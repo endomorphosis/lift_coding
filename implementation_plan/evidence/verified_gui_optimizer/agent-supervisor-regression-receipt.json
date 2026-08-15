@@ -1,0 +1,149 @@
+{
+  "analysis_classification": "exact",
+  "application_id": "app:agent-supervisor",
+  "archived_baseline": {
+    "artifact_manifest_cid": "bafkreibswlqxejb5wlnnubaqmxd7b2pk5ivwnetoxuovt2wgeq3oka4eyq",
+    "baseline_identity": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553",
+    "digest": "sha256:b3b3cab4dc167a3fb654e7b3cd4e213a258eba4166d9e6b31b8be06bb1674a1b",
+    "original_defect_codes": [
+      "missing-field-error-association",
+      "outerhtml-root-replace-focus-risk"
+    ],
+    "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-browser-baseline.json",
+    "recorded_problem_codes": [
+      "accessible-name",
+      "aria-disabled-instead-of-native-disabled",
+      "console-spec-not-discovered-by-reviewed-playwright-config",
+      "existing-accessibility-coverage-is-not-live-dom-audit",
+      "existing-screenshots-are-not-pixel-diff-baseline",
+      "focus-trap",
+      "horizontal-overflow",
+      "keyboard-activation",
+      "keyboard-order",
+      "keyboard-reachability",
+      "missing-field-error-association",
+      "outerhtml-root-replace-focus-risk",
+      "python-ui-invariant-engine-not-invoked",
+      "static-confirmation-is-not-argument-digest-bound",
+      "viewport-overflow",
+      "visual-baseline-missing-comparison-target"
+    ],
+    "semantic_digest": "sha256:b5f9352877a3544c94cf6a2e64816bbd6c5318652420ba3158239b2940b30e32"
+  },
+  "can_issue_authoritative_allow": false,
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "claim_boundary": {
+    "pixel_change_is_neutral_observation": true,
+    "screen_reader_reviewed": false,
+    "ui_visibility_authorizes": false,
+    "verified_authorization": false,
+    "verified_complete_security": false,
+    "verified_live_accessibility": true,
+    "verified_live_interaction": true,
+    "verified_live_visual": false,
+    "verified_wcag": false
+  },
+  "current_target": {
+    "confirmation_gate_present": true,
+    "digest": "sha256:e677e43913956dffafdc919048c9960f487907cf90b773923f97a7a475183a25",
+    "disabled_dispatch_present": true,
+    "error_association_present": true,
+    "fixture_host_digest": "sha256:8ce9240330fb401ad98091ff4a5949245a897bb8fa630f0af4ce2c3b31fecb01",
+    "fixture_host_lacks_live_error_binding": true,
+    "focus_restore_present": true,
+    "improvement_digest": "sha256:29e1d9b91ca21338e4715b26d894219dbb35021ead3d0ba285f28f2e2aceef01",
+    "path": "swissknife/web/js/apps/agent-supervisor.js",
+    "proposal_digest": "sha256:3a5dd202ecc7f22757f8f52dc556bce593f3184714381ca93043f6738e10735b"
+  },
+  "decision": "pass",
+  "headless_shell_used": false,
+  "improvement_metrics": {
+    "confirmation_bypass_count": {
+      "after": 0,
+      "before": 0,
+      "improved": false
+    },
+    "critical_accessibility_violations": {
+      "after": 0,
+      "before": 0,
+      "improved": false
+    },
+    "error_association_failure_count": {
+      "after": 0,
+      "before": 1,
+      "improved": true
+    },
+    "focus_loss_count": {
+      "after": 0,
+      "before": 1,
+      "improved": true
+    },
+    "security_violations": {
+      "after": 0,
+      "before": 0,
+      "improved": false
+    }
+  },
+  "interface": "AgentSupervisorRegressionSuite@1",
+  "locked_contracts": [
+    "focus-restore",
+    "error-association",
+    "loading-empty-error",
+    "keyboard-path",
+    "exact-confirmation",
+    "disabled-dispatch",
+    "gateway-boundary",
+    "responsive-overflow"
+  ],
+  "mutation_vectors": {
+    "association": {
+      "mutant_fails": true,
+      "source_holds": true
+    },
+    "confirmation": {
+      "mutant_fails": true,
+      "source_holds": true
+    },
+    "disabled_dispatch": {
+      "mutant_fails": true,
+      "source_holds": true
+    },
+    "focus": {
+      "mutant_fails": true,
+      "source_holds": true
+    },
+    "policy": {
+      "browser_authorization_rejected": true,
+      "confirmation_denies_transport": true
+    }
+  },
+  "receipt_id": "receipt:regression:vgo-081-agent-supervisor",
+  "scenario_locks": [
+    "archived-vgo-068-defects",
+    "live-focus-restore",
+    "live-error-association",
+    "loading-empty-error",
+    "keyboard-path",
+    "exact-confirmation",
+    "disabled-dispatch",
+    "gateway-boundary",
+    "mutation-adversarial"
+  ],
+  "schema_version": "agent-supervisor-regression-receipt/v1",
+  "screen_id": "screen:agent-supervisor",
+  "suites": {
+    "browser_boundary": "swissknife/test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts",
+    "playwright_regression": "swissknife/test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts"
+  },
+  "task_id": "VGO-081",
+  "uses_browser_issued_authorization": false,
+  "uses_production_credentials": false,
+  "uses_production_services": false,
+  "validation_boundary": {
+    "chromium_channel": "chromium",
+    "headless_shell_forbidden": true,
+    "python_interpreter": "/usr/bin/python3.12",
+    "sealed_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+  },
+  "verification_status": "integrity_valid"
+}

@@ -1,0 +1,455 @@
+{
+  "accepted_task_audits": [
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "authority_labels": [
+        "structural",
+        "integrity_valid",
+        "not_complete_security"
+      ],
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "focus_restoration_coverage": 1.0,
+        "security_violations": 0
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "current_tree_holds": {
+        "confirmation_gate_present": true,
+        "disabled_dispatch_present": true,
+        "focus_restore_present": true
+      },
+      "decision": "accept",
+      "declared_method": "exact_aria_reference_repair",
+      "disclosure": "Independent audit of the VGO-090 automatic acceptance. restoreFocusState/captureFocusState remain in swissknife/web/js/apps/agent-supervisor.js. VGO-081 records focus_loss_count 1 to 0 versus the archived VGO-068 baseline. This is the previously admitted VGO-080 patch, not a new canonical edit and not an authorization or confirmation change.",
+      "hard_gate_passed": true,
+      "measurable_improvement": true,
+      "objective_metric_id": "focus_restoration_coverage",
+      "receipt_id": "receipt:vgo-090:focus-restoration",
+      "task_id": "task:focus-restoration"
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "authority_labels": [
+        "structural",
+        "integrity_valid",
+        "not_complete_security"
+      ],
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "error_association_coverage": 1.0,
+        "security_violations": 0
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "current_tree_holds": {
+        "aria_describedby_present": true,
+        "aria_errormessage_present": true,
+        "aria_invalid_present": true,
+        "confirmation_gate_present": true,
+        "disabled_dispatch_present": true
+      },
+      "decision": "accept",
+      "declared_method": "aria_reference_repair",
+      "disclosure": "Independent audit of the VGO-090 automatic acceptance. fieldErrorBinding still writes aria-invalid, aria-describedby, and aria-errormessage. VGO-081 records error_association_failure_count 1 to 0. This is the previously admitted VGO-080 patch, not a new canonical edit and not an authorization or confirmation change.",
+      "hard_gate_passed": true,
+      "measurable_improvement": true,
+      "objective_metric_id": "error_association_coverage",
+      "receipt_id": "receipt:vgo-090:error-presentation",
+      "task_id": "task:error-presentation"
+    }
+  ],
+  "action_schema_confirmation_bindings": {
+    "confirmation_argument_digest_bound": false,
+    "confirmation_gate_present": true,
+    "confirmation_interface": "UiConfirmationBinding@1",
+    "confirmation_schema": "ui-confirmation-binding/v1",
+    "confirmation_tokens": [
+      "confirm-agent-supervisor:${normalized_target}:${client_request_id}",
+      "confirm-agent-supervisor:task:${task_id}:${client_request_id}"
+    ],
+    "disabled_dispatch_present": true,
+    "gateway_denies_without_confirmation": true,
+    "hidden_prohibited_dispatch_found": false,
+    "policy_validator_interface": "UiPolicyBindingValidator@1",
+    "policy_validator_schema": "ui-policy-binding-validator/v1",
+    "steering_and_dispatch_require_checkbox": true,
+    "ui_action_binding_interface": "UiActionBinding@1",
+    "ui_action_binding_schema": "ui-action-binding/v1",
+    "ui_visibility_authorizes": false
+  },
+  "aggregates": {
+    "accepted_tasks_audited": 2,
+    "auto_accepted_authorization_confirmation_regressions": 0,
+    "auto_accepted_critical_accessibility_regressions": 0,
+    "benchmark_expected_tasks": 15,
+    "benchmark_tasks_covered": 15,
+    "closeout_blocked": false,
+    "counterexamples_found": 0,
+    "credential_or_host_escape_found": false,
+    "hidden_prohibited_dispatch_found": false,
+    "human_review_tasks": 1,
+    "rejected_tasks": 12,
+    "security_proof_claimed": false,
+    "ui_authorization_synthesis_found": false
+  },
+  "analysis_classification": "exact",
+  "application_id": "app:agent-supervisor",
+  "authority_labels": {
+    "browser_policy_authoritative": false,
+    "can_issue_authoritative_allow": false,
+    "claim_level": {
+      "accepted_focus_restoration": "structural",
+      "accepted_error_presentation": "structural",
+      "adversarial_isolation": "exact",
+      "complete_security": "not_claimed",
+      "confirmation_argument_digest": "unmet_rejected_objective",
+      "host_boundary": "exact",
+      "patch_scope": "exact",
+      "ui_authorization": "not_authorization"
+    },
+    "gui_acceptance_authority_interface": "GuiAcceptanceAuthority@1",
+    "gui_acceptance_authority_schema": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/acceptance-authority@1",
+    "gui_host_boundary_policy_interface": "GuiHostBoundaryPolicy@1",
+    "gui_patch_authority_interface": "GuiPatchAuthority@1",
+    "scope_declaration_is_host_authority": false,
+    "ui_state_is_authorization": false
+  },
+  "benchmark_decision_audit": {
+    "accepted": [
+      "task:focus-restoration",
+      "task:error-presentation"
+    ],
+    "auto_accepted_authorization_confirmation_regressions": 0,
+    "auto_accepted_critical_accessibility_regressions": 0,
+    "human_review": [
+      "task:primary-action-hierarchy"
+    ],
+    "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-benchmark.json",
+    "receipt_id": "receipt:vgo-090-benchmark-v1",
+    "rejected": [
+      "task:accessible-labels",
+      "task:loading-state",
+      "task:failure-state",
+      "task:interaction-step-reduction",
+      "task:responsive-overflow",
+      "task:design-token-consistency",
+      "task:confirmation-ux",
+      "task:empty-state-guidance",
+      "task:keyboard-reachability",
+      "task:localization-clipping",
+      "task:modal-focus-lifecycle",
+      "task:action-binding-integrity"
+    ],
+    "unmet_targets_disclosed": [
+      "median_context_reduction"
+    ]
+  },
+  "can_issue_authoritative_allow": false,
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "claim_boundary": {
+    "pixel_change_is_neutral_observation": true,
+    "screen_reader_reviewed": false,
+    "ui_visibility_authorizes": false,
+    "verified_authorization": false,
+    "verified_complete_security": false,
+    "verified_live_accessibility": false,
+    "verified_live_interaction": false,
+    "verified_live_visual": false,
+    "verified_wcag": false
+  },
+  "closeout_blocked": false,
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "test/api/test_gui_optimizer_authority.py",
+        "test/api/test_gui_optimizer_patch_scope.py",
+        "test/api/test_gui_optimizer_acceptance_adversarial.py",
+        "-q"
+      ],
+      "cwd": "external/ipfs_accelerate",
+      "env": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": ".:../ipfs_datasets"
+      },
+      "interpreter": "/usr/bin/python3.12",
+      "kind": "named_suite",
+      "required": true,
+      "static_claim_replay": "pass",
+      "subject": "python-authority-scope-adversarial",
+      "validation_runner_authoritative": true
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "test:run",
+        "--",
+        "test/unit/services/gui-optimizer/policy-validator.test.ts",
+        "test/browser/all-app-tool-gateway.test.ts",
+        "test/browser/agent-supervisor-console-gateway.test.ts",
+        "test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts"
+      ],
+      "cwd": "swissknife",
+      "env": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+      },
+      "kind": "named_suite",
+      "required": true,
+      "static_claim_replay": "pass",
+      "subject": "typescript-policy-gateway-boundary",
+      "validation_runner_authoritative": true
+    },
+    {
+      "argv": [
+        "node",
+        "scripts/run_playwright_test.mjs",
+        "test",
+        "-c",
+        "build-tools/configs/playwright.verified-gui-optimizer.config.ts",
+        "test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+        "test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts",
+        "--reporter=line"
+      ],
+      "cwd": "swissknife",
+      "env": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+      },
+      "kind": "named_suite",
+      "required": true,
+      "static_claim_replay": "pass",
+      "subject": "playwright-lifecycle-regression",
+      "validation_runner_authoritative": true
+    },
+    {
+      "argv": [
+        "scripts/gui-opt",
+        "report",
+        "acceptance-security-audit",
+        "--require-complete",
+        "--verify-receipts"
+      ],
+      "cwd": ".",
+      "kind": "fail_closed_receipt_check",
+      "required": true,
+      "subject": "acceptance-security-audit-report",
+      "validation_runner_authoritative": true
+    }
+  ],
+  "conflict_policy": "Read and report current-tree evidence only; do not change backend policy, credential handling, gateways, target implementation, tests or benchmark results.",
+  "counterexamples": [],
+  "decision": "pass",
+  "disclosed_limitations": [
+    "This receipt does not claim complete security, complete accessibility, WCAG conformance, or verified host authorization.",
+    "Median context reduction remains 0.0 against the 0.3 target and is disclosed rather than hidden.",
+    "task:confirmation-ux remains rejected: confirmation checkboxes and tokens exist, but confirmation is not argument-digest-bound.",
+    "The VGO-080 improvement receipt binds placeholder patch_digest sha256:8888888888888888888888888888888888888888888888888888888888888888 rather than a content hash of a new isolated-worktree patch.",
+    "Remaining catalog defects (accessible names, overflow, keyboard reachability, focus trap, design tokens) were not automatically accepted.",
+    "swissknife/web/js/apps/node_modules/evil/index.js is a modeled forbidden generated path, not a required workspace output, and must not be materialized."
+  ],
+  "evidence_rehash": [
+    {
+      "kind": "benchmark_report",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-benchmark.json",
+      "receipt_id": "receipt:vgo-090-benchmark-v1",
+      "recorded_baseline_identity": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553",
+      "recorded_repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+      "verification_status": "integrity_valid"
+    },
+    {
+      "kind": "improvement_receipt",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-improvement-receipt.json",
+      "receipt_id": "receipt:improvement:vgo-080-focus-error",
+      "recorded_digest": "sha256:29e1d9b91ca21338e4715b26d894219dbb35021ead3d0ba285f28f2e2aceef01",
+      "verification_status": "integrity_valid"
+    },
+    {
+      "kind": "proposal",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-proposal.json",
+      "proposal_id": "proposal:vgo-080-focus-error",
+      "recorded_digest": "sha256:3a5dd202ecc7f22757f8f52dc556bce593f3184714381ca93043f6738e10735b",
+      "verification_status": "integrity_valid"
+    },
+    {
+      "kind": "regression_receipt",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-regression-receipt.json",
+      "receipt_id": "receipt:regression:vgo-081-agent-supervisor",
+      "recorded_target_digest": "sha256:e677e43913956dffafdc919048c9960f487907cf90b773923f97a7a475183a25",
+      "verification_status": "integrity_valid"
+    },
+    {
+      "kind": "browser_baseline",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-browser-baseline.json",
+      "recorded_artifact_manifest_digest": "sha256:ee909b29ca9ca7e3a5dbb66eddcccd5c0034c48d0364bb27531a64bf9055b7fb",
+      "recorded_baseline_identity": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553",
+      "recorded_digest": "sha256:b3b3cab4dc167a3fb654e7b3cd4e213a258eba4166d9e6b31b8be06bb1674a1b"
+    },
+    {
+      "kind": "semantic_baseline",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-semantic-baseline.json",
+      "recorded_digest": "sha256:b5f9352877a3544c94cf6a2e64816bbd6c5318652420ba3158239b2940b30e32"
+    },
+    {
+      "kind": "target_source",
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "recorded_digest": "sha256:e677e43913956dffafdc919048c9960f487907cf90b773923f97a7a475183a25"
+    }
+  ],
+  "findings": [
+    {
+      "code": "accepted_focus_restoration_holds",
+      "severity": "info",
+      "summary": "task:focus-restoration automatic acceptance is supported by current-tree restoreFocusState/captureFocusState and VGO-081 focus_loss_count 1 to 0. Confirmation and dispatch gates are unchanged."
+    },
+    {
+      "code": "accepted_error_presentation_holds",
+      "severity": "info",
+      "summary": "task:error-presentation automatic acceptance is supported by current-tree aria-invalid/aria-describedby/aria-errormessage binding and VGO-081 error_association_failure_count 1 to 0. Confirmation and dispatch gates are unchanged."
+    },
+    {
+      "code": "forbidden_generated_path_not_materialized",
+      "severity": "info",
+      "summary": "GuiPatchAuthority rejects swissknife/web/js/apps/node_modules/evil/index.js as a forbidden node_modules segment. The path is absent from the current tree and is not a declared VGO-091 output."
+    },
+    {
+      "code": "static_confirmation_not_argument_digest_bound",
+      "severity": "limitation",
+      "summary": "Confirmation remains checkbox-and-token gated, not argument-digest-bound. VGO-090 rejected task:confirmation-ux instead of automatically accepting that gap."
+    }
+  ],
+  "forbidden_path_audit": {
+    "descriptor_relocation": "external/ipfs_accelerate/test/doc-builder-test/kit/preprocessors/index.js",
+    "modeled_attack_path": "swissknife/web/js/apps/node_modules/evil/index.js",
+    "present_on_disk": false,
+    "reason_codes": [
+      "path_forbidden_segment"
+    ],
+    "required_workspace_output": false,
+    "verdict": "reject"
+  },
+  "gaps": [],
+  "interface": "GuiSecurityAuditReceipt@1",
+  "named_suites": {
+    "adversarial_acceptance": "external/ipfs_accelerate/test/api/test_gui_optimizer_acceptance_adversarial.py",
+    "authority": "external/ipfs_accelerate/test/api/test_gui_optimizer_authority.py",
+    "boundary": "swissknife/test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts",
+    "console_gateway": "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+    "patch_scope": "external/ipfs_accelerate/test/api/test_gui_optimizer_patch_scope.py",
+    "playwright_lifecycle": "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+    "playwright_regression": "swissknife/test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts",
+    "policy_validator": "swissknife/test/unit/services/gui-optimizer/policy-validator.test.ts",
+    "tool_gateway": "swissknife/test/browser/all-app-tool-gateway.test.ts"
+  },
+  "receipt_id": "receipt:vgo-091-acceptance-security-audit",
+  "rejected_patch_tree_comparisons": [
+    {
+      "canonical_branch_unchanged": true,
+      "case_id": "adv:rejected-patch-isolation",
+      "expected_decision": "rejected",
+      "expected_reason_codes": [
+        "scope_rejected",
+        "undeclared_file"
+      ],
+      "isolate_canonical": true,
+      "never_auto_accept": true,
+      "path": "swissknife/web/js/apps/legal-assistant.js",
+      "suite": "suite:vgo-086-adversarial-acceptance",
+      "surface": "executor"
+    },
+    {
+      "canonical_branch_unchanged": true,
+      "case_id": "adv:out-of-scope",
+      "expected_decision": "rejected",
+      "expected_reason_codes": [
+        "undeclared_file",
+        "unrelated_application"
+      ],
+      "isolate_canonical": true,
+      "never_auto_accept": true,
+      "path": "swissknife/web/js/apps/legal-assistant.js",
+      "suite": "suite:vgo-086-adversarial-acceptance",
+      "surface": "scope_gate"
+    },
+    {
+      "canonical_branch_unchanged": true,
+      "case_id": "modeled-generated-path",
+      "expected_decision": "rejected",
+      "expected_reason_codes": [
+        "path_forbidden_segment"
+      ],
+      "isolate_canonical": true,
+      "never_auto_accept": true,
+      "path": "swissknife/web/js/apps/node_modules/evil/index.js",
+      "suite": "GuiPatchAuthority@1",
+      "surface": "patch_authority"
+    }
+  ],
+  "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+  "repository_revision": "3c5c7895339ac87a60481066e494ce48e0daa89b",
+  "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/security-audit@1",
+  "screen_id": "screen:agent-supervisor",
+  "source_observations": {
+    "aria_disabled_submit_retained": true,
+    "confirmation_digest_bound": false,
+    "has_confirmation_gate": true,
+    "has_disabled_dispatch": true,
+    "has_error_binding": true,
+    "has_focus_restore": true,
+    "has_focus_trap": false,
+    "outerhtml_rerender_retained": true
+  },
+  "static_claim_replay": {
+    "accessibility_hard_gate": {
+      "auto_accepted_critical_regression": false,
+      "result": "pass"
+    },
+    "authority": {
+      "forbidden_generated_path_rejected": true,
+      "result": "pass",
+      "ui_state_rejected_as_authorization": true
+    },
+    "canonical_branch_isolation": {
+      "adversarial_isolation_cases": [
+        "adv:rejected-patch-isolation",
+        "adv:out-of-scope"
+      ],
+      "result": "pass"
+    },
+    "confirmation": {
+      "bypass_found": false,
+      "gateway_denies_without_confirmation": true,
+      "result": "pass",
+      "source_gate_present": true
+    },
+    "policy_binding": {
+      "hidden_prohibited_dispatch_found": false,
+      "result": "pass",
+      "stale_policy_cannot_authorize": true
+    },
+    "scope": {
+      "generated_vendor_paths_rejected": true,
+      "result": "pass",
+      "undeclared_and_unrelated_paths_rejected": true
+    }
+  },
+  "task_id": "VGO-091",
+  "uses_browser_issued_authorization": false,
+  "uses_production_credentials": false,
+  "uses_production_services": false,
+  "validation_boundary": {
+    "headless_shell_forbidden": true,
+    "home_prefix": "ipfs-accelerate-validation-home-",
+    "operator_path_override": "IPFS_ACCELERATE_AGENT_VALIDATION_PATH",
+    "python_interpreter": "/usr/bin/python3.12",
+    "sealed_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "xdg_cache": "$HOME/.cache",
+    "xdg_config": "$HOME/.config",
+    "xdg_data": "$HOME/.local/share",
+    "xdg_state": "$HOME/.local/state"
+  },
+  "verification_status": "integrity_valid"
+}

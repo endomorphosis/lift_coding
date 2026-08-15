@@ -1,0 +1,232 @@
+{
+  "interface": "VerifiedGuiOptimizer@1",
+  "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/current-tree-verification@1",
+  "receipt_id": "receipt:vgo-093-current-tree-verification",
+  "task_id": "VGO-093",
+  "application_id": "app:agent-supervisor",
+  "screen_id": "screen:agent-supervisor",
+  "verification_status": "integrity_valid",
+  "decision": "pass",
+  "closeout_blocked": false,
+  "repository_revision": "edb439860864052424d1c2d76839f5c1550ded03",
+  "repository_tree": "79f551da56b9ed495a8f54ed2ee8d66fab895f9f",
+  "gitlinks": {
+    "swissknife": "1821fbc19e02d233afb068c6591e3de30ed0bfe6",
+    "external/ipfs_accelerate": "9f96d2cde6c0ca8ff4269645c9f4479a90f33790",
+    "external/ipfs_datasets": "628da00c7e839dc5634543c365de52c4e14827ce"
+  },
+  "source_identity": "sha256:f49b95122cfa385f9c680f1cfee3fdc8231b359c55a9ce57c9c855cb00b1c881",
+  "tool_versions": {
+    "python": "Python 3.12.3",
+    "node": "v22.19.0",
+    "npm": "10.8.2"
+  },
+  "commands": [
+    {
+      "name": "datasets-gui-optimizer",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/unit/logic/gui_optimizer",
+        "-q",
+        "--tb=line"
+      ],
+      "cwd": "external/ipfs_datasets",
+      "exit_code": 0,
+      "duration_seconds": 1.436,
+      "ok": true
+    },
+    {
+      "name": "accelerate-gui-optimizer",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "test/api/test_gui_optimizer_architecture_docs.py",
+        "test/api/test_gui_optimizer_authority.py",
+        "test/api/test_gui_optimizer_patch_scope.py",
+        "test/api/test_gui_optimizer_acceptance_adversarial.py",
+        "test/api/test_gui_optimizer_benchmark_catalog.py",
+        "test/api/test_gui_optimizer_check_plan.py",
+        "test/api/test_gui_optimizer_cli.py",
+        "-q",
+        "--tb=line"
+      ],
+      "cwd": "external/ipfs_accelerate",
+      "exit_code": 0,
+      "duration_seconds": 8.851,
+      "ok": true
+    },
+    {
+      "name": "swissknife-optimizer-unit-browser",
+      "argv": [
+        "npm",
+        "run",
+        "test:run",
+        "--",
+        "test/unit/services/gui-optimizer",
+        "test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts",
+        "test/browser/all-app-tool-gateway.test.ts",
+        "test/browser/agent-supervisor-console-gateway.test.ts"
+      ],
+      "cwd": "swissknife",
+      "exit_code": 1,
+      "duration_seconds": 1.881,
+      "ok": false
+    },
+    {
+      "name": "playwright-dedicated-config",
+      "argv": [
+        "node",
+        "scripts/run_playwright_test.mjs",
+        "test",
+        "-c",
+        "build-tools/configs/playwright.verified-gui-optimizer.config.ts",
+        "test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+        "test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts",
+        "--reporter=line"
+      ],
+      "cwd": "swissknife",
+      "exit_code": 0,
+      "duration_seconds": 29.36,
+      "ok": true
+    },
+    {
+      "name": "identity-vectors-cmp",
+      "argv": [
+        "cmp",
+        "external/ipfs_datasets/tests/fixtures/gui_optimizer/identity-vectors.json",
+        "swissknife/test/fixtures/gui-optimizer/identity-vectors.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_seconds": 0.001,
+      "ok": true
+    },
+    {
+      "name": "identity-vectors-python",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "tests/unit/logic/gui_optimizer/test_identity_vectors.py",
+        "-q",
+        "--tb=line"
+      ],
+      "cwd": "external/ipfs_datasets",
+      "exit_code": 0,
+      "duration_seconds": 0.645,
+      "ok": true
+    },
+    {
+      "name": "identity-vectors-typescript",
+      "argv": [
+        "npm",
+        "run",
+        "test:run",
+        "--",
+        "test/unit/services/gui-optimizer/identity-vectors.test.ts"
+      ],
+      "cwd": "swissknife",
+      "exit_code": 0,
+      "duration_seconds": 0.675,
+      "ok": true
+    },
+    {
+      "name": "cli-smoke-help",
+      "argv": [
+        "scripts/gui-opt",
+        "--help"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_seconds": 0.156,
+      "ok": true
+    },
+    {
+      "name": "cli-smoke-report-audit",
+      "argv": [
+        "scripts/gui-opt",
+        "report",
+        "acceptance-security-audit",
+        "--require-complete",
+        "--verify-receipts"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_seconds": 0.178,
+      "ok": true
+    },
+    {
+      "name": "cli-smoke-report-benchmark",
+      "argv": [
+        "scripts/gui-opt",
+        "report",
+        "benchmark-agent-supervisor",
+        "--require-complete",
+        "--expected-tasks",
+        "15",
+        "--verify-receipts"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "duration_seconds": 0.178,
+      "ok": true
+    },
+    {
+      "name": "swissknife-build-web",
+      "argv": [
+        "npm",
+        "run",
+        "build:web"
+      ],
+      "cwd": "swissknife",
+      "exit_code": 0,
+      "duration_seconds": 4.48,
+      "ok": true
+    }
+  ],
+  "aggregates": {
+    "command_count": 11,
+    "passed": 10,
+    "failed": 1,
+    "required_failures": [],
+    "new_required_failures": [],
+    "known_baseline_failures": [
+      {
+        "suite": "swissknife/test/unit/services/gui-optimizer/agent-supervisor-baseline.test.ts",
+        "tests": 2,
+        "passed_in_suite": 4,
+        "classification": "known_vgo_062_snapshot_vs_vgo_080_target",
+        "summary": "VGO-062 semantic-baseline snapshot still requires missing-field-error-association in known_pre_change_failures. VGO-080/081 repaired live field-error association; VGO-081 Playwright regression passed on this tree. The 2 failed assertions are the archived baseline inventory, not a new required product failure."
+      }
+    ],
+    "command_exit_nonzero": [
+      "swissknife-optimizer-unit-browser"
+    ],
+    "tests_in_nonzero_command": {
+      "passed": 338,
+      "failed": 2,
+      "files_passed": 20,
+      "files_failed": 1
+    }
+  },
+  "conflict_policy": "Verification is non-mutating except its declared durable receipt. Generated dist/Playwright/coverage outputs are discarded.",
+  "claim_boundary": {
+    "checks_not_run_not_claimed": true,
+    "complete_security": false,
+    "wcag_certified": false,
+    "proved_optimal": false
+  },
+  "generated_at": "2026-08-15T09:19:23.486634+00:00",
+  "uses_production_credentials": false,
+  "uses_production_services": false,
+  "known_versus_new": {
+    "known_baseline_failures_distinguished": true,
+    "new_required_failures": [],
+    "browser_and_build_evidence_real": true,
+    "playwright_dedicated_config_passed": true,
+    "build_web_passed": true
+  }
+}
