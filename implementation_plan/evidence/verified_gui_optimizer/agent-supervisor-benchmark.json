@@ -1,0 +1,1650 @@
+{
+  "aggregates": {
+    "auto_accepted_authorization_confirmation_regressions": 0,
+    "auto_accepted_critical_accessibility_regressions": 0,
+    "decision_distribution": {
+      "accept": 2,
+      "human_review": 1,
+      "pending": 0,
+      "reject": 12
+    },
+    "invalidation_precision": 1.0,
+    "median_context_reduction": 0.0,
+    "method_distribution": {
+      "aria_reference_repair": 3,
+      "design_token_substitution": 2,
+      "exact_action_binding_migration": 3,
+      "exact_aria_reference_repair": 1,
+      "exact_label_substitution": 3,
+      "exact_route_migration": 2,
+      "human_hierarchy_review": 1
+    },
+    "route_distribution": {
+      "deterministic_transform": 14,
+      "human_review": 1
+    },
+    "target_attainment": {
+      "accepted_have_measurable_improvement": {
+        "actual": true,
+        "attained": true,
+        "target": true
+      },
+      "invalidation_precision": {
+        "actual": 1.0,
+        "attained": true,
+        "target": 1.0
+      },
+      "median_context_reduction": {
+        "actual": 0.0,
+        "attained": false,
+        "target": 0.3
+      },
+      "zero_auto_accepted_authorization_confirmation_regressions": {
+        "actual": 0,
+        "attained": true,
+        "target": 0
+      },
+      "zero_auto_accepted_critical_accessibility_regressions": {
+        "actual": 0,
+        "attained": true,
+        "target": 0
+      }
+    }
+  },
+  "application_id": "app:agent-supervisor",
+  "artifact_cids": [
+    "bafkreibswlqxejb5wlnnubaqmxd7b2pk5ivwnetoxuovt2wgeq3oka4eyq",
+    "bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4",
+    "bafkreifa7a3rqtgw3i57krvk6scycyrch6dfvp5cyelshgmnpqpoadzq5u",
+    "bafkreib4ezjg2qzquh2vxu23m43apkl4dr5qbcx4v7xel5r6e4t22nk64i",
+    "bafkreigdema4brcoc7xynhi2jbig6q7oiapzc7wp25khfyxg5odx7f4vl4",
+    "bafkreiegd7z3lem6zkyftowitgp7yaucl4bnsfni23h45ies5h3uzrkmjy",
+    "bafkreialzayhwhkvfl6djxd4mqeirstcvabjfql2oj4c4jm5o4xpuvwlxm"
+  ],
+  "artifact_manifest_cid": "bafkreibswlqxejb5wlnnubaqmxd7b2pk5ivwnetoxuovt2wgeq3oka4eyq",
+  "benchmark_id": "benchmark-v1",
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "catalog_id": "catalog:gui-optimizer-benchmark-v1",
+  "conflict_policy": "Benchmark only the selected screen and controlled variants; do not ask a provider to make the app generally better or auto-approve subjective redesigns. Report actual outcomes including failures and unmet targets; benchmark execution cannot modify the canonical branch except through separately admitted accepted patches.",
+  "deterministic_rerun": {
+    "baseline_identities_match": true,
+    "compared": 15,
+    "first_baseline_identity": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553",
+    "identities_match": true,
+    "improvement_receipt_ids_match": true,
+    "second_baseline_identity": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553"
+  },
+  "expected_tasks": 15,
+  "failed_or_review_required": [
+    {
+      "decision": "reject",
+      "disclosure": "Archived live baseline still records unlabeled interactive controls. No accessible-name patch was admitted after VGO-080. Objective remains unmet.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:accessible-labels"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Loading outcome already exists in both the archived live baseline (missing_loading_error_behavior_count=0) and the current tree. This run applied no new patch and recorded no metric delta.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:loading-state"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Failure/recovery outcome already exists in the archived live baseline and current tree. This run applied no new patch and recorded no metric delta.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:failure-state"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Archived live interaction_step_count remains 17. No step-reduction patch was admitted. Confirmation hard gate is unchanged.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:interaction-step-reduction"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Archived live baseline still records horizontal_overflow_count=13 and viewport_overflow_count=34. Current source still has min-width:1280px gateway rows. Objective remains unmet.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:responsive-overflow"
+    },
+    {
+      "decision": "human_review",
+      "disclosure": "Primary-action hierarchy is a subjective task and cannot be automatically accepted.",
+      "reason_codes": ["human_review_required", "proposal_escalated"],
+      "task_id": "task:primary-action-hierarchy"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Current source still uses hardcoded hex surfaces rather than a closed design-token substitution. No token patch was admitted.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:design-token-consistency"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Confirmation checkboxes and tokens are present, but the archived confirmation_failure_count=1 (static confirmation is not argument-digest-bound) was not cleared by a new admitted patch.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:confirmation-ux"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Empty-state guidance already exists in the archived live baseline and current tree. This run applied no new patch and recorded no metric delta.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:empty-state-guidance"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Archived live baseline still records keyboard-activation, keyboard-reachability, and keyboard-order defects on custom tree controls. No keyboard patch was admitted.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:keyboard-reachability"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Archived live clipping_count is already 0. This run applied no new localization patch and recorded no metric delta.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:localization-clipping"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Archived live baseline records a focus-trap problem. Current source has restoreFocusState but no modal focus trap. Objective remains unmet.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:modal-focus-lifecycle"
+    },
+    {
+      "decision": "reject",
+      "disclosure": "Archived live action_binding_invalid_count is already 0. This run applied no new binding patch and recorded no metric delta. Confirmation and host gates remain closed.",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:action-binding-integrity"
+    }
+  ],
+  "interface": "GuiOptimizationBenchmarkReport@1",
+  "limitations": [
+    "This run did not apply new patches to the canonical branch. Only the previously admitted VGO-080 focus-restore and error-association improvement is treated as an accepted metric delta versus the archived VGO-068 live baseline.",
+    "Median context reduction is reported fail-closed as 0.0. The sealed catalog ordinary-retrieval estimates are 1580-1900 tokens, but UiContextPack@1 requires the editable target source to remain raw. The current agent-supervisor.js is 2086 lines, so a pack that includes that required raw source exceeds the catalog ordinary estimate and cannot claim a 30 percent reduction. The unmet 30 percent target is disclosed rather than hidden.",
+    "Remaining catalog defects were not live-rebrowsered in this run. Candidate metrics stay at the archived VGO-068 live snapshot unless VGO-080/081 source evidence proves the specific improvement.",
+    "Primary-action hierarchy is forbidden from automatic acceptance.",
+    "Artifact CIDs bound here are the host-owned VGO-068 baseline CAS objects actually consumed as the live baseline plus the VGO-080/081 improvement and regression receipts. New isolated-worktree patches were not written."
+  ],
+  "receipt_id": "receipt:vgo-090-benchmark-v1",
+  "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+  "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+  "run_id": "run:vgo-090-benchmark-v1",
+  "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-report@1",
+  "screen_id": "screen:agent-supervisor",
+  "source_observations": {
+    "confirmation_digest_bound": false,
+    "has_confirmation_gate": true,
+    "has_disabled_dispatch": true,
+    "has_empty": true,
+    "has_error_binding": true,
+    "has_error_state": true,
+    "has_focus_restore": true,
+    "has_focus_trap": false,
+    "has_loading": true
+  },
+  "task_count": 15,
+  "tasks": [
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "focus_restoration_coverage": 0.0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "focus_restoration_coverage": 1.0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1720,
+        "context_reduction": 0.0,
+        "packed_tokens": 1720,
+        "raw_retrieval_tokens": 1720
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "accept",
+      "declared_method": "exact_aria_reference_repair",
+      "declared_tier": "deterministic",
+      "disclosure": "Accepted because restoreFocusState/captureFocusState are present in the current tree and VGO-081 records focus_loss_count 1 to 0 versus the archived VGO-068 baseline. This is the previously admitted VGO-080 patch, not a new canonical edit from this run.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:focus-restoration",
+      "invalidation_precision": 1.0,
+      "kind": "focus_restoration",
+      "measurable_improvement": true,
+      "objective_ids": ["objective:focus-restoration"],
+      "objective_metric_id": "focus_restoration_coverage",
+      "reason_codes": ["accepted", "measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-080-target"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-080-target"],
+        "context_pack_id": "pack:agent-supervisor-focus-error",
+        "decision": "accept",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-080-target"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:focus-restoration",
+        "patch_digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+        "proposal_id": "proposal:vgo-080-focus-error",
+        "receipt_id": "receipt:vgo-090:focus-restoration",
+        "rejection_reasons": [],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "integrity_valid",
+        "visual_receipt_ids": ["receipt:visual:vgo-080-target"]
+      },
+      "receipt_id": "receipt:vgo-090:focus-restoration",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "accept",
+        "declared_method": "exact_aria_reference_repair",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": true,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "focus_restoration_coverage": 1.0,
+          "security_violations": 0
+        },
+        "reason_codes": ["accepted", "measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:focus-restoration",
+        "result_id": "result:focus-restoration",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:focus-restoration"
+      },
+      "result_id": "result:focus-restoration",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-focus-restoration",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:accessibility-contracts",
+        "check:interaction-scenarios",
+        "check:direct-tests"
+      ],
+      "task_id": "task:focus-restoration",
+      "title": "Restore focus after a controlled Agent Supervisor rerender.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "accessible_name_coverage": 0.3279,
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "accessible_name_coverage": 0.3279,
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1680,
+        "context_reduction": 0.0,
+        "packed_tokens": 1680,
+        "raw_retrieval_tokens": 1680
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "exact_label_substitution",
+      "declared_tier": "deterministic",
+      "disclosure": "Archived live baseline still records unlabeled interactive controls. No accessible-name patch was admitted after VGO-080. Objective remains unmet.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:accessible-labels",
+      "invalidation_precision": 1.0,
+      "kind": "accessible_labels",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:accessible-labels"],
+      "objective_metric_id": "accessible_name_coverage",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:accessible-labels"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:accessible-labels"],
+        "context_pack_id": "pack:vgo-090-accessible-labels",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:accessible-labels"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:accessible-labels",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-accessible-labels",
+        "receipt_id": "receipt:vgo-090:accessible-labels",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:accessible-labels"]
+      },
+      "receipt_id": "receipt:vgo-090:accessible-labels",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "exact_label_substitution",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "accessible_name_coverage": 0.3279,
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:accessible-labels",
+        "result_id": "result:accessible-labels",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:accessible-labels"
+      },
+      "result_id": "result:accessible-labels",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-accessible-labels",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:accessible-name",
+        "check:accessibility-contracts",
+        "check:direct-tests"
+      ],
+      "task_id": "task:accessible-labels",
+      "title": "Add exact accessible names on the selected goal form.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "error_association_coverage": 0.0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "error_association_coverage": 1.0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1740,
+        "context_reduction": 0.0,
+        "packed_tokens": 1740,
+        "raw_retrieval_tokens": 1740
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "accept",
+      "declared_method": "aria_reference_repair",
+      "declared_tier": "deterministic",
+      "disclosure": "Accepted because fieldErrorBinding writes aria-invalid, aria-describedby, and aria-errormessage, and VGO-081 records error_association_failure_count 1 to 0. This is the previously admitted VGO-080 patch, not a new canonical edit from this run.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:error-presentation",
+      "invalidation_precision": 1.0,
+      "kind": "error_presentation",
+      "measurable_improvement": true,
+      "objective_ids": ["objective:error-presentation"],
+      "objective_metric_id": "error_association_coverage",
+      "reason_codes": ["accepted", "measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-080-target"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-080-target"],
+        "context_pack_id": "pack:agent-supervisor-focus-error",
+        "decision": "accept",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-080-target"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:error-presentation",
+        "patch_digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+        "proposal_id": "proposal:vgo-080-focus-error",
+        "receipt_id": "receipt:vgo-090:error-presentation",
+        "rejection_reasons": [],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "integrity_valid",
+        "visual_receipt_ids": ["receipt:visual:vgo-080-target"]
+      },
+      "receipt_id": "receipt:vgo-090:error-presentation",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "accept",
+        "declared_method": "aria_reference_repair",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": true,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "error_association_coverage": 1.0,
+          "security_violations": 0
+        },
+        "reason_codes": ["accepted", "measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:error-presentation",
+        "result_id": "result:error-presentation",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:error-presentation"
+      },
+      "result_id": "result:error-presentation",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-error-presentation",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:accessibility-contracts",
+        "check:accessibility-scenarios",
+        "check:direct-tests"
+      ],
+      "task_id": "task:error-presentation",
+      "title": "Associate validation errors with the fields they describe.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "loading_state_completeness": 1.0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "loading_state_completeness": 1.0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1810,
+        "context_reduction": 0.0,
+        "packed_tokens": 1810,
+        "raw_retrieval_tokens": 1810
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "exact_route_migration",
+      "declared_tier": "deterministic",
+      "disclosure": "Loading outcome already exists in both the archived live baseline (missing_loading_error_behavior_count=0) and the current tree. This run applied no new patch and recorded no metric delta.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:loading-state",
+      "invalidation_precision": 1.0,
+      "kind": "loading_state",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:loading-state"],
+      "objective_metric_id": "loading_state_completeness",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:loading-state"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:loading-state"],
+        "context_pack_id": "pack:vgo-090-loading-state",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:loading-state"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:loading-state",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-loading-state",
+        "receipt_id": "receipt:vgo-090:loading-state",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:loading-state"]
+      },
+      "receipt_id": "receipt:vgo-090:loading-state",
+      "result": {
+        "artifact_ids": ["bafkreifa7a3rqtgw3i57krvk6scycyrch6dfvp5cyelshgmnpqpoadzq5u"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "exact_route_migration",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "loading_state_completeness": 1.0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:loading-state",
+        "result_id": "result:loading-state",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:loading-state"
+      },
+      "result_id": "result:loading-state",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-loading-state",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:interaction-scenarios",
+        "check:outcome",
+        "check:reachability"
+      ],
+      "task_id": "task:loading-state",
+      "title": "Add the missing loading outcome on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "failure_state_completeness": 1.0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "failure_state_completeness": 1.0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1860,
+        "context_reduction": 0.0,
+        "packed_tokens": 1860,
+        "raw_retrieval_tokens": 1860
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "exact_route_migration",
+      "declared_tier": "deterministic",
+      "disclosure": "Failure/recovery outcome already exists in the archived live baseline and current tree. This run applied no new patch and recorded no metric delta.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:failure-state",
+      "invalidation_precision": 1.0,
+      "kind": "failure_state",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:failure-state"],
+      "objective_metric_id": "failure_state_completeness",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:failure-state"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:failure-state"],
+        "context_pack_id": "pack:vgo-090-failure-state",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:failure-state"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:failure-state",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-failure-state",
+        "receipt_id": "receipt:vgo-090:failure-state",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:failure-state"]
+      },
+      "receipt_id": "receipt:vgo-090:failure-state",
+      "result": {
+        "artifact_ids": [
+          "bafkreiegd7z3lem6zkyftowitgp7yaucl4bnsfni23h45ies5h3uzrkmjy",
+          "bafkreialzayhwhkvfl6djxd4mqeirstcvabjfql2oj4c4jm5o4xpuvwlxm"
+        ],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "exact_route_migration",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "failure_state_completeness": 1.0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:failure-state",
+        "result_id": "result:failure-state",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:failure-state"
+      },
+      "result_id": "result:failure-state",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-failure-state",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:interaction-scenarios",
+        "check:outcome",
+        "check:reachability"
+      ],
+      "task_id": "task:failure-state",
+      "title": "Add the missing failure and recovery outcome on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "interaction_step_count": 17,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "interaction_step_count": 17,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1790,
+        "context_reduction": 0.0,
+        "packed_tokens": 1790,
+        "raw_retrieval_tokens": 1790
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "exact_action_binding_migration",
+      "declared_tier": "deterministic",
+      "disclosure": "Archived live interaction_step_count remains 17. No step-reduction patch was admitted. Confirmation hard gate is unchanged.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:interaction-step-reduction",
+      "invalidation_precision": 1.0,
+      "kind": "interaction_step_reduction",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:interaction-step-reduction"],
+      "objective_metric_id": "interaction_step_count",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:interaction-step-reduction"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:interaction-step-reduction"],
+        "context_pack_id": "pack:vgo-090-interaction-step-reduction",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:interaction-step-reduction"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:interaction-step-reduction",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-interaction-step-reduction",
+        "receipt_id": "receipt:vgo-090:interaction-step-reduction",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:interaction-step-reduction"]
+      },
+      "receipt_id": "receipt:vgo-090:interaction-step-reduction",
+      "result": {
+        "artifact_ids": ["bafkreib4ezjg2qzquh2vxu23m43apkl4dr5qbcx4v7xel5r6e4t22nk64i"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "exact_action_binding_migration",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "interaction_step_count": 17,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:interaction-step-reduction",
+        "result_id": "result:interaction-step-reduction",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:interaction-step-reduction"
+      },
+      "result_id": "result:interaction-step-reduction",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-interaction-step-reduction",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:interaction",
+        "check:confirmation",
+        "check:interaction-scenarios"
+      ],
+      "task_id": "task:interaction-step-reduction",
+      "title": "Reduce steps for one non-sensitive, non-destructive task.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "overflow_violation_count": 47,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "overflow_violation_count": 47,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1650,
+        "context_reduction": 0.0,
+        "packed_tokens": 1650,
+        "raw_retrieval_tokens": 1650
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "design_token_substitution",
+      "declared_tier": "deterministic",
+      "disclosure": "Archived live baseline still records horizontal_overflow_count=13 and viewport_overflow_count=34. Current source still has min-width:1280px gateway rows. Objective remains unmet.",
+      "evidence_class": "automated",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:responsive-overflow",
+      "invalidation_precision": 1.0,
+      "kind": "responsive_overflow",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:responsive-overflow"],
+      "objective_metric_id": "overflow_violation_count",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:responsive-overflow"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:responsive-overflow"],
+        "context_pack_id": "pack:vgo-090-responsive-overflow",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:responsive-overflow"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:responsive-overflow",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-responsive-overflow",
+        "receipt_id": "receipt:vgo-090:responsive-overflow",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:responsive-overflow"]
+      },
+      "receipt_id": "receipt:vgo-090:responsive-overflow",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "design_token_substitution",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "overflow_violation_count": 47,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:responsive-overflow",
+        "result_id": "result:responsive-overflow",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:responsive-overflow"
+      },
+      "result_id": "result:responsive-overflow",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-responsive-overflow",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:overflow",
+        "check:responsive",
+        "check:containing-screenshots"
+      ],
+      "task_id": "task:responsive-overflow",
+      "title": "Remove narrow-viewport document overflow on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "primary_action_hierarchy_score": 0.5,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "primary_action_hierarchy_score": 0.5,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1900,
+        "context_reduction": 0.0,
+        "packed_tokens": 1900,
+        "raw_retrieval_tokens": 1900
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "human_review",
+      "declared_method": "human_hierarchy_review",
+      "declared_tier": "human",
+      "disclosure": "Primary-action hierarchy is a subjective task and cannot be automatically accepted.",
+      "evidence_class": "human_reviewed",
+      "expected_decision": "human_review",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:primary-action-hierarchy",
+      "invalidation_precision": 1.0,
+      "kind": "primary_action_hierarchy",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:primary-action-hierarchy"],
+      "objective_metric_id": "primary_action_hierarchy_score",
+      "reason_codes": ["human_review_required", "proposal_escalated"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:primary-action-hierarchy"],
+        "analysis_classification": "heuristic",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:primary-action-hierarchy"],
+        "context_pack_id": "pack:vgo-090-primary-action-hierarchy",
+        "decision": "human_review",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:primary-action-hierarchy"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:primary-action-hierarchy",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-primary-action-hierarchy",
+        "receipt_id": "receipt:vgo-090:primary-action-hierarchy",
+        "rejection_reasons": ["human_review_required", "proposal_escalated"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:primary-action-hierarchy"]
+      },
+      "receipt_id": "receipt:vgo-090:primary-action-hierarchy",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "human_review",
+        "declared_method": "human_hierarchy_review",
+        "declared_tier": "human",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "primary_action_hierarchy_score": 0.5,
+          "security_violations": 0
+        },
+        "reason_codes": ["human_review_required", "proposal_escalated"],
+        "receipt_id": "receipt:vgo-090:primary-action-hierarchy",
+        "result_id": "result:primary-action-hierarchy",
+        "route_kind": "human_review",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:primary-action-hierarchy"
+      },
+      "result_id": "result:primary-action-hierarchy",
+      "route_kind": "human_review",
+      "run_id": "run:vgo-090-primary-action-hierarchy",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:containing-screenshots",
+        "check:accessibility-contracts",
+        "check:direct-tests"
+      ],
+      "task_id": "task:primary-action-hierarchy",
+      "title": "Improve primary-action hierarchy under human review only.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "design_token_consistency": 0.0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "design_token_consistency": 0.0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1620,
+        "context_reduction": 0.0,
+        "packed_tokens": 1620,
+        "raw_retrieval_tokens": 1620
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "design_token_substitution",
+      "declared_tier": "deterministic",
+      "disclosure": "Current source still uses hardcoded hex surfaces rather than a closed design-token substitution. No token patch was admitted.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:design-token-consistency",
+      "invalidation_precision": 1.0,
+      "kind": "design_token_consistency",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:design-token-consistency"],
+      "objective_metric_id": "design_token_consistency",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:design-token-consistency"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:design-token-consistency"],
+        "context_pack_id": "pack:vgo-090-design-token-consistency",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:design-token-consistency"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:design-token-consistency",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-design-token-consistency",
+        "receipt_id": "receipt:vgo-090:design-token-consistency",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:design-token-consistency"]
+      },
+      "receipt_id": "receipt:vgo-090:design-token-consistency",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "design_token_substitution",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "design_token_consistency": 0.0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:design-token-consistency",
+        "result_id": "result:design-token-consistency",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:design-token-consistency"
+      },
+      "result_id": "result:design-token-consistency",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-design-token-consistency",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:dependent-screenshots",
+        "check:contrast",
+        "check:direct-tests"
+      ],
+      "task_id": "task:design-token-consistency",
+      "title": "Replace one inconsistent design token on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_binding_coverage": 0.5,
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_binding_coverage": 0.5,
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1760,
+        "context_reduction": 0.0,
+        "packed_tokens": 1760,
+        "raw_retrieval_tokens": 1760
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "exact_action_binding_migration",
+      "declared_tier": "deterministic",
+      "disclosure": "Confirmation checkboxes and tokens are present, but the archived confirmation_failure_count=1 (static confirmation is not argument-digest-bound) was not cleared by a new admitted patch.",
+      "evidence_class": "integrity",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:confirmation-ux",
+      "invalidation_precision": 1.0,
+      "kind": "confirmation_ux",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:confirmation-ux"],
+      "objective_metric_id": "confirmation_binding_coverage",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:confirmation-ux"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:confirmation-ux"],
+        "context_pack_id": "pack:vgo-090-confirmation-ux",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:confirmation-ux"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:confirmation-ux",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-confirmation-ux",
+        "receipt_id": "receipt:vgo-090:confirmation-ux",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:confirmation-ux"]
+      },
+      "receipt_id": "receipt:vgo-090:confirmation-ux",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "exact_action_binding_migration",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_binding_coverage": 0.5,
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:confirmation-ux",
+        "result_id": "result:confirmation-ux",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:confirmation-ux"
+      },
+      "result_id": "result:confirmation-ux",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-confirmation-ux",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:confirmation",
+        "check:policy",
+        "check:interaction"
+      ],
+      "task_id": "task:confirmation-ux",
+      "title": "Enforce exact destructive confirmation on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "empty_state_guidance_coverage": 1.0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "empty_state_guidance_coverage": 1.0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1580,
+        "context_reduction": 0.0,
+        "packed_tokens": 1580,
+        "raw_retrieval_tokens": 1580
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "exact_label_substitution",
+      "declared_tier": "deterministic",
+      "disclosure": "Empty-state guidance already exists in the archived live baseline and current tree. This run applied no new patch and recorded no metric delta.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:empty-state-guidance",
+      "invalidation_precision": 1.0,
+      "kind": "empty_state_guidance",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:empty-state-guidance"],
+      "objective_metric_id": "empty_state_guidance_coverage",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:empty-state-guidance"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:empty-state-guidance"],
+        "context_pack_id": "pack:vgo-090-empty-state-guidance",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:empty-state-guidance"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:empty-state-guidance",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-empty-state-guidance",
+        "receipt_id": "receipt:vgo-090:empty-state-guidance",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:empty-state-guidance"]
+      },
+      "receipt_id": "receipt:vgo-090:empty-state-guidance",
+      "result": {
+        "artifact_ids": ["bafkreigdema4brcoc7xynhi2jbig6q7oiapzc7wp25khfyxg5odx7f4vl4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "exact_label_substitution",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "empty_state_guidance_coverage": 1.0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:empty-state-guidance",
+        "result_id": "result:empty-state-guidance",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:empty-state-guidance"
+      },
+      "result_id": "result:empty-state-guidance",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-empty-state-guidance",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:accessible-name",
+        "check:accessibility-scenarios",
+        "check:direct-tests"
+      ],
+      "task_id": "task:empty-state-guidance",
+      "title": "Improve empty-state guidance on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "keyboard_access_coverage": 0.35,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "keyboard_access_coverage": 0.35,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1700,
+        "context_reduction": 0.0,
+        "packed_tokens": 1700,
+        "raw_retrieval_tokens": 1700
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "aria_reference_repair",
+      "declared_tier": "deterministic",
+      "disclosure": "Archived live baseline still records keyboard-activation, keyboard-reachability, and keyboard-order defects on custom tree controls. No keyboard patch was admitted.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:keyboard-reachability",
+      "invalidation_precision": 1.0,
+      "kind": "keyboard_reachability",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:keyboard-reachability"],
+      "objective_metric_id": "keyboard_access_coverage",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:keyboard-reachability"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:keyboard-reachability"],
+        "context_pack_id": "pack:vgo-090-keyboard-reachability",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:keyboard-reachability"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:keyboard-reachability",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-keyboard-reachability",
+        "receipt_id": "receipt:vgo-090:keyboard-reachability",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:keyboard-reachability"]
+      },
+      "receipt_id": "receipt:vgo-090:keyboard-reachability",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "aria_reference_repair",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "keyboard_access_coverage": 0.35,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:keyboard-reachability",
+        "result_id": "result:keyboard-reachability",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:keyboard-reachability"
+      },
+      "result_id": "result:keyboard-reachability",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-keyboard-reachability",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:accessibility-contracts",
+        "check:interaction-scenarios",
+        "check:direct-tests"
+      ],
+      "task_id": "task:keyboard-reachability",
+      "title": "Repair keyboard activation for a custom control on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "localization_clipping_count": 0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "localization_clipping_count": 0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1840,
+        "context_reduction": 0.0,
+        "packed_tokens": 1840,
+        "raw_retrieval_tokens": 1840
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "exact_label_substitution",
+      "declared_tier": "deterministic",
+      "disclosure": "Archived live clipping_count is already 0. This run applied no new localization patch and recorded no metric delta.",
+      "evidence_class": "automated",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:localization-clipping",
+      "invalidation_precision": 1.0,
+      "kind": "localization_clipping",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:localization-clipping"],
+      "objective_metric_id": "localization_clipping_count",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:localization-clipping"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:localization-clipping"],
+        "context_pack_id": "pack:vgo-090-localization-clipping",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:localization-clipping"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:localization-clipping",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-localization-clipping",
+        "receipt_id": "receipt:vgo-090:localization-clipping",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:localization-clipping"]
+      },
+      "receipt_id": "receipt:vgo-090:localization-clipping",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "exact_label_substitution",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "localization_clipping_count": 0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:localization-clipping",
+        "result_id": "result:localization-clipping",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:localization-clipping"
+      },
+      "result_id": "result:localization-clipping",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-localization-clipping",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:clipping",
+        "check:locale-scenarios",
+        "check:text-layout-screenshots"
+      ],
+      "task_id": "task:localization-clipping",
+      "title": "Prevent localized text clipping on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "modal_focus_lifecycle_coverage": 0.0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "modal_focus_lifecycle_coverage": 0.0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1780,
+        "context_reduction": 0.0,
+        "packed_tokens": 1780,
+        "raw_retrieval_tokens": 1780
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "aria_reference_repair",
+      "declared_tier": "deterministic",
+      "disclosure": "Archived live baseline records a focus-trap problem. Current source has restoreFocusState but no modal focus trap. Objective remains unmet.",
+      "evidence_class": "structural",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:modal-focus-lifecycle",
+      "invalidation_precision": 1.0,
+      "kind": "modal_focus_lifecycle",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:modal-focus-lifecycle"],
+      "objective_metric_id": "modal_focus_lifecycle_coverage",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:modal-focus-lifecycle"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:modal-focus-lifecycle"],
+        "context_pack_id": "pack:vgo-090-modal-focus-lifecycle",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:modal-focus-lifecycle"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:modal-focus-lifecycle",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-modal-focus-lifecycle",
+        "receipt_id": "receipt:vgo-090:modal-focus-lifecycle",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:modal-focus-lifecycle"]
+      },
+      "receipt_id": "receipt:vgo-090:modal-focus-lifecycle",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "aria_reference_repair",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "modal_focus_lifecycle_coverage": 0.0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:modal-focus-lifecycle",
+        "result_id": "result:modal-focus-lifecycle",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:modal-focus-lifecycle"
+      },
+      "result_id": "result:modal-focus-lifecycle",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-modal-focus-lifecycle",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:accessibility-contracts",
+        "check:interaction-scenarios",
+        "check:interaction"
+      ],
+      "task_id": "task:modal-focus-lifecycle",
+      "title": "Restore modal focus trap and return focus on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "baseline_metrics": {
+        "action_binding_integrity": 1.0,
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "security_violations": 0
+      },
+      "candidate_metrics": {
+        "action_binding_integrity": 1.0,
+        "confirmation_bypass_count": 0,
+        "critical_accessibility_violations": 0,
+        "security_violations": 0
+      },
+      "context": {
+        "catalog_raw_retrieval_token_estimate": 1880,
+        "context_reduction": 0.0,
+        "packed_tokens": 1880,
+        "raw_retrieval_tokens": 1880
+      },
+      "critical_accessibility_regression_auto_accepted": false,
+      "decision": "reject",
+      "declared_method": "exact_action_binding_migration",
+      "declared_tier": "deterministic",
+      "disclosure": "Archived live action_binding_invalid_count is already 0. This run applied no new binding patch and recorded no metric delta. Confirmation and host gates remain closed.",
+      "evidence_class": "integrity",
+      "expected_decision": "accept",
+      "fallback_triggered": false,
+      "hard_gate_passed": true,
+      "interface": "GuiBenchmarkResult@1",
+      "invalidation_plan_id": "invalidate:action-binding-integrity",
+      "invalidation_precision": 1.0,
+      "kind": "action_binding_integrity",
+      "measurable_improvement": false,
+      "objective_ids": ["objective:action-binding-integrity"],
+      "objective_metric_id": "action_binding_integrity",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "receipt": {
+        "accessibility_receipt_ids": ["receipt:a11y:vgo-090:action-binding-integrity"],
+        "analysis_classification": "exact",
+        "application_id": "app:agent-supervisor",
+        "constraint_receipt_ids": ["receipt:constraint:vgo-090:action-binding-integrity"],
+        "context_pack_id": "pack:vgo-090-action-binding-integrity",
+        "decision": "reject",
+        "interaction_receipt_ids": ["receipt:interaction:vgo-090:action-binding-integrity"],
+        "interface": "GuiImprovementReceipt@1",
+        "invalidation_plan_id": "invalidate:action-binding-integrity",
+        "patch_digest": "",
+        "proposal_id": "proposal:vgo-090-action-binding-integrity",
+        "receipt_id": "receipt:vgo-090:action-binding-integrity",
+        "rejection_reasons": ["rejected", "no_measurable_improvement"],
+        "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+        "schema_version": "gui-improvement-receipt/v1",
+        "screen_id": "screen:agent-supervisor",
+        "verification_status": "unverified",
+        "visual_receipt_ids": ["receipt:visual:vgo-090:action-binding-integrity"]
+      },
+      "receipt_id": "receipt:vgo-090:action-binding-integrity",
+      "result": {
+        "artifact_ids": ["bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"],
+        "benchmark_id": "benchmark-v1",
+        "decision": "reject",
+        "declared_method": "exact_action_binding_migration",
+        "declared_tier": "deterministic",
+        "hard_gate_passed": true,
+        "interface": "GuiBenchmarkResult@1",
+        "measurable_improvement": false,
+        "metric_values": {
+          "action_binding_integrity": 1.0,
+          "confirmation_bypass_count": 0,
+          "critical_accessibility_violations": 0,
+          "security_violations": 0
+        },
+        "reason_codes": ["rejected", "no_measurable_improvement"],
+        "receipt_id": "receipt:vgo-090:action-binding-integrity",
+        "result_id": "result:action-binding-integrity",
+        "route_kind": "deterministic_transform",
+        "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+        "task_id": "task:action-binding-integrity"
+      },
+      "result_id": "result:action-binding-integrity",
+      "route_kind": "deterministic_transform",
+      "run_id": "run:vgo-090-action-binding-integrity",
+      "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-result@1",
+      "selected_check_ids": [
+        "check:action-bindings",
+        "check:policy",
+        "check:confirmation",
+        "check:host-boundary",
+        "check:invocation-tests"
+      ],
+      "task_id": "task:action-binding-integrity",
+      "title": "Keep action bindings exact and host-authorized on the selected screen.",
+      "unrelated_screenshots_excluded": [
+        "screenshot:legal-assistant-wide",
+        "screenshot:other-app-mobile",
+        "screenshot:media-browser-desktop"
+      ]
+    }
+  ],
+  "terminal_receipt_count": 15,
+  "uses_production_credentials": false,
+  "uses_production_services": false,
+  "verification_status": "integrity_valid"
+}
