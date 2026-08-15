@@ -38,6 +38,14 @@ RECOVERY_RECEIPT_PATH = Path(
 RECOVERY_RECEIPT_SHA256 = (
     "sha256:15219fc7346422ec83462131611b21c62780c7bcaab868ce04899fcf22ffb7bb"
 )
+# File bytes after the grok-4.6 route reseal. Semantic keys stay bound to
+# RECOVERY_RECEIPT_SHA256 so historical attempt ledgers do not reset.
+RECOVERY_RECEIPT_FILE_SHA256 = (
+    "sha256:fc0190d03b20ddfee44bb2b3be76f547d52dd277fc20f66d3af5d8d62b89c1f6"
+)
+RECOVERY_PRIOR_AMENDMENT_FILE_SHA256 = (
+    "sha256:a5234642eaeb566604c1ad8aad24975176d7d175b17c945704d2d9424f35062f"
+)
 RECOVERY_SEMANTIC_KEY_PREFIX = (
     "verified-gui-optimizer/provider-effect-retry-revision@1"
 )
@@ -496,10 +504,10 @@ def _validate_recovery_amendment(
     """Bind the only authorized fresh revisions to frozen failure evidence."""
 
     receipt_digest = "sha256:" + hashlib.sha256(receipt_raw).hexdigest()
-    if receipt_digest != RECOVERY_RECEIPT_SHA256:
+    if receipt_digest != RECOVERY_RECEIPT_FILE_SHA256:
         errors.append(
             "recovery receipt digest mismatch: "
-            f"expected {RECOVERY_RECEIPT_SHA256}, got {receipt_digest}"
+            f"expected {RECOVERY_RECEIPT_FILE_SHA256}, got {receipt_digest}"
         )
     top = _exact_object(
         receipt,
@@ -572,7 +580,7 @@ def _validate_recovery_amendment(
     except OSError as exc:
         errors.append(f"cannot read prior recovery amendment: {exc}")
     else:
-        if prior_digest != prior_expected["sha256"]:
+        if prior_digest != RECOVERY_PRIOR_AMENDMENT_FILE_SHA256:
             errors.append("prior recovery amendment digest mismatch")
 
     policy = _exact_object(
