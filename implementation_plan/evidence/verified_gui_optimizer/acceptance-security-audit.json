@@ -1,0 +1,504 @@
+{
+  "accepted_benchmark_tasks": [
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "benchmark_receipt_id": "receipt:vgo-090:focus-restoration",
+      "critical_accessibility_regression_auto_accepted": false,
+      "current_tree_holds": true,
+      "decision": "accept",
+      "declared_method": "exact_aria_reference_repair",
+      "disclosure": "Independent current-tree replay confirms captureFocusState/restoreFocusState around the existing outerHTML rerender. VGO-081 records focus_loss_count 1 to 0. This is the previously admitted VGO-080 patch, not a new canonical edit.",
+      "evidence_class": "structural",
+      "hard_gate_passed": true,
+      "improvement_receipt_id": "receipt:improvement:vgo-080-focus-error",
+      "measurable_improvement": true,
+      "objective_metric_id": "focus_restoration_coverage",
+      "source_observations": {
+        "capture_focus_state_present": true,
+        "outerhtml_rerender_retained": true,
+        "restore_focus_state_present": true
+      },
+      "task_id": "task:focus-restoration"
+    },
+    {
+      "authorization_confirmation_regression_auto_accepted": false,
+      "benchmark_receipt_id": "receipt:vgo-090:error-presentation",
+      "critical_accessibility_regression_auto_accepted": false,
+      "current_tree_holds": true,
+      "decision": "accept",
+      "declared_method": "aria_reference_repair",
+      "disclosure": "Independent current-tree replay confirms fieldErrorBinding writes aria-invalid, aria-describedby, and aria-errormessage on steering and dispatch controls. VGO-081 records error_association_failure_count 1 to 0. This is the previously admitted VGO-080 patch, not a new canonical edit.",
+      "evidence_class": "structural",
+      "hard_gate_passed": true,
+      "improvement_receipt_id": "receipt:improvement:vgo-080-focus-error",
+      "measurable_improvement": true,
+      "objective_metric_id": "error_association_coverage",
+      "source_observations": {
+        "aria_describedby_present": true,
+        "aria_errormessage_present": true,
+        "aria_invalid_present": true,
+        "field_error_binding_present": true
+      },
+      "task_id": "task:error-presentation"
+    }
+  ],
+  "accepted_task_count": 2,
+  "accepted_tasks_covered": true,
+  "analysis_classification": "exact",
+  "application_id": "app:agent-supervisor",
+  "audit_method": "independent_current_tree_replay",
+  "audited_revisions": {
+    "benchmark_report": "dda22aace054b1df19de2498b2adbd80b84f3a67",
+    "objective_revision": "baguqeerazz3kv5g43lawi57ibfiqnddzstncg6gpadg6io622pcbv32efbca",
+    "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+    "target_improvement_receipt": "4045acd8f2df5ba90377fb48ec33382fe72e346a",
+    "tree_id": "f6ef26595b7e20ed7b464080ab96d6c1fda81d8b"
+  },
+  "authority_claims": [
+    {
+      "claim": "ui_visibility_authorizes",
+      "evidence": [
+        "GuiAcceptanceAuthority@1 rejects ui_visible/ui_enabled without bound host authority",
+        "UiPolicyBindingValidator@1 sets ui_visibility_authorizes false on every report",
+        "allowsAutomaticAcceptance requires ui_visibility_authorizes === false"
+      ],
+      "interface": "GuiAcceptanceAuthority@1",
+      "label": "not_authorization",
+      "status": "holds"
+    },
+    {
+      "claim": "browser_policy_authoritative",
+      "evidence": [
+        "GuiAcceptanceAuthority@1 rejects browser_policy_authoritative_claim",
+        "UiPolicyBindingValidator@1 reason browser_policy_not_authoritative blocks automatic acceptance",
+        "console normalizeRuntimeObservation copies only allow/deny/require_confirmation identifiers"
+      ],
+      "interface": "GuiAcceptanceAuthority@1",
+      "label": "not_authoritative",
+      "status": "holds"
+    },
+    {
+      "claim": "scope_declaration_is_host_authority",
+      "evidence": [
+        "AuthorityReasonCode.SCOPE_DECLARATION_NOT_AUTHORITY",
+        "scope-only evidence cannot authorize an intended action"
+      ],
+      "interface": "GuiAcceptanceAuthority@1",
+      "label": "not_authority",
+      "status": "holds"
+    },
+    {
+      "claim": "caller_policy_fields_authorize",
+      "evidence": [
+        "policy_decision_id and policy_fresh have no authority without current evidence bound to the exact action and canonical sha256 digest"
+      ],
+      "interface": "GuiAcceptanceAuthority@1",
+      "label": "not_authority",
+      "status": "holds"
+    },
+    {
+      "claim": "accessibility_or_security_regression_auto_accept",
+      "evidence": [
+        "GuiAcceptanceAuthority@1 rejects accessibility_regression and security_regression",
+        "benchmark aggregates auto_accepted_critical_accessibility_regressions=0 and auto_accepted_authorization_confirmation_regressions=0",
+        "both accepted tasks keep those flags false"
+      ],
+      "interface": "GuiAcceptanceAuthority@1",
+      "label": "hard_gate",
+      "status": "holds"
+    },
+    {
+      "claim": "exact_confirmation_binding",
+      "evidence": [
+        "steering, dispatch, persist, and checkpoint handlers deny without confirm",
+        "localPromptSteeringResult denies missing confirmation_token unless dry_run",
+        "gateway requestPromptSteering denies before transport when confirmation is missing",
+        "confirmation tokens are static strings, not argument-digest-bound"
+      ],
+      "interface": "UiConfirmationBinding@1",
+      "label": "present_not_digest_bound",
+      "status": "holds_with_limitation"
+    },
+    {
+      "claim": "hidden_or_disabled_action_dispatch",
+      "evidence": [
+        "submit-steering/submit-dispatch click listeners exist while aria-disabled is presentation-only",
+        "handlers re-check confirmation and do not invoke the capability when confirm is missing",
+        "persist/checkpoint use native disabled and a second confirm check",
+        "AllAppToolGateway and console gateway remain the only transport"
+      ],
+      "interface": "UiPolicyBindingValidator@1",
+      "label": "no_transport_without_confirmation",
+      "status": "holds"
+    },
+    {
+      "claim": "browser_host_credential_escape",
+      "evidence": [
+        "GuiHostBoundaryPolicy@1 forbids path, command, and credential selectors",
+        "normalizeRuntimeObservation drops host paths, credentials, URLs, and arbitrary payloads",
+        "escapeAttr only permits http(s), hash, docs/, contracts/, and implementation_plan/ hrefs"
+      ],
+      "interface": "GuiHostBoundaryPolicy@1",
+      "label": "fail_closed",
+      "status": "holds"
+    }
+  ],
+  "bindings": {
+    "action": {
+      "dispatch_method": "agent_supervisor.task_control.request",
+      "governed_write_capabilities": [
+        "supervisor.prompt-steering.request",
+        "supervisor.task-control.request"
+      ],
+      "schema": "structured-json-payload",
+      "steering_method": "agent_supervisor.prompt_steering.request",
+      "transport": "mediated_gateway_only"
+    },
+    "confirmation": {
+      "argument_digest_bound": false,
+      "bypass_found": false,
+      "checkbox_and_handler_gate_present": true,
+      "gateway_pre_transport_denial": true,
+      "limitation": "static-confirmation-is-not-argument-digest-bound remains an archived live defect and was not auto-accepted as task:confirmation-ux",
+      "token_pattern": "confirm-agent-supervisor:<target-or-receipt>:<client-request-id>"
+    },
+    "schema": {
+      "acceptance_authority": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/acceptance-authority@1",
+      "adversarial_suite": "gui-adversarial-proposal-suite/v1",
+      "benchmark_report": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/benchmark-report@1",
+      "improvement_receipt": "gui-improvement-receipt/v1",
+      "policy_binding_validator": "ui-policy-binding-validator/v1"
+    }
+  },
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "catalog_task_count": 15,
+  "claim_boundary": {
+    "browser_policy_authoritative": false,
+    "executed_hostile_payloads": false,
+    "pixel_change_is_neutral_observation": true,
+    "screen_reader_reviewed": false,
+    "security_proof": false,
+    "ui_visibility_authorizes": false,
+    "verified_authorization": false,
+    "verified_complete_security": false,
+    "verified_live_accessibility": false,
+    "verified_wcag": false
+  },
+  "closeout_block_reasons": [
+    "placeholder_patch_digest",
+    "subordinate_receipt_revision_mismatch",
+    "confirmation_not_argument_digest_bound",
+    "named_suite_process_exits_are_the_validation_gate"
+  ],
+  "closeout_blocked": true,
+  "conflict_policy": "Read and report current-tree evidence only; do not change backend policy, credential handling, gateways, target implementation, tests or benchmark results.",
+  "decision": "pass",
+  "evidence_gaps": [
+    {
+      "blocks_closeout": true,
+      "code": "placeholder_patch_digest",
+      "detail": "The VGO-080 improvement receipt and both accepted VGO-090 task receipts bind patch_digest sha256:8888888888888888888888888888888888888888888888888888888888888888. This audit cannot rehash admitted patch bytes. Current-tree source observations still show the declared focus-restore and error-association functions.",
+      "paths": [
+        "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-improvement-receipt.json",
+        "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-benchmark.json"
+      ]
+    },
+    {
+      "blocks_closeout": true,
+      "code": "subordinate_receipt_revision_mismatch",
+      "detail": "The target improvement receipt records repository_revision 4045acd8f2df5ba90377fb48ec33382fe72e346a. The benchmark report records dda22aace054b1df19de2498b2adbd80b84f3a67. This audit is bound to tree_id f6ef26595b7e20ed7b464080ab96d6c1fda81d8b and does not claim those receipts were produced at one identical git revision.",
+      "paths": [
+        "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-improvement-receipt.json",
+        "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-benchmark.json"
+      ]
+    },
+    {
+      "blocks_closeout": true,
+      "code": "confirmation_not_argument_digest_bound",
+      "detail": "Confirmation checkboxes, tokens, handler gates, and gateway pre-transport denial are present. Tokens are not bound to a canonical argument digest. The archived live baseline records static-confirmation-is-not-argument-digest-bound. task:confirmation-ux was rejected and not auto-accepted.",
+      "paths": [
+        "swissknife/web/js/apps/agent-supervisor.js",
+        "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-browser-baseline.json"
+      ]
+    },
+    {
+      "blocks_closeout": true,
+      "code": "named_suite_process_exits_are_the_validation_gate",
+      "detail": "This receipt records an independent static and contract replay of current-tree evidence. Named Python, TypeScript, gateway, and Playwright commands remain the fail-closed validation gate. A process exit is not treated as completion or as a security proof.",
+      "paths": []
+    },
+    {
+      "blocks_closeout": false,
+      "code": "remaining_catalog_objectives_unmet",
+      "detail": "Twelve catalog tasks were rejected and one required human review. Unmet objectives include accessible names, overflow, keyboard reachability, modal focus trap, design tokens, and the 30 percent median context-reduction target. None of those misses were automatically accepted.",
+      "paths": [
+        "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-benchmark.json"
+      ]
+    },
+    {
+      "blocks_closeout": false,
+      "code": "aria_disabled_submit_is_presentation_only",
+      "detail": "Steering and dispatch submit controls use aria-disabled rather than native disabled. Click listeners still reach the handlers, which deny without confirmation and do not call the capability. This residual presentation issue is recorded in the archived baseline as aria-disabled-instead-of-native-disabled and was retained by the VGO-080 patch. It is not a confirmation bypass or auto-accepted accessibility regression.",
+      "paths": [
+        "swissknife/web/js/apps/agent-supervisor.js"
+      ]
+    }
+  ],
+  "evidence_rehashes": [
+    {
+      "digest": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553",
+      "identity_field": "baseline_identity",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-browser-baseline.json",
+      "receipt_id": null,
+      "verification_status": null
+    },
+    {
+      "digest": "sha256:b5f9352877a3544c94cf6a2e64816bbd6c5318652420ba3158239b2940b30e32",
+      "identity_field": "archived_baseline.semantic_digest",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-semantic-baseline.json",
+      "receipt_id": null,
+      "verification_status": "unverified"
+    },
+    {
+      "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+      "identity_field": "patch_digest",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-improvement-receipt.json",
+      "receipt_id": "receipt:improvement:vgo-080-focus-error",
+      "verification_status": "integrity_valid"
+    },
+    {
+      "digest": "sha256:3a5dd202ecc7f22757f8f52dc556bce593f3184714381ca93043f6738e10735b",
+      "identity_field": "proposal_digest",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-proposal.json",
+      "receipt_id": "proposal:vgo-080-focus-error",
+      "verification_status": "integrity_valid"
+    },
+    {
+      "digest": "sha256:e677e43913956dffafdc919048c9960f487907cf90b773923f97a7a475183a25",
+      "identity_field": "current_target.digest",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-regression-receipt.json",
+      "receipt_id": "receipt:regression:vgo-081-agent-supervisor",
+      "verification_status": "integrity_valid"
+    },
+    {
+      "digest": null,
+      "identity_field": "receipt_id",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-benchmark.json",
+      "receipt_id": "receipt:vgo-090-benchmark-v1",
+      "verification_status": null
+    },
+    {
+      "digest": null,
+      "identity_field": "receipt_id",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-artifacts.json",
+      "receipt_id": "receipt:improvement:vgo-080-focus-error",
+      "verification_status": null
+    }
+  ],
+  "expected_tasks": 15,
+  "findings": {
+    "auto_accepted_critical_accessibility_regression": "not_found",
+    "confirmation_bypass": "not_found",
+    "credential_host_escape": "not_found",
+    "hidden_prohibited_dispatch": "not_found",
+    "ui_authorization_synthesis": "not_found"
+  },
+  "interface": "GuiSecurityAuditReceipt@1",
+  "limitations": [
+    "This audit is not a complete security proof, WCAG certification, or authorization proof.",
+    "Content identities and receipts prove integrity of recorded bytes, not truth of unrerun live browser behavior.",
+    "Hostile adversarial fixtures were treated as data. Their HTML, commands, tools, paths, and credential payloads were not executed.",
+    "Remaining catalog defects were not live-rebrowsered by this audit. Candidate metrics stay at the archived VGO-068 snapshot except where VGO-080/081 source evidence proves the two accepted improvements.",
+    "Median context reduction remains 0.0 against the 0.3 target and is disclosed rather than hidden."
+  ],
+  "named_suites": [
+    {
+      "claim": "patch, host-boundary, and acceptance authority fail closed",
+      "command": "cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_authority.py -q",
+      "execution": "validation_gate",
+      "interface": "GuiAcceptanceAuthority@1",
+      "path": "external/ipfs_accelerate/test/api/test_gui_optimizer_authority.py",
+      "static_replay": "holds",
+      "suite_id": "suite:gui-optimizer-authority"
+    },
+    {
+      "claim": "undeclared, generated, unrelated, and oversized patches reject",
+      "command": "cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_patch_scope.py -q",
+      "execution": "validation_gate",
+      "interface": "GuiPatchScopeGate@1",
+      "path": "external/ipfs_accelerate/test/api/test_gui_optimizer_patch_scope.py",
+      "static_replay": "holds",
+      "suite_id": "suite:gui-optimizer-patch-scope"
+    },
+    {
+      "claim": "adversarial proposals never auto-accept; rejected patches leave the canonical branch unchanged",
+      "command": "cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_acceptance_adversarial.py -q",
+      "execution": "validation_gate",
+      "interface": "GuiAdversarialProposalSuite@1",
+      "path": "external/ipfs_accelerate/test/api/test_gui_optimizer_acceptance_adversarial.py",
+      "static_replay": "holds",
+      "suite_id": "suite:vgo-086-adversarial-acceptance"
+    },
+    {
+      "claim": "ambiguous, stale, confirmation, and dispatchable-disabled bindings block automatic acceptance",
+      "command": "cd swissknife && npm run test:run -- test/unit/services/gui-optimizer/policy-validator.test.ts",
+      "execution": "validation_gate",
+      "interface": "UiPolicyBindingValidator@1",
+      "path": "swissknife/test/unit/services/gui-optimizer/policy-validator.test.ts",
+      "static_replay": "holds",
+      "suite_id": "suite:ui-policy-binding-validator"
+    },
+    {
+      "claim": "all-app tool gateway remains mediated and does not mint browser-issued authorization",
+      "command": "cd swissknife && npm run test:run -- test/browser/all-app-tool-gateway.test.ts",
+      "execution": "validation_gate",
+      "interface": "AllAppToolGateway@1",
+      "path": "swissknife/test/browser/all-app-tool-gateway.test.ts",
+      "static_replay": "holds",
+      "suite_id": "suite:all-app-tool-gateway"
+    },
+    {
+      "claim": "console gateway denies unconfirmed governed writes before transport",
+      "command": "cd swissknife && npm run test:run -- test/browser/agent-supervisor-console-gateway.test.ts",
+      "execution": "validation_gate",
+      "interface": "AgentSupervisorConsoleGateway@1",
+      "path": "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+      "static_replay": "holds",
+      "suite_id": "suite:agent-supervisor-console-gateway"
+    },
+    {
+      "claim": "direct-browser regression locks focus, error association, confirmation, disabled dispatch, and gateway boundary",
+      "command": "cd swissknife && npm run test:run -- test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts",
+      "execution": "validation_gate",
+      "interface": "AgentSupervisorRegressionSuite@1",
+      "path": "swissknife/test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts",
+      "static_replay": "holds",
+      "suite_id": "suite:agent-supervisor-browser-boundary"
+    },
+    {
+      "claim": "full-browser goal/task lifecycle keeps confirmation and rejected-request graph isolation",
+      "command": "cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.verified-gui-optimizer.config.ts test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts --reporter=line",
+      "execution": "validation_gate",
+      "interface": "AgentSupervisorLifecycle@1",
+      "path": "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+      "static_replay": "holds",
+      "suite_id": "suite:agent-supervisor-goal-task-lifecycle"
+    },
+    {
+      "claim": "full-browser regression locks the admitted VGO-080 contracts without production credentials",
+      "command": "cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.verified-gui-optimizer.config.ts test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts --reporter=line",
+      "execution": "validation_gate",
+      "interface": "AgentSupervisorRegressionSuite@1",
+      "path": "swissknife/test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts",
+      "static_replay": "holds",
+      "suite_id": "suite:agent-supervisor-playwright-regression"
+    }
+  ],
+  "prohibited_findings": [],
+  "receipt_id": "receipt:vgo-091-acceptance-security-audit",
+  "rejected_or_review_tasks": [
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:accessible-labels"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:loading-state"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:failure-state"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:interaction-step-reduction"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:responsive-overflow"
+    },
+    {
+      "decision": "human_review",
+      "reason_codes": ["human_review_required", "proposal_escalated"],
+      "task_id": "task:primary-action-hierarchy"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:design-token-consistency"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:confirmation-ux"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:empty-state-guidance"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:keyboard-reachability"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:localization-clipping"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:modal-focus-lifecycle"
+    },
+    {
+      "decision": "reject",
+      "reason_codes": ["rejected", "no_measurable_improvement"],
+      "task_id": "task:action-binding-integrity"
+    }
+  ],
+  "rejected_patch_isolation": {
+    "adversarial_case_id": "adv:rejected-patch-isolation",
+    "canonical_branch_mutation_claimed": false,
+    "compare": "temporary-repository before/after HEAD identity in the VGO-086 executor suite",
+    "never_auto_accept": true,
+    "required_case_ids": [
+      "adv:out-of-scope",
+      "adv:test-deletion",
+      "adv:arbitrary-html",
+      "adv:authority-weakening",
+      "adv:credential-weakening",
+      "adv:check-weakening",
+      "adv:unrelated-app",
+      "adv:excess-size",
+      "adv:unverified-binding",
+      "adv:aesthetic-a11y-regression",
+      "adv:click-confirmation-bypass",
+      "adv:interrupted-optimization",
+      "adv:deterministic-rerun",
+      "adv:stale-journal",
+      "adv:rejected-patch-isolation"
+    ],
+    "status": "contract_present"
+  },
+  "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+  "schema_version": "gui-security-audit-receipt/v1",
+  "screen_id": "screen:agent-supervisor",
+  "security_proof_claimed": false,
+  "task_count": 15,
+  "task_id": "VGO-091",
+  "tree_id": "f6ef26595b7e20ed7b464080ab96d6c1fda81d8b",
+  "validation_boundary": {
+    "chromium_channel": "chromium",
+    "headless_shell_forbidden": true,
+    "python_interpreter": "/usr/bin/python3.12",
+    "sealed_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+  },
+  "verification_status": "integrity_valid"
+}
