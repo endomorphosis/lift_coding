@@ -1,0 +1,126 @@
+{
+  "interface": "GuiImprovementReceipt@1",
+  "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/final-current-tree@1",
+  "receipt_id": "receipt:vgo-099-final-current-tree",
+  "task_id": "VGO-099",
+  "application_id": "app:agent-supervisor",
+  "screen_id": "screen:agent-supervisor",
+  "verification_status": "integrity_valid",
+  "decision": "complete",
+  "closeout_blocked": false,
+  "evaluated_source_revision": "90d67c970330894eac70e8c8c46c02de11efcc3c",
+  "evaluated_source_tree": "585f444bb9a8a06c7dd1230ad764939a3b8e3018",
+  "gitlinks": {
+    "swissknife": "1821fbc19e02d233afb068c6591e3de30ed0bfe6",
+    "external/ipfs_accelerate": "9f96d2cde6c0ca8ff4269645c9f4479a90f33790",
+    "external/ipfs_datasets": "628da00c7e839dc5634543c365de52c4e14827ce"
+  },
+  "excludes_closeout_outputs": [
+    "implementation_plan/evidence/verified_gui_optimizer/final-current-tree-receipt.json",
+    "implementation_plan/evidence/verified_gui_optimizer/final-report.md"
+  ],
+  "status_only_control_commit_recorded_after_handoff": true,
+  "subordinate_receipts": [
+    {
+      "name": "acceptance-security-audit",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/acceptance-security-audit.json",
+      "present": true,
+      "sha256": "sha256:3f90b327cc1adc89373485da3dbc8fb26f620df45099803c46959bceeaef05f2",
+      "bytes": 18907,
+      "receipt_id": "receipt:vgo-091-acceptance-security-audit",
+      "verification_status": "integrity_valid",
+      "repository_revision": "3c5c7895339ac87a60481066e494ce48e0daa89b"
+    },
+    {
+      "name": "benchmark",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-benchmark.json",
+      "present": true,
+      "sha256": "sha256:9d8c68b7372714838faac704676e4d4dbbd71a7b7b4ec8444f190f585e00e276",
+      "bytes": 75840,
+      "receipt_id": "receipt:vgo-090-benchmark-v1",
+      "verification_status": "integrity_valid",
+      "repository_revision": "dda22aace054b1df19de2498b2adbd80b84f3a67"
+    },
+    {
+      "name": "current-tree-verification",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/current-tree-verification.json",
+      "present": true,
+      "sha256": "sha256:a709aa33059b7410235bc6e9eae1612bb42efc4c271b5eadd5eee8a71edb30bc",
+      "bytes": 6703,
+      "receipt_id": "receipt:vgo-093-current-tree-verification",
+      "verification_status": "integrity_valid",
+      "repository_revision": "edb439860864052424d1c2d76839f5c1550ded03"
+    },
+    {
+      "name": "target-improvement",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-improvement-receipt.json",
+      "present": true,
+      "sha256": "sha256:29e1d9b91ca21338e4715b26d894219dbb35021ead3d0ba285f28f2e2aceef01",
+      "bytes": 1002,
+      "receipt_id": "receipt:improvement:vgo-080-focus-error",
+      "verification_status": "integrity_valid",
+      "repository_revision": "4045acd8f2df5ba90377fb48ec33382fe72e346a"
+    },
+    {
+      "name": "regression",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-regression-receipt.json",
+      "present": true,
+      "sha256": "sha256:bab328b7619fac291996efd78759e999b94da8752ef313c6a7b81c6d56e9f0d0",
+      "bytes": 5008,
+      "receipt_id": "receipt:regression:vgo-081-agent-supervisor",
+      "verification_status": "integrity_valid",
+      "repository_revision": null
+    },
+    {
+      "name": "semantic-baseline",
+      "path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-semantic-baseline.json",
+      "present": true,
+      "sha256": "sha256:b5f9352877a3544c94cf6a2e64816bbd6c5318652420ba3158239b2940b30e32",
+      "bytes": 25964,
+      "receipt_id": null,
+      "verification_status": "unverified",
+      "repository_revision": null
+    }
+  ],
+  "command_ledger": [
+    {
+      "command": "scripts/gui-opt verify current-tree --full --receipt implementation_plan/evidence/verified_gui_optimizer/current-tree-verification.json",
+      "ok": true
+    },
+    {
+      "command": "scripts/gui-opt report acceptance-security-audit --require-complete --verify-receipts",
+      "ok": true
+    },
+    {
+      "command": "scripts/gui-opt report benchmark-agent-supervisor --require-complete --expected-tasks 15 --verify-receipts",
+      "ok": true
+    },
+    {
+      "command": "scripts/gui-opt report final-current-tree --require-complete --verify-receipts",
+      "ok": true
+    }
+  ],
+  "benchmark_summary": {
+    "expected_tasks": 15,
+    "accepted": [
+      "task:focus-restoration",
+      "task:error-presentation"
+    ],
+    "human_review": [
+      "task:primary-action-hierarchy"
+    ],
+    "rejected_count": 12,
+    "median_context_reduction": 0.0,
+    "median_context_reduction_target": 0.3
+  },
+  "limitations": [
+    "This receipt does not claim the GUI is proved optimal, WCAG-certified, or completely secure.",
+    "Median context reduction remains 0.0 against the 0.3 target.",
+    "Confirmation is checkbox-and-token gated, not argument-digest-bound.",
+    "VGO-062 semantic-baseline snapshot still lists pre-VGO-080 error-association inventory; VGO-081 live Playwright proved the accepted target repairs."
+  ],
+  "narrow_final_claim": "The selected GUI workflow was incrementally analyzed and improved against declared interaction, accessibility, policy, and visual-regression criteria, with content-addressed evidence for the evaluated scenarios.",
+  "uses_production_credentials": false,
+  "uses_production_services": false,
+  "generated_at": "2026-08-15T09:20:56.052332+00:00"
+}
