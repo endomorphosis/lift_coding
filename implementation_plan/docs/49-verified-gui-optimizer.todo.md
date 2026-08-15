@@ -1143,7 +1143,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-096 Publish architecture and application-extension guidance
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
