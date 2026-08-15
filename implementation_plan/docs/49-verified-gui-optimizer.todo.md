@@ -987,7 +987,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-081 Add Agent Supervisor target regression tests
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
