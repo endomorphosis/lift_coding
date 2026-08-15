@@ -1117,7 +1117,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-093 Run full current-tree build and browser verification
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
