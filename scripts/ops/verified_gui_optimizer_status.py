@@ -14,9 +14,7 @@ from typing import Any
 
 SCHEMA = "verified-gui-optimizer-supervisor-health@1"
 LANE_COUNT = 4
-ATTEMPT_LIMIT_IDLE_REASON = (
-    "all_selectable_ready_tasks_reached_max_task_attempts"
-)
+ATTEMPT_LIMIT_IDLE_REASON = "all_selectable_ready_tasks_reached_max_task_attempts"
 EMPTY_BACKLOG_IDLE_REASONS = frozenset(
     {
         "no_shard_selectable_ready_tasks",
@@ -54,9 +52,7 @@ RECOVERABLE_WRAPPER_STATUSES = frozenset(
     }
 )
 KNOWN_WRAPPER_STATUSES = (
-    ACTIVE_WRAPPER_STATUSES
-    | RECOVERABLE_WRAPPER_STATUSES
-    | {"stopped", "termination_blocked"}
+    ACTIVE_WRAPPER_STATUSES | RECOVERABLE_WRAPPER_STATUSES | {"stopped", "termination_blocked"}
 )
 RUNNER_TERMINAL_LINE = "all supervisor tracks reached fresh terminal quiescence"
 RUNNER_COMPLETED_LINE = "completed after terminal board drain"
@@ -187,9 +183,7 @@ def _task_count(
 
 def _disposition_idle_reason(reason: str) -> bool:
     prefix = "disposition_idle:"
-    return reason.startswith(prefix) and reason[len(prefix) :] in (
-        DISPOSITION_IDLE_VALUES
-    )
+    return reason.startswith(prefix) and reason[len(prefix) :] in (DISPOSITION_IDLE_VALUES)
 
 
 def _selection_idle_reason_is_quiescent(reason: str) -> bool:
@@ -204,10 +198,7 @@ def _selection_idle_reason_is_quiescent(reason: str) -> bool:
     if not reason.startswith(retry_prefix):
         return False
     nested = reason[len(retry_prefix) :]
-    return bool(nested) and (
-        nested in POLICY_IDLE_REASONS
-        or _disposition_idle_reason(nested)
-    )
+    return bool(nested) and (nested in POLICY_IDLE_REASONS or _disposition_idle_reason(nested))
 
 
 def _task_projection_is_quiescent(
@@ -270,11 +261,7 @@ def _lane_snapshot(
     if status and (not isinstance(status_name, str) or not status_name):
         issues.append("invalid_supervisor_status")
         status_name = None
-    status_updated_at = (
-        status.get("updated_at") or status.get("heartbeat_at")
-        if status
-        else None
-    )
+    status_updated_at = status.get("updated_at") or status.get("heartbeat_at") if status else None
     status_age = _age_seconds(status_updated_at, now=now)
     status_fresh = status_age is not None and status_age <= stale_seconds
     if status and status_age is None:
@@ -370,9 +357,7 @@ def _lane_snapshot(
         and counts["blocked_count"] == 0
         and counts["external_reserved_count"] == 0
     )
-    terminal_quiescent = bool(
-        runner_terminal_evidence and terminal_fields_satisfied
-    )
+    terminal_quiescent = bool(runner_terminal_evidence and terminal_fields_satisfied)
     projection_quiescent = terminal_quiescent or (
         _task_projection_is_quiescent(
             active_task_id=active_task_id,
@@ -381,9 +366,7 @@ def _lane_snapshot(
             counts=counts,
         )
     )
-    execution_active = bool(
-        active_task_id or implementation_in_progress
-    )
+    execution_active = bool(active_task_id or implementation_in_progress)
     task_freshness_required = not projection_quiescent
     heartbeat_age = _age_seconds(task.get("heartbeat_at"), now=now)
     progress_age = _age_seconds(task.get("last_progress_at"), now=now)
@@ -392,15 +375,12 @@ def _lane_snapshot(
     if blocked_count > 0:
         blockers.append(f"blocked_tasks_present:{blocked_count}")
     attempt_limited = bool(
-        not terminal_fields_satisfied
-        and selection_idle_reason == ATTEMPT_LIMIT_IDLE_REASON
+        not terminal_fields_satisfied and selection_idle_reason == ATTEMPT_LIMIT_IDLE_REASON
     )
     if attempt_limited:
         blockers.append("all_selectable_ready_tasks_reached_attempt_limit")
 
-    last_implementation_returncode = task.get(
-        "last_implementation_returncode"
-    )
+    last_implementation_returncode = task.get("last_implementation_returncode")
     if (
         isinstance(last_implementation_returncode, int)
         and not isinstance(last_implementation_returncode, bool)
@@ -429,42 +409,29 @@ def _lane_snapshot(
         "wrapper_status_fresh": status_fresh,
         "supervisor_pid": supervisor_marker_pid,
         "supervisor_pid_alive": bool(
-            supervisor_marker_pid
-            and pid_liveness.get(supervisor_marker_pid, False)
+            supervisor_marker_pid and pid_liveness.get(supervisor_marker_pid, False)
         ),
         "status_supervisor_pid": status_supervisor_pid,
         "status_supervisor_pid_alive": bool(
-            status_supervisor_pid
-            and pid_liveness.get(status_supervisor_pid, False)
+            status_supervisor_pid and pid_liveness.get(status_supervisor_pid, False)
         ),
-        "supervisor_pid_identity_matches": supervisor_identity.get(
-            supervisor_marker_pid
-        ),
-        "status_supervisor_pid_identity_matches": supervisor_identity.get(
-            status_supervisor_pid
-        ),
+        "supervisor_pid_identity_matches": supervisor_identity.get(supervisor_marker_pid),
+        "status_supervisor_pid_identity_matches": supervisor_identity.get(status_supervisor_pid),
         "supervisor_live_pids": supervisor_live_pids,
         "projected_supervisor_pid_alive": projected_supervisor_alive,
         "daemon_pid": daemon_marker_pid,
-        "daemon_pid_alive": bool(
-            daemon_marker_pid and pid_liveness.get(daemon_marker_pid, False)
-        ),
+        "daemon_pid_alive": bool(daemon_marker_pid and pid_liveness.get(daemon_marker_pid, False)),
         "status_daemon_pid": status_daemon_pid,
         "status_daemon_pid_alive": bool(
-            status_daemon_pid
-            and pid_liveness.get(status_daemon_pid, False)
+            status_daemon_pid and pid_liveness.get(status_daemon_pid, False)
         ),
         "daemon_pid_identity_matches": daemon_identity.get(daemon_marker_pid),
-        "status_daemon_pid_identity_matches": daemon_identity.get(
-            status_daemon_pid
-        ),
+        "status_daemon_pid_identity_matches": daemon_identity.get(status_daemon_pid),
         "daemon_live_pids": daemon_live_pids,
         "projected_daemon_pid_alive": projected_daemon_alive,
         "last_recycle_reason": status.get("last_recycle_reason"),
         "autonomous_unstall": status.get("autonomous_unstall"),
-        "stalled_without_active_worker": bool(
-            status.get("stalled_without_active_worker")
-        ),
+        "stalled_without_active_worker": bool(status.get("stalled_without_active_worker")),
         "heartbeat_at": task.get("heartbeat_at"),
         "heartbeat_age_seconds": heartbeat_age,
         "last_progress_at": task.get("last_progress_at"),
@@ -516,9 +483,7 @@ def _assess_lane_runtime(
     ):
         warnings.append("projected_supervisor_pid_liveness_disagrees")
     projected_daemon = lane["projected_daemon_pid_alive"]
-    if isinstance(projected_daemon, bool) and (
-        projected_daemon != lane["status_daemon_pid_alive"]
-    ):
+    if isinstance(projected_daemon, bool) and (projected_daemon != lane["status_daemon_pid_alive"]):
         warnings.append("projected_daemon_pid_liveness_disagrees")
 
     if lane["status"] not in KNOWN_WRAPPER_STATUSES:
@@ -531,9 +496,7 @@ def _assess_lane_runtime(
             lane["orphaned"] = True
             issues.append("live_lane_process_without_master")
         if lane["status"] != "stopped":
-            issues.append(
-                f"wrapper_not_stopped_after_master_exit:{lane['status']}"
-            )
+            issues.append(f"wrapper_not_stopped_after_master_exit:{lane['status']}")
         if Path(lane["supervisor_pid_path"]).exists():
             issues.append("supervisor_pid_marker_not_removed")
         if Path(lane["daemon_pid_path"]).exists():
@@ -604,9 +567,7 @@ def _assess_lane_runtime(
         lane["orphaned"] = True
         issues.append("orphaned_daemon_without_live_wrapper")
 
-    enforce_task_freshness = bool(
-        lane["status"] == "running" and lane["task_freshness_required"]
-    )
+    enforce_task_freshness = bool(lane["status"] == "running" and lane["task_freshness_required"])
     if enforce_task_freshness:
         # The managed daemon deliberately blocks while an implementation
         # command runs, so its task-state projection may remain byte-stable
@@ -645,9 +606,7 @@ def build_report(
         if master_pid_alive
         else None
     )
-    master_runtime_alive = bool(
-        master_pid_alive and master_pid_identity_matches is not False
-    )
+    master_runtime_alive = bool(master_pid_alive and master_pid_identity_matches is not False)
     logs = sorted((runtime_root / "logs").glob("configured-board-*.log"))
     latest_master_log = logs[-1] if logs else None
     runner_terminal_evidence = _runner_terminal_evidence(latest_master_log)
@@ -669,12 +628,9 @@ def build_report(
             stale_seconds=stale_seconds,
         )
 
-    all_lanes_terminal = bool(lanes) and all(
-        lane["terminal_quiescent"] for lane in lanes
-    )
+    all_lanes_terminal = bool(lanes) and all(lane["terminal_quiescent"] for lane in lanes)
     any_lane_process_alive = any(
-        lane["supervisor_live_pids"] or lane["daemon_live_pids"]
-        for lane in lanes
+        lane["supervisor_live_pids"] or lane["daemon_live_pids"] for lane in lanes
     )
     terminal_drained = bool(
         all_lanes_terminal
@@ -689,28 +645,18 @@ def build_report(
         )
     )
 
-    issues = [
-        f"lane_{lane['lane']}:{issue}"
-        for lane in lanes
-        for issue in lane["issues"]
-    ]
-    blockers = [
-        f"lane_{lane['lane']}:{blocker}"
-        for lane in lanes
-        for blocker in lane["blockers"]
-    ]
-    warnings = [
-        f"lane_{lane['lane']}:{warning}"
-        for lane in lanes
-        for warning in lane["warnings"]
-    ]
+    issues = [f"lane_{lane['lane']}:{issue}" for lane in lanes for issue in lane["issues"]]
+    blockers = [f"lane_{lane['lane']}:{blocker}" for lane in lanes for blocker in lane["blockers"]]
+    warnings = [f"lane_{lane['lane']}:{warning}" for lane in lanes for warning in lane["warnings"]]
     if master_pid_alive and master_pid_identity_matches is False:
         issues.append("configured_board_master_pid_identity_mismatch")
     if not master_runtime_alive and not terminal_drained:
         issues.append("configured_board_master_not_alive")
-    terminal_fields_without_runner_evidence = bool(lanes) and all(
-        lane["terminal_fields_satisfied"] for lane in lanes
-    ) and not runner_terminal_evidence
+    terminal_fields_without_runner_evidence = (
+        bool(lanes)
+        and all(lane["terminal_fields_satisfied"] for lane in lanes)
+        and not runner_terminal_evidence
+    )
     if not master_runtime_alive and terminal_fields_without_runner_evidence:
         issues.append("terminal_projection_lacks_runner_freshness_evidence")
 
@@ -738,14 +684,10 @@ def build_report(
         "master_pid_alive": master_pid_alive,
         "master_pid_identity_matches": master_pid_identity_matches,
         "master_runtime_alive": master_runtime_alive,
-        "latest_master_log": (
-            str(latest_master_log) if latest_master_log else None
-        ),
+        "latest_master_log": (str(latest_master_log) if latest_master_log else None),
         "runner_terminal_evidence": runner_terminal_evidence,
         "stale_seconds": stale_seconds,
-        "terminal_lane_count": sum(
-            1 for lane in lanes if lane["terminal_quiescent"]
-        ),
+        "terminal_lane_count": sum(1 for lane in lanes if lane["terminal_quiescent"]),
         "all_lanes_terminal": all_lanes_terminal,
         "terminal_drained": terminal_drained,
         "blocked_lane_count": sum(1 for lane in lanes if lane["blockers"]),
@@ -787,9 +729,13 @@ def _run_self_test() -> int:
             encoding="utf-8",
         )
         fresh = now.isoformat().replace("+00:00", "Z")
-        stale = (now - dt.timedelta(hours=1)).isoformat().replace(
-            "+00:00",
-            "Z",
+        stale = (
+            (now - dt.timedelta(hours=1))
+            .isoformat()
+            .replace(
+                "+00:00",
+                "Z",
+            )
         )
         master_pid = 100
         live_pids = {master_pid}
@@ -834,9 +780,7 @@ def _run_self_test() -> int:
                 "external_reserved_count": 0,
                 "waiting_count": 40 if active else 42 - completed_count,
                 "blocked_count": blocked_count,
-                "blocked_task_ids": (
-                    ["VGO-BLOCKED"] if blocked_count else []
-                ),
+                "blocked_task_ids": (["VGO-BLOCKED"] if blocked_count else []),
                 "active_task_id": f"VGO-{lane + 1:03d}" if active else "",
                 "active_task_cid": f"cid-{lane}",
                 "implementation_in_progress": active,
@@ -875,14 +819,17 @@ def _run_self_test() -> int:
             write_lane(lane)
 
         module = sys.modules[__name__]
-        with mock.patch.object(
-            module,
-            "_pid_alive",
-            side_effect=lambda pid: bool(pid in live_pids),
-        ), mock.patch.object(
-            module,
-            "_pid_identity_matches",
-            return_value=None,
+        with (
+            mock.patch.object(
+                module,
+                "_pid_alive",
+                side_effect=lambda pid: bool(pid in live_pids),
+            ),
+            mock.patch.object(
+                module,
+                "_pid_identity_matches",
+                return_value=None,
+            ),
         ):
             report = build_report(repo_root, runtime_relative, 60.0)
             check(report["lifecycle"] == "running", "running lifecycle")
@@ -894,8 +841,7 @@ def _run_self_test() -> int:
             check(report["lifecycle"] == "running", "active stable lifecycle")
             check(
                 any(
-                    "task_heartbeat_stale_while_wrapper_live" in item
-                    for item in report["warnings"]
+                    "task_heartbeat_stale_while_wrapper_live" in item for item in report["warnings"]
                 ),
                 "active stable task projection is diagnostic",
             )
@@ -933,11 +879,7 @@ def _run_self_test() -> int:
             check(report["lifecycle"] == "blocked", "attempt-limit lifecycle")
 
             write_lane(0)
-            status_path = (
-                state_root
-                / "lane-0"
-                / "vgo_lane_0_supervisor_status.json"
-            )
+            status_path = state_root / "lane-0" / "vgo_lane_0_supervisor_status.json"
             stale_status = json.loads(status_path.read_text(encoding="utf-8"))
             stale_status["updated_at"] = stale
             status_path.write_text(json.dumps(stale_status), encoding="utf-8")
@@ -1047,10 +989,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.self_test:
         return _run_self_test()
-    if (
-        not math.isfinite(args.stale_seconds)
-        or args.stale_seconds <= 0
-    ):
+    if not math.isfinite(args.stale_seconds) or args.stale_seconds <= 0:
         parser.error("--stale-seconds must be finite and positive")
     repo_root = args.repo_root.resolve()
     report = build_report(repo_root, args.runtime_root, args.stale_seconds)

@@ -23,10 +23,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = Path("config/verified_gui_optimizer_scheduler.json")
-SCHEMA = (
-    "ipfs_accelerate_py.agent_supervisor."
-    "verified_gui_optimizer.scheduler_config@1"
-)
+SCHEMA = "ipfs_accelerate_py.agent_supervisor.verified_gui_optimizer.scheduler_config@1"
 BOARD_NAMESPACE = "verified-gui-optimizer-v1"
 MERGE_BRANCH = "feature/verified-gui-optimizer"
 TASK_PREFIX = "VGO-"
@@ -35,9 +32,7 @@ RECOVERY_RECEIPT_PATH = Path(
     "implementation_plan/evidence/verified_gui_optimizer/recovery/"
     "provider_effect_task_revision_retry_amendment_20260812.json"
 )
-RECOVERY_RECEIPT_SHA256 = (
-    "sha256:15219fc7346422ec83462131611b21c62780c7bcaab868ce04899fcf22ffb7bb"
-)
+RECOVERY_RECEIPT_SHA256 = "sha256:15219fc7346422ec83462131611b21c62780c7bcaab868ce04899fcf22ffb7bb"
 # File bytes after the grok-4.6 route reseal. Semantic keys stay bound to
 # RECOVERY_RECEIPT_SHA256 so historical attempt ledgers do not reset.
 RECOVERY_RECEIPT_FILE_SHA256 = (
@@ -46,9 +41,7 @@ RECOVERY_RECEIPT_FILE_SHA256 = (
 RECOVERY_PRIOR_AMENDMENT_FILE_SHA256 = (
     "sha256:a5234642eaeb566604c1ad8aad24975176d7d175b17c945704d2d9424f35062f"
 )
-RECOVERY_SEMANTIC_KEY_PREFIX = (
-    "verified-gui-optimizer/provider-effect-retry-revision@1"
-)
+RECOVERY_SEMANTIC_KEY_PREFIX = "verified-gui-optimizer/provider-effect-retry-revision@1"
 
 TASK_IDS = (
     "VGO-000",
@@ -219,62 +212,34 @@ PROHIBITED_DEPENDENCY_PATTERNS = (
 )
 RECOVERY_TASK_REVISIONS = {
     "VGO-001": {
-        "old_key": (
-            "task/v1/"
-            "02a08eba52aca07cbcedb9f30341517f746b1facc1eb89479a658d6e3949871f"
-        ),
-        "old_cid": (
-            "baguqeeraakqi5ossvsqhzphnxhzqgqkrp52gwh5myhvysr42mwgw4okjq4pq"
-        ),
-        "new_key": (
-            "task/v1/"
-            "58ee568b77ceb6982901566ad475d04adb5bb49e60b05101ef7ec0d55cc7e5da"
-        ),
-        "new_cid": (
-            "baguqeeraldxfnc3xz23jqkibkzvni5oqjlnvxne6mcyfcappp3ankxgh4xna"
-        ),
+        "old_key": ("task/v1/02a08eba52aca07cbcedb9f30341517f746b1facc1eb89479a658d6e3949871f"),
+        "old_cid": ("baguqeeraakqi5ossvsqhzphnxhzqgqkrp52gwh5myhvysr42mwgw4okjq4pq"),
+        "new_key": ("task/v1/58ee568b77ceb6982901566ad475d04adb5bb49e60b05101ef7ec0d55cc7e5da"),
+        "new_cid": ("baguqeeraldxfnc3xz23jqkibkzvni5oqjlnvxne6mcyfcappp3ankxgh4xna"),
         "contract_sha256": (
-            "sha256:"
-            "71828ac55853cf1fb68f1a0eef164e1a15ebfaecf8b3feac73f5847eaa766411"
+            "sha256:71828ac55853cf1fb68f1a0eef164e1a15ebfaecf8b3feac73f5847eaa766411"
         ),
         "contract_size": 14028,
         "display_attempt_count": 5,
         "revision_attempt_count": 5,
         "event_sequence": 742,
         "event_type": "implementation_retry_deferred",
-        "event_id": (
-            "sha256:"
-            "8939c8efce77048fd79fe5b9e8d1d141ae23bea9ac0bfe6b49146435b9a8a2ac"
-        ),
+        "event_id": ("sha256:8939c8efce77048fd79fe5b9e8d1d141ae23bea9ac0bfe6b49146435b9a8a2ac"),
     },
     "VGO-009": {
-        "old_key": (
-            "task/v1/"
-            "53d3044c4e2d0ae6b2c41a73b3bfd4bc3b14a6db75f704c9b9602520ba58c805"
-        ),
-        "old_cid": (
-            "baguqeerakpjqitcofufonmwedjz3hp6uxq5rjjw3ox3qjsnzmassbosyzacq"
-        ),
-        "new_key": (
-            "task/v1/"
-            "9a7b6853646e476c7442902c016dba48be4294de539f20aaff86bca93a504660"
-        ),
-        "new_cid": (
-            "baguqeeratj5wqu3enzdwy5ccsawac3n2jc7effg6kopsbkx7q26ksosqizqa"
-        ),
+        "old_key": ("task/v1/53d3044c4e2d0ae6b2c41a73b3bfd4bc3b14a6db75f704c9b9602520ba58c805"),
+        "old_cid": ("baguqeerakpjqitcofufonmwedjz3hp6uxq5rjjw3ox3qjsnzmassbosyzacq"),
+        "new_key": ("task/v1/9a7b6853646e476c7442902c016dba48be4294de539f20aaff86bca93a504660"),
+        "new_cid": ("baguqeeratj5wqu3enzdwy5ccsawac3n2jc7effg6kopsbkx7q26ksosqizqa"),
         "contract_sha256": (
-            "sha256:"
-            "fabfd426ced4a317ae8b7eb3e10a7ef68deaecf7c68142a8c0289be79d2342e7"
+            "sha256:fabfd426ced4a317ae8b7eb3e10a7ef68deaecf7c68142a8c0289be79d2342e7"
         ),
         "contract_size": 12919,
         "display_attempt_count": 4,
         "revision_attempt_count": 4,
         "event_sequence": 906,
         "event_type": "implementation_finished",
-        "event_id": (
-            "sha256:"
-            "0bfd46d60d78386fcc2acd8d6dcf9744db25d5fb97c50019ea690e9f29f61966"
-        ),
+        "event_id": ("sha256:0bfd46d60d78386fcc2acd8d6dcf9744db25d5fb97c50019ea690e9f29f61966"),
     },
 }
 
@@ -307,9 +272,7 @@ def _split_csv(value: str) -> list[str]:
     if normalized.lower() in {"", "-", "none", "n/a"}:
         return []
     return [
-        item.strip().strip("`'\"")
-        for item in normalized.split(",")
-        if item.strip().strip("`'\"")
+        item.strip().strip("`'\"") for item in normalized.split(",") if item.strip().strip("`'\"")
     ]
 
 
@@ -325,16 +288,11 @@ def _canonical_identity_json_bytes(value: Any) -> bytes:
             for child in item:
                 check(child)
             return
-        if isinstance(item, dict) and all(
-            isinstance(key, str) for key in item
-        ):
+        if isinstance(item, dict) and all(isinstance(key, str) for key in item):
             for child in item.values():
                 check(child)
             return
-        raise ValueError(
-            "unsupported task identity value: "
-            f"{type(item).__name__}"
-        )
+        raise ValueError(f"unsupported task identity value: {type(item).__name__}")
 
     check(value)
     return json.dumps(
@@ -375,9 +333,7 @@ def _task_identity_from_record(
     """Recompute the daemon's semantic identity for one sealed board row."""
 
     metadata_value = record.get("metadata")
-    metadata = (
-        dict(metadata_value) if isinstance(metadata_value, Mapping) else {}
-    )
+    metadata = dict(metadata_value) if isinstance(metadata_value, Mapping) else {}
     if omit_semantic_key:
         metadata.pop("semantic key", None)
     title = _normalize_identity_text(record.get("title", ""))
@@ -397,8 +353,7 @@ def _task_identity_from_record(
         {
             _normalize_identity_text(item)
             for item in _identity_sequence(
-                metadata.get("missing evidence", "")
-                or metadata.get("evidence", "")
+                metadata.get("missing evidence", "") or metadata.get("evidence", "")
             )
             if _normalize_identity_text(item)
         }
@@ -406,9 +361,7 @@ def _task_identity_from_record(
     evidence_outputs = sorted(
         {
             _normalize_identity_path(item)
-            for item in _identity_sequence(
-                metadata.get("evidence outputs", "")
-            )
+            for item in _identity_sequence(metadata.get("evidence outputs", ""))
             if _normalize_identity_path(item)
         }
     )
@@ -444,21 +397,13 @@ def _task_identity_from_record(
     digest = hashlib.sha256(raw).digest()
     fingerprint = digest.hex()
     cid_bytes = b"\x01\xa9\x02\x12\x20" + digest
-    cid = (
-        "b"
-        + base64.b32encode(cid_bytes)
-        .decode("ascii")
-        .rstrip("=")
-        .lower()
-    )
+    cid = "b" + base64.b32encode(cid_bytes).decode("ascii").rstrip("=").lower()
     return f"task/v1/{fingerprint}", cid
 
 
 def _task_contract_bytes(record: Mapping[str, Any], task_id: str) -> bytes:
     metadata_value = record.get("metadata")
-    metadata = (
-        dict(metadata_value) if isinstance(metadata_value, Mapping) else {}
-    )
+    metadata = dict(metadata_value) if isinstance(metadata_value, Mapping) else {}
     metadata.pop("status", None)
     metadata.pop("semantic key", None)
     material = {
@@ -488,8 +433,7 @@ def _exact_object(
     actual = set(value)
     if actual != expected_keys:
         errors.append(
-            f"{label} fields must equal {sorted(expected_keys)!r}, got "
-            f"{sorted(actual)!r}"
+            f"{label} fields must equal {sorted(expected_keys)!r}, got {sorted(actual)!r}"
         )
     return value
 
@@ -530,17 +474,11 @@ def _validate_recovery_amendment(
         errors=errors,
     )
     exact_top = {
-        "schema": (
-            "verified-gui-optimizer/"
-            "provider-effect-retry-revision-amendment@1"
-        ),
+        "schema": ("verified-gui-optimizer/provider-effect-retry-revision-amendment@1"),
         "board_namespace": BOARD_NAMESPACE,
-        "authorized_action": (
-            "add_receipt_bound_semantic_revision_to_exact_tasks"
-        ),
+        "authorized_action": ("add_receipt_bound_semantic_revision_to_exact_tasks"),
         "authorization_basis": (
-            "operator_directed_retry_after_verified_no_model_execution_"
-            "control_plane_failures"
+            "operator_directed_retry_after_verified_no_model_execution_control_plane_failures"
         ),
         "authorized_at": "2026-08-12T06:41:42Z",
         "attempt_ledger_policy": "append_only_no_refund",
@@ -565,10 +503,7 @@ def _validate_recovery_amendment(
             "implementation_plan/evidence/verified_gui_optimizer/recovery/"
             "provider_capsule_immutability_retry_amendment_20260812.json"
         ),
-        "sha256": (
-            "sha256:"
-            "b1881c4070aff2f326440c04d59158872627f31eafb5c0f8f00b80e33a8e3b96"
-        ),
+        "sha256": ("sha256:b1881c4070aff2f326440c04d59158872627f31eafb5c0f8f00b80e33a8e3b96"),
         "authorized_action": "increase_max_task_attempts_from_4_to_5",
         "authorized_max_task_attempts": 5,
     }
@@ -602,8 +537,7 @@ def _validate_recovery_amendment(
     expected_policy = {
         "metadata_field": "Semantic key",
         "value_template": (
-            f"{RECOVERY_SEMANTIC_KEY_PREFIX}/"
-            "{task_id}/receipt-sha256:{receipt_sha256}"
+            f"{RECOVERY_SEMANTIC_KEY_PREFIX}/{{task_id}}/receipt-sha256:{{receipt_sha256}}"
         ),
         "receipt_self_hash_embedded": False,
         "exact_task_ids": ["VGO-001", "VGO-009"],
@@ -683,9 +617,7 @@ def _validate_recovery_amendment(
             "display_attempt_counts_are_scoped_to_the_matching_canonical_task_"
             "revision_while_legacy_identityless_counts_remain_conservative"
         ),
-        "terra_route_and_rescue_test_result": (
-            "79 passed, 1 real-Docker deselected"
-        ),
+        "terra_route_and_rescue_test_result": ("79 passed, 1 real-Docker deselected"),
         "scheduler_revision_test_result": "8 passed",
         "daemon_semantic_revision_test_result": "2 passed",
         "independent_audit": "go",
@@ -710,9 +642,7 @@ def _validate_recovery_amendment(
         errors=errors,
     )
     expected_route = {
-        "route_id": (
-            "agent-supervisor-prompt-v3-grok45-terra56-high-auth-or-hard-quota-v1"
-        ),
+        "route_id": ("agent-supervisor-prompt-v3-grok45-terra56-high-auth-or-hard-quota-v1"),
         "authorization_id": (
             "sha256:10bf8bb19799087c0ecca2abe3112fe07bfeafd76a420c3347ad2ce8989fa316"
         ),
@@ -755,8 +685,7 @@ def _validate_recovery_amendment(
         "runtime_state_or_counter_edit_forbidden": True,
         "generic_provider_fallback_remains_forbidden": True,
         "fallback_route": (
-            "grok-4.6_to_gpt-5.6-terra_high_only_on_auth_unavailable_or_"
-            "verified_hard_quota"
+            "grok-4.6_to_gpt-5.6-terra_high_only_on_auth_unavailable_or_verified_hard_quota"
         ),
     }
     if dict(constraints) != expected_constraints:
@@ -774,48 +703,82 @@ def _validate_recovery_amendment(
     attempts = attempts_value if isinstance(attempts_value, list) else []
     if not isinstance(attempts_value, list):
         errors.append("recovery receipt failed_attempts must be a list")
-    attempt_ids = [
-        str(item.get("task_id") or "")
-        for item in attempts
-        if isinstance(item, Mapping)
-    ]
+    attempt_ids = [str(item.get("task_id") or "") for item in attempts if isinstance(item, Mapping)]
     if attempt_ids != ["VGO-001", "VGO-009"] or len(attempts) != 2:
         errors.append("recovery receipt failed_attempts must be exact ordered tasks")
     attempts_by_id = {
-        str(item.get("task_id") or ""): item
-        for item in attempts
-        if isinstance(item, Mapping)
+        str(item.get("task_id") or ""): item for item in attempts if isinstance(item, Mapping)
     }
     attempt_keys = {
         "VGO-001": {
-            "task_id", "canonical_task_key", "task_revision_cid",
+            "task_id",
+            "canonical_task_key",
+            "task_revision_cid",
             "task_contract_sha256_without_status_or_semantic_key",
-            "task_contract_canonical_json_size_bytes", "display_attempt_count",
-            "revision_attempt_count", "event_sequence", "event_type", "event_id",
-            "previous_event_id", "event_snapshot_id", "event_stream_id",
-            "finished_at", "reason", "attempt", "max_task_attempts",
-            "implementation_max_repair_rounds", "backoff_seconds",
-            "provider_dispatched", "attempt_consumed", "active_task_cleared",
-            "display_counter_pinned", "attempt_5_protected_latch_observed",
+            "task_contract_canonical_json_size_bytes",
+            "display_attempt_count",
+            "revision_attempt_count",
+            "event_sequence",
+            "event_type",
+            "event_id",
+            "previous_event_id",
+            "event_snapshot_id",
+            "event_stream_id",
+            "finished_at",
+            "reason",
+            "attempt",
+            "max_task_attempts",
+            "implementation_max_repair_rounds",
+            "backoff_seconds",
+            "provider_dispatched",
+            "attempt_consumed",
+            "active_task_cleared",
+            "display_counter_pinned",
+            "attempt_5_protected_latch_observed",
             "attempt_5_provider_effect_observed",
             "attempt_5_provider_attempt_cas_change_observed",
         },
         "VGO-009": {
-            "task_id", "canonical_task_key", "task_revision_cid",
+            "task_id",
+            "canonical_task_key",
+            "task_revision_cid",
             "task_contract_sha256_without_status_or_semantic_key",
-            "task_contract_canonical_json_size_bytes", "display_attempt_count",
-            "revision_attempt_count", "event_sequence", "event_type", "event_id",
-            "previous_event_id", "event_snapshot_id", "event_stream_id",
-            "finished_at", "attempt", "returncode", "provider_dispatched",
-            "attempt_consumed", "baseline_commit", "branch", "workspace_path",
-            "workspace_relative_path", "diagnostic_receipt_cid",
-            "implementation_log_relative_path", "implementation_log_sha256",
-            "implementation_log_mode", "implementation_log_size_bytes",
-            "implementation_log_line_count", "docker_create_stdout",
-            "docker_container_started", "docker_container_survived_cleanup",
-            "primary_model_execution_observed", "fallback_model_execution_observed",
-            "failure", "invocation_id", "logical_attempt_id", "worktree_id",
-            "prompt_cid", "scope_cid", "provider_attempt_store",
+            "task_contract_canonical_json_size_bytes",
+            "display_attempt_count",
+            "revision_attempt_count",
+            "event_sequence",
+            "event_type",
+            "event_id",
+            "previous_event_id",
+            "event_snapshot_id",
+            "event_stream_id",
+            "finished_at",
+            "attempt",
+            "returncode",
+            "provider_dispatched",
+            "attempt_consumed",
+            "baseline_commit",
+            "branch",
+            "workspace_path",
+            "workspace_relative_path",
+            "diagnostic_receipt_cid",
+            "implementation_log_relative_path",
+            "implementation_log_sha256",
+            "implementation_log_mode",
+            "implementation_log_size_bytes",
+            "implementation_log_line_count",
+            "docker_create_stdout",
+            "docker_container_started",
+            "docker_container_survived_cleanup",
+            "primary_model_execution_observed",
+            "fallback_model_execution_observed",
+            "failure",
+            "invocation_id",
+            "logical_attempt_id",
+            "worktree_id",
+            "prompt_cid",
+            "scope_cid",
+            "provider_attempt_store",
         },
     }
     for task_id, expected in RECOVERY_TASK_REVISIONS.items():
@@ -829,9 +792,7 @@ def _validate_recovery_amendment(
             "task_id": task_id,
             "canonical_task_key": expected["old_key"],
             "task_revision_cid": expected["old_cid"],
-            "task_contract_sha256_without_status_or_semantic_key": (
-                expected["contract_sha256"]
-            ),
+            "task_contract_sha256_without_status_or_semantic_key": (expected["contract_sha256"]),
             "task_contract_canonical_json_size_bytes": expected["contract_size"],
             "display_attempt_count": expected["display_attempt_count"],
             "revision_attempt_count": expected["revision_attempt_count"],
@@ -899,9 +860,7 @@ def _validate_recovery_amendment(
             "data/agent_supervisor/verified_gui_optimizer/worktrees/"
             "workspace-75a13f8fed7b-68c891b9dc70"
         ),
-        "diagnostic_receipt_cid": (
-            "baguqeerac6mvzkwph3dmbqtgu5blb4ys4xndnn3ru4f2na4pvn2klzij2t5a"
-        ),
+        "diagnostic_receipt_cid": ("baguqeerac6mvzkwph3dmbqtgu5blb4ys4xndnn3ru4f2na4pvn2klzij2t5a"),
         "implementation_log_relative_path": (
             "data/agent_supervisor/verified_gui_optimizer/state/lane-3/"
             "implementation_logs/vgo-009-attempt-4.log"
@@ -920,24 +879,13 @@ def _validate_recovery_amendment(
         "primary_model_execution_observed": False,
         "fallback_model_execution_observed": False,
         "failure": (
-            "docker_create_container_id_stdout_was_mistaken_for_attached_"
-            "primary_provider_success"
+            "docker_create_container_id_stdout_was_mistaken_for_attached_primary_provider_success"
         ),
-        "invocation_id": (
-            "baguqeerawcszsylibexr6j3wvvbejot5lx25kskvrxvtobhvqaexzpijn67a"
-        ),
-        "logical_attempt_id": (
-            "baguqeerainkc65733xab44sastdwqt5z5rouif3zggu2dqriikrtcptskxyq"
-        ),
-        "worktree_id": (
-            "baguqeera6jmdcsvt5r5xdqrzrkjrywtrjdcb5ky5mgpaekalro6gmg6psyoq"
-        ),
-        "prompt_cid": (
-            "sha256:a940f2b56ba7098019c335aa3a9da879177da16670560fb38d51fccc820ef54c"
-        ),
-        "scope_cid": (
-            "baguqeeragz5dmvcmmv376kqk2cwmzqnqa5zd3vdqjq6qdi6vwo7focjovbnq"
-        ),
+        "invocation_id": ("baguqeerawcszsylibexr6j3wvvbejot5lx25kskvrxvtobhvqaexzpijn67a"),
+        "logical_attempt_id": ("baguqeerainkc65733xab44sastdwqt5z5rouif3zggu2dqriikrtcptskxyq"),
+        "worktree_id": ("baguqeera6jmdcsvt5r5xdqrzrkjrywtrjdcb5ky5mgpaekalro6gmg6psyoq"),
+        "prompt_cid": ("sha256:a940f2b56ba7098019c335aa3a9da879177da16670560fb38d51fccc820ef54c"),
+        "scope_cid": ("baguqeeragz5dmvcmmv376kqk2cwmzqnqa5zd3vdqjq6qdi6vwo7focjovbnq"),
     }
     for field, value in expected_vgo009.items():
         if vgo009.get(field) != value:
@@ -945,9 +893,16 @@ def _validate_recovery_amendment(
     store = _exact_object(
         vgo009.get("provider_attempt_store"),
         expected_keys={
-            "path", "identity", "directory_mode", "last_metadata_change_at",
-            "entry_count", "json_count", "lock_count", "provider_effect_count",
-            "provider_route_outcome_count", "sole_entry",
+            "path",
+            "identity",
+            "directory_mode",
+            "last_metadata_change_at",
+            "entry_count",
+            "json_count",
+            "lock_count",
+            "provider_effect_count",
+            "provider_route_outcome_count",
+            "sole_entry",
         },
         label="recovery receipt VGO-009.provider_attempt_store",
         errors=errors,
@@ -957,9 +912,7 @@ def _validate_recovery_amendment(
             "/home/barberb/.local/state/ipfs_accelerate_py/provider-attempts/"
             "ddb61fab93e4775fc4af8a7dff7deeb845e2a03a4925cca66d69bd8006120676"
         ),
-        "identity": (
-            "sha256:6ff0cc35d4facbbf7c003569e6baa73e4aa0ef7fc73bfad5104e0bcd20ac4ab9"
-        ),
+        "identity": ("sha256:6ff0cc35d4facbbf7c003569e6baa73e4aa0ef7fc73bfad5104e0bcd20ac4ab9"),
         "directory_mode": "0700",
         "last_metadata_change_at": "2026-08-12T05:54:30.284968753+00:00",
         "entry_count": 1,
@@ -968,9 +921,7 @@ def _validate_recovery_amendment(
         "provider_effect_count": 0,
         "provider_route_outcome_count": 0,
         "sole_entry": {
-            "name": (
-                "7cd6cbfbb2680ed950e2846f6209a243b9dded9efba495106c0b396fb54e48ff.lock"
-            ),
+            "name": ("7cd6cbfbb2680ed950e2846f6209a243b9dded9efba495106c0b396fb54e48ff.lock"),
             "mode": "0600",
             "size_bytes": 0,
         },
@@ -987,11 +938,7 @@ def _validate_recovery_amendment(
     }
     for task_id, record in task_records.items():
         metadata = record.get("metadata", {})
-        semantic_key = (
-            metadata.get("semantic key", "")
-            if isinstance(metadata, Mapping)
-            else ""
-        )
+        semantic_key = metadata.get("semantic key", "") if isinstance(metadata, Mapping) else ""
         expected_semantic_key = expected_semantic_keys.get(task_id, "")
         if semantic_key != expected_semantic_key:
             if task_id in expected_semantic_keys:
@@ -1009,12 +956,8 @@ def _validate_recovery_amendment(
         if len(contract_raw) != expected["contract_size"]:
             errors.append(f"{task_id}: task contract canonical byte size changed")
         try:
-            old_key, old_cid = _task_identity_from_record(
-                record, omit_semantic_key=True
-            )
-            new_key, new_cid = _task_identity_from_record(
-                record, omit_semantic_key=False
-            )
+            old_key, old_cid = _task_identity_from_record(record, omit_semantic_key=True)
+            new_key, new_cid = _task_identity_from_record(record, omit_semantic_key=False)
         except ValueError as exc:
             errors.append(f"{task_id}: cannot recompute task identity: {exc}")
             continue
@@ -1054,9 +997,7 @@ def _parse_markdown_records(
         current_line = 0
         current_metadata = {}
 
-    for line_number, line in enumerate(
-        path.read_text(encoding="utf-8").splitlines(), start=1
-    ):
+    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         if line.startswith("## "):
             flush()
             match = heading_pattern.fullmatch(line)
@@ -1076,8 +1017,7 @@ def _parse_markdown_records(
         normalized_key = key.strip().lower()
         if normalized_key in current_metadata:
             errors.append(
-                f"{path}:{line_number}: {current_id} repeats metadata "
-                f"field {normalized_key!r}"
+                f"{path}:{line_number}: {current_id} repeats metadata field {normalized_key!r}"
             )
         current_metadata[normalized_key] = value.strip()
     flush()
@@ -1155,15 +1095,9 @@ def _command_version(command: str) -> str:
 def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
     exact_scalars = {
         "schema": SCHEMA,
-        "taskboard_path": (
-            "implementation_plan/docs/49-verified-gui-optimizer.todo.md"
-        ),
-        "objectives_path": (
-            "implementation_plan/docs/49-verified-gui-optimizer.objectives.md"
-        ),
-        "plan_path": (
-            "implementation_plan/docs/49-verified-gui-optimizer-plan-2026-08-11.md"
-        ),
+        "taskboard_path": ("implementation_plan/docs/49-verified-gui-optimizer.todo.md"),
+        "objectives_path": ("implementation_plan/docs/49-verified-gui-optimizer.objectives.md"),
+        "plan_path": ("implementation_plan/docs/49-verified-gui-optimizer-plan-2026-08-11.md"),
         "validator_path": "scripts/validate_verified_gui_optimizer_board.py",
         "task_prefix": TASK_PREFIX,
         "board_namespace": BOARD_NAMESPACE,
@@ -1193,29 +1127,18 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
     }
     for field, expected in exact_scalars.items():
         if config.get(field) != expected:
-            errors.append(
-                f"config.{field} must equal {expected!r}, got "
-                f"{config.get(field)!r}"
-            )
+            errors.append(f"config.{field} must equal {expected!r}, got {config.get(field)!r}")
 
     source = config.get("source_binding")
     expected_source = {
-        "accelerator_required_ancestor": (
-            "ce448eae6ab5706832d3ae88b041f9d38ac82ae8"
-        ),
+        "accelerator_required_ancestor": ("ce448eae6ab5706832d3ae88b041f9d38ac82ae8"),
         "accelerator_required_branch": MERGE_BRANCH,
         "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-        "ipfs_accelerate_planning_revision": (
-            "4784c932f87aafbd949714c05439836ab0f446a7"
-        ),
+        "ipfs_accelerate_planning_revision": ("4784c932f87aafbd949714c05439836ab0f446a7"),
         "ipfs_datasets_submodule_path": "external/ipfs_datasets",
-        "ipfs_datasets_planning_revision": (
-            "a2f5400b7cb89c8481819379a1b7b9959fe81d45"
-        ),
+        "ipfs_datasets_planning_revision": ("a2f5400b7cb89c8481819379a1b7b9959fe81d45"),
         "swissknife_submodule_path": "swissknife",
-        "swissknife_planning_revision": (
-            "26f06277888b09a3e7c9b4a3b844001f1dbc0841"
-        ),
+        "swissknife_planning_revision": ("26f06277888b09a3e7c9b4a3b844001f1dbc0841"),
     }
     if not isinstance(source, Mapping):
         errors.append("config.source_binding must be an object")
@@ -1234,8 +1157,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
             errors.append(f"config.source_binding.{field} must be true")
     if source.get("planning_revision_is_runtime_completion_evidence") is not False:
         errors.append(
-            "config.source_binding.planning_revision_is_runtime_completion_evidence "
-            "must be false"
+            "config.source_binding.planning_revision_is_runtime_completion_evidence must be false"
         )
 
     expected_submodules = [
@@ -1264,9 +1186,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
         "root": "data/agent_supervisor/verified_gui_optimizer",
         "state": "data/agent_supervisor/verified_gui_optimizer/state",
         "worktrees": "data/agent_supervisor/verified_gui_optimizer/worktrees",
-        "merge_queue": (
-            "data/agent_supervisor/verified_gui_optimizer/merge-queue"
-        ),
+        "merge_queue": ("data/agent_supervisor/verified_gui_optimizer/merge-queue"),
         "logs": "data/agent_supervisor/verified_gui_optimizer/logs",
     }
     if not isinstance(runtime, Mapping):
@@ -1302,8 +1222,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
             for task_id in lane.get("initial_task_ids", []):
                 if task_id not in TASK_IDS or _task_shard(task_id) != index:
                     errors.append(
-                        f"config.lanes[{index}] has a cross-shard initial task "
-                        f"{task_id!r}"
+                        f"config.lanes[{index}] has a cross-shard initial task {task_id!r}"
                     )
 
     provider = config.get("provider")
@@ -1351,10 +1270,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
     expected_toolchain = {
         "node_version": "v22.19.0",
         "npm_version": "10.8.2",
-        "bin_path": (
-            "data/agent_supervisor/verified_gui_optimizer/"
-            "toolchain/node_modules/.bin"
-        ),
+        "bin_path": ("data/agent_supervisor/verified_gui_optimizer/toolchain/node_modules/.bin"),
         "swissknife_dependency_source": "swissknife/node_modules",
         "install_from_committed_lock_only": True,
     }
@@ -1373,8 +1289,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
         )
     if npm_version != expected_toolchain["npm_version"]:
         errors.append(
-            "active npm toolchain must be 10.8.2; prepend the sealed "
-            "runtime toolchain bin to PATH"
+            "active npm toolchain must be 10.8.2; prepend the sealed runtime toolchain bin to PATH"
         )
     for relative in (
         "swissknife/node_modules/.bin/vitest",
@@ -1382,9 +1297,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
         "swissknife/node_modules/@ucans/ucans",
     ):
         if not (REPO_ROOT / relative).exists():
-            errors.append(
-                f"missing lock-provisioned shared SwissKnife dependency {relative}"
-            )
+            errors.append(f"missing lock-provisioned shared SwissKnife dependency {relative}")
 
     scope = config.get("scope_policy")
     if not isinstance(scope, Mapping):
@@ -1442,13 +1355,9 @@ def _validate_tasks(
     errors: list[str],
 ) -> None:
     if tuple(records) != TASK_IDS:
-        errors.append(
-            "task headings must be the exact ordered 42-ID sealed projection"
-        )
+        errors.append("task headings must be the exact ordered 42-ID sealed projection")
     wave_by_task = {
-        task_id: wave_index
-        for wave_index, wave in enumerate(EXPECTED_WAVES)
-        for task_id in wave
+        task_id: wave_index for wave_index, wave in enumerate(EXPECTED_WAVES) for task_id in wave
     }
     dependencies: dict[str, list[str]] = {}
     statuses: dict[str, str] = {}
@@ -1471,14 +1380,10 @@ def _validate_tasks(
         if task_id == "VGO-000" and status != "completed":
             errors.append("VGO-000: status must remain completed")
         elif task_id != "VGO-000" and status not in {"pending", "completed"}:
-            errors.append(
-                f"{task_id}: status must be pending or completed, got {status!r}"
-            )
+            errors.append(f"{task_id}: status must be pending or completed, got {status!r}")
         if metadata.get("completion", "").lower() != expected_completion:
             errors.append(f"{task_id}: completion must be {expected_completion}")
-        no_change_completion = metadata.get(
-            "no-change completion", "forbidden"
-        ).strip().lower()
+        no_change_completion = metadata.get("no-change completion", "forbidden").strip().lower()
         if no_change_completion != "forbidden":
             errors.append(
                 f"{task_id}: no-change completion must be forbidden on the "
@@ -1487,9 +1392,7 @@ def _validate_tasks(
         if metadata.get("is schedulable", "").lower() != "true":
             errors.append(f"{task_id}: Is schedulable must be true")
         if metadata.get("review only", "").lower() != expected_review_only:
-            errors.append(
-                f"{task_id}: Review only must be {expected_review_only}"
-            )
+            errors.append(f"{task_id}: Review only must be {expected_review_only}")
         if metadata.get("board namespace") != BOARD_NAMESPACE:
             errors.append(f"{task_id}: board namespace mismatch")
         goal_id = metadata.get("goal id", "")
@@ -1505,8 +1408,7 @@ def _validate_tasks(
         max_timeout = int(config.get("implementation_max_timeout_seconds") or 0)
         if timeout < 1 or timeout > max_timeout:
             errors.append(
-                f"{task_id}: Implementation timeout seconds must be in "
-                f"[1, {max_timeout}]"
+                f"{task_id}: Implementation timeout seconds must be in [1, {max_timeout}]"
             )
 
         task_dependencies = _split_csv(metadata.get("depends on", ""))
@@ -1523,9 +1425,7 @@ def _validate_tasks(
                 errors.append(f"{task_id}: cannot depend on itself")
                 continue
             if wave_by_task.get(dependency, 999) >= wave_by_task.get(task_id, -1):
-                errors.append(
-                    f"{task_id}: dependency {dependency} is not in an earlier wave"
-                )
+                errors.append(f"{task_id}: dependency {dependency} is not in an earlier wave")
 
         outputs = _split_csv(metadata.get("outputs", ""))
         predicted = _split_csv(metadata.get("predicted files", ""))
@@ -1539,9 +1439,7 @@ def _validate_tasks(
             for path in paths:
                 control_seal_path = task_id == "VGO-000" and path in CONTROL_PATHS
                 if not _allowed_output_path(path) and not control_seal_path:
-                    errors.append(
-                        f"{task_id}: {field_name} path is outside narrow roots: {path!r}"
-                    )
+                    errors.append(f"{task_id}: {field_name} path is outside narrow roots: {path!r}")
                 if path in CONTROL_PATHS and task_id != "VGO-000":
                     errors.append(
                         f"{task_id}: task cannot overwrite protected control path {path!r}"
@@ -1569,20 +1467,14 @@ def _validate_tasks(
         dependency_material = "\n".join(dependency_fields).lower()
         for pattern in PROHIBITED_DEPENDENCY_PATTERNS:
             if pattern in dependency_material:
-                errors.append(
-                    f"{task_id}: prohibited prior-module dependency {pattern!r}"
-                )
+                errors.append(f"{task_id}: prohibited prior-module dependency {pattern!r}")
 
         declared_lane = metadata.get("parallel lane", "")
         match = re.fullmatch(r"vgo-lane-([0-3])", declared_lane)
         if match is None:
-            errors.append(
-                f"{task_id}: Parallel lane must be one of vgo-lane-0..3"
-            )
+            errors.append(f"{task_id}: Parallel lane must be one of vgo-lane-0..3")
         elif int(match.group(1)) != _task_shard(task_id):
-            errors.append(
-                f"{task_id}: declared Parallel lane conflicts with stable hash shard"
-            )
+            errors.append(f"{task_id}: declared Parallel lane conflicts with stable hash shard")
 
     cyclic = sorted(_cycle_nodes(dependencies))
     if cyclic:
@@ -1591,8 +1483,7 @@ def _validate_tasks(
     if roots != ["VGO-000"]:
         errors.append(f"task dependency roots must equal ['VGO-000'], got {roots}")
     if records and TARGET_SOURCE not in (
-        REPO_ROOT
-        / str(config.get("taskboard_path") or "")
+        REPO_ROOT / str(config.get("taskboard_path") or "")
     ).read_text(encoding="utf-8"):
         errors.append("taskboard must explicitly bind the selected Agent Supervisor source")
 
@@ -1614,9 +1505,7 @@ def _validate_tasks(
             )
     initial = config.get("initial_projection")
     initial_completed = (
-        initial.get("completed_task_ids", [])
-        if isinstance(initial, Mapping)
-        else []
+        initial.get("completed_task_ids", []) if isinstance(initial, Mapping) else []
     )
     for task_id in initial_completed:
         if statuses.get(str(task_id)) != "completed":
@@ -1709,9 +1598,7 @@ def _validate_goals(
         for character in command.strip():
             if escaped:
                 if character in {"\n", "\r"} and not in_single_quote:
-                    path_errors.append(
-                        "validation must not contain line continuation syntax"
-                    )
+                    path_errors.append("validation must not contain line continuation syntax")
                 current.append(character)
                 escaped = False
                 continue
@@ -1755,8 +1642,7 @@ def _validate_goals(
                 or tokens[0] == "&&"
                 or tokens[-1] == "&&"
                 or any(
-                    token != "&&"
-                    and any(character in token for character in ";&|()<>")
+                    token != "&&" and any(character in token for character in ";&|()<>")
                     for token in tokens
                 )
             ):
@@ -1780,9 +1666,7 @@ def _validate_goals(
             for index, segment in enumerate(segments):
                 if segment[0] == "cd":
                     if index != 0 or len(segment) != 2:
-                        path_errors.append(
-                            "validation cd must be the first segment with one path"
-                        )
+                        path_errors.append("validation cd must be the first segment with one path")
                         continue
                     normalized, problem = normalize_validation_path(cwd, segment[1])
                     if problem:
@@ -1812,7 +1696,10 @@ def _validate_goals(
         for field in GOAL_REQUIRED_FIELDS:
             if field not in metadata:
                 errors.append(f"{goal_id}: missing metadata field {field!r}")
-            elif field not in {"parent", "depends on", "direct child goals", "producing tasks"} and not metadata[field].strip():
+            elif (
+                field not in {"parent", "depends on", "direct child goals", "producing tasks"}
+                and not metadata[field].strip()
+            ):
                 errors.append(f"{goal_id}: metadata field {field!r} is empty")
         if metadata.get("status", "").lower() != "pending":
             errors.append(f"{goal_id}: status must be pending at launch")
@@ -1853,12 +1740,9 @@ def _validate_goals(
                     task_goal = task_record["metadata"].get("goal id", "")
                     if task_goal != goal_id:
                         errors.append(
-                            f"{goal_id}: producing task {task_id} has primary "
-                            f"Goal id {task_goal!r}"
+                            f"{goal_id}: producing task {task_id} has primary Goal id {task_goal!r}"
                         )
-                    owned_outputs.update(
-                        _split_csv(task_record["metadata"].get("outputs", ""))
-                    )
+                    owned_outputs.update(_split_csv(task_record["metadata"].get("outputs", "")))
 
         goal_outputs = _split_csv(metadata.get("outputs", ""))
         if len(goal_outputs) != len(set(goal_outputs)):
@@ -1868,13 +1752,10 @@ def _validate_goals(
                 errors.append(f"{goal_id}: unsafe Output path {output!r}")
             elif not output_is_declared(output, owned_outputs):
                 errors.append(
-                    f"{goal_id}: Output {output!r} is not owned by a "
-                    "declared producing task"
+                    f"{goal_id}: Output {output!r} is not owned by a declared producing task"
                 )
 
-        validation_paths, path_errors = referenced_validation_paths(
-            metadata.get("validation", "")
-        )
+        validation_paths, path_errors = referenced_validation_paths(metadata.get("validation", ""))
         for problem in path_errors:
             errors.append(f"{goal_id}: {problem}")
         for relative in sorted(validation_paths):
@@ -1883,17 +1764,11 @@ def _validate_goals(
                 and not output_is_declared(relative, all_task_outputs)
                 and not (REPO_ROOT / relative).exists()
             ):
-                errors.append(
-                    f"{goal_id}: Validation references undeclared path "
-                    f"{relative!r}"
-                )
+                errors.append(f"{goal_id}: Validation references undeclared path {relative!r}")
 
     for task_id, task_record in task_records.items():
         primary_goal = task_record["metadata"].get("goal id", "")
-        if (
-            primary_goal in records
-            and task_id not in producing_by_goal.get(primary_goal, [])
-        ):
+        if primary_goal in records and task_id not in producing_by_goal.get(primary_goal, []):
             errors.append(
                 f"{task_id}: primary Goal id {primary_goal} does not list the "
                 "task in Producing tasks"
@@ -1903,18 +1778,12 @@ def _validate_goals(
         if not parent:
             continue
         if goal_id not in direct_children.get(parent, []):
-            errors.append(
-                f"{goal_id}: Parent {parent} does not list it as a direct child"
-            )
+            errors.append(f"{goal_id}: Parent {parent} does not list it as a direct child")
     for parent, children in direct_children.items():
         for child in children:
             if parents.get(child) != parent:
-                errors.append(
-                    f"{parent}: direct child {child} has Parent {parents.get(child)!r}"
-                )
-    parent_graph = {
-        goal_id: [parent] if parent else [] for goal_id, parent in parents.items()
-    }
+                errors.append(f"{parent}: direct child {child} has Parent {parents.get(child)!r}")
+    parent_graph = {goal_id: [parent] if parent else [] for goal_id, parent in parents.items()}
     cyclic = sorted(_cycle_nodes(parent_graph))
     if cyclic:
         errors.append(f"goal parent graph is cyclic at {cyclic}")
@@ -1923,10 +1792,7 @@ def _validate_goals(
         errors.append(f"goal dependency graph is cyclic at {dependency_cycles}")
     missing_task_mentions = sorted(set(task_records) - producing_mentions)
     if missing_task_mentions:
-        errors.append(
-            "goal heap Producing tasks omits declared tasks: "
-            f"{missing_task_mentions}"
-        )
+        errors.append(f"goal heap Producing tasks omits declared tasks: {missing_task_mentions}")
 
     root_metadata = records.get("VGO-G000", {}).get("metadata", {})
     root_claims = "\n".join(
@@ -1943,9 +1809,7 @@ def _validate_goals(
         "proof cache",
     ):
         if required_claim not in root_claims:
-            errors.append(
-                f"VGO-G000: final acceptance boundary omits {required_claim!r}"
-            )
+            errors.append(f"VGO-G000: final acceptance boundary omits {required_claim!r}")
 
 
 def validate() -> dict[str, Any]:
@@ -1986,9 +1850,7 @@ def validate() -> dict[str, Any]:
     if task_path.is_file():
         task_records, parse_errors = _parse_markdown_records(
             task_path,
-            re.compile(
-                r"^## (?P<id>VGO-[0-9]{3}) (?P<title>\S.*)$"
-            ),
+            re.compile(r"^## (?P<id>VGO-[0-9]{3}) (?P<title>\S.*)$"),
         )
         errors.extend(parse_errors)
         _validate_tasks(task_records, config, errors)
@@ -2008,10 +1870,7 @@ def validate() -> dict[str, Any]:
             json.JSONDecodeError,
             ValueError,
         ) as exc:
-            errors.append(
-                "cannot load recovery amendment: "
-                f"{type(exc).__name__}: {exc}"
-            )
+            errors.append(f"cannot load recovery amendment: {type(exc).__name__}: {exc}")
         else:
             _validate_recovery_amendment(
                 recovery_receipt,
@@ -2023,9 +1882,7 @@ def validate() -> dict[str, Any]:
     if goal_path.is_file():
         goal_records, parse_errors = _parse_markdown_records(
             goal_path,
-            re.compile(
-                r"^## (?P<id>VGO-G[0-9]{3}) (?P<title>\S.*)$"
-            ),
+            re.compile(r"^## (?P<id>VGO-G[0-9]{3}) (?P<title>\S.*)$"),
         )
         errors.extend(parse_errors)
         _validate_goals(goal_records, task_records, errors)
@@ -2056,8 +1913,7 @@ def validate() -> dict[str, Any]:
             "strict_lane_count": int(config.get("max_lanes") or 0),
             "selected_source": TARGET_SOURCE,
             "refill_enabled": bool(
-                config.get("objective_refill_enabled")
-                or config.get("codebase_refill_enabled")
+                config.get("objective_refill_enabled") or config.get("codebase_refill_enabled")
             ),
         },
     }
