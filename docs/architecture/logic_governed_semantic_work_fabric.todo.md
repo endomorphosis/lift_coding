@@ -303,7 +303,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-005 Freeze the authority map and cross-package integration interfaces
 
 - Stable task ID: LGSWF-005
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
