@@ -1,0 +1,171 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-004",
+  "title": "Audit package DAG, compatibility facades, and predecessor incidents",
+  "track": "lgswf-g100-inventory",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-004",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G100",
+  "owning_repository": "cross-repository",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-000"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-004",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_datasets at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "config/agent_supervisor_logic_governed_semantic_work_fabric.json",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/semantic-scan-bootstrap-failures.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/board-bootstrap.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/incidents/bootstrap-launch-r0-provider-contract.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/incidents/bootstrap-launch-r1-module-path.json",
+    "artifacts/logic_governed_semantic_work_fabric/inventory/accelerator-authority.json"
+  ],
+  "write_scope": [
+    "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-004.json"
+  ],
+  "changed_paths": [
+    "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-004.json"
+  ],
+  "expected_outputs": [
+    "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-004.json"
+  ],
+  "outputs_present": {
+    "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-004.json": true
+  },
+  "objective_summary": "Classified canonical, consumer, facade, projection, legacy, duplicate, experimental, obsolete, and unresolved surfaces across the accelerator domain DAG and datasets semantic authorities; recorded allowed consumer edges and upward import violations; preserved PCCE r2-r5 range digests and the r5 terminal empty-context, contradictory-review-schema, and task-CID-alias failures without reusing historical claims or leases.",
+  "findings_digest": {
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "checked_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "accelerator_domain_dag": [
+      "core",
+      "control",
+      "task_sources",
+      "context",
+      "analysis",
+      "proof",
+      "objectives",
+      "planning",
+      "validation",
+      "prompt",
+      "merge",
+      "rescue",
+      "runtime",
+      "self_improvement",
+      "integrations",
+      "todo_daemon",
+      "entrypoints"
+    ],
+    "high_severity_upward_violations": [
+      "datasets counterexample identity delegates to accelerator formal_counterexamples"
+    ],
+    "medium_severity_upward_violations": [
+      "software_verification.source_adapters → program_ast_adapters",
+      "software_verification.domain_adapters → code_security_facts",
+      "tactician.proof_plan → planning.plan_evaluator"
+    ],
+    "compatibility_facades": [
+      "entrypoints empty ENTRYPOINT_LAZY_FACADE_EXPORTS",
+      "package-root lazy re-exports",
+      "ops script wrappers",
+      "MCP/MCP++ surfaces",
+      "datasets llm_router alias"
+    ],
+    "pcce_r5_incident_digest": "sha256:28aedd7072735fd539ed4dc4ad9387242a02b0372626a42f36a695c2ce9e9b61",
+    "pcce_failure_modes_preserved": [
+      "empty-context",
+      "contradictory-review-schema",
+      "task-CID-alias"
+    ],
+    "reuse_policy": "PCCE claims, leases, fences, worktrees, and task identities are preserved and never reused",
+    "product_gate": "bounded bootstrap inventory only; mutation remains gated on LGSWF-009"
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "CounterexampleEnvelope@2",
+    "PublicCounterexampleBoundary@1"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "inventory artifact written as strict UTF-8 JSON object; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "read-only inventory under raw-source-required bootstrap; no datasets-selected formal proof obligations apply",
+    "limitations": [
+      "canonical semantic-state root unavailable",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "bootstrap_raw_source_inventory",
+    "provisional_root": null,
+    "canonical_refresh_required": false,
+    "reason": "task mutates only inventory/receipt artifact paths; no source or datasets semantic truth mutation"
+  },
+  "merge": {
+    "mutation_class": "owned_artifact_paths_only",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "io-analysis inventory class",
+    "plan_tree_semantic_fence": "bootstrap exact-tree + unavailable semantic root binding",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "pcce_historical_state_reuse": false
+  },
+  "acceptance_criteria": {
+    "classify_canonical_consumer_facade_projection_legacy_duplicate_experimental_obsolete_unresolved": true,
+    "preserve_pcce_r2_r5_evidence_and_three_failure_modes": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "n/a_or_pending_for_artifact_only_mutation",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-004",
+  "inventory_artifact": "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json"
+}

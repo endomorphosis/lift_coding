@@ -1,0 +1,930 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.package-dag-and-predecessors@1",
+  "task_id": "LGSWF-004",
+  "title": "Audit package DAG, compatibility facades, and predecessor incidents",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "inspection_method": "raw-source-required exact-tree inventory against checked accelerator and datasets gitlinks; package maps and README used as secondary navigation only",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "checked_authorities": {
+    "root": {
+      "repository": "lift_coding",
+      "commit": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
+      "tree": "db6c28fdc119fab6cd6c109412c5d1ccda02c0c6",
+      "control_bootstrap_commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff"
+    },
+    "accelerator": {
+      "repository": "ipfs_accelerate_py",
+      "path": "external/ipfs_accelerate",
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "branch_observation": "fix/implementation-auto-rescue-20260809",
+      "superproject_gitlink_candidate": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "pcce_repair_head_candidate": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "authority_class": "checked implementation authority for this board",
+      "later_revisions_policy": "intervening commits, superproject pin 485edc08…, and PCCE repair head 0837254e… are candidate evidence only; they are not current operational authority"
+    },
+    "datasets": {
+      "repository": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "branch_observation": "main",
+      "accelerator_nested_dependency_pin": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+      "authority_class": "checked sibling semantic authority; nested accelerator gitlink is deinitialized and not current",
+      "later_revisions_policy": "origin/main and later IPS/AAE/logic-platform surfaces are unavailable at checked authority"
+    }
+  },
+  "classification_vocabulary": {
+    "canonical": "owns semantic or operational identity for its domain; other packages must reference rather than redefine it",
+    "consumer": "imports another package's contracts or capabilities without redefining their identity",
+    "facade": "compatibility, transport, or composition surface that does not own authority; may be inert or lazy",
+    "projection": "lossless or bootstrap view of another authority (markdown board, world view, inventory constant)",
+    "legacy": "historical path, spelling, or bootstrap source retained only for compatibility or migration",
+    "duplicate": "parallel record or import path that risks redefining identity already owned elsewhere",
+    "experimental": "landed but optional, pilot, or not product-gated for LGSWF continuous operation",
+    "obsolete": "retired flat path, superseded package assumption, or absent surface that must not be assumed present",
+    "unresolved": "required surface missing, upward violation, bootstrap failure, or candidate-only later tree content needing explicit disposition"
+  },
+  "intended_package_direction": {
+    "rule": "datasets owns semantic truth; accelerator owns operational coordination; composition adapters live on the accelerator side or behind datasets-owned leaf protocols; compatibility facades remain inert; datasets never imports accelerator to define semantic identity",
+    "accelerator_domain_dag_bottom_up": [
+      "core",
+      "control",
+      "task_sources",
+      "context",
+      "analysis",
+      "proof",
+      "objectives",
+      "planning",
+      "validation",
+      "prompt",
+      "merge",
+      "rescue",
+      "runtime",
+      "self_improvement",
+      "integrations",
+      "todo_daemon",
+      "entrypoints"
+    ],
+    "accelerator_dag_rules": [
+      "acyclic bottom-up only",
+      "core must not import todo_daemon/runtime/merge/rescue",
+      "no lower domain package may import entrypoints",
+      "entrypoints cold-import may load only provider-free contracts",
+      "no long-lived flat re-export stubs at retired package-root paths"
+    ],
+    "datasets_semantic_authority_packages": [
+      "ipfs_datasets_py.logic.software_contracts.semantic_index",
+      "ipfs_datasets_py.logic.software_contracts.semantic_state",
+      "ipfs_datasets_py.logic.software_contracts.contracts",
+      "ipfs_datasets_py.logic.software_contracts.registry",
+      "ipfs_datasets_py.logic.software_contracts.semantic_governor",
+      "ipfs_datasets_py.logic.software_verification",
+      "ipfs_datasets_py.logic.verification_api"
+    ],
+    "cross_package_allowed_edges": [
+      {
+        "from": "ipfs_accelerate_py.agent_supervisor.*",
+        "to": "ipfs_datasets_py.logic.*",
+        "classification": "consumer",
+        "note": "accelerator may consume datasets semantic/proof/IR surfaces by type without redefining them"
+      },
+      {
+        "from": "ipfs_accelerate_py.agent_supervisor.integrations",
+        "to": "ipfs_datasets_py",
+        "classification": "facade",
+        "note": "optional bounded adapters; not semantic truth authority"
+      }
+    ],
+    "cross_package_forbidden_edges": [
+      {
+        "from": "ipfs_datasets_py.logic.* semantic identity paths",
+        "to": "ipfs_accelerate_py.agent_supervisor.*",
+        "reason": "datasets must not import accelerator to define semantic identity; violates intended package direction"
+      }
+    ]
+  },
+  "accelerator_domain_packages": [
+    {
+      "package": "core",
+      "path": "ipfs_accelerate_py/agent_supervisor/core/",
+      "classification": "canonical",
+      "role": "shared foundation: conflict graph, wrappers, external completion, multiformats identity, layout evidence"
+    },
+    {
+      "package": "control",
+      "path": "ipfs_accelerate_py/agent_supervisor/control/",
+      "classification": "canonical",
+      "role": "transport-neutral control plane, permits, authorization"
+    },
+    {
+      "package": "task_sources",
+      "path": "ipfs_accelerate_py/agent_supervisor/task_sources/",
+      "classification": "canonical",
+      "role": "task identity, plan-revision store, markdown/DuckDB projections, queues"
+    },
+    {
+      "package": "context",
+      "path": "ipfs_accelerate_py/agent_supervisor/context/",
+      "classification": "canonical",
+      "role": "decision context compiler and runtime contracts"
+    },
+    {
+      "package": "analysis",
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/",
+      "classification": "canonical",
+      "role": "AST/index/cache/retrieval, program graph, repository forest"
+    },
+    {
+      "package": "proof",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/",
+      "classification": "consumer",
+      "role": "proof orchestration and formal-verification cache; consumes datasets obligations rather than owning semantic truth"
+    },
+    {
+      "package": "objectives",
+      "path": "ipfs_accelerate_py/agent_supervisor/objectives/",
+      "classification": "canonical",
+      "role": "objective heap, tracker, backlog, goal completion"
+    },
+    {
+      "package": "planning",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/",
+      "classification": "canonical",
+      "role": "plan compile/validate, plan-revision contracts, formal planning"
+    },
+    {
+      "package": "validation",
+      "path": "ipfs_accelerate_py/agent_supervisor/validation/",
+      "classification": "canonical",
+      "role": "proposal validation and pre/post merge deterministic gates"
+    },
+    {
+      "package": "prompt",
+      "path": "ipfs_accelerate_py/agent_supervisor/prompt/",
+      "classification": "canonical",
+      "role": "prompt workflows, plan create/steer services"
+    },
+    {
+      "package": "merge",
+      "path": "ipfs_accelerate_py/agent_supervisor/merge/",
+      "classification": "canonical",
+      "role": "merge queue/train, leases, worktree lifecycle"
+    },
+    {
+      "package": "rescue",
+      "path": "ipfs_accelerate_py/agent_supervisor/rescue/",
+      "classification": "canonical",
+      "role": "watchdog, recovery, rescue orchestration"
+    },
+    {
+      "package": "runtime",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/",
+      "classification": "canonical",
+      "role": "configured-board scheduler, multi-supervisor runner, event log, resource scheduler"
+    },
+    {
+      "package": "self_improvement",
+      "path": "ipfs_accelerate_py/agent_supervisor/self_improvement/",
+      "classification": "experimental",
+      "role": "meta-improvement epochs and v2 contracts; not LGSWF configured-board actuation"
+    },
+    {
+      "package": "integrations",
+      "path": "ipfs_accelerate_py/agent_supervisor/integrations/",
+      "classification": "facade",
+      "role": "optional bridges to datasets analysis/logic/program graph and external tools"
+    },
+    {
+      "package": "todo_daemon",
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/",
+      "classification": "canonical",
+      "role": "implementation supervisor/daemon loops; primary LGSWF configured-board actuation"
+    },
+    {
+      "package": "entrypoints",
+      "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/",
+      "classification": "facade",
+      "role": "highest-layer prompt-first composition; ENTRYPOINT_LAZY_FACADE_EXPORTS is empty at checked head"
+    },
+    {
+      "package": "contract_analysis",
+      "path": "ipfs_accelerate_py/agent_supervisor/contract_analysis/",
+      "classification": "consumer",
+      "role": "bounded contract-analysis profiles/cache adapters that consume datasets software_contracts.cache"
+    }
+  ],
+  "datasets_semantic_surfaces": [
+    {
+      "surface": "semantic_index",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/",
+      "classification": "canonical",
+      "role": "repository capture, AST symbol identity, relationships, deltas, invalidation, root publication"
+    },
+    {
+      "surface": "semantic_state",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/",
+      "classification": "canonical",
+      "role": "state roots, binding projection, capsules, freshness, test/proof selection"
+    },
+    {
+      "surface": "software_contracts_registry",
+      "paths": [
+        "ipfs_datasets_py/logic/software_contracts/contracts.py",
+        "ipfs_datasets_py/logic/software_contracts/registry.py"
+      ],
+      "classification": "canonical",
+      "role": "reviewed software contract IR and registry identity"
+    },
+    {
+      "surface": "software_verification",
+      "path": "ipfs_datasets_py/logic/software_verification/",
+      "classification": "canonical",
+      "role": "formal program contracts, VC generation, obligation graphs, typed proof/counterexample evidence"
+    },
+    {
+      "surface": "semantic_governor",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_governor/",
+      "classification": "canonical",
+      "role": "context coverage/sufficiency, omission diagnosis, quarantine, rule proposals"
+    },
+    {
+      "surface": "verification_api",
+      "path": "ipfs_datasets_py/logic/verification_api.py",
+      "classification": "consumer",
+      "role": "high-level semantic proof/receipt consumer API; explicitly not supervisor-control authority"
+    },
+    {
+      "surface": "counterexample_public_boundary",
+      "path": "ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py",
+      "classification": "canonical",
+      "role": "datasets-owned CounterexampleEnvelope@2 / PublicCounterexampleBoundary@1 wire contract",
+      "identity_note": "semantic identity normalization is currently delegated upward to accelerator formal_counterexamples; that upward import is a package-direction violation to repair in Epic A"
+    },
+    {
+      "surface": "adversarial_assurance_package",
+      "classification": "unresolved",
+      "status": "absent_at_checked_authority",
+      "note": "plan requires no invention; later origin/main may contain IPS/AAE surfaces but checked ac82107e does not expose the board-required adversarial_assurance / incremental_sealing / ProofRepository@1 stack"
+    },
+    {
+      "surface": "incremental_proof_sealing",
+      "classification": "unresolved",
+      "status": "absent_at_checked_authority"
+    },
+    {
+      "surface": "ProofRepository@1",
+      "classification": "unresolved",
+      "status": "absent_at_checked_authority"
+    }
+  ],
+  "import_graph": {
+    "summary": "Within agent_supervisor, domain packages follow the declared bottom-up DAG. Cross-repository edges are mixed: accelerator integrations and proof packages consume datasets (allowed consumer direction); several datasets logic paths import accelerator symbols to obtain identity/normalization (forbidden for semantic identity).",
+    "accelerator_internal_edges": [
+      {
+        "from": "entrypoints",
+        "to": "contracts + lower domain packages (lazy only)",
+        "direction": "allowed_downward",
+        "classification": "facade"
+      },
+      {
+        "from": "todo_daemon",
+        "to": "runtime, merge, validation, task_sources, proof (optional hooks)",
+        "direction": "allowed_downward",
+        "classification": "canonical"
+      },
+      {
+        "from": "integrations",
+        "to": "ipfs_datasets_py optional modules",
+        "direction": "allowed_consumer",
+        "classification": "facade"
+      },
+      {
+        "from": "proof",
+        "to": "ipfs_datasets_py.logic.ir_core / backends / hammers / zkp",
+        "direction": "allowed_consumer",
+        "classification": "consumer"
+      },
+      {
+        "from": "contract_analysis",
+        "to": "ipfs_datasets_py.logic.software_contracts.cache",
+        "direction": "allowed_consumer",
+        "classification": "consumer"
+      },
+      {
+        "from": "merge.lease_coordination",
+        "to": "ipfs_datasets_py.logic.profile_g",
+        "direction": "allowed_consumer",
+        "classification": "consumer"
+      },
+      {
+        "from": "todo_daemon.legal_parser_daemon / logic_port",
+        "to": "ipfs_datasets_py.logic.deontic / optimizers",
+        "direction": "allowed_consumer",
+        "classification": "consumer"
+      }
+    ],
+    "upward_violations": [
+      {
+        "id": "datasets-counterexample-identity-upward",
+        "from": "ipfs_datasets_py.logic.software_verification.counterexamples.contracts",
+        "to": "ipfs_accelerate_py.agent_supervisor.proof.formal_counterexamples",
+        "symbols": [
+          "normalize_counterexample",
+          "FormalCounterexample",
+          "FORMAL_COUNTEREXAMPLE_SCHEMA"
+        ],
+        "classification": "duplicate",
+        "severity": "high",
+        "detail": "datasets public counterexample boundary delegates semantic identity to accelerator normalizer; identity authority must live in datasets or a datasets-owned leaf protocol",
+        "repair_owner": "LGSWF-007 / Epic A DAG repair"
+      },
+      {
+        "id": "datasets-source-adapters-upward",
+        "from": "ipfs_datasets_py.logic.software_verification.source_adapters",
+        "to": "ipfs_accelerate_py.agent_supervisor.program_ast_adapters",
+        "symbols": [
+          "adapt_program_source",
+          "detect_program_language"
+        ],
+        "classification": "legacy",
+        "severity": "medium",
+        "detail": "optional lazy import of accelerator analysis adapters; program_ast_adapters lives under analysis/ after domain-layout cutover and is also reachable via historical flat alias",
+        "repair_owner": "LGSWF-007"
+      },
+      {
+        "id": "datasets-domain-adapters-upward",
+        "from": "ipfs_datasets_py.logic.software_verification.domain_adapters",
+        "to": "ipfs_accelerate_py.agent_supervisor.code_security_facts",
+        "symbols": [
+          "CodeSecurityFactSet",
+          "extract_code_security_facts"
+        ],
+        "classification": "legacy",
+        "severity": "medium",
+        "detail": "optional lazy import; code_security_facts is owned by proof/ after domain-layout cutover",
+        "repair_owner": "LGSWF-007"
+      },
+      {
+        "id": "datasets-tactician-plan-evaluator-upward",
+        "from": "ipfs_datasets_py.logic.software_verification.tactician.proof_plan",
+        "to": "ipfs_accelerate_py.agent_supervisor.planning.plan_evaluator",
+        "classification": "consumer",
+        "severity": "medium",
+        "detail": "optional AND/OR and proof-aware plan-evaluator adapters require accelerator; composition should invert so accelerator consumes datasets plans",
+        "repair_owner": "LGSWF-007"
+      },
+      {
+        "id": "datasets-llm-router-alias",
+        "from": "ipfs_datasets_py.llm_router",
+        "to": "ipfs_accelerate_py.llm_router",
+        "classification": "facade",
+        "severity": "low",
+        "detail": "historical datasets path re-exports accelerator router module object; compatibility only, not semantic authority"
+      },
+      {
+        "id": "datasets-storage-wrapper-optional",
+        "from": "ipfs_datasets_py.logic.modal.leanstral_artifact_cache",
+        "to": "ipfs_accelerate_py.common.storage_wrapper",
+        "classification": "facade",
+        "severity": "low",
+        "detail": "optional storage bridge; not semantic index identity"
+      },
+      {
+        "id": "datasets-p2p-optional",
+        "from": "ipfs_datasets_py.p2p_networking.libp2p_kit_full",
+        "to": "ipfs_accelerate_py.mcp_server.tools.p2p.native_p2p_tools",
+        "classification": "facade",
+        "severity": "low",
+        "detail": "optional P2P tooling bridge outside semantic truth path"
+      },
+      {
+        "id": "datasets-ipfs-backend-optional",
+        "from": "ipfs_datasets_py.ipfs_backend_router",
+        "to": "ipfs_accelerate_py.datasets_integration.filesystem",
+        "classification": "facade",
+        "severity": "low",
+        "detail": "flag-gated optional backend; not semantic index authority"
+      }
+    ],
+    "allowed_consumer_edges_sample": [
+      {
+        "from": "ipfs_accelerate_py.agent_supervisor.integrations.ipfs_datasets_logic_provider",
+        "to": "ipfs_datasets_py.logic.hammers",
+        "classification": "facade"
+      },
+      {
+        "from": "ipfs_accelerate_py.agent_supervisor.integrations.ipfs_datasets_analysis_provider",
+        "to": "ipfs_datasets_py.logic.intent_ir / knowledge_graphs",
+        "classification": "facade"
+      },
+      {
+        "from": "ipfs_accelerate_py.agent_supervisor.proof.code_contract_prover",
+        "to": "ipfs_datasets_py.logic.backends / ir_core",
+        "classification": "consumer"
+      },
+      {
+        "from": "ipfs_accelerate_py.agent_supervisor.proof.end_goal_development",
+        "to": "ipfs_datasets_py.logic.software_verification.tactician.contracts",
+        "classification": "consumer"
+      },
+      {
+        "from": "ipfs_accelerate_py.agent_supervisor.integrations.test_reuse_capabilities",
+        "to": "ipfs_datasets_py.logic.zkp",
+        "classification": "consumer"
+      }
+    ]
+  },
+  "classified_surfaces": {
+    "canonical": [
+      {
+        "id": "datasets-semantic-index",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/",
+        "owner": "ipfs_datasets_py",
+        "note": "semantic symbol/root authority"
+      },
+      {
+        "id": "datasets-semantic-state",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/",
+        "owner": "ipfs_datasets_py",
+        "note": "SemanticStateRoot@1 and capsule/binding authority"
+      },
+      {
+        "id": "datasets-software-verification",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/",
+        "owner": "ipfs_datasets_py"
+      },
+      {
+        "id": "accelerator-task-identity",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/task_identity.py",
+        "owner": "ipfs_accelerate_py",
+        "note": "task-identity@1"
+      },
+      {
+        "id": "accelerator-plan-revision-contracts",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+        "owner": "ipfs_accelerate_py"
+      },
+      {
+        "id": "accelerator-implementation-daemon",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/",
+        "owner": "ipfs_accelerate_py",
+        "note": "configured-board actuation path"
+      },
+      {
+        "id": "accelerator-configured-board-scheduler",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+        "owner": "ipfs_accelerate_py"
+      }
+    ],
+    "consumer": [
+      {
+        "id": "accelerator-proof-of-datasets-obligations",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/",
+        "consumes": "datasets obligation/proof artifact kinds"
+      },
+      {
+        "id": "accelerator-integrations-datasets-providers",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_*_provider.py",
+        "consumes": "datasets hammers, analysis, program graph, tactician, test certificates"
+      },
+      {
+        "id": "datasets-verification-api",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/verification_api.py",
+        "consumes": "datasets verification stack; not a control authority"
+      },
+      {
+        "id": "accelerator-contract-analysis",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/contract_analysis/",
+        "consumes": "datasets software_contracts.cache"
+      }
+    ],
+    "facade": [
+      {
+        "id": "entrypoints-empty-lazy-facades",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/__init__.py",
+        "detail": "ENTRYPOINT_LAZY_FACADE_EXPORTS = (); contracts/resolvers landed; not configured-board launch surface"
+      },
+      {
+        "id": "agent-supervisor-package-root-lazy-reexport",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/__init__.py",
+        "detail": "__getattr__ resolves AGENT_SUPERVISOR_LANDED_MODULE_TO_PACKAGE stems; import success is not a capability signal"
+      },
+      {
+        "id": "ops-script-wrappers",
+        "paths": [
+          "external/ipfs_accelerate/scripts/ops/agent_supervisor/configured_board_scheduler.py",
+          "external/ipfs_accelerate/scripts/ops/agent_supervisor/implementation_supervisor_entry.py"
+        ],
+        "detail": "thin path-inserting wrappers; domain package modules own behavior"
+      },
+      {
+        "id": "mcp-compatibility-facades",
+        "paths": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/mcp/",
+          "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/",
+          "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/"
+        ],
+        "detail": "MCP/MCP++ transport and tool surfaces outside agent_supervisor operational authority for LGSWF"
+      },
+      {
+        "id": "datasets-llm-router-alias",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/llm_router.py",
+        "detail": "module replacement alias onto accelerator llm_router"
+      },
+      {
+        "id": "datasets-optional-accelerate-backends",
+        "paths": [
+          "external/ipfs_datasets/ipfs_datasets_py/ipfs_backend_router.py",
+          "external/ipfs_datasets/ipfs_datasets_py/p2p_networking/libp2p_kit_full.py",
+          "external/ipfs_datasets/ipfs_datasets_py/logic/modal/leanstral_artifact_cache.py"
+        ],
+        "detail": "optional/flag-gated accelerator bridges"
+      }
+    ],
+    "projection": [
+      {
+        "id": "legacy-markdown-taskboard",
+        "path": "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+        "detail": "bootstrap_task_source = legacy-markdown-pending-plan-revision-r1; not PlanRevisionStore authority"
+      },
+      {
+        "id": "machine-task-board-projection",
+        "paths": [
+          "artifacts/logic_governed_semantic_work_fabric/control/task-board.json",
+          "artifacts/logic_governed_semantic_work_fabric/control/task-dependency-graph.json"
+        ],
+        "detail": "sealed bootstrap machine projections; superseded only after accepted PlanRevision r1"
+      },
+      {
+        "id": "supervisor-world-view",
+        "detail": "SupervisorWorldView is a pure query projection over SupervisorWorldSnapshot@1; holds no mutation port (plan intent; not fully wired on configured board)"
+      },
+      {
+        "id": "domain-layout-stem-inventories",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/__init__.py",
+        "detail": "AGENT_SUPERVISOR_LANDED_MODULE_TO_PACKAGE and role package tuples are layout projections"
+      },
+      {
+        "id": "datasets-semantic-state-bindings-projection",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+        "detail": "binding projection over semantic state roots"
+      }
+    ],
+    "legacy": [
+      {
+        "id": "board-prefix-layout-aliases",
+        "detail": "AGENT_SUPERVISOR_G0xx_* and AGENT_SUPERVISOR_EVIDENCE_CLUSTER_* spellings remain aliases of semantic layout names"
+      },
+      {
+        "id": "goal-state-legacy-labels",
+        "path": "objectives/goal_completion.py",
+        "detail": "complete/completed/done normalize to verified_complete for readers"
+      },
+      {
+        "id": "resource-scheduler-aliases",
+        "path": "runtime/resource_scheduler.py",
+        "detail": "RouteAwareResourceScheduler = FormalVerificationResourceScheduler = GoalRuntimeResourceScheduler"
+      },
+      {
+        "id": "legacy-event-log-manifest-schema",
+        "detail": "LEGACY_EVENT_LOG_MANIFEST_SCHEMA retained for older manifests"
+      },
+      {
+        "id": "legacy-landed-provider-cli",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/legacy_landed_provider_cli.py",
+        "detail": "historical provider leaf review path; review findings schema forces maxItems:0"
+      },
+      {
+        "id": "flat-module-historical-aliases",
+        "detail": "historical flat stems (program_ast_adapters, code_security_facts, …) resolve via package-root aliasing after domain-layout cutover; new callers must use domain package paths"
+      }
+    ],
+    "duplicate": [
+      {
+        "id": "counterexample-identity-dual-ownership-risk",
+        "datasets_path": "ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py",
+        "accelerator_path": "ipfs_accelerate_py/agent_supervisor/proof/formal_counterexamples.py",
+        "detail": "datasets owns public envelope while delegating identity normalization to accelerator; risks divergent identity if either side diverges"
+      },
+      {
+        "id": "later-accelerator-semantic-state-package",
+        "checked": "absent at ea11293b",
+        "later_candidate": "20-file agent_supervisor/semantic_state package on 485edc08…",
+        "detail": "later tree content is candidate evidence only; must not be assumed as current implementation and must not become a second semantic-state authority beside datasets"
+      },
+      {
+        "id": "nested-vs-sibling-datasets-pins",
+        "nested_pin": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+        "checked_sibling": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "detail": "accelerator nested ipfs_datasets_py gitlink is deinitialized and 568 commits behind checked sibling; dual pins risk silent authority split"
+      }
+    ],
+    "experimental": [
+      {
+        "id": "self-improvement-v2",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/",
+        "detail": "landed library; not LGSWF configured-board path"
+      },
+      {
+        "id": "symbolic-assurance-pilot",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/symbolic_assurance_pilot.py",
+        "detail": "pilot surface"
+      },
+      {
+        "id": "bundle-supervisor-composed-path",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py",
+        "detail": "alternate composition with LeaseCoordinator/ResourceScheduler; not configured-board launch"
+      },
+      {
+        "id": "formal-planning-adversarial",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_planning_adversarial.py",
+        "detail": "landed formal-planning adversarial helpers; not board-selected proof authority"
+      }
+    ],
+    "obsolete": [
+      {
+        "id": "retired-flat-root-modules",
+        "detail": "package root no longer hosts production modules other than __init__.py; residual flat re-export stubs must not be reintroduced"
+      },
+      {
+        "id": "assumed-accelerator-semantic-state-at-checked-head",
+        "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/",
+        "status": "absent",
+        "detail": "checked accelerator head has no semantic_state package; scaffolding it from empty root would invent authority"
+      },
+      {
+        "id": "pcce-historical-claims-leases-fences",
+        "detail": "PCCE r2-r5 claims, leases, fences, worktrees, and task identities are preserved historical evidence and never reused as current board state"
+      }
+    ],
+    "unresolved": [
+      {
+        "id": "canonical-semantic-state-root",
+        "status": "unavailable",
+        "evidence": "artifacts/logic_governed_semantic_work_fabric/baseline/semantic-scan-bootstrap-failures.json",
+        "detail": "three bootstrap scan attempts failed or were boundedly interrupted; no canonical root fabricated"
+      },
+      {
+        "id": "plan-revision-store-configured-board-wiring",
+        "status": "not_wired",
+        "detail": "PlanRevisionStore library exists but configured_board_scheduler does not construct it"
+      },
+      {
+        "id": "lease-coordinator-configured-board-wiring",
+        "status": "not_wired",
+        "detail": "LeaseCoordinator exists on composed path only"
+      },
+      {
+        "id": "resource-scheduler-class-configured-board-wiring",
+        "status": "helpers_and_file_claims_only",
+        "detail": "ResourceScheduler class acquire path not used by configured board"
+      },
+      {
+        "id": "datasets-upward-import-cluster",
+        "status": "violations_recorded",
+        "detail": "counterexample identity and optional adapter/plan-evaluator imports require LGSWF-007 disposition"
+      },
+      {
+        "id": "intervening-accelerator-1245-commits",
+        "status": "candidate_evidence_only",
+        "range": "ea11293bb996f052d620eae989f5377a956764b1..485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+        "detail": "LGSWF-008 must disposition; not current authority"
+      },
+      {
+        "id": "datasets-missing-later-assurance-surfaces",
+        "status": "absent_at_checked_authority",
+        "detail": "adversarial_assurance, incremental_sealing, ProofRepository@1, logic-platform canonicalization unavailable at ac82107e"
+      },
+      {
+        "id": "datasets-semantic-authority-integration-module",
+        "path": "ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py",
+        "status": "absent_at_checked_head",
+        "detail": "LGSWF-008 owned output; not present under integrations/ at ea11293b"
+      }
+    ]
+  },
+  "compatibility_facades_and_shims": [
+    {
+      "kind": "package_root_lazy_reexport",
+      "path": "ipfs_accelerate_py/agent_supervisor/__init__.py",
+      "classification": "facade",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "entrypoints_empty_lazy_facade_inventory",
+      "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/__init__.py",
+      "classification": "facade",
+      "detail": "ENTRYPOINT_LAZY_FACADE_EXPORTS is intentionally empty"
+    },
+    {
+      "kind": "ops_script_wrappers",
+      "classification": "facade",
+      "authority": "launch_wiring_helpers"
+    },
+    {
+      "kind": "mcp_and_mcplusplus_surfaces",
+      "classification": "facade",
+      "authority": "out_of_scope_compatibility"
+    },
+    {
+      "kind": "datasets_llm_router_module_alias",
+      "path": "ipfs_datasets_py/llm_router.py",
+      "classification": "facade",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "legacy_markdown_board_bootstrap",
+      "classification": "projection",
+      "authority": "bootstrap_projection_only"
+    },
+    {
+      "kind": "goal_state_legacy_labels",
+      "classification": "legacy",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "resource_scheduler_class_aliases",
+      "classification": "legacy",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "board_prefix_layout_constant_aliases",
+      "classification": "legacy",
+      "authority": "compatibility_only"
+    }
+  ],
+  "predecessor_incidents": {
+    "policy": "PCCE and other board claims, leases, fences, worktrees, incidents, and receipts are preserved and never reused",
+    "pcce_campaign": {
+      "label": "PCCE r2-r5",
+      "checked_authority_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "superproject_pin_candidate": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "pcce_repair_head_candidate": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "ranges": [
+        {
+          "repository": "accelerator",
+          "range": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84..0837254e910221c17b3c8ac8a2a233658de976f1",
+          "commit_count": 6,
+          "commit_list_sha256": "99a05f16955373abdead91bd618f6b746b0391a3302312050fb06b1fce3bddff",
+          "name_status_sha256": "ca6a901e452a6029db725e012fc8d1f20c26d50632f926f8c13f71a6d32bb318",
+          "classification": "PCCE runtime repairs; historical candidate evidence only"
+        },
+        {
+          "repository": "accelerator",
+          "range": "ea11293bb996f052d620eae989f5377a956764b1..0837254e910221c17b3c8ac8a2a233658de976f1",
+          "commit_count": 1251,
+          "commit_list_sha256": "182412a501b4f5fc3f3e4569815d2d3dfeed7c6ace4f92215403c53b22862264",
+          "name_status_sha256": "fa89783d8210254a05ac4d171a244b806e99bd68aeaf9e1f922d4b352188d2d6",
+          "classification": "complete checked-to-PCCE comparison"
+        },
+        {
+          "repository": "accelerator",
+          "range": "ea11293bb996f052d620eae989f5377a956764b1..485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+          "commit_count": 1245,
+          "commit_list_sha256": "363105f61ca05cea44bdb1bcf0829ab88bdbd626ca486390acc0ba25b5b7dd62",
+          "name_status_sha256": "7cd8665ebf0a06a0d9eef7f6452fdd754774c16425f716696378f4f30a6f4d2c",
+          "classification": "intervening candidate implementations; not checked authority"
+        }
+      ],
+      "r5_terminal_incident": {
+        "round": "r5",
+        "result": "process_admitted_and_exited_zero_without_product_task",
+        "repository_writes": 0,
+        "preserved_incident_digest": "sha256:28aedd7072735fd539ed4dc4ad9387242a02b0372626a42f36a695c2ce9e9b61",
+        "reuse_policy": "nothing from its claims, leases, fences, worktrees, or task identities is reused",
+        "failure_modes": [
+          {
+            "id": "empty-context",
+            "name": "empty source context",
+            "classification": "unresolved",
+            "detail": "provider/source context path delivered empty source bytes so no product implementation could proceed; empty context is a typed gap, not success",
+            "related_checked_surfaces": [
+              "ipfs_accelerate_py/agent_supervisor/todo_daemon/production_context_slice.py",
+              "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py"
+            ]
+          },
+          {
+            "id": "contradictory-review-schema",
+            "name": "contradictory review schema (required findings while allowing zero items)",
+            "classification": "unresolved",
+            "detail": "review response schema required a findings array while maxItems:0 forbade any findings; schema admits empty findings yet product review expected non-empty diagnostic content",
+            "related_checked_surfaces": [
+              {
+                "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/legacy_landed_provider_cli.py",
+                "observation": "findings array is required and maxItems is 0"
+              },
+              {
+                "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/production_provider_cli.py",
+                "observation": "CODEX_REVIEW role requires findings with maxItems:0"
+              }
+            ]
+          },
+          {
+            "id": "task-CID-alias",
+            "name": "coordination/materialized task CID alias mismatch",
+            "classification": "unresolved",
+            "detail": "coordination task CID and materialized task CID/alias disagreed or looked up ambiguously; fail-closed task source integrity errors remain the correct response",
+            "related_checked_surfaces": [
+              {
+                "path": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_task_source.py",
+                "observation": "raises TaskSourceIntegrityError when task CID/alias lookup is ambiguous"
+              },
+              {
+                "path": "ipfs_accelerate_py/agent_supervisor/task_sources/task_identity.py",
+                "observation": "task-identity@1 is the intended stable identity; aliases must not silently remap authority"
+              }
+            ]
+          }
+        ],
+        "rounds_r2_through_r5_preservation": {
+          "r2": "preserved historical launch/repair evidence only; not current board authority",
+          "r3": "preserved historical launch/repair evidence only; not current board authority",
+          "r4": "preserved historical launch/repair evidence only; not current board authority",
+          "r5": "preserved terminal incident sha256:28aedd70… with empty-context, contradictory-review-schema, and task-CID-alias failures; completed no product task"
+        }
+      }
+    },
+    "lgswf_bootstrap_launch_incidents": [
+      {
+        "incident_id": "urn:lgswf:launch-incident:bootstrap-r0-provider-contract",
+        "path": "artifacts/logic_governed_semantic_work_fabric/control/incidents/bootstrap-launch-r0-provider-contract.json",
+        "classification": "legacy",
+        "result": "rejected_before_process_start",
+        "reason": "legacy explicit codex route rejected; sealed ordered grok_cli→codex route required",
+        "historical_rewrite_allowed": false
+      },
+      {
+        "incident_id": "urn:lgswf:launch-incident:bootstrap-r1-module-path",
+        "path": "artifacts/logic_governed_semantic_work_fabric/control/incidents/bootstrap-launch-r1-module-path.json",
+        "classification": "legacy",
+        "result": "master_exited_before_supervisor_start",
+        "reason": "ModuleNotFoundError: No module named 'ipfs_accelerate_py' without explicit external/ipfs_accelerate PYTHONPATH binding",
+        "historical_rewrite_allowed": false
+      }
+    ],
+    "semantic_scan_bootstrap_failures": {
+      "path": "artifacts/logic_governed_semantic_work_fabric/baseline/semantic-scan-bootstrap-failures.json",
+      "classification": "unresolved",
+      "canonical_semantic_state_root": null,
+      "attempts": [
+        {
+          "error_type": "SemanticIndexModelError",
+          "error": "namespace must be nonempty trimmed NFC text"
+        },
+        {
+          "error_type": "ASTIRValidationError",
+          "error": "named_argument_names must not contain duplicates"
+        },
+        {
+          "result": "bounded_interrupt",
+          "reason": "datasets scan interrupted after deep-copy AST projection pressure; no root emitted"
+        }
+      ]
+    }
+  },
+  "disposition_handoffs": [
+    {
+      "task_id": "LGSWF-005",
+      "action": "freeze authority map and interface freeze from this inventory without creating duplicate semantic records or upward package imports"
+    },
+    {
+      "task_id": "LGSWF-007",
+      "action": "repair datasets→accelerator upward import cluster so semantic identity is datasets-owned"
+    },
+    {
+      "task_id": "LGSWF-008",
+      "action": "disposition intervening accelerator commits, bind sibling datasets checkout, add datasets_semantic_authority integration, and repair the three preserved PCCE bootstrap failures without reusing historical claims/leases/fences"
+    },
+    {
+      "task_id": "LGSWF-009",
+      "action": "mutation gate: verify non-null datasets roots and accept PlanRevision r1"
+    }
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-004 is a read-only cross-repository inventory under raw-source-required bootstrap bindings; no datasets proof obligations are selected for this task",
+    "limitations": [
+      "canonical semantic-state root unavailable at bootstrap",
+      "formal proof against symbol/capsule graphs cannot be current without LGSWF-009 roots",
+      "simulated or model-claimed proof is non-authoritative"
+    ]
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json"
+    ],
+    "status": "artifact_is_strict_json_object",
+    "authoritative_runner": "sealed supervisor validation environment"
+  },
+  "completion_authoritative": false,
+  "limitations": [
+    "Inventory is exact-tree raw-source observation at accelerator ea11293b and datasets ac82107e; later pins are not current authority",
+    "No exhaustive AST import graph of every module was generated; classified edges are the LGSWF-relevant cross-package and domain-DAG surfaces observed in source",
+    "PCCE r2-r4 per-round process logs are preserved by policy as historical evidence; this artifact records the sealed range digests and the r5 terminal incident digest plus the three named failure modes",
+    "Import success of facades is not a capability signal"
+  ]
+}
