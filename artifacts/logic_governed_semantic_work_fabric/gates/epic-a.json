@@ -1,0 +1,59 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "gate": "epic-a",
+  "task_id": "LGSWF-009",
+  "title": "Qualify Epic A: canonical roots, PlanRevision r1, exact task bindings",
+  "track": "lgswf-g100-epic-gate",
+  "observed_at": "2026-08-16T22:30:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-009",
+  "status": "qualified",
+  "depends_on": [
+    "LGSWF-006",
+    "LGSWF-007",
+    "LGSWF-008"
+  ],
+  "criteria": {
+    "datasets_roots_verified_non_null": true,
+    "plan_revision_r1_accepted_via_store": true,
+    "exact_task_bindings_materialized": true,
+    "fail_closed_if_unverified": true,
+    "bootstrap_unavailable_superseded": true,
+    "markdown_board_projection_superseded_as_plan_authority": true
+  },
+  "evidence": {
+    "canonical_roots": "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+    "task_bindings": "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+    "plan_revision": "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+    "receipt": "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-009.json",
+    "datasets_root_cid": "urn:lgswf:semantic-state-root:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:ns:lgswf-ipfs-datasets-py-v1",
+    "accelerator_root_cid": "urn:lgswf:semantic-state-root:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f:ns:lgswf-ipfs-accelerate-py-v1",
+    "plan_root_cid": "urn:lgswf:plan-root:r1:logic-governed-semantic-work-fabric-v0.1",
+    "revision_cid": "urn:lgswf:plan-revision-cid:r1:logic-governed-semantic-work-fabric-v0.1",
+    "task_binding_count": 63,
+    "checked_trees": {
+      "accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    }
+  },
+  "unblocks": [
+    "LGSWF-010",
+    "LGSWF-G200"
+  ],
+  "product_gate": "continuous multi-supervisor fabric remains gated on later epics; Epic A admits non-null datasets roots and accepted PlanRevision r1",
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json"
+    ],
+    "status": "artifact_is_strict_json_object"
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic A gate is evidence qualification over verified roots and accepted plan; no formal prover obligations selected"
+  },
+  "result_identity": "urn:lgswf:result:epic-a:LGSWF-009@plan-r1:datasets-2b3d892d"
+}

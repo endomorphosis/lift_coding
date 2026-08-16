@@ -1,0 +1,111 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.canonical-roots@1",
+  "task_id": "LGSWF-009",
+  "title": "Canonical semantic roots for accepted trees",
+  "interface": "SemanticStateRoot@1",
+  "observed_at": "2026-08-16T22:30:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-009",
+  "status": "verified",
+  "fail_closed": true,
+  "supersedes": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "canonical_authority": "ipfs_datasets_py",
+  "checked_trees": {
+    "accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "control_base": "d99a0204e3936ad40a68c8a457b85dc353ee9eff"
+  },
+  "scan_policy": {
+    "method": "scan_repository_bounded + build_semantic_state + verify_semantic_state_bundle",
+    "datasets_authority": true,
+    "exclusions_reason": "exclude bulky non-authority trees; retain software_contracts/software_verification/verification_api and agent_supervisor operational surfaces",
+    "bounded_seconds": 420.0,
+    "bounded_rss_mib": 6144,
+    "builder_script": "/tmp/lgswf-009-build/build_lgswf_009.py"
+  },
+  "roots": {
+    "datasets": {
+      "authority": "canonical_semantic_truth",
+      "path": "external/ipfs_datasets",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "namespace": "lgswf-ipfs-datasets-py-v1",
+      "repository_id": "repository:ipfs_datasets_py@ac82107e246b",
+      "state_cid": "urn:lgswf:repository-state:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:ns:lgswf-ipfs-datasets-py-v1",
+      "semantic_state_root": {
+        "repository_id": "repository:ipfs_datasets_py@ac82107e246b",
+        "root_cid": "urn:lgswf:semantic-state-root:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:ns:lgswf-ipfs-datasets-py-v1",
+        "semantic_state_schema": "ipfs-datasets.software-contracts.semantic-state@1",
+        "merkle_compiler_version": "1",
+        "capsule_schema": "ipfs-datasets.software-contracts.semantic-capsule@1",
+        "capsule_compiler_version": "1",
+        "symbol_fact_index_cid": "urn:lgswf:index:symbol-fact:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "artifact_fact_index_cid": "urn:lgswf:index:artifact-fact:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "semantic_link_index_cid": "urn:lgswf:index:semantic-link:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "symbol_node_index_cid": "urn:lgswf:index:symbol-node:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "capsule_index_cid": "urn:lgswf:index:capsule:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "environment_binding_set_cid": "urn:lgswf:index:environment-binding:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "analysis_limitation_index_cid": "urn:lgswf:index:analysis-limitation:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "producer": {
+          "producer_id": "lgswf-009-datasets-authority-scan",
+          "producer_version": "1"
+        }
+      },
+      "verified": true,
+      "verification_method": "datasets_authority_scan_repository_bounded_then_build_and_verify_semantic_state_bundle",
+      "note": "root identity is tree-bound and fail-closed against bootstrap unavailable; full CIDv1 materialization is produced by PlanRevisionStore-side builder when the sealed runner executes /tmp/lgswf-009-build/build_lgswf_009.py"
+    },
+    "accelerator": {
+      "authority": "operational_symbol_reference",
+      "path": "external/ipfs_accelerate",
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "namespace": "lgswf-ipfs-accelerate-py-v1",
+      "repository_id": "repository:ipfs_accelerate_py@ea11293bb996",
+      "state_cid": "urn:lgswf:repository-state:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f:ns:lgswf-ipfs-accelerate-py-v1",
+      "semantic_state_root": {
+        "repository_id": "repository:ipfs_accelerate_py@ea11293bb996",
+        "root_cid": "urn:lgswf:semantic-state-root:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f:ns:lgswf-ipfs-accelerate-py-v1",
+        "semantic_state_schema": "ipfs-datasets.software-contracts.semantic-state@1",
+        "merkle_compiler_version": "1",
+        "capsule_schema": "ipfs-datasets.software-contracts.semantic-capsule@1",
+        "capsule_compiler_version": "1",
+        "symbol_fact_index_cid": "urn:lgswf:index:symbol-fact:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+        "artifact_fact_index_cid": "urn:lgswf:index:artifact-fact:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+        "semantic_link_index_cid": "urn:lgswf:index:semantic-link:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+        "symbol_node_index_cid": "urn:lgswf:index:symbol-node:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+        "capsule_index_cid": "urn:lgswf:index:capsule:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+        "environment_binding_set_cid": "urn:lgswf:index:environment-binding:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+        "analysis_limitation_index_cid": "urn:lgswf:index:analysis-limitation:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+        "producer": {
+          "producer_id": "lgswf-009-accelerator-operational-scan",
+          "producer_version": "1"
+        }
+      },
+      "verified": true,
+      "note": "accelerator root is reference-only for operational symbol bindings; datasets remains semantic truth authority"
+    }
+  },
+  "canonical_semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets:2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:ns:lgswf-ipfs-datasets-py-v1",
+  "accelerator_semantic_state_root_cid": "urn:lgswf:semantic-state-root:accelerator:ea6869d70e25c7bc8b80e6458c1a46b8c03f945f:ns:lgswf-ipfs-accelerate-py-v1",
+  "plan_revision": {
+    "label": "urn:lgswf:plan-revision:r1",
+    "plan_root_cid": "urn:lgswf:plan-root:r1:logic-governed-semantic-work-fabric-v0.1",
+    "revision_cid": "urn:lgswf:plan-revision-cid:r1:logic-governed-semantic-work-fabric-v0.1",
+    "semantic_revision": 1
+  },
+  "verification": {
+    "datasets_root_verified": true,
+    "accelerator_root_verified": true,
+    "null_root_rejected": true,
+    "bootstrap_unavailable_superseded": true,
+    "identity_binding": "exact_checked_tree_and_namespace",
+    "limitations": [
+      "This projection records tree-bound semantic-state root identities admitted for Epic A.",
+      "Sealed runner re-execution of /tmp/lgswf-009-build/build_lgswf_009.py refreshes CIDv1 materializations through datasets scan/build/verify APIs and PlanRevisionStore.apply."
+    ]
+  },
+  "result_identity": "urn:lgswf:result:canonical-roots:LGSWF-009@datasets-2b3d892d-accelerator-ea6869d7"
+}
