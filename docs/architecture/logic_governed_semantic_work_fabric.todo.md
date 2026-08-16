@@ -129,7 +129,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-002 Inventory datasets semantic authorities and absent requested surfaces
 
 - Stable task ID: LGSWF-002
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
