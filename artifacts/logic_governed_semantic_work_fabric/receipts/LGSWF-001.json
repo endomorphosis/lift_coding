@@ -1,0 +1,175 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-001",
+  "title": "Inventory exact revisions, dirty overlays, and every intervening change",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "goal_id": "LGSWF-G100",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "control_head": "0e0ed64b1cc5d39a31a77f2acefeb3316bb54e0f",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "acceptance_requires": [
+    "declared outputs exist at recorded identities",
+    "validation current",
+    "selected proof current or verified empty selection",
+    "merge and canonical semantic refresh succeed where mutation occurs",
+    "independent fenced supervisor acceptance"
+  ],
+  "objective": "Verify checked heads and trees, preserve dirty-overlay identities, enumerate and digest every locally known intervening revision range, and classify later code as candidate evidence rather than current authority.",
+  "outputs": [
+    {
+      "path": "artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json",
+      "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.revision-ledger@1",
+      "role": "primary_inventory"
+    },
+    {
+      "path": "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-001.json",
+      "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+      "role": "task_receipt"
+    }
+  ],
+  "evidence": {
+    "checked_heads_and_trees_verified": true,
+    "verified_heads": {
+      "accelerator": "ea11293bb996f052d620eae989f5377a956764b1",
+      "accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "root_planning_observation": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
+      "root_planning_tree": "db6c28fdc119fab6cd6c109412c5d1ccda02c0c6",
+      "control_head": "0e0ed64b1cc5d39a31a77f2acefeb3316bb54e0f",
+      "control_bootstrap": "d99a0204e3936ad40a68c8a457b85dc353ee9eff"
+    },
+    "dirty_overlay_identities_preserved": true,
+    "dirty_overlay_identities": {
+      "accelerator_tracked_binary_diff_sha256": "ecdecc645909c91fc46cfda6605391cb6e02d912ba367ebe7530dc5adcb3b58c",
+      "accelerator_ordered_untracked_path_list_sha256": "e4e0b630f236b0d8c77fa60d033e7c2c1d3bb102511ffe5fcc68ba5ed32e8cfc",
+      "accelerator_tracked_modified_count": 38,
+      "accelerator_untracked_count": 134,
+      "datasets_tracked_binary_diff_sha256": "5494ce7f87ef0b9bcc4a70fc05340381e89757adecd21b185d944588dcfa998f",
+      "datasets_ordered_untracked_path_list_sha256": "db108b8a45f1321be2d4242e4f5ae1808459c8bde5bb38e7b9ec17501df6a8b2",
+      "datasets_tracked_modified_count": 2,
+      "datasets_untracked_count": 29
+    },
+    "intervening_ranges_enumerated": 6,
+    "intervening_ranges": [
+      {
+        "repository": "accelerator",
+        "range": "ea11293bb996f052d620eae989f5377a956764b1..485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+        "commit_count": 1245,
+        "commit_list_sha256": "363105f61ca05cea44bdb1bcf0829ab88bdbd626ca486390acc0ba25b5b7dd62",
+        "name_status_sha256": "7cd8665ebf0a06a0d9eef7f6452fdd754774c16425f716696378f4f30a6f4d2c",
+        "authority_class": "candidate_evidence"
+      },
+      {
+        "repository": "accelerator",
+        "range": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84..0837254e910221c17b3c8ac8a2a233658de976f1",
+        "commit_count": 6,
+        "commit_list_sha256": "99a05f16955373abdead91bd618f6b746b0391a3302312050fb06b1fce3bddff",
+        "name_status_sha256": "ca6a901e452a6029db725e012fc8d1f20c26d50632f926f8c13f71a6d32bb318",
+        "authority_class": "candidate_evidence"
+      },
+      {
+        "repository": "accelerator",
+        "range": "ea11293bb996f052d620eae989f5377a956764b1..0837254e910221c17b3c8ac8a2a233658de976f1",
+        "commit_count": 1251,
+        "commit_list_sha256": "182412a501b4f5fc3f3e4569815d2d3dfeed7c6ace4f92215403c53b22862264",
+        "name_status_sha256": "fa89783d8210254a05ac4d171a244b806e99bd68aeaf9e1f922d4b352188d2d6",
+        "authority_class": "candidate_evidence"
+      },
+      {
+        "repository": "datasets",
+        "range": "a2f5400b7cb89c8481819379a1b7b9959fe81d45..ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "commit_count": 568,
+        "commit_list_sha256": "b3c82fefe6d12c1cc9dfbfcdcb87004664ff5a2716657361b1ce7c864301304c",
+        "name_status_sha256": "ffe921af780d2dbfc6b29d5d02fa79943f8d1fa70e4403ea43c92a31f1673233",
+        "authority_class": "historical_gap_to_checked_authority"
+      },
+      {
+        "repository": "datasets",
+        "range": "ac82107e246b30e35a2bbdcf75e01370d22350c6..7f0fe2bbad3c70928234c6e2312ee3182fd7681f",
+        "commit_count": 96,
+        "commit_list_sha256": "e7f03b39578f511b1c00437c14d9223b83c52c8ddeff2a76c0ce5cbf97411db0",
+        "name_status_sha256": "22de5d8908de21823958e922ac88059afeb602c6b4779929fc3d3768046a42c6",
+        "authority_class": "candidate_evidence"
+      },
+      {
+        "repository": "root",
+        "range": "b6f40c05e0884867eb8557f8882cd25cb760ca2f..local-origin-main",
+        "commit_count": 175,
+        "commit_list_sha256": "085e07f5e27164f4f562ccf2de3c95292e7b68bcecde4afd0af32cc595220abe",
+        "name_status_sha256": "66352d30c98e91e75cb94ebb9181457062fc0f969f6b3fd2201e3547f07d740d",
+        "authority_class": "candidate_evidence"
+      }
+    ],
+    "later_code_classified_as_candidate_evidence": true,
+    "baseline_source": "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json"
+    ],
+    "results": [
+      {
+        "command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json",
+        "status": "artifact_present_well_formed_json",
+        "passed": true,
+        "checks": [
+          "declared output path exists",
+          "JSON object parses with balanced structure and required top-level keys",
+          "schema equals revision-ledger@1",
+          "task_id equals LGSWF-001",
+          "six intervening ranges present with commit_list_sha256 and name_status_sha256",
+          "dirty-overlay identities preserved from protected baseline"
+        ],
+        "note": "Authoritative sealed validation runner re-executes the same command under PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin and /usr/bin/python3.12."
+      }
+    ]
+  },
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-001 is a read-only inventory task over exact Git trees with raw-source bootstrap bindings; no datasets proof obligations are selected while canonical semantic-state roots remain unavailable (semantic-scan-bootstrap-failures@1).",
+    "limitations": [
+      "canonical_semantic_state_root is null until LGSWF-009",
+      "simulated or model-claimed proof is non-authoritative"
+    ],
+    "proof_current": true
+  },
+  "semantic_refresh": {
+    "provisional_root": null,
+    "canonical_refresh": "not_applicable_read_only_inventory_artifacts_only",
+    "mutation_of_source_trees": false
+  },
+  "merge": {
+    "required": true,
+    "scope": "artifact-only",
+    "owned_paths": [
+      "artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json",
+      "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-001.json"
+    ],
+    "status": "pending_supervisor_admission"
+  },
+  "changed_paths": [
+    "artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-001.json"
+  ],
+  "before_after": {
+    "before_tree_binding": {
+      "control_head": "0e0ed64b1cc5d39a31a77f2acefeb3316bb54e0f",
+      "control_bootstrap": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "accelerator": "ea11293bb996f052d620eae989f5377a956764b1",
+      "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    },
+    "after_note": "Task mutates only declared inventory and receipt artifacts; checked source heads and trees remain unchanged."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "result_identity": "urn:lgswf:receipt:LGSWF-001@checked-ea11293b-ac82107e"
+}

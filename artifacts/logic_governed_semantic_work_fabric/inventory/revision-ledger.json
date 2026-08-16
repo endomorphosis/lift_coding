@@ -1,0 +1,290 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.revision-ledger@1",
+  "task_id": "LGSWF-001",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "planning_base": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "control_head": "0e0ed64b1cc5d39a31a77f2acefeb3316bb54e0f",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "baseline_source": "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json",
+  "baseline_observed_at": "2026-08-16T01:02:03Z",
+  "remote_note": "Remote comparisons use locally known refs; no fetch was performed during this inventory. Later remote tips remain candidate evidence until a separately authorized fetch.",
+  "objective": "Verify checked heads and trees, preserve dirty-overlay identities, enumerate and digest every locally known intervening revision range, and classify later code as candidate evidence rather than current authority.",
+  "checked_heads_and_trees": {
+    "root_implementation_authority": {
+      "role": "operator_checkout_planning_observation",
+      "branch": "chore/fmt-check-main",
+      "commit": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
+      "tree": "db6c28fdc119fab6cd6c109412c5d1ccda02c0c6",
+      "dirty_at_planning": true,
+      "ref_present_in_local_store": true,
+      "ref_evidence": "refs/heads/chore/fmt-check-main in root packed-refs",
+      "classification": "planning_observation_not_control_runtime_head",
+      "verified": true
+    },
+    "control_checkout": {
+      "role": "sealed_control_and_task_worktree_base",
+      "branch": "codex/logic-governed-semantic-work-fabric",
+      "head": "0e0ed64b1cc5d39a31a77f2acefeb3316bb54e0f",
+      "bootstrap_commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "task_worktree_branch": "implementation/lgswf-001-3b8fee68a307-attempt-1-1786843797",
+      "task_worktree_orig_head": "0e0ed64b1cc5d39a31a77f2acefeb3316bb54e0f",
+      "accelerator_gitlink": "ea11293bb996f052d620eae989f5377a956764b1",
+      "datasets_gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "purpose": "clean sealed control checkout; not a claim that dirty overlay content is irrelevant or accepted",
+      "verified": true
+    },
+    "accelerator": {
+      "role": "checked_implementation_authority",
+      "path": "external/ipfs_accelerate",
+      "branch_at_planning": "fix/implementation-auto-rescue-20260809",
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "superproject_gitlink_at_operator_planning": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "worktree_head_ref": "refs/heads/implementation/lgswf-001-3b8fee68a307-attempt-1-1786843797-submodule-external-ipfs_accelerate",
+      "worktree_head": "ea11293bb996f052d620eae989f5377a956764b1",
+      "worktree_head_matches_checked": true,
+      "classification": "current_authority",
+      "verified": true
+    },
+    "datasets": {
+      "role": "checked_implementation_authority",
+      "path": "external/ipfs_datasets",
+      "branch_at_planning": "main",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "superproject_gitlink_at_operator_planning": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "worktree_head_ref": "refs/heads/implementation/lgswf-001-3b8fee68a307-attempt-1-1786843797-submodule-external-ipfs_datasets",
+      "worktree_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "worktree_head_matches_checked": true,
+      "classification": "current_authority",
+      "verified": true
+    }
+  },
+  "dirty_overlays": {
+    "policy": "Dirty-overlay identities from the operator checkout planning observation are preserved verbatim. The sealed control and task worktrees are intentionally clean and do not host these overlays. Overlays remain operator-checkout only; never copied wholesale; disposition is required before selective port (LGSWF-005 / LGSWF-008).",
+    "preservation": "exact_baseline_identities",
+    "operator_root": {
+      "branch": "chore/fmt-check-main",
+      "commit": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
+      "tree": "db6c28fdc119fab6cd6c109412c5d1ccda02c0c6",
+      "dirty": true,
+      "identity_source": "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json#implementation_authority.root",
+      "preservation": "preserved",
+      "authority": "not_current_implementation_authority_for_control_checkout"
+    },
+    "accelerator": {
+      "path": "external/ipfs_accelerate",
+      "branch": "fix/implementation-auto-rescue-20260809",
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "superproject_gitlink": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "tracked_modified_count": 38,
+      "untracked_count": 134,
+      "tracked_binary_diff_sha256": "ecdecc645909c91fc46cfda6605391cb6e02d912ba367ebe7530dc5adcb3b58c",
+      "ordered_untracked_path_list_sha256": "e4e0b630f236b0d8c77fa60d033e7c2c1d3bb102511ffe5fcc68ba5ed32e8cfc",
+      "overlay_policy": "preserved in operator checkout; inventory and disposition required before selective port; never copied wholesale",
+      "identity_source": "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json#implementation_authority.accelerator",
+      "preservation": "preserved",
+      "control_worktree_hosts_overlay": false
+    },
+    "datasets": {
+      "path": "external/ipfs_datasets",
+      "branch": "main",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "superproject_gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tracked_modified_count": 2,
+      "untracked_count": 29,
+      "tracked_binary_diff_sha256": "5494ce7f87ef0b9bcc4a70fc05340381e89757adecd21b185d944588dcfa998f",
+      "ordered_untracked_path_list_sha256": "db108b8a45f1321be2d4242e4f5ae1808459c8bde5bb38e7b9ec17501df6a8b2",
+      "overlay_policy": "preserved in operator checkout; inventory and disposition required before selective port; never copied wholesale",
+      "identity_source": "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json#implementation_authority.datasets",
+      "preservation": "preserved",
+      "control_worktree_hosts_overlay": false
+    }
+  },
+  "intervening_revision_ranges": [
+    {
+      "repository": "accelerator",
+      "range": "ea11293bb996f052d620eae989f5377a956764b1..485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "from": "ea11293bb996f052d620eae989f5377a956764b1",
+      "to": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "endpoints_locally_known": true,
+      "endpoint_evidence": {
+        "from_ref": "refs/heads/fix/implementation-auto-rescue-20260809 and task worktree HEAD",
+        "to_ref": "refs/remotes/origin/agent/semantic-compression-governor-v1 and refs/heads/agent/semantic-compression-governor-v1"
+      },
+      "commit_count": 1245,
+      "commit_list_sha256": "363105f61ca05cea44bdb1bcf0829ab88bdbd626ca486390acc0ba25b5b7dd62",
+      "name_status_sha256": "7cd8665ebf0a06a0d9eef7f6452fdd754774c16425f716696378f4f30a6f4d2c",
+      "classification": "intervening candidate implementations; not checked authority",
+      "authority_class": "candidate_evidence",
+      "later_code_is_current_authority": false,
+      "digest_source": "baseline/revision-comparison.json sealed planning observation; re-admitted as inventory ledger"
+    },
+    {
+      "repository": "accelerator",
+      "range": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84..0837254e910221c17b3c8ac8a2a233658de976f1",
+      "from": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "to": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "endpoints_locally_known": true,
+      "endpoint_evidence": {
+        "from_ref": "accelerator pin / semantic-compression-governor-v1",
+        "to_ref": "PCCE control worktree HEADs and fix/pcce-r3-provider-cli-50c0"
+      },
+      "commit_count": 6,
+      "commit_list_sha256": "99a05f16955373abdead91bd618f6b746b0391a3302312050fb06b1fce3bddff",
+      "name_status_sha256": "ca6a901e452a6029db725e012fc8d1f20c26d50632f926f8c13f71a6d32bb318",
+      "classification": "PCCE runtime repairs; historical candidate evidence only",
+      "authority_class": "candidate_evidence",
+      "later_code_is_current_authority": false,
+      "digest_source": "baseline/revision-comparison.json sealed planning observation; re-admitted as inventory ledger"
+    },
+    {
+      "repository": "accelerator",
+      "range": "ea11293bb996f052d620eae989f5377a956764b1..0837254e910221c17b3c8ac8a2a233658de976f1",
+      "from": "ea11293bb996f052d620eae989f5377a956764b1",
+      "to": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "endpoints_locally_known": true,
+      "commit_count": 1251,
+      "commit_list_sha256": "182412a501b4f5fc3f3e4569815d2d3dfeed7c6ace4f92215403c53b22862264",
+      "name_status_sha256": "fa89783d8210254a05ac4d171a244b806e99bd68aeaf9e1f922d4b352188d2d6",
+      "classification": "complete checked-to-PCCE comparison",
+      "authority_class": "candidate_evidence",
+      "later_code_is_current_authority": false,
+      "digest_source": "baseline/revision-comparison.json sealed planning observation; re-admitted as inventory ledger"
+    },
+    {
+      "repository": "datasets",
+      "range": "a2f5400b7cb89c8481819379a1b7b9959fe81d45..ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "from": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+      "to": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "endpoints_locally_known": true,
+      "endpoint_evidence": {
+        "from_ref": "refs/remotes/wt/main and nested accelerator dependency pin",
+        "to_ref": "checked sibling external/ipfs_datasets HEAD"
+      },
+      "commit_count": 568,
+      "commit_list_sha256": "b3c82fefe6d12c1cc9dfbfcdcb87004664ff5a2716657361b1ce7c864301304c",
+      "name_status_sha256": "ffe921af780d2dbfc6b29d5d02fa79943f8d1fa70e4403ea43c92a31f1673233",
+      "classification": "gap between accelerator nested dependency pin and checked sibling authority",
+      "authority_class": "historical_gap_to_checked_authority",
+      "later_code_is_current_authority": false,
+      "digest_source": "baseline/revision-comparison.json sealed planning observation; re-admitted as inventory ledger"
+    },
+    {
+      "repository": "datasets",
+      "range": "ac82107e246b30e35a2bbdcf75e01370d22350c6..7f0fe2bbad3c70928234c6e2312ee3182fd7681f",
+      "from": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "to": "7f0fe2bbad3c70928234c6e2312ee3182fd7681f",
+      "endpoints_locally_known": true,
+      "endpoint_evidence": {
+        "from_ref": "checked sibling external/ipfs_datasets HEAD",
+        "to_ref": "refs/remotes/origin/integration/lpc-main-landing"
+      },
+      "commit_count": 96,
+      "commit_list_sha256": "e7f03b39578f511b1c00437c14d9223b83c52c8ddeff2a76c0ce5cbf97411db0",
+      "name_status_sha256": "22de5d8908de21823958e922ac88059afeb602c6b4779929fc3d3768046a42c6",
+      "classification": "later origin/main including IPS, AAE, and logic-platform canonicalization; unavailable at checked authority",
+      "authority_class": "candidate_evidence",
+      "later_code_is_current_authority": false,
+      "digest_source": "baseline/revision-comparison.json sealed planning observation; re-admitted as inventory ledger"
+    },
+    {
+      "repository": "root",
+      "range": "b6f40c05e0884867eb8557f8882cd25cb760ca2f..local-origin-main",
+      "from": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
+      "to_label": "local-origin-main",
+      "endpoints_locally_known": true,
+      "commit_count": 175,
+      "commit_list_sha256": "085e07f5e27164f4f562ccf2de3c95292e7b68bcecde4afd0af32cc595220abe",
+      "name_status_sha256": "66352d30c98e91e75cb94ebb9181457062fc0f969f6b3fd2201e3547f07d740d",
+      "classification": "informational locally known comparison",
+      "authority_class": "candidate_evidence",
+      "later_code_is_current_authority": false,
+      "digest_source": "baseline/revision-comparison.json sealed planning observation; re-admitted as inventory ledger",
+      "note": "Informational only; local origin/main tip may advance after the sealed planning observation without changing checked authority."
+    }
+  ],
+  "later_code_policy": {
+    "rule": "Later commits, dirty overlays, and remote tips are candidate evidence only. They are not current implementation authority and must not be assumed present in the checked trees.",
+    "current_authority_commits": {
+      "accelerator": "ea11293bb996f052d620eae989f5377a956764b1",
+      "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "control_head": "0e0ed64b1cc5d39a31a77f2acefeb3316bb54e0f",
+      "control_bootstrap": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "root_planning_observation": "b6f40c05e0884867eb8557f8882cd25cb760ca2f"
+    },
+    "candidate_endpoints": {
+      "accelerator_superproject_pin": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "accelerator_pcce": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "datasets_nested_dependency_pin": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+      "datasets_later_origin_main": "7f0fe2bbad3c70928234c6e2312ee3182fd7681f"
+    },
+    "disposition_owners": {
+      "dirty_overlay_and_interface_freeze": "LGSWF-005",
+      "intervening_accelerator_commits": "LGSWF-008"
+    }
+  },
+  "material_revision_consequences": [
+    {
+      "id": "accelerator-semantic-state-absent-at-checked",
+      "statement": "accelerator ea11293b has no agent_supervisor/semantic_state package; later 485edc08 has 20 files, so no current implementation may be assumed",
+      "authority": "checked_only",
+      "later_code_status": "candidate_evidence"
+    },
+    {
+      "id": "accelerator-launcher-bootstrap-only",
+      "statement": "accelerator configured launcher does not wire PlanRevisionStore, LeaseCoordinator, or ResourceScheduler into the daemon CLI; launch is bootstrap execution only",
+      "authority": "checked_only",
+      "later_code_status": "candidate_evidence",
+      "repair_task": "LGSWF-008"
+    },
+    {
+      "id": "accelerator-nested-datasets-deinitialized",
+      "statement": "accelerator nested ipfs_datasets_py gitlink is deinitialized at a2f5400b; the board binds the checked sibling external/ipfs_datasets",
+      "authority": "checked_only",
+      "checked_sibling": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "nested_pin": "a2f5400b7cb89c8481819379a1b7b9959fe81d45"
+    },
+    {
+      "id": "datasets-absent-later-surfaces",
+      "statement": "datasets ac82107e has semantic index/state/governor but no adversarial_assurance, incremental_sealing, ProofRepository@1, or logic-platform-canonicalization surfaces",
+      "authority": "checked_only",
+      "later_code_status": "candidate_evidence_only_not_checked_authority"
+    },
+    {
+      "id": "datasets-upward-imports",
+      "statement": "datasets counterexample and adapter paths contain upward accelerator imports that violate the intended package DAG and must be isolated",
+      "authority": "checked_only",
+      "repair_task": "LGSWF-007"
+    },
+    {
+      "id": "pcce-r5-no-product-change",
+      "statement": "PCCE r5 completed no product task and wrote no repository change after empty source context, contradictory review maxItems, and coordination/materialized task CID alias failures",
+      "authority": "historical_candidate_evidence_only",
+      "incident_digest": "sha256:28aedd7072735fd539ed4dc4ad9387242a02b0372626a42f36a695c2ce9e9b61",
+      "historical_reuse": "forbidden"
+    }
+  ],
+  "verification_summary": {
+    "checked_heads_and_trees_verified": true,
+    "dirty_overlay_identities_preserved": true,
+    "intervening_ranges_enumerated": 6,
+    "intervening_ranges_digested": 6,
+    "later_code_classified_as_candidate_evidence": true,
+    "mismatches": [],
+    "verification_method": [
+      "resolved task and submodule HEAD refs under the sealed control git store",
+      "confirmed accelerator and datasets worktree HEADs equal checked authority commits",
+      "confirmed control branch head 0e0ed64b and planning bootstrap identity d99a0204",
+      "confirmed candidate endpoints present in local packed-refs or sibling worktree HEADs",
+      "preserved dirty-overlay path-list and binary-diff digests exactly from protected baseline",
+      "re-admitted sealed commit-list and name-status digests for every baseline intervening range"
+    ]
+  },
+  "result_identity": "urn:lgswf:inventory:revision-ledger:LGSWF-001@checked-ea11293b-ac82107e",
+  "completion_authoritative": false
+}
