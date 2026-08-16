@@ -3666,7 +3666,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 
 ## LGSWF-146 Resolve validation retry-budget failure for LGSWF-008
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
