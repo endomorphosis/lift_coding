@@ -535,7 +535,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-009 Build canonical semantic roots, accepted PlanRevision r1, and exact task bindings
 
 - Stable task ID: LGSWF-009
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
