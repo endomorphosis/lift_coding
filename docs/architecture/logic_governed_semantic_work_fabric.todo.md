@@ -187,7 +187,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-003 Inventory accelerator operational authorities and actual runtime wiring
 
 - Stable task ID: LGSWF-003
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
