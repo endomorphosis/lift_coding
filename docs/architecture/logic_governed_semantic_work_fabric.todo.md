@@ -361,7 +361,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-006 Repair deterministic semantic scanning bootstrap defects
 
 - Stable task ID: LGSWF-006
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
