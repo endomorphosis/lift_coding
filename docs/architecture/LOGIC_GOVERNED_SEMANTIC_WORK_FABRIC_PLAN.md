@@ -233,7 +233,7 @@ The final supervisor report contains the required 24 sections and an explicit co
 
 The checked configured-board launcher is used because it preserves branch, ancestor, protected-file, clean-checkout, exact-gitlink, validator, and lifecycle protections. It is not represented as the completed fabric.
 
-Initial launch uses two supervisors, direct bounded Codex routing, no objective/codebase refill, and the four read-only inventory tasks. Source mutations remain behind Epic A. The runtime has a fresh namespace and does not reuse prior board state.
+Initial launch uses two supervisors, the runtime-required sealed Grok-primary/Codex-independent-review route with bounded quota fallback, no objective/codebase refill, and the four read-only inventory tasks. Source mutations remain behind Epic A. The runtime has a fresh namespace and does not reuse prior board state.
 
 Monitor lane status for heartbeat/progress, active task and phase, eligible/blocked counts, selection idle reason, implementation/merge return codes, and autonomous-unstall state. Exact critical conditions include stalled worktree/implementation logs, stale heartbeat/no progress, unresolved merge failure, protected-path/worktree reconciliation, missing active plan in fabric mode, provider/resource backoff, and autonomous-unstall quarantine.
 

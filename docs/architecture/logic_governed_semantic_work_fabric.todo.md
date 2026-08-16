@@ -92,7 +92,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Contract and obligation CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Resource demand: {"cpu_concurrency":1,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":24000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":2048,"subprocesses":1,"worktree_slots":1}
-- Model-route class: codex-bounded-inventory
+- Model-route class: ordered-grok-implement-codex-review-inventory
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Verify checked heads and trees, preserve dirty-overlay identities, enumerate and digest every locally known intervening revision range, and classify later code as candidate evidence rather than current authority. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -150,7 +150,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Contract and obligation CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Resource demand: {"cpu_concurrency":1,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":24000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":2048,"subprocesses":1,"worktree_slots":1}
-- Model-route class: codex-bounded-inventory
+- Model-route class: ordered-grok-implement-codex-review-inventory
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Inspect canonical semantic index, state, capsules, freshness, bindings, contracts, invalidation, proof selection, verification, governor, formalization, backends, families, and record adversarial-assurance and incremental-sealing absence at the checked head. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -208,7 +208,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Contract and obligation CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Resource demand: {"cpu_concurrency":1,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":24000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":2048,"subprocesses":1,"worktree_slots":1}
-- Model-route class: codex-bounded-inventory
+- Model-route class: ordered-grok-implement-codex-review-inventory
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Locate the landed goal, task, plan-revision, conflict, resource, proof, claim, daemon, merge, event, rescue, and entrypoint implementations; distinguish library capability from configured-launch wiring and compatibility shims. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -266,7 +266,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Contract and obligation CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Resource demand: {"cpu_concurrency":1,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":24000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":2048,"subprocesses":1,"worktree_slots":1}
-- Model-route class: codex-bounded-inventory
+- Model-route class: ordered-grok-implement-codex-review-inventory
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Classify canonical, consumer, facade, projection, legacy, duplicate, experimental, obsolete, and unresolved surfaces; preserve PCCE r2-r5 evidence and its empty-context, contradictory-review-schema, and task-CID-alias failures. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -324,7 +324,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Contract and obligation CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Resource demand: {"cpu_concurrency":1,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":32000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":2048,"subprocesses":1,"worktree_slots":1}
-- Model-route class: codex-bounded-contract-freeze
+- Model-route class: ordered-grok-implement-codex-review-contract-freeze
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Freeze exact mappings between datasets semantic artifacts and accelerator references without creating duplicate semantic records or upward package imports. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -382,7 +382,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Contract and obligation CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Resource demand: {"cpu_concurrency":4,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":8192,"subprocesses":4,"worktree_slots":1}
-- Model-route class: codex-bounded-semantic-bootstrap
+- Model-route class: ordered-grok-implement-codex-review-semantic-bootstrap
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Repair only the observed empty-namespace and duplicate named-argument scan failures, retain deterministic identities, and prove scans of both checked repositories complete or yield a typed bounded no-go. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -440,7 +440,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Contract and obligation CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-dependency-repair
+- Model-route class: ordered-grok-implement-codex-review-dependency-repair
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Invert or isolate the checked upward imports, especially CounterexampleEnvelope identity, behind datasets-owned leaf contracts without changing semantic meaning. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -498,7 +498,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Contract and obligation CIDs: raw-source-required; exact Git tree and bootstrap failure evidence
 - Resource demand: {"cpu_concurrency":4,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":8192,"subprocesses":4,"worktree_slots":1}
-- Model-route class: codex-bounded-runtime-bootstrap
+- Model-route class: ordered-grok-implement-codex-review-runtime-bootstrap
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Disposition all 1,245 intervening commits, port only reviewed compatible reference contracts where necessary, bind the sibling datasets checkout, and repair the three preserved PCCE bootstrap failures without advancing authority silently. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -556,7 +556,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-009
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-009
 - Resource demand: {"cpu_concurrency":4,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":8192,"subprocesses":4,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Rescan the accepted trees with datasets authority, open or create the active plan only through PlanRevisionStore, materialize per-task exact symbol/capsule/contract/obligation bindings, and fail closed if roots cannot be verified. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -614,7 +614,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-010
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-010
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Define a content-addressed accelerator-owned operational overlay that references separately verified semantic, plan, objective, claim, resource, capability, merge, policy, completion, gap, epoch, fence, and event authorities and embeds none of the prohibited payloads. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -672,7 +672,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-011
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-011
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Construct snapshots from independent authorities, classify current/stale/unavailable/inconsistent/quarantined components, require repository/tree/plan/population/semantic/policy agreement, and expose mutation-free goal/task/conflict/resource/evidence/refill queries. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -730,7 +730,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-014
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-014
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Verify canonical serialization, component freshness matrices, fail-closed consistency, authority isolation, and read-only behavior before unblocking semantic bindings. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -788,7 +788,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-020
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-020
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Reference exact datasets semantic artifacts for goals, subgoals, and tasks and require observable state, semantic properties, current tests/proofs, accepted children, resolved counterexamples/gaps, review, tree, and root for completion. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -846,7 +846,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-021
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-021
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Bind provisional semantic roots to worktree attempts, keep them noncanonical, distinguish every task lifecycle gate, and reserve task acceptance for a fenced supervisor after merge and canonical refresh. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -904,7 +904,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-024
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-024
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Prove no capsule content is copied, stale bindings fail closed, raw-source fallback is datasets-governed, and completion never follows task status alone. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -962,7 +962,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-030
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-030
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Compose goal, plan, semantic, code/data/interface/schema, contract/proof/validation/policy/merge/lifecycle, scope, invalidation, conflict, supersession, generation, block, and unlock edges with typed authority, evidence, roots, revision, certainty, and invalidation. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1020,7 +1020,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-031
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-031
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Separate dependency from conflict, prefer exact symbol/interface/schema/effect scopes, conservatively fall back for opacity, and compute durable integer depth, critical path, unlock, blocking, cost, uncertainty, merge risk, bottleneck, and locality values. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1078,7 +1078,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-034
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-034
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Verify all required edge classes, evidence lineage, conservative unknown handling, disjoint-reader/writer cases, hidden semantic conflicts, deterministic identities, and no binary floats. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1136,7 +1136,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-040
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-040
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Enforce every readiness condition and choose a conflict-free antichain under resources using deterministic bounded integer scoring; model proposals remain non-authoritative. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1194,7 +1194,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-041
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-041
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Score completion, critical-path and unlock value, locality, age/fairness against resource/provider/conflict/uncertainty/retry/merge costs with stable tie-breaking and bounded search. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1252,7 +1252,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-042
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-042
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Use existing PlanDelta lifecycle rules to improve parallelism without in-place mutation of started history; bound speculative work to isolated, cancellable, non-authoritative evidence. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1310,7 +1310,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-045
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-045
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Prove identical snapshots and policies yield identical frontiers, unsafe work is rejected with typed reasons, fairness is bounded, and split/coalesce preserves completion coverage. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1368,7 +1368,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-050
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-050
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Extend rather than replace resource contracts across CPU, RAM, GPU, disk, network, subprocess, worktree, model tokens, provider, prover, license/key, merge, and persistence dimensions with leased task/attempt/supervisor/daemon binding and fenced reclaim. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1426,7 +1426,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-051
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-051
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Keep predictions separate from observations and coordinate reuse of scans, semantic blocks, capsules, ContextPacks, sessions, prefixes, tests, proofs, environments, dependencies, and worktree objects without duplicate computation. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1484,7 +1484,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-052
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-052
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Decouple analysis, context, inference, proof translation/solver/kernel, validation, merge, and persistence pressure; preempt only stale/low-priority/idempotent or compensated work. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1542,7 +1542,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-054
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-054
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Prove hard resources never overcommit, all reservations release or reclaim safely, independent saturated stages do not globally stall, and predictions never overwrite receipts. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1600,7 +1600,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-060
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-060
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Extend the sealed multi-supervisor runner with non-authoritative capability observations for identity, scope, revision, epoch, stages, resources, providers, provers, worktrees, merge, persistence, load, health, heartbeat, and expiry. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1658,7 +1658,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-061
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-061
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Permit one fenced writer per mutable shard, proposal-only peers, later-epoch failover, and rejection of every stale coordinator commit. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1716,7 +1716,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-062
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-062
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Partition by semantic/repository/goal/resource/provider/worktree/merge/duration with explicit cross edges; steal only eligible fenced work and accept one result per task, plan, tree, semantic root, and idempotency key. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1774,7 +1774,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-064
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-064
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Prove process at-least-once execution cannot create duplicate accepted effects, hidden in-memory dependencies are absent, and stale/partitioned authorities fail closed. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1832,7 +1832,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-070
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-070
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Bind every required goal/plan/repository/semantic/symbol/capsule/source/contract/proof/context/scope/resource/provider/model/validation/completion/lease/fence/attempt/idempotency/checkpoint/cancellation/output field without introducing a parallel packet format. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1890,7 +1890,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-071
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-071
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Represent offered through accepted plus all side paths; record bounded attempt checkpoints without equating them to completion; stop immediately on changed plan/root/lease/fence/scope/cancellation or prior acceptance. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -1948,7 +1948,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-072
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-072
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Make active PlanRevisionStore, shared coordination, resource admission, packet identity, checkpoint recovery, and stale fencing non-optional for fabric mode while retaining sealed launcher protections. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2006,7 +2006,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-073
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-073
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Prove checkpoint integrity, resume binding, stale stops, side-path taxonomy, scope enforcement, and supervisor-only acceptance. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2064,7 +2064,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-080
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-080
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Use every specified semantic, proof, assurance, merge, failure, provider, resource, granularity, progress, steering, and external-change trigger and include evidence, impacts, validation, uncertainty, dedupe, fallback, and review. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2122,7 +2122,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-081
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-081
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Bound successor/revision/task/subgoal/key/retry/provider/token/frequency/no-progress amplification, preserve all started history, and diagnose every required plan-health defect without direct plan mutation. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2180,7 +2180,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-084
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-084
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Prove accepted history is immutable, semantically equivalent refill cannot multiply, completion criteria cannot weaken, and all doctor changes remain proposals. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2238,7 +2238,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-090
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-090
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Resolve and verify datasets views, freshness, source fallback, selected tests/proofs, and ContextPack before execution; on patch scan changed symbols, calculate invalidation, update provisional obligations, reject scope escapes, and replan verification. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2296,7 +2296,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-091
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-091
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Before merge verify predicted effects/contracts/selected tests/proofs/governor/assurance and seal; after queue acceptance rescan canonical tree, compare deltas, invalidate dependents, update snapshot, reevaluate goals, and revise until settled. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2354,7 +2354,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-094
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-094
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Prove workers cannot publish canonical roots, predicted/observed deltas reconcile, every invalidation propagates, and accepted tree/root identity remains exact. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2412,7 +2412,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-100
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-100
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Observe, plan, reserve, dispatch, checkpoint, verify, merge, refresh, evaluate, revise, and repeat until every specified parent/child/task/evidence/invalidation/proof/gap/tree/root/plan/claim/merge/receipt condition is current. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2470,7 +2470,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-101
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-101
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Expose blocked external/resource/provider/semantic/verification/review/exhaustion/no-progress/policy/quarantine/cancellation terminals with immutable evidence and never report them as success. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2528,7 +2528,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-103
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-103
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Prove fixed-point sufficiency, bounded no-progress/exhaustion behavior, restart continuation, no premature completion, and honest terminal classification. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2586,7 +2586,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-110
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-110
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Record every required snapshot/candidate/rejection/conflict/frontier/resource/assignment/priority/path/unlock/cache/fairness/provider/policy/claim fact and all requested concurrency, reuse, cost, failure, refill, and no-progress metrics. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2644,7 +2644,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-111
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-111
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-implementation
+- Model-route class: ordered-grok-implement-codex-review-implementation
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Provide stable machine output and provenance through existing entrypoints without adding a GUI or granting read APIs mutation authority. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2702,7 +2702,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-113
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-113
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Validate receipt content identities, exact decision explanations, integer/fixed-point durability, metric definitions, restart continuity, and entrypoint schema. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2760,7 +2760,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-120
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-120
 - Resource demand: {"cpu_concurrency":4,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":8192,"subprocesses":4,"worktree_slots":1}
-- Model-route class: codex-bounded-qualification
+- Model-route class: ordered-grok-implement-codex-review-qualification
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Create multiple resource classes, independent and conflicting branches, multilevel goals, proof/validation work, merge pressure, and refill triggers with restartable durable state. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2818,7 +2818,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-121
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-121
 - Resource demand: {"cpu_concurrency":4,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":8192,"subprocesses":4,"worktree_slots":1}
-- Model-route class: codex-bounded-fault-injection
+- Model-route class: ordered-grok-implement-codex-review-fault-injection
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Run deterministic cases 1-9 and 15-16 including concurrent independence, writer exclusion, compatible reads, stale plan/root fencing, duplicate claims, later epoch, old-coordinator rejection, checkpoint resume, eligible stealing, and partition rejection. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2876,7 +2876,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-122
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-122
 - Resource demand: {"cpu_concurrency":4,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":8192,"subprocesses":4,"worktree_slots":1}
-- Model-route class: codex-bounded-fault-injection
+- Model-route class: ordered-grok-implement-codex-review-fault-injection
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Run deterministic cases 10-14 and 17-25 covering compensation, independent pressure, hidden dependency, invalidation, successor proof work, bounded recurring failure, refill dedupe, immutable history, safe split/coalesce, and current-evidence completion. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2934,7 +2934,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-123
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-123
 - Resource demand: {"cpu_concurrency":4,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":8192,"subprocesses":4,"worktree_slots":1}
-- Model-route class: codex-bounded-adversarial
+- Model-route class: ordered-grok-implement-codex-review-adversarial
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Inject every forged/stale/wrong-scope/tree/plan/fence/effect/policy/test/proof/model/receipt/replay/checkpoint/split-brain/impossible-telemetry case and require all critical paths to fail closed. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -2992,7 +2992,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-125
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-125
 - Resource demand: {"cpu_concurrency":4,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":8192,"subprocesses":4,"worktree_slots":1}
-- Model-route class: codex-bounded-fault-injection
+- Model-route class: ordered-grok-implement-codex-review-fault-injection
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Kill and restart coordinators, supervisors, and daemons at every lifecycle stage and reconstruct solely from durable authoritative records with stale leases fenced. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3050,7 +3050,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-126
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-126
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Aggregate raw deterministic receipts without hiding failed attempts and issue pass, bounded no-go, or external-block disposition for every required case. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3108,7 +3108,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-130
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-130
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-benchmark
+- Model-route class: ordered-grok-implement-codex-review-benchmark
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Freeze independent, fan-out/fan-in, long-path, shared-schema, proof/model/merge-heavy, bottleneck, failure, invalidation, and refill workloads plus serial, dependency-only, conflict-aware, and complete-fabric policies. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3166,7 +3166,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-131
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-131
 - Resource demand: {"cpu_concurrency":8,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":2,"ram_mib":16384,"subprocesses":8,"worktree_slots":2}
-- Model-route class: codex-bounded-benchmark
+- Model-route class: ordered-grok-implement-codex-review-benchmark
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Execute configurations A and B against the exact frozen release/workload/environment and retain observed values separately from estimates. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3224,7 +3224,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-132
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-132
 - Resource demand: {"cpu_concurrency":8,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":64000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":2,"ram_mib":16384,"subprocesses":8,"worktree_slots":2}
-- Model-route class: codex-bounded-benchmark
+- Model-route class: ordered-grok-implement-codex-review-benchmark
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Execute configurations C and D under identical bindings, retain every failure/throttle/conflict/revision/recovery receipt, and never fabricate target attainment. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3282,7 +3282,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-134
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-134
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-analysis
+- Model-route class: ordered-grok-implement-codex-review-analysis
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Report every requested measure and target honestly, distinguish theoretical DAG width from achieved concurrency, and bind conclusions only to the exact corpus, policies, providers, release, and environment. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3340,7 +3340,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-135
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-135
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Verify corpus immutability, run comparability, raw receipt integrity, metric calculations, target truthfulness, and bounded scheduling/refill overhead. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3398,7 +3398,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-140
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-140
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-release
+- Model-route class: ordered-grok-implement-codex-review-release
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Assemble exact revisions, all schemas, inventories, authority map, tests, faults, corpus, raw results, reports, findings, limitations, migration, rollback, and decision into one verifiable release. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3456,7 +3456,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-141
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-141
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-release
+- Model-route class: ordered-grok-implement-codex-review-release
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Document trust boundaries, unresolved risks, compatible migration from legacy boards, disable/rollback and compensation paths, and protected-branch non-authority. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3514,7 +3514,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-142
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-142
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-release
+- Model-route class: ordered-grok-implement-codex-review-release
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Deterministically choose no higher than research_demo, internal_alpha, internal_pilot, supervised_external_pilot, or production_candidate from current evidence and emit an explicit continuous-operation recommendation. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3572,7 +3572,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-144
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-144
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-release
+- Model-route class: ordered-grok-implement-codex-review-release
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Report all required revisions, inventory, authority, board, reuse, designs, protocols, results, reuse, overhead, security, limitations, level, and recommendation; use the scoped final claim only when its predicates are evidenced. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.
@@ -3630,7 +3630,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 - Capsule CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-145
 - Contract and obligation CIDs: artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-145
 - Resource demand: {"cpu_concurrency":2,"disk_mib":4096,"gpu_memory_mib":0,"merge_slots":1,"model_input_tokens":48000,"network":"denied-unless-packet-authorizes","persistence_mib_per_second":64,"prover_concurrency":1,"provider_concurrency":1,"ram_mib":4096,"subprocesses":2,"worktree_slots":1}
-- Model-route class: codex-bounded-epic-gate
+- Model-route class: ordered-grok-implement-codex-review-epic-gate
 - Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge
 - Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches
 - Completion contract: Verify every parent completion predicate and either seal a bounded qualified release or preserve an explicit no-go/non-success terminal with all failed attempts and unresolved obligations. The declared outputs must exist at their recorded identities; every validation and selected proof must be current; merge and canonical semantic refresh must succeed where mutation occurs; an independent fenced supervisor must accept the result. Worker completion or task status alone is insufficient.

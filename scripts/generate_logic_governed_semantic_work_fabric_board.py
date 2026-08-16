@@ -229,7 +229,7 @@ def render_todo() -> str:
             f"- Capsule CIDs: {binding}",
             f"- Contract and obligation CIDs: {binding}",
             f"- Resource demand: {_resource_vector(task.resource)}",
-            f"- Model-route class: {'none-operator-seal' if not task.schedulable else 'codex-bounded-' + task.stage}",
+            f"- Model-route class: {'none-operator-seal' if not task.schedulable else 'ordered-grok-implement-codex-review-' + task.stage}",
             "- Permitted effects: read declared scope; mutate only owned paths in the leased worktree; run declared validation; emit immutable evidence; request admitted merge",
             "- Prohibited effects: mutate canonical datasets semantic truth; edit protected board or policy; overlap an active writer; publish provisional roots; weaken tests/contracts/proofs; self-approve; contact network or external systems without explicit packet authority; merge protected branches",
             f"- Completion contract: {completion_contract}",
