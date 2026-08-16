@@ -145,6 +145,22 @@ def _reachable(adjacency: dict[str, set[str]], source: str, target: str) -> bool
     return False
 
 
+def _normalize_todo_progress(text: str) -> str:
+    """Mask the only mutable field in the legacy task projection.
+
+    The implementation supervisor records accepted work by changing ``Status``
+    from ``todo`` to ``completed``.  Every other byte remains protected by the
+    deterministic generator comparison below.  Unknown lifecycle values are
+    intentionally not masked and therefore fail closed.
+    """
+
+    return re.sub(
+        r"(?m)^- Status: (?:todo|completed)$",
+        "- Status: <accepted-progress>",
+        text.rstrip(),
+    )
+
+
 def validate() -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -172,8 +188,12 @@ def validate() -> dict[str, Any]:
     if len(expected_goal_ids) != len(set(expected_goal_ids)):
         errors.append("generator contains duplicate goal IDs")
 
-    if TODO_PATH.read_text(encoding="utf-8").rstrip() != render_todo().rstrip():
-        errors.append("todo Markdown differs from its protected deterministic generator")
+    actual_todo = TODO_PATH.read_text(encoding="utf-8")
+    if _normalize_todo_progress(actual_todo) != _normalize_todo_progress(render_todo()):
+        errors.append(
+            "todo Markdown differs from its protected deterministic generator "
+            "outside accepted Status progress"
+        )
     if OBJECTIVES_PATH.read_text(encoding="utf-8").rstrip() != render_objectives().rstrip():
         errors.append("objective heap differs from its protected deterministic generator")
     if _load_json(PROJECTION_PATH) != projection():
@@ -192,6 +212,7 @@ def validate() -> dict[str, Any]:
     adjacency: dict[str, set[str]] = defaultdict(set)
     indegree = {task_id: 0 for task_id in expected_ids}
     owned: dict[str, set[str]] = {}
+    completed_ids: set[str] = set()
     for task in parsed:
         metadata = task.metadata
         missing = sorted(REQUIRED_FIELDS - set(metadata))
@@ -232,14 +253,39 @@ def validate() -> dict[str, Any]:
         if task.task_id == "LGSWF-000":
             if task.status != "completed" or metadata["is schedulable"] != "false":
                 errors.append("LGSWF-000 must be completed and unschedulable")
-        elif task.status != "todo" or metadata["is schedulable"] != "true":
-            errors.append(f"{task.task_id} must initially be todo and schedulable")
+        elif task.status not in {"todo", "completed"} or metadata["is schedulable"] != "true":
+            errors.append(
+                f"{task.task_id} must be todo or completed and retain its generated "
+                "schedulability contract"
+            )
+        if task.status == "completed":
+            completed_ids.add(task.task_id)
         for dependency in task.depends_on:
             if dependency not in expected_id_set:
                 errors.append(f"{task.task_id} references unknown dependency {dependency}")
                 continue
             adjacency[dependency].add(task.task_id)
             indegree[task.task_id] += 1
+
+    for task in parsed:
+        if task.task_id not in completed_ids:
+            continue
+        missing_dependencies = sorted(set(task.depends_on) - completed_ids)
+        if missing_dependencies:
+            errors.append(
+                f"{task.task_id} is completed before dependencies: "
+                f"{', '.join(missing_dependencies)}"
+            )
+        missing_outputs = sorted(
+            path
+            for path in owned.get(task.task_id, set())
+            if not (REPO_ROOT / path).exists()
+        )
+        if missing_outputs:
+            errors.append(
+                f"{task.task_id} is completed with missing declared outputs: "
+                f"{', '.join(missing_outputs)}"
+            )
 
     ready = sorted(
         task_id for task_id, degree in indegree.items()
@@ -341,6 +387,7 @@ def validate() -> dict[str, Any]:
         "warnings": warnings,
         "task_count": len(parsed),
         "goal_count": len(GOALS),
+        "completed_task_ids": sorted(completed_ids),
         "initial_ready_task_ids": ready_after_bootstrap,
         "planning_base": PLANNING_BASE,
         "accelerator_base": ACCELERATOR_BASE,
