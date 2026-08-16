@@ -1,0 +1,763 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.accelerator-authority@1",
+  "task_id": "LGSWF-003",
+  "title": "Inventory accelerator operational authorities and actual runtime wiring",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "inspection_method": "raw-source-required exact-tree inventory against the checked accelerator gitlink; package README/package-map/execution guides used as secondary navigation only",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "checked_authority": {
+    "repository": "ipfs_accelerate_py",
+    "path": "external/ipfs_accelerate",
+    "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "branch_observation": "fix/implementation-auto-rescue-20260809",
+    "superproject_gitlink_candidate": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+    "authority_class": "checked implementation authority for this board",
+    "later_revisions_policy": "intervening commits and superproject pin 485edc08… are candidate evidence only; they are not current operational authority",
+    "absent_package_at_checked_head": {
+      "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/",
+      "status": "absent",
+      "note": "later trees may contain a semantic-state package; checked head has none and must not be assumed"
+    }
+  },
+  "package_direction": {
+    "root": "ipfs_accelerate_py.agent_supervisor",
+    "dependency_dag_bottom_up": [
+      "core",
+      "control",
+      "task_sources",
+      "context",
+      "analysis",
+      "proof",
+      "objectives",
+      "planning",
+      "validation",
+      "prompt",
+      "merge",
+      "rescue",
+      "runtime",
+      "self_improvement",
+      "integrations",
+      "todo_daemon",
+      "entrypoints"
+    ],
+    "rules": [
+      "acyclic bottom-up only",
+      "core must not import todo_daemon/runtime/merge/rescue",
+      "no lower domain package may import entrypoints",
+      "entrypoints cold-import may load only provider-free contracts",
+      "no long-lived flat re-export stubs at retired package-root paths"
+    ],
+    "semantic_truth_boundary": "accelerator owns operational coordination only; datasets owns semantic index/state/capsules/proof obligations; accelerator references datasets roots by type and must not redefine them"
+  },
+  "classification_vocabulary": {
+    "library_capability": "landed module/class/API exists and is importable under the domain package; may be unit-tested and optionally composed by non-LGSWF callers",
+    "configured_launch_wiring": "constructed, passed, or invoked by the sealed configured-board path used for this board (scheduler config → configured_board_scheduler → multi_supervisor_runner → implementation_supervisor_entry → implementation_supervisor/daemon)",
+    "composed_bundle_path": "optional alternate composition (for example objectives.bundle_supervisor) that wires full LeaseCoordinator/ResourceScheduler; not the LGSWF configured-board launch path",
+    "compatibility_shim": "historical alias, lazy package-root re-export, legacy status spelling, empty facade slot, or MCP/facade surface that is not primary operational authority",
+    "not_wired": "library exists but configured-board launch does not construct or bind it"
+  },
+  "configured_launch_path": {
+    "status": "bounded_bootstrap_execution",
+    "product_fabric_complete": false,
+    "bootstrap_task_source": "legacy-markdown-pending-plan-revision-r1",
+    "scheduler_config": "config/agent_supervisor_logic_governed_semantic_work_fabric.json",
+    "scheduler_schema": "ipfs_accelerate_py.agent_supervisor.logic_governed_semantic_work_fabric.scheduler_config@1",
+    "library_launcher": "ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+    "ops_script_entry": "external/ipfs_accelerate/scripts/ops/agent_supervisor/configured_board_scheduler.py",
+    "implementation_entry": "external/ipfs_accelerate/scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
+    "implementation_entry_target": "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor:main",
+    "process_composition": [
+      "ConfiguredBoard.load / preflight / launch_plan",
+      "build_configured_multi_supervisor_cli_runner",
+      "multi_supervisor_runner sharded lanes",
+      "implementation_supervisor_entry → ImplementationSupervisor",
+      "ImplementationDaemon claim/worktree/provider/validation/merge-queue"
+    ],
+    "wired_cli_surfaces": [
+      "--todo-path → markdown taskboard",
+      "--task-prefix",
+      "--worktree-root / --worktree-submodule-path",
+      "--merge-target-branch / --merge-queue-dir",
+      "--implementation-protected-path",
+      "provider environment (ordered grok_cli→codex route)",
+      "lane sharding / max_lanes",
+      "timeouts, retry budgets, watchdog grace"
+    ],
+    "explicitly_disabled_on_configured_board": [
+      "--no-objective-task-janitor",
+      "--no-objective-goal-completion-reconcile",
+      "--no-objective-goal-migration"
+    ],
+    "not_constructed_by_configured_board": [
+      "PlanRevisionStore",
+      "LeaseCoordinator",
+      "ResourceScheduler (class instance / acquire path)",
+      "TaskConflictGraph / build_conflict_graph",
+      "ProofScheduler",
+      "entrypoints LaunchPlan runtime facade"
+    ],
+    "plan_note": "matches sealed plan statement that the checked accelerator CLI does not yet wire PlanRevisionStore, LeaseCoordinator, or ResourceScheduler into configured-board daemon execution"
+  },
+  "authorities": {
+    "goal": {
+      "authority_role": "objective lifecycle and evidence-backed goal completion",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "ipfs_accelerate_py/agent_supervisor/objectives/objective_graph.py",
+        "ipfs_accelerate_py/agent_supervisor/objectives/objective_tracker.py",
+        "ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+        "ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py"
+      ],
+      "key_symbols": [
+        "GoalState",
+        "CompletionEvidence",
+        "evaluate_goal_completion",
+        "ObjectiveGoal",
+        "ObjectiveTracker surfaces in objective_tracker",
+        "objective_graph scan/refill helpers"
+      ],
+      "interfaces": [
+        "goal completion schema v1",
+        "goal lifecycle states active/provisionally_complete/verified_complete/analysis_inconclusive/blocked/reopened"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "not_primary",
+      "configured_launch_detail": "configured board disables objective goal completion reconcile/migration/janitor; goal completion projection helpers exist on implementation_supervisor_runner but are not the LGSWF bootstrap actuation path",
+      "composed_bundle_path": "bundle_supervisor can observe goal/task readiness with full lease/resource composition",
+      "compatibility_shims": [
+        "legacy goal status spellings complete/completed/done normalize to verified_complete for readers; new writers use verified_complete",
+        "LEGACY_COMPLETED_GOAL_STATES retained for migration detection only"
+      ],
+      "completion_rule": "task population completion does not complete a goal; verified_complete requires fresh tree-bound evidence"
+    },
+    "task": {
+      "authority_role": "stable task identity, board projection, and readiness protocol",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/task_sources/task_identity.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/task_source.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/markdown_task_source.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_task_source.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/taskboard_store.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/persistent_task_queue.py"
+      ],
+      "key_symbols": [
+        "TASK_IDENTITY_SCHEMA = ipfs_accelerate_py/agent-supervisor/task-identity@1",
+        "TaskIdentity",
+        "canonical_task_identity",
+        "CanonicalTaskSource",
+        "ActivePlanBinding",
+        "MarkdownTaskSource",
+        "open_task_source",
+        "locked_taskboard / replace_locked_taskboard"
+      ],
+      "interfaces": [
+        "task-identity@1",
+        "task-source-protocol@1",
+        "markdown and duckdb projections as lossless views, not plan authority"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "wired",
+      "configured_launch_detail": "configured board points --todo-path at docs/architecture/logic_governed_semantic_work_fabric.todo.md with task prefix LGSWF-; bootstrap_task_source is legacy-markdown-pending-plan-revision-r1",
+      "composed_bundle_path": "DuckDB/dual sources and PlanRevision-backed dispatch available when callers bind them",
+      "compatibility_shims": [
+        "Markdown board remains a projection; PlanRevisionStore is the intended plan authority after LGSWF-009 r1"
+      ]
+    },
+    "plan_revision": {
+      "authority_role": "immutable plan ancestry, active plan pointer, and create/steer apply receipts",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+        "ipfs_accelerate_py/agent_supervisor/prompt/plan_supervisor_service.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/task_source.py"
+      ],
+      "key_symbols": [
+        "PlanRevisionContracts@1",
+        "PlanRevision",
+        "PlanDelta",
+        "PlanAuthorityRoots",
+        "PlanRevisionStore@1",
+        "PLAN_REVISION_STORE_INTERFACE",
+        "ActivePlanBinding",
+        "bind_active_plan_revision",
+        "load_active_plan_binding_from_store",
+        "MissingActivePlanRevisionError"
+      ],
+      "interfaces": [
+        "PlanRevisionContracts@1",
+        "PlanRevisionStore@1",
+        "plan-revision-store@1 / plan-revision-active@1 / plan-revision-apply-receipt@1"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "not_wired",
+      "configured_launch_detail": "ImplementationDaemon accepts optional plan_revision_store and defaults require_active_plan_revision only when a store or compiled plan is bound; configured_board_scheduler never constructs or passes PlanRevisionStore. Board still records base_plan_revision urn:lgswf:plan-revision:r000 as a bootstrap label only.",
+      "composed_bundle_path": "PlanSupervisorService and dual task sources can bind PlanRevisionStore when a program composes them",
+      "compatibility_shims": [
+        "legacy markdown taskboard used as bootstrap task source until accepted PlanRevision r1"
+      ]
+    },
+    "conflict": {
+      "authority_role": "which ready tasks may execute together; orthogonal to dependency readiness",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+        "ipfs_accelerate_py/agent_supervisor/objectives/bundle_optimizer.py"
+      ],
+      "key_symbols": [
+        "TaskWorkContract",
+        "ConflictSurface",
+        "ConflictEdge",
+        "TaskConflictGraph",
+        "build_conflict_surface",
+        "build_conflict_graph",
+        "task-work-contract@1",
+        "task-planning-work-contract@1"
+      ],
+      "interfaces": [
+        "conflict surface prediction and explainable lane coloring",
+        "serializes to ordinary JSON for cross-process manifests"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "not_wired",
+      "configured_launch_detail": "todo_daemon does not import conflict_graph; configured board relies on protected paths, lane sharding, and file claims rather than constructing TaskConflictGraph",
+      "composed_bundle_path": "bundle_optimizer consumes TaskConflictGraph for antichain selection in the composed bundle path",
+      "compatibility_shims": []
+    },
+    "resource": {
+      "authority_role": "host/provider/pool capacity admission and fair backpressure",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/provider_batch_scheduler.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/provider_capacity_monitor.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/provider_capacity_snapshot.py"
+      ],
+      "key_symbols": [
+        "ResourceScheduler",
+        "ResourceAdmissionLease",
+        "AdmissionDecision",
+        "GoalRuntimeResourceScheduler",
+        "RouteAwareResourceScheduler",
+        "FormalVerificationResourceScheduler",
+        "admit_compiled_execution_assignments",
+        "evaluate_capacity_drift",
+        "ResourceSchedulerBatchAdmission",
+        "ProviderBatchScheduler"
+      ],
+      "interfaces": [
+        "ResourceScheduler.evaluate / acquire",
+        "capacity drift and compiled execution assignment helpers"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "partial",
+      "configured_launch_detail": "configured board does not construct ResourceScheduler. ImplementationDaemon imports admit_compiled_execution_assignments and evaluate_capacity_drift helpers and uses file-backed implementation_resource_claim locks; that is not the full ResourceScheduler acquire/lease path described for the composed bundle supervisor.",
+      "composed_bundle_path": "objectives.bundle_supervisor constructs ResourceScheduler(policy) and reaps with LeaseCoordinator",
+      "compatibility_shims": [
+        "RouteAwareResourceScheduler and FormalVerificationResourceScheduler are aliases of GoalRuntimeResourceScheduler"
+      ]
+    },
+    "proof": {
+      "authority_role": "proof orchestration and formal-verification cache as consumers of datasets obligations; not semantic truth authority",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/proof/proof_scheduler.py",
+        "ipfs_accelerate_py/agent_supervisor/proof/formal_verification_cache.py",
+        "ipfs_accelerate_py/agent_supervisor/proof/formal_verification_contracts.py",
+        "ipfs_accelerate_py/agent_supervisor/proof/formal_verification_policy.py",
+        "ipfs_accelerate_py/agent_supervisor/proof/code_proof_obligations.py",
+        "ipfs_accelerate_py/agent_supervisor/proof/multi_prover_router.py"
+      ],
+      "key_symbols": [
+        "ProofScheduler",
+        "ProofSchedulerConfig",
+        "execute_proof_plan",
+        "FormalVerificationCache",
+        "ProofReceipt",
+        "CodeProofObligation",
+        "AssuranceLevel"
+      ],
+      "interfaces": [
+        "proof schedule/lease snapshots",
+        "trust-aware FormalVerificationCache (not a trust root)"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "optional_hook_only",
+      "configured_launch_detail": "ImplementationDaemon accepts optional proof_gate/proof_workflow/formal_verification_policy and proof_scheduler options keys, but configured-board launch does not bind a ProofScheduler instance. For LGSWF-003 inventory scope no datasets proof obligations are selected.",
+      "composed_bundle_path": "available when a program injects proof workflow options or uses proof package entrypoints directly",
+      "compatibility_shims": [],
+      "authority_boundary": "accelerator orchestrates proof; datasets owns obligation identity and formal VC/proof artifact kinds"
+    },
+    "claim": {
+      "authority_role": "ownership of work units and code-level claim records; multiple claim families exist and must not be conflated",
+      "families": [
+        {
+          "family": "task_lease_claim",
+          "primary_paths": [
+            "ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+            "ipfs_accelerate_py/agent_supervisor/merge/leased_lane.py"
+          ],
+          "key_symbols": [
+            "LeaseCoordinator",
+            "LeaseGrant",
+            "claimability",
+            "DependencyNotReadyError",
+            "StaleFencingTokenError",
+            "LeaseExpiredError"
+          ],
+          "library_capability": "landed",
+          "configured_launch_wiring": "not_wired",
+          "configured_launch_detail": "DuckDB LeaseCoordinator is the durable claim/fence authority on the composed path; configured-board multi_supervisor_runner does not construct it",
+          "composed_bundle_path": "bundle_supervisor opens LeaseCoordinator(coordination_path) for claim/reap"
+        },
+        {
+          "family": "implementation_file_claim",
+          "primary_paths": [
+            "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+            "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py"
+          ],
+          "key_symbols": [
+            "IMPLEMENTATION_TASK_CLAIM_LOCK_KIND",
+            "IMPLEMENTATION_RESOURCE_CLAIM_LOCK_KIND",
+            "_try_acquire_implementation_task_claim",
+            "_acquire_implementation_resource_claims",
+            "implementation_task_claim_protected_fence_paths"
+          ],
+          "library_capability": "landed",
+          "configured_launch_wiring": "wired",
+          "configured_launch_detail": "primary claim mechanism on the LGSWF configured-board path: filesystem claim locks under the lane state directory, not LeaseCoordinator"
+        },
+        {
+          "family": "code_claim_record",
+          "primary_paths": [
+            "ipfs_accelerate_py/agent_supervisor/proof/code_claim_contracts.py"
+          ],
+          "key_symbols": [
+            "CodeClaimRecord",
+            "ClaimFamily",
+            "ClaimStatus",
+            "claim_from_obligation",
+            "claim_from_receipt",
+            "evaluate_invalidation"
+          ],
+          "library_capability": "landed",
+          "configured_launch_wiring": "not_wired",
+          "configured_launch_detail": "assurance claim IR; not the task ownership claim used by the daemon"
+        },
+        {
+          "family": "compiled_claim_preconditions",
+          "primary_paths": [
+            "ipfs_accelerate_py/agent_supervisor/task_sources/task_source.py"
+          ],
+          "key_symbols": [
+            "CompiledClaimPreconditions",
+            "compiled_claim_preconditions"
+          ],
+          "library_capability": "landed",
+          "configured_launch_wiring": "conditional",
+          "configured_launch_detail": "used when plan-runtime / active plan binding is enabled; not enabled by default on configured board without PlanRevisionStore"
+        }
+      ]
+    },
+    "daemon": {
+      "authority_role": "implementation and supervisor process loops; claim, worktree, provider, validation, merge admission, status",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon_runner.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor_runner.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/authoritative_completion.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/worktrees.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/task_execution_policy.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py"
+      ],
+      "key_symbols": [
+        "ImplementationDaemon",
+        "ImplementationSupervisor",
+        "ImplementationReceipt",
+        "AuthoritativeCompletionGate",
+        "evaluate_authoritative_completion_gate",
+        "promote_authoritative_completion",
+        "WorktreePool / WorktreeLease",
+        "ConfiguredBoard",
+        "configured_board_launch_plan"
+      ],
+      "interfaces": [
+        "worker completion is not authoritative completion",
+        "merge ≠ AuthoritativeCompletionGate admission",
+        "generated runtime artifacts are not completion authority (scheduler config flag)"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "wired",
+      "configured_launch_detail": "this is the actual LGSWF actuation path after sealed preflight",
+      "composed_bundle_path": "bundle_supervisor is an alternate multi-lane composition, not used by LGSWF configured-board common args",
+      "compatibility_shims": [
+        "scripts/ops/agent_supervisor/* thin path-inserting wrappers around domain package mains"
+      ]
+    },
+    "merge": {
+      "authority_role": "landing completed work onto the merge target; not task acceptance",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/merge/merge_queue.py",
+        "ipfs_accelerate_py/agent_supervisor/merge/merge_train.py",
+        "ipfs_accelerate_py/agent_supervisor/merge/merge_resolver.py",
+        "ipfs_accelerate_py/agent_supervisor/merge/merge_checkpoint.py",
+        "ipfs_accelerate_py/agent_supervisor/merge/merge_conflict_repair.py",
+        "ipfs_accelerate_py/agent_supervisor/merge/checkout_lock.py",
+        "ipfs_accelerate_py/agent_supervisor/merge/worktree_lifecycle.py",
+        "ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+        "ipfs_accelerate_py/agent_supervisor/merge/leased_lane.py"
+      ],
+      "key_symbols": [
+        "MergeQueue",
+        "MergeRequest",
+        "MergeTrain",
+        "MergeCheckpoint",
+        "ParallelAcceptanceReceipt",
+        "checkout mutation locks",
+        "WorktreeLifecycleStore"
+      ],
+      "interfaces": [
+        "merge-queue-dir filesystem queue",
+        "single-consumer merge train fence",
+        "MERGE_TARGET_BINDING_SCHEMA"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "partial",
+      "configured_launch_detail": "configured board wires --merge-queue-dir and --merge-target-branch; ImplementationDaemon constructs MergeQueue. Full LeaseCoordinator-backed leased-lane composition is not used by configured board. Merge still does not imply AuthoritativeCompletionGate admission.",
+      "composed_bundle_path": "leased_lane + LeaseCoordinator + MergeTrain compose the full distributed landing path",
+      "compatibility_shims": [
+        "integrations/llm_merge_resolver_fallback is an optional bridge, not merge authority"
+      ]
+    },
+    "event": {
+      "authority_role": "append-only operational event stream, cursors, and recovery of JSONL logs",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/runtime/event_log.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/artifact_store.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/runtime_cas.py"
+      ],
+      "key_symbols": [
+        "append_jsonl_event",
+        "append_semantic_change_event",
+        "event_log_manifest",
+        "latest_event_cursor / initial_event_cursor",
+        "repair_jsonl_event_log",
+        "EVENT_LOG_MANIFEST_SCHEMA",
+        "EVENT_CURSOR_CHECKPOINT_SCHEMA"
+      ],
+      "interfaces": [
+        "JSONL event log with atomic append and cursor replay",
+        "large payloads offloaded via artifact_store / runtime_cas"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "wired",
+      "configured_launch_detail": "implementation_daemon and implementation_supervisor import and append/repair event log helpers for lane status and recovery",
+      "composed_bundle_path": "bundle_supervisor also reads event_log_sources",
+      "compatibility_shims": [
+        "LEGACY_EVENT_LOG_MANIFEST_SCHEMA retained for older manifests"
+      ]
+    },
+    "rescue": {
+      "authority_role": "bounded recovery, watchdog, quarantine, and authorized rescue actions",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/rescue/rescue_orchestrator.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/rescue_planner.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/supervisor_watchdog.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/supervisor_recovery.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/recovery_diagnostics.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/codex_failure_policy.py"
+      ],
+      "key_symbols": [
+        "RescueOrchestrator",
+        "RescueReceiptDisposition",
+        "RescuePlanner",
+        "RescuePlannerPolicy",
+        "SupervisorWatchdog",
+        "SupervisorRecovery"
+      ],
+      "interfaces": [
+        "control-authorized rescue receipts",
+        "watchdog liveness combining heartbeat age, lifecycle state, and process probes"
+      ],
+      "library_capability": "landed",
+      "configured_launch_wiring": "partial",
+      "configured_launch_detail": "implementation_supervisor imports RescuePlanner and SupervisorWatchdog; configured board supplies stale_seconds, max_restarts, and watchdog_startup_grace_seconds. Full RescueOrchestrator control-transaction path is library capability used when a rescue plan is authorized, not continuous LGSWF bootstrap inventory actuation.",
+      "composed_bundle_path": "available to any supervisor composition that injects rescue authorization boundaries",
+      "compatibility_shims": []
+    },
+    "entrypoint": {
+      "authority_role": "highest-layer prompt-first composition boundary; cold-import contracts only by default",
+      "primary_paths": [
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/__init__.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/contracts.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/authority_resolver.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/target_resolver.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/capability_resolver.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/profile_resolver.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/objective_resolver.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/state_resolver.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/prompt_broker.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/inference_runtime.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/inference_explain.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/plan_lint.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/run_registry.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/steering_contracts.py",
+        "ipfs_accelerate_py/agent_supervisor/entrypoints/verified_ipld_backend.py"
+      ],
+      "key_symbols": [
+        "ENTRYPOINT_CONTRACT_EXPORTS",
+        "ENTRYPOINT_LAZY_FACADE_EXPORTS = ()",
+        "SupervisorInvocationRequest",
+        "TargetResolutionReceipt",
+        "LaunchPlan",
+        "RunHandle",
+        "authority/target/capability resolvers as pure modules"
+      ],
+      "interfaces": [
+        "provider-free DAG-JSON entrypoint contracts",
+        "DuckDB coordination vs Parquet/IPLD replication separation declared in contracts"
+      ],
+      "library_capability": "landed_contracts_and_resolvers",
+      "configured_launch_wiring": "not_wired",
+      "configured_launch_detail": "LGSWF launch uses runtime.configured_board_scheduler and todo_daemon implementation_supervisor entry scripts, not entrypoints LaunchPlan facades. ENTRYPOINT_LAZY_FACADE_EXPORTS is intentionally empty until facade delivery tasks land.",
+      "composed_bundle_path": "resolvers and contracts are importable for future facades; lower packages must never import entrypoints",
+      "compatibility_shims": [
+        "empty ENTRYPOINT_LAZY_FACADE_EXPORTS is an explicit non-facade state, not a runtime capability claim"
+      ]
+    }
+  },
+  "wiring_matrix": [
+    {
+      "authority": "goal",
+      "library": true,
+      "configured_board": false,
+      "bundle_composed": true,
+      "notes": "reconcile disabled on configured board common args"
+    },
+    {
+      "authority": "task",
+      "library": true,
+      "configured_board": true,
+      "bundle_composed": true,
+      "notes": "markdown todo path wired; plan-revision authority not yet active"
+    },
+    {
+      "authority": "plan_revision",
+      "library": true,
+      "configured_board": false,
+      "bundle_composed": "optional",
+      "notes": "PlanRevisionStore not constructed by configured_board_scheduler"
+    },
+    {
+      "authority": "conflict",
+      "library": true,
+      "configured_board": false,
+      "bundle_composed": true,
+      "notes": "TaskConflictGraph unused by todo_daemon configured path"
+    },
+    {
+      "authority": "resource",
+      "library": true,
+      "configured_board": "helpers_and_file_claims_only",
+      "bundle_composed": true,
+      "notes": "ResourceScheduler class not constructed on configured board"
+    },
+    {
+      "authority": "proof",
+      "library": true,
+      "configured_board": "optional_hooks",
+      "bundle_composed": "optional",
+      "notes": "ProofScheduler not bound by configured board"
+    },
+    {
+      "authority": "claim.task_lease",
+      "library": true,
+      "configured_board": false,
+      "bundle_composed": true,
+      "notes": "LeaseCoordinator not used by configured multi_supervisor path"
+    },
+    {
+      "authority": "claim.implementation_file",
+      "library": true,
+      "configured_board": true,
+      "bundle_composed": "n/a",
+      "notes": "filesystem task/resource claim locks are the live claim mechanism"
+    },
+    {
+      "authority": "claim.code_claim",
+      "library": true,
+      "configured_board": false,
+      "bundle_composed": "optional",
+      "notes": "assurance claim IR only"
+    },
+    {
+      "authority": "daemon",
+      "library": true,
+      "configured_board": true,
+      "bundle_composed": "alternate",
+      "notes": "primary LGSWF actuation"
+    },
+    {
+      "authority": "merge",
+      "library": true,
+      "configured_board": true,
+      "bundle_composed": true,
+      "notes": "MergeQueue wired; LeaseCoordinator-leased merge train not"
+    },
+    {
+      "authority": "event",
+      "library": true,
+      "configured_board": true,
+      "bundle_composed": true,
+      "notes": "append_jsonl_event used by daemon/supervisor"
+    },
+    {
+      "authority": "rescue",
+      "library": true,
+      "configured_board": "watchdog_and_planner",
+      "bundle_composed": true,
+      "notes": "watchdog/planner wired; orchestrator is on-demand"
+    },
+    {
+      "authority": "entrypoint",
+      "library": true,
+      "configured_board": false,
+      "bundle_composed": false,
+      "notes": "contracts/resolvers landed; lazy facades empty"
+    }
+  ],
+  "compatibility_shims_and_facades": [
+    {
+      "kind": "package_root_lazy_reexport",
+      "path": "ipfs_accelerate_py/agent_supervisor/__init__.py",
+      "detail": "__getattr__ resolves AGENT_SUPERVISOR_LANDED_MODULE_TO_PACKAGE stems and historical export names; import success is not a capability signal",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "deprecated_alias",
+      "symbol": "AGENT_SUPERVISOR_LANDED_MODULE_OWNERS",
+      "detail": "alias of AGENT_SUPERVISOR_LANDED_MODULE_TO_PACKAGE",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "deprecated_board_prefix_layout_constants",
+      "detail": "AGENT_SUPERVISOR_G0xx_* and AGENT_SUPERVISOR_EVIDENCE_CLUSTER_* spellings remain as aliases of semantic layout names",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "goal_state_legacy_labels",
+      "path": "objectives/goal_completion.py",
+      "detail": "complete/completed/done normalize to verified_complete for readers",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "resource_scheduler_aliases",
+      "path": "runtime/resource_scheduler.py",
+      "detail": "RouteAwareResourceScheduler = FormalVerificationResourceScheduler = GoalRuntimeResourceScheduler",
+      "authority": "compatibility_only"
+    },
+    {
+      "kind": "ops_script_wrappers",
+      "paths": [
+        "external/ipfs_accelerate/scripts/ops/agent_supervisor/configured_board_scheduler.py",
+        "external/ipfs_accelerate/scripts/ops/agent_supervisor/implementation_supervisor_entry.py"
+      ],
+      "detail": "thin sys.path bootstrap wrappers; domain package modules own behavior",
+      "authority": "launch_wiring_helpers"
+    },
+    {
+      "kind": "entrypoints_empty_lazy_facade_inventory",
+      "path": "entrypoints/__init__.py",
+      "detail": "ENTRYPOINT_LAZY_FACADE_EXPORTS is empty; not a configured launch surface for LGSWF",
+      "authority": "compatibility_or_future_facade"
+    },
+    {
+      "kind": "mcp_compatibility_facades",
+      "paths": [
+        "ipfs_accelerate_py/mcp/",
+        "ipfs_accelerate_py/mcplusplus_module/"
+      ],
+      "detail": "MCP unification plan treats these as compatibility facades/shims outside agent_supervisor operational authorities; not LGSWF coordination authority",
+      "authority": "out_of_scope_compatibility"
+    },
+    {
+      "kind": "legacy_markdown_board_bootstrap",
+      "detail": "source_binding.bootstrap_task_source = legacy-markdown-pending-plan-revision-r1; accepted PlanRevisionStore projection supersedes after LGSWF-009",
+      "authority": "bootstrap_projection_only"
+    }
+  ],
+  "supporting_operational_surfaces": {
+    "control": {
+      "paths": [
+        "ipfs_accelerate_py/agent_supervisor/control/control_plane.py",
+        "ipfs_accelerate_py/agent_supervisor/control/control_contracts.py",
+        "ipfs_accelerate_py/agent_supervisor/control/execution_permit.py",
+        "ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py"
+      ],
+      "role": "transport-neutral control ops and permits; not the configured-board implementation loop"
+    },
+    "validation": {
+      "paths": [
+        "ipfs_accelerate_py/agent_supervisor/validation/proposal_validation.py",
+        "ipfs_accelerate_py/agent_supervisor/validation/validation_commands.py",
+        "ipfs_accelerate_py/agent_supervisor/validation/validation_runtime.py",
+        "ipfs_accelerate_py/agent_supervisor/validation/validation_scheduler.py"
+      ],
+      "role": "pre/post merge deterministic gates used by ImplementationDaemon",
+      "configured_launch_wiring": "wired_via_daemon"
+    },
+    "authoritative_completion": {
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/authoritative_completion.py",
+      "role": "separates merge landing from board acceptance; completion_authoritative cannot be self-asserted on ImplementationReceipt"
+    }
+  },
+  "product_gate_summary": {
+    "present_qualification": "no-go for continuous multi-supervisor fabric operation; bounded bootstrap inventories only",
+    "library_exists_but_not_configured_board_wired": [
+      "PlanRevisionStore",
+      "LeaseCoordinator",
+      "ResourceScheduler class acquire path",
+      "TaskConflictGraph",
+      "ProofScheduler",
+      "entrypoints LaunchPlan facades",
+      "agent_supervisor/semantic_state package (absent at checked head)"
+    ],
+    "configured_board_actually_uses": [
+      "markdown taskboard + task identity helpers",
+      "implementation supervisor/daemon loops",
+      "filesystem task and resource claim locks",
+      "worktree isolation",
+      "event_log append/repair",
+      "MergeQueue directory landing",
+      "validation command gates",
+      "RescuePlanner + SupervisorWatchdog knobs",
+      "ordered provider environment"
+    ],
+    "mutation_admission_gate": "LGSWF-009 verified canonical roots and accepted PlanRevision r1"
+  },
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-003 is a read-only inventory of accelerator operational sources under raw-source-required bootstrap bindings; no datasets proof obligations are selected for this task",
+    "limitations": [
+      "canonical semantic-state root unavailable at bootstrap",
+      "formal proof against symbol/capsule graphs cannot be current without LGSWF-009 roots",
+      "simulated or model-claimed proof is non-authoritative"
+    ]
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/inventory/accelerator-authority.json"
+    ],
+    "status": "artifact_is_strict_json_object",
+    "authoritative_runner": "sealed supervisor validation environment"
+  },
+  "completion_authoritative": false,
+  "limitations": [
+    "Inventory is exact-tree raw-source observation at ea11293b; later superproject pin content is not current authority",
+    "No agent_supervisor/semantic_state package exists at the checked head",
+    "Configured-board wiring was determined from configured_board_scheduler, multi_supervisor_runner, implementation_supervisor_entry, implementation_supervisor, and implementation_daemon source, not from a live process dump",
+    "MCP compatibility facades are recorded only to prevent confusion with operational authorities"
+  ]
+}
