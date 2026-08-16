@@ -419,7 +419,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-007 Remove datasets-to-accelerator semantic authority inversions
 
 - Stable task ID: LGSWF-007
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
