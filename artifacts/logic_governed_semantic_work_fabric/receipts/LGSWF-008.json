@@ -18,7 +18,7 @@
   ],
   "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
   "bundle": "lgswf/lgswf-g100/lgswf-008",
-  "observed_at": "2026-08-16T18:00:00Z",
+  "observed_at": "2026-08-16T20:30:00Z",
   "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
   "read_scope": [
     "checked source at ea11293bb996f052d620eae989f5377a956764b1",
@@ -27,6 +27,7 @@
     "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
     "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
     "artifacts/logic_governed_semantic_work_fabric/baseline/semantic-scan-bootstrap-failures.json",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json",
     "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
     "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
     "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
@@ -75,9 +76,11 @@
     "intervening_name_status_sha256": "7cd8665ebf0a06a0d9eef7f6452fdd754774c16425f716696378f4f30a6f4d2c",
     "later_code_is_current_authority": false,
     "later_semantic_state_package_policy": "candidate_evidence_only_do_not_scaffold",
+    "selective_port_policy": "port only reviewed compatible reference contracts via admitted tasks; reject wholesale copy of intervening trees",
     "sibling_datasets_bound": true,
     "sibling_datasets_path": "external/ipfs_datasets",
     "nested_datasets_pin_authority": false,
+    "nested_datasets_pin_candidate": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
     "source_resolver": {
       "surface": "configured_board_scheduler.source_resolver",
       "pythonpath_roots": [
@@ -87,7 +90,13 @@
       "repairs": [
         "bootstrap-launch-r1-module-path"
       ],
-      "provider_environment_unchanged": true
+      "provider_environment_unchanged": true,
+      "applied_at": "process_start_after_provider_env_merge"
+    },
+    "provider_route_repair": {
+      "incident": "bootstrap-launch-r0-provider-contract",
+      "required_route": "grok_cli/grok-4.5 -> codex/gpt-5.6-terra medium primary_quota_exhausted",
+      "historical_rewrite_allowed": false
     },
     "pcce_r5_incident_digest": "sha256:28aedd7072735fd539ed4dc4ad9387242a02b0372626a42f36a695c2ce9e9b61",
     "pcce_failure_modes_repaired": [
@@ -129,7 +138,7 @@
         "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/test_lgswf_bootstrap_runtime.py",
         "required": true,
         "status": "declared_for_authoritative_runner",
-        "producer_note": "bootstrap runtime tests cover sibling datasets binding, intervening-commit disposition, source-resolver PYTHONPATH, and the three PCCE fail-closed guards; authoritative sealed validation PATH/HOME is supervisor-owned"
+        "producer_note": "bootstrap runtime tests cover sibling datasets binding, intervening-commit disposition, source-resolver PYTHONPATH, validation PYTHONPATH binding, and the three PCCE fail-closed guards; authoritative sealed validation PATH/HOME is supervisor-owned"
       }
     ]
   },
@@ -162,6 +171,7 @@
     "Does not scaffold agent_supervisor/semantic_state as current authority",
     "Does not admit intervening 485edc08/PCCE trees as checked operational authority",
     "Does not publish canonical datasets semantic roots (LGSWF-009)",
-    "PCCE historical claims/leases/fences/worktrees remain non-reusable"
+    "PCCE historical claims/leases/fences/worktrees remain non-reusable",
+    "production_provider_cli / legacy_landed_provider_cli remain outside this task write scope; fail-closed guards live on the admitted integration and daemon surfaces"
   ]
 }
