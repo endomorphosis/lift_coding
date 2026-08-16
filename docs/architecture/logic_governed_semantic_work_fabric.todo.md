@@ -245,7 +245,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-004 Audit package DAG, compatibility facades, and predecessor incidents
 
 - Stable task ID: LGSWF-004
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
