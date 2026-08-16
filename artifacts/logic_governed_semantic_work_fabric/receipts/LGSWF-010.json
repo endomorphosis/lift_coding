@@ -1,0 +1,231 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-010",
+  "title": "Define SupervisorWorldSnapshot@1 reference-only contracts",
+  "track": "lgswf-g200-implementation",
+  "priority": "P0",
+  "attempt": 3,
+  "stage": "implementation",
+  "objective_id": "LGSWF-010",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G200",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-009"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g200/lgswf-010",
+  "observed_at": "2026-08-16T23:45:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-010",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-009.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+    "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+    "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+    "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json": true
+  },
+  "objective_summary": "Defined SupervisorWorldSnapshot@1 as a content-addressed accelerator-owned operational overlay under agent_supervisor.core. The contract references separately verified semantic, plan, objective, claim, resource, capability, merge, policy, completion, gap, epoch, fence, and event authorities by identity and closed freshness state only, embeds none of the prohibited payloads, and fails closed on scheduling-key disagreement.",
+  "findings_digest": {
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "interface": "SupervisorWorldSnapshot@1",
+    "module": "ipfs_accelerate_py.agent_supervisor.core.world_snapshot_contracts",
+    "symbol": "SupervisorWorldSnapshot",
+    "schema": "ipfs_accelerate_py/agent-supervisor/supervisor-world-snapshot@1",
+    "contract_version": 1,
+    "component_count": 25,
+    "required_component_keys": [
+      "repository",
+      "tree",
+      "datasets_repository_state",
+      "semantic_state_root",
+      "symbol_root",
+      "capsule_root",
+      "environment_root",
+      "contract_root",
+      "proof_root",
+      "plan_root",
+      "plan_revision",
+      "objective_graph",
+      "goal_population",
+      "subgoal_population",
+      "task_population",
+      "claims",
+      "resources",
+      "capabilities",
+      "merge_queue",
+      "completion_evidence",
+      "unresolved_gaps",
+      "active_policies",
+      "event_cursor",
+      "coordination_epoch",
+      "fencing_epoch"
+    ],
+    "component_freshness_states": [
+      "current",
+      "stale",
+      "unavailable",
+      "inconsistent",
+      "quarantined"
+    ],
+    "scheduling_agreement_keys": [
+      "repository",
+      "tree",
+      "plan_revision",
+      "task_population",
+      "semantic_state_root",
+      "active_policies"
+    ],
+    "prohibited_payload_classes": [
+      "raw source",
+      "prompts",
+      "credentials",
+      "model replies",
+      "mutable local paths",
+      "provider payloads"
+    ],
+    "optional_typed_roots_may_be_unavailable": [
+      "symbol_root",
+      "capsule_root",
+      "environment_root",
+      "contract_root",
+      "proof_root"
+    ],
+    "reference_only": true,
+    "embeds_authority_bodies": false,
+    "imports_runtime_builder": false,
+    "imports_datasets_semantic_packages": false,
+    "prior_attempt_defect": "expected_output_ignored_or_unstaged for world_snapshot_contracts.py and test_world_snapshot_contracts.py because submodule .gitignore bare 'core' rule excluded agent_supervisor/core trees",
+    "repair_round": 1,
+    "ignore_repair": "anchored core-dump patterns to /core and /core.* so declared core package outputs are not gitignored"
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "interface-freeze@1",
+    "SupervisorWorldSnapshot@1",
+    "SemanticStateRoot@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1"
+  ],
+  "symbols_changed": [
+    "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py#SupervisorWorldSnapshot",
+    "WorldComponentRef",
+    "WorldSchedulingAgreementKeys",
+    "ComponentFreshness",
+    "AuthorityDomain"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "authoritative sealed validation PATH is /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin; interpreter target /usr/bin/python3.12; private HOME per command"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-010 lands reference-only contract types; task binding records verified_empty proof selection with no formal obligations",
+    "limitations": [
+      "no datasets formal proof obligations selected for this contract surface",
+      "model-claimed proof is non-authoritative",
+      "runtime assembly of snapshots is owned by LGSWF-011"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_operational_contract_addition",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "provisional_note": "attempt-bound provisional semantic root is supervisor-owned; this receipt does not publish canonical datasets state",
+    "canonical_refresh_required": true,
+    "reason": "new accelerator-owned contract module under agent_supervisor.core; datasets semantic truth is referenced, not redefined"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_artifact_paths",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots from LGSWF-009",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "upward_package_imports_accepted_as_authority": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_new_modules": false,
+    "expected_outputs_unstaged": false
+  },
+  "acceptance_criteria": {
+    "content_addressed_reference_only_overlay_defined": true,
+    "references_required_authorities": true,
+    "embeds_no_prohibited_payloads": true,
+    "closed_freshness_vocabulary": true,
+    "scheduling_agreement_keys_fail_closed": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "SupervisorWorldSnapshot@1": "interface_frozen_implementation_deferred by LGSWF-005",
+      "world_snapshot_contracts.py": "absent",
+      "test_world_snapshot_contracts.py": "absent",
+      "receipt": "absent"
+    },
+    "after": {
+      "SupervisorWorldSnapshot@1": "landed library contract under agent_supervisor.core",
+      "world_snapshot_contracts.py": "present with SupervisorWorldSnapshot, WorldComponentRef, WorldSchedulingAgreementKeys",
+      "test_world_snapshot_contracts.py": "present with reference-only, prohibited-payload, and scheduling fail-closed coverage",
+      "receipt": "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json",
+      "runtime_assembly": "deferred to LGSWF-011"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-010",
+  "result_identity": "urn:lgswf:receipt:LGSWF-010@supervisor-world-snapshot-contracts-v1"
+}
