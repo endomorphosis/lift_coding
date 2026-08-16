@@ -1,0 +1,103 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.revision-comparison@1",
+  "observed_at": "2026-08-16T01:02:03Z",
+  "remote_note": "Remote comparisons use locally known refs; no fetch was performed during this planning run.",
+  "implementation_authority": {
+    "root": {
+      "branch": "chore/fmt-check-main",
+      "commit": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
+      "tree": "db6c28fdc119fab6cd6c109412c5d1ccda02c0c6",
+      "dirty": true
+    },
+    "accelerator": {
+      "path": "external/ipfs_accelerate",
+      "branch": "fix/implementation-auto-rescue-20260809",
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "superproject_gitlink": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "tracked_modified_count": 38,
+      "untracked_count": 134,
+      "tracked_binary_diff_sha256": "ecdecc645909c91fc46cfda6605391cb6e02d912ba367ebe7530dc5adcb3b58c",
+      "ordered_untracked_path_list_sha256": "e4e0b630f236b0d8c77fa60d033e7c2c1d3bb102511ffe5fcc68ba5ed32e8cfc",
+      "overlay_policy": "preserved in operator checkout; inventory and disposition required before selective port; never copied wholesale"
+    },
+    "datasets": {
+      "path": "external/ipfs_datasets",
+      "branch": "main",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "superproject_gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tracked_modified_count": 2,
+      "untracked_count": 29,
+      "tracked_binary_diff_sha256": "5494ce7f87ef0b9bcc4a70fc05340381e89757adecd21b185d944588dcfa998f",
+      "ordered_untracked_path_list_sha256": "db108b8a45f1321be2d4242e4f5ae1808459c8bde5bb38e7b9ec17501df6a8b2",
+      "overlay_policy": "preserved in operator checkout; inventory and disposition required before selective port; never copied wholesale"
+    }
+  },
+  "control_checkout": {
+    "path": ".worktrees/logic-governed-semantic-work-fabric-control",
+    "branch": "codex/logic-governed-semantic-work-fabric",
+    "bootstrap_commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+    "accelerator_gitlink": "ea11293bb996f052d620eae989f5377a956764b1",
+    "datasets_gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "purpose": "clean sealed control checkout; not a claim that dirty overlay content is irrelevant or accepted"
+  },
+  "ranges": [
+    {
+      "repository": "accelerator",
+      "range": "ea11293bb996f052d620eae989f5377a956764b1..485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "commit_count": 1245,
+      "commit_list_sha256": "363105f61ca05cea44bdb1bcf0829ab88bdbd626ca486390acc0ba25b5b7dd62",
+      "name_status_sha256": "7cd8665ebf0a06a0d9eef7f6452fdd754774c16425f716696378f4f30a6f4d2c",
+      "classification": "intervening candidate implementations; not checked authority"
+    },
+    {
+      "repository": "accelerator",
+      "range": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84..0837254e910221c17b3c8ac8a2a233658de976f1",
+      "commit_count": 6,
+      "commit_list_sha256": "99a05f16955373abdead91bd618f6b746b0391a3302312050fb06b1fce3bddff",
+      "name_status_sha256": "ca6a901e452a6029db725e012fc8d1f20c26d50632f926f8c13f71a6d32bb318",
+      "classification": "PCCE runtime repairs; historical candidate evidence only"
+    },
+    {
+      "repository": "accelerator",
+      "range": "ea11293bb996f052d620eae989f5377a956764b1..0837254e910221c17b3c8ac8a2a233658de976f1",
+      "commit_count": 1251,
+      "commit_list_sha256": "182412a501b4f5fc3f3e4569815d2d3dfeed7c6ace4f92215403c53b22862264",
+      "name_status_sha256": "fa89783d8210254a05ac4d171a244b806e99bd68aeaf9e1f922d4b352188d2d6",
+      "classification": "complete checked-to-PCCE comparison"
+    },
+    {
+      "repository": "datasets",
+      "range": "a2f5400b7cb89c8481819379a1b7b9959fe81d45..ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "commit_count": 568,
+      "commit_list_sha256": "b3c82fefe6d12c1cc9dfbfcdcb87004664ff5a2716657361b1ce7c864301304c",
+      "name_status_sha256": "ffe921af780d2dbfc6b29d5d02fa79943f8d1fa70e4403ea43c92a31f1673233",
+      "classification": "gap between accelerator nested dependency pin and checked sibling authority"
+    },
+    {
+      "repository": "datasets",
+      "range": "ac82107e246b30e35a2bbdcf75e01370d22350c6..7f0fe2bbad3c70928234c6e2312ee3182fd7681f",
+      "commit_count": 96,
+      "commit_list_sha256": "e7f03b39578f511b1c00437c14d9223b83c52c8ddeff2a76c0ce5cbf97411db0",
+      "name_status_sha256": "22de5d8908de21823958e922ac88059afeb602c6b4779929fc3d3768046a42c6",
+      "classification": "later origin/main including IPS, AAE, and logic-platform canonicalization; unavailable at checked authority"
+    },
+    {
+      "repository": "root",
+      "range": "b6f40c05e0884867eb8557f8882cd25cb760ca2f..local-origin-main",
+      "commit_count": 175,
+      "commit_list_sha256": "085e07f5e27164f4f562ccf2de3c95292e7b68bcecde4afd0af32cc595220abe",
+      "name_status_sha256": "66352d30c98e91e75cb94ebb9181457062fc0f969f6b3fd2201e3547f07d740d",
+      "classification": "informational locally known comparison"
+    }
+  ],
+  "material_revision_consequences": [
+    "accelerator ea11293b has no agent_supervisor/semantic_state package; later 485edc08 has 20 files, so no current implementation may be assumed",
+    "accelerator configured launcher does not wire PlanRevisionStore, LeaseCoordinator, or ResourceScheduler into the daemon CLI; launch is bootstrap execution only",
+    "accelerator nested ipfs_datasets_py gitlink is deinitialized at a2f5400b; the board binds the checked sibling external/ipfs_datasets",
+    "datasets ac82107e has semantic index/state/governor but no adversarial_assurance, incremental_sealing, ProofRepository@1, or logic-platform-canonicalization surfaces",
+    "datasets counterexample and adapter paths contain upward accelerator imports that violate the intended package DAG and must be isolated",
+    "PCCE r5 completed no product task and wrote no repository change after empty source context, contradictory review maxItems, and coordination/materialized task CID alias failures"
+  ]
+}

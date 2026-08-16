@@ -1,0 +1,19 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.board-bootstrap@1",
+  "task_id": "LGSWF-000",
+  "status": "completed",
+  "result_identity": "urn:lgswf:board-seal:r000",
+  "planning_base": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": null,
+  "initial_ready_task_ids": [
+    "LGSWF-001",
+    "LGSWF-002",
+    "LGSWF-003",
+    "LGSWF-004"
+  ],
+  "initial_ready_effect_class": "read-only inventory with unique evidence outputs",
+  "mutation_gate": "LGSWF-009 verified canonical roots and accepted PlanRevision r1",
+  "historical_state_policy": "PCCE and other board claims, leases, fences, worktrees, incidents, and receipts are preserved and never reused",
+  "completion_authoritative": false
+}

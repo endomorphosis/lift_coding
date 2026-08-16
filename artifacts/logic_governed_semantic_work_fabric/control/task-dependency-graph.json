@@ -1,0 +1,428 @@
+{
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "edges": [
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-000",
+      "target": "LGSWF-001"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-000",
+      "target": "LGSWF-002"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-000",
+      "target": "LGSWF-003"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-000",
+      "target": "LGSWF-004"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-001",
+      "target": "LGSWF-005"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-002",
+      "target": "LGSWF-005"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-003",
+      "target": "LGSWF-005"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-004",
+      "target": "LGSWF-005"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-005",
+      "target": "LGSWF-006"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-005",
+      "target": "LGSWF-007"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-005",
+      "target": "LGSWF-008"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-006",
+      "target": "LGSWF-009"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-007",
+      "target": "LGSWF-009"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-008",
+      "target": "LGSWF-009"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-009",
+      "target": "LGSWF-010"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-010",
+      "target": "LGSWF-011"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-011",
+      "target": "LGSWF-014"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-014",
+      "target": "LGSWF-020"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-020",
+      "target": "LGSWF-021"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-021",
+      "target": "LGSWF-024"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-024",
+      "target": "LGSWF-030"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-030",
+      "target": "LGSWF-031"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-031",
+      "target": "LGSWF-034"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-034",
+      "target": "LGSWF-040"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-040",
+      "target": "LGSWF-041"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-041",
+      "target": "LGSWF-042"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-042",
+      "target": "LGSWF-045"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-045",
+      "target": "LGSWF-050"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-050",
+      "target": "LGSWF-051"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-051",
+      "target": "LGSWF-052"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-052",
+      "target": "LGSWF-054"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-054",
+      "target": "LGSWF-060"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-060",
+      "target": "LGSWF-061"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-061",
+      "target": "LGSWF-062"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-062",
+      "target": "LGSWF-064"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-064",
+      "target": "LGSWF-070"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-070",
+      "target": "LGSWF-071"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-071",
+      "target": "LGSWF-072"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-072",
+      "target": "LGSWF-073"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-073",
+      "target": "LGSWF-080"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-080",
+      "target": "LGSWF-081"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-081",
+      "target": "LGSWF-084"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-084",
+      "target": "LGSWF-090"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-090",
+      "target": "LGSWF-091"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-091",
+      "target": "LGSWF-094"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-094",
+      "target": "LGSWF-100"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-100",
+      "target": "LGSWF-101"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-101",
+      "target": "LGSWF-103"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-103",
+      "target": "LGSWF-110"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-110",
+      "target": "LGSWF-111"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-111",
+      "target": "LGSWF-113"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-113",
+      "target": "LGSWF-120"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-120",
+      "target": "LGSWF-121"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-120",
+      "target": "LGSWF-122"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-120",
+      "target": "LGSWF-123"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-120",
+      "target": "LGSWF-125"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-121",
+      "target": "LGSWF-126"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-122",
+      "target": "LGSWF-126"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-123",
+      "target": "LGSWF-126"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-125",
+      "target": "LGSWF-126"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-126",
+      "target": "LGSWF-130"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-130",
+      "target": "LGSWF-131"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-130",
+      "target": "LGSWF-132"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-131",
+      "target": "LGSWF-134"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-132",
+      "target": "LGSWF-134"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-134",
+      "target": "LGSWF-135"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-135",
+      "target": "LGSWF-140"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-140",
+      "target": "LGSWF-141"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-141",
+      "target": "LGSWF-142"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-142",
+      "target": "LGSWF-144"
+    },
+    {
+      "kind": "task_dependency",
+      "source": "LGSWF-144",
+      "target": "LGSWF-145"
+    }
+  ],
+  "graph_id": "sha256:2553729abf1f3dd9a9cd91c19b2b758e76d5c7f14648e9c8121646628f0c976f",
+  "nodes": [
+    "LGSWF-000",
+    "LGSWF-001",
+    "LGSWF-002",
+    "LGSWF-003",
+    "LGSWF-004",
+    "LGSWF-005",
+    "LGSWF-006",
+    "LGSWF-007",
+    "LGSWF-008",
+    "LGSWF-009",
+    "LGSWF-010",
+    "LGSWF-011",
+    "LGSWF-014",
+    "LGSWF-020",
+    "LGSWF-021",
+    "LGSWF-024",
+    "LGSWF-030",
+    "LGSWF-031",
+    "LGSWF-034",
+    "LGSWF-040",
+    "LGSWF-041",
+    "LGSWF-042",
+    "LGSWF-045",
+    "LGSWF-050",
+    "LGSWF-051",
+    "LGSWF-052",
+    "LGSWF-054",
+    "LGSWF-060",
+    "LGSWF-061",
+    "LGSWF-062",
+    "LGSWF-064",
+    "LGSWF-070",
+    "LGSWF-071",
+    "LGSWF-072",
+    "LGSWF-073",
+    "LGSWF-080",
+    "LGSWF-081",
+    "LGSWF-084",
+    "LGSWF-090",
+    "LGSWF-091",
+    "LGSWF-094",
+    "LGSWF-100",
+    "LGSWF-101",
+    "LGSWF-103",
+    "LGSWF-110",
+    "LGSWF-111",
+    "LGSWF-113",
+    "LGSWF-120",
+    "LGSWF-121",
+    "LGSWF-122",
+    "LGSWF-123",
+    "LGSWF-125",
+    "LGSWF-126",
+    "LGSWF-130",
+    "LGSWF-131",
+    "LGSWF-132",
+    "LGSWF-134",
+    "LGSWF-135",
+    "LGSWF-140",
+    "LGSWF-141",
+    "LGSWF-142",
+    "LGSWF-144",
+    "LGSWF-145"
+  ],
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.dependency-graph@1"
+}
+

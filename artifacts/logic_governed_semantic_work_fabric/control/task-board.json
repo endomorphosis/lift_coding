@@ -1,0 +1,977 @@
+{
+  "accelerator_base": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "completed_task_ids": [
+    "LGSWF-000"
+  ],
+  "datasets_base": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+  "goal_count": 16,
+  "initial_ready_task_ids": [
+    "LGSWF-001",
+    "LGSWF-002",
+    "LGSWF-003",
+    "LGSWF-004"
+  ],
+  "planning_base": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "projection_id": "sha256:eadd150ef0a1527d847c9c11af4f1931e4bfbaf846f9b6b917053080c2d8787e",
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-board@1",
+  "task_count": 63,
+  "tasks": [
+    {
+      "dependencies": [],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/control/board-bootstrap.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": false,
+      "status": "completed",
+      "task_id": "LGSWF-000"
+    },
+    {
+      "dependencies": [
+        "LGSWF-000"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-001.json"
+      ],
+      "owner": "lift_coding",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-001"
+    },
+    {
+      "dependencies": [
+        "LGSWF-000"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/inventory/datasets-authority.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-002.json"
+      ],
+      "owner": "ipfs_datasets_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-002"
+    },
+    {
+      "dependencies": [
+        "LGSWF-000"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/inventory/accelerator-authority.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-003.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-003"
+    },
+    {
+      "dependencies": [
+        "LGSWF-000"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-004.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-004"
+    },
+    {
+      "dependencies": [
+        "LGSWF-001",
+        "LGSWF-002",
+        "LGSWF-003",
+        "LGSWF-004"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+        "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-005.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-005"
+    },
+    {
+      "dependencies": [
+        "LGSWF-005"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+        "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_lgswf_bootstrap.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-006.json"
+      ],
+      "owner": "ipfs_datasets_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-006"
+    },
+    {
+      "dependencies": [
+        "LGSWF-005"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/domain_adapters.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py",
+        "external/ipfs_datasets/tests/unit/logic/software_verification/test_accelerator_dependency_boundary.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-007.json"
+      ],
+      "owner": "ipfs_datasets_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-007"
+    },
+    {
+      "dependencies": [
+        "LGSWF-005"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/test/agent_supervisor/test_lgswf_bootstrap_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-008.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-008"
+    },
+    {
+      "dependencies": [
+        "LGSWF-006",
+        "LGSWF-007",
+        "LGSWF-008"
+      ],
+      "goal_id": "LGSWF-G100",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+        "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+        "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-009.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-009"
+    },
+    {
+      "dependencies": [
+        "LGSWF-009"
+      ],
+      "goal_id": "LGSWF-G200",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-010"
+    },
+    {
+      "dependencies": [
+        "LGSWF-010"
+      ],
+      "goal_id": "LGSWF-G200",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-011"
+    },
+    {
+      "dependencies": [
+        "LGSWF-011"
+      ],
+      "goal_id": "LGSWF-G200",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-b.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-014.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-014"
+    },
+    {
+      "dependencies": [
+        "LGSWF-014"
+      ],
+      "goal_id": "LGSWF-G300",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-020"
+    },
+    {
+      "dependencies": [
+        "LGSWF-020"
+      ],
+      "goal_id": "LGSWF-G300",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_provisional_acceptance.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-021.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-021"
+    },
+    {
+      "dependencies": [
+        "LGSWF-021"
+      ],
+      "goal_id": "LGSWF-G300",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-c.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-024.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-024"
+    },
+    {
+      "dependencies": [
+        "LGSWF-024"
+      ],
+      "goal_id": "LGSWF-G400",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-030"
+    },
+    {
+      "dependencies": [
+        "LGSWF-030"
+      ],
+      "goal_id": "LGSWF-G400",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-031"
+    },
+    {
+      "dependencies": [
+        "LGSWF-031"
+      ],
+      "goal_id": "LGSWF-G400",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-034.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-034"
+    },
+    {
+      "dependencies": [
+        "LGSWF-034"
+      ],
+      "goal_id": "LGSWF-G500",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-040"
+    },
+    {
+      "dependencies": [
+        "LGSWF-040"
+      ],
+      "goal_id": "LGSWF-G500",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-041"
+    },
+    {
+      "dependencies": [
+        "LGSWF-041"
+      ],
+      "goal_id": "LGSWF-G500",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-042"
+    },
+    {
+      "dependencies": [
+        "LGSWF-042"
+      ],
+      "goal_id": "LGSWF-G500",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-045.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-045"
+    },
+    {
+      "dependencies": [
+        "LGSWF-045"
+      ],
+      "goal_id": "LGSWF-G600",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-050"
+    },
+    {
+      "dependencies": [
+        "LGSWF-050"
+      ],
+      "goal_id": "LGSWF-G600",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/work_cache.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_work_cache.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-051.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-051"
+    },
+    {
+      "dependencies": [
+        "LGSWF-051"
+      ],
+      "goal_id": "LGSWF-G600",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_backpressure.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-052.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-052"
+    },
+    {
+      "dependencies": [
+        "LGSWF-052"
+      ],
+      "goal_id": "LGSWF-G600",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-f.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-054.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-054"
+    },
+    {
+      "dependencies": [
+        "LGSWF-054"
+      ],
+      "goal_id": "LGSWF-G700",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-060"
+    },
+    {
+      "dependencies": [
+        "LGSWF-060"
+      ],
+      "goal_id": "LGSWF-G700",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-061"
+    },
+    {
+      "dependencies": [
+        "LGSWF-061"
+      ],
+      "goal_id": "LGSWF-G700",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-062"
+    },
+    {
+      "dependencies": [
+        "LGSWF-062"
+      ],
+      "goal_id": "LGSWF-G700",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-064.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-064"
+    },
+    {
+      "dependencies": [
+        "LGSWF-064"
+      ],
+      "goal_id": "LGSWF-G800",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/work_packet.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_work_packet.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-070.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-070"
+    },
+    {
+      "dependencies": [
+        "LGSWF-070"
+      ],
+      "goal_id": "LGSWF-G800",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-071"
+    },
+    {
+      "dependencies": [
+        "LGSWF-071"
+      ],
+      "goal_id": "LGSWF-G800",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-072"
+    },
+    {
+      "dependencies": [
+        "LGSWF-072"
+      ],
+      "goal_id": "LGSWF-G800",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-h.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-073.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-073"
+    },
+    {
+      "dependencies": [
+        "LGSWF-073"
+      ],
+      "goal_id": "LGSWF-G900",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-080"
+    },
+    {
+      "dependencies": [
+        "LGSWF-080"
+      ],
+      "goal_id": "LGSWF-G900",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-081"
+    },
+    {
+      "dependencies": [
+        "LGSWF-081"
+      ],
+      "goal_id": "LGSWF-G900",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-i.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-084.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-084"
+    },
+    {
+      "dependencies": [
+        "LGSWF-084"
+      ],
+      "goal_id": "LGSWF-G1000",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+        "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-090"
+    },
+    {
+      "dependencies": [
+        "LGSWF-090"
+      ],
+      "goal_id": "LGSWF-G1000",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/merge_queue.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-091"
+    },
+    {
+      "dependencies": [
+        "LGSWF-091"
+      ],
+      "goal_id": "LGSWF-G1000",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-094.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-094"
+    },
+    {
+      "dependencies": [
+        "LGSWF-094"
+      ],
+      "goal_id": "LGSWF-G1100",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/convergence.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_convergence.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-100.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-100"
+    },
+    {
+      "dependencies": [
+        "LGSWF-100"
+      ],
+      "goal_id": "LGSWF-G1100",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/test/agent_supervisor/objectives/test_fabric_terminal_states.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-101.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-101"
+    },
+    {
+      "dependencies": [
+        "LGSWF-101"
+      ],
+      "goal_id": "LGSWF-G1100",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-k.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-103.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-103"
+    },
+    {
+      "dependencies": [
+        "LGSWF-103"
+      ],
+      "goal_id": "LGSWF-G1200",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/scheduling_observability.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_scheduling_observability.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-110.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-110"
+    },
+    {
+      "dependencies": [
+        "LGSWF-110"
+      ],
+      "goal_id": "LGSWF-G1200",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/supervisor_fabric.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/__init__.py",
+        "external/ipfs_accelerate/test/agent_supervisor/entrypoints/test_supervisor_fabric.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-111.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-111"
+    },
+    {
+      "dependencies": [
+        "LGSWF-111"
+      ],
+      "goal_id": "LGSWF-G1200",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-l.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-113.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-113"
+    },
+    {
+      "dependencies": [
+        "LGSWF-113"
+      ],
+      "goal_id": "LGSWF-G1300",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/fixtures.py",
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_fixture_topology.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-120.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-120"
+    },
+    {
+      "dependencies": [
+        "LGSWF-120"
+      ],
+      "goal_id": "LGSWF-G1300",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_coordination_faults.py",
+        "artifacts/logic_governed_semantic_work_fabric/qualification/coordination-faults.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-121.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-121"
+    },
+    {
+      "dependencies": [
+        "LGSWF-120"
+      ],
+      "goal_id": "LGSWF-G1300",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_resource_semantic_faults.py",
+        "artifacts/logic_governed_semantic_work_fabric/qualification/resource-semantic-faults.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-122.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-122"
+    },
+    {
+      "dependencies": [
+        "LGSWF-120"
+      ],
+      "goal_id": "LGSWF-G1300",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_adversarial_matrix.py",
+        "artifacts/logic_governed_semantic_work_fabric/qualification/adversarial-matrix.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-123.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-123"
+    },
+    {
+      "dependencies": [
+        "LGSWF-120"
+      ],
+      "goal_id": "LGSWF-G1300",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_restart_reconstruction.py",
+        "artifacts/logic_governed_semantic_work_fabric/qualification/restart-reconstruction.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-125.json"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-125"
+    },
+    {
+      "dependencies": [
+        "LGSWF-121",
+        "LGSWF-122",
+        "LGSWF-123",
+        "LGSWF-125"
+      ],
+      "goal_id": "LGSWF-G1300",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-m.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-126.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-126"
+    },
+    {
+      "dependencies": [
+        "LGSWF-126"
+      ],
+      "goal_id": "LGSWF-G1400",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/corpus.json",
+        "external/ipfs_accelerate/scripts/benchmarks/logic_governed_semantic_work_fabric.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-130.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-130"
+    },
+    {
+      "dependencies": [
+        "LGSWF-130"
+      ],
+      "goal_id": "LGSWF-G1400",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/raw/config-a.json",
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/raw/config-b.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-131.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-131"
+    },
+    {
+      "dependencies": [
+        "LGSWF-130"
+      ],
+      "goal_id": "LGSWF-G1400",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/raw/config-c.json",
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/raw/config-d.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-132.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-132"
+    },
+    {
+      "dependencies": [
+        "LGSWF-131",
+        "LGSWF-132"
+      ],
+      "goal_id": "LGSWF-G1400",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/performance-report.json",
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/resource-efficiency-report.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-134.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-134"
+    },
+    {
+      "dependencies": [
+        "LGSWF-134"
+      ],
+      "goal_id": "LGSWF-G1400",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-n.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-135.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-135"
+    },
+    {
+      "dependencies": [
+        "LGSWF-135"
+      ],
+      "goal_id": "LGSWF-G1500",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/release/manifest.json",
+        "artifacts/logic_governed_semantic_work_fabric/release/artifact-index.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-140.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-140"
+    },
+    {
+      "dependencies": [
+        "LGSWF-140"
+      ],
+      "goal_id": "LGSWF-G1500",
+      "owned_paths": [
+        "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_SECURITY.md",
+        "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_MIGRATION.md",
+        "artifacts/logic_governed_semantic_work_fabric/release/security-findings.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-141.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-141"
+    },
+    {
+      "dependencies": [
+        "LGSWF-141"
+      ],
+      "goal_id": "LGSWF-G1500",
+      "owned_paths": [
+        "scripts/validate_logic_governed_semantic_work_fabric_release.py",
+        "artifacts/logic_governed_semantic_work_fabric/release/qualification-decision.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-142.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-142"
+    },
+    {
+      "dependencies": [
+        "LGSWF-142"
+      ],
+      "goal_id": "LGSWF-G1500",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/release/final-supervisor-report.json",
+        "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_QUALIFICATION.md",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-144.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-144"
+    },
+    {
+      "dependencies": [
+        "LGSWF-144"
+      ],
+      "goal_id": "LGSWF-G1500",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-o.json",
+        "artifacts/logic_governed_semantic_work_fabric/release/release-seal.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-145.json"
+      ],
+      "owner": "cross-repository",
+      "schedulable": true,
+      "status": "todo",
+      "task_id": "LGSWF-145"
+    }
+  ],
+  "terminal_task_id": "LGSWF-145"
+}
+
