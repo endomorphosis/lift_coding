@@ -279,7 +279,7 @@ def validate() -> dict[str, Any]:
         missing_outputs = sorted(
             path
             for path in owned.get(task.task_id, set())
-            if not (REPO_ROOT / path).exists()
+            if not (REPO_ROOT / path).is_file()
         )
         if missing_outputs:
             errors.append(
