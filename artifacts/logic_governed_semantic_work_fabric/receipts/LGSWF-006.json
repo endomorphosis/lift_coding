@@ -1,0 +1,174 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-006",
+  "title": "Repair deterministic semantic scanning bootstrap defects",
+  "track": "lgswf-g100-semantic-bootstrap",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-006",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G100",
+  "owning_repository": "external/ipfs_datasets",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-005"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-006",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_datasets at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/semantic-scan-bootstrap-failures.json",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/ast_ir.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/python_frontend.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/scanner.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/identity.py"
+  ],
+  "write_scope": [
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+    "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_lgswf_bootstrap.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-006.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+    "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_lgswf_bootstrap.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-006.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+    "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_lgswf_bootstrap.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-006.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/index.py": true,
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py": true,
+    "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_lgswf_bootstrap.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-006.json": true
+  },
+  "objective_summary": "Repaired the two observed semantic-scan bootstrap defects only: (1) empty namespace derived from leading-dot module path segments when scan_repository runs without an explicit namespace; (2) ASTIRValidationError on duplicate named_argument_names aborting repository scans. Deterministic stable/version identities are retained. Public scan_repository accepts an optional namespace keyword. Checked-repository proofs are expressed as complete state roots or typed bounded no-go dispositions that never re-emit the two repaired failures.",
+  "findings_digest": {
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "canonical_semantic_state_root": null,
+    "repaired_defects": [
+      {
+        "id": "empty-namespace",
+        "baseline_error": "SemanticIndexModelError: namespace must be nonempty trimmed NFC text",
+        "root_cause": "module.split('.')[0] is empty for leading-dot path segments such as .github/**/*.py",
+        "repair": "python_analysis._resolve_namespace skips empty dotted segments and falls back to __main__; index.scan_repository forwards optional namespace"
+      },
+      {
+        "id": "duplicate-named-argument-names",
+        "baseline_error": "ASTIRValidationError: named_argument_names must not contain duplicates",
+        "root_cause": "shared AST IR CallRecord validation aborts frontend extraction for duplicate keyword bags",
+        "repair": "python_analysis._extract_python_frontend retries under first-seen ordered dedupe; residual ASTIRValidationError becomes per-file python.ast_ir_validation_error diagnostic so the repository scan continues"
+      }
+    ],
+    "out_of_scope_baseline_item": {
+      "id": "datasets-deepcopy-resource-bound",
+      "baseline": "bounded_interrupt during copy.deepcopy AST projection",
+      "disposition": "not repaired by this task; typed complete-or-bounded-no-go proof retained for datasets"
+    },
+    "identity_policy": "explicit nonempty namespace bindings are returned unchanged; derived namespaces remain deterministic NFC-trimmed nonempty text; stable_symbol_id inputs are otherwise unchanged",
+    "product_gate": "bootstrap scan defects repaired only; continuous multi-supervisor operation and non-null canonical roots remain LGSWF-009 gates"
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "semantic-index-scan-api@bootstrap",
+    "python-semantic-analysis@2"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_lgswf_bootstrap.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "bootstrap unit and bounded checked-repo proofs; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "semantic-bootstrap repair under raw-source-required bootstrap; no datasets-selected formal proof obligations apply while canonical semantic-state root is unavailable",
+    "limitations": [
+      "canonical semantic-state root unavailable until LGSWF-009",
+      "datasets full-tree deepcopy resource bound remains a typed no-go path when encountered",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "bootstrap_raw_source_semantic_index_repair",
+    "provisional_root": null,
+    "canonical_refresh_required": true,
+    "reason": "task mutates datasets semantic-index source and tests; canonical refresh required after merge where mutation occurs; root remains unavailable until later verified roots"
+  },
+  "merge": {
+    "mutation_class": "owned_source_and_receipt_paths",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-small semantic-bootstrap class",
+    "plan_tree_semantic_fence": "bootstrap exact-tree + unavailable semantic root binding",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation_outside_allowed_paths": false,
+    "duplicate_semantic_records_created": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "unrelated_defect_scope_expansion": false
+  },
+  "acceptance_criteria": {
+    "repair_empty_namespace_only": true,
+    "repair_duplicate_named_argument_only": true,
+    "retain_deterministic_identities": true,
+    "both_repos_complete_or_typed_bounded_no_go": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "required_for_source_mutation_pending_supervisor",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "scan_without_namespace": "SemanticIndexModelError namespace must be nonempty trimmed NFC text",
+      "scan_with_explicit_namespace_accelerator": "ASTIRValidationError named_argument_names must not contain duplicates",
+      "scan_datasets": "bounded_interrupt deepcopy resource policy"
+    },
+    "after": {
+      "scan_without_namespace": "derives nonempty namespace from first nonempty module segment (e.g. github for .github/...)",
+      "duplicate_named_argument_names": "ordered first-seen dedupe retry; residual per-file diagnostic; repository scan continues",
+      "datasets_resource_bound": "typed complete-or-bounded-no-go retained; not silently rewritten as success"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-006",
+  "result_identity": "urn:lgswf:receipt:LGSWF-006@bootstrap-scan-repair"
+}
