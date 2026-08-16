@@ -477,7 +477,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-008 Reconcile missing accelerator semantic-state surfaces and predecessor launch defects
 
 - Stable task ID: LGSWF-008
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
