@@ -1,0 +1,782 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.datasets-authority@1",
+  "task_id": "LGSWF-002",
+  "title": "Inventory datasets semantic authorities and absent requested surfaces",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "inspection_method": "raw-source-required exact-tree inventory against the checked datasets gitlink; plan and baseline records used only as secondary navigation; no canonical semantic-state root was fabricated",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "checked_authority": {
+    "repository": "ipfs_datasets_py",
+    "path": "external/ipfs_datasets",
+    "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "branch_observation": "main",
+    "accelerator_nested_dependency_pin": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+    "authority_class": "checked implementation authority for this board",
+    "later_revisions_policy": "later origin/main (7f0fe2bb…) and intervening commits are candidate evidence only; they are not current semantic authority",
+    "canonical_semantic_state_root": null,
+    "bootstrap_scan_status": "bounded_interrupt_no_root_emitted",
+    "bootstrap_evidence": "artifacts/logic_governed_semantic_work_fabric/baseline/semantic-scan-bootstrap-failures.json"
+  },
+  "package_direction": {
+    "root": "ipfs_datasets_py.logic",
+    "semantic_truth_boundary": "datasets owns semantic index/state/capsules/contracts/proof obligations and formalization; accelerator owns operational coordination and must reference datasets roots by type without redefining them",
+    "rules": [
+      "datasets never imports accelerator to define semantic identity",
+      "composition adapters live on the accelerator side or behind datasets-owned leaf protocols",
+      "SemanticStateRoot@1 excludes operational fields (history, selection, receipts, clocks, leases, paths)",
+      "no replacement packages may be invented for surfaces absent at the checked head"
+    ]
+  },
+  "classification_vocabulary": {
+    "present_authority": "landed package/module exists at the checked tree and is the datasets owner for that semantic concern",
+    "absent_requested_surface": "plan-requested fabric surface is not present as a package/module/interface at the checked head; must not be assumed or replaced",
+    "supporting_surface": "landed capability that supports semantic truth but is not the primary root owner for that concern",
+    "out_of_scope_homonym": "similar name exists for an unrelated product domain and is not the LGSWF fabric surface"
+  },
+  "authorities": {
+    "semantic_index": {
+      "authority_role": "repository capture, AST symbol and symbol-version identity, relationships, deltas, invalidation, explanations, and immutable root publication",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_index",
+      "primary_modules": [
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/__init__.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/scanner.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/models.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/identity.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/symbol_graph.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/delta.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/invalidation.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/explain.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/pytest_analysis.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/persistence.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/snapshot.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/watch.py"
+      ],
+      "key_symbols": [
+        "IncrementalSemanticIndex",
+        "scan_repository",
+        "diff_repository_states",
+        "calculate_invalidation",
+        "explain_symbol",
+        "explain_impact",
+        "watch_repository",
+        "RepositoryState",
+        "RepositoryStateDelta",
+        "InvalidationPlan",
+        "SymbolRecord",
+        "DependencyEdge"
+      ],
+      "interfaces_and_schemas": [
+        "ipfs-datasets.software-contracts.semantic-index@2",
+        "ipfs-datasets.software-contracts.semantic-repository-state@1",
+        "ipfs-datasets.software-contracts.semantic-repository-delta@1",
+        "ipfs-datasets.software-contracts.semantic-invalidation-plan@1",
+        "ipfs-datasets.software-contracts.semantic-symbol@2",
+        "ipfs-datasets.software-contracts.semantic-edge@1"
+      ],
+      "notes": [
+        "Public facade is side-effect-free on import; scanning requires an explicit call",
+        "Bootstrap scan of this repository was boundedly interrupted and emitted no canonical root"
+      ]
+    },
+    "semantic_state": {
+      "authority_role": "state roots and verified bundles, binding projection, capsule compilation, confidence/freshness, producer-bound raw source, environment-derived invalidation, and graph-based test/proof selection",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_state",
+      "primary_modules": [
+        "ipfs_datasets_py/logic/software_contracts/semantic_state/__init__.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_state/api.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_state/models.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_state/merkle.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_state/oracle.py"
+      ],
+      "key_symbols": [
+        "build_semantic_state",
+        "verify_semantic_state_bundle",
+        "open_semantic_state",
+        "view_semantic_state_bundle",
+        "SemanticStateRoot",
+        "SemanticStateBundle",
+        "SemanticStateView",
+        "VerifiedSemanticStateView",
+        "SemanticStateProducer"
+      ],
+      "interfaces_and_schemas": [
+        "SemanticStateProducer@1",
+        "SemanticStateView@1",
+        "SemanticStateBlockReader@1",
+        "ipfs-datasets.software-contracts.semantic-state-api@1",
+        "ipfs-datasets.software-contracts.semantic-state@1",
+        "ipfs-datasets.software-contracts.semantic-state-root@1"
+      ],
+      "semantic_state_root_fields": [
+        "repository_id",
+        "producer",
+        "semantic_state_schema",
+        "merkle_compiler_version",
+        "capsule_schema",
+        "capsule_compiler_version",
+        "symbol_fact_index_cid",
+        "artifact_fact_index_cid",
+        "semantic_link_index_cid",
+        "symbol_node_index_cid",
+        "capsule_index_cid",
+        "environment_binding_set_cid",
+        "analysis_limitation_index_cid",
+        "root_cid"
+      ],
+      "semantic_state_root_exclusions": {
+        "statement": "SemanticStateRoot@1 references its own symbol/artifact/link/node/capsule/environment-binding/limitation roots; it does not currently contain global contract or proof-obligation roots",
+        "excluded_operational_fields_examples": [
+          "previous_root",
+          "history",
+          "selection",
+          "test_selection",
+          "proof_selection",
+          "receipt",
+          "invalidation_plan",
+          "timestamp",
+          "lease",
+          "local_path"
+        ]
+      }
+    },
+    "capsules": {
+      "authority_role": "deterministic semantic capsule compilation bound to symbol facts and relevant environment bindings",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+      "key_symbols": [
+        "compile_semantic_capsule",
+        "compile_semantic_capsules",
+        "verify_capsule_compile_result",
+        "SemanticCapsule",
+        "CapsuleCompileResult"
+      ],
+      "interfaces_and_schemas": [
+        "SemanticCapsuleCompiler@1",
+        "ipfs-datasets.software-contracts.semantic-capsule@1"
+      ],
+      "notes": [
+        "Capsule bodies remain datasets-owned; accelerator SemanticWorkBinding records reference capsules by identity"
+      ]
+    },
+    "freshness": {
+      "authority_role": "capsule freshness assessment separate from immutable capsule payloads",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_state/freshness.py",
+      "key_symbols": [
+        "assess_capsule_freshness",
+        "CapsuleFreshness",
+        "FreshnessState",
+        "AdmissionDecision"
+      ],
+      "interfaces_and_schemas": [
+        "CapsuleFreshness@1",
+        "ipfs-datasets.software-contracts.semantic-capsule-freshness@1"
+      ],
+      "admission_rules": [
+        "only fresh exact capsules may substitute as exact_substitute",
+        "only fresh conservative capsules with visible caveats may substitute as conservative_substitute_with_caveats",
+        "stale/heuristic/opaque/unknown/invalid capsules require raw source"
+      ]
+    },
+    "bindings": {
+      "authority_role": "environment binding set construction, relevant binding projection, and binding deltas",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+      "key_symbols": [
+        "build_environment_binding_set",
+        "relevant_binding_projection",
+        "EnvironmentBinding",
+        "EnvironmentBindingSet",
+        "RelevantBindingProjection",
+        "SemanticBindingDelta",
+        "BindingKind",
+        "BindingScope"
+      ],
+      "interfaces_and_schemas": [
+        "ipfs-datasets.software-contracts.semantic-environment-binding@1",
+        "ipfs-datasets.software-contracts.semantic-environment-binding-set@1",
+        "ipfs-datasets.software-contracts.semantic-relevant-binding-projection@1",
+        "ipfs-datasets.software-contracts.semantic-binding-delta@1"
+      ],
+      "notes": [
+        "Capsule compilation must consume the projection produced here and must not rediscover binding scope"
+      ]
+    },
+    "producer_bound_source": {
+      "authority_role": "exact producer-bound raw-source admission through sealed snapshot/tree-bound views",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_state/source.py",
+      "key_symbols": [
+        "read_required_source",
+        "VerifiedSourceEvidence",
+        "SourceAdmissionError"
+      ],
+      "interfaces_and_schemas": [
+        "ProducerBoundSource@1",
+        "ipfs-datasets.software-contracts.semantic-producer-bound-source@1",
+        "ipfs-datasets.software-contracts.semantic-verified-source-evidence@1"
+      ]
+    },
+    "contracts": {
+      "authority_role": "reviewed software contract IR and registry identity for callable/data/effect/resource facts",
+      "status": "present",
+      "primary_paths": [
+        "ipfs_datasets_py/logic/software_contracts/contracts.py",
+        "ipfs_datasets_py/logic/software_contracts/registry.py",
+        "ipfs_datasets_py/logic/software_contracts/content.py"
+      ],
+      "key_symbols": [
+        "CallableContract",
+        "ContractDocument",
+        "ContractFinding",
+        "ContractRegistry",
+        "SOFTWARE_CONTRACT_SCHEMA",
+        "REGISTRY_SCHEMA",
+        "BoundedPredicate",
+        "EffectContract",
+        "ResourceContract"
+      ],
+      "interfaces_and_schemas": [
+        "ipfs-datasets.software-contracts.software-contract@1.0.0",
+        "ipfs-datasets.software-contracts.software-contract-descriptor@1",
+        "ipfs-datasets.software-contracts.contract-registry@1"
+      ],
+      "notes": [
+        "Reviewed contract registries retain artifact-kind-specific roots rather than living inside SemanticStateRoot@1",
+        "Content identity uses the software-contract CID profile from content.py"
+      ]
+    },
+    "invalidation": {
+      "authority_role": "bounded invalidation obligations for repository and semantic-state deltas; never rewrites callers or proofs",
+      "status": "present",
+      "families": [
+        {
+          "family": "semantic_index_invalidation",
+          "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_index/invalidation.py",
+          "key_symbols": [
+            "calculate_invalidation",
+            "InvalidationPlan",
+            "InvalidationObligation"
+          ],
+          "role": "edge-backed invalidation over RepositoryState deltas"
+        },
+        {
+          "family": "semantic_state_invalidation",
+          "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_state/invalidation.py",
+          "key_symbols": [
+            "extend_semantic_invalidation",
+            "build_bindings_for_indexes",
+            "SemanticInvalidationReason",
+            "SemanticInvalidationRule",
+            "SemanticRemediation"
+          ],
+          "interfaces_and_schemas": [
+            "ipfs-datasets.software-contracts.semantic-invalidation-obligation@1",
+            "ipfs-datasets.software-contracts.semantic-invalidation-plan@1"
+          ],
+          "role": "environment-derived and root-diff invalidation over SemanticStateRoot pairs"
+        }
+      ]
+    },
+    "proof_selection": {
+      "authority_role": "graph-based selection of affected tests and proof obligations from pure semantic evidence",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_state/test_selection.py",
+      "supporting_path": "ipfs_datasets_py/logic/software_contracts/semantic_state/oracle.py",
+      "key_symbols": [
+        "select_tests_and_proofs",
+        "compare_test_selection_oracle",
+        "TestSelection",
+        "SelectionPolicy",
+        "SelectionRule",
+        "SelectionFallbackReason"
+      ],
+      "interfaces_and_schemas": [
+        "TestSelection@1",
+        "ProofSelection@1",
+        "ipfs-datasets.software-contracts.semantic-test-selection@1",
+        "ipfs-datasets.software-contracts.semantic-selection-policy@1",
+        "ipfs-datasets.software-contracts.semantic-test-oracle-comparison@1"
+      ],
+      "notes": [
+        "Selection is derived evidence and is deliberately excluded from SemanticStateRoot durable fields",
+        "For this inventory task no datasets formal proof obligations are selected (verified empty selection)"
+      ]
+    },
+    "verification": {
+      "authority_role": "formal program contracts, VC generation, obligation graphs, proof plans, typed proof/counterexample evidence, and verification results",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_verification",
+      "primary_modules": [
+        "ipfs_datasets_py/logic/software_verification/contracts.py",
+        "ipfs_datasets_py/logic/software_verification/program.py",
+        "ipfs_datasets_py/logic/software_verification/vc.py",
+        "ipfs_datasets_py/logic/software_verification/pipeline.py",
+        "ipfs_datasets_py/logic/software_verification/receipts.py",
+        "ipfs_datasets_py/logic/software_verification/ir.py",
+        "ipfs_datasets_py/logic/software_verification/counterexamples/",
+        "ipfs_datasets_py/logic/software_verification/tactician/proof_graph.py",
+        "ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py",
+        "ipfs_datasets_py/logic/software_verification/tactician/proof_holes.py",
+        "ipfs_datasets_py/logic/software_verification/tactician/contracts.py"
+      ],
+      "key_symbols": [
+        "ProgramContract",
+        "ProgramIR",
+        "VerificationConditionGenerator",
+        "SourceToVerificationPipeline",
+        "ProofObligationGraph",
+        "BackwardProofObligationGraph",
+        "LogicTranslationReceipt",
+        "GoalDirectedProofPlanRanker"
+      ],
+      "interfaces_and_schemas": [
+        "VerificationConditionGenerator@1",
+        "SourceToVerificationPipeline@1",
+        "ProofObligationGraph@1",
+        "BackwardProofObligationGraph@1",
+        "LogicTranslationReceipt@1",
+        "GoalDirectedProofPlanRanker@1",
+        "program-contract/v1",
+        "verification-condition/v1",
+        "verification-condition-set/v1"
+      ],
+      "notes": [
+        "VC/proof-graph/obligation collections retain artifact-kind-specific roots, not SemanticStateRoot fields",
+        "Accelerator proof_scheduler and formal_verification_cache are consumers, not semantic truth owners"
+      ]
+    },
+    "verification_api": {
+      "authority_role": "high-level semantic proof/receipt consumer API; explicitly not a supervisor-control authority",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/verification_api.py",
+      "key_symbols": [
+        "LogicVerificationAPI@1",
+        "VerificationAPI@2",
+        "CanonicalLogicDiscovery@1",
+        "LogicVerificationProviderRoleClosure@1",
+        "ExecutableProviderMatrix@1",
+        "GoalTacticianAPI@1",
+        "VerifiedReceiptDispatch@2",
+        "STABLE_OPERATIONS"
+      ],
+      "interfaces_and_schemas": [
+        "LogicVerificationAPI@1",
+        "VerificationAPI@2",
+        "CanonicalLogicDiscovery@1",
+        "LogicVerificationProviderRoleClosure@1",
+        "ExecutableProviderMatrix@1",
+        "GoalTacticianAPI@1",
+        "VerifiedReceiptDispatch@2",
+        "logic-verification-response/v1"
+      ],
+      "authority_boundary": "consumer API for discovery/compile/check/monitor/portfolio/counterexample/receipt surfaces; not plan, task, or daemon control authority"
+    },
+    "governor": {
+      "authority_role": "context coverage/sufficiency, omission diagnosis, expansion, calibration, trusted decisions, quarantine, and rule proposals",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/software_contracts/semantic_governor",
+      "primary_modules": [
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/__init__.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/base.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/coverage.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/omission.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/expansion.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/calibration.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/rules.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/untrusted_input.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/audit_contracts.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/calibration_contracts.py",
+        "ipfs_datasets_py/logic/software_contracts/semantic_governor/policy_contracts.py"
+      ],
+      "key_symbols": [
+        "build_context_coverage_manifest",
+        "evaluate_context_sufficiency",
+        "diagnose_omission",
+        "plan_context_expansion",
+        "update_calibration",
+        "propose_rule_change",
+        "detect_instruction_like_content",
+        "apply_trusted_decision",
+        "merge_calibration_profiles",
+        "validate_rule_proposal"
+      ],
+      "interfaces_and_schemas": [
+        "SemanticGovernorPublicApi@1",
+        "ipfs-datasets.software-contracts.semantic-governor-public-api@1",
+        "CONTEXT_COVERAGE_MANIFEST_INTERFACE",
+        "CONTEXT_SUFFICIENCY_CLAIM_INTERFACE",
+        "CONTEXT_EXPANSION_PLAN_INTERFACE",
+        "OMISSION_EVIDENCE_INTERFACE"
+      ],
+      "notes": [
+        "Empirical calibration may change routing/audit frequency only; it never upgrades formal proof classification to exact",
+        "Rule proposals use a typed allowlisted DSL and cannot disable full-suite fallback"
+      ]
+    },
+    "formalization": {
+      "authority_role": "domain-neutral formalization compiler, views, samples, and cross-view links",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/formalization",
+      "primary_modules": [
+        "ipfs_datasets_py/logic/formalization/__init__.py",
+        "ipfs_datasets_py/logic/formalization/compiler.py",
+        "ipfs_datasets_py/logic/formalization/views.py",
+        "ipfs_datasets_py/logic/formalization/samples.py",
+        "ipfs_datasets_py/logic/formalization/artifacts_v3.py",
+        "ipfs_datasets_py/logic/formalization/constraint_contracts.py",
+        "ipfs_datasets_py/logic/formalization/advisor.py"
+      ],
+      "key_symbols": [
+        "FormalizationCompiler",
+        "FormalizationArtifact",
+        "FormalizationView",
+        "ViewRegistry",
+        "FormalFormula",
+        "FormalSymbol",
+        "CrossViewLink",
+        "FormalizationSample"
+      ],
+      "notes": [
+        "Package-root exports are limited to reviewed deterministic contracts; learned advisors remain out of the package-root API until reviewed"
+      ]
+    },
+    "backends": {
+      "authority_role": "side-effect-free proof-backend discovery and bounded execution adapters",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/backends",
+      "primary_modules": [
+        "ipfs_datasets_py/logic/backends/registry.py",
+        "ipfs_datasets_py/logic/backends/provider.py",
+        "ipfs_datasets_py/logic/backends/portfolio.py",
+        "ipfs_datasets_py/logic/backends/process.py",
+        "ipfs_datasets_py/logic/backends/smt/",
+        "ipfs_datasets_py/logic/backends/z3/",
+        "ipfs_datasets_py/logic/backends/cvc5/",
+        "ipfs_datasets_py/logic/backends/atp/",
+        "ipfs_datasets_py/logic/backends/kernel/",
+        "ipfs_datasets_py/logic/backends/protocol/",
+        "ipfs_datasets_py/logic/backends/tla/",
+        "ipfs_datasets_py/logic/backends/datalog/",
+        "ipfs_datasets_py/logic/backends/hyperproperties/",
+        "ipfs_datasets_py/logic/backends/installers/"
+      ],
+      "key_symbols": [
+        "ProofBackend",
+        "BackendCapabilities",
+        "BackendRequest",
+        "CompiledBackendRequest",
+        "BACKEND_ADAPTER_VERSION",
+        "SoftwareVerificationSMTCompiler"
+      ],
+      "interfaces_and_schemas": [
+        "proof-backend-adapter/v1"
+      ],
+      "notes": [
+        "Registration never imports a solver or probes the environment; availability is checked only on explicit is_available/run",
+        "Backend presence is not a claim that sealed validation PATH can execute every prover"
+      ]
+    },
+    "families": {
+      "authority_role": "canonical, side-effect-free logic-family taxonomy and provider capability descriptors",
+      "status": "present",
+      "primary_path": "ipfs_datasets_py/logic/families",
+      "primary_modules": [
+        "ipfs_datasets_py/logic/families/registry.py",
+        "ipfs_datasets_py/logic/families/registry_v3.py",
+        "ipfs_datasets_py/logic/families/models.py",
+        "ipfs_datasets_py/logic/families/profiles.py",
+        "ipfs_datasets_py/logic/families/profile_catalog_v3.py",
+        "ipfs_datasets_py/logic/families/providers.py",
+        "ipfs_datasets_py/logic/families/provider_matrix_v2.py",
+        "ipfs_datasets_py/logic/families/translations.py",
+        "ipfs_datasets_py/logic/families/namespaces.py",
+        "ipfs_datasets_py/logic/families/aliases.py"
+      ],
+      "key_symbols": [
+        "LogicFamilyRegistry@2",
+        "DEFAULT_REGISTRY",
+        "FOUNDATION_FAMILY_IDS",
+        "PLANNED_EXTENSION_FAMILY_IDS",
+        "DECLARATION_ONLY_FAMILY_IDS",
+        "LogicFamilyDescriptor",
+        "ProviderCapabilityDescriptor"
+      ],
+      "interfaces_and_schemas": [
+        "LogicFamilyRegistry@2",
+        "REGISTRY_VERSION 2.0.0"
+      ],
+      "foundation_family_ids": [
+        "authorization",
+        "concurrency",
+        "cryptographic_protocol",
+        "datalog",
+        "dcec",
+        "deontic",
+        "event_calculus",
+        "first_order",
+        "frame_logic",
+        "higher_order",
+        "horn_chc",
+        "hyperproperty",
+        "modal",
+        "mu_calculus",
+        "program",
+        "propositional",
+        "refinement",
+        "separation_logic",
+        "tdfol",
+        "temporal",
+        "transition_system"
+      ],
+      "notes": [
+        "Registry import does not load backend registries, installers, or process runners"
+      ]
+    }
+  },
+  "absent_requested_surfaces": [
+    {
+      "surface": "adversarial_assurance",
+      "status": "absent_at_checked_head",
+      "searched_roots": [
+        "ipfs_datasets_py/logic/",
+        "ipfs_datasets_py/logic/software_contracts/",
+        "ipfs_datasets_py/logic/software_verification/"
+      ],
+      "evidence": "no package, module, or interface named adversarial_assurance / AdversarialAssurance under datasets logic semantic authorities at ac82107e",
+      "policy": "do not invent a replacement; Epic A must bind a separately admitted revision that contains the surface or emit a qualification no-go",
+      "homonym_note": {
+        "path_examples": [
+          "scripts/ops/uspto/validate_v2_release.py",
+          "tests/security/test_uspto_v2_adversarial_assurance.py",
+          "data/release/uspto_submission_assurance/v2_receipt.schema.json"
+        ],
+        "classification": "out_of_scope_homonym",
+        "detail": "USPTO submission-assurance adversarial suite is a patent-release gate, not the LGSWF fabric adversarial-assurance semantic surface"
+      }
+    },
+    {
+      "surface": "incremental_sealing",
+      "status": "absent_at_checked_head",
+      "aliases_checked": [
+        "incremental_sealing",
+        "incremental_seal",
+        "IncrementalSeal",
+        "proof sealing"
+      ],
+      "searched_roots": [
+        "ipfs_datasets_py/logic/",
+        "ipfs_datasets_py/logic/software_contracts/",
+        "ipfs_datasets_py/logic/software_verification/"
+      ],
+      "evidence": "no incremental proof-sealing package/module/interface is present at ac82107e; sealed plan pre-merge incremental seal step therefore cannot be assumed",
+      "policy": "do not invent a replacement; later origin/main content remains candidate evidence only"
+    },
+    {
+      "surface": "ProofRepository@1",
+      "status": "absent_at_checked_head",
+      "searched_roots": [
+        "ipfs_datasets_py/logic/",
+        "ipfs_datasets_py/logic/software_verification/",
+        "ipfs_datasets_py/logic/common/"
+      ],
+      "evidence": "no ProofRepository@1 interface constant or owning module is present at the checked head",
+      "related_present_surfaces": [
+        "LogicTranslationReceipt@1",
+        "ProofObligationGraph@1",
+        "ipfs_datasets_py/logic/common/duckdb_proof_store.py (coordination/store helpers, not ProofRepository@1)"
+      ],
+      "policy": "do not invent a replacement or promote duckdb proof stores to ProofRepository@1"
+    },
+    {
+      "surface": "logic_platform_canonicalization",
+      "status": "absent_at_checked_head",
+      "aliases_checked": [
+        "logic-platform-canonicalization",
+        "logic_platform_canonicalization",
+        "logic platform canonicalization"
+      ],
+      "searched_roots": [
+        "ipfs_datasets_py/logic/"
+      ],
+      "evidence": "later origin/main candidate range is classified as including IPS/AAE/logic-platform canonicalization, but those surfaces are unavailable at checked authority ac82107e",
+      "candidate_evidence_only": "ac82107e246b30e35a2bbdcf75e01370d22350c6..7f0fe2bbad3c70928234c6e2312ee3182fd7681f",
+      "policy": "later code is candidate evidence only; not current authority"
+    }
+  ],
+  "presence_matrix": [
+    {
+      "surface": "semantic_index",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index"
+    },
+    {
+      "surface": "semantic_state",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state"
+    },
+    {
+      "surface": "capsules",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py"
+    },
+    {
+      "surface": "freshness",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/freshness.py"
+    },
+    {
+      "surface": "bindings",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py"
+    },
+    {
+      "surface": "contracts",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/contracts.py"
+    },
+    {
+      "surface": "registry",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/registry.py"
+    },
+    {
+      "surface": "invalidation",
+      "status": "present",
+      "path": "semantic_index/invalidation.py + semantic_state/invalidation.py"
+    },
+    {
+      "surface": "proof_selection",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/test_selection.py"
+    },
+    {
+      "surface": "verification",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_verification"
+    },
+    {
+      "surface": "verification_api",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/verification_api.py"
+    },
+    {
+      "surface": "governor",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_governor"
+    },
+    {
+      "surface": "formalization",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/formalization"
+    },
+    {
+      "surface": "backends",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/backends"
+    },
+    {
+      "surface": "families",
+      "status": "present",
+      "path": "ipfs_datasets_py/logic/families"
+    },
+    {
+      "surface": "adversarial_assurance",
+      "status": "absent_at_checked_head"
+    },
+    {
+      "surface": "incremental_sealing",
+      "status": "absent_at_checked_head"
+    },
+    {
+      "surface": "ProofRepository@1",
+      "status": "absent_at_checked_head"
+    },
+    {
+      "surface": "logic_platform_canonicalization",
+      "status": "absent_at_checked_head"
+    }
+  ],
+  "supporting_surfaces": {
+    "content_identity": {
+      "path": "ipfs_datasets_py/logic/software_contracts/content.py",
+      "role": "canonical DAG-JSON bytes and CIDv1 for software-contract and semantic-state identity"
+    },
+    "ast_and_frontends": {
+      "paths": [
+        "ipfs_datasets_py/logic/software_contracts/ast_ir.py",
+        "ipfs_datasets_py/logic/software_contracts/python_frontend.py",
+        "ipfs_datasets_py/logic/software_contracts/typescript_frontend.py",
+        "ipfs_datasets_py/logic/software_contracts/syntax_bridge.py"
+      ],
+      "role": "frontend/AST IR support for software contracts; not independent fabric roots"
+    },
+    "ir_core": {
+      "path": "ipfs_datasets_py/logic/ir_core",
+      "role": "shared IR identity, claims, evidence, and schema registry used by verification and backends"
+    },
+    "cli_navigation": {
+      "path": "ipfs_datasets_py/cli/semantic_index_cli.py",
+      "role": "operator CLI over semantic_index; secondary navigation only"
+    }
+  },
+  "bootstrap_and_root_status": {
+    "canonical_semantic_state_root": null,
+    "base_semantic_state_root_label": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+    "scan_attempts_summary": [
+      {
+        "repository": "external/ipfs_accelerate",
+        "revision": "ea11293bb996f052d620eae989f5377a956764b1",
+        "result": "failed",
+        "error_type": "SemanticIndexModelError"
+      },
+      {
+        "repository": "external/ipfs_accelerate",
+        "revision": "ea11293bb996f052d620eae989f5377a956764b1",
+        "result": "failed",
+        "error_type": "ASTIRValidationError"
+      },
+      {
+        "repository": "external/ipfs_datasets",
+        "revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "result": "bounded_interrupt",
+        "reason": "deepcopy AST projection resource bound; no root emitted"
+      }
+    ],
+    "dispatch_policy": "LGSWF-001 through LGSWF-008 may use exact-tree raw-source bootstrap bindings; later mutations fail closed until LGSWF-009 verifies non-null canonical roots and accepts PlanRevision r1"
+  },
+  "proof_selection_for_this_task": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-002 is a read-only inventory of datasets semantic sources under raw-source-required bootstrap bindings; no datasets formal proof obligations are selected while the canonical semantic-state root remains unavailable",
+    "limitations": [
+      "canonical semantic-state root is null until LGSWF-009",
+      "formal proof against symbol/capsule graphs cannot be current without verified roots",
+      "simulated or model-claimed proof is non-authoritative",
+      "adversarial_assurance and incremental_sealing are absent and cannot supply selected obligations"
+    ]
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/inventory/datasets-authority.json"
+    ],
+    "status": "artifact_is_strict_json_object",
+    "authoritative_runner": "sealed supervisor validation environment with PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin and interpreter /usr/bin/python3.12"
+  },
+  "completion_authoritative": false,
+  "limitations": [
+    "Inventory is exact-tree raw-source observation at ac82107e; later origin/main content is not current authority",
+    "No verified canonical semantic-state root exists at bootstrap; inventory does not fabricate one",
+    "Presence of packages is not a claim that a full repository scan succeeds under sealed resource bounds",
+    "USPTO adversarial_assurance homonyms are recorded only to prevent confusion with the absent fabric surface",
+    "Backend and prover modules are inventoried for authority mapping; sealed validation PATH may lack external provers"
+  ],
+  "result_identity": "urn:lgswf:inventory:datasets-authority:LGSWF-002@checked-ac82107e"
+}
