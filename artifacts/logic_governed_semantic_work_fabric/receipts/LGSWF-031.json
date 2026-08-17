@@ -1,0 +1,226 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-031",
+  "title": "Extend the dedicated conflict graph and fixed-point scheduling metrics",
+  "track": "lgswf-g400-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-031",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G400",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-030"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g400/lgswf-031",
+  "observed_at": "2026-08-17T22:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-031",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+    "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+    "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+    "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py": true,
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json": true
+  },
+  "objective_summary": "Extended TaskConflictGraph with exact symbol/interface/schema/effect scope preference, conservative opacity fallback to repository serialization, and durable integer scheduling metrics. Landed analysis/semantic_conflicts.py#compute_semantic_conflicts which keeps dependency and conflict edge families separate, prefers exact scopes as the primary authority independent of lane-coloring weights, and computes fixed-point integer depth, critical path, unlock, blocking, cost, uncertainty, merge risk, bottleneck, and locality values without binary floating point in content-addressed records. Worker completion or task status alone never authorizes acceptance.",
+  "findings_digest": {
+    "interface": "SemanticConflictGraph@1",
+    "dependency_and_conflict_separate": true,
+    "primary_conflict_authority": "exact-scope-and-opacity-pair-analysis",
+    "core_graph_role": "residual-submodule-artifact-history-surfaces",
+    "scope_preference": [
+      "symbol",
+      "interface",
+      "schema",
+      "effect",
+      "file",
+      "repository"
+    ],
+    "opacity_fallback": "symbol-to-file-to-repository",
+    "scheduling_metrics": [
+      "depth",
+      "critical_path",
+      "unlock",
+      "blocking",
+      "cost",
+      "uncertainty",
+      "merge_risk",
+      "bottleneck",
+      "locality"
+    ],
+    "metric_scale_millionths": 1000000,
+    "floats_rejected": true,
+    "symbols_landed": [
+      "TaskConflictGraph",
+      "TaskSchedulingMetricRecord",
+      "compute_conflict_scheduling_metrics",
+      "compute_semantic_conflicts",
+      "compute_fixed_point_scheduling_metrics",
+      "SemanticConflictGraph",
+      "SemanticConflictEdge",
+      "DependencyEdge",
+      "TaskSchedulingMetrics",
+      "resolve_scope_precision",
+      "attach_scheduling_metrics"
+    ],
+    "module_paths": {
+      "conflict_graph": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+      "semantic_conflicts": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py"
+    },
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-034"
+    ]
+  },
+  "interfaces_referenced": [
+    "SemanticConflictGraph@1",
+    "TaskConflictGraph",
+    "SemanticWorkGraph@1",
+    "authority-map@1",
+    "task-identity@1"
+  ],
+  "symbols_changed": [
+    "TaskConflictGraph",
+    "TaskSchedulingMetricRecord",
+    "ConflictSurface",
+    "compute_conflict_scheduling_metrics",
+    "materialize_task_conflict_graph",
+    "compute_semantic_conflicts",
+    "compute_fixed_point_scheduling_metrics",
+    "SemanticConflictGraph",
+    "SemanticConflictEdge",
+    "DependencyEdge",
+    "TaskSchedulingMetrics",
+    "resolve_scope_precision",
+    "attach_scheduling_metrics"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic SemanticConflictGraph@1 and fixed-point scheduling metrics suite; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-031 lands contracts and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-031 mutates accelerator analysis/core source and tests; datasets semantic truth is referenced only; canonical refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept after merge and canonical semantic refresh"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + epic-c pass + LGSWF-030",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "self_approval": false,
+    "network_or_provider_without_packet_authority": false
+  },
+  "acceptance_evidence": {
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+    "dependency_and_conflict_separate": true,
+    "exact_scopes_preferred": true,
+    "opacity_fallback_conservative": true,
+    "integer_scheduling_metrics": true
+  },
+  "before_after": {
+    "before": {
+      "TaskConflictGraph": "lane coloring without exact-scope preference or integer scheduling metrics",
+      "compute_semantic_conflicts": "absent"
+    },
+    "after": {
+      "TaskConflictGraph": "exact symbol/interface/schema/effect preference, opacity fallback, integer scheduling_metrics",
+      "compute_semantic_conflicts": "implemented at analysis/semantic_conflicts.py",
+      "scheduling_metrics": [
+        "depth",
+        "critical_path",
+        "unlock",
+        "blocking",
+        "cost",
+        "uncertainty",
+        "merge_risk",
+        "bottleneck",
+        "locality"
+      ],
+      "downstream_unlock": [
+        "LGSWF-034"
+      ]
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "worker_completion_sufficient": false,
+    "task_status_sufficient": false,
+    "requires_declared_outputs": true,
+    "requires_current_validation": true,
+    "requires_merge_and_canonical_refresh_on_mutation": true,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only",
+    "producer_disposition": "implementation_complete_pending_supervisor_acceptance"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-031",
+  "result_identity": "urn:lgswf:receipt:LGSWF-031@semantic-conflict-graph-v1"
+}
