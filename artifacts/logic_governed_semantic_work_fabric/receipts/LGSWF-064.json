@@ -1,0 +1,300 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-064",
+  "title": "Qualify Epic G multi-supervisor coordination",
+  "track": "lgswf-g700-epic-gate",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-064",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G700",
+  "owning_repository": "cross-repository",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-062"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g700/lgswf-064",
+  "observed_at": "2026-08-17T23:59:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_datasets at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-b.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-c.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-f.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-054.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+    "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py"
+  ],
+  "write_scope": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-064.json"
+  ],
+  "changed_paths": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-064.json"
+  ],
+  "expected_outputs": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-064.json"
+  ],
+  "outputs_present": {
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-064.json": true
+  },
+  "objective_summary": "Qualified Epic G (LGSWF-G700) multi-supervisor coordination by verifying that at-least-once process delivery cannot create duplicate accepted effects under LogicalAcceptanceLedger five-field keys, that partition and coordination surfaces never invent hidden in-memory cross-partition dependencies, and that stale or partitioned authorities fail closed through fenced shard ownership, later-epoch failover, steal gates, and rejection of worker-completion-alone. Recorded non-authoritative SupervisorCapabilities@1 observations, FabricCoordinationShard@1 one-writer/proposal-only peers, SupervisorPartitioning@1 explicit edges and governed steal, verified empty formal proof selection, and gate pass that unblocks daemon packets (LGSWF-070) while continuous multi-supervisor operation remains no-go.",
+  "findings_digest": {
+    "epic_id": "LGSWF-G700",
+    "epic_label": "G — multi-supervisor coordination",
+    "epic_g_disposition": "pass",
+    "producing_tasks": [
+      "LGSWF-060",
+      "LGSWF-061",
+      "LGSWF-062"
+    ],
+    "interfaces": [
+      "SupervisorFabric@1",
+      "SupervisorCapabilities@1",
+      "FabricCoordinationShard@1",
+      "SupervisorPartitioning@1"
+    ],
+    "process_at_least_once_yields_exactly_once_logical_acceptance": {
+      "logical_acceptance_key_fields": [
+        "task",
+        "plan",
+        "tree",
+        "semantic_root",
+        "idempotency_key"
+      ],
+      "at_least_once_process_delivery": true,
+      "exactly_once_logical_acceptance": true,
+      "identical_replay_returns_sealed_receipt": true,
+      "conflicting_result_fails_closed": true,
+      "worker_completion_alone_insufficient": true,
+      "duplicate_accepted_effects_prevented": true
+    },
+    "hidden_in_memory_dependencies_absent": {
+      "partition_dimensions": [
+        "semantic",
+        "repository",
+        "goal",
+        "resource",
+        "provider",
+        "worktree",
+        "merge",
+        "duration"
+      ],
+      "cross_partition_edges_explicit_only": true,
+      "implicit_hidden_edges_never_invented": true,
+      "coordination_shard_state_durable": true,
+      "capability_advertisements_not_authority": true
+    },
+    "stale_partitioned_authorities_fail_closed": {
+      "one_fenced_writer_per_mutable_shard": true,
+      "peers_are_proposal_only": true,
+      "later_epoch_failover": true,
+      "stale_coordinator_commits_rejected": true,
+      "stale_or_forged_fence_identity_rejected": true,
+      "steal_eligible_states": [
+        "virgin",
+        "expired",
+        "dead",
+        "transferable"
+      ],
+      "steal_requires_verified_current_checkpoint": true,
+      "steal_requires_later_fence": true,
+      "active_leases_never_preempted": true
+    },
+    "capabilities_are_non_authoritative_observations": {
+      "observation_dimensions": [
+        "identity",
+        "scope",
+        "revision",
+        "epoch",
+        "stages",
+        "resources",
+        "providers",
+        "provers",
+        "worktrees",
+        "merge",
+        "persistence",
+        "load",
+        "health",
+        "heartbeat",
+        "expiry"
+      ],
+      "capability_based_roles": [
+        "snapshot_reader",
+        "proposer",
+        "claimer",
+        "evidence_publisher",
+        "fenced_writer",
+        "coordinator",
+        "peer"
+      ],
+      "observations_non_authoritative": true,
+      "roles_are_eligibility_not_grants": true,
+      "advertisements_never_grant_authority": true
+    },
+    "no_binary_floats": {
+      "floats_rejected_from_identity": true
+    },
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "checked_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_canonical_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "continuous_multi_supervisor_operation": "no-go",
+    "downstream_unlock": [
+      "LGSWF-070"
+    ]
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "SupervisorFabric@1",
+    "SupervisorCapabilities@1",
+    "FabricCoordinationShard@1",
+    "SupervisorPartitioning@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1"
+  ],
+  "symbols_changed": [
+    "epic-g gate disposition",
+    "LGSWF-064 qualification receipt"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "epic-g gate object must be strict JSON; authoritative sealed validation PATH/HOME is supervisor-owned"
+      },
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+        "required": false,
+        "status": "supporting_evidence_for_authoritative_runner",
+        "producer_note": "LGSWF-060 hermetic SupervisorCapabilities@1 non-authoritative observation suite; not the sole admission command for LGSWF-064"
+      },
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+        "required": false,
+        "status": "supporting_evidence_for_authoritative_runner",
+        "producer_note": "LGSWF-061 hermetic FabricCoordinationShard@1 one-writer/failover/stale-commit suite; not the sole admission command for LGSWF-064"
+      },
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+        "required": false,
+        "status": "supporting_evidence_for_authoritative_runner",
+        "producer_note": "LGSWF-062 hermetic partition/steal/exactly-once acceptance suite; not the sole admission command for LGSWF-064"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic G qualification records verified empty formal proof selection; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "epic_gate_qualification_only",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "canonical_refresh_required": false,
+    "reason": "LGSWF-064 mutates only gate and receipt artifacts; no product source or datasets semantic truth mutation occurs"
+  },
+  "merge": {
+    "mutation_class": "artifact_paths_only",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium epic-gate class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + epic-f pass + LGSWF-060/061/062 receipts",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "duplicate_logical_acceptance": false,
+    "implicit_cross_partition_edges": false,
+    "stale_coordinator_commit_accepted": false,
+    "capability_advertisement_treated_as_authority": false
+  },
+  "acceptance_criteria": {
+    "process_at_least_once_cannot_create_duplicate_accepted_effects": true,
+    "hidden_in_memory_dependencies_absent": true,
+    "stale_partitioned_authorities_fail_closed": true,
+    "producing_tasks_evidenced": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+    "daemon_packets_and_checkpoints_unblocked": "LGSWF-070"
+  },
+  "before_after": {
+    "before": {
+      "epic_g": "unqualified; LGSWF-060/061/062 outputs present as producing evidence only",
+      "daemon_packet_admission": "blocked on LGSWF-064",
+      "multi_supervisor_coordination_gate": null
+    },
+    "after": {
+      "epic_g": "pass recorded at artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+      "daemon_packet_admission": "unblocked for dependency-ready LGSWF-070",
+      "multi_supervisor_coordination_gate": "urn:lgswf:gate:epic-g@lgswf-064-pass",
+      "continuous_multi_supervisor_operation": "no-go"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "worker_completion_sufficient": false,
+    "task_status_sufficient": false,
+    "requires_declared_outputs": true,
+    "requires_current_validation": true,
+    "requires_merge_and_canonical_refresh_on_mutation": true,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only",
+    "producer_disposition": "implementation_complete_pending_supervisor_acceptance"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-064",
+  "result_identity": "urn:lgswf:receipt:LGSWF-064@epic-g-pass"
+}
