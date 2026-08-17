@@ -767,7 +767,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-020 Implement SemanticWorkBinding@1 and explicit goal completion contracts
 
 - Stable task ID: LGSWF-020
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
