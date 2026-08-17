@@ -18,7 +18,7 @@
   ],
   "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
   "bundle": "lgswf/lgswf-g600/lgswf-051",
-  "observed_at": "2026-08-17T18:00:00Z",
+  "observed_at": "2026-08-17T20:15:00Z",
   "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
   "read_scope": [
     "checked source at ea11293bb996f052d620eae989f5377a956764b1",
@@ -77,6 +77,7 @@
       "WorkObservation.from_receipt",
       "build_work_cache",
       "normalize_work_kind",
+      "normalize_estimate_dimension",
       "WORK_ARTIFACT_KINDS",
       "ESTIMATE_DIMENSIONS"
     ],
@@ -113,7 +114,9 @@
       "collapses_concurrent_identical_misses": true,
       "cache_hit_skips_producer": true,
       "unrelated_keys_remain_parallel": true,
-      "duplicate_computation_prevented": true
+      "duplicate_computation_prevented": true,
+      "producer_error_allows_retry": true,
+      "follower_timeout_bounded": true
     },
     "locality_placement": {
       "exact_key_reuse_score": 100,
@@ -135,13 +138,7 @@
       "LGSWF-052",
       "LGSWF-054"
     ],
-    "continuous_multi_supervisor_operation": "no-go",
-    "retry_budget_repair": {
-      "repair_task_id": "LGSWF-148",
-      "source_task_id": "LGSWF-051",
-      "failure_kind": "validation",
-      "root_cause": "declared WorkCache outputs and hermetic validation suite were absent after prior validation-budget exhaustion; repair lands complete WorkCache@1 implementation, tests, and receipt"
-    }
+    "continuous_multi_supervisor_operation": "no-go"
   },
   "interfaces_referenced": [
     "WorkCache@1",
@@ -183,7 +180,7 @@
         "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_work_cache.py",
         "required": true,
         "status": "declared_for_authoritative_runner",
-        "producer_note": "hermetic WorkCache@1 suite covering immutable observations, separate predictions, receipt-derived median/max/latest estimates, single-flight collapse, locality placement, all reusable kinds, float rejection, and invalidation; authoritative sealed validation PATH/HOME is supervisor-owned"
+        "producer_note": "hermetic WorkCache@1 suite covering immutable observations, separate predictions, receipt-derived median/max/latest estimates, even-sample integer midpoint median, single-flight collapse/error-retry/timeout, locality placement, all reusable kinds, float rejection, and invalidation; authoritative sealed validation PATH/HOME is supervisor-owned"
       }
     ]
   },
@@ -247,8 +244,7 @@
       "work_cache": "absent",
       "receipt_derived_estimates": "absent",
       "single_flight_work_reuse": "absent_at_fabric_work_cache_surface",
-      "locality_placement": "absent",
-      "epic_f_producing_task": "LGSWF-051 blocked after validation retry budget"
+      "locality_placement": "absent"
     },
     "after": {
       "work_cache": "WorkCache@1 on runtime/work_cache.py",
