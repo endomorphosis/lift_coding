@@ -1579,7 +1579,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-060 Advertise supervisor capabilities and capability-based roles
 
 - Stable task ID: LGSWF-060
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
