@@ -1,0 +1,260 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-100",
+  "title": "Implement the bounded global convergence loop and successful fixed point",
+  "track": "lgswf-g1100-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-100",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G1100",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-094"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g1100/lgswf-100",
+  "observed_at": "2026-08-17T23:59:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-100",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-094.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py",
+    "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+    "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/convergence.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_convergence.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-100.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/convergence.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_convergence.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-100.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/convergence.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_convergence.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-100.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/convergence.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_convergence.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-100.json": true
+  },
+  "objective_summary": "Landed GlobalConvergenceLoop@1 and FixedPointSuccess@1 as the accelerator operational composition surface that runs the bounded observe/plan/reserve/dispatch/checkpoint/verify/merge/refresh/evaluate/revise loop until every required parent/child/task/evidence/invalidation/proof/gap/tree/root/plan/claim/merge/receipt condition is current. Success requires accepted required goals and children, no mandatory ready/blocked/unresolved task, current completion evidence, no blocking invalidation/proof/critical assurance gap, matching accepted tree and semantic root, current plan, empty mutating claims, settled merge queue, verified receipts and seals, and independent fenced supervisor acceptance. Worker completion or task status alone never authorizes a successful fixed point. This surface never publishes datasets canonical roots and never self-authorizes acceptance. Hard iteration and no-progress bounds fail closed without false completion. Typed non-success terminals remain deferred to LGSWF-101.",
+  "findings_digest": {
+    "interface": "GlobalConvergenceLoop@1",
+    "related_interfaces": [
+      "FixedPointSuccess@1",
+      "ConvergencePhase@1",
+      "SemanticRefresh@1",
+      "SemanticReconciliation@1",
+      "PostAcceptanceCanonicalRefresh@1",
+      "ProvisionalSemanticBinding@1"
+    ],
+    "primary_symbol": "run_convergence_loop",
+    "module_paths": {
+      "implementation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/convergence.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/runtime/test_convergence.py",
+      "receipt": "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-100.json"
+    },
+    "core_symbols": [
+      "run_convergence_loop",
+      "evaluate_fixed_point",
+      "observe_world",
+      "plan_frontier",
+      "reserve_resources",
+      "dispatch_work",
+      "checkpoint_execution",
+      "verify_results",
+      "merge_admitted",
+      "refresh_canonical",
+      "revise_open_work",
+      "step_phase",
+      "assert_not_false_completion",
+      "canonical_json_bytes",
+      "content_digest",
+      "ConvergencePhase",
+      "ConvergenceDisposition",
+      "FixedPointCondition",
+      "ConditionEvaluation",
+      "PhaseReceipt",
+      "FixedPointDecision",
+      "ConvergenceResult"
+    ],
+    "phase_order": [
+      "observe",
+      "plan",
+      "reserve",
+      "dispatch",
+      "checkpoint",
+      "verify",
+      "merge",
+      "refresh",
+      "evaluate",
+      "revise"
+    ],
+    "fixed_point_conditions": [
+      "required_parents_accepted",
+      "required_children_accepted",
+      "no_mandatory_ready_task",
+      "no_mandatory_blocked_task",
+      "no_unresolved_mandatory_task",
+      "completion_evidence_current",
+      "no_blocking_invalidation",
+      "no_blocking_proof_gap",
+      "no_critical_assurance_gap",
+      "accepted_tree_matches",
+      "accepted_root_matches",
+      "plan_current",
+      "mutating_claims_empty",
+      "merge_queue_settled",
+      "receipts_verified",
+      "seals_verified",
+      "supervisor_acceptance_current"
+    ],
+    "hard_bounds": [
+      "max_iterations",
+      "max_no_progress_epochs"
+    ],
+    "authority_hard_offs": {
+      "authorizes_completion": false,
+      "authorizes_acceptance": false,
+      "publishes_canonical_root": false,
+      "worker_completion_alone_insufficient": true,
+      "independent_supervisor_acceptance_required": true,
+      "datasets_authority_publishes_canonical_root": true
+    },
+    "fail_closed_invariants": {
+      "worker_or_task_status_alone_never_succeeds": true,
+      "missing_supervisor_fence_blocks_fixed_point": true,
+      "no_progress_bound_without_false_completion": true,
+      "bounded_exhaustion_without_false_completion": true,
+      "binary_floats_rejected_from_identity": true,
+      "prohibited_embeddings_rejected": true,
+      "content_addressed_decisions": true
+    },
+    "floats_rejected": true,
+    "prohibited_embeddings_rejected": true,
+    "content_addressed_decisions": true,
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "checked_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "dependency_unblocked_by": "LGSWF-094",
+    "downstream_unlock": [
+      "LGSWF-101",
+      "LGSWF-103"
+    ],
+    "continuous_multi_supervisor_operation": "no-go",
+    "typed_non_success_terminals": "deferred_to_LGSWF-101"
+  },
+  "interfaces_referenced": [
+    "GlobalConvergenceLoop@1",
+    "FixedPointSuccess@1",
+    "ConvergencePhase@1",
+    "SemanticRefresh@1",
+    "SemanticReconciliation@1",
+    "authority-map@1",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback"
+  ],
+  "symbols_changed": [
+    "run_convergence_loop",
+    "evaluate_fixed_point",
+    "observe_world",
+    "plan_frontier",
+    "reserve_resources",
+    "dispatch_work",
+    "checkpoint_execution",
+    "verify_results",
+    "merge_admitted",
+    "refresh_canonical",
+    "revise_open_work",
+    "step_phase",
+    "assert_not_false_completion",
+    "canonical_json_bytes",
+    "content_digest",
+    "world_digest",
+    "ConditionEvaluation",
+    "PhaseReceipt",
+    "FixedPointDecision",
+    "ConvergenceResult",
+    "ConvergencePhase",
+    "ConvergenceDisposition",
+    "FixedPointCondition",
+    "CONVERGENCE_INTERFACE",
+    "FIXED_POINT_INTERFACE",
+    "FIXED_POINT_CONDITIONS",
+    "CONVERGENCE_PHASE_ORDER"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_convergence.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic GlobalConvergenceLoop@1 suite covering phase order, all 17 fixed-point success conditions, immediate fixed-point return, advance-to-success loop, no-progress and bounded-exhaustion without false completion, worker-completion-alone rejection, independent supervisor fence requirement, content-addressed phase/decision identities, float and prohibited-payload rejection, and authority hard-offs; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-100 lands the convergence loop surface and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative",
+      "typed non-success terminals are owned by LGSWF-101",
+      "datasets authority remains the only publisher of canonical roots"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "provisional_root_policy": "attempt-bound noncanonical worktree roots only; never published as canonical",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-100 mutates accelerator runtime source and tests; datasets semantic truth is referenced only; this surface coordinates fixed-point evaluation without publishing datasets roots"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "pre_merge_gate": "required_for_mutation_paths",
+    "post_acceptance_canonical_refresh": "required_after_admitted_merge"
+  },
+  "completion_decision": {
+    "worker_completion_alone_sufficient": false,
+    "task_status_alone_sufficient": false,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "requires_current_validation": true,
+    "requires_current_proof_selection": true,
+    "requires_declared_outputs_at_recorded_identities": true,
+    "fixed_point_success_does_not_self_authorize_acceptance": true
+  },
+  "continuous_multi_supervisor_operation": "no-go",
+  "limitations": [
+    "Continuous multi-supervisor fabric operation remains no-go pending later epics",
+    "Typed non-success terminal vocabulary is implemented by LGSWF-101",
+    "Epic K gate qualification is LGSWF-103"
+  ]
+}
