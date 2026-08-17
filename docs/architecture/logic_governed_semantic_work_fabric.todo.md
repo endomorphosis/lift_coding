@@ -1347,7 +1347,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-050 Extend ResourceScheduler with leased multidimensional hard reservations
 
 - Stable task ID: LGSWF-050
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
