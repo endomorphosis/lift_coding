@@ -999,7 +999,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-031 Extend the dedicated conflict graph and fixed-point scheduling metrics
 
 - Stable task ID: LGSWF-031
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
