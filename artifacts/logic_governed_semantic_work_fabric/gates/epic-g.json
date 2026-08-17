@@ -1,0 +1,358 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G700",
+  "epic_label": "G — multi-supervisor coordination",
+  "gate_task_id": "LGSWF-064",
+  "observed_at": "2026-08-17T23:59:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g700/lgswf-064",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-064",
+    "requires": [
+      "SupervisorCapabilities@1 advertisements remain non-authoritative observations; capability-based roles are eligibility only and never grant leases, fences, or merge authority",
+      "FabricCoordinationShard@1 admits exactly one fenced writer per mutable shard; peers are proposal-only and may read snapshots, propose, and publish immutable evidence without committing mutations",
+      "coordinator failover advances epoch and fencing token only after prior fence expiry or release; every stale or forged coordinator commit fails closed via StaleCoordinatorCommitError",
+      "SupervisorPartitioning@1 partitions work by closed semantic/repository/goal/resource/provider/worktree/merge/duration dimensions and records only explicit cross-partition edges",
+      "hidden in-memory partition dependencies are never invented; cross-partition relationships require explicit edges or declared work-item dependencies",
+      "work stealing admits only virgin/expired/dead/transferable fenced work with a verified current checkpoint and later fencing token; active leases are never preempted",
+      "at-least-once process delivery yields exactly-once logical acceptance over task/plan/tree/semantic_root/idempotency_key; identical replays return the sealed receipt; conflicting results fail closed",
+      "worker completion or task status alone never authorizes acceptance",
+      "binary floats are excluded from content-addressed capability, shard, partition, steal, and logical-acceptance identities",
+      "model proposals remain non-authoritative and never admit work"
+    ],
+    "prior_status": "Epic F open for dependency-ready work; Epic G unblocks daemon packets and checkpoints"
+  },
+  "predicates": {
+    "process_at_least_once_yields_exactly_once_logical_acceptance": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+      ],
+      "task": "LGSWF-062",
+      "interface": "SupervisorPartitioning@1",
+      "primary_symbols": [
+        "LogicalAcceptanceLedger",
+        "accept_logical_result",
+        "build_logical_acceptance_key"
+      ],
+      "logical_acceptance_key_fields": [
+        "task",
+        "plan",
+        "tree",
+        "semantic_root",
+        "idempotency_key"
+      ],
+      "at_least_once_process_delivery": true,
+      "exactly_once_logical_acceptance": true,
+      "identical_replay_returns_sealed_receipt": true,
+      "conflicting_result_fails_closed": true,
+      "worker_completion_alone_insufficient": true,
+      "duplicate_accepted_effects_prevented": true,
+      "hermetic_proofs": [
+        "test_exactly_once_logical_acceptance_over_five_field_key",
+        "test_logical_acceptance_key_identity_and_round_trip",
+        "test_supervisor_fabric_partition_steal_and_acceptance_registry",
+        "test_partition_and_acceptance_are_thread_safe"
+      ]
+    },
+    "hidden_in_memory_dependencies_absent": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+      ],
+      "tasks": [
+        "LGSWF-060",
+        "LGSWF-061",
+        "LGSWF-062"
+      ],
+      "interfaces": [
+        "SupervisorPartitioning@1",
+        "FabricCoordinationShard@1",
+        "SupervisorCapabilities@1"
+      ],
+      "partition_dimensions": [
+        "semantic",
+        "repository",
+        "goal",
+        "resource",
+        "provider",
+        "worktree",
+        "merge",
+        "duration"
+      ],
+      "cross_partition_edges_explicit_only": true,
+      "implicit_hidden_edges_never_invented": true,
+      "intra_partition_dependencies_not_promoted_to_cross_edges": true,
+      "coordination_shard_state_durable": true,
+      "process_local_dictionaries_not_authoritative_for_shard_ownership": true,
+      "capability_advertisements_not_authority": true,
+      "hermetic_proofs": [
+        "test_partition_work_by_closed_dimensions_with_explicit_cross_edges",
+        "test_partition_work_records_cross_partition_dependency_edges",
+        "test_partition_work_rejects_unknown_dependency",
+        "test_one_fenced_writer_per_mutable_shard",
+        "test_proposal_only_peers_cannot_mutate",
+        "test_observations_are_not_authority_for_coordination"
+      ]
+    },
+    "stale_partitioned_authorities_fail_closed": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+      ],
+      "tasks": [
+        "LGSWF-060",
+        "LGSWF-061",
+        "LGSWF-062"
+      ],
+      "interfaces": [
+        "FabricCoordinationShard@1",
+        "SupervisorPartitioning@1",
+        "SupervisorCapabilities@1"
+      ],
+      "one_fenced_writer_per_mutable_shard": true,
+      "peers_are_proposal_only": true,
+      "later_epoch_failover": true,
+      "stale_coordinator_commits_rejected": true,
+      "stale_or_forged_fence_identity_rejected": true,
+      "steal_eligible_states": [
+        "virgin",
+        "expired",
+        "dead",
+        "transferable"
+      ],
+      "steal_requires_verified_current_checkpoint": true,
+      "steal_requires_later_fence": true,
+      "active_leases_never_preempted": true,
+      "expired_capability_advertisements_excluded_from_role_queries": true,
+      "worker_completion_alone_insufficient": true,
+      "hermetic_proofs": [
+        "test_later_epoch_failover_rejects_stale_coordinator_commits",
+        "test_stale_fence_identity_fields_rejected",
+        "test_release_then_acquire_advances_epoch",
+        "test_concurrent_acquire_admits_one_writer",
+        "test_steal_only_eligible_fenced_work",
+        "test_exactly_once_logical_acceptance_over_five_field_key",
+        "test_freshness_heartbeat_and_expiry",
+        "test_missing_observation_dimension_fails_closed"
+      ]
+    },
+    "capabilities_are_non_authoritative_observations": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json"
+      ],
+      "task": "LGSWF-060",
+      "interface": "SupervisorCapabilities@1",
+      "fabric_interface": "SupervisorFabric@1",
+      "primary_symbol": "advertise_capabilities",
+      "observation_dimensions": [
+        "identity",
+        "scope",
+        "revision",
+        "epoch",
+        "stages",
+        "resources",
+        "providers",
+        "provers",
+        "worktrees",
+        "merge",
+        "persistence",
+        "load",
+        "health",
+        "heartbeat",
+        "expiry"
+      ],
+      "capability_based_roles": [
+        "snapshot_reader",
+        "proposer",
+        "claimer",
+        "evidence_publisher",
+        "fenced_writer",
+        "coordinator",
+        "peer"
+      ],
+      "observations_non_authoritative": true,
+      "roles_are_eligibility_not_grants": true,
+      "advertisements_never_grant_authority": true,
+      "heartbeat_and_expiry_supported": true,
+      "hermetic_proofs": [
+        "test_advertise_capabilities_covers_all_observation_dimensions",
+        "test_capability_based_roles_are_derived_and_non_authoritative",
+        "test_advertise_capabilities_rejects_authoritative_grant",
+        "test_observations_are_not_authority_for_coordination",
+        "test_supervisor_fabric_registry_and_role_queries",
+        "test_freshness_heartbeat_and_expiry"
+      ]
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-060",
+        "LGSWF-061",
+        "LGSWF-062"
+      ],
+      "result_identities": [
+        "pending:content-addressed-result:LGSWF-060",
+        "pending:content-addressed-result:LGSWF-061",
+        "pending:content-addressed-result:LGSWF-062"
+      ],
+      "receipt_identity_notes": {
+        "LGSWF-060": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance",
+        "LGSWF-061": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance",
+        "LGSWF-062": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance"
+      },
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_f_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-f.json",
+      "epic_f_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-054"
+    },
+    "no_binary_floats_in_content_addressed_material": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+      ],
+      "tasks": [
+        "LGSWF-060",
+        "LGSWF-061",
+        "LGSWF-062"
+      ],
+      "floats_rejected_from_identity": true,
+      "hermetic_proofs": [
+        "test_floats_rejected_from_capability_artifacts",
+        "test_fence_round_trip_and_integer_only_artifacts",
+        "test_floats_rejected_from_partition_and_acceptance_artifacts"
+      ]
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "SupervisorFabric@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.fabric-capability-advertisement@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "SupervisorFabric",
+      "role": "sealed multi-supervisor registry for capability advertisements, partition plans, steal receipts, and logical acceptance"
+    },
+    "SupervisorCapabilities@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.fabric-supervisor-capabilities@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "advertise_capabilities",
+      "observations_non_authoritative": true
+    },
+    "FabricCoordinationShard@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.fabric-coordination-shard@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "LeaseCoordinator",
+      "one_fenced_writer_per_mutable_shard": true,
+      "stale_coordinator_commits_rejected": true
+    },
+    "SupervisorPartitioning@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+      "schemas": [
+        "ipfs_accelerate_py.agent_supervisor.fabric-work-partition@1",
+        "ipfs_accelerate_py.agent_supervisor.fabric-work-partition-plan@1",
+        "ipfs_accelerate_py.agent_supervisor.fabric-cross-partition-edge@1",
+        "ipfs_accelerate_py.agent_supervisor.fabric-work-steal-eligibility@1",
+        "ipfs_accelerate_py.agent_supervisor.fabric-work-steal-receipt@1",
+        "ipfs_accelerate_py.agent_supervisor.fabric-logical-acceptance-key@1",
+        "ipfs_accelerate_py.agent_supervisor.fabric-logical-acceptance-receipt@1"
+      ],
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "partition_work",
+        "steal_fenced_work",
+        "accept_logical_result",
+        "LogicalAcceptanceLedger"
+      ],
+      "exactly_once_logical_acceptance": true,
+      "cross_partition_edges_explicit_only": true
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-070"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Daemon packets and checkpoints (Epic H / LGSWF-070) may schedule after LGSWF-064; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "formal datasets proof selection remains verified empty; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "LogicalAcceptanceLedger@1 provides the exactly-once logical contract surface; full durable restart reconstruction across process death is qualified later under multi-supervisor and daemon fault epic work",
+    "SupervisorCapabilities@1, FabricCoordinationShard@1, and SupervisorPartitioning@1 are multi-supervisor coordination surfaces; daemon packet lifecycle and checkpoint authority remain outside Epic G",
+    "worker completion or task status alone is never authoritative completion"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic G gate records verified empty formal proof selection at accepted trees; contract and hermetic tests plus current producing-task receipts are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-g@lgswf-064-pass"
+}
