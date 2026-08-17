@@ -1173,7 +1173,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-041 Implement auditable frontier policy, fairness, and congestion adjustments
 
 - Stable task ID: LGSWF-041
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
