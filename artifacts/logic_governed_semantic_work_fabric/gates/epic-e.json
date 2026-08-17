@@ -1,0 +1,426 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G500",
+  "epic_label": "E — safe parallel frontier",
+  "gate_task_id": "LGSWF-045",
+  "observed_at": "2026-08-17T14:30:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g500/lgswf-045",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-045",
+    "requires": [
+      "ParallelFrontier@1 enforces every readiness condition fail-closed before ready-set admission",
+      "identical snapshots and policies yield identical content-addressed frontier selections",
+      "unsafe work is rejected with typed readiness failures and selection RejectionReason codes",
+      "resource-feasible conflict-free antichain selection ranks width, then integer score total, then stable task identity",
+      "FrontierPolicy@1 scores with policy-versioned scaled-integer terms and hard-bounds fairness so starvation relief cannot dominate critical path",
+      "congestion dimensions act independently so provider pressure cannot stop CPU analysis and merge pressure defers mutation while permitting read-only work",
+      "AdaptiveFrontier@1 split/coalesce/rewire apply only to future mutable unstarted-family specs, retain started history with supersession, and preserve path/acceptance coverage",
+      "speculative adaptive work is isolated, resource-bounded, cancellable, evidence-only, and non-authoritative",
+      "model proposals remain non-authoritative and never admit work",
+      "binary floats are excluded from content-addressed frontier and policy identities"
+    ],
+    "prior_status": "Epic D open for dependency-ready work; Epic E unblocks resource-aware scheduling"
+  },
+  "predicates": {
+    "identical_snapshots_yield_identical_frontiers": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json"
+      ],
+      "tasks": [
+        "LGSWF-040",
+        "LGSWF-041",
+        "LGSWF-042"
+      ],
+      "note": "Identical task snapshots, conflict projections, resource capacity, and policy versions produce identical selected_task_ids, selection_identity digests, policy decision identities, and adaptive decision_cid values",
+      "mechanisms": [
+        "canonical JSON with sorted keys, ensure_ascii, compact separators",
+        "sha256 content digests over float-free identity material",
+        "stable task-identity final tie-break",
+        "antichain rank width then integer score total then stable task identity",
+        "policy version and weight surfaces included in decision identity"
+      ],
+      "hermetic_proofs": [
+        "test_deterministic_selection_and_identity",
+        "test_stable_tie_break_and_deterministic_identity",
+        "test_identical_snapshots_yield_identical_decisions"
+      ]
+    },
+    "unsafe_work_rejected_with_typed_reasons": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+      ],
+      "task": "LGSWF-040",
+      "interface": "ParallelFrontier@1",
+      "required_readiness_conditions": [
+        "active_plan",
+        "legal_lifecycle",
+        "predecessors",
+        "semantic_binding",
+        "capsule_or_source",
+        "contracts_obligations",
+        "scope",
+        "conflicts",
+        "resources",
+        "provider_capacity",
+        "completion_policy",
+        "quarantine",
+        "supersession",
+        "block",
+        "review",
+        "model_authority"
+      ],
+      "selection_rejection_reasons": [
+        "not_ready",
+        "conflicts_with_selected",
+        "resource_infeasible",
+        "dominated_by_search",
+        "model_proposal_non_authoritative",
+        "outside_ready_set"
+      ],
+      "fail_closed": true,
+      "model_proposals_never_admit_work": true,
+      "hermetic_proofs": [
+        "test_interface_and_required_readiness_conditions",
+        "test_each_readiness_condition_can_fail_closed",
+        "test_model_proposals_are_non_authoritative",
+        "test_predecessors_must_be_accepted",
+        "test_unbound_active_plan_fails_closed"
+      ]
+    },
+    "fairness_bounded": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json"
+      ],
+      "task": "LGSWF-041",
+      "interface": "FrontierPolicy@1",
+      "score_scale": 1000000,
+      "max_age_epochs": 100,
+      "max_fairness_boost": 1000000,
+      "cannot_dominate_critical_path": true,
+      "explicit_zero_fairness_distinct_from_missing": true,
+      "hermetic_proofs": [
+        "test_fairness_is_hard_bounded",
+        "test_explicit_zero_fairness_is_not_missing",
+        "test_completion_critical_path_unlock_and_costs"
+      ]
+    },
+    "split_coalesce_preserves_completion_coverage": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json"
+      ],
+      "task": "LGSWF-042",
+      "interface": "AdaptiveFrontier@1",
+      "plan_delta_operations": [
+        "split_unstarted_task",
+        "coalesce_unstarted_tasks",
+        "rewire_unstarted_dependency",
+        "attach_evidence",
+        "record_uncertainty"
+      ],
+      "lifecycle_rules": {
+        "mutable_targets": [
+          "proposed",
+          "admitted",
+          "ready",
+          "unstarted",
+          "blocked"
+        ],
+        "immutable_history": [
+          "claimed",
+          "running",
+          "settling",
+          "completed",
+          "accepted"
+        ],
+        "in_place_started_history_mutation": false,
+        "successors_carry_explicit_supersession": true
+      },
+      "coverage_invariants": {
+        "split_retains_paths_and_acceptance": true,
+        "coalesce_retains_union_paths_and_acceptance": true,
+        "started_history_cannot_shrink": true
+      },
+      "speculative_bounds": {
+        "isolated": true,
+        "cancellable": true,
+        "authoritative": false,
+        "effect_class": "evidence_only",
+        "authoritative_merge": false,
+        "authoritative_publication": false
+      },
+      "hermetic_proofs": [
+        "test_propose_split_improves_parallelism_without_mutating_started",
+        "test_propose_coalesce_preserves_union_coverage",
+        "test_propose_rewire_removes_false_serialization",
+        "test_speculative_items_are_cancellable_and_non_authoritative",
+        "test_split_builder_rejects_started_history_and_single_successor",
+        "test_coalesce_and_rewire_builders_are_history_safe"
+      ]
+    },
+    "conflict_free_resource_feasible_antichain": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json"
+      ],
+      "tasks": [
+        "LGSWF-040",
+        "LGSWF-041"
+      ],
+      "dependency_and_conflict_separate": true,
+      "antichain_rank": [
+        "width",
+        "integer_score_total",
+        "stable_task_identity"
+      ],
+      "search_modes": [
+        "exact",
+        "greedy_local"
+      ],
+      "default_exact_search_limit": 16,
+      "width_outranks_single_high_score_under_conflict": true,
+      "negative_resource_costs_cannot_prefer_empty_set": true,
+      "hard_resource_keys": [
+        "cpu_concurrency",
+        "ram_mib",
+        "gpu_memory_mib",
+        "disk_mib",
+        "subprocesses",
+        "worktree_slots",
+        "provider_concurrency",
+        "prover_concurrency",
+        "merge_slots",
+        "model_input_tokens",
+        "model_output_tokens",
+        "persistence_mib_per_second"
+      ],
+      "hermetic_proofs": [
+        "test_conflict_free_antichain_selected_under_resources",
+        "test_resource_capacity_limits_antichain_width",
+        "test_width_outranks_single_high_score_under_conflict",
+        "test_dependency_readiness_separate_from_conflict_selection",
+        "test_conflict_free_selection_prefers_width_under_policy_scores",
+        "test_bounded_exact_and_greedy_search_modes"
+      ]
+    },
+    "congestion_dimensions_independent": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json"
+      ],
+      "task": "LGSWF-041",
+      "congestion_dimensions": [
+        "analysis",
+        "context",
+        "model",
+        "provider",
+        "proof",
+        "prover",
+        "solver",
+        "kernel",
+        "validation",
+        "merge",
+        "persistence"
+      ],
+      "independence_rules": {
+        "provider_pressure_cannot_stop_cpu_analysis": true,
+        "proof_pressure_cannot_stop_unrelated_analysis": true,
+        "merge_pressure_defers_mutation_permits_read_only": true,
+        "speculative_blocked_under_elevated_pressure": true
+      },
+      "hermetic_proofs": [
+        "test_provider_pressure_does_not_penalize_cpu_analysis",
+        "test_merge_pressure_defers_mutation_but_not_read_only",
+        "test_proof_pressure_does_not_stop_unrelated_analysis",
+        "test_speculative_work_blocked_under_congestion"
+      ]
+    },
+    "policy_scoring_auditable": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json"
+      ],
+      "task": "LGSWF-041",
+      "scoring_terms": [
+        "completion_value",
+        "critical_path_gain",
+        "downstream_unlock_value",
+        "cache_and_worktree_locality",
+        "bounded_age_and_fairness",
+        "resource_and_model_cost",
+        "provider_pressure",
+        "conflict_and_merge_risk",
+        "semantic_uncertainty",
+        "expected_retry_cost"
+      ],
+      "score_scale": 1000000,
+      "tie_break": "stable_task_identity",
+      "model_proposals_authoritative": false,
+      "hermetic_proofs": [
+        "test_interface_constants_and_term_inventory",
+        "test_score_frontier_candidates_uses_all_terms_and_ranks_stably",
+        "test_policy_weights_and_version_are_auditable",
+        "test_receipts_are_json_safe_and_float_free"
+      ]
+    },
+    "no_binary_floats_in_content_addressed_material": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json"
+      ],
+      "tasks": [
+        "LGSWF-040",
+        "LGSWF-041"
+      ],
+      "score_scale": 1000000,
+      "floats_rejected_from_identity": true,
+      "hermetic_proofs": [
+        "test_score_uses_only_durable_integers",
+        "test_selection_receipt_is_json_safe_and_float_free",
+        "test_receipts_are_json_safe_and_float_free",
+        "test_deterministic_selection_and_identity"
+      ]
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-040",
+        "LGSWF-041",
+        "LGSWF-042"
+      ],
+      "result_identities": [
+        "urn:lgswf:receipt:LGSWF-040@parallel-frontier-v1-attempt2",
+        "urn:lgswf:receipt:LGSWF-041@frontier-policy-v1-attempt1",
+        "urn:lgswf:receipt:LGSWF-042@adaptive-frontier-v1-attempt1"
+      ],
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_d_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+      "epic_d_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-034"
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "ParallelFrontier@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/parallel-frontier@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "select_parallel_frontier",
+      "readiness_fail_closed": true
+    },
+    "FrontierPolicy@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/frontier-policy@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "apply_frontier_policy",
+      "fairness_hard_bounded": true
+    },
+    "AdaptiveFrontier@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/adaptive-frontier-decision@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "propose_adaptive_frontier_deltas",
+      "coverage_preserving": true
+    },
+    "PlanRevisionContracts@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/plan-revision@1",
+      "owner": "ipfs_accelerate_py",
+      "role": "immutable plan-delta lifecycle surface hosting AdaptiveFrontier@1 helpers"
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-050"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Resource-aware scheduling (Epic F / LGSWF-050) may schedule after LGSWF-045; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "formal datasets proof selection remains verified empty; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "ParallelFrontier@1 and FrontierPolicy@1 are pure planning leaves; they do not reserve resources, mutate worktrees, or accept tasks",
+    "resource admission, leased multidimensional hard reservations, and multi-supervisor coordination remain outside Epic E and must not be asserted complete here",
+    "worker completion or task status alone is never authoritative completion"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic E gate records verified empty formal proof selection at accepted trees; contract and hermetic tests plus current producing-task receipts are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-e@lgswf-045-pass"
+}
