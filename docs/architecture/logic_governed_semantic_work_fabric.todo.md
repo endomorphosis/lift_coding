@@ -825,7 +825,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-021 Separate task execution, verification, merge, refresh, and acceptance with provisional roots
 
 - Stable task ID: LGSWF-021
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
