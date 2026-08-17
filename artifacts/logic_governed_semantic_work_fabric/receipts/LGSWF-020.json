@@ -1,0 +1,222 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-020",
+  "title": "Implement SemanticWorkBinding@1 and explicit goal completion contracts",
+  "track": "lgswf-g300-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-020",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G300",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-014"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g300/lgswf-020",
+  "observed_at": "2026-08-17T18:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-020",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-014.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py": true,
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json": true
+  },
+  "objective_summary": "Landed SemanticWorkBinding@1 as a content-addressed accelerator reference record for goals, subgoals, and tasks. The binding names accepted plan, tree/root, symbols/artifacts, capsule/source/environment identities, conditions, effects/scopes, tests, proof obligations, assumptions, limitations, counterexamples, invalidation, completion rule, authority, and review requirements without embedding capsule bodies or duplicating datasets semantic records. Extended goal_completion with fabric-explicit completion over observable state, semantic properties, current tests/proofs, accepted children, resolved counterexamples/gaps, review, tree, and root. Task population completion and worker completion alone never authorize goal success; merge, canonical semantic refresh, and independent fenced supervisor acceptance remain mandatory.",
+  "findings_digest": {
+    "interface": "SemanticWorkBinding@1",
+    "bootstrap_fallback": "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "subject_kinds": [
+      "goal",
+      "subgoal",
+      "task"
+    ],
+    "required_reference_fields": [
+      "accepted_plan",
+      "tree_root",
+      "target_symbols_artifacts",
+      "capsule_source_environment",
+      "conditions",
+      "effects_scopes",
+      "tests",
+      "proof_obligations",
+      "assumptions",
+      "limitations",
+      "counterexamples",
+      "invalidation",
+      "completion_rule",
+      "authority",
+      "review_requirements"
+    ],
+    "prohibited_embeddings": [
+      "capsule bodies",
+      "duplicated datasets semantic records",
+      "raw source",
+      "prompts",
+      "credentials",
+      "model replies",
+      "mutable local paths",
+      "provider payloads"
+    ],
+    "fabric_completion_facets": [
+      "observable_state",
+      "semantic_properties",
+      "current_tests_proofs",
+      "accepted_children",
+      "resolved_counterexamples_gaps",
+      "review",
+      "tree",
+      "root"
+    ],
+    "completion_never_from_task_status_alone": true,
+    "completion_never_from_worker_completion_alone": true,
+    "symbols_landed": [
+      "SemanticWorkBinding",
+      "evaluate_goal_completion",
+      "evaluate_fabric_goal_completion"
+    ],
+    "module_paths": {
+      "binding": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+      "completion": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py"
+    },
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1"
+  },
+  "interfaces_referenced": [
+    "SemanticWorkBinding@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "authority-map@1",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "SemanticStateRoot@1",
+    "fabric-goal-completion@1"
+  ],
+  "symbols_changed": [
+    "SemanticWorkBinding",
+    "binding_from_task_record",
+    "evaluate_fabric_goal_completion",
+    "evaluate_goal_completion fabric path",
+    "FabricGoalCompletionDecision",
+    "REQUIRED_FABRIC_COMPLETION_FACETS"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic SemanticWorkBinding@1 and fabric goal completion suite; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-020 lands contracts and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-020 mutates accelerator planning/objectives source and tests; datasets semantic truth is referenced only; canonical refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept after merge and canonical semantic refresh"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + epic-b pass",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "undeclared_path_mutation": false
+  },
+  "acceptance_criteria": {
+    "semantic_work_binding_interface_landed": true,
+    "reference_only_no_capsule_bodies": true,
+    "goal_subgoal_task_subjects_supported": true,
+    "fabric_completion_facets_required": true,
+    "task_status_alone_insufficient": true,
+    "worker_completion_alone_insufficient": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "SemanticWorkBinding@1": "interface_frozen_implementation_deferred_to_LGSWF-020",
+      "goal_completion_fabric_facets": "absent",
+      "bootstrap_fallback_active": "SemanticWorkBinding@1-or-bootstrap-fallback"
+    },
+    "after": {
+      "SemanticWorkBinding@1": "implemented at planning/semantic_work_binding.py",
+      "goal_completion_fabric_facets": "REQUIRED_FABRIC_COMPLETION_FACETS + evaluate_fabric_goal_completion",
+      "evaluate_goal_completion": "fabric path when semantic_work_binding provided; legacy path preserved otherwise",
+      "downstream_unlock": [
+        "LGSWF-021"
+      ]
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-020",
+  "result_identity": "urn:lgswf:receipt:LGSWF-020@semantic-work-binding-v1"
+}
