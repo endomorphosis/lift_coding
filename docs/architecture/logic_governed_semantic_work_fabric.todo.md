@@ -593,7 +593,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-010 Define SupervisorWorldSnapshot@1 reference-only contracts
 
 - Stable task ID: LGSWF-010
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
