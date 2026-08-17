@@ -1,0 +1,232 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-040",
+  "title": "Implement deterministic readiness and conflict-free frontier selection",
+  "track": "lgswf-g500-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-040",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G500",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-034"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g500/lgswf-040",
+  "observed_at": "2026-08-17T23:55:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-040",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-034.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json": true
+  },
+  "objective_summary": "Landed ParallelFrontier@1 deterministic readiness and conflict-free frontier selection. Every readiness condition (active plan, legal lifecycle, predecessors, semantic binding, capsule/source fallback, contracts/obligations, scope, active-writer conflicts, resources/provider capacity, completion policy, quarantine/supersession/block/review) is enforced fail-closed before a task enters the ready set. The ready set is projected through the dedicated semantic conflict graph; a resource-feasible conflict-free antichain is selected with policy-versioned scaled-integer scoring (completion, critical-path, unlock, locality, age/fairness minus resource/model cost, provider pressure, merge risk, uncertainty, retry cost). Small frontiers use exact search; larger ones use deterministic greedy-plus-local-improvement. Stable task identity is the final tie-break. Every rejection and selection is receipted. Model proposals are accepted as non-authoritative input and never admit work or alter the selected antichain. Binary floats are excluded from content-addressed identities. Worker completion or task status alone never authorizes acceptance.",
+  "findings_digest": {
+    "interface": "ParallelFrontier@1",
+    "core_symbols": [
+      "select_parallel_frontier",
+      "evaluate_readiness",
+      "score_candidate",
+      "select_conflict_free_antichain",
+      "FrontierSelection",
+      "ReadinessDecision",
+      "CandidateScore",
+      "FrontierScoringPolicy",
+      "ReadinessCondition",
+      "RejectionReason"
+    ],
+    "readiness_conditions": [
+      "active_plan",
+      "legal_lifecycle",
+      "predecessors",
+      "semantic_binding",
+      "capsule_source_fallback",
+      "contracts_obligations",
+      "scope",
+      "conflicts",
+      "resources_provider_capacity",
+      "completion_policy",
+      "quarantine_supersession_block_review"
+    ],
+    "score_terms": [
+      "completion_value",
+      "critical_path_gain",
+      "downstream_unlock_value",
+      "cache_and_worktree_locality",
+      "bounded_age_and_fairness",
+      "resource_and_model_cost",
+      "provider_pressure",
+      "conflict_and_merge_risk",
+      "semantic_uncertainty",
+      "expected_retry_cost"
+    ],
+    "score_scale": 1000000,
+    "selection_methods": [
+      "exact",
+      "greedy_local_improvement"
+    ],
+    "default_exact_search_bound": 16,
+    "dependency_and_conflict_separate": true,
+    "model_proposals_authoritative": false,
+    "floats_rejected_from_identity": true,
+    "stable_tie_break": "task_cid then task_id",
+    "module_paths": {
+      "implementation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py"
+    },
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-041"
+    ]
+  },
+  "interfaces_referenced": [
+    "ParallelFrontier@1",
+    "SemanticConflictAnalysis@1",
+    "TaskConflictGraph",
+    "TaskSchedulingMetrics",
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1"
+  ],
+  "symbols_changed": [
+    "select_parallel_frontier",
+    "evaluate_readiness",
+    "score_candidate",
+    "select_conflict_free_antichain",
+    "FrontierSelection",
+    "ReadinessDecision",
+    "CandidateScore",
+    "FrontierScoringPolicy",
+    "FrontierRejection",
+    "ReadinessCondition",
+    "RejectionReason"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic ParallelFrontier@1 readiness, integer scoring, conflict-free resource-feasible antichain suite; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-040 lands parallel frontier planner and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_source_and_receipt_mutation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-040 mutates accelerator planning source and tests under external/ipfs_accelerate; canonical datasets semantic refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_artifact_paths",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + epic-d pass + LGSWF-034 receipt",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "model_proposal_admission": false
+  },
+  "acceptance_criteria": {
+    "every_readiness_condition_enforced": true,
+    "conflict_free_antichain_under_resources": true,
+    "deterministic_bounded_integer_scoring": true,
+    "model_proposals_non_authoritative": true,
+    "rejections_and_selections_receipted": true,
+    "no_binary_floats_in_identity": true,
+    "stable_task_identity_tie_break": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "parallel_frontier": "absent source module; only stale pycache residue if any",
+      "select_parallel_frontier": "planned symbol only",
+      "deterministic_ready_antichain": "unimplemented"
+    },
+    "after": {
+      "parallel_frontier": "landed ParallelFrontier@1 at external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+      "select_parallel_frontier": "enforces readiness, scores with scaled integers, selects conflict-free resource-feasible antichain",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+      "model_proposals_authoritative": false
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "worker_completion_sufficient": false,
+    "task_status_sufficient": false,
+    "requires_declared_outputs": true,
+    "requires_current_validation": true,
+    "requires_merge_and_canonical_refresh_on_mutation": true,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only",
+    "producer_disposition": "implementation_complete_pending_supervisor_acceptance"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-040",
+  "result_identity": "urn:lgswf:receipt:LGSWF-040@parallel-frontier-v1"
+}
