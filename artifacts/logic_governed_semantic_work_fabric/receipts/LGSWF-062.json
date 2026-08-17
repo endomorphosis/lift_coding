@@ -1,0 +1,247 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-062",
+  "title": "Partition work, govern stealing, and provide exactly-once logical acceptance",
+  "track": "lgswf-g700-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-062",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G700",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-061"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g700/lgswf-062",
+  "observed_at": "2026-08-17T12:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-062",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json": true
+  },
+  "objective_summary": "Extended SupervisorFabric@1 with WorkPartition@1 partitioning across semantic/repository/goal/resource/provider/worktree/merge/duration, explicit cross-partition edges, governed fenced work stealing limited to virgin/expired/dead/transferable state with verified checkpoints and later fencing tokens, and exactly-once logical acceptance over task/plan/tree/semantic-root/idempotency-key. Primary symbol partition_work groups work units by closed dimension coordinates while preserving dependency and shared-axis cross edges. steal_fenced_work and accept_logical_result enforce fail-closed steal and single-result acceptance. SupervisorFabric methods register_partition_plan, steal_work, and accept_result own the in-fabric registries. Worker completion or task status alone never authorizes acceptance.",
+  "findings_digest": {
+    "interface": "WorkPartition@1",
+    "fabric_interface": "SupervisorFabric@1",
+    "primary_symbol": "partition_work",
+    "module_paths": {
+      "implementation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py"
+    },
+    "core_symbols": [
+      "partition_work",
+      "PartitionCoordinates",
+      "PartitionedWorkUnit",
+      "CrossPartitionEdge",
+      "WorkPartitionPlan",
+      "evaluate_steal_eligibility",
+      "steal_fenced_work",
+      "LogicalAcceptanceKey",
+      "LogicalAcceptanceRecord",
+      "accept_logical_result",
+      "SupervisorFabric.register_partition_plan",
+      "SupervisorFabric.steal_work",
+      "SupervisorFabric.accept_result"
+    ],
+    "schemas": [
+      "ipfs_accelerate_py.agent_supervisor.fabric-work-partition@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-partitioned-work-unit@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-cross-partition-edge@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-work-partition-plan@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-work-steal-decision@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-logical-acceptance-key@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-logical-acceptance@1"
+    ],
+    "partition_dimensions": [
+      "semantic",
+      "repository",
+      "goal",
+      "resource",
+      "provider",
+      "worktree",
+      "merge",
+      "duration"
+    ],
+    "explicit_cross_edges": true,
+    "steal_eligible_states": [
+      "virgin",
+      "expired",
+      "dead",
+      "transferable"
+    ],
+    "steal_requires_later_fence": true,
+    "steal_requires_verified_checkpoint_for_non_virgin": true,
+    "exactly_once_logical_acceptance_key": [
+      "task_id",
+      "plan_revision",
+      "base_tree_root",
+      "semantic_state_root",
+      "idempotency_key"
+    ],
+    "conflicting_result_rejected": true,
+    "idempotent_same_result_reattach": true,
+    "worker_completion_alone_insufficient": true,
+    "integer_only_artifacts": true,
+    "floats_rejected": true,
+    "extension_not_replacement": true,
+    "preserved_contracts": [
+      "SupervisorFabric@1 capability observations",
+      "CapabilityAdvertisement non-authority",
+      "FabricCoordinationShard@1 fenced writers"
+    ],
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-064"
+    ],
+    "continuous_multi_supervisor_operation": "no-go"
+  },
+  "interfaces_referenced": [
+    "WorkPartition@1",
+    "SupervisorFabric@1",
+    "FabricCoordinationShard@1",
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1"
+  ],
+  "symbols_changed": [
+    "partition_work",
+    "PartitionCoordinates",
+    "PartitionedWorkUnit",
+    "CrossPartitionEdge",
+    "CrossPartitionEdgeKind",
+    "WorkPartitionPlan",
+    "StealDecision",
+    "StealOwnerState",
+    "evaluate_steal_eligibility",
+    "steal_fenced_work",
+    "LogicalAcceptanceKey",
+    "LogicalAcceptanceRecord",
+    "accept_logical_result",
+    "SupervisorFabric.register_partition_plan",
+    "SupervisorFabric.get_partition_plan",
+    "SupervisorFabric.list_partition_plans",
+    "SupervisorFabric.register_work_unit",
+    "SupervisorFabric.get_work_unit",
+    "SupervisorFabric.steal_work",
+    "SupervisorFabric.accept_result",
+    "SupervisorFabric.get_acceptance",
+    "SupervisorFabric.list_acceptances",
+    "normalize_partition_dimension",
+    "normalize_steal_owner_state",
+    "normalize_cross_edge_kind",
+    "work_partition_dimensions",
+    "steal_eligible_states",
+    "logical_acceptance_key_fields",
+    "partition_identity",
+    "WORK_PARTITION_DIMENSIONS",
+    "STEAL_ELIGIBLE_STATES",
+    "LOGICAL_ACCEPTANCE_KEY_FIELDS"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic WorkPartition@1 suite covering closed partition dimensions, explicit cross edges, steal eligibility for virgin/expired/dead/transferable only with later fence and verified checkpoint, exactly-once logical acceptance over task/plan/tree/semantic/idempotency, conflicting result rejection, worker-completion non-authority, and concurrent steal/accept; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-062 lands work partitioning, steal governance, and exactly-once acceptance runtime with hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-062 mutates accelerator runtime source and tests; datasets semantic truth is referenced only; canonical refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class with fabric hard reservation dimensions",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + LGSWF-061 receipt",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "model_proposal_admitted_as_authority": false,
+    "active_work_stolen": false,
+    "duplicate_logical_acceptance": false,
+    "worker_completion_treated_as_acceptance": false
+  },
+  "acceptance_criteria": {
+    "partition_by_semantic_repository_goal_resource_provider_worktree_merge_duration": true,
+    "explicit_cross_partition_edges": true,
+    "steal_only_eligible_fenced_work": true,
+    "exactly_once_logical_acceptance": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance_required": true,
+    "worker_completion_alone_insufficient": true
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "independent fenced supervisor acceptance is required; validation and merge admission remain supervisor-owned"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-062"
+}
