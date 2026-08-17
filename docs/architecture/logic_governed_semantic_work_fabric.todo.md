@@ -1927,7 +1927,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-072 Wire governed packets and checkpoints into existing daemon and multi-runner
 
 - Stable task ID: LGSWF-072
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
