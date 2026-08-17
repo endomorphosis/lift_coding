@@ -709,7 +709,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-014 Qualify Epic B operational world-state overlay
 
 - Stable task ID: LGSWF-014
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
