@@ -1115,7 +1115,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-040 Implement deterministic readiness and conflict-free frontier selection
 
 - Stable task ID: LGSWF-040
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
