@@ -1,0 +1,548 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G900",
+  "epic_label": "I — adaptive revision and refill",
+  "gate_task_id": "LGSWF-084",
+  "observed_at": "2026-08-17T23:59:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g900/lgswf-084",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-084",
+    "requires": [
+      "RefillProposal@1 / SemanticRefill@1 / BoundedRefillTriggerPolicy@1 emit evidence-backed refill proposals only; proposals never authorize execution, mutation, completion, or acceptance",
+      "every required refill trigger (semantic, proof, assurance, merge, failure, provider, resource, granularity, progress, steering, external_change) carries evidence, impacts, validation, uncertainty, dedupe, fallback, and review",
+      "hard amplification bounds cover successor depth, revision depth, tasks/subgoals per revision, repeated semantic keys, retries, provider calls, tokens, frequency, and no-progress epochs",
+      "idle capacity alone cannot generate work; cosmetic rewrites cannot bypass semantic-key dedupe; completion contracts cannot be weakened",
+      "claimed/running/settling/completed/accepted history remains immutable under PlanRevisionStore@1 apply and BoundedRefillTriggerPolicy@1 admission",
+      "semantically equivalent refill (exact or cosmetic semantic key) cannot multiply admitted work",
+      "PlanDoctor@1 diagnoses every required plan-health defect and emits proposal-only repairs that never mutate, activate, complete, or accept plans",
+      "PlanRevisionStore@1 enforces amplification bounds, exact/cosmetic semantic-key dedupe, and started-history preservation aligned to BoundedRefillTriggerPolicy@1 defaults",
+      "acceptance requires independent fenced supervisor verification; worker completion or task status alone never authorizes acceptance",
+      "binary floats are excluded from content-addressed refill, doctor, amplification, and revision identities",
+      "model proposals remain non-authoritative and never admit work"
+    ],
+    "prior_status": "Epic H open for dependency-ready work; Epic I unblocks closed-loop semantic refresh"
+  },
+  "predicates": {
+    "accepted_history_immutable": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "tasks": [
+        "LGSWF-080",
+        "LGSWF-081"
+      ],
+      "interfaces": [
+        "RefillProposal@1",
+        "BoundedRefillTriggerPolicy@1",
+        "PlanRevisionStore@1",
+        "PlanDoctor@1"
+      ],
+      "primary_symbols": [
+        "BoundedRefillTriggerPolicy",
+        "build_refill_proposal",
+        "admit_refill_proposal",
+        "PlanRevisionStore",
+        "PlanRevisionStoreHistoryError",
+        "PlanDoctor",
+        "_IMMUTABLE_HISTORY_LIFECYCLES"
+      ],
+      "immutable_lifecycles": [
+        "claimed",
+        "running",
+        "settling",
+        "completed",
+        "accepted"
+      ],
+      "history_mutation_rejected_on_refill_build": true,
+      "history_mutation_rejected_on_store_apply": true,
+      "history_immutability_diagnosed_by_doctor": true,
+      "allow_history_mutation_policy_constructor_fails_closed": true,
+      "started_history_preserved_on_active_revision": true,
+      "hermetic_proofs": [
+        "test_bounded_policy_rejects_idle_capacity_and_history_mutation",
+        "test_history_immutability_finding_for_started_records",
+        "test_store_enforces_amplification_bounds",
+        "test_store_dedupes_cosmetic_semantic_keys_and_preserves_history"
+      ]
+    },
+    "semantically_equivalent_refill_cannot_multiply": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "tasks": [
+        "LGSWF-080",
+        "LGSWF-081"
+      ],
+      "interfaces": [
+        "RefillProposal@1",
+        "SemanticRefill@1",
+        "BoundedRefillTriggerPolicy@1",
+        "PlanRevisionStore@1",
+        "PlanDoctor@1"
+      ],
+      "primary_symbols": [
+        "cosmetic_semantic_equivalent",
+        "admit_refill_proposal",
+        "evaluate_refill_epoch",
+        "BacklogRefinery.propose_required_trigger_suite",
+        "PlanRevisionStoreDedupeError",
+        "PlanHealthDefectKind.COSMETIC_DEDUPE"
+      ],
+      "exact_semantic_key_deduped": true,
+      "cosmetic_semantic_key_deduped": true,
+      "repeated_semantic_keys_hard_bounded": true,
+      "max_repeated_semantic_keys_default": 1,
+      "second_required_trigger_suite_suppressed": true,
+      "store_refuses_exact_and_cosmetic_rewrites": true,
+      "doctor_diagnoses_cosmetic_dedupe_defect": true,
+      "hermetic_proofs": [
+        "test_dedupe_blocks_exact_and_cosmetic_semantic_rewrites",
+        "test_backlog_refinery_coordinates_required_triggers",
+        "test_diagnoses_all_amplification_bounds_and_dedupe",
+        "test_store_dedupes_cosmetic_semantic_keys_and_preserves_history"
+      ]
+    },
+    "completion_criteria_cannot_weaken": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "tasks": [
+        "LGSWF-080",
+        "LGSWF-081"
+      ],
+      "interfaces": [
+        "BoundedRefillTriggerPolicy@1",
+        "RefillProposal@1"
+      ],
+      "primary_symbols": [
+        "BoundedRefillTriggerPolicy",
+        "RefillProposal",
+        "admit_refill_proposal"
+      ],
+      "allow_completion_weakening_constructor_fails_closed": true,
+      "proposals_never_authorize_completion": true,
+      "proposals_never_authorize_acceptance": true,
+      "proposals_never_authorize_execution": true,
+      "proposals_never_authorize_mutation": true,
+      "review_blocks_acceptance_when_required": true,
+      "worker_completion_alone_insufficient": true,
+      "task_status_alone_insufficient": true,
+      "hermetic_proofs": [
+        "test_bounded_policy_rejects_idle_capacity_and_history_mutation",
+        "test_every_required_trigger_builds_proposal_with_required_fields",
+        "test_proposal_rejects_authority_claims"
+      ]
+    },
+    "doctor_changes_remain_proposals": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "task": "LGSWF-081",
+      "interface": "PlanDoctor@1",
+      "primary_symbols": [
+        "PlanDoctor",
+        "PlanDoctorReport",
+        "PlanDoctorFinding",
+        "PlanDoctorProposal",
+        "PlanHealthDefectKind",
+        "diagnose_plan"
+      ],
+      "doctor_never_mutates_plan": true,
+      "doctor_never_activates_revision": true,
+      "doctor_never_authorizes_completion": true,
+      "doctor_never_authorizes_acceptance": true,
+      "doctor_never_authorizes_mutation": true,
+      "proposals_set_activates_revision_false": true,
+      "proposals_set_mutates_plan_false": true,
+      "pure_diagnostic_leaf": true,
+      "required_plan_health_defects": [
+        "cycle",
+        "reachability_orphan",
+        "missing_completion",
+        "missing_binding",
+        "missing_verification",
+        "hidden_serialization",
+        "excessive_serialization",
+        "unsafe_parallelism",
+        "resource_infeasibility",
+        "bottleneck",
+        "starvation",
+        "retries",
+        "stale_evidence",
+        "root_mismatch",
+        "incomplete_parent_coverage"
+      ],
+      "amplification_and_history_defects_also_diagnosed": [
+        "cosmetic_dedupe",
+        "history_immutable"
+      ],
+      "hermetic_proofs": [
+        "test_interfaces_authority_and_required_defect_vocabulary",
+        "test_healthy_plan_diagnoses_all_required_defects_without_mutation",
+        "test_diagnoses_cycle_orphan_missing_fields_and_proposes_without_activation",
+        "test_diagnoses_serialization_parallelism_resources_bottleneck_starvation",
+        "test_diagnoses_stale_evidence_root_mismatch_and_incomplete_parent_coverage",
+        "test_diagnoses_all_amplification_bounds_and_dedupe",
+        "test_history_immutability_finding_for_started_records"
+      ]
+    },
+    "evidence_backed_bounded_refill": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json"
+      ],
+      "task": "LGSWF-080",
+      "interfaces": [
+        "RefillProposal@1",
+        "SemanticRefill@1",
+        "BoundedRefillTriggerPolicy@1"
+      ],
+      "primary_symbols": [
+        "RefillProposal",
+        "RefillTriggerEvent",
+        "BoundedRefillTriggerPolicy",
+        "BacklogRefinery",
+        "build_refill_proposal",
+        "evaluate_refill_epoch",
+        "admit_refill_proposal"
+      ],
+      "required_triggers": [
+        "semantic",
+        "proof",
+        "assurance",
+        "merge",
+        "failure",
+        "provider",
+        "resource",
+        "granularity",
+        "progress",
+        "steering",
+        "external_change"
+      ],
+      "proposal_required_fields": [
+        "evidence",
+        "impacts",
+        "validation",
+        "uncertainty",
+        "dedupe",
+        "fallback",
+        "review",
+        "affected_scope",
+        "current_roots",
+        "proposed_deltas"
+      ],
+      "hard_bounds": [
+        "max_successor_depth",
+        "max_revision_depth",
+        "max_tasks_per_revision",
+        "max_subgoals_per_revision",
+        "max_repeated_semantic_keys",
+        "max_retries",
+        "max_provider_calls",
+        "max_tokens",
+        "max_frequency_per_epoch",
+        "max_no_progress_epochs",
+        "cooldown_seconds",
+        "max_open_work",
+        "min_evidence_count"
+      ],
+      "idle_capacity_alone_cannot_generate_work": true,
+      "content_addressed_proposal_identity": true,
+      "backlog_refinery_proposal_only_no_board_mutation": true,
+      "hermetic_proofs": [
+        "test_interfaces_and_required_trigger_vocabulary",
+        "test_every_required_trigger_builds_proposal_with_required_fields",
+        "test_frequency_open_work_and_depth_bounds",
+        "test_high_uncertainty_uses_fallback_and_review_paths",
+        "test_evaluate_refill_epoch_admits_full_required_suite",
+        "test_backlog_refinery_coordinates_required_triggers"
+      ]
+    },
+    "plan_revision_store_amplification_and_dedupe": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "task": "LGSWF-081",
+      "interfaces": [
+        "PlanRevisionStore@1",
+        "PlanDoctor@1",
+        "BoundedRefillTriggerPolicy@1"
+      ],
+      "primary_symbols": [
+        "PlanRevisionAmplificationBounds",
+        "PlanRevisionAmplificationObservation",
+        "PlanRevisionAmplificationState",
+        "evaluate_amplification_bounds",
+        "default_amplification_bounds",
+        "PlanRevisionStore.assert_amplification_admissible",
+        "PlanRevisionStore.check_amplification"
+      ],
+      "amplification_bounds": [
+        "max_successor_depth",
+        "max_revision_depth",
+        "max_tasks_per_revision",
+        "max_subgoals_per_revision",
+        "max_repeated_semantic_keys",
+        "max_retries",
+        "max_provider_calls",
+        "max_tokens",
+        "max_frequency_per_epoch",
+        "max_no_progress_epochs"
+      ],
+      "amplification_bounds_aligned_with_refill_policy": true,
+      "amplification_bounds_persisted": true,
+      "amplification_state_persisted": true,
+      "fail_closed_on_bound_breach": true,
+      "hermetic_proofs": [
+        "test_store_enforces_amplification_bounds",
+        "test_store_dedupes_cosmetic_semantic_keys_and_preserves_history",
+        "test_store_and_doctor_round_trip_bounds_align",
+        "test_diagnoses_all_amplification_bounds_and_dedupe"
+      ]
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-080",
+        "LGSWF-081"
+      ],
+      "result_identities": [
+        "pending:content-addressed-result:LGSWF-080",
+        "pending:content-addressed-result:LGSWF-081"
+      ],
+      "receipt_identity_notes": {
+        "LGSWF-080": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance",
+        "LGSWF-081": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance"
+      },
+      "declared_producing_outputs_present": {
+        "LGSWF-080": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+          "external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+          "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json"
+        ],
+        "LGSWF-081": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+          "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+          "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+        ]
+      },
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_h_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-h.json",
+      "epic_h_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-073"
+    },
+    "no_binary_floats_in_content_addressed_material": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "tasks": [
+        "LGSWF-080",
+        "LGSWF-081"
+      ],
+      "floats_rejected_from_identity": true,
+      "integer_only_amplification_and_bounds": true,
+      "hermetic_proofs": [
+        "test_every_required_trigger_builds_proposal_with_required_fields",
+        "test_store_and_doctor_round_trip_bounds_align"
+      ]
+    },
+    "supervisor_only_acceptance": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-073.json"
+      ],
+      "acceptance_requires_independent_fenced_supervisor": true,
+      "worker_completion_alone_insufficient": true,
+      "task_status_alone_insufficient": true,
+      "completion_authoritative_forced_false": true,
+      "refill_proposals_never_authorize_acceptance": true,
+      "doctor_proposals_never_authorize_acceptance": true
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "RefillProposal@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.refill-proposal@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "RefillProposal",
+        "RefillTriggerEvent",
+        "build_refill_proposal",
+        "admit_refill_proposal"
+      ],
+      "role": "content-addressed evidence-backed refill proposal contract; proposal-only and never authoritative for execution or acceptance",
+      "authorizes_execution": false,
+      "authorizes_completion": false,
+      "authorizes_acceptance": false,
+      "authorizes_mutation": false
+    },
+    "SemanticRefill@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.semantic-refill@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "evaluate_refill_epoch",
+        "build_trigger_suite_for_roots",
+        "cosmetic_semantic_equivalent"
+      ],
+      "role": "semantic refill epoch evaluation with exact and cosmetic key dedupe"
+    },
+    "BoundedRefillTriggerPolicy@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.bounded-refill-trigger-policy@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "BoundedRefillTriggerPolicy",
+        "default_bounded_trigger_policy",
+        "evaluate_trigger_against_policy"
+      ],
+      "role": "fail-closed hard bounds for refill amplification, frequency, open work, idle-capacity refusal, history immutability, and completion non-weakening",
+      "allow_completion_weakening": false,
+      "allow_history_mutation": false,
+      "idle_capacity_alone_cannot_generate_work": true
+    },
+    "PlanDoctor@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.plan-doctor@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "PlanDoctor",
+        "PlanDoctorReport",
+        "PlanDoctorProposal",
+        "PlanHealthDefectKind",
+        "diagnose_plan"
+      ],
+      "role": "deterministic pure diagnostic leaf that proposes plan repairs without mutation or activation",
+      "authorizes_mutation": false,
+      "authorizes_activation": false,
+      "authorizes_completion": false,
+      "authorizes_acceptance": false
+    },
+    "PlanRevisionStore@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.plan-revision-store@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "PlanRevisionStore",
+        "PlanRevisionAmplificationBounds",
+        "PlanRevisionAmplificationObservation",
+        "evaluate_amplification_bounds",
+        "PlanRevisionStoreHistoryError",
+        "PlanRevisionStoreDedupeError",
+        "PlanRevisionStoreBoundsError"
+      ],
+      "role": "durable plan revision apply surface with fail-closed amplification bounds, semantic-key dedupe, and immutable started history",
+      "started_history_immutable": true,
+      "semantic_key_dedupe": true
+    },
+    "BacklogRefinery@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.backlog-refinery@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "BacklogRefinery",
+        "propose_required_trigger_suite"
+      ],
+      "role": "coordinates required refill trigger suite into proposal-only admissions without board mutation"
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-090"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Closed-loop semantic refresh (Epic J / LGSWF-090) may schedule after LGSWF-084; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "formal datasets proof selection remains verified empty; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "RefillProposal@1, BoundedRefillTriggerPolicy@1, PlanDoctor@1, and PlanRevisionStore amplification/dedupe/history controls are the Epic I surface; closed-loop semantic refresh and continuous fabric operation remain outside Epic I",
+    "worker completion or task status alone is never authoritative completion",
+    "refill proposals and doctor proposals never authorize execution, mutation, completion, or acceptance and never substitute for independent fenced supervisor acceptance"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic I gate records verified empty formal proof selection at accepted trees; contract and hermetic tests plus current producing-task receipts are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-i.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-i.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-i@lgswf-084-pass"
+}
