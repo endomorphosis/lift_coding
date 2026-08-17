@@ -1753,7 +1753,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-064 Qualify Epic G multi-supervisor coordination
 
 - Stable task ID: LGSWF-064
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
