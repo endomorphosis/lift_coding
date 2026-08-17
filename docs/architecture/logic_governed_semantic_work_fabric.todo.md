@@ -1695,7 +1695,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-062 Partition work, govern stealing, and provide exactly-once logical acceptance
 
 - Stable task ID: LGSWF-062
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
