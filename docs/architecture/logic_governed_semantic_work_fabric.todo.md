@@ -1811,7 +1811,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-070 Extend one canonical daemon work-packet contract
 
 - Stable task ID: LGSWF-070
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
