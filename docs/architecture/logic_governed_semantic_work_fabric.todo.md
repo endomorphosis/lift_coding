@@ -941,7 +941,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-030 Compose SemanticWorkGraph@1 without collapsing edge authorities
 
 - Stable task ID: LGSWF-030
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
