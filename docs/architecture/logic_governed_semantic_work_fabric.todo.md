@@ -1985,7 +1985,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-073 Qualify Epic H daemon protocol
 
 - Stable task ID: LGSWF-073
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
