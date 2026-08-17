@@ -2275,7 +2275,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-091 Gate merge and refresh canonical semantic state after acceptance
 
 - Stable task ID: LGSWF-091
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
