@@ -883,7 +883,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-024 Qualify Epic C semantic work bindings
 
 - Stable task ID: LGSWF-024
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
