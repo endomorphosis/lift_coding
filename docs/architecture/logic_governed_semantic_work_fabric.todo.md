@@ -2043,7 +2043,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-080 Implement evidence-backed refill proposals and bounded trigger policy
 
 - Stable task ID: LGSWF-080
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
