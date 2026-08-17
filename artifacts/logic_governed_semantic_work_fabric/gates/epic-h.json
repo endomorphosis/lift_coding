@@ -1,0 +1,565 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G800",
+  "epic_label": "H — daemon packets and checkpoints",
+  "gate_task_id": "LGSWF-073",
+  "observed_at": "2026-08-17T23:59:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g800/lgswf-073",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-073",
+    "requires": [
+      "WorkPacket@1 is the single canonical daemon packet; existing implementation-daemon envelopes extend in place and never introduce a parallel packet format",
+      "WorkPacket@1 binds every required goal, plan, repository, semantic, symbol, capsule, source, contract, proof, context, scope, resource, provider, model, validation, completion, lease, fence, attempt, idempotency, checkpoint, cancellation, and output field under one content-addressed schema",
+      "CheckpointProtocol@1 exposes the closed main lifecycle offered through accepted and the full side-path taxonomy rejected/blocked/cancelled/timed_out/failed/partial_effect/compensation_required/superseded/quarantined",
+      "bounded attempt checkpoints bind attempt, plan revision, semantic root, worktree tree, changed files/symbols, stage, resources, model calls, tests, proofs, outstanding obligations, effects, resume needs, and checkpoint_cid without implying completion",
+      "resume requires a verified authority binding over plan, semantic root, lease, fence, and scope digests; foreign or unbound checkpoints fail closed",
+      "typed stale stops fire immediately on plan_changed, supersession, semantic_root_changed, lease_changed, fence_changed, scope_changed, cancellation, or prior_acceptance and never allow finish after authority loss",
+      "scope enforcement binds read_scope, write_scope, allowed_edit_paths, and effects into content-addressed scope digests; scope drift is a typed stale stop",
+      "fabric mode makes active PlanRevisionStore, shared coordination, resource admission, packet identity, checkpoint recovery, stale fencing, and sealed launcher protections non-optional on ImplementationDaemon and MultiSupervisorRunner",
+      "acceptance requires supervisor_verified then accepted; worker completion or task status alone never authorizes acceptance",
+      "binary floats are excluded from content-addressed packet, checkpoint, authority-binding, and typed-stale-stop identities",
+      "model proposals remain non-authoritative and never admit work"
+    ],
+    "prior_status": "Epic G open for dependency-ready work; Epic H unblocks adaptive revision and refill"
+  },
+  "predicates": {
+    "checkpoint_integrity": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "tasks": [
+        "LGSWF-071",
+        "LGSWF-072"
+      ],
+      "interfaces": [
+        "CheckpointProtocol@1",
+        "GovernedDaemonRuntime@1"
+      ],
+      "primary_symbols": [
+        "AttemptCheckpoint",
+        "build_attempt_checkpoint",
+        "write_attempt_checkpoint_atomic",
+        "content_digest",
+        "record_fabric_attempt_checkpoint"
+      ],
+      "checkpoint_binds": [
+        "attempt",
+        "plan_revision",
+        "semantic_state_root",
+        "worktree_tree",
+        "changed_files",
+        "changed_symbols",
+        "completed_stage",
+        "consumed_resources",
+        "model_calls",
+        "tests",
+        "proofs",
+        "outstanding_obligations",
+        "effects",
+        "resume_needs",
+        "checkpoint_cid"
+      ],
+      "content_addressed_checkpoint_cid": true,
+      "atomic_durable_checkpoint_writes": true,
+      "checkpoints_imply_completion": false,
+      "integer_only_artifacts": true,
+      "floats_rejected": true,
+      "hermetic_proofs": [
+        "test_attempt_checkpoint_never_implies_completion",
+        "test_checkpoint_binds_required_resume_fields",
+        "test_atomic_checkpoint_persist_and_resume_binding",
+        "test_atomic_write_is_idempotent_for_same_cid",
+        "test_round_trip_protocol_and_identity",
+        "test_floats_and_prohibited_payloads_fail_closed",
+        "test_checkpoint_recovery_and_stale_fencing"
+      ]
+    },
+    "resume_binding": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "tasks": [
+        "LGSWF-071",
+        "LGSWF-072"
+      ],
+      "interfaces": [
+        "CheckpointProtocol@1",
+        "GovernedDaemonRuntime@1"
+      ],
+      "primary_symbols": [
+        "AuthorityBinding",
+        "build_authority_binding",
+        "resume_checkpoint_if_bound",
+        "bind_checkpoint_protocol",
+        "resume_fabric_checkpoint"
+      ],
+      "resume_requires_authority_binding": true,
+      "authority_binding_fields": [
+        "plan_revision",
+        "semantic_state_root",
+        "lease_id",
+        "fence_token",
+        "fencing_epoch",
+        "scope_digest"
+      ],
+      "foreign_or_unbound_checkpoint_fails_closed": true,
+      "checkpoint_recovery_non_optional_in_fabric_mode": true,
+      "hermetic_proofs": [
+        "test_atomic_checkpoint_persist_and_resume_binding",
+        "test_checkpoint_bound_is_enforced",
+        "test_load_resume_on_protocol_restores_checkpointed_state",
+        "test_checkpoint_binds_required_resume_fields",
+        "test_checkpoint_recovery_and_stale_fencing",
+        "test_fabric_mode_ready_when_all_controls_bound"
+      ]
+    },
+    "typed_stale_stops": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "tasks": [
+        "LGSWF-071",
+        "LGSWF-072"
+      ],
+      "interfaces": [
+        "CheckpointProtocol@1",
+        "GovernedDaemonRuntime@1"
+      ],
+      "primary_symbols": [
+        "StaleStopReason",
+        "TypedStaleStop",
+        "evaluate_stale_stop",
+        "evaluate_fabric_stale_fence"
+      ],
+      "stale_stop_reasons": [
+        "plan_changed",
+        "supersession",
+        "semantic_root_changed",
+        "lease_changed",
+        "fence_changed",
+        "scope_changed",
+        "cancellation",
+        "prior_acceptance"
+      ],
+      "stop_immediately_on_authority_loss": true,
+      "cannot_finish_after_authority_loss": true,
+      "stale_fencing_non_optional_in_fabric_mode": true,
+      "priority_ordered_evaluation": true,
+      "hermetic_proofs": [
+        "test_typed_stale_stops_for_each_authority_axis",
+        "test_stale_stop_is_immediate_and_priority_ordered",
+        "test_matching_authority_does_not_stale_stop",
+        "test_typed_stale_stop_round_trip",
+        "test_checkpoint_recovery_and_stale_fencing"
+      ]
+    },
+    "side_path_taxonomy": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json"
+      ],
+      "task": "LGSWF-071",
+      "interface": "CheckpointProtocol@1",
+      "primary_symbols": [
+        "DaemonLifecycleState",
+        "MAIN_LIFECYCLE_STATES",
+        "SIDE_PATH_STATES",
+        "transition_lifecycle",
+        "allowed_lifecycle_transitions"
+      ],
+      "main_lifecycle": [
+        "offered",
+        "admitted",
+        "claimed",
+        "running",
+        "checkpointed",
+        "settling",
+        "worker_completed",
+        "supervisor_verified",
+        "accepted"
+      ],
+      "side_paths": [
+        "rejected",
+        "blocked",
+        "cancelled",
+        "timed_out",
+        "failed",
+        "partial_effect",
+        "compensation_required",
+        "superseded",
+        "quarantined"
+      ],
+      "side_paths_reachable_and_terminal": true,
+      "illegal_main_transitions_fail_closed": true,
+      "accepted_is_immutable": true,
+      "hermetic_proofs": [
+        "test_closed_lifecycle_and_side_path_vocabulary",
+        "test_main_path_offered_through_accepted",
+        "test_all_side_paths_are_reachable_and_terminal",
+        "test_illegal_main_transitions_fail_closed"
+      ]
+    },
+    "scope_enforcement": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/work_packet.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_work_packet.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-070.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json"
+      ],
+      "tasks": [
+        "LGSWF-070",
+        "LGSWF-071"
+      ],
+      "interfaces": [
+        "WorkPacket@1",
+        "CheckpointProtocol@1"
+      ],
+      "primary_symbols": [
+        "scope_digest",
+        "REQUIRED_WORK_PACKET_FIELDS",
+        "build_authority_binding",
+        "evaluate_stale_stop"
+      ],
+      "scope_fields": [
+        "read_scope",
+        "write_scope",
+        "allowed_edit_paths",
+        "effects"
+      ],
+      "scope_digest_content_addressed": true,
+      "scope_drift_is_typed_stale_stop": true,
+      "work_packet_requires_scope_group": true,
+      "hermetic_proofs": [
+        "test_scope_digest_is_stable",
+        "test_work_packet_binds_every_required_field_group",
+        "test_missing_required_field_group_fails_closed",
+        "test_typed_stale_stops_for_each_authority_axis",
+        "test_checkpoint_binds_required_resume_fields"
+      ]
+    },
+    "supervisor_only_acceptance": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/work_packet.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_work_packet.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-070.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "tasks": [
+        "LGSWF-070",
+        "LGSWF-071",
+        "LGSWF-072"
+      ],
+      "interfaces": [
+        "WorkPacket@1",
+        "CheckpointProtocol@1",
+        "GovernedDaemonRuntime@1",
+        "GovernedMultiSupervisorRunner@1"
+      ],
+      "primary_symbols": [
+        "WorkPacket.worker_completion_is_authoritative",
+        "CheckpointProtocol.mark_supervisor_verified",
+        "CheckpointProtocol.mark_accepted",
+        "completion_authoritative"
+      ],
+      "acceptance_requires_supervisor_verified": true,
+      "worker_completion_alone_insufficient": true,
+      "completion_authoritative_forced_false": true,
+      "checkpoints_imply_completion": false,
+      "task_status_alone_insufficient": true,
+      "hermetic_proofs": [
+        "test_worker_completion_alone_never_authorizes_acceptance",
+        "test_worker_completion_alone_never_accepts",
+        "test_main_path_offered_through_accepted",
+        "test_attempt_checkpoint_never_implies_completion",
+        "test_multi_supervisor_runner_run_without_tracks_is_non_authoritative"
+      ]
+    },
+    "canonical_work_packet_contract": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/work_packet.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_work_packet.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-070.json"
+      ],
+      "task": "LGSWF-070",
+      "interface": "WorkPacket@1",
+      "primary_symbol": "WorkPacket",
+      "required_field_groups": [
+        "goal",
+        "plan",
+        "repository",
+        "semantic",
+        "symbol",
+        "capsule",
+        "source",
+        "contract",
+        "proof",
+        "context",
+        "scope",
+        "resource",
+        "provider",
+        "model",
+        "validation",
+        "completion",
+        "lease",
+        "fence",
+        "attempt",
+        "idempotency",
+        "checkpoint",
+        "cancellation",
+        "output"
+      ],
+      "extension_not_replacement": true,
+      "parallel_packet_format_introduced": false,
+      "content_addressed_packet_cid": true,
+      "logical_acceptance_key_fields": [
+        "task",
+        "plan",
+        "tree",
+        "semantic_root",
+        "idempotency_key"
+      ],
+      "hermetic_proofs": [
+        "test_closed_required_field_vocabulary",
+        "test_work_packet_binds_every_required_field_group",
+        "test_round_trip_and_content_identity_are_stable",
+        "test_extend_existing_daemon_packet_without_parallel_format",
+        "test_single_schema_only_no_parallel_packet_format",
+        "test_logical_acceptance_key_projection",
+        "test_floats_and_prohibited_payloads_fail_closed"
+      ]
+    },
+    "fabric_mode_non_optional_controls": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "task": "LGSWF-072",
+      "interfaces": [
+        "GovernedDaemonRuntime@1",
+        "GovernedMultiSupervisorRunner@1"
+      ],
+      "primary_symbols": [
+        "ImplementationDaemon",
+        "MultiSupervisorRunner",
+        "require_fabric_runtime_controls",
+        "seal_fabric_multi_supervisor_environment"
+      ],
+      "non_optional_fabric_controls": [
+        "active_plan_revision_store",
+        "shared_coordination",
+        "resource_admission",
+        "packet_identity",
+        "checkpoint_recovery",
+        "stale_fencing",
+        "sealed_launcher_protections"
+      ],
+      "fabric_mode_env": "IPFS_ACCELERATE_AGENT_FABRIC_MODE",
+      "fabric_mode_forces_require_active_plan_revision": true,
+      "sealed_launcher_protections_retained": true,
+      "sealed_route": "grok_cli/grok-4.5 -> codex/gpt-5.6-terra medium primary_quota_exhausted",
+      "hermetic_proofs": [
+        "test_implementation_daemon_alias_and_required_controls",
+        "test_fabric_mode_environment_detection",
+        "test_fabric_mode_forces_active_plan_requirement",
+        "test_fabric_mode_ready_when_all_controls_bound",
+        "test_fabric_dispatch_preflight_skips_when_controls_missing",
+        "test_resource_admission_denied_fails_closed",
+        "test_sealed_launcher_protections_retained_on_multi_runner",
+        "test_multi_supervisor_runner_fabric_controls_non_optional",
+        "test_multi_supervisor_runner_child_environment_seals_route"
+      ]
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-070.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-070",
+        "LGSWF-071",
+        "LGSWF-072"
+      ],
+      "result_identities": [
+        "pending:content-addressed-result:LGSWF-070",
+        "pending:content-addressed-result:LGSWF-071",
+        "pending:content-addressed-result:LGSWF-072"
+      ],
+      "receipt_identity_notes": {
+        "LGSWF-070": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance",
+        "LGSWF-071": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance",
+        "LGSWF-072": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance"
+      },
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_g_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+      "epic_g_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-064"
+    },
+    "no_binary_floats_in_content_addressed_material": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_work_packet.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-070.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "tasks": [
+        "LGSWF-070",
+        "LGSWF-071",
+        "LGSWF-072"
+      ],
+      "floats_rejected_from_identity": true,
+      "hermetic_proofs": [
+        "test_floats_and_prohibited_payloads_fail_closed",
+        "test_seal_governed_work_packet_identity",
+        "test_round_trip_protocol_and_identity"
+      ]
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "WorkPacket@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/work_packet.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.daemon-work-packet@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "WorkPacket",
+      "role": "single canonical daemon work-packet contract extending existing envelopes without a parallel format",
+      "extension_not_replacement": true
+    },
+    "CheckpointProtocol@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.daemon-checkpoint-protocol@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "CheckpointProtocol",
+        "AttemptCheckpoint",
+        "AuthorityBinding",
+        "TypedStaleStop",
+        "evaluate_stale_stop",
+        "resume_checkpoint_if_bound"
+      ],
+      "role": "explicit daemon lifecycle, bounded attempt checkpoints, resume binding, and typed stale stops",
+      "checkpoints_imply_completion": false,
+      "acceptance_requires_supervisor_verified": true
+    },
+    "GovernedDaemonRuntime@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.governed-daemon-runtime@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "ImplementationDaemon",
+        "PortalImplementationDaemon",
+        "seal_governed_work_packet",
+        "bind_checkpoint_protocol",
+        "resume_fabric_checkpoint",
+        "evaluate_fabric_stale_fence"
+      ],
+      "role": "fabric-mode wiring of WorkPacket@1 and CheckpointProtocol@1 into the existing implementation daemon with non-optional controls"
+    },
+    "GovernedMultiSupervisorRunner@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.governed-multi-supervisor-runner@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "MultiSupervisorRunner",
+        "seal_fabric_multi_supervisor_environment",
+        "seal_ordered_implementation_provider_route"
+      ],
+      "role": "fabric-mode multi-runner sealing that retains ordered implementation-provider launcher protections"
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-080"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Adaptive revision and refill (Epic I / LGSWF-080) may schedule after LGSWF-073; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "formal datasets proof selection remains verified empty; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "WorkPacket@1, CheckpointProtocol@1, and fabric-mode daemon/multi-runner wiring are the Epic H surface; adaptive revision/refill and continuous fabric operation remain outside Epic H",
+    "worker completion or task status alone is never authoritative completion",
+    "checkpoints never imply completion and never substitute for independent fenced supervisor acceptance"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic H gate records verified empty formal proof selection at accepted trees; contract and hermetic tests plus current producing-task receipts are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-h.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_work_packet.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-h.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-h@lgswf-073-pass"
+}
