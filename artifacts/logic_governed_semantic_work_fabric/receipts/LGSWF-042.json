@@ -1,0 +1,268 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-042",
+  "title": "Integrate safe split, coalesce, rewire, and speculative plan deltas",
+  "track": "lgswf-g500-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-042",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G500",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-041"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g500/lgswf-042",
+  "observed_at": "2026-08-17T13:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-042",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py": true,
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json": true
+  },
+  "objective_summary": "Landed AdaptiveFrontier@1 on the existing PlanDelta lifecycle surface: builders and pure proposal/projection helpers for split_unstarted_task, coalesce_unstarted_tasks, rewire_unstarted_dependency, and speculative evidence-only deltas. Structural ops apply only to future mutable unstarted-family specifications, retain started history with explicit supersession, and preserve path/acceptance coverage. Speculative work is isolated, resource-bounded, safely cancellable, evidence-only, and non-authoritative. configured_board_scheduler seals adaptive frontier policy into board load/preflight/launch so history mutation and authoritative speculation fail closed. Worker completion or task status alone never authorizes acceptance.",
+  "findings_digest": {
+    "interface": "AdaptiveFrontier@1",
+    "primary_symbol": "propose_adaptive_frontier_deltas",
+    "module_paths": {
+      "contracts": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+      "scheduler": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py"
+    },
+    "core_symbols": [
+      "propose_adaptive_frontier_deltas",
+      "build_split_unstarted_delta_item",
+      "build_coalesce_unstarted_delta_item",
+      "build_rewire_unstarted_delta_item",
+      "build_speculative_evidence_delta_item",
+      "build_adaptive_plan_delta",
+      "project_population_after_adaptive_delta",
+      "cancel_speculative_items",
+      "assert_adaptive_delta_safe",
+      "configured_board_adaptive_frontier_policy",
+      "AdaptiveFrontierDecision",
+      "AdaptiveFrontierProposal",
+      "AdaptivePopulationProjection",
+      "SpeculativeWorkBound"
+    ],
+    "plan_delta_operations": [
+      "split_unstarted_task",
+      "coalesce_unstarted_tasks",
+      "rewire_unstarted_dependency",
+      "attach_evidence",
+      "record_uncertainty"
+    ],
+    "lifecycle_rules": {
+      "mutable_targets": [
+        "proposed",
+        "admitted",
+        "ready",
+        "unstarted",
+        "blocked"
+      ],
+      "immutable_history": [
+        "claimed",
+        "running",
+        "settling",
+        "completed",
+        "accepted"
+      ],
+      "in_place_started_history_mutation": false,
+      "successors_carry_explicit_supersession": true
+    },
+    "speculative_bounds": {
+      "isolated": true,
+      "cancellable": true,
+      "authoritative": false,
+      "effect_class": "evidence_only",
+      "authoritative_merge": false,
+      "authoritative_publication": false
+    },
+    "coverage_invariants": {
+      "split_retains_paths_and_acceptance": true,
+      "coalesce_retains_union_paths_and_acceptance": true,
+      "started_history_cannot_shrink": true
+    },
+    "board_integration": {
+      "load_defaults_adaptive_frontier_policy": true,
+      "preflight_checks_adaptive_frontier_policy": true,
+      "launch_plan_embeds_adaptive_frontier_policy": true,
+      "rejects_mutate_started_history": true,
+      "rejects_authoritative_speculation": true
+    },
+    "reuses": [
+      "PlanDelta",
+      "PlanDeltaItem",
+      "PlanDeltaOperation",
+      "assert_delta_preserves_history",
+      "assert_population_history_intact",
+      "PlanRevisionContracts@1"
+    ],
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-045"
+    ]
+  },
+  "interfaces_referenced": [
+    "AdaptiveFrontier@1",
+    "PlanRevisionContracts@1",
+    "PlanDelta@1",
+    "PlanDeltaOperation@1",
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "task-identity@1",
+    "FrontierPolicy@1",
+    "ParallelFrontier@1"
+  ],
+  "symbols_changed": [
+    "propose_adaptive_frontier_deltas",
+    "build_split_unstarted_delta_item",
+    "build_coalesce_unstarted_delta_item",
+    "build_rewire_unstarted_delta_item",
+    "build_speculative_evidence_delta_item",
+    "build_adaptive_plan_delta",
+    "project_population_after_adaptive_delta",
+    "cancel_speculative_items",
+    "assert_adaptive_delta_safe",
+    "is_mutable_frontier_target",
+    "adaptive_plan_delta_operations",
+    "configured_board_adaptive_frontier_policy",
+    "AdaptiveFrontierConfig",
+    "AdaptiveFrontierDecision",
+    "AdaptiveFrontierProposal",
+    "AdaptivePopulationProjection",
+    "SpeculativeWorkBound"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic AdaptiveFrontier@1 suite for lifecycle-safe split/coalesce/rewire, speculative cancel bounds, deterministic proposal identity, coverage preservation, and configured-board policy sealing; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-042 lands adaptive plan-delta helpers, board policy wiring, and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-042 mutates accelerator planning/runtime source and tests; datasets semantic truth is referenced only; canonical refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + LGSWF-041 receipt",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "model_proposal_admitted_as_authority": false,
+    "started_history_mutated_in_place": false,
+    "authoritative_speculative_merge_or_publication": false
+  },
+  "acceptance_criteria": {
+    "uses_existing_plan_delta_lifecycle_rules": true,
+    "split_coalesce_rewire_only_future_mutable_specs": true,
+    "started_history_retained_with_supersession": true,
+    "speculative_isolated_cancellable_non_authoritative": true,
+    "parallelism_improved_without_in_place_history_mutation": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "adaptive_frontier_helpers": "absent",
+      "split_coalesce_rewire_builders": "enum_ops_only_without_adaptive_integration",
+      "board_adaptive_frontier_policy": "not_wired",
+      "epic_e_producing_task": "LGSWF-042 blocked after LGSWF-041"
+    },
+    "after": {
+      "adaptive_frontier_helpers": "AdaptiveFrontier@1 at plan_revision_contracts.py",
+      "split_coalesce_rewire_and_speculative_deltas": "propose_adaptive_frontier_deltas and builders enforce lifecycle and coverage invariants",
+      "board_adaptive_frontier_policy": "configured_board_scheduler seals policy on load/preflight/launch",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+      "downstream": "LGSWF-045 Epic E qualification unblocked for dependency-ready work"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "worker_completion_sufficient": false,
+    "task_status_sufficient": false,
+    "requires_declared_outputs": true,
+    "requires_current_validation": true,
+    "requires_merge_and_canonical_refresh_on_mutation": true,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only",
+    "producer_disposition": "implementation_complete_pending_supervisor_acceptance"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-042",
+  "result_identity": "urn:lgswf:receipt:LGSWF-042@adaptive-frontier-v1-attempt1"
+}
