@@ -1,0 +1,289 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-094",
+  "title": "Qualify Epic J closed-loop semantic refresh",
+  "track": "lgswf-g1000-epic-gate",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-094",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G1000",
+  "owning_repository": "cross-repository",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-091"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g1000/lgswf-094",
+  "observed_at": "2026-08-17T23:59:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_datasets at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-b.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-c.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-f.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-h.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-i.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-084.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/merge_queue.py",
+    "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+    "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py"
+  ],
+  "write_scope": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-094.json"
+  ],
+  "changed_paths": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-094.json"
+  ],
+  "expected_outputs": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-094.json"
+  ],
+  "outputs_present": {
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-094.json": true
+  },
+  "objective_summary": "Qualified Epic J (LGSWF-G1000) closed-loop semantic refresh by proving workers and accelerator surfaces cannot publish canonical roots, predicted and observed semantic deltas reconcile fail-closed, every invalidation propagates through provisional-patch and post-acceptance closures, and accepted tree/root identity remains exact across pre-execution, pre-merge seal, rescan, and snapshot. Recorded SemanticRefresh@1 pre-execution/provisional-patch composition, SemanticReconciliation@1 merge-gate and post-acceptance refresh, MergeQueue gated completion, verified empty formal proof selection, and gate pass that unblocks fixed-point convergence (LGSWF-100) while continuous multi-supervisor operation remains no-go.",
+  "findings_digest": {
+    "epic_id": "LGSWF-G1000",
+    "epic_label": "J — closed-loop semantic refresh",
+    "epic_j_disposition": "pass",
+    "producing_tasks": [
+      "LGSWF-090",
+      "LGSWF-091"
+    ],
+    "interfaces": [
+      "SemanticRefresh@1",
+      "PreExecutionSemanticRefresh@1",
+      "ProvisionalPatchSemanticRefresh@1",
+      "SemanticReconciliation@1",
+      "PreMergeSemanticGate@1",
+      "PostAcceptanceCanonicalRefresh@1",
+      "MergeQueue"
+    ],
+    "workers_cannot_publish_canonical_roots": {
+      "semantic_refresh_publishes_canonical_root": false,
+      "semantic_reconciliation_publishes_canonical_root": false,
+      "provisional_roots_noncanonical": true,
+      "provisional_roots_not_publishable_as_canonical": true,
+      "datasets_authority_publishes_canonical_root": true,
+      "assert_not_canonical_publication_hard_off": true,
+      "worker_completion_alone_insufficient": true
+    },
+    "predicted_observed_deltas_reconcile": {
+      "pre_merge_verifies_predicted_effects": true,
+      "post_acceptance_compares_predicted_and_observed_deltas": true,
+      "path_and_symbol_sets_must_match": true,
+      "delta_mismatch_rejects_fail_closed": true,
+      "matched_comparison_content_addressed": true
+    },
+    "every_invalidation_propagates": {
+      "provisional_patch_calculates_invalidation_closure": true,
+      "provisional_obligations_updated_noncanonical": true,
+      "post_acceptance_invalidates_dependents": true,
+      "bfs_dependency_closure": true,
+      "related_tests_and_proofs_bound_to_obligations": true,
+      "verification_replanned_from_obligations": true,
+      "goals_reevaluated_after_invalidation": true,
+      "revise_until_settled_or_bound": true
+    },
+    "accepted_tree_root_identity_exact": {
+      "pre_execution_requires_datasets_view_tree_and_root_match": true,
+      "context_pack_bound_to_task_attempt_plan_tree_root": true,
+      "pre_merge_seal_current_and_tree_matched": true,
+      "post_acceptance_rescan_binds_accepted_tree_root": true,
+      "snapshot_update_records_exact_root_identity": true,
+      "stale_or_mismatched_roots_reject_fail_closed": true
+    },
+    "pre_execution_and_provisional_patch_closed_loop": {
+      "pre_execution_checks": [
+        "datasets_view_current",
+        "datasets_view_tree_and_root_match_attempt",
+        "capsule_freshness_or_admitted_source_fallback",
+        "proof_selection_current_or_verified_empty",
+        "context_pack_bound_to_task_attempt_plan_tree_root",
+        "source_fallback_policy_recorded"
+      ],
+      "provisional_patch_checks": [
+        "scope_escape_rejected_fail_closed",
+        "changed_symbols_scanned_from_admitted_paths",
+        "invalidation_closure_calculated",
+        "provisional_obligations_updated_noncanonical",
+        "verification_replanned_from_obligations",
+        "provisional_root_attempt_bound_and_noncanonical"
+      ],
+      "source_fallback_policy": "producer-bound-raw-source-when-capsule-stale"
+    },
+    "merge_gate_and_post_acceptance_refresh": {
+      "pre_merge_checks": [
+        "predicted_effects_current_or_no_mutation",
+        "contracts_current_and_nonempty",
+        "selected_tests_proofs_current_or_verified_empty",
+        "governor_admitted",
+        "assurance_current_or_absence_recorded",
+        "seal_current_and_tree_matched"
+      ],
+      "post_acceptance_checks": [
+        "canonical_tree_rescanned",
+        "predicted_observed_deltas_compared",
+        "dependents_invalidated",
+        "semantic_snapshot_updated",
+        "goals_reevaluated",
+        "revise_until_settled_or_bound"
+      ],
+      "require_pre_merge_semantic_gate": true,
+      "complete_with_semantic_reconciliation": true,
+      "fail_closed_without_admitted_gate": true
+    },
+    "supervisor_only_acceptance": {
+      "acceptance_requires_independent_fenced_supervisor": true,
+      "worker_completion_alone_insufficient": true,
+      "task_status_alone_insufficient": true,
+      "completion_authoritative_forced_false": true
+    },
+    "no_binary_floats": {
+      "floats_rejected_from_identity": true
+    },
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "checked_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_canonical_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "continuous_multi_supervisor_operation": "no-go",
+    "downstream_unlock": [
+      "LGSWF-100"
+    ]
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "SemanticRefresh@1",
+    "PreExecutionSemanticRefresh@1",
+    "ProvisionalPatchSemanticRefresh@1",
+    "SemanticReconciliation@1",
+    "PreMergeSemanticGate@1",
+    "PostAcceptanceCanonicalRefresh@1",
+    "MergeQueue",
+    "PlanRevisionContracts@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "task-identity@1",
+    "contract:SemanticStateRoot@1"
+  ],
+  "symbols_changed": [
+    "epic-j gate disposition",
+    "LGSWF-094 qualification receipt"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "epic-j gate object must be strict JSON; authoritative sealed validation PATH/HOME is supervisor-owned"
+      },
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+        "required": false,
+        "status": "supporting_evidence_for_authoritative_runner",
+        "producer_note": "LGSWF-090 hermetic SemanticRefresh@1 suite; not the sole admission command for LGSWF-094"
+      },
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "required": false,
+        "status": "supporting_evidence_for_authoritative_runner",
+        "producer_note": "LGSWF-091 hermetic SemanticReconciliation@1 suite; not the sole admission command for LGSWF-094"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic J qualification records verified empty formal proof selection; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative",
+      "datasets authority remains the only publisher of canonical roots"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "epic_gate_qualification_only",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "canonical_refresh_required": false,
+    "reason": "LGSWF-094 mutates only gate and receipt artifacts; no product source or datasets semantic truth mutation occurs"
+  },
+  "merge": {
+    "mutation_class": "artifact_paths_only",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium epic-gate class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + epic-i pass + LGSWF-090/091 receipts",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "worker_canonical_root_publication": false,
+    "predicted_observed_delta_mismatch_admitted": false,
+    "invalidation_propagation_skipped": false,
+    "accepted_tree_root_identity_drift": false,
+    "worker_completion_treated_as_acceptance": false,
+    "model_proposal_admitted_as_authority": false
+  },
+  "acceptance_criteria": {
+    "workers_cannot_publish_canonical_roots": true,
+    "predicted_observed_deltas_reconcile": true,
+    "every_invalidation_propagates": true,
+    "accepted_tree_root_identity_exact": true,
+    "pre_execution_and_provisional_patch_closed_loop": true,
+    "merge_gate_and_post_acceptance_refresh": true,
+    "producing_task_receipts_current": true,
+    "epic_i_prerequisite_open": true,
+    "declared_outputs_present": true,
+    "validation_current": true,
+    "proof_selection_verified_empty_or_current": true,
+    "worker_completion_alone_insufficient": true,
+    "independent_fenced_supervisor_acceptance_required": true
+  },
+  "completion_decision": {
+    "worker_complete": true,
+    "task_status_complete": false,
+    "supervisor_accepted": false,
+    "reason": "Epic J gate and qualification receipt are ready for independent fenced supervisor validation and admission; worker completion alone is insufficient"
+  }
+}
