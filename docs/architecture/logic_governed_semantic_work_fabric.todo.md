@@ -2159,7 +2159,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-084 Qualify Epic I adaptive plan revision and refill
 
 - Stable task ID: LGSWF-084
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
