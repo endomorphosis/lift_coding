@@ -2217,7 +2217,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-090 Connect pre-execution and provisional-patch semantic refresh
 
 - Stable task ID: LGSWF-090
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
