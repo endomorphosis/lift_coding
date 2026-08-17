@@ -1869,7 +1869,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-071 Implement explicit daemon lifecycle, checkpoints, and typed stale stops
 
 - Stable task ID: LGSWF-071
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
