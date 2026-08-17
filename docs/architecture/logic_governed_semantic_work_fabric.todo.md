@@ -2101,7 +2101,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-081 Enforce immutable revision safety, refill bounds, dedupe, and deterministic plan doctor
 
 - Stable task ID: LGSWF-081
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
