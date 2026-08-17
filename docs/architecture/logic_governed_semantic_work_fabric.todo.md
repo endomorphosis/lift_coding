@@ -1231,7 +1231,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-042 Integrate safe split, coalesce, rewire, and speculative plan deltas
 
 - Stable task ID: LGSWF-042
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
