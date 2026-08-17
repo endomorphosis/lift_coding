@@ -1463,7 +1463,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-052 Apply stage-specific backpressure, safe preemption, and cancellation
 
 - Stable task ID: LGSWF-052
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
