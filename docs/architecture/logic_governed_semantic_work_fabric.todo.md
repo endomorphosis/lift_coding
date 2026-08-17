@@ -2333,7 +2333,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-094 Qualify Epic J closed-loop semantic refresh
 
 - Stable task ID: LGSWF-094
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
