@@ -1,0 +1,210 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-061",
+  "title": "Enforce fenced coordination shards and coordinator failover",
+  "track": "lgswf-g700-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-061",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G700",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-060"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g700/lgswf-061",
+  "observed_at": "2026-08-17T12:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-061",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+    "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+    "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+    "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json": true
+  },
+  "objective_summary": "Extended LeaseCoordinator with durable fenced coordination shards so exactly one fenced writer owns each mutable shard. Peers remain proposal-only: they may read snapshots, submit non-authoritative proposals, and publish immutable evidence, but cannot commit mutations. Failover advances epoch and fencing token only after the prior fence expires or is released, and every stale coordinator commit is rejected via StaleCoordinatorCommitError. Worker completion or task status alone never authorizes acceptance.",
+  "findings_digest": {
+    "interface": "FabricCoordinationShard@1",
+    "primary_symbol": "LeaseCoordinator",
+    "module_paths": {
+      "implementation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py"
+    },
+    "core_symbols": [
+      "LeaseCoordinator",
+      "LeaseCoordinator.acquire_shard_writer",
+      "LeaseCoordinator.failover_shard",
+      "LeaseCoordinator.release_shard_writer",
+      "LeaseCoordinator.active_shard_writer",
+      "LeaseCoordinator.commit_shard",
+      "LeaseCoordinator.propose_to_shard",
+      "LeaseCoordinator.publish_shard_evidence",
+      "LeaseCoordinator.shard_snapshot",
+      "LeaseCoordinator.list_shard_proposals",
+      "CoordinationShardFence",
+      "StaleCoordinatorCommitError",
+      "ShardWriterConflictError",
+      "ProposalOnlyPeerError"
+    ],
+    "schemas": [
+      "ipfs_accelerate_py.agent_supervisor.fabric-coordination-shard@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-coordination-shard-fence@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-coordination-shard-proposal@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-coordination-shard-commit@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-coordination-shard-evidence@1",
+      "ipfs_accelerate_py.agent_supervisor.fabric-coordination-shard-snapshot@1"
+    ],
+    "one_fenced_writer_per_mutable_shard": true,
+    "peers_are_proposal_only": true,
+    "later_epoch_failover": true,
+    "stale_coordinator_commits_rejected": true,
+    "snapshot_and_evidence_non_authoritative": true,
+    "integer_only_artifacts": true,
+    "floats_rejected": true,
+    "extension_not_replacement": true,
+    "preserved_contracts": [
+      "LeaseCoordinator task lease claim/renew/receipt",
+      "DistributedSingleFlightCoordinator",
+      "SupervisorFabric@1 capability observations"
+    ],
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-062"
+    ],
+    "continuous_multi_supervisor_operation": "no-go"
+  },
+  "interfaces_referenced": [
+    "FabricCoordinationShard@1",
+    "SupervisorFabric@1",
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1"
+  ],
+  "symbols_changed": [
+    "LeaseCoordinator",
+    "LeaseCoordinator.acquire_shard_writer",
+    "LeaseCoordinator.failover_shard",
+    "LeaseCoordinator.release_shard_writer",
+    "LeaseCoordinator.active_shard_writer",
+    "LeaseCoordinator.commit_shard",
+    "LeaseCoordinator.propose_to_shard",
+    "LeaseCoordinator.publish_shard_evidence",
+    "LeaseCoordinator.shard_snapshot",
+    "LeaseCoordinator.list_shard_proposals",
+    "CoordinationShardFence",
+    "StaleCoordinatorCommitError",
+    "ShardWriterConflictError",
+    "ProposalOnlyPeerError",
+    "COORDINATION_SHARD_SCHEMA",
+    "COORDINATION_SHARD_FENCE_SCHEMA",
+    "COORDINATION_SHARD_PROPOSAL_SCHEMA",
+    "COORDINATION_SHARD_COMMIT_SCHEMA",
+    "COORDINATION_SHARD_EVIDENCE_SCHEMA",
+    "COORDINATION_SHARD_SNAPSHOT_SCHEMA",
+    "SHARD_PEER_ROLE",
+    "SHARD_WRITER_ROLE"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic fenced coordination shard suite covering one writer per shard, proposal-only peers, later-epoch failover, rejection of every stale coordinator commit, snapshot/evidence non-authority, integer-only artifacts, and concurrent acquire; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-061 lands fenced coordination shard runtime and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-061 mutates accelerator merge coordination source and tests; datasets semantic truth is referenced only; canonical refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class with fabric hard reservation dimensions",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + LGSWF-060 receipt",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "model_proposal_admitted_as_authority": false,
+    "stale_coordinator_commit_accepted": false,
+    "second_active_shard_writer_admitted": false
+  },
+  "acceptance_criteria": {
+    "one_fenced_writer_per_mutable_shard": true,
+    "proposal_only_peers": true,
+    "later_epoch_failover": true,
+    "stale_coordinator_commits_rejected": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance_required": true,
+    "worker_completion_alone_insufficient": true
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "independent fenced supervisor acceptance is required; validation and merge admission remain supervisor-owned"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-061"
+}
