@@ -1637,7 +1637,7 @@ Every schedulable task uses an isolated worktree, exact claim/lease/fence/idempo
 ## LGSWF-061 Enforce fenced coordination shards and coordinator failover
 
 - Stable task ID: LGSWF-061
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
