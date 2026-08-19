@@ -1160,7 +1160,7 @@ not authority.
 
 ## FACP-042 Extend static analysis with IPA product domains
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
