@@ -1,0 +1,547 @@
+{
+  "schema": "facp/contract-conformance@1",
+  "schema_version": 1,
+  "task_id": "FACP-037",
+  "goal_id": "FACP-G310",
+  "bundle": "facp/contracts/gate",
+  "title": "Seal cross-language canonical contract conformance",
+  "release": "canonical-contracts-v1",
+  "vocabulary_schema": "facp/dag-cbor-profile@1",
+  "status": "sealed",
+  "generated_at": "2026-08-19T18:00:00Z",
+  "behavior_change": false,
+  "policy": {
+    "producer_artifacts_immutable": true,
+    "discovery_is_not_completion": true,
+    "provider_authority": "none",
+    "fail_closed": true,
+    "no_network": true,
+    "no_unqualified_production_claim": true,
+    "compiler_self_report_not_sole_evidence": true,
+    "accept_missing_language": false,
+    "prohibited_effects": [
+      "accept_missing_language",
+      "network",
+      "trust_compiler_self_report_as_sole_evidence",
+      "provider_authored_completion",
+      "introduce_unqualified_production_claim"
+    ]
+  },
+  "evidence_subset": [
+    "byte_cid_parity",
+    "unknown_duplicate_mutation_rejection",
+    "stable_errors",
+    "generator_determinism",
+    "independent_validator"
+  ],
+  "source_binding": {
+    "controller_commit": "d8aef4545834c1662629c6ddbd522fe9e1030c0c",
+    "controller_tree": "a181d7856ca1cfdc94eb3f2d471cd559cf8b9dec",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "encoding_spec_path": "Mcp-Plus-Plus/docs/spec/assurance-canonical-encoding.md",
+    "encoding_spec_sha256": "9adb2629d5dbbedd8357a84dd68e1370d5c6b2dc71bf61c0ab9a4eb5347852dc",
+    "idl_spec_path": "Mcp-Plus-Plus/docs/spec/assurance-idl.md",
+    "idl_spec_sha256": "f9d77d172b44a13e98bfaa61b31b14baf328eb1015260ff1c8d5460889f1acb9",
+    "vectors_path": "Mcp-Plus-Plus/conformance/vectors/assurance-canonical-encoding.json",
+    "vectors_sha256": "49b4c32f774f2e096a88f1c219377e87776ccab0166ebb981047aa896210f805",
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "8139a6fb647455fee982d59720156edf303e89de",
+        "planning_revision_field": "mcp_plus_plus_planning_revision",
+        "scheduler_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "56c809a76bf88504dbd506d34b815ddb902a1cfe",
+        "planning_revision_field": "accelerate_planning_revision",
+        "scheduler_planning_revision": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "bcb9fd40f26a107324660c134a99db9d38ca05f0",
+        "planning_revision_field": "datasets_planning_revision",
+        "scheduler_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "ef01df27221e6ae55f1416154b981f3284193bc9",
+        "planning_revision_field": "kit_planning_revision",
+        "scheduler_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "916ca5cd4c8ab53763e219a5a9fca89f9247242c",
+        "planning_revision_field": "swissknife_planning_revision",
+        "scheduler_planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "matches_scheduler_planning_revision": false
+      }
+    ],
+    "depends_on": [
+      "FACP-035",
+      "FACP-036"
+    ],
+    "shared_producer_inputs": [
+      "FACP-032",
+      "FACP-033",
+      "FACP-034"
+    ],
+    "producer_inputs": [
+      {
+        "task_id": "FACP-032",
+        "role": "assurance_idl_spec",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/docs/spec/assurance-idl.md",
+            "sha256": "f9d77d172b44a13e98bfaa61b31b14baf328eb1015260ff1c8d5460889f1acb9"
+          },
+          {
+            "path": "Mcp-Plus-Plus/schemas/assurance/v1/operation-spec.schema.json",
+            "sha256": "72c9d1c0b3747df63a4f2d08bc2cefa9cb9c0c2f41e786c188b96d3ff8f192a6"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_assurance_idl_spec.py",
+            "sha256": "a1f3158572e90d1a4fae2f26e149f6115492a78c4943f62445d5ba75e5bf2332"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-033",
+        "role": "canonical_encoding_profile",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/docs/spec/assurance-canonical-encoding.md",
+            "sha256": "9adb2629d5dbbedd8357a84dd68e1370d5c6b2dc71bf61c0ab9a4eb5347852dc"
+          },
+          {
+            "path": "Mcp-Plus-Plus/conformance/vectors/assurance-canonical-encoding.json",
+            "sha256": "49b4c32f774f2e096a88f1c219377e87776ccab0166ebb981047aa896210f805"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_assurance_canonical_encoding_spec.py",
+            "sha256": "4da3fd3bf358b7d653a497d25b46c6c2cea301d70c875de56d7d7f6b6f20ad73"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-034",
+        "role": "assurance_idl_compiler",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/compiler.py",
+            "sha256": "3cdab3c846750149ddd4f8b0afd6afd4b384282121f18579169d5aedd8843c7c"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_assurance_idl_compiler.py",
+            "sha256": "b0034d1b79a3a866b8eca2cc1610744d820320bd73b0a995c8911d9402ff7493"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-035",
+        "role": "rust_independent_validator",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/tests-rs/src/assurance_codec.rs",
+            "sha256": "6d646a034fba3419a5e6bcdb3943d96de9aa0dc29ddac380d67d6b47e894c925"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-rs/tests/assurance_translation_validation_test.rs",
+            "sha256": "2ee9aa87a4cf216ecaae4cd911d1d4d1c95d9ef5036c387c1e52e288b60d983b"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_assurance_rust_translation_validation.py",
+            "sha256": "6c145117ac3564abe5534f463551ab016d8d3ee9c66143681bebae4c116b2f39"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-036",
+        "role": "generated_language_bindings",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated_manifest.json",
+            "sha256": "df45744cf407ef7f4c74e2cb96446d15e7023abed6119f86b3067f88082ee172"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_assurance_generated_bindings.py",
+            "sha256": "360bca6c404ac180e327c50ef04bd25441e09b98ce9e4c06784ad54df12df0d5"
+          }
+        ]
+      }
+    ]
+  },
+  "toolchains": {
+    "schema": "facp/ccc-toolchain-binding@1",
+    "tcb_path": "implementation_plan/formal_assurance_control_plane/baseline/trusted_computing_base.json",
+    "tcb_sha256": "03f32a9e9f92e2883a67f44243e9a4d435a2a62a0dc5de4efb02611ec0cb3743",
+    "languages": [
+      "python",
+      "typescript",
+      "rust",
+      "go"
+    ],
+    "python": {
+      "name": "python3",
+      "version": "3.12.3",
+      "raw": "Python 3.12.3",
+      "tcb_raw": "Python 3.12.3",
+      "dag_cbor_version": "0.3.3",
+      "role": "reference_codec"
+    },
+    "rust": {
+      "name": "rust_cargo",
+      "version": "1.95.0",
+      "cargo_raw": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+      "cargo_commit": "f2d3ce0bd7f24a49f8f72d9000448f8838c4e850",
+      "tcb_raw": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+      "role": "independent_validator",
+      "validator_task_id": "FACP-035",
+      "validator_bundle": "facp/contracts/rust-codec"
+    },
+    "typescript": {
+      "name": "nodejs",
+      "version": "18.19.1",
+      "raw": "v18.19.1",
+      "tcb_raw": "v18.19.1",
+      "role": "generated_binding_projection"
+    },
+    "go": {
+      "name": "go",
+      "version": "1.24.6",
+      "raw": "go version go1.24.6 linux/arm64",
+      "tcb_raw": "go version go1.24.6 linux/arm64",
+      "role": "generated_binding_projection"
+    }
+  },
+  "byte_cid_parity": {
+    "agree": true,
+    "languages": [
+      "python",
+      "typescript",
+      "rust",
+      "go"
+    ],
+    "profile": "facp/dag-cbor-profile@1",
+    "positive_vector_count": 12,
+    "python_reference_match": true,
+    "rust_independent_match": true,
+    "generated_binding_fixture_parity": true,
+    "contract_fixture_parity": [
+      {
+        "source_contract": "facp/operation-spec@1",
+        "fixture_id": "opspec_identity_core",
+        "canonical_hex": "a6646e616d656367657466736368656d6175666163702f6f7065726174696f6e2d7370656340316776657273696f6e01696e616d65737061636570697066735f64617461736574735f70796c6f7065726174696f6e5f69646c64617461736574732e6765746e736368656d615f76657273696f6e01",
+        "cid": "bafyreidoekiti334iknk3kopzwgg6iknipag2seeqsregyofju5utzx7ye",
+        "vector_path": "Mcp-Plus-Plus/tools/assurance_idl/generated/vectors/operation-spec.json",
+        "vector_sha256": "913844e5f8152dcb4f5cda931868271fd248dbedffc52e5ee3ef606ab5484552",
+        "languages": {
+          "python": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/python/operation_spec.py",
+            "sha256": "0b831d83252a14fe0d2c8682607860fe217a9dc4f292569b9bcf318b036a3789",
+            "rejects_unknown_field": true
+          },
+          "typescript": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/typescript/operationSpec.ts",
+            "sha256": "9a24f123f598b62029259f8d1bb19854fd367b68f3517820cab54d2cea9b3b5d",
+            "rejects_unknown_field": true
+          },
+          "rust": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/rust/operation_spec.rs",
+            "sha256": "50374ae4fd623d5faacc3a904084b457d7ba802e028df9f6e11b39c5b94f1398",
+            "rejects_unknown_field": true
+          },
+          "go": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/go/operation_spec.go",
+            "sha256": "81e4e6bcc2711e04ab74d20fdc2b5e057ae8620297badb84e8cc0c0a2a6f92fe",
+            "rejects_unknown_field": true
+          }
+        }
+      },
+      {
+        "source_contract": "facp/evidence-envelope@1",
+        "fixture_id": "evidence_envelope_product",
+        "canonical_hex": "ab6570726f6f6668766572696669656466656666656374686f62736572766564666f726967696e6d6c6976655f6f6273657276656466706f6c69637967616c6c6f776564667265766965776a756e726576696577656466736368656d617818666163702f65766964656e63652d656e76656c6f7065403169617574686f726974796576616c69646966726573686e6573736763757272656e7469696e746567726974796c6469676573745f76616c69646b656e7669726f6e6d656e74646c6976656e736368656d615f76657273696f6e01",
+        "cid": "bafyreiguuepnw7ifbeotkdjv7wzaikbi2ovj3jc6l6bd7wtwlzp7ivaqpa",
+        "vector_path": "Mcp-Plus-Plus/tools/assurance_idl/generated/vectors/evidence-envelope.json",
+        "vector_sha256": "4e6b455b176b4a9c37f1c7517a528e6b6569803113d7efec28a70b1d3f0d5b76",
+        "languages": {
+          "python": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/python/evidence_envelope.py",
+            "sha256": "747083f7e82e158be0084c7a5ce8439e973905b34a9d682a2d402074690980c3",
+            "rejects_unknown_field": true
+          },
+          "typescript": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/typescript/evidenceEnvelope.ts",
+            "sha256": "f7c3341bb06d08897671be66902bb6ece45f4583ee3015f509436db4ed221a9c",
+            "rejects_unknown_field": true
+          },
+          "rust": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/rust/evidence_envelope.rs",
+            "sha256": "3c34c0e5a0109d9b9c0cfa8533cd6521ad85adc12bebfb64884959d6a82a377a",
+            "rejects_unknown_field": true
+          },
+          "go": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/go/evidence_envelope.go",
+            "sha256": "df40a474b448777e0f95dfee0bad6804e76dc150b602f039583bbe9eb5eeb764",
+            "rejects_unknown_field": true
+          }
+        }
+      },
+      {
+        "source_contract": "facp/admission-token@1",
+        "fixture_id": "admission_token_links",
+        "canonical_hex": "a7656e6f6e636562303166736368656d6176666163702f61646d697373696f6e2d746f6b656e4031696163746f725f636964d82a58250001551220ae4b3280e56e2faf83f414a6e3dabe9d5fbe18976544c05fed121accb85b53fc696e6f745f61667465721a6a53ba006c617267756d656e745f636964d82a582500017112206e2291346f7c429aada9cfcd8c6f214d43c06d488484a24361c54d3b49e6ffc16c6f7065726174696f6e5f69646c64617461736574732e6765746e736368656d615f76657273696f6e01",
+        "cid": "bafyreiatqqn3qgbt2sgz6serm2eo2en55bfv3psmwjzu2c22kgnmvcdpv4",
+        "vector_path": "Mcp-Plus-Plus/tools/assurance_idl/generated/vectors/admission-token.json",
+        "vector_sha256": "8eb80fa4bff76f1586fdf5b964d859913bdb8eed41a94e4b336842d497dfd230",
+        "languages": {
+          "python": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/python/admission_token.py",
+            "sha256": "83e6a2bf0e623e63388c0ed9bb78c63443744f6eeb983f23557644d9626be595",
+            "rejects_unknown_field": true
+          },
+          "typescript": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/typescript/admissionToken.ts",
+            "sha256": "10576e86e201eb6d91e7f1c0f7f991ad37ac399d1a08553634d0bb21eebc740b",
+            "rejects_unknown_field": true
+          },
+          "rust": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/rust/admission_token.rs",
+            "sha256": "3444e543d42493533baf55605a8f76fa76bd05c6ed266de509158060a15d755f",
+            "rejects_unknown_field": true
+          },
+          "go": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/go/admission_token.go",
+            "sha256": "6dfc6932bd3a0489a7185fa7ee08945873e041ba4c5ea928c3f0698dc6ca8620",
+            "rejects_unknown_field": true
+          }
+        }
+      },
+      {
+        "source_contract": "facp/effect-receipt@1",
+        "fixture_id": "effect_receipt_link",
+        "canonical_hex": "a566656666656374686f6273657276656466736368656d6175666163702f6566666563742d726563656970744031676f7574636f6d65684f627365727665646e736368656d615f76657273696f6e017361646d697373696f6e5f746f6b656e5f636964d82a5825000171122013841bb81833d48d9f48916688ed11bde84b5dbe4cb2734d0b5a519aca886faf",
+        "cid": "bafyreibefqz4mp2w6fueax77edu7pmwtszqqdwzroxqhkahv4v2npwz57e",
+        "vector_path": "Mcp-Plus-Plus/tools/assurance_idl/generated/vectors/effect-receipt.json",
+        "vector_sha256": "0f5fbf646c491bdb37c4a70f94c7f45b9c83a367c925f6959bb576f5ab222278",
+        "languages": {
+          "python": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/python/effect_receipt.py",
+            "sha256": "873aa313a6e711d4003ead3c46953c587ead2ae275f70886947033cebff89987",
+            "rejects_unknown_field": true
+          },
+          "typescript": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/typescript/effectReceipt.ts",
+            "sha256": "b131895ca6bed2aba81d3681e0670024acbf04897c04ed3fd72573034380f6fa",
+            "rejects_unknown_field": true
+          },
+          "rust": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/rust/effect_receipt.rs",
+            "sha256": "827bda5b6da022af093bb964052e7cb74e9db677425c0a7b246b4ea9a71e421e",
+            "rejects_unknown_field": true
+          },
+          "go": {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated/go/effect_receipt.go",
+            "sha256": "4b4f2aa53822d0927b2cb1d5c16962a2b89c2baf0ce247353d395c026ca60e7c",
+            "rejects_unknown_field": true
+          }
+        }
+      }
+    ],
+    "positive_cases": [
+      {
+        "id": "empty_map",
+        "cid": "bafyreigbtj4x7ip5legnfznufuopl4sg4knzc2cof6duas4b3q2fy6swua",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "bools_null",
+        "cid": "bafyreidg4dawcsfsujszlv5xuhgiwrgcsat7wshdtuutcz3omxr7rdmr7q",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "sorted_len_then_lex",
+        "cid": "bafyreidpxecqvzu63ziw5cy2jqkfmhegzfbj37hvqlbx3n22wrl2yznvvq",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "int_boundaries",
+        "cid": "bafyreib5dqorbgf7ws3v57vbvw4zkwpwwz4ecgairaozp4ql2zyhgdetjm",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "bytes_value",
+        "cid": "bafyreicmwp5wbjojdms4iqlqv4zzj6bg4yxswa37om3npu2xf6sbfk32su",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "inner_link_target",
+        "cid": "bafyreibjk2zm52hfizr454i2vrctndr2q2oimlwxu36s3or2icabptr6by",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "ipld_link_wrap",
+        "cid": "bafyreiar7ey7pff4cuqr6uhh2muopjbvspgyqoqjprr3osg7dyujmg4tsa",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "opspec_identity_core",
+        "cid": "bafyreidoekiti334iknk3kopzwgg6iknipag2seeqsregyofju5utzx7ye",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "evidence_envelope_product",
+        "cid": "bafyreiguuepnw7ifbeotkdjv7wzaikbi2ovj3jc6l6bd7wtwlzp7ivaqpa",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "admission_token_links",
+        "cid": "bafyreiatqqn3qgbt2sgz6serm2eo2en55bfv3psmwjzu2c22kgnmvcdpv4",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "effect_receipt_link",
+        "cid": "bafyreibefqz4mp2w6fueax77edu7pmwtszqqdwzroxqhkahv4v2npwz57e",
+        "cid_family": "assurance_signed_dag_cbor"
+      },
+      {
+        "id": "opaque_raw_bytes",
+        "cid": "bafkreifojmzibzlof6xyh5auu3r5vpu5l67brf3fitaf73isdlglqw2t7q",
+        "cid_family": "assurance_opaque_raw"
+      }
+    ],
+    "reading": "Python reference codec and Rust independent validator both emit byte-identical canonical encodings and CIDs for every positive vector. Generated Python/TypeScript/Rust/Go binding packages embed the same canonical_hex/CID fixtures for EvidenceEnvelope, OperationSpec, AdmissionToken, and EffectReceipt."
+  },
+  "unknown_duplicate_mutation_rejection": {
+    "unknown_field_rejected": true,
+    "unknown_field_vector_id": "unknown_field_opspec",
+    "unknown_fields": [
+      "authority"
+    ],
+    "duplicate_map_key_rejected": true,
+    "duplicate_map_key_vector_id": "duplicate_map_key",
+    "mutation_reject_count": 4,
+    "mutations": [
+      {
+        "id": "flip_one_canonical_byte",
+        "rejected": true,
+        "error": "MALLEABLE_ENCODING"
+      },
+      {
+        "id": "substitute_indefinite_for_empty_map",
+        "rejected": true,
+        "error": "NON_DEFINITE_LENGTH"
+      },
+      {
+        "id": "reorder_keys_same_logical_value",
+        "rejected": true,
+        "error": "UNSORTED_MAP_KEYS"
+      },
+      {
+        "id": "cid_bit_flip_vs_retained_bytes",
+        "rejected": true,
+        "error": "WRONG_CID_FAMILY"
+      }
+    ],
+    "one_bit_mutation_id": "flip_one_canonical_byte",
+    "one_bit_mutation_rejected": true,
+    "generated_python_unknown_field_rejected": true,
+    "negative_vector_count": 17
+  },
+  "stable_errors": {
+    "profile_error_codes": [
+      "NON_DEFINITE_LENGTH",
+      "DUPLICATE_MAP_KEY",
+      "UNSORTED_MAP_KEYS",
+      "NON_MINIMAL_INTEGER",
+      "FORBIDDEN_FLOAT",
+      "FORBIDDEN_TAG",
+      "INVALID_CID_LINK",
+      "NON_STRING_MAP_KEY",
+      "MALLEABLE_ENCODING",
+      "WRONG_CID_FAMILY",
+      "NON_CANONICAL_CID_TEXT",
+      "PSEUDO_CID",
+      "UNKNOWN_FIELD",
+      "REGEX_ONLY_CID"
+    ],
+    "error_code_count": 14,
+    "required_codes_present": true,
+    "required_codes": [
+      "UNKNOWN_FIELD",
+      "DUPLICATE_MAP_KEY",
+      "MALLEABLE_ENCODING",
+      "NON_DEFINITE_LENGTH",
+      "UNSORTED_MAP_KEYS",
+      "WRONG_CID_FAMILY",
+      "PSEUDO_CID",
+      "FORBIDDEN_FLOAT"
+    ]
+  },
+  "generator_determinism": {
+    "task_id": "FACP-036",
+    "manifest_path": "Mcp-Plus-Plus/tools/assurance_idl/generated_manifest.json",
+    "manifest_sha256": "df45744cf407ef7f4c74e2cb96446d15e7023abed6119f86b3067f88082ee172",
+    "generator_version": 1,
+    "clean_generation_byte_identical": true,
+    "languages": [
+      "python",
+      "typescript",
+      "rust",
+      "go"
+    ],
+    "source_contracts": [
+      "facp/evidence-envelope@1",
+      "facp/operation-spec@1",
+      "facp/admission-token@1",
+      "facp/effect-receipt@1"
+    ],
+    "owned_path_count": 48,
+    "entry_count": 96,
+    "generation_input_digests": {
+      "code": "69190cf64d47a6ae18e8cb249e1fa35f9331b975110d8611107bb5d8cd57195e",
+      "docs": "6e1b1dfd88e85ed2aa946ba690ef799b70ea77b94166f12531852cc7185e7919",
+      "error": "3aa5de2db2473b2fc6dfbaf793a23370d3b59827b41bc96218551d0e871ad963",
+      "formal_skeleton": "a9705df1294d57d8d5e944a3079b4a36bda8d25423632f6131e0954024710929",
+      "schema": "8a26514c03798b2413e38a296428b156d43b04d4a055dafe1b3f00084ccc94d3",
+      "vector": "766bc0b148fa3adce22bf87694bd6556f2556d929e0441155419428e68d963da"
+    },
+    "compiler_self_report_not_sole_evidence": true
+  },
+  "independent_validator": {
+    "task_id": "FACP-035",
+    "bundle": "facp/contracts/rust-codec",
+    "validation_result_schema": "facp/translation-validation@1",
+    "codec_path": "Mcp-Plus-Plus/tests-rs/src/assurance_codec.rs",
+    "codec_sha256": "6d646a034fba3419a5e6bcdb3943d96de9aa0dc29ddac380d67d6b47e894c925",
+    "test_path": "Mcp-Plus-Plus/tests-rs/tests/assurance_translation_validation_test.rs",
+    "test_sha256": "2ee9aa87a4cf216ecaae4cd911d1d4d1c95d9ef5036c387c1e52e288b60d983b",
+    "compiler_identity_bound_separately": true,
+    "compiler_task_id": "FACP-034",
+    "compiler_bundle": "facp/contracts/compiler",
+    "does_not_trust_generator_without_validation": true,
+    "positive_round_trip_confirmed": true,
+    "negative_and_mutation_rejected": true,
+    "cargo_test_name": "assurance_translation_validation_test",
+    "pass": true
+  },
+  "acceptance": {
+    "four_language_byte_cid_identity": true,
+    "one_bit_mutations_fail": true,
+    "unknown_field_mutations_fail": true,
+    "gate_binds_exact_source_and_toolchains": true,
+    "independent_validator_required": true,
+    "generator_determinism_confirmed": true
+  },
+  "content_binding": {
+    "alg": "sha256",
+    "canonicalization": "json-sort-keys-separators-comma-colon",
+    "covers": "gate_record_excluding_content_sha256"
+  },
+  "content_sha256": "3c6ad5fa1a9361a90ab44e7504a44901f92328465e461ab328f236e3ba6459e6"
+}
