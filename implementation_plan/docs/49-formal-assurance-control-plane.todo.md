@@ -782,7 +782,7 @@ not authority.
 
 ## FACP-028 Enforce Kit proof-role and freshness transitions
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
