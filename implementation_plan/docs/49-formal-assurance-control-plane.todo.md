@@ -1670,3 +1670,15 @@ not authority.
 - Preconditions: Composed workflow passes and ReleaseAdmissible evaluates true for exact source/dependency/environment/rights/capability closure.
 - Evidence subset: source forest, immutable lock, build environment/artifacts, contracts/controller/policies, proofs/tests, live capability receipts, rights, reproducibility/provenance, composed trace, residual risks/human exceptions
 - Acceptance: Independent verifier reconstructs manifest identity and every required predicate; all zero floors are zero; signatures bind complete closure; any unresolved right, stale proof/capability, mutable dependency, nonreproducible artifact, simulated evidence, or unsupported claim keeps release nonadmissible.
+
+## FACP-061 Resolve validation retry-budget failure for FACP-029
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: FACP-005, FACP-018, FACP-020
+- Outputs: swissknife/test/formal-assurance/browser-nonauthority.test.ts, swissknife/test/formal-assurance/browser-authority-vectors.json, data/agent_supervisor/formal_assurance_control_plane_v3/state/discovery
+- Validation: export PYTHONPATH="$PWD"/Mcp-Plus-Plus:"$PWD"/external/ipfs_accelerate:"$PWD"/external/ipfs_datasets:"$PWD"/external/ipfs_kit:"$PWD"/swissknife; python3 -m pytest test/formal_assurance/test_facp_029_swissknife_browser_vectors.py -q
+
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in FACP-029. Use evidence in /home/barberb/lift_coding/.worktrees/formal-assurance-control-plane/data/agent_supervisor/formal_assurance_control_plane_v3/state/discovery/2026-08-19-facp-061-facp-029-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release FACP-029 from strategy blocked_tasks. The declared validation target paths (test/formal_assurance/test_facp_029_swissknife_browser_vectors.py) are bounded diagnostic and repair scope: change them only when evidence proves inherited validation debt, and do not weaken correct assertions or policy.
