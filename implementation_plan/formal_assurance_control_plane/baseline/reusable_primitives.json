@@ -1,0 +1,1084 @@
+{
+  "schema": "facp/reusable_primitives@1",
+  "task_id": "FACP-001",
+  "title": "Inventory reusable formal and supervisor primitives",
+  "goal_id": "FACP-G010",
+  "generated_at": "2026-08-19T07:05:36Z",
+  "behavior_change": false,
+  "discovery_is_not_completion": true,
+  "owning_repository": "root",
+  "reading": [
+    "external/ipfs_accelerate",
+    "external/ipfs_kit",
+    "external/ipfs_datasets"
+  ],
+  "source_binding": {
+    "controller_tree_id": "d741f587e8b1fe5f8787d41dd63da40f58184b50",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "repositories": {
+      "external/ipfs_accelerate": {
+        "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "planning_revision_field": "accelerate_planning_revision"
+      },
+      "external/ipfs_kit": {
+        "commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "planning_revision_field": "kit_planning_revision"
+      },
+      "external/ipfs_datasets": {
+        "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "planning_revision_field": "datasets_planning_revision"
+      },
+      "swissknife": {
+        "commit": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "planning_revision_field": "swissknife_planning_revision",
+        "inventory_note": "SwissKnife presentation surfaces are out of FACP-001 primary reuse scope; authority remains host-side."
+      },
+      "Mcp-Plus-Plus": {
+        "commit": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "planning_revision_field": "mcp_plus_plus_planning_revision",
+        "inventory_note": "MCP++ will own normative FCA; this inventory records existing supervisor/kit/datasets primitives to adapt."
+      }
+    }
+  },
+  "policy": {
+    "evidence_subset": [
+      "evidence_ladders",
+      "proof_contracts_caches",
+      "planners",
+      "dependency_graphs",
+      "authorization",
+      "repair",
+      "lease_fence_recovery",
+      "runtime_monitors"
+    ],
+    "required_component_fields": [
+      "component_id",
+      "category",
+      "repository",
+      "commit",
+      "path",
+      "symbol",
+      "semantic_authority",
+      "gaps",
+      "adoption_disposition",
+      "compatibility_risk",
+      "total_assurance_ladder",
+      "fca_adaptation"
+    ],
+    "adoption_disposition_vocabulary": [
+      "reuse_as_is",
+      "adapt_conservatively_for_fca",
+      "reference_semantics_only",
+      "do_not_duplicate"
+    ],
+    "compatibility_risk_levels": [
+      "low",
+      "medium",
+      "high"
+    ],
+    "total_assurance_ladder_rule": "Every total assurance ladder is flagged for conservative Formal Claim Algebra adaptation rather than duplication; legacy ranks may inform at most one FCA dimension and must not acquire evidence dimensions they did not carry."
+  },
+  "components": [
+    {
+      "component_id": "accelerate.assurance_level",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/formal_verification_contracts.py",
+      "symbol": "AssuranceLevel",
+      "line": 103,
+      "semantic_authority": "Authoritative ordered proof-assurance lattice for policy and completion gates inside the supervisor proof stack; projects from typed evidence and must not be treated as a free-standing claimed field.",
+      "gaps": [
+        "Collapses multidimensional FCA evidence (origin/integrity/authority/policy/proof/freshness/effect/environment/review) into one rank.",
+        "Compatibility aliases (NONE/SOLVER_VERIFIED) can mask semantic drift.",
+        "Does not encode hermetic-vs-live environment or freshness."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Widely imported by planners, caches, and completion gates; incorrect remapping would broaden promotions."
+      },
+      "total_assurance_ladder": true,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": true,
+        "rationale": "Flagged for conservative FCA adaptation rather than duplication: rank values may inform the proof dimension only and must not invent missing EvidenceEnvelope dimensions."
+      }
+    },
+    {
+      "component_id": "accelerate.database_repair_assurance_level",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/database_repair_evidence.py",
+      "symbol": "AssuranceLevel",
+      "line": 285,
+      "semantic_authority": "Local ordered assurance vocabulary for database-repair evidence records; authoritative only within that evidence store, not portfolio promotion.",
+      "gaps": [
+        "Diverges from formal_verification_contracts.AssuranceLevel (adds HEURISTIC/VALIDATED; different NONE semantics).",
+        "Second total ladder risks dual authorities if either is duplicated into FCA."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Incompatible twin ladder; duplication would create conflicting promotion semantics."
+      },
+      "total_assurance_ladder": true,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": true,
+        "rationale": "Flagged for conservative FCA adaptation rather than duplication: reconcile through a compatibility adapter into FCA; do not promote either ladder as normative."
+      }
+    },
+    {
+      "component_id": "accelerate.proof_status",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/program_logic_prediction_contracts.py",
+      "symbol": "ProofStatus",
+      "line": 164,
+      "semantic_authority": "Closed proof/refutation status for program-logic predictions, independent of source authority and scores.",
+      "gaps": [
+        "Mixes status, freshness (STALE), and error into one enum.",
+        "CANDIDATE/SOLVER_CHECKED/KERNEL_VERIFIED ranks parallel AssuranceLevel without shared identity."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Cross-module comparisons already treat ProofStatus like an assurance rank."
+      },
+      "total_assurance_ladder": true,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": true,
+        "rationale": "Flagged for conservative FCA adaptation rather than duplication: map status into proof/freshness facets separately."
+      }
+    },
+    {
+      "component_id": "accelerate.evidence_class",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_planning_adversarial.py",
+      "symbol": "EvidenceClass",
+      "line": 106,
+      "semantic_authority": "Property-specific non-ordered evidence classes for formal-planning adversarial admission; policy must name acceptable classes rather than ranking strings.",
+      "gaps": [
+        "Still coexists with AssuranceLevel ranks in the same module.",
+        "Does not cover origin/environment product dimensions required by FCA."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Explicitly non-ordered; closer to FCA product thinking than total ladders."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Reuse as a non-ordered class vocabulary; do not collapse into AssuranceLevel ranks."
+      }
+    },
+    {
+      "component_id": "accelerate.artifact_role",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/activation_contracts.py",
+      "symbol": "ArtifactRole",
+      "line": 155,
+      "semantic_authority": "Closed non-interchangeable activation artifact roles (candidate vs current vs certificate); authoritative that roles cannot be relabeled into each other.",
+      "gaps": [
+        "Scoped to proof-backed test reuse activation, not general production claims.",
+        "AUTHORITATIVE_CERTIFICATE still depends on local re-verify before SKIP."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Role distinctions are reference semantics for candidate/current separation in FCA."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Adapt candidate/current/certificate role separation into FCA proof/freshness facets; do not invent a second role lattice."
+      }
+    },
+    {
+      "component_id": "kit.backend_support_tier",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_kit",
+      "commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "path": "external/ipfs_kit/ipfs_kit_py/backends/spec.py",
+      "symbol": "BackendSupportTier",
+      "line": 25,
+      "semantic_authority": "Inventory-assigned backend support tier; never inferred at runtime and not live qualification evidence by itself.",
+      "gaps": [
+        "PRODUCTION/CONDITIONAL tiers are not hermetic/conditional/live observation environments.",
+        "Configuration-only backends can still appear supported if misread as live-qualified."
+      ],
+      "adoption_disposition": "reference_semantics_only",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Support-tier wording is easy to confuse with live capability receipts."
+      },
+      "total_assurance_ladder": true,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": true,
+        "rationale": "Flagged for conservative FCA adaptation rather than duplication: map tiers into environment/support claims without promoting configuration inventory to live observation."
+      }
+    },
+    {
+      "component_id": "kit.evidence_kind",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_kit",
+      "commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "path": "external/ipfs_kit/ipfs_kit_py/core/operation_contracts.py",
+      "symbol": "EvidenceKind",
+      "line": 464,
+      "semantic_authority": "Closed kinds of effect/durability evidence references (WAL, CID, replica receipt); never raw bodies and never logical proof validity.",
+      "gaps": [
+        "Storage-effect evidence only; does not authorize logical proof or admission.",
+        "Integrity_PROOF kind name can be misread as semantic proof."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Effect-evidence vocabulary is compatible with Kit ownership in the FACP plan."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "kit.proof_certificate_store",
+      "category": "proof_contracts_caches",
+      "repository": "external/ipfs_kit",
+      "commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+      "symbol": "IpfsKitProofCertificateStore",
+      "line": 332,
+      "semantic_authority": "Authoritative content-addressed proof-certificate blob store with digest checks; not logical proof validity or authorization.",
+      "gaps": [
+        "Stores bytes/CIDs only; verifier acceptance lives elsewhere.",
+        "Remote get adapters must remain integrity-checked."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "CAS semantics are load-bearing for certificate persistence."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "datasets.evidence_kind",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_datasets",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/evidence.py",
+      "symbol": "EvidenceKind",
+      "line": 42,
+      "semantic_authority": "Stable semantic evidence categories for IR; none implies proof authority by itself.",
+      "gaps": [
+        "Parallel vocabulary to accelerate/kit EvidenceKind enums without shared identity.",
+        "Does not encode promotion predicates."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Cross-repository EvidenceKind collision risk during FCA binding generation."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Adapt into FCA/CCC shared vocabulary; do not keep three normative EvidenceKind authorities."
+      }
+    },
+    {
+      "component_id": "datasets.evidence_review_status",
+      "category": "evidence_ladders",
+      "repository": "external/ipfs_datasets",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/evidence.py",
+      "symbol": "EvidenceReviewStatus",
+      "line": 56,
+      "semantic_authority": "Review lifecycle for addressed evidence (unreviewed through quarantined); closest existing match to FCA review dimension.",
+      "gaps": [
+        "Includes ACCEPTED/REJECTED which can be mistaken for production success.",
+        "Not bound to authority/freshness/effect dimensions."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Review status may be over-read as admission."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.formal_verification_contracts",
+      "category": "proof_contracts_caches",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/formal_verification_contracts.py",
+      "symbol": "ProofVerdict",
+      "line": 182,
+      "semantic_authority": "Authoritative typed proof-verdict and receipt contract vocabulary for the supervisor proof stack; conclusive only for PROVED/DISPROVED.",
+      "gaps": [
+        "Coupled to AssuranceLevel total ladder in the same module.",
+        "Provider-claimed assurance fields require independent kernel evidence."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Schema@version bindings are widely consumed by caches and planners."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.formal_verification_cache",
+      "category": "proof_contracts_caches",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/formal_verification_cache.py",
+      "symbol": "FormalVerificationCache",
+      "line": 1297,
+      "semantic_authority": "Durable reconstructable proof-cache store under binding checks; cache hits are not a trust root and must re-derive authority.",
+      "gaps": [
+        "DuckDB/single-flight coupling.",
+        "Draft/attestation namespaces must remain non-authoritative."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Process-safe cache key schemas are deep dependencies for proof reuse."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.doctor_proof_cache_gate",
+      "category": "proof_contracts_caches",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/doctor_proof_cache.py",
+      "symbol": "DoctorProofCacheGate",
+      "line": 1316,
+      "semantic_authority": "Federation/admission gate over FormalVerificationCache for doctor lanes; not a second proof trust root.",
+      "gaps": [
+        "Multiple nominating surfaces increase mis-binding risk.",
+        "Must not bypass FormalVerificationCache reconstruct-on-hit rules."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Doctor-lane specific but reuses core cache contracts."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.test_proof_cache",
+      "category": "proof_contracts_caches",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py",
+      "symbol": "TestProofCache",
+      "line": 267,
+      "semantic_authority": "Adapter for proof-backed test-reuse admission after local re-verify; serialized trusted flags are never authority alone.",
+      "gaps": [
+        "Depends on external certificate providers and current locator freshness."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Reuse decisions couple to test certificate schemas."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.proof_cached_test_validation",
+      "category": "proof_contracts_caches",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_cached_test_validation.py",
+      "symbol": "ProofCachedTestValidation",
+      "line": 594,
+      "semantic_authority": "Supervisor boundary from pytest proof-cache SKIP to completion evidence; historical certificates alone do not validate.",
+      "gaps": [
+        "Short-lived receipts; requires live tree + certificate re-verify."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Ties validation completion gates to the test-reuse stack."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.proof_carrying_planner",
+      "category": "planners",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/proof_carrying_planner.py",
+      "symbol": "ProofCarryingPlanner",
+      "line": 872,
+      "semantic_authority": "Coordinator for restartable proof-carrying workflow state and decisions; must not promote provider status strings across evidence roles.",
+      "gaps": [
+        "Integration adapters (provider/prover/merge/monitor) must be explicit.",
+        "Consumes AssuranceLevel total ladder for plan assurance thresholds."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Duplicating this orchestration would fork trust boundaries."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.plan_admission_service",
+      "category": "planners",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_admission_service.py",
+      "symbol": "PlanAdmissionService",
+      "line": 950,
+      "semantic_authority": "Multi-gate plan admission join that strips provider admitted/valid/passed claims and binds receipts to tree/IR/proof roots.",
+      "gaps": [
+        "Hard-stage ordering must remain fail-closed under FCA.",
+        "Unknown mandatory applicability must not soft-succeed."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Central admission choke point for the future control plane."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.formal_plan_compiler",
+      "category": "planners",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py",
+      "symbol": "FormalPlanCompiler",
+      "line": 1215,
+      "semantic_authority": "Compiles plan sources into FormalWorkPlan/admission artifacts; compilation success is not proof or execution permit.",
+      "gaps": [
+        "Multiple source surfaces need stable identity bindings."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Large surface coupled to planning vocabulary and admission IR."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.formal_plan_validator",
+      "category": "planners",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_validator.py",
+      "symbol": "FormalPlanValidator",
+      "line": 976,
+      "semantic_authority": "Consistency validator for FormalWorkPlan over a reviewed DCEC/TDFOL subset; not code-correctness or work-happened attestation.",
+      "gaps": [
+        "Positive plan check is not kernel_verified without reconstructing kernel evidence."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Deliberately small reference model."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.formal_work_plan",
+      "category": "planners",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_planning_contracts.py",
+      "symbol": "FormalWorkPlan",
+      "line": 1143,
+      "semantic_authority": "Canonical contract shape for formal work plans, evidence requirements, and plan assurance records.",
+      "gaps": [
+        "PlanAssurance still carries minimum AssuranceLevel ranks.",
+        "Not an execution or mutation permit."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Schema changes ripple across compiler/validator/admission."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.program_dependency_graph",
+      "category": "dependency_graphs",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/program_dependency_graph.py",
+      "symbol": "ProgramDependencyGraph",
+      "line": 403,
+      "semantic_authority": "Snapshot-bound typed program dependency graph (call/data/state/schema/wiring); not proof authority.",
+      "gaps": [
+        "Dynamic callees/factories marked incomplete.",
+        "Path heuristics can miss generated/native edges."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Large AST/index coupling for impact analysis."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.semantic_dependency_graph",
+      "category": "dependency_graphs",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_dependency_graph.py",
+      "symbol": "SemanticDependencyGraph",
+      "line": 788,
+      "semantic_authority": "Verification-boundary semantic dependency graph; mandatory closure excludes untrusted/model annotations from authority-bearing sets.",
+      "gaps": [
+        "Bounds (nodes/edges/depth) can truncate; truncated closures must not silently authorize."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Authority/trust enums are cross-cutting for SDI."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.semantic_authority",
+      "category": "dependency_graphs",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_dependency_graph.py",
+      "symbol": "SemanticAuthority",
+      "line": 201,
+      "semantic_authority": "Closed semantic-authority classification for dependency nodes used by mandatory closure.",
+      "gaps": [
+        "Local graph authority, not portfolio authorization or proof promotion."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Small closed vocabulary; useful reference for FCA authority facet naming."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.reference_authorization_evaluator",
+      "category": "authorization",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py",
+      "symbol": "ReferenceAuthorizationEvaluator",
+      "line": 923,
+      "semantic_authority": "Reference evaluator for principal/action/lease/fencing authorization decisions; never asserts generated-code correctness.",
+      "gaps": [
+        "Datalog/SecPAL engines are shadow-only until fixture conformance.",
+        "Delegation depth is capped."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Security-sensitive policy schemas and engine adapters."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.authorization_grant",
+      "category": "authorization",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/authorization_logic.py",
+      "symbol": "AuthorizationGrant",
+      "line": 370,
+      "semantic_authority": "Canonical grant contract for scoped capabilities including lease and fencing bindings.",
+      "gaps": [
+        "GeneratedCodeCorrectness is permanently not_established by design.",
+        "Expired/revoked grants must remain fail-closed under FCA."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Grant schema is foundational for EAK authority admission."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.execution_permit",
+      "category": "authorization",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/execution_permit.py",
+      "symbol": "issue_execution_permit",
+      "line": 980,
+      "semantic_authority": "One-use mutation permit issuer after plan admission; verification consumes uses and never grants task-completion authority.",
+      "gaps": [
+        "Requires current DecisionRequest + mandatory closure + fencing/lease bindings."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Replay/fencing bugs at this boundary are critical."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.verified_authority_binding",
+      "category": "authorization",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/contracts/authority.py",
+      "symbol": "VerifiedAuthorityBinding",
+      "line": 10,
+      "semantic_authority": "Neutral Protocol for verified authority bindings; no key storage or I/O.",
+      "gaps": [
+        "Implementation lives in control.profile_authority; ports alone are insufficient."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Thin Protocol surface."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.program_repair_synthesizer",
+      "category": "repair",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py",
+      "symbol": "ProgramRepairSynthesizer",
+      "line": 1857,
+      "semantic_authority": "Proposal-only deterministic repair synthesizer under reviewed operators; no write/semantic/proof authority; hybrid residual path is separately named.",
+      "gaps": [
+        "Does not import LLM surfaces; residual hybrid packets must not escalate authority."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Couples to CEGIS/doctor synthesizer contracts for RSE."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.repair_operator_registry",
+      "category": "repair",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/repair_operator_registry.py",
+      "symbol": "RepairOperatorRegistry",
+      "line": 822,
+      "semantic_authority": "Authoritative catalog of reviewed doctor repair operators/capabilities; unknown operators are rejected.",
+      "gaps": [
+        "Registry contents are reviewed artifacts and must be version-pinned for FCA."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Closed enum/spec lookup surface."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.contract_drift_monitor",
+      "category": "repair",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/drift_monitor.py",
+      "symbol": "ContractDriftMonitor",
+      "line": 319,
+      "semantic_authority": "Drift-driven proof invalidation/reopen of affected evidence closures; cannot auto-weaken contracts or infer health from stale receipts.",
+      "gaps": [
+        "Thin package; release-root policy path is environment-specific."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Couples to release evidence and invalidation closures."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.lease_coordinator",
+      "category": "lease_fence_recovery",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+      "symbol": "LeaseCoordinator",
+      "line": 1561,
+      "semantic_authority": "Authoritative fencing/lease coordination for daemon lanes; expired workers cannot publish after takeover.",
+      "gaps": [
+        "DuckDB single-writer and file-lock assumptions.",
+        "Single-flight outcomes are not proof hits."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Concurrency/fencing correctness is hard to reimplement safely."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.stale_fencing_token_error",
+      "category": "lease_fence_recovery",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+      "symbol": "StaleFencingTokenError",
+      "line": 524,
+      "semantic_authority": "Fail-closed signal when execution uses a superseded fencing token.",
+      "gaps": [
+        "Error taxonomy is Profile-G coded; adapters must preserve fail-closed meaning."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Small error contract with clear semantics."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.distributed_single_flight",
+      "category": "lease_fence_recovery",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+      "symbol": "DistributedSingleFlightCoordinator",
+      "line": 5235,
+      "semantic_authority": "Distributed single-flight coordinator for shared proof/work units; outcomes are coordination results, not proof authority.",
+      "gaps": [
+        "Must not be misread as cache-hit semantic truth."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Deep coupling to lease store and proof cache single-flight."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.checkout_mutation_lease",
+      "category": "lease_fence_recovery",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/checkout_lock.py",
+      "symbol": "acquire_checkout_mutation_lease",
+      "line": 641,
+      "semantic_authority": "Checkout mutation lease/lock helper for merge trains and objective admission; not semantic proof authority.",
+      "gaps": [
+        "POSIX/Windows lock backends differ; inactive-lease adoption needs liveness checks."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Filesystem/git common-dir coupling."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.run_leased_lane",
+      "category": "lease_fence_recovery",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/leased_lane.py",
+      "symbol": "run_leased_lane",
+      "line": 1768,
+      "semantic_authority": "Leased worker-lane execution under process fence; completion receipts are durable lane outcomes, not global proof.",
+      "gaps": [
+        "Heavy DuckDB/task-identity coupling; process fencing edge cases."
+      ],
+      "adoption_disposition": "reference_semantics_only",
+      "compatibility_risk": {
+        "level": "high",
+        "rationale": "Ops-specific lane runner; reuse patterns, not as FCA kernel."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.supervisor_recovery",
+      "category": "lease_fence_recovery",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/supervisor_recovery.py",
+      "symbol": "SupervisorRecovery",
+      "line": 899,
+      "semantic_authority": "Checkpointed supervisor recovery dispositions/receipts under integrity bounds; detection is not unrestricted restart authority.",
+      "gaps": [
+        "Programmatic recovery policies are bounded; fault-injection helpers must stay non-prod."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Checkpoint store formats and fault enums."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.rescue_orchestrator",
+      "category": "lease_fence_recovery",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/rescue_orchestrator.py",
+      "symbol": "RescueOrchestrator",
+      "line": 1203,
+      "semantic_authority": "Fail-closed execution of incident rescue proposals via multi-domain auth + one-use permits; no shell/provider surface.",
+      "gaps": [
+        "Requires injected authorizers/permit boundary; planner proposals alone are non-authoritative."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Protocol-heavy; safe if adapters stay explicit."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.runtime_temporal_monitor",
+      "category": "runtime_monitors",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/runtime_temporal_monitor.py",
+      "symbol": "RuntimeTemporalMonitor",
+      "line": 1015,
+      "semantic_authority": "Finite-prefix counterexample detector for temporal properties; a clean prefix is no_violation_observed only and never proves unbounded properties.",
+      "gaps": [
+        "Out-of-window/untimestamped events are inconclusive.",
+        "Reopen requests are observations, not auto-repair authority."
+      ],
+      "adoption_disposition": "adapt_conservatively_for_fca",
+      "compatibility_risk": {
+        "level": "medium",
+        "rationale": "Event schema/lifecycle coupling for TEP monitors."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": true,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.temporal_monitor_policy",
+      "category": "runtime_monitors",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/runtime_temporal_monitor.py",
+      "symbol": "TemporalMonitorPolicy",
+      "line": 333,
+      "semantic_authority": "Policy contract for which temporal properties a runtime monitor evaluates and how inconclusive traces are treated.",
+      "gaps": [
+        "Policy alone does not observe effects."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Small policy DTO."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    },
+    {
+      "component_id": "accelerate.stall_classifier",
+      "category": "runtime_monitors",
+      "repository": "external/ipfs_accelerate",
+      "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/run_monitor.py",
+      "symbol": "StallClassifier",
+      "line": 168,
+      "semantic_authority": "Contracts for RUNNING stall classification and recovery-policy receipts; detection never grants restart or self-guardian attestation.",
+      "gaps": [
+        "Client sessions never own monitor liveness; guardian adoption is separate."
+      ],
+      "adoption_disposition": "reuse_as_is",
+      "compatibility_risk": {
+        "level": "low",
+        "rationale": "Contract/DTO oriented."
+      },
+      "total_assurance_ladder": false,
+      "fca_adaptation": {
+        "flagged_for_conservative_adaptation": false,
+        "do_not_duplicate": false,
+        "rationale": "Not a total assurance ladder; reuse or adapt under stated disposition."
+      }
+    }
+  ],
+  "coverage": {
+    "component_count": 40,
+    "total_assurance_ladders_flagged": 4,
+    "categories_present": [
+      "authorization",
+      "dependency_graphs",
+      "evidence_ladders",
+      "lease_fence_recovery",
+      "planners",
+      "proof_contracts_caches",
+      "repair",
+      "runtime_monitors"
+    ]
+  },
+  "acceptance_notes": [
+    "Every reusable component records exact commit/path/symbol, semantic authority, gaps, adoption disposition, and compatibility risk.",
+    "Total assurance ladders (AssuranceLevel variants, ProofStatus rank usage, BackendSupportTier as support ladder) are flagged for conservative FCA adaptation rather than duplication.",
+    "Discovery in this report is not completion of FCA, migration, or proof."
+  ]
+}
