@@ -1322,7 +1322,7 @@ not authority.
 
 ## FACP-048 Publish and compose repository assume-guarantee contracts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
