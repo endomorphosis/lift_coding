@@ -566,7 +566,7 @@ not authority.
 
 ## FACP-020 Seal formal-claim-algebra-v1 conformance
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
