@@ -863,7 +863,7 @@ not authority.
 
 ## FACP-031 Seal the four-path FCA day-90 gate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
