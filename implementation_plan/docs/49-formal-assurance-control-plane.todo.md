@@ -53,7 +53,7 @@ not authority.
 
 ## FACP-001 Inventory reusable formal and supervisor primitives
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
