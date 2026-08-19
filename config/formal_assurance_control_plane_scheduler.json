@@ -77,11 +77,11 @@
     "scripts/formal_assurance_control_plane_supervisor.sh"
   ],
   "runtime_paths": {
-    "root": "data/agent_supervisor/formal_assurance_control_plane",
-    "state": "data/agent_supervisor/formal_assurance_control_plane/state",
-    "worktrees": "data/agent_supervisor/formal_assurance_control_plane/worktrees",
-    "merge_queue": "data/agent_supervisor/formal_assurance_control_plane/merge_queue",
-    "logs": "data/agent_supervisor/formal_assurance_control_plane/logs"
+    "root": "data/agent_supervisor/formal_assurance_control_plane_v2",
+    "state": "data/agent_supervisor/formal_assurance_control_plane_v2/state",
+    "worktrees": "data/agent_supervisor/formal_assurance_control_plane_v2/worktrees",
+    "merge_queue": "data/agent_supervisor/formal_assurance_control_plane_v2/merge_queue",
+    "logs": "data/agent_supervisor/formal_assurance_control_plane_v2/logs"
   },
   "provider": {
     "primary_provider_id": "grok_cli",
@@ -89,7 +89,7 @@
     "fallback_provider_id": "codex",
     "fallback_model_id": "gpt-5.6-terra",
     "fallback_trigger": "primary_quota_exhausted",
-    "fallback_reasoning_effort": "medium",
+    "fallback_reasoning_effort": "high",
     "max_concurrency": 4
   },
   "safety_floors": {

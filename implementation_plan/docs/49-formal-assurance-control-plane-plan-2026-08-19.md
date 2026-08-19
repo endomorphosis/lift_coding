@@ -62,6 +62,13 @@ configured-board scheduler already emits. The backport changes no task-source
 semantics; it prevents an argument-parser restart storm while retaining the
 scheduler's explicit authority selection.
 
+The first post-parser bootstrap exposed a second sealed-route mismatch before
+any provider was dispatched: this pinned daemon admits the reviewed quota-only
+route only with Codex reasoning effort `high`. The controller therefore seals
+that exact tuple and uses the fresh `formal_assurance_control_plane_v2`
+runtime namespace. The prior namespace is retained as failure evidence rather
+than deleting or silently resetting its consumed attempt records.
+
 ## 3. Target flow and trusted computing base
 
 ```text
