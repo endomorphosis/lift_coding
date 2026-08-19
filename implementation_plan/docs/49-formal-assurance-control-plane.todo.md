@@ -674,7 +674,7 @@ not authority.
 
 ## FACP-024 Add Accelerate mock-origin rejection tests
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
