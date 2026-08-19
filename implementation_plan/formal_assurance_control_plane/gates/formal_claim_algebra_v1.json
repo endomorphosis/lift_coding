@@ -1,0 +1,380 @@
+{
+  "schema": "facp/fca-conformance@1",
+  "schema_version": 1,
+  "task_id": "FACP-020",
+  "goal_id": "FACP-G100",
+  "bundle": "facp/fca/gate",
+  "title": "Seal formal-claim-algebra-v1 conformance",
+  "release": "formal-claim-algebra-v1",
+  "vocabulary_schema": "facp/formal-claim-algebra-v1@1",
+  "status": "sealed",
+  "generated_at": "2026-08-19T15:08:52Z",
+  "behavior_change": false,
+  "policy": {
+    "producer_artifacts_immutable": true,
+    "discovery_is_not_completion": true,
+    "provider_authority": "none",
+    "four_path_migration_excluded_until": "FACP-031",
+    "no_unqualified_production_claim": true,
+    "fail_closed": true,
+    "prohibited_effects": [
+      "mark_migrated_paths_complete",
+      "accept_stale_or_partial_language_results",
+      "provider_authored_completion",
+      "construct_forbidden_promotion",
+      "introduce_unqualified_production_claim"
+    ]
+  },
+  "source_binding": {
+    "controller_commit": "74d27ffea8fdfa8bb83980650908528352e5976f",
+    "controller_tree": "3f016bea2dc70f5aa2422e45fdecf14f2d20137a",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "spec_path": "Mcp-Plus-Plus/docs/spec/formal-claim-algebra-v1.md",
+    "spec_sha256": "5df1e98582b0d1a3d323d541043268aefae488e173883390f7f9b97595d638bb",
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "d572b1662922ffda952016f04537711f5c730581",
+        "planning_revision_field": "mcp_plus_plus_planning_revision",
+        "scheduler_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "fd96ae5663f9681ccb606cc373d58a82521e4324",
+        "planning_revision_field": "accelerate_planning_revision",
+        "scheduler_planning_revision": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "planning_revision_field": "datasets_planning_revision",
+        "scheduler_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "matches_scheduler_planning_revision": true
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "09c3156ee99929cc2d13aaadcce7e2be024606bd",
+        "planning_revision_field": "kit_planning_revision",
+        "scheduler_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "planning_revision_field": "swissknife_planning_revision",
+        "scheduler_planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "matches_scheduler_planning_revision": true
+      }
+    ],
+    "depends_on": [
+      "FACP-012",
+      "FACP-014",
+      "FACP-015",
+      "FACP-017",
+      "FACP-018",
+      "FACP-019"
+    ],
+    "shared_producer_inputs": [
+      "FACP-013",
+      "FACP-016"
+    ],
+    "producer_inputs": [
+      {
+        "task_id": "FACP-012",
+        "role": "illegal_promotion_theorems",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/formal/lean/FormalClaimAlgebra/Promotion.lean",
+            "sha256": "f8a32df78c0830ea21fdf4f03d49ccff18cb020c3b20b2b68f1c2daea4ecf9b7"
+          },
+          {
+            "path": "Mcp-Plus-Plus/formal/lean/FormalClaimAlgebra/Basic.lean",
+            "sha256": "f701d92fe1a5141b3273ad2eafe8fbd6d7b78d0d2e9f47708b51abb0c87c7d54"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_formal_claim_algebra_theorems.py",
+            "sha256": "4e578347477a615bdfdb058049d856e1d03f8238f39fa8c1dc49c78b1a7b24c0"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-013",
+        "role": "shared_rust_kernel",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/tests-rs/src/formal_claim_algebra.rs",
+            "sha256": "472e63c63b53ee16e403b9e93cd53e580ab58bf6edf03f4af34dff2b586c9bc6"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-rs/tests/formal_claim_algebra_test.rs",
+            "sha256": "fa1bbb897505d22140fa13d129d7b176ae51c814d37f44ec9112ed38e77c80db"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-014",
+        "role": "accelerate_compatibility_adapter",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/assurance/formal_claim_adapter.py",
+            "sha256": "0f30e833495066e08de170877697ff1ffd59ad97140d18cea6b8328b78f3c1d2"
+          },
+          {
+            "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_formal_claim_adapter.py",
+            "sha256": "5105304f84102451bf910d6e6a44e9dc07391814d9ea63100228a4fde35acbba"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-015",
+        "role": "kit_compatibility_adapter",
+        "paths": [
+          {
+            "path": "external/ipfs_kit/ipfs_kit_py/assurance/formal_claim_adapter.py",
+            "sha256": "7d743970f542dc2f196d9bfca2bf3ec367c8929bafa23be5d047af25c31dea51"
+          },
+          {
+            "path": "external/ipfs_kit/tests/test_formal_claim_adapter.py",
+            "sha256": "2245703f367f3c2ef53615e13ebe7f5c49f8d9243d9d2d53a6c83f6b074d8e4e"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-016",
+        "role": "shared_vectors_and_schema",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/conformance/vectors/formal_claim_algebra.json",
+            "sha256": "b24ef03e678eb36bb18e3ccb7d72c80293c05835d1369b9cf77b7d9358087fbe"
+          },
+          {
+            "path": "Mcp-Plus-Plus/schemas/assurance/v1/promotion-rules.json",
+            "sha256": "753a96ca7e7d01e1781cedc0323a05e01ac7957fba8b9d873d6210e5b6573481"
+          },
+          {
+            "path": "Mcp-Plus-Plus/schemas/assurance/v1/evidence-envelope.schema.json",
+            "sha256": "fcadb7483b5fcc55dd10ac7ad2842915f09ba81481ae2190f9fbbf75f706631f"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-017",
+        "role": "python_binding",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/tests-py/validators/formal_claim_algebra.py",
+            "sha256": "7b25e370d7ee21c264abc5be5ee24ed0bd1b3bd1b7abfdad876442371971e781"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_formal_claim_algebra_python.py",
+            "sha256": "b0d8f5626beba48448be135670a35a14f3a364eff9506847c5bb5412ecd8980c"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-018",
+        "role": "typescript_binding",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/tests-ts/src/formalClaimAlgebra.ts",
+            "sha256": "e6af81f0413be1c8ccd4ca05f4258a883bfa3458400e6d4e1afaef8415442325"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-ts/src/__tests__/formalClaimAlgebra.test.ts",
+            "sha256": "3398e9b05b27ed874b0a9012473f7f213af17babd1f7c804c466371f5e9ebe7a"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-019",
+        "role": "ambiguous_claim_scanner",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_claim_scanner.py",
+            "sha256": "19ebf81a1595dbbbb7c929d1cf29bf77d185f263a4350018a092d52cf586b04d"
+          },
+          {
+            "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_formal_claim_scanner.py",
+            "sha256": "09da7ac417401e0a3a7d815a2c81301c2d1ed33745dde5d81881dbf2b74c0844"
+          },
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/baseline/defect_corpus.jsonl",
+            "sha256": "81abcb87afa62c88ff371afe8fd5ffe8433941bf726056901e931d3c1f25b4c5"
+          }
+        ]
+      }
+    ]
+  },
+  "evidence_subset": [
+    "theorem_toolchain_identities",
+    "vector_digests",
+    "cross_language_transition_matrix",
+    "compatibility_loss_report",
+    "scanner_corpus_score"
+  ],
+  "theorem_toolchain_identities": {
+    "schema": "facp/illegal-promotion-proof@1",
+    "lean_pinned_version": "4.33.0",
+    "lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+    "lean_raw": "Lean (version 4.33.0, aarch64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+    "lake_version": "5.0.0-src+d8b1897",
+    "promotion_lean_path": "Mcp-Plus-Plus/formal/lean/FormalClaimAlgebra/Promotion.lean",
+    "promotion_lean_sha256": "f8a32df78c0830ea21fdf4f03d49ccff18cb020c3b20b2b68f1c2daea4ecf9b7",
+    "basic_lean_path": "Mcp-Plus-Plus/formal/lean/FormalClaimAlgebra/Basic.lean",
+    "basic_lean_sha256": "f701d92fe1a5141b3273ad2eafe8fbd6d7b78d0d2e9f47708b51abb0c87c7d54",
+    "lakefile_path": "Mcp-Plus-Plus/formal/lean/lakefile.toml",
+    "lakefile_sha256": "e045d9179b637f5ccf92121d95dba94029261b7216055894e1f8a112b9006b8a",
+    "theorem_count": 48,
+    "theorem_names": [
+      "fixture_not_to_live_observed",
+      "fixture_not_to_hermetic_observed",
+      "simulated_not_to_live_observed",
+      "simulated_not_to_hermetic_observed",
+      "expired_not_to_valid",
+      "revoked_not_to_valid",
+      "denied_not_to_valid",
+      "policy_denied_not_to_allowed",
+      "candidate_forbidden_without_verifier",
+      "stale_not_to_current",
+      "superseded_not_to_current",
+      "withdrawn_not_to_current",
+      "withdrawn_not_to_stale",
+      "not_started_not_to_observed",
+      "externally_unknown_forbidden_without_observation",
+      "hermetic_not_to_live",
+      "conditional_live_forbidden_without_qualification",
+      "origin_forbidden_implies_not_allowed",
+      "authority_forbidden_implies_not_allowed",
+      "policy_forbidden_implies_not_allowed",
+      "freshness_forbidden_implies_not_allowed",
+      "absolute_effect_forbidden_implies_not_allowed",
+      "proof_reusable_requires_verified",
+      "production_supported_requires_live_origin",
+      "production_supported_requires_valid_authority",
+      "production_supported_requires_current_freshness",
+      "release_admissible_requires_verified_proof",
+      "digest_to_truth",
+      "signature_to_authority",
+      "declared_to_observed",
+      "payment_to_authority",
+      "browser_policy_to_host_policy",
+      "candidate_to_verified",
+      "inventory_to_live_qualification",
+      "externally_unknown_to_observed",
+      "discovery_to_completion",
+      "review_fills_missing_evidence",
+      "single_dimension_to_production_success",
+      "success_boolean_to_observed",
+      "mutable_dependency_to_release",
+      "license_conflict_to_release",
+      "unchecked_hash_not_production",
+      "fixture_not_production_supported",
+      "simulated_not_production_supported",
+      "stale_receipt_not_production_supported",
+      "expired_delegation_not_production_supported",
+      "revoked_delegation_not_production_supported",
+      "strong_envelope_satisfies_all_predicates"
+    ],
+    "prohibited_declarations_absent": true,
+    "tcb_path": "implementation_plan/formal_assurance_control_plane/baseline/trusted_computing_base.json",
+    "tcb_sha256": "03f32a9e9f92e2883a67f44243e9a4d435a2a62a0dc5de4efb02611ec0cb3743"
+  },
+  "vector_digests": {
+    "vectors_path": "Mcp-Plus-Plus/conformance/vectors/formal_claim_algebra.json",
+    "vectors_sha256": "b24ef03e678eb36bb18e3ccb7d72c80293c05835d1369b9cf77b7d9358087fbe",
+    "rules_path": "Mcp-Plus-Plus/schemas/assurance/v1/promotion-rules.json",
+    "rules_sha256": "753a96ca7e7d01e1781cedc0323a05e01ac7957fba8b9d873d6210e5b6573481",
+    "envelope_schema_path": "Mcp-Plus-Plus/schemas/assurance/v1/evidence-envelope.schema.json",
+    "envelope_schema_sha256": "fcadb7483b5fcc55dd10ac7ad2842915f09ba81481ae2190f9fbbf75f706631f",
+    "positive_vector_count": 72,
+    "negative_vector_count": 36,
+    "mutation_vector_count": 19,
+    "theorem_case_count": 47
+  },
+  "cross_language_transition_matrix": {
+    "languages": [
+      "lean",
+      "rust",
+      "python",
+      "typescript"
+    ],
+    "agree": true,
+    "positive_accept": 72,
+    "negative_reject": 36,
+    "mutation_reject": 19,
+    "python_normative_vectors_pass": true,
+    "rust_tables_match_rules": true,
+    "typescript_tables_match_rules": true,
+    "lean_forbidden_promotion_theorems_present": true,
+    "weak_origin_production_success_blocked": true
+  },
+  "compatibility_loss_report": {
+    "accelerate_adapter": {
+      "task_id": "FACP-014",
+      "adapter_path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/assurance/formal_claim_adapter.py",
+      "adapter_sha256": "0f30e833495066e08de170877697ff1ffd59ad97140d18cea6b8328b78f3c1d2",
+      "unsafe_promotion_default": false,
+      "unsafe_promotion": false,
+      "information_losing_reverse_projection_refused": true,
+      "refusal_code": "information_losing_reverse_projection"
+    },
+    "kit_adapter": {
+      "task_id": "FACP-015",
+      "adapter_path": "external/ipfs_kit/ipfs_kit_py/assurance/formal_claim_adapter.py",
+      "adapter_sha256": "7d743970f542dc2f196d9bfca2bf3ec367c8929bafa23be5d047af25c31dea51",
+      "unsafe_promotion_default": false,
+      "unsafe_promotion": false,
+      "round_trip_preserves_distinctions": true,
+      "zero_qualified_nonqualifying": true,
+      "envelope_only_reverse_projection_refused": true
+    }
+  },
+  "scanner_corpus_score": {
+    "schema": "facp/ambiguous-claim-scan@1",
+    "scanner_version": "formal-claim-scanner/v1",
+    "scanner_path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/formal_claim_scanner.py",
+    "scanner_sha256": "19ebf81a1595dbbbb7c929d1cf29bf77d185f263a4350018a092d52cf586b04d",
+    "corpus_path": "implementation_plan/formal_assurance_control_plane/baseline/defect_corpus.jsonl",
+    "corpus_sha256": "81abcb87afa62c88ff371afe8fd5ffe8433941bf726056901e931d3c1f25b4c5",
+    "seeds_total": 104,
+    "seeds_scannable": 77,
+    "seeds_bound": 77,
+    "finding_count": 134,
+    "reject_or_corpus_bound_count": 134,
+    "allowlist_cannot_suppress_corpus": true,
+    "no_new_unqualified_production_claim": true,
+    "score": 1.0
+  },
+  "exclusions": {
+    "four_path_migration": {
+      "excluded": true,
+      "deferred_until_task": "FACP-031",
+      "migration_complete": false,
+      "migrated_paths_marked_complete": false,
+      "day90_gate_path": "implementation_plan/formal_assurance_control_plane/gates/day90_four_path.json",
+      "day90_gate_present": false,
+      "repositories": [
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "swissknife"
+      ],
+      "reading": "FACP-020 seals FCA conformance only. Four-path production migration remains deferred until FACP-031."
+    }
+  },
+  "acceptance": {
+    "all_implementations_agree": true,
+    "no_forbidden_promotion_constructible": true,
+    "no_unqualified_production_claim_newly_introduced": true,
+    "receipt_binds_exact_source_and_dependencies": true,
+    "four_path_migration_excluded_until_facp_031": true
+  },
+  "content_binding": {
+    "alg": "sha256",
+    "canonicalization": "json-sort-keys-separators-comma-colon",
+    "covers": "gate_record_excluding_content_sha256"
+  },
+  "content_sha256": "bf7743f55ebd801d2af4241e7b26bab0a2cdec8520c4a88443f3d176dbc7d248"
+}
