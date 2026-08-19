@@ -836,7 +836,7 @@ not authority.
 
 ## FACP-030 Migrate SwissKnife to host-issued FCA outcomes
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
