@@ -539,7 +539,7 @@ not authority.
 
 ## FACP-019 Add the repository-wide ambiguous-claim scanner
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
