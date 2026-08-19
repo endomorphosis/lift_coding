@@ -188,7 +188,7 @@ not authority.
 
 ## FACP-006 Inventory MCP++ schemas and canonicalization
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
