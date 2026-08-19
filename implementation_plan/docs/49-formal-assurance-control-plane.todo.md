@@ -1106,7 +1106,7 @@ not authority.
 
 ## FACP-040 Route migrated Accelerate transports through admission
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
