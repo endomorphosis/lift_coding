@@ -1079,7 +1079,7 @@ not authority.
 
 ## FACP-039 Implement the restricted Effect Admission Kernel
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
