@@ -1133,7 +1133,7 @@ not authority.
 
 ## FACP-041 Connect SwissKnife and seal the EAK negative gate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
