@@ -1484,7 +1484,7 @@ not authority.
 
 ## FACP-054 Execute the local filesystem, pinned IPFS, and Iroh cohort
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
