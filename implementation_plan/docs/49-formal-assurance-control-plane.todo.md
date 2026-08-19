@@ -1241,7 +1241,7 @@ not authority.
 
 ## FACP-045 Model transactional effect protocols
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
