@@ -269,7 +269,7 @@ not authority.
 
 ## FACP-009 Specify the multidimensional evidence product algebra
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
