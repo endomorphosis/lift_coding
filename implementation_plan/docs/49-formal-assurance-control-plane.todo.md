@@ -1295,7 +1295,7 @@ not authority.
 
 ## FACP-047 Extend semantic graphs into content-addressed capsules
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
