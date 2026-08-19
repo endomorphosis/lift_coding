@@ -890,7 +890,7 @@ not authority.
 
 ## FACP-032 Extend MCP++ IDL with OperationSpec@1
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
