@@ -1,0 +1,418 @@
+{
+  "schema": "facp/tcb@1",
+  "schema_version": 1,
+  "task_id": "FACP-008",
+  "goal_id": "FACP-G010",
+  "bundle": "facp/inventory/fanin",
+  "title": "Formal assurance trusted computing base snapshot",
+  "generated_at": "2026-08-19T07:33:54Z",
+  "behavior_change": false,
+  "policy": {
+    "discovery_is_not_completion": true,
+    "missing_tool_is_typed_capability_gap": true,
+    "no_ad_hoc_installation": true,
+    "no_simulated_proof_for_absent_tools": true
+  },
+  "source_binding": {
+    "controller_commit": "c999de6c7589c64bb9db208c5e250888c77374f8",
+    "controller_tree": "5aebaab5a78c2c543735602481e59d2796b71283",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "planning_revision_field": "mcp_plus_plus_planning_revision"
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "planning_revision_field": "accelerate_planning_revision"
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "planning_revision_field": "datasets_planning_revision"
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "planning_revision_field": "kit_planning_revision"
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "planning_revision_field": "swissknife_planning_revision"
+      }
+    ]
+  },
+  "components": [
+    {
+      "component_id": "tool:lean4",
+      "name": "lean4",
+      "role": "Normative claim and promotion semantics",
+      "version": "4.33.0",
+      "status": "present",
+      "required_for_core_fca": true,
+      "capability": "available",
+      "assumptions": [
+        "lean4 version 4.33.0 is the observed host toolchain identity for this TCB snapshot.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": "Lean (version 4.33.0, aarch64-unknown-linux-gnu, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+      "notes": null
+    },
+    {
+      "component_id": "tool:lake",
+      "name": "lake",
+      "role": "Lean project build orchestration",
+      "version": "5.0.0-src+d8b1897",
+      "status": "present",
+      "required_for_core_fca": true,
+      "capability": "available",
+      "assumptions": [
+        "lake version 5.0.0-src+d8b1897 is the observed host toolchain identity for this TCB snapshot.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": "Lake version 5.0.0-src+d8b1897 (Lean version 4.33.0)",
+      "notes": null
+    },
+    {
+      "component_id": "tool:rust_cargo",
+      "name": "rust_cargo",
+      "role": "Executable trusted kernel toolchain (Rust)",
+      "version": "1.95.0",
+      "status": "present",
+      "required_for_core_fca": true,
+      "capability": "available",
+      "assumptions": [
+        "rust_cargo version 1.95.0 is the observed host toolchain identity for this TCB snapshot.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+      "notes": null
+    },
+    {
+      "component_id": "tool:verus",
+      "name": "verus",
+      "role": "Optional Rust verification where a pinned toolchain is admitted",
+      "version": null,
+      "status": "absent",
+      "required_for_core_fca": false,
+      "capability": "typed_capability_gap",
+      "assumptions": [
+        "verus is absent on the host; tasks needing it must record defer_capability or reviewed provisioning, never ad hoc install.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": null,
+      "notes": "conditional_pinned_toolchain_only"
+    },
+    {
+      "component_id": "tool:tla_plus",
+      "name": "tla_plus",
+      "role": "Stateful and distributed protocol modeling (TLA+/PlusCal)",
+      "version": null,
+      "status": "absent",
+      "required_for_core_fca": false,
+      "capability": "typed_capability_gap",
+      "assumptions": [
+        "tla_plus is absent on the host; tasks needing it must record defer_capability or reviewed provisioning, never ad hoc install.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": null,
+      "notes": "PlusCal/TLA+ toolchain not pinned in this worktree; capability gap until admitted."
+    },
+    {
+      "component_id": "tool:alloy",
+      "name": "alloy",
+      "role": "Relational counterexamples",
+      "version": null,
+      "status": "absent",
+      "required_for_core_fca": false,
+      "capability": "typed_capability_gap",
+      "assumptions": [
+        "alloy is absent on the host; tasks needing it must record defer_capability or reviewed provisioning, never ad hoc install.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": null,
+      "notes": null
+    },
+    {
+      "component_id": "tool:souffle",
+      "name": "souffle",
+      "role": "Souffle-compatible Datalog for static effects/trust/impact",
+      "version": null,
+      "status": "absent",
+      "required_for_core_fca": false,
+      "capability": "typed_capability_gap",
+      "assumptions": [
+        "souffle is absent on the host; tasks needing it must record defer_capability or reviewed provisioning, never ad hoc install.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": null,
+      "notes": null
+    },
+    {
+      "component_id": "tool:z3",
+      "name": "z3",
+      "role": "SMT solver for proof and synthesis scopes",
+      "version": "4.15.4",
+      "status": "present",
+      "required_for_core_fca": false,
+      "capability": "available",
+      "assumptions": [
+        "z3 version 4.15.4 is the observed host toolchain identity for this TCB snapshot.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": "Z3 version 4.15.4 - 64 bit",
+      "notes": null
+    },
+    {
+      "component_id": "tool:cvc5",
+      "name": "cvc5",
+      "role": "SMT solver for proof and synthesis scopes",
+      "version": "1.3.3",
+      "status": "present",
+      "required_for_core_fca": false,
+      "capability": "available",
+      "assumptions": [
+        "cvc5 version 1.3.3 is the observed host toolchain identity for this TCB snapshot.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]",
+      "notes": null
+    },
+    {
+      "component_id": "tool:python3",
+      "name": "python3",
+      "role": "Generated Python bindings, scanners, and hermetic tests",
+      "version": "3.12.3",
+      "status": "present",
+      "required_for_core_fca": true,
+      "capability": "available",
+      "assumptions": [
+        "python3 version 3.12.3 is the observed host toolchain identity for this TCB snapshot.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": "Python 3.12.3",
+      "notes": null
+    },
+    {
+      "component_id": "tool:nodejs",
+      "name": "nodejs",
+      "role": "Generated TypeScript binding runtime",
+      "version": "18.19.1",
+      "status": "present",
+      "required_for_core_fca": false,
+      "capability": "available",
+      "assumptions": [
+        "nodejs version 18.19.1 is the observed host toolchain identity for this TCB snapshot.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": "v18.19.1",
+      "notes": null
+    },
+    {
+      "component_id": "tool:go",
+      "name": "go",
+      "role": "Generated Go bindings toolchain",
+      "version": "1.24.6",
+      "status": "present",
+      "required_for_core_fca": false,
+      "capability": "available",
+      "assumptions": [
+        "go version 1.24.6 is the observed host toolchain identity for this TCB snapshot.",
+        "Tool identity must be rebound if the host toolchain changes before proof-checking or release gates."
+      ],
+      "raw": "go version go1.24.6 linux/arm64",
+      "notes": null
+    },
+    {
+      "component_id": "portfolio:ipfs_kit_py",
+      "name": "ipfs_kit_py",
+      "role": "Artifact authority: immutable artifacts, CAS, WAL, current pointers",
+      "version": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "status": "present",
+      "path": "external/ipfs_kit",
+      "assumptions": [
+        "Hermetic/conditional/live distinctions and candidate/admitted/current proof roles are reference semantics to adapt, not weaken.",
+        "Zero live-qualified backends is a valid honest state and must not be relabeled as live."
+      ]
+    },
+    {
+      "component_id": "portfolio:ipfs_accelerate_py",
+      "name": "ipfs_accelerate_py",
+      "role": "Orchestration: admission-token consumption and monitored execution",
+      "version": "a7942225417cac69936c933088b09f10f9fa3ae6",
+      "status": "present",
+      "path": "external/ipfs_accelerate",
+      "assumptions": [
+        "Existing assurance ladders are total and must be adapted conservatively into FCA dimensions.",
+        "Legacy mock capability/inference and pseudo-CID paths are defect seeds, not production authority."
+      ]
+    },
+    {
+      "component_id": "portfolio:ipfs_datasets_py",
+      "name": "ipfs_datasets_py",
+      "role": "IR/proof semantics and semantic compilation",
+      "version": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "status": "present",
+      "path": "external/ipfs_datasets",
+      "assumptions": [
+        "Package import must not enable installation or ambient mutation on assurance paths.",
+        "MIT/AGPL declaration conflict remains unresolved_human_legal_review."
+      ]
+    },
+    {
+      "component_id": "portfolio:swissknife",
+      "name": "SwissKnife",
+      "role": "Human presentation without authority-creation capability",
+      "version": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+      "status": "present",
+      "path": "swissknife",
+      "assumptions": [
+        "Browser state must never originate authority; host independently evaluates authenticated request fields.",
+        "Missing license/provenance remains human-blocked."
+      ]
+    },
+    {
+      "component_id": "portfolio:mcp_plus_plus",
+      "name": "Mcp-Plus-Plus",
+      "role": "Normative FCA ownership, schemas, and cross-language contracts",
+      "version": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+      "status": "present",
+      "path": "Mcp-Plus-Plus",
+      "assumptions": [
+        "Hand-maintained duplicate semantics are inventory conflicts until CCC selects DAG-CBOR source of truth.",
+        "MCP++ owns normative claim semantics; repository adapters cannot broaden them."
+      ]
+    }
+  ],
+  "assumptions": [
+    "Python and TypeScript are not whole-program proof targets; they consume verified bindings and translation-validated artifacts.",
+    "A missing optional formal tool yields a typed capability gap; it never triggers import-time or worker-time installation and never produces simulated proof.",
+    "Provider/LLM output is proposal-only; validation, merge, goal completion, release, and authority remain deterministic or externally reviewed.",
+    "Exact committed gitlinks in the clean controller worktree are the only source authority for inventories and TCB qualification.",
+    "Discovery of defects or reusable components is not remediation completion."
+  ],
+  "formal_tool_capabilities": {
+    "lean4": {
+      "status": "present",
+      "version": "4.33.0",
+      "role": "normative_claim_and_promotion_semantics"
+    },
+    "lake": {
+      "status": "present",
+      "version": "5.0.0-src+d8b1897",
+      "role": "lean_build_orchestrator"
+    },
+    "rust_cargo": {
+      "status": "present",
+      "version": "1.95.0",
+      "role": "executable_trusted_kernel_toolchain"
+    },
+    "verus": {
+      "status": "absent",
+      "version": null,
+      "role": "optional_rust_verification"
+    },
+    "z3": {
+      "status": "present",
+      "version": "4.15.4",
+      "role": "smt_solver"
+    },
+    "cvc5": {
+      "status": "present",
+      "version": "1.3.3",
+      "role": "smt_solver"
+    },
+    "souffle": {
+      "status": "absent",
+      "version": null,
+      "role": "datalog_engine"
+    },
+    "alloy": {
+      "status": "absent",
+      "version": null,
+      "role": "relational_counterexamples"
+    },
+    "tla_plus": {
+      "status": "absent",
+      "version": null,
+      "role": "stateful_distributed_protocols"
+    },
+    "python3": {
+      "status": "present",
+      "version": "3.12.3",
+      "role": "bindings_and_tests"
+    },
+    "nodejs": {
+      "status": "present",
+      "version": "18.19.1",
+      "role": "typescript_bindings_runtime"
+    },
+    "go": {
+      "status": "present",
+      "version": "1.24.6",
+      "role": "go_bindings_toolchain"
+    }
+  },
+  "formal_tool_absence": [
+    {
+      "tool": "verus",
+      "role": "optional_rust_verification",
+      "disposition": "typed_capability_gap",
+      "prohibited_compensation": [
+        "import_time_installation",
+        "worker_time_installation",
+        "simulated_proof"
+      ]
+    },
+    {
+      "tool": "souffle",
+      "role": "datalog_engine",
+      "disposition": "typed_capability_gap",
+      "prohibited_compensation": [
+        "import_time_installation",
+        "worker_time_installation",
+        "simulated_proof"
+      ]
+    },
+    {
+      "tool": "alloy",
+      "role": "relational_counterexamples",
+      "disposition": "typed_capability_gap",
+      "prohibited_compensation": [
+        "import_time_installation",
+        "worker_time_installation",
+        "simulated_proof"
+      ]
+    },
+    {
+      "tool": "tla_plus",
+      "role": "stateful_distributed_protocols",
+      "disposition": "typed_capability_gap",
+      "prohibited_compensation": [
+        "import_time_installation",
+        "worker_time_installation",
+        "simulated_proof"
+      ]
+    }
+  ],
+  "allocation": {
+    "normative_claim_semantics": "Lean 4",
+    "executable_trusted_kernel": "Rust; Verus only where a pinned toolchain is admitted",
+    "stateful_distributed_protocols": "TLA+/PlusCal; Alloy for relational counterexamples",
+    "decidable_runtime_admission": "closed Rust IR, Datalog, bounded temporal monitors",
+    "static_effects_trust_impact": "abstract interpretation and Souffle-compatible Datalog",
+    "proof_and_synthesis": "Z3, cvc5, SyGuS/CEGIS, incremental solver scopes",
+    "artifact_authority": "ipfs_kit_py",
+    "orchestration": "ipfs_accelerate_py",
+    "ir_proof_semantics": "ipfs_datasets_py",
+    "human_presentation": "SwissKnife without authority-creation capability"
+  },
+  "acceptance": {
+    "every_component_names_version_or_absence": true,
+    "every_component_names_assumptions": true,
+    "absent_tools_are_typed_gaps": true
+  }
+}
