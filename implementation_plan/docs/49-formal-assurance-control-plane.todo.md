@@ -512,7 +512,7 @@ not authority.
 
 ## FACP-018 Generate the TypeScript FCA binding and validator
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
