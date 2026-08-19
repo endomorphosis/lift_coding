@@ -647,7 +647,7 @@ not authority.
 
 ## FACP-023 Replace Datasets false-success fallbacks
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
