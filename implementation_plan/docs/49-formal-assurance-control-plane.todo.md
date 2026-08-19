@@ -107,7 +107,7 @@ not authority.
 
 ## FACP-003 Inventory Datasets import, outcome, and rights defects
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
