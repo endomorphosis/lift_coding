@@ -1,0 +1,1316 @@
+{
+  "schema": "facp/inventory/accelerate_claims@1",
+  "schema_version": 1,
+  "task_id": "FACP-002",
+  "goal_id": "FACP-G010",
+  "bundle": "facp/inventory/accelerate",
+  "title": "Inventory of Accelerate unsafe claims and promotions",
+  "status": "confirmed-observation",
+  "generated_at": "2026-08-19T07:11:07Z",
+  "policy": {
+    "discovery_is_not_completion": true,
+    "correctness_from_presence": false,
+    "provider_authority": "proposal-only",
+    "prohibited_effects": [
+      "execute_providers",
+      "edit_accelerate_source",
+      "promote_mocks_or_runtime_observations"
+    ]
+  },
+  "source_binding": {
+    "repository": "external/ipfs_accelerate",
+    "gitlink_path": "external/ipfs_accelerate",
+    "commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+    "commit_short": "a7942225417",
+    "package_root": "external/ipfs_accelerate/ipfs_accelerate_py",
+    "inspection_mode": "static-read-only"
+  },
+  "evidence_subset": [
+    "mock_worker",
+    "mock_hardware",
+    "mock_handler",
+    "inference_outcome",
+    "raw_hash",
+    "pseudo_cid",
+    "fallback_namespace",
+    "success_support_field"
+  ],
+  "category_coverage": [
+    "fallback_namespace",
+    "inference_outcome",
+    "mock_handler",
+    "mock_hardware",
+    "mock_worker",
+    "pseudo_cid",
+    "raw_hash",
+    "success_support_field"
+  ],
+  "related_program_seeds": {
+    "plan_observations": [
+      "mock capability/inference and pseudo-CID behavior in accelerate legacy paths",
+      "simulation presented as live completion is forbidden ownership for ipfs_accelerate_py"
+    ],
+    "downstream_tasks": [
+      "FACP-024",
+      "FACP-025",
+      "FACP-026",
+      "FACP-008"
+    ]
+  },
+  "confirmed_defects": [
+    {
+      "id": "defect:accelerate-mock-worker-cuda-true",
+      "title": "MockWorker reports cuda/openvino available without probing hardware",
+      "category": "mock_worker",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "Hardware capability claim (cuda=True, openvino=True) originates from an inlined MockWorker rather than live probe evidence.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 139,
+          "end_line": 143,
+          "symbol": "ipfs_accelerate_py.__init__",
+          "excerpt": "type('MockWorker'"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 237,
+          "end_line": 237,
+          "symbol": "ipfs_accelerate_py.__init__",
+          "excerpt": "self.hwtest = self.test_hardware()"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_accelerate_py.__init__",
+        "MockWorker.test_hardware (inline lambda)",
+        "ipfs_accelerate_py.test_hardware / hwtest assignment",
+        "ipfs_accelerate_py.add_endpoint (gates on hwtest)",
+        "ipfs_accelerate_py.get_capabilities (exports hwtest)",
+        "mcp_server.tools.acceleration_tools.native_acceleration_tools.acceleration_get_hardware_info / accelerate_model"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Package public core group resolves ipfs_accelerate_py from .ipfs_accelerate; MCP acceleration tools and CLI construct the class on production request paths.",
+        "entrypoints": [
+          "ipfs_accelerate_py.__init__ (group core)",
+          "ipfs_accelerate_py/cli.py",
+          "ipfs_accelerate_py/mcp_server/tools/acceleration_tools/native_acceleration_tools.py",
+          "ipfs_accelerate_py/mcp/cli.py"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_accelerate.py::test_hardware_detection",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp/tests/test_init.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp/tests/test_mcp_init.py"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:mock-worker-cuda-true",
+        "scenario": "Instantiate ipfs_accelerate_py({}, {}) on a host without CUDA/OpenVINO; MockWorker.test_hardware still returns cuda=True and openvino=True, and get_capabilities exposes those bits.",
+        "inputs": {
+          "resources": {},
+          "metadata": {}
+        },
+        "expected_illegal_promotion": "simulated hardware support -> production capability/supported claim",
+        "mutation_oracle": "Flip MockWorker.test_hardware cuda to False; production routing that previously admitted cuda endpoints must fail closed or become Unavailable."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "reject_simulated_to_live_promotion",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "mock_capability",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-mock-multiformats-raw-sha256-cid",
+      "title": "MockIPFSMultiformats returns raw SHA-256 hex as CID",
+      "category": "raw_hash",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "Content identity is claimed via hashlib.sha256(...).hexdigest() labeled as a CID without multihash/CIDv1 encoding.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 145,
+          "end_line": 150,
+          "symbol": "MockIPFSMultiformats.get_cid",
+          "excerpt": "hashlib.sha256"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 1008,
+          "end_line": 1015,
+          "symbol": "ipfs_accelerate_py.queue",
+          "excerpt": "self.ipfs_multiformats.get_cid"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 1019,
+          "end_line": 1034,
+          "symbol": "ipfs_accelerate_py.fetch",
+          "excerpt": "self.ipfs_multiformats.get_cid"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_accelerate_py.__init__ (installs MockIPFSMultiformats)",
+        "ipfs_accelerate_py.queue / fetch",
+        "MockIPFSMultiformats.get_cid -> raw sha256 hex",
+        "queue/cache keys treated as content identifiers"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Default constructor always installs MockIPFSMultiformats; queue/fetch use it for batch item identity on production accelerate paths.",
+        "entrypoints": [
+          "ipfs_accelerate_py.queue",
+          "ipfs_accelerate_py.fetch",
+          "ipfs_accelerate_py.init_endpoints consumers"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_accelerate.py::test_ipfs_operations (legacy path; does not reject raw hex as CID)",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_execution_identity.py::reject_pseudo_cid (rejector exists but is not wired into MockIPFSMultiformats)"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:raw-sha256-as-cid",
+        "scenario": "Call queue([model], [\"hello\"]); resulting key is 64 hex chars, not a decodable CIDv0/v1.",
+        "inputs": {
+          "batch_item": "hello"
+        },
+        "expected_illegal_promotion": "unchecked raw hash -> content identity / CID claim",
+        "mutation_oracle": "One-bit flip of input bytes must change identity; presented value must fail canonical CID decode/recompute under FACP-026 profile."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "reject_unchecked_hash_as_integrity",
+        "ipa": "pseudo_cid_construction",
+        "rse_grammar": "pseudo_cid",
+        "migration_tasks": [
+          "FACP-026"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-test-hardware-hardcoded-support",
+      "title": "test_hardware hardcodes cuda/openvino True even when reading cache",
+      "category": "success_support_field",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "Support/availability fields for cuda and openvino are assigned True by default and re-forced after loading cached results, promoting unobserved hardware support.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 197,
+          "end_line": 198,
+          "symbol": "ipfs_accelerate_py.__init__",
+          "excerpt": "\"cuda\": True"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 377,
+          "end_line": 389,
+          "symbol": "ipfs_accelerate_py.test_hardware",
+          "excerpt": "test_results = {\"cuda\": True"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 404,
+          "end_line": 418,
+          "symbol": "ipfs_accelerate_py.test_hardware",
+          "excerpt": "test_results = {\"cuda\": True"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 439,
+          "end_line": 453,
+          "symbol": "ipfs_accelerate_py.test_hardware",
+          "excerpt": "test_results = {\"cuda\": True"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 1695,
+          "end_line": 1698,
+          "symbol": "ipfs_accelerate_py.get_capabilities",
+          "excerpt": "capabilities[\"hwtest\"]"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_accelerate_py.__init__",
+        "ipfs_accelerate_py.test_hardware",
+        "hwtest dict with cuda/openvino True",
+        "add_endpoint hardware gate",
+        "get_capabilities -> consumers"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Constructor always calls test_hardware(); results are exported via get_capabilities and gate add_endpoint.",
+        "entrypoints": [
+          "ipfs_accelerate_py.test_hardware",
+          "ipfs_accelerate_py.get_capabilities",
+          "ipfs_accelerate_py.add_endpoint"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_accelerate.py::test_hardware_detection"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:hardcoded-hwtest-true",
+        "scenario": "Create a temp test_results cache with cuda=False; test_hardware overwrites it back to cuda=True before return.",
+        "inputs": {
+          "cached_results": {
+            "cuda": false,
+            "openvino": false
+          }
+        },
+        "expected_illegal_promotion": "declared/fixture support -> production supported claim",
+        "mutation_oracle": "Cached cuda=False must remain False or yield Unavailable; never silently rewritten to True."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_probe_backed_capability",
+        "ipa": "success_without_observation",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-mock-handler-labeled-real",
+      "title": "add_endpoint installs mock inference handlers labeled REAL",
+      "category": "mock_handler",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "Simulated inference embeddings/text are registered into production endpoint_handler sinks and logged as REAL implementation type.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 693,
+          "end_line": 804,
+          "symbol": "ipfs_accelerate_py._create_mock_handler",
+          "excerpt": "(REAL implementation type)"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 806,
+          "end_line": 837,
+          "symbol": "ipfs_accelerate_py.add_endpoint",
+          "excerpt": "self._create_mock_handler"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_accelerate_py.init_endpoints / add_endpoint",
+        "_create_mock_handler",
+        "resources[\"endpoint_handler\"][model][endpoint_type] = mock_*_handler",
+        "endpoints[\"local_endpoints\"] registry",
+        "endpoint_consumer / process paths return fabricated outputs"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "add_endpoint always creates a mock handler for newly registered backends; this is the default production endpoint registration path.",
+        "entrypoints": [
+          "ipfs_accelerate_py.add_endpoint",
+          "ipfs_accelerate_py.init_endpoints",
+          "mcp acceleration tools constructing ipfs_accelerate_py"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_accelerate.py::test_model_endpoints",
+        "external/ipfs_accelerate/test/implementation_files/endpoint_handler_implementation.py"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:mock-handler-real-label",
+        "scenario": "await add_endpoint(\"bert-base-uncased\", \"local\", [\"bert-base-uncased\", \"cpu:0\", 2048]); handler returns fixed embedding vectors while log claims REAL.",
+        "inputs": {
+          "model": "bert-base-uncased",
+          "backend": "cpu:0"
+        },
+        "expected_illegal_promotion": "fixture/simulated inference output -> live observed success",
+        "mutation_oracle": "Same-name real handler vs fixture decoy must be distinguished by provenance; mock origin must classify as Simulated and cannot satisfy production success."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "reject_simulated_to_live_promotion",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-api-available-default-true",
+      "title": "API endpoint registration defaults api_available=True without probe",
+      "category": "success_support_field",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "API backends are treated as available by default comment-justified absence of an apitest dict, enabling registration without observed availability.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+          "start_line": 861,
+          "end_line": 869,
+          "symbol": "ipfs_accelerate_py.add_endpoint",
+          "excerpt": "api_available = True"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_accelerate_py.add_endpoint",
+        "api_available = True default",
+        "add_api_endpoint(model, api_type, ...)"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "add_endpoint API branch on production coordinator path.",
+        "entrypoints": [
+          "ipfs_accelerate_py.add_endpoint"
+        ]
+      },
+      "current_tests": [
+        "none found that assert fail-closed API unavailability"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:api-available-default-true",
+        "scenario": "Register an openai_api endpoint with no credentials/network; api_available remains True and add_api_endpoint proceeds.",
+        "inputs": {
+          "endpoint_type": "openai_api:0"
+        },
+        "expected_illegal_promotion": "declared available -> production API support claim",
+        "mutation_oracle": "Missing credentials/probe must yield Unavailable/Rejected, not default True."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_probe_backed_capability",
+        "ipa": "success_without_observation",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-legacy-mock-hardware-detection",
+      "title": "Legacy accelerator falls back to mock hardware detection module",
+      "category": "mock_hardware",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "When hardware_detection import fails, a mock module reports cpu.available=True and other platforms available=False, still shaping support claims from simulation.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "start_line": 214,
+          "end_line": 219,
+          "symbol": "ipfs_accelerate_py._setup_hardware_detection",
+          "excerpt": "_create_mock_hardware_detection"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "start_line": 221,
+          "end_line": 241,
+          "symbol": "ipfs_accelerate_py._create_mock_hardware_detection",
+          "excerpt": "detect_all_hardware"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_accelerate_py_legacy.ipfs_accelerate_py.__init__",
+        "_setup_hardware_detection",
+        "_create_mock_hardware_detection",
+        "detect_all_hardware -> available flags",
+        "test/test_accelerate.py hardware detection consumers"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Legacy module remains importable and is exercised by test helpers and example entrypoints; docs mark it legacy but it is still in the package tree and callable.",
+        "entrypoints": [
+          "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "external/ipfs_accelerate/test/test_accelerate.py",
+          "external/ipfs_accelerate/test/test_helper.py"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_accelerate.py::test_hardware_detection"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:legacy-mock-hardware",
+        "scenario": "Import legacy accelerator with hardware_detection absent; detect_all_hardware returns cpu.available=True from mock module.",
+        "inputs": {
+          "hardware_detection_import": null
+        },
+        "expected_illegal_promotion": "simulated hardware module -> production available claim",
+        "mutation_oracle": "Missing detector must be Unavailable, not a mock module with invented availability."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "isolate_simulation_namespace",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "mock_capability",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-legacy-pseudo-cid-store",
+      "title": "Legacy store_to_ipfs fabricates Qm-prefixed truncated SHA-256 CIDs",
+      "category": "pseudo_cid",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "IPFS store success returns f\"Qm{sha256.hexdigest()[:40]}\" which is neither CIDv0 nor CIDv1 and cannot recompute against bytes.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "start_line": 747,
+          "end_line": 766,
+          "symbol": "ipfs_accelerate_py.store_to_ipfs",
+          "excerpt": "mock_cid = f\"Qm"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_accelerate_py_legacy.store_to_ipfs",
+        "hashlib.sha256(data).hexdigest()[:40]",
+        "return Qm-prefixed pseudo CID",
+        "test_ipfs_operations treats return as successful CID"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Legacy store_to_ipfs is directly called from package tests and remains a public method on the legacy accelerator class.",
+        "entrypoints": [
+          "ipfs_accelerate_py_legacy.store_to_ipfs",
+          "external/ipfs_accelerate/test/test_accelerate.py::test_ipfs_operations"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_accelerate.py::test_ipfs_operations (asserts store succeeds; does not validate CID profile)"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:qm-truncated-sha256",
+        "scenario": "await store_to_ipfs(b\"payload\"); returned string matches ^Qm[0-9a-f]{40}$ and fails multiformats CID decode.",
+        "inputs": {
+          "data": "payload"
+        },
+        "expected_illegal_promotion": "raw/truncated hash with Qm prefix -> content identity claim",
+        "mutation_oracle": "Canonical decode/recompute must reject; one-bit content mutation must not preserve pseudo identity under FACP-026."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "reject_unchecked_hash_as_integrity",
+        "ipa": "pseudo_cid_construction",
+        "rse_grammar": "pseudo_cid",
+        "migration_tasks": [
+          "FACP-026"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-cuda-utils-mock-device-available",
+      "title": "cuda_utils creates MagicMock CUDA device with is_available=True",
+      "category": "mock_hardware",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "create_cuda_mock_implementation fabricates CUDA availability and device name; handlers can emit device=cuda:0 even when implementation_type is MOCK.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/cuda_utils.py",
+          "start_line": 417,
+          "end_line": 440,
+          "symbol": "CudaUtils.create_cuda_mock_implementation",
+          "excerpt": "\"is_available\": MagicMock(return_value=True)"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/cuda_utils.py",
+          "start_line": 451,
+          "end_line": 457,
+          "symbol": "CudaUtils.create_cuda_mock_implementation",
+          "excerpt": "\"implementation_type\": \"MOCK\""
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/cuda_utils.py",
+          "start_line": 506,
+          "end_line": 534,
+          "symbol": "CudaUtils.get_implementation_type",
+          "excerpt": "Detected implementation type"
+        }
+      ],
+      "call_flow_path": [
+        "worker.cuda_utils.CudaUtils.create_cuda_mock_implementation",
+        "MagicMock cuda.is_available -> True",
+        "handler returns device cuda:0 with MOCK implementation_type",
+        "skillset handlers / tests consume as CUDA path"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "CudaUtils is part of the worker package used by skillset endpoint construction; mock CUDA creators are reachable from worker code paths and mirrored under test/.",
+        "entrypoints": [
+          "ipfs_accelerate_py/worker/cuda_utils.py",
+          "ipfs_accelerate_py/worker/skillset/* (CUDA handler factories)"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/ipfs_accelerate_py/worker/cuda_utils.py (mirrors production helper; does not forbid mock->cuda claim)"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:cuda-mock-available-true",
+        "scenario": "create_cuda_mock_implementation(\"lm\"); handler(prompt) returns device=cuda:0 while no real CUDA exists.",
+        "inputs": {
+          "model_type": "lm",
+          "prompt": "hello"
+        },
+        "expected_illegal_promotion": "mock CUDA capability -> cuda device routing claim",
+        "mutation_oracle": "Mock CUDA origin must be Simulated and rejected for non-CPU production routing without probe receipt."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_probe_backed_capability",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "mock_capability",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-skillset-mock-model-fallback",
+      "title": "HF skillset create_mock_model fallback can continue as inference path",
+      "category": "inference_outcome",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "On tokenizer/model load failure, skillsets create MagicMock models and continue; later branches may still emit implementation_type REAL on some paths, yielding invented inference success.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/skillset/hf_t5.py",
+          "start_line": 370,
+          "end_line": 389,
+          "symbol": "hf_t5.create_mock_model",
+          "excerpt": "True = is_mock"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/skillset/hf_t5.py",
+          "start_line": 413,
+          "end_line": 416,
+          "symbol": "hf_t5.init_cpu",
+          "excerpt": "create_mock_model()"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/skillset/hf_clip.py",
+          "start_line": 539,
+          "end_line": 539,
+          "symbol": "hf_clip",
+          "excerpt": "Create mock components as fallback"
+        }
+      ],
+      "call_flow_path": [
+        "worker.skillset.hf_t5 / hf_clip / hf_whisper / hf_wav2vec2 / hf_clap / default_embed",
+        "create_mock_model on import/load failure",
+        "endpoint handler registered into worker resources",
+        "inference call returns fabricated text/embeddings"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Skillset modules are the worker model adapters used when local endpoints are initialized; mock fallback is inline in production skillset files (not test-only).",
+        "entrypoints": [
+          "ipfs_accelerate_py/worker/skillset/hf_t5.py",
+          "ipfs_accelerate_py/worker/skillset/hf_clip.py",
+          "ipfs_accelerate_py/worker/skillset/hf_whisper.py",
+          "ipfs_accelerate_py/worker/skillset/hf_wav2vec2.py",
+          "ipfs_accelerate_py/worker/skillset/hf_clap.py",
+          "ipfs_accelerate_py/worker/skillset/default_embed.py"
+        ]
+      },
+      "current_tests": [
+        "skillset-local prints/mocks; no formal_assurance mock-origin rejection suite yet (planned FACP-024)"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:skillset-mock-fallback-success",
+        "scenario": "Force transformers MagickMock; hf_t5 create_mock_model returns is_mock=True and handler yields \"Mock T5 generated text\" without Unavailable.",
+        "inputs": {
+          "model": "t5-small",
+          "transformers": "MagicMock"
+        },
+        "expected_illegal_promotion": "simulated inference -> observed/success outcome",
+        "mutation_oracle": "Mock-origin result must be Simulated or Unavailable; never Observed/Verified/success."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_observed_outcome",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-mcp-mock-ipfs-random-cid",
+      "title": "MCP MockIPFSClient fabricates random Qm-like CIDs",
+      "category": "pseudo_cid",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "random_cid builds \"Qm\" + 44 random alnum chars and returns them from add_file/id/peers as if they were content identifiers.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp/tools/mock_ipfs.py",
+          "start_line": 25,
+          "end_line": 28,
+          "symbol": "random_cid",
+          "excerpt": "return \"Qm\""
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp/tools/mock_ipfs.py",
+          "start_line": 40,
+          "end_line": 48,
+          "symbol": "MockIPFSClient.add_file",
+          "excerpt": "cid = random_cid()"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/ipfs/__init__.py",
+          "start_line": 20,
+          "end_line": 46,
+          "symbol": "MockIPFSClient / _random_cid",
+          "excerpt": "return \"Qm\""
+        }
+      ],
+      "call_flow_path": [
+        "mcp.tools.mock_ipfs.random_cid / MockIPFSClient.add_file",
+        "mcp_server.tools.ipfs.MockIPFSClient shim (compat namespace)",
+        "callers without live ipfs_kit receive fabricated Hash/CID"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Canonical mcp_server.tools.ipfs re-exports MockIPFSClient and falls back to a built-in random Qm generator when legacy mock module is absent; still importable from production package path.",
+        "entrypoints": [
+          "ipfs_accelerate_py.mcp.tools.mock_ipfs",
+          "ipfs_accelerate_py.mcp_server.tools.ipfs.MockIPFSClient"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_unified_mcp_tools.py",
+        "external/ipfs_accelerate/test/test_api_integrations_comprehensive.py::test_ipfs_fallback_on_local_miss"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:random-qm-cid",
+        "scenario": "MockIPFSClient().add_file(temp_path) returns Hash/CID matching ^Qm[a-z0-9]{44}$ with no relationship to file bytes.",
+        "inputs": {
+          "file_bytes": "abc"
+        },
+        "expected_illegal_promotion": "random Qm-like string -> content identity claim",
+        "mutation_oracle": "Identical bytes across two adds may yield different CIDs; decode/recompute must fail."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "reject_unchecked_hash_as_integrity",
+        "ipa": "pseudo_cid_construction",
+        "rse_grammar": "pseudo_cid",
+        "migration_tasks": [
+          "FACP-026"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-shared-tools-success-pseudo-cid",
+      "title": "shared_tools add_file returns success:true with Qm{hash%1000000} fallback",
+      "category": "success_support_field",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "MCP shared add_file tool always returns success:True on the try path and may invent a truncated Qm CID via hash(content) % 1000000 when result lacks cid.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp/tools/shared_tools.py",
+          "start_line": 437,
+          "end_line": 461,
+          "symbol": "add_file",
+          "excerpt": "\"success\": True"
+        }
+      ],
+      "call_flow_path": [
+        "mcp.tools.shared_tools.add_file",
+        "file_ops.add_file",
+        "return success:True + cid fallback Qm{hash%1000000}",
+        "MCP dashboard / tool consumers"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Registered as @mcp.tool shared operations used by dashboard expectations.",
+        "entrypoints": [
+          "ipfs_accelerate_py/mcp/tools/shared_tools.py",
+          "MCP dashboard shared tool surface"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_unified_mcp_tools.py"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:shared-add-file-false-success",
+        "scenario": "Invoke add_file with content whose file_ops result omits cid; response is {success:True, cid:\"Qm<digits>\"} without durable IPFS effect observation.",
+        "inputs": {
+          "content": "hello",
+          "filename": "x.txt"
+        },
+        "expected_illegal_promotion": "unobserved/fallback effect -> success:true production claim",
+        "mutation_oracle": "Missing backend must be Unavailable; invented CID must be rejected by identity gate."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_observed_outcome",
+        "ipa": "success_without_observation",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-025",
+          "FACP-026"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-fallback-compat-mock-namespaces",
+      "title": "Deprecated mcp.tools.mock_ipfs remains compatibility fallback for mcp_server",
+      "category": "fallback_namespace",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "Canonical mcp_server IPFS tools prefer the deprecated mock_ipfs compatibility namespace before a local stub, allowing mock-origin clients to remain selectable outside an explicit test mode.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp/tools/mock_ipfs.py",
+          "start_line": 1,
+          "end_line": 12,
+          "symbol": "module docstring",
+          "excerpt": "compatibility shim"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/ipfs/__init__.py",
+          "start_line": 20,
+          "end_line": 24,
+          "symbol": "_load_mock_ipfs_client",
+          "excerpt": "from ipfs_accelerate_py.mcp.tools.mock_ipfs import MockIPFSClient"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/storage_tools/native_storage_tools.py",
+          "start_line": 80,
+          "end_line": 93,
+          "symbol": "_FallbackMockStorageManager",
+          "excerpt": "MockStorageManager"
+        }
+      ],
+      "call_flow_path": [
+        "mcp_server.tools.ipfs._load_mock_ipfs_client",
+        "import legacy mcp.tools.mock_ipfs.MockIPFSClient",
+        "OR built-in _CanonicalMockIPFSClient with random Qm CIDs",
+        "storage_tools fallback to datasets MockStorageManager"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Import-time resolution in production mcp_server package; not gated by explicit test-mode flag.",
+        "entrypoints": [
+          "ipfs_accelerate_py.mcp_server.tools.ipfs",
+          "ipfs_accelerate_py.mcp_server.tools.storage_tools.native_storage_tools"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_unified_mcp_tools.py",
+        "none found asserting simulation-only namespace isolation"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:compat-mock-namespace",
+        "scenario": "Import MockIPFSClient from mcp_server.tools.ipfs without test-mode env; receive legacy mock client that issues pseudo CIDs.",
+        "inputs": {
+          "import_path": "ipfs_accelerate_py.mcp_server.tools.ipfs.MockIPFSClient"
+        },
+        "expected_illegal_promotion": "compatibility/fallback mock namespace -> production IPFS client selection",
+        "mutation_oracle": "Simulation namespace must be selectable only under explicit test mode; production resolution must fail closed to Unavailable."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "isolate_simulation_namespace",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "mock_capability",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-legacy-mock-inference-handler",
+      "title": "Legacy _create_mock_handler supplies fixed inference responses",
+      "category": "mock_handler",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "Legacy accelerator registers async mock handlers that return fixed inference strings/bytes for endpoint types when real handlers are unavailable.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "start_line": 306,
+          "end_line": 320,
+          "symbol": "ipfs_accelerate_py._create_mock_handler",
+          "excerpt": "mock handler"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "start_line": 500,
+          "end_line": 520,
+          "symbol": "endpoint init",
+          "excerpt": "_create_mock_handler"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_accelerate_py_legacy endpoint initialization",
+        "_create_mock_handler",
+        "fixed mock_handler(input_text) response",
+        "process_async / tests treat as endpoint success"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Legacy class still exported/usable; test_helper create_framework and examples may bind it.",
+        "entrypoints": [
+          "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "external/ipfs_accelerate/test/test_helper.py"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_accelerate.py::test_model_endpoints"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:legacy-mock-handler",
+        "scenario": "Initialize legacy endpoints without transformers; handler returns canned text rather than Unavailable.",
+        "inputs": {
+          "model": "bert-base-uncased"
+        },
+        "expected_illegal_promotion": "simulated inference -> live completion claim",
+        "mutation_oracle": "Mock handler outputs must carry origin=simulated and cannot satisfy production Observed success."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "reject_simulated_to_live_promotion",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-cuda-utils-magicmock-torch",
+      "title": "cuda_utils substitutes MagicMock for missing torch so CUDA checks pass",
+      "category": "mock_hardware",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "ImportError for torch installs MagicMock; torch.cuda.is_available() becomes truthy, so get_cuda_device can proceed as if CUDA existed.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/cuda_utils.py",
+          "start_line": 47,
+          "end_line": 55,
+          "symbol": "cuda_utils.init",
+          "excerpt": "using mock"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/cuda_utils.py",
+          "start_line": 88,
+          "end_line": 92,
+          "symbol": "cuda_utils.get_cuda_device",
+          "excerpt": "self.torch.cuda.is_available()"
+        }
+      ],
+      "call_flow_path": [
+        "worker.cuda_utils.init",
+        "ImportError -> self.torch = MagicMock()",
+        "get_cuda_device / benchmark paths call torch.cuda.is_available()",
+        "skillset CUDA init consumers"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "CudaUtils is imported by worker skillsets; missing torch silently mocks instead of Unavailable.",
+        "entrypoints": [
+          "ipfs_accelerate_py/worker/cuda_utils.py",
+          "worker.skillset.*"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_helpers.py (creates CUDA mocks)",
+        "none found that fail-closed when torch is absent"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:cuda-utils-magicmock-torch",
+        "scenario": "Instantiate CudaUtils without torch installed; MagicMock makes is_available() truthy and device selection continues.",
+        "inputs": {
+          "torch_import": "ImportError"
+        },
+        "expected_illegal_promotion": "mock torch CUDA availability -> live cuda device claim",
+        "mutation_oracle": "Missing torch must yield Unavailable; MagicMock must not satisfy capability probes."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_probe_backed_capability",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "mock_capability",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-kit-integration-bafy-pseudo-cid",
+      "title": "IPFSKitStorage._generate_cid returns bafy+truncated-hex pseudo CIDs",
+      "category": "pseudo_cid",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "Storage integration comments admit simplified hashing yet returns f\"bafy{sha256[:56]}\" as a CID-like identifier on store paths.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_kit_integration.py",
+          "start_line": 717,
+          "end_line": 733,
+          "symbol": "IPFSKitStorage._generate_cid",
+          "excerpt": "bafy{hash_value[:56]}"
+        }
+      ],
+      "call_flow_path": [
+        "IPFSKitStorage.store / _store_local / _store_with_ipfs_kit",
+        "_generate_cid",
+        "return bafy+truncated hex as CID"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Primary accelerate storage integration used when kit path/fallback stores content.",
+        "entrypoints": [
+          "ipfs_accelerate_py/ipfs_kit_integration.py::IPFSKitStorage",
+          "get_storage"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_ipfs_kit_integration.py"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:kit-bafy-pseudo-cid",
+        "scenario": "IPFSKitStorage._generate_cid(b\"x\") returns bafy + 56 hex chars that fail multiformats decode/recompute.",
+        "inputs": {
+          "data": "x"
+        },
+        "expected_illegal_promotion": "truncated hash with bafy prefix -> content identity claim",
+        "mutation_oracle": "Canonical CID gate must reject; identical bytes must not be accepted as live CIDv1."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "reject_unchecked_hash_as_integrity",
+        "ipa": "pseudo_cid_construction",
+        "rse_grammar": "pseudo_cid",
+        "migration_tasks": [
+          "FACP-026"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-hf-cache-backend-bafy-cid",
+      "title": "HfCacheBackend returns synthetic bafy cache keys through CID APIs",
+      "category": "pseudo_cid",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "HfCacheBackend._generate_cid documents non-CID keys but add_bytes still returns bafy-prefixed strings via a CID-shaped API; tests encode the unsafe prefix.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_backend_router.py",
+          "start_line": 502,
+          "end_line": 523,
+          "symbol": "HfCacheBackend._generate_cid/add_bytes",
+          "excerpt": "bafy{hash_value[:56]}"
+        }
+      ],
+      "call_flow_path": [
+        "ipfs_backend_router.HfCacheBackend.add_bytes",
+        "_generate_cid",
+        "return synthetic bafy key as cid"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Backend router cache transport is selectable on accelerate storage routes.",
+        "entrypoints": [
+          "ipfs_accelerate_py/ipfs_backend_router.py::HfCacheBackend"
+        ]
+      },
+      "current_tests": [
+        "external/ipfs_accelerate/test/test_ipfs_backend_router.py (asserts cid.startswith(\"bafy\"))"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:hf-cache-bafy-key",
+        "scenario": "HfCacheBackend().add_bytes(b\"payload\") returns bafy+hex; callers treat it as CID.",
+        "inputs": {
+          "data": "payload"
+        },
+        "expected_illegal_promotion": "cache key -> content identity / CID claim",
+        "mutation_oracle": "validate_cid/rehash admission must reject; API should not present cache keys as CIDs."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "reject_unchecked_hash_as_integrity",
+        "ipa": "pseudo_cid_construction",
+        "rse_grammar": "pseudo_cid",
+        "migration_tasks": [
+          "FACP-026"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-embedding-bafy-uuid-pseudo-cid",
+      "title": "multi_model_embedding.store_on_ipfs invents bafy..uuid CIDs without client",
+      "category": "pseudo_cid",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "When ipfs_client is None, store_on_ipfs returns f\"bafy..{uuid}\" per model instead of Unavailable.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/embeddings/multi_model_embedding.py",
+          "start_line": 272,
+          "end_line": 275,
+          "symbol": "MultiModelEmbedding.store_on_ipfs",
+          "excerpt": "bafy..{uuid"
+        }
+      ],
+      "call_flow_path": [
+        "embeddings.multi_model_embedding.store_on_ipfs",
+        "ipfs_client is None branch",
+        "return invented bafy..uuid map"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Public embedding helper method; missing client yields fake CIDs rather than failure.",
+        "entrypoints": [
+          "ipfs_accelerate_py/embeddings/multi_model_embedding.py"
+        ]
+      },
+      "current_tests": [
+        "none found rejecting bafy..uuid placeholders"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:embedding-bafy-uuid",
+        "scenario": "store_on_ipfs({\"m\":[vec]}, ipfs_client=None) -> {\"m\": \"bafy..<16hex>\"}.",
+        "inputs": {
+          "ipfs_client": null
+        },
+        "expected_illegal_promotion": "missing effect -> fabricated CID success map",
+        "mutation_oracle": "None client must be Unavailable; UUID placeholders must not parse as CIDs."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_observed_outcome",
+        "ipa": "pseudo_cid_construction",
+        "rse_grammar": "pseudo_cid",
+        "migration_tasks": [
+          "FACP-025",
+          "FACP-026"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-worker-test-hardware-hardcoded-true",
+      "title": "worker.Worker.test_hardware hardcodes cuda/openvino True after cache load",
+      "category": "success_support_field",
+      "severity": "P0",
+      "status": "confirmed",
+      "unsafe_claim": "Real Worker.test_hardware defaults and reassigns cuda/openvino to True even after reading a results file, mirroring the MockWorker lie on the non-mock path.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/worker.py",
+          "start_line": 310,
+          "end_line": 345,
+          "symbol": "Worker.test_hardware",
+          "excerpt": "\"cuda\": True"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/worker/worker.py",
+          "start_line": 364,
+          "end_line": 369,
+          "symbol": "Worker.test_hardware",
+          "excerpt": "\"cuda\": True"
+        }
+      ],
+      "call_flow_path": [
+        "worker.Worker.test_hardware",
+        "hardcoded test_results cuda/openvino True",
+        "optional cache read overwritten back to True",
+        "hardware routing / capability consumers"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Production Worker class hardware probe path.",
+        "entrypoints": [
+          "ipfs_accelerate_py/worker/worker.py::Worker.test_hardware"
+        ]
+      },
+      "current_tests": [
+        "hardware generator tests; none assert fail-closed when CUDA absent"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:worker-hwtest-hardcoded-true",
+        "scenario": "CPU-only host or cache with cuda=False still returns cuda=True from Worker.test_hardware.",
+        "inputs": {
+          "cached_results": {
+            "cuda": false
+          }
+        },
+        "expected_illegal_promotion": "declared support -> production supported claim",
+        "mutation_oracle": "Cached/probed False must remain False or Unavailable."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_probe_backed_capability",
+        "ipa": "success_without_observation",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-plan-create-fallback-digest-cid",
+      "title": "plan_create _record_cid falls back to namespaced sha256 digests labeled as CIDs",
+      "category": "fallback_namespace",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "When records lack content_id/cid fields, _record_cid mints sha256: hex digests under fallback_namespace and stores them in *_cid fields.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/plan_create_service.py",
+          "start_line": 238,
+          "end_line": 299,
+          "symbol": "_digest/_record_cid",
+          "excerpt": "fallback_namespace"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/plan_create_service.py",
+          "start_line": 816,
+          "end_line": 827,
+          "symbol": "PlanCreateService stage outputs",
+          "excerpt": "scan_cid"
+        }
+      ],
+      "call_flow_path": [
+        "PlanCreateService stages",
+        "_record_cid(..., fallback_namespace=*)",
+        "_digest -> sha256:hex",
+        "scan_cid / plan_cid / evidence cid fields"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Supervisor plan-create service used on production orchestration paths.",
+        "entrypoints": [
+          "ipfs_accelerate_py/agent_supervisor/prompt/plan_create_service.py"
+        ]
+      },
+      "current_tests": [
+        "plan-create/steer API tests use digest helpers; do not require multiformats CID for fallbacks"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:plan-create-digest-cid",
+        "scenario": "_record_cid({\"a\":1}, fallback_namespace=\"scan\") returns sha256:... labeled as scan_cid.",
+        "inputs": {
+          "value": {
+            "a": 1
+          },
+          "fallback_namespace": "scan"
+        },
+        "expected_illegal_promotion": "fallback digest namespace -> CID-labeled identity field",
+        "mutation_oracle": "Absent observed identity must remain empty/Unavailable, not a digest relabeled as CID."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "isolate_simulation_namespace",
+        "ipa": "pseudo_cid_construction",
+        "rse_grammar": "pseudo_cid",
+        "migration_tasks": [
+          "FACP-026"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-se-tools-fallback-success-true",
+      "title": "Software-engineering MCP fallbacks return success:True without observation",
+      "category": "success_support_field",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "When primary SE tool implementations are unavailable, native fallbacks return success:True with empty results and fallback:True.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/software_engineering_tools/native_software_engineering_tools.py",
+          "start_line": 191,
+          "end_line": 222,
+          "symbol": "SE tool fallbacks",
+          "excerpt": "\"success\": True"
+        }
+      ],
+      "call_flow_path": [
+        "native_software_engineering_tools dispatch",
+        "missing dependency -> *_fallback",
+        "return success:True + fallback:True"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Canonical mcp_server native SE tools registered for production MCP surfaces.",
+        "entrypoints": [
+          "ipfs_accelerate_py/mcp_server/tools/software_engineering_tools/native_software_engineering_tools.py"
+        ]
+      },
+      "current_tests": [
+        "none found requiring fail-closed on SE fallback"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:se-fallback-success-true",
+        "scenario": "Trigger detect-error-patterns fallback; response has success=True, patterns=[], fallback=True.",
+        "inputs": {
+          "error_logs": [
+            "boom"
+          ]
+        },
+        "expected_illegal_promotion": "unobserved fallback -> success:true claim",
+        "mutation_oracle": "Missing analyzer must be Unavailable, not success with empty patterns."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_observed_outcome",
+        "ipa": "success_without_observation",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-025"
+        ]
+      }
+    },
+    {
+      "id": "defect:accelerate-ai-model-server-mock-inference",
+      "title": "MCP ai_model_server exposes mock generate/classify/embed as demo outcomes",
+      "category": "inference_outcome",
+      "severity": "P1",
+      "status": "confirmed",
+      "unsafe_claim": "Public mock_generate_text/mock_classify_text/mock_generate_embeddings return invented text, POSITIVE@0.85 confidence, and MD5-derived embeddings without model execution.",
+      "source_spans": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp/ai_model_server.py",
+          "start_line": 315,
+          "end_line": 340,
+          "symbol": "mock_generate_text/mock_classify_text/mock_generate_embeddings",
+          "excerpt": "Mock text generation"
+        }
+      ],
+      "call_flow_path": [
+        "mcp.ai_model_server mock_* helpers",
+        "demo/__main__ or importers",
+        "invented prediction/confidence/embedding returned to callers"
+      ],
+      "production_reachability": {
+        "reachable": true,
+        "via": "Public module functions in production package path beside AIModelMCPServer factory.",
+        "entrypoints": [
+          "ipfs_accelerate_py/mcp/ai_model_server.py"
+        ]
+      },
+      "current_tests": [
+        "none found classifying these helpers as simulated-only"
+      ],
+      "counterexample_seed": {
+        "seed_id": "seed:ai-model-server-mock-classify",
+        "scenario": "mock_classify_text(\"anything\") -> prediction=POSITIVE confidence=0.85 with no model.",
+        "inputs": {
+          "text": "anything"
+        },
+        "expected_illegal_promotion": "simulated inference -> live classification success",
+        "mutation_oracle": "Must be Simulated/Unavailable; confidence cannot satisfy Observed/Verified."
+      },
+      "proposed_fca_ipa_repair_class": {
+        "fca": "require_observed_outcome",
+        "ipa": "mock_to_production_flow",
+        "rse_grammar": "false_success",
+        "migration_tasks": [
+          "FACP-024",
+          "FACP-025"
+        ]
+      }
+    }
+  ],
+  "defect_count": 21,
+  "notes": "Inventory binds exact source spans on gitlink commit a7942225417cac69936c933088b09f10f9fa3ae6. 21 confirmed defects across mock worker/hardware/handler, inference outcomes, raw hashes, pseudo-CIDs, fallback namespaces, and success/support fields. Discovery is not remediation; migration tasks FACP-024/025/026 own repairs."
+}
