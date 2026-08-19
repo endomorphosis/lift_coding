@@ -161,7 +161,7 @@ not authority.
 
 ## FACP-005 Inventory SwissKnife authority and information flows
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
