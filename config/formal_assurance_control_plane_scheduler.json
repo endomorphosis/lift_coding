@@ -1,0 +1,107 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.formal_assurance_control_plane.scheduler_config@1",
+  "taskboard_path": "implementation_plan/docs/49-formal-assurance-control-plane.todo.md",
+  "objectives_path": "implementation_plan/docs/49-formal-assurance-control-plane.objectives.md",
+  "plan_path": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+  "validator_path": "scripts/validate_formal_assurance_control_plane_board.py",
+  "task_prefix": "FACP-",
+  "board_namespace": "formal-assurance-control-plane-v1",
+  "merge_target_branch": "agent/formal-assurance-control-plane",
+  "source_binding": {
+    "accelerator_required_branch": "agent/formal-assurance-control-plane",
+    "accelerator_required_ancestor": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "mcp_plus_plus_submodule_path": "Mcp-Plus-Plus",
+    "mcp_plus_plus_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+    "accelerate_submodule_path": "external/ipfs_accelerate",
+    "accelerate_planning_revision": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+    "datasets_submodule_path": "external/ipfs_datasets",
+    "datasets_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "kit_submodule_path": "external/ipfs_kit",
+    "kit_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "swissknife_submodule_path": "swissknife",
+    "swissknife_planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e"
+  },
+  "max_lanes": 4,
+  "lanes": [
+    {
+      "index": 0,
+      "name": "facp-lane-0",
+      "strict_shard_remainder": 0
+    },
+    {
+      "index": 1,
+      "name": "facp-lane-1",
+      "strict_shard_remainder": 1
+    },
+    {
+      "index": 2,
+      "name": "facp-lane-2",
+      "strict_shard_remainder": 2
+    },
+    {
+      "index": 3,
+      "name": "facp-lane-3",
+      "strict_shard_remainder": 3
+    }
+  ],
+  "strict_task_sharding": true,
+  "exit_when_all_tracks_terminal": true,
+  "objective_refill_enabled": false,
+  "codebase_refill_enabled": false,
+  "poll_interval_seconds": 5,
+  "daemon_interval_seconds": 30,
+  "check_interval_seconds": 15,
+  "stale_seconds": 1200,
+  "watchdog_startup_grace_seconds": 300,
+  "max_restarts": 4,
+  "max_task_attempts": 4,
+  "implementation_timeout_seconds": 7200,
+  "implementation_max_timeout_seconds": 10800,
+  "implementation_log_stall_seconds": 900,
+  "implementation_retry_budget": 3,
+  "validation_retry_budget": 3,
+  "merge_retry_budget": 3,
+  "worktree_submodule_paths": [
+    "Mcp-Plus-Plus",
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "swissknife"
+  ],
+  "protected_paths": [
+    "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+    "implementation_plan/docs/49-formal-assurance-control-plane.objectives.md",
+    "implementation_plan/docs/49-formal-assurance-control-plane.todo.md",
+    "config/formal_assurance_control_plane_scheduler.json",
+    "scripts/validate_formal_assurance_control_plane_board.py",
+    "scripts/formal_assurance_control_plane_supervisor.sh"
+  ],
+  "runtime_paths": {
+    "root": "data/agent_supervisor/formal_assurance_control_plane",
+    "state": "data/agent_supervisor/formal_assurance_control_plane/state",
+    "worktrees": "data/agent_supervisor/formal_assurance_control_plane/worktrees",
+    "merge_queue": "data/agent_supervisor/formal_assurance_control_plane/merge_queue",
+    "logs": "data/agent_supervisor/formal_assurance_control_plane/logs"
+  },
+  "provider": {
+    "primary_provider_id": "grok_cli",
+    "primary_model_id": "grok-4.5",
+    "fallback_provider_id": "codex",
+    "fallback_model_id": "gpt-5.6-terra",
+    "fallback_trigger": "primary_quota_exhausted",
+    "fallback_reasoning_effort": "medium",
+    "max_concurrency": 4
+  },
+  "safety_floors": {
+    "simulated_to_live_promotion": 0,
+    "effect_without_admission_token": 0,
+    "stale_proof_reuse": 0,
+    "browser_authored_authority": 0,
+    "pseudo_cid_supported_path": 0,
+    "mutable_release_dependency": 0,
+    "success_without_observation": 0,
+    "secret_flow_to_public_evidence": 0,
+    "blind_retry_unknown_irreversible_effect": 0,
+    "llm_self_certification_or_policy_authority": 0
+  }
+}
