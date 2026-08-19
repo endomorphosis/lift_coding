@@ -1,0 +1,509 @@
+{
+  "schema": "FACPKitEvidenceInventory@1",
+  "schema_version": "formal_assurance_control_plane.baseline.kit_evidence@1",
+  "task_id": "FACP-004",
+  "goal_id": "FACP-G010",
+  "bundle": "facp/inventory/kit",
+  "title": "Inventory Kit evidence, backend, and proof-role semantics",
+  "contract_version": 1,
+  "behavior_change": false,
+  "generated_at": "2026-08-19T00:00:00Z",
+  "authority": {
+    "statement": "ipfs_kit_py already distinguishes hermetic/conditional/live evidence classes, inventory vs live backend tiers, configured vs selectable runtime states, and candidate/admitted/current proof-head roles. Those distinctions are reference semantics to adapt into FCA, not to collapse or replace with a weaker total ladder. Zero live-qualified backends is a valid honest state.",
+    "plan_ref": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+    "objective_ref": "FACP-G230",
+    "owning_repository": "external/ipfs_kit",
+    "prohibited_effects": [
+      "run_live_backends",
+      "edit_kit_source",
+      "relabel_hermetic_evidence_as_live",
+      "propose_weaker_replacement_semantics"
+    ]
+  },
+  "source_binding": {
+    "submodule_path": "external/ipfs_kit",
+    "package": "ipfs_kit_py",
+    "gitlink_commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "worktree_status": "clean",
+    "evidence_observation": "read-only inventory against exact gitlink; no live backend execution"
+  },
+  "evidence_subset": [
+    "hermetic_conditional_live_support",
+    "configured_selected_states",
+    "candidate_admitted_current_proof_roles",
+    "cas_wal_recovery",
+    "receipt_freshness"
+  ],
+  "honest_distinctions": {
+    "kernel_vfs_claim_classes": {
+      "authority": "external/ipfs_kit/docs/kernel_vfs/support_matrix.json",
+      "schema": "KernelVFSSupportMatrix@1",
+      "classes": {
+        "hermetic": {
+          "id": "claim:hermetic",
+          "promotion_power": "none_beyond_hermetic",
+          "description": "Proven without native FUSE/WinFsp mount, Docker daemon, credentials, or network backend."
+        },
+        "conditional": {
+          "id": "claim:conditional",
+          "promotion_power": "requires_current_capability_receipt",
+          "description": "Capable only when a named host/driver/capability gate is present; absence yields capability_unavailable."
+        },
+        "live": {
+          "id": "claim:live",
+          "promotion_power": "production_platform_advertisement",
+          "requires": [
+            "native_capability_ready",
+            "current_live_receipt",
+            "zero_safety_floors"
+          ],
+          "description": "Native mount or container runtime on a labeled capable runner with current receipts."
+        }
+      },
+      "policy_invariants": [
+        "presence_is_not_support",
+        "hermetic_green_is_not_live",
+        "stale_receipt_rejected",
+        "zero_collection_rejected"
+      ],
+      "forbidden_inferences": [
+        "hermetic_fixture_implies_live_mount",
+        "stale_receipt_implies_current",
+        "registry_presence_implies_support"
+      ]
+    },
+    "backend_support_tiers": {
+      "authority": "external/ipfs_kit/ipfs_kit_py/backends/spec.py",
+      "joined_manifest": "external/ipfs_kit/docs/runtime_readiness/backend_support_manifest.json",
+      "schema": "BackendSupportManifest@1",
+      "inventory_enum": "BackendSupportTier",
+      "inventory_values": [
+        "production",
+        "conditional",
+        "configuration-only",
+        "experimental",
+        "unsupported"
+      ],
+      "manifest_extra_values": [
+        "unknown-pending-proof"
+      ],
+      "policy": {
+        "id": "BackendSupportMatrixPolicy@1",
+        "presence_is_not_support": true,
+        "stale_or_missing_external_evidence": "demote_or_block",
+        "hidden_fallback_forbidden": true,
+        "forbidden_inferences": [
+          "registry_presence_implies_support",
+          "schema_form_implies_runtime",
+          "hermetic_fixture_implies_live_provider",
+          "installed_sdk_implies_canonical_adapter",
+          "mcp_client_implies_storage_backend",
+          "missing_evidence_implies_pass"
+        ],
+        "production_requires": [
+          "live_conformance_receipt",
+          "complete_required_operations",
+          "current_tree_evidence",
+          "current_external_or_service_receipt",
+          "canonical_runtime_factory",
+          "no_open_p0_defect_on_required_path"
+        ]
+      },
+      "parallel_to_kernel_vfs": "Backend inventory/live tiers and Kernel VFS claim classes share English labels but have distinct promotion predicates; they must not be merged into one ladder."
+    },
+    "configured_selected_states": {
+      "authority": "external/ipfs_kit/ipfs_kit_py/backends/provider_adapters.py",
+      "availability_enum": "ProviderAvailability",
+      "ladder": [
+        {
+          "state": "absent",
+          "meaning": "No inventory entry / not configured for the requested name."
+        },
+        {
+          "state": "unsupported",
+          "enum_value": "unsupported",
+          "meaning": "Excluded inventory entry; typed rejection before effects."
+        },
+        {
+          "state": "configured",
+          "enum_value": "configuration-only",
+          "meaning": "Configuration and health only; receipts cannot promote to storage."
+        },
+        {
+          "state": "receipt-required",
+          "enum_value": "receipt-required",
+          "meaning": "Storage/runtime contract declared but current external/service receipt missing."
+        },
+        {
+          "state": "canonical-adapter-missing",
+          "enum_value": "canonical-adapter-missing",
+          "meaning": "Current receipt exists but no repository-owned CanonicalRuntimeFactory is registered."
+        },
+        {
+          "state": "selected",
+          "enum_value": "runtime-ready",
+          "machine_bit": "routing.storage_selectable",
+          "meaning": "Current receipt and canonical factory; only then storage-executable / selectable."
+        }
+      ],
+      "invariants": [
+        "configured_is_not_selected",
+        "validate_provider_configuration_does_not_promote_storage",
+        "routing_selects_only_runtime_ready_with_current_evidence"
+      ]
+    },
+    "proof_roles": {
+      "note": "Kit has no single ProofRole enum; candidate/admitted/current are composed across governor artifacts, authorization CIDs, and CAS current pointers.",
+      "roles": [
+        {
+          "role": "candidate",
+          "symbols": [
+            "GovernorArtifactKind.POLICY_CANDIDATE",
+            "PromotionStateSnapshot.candidate_cid"
+          ],
+          "paths": [
+            "external/ipfs_kit/ipfs_kit_py/semantic_governor_store/contracts.py",
+            "external/ipfs_kit/ipfs_kit_py/semantic_governor_store/policy.py"
+          ],
+          "meaning": "Immutable candidate artifact CID; cannot authorize its own promotion."
+        },
+        {
+          "role": "admitted",
+          "symbols": [
+            "authorization_cid",
+            "_ADMITTED_RECEIPT_KINDS",
+            "AdmissionDisposition.ADMITTED"
+          ],
+          "paths": [
+            "external/ipfs_kit/ipfs_kit_py/semantic_governor_store/contracts.py",
+            "external/ipfs_kit/ipfs_kit_py/semantic_governor_store/policy.py",
+            "external/ipfs_kit/ipfs_kit_py/kernel_vfs/cache_state.py"
+          ],
+          "meaning": "Distinct authorization / admission decision; candidate_cid must not equal authorization_cid."
+        },
+        {
+          "role": "current",
+          "symbols": [
+            "current_promotion",
+            "current_policy",
+            "current_state_root",
+            "DurableStateRootAdapter.current_root"
+          ],
+          "paths": [
+            "external/ipfs_kit/ipfs_kit_py/semantic_governor_store/policy.py",
+            "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/state_root_adapter.py",
+            "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py"
+          ],
+          "meaning": "CAS-protected visible head; stale expected generation/CID yields conflict, never silent overwrite."
+        }
+      ],
+      "proof_certificate_transport": {
+        "path": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+        "symbol": "IpfsKitProofCertificateStore",
+        "role": "immutable_bytes_cas_transport_only",
+        "explicit_non_authority": "Never decides whether certificate bytes prove that a test may be reused; accelerate owns reuse/admission authority."
+      }
+    },
+    "cas_wal_recovery": {
+      "cas": {
+        "paths": [
+          "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
+          "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/state_root_adapter.py",
+          "external/ipfs_kit/ipfs_kit_py/semantic_governor_store/policy.py",
+          "external/ipfs_kit/docs/durable_state_roots.md"
+        ],
+        "outcomes": [
+          "updated",
+          "unchanged",
+          "conflict"
+        ],
+        "invariants": [
+          "expected_revision_and_cid_required",
+          "aba_safe",
+          "no_silent_overwrite_of_stale_root"
+        ]
+      },
+      "wal": {
+        "paths": [
+          "external/ipfs_kit/ipfs_kit_py/core/wal/contracts.py",
+          "external/ipfs_kit/ipfs_kit_py/core/wal/recovery.py",
+          "external/ipfs_kit/ipfs_kit_py/storage_wal.py"
+        ],
+        "invariants": [
+          "buffered_or_queued_is_not_committed_or_durable",
+          "recovery_replays_only_fully_committed_transactions"
+        ]
+      },
+      "recovery": {
+        "paths": [
+          "external/ipfs_kit/ipfs_kit_py/semantic_governor_store/recovery.py",
+          "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py"
+        ],
+        "invariants": [
+          "rebuild_indexes_from_immutable_blocks",
+          "never_invent_promotion_or_winner_among_ambiguous_successors",
+          "corrupt_or_ambiguous_chains_fail_closed"
+        ]
+      }
+    },
+    "receipt_freshness": {
+      "provider_receipt": {
+        "path": "external/ipfs_kit/ipfs_kit_py/backends/provider_adapters.py",
+        "rule": "issued_at <= now < expires_at; otherwise ProviderReceiptError('provider receipt is not current')"
+      },
+      "external_receipt_authority": {
+        "path": "external/ipfs_kit/docs/runtime_readiness/backend_external_receipts",
+        "index": "external/ipfs_kit/docs/runtime_readiness/backend_external_receipts/index.json",
+        "active_receipts": 0,
+        "empty_authority_meaning": "Explicit empty registry; not production evidence; inventory remains configuration-only, unsupported, or receipt-required."
+      },
+      "kernel_vfs_rule": "rule:receipt_freshness rejects zero collection, skip-only, stale receipt, continue-on-error, and shell || true",
+      "joined_manifest_freshness_labels": [
+        "current-tree-artifact",
+        "joined-by-dependency-task",
+        "missing",
+        "not-required-for-configuration-only",
+        "not-applicable",
+        "empty-authority-current"
+      ]
+    }
+  },
+  "live_qualification": {
+    "live_qualified_backend_count": 0,
+    "storage_selectable_count": 0,
+    "inventory_production_count": 0,
+    "live_production_count": 0,
+    "zero_qualified_is_valid_honest_state": true,
+    "evidence": [
+      {
+        "path": "external/ipfs_kit/docs/runtime_readiness/backend_support_manifest.json",
+        "field": "summary",
+        "values": {
+          "canonical_count": 27,
+          "production_count": 0,
+          "live_production_count": 0,
+          "storage_selectable_count": 0,
+          "by_inventory_tier": {
+            "conditional": 1,
+            "configuration-only": 22,
+            "unsupported": 4
+          },
+          "honesty": {
+            "production_backends_at_join": 0,
+            "hidden_fallback_entries": 0,
+            "silent_pass_on_missing_evidence": 0
+          }
+        }
+      },
+      {
+        "path": "external/ipfs_kit/docs/runtime_readiness/backend_support_matrix.md",
+        "claim": "Inventory production 0; Live production 0; Storage-selectable now 0"
+      },
+      {
+        "path": "external/ipfs_kit/docs/runtime_readiness/backend_external_receipts/index.json",
+        "claim": "receipts array empty; active_receipts 0"
+      },
+      {
+        "path": "external/ipfs_kit/tests/runtime_readiness/backends/test_joined_backend_matrix.py",
+        "claim": "test_summary_honesty_counters asserts production_count == 0 and live_production_count == 0"
+      }
+    ],
+    "sole_storage_capable_inventory_entry": {
+      "canonical_name": "iroh",
+      "inventory_tier": "conditional",
+      "live_tier": "conditional",
+      "disposition": "conditional-receipt-required",
+      "availability": "receipt-required",
+      "storage_selectable": false,
+      "evidence_freshness": "missing",
+      "runtime_factory": "create_filesystem"
+    }
+  },
+  "adapter_seams": [
+    {
+      "id": "handsfree_ipfs_kit_adapter",
+      "path": "src/handsfree/ipfs_kit_adapters.py",
+      "symbols": [
+        "IPFSKitAdapter",
+        "get_ipfs_kit_adapter",
+        "_IPFSKitModuleAdapter"
+      ],
+      "role": "root-repo optional protocol over ipfs_kit_py.ipfs_kit; pin/unpin/add/cat/status only; not proof or live-qualification authority"
+    },
+    {
+      "id": "backend_inventory_spec",
+      "path": "external/ipfs_kit/ipfs_kit_py/backends/spec.py",
+      "symbols": [
+        "BackendSpec",
+        "BackendSupportTier",
+        "BackendCapability",
+        "BACKEND_SPECS"
+      ],
+      "role": "canonical inventory authority; presence is not storage support"
+    },
+    {
+      "id": "provider_adapter_catalog",
+      "path": "external/ipfs_kit/ipfs_kit_py/backends/provider_adapters.py",
+      "symbols": [
+        "ProviderAdapterCatalog",
+        "ProviderAvailability",
+        "ProviderReceipt",
+        "CanonicalRuntimeFactory",
+        "provider_adapter_for"
+      ],
+      "role": "configured-to-runtime-ready gate; receipt freshness and typed demotion"
+    },
+    {
+      "id": "hermetic_filesystem_adapter",
+      "path": "external/ipfs_kit/ipfs_kit_py/backends/filesystem_backend.py",
+      "symbols": [
+        "HermeticFilesystemAdapter",
+        "HermeticBackendError"
+      ],
+      "role": "local hermetic reference; is_hermetic=true; live_provider=false"
+    },
+    {
+      "id": "hermetic_ipfs_fixture_adapter",
+      "path": "external/ipfs_kit/ipfs_kit_py/backends/ipfs_backend.py",
+      "symbols": [
+        "HermeticIPFSFixtureAdapter",
+        "IPFSBackendAdapter"
+      ],
+      "role": "IPFS-shaped hermetic fixture; must not imply live provider"
+    },
+    {
+      "id": "iroh_backend_adapter",
+      "path": "external/ipfs_kit/ipfs_kit_py/backends/iroh_backend.py",
+      "symbols": [
+        "IrohBackendAdapter"
+      ],
+      "role": "conditional storage-capable inventory target; still receipt-gated"
+    },
+    {
+      "id": "python_operation_adapter",
+      "path": "external/ipfs_kit/ipfs_kit_py/high_level_api/operation_adapter.py",
+      "symbols": [
+        "PythonAdapter"
+      ],
+      "role": "Python transport projection under AllInterfaceParityPolicy@1"
+    },
+    {
+      "id": "cli_operation_adapter",
+      "path": "external/ipfs_kit/ipfs_kit_py/cli/operation_adapter.py",
+      "symbols": [
+        "CLIAdapter"
+      ],
+      "role": "CLI transport projection; same advertised operations as Python/MCP"
+    },
+    {
+      "id": "mcp_operation_adapter",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/tools/operation_adapter.py",
+      "symbols": [
+        "MCPToolAdapter",
+        "MCPPlusPlusToolAdapter"
+      ],
+      "role": "MCP/MCP++ tool projection; authorization/durability meanings preserved across transports"
+    },
+    {
+      "id": "legacy_vfs_adapter",
+      "path": "external/ipfs_kit/ipfs_kit_py/core/vfs/adapters.py",
+      "symbols": [
+        "LegacyVFSAdapter"
+      ],
+      "role": "legacy VFS surface into CanonicalVFSService@1; not a parallel authority"
+    },
+    {
+      "id": "durable_state_root_adapter",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/state_root_adapter.py",
+      "symbols": [
+        "DurableStateRootAdapter"
+      ],
+      "role": "CAS current-pointer facade; datasets owns semantic CID identity; Kit verifies without minting replacements"
+    },
+    {
+      "id": "proof_certificate_store_transport",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+      "symbols": [
+        "IpfsKitProofCertificateStore"
+      ],
+      "role": "optional CID-bound certificate byte transport; not reuse/admission oracle"
+    },
+    {
+      "id": "semantic_governor_promotion",
+      "path": "external/ipfs_kit/ipfs_kit_py/semantic_governor_store/policy.py",
+      "symbols": [
+        "DurablePromotionStateRepository",
+        "compare_and_swap_promotion"
+      ],
+      "role": "candidate vs authorization vs current promotion head"
+    }
+  ],
+  "key_encoding_tests": [
+    "external/ipfs_kit/tests/runtime_readiness/backends/test_joined_backend_matrix.py",
+    "external/ipfs_kit/tests/runtime_readiness/backends/test_provider_backend_contracts.py",
+    "external/ipfs_kit/tests/runtime_readiness/backends/test_hermetic_adapters.py",
+    "external/ipfs_kit/tests/runtime_readiness/backends/test_backend_spec_registry.py",
+    "external/ipfs_kit/tests/semantic_governor_store/test_contracts.py",
+    "external/ipfs_kit/tests/semantic_governor_store/test_policy_cas.py",
+    "external/ipfs_kit/tests/semantic_governor_store/test_recovery.py",
+    "external/ipfs_kit/tests/test_proof_certificate_store.py",
+    "external/ipfs_kit/tests/runtime_readiness/wal/test_wal_contracts.py",
+    "external/ipfs_kit/tests/runtime_readiness/wal/test_wal_recovery.py",
+    "external/ipfs_kit/tests/kernel_vfs/linux/test_loader_doctor.py",
+    "external/ipfs_kit/tests/kernel_vfs/windows/test_loader_doctor.py"
+  ],
+  "weaker_replacements_forbidden": [
+    {
+      "collapse": "hermetic_equals_live",
+      "reason": "Hermetic green CI/fixtures must not advertise production mounts or live providers."
+    },
+    {
+      "collapse": "inventory_tier_equals_live_tier_equals_storage_selectable",
+      "reason": "Configuration-only or conditional-without-receipt must not become selectable."
+    },
+    {
+      "collapse": "configured_equals_selected",
+      "reason": "Validating configuration is not runtime-ready selection."
+    },
+    {
+      "collapse": "candidate_equals_admitted_equals_current",
+      "reason": "Self-authorization, non-CAS head overwrite, or treating transport CAS hits as proof admission would weaken Kit invariants."
+    },
+    {
+      "collapse": "buffered_wal_equals_committed_durable",
+      "reason": "Recovery must not invent winners on ambiguous forks or treat queued writes as durable."
+    },
+    {
+      "collapse": "stale_or_empty_receipts_equal_current_evidence",
+      "reason": "Empty external receipt authority remains non-qualifying."
+    },
+    {
+      "collapse": "proof_certificate_transport_equals_reuse_oracle",
+      "reason": "IpfsKitProofCertificateStore explicitly declines reuse decisions."
+    },
+    {
+      "collapse": "zero_live_backends_is_a_defect_to_paper_over",
+      "reason": "Zero-qualified backend count is a reviewed honest state; do not invent weaker production claims."
+    },
+    {
+      "collapse": "kernel_vfs_claim_classes_merged_with_backend_support_tiers",
+      "reason": "Same English words, different promotion predicates; merging loses honesty."
+    },
+    {
+      "collapse": "legacy_or_transport_adapters_as_parallel_authorities",
+      "reason": "LegacyVFSAdapter and MCP/CLI adapters must not bypass CanonicalVFSService / ServiceRouter."
+    }
+  ],
+  "adaptation_disposition": {
+    "for_facp_015": "Lossless FCA adapter around current support-matrix and proof-seal/current-pointer records; preserve every distinction above; keep unsupported/ambiguous/zero-qualified records nonqualifying.",
+    "for_facp_027_028": "Live gate and proof-role/freshness transitions must require current live evidence; stale or ambiguous proof execution cannot update current.",
+    "replacement_policy": "adapt_not_replace"
+  },
+  "acceptance": {
+    "preserves_honest_distinctions": true,
+    "identifies_exact_adapter_seams": true,
+    "live_qualified_backends": 0,
+    "proposes_weaker_replacement": false
+  }
+}
