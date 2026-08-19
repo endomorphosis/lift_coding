@@ -134,7 +134,7 @@ not authority.
 
 ## FACP-004 Inventory Kit evidence, backend, and proof-role semantics
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
