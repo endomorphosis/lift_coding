@@ -1376,7 +1376,7 @@ not authority.
 
 ## FACP-050 Extend proof cache and solver orchestration
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
