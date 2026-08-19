@@ -55,6 +55,13 @@ The supervisor executes only against exact committed gitlinks in its clean
 controller worktree. It must not consume the dirty legacy checkout as source
 authority.
 
+The controller pins one narrow supervisor-runtime compatibility backport in
+`external/ipfs_accelerate`: upstream commit `8f8cc1a04` accepts the explicit
+legacy-Markdown task-source, authority, and fail-closed arguments that the
+configured-board scheduler already emits. The backport changes no task-source
+semantics; it prevents an argument-parser restart storm while retaining the
+scheduler's explicit authority selection.
+
 ## 3. Target flow and trusted computing base
 
 ```text
