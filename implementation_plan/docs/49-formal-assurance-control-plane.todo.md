@@ -323,7 +323,7 @@ not authority.
 
 ## FACP-011 Encode FCA definitions and transitions in Lean
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
