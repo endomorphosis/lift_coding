@@ -1052,7 +1052,7 @@ not authority.
 
 ## FACP-038 Define effect classes and admission typestate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
