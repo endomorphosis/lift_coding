@@ -1457,7 +1457,7 @@ not authority.
 
 ## FACP-053 Generate backend certification suites
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
