@@ -809,7 +809,7 @@ not authority.
 
 ## FACP-029 Prove SwissKnife browser nonauthority
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
