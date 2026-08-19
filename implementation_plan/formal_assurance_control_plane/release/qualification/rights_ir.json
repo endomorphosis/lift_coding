@@ -1,0 +1,364 @@
+{
+  "schema": "facp/rights-ir@1",
+  "schema_version": 1,
+  "task_id": "FACP-055",
+  "goal_id": "FACP-G810",
+  "bundle": "facp/release/rights",
+  "title": "RightsIR SPDX rights graph for release qualification",
+  "vocabulary_schema": "facp/formal-claim-algebra-v1@1",
+  "release_predicate_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+  "inventory_ref": "implementation_plan/formal_assurance_control_plane/baseline/release_rights.json",
+  "generated_at": "2026-08-19T00:00:00Z",
+  "behavior_change": false,
+  "authority": {
+    "statement": "RightsIR records SPDX Boolean expressions and explicit dispositions. Conflict and missing license/provenance machine-block release. Unknown, ambiguous, and custom-unparsed rights remain human-review and never machine-clear to compatible.",
+    "provider_authority": "proposal-only",
+    "prohibited_effects": [
+      "infer_legal_clearance",
+      "unknown_or_conflict_to_compatible",
+      "sign_or_publish",
+      "definitive_legal_advice",
+      "machine_clear_from_readme_prose"
+    ]
+  },
+  "policy": {
+    "spdx_boolean_expressions": true,
+    "ambiguous_legal_interpretation_human_blocked": true,
+    "machine_clearance_of_unknown_or_conflict_forbidden": true,
+    "conflict_machine_blocks": true,
+    "missing_license_or_provenance_machine_blocks": true,
+    "unknown_remains_human_review": true,
+    "apparently_aligned_is_not_clearance": true,
+    "fail_closed": true
+  },
+  "evidence_subset": [
+    "licenses",
+    "data_rights",
+    "model_rights",
+    "attribution",
+    "share_alike",
+    "commercial",
+    "redistribution",
+    "unknown_custom"
+  ],
+  "disposition_vocabulary": {
+    "machine_block": {
+      "blocks_release": true,
+      "machine_clearance_allowed": false,
+      "requires_human_review": false,
+      "description": "Deterministic automatic block; no provider may clear."
+    },
+    "human_review": {
+      "blocks_release": true,
+      "machine_clearance_allowed": false,
+      "requires_human_review": true,
+      "description": "Unresolved or ambiguous rights; human legal review required; never auto-cleared."
+    },
+    "observation_only_not_clearance": {
+      "blocks_release": false,
+      "machine_clearance_allowed": false,
+      "requires_human_review": false,
+      "description": "Apparent SPDX alignment observation only; does not satisfy rights_resolution."
+    },
+    "human_cleared": {
+      "blocks_release": false,
+      "machine_clearance_allowed": false,
+      "requires_human_review": false,
+      "description": "Explicit human legal clearance recorded against exact SPDX expression and tree binding."
+    }
+  },
+  "status_to_disposition": {
+    "conflict": "machine_block",
+    "missing": "machine_block",
+    "missing_artifact": "machine_block",
+    "undeclared": "machine_block",
+    "unknown": "human_review",
+    "ambiguous": "human_review",
+    "custom_unparsed": "human_review",
+    "apparently_aligned": "observation_only_not_clearance",
+    "compatible": "human_review",
+    "human_cleared": "human_cleared"
+  },
+  "evaluation_rules": [
+    {
+      "id": "rule:conflict-machine-blocks",
+      "when_status_in": ["conflict"],
+      "then_disposition": "machine_block",
+      "blocks_release": true,
+      "machine_clearance_allowed": false,
+      "reason_code": "rights_conflict"
+    },
+    {
+      "id": "rule:missing-license-or-provenance-machine-blocks",
+      "when_status_in": ["missing", "missing_artifact", "undeclared"],
+      "then_disposition": "machine_block",
+      "blocks_release": true,
+      "machine_clearance_allowed": false,
+      "reason_code": "missing_license_or_provenance"
+    },
+    {
+      "id": "rule:unknown-human-review",
+      "when_status_in": ["unknown", "ambiguous", "custom_unparsed", "compatible"],
+      "then_disposition": "human_review",
+      "blocks_release": true,
+      "machine_clearance_allowed": false,
+      "reason_code": "unknown_rights_human_review"
+    },
+    {
+      "id": "rule:apparently-aligned-not-clearance",
+      "when_status_in": ["apparently_aligned"],
+      "then_disposition": "observation_only_not_clearance",
+      "blocks_release": false,
+      "machine_clearance_allowed": false,
+      "reason_code": "alignment_observation_only"
+    },
+    {
+      "id": "rule:human-cleared-only-via-explicit-record",
+      "when_status_in": ["human_cleared"],
+      "then_disposition": "human_cleared",
+      "blocks_release": false,
+      "machine_clearance_allowed": false,
+      "reason_code": "human_legal_clearance"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "rights:datasets-mit-vs-agpl",
+      "subject": "external/ipfs_datasets",
+      "qualification_input_id": "qi:datasets-package-vs-repository-license-conflict",
+      "kind": "package_vs_repository_license",
+      "mandatory": true,
+      "package_spdx": "MIT",
+      "repository_spdx": "AGPL-3.0-only",
+      "spdx_expression": "(MIT) XOR (AGPL-3.0-only)",
+      "compatibility_note": "MIT package metadata disagrees with AGPL-3.0 repository LICENSE; expressions are mutually exclusive claims, not a conjunctive dual-license grant.",
+      "status": "conflict",
+      "sources": [
+        {
+          "path": "external/ipfs_datasets/pyproject.toml",
+          "field": "project.license.text",
+          "observed": "MIT"
+        },
+        {
+          "path": "external/ipfs_datasets/LICENSE",
+          "field": "license_text_header",
+          "observed": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3"
+        }
+      ],
+      "rights_facets": {
+        "attribution": "unresolved_due_to_conflict",
+        "share_alike": "agpl_claims_copyleft",
+        "commercial": "unresolved_due_to_conflict",
+        "redistribution": "unresolved_due_to_conflict"
+      }
+    },
+    {
+      "id": "rights:swissknife-undeclared",
+      "subject": "swissknife",
+      "qualification_input_id": "qi:swissknife-missing-license-and-provenance",
+      "kind": "missing_license_and_provenance",
+      "mandatory": true,
+      "package_spdx": null,
+      "repository_spdx": null,
+      "spdx_expression": "NOASSERTION",
+      "status": "missing",
+      "sources": [
+        {
+          "path": "swissknife/package.json",
+          "field": "license",
+          "observed": ""
+        },
+        {
+          "path": "swissknife/LICENSE",
+          "observed": "missing"
+        },
+        {
+          "path": "swissknife/LICENSE.md",
+          "observed": "missing"
+        },
+        {
+          "path": "swissknife/README.md",
+          "field": "License section",
+          "observed": "claims AGPL License via LICENSE.md which does not exist"
+        }
+      ],
+      "rights_facets": {
+        "attribution": "unknown",
+        "share_alike": "unknown",
+        "commercial": "unknown",
+        "redistribution": "unknown",
+        "provenance": "missing"
+      }
+    },
+    {
+      "id": "rights:mcp-plusplus-license-file-missing",
+      "subject": "Mcp-Plus-Plus",
+      "qualification_input_id": "qi:mcp-plusplus-missing-license-file",
+      "kind": "missing_license_artifact",
+      "mandatory": true,
+      "package_spdx": null,
+      "claimed_spdx": "MIT",
+      "repository_spdx": null,
+      "spdx_expression": "NOASSERTION",
+      "status": "missing_artifact",
+      "sources": [
+        {
+          "path": "Mcp-Plus-Plus/README.md",
+          "field": "License section",
+          "observed": "This project is licensed under the MIT License - see the LICENSE file for details."
+        },
+        {
+          "path": "Mcp-Plus-Plus/LICENSE",
+          "observed": "missing"
+        }
+      ],
+      "rights_facets": {
+        "attribution": "unknown",
+        "redistribution": "unknown"
+      }
+    },
+    {
+      "id": "rights:root-package-license-undeclared",
+      "subject": ".",
+      "qualification_input_id": "qi:root-license-file-without-package-metadata",
+      "kind": "undeclared_package_metadata",
+      "mandatory": true,
+      "package_spdx": null,
+      "repository_spdx": "AGPL-3.0-only",
+      "spdx_expression": "AGPL-3.0-only WITH NOASSERTION-package-metadata",
+      "status": "undeclared",
+      "sources": [
+        {
+          "path": "LICENSE",
+          "field": "license_text_header",
+          "observed": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3"
+        },
+        {
+          "path": "pyproject.toml",
+          "field": "project.license",
+          "observed": null
+        }
+      ],
+      "rights_facets": {
+        "attribution": "repository_agpl_present",
+        "redistribution": "package_metadata_undeclared"
+      }
+    },
+    {
+      "id": "rights:kit-agpl-aligned",
+      "subject": "external/ipfs_kit",
+      "kind": "package_repository_alignment_observation",
+      "mandatory": false,
+      "package_spdx": "AGPL-3.0-or-later",
+      "repository_spdx": "AGPL-3.0-only",
+      "spdx_expression": "AGPL-3.0-or-later",
+      "status": "apparently_aligned",
+      "sources": [
+        {
+          "path": "external/ipfs_kit",
+          "observed": "package AGPL-3.0-or-later with repository AGPL-3.0"
+        }
+      ],
+      "rights_facets": {
+        "share_alike": "copyleft_observed",
+        "redistribution": "apparently_aligned"
+      },
+      "note": "Alignment observation only; not a legal clearance."
+    },
+    {
+      "id": "rights:accelerate-agpl-aligned",
+      "subject": "external/ipfs_accelerate",
+      "kind": "package_repository_alignment_observation",
+      "mandatory": false,
+      "package_spdx": "AGPL-3.0-or-later",
+      "repository_spdx": "AGPL-3.0-only",
+      "spdx_expression": "AGPL-3.0-or-later",
+      "status": "apparently_aligned",
+      "sources": [
+        {
+          "path": "external/ipfs_accelerate",
+          "observed": "package AGPLv3+ with repository AGPL-3.0"
+        }
+      ],
+      "rights_facets": {
+        "share_alike": "copyleft_observed",
+        "redistribution": "apparently_aligned"
+      },
+      "note": "Alignment observation only; not a legal clearance."
+    },
+    {
+      "id": "rights:unknown-custom-license-text",
+      "subject": "example:custom-unparsed-license",
+      "kind": "unknown_custom",
+      "mandatory": true,
+      "package_spdx": null,
+      "repository_spdx": null,
+      "spdx_expression": "LicenseRef-Custom-Unparsed",
+      "status": "custom_unparsed",
+      "sources": [
+        {
+          "path": "synthetic",
+          "observed": "Custom proprietary notice without SPDX mapping"
+        }
+      ],
+      "rights_facets": {
+        "attribution": "unknown",
+        "commercial": "unknown",
+        "redistribution": "unknown",
+        "unknown_custom": true
+      },
+      "synthetic": true,
+      "note": "Seed node proving unknown/custom rights stay human-review, never machine-cleared."
+    },
+    {
+      "id": "rights:data-model-rights-unknown",
+      "subject": "example:data-model-corpus",
+      "kind": "data_model_rights",
+      "mandatory": true,
+      "package_spdx": null,
+      "repository_spdx": null,
+      "spdx_expression": "NOASSERTION",
+      "status": "unknown",
+      "sources": [
+        {
+          "path": "synthetic",
+          "observed": "Training/data/model redistribution rights undeclared"
+        }
+      ],
+      "rights_facets": {
+        "data_rights": "unknown",
+        "model_rights": "unknown",
+        "commercial": "unknown",
+        "redistribution": "unknown"
+      },
+      "synthetic": true,
+      "note": "Seed node for unknown data/model rights remaining human review."
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge:datasets-package-conflicts-repository",
+      "from": "rights:datasets-mit-vs-agpl",
+      "to": "rights:datasets-mit-vs-agpl",
+      "relation": "spdx_claim_conflict",
+      "left": "MIT",
+      "right": "AGPL-3.0-only",
+      "blocks_release": true
+    },
+    {
+      "id": "edge:swissknife-readme-without-artifact",
+      "from": "rights:swissknife-undeclared",
+      "to": "rights:swissknife-undeclared",
+      "relation": "readme_claim_without_license_artifact",
+      "blocks_release": true
+    }
+  ],
+  "acceptance_bindings": {
+    "datasets_license_conflict_blocks_automatically": "rights:datasets-mit-vs-agpl",
+    "swissknife_missing_license_provenance_blocks_automatically": "rights:swissknife-undeclared",
+    "unknown_rights_remain_human_review": [
+      "rights:unknown-custom-license-text",
+      "rights:data-model-rights-unknown"
+    ]
+  }
+}
