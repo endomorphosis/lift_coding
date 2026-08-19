@@ -1,0 +1,1048 @@
+{
+  "schema": "FACPMCPPlusPlusContractsInventory@1",
+  "schema_version": "formal_assurance_control_plane.baseline.mcplusplus_contracts@1",
+  "task_id": "FACP-006",
+  "goal_id": "FACP-G010",
+  "bundle": "facp/inventory/mcplusplus",
+  "title": "Inventory MCP++ schemas and canonicalization",
+  "contract_version": 1,
+  "behavior_change": false,
+  "discovery_is_not_completion": true,
+  "generated_at": "2026-08-19T00:00:00Z",
+  "authority": {
+    "statement": "MCP++ owns normative wire models, profiles A-H, schemas, vectors, and validators. This inventory maps every wire model and canonicalization rule across Python/TypeScript/Rust/Go, records conflicting and permissive choices, and names the smallest executable compiler source of truth. It does not select a final assurance encoding or mutate normative specs.",
+    "plan_ref": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+    "objective_ref": "FACP-G010",
+    "owning_repository": "Mcp-Plus-Plus",
+    "prohibited_effects": [
+      "mutate_normative_specs",
+      "select_format_without_evidence",
+      "call_providers",
+      "hand_edit_future_generated_bindings"
+    ]
+  },
+  "source_binding": {
+    "submodule_path": "Mcp-Plus-Plus",
+    "gitlink_path": "Mcp-Plus-Plus",
+    "gitlink_commit": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+    "planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+    "worktree_status": "clean",
+    "binding_rule": "Exact committed gitlink in the controller worktree; dirty MCP++ checkouts are not authority.",
+    "evidence_observation": "read-only inventory of schemas, specs, vectors, and validators; no provider calls"
+  },
+  "evidence_subset": [
+    "IDL",
+    "profiles A-H",
+    "DAG-JSON/DAG-CBOR/JSON choices",
+    "CID families",
+    "Python/TS/Rust/Go validators",
+    "duplicate semantics",
+    "unknown-field behavior"
+  ],
+  "languages": ["python", "typescript", "rust", "go"],
+  "profiles": [
+    {
+      "id": "A",
+      "name": "MCP-IDL",
+      "capability_key": "mcp++/mcp-idl",
+      "spec": "Mcp-Plus-Plus/docs/spec/mcp-idl.md",
+      "validators": {
+        "python": "Mcp-Plus-Plus/tests-py/validators/mcp_idl.py",
+        "typescript": "Mcp-Plus-Plus/tests-ts/src/validators/mcpIDL.ts",
+        "rust": "Mcp-Plus-Plus/tests-rs/src/validators/mcp_idl.rs",
+        "go": "Mcp-Plus-Plus/tests-go/validators/mcp_idl.go"
+      },
+      "json_schema": null,
+      "canonicalization": "multi_option_unresolved",
+      "notes": "Spec permits canonical JSON, DAG-JSON, or DAG-CBOR; IDL CID helpers are non-IPLD pseudo-CIDs."
+    },
+    {
+      "id": "B",
+      "name": "CID-Native Execution Artifacts",
+      "capability_key": "mcp++/cid-envelope",
+      "spec": "Mcp-Plus-Plus/docs/spec/cid-native-artifacts.md",
+      "validators": {
+        "python": "Mcp-Plus-Plus/tests-py/validators/cid_artifacts.py",
+        "typescript": "Mcp-Plus-Plus/tests-ts/src/validators/cidArtifacts.ts",
+        "rust": "Mcp-Plus-Plus/tests-rs/src/validators/cid_artifacts.rs",
+        "go": "Mcp-Plus-Plus/tests-go/validators/cid_artifacts.go"
+      },
+      "json_schema": null,
+      "canonicalization": "canonical_json_or_cbor_family_unresolved",
+      "notes": "Normative CID family is Kubo CIDv1 raw-leaves (bafkrei…) or legacy CIDv0; encoding family left open."
+    },
+    {
+      "id": "C",
+      "name": "Capability Delegation (UCAN)",
+      "capability_key": "mcp++/ucan",
+      "spec": "Mcp-Plus-Plus/docs/spec/ucan-delegation.md",
+      "validators": {
+        "python": "Mcp-Plus-Plus/tests-py/validators/ucan_delegation.py",
+        "typescript": "Mcp-Plus-Plus/tests-ts/src/validators/ucanDelegation.ts",
+        "rust": "Mcp-Plus-Plus/tests-rs/src/validators/ucan_delegation.rs",
+        "go": "Mcp-Plus-Plus/tests-go/validators/ucan_delegation.go"
+      },
+      "json_schema": null,
+      "canonicalization": "proof_bundle_content_addressed",
+      "notes": "Delegation proofs SHOULD be canonicalized into proof_cid; wire shapes differ across languages."
+    },
+    {
+      "id": "D",
+      "name": "Temporal Deontic Policy Evaluation",
+      "capability_key": "mcp++/deontic-policy",
+      "spec": "Mcp-Plus-Plus/docs/spec/temporal-deontic-policy.md",
+      "validators": {
+        "python": "Mcp-Plus-Plus/tests-py/validators/policy_evaluation.py",
+        "typescript": "Mcp-Plus-Plus/tests-ts/src/validators/policyEvaluation.ts",
+        "rust": "Mcp-Plus-Plus/tests-rs/src/validators/policy_evaluation.rs",
+        "go": "Mcp-Plus-Plus/tests-go/validators/policy_evaluation.go"
+      },
+      "json_schema": null,
+      "canonicalization": "compact_key_sorted_utf8_json_sha256",
+      "notes": "ZKP commitments use compact key-sorted UTF-8 JSON + SHA-256, not IPLD DAG-* CIDs."
+    },
+    {
+      "id": "E",
+      "name": "mcp+p2p Transport Binding",
+      "capability_key": "mcp++/p2p-transport",
+      "spec": "Mcp-Plus-Plus/docs/spec/transport-mcp-p2p.md",
+      "validators": {
+        "python": "Mcp-Plus-Plus/tests-py/validators/transport.py",
+        "typescript": "Mcp-Plus-Plus/tests-ts/src/validators/transport.ts",
+        "rust": "Mcp-Plus-Plus/tests-rs/src/validators/transport.rs",
+        "go": "Mcp-Plus-Plus/tests-go/validators/transport.go"
+      },
+      "json_schema": null,
+      "canonicalization": "transport_framing_not_artifact_cid",
+      "notes": "Session/bus/error wire models exist; unknown-field policy is permissive outside JSON-RPC envelopes."
+    },
+    {
+      "id": "F",
+      "name": "Event DAG Provenance",
+      "capability_key": "mcp++/event-dag",
+      "spec": "Mcp-Plus-Plus/docs/spec/event-dag-ordering.md",
+      "validators": {
+        "python": "Mcp-Plus-Plus/tests-py/validators/event_dag.py",
+        "typescript": "Mcp-Plus-Plus/tests-ts/src/validators/eventDAG.ts",
+        "rust": "Mcp-Plus-Plus/tests-rs/src/validators/event_dag.rs",
+        "go": "Mcp-Plus-Plus/tests-go/validators/event_dag.go"
+      },
+      "json_schema": null,
+      "canonicalization": "defers_to_profile_b",
+      "notes": "Defers CID/canonical rules to Profile B; Event vs DAGEvent duplicates exist in Rust/Go."
+    },
+    {
+      "id": "G",
+      "name": "Risk Scoring and Scheduling",
+      "capability_key": null,
+      "spec": "Mcp-Plus-Plus/docs/spec/risk-scheduling.md",
+      "validators": {
+        "python": "Mcp-Plus-Plus/tests-py/validators/profile_g.py",
+        "typescript": "Mcp-Plus-Plus/tests-ts/src/profileG.ts",
+        "rust": "Mcp-Plus-Plus/tests-rs/tests/profile_g_codec_test.rs",
+        "go": "Mcp-Plus-Plus/tests-go/profile_g_codec_test.go"
+      },
+      "json_schema": null,
+      "canonicalization": "dag_json_cidv1_sha256",
+      "notes": "Capability negotiation table in mcp++-profiles-draft.md lists A-F and H keys but omits Profile G. Full closed codecs in Python and TypeScript reject unknown fields and floats; Rust/Go only rehash CID prefixes in tests."
+    },
+    {
+      "id": "H",
+      "name": "x402 Payments",
+      "capability_key": "mcp++/x402-payments",
+      "spec": "Mcp-Plus-Plus/docs/spec/x402-payments.md",
+      "validators": {
+        "python": "Mcp-Plus-Plus/tests-py/validators/profile_h.py",
+        "typescript": "Mcp-Plus-Plus/tests-ts/src/profileH.ts",
+        "rust": null,
+        "go": null
+      },
+      "json_schema": "Mcp-Plus-Plus/schemas/profile-h/1.0",
+      "canonicalization": "dag_json_cidv1_sha256_strict_links",
+      "notes": "Only Profile H has normative JSON Schema trees; codecs exist only in Python and TypeScript; linked CIDs must be dag-json."
+    }
+  ],
+  "wire_models": [
+    {
+      "model": "JSONRPCError",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "JSONRPCRequest",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "deny", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "JSONRPCNotification",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "deny", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "JSONRPCResponse",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "deny", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "ClientInfo",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "ServerInfo",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false,
+      "notes": "Rust aliases ServerInfo to ClientInfo."
+    },
+    {
+      "model": "Capabilities",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "InitializeParams",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-INIT-PARAMS-CASE"
+    },
+    {
+      "model": "InitializeResult",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "ToolCallParams",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "ResourceReadParams",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "PromptGetParams",
+      "profile": "base-mcp",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "MethodDescriptor",
+      "profile": "A",
+      "presence": {"python": true, "typescript": true, "rust": false, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "absent", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-IDL-METHOD",
+      "notes": "Rust uses ToolDefinition instead; Go uses parameters[]/return_type."
+    },
+    {
+      "model": "ErrorDescriptor",
+      "profile": "A",
+      "presence": {"python": true, "typescript": true, "rust": false, "go": false},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "absent", "go": "absent"},
+      "shape_conflict": false
+    },
+    {
+      "model": "InterfaceDescriptor",
+      "profile": "A",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-IDL-INTERFACE"
+    },
+    {
+      "model": "ExecutionEnvelope",
+      "profile": "B",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-ENVELOPE"
+    },
+    {
+      "model": "ExecutionReceipt",
+      "profile": "B",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-RECEIPT"
+    },
+    {
+      "model": "UCANToken",
+      "profile": "C",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-UCAN-PRF"
+    },
+    {
+      "model": "DelegationChain",
+      "profile": "C",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-DELEGATION-CHAIN"
+    },
+    {
+      "model": "Delegation",
+      "profile": "C",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false,
+      "notes": "Canonical full-name wire record; Rust/Go comments claim extras permitted while decode drops unknowns."
+    },
+    {
+      "model": "TemporalConstraint",
+      "profile": "D",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": false},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "silent_ignore", "go": "absent"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-POLICY-D",
+      "notes": "Go uses PolicyConstraint / PolicyDescriptor instead of TemporalConstraint / Policy."
+    },
+    {
+      "model": "Policy",
+      "profile": "D",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": false},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "absent"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-POLICY-D",
+      "notes": "Go PolicyDescriptor; Rust Policy schema differs (policy_cid/rules)."
+    },
+    {
+      "model": "PolicyDecision",
+      "profile": "D",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-POLICY-DECISION",
+      "notes": "Go also defines PolicyDecisionWire matching Py/TS interop shape."
+    },
+    {
+      "model": "DAGEvent",
+      "profile": "F",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-DUP-EVENT-DAG",
+      "notes": "Rust/Go also keep alternate Event / EventDAG types."
+    },
+    {
+      "model": "TransportMessage",
+      "profile": "E",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "forbid", "typescript": "strict", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "TransportSession",
+      "profile": "E",
+      "presence": {"python": true, "typescript": true, "rust": false, "go": false},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "absent", "go": "absent"},
+      "shape_conflict": true,
+      "conflict_id": "MCP-SHAPE-SESSION",
+      "notes": "Rust SessionInfo; Go SessionInit — incompatible session wire names."
+    },
+    {
+      "model": "P2PMessage",
+      "profile": "E",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "SessionError",
+      "profile": "E",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "BusMessage",
+      "profile": "E",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false,
+      "notes": "Uses sha256:<hex> content identifiers rather than IPLD CIDs."
+    },
+    {
+      "model": "AuditEntry",
+      "profile": "D",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false,
+      "notes": "entry_cid is sha256:<hex>; Python requires an explicit extra map."
+    },
+    {
+      "model": "WasmProofResult",
+      "profile": "F",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false
+    },
+    {
+      "model": "ZKProofArtifact",
+      "profile": "F",
+      "presence": {"python": true, "typescript": true, "rust": true, "go": true},
+      "unknown_fields": {"python": "allow", "typescript": "passthrough", "rust": "silent_ignore", "go": "silent_ignore"},
+      "shape_conflict": false,
+      "notes": "artifact_cid / vk_cid use sha256:<hex> family."
+    },
+    {
+      "model": "ProfileGArtifacts",
+      "profile": "G",
+      "kinds": [
+        "Goal",
+        "Subgoal",
+        "PlanBranch",
+        "PlanSelection",
+        "TaskSpec",
+        "RiskModel",
+        "RiskEvidence",
+        "RiskAssessment",
+        "NeighborhoodRecord",
+        "NeighborhoodAttestation",
+        "ScheduleProposal",
+        "TaskClaim",
+        "ClaimResolution",
+        "TaskReceipt"
+      ],
+      "presence": {"python": true, "typescript": true, "rust": "cid_test_only", "go": "cid_test_only"},
+      "unknown_fields": {"python": "reject", "typescript": "reject", "rust": "unimplemented", "go": "unimplemented"},
+      "shape_conflict": false,
+      "notes": "Closed allowlist codecs; not declared in models.* structs."
+    },
+    {
+      "model": "ProfileHArtifacts",
+      "profile": "H",
+      "kinds": [
+        "PaidCapability",
+        "PaymentQuote",
+        "PaymentAuthorization",
+        "PaymentVerification",
+        "SettlementReceipt",
+        "PaidEntitlement",
+        "UsageRecord",
+        "RefundRecord",
+        "AccessReceipt"
+      ],
+      "presence": {"python": true, "typescript": true, "rust": false, "go": false},
+      "unknown_fields": {"python": "reject", "typescript": "reject", "rust": "absent", "go": "absent"},
+      "shape_conflict": false,
+      "notes": "Closed DAG-JSON records with schemas/profile-h/1.0 additionalProperties:false."
+    }
+  ],
+  "canonicalization_rules": [
+    {
+      "rule_id": "CANON-IDL-MULTI",
+      "scope": "Profile A InterfaceDescriptor",
+      "encoding_choices": ["canonical_json", "dag_json", "dag_cbor"],
+      "status": "permissive_unresolved",
+      "authority": {
+        "path": "Mcp-Plus-Plus/docs/spec/mcp-idl.md",
+        "line_start": 32,
+        "line_end": 35,
+        "quote": "Acceptable approaches include canonical JSON, DAG-JSON, or DAG-CBOR."
+      },
+      "implementations": [
+        {
+          "language": "python",
+          "path": "Mcp-Plus-Plus/tests-py/validators/mcp_idl.py",
+          "line_start": 152,
+          "line_end": 175,
+          "quote": "return f\"bafy{hash_b64}\"",
+          "behavior": "sorted compact JSON + SHA-256 rendered as non-IPLD bafy… pseudo-CID"
+        },
+        {
+          "language": "typescript",
+          "path": "Mcp-Plus-Plus/tests-ts/src/validators/mcpIDL.ts",
+          "behavior": "top-level key sort + 32-bit string hash → bafkrei+base36 pseudo-CID"
+        }
+      ]
+    },
+    {
+      "rule_id": "CANON-PROFILE-B-CID",
+      "scope": "Profile B artifact CIDs",
+      "encoding_choices": ["canonical_json_or_cbor_family"],
+      "status": "cid_family_pinned_encoding_open",
+      "authority": {
+        "path": "Mcp-Plus-Plus/docs/spec/cid-native-artifacts.md",
+        "line_start": 13,
+        "line_end": 30,
+        "quote": "ipfs add --cid-version=1 --raw-leaves"
+      },
+      "cid_profile": "cidv1_raw_sha256_base32_or_cidv0",
+      "wire_regex": "^(Qm[1-9A-HJ-NP-Za-km-z]{44}|b[a-z2-7]{58})$",
+      "notes": "Regex accepts exactly 59-char CIDv1 raw (bafkrei…) or CIDv0; rejects longer dag-json baguqeera… CIDs."
+    },
+    {
+      "rule_id": "CANON-PROFILE-D-COMMITMENT",
+      "scope": "Profile D ZKP commitments",
+      "encoding_choices": ["compact_key_sorted_utf8_json"],
+      "status": "pinned_non_ipld",
+      "authority": {
+        "path": "Mcp-Plus-Plus/docs/spec/temporal-deontic-policy.md",
+        "line_start": 147,
+        "line_end": 149,
+        "quote": "Commitments MUST use canonical compact, recursively key-sorted UTF-8 JSON and"
+      },
+      "hash": "sha256"
+    },
+    {
+      "rule_id": "CANON-PROFILE-G-DAGJSON",
+      "scope": "Profile G artifacts",
+      "encoding_choices": ["dag_json"],
+      "status": "executable_cross_checked",
+      "authority": {
+        "path": "Mcp-Plus-Plus/tests-py/validators/profile_g.py",
+        "line_start": 53,
+        "line_end": 67,
+        "quote": "def canonical_profile_g_bytes(v):"
+      },
+      "rules": [
+        "UTF-8 compact JSON with lexicographically sorted object keys",
+        "separators (',', ':') and no insignificant whitespace",
+        "reject floats / non-JSON values / non-string keys",
+        "reject unknown fields against closed kind allowlists",
+        "CIDv1 dag-json (0x0129) sha2-256 multibase base32 (baguqeera…)"
+      ],
+      "cid_prefix_bytes": "01 a9 02 12 20",
+      "ports": {
+        "python": "full_codec",
+        "typescript": "full_codec",
+        "rust": "cid_rehash_test_only",
+        "go": "cid_rehash_test_only"
+      }
+    },
+    {
+      "rule_id": "CANON-PROFILE-H-DAGJSON",
+      "scope": "Profile H artifacts and x402 headers",
+      "encoding_choices": ["dag_json"],
+      "status": "normative_spec_and_codec",
+      "authority": {
+        "path": "Mcp-Plus-Plus/docs/spec/x402-payments.md",
+        "line_start": 154,
+        "line_end": 158,
+        "quote": "Profile H artifacts are closed, versioned CIDv1 DAG-JSON records."
+      },
+      "rules": [
+        "UTF-8, lexicographically sorted keys, no duplicate keys, no floats",
+        "explicit schema/version markers",
+        "unknown fields MUST be rejected unless negotiated extension owns them",
+        "linked CIDs MUST decode as CIDv1 dag-json sha2-256",
+        "x402 header bytes MUST equal re-canonicalized DAG-JSON"
+      ],
+      "schema_authority": "Mcp-Plus-Plus/schemas/profile-h/1.0",
+      "ports": {
+        "python": "full_codec",
+        "typescript": "full_codec",
+        "rust": "absent",
+        "go": "absent"
+      }
+    },
+    {
+      "rule_id": "CANON-FACP-CCC-PLANNED",
+      "scope": "Future Assurance IDL signed artifacts",
+      "encoding_choices": ["dag_cbor"],
+      "status": "planned_not_implemented",
+      "authority": {
+        "path": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+        "line_start": 234,
+        "line_end": 240,
+        "quote": "Use deterministic DAG-CBOR for signed persisted artifacts, reject unknown"
+      },
+      "notes": "FACP-G310 plans DAG-CBOR identity for EvidenceEnvelope/OperationSpec/AdmissionToken/EffectReceipt; tools/assurance_idl does not exist yet."
+    }
+  ],
+  "cid_families": [
+    {
+      "family_id": "cidv1_raw_sha256_base32",
+      "example_prefix": "bafkrei",
+      "multicodec": "0x55",
+      "used_by": ["Profile B validators", "many conformance vectors", "ExecutionEnvelope/Receipt regex"],
+      "status": "profile_b_normative_preferred"
+    },
+    {
+      "family_id": "cidv0_sha256_base58btc",
+      "example_prefix": "Qm",
+      "used_by": ["Profile B legacy acceptance"],
+      "status": "legacy_allowed"
+    },
+    {
+      "family_id": "cidv1_dag_json_sha256_base32",
+      "example_prefix": "baguqeera",
+      "multicodec": "0x0129",
+      "prefix_bytes": "01 a9 02 12 20",
+      "used_by": ["Profile G codecs", "Profile H codecs", "profile_g/h vectors"],
+      "status": "profile_g_h_normative",
+      "conflicts_with": ["Profile B 59-char bafkrei regex"]
+    },
+    {
+      "family_id": "sha256_hex_digest_alias",
+      "wire_pattern": "^sha256:[0-9a-f]{64}$",
+      "used_by": ["BusMessage", "AuditEntry.entry_cid", "ZKProofArtifact"],
+      "status": "non_ipld_alias"
+    },
+    {
+      "family_id": "pseudo_bafy_test_cid",
+      "example_prefix": "bafy",
+      "used_by": ["mcp_idl.py compute_interface_cid"],
+      "status": "non_conformant_test_helper"
+    }
+  ],
+  "conflicting_or_permissive_choices": [
+    {
+      "conflict_id": "MCP-CANON-ENCODING-FRAGMENTATION",
+      "severity": "high",
+      "category": "canonicalization",
+      "summary": "Specs and codecs disagree on the security-critical encoding: Profile A permits JSON/DAG-JSON/DAG-CBOR; Profile B leaves JSON/CBOR open while pinning raw CIDs; Profiles G/H pin DAG-JSON; FACP CCC plans DAG-CBOR.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/docs/spec/mcp-idl.md",
+          "line_start": 32,
+          "line_end": 32,
+          "quote": "Acceptable approaches include canonical JSON, DAG-JSON, or DAG-CBOR."
+        },
+        {
+          "path": "Mcp-Plus-Plus/docs/spec/x402-payments.md",
+          "line_start": 154,
+          "line_end": 154,
+          "quote": "Profile H artifacts are closed, versioned CIDv1 DAG-JSON records."
+        },
+        {
+          "path": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+          "line_start": 234,
+          "line_end": 234,
+          "quote": "Use deterministic DAG-CBOR for signed persisted artifacts, reject unknown"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-032", "FACP-033"]
+    },
+    {
+      "conflict_id": "MCP-CID-FAMILY-B-VS-GH",
+      "severity": "high",
+      "category": "cid_families",
+      "summary": "Profile B wire regex and models accept only CIDv0 or 59-char CIDv1 raw (bafkrei…). Profile G/H emit/require longer CIDv1 dag-json (baguqeera…) that fail the Profile B pattern.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/docs/spec/cid-native-artifacts.md",
+          "line_start": 25,
+          "line_end": 30,
+          "quote": "raw-leaves"
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/profile_h.py",
+          "line_start": 158,
+          "line_end": 162,
+          "quote": "b\"\\x01\\xa9\\x02\\x12\\x20\""
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/profile_h.py",
+          "line_start": 134,
+          "line_end": 134,
+          "quote": "floats are not canonical DAG-JSON"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-033"]
+    },
+    {
+      "conflict_id": "MCP-UNKNOWN-FIELD-PERMISSIVE",
+      "severity": "high",
+      "category": "unknown_field_behavior",
+      "summary": "Python/TypeScript split forbid|strict vs allow|passthrough deliberately. Rust denies unknowns only on three JSON-RPC envelopes. Go never DisallowUnknownFields. Profile G/H codecs reject unknowns, but only in py/ts.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/models.py",
+          "line_start": 40,
+          "line_end": 40,
+          "quote": "model_config = ConfigDict(extra='forbid', strict=True)"
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/models.py",
+          "line_start": 95,
+          "line_end": 95,
+          "quote": "model_config = ConfigDict(extra='allow', strict=True)"
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-ts/src/models.ts",
+          "line_start": 33,
+          "line_end": 33,
+          "quote": "}).strict();"
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-ts/src/models.ts",
+          "line_start": 75,
+          "line_end": 75,
+          "quote": "}).passthrough(); // Allow additional properties"
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-rs/src/models.rs",
+          "line_start": 12,
+          "line_end": 12,
+          "quote": "#[serde(deny_unknown_fields)]"
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/profile_g.py",
+          "line_start": 75,
+          "line_end": 75,
+          "quote": "if x not in allowed:fail(\"/\"+x,\"unknown field\")"
+        }
+      ],
+      "permissive_models": [
+        "ClientInfo",
+        "ServerInfo",
+        "Capabilities",
+        "InitializeParams",
+        "InitializeResult",
+        "MethodDescriptor",
+        "ErrorDescriptor",
+        "InterfaceDescriptor",
+        "ExecutionReceipt",
+        "UCANToken",
+        "Delegation",
+        "Policy",
+        "PolicyDecision",
+        "DAGEvent",
+        "TransportSession",
+        "P2PMessage",
+        "SessionError",
+        "BusMessage",
+        "AuditEntry",
+        "WasmProofResult",
+        "ZKProofArtifact"
+      ],
+      "strict_models_py_ts": [
+        "JSONRPCError",
+        "JSONRPCRequest",
+        "JSONRPCNotification",
+        "JSONRPCResponse",
+        "ToolCallParams",
+        "ResourceReadParams",
+        "PromptGetParams",
+        "ExecutionEnvelope",
+        "DelegationChain",
+        "TemporalConstraint",
+        "TransportMessage"
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-032", "FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-SHAPE-IDL-INTERFACE",
+      "severity": "high",
+      "category": "duplicate_semantics",
+      "summary": "InterfaceDescriptor wire shapes disagree: Py/TS use name+namespace+methods[]; Rust uses name+tools[]+interface_cid; Go uses interface_name+methods[] with parameters/return_type.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/models.py",
+          "line_start": 190,
+          "line_end": 197,
+          "quote": "name: str = Field(..., min_length=1, description=\"Interface name\")"
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-go/models.go",
+          "line_start": 107,
+          "line_end": 111,
+          "quote": "InterfaceName string                 `json:\"interface_name\" validate:\"required,min=1\""
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-rs/src/models.rs",
+          "line_start": 218,
+          "line_end": 232,
+          "quote": "pub tools: Vec<ToolDefinition>,"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-032"]
+    },
+    {
+      "conflict_id": "MCP-SHAPE-INIT-PARAMS-CASE",
+      "severity": "medium",
+      "category": "duplicate_semantics",
+      "summary": "Rust InitializeParams serializes protocol_version/client_info snake_case without rename, while Py/TS/Go and Rust InitializeResult use camelCase protocolVersion/clientInfo.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-rs/src/models.rs",
+          "line_start": 103,
+          "line_end": 113,
+          "quote": "pub protocol_version: String,"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-SHAPE-ENVELOPE",
+      "severity": "medium",
+      "category": "duplicate_semantics",
+      "summary": "ExecutionEnvelope: Py/TS require timestamp+parents; Go requires invocation and omits timestamp; Rust timestamp is String-only without metadata.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-go/models.go",
+          "line_start": 142,
+          "line_end": 148,
+          "quote": "Invocation   map[string]interface{} `json:\"invocation\" validate:\"required\""
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-SHAPE-RECEIPT",
+      "severity": "medium",
+      "category": "duplicate_semantics",
+      "summary": "ExecutionReceipt is intentionally permissive (extra allow) as de-facto server wire; Go requires receipt_cid and omits envelope_cid/decision_cid.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/models.py",
+          "line_start": 227,
+          "line_end": 232,
+          "quote": "De-facto wire receipt emitted by ipfs_accelerate_py and ipfs_datasets_py."
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-SHAPE-DELEGATION-CHAIN",
+      "severity": "medium",
+      "category": "duplicate_semantics",
+      "summary": "DelegationChain fields diverge: Py/TS root+chain+proof_cid; Rust chain-only; Go root+proofs without proof_cid.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/models.py",
+          "line_start": 267,
+          "line_end": 274,
+          "quote": "model_config = ConfigDict(extra='forbid', strict=True)"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-SHAPE-UCAN-PRF",
+      "severity": "medium",
+      "category": "duplicate_semantics",
+      "summary": "UCANToken.prf is a string list in Py/TS/Go but Option<String> in Rust.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-rs/src/models.rs",
+          "line_start": 325,
+          "line_end": 327,
+          "quote": "pub prf: Option<String>,"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-SHAPE-POLICY-D",
+      "severity": "medium",
+      "category": "duplicate_semantics",
+      "summary": "Profile D policy models are not isomorphic: Py/TS Policy+TemporalConstraint; Rust Policy with rules; Go PolicyDescriptor+PolicyConstraint and a separate PolicyDecisionWire.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-go/models.go",
+          "line_start": 318,
+          "line_end": 326,
+          "quote": "type PolicyDecisionWire struct"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-DUP-EVENT-DAG",
+      "severity": "medium",
+      "category": "duplicate_semantics",
+      "summary": "Rust and Go retain alternate Event / EventDAG types alongside canonical DAGEvent.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-go/models.go",
+          "line_start": 308,
+          "line_end": 310,
+          "quote": "DAGEvent is the canonical DAG event wire form."
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-SHAPE-SESSION",
+      "severity": "low",
+      "category": "duplicate_semantics",
+      "summary": "Transport session identity uses three incompatible types: TransportSession (Py/TS), SessionInfo (Rust), SessionInit (Go).",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/models.py",
+          "line_start": 410,
+          "line_end": 412,
+          "quote": "class TransportSession(BaseModel):"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034"]
+    },
+    {
+      "conflict_id": "MCP-IDL-PSEUDO-CID",
+      "severity": "high",
+      "category": "canonicalization",
+      "summary": "MCP-IDL compute_interface_cid helpers produce non-IPLD identifiers and must not be treated as compiler SoT.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-py/validators/mcp_idl.py",
+          "line_start": 166,
+          "line_end": 175,
+          "quote": "canonical = json.dumps(descriptor, sort_keys=True, separators=(',', ':'))"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-032", "FACP-033"]
+    },
+    {
+      "conflict_id": "MCP-GO-JSON-HTML-ESCAPE",
+      "severity": "low",
+      "category": "canonicalization",
+      "summary": "Go profile_g_codec_test uses encoding/json.Marshal which HTML-escapes <>&; Python/TS do not. Vectors without those characters still agree.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/tests-go/profile_g_codec_test.go",
+          "line_start": 34,
+          "line_end": 41,
+          "quote": "raw := append([]byte{1, 0xa9, 2, 0x12, 0x20}, h[:]...)"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-033"]
+    },
+    {
+      "conflict_id": "MCP-ROOT-VALIDATOR-MIRROR",
+      "severity": "low",
+      "category": "duplicate_semantics",
+      "summary": "Repository root validators/models.py mirrors a subset of MCP++ IDL/DAG models, creating a second handwritten authority surface outside the gitlink.",
+      "evidence": [
+        {
+          "path": "validators/models.py",
+          "line_start": 26,
+          "line_end": 29,
+          "quote": "class InterfaceDescriptor(BaseModel):"
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-032"]
+    },
+    {
+      "conflict_id": "MCP-PROFILE-H-LANG-GAP",
+      "severity": "medium",
+      "category": "validator_coverage",
+      "summary": "Profile H has normative schemas and py/ts codecs but no Rust/Go codec ports; four-language byte identity is not currently enforceable for H.",
+      "evidence": [
+        {
+          "path": "Mcp-Plus-Plus/schemas/profile-h/1.0/artifacts.schema.json",
+          "line_start": 5,
+          "line_end": 5,
+          "quote": "Closed DAG-JSON shapes. Semantic, CID codec, expiry, redaction, and negotiated-bound checks are additionally enforced by the Profile H codecs."
+        }
+      ],
+      "disposition": "inventory_only_do_not_select",
+      "proposed_follow_on": ["FACP-034", "FACP-035"]
+    }
+  ],
+  "conformance_vectors": {
+    "directory": "Mcp-Plus-Plus/conformance/vectors",
+    "readme": "Mcp-Plus-Plus/conformance/README.md",
+    "canonical_wire_models_named": [
+      "InitializeResult",
+      "PolicyDecision",
+      "P2PMessage",
+      "Delegation",
+      "DAGEvent",
+      "ExecutionReceipt"
+    ],
+    "profile_g_h_vector_sets": [
+      "profile_g_artifacts_valid.json",
+      "profile_g_artifacts_invalid.json",
+      "profile_g_protocol_valid.json",
+      "profile_g_protocol_invalid.json",
+      "profile_g_three_peer.json",
+      "profile_h_artifacts_valid.json",
+      "profile_h_transport_valid.json",
+      "profile_h_invalid.json"
+    ],
+    "notes": "Older wire vectors pin shape only; Profile G/H vectors pin expected CIDs and/or exact canonical bytes."
+  },
+  "schemas_inventory": {
+    "present": [
+      "Mcp-Plus-Plus/schemas/profile-h/1.0/artifacts.schema.json",
+      "Mcp-Plus-Plus/schemas/profile-h/1.0/common.schema.json",
+      "Mcp-Plus-Plus/schemas/profile-h/1.0/x402-v2.schema.json"
+    ],
+    "absent": [
+      "Mcp-Plus-Plus/schemas/assurance/v1",
+      "Mcp-Plus-Plus/schemas/profile-g",
+      "Mcp-Plus-Plus/schemas/profile-a",
+      "Mcp-Plus-Plus/schemas/profile-b",
+      "Mcp-Plus-Plus/tools/assurance_idl"
+    ],
+    "notes": "Handwritten validators remain executable authority for profiles A-G; only Profile H has JSON Schema trees, and even those defer CID/redaction/bound checks to codecs."
+  },
+  "smallest_compiler_source_of_truth": {
+    "name": "Profile G DAG-JSON codec (Python)",
+    "path": "Mcp-Plus-Plus/tests-py/validators/profile_g.py",
+    "symbol": "canonical_profile_g_bytes",
+    "line_start": 53,
+    "line_end": 67,
+    "quote": "def canonical_profile_g_bytes(v):",
+    "rationale": [
+      "Smallest self-contained executable path from value → canonical bytes → CIDv1 dag-json sha2-256 multibase.",
+      "Rejects floats and unknown fields; cross-checked by TypeScript twin and Rust/Go CID tests against pinned conformance vectors.",
+      "mcp_idl.py / models.py / schemas alone cannot serve as bytes+CID compilers; Profile H is equally precise but payment-domain-specific and py/ts-only; tools/assurance_idl does not exist yet."
+    ],
+    "not_selected_as_final_assurance_encoding": true,
+    "future_compiler_owner": {
+      "path": "Mcp-Plus-Plus/tools/assurance_idl",
+      "generated_schemas": "Mcp-Plus-Plus/schemas/assurance/v1",
+      "planned_encoding": "deterministic_dag_cbor",
+      "plan_goal": "FACP-G310",
+      "status": "planned_absent",
+      "notes": "FACP-032+ must create one compiler owner; generated files must not be hand-edited. Inventory names today's smallest executable SoT without elevating DAG-JSON as the long-term assurance identity."
+    }
+  },
+  "prohibited_conclusions": [
+    "select_final_assurance_encoding_in_this_task",
+    "treat_mcp_idl_pseudo_cid_as_compiler_sot",
+    "treat_go_silent_ignore_as_strict_validation",
+    "mutate_mcpplusplus_specs_or_validators",
+    "infer_four_language_profile_h_parity"
+  ],
+  "proposed_follow_on": [
+    "FACP-032",
+    "FACP-033",
+    "FACP-034",
+    "FACP-035"
+  ]
+}
