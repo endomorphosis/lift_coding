@@ -1,0 +1,535 @@
+{
+  "schema": "facp/day90-gate@1",
+  "schema_version": 1,
+  "task_id": "FACP-031",
+  "goal_id": "FACP-G200",
+  "bundle": "facp/migration/gate",
+  "title": "Seal the four-path FCA day-90 gate",
+  "vocabulary_schema": "facp/formal-claim-algebra-v1@1",
+  "fca_conformance_gate_path": "implementation_plan/formal_assurance_control_plane/gates/formal_claim_algebra_v1.json",
+  "fca_conformance_gate_sha256": "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21",
+  "status": "sealed",
+  "generated_at": "2026-08-19T17:05:00Z",
+  "behavior_change": false,
+  "policy": {
+    "producer_artifacts_immutable": true,
+    "discovery_is_not_completion": true,
+    "provider_authority": "none",
+    "fail_closed": true,
+    "no_unqualified_production_claim": true,
+    "no_live_external_effect": true,
+    "no_release_claim": true,
+    "no_waive_missing_migration": true,
+    "no_infer_rights": true,
+    "migrated_repository_commits_immutable": true,
+    "prohibited_effects": [
+      "live_external_effect",
+      "release_claim",
+      "waive_missing_migration",
+      "infer_rights",
+      "construct_forbidden_promotion",
+      "introduce_unqualified_production_claim",
+      "provider_authored_completion"
+    ]
+  },
+  "evidence_subset": [
+    "import_purity",
+    "typed_outcomes",
+    "mock_provenance",
+    "canonical_cid",
+    "live_qualification",
+    "proof_roles",
+    "browser_nonauthority",
+    "ambiguous_claim_scan"
+  ],
+  "source_binding": {
+    "controller_commit": "91109b0ba5a450153c66a43626542ddaae752ac7",
+    "controller_tree": "c1975f3ded933ff91c599d00961f56e2874eb671",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "d572b1662922ffda952016f04537711f5c730581",
+        "planning_revision_field": "mcp_plus_plus_planning_revision",
+        "scheduler_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "56c809a76bf88504dbd506d34b815ddb902a1cfe",
+        "planning_revision_field": "accelerate_planning_revision",
+        "scheduler_planning_revision": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "bcb9fd40f26a107324660c134a99db9d38ca05f0",
+        "planning_revision_field": "datasets_planning_revision",
+        "scheduler_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "ef01df27221e6ae55f1416154b981f3284193bc9",
+        "planning_revision_field": "kit_planning_revision",
+        "scheduler_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "916ca5cd4c8ab53763e219a5a9fca89f9247242c",
+        "planning_revision_field": "swissknife_planning_revision",
+        "scheduler_planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "matches_scheduler_planning_revision": false
+      }
+    ],
+    "depends_on": [
+      "FACP-022",
+      "FACP-023",
+      "FACP-025",
+      "FACP-026",
+      "FACP-027",
+      "FACP-028",
+      "FACP-030"
+    ],
+    "shared_producer_inputs": [
+      "FACP-020",
+      "FACP-021",
+      "FACP-024",
+      "FACP-029"
+    ],
+    "producer_inputs": [
+      {
+        "task_id": "FACP-020",
+        "role": "fca_conformance_gate",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/gates/formal_claim_algebra_v1.json",
+            "sha256": "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-021",
+        "role": "datasets_import_purity_baseline",
+        "paths": [
+          {
+            "path": "external/ipfs_datasets/tests/unit/test_formal_assurance_import_purity.py",
+            "sha256": "487d0ecfa55ac384ae9e55de1b6ad9a4c866d3039a27db541291eb450aab34ec"
+          },
+          {
+            "path": "external/ipfs_datasets/docs/architecture/FORMAL_ASSURANCE_IMPORT_BASELINE.md",
+            "sha256": "2eec0c393bcbbfeeafdcd6f508b59516de91c15f7cd487cb87202fadcc6d3e33"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-022",
+        "role": "datasets_explicit_initialization",
+        "paths": [
+          {
+            "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/initialization.py",
+            "sha256": "e8acb275b7436f64ba46a7aeae4f85780497ba7be187db28a3ee6dcf3f048928"
+          },
+          {
+            "path": "external/ipfs_datasets/tests/unit/test_formal_assurance_explicit_initialization.py",
+            "sha256": "c82193b0e9ff93fc2fc92fbc9cfa5dc56dba32dd4a71e1801b8d8f44a3804396"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-023",
+        "role": "datasets_typed_outcomes",
+        "paths": [
+          {
+            "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/outcomes.py",
+            "sha256": "c335d371be22357c53b1f709029198dda4b882e34951a1c3aa87876c1f1d634e"
+          },
+          {
+            "path": "external/ipfs_datasets/tests/unit/test_formal_assurance_dataset_outcomes.py",
+            "sha256": "520523d28b4f643c33b86ab35c2e46af4988d24e4bb323385c992d13ed19ca1f"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-024",
+        "role": "accelerate_mock_origin_fixtures",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/test/api/test_formal_assurance_mock_origin.py",
+            "sha256": "66d6af7c498c9ec921c8277fc4804c13968ae36a218dd41167afc2f79dbca3b1"
+          },
+          {
+            "path": "external/ipfs_accelerate/test/fixtures/formal_assurance/mock_origin_cases.json",
+            "sha256": "60a7e9356aad711393041fed0f34ad49b3c98c8c9c6f4ae408fc6f977ce49702"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-025",
+        "role": "accelerate_capability_outcomes",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/capability_outcomes.py",
+            "sha256": "fc9ada34cf7bd393628697c99fc8e02ffad8e7586d9550270341f67f80435005"
+          },
+          {
+            "path": "external/ipfs_accelerate/test/api/test_formal_assurance_capability_outcomes.py",
+            "sha256": "9d15aa32299eb77281b2ba7ccd38a33a96b8d43e822b6c26d47b342654ef74c3"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-026",
+        "role": "accelerate_canonical_cid",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/content_identity.py",
+            "sha256": "a51cd2919d34d3d97785393b770883cb40c3e642d831709563bb936303527f6f"
+          },
+          {
+            "path": "external/ipfs_accelerate/test/api/test_formal_assurance_content_identity.py",
+            "sha256": "f03565ed5b34169c687a5953efb883b2416a109344ea5bac00ee9b79c5c9c9bc"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-027",
+        "role": "kit_live_backend_gate",
+        "paths": [
+          {
+            "path": "external/ipfs_kit/ipfs_kit_py/assurance/live_backend_gate.py",
+            "sha256": "2f3395001cd91fb62d5f785fa52a7e8bc74d8da73179d11dac04b29027317e9f"
+          },
+          {
+            "path": "external/ipfs_kit/tests/test_formal_assurance_live_backend_gate.py",
+            "sha256": "3798e3e57cb6537a975505321d5629977d11bd25c6752671aba0f85b2e121e5c"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-028",
+        "role": "kit_proof_role_gate",
+        "paths": [
+          {
+            "path": "external/ipfs_kit/ipfs_kit_py/assurance/proof_role_gate.py",
+            "sha256": "a7e8cfe700b9e3b0ecf10d7bf1c7ce7e518d6079103bd1a4e6004b0d49593cc4"
+          },
+          {
+            "path": "external/ipfs_kit/tests/test_formal_assurance_proof_role_gate.py",
+            "sha256": "66caa3a0f68fc42e6cf6b2a79d56259eac3dfe92c78225fb6b108fb2c2c66cfa"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-029",
+        "role": "swissknife_browser_nonauthority",
+        "paths": [
+          {
+            "path": "swissknife/test/formal-assurance/browser-nonauthority.test.ts",
+            "sha256": "457eef4197445a204a49f9b3c1f3355958ef38f3528e2fea50e1e518807c9512"
+          },
+          {
+            "path": "swissknife/test/formal-assurance/browser-authority-vectors.json",
+            "sha256": "f9122f1e756bd5bf6f04b34c9abdd1aefcf515da6df015b13a6f36569cc98e9a"
+          },
+          {
+            "path": "test/formal_assurance/test_facp_029_swissknife_browser_vectors.py",
+            "sha256": "598c473f275dc68573dbfff6d05347ec2603811ffa74493bb679b2bd11fcdee2"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-030",
+        "role": "swissknife_host_admission_projection",
+        "paths": [
+          {
+            "path": "swissknife/src/services/mcp/formalAssuranceGateway.ts",
+            "sha256": "02b740dbfc3ffcd6d2d8f87f7b9c41c479a9599b501efe9689e538692a4c3d4e"
+          },
+          {
+            "path": "swissknife/test/formal-assurance/host-admission-projection.test.ts",
+            "sha256": "60473327e915126586135ebf62d087e0648f9382237bccd29fa55850c2cd0d20"
+          },
+          {
+            "path": "test/formal_assurance/test_facp_030_swissknife_host_projection.py",
+            "sha256": "b5fa8c713ef94d10f1b7637cec519304e9a9a9b90b4bcbedaf5de50b5479f189"
+          }
+        ]
+      }
+    ]
+  },
+  "migrated_paths": {
+    "repositories": [
+      {
+        "path": "external/ipfs_datasets",
+        "lane": "datasets-migration",
+        "goal_id": "FACP-G210",
+        "tasks": [
+          "FACP-021",
+          "FACP-022",
+          "FACP-023"
+        ],
+        "assurance_modules": [
+          "external/ipfs_datasets/ipfs_datasets_py/assurance/initialization.py",
+          "external/ipfs_datasets/ipfs_datasets_py/assurance/outcomes.py"
+        ],
+        "gitlink_commit": "bcb9fd40f26a107324660c134a99db9d38ca05f0",
+        "assurance_module_digests": [
+          {
+            "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/initialization.py",
+            "sha256": "e8acb275b7436f64ba46a7aeae4f85780497ba7be187db28a3ee6dcf3f048928"
+          },
+          {
+            "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/outcomes.py",
+            "sha256": "c335d371be22357c53b1f709029198dda4b882e34951a1c3aa87876c1f1d634e"
+          }
+        ]
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "lane": "accelerate-migration",
+        "goal_id": "FACP-G220",
+        "tasks": [
+          "FACP-024",
+          "FACP-025",
+          "FACP-026"
+        ],
+        "assurance_modules": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/assurance/capability_outcomes.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/assurance/content_identity.py"
+        ],
+        "gitlink_commit": "56c809a76bf88504dbd506d34b815ddb902a1cfe",
+        "assurance_module_digests": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/capability_outcomes.py",
+            "sha256": "fc9ada34cf7bd393628697c99fc8e02ffad8e7586d9550270341f67f80435005"
+          },
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/content_identity.py",
+            "sha256": "a51cd2919d34d3d97785393b770883cb40c3e642d831709563bb936303527f6f"
+          }
+        ]
+      },
+      {
+        "path": "external/ipfs_kit",
+        "lane": "kit-migration",
+        "goal_id": "FACP-G230",
+        "tasks": [
+          "FACP-027",
+          "FACP-028"
+        ],
+        "assurance_modules": [
+          "external/ipfs_kit/ipfs_kit_py/assurance/live_backend_gate.py",
+          "external/ipfs_kit/ipfs_kit_py/assurance/proof_role_gate.py"
+        ],
+        "gitlink_commit": "ef01df27221e6ae55f1416154b981f3284193bc9",
+        "assurance_module_digests": [
+          {
+            "path": "external/ipfs_kit/ipfs_kit_py/assurance/live_backend_gate.py",
+            "sha256": "2f3395001cd91fb62d5f785fa52a7e8bc74d8da73179d11dac04b29027317e9f"
+          },
+          {
+            "path": "external/ipfs_kit/ipfs_kit_py/assurance/proof_role_gate.py",
+            "sha256": "a7e8cfe700b9e3b0ecf10d7bf1c7ce7e518d6079103bd1a4e6004b0d49593cc4"
+          }
+        ]
+      },
+      {
+        "path": "swissknife",
+        "lane": "swissknife-migration",
+        "goal_id": "FACP-G240",
+        "tasks": [
+          "FACP-029",
+          "FACP-030"
+        ],
+        "assurance_modules": [
+          "swissknife/src/services/mcp/formalAssuranceGateway.ts"
+        ],
+        "gitlink_commit": "916ca5cd4c8ab53763e219a5a9fca89f9247242c",
+        "assurance_module_digests": [
+          {
+            "path": "swissknife/src/services/mcp/formalAssuranceGateway.ts",
+            "sha256": "02b740dbfc3ffcd6d2d8f87f7b9c41c479a9599b501efe9689e538692a4c3d4e"
+          }
+        ]
+      }
+    ],
+    "migration_complete": true,
+    "four_path_count": 4
+  },
+  "forbidden_promotions": {
+    "import_mutation": {
+      "blocked": true,
+      "repository": "external/ipfs_datasets",
+      "producer_tasks": [
+        "FACP-021",
+        "FACP-022"
+      ],
+      "oracle": "Cold import authorizes neither install nor implicit HOME state; initialize_datasets requires explicit state_root.",
+      "evidence_keys": [
+        "import_purity"
+      ],
+      "adapter_path": "external/ipfs_datasets/ipfs_datasets_py/assurance/initialization.py",
+      "adapter_sha256": "e8acb275b7436f64ba46a7aeae4f85780497ba7be187db28a3ee6dcf3f048928"
+    },
+    "false_success": {
+      "blocked": true,
+      "repository": "external/ipfs_datasets",
+      "producer_tasks": [
+        "FACP-023"
+      ],
+      "oracle": "Missing backend/dependency and inventoried false-success fallbacks resolve to typed Unavailable/Attempted/Unknown, never success.",
+      "evidence_keys": [
+        "typed_outcomes"
+      ],
+      "adapter_path": "external/ipfs_datasets/ipfs_datasets_py/assurance/outcomes.py",
+      "adapter_sha256": "c335d371be22357c53b1f709029198dda4b882e34951a1c3aa87876c1f1d634e"
+    },
+    "mock_to_live": {
+      "blocked": true,
+      "repository": "external/ipfs_accelerate",
+      "producer_tasks": [
+        "FACP-024",
+        "FACP-025"
+      ],
+      "oracle": "Simulation namespaces and mock inference are refused outside explicit test mode; non-CPU routes require current live probe evidence.",
+      "evidence_keys": [
+        "mock_provenance",
+        "typed_outcomes"
+      ],
+      "adapter_path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/capability_outcomes.py",
+      "adapter_sha256": "fc9ada34cf7bd393628697c99fc8e02ffad8e7586d9550270341f67f80435005"
+    },
+    "pseudo_cid": {
+      "blocked": true,
+      "repository": "external/ipfs_accelerate",
+      "producer_tasks": [
+        "FACP-026"
+      ],
+      "oracle": "Raw SHA-256 hex and Qm-like identifiers fail closed as integrity.unchecked; canonical CIDv1 must decode and recompute.",
+      "evidence_keys": [
+        "canonical_cid"
+      ],
+      "adapter_path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/content_identity.py",
+      "adapter_sha256": "a51cd2919d34d3d97785393b770883cb40c3e642d831709563bb936303527f6f"
+    },
+    "hermetic_to_live": {
+      "blocked": true,
+      "repository": "external/ipfs_kit",
+      "producer_tasks": [
+        "FACP-027"
+      ],
+      "oracle": "Hermetic/configured/fixture origins cannot satisfy live qualification; empty candidates yield Unavailable without fallback success.",
+      "evidence_keys": [
+        "live_qualification"
+      ],
+      "adapter_path": "external/ipfs_kit/ipfs_kit_py/assurance/live_backend_gate.py",
+      "adapter_sha256": "2f3395001cd91fb62d5f785fa52a7e8bc74d8da73179d11dac04b29027317e9f"
+    },
+    "candidate_to_current": {
+      "blocked": true,
+      "repository": "external/ipfs_kit",
+      "producer_tasks": [
+        "FACP-028"
+      ],
+      "oracle": "Candidate never implies admitted; candidate evidence cannot promote to current; stale admitted evidence cannot become current.",
+      "evidence_keys": [
+        "proof_roles"
+      ],
+      "adapter_path": "external/ipfs_kit/ipfs_kit_py/assurance/proof_role_gate.py",
+      "adapter_sha256": "a7e8cfe700b9e3b0ecf10d7bf1c7ce7e518d6079103bd1a4e6004b0d49593cc4"
+    },
+    "browser_to_authority": {
+      "blocked": true,
+      "repository": "swissknife",
+      "producer_tasks": [
+        "FACP-029",
+        "FACP-030"
+      ],
+      "oracle": "Browser authority field deltas do not alter host authorization inputs; gateway projects consent=absent and never constructs allow/policy/authority.",
+      "evidence_keys": [
+        "browser_nonauthority"
+      ],
+      "adapter_path": "swissknife/src/services/mcp/formalAssuranceGateway.ts",
+      "adapter_sha256": "02b740dbfc3ffcd6d2d8f87f7b9c41c479a9599b501efe9689e538692a4c3d4e"
+    }
+  },
+  "promotion_denial_matrix": {
+    "import_mutation": false,
+    "false_success": false,
+    "mock_to_live": false,
+    "pseudo_cid": false,
+    "hermetic_to_live": false,
+    "candidate_to_current": false,
+    "browser_to_authority": false
+  },
+  "limitations": [
+    {
+      "id": "lim:hermetic-fanin-only",
+      "statement": "This gate executes hermetic cross-repository regression/mutation checks only; it performs no live backend, provider, network, or host-effect execution."
+    },
+    {
+      "id": "lim:no-release-claim",
+      "statement": "Sealing FACP-031 does not assert release_admissible, rights resolution, or portfolio-wide production completion."
+    },
+    {
+      "id": "lim:inventoried-seams-only",
+      "statement": "Coverage binds the inventoried migration adapters and declared producer tests; it does not waive unrepaired legacy call sites outside those seams."
+    },
+    {
+      "id": "lim:fca-conformance-separate",
+      "statement": "Formal-claim-algebra-v1 language conformance remains sealed by FACP-020; this receipt seals four-path migration fan-in against that vocabulary."
+    },
+    {
+      "id": "lim:planning-revision-may-lag",
+      "statement": "Migrated repository gitlink commits are immutable inputs and may diverge from scheduler planning revisions after migration landings."
+    },
+    {
+      "id": "lim:browser-surfaces-fixture-bound",
+      "statement": "SwissKnife browser/host projections are validated via declared TypeScript fixtures and Python harness mirrors without a browser runtime."
+    },
+    {
+      "id": "lim:zero-live-kit-honest",
+      "statement": "Zero live-qualified Kit backends remain an honest Unavailable state; hermetic inventory support never promotes to production_supported."
+    },
+    {
+      "id": "lim:compatibility-preserves-nonsuccess",
+      "statement": "Compatibility projections preserve non-success disposition and set unsafe_promotion=false; they never invent Observed/Verified success from stubs."
+    }
+  ],
+  "ambiguous_claim_scan": {
+    "bound": true,
+    "fca_gate_scanner_corpus_score_path": "implementation_plan/formal_assurance_control_plane/gates/formal_claim_algebra_v1.json#scanner_corpus_score",
+    "migration_adapters_unsafe_promotion": false,
+    "allowlist_cannot_suppress_corpus": true,
+    "no_new_unqualified_production_claim": true,
+    "scanned_adapter_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/initialization.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/outcomes.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/capability_outcomes.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/content_identity.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/live_backend_gate.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/proof_role_gate.py",
+      "swissknife/src/services/mcp/formalAssuranceGateway.ts"
+    ]
+  },
+  "acceptance": {
+    "no_import_mutation": true,
+    "no_false_success": true,
+    "no_mock_to_live": true,
+    "no_pseudo_cid": true,
+    "no_hermetic_to_live": true,
+    "no_candidate_to_current": true,
+    "no_browser_to_authority": true,
+    "gate_binds_exact_commits": true,
+    "gate_binds_limitations": true,
+    "all_forbidden_promotions_blocked": true
+  },
+  "content_binding": {
+    "alg": "sha256",
+    "canonicalization": "json-sort-keys-separators-comma-colon",
+    "covers": "gate_record_excluding_content_sha256"
+  },
+  "content_sha256": "c4a44e73503047494ab0785b521398d553fb355d8d70a9fc25dc27ec2d3dda34"
+}
