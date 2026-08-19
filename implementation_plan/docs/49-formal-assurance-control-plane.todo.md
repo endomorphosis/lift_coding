@@ -1430,7 +1430,7 @@ not authority.
 
 ## FACP-052 Synthesize or validate the bounded supervisor controller
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
