@@ -296,7 +296,7 @@ not authority.
 
 ## FACP-010 Define promotion predicates and compatibility rules
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
