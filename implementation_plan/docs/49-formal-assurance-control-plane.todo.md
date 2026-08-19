@@ -701,7 +701,7 @@ not authority.
 
 ## FACP-025 Migrate Accelerate capability and inference outcomes
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
