@@ -1538,7 +1538,7 @@ not authority.
 
 ## FACP-056 Add immutable lock, reproducible build, and signed provenance
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
