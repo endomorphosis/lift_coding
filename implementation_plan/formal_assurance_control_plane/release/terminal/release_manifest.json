@@ -1,0 +1,776 @@
+{
+  "schema": "facp/terminal-release@1",
+  "schema_version": 1,
+  "task_id": "FACP-060",
+  "goal_id": "FACP-G820",
+  "bundle": "facp/release/terminal",
+  "title": "Seal the terminal proof-carrying release",
+  "release": "terminal-release-v1",
+  "vocabulary_schema": "facp/formal-claim-algebra-v1@1",
+  "composition_proof_schema": "facp/composition-proof@1",
+  "release_predicate_schema": "facp/release-predicate@1",
+  "predicate": "ReleaseAdmissible",
+  "status": "sealed",
+  "generated_at": "2026-08-19T23:30:00Z",
+  "behavior_change": false,
+  "policy": {
+    "fail_closed": true,
+    "provider_authority": "none",
+    "implementation_mode": "deterministic-only",
+    "producer_artifacts_immutable": true,
+    "discovery_is_not_completion": true,
+    "waive_zero_floor_forbidden": true,
+    "publish_or_deploy_forbidden": true,
+    "human_prose_is_not_proof": true,
+    "provider_output_is_not_proof": true,
+    "simulation_as_production_forbidden": true,
+    "historical_receipt_is_not_current_qualification": true,
+    "sign_with_missing_stale_or_conflicting_evidence_forbidden": true,
+    "production_release_claim_forbidden_while_nonadmissible": true,
+    "no_network": true,
+    "credentials_forbidden_in_manifest": true,
+    "prohibited_effects": [
+      "publish",
+      "deploy",
+      "waive_zero_floor",
+      "accept_human_prose_as_proof",
+      "accept_provider_output_as_proof",
+      "sign_with_missing_evidence",
+      "sign_with_stale_evidence",
+      "sign_with_conflicting_evidence",
+      "treat_historical_receipt_as_current_qualification",
+      "simulation_as_production",
+      "infer_legal_clearance",
+      "network",
+      "provider_authored_completion"
+    ]
+  },
+  "evidence_subset": [
+    "source_forest",
+    "immutable_lock",
+    "build_environment_artifacts",
+    "contracts_controller_policies",
+    "proofs_tests",
+    "live_capability_receipts",
+    "rights",
+    "reproducibility_provenance",
+    "composed_trace",
+    "residual_risks_human_exceptions"
+  ],
+  "source_binding": {
+    "controller_commit": "904951a944b1bedc868b885163e7cf59981e9d91",
+    "controller_tree": "98a10e5daa4b314a746c577c56a6875e7d8c29de",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "scheduler_config_sha256": "a76085554bdb72bdbb4b92a879a07a247cb0778248e6861d9195a72a24c02363",
+    "repository_contracts_path": "Mcp-Plus-Plus/schemas/assurance/v1/repository-contracts.json",
+    "repository_contracts_sha256": "f94b3dc57a3f979c68f8f7ae74f2c8976e3b2784b27070e4fdebe371a7c04b1c",
+    "portfolio_lock_path": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+    "portfolio_lock_sha256": "596bd5ddaef18950d5dbe31c8b67422c4d8d3ecfdb2b93dd839fb459b5562586",
+    "release_predicate_path": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+    "release_predicate_sha256": "ee6b86a1a57b9c45ce7f6ca772a6749a162d7809a21370dbc39fe259fe33512a",
+    "rights_ir_path": "implementation_plan/formal_assurance_control_plane/release/qualification/rights_ir.json",
+    "rights_ir_sha256": "ed40ce461731433ea8af2f0145d7876d1c001b81cad3d87bd9a54af4c4a6f1ba",
+    "provenance_policy_path": "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json",
+    "provenance_policy_sha256": "47986a76f2a6e037418af12ce05f743ea4975c0c3b0a25cf7214f9025360cd04",
+    "composed_workflow_path": "implementation_plan/formal_assurance_control_plane/release/terminal/composed_workflow.json",
+    "composed_workflow_sha256": "639205ec3c6b5cd75036873cdb447e1e2987d9284b1bb067b58025dca3327707",
+    "composed_workflow_content_sha256": "8a9df797bbe30693eb99332b610d3c36e8f45a90183cd315889aa07d903974df",
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "2e5a448cc91e371eee9a742460ce02dfbc7005ce",
+        "planning_revision_field": "mcp_plus_plus_planning_revision",
+        "scheduler_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "878a848be6ac7df02e9b93074732be5a8b5bf305",
+        "planning_revision_field": "accelerate_planning_revision",
+        "scheduler_planning_revision": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "fd3122c9ae2780583ec0124e952559662e616a24",
+        "planning_revision_field": "datasets_planning_revision",
+        "scheduler_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "2f78e897288a0ab90b15e03e54056d69ab371c70",
+        "planning_revision_field": "kit_planning_revision",
+        "scheduler_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "68751041ee52c36a558738d6a0b58d142d9b1840",
+        "planning_revision_field": "swissknife_planning_revision",
+        "scheduler_planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "matches_scheduler_planning_revision": false
+      }
+    ],
+    "depends_on": [
+      "FACP-059"
+    ],
+    "producer_inputs": [
+      {
+        "task_id": "FACP-059",
+        "role": "composed_workflow",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/terminal/composed_workflow.json",
+            "sha256": "639205ec3c6b5cd75036873cdb447e1e2987d9284b1bb067b58025dca3327707",
+            "content_sha256": "8a9df797bbe30693eb99332b610d3c36e8f45a90183cd315889aa07d903974df"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-055",
+        "role": "release_predicate_and_rights",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+            "sha256": "ee6b86a1a57b9c45ce7f6ca772a6749a162d7809a21370dbc39fe259fe33512a"
+          },
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/rights_ir.json",
+            "sha256": "ed40ce461731433ea8af2f0145d7876d1c001b81cad3d87bd9a54af4c4a6f1ba"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-056",
+        "role": "immutable_supply_chain",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+            "sha256": "596bd5ddaef18950d5dbe31c8b67422c4d8d3ecfdb2b93dd839fb459b5562586"
+          },
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json",
+            "sha256": "47986a76f2a6e037418af12ce05f743ea4975c0c3b0a25cf7214f9025360cd04"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-057",
+        "role": "evidence_checked_documentation",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/evidence_checked_documentation.py",
+            "sha256": "984c5ae9992f13b804700702bc4f980579a3a7d68ef5bf30689900d5f8e10a8e"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-058",
+        "role": "external_conformance",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/external_conformance.json",
+            "sha256": "8955a86215343ae0f5bc6a0889b465b0cedbbe6fc284219133c4f53b216b09a6"
+          }
+        ]
+      }
+    ]
+  },
+  "closure": {
+    "identity_alg": "sha256",
+    "identity_sha256": "64b3a4c8b49623045d082afee312704cfc6669b852db562ac9da9a15c6c76d8a",
+    "artifacts": [
+      {
+        "role": "release_predicate",
+        "task_id": "FACP-055",
+        "path": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+        "sha256": "ee6b86a1a57b9c45ce7f6ca772a6749a162d7809a21370dbc39fe259fe33512a",
+        "schema": "facp/release-predicate@1"
+      },
+      {
+        "role": "rights_ir",
+        "task_id": "FACP-055",
+        "path": "implementation_plan/formal_assurance_control_plane/release/qualification/rights_ir.json",
+        "sha256": "ed40ce461731433ea8af2f0145d7876d1c001b81cad3d87bd9a54af4c4a6f1ba",
+        "schema": "facp/rights-ir@1"
+      },
+      {
+        "role": "portfolio_lock",
+        "task_id": "FACP-056",
+        "path": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+        "sha256": "596bd5ddaef18950d5dbe31c8b67422c4d8d3ecfdb2b93dd839fb459b5562586",
+        "schema": "facp/portfolio-lock@1"
+      },
+      {
+        "role": "provenance_policy",
+        "task_id": "FACP-056",
+        "path": "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json",
+        "sha256": "47986a76f2a6e037418af12ce05f743ea4975c0c3b0a25cf7214f9025360cd04",
+        "schema": "facp/provenance-policy@1"
+      },
+      {
+        "role": "evidence_checked_documentation",
+        "task_id": "FACP-057",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/evidence_checked_documentation.py",
+        "sha256": "984c5ae9992f13b804700702bc4f980579a3a7d68ef5bf30689900d5f8e10a8e"
+      },
+      {
+        "role": "external_conformance",
+        "task_id": "FACP-058",
+        "path": "implementation_plan/formal_assurance_control_plane/release/qualification/external_conformance.json",
+        "sha256": "8955a86215343ae0f5bc6a0889b465b0cedbbe6fc284219133c4f53b216b09a6",
+        "schema": "facp/external-conformance@1"
+      },
+      {
+        "role": "composed_workflow",
+        "task_id": "FACP-059",
+        "path": "implementation_plan/formal_assurance_control_plane/release/terminal/composed_workflow.json",
+        "sha256": "639205ec3c6b5cd75036873cdb447e1e2987d9284b1bb067b58025dca3327707",
+        "content_sha256": "8a9df797bbe30693eb99332b610d3c36e8f45a90183cd315889aa07d903974df",
+        "schema": "facp/composed-workflow@1"
+      },
+      {
+        "role": "repository_contracts",
+        "task_id": "FACP-048",
+        "path": "Mcp-Plus-Plus/schemas/assurance/v1/repository-contracts.json",
+        "sha256": "f94b3dc57a3f979c68f8f7ae74f2c8976e3b2784b27070e4fdebe371a7c04b1c",
+        "schema": "facp/repository-contracts@1"
+      },
+      {
+        "role": "backend_cohort",
+        "task_id": "FACP-051",
+        "path": "external/ipfs_kit/data/formal_assurance/backend_receipts/cohort.json",
+        "sha256": "485342243f2a89d59da448ad3d3b0703e242958b005954c07561116ef5bd0260"
+      },
+      {
+        "role": "scheduler_config",
+        "task_id": "FACP-000",
+        "path": "config/formal_assurance_control_plane_scheduler.json",
+        "sha256": "a76085554bdb72bdbb4b92a879a07a247cb0778248e6861d9195a72a24c02363"
+      },
+      {
+        "role": "release_rights_inventory",
+        "task_id": "FACP-007",
+        "path": "implementation_plan/formal_assurance_control_plane/baseline/release_rights.json",
+        "sha256": "90e4c463f8b094069a6b8c9e73af396052bfca4530e1fd1a23b6047918fe9166",
+        "schema": "FACPReleaseRightsInventory@1"
+      },
+      {
+        "role": "gate:formal_claim_algebra_v1",
+        "task_id": "FACP-020",
+        "path": "implementation_plan/formal_assurance_control_plane/gates/formal_claim_algebra_v1.json",
+        "sha256": "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21"
+      },
+      {
+        "role": "gate:canonical_contracts_v1",
+        "task_id": "FACP-037",
+        "path": "implementation_plan/formal_assurance_control_plane/gates/canonical_contracts_v1.json",
+        "sha256": "5d6f55df46a4c194965d5cbc75b3b9c9334f2ea6288786816e2925b0a13c6ef9"
+      },
+      {
+        "role": "gate:day90_four_path",
+        "task_id": "FACP-031",
+        "path": "implementation_plan/formal_assurance_control_plane/gates/day90_four_path.json",
+        "sha256": "10f527f2b0535fae5b50fe7ee3f88e03b04ea6f76bb0e920e7e2133d18d93356"
+      }
+    ],
+    "terminal_workflow": [
+      "swissknife_request",
+      "host_authentication_and_admission",
+      "datasets_semantic_compilation_translation_receipt",
+      "accelerate_scheduling_and_observed_execution",
+      "kit_immutable_persistence_current_pointer",
+      "swissknife_evidence_presentation"
+    ],
+    "composed_workflow_status": "sealed",
+    "composed_workflow_content_sha256": "8a9df797bbe30693eb99332b610d3c36e8f45a90183cd315889aa07d903974df"
+  },
+  "zero_floors": {
+    "simulated_to_live_promotion": 0,
+    "effects_without_admission_token": 0,
+    "stale_proof_reuse": 0,
+    "browser_authored_authority": 0,
+    "pseudo_cid_on_supported_paths": 0,
+    "release_with_mutable_dependencies": 0,
+    "success_without_observed_or_verified_evidence": 0,
+    "secret_flow_to_public_evidence": 0,
+    "blind_retry_unknown_irreversible_effects": 0,
+    "llm_self_certification_or_policy_authority": 0
+  },
+  "predicates": {
+    "name": "ReleaseAdmissible",
+    "release_predicate_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+    "qualification_record": {
+      "proof_freshness": "current",
+      "proof_tree_match": true,
+      "historical_receipt_used_as_current": false,
+      "origin": "hermetic_observed",
+      "claimed_environment": "hermetic",
+      "dependency_mutability": "mutable",
+      "has_mutable_ref": true,
+      "capability_status": "present",
+      "live_capability_present": true,
+      "contract_status": "compatible",
+      "contracts_compatible": true,
+      "rights_disposition": "machine_block",
+      "mandatory_rights_resolved": false,
+      "rights_status": "conflict",
+      "reproducibility_complete": false,
+      "nonreproducible_blockers_present": true,
+      "simulated_evidence_as_production": false,
+      "unsupported_claim_present": false,
+      "composed_workflow_sealed": true,
+      "zero_floors_all_zero": true
+    },
+    "conjuncts": [
+      {
+        "id": "exact_source_binding",
+        "requirement": "Qualification binds the exact controller tree and planning-forest gitlinks; floating branch tips do not qualify.",
+        "satisfied": true,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "immutable_dependency_closure",
+        "requirement": "Every release-consumed dependency is content-addressed or lock-pinned; git+@branch, nightly indexes, and competing locks are rejected.",
+        "satisfied": false,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "identified_build_environment",
+        "requirement": "Build environment identity is declared and reproducible within policy bounds.",
+        "satisfied": true,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "current_proofs_and_tests",
+        "requirement": "Proofs and tests are current for the exact tree; stale or historical receipts are rejected.",
+        "satisfied": true,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "contract_compatibility",
+        "requirement": "Repository assume/guarantee contracts compose without unresolved mandatory incompatibilities.",
+        "satisfied": true,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "rights_resolution",
+        "requirement": "RightsIR dispositions for mandatory nodes are human_cleared or non-blocking observation-only; machine_block and human_review block.",
+        "satisfied": false,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "live_capabilities",
+        "requirement": "Live capability claims require current signed live receipts; hermetic/simulated evidence cannot satisfy live.",
+        "satisfied": false,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "reproducibility_and_provenance",
+        "requirement": "Immutable portfolio lock, reproducible build evidence, and signed provenance policy are present (FACP-056+).",
+        "satisfied": false,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "composed_workflow_trace",
+        "requirement": "FACP-059 composed SwissKnife-host-Datasets-Accelerate-Kit-SwissKnife trace is sealed and content-bound.",
+        "satisfied": true,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "zero_floors",
+        "requirement": "All hard safety floors remain exactly zero.",
+        "satisfied": true,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "signature_binds_complete_closure",
+        "requirement": "Authorized signature domain binds the complete evidence closure; production signature withheld while nonadmissible.",
+        "satisfied": true,
+        "blocks_release_when_unsatisfied": true
+      },
+      {
+        "id": "historical_receipt_not_current",
+        "requirement": "Historical campaign receipts cannot satisfy the current terminal release predicate.",
+        "satisfied": true,
+        "blocks_release_when_unsatisfied": true
+      }
+    ],
+    "rejection_codes": [
+      "mutable_ref",
+      "unresolved_mandatory_rights"
+    ],
+    "extended_blockers": [
+      {
+        "code": "unresolved_mandatory_rights",
+        "blocks_release": true,
+        "sources": [
+          "rights:datasets-mit-vs-agpl",
+          "rights:swissknife-undeclared",
+          "rights:mcp-plusplus-license-file-missing",
+          "rights:root-package-license-undeclared",
+          "rights:unknown-custom-license-text",
+          "rights:data-model-rights-unknown"
+        ]
+      },
+      {
+        "code": "mutable_ref",
+        "blocks_release": true,
+        "sources": [
+          "nonreproducible:mutable_dependency",
+          "nonreproducible:competing_lock_authority",
+          "nonreproducible:missing_lock",
+          "nonreproducible:pin_authority_divergence"
+        ]
+      },
+      {
+        "code": "nonreproducible_artifact",
+        "blocks_release": true,
+        "sources": [
+          "reject:accelerate-git-plus-main",
+          "reject:accelerate-torch-nightly-index",
+          "reject:swissknife-competing-yarn-lock",
+          "reject:swissknife-competing-pnpm-lock",
+          "reject:mcp-tests-rs-missing-cargo-lock",
+          "reject:scheduler-planning-revision-divergence"
+        ]
+      },
+      {
+        "code": "stale_or_incomplete_live_capability",
+        "blocks_release": true,
+        "detail": "Only local_filesystem is LiveQualified; pinned_ipfs and iroh remain Unavailable; empty external receipt registry is not current production evidence."
+      },
+      {
+        "code": "historical_campaign_receipt_forbidden",
+        "blocks_release": true,
+        "sources": [
+          "historical:wpd-terminal-release-receipt"
+        ]
+      },
+      {
+        "code": "production_signature_absent",
+        "blocks_release": true,
+        "detail": "Provenance/production signature withheld while release_admissible is false."
+      }
+    ],
+    "release_admissible": false,
+    "reason": "Mandatory RightsIR nodes remain unresolved; mutable/nonreproducible dependency blockers remain; live backend cohort is incomplete for production; production signature is withheld. Historical WPD receipts cannot satisfy this predicate."
+  },
+  "rights": {
+    "rights_ir_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/rights_ir.json",
+    "mandatory_blocking_nodes": [
+      {
+        "node_id": "rights:datasets-mit-vs-agpl",
+        "status": "conflict",
+        "disposition": "machine_block",
+        "blocks_release": true
+      },
+      {
+        "node_id": "rights:swissknife-undeclared",
+        "status": "missing",
+        "disposition": "machine_block",
+        "blocks_release": true
+      },
+      {
+        "node_id": "rights:mcp-plusplus-license-file-missing",
+        "status": "missing_artifact",
+        "disposition": "machine_block",
+        "blocks_release": true
+      },
+      {
+        "node_id": "rights:root-package-license-undeclared",
+        "status": "undeclared",
+        "disposition": "machine_block",
+        "blocks_release": true
+      },
+      {
+        "node_id": "rights:unknown-custom-license-text",
+        "status": "custom_unparsed",
+        "disposition": "human_review",
+        "blocks_release": true
+      },
+      {
+        "node_id": "rights:data-model-rights-unknown",
+        "status": "unknown",
+        "disposition": "human_review",
+        "blocks_release": true
+      }
+    ],
+    "mandatory_rights_resolved": false,
+    "machine_clearance_attempted": false
+  },
+  "live_capabilities": {
+    "cohort_ref": "external/ipfs_kit/data/formal_assurance/backend_receipts/cohort.json",
+    "cohort_sha256": "485342243f2a89d59da448ad3d3b0703e242958b005954c07561116ef5bd0260",
+    "local_filesystem": {
+      "disposition": "LiveQualified",
+      "live_qualified": true
+    },
+    "pinned_ipfs": {
+      "disposition": "Unavailable",
+      "live_qualified": false
+    },
+    "iroh": {
+      "disposition": "Unavailable",
+      "live_qualified": false
+    },
+    "production_cohort_complete": false
+  },
+  "reproducibility": {
+    "portfolio_lock_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+    "provenance_policy_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json",
+    "immutable_dependency_closure_complete": false,
+    "release_admissible": false,
+    "blocking_codes": [
+      "nonreproducible:mutable_dependency",
+      "nonreproducible:competing_lock_authority",
+      "nonreproducible:missing_lock",
+      "nonreproducible:pin_authority_divergence"
+    ],
+    "signed_production_provenance_present": false
+  },
+  "residual_risks": [
+    {
+      "id": "risk:rights-datasets-mit-agpl",
+      "severity": "high",
+      "status": "open",
+      "summary": "Datasets MIT package metadata vs AGPL-3.0 repository LICENSE remains machine-blocked."
+    },
+    {
+      "id": "risk:rights-swissknife-undeclared",
+      "severity": "high",
+      "status": "open",
+      "summary": "SwissKnife missing license/provenance remains machine-blocked."
+    },
+    {
+      "id": "risk:mutable-accelerate-deps",
+      "severity": "high",
+      "status": "open",
+      "summary": "Accelerate git+@branch and nightly index inputs remain typed nonreproducible blockers."
+    },
+    {
+      "id": "risk:competing-swissknife-locks",
+      "severity": "medium",
+      "status": "open",
+      "summary": "Competing SwissKnife lock authorities remain unresolved for release."
+    },
+    {
+      "id": "risk:incomplete-live-backends",
+      "severity": "medium",
+      "status": "open",
+      "summary": "Pinned IPFS and Iroh remain Unavailable; only local_filesystem is LiveQualified."
+    },
+    {
+      "id": "risk:scheduler-planning-revision-divergence",
+      "severity": "medium",
+      "status": "open",
+      "summary": "Planning-forest gitlinks diverge from scheduler planning revisions for one or more repositories."
+    }
+  ],
+  "human_exceptions": [
+    {
+      "id": "exception:none-recorded",
+      "status": "absent",
+      "summary": "No human legal clearance or waiver is recorded against mandatory RightsIR blockers; machine clearance is forbidden.",
+      "waives_zero_floor": false,
+      "clears_release": false
+    }
+  ],
+  "historical_receipts_forbidden": [
+    {
+      "id": "historical:wpd-terminal-release-receipt",
+      "path": "implementation_plan/docs/47-wpd-terminal-release-receipt.json",
+      "sha256": "f2cee70b4a76792cac876e6d672ebc7d7e61d9710d7935b7193cd5b8c7dc6b60",
+      "satisfies_facp_terminal_release": false,
+      "reason": "Plan terminal release theorem forbids historical campaign receipts from satisfying the current composed release predicate."
+    }
+  ],
+  "negative_fixtures": [
+    {
+      "id": "neg:unresolved-right",
+      "expect_admissible": false,
+      "mutation": {
+        "mandatory_rights_resolved": false,
+        "rights_disposition": "machine_block",
+        "rights_status": "conflict"
+      },
+      "expect_codes": [
+        "unresolved_mandatory_rights"
+      ]
+    },
+    {
+      "id": "neg:stale-proof",
+      "expect_admissible": false,
+      "mutation": {
+        "proof_freshness": "stale",
+        "proof_tree_match": false,
+        "historical_receipt_used_as_current": true
+      },
+      "expect_codes": [
+        "stale_proof"
+      ]
+    },
+    {
+      "id": "neg:stale-capability",
+      "expect_admissible": false,
+      "mutation": {
+        "capability_status": "missing",
+        "live_capability_present": false
+      },
+      "expect_codes": [
+        "missing_capability"
+      ]
+    },
+    {
+      "id": "neg:mutable-dependency",
+      "expect_admissible": false,
+      "mutation": {
+        "dependency_mutability": "mutable",
+        "has_mutable_ref": true
+      },
+      "expect_codes": [
+        "mutable_ref"
+      ]
+    },
+    {
+      "id": "neg:nonreproducible-artifact",
+      "expect_admissible": false,
+      "mutation": {
+        "reproducibility_complete": false,
+        "nonreproducible_blockers_present": true
+      },
+      "expect_extended_codes": [
+        "nonreproducible_artifact"
+      ]
+    },
+    {
+      "id": "neg:simulated-evidence",
+      "expect_admissible": false,
+      "mutation": {
+        "origin": "simulated",
+        "claimed_environment": "live",
+        "simulated_evidence_as_production": true
+      },
+      "expect_codes": [
+        "simulation_as_live"
+      ]
+    },
+    {
+      "id": "neg:unsupported-claim",
+      "expect_admissible": false,
+      "mutation": {
+        "unsupported_claim_present": true
+      },
+      "expect_extended_codes": [
+        "unsupported_claim"
+      ]
+    },
+    {
+      "id": "neg:historical-wpd-receipt",
+      "expect_admissible": false,
+      "mutation": {
+        "historical_receipt_used_as_current": true,
+        "proof_freshness": "historical"
+      },
+      "expect_codes": [
+        "stale_proof"
+      ],
+      "forbidden_receipt": "historical:wpd-terminal-release-receipt"
+    },
+    {
+      "id": "pos:all-clear-synthetic",
+      "expect_admissible": true,
+      "synthetic_clearance_only": true,
+      "note": "Synthetic positive control; not a current-tree release claim.",
+      "mutation": {
+        "proof_freshness": "current",
+        "proof_tree_match": true,
+        "historical_receipt_used_as_current": false,
+        "origin": "live_observed",
+        "claimed_environment": "live",
+        "dependency_mutability": "immutable",
+        "has_mutable_ref": false,
+        "capability_status": "present",
+        "live_capability_present": true,
+        "contract_status": "compatible",
+        "contracts_compatible": true,
+        "rights_disposition": "human_cleared",
+        "mandatory_rights_resolved": true,
+        "rights_status": "human_cleared",
+        "reproducibility_complete": true,
+        "nonreproducible_blockers_present": false,
+        "simulated_evidence_as_production": false,
+        "unsupported_claim_present": false,
+        "composed_workflow_sealed": true,
+        "zero_floors_all_zero": true
+      },
+      "expect_codes": []
+    }
+  ],
+  "signature": {
+    "alg": "ed25519",
+    "domain": "facp/terminal-release-seal@1",
+    "covers": "complete_closure",
+    "closure_identity_sha256": "64b3a4c8b49623045d082afee312704cfc6669b852db562ac9da9a15c6c76d8a",
+    "bound_digests": [
+      "10f527f2b0535fae5b50fe7ee3f88e03b04ea6f76bb0e920e7e2133d18d93356",
+      "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21",
+      "47986a76f2a6e037418af12ce05f743ea4975c0c3b0a25cf7214f9025360cd04",
+      "485342243f2a89d59da448ad3d3b0703e242958b005954c07561116ef5bd0260",
+      "596bd5ddaef18950d5dbe31c8b67422c4d8d3ecfdb2b93dd839fb459b5562586",
+      "5d6f55df46a4c194965d5cbc75b3b9c9334f2ea6288786816e2925b0a13c6ef9",
+      "639205ec3c6b5cd75036873cdb447e1e2987d9284b1bb067b58025dca3327707",
+      "64b3a4c8b49623045d082afee312704cfc6669b852db562ac9da9a15c6c76d8a",
+      "8955a86215343ae0f5bc6a0889b465b0cedbbe6fc284219133c4f53b216b09a6",
+      "90e4c463f8b094069a6b8c9e73af396052bfca4530e1fd1a23b6047918fe9166",
+      "984c5ae9992f13b804700702bc4f980579a3a7d68ef5bf30689900d5f8e10a8e",
+      "a76085554bdb72bdbb4b92a879a07a247cb0778248e6861d9195a72a24c02363",
+      "ed40ce461731433ea8af2f0145d7876d1c001b81cad3d87bd9a54af4c4a6f1ba",
+      "ee6b86a1a57b9c45ce7f6ca772a6749a162d7809a21370dbc39fe259fe33512a",
+      "f94b3dc57a3f979c68f8f7ae74f2c8976e3b2784b27070e4fdebe371a7c04b1c"
+    ],
+    "status": "withheld",
+    "reason": "release_nonadmissible",
+    "production_release_authorized": false,
+    "key_material_present": false,
+    "release_boundary": "facp/provenance-policy@1#/signature_policy",
+    "request": {
+      "requested": true,
+      "authorized": false,
+      "denied_because": [
+        "unresolved_mandatory_rights",
+        "mutable_ref",
+        "nonreproducible_artifact",
+        "incomplete_live_capability_cohort"
+      ]
+    },
+    "payload_sha256": "fdc12b3646f17cfbce68ace6b846831f031ff5691b217c787ec067616bd70aee"
+  },
+  "sanitization": {
+    "credentials_stored": false,
+    "private_or_secret_values_present": false,
+    "key_material_in_artifact_forbidden": true
+  },
+  "acceptance": {
+    "independent_verifier_reconstructs_manifest_identity": true,
+    "independent_verifier_reconstructs_every_required_predicate": true,
+    "all_zero_floors_are_zero": true,
+    "signatures_bind_complete_closure": true,
+    "unresolved_right_keeps_nonadmissible": true,
+    "stale_proof_or_capability_keeps_nonadmissible": true,
+    "mutable_dependency_keeps_nonadmissible": true,
+    "nonreproducible_artifact_keeps_nonadmissible": true,
+    "simulated_evidence_keeps_nonadmissible": true,
+    "unsupported_claim_keeps_nonadmissible": true,
+    "historical_campaign_receipt_does_not_satisfy": true,
+    "current_tree_release_admissible": false,
+    "production_publish_or_deploy_performed": false
+  },
+  "content_binding": {
+    "alg": "sha256",
+    "canonicalization": "json-sort-keys-separators-comma-colon",
+    "covers": "gate_record_excluding_content_sha256"
+  },
+  "content_sha256": "5b22945002368dc70e081e0d7f66dc47dc14c301bedbf6279d125d5d06a86c5f"
+}
