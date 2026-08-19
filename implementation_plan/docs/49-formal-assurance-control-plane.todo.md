@@ -1187,7 +1187,7 @@ not authority.
 
 ## FACP-043 Add bounded IPA repair transforms and mutation gate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
