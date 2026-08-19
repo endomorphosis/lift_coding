@@ -350,7 +350,7 @@ not authority.
 
 ## FACP-012 Prove the illegal-promotion theorem suite
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
