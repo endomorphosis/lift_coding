@@ -351,6 +351,13 @@ def validate() -> dict[str, object]:
             errors.append("objective refill must be disabled")
         if scheduler.get("codebase_refill_enabled") is not False:
             errors.append("codebase refill must be disabled")
+        for field, label in (
+            ("retry_budget_guardrail_enabled", "retry-budget guardrail"),
+            ("dependency_guardrail_enabled", "dependency guardrail"),
+            ("reconciliation_guardrail_enabled", "reconciliation guardrail"),
+        ):
+            if scheduler.get(field) is not False:
+                errors.append(f"{label} must be disabled")
         runtime_paths = scheduler.get("runtime_paths")
         expected_runtime = {
             "root": RUNTIME_ROOT,
