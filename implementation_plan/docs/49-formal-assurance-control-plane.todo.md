@@ -917,7 +917,7 @@ not authority.
 
 ## FACP-033 Fix the normative DAG-CBOR and CID profile
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
