@@ -1349,7 +1349,7 @@ not authority.
 
 ## FACP-049 Add translation receipts and deontic safety refinement
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
