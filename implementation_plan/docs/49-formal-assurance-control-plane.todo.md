@@ -80,7 +80,7 @@ not authority.
 
 ## FACP-002 Inventory Accelerate unsafe claims and promotions
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
