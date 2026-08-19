@@ -1,0 +1,666 @@
+{
+  "schema": "FACPSwissKnifeAuthorityInventory@1",
+  "schema_version": "formal_assurance_control_plane.baseline.swissknife_authority@1",
+  "task_id": "FACP-005",
+  "goal_id": "FACP-G010",
+  "bundle": "facp/inventory/swissknife",
+  "title": "Inventory SwissKnife authority and information flows",
+  "contract_version": 1,
+  "behavior_change": false,
+  "discovery_is_not_completion": true,
+  "generated_at": "2026-08-19T00:00:00Z",
+  "authority": {
+    "statement": "SwissKnife owns presentation, intent projection, confirmation interaction, and evidence display. Browser-authored allow/deny, consent, tenant, and dry-run fields are not production admission authority. Host policy and admission remain outside TypeScript UI code.",
+    "plan_ref": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+    "objective_ref": "FACP-G240",
+    "owning_repository": "swissknife",
+    "prohibited_effects": [
+      "browser_network_execution",
+      "swissknife_source_mutation",
+      "infer_license_rights",
+      "treat_ui_confirmation_as_host_admission",
+      "treat_default_granted_consent_as_accepted_evidence"
+    ]
+  },
+  "source_binding": {
+    "submodule_path": "swissknife",
+    "gitlink_path": "swissknife",
+    "repository": "swissknife",
+    "package": "swissknife",
+    "gitlink_commit": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+    "planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+    "worktree_status": "clean",
+    "binding_rule": "Exact committed SwissKnife gitlink in the controller worktree; dirty checkouts are not authority.",
+    "evidence_observation": "read-only inventory against exact gitlink; no browser/network execution"
+  },
+  "evidence_subset": [
+    "browser policy/consent defaults",
+    "tenant selection",
+    "dry-run/live projection",
+    "host dispatch",
+    "secrets/paths/logs/prompts",
+    "license/provenance"
+  ],
+  "prohibited_conclusions": [
+    "browser_authority_is_host_admission",
+    "default_granted_consent_is_safe",
+    "license_compatibility_inferred",
+    "missing_tenant_binding_is_absent_risk",
+    "ui_confirmation_token_equals_host_policy"
+  ],
+  "trust_label_vocabulary": [
+    "untrusted_browser",
+    "browser_presentation_only",
+    "browser_constructed_policy",
+    "host_boundary_enforcement",
+    "host_dispatch",
+    "host_authority_required",
+    "rights_unresolved"
+  ],
+  "authority_edges": [
+    {
+      "edge_id": "SK-AUTH-001",
+      "category": "authority_edge",
+      "family": "browser_policy_consent_defaults",
+      "title": "Governed desktop invoke defaults consent to granted",
+      "path": "swissknife/src/services/mcp/virtual-desktop-live-gateway.ts",
+      "symbol": "VirtualDesktopLiveGateway.invoke",
+      "line_start": 66,
+      "line_end": 68,
+      "quote": "invocation.consent ?? (governed ? 'granted' : 'not_required')",
+      "owner": "browser_gateway",
+      "trust_label": "untrusted_browser",
+      "flow": "browser_control_click -> VirtualDesktopLiveGateway.invoke -> MediatedInvocationRequest.consent",
+      "risk": "Legacy default-granted consent for mutative desktop controls constructs browser-side confirmation without a host-issued admission outcome.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-default-granted-consent",
+        "oracle": "Paired governed invokes that differ only by omitting consent must not synthesize consent=granted; default must be absent/denied pending host confirmation.",
+        "legacy_observed": "governed ? 'granted' : 'not_required'"
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029", "FACP-030"],
+        "action": "Remove default-granted consent; browser may project confirmation intent only; host admission supplies allow/deny.",
+        "keep": false
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-002",
+      "category": "authority_edge",
+      "family": "browser_policy_consent_defaults",
+      "title": "Desktop gateway constructs allow policy_decision locally",
+      "path": "swissknife/src/services/mcp/virtual-desktop-live-gateway.ts",
+      "symbol": "VirtualDesktopLiveGateway.invoke.policy_decision",
+      "line_start": 74,
+      "line_end": 79,
+      "quote": "outcome: consent === 'denied' ? 'deny' : 'allow'",
+      "owner": "browser_gateway",
+      "trust_label": "browser_constructed_policy",
+      "flow": "browser consent field -> local policy_decision.outcome allow/deny -> AllAppToolGateway",
+      "risk": "Browser-local policy constructor can emit allow without host policy evaluation or exact-argument admission binding.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-browser-constructed-allow",
+        "oracle": "Requests differing only in browser-authored policy_decision.outcome must produce identical host authorization inputs; browser allow must not grant authority."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029", "FACP-030"],
+        "action": "Delete browser policy_decision constructor; consume host-issued typed decision bound to method/resource/argument digest.",
+        "keep": false
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-003",
+      "category": "authority_edge",
+      "family": "browser_policy_consent_defaults",
+      "title": "Agent Supervisor gateway synthesizes console policy locally",
+      "path": "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "symbol": "AgentSupervisorThreeBackendRuntime.policyFor",
+      "line_start": 882,
+      "line_end": 891,
+      "quote": "Browser-safe mediated request is permitted by the console policy.",
+      "owner": "browser_gateway",
+      "trust_label": "browser_constructed_policy",
+      "flow": "confirmation_token presence -> policyFor allow/require_confirmation -> invokeAllAppLiveToolBinding",
+      "risk": "Console-local allow reason treats mediated browser requests as permitted by UI policy rather than host admission.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-console-local-allow-policy",
+        "oracle": "Injected confirmation_token alone must not change host admission digest/result; console policyFor allow is a failing seed."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029", "FACP-030"],
+        "action": "Replace policyFor synthesis with host-issued decision projection; keep only shape validation and redaction.",
+        "keep": false
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-004",
+      "category": "authority_edge",
+      "family": "browser_policy_consent_defaults",
+      "title": "confirmation_token maps to consent granted without host lease",
+      "path": "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "symbol": "consentFor",
+      "line_start": 1651,
+      "line_end": 1653,
+      "quote": "confirmation_token ? 'granted' : 'not_required'",
+      "owner": "browser_gateway",
+      "trust_label": "untrusted_browser",
+      "flow": "browser payload.confirmation_token -> consentFor -> MediatedInvocationRequest.consent",
+      "risk": "UI confirmation token is treated as consent grant; FACP requires host-issued outcomes and absent default consent.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-confirmation-token-as-grant",
+        "oracle": "Presence/absence of confirmation_token must not itself authorize effects; consent default remains absent until host decision."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029", "FACP-030"],
+        "action": "Treat confirmation_token as review-intent projection only; host maps confirmation to admission separately.",
+        "keep": false
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-005",
+      "category": "authority_edge",
+      "family": "browser_policy_consent_defaults",
+      "title": "App capability gateway accepts caller-supplied policy_decision",
+      "path": "swissknife/src/services/apps/app-capability-gateway.ts",
+      "symbol": "policyMetadata",
+      "line_start": 453,
+      "line_end": 465,
+      "quote": "decision?.decision ?? 'not_evaluated'",
+      "owner": "shared_gateway",
+      "trust_label": "browser_constructed_policy",
+      "flow": "AppCapabilityInvocationRequest.policy_decision -> policyMetadata -> transport.invoke",
+      "risk": "Optional caller policy_decision can carry permit/deny metadata across the browser/host boundary without proving host authorship.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-caller-supplied-policy-decision",
+        "oracle": "Caller-supplied permit must not enable execution; only host-authored decision CIDs/outcomes are admissible."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029", "FACP-030"],
+        "action": "Reject browser-authored policy_decision fields; accept only host admission projection references.",
+        "keep": false
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-006",
+      "category": "authority_edge",
+      "family": "dry_run_live_projection",
+      "title": "Mediated invocation forwards caller dry_run into host-bound policy bag",
+      "path": "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+      "symbol": "resolveMediatedInvocation",
+      "line_start": 754,
+      "line_end": 762,
+      "quote": "dry_run: request.dry_run",
+      "secondary_spans": [
+        {
+          "path": "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+          "symbol": "MediatedInvocationRequest.dry_run",
+          "line_start": 197,
+          "line_end": 203,
+          "quote": "dry_run: boolean;"
+        }
+      ],
+      "owner": "shared_contract",
+      "trust_label": "untrusted_browser",
+      "flow": "browser dry_run flag -> resolveMediatedInvocation input.policy.dry_run -> host mediator dispatch",
+      "risk": "Browser can project dry_run=false with locally allowed policy; live projection must be host-gated, not UI-selected.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-browser-dry-run-false-live-upgrade",
+        "oracle": "dry_run=false from browser must not upgrade evidence class or bypass confirmation; host decides live admission."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030"],
+        "action": "Keep dry_run as request intent only; host admission binds live vs dry-run and returns typed outcome.",
+        "keep": true,
+        "adaptation": "preserve field as projection, strip authority meaning"
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-007",
+      "category": "authority_edge",
+      "family": "dry_run_live_projection",
+      "title": "UI declares governed actions dry-run by default",
+      "path": "swissknife/web/src/live-tool-gateway-panel.ts",
+      "symbol": "renderLiveToolGatewayPanel",
+      "line_start": 16,
+      "line_end": 23,
+      "quote": "Governed actions are dry-run by default.",
+      "owner": "browser_ui",
+      "trust_label": "browser_presentation_only",
+      "flow": "desktop panel copy/control -> VirtualDesktopLiveGateway dry_run default",
+      "risk": "Presentation default is desirable but not host proof; must not be confused with admission authority.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-dry-run-default-not-admission",
+        "oracle": "UI dry-run default text/control must not be accepted as production live qualification evidence."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030"],
+        "action": "Retain dry-run-default UX; bind live enablement exclusively to host-issued outcomes displayed with argument digest.",
+        "keep": true,
+        "adaptation": "presentation_only"
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-008",
+      "category": "authority_edge",
+      "family": "host_dispatch",
+      "title": "Host mediator dispatches only after consent/dry-run gate",
+      "path": "swissknife/src/services/mcp/all-app-tool-mediator.ts",
+      "symbol": "AllAppToolMediator.dispatch",
+      "line_start": 98,
+      "line_end": 104,
+      "quote": "consent !== 'granted'",
+      "owner": "host_mediator",
+      "trust_label": "host_dispatch",
+      "flow": "BrowserMediatedToolCall -> AllAppToolMediator.dispatch -> owner adapter.invoke",
+      "risk": "Host gate still trusts browser-provided consent/dry_run bits; correct ownership is host, but inputs remain untrusted.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-host-dispatch-trusts-browser-consent",
+        "oracle": "Mutating dispatch with browser consent=granted and dry_run=false must fail closed without host admission token."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030"],
+        "action": "Adapt mediator to require host admission token/decision CID; stop treating browser consent as sufficient.",
+        "keep": true,
+        "adaptation": "replace_consent_predicate_with_host_admission"
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-009",
+      "category": "authority_edge",
+      "family": "host_dispatch",
+      "title": "Forbidden browser surfaces enumerate non-authority boundaries",
+      "path": "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "symbol": "AGENT_SUPERVISOR_CONSOLE_CONTRACT.forbidden_browser_surfaces",
+      "line_start": 382,
+      "line_end": 387,
+      "quote": "host_state_file_read",
+      "owner": "shared_contract",
+      "trust_label": "browser_presentation_only",
+      "flow": "browser console contract -> forbidden surfaces list -> bundle audit expectations",
+      "risk": "Contract forbids direct host effects but does not by itself prevent browser-constructed policy on mediated paths.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-forbidden-surface-bypass",
+        "oracle": "Browser payloads requesting host_process_launch or host_state_file_read must remain denied/unavailable."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029"],
+        "action": "Keep forbidden surfaces; extend negatives to browser policy/consent fields.",
+        "keep": true
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-010",
+      "category": "authority_edge",
+      "family": "tenant_selection",
+      "title": "Azure tenantId collected in browser api-keys form without host tenant binding",
+      "path": "swissknife/web/js/apps/api-keys.js",
+      "symbol": "azure.fields.tenantId",
+      "line_start": 23,
+      "line_end": 23,
+      "quote": "tenantId",
+      "secondary_spans": [
+        {
+          "path": "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+          "symbol": "POLICY_BLOCKED_APP_IDS",
+          "line_start": 253,
+          "line_end": 253,
+          "quote": "api-keys"
+        }
+      ],
+      "owner": "browser_ui",
+      "trust_label": "untrusted_browser",
+      "flow": "browser api-keys form tenantId/clientSecret fields -> local credential UX (tool path policy_blocked)",
+      "risk": "Tenant-like selector exists as a credential field, not as a host-bound tenant admission dimension; portfolio cross-tenant hyperproperties lack an explicit SwissKnife selector edge.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-browser-tenant-field-not-admission",
+        "oracle": "Changing browser tenantId alone must not alter host authorization; missing host tenant binding remains an explicit gap."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030", "FACP-G320"],
+        "action": "Do not promote browser tenantId to authority; introduce host-issued tenant/scope binding if multi-tenant dispatch is required.",
+        "keep": false,
+        "adaptation": "credential_field_only_until_host_tenant_binding_exists"
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-011",
+      "category": "authority_edge",
+      "family": "browser_policy_consent_defaults",
+      "title": "UIIR refuses to encode permissions as UI visibility authority",
+      "path": "swissknife/src/services/mcp/ui-ux-ir-codec.ts",
+      "symbol": "permissions_loss_reason",
+      "line_start": 2207,
+      "line_end": 2212,
+      "quote": "never UI visibility authority",
+      "owner": "shared_codec",
+      "trust_label": "browser_presentation_only",
+      "flow": "descriptor permissions -> UIIR codec lossy drop -> presentation IR without authz",
+      "risk": "Positive separation to preserve; regressions that reintroduce permission-as-visibility would recreate browser authority.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-permissions-as-visibility",
+        "oracle": "UIIR encode/decode must not resurrect permissions as enabled/visible authority."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029"],
+        "action": "Keep lossy separation; seed regression vectors in browser-nonauthority suite.",
+        "keep": true
+      }
+    },
+    {
+      "edge_id": "SK-AUTH-012",
+      "category": "authority_edge",
+      "family": "host_dispatch",
+      "title": "MCP dashboard marks host daemon commands non-executable in browser",
+      "path": "swissknife/src/services/mcp/mcp-dashboard-browser-policy.ts",
+      "symbol": "McpDashboardHostDaemonEntry.browserExecutable",
+      "line_start": 67,
+      "line_end": 68,
+      "quote": "browserExecutable: false",
+      "owner": "browser_policy_module",
+      "trust_label": "browser_presentation_only",
+      "flow": "dashboard host command record -> browserExecutable=false -> UI disclaimer only",
+      "risk": "Host command text must remain non-authority; any browser execution path would violate ownership.",
+      "negative_test_seed": {
+        "id": "cx-sk-auth-host-daemon-browser-execute",
+        "oracle": "Host daemon command entries must never become browserExecutable or spawn process APIs in web builds."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029"],
+        "action": "Keep classification; ensure migration does not reclassify host commands as browser remotes.",
+        "keep": true
+      }
+    }
+  ],
+  "sensitive_flow_edges": [
+    {
+      "edge_id": "SK-SENS-001",
+      "category": "sensitive_flow",
+      "family": "secrets_paths_logs_prompts",
+      "title": "Tool gateway rejects host_path and credential keys from browser payloads",
+      "path": "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+      "symbol": "FORBIDDEN_BROWSER_PAYLOAD_KEYS",
+      "line_start": 101,
+      "line_end": 119,
+      "quote": "host_path",
+      "owner": "browser_gateway",
+      "trust_label": "host_boundary_enforcement",
+      "flow": "browser payload -> forbiddenBrowserPayloadPath -> invalid_input before dispatch",
+      "risk": "Boundary is necessary but must stay fail-closed; missing keys or nested smuggling would leak host paths/secrets.",
+      "negative_test_seed": {
+        "id": "cx-sk-sens-host-path-payload-accepted",
+        "oracle": "Payloads containing host_path/file_path/api_key/secret must be rejected before owner dispatch."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030"],
+        "action": "Retain and strengthen nested/canonicalized key rejection; never transmit raw credential/host path.",
+        "keep": true
+      }
+    },
+    {
+      "edge_id": "SK-SENS-002",
+      "category": "sensitive_flow",
+      "family": "secrets_paths_logs_prompts",
+      "title": "Prompt steering redacts prompt text in logs",
+      "path": "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "symbol": "AGENT_SUPERVISOR_PROMPT_STEERING_REDACTED_LOG",
+      "line_start": 92,
+      "line_end": 92,
+      "quote": "[prompt redacted]",
+      "secondary_spans": [
+        {
+          "path": "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+          "symbol": "redactAgentSupervisorPromptSteeringForLog",
+          "line_start": 468,
+          "line_end": 477,
+          "quote": "prompt: AGENT_SUPERVISOR_PROMPT_STEERING_REDACTED_LOG"
+        }
+      ],
+      "owner": "browser_gateway",
+      "trust_label": "browser_presentation_only",
+      "flow": "prompt steering request -> redactAgentSupervisorPromptSteeringForLog -> display/log projection",
+      "risk": "Public evidence must not contain raw prompt/secret content; redaction marker is presentation-only.",
+      "negative_test_seed": {
+        "id": "cx-sk-sens-prompt-leak-to-log",
+        "oracle": "Log/receipt projections for prompt steering must not embed raw prompt text when redaction mode is required."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030"],
+        "action": "Keep redaction; bind declassification explicitly if any prompt substring must appear in evidence.",
+        "keep": true
+      }
+    },
+    {
+      "edge_id": "SK-SENS-003",
+      "category": "sensitive_flow",
+      "family": "secrets_paths_logs_prompts",
+      "title": "Legacy web AI adapter stores and transmits secret key from localStorage",
+      "path": "swissknife/web/src/adapters/ai-adapter.ts",
+      "symbol": "getStoredSecretKey",
+      "line_start": 72,
+      "line_end": 74,
+      "quote": "goose_secret_key",
+      "secondary_spans": [
+        {
+          "path": "swissknife/web/src/adapters/ai-adapter.ts",
+          "symbol": "X-Secret-Key header",
+          "line_start": 213,
+          "line_end": 214,
+          "quote": "X-Secret-Key"
+        }
+      ],
+      "owner": "browser_ui",
+      "trust_label": "untrusted_browser",
+      "flow": "localStorage goose_secret_key -> AI adapter headers -> localhost backend",
+      "risk": "Browser-held secret key can flow on requests outside mediated host admission and redaction policy.",
+      "negative_test_seed": {
+        "id": "cx-sk-sens-localstorage-secret-header",
+        "oracle": "Migrated paths must not read goose_secret_key from localStorage or attach X-Secret-Key outside host-mediated credential handling."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030"],
+        "action": "Remove or isolate legacy adapter from mediated FCA paths; forbid raw secret header emission from browser bundles.",
+        "keep": false
+      }
+    },
+    {
+      "edge_id": "SK-SENS-004",
+      "category": "sensitive_flow",
+      "family": "secrets_paths_logs_prompts",
+      "title": "Backend status contract forbids exposing host paths and credentials",
+      "path": "swissknife/src/services/apps/all-app-backend-status-contract.ts",
+      "symbol": "browser_safety",
+      "line_start": 234,
+      "line_end": 239,
+      "quote": "host_paths_exposed: false",
+      "secondary_spans": [
+        {
+          "path": "swissknife/src/services/apps/all-app-backend-status-contract.ts",
+          "symbol": "FORBIDDEN_BROWSER_STATUS_PATTERNS",
+          "line_start": 205,
+          "line_end": 209,
+          "quote": "host_path"
+        }
+      ],
+      "owner": "shared_contract",
+      "trust_label": "host_boundary_enforcement",
+      "flow": "backend status projection -> browser_safety flags/patterns -> UI status panel",
+      "risk": "Status leakage of backend_url/api_key/host_path would violate browser nonauthority and secret hyperproperties.",
+      "negative_test_seed": {
+        "id": "cx-sk-sens-status-host-path-leak",
+        "oracle": "Backend status payloads containing host_path/api_key/localhost URLs must fail validation."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029"],
+        "action": "Keep fail-closed status projection; extend vectors for nested secret fields.",
+        "keep": true
+      }
+    },
+    {
+      "edge_id": "SK-SENS-005",
+      "category": "sensitive_flow",
+      "family": "secrets_paths_logs_prompts",
+      "title": "Host mediator rejects forbidden browser payload keys before adapter invoke",
+      "path": "swissknife/src/services/mcp/all-app-tool-mediator.ts",
+      "symbol": "forbidden_browser_payload",
+      "line_start": 69,
+      "line_end": 94,
+      "quote": "forbidden_browser_payload",
+      "owner": "host_mediator",
+      "trust_label": "host_boundary_enforcement",
+      "flow": "BrowserMediatedToolCall.input.payload -> forbiddenPayloadPath -> failed outcome",
+      "risk": "Second boundary after gateway; both must remain; bypassing either reintroduces credential/path flow.",
+      "negative_test_seed": {
+        "id": "cx-sk-sens-mediator-forbidden-key-bypass",
+        "oracle": "Mediator must fail closed on authorization/host_path/secret keys even if gateway is skipped."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030"],
+        "action": "Keep dual boundary; do not weaken either side during migration.",
+        "keep": true
+      }
+    },
+    {
+      "edge_id": "SK-SENS-006",
+      "category": "sensitive_flow",
+      "family": "dry_run_live_projection",
+      "title": "Desktop governed controls default dry_run true while consent defaults granted",
+      "path": "swissknife/src/services/mcp/virtual-desktop-live-gateway.ts",
+      "symbol": "VirtualDesktopLiveGateway.invoke.dryRun",
+      "line_start": 66,
+      "line_end": 73,
+      "quote": "const dryRun = invocation.dry_run ?? governed;",
+      "owner": "browser_gateway",
+      "trust_label": "untrusted_browser",
+      "flow": "governed binding -> dryRun default true + consent default granted -> mediated request",
+      "risk": "Dry-run default mitigates live effect locally but pairs with default-granted consent; mixed trust must be split in FCA migration.",
+      "negative_test_seed": {
+        "id": "cx-sk-sens-dry-run-default-with-granted-consent",
+        "oracle": "Even with dry_run default true, consent must not default to granted; live flip must require host admission."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-029", "FACP-030"],
+        "action": "Keep dry-run-default; remove granted consent default; host decides live upgrade.",
+        "keep": true,
+        "adaptation": "split_dry_run_default_from_consent_default"
+      }
+    }
+  ],
+  "missing_rights": [
+    {
+      "gap_id": "SK-RIGHTS-001",
+      "category": "missing_rights",
+      "family": "license_provenance",
+      "title": "package.json license field is empty while README claims AGPL and LICENSE.md is absent",
+      "disposition": "unresolved_human_legal_review",
+      "inferred_compatibility": false,
+      "summary": "SwissKnife declares an empty package license, README points at AGPL via LICENSE.md, and LICENSE.md is missing from the exact gitlink. Mechanical rights clearance is forbidden.",
+      "declarations": [
+        {
+          "path": "swissknife/package.json",
+          "symbol": "license",
+          "line_start": 102,
+          "line_end": 102,
+          "quote": "\"license\": \"\"",
+          "declared_license": ""
+        },
+        {
+          "path": "swissknife/README.md",
+          "symbol": "License section",
+          "line_start": 517,
+          "line_end": 519,
+          "quote": "AGPL License",
+          "declared_license": "AGPL (README claim; LICENSE.md missing)"
+        }
+      ],
+      "missing_artifacts": [
+        {
+          "path": "swissknife/LICENSE.md",
+          "status": "absent_in_exact_gitlink",
+          "note": "README links to LICENSE.md but the file is not present at the bound commit."
+        }
+      ],
+      "negative_test_seed": {
+        "id": "cx-sk-rights-empty-license-inferred-ok",
+        "oracle": "Inventory must not infer SPDX clearance or compatibility from empty package license or missing LICENSE.md."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-external-rights-resolution"],
+        "action": "Human legal review must supply RightsIR/SPDX; do not machine-clear from README prose.",
+        "keep": false
+      },
+      "owner": "human_legal_review",
+      "trust_label": "rights_unresolved"
+    },
+    {
+      "gap_id": "SK-RIGHTS-002",
+      "category": "missing_rights",
+      "family": "tenant_selection",
+      "title": "No host-bound tenant selection edge on mediated browser-to-host dispatch",
+      "disposition": "explicit_gap_unresolved",
+      "inferred_compatibility": false,
+      "summary": "Evidence subset requires tenant selection inventory. Exact tree exposes Azure tenantId as a browser credential field and blocks api-keys tool dispatch, but does not provide a host-issued tenant/scope admission binding for mediated tool calls.",
+      "declarations": [
+        {
+          "path": "swissknife/web/js/apps/api-keys.js",
+          "symbol": "azure.fields.tenantId",
+          "line_start": 23,
+          "line_end": 23,
+          "quote": "tenantId",
+          "declared_license": null,
+          "note": "Credential form field only; not host tenant admission."
+        }
+      ],
+      "missing_artifacts": [
+        {
+          "path": "swissknife/src/services/mcp/all-app-tool-mediator.ts",
+          "status": "no_tenant_admission_field",
+          "note": "MediatedOwnerToolCall carries owner/tool/correlation/payload/dry_run/policy/transport without tenant_id."
+        }
+      ],
+      "negative_test_seed": {
+        "id": "cx-sk-rights-missing-tenant-binding-treated-as-ok",
+        "oracle": "Absence of host tenant binding must remain an explicit gap; inventory must not treat missing tenant controls as satisfied."
+      },
+      "removal_or_adaptation_target": {
+        "follow_on": ["FACP-030", "FACP-G320"],
+        "action": "If multi-tenant effects are required, add host-issued tenant/scope binding; until then keep gap explicit.",
+        "keep": false
+      },
+      "owner": "host_authority_required",
+      "trust_label": "rights_unresolved"
+    }
+  ],
+  "adaptation_disposition": {
+    "replacement_policy": "adapt_not_replace",
+    "for_facp_029": "Seed browser-nonauthority paired tests from SK-AUTH-001..005 and SK-SENS-003; default-granted and browser-constructed allow are failing seeds, not accepted evidence.",
+    "for_facp_030": "Migrate mediated paths to host-issued FCA outcomes; browser sends no authority decision; default consent absent; UI displays exact argument digest.",
+    "preserve": [
+      "SK-AUTH-007",
+      "SK-AUTH-009",
+      "SK-AUTH-011",
+      "SK-AUTH-012",
+      "SK-SENS-001",
+      "SK-SENS-002",
+      "SK-SENS-004",
+      "SK-SENS-005"
+    ],
+    "remove_or_rewrite": [
+      "SK-AUTH-001",
+      "SK-AUTH-002",
+      "SK-AUTH-003",
+      "SK-AUTH-004",
+      "SK-AUTH-005",
+      "SK-SENS-003"
+    ]
+  },
+  "acceptance": {
+    "every_authority_edge_has_source_span": true,
+    "every_authority_edge_has_owner": true,
+    "every_authority_edge_has_trust_label": true,
+    "every_authority_edge_has_negative_test_seed": true,
+    "every_authority_edge_has_removal_or_adaptation_target": true,
+    "every_sensitive_flow_edge_complete": true,
+    "missing_rights_remain_explicit": true,
+    "default_granted_consent_is_failing_seed": true,
+    "license_rights_not_inferred": true
+  }
+}
