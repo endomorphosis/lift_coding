@@ -1,0 +1,690 @@
+{
+  "schema": "facp/composed-workflow@1",
+  "schema_version": 1,
+  "task_id": "FACP-059",
+  "goal_id": "FACP-G820",
+  "bundle": "facp/release/composition",
+  "title": "Compose one end-to-end proof-carrying SwissKnife-to-Kit workflow",
+  "release": "composed-workflow-v1",
+  "vocabulary_schema": "facp/formal-claim-algebra-v1@1",
+  "composition_proof_schema": "facp/composition-proof@1",
+  "repository_contracts_schema": "facp/repository-contracts@1",
+  "status": "sealed",
+  "generated_at": "2026-08-19T23:00:00Z",
+  "behavior_change": false,
+  "policy": {
+    "fail_closed": true,
+    "provider_authority": "proposal-only",
+    "producer_artifacts_immutable": true,
+    "discovery_is_not_completion": true,
+    "simulation_as_production_forbidden": true,
+    "browser_authority_forbidden": true,
+    "omit_failed_assumption_forbidden": true,
+    "no_unqualified_production_claim": true,
+    "no_network": true,
+    "credentials_forbidden_in_receipt": true,
+    "prohibited_effects": [
+      "real_legal_filing_or_payment",
+      "private_data_exfiltration",
+      "unsupported_live_backend",
+      "browser_authority",
+      "simulation_as_production",
+      "omit_failed_assumption",
+      "undisclosed_environmental_premise",
+      "assume_away_component_defect",
+      "credential_or_secret_in_receipt",
+      "network",
+      "sign_or_publish_production_release",
+      "provider_authored_completion"
+    ]
+  },
+  "evidence_subset": [
+    "canonical_request",
+    "admission_token",
+    "translation_receipt",
+    "observed_execution",
+    "immutable_storage_current_pointer_receipt",
+    "presentation_projection",
+    "repository_assumption_guarantee_discharge",
+    "failure_compensation_traces"
+  ],
+  "source_binding": {
+    "controller_commit": "8a99f14216f64565bb2669a027ae6918c36a9a0b",
+    "controller_tree": "866a35289405282c4c7c534a56c80818f6d99e9f",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "scheduler_config_sha256": "a76085554bdb72bdbb4b92a879a07a247cb0778248e6861d9195a72a24c02363",
+    "repository_contracts_path": "Mcp-Plus-Plus/schemas/assurance/v1/repository-contracts.json",
+    "repository_contracts_sha256": "f94b3dc57a3f979c68f8f7ae74f2c8976e3b2784b27070e4fdebe371a7c04b1c",
+    "portfolio_lock_path": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+    "portfolio_lock_sha256": "596bd5ddaef18950d5dbe31c8b67422c4d8d3ecfdb2b93dd839fb459b5562586",
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "2e5a448cc91e371eee9a742460ce02dfbc7005ce",
+        "planning_revision_field": "mcp_plus_plus_planning_revision",
+        "scheduler_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "878a848be6ac7df02e9b93074732be5a8b5bf305",
+        "planning_revision_field": "accelerate_planning_revision",
+        "scheduler_planning_revision": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "fd3122c9ae2780583ec0124e952559662e616a24",
+        "planning_revision_field": "datasets_planning_revision",
+        "scheduler_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "2f78e897288a0ab90b15e03e54056d69ab371c70",
+        "planning_revision_field": "kit_planning_revision",
+        "scheduler_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "68751041ee52c36a558738d6a0b58d142d9b1840",
+        "planning_revision_field": "swissknife_planning_revision",
+        "scheduler_planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "matches_scheduler_planning_revision": false
+      }
+    ],
+    "depends_on": [
+      "FACP-023",
+      "FACP-025",
+      "FACP-026",
+      "FACP-028",
+      "FACP-041",
+      "FACP-046",
+      "FACP-048",
+      "FACP-049",
+      "FACP-051",
+      "FACP-052",
+      "FACP-054",
+      "FACP-056",
+      "FACP-057",
+      "FACP-058"
+    ],
+    "producer_inputs": [
+      {
+        "task_id": "FACP-023",
+        "role": "datasets_typed_outcomes",
+        "paths": [
+          {
+            "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/outcomes.py",
+            "sha256": "c335d371be22357c53b1f709029198dda4b882e34951a1c3aa87876c1f1d634e"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-025",
+        "role": "accelerate_capability_outcomes",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/capability_outcomes.py",
+            "sha256": "fc9ada34cf7bd393628697c99fc8e02ffad8e7586d9550270341f67f80435005"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-026",
+        "role": "accelerate_content_identity",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/content_identity.py",
+            "sha256": "a51cd2919d34d3d97785393b770883cb40c3e642d831709563bb936303527f6f"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-028",
+        "role": "kit_proof_role_gate",
+        "paths": [
+          {
+            "path": "external/ipfs_kit/ipfs_kit_py/assurance/proof_role_gate.py",
+            "sha256": "a7e8cfe700b9e3b0ecf10d7bf1c7ce7e518d6079103bd1a4e6004b0d49593cc4"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-041",
+        "role": "swissknife_admission_token_client",
+        "paths": [
+          {
+            "path": "swissknife/src/services/mcp/admissionTokenClient.ts",
+            "sha256": "e025110deda76926a4d2e5c189f0c9e155076b6f59bc5eeb353884a7cd174794"
+          },
+          {
+            "path": "swissknife/src/services/mcp/formalAssuranceGateway.ts",
+            "sha256": "02b740dbfc3ffcd6d2d8f87f7b9c41c479a9599b501efe9689e538692a4c3d4e"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-046",
+        "role": "tep_runtime_monitor",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/formal_transition_monitor.py",
+            "sha256": "f6a8c62cc85171ddf62457036e629a16a7eef6e5e16caf4268d78c63d467027e"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-048",
+        "role": "repository_composition_contracts",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/schemas/assurance/v1/repository-contracts.json",
+            "sha256": "f94b3dc57a3f979c68f8f7ae74f2c8976e3b2784b27070e4fdebe371a7c04b1c"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_assume_guarantee_contracts.py",
+            "sha256": "d106030e619abda67099f49685bfd0cde5b8b17370bf0ccd9d6aa7bc135a0ef5"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-049",
+        "role": "datasets_translation_receipts",
+        "paths": [
+          {
+            "path": "external/ipfs_datasets/ipfs_datasets_py/logic/translation_validation/formal_assurance.py",
+            "sha256": "faff8bd916f298bae6c1c9f28a4ef312d933abba88346ff2a7c2ee0428df62d1"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-051",
+        "role": "cegis_repair",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/formal_assurance_cegis.py",
+            "sha256": "9d4c230b0948628eef7818eceb5583f029c1b862fdea63e9566dc223243dc2f4"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-052",
+        "role": "supervisor_controller",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/formal_assurance_controller.py",
+            "sha256": "7fea8ed3c0f96169e8fdaa90f8b686cce89a771ae7dd602ecf7913a3ab4c53b9"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-054",
+        "role": "backend_cohort_receipt",
+        "paths": [
+          {
+            "path": "external/ipfs_kit/data/formal_assurance/backend_receipts/cohort.json",
+            "sha256": "485342243f2a89d59da448ad3d3b0703e242958b005954c07561116ef5bd0260"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-056",
+        "role": "immutable_supply_chain",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+            "sha256": "596bd5ddaef18950d5dbe31c8b67422c4d8d3ecfdb2b93dd839fb459b5562586"
+          },
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json",
+            "sha256": "47986a76f2a6e037418af12ce05f743ea4975c0c3b0a25cf7214f9025360cd04"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-057",
+        "role": "evidence_checked_documentation",
+        "paths": [
+          {
+            "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/evidence_checked_documentation.py",
+            "sha256": "984c5ae9992f13b804700702bc4f980579a3a7d68ef5bf30689900d5f8e10a8e"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-058",
+        "role": "external_conformance",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/external_conformance.json",
+            "sha256": "8955a86215343ae0f5bc6a0889b465b0cedbbe6fc284219133c4f53b216b09a6"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-055",
+        "role": "release_predicate_and_rights",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+            "sha256": "ee6b86a1a57b9c45ce7f6ca772a6749a162d7809a21370dbc39fe259fe33512a"
+          },
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/release/qualification/rights_ir.json",
+            "sha256": "ed40ce461731433ea8af2f0145d7876d1c001b81cad3d87bd9a54af4c4a6f1ba"
+          }
+        ]
+      }
+    ]
+  },
+  "terminal_workflow": [
+    "swissknife_request",
+    "host_authentication_and_admission",
+    "datasets_semantic_compilation_translation_receipt",
+    "accelerate_scheduling_and_observed_execution",
+    "kit_immutable_persistence_current_pointer",
+    "swissknife_evidence_presentation"
+  ],
+  "positive_trace": {
+    "trace_id": "accept/composed-happy-path",
+    "expect_accept": true,
+    "environment": "hermetic",
+    "claimed_environment": "local_reviewed_synthetic",
+    "origin": "synthetic_fixture",
+    "authority_class": "kernel_admitted",
+    "evidence_class": "hermetic",
+    "ifa_label": "Internal",
+    "effect_classification": {
+      "operation_id": "facp.composed_workflow.synthetic_write",
+      "effect_class": "write",
+      "idempotency_class": "idempotent",
+      "reversibility_class": "reversible",
+      "observation_obligation": "independent_observation_required",
+      "admission_token_issuer": "effect_admission_kernel"
+    },
+    "steps": [
+      {
+        "workflow_step": "swissknife_request",
+        "gate": "swissknife_request",
+        "artifact": "CanonicalHostRequest",
+        "schema": "facp/host-admission-projection@1",
+        "authority_class": "none",
+        "evidence_class": "hermetic",
+        "effect_class": "pure",
+        "ifa_label": "Internal",
+        "canonical_request": {
+          "schema": "facp/host-admission-projection@1",
+          "method": "tools/call",
+          "operation_id": "facp.composed_workflow.synthetic_write",
+          "resource_id": "resource:facp059:local-filesystem-object",
+          "actor_ref": "actor:facp059-synthetic",
+          "session_ref": "session:facp059-synthetic",
+          "argument_digest": "69f29f79b98d99f1b011dce4c7606af05bdef5c3b4315564aa8eb95df2308cda",
+          "argument_cid": "cid:argument:69f29f79b98d99f1b011dce4c7606af05bdef5c3b4315564aa8eb95df2308cda",
+          "consent": "absent",
+          "authority_decision": null
+        },
+        "boundaries_discharged": [
+          "boundary:accelerate->swissknife.nonauthority"
+        ]
+      },
+      {
+        "workflow_step": "host_authentication_and_admission",
+        "gate": "host_authentication_and_admission",
+        "artifact": "HostIssuedAdmissionTokenProjection",
+        "schemas": [
+          "facp/admission-token@1",
+          "facp/effect-admission-gate@1"
+        ],
+        "authority_class": "kernel_admitted",
+        "evidence_class": "hermetic",
+        "effect_class": "write",
+        "ifa_label": "Internal",
+        "admission_token": {
+          "schema": "facp/admission-token@1",
+          "issuer": "effect_admission_kernel",
+          "kernel_call": "effect_admission_kernel.unlock_handler",
+          "token_id": "token:facp059:synthetic-one-use",
+          "operation_id": "facp.composed_workflow.synthetic_write",
+          "effect_class": "write",
+          "idempotency_class": "idempotent",
+          "reversibility_class": "reversible",
+          "observation_obligation": "independent_observation_required",
+          "confirmation_obligation": "one_use_confirmation_required",
+          "argument_cid": "cid:argument:69f29f79b98d99f1b011dce4c7606af05bdef5c3b4315564aa8eb95df2308cda",
+          "argument_digest": "69f29f79b98d99f1b011dce4c7606af05bdef5c3b4315564aa8eb95df2308cda",
+          "actor_cid": "actor:facp059-synthetic",
+          "resource_cid": "cid:resource:689ab573a2767c23480f1dbb432c534eab14984386dc37d3121deb6a22a8cf9b",
+          "policy_cid": "policy:facp059:local-synthetic-allow",
+          "nonce": "nonce:facp059:0001",
+          "not_before": 1700000000000,
+          "not_after": 1700000060000,
+          "admission_token_cid": "cid:admission:82a477a85fcf26742145ac3de8197d917ebb34ba2a26aab7735f6bbfe83896f4",
+          "satisfied_obligations": [
+            "capability_verified",
+            "host_policy_required",
+            "one_use_confirmation_required",
+            "lease_required",
+            "independent_observation_required"
+          ],
+          "closed_outcome": "Observed"
+        },
+        "boundaries_discharged": [
+          "boundary:swissknife->accelerate.admission",
+          "boundary:datasets->accelerate.admission"
+        ]
+      },
+      {
+        "workflow_step": "datasets_semantic_compilation_translation_receipt",
+        "gate": "datasets_semantic_compilation_translation_receipt",
+        "artifact": "TranslationReceipt",
+        "schema": "facp/translation-receipt@1",
+        "authority_class": "none",
+        "evidence_class": "hermetic",
+        "effect_class": "pure",
+        "ifa_label": "Internal",
+        "translation_receipt": {
+          "schema_version": "facp/translation-receipt@1",
+          "evidence_id": "facp/translation-receipt@1",
+          "interface": "FormalAssuranceTranslationReceipt@1",
+          "source_cid": "cid:source:facp059-canonical-request",
+          "target_cid": "cid:target:facp059-semantic-ir",
+          "compiler_cid": "cid:compiler:datasets-formal-assurance-facp049",
+          "source_schema": "schema:swissknife.canonical_host_request@1",
+          "target_schema": "schema:datasets.semantic_ir@1",
+          "preservation_class": "exact",
+          "equality_criteria": {
+            "criteria_id": "eq:facp059-exact",
+            "kind": "exact",
+            "description": "Synthetic FACP-059 request/IR equality under declared schemas",
+            "property_ids": []
+          },
+          "assumptions": [
+            "assumption:datasets.canonical_contracts",
+            "assumption:swissknife.datasets_translation"
+          ],
+          "obligations": [
+            "obligation:no_silent_permission_widening",
+            "obligation:named_loss_required_when_lossy"
+          ],
+          "named_losses": [],
+          "receipt_cid": "sha256:aebdb8b5827c114cc786d8b2fffb3594f954fdc4fa105f5fc3bcd41728531272"
+        },
+        "boundaries_discharged": [
+          "boundary:accelerate->datasets.semantics",
+          "boundary:swissknife->datasets.translation",
+          "boundary:kit->datasets.payload",
+          "boundary:datasets->mcp.contracts"
+        ]
+      },
+      {
+        "workflow_step": "accelerate_scheduling_and_observed_execution",
+        "gate": "accelerate_scheduling_and_observed_execution",
+        "artifact": "TEPObservedExecution",
+        "monitor_schema": "facp/tep-monitor@1",
+        "tep_vector_id": "accept/happy-path",
+        "controller_mode_terminal": "terminal_success",
+        "controller_effects": [
+          "acquire_lease",
+          "route_provider",
+          "observe",
+          "seal_receipt"
+        ],
+        "authority_class": "kernel_admitted",
+        "evidence_class": "hermetic",
+        "effect_class": "write",
+        "ifa_label": "Internal",
+        "invariants_held": [
+          "NoDoubleEffect",
+          "NoStaleFenceCompletion",
+          "NoSuccessWithoutObservation",
+          "NoConfirmationReuse",
+          "NoBlindUnknownRetry"
+        ],
+        "boundaries_discharged": [
+          "boundary:kit->accelerate.observation",
+          "boundary:accelerate->mcp.contracts"
+        ]
+      },
+      {
+        "workflow_step": "kit_immutable_persistence_current_pointer",
+        "gate": "kit_immutable_persistence_current_pointer",
+        "artifact": "KitCurrentPointerReceipt",
+        "authority_class": "live_observed",
+        "evidence_class": "live",
+        "effect_class": "write",
+        "ifa_label": "Internal",
+        "kit_persistence": {
+          "backend_id": "local_filesystem",
+          "receipt_schema": "BackendCertificationReceipt@1",
+          "cohort_schema": "BackendCertificationCohort@1",
+          "cohort_path": "external/ipfs_kit/data/formal_assurance/backend_receipts/cohort.json",
+          "cohort_sha256": "485342243f2a89d59da448ad3d3b0703e242958b005954c07561116ef5bd0260",
+          "disposition": "LiveQualified",
+          "closed_outcome": "Verified",
+          "live_qualified": true,
+          "suite_complete": true,
+          "credentials_stored": false,
+          "unsafe_promotion": false,
+          "freshness": "current",
+          "proof_roles": [
+            "candidate",
+            "admitted",
+            "current"
+          ],
+          "promotion_path": [
+            "Observe",
+            "SealReceipt",
+            "SettleCurrent",
+            "PromoteProof"
+          ],
+          "candidate_implies_admitted": false,
+          "admitted_stale_becomes_current": false,
+          "cas_integrity": true,
+          "unavailable_backends": {
+            "pinned_ipfs": "Unavailable",
+            "iroh": "Unavailable"
+          }
+        },
+        "boundaries_discharged": [
+          "boundary:accelerate->kit.persistence",
+          "boundary:swissknife->kit.proof_roles"
+        ]
+      },
+      {
+        "workflow_step": "swissknife_evidence_presentation",
+        "gate": "swissknife_evidence_presentation",
+        "artifact": "ConsumedHostOutcomePresentation",
+        "authority_class": "none",
+        "evidence_class": "hermetic",
+        "effect_class": "pure",
+        "ifa_label": "Public",
+        "presentation": {
+          "artifact": "ConsumedHostOutcomePresentation",
+          "evidence_class": "host_issued",
+          "presentation_classification": "presentation_only",
+          "may_upgrade_evidence": false,
+          "authority_decision_from_browser": false,
+          "authorizes": false,
+          "displays": [
+            "argument_digest",
+            "admission_token_cid",
+            "translation_receipt.receipt_cid",
+            "kit.cohort_sha256",
+            "tep.vector_id",
+            "composition.discharge_digest"
+          ]
+        },
+        "boundaries_discharged": []
+      }
+    ],
+    "compensation_trace": {
+      "tep_vector_id": "accept/compensation",
+      "expect_accept": true,
+      "notes": "Bounded compensatable failure path remains admissible under TEP; not promoted as production success."
+    },
+    "capsule": {
+      "capsule_id": "capsule:composed-workflow@1",
+      "kind": "release",
+      "required_contract_ids": [
+        "contract:ipfs_datasets_py@1",
+        "contract:ipfs_kit_py@1",
+        "contract:ipfs_accelerate_py@1",
+        "contract:swissknife@1",
+        "contract:mcp_plus_plus@1"
+      ]
+    }
+  },
+  "negative_variants": [
+    {
+      "id": "seed:browser-allow-as-admission",
+      "kind": "contract_seed",
+      "seed_id": "seed:browser-allow-as-admission",
+      "fail_gate": "host_authentication_and_admission",
+      "expected_violation_code": "BOUNDARY_VIOLATED:boundary:accelerate->swissknife.nonauthority",
+      "violated_boundary_id": "boundary:accelerate->swissknife.nonauthority"
+    },
+    {
+      "id": "seed:candidate-to-current",
+      "kind": "contract_seed",
+      "seed_id": "seed:candidate-to-current",
+      "fail_gate": "kit_immutable_persistence_current_pointer",
+      "expected_violation_code": "BOUNDARY_VIOLATED:boundary:swissknife->kit.proof_roles",
+      "violated_boundary_id": "boundary:swissknife->kit.proof_roles"
+    },
+    {
+      "id": "seed:success-without-observation",
+      "kind": "contract_seed",
+      "seed_id": "seed:success-without-observation",
+      "fail_gate": "accelerate_scheduling_and_observed_execution",
+      "expected_violation_code": "BOUNDARY_VIOLATED:boundary:kit->accelerate.observation",
+      "violated_boundary_id": "boundary:kit->accelerate.observation",
+      "tep_vector_id": "reject/success-without-observation"
+    },
+    {
+      "id": "seed:datasets-external-effect-success",
+      "kind": "contract_seed",
+      "seed_id": "seed:datasets-external-effect-success",
+      "fail_gate": "datasets_semantic_compilation_translation_receipt",
+      "expected_violation_code": "BOUNDARY_VIOLATED:boundary:accelerate->datasets.semantics",
+      "violated_boundary_id": "boundary:accelerate->datasets.semantics"
+    },
+    {
+      "id": "seed:undisclosed-environment-premise",
+      "kind": "contract_seed",
+      "seed_id": "seed:undisclosed-environment-premise",
+      "fail_gate": "composition_discharge",
+      "expected_violation_code": "ENV_UNDISCLOSED_PREMISE",
+      "violated_boundary_id": null
+    },
+    {
+      "id": "tep:reject/double-effect",
+      "kind": "tep_vector",
+      "tep_vector_id": "reject/double-effect",
+      "fail_gate": "accelerate_scheduling_and_observed_execution",
+      "expected_code": "NoDoubleEffect",
+      "expect_accept": false
+    },
+    {
+      "id": "tep:reject/confirmation-reuse",
+      "kind": "tep_vector",
+      "tep_vector_id": "reject/confirmation-reuse",
+      "fail_gate": "host_authentication_and_admission",
+      "expected_code": "NoConfirmationReuse",
+      "expect_accept": false
+    },
+    {
+      "id": "tep:reject/blind-unknown-retry",
+      "kind": "tep_vector",
+      "tep_vector_id": "reject/blind-unknown-retry",
+      "fail_gate": "accelerate_scheduling_and_observed_execution",
+      "expected_code": "NoBlindUnknownRetry",
+      "expect_accept": false
+    }
+  ],
+  "classifications": {
+    "effects": {
+      "effect_class": "write",
+      "reversibility_class": "reversible",
+      "idempotency_class": "idempotent",
+      "observation_obligation": "independent_observation_required"
+    },
+    "authority": {
+      "browser": "none",
+      "host_token": "kernel_admitted",
+      "confirmation": "interaction_only",
+      "presentation": "none"
+    },
+    "evidence": {
+      "workflow": "hermetic",
+      "kit_backend_local_filesystem": "live",
+      "pinned_ipfs": "unavailable",
+      "iroh": "unavailable",
+      "simulation_as_production": false
+    },
+    "ifa_labels": {
+      "receipt_body": "Internal",
+      "presentation_projection": "Public",
+      "secrets": "CryptographicSecret",
+      "credentials": "Credential"
+    }
+  },
+  "sanitization": {
+    "forbidden_keys": [
+      "goose_secret_key",
+      "X-Secret-Key",
+      "secret_header",
+      "authorization",
+      "api_key",
+      "password",
+      "secret",
+      "bearer_token",
+      "backend_credentials",
+      "token_secret",
+      "private_context",
+      "private_key",
+      "signing_key",
+      "host_path",
+      "file_path",
+      "filesystem_path"
+    ],
+    "credentials_stored": false,
+    "private_or_secret_values_present": false
+  },
+  "assumptions": [
+    {
+      "id": "assumption:datasets.rights_conflict_review",
+      "status": "unresolved",
+      "explicit_unresolved": true,
+      "unresolved_reason": "MIT/AGPL conflict remains under explicit human legal review; not discharged by component guarantee."
+    },
+    {
+      "id": "assumption:swissknife.human_rights_review",
+      "status": "unresolved",
+      "explicit_unresolved": true,
+      "unresolved_reason": "SwissKnife missing license/provenance remains human-review blocked for release admissibility."
+    },
+    {
+      "id": "assumption:kit.live_backend_qualification",
+      "status": "unresolved",
+      "explicit_unresolved": true,
+      "unresolved_reason": "Only local_filesystem is LiveQualified in the current cohort; pinned_ipfs and iroh remain Unavailable."
+    }
+  ],
+  "failures": [],
+  "acceptance": {
+    "positive_trace_satisfies_every_contract_and_tep_invariant": true,
+    "negative_variants_fail_at_intended_gates": true,
+    "effects_authority_evidence_classified": true,
+    "receipt_binds_exact_source_forest": true,
+    "no_private_or_secret_values": true
+  },
+  "content_binding": {
+    "alg": "sha256",
+    "canonicalization": "json-sort-keys-separators-comma-colon",
+    "covers": "gate_record_excluding_content_sha256"
+  },
+  "content_sha256": "8a9df797bbe30693eb99332b610d3c36e8f45a90183cd315889aa07d903974df"
+}
