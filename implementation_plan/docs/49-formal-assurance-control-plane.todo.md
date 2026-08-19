@@ -1025,7 +1025,7 @@ not authority.
 
 ## FACP-037 Seal cross-language canonical contract conformance
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
