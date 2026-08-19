@@ -242,7 +242,7 @@ not authority.
 
 ## FACP-008 Build the unified claim inventory and seeded defect corpus
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
