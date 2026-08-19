@@ -620,7 +620,7 @@ not authority.
 
 ## FACP-022 Move Datasets installation behind explicit initialization
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
