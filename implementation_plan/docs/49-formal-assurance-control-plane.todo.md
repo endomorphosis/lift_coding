@@ -998,7 +998,7 @@ not authority.
 
 ## FACP-036 Generate Python, TypeScript, Rust, and Go operation bindings
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
