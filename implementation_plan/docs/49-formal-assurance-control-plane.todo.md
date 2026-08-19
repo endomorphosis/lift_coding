@@ -593,7 +593,7 @@ not authority.
 
 ## FACP-021 Characterize Datasets cold-import effects
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
