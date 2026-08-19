@@ -1646,7 +1646,7 @@ not authority.
 
 ## FACP-060 Seal the terminal proof-carrying release
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
