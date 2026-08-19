@@ -944,7 +944,7 @@ not authority.
 
 ## FACP-034 Implement the Assurance IDL compiler core
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
