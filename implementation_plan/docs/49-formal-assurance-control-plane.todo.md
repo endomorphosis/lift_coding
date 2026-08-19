@@ -458,7 +458,7 @@ not authority.
 
 ## FACP-016 Define EvidenceEnvelope@1 and normative transition vectors
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
