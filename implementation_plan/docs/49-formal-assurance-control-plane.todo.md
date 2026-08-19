@@ -1565,7 +1565,7 @@ not authority.
 
 ## FACP-057 Add evidence-checked documentation claims
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
