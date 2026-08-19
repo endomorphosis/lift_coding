@@ -1,0 +1,558 @@
+{
+  "schema": "facp/external-conformance@1",
+  "schema_version": 1,
+  "task_id": "FACP-058",
+  "goal_id": "FACP-G810",
+  "bundle": "facp/release/external-conformance",
+  "title": "Validate an independent cross-language conformance implementation",
+  "release": "external-conformance-v1",
+  "vocabulary_schema": "facp/dag-cbor-profile@1",
+  "status": "sealed",
+  "generated_at": "2026-08-19T22:30:00Z",
+  "behavior_change": false,
+  "policy": {
+    "producer_artifacts_immutable": true,
+    "discovery_is_not_completion": true,
+    "provider_authority": "none",
+    "fail_closed": true,
+    "no_network": true,
+    "no_unqualified_production_claim": true,
+    "no_network_interop_claim_without_observation": true,
+    "generated_implementation_not_independent_validator": true,
+    "omit_failing_vectors_forbidden": true,
+    "external_implementation_source_immutable": true,
+    "prohibited_effects": [
+      "use_generated_implementation_as_independent_validator",
+      "network_interoperability_claim_without_observation",
+      "omit_failing_vectors",
+      "network",
+      "provider_authored_completion",
+      "introduce_unqualified_production_claim"
+    ]
+  },
+  "evidence_subset": [
+    "implementation_source_toolchain_identity",
+    "positive_negative_mutation_vectors",
+    "canonical_bytes_cids_errors",
+    "assumptions",
+    "failures"
+  ],
+  "source_binding": {
+    "controller_commit": "667ce61ee2e80ef7304804fed5055afc58ab9b46",
+    "controller_tree": "b2212d5f598fd5053dac6a41c704f9bd5636e606",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "vectors_path": "Mcp-Plus-Plus/conformance/vectors/assurance-canonical-encoding.json",
+    "vectors_sha256": "49b4c32f774f2e096a88f1c219377e87776ccab0166ebb981047aa896210f805",
+    "encoding_spec_path": "Mcp-Plus-Plus/docs/spec/assurance-canonical-encoding.md",
+    "encoding_spec_sha256": "9adb2629d5dbbedd8357a84dd68e1370d5c6b2dc71bf61c0ab9a4eb5347852dc",
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "2e5a448cc91e371eee9a742460ce02dfbc7005ce",
+        "planning_revision_field": "mcp_plus_plus_planning_revision",
+        "scheduler_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "a0fbfbbc26cc37ca470056aab8c499140c1e5103",
+        "planning_revision_field": "accelerate_planning_revision",
+        "scheduler_planning_revision": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "fd3122c9ae2780583ec0124e952559662e616a24",
+        "planning_revision_field": "datasets_planning_revision",
+        "scheduler_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "2f78e897288a0ab90b15e03e54056d69ab371c70",
+        "planning_revision_field": "kit_planning_revision",
+        "scheduler_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "matches_scheduler_planning_revision": false
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "68751041ee52c36a558738d6a0b58d142d9b1840",
+        "planning_revision_field": "swissknife_planning_revision",
+        "scheduler_planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "matches_scheduler_planning_revision": false
+      }
+    ],
+    "depends_on": [
+      "FACP-037",
+      "FACP-048",
+      "FACP-049"
+    ],
+    "shared_producer_inputs": [
+      "FACP-033",
+      "FACP-035"
+    ],
+    "producer_inputs": [
+      {
+        "task_id": "FACP-037",
+        "role": "canonical_contract_gate",
+        "paths": [
+          {
+            "path": "implementation_plan/formal_assurance_control_plane/gates/canonical_contracts_v1.json",
+            "sha256": "5d6f55df46a4c194965d5cbc75b3b9c9334f2ea6288786816e2925b0a13c6ef9"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-035",
+        "role": "independent_rust_assurance_codec",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/tests-rs/src/assurance_codec.rs",
+            "sha256": "6d646a034fba3419a5e6bcdb3943d96de9aa0dc29ddac380d67d6b47e894c925"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-rs/tests/assurance_translation_validation_test.rs",
+            "sha256": "2ee9aa87a4cf216ecaae4cd911d1d4d1c95d9ef5036c387c1e52e288b60d983b"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_assurance_rust_translation_validation.py",
+            "sha256": "6c145117ac3564abe5534f463551ab016d8d3ee9c66143681bebae4c116b2f39"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-033",
+        "role": "public_conformance_vectors",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/conformance/vectors/assurance-canonical-encoding.json",
+            "sha256": "49b4c32f774f2e096a88f1c219377e87776ccab0166ebb981047aa896210f805"
+          },
+          {
+            "path": "Mcp-Plus-Plus/docs/spec/assurance-canonical-encoding.md",
+            "sha256": "9adb2629d5dbbedd8357a84dd68e1370d5c6b2dc71bf61c0ab9a4eb5347852dc"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-048",
+        "role": "repository_composition_contracts",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/schemas/assurance/v1/repository-contracts.json",
+            "sha256": "f94b3dc57a3f979c68f8f7ae74f2c8976e3b2784b27070e4fdebe371a7c04b1c"
+          },
+          {
+            "path": "Mcp-Plus-Plus/tests-py/integration/test_assume_guarantee_contracts.py",
+            "sha256": "d106030e619abda67099f49685bfd0cde5b8b17370bf0ccd9d6aa7bc135a0ef5"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-049",
+        "role": "translation_safety_relation",
+        "paths": [
+          {
+            "path": "external/ipfs_datasets/ipfs_datasets_py/logic/translation_validation/formal_assurance.py",
+            "sha256": "faff8bd916f298bae6c1c9f28a4ef312d933abba88346ff2a7c2ee0428df62d1"
+          },
+          {
+            "path": "external/ipfs_datasets/tests/unit/logic/test_formal_assurance_translation_validation.py",
+            "sha256": "16771a27824416e5db2f1ea001db62ea12cbac31cdb6c1ee0ac194d6ff110f35"
+          }
+        ]
+      },
+      {
+        "task_id": "FACP-036",
+        "role": "generated_manifest_negative_independence_witness",
+        "paths": [
+          {
+            "path": "Mcp-Plus-Plus/tools/assurance_idl/generated_manifest.json",
+            "sha256": "df45744cf407ef7f4c74e2cb96446d15e7023abed6119f86b3067f88082ee172"
+          }
+        ]
+      }
+    ]
+  },
+  "toolchain": {
+    "schema": "facp/ccc-toolchain-binding@1",
+    "tcb_path": "implementation_plan/formal_assurance_control_plane/baseline/trusted_computing_base.json",
+    "tcb_sha256": "03f32a9e9f92e2883a67f44243e9a4d435a2a62a0dc5de4efb02611ec0cb3743",
+    "languages": [
+      "rust"
+    ],
+    "rust": {
+      "name": "rust_cargo",
+      "version": "1.95.0",
+      "cargo_raw": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+      "cargo_commit": "f2d3ce0bd7f24a49f8f72d9000448f8838c4e850",
+      "tcb_raw": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+      "role": "independent_implementation",
+      "implementation_task_id": "FACP-035",
+      "implementation_bundle": "facp/contracts/rust-codec"
+    }
+  },
+  "independent_implementation": {
+    "language": "rust",
+    "task_id": "FACP-035",
+    "bundle": "facp/contracts/rust-codec",
+    "goal_id": "FACP-G310",
+    "validation_result_schema": "facp/translation-validation@1",
+    "codec_path": "Mcp-Plus-Plus/tests-rs/src/assurance_codec.rs",
+    "codec_sha256": "6d646a034fba3419a5e6bcdb3943d96de9aa0dc29ddac380d67d6b47e894c925",
+    "test_path": "Mcp-Plus-Plus/tests-rs/tests/assurance_translation_validation_test.rs",
+    "test_sha256": "2ee9aa87a4cf216ecaae4cd911d1d4d1c95d9ef5036c387c1e52e288b60d983b",
+    "cargo_test_name": "assurance_translation_validation_test",
+    "crate_dir": "Mcp-Plus-Plus/tests-rs",
+    "maintenance": "hand_authored_not_generator_owned",
+    "pass": true,
+    "independence_relationship": {
+      "schema": "facp/independence-relationship@1",
+      "not_generated_binding": true,
+      "absent_from_generated_manifest_owned_paths": true,
+      "generated_manifest_path": "Mcp-Plus-Plus/tools/assurance_idl/generated_manifest.json",
+      "generated_manifest_sha256": "df45744cf407ef7f4c74e2cb96446d15e7023abed6119f86b3067f88082ee172",
+      "compiler_identity_bound_separately": true,
+      "compiler_task_id": "FACP-034",
+      "compiler_bundle": "facp/contracts/compiler",
+      "does_not_trust_generator_without_validation": true,
+      "does_not_import_assurance_idl_compiler": true,
+      "distinct_from_python_reference_codec": true,
+      "distinct_from_facp036_generated_projections": true,
+      "content_bound": true,
+      "reading": "Rust assurance_codec (FACP-035 / facp/contracts/rust-codec) is the hand-maintained independent implementation of facp/dag-cbor-profile@1. FACP-036 generated projections under Mcp-Plus-Plus/tools/assurance_idl/generated/ are generator-owned and are not used as independent conformance evidence for release qualification."
+    }
+  },
+  "vector_execution": {
+    "vectors_path": "Mcp-Plus-Plus/conformance/vectors/assurance-canonical-encoding.json",
+    "vectors_sha256": "49b4c32f774f2e096a88f1c219377e87776ccab0166ebb981047aa896210f805",
+    "vectors_schema": "facp/assurance-canonical-encoding-vectors@1",
+    "profile": "facp/dag-cbor-profile@1",
+    "positive_vector_count": 12,
+    "negative_vector_count": 17,
+    "mutation_vector_count": 4,
+    "pass": true,
+    "canonical_identity_match": true,
+    "error_codes_match": true,
+    "positive_cases": [
+      {
+        "id": "empty_map",
+        "cid": "bafyreigbtj4x7ip5legnfznufuopl4sg4knzc2cof6duas4b3q2fy6swua",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "bools_null",
+        "cid": "bafyreidg4dawcsfsujszlv5xuhgiwrgcsat7wshdtuutcz3omxr7rdmr7q",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "sorted_len_then_lex",
+        "cid": "bafyreidpxecqvzu63ziw5cy2jqkfmhegzfbj37hvqlbx3n22wrl2yznvvq",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "int_boundaries",
+        "cid": "bafyreib5dqorbgf7ws3v57vbvw4zkwpwwz4ecgairaozp4ql2zyhgdetjm",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "bytes_value",
+        "cid": "bafyreicmwp5wbjojdms4iqlqv4zzj6bg4yxswa37om3npu2xf6sbfk32su",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "inner_link_target",
+        "cid": "bafyreibjk2zm52hfizr454i2vrctndr2q2oimlwxu36s3or2icabptr6by",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "ipld_link_wrap",
+        "cid": "bafyreiar7ey7pff4cuqr6uhh2muopjbvspgyqoqjprr3osg7dyujmg4tsa",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "opspec_identity_core",
+        "cid": "bafyreidoekiti334iknk3kopzwgg6iknipag2seeqsregyofju5utzx7ye",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "evidence_envelope_product",
+        "cid": "bafyreiguuepnw7ifbeotkdjv7wzaikbi2ovj3jc6l6bd7wtwlzp7ivaqpa",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "admission_token_links",
+        "cid": "bafyreiatqqn3qgbt2sgz6serm2eo2en55bfv3psmwjzu2c22kgnmvcdpv4",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "effect_receipt_link",
+        "cid": "bafyreibefqz4mp2w6fueax77edu7pmwtszqqdwzroxqhkahv4v2npwz57e",
+        "cid_family": "assurance_signed_dag_cbor",
+        "canonical_identity_match": true
+      },
+      {
+        "id": "opaque_raw_bytes",
+        "cid": "bafkreifojmzibzlof6xyh5auu3r5vpu5l67brf3fitaf73isdlglqw2t7q",
+        "cid_family": "assurance_opaque_raw",
+        "canonical_identity_match": true
+      }
+    ],
+    "negative_cases": [
+      {
+        "id": "indefinite_map",
+        "expected_error": "NON_DEFINITE_LENGTH",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "indefinite_string",
+        "expected_error": "NON_DEFINITE_LENGTH",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "duplicate_map_key",
+        "expected_error": "DUPLICATE_MAP_KEY",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "unsorted_map_keys_lex",
+        "expected_error": "UNSORTED_MAP_KEYS",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "unsorted_map_keys_length",
+        "expected_error": "UNSORTED_MAP_KEYS",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "non_minimal_integer",
+        "expected_error": "NON_MINIMAL_INTEGER",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "forbidden_float_1_5",
+        "expected_error": "FORBIDDEN_FLOAT",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "forbidden_float_neg_zero",
+        "expected_error": "FORBIDDEN_FLOAT",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "forbidden_tag_43",
+        "expected_error": "FORBIDDEN_TAG",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "cid_link_missing_identity_multibase",
+        "expected_error": "INVALID_CID_LINK",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "float_in_logical_value",
+        "expected_error": "FORBIDDEN_FLOAT",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "non_string_map_key",
+        "expected_error": "NON_STRING_MAP_KEY",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "pseudo_cid_raw_hex",
+        "expected_error": "PSEUDO_CID",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "pseudo_cid_qm",
+        "expected_error": "PSEUDO_CID",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "wrong_family_dag_json_for_signed_bytes",
+        "expected_error": "WRONG_CID_FAMILY",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "non_canonical_cid_text_uppercase",
+        "expected_error": "NON_CANONICAL_CID_TEXT",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "unknown_field_opspec",
+        "expected_error": "UNKNOWN_FIELD",
+        "rejected": true,
+        "error_match": true
+      }
+    ],
+    "mutations": [
+      {
+        "id": "flip_one_canonical_byte",
+        "expected_error": "MALLEABLE_ENCODING",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "substitute_indefinite_for_empty_map",
+        "expected_error": "NON_DEFINITE_LENGTH",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "reorder_keys_same_logical_value",
+        "expected_error": "UNSORTED_MAP_KEYS",
+        "rejected": true,
+        "error_match": true
+      },
+      {
+        "id": "cid_bit_flip_vs_retained_bytes",
+        "expected_error": "WRONG_CID_FAMILY",
+        "rejected": true,
+        "error_match": true
+      }
+    ],
+    "stable_error_codes": [
+      "NON_DEFINITE_LENGTH",
+      "DUPLICATE_MAP_KEY",
+      "UNSORTED_MAP_KEYS",
+      "NON_MINIMAL_INTEGER",
+      "FORBIDDEN_FLOAT",
+      "FORBIDDEN_TAG",
+      "INVALID_CID_LINK",
+      "NON_STRING_MAP_KEY",
+      "MALLEABLE_ENCODING",
+      "WRONG_CID_FAMILY",
+      "NON_CANONICAL_CID_TEXT",
+      "PSEUDO_CID",
+      "UNKNOWN_FIELD",
+      "REGEX_ONLY_CID"
+    ],
+    "stable_error_codes_bound": true,
+    "cargo_observation": {
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--test",
+        "assurance_translation_validation_test",
+        "--",
+        "--nocapture"
+      ],
+      "returncode": 0,
+      "required_markers_observed": [
+        "every_positive_vector_round_trips_with_exact_cid",
+        "every_negative_and_mutation_vector_is_rejected",
+        "independent_translation_validation_confirms_all_vectors",
+        "does_not_trust_generator_without_validation",
+        "test result: ok."
+      ]
+    }
+  },
+  "composition_contracts": {
+    "task_id": "FACP-048",
+    "goal_id": "FACP-G620",
+    "schema": "facp/repository-contracts@1",
+    "bundle": "facp/composition/contracts",
+    "path": "Mcp-Plus-Plus/schemas/assurance/v1/repository-contracts.json",
+    "sha256": "f94b3dc57a3f979c68f8f7ae74f2c8976e3b2784b27070e4fdebe371a7c04b1c",
+    "fail_closed": true,
+    "discovery_via_repository_import_forbidden": true,
+    "relevant_guarantees": [
+      "guarantee:mcp.normative_contract_registry",
+      "guarantee:datasets.translation_receipt_names_loss"
+    ],
+    "relevant_assumptions": [
+      "assumption:datasets.canonical_contracts",
+      "assumption:accelerate.operation_spec_closed",
+      "assumption:swissknife.datasets_translation"
+    ],
+    "relevant_boundaries": [
+      "boundary:datasets->mcp.contracts",
+      "boundary:accelerate->mcp.contracts",
+      "boundary:swissknife->datasets.translation"
+    ],
+    "does_not_discharge_live_effect_observation": true,
+    "reading": "Independent wire conformance supports MCP normative-contract ownership assumed by Datasets/Accelerate composition boundaries; hermetic vector pass does not discharge live effect observation or network interoperability."
+  },
+  "translation_safety": {
+    "task_id": "FACP-049",
+    "goal_id": "FACP-G630",
+    "bundle": "facp/translation/validation",
+    "module_path": "external/ipfs_datasets/ipfs_datasets_py/logic/translation_validation/formal_assurance.py",
+    "module_sha256": "faff8bd916f298bae6c1c9f28a4ef312d933abba88346ff2a7c2ee0428df62d1",
+    "evidence_schemas": [
+      "facp/translation-receipt@1",
+      "facp/deontic-refinement@1",
+      "facp/rewrite-trust@1"
+    ],
+    "silent_drop_forbidden": true,
+    "permission_broadening_forbidden": true,
+    "heuristic_rewrite_not_admitted_to_proof_extraction": true,
+    "claim_equivalence_without_criteria_forbidden": true,
+    "precondition_pass": true,
+    "reading": "Translation-safety relation (FACP-049) is a sealed precondition for release qualification; FACP-058 binds its module identity and safety flags without re-authoring translation logic."
+  },
+  "canonical_contract_gate": {
+    "task_id": "FACP-037",
+    "goal_id": "FACP-G310",
+    "schema": "facp/contract-conformance@1",
+    "bundle": "facp/contracts/gate",
+    "path": "implementation_plan/formal_assurance_control_plane/gates/canonical_contracts_v1.json",
+    "sha256": "5d6f55df46a4c194965d5cbc75b3b9c9334f2ea6288786816e2925b0a13c6ef9",
+    "gate_content_sha256": "3c6ad5fa1a9361a90ab44e7504a44901f92328465e461ab328f236e3ba6459e6",
+    "status_required": "sealed",
+    "status_observed": "sealed",
+    "independent_validator_section_pass": true,
+    "precondition_pass": true
+  },
+  "assumptions": [
+    "Host cargo registry cache already satisfies --offline (no network fetch during qualification).",
+    "FACP-037, FACP-048, and FACP-049 artifacts are immutable inputs on the same planning forest.",
+    "No network interoperability or production-readiness claim is implied by hermetic vector pass.",
+    "Python reference codec remains distinct from the independent Rust implementation under test."
+  ],
+  "failures": [],
+  "acceptance": {
+    "independent_implementation_passes_full_required_vector_set": true,
+    "canonical_identity_and_errors_match": true,
+    "independence_relationship_documented_and_content_bound": true,
+    "composition_contracts_bound": true,
+    "translation_safety_precondition_bound": true,
+    "canonical_contract_gate_precondition_bound": true,
+    "release_blocked_with_counterexamples_if_fail": true,
+    "network_interoperability_not_claimed": true
+  },
+  "content_binding": {
+    "alg": "sha256",
+    "canonicalization": "json-sort-keys-separators-comma-colon",
+    "covers": "gate_record_excluding_content_sha256"
+  },
+  "content_sha256": "765b6cc7a33b44ffa46b3078b0f7f9f54823a8b2c6970818ef91f0a5e655219f"
+}
