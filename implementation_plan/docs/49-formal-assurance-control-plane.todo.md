@@ -1673,7 +1673,7 @@ not authority.
 
 ## FACP-061 Resolve validation retry-budget failure for FACP-029
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
