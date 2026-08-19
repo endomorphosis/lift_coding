@@ -1403,7 +1403,7 @@ not authority.
 
 ## FACP-051 Add bounded counterexample-guided repair
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
