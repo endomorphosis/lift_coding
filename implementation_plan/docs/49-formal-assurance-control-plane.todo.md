@@ -215,7 +215,7 @@ not authority.
 
 ## FACP-007 Inventory release, dependency, Git, and rights qualification
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
