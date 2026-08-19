@@ -755,7 +755,7 @@ not authority.
 
 ## FACP-027 Enforce Kit current live-backend qualification
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
