@@ -377,7 +377,7 @@ not authority.
 
 ## FACP-013 Implement the executable Rust FCA kernel
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
