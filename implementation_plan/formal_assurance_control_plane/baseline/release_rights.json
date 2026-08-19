@@ -1,0 +1,760 @@
+{
+  "schema": "FACPReleaseRightsInventory@1",
+  "schema_version": "formal_assurance_control_plane.baseline.release_rights@1",
+  "task_id": "FACP-007",
+  "goal_id": "FACP-G010",
+  "bundle": "facp/inventory/release",
+  "title": "Inventory release, dependency, Git, and rights qualification",
+  "contract_version": 1,
+  "behavior_change": false,
+  "generated_at": "2026-08-19T00:00:00Z",
+  "authority": {
+    "statement": "This inventory identifies every mutable, unknown, or stale qualification input with an exact source and blocking predicate. It separates historical campaign receipts from current-tree qualification. It does not sign, publish, clear rights, or infer legal compatibility.",
+    "plan_ref": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+    "objective_ref": "FACP-G010",
+    "downstream_objective_ref": "FACP-G810",
+    "owning_repository": "root",
+    "provider_authority": "proposal-only",
+    "prohibited_effects": [
+      "fetch_or_update_dependencies",
+      "sign_or_publish",
+      "infer_legal_clearance",
+      "treat_historical_receipt_as_current_qualification",
+      "accept_mutable_vcs_dependency_as_release_input"
+    ]
+  },
+  "policy": {
+    "discovery_is_not_completion": true,
+    "correctness_from_presence": false,
+    "historical_receipt_is_not_current_qualification": true,
+    "ambiguous_rights_remain_human_blocked": true,
+    "mutable_dependency_blocks_release": true
+  },
+  "evidence_subset": [
+    "mutable_revisions",
+    "gitlink_ancestry",
+    "campaign_divergence",
+    "stale_receipts",
+    "package_repository_license_conflicts",
+    "missing_provenance",
+    "reproducibility_inputs"
+  ],
+  "source_binding": {
+    "controller_commit": "5d0f18898d98fc284e1c4756b78259c56a680315",
+    "controller_tree": "21a82fd11a2d0c7fe41b154a042f9029e9d43db6",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "required_branch": "agent/formal-assurance-control-plane",
+    "inspection_mode": "static-read-only",
+    "worktree_status": "clean-relative-to-declared-outputs",
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "gitmodules_branch": "main",
+        "scheduler_field": "mcp_plus_plus_planning_revision"
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "gitmodules_branch": "main",
+        "scheduler_field": "accelerate_planning_revision"
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "gitmodules_branch": "agent/ui-ux-ir",
+        "scheduler_field": "datasets_planning_revision"
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "gitmodules_branch": "main",
+        "scheduler_field": "kit_planning_revision"
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "gitmodules_branch": "agent/ui-ux-ir",
+        "scheduler_field": "swissknife_planning_revision"
+      }
+    ]
+  },
+  "qualification_input_classes": {
+    "mutable": "Input can change identity without a corresponding committed tree/lock update (floating branch, git+@main, unpinned nightly, dual competing locks).",
+    "unknown": "Required rights, provenance, or reproducibility fact is absent, empty, or undeclared.",
+    "stale": "Evidence exists but is bound to a different tree, expired, empty-as-current, or otherwise not current-tree qualification."
+  },
+  "qualification_inputs": [
+    {
+      "id": "qi:accelerate-git-plus-main-mutable-deps",
+      "class": "mutable",
+      "category": "mutable_revisions",
+      "title": "Accelerate install/runtime requirements pin VCS deps to floating @main",
+      "sources": [
+        {
+          "path": "external/ipfs_accelerate/install/requirements_base.txt",
+          "observed": "ipfs_kit_py @ git+https://github.com/endomorphosis/ipfs_kit_py.git@main"
+        },
+        {
+          "path": "external/ipfs_accelerate/install/requirements_cuda.txt",
+          "observed": "git+...@main for kit/model_manager/libp2p/transformers"
+        },
+        {
+          "path": "external/ipfs_accelerate/install/requirements_apple.txt",
+          "observed": "git+...@main floating VCS pins"
+        },
+        {
+          "path": "external/ipfs_accelerate/install/requirements_qualcomm.txt",
+          "observed": "git+...@main floating VCS pins"
+        },
+        {
+          "path": "external/ipfs_accelerate/install/requirements_openvino.txt",
+          "observed": "git+...@main floating VCS pins"
+        },
+        {
+          "path": "external/ipfs_accelerate/install/requirements_github_ci.txt",
+          "observed": "git+...@main floating VCS pins"
+        },
+        {
+          "path": "external/ipfs_accelerate/requirements-hf-server.txt",
+          "observed": "git+https://github.com/endomorphosis/ipfs_kit_py.git@main and datasets @main"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/requirements.txt",
+          "observed": "contains git+@main mutable VCS dependency lines"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp/requirements-mcp.txt",
+          "observed": "contains git+@main mutable VCS dependency lines"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_immutable_dependency_closure: reject when any release-consumed requirement resolves via git+URL@branch (including @main/@master) rather than an immutable commit/tag digest bound into a lock.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:accelerate-torch-nightly-mutable-index",
+      "class": "mutable",
+      "category": "mutable_revisions",
+      "title": "CUDA 13.0 torch nightly index is an unpinned mutable channel",
+      "sources": [
+        {
+          "path": "external/ipfs_accelerate/install/requirements_torch_cu130_nightly.txt",
+          "observed": "--index-url https://download.pytorch.org/whl/nightly/cu130 with unpinned torch/torchvision/torchaudio"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_immutable_dependency_closure: reject nightly/unpinned wheel indexes as release dependency inputs.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:gitmodules-floating-branch-tracking",
+      "class": "mutable",
+      "category": "mutable_revisions",
+      "title": ".gitmodules declares floating branch tracking alongside pinned gitlinks",
+      "sources": [
+        {
+          "path": ".gitmodules",
+          "field": "submodule.*.branch",
+          "observed": "external/ipfs_kit=main; external/ipfs_accelerate=main; Mcp-Plus-Plus=main; external/ipfs_datasets=agent/ui-ux-ir; swissknife=agent/ui-ux-ir"
+        },
+        {
+          "path": "config/formal_assurance_control_plane_scheduler.json",
+          "field": "source_binding.*_planning_revision",
+          "observed": "exact commit pins for the five planning-forest gitlinks"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_exact_source_forest: branch-named submodule tracking is not a release pin; only the committed gitlink SHA may qualify, and any consumer that follows .gitmodules branch tips is blocked.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:swissknife-competing-lockfiles",
+      "class": "mutable",
+      "category": "mutable_revisions",
+      "title": "SwissKnife ships competing npm/yarn/pnpm lockfiles under one packageManager claim",
+      "sources": [
+        {
+          "path": "swissknife/package.json",
+          "field": "packageManager",
+          "observed": "npm@10.8.2"
+        },
+        {
+          "path": "swissknife/package-lock.json",
+          "observed": "present"
+        },
+        {
+          "path": "swissknife/yarn.lock",
+          "observed": "present"
+        },
+        {
+          "path": "swissknife/pnpm-lock.yaml",
+          "observed": "present"
+        },
+        {
+          "path": "swissknife/web/package-lock.json",
+          "observed": "present nested lock"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_single_immutable_lock_authority: reject when multiple package-manager locks coexist for the same package tree without an explicit sole lock authority bound into the release.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:accelerate-local-branch-tip-diverges-from-gitlink",
+      "class": "mutable",
+      "category": "campaign_divergence",
+      "title": "Local accelerate origin/main tip diverges from the pinned planning gitlink",
+      "sources": [
+        {
+          "path": "external/ipfs_accelerate",
+          "field": "gitlink",
+          "observed": "a7942225417cac69936c933088b09f10f9fa3ae6"
+        },
+        {
+          "path": "external/ipfs_accelerate",
+          "field": "refs/heads/main",
+          "observed": "19eddcc8385dcf18d10996306fe616ac520df0fd",
+          "divergence": {
+            "tip_ahead_of_gitlink": 1264,
+            "gitlink_ahead_of_tip": 2,
+            "merge_base": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84"
+          }
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_exact_gitlink_not_branch_tip: qualification uses only the committed gitlink; following a diverged branch tip or campaign head is blocked.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:datasets-local-branch-tip-diverges-from-gitlink",
+      "class": "stale",
+      "category": "campaign_divergence",
+      "title": "Datasets agent/ui-ux-ir local tip is an ancestor of the pinned gitlink (campaign drift)",
+      "sources": [
+        {
+          "path": "external/ipfs_datasets",
+          "field": "gitlink",
+          "observed": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+        },
+        {
+          "path": "external/ipfs_datasets",
+          "field": "refs/heads/agent/ui-ux-ir",
+          "observed": "d144be65ffe4c6423e4e1c30cd692812607343eb",
+          "divergence": {
+            "tip_ahead_of_gitlink": 0,
+            "gitlink_ahead_of_tip": 1621,
+            "merge_base": "d144be65ffe4c6423e4e1c30cd692812607343eb"
+          }
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_gitlink_ancestry_clarity: a floating campaign branch tip that is not identical to the gitlink cannot authorize release; only the exact gitlink commit qualifies.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:swissknife-local-branch-tip-diverges-from-gitlink",
+      "class": "stale",
+      "category": "campaign_divergence",
+      "title": "SwissKnife agent/ui-ux-ir local tip is an ancestor of the pinned gitlink",
+      "sources": [
+        {
+          "path": "swissknife",
+          "field": "gitlink",
+          "observed": "afdbf885175fde34505ef05a2ea6aac5535ad03e"
+        },
+        {
+          "path": "swissknife",
+          "field": "refs/heads/agent/ui-ux-ir",
+          "observed": "f46e37b4723c64c5ace018e63e548602bbd86bb6",
+          "divergence": {
+            "tip_ahead_of_gitlink": 0,
+            "gitlink_ahead_of_tip": 25,
+            "merge_base": "f46e37b4723c64c5ace018e63e548602bbd86bb6"
+          }
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_gitlink_ancestry_clarity: campaign branch tips that disagree with the committed gitlink are non-qualifying for release.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:kit-kernel-vfs-release-receipt-stale-vs-gitlink",
+      "class": "stale",
+      "category": "stale_receipts",
+      "title": "Kernel VFS release receipt binds an ancestral implementation baseline, not the current kit gitlink",
+      "sources": [
+        {
+          "path": "external/ipfs_kit/docs/kernel_vfs/release_receipt.json",
+          "field": "source_evidence.implementation_baseline.commit",
+          "observed": "3b6d9824dccb0202c551f0ef9c77717ce3a18297"
+        },
+        {
+          "path": "external/ipfs_kit",
+          "field": "gitlink",
+          "observed": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "relationship": "receipt baseline is an ancestor; 46 commits separate baseline from current gitlink"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_current_tree_receipt: historical receipts whose bound commit/tree != current planning gitlink are stale evidence and cannot satisfy current-tree qualification.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false,
+      "historical_receipt_ref": "historical:kit-kernel-vfs-release-receipt"
+    },
+    {
+      "id": "qi:kit-external-backend-receipts-empty",
+      "class": "stale",
+      "category": "stale_receipts",
+      "title": "Kit external backend receipt authority is explicitly empty",
+      "sources": [
+        {
+          "path": "external/ipfs_kit/docs/runtime_readiness/backend_external_receipts/index.json",
+          "field": "receipts",
+          "observed": []
+        },
+        {
+          "path": "implementation_plan/formal_assurance_control_plane/baseline/kit_evidence.json",
+          "field": "honest_distinctions.receipt_freshness.external_receipt_authority.active_receipts",
+          "observed": 0
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_current_live_capability_receipts: an empty external receipt registry is not current production evidence; live capability claims remain blocked.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:kit-release-candidate-receipt-historical",
+      "class": "stale",
+      "category": "stale_receipts",
+      "title": "Kit runtime-readiness release-candidate receipt is a prior campaign artifact",
+      "sources": [
+        {
+          "path": "external/ipfs_kit/docs/runtime_readiness/release_candidate_receipt.json",
+          "field": "schema",
+          "observed": "ipfs_kit_py/runtime-readiness/release-candidate-receipt@1"
+        },
+        {
+          "path": "external/ipfs_kit/docs/runtime_readiness/release_candidate_receipt.json",
+          "field": "task_id",
+          "observed": "KITA-046"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.forbid_historical_campaign_receipt: KITA-046 release-candidate evidence cannot satisfy FACP current-tree qualification without a fresh binding to the planning gitlink.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false,
+      "historical_receipt_ref": "historical:kit-release-candidate-receipt"
+    },
+    {
+      "id": "qi:kit-soak-chaos-receipt-historical",
+      "class": "stale",
+      "category": "stale_receipts",
+      "title": "Kit soak/chaos receipt is historical campaign evidence",
+      "sources": [
+        {
+          "path": "external/ipfs_kit/docs/runtime_readiness/soak_chaos_receipt.json",
+          "field": "schema",
+          "observed": "ipfs_kit_py/runtime-readiness/soak-chaos-receipt@1"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.forbid_historical_campaign_receipt: soak/chaos receipts remain historical unless rebound to the exact current source forest and environment.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false,
+      "historical_receipt_ref": "historical:kit-soak-chaos-receipt"
+    },
+    {
+      "id": "qi:iroh-release-receipts-historical",
+      "class": "stale",
+      "category": "stale_receipts",
+      "title": "Iroh release receipts bundle is dated campaign evidence for a prior release_bundle",
+      "sources": [
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/resources/iroh-release-receipts.json",
+          "field": "release_bundle",
+          "observed": "iroh-1.0.2-ipfs-kit.1"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/resources/iroh-release-receipts.json",
+          "field": "recorded_at",
+          "observed": "2026-07-13T00:00:00Z"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/resources/iroh-release-receipts.json",
+          "field": "task_id",
+          "observed": "IROH-027"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.forbid_historical_campaign_receipt: IROH-027 receipts are not current-tree FACP qualification and cannot promote live Iroh support alone.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false,
+      "historical_receipt_ref": "historical:kit-iroh-release-receipts"
+    },
+    {
+      "id": "qi:wpd-terminal-release-receipt-historical",
+      "class": "stale",
+      "category": "stale_receipts",
+      "title": "Worker-planner-doctor terminal release receipt is a prior campaign artifact",
+      "sources": [
+        {
+          "path": "implementation_plan/docs/47-wpd-terminal-release-receipt.json",
+          "field": "schema",
+          "observed": "ipfs_accelerate_py/agent-supervisor/worker-planner-doctor-release-receipt@1"
+        },
+        {
+          "path": "implementation_plan/docs/47-wpd-terminal-release-receipt.json",
+          "field": "verdict",
+          "observed": "pass"
+        },
+        {
+          "path": "implementation_plan/docs/47-wpd-terminal-release-receipt.json",
+          "field": "promotion_allowed",
+          "observed": true
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.forbid_historical_campaign_receipt: a prior WPD pass/promotion_allowed receipt cannot satisfy the FACP terminal release theorem for the current source forest.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false,
+      "historical_receipt_ref": "historical:wpd-terminal-release-receipt"
+    },
+    {
+      "id": "qi:datasets-package-vs-repository-license-conflict",
+      "class": "unknown",
+      "category": "package_repository_license_conflicts",
+      "title": "ipfs_datasets_py declares MIT in package metadata while repository LICENSE is AGPL-3.0",
+      "sources": [
+        {
+          "path": "external/ipfs_datasets/pyproject.toml",
+          "field": "project.license.text",
+          "observed": "MIT"
+        },
+        {
+          "path": "external/ipfs_datasets/LICENSE",
+          "field": "license_text_header",
+          "observed": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3"
+        },
+        {
+          "path": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+          "field": "section_2_current_tree_starting_evidence",
+          "observed": "Its declared package license and repository license also conflict."
+        }
+      ],
+      "blocking_predicate": "RightsIR.conflict_or_unknown_blocks_release: package SPDX/license metadata that disagrees with the repository LICENSE file is an unresolved rights conflict and remains human-blocked; machine clearance is forbidden.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:root-license-file-without-package-metadata",
+      "class": "unknown",
+      "category": "package_repository_license_conflicts",
+      "title": "Root repository has AGPL-3.0 LICENSE but pyproject declares no package license",
+      "sources": [
+        {
+          "path": "LICENSE",
+          "field": "license_text_header",
+          "observed": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3"
+        },
+        {
+          "path": "pyproject.toml",
+          "field": "project.license",
+          "observed": null
+        },
+        {
+          "path": "pyproject.toml",
+          "field": "project.name",
+          "observed": "handsfree-dev-companion"
+        }
+      ],
+      "blocking_predicate": "RightsIR.require_declared_package_and_repository_license_agreement: missing package license metadata against a present repository LICENSE is unknown rights input and blocks automated release clearance.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:swissknife-missing-license-and-provenance",
+      "class": "unknown",
+      "category": "missing_provenance",
+      "title": "SwissKnife has empty package license, missing LICENSE file, and broken README license pointer",
+      "sources": [
+        {
+          "path": "swissknife/package.json",
+          "field": "license",
+          "observed": ""
+        },
+        {
+          "path": "swissknife/LICENSE",
+          "observed": "missing"
+        },
+        {
+          "path": "swissknife/LICENSE.md",
+          "observed": "missing"
+        },
+        {
+          "path": "swissknife/README.md",
+          "field": "License section",
+          "observed": "claims AGPL License via LICENSE.md which does not exist"
+        }
+      ],
+      "blocking_predicate": "RightsIR.missing_license_or_provenance_blocks_release: empty/missing license declaration and missing LICENSE artifact leave rights unresolved; SwissKnife cannot be release-admitted until SPDX/rights and provenance are explicit.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:mcp-plusplus-missing-license-file",
+      "class": "unknown",
+      "category": "missing_provenance",
+      "title": "MCP++ README claims MIT LICENSE file that is absent from the tree",
+      "sources": [
+        {
+          "path": "Mcp-Plus-Plus/README.md",
+          "field": "License section",
+          "observed": "This project is licensed under the MIT License - see the LICENSE file for details."
+        },
+        {
+          "path": "Mcp-Plus-Plus/LICENSE",
+          "observed": "missing"
+        },
+        {
+          "path": "Mcp-Plus-Plus/LICENSE.md",
+          "observed": "missing"
+        }
+      ],
+      "blocking_predicate": "RightsIR.missing_license_artifact_blocks_release: README license claims without a present LICENSE file are unknown rights inputs and remain human-blocked.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:missing-portfolio-lock-and-sbom",
+      "class": "unknown",
+      "category": "reproducibility_inputs",
+      "title": "No portfolio lock or SBOM binds the immutable dependency/provenance closure",
+      "sources": [
+        {
+          "path": "portfolio.lock.json",
+          "observed": "missing"
+        },
+        {
+          "path": "sbom.json",
+          "observed": "missing"
+        },
+        {
+          "path": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+          "observed": "missing (FACP-056 output not yet present)"
+        },
+        {
+          "path": "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json",
+          "observed": "missing (FACP-056 output not yet present)"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_immutable_lock_and_signed_provenance: absence of portfolio.lock / SBOM / provenance policy blocks reproducible release qualification.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:mcp-plusplus-tests-rs-missing-cargo-lock",
+      "class": "unknown",
+      "category": "reproducibility_inputs",
+      "title": "MCP++ Rust test crate has Cargo.toml without Cargo.lock",
+      "sources": [
+        {
+          "path": "Mcp-Plus-Plus/tests-rs/Cargo.toml",
+          "observed": "present"
+        },
+        {
+          "path": "Mcp-Plus-Plus/tests-rs/Cargo.lock",
+          "observed": "missing"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_language_lockfiles_for_release_surfaces: a release-consumed Rust crate without Cargo.lock lacks an immutable dependency closure.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false
+    },
+    {
+      "id": "qi:unchecked-out-nonplanning-gitlinks",
+      "class": "unknown",
+      "category": "missing_provenance",
+      "title": "Non-planning gitlinks exist in the controller tree but are empty checkouts",
+      "sources": [
+        {
+          "path": "external/meta-wearables-dat-android",
+          "field": "gitlink",
+          "observed": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+          "checkout": "empty"
+        },
+        {
+          "path": "external/meta-wearables-dat-ios",
+          "field": "gitlink",
+          "observed": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+          "checkout": "empty"
+        },
+        {
+          "path": "hallucinate_app",
+          "field": "gitlink",
+          "observed": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+          "checkout": "empty"
+        }
+      ],
+      "blocking_predicate": "ReleaseAdmissible.require_declared_forest_completeness: any gitlink included in a release claim must be present, content-addressed, and rights-resolved; empty checkouts are unknown provenance and cannot be silently omitted if referenced by the release surface.",
+      "blocks_release": true,
+      "legal_clearance_inferred": false,
+      "notes": "FACP scheduler planning forest excludes these paths; they still appear as committed gitlinks and remain unresolved if a release claim reaches them."
+    }
+  ],
+  "historical_receipts": [
+    {
+      "id": "historical:kit-kernel-vfs-release-receipt",
+      "path": "external/ipfs_kit/docs/kernel_vfs/release_receipt.json",
+      "schema": "KernelVFSReleaseReceipt@1",
+      "bound_commit": "3b6d9824dccb0202c551f0ef9c77717ce3a18297",
+      "current_kit_gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "current_tree_qualification_authority": false,
+      "disposition": "historical_stale_evidence",
+      "reason": "Binds an ancestral KVFS implementation baseline; completion_authoritative is false; live production remains conditional on current receipts."
+    },
+    {
+      "id": "historical:kit-release-candidate-receipt",
+      "path": "external/ipfs_kit/docs/runtime_readiness/release_candidate_receipt.json",
+      "schema": "ipfs_kit_py/runtime-readiness/release-candidate-receipt@1",
+      "task_id": "KITA-046",
+      "current_tree_qualification_authority": false,
+      "disposition": "historical_campaign_receipt",
+      "reason": "Prior runtime-readiness campaign artifact; not rebound to the FACP planning forest."
+    },
+    {
+      "id": "historical:kit-soak-chaos-receipt",
+      "path": "external/ipfs_kit/docs/runtime_readiness/soak_chaos_receipt.json",
+      "schema": "ipfs_kit_py/runtime-readiness/soak-chaos-receipt@1",
+      "current_tree_qualification_authority": false,
+      "disposition": "historical_campaign_receipt",
+      "reason": "Soak/chaos evidence is immutable failure-or-campaign history until freshly bound."
+    },
+    {
+      "id": "historical:kit-iroh-release-receipts",
+      "path": "external/ipfs_kit/ipfs_kit_py/resources/iroh-release-receipts.json",
+      "schema": "./iroh-release-receipts.schema.json",
+      "task_id": "IROH-027",
+      "release_bundle": "iroh-1.0.2-ipfs-kit.1",
+      "recorded_at": "2026-07-13T00:00:00Z",
+      "current_tree_qualification_authority": false,
+      "disposition": "historical_campaign_receipt",
+      "reason": "Dated Iroh release-bundle receipts are not FACP current-tree live qualification."
+    },
+    {
+      "id": "historical:wpd-terminal-release-receipt",
+      "path": "implementation_plan/docs/47-wpd-terminal-release-receipt.json",
+      "schema": "ipfs_accelerate_py/agent-supervisor/worker-planner-doctor-release-receipt@1",
+      "verdict": "pass",
+      "promotion_allowed": true,
+      "current_tree_qualification_authority": false,
+      "disposition": "historical_campaign_receipt",
+      "reason": "Plan terminal release theorem forbids historical campaign receipts from satisfying the current composed release predicate."
+    },
+    {
+      "id": "historical:facp-v2-namespace-failure-evidence",
+      "path": "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md",
+      "field": "section_2_namespaces",
+      "observed": "formal_assurance_control_plane_v2 attempt records remain preserved; controller now uses v3",
+      "current_tree_qualification_authority": false,
+      "disposition": "immutable_failure_evidence",
+      "reason": "Earlier supervisor namespaces are immutable failure evidence, not current qualification."
+    }
+  ],
+  "current_tree_qualification": {
+    "authority_statement": "Only evidence bound to the exact controller tree and planning-forest gitlinks may qualify. Historical receipts listed above are excluded from this section.",
+    "planning_forest_pins_present": true,
+    "live_capability_receipts_current": false,
+    "immutable_dependency_closure_present": false,
+    "rights_resolved": false,
+    "reproducible_provenance_present": false,
+    "release_admissible": false,
+    "blocking_qualification_input_ids": [
+      "qi:accelerate-git-plus-main-mutable-deps",
+      "qi:accelerate-torch-nightly-mutable-index",
+      "qi:gitmodules-floating-branch-tracking",
+      "qi:swissknife-competing-lockfiles",
+      "qi:accelerate-local-branch-tip-diverges-from-gitlink",
+      "qi:datasets-local-branch-tip-diverges-from-gitlink",
+      "qi:swissknife-local-branch-tip-diverges-from-gitlink",
+      "qi:kit-kernel-vfs-release-receipt-stale-vs-gitlink",
+      "qi:kit-external-backend-receipts-empty",
+      "qi:kit-release-candidate-receipt-historical",
+      "qi:kit-soak-chaos-receipt-historical",
+      "qi:iroh-release-receipts-historical",
+      "qi:wpd-terminal-release-receipt-historical",
+      "qi:datasets-package-vs-repository-license-conflict",
+      "qi:root-license-file-without-package-metadata",
+      "qi:swissknife-missing-license-and-provenance",
+      "qi:mcp-plusplus-missing-license-file",
+      "qi:missing-portfolio-lock-and-sbom",
+      "qi:mcp-plusplus-tests-rs-missing-cargo-lock",
+      "qi:unchecked-out-nonplanning-gitlinks"
+    ],
+    "required_future_artifacts": [
+      "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+      "implementation_plan/formal_assurance_control_plane/release/qualification/rights_ir.json",
+      "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+      "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json"
+    ]
+  },
+  "rights_summary": {
+    "machine_clearance_allowed": false,
+    "human_review_required": true,
+    "conflicts": [
+      {
+        "id": "rights:datasets-mit-vs-agpl",
+        "qualification_input_id": "qi:datasets-package-vs-repository-license-conflict",
+        "package_license": "MIT",
+        "repository_license": "AGPL-3.0",
+        "status": "conflict"
+      }
+    ],
+    "missing": [
+      {
+        "id": "rights:swissknife-undeclared",
+        "qualification_input_id": "qi:swissknife-missing-license-and-provenance",
+        "status": "missing"
+      },
+      {
+        "id": "rights:mcp-plusplus-license-file-missing",
+        "qualification_input_id": "qi:mcp-plusplus-missing-license-file",
+        "claimed": "MIT",
+        "status": "missing_artifact"
+      },
+      {
+        "id": "rights:root-package-license-undeclared",
+        "qualification_input_id": "qi:root-license-file-without-package-metadata",
+        "repository_license": "AGPL-3.0",
+        "package_license": null,
+        "status": "undeclared_package_metadata"
+      }
+    ],
+    "aligned_observations": [
+      {
+        "id": "rights:kit-agpl-aligned",
+        "package": "ipfs_kit_py",
+        "package_license": "AGPL-3.0-or-later",
+        "repository_license": "AGPL-3.0",
+        "status": "apparently_aligned",
+        "note": "Alignment observation only; not a legal clearance."
+      },
+      {
+        "id": "rights:accelerate-agpl-aligned",
+        "package": "ipfs_accelerate_py",
+        "package_license": "GNU Affero General Public License v3 or later (AGPLv3+)",
+        "repository_license": "AGPL-3.0",
+        "status": "apparently_aligned",
+        "note": "Alignment observation only; not a legal clearance."
+      }
+    ]
+  },
+  "acceptance": {
+    "every_mutable_unknown_stale_input_has_exact_source": true,
+    "every_mutable_unknown_stale_input_has_blocking_predicate": true,
+    "historical_receipts_separated_from_current_tree_qualification": true,
+    "legal_clearance_inferred": false,
+    "release_admissible_claimed": false
+  },
+  "downstream_tasks": [
+    "FACP-008",
+    "FACP-055",
+    "FACP-056",
+    "FACP-060"
+  ]
+}
