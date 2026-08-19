@@ -1268,7 +1268,7 @@ not authority.
 
 ## FACP-046 Enforce protocol/runtime trace conformance
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
