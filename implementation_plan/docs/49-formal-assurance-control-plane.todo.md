@@ -431,7 +431,7 @@ not authority.
 
 ## FACP-015 Adapt Kit evidence and proof-role records to FCA
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
