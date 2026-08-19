@@ -404,7 +404,7 @@ not authority.
 
 ## FACP-014 Adapt existing supervisor assurance records to FCA
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
