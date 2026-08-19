@@ -1592,7 +1592,7 @@ not authority.
 
 ## FACP-058 Validate an independent cross-language conformance implementation
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
