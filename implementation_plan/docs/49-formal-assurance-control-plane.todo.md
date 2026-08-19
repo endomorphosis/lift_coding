@@ -971,7 +971,7 @@ not authority.
 
 ## FACP-035 Add Rust codec and independent translation validation
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
