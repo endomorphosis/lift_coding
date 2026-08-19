@@ -45,7 +45,7 @@ CONTROLLER = Path("scripts/formal_assurance_control_plane_supervisor.sh")
 TASK_PREFIX = "FACP-"
 GOAL_PREFIX = "FACP-G"
 BOARD_NAMESPACE = "formal-assurance-control-plane-v1"
-RUNTIME_ROOT = "data/agent_supervisor/formal_assurance_control_plane_v2"
+RUNTIME_ROOT = "data/agent_supervisor/formal_assurance_control_plane_v3"
 ROOT_GOAL = "FACP-G000"
 BOOTSTRAP_TASK = "FACP-000"
 INITIAL_READY = tuple(f"FACP-{index:03d}" for index in range(1, 8))
@@ -365,6 +365,7 @@ def validate() -> dict[str, object]:
         expected_provider = {
             "primary_provider_id": "grok_cli",
             "primary_model_id": "grok-4.5",
+            "primary_executable": "/home/barberb/.local/bin/grok",
             "fallback_provider_id": "codex",
             "fallback_model_id": "gpt-5.6-terra",
             "fallback_trigger": "primary_quota_exhausted",

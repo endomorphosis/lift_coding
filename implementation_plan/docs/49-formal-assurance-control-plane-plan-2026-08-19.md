@@ -65,9 +65,15 @@ scheduler's explicit authority selection.
 The first post-parser bootstrap exposed a second sealed-route mismatch before
 any provider was dispatched: this pinned daemon admits the reviewed quota-only
 route only with Codex reasoning effort `high`. The controller therefore seals
-that exact tuple and uses the fresh `formal_assurance_control_plane_v2`
-runtime namespace. The prior namespace is retained as failure evidence rather
-than deleting or silently resetting its consumed attempt records.
+that exact tuple. Its first provider-readiness wave then encountered transient
+Grok readiness failures before dispatch, while the following wave reached
+provider command construction. Those attempt records remain preserved in the
+`formal_assurance_control_plane_v2` namespace. The controller now uses the
+fresh `formal_assurance_control_plane_v3` namespace, validates the authenticated
+Grok/Codex route immediately before launch, and carries the tracked absolute
+Grok executable path through the sealed provider environment. Earlier
+namespaces remain immutable failure evidence rather than being deleted or
+silently reset.
 
 ## 3. Target flow and trusted computing base
 

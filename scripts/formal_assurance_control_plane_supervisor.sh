@@ -5,7 +5,7 @@ FACP_ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)"
 FACP_CONFIG="config/formal_assurance_control_plane_scheduler.json"
 FACP_SCHEDULER="$FACP_ROOT/external/ipfs_accelerate/scripts/ops/agent_supervisor/configured_board_scheduler.py"
 FACP_VALIDATOR="$FACP_ROOT/scripts/validate_formal_assurance_control_plane_board.py"
-FACP_RUNTIME="$FACP_ROOT/data/agent_supervisor/formal_assurance_control_plane_v2"
+FACP_RUNTIME="$FACP_ROOT/data/agent_supervisor/formal_assurance_control_plane_v3"
 FACP_STATE="$FACP_RUNTIME/state"
 FACP_LOGS="$FACP_RUNTIME/logs"
 FACP_MASTER_PID="$FACP_STATE/configured-board-master.pid"
@@ -15,7 +15,7 @@ export PYTHONHASHSEED=0
 export IPFS_DATASETS_AUTO_INSTALL=false
 export IPFS_AUTO_INSTALL=false
 export IPFS_DATASETS_PY_MINIMAL_IMPORTS=1
-export IPFS_ACCELERATE_AGENT_GROK_BIN="${IPFS_ACCELERATE_AGENT_GROK_BIN:-/home/barberb/.local/bin/grok}"
+export IPFS_ACCELERATE_AGENT_GROK_BIN="/home/barberb/.local/bin/grok"
 export PYTHONPATH="$FACP_ROOT/external/ipfs_accelerate:$FACP_ROOT/external/ipfs_datasets:$FACP_ROOT/external/ipfs_kit${PYTHONPATH:+:$PYTHONPATH}"
 
 facp_scheduler() {
@@ -119,6 +119,42 @@ PY
 facp_doctor() {
   python3 "$FACP_VALIDATOR" --check-all
   facp_scheduler preflight
+  python3 - "$IPFS_ACCELERATE_AGENT_GROK_BIN" <<'PY'
+import json
+import shutil
+import sys
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import asdict
+
+from ipfs_accelerate_py.llm_router import probe_grok_codex_agent_route_readiness
+
+codex = shutil.which("codex")
+
+def probe(_lane: int):
+    return probe_grok_codex_agent_route_readiness(
+        grok_bin=sys.argv[1],
+        codex_bin=codex,
+        grok_model="grok-4.5",
+        codex_model="gpt-5.6-terra",
+        codex_reasoning_effort="high",
+    )
+
+with ThreadPoolExecutor(max_workers=4) as executor:
+    readiness = tuple(executor.map(probe, range(4)))
+payload = {
+    "schema": "facp/provider-readiness@1",
+    "lane_count": len(readiness),
+    "lanes": [asdict(item) for item in readiness],
+}
+print(json.dumps(payload, default=str, sort_keys=True))
+if not all(
+    item.grok_ready
+    and item.codex_ready
+    and item.effective_provider == "grok"
+    for item in readiness
+):
+    raise SystemExit(69)
+PY
 }
 
 facp_start() {

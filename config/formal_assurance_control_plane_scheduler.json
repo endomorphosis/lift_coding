@@ -13,7 +13,7 @@
     "mcp_plus_plus_submodule_path": "Mcp-Plus-Plus",
     "mcp_plus_plus_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
     "accelerate_submodule_path": "external/ipfs_accelerate",
-    "accelerate_planning_revision": "90999f423d86ac7ac0b1b45f1babea0ed4c90097",
+    "accelerate_planning_revision": "a7942225417cac69936c933088b09f10f9fa3ae6",
     "datasets_submodule_path": "external/ipfs_datasets",
     "datasets_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
     "kit_submodule_path": "external/ipfs_kit",
@@ -77,15 +77,16 @@
     "scripts/formal_assurance_control_plane_supervisor.sh"
   ],
   "runtime_paths": {
-    "root": "data/agent_supervisor/formal_assurance_control_plane_v2",
-    "state": "data/agent_supervisor/formal_assurance_control_plane_v2/state",
-    "worktrees": "data/agent_supervisor/formal_assurance_control_plane_v2/worktrees",
-    "merge_queue": "data/agent_supervisor/formal_assurance_control_plane_v2/merge_queue",
-    "logs": "data/agent_supervisor/formal_assurance_control_plane_v2/logs"
+    "root": "data/agent_supervisor/formal_assurance_control_plane_v3",
+    "state": "data/agent_supervisor/formal_assurance_control_plane_v3/state",
+    "worktrees": "data/agent_supervisor/formal_assurance_control_plane_v3/worktrees",
+    "merge_queue": "data/agent_supervisor/formal_assurance_control_plane_v3/merge_queue",
+    "logs": "data/agent_supervisor/formal_assurance_control_plane_v3/logs"
   },
   "provider": {
     "primary_provider_id": "grok_cli",
     "primary_model_id": "grok-4.5",
+    "primary_executable": "/home/barberb/.local/bin/grok",
     "fallback_provider_id": "codex",
     "fallback_model_id": "gpt-5.6-terra",
     "fallback_trigger": "primary_quota_exhausted",
