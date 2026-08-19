@@ -728,7 +728,7 @@ not authority.
 
 ## FACP-026 Replace Accelerate pseudo-CID paths
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
