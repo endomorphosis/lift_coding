@@ -1,0 +1,560 @@
+{
+  "schema_version": "facp-datasets-claims/v1",
+  "task_id": "FACP-003",
+  "title": "Inventory Datasets import, outcome, and rights defects",
+  "bundle": "facp/inventory/datasets",
+  "behavior_change": false,
+  "discovery_is_not_completion": true,
+  "source_binding": {
+    "repository": "external/ipfs_datasets",
+    "package": "ipfs_datasets_py",
+    "gitlink_path": "external/ipfs_datasets",
+    "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "binding_rule": "Exact committed gitlink in the controller worktree; dirty legacy checkouts are not authority."
+  },
+  "evidence_subset": [
+    "module-top-level effects",
+    "installer reachability",
+    "PATH/environment writes",
+    "download/upload fallbacks",
+    "semantic results",
+    "MIT/AGPL declarations"
+  ],
+  "prohibited_conclusions": [
+    "package_installation",
+    "network_during_inventory",
+    "source_mutation",
+    "legal_compatibility_inference"
+  ],
+  "rights_conflict": {
+    "defect_id": "DS-RIGHTS-001",
+    "disposition": "unresolved_human_legal_review",
+    "inferred_compatibility": false,
+    "summary": "Package metadata declares MIT while the repository LICENSE and README declare AGPL-3.0; mechanical compatibility must not be inferred.",
+    "declarations": [
+      {
+        "path": "external/ipfs_datasets/pyproject.toml",
+        "symbol": "project.license",
+        "line_start": 10,
+        "line_end": 10,
+        "quote": "license = {text = \"MIT\"}",
+        "declared_license": "MIT"
+      },
+      {
+        "path": "external/ipfs_datasets/LICENSE",
+        "symbol": "repository_license_header",
+        "line_start": 1,
+        "line_end": 2,
+        "quote": "GNU AFFERO GENERAL PUBLIC LICENSE",
+        "declared_license": "AGPL-3.0"
+      },
+      {
+        "path": "external/ipfs_datasets/README.md",
+        "symbol": "License section",
+        "line_start": 1169,
+        "line_end": 1171,
+        "quote": "This project is licensed under the AGPL-3.0 License",
+        "declared_license": "AGPL-3.0"
+      },
+      {
+        "path": "external/ipfs_datasets/setup.py",
+        "symbol": "classifiers",
+        "line_start": 782,
+        "line_end": 782,
+        "quote": "License :: OSI Approved :: MIT License",
+        "declared_license": "MIT"
+      }
+    ],
+    "repair_class": "human_legal_review",
+    "proposed_follow_on": ["FACP-external-rights-resolution"],
+    "notes": [
+      "Do not treat MIT packaging metadata as overriding AGPL LICENSE text.",
+      "Do not treat AGPL LICENSE text as silently compatible with MIT classifiers.",
+      "Rights remain an unresolved human legal review item for later portfolio release gates."
+    ]
+  },
+  "import_effect_traces": [
+    {
+      "defect_id": "DS-IMPORT-001",
+      "category": "import_effect",
+      "family": "module_top_level_environment_write",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "symbol": "_enable_default_auto_install",
+      "line_start": 29,
+      "line_end": 37,
+      "quote": "os.environ[\"IPFS_DATASETS_AUTO_INSTALL\"] = \"true\"",
+      "call_flow": [
+        "import ipfs_datasets_py",
+        "_enable_default_auto_install()",
+        "set IPFS_DATASETS_AUTO_INSTALL and IPFS_KIT_AUTO_INSTALL_DEPS when unset"
+      ],
+      "production_reachability": "package_import_default",
+      "effects": [
+        "writes process environment defaults enabling auto-install",
+        "enables kit dependency auto-install ambiently"
+      ],
+      "counterexample_seed": {
+        "id": "cx-ds-import-auto-install-default-on",
+        "oracle": "Cold import with unset auto-install env must not enable installer defaults; observed legacy enables them."
+      },
+      "repair_class": "import_purity",
+      "proposed_follow_on": ["FACP-021", "FACP-022"]
+    },
+    {
+      "defect_id": "DS-IMPORT-002",
+      "category": "import_effect",
+      "family": "installer_construction_path_and_fs_mutation",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "symbol": "get_installer",
+      "line_start": 186,
+      "line_end": 199,
+      "quote": "installer = get_installer()",
+      "secondary_spans": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/auto_installer.py",
+          "symbol": "DependencyInstaller.__init__",
+          "line_start": 117,
+          "line_end": 145,
+          "quote": "self.bin_dir.mkdir(parents=True, exist_ok=True)"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/auto_installer.py",
+          "symbol": "DependencyInstaller._ensure_bin_on_path",
+          "line_start": 231,
+          "line_end": 243,
+          "quote": "os.environ['PATH'] = os.pathsep.join(new_parts + parts)"
+        }
+      ],
+      "call_flow": [
+        "import ipfs_datasets_py (non-minimal)",
+        "from .auto_installer import get_installer",
+        "DependencyInstaller.__init__",
+        "mkdir bin/deps/npm",
+        "_ensure_bin_on_path"
+      ],
+      "production_reachability": "package_import_default_unless_minimal_imports",
+      "effects": [
+        "filesystem mkdir under project bin/deps",
+        "process PATH mutation"
+      ],
+      "counterexample_seed": {
+        "id": "cx-ds-import-installer-path-mkdir",
+        "oracle": "Write-denied cold import must not create installer directories or rewrite PATH."
+      },
+      "repair_class": "explicit_initialization",
+      "proposed_follow_on": ["FACP-022"]
+    },
+    {
+      "defect_id": "DS-IMPORT-003",
+      "category": "import_effect",
+      "family": "installer_reachability_pip_subprocess",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/auto_installer.py",
+      "symbol": "DependencyInstaller._pip_install",
+      "line_start": 1110,
+      "line_end": 1143,
+      "quote": "sys.executable, '-m', 'pip', 'install', package_spec",
+      "secondary_spans": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/auto_installer.py",
+          "symbol": "ensure_module",
+          "line_start": 1538,
+          "line_end": 1567,
+          "quote": "success, module = installer.ensure_dependency(module_name, package_name, system_deps)"
+        }
+      ],
+      "call_flow": [
+        "ensure_module / lazy_import",
+        "get_installer().ensure_dependency",
+        "_pip_install via subprocess"
+      ],
+      "production_reachability": "reachable_after_import_when_auto_install_enabled",
+      "effects": [
+        "subprocess pip install",
+        "network and package mutation when auto-install is enabled"
+      ],
+      "counterexample_seed": {
+        "id": "cx-ds-import-pip-reachability",
+        "oracle": "Missing optional module must yield Unavailable/Failed without pip/network when auto-install is denied."
+      },
+      "repair_class": "explicit_initialization",
+      "proposed_follow_on": ["FACP-021", "FACP-022"]
+    },
+    {
+      "defect_id": "DS-IMPORT-004",
+      "category": "import_effect",
+      "family": "persistent_user_path_write",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/auto_installer.py",
+      "symbol": "DependencyInstaller._add_to_user_path",
+      "line_start": 862,
+      "line_end": 894,
+      "quote": "subprocess.run(['setx', 'PATH', new_user_path]",
+      "call_flow": [
+        "DependencyInstaller local binary install helpers",
+        "_add_to_user_path",
+        "winreg.SetValueEx and/or setx PATH"
+      ],
+      "production_reachability": "windows_installer_paths",
+      "effects": [
+        "persistent user PATH mutation beyond process lifetime"
+      ],
+      "counterexample_seed": {
+        "id": "cx-ds-import-persistent-path",
+        "oracle": "Library import/install helpers must not mutate durable user PATH."
+      },
+      "repair_class": "explicit_initialization",
+      "proposed_follow_on": ["FACP-022"]
+    },
+    {
+      "defect_id": "DS-IMPORT-005",
+      "category": "import_effect",
+      "family": "runtime_installer_bootstrap_write",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/auto_installer.py",
+      "symbol": "ensure_repo_installer_current",
+      "line_start": 1475,
+      "line_end": 1524,
+      "quote": "_save_runtime_installer_state",
+      "secondary_spans": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/auto_installer.py",
+          "symbol": "_save_runtime_installer_state",
+          "line_start": 108,
+          "line_end": 111,
+          "quote": "marker_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\")"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+          "symbol": "ensure_repo_installer_current",
+          "line_start": 197,
+          "line_end": 199,
+          "quote": "ensure_repo_installer_current()"
+        }
+      ],
+      "call_flow": [
+        "import ipfs_datasets_py",
+        "ensure_repo_installer_current()",
+        "optional companion bootstrap helpers",
+        "write state/runtime_installer_state.json when gated on"
+      ],
+      "production_reachability": "import_reachable_when_IPFS_DATASETS_ENSURE_INSTALLER_truthy_or_force",
+      "effects": [
+        "persistent state write",
+        "optional companion package bootstrap"
+      ],
+      "counterexample_seed": {
+        "id": "cx-ds-import-runtime-installer-state",
+        "oracle": "Cold import with installer bootstrap denied must not write runtime installer state."
+      },
+      "repair_class": "explicit_initialization",
+      "proposed_follow_on": ["FACP-021", "FACP-022"]
+    }
+  ],
+  "false_success_spans": [
+    {
+      "defect_id": "DS-FALSE-001",
+      "category": "false_success",
+      "family": "download_fallback_stub_success",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "symbol": "_FallbackIPFSDatasets.download_dataset",
+      "line_start": 211,
+      "line_end": 217,
+      "quote": "return {\"status\": \"success\", \"dataset\": None}",
+      "call_flow": [
+        "IPFSDatasets attribute resolution under missing deps or minimal imports",
+        "_FallbackIPFSDatasets.download_dataset / upload_dataset",
+        "success-shaped stub without durable transfer"
+      ],
+      "production_reachability": "lazy_export_fallback_and_minimal_imports",
+      "outcome_shape": {
+        "success_fields": ["status=success"],
+        "durable_effect": false
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-fallback-download-upload",
+        "oracle": "Missing backend download/upload must not return status=success."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    },
+    {
+      "defect_id": "DS-FALSE-002",
+      "category": "false_success",
+      "family": "download_placeholder_success",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/core_operations/ipfs_getter.py",
+      "symbol": "IPFSGetter.get",
+      "line_start": 63,
+      "line_end": 71,
+      "quote": "\"message\": \"Content retrieved successfully\"",
+      "call_flow": [
+        "IPFSGetter.get",
+        "TODO placeholder",
+        "return status=success without IPFS I/O"
+      ],
+      "production_reachability": "core_operations_api",
+      "outcome_shape": {
+        "success_fields": ["status=success"],
+        "durable_effect": false
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-ipfs-getter-placeholder",
+        "oracle": "Unimplemented get must return Unavailable/Failed, never success."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    },
+    {
+      "defect_id": "DS-FALSE-003",
+      "category": "false_success",
+      "family": "upload_placeholder_success",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/core_operations/dataset_saver.py",
+      "symbol": "DatasetSaver.save",
+      "line_start": 59,
+      "line_end": 67,
+      "quote": "\"message\": \"Dataset saved successfully\"",
+      "call_flow": [
+        "DatasetSaver.save",
+        "TODO placeholder",
+        "return status=success without durable write"
+      ],
+      "production_reachability": "core_operations_api",
+      "outcome_shape": {
+        "success_fields": ["status=success"],
+        "durable_effect": false
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-dataset-saver-placeholder",
+        "oracle": "Unimplemented save must not claim success."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    },
+    {
+      "defect_id": "DS-FALSE-004",
+      "category": "false_success",
+      "family": "upload_mock_cid_success",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/core_operations/ipfs_pinner.py",
+      "symbol": "IPFSPinner.pin",
+      "line_start": 72,
+      "line_end": 78,
+      "quote": "mock_cid = f\"Qm{hash(str(content_source)) % 1000000000:09d}\"",
+      "secondary_spans": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/core_operations/ipfs_pinner.py",
+          "symbol": "IPFSPinner._pin_direct",
+          "line_start": 142,
+          "line_end": 168,
+          "quote": "using mock response"
+        }
+      ],
+      "call_flow": [
+        "IPFSPinner.pin / _pin_direct",
+        "missing methods or exception",
+        "fabricated Qm CID with status=success"
+      ],
+      "production_reachability": "core_operations_api",
+      "outcome_shape": {
+        "success_fields": ["status=success", "cid"],
+        "durable_effect": false,
+        "pseudo_cid": true
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-pinner-mock-cid",
+        "oracle": "Pin/upload failure must not mint pseudo-CID success."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    },
+    {
+      "defect_id": "DS-FALSE-005",
+      "category": "false_success",
+      "family": "download_mock_content_success",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/tools/ipfs_tools/get_from_ipfs.py",
+      "symbol": "get_from_ipfs",
+      "line_start": 140,
+      "line_end": 155,
+      "quote": "\"content\": f\"Mock content for CID {cid}\"",
+      "call_flow": [
+        "get_from_ipfs direct integration branch",
+        "missing method or exception",
+        "mock content with status=success"
+      ],
+      "production_reachability": "mcp_tool_surface",
+      "outcome_shape": {
+        "success_fields": ["status=success", "content"],
+        "durable_effect": false
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-get-from-ipfs-mock",
+        "oracle": "Failed IPFS get must not return mock content as success."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    },
+    {
+      "defect_id": "DS-FALSE-006",
+      "category": "false_success",
+      "family": "cluster_upload_download_mock_success",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/tools/ipfs_cluster_tools/enhanced_ipfs_cluster_tools.py",
+      "symbol": "manage_ipfs_content",
+      "line_start": 97,
+      "line_end": 118,
+      "quote": "mock_cid = f\"Qm{hashlib.sha256(content.encode()).hexdigest()[:44]}\"",
+      "call_flow": [
+        "manage_ipfs_content upload/download/verify",
+        "fabricated CID or mock content",
+        "outer status=success including integrity_valid True without check"
+      ],
+      "production_reachability": "mcp_cluster_tool_surface",
+      "outcome_shape": {
+        "success_fields": ["status=success", "cid", "integrity_valid"],
+        "durable_effect": false,
+        "pseudo_cid": true
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-cluster-mock-upload-download",
+        "oracle": "Cluster upload/download/verify without backends must not claim success or integrity."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    },
+    {
+      "defect_id": "DS-FALSE-007",
+      "category": "false_success",
+      "family": "dataset_tool_mock_save_success",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/tools/dataset_tools/save_dataset.py",
+      "symbol": "save_dataset",
+      "line_start": 130,
+      "line_end": 137,
+      "quote": "dataset_id = f\"mock_dataset_{hash(str(dataset_data))}\"",
+      "call_flow": [
+        "save_dataset with direct data",
+        "mock_dataset id",
+        "status=success without durable write"
+      ],
+      "production_reachability": "mcp_dataset_tool_surface",
+      "outcome_shape": {
+        "success_fields": ["status=success", "dataset_id"],
+        "durable_effect": false
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-save-dataset-mock",
+        "oracle": "Mock dataset save must not report success."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    },
+    {
+      "defect_id": "DS-FALSE-008",
+      "category": "false_success",
+      "family": "simulated_upload_cid",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/ipfs_backend_router.py",
+      "symbol": "_AccelerateBackend.add_bytes",
+      "line_start": 402,
+      "line_end": 408,
+      "quote": "return a deterministic simulated CID",
+      "secondary_spans": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/ipfs_backend_router.py",
+          "symbol": "_IPFSKitBackend.add_bytes",
+          "line_start": 586,
+          "line_end": 590,
+          "quote": "return _simulated_cid(data)"
+        }
+      ],
+      "call_flow": [
+        "backend add_bytes",
+        "IPFS unavailable or add failure",
+        "return Qm{sha256...} simulated CID"
+      ],
+      "production_reachability": "ipfs_backend_router_accelerate_and_kit_paths",
+      "outcome_shape": {
+        "success_fields": ["returned_cid"],
+        "durable_effect": false,
+        "pseudo_cid": true
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-simulated-cid",
+        "oracle": "Unavailable IPFS add must not return a success-shaped simulated CID."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    },
+    {
+      "defect_id": "DS-FALSE-009",
+      "category": "false_success",
+      "family": "semantic_result_simulated_success",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/embeddings/semantic_search_engine.py",
+      "symbol": "semantic_search",
+      "line_start": 50,
+      "line_end": 83,
+      "quote": "\"note\": \"Simulated semantic search - full implementation requires vector store integration\"",
+      "secondary_spans": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/embeddings/semantic_search_engine.py",
+          "symbol": "multi_modal_search",
+          "line_start": 132,
+          "line_end": 177,
+          "quote": "simulated_results"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/embeddings/semantic_search_engine.py",
+          "symbol": "hybrid_search",
+          "line_start": 226,
+          "line_end": 301,
+          "quote": "\"status\": \"success\""
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/embeddings/semantic_search_engine.py",
+          "symbol": "search_with_filters",
+          "line_start": 343,
+          "line_end": 413,
+          "quote": "\"status\": \"success\""
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/tools/embedding_tools/advanced_search.py",
+          "symbol": "reexport",
+          "line_start": 7,
+          "line_end": 18,
+          "quote": "semantic_search"
+        }
+      ],
+      "call_flow": [
+        "semantic_search / multi_modal_search / hybrid_search / search_with_filters",
+        "fabricate results",
+        "status=success without vector-store observation",
+        "MCP advanced_search re-export"
+      ],
+      "production_reachability": "embeddings_api_and_mcp_tool_surface",
+      "outcome_shape": {
+        "success_fields": ["status=success", "results"],
+        "durable_effect": false,
+        "semantic_authority": "simulated"
+      },
+      "counterexample_seed": {
+        "id": "cx-ds-false-semantic-simulated",
+        "oracle": "Simulated semantic hits must not promote as Observed/Verified success."
+      },
+      "repair_class": "fca_outcomes",
+      "proposed_follow_on": ["FACP-023"]
+    }
+  ],
+  "reproducibility": {
+    "import_effect_traces": "Each import_effect record binds path/symbol/line span/quote against the exact gitlink commit; tests re-read those spans.",
+    "false_success_spans": "Each false_success record binds path/symbol/line span/quote; tests re-read those spans and reject success-shaped claims without durable effect.",
+    "cold_import_probe": {
+      "allowed": true,
+      "constraints": [
+        "network denied",
+        "process spawn denied where practical",
+        "write denied where practical",
+        "auto-install environment disabled for probe"
+      ],
+      "purpose": "Demonstrate ambient auto-install defaulting without performing package installation."
+    }
+  },
+  "current_tests": [],
+  "notes": [
+    "Inventory discovery is not repair completion.",
+    "Rights conflict is explicitly unresolved_human_legal_review.",
+    "Follow-on migration tasks FACP-021/022/023 own remediation."
+  ]
+}
