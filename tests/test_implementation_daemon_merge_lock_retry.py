@@ -169,10 +169,6 @@ def test_failed_merge_reconciliation_ignores_removed_todo_tasks(tmp_path):
         "validation_result": {"attempted": True, "passed": True},
         "merge_result": {"merged": False, "attempted": True, "reason": "merge_conflict"},
     }
-    events_path.write_text(
-        "\n".join(json.dumps(event) for event in [removed_event, blocked_event, live_event]),
-        encoding="utf-8",
-    )
     daemon = Daemon(
         todo_path=todo_path,
         state_path=tmp_path / "state.json",
@@ -183,6 +179,18 @@ def test_failed_merge_reconciliation_ignores_removed_todo_tasks(tmp_path):
     )
     daemon._main_branch_name = lambda: "main"
     daemon._git_ref_is_ancestor = lambda _commit, _target: False
+
+    # Reconciliation is revision-bound: a display task ID alone no longer
+    # authorizes a historical event to affect the current task contract.
+    current = {task.task_id: task for task in daemon._load_tasks()}
+    for event in (live_event, blocked_event):
+        identity = daemon._identity_for_task(current[event["task_id"]])
+        event["canonical_task_key"] = identity.canonical_task_key
+        event["canonical_task_cid"] = identity.canonical_task_cid
+    events_path.write_text(
+        "\n".join(json.dumps(event) for event in [removed_event, blocked_event, live_event]),
+        encoding="utf-8",
+    )
 
     candidates = daemon._failed_merge_candidates()
     assert [c.get("task_id") for c in candidates] == [live_event["task_id"]]

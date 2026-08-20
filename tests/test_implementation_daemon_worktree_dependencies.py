@@ -177,6 +177,7 @@ def test_missing_validation_worktree_is_recorded_without_implementation_exceptio
         events_path=tmp_path / "events.jsonl",
         repo_root=repo_root,
         worktree_root=worktree_root,
+        implement=True,
     )
     monkeypatch.setattr(
         daemon, "_record_event", lambda event, payload: events.append((event, payload))

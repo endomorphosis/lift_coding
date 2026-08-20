@@ -148,10 +148,18 @@ def validate(chapter: str, registry: str) -> list[str]:
 
     for profile in ("C (UCAN)", "D (policy)", "E (transport)", "F (provenance)", "G (scheduling)"):
         require(profile in chapter, f"composition rule missing for Profile {profile[0]}")
+    execution_boundary_recheck = bool(
+        re.search(
+            r"Re-run\s+time-sensitive\s+policy\s+and\s+Profile G\s+"
+            r"lease/fence\s+checks\s+immediately\s+before\s+the\s+"
+            r"side-effect\s+boundary",
+            chapter,
+        )
+    )
     require(
         "authorize before" in chapter
         and "before settlement" in chapter
-        and "before execution" in chapter,
+        and ("before execution" in chapter or execution_boundary_recheck),
         "authorization ordering is incomplete",
     )
     require("MUST NOT grant identity" in chapter, "payment-as-authorization prohibition is missing")

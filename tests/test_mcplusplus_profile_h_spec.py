@@ -52,3 +52,15 @@ def test_profile_composition_cannot_be_removed() -> None:
     chapter = chapter.replace("**G (scheduling):**", "**Scheduling:**")
     failures = _module().validate(chapter, registry)
     assert "composition rule missing for Profile G" in failures
+
+
+def test_execution_boundary_authorization_recheck_cannot_be_removed() -> None:
+    chapter, registry = _texts()
+    mutated = chapter.replace(
+        "checks immediately before\n   the side-effect boundary",
+        "checks only after\n   the side-effect boundary",
+        1,
+    )
+    assert mutated != chapter
+    failures = _module().validate(mutated, registry)
+    assert "authorization ordering is incomplete" in failures
