@@ -1,0 +1,442 @@
+{
+  "schema": "facp/portfolio-lock@1",
+  "schema_version": 1,
+  "task_id": "FACP-056",
+  "goal_id": "FACP-G810",
+  "bundle": "facp/release/supply-chain",
+  "title": "Immutable portfolio lock for release qualification",
+  "vocabulary_schema": "facp/formal-claim-algebra-v1@1",
+  "provenance_policy_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json",
+  "release_predicate_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+  "inventory_ref": "implementation_plan/formal_assurance_control_plane/baseline/release_rights.json",
+  "generated_at": "2026-08-19T00:00:00Z",
+  "behavior_change": false,
+  "authority": {
+    "statement": "This portfolio lock is the sole declared authority for release-consumed dependency identity. Only digest-bound immutable entries may qualify. Mutable VCS refs, nightly indexes, competing lockfiles without a sole authority, and missing language locks are recorded as typed blockers and never admitted. This artifact does not sign, publish, fetch dependencies, or claim production release admissibility.",
+    "provider_authority": "none",
+    "prohibited_effects": [
+      "resolve_mutable_branch_during_build",
+      "accept_mutable_vcs_dependency_as_release_input",
+      "claim_reproducibility_from_one_build",
+      "include_credential",
+      "sign_or_publish_production_release",
+      "fetch_or_update_dependencies"
+    ]
+  },
+  "policy": {
+    "fail_closed": true,
+    "digest_bound_required": true,
+    "mutable_ref_forbidden": true,
+    "single_lock_authority_required": true,
+    "competing_locks_block_without_sole_authority": true,
+    "reproducibility_from_one_build_forbidden": true,
+    "missing_language_lock_blocks_release_surface": true,
+    "scheduler_planning_revision_is_release_pin": true,
+    "observed_gitlink_divergence_is_blocker_when_mismatched": true
+  },
+  "evidence_subset": [
+    "commits",
+    "gitlinks",
+    "package_locks",
+    "content_hashes",
+    "toolchains",
+    "environment",
+    "instructions",
+    "sbom",
+    "bit_identity"
+  ],
+  "source_binding": {
+    "controller_commit": "e90f73bb1449832cf992ca9a6687207d0469ff88",
+    "controller_tree": "da28c6ec49729aeaccace4f149b5d21e1e529bf2",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "scheduler_config_sha256": "a76085554bdb72bdbb4b92a879a07a247cb0778248e6861d9195a72a24c02363",
+    "depends_on": [
+      "FACP-055"
+    ],
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "kind": "gitlink",
+        "digest_algorithm": "git-commit-sha1",
+        "digest": "2e5a448cc91e371eee9a742460ce02dfbc7005ce",
+        "scheduler_field": "mcp_plus_plus_planning_revision",
+        "scheduler_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "matches_scheduler_planning_revision": false,
+        "mutability": "immutable_commit_digest",
+        "admitted_as_release_input": true,
+        "note": "Observed gitlink digest is bound; scheduler planning revision mismatch remains a typed divergence blocker for pin authority."
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "kind": "gitlink",
+        "digest_algorithm": "git-commit-sha1",
+        "digest": "d1f3cd31364bb8781d4fc3e0604b28b72317a81c",
+        "scheduler_field": "accelerate_planning_revision",
+        "scheduler_planning_revision": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "matches_scheduler_planning_revision": false,
+        "mutability": "immutable_commit_digest",
+        "admitted_as_release_input": true,
+        "note": "Observed gitlink digest is bound; scheduler planning revision mismatch remains a typed divergence blocker for pin authority."
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "kind": "gitlink",
+        "digest_algorithm": "git-commit-sha1",
+        "digest": "fd3122c9ae2780583ec0124e952559662e616a24",
+        "scheduler_field": "datasets_planning_revision",
+        "scheduler_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "matches_scheduler_planning_revision": false,
+        "mutability": "immutable_commit_digest",
+        "admitted_as_release_input": true,
+        "note": "Observed gitlink digest is bound; scheduler planning revision mismatch remains a typed divergence blocker for pin authority."
+      },
+      {
+        "path": "external/ipfs_kit",
+        "kind": "gitlink",
+        "digest_algorithm": "git-commit-sha1",
+        "digest": "2f78e897288a0ab90b15e03e54056d69ab371c70",
+        "scheduler_field": "kit_planning_revision",
+        "scheduler_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "matches_scheduler_planning_revision": false,
+        "mutability": "immutable_commit_digest",
+        "admitted_as_release_input": true,
+        "note": "Observed gitlink digest is bound; scheduler planning revision mismatch remains a typed divergence blocker for pin authority."
+      },
+      {
+        "path": "swissknife",
+        "kind": "gitlink",
+        "digest_algorithm": "git-commit-sha1",
+        "digest": "68751041ee52c36a558738d6a0b58d142d9b1840",
+        "scheduler_field": "swissknife_planning_revision",
+        "scheduler_planning_revision": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "matches_scheduler_planning_revision": false,
+        "mutability": "immutable_commit_digest",
+        "admitted_as_release_input": true,
+        "note": "Observed gitlink digest is bound; scheduler planning revision mismatch remains a typed divergence blocker for pin authority."
+      }
+    ]
+  },
+  "dependencies": [
+    {
+      "id": "dep:controller-tree",
+      "kind": "controller_tree",
+      "path": ".",
+      "digest_algorithm": "git-tree-sha1",
+      "digest": "da28c6ec49729aeaccace4f149b5d21e1e529bf2",
+      "mutability": "immutable",
+      "admitted": true
+    },
+    {
+      "id": "dep:controller-commit",
+      "kind": "controller_commit",
+      "path": ".",
+      "digest_algorithm": "git-commit-sha1",
+      "digest": "e90f73bb1449832cf992ca9a6687207d0469ff88",
+      "mutability": "immutable",
+      "admitted": true
+    },
+    {
+      "id": "dep:release-predicate",
+      "kind": "qualification_artifact",
+      "path": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+      "digest_algorithm": "sha256",
+      "digest": "ee6b86a1a57b9c45ce7f6ca772a6749a162d7809a21370dbc39fe259fe33512a",
+      "mutability": "immutable",
+      "admitted": true
+    },
+    {
+      "id": "dep:rights-ir",
+      "kind": "qualification_artifact",
+      "path": "implementation_plan/formal_assurance_control_plane/release/qualification/rights_ir.json",
+      "digest_algorithm": "sha256",
+      "digest": "ed40ce461731433ea8af2f0145d7876d1c001b81cad3d87bd9a54af4c4a6f1ba",
+      "mutability": "immutable",
+      "admitted": true
+    },
+    {
+      "id": "dep:release-rights-inventory",
+      "kind": "qualification_artifact",
+      "path": "implementation_plan/formal_assurance_control_plane/baseline/release_rights.json",
+      "digest_algorithm": "sha256",
+      "digest": "90e4c463f8b094069a6b8c9e73af396052bfca4530e1fd1a23b6047918fe9166",
+      "mutability": "immutable",
+      "admitted": true
+    },
+    {
+      "id": "dep:root-pyproject",
+      "kind": "package_manifest",
+      "path": "pyproject.toml",
+      "digest_algorithm": "sha256",
+      "digest": "8181fe8ff2b716da6009f52207f6229d2f1fd947e74f51339652864366657e19",
+      "mutability": "immutable",
+      "admitted": true
+    },
+    {
+      "id": "dep:root-requirements-dev",
+      "kind": "version_pin_set",
+      "path": "requirements-dev.txt",
+      "digest_algorithm": "sha256",
+      "digest": "9bc38dbc68645262d0378ee42e1331c017833651471e12dedbf3ef153ed485c2",
+      "mutability": "immutable",
+      "admitted": true,
+      "pin_style": "exact_equality_versions",
+      "note": "File digest binds the exact pin set; wheel content digests are not separately sealed in this lock."
+    },
+    {
+      "id": "dep:swissknife-package-json",
+      "kind": "package_manifest",
+      "path": "swissknife/package.json",
+      "digest_algorithm": "sha256",
+      "digest": "3f12e1aa0d255b37e3b65808af412358c50e643f143edecf03a0f47a1b6c97bf",
+      "mutability": "immutable",
+      "admitted": true,
+      "package_manager_claim": "npm@10.8.2"
+    },
+    {
+      "id": "dep:swissknife-package-lock",
+      "kind": "package_lock",
+      "path": "swissknife/package-lock.json",
+      "digest_algorithm": "sha256",
+      "digest": "584a3304603b208797b50faee86f00f5a6fe987d2289f382ae4f7b93a62dbc21",
+      "mutability": "immutable",
+      "admitted": true,
+      "lock_authority_role": "sole_authority",
+      "package_tree": "swissknife"
+    },
+    {
+      "id": "dep:mcp-tests-rs-cargo-toml",
+      "kind": "package_manifest",
+      "path": "Mcp-Plus-Plus/tests-rs/Cargo.toml",
+      "digest_algorithm": "sha256",
+      "digest": "3dbb9490a3f154e5842fd8542d017c4923c445222220029ad3364a2bd5b02057",
+      "mutability": "immutable",
+      "admitted": true,
+      "note": "Manifest is digest-bound; corresponding Cargo.lock is missing and blocks release-surface reproducibility."
+    }
+  ],
+  "lock_authorities": [
+    {
+      "id": "lock-authority:swissknife-npm",
+      "package_tree": "swissknife",
+      "sole_authority_path": "swissknife/package-lock.json",
+      "sole_authority_digest_sha256": "584a3304603b208797b50faee86f00f5a6fe987d2289f382ae4f7b93a62dbc21",
+      "package_manager": "npm@10.8.2",
+      "rejected_competing_locks": [
+        {
+          "path": "swissknife/yarn.lock",
+          "digest_sha256": "8de1199f058175ec1fde7a0a71ce988ab118782c2bd929850c1961a1b1bc9dd0",
+          "reason_code": "competing_lock_authority"
+        },
+        {
+          "path": "swissknife/pnpm-lock.yaml",
+          "digest_sha256": "ab17cc697177d435dd2c3c27b820ee284e9413bea6b4f86fcafae78a8348eacf",
+          "reason_code": "competing_lock_authority"
+        }
+      ]
+    }
+  ],
+  "rejected_mutable_inputs": [
+    {
+      "id": "reject:accelerate-git-plus-main",
+      "class": "mutable",
+      "reason_code": "mutable_vcs_ref",
+      "blocker_code": "nonreproducible:mutable_dependency",
+      "paths": [
+        "external/ipfs_accelerate/install/requirements_base.txt",
+        "external/ipfs_accelerate/install/requirements_apple.txt",
+        "external/ipfs_accelerate/install/requirements_qualcomm.txt",
+        "external/ipfs_accelerate/requirements-hf-server.txt"
+      ],
+      "observed": "git+URL@main / git+URL@branch floating VCS pins",
+      "admitted": false,
+      "blocks_release": true
+    },
+    {
+      "id": "reject:accelerate-torch-nightly-index",
+      "class": "mutable",
+      "reason_code": "nightly_index",
+      "blocker_code": "nonreproducible:mutable_dependency",
+      "paths": [
+        "external/ipfs_accelerate/install/requirements_torch_cu130_nightly.txt"
+      ],
+      "path_sha256": "c3e440cf2c875e43b59a875fb707f694777e01c33ac72627d8e689e98bc7f6f0",
+      "observed": "--index-url https://download.pytorch.org/whl/nightly/cu130 with unpinned nightlies",
+      "admitted": false,
+      "blocks_release": true
+    },
+    {
+      "id": "reject:swissknife-competing-yarn-lock",
+      "class": "mutable",
+      "reason_code": "competing_lock_authority",
+      "blocker_code": "nonreproducible:competing_lock_authority",
+      "path": "swissknife/yarn.lock",
+      "digest_sha256": "8de1199f058175ec1fde7a0a71ce988ab118782c2bd929850c1961a1b1bc9dd0",
+      "admitted": false,
+      "blocks_release": true,
+      "note": "Present but rejected; sole authority is package-lock.json per packageManager npm@10.8.2."
+    },
+    {
+      "id": "reject:swissknife-competing-pnpm-lock",
+      "class": "mutable",
+      "reason_code": "competing_lock_authority",
+      "blocker_code": "nonreproducible:competing_lock_authority",
+      "path": "swissknife/pnpm-lock.yaml",
+      "digest_sha256": "ab17cc697177d435dd2c3c27b820ee284e9413bea6b4f86fcafae78a8348eacf",
+      "admitted": false,
+      "blocks_release": true,
+      "note": "Present but rejected; sole authority is package-lock.json per packageManager npm@10.8.2."
+    },
+    {
+      "id": "reject:mcp-tests-rs-missing-cargo-lock",
+      "class": "unknown",
+      "reason_code": "missing_language_lock",
+      "blocker_code": "nonreproducible:missing_lock",
+      "path": "Mcp-Plus-Plus/tests-rs/Cargo.lock",
+      "observed": "missing",
+      "related_manifest": "Mcp-Plus-Plus/tests-rs/Cargo.toml",
+      "admitted": false,
+      "blocks_release": true
+    },
+    {
+      "id": "reject:scheduler-planning-revision-divergence",
+      "class": "mutable",
+      "reason_code": "gitlink_scheduler_divergence",
+      "blocker_code": "nonreproducible:pin_authority_divergence",
+      "observed": "Every planning-forest gitlink digest differs from scheduler planning revision",
+      "admitted": false,
+      "blocks_release": true,
+      "note": "Lock binds observed gitlink digests and records divergence; release pin authority remains unresolved until they match."
+    }
+  ],
+  "sbom": {
+    "schema": "facp/sbom-summary@1",
+    "format": "facp-compact-sbom",
+    "component_count": 8,
+    "components": [
+      {
+        "name": "controller",
+        "type": "git-commit",
+        "digest": "sha1:e90f73bb1449832cf992ca9a6687207d0469ff88"
+      },
+      {
+        "name": "Mcp-Plus-Plus",
+        "type": "gitlink",
+        "digest": "sha1:2e5a448cc91e371eee9a742460ce02dfbc7005ce"
+      },
+      {
+        "name": "ipfs_accelerate",
+        "type": "gitlink",
+        "digest": "sha1:d1f3cd31364bb8781d4fc3e0604b28b72317a81c"
+      },
+      {
+        "name": "ipfs_datasets",
+        "type": "gitlink",
+        "digest": "sha1:fd3122c9ae2780583ec0124e952559662e616a24"
+      },
+      {
+        "name": "ipfs_kit",
+        "type": "gitlink",
+        "digest": "sha1:2f78e897288a0ab90b15e03e54056d69ab371c70"
+      },
+      {
+        "name": "swissknife",
+        "type": "gitlink",
+        "digest": "sha1:68751041ee52c36a558738d6a0b58d142d9b1840"
+      },
+      {
+        "name": "swissknife-package-lock",
+        "type": "npm-lock",
+        "digest": "sha256:584a3304603b208797b50faee86f00f5a6fe987d2289f382ae4f7b93a62dbc21"
+      },
+      {
+        "name": "requirements-dev",
+        "type": "pip-pin-set",
+        "digest": "sha256:9bc38dbc68645262d0378ee42e1331c017833651471e12dedbf3ef153ed485c2"
+      }
+    ]
+  },
+  "declared_artifacts": [
+    {
+      "id": "artifact:facp-portfolio-closure-v1",
+      "name": "facp-portfolio-closure-v1",
+      "media_type": "application/vnd.facp.portfolio-closure+json",
+      "build_recipe_id": "recipe:hermetic-portfolio-closure-v1",
+      "reproducibility": {
+        "required": true,
+        "method": "two_clean_environments_bit_identity",
+        "single_build_insufficient": true
+      },
+      "product_path_template": "facp-portfolio-closure-v1.json",
+      "description": "Hermetic declared artifact derived solely from digest-bound admitted lock materials and exact builder identity fields."
+    }
+  ],
+  "build_recipes": [
+    {
+      "id": "recipe:hermetic-portfolio-closure-v1",
+      "build_type": "facp/reproducible-build@1",
+      "isolation": "two_clean_temp_environments",
+      "network": false,
+      "credentials_forbidden": true,
+      "mutable_ref_resolution_forbidden": true,
+      "instructions": [
+        "Collect every admitted dependency digest from portfolio.lock.json in stable id order.",
+        "Collect planning-forest digests in path order.",
+        "Bind exact builder identity fields required by provenance_policy.json.",
+        "Emit canonical JSON object with keys builder, materials, lock_schema, artifact_id.",
+        "Write UTF-8 bytes with sorted keys, no insignificant whitespace variance beyond canonical separators.",
+        "Repeat in a second clean environment and require identical sha256."
+      ],
+      "canonical_json": {
+        "sort_keys": true,
+        "separators": [
+          ",",
+          ":"
+        ],
+        "ensure_ascii": true
+      },
+      "materials_from": [
+        "dependencies[admitted=true]",
+        "source_binding.planning_forest",
+        "declared_artifacts"
+      ],
+      "expected_outcome": "bit_identical_or_typed_nonreproducible_blocker"
+    }
+  ],
+  "toolchain": {
+    "language": "python",
+    "requires_python": ">=3.11",
+    "builder_id": "facp/hermetic-builder@1",
+    "builder_version": "1.0.0",
+    "environment_policy_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/provenance_policy.json#/builder_identity"
+  },
+  "current_tree_qualification": {
+    "immutable_dependency_closure_complete": false,
+    "all_admitted_dependencies_digest_bound": true,
+    "mutable_inputs_rejected": true,
+    "reproducible_declared_artifact_policy_present": true,
+    "signed_provenance_policy_present": true,
+    "release_admissible": false,
+    "reason": "Admitted lock entries are digest-bound, but typed nonreproducible blockers remain: mutable accelerate VCS/nightly inputs, competing SwissKnife locks, missing MCP++ tests-rs Cargo.lock, and scheduler planning-revision divergence.",
+    "blocking_codes": [
+      "nonreproducible:mutable_dependency",
+      "nonreproducible:competing_lock_authority",
+      "nonreproducible:missing_lock",
+      "nonreproducible:pin_authority_divergence"
+    ],
+    "blocking_rejection_ids": [
+      "reject:accelerate-git-plus-main",
+      "reject:accelerate-torch-nightly-index",
+      "reject:swissknife-competing-yarn-lock",
+      "reject:swissknife-competing-pnpm-lock",
+      "reject:mcp-tests-rs-missing-cargo-lock",
+      "reject:scheduler-planning-revision-divergence"
+    ]
+  },
+  "acceptance": {
+    "all_source_dependencies_immutable_and_digest_bound": true,
+    "mutable_inputs_are_typed_blockers_not_admitted": true,
+    "two_clean_environments_bit_identity_or_typed_blocker": true,
+    "sole_lock_authority_declared_for_swissknife": true,
+    "current_tree_release_admissible_claimed": false
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "schema": "facp/release-predicate@1",
+  "schema_version": 1,
+  "task_id": "FACP-055",
+  "goal_id": "FACP-G810",
+  "bundle": "facp/release/rights",
+  "title": "ReleaseAdmissible qualification predicate",
+  "predicate": "ReleaseAdmissible",
+  "vocabulary_schema": "facp/formal-claim-algebra-v1@1",
+  "rights_ir_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/rights_ir.json",
+  "inventory_ref": "implementation_plan/formal_assurance_control_plane/baseline/release_rights.json",
+  "generated_at": "2026-08-19T00:00:00Z",
+  "behavior_change": false,
+  "authority": {
+    "statement": "ReleaseAdmissible is fail-closed. Any stale proof, simulation presented as live, mutable dependency reference, missing live capability, incompatible repository contract, or unresolved mandatory rights input rejects release. Historical campaign receipts never satisfy current-tree qualification.",
+    "provider_authority": "proposal-only",
+    "prohibited_effects": [
+      "sign_or_publish",
+      "accept_mutable_vcs_dependency_as_release_input",
+      "treat_historical_receipt_as_current_qualification",
+      "simulation_as_live",
+      "infer_legal_clearance",
+      "unknown_or_conflict_to_compatible"
+    ]
+  },
+  "policy": {
+    "fail_closed": true,
+    "historical_receipt_is_not_current_qualification": true,
+    "mutable_dependency_blocks_release": true,
+    "ambiguous_rights_remain_human_blocked": true,
+    "simulation_cannot_satisfy_live": true,
+    "stale_proof_reuse_forbidden": true,
+    "contract_incompatibility_blocks_release": true,
+    "missing_capability_blocks_release": true
+  },
+  "evidence_subset": [
+    "source",
+    "lock",
+    "build_environment",
+    "tests",
+    "proofs",
+    "contracts",
+    "live_capabilities",
+    "licenses",
+    "data_rights",
+    "model_rights",
+    "attribution",
+    "share_alike",
+    "commercial",
+    "redistribution",
+    "unknown_custom"
+  ],
+  "necessary_evidence": [
+    "exact_source_binding",
+    "immutable_dependency_closure",
+    "identified_build_environment",
+    "current_proofs_and_tests",
+    "contract_compatibility",
+    "rights_resolution",
+    "reproducibility_inputs",
+    "signed_provenance"
+  ],
+  "conjuncts": [
+    {
+      "id": "exact_source_binding",
+      "requirement": "Qualification binds the exact controller tree and planning-forest gitlinks; floating branch tips do not qualify."
+    },
+    {
+      "id": "immutable_dependency_closure",
+      "requirement": "Every release-consumed dependency is content-addressed or lock-pinned; git+@branch, nightly indexes, and competing locks are rejected."
+    },
+    {
+      "id": "identified_build_environment",
+      "requirement": "Build environment identity is declared and reproducible within policy bounds."
+    },
+    {
+      "id": "current_proofs_and_tests",
+      "requirement": "Proofs and tests are current for the exact tree; stale or historical receipts are rejected."
+    },
+    {
+      "id": "contract_compatibility",
+      "requirement": "Repository assume/guarantee contracts compose without unresolved mandatory incompatibilities."
+    },
+    {
+      "id": "rights_resolution",
+      "requirement": "RightsIR dispositions for mandatory nodes are human_cleared or non-blocking observation-only; machine_block and human_review block."
+    },
+    {
+      "id": "live_capabilities",
+      "requirement": "Live capability claims require current signed live receipts; hermetic/simulated evidence cannot satisfy live."
+    },
+    {
+      "id": "reproducibility_and_provenance",
+      "requirement": "Immutable portfolio lock, reproducible build evidence, and signed provenance policy are present (FACP-056+)."
+    }
+  ],
+  "rejection_rules": [
+    {
+      "code": "stale_proof",
+      "blocks_release": true,
+      "description": "Proof or receipt freshness is stale, historical, superseded, or bound to a different tree/gitlink.",
+      "when_any": [
+        {"field": "proof_freshness", "in": ["stale", "historical", "superseded", "expired"]},
+        {"field": "proof_tree_match", "equals": false},
+        {"field": "historical_receipt_used_as_current", "equals": true}
+      ]
+    },
+    {
+      "code": "simulation_as_live",
+      "blocks_release": true,
+      "description": "Simulation, fixture, or mock origin is presented as live production qualification.",
+      "when_all": [
+        {"field": "origin", "in": ["simulated", "fixture", "mock", "declared"]},
+        {"field": "claimed_environment", "in": ["live", "production"]}
+      ]
+    },
+    {
+      "code": "mutable_ref",
+      "blocks_release": true,
+      "description": "Release inputs include mutable VCS refs, floating branches, unpinned nightlies, or competing lock authorities.",
+      "when_any": [
+        {"field": "dependency_mutability", "in": ["mutable", "floating_branch", "git_plus_branch", "nightly_index", "competing_locks"]},
+        {"field": "has_mutable_ref", "equals": true}
+      ]
+    },
+    {
+      "code": "missing_capability",
+      "blocks_release": true,
+      "description": "Required live capability receipt or admission is absent, empty, or unavailable.",
+      "when_any": [
+        {"field": "capability_status", "in": ["missing", "absent", "unavailable", "empty_registry"]},
+        {"field": "live_capability_present", "equals": false}
+      ]
+    },
+    {
+      "code": "incompatible_contract",
+      "blocks_release": true,
+      "description": "Repository contract composition fails: violated boundary, incompatible versions, or unresolved mandatory assumption.",
+      "when_any": [
+        {"field": "contract_status", "in": ["incompatible", "violated", "unresolved_mandatory"]},
+        {"field": "contracts_compatible", "equals": false}
+      ]
+    },
+    {
+      "code": "unresolved_mandatory_rights",
+      "blocks_release": true,
+      "description": "Mandatory RightsIR node remains machine_block or human_review; rights_resolution is incomplete.",
+      "when_any": [
+        {"field": "rights_disposition", "in": ["machine_block", "human_review"]},
+        {"field": "mandatory_rights_resolved", "equals": false},
+        {"field": "rights_status", "in": ["conflict", "missing", "missing_artifact", "undeclared", "unknown", "ambiguous", "custom_unparsed"]}
+      ]
+    }
+  ],
+  "rejection_code_order": [
+    "stale_proof",
+    "simulation_as_live",
+    "mutable_ref",
+    "missing_capability",
+    "incompatible_contract",
+    "unresolved_mandatory_rights"
+  ],
+  "negative_fixtures": [
+    {
+      "id": "neg:stale-proof",
+      "expect_rejected": true,
+      "expect_codes": ["stale_proof"],
+      "record": {
+        "proof_freshness": "stale",
+        "proof_tree_match": false,
+        "historical_receipt_used_as_current": true,
+        "origin": "hermetic_observed",
+        "claimed_environment": "hermetic",
+        "dependency_mutability": "immutable",
+        "has_mutable_ref": false,
+        "capability_status": "present",
+        "live_capability_present": true,
+        "contract_status": "compatible",
+        "contracts_compatible": true,
+        "rights_disposition": "human_cleared",
+        "mandatory_rights_resolved": true,
+        "rights_status": "human_cleared"
+      }
+    },
+    {
+      "id": "neg:simulation-as-live",
+      "expect_rejected": true,
+      "expect_codes": ["simulation_as_live"],
+      "record": {
+        "proof_freshness": "current",
+        "proof_tree_match": true,
+        "historical_receipt_used_as_current": false,
+        "origin": "simulated",
+        "claimed_environment": "live",
+        "dependency_mutability": "immutable",
+        "has_mutable_ref": false,
+        "capability_status": "present",
+        "live_capability_present": true,
+        "contract_status": "compatible",
+        "contracts_compatible": true,
+        "rights_disposition": "human_cleared",
+        "mandatory_rights_resolved": true,
+        "rights_status": "human_cleared"
+      }
+    },
+    {
+      "id": "neg:mutable-ref",
+      "expect_rejected": true,
+      "expect_codes": ["mutable_ref"],
+      "record": {
+        "proof_freshness": "current",
+        "proof_tree_match": true,
+        "historical_receipt_used_as_current": false,
+        "origin": "live_observed",
+        "claimed_environment": "live",
+        "dependency_mutability": "git_plus_branch",
+        "has_mutable_ref": true,
+        "capability_status": "present",
+        "live_capability_present": true,
+        "contract_status": "compatible",
+        "contracts_compatible": true,
+        "rights_disposition": "human_cleared",
+        "mandatory_rights_resolved": true,
+        "rights_status": "human_cleared"
+      }
+    },
+    {
+      "id": "neg:missing-capability",
+      "expect_rejected": true,
+      "expect_codes": ["missing_capability"],
+      "record": {
+        "proof_freshness": "current",
+        "proof_tree_match": true,
+        "historical_receipt_used_as_current": false,
+        "origin": "live_observed",
+        "claimed_environment": "live",
+        "dependency_mutability": "immutable",
+        "has_mutable_ref": false,
+        "capability_status": "empty_registry",
+        "live_capability_present": false,
+        "contract_status": "compatible",
+        "contracts_compatible": true,
+        "rights_disposition": "human_cleared",
+        "mandatory_rights_resolved": true,
+        "rights_status": "human_cleared"
+      }
+    },
+    {
+      "id": "neg:incompatible-contract",
+      "expect_rejected": true,
+      "expect_codes": ["incompatible_contract"],
+      "record": {
+        "proof_freshness": "current",
+        "proof_tree_match": true,
+        "historical_receipt_used_as_current": false,
+        "origin": "live_observed",
+        "claimed_environment": "live",
+        "dependency_mutability": "immutable",
+        "has_mutable_ref": false,
+        "capability_status": "present",
+        "live_capability_present": true,
+        "contract_status": "incompatible",
+        "contracts_compatible": false,
+        "rights_disposition": "human_cleared",
+        "mandatory_rights_resolved": true,
+        "rights_status": "human_cleared"
+      }
+    },
+    {
+      "id": "neg:unresolved-mandatory-rights",
+      "expect_rejected": true,
+      "expect_codes": ["unresolved_mandatory_rights"],
+      "record": {
+        "proof_freshness": "current",
+        "proof_tree_match": true,
+        "historical_receipt_used_as_current": false,
+        "origin": "live_observed",
+        "claimed_environment": "live",
+        "dependency_mutability": "immutable",
+        "has_mutable_ref": false,
+        "capability_status": "present",
+        "live_capability_present": true,
+        "contract_status": "compatible",
+        "contracts_compatible": true,
+        "rights_disposition": "machine_block",
+        "mandatory_rights_resolved": false,
+        "rights_status": "conflict"
+      }
+    },
+    {
+      "id": "pos:all-clear-synthetic",
+      "expect_rejected": false,
+      "expect_codes": [],
+      "synthetic_clearance_only": true,
+      "note": "Synthetic positive control proving the predicate can pass when every conjunct is satisfied; not a current-tree release claim.",
+      "record": {
+        "proof_freshness": "current",
+        "proof_tree_match": true,
+        "historical_receipt_used_as_current": false,
+        "origin": "live_observed",
+        "claimed_environment": "live",
+        "dependency_mutability": "immutable",
+        "has_mutable_ref": false,
+        "capability_status": "present",
+        "live_capability_present": true,
+        "contract_status": "compatible",
+        "contracts_compatible": true,
+        "rights_disposition": "human_cleared",
+        "mandatory_rights_resolved": true,
+        "rights_status": "human_cleared"
+      }
+    }
+  ],
+  "current_tree_qualification": {
+    "release_admissible": false,
+    "reason": "Mandatory RightsIR nodes remain unresolved; mutable refs, missing portfolio lock/provenance, and absent live capability receipts also block. This predicate documents rejection; it does not clear release.",
+    "blocking_rejection_codes": [
+      "mutable_ref",
+      "missing_capability",
+      "unresolved_mandatory_rights"
+    ],
+    "rights_ir_blocking_node_ids": [
+      "rights:datasets-mit-vs-agpl",
+      "rights:swissknife-undeclared",
+      "rights:mcp-plusplus-license-file-missing",
+      "rights:root-package-license-undeclared"
+    ]
+  },
+  "source_binding": {
+    "controller_commit": "667ce61ee2e80ef7304804fed5055afc58ab9b46",
+    "controller_tree": "b2212d5f598fd5053dac6a41c704f9bd5636e606",
+    "scheduler_config": "config/formal_assurance_control_plane_scheduler.json",
+    "depends_on": [
+      "FACP-007",
+      "FACP-031",
+      "FACP-037",
+      "FACP-044",
+      "FACP-047",
+      "FACP-048",
+      "FACP-049",
+      "FACP-050",
+      "FACP-054"
+    ],
+    "planning_forest": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "gitlink_commit": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "scheduler_field": "mcp_plus_plus_planning_revision"
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "gitlink_commit": "a7942225417cac69936c933088b09f10f9fa3ae6",
+        "scheduler_field": "accelerate_planning_revision"
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "gitlink_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "scheduler_field": "datasets_planning_revision"
+      },
+      {
+        "path": "external/ipfs_kit",
+        "gitlink_commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "scheduler_field": "kit_planning_revision"
+      },
+      {
+        "path": "swissknife",
+        "gitlink_commit": "afdbf885175fde34505ef05a2ea6aac5535ad03e",
+        "scheduler_field": "swissknife_planning_revision"
+      }
+    ]
+  },
+  "acceptance": {
+    "datasets_license_conflict_blocks_automatically": true,
+    "swissknife_missing_license_provenance_blocks_automatically": true,
+    "unknown_rights_remain_human_review": true,
+    "rejects_stale_proof": true,
+    "rejects_simulation_as_live": true,
+    "rejects_mutable_ref": true,
+    "rejects_missing_capability": true,
+    "rejects_incompatible_contract": true,
+    "rejects_unresolved_mandatory_rights": true,
+    "current_tree_release_admissible_claimed": false
+  }
+}

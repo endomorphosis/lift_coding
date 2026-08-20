@@ -1,0 +1,289 @@
+{
+  "schema": "facp/provenance-policy@1",
+  "schema_version": 1,
+  "task_id": "FACP-056",
+  "goal_id": "FACP-G810",
+  "bundle": "facp/release/supply-chain",
+  "title": "Signed provenance and reproducible-build verification policy",
+  "vocabulary_schema": "facp/reproducible-build@1",
+  "portfolio_lock_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+  "release_predicate_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/release_predicate.json",
+  "generated_at": "2026-08-19T00:00:00Z",
+  "behavior_change": false,
+  "authority": {
+    "statement": "Release qualification requires signed in-toto/SLSA-style provenance that verifies step materials, step products, and exact builder identity against the portfolio lock. Hermetic tests may generate unsigned test provenance. A single build never establishes reproducibility. Credentials must not appear in provenance. This policy does not publish or sign a production release.",
+    "provider_authority": "none",
+    "prohibited_effects": [
+      "sign_or_publish_production_release",
+      "claim_reproducibility_from_one_build",
+      "include_credential",
+      "resolve_mutable_branch_during_build",
+      "omit_material_or_product_digest",
+      "accept_builder_identity_mismatch"
+    ]
+  },
+  "policy": {
+    "fail_closed": true,
+    "require_signed_provenance_for_release": true,
+    "unsigned_test_provenance_allowed_for_hermetic_validation": true,
+    "verify_step_materials": true,
+    "verify_step_products": true,
+    "verify_exact_builder_identity": true,
+    "two_environment_bit_identity_required": true,
+    "single_build_reproducibility_claim_forbidden": true,
+    "credentials_forbidden_in_provenance": true,
+    "mutable_ref_resolution_forbidden": true,
+    "material_digests_must_match_portfolio_lock": true,
+    "product_digests_must_match_subjects": true
+  },
+  "evidence_subset": [
+    "commits",
+    "gitlinks",
+    "package_locks",
+    "content_hashes",
+    "toolchains",
+    "environment",
+    "instructions",
+    "sbom",
+    "in_toto_style_steps",
+    "slsa_style_provenance",
+    "bit_identity"
+  ],
+  "builder_identity": {
+    "required_fields": [
+      "builder_id",
+      "builder_version",
+      "builder_uri",
+      "builder_digest_sha256"
+    ],
+    "exact_match_required": true,
+    "declared": {
+      "builder_id": "facp/hermetic-builder@1",
+      "builder_version": "1.0.0",
+      "builder_uri": "facp://builders/hermetic-portfolio-closure/v1",
+      "builder_digest_sha256": "3c8f0d6f2a1b9e7c4d5a6b8c9d0e1f2a3b4c5d6e7f8091a2b3c4d5e6f7081920",
+      "build_type": "facp/reproducible-build@1"
+    },
+    "forbidden_identities": [
+      "provider-authored",
+      "unspecified",
+      "local-ad-hoc",
+      "mutable-branch-resolver"
+    ]
+  },
+  "signature_policy": {
+    "release_requires_signature": true,
+    "algorithms_allowed": [
+      "ed25519",
+      "ecdsa-p256-sha256"
+    ],
+    "test_provenance": {
+      "signature_required": false,
+      "envelope_field": "signatures",
+      "must_set_unsigned_test_provenance": true,
+      "production_release_claim_forbidden": true
+    },
+    "key_material_in_artifact_forbidden": true
+  },
+  "in_toto_style": {
+    "statement_type": "https://in-toto.io/Statement/v1",
+    "required_statement_fields": [
+      "_type",
+      "subject",
+      "predicateType",
+      "predicate"
+    ],
+    "subject_requires_name_and_sha256": true,
+    "steps": [
+      {
+        "id": "step:materialize-lock-closure",
+        "name": "materialize-lock-closure",
+        "command": "facp.portfolio.lock.materialize",
+        "materials_source": "portfolio.lock.dependencies[admitted=true]",
+        "products": [
+          "lock-closure-view"
+        ],
+        "must_verify_materials": true,
+        "must_verify_products": true
+      },
+      {
+        "id": "step:hermetic-build-declared-artifact",
+        "name": "hermetic-build-declared-artifact",
+        "command": "facp.reproducible.build.two_env",
+        "materials_source": "step:materialize-lock-closure.products",
+        "products": [
+          "artifact:facp-portfolio-closure-v1"
+        ],
+        "must_verify_materials": true,
+        "must_verify_products": true,
+        "requires_two_environments": true
+      },
+      {
+        "id": "step:attest-provenance",
+        "name": "attest-provenance",
+        "command": "facp.provenance.attest",
+        "materials_source": "step:hermetic-build-declared-artifact.products",
+        "products": [
+          "provenance-statement"
+        ],
+        "must_verify_materials": true,
+        "must_verify_products": true,
+        "must_bind_builder_identity": true
+      }
+    ]
+  },
+  "slsa_style": {
+    "predicate_type": "https://slsa.dev/provenance/v1",
+    "build_type": "facp/reproducible-build@1",
+    "required_predicate_paths": [
+      "buildDefinition.buildType",
+      "buildDefinition.externalParameters",
+      "buildDefinition.resolvedDependencies",
+      "runDetails.builder.id",
+      "runDetails.builder.version",
+      "runDetails.metadata"
+    ],
+    "resolved_dependencies_must_be_digest_bound": true,
+    "builder_id_must_equal_declared": true,
+    "external_parameters_must_reference_portfolio_lock": true
+  },
+  "verification_rules": [
+    {
+      "id": "rule:materials-match-lock",
+      "description": "Every attested material digest must equal an admitted portfolio.lock dependency or planning-forest digest.",
+      "blocks_release": true,
+      "check": "materials_digests_subseteq_admitted_lock_digests"
+    },
+    {
+      "id": "rule:products-match-subjects",
+      "description": "Every provenance subject digest must equal the corresponding step product digest.",
+      "blocks_release": true,
+      "check": "subject_digests_equal_product_digests"
+    },
+    {
+      "id": "rule:exact-builder-identity",
+      "description": "Provenance builder id, version, uri, and digest must exactly match builder_identity.declared.",
+      "blocks_release": true,
+      "check": "builder_identity_exact_match"
+    },
+    {
+      "id": "rule:two-env-bit-identity",
+      "description": "Declared artifact digests from two clean environments must be identical, otherwise emit a typed nonreproducible blocker.",
+      "blocks_release": true,
+      "check": "two_env_bit_identical_or_typed_blocker"
+    },
+    {
+      "id": "rule:no-mutable-materials",
+      "description": "Rejected mutable inputs from the portfolio lock must not appear as admitted materials.",
+      "blocks_release": true,
+      "check": "rejected_mutable_inputs_not_in_materials"
+    },
+    {
+      "id": "rule:release-signature-required",
+      "description": "Production release provenance must carry an allowed signature algorithm envelope.",
+      "blocks_release": true,
+      "check": "release_provenance_signed",
+      "waived_for": "unsigned_test_provenance"
+    }
+  ],
+  "nonreproducible_blocker_codes": [
+    "nonreproducible:mutable_dependency",
+    "nonreproducible:competing_lock_authority",
+    "nonreproducible:missing_lock",
+    "nonreproducible:pin_authority_divergence",
+    "nonreproducible:environment_nondeterminism",
+    "nonreproducible:artifact_digest_mismatch",
+    "nonreproducible:builder_identity_mismatch",
+    "nonreproducible:material_digest_mismatch",
+    "nonreproducible:product_digest_mismatch"
+  ],
+  "reproducibility": {
+    "minimum_environments": 2,
+    "environments_must_be_clean": true,
+    "bit_identical_required_for_declared_artifacts": true,
+    "typed_blocker_required_on_mismatch": true,
+    "mismatch_blocker_code": "nonreproducible:artifact_digest_mismatch",
+    "one_build_never_sufficient": true,
+    "declared_artifact_ids": [
+      "artifact:facp-portfolio-closure-v1"
+    ]
+  },
+  "hermetic_test_provenance_template": {
+    "unsigned_test_provenance": true,
+    "production_release_claim": false,
+    "statement": {
+      "_type": "https://in-toto.io/Statement/v1",
+      "predicateType": "https://slsa.dev/provenance/v1",
+      "predicate": {
+        "buildDefinition": {
+          "buildType": "facp/reproducible-build@1",
+          "externalParameters": {
+            "portfolio_lock_ref": "implementation_plan/formal_assurance_control_plane/release/qualification/portfolio.lock.json",
+            "artifact_id": "artifact:facp-portfolio-closure-v1",
+            "recipe_id": "recipe:hermetic-portfolio-closure-v1"
+          },
+          "resolvedDependencies": []
+        },
+        "runDetails": {
+          "builder": {
+            "id": "facp/hermetic-builder@1",
+            "version": {
+              "builder_version": "1.0.0",
+              "builder_uri": "facp://builders/hermetic-portfolio-closure/v1",
+              "builder_digest_sha256": "3c8f0d6f2a1b9e7c4d5a6b8c9d0e1f2a3b4c5d6e7f8091a2b3c4d5e6f7081920"
+            }
+          },
+          "metadata": {
+            "invocationId": "hermetic-test",
+            "unsigned_test_provenance": true
+          }
+        }
+      }
+    }
+  },
+  "negative_fixtures": [
+    {
+      "id": "neg:builder-identity-mismatch",
+      "expect_blocker": "nonreproducible:builder_identity_mismatch",
+      "mutation": {
+        "builder_id": "local-ad-hoc"
+      }
+    },
+    {
+      "id": "neg:material-digest-mismatch",
+      "expect_blocker": "nonreproducible:material_digest_mismatch",
+      "mutation": {
+        "material_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "id": "neg:product-digest-mismatch",
+      "expect_blocker": "nonreproducible:product_digest_mismatch",
+      "mutation": {
+        "subject_digest": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "id": "neg:single-build-reproducibility-claim",
+      "expect_rejected": true,
+      "mutation": {
+        "environment_count": 1,
+        "claim_reproducible": true
+      }
+    }
+  ],
+  "current_tree_qualification": {
+    "signed_production_provenance_present": false,
+    "unsigned_test_provenance_policy_ready": true,
+    "builder_identity_declared": true,
+    "release_admissible": false,
+    "reason": "Provenance policy is present and verifiable for hermetic test envelopes, but production signature and full immutable dependency closure remain incomplete."
+  },
+  "acceptance": {
+    "provenance_verifies_step_materials": true,
+    "provenance_verifies_step_products": true,
+    "provenance_verifies_exact_builder_identity": true,
+    "two_clean_environments_bit_identity_or_typed_blocker": true,
+    "current_tree_release_admissible_claimed": false
+  }
+}
