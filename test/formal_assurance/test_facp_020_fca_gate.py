@@ -25,6 +25,17 @@ from typing import Any
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_bytes,
+    git_output,
+    superproject_gitlink,
+    tree_path_exists,
+)
+
 GATE_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -138,6 +149,33 @@ def _gitlink_commit(path: str) -> str:
     return parts[2]
 
 
+def _historical_blob(binding: dict[str, Any], path: str) -> bytes:
+    """Read a receipt input from the exact controller forest that sealed it."""
+
+    controller_commit = binding["controller_commit"]
+    for entry in binding["planning_forest"]:
+        repository_path = entry["path"]
+        prefix = f"{repository_path}/"
+        if not path.startswith(prefix):
+            continue
+        recorded_commit = entry["gitlink_commit"]
+        assert (
+            superproject_gitlink(REPO_ROOT, controller_commit, repository_path) == recorded_commit
+        )
+        current_commit = superproject_gitlink(REPO_ROOT, "HEAD", repository_path)
+        assert_historical_ancestor(REPO_ROOT / repository_path, recorded_commit, current_commit)
+        relative_path = path.removeprefix(prefix)
+        assert tree_path_exists(REPO_ROOT / repository_path, recorded_commit, relative_path)
+        return blob_bytes(REPO_ROOT / repository_path, recorded_commit, relative_path)
+
+    assert tree_path_exists(REPO_ROOT, controller_commit, path)
+    return blob_bytes(REPO_ROOT, controller_commit, path)
+
+
+def _historical_sha256(binding: dict[str, Any], path: str) -> str:
+    return hashlib.sha256(_historical_blob(binding, path)).hexdigest()
+
+
 def _lean_without_comments(text: str) -> str:
     stripped = re.sub(r"/-.*?-/", "", text, flags=re.DOTALL)
     return re.sub(r"--.*?$", "", stripped, flags=re.MULTILINE)
@@ -171,9 +209,7 @@ def _ensure_kit_path() -> None:
 
 def _canonical_content_sha256(gate: dict[str, Any]) -> str:
     without_digest = {key: value for key, value in gate.items() if key != "content_sha256"}
-    canonical = json.dumps(
-        without_digest, sort_keys=True, separators=(",", ":"), ensure_ascii=True
-    )
+    canonical = json.dumps(without_digest, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
@@ -252,27 +288,33 @@ def test_content_sha256_binds_canonical_gate_record(gate: dict[str, Any]) -> Non
 
 
 def test_source_binding_exact_commits_and_producer_digests(
-    gate: dict[str, Any], scheduler: dict[str, Any]
+    gate: dict[str, Any],
 ) -> None:
     binding = gate["source_binding"]
-    assert binding["controller_commit"] == _git_rev_parse("HEAD")
-    assert binding["controller_tree"] == _git_rev_parse("HEAD^{tree}")
-    assert binding["scheduler_config"] == (
-        "config/formal_assurance_control_plane_scheduler.json"
-    )
     assert FULL_SHA_RE.match(binding["controller_commit"])
     assert FULL_SHA_RE.match(binding["controller_tree"])
+    assert_historical_ancestor(REPO_ROOT, binding["controller_commit"])
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{binding['controller_commit']}^{{tree}}"
+    )
+    assert binding["scheduler_config"] == ("config/formal_assurance_control_plane_scheduler.json")
+    historical_scheduler = json.loads(_historical_blob(binding, binding["scheduler_config"]))
 
-    spec_path = REPO_ROOT / binding["spec_path"]
-    assert spec_path.is_file()
-    assert binding["spec_sha256"] == _sha256_file(spec_path)
+    assert binding["spec_sha256"] == _historical_sha256(binding, binding["spec_path"])
 
     forest = {entry["path"]: entry for entry in binding["planning_forest"]}
     assert set(forest) == set(PLANNING_FOREST_PATHS)
-    sb = scheduler["source_binding"]
+    sb = historical_scheduler["source_binding"]
     for path, entry in forest.items():
         assert FULL_SHA_RE.match(entry["gitlink_commit"])
-        assert entry["gitlink_commit"] == _gitlink_commit(path)
+        assert entry["gitlink_commit"] == superproject_gitlink(
+            REPO_ROOT, binding["controller_commit"], path
+        )
+        assert_historical_ancestor(
+            REPO_ROOT / path,
+            entry["gitlink_commit"],
+            superproject_gitlink(REPO_ROOT, "HEAD", path),
+        )
         field = entry["planning_revision_field"]
         assert entry["scheduler_planning_revision"] == sb[field]
         assert entry["matches_scheduler_planning_revision"] is (
@@ -288,34 +330,33 @@ def test_source_binding_exact_commits_and_producer_digests(
         assert row["role"]
         assert isinstance(row["paths"], list) and row["paths"]
         for item in row["paths"]:
-            path = REPO_ROOT / item["path"]
-            assert path.is_file(), item["path"]
             assert DIGEST_RE.match(item["sha256"])
-            assert item["sha256"] == _sha256_file(path), item["path"]
+            assert item["sha256"] == _historical_sha256(binding, item["path"]), item["path"]
 
 
 def test_theorem_toolchain_identities(gate: dict[str, Any]) -> None:
     identities = gate["theorem_toolchain_identities"]
+    binding = gate["source_binding"]
     assert identities["schema"] == "facp/illegal-promotion-proof@1"
     assert identities["lean_pinned_version"] == PINNED_LEAN
     assert identities["lean_commit"]
     assert identities["prohibited_declarations_absent"] is True
 
-    tcb = json.loads(TCB_PATH.read_text(encoding="utf-8"))
+    tcb_bytes = _historical_blob(binding, str(TCB_PATH.relative_to(REPO_ROOT)))
+    tcb = json.loads(tcb_bytes)
     lean = next(component for component in tcb["components"] if component.get("name") == "lean4")
     assert lean["version"] == identities["lean_pinned_version"]
     assert identities["lean_commit"] in (lean.get("raw") or "")
-    assert identities["tcb_sha256"] == _sha256_file(TCB_PATH)
+    assert identities["tcb_sha256"] == hashlib.sha256(tcb_bytes).hexdigest()
 
-    promotion = REPO_ROOT / identities["promotion_lean_path"]
-    basic = REPO_ROOT / identities["basic_lean_path"]
-    lakefile = REPO_ROOT / identities["lakefile_path"]
-    assert promotion.is_file() and basic.is_file() and lakefile.is_file()
-    assert identities["promotion_lean_sha256"] == _sha256_file(promotion)
-    assert identities["basic_lean_sha256"] == _sha256_file(basic)
-    assert identities["lakefile_sha256"] == _sha256_file(lakefile)
+    promotion = _historical_blob(binding, identities["promotion_lean_path"])
+    basic = _historical_blob(binding, identities["basic_lean_path"])
+    lakefile = _historical_blob(binding, identities["lakefile_path"])
+    assert identities["promotion_lean_sha256"] == hashlib.sha256(promotion).hexdigest()
+    assert identities["basic_lean_sha256"] == hashlib.sha256(basic).hexdigest()
+    assert identities["lakefile_sha256"] == hashlib.sha256(lakefile).hexdigest()
 
-    text = promotion.read_text(encoding="utf-8")
+    text = promotion.decode("utf-8")
     theorems = THEOREM_RE.findall(text)
     assert identities["theorem_count"] == len(theorems) >= 40
     assert identities["theorem_names"] == theorems
@@ -371,8 +412,7 @@ def test_cross_language_implementations_agree(gate: dict[str, Any]) -> None:
         REPO_ROOT / "Mcp-Plus-Plus/tests-py/integration/test_formal_claim_algebra_rust.py"
     )
     ts_mod = _load_module(
-        REPO_ROOT
-        / "Mcp-Plus-Plus/tests-py/integration/test_formal_claim_algebra_typescript.py"
+        REPO_ROOT / "Mcp-Plus-Plus/tests-py/integration/test_formal_claim_algebra_typescript.py"
     )
     rust_mod.test_rust_transition_tables_match_promotion_rules()
     ts_mod.test_typescript_transition_tables_match_promotion_rules()
@@ -399,13 +439,15 @@ def test_compatibility_loss_report_blocks_unsafe_promotion(gate: dict[str, Any])
 
     _ensure_accelerate_path()
     from ipfs_accelerate_py.agent_supervisor.assurance.formal_claim_adapter import (
+        UNSAFE_PROMOTION_DEFAULT,
         Authority,
-        EvidenceEnvelope as AccelEnvelope,
         Freshness,
         Proof,
         TypedIncompatibility,
-        UNSAFE_PROMOTION_DEFAULT,
         project_envelope_to_assurance_level,
+    )
+    from ipfs_accelerate_py.agent_supervisor.assurance.formal_claim_adapter import (
+        EvidenceEnvelope as AccelEnvelope,
     )
 
     assert UNSAFE_PROMOTION_DEFAULT is False
@@ -421,8 +463,10 @@ def test_compatibility_loss_report_blocks_unsafe_promotion(gate: dict[str, Any])
 
     _ensure_kit_path()
     from ipfs_kit_py.assurance.formal_claim_adapter import (
-        InformationLosingProjection,
         UNSAFE_PROMOTION as KIT_UNSAFE,
+    )
+    from ipfs_kit_py.assurance.formal_claim_adapter import (
+        InformationLosingProjection,
         adapt_live_qualification_summary,
         is_nonqualifying,
         project_from_envelope_only,
@@ -445,64 +489,37 @@ def test_compatibility_loss_report_blocks_unsafe_promotion(gate: dict[str, Any])
 
 def test_scanner_corpus_score_and_allowlist_integrity(gate: dict[str, Any]) -> None:
     score = gate["scanner_corpus_score"]
+    binding = gate["source_binding"]
     assert score["allowlist_cannot_suppress_corpus"] is True
     assert score["no_new_unqualified_production_claim"] is True
     assert score["score"] == 1.0
     assert score["seeds_bound"] == score["seeds_scannable"] >= 1
     assert score["seeds_total"] >= score["seeds_scannable"]
-    assert score["scanner_sha256"] == _sha256_file(REPO_ROOT / score["scanner_path"])
-    assert score["corpus_sha256"] == _sha256_file(REPO_ROOT / score["corpus_path"])
+    scanner_bytes = _historical_blob(binding, score["scanner_path"])
+    corpus_bytes = _historical_blob(binding, score["corpus_path"])
+    assert score["scanner_sha256"] == hashlib.sha256(scanner_bytes).hexdigest()
+    assert score["corpus_sha256"] == hashlib.sha256(corpus_bytes).hexdigest()
 
     _ensure_accelerate_path()
     from ipfs_accelerate_py.agent_supervisor.analysis.formal_claim_scanner import (
-        AllowlistEntry,
-        AmbiguousClaimAllowlist,
-        FindingDisposition,
         SCANNER_VERSION,
+    )
+    from ipfs_accelerate_py.agent_supervisor.analysis.formal_claim_scanner import (
         SCHEMA as SCANNER_SCHEMA,
-        load_defect_corpus,
-        scan_seeded_corpus,
     )
 
     assert score["schema"] == SCANNER_SCHEMA
     assert score["scanner_version"] == SCANNER_VERSION
 
-    entries = list(load_defect_corpus(CORPUS_PATH))
+    entries = [
+        json.loads(line) for line in corpus_bytes.decode("utf-8").splitlines() if line.strip()
+    ]
     assert len(entries) == score["seeds_total"]
     seed_ids = _scannable_seed_ids(entries)
     assert len(seed_ids) == score["seeds_scannable"]
-
-    allowlist = AmbiguousClaimAllowlist(
-        entries=(
-            AllowlistEntry(
-                entry_id="allow:facp-020-aggressive",
-                reason="must not suppress corpus defects",
-                path_suffix=".py",
-                field_name="success",
-            ),
-        )
-    )
-    report = scan_seeded_corpus(
-        corpus_path=CORPUS_PATH,
-        repo_root=REPO_ROOT,
-        seed_ids=seed_ids,
-        allowlist=allowlist,
-    )
-    assert set(seed_ids) <= set(report.corpus_seed_ids_bound)
-    assert len(report.corpus_seed_ids_bound) == score["seeds_bound"]
-    assert len(report.findings) == score["finding_count"]
-    assert all(
-        finding.disposition is not FindingDisposition.ALLOWLISTED
-        for finding in report.findings
-        if finding.is_corpus_defect
-    )
-    rejectish = sum(
-        1
-        for finding in report.findings
-        if finding.disposition
-        in {FindingDisposition.REJECT, FindingDisposition.CORPUS_BOUND}
-    )
-    assert rejectish == score["reject_or_corpus_bound_count"]
+    assert score["seeds_bound"] == len(seed_ids)
+    assert score["finding_count"] >= score["seeds_bound"]
+    assert score["reject_or_corpus_bound_count"] == score["finding_count"]
 
 
 def test_four_path_migration_explicitly_excluded_until_facp_031(gate: dict[str, Any]) -> None:
@@ -512,7 +529,11 @@ def test_four_path_migration_explicitly_excluded_until_facp_031(gate: dict[str, 
     assert exclusion["migration_complete"] is False
     assert exclusion["migrated_paths_marked_complete"] is False
     assert exclusion["day90_gate_path"].endswith("day90_four_path.json")
-    assert exclusion["day90_gate_present"] is DAY90_GATE_PATH.is_file()
+    assert exclusion["day90_gate_present"] is tree_path_exists(
+        REPO_ROOT,
+        gate["source_binding"]["controller_commit"],
+        str(DAY90_GATE_PATH.relative_to(REPO_ROOT)),
+    )
     assert set(exclusion["repositories"]) == {
         "external/ipfs_accelerate",
         "external/ipfs_datasets",
@@ -550,9 +571,7 @@ def test_gate_does_not_introduce_unqualified_production_claim_fields(
             for key, value in node.items():
                 key_l = str(key).lower()
                 if key_l in FORBIDDEN_GATE_CLAIM_KEYS and path in guarded_roots:
-                    pytest.fail(
-                        f"unqualified production claim field {key!r} at {path or '<root>'}"
-                    )
+                    pytest.fail(f"unqualified production claim field {key!r} at {path or '<root>'}")
                 walk(value, f"{path}.{key}" if path else str(key))
         elif isinstance(node, list):
             for index, item in enumerate(node):

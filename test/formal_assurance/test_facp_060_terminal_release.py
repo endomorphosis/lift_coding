@@ -20,12 +20,24 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_bytes,
+    git_output,
+    superproject_gitlink,
+    tree_path_exists,
+)
+
 MANIFEST_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -215,6 +227,33 @@ def _gitlink_commit(path: str) -> str:
     return parts[2]
 
 
+def _historical_blob(binding: dict[str, Any], path: str) -> bytes:
+    """Read a manifest input from its immutable controller forest."""
+
+    controller_commit = binding["controller_commit"]
+    for entry in binding["planning_forest"]:
+        repository_path = entry["path"]
+        prefix = f"{repository_path}/"
+        if not path.startswith(prefix):
+            continue
+        recorded_commit = entry["gitlink_commit"]
+        assert (
+            superproject_gitlink(REPO_ROOT, controller_commit, repository_path) == recorded_commit
+        )
+        current_commit = superproject_gitlink(REPO_ROOT, "HEAD", repository_path)
+        assert_historical_ancestor(REPO_ROOT / repository_path, recorded_commit, current_commit)
+        relative_path = path.removeprefix(prefix)
+        assert tree_path_exists(REPO_ROOT / repository_path, recorded_commit, relative_path)
+        return blob_bytes(REPO_ROOT / repository_path, recorded_commit, relative_path)
+
+    assert tree_path_exists(REPO_ROOT, controller_commit, path)
+    return blob_bytes(REPO_ROOT, controller_commit, path)
+
+
+def _historical_sha256(binding: dict[str, Any], path: str) -> str:
+    return hashlib.sha256(_historical_blob(binding, path)).hexdigest()
+
+
 def _load_json(path: Path) -> dict[str, Any]:
     assert path.is_file(), f"missing artifact: {path}"
     payload = json.loads(path.read_text(encoding="utf-8"))
@@ -401,45 +440,54 @@ def test_independent_verifier_reconstructs_manifest_identity(
     assert DIGEST_RE.match(manifest["content_sha256"])
     binding = manifest["content_binding"]
     assert binding["alg"] == "sha256"
-    assert "sort-keys" in binding["canonicalization"] or "separators" in binding[
-        "canonicalization"
-    ]
+    assert "sort-keys" in binding["canonicalization"] or "separators" in binding["canonicalization"]
     assert binding["covers"] == "gate_record_excluding_content_sha256"
     assert _canonical_content_sha256(manifest) == manifest["content_sha256"]
 
 
 def test_source_binding_matches_current_forest_and_producer_digests(
-    manifest: dict[str, Any], scheduler: dict[str, Any], composed: dict[str, Any]
+    manifest: dict[str, Any],
 ) -> None:
     binding = manifest["source_binding"]
-    assert binding["controller_commit"] == _git_rev_parse("HEAD")
-    assert binding["controller_tree"] == _git_rev_parse("HEAD^{tree}")
     assert FULL_SHA_RE.match(binding["controller_commit"])
     assert FULL_SHA_RE.match(binding["controller_tree"])
+    assert_historical_ancestor(REPO_ROOT, binding["controller_commit"])
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{binding['controller_commit']}^{{tree}}"
+    )
 
-    assert binding["scheduler_config_sha256"] == _sha256_file(SCHEDULER_PATH)
-    assert binding["repository_contracts_sha256"] == _sha256_file(CONTRACTS_PATH)
-    assert binding["portfolio_lock_sha256"] == _sha256_file(PORTFOLIO_LOCK_PATH)
-    assert binding["release_predicate_sha256"] == _sha256_file(RELEASE_PREDICATE_PATH)
-    assert binding["rights_ir_sha256"] == _sha256_file(RIGHTS_IR_PATH)
-    assert binding["provenance_policy_sha256"] == _sha256_file(PROVENANCE_PATH)
-    assert binding["composed_workflow_sha256"] == _sha256_file(COMPOSED_PATH)
+    scheduler_bytes = _historical_blob(binding, binding["scheduler_config"])
+    assert binding["scheduler_config_sha256"] == hashlib.sha256(scheduler_bytes).hexdigest()
+    historical_scheduler = json.loads(scheduler_bytes)
+    for digest_field, path_field in (
+        ("repository_contracts_sha256", "repository_contracts_path"),
+        ("portfolio_lock_sha256", "portfolio_lock_path"),
+        ("release_predicate_sha256", "release_predicate_path"),
+        ("rights_ir_sha256", "rights_ir_path"),
+        ("provenance_policy_sha256", "provenance_policy_path"),
+        ("composed_workflow_sha256", "composed_workflow_path"),
+    ):
+        assert binding[digest_field] == _historical_sha256(binding, binding[path_field])
 
-    composed_without = {
-        key: value for key, value in composed.items() if key != "content_sha256"
-    }
-    composed_content = hashlib.sha256(
-        _canonical_json_bytes(composed_without)
-    ).hexdigest()
+    composed = json.loads(_historical_blob(binding, binding["composed_workflow_path"]))
+    composed_without = {key: value for key, value in composed.items() if key != "content_sha256"}
+    composed_content = hashlib.sha256(_canonical_json_bytes(composed_without)).hexdigest()
     assert composed_content == composed["content_sha256"]
     assert binding["composed_workflow_content_sha256"] == composed_content
 
     forest = {entry["path"]: entry for entry in binding["planning_forest"]}
     assert set(forest) == set(PLANNING_FOREST_PATHS)
-    sb = scheduler["source_binding"]
+    sb = historical_scheduler["source_binding"]
     for path, entry in forest.items():
         assert FULL_SHA_RE.match(entry["gitlink_commit"])
-        assert entry["gitlink_commit"] == _gitlink_commit(path)
+        assert entry["gitlink_commit"] == superproject_gitlink(
+            REPO_ROOT, binding["controller_commit"], path
+        )
+        assert_historical_ancestor(
+            REPO_ROOT / path,
+            entry["gitlink_commit"],
+            superproject_gitlink(REPO_ROOT, "HEAD", path),
+        )
         field = entry["planning_revision_field"]
         assert entry["scheduler_planning_revision"] == sb[field]
         assert entry["matches_scheduler_planning_revision"] is (
@@ -454,10 +502,8 @@ def test_source_binding_matches_current_forest_and_producer_digests(
         assert row["role"]
         assert row["paths"]
         for item in row["paths"]:
-            path = REPO_ROOT / item["path"]
-            assert path.is_file(), item["path"]
             assert DIGEST_RE.match(item["sha256"])
-            assert item["sha256"] == _sha256_file(path), item["path"]
+            assert item["sha256"] == _historical_sha256(binding, item["path"]), item["path"]
 
 
 def test_closure_artifacts_match_filesystem_and_identity_reconstructs(
@@ -525,16 +571,16 @@ def test_predicates_reconstruct_nonadmissible_current_tree(
     assert by_id["historical_receipt_not_current"]["satisfied"] is True
 
     record = predicates["qualification_record"]
-    admissible, codes, extended = evaluate_terminal_admissible(
-        manifest, release_predicate, record
-    )
+    admissible, codes, extended = evaluate_terminal_admissible(manifest, release_predicate, record)
     assert admissible is False
     assert set(codes) == set(predicates["rejection_codes"])
     assert "mutable_ref" in codes
     assert "unresolved_mandatory_rights" in codes
-    assert "nonreproducible_artifact" in {
-        blocker["code"] for blocker in predicates["extended_blockers"]
-    } or "nonreproducible_artifact" in extended
+    assert (
+        "nonreproducible_artifact"
+        in {blocker["code"] for blocker in predicates["extended_blockers"]}
+        or "nonreproducible_artifact" in extended
+    )
 
     # RightsIR mandatory blockers remain present.
     status_map = rights_ir["status_to_disposition"]
@@ -542,20 +588,15 @@ def test_predicates_reconstruct_nonadmissible_current_tree(
     blocking_ids = {
         node["id"]
         for node in rights_ir["nodes"]
-        if node.get("mandatory")
-        and vocab[status_map[node["status"]]]["blocks_release"]
+        if node.get("mandatory") and vocab[status_map[node["status"]]]["blocks_release"]
     }
     sealed_blocking = {row["node_id"] for row in manifest["rights"]["mandatory_blocking_nodes"]}
     assert blocking_ids == sealed_blocking
     assert manifest["rights"]["mandatory_rights_resolved"] is False
     assert manifest["rights"]["machine_clearance_attempted"] is False
 
-    assert (
-        portfolio_lock["current_tree_qualification"]["release_admissible"] is False
-    )
-    assert (
-        release_predicate["current_tree_qualification"]["release_admissible"] is False
-    )
+    assert portfolio_lock["current_tree_qualification"]["release_admissible"] is False
+    assert release_predicate["current_tree_qualification"]["release_admissible"] is False
 
 
 def test_signature_binds_complete_closure_and_withholds_production_auth(
@@ -588,9 +629,10 @@ def test_live_capabilities_and_reproducibility_remain_incomplete(
     live = manifest["live_capabilities"]
     assert live["cohort_sha256"] == _sha256_file(COHORT_PATH)
     assert live["local_filesystem"]["live_qualified"] is True
-    assert live["local_filesystem"]["disposition"] == cohort["results"]["local_filesystem"][
-        "disposition"
-    ]
+    assert (
+        live["local_filesystem"]["disposition"]
+        == cohort["results"]["local_filesystem"]["disposition"]
+    )
     assert live["pinned_ipfs"]["live_qualified"] is False
     assert live["iroh"]["live_qualified"] is False
     assert live["production_cohort_complete"] is False
@@ -649,9 +691,7 @@ def test_negative_fixtures_keep_release_nonadmissible(
 
     base = copy.deepcopy(manifest["predicates"]["qualification_record"])
     base.update(fixture["mutation"])
-    admissible, codes, extended = evaluate_terminal_admissible(
-        manifest, release_predicate, base
-    )
+    admissible, codes, extended = evaluate_terminal_admissible(manifest, release_predicate, base)
     assert admissible is False
 
     for code in fixture.get("expect_codes") or []:
@@ -671,9 +711,7 @@ def test_synthetic_all_clear_fixture_is_admissible_but_not_current_tree_claim(
     assert positive["expect_admissible"] is True
 
     record = dict(positive["mutation"])
-    admissible, codes, extended = evaluate_terminal_admissible(
-        manifest, release_predicate, record
-    )
+    admissible, codes, extended = evaluate_terminal_admissible(manifest, release_predicate, record)
     assert admissible is True
     assert codes == []
     assert extended == []
@@ -688,9 +726,7 @@ def test_acceptance_flags_match_fail_closed_behavior(
 ) -> None:
     acceptance = manifest["acceptance"]
     assert acceptance["independent_verifier_reconstructs_manifest_identity"] is True
-    assert (
-        acceptance["independent_verifier_reconstructs_every_required_predicate"] is True
-    )
+    assert acceptance["independent_verifier_reconstructs_every_required_predicate"] is True
     assert acceptance["all_zero_floors_are_zero"] is True
     assert acceptance["signatures_bind_complete_closure"] is True
     assert acceptance["unresolved_right_keeps_nonadmissible"] is True

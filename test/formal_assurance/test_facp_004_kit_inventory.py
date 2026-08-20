@@ -9,12 +9,22 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    current_head,
+    superproject_gitlink,
+)
+
 REPORT_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -23,16 +33,10 @@ REPORT_PATH = (
     / "kit_evidence.json"
 )
 KIT_ROOT = REPO_ROOT / "external" / "ipfs_kit"
-KIT_MANIFEST = (
-    KIT_ROOT / "docs" / "runtime_readiness" / "backend_support_manifest.json"
-)
+KIT_MANIFEST = KIT_ROOT / "docs" / "runtime_readiness" / "backend_support_manifest.json"
 KIT_SUPPORT_MATRIX = KIT_ROOT / "docs" / "kernel_vfs" / "support_matrix.json"
 KIT_EXTERNAL_RECEIPT_INDEX = (
-    KIT_ROOT
-    / "docs"
-    / "runtime_readiness"
-    / "backend_external_receipts"
-    / "index.json"
+    KIT_ROOT / "docs" / "runtime_readiness" / "backend_external_receipts" / "index.json"
 )
 
 REQUIRED_DISTINCTION_KEYS = (
@@ -73,37 +77,18 @@ def kit_manifest() -> dict[str, Any]:
 
 @pytest.fixture(scope="module")
 def kit_support_matrix() -> dict[str, Any]:
-    assert KIT_SUPPORT_MATRIX.is_file(), (
-        f"missing Kernel VFS support matrix: {KIT_SUPPORT_MATRIX}"
-    )
+    assert KIT_SUPPORT_MATRIX.is_file(), f"missing Kernel VFS support matrix: {KIT_SUPPORT_MATRIX}"
     payload = json.loads(KIT_SUPPORT_MATRIX.read_text(encoding="utf-8"))
     assert isinstance(payload, dict)
     return payload
 
 
 def _git_kit_head() -> str:
-    completed = subprocess.run(
-        ["git", "-C", str(KIT_ROOT), "rev-parse", "HEAD"],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return completed.stdout.strip()
+    return current_head(KIT_ROOT)
 
 
 def _gitlink_commit() -> str:
-    completed = subprocess.run(
-        ["git", "ls-tree", "HEAD", "external/ipfs_kit"],
-        check=True,
-        capture_output=True,
-        text=True,
-        cwd=REPO_ROOT,
-    )
-    # format: <mode> commit <sha>\tpath
-    parts = completed.stdout.strip().split()
-    assert len(parts) >= 3
-    assert parts[1] == "commit"
-    return parts[2]
+    return superproject_gitlink(REPO_ROOT, "HEAD", "external/ipfs_kit")
 
 
 def test_report_task_and_schema_binding(report: dict[str, Any]) -> None:
@@ -124,10 +109,10 @@ def test_report_task_and_schema_binding(report: dict[str, Any]) -> None:
 def test_source_binding_matches_exact_kit_gitlink(report: dict[str, Any]) -> None:
     binding = report["source_binding"]
     assert binding["submodule_path"] == "external/ipfs_kit"
-    expected = _gitlink_commit()
-    assert binding["gitlink_commit"] == expected
-    assert binding["planning_revision"] == expected
-    assert _git_kit_head() == expected
+    assert binding["planning_revision"] == binding["gitlink_commit"]
+    current_gitlink = _gitlink_commit()
+    assert _git_kit_head() == current_gitlink
+    assert_historical_ancestor(KIT_ROOT, binding["gitlink_commit"], current_gitlink)
     assert binding["worktree_status"] == "clean"
     dirty = subprocess.run(
         ["git", "-C", str(KIT_ROOT), "status", "--porcelain"],
@@ -153,9 +138,7 @@ def test_preserves_honest_distinctions(
     matrix_classes = kit_support_matrix["claim_classes"]
     for name in REQUIRED_CLAIM_CLASSES:
         assert name in matrix_classes
-        assert claim_classes[name]["promotion_power"] == matrix_classes[name][
-            "promotion_power"
-        ]
+        assert claim_classes[name]["promotion_power"] == matrix_classes[name]["promotion_power"]
 
     assert kit_support_matrix["policy"]["hermetic_green_is_not_live"] is True
     assert (
@@ -180,9 +163,7 @@ def test_preserves_honest_distinctions(
     for state in REQUIRED_CONFIG_STATES:
         assert state in ladder_states
 
-    roles = {
-        entry["role"] for entry in distinctions["proof_roles"]["roles"]
-    }
+    roles = {entry["role"] for entry in distinctions["proof_roles"]["roles"]}
     for role in REQUIRED_PROOF_ROLES:
         assert role in roles
 
@@ -219,9 +200,7 @@ def test_identifies_exact_adapter_seams(report: dict[str, Any]) -> None:
     assert required_ids <= seen_ids
 
 
-def test_zero_live_qualified_backends(
-    report: dict[str, Any], kit_manifest: dict[str, Any]
-) -> None:
+def test_zero_live_qualified_backends(report: dict[str, Any], kit_manifest: dict[str, Any]) -> None:
     live = report["live_qualification"]
     assert live["live_qualified_backend_count"] == 0
     assert live["storage_selectable_count"] == 0
@@ -237,20 +216,16 @@ def test_zero_live_qualified_backends(
     assert summary["honesty"]["silent_pass_on_missing_evidence"] == 0
 
     selectable = [
-        backend
-        for backend in kit_manifest["backends"]
-        if backend["routing"]["storage_selectable"]
+        backend for backend in kit_manifest["backends"] if backend["routing"]["storage_selectable"]
     ]
     assert selectable == []
 
-    receipt_index = json.loads(
-        KIT_EXTERNAL_RECEIPT_INDEX.read_text(encoding="utf-8")
-    )
+    receipt_index = json.loads(KIT_EXTERNAL_RECEIPT_INDEX.read_text(encoding="utf-8"))
     assert receipt_index.get("receipts") == []
     assert (
-        report["honest_distinctions"]["receipt_freshness"][
-            "external_receipt_authority"
-        ]["active_receipts"]
+        report["honest_distinctions"]["receipt_freshness"]["external_receipt_authority"][
+            "active_receipts"
+        ]
         == 0
     )
 
@@ -261,9 +236,7 @@ def test_zero_live_qualified_backends(
     assert iroh["availability"] == "receipt-required"
 
     manifest_iroh = next(
-        backend
-        for backend in kit_manifest["backends"]
-        if backend["canonical_name"] == "iroh"
+        backend for backend in kit_manifest["backends"] if backend["canonical_name"] == "iroh"
     )
     assert manifest_iroh["routing"]["storage_selectable"] is False
     assert manifest_iroh["availability"] == "receipt-required"
@@ -310,13 +283,9 @@ def test_key_encoding_tests_and_cas_wal_paths_exist(report: dict[str, Any]) -> N
     cas_wal = report["honest_distinctions"]["cas_wal_recovery"]
     for section in ("cas", "wal", "recovery"):
         for relative in cas_wal[section]["paths"]:
-            assert (REPO_ROOT / relative).is_file(), (
-                f"missing {section} path: {relative}"
-            )
+            assert (REPO_ROOT / relative).is_file(), f"missing {section} path: {relative}"
         assert cas_wal[section]["invariants"]
 
     for role_entry in report["honest_distinctions"]["proof_roles"]["roles"]:
         for relative in role_entry["paths"]:
-            assert (REPO_ROOT / relative).is_file(), (
-                f"missing proof-role path: {relative}"
-            )
+            assert (REPO_ROOT / relative).is_file(), f"missing proof-role path: {relative}"

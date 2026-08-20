@@ -12,28 +12,29 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-BASELINE = (
-    REPO_ROOT
-    / "implementation_plan"
-    / "formal_assurance_control_plane"
-    / "baseline"
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_text,
+    current_head,
+    git_output,
+    superproject_gitlink,
 )
+
+BASELINE = REPO_ROOT / "implementation_plan" / "formal_assurance_control_plane" / "baseline"
 CLAIM_INVENTORY_PATH = BASELINE / "claim_inventory.json"
 DEFECT_CORPUS_PATH = BASELINE / "defect_corpus.jsonl"
 TCB_PATH = BASELINE / "trusted_computing_base.json"
-TODO_PATH = (
-    REPO_ROOT
-    / "implementation_plan"
-    / "docs"
-    / "49-formal-assurance-control-plane.todo.md"
-)
+TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "49-formal-assurance-control-plane.todo.md"
 SCHEDULER_PATH = REPO_ROOT / "config" / "formal_assurance_control_plane_scheduler.json"
 
 CLAIM_SCHEMA = "facp/claim-inventory@1"
@@ -113,29 +114,8 @@ FULL_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
 TASK_HEADING_RE = re.compile(r"^## (FACP-\d+) ", re.M)
 
 
-def _git_rev_parse(*args: str, cwd: Path | None = None) -> str:
-    completed = subprocess.run(
-        ["git", "rev-parse", *args],
-        check=True,
-        capture_output=True,
-        text=True,
-        cwd=cwd or REPO_ROOT,
-    )
-    return completed.stdout.strip()
-
-
 def _gitlink_commit(path: str) -> str:
-    completed = subprocess.run(
-        ["git", "ls-tree", "HEAD", path],
-        check=True,
-        capture_output=True,
-        text=True,
-        cwd=REPO_ROOT,
-    )
-    parts = completed.stdout.strip().split()
-    assert len(parts) >= 3, completed.stdout
-    assert parts[1] == "commit", completed.stdout
-    return parts[2]
+    return superproject_gitlink(REPO_ROOT, "HEAD", path)
 
 
 def _planned_task_ids() -> set[str]:
@@ -199,19 +179,23 @@ def test_claim_inventory_task_and_schema_binding(claim_inventory: dict[str, Any]
 
 
 def test_source_binding_matches_scheduler_and_gitlinks(
-    claim_inventory: dict[str, Any], scheduler: dict[str, Any]
+    claim_inventory: dict[str, Any],
 ) -> None:
     binding = claim_inventory["source_binding"]
-    assert binding["controller_commit"] == _git_rev_parse("HEAD")
-    assert binding["controller_tree"] == _git_rev_parse("HEAD^{tree}")
-    assert binding["scheduler_config"] == (
-        "config/formal_assurance_control_plane_scheduler.json"
+    controller_commit = binding["controller_commit"]
+    assert_historical_ancestor(REPO_ROOT, controller_commit)
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{controller_commit}^{{tree}}"
     )
+    assert binding["scheduler_config"] == ("config/formal_assurance_control_plane_scheduler.json")
 
     forest = {entry["path"]: entry for entry in binding["planning_forest"]}
     assert set(forest) == set(PLANNING_FOREST_PATHS)
 
-    sb = scheduler["source_binding"]
+    historical_scheduler = json.loads(
+        blob_text(REPO_ROOT, controller_commit, binding["scheduler_config"])
+    )
+    sb = historical_scheduler["source_binding"]
     expected = {
         "Mcp-Plus-Plus": sb["mcp_plus_plus_planning_revision"],
         "external/ipfs_accelerate": sb["accelerate_planning_revision"],
@@ -222,7 +206,10 @@ def test_source_binding_matches_scheduler_and_gitlinks(
     for path, commit in expected.items():
         assert FULL_SHA_RE.match(commit)
         assert forest[path]["gitlink_commit"] == commit
-        assert _gitlink_commit(path) == commit
+        assert superproject_gitlink(REPO_ROOT, controller_commit, path) == commit
+        current_gitlink = _gitlink_commit(path)
+        assert current_head(REPO_ROOT / path) == current_gitlink
+        assert_historical_ancestor(REPO_ROOT / path, commit, current_gitlink)
 
     inputs = {entry["task_id"]: entry for entry in binding["inventory_inputs"]}
     assert set(inputs) == set(REQUIRED_INPUT_INVENTORIES)
@@ -389,19 +376,14 @@ def test_defect_corpus_contains_all_roadmap_seeds_with_disposition_and_oracle(
     assert not missing_seeds, sorted(missing_seeds)
 
     # Fan-in must not drop accelerate confirmed defect seeds.
-    accelerate = json.loads(
-        (BASELINE / "accelerate_claims.json").read_text(encoding="utf-8")
-    )
+    accelerate = json.loads((BASELINE / "accelerate_claims.json").read_text(encoding="utf-8"))
     accelerate_seeds = {
-        defect["counterexample_seed"]["seed_id"]
-        for defect in accelerate["confirmed_defects"]
+        defect["counterexample_seed"]["seed_id"] for defect in accelerate["confirmed_defects"]
     }
     assert accelerate_seeds <= seen, sorted(accelerate_seeds - seen)
 
 
-def test_tcb_names_versions_and_assumptions(
-    tcb: dict[str, Any], scheduler: dict[str, Any]
-) -> None:
+def test_tcb_names_versions_and_assumptions(tcb: dict[str, Any]) -> None:
     assert tcb["schema"] == TCB_SCHEMA
     assert tcb["task_id"] == TASK_ID
     assert tcb["goal_id"] == GOAL_ID
@@ -411,8 +393,19 @@ def test_tcb_names_versions_and_assumptions(
     assert tcb["policy"]["no_simulated_proof_for_absent_tools"] is True
 
     binding = tcb["source_binding"]
-    assert binding["controller_commit"] == _git_rev_parse("HEAD")
-    assert binding["controller_tree"] == _git_rev_parse("HEAD^{tree}")
+    controller_commit = binding["controller_commit"]
+    assert_historical_ancestor(REPO_ROOT, controller_commit)
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{controller_commit}^{{tree}}"
+    )
+    for entry in binding["planning_forest"]:
+        path = entry["path"]
+        assert superproject_gitlink(REPO_ROOT, controller_commit, path) == entry[
+            "gitlink_commit"
+        ]
+        current_gitlink = _gitlink_commit(path)
+        assert current_head(REPO_ROOT / path) == current_gitlink
+        assert_historical_ancestor(REPO_ROOT / path, entry["gitlink_commit"], current_gitlink)
 
     components = tcb["components"]
     assert isinstance(components, list) and len(components) >= 10
@@ -459,11 +452,12 @@ def test_tcb_names_versions_and_assumptions(
             assert "import_time_installation" in prohibited
 
     # Portfolio pins must match scheduler planning revisions.
-    sb = scheduler["source_binding"]
+    historical_scheduler = json.loads(
+        blob_text(REPO_ROOT, controller_commit, binding["scheduler_config"])
+    )
+    sb = historical_scheduler["source_binding"]
     portfolio_versions = {
-        c["path"]: c["version"]
-        for c in components
-        if c["component_id"].startswith("portfolio:")
+        c["path"]: c["version"] for c in components if c["component_id"].startswith("portfolio:")
     }
     assert portfolio_versions["external/ipfs_accelerate"] == sb["accelerate_planning_revision"]
     assert portfolio_versions["external/ipfs_datasets"] == sb["datasets_planning_revision"]
@@ -484,10 +478,7 @@ def test_fanin_acceptance_flags_are_true(
     assert acceptance["every_seed_has_expected_disposition_and_mutation_oracle"] is True
     assert acceptance["tcb_names_versions_and_assumptions"] is True
     assert (
-        acceptance[
-            "every_planned_task_traces_to_inventory_fact_or_normative_requirement"
-        ]
-        is True
+        acceptance["every_planned_task_traces_to_inventory_fact_or_normative_requirement"] is True
     )
     tcb_acceptance = tcb["acceptance"]
     assert tcb_acceptance["every_component_names_version_or_absence"] is True

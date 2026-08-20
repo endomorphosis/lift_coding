@@ -20,13 +20,24 @@ import re
 import subprocess
 import sys
 import types
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_bytes,
+    git_output,
+    superproject_gitlink,
+    tree_path_exists,
+)
+
 GATE_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -43,11 +54,7 @@ FCA_GATE_PATH = (
 )
 SCHEDULER_PATH = REPO_ROOT / "config" / "formal_assurance_control_plane_scheduler.json"
 VECTORS_PATH = (
-    REPO_ROOT
-    / "swissknife"
-    / "test"
-    / "formal-assurance"
-    / "browser-authority-vectors.json"
+    REPO_ROOT / "swissknife" / "test" / "formal-assurance" / "browser-authority-vectors.json"
 )
 
 GATE_SCHEMA = "facp/day90-gate@1"
@@ -125,7 +132,7 @@ FORBIDDEN_GATE_CLAIM_KEYS = {
     "capability",
 }
 
-NOW = datetime(2026, 8, 19, 12, 0, tzinfo=timezone.utc)
+NOW = datetime(2026, 8, 19, 12, 0, tzinfo=UTC)
 
 
 def _sha256_file(path: Path) -> str:
@@ -157,11 +164,36 @@ def _gitlink_commit(path: str) -> str:
     return parts[2]
 
 
+def _historical_blob(binding: dict[str, Any], path: str) -> bytes:
+    """Read a receipt input from its immutable controller forest."""
+
+    controller_commit = binding["controller_commit"]
+    for entry in binding["planning_forest"]:
+        repository_path = entry["path"]
+        prefix = f"{repository_path}/"
+        if not path.startswith(prefix):
+            continue
+        recorded_commit = entry["gitlink_commit"]
+        assert (
+            superproject_gitlink(REPO_ROOT, controller_commit, repository_path) == recorded_commit
+        )
+        current_commit = superproject_gitlink(REPO_ROOT, "HEAD", repository_path)
+        assert_historical_ancestor(REPO_ROOT / repository_path, recorded_commit, current_commit)
+        relative_path = path.removeprefix(prefix)
+        assert tree_path_exists(REPO_ROOT / repository_path, recorded_commit, relative_path)
+        return blob_bytes(REPO_ROOT / repository_path, recorded_commit, relative_path)
+
+    assert tree_path_exists(REPO_ROOT, controller_commit, path)
+    return blob_bytes(REPO_ROOT, controller_commit, path)
+
+
+def _historical_sha256(binding: dict[str, Any], path: str) -> str:
+    return hashlib.sha256(_historical_blob(binding, path)).hexdigest()
+
+
 def _canonical_content_sha256(gate: dict[str, Any]) -> str:
     without_digest = {key: value for key, value in gate.items() if key != "content_sha256"}
-    canonical = json.dumps(
-        without_digest, sort_keys=True, separators=(",", ":"), ensure_ascii=True
-    )
+    canonical = json.dumps(without_digest, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
@@ -191,7 +223,7 @@ def _load_assurance_module(package_root: Path, package_name: str, module_file: P
         assurance_pkg = types.ModuleType(assurance_mod_name)
         assurance_pkg.__path__ = [str(assurance_dir)]  # type: ignore[attr-defined]
         sys.modules[assurance_mod_name] = assurance_pkg
-        setattr(sys.modules[package_mod_name], "assurance", assurance_pkg)
+        sys.modules[package_mod_name].assurance = assurance_pkg  # type: ignore[attr-defined]
 
     spec = importlib.util.spec_from_file_location(module_mod_name, module_file)
     assert spec is not None and spec.loader is not None
@@ -240,7 +272,9 @@ def test_gate_schema_task_and_bundle_binding(gate: dict[str, Any]) -> None:
     assert gate["generated_at"]
     assert set(gate["evidence_subset"]) >= REQUIRED_EVIDENCE_SUBSET
     assert gate["fca_conformance_gate_path"].endswith("formal_claim_algebra_v1.json")
-    assert gate["fca_conformance_gate_sha256"] == _sha256_file(FCA_GATE_PATH)
+    assert gate["fca_conformance_gate_sha256"] == _historical_sha256(
+        gate["source_binding"], str(FCA_GATE_PATH.relative_to(REPO_ROOT))
+    )
     assert DIGEST_RE.match(gate["fca_conformance_gate_sha256"])
 
 
@@ -278,23 +312,31 @@ def test_content_sha256_binds_canonical_gate_record(gate: dict[str, Any]) -> Non
 
 
 def test_source_binding_exact_commits_and_producer_digests(
-    gate: dict[str, Any], scheduler: dict[str, Any]
+    gate: dict[str, Any],
 ) -> None:
     binding = gate["source_binding"]
-    assert binding["controller_commit"] == _git_rev_parse("HEAD")
-    assert binding["controller_tree"] == _git_rev_parse("HEAD^{tree}")
-    assert binding["scheduler_config"] == (
-        "config/formal_assurance_control_plane_scheduler.json"
-    )
     assert FULL_SHA_RE.match(binding["controller_commit"])
     assert FULL_SHA_RE.match(binding["controller_tree"])
+    assert_historical_ancestor(REPO_ROOT, binding["controller_commit"])
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{binding['controller_commit']}^{{tree}}"
+    )
+    assert binding["scheduler_config"] == ("config/formal_assurance_control_plane_scheduler.json")
+    historical_scheduler = json.loads(_historical_blob(binding, binding["scheduler_config"]))
 
     forest = {entry["path"]: entry for entry in binding["planning_forest"]}
     assert set(forest) == set(PLANNING_FOREST_PATHS)
-    sb = scheduler["source_binding"]
+    sb = historical_scheduler["source_binding"]
     for path, entry in forest.items():
         assert FULL_SHA_RE.match(entry["gitlink_commit"])
-        assert entry["gitlink_commit"] == _gitlink_commit(path)
+        assert entry["gitlink_commit"] == superproject_gitlink(
+            REPO_ROOT, binding["controller_commit"], path
+        )
+        assert_historical_ancestor(
+            REPO_ROOT / path,
+            entry["gitlink_commit"],
+            superproject_gitlink(REPO_ROOT, "HEAD", path),
+        )
         field = entry["planning_revision_field"]
         assert entry["scheduler_planning_revision"] == sb[field]
         assert entry["matches_scheduler_planning_revision"] is (
@@ -310,10 +352,8 @@ def test_source_binding_exact_commits_and_producer_digests(
         assert row["role"]
         assert isinstance(row["paths"], list) and row["paths"]
         for item in row["paths"]:
-            path = REPO_ROOT / item["path"]
-            assert path.is_file(), item["path"]
             assert DIGEST_RE.match(item["sha256"])
-            assert item["sha256"] == _sha256_file(path), item["path"]
+            assert item["sha256"] == _historical_sha256(binding, item["path"]), item["path"]
 
 
 def test_migrated_paths_bind_four_repositories_and_commits(gate: dict[str, Any]) -> None:
@@ -322,16 +362,22 @@ def test_migrated_paths_bind_four_repositories_and_commits(gate: dict[str, Any])
     assert migrated["four_path_count"] == 4
     repos = {row["path"]: row for row in migrated["repositories"]}
     assert set(repos) == MIGRATED_REPOS
+    binding = gate["source_binding"]
     for path, row in repos.items():
-        assert row["gitlink_commit"] == _gitlink_commit(path)
         assert FULL_SHA_RE.match(row["gitlink_commit"])
+        assert row["gitlink_commit"] == superproject_gitlink(
+            REPO_ROOT, binding["controller_commit"], path
+        )
+        assert_historical_ancestor(
+            REPO_ROOT / path,
+            row["gitlink_commit"],
+            superproject_gitlink(REPO_ROOT, "HEAD", path),
+        )
         assert row["lane"]
         assert row["goal_id"].startswith("FACP-G2")
         assert isinstance(row["tasks"], list) and row["tasks"]
         for item in row["assurance_module_digests"]:
-            module_path = REPO_ROOT / item["path"]
-            assert module_path.is_file(), item["path"]
-            assert item["sha256"] == _sha256_file(module_path)
+            assert item["sha256"] == _historical_sha256(binding, item["path"])
 
 
 def test_forbidden_promotions_and_limitations_bound(gate: dict[str, Any]) -> None:
@@ -347,9 +393,9 @@ def test_forbidden_promotions_and_limitations_bound(gate: dict[str, Any]) -> Non
         assert row["producer_tasks"]
         assert row["oracle"]
         assert row["evidence_keys"]
-        adapter = REPO_ROOT / row["adapter_path"]
-        assert adapter.is_file(), row["adapter_path"]
-        assert row["adapter_sha256"] == _sha256_file(adapter)
+        assert row["adapter_sha256"] == _historical_sha256(
+            gate["source_binding"], row["adapter_path"]
+        )
 
     limitations = gate["limitations"]
     assert isinstance(limitations, list) and len(limitations) >= 6
@@ -391,9 +437,7 @@ def test_gate_does_not_introduce_unqualified_production_claim_fields(
             for key, value in node.items():
                 key_l = str(key).lower()
                 if key_l in FORBIDDEN_GATE_CLAIM_KEYS and path in guarded_roots:
-                    pytest.fail(
-                        f"unqualified production claim field {key!r} at {path or '<root>'}"
-                    )
+                    pytest.fail(f"unqualified production claim field {key!r} at {path or '<root>'}")
                 walk(value, f"{path}.{key}" if path else str(key))
         elif isinstance(node, list):
             for index, item in enumerate(node):
@@ -436,11 +480,7 @@ def test_import_mutation_blocked_on_datasets_path() -> None:
     assert env["IPFS_DATASETS_PY_MINIMAL_IMPORTS"] == "1"
     # Under a hermetic fragment (no ambient truthy legacy flags), silent
     # default-on remains impossible without explicit authorization.
-    cleared = {
-        key: os.environ[key]
-        for key in init._LEGACY_AUTO_INSTALL_KEYS
-        if key in os.environ
-    }
+    cleared = {key: os.environ[key] for key in init._LEGACY_AUTO_INSTALL_KEYS if key in os.environ}
     try:
         for key in init._LEGACY_AUTO_INSTALL_KEYS:
             os.environ.pop(key, None)
@@ -454,12 +494,7 @@ def test_false_success_blocked_on_datasets_path() -> None:
     outcomes = _load_assurance_module(
         REPO_ROOT / "external" / "ipfs_datasets",
         "ipfs_datasets_py",
-        REPO_ROOT
-        / "external"
-        / "ipfs_datasets"
-        / "ipfs_datasets_py"
-        / "assurance"
-        / "outcomes.py",
+        REPO_ROOT / "external" / "ipfs_datasets" / "ipfs_datasets_py" / "assurance" / "outcomes.py",
     )
     assert outcomes.UNSAFE_PROMOTION is False
     missing = outcomes.unavailable_missing_backend(operation="download", backend="ipfs")
@@ -662,9 +697,9 @@ def test_browser_to_authority_blocked_on_swissknife_path() -> None:
     )
     assert legacy["accepted_evidence"] is False
     assert vectors["authority"]["browser_fields_are_not_host_admission"] is True
-    assert vectors["acceptance"][
-        "paired_browser_authority_deltas_preserve_host_authorization"
-    ] is True
+    assert (
+        vectors["acceptance"]["paired_browser_authority_deltas_preserve_host_authorization"] is True
+    )
 
     gateway = (
         REPO_ROOT / "swissknife" / "src" / "services" / "mcp" / "formalAssuranceGateway.ts"
@@ -732,7 +767,5 @@ def test_ambiguous_claim_scan_binds_migration_adapters(gate: dict[str, Any]) -> 
             "ipfs_kit_py/assurance/proof_role_gate.py",
         ),
     ):
-        module = _load_assurance_module(
-            package_root, package_name, package_root / relative
-        )
-        assert getattr(module, "UNSAFE_PROMOTION") is False
+        module = _load_assurance_module(package_root, package_name, package_root / relative)
+        assert module.UNSAFE_PROMOTION is False

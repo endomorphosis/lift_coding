@@ -8,12 +8,22 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
+import sys
 from pathlib import Path
 
 import pytest
 
 WORKSPACE = Path(__file__).resolve().parents[2]
+if str(WORKSPACE) not in sys.path:
+    sys.path.insert(0, str(WORKSPACE))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_text,
+    current_head,
+    superproject_gitlink,
+)
+
 REPORT_PATH = (
     WORKSPACE
     / "implementation_plan"
@@ -25,6 +35,7 @@ REPORT_PATH = (
 SCHEMA = "facp/inventory/accelerate_claims@1"
 TASK_ID = "FACP-002"
 GITLINK = "external/ipfs_accelerate"
+ACCELERATE_ROOT = WORKSPACE / GITLINK
 
 REQUIRED_TOP_LEVEL = {
     "schema",
@@ -79,18 +90,7 @@ REQUIRED_DEFECT_IDS = {
 
 
 def _gitlink_commit() -> str:
-    result = subprocess.run(
-        ["git", "ls-tree", "HEAD", GITLINK],
-        cwd=WORKSPACE,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    # Example: "160000 commit a7942...\\texternal/ipfs_accelerate"
-    parts = result.stdout.strip().split()
-    assert len(parts) >= 3, result.stdout
-    assert parts[1] == "commit", result.stdout
-    return parts[2]
+    return superproject_gitlink(WORKSPACE, "HEAD", GITLINK)
 
 
 @pytest.fixture(scope="module")
@@ -119,8 +119,9 @@ def test_source_binding_matches_gitlink(report: dict):
     binding = report["source_binding"]
     assert binding["repository"] == GITLINK
     assert binding["gitlink_path"] == GITLINK
-    expected = _gitlink_commit()
-    assert binding["commit"] == expected
+    current_gitlink = _gitlink_commit()
+    assert current_head(ACCELERATE_ROOT) == current_gitlink
+    assert_historical_ancestor(ACCELERATE_ROOT, binding["commit"], current_gitlink)
     assert binding["commit"].startswith(binding.get("commit_short", binding["commit"][:7]))
 
 
@@ -171,14 +172,14 @@ def test_required_seed_defects_present(report: dict):
 
 
 def test_source_spans_resolve_to_exact_lines(report: dict):
+    bound_commit = report["source_binding"]["commit"]
     for defect in report["confirmed_defects"]:
         for span in defect["source_spans"]:
             missing = REQUIRED_SPAN_FIELDS - set(span)
             assert not missing, f"{defect['id']}: span missing {sorted(missing)}"
-            path = WORKSPACE / span["path"]
-            assert path.is_file(), f"{defect['id']}: missing path {span['path']}"
             assert span["path"].startswith("external/ipfs_accelerate/"), span["path"]
-            lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+            relative_path = str(Path(span["path"]).relative_to(GITLINK))
+            lines = blob_text(ACCELERATE_ROOT, bound_commit, relative_path).splitlines()
             start = span["start_line"]
             end = span["end_line"]
             assert isinstance(start, int) and isinstance(end, int)
@@ -232,4 +233,7 @@ def test_production_reachable_defects_name_entrypoints(report: dict):
     assert reachable, "expected at least one production-reachable defect"
     for defect in reachable:
         assert defect["production_reachability"]["via"].strip()
-        assert all(isinstance(e, str) and e.strip() for e in defect["production_reachability"]["entrypoints"])
+        assert all(
+            isinstance(e, str) and e.strip()
+            for e in defect["production_reachability"]["entrypoints"]
+        )

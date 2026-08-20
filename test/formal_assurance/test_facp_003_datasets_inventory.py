@@ -18,6 +18,16 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_text,
+    current_head,
+    superproject_gitlink,
+)
+
 CLAIMS_PATH = (
     ROOT
     / "implementation_plan"
@@ -26,6 +36,7 @@ CLAIMS_PATH = (
     / "datasets_claims.json"
 )
 DATASETS_GITLINK = ROOT / "external" / "ipfs_datasets"
+DATASETS_GITLINK_PATH = "external/ipfs_datasets"
 
 REQUIRED_EVIDENCE = {
     "module-top-level effects",
@@ -55,54 +66,33 @@ def _load_claims() -> dict:
 
 
 def _gitlink_commit() -> str:
-    result = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=DATASETS_GITLINK,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    assert result.returncode == 0, result.stderr
-    commit = (result.stdout or "").strip()
-    assert len(commit) == 40
-    return commit
+    return current_head(DATASETS_GITLINK)
 
 
 def _parent_gitlink_commit() -> str:
-    result = subprocess.run(
-        ["git", "ls-tree", "HEAD", "external/ipfs_datasets"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    assert result.returncode == 0, result.stderr
-    # format: <mode> commit <sha>\texternal/ipfs_datasets
-    parts = (result.stdout or "").strip().split()
-    assert len(parts) >= 3 and parts[1] == "commit"
-    return parts[2]
+    return superproject_gitlink(ROOT, "HEAD", DATASETS_GITLINK_PATH)
 
 
-def _read_span(path: str, line_start: int, line_end: int) -> str:
-    file_path = ROOT / path
-    assert file_path.is_file(), f"missing source path: {path}"
-    lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+def _read_span(commit: str, path: str, line_start: int, line_end: int) -> str:
+    relative_path = str(Path(path).relative_to(DATASETS_GITLINK_PATH))
+    lines = blob_text(DATASETS_GITLINK, commit, relative_path).splitlines()
     assert 1 <= line_start <= line_end <= len(lines), (
         f"span out of range for {path}: {line_start}-{line_end} (file has {len(lines)} lines)"
     )
     return "\n".join(lines[line_start - 1 : line_end])
 
 
-def _assert_quote_in_span(record: dict, *, label: str) -> None:
+def _assert_quote_in_span(record: dict, *, commit: str, label: str) -> None:
     path = record["path"]
     quote = record["quote"]
-    span = _read_span(path, int(record["line_start"]), int(record["line_end"]))
+    span = _read_span(commit, path, int(record["line_start"]), int(record["line_end"]))
     assert quote in span, (
         f"{label} quote not reproducible at {path}:"
         f"{record['line_start']}-{record['line_end']}: {quote!r}"
     )
     for secondary in record.get("secondary_spans") or []:
         secondary_span = _read_span(
+            commit,
             secondary["path"],
             int(secondary["line_start"]),
             int(secondary["line_end"]),
@@ -130,12 +120,14 @@ def test_source_binding_matches_exact_gitlink_commit() -> None:
     assert binding["gitlink_path"] == "external/ipfs_datasets"
     assert binding["repository"] == "external/ipfs_datasets"
     bound = binding["commit"]
-    assert bound == _gitlink_commit()
-    assert bound == _parent_gitlink_commit()
+    current_gitlink = _parent_gitlink_commit()
+    assert _gitlink_commit() == current_gitlink
+    assert_historical_ancestor(DATASETS_GITLINK, bound, current_gitlink)
 
 
 def test_import_effect_traces_are_reproducible() -> None:
     claims = _load_claims()
+    bound_commit = claims["source_binding"]["commit"]
     traces = claims["import_effect_traces"]
     assert isinstance(traces, list) and len(traces) >= 4
 
@@ -151,11 +143,12 @@ def test_import_effect_traces_are_reproducible() -> None:
         assert item["repair_class"] in {"import_purity", "explicit_initialization"}
         assert item["counterexample_seed"]["id"]
         assert item["call_flow"]
-        _assert_quote_in_span(item, label=item["defect_id"])
+        _assert_quote_in_span(item, commit=bound_commit, label=item["defect_id"])
 
 
 def test_false_success_spans_are_reproducible() -> None:
     claims = _load_claims()
+    bound_commit = claims["source_binding"]["commit"]
     spans = claims["false_success_spans"]
     assert isinstance(spans, list) and len(spans) >= 5
 
@@ -170,11 +163,12 @@ def test_false_success_spans_are_reproducible() -> None:
         assert item["repair_class"] == "fca_outcomes"
         assert item["outcome_shape"]["durable_effect"] is False
         assert item["counterexample_seed"]["id"]
-        _assert_quote_in_span(item, label=item["defect_id"])
+        _assert_quote_in_span(item, commit=bound_commit, label=item["defect_id"])
 
 
 def test_rights_conflict_is_unresolved_human_legal_review() -> None:
     claims = _load_claims()
+    bound_commit = claims["source_binding"]["commit"]
     rights = claims["rights_conflict"]
     assert rights["defect_id"] == "DS-RIGHTS-001"
     assert rights["disposition"] == "unresolved_human_legal_review"
@@ -189,7 +183,7 @@ def test_rights_conflict_is_unresolved_human_legal_review() -> None:
     assert len(declarations) >= 4
 
     for item in declarations:
-        _assert_quote_in_span(item, label=f"rights:{item['path']}")
+        _assert_quote_in_span(item, commit=bound_commit, label=f"rights:{item['path']}")
 
     # Explicitly forbid encoding a compatibility conclusion.
     serialized = json.dumps(rights)
@@ -226,21 +220,17 @@ def test_cold_import_probe_reproduces_auto_install_default_effect() -> None:
     """
     claims = _load_claims()
     auto_install = next(
-        item
-        for item in claims["import_effect_traces"]
-        if item["defect_id"] == "DS-IMPORT-001"
+        item for item in claims["import_effect_traces"] if item["defect_id"] == "DS-IMPORT-001"
     )
-    _assert_quote_in_span(auto_install, label="cold-import-seed")
+    bound_commit = claims["source_binding"]["commit"]
+    _assert_quote_in_span(auto_install, commit=bound_commit, label="cold-import-seed")
 
     probe = textwrap.dedent(
         """
         import os
-        import pathlib
         import re
 
-        root = pathlib.Path(os.environ["FACP003_ROOT"])
-        init_path = root / "external/ipfs_datasets/ipfs_datasets_py/__init__.py"
-        source = init_path.read_text(encoding="utf-8")
+        source = os.environ["FACP003_SOURCE"]
 
         # Extract and exec only the documented helper; do not import the package.
         match = re.search(
@@ -272,7 +262,9 @@ def test_cold_import_probe_reproduces_auto_install_default_effect() -> None:
     )
 
     env = os.environ.copy()
-    env["FACP003_ROOT"] = str(ROOT)
+    env["FACP003_SOURCE"] = blob_text(
+        DATASETS_GITLINK, bound_commit, "ipfs_datasets_py/__init__.py"
+    )
     # Deny auto-install / ensure-installer for any accidental broader import.
     env["IPFS_DATASETS_AUTO_INSTALL"] = "false"
     env["IPFS_KIT_AUTO_INSTALL_DEPS"] = "0"

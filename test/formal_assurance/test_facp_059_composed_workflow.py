@@ -19,13 +19,25 @@ import json
 import re
 import subprocess
 import sys
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_bytes,
+    git_output,
+    superproject_gitlink,
+    tree_path_exists,
+)
+
 RECEIPT_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -39,7 +51,13 @@ CONTRACTS_PATH = (
 )
 SCHEDULER_PATH = REPO_ROOT / "config" / "formal_assurance_control_plane_scheduler.json"
 COHORT_PATH = (
-    REPO_ROOT / "external" / "ipfs_kit" / "data" / "formal_assurance" / "backend_receipts" / "cohort.json"
+    REPO_ROOT
+    / "external"
+    / "ipfs_kit"
+    / "data"
+    / "formal_assurance"
+    / "backend_receipts"
+    / "cohort.json"
 )
 ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
@@ -212,6 +230,33 @@ def _gitlink_commit(path: str) -> str:
     return parts[2]
 
 
+def _historical_blob(binding: dict[str, Any], path: str) -> bytes:
+    """Read a receipt input from its immutable controller forest."""
+
+    controller_commit = binding["controller_commit"]
+    for entry in binding["planning_forest"]:
+        repository_path = entry["path"]
+        prefix = f"{repository_path}/"
+        if not path.startswith(prefix):
+            continue
+        recorded_commit = entry["gitlink_commit"]
+        assert (
+            superproject_gitlink(REPO_ROOT, controller_commit, repository_path) == recorded_commit
+        )
+        current_commit = superproject_gitlink(REPO_ROOT, "HEAD", repository_path)
+        assert_historical_ancestor(REPO_ROOT / repository_path, recorded_commit, current_commit)
+        relative_path = path.removeprefix(prefix)
+        assert tree_path_exists(REPO_ROOT / repository_path, recorded_commit, relative_path)
+        return blob_bytes(REPO_ROOT / repository_path, recorded_commit, relative_path)
+
+    assert tree_path_exists(REPO_ROOT, controller_commit, path)
+    return blob_bytes(REPO_ROOT, controller_commit, path)
+
+
+def _historical_sha256(binding: dict[str, Any], path: str) -> str:
+    return hashlib.sha256(_historical_blob(binding, path)).hexdigest()
+
+
 def _ensure_path(root: Path) -> None:
     token = str(root)
     if token not in sys.path:
@@ -311,9 +356,7 @@ class AssumeGuaranteeComposer:
         self.guarantees = _index_guarantees(self.contracts)
         self.assumptions = _index_assumptions(self.contracts)
         self.boundaries = {row["id"]: row for row in registry["composition_boundaries"]}
-        self.env_rules = {
-            row["id"]: row for row in registry["environment_discharge_rules"]
-        }
+        self.env_rules = {row["id"]: row for row in registry["environment_discharge_rules"]}
         self._unqualified: set[str] = set()
         self._extra_assumptions: list[dict[str, Any]] = []
 
@@ -343,9 +386,7 @@ class AssumeGuaranteeComposer:
         boundary_id = boundary["id"] if boundary else None
 
         if assumption.get("environment"):
-            if assumption.get("explicit_unresolved") and assumption.get(
-                "unresolved_reason"
-            ):
+            if assumption.get("explicit_unresolved") and assumption.get("unresolved_reason"):
                 return DischargeResult(
                     assumption_id=aid,
                     status="unresolved",
@@ -421,9 +462,7 @@ class AssumeGuaranteeComposer:
                 report.unresolved.append(result.assumption_id)
         return report
 
-    def apply_seeded_failure(
-        self, seed: Mapping[str, Any]
-    ) -> tuple[CompositionReport, str]:
+    def apply_seeded_failure(self, seed: Mapping[str, Any]) -> tuple[CompositionReport, str]:
         broken = seed.get("broken_guarantee_id")
         if broken:
             self.mark_unqualified(broken)
@@ -517,37 +556,48 @@ def test_content_sha256_binds_canonical_receipt(receipt: dict[str, Any]) -> None
     assert DIGEST_RE.match(receipt["content_sha256"])
     binding = receipt["content_binding"]
     assert binding["alg"] == "sha256"
-    assert "sort-keys" in binding["canonicalization"] or "separators" in binding[
-        "canonicalization"
-    ]
+    assert "sort-keys" in binding["canonicalization"] or "separators" in binding["canonicalization"]
     assert binding["covers"] == "gate_record_excluding_content_sha256"
     assert _canonical_content_sha256(receipt) == receipt["content_sha256"]
 
 
 def test_source_binding_commits_forest_and_depends_on(
-    receipt: dict[str, Any], scheduler: dict[str, Any]
+    receipt: dict[str, Any],
 ) -> None:
     binding = receipt["source_binding"]
-    assert binding["controller_commit"] == _git_rev_parse("HEAD")
-    assert binding["controller_tree"] == _git_rev_parse("HEAD^{tree}")
-    assert binding["scheduler_config"] == (
-        "config/formal_assurance_control_plane_scheduler.json"
+    assert FULL_SHA_RE.match(binding["controller_commit"])
+    assert FULL_SHA_RE.match(binding["controller_tree"])
+    assert_historical_ancestor(REPO_ROOT, binding["controller_commit"])
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{binding['controller_commit']}^{{tree}}"
     )
+    assert binding["scheduler_config"] == ("config/formal_assurance_control_plane_scheduler.json")
+    scheduler_bytes = _historical_blob(binding, binding["scheduler_config"])
     assert DIGEST_RE.match(binding["scheduler_config_sha256"])
-    assert binding["scheduler_config_sha256"] == _sha256_file(SCHEDULER_PATH)
+    assert binding["scheduler_config_sha256"] == hashlib.sha256(scheduler_bytes).hexdigest()
+    historical_scheduler = json.loads(scheduler_bytes)
     assert DIGEST_RE.match(binding["repository_contracts_sha256"])
-    assert binding["repository_contracts_sha256"] == _sha256_file(CONTRACTS_PATH)
+    assert binding["repository_contracts_sha256"] == _historical_sha256(
+        binding, binding["repository_contracts_path"]
+    )
     assert DIGEST_RE.match(binding["portfolio_lock_sha256"])
-    assert binding["portfolio_lock_sha256"] == _sha256_file(
-        REPO_ROOT / binding["portfolio_lock_path"]
+    assert binding["portfolio_lock_sha256"] == _historical_sha256(
+        binding, binding["portfolio_lock_path"]
     )
 
     forest = {entry["path"]: entry for entry in binding["planning_forest"]}
     assert set(forest) == set(PLANNING_FOREST_PATHS)
-    sb = scheduler["source_binding"]
+    sb = historical_scheduler["source_binding"]
     for path, entry in forest.items():
         assert FULL_SHA_RE.match(entry["gitlink_commit"])
-        assert entry["gitlink_commit"] == _gitlink_commit(path)
+        assert entry["gitlink_commit"] == superproject_gitlink(
+            REPO_ROOT, binding["controller_commit"], path
+        )
+        assert_historical_ancestor(
+            REPO_ROOT / path,
+            entry["gitlink_commit"],
+            superproject_gitlink(REPO_ROOT, "HEAD", path),
+        )
         field = entry["planning_revision_field"]
         assert entry["scheduler_planning_revision"] == sb[field]
         assert entry["matches_scheduler_planning_revision"] is (
@@ -564,10 +614,10 @@ def test_producer_input_digests_match_filesystem(receipt: dict[str, Any]) -> Non
         assert row["role"]
         assert isinstance(row["paths"], list) and row["paths"]
         for item in row["paths"]:
-            path = REPO_ROOT / item["path"]
-            assert path.is_file(), item["path"]
             assert DIGEST_RE.match(item["sha256"])
-            assert item["sha256"] == _sha256_file(path), item["path"]
+            assert item["sha256"] == _historical_sha256(receipt["source_binding"], item["path"]), (
+                item["path"]
+            )
 
 
 def test_terminal_workflow_matches_repository_contracts(
@@ -665,6 +715,8 @@ def test_positive_tep_happy_path_holds_all_invariants(receipt: dict[str, Any]) -
     _ensure_path(ACCELERATE_ROOT)
     from ipfs_accelerate_py.agent_supervisor.runtime.formal_transition_monitor import (
         REQUIRED_INVARIANTS as MONITOR_INVARIANTS,
+    )
+    from ipfs_accelerate_py.agent_supervisor.runtime.formal_transition_monitor import (
         evaluate_all_normative_vectors,
         evaluate_normative_vector,
         load_normative_vectors,
@@ -816,9 +868,7 @@ def test_negative_contract_seeds_fail_at_intended_gate(
         boundary_id = variant.get("violated_boundary_id")
         if boundary_id:
             boundary = next(
-                row
-                for row in contracts["composition_boundaries"]
-                if row["id"] == boundary_id
+                row for row in contracts["composition_boundaries"] if row["id"] == boundary_id
             )
             assert (
                 boundary["workflow_step"] == variant["fail_gate"]
@@ -913,8 +963,7 @@ def test_capsule_invalidates_when_contract_digest_changes(
 
     composer = AssumeGuaranteeComposer(contracts)
     digests = {
-        contract["id"]: "sha256:"
-        + hashlib.sha256(_canonical_json_bytes(contract)).hexdigest()
+        contract["id"]: "sha256:" + hashlib.sha256(_canonical_json_bytes(contract)).hexdigest()
         for contract in composer.contracts.values()
     }
     required = list(capsule_spec["required_contract_ids"])

@@ -9,7 +9,7 @@ no legal clearance is inferred.
 from __future__ import annotations
 
 import json
-import subprocess
+import sys
 import tomllib
 from pathlib import Path
 from typing import Any
@@ -17,6 +17,18 @@ from typing import Any
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_text,
+    current_head,
+    git_output,
+    superproject_gitlink,
+    tree_path_exists,
+)
+
 REPORT_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -85,28 +97,7 @@ PLANNING_FOREST_PATHS = (
 
 
 def _gitlink_commit(path: str) -> str:
-    completed = subprocess.run(
-        ["git", "ls-tree", "HEAD", path],
-        check=True,
-        capture_output=True,
-        text=True,
-        cwd=REPO_ROOT,
-    )
-    parts = completed.stdout.strip().split()
-    assert len(parts) >= 3, completed.stdout
-    assert parts[1] == "commit", completed.stdout
-    return parts[2]
-
-
-def _git_rev_parse(*args: str, cwd: Path | None = None) -> str:
-    completed = subprocess.run(
-        ["git", "rev-parse", *args],
-        check=True,
-        capture_output=True,
-        text=True,
-        cwd=cwd or REPO_ROOT,
-    )
-    return completed.stdout.strip()
+    return superproject_gitlink(REPO_ROOT, "HEAD", path)
 
 
 def _input_by_id(report: dict[str, Any], input_id: str) -> dict[str, Any]:
@@ -149,16 +140,20 @@ def test_report_task_and_schema_binding(report: dict[str, Any]) -> None:
 
 
 def test_source_binding_matches_scheduler_and_gitlinks(
-    report: dict[str, Any], scheduler: dict[str, Any]
+    report: dict[str, Any],
 ) -> None:
     binding = report["source_binding"]
-    assert binding["controller_commit"] == _git_rev_parse("HEAD")
-    assert binding["controller_tree"] == _git_rev_parse("HEAD^{tree}")
-    assert binding["scheduler_config"] == (
-        "config/formal_assurance_control_plane_scheduler.json"
+    controller_commit = binding["controller_commit"]
+    assert_historical_ancestor(REPO_ROOT, controller_commit)
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{controller_commit}^{{tree}}"
     )
+    assert binding["scheduler_config"] == ("config/formal_assurance_control_plane_scheduler.json")
 
-    sb = scheduler["source_binding"]
+    historical_scheduler = json.loads(
+        blob_text(REPO_ROOT, controller_commit, binding["scheduler_config"])
+    )
+    sb = historical_scheduler["source_binding"]
     forest = {entry["path"]: entry for entry in binding["planning_forest"]}
     assert set(forest) == set(PLANNING_FOREST_PATHS)
 
@@ -171,7 +166,10 @@ def test_source_binding_matches_scheduler_and_gitlinks(
     }
     for path, commit in expected.items():
         assert forest[path]["gitlink_commit"] == commit
-        assert _gitlink_commit(path) == commit
+        assert superproject_gitlink(REPO_ROOT, controller_commit, path) == commit
+        current_gitlink = _gitlink_commit(path)
+        assert current_head(REPO_ROOT / path) == current_gitlink
+        assert_historical_ancestor(REPO_ROOT / path, commit, current_gitlink)
 
 
 def test_every_qualification_input_has_source_and_blocking_predicate(
@@ -228,9 +226,7 @@ def test_historical_receipts_separated_from_current_tree_qualification(
     assert REQUIRED_INPUT_IDS <= blocking_ids
 
     # No historical receipt path may be treated as a current-tree authority source.
-    historical_paths = {
-        entry["path"] for entry in historical if "path" in entry
-    }
+    historical_paths = {entry["path"] for entry in historical if "path" in entry}
     authority_statement = current["authority_statement"].lower()
     assert "historical" in authority_statement
     assert "excluded" in authority_statement or "exact" in authority_statement
@@ -244,16 +240,12 @@ def test_datasets_license_conflict_matches_sources(report: dict[str, Any]) -> No
     assert entry["category"] == "package_repository_license_conflicts"
 
     pyproject = tomllib.loads(
-        (REPO_ROOT / "external/ipfs_datasets/pyproject.toml").read_text(
-            encoding="utf-8"
-        )
+        (REPO_ROOT / "external/ipfs_datasets/pyproject.toml").read_text(encoding="utf-8")
     )
     package_license = pyproject["project"]["license"]["text"]
     assert package_license == "MIT"
 
-    license_text = (REPO_ROOT / "external/ipfs_datasets/LICENSE").read_text(
-        encoding="utf-8"
-    )
+    license_text = (REPO_ROOT / "external/ipfs_datasets/LICENSE").read_text(encoding="utf-8")
     assert "GNU AFFERO GENERAL PUBLIC LICENSE" in license_text
 
     rights = report["rights_summary"]
@@ -268,9 +260,7 @@ def test_swissknife_missing_license_and_competing_locks(
 ) -> None:
     missing = _input_by_id(report, "qi:swissknife-missing-license-and-provenance")
     assert missing["class"] == "unknown"
-    package = json.loads(
-        (REPO_ROOT / "swissknife/package.json").read_text(encoding="utf-8")
-    )
+    package = json.loads((REPO_ROOT / "swissknife/package.json").read_text(encoding="utf-8"))
     assert package.get("license", None) in ("", None)
     assert not (REPO_ROOT / "swissknife/LICENSE").exists()
     assert not (REPO_ROOT / "swissknife/LICENSE.md").exists()
@@ -308,33 +298,36 @@ def test_mutable_git_plus_main_dependencies_exist(report: dict[str, Any]) -> Non
 def test_stale_kit_receipt_not_current_gitlink(report: dict[str, Any]) -> None:
     entry = _input_by_id(report, "qi:kit-kernel-vfs-release-receipt-stale-vs-gitlink")
     assert entry["class"] == "stale"
-    receipt_path = REPO_ROOT / "external/ipfs_kit/docs/kernel_vfs/release_receipt.json"
-    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    kit_root = REPO_ROOT / "external/ipfs_kit"
+    inventory_gitlink = next(
+        item["gitlink_commit"]
+        for item in report["source_binding"]["planning_forest"]
+        if item["path"] == "external/ipfs_kit"
+    )
+    receipt = json.loads(
+        blob_text(
+            kit_root,
+            inventory_gitlink,
+            "docs/kernel_vfs/release_receipt.json",
+        )
+    )
     bound = receipt["source_evidence"]["implementation_baseline"]["commit"]
     kit_gitlink = _gitlink_commit("external/ipfs_kit")
     assert bound != kit_gitlink
-    assert any(
-        source.get("observed") == bound for source in entry["sources"]
-    )
-    assert any(
-        source.get("observed") == kit_gitlink for source in entry["sources"]
-    )
+    assert any(source.get("observed") == bound for source in entry["sources"])
+    assert any(source.get("observed") == inventory_gitlink for source in entry["sources"])
 
-    # Ancestry: receipt baseline is ancestor of current gitlink, hence stale-not-foreign.
-    merge_base = subprocess.run(
-        ["git", "-C", str(REPO_ROOT / "external/ipfs_kit"), "merge-base", bound, kit_gitlink],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
-    assert merge_base == bound
+    # Both transitions remain explicit: receipt -> inventory -> current checkout.
+    assert_historical_ancestor(kit_root, bound, inventory_gitlink)
+    assert_historical_ancestor(kit_root, inventory_gitlink, kit_gitlink)
 
     empty = _input_by_id(report, "qi:kit-external-backend-receipts-empty")
     index = json.loads(
-        (
-            REPO_ROOT
-            / "external/ipfs_kit/docs/runtime_readiness/backend_external_receipts/index.json"
-        ).read_text(encoding="utf-8")
+        blob_text(
+            kit_root,
+            inventory_gitlink,
+            "docs/runtime_readiness/backend_external_receipts/index.json",
+        )
     )
     assert index.get("receipts") == []
     assert empty["class"] == "stale"
@@ -367,21 +360,29 @@ def test_historical_receipt_files_exist_and_are_non_authority(
 
 
 def test_mcp_plusplus_and_reproducibility_gaps(report: dict[str, Any]) -> None:
+    binding = report["source_binding"]
+    mcp_commit = next(
+        item["gitlink_commit"]
+        for item in binding["planning_forest"]
+        if item["path"] == "Mcp-Plus-Plus"
+    )
+    mcp_root = REPO_ROOT / "Mcp-Plus-Plus"
     mcp = _input_by_id(report, "qi:mcp-plusplus-missing-license-file")
     assert mcp["class"] == "unknown"
-    assert not (REPO_ROOT / "Mcp-Plus-Plus/LICENSE").exists()
-    assert not (REPO_ROOT / "Mcp-Plus-Plus/LICENSE.md").exists()
-    readme = (REPO_ROOT / "Mcp-Plus-Plus/README.md").read_text(encoding="utf-8")
+    assert not tree_path_exists(mcp_root, mcp_commit, "LICENSE")
+    assert not tree_path_exists(mcp_root, mcp_commit, "LICENSE.md")
+    readme = blob_text(mcp_root, mcp_commit, "README.md")
     assert "MIT License" in readme
 
     portfolio = _input_by_id(report, "qi:missing-portfolio-lock-and-sbom")
     assert portfolio["class"] == "unknown"
-    assert not (REPO_ROOT / "portfolio.lock.json").exists()
-    assert not (REPO_ROOT / "sbom.json").exists()
+    controller_commit = binding["controller_commit"]
+    assert not tree_path_exists(REPO_ROOT, controller_commit, "portfolio.lock.json")
+    assert not tree_path_exists(REPO_ROOT, controller_commit, "sbom.json")
 
     cargo = _input_by_id(report, "qi:mcp-plusplus-tests-rs-missing-cargo-lock")
-    assert (REPO_ROOT / "Mcp-Plus-Plus/tests-rs/Cargo.toml").is_file()
-    assert not (REPO_ROOT / "Mcp-Plus-Plus/tests-rs/Cargo.lock").exists()
+    assert tree_path_exists(mcp_root, mcp_commit, "tests-rs/Cargo.toml")
+    assert not tree_path_exists(mcp_root, mcp_commit, "tests-rs/Cargo.lock")
     assert cargo["class"] == "unknown"
 
 
@@ -390,20 +391,13 @@ def test_root_license_metadata_gap_and_acceptance(report: dict[str, Any]) -> Non
     assert entry["class"] == "unknown"
     license_text = (REPO_ROOT / "LICENSE").read_text(encoding="utf-8")
     assert "GNU AFFERO GENERAL PUBLIC LICENSE" in license_text
-    pyproject = tomllib.loads(
-        (REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    )
+    pyproject = tomllib.loads((REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     assert pyproject["project"].get("license") is None
 
     acceptance = report["acceptance"]
     assert acceptance["every_mutable_unknown_stale_input_has_exact_source"] is True
-    assert (
-        acceptance["every_mutable_unknown_stale_input_has_blocking_predicate"] is True
-    )
-    assert (
-        acceptance["historical_receipts_separated_from_current_tree_qualification"]
-        is True
-    )
+    assert acceptance["every_mutable_unknown_stale_input_has_blocking_predicate"] is True
+    assert acceptance["historical_receipts_separated_from_current_tree_qualification"] is True
     assert acceptance["legal_clearance_inferred"] is False
     assert acceptance["release_admissible_claimed"] is False
 

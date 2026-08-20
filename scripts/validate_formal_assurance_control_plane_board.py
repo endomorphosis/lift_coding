@@ -5,12 +5,10 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 from collections import defaultdict, deque
+from collections.abc import Iterable
 from pathlib import Path, PurePosixPath
-from typing import Iterable
-
 
 ROOT = Path(__file__).resolve().parents[1]
 ACCELERATOR = ROOT / "external" / "ipfs_accelerate"
@@ -28,7 +26,6 @@ from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon impor
     parse_task_file,
     split_csv,
 )
-
 
 PLAN = Path(
     "implementation_plan/docs/49-formal-assurance-control-plane-plan-2026-08-19.md"

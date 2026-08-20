@@ -11,13 +11,23 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_text,
+    current_head,
+    superproject_gitlink,
+)
+
 REPORT_PATH = (
     ROOT
     / "implementation_plan"
@@ -78,18 +88,8 @@ def _load_report() -> dict[str, Any]:
     return payload
 
 
-def _git_head(repo_relative: str) -> str:
-    completed = subprocess.run(
-        ["git", "-C", str(ROOT / repo_relative), "rev-parse", "HEAD"],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return completed.stdout.strip()
-
-
-def _scheduler_revisions() -> dict[str, str]:
-    scheduler = json.loads(SCHEDULER_PATH.read_text(encoding="utf-8"))
+def _scheduler_revisions(controller_commit: str, scheduler_path: str) -> dict[str, str]:
+    scheduler = json.loads(blob_text(ROOT, controller_commit, scheduler_path))
     binding = scheduler["source_binding"]
     return {
         "external/ipfs_accelerate": binding["accelerate_planning_revision"],
@@ -100,8 +100,7 @@ def _scheduler_revisions() -> dict[str, str]:
     }
 
 
-def _symbol_defined(path: Path, symbol: str) -> bool:
-    text = path.read_text(encoding="utf-8")
+def _symbol_defined(text: str, symbol: str) -> bool:
     patterns = (
         rf"^class {re.escape(symbol)}\b",
         rf"^def {re.escape(symbol)}\b",
@@ -126,14 +125,21 @@ def test_report_schema_and_task_metadata(report: dict[str, Any]) -> None:
 
 
 def test_source_binding_matches_scheduler_and_git(report: dict[str, Any]) -> None:
-    expected = _scheduler_revisions()
-    repos = report["source_binding"]["repositories"]
+    source_binding = report["source_binding"]
+    controller_commit = source_binding["controller_tree_id"]
+    assert_historical_ancestor(ROOT, controller_commit)
+    expected = _scheduler_revisions(
+        controller_commit, source_binding["scheduler_config"]
+    )
+    repos = source_binding["repositories"]
     for repo, commit in expected.items():
         assert repo in repos, f"missing source binding for {repo}"
         assert FULL_SHA_RE.fullmatch(repos[repo]["commit"]), repos[repo]["commit"]
         assert repos[repo]["commit"] == commit
-        if (ROOT / repo).exists():
-            assert _git_head(repo) == commit
+        assert superproject_gitlink(ROOT, controller_commit, repo) == commit
+        gitlink = superproject_gitlink(ROOT, "HEAD", repo)
+        assert current_head(ROOT / repo) == gitlink
+        assert_historical_ancestor(ROOT / repo, commit, gitlink)
 
 
 def test_every_component_has_required_fields(report: dict[str, Any]) -> None:
@@ -180,16 +186,16 @@ def test_component_commits_paths_and_symbols_resolve(report: dict[str, Any]) -> 
         assert repo in binding
         assert item["commit"] == binding[repo]["commit"]
 
-        path = ROOT / item["path"]
-        assert path.is_file(), f"missing path for {item['component_id']}: {item['path']}"
         assert item["path"].startswith(repo.rstrip("/") + "/") or item["path"].startswith(
             repo + "/"
         )
-        assert _symbol_defined(path, item["symbol"]), (
+        relative_path = str(Path(item["path"]).relative_to(repo))
+        text = blob_text(ROOT / repo, item["commit"], relative_path)
+        assert _symbol_defined(text, item["symbol"]), (
             f"{item['component_id']}: symbol {item['symbol']!r} not defined in {item['path']}"
         )
         if "line" in item:
-            lines = path.read_text(encoding="utf-8").splitlines()
+            lines = text.splitlines()
             line_no = int(item["line"])
             assert 1 <= line_no <= len(lines)
             assert item["symbol"] in lines[line_no - 1]
@@ -243,9 +249,5 @@ def test_mutated_report_missing_required_field_fails_local_checks(report: dict[s
 
     broken = json.loads(json.dumps(report))
     del broken["components"][0]["semantic_authority"]
-    missing = [
-        field
-        for field in REQUIRED_COMPONENT_FIELDS
-        if field not in broken["components"][0]
-    ]
+    missing = [field for field in REQUIRED_COMPONENT_FIELDS if field not in broken["components"][0]]
     assert "semantic_authority" in missing

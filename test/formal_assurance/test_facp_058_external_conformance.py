@@ -27,6 +27,17 @@ from typing import Any
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_bytes,
+    git_output,
+    superproject_gitlink,
+    tree_path_exists,
+)
+
 RECEIPT_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -51,11 +62,7 @@ CCC_GATE_PATH = (
     / "canonical_contracts_v1.json"
 )
 VECTORS_PATH = (
-    REPO_ROOT
-    / "Mcp-Plus-Plus"
-    / "conformance"
-    / "vectors"
-    / "assurance-canonical-encoding.json"
+    REPO_ROOT / "Mcp-Plus-Plus" / "conformance" / "vectors" / "assurance-canonical-encoding.json"
 )
 ENCODING_SPEC_PATH = (
     REPO_ROOT / "Mcp-Plus-Plus" / "docs" / "spec" / "assurance-canonical-encoding.md"
@@ -159,12 +166,8 @@ def _sha256_file(path: Path) -> str:
 
 
 def _canonical_content_sha256(receipt: dict[str, Any]) -> str:
-    without_digest = {
-        key: value for key, value in receipt.items() if key != "content_sha256"
-    }
-    canonical = json.dumps(
-        without_digest, sort_keys=True, separators=(",", ":"), ensure_ascii=True
-    )
+    without_digest = {key: value for key, value in receipt.items() if key != "content_sha256"}
+    canonical = json.dumps(without_digest, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
@@ -191,6 +194,33 @@ def _gitlink_commit(path: str) -> str:
     assert len(parts) >= 3, completed.stdout
     assert parts[1] == "commit", completed.stdout
     return parts[2]
+
+
+def _historical_blob(binding: dict[str, Any], path: str) -> bytes:
+    """Read a receipt input from its immutable controller forest."""
+
+    controller_commit = binding["controller_commit"]
+    for entry in binding["planning_forest"]:
+        repository_path = entry["path"]
+        prefix = f"{repository_path}/"
+        if not path.startswith(prefix):
+            continue
+        recorded_commit = entry["gitlink_commit"]
+        assert (
+            superproject_gitlink(REPO_ROOT, controller_commit, repository_path) == recorded_commit
+        )
+        current_commit = superproject_gitlink(REPO_ROOT, "HEAD", repository_path)
+        assert_historical_ancestor(REPO_ROOT / repository_path, recorded_commit, current_commit)
+        relative_path = path.removeprefix(prefix)
+        assert tree_path_exists(REPO_ROOT / repository_path, recorded_commit, relative_path)
+        return blob_bytes(REPO_ROOT / repository_path, recorded_commit, relative_path)
+
+    assert tree_path_exists(REPO_ROOT, controller_commit, path)
+    return blob_bytes(REPO_ROOT, controller_commit, path)
+
+
+def _historical_sha256(binding: dict[str, Any], path: str) -> str:
+    return hashlib.sha256(_historical_blob(binding, path)).hexdigest()
 
 
 def _run_out(cmd: list[str]) -> str:
@@ -306,28 +336,36 @@ def test_content_sha256_binds_canonical_receipt(receipt: dict[str, Any]) -> None
 
 
 def test_source_binding_commits_forest_and_depends_on(
-    receipt: dict[str, Any], scheduler: dict[str, Any]
+    receipt: dict[str, Any],
 ) -> None:
     binding = receipt["source_binding"]
-    assert binding["controller_commit"] == _git_rev_parse("HEAD")
-    assert binding["controller_tree"] == _git_rev_parse("HEAD^{tree}")
-    assert binding["scheduler_config"] == (
-        "config/formal_assurance_control_plane_scheduler.json"
-    )
     assert FULL_SHA_RE.match(binding["controller_commit"])
     assert FULL_SHA_RE.match(binding["controller_tree"])
+    assert_historical_ancestor(REPO_ROOT, binding["controller_commit"])
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{binding['controller_commit']}^{{tree}}"
+    )
+    assert binding["scheduler_config"] == ("config/formal_assurance_control_plane_scheduler.json")
+    historical_scheduler = json.loads(_historical_blob(binding, binding["scheduler_config"]))
 
-    assert binding["vectors_sha256"] == _sha256_file(VECTORS_PATH)
-    assert binding["encoding_spec_sha256"] == _sha256_file(ENCODING_SPEC_PATH)
-    assert (REPO_ROOT / binding["vectors_path"]).is_file()
-    assert (REPO_ROOT / binding["encoding_spec_path"]).is_file()
+    assert binding["vectors_sha256"] == _historical_sha256(binding, binding["vectors_path"])
+    assert binding["encoding_spec_sha256"] == _historical_sha256(
+        binding, binding["encoding_spec_path"]
+    )
 
     forest = {entry["path"]: entry for entry in binding["planning_forest"]}
     assert set(forest) == set(PLANNING_FOREST_PATHS)
-    sb = scheduler["source_binding"]
+    sb = historical_scheduler["source_binding"]
     for path, entry in forest.items():
         assert FULL_SHA_RE.match(entry["gitlink_commit"])
-        assert entry["gitlink_commit"] == _gitlink_commit(path)
+        assert entry["gitlink_commit"] == superproject_gitlink(
+            REPO_ROOT, binding["controller_commit"], path
+        )
+        assert_historical_ancestor(
+            REPO_ROOT / path,
+            entry["gitlink_commit"],
+            superproject_gitlink(REPO_ROOT, "HEAD", path),
+        )
         field = entry["planning_revision_field"]
         assert entry["scheduler_planning_revision"] == sb[field]
         assert entry["matches_scheduler_planning_revision"] is (
@@ -346,10 +384,10 @@ def test_producer_input_digests_match_filesystem(receipt: dict[str, Any]) -> Non
         assert row["role"]
         assert isinstance(row["paths"], list) and row["paths"]
         for item in row["paths"]:
-            path = REPO_ROOT / item["path"]
-            assert path.is_file(), item["path"]
             assert DIGEST_RE.match(item["sha256"])
-            assert item["sha256"] == _sha256_file(path), item["path"]
+            assert item["sha256"] == _historical_sha256(receipt["source_binding"], item["path"]), (
+                item["path"]
+            )
 
 
 def test_toolchain_binds_tcb_and_live_cargo_identity(receipt: dict[str, Any]) -> None:
@@ -358,8 +396,7 @@ def test_toolchain_binds_tcb_and_live_cargo_identity(receipt: dict[str, Any]) ->
     assert toolchains["languages"] == ["rust"]
     assert toolchains["tcb_sha256"] == _sha256_file(TCB_PATH)
     assert toolchains["tcb_path"] == (
-        "implementation_plan/formal_assurance_control_plane/baseline/"
-        "trusted_computing_base.json"
+        "implementation_plan/formal_assurance_control_plane/baseline/trusted_computing_base.json"
     )
 
     tcb = json.loads(TCB_PATH.read_text(encoding="utf-8"))
@@ -379,9 +416,7 @@ def test_toolchain_binds_tcb_and_live_cargo_identity(receipt: dict[str, Any]) ->
             commit = line.split(":", 1)[1].strip()
             break
     assert rust["cargo_commit"] == commit
-    assert FULL_SHA_RE.match(rust["cargo_commit"]) or DIGEST_RE.match(
-        rust["cargo_commit"]
-    )
+    assert FULL_SHA_RE.match(rust["cargo_commit"]) or DIGEST_RE.match(rust["cargo_commit"])
 
 
 def test_independence_relationship_excludes_generated_manifest_and_compiler(
@@ -419,8 +454,7 @@ def test_independence_relationship_excludes_generated_manifest_and_compiler(
     assert impl["codec_path"] not in owned
     assert not any(path.startswith("Mcp-Plus-Plus/tests-rs/src/assurance_codec") for path in owned)
     assert not any(
-        "assurance_idl/generated" in path and path.endswith("assurance_codec.rs")
-        for path in owned
+        "assurance_idl/generated" in path and path.endswith("assurance_codec.rs") for path in owned
     )
 
     codec = CODEC_RS.read_text(encoding="utf-8")
@@ -556,16 +590,18 @@ def test_failures_empty_when_sealed_or_exact_counterexamples_when_blocked(
     )
     if receipt["status"] == "sealed":
         assert receipt["failures"] == []
-        assert receipt["acceptance"][
-            "independent_implementation_passes_full_required_vector_set"
-        ] is True
+        assert (
+            receipt["acceptance"]["independent_implementation_passes_full_required_vector_set"]
+            is True
+        )
         assert receipt["acceptance"]["canonical_identity_and_errors_match"] is True
     else:
         assert receipt["status"] == "blocked"
         assert receipt["failures"], "blocked release must list exact counterexamples"
-        assert receipt["acceptance"][
-            "independent_implementation_passes_full_required_vector_set"
-        ] is False
+        assert (
+            receipt["acceptance"]["independent_implementation_passes_full_required_vector_set"]
+            is False
+        )
         for failure in receipt["failures"]:
             assert failure["id"] in vector_ids
             # Fail-closed: never omit the identity of a failing vector.
@@ -620,7 +656,9 @@ def test_translation_safety_binds_facp_049_module_markers(receipt: dict[str, Any
     assert section["precondition_pass"] is True
 
     source = TRANSLATION_MODULE_PATH.read_text(encoding="utf-8")
-    assert 'TASK_ID: Final[str] = "FACP-049"' in source or 'TASK_ID' in source and "FACP-049" in source
+    assert (
+        'TASK_ID: Final[str] = "FACP-049"' in source or "TASK_ID" in source and "FACP-049" in source
+    )
     assert "SILENT_DROP_FORBIDDEN" in source
     assert "facp/translation-receipt@1" in source
     assert "facp/deontic-refinement@1" in source
@@ -669,9 +707,7 @@ def test_acceptance_flags_and_no_unqualified_production_claim_fields(
     assert acceptance["network_interoperability_not_claimed"] is True
 
     if receipt["status"] == "sealed":
-        assert acceptance[
-            "independent_implementation_passes_full_required_vector_set"
-        ] is True
+        assert acceptance["independent_implementation_passes_full_required_vector_set"] is True
         assert acceptance["canonical_identity_and_errors_match"] is True
 
     guarded_roots = {
@@ -691,9 +727,7 @@ def test_acceptance_flags_and_no_unqualified_production_claim_fields(
             for key, value in node.items():
                 key_l = str(key).lower()
                 if key_l in FORBIDDEN_RECEIPT_CLAIM_KEYS and path in guarded_roots:
-                    pytest.fail(
-                        f"unqualified production claim field {key!r} at {path or '<root>'}"
-                    )
+                    pytest.fail(f"unqualified production claim field {key!r} at {path or '<root>'}")
                 walk(value, f"{path}.{key}" if path else str(key))
         elif isinstance(node, list):
             for index, item in enumerate(node):

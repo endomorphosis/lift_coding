@@ -11,12 +11,24 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_text,
+    current_head,
+    superproject_gitlink,
+    tree_path_exists,
+)
+
 REPORT_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -77,52 +89,35 @@ def report() -> dict[str, Any]:
 
 
 def _git_swissknife_head() -> str:
-    completed = subprocess.run(
-        ["git", "-C", str(SWISSKNIFE_ROOT), "rev-parse", "HEAD"],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    commit = completed.stdout.strip()
+    commit = current_head(SWISSKNIFE_ROOT)
     assert len(commit) == 40
     return commit
 
 
 def _gitlink_commit() -> str:
-    completed = subprocess.run(
-        ["git", "ls-tree", "HEAD", "swissknife"],
-        check=True,
-        capture_output=True,
-        text=True,
-        cwd=REPO_ROOT,
-    )
-    parts = completed.stdout.strip().split()
-    assert len(parts) >= 3
-    assert parts[1] == "commit"
-    return parts[2]
+    return superproject_gitlink(REPO_ROOT, "HEAD", "swissknife")
 
 
-def _read_span(path: str, line_start: int, line_end: int) -> str:
-    file_path = REPO_ROOT / path
-    assert file_path.is_file(), f"missing source path: {path}"
-    lines = file_path.read_text(encoding="utf-8", errors="replace").splitlines()
+def _read_span(commit: str, path: str, line_start: int, line_end: int) -> str:
+    relative_path = str(Path(path).relative_to("swissknife"))
+    lines = blob_text(SWISSKNIFE_ROOT, commit, relative_path).splitlines()
     assert 1 <= line_start <= line_end <= len(lines), (
-        f"span out of range for {path}: {line_start}-{line_end} "
-        f"(file has {len(lines)} lines)"
+        f"span out of range for {path}: {line_start}-{line_end} (file has {len(lines)} lines)"
     )
     return "\n".join(lines[line_start - 1 : line_end])
 
 
-def _assert_quote_in_span(record: dict[str, Any], *, label: str) -> None:
+def _assert_quote_in_span(record: dict[str, Any], *, commit: str, label: str) -> None:
     path = record["path"]
     quote = record["quote"]
-    span = _read_span(path, int(record["line_start"]), int(record["line_end"]))
+    span = _read_span(commit, path, int(record["line_start"]), int(record["line_end"]))
     assert quote in span, (
         f"{label} quote not reproducible at {path}:"
         f"{record['line_start']}-{record['line_end']}: {quote!r}"
     )
     for secondary in record.get("secondary_spans") or []:
         secondary_span = _read_span(
+            commit,
             secondary["path"],
             int(secondary["line_start"]),
             int(secondary["line_end"]),
@@ -134,7 +129,7 @@ def _assert_quote_in_span(record: dict[str, Any], *, label: str) -> None:
         )
 
 
-def _assert_edge_complete(edge: dict[str, Any], *, expected_category: str) -> None:
+def _assert_edge_complete(edge: dict[str, Any], *, commit: str, expected_category: str) -> None:
     for field in REQUIRED_EDGE_FIELDS:
         assert field in edge, f"{edge.get('edge_id', '<missing>')} missing {field}"
     assert edge["category"] == expected_category
@@ -148,7 +143,7 @@ def _assert_edge_complete(edge: dict[str, Any], *, expected_category: str) -> No
     assert isinstance(target, dict)
     assert target.get("action")
     assert "follow_on" in target
-    _assert_quote_in_span(edge, label=edge["edge_id"])
+    _assert_quote_in_span(edge, commit=commit, label=edge["edge_id"])
 
 
 def test_report_task_and_schema_binding(report: dict[str, Any]) -> None:
@@ -174,10 +169,10 @@ def test_source_binding_matches_exact_swissknife_gitlink(
     binding = report["source_binding"]
     assert binding["submodule_path"] == "swissknife"
     assert binding["gitlink_path"] == "swissknife"
-    expected = _gitlink_commit()
-    assert binding["gitlink_commit"] == expected
-    assert binding["planning_revision"] == expected
-    assert _git_swissknife_head() == expected
+    assert binding["planning_revision"] == binding["gitlink_commit"]
+    current_gitlink = _gitlink_commit()
+    assert _git_swissknife_head() == current_gitlink
+    assert_historical_ancestor(SWISSKNIFE_ROOT, binding["gitlink_commit"], current_gitlink)
     assert binding["worktree_status"] == "clean"
     dirty = subprocess.run(
         ["git", "-C", str(SWISSKNIFE_ROOT), "status", "--porcelain"],
@@ -191,6 +186,7 @@ def test_source_binding_matches_exact_swissknife_gitlink(
 def test_authority_edges_are_complete_and_reproducible(
     report: dict[str, Any],
 ) -> None:
+    bound_commit = report["source_binding"]["gitlink_commit"]
     edges = report["authority_edges"]
     assert isinstance(edges, list) and len(edges) >= 10
 
@@ -209,13 +205,14 @@ def test_authority_edges_are_complete_and_reproducible(
         assert edge_id not in seen
         seen.add(edge_id)
         assert edge_id.startswith("SK-AUTH-")
-        _assert_edge_complete(edge, expected_category="authority_edge")
+        _assert_edge_complete(edge, commit=bound_commit, expected_category="authority_edge")
         assert edge["trust_label"] in report["trust_label_vocabulary"]
 
 
 def test_sensitive_flow_edges_are_complete_and_reproducible(
     report: dict[str, Any],
 ) -> None:
+    bound_commit = report["source_binding"]["gitlink_commit"]
     edges = report["sensitive_flow_edges"]
     assert isinstance(edges, list) and len(edges) >= 5
 
@@ -234,7 +231,7 @@ def test_sensitive_flow_edges_are_complete_and_reproducible(
         assert edge_id not in seen
         seen.add(edge_id)
         assert edge_id.startswith("SK-SENS-")
-        _assert_edge_complete(edge, expected_category="sensitive_flow")
+        _assert_edge_complete(edge, commit=bound_commit, expected_category="sensitive_flow")
         assert edge["trust_label"] in report["trust_label_vocabulary"]
 
 
@@ -242,9 +239,7 @@ def test_default_granted_consent_is_failing_seed_not_accepted_evidence(
     report: dict[str, Any],
 ) -> None:
     default_granted = next(
-        edge
-        for edge in report["authority_edges"]
-        if edge["edge_id"] == "SK-AUTH-001"
+        edge for edge in report["authority_edges"] if edge["edge_id"] == "SK-AUTH-001"
     )
     assert "granted" in default_granted["quote"]
     assert default_granted["trust_label"] == "untrusted_browser"
@@ -254,26 +249,21 @@ def test_default_granted_consent_is_failing_seed_not_accepted_evidence(
     assert "must not synthesize consent=granted" in seed["oracle"]
 
     constructed_allow = next(
-        edge
-        for edge in report["authority_edges"]
-        if edge["edge_id"] == "SK-AUTH-002"
+        edge for edge in report["authority_edges"] if edge["edge_id"] == "SK-AUTH-002"
     )
     assert "allow" in constructed_allow["quote"]
     assert constructed_allow["trust_label"] == "browser_constructed_policy"
 
     acceptance = report["acceptance"]
     assert acceptance["default_granted_consent_is_failing_seed"] is True
-    assert (
-        "SK-AUTH-001" in report["adaptation_disposition"]["remove_or_rewrite"]
-    )
-    assert (
-        "SK-AUTH-002" in report["adaptation_disposition"]["remove_or_rewrite"]
-    )
+    assert "SK-AUTH-001" in report["adaptation_disposition"]["remove_or_rewrite"]
+    assert "SK-AUTH-002" in report["adaptation_disposition"]["remove_or_rewrite"]
 
 
 def test_missing_rights_remain_explicit_without_legal_inference(
     report: dict[str, Any],
 ) -> None:
+    bound_commit = report["source_binding"]["gitlink_commit"]
     gaps = report["missing_rights"]
     assert isinstance(gaps, list) and len(gaps) >= 2
 
@@ -289,15 +279,14 @@ def test_missing_rights_remain_explicit_without_legal_inference(
     assert any(item["declared_license"] == "" for item in declarations)
     assert any("AGPL" in str(item.get("declared_license")) for item in declarations)
     for item in declarations:
-        _assert_quote_in_span(item, label=f"rights:{item['path']}")
+        _assert_quote_in_span(item, commit=bound_commit, label=f"rights:{item['path']}")
 
     missing = license_gap["missing_artifacts"]
     assert any(
-        item["path"] == "swissknife/LICENSE.md"
-        and item["status"] == "absent_in_exact_gitlink"
+        item["path"] == "swissknife/LICENSE.md" and item["status"] == "absent_in_exact_gitlink"
         for item in missing
     )
-    assert not (REPO_ROOT / "swissknife" / "LICENSE.md").exists()
+    assert not tree_path_exists(SWISSKNIFE_ROOT, bound_commit, "LICENSE.md")
 
     tenant_gap = next(gap for gap in gaps if gap["gap_id"] == "SK-RIGHTS-002")
     assert tenant_gap["family"] == "tenant_selection"
@@ -305,7 +294,7 @@ def test_missing_rights_remain_explicit_without_legal_inference(
     assert tenant_gap["inferred_compatibility"] is False
     assert tenant_gap["negative_test_seed"]["id"]
     for item in tenant_gap["declarations"]:
-        _assert_quote_in_span(item, label=f"tenant-gap:{item['path']}")
+        _assert_quote_in_span(item, commit=bound_commit, label=f"tenant-gap:{item['path']}")
 
     serialized = json.dumps(gaps)
     for forbidden in (
@@ -335,8 +324,7 @@ def test_inventory_covers_evidence_subset_topics(report: dict[str, Any]) -> None
     assert "unresolved_human_legal_review" in blob
 
     families = {
-        edge["family"]
-        for edge in report["authority_edges"] + report["sensitive_flow_edges"]
+        edge["family"] for edge in report["authority_edges"] + report["sensitive_flow_edges"]
     }
     assert "browser_policy_consent_defaults" in families
     assert "tenant_selection" in families or any(

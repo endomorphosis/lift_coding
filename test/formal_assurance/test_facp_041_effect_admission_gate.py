@@ -178,6 +178,8 @@ def accelerate_admission():
     _ensure_accelerate_path()
     from ipfs_accelerate_py.agent_supervisor.admission.formal_kernel import (
         KERNEL_ISSUER as KERNEL_ISSUER_MOD,
+    )
+    from ipfs_accelerate_py.agent_supervisor.admission.formal_kernel import (
         AdmissionBindings,
         AdmissionErrorCode,
         AdmissionToken,
@@ -190,6 +192,8 @@ def accelerate_admission():
     )
     from ipfs_accelerate_py.agent_supervisor.admission.transport_gate import (
         KERNEL_CALL as KERNEL_CALL_MOD,
+    )
+    from ipfs_accelerate_py.agent_supervisor.admission.transport_gate import (
         MIGRATED_TRANSPORTS,
         CommonTransportGate,
         HandlerNotUnlockedError,
@@ -897,7 +901,7 @@ def test_all_transport_kernel_identity(
         identities.append(result.kernel_call)
 
     # Shared unlock identity across every migrated Accelerate transport.
-    for left, right in zip(identities, identities[1:]):
+    for left, right in zip(identities, identities[1:], strict=False):
         assert adm["same_kernel_call"](left, right)
         assert left.identity_without_transport() == right.identity_without_transport()
 

@@ -15,8 +15,8 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import re
+import sys
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -24,6 +24,17 @@ from typing import Any
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from facp_historical_git import (
+    assert_historical_ancestor,
+    blob_bytes,
+    git_output,
+    superproject_gitlink,
+    tree_path_exists,
+)
+
 QUAL_DIR = (
     REPO_ROOT
     / "implementation_plan"
@@ -95,6 +106,33 @@ def _sha256_file(path: Path) -> str:
     return _sha256_bytes(path.read_bytes())
 
 
+def _historical_blob(binding: dict[str, Any], path: str) -> bytes:
+    """Read a lock input from the immutable controller forest."""
+
+    controller_commit = binding["controller_commit"]
+    for entry in binding["planning_forest"]:
+        repository_path = entry["path"]
+        prefix = f"{repository_path}/"
+        if not path.startswith(prefix):
+            continue
+        recorded_commit = entry["digest"]
+        assert (
+            superproject_gitlink(REPO_ROOT, controller_commit, repository_path) == recorded_commit
+        )
+        current_commit = superproject_gitlink(REPO_ROOT, "HEAD", repository_path)
+        assert_historical_ancestor(REPO_ROOT / repository_path, recorded_commit, current_commit)
+        relative_path = path.removeprefix(prefix)
+        assert tree_path_exists(REPO_ROOT / repository_path, recorded_commit, relative_path)
+        return blob_bytes(REPO_ROOT / repository_path, recorded_commit, relative_path)
+
+    assert tree_path_exists(REPO_ROOT, controller_commit, path)
+    return blob_bytes(REPO_ROOT, controller_commit, path)
+
+
+def _historical_sha256(binding: dict[str, Any], path: str) -> str:
+    return _sha256_bytes(_historical_blob(binding, path))
+
+
 def _canonical_json_bytes(payload: dict[str, Any]) -> bytes:
     return json.dumps(
         payload,
@@ -134,9 +172,7 @@ def build_portfolio_closure_payload(
             "digest_algorithm": node["digest_algorithm"],
             "digest": node["digest"],
         }
-        for node in sorted(
-            lock["source_binding"]["planning_forest"], key=lambda item: item["path"]
-        )
+        for node in sorted(lock["source_binding"]["planning_forest"], key=lambda item: item["path"])
     ]
     builder = provenance["builder_identity"]["declared"]
     return {
@@ -189,12 +225,11 @@ def two_clean_environment_builds(
         "LC_ALL": "C",
         "TZ": "UTC",
     }
-    with tempfile.TemporaryDirectory(prefix="facp056-env-a-") as dir_a, tempfile.TemporaryDirectory(
-        prefix="facp056-env-b-"
-    ) as dir_b:
-        build_a = hermetic_build_declared_artifact(
-            lock, provenance, Path(dir_a), env=clean_env
-        )
+    with (
+        tempfile.TemporaryDirectory(prefix="facp056-env-a-") as dir_a,
+        tempfile.TemporaryDirectory(prefix="facp056-env-b-") as dir_b,
+    ):
+        build_a = hermetic_build_declared_artifact(lock, provenance, Path(dir_a), env=clean_env)
         build_b = hermetic_build_declared_artifact(
             lock, provenance, Path(dir_b), env=dict(clean_env)
         )
@@ -283,9 +318,7 @@ def generate_unsigned_test_provenance(
                     {
                         "name": "lock-closure-view",
                         "digest": {
-                            "sha256": _sha256_bytes(
-                                _canonical_json_bytes({"materials": materials})
-                            )
+                            "sha256": _sha256_bytes(_canonical_json_bytes({"materials": materials}))
                         },
                     }
                 ],
@@ -325,9 +358,7 @@ def generate_unsigned_test_provenance(
     }
     # Bind provenance statement identity without circular signature bytes.
     statement_for_hash = {
-        key: value
-        for key, value in statement.items()
-        if key not in {"signatures"}
+        key: value for key, value in statement.items() if key not in {"signatures"}
     }
     statement_for_hash["steps"] = [
         step
@@ -383,9 +414,7 @@ def verify_provenance(
         blockers.append("nonreproducible:product_digest_mismatch")
 
     build_step = next(
-        step
-        for step in statement["steps"]
-        if step["id"] == "step:hermetic-build-declared-artifact"
+        step for step in statement["steps"] if step["id"] == "step:hermetic-build-declared-artifact"
     )
     product = build_step["products"][0]
     if product["digest"]["sha256"] != product_digest:
@@ -398,8 +427,7 @@ def verify_provenance(
         run_builder["id"] != declared_builder["builder_id"]
         or version["builder_version"] != declared_builder["builder_version"]
         or version["builder_uri"] != declared_builder["builder_uri"]
-        or version["builder_digest_sha256"]
-        != declared_builder["builder_digest_sha256"]
+        or version["builder_digest_sha256"] != declared_builder["builder_digest_sha256"]
     ):
         blockers.append("nonreproducible:builder_identity_mismatch")
 
@@ -413,9 +441,7 @@ def verify_provenance(
 
     # Rejected mutable inputs must not appear as admitted materials.
     rejected_paths = {
-        item.get("path")
-        for item in lock["rejected_mutable_inputs"]
-        if item.get("path")
+        item.get("path") for item in lock["rejected_mutable_inputs"] if item.get("path")
     }
     for step in statement["steps"]:
         for material in step.get("materials", []):
@@ -423,9 +449,7 @@ def verify_provenance(
                 blockers.append("nonreproducible:mutable_dependency")
 
     # Single-build claim forbidden.
-    env_count = statement["predicate"]["runDetails"]["metadata"].get(
-        "environment_count", 0
-    )
+    env_count = statement["predicate"]["runDetails"]["metadata"].get("environment_count", 0)
     if statement.get("production_release_claim") is True:
         blockers.append("nonreproducible:artifact_digest_mismatch")
     if env_count < 2 and statement.get("claim_reproducible") is True:
@@ -520,9 +544,9 @@ def test_all_admitted_dependencies_are_immutable_and_digest_bound(
 
         path = dep.get("path")
         if path and path != "." and algo == "sha256":
-            on_disk = REPO_ROOT / path
-            assert on_disk.is_file(), f"missing digest-bound path: {path}"
-            assert _sha256_file(on_disk) == digest, f"digest drift for {path}"
+            assert _historical_sha256(lock["source_binding"], path) == digest, (
+                f"historical digest drift for {path}"
+            )
 
     for node in lock["source_binding"]["planning_forest"]:
         assert FULL_SHA1_RE.match(node["digest"])
@@ -538,17 +562,20 @@ def test_all_admitted_dependencies_are_immutable_and_digest_bound(
 
 
 def test_lock_digests_match_on_disk_and_scheduler_pins(
-    lock: dict[str, Any], scheduler: dict[str, Any]
+    lock: dict[str, Any],
 ) -> None:
     binding = lock["source_binding"]
     assert FULL_SHA1_RE.match(binding["controller_commit"])
     assert FULL_SHA1_RE.match(binding["controller_tree"])
-    assert (
-        _sha256_file(SCHEDULER_PATH)
-        == binding["scheduler_config_sha256"]
+    assert_historical_ancestor(REPO_ROOT, binding["controller_commit"])
+    assert binding["controller_tree"] == git_output(
+        REPO_ROOT, "rev-parse", f"{binding['controller_commit']}^{{tree}}"
     )
+    scheduler_bytes = _historical_blob(binding, binding["scheduler_config"])
+    assert _sha256_bytes(scheduler_bytes) == binding["scheduler_config_sha256"]
+    historical_scheduler = json.loads(scheduler_bytes)
 
-    sb = scheduler["source_binding"]
+    sb = historical_scheduler["source_binding"]
     field_map = {
         "Mcp-Plus-Plus": "mcp_plus_plus_planning_revision",
         "external/ipfs_accelerate": "accelerate_planning_revision",
@@ -557,15 +584,22 @@ def test_lock_digests_match_on_disk_and_scheduler_pins(
         "swissknife": "swissknife_planning_revision",
     }
     for node in binding["planning_forest"]:
+        assert node["digest"] == superproject_gitlink(
+            REPO_ROOT, binding["controller_commit"], node["path"]
+        )
+        assert_historical_ancestor(
+            REPO_ROOT / node["path"],
+            node["digest"],
+            superproject_gitlink(REPO_ROOT, "HEAD", node["path"]),
+        )
         field = field_map[node["path"]]
         assert node["scheduler_field"] == field
         assert node["scheduler_planning_revision"] == sb[field]
-        assert node["matches_scheduler_planning_revision"] is (
-            node["digest"] == sb[field]
-        )
+        assert node["matches_scheduler_planning_revision"] is (node["digest"] == sb[field])
 
 
 def test_swissknife_sole_lock_authority(lock: dict[str, Any]) -> None:
+    binding = lock["source_binding"]
     authorities = lock["lock_authorities"]
     assert len(authorities) == 1
     authority = authorities[0]
@@ -573,16 +607,14 @@ def test_swissknife_sole_lock_authority(lock: dict[str, Any]) -> None:
     assert authority["sole_authority_path"] == "swissknife/package-lock.json"
     assert authority["package_manager"] == "npm@10.8.2"
     assert (
-        _sha256_file(REPO_ROOT / "swissknife/package-lock.json")
+        _historical_sha256(binding, "swissknife/package-lock.json")
         == authority["sole_authority_digest_sha256"]
     )
 
     competing = {item["path"] for item in authority["rejected_competing_locks"]}
     assert competing == {"swissknife/yarn.lock", "swissknife/pnpm-lock.yaml"}
 
-    package = json.loads(
-        (REPO_ROOT / "swissknife/package.json").read_text(encoding="utf-8")
-    )
+    package = json.loads(_historical_blob(binding, "swissknife/package.json"))
     assert package["packageManager"] == "npm@10.8.2"
 
 
@@ -600,18 +632,23 @@ def test_typed_nonreproducible_blockers_cover_known_gaps(
     assert current["release_admissible"] is False
     assert REQUIRED_BLOCKER_CODES <= set(current["blocking_codes"])
 
-    # Concrete evidence still present on disk for blockers.
-    assert not (REPO_ROOT / "Mcp-Plus-Plus/tests-rs/Cargo.lock").exists()
-    assert (REPO_ROOT / "swissknife/yarn.lock").is_file()
-    assert (REPO_ROOT / "swissknife/pnpm-lock.yaml").is_file()
-    nightly = (
-        REPO_ROOT
-        / "external/ipfs_accelerate/install/requirements_torch_cu130_nightly.txt"
-    ).read_text(encoding="utf-8")
+    # Validate blocker evidence in the exact recorded Git forest. Ignored build
+    # outputs in the current worktree cannot discharge or create a lock claim.
+    binding = lock["source_binding"]
+    mcp_commit = next(
+        node["digest"] for node in binding["planning_forest"] if node["path"] == "Mcp-Plus-Plus"
+    )
+    assert not tree_path_exists(REPO_ROOT / "Mcp-Plus-Plus", mcp_commit, "tests-rs/Cargo.lock")
+    assert _historical_blob(binding, "swissknife/yarn.lock")
+    assert _historical_blob(binding, "swissknife/pnpm-lock.yaml")
+    nightly = _historical_blob(
+        binding,
+        "external/ipfs_accelerate/install/requirements_torch_cu130_nightly.txt",
+    ).decode("utf-8")
     assert "nightly" in nightly
-    base_req = (
-        REPO_ROOT / "external/ipfs_accelerate/install/requirements_base.txt"
-    ).read_text(encoding="utf-8")
+    base_req = _historical_blob(
+        binding, "external/ipfs_accelerate/install/requirements_base.txt"
+    ).decode("utf-8")
     assert "git+" in base_req and "@main" in base_req
 
 
@@ -655,9 +692,7 @@ def test_provenance_verifies_materials_products_and_builder_identity(
     assert product_digest
 
     materials = result["payload"]["materials"]
-    statement = generate_unsigned_test_provenance(
-        lock, provenance, product_digest, materials
-    )
+    statement = generate_unsigned_test_provenance(lock, provenance, product_digest, materials)
 
     assert statement["_type"] == provenance["in_toto_style"]["statement_type"]
     assert statement["predicateType"] == provenance["slsa_style"]["predicate_type"]
@@ -665,17 +700,16 @@ def test_provenance_verifies_materials_products_and_builder_identity(
     assert statement["production_release_claim"] is False
     assert statement["signatures"] == []
 
-    ok, blockers = verify_provenance(
-        lock, provenance, statement, product_digest=product_digest
-    )
+    ok, blockers = verify_provenance(lock, provenance, statement, product_digest=product_digest)
     assert ok is True
     assert blockers == []
 
     # Exact builder identity fields required by policy.
     for field in provenance["builder_identity"]["required_fields"]:
         assert field in provenance["builder_identity"]["declared"]
-        assert statement["steps"][-1]["builder_identity"][field] == (
-            provenance["builder_identity"]["declared"][field]
+        assert (
+            statement["steps"][-1]["builder_identity"][field]
+            == (provenance["builder_identity"]["declared"][field])
         )
 
     # Step coverage.
@@ -691,34 +725,26 @@ def test_provenance_negative_mutations_emit_typed_blockers(
     product_digest = result["digest_sha256"]
     assert product_digest
     materials = result["payload"]["materials"]
-    base = generate_unsigned_test_provenance(
-        lock, provenance, product_digest, materials
-    )
+    base = generate_unsigned_test_provenance(lock, provenance, product_digest, materials)
 
     # Builder identity mismatch.
     mutated = json.loads(json.dumps(base))
     mutated["predicate"]["runDetails"]["builder"]["id"] = "local-ad-hoc"
-    ok, blockers = verify_provenance(
-        lock, provenance, mutated, product_digest=product_digest
-    )
+    ok, blockers = verify_provenance(lock, provenance, mutated, product_digest=product_digest)
     assert ok is False
     assert "nonreproducible:builder_identity_mismatch" in blockers
 
     # Material digest mismatch.
     mutated = json.loads(json.dumps(base))
     mutated["steps"][0]["materials"][0]["digest"] = "0" * 64
-    ok, blockers = verify_provenance(
-        lock, provenance, mutated, product_digest=product_digest
-    )
+    ok, blockers = verify_provenance(lock, provenance, mutated, product_digest=product_digest)
     assert ok is False
     assert "nonreproducible:material_digest_mismatch" in blockers
 
     # Product / subject digest mismatch.
     mutated = json.loads(json.dumps(base))
     mutated["subject"][0]["digest"]["sha256"] = "1" * 64
-    ok, blockers = verify_provenance(
-        lock, provenance, mutated, product_digest=product_digest
-    )
+    ok, blockers = verify_provenance(lock, provenance, mutated, product_digest=product_digest)
     assert ok is False
     assert "nonreproducible:product_digest_mismatch" in blockers
 
@@ -751,9 +777,7 @@ def test_cross_refs_with_release_predicate(
     assert provenance["acceptance"]["provenance_verifies_exact_builder_identity"] is True
 
 
-def test_no_credentials_in_artifacts(
-    lock: dict[str, Any], provenance: dict[str, Any]
-) -> None:
+def test_no_credentials_in_artifacts(lock: dict[str, Any], provenance: dict[str, Any]) -> None:
     serialized = json.dumps(lock) + json.dumps(provenance)
     forbidden_tokens = (
         "BEGIN PRIVATE KEY",
