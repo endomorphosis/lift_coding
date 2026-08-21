@@ -1,0 +1,50 @@
+{
+  "admitted_at": "2026-08-21T20:30:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-022:runtime-modes-policy",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-policy-implementation",
+  "content_id": "sha256:022c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c",
+  "evidence": {
+    "adapter_self_approval": false,
+    "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+    "contract_version": "0.1",
+    "decision_table_admission_entries": 44,
+    "decision_table_complete": true,
+    "decision_table_promotion_entries": 16,
+    "environment_variable_promotion": false,
+    "epic_a_gate_content_id": "sha256:da97b6cd1307bf42b2109b2647a79e64f0c754f85e19ed1d73f549b580b14ce6",
+    "epic_a_gate_task": "PCCE-011",
+    "forbidden_evidence": [
+      "simulated",
+      "replayed",
+      "stale",
+      "invalid",
+      "unavailable",
+      "pseudo_cid",
+      "unsigned_required",
+      "unsealed"
+    ],
+    "frozen_taxonomy_compatible": true,
+    "modes": [
+      "production",
+      "supervised",
+      "evaluation",
+      "simulation"
+    ],
+    "mutable_global_policy": false,
+    "negative_promotion_tests": true,
+    "pcce_006_content_id": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+    "policy_descriptor_cid": "ipfs_accelerate_py.proof_context.policy.POLICY_DESCRIPTOR_CID",
+    "policy_descriptor_constant": "POLICY_DESCRIPTOR_CID",
+    "policy_descriptor_schema": "ipfs-accelerate.proof-context.v0.1/policy-descriptor",
+    "replay_as_live_quality": false,
+    "silent_fallback": false,
+    "simulation_direct_promotion": false,
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_policy.py"
+  },
+  "objective_id": "PCCE-G200",
+  "rollback": "Revert the policy commit and invalidate all runtime results produced under it; never reinterpret old simulation evidence under a replacement policy.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-022"
+}
