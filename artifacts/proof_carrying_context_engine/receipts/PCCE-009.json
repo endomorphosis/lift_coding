@@ -1,0 +1,23 @@
+{
+  "admitted_at": "2026-08-21T15:53:22Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-009:kit-port",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "b8b68b3621e8f82f2f6ac946193c875994716d9c",
+  "bound_tree": "ad25ad58855c0bf7d10983e5f4be3fce22e7e479",
+  "completion_mode": "operator-bounded-port",
+  "content_id": "sha256:13013e08c931e6fcb030e09eb561e192199a1561e895d20a93c0e1b95a287f50",
+  "evidence": {
+    "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+    "repository": "endomorphosis/ipfs_kit_py",
+    "runtime_authority_granted_to_mcp": false,
+    "sibling_layout_required": false,
+    "validation": "python -m pytest -q tests/proof_context/test_v01_state_store.py -> 6 passed"
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-kit-v01-port",
+  "parent_control_commit": "cf285dbadcc07d3f0b43171e4aa85491bd424613",
+  "rollback": "revert the unique port commit and this receipt; canonical inventoried modules remain",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-009"
+}

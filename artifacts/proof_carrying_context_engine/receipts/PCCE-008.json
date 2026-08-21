@@ -1,0 +1,23 @@
+{
+  "admitted_at": "2026-08-21T15:53:22Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-008:datasets-port",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "272df2660135562adaa12bf3e67f01b63ed68806",
+  "bound_tree": "0a6b956299966a08f42aca814004e09ba2d0933d",
+  "completion_mode": "operator-bounded-port",
+  "content_id": "sha256:86131c6c8acf1b8d1453e5c7c290e74eb3fafdc092d53b555c3e247f08112644",
+  "evidence": {
+    "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+    "repository": "endomorphosis/ipfs_datasets_py",
+    "runtime_authority_granted_to_mcp": false,
+    "sibling_layout_required": false,
+    "validation": "python -m pytest -q tests/proof_context/test_v01_provider.py -> 5 passed"
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-datasets-v01-port",
+  "parent_control_commit": "cf285dbadcc07d3f0b43171e4aa85491bd424613",
+  "rollback": "revert the unique port commit and this receipt; canonical inventoried modules remain",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-008"
+}

@@ -1,0 +1,23 @@
+{
+  "admitted_at": "2026-08-21T15:53:22Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-010:accelerate-loader",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "f33c446d08ba7010b5447fbe120d877bb4a53112",
+  "bound_tree": "c51073b1790deb054a7d89635986611487200e9b",
+  "completion_mode": "operator-bounded-port",
+  "content_id": "sha256:03648c99eb6e27ff6d072d9b55e38c345927e4e5c10c6e9faa23db02fbc57e52",
+  "evidence": {
+    "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+    "repository": "endomorphosis/ipfs_accelerate_py",
+    "runtime_authority_granted_to_mcp": false,
+    "sibling_layout_required": false,
+    "validation": "python -m pytest -q test/proof_context/test_v01_dependencies.py test/proof_context/test_v01_contract_resources.py -> 6 passed"
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-accelerate-v01-loader",
+  "parent_control_commit": "cf285dbadcc07d3f0b43171e4aa85491bd424613",
+  "rollback": "revert the unique port commit and this receipt; canonical inventoried modules remain",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-010"
+}
