@@ -1,0 +1,34 @@
+{
+  "accelerate_commit": "c0c5e6e360078a45638c183485c544605443e17b",
+  "accelerate_tree": "d01a899e7c41cab1aeca00d4469908ee974c3e04",
+  "admitted_at": "2026-08-21T16:40:10Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-013:verification-store",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "operator-bounded-cross-repo-migration",
+  "content_id": "sha256:28ded59307d5ae1bb67ef9b9564f11350d233286d62b11992cdca5e77639e2b4",
+  "evidence": {
+    "existing_hermetic_store": "ipfs_kit_py/proof_seal_store",
+    "fail_closed": [
+      "simulated",
+      "claimed_cid_mismatch",
+      "generation_aba",
+      "optional_ipfs"
+    ],
+    "migration_item": "MIG-002",
+    "second_block_store_added": false,
+    "store_authority": "ipfs_kit_py.proof_context.verification_store",
+    "validation": {
+      "accelerate": "pytest test/proof_context/test_verification_store_bridge.py passed",
+      "kit": "pytest tests/proof_context/test_verification_store.py tests/proof_seal_store/test_local_store.py passed"
+    }
+  },
+  "kit_commit": "6e1ffa7bde88fc06aa5464bc98db9714b9d9a1e9",
+  "kit_tree": "1be3734801729c04c647306bd5f635914a9052e4",
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-kit-verification-writer",
+  "parent_control_commit": "fa180b4e74ec92bad36ca3a8540513a3db6e956b",
+  "rollback": "revert kit verification_store and accelerator bridge commits together; restore prior CAS root through hermetic store API",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-013"
+}
