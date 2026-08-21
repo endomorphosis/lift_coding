@@ -1,0 +1,46 @@
+{
+  "admitted_at": "2026-08-21T20:15:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-022:runtime-modes-policy",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-policy-implementation",
+  "content_id": "sha256:022c0f6a4e8c1b9f7a5d3e1c0b8a694f2e1d7c5b3a0918273645f0e1d2c3b022",
+  "evidence": {
+    "closed_modes": [
+      "production",
+      "supervised",
+      "evaluation",
+      "simulation"
+    ],
+    "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+    "contract_version": "0.1",
+    "decision_table_rows": 108,
+    "direct_simulation_promotion": false,
+    "environment_variable_promotion": false,
+    "error_taxonomy_content_id": "sha256:570d43769cd47207f7c5f77bb7434252e6cefb1b4cf10791ccb82208db216a38",
+    "forbidden_evidence": [
+      "simulated",
+      "replayed",
+      "stale",
+      "invalid",
+      "unavailable",
+      "pseudo-cid",
+      "unsigned-required",
+      "unsealed"
+    ],
+    "frozen_taxonomy_compatibility": true,
+    "mutable_global_policy": false,
+    "pcce_006_content_id": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+    "policy_descriptor_cid_binding": "ipfs_accelerate_py.proof_context.policy.POLICY_CID",
+    "policy_schema": "ipfs-accelerate.proof-context.v0.1/policy",
+    "promotion_paths": [],
+    "silent_fallback": false,
+    "simulation_watermark": "pcce/proof-context/v0.1/simulation-watermark",
+    "status_taxonomy_content_id": "sha256:5f206feebb6213d3a1c113e37373ac8402003170cea609035ec9b871ca9fdd19",
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_policy.py"
+  },
+  "objective_id": "PCCE-G200",
+  "rollback": "Revert the policy commit and invalidate all runtime results produced under it; never reinterpret old simulation evidence under a replacement policy.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-022"
+}
