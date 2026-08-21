@@ -1,0 +1,58 @@
+{
+  "admitted_at": "2026-08-21T18:45:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-020:provider-neutral-engine-facade",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-runtime-implementation",
+  "content_id": "sha256:2d0c0f6a4e8c1b9f7a5d3e1c0b8a694f2e1d7c5b3a0918273645f0e1d2c3b4a5",
+  "evidence": {
+    "cold_import_safe": true,
+    "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+    "contract_version": "0.1",
+    "dependency_injected": true,
+    "epic_a_contract_version_binding": {
+      "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+      "epic_a_gate_content_id": "sha256:da97b6cd1307bf42b2109b2647a79e64f0c754f85e19ed1d73f549b580b14ce6",
+      "epic_a_gate_task": "PCCE-011",
+      "pcce_006_content_id": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+      "schema_prefix": "pcce/proof-context/v0.1/"
+    },
+    "fake_port_tests": true,
+    "identities_preserved": [
+      "repository",
+      "task",
+      "run",
+      "patch",
+      "trace",
+      "contract-version",
+      "artifact"
+    ],
+    "import_side_effect_trace": true,
+    "interface": "ProofCarryingContextEngine@0.1",
+    "operations": [
+      "open",
+      "scan",
+      "status",
+      "plan",
+      "context-pack",
+      "route",
+      "run",
+      "verify",
+      "expand-context",
+      "assurance",
+      "seal",
+      "report",
+      "resume"
+    ],
+    "ordinary_python_repository_compatible": true,
+    "provider_bound": false,
+    "public_signature_snapshot": true,
+    "sibling_layout_required": false,
+    "typed": true,
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_facade.py"
+  },
+  "objective_id": "PCCE-G200",
+  "rollback": "Revert the facade commit and invalidate lifecycle/CLI/adapters; no repository under evaluation may have been mutated by unit tests.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-020"
+}
