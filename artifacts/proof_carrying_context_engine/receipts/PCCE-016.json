@@ -1,0 +1,25 @@
+{
+  "accelerate_commit": "b36be53bfe92e536b95f84adbe45e89a2446c54b",
+  "accelerate_tree": "f684859f21b13363e94575bcbe3f0096610437a3",
+  "admitted_at": "2026-08-21T17:26:05Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-016:incremental-verification-conformance",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "operator-current-tree-qualification",
+  "content_id": "sha256:936d17515f1e1788e758c8b267426bfab9825f55f6acbd632083864a15aff4c4",
+  "evidence": {
+    "controlled_false_negatives": 0,
+    "fixtures": "test/fixtures/incremental_verification",
+    "full_suite_fallback_weakened": false,
+    "reconstructed_from_prose": false,
+    "repair": "already_present_at_bound_pin",
+    "required_matrix_cases": 18,
+    "validation": "pytest planner+conformance+scheduler -> 63 passed"
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-qualify-current-tree-selection-conformance",
+  "parent_control_commit": "bf0f2b665441852b1b6f879d899fe00cecd664fe",
+  "rollback": "discard this receipt only; planner/selection were not mutated",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-016"
+}
