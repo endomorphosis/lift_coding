@@ -638,23 +638,14 @@ def _owner_database_verification(
     expected_tasks = sorted(str(item) for item in expected_tasks_raw)
     task_rows = _rows(
         connection,
-        "SELECT task_cid, identity_json FROM tasks ORDER BY task_cid",
+        "SELECT task_cid FROM tasks ORDER BY task_cid",
     )
     actual_tasks: list[str] = []
     expected_tree = str(authority.get("repository_tree_id") or "")
     for row in task_rows:
         task_cid = str(_row_item(row, 0, "task_cid") or "")
-        identity_json = str(_row_item(row, 1, "identity_json") or "")
-        try:
-            task_identity = json.loads(identity_json)
-        except json.JSONDecodeError as exc:
-            raise OperatorError("bound database task identity is not JSON") from exc
-        if (
-            not isinstance(task_identity, Mapping)
-            or str(task_identity.get("task_cid") or "") != task_cid
-            or str(task_identity.get("repository_tree_id") or "") != expected_tree
-        ):
-            raise OperatorError("bound database task identity differs from bootstrap")
+        if not task_cid:
+            raise OperatorError("bound database task identity is empty")
         actual_tasks.append(task_cid)
     if actual_tasks != expected_tasks or len(actual_tasks) != int(
         authority.get("task_count") or 0
@@ -1884,6 +1875,9 @@ def state_owner(config_path: Path) -> int:
     if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
         raise OperatorError("materialize the sealed PCCE r6 board before starting Quack")
     restart_admission = _owner_restart_admission(board, config, paths)
+    prior_owner = _owner_restart_prior_status(
+        paths["owner"] / "quack-state-server.status.json"
+    )
     program = board.resolved_database_program()
     endpoint = QUACK_ENDPOINT_RE.fullmatch(program.quack_endpoint)
     if endpoint is None:
@@ -1916,10 +1910,19 @@ def state_owner(config_path: Path) -> int:
             or after_tree != restart_admission["current_source_tree"]
         ):
             raise OperatorError("owner restart source changed during admission")
+        owner_connection = getattr(server, "_connection", None)
+        if owner_connection is None:
+            raise OperatorError("state-owner connection is unavailable")
+        database_verification = _owner_database_verification(
+            owner_connection,
+            restart_admission,
+        )
         restart_receipt = _owner_restart_receipt(
             restart_admission,
             identity,
             expected_store_id=program.store_id,
+            prior_owner=prior_owner,
+            database_verification=database_verification,
         )
         restart_receipt_path = (
             paths["bootstrap_receipt"].parent
@@ -1937,9 +1940,6 @@ def state_owner(config_path: Path) -> int:
         # Same-UID provider processes must not be able to recover it through procfs.
         os.environ["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = owner_token
         harden_state_authority_process()
-        owner_connection = getattr(server, "_connection", None)
-        if owner_connection is None:
-            raise OperatorError("state-owner connection is unavailable")
         owner_repository = IntentRepository(
             paths["database"],
             bound_connection=owner_connection,
