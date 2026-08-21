@@ -1,0 +1,190 @@
+{
+  "authority": false,
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "content_id": "sha256:f8262947cde0cee64b42e7e3a64ad29e1a54b89355e201d306d34407e3cf92b6",
+  "inspected_at": "2026-08-21T15:19:11Z",
+  "inventory_inputs": {
+    "accelerate": {
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "inventory": "sha256:660681c9849db6d8732f5f88c9402daa19903dfe31064b089820d0b3a4161b82",
+      "receipt": "sha256:43d3781328e7720735bef141c701383bc3f40608abc1e8272bafd9961b48af1b",
+      "repo": "endomorphosis/ipfs_accelerate_py",
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+    },
+    "datasets": {
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "inventory": "sha256:c706ca54d2bc763f23bf3407690be23e7a583d6db0acdd39d24d54dc4e2e9afb",
+      "receipt": "sha256:ec279a7c9faae21c120b9dc7c588b3536288a4cdbc9e5914dd063f908b91d3dd",
+      "repo": "endomorphosis/ipfs_datasets_py",
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f"
+    },
+    "kit": {
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "inventory": "sha256:d59ab2a0715723ba61b97ee5892454bd8459a91c8df9d3ff7d32da77230ddb3b",
+      "receipt": "sha256:9ae1f8e1dbe94883860f858834c83a595bb97e68fa9eabbe8d69dc7ad81ea458",
+      "repo": "endomorphosis/ipfs_kit_py",
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c"
+    },
+    "mcp": {
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "inventory": "sha256:d4db28df46447f891dbe0507678080b266a56212abec3cc6b8dc663b6a75e9f5",
+      "receipt": "sha256:6dd984225c0a837622b013cd63ac150906d07dc9780e61acfc0e15c8b895dc76",
+      "repo": "endomorphosis/Mcp-Plus-Plus",
+      "tree": "b85eabbb61187c472543297f001778507c8ac531"
+    }
+  },
+  "items": [
+    {
+      "also_source": [
+        {
+          "note": "duplicate adapter copy",
+          "path": "ipfs_accelerate_py/agent_supervisor/verification/datasets_adapter.py",
+          "symbol": "ContextPackView"
+        },
+        {
+          "note": "duplicate GUI-optimizer copy",
+          "path": "ipfs_accelerate_py/agent_supervisor/gui_optimizer/proposal.py",
+          "symbol": "ContextPackView"
+        }
+      ],
+      "compatibility_strategy": "Datasets becomes the sole v0.1 ContextPack builder and semantic-outcome authority. Accelerator ContextPacker is reduced to a compatibility/delegation surface; duplicate ContextPackView copies are not production writers.",
+      "dependent_invalidation_set": [
+        "PCCE-011",
+        "PCCE-020",
+        "PCCE-021",
+        "PCCE-025",
+        "PCCE-050"
+      ],
+      "depends_on_tasks": [
+        "PCCE-008",
+        "PCCE-010"
+      ],
+      "id": "MIG-001",
+      "risk": "critical-ownership-migration",
+      "source": {
+        "blob": "6af93d39a643b6af190f833bfb4131fdbea49c65",
+        "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "ContextPacker"
+      },
+      "subsystem": "ContextPack Builder",
+      "target": {
+        "path": "ipfs_datasets_py/proof_context/context_pack.py",
+        "repository": "endomorphosis/ipfs_datasets_py",
+        "retain_view": "ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py::ContextPackView"
+      },
+      "task_id": "PCCE-012"
+    },
+    {
+      "compatibility_strategy": "Kit is the sole production writer for verification receipts, proof forests, CAS roots, and WAL/recovery. Accelerator keeps scheduling and a read/delegate bridge. Legacy accelerator formats become versioned read-only migration inputs.",
+      "dependent_invalidation_set": [
+        "PCCE-014",
+        "PCCE-015",
+        "PCCE-011",
+        "PCCE-020",
+        "PCCE-051"
+      ],
+      "depends_on_tasks": [
+        "PCCE-009",
+        "PCCE-010",
+        "PCCE-017"
+      ],
+      "id": "MIG-002",
+      "risk": "critical-persistence-migration",
+      "source": {
+        "blob": "38d2b2b387328ad2b25a7863d11a453b6b39edc6",
+        "path": "ipfs_accelerate_py/agent_supervisor/verification/receipt_cache.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "VerificationReceiptCache"
+      },
+      "subsystem": "Verification Receipt Cache",
+      "target": {
+        "existing_store": "ipfs_kit_py/proof_seal_store",
+        "path": "ipfs_kit_py/proof_context/verification_store.py",
+        "repository": "endomorphosis/ipfs_kit_py"
+      },
+      "task_id": "PCCE-013"
+    },
+    {
+      "compatibility_strategy": "Converge the in-pin sealer as current-tree accelerator authority and persist proof units only through the kit v0.1 store after MIG-002. Do not reconstruct unpublished objects; bound-pin objects are already present.",
+      "dependent_invalidation_set": [
+        "PCCE-011",
+        "PCCE-020",
+        "PCCE-072"
+      ],
+      "depends_on_tasks": [
+        "PCCE-013",
+        "PCCE-017"
+      ],
+      "id": "MIG-003",
+      "risk": "critical-proof-integrity",
+      "source": {
+        "blob": "40013d424655712d5471dda7747c8e685686cacc",
+        "path": "ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "IncrementalProofSealer"
+      },
+      "subsystem": "Incremental Proof Sealer",
+      "target": {
+        "path": "ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing",
+        "persistence": "ipfs_kit_py/proof_seal_store",
+        "repository": "endomorphosis/ipfs_accelerate_py"
+      },
+      "task_id": "PCCE-014"
+    },
+    {
+      "compatibility_strategy": "Qualify the in-pin campaign API as accelerator orchestration. Datasets/kit remain semantic and persistence authorities. MCP++ remains a narrow shared receipt schema only.",
+      "dependent_invalidation_set": [
+        "PCCE-011",
+        "PCCE-073",
+        "PCCE-076"
+      ],
+      "depends_on_tasks": [
+        "PCCE-013",
+        "PCCE-018",
+        "PCCE-019"
+      ],
+      "id": "MIG-004",
+      "risk": "high-assurance-qualification",
+      "source": {
+        "blob": "4c7fa7cd5783bb01ef5a34699aade6f21f6dce0d",
+        "path": "ipfs_accelerate_py/agent_supervisor/adversarial_assurance/api.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "AssuranceCampaignApi"
+      },
+      "subsystem": "Adversarial Assurance Engine",
+      "target": {
+        "path": "ipfs_accelerate_py/agent_supervisor/adversarial_assurance",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "shared_schema": "Mcp-Plus-Plus/schemas/adversarial_assurance_receipt.schema.json"
+      },
+      "task_id": "PCCE-015"
+    }
+  ],
+  "non_migrations": [
+    {
+      "reason": "Excluded from v0.1 product scope. Presence at the bound pin is inventory evidence only.",
+      "subsystem": "Verified GUI Optimizer"
+    },
+    {
+      "reason": "Explicit unavailable result. New implementation is PCCE-045 after Epic A, not a migration of unpublished WIP.",
+      "subsystem": "Self-Hosting Qualification Harness"
+    },
+    {
+      "reason": "No runtime authority is assigned. Schema freeze is PCCE-006, not a code move.",
+      "subsystem": "MCP++ runtime"
+    },
+    {
+      "reason": "archive/ and enhanced_wal_durability.py stay non-canonical; v0.1 WAL is ipfs_kit_py/core/wal.",
+      "subsystem": "Legacy kit WAL copies"
+    }
+  ],
+  "notes": [
+    "Migrations are limited to v0.1 blockers. Legacy cleanup outside these items is out of scope.",
+    "Ambiguous owners fail closed; ContextPack construction and receipt persistence are the only current boundary violations among the eleven subsystems."
+  ],
+  "parent_control_commit": "2b205f981f2d973b74fed183772f0afa004c3cc1",
+  "parent_control_tree": "5bf704ff4281001e0212ff806909a897a0ff3cee",
+  "schema": "lift_coding.proof-carrying-context-engine.migration-map@1",
+  "task_id": "PCCE-005"
+}

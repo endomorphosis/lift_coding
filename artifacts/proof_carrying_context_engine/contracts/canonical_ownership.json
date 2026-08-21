@@ -1,0 +1,316 @@
+{
+  "authority": false,
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "content_id": "sha256:432d896eea0bc0f5cde12adb35689000c97baf487e507df6d0ccc93167030267",
+  "inspected_at": "2026-08-21T15:19:11Z",
+  "inventory_inputs": {
+    "accelerate": {
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "inventory": "sha256:660681c9849db6d8732f5f88c9402daa19903dfe31064b089820d0b3a4161b82",
+      "receipt": "sha256:43d3781328e7720735bef141c701383bc3f40608abc1e8272bafd9961b48af1b",
+      "repo": "endomorphosis/ipfs_accelerate_py",
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+    },
+    "datasets": {
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "inventory": "sha256:c706ca54d2bc763f23bf3407690be23e7a583d6db0acdd39d24d54dc4e2e9afb",
+      "receipt": "sha256:ec279a7c9faae21c120b9dc7c588b3536288a4cdbc9e5914dd063f908b91d3dd",
+      "repo": "endomorphosis/ipfs_datasets_py",
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f"
+    },
+    "kit": {
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "inventory": "sha256:d59ab2a0715723ba61b97ee5892454bd8459a91c8df9d3ff7d32da77230ddb3b",
+      "receipt": "sha256:9ae1f8e1dbe94883860f858834c83a595bb97e68fa9eabbe8d69dc7ad81ea458",
+      "repo": "endomorphosis/ipfs_kit_py",
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c"
+    },
+    "mcp": {
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "inventory": "sha256:d4db28df46447f891dbe0507678080b266a56212abec3cc6b8dc663b6a75e9f5",
+      "receipt": "sha256:6dd984225c0a837622b013cd63ac150906d07dc9780e61acfc0e15c8b895dc76",
+      "repo": "endomorphosis/Mcp-Plus-Plus",
+      "tree": "b85eabbb61187c472543297f001778507c8ac531"
+    }
+  },
+  "mcp_runtime_authority": false,
+  "notes": [
+    "Inventories are immutable inputs; this map does not mutate inventoried repositories.",
+    "README names, branch names, and path presence were not used as the sole selection criteria.",
+    "MCP++ never owns production runtime state or execution authority.",
+    "Verified GUI Optimizer is inventory input only and is excluded from the v0.1 runtime."
+  ],
+  "parent_control_commit": "2b205f981f2d973b74fed183772f0afa004c3cc1",
+  "parent_control_tree": "5bf704ff4281001e0212ff806909a897a0ff3cee",
+  "repository_boundaries": {
+    "Mcp-Plus-Plus": {
+      "not_authority": "production runtime state, orchestration, persistence, model selection, CID recomputation",
+      "v0_1_authority": "shared invocation/receipt schemas, canonical vectors, and narrow interoperability contracts only"
+    },
+    "ipfs_accelerate_py": {
+      "not_authority": "canonical semantic construction, durable receipt/proof-forest writers, MCP++ runtime",
+      "v0_1_authority": "engine facade, lifecycle orchestration, adapters, worktrees, routing, verification/proof scheduling, cancellation/timeouts/admission/retry, shadow and assurance campaigns"
+    },
+    "ipfs_datasets_py": {
+      "not_authority": "persistence, orchestration, MCP++ runtime",
+      "v0_1_authority": "semantic repository state, capsules, ContextPacks and sufficiency views, invalidation, task/benchmark specifications, semantic outcome comparison"
+    },
+    "ipfs_kit_py": {
+      "not_authority": "semantic construction, model routing, MCP++ runtime",
+      "v0_1_authority": "immutable artifacts, state/receipt/proof-forest persistence, CAS roots, WAL transitions, local hermetic storage, optional IPFS transport"
+    }
+  },
+  "schema": "lift_coding.proof-carrying-context-engine.canonical-ownership@1",
+  "subsystems": [
+    {
+      "boundary_match": true,
+      "canonical_implementation": {
+        "blob": "a2ca2dee8aaed0f0f69dcb327e34fa5110ee377b",
+        "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+        "repository": "endomorphosis/ipfs_datasets_py",
+        "symbol": "IncrementalSemanticIndex",
+        "symbol_line": 114,
+        "tests": [
+          "tests/unit/logic/software_contracts/semantic_index/test_python_analysis_authority_adversarial.py"
+        ],
+        "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f"
+      },
+      "canonical_owner": "ipfs_datasets_py",
+      "disposition": "canonical_present",
+      "migration_item": null,
+      "prescribed_owner": "ipfs_datasets_py",
+      "rationale": "Present at datasets pin with tests. No competing datasets-external implementation at bound pins.",
+      "subsystem": "Incremental Semantic Index"
+    },
+    {
+      "boundary_match": true,
+      "canonical_implementation": {
+        "blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
+        "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+        "repository": "endomorphosis/ipfs_datasets_py",
+        "symbol": "compile_semantic_capsule",
+        "symbol_line": 616,
+        "tests": [
+          "tests/unit/logic/software_contracts/semantic_state/test_capsules.py"
+        ],
+        "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f"
+      },
+      "canonical_owner": "ipfs_datasets_py",
+      "disposition": "canonical_present",
+      "migration_item": null,
+      "prescribed_owner": "ipfs_datasets_py",
+      "rationale": "Function API rather than a compiler class. Name mismatch is recorded; no code move is required.",
+      "subsystem": "Semantic Capsule Compiler"
+    },
+    {
+      "boundary_match": false,
+      "canonical_implementation": {
+        "blob": "6af93d39a643b6af190f833bfb4131fdbea49c65",
+        "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+        "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "ContextPacker",
+        "symbol_line": 319,
+        "tests": [],
+        "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+      },
+      "canonical_owner": "ipfs_accelerate_py",
+      "disposition": "boundary_violation",
+      "migration_item": "MIG-001",
+      "prescribed_owner": "ipfs_datasets_py",
+      "rationale": "Datasets owns sufficiency views. Production pack construction is accelerator-owned and must migrate.",
+      "related_datasets_view": {
+        "blob": "77a4ba670303ac9c2a5ffe0fbfc1c7e9260d371e",
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
+        "symbol": "ContextPackView",
+        "symbol_line": 324
+      },
+      "subsystem": "ContextPack Builder"
+    },
+    {
+      "boundary_match": false,
+      "canonical_implementation": {
+        "blob": "38d2b2b387328ad2b25a7863d11a453b6b39edc6",
+        "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+        "path": "ipfs_accelerate_py/agent_supervisor/verification/receipt_cache.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "VerificationReceiptCache",
+        "symbol_line": 409,
+        "tests": [],
+        "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+      },
+      "canonical_owner": "ipfs_accelerate_py",
+      "disposition": "boundary_violation",
+      "kit_persistence_candidates": [
+        {
+          "path": "ipfs_kit_py/proof_seal_store/forest.py",
+          "symbol": "ProofForestStore"
+        },
+        {
+          "path": "ipfs_kit_py/proof_seal_store/local_store.py",
+          "symbol": "HermeticProofSealStore"
+        },
+        {
+          "path": "ipfs_kit_py/mcp_server/agent_supervisor_receipts.py",
+          "symbol": null
+        }
+      ],
+      "migration_item": "MIG-002",
+      "prescribed_owner": "ipfs_kit_py",
+      "rationale": "Live cache is accelerator-owned. Durable receipt/proof-forest authority must be kit with an accelerator scheduling adapter.",
+      "subsystem": "Verification Receipt Cache"
+    },
+    {
+      "boundary_match": true,
+      "canonical_implementation": {
+        "blob": "d283fa8d84547d37b4f26444c8af91b6afcf93a9",
+        "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+        "path": "ipfs_accelerate_py/agent_supervisor/verification/planner.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "IncrementalVerificationPlanner",
+        "symbol_line": 2310,
+        "tests": [
+          "test/api/test_agent_supervisor_incremental_verification_planner.py"
+        ],
+        "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+      },
+      "canonical_owner": "ipfs_accelerate_py",
+      "disposition": "canonical_present",
+      "migration_item": null,
+      "prescribed_owner": "ipfs_accelerate_py",
+      "rationale": "Orchestration/scheduling belongs on the accelerator. Conformance repair is PCCE-016, not an ownership move.",
+      "subsystem": "Incremental Verification Planner"
+    },
+    {
+      "boundary_match": true,
+      "canonical_implementation": {
+        "blob": "51d7a0850bb42db3de3798b47e1ffd56e0a47b86",
+        "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+        "path": "ipfs_accelerate_py/agent_supervisor/verification/model_route.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "ModelRoutePlanner",
+        "symbol_line": 1404,
+        "tests": [],
+        "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+      },
+      "canonical_owner": "ipfs_accelerate_py",
+      "disposition": "canonical_present",
+      "migration_item": null,
+      "prescribed_owner": "ipfs_accelerate_py",
+      "rationale": "Selects capability tier only; does not own credentials or mutation.",
+      "subsystem": "Model Route Planner"
+    },
+    {
+      "boundary_match": true,
+      "canonical_implementation": {
+        "blob": "74ff019c0a0e233322c4d962457dbf277a12e38a",
+        "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+        "path": "ipfs_accelerate_py/agent_supervisor/semantic_governor/governor.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "SemanticCompressionGovernor",
+        "symbol_line": 450,
+        "tests": [
+          "test/api/semantic_governor/test_public_api.py"
+        ],
+        "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+      },
+      "canonical_owner": "ipfs_accelerate_py",
+      "datasets_analysis_surface": {
+        "api": "SemanticGovernorPublicApi@1",
+        "note": "Datasets owns analysis/sufficiency; accelerator owns orchestration governor.",
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_governor/__init__.py"
+      },
+      "disposition": "canonical_present",
+      "migration_item": null,
+      "prescribed_owner": "ipfs_accelerate_py",
+      "rationale": "Split matches prescribed ownership: datasets analysis, accelerator orchestration.",
+      "subsystem": "Semantic Compression Governor"
+    },
+    {
+      "boundary_match": true,
+      "canonical_implementation": {
+        "blob": "877aefa4bbe5b923433af2f1bcbc4072df11c6b1",
+        "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+        "path": "ipfs_accelerate_py/agent_supervisor/gui_optimizer/improvement_loop.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "VerifiedGuiOptimizer",
+        "symbol_line": 701,
+        "tests": [],
+        "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+      },
+      "canonical_owner": "ipfs_accelerate_py",
+      "disposition": "unavailable_for_v0.1",
+      "migration_item": null,
+      "prescribed_owner": "none-v0.1",
+      "rationale": "Present at the current accelerate pin, but not a v0.1 product requirement unless a narrow reusable contract is later proven necessary. Preliminary plan disposition (unpublished/not in pin) is stale.",
+      "subsystem": "Verified GUI Optimizer"
+    },
+    {
+      "boundary_match": true,
+      "canonical_implementation": {
+        "blob": "40013d424655712d5471dda7747c8e685686cacc",
+        "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+        "path": "ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "IncrementalProofSealer",
+        "symbol_line": 377,
+        "tests": [
+          "test/api/incremental_sealing/test_public_api.py"
+        ],
+        "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+      },
+      "canonical_owner": "ipfs_accelerate_py",
+      "disposition": "canonical_present_requires_qualification",
+      "migration_item": "MIG-003",
+      "persistence_owner": "ipfs_kit_py",
+      "prescribed_owner": "ipfs_accelerate_py",
+      "rationale": "Sealer class is in the bound accelerate pin (IPS branch is an ancestor). Kit proof_seal_store is the persistence target. Qualification and kit writer wiring remain PCCE-014/013. Named candidate objects cited by the preliminary plan are now ancestors of the bound pins, so they are not unpublished external blocks.",
+      "subsystem": "Incremental Proof Sealer"
+    },
+    {
+      "boundary_match": true,
+      "canonical_implementation": {
+        "blob": "4c7fa7cd5783bb01ef5a34699aade6f21f6dce0d",
+        "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+        "path": "ipfs_accelerate_py/agent_supervisor/adversarial_assurance/api.py",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "symbol": "AssuranceCampaignApi",
+        "symbol_line": 1710,
+        "tests": [
+          "test/api/adversarial_assurance/test_current_tree_conformance.py"
+        ],
+        "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+      },
+      "canonical_owner": "ipfs_accelerate_py",
+      "disposition": "canonical_present_requires_qualification",
+      "mcp_narrow_contract": {
+        "note": "MCP++ supplies shared receipt identity only.",
+        "path": "schemas/adversarial_assurance_receipt.schema.json"
+      },
+      "migration_item": "MIG-004",
+      "prescribed_owner": "ipfs_accelerate_py",
+      "rationale": "Campaign API is in the bound accelerate pin (AAE branch is an ancestor). Qualification remains PCCE-015. MCP++ is not granted runtime authority.",
+      "subsystem": "Adversarial Assurance Engine"
+    },
+    {
+      "boundary_match": true,
+      "canonical_implementation": null,
+      "canonical_owner": null,
+      "disposition": "unavailable",
+      "evidence": {
+        "missing_symbol": "SelfHostingQualificationHarness",
+        "plan_blob": "caebf230f55fbf61db05d9d2ac8f159d57071a9e",
+        "plan_path": "docs/architecture/SELF_HOSTING_QUALIFICATION_PLAN.md",
+        "wip_is_ancestor_of_pin": false,
+        "wip_ref": "agent/self-hosting-qualification-v1"
+      },
+      "migration_item": null,
+      "prescribed_owner": "ipfs_accelerate_py",
+      "rationale": "Plan/observers exist. No harness facade at the bound pin. Explicit unavailable result; implement later as PCCE-045, not by adopting unpublished WIP as canonical.",
+      "subsystem": "Self-Hosting Qualification Harness"
+    }
+  ],
+  "task_id": "PCCE-005"
+}
