@@ -1,0 +1,39 @@
+{
+  "accelerate_commit": "b36be53bfe92e536b95f84adbe45e89a2446c54b",
+  "accelerate_tree": "f684859f21b13363e94575bcbe3f0096610437a3",
+  "admitted_at": "2026-08-21T17:25:12Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-015:adversarial-assurance-runtime",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "operator-candidate-qualification",
+  "content_id": "sha256:8a97fbe2e69a676b9dc3ff201b1695880715e22d4edd8038d44ecb9aa07e7cda",
+  "evidence": {
+    "bridge": "ipfs_accelerate_py.proof_context.assurance_bridge",
+    "datasets_spec": "PCCE-018",
+    "fail_closed": [
+      "critical_survivor",
+      "simulated",
+      "self_approved",
+      "unavailable",
+      "hidden_benchmark"
+    ],
+    "kit_store": "PCCE-019",
+    "known_pin_gaps": [
+      "AAE-063 board validator expects agent/adversarial-assurance-engine-v1 gitlinks",
+      "security/distributed-storage campaign fixture recipes are absent from this pin"
+    ],
+    "migration_item": "MIG-004",
+    "reconstructed_from_prose": false,
+    "runtime": "ipfs_accelerate_py.agent_supervisor.adversarial_assurance",
+    "validation": {
+      "bridge": "test/proof_context/test_assurance_bridge.py 5 passed",
+      "core_and_bridge": "469 passed (campaign fixture catalogs and AAE-063 gitlink/board checks excluded as pin-level AAE-branch gates)"
+    }
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-qualify-in-pin-assurance-runtime",
+  "parent_control_commit": "0c45f85ee6f39bd23f8d3d8332e2373d14a72c68",
+  "rollback": "revert the assurance_bridge and crash-test fixture loader commit",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-015"
+}
