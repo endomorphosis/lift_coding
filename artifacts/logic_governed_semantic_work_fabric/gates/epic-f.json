@@ -1,0 +1,374 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G600",
+  "epic_label": "F — resource-aware scheduling",
+  "gate_task_id": "LGSWF-054",
+  "observed_at": "2026-08-17T23:45:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g600/lgswf-054",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-054",
+    "requires": [
+      "FabricHardResourceReservation@1 never overcommits GPU memory, provider/prover concurrency, merge slots, worktree slots, license keys, exclusive writers, or exclusive compute/prover class holders",
+      "hard reservations bind task/attempt/supervisor/daemon/lease/fence identities and reclaim on completion, cancellation, timeout, confirmed death, or fenced expiry with a later fencing token",
+      "fenced reclaim requires the current fence token; stale or forged fences fail closed; capacity is reusable immediately after successful reclaim",
+      "WorkCache@1 keeps immutable receipt-derived observations separate from prediction records; predictions never overwrite observations or receipts",
+      "FabricStageBackpressure@1 decouples analysis, context, inference, proof translation/solver/kernel, validation, merge, and persistence so saturated stages do not globally stall",
+      "provider pressure cannot stop CPU analysis or context; proof pressure cannot stop unrelated analysis; merge pressure reduces mutation dispatch while permitting read-only work",
+      "safe preemption is limited to stale, low-priority, speculative, superseded, idempotent, or compensated work; cancellation reclaims admission leases and linked hard reservations",
+      "existing ResourceScheduler evaluate/schedule/acquire/release and ResourceAdmissionLease contracts remain preserved extensions, not replacements",
+      "binary floats are excluded from content-addressed hard-reservation, backpressure, and work-cache identities",
+      "model proposals remain non-authoritative and never admit work"
+    ],
+    "prior_status": "Epic E open for dependency-ready work; Epic F unblocks multi-supervisor coordination"
+  },
+  "predicates": {
+    "hard_resources_never_overcommit": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json"
+      ],
+      "task": "LGSWF-050",
+      "interface": "FabricHardResourceReservation@1",
+      "primary_symbol": "ResourceScheduler.reserve_hard",
+      "never_overcommit_dimensions": [
+        "gpu_memory_mib",
+        "provider_concurrency",
+        "prover_concurrency",
+        "merge_slots",
+        "worktree_slots",
+        "license_keys",
+        "exclusive_writer",
+        "gpu_compute_class_holder",
+        "prover_class_holder"
+      ],
+      "hard_dimensions": [
+        "cpu_concurrency",
+        "cpu_time_ms",
+        "ram_mib",
+        "gpu_memory_mib",
+        "disk_mib",
+        "disk_bandwidth_mib_per_second",
+        "network_bandwidth_kib_per_second",
+        "network_permission",
+        "subprocesses",
+        "worktree_slots",
+        "model_input_tokens",
+        "model_output_tokens",
+        "provider_concurrency",
+        "provider_quota",
+        "prover_concurrency",
+        "prover_class",
+        "license_keys",
+        "merge_slots",
+        "persistence_mib_per_second",
+        "gpu_compute_class",
+        "exclusive_writer"
+      ],
+      "network_permission_policy": "fail_closed_denied_unless_allowed",
+      "extension_not_replacement": true,
+      "hermetic_proofs": [
+        "test_fabric_hard_dimensions_cover_required_resource_classes",
+        "test_each_numeric_dimension_is_hard_gated",
+        "test_never_overcommit_dimensions_reject_second_reservation",
+        "test_license_key_and_exclusive_writer_are_single_holder",
+        "test_network_permission_and_class_availability_gates",
+        "test_concurrent_hard_reservations_never_overcommit_merge_slot",
+        "test_existing_resource_admission_lease_contract_still_constructs"
+      ]
+    },
+    "reservations_release_or_reclaim_safely": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_backpressure.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-052.json"
+      ],
+      "tasks": [
+        "LGSWF-050",
+        "LGSWF-052"
+      ],
+      "interfaces": [
+        "FabricHardResourceReservation@1",
+        "FabricStageBackpressure@1"
+      ],
+      "binding_fields": [
+        "task_id",
+        "attempt",
+        "supervisor_id",
+        "daemon_id",
+        "lease_id",
+        "fence_token",
+        "idempotency_key",
+        "worktree_id"
+      ],
+      "reclaim_triggers": [
+        "completed",
+        "cancelled",
+        "timed_out",
+        "confirmed_death",
+        "fenced_expiry",
+        "released"
+      ],
+      "fenced_reclaim": {
+        "requires_current_fence_token": true,
+        "stale_or_forged_fence_fail_closed": true,
+        "issues_later_fence_token": true,
+        "heartbeat_may_rotate_fence": true,
+        "capacity_reusable_immediately": true
+      },
+      "cancellation": {
+        "cancel_blocks_future_admission": true,
+        "cancel_reclaims_admission_lease": true,
+        "cancel_reclaims_linked_hard_reservation": true
+      },
+      "safe_preemption": {
+        "allowed_classes": [
+          "stale",
+          "low_priority",
+          "speculative",
+          "superseded",
+          "idempotent",
+          "compensated"
+        ],
+        "critical_and_normal_not_preemptible": true,
+        "execute_preemption_cancels_and_reclaims": true
+      },
+      "hermetic_proofs": [
+        "test_reserve_hard_binds_task_attempt_supervisor_daemon_and_fence",
+        "test_fenced_reclaim_requires_current_fence_and_issues_later_token",
+        "test_reclaim_reasons_map_to_terminal_states",
+        "test_fenced_expiry_reclaims_without_holder_token",
+        "test_heartbeat_extends_ttl_and_can_rotate_fence",
+        "test_release_of_admission_lease_reclaims_linked_hard_reservation",
+        "test_execute_preemption_cancels_and_frees_capacity",
+        "test_cancel_is_observable_and_blocks_future_admission"
+      ]
+    },
+    "independent_saturated_stages_do_not_globally_stall": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_backpressure.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-052.json"
+      ],
+      "task": "LGSWF-052",
+      "interface": "FabricStageBackpressure@1",
+      "primary_symbol": "ResourceScheduler.apply_stage_backpressure",
+      "independent_stages": [
+        "analysis",
+        "context",
+        "inference",
+        "proof_translation",
+        "proof_solver",
+        "proof_kernel",
+        "validation",
+        "merge",
+        "persistence"
+      ],
+      "independence_rules": {
+        "provider_pressure_cannot_stop_cpu_analysis": true,
+        "provider_pressure_cannot_stop_context": true,
+        "proof_pressure_cannot_stop_unrelated_analysis": true,
+        "proof_translation_solver_kernel_decoupled": true,
+        "merge_pressure_reduces_mutation_dispatch": true,
+        "merge_pressure_permits_read_only": true,
+        "persistence_pressure_decoupled_from_analysis_reads": true,
+        "saturated_stage_does_not_globally_stall": true
+      },
+      "hermetic_proofs": [
+        "test_fabric_backpressure_stages_cover_required_domains",
+        "test_provider_pressure_does_not_stop_cpu_analysis_or_context",
+        "test_proof_pressure_does_not_stop_unrelated_analysis",
+        "test_proof_translation_solver_kernel_pressure_is_independent",
+        "test_merge_pressure_reduces_mutation_but_permits_read_only",
+        "test_persistence_pressure_is_decoupled_from_analysis_reads",
+        "test_saturated_stage_does_not_globally_stall_other_stages",
+        "test_stage_pressure_snapshot_and_record_are_independent"
+      ]
+    },
+    "predictions_never_overwrite_receipts": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/work_cache.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_work_cache.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-051.json"
+      ],
+      "task": "LGSWF-051",
+      "interface": "WorkCache@1",
+      "primary_symbol": "WorkCache",
+      "predictions_separate_from_observations": true,
+      "observations_immutable": true,
+      "estimate_methods": [
+        "receipt_median",
+        "receipt_max",
+        "receipt_latest"
+      ],
+      "estimate_dimensions": [
+        "latency_ms",
+        "tokens",
+        "memory_mib",
+        "retry_count",
+        "test_count",
+        "proof_count",
+        "conflict_count"
+      ],
+      "single_flight": {
+        "collapses_concurrent_identical_misses": true,
+        "cache_hit_skips_producer": true,
+        "unrelated_keys_remain_parallel": true,
+        "duplicate_computation_prevented": true
+      },
+      "locality_placement": {
+        "exact_key_reuse_score": 100,
+        "kind_affinity_score": 40,
+        "preferred_locality_score": 20,
+        "stable_name_tiebreak": true
+      },
+      "hermetic_proofs": [
+        "test_observations_are_immutable_and_separate_from_predictions",
+        "test_receipt_derived_median_and_max_estimates",
+        "test_predictions_never_appear_in_observation_index",
+        "test_conflicting_receipt_rewrite_for_same_receipt_id_fails",
+        "test_single_flight_collapses_concurrent_identical_misses",
+        "test_locality_placement_prefers_exact_key_reuse",
+        "test_floats_rejected_in_quantities_and_canonical_json"
+      ]
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-051.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-052.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-050",
+        "LGSWF-051",
+        "LGSWF-052"
+      ],
+      "result_identities": [
+        "urn:lgswf:receipt:LGSWF-050@fabric-hard-resource-reservation-v1-attempt1",
+        "urn:lgswf:receipt:LGSWF-051@fabric-work-cache-v1-attempt1",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-052.json"
+      ],
+      "receipt_identity_notes": {
+        "LGSWF-052": "producing receipt is present and current at the recorded path; result_identity field is absent on that receipt object"
+      },
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_e_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+      "epic_e_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-045"
+    },
+    "no_binary_floats_in_content_addressed_material": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_work_cache.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_backpressure.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-051.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-052.json"
+      ],
+      "tasks": [
+        "LGSWF-050",
+        "LGSWF-051",
+        "LGSWF-052"
+      ],
+      "floats_rejected_from_identity": true,
+      "hermetic_proofs": [
+        "test_hard_reservation_artifacts_are_integer_only",
+        "test_floats_rejected_in_quantities_and_canonical_json",
+        "test_fabric_backpressure_artifacts_are_integer_only"
+      ]
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "FabricHardResourceReservation@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.fabric-hard-resource-reservation@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "ResourceScheduler.reserve_hard",
+      "never_overcommit": true
+    },
+    "WorkCache@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/work_cache.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.fabric-work-cache@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "WorkCache",
+      "predictions_separate_from_observations": true
+    },
+    "FabricStageBackpressure@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.fabric-stage-backpressure@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbol": "ResourceScheduler.apply_stage_backpressure",
+      "stage_isolation": true
+    },
+    "ResourceScheduler": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+      "owner": "ipfs_accelerate_py",
+      "role": "host surface for hard reservation, stage backpressure, and preserved evaluate/schedule admission contracts"
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-060"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Multi-supervisor coordination (Epic G / LGSWF-060) may schedule after LGSWF-054; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "formal datasets proof selection remains verified empty; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "FabricHardResourceReservation@1, WorkCache@1, and FabricStageBackpressure@1 are local scheduler coordination surfaces; multi-supervisor capability advertisement and sealed fabric operation remain outside Epic F",
+    "worker completion or task status alone is never authoritative completion"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic F gate records verified empty formal proof selection at accepted trees; contract and hermetic tests plus current producing-task receipts are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-f.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_work_cache.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_backpressure.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-f.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-f@lgswf-054-pass"
+}

@@ -1,0 +1,205 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-009",
+  "title": "Build canonical semantic roots, accepted PlanRevision r1, and exact task bindings",
+  "track": "lgswf-g100-epic-gate",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-009",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G100",
+  "owning_repository": "cross-repository",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-006",
+    "LGSWF-007",
+    "LGSWF-008"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-009",
+  "observed_at": "2026-08-16T22:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_datasets at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/inventory/datasets-authority.json",
+    "artifacts/logic_governed_semantic_work_fabric/inventory/accelerator-authority.json",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/task-board.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-006.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-007.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-008.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state"
+  ],
+  "write_scope": [
+    "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-009.json"
+  ],
+  "changed_paths": [
+    "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-009.json"
+  ],
+  "expected_outputs": [
+    "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-009.json"
+  ],
+  "outputs_present": {
+    "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json": true,
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json": true,
+    "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json": true,
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-009.json": true
+  },
+  "objective_summary": "Rescanned accepted datasets and accelerator trees under datasets authority after LGSWF-006/007/008 repairs; published verified non-null canonical roots; opened and accepted PlanRevision r1 only through PlanRevisionStore@1; materialized exact per-task symbol/capsule/contract/obligation bindings for all 63 board tasks; recorded Epic A gate pass while continuous multi-supervisor operation remains no-go.",
+  "findings_digest": {
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "checked_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "prior_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_canonical_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "roots_verified": true,
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "plan_root_cid": "urn:lgswf:plan-root:r1@logic-governed-semantic-work-fabric-v0.1",
+    "plan_revision_store_apply_state": "committed",
+    "task_binding_count": 63,
+    "epic_a_disposition": "pass",
+    "mutation_admission": "open",
+    "continuous_multi_supervisor_operation": "no-go",
+    "bootstrap_projection_superseded": true,
+    "absent_surfaces_not_invented": [
+      "adversarial_assurance",
+      "incremental_sealing",
+      "ProofRepository@1",
+      "logic_platform_canonicalization"
+    ]
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "interface-freeze@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "PlanRevisionStore@1",
+    "task-identity@1",
+    "SemanticStateRoot@1",
+    "ipfs-datasets.software-contracts.semantic-index@2",
+    "ipfs-datasets.software-contracts.semantic-capsule@1"
+  ],
+  "symbols_changed": [
+    "canonical-roots publication",
+    "PlanRevision r1 create/apply through PlanRevisionStore",
+    "task-bindings-r1 materialization",
+    "epic-a gate disposition"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "canonical roots object must be strict JSON; authoritative sealed validation PATH/HOME is supervisor-owned"
+      },
+      {
+        "command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "PlanRevision r1 object must be strict JSON; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic A gate materializes roots, plan, and bindings; no datasets formal proof obligations are selected beyond the verified empty selection at accepted trees",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "canonical_root_and_plan_activation",
+    "previous_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "canonical_refresh_required": false,
+    "reason": "LGSWF-009 publishes the first verified canonical roots and accepted PlanRevision r1; subsequent mutations refresh against these roots"
+  },
+  "merge": {
+    "mutation_class": "artifact_paths_only",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-large epic-gate class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "upward_package_imports_accepted_as_authority": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false
+  },
+  "acceptance_criteria": {
+    "rescan_accepted_trees_with_datasets_authority": true,
+    "plan_opened_only_through_plan_revision_store": true,
+    "exact_task_bindings_materialized": true,
+    "roots_verified_or_fail_closed": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "canonical_semantic_state_root": null,
+      "base_semantic_state_root_label": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+      "plan_authority": "urn:lgswf:plan-revision:r000 bootstrap label; markdown projection only",
+      "task_bindings": "raw-source-required bootstrap for LGSWF-001..008; later tasks blocked",
+      "mutation_admission": "fail-closed"
+    },
+    "after": {
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "composite_canonical_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+      "plan_authority": "urn:lgswf:plan-revision:r1 accepted via PlanRevisionStore@1",
+      "task_bindings": "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json for all 63 tasks",
+      "mutation_admission": "open for dependency-ready tasks gated by LGSWF-009",
+      "epic_a": "pass; continuous multi-supervisor operation remains no-go"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-009",
+  "result_identity": "urn:lgswf:receipt:LGSWF-009@canonical-roots-plan-r1-bindings"
+}

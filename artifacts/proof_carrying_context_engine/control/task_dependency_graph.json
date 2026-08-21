@@ -1,0 +1,630 @@
+{
+  "board_projection_id": "sha256:5a3b74e77f1710edf234532636c7519966da541db9adbcef6785eb412d1800e4",
+  "edges": [
+    {
+      "from": "PCCE-000",
+      "to": "PCCE-001"
+    },
+    {
+      "from": "PCCE-000",
+      "to": "PCCE-002"
+    },
+    {
+      "from": "PCCE-000",
+      "to": "PCCE-003"
+    },
+    {
+      "from": "PCCE-000",
+      "to": "PCCE-004"
+    },
+    {
+      "from": "PCCE-001",
+      "to": "PCCE-005"
+    },
+    {
+      "from": "PCCE-002",
+      "to": "PCCE-005"
+    },
+    {
+      "from": "PCCE-003",
+      "to": "PCCE-005"
+    },
+    {
+      "from": "PCCE-004",
+      "to": "PCCE-005"
+    },
+    {
+      "from": "PCCE-005",
+      "to": "PCCE-006"
+    },
+    {
+      "from": "PCCE-006",
+      "to": "PCCE-007"
+    },
+    {
+      "from": "PCCE-007",
+      "to": "PCCE-008"
+    },
+    {
+      "from": "PCCE-007",
+      "to": "PCCE-009"
+    },
+    {
+      "from": "PCCE-007",
+      "to": "PCCE-010"
+    },
+    {
+      "from": "PCCE-012",
+      "to": "PCCE-011"
+    },
+    {
+      "from": "PCCE-013",
+      "to": "PCCE-011"
+    },
+    {
+      "from": "PCCE-014",
+      "to": "PCCE-011"
+    },
+    {
+      "from": "PCCE-015",
+      "to": "PCCE-011"
+    },
+    {
+      "from": "PCCE-016",
+      "to": "PCCE-011"
+    },
+    {
+      "from": "PCCE-017",
+      "to": "PCCE-011"
+    },
+    {
+      "from": "PCCE-018",
+      "to": "PCCE-011"
+    },
+    {
+      "from": "PCCE-019",
+      "to": "PCCE-011"
+    },
+    {
+      "from": "PCCE-008",
+      "to": "PCCE-012"
+    },
+    {
+      "from": "PCCE-010",
+      "to": "PCCE-012"
+    },
+    {
+      "from": "PCCE-009",
+      "to": "PCCE-013"
+    },
+    {
+      "from": "PCCE-010",
+      "to": "PCCE-013"
+    },
+    {
+      "from": "PCCE-017",
+      "to": "PCCE-013"
+    },
+    {
+      "from": "PCCE-013",
+      "to": "PCCE-014"
+    },
+    {
+      "from": "PCCE-017",
+      "to": "PCCE-014"
+    },
+    {
+      "from": "PCCE-010",
+      "to": "PCCE-015"
+    },
+    {
+      "from": "PCCE-014",
+      "to": "PCCE-015"
+    },
+    {
+      "from": "PCCE-018",
+      "to": "PCCE-015"
+    },
+    {
+      "from": "PCCE-019",
+      "to": "PCCE-015"
+    },
+    {
+      "from": "PCCE-010",
+      "to": "PCCE-016"
+    },
+    {
+      "from": "PCCE-013",
+      "to": "PCCE-016"
+    },
+    {
+      "from": "PCCE-007",
+      "to": "PCCE-017"
+    },
+    {
+      "from": "PCCE-007",
+      "to": "PCCE-018"
+    },
+    {
+      "from": "PCCE-009",
+      "to": "PCCE-019"
+    },
+    {
+      "from": "PCCE-018",
+      "to": "PCCE-019"
+    },
+    {
+      "from": "PCCE-011",
+      "to": "PCCE-020"
+    },
+    {
+      "from": "PCCE-020",
+      "to": "PCCE-021"
+    },
+    {
+      "from": "PCCE-022",
+      "to": "PCCE-021"
+    },
+    {
+      "from": "PCCE-023",
+      "to": "PCCE-021"
+    },
+    {
+      "from": "PCCE-011",
+      "to": "PCCE-022"
+    },
+    {
+      "from": "PCCE-011",
+      "to": "PCCE-023"
+    },
+    {
+      "from": "PCCE-021",
+      "to": "PCCE-024"
+    },
+    {
+      "from": "PCCE-020",
+      "to": "PCCE-025"
+    },
+    {
+      "from": "PCCE-021",
+      "to": "PCCE-025"
+    },
+    {
+      "from": "PCCE-022",
+      "to": "PCCE-025"
+    },
+    {
+      "from": "PCCE-023",
+      "to": "PCCE-025"
+    },
+    {
+      "from": "PCCE-024",
+      "to": "PCCE-025"
+    },
+    {
+      "from": "PCCE-025",
+      "to": "PCCE-030"
+    },
+    {
+      "from": "PCCE-030",
+      "to": "PCCE-031"
+    },
+    {
+      "from": "PCCE-030",
+      "to": "PCCE-032"
+    },
+    {
+      "from": "PCCE-030",
+      "to": "PCCE-033"
+    },
+    {
+      "from": "PCCE-030",
+      "to": "PCCE-034"
+    },
+    {
+      "from": "PCCE-031",
+      "to": "PCCE-035"
+    },
+    {
+      "from": "PCCE-032",
+      "to": "PCCE-035"
+    },
+    {
+      "from": "PCCE-033",
+      "to": "PCCE-035"
+    },
+    {
+      "from": "PCCE-034",
+      "to": "PCCE-035"
+    },
+    {
+      "from": "PCCE-025",
+      "to": "PCCE-040"
+    },
+    {
+      "from": "PCCE-035",
+      "to": "PCCE-041"
+    },
+    {
+      "from": "PCCE-040",
+      "to": "PCCE-041"
+    },
+    {
+      "from": "PCCE-025",
+      "to": "PCCE-042"
+    },
+    {
+      "from": "PCCE-040",
+      "to": "PCCE-042"
+    },
+    {
+      "from": "PCCE-025",
+      "to": "PCCE-043"
+    },
+    {
+      "from": "PCCE-035",
+      "to": "PCCE-044"
+    },
+    {
+      "from": "PCCE-041",
+      "to": "PCCE-044"
+    },
+    {
+      "from": "PCCE-042",
+      "to": "PCCE-044"
+    },
+    {
+      "from": "PCCE-043",
+      "to": "PCCE-044"
+    },
+    {
+      "from": "PCCE-035",
+      "to": "PCCE-045"
+    },
+    {
+      "from": "PCCE-044",
+      "to": "PCCE-045"
+    },
+    {
+      "from": "PCCE-044",
+      "to": "PCCE-050"
+    },
+    {
+      "from": "PCCE-044",
+      "to": "PCCE-051"
+    },
+    {
+      "from": "PCCE-045",
+      "to": "PCCE-052"
+    },
+    {
+      "from": "PCCE-050",
+      "to": "PCCE-052"
+    },
+    {
+      "from": "PCCE-051",
+      "to": "PCCE-052"
+    },
+    {
+      "from": "PCCE-057",
+      "to": "PCCE-052"
+    },
+    {
+      "from": "PCCE-050",
+      "to": "PCCE-053"
+    },
+    {
+      "from": "PCCE-051",
+      "to": "PCCE-053"
+    },
+    {
+      "from": "PCCE-052",
+      "to": "PCCE-053"
+    },
+    {
+      "from": "PCCE-053",
+      "to": "PCCE-054"
+    },
+    {
+      "from": "PCCE-044",
+      "to": "PCCE-055"
+    },
+    {
+      "from": "PCCE-054",
+      "to": "PCCE-056"
+    },
+    {
+      "from": "PCCE-055",
+      "to": "PCCE-056"
+    },
+    {
+      "from": "PCCE-044",
+      "to": "PCCE-057"
+    },
+    {
+      "from": "PCCE-056",
+      "to": "PCCE-060"
+    },
+    {
+      "from": "PCCE-060",
+      "to": "PCCE-061"
+    },
+    {
+      "from": "PCCE-060",
+      "to": "PCCE-062"
+    },
+    {
+      "from": "PCCE-060",
+      "to": "PCCE-063"
+    },
+    {
+      "from": "PCCE-060",
+      "to": "PCCE-064"
+    },
+    {
+      "from": "PCCE-060",
+      "to": "PCCE-065"
+    },
+    {
+      "from": "PCCE-060",
+      "to": "PCCE-066"
+    },
+    {
+      "from": "PCCE-061",
+      "to": "PCCE-067"
+    },
+    {
+      "from": "PCCE-062",
+      "to": "PCCE-067"
+    },
+    {
+      "from": "PCCE-063",
+      "to": "PCCE-067"
+    },
+    {
+      "from": "PCCE-064",
+      "to": "PCCE-067"
+    },
+    {
+      "from": "PCCE-065",
+      "to": "PCCE-067"
+    },
+    {
+      "from": "PCCE-066",
+      "to": "PCCE-067"
+    },
+    {
+      "from": "PCCE-079",
+      "to": "PCCE-067"
+    },
+    {
+      "from": "PCCE-067",
+      "to": "PCCE-068"
+    },
+    {
+      "from": "PCCE-056",
+      "to": "PCCE-070"
+    },
+    {
+      "from": "PCCE-070",
+      "to": "PCCE-071"
+    },
+    {
+      "from": "PCCE-070",
+      "to": "PCCE-072"
+    },
+    {
+      "from": "PCCE-070",
+      "to": "PCCE-073"
+    },
+    {
+      "from": "PCCE-070",
+      "to": "PCCE-074"
+    },
+    {
+      "from": "PCCE-071",
+      "to": "PCCE-075"
+    },
+    {
+      "from": "PCCE-072",
+      "to": "PCCE-075"
+    },
+    {
+      "from": "PCCE-073",
+      "to": "PCCE-075"
+    },
+    {
+      "from": "PCCE-074",
+      "to": "PCCE-075"
+    },
+    {
+      "from": "PCCE-075",
+      "to": "PCCE-076"
+    },
+    {
+      "from": "PCCE-015",
+      "to": "PCCE-079"
+    },
+    {
+      "from": "PCCE-025",
+      "to": "PCCE-079"
+    },
+    {
+      "from": "PCCE-035",
+      "to": "PCCE-079"
+    },
+    {
+      "from": "PCCE-045",
+      "to": "PCCE-079"
+    },
+    {
+      "from": "PCCE-064",
+      "to": "PCCE-079"
+    },
+    {
+      "from": "PCCE-065",
+      "to": "PCCE-079"
+    },
+    {
+      "from": "PCCE-068",
+      "to": "PCCE-080"
+    },
+    {
+      "from": "PCCE-076",
+      "to": "PCCE-080"
+    },
+    {
+      "from": "PCCE-080",
+      "to": "PCCE-081"
+    },
+    {
+      "from": "PCCE-081",
+      "to": "PCCE-082"
+    },
+    {
+      "from": "PCCE-082",
+      "to": "PCCE-083"
+    }
+  ],
+  "graph_id": "sha256:1c2b562d757a5cbb6ec9ae8490061d0df1b49e331fea56b87cab2a4998e79bb6",
+  "nodes": [
+    "PCCE-000",
+    "PCCE-001",
+    "PCCE-002",
+    "PCCE-003",
+    "PCCE-004",
+    "PCCE-005",
+    "PCCE-006",
+    "PCCE-007",
+    "PCCE-008",
+    "PCCE-009",
+    "PCCE-010",
+    "PCCE-011",
+    "PCCE-012",
+    "PCCE-013",
+    "PCCE-014",
+    "PCCE-015",
+    "PCCE-016",
+    "PCCE-017",
+    "PCCE-018",
+    "PCCE-019",
+    "PCCE-020",
+    "PCCE-021",
+    "PCCE-022",
+    "PCCE-023",
+    "PCCE-024",
+    "PCCE-025",
+    "PCCE-030",
+    "PCCE-031",
+    "PCCE-032",
+    "PCCE-033",
+    "PCCE-034",
+    "PCCE-035",
+    "PCCE-040",
+    "PCCE-041",
+    "PCCE-042",
+    "PCCE-043",
+    "PCCE-044",
+    "PCCE-045",
+    "PCCE-050",
+    "PCCE-051",
+    "PCCE-052",
+    "PCCE-053",
+    "PCCE-054",
+    "PCCE-055",
+    "PCCE-056",
+    "PCCE-057",
+    "PCCE-060",
+    "PCCE-061",
+    "PCCE-062",
+    "PCCE-063",
+    "PCCE-064",
+    "PCCE-065",
+    "PCCE-066",
+    "PCCE-067",
+    "PCCE-068",
+    "PCCE-070",
+    "PCCE-071",
+    "PCCE-072",
+    "PCCE-073",
+    "PCCE-074",
+    "PCCE-075",
+    "PCCE-076",
+    "PCCE-079",
+    "PCCE-080",
+    "PCCE-081",
+    "PCCE-082",
+    "PCCE-083"
+  ],
+  "objective_id": "PCCE-G000",
+  "schema": "ipfs_accelerate_py.agent_supervisor.derived-task-dependency-graph@1",
+  "topological_order": [
+    "PCCE-000",
+    "PCCE-001",
+    "PCCE-002",
+    "PCCE-003",
+    "PCCE-004",
+    "PCCE-005",
+    "PCCE-006",
+    "PCCE-007",
+    "PCCE-008",
+    "PCCE-009",
+    "PCCE-010",
+    "PCCE-017",
+    "PCCE-018",
+    "PCCE-012",
+    "PCCE-013",
+    "PCCE-019",
+    "PCCE-014",
+    "PCCE-016",
+    "PCCE-015",
+    "PCCE-011",
+    "PCCE-020",
+    "PCCE-022",
+    "PCCE-023",
+    "PCCE-021",
+    "PCCE-024",
+    "PCCE-025",
+    "PCCE-030",
+    "PCCE-040",
+    "PCCE-043",
+    "PCCE-031",
+    "PCCE-032",
+    "PCCE-033",
+    "PCCE-034",
+    "PCCE-042",
+    "PCCE-035",
+    "PCCE-041",
+    "PCCE-044",
+    "PCCE-045",
+    "PCCE-050",
+    "PCCE-051",
+    "PCCE-055",
+    "PCCE-057",
+    "PCCE-052",
+    "PCCE-053",
+    "PCCE-054",
+    "PCCE-056",
+    "PCCE-060",
+    "PCCE-070",
+    "PCCE-061",
+    "PCCE-062",
+    "PCCE-063",
+    "PCCE-064",
+    "PCCE-065",
+    "PCCE-066",
+    "PCCE-071",
+    "PCCE-072",
+    "PCCE-073",
+    "PCCE-074",
+    "PCCE-079",
+    "PCCE-075",
+    "PCCE-067",
+    "PCCE-076",
+    "PCCE-068",
+    "PCCE-080",
+    "PCCE-081",
+    "PCCE-082",
+    "PCCE-083"
+  ]
+}

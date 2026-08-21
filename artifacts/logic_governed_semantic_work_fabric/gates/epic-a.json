@@ -1,0 +1,139 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G100",
+  "epic_label": "A — inventory and contract freeze",
+  "gate_task_id": "LGSWF-009",
+  "observed_at": "2026-08-16T22:00:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-009",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-009",
+    "requires": [
+      "verified non-null datasets canonical roots",
+      "accepted PlanRevision r1 via PlanRevisionStore",
+      "exact per-task symbol/capsule/contract/obligation bindings"
+    ],
+    "prior_status": "fail-closed until LGSWF-009"
+  },
+  "predicates": {
+    "exact_revisions_inventoried": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json",
+      "task": "LGSWF-001"
+    },
+    "datasets_authorities_inventoried": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/inventory/datasets-authority.json",
+      "task": "LGSWF-002",
+      "absent_surfaces_recorded": [
+        "adversarial_assurance",
+        "incremental_sealing",
+        "ProofRepository@1",
+        "logic_platform_canonicalization"
+      ]
+    },
+    "accelerator_authorities_inventoried": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/inventory/accelerator-authority.json",
+      "task": "LGSWF-003"
+    },
+    "package_dag_and_predecessors_audited": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+      "task": "LGSWF-004"
+    },
+    "authority_map_and_interfaces_frozen": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+        "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json"
+      ],
+      "task": "LGSWF-005"
+    },
+    "semantic_scan_bootstrap_repaired": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-006.json",
+      "task": "LGSWF-006"
+    },
+    "upward_authority_inversions_repaired": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-007.json",
+      "task": "LGSWF-007"
+    },
+    "runtime_bootstrap_repaired": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-008.json",
+      "task": "LGSWF-008"
+    },
+    "canonical_roots_verified": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+      "roots_verified": true,
+      "datasets_semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "accelerator_repository_state_cid": "urn:lgswf:repository-state:accelerator@ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "composite_canonical_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+      "task": "LGSWF-009"
+    },
+    "plan_revision_r1_accepted_via_store": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+      "store_interface": "PlanRevisionStore@1",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "apply_state": "committed",
+      "task": "LGSWF-009"
+    },
+    "exact_task_bindings_materialized": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+      "task_count": 63,
+      "binding_modes": [
+        "artifact-identity",
+        "exact-symbol-scope",
+        "mixed-artifact-and-source"
+      ],
+      "task": "LGSWF-009"
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-010"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Post-bootstrap product mutations remain gated by LGSWF-009 reachability in the dependency graph"
+  },
+  "limitations": [
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "intervening accelerator commits remain candidate evidence only",
+    "worker completion or task status alone is never authoritative completion"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic A gate records verified empty formal proof selection at accepted trees"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json"
+    ],
+    "status": "declared_for_authoritative_runner"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-a@lgswf-009-pass"
+}

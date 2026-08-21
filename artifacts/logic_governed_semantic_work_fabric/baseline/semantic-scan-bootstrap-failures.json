@@ -1,0 +1,36 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.semantic-bootstrap@1",
+  "status": "semantic_analysis_inconclusive",
+  "canonical_semantic_state_root": null,
+  "attempts": [
+    {
+      "repository": "external/ipfs_accelerate",
+      "revision": "ea11293bb996f052d620eae989f5377a956764b1",
+      "operation": "scan_repository without explicit namespace",
+      "result": "failed",
+      "error_type": "SemanticIndexModelError",
+      "error": "namespace must be nonempty trimmed NFC text"
+    },
+    {
+      "repository": "external/ipfs_accelerate",
+      "revision": "ea11293bb996f052d620eae989f5377a956764b1",
+      "operation": "scan_repository_state with namespace lgswf-ipfs-accelerate-py-v1",
+      "result": "failed",
+      "error_type": "ASTIRValidationError",
+      "error": "named_argument_names must not contain duplicates",
+      "source": "ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py"
+    },
+    {
+      "repository": "external/ipfs_datasets",
+      "revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "operation": "scan_repository_state with namespace lgswf-ipfs-datasets-py-v1 followed by build_semantic_state and verification",
+      "result": "bounded_interrupt",
+      "elapsed_seconds_lower_bound": 1320,
+      "resident_memory_mib_observed": 6749,
+      "cpu_percent_observed": 96.4,
+      "interrupted_at": "copy.deepcopy AST projection in semantic_index/python_analysis.py:_projection",
+      "reason": "bounded diagnostic resource policy; no root was emitted"
+    }
+  ],
+  "dispatch_policy": "LGSWF-001 through LGSWF-008 may use exact-tree raw-source bootstrap bindings where their tasks explicitly allow it. All later mutations fail closed until LGSWF-009 verifies non-null canonical roots and accepts PlanRevision r1."
+}

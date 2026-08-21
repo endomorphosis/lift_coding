@@ -9,6 +9,7 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 GOAL_PACKET = "goal_packet/interoperability/swissknife/06921590135c"
 GOAL_PACKET_GOALS = {
@@ -20,11 +21,25 @@ GOAL_PACKET_GOALS = {
     "VAIOS-G705",
     "VAIOS-G706",
 }
-OBJECTIVE_GAP_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md"
+OBJECTIVE_GAP_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md"
+)
 VALIDATION_REPAIR_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md"
 ATTEMPT_REPAIR_REF = (
     "data/virtual_ai_os/discovery/"
     "2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md"
+)
+HAO_OBJECTIVE_GAP_REF = (
+    "data/hallucinate_multimodal_control/discovery/"
+    "2026-07-08-hao-730-objective-gap-d33307f93408.md"
+)
+HAO_ATTEMPT_2_CONFIRMATION_REF = (
+    "data/hallucinate_multimodal_control/discovery/"
+    "2026-07-08-hao-730-attempt-2-validation-confirmation.md"
+)
+HAO_ATTEMPT_2_REPAIR_REF = (
+    "data/hallucinate_multimodal_control/discovery/"
+    "2026-07-09-hao-730-attempt-2-objective-validation-repair.md"
 )
 MOBILE_ORB_OPERATIONS = {
     "register_edge_capabilities",
@@ -277,6 +292,15 @@ def test_mobile_descriptor_exports_vai_661_swissknife_interop_contract() -> None
     assert descriptor["validation"]["objective_gap_ref"] == OBJECTIVE_GAP_REF
     assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
     assert descriptor["validation"]["attempt_validation_repair_ref"] == ATTEMPT_REPAIR_REF
+    assert descriptor["validation"]["active_task_id"] == "HAO-730"
+    assert descriptor["validation"]["active_attempt"] == 2
+    assert descriptor["validation"]["active_task_board"] == "hallucinate_multimodal_control"
+    assert descriptor["validation"]["active_objective_gap_ref"] == HAO_OBJECTIVE_GAP_REF
+    assert (
+        descriptor["validation"]["active_validation_confirmation_ref"]
+        == HAO_ATTEMPT_2_CONFIRMATION_REF
+    )
+    assert descriptor["validation"]["active_validation_repair_ref"] == HAO_ATTEMPT_2_REPAIR_REF
     assert set(descriptor["validation"]["objective_goals"]) == GOAL_PACKET_GOALS
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
@@ -304,6 +328,12 @@ def test_mobile_display_widget_contract_maps_swissknife_actions_to_dat_methods()
     assert contract["objective_gap_ref"] == OBJECTIVE_GAP_REF
     assert contract["validation_repair_ref"] == VALIDATION_REPAIR_REF
     assert contract["attempt_validation_repair_ref"] == ATTEMPT_REPAIR_REF
+    assert contract["active_task_id"] == "HAO-730"
+    assert contract["active_attempt"] == 2
+    assert contract["active_task_board"] == "hallucinate_multimodal_control"
+    assert contract["active_objective_gap_ref"] == HAO_OBJECTIVE_GAP_REF
+    assert contract["active_validation_confirmation_ref"] == HAO_ATTEMPT_2_CONFIRMATION_REF
+    assert contract["active_validation_repair_ref"] == HAO_ATTEMPT_2_REPAIR_REF
     assert set(contract["objective_goals"]) == GOAL_PACKET_GOALS
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
@@ -325,6 +355,9 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_mobile
         assert "VAI-661 attempt 1 objective validation repair" in schema["$comment"]
         assert ATTEMPT_REPAIR_REF in schema["$comment"]
         assert OBJECTIVE_GAP_REF in schema["$comment"]
+        assert "HAO-730 attempt 2 objective validation repair" in schema["$comment"]
+        assert HAO_OBJECTIVE_GAP_REF in schema["$comment"]
+        assert HAO_ATTEMPT_2_REPAIR_REF in schema["$comment"]
         assert "agent_identity" in schema["$comment"]
         assert "allowed_surfaces" in schema["$comment"]
         assert "arguments_hash" in schema["$comment"]
@@ -340,16 +373,23 @@ def test_mobile_orb_bridge_module_remains_parseable_after_contract_wiring() -> N
     assert source.count("export const MOBILE_ORB_DIAGNOSTICS_CONTRACT") == 1
 
 
-def test_docs_discovery_and_heap_record_vai_661_objective_validation_repair() -> None:
+def test_docs_discovery_and_heap_record_vai_661_and_hao_730_objective_validation_repair() -> None:
     docs = (REPO_ROOT / "docs/integration/swissknife-mobile.md").read_text(encoding="utf-8")
     gap = (REPO_ROOT / OBJECTIVE_GAP_REF).read_text(encoding="utf-8")
     repair = (REPO_ROOT / VALIDATION_REPAIR_REF).read_text(encoding="utf-8")
     attempt_repair = (REPO_ROOT / ATTEMPT_REPAIR_REF).read_text(encoding="utf-8")
+    hao_gap = (REPO_ROOT / HAO_OBJECTIVE_GAP_REF).read_text(encoding="utf-8")
+    hao_attempt_confirmation = (REPO_ROOT / HAO_ATTEMPT_2_CONFIRMATION_REF).read_text(
+        encoding="utf-8"
+    )
+    hao_attempt_repair = (REPO_ROOT / HAO_ATTEMPT_2_REPAIR_REF).read_text(
+        encoding="utf-8"
+    )
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
 
-    required_terms = [
+    base_terms = [
         "VAI-661",
         "VAIOS-G700",
         GOAL_PACKET,
@@ -362,20 +402,41 @@ def test_docs_discovery_and_heap_record_vai_661_objective_validation_repair() ->
         "mobile/src/orb/metaGlassesMobileOrbBridge.js",
         "swissknife/contracts/control_surface_contract.schema.json",
         "swissknife/contracts/interaction_envelope.schema.json",
+    ]
+    active_identity_terms = ["HAO-730"]
+    legacy_terms = [
         OBJECTIVE_GAP_REF,
         VALIDATION_REPAIR_REF,
         ATTEMPT_REPAIR_REF,
     ]
-    for content in (docs, repair, attempt_repair, heap):
-        for term in required_terms:
+    active_terms = [
+        HAO_OBJECTIVE_GAP_REF,
+        HAO_ATTEMPT_2_CONFIRMATION_REF,
+        HAO_ATTEMPT_2_REPAIR_REF,
+    ]
+    for content in (docs, hao_attempt_repair, heap):
+        for term in base_terms + active_identity_terms + legacy_terms + active_terms:
+            assert term in content
+    for content in (hao_attempt_confirmation,):
+        for term in base_terms + active_identity_terms + active_terms[:2]:
+            assert term in content
+    for content in (repair, attempt_repair):
+        for term in base_terms + legacy_terms:
             assert term in content
 
     assert "Fingerprint: d33307f93408e32451468150b5e7fe003eb0222d" in gap
+    assert "Fingerprint: d33307f93408e32451468150b5e7fe003eb0222d" in hao_gap
     assert "VAI-661 attempt 1 objective validation repair" in attempt_repair
     assert "Attempt: 1" in attempt_repair
+    assert "HAO-730 Attempt 2 Objective Validation Confirmation" in hao_attempt_confirmation
+    assert "HAO-730 attempt 2 objective validation repair" in hao_attempt_repair
+    assert "Attempt: 2" in hao_attempt_repair
     assert "attempt 1 objective validation repair" in heap
+    assert "HAO-730 attempt 2 objective validation repair" in heap
 
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in repair
         assert goal_id in attempt_repair
+        assert goal_id in hao_attempt_confirmation
+        assert goal_id in hao_attempt_repair
         assert goal_id in heap

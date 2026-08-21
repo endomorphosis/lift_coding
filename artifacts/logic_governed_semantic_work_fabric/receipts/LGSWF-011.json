@@ -1,0 +1,114 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-011",
+  "title": "Assemble fail-closed snapshots and the read-only SupervisorWorldView",
+  "track": "lgswf-g200-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-011",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G200",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-010"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g200/lgswf-011",
+  "observed_at": "2026-08-17T00:30:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py": true,
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json": true
+  },
+  "objective_summary": "Landed fail-closed SupervisorWorldSnapshot assembly from independent authority observations with closed current/stale/unavailable/inconsistent/quarantined classification, exact repository/tree/plan/population/semantic/policy scheduling agreement, and a mutation-free SupervisorWorldView exposing goal/task/conflict/resource/evidence/refill queries over the content-addressed snapshot.",
+  "findings_digest": {
+    "builder_entry": "build_world_snapshot",
+    "view_entry": "SupervisorWorldView",
+    "component_states": [
+      "current",
+      "stale",
+      "unavailable",
+      "inconsistent",
+      "quarantined"
+    ],
+    "scheduling_agreement_kinds": [
+      "repository",
+      "repository_tree",
+      "plan_revision",
+      "task_population",
+      "semantic_state_root",
+      "active_policies"
+    ],
+    "classification_priority": [
+      "unavailable",
+      "quarantined",
+      "inconsistent",
+      "stale",
+      "current"
+    ],
+    "world_view_queries": [
+      "goals",
+      "subgoals",
+      "tasks",
+      "bindings",
+      "ready_tasks",
+      "blocking_dependencies",
+      "conflicts",
+      "resources",
+      "claims",
+      "completion_evidence",
+      "refill_eligibility"
+    ],
+    "has_mutation_port": false,
+    "references_only": true,
+    "does_not_reinterpret_authorities": true,
+    "depends_on_contracts": "LGSWF-010 SupervisorWorldSnapshot@1",
+    "hermetic_test_bootstrap": true
+  },
+  "interfaces_referenced": [
+    "SupervisorWorldSnapshot@1",
+    "SupervisorWorldView",
+    "WorldSnapshotBuilder@1",
+    "authority-map@1",
+    "PlanRevisionContracts@1"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner"
+      }
+    ]
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "independent fenced supervisor acceptance is required"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-011"
+}

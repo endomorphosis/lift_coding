@@ -1,0 +1,2578 @@
+{
+  "schema": "proof-carrying-context-engine/control-incident@1",
+  "incident_id": "urn:pcce:control-incident:scheduler-r3-provider-route",
+  "status": "preserved_infrastructure_failure",
+  "captured_at": "2026-08-14T08:47:13Z",
+  "content_id": "sha256:6f06d9dd6cffe17484028f468618eb9000edd6de34adc550285a0bb603b52702",
+  "canonicalization": {
+    "algorithm": "sha256",
+    "excluded_fields": [
+      "content_id"
+    ],
+    "json": "UTF-8 JSON with recursively sorted keys, separators ',' and ':', and ensure_ascii=false"
+  },
+  "source_control_commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+  "source_control_tree": "293c704f2bd6e588b89903f7ac9b6bb3aeb6b87e",
+  "source_board_receipts": {
+    "active_r3": {
+      "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+      "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r3",
+      "content_id": "sha256:7a08c3f3cc34b405daa66220558d1ddc662ec80435b132610a2f4e1aa047ff49",
+      "byte_size": 13083,
+      "byte_sha256": "sha256:f674da5a09d34e0592c21fd32dbb3886cc298d7b0edb4947ea152674c95a6685",
+      "git_blob": "d788c2e1362152b9894556ebb709ad0f071e08fa",
+      "preserved_byte_for_byte": true
+    },
+    "historical_r2": {
+      "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+      "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r2",
+      "content_id": "sha256:491f3edea7febc4306e297082f60ca1e46677c38d60427015302622dc912c029",
+      "byte_size": 4373,
+      "byte_sha256": "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+      "git_blob": "fff24f12acbb1d3edf0206916d343d27e189128f",
+      "preserved_byte_for_byte": true
+    },
+    "historical_r2_incident": {
+      "path": "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+      "incident_id": "urn:pcce:control-incident:scheduler-r2-provider-handoff",
+      "content_id": "sha256:2c3ff2b51de842d5349d5518a5240ed37780062702ba6aa68d39485202016215",
+      "byte_sha256": "sha256:98c5c8c3b1f038962a55698524f10feee0fd29568e36b52c09ca020cc77dd141",
+      "git_blob": "42e8ec20503bae6195462a1b32d28853802067f7",
+      "preserved_byte_for_byte": true
+    },
+    "profile_g_bootstrap": {
+      "path": "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
+      "content_id": "",
+      "byte_sha256": "sha256:37ae92791a4a2705bf97c83cbdeb383b1dec97e8604daf4f138bbde9692f37f5",
+      "git_blob": "e2635abf0bf93cc1cc06ed8f2491a295114b4189",
+      "preserved_byte_for_byte": true
+    }
+  },
+  "protected_control_artifacts": {
+    "hash_algorithm": "sha256",
+    "hash_passes": 2,
+    "file_count": 12,
+    "all_hashes_stable": true,
+    "files": [
+      {
+        "path": "artifacts/proof_carrying_context_engine/control/bundle_index.json",
+        "size_bytes": 564584,
+        "sha256_pass_1": "sha256:e7a70b62df1ebb5d66e1bd655e48e06363e30ae2d36543a68e98367b05e862e9",
+        "sha256_pass_2": "sha256:e7a70b62df1ebb5d66e1bd655e48e06363e30ae2d36543a68e98367b05e862e9",
+        "git_blob": "70ee0650226e91ab1fd615814d1fcf1a2503cfbd",
+        "stable": true
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+        "size_bytes": 32093,
+        "sha256_pass_1": "sha256:98c5c8c3b1f038962a55698524f10feee0fd29568e36b52c09ca020cc77dd141",
+        "sha256_pass_2": "sha256:98c5c8c3b1f038962a55698524f10feee0fd29568e36b52c09ca020cc77dd141",
+        "git_blob": "42e8ec20503bae6195462a1b32d28853802067f7",
+        "stable": true
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
+        "size_bytes": 2275,
+        "sha256_pass_1": "sha256:37ae92791a4a2705bf97c83cbdeb383b1dec97e8604daf4f138bbde9692f37f5",
+        "sha256_pass_2": "sha256:37ae92791a4a2705bf97c83cbdeb383b1dec97e8604daf4f138bbde9692f37f5",
+        "git_blob": "e2635abf0bf93cc1cc06ed8f2491a295114b4189",
+        "stable": true
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/control/task_board.json",
+        "size_bytes": 367883,
+        "sha256_pass_1": "sha256:d4a1c16d2d738475045e46578ae3aeafdeff1670bf09c668a6f5c1999fabb888",
+        "sha256_pass_2": "sha256:d4a1c16d2d738475045e46578ae3aeafdeff1670bf09c668a6f5c1999fabb888",
+        "git_blob": "d3001823cf7926b3372f36c64298bc3006bf56df",
+        "stable": true
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
+        "size_bytes": 10015,
+        "sha256_pass_1": "sha256:ed6e1b041134434c6448e3ff6daeb57c1b13bdfd2f6deebf1b3e6ba92b3f245a",
+        "sha256_pass_2": "sha256:ed6e1b041134434c6448e3ff6daeb57c1b13bdfd2f6deebf1b3e6ba92b3f245a",
+        "git_blob": "ac9d4b8a21beb1767a91ece98672bc0cb342c8bd",
+        "stable": true
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+        "size_bytes": 13083,
+        "sha256_pass_1": "sha256:f674da5a09d34e0592c21fd32dbb3886cc298d7b0edb4947ea152674c95a6685",
+        "sha256_pass_2": "sha256:f674da5a09d34e0592c21fd32dbb3886cc298d7b0edb4947ea152674c95a6685",
+        "git_blob": "d788c2e1362152b9894556ebb709ad0f071e08fa",
+        "stable": true
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+        "size_bytes": 4373,
+        "sha256_pass_1": "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+        "sha256_pass_2": "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+        "git_blob": "fff24f12acbb1d3edf0206916d343d27e189128f",
+        "stable": true
+      },
+      {
+        "path": "config/proof_carrying_context_engine_v0_1_supervisor.json",
+        "size_bytes": 10188,
+        "sha256_pass_1": "sha256:d1557ae861dd420afdb1c97b77f38e6169481a210e28603425e3cc18e5b472cf",
+        "sha256_pass_2": "sha256:d1557ae861dd420afdb1c97b77f38e6169481a210e28603425e3cc18e5b472cf",
+        "git_blob": "89bed0c15a62841ad4847d3a1252b0f557614265",
+        "stable": true
+      },
+      {
+        "path": "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md",
+        "size_bytes": 19128,
+        "sha256_pass_1": "sha256:83931b68c58bcb641224e511b5ea29538c76cb674e5b2661c8a2b92927db0fd9",
+        "sha256_pass_2": "sha256:83931b68c58bcb641224e511b5ea29538c76cb674e5b2661c8a2b92927db0fd9",
+        "git_blob": "8fe1ae1331b8077055db3f33cf4f474f34e65816",
+        "stable": true
+      },
+      {
+        "path": "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
+        "size_bytes": 19893,
+        "sha256_pass_1": "sha256:bdd0b3e16ced4a1b54f991c8d983259a92bb892c67f21a19e8ccf46841086a3d",
+        "sha256_pass_2": "sha256:bdd0b3e16ced4a1b54f991c8d983259a92bb892c67f21a19e8ccf46841086a3d",
+        "git_blob": "2873dc854512a769981c45d56d2be7b0364987a8",
+        "stable": true
+      },
+      {
+        "path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+        "size_bytes": 260144,
+        "sha256_pass_1": "sha256:28395db19dd4f2b1f7b2e22e335ef25f414d5f0ec44245c5eca22b7a77decc2f",
+        "sha256_pass_2": "sha256:28395db19dd4f2b1f7b2e22e335ef25f414d5f0ec44245c5eca22b7a77decc2f",
+        "git_blob": "4748e463a3ea57e3d8a5d03ef1f59583a68a2c69",
+        "stable": true
+      },
+      {
+        "path": "scripts/validate_proof_carrying_context_engine_board.py",
+        "size_bytes": 50441,
+        "sha256_pass_1": "sha256:3b2ac087b99342b1bf9769cf5e63307ea5de4b1b76839b8e2bc16413de75d00f",
+        "sha256_pass_2": "sha256:3b2ac087b99342b1bf9769cf5e63307ea5de4b1b76839b8e2bc16413de75d00f",
+        "git_blob": "a29263c45bd4b099f75a389e3fe4d6eaf3899b60",
+        "stable": true
+      }
+    ]
+  },
+  "source_repository_gitlinks": {
+    "accelerate": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+    "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "mcp_plus_plus": "6965f89f066769f3b3ac7b5f753b1a0044562570"
+  },
+  "launch_receipt": {
+    "path": "scheduler-r3/control-launch-receipt.json",
+    "artifact_identity": "urn:pcce:control-launch-receipt:r3",
+    "content_id": "sha256:ef971f28fa439a3f053fbe001c9b4467fe440eedeb180c2c17fc962909248ec8",
+    "status": "admitted",
+    "created_at": "2026-08-14T08:21:52.708455Z",
+    "control": {
+      "branch": "agent/proof-carrying-context-engine-v0.1",
+      "clean": true,
+      "commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+      "tree": "293c704f2bd6e588b89903f7ac9b6bb3aeb6b87e"
+    },
+    "repositories": {
+      "accelerate": {
+        "clean": true,
+        "gitlink": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+        "head": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+        "path": "external/ipfs_accelerate"
+      },
+      "datasets": {
+        "clean": true,
+        "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "path": "external/ipfs_datasets"
+      },
+      "kit": {
+        "clean": true,
+        "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "path": "external/ipfs_kit"
+      },
+      "mcp_plus_plus": {
+        "clean": true,
+        "gitlink": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "head": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "path": "Mcp-Plus-Plus"
+      }
+    },
+    "provider_policy": {
+      "codex_implementation_fallback_enabled": false,
+      "context_budget_tokens": 24576,
+      "name": "grok-implement-codex-independent-review",
+      "provider_timeout_seconds": 300,
+      "review_authority_key_generation": "fresh_r3_only"
+    },
+    "capacity": {
+      "expires_at_ms": 1786695738444,
+      "file_mode": "0600",
+      "file_owner_uid": 1000,
+      "file_sha256": "sha256:5576158b611fff9c4bcfc9e9e50a81499cf4b01f005e8c60b53730c3b9ed1910",
+      "observed_at_ms": 1786695708444,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/provider/capacity.json",
+      "required_roles": [
+        "grok-implement",
+        "codex-review"
+      ],
+      "snapshot_id": "sha256:fa77c2d97cd015fa37fbf1c2d7dd3d6a460507b96cb64b0f11cbbffc7fd08868",
+      "status": "fresh_and_usable_at_admission"
+    },
+    "scheduler": {
+      "coordination_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r3/coordination.duckdb",
+      "generation": "r3",
+      "log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r3",
+      "manifest_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r3/bundle_lanes.json",
+      "max_lanes": 2,
+      "max_task_attempts": 3,
+      "r2_reuse_permitted": false,
+      "state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r3",
+      "worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r3"
+    },
+    "dry_run": {
+      "blocked_count": 62,
+      "claimable_count": 4,
+      "coordination_database_created": false,
+      "manifest_sha256": "sha256:3cc6cc65635fcd95654426bb5f3d1f05292696daef8bd9fc86b252755ca79f82",
+      "manifest_size": 11106653,
+      "planned_count": 66,
+      "query_store_sha256": "sha256:4471e1bf27915dd98e76743476afafa201302c1085b3f8ae44105b167d61bc18",
+      "query_store_size": 15216640,
+      "ready_task_ids": [
+        "PCCE-001",
+        "PCCE-002",
+        "PCCE-003",
+        "PCCE-004"
+      ],
+      "review_key_created": false,
+      "started_count": 0,
+      "worktrees_or_logs_created": false
+    },
+    "raw_file_sha256": "sha256:c8faa801cefaefea792faecf4eabb06343934bb3f5375bc2da6ca07385c56b40"
+  },
+  "process_identity": {
+    "path": "scheduler-r3/scheduler-process-identity.json",
+    "artifact_identity": "urn:pcce:scheduler-process-identity:r3",
+    "content_id": "sha256:c7b20b393e631e4a688b777944fa26f7042c14520233b4f77e793baf405e288e",
+    "historical_status": "running",
+    "pid": 34867,
+    "boot_id": "a847e245-d5d5-4e35-856a-ba1a9124b7fa",
+    "start_time_ticks": "6012596",
+    "argv_sha256": "sha256:f3b638ec59505aacf441a07d4f62bed537fbb23acb38721806a7831916dc6b5d",
+    "control_commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+    "control_tree": "293c704f2bd6e588b89903f7ac9b6bb3aeb6b87e",
+    "launch_receipt_content_id": "sha256:ef971f28fa439a3f053fbe001c9b4467fe440eedeb180c2c17fc962909248ec8",
+    "provider_policy": "grok-implement-codex-independent-review",
+    "captured_at": "2026-08-14T08:23:13.707361Z",
+    "final_observation": {
+      "checked_at": "2026-08-14T08:47:13Z",
+      "current_boot_id": "a847e245-d5d5-4e35-856a-ba1a9124b7fa",
+      "pid_live": false,
+      "r3_agent_process_match_count": 0,
+      "manifest_active_worker_count": 0,
+      "manifest_active_worker_pids": [],
+      "historical_running_status_not_promoted": true,
+      "stale_pid_files": [
+        {
+          "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_bundle_supervisor.pid",
+          "pid": 51397,
+          "live": false,
+          "identity_matches_r3": false
+        },
+        {
+          "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_managed_daemon.pid",
+          "pid": 60896,
+          "live": false,
+          "identity_matches_r3": false
+        },
+        {
+          "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_bundle_supervisor.pid",
+          "pid": 74200,
+          "live": false,
+          "identity_matches_r3": false
+        },
+        {
+          "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_managed_daemon.pid",
+          "pid": 85881,
+          "live": false,
+          "identity_matches_r3": false
+        }
+      ]
+    },
+    "raw_file_sha256": "sha256:47be88b4f1f28db04ca969162cc71b8e4a02301aa2ff03834a15dc8a3c29c888"
+  },
+  "cause": {
+    "classification": "infrastructure_failure",
+    "boundary": "governed ProductionProviderRoute@1 -> legacy native provider execution hook",
+    "handoff_and_packet_route_reached": true,
+    "exact_repeated_reason": "provider_failure:legacy native provider command failed",
+    "root_cause_status": "post_stop_probe_classified_account_balance_exhaustion; raw task route did not retain nested detail",
+    "observed_behavior": "All six governed packets reached the typed route, but the implementation role failed before a child result, effective provider, model response, repository write, or recorded raw model command; Codex review was not applicable.",
+    "typed_provider_route_dispatch_count": 6,
+    "raw_model_command_invocation_count": 0,
+    "model_response_bytes": 0,
+    "independent_review_execution_count": 0,
+    "repository_write_count": 0
+  },
+  "post_stop_diagnosis": {
+    "evidence_class": "non_R3_runtime_evidence; diagnostic only; not task, product, receipt, completion, or provider-quality evidence",
+    "performed_after_scheduler_exit": true,
+    "grok_version": "1.0.3",
+    "probe": {
+      "scope": "minimal exact-argv structured probe",
+      "returncode": 1,
+      "stdout_bytes": 171,
+      "stdout_sha256": "sha256:9eb134a4eee3dd3b1ec6ba126325d35f2c423a0ea02aad4b0344b8f93f0adfac",
+      "stdout_envelope": {
+        "count": 1,
+        "shape": "{type,error;message}"
+      },
+      "stderr_bytes": 140,
+      "stderr_sha256": "sha256:948b81c84a8ac30244458938d10ad06aa05446679c89bc48e720306e33f1289c",
+      "nested_http_status": 402,
+      "classification": "balance_exhausted",
+      "raw_text_retained": false,
+      "temporary_artifacts_hashed_or_admitted": false
+    },
+    "capacity_semantics": {
+      "budget_source": "operator-admission-budget-not-provider-reported-quota",
+      "healthy_snapshot_proved_account_capacity": false,
+      "interpretation": "The capacity publisher represented operator admission budgets; its healthy state did not prove provider-account balance or quota."
+    },
+    "post_R3_monitor_state": {
+      "monitor_stopped_after_R3": true,
+      "capacity_snapshot_deliberately_expired": true,
+      "restart_authorized": false
+    },
+    "prohibited_use": "Do not hash /tmp, reconstruct or retain raw probe text, or promote this probe to R3 task/product evidence."
+  },
+  "scheduler_snapshot": {
+    "source_manifest": "scheduler-r3/bundle_lanes.json",
+    "source_manifest_byte_size": 3554840,
+    "source_manifest_sha256_pass_1": "sha256:750caf5961d93123a0a85cd2784e1ff71c58ecddd87a967586b5b4c4568d40c6",
+    "source_manifest_sha256_pass_2": "sha256:750caf5961d93123a0a85cd2784e1ff71c58ecddd87a967586b5b4c4568d40c6",
+    "source_manifest_hash_stable": true,
+    "schema": "ipfs_accelerate_py.agent_supervisor.dynamic_bundle_scheduler@1",
+    "generated_at": "2026-08-14T08:26:28.647309+00:00",
+    "cycle": 11,
+    "scheduler_state": "stopping",
+    "scheduler_snapshot_id": "1fd7867f64324b0891b8550df5b51ee047872130cc7cc7c234f7ea8ea7d7ccc5",
+    "scheduler_decision_snapshot_id": "1fd7867f64324b0891b8550df5b51ee047872130cc7cc7c234f7ea8ea7d7ccc5",
+    "planned_count": 66,
+    "started_count": 0,
+    "completed_count": 0,
+    "running_count": 0,
+    "ready_count": 2,
+    "blocked_count": 0,
+    "active_worker_count": 0,
+    "active_worker_pids": [],
+    "counts": {
+      "active": 0,
+      "blocked": 0,
+      "capacity": 2,
+      "completed": 0,
+      "effective_capacity": 0,
+      "ready": 2
+    },
+    "backpressure_reasons": [
+      "host_worker_capacity",
+      "cpu_proof_concurrency"
+    ],
+    "final_task_rows": [
+      {
+        "task_id": "PCCE-003",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "state": "ready",
+        "lease_state": "released",
+        "attempt": 1,
+        "bundle_key": "pcce/a/inventory-accelerate",
+        "board_execution_slice_task_cids": [
+          "baguqeerakon4ykyeoqeowidcaz75wv6lmusfksscugrdnex3ii3k6gx3vyba"
+        ]
+      },
+      {
+        "task_id": "PCCE-001",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "state": "ready",
+        "lease_state": "released",
+        "attempt": 1,
+        "bundle_key": "pcce/a/inventory-datasets",
+        "board_execution_slice_task_cids": [
+          "baguqeerasqk6k57o5o4i5rajyfcitczs7j4svpdjmo2qijrqktygwfslvzna"
+        ]
+      }
+    ],
+    "snapshot_source": "event_log",
+    "snapshot_source_event_count": 178,
+    "snapshot_phase_counts": {
+      "active": 0,
+      "blocked": 0,
+      "idle": 0,
+      "merge": 0,
+      "ready": 2,
+      "resolver": 0,
+      "validation": 0
+    },
+    "snapshot_totals": {
+      "implementation_attempts": 6,
+      "retries": 4,
+      "completions": 2,
+      "total_tokens": 0,
+      "total_cost_usd": 0.0,
+      "validation_latency_ms": 0,
+      "merge_attempts": 0
+    },
+    "query_store_table_counts": {
+      "active_lanes": 0,
+      "artifact_catalog": 1,
+      "artifact_fields": 33,
+      "artifact_tables": 15,
+      "blocked_tasks": 0,
+      "completed_tasks": 0,
+      "manifest_conflict_decisions": 2145,
+      "manifest_conflict_edges": 738,
+      "manifest_decisions": 0,
+      "manifest_lanes": 0,
+      "manifest_tasks": 2,
+      "ready_tasks": 2,
+      "scheduler_metrics": 70,
+      "scheduler_phases": 7,
+      "scheduler_task_states": 2
+    },
+    "preserved_discrepancies": [
+      {
+        "manifest_values": {
+          "started_count": 0,
+          "completed_count": 0,
+          "snapshot_completions": 2,
+          "internal_attempts": 6
+        },
+        "durable_values": {
+          "outer_claims": 2,
+          "outer_receipts": 2,
+          "internal_failed_attempts": 6,
+          "product_completions": 0
+        },
+        "interpretation": "Two snapshot completions are lane/process outcomes and six attempts are internal retries; neither is product completion."
+      },
+      {
+        "manifest_values": {
+          "nested_active_leases": 2
+        },
+        "durable_values": {
+          "leases": 2,
+          "released_leases": 2,
+          "cancelled_receipts": 2
+        },
+        "interpretation": "Nested resource metrics predate terminal release; read-only coordination rows are terminal."
+      },
+      {
+        "manifest_values": {
+          "final_ready_task_ids": [
+            "PCCE-003",
+            "PCCE-001"
+          ],
+          "unmaterialized": [
+            "PCCE-002",
+            "PCCE-004"
+          ]
+        },
+        "durable_values": {
+          "registered_initial_task_ids": [
+            "PCCE-001",
+            "PCCE-002",
+            "PCCE-003",
+            "PCCE-004"
+          ],
+          "claimed_task_ids": [
+            "PCCE-001",
+            "PCCE-003"
+          ]
+        },
+        "interpretation": "PCCE-002/004 were registered and dry-run-ready but never started."
+      }
+    ]
+  },
+  "task_state_accounting": {
+    "board_projection": {
+      "task_count": 67,
+      "completed_task_ids": [
+        "PCCE-000"
+      ],
+      "todo_task_ids": [
+        "PCCE-001",
+        "PCCE-002",
+        "PCCE-003",
+        "PCCE-004",
+        "PCCE-005",
+        "PCCE-006",
+        "PCCE-007",
+        "PCCE-008",
+        "PCCE-009",
+        "PCCE-010",
+        "PCCE-011",
+        "PCCE-012",
+        "PCCE-013",
+        "PCCE-014",
+        "PCCE-015",
+        "PCCE-016",
+        "PCCE-017",
+        "PCCE-018",
+        "PCCE-019",
+        "PCCE-020",
+        "PCCE-021",
+        "PCCE-022",
+        "PCCE-023",
+        "PCCE-024",
+        "PCCE-025",
+        "PCCE-030",
+        "PCCE-031",
+        "PCCE-032",
+        "PCCE-033",
+        "PCCE-034",
+        "PCCE-035",
+        "PCCE-040",
+        "PCCE-041",
+        "PCCE-042",
+        "PCCE-043",
+        "PCCE-044",
+        "PCCE-045",
+        "PCCE-050",
+        "PCCE-051",
+        "PCCE-052",
+        "PCCE-053",
+        "PCCE-054",
+        "PCCE-055",
+        "PCCE-056",
+        "PCCE-057",
+        "PCCE-060",
+        "PCCE-061",
+        "PCCE-062",
+        "PCCE-063",
+        "PCCE-064",
+        "PCCE-065",
+        "PCCE-066",
+        "PCCE-067",
+        "PCCE-068",
+        "PCCE-070",
+        "PCCE-071",
+        "PCCE-072",
+        "PCCE-073",
+        "PCCE-074",
+        "PCCE-075",
+        "PCCE-076",
+        "PCCE-079",
+        "PCCE-080",
+        "PCCE-081",
+        "PCCE-082",
+        "PCCE-083"
+      ],
+      "projection_mutated_by_r3": false
+    },
+    "coordination_registry": {
+      "registered_task_count": 66,
+      "registered_task_ids": [
+        "PCCE-003",
+        "PCCE-001",
+        "PCCE-002",
+        "PCCE-004",
+        "PCCE-010",
+        "PCCE-015",
+        "PCCE-012",
+        "PCCE-018",
+        "PCCE-008",
+        "PCCE-017",
+        "PCCE-011",
+        "PCCE-014",
+        "PCCE-016",
+        "PCCE-019",
+        "PCCE-009",
+        "PCCE-005",
+        "PCCE-006",
+        "PCCE-007",
+        "PCCE-013",
+        "PCCE-020",
+        "PCCE-021",
+        "PCCE-022",
+        "PCCE-024",
+        "PCCE-023",
+        "PCCE-025",
+        "PCCE-030",
+        "PCCE-035",
+        "PCCE-031",
+        "PCCE-032",
+        "PCCE-034",
+        "PCCE-033",
+        "PCCE-044",
+        "PCCE-042",
+        "PCCE-041",
+        "PCCE-043",
+        "PCCE-040",
+        "PCCE-054",
+        "PCCE-055",
+        "PCCE-056",
+        "PCCE-050",
+        "PCCE-051",
+        "PCCE-057",
+        "PCCE-052",
+        "PCCE-053",
+        "PCCE-045",
+        "PCCE-060",
+        "PCCE-064",
+        "PCCE-065",
+        "PCCE-062",
+        "PCCE-063",
+        "PCCE-061",
+        "PCCE-067",
+        "PCCE-066",
+        "PCCE-068",
+        "PCCE-079",
+        "PCCE-073",
+        "PCCE-075",
+        "PCCE-074",
+        "PCCE-072",
+        "PCCE-071",
+        "PCCE-076",
+        "PCCE-070",
+        "PCCE-080",
+        "PCCE-083",
+        "PCCE-082",
+        "PCCE-081"
+      ],
+      "dependency_waiting_unlaunched_task_ids": [
+        "PCCE-005",
+        "PCCE-006",
+        "PCCE-007",
+        "PCCE-008",
+        "PCCE-009",
+        "PCCE-010",
+        "PCCE-011",
+        "PCCE-012",
+        "PCCE-013",
+        "PCCE-014",
+        "PCCE-015",
+        "PCCE-016",
+        "PCCE-017",
+        "PCCE-018",
+        "PCCE-019",
+        "PCCE-020",
+        "PCCE-021",
+        "PCCE-022",
+        "PCCE-023",
+        "PCCE-024",
+        "PCCE-025",
+        "PCCE-030",
+        "PCCE-031",
+        "PCCE-032",
+        "PCCE-033",
+        "PCCE-034",
+        "PCCE-035",
+        "PCCE-040",
+        "PCCE-041",
+        "PCCE-042",
+        "PCCE-043",
+        "PCCE-044",
+        "PCCE-045",
+        "PCCE-050",
+        "PCCE-051",
+        "PCCE-052",
+        "PCCE-053",
+        "PCCE-054",
+        "PCCE-055",
+        "PCCE-056",
+        "PCCE-057",
+        "PCCE-060",
+        "PCCE-061",
+        "PCCE-062",
+        "PCCE-063",
+        "PCCE-064",
+        "PCCE-065",
+        "PCCE-066",
+        "PCCE-067",
+        "PCCE-068",
+        "PCCE-070",
+        "PCCE-071",
+        "PCCE-072",
+        "PCCE-073",
+        "PCCE-074",
+        "PCCE-075",
+        "PCCE-076",
+        "PCCE-079",
+        "PCCE-080",
+        "PCCE-081",
+        "PCCE-082",
+        "PCCE-083"
+      ]
+    },
+    "initial_task_ledger": [
+      {
+        "task_id": "PCCE-001",
+        "board_canonical_task_cid": "baguqeerasqk6k57o5o4i5rajyfcitczs7j4svpdjmo2qijrqktygwfslvzna",
+        "coordination_task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "internal_daemon_task_cids": [
+          "baguqeeralsn442oueq4owadbty6hbofjc2mdfnduphdjp64hvpjvjnxst7ha"
+        ],
+        "identity_layer_note": "Board, Profile-G coordination, and runtime-daemon CIDs are distinct bound identities and must not be collapsed.",
+        "board_status": "todo",
+        "outer_projection_state": "ready",
+        "outer_projection_attempt": 1,
+        "outer_lease_state": "released",
+        "outer_coordination_receipt_status": "cancelled",
+        "outer_coordination_receipt_cid": "baguqeerahuvl3vjysaxa2h4ccajteiq7w35fcyweiyou7yojzekba2lj5iha",
+        "internal_attempt_count": 3,
+        "internal_attempts": [
+          1,
+          2,
+          3
+        ],
+        "internal_statuses": [
+          "rejected",
+          "rejected",
+          "rejected"
+        ],
+        "internal_provider_receipt_ids": [
+          "baguqeeraxta47kb6o4l2osepufcipfabzblpul2nra23o7rqsf7efyvl4qha",
+          "baguqeerazhvflqlemuqecmkqgnvcxbf2tp27vt7jmahqydn2oeurrcc37a4a",
+          "baguqeerajcs5qyf6h4inhusyfhe7svzocvk5luq7on6xtgj2s3xj4ltrxkfa"
+        ],
+        "model_response_bytes": 0,
+        "source_change_count": 0,
+        "commit_count": 0,
+        "merge_count": 0,
+        "validation_attempt_count": 0,
+        "final_disposition": "internal_attempt_budget_exhausted_outer_ready_with_released_cancelled_lease"
+      },
+      {
+        "task_id": "PCCE-002",
+        "board_canonical_task_cid": "baguqeeraebc5gjbjdvcyda3ok3apa6t77kpowwbhiazcmthbfvwizo3gxvuq",
+        "coordination_task_cid": "baguqeera6243cklj7ey6mdhuqanjnycp6jtnmiqk7e5zidv6yzsl6usd4qla",
+        "internal_daemon_task_cids": [],
+        "identity_layer_note": "Board, Profile-G coordination, and runtime-daemon CIDs are distinct bound identities and must not be collapsed.",
+        "board_status": "todo",
+        "outer_projection_state": "not_materialized",
+        "outer_projection_attempt": 0,
+        "outer_lease_state": "never_claimed",
+        "outer_coordination_receipt_status": "none",
+        "outer_coordination_receipt_cid": "",
+        "internal_attempt_count": 0,
+        "internal_attempts": [],
+        "internal_statuses": [],
+        "internal_provider_receipt_ids": [],
+        "model_response_bytes": 0,
+        "source_change_count": 0,
+        "commit_count": 0,
+        "merge_count": 0,
+        "validation_attempt_count": 0,
+        "final_disposition": "registered_but_unstarted"
+      },
+      {
+        "task_id": "PCCE-003",
+        "board_canonical_task_cid": "baguqeerakon4ykyeoqeowidcaz75wv6lmusfksscugrdnex3ii3k6gx3vyba",
+        "coordination_task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "internal_daemon_task_cids": [
+          "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa"
+        ],
+        "identity_layer_note": "Board, Profile-G coordination, and runtime-daemon CIDs are distinct bound identities and must not be collapsed.",
+        "board_status": "todo",
+        "outer_projection_state": "ready",
+        "outer_projection_attempt": 1,
+        "outer_lease_state": "released",
+        "outer_coordination_receipt_status": "cancelled",
+        "outer_coordination_receipt_cid": "baguqeeravrnl42afocllwmtqcxyqx37da427vx62mydxwdwdopzahd7sy6uq",
+        "internal_attempt_count": 3,
+        "internal_attempts": [
+          1,
+          2,
+          3
+        ],
+        "internal_statuses": [
+          "rejected",
+          "rejected",
+          "rejected"
+        ],
+        "internal_provider_receipt_ids": [
+          "baguqeeravd24gdwxqjpktmf3mt53dxpkfllmrcozswv7h6hesn4qlj7qxf7q",
+          "baguqeeraj36eye3yu2wm6unchkaodt5jb3dqfudklmusfyyhe66bst5cr2ja",
+          "baguqeeraetowneyempasdwsd2tkjomn7nx3xybv4llrx23pozyf4cfafjgzq"
+        ],
+        "model_response_bytes": 0,
+        "source_change_count": 0,
+        "commit_count": 0,
+        "merge_count": 0,
+        "validation_attempt_count": 0,
+        "final_disposition": "internal_attempt_budget_exhausted_outer_ready_with_released_cancelled_lease"
+      },
+      {
+        "task_id": "PCCE-004",
+        "board_canonical_task_cid": "baguqeera7tbyyj67czlvai7wlvtgpagfhnrpgjtawlsq2jfy7zjjfmodntlq",
+        "coordination_task_cid": "baguqeerakwu33rvi5lwp42k7gamii54y7frng7hv7jnnze2fwzavdubmz7ga",
+        "internal_daemon_task_cids": [],
+        "identity_layer_note": "Board, Profile-G coordination, and runtime-daemon CIDs are distinct bound identities and must not be collapsed.",
+        "board_status": "todo",
+        "outer_projection_state": "not_materialized",
+        "outer_projection_attempt": 0,
+        "outer_lease_state": "never_claimed",
+        "outer_coordination_receipt_status": "none",
+        "outer_coordination_receipt_cid": "",
+        "internal_attempt_count": 0,
+        "internal_attempts": [],
+        "internal_statuses": [],
+        "internal_provider_receipt_ids": [],
+        "model_response_bytes": 0,
+        "source_change_count": 0,
+        "commit_count": 0,
+        "merge_count": 0,
+        "validation_attempt_count": 0,
+        "final_disposition": "registered_but_unstarted"
+      }
+    ],
+    "lane_task_states": {
+      "PCCE-003": {
+        "lane": "pcce-a-inventory-accelerate",
+        "task_state_path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_task_state.json",
+        "supervisor_status_path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_supervisor_status.json",
+        "implementation_attempts_by_cid": {
+          "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa": 3
+        },
+        "selectable_ready_task_ids": [],
+        "selection_idle_reason": "all_selectable_ready_tasks_reached_max_task_attempts",
+        "last_implementation_returncode": 1,
+        "last_implementation_commit": "",
+        "last_merge_commit": "",
+        "last_merge_error": "not_attempted",
+        "implementation_in_progress": false,
+        "historical_supervisor_status": {
+          "status": "running",
+          "supervisor_pid": 52332,
+          "daemon_pid": 60896,
+          "restart_count": 0,
+          "updated_at": "2026-08-14T08:26:27.485644+00:00"
+        }
+      },
+      "PCCE-001": {
+        "lane": "pcce-a-inventory-datasets",
+        "task_state_path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_task_state.json",
+        "supervisor_status_path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_supervisor_status.json",
+        "implementation_attempts_by_cid": {
+          "baguqeeralsn442oueq4owadbty6hbofjc2mdfnduphdjp64hvpjvjnxst7ha": 3
+        },
+        "selectable_ready_task_ids": [],
+        "selection_idle_reason": "all_selectable_ready_tasks_reached_max_task_attempts",
+        "last_implementation_returncode": 1,
+        "last_implementation_commit": "",
+        "last_merge_commit": "",
+        "last_merge_error": "not_attempted",
+        "implementation_in_progress": false,
+        "historical_supervisor_status": {
+          "status": "running",
+          "supervisor_pid": 75621,
+          "daemon_pid": 85881,
+          "restart_count": 0,
+          "updated_at": "2026-08-14T08:26:28.194146+00:00"
+        }
+      }
+    },
+    "diagnostic_receipts": {
+      "PCCE-003": {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-diagnostic-receipt.json",
+        "receipt_id": "baguqeeraoe6bz5rif7i57n4vjzw6uk2hdzmnxwzz5jcuzn4ar3ffhoye3uiq",
+        "failure_id": "baguqeeraj2gkq3ehthieuier6v4ducxwjzewl3vurcfdvdv4g6ygpvozwbta",
+        "tree_id": "95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+        "changed_files": [],
+        "changed_symbols": [],
+        "failure": {
+          "kind": "implementation_failure",
+          "returncode": 1,
+          "validation": {
+            "attempted": false,
+            "passed": true,
+            "reason": "not_run",
+            "returncode": 0
+          }
+        },
+        "unresolved_requirements": [
+          "baguqeera6vd76jfxis4khalko26xzxn6cczgjk4saec2rli4xpi2x452yzla",
+          "baguqeeraxtwxyloijbpzypcf2c4g7wkepflkr55keg7nw7qvxx3oxb7rdgkq"
+        ]
+      },
+      "PCCE-001": {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-diagnostic-receipt.json",
+        "receipt_id": "baguqeeraito6qrnlqyk5wwuhfwiz67xczaixabfifnqe7re2a7zifustsakq",
+        "failure_id": "baguqeeraj2gkq3ehthieuier6v4ducxwjzewl3vurcfdvdv4g6ygpvozwbta",
+        "tree_id": "95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+        "changed_files": [],
+        "changed_symbols": [],
+        "failure": {
+          "kind": "implementation_failure",
+          "returncode": 1,
+          "validation": {
+            "attempted": false,
+            "passed": true,
+            "reason": "not_run",
+            "returncode": 0
+          }
+        },
+        "unresolved_requirements": [
+          "baguqeeraq3glxqlu7piolhty3nx5kf2lpqlvyjmhpnqx6igwypdx35bi43ba",
+          "baguqeeraxmcmmfrqgmndyo3pvlfuj2k4knygjs7iixbtp5ah66qxtyrurlma"
+        ]
+      }
+    },
+    "accounting_totals": {
+      "outer_coordination_claims": 2,
+      "outer_coordination_leases": 2,
+      "outer_coordination_receipts": 2,
+      "outer_cancelled_receipts": 2,
+      "internal_provider_attempts": 6,
+      "internal_failed_attempts": 6,
+      "internal_attempts_by_task": {
+        "PCCE-001": 3,
+        "PCCE-002": 0,
+        "PCCE-003": 3,
+        "PCCE-004": 0
+      },
+      "internal_retries": 4,
+      "raw_model_commands": 0,
+      "model_response_bytes": 0,
+      "source_changes": 0,
+      "commits": 0,
+      "merges": 0,
+      "validations_attempted": 0,
+      "product_tasks_completed": 0
+    }
+  },
+  "internal_attempt_receipts": [
+    {
+      "task_id": "PCCE-003",
+      "internal_task_cid": "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa",
+      "attempt": 1,
+      "provider_receipt_path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-1-provider-receipt.json",
+      "attempt_log_path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-1.log",
+      "provider_receipt_id": "baguqeeravd24gdwxqjpktmf3mt53dxpkfllmrcozswv7h6hesn4qlj7qxf7q",
+      "packet_id": "packet:production:PCCE-003:attempt-1",
+      "packet_cid": "baguqeerak3p6c5nqdhj5gdoqni2zcepdq52uv3mvzn5qakxz624wpqmjujxq",
+      "snapshot_id": "git-commit:95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+      "status": "rejected",
+      "reason_code": "provider_failure",
+      "implementation_reason_code": "provider_failure:legacy native provider command failed",
+      "child_exit_code": null,
+      "effective_provider": "",
+      "grok_response_bytes": 0,
+      "codex_review_status": "not_applicable",
+      "codex_review_response_bytes": 0,
+      "raw_model_command_invoked": false,
+      "returncode": 1,
+      "write_performed": false,
+      "admission": {
+        "completion_authoritative": false,
+        "independent_review": false,
+        "proof_authoritative": false,
+        "proposal_only": true,
+        "provider_result_admitted": false,
+        "repository_write_allowed": false,
+        "review_presence": "not_applicable",
+        "self_review": false,
+        "writer_lease_bound": false
+      }
+    },
+    {
+      "task_id": "PCCE-003",
+      "internal_task_cid": "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa",
+      "attempt": 2,
+      "provider_receipt_path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-2-provider-receipt.json",
+      "attempt_log_path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-2.log",
+      "provider_receipt_id": "baguqeeraj36eye3yu2wm6unchkaodt5jb3dqfudklmusfyyhe66bst5cr2ja",
+      "packet_id": "packet:production:PCCE-003:attempt-2",
+      "packet_cid": "baguqeerasb6yyuhuu5swlxkakrdziq6xuj7oy75piz7f34xlc3436nsxf4va",
+      "snapshot_id": "git-commit:95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+      "status": "rejected",
+      "reason_code": "provider_failure",
+      "implementation_reason_code": "provider_failure:legacy native provider command failed",
+      "child_exit_code": null,
+      "effective_provider": "",
+      "grok_response_bytes": 0,
+      "codex_review_status": "not_applicable",
+      "codex_review_response_bytes": 0,
+      "raw_model_command_invoked": false,
+      "returncode": 1,
+      "write_performed": false,
+      "admission": {
+        "completion_authoritative": false,
+        "independent_review": false,
+        "proof_authoritative": false,
+        "proposal_only": true,
+        "provider_result_admitted": false,
+        "repository_write_allowed": false,
+        "review_presence": "not_applicable",
+        "self_review": false,
+        "writer_lease_bound": false
+      }
+    },
+    {
+      "task_id": "PCCE-003",
+      "internal_task_cid": "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa",
+      "attempt": 3,
+      "provider_receipt_path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-3-provider-receipt.json",
+      "attempt_log_path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-3.log",
+      "provider_receipt_id": "baguqeeraetowneyempasdwsd2tkjomn7nx3xybv4llrx23pozyf4cfafjgzq",
+      "packet_id": "packet:production:PCCE-003:attempt-3",
+      "packet_cid": "baguqeerarosjuod5bj7doncmwdz5xsglxg6e7vdeio4psnkahi5mzyuargfa",
+      "snapshot_id": "git-commit:95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+      "status": "rejected",
+      "reason_code": "provider_failure",
+      "implementation_reason_code": "provider_failure:legacy native provider command failed",
+      "child_exit_code": null,
+      "effective_provider": "",
+      "grok_response_bytes": 0,
+      "codex_review_status": "not_applicable",
+      "codex_review_response_bytes": 0,
+      "raw_model_command_invoked": false,
+      "returncode": 1,
+      "write_performed": false,
+      "admission": {
+        "completion_authoritative": false,
+        "independent_review": false,
+        "proof_authoritative": false,
+        "proposal_only": true,
+        "provider_result_admitted": false,
+        "repository_write_allowed": false,
+        "review_presence": "not_applicable",
+        "self_review": false,
+        "writer_lease_bound": false
+      }
+    },
+    {
+      "task_id": "PCCE-001",
+      "internal_task_cid": "baguqeeralsn442oueq4owadbty6hbofjc2mdfnduphdjp64hvpjvjnxst7ha",
+      "attempt": 1,
+      "provider_receipt_path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-1-provider-receipt.json",
+      "attempt_log_path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-1.log",
+      "provider_receipt_id": "baguqeeraxta47kb6o4l2osepufcipfabzblpul2nra23o7rqsf7efyvl4qha",
+      "packet_id": "packet:production:PCCE-001:attempt-1",
+      "packet_cid": "baguqeeraxlho7hl3aclvrb4jjdizwyjozglei3hpdiyaai5hudegyw7gpq7q",
+      "snapshot_id": "git-commit:95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+      "status": "rejected",
+      "reason_code": "provider_failure",
+      "implementation_reason_code": "provider_failure:legacy native provider command failed",
+      "child_exit_code": null,
+      "effective_provider": "",
+      "grok_response_bytes": 0,
+      "codex_review_status": "not_applicable",
+      "codex_review_response_bytes": 0,
+      "raw_model_command_invoked": false,
+      "returncode": 1,
+      "write_performed": false,
+      "admission": {
+        "completion_authoritative": false,
+        "independent_review": false,
+        "proof_authoritative": false,
+        "proposal_only": true,
+        "provider_result_admitted": false,
+        "repository_write_allowed": false,
+        "review_presence": "not_applicable",
+        "self_review": false,
+        "writer_lease_bound": false
+      }
+    },
+    {
+      "task_id": "PCCE-001",
+      "internal_task_cid": "baguqeeralsn442oueq4owadbty6hbofjc2mdfnduphdjp64hvpjvjnxst7ha",
+      "attempt": 2,
+      "provider_receipt_path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-2-provider-receipt.json",
+      "attempt_log_path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-2.log",
+      "provider_receipt_id": "baguqeerazhvflqlemuqecmkqgnvcxbf2tp27vt7jmahqydn2oeurrcc37a4a",
+      "packet_id": "packet:production:PCCE-001:attempt-2",
+      "packet_cid": "baguqeeraugva32tab66yjmqyr425jdesxkr5u7zbp65vvd7vvhkm5pw5w6sa",
+      "snapshot_id": "git-commit:95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+      "status": "rejected",
+      "reason_code": "provider_failure",
+      "implementation_reason_code": "provider_failure:legacy native provider command failed",
+      "child_exit_code": null,
+      "effective_provider": "",
+      "grok_response_bytes": 0,
+      "codex_review_status": "not_applicable",
+      "codex_review_response_bytes": 0,
+      "raw_model_command_invoked": false,
+      "returncode": 1,
+      "write_performed": false,
+      "admission": {
+        "completion_authoritative": false,
+        "independent_review": false,
+        "proof_authoritative": false,
+        "proposal_only": true,
+        "provider_result_admitted": false,
+        "repository_write_allowed": false,
+        "review_presence": "not_applicable",
+        "self_review": false,
+        "writer_lease_bound": false
+      }
+    },
+    {
+      "task_id": "PCCE-001",
+      "internal_task_cid": "baguqeeralsn442oueq4owadbty6hbofjc2mdfnduphdjp64hvpjvjnxst7ha",
+      "attempt": 3,
+      "provider_receipt_path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-3-provider-receipt.json",
+      "attempt_log_path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-3.log",
+      "provider_receipt_id": "baguqeerajcs5qyf6h4inhusyfhe7svzocvk5luq7on6xtgj2s3xj4ltrxkfa",
+      "packet_id": "packet:production:PCCE-001:attempt-3",
+      "packet_cid": "baguqeerakxggvxidwkem74oipvtzoiaalxjl63zs4kl2u4k6akoyyl45mkxa",
+      "snapshot_id": "git-commit:95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+      "status": "rejected",
+      "reason_code": "provider_failure",
+      "implementation_reason_code": "provider_failure:legacy native provider command failed",
+      "child_exit_code": null,
+      "effective_provider": "",
+      "grok_response_bytes": 0,
+      "codex_review_status": "not_applicable",
+      "codex_review_response_bytes": 0,
+      "raw_model_command_invoked": false,
+      "returncode": 1,
+      "write_performed": false,
+      "admission": {
+        "completion_authoritative": false,
+        "independent_review": false,
+        "proof_authoritative": false,
+        "proposal_only": true,
+        "provider_result_admitted": false,
+        "repository_write_allowed": false,
+        "review_presence": "not_applicable",
+        "self_review": false,
+        "writer_lease_bound": false
+      }
+    }
+  ],
+  "coordination_state": {
+    "database_path": "scheduler-r3/coordination.duckdb",
+    "opened_read_only_for_capture": true,
+    "metadata": [
+      {
+        "metadata_key": "store",
+        "value": {
+          "backend": "duckdb",
+          "schema": "ipfs_accelerate_py.agent_supervisor.lease-coordination-duckdb@1"
+        }
+      }
+    ],
+    "table_counts": {
+      "artifacts": 365,
+      "coordination_metadata": 1,
+      "distributed_dispatches": 0,
+      "distributed_inputs": 0,
+      "distributed_publications": 0,
+      "heartbeats": 16,
+      "leases": 2,
+      "receipts": 2,
+      "task_aliases": 198,
+      "task_dependencies": 117,
+      "task_dependency_repair_state": 66,
+      "task_dependency_repairs": 0,
+      "tasks": 66,
+      "token_history": 2,
+      "worker_capability_receipts": 0,
+      "worker_environment_receipts": 0
+    },
+    "artifact_kind_counts": [
+      {
+        "kind": "ClaimResolution",
+        "count": 15
+      },
+      {
+        "kind": "DaemonHeartbeat",
+        "count": 16
+      },
+      {
+        "kind": "TaskClaim",
+        "count": 2
+      },
+      {
+        "kind": "TaskReceipt",
+        "count": 2
+      },
+      {
+        "kind": "mcp++/profile-g/goal@1",
+        "count": 66
+      },
+      {
+        "kind": "mcp++/profile-g/plan-branch@1",
+        "count": 66
+      },
+      {
+        "kind": "mcp++/profile-g/plan-selection@1",
+        "count": 66
+      },
+      {
+        "kind": "mcp++/profile-g/subgoal@1",
+        "count": 66
+      },
+      {
+        "kind": "mcp++/profile-g/task@1",
+        "count": 66
+      }
+    ],
+    "initial_task_rows": [
+      {
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "goal_cid": "baguqeeraxblpqkybprwr2rgvahh376w7r5ccv6y556nhdfer2q6tudvwtctq",
+        "subgoal_cid": "baguqeeradawr42li2jsz6d3ftfqcp4dmjxhnl2yqinrskenn7kzwrpo6ojma",
+        "task_id": "PCCE-003",
+        "registered_at_ms": 1786695763174,
+        "updated_at_ms": 1786695763174
+      },
+      {
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "goal_cid": "baguqeeraa6hph4xhvmzqpqwc2lhfmbt6qgvdvblytknxetrhqxtzhyuw6y3q",
+        "subgoal_cid": "baguqeera22ocqlwbsq5nyhzpznxstvsegw3rte7mo2z4zu4upjdwrr4ectnq",
+        "task_id": "PCCE-001",
+        "registered_at_ms": 1786695763206,
+        "updated_at_ms": 1786695763206
+      },
+      {
+        "task_cid": "baguqeera6243cklj7ey6mdhuqanjnycp6jtnmiqk7e5zidv6yzsl6usd4qla",
+        "goal_cid": "baguqeeraqzl25gzjhpoiagm3bhzuwlrij63eboovlb3mvkg6zehpyrg3oobq",
+        "subgoal_cid": "baguqeeraqvms5xj44t2n365rhjdguesuzrm4kir42fugqxd3vi53pj4t5esq",
+        "task_id": "PCCE-002",
+        "registered_at_ms": 1786695763241,
+        "updated_at_ms": 1786695763241
+      },
+      {
+        "task_cid": "baguqeerakwu33rvi5lwp42k7gamii54y7frng7hv7jnnze2fwzavdubmz7ga",
+        "goal_cid": "baguqeerac4jgg7jcd5cj5m6ujwy4sfnbmju7pesmsipg6fainir2sac2tkka",
+        "subgoal_cid": "baguqeeraidizz2spq5kuqlm2iawdnq7irmfngcw7on4fufawkksn4vll72lq",
+        "task_id": "PCCE-004",
+        "registered_at_ms": 1786695763277,
+        "updated_at_ms": 1786695763277
+      }
+    ],
+    "leases": [
+      {
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claim_cid": "baguqeeranig755vst6rlafpddqseqcx5plfnqlmiuvwz3kqnegawxhldbaxq",
+        "resolution_cid": "baguqeera7ekncyzskqdbd4rn4sd5hg35gmoaibxgdmwj4dl5vib3i7zw2jsq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "logical_epoch": 1,
+        "fencing_token": 1,
+        "expires_at_ms": 1786696043247,
+        "attempt": 1,
+        "state": "released",
+        "started_at_ms": 1786695772930,
+        "release_reason": "receipt:cancelled:retryable",
+        "retry_not_before_ms": 0
+      },
+      {
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claim_cid": "baguqeeraagwn4kyglh2fqhhfkkh2av3rl7724223otpj4pwnkxsr5lirgm4q",
+        "resolution_cid": "baguqeera4f6j6tunyfl5rrzjipbomtvjnggp4jy7vpmxamk2hpxits2nunca",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "logical_epoch": 1,
+        "fencing_token": 1,
+        "expires_at_ms": 1786696035681,
+        "attempt": 1,
+        "state": "released",
+        "started_at_ms": 1786695795067,
+        "release_reason": "receipt:cancelled:retryable",
+        "retry_not_before_ms": 0
+      }
+    ],
+    "receipts": [
+      {
+        "receipt_cid": "baguqeeravrnl42afocllwmtqcxyqx37da427vx62mydxwdwdopzahd7sy6uq",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "goal_cid": "baguqeeraxblpqkybprwr2rgvahh376w7r5ccv6y556nhdfer2q6tudvwtctq",
+        "subgoal_cid": "baguqeeradawr42li2jsz6d3ftfqcp4dmjxhnl2yqinrskenn7kzwrpo6ojma",
+        "claim_cid": "baguqeeranig755vst6rlafpddqseqcx5plfnqlmiuvwz3kqnegawxhldbaxq",
+        "fencing_token": 1,
+        "payload": {
+          "attempt": 1,
+          "claim_cid": "baguqeeranig755vst6rlafpddqseqcx5plfnqlmiuvwz3kqnegawxhldbaxq",
+          "correlation_id": "pcce/a/inventory-accelerate",
+          "created_at_ms": 1786695988075,
+          "failure_class": "retryable",
+          "fencing_token": 1,
+          "finished_at_ms": 1786695988075,
+          "next_state": "ready",
+          "output_cid": null,
+          "parents": [
+            "baguqeera7ekncyzskqdbd4rn4sd5hg35gmoaibxgdmwj4dl5vib3i7zw2jsq"
+          ],
+          "profile_b_receipt_cid": "baguqeeraq7nboms3fyyagyvjbwmlwptvtrqn4rs5rn27w2gfvcmcdohdfqma",
+          "provider": "ipfs_accelerate_py",
+          "provider_version": "3.2.0",
+          "resolution_cid": "baguqeera7ekncyzskqdbd4rn4sd5hg35gmoaibxgdmwj4dl5vib3i7zw2jsq",
+          "resource_use_cid": "baguqeerawvut36mtkualr4tvfoaemjv7p553mmyyo5abgnhgwitihqyljlga",
+          "schema": "mcp++/profile-g/task-receipt@1",
+          "started_at_ms": 1786695773115,
+          "status": "cancelled",
+          "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa"
+        }
+      },
+      {
+        "receipt_cid": "baguqeerahuvl3vjysaxa2h4ccajteiq7w35fcyweiyou7yojzekba2lj5iha",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "goal_cid": "baguqeeraa6hph4xhvmzqpqwc2lhfmbt6qgvdvblytknxetrhqxtzhyuw6y3q",
+        "subgoal_cid": "baguqeera22ocqlwbsq5nyhzpznxstvsegw3rte7mo2z4zu4upjdwrr4ectnq",
+        "claim_cid": "baguqeeraagwn4kyglh2fqhhfkkh2av3rl7724223otpj4pwnkxsr5lirgm4q",
+        "fencing_token": 1,
+        "payload": {
+          "attempt": 1,
+          "claim_cid": "baguqeeraagwn4kyglh2fqhhfkkh2av3rl7724223otpj4pwnkxsr5lirgm4q",
+          "correlation_id": "pcce/a/inventory-datasets",
+          "created_at_ms": 1786695988434,
+          "failure_class": "retryable",
+          "fencing_token": 1,
+          "finished_at_ms": 1786695988434,
+          "next_state": "ready",
+          "output_cid": null,
+          "parents": [
+            "baguqeera4f6j6tunyfl5rrzjipbomtvjnggp4jy7vpmxamk2hpxits2nunca"
+          ],
+          "profile_b_receipt_cid": "baguqeerafrzuu2bu5xg3twyd2ph3x6e5r2wholw4hjsjftjdfry4bvwmgw2a",
+          "provider": "ipfs_accelerate_py",
+          "provider_version": "3.2.0",
+          "resolution_cid": "baguqeera4f6j6tunyfl5rrzjipbomtvjnggp4jy7vpmxamk2hpxits2nunca",
+          "resource_use_cid": "baguqeerawvut36mtkualr4tvfoaemjv7p553mmyyo5abgnhgwitihqyljlga",
+          "schema": "mcp++/profile-g/task-receipt@1",
+          "started_at_ms": 1786695795251,
+          "status": "cancelled",
+          "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq"
+        }
+      }
+    ],
+    "token_history": [
+      {
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "fencing_token": 1
+      },
+      {
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "fencing_token": 1
+      }
+    ],
+    "heartbeats": [
+      {
+        "heartbeat_cid": "baguqeeratx6sgah4sktbm55l6vorpjkx2oe35vdi34ijhkkveobxerudufbq",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695953281,
+        "expires_at_ms": 1786695968281,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeeraipchd3goqemvkv4mfoet3ve4jbk5wfu5gik6lnksrgmrae7fvgjq",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695958343,
+        "expires_at_ms": 1786695973343,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeerakac2tv2s36lgvhsyhh4tkt3k5hafps6ofwvfpft5ym3p6mvjthjq",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695963403,
+        "expires_at_ms": 1786695978403,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeeraav3z6vlj6onqzs2v4nsuc4gkhwuqnsnkaebpnauk3ghisbqlexna",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695968467,
+        "expires_at_ms": 1786695983467,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeeraliilb7t2ui4fl5m5x4b3iwurzzrfylu6yjefnmoathuk6txwj2za",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695973533,
+        "expires_at_ms": 1786695988533,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeerawsvhctcrf4vr75znfneq7ptq33feae5qd4lyuroqpse7o3nwm5xa",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695978588,
+        "expires_at_ms": 1786695993588,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeerau2zgxjlxci2tjleqbjsuoxjg44qiwxrq64sq6o724hkq3osdbcxa",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695983326,
+        "expires_at_ms": 1786695998326,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeeragihjfuf5xkfzlyyitq2atm4eoux7uux3yj6rmrquiblvnge7nf7a",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695988033,
+        "expires_at_ms": 1786696003033,
+        "capacity_millionths": 0
+      },
+      {
+        "heartbeat_cid": "baguqeerayfptjuz4ltcyd6rk64uvwh653o2bzg6vsgc2bt2oosuflpzzoxya",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695955854,
+        "expires_at_ms": 1786695970854,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeeragj3e4mkzafidgqafpyciwagjr2h4dm6qw4gpvmhkzj347kvvzpuq",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695960941,
+        "expires_at_ms": 1786695975941,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeera2vhrzy3iizlld2wkg62bsa7lyu6p7eun3o2qkmgslcfp3h2brryq",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695966299,
+        "expires_at_ms": 1786695981299,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeerajiovsw73hj6xl56dyqz3i5z4xnwjqqac23v5aowrz2y7htdghgmq",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695971368,
+        "expires_at_ms": 1786695986368,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeerakadl7q2hgpeyuf4wjho42iqtr7yjs7roslembkixk5c6mqhyik5a",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695975743,
+        "expires_at_ms": 1786695990743,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeerab3l5dlhsq7udkic6uj3wvqy4axzc34g2oni3pzxyzgzvhie5gt5q",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695980814,
+        "expires_at_ms": 1786695995814,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeeratvxn6f7he63vzdixiuxsiqr5wcnlrv4pyfp4d2yep6zzrpuxttjq",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695985902,
+        "expires_at_ms": 1786696000902,
+        "capacity_millionths": 1000000
+      },
+      {
+        "heartbeat_cid": "baguqeerawnyf4byqvh2xkyd4twiz7eja33ygqduvlop5gnvno4jarmzjc2pq",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+        "claimant_did": "did:web:ipfs-accelerate.local",
+        "fencing_token": 1,
+        "observed_at_ms": 1786695988393,
+        "expires_at_ms": 1786696003393,
+        "capacity_millionths": 0
+      }
+    ]
+  },
+  "source_worktree_evidence": {
+    "workspace_count": 2,
+    "workspaces": [
+      {
+        "lane": "pcce-a-inventory-accelerate",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r3/pcce-a-inventory-accelerate/workspace_f61b6b5682a0_dff409cb7303",
+        "head": "95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+        "tree": "293c704f2bd6e588b89903f7ac9b6bb3aeb6b87e",
+        "clean": true,
+        "pool_state_path": "worktrees-r3/pcce-a-inventory-accelerate/.pool-state/f61b6b5682a0-dff409cb7303.json",
+        "pool_state": "idle",
+        "pool_use_count": 3,
+        "pool_lease_pid": 0,
+        "dependency_heads": {
+          "Mcp-Plus-Plus": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+          "external/ipfs_accelerate": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "nested_repositories": [
+          {
+            "path": "Mcp-Plus-Plus",
+            "head": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+            "clean": true
+          },
+          {
+            "path": "external/ipfs_accelerate",
+            "head": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+            "clean": true
+          },
+          {
+            "path": "external/ipfs_datasets",
+            "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+            "clean": true
+          },
+          {
+            "path": "external/ipfs_kit",
+            "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+            "clean": true
+          }
+        ]
+      },
+      {
+        "lane": "pcce-a-inventory-datasets",
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r3/pcce-a-inventory-datasets/workspace_f61b6b5682a0_f1461737e0c2",
+        "head": "95a04cbc18d8f4316415fe0aadf32c0747df50a6",
+        "tree": "293c704f2bd6e588b89903f7ac9b6bb3aeb6b87e",
+        "clean": true,
+        "pool_state_path": "worktrees-r3/pcce-a-inventory-datasets/.pool-state/f61b6b5682a0-f1461737e0c2.json",
+        "pool_state": "idle",
+        "pool_use_count": 3,
+        "pool_lease_pid": 0,
+        "dependency_heads": {
+          "Mcp-Plus-Plus": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+          "external/ipfs_accelerate": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+          "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+        },
+        "nested_repositories": [
+          {
+            "path": "Mcp-Plus-Plus",
+            "head": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+            "clean": true
+          },
+          {
+            "path": "external/ipfs_accelerate",
+            "head": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+            "clean": true
+          },
+          {
+            "path": "external/ipfs_datasets",
+            "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+            "clean": true
+          },
+          {
+            "path": "external/ipfs_kit",
+            "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+            "clean": true
+          }
+        ]
+      }
+    ],
+    "implementation_branch_refs": [
+      {
+        "ref": "refs/heads/implementation/pcce-001-5c9bce69d424-attempt-1-1786695806",
+        "commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6"
+      },
+      {
+        "ref": "refs/heads/implementation/pcce-001-5c9bce69d424-attempt-2-1786695859",
+        "commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6"
+      },
+      {
+        "ref": "refs/heads/implementation/pcce-001-5c9bce69d424-attempt-3-1786695903",
+        "commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6"
+      },
+      {
+        "ref": "refs/heads/implementation/pcce-003-8a7f89c013e9-attempt-1-1786695785",
+        "commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6"
+      },
+      {
+        "ref": "refs/heads/implementation/pcce-003-8a7f89c013e9-attempt-2-1786695851",
+        "commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6"
+      },
+      {
+        "ref": "refs/heads/implementation/pcce-003-8a7f89c013e9-attempt-3-1786695895",
+        "commit": "95a04cbc18d8f4316415fe0aadf32c0747df50a6"
+      }
+    ],
+    "implementation_branch_ref_count": 6,
+    "all_branch_refs_point_to_source_control_commit": true,
+    "source_file_hash_coverage": "Generated state/log/pool/Git-pointer artifacts are hashed individually; workspace source is bound by clean exact HEAD/tree/submodule states.",
+    "source_repository_mutated": false,
+    "new_source_commit_count": 0
+  },
+  "raw_artifacts": {
+    "source_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1",
+    "hash_algorithm": "sha256",
+    "hash_passes": 2,
+    "file_count": 97,
+    "all_hashes_stable": true,
+    "files": [
+      {
+        "path": "logs-r3/pcce-a-inventory-accelerate.log",
+        "size_bytes": 0,
+        "mtime_ns": 1786695772966431807,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "logs-r3/pcce-a-inventory-datasets.log",
+        "size_bytes": 0,
+        "mtime_ns": 1786695795107633979,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/.bundle_lanes.duckdb.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695603136411916,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/.coordination.duckdb.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695763116124845,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/.production-provider-review-authority.ed25519",
+        "size_bytes": 32,
+        "mtime_ns": 1786695783965208504,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:1aa45b3353529be8666cbb629a733772abae0c4adbc29d3f534d64a719bf4398",
+        "sha256_pass_2": "sha256:1aa45b3353529be8666cbb629a733772abae0c4adbc29d3f534d64a719bf4398",
+        "stable": true,
+        "sensitivity": "secret key material; digest only, no raw bytes embedded"
+      },
+      {
+        "path": "scheduler-r3/.production-provider-review-authority.ed25519.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695783963352404,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/bundle_lanes.duckdb",
+        "size_bytes": 10760192,
+        "mtime_ns": 1786695989038632510,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:63dca6802f12eef044d12e0cb78f96445d65d0b94e90ef250e07d64fdc53397b",
+        "sha256_pass_2": "sha256:63dca6802f12eef044d12e0cb78f96445d65d0b94e90ef250e07d64fdc53397b",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/bundle_lanes.json",
+        "size_bytes": 3554840,
+        "mtime_ns": 1786695988687628552,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:750caf5961d93123a0a85cd2784e1ff71c58ecddd87a967586b5b4c4568d40c6",
+        "sha256_pass_2": "sha256:750caf5961d93123a0a85cd2784e1ff71c58ecddd87a967586b5b4c4568d40c6",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/control-launch-receipt.json",
+        "size_bytes": 4648,
+        "mtime_ns": 1786695736271833173,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:c8faa801cefaefea792faecf4eabb06343934bb3f5375bc2da6ca07385c56b40",
+        "sha256_pass_2": "sha256:c8faa801cefaefea792faecf4eabb06343934bb3f5375bc2da6ca07385c56b40",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/coordination.duckdb",
+        "size_bytes": 18100224,
+        "mtime_ns": 1786695988463626026,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:8f430a9b66bab61410bc2181ee5b50e3fc51637134e08deff2207a2e8b38a358",
+        "sha256_pass_2": "sha256:8f430a9b66bab61410bc2181ee5b50e3fc51637134e08deff2207a2e8b38a358",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/.agent_pcce_a_inventory_accelerate_events.jsonl.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695784942363112,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/.agent_pcce_a_inventory_accelerate_supervisor.lock.update.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695781340323723,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/.agent_pcce_a_inventory_accelerate_supervisor_events.jsonl.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695777452649928,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/.agent_pcce_a_inventory_accelerate_task_state.event-driven-checkpoint.json.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695939355073938,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/.implementation.lock.update.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695785109761439,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_bundle_supervisor.pid",
+        "size_bytes": 6,
+        "mtime_ns": 1786695772967077670,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e8fe76b7a66322065b32f66814f45ac4aae8e9cf06f93877a53ff08788d5b67f",
+        "sha256_pass_2": "sha256:e8fe76b7a66322065b32f66814f45ac4aae8e9cf06f93877a53ff08788d5b67f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_events.jsonl",
+        "size_bytes": 104560,
+        "mtime_ns": 1786695939336649315,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:704c012cd6578cfbb8d8d9fd5a4c9e5ec74192b3d749fcb50fb8aa2f04b7f793",
+        "sha256_pass_2": "sha256:704c012cd6578cfbb8d8d9fd5a4c9e5ec74192b3d749fcb50fb8aa2f04b7f793",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_events.jsonl.manifest.json",
+        "size_bytes": 1153,
+        "mtime_ns": 1786695939341058021,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:757d72f18ce9ca9acd31d76d59dbd8491af61604b3db8e483a6ad1158f72f34b",
+        "sha256_pass_2": "sha256:757d72f18ce9ca9acd31d76d59dbd8491af61604b3db8e483a6ad1158f72f34b",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_implementation_daemon_20260814T082301Z.log",
+        "size_bytes": 146217,
+        "mtime_ns": 1786695969391411208,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:cb8520c324ea4fb95d7d81144e65e329631ef5e77363024381600672de11495f",
+        "sha256_pass_2": "sha256:cb8520c324ea4fb95d7d81144e65e329631ef5e77363024381600672de11495f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_managed_daemon.latest.log",
+        "size_bytes": 146217,
+        "mtime_ns": 1786695969391411208,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:cb8520c324ea4fb95d7d81144e65e329631ef5e77363024381600672de11495f",
+        "sha256_pass_2": "sha256:cb8520c324ea4fb95d7d81144e65e329631ef5e77363024381600672de11495f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_managed_daemon.pid",
+        "size_bytes": 6,
+        "mtime_ns": 1786695781341813084,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:3176813ab27763feebb877a9f6bb97ffd49716c3704472bcf3b0eb531506b619",
+        "sha256_pass_2": "sha256:3176813ab27763feebb877a9f6bb97ffd49716c3704472bcf3b0eb531506b619",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_runtime.todo.md",
+        "size_bytes": 260144,
+        "mtime_ns": 1786695772965981098,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:28395db19dd4f2b1f7b2e22e335ef25f414d5f0ec44245c5eca22b7a77decc2f",
+        "sha256_pass_2": "sha256:28395db19dd4f2b1f7b2e22e335ef25f414d5f0ec44245c5eca22b7a77decc2f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_strategy.json",
+        "size_bytes": 2334,
+        "mtime_ns": 1786695777468339348,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:47e131ee1672a012d893598469bd2f59293853c460a5761116c37c7fc4ad8ace",
+        "sha256_pass_2": "sha256:47e131ee1672a012d893598469bd2f59293853c460a5761116c37c7fc4ad8ace",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_supervisor_events.jsonl",
+        "size_bytes": 8624,
+        "mtime_ns": 1786695781331677261,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:19b0a9aabf9b4a0a99eae957fad10dcccf03d366508673b7fe9b61cdc835c6fa",
+        "sha256_pass_2": "sha256:19b0a9aabf9b4a0a99eae957fad10dcccf03d366508673b7fe9b61cdc835c6fa",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_supervisor_events.jsonl.manifest.json",
+        "size_bytes": 1168,
+        "mtime_ns": 1786695781335029441,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:6ea47b5b6dd6037374b47bda2a37ad9f1a4cb3475751a59d3bf31de5e97624e8",
+        "sha256_pass_2": "sha256:6ea47b5b6dd6037374b47bda2a37ad9f1a4cb3475751a59d3bf31de5e97624e8",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_supervisor_status.json",
+        "size_bytes": 3217,
+        "mtime_ns": 1786695987486158220,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:dd984840cf652db41bb31f715ce8b1da12fd854a85727446ceee2cd9d8af5812",
+        "sha256_pass_2": "sha256:dd984840cf652db41bb31f715ce8b1da12fd854a85727446ceee2cd9d8af5812",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_task_state.event-driven-checkpoint.json",
+        "size_bytes": 116178,
+        "mtime_ns": 1786695939358216261,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:f35e6240bbc39b5a5b64328446e7eaaf49f58e0b88b0c7cbd6b68d7331aac8f9",
+        "sha256_pass_2": "sha256:f35e6240bbc39b5a5b64328446e7eaaf49f58e0b88b0c7cbd6b68d7331aac8f9",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_task_state.json",
+        "size_bytes": 63650,
+        "mtime_ns": 1786695939336649315,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:d6d59105e7d7bf904ecdc86ef32e185d52f30771de9fbd267baf5ef3ea9fcedb",
+        "sha256_pass_2": "sha256:d6d59105e7d7bf904ecdc86ef32e185d52f30771de9fbd267baf5ef3ea9fcedb",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_taskboard_input.json",
+        "size_bytes": 685,
+        "mtime_ns": 1786695772966431807,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:ecd6459eb282db4407640c63c8bd712bde49417470f3ebb2f631933f23ceda9a",
+        "sha256_pass_2": "sha256:ecd6459eb282db4407640c63c8bd712bde49417470f3ebb2f631933f23ceda9a",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-1-context-receipt.json",
+        "size_bytes": 2570,
+        "mtime_ns": 1786695785113490616,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:bf7962f7852da72f704bc9cf264b889f4d14bc7e0d173513f439e751dd80ef06",
+        "sha256_pass_2": "sha256:bf7962f7852da72f704bc9cf264b889f4d14bc7e0d173513f439e751dd80ef06",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-1-provider-receipt.json",
+        "size_bytes": 2968,
+        "mtime_ns": 1786695820404143170,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:9236b9398c516a0b273d9d0bc94bac26ce2e321a725aa7e892d84460eb10d9d3",
+        "sha256_pass_2": "sha256:9236b9398c516a0b273d9d0bc94bac26ce2e321a725aa7e892d84460eb10d9d3",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-1.log",
+        "size_bytes": 600,
+        "mtime_ns": 1786695820442752683,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:f3e6f8723c8edacf4f7eb03965833453ee74c9ad14353c671b5c50fe17ad4f64",
+        "sha256_pass_2": "sha256:f3e6f8723c8edacf4f7eb03965833453ee74c9ad14353c671b5c50fe17ad4f64",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-2-context-receipt.json",
+        "size_bytes": 2831,
+        "mtime_ns": 1786695851719493342,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:b794d79608ead7ccbca7435f4263975e83889b82d2a3fe37cc2a899709bdf73e",
+        "sha256_pass_2": "sha256:b794d79608ead7ccbca7435f4263975e83889b82d2a3fe37cc2a899709bdf73e",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-2-provider-receipt.json",
+        "size_bytes": 2968,
+        "mtime_ns": 1786695864592016974,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:6de5bd4fc119a3968cbb53c66c50c990408237e7049b8d24d6086f271441c6d6",
+        "sha256_pass_2": "sha256:6de5bd4fc119a3968cbb53c66c50c990408237e7049b8d24d6086f271441c6d6",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-2-retry-capsule.json",
+        "size_bytes": 3346,
+        "mtime_ns": 1786695851719782321,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:94b11b5febbf18d5e154517088b4e2d09d23fecc372833b549ac1ef41e1acdb9",
+        "sha256_pass_2": "sha256:94b11b5febbf18d5e154517088b4e2d09d23fecc372833b549ac1ef41e1acdb9",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-2.log",
+        "size_bytes": 600,
+        "mtime_ns": 1786695864629240859,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:c7b3c9d1152cc1fffad6287a6e2c0f8513467a6eceb3dec02f6c7d90de98c30b",
+        "sha256_pass_2": "sha256:c7b3c9d1152cc1fffad6287a6e2c0f8513467a6eceb3dec02f6c7d90de98c30b",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-3-context-receipt.json",
+        "size_bytes": 2831,
+        "mtime_ns": 1786695895835005888,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:a9b7e571720d4f832f7a6a30340e09616225e21d9405335d759ae0983a810177",
+        "sha256_pass_2": "sha256:a9b7e571720d4f832f7a6a30340e09616225e21d9405335d759ae0983a810177",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-3-provider-receipt.json",
+        "size_bytes": 2968,
+        "mtime_ns": 1786695908173868336,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:85c0e60dfe95dc6283b2cd891fab50a1e5cedf7f9064a5a7fe0aea0961a48d00",
+        "sha256_pass_2": "sha256:85c0e60dfe95dc6283b2cd891fab50a1e5cedf7f9064a5a7fe0aea0961a48d00",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-3-retry-capsule.json",
+        "size_bytes": 3346,
+        "mtime_ns": 1786695895835316756,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:c52fcceeeaa39ede1a92e4814703413daf859b69728967ddd27c97369c1df330",
+        "sha256_pass_2": "sha256:c52fcceeeaa39ede1a92e4814703413daf859b69728967ddd27c97369c1df330",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-3.log",
+        "size_bytes": 600,
+        "mtime_ns": 1786695908213725677,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:806f5b19b167768e70afb0126170df08586513e32d5cc025eb54526dbf80d7f8",
+        "sha256_pass_2": "sha256:806f5b19b167768e70afb0126170df08586513e32d5cc025eb54526dbf80d7f8",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-base-context-capsule.json",
+        "size_bytes": 6595,
+        "mtime_ns": 1786695785113762411,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:73c8aff29ee3fa4d5cce4a2b4832852cc3c606c600b609d243965bb634e74a83",
+        "sha256_pass_2": "sha256:73c8aff29ee3fa4d5cce4a2b4832852cc3c606c600b609d243965bb634e74a83",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-base-context-receipt.json",
+        "size_bytes": 2570,
+        "mtime_ns": 1786695785113885916,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:bf7962f7852da72f704bc9cf264b889f4d14bc7e0d173513f439e751dd80ef06",
+        "sha256_pass_2": "sha256:bf7962f7852da72f704bc9cf264b889f4d14bc7e0d173513f439e751dd80ef06",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-diagnostic-receipt.json",
+        "size_bytes": 925,
+        "mtime_ns": 1786695908795771565,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e21669602ab4f36f5a763b0c69794b8caeb3ce91233416ae1f8e5d9949af9d58",
+        "sha256_pass_2": "sha256:e21669602ab4f36f5a763b0c69794b8caeb3ce91233416ae1f8e5d9949af9d58",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-diagnostic-state.json",
+        "size_bytes": 202,
+        "mtime_ns": 1786695908795890286,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:c7fa4667bc5d2fe037c63f56b9385b992b9f76e0fcf0bc924cedb4091083830f",
+        "sha256_pass_2": "sha256:c7fa4667bc5d2fe037c63f56b9385b992b9f76e0fcf0bc924cedb4091083830f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-accelerate/state/task_queue.json",
+        "size_bytes": 103235,
+        "mtime_ns": 1786695918880134634,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:a2a4311dd2b487e8d51a53a5b3d945896f9028eb4885835f29d9c784b5e2d14b",
+        "sha256_pass_2": "sha256:a2a4311dd2b487e8d51a53a5b3d945896f9028eb4885835f29d9c784b5e2d14b",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/.agent_pcce_a_inventory_datasets_events.jsonl.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695806779602459,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/.agent_pcce_a_inventory_datasets_supervisor.lock.update.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695803060561630,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/.agent_pcce_a_inventory_datasets_supervisor_events.jsonl.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695799208367192,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/.agent_pcce_a_inventory_datasets_task_state.event-driven-checkpoint.json.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695946772157100,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/.implementation.lock.update.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695806895603732,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_bundle_supervisor.pid",
+        "size_bytes": 6,
+        "mtime_ns": 1786695795108189282,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:a8347f86c9c42c17e853b4e9f9305f013329caaab8652dbb03d2711378ade601",
+        "sha256_pass_2": "sha256:a8347f86c9c42c17e853b4e9f9305f013329caaab8652dbb03d2711378ade601",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_events.jsonl",
+        "size_bytes": 104487,
+        "mtime_ns": 1786695946756963474,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:01f6da040291cd7a4b1d4886ce02c58f35552d003c5bbab50132edb0df974cc0",
+        "sha256_pass_2": "sha256:01f6da040291cd7a4b1d4886ce02c58f35552d003c5bbab50132edb0df974cc0",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_events.jsonl.manifest.json",
+        "size_bytes": 1149,
+        "mtime_ns": 1786695946759962515,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:72e0dacdcb511e2eff248745a7a6e2120cef9ad7e1c4e09e2253e73f64a1715f",
+        "sha256_pass_2": "sha256:72e0dacdcb511e2eff248745a7a6e2120cef9ad7e1c4e09e2253e73f64a1715f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_implementation_daemon_20260814T082323Z.log",
+        "size_bytes": 145479,
+        "mtime_ns": 1786695976821494836,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:8ae5b3760a1a96cf7233afa398469894025717b253bf3107fb383b2e4b8b6ea7",
+        "sha256_pass_2": "sha256:8ae5b3760a1a96cf7233afa398469894025717b253bf3107fb383b2e4b8b6ea7",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_managed_daemon.latest.log",
+        "size_bytes": 145479,
+        "mtime_ns": 1786695976821494836,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:8ae5b3760a1a96cf7233afa398469894025717b253bf3107fb383b2e4b8b6ea7",
+        "sha256_pass_2": "sha256:8ae5b3760a1a96cf7233afa398469894025717b253bf3107fb383b2e4b8b6ea7",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_managed_daemon.pid",
+        "size_bytes": 6,
+        "mtime_ns": 1786695803061917677,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:550acee1b7b96f541f4d70753ba2ee2210a2783338d2e81e5f956b714f5be868",
+        "sha256_pass_2": "sha256:550acee1b7b96f541f4d70753ba2ee2210a2783338d2e81e5f956b714f5be868",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_runtime.todo.md",
+        "size_bytes": 260144,
+        "mtime_ns": 1786695795107170230,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:28395db19dd4f2b1f7b2e22e335ef25f414d5f0ec44245c5eca22b7a77decc2f",
+        "sha256_pass_2": "sha256:28395db19dd4f2b1f7b2e22e335ef25f414d5f0ec44245c5eca22b7a77decc2f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_strategy.json",
+        "size_bytes": 2334,
+        "mtime_ns": 1786695799226266429,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:f2c5845ca84b1fe457db9c1b120534411583bb4ca98671c2797f846360cd6ee3",
+        "sha256_pass_2": "sha256:f2c5845ca84b1fe457db9c1b120534411583bb4ca98671c2797f846360cd6ee3",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_supervisor_events.jsonl",
+        "size_bytes": 8598,
+        "mtime_ns": 1786695803052410293,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:d44e08e545edc64471daa4200d7064b747328a15a284d9e2996deb1b1cc5ad6d",
+        "sha256_pass_2": "sha256:d44e08e545edc64471daa4200d7064b747328a15a284d9e2996deb1b1cc5ad6d",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_supervisor_events.jsonl.manifest.json",
+        "size_bytes": 1164,
+        "mtime_ns": 1786695803055418726,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:08a44fd38d5501cc3a72a606496d88bbeb281c3aa3673513409c47f2c08ebc0d",
+        "sha256_pass_2": "sha256:08a44fd38d5501cc3a72a606496d88bbeb281c3aa3673513409c47f2c08ebc0d",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_supervisor_status.json",
+        "size_bytes": 3187,
+        "mtime_ns": 1786695988194675697,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:b040b2470a02b0857a9f697e9e5334444199862f8690cce970b69fad3faf8b39",
+        "sha256_pass_2": "sha256:b040b2470a02b0857a9f697e9e5334444199862f8690cce970b69fad3faf8b39",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_task_state.event-driven-checkpoint.json",
+        "size_bytes": 115610,
+        "mtime_ns": 1786695946775433761,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:89a75c3f626f17d1ee136dfb844c9b9e4cc3f1a6bfe2011c78980b0892cb8b5f",
+        "sha256_pass_2": "sha256:89a75c3f626f17d1ee136dfb844c9b9e4cc3f1a6bfe2011c78980b0892cb8b5f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_task_state.json",
+        "size_bytes": 63378,
+        "mtime_ns": 1786695946756963474,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:370404ffb4f33b65676d31a23bb5137141813ea4c14d131c0b08c1450b7aef96",
+        "sha256_pass_2": "sha256:370404ffb4f33b65676d31a23bb5137141813ea4c14d131c0b08c1450b7aef96",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_taskboard_input.json",
+        "size_bytes": 679,
+        "mtime_ns": 1786695795107633979,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:eed78a41544a95310fcbbf3b722d9352161c0065bf8d25324c295819cb998726",
+        "sha256_pass_2": "sha256:eed78a41544a95310fcbbf3b722d9352161c0065bf8d25324c295819cb998726",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-1-context-receipt.json",
+        "size_bytes": 2570,
+        "mtime_ns": 1786695806899559584,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:c7ba8d6c2a27708c764ce49d5f7678ae25cd3754d0e59f17c487fcb8fcf30ed7",
+        "sha256_pass_2": "sha256:c7ba8d6c2a27708c764ce49d5f7678ae25cd3754d0e59f17c487fcb8fcf30ed7",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-1-provider-receipt.json",
+        "size_bytes": 2968,
+        "mtime_ns": 1786695827836822238,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:84fa7dda147d60b1f42d7a84015d9720e822e3770b1a956f4fcef1c417b565a9",
+        "sha256_pass_2": "sha256:84fa7dda147d60b1f42d7a84015d9720e822e3770b1a956f4fcef1c417b565a9",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-1.log",
+        "size_bytes": 605,
+        "mtime_ns": 1786695827876834567,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:7682d5d3bc940adffa79ee356227d1214658470ae7e14697de7a7758912154ed",
+        "sha256_pass_2": "sha256:7682d5d3bc940adffa79ee356227d1214658470ae7e14697de7a7758912154ed",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-2-context-receipt.json",
+        "size_bytes": 2831,
+        "mtime_ns": 1786695859113068670,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:569ada478a6cac88f244dc6ce6c38f6adc05955f61cb4cb1134071b944a99e06",
+        "sha256_pass_2": "sha256:569ada478a6cac88f244dc6ce6c38f6adc05955f61cb4cb1134071b944a99e06",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-2-provider-receipt.json",
+        "size_bytes": 2968,
+        "mtime_ns": 1786695871750351887,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:d8600d650e7e33426f91d5283ec3a3585a72aa9e51af42b9fafd360c3c0b9911",
+        "sha256_pass_2": "sha256:d8600d650e7e33426f91d5283ec3a3585a72aa9e51af42b9fafd360c3c0b9911",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-2-retry-capsule.json",
+        "size_bytes": 3346,
+        "mtime_ns": 1786695859113392257,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:780d6b769803a9b50eb47761ae591345b5993d04a55296958d305b329020ed5d",
+        "sha256_pass_2": "sha256:780d6b769803a9b50eb47761ae591345b5993d04a55296958d305b329020ed5d",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-2.log",
+        "size_bytes": 605,
+        "mtime_ns": 1786695871789320288,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:c773d10daf3a261b35b7837ebf6a6f4fb51ac069e9c775b72f454d0545d46a30",
+        "sha256_pass_2": "sha256:c773d10daf3a261b35b7837ebf6a6f4fb51ac069e9c775b72f454d0545d46a30",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-3-context-receipt.json",
+        "size_bytes": 2831,
+        "mtime_ns": 1786695903012480954,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:8c2d7033e657e97afd634895e102c852bb17730fe220db3ef86172a9d835d8a2",
+        "sha256_pass_2": "sha256:8c2d7033e657e97afd634895e102c852bb17730fe220db3ef86172a9d835d8a2",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-3-provider-receipt.json",
+        "size_bytes": 2968,
+        "mtime_ns": 1786695915582715263,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:fb5a6284191e1158f45e8996161be41c80f3c8b7fa0f01a1f6bba013dd325ee2",
+        "sha256_pass_2": "sha256:fb5a6284191e1158f45e8996161be41c80f3c8b7fa0f01a1f6bba013dd325ee2",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-3-retry-capsule.json",
+        "size_bytes": 3346,
+        "mtime_ns": 1786695903012846750,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:8c640b7f968ab6a1b3ef9630ae4e9a2b127c6aa565a2f5c41158a2fdd7742d30",
+        "sha256_pass_2": "sha256:8c640b7f968ab6a1b3ef9630ae4e9a2b127c6aa565a2f5c41158a2fdd7742d30",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-attempt-3.log",
+        "size_bytes": 605,
+        "mtime_ns": 1786695915625808433,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:96b724362774c1e6f70dfa839247cf673a50ed57b88a31c50cfaa17460440c65",
+        "sha256_pass_2": "sha256:96b724362774c1e6f70dfa839247cf673a50ed57b88a31c50cfaa17460440c65",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-base-context-capsule.json",
+        "size_bytes": 6558,
+        "mtime_ns": 1786695806899814451,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:525717bb5bd884297c8b644c0dcc35c70f2bf5db8e79d1d049d7ceccefdb88e2",
+        "sha256_pass_2": "sha256:525717bb5bd884297c8b644c0dcc35c70f2bf5db8e79d1d049d7ceccefdb88e2",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-base-context-receipt.json",
+        "size_bytes": 2570,
+        "mtime_ns": 1786695806899930084,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:c7ba8d6c2a27708c764ce49d5f7678ae25cd3754d0e59f17c487fcb8fcf30ed7",
+        "sha256_pass_2": "sha256:c7ba8d6c2a27708c764ce49d5f7678ae25cd3754d0e59f17c487fcb8fcf30ed7",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-diagnostic-receipt.json",
+        "size_bytes": 925,
+        "mtime_ns": 1786695916179440889,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:47936f4f9e7ce88b93b6b062fa3cbdedae69f6994ae28cc0edf6011743a901b9",
+        "sha256_pass_2": "sha256:47936f4f9e7ce88b93b6b062fa3cbdedae69f6994ae28cc0edf6011743a901b9",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/implementation_logs/pcce-001-diagnostic-state.json",
+        "size_bytes": 201,
+        "mtime_ns": 1786695916179760877,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:0feb6291dcc87af71b0c283cbe34e31b593b2f7fde8cd352862eee3c348167aa",
+        "sha256_pass_2": "sha256:0feb6291dcc87af71b0c283cbe34e31b593b2f7fde8cd352862eee3c348167aa",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/pcce-a-inventory-datasets/state/task_queue.json",
+        "size_bytes": 102967,
+        "mtime_ns": 1786695918902422659,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:66686a20adf1fd68e3b3f3989cc7eba27448462dd41fabac82493d57ce568724",
+        "sha256_pass_2": "sha256:66686a20adf1fd68e3b3f3989cc7eba27448462dd41fabac82493d57ce568724",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/scheduler-process-identity.json",
+        "size_bytes": 1006,
+        "mtime_ns": 1786695818934736085,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:47be88b4f1f28db04ca969162cc71b8e4a02301aa2ff03834a15dc8a3c29c888",
+        "sha256_pass_2": "sha256:47be88b4f1f28db04ca969162cc71b8e4a02301aa2ff03834a15dc8a3c29c888",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/scheduler_decision_metrics.json",
+        "size_bytes": 171977,
+        "mtime_ns": 1786695989057017485,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:683521898c0ed825df5e4fc96b1d199daa87c288e24913d015f1cdc6c0730aec",
+        "sha256_pass_2": "sha256:683521898c0ed825df5e4fc96b1d199daa87c288e24913d015f1cdc6c0730aec",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r3/scheduler_metrics.json",
+        "size_bytes": 171977,
+        "mtime_ns": 1786695989054280447,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:683521898c0ed825df5e4fc96b1d199daa87c288e24913d015f1cdc6c0730aec",
+        "sha256_pass_2": "sha256:683521898c0ed825df5e4fc96b1d199daa87c288e24913d015f1cdc6c0730aec",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-accelerate/.pool-state/.f61b6b5682a0-dff409cb7303.lock.update.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695851740098098,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-accelerate/.pool-state/f61b6b5682a0-dff409cb7303.json",
+        "size_bytes": 1292,
+        "mtime_ns": 1786695908776293075,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:dd0c8dcea0a25d220eb66ed521df522a7e2ddd5d1c67cf85599345f4c29ff3da",
+        "sha256_pass_2": "sha256:dd0c8dcea0a25d220eb66ed521df522a7e2ddd5d1c67cf85599345f4c29ff3da",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-accelerate/workspace_f61b6b5682a0_dff409cb7303/.git",
+        "size_bytes": 85,
+        "mtime_ns": 1786695785136529924,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:4b31d9722135e29b0d9de51399d31875768c6209fd6857b41c5a7ed9da99b537",
+        "sha256_pass_2": "sha256:4b31d9722135e29b0d9de51399d31875768c6209fd6857b41c5a7ed9da99b537",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-accelerate/workspace_f61b6b5682a0_dff409cb7303/Mcp-Plus-Plus/.git",
+        "size_bytes": 133,
+        "mtime_ns": 1786695814570688077,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e4ca4470750caef74918463ae2483eca5678a26f65eef5d61cf0187ebef5df57",
+        "sha256_pass_2": "sha256:e4ca4470750caef74918463ae2483eca5678a26f65eef5d61cf0187ebef5df57",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-accelerate/workspace_f61b6b5682a0_dff409cb7303/external/ipfs_accelerate/.git",
+        "size_bytes": 146,
+        "mtime_ns": 1786695806182764913,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:cd5e8c00995ca7e7129d68be7d3c029bec2e28a96579f823e0ca5385b2a7947b",
+        "sha256_pass_2": "sha256:cd5e8c00995ca7e7129d68be7d3c029bec2e28a96579f823e0ca5385b2a7947b",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-accelerate/workspace_f61b6b5682a0_dff409cb7303/external/ipfs_datasets/.git",
+        "size_bytes": 142,
+        "mtime_ns": 1786695798104852819,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:e69c2b38c2f299cdf2fd9aaace41cbe3210b79912cfdd3b38a6540661006ec4b",
+        "sha256_pass_2": "sha256:e69c2b38c2f299cdf2fd9aaace41cbe3210b79912cfdd3b38a6540661006ec4b",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-accelerate/workspace_f61b6b5682a0_dff409cb7303/external/ipfs_kit/.git",
+        "size_bytes": 132,
+        "mtime_ns": 1786695801980227743,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:4a8a398c0b71dc98014c1e6d05e869db9ae761e0f3bb167caf2352826cc1d43b",
+        "sha256_pass_2": "sha256:4a8a398c0b71dc98014c1e6d05e869db9ae761e0f3bb167caf2352826cc1d43b",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-datasets/.pool-state/.f61b6b5682a0-f1461737e0c2.lock.update.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786695859134179960,
+        "mode": "0600",
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-datasets/.pool-state/f61b6b5682a0-f1461737e0c2.json",
+        "size_bytes": 1291,
+        "mtime_ns": 1786695916153650633,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:12ced064b99d9fe0df038eb6c2c9f1177ff1fbb325ee82856ddf4be6f89c024f",
+        "sha256_pass_2": "sha256:12ced064b99d9fe0df038eb6c2c9f1177ff1fbb325ee82856ddf4be6f89c024f",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-datasets/workspace_f61b6b5682a0_f1461737e0c2/.git",
+        "size_bytes": 85,
+        "mtime_ns": 1786695806922541436,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:71a4b13bb809cb9b74c0d0e06d29990615c37f01ed2fbea4e98e40b0f71d2fc7",
+        "sha256_pass_2": "sha256:71a4b13bb809cb9b74c0d0e06d29990615c37f01ed2fbea4e98e40b0f71d2fc7",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-datasets/workspace_f61b6b5682a0_f1461737e0c2/Mcp-Plus-Plus/.git",
+        "size_bytes": 134,
+        "mtime_ns": 1786695823840834083,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:467fdeb31f5a505330b4dd2f73521f55a24b6772a22fcabbbd2de0e7ef82bd16",
+        "sha256_pass_2": "sha256:467fdeb31f5a505330b4dd2f73521f55a24b6772a22fcabbbd2de0e7ef82bd16",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-datasets/workspace_f61b6b5682a0_f1461737e0c2/external/ipfs_accelerate/.git",
+        "size_bytes": 147,
+        "mtime_ns": 1786695816032979087,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:c9e4a2a86aafe8f630ae1b2dfb81c5214d692dbbdaf2f8c5a33bc58e83ffd3f5",
+        "sha256_pass_2": "sha256:c9e4a2a86aafe8f630ae1b2dfb81c5214d692dbbdaf2f8c5a33bc58e83ffd3f5",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-datasets/workspace_f61b6b5682a0_f1461737e0c2/external/ipfs_datasets/.git",
+        "size_bytes": 143,
+        "mtime_ns": 1786695808345084613,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:3c2afac0cd1a6afadf32555af1b23ead007b6865c86eabc3e1119e894289a83d",
+        "sha256_pass_2": "sha256:3c2afac0cd1a6afadf32555af1b23ead007b6865c86eabc3e1119e894289a83d",
+        "stable": true
+      },
+      {
+        "path": "worktrees-r3/pcce-a-inventory-datasets/workspace_f61b6b5682a0_f1461737e0c2/external/ipfs_kit/.git",
+        "size_bytes": 133,
+        "mtime_ns": 1786695811994410937,
+        "mode": "0664",
+        "sha256_pass_1": "sha256:d2bf8023f2f4c9d618610d6316b9d72174f5dffbd34117de6ba86113a1f824e4",
+        "sha256_pass_2": "sha256:d2bf8023f2f4c9d618610d6316b9d72174f5dffbd34117de6ba86113a1f824e4",
+        "stable": true
+      }
+    ]
+  },
+  "partial_effects": {
+    "recorded": true,
+    "state_and_log_artifacts_created": true,
+    "generated_state_and_log_file_count": 83,
+    "worktree_lifecycle_metadata_file_count": 14,
+    "registered_task_count": 66,
+    "registered_dependency_count": 117,
+    "registered_alias_count": 198,
+    "coordination_artifact_count": 365,
+    "heartbeat_count": 16,
+    "task_claim_count": 2,
+    "task_receipt_count": 2,
+    "released_lease_count": 2,
+    "cancelled_outer_receipt_count": 2,
+    "internal_attempt_count": 6,
+    "provider_receipt_count": 6,
+    "typed_context_packet_count": 6,
+    "implementation_workspace_count": 2,
+    "pooled_idle_workspace_count": 2,
+    "baseline_only_implementation_branch_ref_count": 6,
+    "source_repository_mutated": false,
+    "submodule_source_mutated": false,
+    "new_source_commit_created": false,
+    "model_response_recorded": false,
+    "patch_generated": false,
+    "validation_run": false,
+    "merge_attempted": false,
+    "product_task_completed": false,
+    "accepted_output_artifact_count": 0
+  },
+  "stop_semantics": {
+    "monitor_mode": "read-only; no signal, restart, state write, lease operation, or Git mutation",
+    "scheduler_identity_matched_while_live": {
+      "pid": 34867,
+      "boot_id": "a847e245-d5d5-4e35-856a-ba1a9124b7fa",
+      "start_time_ticks": "6012596",
+      "argv_sha256": "sha256:f3b638ec59505aacf441a07d4f62bed537fbb23acb38721806a7831916dc6b5d"
+    },
+    "terminal_observation": {
+      "checked_at": "2026-08-14T08:47:13Z",
+      "pid_live": false,
+      "r3_agent_process_match_count": 0,
+      "scheduler_state": "stopping",
+      "active_worker_count": 0,
+      "active_worker_pids": []
+    },
+    "lane_termination": "Both leased lanes terminated after three failed internal attempts. Outer receipts were cancelled/retryable, both token-1 leases released, and PCCE-002/004 remained unstarted.",
+    "scheduler_restart_performed": false,
+    "scheduler_resume_performed": false,
+    "PCCE-002_started": false,
+    "PCCE-004_started": false
+  },
+  "prohibited_claims": [
+    "No R3 artifact completes PCCE-001/002/003/004.",
+    "Two snapshot completions are not completed product tasks.",
+    "Two cancelled coordination receipts are not six internal receipts or successful work.",
+    "Six rejected internal receipts must not be collapsed into two outer claims.",
+    "Typed packets do not prove raw model invocation; all six logs record false.",
+    "Zero response bytes and not-applicable review are not live model/review evidence.",
+    "PCCE-002/004 were registered but unstarted and produced no runtime effects.",
+    "Stale nested active-lease metrics do not override released leases.",
+    "Operator admission budgets did not prove provider account capacity.",
+    "The post-stop 402 probe is non-R3 diagnostic evidence only.",
+    "Six baseline-only branch refs contain no source changes.",
+    "This incident is not route-repair evidence.",
+    "No R3 state, claim, lease, fence, receipt, packet, branch, or workspace may be reused as production evidence."
+  ],
+  "retention": {
+    "disposition": "preserve_read_only",
+    "source_state_file_content_mutated_during_capture": false,
+    "source_log_file_content_mutated_during_capture": false,
+    "source_board_projection_content_mutated": false,
+    "source_frozen_receipt_content_mutated": false,
+    "source_control_worktree_mutated": false,
+    "forensic_artifact_created_in_isolated_worktree": true,
+    "resume_scheduler_r3": false,
+    "reuse_scheduler_r3_state": false,
+    "reuse_scheduler_r3_worktrees": false,
+    "reuse_scheduler_r3_logs": false,
+    "reuse_claims_leases_fences_or_receipts": false,
+    "reuse_context_or_provider_receipts_as_product_evidence": false,
+    "replacement_run_policy": "After provider-account capacity and exact native CLI behavior are qualified, use a distinct generation with fresh state/worktree/log/claim/lease/fence/receipt/review-authority/launch identities.",
+    "raw_evidence_policy": "Preserve scheduler-r3, logs-r3, worktrees-r3, databases, six internal attempts, and this manifest read-only; do not repair, compact, replay, resume, or delete in place.",
+    "allowed_use": "Immutable evidence of R3 infrastructure failure and partial effects only."
+  }
+}

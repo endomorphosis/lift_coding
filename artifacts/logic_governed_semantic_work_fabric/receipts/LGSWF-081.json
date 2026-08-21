@@ -1,0 +1,261 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-081",
+  "title": "Enforce immutable revision safety, refill bounds, dedupe, and deterministic plan doctor",
+  "track": "lgswf-g900-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-081",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G900",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-080"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g900/lgswf-081",
+  "observed_at": "2026-08-17T23:59:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-081",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py": true,
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json": true
+  },
+  "objective_summary": "Landed PlanDoctor@1 as a pure diagnostic leaf that checks every required plan-health defect without mutating or activating plans, and extended PlanRevisionStore@1 with fail-closed amplification bounds, cosmetic/exact semantic-key dedupe, and started-history preservation aligned to BoundedRefillTriggerPolicy@1 defaults. Successor/revision/task/subgoal/key/retry/provider/token/frequency/no-progress amplification is bounded; claimed/running/settling/completed/accepted history remains immutable; doctor proposals never authorize activation. Worker completion or task status alone is insufficient.",
+  "findings_digest": {
+    "interface": "PlanDoctor@1",
+    "related_interfaces": [
+      "PlanRevisionStore@1",
+      "PlanRevisionContracts@1",
+      "BoundedRefillTriggerPolicy@1",
+      "RefillProposal@1"
+    ],
+    "primary_symbols": [
+      "PlanDoctor",
+      "PlanRevisionStore"
+    ],
+    "module_paths": {
+      "plan_doctor": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+      "plan_revision_store": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py"
+    },
+    "core_symbols": [
+      "PlanDoctor",
+      "PlanDoctorReport",
+      "PlanDoctorFinding",
+      "PlanDoctorProposal",
+      "PlanHealthDefectKind",
+      "PlanRevisionAmplificationBounds",
+      "PlanRevisionAmplificationObservation",
+      "PlanRevisionAmplificationState",
+      "PlanRevisionStoreBoundsError",
+      "PlanRevisionStoreDedupeError",
+      "PlanRevisionStoreHistoryError",
+      "evaluate_amplification_bounds",
+      "default_amplification_bounds",
+      "diagnose_plan",
+      "required_plan_health_defect_values"
+    ],
+    "required_plan_health_defects": [
+      "cycle",
+      "reachability_orphan",
+      "missing_completion",
+      "missing_binding",
+      "missing_verification",
+      "hidden_serialization",
+      "excessive_serialization",
+      "unsafe_parallelism",
+      "resource_infeasibility",
+      "bottleneck",
+      "starvation",
+      "retries",
+      "stale_evidence",
+      "root_mismatch",
+      "incomplete_parent_coverage"
+    ],
+    "amplification_bounds": [
+      "max_successor_depth",
+      "max_revision_depth",
+      "max_tasks_per_revision",
+      "max_subgoals_per_revision",
+      "max_repeated_semantic_keys",
+      "max_retries",
+      "max_provider_calls",
+      "max_tokens",
+      "max_frequency_per_epoch",
+      "max_no_progress_epochs"
+    ],
+    "fail_closed_invariants": {
+      "doctor_never_mutates_plan": true,
+      "doctor_never_activates_revision": true,
+      "doctor_never_authorizes_completion": true,
+      "doctor_never_authorizes_acceptance": true,
+      "started_history_immutable": true,
+      "cosmetic_semantic_keys_deduped": true,
+      "exact_semantic_keys_deduped": true,
+      "amplification_bounds_aligned_with_refill_policy": true,
+      "worker_completion_insufficient": true
+    },
+    "store_extensions": {
+      "amplification_bounds_persisted": true,
+      "amplification_state_persisted": true,
+      "apply_request_amplification_field": true,
+      "semantic_keys_field": true
+    },
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-084"
+    ]
+  },
+  "interfaces_referenced": [
+    "PlanDoctor@1",
+    "PlanRevisionStore@1",
+    "PlanRevisionContracts@1",
+    "BoundedRefillTriggerPolicy@1",
+    "RefillProposal@1",
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "task-identity@1"
+  ],
+  "symbols_changed": [
+    "PlanDoctor",
+    "PlanDoctorReport",
+    "PlanHealthDefectKind",
+    "PlanRevisionAmplificationBounds",
+    "PlanRevisionAmplificationObservation",
+    "PlanRevisionStore.assert_amplification_admissible",
+    "PlanRevisionStore.check_amplification",
+    "evaluate_amplification_bounds"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic PlanDoctor@1 / PlanRevisionStore amplification suite; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-081 records verified empty formal proof selection; contract and hermetic tests are the selected evidence surface",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_source_and_receipt",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-081 mutates accelerator planning/task_sources source under declared outputs; datasets semantic truth is not mutated; canonical refresh follows admitted merge of the accelerator tree"
+  },
+  "merge": {
+    "mutation_class": "declared_accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + LGSWF-080 receipt",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "completion_contract_weakened": false,
+    "history_mutation_of_started_records": false,
+    "plan_doctor_direct_plan_mutation": false,
+    "plan_doctor_revision_activation": false,
+    "worker_completion_treated_as_acceptance": false
+  },
+  "acceptance_criteria": {
+    "amplification_bounds_enforced": true,
+    "semantic_key_dedupe_enforced": true,
+    "started_history_preserved": true,
+    "required_plan_health_defects_diagnosed": true,
+    "doctor_proposal_only_no_activation": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+    "downstream_unlock": "LGSWF-084"
+  },
+  "before_after": {
+    "before": {
+      "plan_doctor": "absent as PlanDoctor@1 fabric leaf",
+      "plan_revision_store_amplification": "lifecycle history only; no plan §12 amplification ceilings on apply",
+      "semantic_key_dedupe_in_store": "absent"
+    },
+    "after": {
+      "plan_doctor": "PlanDoctor@1 diagnoses every required defect and emits proposal-only repairs",
+      "plan_revision_store_amplification": "fail-closed successor/revision/task/subgoal/key/retry/provider/token/frequency/no-progress bounds",
+      "semantic_key_dedupe_in_store": "exact and cosmetic semantic keys refused; started history retained",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "worker_completion_sufficient": false,
+    "task_status_sufficient": false,
+    "requires_declared_outputs": true,
+    "requires_current_validation": true,
+    "requires_merge_and_canonical_refresh_on_mutation": true,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only",
+    "producer_disposition": "implementation_complete_pending_supervisor_acceptance"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-081",
+  "result_identity": "urn:lgswf:receipt:LGSWF-081@plan-doctor-v1"
+}

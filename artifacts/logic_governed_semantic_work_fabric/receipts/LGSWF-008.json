@@ -1,0 +1,177 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-008",
+  "title": "Reconcile missing accelerator semantic-state surfaces and predecessor launch defects",
+  "track": "lgswf-g100-runtime-bootstrap",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-008",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G100",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-005"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-008",
+  "observed_at": "2026-08-16T20:30:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_datasets at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/semantic-scan-bootstrap-failures.json",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+    "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/incidents/bootstrap-launch-r0-provider-contract.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/incidents/bootstrap-launch-r1-module-path.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-005.json"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+    "external/ipfs_accelerate/test/agent_supervisor/test_lgswf_bootstrap_runtime.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-008.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+    "external/ipfs_accelerate/test/agent_supervisor/test_lgswf_bootstrap_runtime.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-008.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+    "external/ipfs_accelerate/test/agent_supervisor/test_lgswf_bootstrap_runtime.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-008.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py": true,
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py": true,
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/test_lgswf_bootstrap_runtime.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-008.json": true
+  },
+  "objective_summary": "Dispositioned all 1,245 intervening accelerator commits as candidate evidence only; bound the checked sibling external/ipfs_datasets checkout through datasets_semantic_authority; replaced ambient PYTHONPATH bootstrap with a frozen configured-board source resolver; and repaired the three preserved PCCE r5 failure modes (empty-context, contradictory-review-schema, task-CID-alias) as fail-closed daemon/integration guards without advancing canonical semantic authority or reusing historical claims/leases/fences.",
+  "findings_digest": {
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "checked_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "canonical_semantic_state_root": null,
+    "intervening_commit_count": 1245,
+    "intervening_range": "ea11293bb996f052d620eae989f5377a956764b1..485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+    "intervening_commit_list_sha256": "363105f61ca05cea44bdb1bcf0829ab88bdbd626ca486390acc0ba25b5b7dd62",
+    "intervening_name_status_sha256": "7cd8665ebf0a06a0d9eef7f6452fdd754774c16425f716696378f4f30a6f4d2c",
+    "later_code_is_current_authority": false,
+    "later_semantic_state_package_policy": "candidate_evidence_only_do_not_scaffold",
+    "selective_port_policy": "port only reviewed compatible reference contracts via admitted tasks; reject wholesale copy of intervening trees",
+    "sibling_datasets_bound": true,
+    "sibling_datasets_path": "external/ipfs_datasets",
+    "nested_datasets_pin_authority": false,
+    "nested_datasets_pin_candidate": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+    "source_resolver": {
+      "surface": "configured_board_scheduler.source_resolver",
+      "pythonpath_roots": [
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets"
+      ],
+      "repairs": [
+        "bootstrap-launch-r1-module-path"
+      ],
+      "provider_environment_unchanged": true,
+      "applied_at": "process_start_after_provider_env_merge"
+    },
+    "provider_route_repair": {
+      "incident": "bootstrap-launch-r0-provider-contract",
+      "required_route": "grok_cli/grok-4.5 -> codex/gpt-5.6-terra medium primary_quota_exhausted",
+      "historical_rewrite_allowed": false
+    },
+    "pcce_r5_incident_digest": "sha256:28aedd7072735fd539ed4dc4ad9387242a02b0372626a42f36a695c2ce9e9b61",
+    "pcce_failure_modes_repaired": [
+      "empty-context",
+      "contradictory-review-schema",
+      "task-CID-alias"
+    ],
+    "pcce_historical_reuse_allowed": false,
+    "this_module_is_semantic_truth_authority": false,
+    "canonical_semantic_authority": "ipfs_datasets_py",
+    "product_gate": "bounded bootstrap runtime repair only; continuous multi-supervisor fabric remains gated on LGSWF-009 verified roots"
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "DatasetsSemanticAuthorityBinding@1",
+    "ProductionContextSlice@1"
+  ],
+  "symbols_changed": [
+    "bind_datasets_semantic_authority",
+    "configured_board_pythonpath",
+    "resolve_sibling_datasets_root",
+    "resolve_accelerator_source_root",
+    "assert_nonempty_source_context",
+    "assert_review_schema_consistent",
+    "assert_task_cid_binding",
+    "intervening_accelerator_disposition",
+    "configured_board_launch_plan",
+    "preflight_configured_board",
+    "ImplementationDaemon._with_worktree_validation_pythonpath",
+    "ImplementationDaemon._enforce_pcce_bootstrap_guards",
+    "ImplementationDaemon._build_implementation_prompt"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/test_lgswf_bootstrap_runtime.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "bootstrap runtime tests cover sibling datasets binding, intervening-commit disposition, source-resolver PYTHONPATH, validation PYTHONPATH binding, and the three PCCE fail-closed guards; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "runtime bootstrap under raw-source-required bindings; no datasets-selected formal proof obligations apply while canonical semantic-state root is unavailable",
+    "limitations": [
+      "canonical semantic-state root unavailable",
+      "formal proof against symbol/capsule graphs cannot be current without LGSWF-009 roots",
+      "model-claimed proof is non-authoritative",
+      "intervening accelerator commits remain candidate evidence only"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "bootstrap_raw_source_runtime_repair",
+    "provisional_root": null,
+    "canonical_refresh_required": true,
+    "reason": "task mutates accelerator operational integration/runtime/daemon surfaces and receipt artifact; provisional semantic refresh is required after merge admission; canonical root remains gated on LGSWF-009"
+  },
+  "merge": {
+    "mutation_class": "owned_source_and_artifact_paths",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "completion_authoritative": false,
+  "result_identity": "pending:content-addressed-result:LGSWF-008",
+  "limitations": [
+    "Does not scaffold agent_supervisor/semantic_state as current authority",
+    "Does not admit intervening 485edc08/PCCE trees as checked operational authority",
+    "Does not publish canonical datasets semantic roots (LGSWF-009)",
+    "PCCE historical claims/leases/fences/worktrees remain non-reusable",
+    "production_provider_cli / legacy_landed_provider_cli remain outside this task write scope; fail-closed guards live on the admitted integration and daemon surfaces"
+  ]
+}

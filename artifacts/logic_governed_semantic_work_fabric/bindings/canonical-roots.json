@@ -1,0 +1,170 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.canonical-roots@1",
+  "task_id": "LGSWF-009",
+  "title": "Canonical semantic roots for accepted trees under datasets authority",
+  "observed_at": "2026-08-16T22:00:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-009",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "prior_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-006",
+    "LGSWF-007",
+    "LGSWF-008"
+  ],
+  "authority": {
+    "semantic_truth_owner": "ipfs_datasets_py",
+    "operational_coordination_owner": "ipfs_accelerate_py",
+    "datasets_authority_inventory": "artifacts/logic_governed_semantic_work_fabric/inventory/datasets-authority.json",
+    "authority_map": "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+    "interface_freeze": "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+    "package_direction": "datasets owns semantic index/state/capsules/contracts/proof obligations; accelerator references by type only",
+    "fail_closed_if_unverified": true
+  },
+  "accepted_trees": {
+    "datasets": {
+      "repository": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "authority_class": "checked implementation authority",
+      "repository_id": "repository:ipfs_datasets_py@ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    },
+    "accelerator": {
+      "repository": "ipfs_accelerate_py",
+      "path": "external/ipfs_accelerate",
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "authority_class": "checked implementation authority",
+      "repository_id": "repository:ipfs_accelerate_py@ea11293bb996f052d620eae989f5377a956764b1"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "rescan": {
+    "method": "datasets_authority_bounded_rescan",
+    "api": [
+      "ipfs_datasets_py.logic.software_contracts.semantic_index.scan_repository_bounded",
+      "ipfs_datasets_py.logic.software_contracts.semantic_state.build_semantic_state",
+      "ipfs_datasets_py.logic.software_contracts.semantic_state.verify_semantic_state_bundle"
+    ],
+    "exclusions": [
+      "docs",
+      "benchmarks",
+      "artifacts",
+      "htmlcov",
+      "coverage",
+      ".git",
+      "node_modules",
+      "frontend",
+      "static",
+      "data",
+      "datasets",
+      "examples",
+      "notebooks",
+      "scripts"
+    ],
+    "bootstrap_repairs_required": [
+      "LGSWF-006 empty-namespace and duplicate named-argument repairs",
+      "LGSWF-006 BoundedSemanticScanLimit BaseException bounds",
+      "LGSWF-007 datasets-owned counterexample identity and leaf ports",
+      "LGSWF-008 sibling datasets binding and source resolver"
+    ],
+    "fail_closed_policy": "if either accepted tree cannot produce a completed repository state and verified SemanticStateRoot, roots remain non-authoritative and epic-a must not admit continuous mutation"
+  },
+  "roots": {
+    "datasets": {
+      "repository_id": "repository:ipfs_datasets_py@ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "git_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "git_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "namespace": "lgswf-ipfs-datasets-py-v1",
+      "repository_state_cid": "urn:lgswf:repository-state:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "semantic_state_schema": "ipfs-datasets.software-contracts.semantic-state@1",
+      "semantic_state_root_schema": "ipfs-datasets.software-contracts.semantic-state-root@1",
+      "capsule_schema": "ipfs-datasets.software-contracts.semantic-capsule@1",
+      "merkle_compiler_version": "1",
+      "capsule_compiler_version": "1",
+      "symbol_fact_index_cid": "urn:lgswf:symbol-fact-index:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "artifact_fact_index_cid": "urn:lgswf:artifact-fact-index:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "semantic_link_index_cid": "urn:lgswf:semantic-link-index:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "symbol_node_index_cid": "urn:lgswf:symbol-node-index:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "capsule_index_cid": "urn:lgswf:capsule-index:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "environment_binding_set_cid": "urn:lgswf:environment-binding-set:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "analysis_limitation_index_cid": "urn:lgswf:analysis-limitation-index:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "authority_surfaces_present": [
+        "semantic_index",
+        "semantic_state",
+        "capsules",
+        "freshness",
+        "bindings",
+        "contracts",
+        "invalidation",
+        "proof_selection",
+        "verification",
+        "verification_api",
+        "governor",
+        "formalization",
+        "backends",
+        "families"
+      ],
+      "authority_surfaces_absent": [
+        "adversarial_assurance",
+        "incremental_sealing",
+        "ProofRepository@1",
+        "logic_platform_canonicalization"
+      ],
+      "verified": true,
+      "verification_basis": [
+        "accepted tree identity matches checked datasets authority ac82107e/2b3d892d",
+        "datasets-authority inventory confirms present semantic surfaces at checked head",
+        "LGSWF-006 repaired empty-namespace and duplicate named-argument scan aborts",
+        "LGSWF-007 restored datasets-owned semantic identity leaf contracts",
+        "canonical SemanticStateRoot@1 field ownership frozen by authority-map@1",
+        "absent requested surfaces recorded without invention"
+      ]
+    },
+    "accelerator": {
+      "repository_id": "repository:ipfs_accelerate_py@ea11293bb996f052d620eae989f5377a956764b1",
+      "git_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "git_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "namespace": "lgswf-ipfs-accelerate-py-v1",
+      "repository_state_cid": "urn:lgswf:repository-state:accelerator@ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:accelerator@ea6869d70e25c7bc8b80e6458c1a46b8c03f945f:reference-only",
+      "role": "operational_coordination_reference_root",
+      "semantic_truth_authority": false,
+      "datasets_reference_mode": "reference_cid_and_typed_fields_only",
+      "verified": true,
+      "verification_basis": [
+        "accepted tree identity matches checked accelerator authority ea11293b/ea6869d7",
+        "LGSWF-008 bound sibling datasets checkout and frozen source resolver",
+        "intervening accelerator commits remain candidate evidence only",
+        "no accelerator semantic_state package admitted as second truth authority"
+      ]
+    }
+  },
+  "composite_canonical_root": {
+    "root_cid": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "datasets_semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "accelerator_repository_state_cid": "urn:lgswf:repository-state:accelerator@ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "authority_map_identity": "urn:lgswf:contract:authority-map@1:LGSWF-005@checked-ea11293b-ac82107e",
+    "interface_freeze_identity": "urn:lgswf:contract:interface-freeze@1:LGSWF-005@checked-ea11293b-ac82107e",
+    "verified": true
+  },
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic A gate materializes roots and plan bindings; no datasets formal proof obligations are selected beyond the verified empty selection at accepted trees",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "roots_verified": true,
+  "fail_closed": false,
+  "result_identity": "urn:lgswf:bindings:canonical-roots:LGSWF-009@r1"
+}

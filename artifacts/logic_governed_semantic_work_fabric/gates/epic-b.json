@@ -1,0 +1,292 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G200",
+  "epic_label": "B — operational world-state overlay",
+  "gate_task_id": "LGSWF-014",
+  "observed_at": "2026-08-17T12:00:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g200/lgswf-014",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-014",
+    "requires": [
+      "SupervisorWorldSnapshot@1 reference-only contracts with closed component and freshness sets",
+      "fail-closed WorldSnapshotBuilder@1 assembly from independent authority observations",
+      "mutation-free SupervisorWorldView query projection over content-addressed snapshots",
+      "canonical serialization and identity verification for snapshot material",
+      "scheduling agreement on repository, tree, plan revision, task population, semantic-state root, and active policies"
+    ],
+    "prior_status": "Epic A open for dependency-ready work; Epic B unblocks semantic bindings"
+  },
+  "predicates": {
+    "world_snapshot_contracts_defined": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json"
+      ],
+      "task": "LGSWF-010",
+      "interface": "SupervisorWorldSnapshot@1",
+      "contract_version": 1,
+      "reference_only": true,
+      "does_not_reinterpret_authorities": true
+    },
+    "canonical_serialization_verified": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py"
+      ],
+      "mechanisms": [
+        "canonical_json_bytes with sorted keys, ensure_ascii, compact separators",
+        "content_digest as sha256 over canonical identity material",
+        "snapshot_cid computed from schema/contract_version/components only",
+        "claimed snapshot_cid mismatch fails closed",
+        "floats rejected from content-addressed material"
+      ],
+      "deterministic": true,
+      "task": "LGSWF-010"
+    },
+    "component_freshness_matrices_closed": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py"
+      ],
+      "component_states": [
+        "current",
+        "stale",
+        "unavailable",
+        "inconsistent",
+        "quarantined"
+      ],
+      "classification_priority": [
+        "unavailable",
+        "quarantined",
+        "inconsistent",
+        "stale",
+        "current"
+      ],
+      "required_component_kinds": [
+        "repository",
+        "repository_tree",
+        "datasets_repository_state",
+        "semantic_state_root",
+        "plan_root",
+        "plan_revision",
+        "objective_graph",
+        "goal_population",
+        "subgoal_population",
+        "task_population",
+        "claims",
+        "resources",
+        "capabilities",
+        "merge_queue",
+        "completion_evidence",
+        "unresolved_gaps",
+        "active_policies",
+        "event_cursor",
+        "coordination_epoch",
+        "fencing_epoch"
+      ],
+      "optional_component_kinds": [
+        "symbol_root",
+        "capsule_root",
+        "environment_root",
+        "contract_root",
+        "proof_root"
+      ],
+      "scheduling_agreement_kinds": [
+        "repository",
+        "repository_tree",
+        "plan_revision",
+        "task_population",
+        "semantic_state_root",
+        "active_policies"
+      ],
+      "task": "LGSWF-011"
+    },
+    "fail_closed_consistency_verified": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+      ],
+      "failures_observed": [
+        "missing required component",
+        "duplicate component kind",
+        "unknown component kind",
+        "claimed identity mismatch",
+        "unknown observation fields",
+        "kind/key mismatch",
+        "stale scheduling component",
+        "unavailable semantic-state root",
+        "inconsistent task population",
+        "prohibited payload keys",
+        "armored credential material",
+        "mutable local paths",
+        "float values"
+      ],
+      "scheduling_agreement_requires_all_current": true,
+      "task": "LGSWF-011"
+    },
+    "authority_isolation_verified": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+      ],
+      "authority_reference_fields": [
+        "schema",
+        "kind",
+        "identity",
+        "state",
+        "authority",
+        "evidence"
+      ],
+      "prohibited_embeddings": [
+        "raw source",
+        "prompts",
+        "credentials",
+        "model replies",
+        "mutable local paths",
+        "provider payloads"
+      ],
+      "observations_name_identities_only": true,
+      "does_not_reinterpret_authorities": true,
+      "closed_field_sets": true,
+      "task": "LGSWF-010"
+    },
+    "read_only_world_view_verified": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+      ],
+      "interface": "SupervisorWorldView",
+      "has_mutation_port": false,
+      "catalogs_frozen": true,
+      "mutation_methods_rejected": true,
+      "world_view_queries": [
+        "goals",
+        "subgoals",
+        "tasks",
+        "bindings",
+        "ready_tasks",
+        "blocking_dependencies",
+        "conflicts",
+        "resources",
+        "claims",
+        "completion_evidence",
+        "refill_eligibility"
+      ],
+      "task": "LGSWF-011"
+    },
+    "fail_closed_snapshots_assembled": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+      ],
+      "builder_entry": "build_world_snapshot",
+      "builder_interface": "WorldSnapshotBuilder@1",
+      "task": "LGSWF-011"
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-010",
+        "LGSWF-011"
+      ],
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_a_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+      "epic_a_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-009"
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "SupervisorWorldSnapshot@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/supervisor-world-snapshot@1",
+      "owner": "ipfs_accelerate_py"
+    },
+    "WorldSnapshotBuilder@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/world-snapshot-builder@1",
+      "owner": "ipfs_accelerate_py"
+    },
+    "SupervisorWorldView": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/supervisor-world-view@1",
+      "owner": "ipfs_accelerate_py",
+      "mutation_port": false
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-020"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Semantic goal and task bindings (Epic C) may schedule after LGSWF-014; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "optional symbol/capsule/environment/contract/proof roots are admitted only when observed; absence is not invented completeness",
+    "world overlay references authorities by identity and freshness only; datasets remains semantic truth owner",
+    "worker completion or task status alone is never authoritative completion"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic B gate records verified empty formal proof selection at accepted trees; contract and hermetic tests are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-b.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-b.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-b@lgswf-014-pass"
+}

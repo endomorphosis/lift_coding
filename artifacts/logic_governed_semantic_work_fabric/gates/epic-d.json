@@ -1,0 +1,384 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G400",
+  "epic_label": "D — composite work and conflict graphs",
+  "gate_task_id": "LGSWF-034",
+  "observed_at": "2026-08-17T23:45:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g400/lgswf-034",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-034",
+    "requires": [
+      "SemanticWorkGraph@1 composite composition retaining all required edge families without authority collapse",
+      "each edge carries source/target, kind, typed semantic or operational authority, evidence lineage, fixed-point certainty/confidence in millionths, source semantic root, source plan revision, and invalidation conditions",
+      "dependency readiness edges remain separate from conflict concurrency edges",
+      "exact symbol/interface/schema/effect scope preference for concurrent writers; file then repository fallback; opaque analysis fails closed",
+      "disjoint exact-scope writers on a shared file may run concurrently; shared reads remain concurrent when write/effect scopes do not collide",
+      "hidden same-symbol, interface, schema, and effect conflicts serialize even when file paths differ",
+      "durable integer/fixed-point scheduling metrics with binary floats excluded from content-addressed identities",
+      "deterministic content-addressed graph and analysis identities"
+    ],
+    "prior_status": "Epic C open for dependency-ready work; Epic D unblocks deterministic parallel frontier selection"
+  },
+  "predicates": {
+    "required_edge_families_composable": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json"
+      ],
+      "task": "LGSWF-030",
+      "interface": "SemanticWorkGraph@1",
+      "contract_version": 1,
+      "required_edge_families": [
+        "goal",
+        "plan",
+        "semantic",
+        "code",
+        "data",
+        "interface",
+        "schema",
+        "contract",
+        "proof",
+        "validation",
+        "policy",
+        "merge",
+        "lifecycle",
+        "scope",
+        "invalidation",
+        "conflict",
+        "supersession",
+        "generation",
+        "block",
+        "unlock"
+      ],
+      "scope_edge_kinds": [
+        "scope_read",
+        "scope_write",
+        "scope_effect"
+      ],
+      "authorities_not_collapsed": true,
+      "hermetic_proofs": [
+        "test_interface_name_and_required_families",
+        "test_compose_complete_family_graph_retains_all_authorities",
+        "test_require_all_families_rejects_incomplete_composition",
+        "test_collapsing_kind_family_claim_is_rejected"
+      ]
+    },
+    "evidence_lineage_and_edge_fields": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json"
+      ],
+      "task": "LGSWF-030",
+      "required_edge_fields": [
+        "source",
+        "target",
+        "kind",
+        "family",
+        "authority",
+        "authority_class",
+        "evidence",
+        "certainty_millionths",
+        "confidence_millionths",
+        "source_semantic_root",
+        "source_plan_revision",
+        "invalidation",
+        "trust"
+      ],
+      "authority_classes": [
+        "semantic",
+        "operational"
+      ],
+      "fixed_point_certainty_scale": 1000000,
+      "foreign_roots_and_revisions_fail_closed": true,
+      "missing_evidence_fails_closed": true,
+      "hermetic_proofs": [
+        "test_each_edge_carries_typed_authority_evidence_roots_certainty_invalidation",
+        "test_foreign_semantic_root_fails_closed",
+        "test_foreign_plan_revision_fails_closed",
+        "test_missing_evidence_fails_closed",
+        "test_foreign_authority_is_rejected"
+      ]
+    },
+    "dependency_and_conflict_separate": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "tasks": [
+        "LGSWF-030",
+        "LGSWF-031"
+      ],
+      "dependency_answers": "when a task is ready",
+      "conflict_answers": "which ready tasks may run together",
+      "dependency_edges_never_rewritten_as_conflict": true,
+      "conflict_edges_never_rewritten_as_dependency": true,
+      "hermetic_proofs": [
+        "test_dependency_and_conflict_remain_separate_edges",
+        "test_dependency_edges_are_separate_from_conflict_edges",
+        "test_materialize_attaches_dependency_edges_and_metrics"
+      ]
+    },
+    "conservative_unknown_handling": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "tasks": [
+        "LGSWF-030",
+        "LGSWF-031"
+      ],
+      "opaque_fallback_order": [
+        "symbol",
+        "file",
+        "repository"
+      ],
+      "scope_preference_order": [
+        "symbol",
+        "interface",
+        "schema",
+        "effect",
+        "file",
+        "repository",
+        "opaque"
+      ],
+      "opaque_fails_closed": true,
+      "unknown_node_endpoints_fail_closed": true,
+      "unknown_dependency_targets_do_not_invent_edges": true,
+      "forged_identities_fail_closed": true,
+      "work_trust_unknown_not_accepted": true,
+      "hermetic_proofs": [
+        "test_opaque_falls_back_to_repository_serialization",
+        "test_file_fallback_when_exact_scopes_missing_on_one_side",
+        "test_unknown_node_endpoint_fails_closed",
+        "test_extract_dependency_edges_ignores_unknown_targets",
+        "test_forged_graph_identity_fails_closed",
+        "test_forged_authoritative_claim_fails_closed"
+      ]
+    },
+    "disjoint_reader_writer_cases": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "task": "LGSWF-031",
+      "shared_reads_may_run_concurrently": true,
+      "disjoint_exact_scope_writers_on_same_file_may_run_concurrently": true,
+      "exact_scope_levels": [
+        "symbol",
+        "interface",
+        "schema",
+        "effect"
+      ],
+      "file_serialization_when_exact_scope_missing": true,
+      "repository_serialization_when_opaque": true,
+      "hermetic_proofs": [
+        "test_prefer_exact_symbol_scope_allows_disjoint_writers_on_same_file",
+        "test_file_fallback_when_exact_scopes_missing_on_one_side",
+        "test_opaque_falls_back_to_repository_serialization"
+      ]
+    },
+    "hidden_semantic_conflicts": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "task": "LGSWF-031",
+      "note": "Same-symbol, interface, schema, and effect conflicts serialize even when writers occupy different files, exposing hidden semantic collisions that path-only analysis would miss",
+      "conflict_classes_detected_across_files": [
+        "symbol",
+        "interface",
+        "schema",
+        "effect"
+      ],
+      "path_difference_does_not_hide_exact_scope_collision": true,
+      "hermetic_proofs": [
+        "test_same_symbol_and_interface_and_schema_and_effect_conflict",
+        "test_dependency_edges_are_separate_from_conflict_edges"
+      ]
+    },
+    "deterministic_identities": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "tasks": [
+        "LGSWF-030",
+        "LGSWF-031"
+      ],
+      "mechanisms": [
+        "canonical JSON with sorted keys, ensure_ascii, compact separators",
+        "sha256 content digests over float-free identity material",
+        "claimed graph or analysis identity mismatch fails closed",
+        "stable task identity is the final scheduling tie-break surface"
+      ],
+      "deterministic": true,
+      "hermetic_proofs": [
+        "test_graph_is_deterministic_and_content_addressed",
+        "test_content_digest_stable",
+        "test_analysis_identity_is_deterministic_and_float_free",
+        "test_project_task_conflict_graph_round_trip"
+      ]
+    },
+    "no_binary_floats_in_content_addressed_material": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "tasks": [
+        "LGSWF-030",
+        "LGSWF-031"
+      ],
+      "certainty_scale": 1000000,
+      "metric_scale": 1000000,
+      "durable_integer_metrics": [
+        "topological_depth",
+        "critical_path_length",
+        "unlock_count",
+        "blocking_goals",
+        "estimated_cost",
+        "uncertainty_millionths",
+        "merge_risk_millionths",
+        "resource_bottleneck",
+        "cache_locality_millionths"
+      ],
+      "weight_fields_use_millionths": true,
+      "floats_rejected_from_identity": true,
+      "hermetic_proofs": [
+        "test_floats_are_rejected",
+        "test_analysis_identity_is_deterministic_and_float_free",
+        "test_durable_integer_scheduling_metrics",
+        "test_scheduling_metrics_identity_is_integer_only"
+      ]
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-030",
+        "LGSWF-031"
+      ],
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_c_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-c.json",
+      "epic_c_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-024"
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "SemanticWorkGraph@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/semantic-work-graph@1",
+      "owner": "ipfs_accelerate_py",
+      "authorities_not_collapsed": true
+    },
+    "SemanticConflictAnalysis@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/semantic-conflict-analysis@1",
+      "owner": "ipfs_accelerate_py",
+      "dependency_and_conflict_separate": true
+    },
+    "TaskConflictGraph": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/task-conflict-graph",
+      "owner": "ipfs_accelerate_py",
+      "role": "dedicated conflict concurrency graph with dependency readiness projection and integer scheduling metrics"
+    },
+    "TaskSchedulingMetrics": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/task-scheduling-metrics@1",
+      "owner": "ipfs_accelerate_py",
+      "metric_scale": 1000000
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-040"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Deterministic parallel frontier selection (Epic E) may schedule after LGSWF-034; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "formal datasets proof selection remains verified empty; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "legacy float surface-weight fields may remain on planner-compatibility projections; content-addressed identity material and durable metrics remain integer/fixed-point only",
+    "frontier selection, resource admission, and multi-supervisor coordination remain outside Epic D and must not be asserted complete here",
+    "worker completion or task status alone is never authoritative completion"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic D gate records verified empty formal proof selection at accepted trees; contract and hermetic tests plus current producing-task receipts are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-d@lgswf-034-pass"
+}

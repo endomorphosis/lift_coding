@@ -1,0 +1,274 @@
+{
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "task_id": "PCCE-000",
+  "objective_id": "PCCE-G000",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "status": "blocked_external_prerequisite",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r4",
+  "control_base": "5f962ac16768b16febbfc434c1fcd44c6c5bc8f9",
+  "supersedes": {
+    "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r3",
+    "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+    "content_id": "sha256:7a08c3f3cc34b405daa66220558d1ddc662ec80435b132610a2f4e1aa047ff49",
+    "byte_sha256": "sha256:f674da5a09d34e0592c21fd32dbb3886cc298d7b0edb4947ea152674c95a6685",
+    "git_blob": "d788c2e1362152b9894556ebb709ad0f071e08fa",
+    "rewrite_allowed": false,
+    "incident_id": "urn:pcce:control-incident:scheduler-r3-provider-route",
+    "incident_path": "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json",
+    "incident_content_id": "sha256:6f06d9dd6cffe17484028f468618eb9000edd6de34adc550285a0bb603b52702",
+    "incident_file_sha256": "sha256:50b92024287422ca8b45eb4514aed11adb6508e874f790b405d16d8ec73fb09d",
+    "incident_git_blob": "e6d68b42c4a55b4f5dc238b66f22dbfc6396f3c4",
+    "incident_commit": "5f962ac16768b16febbfc434c1fcd44c6c5bc8f9",
+    "incident_rewrite_allowed": false
+  },
+  "evidence": {
+    "objective_sha256": "sha256:bdd0b3e16ced4a1b54f991c8d983259a92bb892c67f21a19e8ccf46841086a3d",
+    "todo_sha256": "sha256:c180f2d3b960068ffe10522eea86afe5614c95ee8a8ef3de5c1c15a8b70d6445",
+    "plan_sha256": "sha256:b07d1cb2b5fd4fb1861f3f942eaa0254d355a178667c1cc1301ecfa7e30f2b40",
+    "config_sha256": "sha256:bdd32d6e8849fa3463d256eb336bc62c6988a04cab6b8d6ba88fe4f69a0e14a9",
+    "validator_sha256": "sha256:aa888f9e797b56fe10a463b9ade57830cb959b7d1c860a6add091f39afb29da7",
+    "profile_g_bootstrap_sha256": "sha256:37ae92791a4a2705bf97c83cbdeb383b1dec97e8604daf4f138bbde9692f37f5",
+    "board_projection_id": "sha256:de86c2601e0476c414071657c398040e6e80dae5472d4a49d77d9c6127c5eae0",
+    "dependency_graph_id": "sha256:a0392227161f03caf6af1c0531790119f55cdb98a7a93850210f448703c243ea",
+    "bundle_index_id": "sha256:ad152f189b68639a284785c0ca062c61bd403f5be0d767bed261788ae8e4db13",
+    "repository_gitlinks": {
+      "accelerate": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "mcp_plus_plus": "6965f89f066769f3b3ac7b5f753b1a0044562570"
+    },
+    "protected_paths": [
+      "artifacts/proof_carrying_context_engine/control/bundle_index.json",
+      "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+      "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json",
+      "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
+      "artifacts/proof_carrying_context_engine/control/task_board.json",
+      "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+      "config/proof_carrying_context_engine_v0_1_supervisor.json",
+      "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md",
+      "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
+      "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "scripts/validate_proof_carrying_context_engine_board.py"
+    ],
+    "task_ids": [
+      "PCCE-000",
+      "PCCE-001",
+      "PCCE-002",
+      "PCCE-003",
+      "PCCE-004",
+      "PCCE-005",
+      "PCCE-006",
+      "PCCE-007",
+      "PCCE-008",
+      "PCCE-009",
+      "PCCE-010",
+      "PCCE-011",
+      "PCCE-012",
+      "PCCE-013",
+      "PCCE-014",
+      "PCCE-015",
+      "PCCE-016",
+      "PCCE-017",
+      "PCCE-018",
+      "PCCE-019",
+      "PCCE-020",
+      "PCCE-021",
+      "PCCE-022",
+      "PCCE-023",
+      "PCCE-024",
+      "PCCE-025",
+      "PCCE-030",
+      "PCCE-031",
+      "PCCE-032",
+      "PCCE-033",
+      "PCCE-034",
+      "PCCE-035",
+      "PCCE-040",
+      "PCCE-041",
+      "PCCE-042",
+      "PCCE-043",
+      "PCCE-044",
+      "PCCE-045",
+      "PCCE-050",
+      "PCCE-051",
+      "PCCE-052",
+      "PCCE-053",
+      "PCCE-054",
+      "PCCE-055",
+      "PCCE-056",
+      "PCCE-057",
+      "PCCE-060",
+      "PCCE-061",
+      "PCCE-062",
+      "PCCE-063",
+      "PCCE-064",
+      "PCCE-065",
+      "PCCE-066",
+      "PCCE-067",
+      "PCCE-068",
+      "PCCE-070",
+      "PCCE-071",
+      "PCCE-072",
+      "PCCE-073",
+      "PCCE-074",
+      "PCCE-075",
+      "PCCE-076",
+      "PCCE-079",
+      "PCCE-080",
+      "PCCE-081",
+      "PCCE-082",
+      "PCCE-083"
+    ],
+    "provider_route_repair": {
+      "base_commit": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+      "base_tree": "a16781386689845c1162c85c0f5c899a673d48e6",
+      "rejected_candidate": {
+        "commit": "b0c85d48f0a1a3337a5aea2d2698e4c9e28fadf0",
+        "tree": "490d17028d011b5cc966af8b3762df303f3abfb1",
+        "purpose": "defer nested Grok quota failures",
+        "disposition": "no_go_cross_format_envelopes_wrongly_accepted",
+        "accepted_as_final": false
+      },
+      "commits": [
+        {
+          "commit": "b0c85d48f0a1a3337a5aea2d2698e4c9e28fadf0",
+          "tree": "490d17028d011b5cc966af8b3762df303f3abfb1",
+          "purpose": "defer nested Grok quota failures"
+        },
+        {
+          "commit": "0837254e910221c17b3c8ac8a2a233658de976f1",
+          "tree": "6eaf101d471ea2ad1b0c948d2e648ea925b444fe",
+          "purpose": "bind Grok quota envelopes to their declared format"
+        }
+      ],
+      "final_commit": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "final_tree": "6eaf101d471ea2ad1b0c948d2e648ea925b444fe",
+      "changed_files": [
+        {
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/legacy_landed_provider_cli.py",
+          "sha256": "sha256:1eddea0eab9b176eedbf9e76e949b5c9677c9feb0da8bd3963577d64b71ad4e9",
+          "git_blob": "0de3b9957277c5fc7476e9f7a68e3b034d280bd3"
+        },
+        {
+          "path": "test/api/test_agent_supervisor_legacy_landed_review.py",
+          "sha256": "sha256:dfae9673cbfa053a6dcbef151a636cb2ed344809a85e21c015c7697107324d5a",
+          "git_blob": "ad04485d8f86662cffbc9a24637dcdf543d2e13c"
+        },
+        {
+          "path": "test/api/test_agent_supervisor_native_grok_quota_signal.py",
+          "sha256": "sha256:8f7274dde092bb59585ea80e32be0f4ea225652b45497b18bab33513626e372a",
+          "git_blob": "7823c6e13f0316643031ff956ea37447a0a12f75"
+        },
+        {
+          "path": "test/api/test_agent_supervisor_production_provider_cli.py",
+          "sha256": "sha256:7650a91d64a9fbab6636c6a5376e15b6eb5d99520c2cd9c1a0f030226d282d7f",
+          "git_blob": "b8e1e297ffc7724afc96bc0996ca9bd1421d617c"
+        },
+        {
+          "path": "test/api/test_agent_supervisor_production_provider_security_regressions.py",
+          "sha256": "sha256:b366754da4177e0b3ddb8ee48a1b4051aaa4cfea8d7bfe25861553115079d12e",
+          "git_blob": "af0653482be7800953c67c2acd6858af02e6ea8a"
+        }
+      ],
+      "implementation_gates": {
+        "disposition": "passed",
+        "passed": 149,
+        "failed": 0,
+        "scope": "quota classification, production provider CLI/security, and legacy landed review",
+        "git_diff_check": "passed"
+      },
+      "independent_review": {
+        "disposition": "final_pass_with_baseline_identical_exception",
+        "changed_file_tests": {
+          "passed": 98,
+          "failed": 0
+        },
+        "broader_tests": {
+          "passed": 59,
+          "failed": 1
+        },
+        "sole_broader_failure": {
+          "candidate_regression": false,
+          "reproduced_at_exact_base_commit": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+          "result": "identical"
+        },
+        "custom_negative_matrix": "passed",
+        "authority_invariants": "passed",
+        "candidate_regressions": 0
+      },
+      "qualification_boundary": "provider quota-envelope parsing repair only; does not establish live Grok account capacity or authorize an r4 launch"
+    },
+    "frozen_history": {
+      "r2_receipt_byte_sha256": "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+      "r2_incident_file_sha256": "sha256:98c5c8c3b1f038962a55698524f10feee0fd29568e36b52c09ca020cc77dd141",
+      "r3_receipt_byte_sha256": "sha256:f674da5a09d34e0592c21fd32dbb3886cc298d7b0edb4947ea152674c95a6685",
+      "r3_incident_file_sha256": "sha256:50b92024287422ca8b45eb4514aed11adb6508e874f790b405d16d8ec73fb09d"
+    }
+  },
+  "parser_report": {
+    "task_count": 67,
+    "goal_count": 9,
+    "unique_task_ids": true,
+    "acyclic": true,
+    "unique_terminal_task_id": "PCCE-083",
+    "initial_ready_task_ids": [
+      "PCCE-001",
+      "PCCE-002",
+      "PCCE-003",
+      "PCCE-004"
+    ]
+  },
+  "restart_policy": {
+    "generation": "r4",
+    "scheduler_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r4",
+    "worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r4",
+    "log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r4",
+    "fresh_claims_leases_fences_and_receipts": true,
+    "resume_scheduler_r2": false,
+    "resume_scheduler_r3": false,
+    "reuse_scheduler_r2_state": false,
+    "reuse_scheduler_r3_state": false,
+    "reuse_scheduler_r2_claims_leases_fences_or_receipts": false,
+    "reuse_scheduler_r3_claims_leases_fences_or_receipts": false,
+    "preserve_scheduler_r2_forensics_read_only": true,
+    "preserve_scheduler_r3_forensics_read_only": true
+  },
+  "external_launch_gate": {
+    "id": "fresh_exact_grok_account_capacity_gate",
+    "required": true,
+    "status": "blocked_external_prerequisite",
+    "evidence_source": "fresh exact-argv live Grok structured probe",
+    "last_observed_provider_result": "http_402_balance_exhausted",
+    "capacity_semantics": "operator-admission-budget-not-provider-reported-quota",
+    "capacity_snapshot_satisfies_gate": false,
+    "external_launch_receipt_created": false,
+    "external_launch_receipt_creation_permitted": false,
+    "live_launch_permitted": false,
+    "product_task_completion_authority": false,
+    "on_pass_must_bind": [
+      "final_control_commit",
+      "final_control_tree",
+      "recursive_repository_gitlinks",
+      "nested_repository_heads",
+      "clean_worktree_evidence",
+      "active_r4_receipt_content_id",
+      "board_projection_id",
+      "dependency_graph_id",
+      "bundle_index_id",
+      "provider_policy",
+      "fresh_exact_grok_account_capacity_evidence",
+      "scheduler_r4_paths"
+    ]
+  },
+  "control_decision": {
+    "control_revision_commit_authorized": true,
+    "accelerator_candidate_audit": "final_pass",
+    "live_launch_authorized": false,
+    "launch_blocker": "fresh_exact_grok_account_capacity_gate",
+    "qualification": "control_revision_only"
+  },
+  "content_id": "sha256:f5fd281c7df68630ca36542c83e57d5c20c9eac428a3fc12f82414b9bc8c62ac"
+}

@@ -1,0 +1,60 @@
+{
+  "authority_cid": "bafkreibwd57hziwus5uqmgfrq5ymh47co54zzblleb6hhrua7he2w66mmi",
+  "commit": "a45ce9c8309da9097c8fa3ed78325bbc8e0e2b4e",
+  "configuration_cid": "bafkreidt6vhfch737mg4s4sm6o3jwb2e34zlpdnezyp7chkmc7rcgyoxvi",
+  "endpoints": [
+    {
+      "health_proves_identity": false,
+      "id": "mcp-plus-plus-in-process",
+      "kind": "mcp",
+      "operations": [
+        "tools/list",
+        "tools/call"
+      ],
+      "route_profile_id": "mcp-plus-plus-v1",
+      "transport": "in_process"
+    },
+    {
+      "health_proves_identity": false,
+      "id": "model-catalog-health",
+      "kind": "model",
+      "operation": "model_catalog_health",
+      "transport": "in_process"
+    }
+  ],
+  "evidence_term": "SCAEV181MCPRUNTIME",
+  "interface": "RuntimeServiceIdentity@1",
+  "modules": [
+    {
+      "byte_length": 88398,
+      "digest": "sha256:6e76f2d2bf7b5ac0fd6609ff744769e2620b84bafaac8f6127b74a7d5b5be8cf",
+      "module": "ipfs_accelerate_py.mcp_server.mcplusplus.idl_registry",
+      "path": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/worktrees/lane-01/workspace-7d088a1f65f4-5827c5cd1350/external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py"
+    },
+    {
+      "byte_length": 34884,
+      "digest": "sha256:55d56668adf60450f04bd88e9984a2d9e35e6fbda0efe12c43c245c183693094",
+      "module": "ipfs_accelerate_py.agent_supervisor.analysis.mcp_live_conformance",
+      "path": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/worktrees/lane-01/workspace-7d088a1f65f4-5827c5cd1350/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_live_conformance.py"
+    }
+  ],
+  "passed": true,
+  "policies": {
+    "health_is_liveness_only": true,
+    "mixed_checkout_state_roots_allowed": false,
+    "stale_service_code_satisfies_identity": false
+  },
+  "reason_codes": [
+    "modules_bound",
+    "commit_tree_bound",
+    "configuration_cid_bound",
+    "state_cid_bound",
+    "authority_cid_bound",
+    "interface_cid_bound"
+  ],
+  "receipt_cid": "bafkreihz7ynemzecfikh5whohaehz4fwab4etg63cuzu56dycrzdpeph24",
+  "schema": "ipfs_accelerate_py/agent-supervisor/runtime-service-identity@1",
+  "service_id": "swissknife-mcp-runtime-v1",
+  "state_cid": "bafkreib4sf5uljbyjsoo4dm3r4hqkgtxfxhdck55sdduu7fstayaiu4rje",
+  "tree": "d6558b57867670196dedf809877be29be8884897"
+}

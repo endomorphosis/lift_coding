@@ -1,0 +1,293 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-050",
+  "title": "Extend ResourceScheduler with leased multidimensional hard reservations",
+  "track": "lgswf-g600-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-050",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G600",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-045"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g600/lgswf-050",
+  "observed_at": "2026-08-17T16:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-050",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-045.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_resource_scheduler.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json": true
+  },
+  "objective_summary": "Extended ResourceScheduler with leased multidimensional hard reservations without replacing existing host/provider admission, ResourceAdmissionLease, adaptive stage capacity, or schedule/evaluate contracts. New fabric types cover CPU concurrency/time, RAM, GPU memory/compute class, disk capacity/bandwidth, network permission/bandwidth, subprocesses, worktrees, model input/output tokens, provider concurrency/quota, prover class/concurrency, license/key exclusivity, merge slots, and persistence bandwidth. Reservations bind task/attempt/supervisor/daemon/lease/fence identities, never overcommit GPU memory, provider/prover concurrency, merge authority, exclusive writers, worktree mutation, or license keys, and reclaim on completion, cancellation, timeout, confirmed death, or fenced expiry with a later fencing token. Worker completion or task status alone never authorizes acceptance.",
+  "findings_digest": {
+    "interface": "FabricHardResourceReservation@1",
+    "schema": "ipfs_accelerate_py.agent_supervisor.fabric-hard-resource-reservation@1",
+    "primary_symbol": "ResourceScheduler.reserve_hard",
+    "module_paths": {
+      "implementation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py"
+    },
+    "core_symbols": [
+      "ResourceScheduler.reserve_hard",
+      "ResourceScheduler.reclaim_hard",
+      "ResourceScheduler.reclaim_expired_hard",
+      "ResourceScheduler.heartbeat_hard",
+      "ResourceScheduler.evaluate_hard_reservation",
+      "ResourceScheduler.hard_capacity_snapshot",
+      "HardResourceDemand",
+      "HardResourceCapacity",
+      "HardResourceReservation",
+      "HardReservationDecision",
+      "ResourceIdentityBinding",
+      "NetworkPermission",
+      "HardReservationState",
+      "FABRIC_HARD_RESOURCE_DIMENSIONS",
+      "FABRIC_NEVER_OVERCOMMIT_DIMENSIONS"
+    ],
+    "extension_not_replacement": true,
+    "preserved_contracts": [
+      "ResourceScheduler.evaluate",
+      "ResourceScheduler.schedule",
+      "ResourceScheduler.acquire",
+      "ResourceScheduler.release",
+      "ResourceAdmissionLease",
+      "ResourceLeaseBudget",
+      "LaneResourceRequirements",
+      "HostResourceSnapshot",
+      "ProviderCapacity",
+      "adaptive stage capacity",
+      "capacity drift admission"
+    ],
+    "dimensions": [
+      "cpu_concurrency",
+      "cpu_time_ms",
+      "ram_mib",
+      "gpu_memory_mib",
+      "disk_mib",
+      "disk_bandwidth_mib_per_second",
+      "network_bandwidth_kib_per_second",
+      "network_permission",
+      "subprocesses",
+      "worktree_slots",
+      "model_input_tokens",
+      "model_output_tokens",
+      "provider_concurrency",
+      "provider_quota",
+      "prover_concurrency",
+      "prover_class",
+      "license_keys",
+      "merge_slots",
+      "persistence_mib_per_second",
+      "gpu_compute_class",
+      "exclusive_writer"
+    ],
+    "never_overcommit": [
+      "gpu_memory_mib",
+      "provider_concurrency",
+      "prover_concurrency",
+      "merge_slots",
+      "worktree_slots",
+      "license_keys",
+      "exclusive_writer",
+      "gpu_compute_class_holder",
+      "prover_class_holder"
+    ],
+    "binding_fields": [
+      "task_id",
+      "attempt",
+      "supervisor_id",
+      "daemon_id",
+      "lease_id",
+      "fence_token",
+      "idempotency_key",
+      "worktree_id"
+    ],
+    "reclaim_triggers": [
+      "completed",
+      "cancelled",
+      "timed_out",
+      "confirmed_death",
+      "fenced_expiry",
+      "released"
+    ],
+    "fenced_reclaim": {
+      "requires_current_fence_token": true,
+      "stale_or_forged_fence_fail_closed": true,
+      "issues_later_fence_token": true,
+      "heartbeat_may_rotate_fence": true,
+      "capacity_reusable_immediately": true
+    },
+    "network_permission_policy": "fail_closed_denied_unless_allowed",
+    "integer_only_artifacts": true,
+    "composes_with_admission_lease": true,
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-051",
+      "LGSWF-052",
+      "LGSWF-054"
+    ],
+    "continuous_multi_supervisor_operation": "no-go"
+  },
+  "interfaces_referenced": [
+    "FabricHardResourceReservation@1",
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "ResourceScheduler",
+    "ParallelFrontier@1"
+  ],
+  "symbols_changed": [
+    "ResourceScheduler.reserve_hard",
+    "ResourceScheduler.reclaim_hard",
+    "ResourceScheduler.reclaim_expired_hard",
+    "ResourceScheduler.heartbeat_hard",
+    "ResourceScheduler.evaluate_hard_reservation",
+    "ResourceScheduler.hard_capacity_snapshot",
+    "ResourceScheduler.active_hard_reservations",
+    "ResourceAdmissionLease.task_id",
+    "ResourceAdmissionLease.attempt",
+    "ResourceAdmissionLease.supervisor_id",
+    "ResourceAdmissionLease.daemon_id",
+    "ResourceAdmissionLease.fence_token",
+    "ResourceAdmissionLease.hard_reservation_id",
+    "HardResourceDemand",
+    "HardResourceCapacity",
+    "HardResourceReservation",
+    "HardReservationDecision",
+    "ResourceIdentityBinding",
+    "NetworkPermission",
+    "HardReservationState",
+    "FABRIC_HARD_RESOURCE_DIMENSIONS",
+    "FABRIC_NEVER_OVERCOMMIT_DIMENSIONS",
+    "normalize_network_permission"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic FabricHardResourceReservation@1 suite covering all hard dimensions, leased binding, never-overcommit gates, fenced reclaim, expiry, heartbeat fence rotation, admission-lease composition, and concurrent merge-slot exclusion; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-050 lands ResourceScheduler hard-reservation extensions and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-050 mutates accelerator runtime source and tests; datasets semantic truth is referenced only; canonical refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class with fabric hard reservation dimensions",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + LGSWF-045 receipt",
+    "hard_reservation_binding": "task/attempt/supervisor/daemon/lease/fence",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "model_proposal_admitted_as_authority": false,
+    "existing_resource_contracts_replaced": false
+  },
+  "acceptance_criteria": {
+    "extends_rather_than_replaces_resource_contracts": true,
+    "covers_cpu_ram_gpu_disk_network_subprocess_worktree_tokens_provider_prover_license_merge_persistence": true,
+    "leased_task_attempt_supervisor_daemon_binding": true,
+    "fenced_reclaim": true,
+    "never_overcommit_hard_dimensions": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "hard_multidimensional_reservations": "absent",
+      "task_attempt_supervisor_daemon_binding_on_resource_lease": "absent",
+      "fenced_hard_reclaim": "absent",
+      "epic_f_producing_task": "LGSWF-050 blocked after LGSWF-045"
+    },
+    "after": {
+      "hard_multidimensional_reservations": "FabricHardResourceReservation@1 on ResourceScheduler.reserve_hard/reclaim_hard",
+      "binding": "ResourceIdentityBinding task/attempt/supervisor/daemon/lease/fence",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+      "downstream": "LGSWF-051 receipt-derived estimates and work cache unblocked for dependency-ready work"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "worker_completion_sufficient": false,
+    "task_status_sufficient": false,
+    "requires_declared_outputs": true,
+    "requires_current_validation": true,
+    "requires_merge_and_canonical_refresh_on_mutation": true,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only",
+    "producer_disposition": "implementation_complete_pending_supervisor_acceptance"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-050",
+  "result_identity": "urn:lgswf:receipt:LGSWF-050@fabric-hard-resource-reservation-v1-attempt1"
+}

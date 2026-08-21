@@ -1,0 +1,199 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-007",
+  "title": "Remove datasets-to-accelerator semantic authority inversions",
+  "track": "lgswf-g100-dependency-repair",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-007",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G100",
+  "owning_repository": "ipfs_datasets_py",
+  "base_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-005"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-007",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_datasets at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+    "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+    "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-005.json"
+  ],
+  "write_scope": [
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/domain_adapters.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py",
+    "external/ipfs_datasets/tests/unit/logic/software_verification/test_accelerator_dependency_boundary.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-007.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/domain_adapters.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py",
+    "external/ipfs_datasets/tests/unit/logic/software_verification/test_accelerator_dependency_boundary.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-007.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/domain_adapters.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py",
+    "external/ipfs_datasets/tests/unit/logic/software_verification/test_accelerator_dependency_boundary.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-007.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py": true,
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/domain_adapters.py": true,
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py": true,
+    "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py": true,
+    "external/ipfs_datasets/tests/unit/logic/software_verification/test_accelerator_dependency_boundary.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-007.json": true
+  },
+  "objective_summary": "Isolated the four checked datasets-to-accelerator upward imports behind datasets-owned leaf contracts without changing semantic meaning: CounterexampleEnvelope@2 identity is computed by CounterexampleIdentity@1 / normalize_public_counterexample in contracts.py; source_adapters and domain_adapters admit optional observational ports via register_program_ast_evidence_port and register_code_security_facts_port; proof_plan evaluator adapters default to the datasets-owned ranker and optionally consume a register_plan_evaluator_port composition surface. No owned module retains an accelerator package import for semantic authority.",
+  "findings_digest": {
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "checked_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "canonical_semantic_state_root": null,
+    "package_direction_restored": "datasets owns semantic identity; optional operational composition registers through datasets-owned leaf ports; no upward import for identity",
+    "repaired_upward_violations": [
+      {
+        "id": "datasets-counterexample-identity-upward",
+        "repair": "CounterexampleIdentity@1 leaf normalizer and CID semantic_id inside counterexamples/contracts.py; project_public_counterexample no longer imports formal_counterexamples"
+      },
+      {
+        "id": "datasets-source-adapters-upward",
+        "repair": "register_program_ast_evidence_port leaf port; default is no observational AST evidence"
+      },
+      {
+        "id": "datasets-domain-adapters-upward",
+        "repair": "register_code_security_facts_port leaf port; observations remain non-authoritative"
+      },
+      {
+        "id": "datasets-tactician-plan-evaluator-upward",
+        "repair": "register_plan_evaluator_port leaf port; default rank_via_* uses datasets-owned rank_missing_proof_plans"
+      }
+    ],
+    "identity_policy": "semantic_id is CIDv1 dag-json/sha2-256 over kind/property_class/violated_property/payload/semantic-bindings/assumption_ids/finite_bounds/observation_policy_id; secrets discarded before identity",
+    "semantic_meaning_preserved": true,
+    "no_upward_package_imports_for_semantic_identity": true
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "CounterexampleEnvelope@2",
+    "PublicCounterexampleBoundary@1",
+    "CounterexampleIdentity@1",
+    "SourceSoftwareVerificationAdapter@1",
+    "IntentSoftwareVerificationAdapter@1",
+    "SecuritySoftwareVerificationAdapter@1",
+    "GoalDirectedProofPlanRanker@1"
+  ],
+  "symbols_changed": [
+    "normalize_public_counterexample",
+    "counterexample_content_identity",
+    "NormalizedCounterexample",
+    "project_public_counterexample",
+    "register_program_ast_evidence_port",
+    "register_code_security_facts_port",
+    "register_plan_evaluator_port",
+    "rank_via_and_or_evaluator",
+    "rank_via_proof_aware_evaluator"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_verification/test_accelerator_dependency_boundary.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "boundary tests assert no accelerator package imports in owned modules, datasets-owned identity leaf behavior, leaf-port registration, and datasets-owned default ranking; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "dependency-repair under raw-source-required bootstrap; no datasets-selected formal proof obligations apply while canonical semantic-state root is unavailable",
+    "limitations": [
+      "canonical semantic-state root unavailable",
+      "formal proof against symbol/capsule graphs cannot be current without LGSWF-009 roots",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "bootstrap_raw_source_dependency_repair",
+    "provisional_root": null,
+    "canonical_refresh_required": true,
+    "reason": "task mutates datasets software-verification leaf contracts and identity path; provisional semantic refresh is required after merge admission; canonical root remains gated on LGSWF-009"
+  },
+  "merge": {
+    "mutation_class": "owned_source_and_artifact_paths",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium dependency-repair class",
+    "plan_tree_semantic_fence": "bootstrap exact-tree + unavailable semantic root binding",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "upward_package_imports_accepted_as_authority": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "dirty_overlay_wholesale_copy": false
+  },
+  "acceptance_criteria": {
+    "invert_or_isolate_checked_upward_imports": true,
+    "counterexample_identity_datasets_owned": true,
+    "semantic_meaning_unchanged": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_for_source_mutation",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "counterexamples.contracts": "project_public_counterexample imported formal_counterexamples for identity",
+      "source_adapters": "lazy import of program_ast_adapters",
+      "domain_adapters": "lazy import of code_security_facts",
+      "tactician.proof_plan": "lazy import of plan_evaluator for rank_via_*"
+    },
+    "after": {
+      "counterexamples.contracts": "CounterexampleIdentity@1 datasets-owned normalizer and semantic_id; no accelerator import",
+      "source_adapters": "register_program_ast_evidence_port leaf port only",
+      "domain_adapters": "register_code_security_facts_port leaf port only",
+      "tactician.proof_plan": "register_plan_evaluator_port leaf port; default datasets-owned ranking"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-007",
+  "result_identity": "urn:lgswf:receipt:LGSWF-007@datasets-leaf-identity-repair"
+}

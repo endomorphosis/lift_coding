@@ -1,0 +1,554 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G1000",
+  "epic_label": "J — closed-loop semantic refresh",
+  "gate_task_id": "LGSWF-094",
+  "observed_at": "2026-08-17T23:59:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g1000/lgswf-094",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-094",
+    "requires": [
+      "SemanticRefresh@1 connects pre-execution and provisional-patch semantic refresh without becoming a second semantic truth authority",
+      "before execution the supervisor verifies datasets views, capsule freshness, producer-bound source fallback, selected tests/proofs (including verified empty), and ContextPack against the attempt binding",
+      "on provisional patch the surface scans changed symbols, calculates invalidation closure, updates noncanonical provisional obligations, rejects scope escapes fail-closed, and replans verification",
+      "provisional roots remain attempt-bound and noncanonical and never publish as canonical datasets truth",
+      "SemanticReconciliation@1 gates merge admission and refreshes canonical semantic state only after queue acceptance",
+      "pre-merge gate verifies predicted effects, contracts, selected tests/proofs (including verified empty), governor disposition, assurance evidence, and seal identity against the candidate tree",
+      "after queue acceptance the surface rescans the accepted canonical tree, compares predicted and observed deltas, invalidates dependents, updates the semantic snapshot, reevaluates goals, and revises until settled",
+      "workers and accelerator surfaces never publish datasets canonical roots; only datasets authority publishes canonical roots",
+      "predicted and observed semantic deltas must reconcile fail-closed; unmatched path or symbol deltas reject post-acceptance refresh",
+      "every invalidation obligation propagates through provisional-patch and post-acceptance closures with related tests and proofs",
+      "accepted tree root and semantic-state root identities remain exact across pre-merge seal, rescan, snapshot, and gate records",
+      "MergeQueue require_pre_merge_semantic_gate and complete_with_semantic_reconciliation fail closed without an admitted gate",
+      "acceptance requires independent fenced supervisor verification; worker completion or task status alone never authorizes acceptance",
+      "binary floats are excluded from content-addressed refresh and reconciliation identities",
+      "model proposals remain non-authoritative and never admit work"
+    ],
+    "prior_status": "Epic I open for dependency-ready work; Epic J unblocks fixed-point convergence"
+  },
+  "predicates": {
+    "workers_cannot_publish_canonical_roots": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+        "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "tasks": [
+        "LGSWF-090",
+        "LGSWF-091"
+      ],
+      "interfaces": [
+        "SemanticRefresh@1",
+        "PreExecutionSemanticRefresh@1",
+        "ProvisionalPatchSemanticRefresh@1",
+        "SemanticReconciliation@1",
+        "PreMergeSemanticGate@1",
+        "PostAcceptanceCanonicalRefresh@1"
+      ],
+      "primary_symbols": [
+        "SEMANTIC_REFRESH_PUBLISHES_CANONICAL_ROOT",
+        "SEMANTIC_RECONCILIATION_PUBLISHES_CANONICAL_ROOT",
+        "assert_not_canonical_publication",
+        "provisional_root_for_attempt",
+        "refresh_semantic_view",
+        "reconcile_semantic_delta",
+        "refresh_after_acceptance"
+      ],
+      "semantic_refresh_publishes_canonical_root": false,
+      "semantic_reconciliation_publishes_canonical_root": false,
+      "semantic_refresh_authorizes_completion": false,
+      "semantic_refresh_authorizes_acceptance": false,
+      "semantic_reconciliation_authorizes_completion": false,
+      "semantic_reconciliation_authorizes_acceptance": false,
+      "provisional_roots_noncanonical": true,
+      "provisional_roots_not_publishable_as_canonical": true,
+      "datasets_authority_publishes_canonical_root": true,
+      "worker_completion_alone_insufficient": true,
+      "hermetic_proofs": [
+        "test_interfaces_and_authority_hard_offs",
+        "test_worker_completion_fields_never_authorize",
+        "test_assert_not_canonical_publication_hard_off",
+        "test_provisional_patch_refresh_end_to_end",
+        "test_post_acceptance_refresh_end_to_end",
+        "test_reconcile_semantic_delta_full_pipeline"
+      ]
+    },
+    "predicted_observed_deltas_reconcile": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "tasks": [
+        "LGSWF-091"
+      ],
+      "interfaces": [
+        "SemanticReconciliation@1",
+        "PostAcceptanceCanonicalRefresh@1"
+      ],
+      "primary_symbols": [
+        "compare_semantic_deltas",
+        "SemanticDeltaComparison",
+        "refresh_after_acceptance",
+        "reconcile_semantic_delta"
+      ],
+      "pre_merge_verifies_predicted_effects": true,
+      "post_acceptance_compares_predicted_and_observed_deltas": true,
+      "path_and_symbol_sets_must_match": true,
+      "delta_mismatch_rejects_fail_closed": true,
+      "matched_comparison_content_addressed": true,
+      "hermetic_proofs": [
+        "test_rescan_compare_invalidate_snapshot_and_goals",
+        "test_post_acceptance_refresh_end_to_end",
+        "test_post_acceptance_rejects_delta_mismatch",
+        "test_reconcile_semantic_delta_full_pipeline",
+        "test_pre_merge_gate_admits_current_effects_contracts_tests_proofs_governor_assurance_seal"
+      ]
+    },
+    "every_invalidation_propagates": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+        "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "tasks": [
+        "LGSWF-090",
+        "LGSWF-091"
+      ],
+      "interfaces": [
+        "ProvisionalPatchSemanticRefresh@1",
+        "PostAcceptanceCanonicalRefresh@1",
+        "SemanticRefresh@1",
+        "SemanticReconciliation@1"
+      ],
+      "primary_symbols": [
+        "calculate_invalidation_closure",
+        "update_provisional_obligations",
+        "invalidate_dependents",
+        "replan_verification",
+        "reevaluate_goals",
+        "revise_until_settled",
+        "ProvisionalInvalidationObligation",
+        "CanonicalInvalidationObligation"
+      ],
+      "provisional_patch_calculates_invalidation_closure": true,
+      "provisional_obligations_updated_noncanonical": true,
+      "post_acceptance_invalidates_dependents": true,
+      "bfs_dependency_closure": true,
+      "related_tests_and_proofs_bound_to_obligations": true,
+      "verification_replanned_from_obligations": true,
+      "goals_reevaluated_after_invalidation": true,
+      "revise_until_settled_or_bound": true,
+      "hermetic_proofs": [
+        "test_scan_invalidation_obligations_and_replan",
+        "test_provisional_patch_refresh_end_to_end",
+        "test_rescan_compare_invalidate_snapshot_and_goals",
+        "test_revise_until_settled_applies_revisions",
+        "test_post_acceptance_refresh_end_to_end",
+        "test_unsettled_goals_raise_when_requested"
+      ]
+    },
+    "accepted_tree_root_identity_exact": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+        "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "tasks": [
+        "LGSWF-090",
+        "LGSWF-091"
+      ],
+      "interfaces": [
+        "SemanticRefresh@1",
+        "PreExecutionSemanticRefresh@1",
+        "SemanticReconciliation@1",
+        "PreMergeSemanticGate@1",
+        "PostAcceptanceCanonicalRefresh@1",
+        "contract:SemanticStateRoot@1"
+      ],
+      "primary_symbols": [
+        "DatasetsSemanticView",
+        "ContextPackRef",
+        "SealRef",
+        "CanonicalTreeScan",
+        "SnapshotUpdate",
+        "rescan_canonical_tree",
+        "update_semantic_snapshot",
+        "verify_pre_execution_semantic_refresh",
+        "verify_pre_merge_gate"
+      ],
+      "pre_execution_requires_datasets_view_tree_and_root_match": true,
+      "context_pack_bound_to_task_attempt_plan_tree_root": true,
+      "pre_merge_seal_current_and_tree_matched": true,
+      "post_acceptance_rescan_binds_accepted_tree_root": true,
+      "snapshot_update_records_exact_root_identity": true,
+      "stale_or_mismatched_roots_reject_fail_closed": true,
+      "recorded_canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "recorded_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "recorded_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "hermetic_proofs": [
+        "test_pre_execution_admits_current_view_fresh_capsules_and_context_pack",
+        "test_pre_execution_rejects_stale_view_and_context_pack_drift",
+        "test_pre_merge_gate_admits_current_effects_contracts_tests_proofs_governor_assurance_seal",
+        "test_pre_merge_gate_rejects_stale_or_missing_components",
+        "test_rescan_compare_invalidate_snapshot_and_goals",
+        "test_post_acceptance_refresh_end_to_end"
+      ]
+    },
+    "pre_execution_and_provisional_patch_closed_loop": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+        "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json"
+      ],
+      "task": "LGSWF-090",
+      "interfaces": [
+        "SemanticRefresh@1",
+        "PreExecutionSemanticRefresh@1",
+        "ProvisionalPatchSemanticRefresh@1"
+      ],
+      "primary_symbols": [
+        "refresh_semantic_view",
+        "verify_pre_execution_semantic_refresh",
+        "refresh_provisional_patch",
+        "scan_changed_symbols",
+        "reject_scope_escapes",
+        "replan_verification"
+      ],
+      "pre_execution_checks": [
+        "datasets_view_current",
+        "datasets_view_tree_and_root_match_attempt",
+        "capsule_freshness_or_admitted_source_fallback",
+        "proof_selection_current_or_verified_empty",
+        "context_pack_bound_to_task_attempt_plan_tree_root",
+        "source_fallback_policy_recorded"
+      ],
+      "provisional_patch_checks": [
+        "scope_escape_rejected_fail_closed",
+        "changed_symbols_scanned_from_admitted_paths",
+        "invalidation_closure_calculated",
+        "provisional_obligations_updated_noncanonical",
+        "verification_replanned_from_obligations",
+        "provisional_root_attempt_bound_and_noncanonical"
+      ],
+      "source_fallback_policy": "producer-bound-raw-source-when-capsule-stale",
+      "hermetic_proofs": [
+        "test_pre_execution_admits_current_view_fresh_capsules_and_context_pack",
+        "test_pre_execution_requires_source_fallback_for_stale_capsules",
+        "test_pre_execution_requires_current_or_verified_empty_proof_selection",
+        "test_path_scope_and_scope_escape_rejection",
+        "test_provisional_patch_refresh_end_to_end",
+        "test_provisional_patch_rejects_scope_escape",
+        "test_refresh_semantic_view_dispatches_both_phases",
+        "test_unsafe_capsule_never_admitted_via_source_fallback"
+      ]
+    },
+    "merge_gate_and_post_acceptance_refresh": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/merge_queue.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "task": "LGSWF-091",
+      "interfaces": [
+        "SemanticReconciliation@1",
+        "PreMergeSemanticGate@1",
+        "PostAcceptanceCanonicalRefresh@1",
+        "MergeQueue"
+      ],
+      "primary_symbols": [
+        "verify_pre_merge_gate",
+        "refresh_after_acceptance",
+        "reconcile_semantic_delta",
+        "MergeQueue.complete",
+        "MergeQueue.complete_with_semantic_reconciliation",
+        "MergeQueueSemanticGateError"
+      ],
+      "pre_merge_checks": [
+        "predicted_effects_current_or_no_mutation",
+        "contracts_current_and_nonempty",
+        "selected_tests_proofs_current_or_verified_empty",
+        "governor_admitted",
+        "assurance_current_or_absence_recorded",
+        "seal_current_and_tree_matched"
+      ],
+      "post_acceptance_checks": [
+        "canonical_tree_rescanned",
+        "predicted_observed_deltas_compared",
+        "dependents_invalidated",
+        "semantic_snapshot_updated",
+        "goals_reevaluated",
+        "revise_until_settled_or_bound"
+      ],
+      "require_pre_merge_semantic_gate": true,
+      "complete_with_semantic_reconciliation": true,
+      "fail_closed_without_admitted_gate": true,
+      "post_acceptance_refresh_after_queue_acceptance": true,
+      "hermetic_proofs": [
+        "test_pre_merge_gate_admits_current_effects_contracts_tests_proofs_governor_assurance_seal",
+        "test_pre_merge_gate_rejects_stale_or_missing_components",
+        "test_pre_merge_gate_accepts_selected_tests_and_value_types",
+        "test_post_acceptance_refresh_end_to_end",
+        "test_post_acceptance_rejects_delta_mismatch",
+        "test_reconcile_semantic_delta_full_pipeline",
+        "test_merge_queue_requires_pre_merge_gate_when_configured",
+        "test_merge_queue_complete_with_semantic_reconciliation",
+        "test_merge_queue_complete_with_semantic_reconciliation_rejects_bad_gate"
+      ]
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-090",
+        "LGSWF-091"
+      ],
+      "result_identities": [
+        "pending:content-addressed-result:LGSWF-090",
+        "pending:content-addressed-result:LGSWF-091"
+      ],
+      "receipt_identity_notes": {
+        "LGSWF-090": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance",
+        "LGSWF-091": "producing receipt is present and current at the recorded path; final_result_identity remains pending supervisor acceptance"
+      },
+      "declared_producing_outputs_present": {
+        "LGSWF-090": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+          "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+          "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json"
+        ],
+        "LGSWF-091": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/merge_queue.py",
+          "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+          "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+        ]
+      },
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_i_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-i.json",
+      "epic_i_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-084"
+    },
+    "no_binary_floats_in_content_addressed_material": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "tasks": [
+        "LGSWF-090",
+        "LGSWF-091"
+      ],
+      "floats_rejected_from_identity": true,
+      "content_addressed_decisions": true,
+      "hermetic_proofs": [
+        "test_floats_and_prohibited_payloads_fail_closed",
+        "test_interfaces_and_authority_hard_offs"
+      ]
+    },
+    "supervisor_only_acceptance": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-084.json"
+      ],
+      "acceptance_requires_independent_fenced_supervisor": true,
+      "worker_completion_alone_insufficient": true,
+      "task_status_alone_insufficient": true,
+      "completion_authoritative_forced_false": true,
+      "semantic_refresh_never_authorizes_acceptance": true,
+      "semantic_reconciliation_never_authorizes_acceptance": true,
+      "merge_queue_completion_is_not_supervisor_acceptance": true
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "SemanticRefresh@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.semantic-refresh@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "refresh_semantic_view",
+        "verify_pre_execution_semantic_refresh",
+        "refresh_provisional_patch",
+        "SemanticRefreshResult"
+      ],
+      "role": "operational composition surface connecting pre-execution and provisional-patch semantic refresh without publishing canonical roots",
+      "authorizes_completion": false,
+      "authorizes_acceptance": false,
+      "publishes_canonical_root": false
+    },
+    "PreExecutionSemanticRefresh@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.pre-execution-semantic-refresh@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "verify_pre_execution_semantic_refresh",
+        "DatasetsSemanticView",
+        "CapsuleFreshnessRef",
+        "ProofSelectionRef",
+        "ContextPackRef",
+        "PreExecutionRefreshDecision"
+      ],
+      "role": "pre-execution admission of current datasets views, freshness, source fallback, proof selection, and ContextPack"
+    },
+    "ProvisionalPatchSemanticRefresh@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.provisional-patch-semantic-refresh@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "refresh_provisional_patch",
+        "scan_changed_symbols",
+        "calculate_invalidation_closure",
+        "update_provisional_obligations",
+        "reject_scope_escapes",
+        "replan_verification",
+        "provisional_root_for_attempt",
+        "ProvisionalPatchRefreshDecision"
+      ],
+      "role": "provisional-patch scan, invalidation, noncanonical obligation update, and verification replan",
+      "provisional_roots_noncanonical": true
+    },
+    "SemanticReconciliation@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.semantic-reconciliation@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "reconcile_semantic_delta",
+        "verify_pre_merge_gate",
+        "refresh_after_acceptance",
+        "SemanticReconciliationResult"
+      ],
+      "role": "merge-package surface that gates merge admission and coordinates post-acceptance canonical semantic refresh without publishing datasets roots",
+      "authorizes_completion": false,
+      "authorizes_acceptance": false,
+      "publishes_canonical_root": false
+    },
+    "PreMergeSemanticGate@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.pre-merge-semantic-gate@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "verify_pre_merge_gate",
+        "PredictedEffectsRef",
+        "ContractSetRef",
+        "ProofSelectionRef",
+        "GovernorRef",
+        "AssuranceRef",
+        "SealRef",
+        "PreMergeGateDecision"
+      ],
+      "role": "fail-closed pre-merge verification of predicted effects, contracts, selected tests/proofs, governor, assurance, and seal identity"
+    },
+    "PostAcceptanceCanonicalRefresh@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.post-acceptance-canonical-refresh@1",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "refresh_after_acceptance",
+        "rescan_canonical_tree",
+        "compare_semantic_deltas",
+        "invalidate_dependents",
+        "update_semantic_snapshot",
+        "reevaluate_goals",
+        "revise_until_settled",
+        "PostAcceptanceRefreshDecision"
+      ],
+      "role": "post-queue-acceptance rescan, predicted/observed delta reconcile, dependent invalidation, snapshot update, and goal reevaluation",
+      "datasets_authority_publishes_canonical_root": true
+    },
+    "MergeQueue": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/merge_queue.py",
+      "schema": "ipfs_accelerate_py.agent_supervisor.merge-queue",
+      "owner": "ipfs_accelerate_py",
+      "primary_symbols": [
+        "MergeQueue.complete",
+        "MergeQueue.complete_with_semantic_reconciliation",
+        "MergeQueueSemanticGateError"
+      ],
+      "role": "merge queue completion gated by admitted pre-merge semantic gate and optional complete_with_semantic_reconciliation",
+      "require_pre_merge_semantic_gate": true,
+      "fail_closed_without_admitted_gate": true
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-100"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Fixed-point convergence (Epic K / LGSWF-100) may schedule after LGSWF-094; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "formal datasets proof selection remains verified empty; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "SemanticRefresh@1 and SemanticReconciliation@1 coordinate refresh and never publish datasets canonical roots; datasets authority remains the only publisher of canonical roots",
+    "worker completion or task status alone is never authoritative completion",
+    "merge-queue completion and semantic reconciliation never authorize supervisor acceptance and never substitute for independent fenced supervisor acceptance",
+    "fixed-point convergence and continuous fabric operation remain outside Epic J"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic J gate records verified empty formal proof selection at accepted trees; contract and hermetic tests plus current producing-task receipts are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-j@lgswf-094-pass"
+}

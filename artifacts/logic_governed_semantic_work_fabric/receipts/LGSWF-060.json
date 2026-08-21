@@ -1,0 +1,244 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-060",
+  "title": "Advertise supervisor capabilities and capability-based roles",
+  "track": "lgswf-g700-implementation",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-060",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G700",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-054"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g700/lgswf-060",
+  "observed_at": "2026-08-17T12:00:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-060",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-054.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/work_cache.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json": true
+  },
+  "objective_summary": "Extended the sealed multi-supervisor runtime with SupervisorFabric@1 / SupervisorCapabilities@1 non-authoritative capability observations. Primary symbol advertise_capabilities records identity, scope, revision, epoch, stages, resources, providers, provers, worktrees, merge, persistence, load, health, heartbeat, and expiry observations; derives capability-based roles (snapshot_reader, proposer, claimer, evidence_publisher, fenced_writer, coordinator, peer) as eligibility only; and rejects authoritative grants. SupervisorFabric stores sealed multi-supervisor advertisements with heartbeat/expiry refresh, role queries, and diagnostic snapshots that never issue leases, fences, or merge authority. Floats are rejected from content-addressed artifacts. Worker completion or task status alone never authorizes acceptance.",
+  "findings_digest": {
+    "interface": "SupervisorFabric@1",
+    "capabilities_interface": "SupervisorCapabilities@1",
+    "schema": "ipfs_accelerate_py.agent_supervisor.fabric-supervisor-capabilities@1",
+    "primary_symbol": "advertise_capabilities",
+    "module_paths": {
+      "implementation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py"
+    },
+    "core_symbols": [
+      "advertise_capabilities",
+      "SupervisorFabric",
+      "SupervisorFabric.advertise",
+      "SupervisorFabric.heartbeat",
+      "SupervisorFabric.get",
+      "SupervisorFabric.list_advertisements",
+      "SupervisorFabric.supervisors_for_role",
+      "SupervisorFabric.snapshot",
+      "CapabilityAdvertisement",
+      "CapabilityObservation",
+      "RoleEligibility",
+      "derive_capability_roles",
+      "build_supervisor_fabric",
+      "capability_dimensions",
+      "capability_roles",
+      "normalize_capability_dimension",
+      "normalize_capability_role",
+      "CAPABILITY_OBSERVATION_DIMENSIONS",
+      "CAPABILITY_BASED_ROLES"
+    ],
+    "observation_dimensions": [
+      "identity",
+      "scope",
+      "revision",
+      "epoch",
+      "stages",
+      "resources",
+      "providers",
+      "provers",
+      "worktrees",
+      "merge",
+      "persistence",
+      "load",
+      "health",
+      "heartbeat",
+      "expiry"
+    ],
+    "capability_based_roles": [
+      "snapshot_reader",
+      "proposer",
+      "claimer",
+      "evidence_publisher",
+      "fenced_writer",
+      "coordinator",
+      "peer"
+    ],
+    "observations_non_authoritative": true,
+    "roles_are_eligibility_not_grants": true,
+    "advertisements_never_grant_authority": true,
+    "heartbeat_and_expiry_supported": true,
+    "integer_only_artifacts": true,
+    "floats_rejected": true,
+    "extension_not_replacement": true,
+    "preserved_contracts": [
+      "multi_supervisor_runner",
+      "ResourceScheduler",
+      "FabricHardResourceReservation@1",
+      "WorkCache@1",
+      "FabricStageBackpressure@1",
+      "SupervisorWorldSnapshot@1 capabilities component"
+    ],
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-061"
+    ],
+    "continuous_multi_supervisor_operation": "no-go"
+  },
+  "interfaces_referenced": [
+    "SupervisorFabric@1",
+    "SupervisorCapabilities@1",
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "SupervisorWorldSnapshot@1",
+    "FabricHardResourceReservation@1",
+    "WorkCache@1",
+    "FabricStageBackpressure@1"
+  ],
+  "symbols_changed": [
+    "advertise_capabilities",
+    "SupervisorFabric",
+    "SupervisorFabric.advertise",
+    "SupervisorFabric.heartbeat",
+    "SupervisorFabric.get",
+    "SupervisorFabric.list_advertisements",
+    "SupervisorFabric.supervisors_for_role",
+    "SupervisorFabric.revoke",
+    "SupervisorFabric.snapshot",
+    "CapabilityAdvertisement",
+    "CapabilityObservation",
+    "RoleEligibility",
+    "derive_capability_roles",
+    "build_supervisor_fabric",
+    "capability_dimensions",
+    "capability_roles",
+    "normalize_capability_dimension",
+    "normalize_capability_role",
+    "normalize_health_state",
+    "normalize_observation_state",
+    "canonical_json_bytes",
+    "content_digest",
+    "CAPABILITY_OBSERVATION_DIMENSIONS",
+    "CAPABILITY_BASED_ROLES"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic SupervisorFabric@1 suite covering closed observation dimensions, capability-based role derivation without authority grants, advertise_capabilities, heartbeat/expiry freshness, multi-supervisor registry role queries, float rejection, missing-dimension fail-closed behavior, and concurrent advertise; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-060 lands supervisor capability advertisement runtime and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-060 mutates accelerator runtime source and tests; datasets semantic truth is referenced only; canonical refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class with fabric hard reservation dimensions",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + LGSWF-054 receipt",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "model_proposal_admitted_as_authority": false,
+    "capability_advertisement_treated_as_authority": false
+  },
+  "acceptance_criteria": {
+    "non_authoritative_capability_observations": true,
+    "covers_identity_scope_revision_epoch_stages_resources_providers_provers_worktrees_merge_persistence_load_health_heartbeat_expiry": true,
+    "capability_based_roles_derived_not_granted": true,
+    "sealed_multi_supervisor_registry": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance_required": true,
+    "worker_completion_alone_insufficient": true
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "reason": "independent fenced supervisor acceptance is required; validation and merge admission remain supervisor-owned"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-060"
+}

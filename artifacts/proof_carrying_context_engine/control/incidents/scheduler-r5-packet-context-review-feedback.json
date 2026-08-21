@@ -1,0 +1,823 @@
+{
+  "schema": "proof-carrying-context-engine/control-incident@1",
+  "incident_id": "urn:pcce:control-incident:scheduler-r5-packet-context-review-feedback",
+  "status": "preserved_infrastructure_failure",
+  "captured_at": "2026-08-14T21:45:04Z",
+  "content_id": "sha256:28aedd7072735fd539ed4dc4ad9387242a02b0372626a42f36a695c2ce9e9b61",
+  "canonicalization": {
+    "algorithm": "sha256",
+    "excluded_fields": [
+      "content_id"
+    ],
+    "json": "UTF-8 JSON with recursively sorted keys, separators ',' and ':', and ensure_ascii=false"
+  },
+  "source_control_commit": "5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29",
+  "source_control_tree": "938ed3317f903056042a216206260929bc371223",
+  "source_board_receipt": {
+    "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r5.json",
+    "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r5",
+    "content_id": "sha256:f7fa00309bcb1017d40191a1220774c7c24d12546afdb0bdbcf9ec99a679d37c",
+    "status": "pending_external_launch_receipt",
+    "byte_sha256_pass_1": "1c8865b30e79d351d565d6552b793ea802813428d29d8af3cfd8e3ab2d6a8389",
+    "byte_sha256_pass_2": "1c8865b30e79d351d565d6552b793ea802813428d29d8af3cfd8e3ab2d6a8389",
+    "byte_size": 11404,
+    "git_blob": "52e992df3a63881e96259be91241145daf0e36f8",
+    "preserved_byte_for_byte": true
+  },
+  "source_repository_gitlinks": {
+    "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "accelerate": "0837254e910221c17b3c8ac8a2a233658de976f1",
+    "mcp_plus_plus": "6965f89f066769f3b3ac7b5f753b1a0044562570"
+  },
+  "launch_receipt": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/control-launch-receipt.json",
+    "schema": "proof-carrying-context-engine/control-launch-receipt@1",
+    "artifact_identity": "urn:pcce:control-launch-receipt:r5:attempt-2",
+    "content_id": "sha256:785d28c1cc98c971a1a576608abc2220590c912822e45f96b3b24a8df140997f",
+    "status": "admitted",
+    "attempt": 2,
+    "created_at": "2026-08-14T21:28:29.846977Z",
+    "control_commit": "5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29",
+    "control_tree": "938ed3317f903056042a216206260929bc371223",
+    "helper_sha256": "sha256:12fd494926490e08cf3aa1367f6fedc5c158c8b93741cd39ea30621d7d13b583",
+    "provider_policy": "grok-implement-codex-independent-review",
+    "capacity_semantics": "operator-admission-budget-not-provider-reported-quota",
+    "account_capacity_probe": {
+      "provider": "grok_cli",
+      "model": "grok-4.5",
+      "result_class": "live",
+      "replayed": false,
+      "simulated": false,
+      "exit_code": 0,
+      "usable_structured_success": true,
+      "evidence_id": "sha256:30355a671a3fd43625dafcabf5f614967506946d6d9d16be7e07e8746a28b32a",
+      "endpoint_receipt_cid": "baguqeerarmw5ygdi7lfabh4is6wl2dyk2shzoguqmfcuuh32mo7xjlvajniq"
+    },
+    "byte_sha256_pass_1": "4fb398136180328e3a750a96a2343a249ffd1b2c6f849bbc4cd6e8d7d87b2573",
+    "byte_sha256_pass_2": "4fb398136180328e3a750a96a2343a249ffd1b2c6f849bbc4cd6e8d7d87b2573",
+    "byte_size": 41483
+  },
+  "process_identity": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/scheduler-process-identity.json",
+    "schema": "proof-carrying-context-engine/scheduler-process-identity@1",
+    "artifact_identity": "urn:pcce:scheduler-process-identity:r5",
+    "content_id": "sha256:476aafae18ede8a3c0f79b42469d1ad86a53a24c92e8d4b8943ecaf1514be4df",
+    "historical_status": "live_identity_observed",
+    "created_at": "2026-08-14T21:28:31.457626Z",
+    "pid": 217358,
+    "boot_id": "a847e245-d5d5-4e35-856a-ba1a9124b7fa",
+    "start_time_ticks": 10727759,
+    "process_group_id": 217358,
+    "session_id": 217358,
+    "argv_argc": 108,
+    "argv_canonical_json_sha256": "sha256:bd6cd2fbe1442b97ea58ee1337b876fb2e3713cc43a9ae213f28ba714b4b400d",
+    "argv_proc_cmdline_sha256": "sha256:5e52a8a97b4d59aeb3b67c4c04a6b3d7f1628e87cd07ab2e8157e0e6f23378a6",
+    "module_origin": "/home/barberb/lift_coding/.worktrees/proof-carrying-context-engine-control/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py",
+    "launch_receipt_content_id": "sha256:785d28c1cc98c971a1a576608abc2220590c912822e45f96b3b24a8df140997f",
+    "observer": {
+      "pid": 192855,
+      "pidfd_opened": true,
+      "helper_sha256": "sha256:12fd494926490e08cf3aa1367f6fedc5c158c8b93741cd39ea30621d7d13b583"
+    },
+    "byte_sha256_pass_1": "ab3b3c16f7085034e286956ea1915337391d13f260718b577400d14a25df44ae",
+    "byte_sha256_pass_2": "ab3b3c16f7085034e286956ea1915337391d13f260718b577400d14a25df44ae",
+    "byte_size": 7219
+  },
+  "process_disposition": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/scheduler-process-disposition.json",
+    "schema": "proof-carrying-context-engine/scheduler-process-disposition@1",
+    "artifact_identity": "urn:pcce:scheduler-process-disposition:r5",
+    "content_id": "sha256:4d2cfd0d42e926e3ec6c7c381fc0095d2ca5676db8dd8db150a85956ea190d08",
+    "created_at": "2026-08-14T21:34:44.731267Z",
+    "pid": 217358,
+    "start_time_ticks": 10727759,
+    "status": "exited_zero",
+    "observer_outcome": "normal_waitpid_exit",
+    "exit_code": 0,
+    "product_task_completion_authority": false,
+    "launch_receipt_content_id": "sha256:785d28c1cc98c971a1a576608abc2220590c912822e45f96b3b24a8df140997f",
+    "process_identity_content_id": "sha256:476aafae18ede8a3c0f79b42469d1ad86a53a24c92e8d4b8943ecaf1514be4df",
+    "byte_sha256_pass_1": "07e924d8d52ad442b5fea760cd7f4d2c0eaf547f02053a19478d95ba3de3b06c",
+    "byte_sha256_pass_2": "07e924d8d52ad442b5fea760cd7f4d2c0eaf547f02053a19478d95ba3de3b06c",
+    "byte_size": 831
+  },
+  "cause": {
+    "classification": "packet_context_and_review_feedback_stall_with_task_identity_projection_defect",
+    "boundary": "production typed provider route for PCCE-003 and outer leased-lane terminal projection",
+    "blocker_count": 3,
+    "blockers": [
+      {
+        "id": "empty_source_context",
+        "summary": "PCCE-003 received task metadata but zero repository source paths or source evidence.",
+        "durable_evidence": {
+          "bundle_context_paths": [],
+          "bundle_effect_subsets": [],
+          "bundle_estimated_context_tokens": 0,
+          "base_capsule_id": "baguqeeran3mwuc2moer3extos3sm3dfrwlck5ixdfcbh4wilwj6ui6x3p56q",
+          "base_capsule_input_tokens": 1321,
+          "base_capsule_evidence": [],
+          "base_capsule_expansion_references": [],
+          "base_capsule_diagnostic_read_only_paths": [],
+          "declared_outputs": [
+            "artifacts/proof_carrying_context_engine/inventory/ipfs_accelerate.json",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-003.json"
+          ],
+          "declared_outputs_absent_at_baseline": true
+        },
+        "implementation_mechanism": {
+          "derive_source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/production_context_slice.py:942",
+          "derive_source_sha256": "56cab858bfce64c928c4884e6bb383bfc0d93187d1559fe3fbec9d4c6c23c2ee",
+          "caller_source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py:22220",
+          "caller_source_sha256": "fe577ad6abecd444150a2aa510aa4ea95a8a676a771f188da95af7bab7221bf8",
+          "behavior": "derive_production_context_read_paths receives only write_paths and returns only existing tracked effect blobs; both declared outputs were new and absent, so the derived read scope was empty"
+        },
+        "nonretained_live_observation": "The attempt-3 transient provider prompt showed context_slice.scope.read_paths=[], sources=[], expansion_handles=[], and provider_may_read_undeclared_paths=false; the transient prompt was not retained and is not part of the double-hashed raw inventory.",
+        "causal_limit": "The empty source context is a proven packet defect and a strong explanation for unusable proposals, but it does not prove why the independent reviewer rejected each proposal."
+      },
+      {
+        "id": "review_findings_max_items_zero",
+        "summary": "The Codex review schema required findings while forbidding every finding item, so review declines carried no actionable rationale into retries.",
+        "implementation_mechanism": {
+          "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/production_provider_cli.py:250",
+          "source_sha256": "0ac9d53abbc7114df0ab7234ee0f3f20a335b30e3c9f868583aa7e3e7a33545c",
+          "decision_enum": [
+            "approve",
+            "reject"
+          ],
+          "findings_required": true,
+          "findings_max_items": 0
+        },
+        "observed_result": {
+          "review_decline_count": 3,
+          "provider_receipt_reason_code": "review_declined",
+          "diagnostic_failure_kind": "implementation_failure",
+          "diagnostic_repeat_count": 3,
+          "changed_files": [],
+          "changed_symbols": [],
+          "validation_attempted": false,
+          "exact_review_rationale_available": false
+        },
+        "causal_limit": "The contract defect proves that retry feedback could not contain findings; it does not reveal the reviewers' unrecorded reasons."
+      },
+      {
+        "id": "runtime_task_cid_alias_mismatch",
+        "summary": "The materialized runtime PCCE-003 CID was not registered as an alias of the coordination task CID, while the leased-lane projection required exact CID equality.",
+        "identities": {
+          "coordination_task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+          "planned_execution_task_cid": "baguqeerakon4ykyeoqeowidcaz75wv6lmusfksscugrdnex3ii3k6gx3vyba",
+          "profile_g_task_cid": "baguqeerav7bl74fewqrkn35phwhrhspp7n2ezzzsefkgmxlqugr222xe27ta",
+          "runtime_task_cid": "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa",
+          "runtime_task_key": "task/v1/8a7f89c013e90769dac667ff1b9be2cb2eb112cbbef6e94f13d77716cd6a80ac"
+        },
+        "registered_aliases": [
+          "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+          "baguqeerakon4ykyeoqeowidcaz75wv6lmusfksscugrdnex3ii3k6gx3vyba",
+          "baguqeerav7bl74fewqrkn35phwhrhspp7n2ezzzsefkgmxlqugr222xe27ta"
+        ],
+        "runtime_task_cid_alias_registered": false,
+        "implementation_mechanism": {
+          "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/leased_lane.py:793",
+          "source_sha256": "c6e7c386f75bcc72e946addfd5e88ba34596e1626cfe5f0d7c37fdbddbec1ea3",
+          "behavior": "leased-lane task projection returns None when task_state.task_identities[task_id].canonical_task_cid differs from the expected coordination CID"
+        },
+        "observed_result": "The lane task state reached a three-attempt terminal backpressure condition while the outer coordination receipt remained cancelled/retryable with next_state=ready."
+      }
+    ],
+    "root_cause_status": "All three implementation defects are evidence-backed. The exact semantic reason for each Codex rejection is unknowable because the review schema retained no findings.",
+    "provider_route_reached": true,
+    "provider_child_execution_count": 6,
+    "provider_child_success_count": 6,
+    "provider_receipt_rejection_count": 3,
+    "repository_write_count": 0
+  },
+  "scheduler_snapshot": {
+    "source_manifest": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/bundle_lanes.json",
+    "source_manifest_byte_size": 3502487,
+    "source_manifest_sha256_pass_1": "bc601c34f9149d5fae416ae9980a376c9ce15ac464c668aa1eaefd3d13c1cf85",
+    "source_manifest_sha256_pass_2": "bc601c34f9149d5fae416ae9980a376c9ce15ac464c668aa1eaefd3d13c1cf85",
+    "source_manifest_hash_stable": true,
+    "schema": "ipfs_accelerate_py.agent_supervisor.dynamic_bundle_scheduler@1",
+    "generated_at": "2026-08-14T21:34:44.116528+00:00",
+    "cycle": 18,
+    "scheduler_state": "stopping",
+    "authoritative": true,
+    "scheduler_snapshot_id": "d456afb0b169ce4aaaab9f7b4abbe2399e0d2d63310dc9c963f71cc46899c119",
+    "scheduler_decision_snapshot_id": "d456afb0b169ce4aaaab9f7b4abbe2399e0d2d63310dc9c963f71cc46899c119",
+    "planned_count": 66,
+    "started_count": 0,
+    "completed_count": 0,
+    "running_count": 0,
+    "ready_count": 1,
+    "blocked_count": 0,
+    "active_worker_count": 0,
+    "active_worker_pids": [],
+    "capacity": 1,
+    "available_worker_capacity": 0,
+    "backpressure_reasons": [
+      "host_worker_capacity",
+      "cpu_proof_concurrency"
+    ],
+    "lane_count": 0,
+    "capture_semantics": "This is the final authoritative overwritten manifest. Live monitoring observed nondecreasing cycles before stop, but historical manifest bytes were not retained and are not claimed as raw evidence.",
+    "progress_accounting": {
+      "board_task_count_including_control": 67,
+      "control_tasks_completed": 1,
+      "product_tasks_planned": 66,
+      "product_tasks_completed": 0,
+      "product_progress_fraction": 0.0,
+      "overall_board_progress_fraction": 0.014925373134328358
+    }
+  },
+  "task_state_accounting": {
+    "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_task_state.json",
+    "source_sha256_pass_1": "c38266c92f01cb79a4ea1902073555e0bbc61e647ae6513d061f505192000b07",
+    "source_sha256_pass_2": "c38266c92f01cb79a4ea1902073555e0bbc61e647ae6513d061f505192000b07",
+    "heartbeat_at": "2026-08-14T21:33:24.587229+00:00",
+    "last_progress_at": "2026-08-14T21:32:54.383852+00:00",
+    "task_count": 67,
+    "completed_count": 1,
+    "completed_task_ids": [
+      "PCCE-000"
+    ],
+    "ready_count": 4,
+    "ready_task_ids": [
+      "PCCE-001",
+      "PCCE-002",
+      "PCCE-003",
+      "PCCE-004"
+    ],
+    "waiting_count": 62,
+    "blocked_count": 0,
+    "eligible_ready_count": 0,
+    "selectable_ready_count": 0,
+    "selectable_ready_task_ids": [],
+    "implementation_in_progress": false,
+    "active_task_id": "",
+    "selection_idle_reason": "all_selectable_ready_tasks_reached_max_task_attempts",
+    "PCCE-003": {
+      "status": "ready",
+      "runtime_task_cid": "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa",
+      "runtime_task_key": "task/v1/8a7f89c013e90769dac667ff1b9be2cb2eb112cbbef6e94f13d77716cd6a80ac",
+      "attempt_count": 3,
+      "last_implementation_returncode": 1,
+      "last_implementation_started_at": "2026-08-14T21:32:02.782221+00:00",
+      "last_implementation_finished_at": "2026-08-14T21:32:54.383852+00:00",
+      "last_implementation_commit": "",
+      "last_merge_commit": "",
+      "last_merge_error": "not_attempted"
+    },
+    "diagnostic_receipt": {
+      "receipt_id": "baguqeerac6yblgntt7wvrmgsezycmno33nrarex7vho2ymiafjqvr4p46uda",
+      "failure_id": "baguqeeraj2gkq3ehthieuier6v4ducxwjzewl3vurcfdvdv4g6ygpvozwbta",
+      "prior_decision_id": "baguqeeralmhc6nhgfhy2tahb5itkym7g5mv2brgsv7jcvpoml4y5x37hdxya",
+      "failure_kind": "implementation_failure",
+      "returncode": 1,
+      "changed_files": [],
+      "changed_symbols": [],
+      "validation_attempted": false,
+      "validation_reason": "not_run",
+      "repeat_count": 3
+    },
+    "attempt_limit_events": [
+      {
+        "sequence": 50,
+        "type": "task_attempt_limit_backpressure",
+        "timestamp": "2026-08-14T21:33:24.926577+00:00",
+        "reason": "max_task_attempts_reached",
+        "limited_task_ids": [
+          "PCCE-003"
+        ]
+      },
+      {
+        "sequence": 51,
+        "type": "daemon_pass",
+        "timestamp": "2026-08-14T21:33:24.963542+00:00",
+        "attempt_limited_task_ids": [
+          "PCCE-003"
+        ],
+        "ready_count": 4,
+        "selectable_ready_count": 0
+      },
+      {
+        "sequence": 52,
+        "type": "task_attempt_limit_backpressure",
+        "timestamp": "2026-08-14T21:33:55.526105+00:00",
+        "reason": "max_task_attempts_reached"
+      },
+      {
+        "sequence": 53,
+        "type": "task_attempt_limit_backpressure",
+        "timestamp": "2026-08-14T21:34:26.266965+00:00",
+        "reason": "max_task_attempts_reached"
+      }
+    ]
+  },
+  "internal_attempt_receipts": [
+    {
+      "task_id": "PCCE-003",
+      "runtime_task_cid": "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa",
+      "attempt": 1,
+      "started_event_sequence": 10,
+      "started_at": "2026-08-14T21:29:17.517665+00:00",
+      "finished_event_sequence": 16,
+      "finished_at": "2026-08-14T21:30:09.400415+00:00",
+      "returncode": 1,
+      "packet_id": "packet:production:PCCE-003:attempt-1",
+      "packet_cid": "baguqeerai5zv2up2jeejl6qownjkyoqw2faykvnl6ijdog57cnk2lhd4hbrq",
+      "packet_bytes": 2838,
+      "snapshot_id": "git-commit:5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29",
+      "provider_receipt_id": "baguqeera3r2dlh6usjecojkgza57ehtlebdkjm25bztfwuvyyjzu6xuqtb5a",
+      "provider_receipt_path": "scheduler-r5/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-1-provider-receipt.json",
+      "provider_receipt_byte_sha256": "7702172cedf71ef7c53e324c8cf7ea0309b5d8e8408a4881e372decb75013a0b",
+      "context_receipt_byte_sha256": "a15590768f53864fb83d8be4a36035ddfad2fa7009924e8abe57e2ee32794713",
+      "attempt_log_byte_sha256": "6b1516a63edabc610c003e2d3d644e0bbfb2d4becddeb280a052b469a8d41715",
+      "provider_receipt_status": "rejected",
+      "reason_code": "review_declined",
+      "review_presence": "review_declined",
+      "selected_proposal_digest": "",
+      "write_performed": false,
+      "completion_authoritative": false,
+      "proof_authoritative": false,
+      "validation_attempted": false,
+      "provider_calls": [
+        {
+          "role": "grok-implement",
+          "provider": "grok_cli",
+          "model": "grok-4.5",
+          "execution_request_id": "provider-request:b2104c92eab1bf31603829309c5101de351382b580e80922246bcda9fc78ca4b",
+          "child_exit_code": 0,
+          "status": "succeeded",
+          "prompt_tokens": 946,
+          "prompt_bytes": 3783,
+          "prompt_digest": "sha256:48ab2ecbc98a4f32bf2fa7df1525812cf155d5924f0247a9a17e0cd85a23468a",
+          "response_bytes": 9102,
+          "response_digest": "sha256:6903bb66c41744e75ff815a7cfd2265b795adf462ffedf0cd82a1dfee2607304"
+        },
+        {
+          "role": "codex-independent-review",
+          "provider": "codex_cli",
+          "model": "gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "execution_request_id": "provider-request:59d3b3e4916d6bbfc24714e9a033541727840417ea27c98c6f24bf45833c962d",
+          "child_exit_code": 0,
+          "execution_status": "succeeded",
+          "review_status": "declined",
+          "prompt_tokens": 3275,
+          "prompt_bytes": 13098,
+          "prompt_digest": "sha256:287b98b4ed30ee17946efa07e5027dbd1a9f26e17b93704c44a390b4973031b8",
+          "response_bytes": 1398,
+          "response_digest": "sha256:a5f4c4377a866f610f941961c9ab4873a6823d8af59dd22f3328d156ac823049"
+        }
+      ]
+    },
+    {
+      "task_id": "PCCE-003",
+      "runtime_task_cid": "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa",
+      "attempt": 2,
+      "started_event_sequence": 26,
+      "started_at": "2026-08-14T21:30:50.730918+00:00",
+      "finished_event_sequence": 32,
+      "finished_at": "2026-08-14T21:31:32.245380+00:00",
+      "returncode": 1,
+      "packet_id": "packet:production:PCCE-003:attempt-2",
+      "packet_cid": "baguqeeraixtzlq6ognlxfhoktemx2seitzj5xykv5sdqpizhcrehxcp2uqua",
+      "packet_bytes": 2838,
+      "snapshot_id": "git-commit:5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29",
+      "provider_receipt_id": "baguqeerayslp2jui32dgt3z4npaf3tghyh3vknwkarfltdqjetqtdz6oih4q",
+      "provider_receipt_path": "scheduler-r5/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-2-provider-receipt.json",
+      "provider_receipt_byte_sha256": "7e0277aeea1bff975c6df0c0d680dd9182a99391fb58bbd1171358cec8be897d",
+      "context_receipt_byte_sha256": "ffa7be8f79d539a6d5c7e478a592f694a54a38f5cd15053ef2b0b9d00111dedb",
+      "retry_capsule_byte_sha256": "16e2f5267aeabbcd8a004250dd2a8f424163e8be9aff6cce3736700604adc06a",
+      "attempt_log_byte_sha256": "40c8c093997a8625d59567f9e5feeba8e4701b970f4b27f433fbd29731c89e4a",
+      "provider_receipt_status": "rejected",
+      "reason_code": "review_declined",
+      "review_presence": "review_declined",
+      "selected_proposal_digest": "",
+      "write_performed": false,
+      "completion_authoritative": false,
+      "proof_authoritative": false,
+      "validation_attempted": false,
+      "provider_calls": [
+        {
+          "role": "grok-implement",
+          "provider": "grok_cli",
+          "model": "grok-4.5",
+          "execution_request_id": "provider-request:9dcb99287e351c3e395bbc7c51823fbbfaf1430f81fd5cbed7c5e5ead799033b",
+          "child_exit_code": 0,
+          "status": "succeeded",
+          "prompt_tokens": 946,
+          "prompt_bytes": 3783,
+          "prompt_digest": "sha256:8b879d8a7184610c54f82ceae0a18909f52b06eb4cf095b4ac6e480e530b4a2b",
+          "response_bytes": 8790,
+          "response_digest": "sha256:6987a194e70446130a55d80ebc6766da1ebd06415ece966ad2562aeee9138b41"
+        },
+        {
+          "role": "codex-independent-review",
+          "provider": "codex_cli",
+          "model": "gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "execution_request_id": "provider-request:74aa02010a4919db417a28c2466ca9857753df9c2852b624b9fb37a9f7509611",
+          "child_exit_code": 0,
+          "execution_status": "succeeded",
+          "review_status": "declined",
+          "prompt_tokens": 3197,
+          "prompt_bytes": 12786,
+          "prompt_digest": "sha256:b6d496947aed154b0db3d1348226466bdc47c63eea6b209ab9105ff1536a5a76",
+          "response_bytes": 1398,
+          "response_digest": "sha256:541f703ba6acd0bedae3275264701a77eda28c217b7efedd9aff8117521eb20c"
+        }
+      ]
+    },
+    {
+      "task_id": "PCCE-003",
+      "runtime_task_cid": "baguqeerarj7ytqat5edwtwwgm77rxg7czmxlcewlx33ostyt253rntlkqcwa",
+      "attempt": 3,
+      "started_event_sequence": 42,
+      "started_at": "2026-08-14T21:32:14.226718+00:00",
+      "finished_event_sequence": 48,
+      "finished_at": "2026-08-14T21:32:54.388415+00:00",
+      "returncode": 1,
+      "packet_id": "packet:production:PCCE-003:attempt-3",
+      "packet_cid": "baguqeerac3huovuds7gpac6vslcq7pn2uc5ybikykqgm23ut5zdwqptjgt6a",
+      "packet_bytes": 2838,
+      "snapshot_id": "git-commit:5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29",
+      "provider_receipt_id": "baguqeerahy6ladd4xtof36paestabv6522cgubawijhxy2ydrhihuvqvhpgq",
+      "provider_receipt_path": "scheduler-r5/pcce-a-inventory-accelerate/state/implementation_logs/pcce-003-attempt-3-provider-receipt.json",
+      "provider_receipt_byte_sha256": "cf4cbc2478e1a463a24b722685bdb37ad784f409e95b92823e9026afd6341817",
+      "context_receipt_byte_sha256": "caf1b013c7c6d7ef1ec45b371c43a2534495098f869c0ff597f741e5e6ec6817",
+      "retry_capsule_byte_sha256": "43b3b68423f0da2e0596064ed4139947158a87a2547300b5eaeef3b777f9aca3",
+      "attempt_log_byte_sha256": "e93d427fcea41fe169646f72ed45229a4fe115bcf2c0150363853035b06db57c",
+      "provider_receipt_status": "rejected",
+      "reason_code": "review_declined",
+      "review_presence": "review_declined",
+      "selected_proposal_digest": "",
+      "write_performed": false,
+      "completion_authoritative": false,
+      "proof_authoritative": false,
+      "validation_attempted": false,
+      "provider_calls": [
+        {
+          "role": "grok-implement",
+          "provider": "grok_cli",
+          "model": "grok-4.5",
+          "execution_request_id": "provider-request:f90427f81a93508a53050e207f5d7318a1c3e9add8112f857176fd47ccdedbfe",
+          "child_exit_code": 0,
+          "status": "succeeded",
+          "prompt_tokens": 946,
+          "prompt_bytes": 3783,
+          "prompt_digest": "sha256:30995b2f37ede6adbfcb7e6e2922fdf1d4f34dd280867417bd4953bf80017be9",
+          "response_bytes": 3380,
+          "response_digest": "sha256:b24c5a93d5fa27169f322664be78f6070d2cad96cadd7eb01ed574596eca23c7"
+        },
+        {
+          "role": "codex-independent-review",
+          "provider": "codex_cli",
+          "model": "gpt-5.6-terra",
+          "reasoning_effort": "medium",
+          "execution_request_id": "provider-request:e4bbe2d773b6a96bc0308b55eeaa37f8e39d142d0c97c854e8244aa8bd73ef35",
+          "child_exit_code": 0,
+          "execution_status": "succeeded",
+          "review_status": "declined",
+          "prompt_tokens": 1844,
+          "prompt_bytes": 7376,
+          "prompt_digest": "sha256:5a67fd2aaf0694599c12197a315bfb0374912c518cf8296efce0964be9d1875a",
+          "response_bytes": 1398,
+          "response_digest": "sha256:16e94390db9cadb47e1f13c1bf2fcede521ba22a571d336a03e1a58ede68acae"
+        }
+      ]
+    }
+  ],
+  "prompt_accounting": {
+    "provider_receipt_source": "Prompt token and byte counts are receipt-recorded, not reconstructed estimates.",
+    "attempt_count": 3,
+    "provider_child_call_count": 6,
+    "grok_implement": {
+      "call_count": 3,
+      "prompt_tokens": 2838,
+      "prompt_bytes": 11349,
+      "response_bytes": 21272
+    },
+    "codex_independent_review": {
+      "call_count": 3,
+      "prompt_tokens": 8316,
+      "prompt_bytes": 33260,
+      "response_bytes": 4194
+    },
+    "totals": {
+      "prompt_tokens": 11154,
+      "prompt_bytes": 44609,
+      "response_bytes": 25466
+    },
+    "response_token_counts_available": false,
+    "cost_fields_available": false,
+    "cost_claim_permitted": false
+  },
+  "provider_and_reviewer_boundary": {
+    "execution_policy": "grok-implement-codex-independent-review",
+    "execution_schema": "ipfs_accelerate_py/agent-supervisor/production-cli-provider-execution@2",
+    "provider_receipt_schema": "ipfs_accelerate_py/agent-supervisor/provider-execution-receipt@2",
+    "typed_child_provider_execution_count": 6,
+    "child_exit_zero_count": 6,
+    "grok_proposal_count": 3,
+    "codex_review_count": 3,
+    "codex_review_decline_count": 3,
+    "receipt_status_rejected_count": 3,
+    "selected_proposal_count": 0,
+    "admitted_proposal_count": 0,
+    "write_performed_count": 0,
+    "daemon_log_raw_model_command_invoked": false,
+    "daemon_log_raw_model_command_semantics": "The daemon itself did not invoke an untyped raw model command; typed child provider executions are separately evidenced by six child receipts.",
+    "replay_or_simulation_label_in_attempt_receipts": "absent; the production typed route and child request/response digests are preserved, but this manifest does not infer fields absent from those receipts",
+    "reviewer_could_approve_own_patch": false
+  },
+  "coordination_state": {
+    "database_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/coordination.duckdb",
+    "opened_read_only_for_capture": true,
+    "schema": "ipfs_accelerate_py.agent_supervisor.lease-coordination-duckdb@1",
+    "byte_sha256_pass_1": "1e4fe67dc89fafefcf62682b1f58581cc7daf9a38bb097b6d40b1b4ac6f3c7be",
+    "byte_sha256_pass_2": "1e4fe67dc89fafefcf62682b1f58581cc7daf9a38bb097b6d40b1b4ac6f3c7be",
+    "byte_size": 19935232,
+    "table_counts": {
+      "artifacts": 352,
+      "coordination_metadata": 1,
+      "distributed_dispatches": 0,
+      "distributed_inputs": 0,
+      "distributed_publications": 0,
+      "heartbeats": 8,
+      "leases": 1,
+      "receipts": 1,
+      "task_aliases": 198,
+      "task_dependencies": 117,
+      "task_dependency_repair_state": 66,
+      "task_dependency_repairs": 0,
+      "tasks": 66,
+      "token_history": 1,
+      "worker_capability_receipts": 0,
+      "worker_environment_receipts": 0
+    },
+    "artifact_kind_counts": {
+      "ClaimResolution": 12,
+      "DaemonHeartbeat": 8,
+      "TaskClaim": 1,
+      "TaskReceipt": 1,
+      "mcp++/profile-g/goal@1": 66,
+      "mcp++/profile-g/plan-branch@1": 66,
+      "mcp++/profile-g/plan-selection@1": 66,
+      "mcp++/profile-g/subgoal@1": 66,
+      "mcp++/profile-g/task@1": 66
+    },
+    "PCCE-003_task": {
+      "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+      "goal_cid": "baguqeeraxblpqkybprwr2rgvahh376w7r5ccv6y556nhdfer2q6tudvwtctq",
+      "subgoal_cid": "baguqeeradawr42li2jsz6d3ftfqcp4dmjxhnl2yqinrskenn7kzwrpo6ojma",
+      "registered_at_ms": 1786742915695,
+      "updated_at_ms": 1786742915695
+    },
+    "PCCE-003_aliases": [
+      "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+      "baguqeerakon4ykyeoqeowidcaz75wv6lmusfksscugrdnex3ii3k6gx3vyba",
+      "baguqeerav7bl74fewqrkn35phwhrhspp7n2ezzzsefkgmxlqugr222xe27ta"
+    ],
+    "lease": {
+      "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+      "claim_cid": "baguqeerad5va4m3du52f3hosovdra2dvsviqj7irs4jhhpkjtdthi3ty6vda",
+      "resolution_cid": "baguqeeraw7xmfonlwhkfhjqi5k7r3vonagdxj5q5i6h4cuje5qfa3fqzfihq",
+      "claimant_did": "did:web:ipfs-accelerate.local",
+      "logical_epoch": 1,
+      "fencing_token": 1,
+      "attempt": 1,
+      "state": "released",
+      "started_at_ms": 1786742925571,
+      "expires_at_ms": 1786743315718,
+      "release_reason": "receipt:cancelled:retryable",
+      "retry_not_before_ms": 0
+    },
+    "outer_receipt": {
+      "receipt_cid": "baguqeerac7ixxp2bddjydnburyrcxdojrj2vbhqinjxuxjzsptqxbulrykpq",
+      "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+      "claim_cid": "baguqeerad5va4m3du52f3hosovdra2dvsviqj7irs4jhhpkjtdthi3ty6vda",
+      "fencing_token": 1,
+      "status": "cancelled",
+      "failure_class": "retryable",
+      "next_state": "ready",
+      "output_cid": null,
+      "started_at_ms": 1786742925753,
+      "created_at_ms": 1786743283898,
+      "finished_at_ms": 1786743283898,
+      "product_completion_authority": false
+    },
+    "heartbeat_summary": {
+      "count": 8,
+      "minimum_observed_at_ms": 1786743251076,
+      "maximum_observed_at_ms": 1786743283856
+    }
+  },
+  "source_worktree_evidence": {
+    "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r5/pcce-a-inventory-accelerate/workspace_45e4b0b23007_c8100baacab9",
+    "workspace_head": "5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29",
+    "workspace_tree": "938ed3317f903056042a216206260929bc371223",
+    "workspace_clean": true,
+    "pool_state": "idle",
+    "pool_use_count": 3,
+    "pool_lease_pid": 0,
+    "declared_outputs": [
+      {
+        "path": "artifacts/proof_carrying_context_engine/inventory/ipfs_accelerate.json",
+        "present": false
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-003.json",
+        "present": false
+      }
+    ],
+    "superproject_branch_refs": [
+      {
+        "branch": "implementation/pcce-003-8a7f89c013e9-attempt-1-1786742937",
+        "commit": "5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29"
+      },
+      {
+        "branch": "implementation/pcce-003-8a7f89c013e9-attempt-2-1786743040",
+        "commit": "5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29"
+      },
+      {
+        "branch": "implementation/pcce-003-8a7f89c013e9-attempt-3-1786743122",
+        "commit": "5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29"
+      }
+    ],
+    "submodule_branch_ref_policy": {
+      "attempt_count": 3,
+      "repository_count": 4,
+      "branch_ref_count": 12,
+      "attempt_branch_stems": [
+        "implementation/pcce-003-8a7f89c013e9-attempt-1-1786742937",
+        "implementation/pcce-003-8a7f89c013e9-attempt-2-1786743040",
+        "implementation/pcce-003-8a7f89c013e9-attempt-3-1786743122"
+      ],
+      "submodule_suffixes": [
+        "-submodule-Mcp-Plus-Plus",
+        "-submodule-external/ipfs_accelerate",
+        "-submodule-external/ipfs_datasets",
+        "-submodule-external/ipfs_kit"
+      ],
+      "all_refs_point_to_baseline_gitlinks": true,
+      "baseline_gitlinks": {
+        "Mcp-Plus-Plus": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+        "external/ipfs_accelerate": "0837254e910221c17b3c8ac8a2a233658de976f1",
+        "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+      }
+    },
+    "source_repository_mutated": false,
+    "submodule_source_mutated": false,
+    "new_source_commit_count": 0
+  },
+  "raw_artifacts": {
+    "source_roots": {
+      "runtime": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1",
+      "control": "/home/barberb/lift_coding/.worktrees/proof-carrying-context-engine-control",
+      "source": "/home/barberb/lift_coding/.worktrees/proof-carrying-context-engine-control/external/ipfs_accelerate"
+    },
+    "hash_algorithm": "sha256",
+    "hash_passes": 2,
+    "file_count": 36,
+    "all_hashes_stable": true,
+    "files": [
+      {"key":"runtime/admit_and_launch.py","byte_size":102537,"sha256_pass_1":"12fd494926490e08cf3aa1367f6fedc5c158c8b93741cd39ea30621d7d13b583","sha256_pass_2":"12fd494926490e08cf3aa1367f6fedc5c158c8b93741cd39ea30621d7d13b583","stable":true},
+      {"key":"runtime/control-launch-receipt.json","byte_size":41483,"sha256_pass_1":"4fb398136180328e3a750a96a2343a249ffd1b2c6f849bbc4cd6e8d7d87b2573","sha256_pass_2":"4fb398136180328e3a750a96a2343a249ffd1b2c6f849bbc4cd6e8d7d87b2573","stable":true},
+      {"key":"runtime/scheduler-process-identity.json","byte_size":7219,"sha256_pass_1":"ab3b3c16f7085034e286956ea1915337391d13f260718b577400d14a25df44ae","sha256_pass_2":"ab3b3c16f7085034e286956ea1915337391d13f260718b577400d14a25df44ae","stable":true},
+      {"key":"runtime/scheduler-process-disposition.json","byte_size":831,"sha256_pass_1":"07e924d8d52ad442b5fea760cd7f4d2c0eaf547f02053a19478d95ba3de3b06c","sha256_pass_2":"07e924d8d52ad442b5fea760cd7f4d2c0eaf547f02053a19478d95ba3de3b06c","stable":true},
+      {"key":"runtime/bundle_lanes.json","byte_size":3502487,"sha256_pass_1":"bc601c34f9149d5fae416ae9980a376c9ce15ac464c668aa1eaefd3d13c1cf85","sha256_pass_2":"bc601c34f9149d5fae416ae9980a376c9ce15ac464c668aa1eaefd3d13c1cf85","stable":true},
+      {"key":"runtime/coordination.duckdb","byte_size":19935232,"sha256_pass_1":"1e4fe67dc89fafefcf62682b1f58581cc7daf9a38bb097b6d40b1b4ac6f3c7be","sha256_pass_2":"1e4fe67dc89fafefcf62682b1f58581cc7daf9a38bb097b6d40b1b4ac6f3c7be","stable":true},
+      {"key":"runtime/task_state.json","byte_size":63900,"sha256_pass_1":"c38266c92f01cb79a4ea1902073555e0bbc61e647ae6513d061f505192000b07","sha256_pass_2":"c38266c92f01cb79a4ea1902073555e0bbc61e647ae6513d061f505192000b07","stable":true},
+      {"key":"runtime/events.jsonl","byte_size":121911,"sha256_pass_1":"c154ce71ba62e782a096d3a87d288635b233c62009e17288adf506e65401267f","sha256_pass_2":"c154ce71ba62e782a096d3a87d288635b233c62009e17288adf506e65401267f","stable":true},
+      {"key":"runtime/events.manifest.json","byte_size":1153,"sha256_pass_1":"c38d395fb7966195cab6bc254942daa7dec1c51ba99efa3dc644ad0c3a022344","sha256_pass_2":"c38d395fb7966195cab6bc254942daa7dec1c51ba99efa3dc644ad0c3a022344","stable":true},
+      {"key":"runtime/taskboard_input.json","byte_size":685,"sha256_pass_1":"248feb5cec0b5d7efbf204aff9e11dce054f45b37280e27e03f787970df61876","sha256_pass_2":"248feb5cec0b5d7efbf204aff9e11dce054f45b37280e27e03f787970df61876","stable":true},
+      {"key":"runtime/runtime.todo.md","byte_size":262782,"sha256_pass_1":"35ce4ec412d008221fc8ff3e71afc472a6c5c7d28ea75b7c1f58091b9b795a7f","sha256_pass_2":"35ce4ec412d008221fc8ff3e71afc472a6c5c7d28ea75b7c1f58091b9b795a7f","stable":true},
+      {"key":"runtime/base-context-capsule.json","byte_size":6595,"sha256_pass_1":"ec8e88b1c7c348ba87014088107646d79d59ddecc2706bedcb96f142c52e3358","sha256_pass_2":"ec8e88b1c7c348ba87014088107646d79d59ddecc2706bedcb96f142c52e3358","stable":true},
+      {"key":"runtime/base-context-receipt.json","byte_size":2570,"sha256_pass_1":"a15590768f53864fb83d8be4a36035ddfad2fa7009924e8abe57e2ee32794713","sha256_pass_2":"a15590768f53864fb83d8be4a36035ddfad2fa7009924e8abe57e2ee32794713","stable":true},
+      {"key":"runtime/attempt-1-context-receipt.json","byte_size":2570,"sha256_pass_1":"a15590768f53864fb83d8be4a36035ddfad2fa7009924e8abe57e2ee32794713","sha256_pass_2":"a15590768f53864fb83d8be4a36035ddfad2fa7009924e8abe57e2ee32794713","stable":true},
+      {"key":"runtime/attempt-1-provider-receipt.json","byte_size":4741,"sha256_pass_1":"7702172cedf71ef7c53e324c8cf7ea0309b5d8e8408a4881e372decb75013a0b","sha256_pass_2":"7702172cedf71ef7c53e324c8cf7ea0309b5d8e8408a4881e372decb75013a0b","stable":true},
+      {"key":"runtime/attempt-1.log","byte_size":599,"sha256_pass_1":"6b1516a63edabc610c003e2d3d644e0bbfb2d4becddeb280a052b469a8d41715","sha256_pass_2":"6b1516a63edabc610c003e2d3d644e0bbfb2d4becddeb280a052b469a8d41715","stable":true},
+      {"key":"runtime/attempt-2-context-receipt.json","byte_size":2831,"sha256_pass_1":"ffa7be8f79d539a6d5c7e478a592f694a54a38f5cd15053ef2b0b9d00111dedb","sha256_pass_2":"ffa7be8f79d539a6d5c7e478a592f694a54a38f5cd15053ef2b0b9d00111dedb","stable":true},
+      {"key":"runtime/attempt-2-provider-receipt.json","byte_size":4741,"sha256_pass_1":"7e0277aeea1bff975c6df0c0d680dd9182a99391fb58bbd1171358cec8be897d","sha256_pass_2":"7e0277aeea1bff975c6df0c0d680dd9182a99391fb58bbd1171358cec8be897d","stable":true},
+      {"key":"runtime/attempt-2-retry-capsule.json","byte_size":3346,"sha256_pass_1":"16e2f5267aeabbcd8a004250dd2a8f424163e8be9aff6cce3736700604adc06a","sha256_pass_2":"16e2f5267aeabbcd8a004250dd2a8f424163e8be9aff6cce3736700604adc06a","stable":true},
+      {"key":"runtime/attempt-2.log","byte_size":599,"sha256_pass_1":"40c8c093997a8625d59567f9e5feeba8e4701b970f4b27f433fbd29731c89e4a","sha256_pass_2":"40c8c093997a8625d59567f9e5feeba8e4701b970f4b27f433fbd29731c89e4a","stable":true},
+      {"key":"runtime/attempt-3-context-receipt.json","byte_size":2831,"sha256_pass_1":"caf1b013c7c6d7ef1ec45b371c43a2534495098f869c0ff597f741e5e6ec6817","sha256_pass_2":"caf1b013c7c6d7ef1ec45b371c43a2534495098f869c0ff597f741e5e6ec6817","stable":true},
+      {"key":"runtime/attempt-3-provider-receipt.json","byte_size":4739,"sha256_pass_1":"cf4cbc2478e1a463a24b722685bdb37ad784f409e95b92823e9026afd6341817","sha256_pass_2":"cf4cbc2478e1a463a24b722685bdb37ad784f409e95b92823e9026afd6341817","stable":true},
+      {"key":"runtime/attempt-3-retry-capsule.json","byte_size":3346,"sha256_pass_1":"43b3b68423f0da2e0596064ed4139947158a87a2547300b5eaeef3b777f9aca3","sha256_pass_2":"43b3b68423f0da2e0596064ed4139947158a87a2547300b5eaeef3b777f9aca3","stable":true},
+      {"key":"runtime/attempt-3.log","byte_size":599,"sha256_pass_1":"e93d427fcea41fe169646f72ed45229a4fe115bcf2c0150363853035b06db57c","sha256_pass_2":"e93d427fcea41fe169646f72ed45229a4fe115bcf2c0150363853035b06db57c","stable":true},
+      {"key":"runtime/diagnostic-receipt.json","byte_size":925,"sha256_pass_1":"bab6c5e6024a82e3ab2440ec2f61c6dca068c6db752cfa24c2711f334f4a4aa4","sha256_pass_2":"bab6c5e6024a82e3ab2440ec2f61c6dca068c6db752cfa24c2711f334f4a4aa4","stable":true},
+      {"key":"runtime/diagnostic-state.json","byte_size":202,"sha256_pass_1":"a970a132589ad1ea2f23e7ef8884c8aad054538afba2d5bbde87d60cd7c449f0","sha256_pass_2":"a970a132589ad1ea2f23e7ef8884c8aad054538afba2d5bbde87d60cd7c449f0","stable":true},
+      {"key":"runtime/pool-state.json","byte_size":1292,"sha256_pass_1":"a2368e5c542e1590a0917b130697ece2e8cd4275d3d14119ab7e194929da9c42","sha256_pass_2":"a2368e5c542e1590a0917b130697ece2e8cd4275d3d14119ab7e194929da9c42","stable":true},
+      {"key":"runtime/lane-outer.log","byte_size":0,"sha256_pass_1":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","sha256_pass_2":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","stable":true},
+      {"key":"control/PCCE-000-r5.json","byte_size":11404,"sha256_pass_1":"1c8865b30e79d351d565d6552b793ea802813428d29d8af3cfd8e3ab2d6a8389","sha256_pass_2":"1c8865b30e79d351d565d6552b793ea802813428d29d8af3cfd8e3ab2d6a8389","stable":true},
+      {"key":"control/task_board.json","byte_size":371001,"sha256_pass_1":"fbfc7743978cee48a45c3d4e5361cf72dae085ff393ca8cad0f57d00952122b2","sha256_pass_2":"fbfc7743978cee48a45c3d4e5361cf72dae085ff393ca8cad0f57d00952122b2","stable":true},
+      {"key":"control/task_dependency_graph.json","byte_size":10015,"sha256_pass_1":"2144ea7e9cfed026500065fe3ab20b22f577786bbc54da4c70362e9213c16c2f","sha256_pass_2":"2144ea7e9cfed026500065fe3ab20b22f577786bbc54da4c70362e9213c16c2f","stable":true},
+      {"key":"control/bundle_index.json","byte_size":568545,"sha256_pass_1":"179164ad54f9bb2e0ca6ef014cbf68f138658c2ad815aa707d8da5c53240746b","sha256_pass_2":"179164ad54f9bb2e0ca6ef014cbf68f138658c2ad815aa707d8da5c53240746b","stable":true},
+      {"key":"source/production_context_slice.py","byte_size":72202,"sha256_pass_1":"56cab858bfce64c928c4884e6bb383bfc0d93187d1559fe3fbec9d4c6c23c2ee","sha256_pass_2":"56cab858bfce64c928c4884e6bb383bfc0d93187d1559fe3fbec9d4c6c23c2ee","stable":true},
+      {"key":"source/implementation_daemon.py","byte_size":2082994,"sha256_pass_1":"fe577ad6abecd444150a2aa510aa4ea95a8a676a771f188da95af7bab7221bf8","sha256_pass_2":"fe577ad6abecd444150a2aa510aa4ea95a8a676a771f188da95af7bab7221bf8","stable":true},
+      {"key":"source/production_provider_cli.py","byte_size":38982,"sha256_pass_1":"0ac9d53abbc7114df0ab7234ee0f3f20a335b30e3c9f868583aa7e3e7a33545c","sha256_pass_2":"0ac9d53abbc7114df0ab7234ee0f3f20a335b30e3c9f868583aa7e3e7a33545c","stable":true},
+      {"key":"source/leased_lane.py","byte_size":77019,"sha256_pass_1":"c6e7c386f75bcc72e946addfd5e88ba34596e1626cfe5f0d7c37fdbddbec1ea3","sha256_pass_2":"c6e7c386f75bcc72e946addfd5e88ba34596e1626cfe5f0d7c37fdbddbec1ea3","stable":true}
+    ]
+  },
+  "partial_effects": {
+    "recorded": true,
+    "state_and_log_artifacts_created": true,
+    "registered_task_count": 66,
+    "registered_dependency_count": 117,
+    "registered_alias_count": 198,
+    "coordination_artifact_count": 352,
+    "heartbeat_count": 8,
+    "task_claim_count": 1,
+    "task_receipt_count": 1,
+    "released_lease_count": 1,
+    "cancelled_outer_receipt_count": 1,
+    "internal_attempt_count": 3,
+    "provider_child_execution_count": 6,
+    "provider_receipt_count": 3,
+    "typed_context_packet_count": 3,
+    "implementation_workspace_count": 1,
+    "pooled_idle_workspace_count": 1,
+    "baseline_only_superproject_branch_ref_count": 3,
+    "baseline_only_submodule_branch_ref_count": 12,
+    "partial_source_effect_count": 0,
+    "source_repository_mutated": false,
+    "submodule_source_mutated": false,
+    "new_source_commit_created": false,
+    "patch_generated": false,
+    "validation_run": false,
+    "merge_attempted": false,
+    "product_task_completed": false,
+    "accepted_output_artifact_count": 0
+  },
+  "stop_semantics": {
+    "monitor_mode_before_stop": "read-only; no state write, lease operation, Git mutation, or process signal",
+    "stop_authority": "parent control operator",
+    "identity_validation": {
+      "launch_receipt_content_id": "sha256:785d28c1cc98c971a1a576608abc2220590c912822e45f96b3b24a8df140997f",
+      "process_identity_content_id": "sha256:476aafae18ede8a3c0f79b42469d1ad86a53a24c92e8d4b8943ecaf1514be4df",
+      "pid": 217358,
+      "boot_id": "a847e245-d5d5-4e35-856a-ba1a9124b7fa",
+      "start_time_ticks": 10727759,
+      "argv_canonical_json_sha256": "sha256:bd6cd2fbe1442b97ea58ee1337b876fb2e3713cc43a9ae213f28ba714b4b400d",
+      "matched_before_signal": true
+    },
+    "signal": "SIGTERM",
+    "signal_target_count": 1,
+    "signal_target_pid": 217358,
+    "other_processes_signalled": false,
+    "helper_exit_code": 0,
+    "scheduler_exit_code": 0,
+    "observer_outcome": "normal_waitpid_exit",
+    "process_disposition_content_id": "sha256:4d2cfd0d42e926e3ec6c7c381fc0095d2ca5676db8dd8db150a85956ea190d08",
+    "terminal_observation": {
+      "checked_at": "2026-08-14T21:45:04Z",
+      "scheduler_pid_live": false,
+      "observer_pid_live": false,
+      "scheduler_state": "stopping",
+      "active_worker_count": 0,
+      "active_worker_pids": []
+    },
+    "scheduler_restart_performed": false,
+    "scheduler_resume_performed": false,
+    "PCCE-001_started": false,
+    "PCCE-002_started": false,
+    "PCCE-004_started": false,
+    "PCCE-003_product_completed": false
+  },
+  "prohibited_claims": [
+    "Scheduler exit code zero is not board or product success.",
+    "The cancelled/retryable outer receipt is not a successful task receipt or product evidence.",
+    "PCCE-003 is not completed; PCCE-000 remains the only completed control task, so product progress is 0/66 and total board progress is 1/67.",
+    "Six child process successes do not make any of the three rejected provider receipts successful or admitted.",
+    "No proposal was selected, no patch was written, no validation ran, no merge was attempted, and no product output exists.",
+    "The empty source context does not prove the independent reviewer's semantic reason for rejecting a proposal.",
+    "No exact review findings may be reconstructed because the review schema set findings.maxItems=0.",
+    "Context-capsule token counts are not repository source-context counts; the durable bundle and source evidence record zero source context paths.",
+    "Operator admission capacity is not provider-reported account quota or billing capacity.",
+    "No inference-cost or total-cost claim is permitted because response token counts, prices, and cost fields are absent.",
+    "No context-reduction, cost-reduction, quality, security, qualification, or production-readiness result follows from R5.",
+    "No R5 state, claim, lease, fence, receipt, packet, branch, workspace, or provider response may be reused as accepted production evidence."
+  ],
+  "retention": {
+    "disposition": "preserve_read_only",
+    "source_state_file_content_mutated_during_capture": false,
+    "source_log_file_content_mutated_during_capture": false,
+    "source_board_projection_content_mutated": false,
+    "source_frozen_receipt_content_mutated": false,
+    "source_control_worktree_mutated": false,
+    "source_submodules_mutated": false,
+    "forensic_artifact_created_in_isolated_worktree": true,
+    "forensic_worktree_base_commit": "5ca56cd4ea9dcabe87c01a5fb8115eb930e5ac29",
+    "resume_scheduler_r5": false,
+    "reuse_scheduler_r5_state": false,
+    "reuse_scheduler_r5_worktrees": false,
+    "reuse_scheduler_r5_logs": false,
+    "reuse_claims_leases_fences_or_receipts": false,
+    "reuse_context_or_provider_receipts_as_product_evidence": false,
+    "replacement_run_policy": "Repair all three blockers, add focused regression tests, create a distinct generation with fresh state/worktree/log/claim/lease/fence/receipt/review-authority/launch identities, and re-admit through current control evidence.",
+    "raw_evidence_policy": "Preserve scheduler-r5, logs-r5, worktrees-r5, coordination state, three internal attempts, and this incident manifest read-only; do not repair, compact, replay, resume, or delete them in place.",
+    "allowed_use": "Immutable evidence of the R5 control-plane infrastructure failure, bounded provider activity, and zero source effects only."
+  }
+}

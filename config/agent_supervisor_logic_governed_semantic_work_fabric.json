@@ -1,0 +1,179 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic_governed_semantic_work_fabric.scheduler_config@1",
+  "taskboard_path": "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+  "objectives_path": "docs/architecture/logic_governed_semantic_work_fabric.objectives.md",
+  "plan_path": "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+  "validator_path": "scripts/validate_logic_governed_semantic_work_fabric_board.py",
+  "task_prefix": "LGSWF-",
+  "goal_prefix": "LGSWF-G",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "merge_target_branch": "codex/logic-governed-semantic-work-fabric",
+  "control_revision": {
+    "active_revision": "r0",
+    "base_plan_revision": "urn:lgswf:plan-revision:r000",
+    "bootstrap_receipt_path": "artifacts/logic_governed_semantic_work_fabric/control/board-bootstrap.json",
+    "historical_receipt_rewrite_allowed": false,
+    "status": "bounded_bootstrap_execution",
+    "product_fabric_complete": false,
+    "mutation_admission_gate": "LGSWF-009"
+  },
+  "source_binding": {
+    "accelerator_required_ancestor": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+    "accelerator_required_branch": "codex/logic-governed-semantic-work-fabric",
+    "bootstrap_task_source": "legacy-markdown-pending-plan-revision-r1",
+    "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
+    "ipfs_accelerate_planning_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+    "ipfs_datasets_submodule_path": "external/ipfs_datasets",
+    "ipfs_datasets_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "require_initialized_gitlinks": true,
+    "require_superproject_gitlink_equals_nested_head": true,
+    "require_clean_nested_worktree_at_task_start": true,
+    "record_recursive_repository_forest_at_launch": true,
+    "changed_revision_requires_fresh_inventory_roots_and_plan": true,
+    "planning_revision_is_runtime_completion_evidence": false
+  },
+  "repositories": {
+    "accelerate": {
+      "path": "external/ipfs_accelerate",
+      "initial_commit": "ea11293bb996f052d620eae989f5377a956764b1"
+    },
+    "datasets": {
+      "path": "external/ipfs_datasets",
+      "initial_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    }
+  },
+  "initial_projection": {
+    "task_count": 63,
+    "completed_task_ids": [
+      "LGSWF-000"
+    ],
+    "ready_task_ids": [
+      "LGSWF-001",
+      "LGSWF-002",
+      "LGSWF-003",
+      "LGSWF-004"
+    ],
+    "blocked_task_ids": [],
+    "terminal_task_id": "LGSWF-145",
+    "goal_count": 16,
+    "root_goal_id": "LGSWF-G000"
+  },
+  "max_lanes": 2,
+  "strict_task_sharding": false,
+  "exit_when_all_tracks_terminal": true,
+  "objective_refill_enabled": false,
+  "codebase_refill_enabled": false,
+  "poll_interval_seconds": 10,
+  "daemon_interval_seconds": 20,
+  "check_interval_seconds": 20,
+  "stale_seconds": 900,
+  "watchdog_startup_grace_seconds": 600,
+  "max_restarts": 4,
+  "max_task_attempts": 3,
+  "implementation_retry_budget": 2,
+  "validation_retry_budget": 2,
+  "merge_retry_budget": 2,
+  "implementation_timeout_seconds": 5400,
+  "implementation_max_timeout_seconds": 10800,
+  "implementation_log_stall_seconds": 1200,
+  "worktree_submodule_paths": [
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets"
+  ],
+  "protected_paths": [
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.objectives.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "config/agent_supervisor_logic_governed_semantic_work_fabric.json",
+    "scripts/generate_logic_governed_semantic_work_fabric_board.py",
+    "scripts/validate_logic_governed_semantic_work_fabric_board.py",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/revision-comparison.json",
+    "artifacts/logic_governed_semantic_work_fabric/baseline/semantic-scan-bootstrap-failures.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/board-bootstrap.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/incidents/bootstrap-launch-r0-provider-contract.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/incidents/bootstrap-launch-r1-module-path.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/task-board.json",
+    "artifacts/logic_governed_semantic_work_fabric/control/task-dependency-graph.json"
+  ],
+  "runtime_paths": {
+    "root": "data/agent_supervisor/logic_governed_semantic_work_fabric_v0_1",
+    "state": "data/agent_supervisor/logic_governed_semantic_work_fabric_v0_1/state",
+    "worktrees": "data/agent_supervisor/logic_governed_semantic_work_fabric_v0_1/worktrees",
+    "merge_queue": "data/agent_supervisor/logic_governed_semantic_work_fabric_v0_1/merge-queue",
+    "logs": "data/agent_supervisor/logic_governed_semantic_work_fabric_v0_1/logs",
+    "evidence": "data/agent_supervisor/logic_governed_semantic_work_fabric_v0_1/evidence",
+    "generated_runtime_artifacts_are_completion_authority": false
+  },
+  "lanes": [
+    {
+      "index": 0,
+      "name": "lgswf-lane-0",
+      "strict_shard_remainder": 0,
+      "initial_task_ids": [
+        "LGSWF-001",
+        "LGSWF-003"
+      ],
+      "initial_focus": "revision-and-accelerator-inventory"
+    },
+    {
+      "index": 1,
+      "name": "lgswf-lane-1",
+      "strict_shard_remainder": 1,
+      "initial_task_ids": [
+        "LGSWF-002",
+        "LGSWF-004"
+      ],
+      "initial_focus": "datasets-and-package-dag-inventory"
+    }
+  ],
+  "provider": {
+    "primary_provider_id": "grok_cli",
+    "primary_model_id": "grok-4.5",
+    "fallback_provider_id": "codex",
+    "fallback_model_id": "gpt-5.6-terra",
+    "fallback_trigger": "primary_quota_exhausted",
+    "fallback_reasoning_effort": "medium",
+    "max_concurrency": 2
+  },
+  "waves": [
+    {
+      "id": "A0",
+      "task_ids": [
+        "LGSWF-000"
+      ]
+    },
+    {
+      "id": "A1",
+      "task_ids": [
+        "LGSWF-001",
+        "LGSWF-002",
+        "LGSWF-003",
+        "LGSWF-004"
+      ]
+    },
+    {
+      "id": "A2",
+      "task_ids": [
+        "LGSWF-005"
+      ]
+    },
+    {
+      "id": "A3",
+      "task_ids": [
+        "LGSWF-006",
+        "LGSWF-007",
+        "LGSWF-008"
+      ]
+    },
+    {
+      "id": "A4",
+      "task_ids": [
+        "LGSWF-009"
+      ]
+    },
+    {
+      "id": "B-O",
+      "policy": "derive only from accepted task dependency graph and active immutable plan revision"
+    }
+  ]
+}

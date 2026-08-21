@@ -1,0 +1,280 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-045",
+  "title": "Qualify Epic E safe parallel-frontier planning",
+  "track": "lgswf-g500-epic-gate",
+  "priority": "P0",
+  "attempt": 1,
+  "stage": "implementation",
+  "objective_id": "LGSWF-045",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G500",
+  "owning_repository": "cross-repository",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-042"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g500/lgswf-045",
+  "observed_at": "2026-08-17T14:30:00Z",
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+    "external/ipfs_accelerate at ea11293bb996f052d620eae989f5377a956764b1",
+    "external/ipfs_datasets at ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-b.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-c.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py"
+  ],
+  "write_scope": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-045.json"
+  ],
+  "changed_paths": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-045.json"
+  ],
+  "expected_outputs": [
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-045.json"
+  ],
+  "outputs_present": {
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-045.json": true
+  },
+  "objective_summary": "Qualified Epic E (LGSWF-G500) safe parallel-frontier planning by verifying ParallelFrontier@1 enforces every readiness condition fail-closed and selects deterministic resource-feasible conflict-free antichains, FrontierPolicy@1 scores with policy-versioned scaled-integer terms while hard-bounding fairness and applying independent congestion adjustments, and AdaptiveFrontier@1 split/coalesce/rewire preserve path and acceptance coverage without mutating started history. Recorded that identical snapshots and policies yield identical frontiers, unsafe work is rejected with typed readiness and selection reasons, and speculative adaptive work remains evidence-only and non-authoritative. Gate pass unblocks resource-aware scheduling (LGSWF-050) while continuous multi-supervisor operation remains no-go.",
+  "findings_digest": {
+    "epic_id": "LGSWF-G500",
+    "epic_label": "E — safe parallel frontier",
+    "epic_e_disposition": "pass",
+    "producing_tasks": [
+      "LGSWF-040",
+      "LGSWF-041",
+      "LGSWF-042"
+    ],
+    "interfaces": [
+      "ParallelFrontier@1",
+      "FrontierPolicy@1",
+      "AdaptiveFrontier@1",
+      "PlanRevisionContracts@1"
+    ],
+    "identical_snapshots_yield_identical_frontiers": true,
+    "unsafe_work_rejected_with_typed_reasons": {
+      "required_readiness_conditions": [
+        "active_plan",
+        "legal_lifecycle",
+        "predecessors",
+        "semantic_binding",
+        "capsule_or_source",
+        "contracts_obligations",
+        "scope",
+        "conflicts",
+        "resources",
+        "provider_capacity",
+        "completion_policy",
+        "quarantine",
+        "supersession",
+        "block",
+        "review",
+        "model_authority"
+      ],
+      "selection_rejection_reasons": [
+        "not_ready",
+        "conflicts_with_selected",
+        "resource_infeasible",
+        "dominated_by_search",
+        "model_proposal_non_authoritative",
+        "outside_ready_set"
+      ],
+      "fail_closed": true
+    },
+    "fairness_bounded": {
+      "max_age_epochs": 100,
+      "max_fairness_boost": 1000000,
+      "cannot_dominate_critical_path": true,
+      "score_scale": 1000000
+    },
+    "split_coalesce_preserves_completion_coverage": {
+      "split_retains_paths_and_acceptance": true,
+      "coalesce_retains_union_paths_and_acceptance": true,
+      "started_history_cannot_shrink": true,
+      "in_place_started_history_mutation": false,
+      "speculative_authoritative": false
+    },
+    "conflict_free_resource_feasible_antichain": {
+      "dependency_and_conflict_separate": true,
+      "antichain_rank": [
+        "width",
+        "integer_score_total",
+        "stable_task_identity"
+      ],
+      "width_outranks_single_high_score_under_conflict": true
+    },
+    "congestion_dimensions_independent": {
+      "provider_pressure_cannot_stop_cpu_analysis": true,
+      "merge_pressure_defers_mutation_permits_read_only": true,
+      "proof_pressure_cannot_stop_unrelated_analysis": true
+    },
+    "model_proposals_authoritative": false,
+    "no_binary_floats": {
+      "floats_rejected_from_identity": true,
+      "score_scale": 1000000
+    },
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "checked_accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "checked_datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "checked_datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_canonical_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "continuous_multi_supervisor_operation": "no-go",
+    "downstream_unlock": [
+      "LGSWF-050"
+    ]
+  },
+  "interfaces_referenced": [
+    "authority-map@1",
+    "ParallelFrontier@1",
+    "FrontierPolicy@1",
+    "AdaptiveFrontier@1",
+    "PlanRevisionContracts@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "task-identity@1",
+    "TaskConflictGraph",
+    "TaskSchedulingMetrics"
+  ],
+  "symbols_changed": [
+    "epic-e gate disposition",
+    "LGSWF-045 qualification receipt"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "epic-e gate object must be strict JSON; authoritative sealed validation PATH/HOME is supervisor-owned"
+      },
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "required": false,
+        "status": "supporting_evidence_for_authoritative_runner",
+        "producer_note": "LGSWF-040 hermetic ParallelFrontier@1 readiness and antichain selection suite; not the sole admission command for LGSWF-045"
+      },
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "required": false,
+        "status": "supporting_evidence_for_authoritative_runner",
+        "producer_note": "LGSWF-041 hermetic FrontierPolicy@1 fairness, congestion, and scoring suite; not the sole admission command for LGSWF-045"
+      },
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+        "required": false,
+        "status": "supporting_evidence_for_authoritative_runner",
+        "producer_note": "LGSWF-042 hermetic AdaptiveFrontier@1 split/coalesce coverage and lifecycle suite; not the sole admission command for LGSWF-045"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic E qualification records verified empty formal proof selection; contract and hermetic tests plus current producing-task receipts are the selected evidence surface",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "epic_gate_qualification_only",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "composite_root": "urn:lgswf:canonical-roots:r1@datasets-2b3d892d+accelerator-ea6869d7",
+    "canonical_refresh_required": false,
+    "reason": "LGSWF-045 mutates only gate and receipt artifacts; no product source or datasets semantic truth mutation occurs"
+  },
+  "merge": {
+    "mutation_class": "artifact_paths_only",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium epic-gate class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + epic-d pass + LGSWF-040/041/042 receipts",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false
+  },
+  "acceptance_criteria": {
+    "identical_snapshots_yield_identical_frontiers": true,
+    "unsafe_work_rejected_with_typed_reasons": true,
+    "fairness_bounded": true,
+    "split_coalesce_preserves_completion_coverage": true,
+    "conflict_free_resource_feasible_antichain": true,
+    "congestion_dimensions_independent": true,
+    "producing_tasks_evidenced": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+    "resource_aware_scheduling_unblocked": "LGSWF-050"
+  },
+  "before_after": {
+    "before": {
+      "epic_e": "unqualified; LGSWF-040/041/042 outputs present as producing evidence only",
+      "resource_aware_scheduling_admission": "blocked on LGSWF-045",
+      "parallel_frontier_gate": null
+    },
+    "after": {
+      "epic_e": "pass recorded at artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+      "resource_aware_scheduling_admission": "unblocked for dependency-ready LGSWF-050",
+      "parallel_frontier_gate": "urn:lgswf:gate:epic-e@lgswf-045-pass",
+      "continuous_multi_supervisor_operation": "no-go"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "worker_completion_sufficient": false,
+    "task_status_sufficient": false,
+    "requires_declared_outputs": true,
+    "requires_current_validation": true,
+    "requires_merge_and_canonical_refresh_on_mutation": true,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only",
+    "producer_disposition": "implementation_complete_pending_supervisor_acceptance"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-045",
+  "result_identity": "urn:lgswf:receipt:LGSWF-045@epic-e-pass"
+}

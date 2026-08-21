@@ -1,0 +1,323 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.epic-gate@1",
+  "epic_id": "LGSWF-G300",
+  "epic_label": "C — semantic goal and task bindings",
+  "gate_task_id": "LGSWF-024",
+  "observed_at": "2026-08-17T20:00:00Z",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g300/lgswf-024",
+  "disposition": "pass",
+  "continuous_multi_supervisor_operation": "no-go",
+  "bounded_bootstrap_complete": true,
+  "mutation_admission": {
+    "status": "open",
+    "gate": "LGSWF-024",
+    "requires": [
+      "SemanticWorkBinding@1 reference-only contracts without capsule body embeddings",
+      "stale bindings, tests, proofs, and roots fail closed",
+      "raw-source fallback named as producer-bound identity and governed by datasets authority",
+      "fabric goal completion over observable state, semantic properties, current tests/proofs, accepted children, resolved counterexamples/gaps, review, tree, and root",
+      "ProvisionalSemanticBinding@1 attempt-bound noncanonical roots for worktree mutations",
+      "task lifecycle gates distinguishing execution, patch validation, proof verification, merge, canonical semantic refresh, and independent fenced supervisor acceptance",
+      "completion never authorized by worker completion or task status alone"
+    ],
+    "prior_status": "Epic B open for dependency-ready work; Epic C unblocks composite work and conflict graphs"
+  },
+  "predicates": {
+    "semantic_work_binding_interface_landed": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json"
+      ],
+      "task": "LGSWF-020",
+      "interface": "SemanticWorkBinding@1",
+      "bootstrap_fallback": "SemanticWorkBinding@1-or-bootstrap-fallback",
+      "contract_version": 1,
+      "subject_kinds": [
+        "goal",
+        "subgoal",
+        "task"
+      ],
+      "required_reference_fields": [
+        "accepted_plan",
+        "tree_root",
+        "target_symbols_artifacts",
+        "capsule_source_environment",
+        "conditions",
+        "effects_scopes",
+        "tests",
+        "proof_obligations",
+        "assumptions",
+        "limitations",
+        "counterexamples",
+        "invalidation",
+        "completion_rule",
+        "authority",
+        "review_requirements"
+      ]
+    },
+    "no_capsule_content_copied": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_provisional_acceptance.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-021.json"
+      ],
+      "reference_only": true,
+      "capsule_bodies_remain_in_datasets": true,
+      "prohibited_embeddings": [
+        "capsule bodies",
+        "duplicated datasets semantic records",
+        "raw source",
+        "prompts",
+        "credentials",
+        "model replies",
+        "mutable local paths",
+        "provider payloads"
+      ],
+      "rejected_payload_keys": [
+        "body",
+        "capsule_body",
+        "capsule_bodies",
+        "raw_source",
+        "source_body",
+        "source_text",
+        "semantic_record",
+        "semantic_records",
+        "prompt",
+        "provider_payload",
+        "credentials"
+      ],
+      "hermetic_proofs": [
+        "test_prohibited_capsule_body_is_rejected",
+        "test_prohibited_raw_source_and_prompt_fields_are_rejected"
+      ],
+      "task": "LGSWF-020"
+    },
+    "stale_bindings_fail_closed": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_provisional_acceptance.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-021.json"
+      ],
+      "failure_modes": [
+        "stale tests or proofs reject fabric goal completion",
+        "tree mismatch against binding rejects completion",
+        "semantic root mismatch against binding rejects completion",
+        "stale validation or proof gates block task acceptance",
+        "forged provisional root identity fails closed",
+        "claimed binding_cid mismatch fails closed"
+      ],
+      "hermetic_proofs": [
+        "test_stale_tests_or_proofs_fail_closed",
+        "test_tree_and_root_must_match_binding",
+        "test_stale_validation_or_proof_blocks_acceptance",
+        "test_forged_provisional_root_fails_closed"
+      ],
+      "exceptional_condition": "stale-root-fails-closed",
+      "task": "LGSWF-020"
+    },
+    "raw_source_fallback_datasets_governed": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json",
+        "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md"
+      ],
+      "binding_modes": [
+        "exact-symbol-scope",
+        "artifact-identity",
+        "bootstrap-raw-source"
+      ],
+      "source_fallback_policies": [
+        "producer-bound-raw-source-when-capsule-stale",
+        "not-required:artifact-only",
+        "not-required:artifact-gate"
+      ],
+      "raw_source_never_embedded_in_binding": true,
+      "capsule_bodies_owned_by_datasets": true,
+      "assumption": "datasets-owns-capsule-bodies",
+      "fallback_is_identity_reference_not_payload": true,
+      "datasets_authority_for_canonical_truth": true,
+      "task": "LGSWF-020"
+    },
+    "completion_never_from_task_status_alone": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_provisional_acceptance.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-021.json"
+      ],
+      "goal_completion_facets": [
+        "observable_state",
+        "semantic_properties",
+        "current_tests_proofs",
+        "accepted_children",
+        "resolved_counterexamples_gaps",
+        "review",
+        "tree",
+        "root"
+      ],
+      "task_lifecycle_gates": [
+        "execution",
+        "patch_validation",
+        "proof_verification",
+        "merge",
+        "canonical_semantic_refresh",
+        "supervisor_acceptance"
+      ],
+      "insufficient_alone": [
+        "worker_completion",
+        "task_status",
+        "task_population_complete"
+      ],
+      "required_for_acceptance": [
+        "merge_succeeded_when_mutation",
+        "canonical_semantic_refresh_succeeded_when_mutation",
+        "independent_fenced_supervisor_acceptance"
+      ],
+      "hermetic_proofs": [
+        "test_task_population_complete_alone_does_not_complete_goal",
+        "test_worker_completion_alone_is_insufficient",
+        "test_merge_and_canonical_refresh_required_when_mutation_occurs"
+      ],
+      "task": "LGSWF-021"
+    },
+    "provisional_roots_noncanonical": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_provisional_acceptance.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-021.json"
+      ],
+      "interface": "ProvisionalSemanticBinding@1",
+      "attempt_bound": true,
+      "noncanonical": true,
+      "publishable_as_canonical": false,
+      "provisional_root_cannot_equal_observed_canonical_root": true,
+      "only_accepted_merge_tree_rescanned_by_datasets": true,
+      "task": "LGSWF-021"
+    },
+    "fabric_goal_completion_contract_verified": {
+      "status": "pass",
+      "evidence": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json"
+      ],
+      "interface": "fabric-goal-completion@1",
+      "completed_task_population_does_not_complete_goal": true,
+      "unresolved_counterexamples_fail_closed": true,
+      "task": "LGSWF-020"
+    },
+    "producing_task_receipts_current": {
+      "status": "pass",
+      "evidence": [
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-021.json"
+      ],
+      "producing_tasks": [
+        "LGSWF-020",
+        "LGSWF-021"
+      ],
+      "completion_authoritative": false,
+      "note": "receipts are evidence only; independent fenced supervisor acceptance remains required"
+    },
+    "epic_b_prerequisite_open": {
+      "status": "pass",
+      "evidence": "artifacts/logic_governed_semantic_work_fabric/gates/epic-b.json",
+      "epic_b_disposition": "pass",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "task": "LGSWF-014"
+    }
+  },
+  "accepted_trees": {
+    "datasets": {
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "accelerator": {
+      "commit": "ea11293bb996f052d620eae989f5377a956764b1",
+      "tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f"
+    },
+    "control_bootstrap": {
+      "commit": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "role": "sealed control and task worktree base"
+    }
+  },
+  "interfaces": {
+    "SemanticWorkBinding@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/semantic-work-binding@1",
+      "owner": "ipfs_accelerate_py",
+      "reference_only": true
+    },
+    "SemanticWorkBinding@1-or-bootstrap-fallback": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/semantic-work-binding@1",
+      "owner": "ipfs_accelerate_py",
+      "role": "bootstrap identity mode without embedding raw source payloads"
+    },
+    "ProvisionalSemanticBinding@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/provisional-semantic-binding@1",
+      "owner": "ipfs_accelerate_py",
+      "noncanonical": true
+    },
+    "task-lifecycle-acceptance@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py",
+      "schema": "ipfs_accelerate_py/agent-supervisor/task-acceptance-decision@1",
+      "owner": "ipfs_accelerate_py"
+    },
+    "fabric-goal-completion@1": {
+      "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+      "owner": "ipfs_accelerate_py"
+    }
+  },
+  "downstream_unlock": {
+    "unblocks": [
+      "LGSWF-030"
+    ],
+    "epic_sequence": "A → B → C → D → E → F → G → H → I → J → K → L → M → N → O",
+    "note": "Composite work and conflict graphs (Epic D) may schedule after LGSWF-024; continuous multi-supervisor fabric operation remains no-go"
+  },
+  "limitations": [
+    "continuous multi-supervisor fabric operation remains no-go until later epic qualifications",
+    "adversarial_assurance, incremental_sealing, and ProofRepository@1 remain absent at checked datasets head and must not be invented",
+    "formal datasets proof selection remains verified empty; hermetic contracts and producing-task receipts are the selected evidence surface",
+    "capsule bodies and raw source payloads remain outside SemanticWorkBinding@1; only identities and fallback policy names are recorded",
+    "provisional semantic roots stay attempt-bound and noncanonical until datasets rescans an accepted merge tree",
+    "worker completion or task status alone is never authoritative completion"
+  ],
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "Epic C gate records verified empty formal proof selection at accepted trees; contract and hermetic tests plus current producing-task receipts are the selected evidence surface"
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-c.json",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+      "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/runtime/test_provisional_acceptance.py"
+    ],
+    "status": "declared_for_authoritative_runner",
+    "gate_command": "python -m json.tool artifacts/logic_governed_semantic_work_fabric/gates/epic-c.json"
+  },
+  "independent_fenced_supervisor_acceptance": "required_not_self_asserted",
+  "completion_authoritative": false,
+  "result_identity": "urn:lgswf:gate:epic-c@lgswf-024-pass"
+}

@@ -1,0 +1,692 @@
+{
+  "schema": "proof-carrying-context-engine/control-incident@1",
+  "incident_id": "urn:pcce:control-incident:scheduler-r2-provider-handoff",
+  "status": "preserved_infrastructure_failure",
+  "captured_at": "2026-08-14T06:55:31Z",
+  "content_id": "sha256:2c3ff2b51de842d5349d5518a5240ed37780062702ba6aa68d39485202016215",
+  "canonicalization": {
+    "algorithm": "sha256",
+    "excluded_fields": [
+      "content_id"
+    ],
+    "json": "UTF-8 JSON with recursively sorted keys, separators ',' and ':', and ensure_ascii=false"
+  },
+  "source_control_commit": "d498faad8b75321a6981d6dfb944bb589581b333",
+  "source_board_receipt": {
+    "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+    "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r2",
+    "content_id": "sha256:491f3edea7febc4306e297082f60ca1e46677c38d60427015302622dc912c029",
+    "byte_sha256": "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+    "rehash_byte_sha256": "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+    "byte_size": 4373,
+    "git_blob": "fff24f12acbb1d3edf0206916d343d27e189128f",
+    "admission_commit": "d498faad8b75321a6981d6dfb944bb589581b333",
+    "preserved_byte_for_byte": true
+  },
+  "source_repository_gitlinks": {
+    "ipfs_datasets_py": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "ipfs_kit_py": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "ipfs_accelerate_py": "c8e953be8696d47376442c73739eea14fad83113",
+    "Mcp-Plus-Plus": "6965f89f066769f3b3ac7b5f753b1a0044562570"
+  },
+  "cause": {
+    "classification": "infrastructure_failure",
+    "boundary": "bundle_supervisor -> implementation_supervisor -> daemon/provider adapter",
+    "failed_handoff": "The bundle supervisor passed four production-provider options to the child implementation supervisor, but the implementation supervisor CLI at the admitted accelerator gitlink did not accept or forward them.",
+    "exact_diagnostic": "implementation_supervisor.py: error: unrecognized arguments: --production-provider-policy grok-implement-codex-independent-review --production-provider-context-budget-tokens 24576 --production-provider-timeout-seconds 300.0 --production-provider-review-authority-key-path /home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r2/.production-provider-review-authority.ed25519",
+    "rejected_argument_count": 4,
+    "rejected_arguments": [
+      {
+        "option": "--production-provider-policy",
+        "value": "grok-implement-codex-independent-review"
+      },
+      {
+        "option": "--production-provider-context-budget-tokens",
+        "value": "24576"
+      },
+      {
+        "option": "--production-provider-timeout-seconds",
+        "value": "300.0"
+      },
+      {
+        "option": "--production-provider-review-authority-key-path",
+        "value": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r2/.production-provider-review-authority.ed25519"
+      }
+    ],
+    "deeper_route_missing": "The child exited at argument parsing before daemon startup or provider-adapter routing.",
+    "provider_invocation_reached": false,
+    "accepted_product_task_start_count": 0,
+    "repository_mutation_count": 0
+  },
+  "scheduler_snapshot": {
+    "source_manifest": "scheduler-r2/bundle_lanes.json",
+    "schema": "ipfs_accelerate_py.agent_supervisor.dynamic_bundle_scheduler@1",
+    "scheduler_state": "stopping",
+    "generated_at": "2026-08-14T06:25:10.237547+00:00",
+    "cycle": 6,
+    "scheduler_snapshot_id": "5962b5d5384a0cf6d2432f9f18e2df716388b9b2c5f02e9dee4e6f02576ab013",
+    "planned_count": 66,
+    "started_count": 0,
+    "completed_count": 0,
+    "running_count": 0,
+    "active_worker_count": 0,
+    "active_worker_pids": [],
+    "ready_count": 1,
+    "blocked_count": 1,
+    "receipt_count": 8,
+    "distributed_dispatch_count": 0,
+    "distributed_input_count": 0,
+    "distributed_publication_count": 0,
+    "implementation_attempt_count": 0,
+    "provider_invocation_count": 0,
+    "coordination_artifact_count": 370,
+    "coordination_heartbeat_count": 16,
+    "current_lease_row_count": 3,
+    "current_released_lease_count": 3,
+    "task_dependency_count": 117,
+    "task_alias_count": 198,
+    "worker_evidence": {
+      "checked_at": "2026-08-14T06:55:31Z",
+      "r2_process_match_count": 0,
+      "manifest_active_worker_count": 0,
+      "manifest_active_worker_pids": [],
+      "stale_pid_files": [
+        {
+          "path": "scheduler-r2/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_bundle_supervisor.pid",
+          "pid": 3860002,
+          "live": false
+        },
+        {
+          "path": "scheduler-r2/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_bundle_supervisor.pid",
+          "pid": 3835186,
+          "live": false
+        },
+        {
+          "path": "scheduler-r2/pcce-a-inventory-kit/state/agent_pcce_a_inventory_kit_bundle_supervisor.pid",
+          "pid": 3860010,
+          "live": false
+        }
+      ],
+      "lane_root_directory_count": 3,
+      "implementation_worktree_file_count": 0,
+      "zero_r2_owned_workers_verified": true
+    },
+    "preserved_discrepancies": [
+      {
+        "manifest_value": {
+          "started_count": 0,
+          "scheduler_snapshot_totals_implementation_attempts": 0
+        },
+        "database_value": {
+          "coordination_receipt_count": 8,
+          "task_claim_count": 8,
+          "token_history_count": 8
+        },
+        "interpretation": "The eight receipts record supervisor/daemon launch attempts rejected at the CLI boundary; they are not accepted product-task starts or provider invocations."
+      },
+      {
+        "manifest_value": {
+          "resource_sample_observed_at_ms": 1786688707947,
+          "stage_metrics_active_leases": 2,
+          "stage_metrics_leases_released": 6,
+          "stage_metrics_cancelled": 0
+        },
+        "final_value": {
+          "outer_manifest_active_worker_count": 0,
+          "database_current_released_lease_count": 3,
+          "database_receipt_count": 8,
+          "cancelled_receipt_count": 2
+        },
+        "interpretation": "The nested resource-admission sample predates the two final cancelled receipts; the lagging sample is retained verbatim and is not promoted over the later outer-manifest and database state."
+      },
+      {
+        "manifest_value": {
+          "ready": [
+            "PCCE-002"
+          ],
+          "blocked": [
+            "PCCE-003"
+          ],
+          "omitted_from_final_ready_blocked_completed": [
+            "PCCE-001",
+            "PCCE-004"
+          ]
+        },
+        "database_value": {
+          "PCCE-001_receipts": 3,
+          "PCCE-002_receipts": 2,
+          "PCCE-003_receipts": 3,
+          "PCCE-004_receipts": 0
+        },
+        "interpretation": "The final projection and the durable attempt ledger answer different questions; both are retained without synthesizing a product-task completion."
+      }
+    ]
+  },
+  "attempt_ledger": [
+    {
+      "task_id": "PCCE-001",
+      "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+      "attempt_count": 3,
+      "statuses_by_attempt": [
+        "failed",
+        "failed",
+        "failed"
+      ],
+      "receipt_cids_by_attempt": [
+        "baguqeeraptnxkz4hpdqn5wlzjrf2umrttgo5ruuehx473fhhx3v4wywyw2uq",
+        "baguqeerapekvgx3yhus6toq6tpdurt3diyk6blquwdouoyj74qd7o4konh6q",
+        "baguqeeraj7tozirfxxh656teelzxoibsujhpqpaf53sovmugb673vh3rtnfq"
+      ],
+      "final_projection": "omitted_from_final_ready_blocked_completed_after_three_failed_receipts",
+      "accepted_product_task_start": false
+    },
+    {
+      "task_id": "PCCE-002",
+      "task_cid": "baguqeera6243cklj7ey6mdhuqanjnycp6jtnmiqk7e5zidv6yzsl6usd4qla",
+      "attempt_count": 2,
+      "statuses_by_attempt": [
+        "failed",
+        "cancelled"
+      ],
+      "receipt_cids_by_attempt": [
+        "baguqeeraxyt4en66sgn4peaynjswrgcruh7dg62ixr6zf3pxcym6htqjiaua",
+        "baguqeeradoxnqtvpgyqrk5knfvq2kl4w6bma62eescwsjlwilqmb4becs5na"
+      ],
+      "final_projection": "ready_with_released_attempt_2_lease",
+      "accepted_product_task_start": false
+    },
+    {
+      "task_id": "PCCE-003",
+      "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+      "attempt_count": 3,
+      "statuses_by_attempt": [
+        "failed",
+        "failed",
+        "cancelled"
+      ],
+      "receipt_cids_by_attempt": [
+        "baguqeerax5tmokmwnbyaflc6vgsamt56225metqyl5rksvsooc5trfajjgka",
+        "baguqeeraduvwrxolzuypn2lb2vjpz5o7bfnd36kdwb6e7rnv4ysosvbqz3jq",
+        "baguqeeram3vkr2l5epf3otse2k5ptj6banvrdcmcfphxk2xwtvnxzyc7vwyq"
+      ],
+      "final_projection": "blocked_with_released_attempt_3_lease",
+      "accepted_product_task_start": false
+    },
+    {
+      "task_id": "PCCE-004",
+      "task_cid": "baguqeerakwu33rvi5lwp42k7gamii54y7frng7hv7jnnze2fwzavdubmz7ga",
+      "attempt_count": 0,
+      "statuses_by_attempt": [],
+      "receipt_cids_by_attempt": [],
+      "final_projection": "never_claimed_and_omitted_from_final_ready_blocked_completed",
+      "accepted_product_task_start": false
+    }
+  ],
+  "attempt_receipts": [
+    {
+      "task_id": "PCCE-001",
+      "receipt_cid": "baguqeeraptnxkz4hpdqn5wlzjrf2umrttgo5ruuehx473fhhx3v4wywyw2uq",
+      "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+      "goal_cid": "baguqeeraa6hph4xhvmzqpqwc2lhfmbt6qgvdvblytknxetrhqxtzhyuw6y3q",
+      "subgoal_cid": "baguqeera22ocqlwbsq5nyhzpznxstvsegw3rte7mo2z4zu4upjdwrr4ectnq",
+      "claim_cid": "baguqeeramybnut7ddvucf3tgz6n2mspmj55zxhckyn5yzlpah4rtxy7fwmra",
+      "fencing_token": 1,
+      "payload": {
+        "attempt": 1,
+        "claim_cid": "baguqeeramybnut7ddvucf3tgz6n2mspmj55zxhckyn5yzlpah4rtxy7fwmra",
+        "correlation_id": "pcce/a/inventory-datasets",
+        "created_at_ms": 1786688655997,
+        "failure_class": "retryable",
+        "fencing_token": 1,
+        "finished_at_ms": 1786688655997,
+        "next_state": "ready",
+        "output_cid": null,
+        "parents": [
+          "baguqeerau3c2afpubqflb47jxvpyukltykgdq3uxpxna2qgqhjiwx7slipta"
+        ],
+        "profile_b_receipt_cid": "baguqeeraufwxuz2wo2fcny444fkcgwjzgeuhbl4bnnq4ietagfvdp2q4o3ia",
+        "provider": "ipfs_accelerate_py",
+        "provider_version": "3.2.0",
+        "resolution_cid": "baguqeerau3c2afpubqflb47jxvpyukltykgdq3uxpxna2qgqhjiwx7slipta",
+        "resource_use_cid": "baguqeeramntfju3xoqkrwmymtkd7eozbojf32kfzoftqvqagujyl323ih7qa",
+        "schema": "mcp++/profile-g/task-receipt@1",
+        "started_at_ms": 1786688649835,
+        "status": "failed",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq"
+      }
+    },
+    {
+      "task_id": "PCCE-001",
+      "receipt_cid": "baguqeerapekvgx3yhus6toq6tpdurt3diyk6blquwdouoyj74qd7o4konh6q",
+      "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+      "goal_cid": "baguqeeraa6hph4xhvmzqpqwc2lhfmbt6qgvdvblytknxetrhqxtzhyuw6y3q",
+      "subgoal_cid": "baguqeera22ocqlwbsq5nyhzpznxstvsegw3rte7mo2z4zu4upjdwrr4ectnq",
+      "claim_cid": "baguqeerayovqheho6fztrqnzray3ypp5yjzkxbnmav6ymarmi4x6g3kd5t5q",
+      "fencing_token": 2,
+      "payload": {
+        "attempt": 2,
+        "claim_cid": "baguqeerayovqheho6fztrqnzray3ypp5yjzkxbnmav6ymarmi4x6g3kd5t5q",
+        "correlation_id": "pcce/a/inventory-datasets",
+        "created_at_ms": 1786688670019,
+        "failure_class": "retryable",
+        "fencing_token": 2,
+        "finished_at_ms": 1786688670019,
+        "next_state": "ready",
+        "output_cid": null,
+        "parents": [
+          "baguqeeraeutjw4lndnmtpullkkxbujw6q4bss6uta2fy7ynll66s33njm2ha"
+        ],
+        "profile_b_receipt_cid": "baguqeerazfdg25kexy2mf7nqjlo6y73w5vd57xegbiukqowwbz7gt3nqdcqa",
+        "provider": "ipfs_accelerate_py",
+        "provider_version": "3.2.0",
+        "resolution_cid": "baguqeeraeutjw4lndnmtpullkkxbujw6q4bss6uta2fy7ynll66s33njm2ha",
+        "resource_use_cid": "baguqeeramntfju3xoqkrwmymtkd7eozbojf32kfzoftqvqagujyl323ih7qa",
+        "schema": "mcp++/profile-g/task-receipt@1",
+        "started_at_ms": 1786688664055,
+        "status": "failed",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq"
+      }
+    },
+    {
+      "task_id": "PCCE-001",
+      "receipt_cid": "baguqeeraj7tozirfxxh656teelzxoibsujhpqpaf53sovmugb673vh3rtnfq",
+      "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq",
+      "goal_cid": "baguqeeraa6hph4xhvmzqpqwc2lhfmbt6qgvdvblytknxetrhqxtzhyuw6y3q",
+      "subgoal_cid": "baguqeera22ocqlwbsq5nyhzpznxstvsegw3rte7mo2z4zu4upjdwrr4ectnq",
+      "claim_cid": "baguqeeramdstcep4w5pckuzukeinqwv6j5xcpv3djmbagkq256kistrvjsyq",
+      "fencing_token": 3,
+      "payload": {
+        "attempt": 3,
+        "claim_cid": "baguqeeramdstcep4w5pckuzukeinqwv6j5xcpv3djmbagkq256kistrvjsyq",
+        "correlation_id": "pcce/a/inventory-datasets",
+        "created_at_ms": 1786688684988,
+        "failure_class": "retryable",
+        "fencing_token": 3,
+        "finished_at_ms": 1786688684988,
+        "next_state": "ready",
+        "output_cid": null,
+        "parents": [
+          "baguqeeragpew3o25s7lbxflteahpcouqcdghroadkdz6oiaeomnp52cjjlba"
+        ],
+        "profile_b_receipt_cid": "baguqeeraqffxn426a724udm3llwvmzdivncpe3mxamk5npcmooirfeolk3oa",
+        "provider": "ipfs_accelerate_py",
+        "provider_version": "3.2.0",
+        "resolution_cid": "baguqeeragpew3o25s7lbxflteahpcouqcdghroadkdz6oiaeomnp52cjjlba",
+        "resource_use_cid": "baguqeeramntfju3xoqkrwmymtkd7eozbojf32kfzoftqvqagujyl323ih7qa",
+        "schema": "mcp++/profile-g/task-receipt@1",
+        "started_at_ms": 1786688678816,
+        "status": "failed",
+        "task_cid": "baguqeerajs5hrr2mockt434k4lxuj7ezuaewn4uszmthhsfqrjok3unqbbnq"
+      }
+    },
+    {
+      "task_id": "PCCE-002",
+      "receipt_cid": "baguqeeraxyt4en66sgn4peaynjswrgcruh7dg62ixr6zf3pxcym6htqjiaua",
+      "task_cid": "baguqeera6243cklj7ey6mdhuqanjnycp6jtnmiqk7e5zidv6yzsl6usd4qla",
+      "goal_cid": "baguqeeraqzl25gzjhpoiagm3bhzuwlrij63eboovlb3mvkg6zehpyrg3oobq",
+      "subgoal_cid": "baguqeeraqvms5xj44t2n365rhjdguesuzrm4kir42fugqxd3vi53pj4t5esq",
+      "claim_cid": "baguqeera3b2mun53nbk3mvapo63jmyuv6zwex25q3vvybgyuf5jr3hyurynq",
+      "fencing_token": 1,
+      "payload": {
+        "attempt": 1,
+        "claim_cid": "baguqeera3b2mun53nbk3mvapo63jmyuv6zwex25q3vvybgyuf5jr3hyurynq",
+        "correlation_id": "pcce/a/inventory-kit",
+        "created_at_ms": 1786688699166,
+        "failure_class": "retryable",
+        "fencing_token": 1,
+        "finished_at_ms": 1786688699166,
+        "next_state": "ready",
+        "output_cid": null,
+        "parents": [
+          "baguqeeraf423ys2y4le4hpn24o7rxuu5otiguux4wkxd2iu45wq2lmdfnayq"
+        ],
+        "profile_b_receipt_cid": "baguqeerapgzrwx3hcohkk4oz5r5v2vzsipujj3lbtwlptsl7wqvmtfc6lhrq",
+        "provider": "ipfs_accelerate_py",
+        "provider_version": "3.2.0",
+        "resolution_cid": "baguqeeraf423ys2y4le4hpn24o7rxuu5otiguux4wkxd2iu45wq2lmdfnayq",
+        "resource_use_cid": "baguqeeramntfju3xoqkrwmymtkd7eozbojf32kfzoftqvqagujyl323ih7qa",
+        "schema": "mcp++/profile-g/task-receipt@1",
+        "started_at_ms": 1786688693199,
+        "status": "failed",
+        "task_cid": "baguqeera6243cklj7ey6mdhuqanjnycp6jtnmiqk7e5zidv6yzsl6usd4qla"
+      }
+    },
+    {
+      "task_id": "PCCE-002",
+      "receipt_cid": "baguqeeradoxnqtvpgyqrk5knfvq2kl4w6bma62eescwsjlwilqmb4becs5na",
+      "task_cid": "baguqeera6243cklj7ey6mdhuqanjnycp6jtnmiqk7e5zidv6yzsl6usd4qla",
+      "goal_cid": "baguqeeraqzl25gzjhpoiagm3bhzuwlrij63eboovlb3mvkg6zehpyrg3oobq",
+      "subgoal_cid": "baguqeeraqvms5xj44t2n365rhjdguesuzrm4kir42fugqxd3vi53pj4t5esq",
+      "claim_cid": "baguqeera3iifjhidomsev4rrvqsz75hhhfncyl7262vizmvoi2asonvn5j6q",
+      "fencing_token": 2,
+      "payload": {
+        "attempt": 2,
+        "claim_cid": "baguqeera3iifjhidomsev4rrvqsz75hhhfncyl7262vizmvoi2asonvn5j6q",
+        "correlation_id": "pcce/a/inventory-kit",
+        "created_at_ms": 1786688710052,
+        "failure_class": "retryable",
+        "fencing_token": 2,
+        "finished_at_ms": 1786688710052,
+        "next_state": "ready",
+        "output_cid": null,
+        "parents": [
+          "baguqeerag5g3e3ztqqcrxv3dfewh4cqv5ez7rk5aluw536fprruonipfvmfq"
+        ],
+        "profile_b_receipt_cid": "baguqeeraho7rhs23u4vhhxwwxgmy5d5jh6e7dogfwhb33qe4efu6m6aepiga",
+        "provider": "ipfs_accelerate_py",
+        "provider_version": "3.2.0",
+        "resolution_cid": "baguqeerag5g3e3ztqqcrxv3dfewh4cqv5ez7rk5aluw536fprruonipfvmfq",
+        "resource_use_cid": "baguqeeramntfju3xoqkrwmymtkd7eozbojf32kfzoftqvqagujyl323ih7qa",
+        "schema": "mcp++/profile-g/task-receipt@1",
+        "started_at_ms": 1786688708199,
+        "status": "cancelled",
+        "task_cid": "baguqeera6243cklj7ey6mdhuqanjnycp6jtnmiqk7e5zidv6yzsl6usd4qla"
+      }
+    },
+    {
+      "task_id": "PCCE-003",
+      "receipt_cid": "baguqeerax5tmokmwnbyaflc6vgsamt56225metqyl5rksvsooc5trfajjgka",
+      "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+      "goal_cid": "baguqeeraxblpqkybprwr2rgvahh376w7r5ccv6y556nhdfer2q6tudvwtctq",
+      "subgoal_cid": "baguqeeradawr42li2jsz6d3ftfqcp4dmjxhnl2yqinrskenn7kzwrpo6ojma",
+      "claim_cid": "baguqeera6vlrnhgqfje3maty5g56w4daqllx4pxc5qvm7ebus777rmuvsvuq",
+      "fencing_token": 1,
+      "payload": {
+        "attempt": 1,
+        "claim_cid": "baguqeera6vlrnhgqfje3maty5g56w4daqllx4pxc5qvm7ebus777rmuvsvuq",
+        "correlation_id": "pcce/a/inventory-accelerate",
+        "created_at_ms": 1786688656069,
+        "failure_class": "retryable",
+        "fencing_token": 1,
+        "finished_at_ms": 1786688656069,
+        "next_state": "ready",
+        "output_cid": null,
+        "parents": [
+          "baguqeerayrgx7whec7levsu5gizq253kkc74utsj4mmem3y5e6d64dao6x6a"
+        ],
+        "profile_b_receipt_cid": "baguqeera4bxpfo5u6taoviekg4srwhbe27rqdf23s745r5hcb6z6qjdrvqia",
+        "provider": "ipfs_accelerate_py",
+        "provider_version": "3.2.0",
+        "resolution_cid": "baguqeerayrgx7whec7levsu5gizq253kkc74utsj4mmem3y5e6d64dao6x6a",
+        "resource_use_cid": "baguqeeramntfju3xoqkrwmymtkd7eozbojf32kfzoftqvqagujyl323ih7qa",
+        "schema": "mcp++/profile-g/task-receipt@1",
+        "started_at_ms": 1786688649792,
+        "status": "failed",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa"
+      }
+    },
+    {
+      "task_id": "PCCE-003",
+      "receipt_cid": "baguqeeraduvwrxolzuypn2lb2vjpz5o7bfnd36kdwb6e7rnv4ysosvbqz3jq",
+      "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+      "goal_cid": "baguqeeraxblpqkybprwr2rgvahh376w7r5ccv6y556nhdfer2q6tudvwtctq",
+      "subgoal_cid": "baguqeeradawr42li2jsz6d3ftfqcp4dmjxhnl2yqinrskenn7kzwrpo6ojma",
+      "claim_cid": "baguqeera7texvujmawlawkzcqszrnkdeyzazt6lhgcpcrr73caz3f2losj3a",
+      "fencing_token": 2,
+      "payload": {
+        "attempt": 2,
+        "claim_cid": "baguqeera7texvujmawlawkzcqszrnkdeyzazt6lhgcpcrr73caz3f2losj3a",
+        "correlation_id": "pcce/a/inventory-accelerate",
+        "created_at_ms": 1786688685070,
+        "failure_class": "retryable",
+        "fencing_token": 2,
+        "finished_at_ms": 1786688685070,
+        "next_state": "ready",
+        "output_cid": null,
+        "parents": [
+          "baguqeeraxmhn4vx6xm3btp52mt76ir6snszxdwyr7f4rva5vjmdgcurz54pa"
+        ],
+        "profile_b_receipt_cid": "baguqeerad2gcnrafv4e3njp2r52joojvwk5jpoqmgn55gq5g7vwinfhdgyia",
+        "provider": "ipfs_accelerate_py",
+        "provider_version": "3.2.0",
+        "resolution_cid": "baguqeeraxmhn4vx6xm3btp52mt76ir6snszxdwyr7f4rva5vjmdgcurz54pa",
+        "resource_use_cid": "baguqeeramntfju3xoqkrwmymtkd7eozbojf32kfzoftqvqagujyl323ih7qa",
+        "schema": "mcp++/profile-g/task-receipt@1",
+        "started_at_ms": 1786688678787,
+        "status": "failed",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa"
+      }
+    },
+    {
+      "task_id": "PCCE-003",
+      "receipt_cid": "baguqeeram3vkr2l5epf3otse2k5ptj6banvrdcmcfphxk2xwtvnxzyc7vwyq",
+      "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa",
+      "goal_cid": "baguqeeraxblpqkybprwr2rgvahh376w7r5ccv6y556nhdfer2q6tudvwtctq",
+      "subgoal_cid": "baguqeeradawr42li2jsz6d3ftfqcp4dmjxhnl2yqinrskenn7kzwrpo6ojma",
+      "claim_cid": "baguqeeraixncze4wdcnesqip7uprkpamdvqnfnhhdi4vgi7qiyik64ya6gfa",
+      "fencing_token": 3,
+      "payload": {
+        "attempt": 3,
+        "claim_cid": "baguqeeraixncze4wdcnesqip7uprkpamdvqnfnhhdi4vgi7qiyik64ya6gfa",
+        "correlation_id": "pcce/a/inventory-accelerate",
+        "created_at_ms": 1786688709600,
+        "failure_class": "retryable",
+        "fencing_token": 3,
+        "finished_at_ms": 1786688709600,
+        "next_state": "ready",
+        "output_cid": null,
+        "parents": [
+          "baguqeerawnecco6df66jdxqdrdbac3hdzdczrc33cm3eaw3vtm4gjt52hpqa"
+        ],
+        "profile_b_receipt_cid": "baguqeeraz627lnl2txbncqxoddwyvhps4drl5ryakee6xcnfwkaminmseixq",
+        "provider": "ipfs_accelerate_py",
+        "provider_version": "3.2.0",
+        "resolution_cid": "baguqeerawnecco6df66jdxqdrdbac3hdzdczrc33cm3eaw3vtm4gjt52hpqa",
+        "resource_use_cid": "baguqeeramntfju3xoqkrwmymtkd7eozbojf32kfzoftqvqagujyl323ih7qa",
+        "schema": "mcp++/profile-g/task-receipt@1",
+        "started_at_ms": 1786688708148,
+        "status": "cancelled",
+        "task_cid": "baguqeera7avykc7hum4y5etp4epsvidspbgvrrqxa32x6vsoukdypkapbuwa"
+      }
+    }
+  ],
+  "raw_artifacts": {
+    "source_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1",
+    "hash_algorithm": "sha256",
+    "hash_passes": 2,
+    "file_count": 19,
+    "all_hashes_stable": true,
+    "files": [
+      {
+        "path": "logs-r2/pcce-a-inventory-accelerate.log",
+        "size_bytes": 24730,
+        "mtime_ns": 1786688682785883769,
+        "sha256_pass_1": "sha256:5cd5ad2f53f9758202b00957a7821ba4bc553a60fa792a33e21ccb436a4cf066",
+        "sha256_pass_2": "sha256:5cd5ad2f53f9758202b00957a7821ba4bc553a60fa792a33e21ccb436a4cf066",
+        "stable": true
+      },
+      {
+        "path": "logs-r2/pcce-a-inventory-datasets.log",
+        "size_bytes": 37095,
+        "mtime_ns": 1786688682704882588,
+        "sha256_pass_1": "sha256:ec556cc7ce68412207e8f8ac3fd3bbd2177fc8361d05c18d7b945277e03b5a9c",
+        "sha256_pass_2": "sha256:ec556cc7ce68412207e8f8ac3fd3bbd2177fc8361d05c18d7b945277e03b5a9c",
+        "stable": true
+      },
+      {
+        "path": "logs-r2/pcce-a-inventory-kit.log",
+        "size_bytes": 12365,
+        "mtime_ns": 1786688696936089887,
+        "sha256_pass_1": "sha256:cfee6541e0623eacfdba7289f2112d3cc204f99afd4eb0854f085d504f12d9c1",
+        "sha256_pass_2": "sha256:cfee6541e0623eacfdba7289f2112d3cc204f99afd4eb0854f085d504f12d9c1",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/.bundle_lanes.duckdb.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786688560711083242,
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/.coordination.duckdb.lock",
+        "size_bytes": 0,
+        "mtime_ns": 1786688624989036529,
+        "sha256_pass_1": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_pass_2": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/bundle_lanes.duckdb",
+        "size_bytes": 10760192,
+        "mtime_ns": 1786688710647289145,
+        "sha256_pass_1": "sha256:c60ec7e70e7e140beadcd3080316ea3ec1aeb4e2bdc0a5995e10d86b43224a0e",
+        "sha256_pass_2": "sha256:c60ec7e70e7e140beadcd3080316ea3ec1aeb4e2bdc0a5995e10d86b43224a0e",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/bundle_lanes.json",
+        "size_bytes": 3543573,
+        "mtime_ns": 1786688710278359213,
+        "sha256_pass_1": "sha256:d63f0605c1f1ca43ca16b27c572d52aeebf417a4632b384cbac37e0c300df087",
+        "sha256_pass_2": "sha256:d63f0605c1f1ca43ca16b27c572d52aeebf417a4632b384cbac37e0c300df087",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/coordination.duckdb",
+        "size_bytes": 15478784,
+        "mtime_ns": 1786688710079280899,
+        "sha256_pass_1": "sha256:5d939da8f54eaa39df033a8e085b65f033fa8b3f9126deb23f9e65702999f992",
+        "sha256_pass_2": "sha256:5d939da8f54eaa39df033a8e085b65f033fa8b3f9126deb23f9e65702999f992",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_bundle_supervisor.pid",
+        "size_bytes": 8,
+        "mtime_ns": 1786688708000243688,
+        "sha256_pass_1": "sha256:f16d806da35c4d9544a3b38310521beec4e6da603463a3be98bf285a3757215e",
+        "sha256_pass_2": "sha256:f16d806da35c4d9544a3b38310521beec4e6da603463a3be98bf285a3757215e",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_runtime.todo.md",
+        "size_bytes": 258316,
+        "mtime_ns": 1786688649629447823,
+        "sha256_pass_1": "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e",
+        "sha256_pass_2": "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_taskboard_input.json",
+        "size_bytes": 685,
+        "mtime_ns": 1786688649629853941,
+        "sha256_pass_1": "sha256:6003ff7ae134bece37de3b1eff7c33172a1357da96a5e3f8bea0ba192da2e8f1",
+        "sha256_pass_2": "sha256:6003ff7ae134bece37de3b1eff7c33172a1357da96a5e3f8bea0ba192da2e8f1",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_bundle_supervisor.pid",
+        "size_bytes": 8,
+        "mtime_ns": 1786688678674204392,
+        "sha256_pass_1": "sha256:4bad5fdff14c84d3abbe5d47e3be7ea15bf4dedb54fb2e70f71f529b2e0c2af9",
+        "sha256_pass_2": "sha256:4bad5fdff14c84d3abbe5d47e3be7ea15bf4dedb54fb2e70f71f529b2e0c2af9",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_runtime.todo.md",
+        "size_bytes": 258316,
+        "mtime_ns": 1786688649676478769,
+        "sha256_pass_1": "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e",
+        "sha256_pass_2": "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_taskboard_input.json",
+        "size_bytes": 679,
+        "mtime_ns": 1786688649676846086,
+        "sha256_pass_1": "sha256:613df9f0b73be723d85f9283853ef41c0938cb01195ab81682284fcfd2c89d1f",
+        "sha256_pass_2": "sha256:613df9f0b73be723d85f9283853ef41c0938cb01195ab81682284fcfd2c89d1f",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-kit/state/agent_pcce_a_inventory_kit_bundle_supervisor.pid",
+        "size_bytes": 8,
+        "mtime_ns": 1786688708050990505,
+        "sha256_pass_1": "sha256:95cb5bb1a29b235dc5287151d1506bf090082bc1efd7ca84306a06e601aaef55",
+        "sha256_pass_2": "sha256:95cb5bb1a29b235dc5287151d1506bf090082bc1efd7ca84306a06e601aaef55",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-kit/state/agent_pcce_a_inventory_kit_runtime.todo.md",
+        "size_bytes": 258316,
+        "mtime_ns": 1786688693056934023,
+        "sha256_pass_1": "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e",
+        "sha256_pass_2": "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/pcce-a-inventory-kit/state/agent_pcce_a_inventory_kit_taskboard_input.json",
+        "size_bytes": 664,
+        "mtime_ns": 1786688693057346621,
+        "sha256_pass_1": "sha256:f16a47ccb353710bd8edf5013fb05f962c4f770ae0c3468a82eda6bd8b569033",
+        "sha256_pass_2": "sha256:f16a47ccb353710bd8edf5013fb05f962c4f770ae0c3468a82eda6bd8b569033",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/scheduler_decision_metrics.json",
+        "size_bytes": 163119,
+        "mtime_ns": 1786688710665960328,
+        "sha256_pass_1": "sha256:866b88ff2b510098fb9a7d909a9a3c2ea8dd695d5849ff6463e4722d6b9ae24c",
+        "sha256_pass_2": "sha256:866b88ff2b510098fb9a7d909a9a3c2ea8dd695d5849ff6463e4722d6b9ae24c",
+        "stable": true
+      },
+      {
+        "path": "scheduler-r2/scheduler_metrics.json",
+        "size_bytes": 163119,
+        "mtime_ns": 1786688710663080286,
+        "sha256_pass_1": "sha256:866b88ff2b510098fb9a7d909a9a3c2ea8dd695d5849ff6463e4722d6b9ae24c",
+        "sha256_pass_2": "sha256:866b88ff2b510098fb9a7d909a9a3c2ea8dd695d5849ff6463e4722d6b9ae24c",
+        "stable": true
+      }
+    ]
+  },
+  "partial_effects": {
+    "recorded": true,
+    "state_and_log_artifacts_created": true,
+    "registered_task_count": 66,
+    "registered_dependency_count": 117,
+    "registered_alias_count": 198,
+    "coordination_artifact_count": 370,
+    "task_claim_count": 8,
+    "task_receipt_count": 8,
+    "heartbeat_count": 16,
+    "runtime_todo_copy_count": 3,
+    "taskboard_input_manifest_count": 3,
+    "stale_pid_file_count": 3,
+    "log_file_count": 3,
+    "empty_lane_root_directory_count": 3,
+    "implementation_workspace_created": false,
+    "source_repository_mutated": false,
+    "submodule_gitlink_mutated": false,
+    "provider_invoked": false,
+    "patch_generated": false,
+    "validation_run": false,
+    "merge_attempted": false,
+    "product_task_completed": false,
+    "accepted_output_artifact_count": 0
+  },
+  "prohibited_claims": [
+    "No r2 receipt is completion evidence for PCCE-001, PCCE-002, PCCE-003, or PCCE-004.",
+    "The eight coordination receipts do not prove eight accepted product-task starts, provider calls, patches, validations, or merges.",
+    "The two cancelled receipts must not be represented as successful, passed, or cleanly completed work.",
+    "The three failed-attempt sequences must not be hidden or collapsed into a generic retry count.",
+    "The stale nested resource-admission sample must not override the later outer-manifest and durable database state.",
+    "This incident artifact is not proof that the provider route is operational after remediation.",
+    "No r2 lease, fencing token, claim, receipt, runtime todo copy, or scheduler projection may be reused as production evidence."
+  ],
+  "retention": {
+    "disposition": "preserve_read_only",
+    "source_state_file_content_mutated_during_capture": false,
+    "source_log_file_content_mutated_during_capture": false,
+    "source_board_receipt_content_mutated": false,
+    "control_worktree_mutated": false,
+    "resume_scheduler_r2": false,
+    "reuse_scheduler_r2_state": false,
+    "reuse_claims_leases_or_fences": false,
+    "reuse_receipts_as_product_evidence": false,
+    "replacement_run_policy": "Use a distinct scheduler state root, worktree root, log root, and fresh task claims after the provider handoff is repaired and independently verified.",
+    "raw_evidence_policy": "Retain scheduler-r2, logs-r2, and the empty worktrees-r2 lane roots as read-only forensic evidence until explicit incident closure; do not compact, replay, repair in place, or delete them as part of replacement-run startup.",
+    "allowed_use": "The r2 artifacts and receipts may be cited only as immutable evidence of this infrastructure failure and its partial effects."
+  }
+}

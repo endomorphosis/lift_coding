@@ -1,0 +1,22 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.launch-incident@1",
+  "incident_id": "urn:lgswf:launch-incident:bootstrap-r1-module-path",
+  "observed_at": "2026-08-16T01:28:55Z",
+  "control_commit": "33012faf859df3e43d9e5f7668012fb7c926ec97",
+  "phase": "detached multi-supervisor master import",
+  "result": "master_exited_before_supervisor_start",
+  "launcher_reported_master_pid": 4126500,
+  "master_log": "data/agent_supervisor/logic_governed_semantic_work_fabric_v0_1/logs/configured-board-20260816T012855Z.log",
+  "exit_evidence": "ModuleNotFoundError: No module named 'ipfs_accelerate_py' while resolving ipfs_accelerate_py.agent_supervisor.runtime.multi_supervisor_runner",
+  "reason": "the root control checkout has no importable ipfs_accelerate_py package and the detached child did not inherit an explicit external/ipfs_accelerate source resolver",
+  "effects": {
+    "supervisors_started": 0,
+    "daemons_started": 0,
+    "claims_created": 0,
+    "worktrees_created": 0,
+    "repository_writes": 0
+  },
+  "repair": "relaunch from the same sealed clean checkout with PYTHONPATH bound to the checked external/ipfs_accelerate gitlink; retain LGSWF-008 as the product-level source-resolver repair",
+  "historical_rewrite_allowed": false,
+  "completion_authoritative": false
+}

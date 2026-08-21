@@ -1,0 +1,21 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.launch-incident@1",
+  "incident_id": "urn:lgswf:launch-incident:bootstrap-r0-provider-contract",
+  "observed_at": "2026-08-16T01:27:52Z",
+  "control_commit": "8fbdc00a1e3cd5ff81a992ed7d35a876502d0761",
+  "phase": "configured multi-supervisor argument admission",
+  "result": "rejected_before_process_start",
+  "exit_code": 2,
+  "reason": "implementation supervisors require the exact six-field grok_cli/grok-4.5 to codex/gpt-5.6-terra medium primary_quota_exhausted route; the initial config supplied the legacy explicit codex route",
+  "effects": {
+    "master_started": false,
+    "supervisors_started": 0,
+    "daemons_started": 0,
+    "claims_created": 0,
+    "worktrees_created": 0,
+    "repository_writes": 0
+  },
+  "repair": "replace the legacy provider object with the downstream runtime's sealed ordered-provider contract, regenerate the protected task route projection, rerun board validation and sealed preflight, then create a new launch attempt",
+  "historical_rewrite_allowed": false,
+  "completion_authoritative": false
+}

@@ -1,0 +1,2223 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-bindings@1",
+  "interface": "SemanticWorkBinding@1-or-bootstrap-fallback",
+  "task_id": "LGSWF-009",
+  "plan_revision": "urn:lgswf:plan-revision:r1",
+  "plan_root_cid": "urn:lgswf:plan-root:r1@logic-governed-semantic-work-fabric-v0.1",
+  "canonical_roots_identity": "urn:lgswf:bindings:canonical-roots:LGSWF-009@r1",
+  "datasets_semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+  "accelerator_repository_state_cid": "urn:lgswf:repository-state:accelerator@ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "observed_at": "2026-08-16T22:00:00Z",
+  "binding_policy": {
+    "exact_symbol_scope_when_source_owned": true,
+    "capsule_bodies_remain_datasets_owned": true,
+    "must_not_embed_capsule_bodies": true,
+    "must_not_duplicate_semantic_records": true,
+    "bootstrap_fallback_for_pre_r1_history": "raw-source-required retained only as historical evidence; active bindings are exact",
+    "fail_closed_on_stale_root_or_plan": true,
+    "completion_never_from_task_status_alone": true
+  },
+  "shared_contracts": [
+    "authority-map@1",
+    "interface-freeze@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "PlanRevisionStore@1",
+    "task-identity@1",
+    "SemanticStateRoot@1",
+    "ipfs-datasets.software-contracts.semantic-index@2",
+    "ipfs-datasets.software-contracts.semantic-capsule@1"
+  ],
+  "shared_proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "plan-level verified empty selection at accepted trees; per-task selection remains empty until source mutation selects datasets obligations"
+  },
+  "task_count": 63,
+  "tasks": {
+    "LGSWF-000": {
+      "task_id": "LGSWF-000",
+      "task_cid": "task:LGSWF-000",
+      "goal_id": "LGSWF-G100",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/control/board-bootstrap.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1",
+        "contract:task-identity@1",
+        "contract:PlanRevisionContracts@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-control"
+    },
+    "LGSWF-001": {
+      "task_id": "LGSWF-001",
+      "task_cid": "task:LGSWF-001",
+      "goal_id": "LGSWF-G100",
+      "owner": "lift_coding",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-001.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1",
+        "contract:task-identity@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "lift_coding-inventory"
+    },
+    "LGSWF-002": {
+      "task_id": "LGSWF-002",
+      "task_cid": "task:LGSWF-002",
+      "goal_id": "LGSWF-G100",
+      "owner": "ipfs_datasets_py",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/inventory/datasets-authority.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-002.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:SemanticStateRoot@1",
+        "contract:ipfs-datasets.software-contracts.semantic-index@2",
+        "contract:ipfs-datasets.software-contracts.semantic-capsule@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_datasets_py-inventory"
+    },
+    "LGSWF-003": {
+      "task_id": "LGSWF-003",
+      "task_cid": "task:LGSWF-003",
+      "goal_id": "LGSWF-G100",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/inventory/accelerator-authority.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-003.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:PlanRevisionStore@1",
+        "contract:task-identity@1",
+        "contract:PlanRevisionContracts@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-inventory"
+    },
+    "LGSWF-004": {
+      "task_id": "LGSWF-004",
+      "task_cid": "task:LGSWF-004",
+      "goal_id": "LGSWF-G100",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-004.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1",
+        "contract:interface-freeze@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-inventory"
+    },
+    "LGSWF-005": {
+      "task_id": "LGSWF-005",
+      "task_cid": "task:LGSWF-005",
+      "goal_id": "LGSWF-G100",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+        "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-005.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1",
+        "contract:interface-freeze@1",
+        "contract:SemanticWorkBinding@1-or-bootstrap-fallback",
+        "contract:SupervisorWorldSnapshot@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-contract-freeze"
+    },
+    "LGSWF-006": {
+      "task_id": "LGSWF-006",
+      "task_cid": "task:LGSWF-006",
+      "goal_id": "LGSWF-G100",
+      "owner": "ipfs_datasets_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+        "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_lgswf_bootstrap.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-006.json"
+      ],
+      "symbol_ids": [
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_index/index.py#scan_repository",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_index/index.py#scan_repository_bounded",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_index/index.py#BoundedSemanticScanLimit",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_index/index.py#BoundedSemanticScanOutcome",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py#_namespace_token",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py#PythonSemanticAnalyzer",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py#analyze_python_source"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:datasets:scan_repository@lgswf-006",
+        "symbol-version:datasets:scan_repository_bounded@lgswf-006",
+        "symbol-version:datasets:BoundedSemanticScanLimit@lgswf-006",
+        "symbol-version:datasets:BoundedSemanticScanOutcome@lgswf-006",
+        "symbol-version:datasets:_namespace_token@lgswf-006",
+        "symbol-version:datasets:PythonSemanticAnalyzer@lgswf-006",
+        "symbol-version:datasets:analyze_python_source@lgswf-006"
+      ],
+      "capsule_cids": [
+        "capsule:datasets:scan_repository@root-r1",
+        "capsule:datasets:scan_repository_bounded@root-r1",
+        "capsule:datasets:BoundedSemanticScanLimit@root-r1",
+        "capsule:datasets:BoundedSemanticScanOutcome@root-r1",
+        "capsule:datasets:_namespace_token@root-r1",
+        "capsule:datasets:PythonSemanticAnalyzer@root-r1",
+        "capsule:datasets:analyze_python_source@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:ipfs-datasets.software-contracts.semantic-index@2",
+        "contract:ipfs-datasets.software-contracts.semantic-repository-state@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_datasets_py-semantic-index"
+    },
+    "LGSWF-007": {
+      "task_id": "LGSWF-007",
+      "task_cid": "task:LGSWF-007",
+      "goal_id": "LGSWF-G100",
+      "owner": "ipfs_datasets_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/domain_adapters.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py",
+        "external/ipfs_datasets/tests/unit/logic/software_verification/test_accelerator_dependency_boundary.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-007.json"
+      ],
+      "symbol_ids": [
+        "symbol:datasets:ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py#normalize_public_counterexample",
+        "symbol:datasets:ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py#counterexample_content_identity",
+        "symbol:datasets:ipfs_datasets_py/logic/software_verification/counterexamples/contracts.py#project_public_counterexample",
+        "symbol:datasets:ipfs_datasets_py/logic/software_verification/source_adapters.py#register_program_ast_evidence_port",
+        "symbol:datasets:ipfs_datasets_py/logic/software_verification/domain_adapters.py#register_code_security_facts_port",
+        "symbol:datasets:ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py#register_plan_evaluator_port",
+        "symbol:datasets:ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py#rank_via_and_or_evaluator",
+        "symbol:datasets:ipfs_datasets_py/logic/software_verification/tactician/proof_plan.py#rank_via_proof_aware_evaluator"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:datasets:normalize_public_counterexample@lgswf-007",
+        "symbol-version:datasets:counterexample_content_identity@lgswf-007",
+        "symbol-version:datasets:project_public_counterexample@lgswf-007",
+        "symbol-version:datasets:register_program_ast_evidence_port@lgswf-007",
+        "symbol-version:datasets:register_code_security_facts_port@lgswf-007",
+        "symbol-version:datasets:register_plan_evaluator_port@lgswf-007",
+        "symbol-version:datasets:rank_via_and_or_evaluator@lgswf-007",
+        "symbol-version:datasets:rank_via_proof_aware_evaluator@lgswf-007"
+      ],
+      "capsule_cids": [
+        "capsule:datasets:normalize_public_counterexample@root-r1",
+        "capsule:datasets:counterexample_content_identity@root-r1",
+        "capsule:datasets:project_public_counterexample@root-r1",
+        "capsule:datasets:register_program_ast_evidence_port@root-r1",
+        "capsule:datasets:register_code_security_facts_port@root-r1",
+        "capsule:datasets:register_plan_evaluator_port@root-r1",
+        "capsule:datasets:rank_via_and_or_evaluator@root-r1",
+        "capsule:datasets:rank_via_proof_aware_evaluator@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:CounterexampleEnvelope@2",
+        "contract:PublicCounterexampleBoundary@1",
+        "contract:CounterexampleIdentity@1",
+        "contract:GoalDirectedProofPlanRanker@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_datasets_py-verification"
+    },
+    "LGSWF-008": {
+      "task_id": "LGSWF-008",
+      "task_cid": "task:LGSWF-008",
+      "goal_id": "LGSWF-G100",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/test/agent_supervisor/test_lgswf_bootstrap_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-008.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py#bind_datasets_semantic_authority",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py#resolve_sibling_datasets_root",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/integrations/datasets_semantic_authority.py#resolve_accelerator_source_root",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py#configured_board_pythonpath",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py#preflight_configured_board",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py#ImplementationDaemon._with_worktree_validation_pythonpath",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py#ImplementationDaemon._enforce_pcce_bootstrap_guards",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py#ImplementationDaemon._build_implementation_prompt"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:bind_datasets_semantic_authority@lgswf-008",
+        "symbol-version:accelerator:resolve_sibling_datasets_root@lgswf-008",
+        "symbol-version:accelerator:resolve_accelerator_source_root@lgswf-008",
+        "symbol-version:accelerator:configured_board_pythonpath@lgswf-008",
+        "symbol-version:accelerator:preflight_configured_board@lgswf-008",
+        "symbol-version:accelerator:ImplementationDaemon._with_worktree_validation_pythonpath@lgswf-008",
+        "symbol-version:accelerator:ImplementationDaemon._enforce_pcce_bootstrap_guards@lgswf-008",
+        "symbol-version:accelerator:ImplementationDaemon._build_implementation_prompt@lgswf-008"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:bind_datasets_semantic_authority@root-r1",
+        "capsule:accelerator:resolve_sibling_datasets_root@root-r1",
+        "capsule:accelerator:resolve_accelerator_source_root@root-r1",
+        "capsule:accelerator:configured_board_pythonpath@root-r1",
+        "capsule:accelerator:preflight_configured_board@root-r1",
+        "capsule:accelerator:ImplementationDaemon._with_worktree_validation_pythonpath@root-r1",
+        "capsule:accelerator:ImplementationDaemon._enforce_pcce_bootstrap_guards@root-r1",
+        "capsule:accelerator:ImplementationDaemon._build_implementation_prompt@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:DatasetsSemanticAuthorityBinding@1",
+        "contract:ProductionContextSlice@1",
+        "contract:PlanRevisionContracts@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-009": {
+      "task_id": "LGSWF-009",
+      "task_cid": "task:LGSWF-009",
+      "goal_id": "LGSWF-G100",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/bindings/canonical-roots.json",
+        "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json",
+        "artifacts/logic_governed_semantic_work_fabric/plans/plan-revision-r1.json",
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-a.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-009.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py#PlanRevisionStore",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py#open_plan_revision_store",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py#PlanRevision",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py#PlanAuthorityRoots",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_index/index.py#scan_repository_bounded",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_state/api.py#build_semantic_state",
+        "symbol:datasets:ipfs_datasets_py/logic/software_contracts/semantic_state/api.py#verify_semantic_state_bundle"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:PlanRevisionStore@r1",
+        "symbol-version:accelerator:open_plan_revision_store@r1",
+        "symbol-version:accelerator:PlanRevision@r1",
+        "symbol-version:accelerator:PlanAuthorityRoots@r1",
+        "symbol-version:datasets:scan_repository_bounded@r1",
+        "symbol-version:datasets:build_semantic_state@r1",
+        "symbol-version:datasets:verify_semantic_state_bundle@r1"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:PlanRevisionStore@root-r1",
+        "capsule:accelerator:open_plan_revision_store@root-r1",
+        "capsule:accelerator:PlanRevision@root-r1",
+        "capsule:accelerator:PlanAuthorityRoots@root-r1",
+        "capsule:datasets:scan_repository_bounded@root-r1",
+        "capsule:datasets:build_semantic_state@root-r1",
+        "capsule:datasets:verify_semantic_state_bundle@root-r1"
+      ],
+      "source_fallback": "not-required:artifact-gate",
+      "contract_cids": [
+        "contract:PlanRevisionContracts@1",
+        "contract:PlanRevisionStore@1",
+        "contract:SemanticStateRoot@1",
+        "contract:SemanticWorkBinding@1-or-bootstrap-fallback",
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-010": {
+      "task_id": "LGSWF-010",
+      "task_cid": "task:LGSWF-010",
+      "goal_id": "LGSWF-G200",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/core/test_world_snapshot_contracts.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-010.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/core/world_snapshot_contracts.py#SupervisorWorldSnapshot"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:SupervisorWorldSnapshot@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:SupervisorWorldSnapshot@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:SupervisorWorldSnapshot@1",
+        "contract:SemanticStateRoot@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-core"
+    },
+    "LGSWF-011": {
+      "task_id": "LGSWF-011",
+      "task_cid": "task:LGSWF-011",
+      "goal_id": "LGSWF-G200",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/world_view.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_world_snapshot_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-011.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/world_snapshot_builder.py#build_world_snapshot",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/world_view.py#SupervisorWorldView"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:build_world_snapshot@planned",
+        "symbol-version:accelerator:SupervisorWorldView@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:build_world_snapshot@root-r1",
+        "capsule:accelerator:SupervisorWorldView@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:SupervisorWorldSnapshot@1",
+        "contract:SupervisorWorldView"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-014": {
+      "task_id": "LGSWF-014",
+      "task_cid": "task:LGSWF-014",
+      "goal_id": "LGSWF-G200",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-b.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-014.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:SupervisorWorldSnapshot@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-020": {
+      "task_id": "LGSWF-020",
+      "task_cid": "task:LGSWF-020",
+      "goal_id": "LGSWF-G300",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_work_binding.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-020.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py#SemanticWorkBinding",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py#evaluate_goal_completion"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:SemanticWorkBinding@planned",
+        "symbol-version:accelerator:evaluate_goal_completion@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:SemanticWorkBinding@root-r1",
+        "capsule:accelerator:evaluate_goal_completion@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:SemanticWorkBinding@1",
+        "contract:SemanticStateRoot@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-planning"
+    },
+    "LGSWF-021": {
+      "task_id": "LGSWF-021",
+      "task_cid": "task:LGSWF-021",
+      "goal_id": "LGSWF-G300",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_provisional_acceptance.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-021.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/provisional_semantic_binding.py#ProvisionalSemanticBinding"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:ProvisionalSemanticBinding@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:ProvisionalSemanticBinding@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:SemanticWorkBinding@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-024": {
+      "task_id": "LGSWF-024",
+      "task_cid": "task:LGSWF-024",
+      "goal_id": "LGSWF-G300",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-c.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-024.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:SemanticWorkBinding@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-030": {
+      "task_id": "LGSWF-030",
+      "task_cid": "task:LGSWF-030",
+      "goal_id": "LGSWF-G400",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_work_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-030.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/analysis/semantic_work_graph.py#SemanticWorkGraph"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:SemanticWorkGraph@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:SemanticWorkGraph@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:SemanticWorkBinding@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-analysis"
+    },
+    "LGSWF-031": {
+      "task_id": "LGSWF-031",
+      "task_cid": "task:LGSWF-031",
+      "goal_id": "LGSWF-G400",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+        "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-031.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py#TaskConflictGraph",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py#compute_semantic_conflicts"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:TaskConflictGraph@planned",
+        "symbol-version:accelerator:compute_semantic_conflicts@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:TaskConflictGraph@root-r1",
+        "capsule:accelerator:compute_semantic_conflicts@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-analysis"
+    },
+    "LGSWF-034": {
+      "task_id": "LGSWF-034",
+      "task_cid": "task:LGSWF-034",
+      "goal_id": "LGSWF-G400",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-034.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-040": {
+      "task_id": "LGSWF-040",
+      "task_cid": "task:LGSWF-040",
+      "goal_id": "LGSWF-G500",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py#select_parallel_frontier"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:select_parallel_frontier@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:select_parallel_frontier@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:PlanRevisionContracts@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-planning"
+    },
+    "LGSWF-041": {
+      "task_id": "LGSWF-041",
+      "task_cid": "task:LGSWF-041",
+      "goal_id": "LGSWF-G500",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_frontier_policy.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-041.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/frontier_policy.py#score_frontier_candidates"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:score_frontier_candidates@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:score_frontier_candidates@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:PlanRevisionContracts@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-planning"
+    },
+    "LGSWF-042": {
+      "task_id": "LGSWF-042",
+      "task_cid": "task:LGSWF-042",
+      "goal_id": "LGSWF-G500",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/configured_board_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_adaptive_frontier.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-042.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py#PlanDelta",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py#PlanDeltaOperation"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:PlanDelta@planned",
+        "symbol-version:accelerator:PlanDeltaOperation@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:PlanDelta@root-r1",
+        "capsule:accelerator:PlanDeltaOperation@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:PlanRevisionContracts@1",
+        "contract:PlanRevisionStore@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-planning"
+    },
+    "LGSWF-045": {
+      "task_id": "LGSWF-045",
+      "task_cid": "task:LGSWF-045",
+      "goal_id": "LGSWF-G500",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-e.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-045.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:PlanRevisionContracts@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-050": {
+      "task_id": "LGSWF-050",
+      "task_cid": "task:LGSWF-050",
+      "goal_id": "LGSWF-G600",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_resource_scheduler.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-050.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py#ResourceScheduler"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:ResourceScheduler@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:ResourceScheduler@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-051": {
+      "task_id": "LGSWF-051",
+      "task_cid": "task:LGSWF-051",
+      "goal_id": "LGSWF-G600",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/work_cache.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_work_cache.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-051.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/work_cache.py#WorkCache"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:WorkCache@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:WorkCache@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-052": {
+      "task_id": "LGSWF-052",
+      "task_cid": "task:LGSWF-052",
+      "goal_id": "LGSWF-G600",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_fabric_backpressure.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-052.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py#apply_stage_backpressure"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:apply_stage_backpressure@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:apply_stage_backpressure@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-054": {
+      "task_id": "LGSWF-054",
+      "task_cid": "task:LGSWF-054",
+      "goal_id": "LGSWF-G600",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-f.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-054.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-060": {
+      "task_id": "LGSWF-060",
+      "task_cid": "task:LGSWF-060",
+      "goal_id": "LGSWF-G700",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_capabilities.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-060.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py#advertise_capabilities"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:advertise_capabilities@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:advertise_capabilities@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-061": {
+      "task_id": "LGSWF-061",
+      "task_cid": "task:LGSWF-061",
+      "goal_id": "LGSWF-G700",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_fabric_coordination.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-061.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py#LeaseCoordinator"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:LeaseCoordinator@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:LeaseCoordinator@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-merge"
+    },
+    "LGSWF-062": {
+      "task_id": "LGSWF-062",
+      "task_cid": "task:LGSWF-062",
+      "goal_id": "LGSWF-G700",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_supervisor_partitioning.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-062.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py#partition_work"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:partition_work@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:partition_work@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-064": {
+      "task_id": "LGSWF-064",
+      "task_cid": "task:LGSWF-064",
+      "goal_id": "LGSWF-G700",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-g.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-064.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-070": {
+      "task_id": "LGSWF-070",
+      "task_cid": "task:LGSWF-070",
+      "goal_id": "LGSWF-G800",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/work_packet.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_work_packet.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-070.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/todo_daemon/work_packet.py#WorkPacket"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:WorkPacket@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:WorkPacket@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:SemanticWorkBinding@1",
+        "contract:task-identity@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-todo-daemon"
+    },
+    "LGSWF-071": {
+      "task_id": "LGSWF-071",
+      "task_cid": "task:LGSWF-071",
+      "goal_id": "LGSWF-G800",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_checkpoint_protocol.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-071.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/todo_daemon/checkpoint_protocol.py#CheckpointProtocol"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:CheckpointProtocol@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:CheckpointProtocol@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:task-identity@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-todo-daemon"
+    },
+    "LGSWF-072": {
+      "task_id": "LGSWF-072",
+      "task_cid": "task:LGSWF-072",
+      "goal_id": "LGSWF-G800",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+        "external/ipfs_accelerate/test/agent_supervisor/todo_daemon/test_governed_daemon_runtime.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-072.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py#ImplementationDaemon",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py#MultiSupervisorRunner"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:ImplementationDaemon@planned",
+        "symbol-version:accelerator:MultiSupervisorRunner@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:ImplementationDaemon@root-r1",
+        "capsule:accelerator:MultiSupervisorRunner@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:PlanRevisionStore@1",
+        "contract:task-identity@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-todo-daemon"
+    },
+    "LGSWF-073": {
+      "task_id": "LGSWF-073",
+      "task_cid": "task:LGSWF-073",
+      "goal_id": "LGSWF-G800",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-h.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-073.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:PlanRevisionStore@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-080": {
+      "task_id": "LGSWF-080",
+      "task_cid": "task:LGSWF-080",
+      "goal_id": "LGSWF-G900",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_semantic_refill.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-080.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/refill_contracts.py#RefillProposal",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py#BacklogRefinery"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:RefillProposal@planned",
+        "symbol-version:accelerator:BacklogRefinery@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:RefillProposal@root-r1",
+        "capsule:accelerator:BacklogRefinery@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:PlanRevisionContracts@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-planning"
+    },
+    "LGSWF-081": {
+      "task_id": "LGSWF-081",
+      "task_cid": "task:LGSWF-081",
+      "goal_id": "LGSWF-G900",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+        "external/ipfs_accelerate/test/agent_supervisor/planning/test_fabric_plan_doctor.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-081.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/planning/plan_doctor.py#PlanDoctor",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py#PlanRevisionStore"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:PlanDoctor@planned",
+        "symbol-version:accelerator:PlanRevisionStore@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:PlanDoctor@root-r1",
+        "capsule:accelerator:PlanRevisionStore@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:PlanRevisionStore@1",
+        "contract:PlanRevisionContracts@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-planning"
+    },
+    "LGSWF-084": {
+      "task_id": "LGSWF-084",
+      "task_cid": "task:LGSWF-084",
+      "goal_id": "LGSWF-G900",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-i.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-084.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:PlanRevisionStore@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-090": {
+      "task_id": "LGSWF-090",
+      "task_cid": "task:LGSWF-090",
+      "goal_id": "LGSWF-G1000",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py",
+        "external/ipfs_accelerate/test/agent_supervisor/integrations/test_semantic_refresh.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-090.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/integrations/semantic_refresh.py#refresh_semantic_view"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:refresh_semantic_view@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:refresh_semantic_view@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:SemanticStateRoot@1",
+        "contract:ipfs-datasets.software-contracts.semantic-index@2"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-integrations"
+    },
+    "LGSWF-091": {
+      "task_id": "LGSWF-091",
+      "task_cid": "task:LGSWF-091",
+      "goal_id": "LGSWF-G1000",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/merge_queue.py",
+        "external/ipfs_accelerate/test/agent_supervisor/merge/test_semantic_reconciliation.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-091.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/merge/semantic_reconciliation.py#reconcile_semantic_delta",
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/merge/merge_queue.py#MergeQueue"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:reconcile_semantic_delta@planned",
+        "symbol-version:accelerator:MergeQueue@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:reconcile_semantic_delta@root-r1",
+        "capsule:accelerator:MergeQueue@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:SemanticStateRoot@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-merge"
+    },
+    "LGSWF-094": {
+      "task_id": "LGSWF-094",
+      "task_cid": "task:LGSWF-094",
+      "goal_id": "LGSWF-G1000",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-j.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-094.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:SemanticStateRoot@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-100": {
+      "task_id": "LGSWF-100",
+      "task_cid": "task:LGSWF-100",
+      "goal_id": "LGSWF-G1100",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/convergence.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_convergence.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-100.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/convergence.py#run_convergence_loop"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:run_convergence_loop@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:run_convergence_loop@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-101": {
+      "task_id": "LGSWF-101",
+      "task_cid": "task:LGSWF-101",
+      "goal_id": "LGSWF-G1100",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
+        "external/ipfs_accelerate/test/agent_supervisor/objectives/test_fabric_terminal_states.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-101.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py#classify_terminal_state"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:classify_terminal_state@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:classify_terminal_state@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-objectives"
+    },
+    "LGSWF-103": {
+      "task_id": "LGSWF-103",
+      "task_cid": "task:LGSWF-103",
+      "goal_id": "LGSWF-G1100",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-k.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-103.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-110": {
+      "task_id": "LGSWF-110",
+      "task_cid": "task:LGSWF-110",
+      "goal_id": "LGSWF-G1200",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/scheduling_observability.py",
+        "external/ipfs_accelerate/test/agent_supervisor/runtime/test_scheduling_observability.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-110.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/runtime/scheduling_observability.py#emit_scheduling_receipt"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:emit_scheduling_receipt@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:emit_scheduling_receipt@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-runtime"
+    },
+    "LGSWF-111": {
+      "task_id": "LGSWF-111",
+      "task_cid": "task:LGSWF-111",
+      "goal_id": "LGSWF-G1200",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/supervisor_fabric.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/__init__.py",
+        "external/ipfs_accelerate/test/agent_supervisor/entrypoints/test_supervisor_fabric.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-111.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:ipfs_accelerate_py/agent_supervisor/entrypoints/supervisor_fabric.py#fabric_status"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:fabric_status@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:fabric_status@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-entrypoints"
+    },
+    "LGSWF-113": {
+      "task_id": "LGSWF-113",
+      "task_cid": "task:LGSWF-113",
+      "goal_id": "LGSWF-G1200",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-l.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-113.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-120": {
+      "task_id": "LGSWF-120",
+      "task_cid": "task:LGSWF-120",
+      "goal_id": "LGSWF-G1300",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/fixtures.py",
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_fixture_topology.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-120.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:test/agent_supervisor/fabric/fixtures.py#build_fabric_fixture"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:build_fabric_fixture@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:build_fabric_fixture@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-qualification"
+    },
+    "LGSWF-121": {
+      "task_id": "LGSWF-121",
+      "task_cid": "task:LGSWF-121",
+      "goal_id": "LGSWF-G1300",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_coordination_faults.py",
+        "artifacts/logic_governed_semantic_work_fabric/qualification/coordination-faults.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-121.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:test/agent_supervisor/fabric/test_coordination_faults.py#test_coordination_fault_matrix"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:test_coordination_fault_matrix@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:test_coordination_fault_matrix@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-qualification"
+    },
+    "LGSWF-122": {
+      "task_id": "LGSWF-122",
+      "task_cid": "task:LGSWF-122",
+      "goal_id": "LGSWF-G1300",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_resource_semantic_faults.py",
+        "artifacts/logic_governed_semantic_work_fabric/qualification/resource-semantic-faults.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-122.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:test/agent_supervisor/fabric/test_resource_semantic_faults.py#test_resource_semantic_fault_matrix"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:test_resource_semantic_fault_matrix@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:test_resource_semantic_fault_matrix@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-qualification"
+    },
+    "LGSWF-123": {
+      "task_id": "LGSWF-123",
+      "task_cid": "task:LGSWF-123",
+      "goal_id": "LGSWF-G1300",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_adversarial_matrix.py",
+        "artifacts/logic_governed_semantic_work_fabric/qualification/adversarial-matrix.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-123.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:test/agent_supervisor/fabric/test_adversarial_matrix.py#test_adversarial_matrix"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:test_adversarial_matrix@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:test_adversarial_matrix@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-qualification"
+    },
+    "LGSWF-125": {
+      "task_id": "LGSWF-125",
+      "task_cid": "task:LGSWF-125",
+      "goal_id": "LGSWF-G1300",
+      "owner": "ipfs_accelerate_py",
+      "binding_mode": "exact-symbol-scope",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "external/ipfs_accelerate/test/agent_supervisor/fabric/test_restart_reconstruction.py",
+        "artifacts/logic_governed_semantic_work_fabric/qualification/restart-reconstruction.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-125.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:test/agent_supervisor/fabric/test_restart_reconstruction.py#test_restart_reconstruction"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:test_restart_reconstruction@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:test_restart_reconstruction@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:PlanRevisionStore@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "ipfs_accelerate_py-qualification"
+    },
+    "LGSWF-126": {
+      "task_id": "LGSWF-126",
+      "task_cid": "task:LGSWF-126",
+      "goal_id": "LGSWF-G1300",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-m.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-126.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-130": {
+      "task_id": "LGSWF-130",
+      "task_cid": "task:LGSWF-130",
+      "goal_id": "LGSWF-G1400",
+      "owner": "cross-repository",
+      "binding_mode": "mixed-artifact-and-source",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/corpus.json",
+        "external/ipfs_accelerate/scripts/benchmarks/logic_governed_semantic_work_fabric.py",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-130.json"
+      ],
+      "symbol_ids": [
+        "symbol:accelerator:scripts/benchmarks/logic_governed_semantic_work_fabric.py#run_benchmark_corpus"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:accelerator:run_benchmark_corpus@planned"
+      ],
+      "capsule_cids": [
+        "capsule:accelerator:run_benchmark_corpus@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-benchmark"
+    },
+    "LGSWF-131": {
+      "task_id": "LGSWF-131",
+      "task_cid": "task:LGSWF-131",
+      "goal_id": "LGSWF-G1400",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/raw/config-a.json",
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/raw/config-b.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-131.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-benchmark"
+    },
+    "LGSWF-132": {
+      "task_id": "LGSWF-132",
+      "task_cid": "task:LGSWF-132",
+      "goal_id": "LGSWF-G1400",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/raw/config-c.json",
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/raw/config-d.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-132.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-benchmark"
+    },
+    "LGSWF-134": {
+      "task_id": "LGSWF-134",
+      "task_cid": "task:LGSWF-134",
+      "goal_id": "LGSWF-G1400",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/performance-report.json",
+        "artifacts/logic_governed_semantic_work_fabric/benchmark/resource-efficiency-report.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-134.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-benchmark"
+    },
+    "LGSWF-135": {
+      "task_id": "LGSWF-135",
+      "task_cid": "task:LGSWF-135",
+      "goal_id": "LGSWF-G1400",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-n.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-135.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    },
+    "LGSWF-140": {
+      "task_id": "LGSWF-140",
+      "task_cid": "task:LGSWF-140",
+      "goal_id": "LGSWF-G1500",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/release/manifest.json",
+        "artifacts/logic_governed_semantic_work_fabric/release/artifact-index.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-140.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1",
+        "contract:interface-freeze@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-release"
+    },
+    "LGSWF-141": {
+      "task_id": "LGSWF-141",
+      "task_cid": "task:LGSWF-141",
+      "goal_id": "LGSWF-G1500",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_SECURITY.md",
+        "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_MIGRATION.md",
+        "artifacts/logic_governed_semantic_work_fabric/release/security-findings.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-141.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-release"
+    },
+    "LGSWF-142": {
+      "task_id": "LGSWF-142",
+      "task_cid": "task:LGSWF-142",
+      "goal_id": "LGSWF-G1500",
+      "owner": "cross-repository",
+      "binding_mode": "mixed-artifact-and-source",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "scripts/validate_logic_governed_semantic_work_fabric_release.py",
+        "artifacts/logic_governed_semantic_work_fabric/release/qualification-decision.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-142.json"
+      ],
+      "symbol_ids": [
+        "symbol:control:scripts/validate_logic_governed_semantic_work_fabric_release.py#main"
+      ],
+      "symbol_version_cids": [
+        "symbol-version:control:validate_release@planned"
+      ],
+      "capsule_cids": [
+        "capsule:control:validate_release@root-r1"
+      ],
+      "source_fallback": "producer-bound-raw-source-when-capsule-stale",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-release"
+    },
+    "LGSWF-144": {
+      "task_id": "LGSWF-144",
+      "task_cid": "task:LGSWF-144",
+      "goal_id": "LGSWF-G1500",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/release/final-supervisor-report.json",
+        "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_QUALIFICATION.md",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-144.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-release"
+    },
+    "LGSWF-145": {
+      "task_id": "LGSWF-145",
+      "task_cid": "task:LGSWF-145",
+      "goal_id": "LGSWF-G1500",
+      "owner": "cross-repository",
+      "binding_mode": "artifact-identity",
+      "plan_revision": "urn:lgswf:plan-revision:r1",
+      "tree_root": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+      "semantic_state_root_cid": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+      "owned_paths": [
+        "artifacts/logic_governed_semantic_work_fabric/gates/epic-o.json",
+        "artifacts/logic_governed_semantic_work_fabric/release/release-seal.json",
+        "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-145.json"
+      ],
+      "symbol_ids": [],
+      "symbol_version_cids": [],
+      "capsule_cids": [],
+      "source_fallback": "not-required:artifact-only",
+      "contract_cids": [
+        "contract:authority-map@1",
+        "contract:PlanRevisionStore@1"
+      ],
+      "obligation_cids": [],
+      "proof_selection": {
+        "selected_obligations": [],
+        "selection_status": "verified_empty"
+      },
+      "completion_rule": "supervisor-accepted-outputs-and-current-evidence",
+      "authority": "cross-repository-epic-gate"
+    }
+  },
+  "result_identity": "urn:lgswf:bindings:task-bindings-r1@lgswf-009"
+}

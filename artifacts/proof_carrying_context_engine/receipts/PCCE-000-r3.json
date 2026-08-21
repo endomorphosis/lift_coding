@@ -1,0 +1,340 @@
+{
+  "admitted_at": "2026-08-14T08:06:47Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r3",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "manual-operator-control-revision",
+  "content_id": "sha256:7a08c3f3cc34b405daa66220558d1ddc662ec80435b132610a2f4e1aa047ff49",
+  "control_base": "8abaa5af47743b0d3d3258adfbbb76d9898e1c70",
+  "evidence": {
+    "board_projection_id": "sha256:e0b79c7f310d951d543f6f8bc5a121724a0bca77ecc12127c612d4c06619e590",
+    "bundle_index_id": "sha256:472ac3550d3d0c1375a636852b7277689e57c863777dd3e24eb653670fbe7812",
+    "config_sha256": "sha256:d1557ae861dd420afdb1c97b77f38e6169481a210e28603425e3cc18e5b472cf",
+    "dependency_graph_id": "sha256:5c71e1302f89a47bf25a3f321103ab703a5246eed5b62f08ea37875e2c68dc0d",
+    "objective_sha256": "sha256:bdd0b3e16ced4a1b54f991c8d983259a92bb892c67f21a19e8ccf46841086a3d",
+    "plan_sha256": "sha256:83931b68c58bcb641224e511b5ea29538c76cb674e5b2661c8a2b92927db0fd9",
+    "profile_g_bootstrap_sha256": "sha256:37ae92791a4a2705bf97c83cbdeb383b1dec97e8604daf4f138bbde9692f37f5",
+    "protected_paths": [
+      "artifacts/proof_carrying_context_engine/control/bundle_index.json",
+      "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+      "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
+      "artifacts/proof_carrying_context_engine/control/task_board.json",
+      "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+      "config/proof_carrying_context_engine_v0_1_supervisor.json",
+      "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md",
+      "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
+      "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "scripts/validate_proof_carrying_context_engine_board.py"
+    ],
+    "provider_route_repair": {
+      "base_commit": "c8e953be8696d47376442c73739eea14fad83113",
+      "baseline_limitations": [
+        {
+          "cause": "missing later generic-fallback helper _configured_agent_implementation_route_plan",
+          "collected": 0,
+          "errors": 1,
+          "result": "collection_error",
+          "return_code": 2,
+          "scope": "not called by the typed PCCE production route",
+          "suite": "implementation_daemon_runner",
+          "uncollected_functions": 35
+        },
+        {
+          "cases": [
+            "plan-bound sparse repo_root",
+            "repeated objective-scan-exclude parser",
+            "missing manual_completion_authority_revalidation_only parser field",
+            "no-implement reconciliation worktree-root"
+          ],
+          "failed": 4,
+          "passed": 25,
+          "result": "baseline_failures",
+          "scope": "not exercised by the exact standard PCCE implement command",
+          "suite": "implementation_supervisor_runner"
+        },
+        {
+          "cause": "untouched generic grok_cli_runner",
+          "failed": 21,
+          "passed": 2,
+          "reproduced_at": "99a329a34dc2625468de5138e12fdb90892076eb",
+          "result": "baseline_failures",
+          "scope": "generic/default route is not qualified or used by the explicit PCCE production route",
+          "suite": "default_provider_route"
+        }
+      ],
+      "changed_files": [
+        {
+          "git_blob": "0dc3b1c645b0525b30f57e23b103a953a1178b4d",
+          "path": "ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py",
+          "sha256": "sha256:d2b89e9330a28a29603bc165a2736003a731563cb95bf4510a35b570a260dc1e"
+        },
+        {
+          "git_blob": "c3e8600cf4e33de33100689f24c9cf3f2444d978",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+          "sha256": "sha256:fe577ad6abecd444150a2aa510aa4ea95a8a676a771f188da95af7bab7221bf8"
+        },
+        {
+          "git_blob": "c049f0c25cb08553f0f3db3d5accdd9ba75dc913",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "sha256": "sha256:63fc57fee91cc28a982b312d7a81aec6559d8f819772603387be36f42e2b5f28"
+        },
+        {
+          "git_blob": "b07f8c9cade96e7b35390595b673502a346add5b",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py",
+          "sha256": "sha256:64ac48f6ee11f061c0e004366a826e4811f37bde201e26294dde477818f9983a"
+        },
+        {
+          "git_blob": "3dcdd09faf24080a3deaa247c454908daf153a7b",
+          "path": "test/api/test_agent_supervisor_planner.py",
+          "sha256": "sha256:9f9634626e685721e084055b018cc9079f65c40dcda25cfb9eda649536c64e33"
+        },
+        {
+          "git_blob": "ce5f3c52ba49563f6ffd7114493ff3a2214545e5",
+          "path": "test/api/test_agent_supervisor_production_provider_cli.py",
+          "sha256": "sha256:c106ed9946b3180f359550cccf530d98e8a5100f7175d7441144535160545251"
+        }
+      ],
+      "commits": [
+        {
+          "commit": "99a329a34dc2625468de5138e12fdb90892076eb",
+          "purpose": "production provider argv handoff",
+          "tree": "1f27da000b7b50167646a8dffb3214833a38e9d3"
+        },
+        {
+          "commit": "912ecf895717b68abc78545a4f5dfe7f88b69413",
+          "purpose": "governed production provider route",
+          "tree": "a96edf1db206d6a7dd0eeed0fff1403a3aa0e6cb"
+        },
+        {
+          "commit": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+          "purpose": "bounded bundle lane controls",
+          "tree": "a16781386689845c1162c85c0f5c899a673d48e6"
+        }
+      ],
+      "final_commit": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+      "final_tree": "a16781386689845c1162c85c0f5c899a673d48e6",
+      "implementation_gates": {
+        "disposition": "passed_for_explicit_pcce_production_policy_route",
+        "failed": 0,
+        "git_diff_check": "passed",
+        "groups": [
+          {
+            "name": "production_cli",
+            "passed": 40
+          },
+          {
+            "name": "production_route_security_reviewed_effect_context_slice",
+            "passed": 66
+          },
+          {
+            "name": "legacy_landed",
+            "passed": 26
+          },
+          {
+            "name": "authority_recovery_post_merge",
+            "passed": 83
+          },
+          {
+            "name": "timeout_envelope_planner",
+            "passed": 1
+          }
+        ],
+        "passed": 216,
+        "py_compile": "passed",
+        "skipped": 0,
+        "xfailed": 0
+      },
+      "independent_review": {
+        "disposition": "pass_with_documented_baseline_exceptions",
+        "failed": 0,
+        "groups": [
+          {
+            "name": "planner",
+            "passed": 33,
+            "warnings": 1
+          },
+          {
+            "name": "authority_acceptance_post_merge_legacy",
+            "passed": 101,
+            "warnings": 1
+          },
+          {
+            "name": "production_route_cli_security_reviewed_effect_context",
+            "passed": 106,
+            "warnings": 1
+          }
+        ],
+        "passed": 240,
+        "scope": "exact explicit PCCE governed production-policy implement route",
+        "static_findings": {
+          "canonical_post_merge_acceptance_funnels": 4,
+          "capacity_evidence_redaction": "present",
+          "git_ancestry_binding": "sanitized",
+          "git_diff_check": "passed",
+          "legacy_direct_completion_sink_callers": 0,
+          "lifecycle_cas": "fail_closed",
+          "transitive_production_method_closure": {
+            "methods": 48,
+            "missing": 0
+          },
+          "worktree_clean_before_and_after": true
+        },
+        "warnings": 3
+      },
+      "qualification_boundary": "explicit PCCE production-policy route only; no blanket full-suite, managed-identity, task-attempt, generic-fallback, or default-provider clearance"
+    },
+    "repository_gitlinks": {
+      "accelerate": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+      "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "mcp_plus_plus": "6965f89f066769f3b3ac7b5f753b1a0044562570"
+    },
+    "task_ids": [
+      "PCCE-000",
+      "PCCE-001",
+      "PCCE-002",
+      "PCCE-003",
+      "PCCE-004",
+      "PCCE-005",
+      "PCCE-006",
+      "PCCE-007",
+      "PCCE-008",
+      "PCCE-009",
+      "PCCE-010",
+      "PCCE-011",
+      "PCCE-012",
+      "PCCE-013",
+      "PCCE-014",
+      "PCCE-015",
+      "PCCE-016",
+      "PCCE-017",
+      "PCCE-018",
+      "PCCE-019",
+      "PCCE-020",
+      "PCCE-021",
+      "PCCE-022",
+      "PCCE-023",
+      "PCCE-024",
+      "PCCE-025",
+      "PCCE-030",
+      "PCCE-031",
+      "PCCE-032",
+      "PCCE-033",
+      "PCCE-034",
+      "PCCE-035",
+      "PCCE-040",
+      "PCCE-041",
+      "PCCE-042",
+      "PCCE-043",
+      "PCCE-044",
+      "PCCE-045",
+      "PCCE-050",
+      "PCCE-051",
+      "PCCE-052",
+      "PCCE-053",
+      "PCCE-054",
+      "PCCE-055",
+      "PCCE-056",
+      "PCCE-057",
+      "PCCE-060",
+      "PCCE-061",
+      "PCCE-062",
+      "PCCE-063",
+      "PCCE-064",
+      "PCCE-065",
+      "PCCE-066",
+      "PCCE-067",
+      "PCCE-068",
+      "PCCE-070",
+      "PCCE-071",
+      "PCCE-072",
+      "PCCE-073",
+      "PCCE-074",
+      "PCCE-075",
+      "PCCE-076",
+      "PCCE-079",
+      "PCCE-080",
+      "PCCE-081",
+      "PCCE-082",
+      "PCCE-083"
+    ],
+    "todo_sha256": "sha256:28395db19dd4f2b1f7b2e22e335ef25f414d5f0ec44245c5eca22b7a77decc2f",
+    "validator_sha256": "sha256:3b2ac087b99342b1bf9769cf5e63307ea5de4b1b76839b8e2bc16413de75d00f"
+  },
+  "external_launch_receipt": {
+    "generated_after_control_commit": true,
+    "generation": "r3",
+    "must_bind": [
+      "final_control_commit",
+      "final_control_tree",
+      "recursive_repository_gitlinks",
+      "nested_repository_heads",
+      "clean_worktree_evidence",
+      "active_r3_receipt_content_id",
+      "board_projection_id",
+      "dependency_graph_id",
+      "bundle_index_id",
+      "provider_policy",
+      "provider_capacity_snapshot_id",
+      "scheduler_r3_paths"
+    ],
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r3/control-launch-receipt.json",
+    "product_task_completion_authority": false,
+    "required": true,
+    "status": "pending_final_control_head"
+  },
+  "objective_id": "PCCE-G000",
+  "operator_approval": {
+    "approved": true,
+    "approved_at": "2026-08-14T08:06:47Z",
+    "identity": "local-operator:uid-1000",
+    "scope": "admit r3 control revision and a fresh scheduler-r3 launch only after final-HEAD launch binding"
+  },
+  "parser_report": {
+    "acyclic": true,
+    "goal_count": 9,
+    "initial_ready_task_ids": [
+      "PCCE-001",
+      "PCCE-002",
+      "PCCE-003",
+      "PCCE-004"
+    ],
+    "task_count": 67,
+    "unique_task_ids": true,
+    "unique_terminal_task_id": "PCCE-083"
+  },
+  "restart_policy": {
+    "fresh_claims_leases_fences_and_receipts": true,
+    "generation": "r3",
+    "log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r3",
+    "preserve_scheduler_r2_forensics_read_only": true,
+    "resume_scheduler_r2": false,
+    "reuse_scheduler_r2_claims_leases_fences_or_receipts": false,
+    "reuse_scheduler_r2_logs": false,
+    "reuse_scheduler_r2_state": false,
+    "reuse_scheduler_r2_worktrees": false,
+    "scheduler_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r3",
+    "worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r3"
+  },
+  "rollback": {
+    "historical_artifacts": "preserve r2 receipt, Profile-G receipt, incident manifest, and r2 forensic state byte-for-byte",
+    "replacement": "supersede r3 with a new explicit receipt and distinct scheduler generation",
+    "source": "revert only the r3 control commit and accelerator gitlink if no r3 product-task work has been admitted"
+  },
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "supersedes": {
+    "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r2",
+    "byte_sha256": "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+    "content_id": "sha256:491f3edea7febc4306e297082f60ca1e46677c38d60427015302622dc912c029",
+    "incident_content_id": "sha256:2c3ff2b51de842d5349d5518a5240ed37780062702ba6aa68d39485202016215",
+    "incident_file_sha256": "sha256:98c5c8c3b1f038962a55698524f10feee0fd29568e36b52c09ca020cc77dd141",
+    "incident_id": "urn:pcce:control-incident:scheduler-r2-provider-handoff",
+    "incident_path": "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+    "incident_rewrite_allowed": false,
+    "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+    "rewrite_allowed": false
+  },
+  "task_id": "PCCE-000"
+}

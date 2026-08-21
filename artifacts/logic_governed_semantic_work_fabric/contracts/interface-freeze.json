@@ -1,0 +1,500 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.interface-freeze@1",
+  "interface": "interface-freeze@1",
+  "task_id": "LGSWF-005",
+  "title": "Freeze the authority map and cross-package integration interfaces",
+  "track": "lgswf-g100-contract-freeze",
+  "observed_at": "2026-08-16T12:00:00Z",
+  "freeze_status": "frozen",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "base_revision": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g100/lgswf-005",
+  "depends_on": [
+    "LGSWF-001",
+    "LGSWF-002",
+    "LGSWF-003",
+    "LGSWF-004"
+  ],
+  "authority_map_ref": "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+  "source_inventories": [
+    "artifacts/logic_governed_semantic_work_fabric/inventory/revision-ledger.json",
+    "artifacts/logic_governed_semantic_work_fabric/inventory/datasets-authority.json",
+    "artifacts/logic_governed_semantic_work_fabric/inventory/accelerator-authority.json",
+    "artifacts/logic_governed_semantic_work_fabric/inventory/package-dag-and-predecessors.json"
+  ],
+  "checked_authorities": {
+    "accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "accelerator_tree": "ea6869d70e25c7bc8b80e6458c1a46b8c03f945f",
+    "datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "datasets_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+    "control_bootstrap": "d99a0204e3936ad40a68c8a457b85dc353ee9eff",
+    "control_head": "0e0ed64b1cc5d39a31a77f2acefeb3316bb54e0f"
+  },
+  "freeze_rules": [
+    "Exact mappings between datasets semantic artifacts and accelerator references are frozen rather than renamed",
+    "Accelerator records reference datasets roots by type and never add operational fields to datasets state",
+    "No duplicate semantic records may be created on either side of the package boundary",
+    "No upward package imports may define semantic identity",
+    "Compatibility facades remain inert and are not capability signals",
+    "Absent checked-head surfaces must not be invented",
+    "Later intervening code is candidate evidence only until admitted by an explicit later task"
+  ],
+  "frozen_interfaces": [
+    {
+      "name": "authority-map@1",
+      "owner": "cross-repository contract freeze",
+      "artifact": "artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+      "status": "frozen_by_LGSWF-005",
+      "role": "accepted ownership and exact mapping map for datasets semantic truth and accelerator operational coordination"
+    },
+    {
+      "name": "interface-freeze@1",
+      "owner": "cross-repository contract freeze",
+      "artifact": "artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json",
+      "status": "frozen_by_LGSWF-005",
+      "role": "accepted cross-package integration interface freeze"
+    },
+    {
+      "name": "SemanticWorkBinding@1",
+      "owner": "ipfs_accelerate_py",
+      "status": "interface_frozen_implementation_deferred",
+      "implementation_task": "LGSWF-020",
+      "bootstrap_fallback": "SemanticWorkBinding@1-or-bootstrap-fallback",
+      "role": "accelerator reference record for goals, subgoals, and tasks",
+      "must_reference": [
+        "accepted plan",
+        "tree/root",
+        "target symbols/artifacts",
+        "capsule/source/environment references",
+        "pre/post/exceptional conditions",
+        "effects/scopes",
+        "tests",
+        "proof obligations",
+        "assumptions",
+        "limitations",
+        "counterexamples",
+        "invalidation",
+        "completion rule",
+        "authority",
+        "review requirements"
+      ],
+      "must_not": [
+        "embed capsule bodies",
+        "duplicate datasets semantic records",
+        "add operational fields into SemanticStateRoot@1"
+      ],
+      "datasets_owners_of_referenced_artifacts": [
+        "semantic_index",
+        "semantic_state",
+        "capsules",
+        "bindings",
+        "contracts_and_registry",
+        "verification",
+        "invalidation",
+        "proof_selection"
+      ]
+    },
+    {
+      "name": "PlanRevisionContracts@1",
+      "owner": "ipfs_accelerate_py",
+      "paths": [
+        "ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py"
+      ],
+      "status": "landed_library_not_wired_on_configured_board",
+      "related": [
+        "PlanRevisionStore@1",
+        "plan-revision-store@1",
+        "plan-revision-active@1",
+        "plan-revision-apply-receipt@1"
+      ],
+      "bootstrap_label": "urn:lgswf:plan-revision:r000",
+      "activation_gate": "LGSWF-009 accepts PlanRevision r1"
+    },
+    {
+      "name": "task-identity@1",
+      "owner": "ipfs_accelerate_py",
+      "path": "ipfs_accelerate_py/agent_supervisor/task_sources/task_identity.py",
+      "status": "landed_and_wired_on_configured_board",
+      "role": "stable task identity; markdown and duckdb are projections, not plan authority"
+    },
+    {
+      "name": "SupervisorWorldSnapshot@1",
+      "owner": "ipfs_accelerate_py",
+      "status": "interface_frozen_implementation_deferred",
+      "implementation_task": "LGSWF-010",
+      "role": "content-addressed operational overlay that references separately verified authorities",
+      "must_reference_without_reinterpreting": [
+        "repository identity and tree",
+        "datasets repository-state CID",
+        "semantic-state-root CID",
+        "typed symbol/capsule/environment/contract/proof roots where checked contracts expose them",
+        "accepted plan root/revision",
+        "objective graph",
+        "goal/subgoal/task population",
+        "claims",
+        "resources",
+        "supervisor/daemon capabilities",
+        "merge queue",
+        "completion evidence",
+        "unresolved gaps",
+        "active policies",
+        "event cursor",
+        "coordination epoch",
+        "fencing epoch"
+      ],
+      "must_not_embed": [
+        "raw source",
+        "prompts",
+        "credentials",
+        "model replies",
+        "mutable local paths",
+        "provider payloads"
+      ],
+      "component_states": [
+        "current",
+        "stale",
+        "unavailable",
+        "inconsistent",
+        "quarantined"
+      ]
+    },
+    {
+      "name": "SupervisorWorldView",
+      "owner": "ipfs_accelerate_py",
+      "status": "interface_frozen_as_pure_query_projection",
+      "role": "pure query projection over SupervisorWorldSnapshot@1; holds no mutation port"
+    },
+    {
+      "name": "SemanticStateRoot@1",
+      "owner": "ipfs_datasets_py",
+      "schema": "ipfs-datasets.software-contracts.semantic-state-root@1",
+      "status": "frozen_mapping",
+      "owned_fields": [
+        "repository_id",
+        "producer",
+        "semantic_state_schema",
+        "merkle_compiler_version",
+        "capsule_schema",
+        "capsule_compiler_version",
+        "symbol_fact_index_cid",
+        "artifact_fact_index_cid",
+        "semantic_link_index_cid",
+        "symbol_node_index_cid",
+        "capsule_index_cid",
+        "environment_binding_set_cid",
+        "analysis_limitation_index_cid",
+        "root_cid"
+      ],
+      "does_not_contain": [
+        "global contract roots",
+        "proof-obligation roots",
+        "history",
+        "selection",
+        "receipts",
+        "clocks",
+        "leases",
+        "local paths"
+      ],
+      "current_canonical_root": null,
+      "bootstrap_binding": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1"
+    },
+    {
+      "name": "SemanticStateProducer@1",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority"
+    },
+    {
+      "name": "SemanticStateView@1",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority"
+    },
+    {
+      "name": "CapsuleFreshness@1",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority",
+      "admission_rules": [
+        "only fresh exact capsules may substitute as exact_substitute",
+        "only fresh conservative capsules with visible caveats may substitute as conservative_substitute_with_caveats",
+        "stale/heuristic/opaque/unknown/invalid capsules require raw source"
+      ]
+    },
+    {
+      "name": "ProducerBoundSource@1",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority",
+      "bootstrap_use": "LGSWF-001 through LGSWF-008 may use exact-tree raw-source-required bootstrap bindings"
+    },
+    {
+      "name": "TestSelection@1",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority"
+    },
+    {
+      "name": "ProofSelection@1",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority",
+      "note": "derived evidence excluded from SemanticStateRoot durable fields"
+    },
+    {
+      "name": "SemanticGovernorPublicApi@1",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority"
+    },
+    {
+      "name": "LogicVerificationAPI@1",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority",
+      "authority_boundary": "consumer API; not supervisor-control authority"
+    },
+    {
+      "name": "LogicFamilyRegistry@2",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_checked_authority"
+    },
+    {
+      "name": "CounterexampleEnvelope@2",
+      "owner": "ipfs_datasets_py",
+      "status": "landed_with_recorded_identity_repair_debt",
+      "related": [
+        "PublicCounterexampleBoundary@1"
+      ],
+      "repair_owner": "LGSWF-007"
+    },
+    {
+      "name": "SemanticWorkGraph@1",
+      "owner": "cross-repository operational graph",
+      "status": "interface_frozen_implementation_deferred",
+      "role": "retains separate goal, task, code/data/interface/schema, contract/proof/validation/policy/merge/lifecycle, read/write/effect, invalidation, conflict, supersession, generation, block, and unlock edges"
+    }
+  ],
+  "cross_package_integration_contracts": [
+    {
+      "id": "datasets-to-accelerator-semantic-reference",
+      "direction": "accelerator_consumes_datasets",
+      "from": "ipfs_accelerate_py.agent_supervisor",
+      "to": "ipfs_datasets_py.logic",
+      "allowed": true,
+      "rules": [
+        "reference by type and content identity only",
+        "never redefine semantic identity",
+        "never embed capsule bodies or raw semantic state into accelerator-owned records except as typed CIDs/references",
+        "never invent a parallel accelerator semantic_state authority at checked head"
+      ]
+    },
+    {
+      "id": "datasets-upward-to-accelerator-for-identity",
+      "direction": "datasets_imports_accelerator",
+      "from": "ipfs_datasets_py.logic semantic identity paths",
+      "to": "ipfs_accelerate_py.agent_supervisor",
+      "allowed": false,
+      "exceptions": "none for semantic identity",
+      "recorded_violations_require_repair": true,
+      "repair_owner": "LGSWF-007"
+    },
+    {
+      "id": "integrations-facade",
+      "direction": "accelerator_facade_to_datasets",
+      "from": "ipfs_accelerate_py.agent_supervisor.integrations",
+      "to": "ipfs_datasets_py",
+      "allowed": true,
+      "classification": "facade",
+      "rules": [
+        "optional bounded adapters only",
+        "not semantic truth authority",
+        "import success is not a capability signal"
+      ]
+    },
+    {
+      "id": "proof-orchestration-consumer",
+      "direction": "accelerator_consumes_datasets",
+      "from": "ipfs_accelerate_py.agent_supervisor.proof",
+      "to": "ipfs_datasets_py.logic software_verification / backends / ir_core",
+      "allowed": true,
+      "classification": "consumer",
+      "rules": [
+        "datasets owns obligation identity and formal artifact kinds",
+        "accelerator owns scheduling and cache orchestration only"
+      ]
+    },
+    {
+      "id": "compatibility-facades-inert",
+      "direction": "compatibility_only",
+      "surfaces": [
+        "entrypoints empty ENTRYPOINT_LAZY_FACADE_EXPORTS",
+        "package-root lazy re-exports",
+        "ops script wrappers",
+        "MCP/MCP++ surfaces",
+        "datasets llm_router alias",
+        "optional datasets storage/P2P/IPFS backend bridges"
+      ],
+      "allowed": true,
+      "classification": "facade",
+      "rules": [
+        "remain inert for LGSWF authority",
+        "must not become dual semantic owners"
+      ]
+    }
+  ],
+  "package_dag_freeze": {
+    "accelerator_domain_dag_bottom_up": [
+      "core",
+      "control",
+      "task_sources",
+      "context",
+      "analysis",
+      "proof",
+      "objectives",
+      "planning",
+      "validation",
+      "prompt",
+      "merge",
+      "rescue",
+      "runtime",
+      "self_improvement",
+      "integrations",
+      "todo_daemon",
+      "entrypoints"
+    ],
+    "rules": [
+      "acyclic bottom-up only",
+      "core must not import todo_daemon/runtime/merge/rescue",
+      "no lower domain package may import entrypoints",
+      "entrypoints cold-import may load only provider-free contracts",
+      "no long-lived flat re-export stubs at retired package-root paths"
+    ],
+    "datasets_semantic_authority_packages": [
+      "ipfs_datasets_py.logic.software_contracts.semantic_index",
+      "ipfs_datasets_py.logic.software_contracts.semantic_state",
+      "ipfs_datasets_py.logic.software_contracts.contracts",
+      "ipfs_datasets_py.logic.software_contracts.registry",
+      "ipfs_datasets_py.logic.software_contracts.semantic_governor",
+      "ipfs_datasets_py.logic.software_verification",
+      "ipfs_datasets_py.logic.verification_api"
+    ]
+  },
+  "configured_board_integration_freeze": {
+    "scheduler_config": "config/agent_supervisor_logic_governed_semantic_work_fabric.json",
+    "bootstrap_task_source": "legacy-markdown-pending-plan-revision-r1",
+    "wired": [
+      "markdown taskboard",
+      "implementation supervisor/daemon",
+      "filesystem task/resource claim locks",
+      "event_log",
+      "MergeQueue",
+      "worktrees",
+      "validation gates",
+      "RescuePlanner/SupervisorWatchdog knobs"
+    ],
+    "not_wired": [
+      "PlanRevisionStore",
+      "LeaseCoordinator",
+      "ResourceScheduler class acquire path",
+      "TaskConflictGraph",
+      "ProofScheduler",
+      "entrypoints LaunchPlan facades"
+    ],
+    "product_gate": "bounded bootstrap execution only; not continuous multi-supervisor fabric"
+  },
+  "dirty_overlay_and_later_code_freeze": {
+    "dirty_overlays": {
+      "policy": "preserve exact identities; reject wholesale copy; selective port only via later admitted source-mutation tasks",
+      "accelerator_tracked_binary_diff_sha256": "ecdecc645909c91fc46cfda6605391cb6e02d912ba367ebe7530dc5adcb3b58c",
+      "accelerator_ordered_untracked_path_list_sha256": "e4e0b630f236b0d8c77fa60d033e7c2c1d3bb102511ffe5fcc68ba5ed32e8cfc",
+      "datasets_tracked_binary_diff_sha256": "5494ce7f87ef0b9bcc4a70fc05340381e89757adecd21b185d944588dcfa998f",
+      "datasets_ordered_untracked_path_list_sha256": "db108b8a45f1321be2d4242e4f5ae1808459c8bde5bb38e7b9ec17501df6a8b2"
+    },
+    "later_code": {
+      "accelerator_superproject_pin": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+      "accelerator_pcce": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "datasets_nested_dependency_pin": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+      "datasets_later_origin_main": "7f0fe2bbad3c70928234c6e2312ee3182fd7681f",
+      "policy": "candidate_evidence_only_not_current_authority",
+      "disposition_owners": {
+        "dirty_overlay_and_interface_freeze": "LGSWF-005",
+        "intervening_accelerator_commits_and_runtime_repair": "LGSWF-008",
+        "upward_import_repair": "LGSWF-007",
+        "mutation_gate": "LGSWF-009"
+      }
+    }
+  },
+  "absent_surfaces_frozen": [
+    {
+      "surface": "adversarial_assurance",
+      "status": "absent_at_checked_head",
+      "policy": "do_not_invent"
+    },
+    {
+      "surface": "incremental_sealing",
+      "status": "absent_at_checked_head",
+      "policy": "do_not_invent"
+    },
+    {
+      "surface": "ProofRepository@1",
+      "status": "absent_at_checked_head",
+      "policy": "do_not_invent"
+    },
+    {
+      "surface": "logic_platform_canonicalization",
+      "status": "absent_at_checked_head",
+      "policy": "candidate_evidence_only"
+    },
+    {
+      "surface": "accelerator agent_supervisor/semantic_state",
+      "status": "absent_at_checked_head",
+      "policy": "do_not_scaffold_as_current_authority"
+    },
+    {
+      "surface": "integrations/datasets_semantic_authority.py",
+      "status": "absent_at_checked_head",
+      "policy": "owned_by_LGSWF-008"
+    }
+  ],
+  "historical_reuse_freeze": {
+    "pcce_r5_incident_digest": "sha256:28aedd7072735fd539ed4dc4ad9387242a02b0372626a42f36a695c2ce9e9b61",
+    "failure_modes_preserved": [
+      "empty-context",
+      "contradictory-review-schema",
+      "task-CID-alias"
+    ],
+    "policy": "PCCE claims, leases, fences, worktrees, and task identities are preserved historical evidence and never reused"
+  },
+  "consumers_must_not_mutate_before_gate": {
+    "gate": "LGSWF-009",
+    "requirements": [
+      "non-null verified datasets semantic-state roots",
+      "accepted PlanRevision r1 with exact per-task bindings"
+    ],
+    "bootstrap_tasks_allowed_raw_source": [
+      "LGSWF-001",
+      "LGSWF-002",
+      "LGSWF-003",
+      "LGSWF-004",
+      "LGSWF-005",
+      "LGSWF-006",
+      "LGSWF-007",
+      "LGSWF-008"
+    ]
+  },
+  "proof_selection": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-005 freezes contracts from prior inventories under raw-source-required bootstrap bindings; no datasets formal proof obligations are selected while the canonical semantic-state root remains unavailable",
+    "limitations": [
+      "canonical semantic-state root unavailable until LGSWF-009",
+      "formal proof against symbol/capsule graphs cannot be current without verified roots",
+      "simulated or model-claimed proof is non-authoritative",
+      "recorded upward import violations remain repair debt for LGSWF-007"
+    ]
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/contracts/authority-map.json",
+      "python -m json.tool artifacts/logic_governed_semantic_work_fabric/contracts/interface-freeze.json"
+    ],
+    "status": "artifact_is_strict_json_object",
+    "authoritative_runner": "sealed supervisor validation environment with PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin and interpreter /usr/bin/python3.12"
+  },
+  "result_identity": "urn:lgswf:contract:interface-freeze@1:LGSWF-005@checked-ea11293b-ac82107e"
+}

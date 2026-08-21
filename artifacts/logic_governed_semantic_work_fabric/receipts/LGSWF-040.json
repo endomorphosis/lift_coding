@@ -1,0 +1,262 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.logic-governed-semantic-work-fabric.task-receipt@1",
+  "task_id": "LGSWF-040",
+  "title": "Implement deterministic readiness and conflict-free frontier selection",
+  "track": "lgswf-g500-implementation",
+  "priority": "P0",
+  "attempt": 2,
+  "stage": "implementation",
+  "objective_id": "LGSWF-040",
+  "parent_goal_id": "LGSWF-G000",
+  "subgoal_id": "LGSWF-G500",
+  "owning_repository": "ipfs_accelerate_py",
+  "base_revision": "ea11293bb996f052d620eae989f5377a956764b1",
+  "base_plan_revision": "urn:lgswf:plan-revision:r000",
+  "base_semantic_state_root": "unavailable:urn:lgswf:evidence:semantic-scan-bootstrap-failures@1",
+  "depends_on": [
+    "LGSWF-034"
+  ],
+  "board_namespace": "logic-governed-semantic-work-fabric-v0.1",
+  "bundle": "lgswf/lgswf-g500/lgswf-040",
+  "observed_at": "2026-08-17T12:00:00Z",
+  "repair_round": 1,
+  "worktree_policy": "leased isolated worktree mutation limited to declared outputs",
+  "read_scope": [
+    "checked source at ea11293bb996f052d620eae989f5377a956764b1",
+    "docs/architecture/LOGIC_GOVERNED_SEMANTIC_WORK_FABRIC_PLAN.md",
+    "docs/architecture/logic_governed_semantic_work_fabric.todo.md",
+    "artifacts/logic_governed_semantic_work_fabric/bindings/task-bindings-r1.json#LGSWF-040",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-034.json",
+    "artifacts/logic_governed_semantic_work_fabric/gates/epic-d.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/conflict_graph.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_conflicts.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_work_binding.py",
+    "external/ipfs_accelerate/test/agent_supervisor/analysis/test_semantic_conflict_graph.py"
+  ],
+  "write_scope": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+  ],
+  "changed_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+  ],
+  "expected_outputs": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json"
+  ],
+  "outputs_present": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py": true,
+    "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py": true,
+    "artifacts/logic_governed_semantic_work_fabric/receipts/LGSWF-040.json": true
+  },
+  "objective_summary": "Landed ParallelFrontier@1 as a pure planning leaf that enforces every readiness condition fail-closed (active plan, legal lifecycle, predecessors, semantic binding, capsule/source fallback, contracts/obligations, scope, conflicts, resources, provider capacity, completion policy, quarantine, supersession, block, review, and model authority), computes the ready set, projects the dedicated conflict graph, and selects a resource-feasible conflict-free antichain with deterministic bounded integer scoring. Small frontiers use exact search; larger frontiers use greedy-plus-local-improvement. Antichain rank is width, then integer score, then stable task identity, so a single high-score conflicting task cannot shrink a wider feasible wave and negative resource costs cannot prefer the empty set. Explicit zero age/retry/provider-pressure arguments are distinct from omitted values that fall back to task payload fields. Model proposals remain non-authoritative and never admit work. Binary floats are excluded from content-addressed selection identities. Worker completion or task status alone never authorizes acceptance.",
+  "findings_digest": {
+    "interface": "ParallelFrontier@1",
+    "primary_symbol": "select_parallel_frontier",
+    "module_paths": {
+      "implementation": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py"
+    },
+    "core_symbols": [
+      "select_parallel_frontier",
+      "evaluate_task_readiness",
+      "compute_ready_set",
+      "score_frontier_candidate",
+      "FrontierSelection",
+      "TaskReadiness",
+      "FrontierScore",
+      "ReadinessCondition",
+      "RejectionReason"
+    ],
+    "required_readiness_conditions": [
+      "active_plan",
+      "legal_lifecycle",
+      "predecessors",
+      "semantic_binding",
+      "capsule_or_source",
+      "contracts_obligations",
+      "scope",
+      "conflicts",
+      "resources",
+      "provider_capacity",
+      "completion_policy",
+      "quarantine",
+      "supersession",
+      "block",
+      "review",
+      "model_authority"
+    ],
+    "scoring_terms": [
+      "completion_value",
+      "critical_path_gain",
+      "downstream_unlock_value",
+      "cache_and_worktree_locality",
+      "bounded_age_and_fairness",
+      "resource_and_model_cost",
+      "provider_pressure",
+      "conflict_and_merge_risk",
+      "semantic_uncertainty",
+      "expected_retry_cost"
+    ],
+    "score_scale": 1000000,
+    "search_modes": [
+      "exact",
+      "greedy_local"
+    ],
+    "default_exact_search_limit": 16,
+    "antichain_rank": [
+      "width",
+      "integer_score_total",
+      "stable_task_identity"
+    ],
+    "dependency_and_conflict_separate": true,
+    "model_proposals_authoritative": false,
+    "floats_rejected_from_identity": true,
+    "hard_resource_keys": [
+      "cpu_concurrency",
+      "ram_mib",
+      "gpu_memory_mib",
+      "disk_mib",
+      "subprocesses",
+      "worktree_slots",
+      "provider_concurrency",
+      "prover_concurrency",
+      "merge_slots",
+      "model_input_tokens",
+      "model_output_tokens",
+      "persistence_mib_per_second"
+    ],
+    "reuses": [
+      "TaskConflictGraph",
+      "ConflictEdge",
+      "DependencyEdge",
+      "TaskSchedulingMetrics",
+      "compute_semantic_conflicts",
+      "project_conflict_free_wave"
+    ],
+    "checked_accelerator_commit": "ea11293bb996f052d620eae989f5377a956764b1",
+    "plan_revision": "urn:lgswf:plan-revision:r1",
+    "canonical_semantic_state_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "downstream_unlock": [
+      "LGSWF-041",
+      "LGSWF-042",
+      "LGSWF-045"
+    ]
+  },
+  "interfaces_referenced": [
+    "ParallelFrontier@1",
+    "authority-map@1",
+    "SemanticWorkBinding@1-or-bootstrap-fallback",
+    "PlanRevisionContracts@1",
+    "task-identity@1",
+    "TaskConflictGraph",
+    "SemanticConflictAnalysis@1",
+    "TaskSchedulingMetrics"
+  ],
+  "symbols_changed": [
+    "select_parallel_frontier",
+    "evaluate_task_readiness",
+    "compute_ready_set",
+    "score_frontier_candidate",
+    "FrontierSelection",
+    "TaskReadiness",
+    "FrontierScore",
+    "ReadinessCondition",
+    "RejectionReason",
+    "content_digest"
+  ],
+  "validation": {
+    "commands": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+        "required": true,
+        "status": "declared_for_authoritative_runner",
+        "producer_note": "hermetic ParallelFrontier@1 readiness and antichain selection suite including width-over-score and explicit-zero score argument cases; authoritative sealed validation PATH/HOME is supervisor-owned"
+      }
+    ]
+  },
+  "proof": {
+    "selected_obligations": [],
+    "selection_status": "verified_empty",
+    "reason": "LGSWF-040 lands parallel frontier planning and hermetic tests only; formal datasets proof selection remains verified empty until later mutation selects obligations",
+    "limitations": [
+      "absent adversarial_assurance and incremental_sealing cannot supply obligations",
+      "ProofRepository@1 is absent at checked head",
+      "model-claimed proof is non-authoritative"
+    ]
+  },
+  "semantic_delta": {
+    "mode": "accelerator_contract_implementation",
+    "previous_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_root": "urn:lgswf:semantic-state-root:datasets@2b3d892dd1c31fb6b8a3eebdb88616d411c49a47:authority-map@1",
+    "canonical_refresh_required": true,
+    "reason": "LGSWF-040 mutates accelerator planning source and tests; datasets semantic truth is referenced only; canonical refresh is required after admitted merge of the accepted tree"
+  },
+  "merge": {
+    "mutation_class": "accelerator_source_and_receipt",
+    "merge_required": true,
+    "merge_result": "pending_supervisor_admission",
+    "note": "worker completion or task status alone is insufficient; independent fenced supervisor must accept"
+  },
+  "leases_and_fences": {
+    "task_claim": "required_by_policy",
+    "worktree_mutation_lease": "required_by_policy",
+    "resource_reservation": "cpu-medium implementation class",
+    "plan_tree_semantic_fence": "plan-revision-r1 + verified canonical roots + epic-d pass + LGSWF-034 receipt",
+    "recorded_in_this_receipt": "policy requirements only; durable claim/lease CIDs are supervisor-owned"
+  },
+  "prohibited_effects_observed": {
+    "protected_board_or_policy_edits": false,
+    "canonical_datasets_mutation": false,
+    "duplicate_semantic_records_created": false,
+    "capsule_bodies_embedded": false,
+    "provisional_root_published_as_canonical": false,
+    "network_or_provider_effects": false,
+    "self_approval": false,
+    "invented_absent_surfaces": false,
+    "undeclared_path_mutation": false,
+    "model_proposal_admitted_as_authority": false
+  },
+  "acceptance_criteria": {
+    "every_readiness_condition_enforced": true,
+    "conflict_free_antichain_under_resources": true,
+    "deterministic_bounded_integer_scoring": true,
+    "model_proposals_non_authoritative": true,
+    "declared_outputs_exist": true,
+    "validation_current": "runner_must_confirm",
+    "proof_selection_current": true,
+    "merge_and_canonical_refresh": "pending_supervisor_admission",
+    "independent_fenced_supervisor_acceptance": "required_not_self_asserted"
+  },
+  "before_after": {
+    "before": {
+      "parallel_frontier_module": "absent_or_incomplete",
+      "readiness_and_antichain_selection": "not_implemented_or_stale",
+      "epic_e_producing_task": "LGSWF-040 blocked after LGSWF-034"
+    },
+    "after": {
+      "parallel_frontier_module": "ParallelFrontier@1 at external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/parallel_frontier.py",
+      "readiness_and_antichain_selection": "select_parallel_frontier enforces readiness and selects resource-feasible conflict-free antichains with width-first integer rank",
+      "tests": "external/ipfs_accelerate/test/agent_supervisor/planning/test_parallel_frontier.py",
+      "downstream": "LGSWF-041 frontier policy unblocked for dependency-ready work"
+    }
+  },
+  "completion_decision": {
+    "worker_status": "outputs_written",
+    "completion_authoritative": false,
+    "worker_completion_sufficient": false,
+    "task_status_sufficient": false,
+    "requires_declared_outputs": true,
+    "requires_current_validation": true,
+    "requires_merge_and_canonical_refresh_on_mutation": true,
+    "requires_independent_fenced_supervisor_acceptance": true,
+    "reason": "AuthoritativeCompletionGate and independent fenced supervisor acceptance are required; this receipt is evidence only",
+    "producer_disposition": "implementation_complete_pending_supervisor_acceptance"
+  },
+  "final_result_identity": "pending:content-addressed-result:LGSWF-040",
+  "result_identity": "urn:lgswf:receipt:LGSWF-040@parallel-frontier-v1-attempt2"
+}

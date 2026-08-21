@@ -107,6 +107,31 @@ repair tied to `tests/integration/test_swissknife_mobile_interop.py`,
 `swissknife/contracts/interaction_envelope.schema.json` without splitting the
 shared VAIOS-G700..VAIOS-G706 packet into smaller child goals.
 
+HAO-730 attempt 2 now carries first-class Hallucinate App evidence in
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-730-attempt-2-objective-validation-repair.md`
+instead of relying only on copied VAI-661 and MGW lineage refs. The active
+repair keeps `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md`
+and `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-2-validation-confirmation.md`
+attached to `SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR` and
+`SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT` through `active_task_id: HAO-730`,
+`active_attempt: 2`, `active_task_board: hallucinate_multimodal_control`,
+`active_objective_gap_ref`,
+`active_validation_confirmation_ref`, and `active_validation_repair_ref`.
+`tests/integration/test_swissknife_mobile_interop.py` validates those HAO refs
+along with the legacy VAI-661 refs, confirms the SwissKnife schemas carry
+`HAO-730 attempt 2 objective validation repair`, `agent_identity`,
+`allowed_surfaces`, and `arguments_hash`, and keeps the proof stack anchored to
+`docs/integration/swissknife-mobile.md`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/utils/metaWearablesDatDisplayWidgetContract.js`,
+`mobile/src/orb/metaGlassesMobileOrbBridge.js`,
+`swissknife/contracts/control_surface_contract.schema.json`, and
+`swissknife/contracts/interaction_envelope.schema.json`. The objective
+validation repair remains cohesive for
+`goal_packet/interoperability/swissknife/06921590135c` and all packet goals:
+VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
+VAIOS-G706.
+
 HAO-749 then resolved the HAO-730 merge retry-budget guardrail. The blocker was
 `main_checkout_dirty_conflict` on `hallucinate_app`, not a semantic overlap in
 the SwissKnife/mobile contract files. The repair committed the nested
