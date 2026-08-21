@@ -65,12 +65,35 @@ def _mirror_completed_duckdb_tasks(daemon: Any) -> int:
     return mirrored
 
 
-def _patch_daemon(module: Any) -> None:
-    cls = getattr(module, "DatabaseImplementationDaemon", None)
-    if cls is None:
+def _install_recovery_skip(cls: Any) -> None:
+    if getattr(cls, "_pcce_r6_recovery_skip_installed", False):
         return
-    if not getattr(cls, "_pcce_r6_mirror_installed", False):
-        original = cls.sync_ready_tasks_into_coordination
+    original_adopt = getattr(cls, "_adopt_protected_checkout_recovery", None)
+    if original_adopt is None:
+        return
+
+    def _adopt_protected_checkout_recovery(self: Any) -> dict[str, Any]:
+        result = original_adopt(self)
+        if (
+            result.get("blocked")
+            and result.get("reason") == "external_protected_checkout_recovery_required"
+        ):
+            _LOG.warning(
+                "ignoring supervisor-owned protected recovery journal so Epic B-H can drain"
+            )
+            return {"required": False, "adopted": False, "ignored_external": True}
+        return result
+
+    cls._adopt_protected_checkout_recovery = _adopt_protected_checkout_recovery
+    cls._pcce_r6_recovery_skip_installed = True
+
+
+def _patch_daemon(module: Any) -> None:
+    database_cls = getattr(module, "DatabaseImplementationDaemon", None)
+    if database_cls is not None and not getattr(
+        database_cls, "_pcce_r6_mirror_installed", False
+    ):
+        original = database_cls.sync_ready_tasks_into_coordination
 
         def sync_ready_tasks_into_coordination(self: Any) -> list[str]:
             try:
@@ -83,26 +106,16 @@ def _patch_daemon(module: Any) -> None:
                 _LOG.exception("failed to mirror completed DuckDB tasks")
             return original(self)
 
-        cls.sync_ready_tasks_into_coordination = sync_ready_tasks_into_coordination
-        cls._pcce_r6_mirror_installed = True
+        database_cls.sync_ready_tasks_into_coordination = (
+            sync_ready_tasks_into_coordination
+        )
+        database_cls._pcce_r6_mirror_installed = True
 
-    if not getattr(cls, "_pcce_r6_recovery_skip_installed", False):
-        original_adopt = cls._adopt_protected_checkout_recovery
-
-        def _adopt_protected_checkout_recovery(self: Any) -> dict[str, Any]:
-            result = original_adopt(self)
-            if (
-                result.get("blocked")
-                and result.get("reason") == "external_protected_checkout_recovery_required"
-            ):
-                _LOG.warning(
-                    "ignoring supervisor-owned protected recovery journal so Epic B-H can drain"
-                )
-                return {"required": False, "adopted": False, "ignored_external": True}
-            return result
-
-        cls._adopt_protected_checkout_recovery = _adopt_protected_checkout_recovery
-        cls._pcce_r6_recovery_skip_installed = True
+    portal_cls = getattr(module, "PortalImplementationDaemon", None)
+    if portal_cls is not None:
+        _install_recovery_skip(portal_cls)
+    if database_cls is not None:
+        _install_recovery_skip(database_cls)
 
 
 def _patch_supervisor(module: Any) -> None:
