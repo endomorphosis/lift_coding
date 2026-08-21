@@ -111,6 +111,26 @@ def _patch_daemon(module: Any) -> None:
         )
         database_cls._pcce_r6_mirror_installed = True
 
+        if not getattr(database_cls, "_pcce_r6_todo_reconcile_installed", False):
+            original_reconcile = database_cls.reconcile_terminal_portal_failures
+
+            def reconcile_terminal_portal_failures(self: Any) -> list[dict[str, Any]]:
+                try:
+                    return original_reconcile(self)
+                except Exception as exc:
+                    message = str(exc)
+                    if "cannot reconcile control status 'todo'" in message:
+                        _LOG.warning(
+                            "skipping vacated portal terminal failures after DuckDB reset to todo"
+                        )
+                        return []
+                    raise
+
+            database_cls.reconcile_terminal_portal_failures = (
+                reconcile_terminal_portal_failures
+            )
+            database_cls._pcce_r6_todo_reconcile_installed = True
+
     portal_cls = getattr(module, "PortalImplementationDaemon", None)
     if portal_cls is not None:
         _install_recovery_skip(portal_cls)
