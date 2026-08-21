@@ -1,0 +1,23 @@
+{
+  "admitted_at": "2026-08-21T15:16:45Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-004:inventory",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "52b794658a9431683d1ff61f320197eafff0c343",
+  "bound_tree": "b85eabbb61187c472543297f001778507c8ac531",
+  "completion_mode": "operator-read-only-inventory",
+  "content_id": "sha256:6dd984225c0a837622b013cd63ac150906d07dc9780e61acfc0e15c8b895dc76",
+  "evidence": {
+    "candidate_count": 7,
+    "discrepancy_count": 2,
+    "inventory_content_id": "sha256:d4db28df46447f891dbe0507678080b266a56212abec3cc6b8dc663b6a75e9f5",
+    "wip_ref_count": 2
+  },
+  "inventory_path": "artifacts/proof_carrying_context_engine/inventory/mcp_plus_plus.json",
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-local-inventory-from-bound-git-objects",
+  "parent_control_commit": "0eba9714692258e5f3cdd6d13404557ebf7fadd9",
+  "rollback": "discard inventory and receipt files only; no source mutation",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-004"
+}

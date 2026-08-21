@@ -1,0 +1,224 @@
+{
+  "authority": false,
+  "bound_commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+  "bound_tree": "3fa93c380105221133ec14601c05696ea8a7f95c",
+  "candidates": [
+    {
+      "blob": "161c4631881607b4ed7c854f751f9fc3be0cfb45",
+      "canonical_path": "ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "docs": [
+        {
+          "blob": "20eb4148099d89eda909a689a7765c74d8fd0925",
+          "kind": "blob",
+          "path": "docs/architecture/DURABLE_STATE_ROOTS_PLAN.md",
+          "present": true
+        }
+      ],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": "DurableCoordinationStore",
+      "repository": "endomorphosis/ipfs_kit_py",
+      "subsystem": "DurableCoordinationStore / CAS roots",
+      "symbol_line": 284,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "69a1af9ef536ddb42ec63f6b8d62e0539657794b",
+          "kind": "blob",
+          "path": "tests/test_agent_supervisor_receipts.py",
+          "present": true
+        }
+      ],
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "a01f9193b8919ce091d7b9a9a078580659876b9d",
+      "canonical_path": "ipfs_kit_py/proof_seal_store/forest.py",
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": "ProofForestStore",
+      "repository": "endomorphosis/ipfs_kit_py",
+      "subsystem": "Proof-forest persistence",
+      "symbol_line": 733,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "9b03026f95565823887bf9ca6aeecad0748ce196",
+          "kind": "blob",
+          "path": "tests/proof_seal_store/test_forest.py",
+          "present": true
+        }
+      ],
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "78aa69c2bd1ae1e3fd7c7f62bcb87907be99e650",
+      "canonical_path": "ipfs_kit_py/core/wal/writer.py",
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "docs": [],
+      "duplicate_or_legacy": "archive/cli_drafts and ipfs_kit_py/enhanced_wal_durability.py are legacy/non-canonical relative to ipfs_kit_py/core/wal.",
+      "inspection_note": "Legacy/archive WAL copies under archive/ are non-canonical.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "WALWriter",
+      "repository": "endomorphosis/ipfs_kit_py",
+      "subsystem": "WAL transitions",
+      "symbol_line": 162,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "dde2c0a2682efaa73a9e768af696f7d45d796bc1",
+          "kind": "blob",
+          "path": "tests/kernel_vfs/wal/test_durable_mutation.py",
+          "present": true
+        }
+      ],
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "5bd118392f02cf39ee92d0d9844a5172248d6c16",
+      "canonical_path": "ipfs_kit_py/proof_seal_store/local_store.py",
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": "HermeticProofSealStore",
+      "repository": "endomorphosis/ipfs_kit_py",
+      "subsystem": "Local hermetic proof-seal store",
+      "symbol_line": 285,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "bb1f3b681029229f74c2bfe4fe6d330b09ccf689",
+          "kind": "blob",
+          "path": "tests/proof_seal_store/test_local_store.py",
+          "present": true
+        }
+      ],
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "6d10cfe16c3de5103e0a23d7d8f1ad631902eb72",
+      "canonical_path": "ipfs_kit_py/proof_seal_store/ipfs_transport.py",
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Optional network boundary; inventory did not contact an IPFS daemon.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/ipfs_kit_py",
+      "subsystem": "Optional IPFS transport",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [
+        {
+          "blob": "121982c159bbb266569d99f4035eaf7d5595e51d",
+          "kind": "blob",
+          "path": "tests/proof_seal_store/test_ipfs_transport.py",
+          "present": true
+        }
+      ],
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "617c4ae170def3a7ee69244a6521ac12bb11c4c3",
+      "canonical_path": "ipfs_kit_py/mcp_server/agent_supervisor_receipts.py",
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/ipfs_kit_py",
+      "subsystem": "Supervisor receipt persistence",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [
+        {
+          "blob": "69a1af9ef536ddb42ec63f6b8d62e0539657794b",
+          "kind": "blob",
+          "path": "tests/test_agent_supervisor_receipts.py",
+          "present": true
+        }
+      ],
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "ipfs_kit_py/mcp_server/mcplusplus",
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Kit stores MCP++-shaped artifacts; schema authority remains Mcp-Plus-Plus.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/ipfs_kit_py",
+      "subsystem": "MCP++ coordination storage (consumer, not MCP++ authority)",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [],
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c",
+      "wip_ref_is_canonical": false
+    }
+  ],
+  "content_id": "sha256:d59ab2a0715723ba61b97ee5892454bd8459a91c8df9d3ff7d32da77230ddb3b",
+  "discrepancies": [
+    {
+      "issue": "legacy_wal_duplicates_non_canonical",
+      "note": "archive/ and enhanced_wal_durability.py are not the v0.1 WAL authority.",
+      "path": "ipfs_kit_py/core/wal",
+      "subsystem": "WAL transitions"
+    }
+  ],
+  "inspected_at": "2026-08-21T15:16:45Z",
+  "notes": [
+    "Path presence and documentation names are not completion evidence.",
+    "Unmerged WIP refs are recorded as non-canonical.",
+    "Inventory is reproduced from Git objects at the bound pin.",
+    "MCP++ is inventory-only for invocation/receipt contracts; it has no production runtime authority.",
+    "Named IPS/runtime-readiness refs are ancestors of the bound kit pin; they are historical, not extra canonical tips.",
+    "No IPFS daemon was contacted; optional-network claims remain unexercised."
+  ],
+  "parent_control_commit": "0eba9714692258e5f3cdd6d13404557ebf7fadd9",
+  "parent_control_tree": "76df14ea829d9a1931235ad6462e3572103cb61b",
+  "repository": "endomorphosis/ipfs_kit_py",
+  "schema": "lift_coding.proof-carrying-context-engine.inventory@1",
+  "task_id": "PCCE-002",
+  "wip_refs_inspected": [
+    {
+      "canonical": false,
+      "commit": "8799e8d3cc39",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "origin/agent/incremental-proof-sealer-v1"
+    },
+    {
+      "canonical": false,
+      "commit": "e4427c5433cf",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "origin/agent/ipfs-kit-runtime-readiness"
+    },
+    {
+      "canonical": false,
+      "commit": "6196017ca3df",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "codex/mcplusplus-1.0-gap-closure"
+    },
+    {
+      "canonical": false,
+      "commit": "6196017ca3df",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "origin/agent/semantic-compression-governor-v1"
+    }
+  ]
+}

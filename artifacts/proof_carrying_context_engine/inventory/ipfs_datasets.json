@@ -1,0 +1,326 @@
+{
+  "authority": false,
+  "bound_commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+  "bound_tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+  "candidates": [
+    {
+      "blob": "a2ca2dee8aaed0f0f69dcb327e34fa5110ee377b",
+      "canonical_path": "ipfs_datasets_py/logic/software_contracts/semantic_index/index.py",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [
+        {
+          "blob": "74aee3b615350a6f081526b842c7ba5306fa1a54",
+          "kind": "blob",
+          "path": "docs/architecture/INCREMENTAL_SEMANTIC_INDEX_PLAN.md",
+          "present": true
+        },
+        {
+          "blob": "f0cbda761a09b71eea619dabd377b5429238fded",
+          "kind": "blob",
+          "path": "docs/software_contracts/INCREMENTAL_SEMANTIC_INDEX.md",
+          "present": true
+        }
+      ],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": "IncrementalSemanticIndex",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Incremental Semantic Index",
+      "symbol_line": 114,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "f51896fdda8d8e45feaae3ab64a1a2f9083d0db1",
+          "kind": "blob",
+          "path": "tests/unit/logic/software_contracts/semantic_index/test_python_analysis_authority_adversarial.py",
+          "present": true
+        }
+      ],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
+      "canonical_path": "ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [
+        {
+          "blob": "511b781caf50f7c86f23557d044a17a3641b1f26",
+          "kind": "blob",
+          "path": "docs/software_contracts/SEMANTIC_STATE_CONTRACT.md",
+          "present": true
+        }
+      ],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Reported class name is not present; public API is compile_semantic_capsule(s).",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "compile_semantic_capsule",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Semantic Capsule Compiler",
+      "symbol_line": 616,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "82ec04a927c76bf35a8dab258644c1aacbb7e5d4",
+          "kind": "blob",
+          "path": "tests/unit/logic/software_contracts/semantic_state/test_capsules.py",
+          "present": true
+        }
+      ],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "77a4ba670303ac9c2a5ffe0fbfc1c7e9260d371e",
+      "canonical_path": "ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Preliminary plan path semantic_state is wrong. Canonical class is in semantic_governor/sufficiency.py. Datasets owns sufficiency views; ContextPack construction (ContextPacker) remains accelerator-owned.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "ContextPackView",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "ContextPack View",
+      "symbol_line": 324,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "abe8cc1e2abb4a61b534b08626a3220f4d15f651",
+          "kind": "blob",
+          "path": "tests/unit/logic/software_contracts/semantic_governor/test_sufficiency.py",
+          "present": true
+        }
+      ],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "ipfs_datasets_py/logic/software_contracts/semantic_state",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Requested datasets construction authority is absent at pin; live builder is accelerator ContextPacker.",
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "ContextPacker",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "ContextPack Builder",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "VerificationReceiptCache",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Verification Receipt Cache",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "IncrementalVerificationPlanner",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Incremental Verification Planner",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "ModelRoutePlanner",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Model Route Planner",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "f766688def76a0edace0e9e0b65aea9abd4e79d6",
+      "canonical_path": "ipfs_datasets_py/logic/software_contracts/semantic_governor/__init__.py",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Datasets exposes SemanticGovernorPublicApi analysis entry points (evaluate_context_sufficiency, etc.), not the accelerator class SemanticCompressionGovernor.",
+      "maturity": "present_path_symbol_mismatch",
+      "public_api_symbol": "SemanticCompressionGovernor",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Semantic Compression Governor",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [
+        {
+          "blob": "fb1a2c62657fb1d1670c4e994f203e59094368bc",
+          "kind": "blob",
+          "path": "tests/unit/logic/software_contracts/semantic_governor/test_public_api.py",
+          "present": true
+        }
+      ],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "VerifiedGuiOptimizer",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Verified GUI Optimizer",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "origin/agent/incremental-proof-sealer-v1 (1480ea2b) is an ancestor of this datasets pin; sealing objects are in-tree history but the sealer class is not datasets-owned.",
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "IncrementalProofSealer",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Incremental Proof Sealer",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "AssuranceCampaignApi",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Adversarial Assurance Engine",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "",
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "SelfHostingQualificationHarness",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "subsystem": "Self-Hosting Qualification Harness",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+      "wip_ref_is_canonical": false
+    }
+  ],
+  "content_id": "sha256:c706ca54d2bc763f23bf3407690be23e7a583d6db0acdd39d24d54dc4e2e9afb",
+  "discrepancies": [
+    {
+      "issue": "documented_path_mismatch",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
+      "requested_path": "ipfs_datasets_py/logic/software_contracts/semantic_state",
+      "requested_symbol": "ContextPackView",
+      "subsystem": "ContextPack View"
+    },
+    {
+      "issue": "ownership_boundary_violation_reported_for_later_migration",
+      "note": "Production construction is accelerator-owned; datasets owns ContextPackView/sufficiency only.",
+      "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+      "requested_symbol": "ContextPacker",
+      "subsystem": "ContextPack Builder"
+    },
+    {
+      "actual_symbol": "compile_semantic_capsule",
+      "issue": "reported_class_name_absent_function_api_present",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+      "requested_symbol": "SemanticCapsuleCompiler",
+      "subsystem": "Semantic Capsule Compiler"
+    }
+  ],
+  "inspected_at": "2026-08-21T15:16:45Z",
+  "notes": [
+    "Path presence and documentation names are not completion evidence.",
+    "Unmerged WIP refs are recorded as non-canonical.",
+    "Inventory is reproduced from Git objects at the bound pin.",
+    "MCP++ is inventory-only for invocation/receipt contracts; it has no production runtime authority.",
+    "All eleven reported subsystems were inspected from the datasets pin; only semantic index, capsule compile, and ContextPackView are datasets-present."
+  ],
+  "parent_control_commit": "0eba9714692258e5f3cdd6d13404557ebf7fadd9",
+  "parent_control_tree": "76df14ea829d9a1931235ad6462e3572103cb61b",
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "schema": "lift_coding.proof-carrying-context-engine.inventory@1",
+  "task_id": "PCCE-001",
+  "wip_refs_inspected": [
+    {
+      "canonical": false,
+      "commit": "0691203550c0",
+      "is_ancestor_of_bound_pin": false,
+      "present": true,
+      "ref": "agent/logic-governed-semantic-work-fabric-datasets-actual-v1"
+    },
+    {
+      "canonical": false,
+      "commit": "1480ea2b4c54",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "origin/agent/incremental-proof-sealer-v1"
+    },
+    {
+      "canonical": false,
+      "commit": "ac82107e246b",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "origin/agent/semantic-compression-governor-v1"
+    },
+    {
+      "canonical": false,
+      "commit": "9d558ad706e8",
+      "is_ancestor_of_bound_pin": false,
+      "present": true,
+      "ref": "origin/agent/ui-ux-ir"
+    },
+    {
+      "canonical": false,
+      "commit": "ac82107e246b",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "codex/mcplusplus-1.0-gap-closure"
+    }
+  ]
+}

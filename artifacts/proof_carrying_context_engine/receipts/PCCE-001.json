@@ -1,0 +1,23 @@
+{
+  "admitted_at": "2026-08-21T15:16:45Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-001:inventory",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+  "bound_tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f",
+  "completion_mode": "operator-read-only-inventory",
+  "content_id": "sha256:ec279a7c9faae21c120b9dc7c588b3536288a4cdbc9e5914dd063f908b91d3dd",
+  "evidence": {
+    "candidate_count": 12,
+    "discrepancy_count": 3,
+    "inventory_content_id": "sha256:c706ca54d2bc763f23bf3407690be23e7a583d6db0acdd39d24d54dc4e2e9afb",
+    "wip_ref_count": 5
+  },
+  "inventory_path": "artifacts/proof_carrying_context_engine/inventory/ipfs_datasets.json",
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-local-inventory-from-bound-git-objects",
+  "parent_control_commit": "0eba9714692258e5f3cdd6d13404557ebf7fadd9",
+  "rollback": "discard inventory and receipt files only; no source mutation",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-001"
+}

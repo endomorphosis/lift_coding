@@ -1,0 +1,213 @@
+{
+  "authority": false,
+  "bound_commit": "52b794658a9431683d1ff61f320197eafff0c343",
+  "bound_tree": "b85eabbb61187c472543297f001778507c8ac531",
+  "candidates": [
+    {
+      "blob": "4ccc2b2f340b1babad0e478e1e908474a2b97033",
+      "canonical_path": "README.md",
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "docs": [
+        {
+          "blob": "4ccc2b2f340b1babad0e478e1e908474a2b97033",
+          "kind": "blob",
+          "path": "README.md",
+          "present": true
+        },
+        {
+          "blob": "a404932d6efa10307b91e157f066762a2112359b",
+          "kind": "blob",
+          "path": "docs/index.md",
+          "present": true
+        }
+      ],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Documentation-first project. No production runtime or persistence authority.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/Mcp-Plus-Plus",
+      "subsystem": "MCP++ invocation/receipt contracts",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [],
+      "tree": "b85eabbb61187c472543297f001778507c8ac531",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "37f7843bfb8c1b9ce2caf4471e3fd2a1ecfb0772",
+      "canonical_path": "schemas/execution/execution-envelope-1.schema.json",
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/Mcp-Plus-Plus",
+      "subsystem": "Execution envelope schema",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [
+        {
+          "blob": "cb0f883ffa7785fa38ae3f623b2ace42bb2d58aa",
+          "kind": "blob",
+          "path": "tests-py/integration/test_cid_envelopes.py",
+          "present": true
+        }
+      ],
+      "tree": "b85eabbb61187c472543297f001778507c8ac531",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "4441ca8df3327e283f18f882044ec8176bb58440",
+      "canonical_path": "schemas/execution/execution-receipt-1.schema.json",
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/Mcp-Plus-Plus",
+      "subsystem": "Execution receipt schema",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [
+        {
+          "blob": "cb0f883ffa7785fa38ae3f623b2ace42bb2d58aa",
+          "kind": "blob",
+          "path": "tests-py/integration/test_cid_envelopes.py",
+          "present": true
+        }
+      ],
+      "tree": "b85eabbb61187c472543297f001778507c8ac531",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "fa5068fd64513fc33e0dce7a3ffd1e6636cb7faf",
+      "canonical_path": "schemas/execution/portable-error-1.schema.json",
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/Mcp-Plus-Plus",
+      "subsystem": "Portable error schema",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [],
+      "tree": "b85eabbb61187c472543297f001778507c8ac531",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "828f74b899e24b145f8b5cf78a07c5ab8f3bcf16",
+      "canonical_path": "tests-py/validators/canonical_jcs.py",
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/Mcp-Plus-Plus",
+      "subsystem": "Canonical JCS validator",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [
+        {
+          "blob": "828f74b899e24b145f8b5cf78a07c5ab8f3bcf16",
+          "kind": "blob",
+          "path": "tests-py/validators/canonical_jcs.py",
+          "present": true
+        }
+      ],
+      "tree": "b85eabbb61187c472543297f001778507c8ac531",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "0bb00bf187b46ff63ba8ced647dd2b28b8f37cb6",
+      "canonical_path": "schemas/adversarial_assurance_receipt.schema.json",
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "docs": [
+        {
+          "blob": "931141a1db83b7d73c814e5cea0a3add6f071ca4",
+          "kind": "blob",
+          "path": "docs/architecture/adversarial_assurance_conformance.md",
+          "present": true
+        }
+      ],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Shared campaign/receipt identity only; MCP++ does not recompute CIDs or authorize promotion.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/Mcp-Plus-Plus",
+      "subsystem": "Assurance receipt schema (narrow shared identity)",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [],
+      "tree": "b85eabbb61187c472543297f001778507c8ac531",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "f083861d146c9e864e6fe1f76fc422532d81a74f",
+      "canonical_path": "conformance/vectors/execution_receipt.json",
+      "commit": "52b794658a9431683d1ff61f320197eafff0c343",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": null,
+      "repository": "endomorphosis/Mcp-Plus-Plus",
+      "subsystem": "Canonical execution-receipt vector",
+      "symbol_line": null,
+      "symbol_present": null,
+      "tests": [
+        {
+          "blob": "cb0f883ffa7785fa38ae3f623b2ace42bb2d58aa",
+          "kind": "blob",
+          "path": "tests-py/integration/test_cid_envelopes.py",
+          "present": true
+        }
+      ],
+      "tree": "b85eabbb61187c472543297f001778507c8ac531",
+      "wip_ref_is_canonical": false
+    }
+  ],
+  "content_id": "sha256:d4db28df46447f891dbe0507678080b266a56212abec3cc6b8dc663b6a75e9f5",
+  "discrepancies": [
+    {
+      "issue": "local_clone_head_differs_from_parent_gitlink",
+      "note": "Parent gitlink is 52b794658 (tree b85eabbb). Local Mcp-Plus-Plus HEAD/main is 6965f89, which is an ancestor of the gitlink after fetch. Inventory used the gitlink pin, not HEAD.",
+      "path": "Mcp-Plus-Plus",
+      "subsystem": "MCP++ invocation/receipt contracts"
+    },
+    {
+      "issue": "no_production_runtime_authority",
+      "note": "Reuse is limited to schemas, vectors, validators, and canonicalization. Orchestration/persistence/model authority stay outside MCP++.",
+      "path": "README.md",
+      "subsystem": "MCP++ invocation/receipt contracts"
+    }
+  ],
+  "inspected_at": "2026-08-21T15:16:45Z",
+  "notes": [
+    "Path presence and documentation names are not completion evidence.",
+    "Unmerged WIP refs are recorded as non-canonical.",
+    "Inventory is reproduced from Git objects at the bound pin.",
+    "MCP++ is inventory-only for invocation/receipt contracts; it has no production runtime authority.",
+    "Bound pin 52b794658 was missing from the local object store until origin fetch; inventory is from that fetched gitlink, not from reconstructing objects."
+  ],
+  "parent_control_commit": "0eba9714692258e5f3cdd6d13404557ebf7fadd9",
+  "parent_control_tree": "76df14ea829d9a1931235ad6462e3572103cb61b",
+  "repository": "endomorphosis/Mcp-Plus-Plus",
+  "schema": "lift_coding.proof-carrying-context-engine.inventory@1",
+  "task_id": "PCCE-004",
+  "wip_refs_inspected": [
+    {
+      "canonical": false,
+      "commit": "6965f89f0667",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "codex/mcplusplus-1.0-gap-closure"
+    },
+    {
+      "canonical": false,
+      "commit": "6965f89f0667",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "main"
+    }
+  ]
+}

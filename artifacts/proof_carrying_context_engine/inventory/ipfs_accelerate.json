@@ -1,0 +1,321 @@
+{
+  "authority": false,
+  "bound_commit": "84a056e41e48a81d4484be43840196578d6c87da",
+  "bound_tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+  "candidates": [
+    {
+      "blob": "6af93d39a643b6af190f833bfb4131fdbea49c65",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Live construction is accelerator-owned; prescribed datasets boundary is violated until PCCE-012.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "ContextPacker",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "ContextPack Builder",
+      "symbol_line": 319,
+      "symbol_present": true,
+      "tests": [],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "bdde6a5a6f6d78b7c76f0358cc380ccbc88da435",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/verification/datasets_adapter.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": "Canonical ContextPackView is datasets semantic_governor/sufficiency.py. Accelerator copies also exist in gui_optimizer/proposal.py.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "ContextPackView",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "ContextPack View (duplicate adapter copy)",
+      "symbol_line": 651,
+      "symbol_present": true,
+      "tests": [],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "38d2b2b387328ad2b25a7863d11a453b6b39edc6",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/verification/receipt_cache.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Persistent authority must be delegated to a kit-backed adapter.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "VerificationReceiptCache",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Verification Receipt Cache",
+      "symbol_line": 409,
+      "symbol_present": true,
+      "tests": [],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "d283fa8d84547d37b4f26444c8af91b6afcf93a9",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/verification/planner.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": "IncrementalVerificationPlanner",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Incremental Verification Planner",
+      "symbol_line": 2310,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "d5ddfa4ead7f0ffe83394a4d5a92c7f74708d0ae",
+          "kind": "blob",
+          "path": "test/api/test_agent_supervisor_incremental_verification_planner.py",
+          "present": true
+        }
+      ],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "51d7a0850bb42db3de3798b47e1ffd56e0a47b86",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/verification/model_route.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Selects capability tier; does not own provider credentials or mutation authority.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "ModelRoutePlanner",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Model Route Planner",
+      "symbol_line": 1404,
+      "symbol_present": true,
+      "tests": [],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "74ff019c0a0e233322c4d962457dbf277a12e38a",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/semantic_governor/governor.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "maturity": "present_at_pin",
+      "public_api_symbol": "SemanticCompressionGovernor",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Semantic Compression Governor",
+      "symbol_line": 450,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "10949288b00372c4e23202776cb06ff55c99cf04",
+          "kind": "blob",
+          "path": "test/api/semantic_governor/test_public_api.py",
+          "present": true
+        }
+      ],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "877aefa4bbe5b923433af2f1bcbc4072df11c6b1",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/gui_optimizer/improvement_loop.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [
+        {
+          "blob": "5600ddce68b2ef8fcdce80c12d5ad40de114311f",
+          "kind": "blob",
+          "path": "docs/architecture/VERIFIED_GUI_OPTIMIZER.md",
+          "present": true
+        }
+      ],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Preliminary plan said unpublished/not in pinned baseline. Current bound accelerate pin contains VerifiedGuiOptimizer. Not a v0.1 product requirement unless a narrow reusable contract is proven necessary.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "VerifiedGuiOptimizer",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Verified GUI Optimizer",
+      "symbol_line": 701,
+      "symbol_present": true,
+      "tests": [],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "40013d424655712d5471dda7747c8e685686cacc",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "agent/incremental-proof-sealer-v1 is an ancestor of this pin; class is in the bound tree. Convergence/qualification remains PCCE-014.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "IncrementalProofSealer",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Incremental Proof Sealer",
+      "symbol_line": 377,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "7493cb51792155b7d2cc47ba20e6487104722205",
+          "kind": "blob",
+          "path": "test/api/incremental_sealing/test_public_api.py",
+          "present": true
+        }
+      ],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "4c7fa7cd5783bb01ef5a34699aade6f21f6dce0d",
+      "canonical_path": "ipfs_accelerate_py/agent_supervisor/adversarial_assurance/api.py",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "agent/adversarial-assurance-engine-v1 is an ancestor of this pin; campaign API is in the bound tree. Qualification remains PCCE-015.",
+      "maturity": "present_at_pin",
+      "public_api_symbol": "AssuranceCampaignApi",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Adversarial Assurance Engine",
+      "symbol_line": 1710,
+      "symbol_present": true,
+      "tests": [
+        {
+          "blob": "d0ec4cdf3504b579fa00e67cf817d55bb43e22ab",
+          "kind": "blob",
+          "path": "test/api/adversarial_assurance/test_current_tree_conformance.py",
+          "present": true
+        }
+      ],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": "caebf230f55fbf61db05d9d2ac8f159d57071a9e",
+      "canonical_path": "docs/architecture/SELF_HOSTING_QUALIFICATION_PLAN.md",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [
+        {
+          "blob": "caebf230f55fbf61db05d9d2ac8f159d57071a9e",
+          "kind": "blob",
+          "path": "docs/architecture/SELF_HOSTING_QUALIFICATION_PLAN.md",
+          "present": true
+        }
+      ],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Plan, bundles, and observers exist. No SelfHostingQualificationHarness facade class at the bound pin. agent/self-hosting-qualification-v1 is not an ancestor of this pin.",
+      "maturity": "present_path_symbol_mismatch",
+      "public_api_symbol": "SelfHostingQualificationHarness",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Self-Hosting Qualification Harness",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [
+        {
+          "blob": "e0e0a246f325db0acc3a7ff4aad07d4257255b98",
+          "kind": "blob",
+          "path": "test/api/test_agent_supervisor_self_hosting_qualification_plan.py",
+          "present": true
+        }
+      ],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    },
+    {
+      "blob": null,
+      "canonical_path": "",
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "docs": [],
+      "duplicate_or_legacy": null,
+      "inspection_note": "Datasets-owned; accelerator must consume via adapter, not duplicate.",
+      "maturity": "absent_from_pin",
+      "public_api_symbol": "IncrementalSemanticIndex",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "subsystem": "Incremental Semantic Index",
+      "symbol_line": null,
+      "symbol_present": false,
+      "tests": [],
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b",
+      "wip_ref_is_canonical": false
+    }
+  ],
+  "content_id": "sha256:660681c9849db6d8732f5f88c9402daa19903dfe31064b089820d0b3a4161b82",
+  "discrepancies": [
+    {
+      "issue": "ownership_boundary_violation",
+      "note": "Prescribed datasets construction authority is not met at the bound pin.",
+      "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+      "requested_symbol": "ContextPacker",
+      "subsystem": "ContextPack Builder"
+    },
+    {
+      "also": "ipfs_accelerate_py/agent_supervisor/gui_optimizer/proposal.py",
+      "issue": "duplicate_context_pack_view",
+      "path": "ipfs_accelerate_py/agent_supervisor/verification/datasets_adapter.py",
+      "requested_symbol": "ContextPackView",
+      "subsystem": "ContextPack View"
+    },
+    {
+      "issue": "preliminary_plan_stale_versus_bound_pin",
+      "note": "Plan said not in pinned baseline; current accelerate pin contains the class.",
+      "path": "ipfs_accelerate_py/agent_supervisor/gui_optimizer/improvement_loop.py",
+      "requested_symbol": "VerifiedGuiOptimizer",
+      "subsystem": "Verified GUI Optimizer"
+    },
+    {
+      "issue": "facade_class_absent",
+      "path": "docs/architecture/SELF_HOSTING_QUALIFICATION_PLAN.md",
+      "requested_symbol": "SelfHostingQualificationHarness",
+      "subsystem": "Self-Hosting Qualification Harness"
+    }
+  ],
+  "inspected_at": "2026-08-21T15:16:45Z",
+  "notes": [
+    "Path presence and documentation names are not completion evidence.",
+    "Unmerged WIP refs are recorded as non-canonical.",
+    "Inventory is reproduced from Git objects at the bound pin.",
+    "MCP++ is inventory-only for invocation/receipt contracts; it has no production runtime authority.",
+    "IPS and AAE named branches are ancestors of the bound accelerate pin; they are not extra canonical tips.",
+    "Self-hosting qualification branch is not an ancestor of the bound pin."
+  ],
+  "parent_control_commit": "0eba9714692258e5f3cdd6d13404557ebf7fadd9",
+  "parent_control_tree": "76df14ea829d9a1931235ad6462e3572103cb61b",
+  "repository": "endomorphosis/ipfs_accelerate_py",
+  "schema": "lift_coding.proof-carrying-context-engine.inventory@1",
+  "task_id": "PCCE-003",
+  "wip_refs_inspected": [
+    {
+      "canonical": false,
+      "commit": "d1980931f86c",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "agent/incremental-proof-sealer-v1"
+    },
+    {
+      "canonical": false,
+      "commit": "64a9c1921a42",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "agent/adversarial-assurance-engine-v1"
+    },
+    {
+      "canonical": false,
+      "commit": "ef2ed37d87d0",
+      "is_ancestor_of_bound_pin": false,
+      "present": true,
+      "ref": "agent/self-hosting-qualification-v1"
+    },
+    {
+      "canonical": false,
+      "commit": "485edc0871c5",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "agent/semantic-compression-governor-v1"
+    },
+    {
+      "canonical": false,
+      "commit": "fa91130d852b",
+      "is_ancestor_of_bound_pin": true,
+      "present": true,
+      "ref": "agent/ipfs-kit-runtime-readiness"
+    }
+  ]
+}
