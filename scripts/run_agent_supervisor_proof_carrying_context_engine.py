@@ -2045,6 +2045,10 @@ def launch_supervisor(
     board, config = _load_config(config_path)
     paths = _runtime_paths(board)
     _assert_clean_current_tree(config)
+    accel = str(ACCEL_ROOT)
+    current_pythonpath = [item for item in os.environ.get("PYTHONPATH", "").split(os.pathsep) if item]
+    if accel not in current_pythonpath:
+        os.environ["PYTHONPATH"] = os.pathsep.join([accel, *current_pythonpath])
     owner_status_path = paths["owner"] / "quack-state-server.status.json"
     if not owner_status_path.is_file():
         raise OperatorError("Quack state owner has no current status")
