@@ -1101,6 +1101,29 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     )
     if task_ids != expected_task_ids:
         raise OperatorError("task board must contain the sealed 67 PCCE task identities")
+    # PCCE-011 is listed before PCCE-012..019 in Markdown even though the gate
+    # depends on those later blocks. Ingest in dependency order, not file order.
+    by_alias = {item[0]: item for item in parsed_tasks}
+    remaining = {
+        task_id: list(_split_csv(fields.get("depends_on")))
+        for task_id, _title, _line, fields in parsed_tasks
+    }
+    ready = [task_id for task_id in task_ids if not remaining[task_id]]
+    ingestion_order: list[tuple[str, str, int, dict[str, str]]] = []
+    seen: set[str] = set()
+    while ready:
+        current = ready.pop(0)
+        if current in seen:
+            continue
+        seen.add(current)
+        ingestion_order.append(by_alias[current])
+        for task_id, deps in remaining.items():
+            if current in deps:
+                deps.remove(current)
+                if not deps and task_id not in seen and task_id not in ready:
+                    ready.append(task_id)
+    if len(ingestion_order) != len(parsed_tasks):
+        raise OperatorError("task dependency graph contains a cycle")
     task_cids = {
         task_id: content_identity(
             {
@@ -1116,7 +1139,9 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     }
     tasks: list[dict[str, Any]] = []
     observed_tasks: set[str] = set()
-    for ordinal, (task_id, title, source_line, fields) in enumerate(parsed_tasks, start=1):
+    for ordinal, (task_id, title, source_line, fields) in enumerate(
+        ingestion_order, start=1
+    ):
         dependencies = _split_csv(fields.get("depends_on"))
         unknown = [item for item in dependencies if item not in task_cids]
         if unknown:
