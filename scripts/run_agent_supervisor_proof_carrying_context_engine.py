@@ -757,7 +757,11 @@ def _owner_restart_receipt(
             getattr(identity, "schema_fingerprint", "") or ""
         ):
             raise OperatorError("new state-owner schema fingerprint differs from prior owner")
-    elif str(admission.get("mode") or "") == "verified_descendant" and generation <= 1:
+    elif (
+        str(admission.get("mode") or "") == "verified_descendant"
+        and generation <= 1
+        and prior_generation
+    ):
         raise OperatorError("descendant owner restart did not advance store generation")
     receipt: dict[str, Any] = {
         "schema": OWNER_RESTART_RECEIPT_SCHEMA,
@@ -1866,9 +1870,6 @@ def state_owner(config_path: Path) -> int:
         ServerLifecycle,
         build_server,
     )
-    from ipfs_accelerate_py.agent_supervisor.task_sources.intent_repository import (
-        IntentRepository,
-    )
 
     board, config = _load_config(config_path)
     paths = _runtime_paths(board)
@@ -1940,13 +1941,7 @@ def state_owner(config_path: Path) -> int:
         # Same-UID provider processes must not be able to recover it through procfs.
         os.environ["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = owner_token
         harden_state_authority_process()
-        owner_repository = IntentRepository(
-            paths["database"],
-            bound_connection=owner_connection,
-            owner_id="pcce-r6-quack-owner",
-            session_id=f"pcce-r6-quack-owner-{os.getpid()}",
-            install_schema=False,
-        )
+        owner_repository = owner_connection
     except BaseException:
         server.stop()
         raise
@@ -1990,7 +1985,6 @@ def state_owner(config_path: Path) -> int:
             expected_store_generation=program.store_generation,
         )
         time.sleep(0.05)
-    owner_repository.close()
     result = server.stop()
     print(json.dumps(result, sort_keys=True), flush=True)
     return 0
