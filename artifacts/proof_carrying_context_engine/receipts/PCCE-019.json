@@ -1,0 +1,26 @@
+{
+  "admitted_at": "2026-08-21T17:22:06Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-019:kit-assurance-store",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "ba5508d940fb5b23a6d0d9b2084f5195cd26a671",
+  "bound_tree": "7c71efa93c4e4124d12fa05515868df3a5344b2e",
+  "completion_mode": "operator-immutable-candidate-qualification",
+  "content_id": "sha256:6f7299a23080ed1654d639cc42da4fc895960c59759e9ffc1d53ad90828f26d4",
+  "evidence": {
+    "acquisition": "already_present_at_bound_pin",
+    "datasets_binding": "PCCE-018",
+    "ipfs_required": false,
+    "package": "ipfs_kit_py/adversarial_assurance_store",
+    "reconstructed_from_prose": false,
+    "sibling_tests_package_required": false,
+    "source_pin": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+    "validation": "python -m pytest -q tests/adversarial_assurance_store -> 134 passed"
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-qualify-in-pin-assurance-store",
+  "parent_control_commit": "fdca38670a2567f6c9735100bd77b97f002b1117",
+  "rollback": "revert the kit test-import adapter commit and this receipt; store implementation remains the inventoried candidate",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-019"
+}
