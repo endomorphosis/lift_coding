@@ -1,0 +1,33 @@
+{
+  "accelerate_commit": "be90d574981aa1043c0f13e9fc2715ab2ea6b505",
+  "accelerate_tree": "400b7c1e64f2ce7b98b76a42bb13044373484b9c",
+  "admitted_at": "2026-08-21T16:39:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-012:context-pack-authority",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "operator-bounded-cross-repo-migration",
+  "content_id": "sha256:67d33500dc95a4662245ac40047e9e7d77b009ccb6a63b4593a601576f8619c0",
+  "datasets_commit": "3594db6492c9d84a682e5d4770069f7804e73044",
+  "datasets_tree": "f1ebe1c3a4761d22655b927ee18b19bee26d157e",
+  "evidence": {
+    "fail_closed": [
+      "stale",
+      "opaque_without_source",
+      "unavailable",
+      "simulated"
+    ],
+    "legacy_packer_production_authority": false,
+    "migration_item": "MIG-001",
+    "v01_authority": "ipfs_datasets_py.proof_context.context_pack",
+    "validation": {
+      "accelerate": "pytest test/proof_context/test_semantic_bridge.py test/api/semantic_state/test_context_pack.py -> 23 passed including 18 legacy",
+      "datasets": "pytest tests/proof_context/test_v01_context_pack.py tests/proof_context/test_v01_semantic_outcome.py -> 10 passed"
+    }
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-datasets-contextpack-authority",
+  "parent_control_commit": "da6d1958898b9f77a956cbf4b2279e77c057a998",
+  "rollback": "revert the datasets ContextPack commit and accelerator bridge commit together; restore ContextPacker as non-v0.1 compatibility surface",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-012"
+}
