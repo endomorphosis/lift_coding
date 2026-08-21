@@ -1,0 +1,24 @@
+{
+  "admitted_at": "2026-08-21T15:24:41Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-007:vectors-compatibility",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "85b8d03e767cd0ca7f4c8994013c27d31f03e817",
+  "bound_tree": "0b65dff9e2ff2be513ffac32c9fcd27838de4ead",
+  "completion_mode": "operator-conformance-implementation",
+  "content_id": "sha256:d5258d4bb9c09df4c8dcc4355e1c1441d611bf311d4c36ec81452f30e5e8b03e",
+  "evidence": {
+    "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+    "ownership_map_content_id": "sha256:432d896eea0bc0f5cde12adb35689000c97baf487e507df6d0ccc93167030267",
+    "runtime_authority": false,
+    "schema_task": "PCCE-006",
+    "validation": "python -m pytest -q tests-py/test_proof_context_v01_vectors.py tests-py/test_proof_context_v01_schemas.py",
+    "vector_sha256": "sha256:9fa44b84d0526c8421a0d3fe84896b32a65d1357ee05c63dae4ffe93af2c697c"
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-local-vector-and-matrix-freeze",
+  "parent_control_commit": "479dc4efe99edb509afe8ee1387a3b9cc6c957dd",
+  "rollback": "revert MCP++ gitlink to 5a4b144 and discard matrix/receipt; do not edit admitted v0.1 vectors in place",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-007"
+}

@@ -1,0 +1,57 @@
+{
+  "algorithm": "mcpp-jcs-v1",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "cid_behavior": "CIDv1 raw sha2-256 base32; pseudo-CIDs rejected",
+  "content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+  "inspected_at": "2026-08-21T15:24:41Z",
+  "notes": [
+    "Equivalent TaskSpecification, coding-agent invocation, and PatchProposal values share canonical bytes and CIDv1 identities via mcpp-jcs-v1.",
+    "Unknown fields, malformed/pseudo CIDs, wrong schema markers, NaN/Infinity, and simulated promotion fail closed.",
+    "MCP++ never owns production runtime state."
+  ],
+  "ownership_map_content_id": "sha256:432d896eea0bc0f5cde12adb35689000c97baf487e507df6d0ccc93167030267",
+  "parent_control_commit": "479dc4efe99edb509afe8ee1387a3b9cc6c957dd",
+  "parent_control_tree": "aef56a483af8f28780f61149727e710933f9bc31",
+  "repositories": [
+    {
+      "commit": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+      "direction": "producer_of_semantic_state; consumer_of_mcp_wire_after_PCCE-008",
+      "migration": "MIG-001 ContextPack construction",
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "role": "semantic producer; schema consumer pending PCCE-008/PCCE-012",
+      "schema_support": "pending_integration_blockers",
+      "tree": "16ef68abe8a35a3033dfaf1ed4e8d6132600df8f"
+    },
+    {
+      "commit": "81f11b6c2ee95ce49c88d07e5448380b66757478",
+      "direction": "producer_of_receipt_proof_forest; consumer_of_mcp_wire_after_PCCE-009",
+      "migration": "MIG-002 verification receipt persistence",
+      "repository": "endomorphosis/ipfs_kit_py",
+      "role": "persistence producer; schema consumer pending PCCE-009/PCCE-013",
+      "schema_support": "pending_integration_blockers",
+      "tree": "3fa93c380105221133ec14601c05696ea8a7f95c"
+    },
+    {
+      "commit": "84a056e41e48a81d4484be43840196578d6c87da",
+      "direction": "producer_of_scheduling_receipts; consumer_of_mcp_wire_after_PCCE-010",
+      "migration": "MIG-001 adapter; MIG-002/003/004 qualification",
+      "repository": "endomorphosis/ipfs_accelerate_py",
+      "role": "orchestration producer; schema consumer pending PCCE-010",
+      "schema_support": "pending_integration_blockers",
+      "tree": "40f0771e77d394ac91d92cc1edb02f7860f6131b"
+    },
+    {
+      "commit": "85b8d03e767cd0ca7f4c8994013c27d31f03e817",
+      "direction": "producer_of_wire_contracts; never_consumer_as_runtime",
+      "migration": null,
+      "repository": "endomorphosis/Mcp-Plus-Plus",
+      "role": "schema and vector producer only; no runtime authority",
+      "schema_support": "proof-context-v0.1",
+      "tree": "0b65dff9e2ff2be513ffac32c9fcd27838de4ead"
+    }
+  ],
+  "schema": "lift_coding.proof-carrying-context-engine.compatibility-matrix@1",
+  "schema_set_commit": "85b8d03e767cd0ca7f4c8994013c27d31f03e817",
+  "schema_set_tree": "0b65dff9e2ff2be513ffac32c9fcd27838de4ead",
+  "task_id": "PCCE-007"
+}
