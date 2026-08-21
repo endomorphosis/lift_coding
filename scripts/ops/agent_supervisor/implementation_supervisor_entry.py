@@ -67,16 +67,16 @@ def _mirror_completed_duckdb_tasks(daemon: Any) -> int:
 
 def _install_completed_dependency_mirror() -> None:
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
-        PortalImplementationDaemon,
+        DatabaseImplementationDaemon,
     )
 
-    original = PortalImplementationDaemon.sync_ready_tasks_into_coordination
+    original = DatabaseImplementationDaemon.sync_ready_tasks_into_coordination
 
     def sync_ready_tasks_into_coordination(self: Any) -> list[str]:
         _mirror_completed_duckdb_tasks(self)
         return original(self)
 
-    PortalImplementationDaemon.sync_ready_tasks_into_coordination = (
+    DatabaseImplementationDaemon.sync_ready_tasks_into_coordination = (
         sync_ready_tasks_into_coordination
     )
 
