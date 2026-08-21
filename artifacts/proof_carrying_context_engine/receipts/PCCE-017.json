@@ -1,0 +1,25 @@
+{
+  "admitted_at": "2026-08-21T15:55:53Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-017:datasets-incremental-sealing",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "6e4af7871d1d7b93b231a8071568a7c1b4325d67",
+  "bound_tree": "71aae79c4b2af31cff661b034ea6cd5b95f97ddf",
+  "completion_mode": "operator-immutable-candidate-present",
+  "content_id": "sha256:6db9dea31c2d3181bb5e356a0b9946964bc17161224c89df85ac3184fd2552fd",
+  "evidence": {
+    "acquisition": "already_present_at_bound_pin",
+    "package": "ipfs_datasets_py/logic/zkp/incremental_sealing",
+    "reconstructed_from_prose": false,
+    "source_pin": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+    "tests": "tests/unit/logic/zkp/incremental_sealing",
+    "validation": "python -m pytest -q tests/unit/logic/zkp/incremental_sealing -> 197 passed",
+    "vectors": "tests/fixtures/incremental_proof_sealer/forest_vectors.json"
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-qualify-in-pin-proof-contracts",
+  "parent_control_commit": "db3171ef74f7c0e092bd965b5417924ade94c6ee",
+  "rollback": "no datasets mutation for this task; discard receipt only",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-017"
+}

@@ -1,0 +1,26 @@
+{
+  "admitted_at": "2026-08-21T15:55:53Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-018:datasets-assurance-specification",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "bound_commit": "6e4af7871d1d7b93b231a8071568a7c1b4325d67",
+  "bound_tree": "71aae79c4b2af31cff661b034ea6cd5b95f97ddf",
+  "completion_mode": "operator-immutable-candidate-binding",
+  "content_id": "sha256:2d47e8398709bea67736f9fbcbdbe4c6f6bcd35aa66eca7e3a8e68d1e57ae84c",
+  "evidence": {
+    "acquisition": "already_present_at_bound_pin",
+    "binding": "ipfs_datasets_py/proof_context/assurance_specification.py",
+    "package": "ipfs_datasets_py/logic/software_contracts/adversarial_assurance",
+    "persistence_authority": false,
+    "reconstructed_from_prose": false,
+    "runtime_authority": false,
+    "source_pin": "b3669171b9bf34dac7e8f178bd0c2cc5936e57ae",
+    "validation": "python -m pytest -q tests/unit/logic/software_contracts/adversarial_assurance tests/proof_context/test_assurance_specification.py -> 731+2 passed"
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-bind-in-pin-assurance-contracts",
+  "parent_control_commit": "db3171ef74f7c0e092bd965b5417924ade94c6ee",
+  "rollback": "revert the assurance_specification commit and this receipt",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-018"
+}
