@@ -2046,9 +2046,15 @@ def launch_supervisor(
     paths = _runtime_paths(board)
     _assert_clean_current_tree(config)
     accel = str(ACCEL_ROOT)
-    current_pythonpath = [item for item in os.environ.get("PYTHONPATH", "").split(os.pathsep) if item]
-    if accel not in current_pythonpath:
-        os.environ["PYTHONPATH"] = os.pathsep.join([accel, *current_pythonpath])
+    hooks = str(ROOT / "scripts" / "ops" / "agent_supervisor" / "pcce_r6_pythonpath")
+    current_pythonpath = [
+        item for item in os.environ.get("PYTHONPATH", "").split(os.pathsep) if item
+    ]
+    ordered: list[str] = []
+    for item in (hooks, accel, *current_pythonpath):
+        if item and item not in ordered:
+            ordered.append(item)
+    os.environ["PYTHONPATH"] = os.pathsep.join(ordered)
     owner_status_path = paths["owner"] / "quack-state-server.status.json"
     if not owner_status_path.is_file():
         raise OperatorError("Quack state owner has no current status")
