@@ -1,0 +1,40 @@
+{
+  "admitted_at": "2026-08-21T17:27:10Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-011:epic-a-gate",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "operator-acceptance-gate",
+  "content_id": "sha256:904f872d85318672291b57f8a2b0a0f297af1ffaca9d0f646645695cc56ffbcc",
+  "evidence": {
+    "decision": "go",
+    "epic_a_gate_content_id": "sha256:da97b6cd1307bf42b2109b2647a79e64f0c754f85e19ed1d73f549b580b14ce6",
+    "implementation_repaired_during_gate": false,
+    "receipts": {
+      "PCCE-001": "sha256:ec279a7c9faae21c120b9dc7c588b3536288a4cdbc9e5914dd063f908b91d3dd",
+      "PCCE-002": "sha256:9ae1f8e1dbe94883860f858834c83a595bb97e68fa9eabbe8d69dc7ad81ea458",
+      "PCCE-003": "sha256:43d3781328e7720735bef141c701383bc3f40608abc1e8272bafd9961b48af1b",
+      "PCCE-004": "sha256:6dd984225c0a837622b013cd63ac150906d07dc9780e61acfc0e15c8b895dc76",
+      "PCCE-005": "sha256:a9c25a7db4b5a6ccb57907e5dad9af69c156e885a8bb5de0d97e5fcab20f291b",
+      "PCCE-006": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+      "PCCE-007": "sha256:d5258d4bb9c09df4c8dcc4355e1c1441d611bf311d4c36ec81452f30e5e8b03e",
+      "PCCE-008": "sha256:86131c6c8acf1b8d1453e5c7c290e74eb3fafdc092d53b555c3e247f08112644",
+      "PCCE-009": "sha256:13013e08c931e6fcb030e09eb561e192199a1561e895d20a93c0e1b95a287f50",
+      "PCCE-010": "sha256:03648c99eb6e27ff6d072d9b55e38c345927e4e5c10c6e9faa23db02fbc57e52",
+      "PCCE-012": "sha256:67d33500dc95a4662245ac40047e9e7d77b009ccb6a63b4593a601576f8619c0",
+      "PCCE-013": "sha256:28ded59307d5ae1bb67ef9b9564f11350d233286d62b11992cdca5e77639e2b4",
+      "PCCE-014": "sha256:c53f027137aa213393cce88b2e6d574efe17001e7c6d019d8c37a908aac2b494",
+      "PCCE-015": "sha256:8a97fbe2e69a676b9dc3ff201b1695880715e22d4edd8038d44ecb9aa07e7cda",
+      "PCCE-016": "sha256:936d17515f1e1788e758c8b267426bfab9825f55f6acbd632083864a15aff4c4",
+      "PCCE-017": "sha256:6db9dea31c2d3181bb5e356a0b9946964bc17161224c89df85ac3184fd2552fd",
+      "PCCE-018": "sha256:2d47e8398709bea67736f9fbcbdbe4c6f6bcd35aa66eca7e3a8e68d1e57ae84c",
+      "PCCE-019": "sha256:6f7299a23080ed1654d639cc42da4fc895960c59759e9ffc1d53ad90828f26d4"
+    },
+    "required_tests_passed": true
+  },
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-epic-a-go-with-documented-limitations",
+  "parent_control_commit": "e50fe1bf779a80eaba060a663cc778992e98adee",
+  "rollback": "invalidate this gate and dependent runtime receipts; do not patch source from the gate",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-011"
+}
