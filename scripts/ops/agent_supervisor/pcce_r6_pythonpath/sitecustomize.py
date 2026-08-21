@@ -139,17 +139,16 @@ def _patch_supervisor(module: Any) -> None:
 
 def _import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
     module = _real_import(name, globals, locals, fromlist, level)
-    loaded = builtins.__import__("sys").modules
     if name == _DAEMON or (
         fromlist and name == "ipfs_accelerate_py.agent_supervisor.todo_daemon"
     ):
-        daemon = loaded.get(_DAEMON)
+        daemon = sys.modules.get(_DAEMON)
         if daemon is not None:
             _patch_daemon(daemon)
     if name == _SUPERVISOR or (
         fromlist and name == "ipfs_accelerate_py.agent_supervisor.todo_daemon"
     ):
-        supervisor = loaded.get(_SUPERVISOR)
+        supervisor = sys.modules.get(_SUPERVISOR)
         if supervisor is not None:
             _patch_supervisor(supervisor)
     return module
