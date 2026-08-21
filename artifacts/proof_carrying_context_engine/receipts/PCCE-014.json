@@ -1,0 +1,34 @@
+{
+  "accelerate_commit": "a9dfb4e5313c9f1b3c9c575a15abcad850e8e644",
+  "accelerate_tree": "b8f7123b4a88c314283e3146d50f7c5389fe635d",
+  "admitted_at": "2026-08-21T16:41:37Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-014:incremental-proof-sealer",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "operator-candidate-qualification",
+  "content_id": "sha256:c53f027137aa213393cce88b2e6d574efe17001e7c6d019d8c37a908aac2b494",
+  "evidence": {
+    "candidate": "present_at_accelerate_pin IncrementalProofSealer",
+    "datasets_proof_contracts": "PCCE-017",
+    "fail_closed": [
+      "simulated",
+      "wrong_parent"
+    ],
+    "kit_persistence": "ipfs_kit_py.proof_context.incremental_seal_store",
+    "migration_item": "MIG-003",
+    "reconstructed_from_prose": false,
+    "validation": {
+      "bridge": "pytest test/proof_context/test_incremental_sealing_bridge.py passed",
+      "incremental_sealing": "pytest test/api/incremental_sealing -> 524 passed",
+      "kit_store": "pytest tests/proof_context/test_incremental_seal_store.py passed"
+    }
+  },
+  "kit_commit": "30c5aa04813a150363988e430be983a15c9f224d",
+  "kit_tree": "4d05d478318948a702172bae99228c9fd3d5de12",
+  "objective_id": "PCCE-G100",
+  "operator_approval": "operator-qualify-in-pin-sealer",
+  "parent_control_commit": "f2386ffb75253a73ee29f075590ba29bee2e4c2e",
+  "rollback": "revert sealer public module, bridge, and kit seal-store commits together",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-014"
+}
