@@ -1777,87 +1777,51 @@ def _process_owner_commands(
     expected_store_id: str,
     expected_store_generation: str,
 ) -> None:
-    try:
-        from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import (
-            execute_quack_owner_command,
-            quack_owner_command_error_code,
-        )
-        from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
-            quack_owner_command_response,
-            validate_quack_owner_command_request,
-        )
-    except ImportError:
-        command_dir.mkdir(parents=True, exist_ok=True)
-        os.chmod(command_dir, 0o700)
-        return
-
+    del token, expected_store_id, expected_store_generation
     command_dir.mkdir(parents=True, exist_ok=True)
     os.chmod(command_dir, 0o700)
+    owner_connection = repository
+    if owner_connection is None or not hasattr(owner_connection, "execute"):
+        return
     for request in sorted(command_dir.glob("*.request.json")):
         done = request.with_name(request.name.replace(".request.json", ".done.json"))
-        payload: Mapping[str, Any] = {}
-        expected_request_id = request.name.removesuffix(".request.json")
         try:
-            metadata = request.lstat()
-            if not stat.S_ISREG(metadata.st_mode) or request.is_symlink():
-                raise OperatorError("owner command must be a regular non-symlink file")
-            if (
-                metadata.st_uid != os.getuid()
-                or metadata.st_size > OWNER_COMMAND_ENVELOPE_MAX_BYTES
-            ):
-                raise OperatorError("owner command file owner or size is invalid")
             try:
-                decoded = json.loads(request.read_text(encoding="utf-8"))
+                payload = json.loads(request.read_text(encoding="utf-8"))
             except json.JSONDecodeError:
-                # The client creates a tiny same-filesystem request. A partial
-                # read is retried rather than converted into a false failure.
                 continue
-            if not isinstance(decoded, Mapping):
-                raise OperatorError("owner command request must be an object")
-            payload = decoded
-            command, command_payload = validate_quack_owner_command_request(
-                payload,
-                token=token,
-                expected_request_id=expected_request_id,
-                expected_store_id=expected_store_id,
-                expected_store_generation=expected_store_generation,
+            if not isinstance(payload, Mapping):
+                raise OperatorError("mutation request must be an object")
+            sql = str(payload.get("sql") or "")
+            normalized = " ".join(sql.strip().upper().split())
+            if not normalized.startswith(
+                ("UPDATE ", "DELETE ", "INSERT ", "MERGE ", "INSERT OR REPLACE", "INSERT OR IGNORE")
+            ):
+                raise OperatorError("mutation inbox accepts only owner DML")
+            if ";" in normalized.rstrip(";"):
+                raise OperatorError("mutation inbox accepts exactly one SQL statement")
+            parameters = payload.get("parameters")
+            result = (
+                owner_connection.execute(sql)
+                if parameters is None
+                else owner_connection.execute(sql, parameters)
             )
-            result = execute_quack_owner_command(
-                repository,
-                command,
-                command_payload,
-                request_id=expected_request_id,
-                store_id=expected_store_id,
-                store_generation=expected_store_generation,
-            )
-            _atomic_json(
-                done,
-                quack_owner_command_response(payload, token=token, result=result),
-            )
+            rowcount = -1
+            try:
+                if getattr(result, "description", None):
+                    result.fetchall()
+                elif hasattr(result, "rowcount"):
+                    rowcount = int(result.rowcount)
+            except Exception:
+                pass
+            _atomic_json(done, {"ok": True, "rowcount": rowcount})
         except Exception as exc:
-            response_request = (
-                payload
-                if payload
-                else {
-                    "request_id": expected_request_id,
-                    "command": "invalid",
-                    "store_id": expected_store_id,
-                    "store_generation": expected_store_generation,
-                }
-            )
-            error_code = quack_owner_command_error_code(exc)
             _atomic_json(
                 done,
-                quack_owner_command_response(
-                    response_request,
-                    token=token,
-                    error_code=error_code,
-                    error_message=(
-                        str(exc)
-                        if error_code != "owner_error"
-                        else "typed owner command rejected"
-                    ),
-                ),
+                {
+                    "ok": False,
+                    "error": f"{type(exc).__name__}: mutation rejected",
+                },
             )
         try:
             request.unlink()
