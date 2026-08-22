@@ -1958,6 +1958,7 @@ def state_owner(config_path: Path) -> int:
     signal.signal(signal.SIGTERM, request_stop)
     command_dir = paths["owner"] / "mutations"
     control_path = server.stop_control_path()
+    last_board_unstall = 0.0
     while server.lifecycle is ServerLifecycle.READY and not stopped["value"]:
         if control_path.is_file():
             break
@@ -1968,6 +1969,39 @@ def state_owner(config_path: Path) -> int:
             expected_store_id=program.store_id,
             expected_store_generation=program.store_generation,
         )
+        now_mono = time.monotonic()
+        if now_mono - last_board_unstall >= OWNER_WATCH_INTERVAL_SECONDS:
+            last_board_unstall = now_mono
+            try:
+                from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+                    unstall_stale_in_progress_tasks,
+                )
+
+                unstall = unstall_stale_in_progress_tasks(owner_repository)
+                if unstall.get("unstalled"):
+                    print(
+                        json.dumps(
+                            {
+                                "schema": OPERATOR_SCHEMA,
+                                "command": "state-owner",
+                                "board_unstall": unstall,
+                            },
+                            sort_keys=True,
+                        ),
+                        flush=True,
+                    )
+            except Exception as exc:
+                print(
+                    json.dumps(
+                        {
+                            "schema": OPERATOR_SCHEMA,
+                            "command": "state-owner",
+                            "board_unstall_error": type(exc).__name__,
+                        },
+                        sort_keys=True,
+                    ),
+                    flush=True,
+                )
         time.sleep(0.05)
     result = server.stop()
     print(json.dumps(result, sort_keys=True), flush=True)
