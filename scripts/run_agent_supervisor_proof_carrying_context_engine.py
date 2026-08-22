@@ -1798,29 +1798,11 @@ def _process_owner_commands(
                 continue
             if not isinstance(payload, Mapping):
                 raise OperatorError("mutation request must be an object")
-            sql = str(payload.get("sql") or "")
-            normalized = " ".join(sql.strip().upper().split())
-            if not normalized.startswith(
-                ("UPDATE ", "DELETE ", "INSERT ", "MERGE ", "INSERT OR REPLACE", "INSERT OR IGNORE")
-            ):
-                raise OperatorError("mutation inbox accepts only owner DML")
-            if ";" in normalized.rstrip(";"):
-                raise OperatorError("mutation inbox accepts exactly one SQL statement")
-            parameters = payload.get("parameters")
-            result = (
-                owner_connection.execute(sql)
-                if parameters is None
-                else owner_connection.execute(sql, parameters)
+            from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+                apply_owner_command_payload,
             )
-            rowcount = -1
-            try:
-                if getattr(result, "description", None):
-                    result.fetchall()
-                elif hasattr(result, "rowcount"):
-                    rowcount = int(result.rowcount)
-            except Exception:
-                pass
-            _atomic_json(done, {"ok": True, "rowcount": rowcount})
+
+            _atomic_json(done, apply_owner_command_payload(owner_connection, payload))
         except Exception as exc:
             _atomic_json(
                 done,
@@ -1857,34 +1839,38 @@ def state_owner(config_path: Path) -> int:
     port = int(endpoint.group(2))
     if not 1 <= port <= 65535:
         raise OperatorError("configured Quack port is out of range")
-    probe = _owner_connection(paths["database"])
+    # Keep this exclusive writer separate from quack_serve. SQL on the listen
+    # handle contends with auth callbacks and surfaces as Authentication
+    # failed or FatalException, which froze mutation-inbox UPDATEs and left
+    # in_progress gates blocking claim_next.
+    owner_writer = _owner_connection(paths["database"])
+    server = None
     try:
         database_verification = _owner_database_verification(
-            probe,
+            owner_writer,
             restart_admission,
         )
-    finally:
-        try:
-            probe.close()
-        except Exception:
-            pass
-    server = build_server(
-        database_path=paths["database"],
-        state_dir=paths["owner"],
-        host=host,
-        port=port,
-        repository_id="repository:lift_coding",
-        store_id=program.store_id,
-        secret_handle=program.endpoint_secret_handle,
-        # The installed Quack extension is a live-qualified beta build. This
-        # permits that real transport; it never permits simulated inference.
-        allow_experimental=True,
-        migrate=_verify_control_plane,
-        connection_factory=_owner_connection,
-        transport=_LiveQuackTransport(),
-    )
-    identity = server.start()
-    try:
+        from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+            unstall_stale_in_progress_tasks,
+        )
+
+        board_unstall = unstall_stale_in_progress_tasks(owner_writer)
+        server = build_server(
+            database_path=paths["database"],
+            state_dir=paths["owner"],
+            host=host,
+            port=port,
+            repository_id="repository:lift_coding",
+            store_id=program.store_id,
+            secret_handle=program.endpoint_secret_handle,
+            # The installed Quack extension is a live-qualified beta build. This
+            # permits that real transport; it never permits simulated inference.
+            allow_experimental=True,
+            migrate=_verify_control_plane,
+            connection_factory=_owner_connection,
+            transport=_LiveQuackTransport(),
+        )
+        identity = server.start()
         # Do not call server.ready(): it issues SELECT 1 on the quack_serve
         # connection and the auth callback then fails closed as
         # Authentication failed.
@@ -1899,8 +1885,7 @@ def state_owner(config_path: Path) -> int:
             or after_tree != restart_admission["current_source_tree"]
         ):
             raise OperatorError("owner restart source changed during admission")
-        owner_connection = getattr(server, "_connection", None)
-        if owner_connection is None:
+        if getattr(server, "_connection", None) is None:
             raise OperatorError("state-owner connection is unavailable")
         restart_receipt = _owner_restart_receipt(
             restart_admission,
@@ -1925,9 +1910,17 @@ def state_owner(config_path: Path) -> int:
         # Same-UID provider processes must not be able to recover it through procfs.
         os.environ["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = owner_token
         harden_state_authority_process()
-        owner_repository = owner_connection
+        owner_repository = owner_writer
     except BaseException:
-        server.stop()
+        if server is not None:
+            try:
+                server.stop()
+            except Exception:
+                pass
+        try:
+            owner_writer.close()
+        except Exception:
+            pass
         raise
     print(
         json.dumps(
@@ -1944,6 +1937,7 @@ def state_owner(config_path: Path) -> int:
                 "owner_command_dir": str(
                     (paths["owner"] / "mutations").relative_to(ROOT)
                 ),
+                "board_unstall": board_unstall,
             },
             sort_keys=True,
         ),
@@ -2003,9 +1997,15 @@ def state_owner(config_path: Path) -> int:
                     flush=True,
                 )
         time.sleep(0.05)
-    result = server.stop()
-    print(json.dumps(result, sort_keys=True), flush=True)
-    return 0
+    try:
+        result = server.stop()
+        print(json.dumps(result, sort_keys=True), flush=True)
+        return 0
+    finally:
+        try:
+            owner_writer.close()
+        except Exception:
+            pass
 
 
 def _unlink_token_vault(path: Path) -> None:
