@@ -104,6 +104,8 @@ TERMINAL_STATUSES: Final = (
     "rejected",
 )
 OWNER_COMMAND_ENVELOPE_MAX_BYTES: Final = 1_048_576
+OWNER_WATCH_INTERVAL_SECONDS: Final = 15.0
+OWNER_DAEMON_COMMAND: Final = "state-owner-daemon"
 
 
 class OperatorError(RuntimeError):
@@ -2245,6 +2247,159 @@ def status(config_path: Path) -> dict[str, Any]:
     }
 
 
+def _owner_python_env() -> dict[str, str]:
+    env = dict(os.environ)
+    sitecustomize = str(ROOT / "scripts" / "ops" / "agent_supervisor" / "pcce_r6_pythonpath")
+    prefixes = [str(ACCEL_ROOT), sitecustomize]
+    existing = str(env.get("PYTHONPATH") or "").strip()
+    env["PYTHONPATH"] = os.pathsep.join(
+        prefixes + ([existing] if existing else [])
+    )
+    env["PYTHONUNBUFFERED"] = "1"
+    return env
+
+
+def _loopback_port_listening(port: int) -> bool:
+    import socket
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(0.4)
+    try:
+        return sock.connect_ex(("127.0.0.1", int(port))) == 0
+    finally:
+        sock.close()
+
+
+def _pid_alive(pid: int) -> bool:
+    if pid <= 1:
+        return False
+    try:
+        os.kill(pid, 0)
+    except OSError:
+        return False
+    return True
+
+
+def _read_pid_file(path: Path) -> int:
+    try:
+        raw = path.read_text(encoding="utf-8").strip()
+    except OSError:
+        return 0
+    if not raw.isdigit():
+        return 0
+    return int(raw)
+
+
+def _write_pid_file(path: Path, pid: int) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(f"{int(pid)}\n", encoding="utf-8")
+    os.chmod(path, 0o600)
+
+
+def _owner_listen_port(config_path: Path) -> int:
+    board, _config = _load_config(config_path)
+    program = board.resolved_database_program()
+    matched = QUACK_ENDPOINT_RE.fullmatch(program.quack_endpoint)
+    if matched is None:
+        raise OperatorError("configured Quack endpoint is not loopback")
+    return int(matched.group(2))
+
+
+def watch_state_owner(config_path: Path) -> int:
+    """Keep the exclusive Quack owner alive until this watch process is stopped.
+
+    Quack clients are multi-writer over ATTACH. The DuckDB file still has one
+    exclusive owner process. CLI 10-hour wrappers must not parent that process;
+    this watch loop is started in its own session and restarts the owner if it
+    exits so the board can drain past a single session cap.
+    """
+
+    port = _owner_listen_port(config_path)
+    argv = [
+        sys.executable,
+        str(ROOT / "scripts" / "run_agent_supervisor_proof_carrying_context_engine.py"),
+        "--config",
+        str(config_path),
+        "state-owner",
+    ]
+    board, _config = _load_config(config_path)
+    paths = _runtime_paths(board)
+    log_path = paths["runtime"] / "logs" / "state-owner.daemon.log"
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    while True:
+        if _loopback_port_listening(port):
+            time.sleep(OWNER_WATCH_INTERVAL_SECONDS)
+            continue
+        with log_path.open("ab", buffering=0) as log_fh:
+            log_fh.write(
+                f"\n# restarting state-owner at {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}\n".encode("utf-8")
+            )
+            child = subprocess.Popen(
+                argv,
+                cwd=str(ROOT),
+                env=_owner_python_env(),
+                stdin=subprocess.DEVNULL,
+                stdout=log_fh,
+                stderr=subprocess.STDOUT,
+                close_fds=True,
+            )
+            child.wait()
+        time.sleep(2.0)
+
+
+def start_state_owner_daemon(config_path: Path) -> dict[str, Any]:
+    """Detach a session-independent owner watch so 10-hour CLI caps cannot stop Quack."""
+
+    board, _config = _load_config(config_path)
+    paths = _runtime_paths(board)
+    pid_path = paths["owner"] / "state-owner-watch.pid"
+    log_path = paths["runtime"] / "logs" / "state-owner-watch.log"
+    existing = _read_pid_file(pid_path)
+    if existing and _pid_alive(existing):
+        return {
+            "schema": OPERATOR_SCHEMA,
+            "command": OWNER_DAEMON_COMMAND,
+            "already_running": True,
+            "watch_pid": existing,
+            "watch_pid_path": str(pid_path.relative_to(ROOT)),
+            "log_path": str(log_path.relative_to(ROOT)),
+        }
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    argv = [
+        sys.executable,
+        str(ROOT / "scripts" / "run_agent_supervisor_proof_carrying_context_engine.py"),
+        "--config",
+        str(config_path),
+        OWNER_DAEMON_COMMAND,
+        "--watch-loop",
+    ]
+    with log_path.open("ab", buffering=0) as log_fh:
+        proc = subprocess.Popen(
+            argv,
+            cwd=str(ROOT),
+            env=_owner_python_env(),
+            stdin=subprocess.DEVNULL,
+            stdout=log_fh,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+            close_fds=True,
+        )
+    _write_pid_file(pid_path, proc.pid)
+    return {
+        "schema": OPERATOR_SCHEMA,
+        "command": OWNER_DAEMON_COMMAND,
+        "already_running": False,
+        "detached": True,
+        "watch_pid": proc.pid,
+        "watch_pid_path": str(pid_path.relative_to(ROOT)),
+        "log_path": str(log_path.relative_to(ROOT)),
+        "note": (
+            "Quack ATTACH is multi-writer; this exclusive owner process is "
+            "session-detached so CLI max_runtime cannot stop the control plane"
+        ),
+    }
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -2261,6 +2416,18 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser(
         "state-owner",
         help="serve the materialized DuckDB authority through fenced loopback Quack",
+    )
+    daemon_parser = commands.add_parser(
+        OWNER_DAEMON_COMMAND,
+        help=(
+            "detach a session-independent Quack owner watch so 10-hour CLI "
+            "wrappers cannot stop the control plane"
+        ),
+    )
+    daemon_parser.add_argument(
+        "--watch-loop",
+        action="store_true",
+        help=argparse.SUPPRESS,
     )
     status_parser = commands.add_parser(
         "status",
@@ -2301,6 +2468,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         if arguments.command == "state-owner":
             return state_owner(config_path)
+        if arguments.command == OWNER_DAEMON_COMMAND:
+            if bool(arguments.watch_loop):
+                return watch_state_owner(config_path)
+            result = start_state_owner_daemon(config_path)
+            print(json.dumps(result, indent=2, sort_keys=True))
+            return 0
         if arguments.command == "status":
             result = status(config_path)
             print(json.dumps(result, indent=2, sort_keys=True))
