@@ -129,6 +129,16 @@ def _patch_daemon(module: Any) -> None:
                             "reset away from in_progress"
                         )
                         return []
+                    lowered = message.lower()
+                    if (
+                        "authentication failed" in lowered
+                        or "quack control-plane attach contended" in lowered
+                        or "could not connect to server" in lowered
+                    ):
+                        _LOG.warning(
+                            "deferring portal reconciliation while Quack attach is contended"
+                        )
+                        return []
                     raise
 
             database_cls.reconcile_terminal_portal_failures = (
