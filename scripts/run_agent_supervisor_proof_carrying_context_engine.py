@@ -1889,12 +1889,8 @@ def state_owner(config_path: Path) -> int:
         owner_connection = getattr(server, "_connection", None)
         if owner_connection is None:
             raise OperatorError("state-owner connection is unavailable")
-        # Mutations and post-start probes must not share the quack_serve
-        # connection. Auth callbacks use a fresh DuckDB session; a second
-        # in-process writer is the supported DuckDB concurrency model.
-        mutation_connection = _owner_connection(paths["database"])
         database_verification = _owner_database_verification(
-            mutation_connection,
+            owner_connection,
             restart_admission,
         )
         restart_receipt = _owner_restart_receipt(
@@ -1920,7 +1916,7 @@ def state_owner(config_path: Path) -> int:
         # Same-UID provider processes must not be able to recover it through procfs.
         os.environ["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = owner_token
         harden_state_authority_process()
-        owner_repository = mutation_connection
+        owner_repository = owner_connection
     except BaseException:
         server.stop()
         raise
@@ -1965,10 +1961,6 @@ def state_owner(config_path: Path) -> int:
         )
         time.sleep(0.05)
     result = server.stop()
-    try:
-        mutation_connection.close()
-    except Exception:
-        pass
     print(json.dumps(result, sort_keys=True), flush=True)
     return 0
 
