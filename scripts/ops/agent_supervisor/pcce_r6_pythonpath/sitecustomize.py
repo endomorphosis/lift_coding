@@ -14,6 +14,7 @@ from __future__ import annotations
 import builtins
 import logging
 import sys
+import threading
 from pathlib import Path
 from typing import Any
 
@@ -119,9 +120,13 @@ def _patch_daemon(module: Any) -> None:
                     return original_reconcile(self)
                 except Exception as exc:
                     message = str(exc)
-                    if "cannot reconcile control status 'todo'" in message:
+                    if (
+                        "cannot reconcile control status 'todo'" in message
+                        or "cannot reconcile control status 'completed'" in message
+                    ):
                         _LOG.warning(
-                            "skipping vacated portal terminal failures after DuckDB reset to todo"
+                            "skipping vacated portal terminal failures after DuckDB "
+                            "reset away from in_progress"
                         )
                         return []
                     raise
@@ -170,21 +175,49 @@ def _patch_supervisor(module: Any) -> None:
     cls._pcce_r6_recovery_skip_installed = True
 
 
+def _patch_loaded_modules() -> None:
+    """Patch whichever module actually owns the daemon classes.
+
+    ``python -m ...implementation_daemon`` execs the file as ``__main__``,
+    so looking only for the package module name misses the claim process.
+    """
+
+    for key in (_DAEMON, "__main__"):
+        module = sys.modules.get(key)
+        if module is not None:
+            _patch_daemon(module)
+    for key in (_SUPERVISOR, "__main__"):
+        module = sys.modules.get(key)
+        if module is not None:
+            _patch_supervisor(module)
+
+
 def _import(name, globals=None, locals=None, fromlist=(), level=0):  # type: ignore[no-untyped-def]
     module = _real_import(name, globals, locals, fromlist, level)
-    if name == _DAEMON or (
-        fromlist and name == "ipfs_accelerate_py.agent_supervisor.todo_daemon"
-    ):
-        daemon = sys.modules.get(_DAEMON)
-        if daemon is not None:
-            _patch_daemon(daemon)
-    if name == _SUPERVISOR or (
-        fromlist and name == "ipfs_accelerate_py.agent_supervisor.todo_daemon"
-    ):
-        supervisor = sys.modules.get(_SUPERVISOR)
-        if supervisor is not None:
-            _patch_supervisor(supervisor)
+    _patch_loaded_modules()
     return module
 
 
 builtins.__import__ = _import
+
+
+def _watch_for_daemon_module() -> None:
+    import time
+
+    for _ in range(200):
+        _patch_loaded_modules()
+        daemon = sys.modules.get(_DAEMON) or sys.modules.get("__main__")
+        if daemon is not None and getattr(
+            getattr(daemon, "DatabaseImplementationDaemon", None),
+            "_pcce_r6_mirror_installed",
+            False,
+        ):
+            return
+        time.sleep(0.05)
+
+
+threading.Thread(
+    target=_watch_for_daemon_module,
+    name="pcce-r6-sitecustomize-patch",
+    daemon=True,
+).start()
