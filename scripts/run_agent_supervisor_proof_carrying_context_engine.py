@@ -1839,38 +1839,53 @@ def state_owner(config_path: Path) -> int:
     port = int(endpoint.group(2))
     if not 1 <= port <= 65535:
         raise OperatorError("configured Quack port is out of range")
-    # Keep this exclusive writer separate from quack_serve. SQL on the listen
-    # handle contends with auth callbacks and surfaces as Authentication
-    # failed or FatalException, which froze mutation-inbox UPDATEs and left
-    # in_progress gates blocking claim_next.
+    # DuckDB allows one writer process. A second in-process connection while
+    # quack_serve is live raises FatalException, and SQL on the listen handle
+    # contends with auth callbacks. Unstall leftover in_progress gates on the
+    # exclusive file connection, close it, then listen.
+    command_dir = paths["owner"] / "mutations"
     owner_writer = _owner_connection(paths["database"])
-    server = None
     try:
         database_verification = _owner_database_verification(
             owner_writer,
             restart_admission,
         )
         from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+            clear_owner_board_unstall_bounce,
             unstall_stale_in_progress_tasks,
         )
 
-        board_unstall = unstall_stale_in_progress_tasks(owner_writer)
-        server = build_server(
-            database_path=paths["database"],
-            state_dir=paths["owner"],
-            host=host,
-            port=port,
-            repository_id="repository:lift_coding",
-            store_id=program.store_id,
-            secret_handle=program.endpoint_secret_handle,
-            # The installed Quack extension is a live-qualified beta build. This
-            # permits that real transport; it never permits simulated inference.
-            allow_experimental=True,
-            migrate=_verify_control_plane,
-            connection_factory=_owner_connection,
-            transport=_LiveQuackTransport(),
+        _process_owner_commands(
+            owner_writer,
+            command_dir,
+            token="",
+            expected_store_id=program.store_id,
+            expected_store_generation=program.store_generation,
         )
-        identity = server.start()
+        board_unstall = unstall_stale_in_progress_tasks(owner_writer)
+        clear_owner_board_unstall_bounce(command_dir)
+    finally:
+        try:
+            owner_writer.close()
+        except Exception:
+            pass
+    server = build_server(
+        database_path=paths["database"],
+        state_dir=paths["owner"],
+        host=host,
+        port=port,
+        repository_id="repository:lift_coding",
+        store_id=program.store_id,
+        secret_handle=program.endpoint_secret_handle,
+        # The installed Quack extension is a live-qualified beta build. This
+        # permits that real transport; it never permits simulated inference.
+        allow_experimental=True,
+        migrate=_verify_control_plane,
+        connection_factory=_owner_connection,
+        transport=_LiveQuackTransport(),
+    )
+    identity = server.start()
+    try:
         # Do not call server.ready(): it issues SELECT 1 on the quack_serve
         # connection and the auth callback then fails closed as
         # Authentication failed.
@@ -1885,7 +1900,8 @@ def state_owner(config_path: Path) -> int:
             or after_tree != restart_admission["current_source_tree"]
         ):
             raise OperatorError("owner restart source changed during admission")
-        if getattr(server, "_connection", None) is None:
+        owner_connection = getattr(server, "_connection", None)
+        if owner_connection is None:
             raise OperatorError("state-owner connection is unavailable")
         restart_receipt = _owner_restart_receipt(
             restart_admission,
@@ -1910,17 +1926,9 @@ def state_owner(config_path: Path) -> int:
         # Same-UID provider processes must not be able to recover it through procfs.
         os.environ["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = owner_token
         harden_state_authority_process()
-        owner_repository = owner_writer
+        owner_repository = owner_connection
     except BaseException:
-        if server is not None:
-            try:
-                server.stop()
-            except Exception:
-                pass
-        try:
-            owner_writer.close()
-        except Exception:
-            pass
+        server.stop()
         raise
     print(
         json.dumps(
@@ -1950,9 +1958,7 @@ def state_owner(config_path: Path) -> int:
 
     signal.signal(signal.SIGINT, request_stop)
     signal.signal(signal.SIGTERM, request_stop)
-    command_dir = paths["owner"] / "mutations"
     control_path = server.stop_control_path()
-    last_board_unstall = 0.0
     while server.lifecycle is ServerLifecycle.READY and not stopped["value"]:
         if control_path.is_file():
             break
@@ -1963,49 +1969,10 @@ def state_owner(config_path: Path) -> int:
             expected_store_id=program.store_id,
             expected_store_generation=program.store_generation,
         )
-        now_mono = time.monotonic()
-        if now_mono - last_board_unstall >= OWNER_WATCH_INTERVAL_SECONDS:
-            last_board_unstall = now_mono
-            try:
-                from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
-                    unstall_stale_in_progress_tasks,
-                )
-
-                unstall = unstall_stale_in_progress_tasks(owner_repository)
-                if unstall.get("unstalled"):
-                    print(
-                        json.dumps(
-                            {
-                                "schema": OPERATOR_SCHEMA,
-                                "command": "state-owner",
-                                "board_unstall": unstall,
-                            },
-                            sort_keys=True,
-                        ),
-                        flush=True,
-                    )
-            except Exception as exc:
-                print(
-                    json.dumps(
-                        {
-                            "schema": OPERATOR_SCHEMA,
-                            "command": "state-owner",
-                            "board_unstall_error": type(exc).__name__,
-                        },
-                        sort_keys=True,
-                    ),
-                    flush=True,
-                )
         time.sleep(0.05)
-    try:
-        result = server.stop()
-        print(json.dumps(result, sort_keys=True), flush=True)
-        return 0
-    finally:
-        try:
-            owner_writer.close()
-        except Exception:
-            pass
+    result = server.stop()
+    print(json.dumps(result, sort_keys=True), flush=True)
+    return 0
 
 
 def _unlink_token_vault(path: Path) -> None:
@@ -2339,6 +2306,16 @@ def _owner_listen_port(config_path: Path) -> int:
     return int(matched.group(2))
 
 
+def _owner_should_recycle_for_board_unstall(mutation_dir: Path) -> bool:
+    try:
+        from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+            owner_should_recycle_for_board_unstall,
+        )
+    except ImportError:
+        return False
+    return bool(owner_should_recycle_for_board_unstall(mutation_dir))
+
+
 def watch_state_owner(config_path: Path) -> int:
     """Keep the exclusive Quack owner alive until this watch process is stopped.
 
@@ -2360,6 +2337,8 @@ def watch_state_owner(config_path: Path) -> int:
     paths = _runtime_paths(board)
     log_path = paths["runtime"] / "logs" / "state-owner.daemon.log"
     log_path.parent.mkdir(parents=True, exist_ok=True)
+    mutation_dir = paths["owner"] / "mutations"
+    last_board_unstall_bounce = 0.0
     while True:
         if _loopback_port_listening(port):
             time.sleep(OWNER_WATCH_INTERVAL_SECONDS)
@@ -2377,7 +2356,23 @@ def watch_state_owner(config_path: Path) -> int:
                 stderr=subprocess.STDOUT,
                 close_fds=True,
             )
-            child.wait()
+            while child.poll() is None:
+                if (
+                    time.monotonic() - last_board_unstall_bounce >= 60.0
+                    and _owner_should_recycle_for_board_unstall(mutation_dir)
+                ):
+                    log_fh.write(
+                        b"\n# recycling state-owner to apply board unstall\n"
+                    )
+                    child.send_signal(signal.SIGTERM)
+                    try:
+                        child.wait(timeout=20)
+                    except subprocess.TimeoutExpired:
+                        child.kill()
+                        child.wait(timeout=5)
+                    last_board_unstall_bounce = time.monotonic()
+                    break
+                time.sleep(1.0)
         time.sleep(2.0)
 
 
