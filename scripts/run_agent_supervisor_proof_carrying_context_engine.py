@@ -1855,6 +1855,17 @@ def state_owner(config_path: Path) -> int:
     port = int(endpoint.group(2))
     if not 1 <= port <= 65535:
         raise OperatorError("configured Quack port is out of range")
+    probe = _owner_connection(paths["database"])
+    try:
+        database_verification = _owner_database_verification(
+            probe,
+            restart_admission,
+        )
+    finally:
+        try:
+            probe.close()
+        except Exception:
+            pass
     server = build_server(
         database_path=paths["database"],
         state_dir=paths["owner"],
@@ -1889,10 +1900,6 @@ def state_owner(config_path: Path) -> int:
         owner_connection = getattr(server, "_connection", None)
         if owner_connection is None:
             raise OperatorError("state-owner connection is unavailable")
-        database_verification = _owner_database_verification(
-            owner_connection,
-            restart_admission,
-        )
         restart_receipt = _owner_restart_receipt(
             restart_admission,
             identity,
