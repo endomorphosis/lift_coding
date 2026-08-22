@@ -1,0 +1,58 @@
+{
+  "admitted_at": "2026-08-22T12:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-021:governed-patch-lifecycle",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-runtime-implementation",
+  "content_id": "sha256:021c0f6a4e8c1b9f7a5d3e1c0b8a694f2e1d7c5b3a0918273645f0e1d2c3b021",
+  "evidence": {
+    "adapter_self_approval": false,
+    "bypass_admitted": false,
+    "canonical_branch_mutation": false,
+    "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+    "contract_version": "0.1",
+    "fake_port_tests": true,
+    "independent_planner_selection": false,
+    "interface": "PatchLifecycle@0.1",
+    "lifecycle_cid_binding": "ipfs_accelerate_py.proof_context.lifecycle.LIFECYCLE_CID",
+    "pcce_006_content_id": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+    "restart_aware": true,
+    "stages": [
+      "operator_identity",
+      "repository_resolution",
+      "semantic_scan",
+      "invalidation",
+      "context_pack",
+      "sufficiency",
+      "route",
+      "proposal",
+      "scope_check",
+      "isolated_apply",
+      "impact",
+      "incremental_verification",
+      "escalation",
+      "assurance",
+      "seal",
+      "disposition"
+    ],
+    "stop_publication_paths": [
+      "rejected",
+      "escalation",
+      "timeout",
+      "cancelled",
+      "unavailable",
+      "partial_effect"
+    ],
+    "supervisor_receipts": [
+      "lease",
+      "fence",
+      "worktree"
+    ],
+    "unsealed_production_admitted": false,
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_lifecycle.py"
+  },
+  "objective_id": "PCCE-G200",
+  "rollback": "Cancel active attempts, fence publishers, discard disposable worktrees, revert the coordinator commit, and preserve partial-effect receipts for dependent invalidation.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-021"
+}
