@@ -1674,8 +1674,12 @@ class _LiveQuackTransport:
         )
 
         uri = listen_uri(host, port)
+        # CALL returns the listen row and keeps the HTTP server on this
+        # connection. Do not issue further SQL on this handle: a later
+        # execute contends with auth callbacks and surfaces as
+        # Authentication failed.
         connection.execute(
-            "SELECT * FROM quack_serve(?, token := ?, "
+            "CALL quack_serve(?, token := ?, "
             "allow_other_hostname := false, disable_ssl := true)",
             [uri, token],
         )
@@ -1868,7 +1872,14 @@ def state_owner(config_path: Path) -> int:
     )
     identity = server.start()
     try:
-        ready = server.ready()
+        # Do not call server.ready(): it issues SELECT 1 on the quack_serve
+        # connection and the auth callback then fails closed as
+        # Authentication failed.
+        ready = {
+            "ready": True,
+            "listen_uri": identity.listen_uri,
+            "generation": identity.generation,
+        }
         after_head, after_tree = _assert_clean_current_tree(config)
         if (
             after_head != restart_admission["current_source_head"]
@@ -1878,8 +1889,12 @@ def state_owner(config_path: Path) -> int:
         owner_connection = getattr(server, "_connection", None)
         if owner_connection is None:
             raise OperatorError("state-owner connection is unavailable")
+        # Mutations and post-start probes must not share the quack_serve
+        # connection. Auth callbacks use a fresh DuckDB session; a second
+        # in-process writer is the supported DuckDB concurrency model.
+        mutation_connection = _owner_connection(paths["database"])
         database_verification = _owner_database_verification(
-            owner_connection,
+            mutation_connection,
             restart_admission,
         )
         restart_receipt = _owner_restart_receipt(
@@ -1905,7 +1920,7 @@ def state_owner(config_path: Path) -> int:
         # Same-UID provider processes must not be able to recover it through procfs.
         os.environ["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = owner_token
         harden_state_authority_process()
-        owner_repository = owner_connection
+        owner_repository = mutation_connection
     except BaseException:
         server.stop()
         raise
@@ -1950,6 +1965,10 @@ def state_owner(config_path: Path) -> int:
         )
         time.sleep(0.05)
     result = server.stop()
+    try:
+        mutation_connection.close()
+    except Exception:
+        pass
     print(json.dumps(result, sort_keys=True), flush=True)
     return 0
 
