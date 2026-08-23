@@ -44,16 +44,28 @@ if _script == "implementation_supervisor_entry.py":
         sys.argv.append("--no-reconciliation-guardrail")
 
 
+def _mirrored_task_cids(daemon: Any) -> set[str]:
+    seen = getattr(daemon, "_pcce_r6_mirrored_task_cids", None)
+    if seen is None:
+        seen = set()
+        daemon._pcce_r6_mirrored_task_cids = seen
+    return seen
+
+
 def _mirror_completed_duckdb_tasks(daemon: Any) -> int:
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
         TASK_SOURCE_QUERY_LIMIT,
     )
 
+    seen = _mirrored_task_cids(daemon)
     mirrored = 0
     page = daemon.task_source.list_tasks(limit=TASK_SOURCE_QUERY_LIMIT)
     for task in page.tasks:
         status = str(task.status or "").strip().lower()
         if status not in _COMPLETED:
+            continue
+        task_cid = str(task.task_cid)
+        if task_cid in seen:
             continue
         daemon.coordinator.register_task(
             task_cid=task.task_cid,
@@ -76,6 +88,7 @@ def _mirror_completed_duckdb_tasks(daemon: Any) -> int:
                 "task_revision": int(task.revision),
             },
         )
+        seen.add(task_cid)
         mirrored += 1
     return mirrored
 
@@ -111,16 +124,15 @@ def _patch_daemon(module: Any) -> None:
         original = database_cls.sync_ready_tasks_into_coordination
 
         def sync_ready_tasks_into_coordination(self: Any) -> list[str]:
-            if not getattr(self, "_pcce_r6_completed_mirrored", False):
-                try:
-                    mirrored = _mirror_completed_duckdb_tasks(self)
-                    self._pcce_r6_completed_mirrored = True
+            try:
+                mirrored = _mirror_completed_duckdb_tasks(self)
+                if mirrored:
                     _LOG.info(
                         "mirrored %s completed DuckDB tasks into coordination",
                         mirrored,
                     )
-                except Exception:
-                    _LOG.exception("failed to mirror completed DuckDB tasks")
+            except Exception:
+                _LOG.exception("failed to mirror completed DuckDB tasks")
             return original(self)
 
         database_cls.sync_ready_tasks_into_coordination = (
