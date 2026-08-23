@@ -123,6 +123,8 @@ def _patch_daemon(module: Any) -> None:
                     if (
                         "cannot reconcile control status 'todo'" in message
                         or "cannot reconcile control status 'completed'" in message
+                        or "validation retry recovery control receipt has unknown or missing fields"
+                        in message
                     ):
                         _LOG.warning(
                             "skipping vacated portal terminal failures after DuckDB "
