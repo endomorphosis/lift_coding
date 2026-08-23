@@ -1,0 +1,32 @@
+{
+  "admitted_at": "2026-08-23T20:20:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-030:coding-agent-adapter",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-runtime-implementation",
+  "content_id": "sha256:030adaptercontractcidbindingpcce030frozenwirerecords0001",
+  "evidence": {
+    "adapter_contract_cid": "bafkreicsv53vledf4kldlhmpj343knvgznwkmamnezf3ix6p7tznwdnp2y",
+    "approval_authority": false,
+    "canonical_branch_authority": false,
+    "interface": "CodingAgentAdapter@0.1",
+    "protocol_methods": [
+      "propose",
+      "cancel"
+    ],
+    "provider_bound": false,
+    "schema_round_trips": true,
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_base.py",
+    "wire_schemas": [
+      "pcce/proof-context/v0.1/task-specification",
+      "pcce/proof-context/v0.1/coding-agent-invocation",
+      "pcce/proof-context/v0.1/patch-proposal",
+      "pcce/proof-context/v0.1/context-pack",
+      "pcce/proof-context/v0.1/model-route-decision"
+    ]
+  },
+  "objective_id": "PCCE-G300",
+  "rollback": "Revert the adapter contract before concrete adapters merge; after use, version the interface and invalidate dependent adapter receipts.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-030"
+}
