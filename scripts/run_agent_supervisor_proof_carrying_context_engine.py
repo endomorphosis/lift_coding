@@ -2379,7 +2379,7 @@ def watch_state_owner(config_path: Path) -> int:
             )
             while child.poll() is None:
                 if (
-                    time.monotonic() - last_board_unstall_bounce >= 60.0
+                    time.monotonic() - last_board_unstall_bounce >= 600.0
                     and _owner_should_recycle_for_board_unstall(mutation_dir)
                 ):
                     log_fh.write(
