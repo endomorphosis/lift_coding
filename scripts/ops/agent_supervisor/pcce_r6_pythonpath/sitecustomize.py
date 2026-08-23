@@ -155,6 +155,8 @@ def _patch_daemon(module: Any) -> None:
                         or "mutation rejected" in lowered
                         or "timed out waiting for quack state-owner" in lowered
                         or "quack owner mutation failed" in lowered
+                        or "not the latest fencing epoch" in lowered
+                        or "stale fence" in lowered
                     ):
                         _LOG.warning(
                             "deferring portal reconciliation while Quack attach is contended"
