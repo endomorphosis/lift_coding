@@ -1,0 +1,54 @@
+{
+  "admitted_at": "2026-08-23T22:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-031:codex-adapter",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-adapter-implementation",
+  "content_id": "sha256:031codexexecadapteridentityscopecancellogsusageunavailable0001",
+  "evidence": {
+    "adapter_id": "codex",
+    "approval_authority": false,
+    "canonical_branch_authority": false,
+    "codex_adapter_cid_binding": "ipfs_accelerate_py.proof_context.adapters.codex.CODEX_ADAPTER_CID",
+    "coding_agent_adapter_contract_cid_binding": "ipfs_accelerate_py.proof_context.adapters.base.ADAPTER_CONTRACT_CID",
+    "file_scope_constrained": true,
+    "identities_survive_request_and_response": true,
+    "interface": "CodingAgentAdapter@0.1",
+    "live_integration": {
+      "permit_env": "IPFS_ACCELERATE_PCCE_CODEX_LIVE_PERMIT",
+      "reason": "no explicit task-scoped live permit; validation PATH has no implied Codex login or credentials",
+      "status": "unavailable",
+      "substituted": false,
+      "validation_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "live_permit_required": true,
+    "mechanism": "codex exec",
+    "mechanism_command": "codex",
+    "mechanism_probe": {
+      "command": "codex",
+      "mechanism": "codex exec",
+      "substituted": false,
+      "version_probe": "codex --version"
+    },
+    "prompt_on_stdin": true,
+    "provider_bound": true,
+    "recorded_transport_cannot_claim_live": true,
+    "redacted_request_response_fixtures": true,
+    "self_approval": false,
+    "usage_fields": [
+      "model",
+      "revision",
+      "token_count",
+      "cached_token_count",
+      "latency_ms",
+      "cost_micros",
+      "response_artifact_cid",
+      "provenance"
+    ],
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_codex.py"
+  },
+  "objective_id": "PCCE-G300",
+  "rollback": "Cancel live Codex calls, revoke the task-scoped live permit, revert the adapter and tests, and preserve provider-side request identities and costs in a failure receipt. Recorded-transport evidence is not live and must not be relabeled.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-031"
+}
