@@ -1,0 +1,322 @@
+{
+  "$comment": "PCCE-043. Incompatible changes require a new schema version.",
+  "$defs": {
+    "cid": {
+      "description": "CIDv1 base32, or null when the identity is missing.",
+      "maxLength": 128,
+      "minLength": 59,
+      "pattern": "^b[a-z2-7]{58,}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "identities": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/cid"
+        },
+        "evidence_cid": {
+          "$ref": "#/$defs/cid"
+        },
+        "patch_id": {
+          "maxLength": 256,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repository_id": {
+          "maxLength": 256,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repository_state_cid": {
+          "$ref": "#/$defs/cid"
+        },
+        "run_id": {
+          "maxLength": 256,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "task_id": {
+          "maxLength": 128,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "trace_id": {
+          "maxLength": 256,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "repository_id",
+        "task_id",
+        "run_id",
+        "patch_id"
+      ],
+      "type": "object"
+    },
+    "provenance": {
+      "enum": [
+        "live",
+        "replayed",
+        "simulated",
+        null
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "succeeded",
+        "rejected",
+        "verification_failed",
+        "proof_failed",
+        "assurance_failed",
+        "context_insufficient",
+        "model_escalation_required",
+        "human_review_required",
+        "unavailable",
+        "timeout",
+        "cancelled",
+        "invalid",
+        "stale",
+        "simulated",
+        "infrastructure_failure",
+        "partial_effect",
+        "repair_required"
+      ],
+      "type": "string"
+    }
+  },
+  "$id": "https://ipfs-accelerate.dev/schemas/proof-context/v0.1/cli-output.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Stable machine envelope for every proof-context CLI command result. Human reports are a projection of the same identities and must label estimates, baselines, and missing evidence honestly. additionalProperties is false. Version 0.1 is immutable after admission.",
+  "properties": {
+    "accepted": {
+      "description": "True only for live succeeded; never for simulated, unavailable, or failure.",
+      "type": "boolean"
+    },
+    "artifact_cids": {
+      "additionalProperties": {
+        "$ref": "#/$defs/cid"
+      },
+      "description": "Named artifact CIDs. Keys are present even when some values are missing.",
+      "type": "object"
+    },
+    "bounded": {
+      "const": true,
+      "type": "boolean"
+    },
+    "command": {
+      "maxLength": 128,
+      "type": "string"
+    },
+    "contract": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "contract_version": {
+      "const": "0.1",
+      "type": "string"
+    },
+    "correlation_id": {
+      "maxLength": 256,
+      "type": "string"
+    },
+    "error": {
+      "maxLength": 128,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "exit_code": {
+      "description": "0 is live succeeded only; simulated/unavailable/failure never use 0.",
+      "maximum": 17,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "identities": {
+      "$ref": "#/$defs/identities"
+    },
+    "interface": {
+      "const": "ProofContextCLI@0.1",
+      "type": "string"
+    },
+    "missing_artifacts": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 16,
+      "type": "array"
+    },
+    "missing_identities": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 16,
+      "type": "array"
+    },
+    "output_cid": {
+      "$ref": "#/$defs/cid"
+    },
+    "output_mode": {
+      "enum": [
+        "json",
+        "human"
+      ],
+      "type": "string"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "policy": {
+      "enum": [
+        "production",
+        "supervised",
+        "evaluation",
+        "simulation"
+      ],
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "provider_bound": {
+      "const": false,
+      "type": "boolean"
+    },
+    "redacted": {
+      "const": true,
+      "type": "boolean"
+    },
+    "schema": {
+      "const": "ipfs-accelerate.proof-context.v0.1/cli-output",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "0.1",
+      "type": "string"
+    },
+    "sibling_layout_required": {
+      "const": false,
+      "type": "boolean"
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "status_taxonomy_content_id": {
+      "const": "sha256:5f206feebb6213d3a1c113e37373ac8402003170cea609035ec9b871ca9fdd19",
+      "type": "string"
+    },
+    "trace_id": {
+      "maxLength": 256,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "schema_version",
+    "status",
+    "exit_code",
+    "correlation_id",
+    "trace_id",
+    "identities",
+    "artifact_cids"
+  ],
+  "title": "PCCE CLI Output@0.1",
+  "type": "object",
+  "x-pcce-contract": "pcce/proof-context/v0.1/cli-output",
+  "x-pcce-contract-version": "0.1",
+  "x-pcce-cost-classes": [
+    "observed",
+    "estimated",
+    "baseline",
+    "missing"
+  ],
+  "x-pcce-exit-code-matrix": {
+    "assurance_failed": 11,
+    "cancelled": 8,
+    "context_insufficient": 12,
+    "human_review_required": 14,
+    "infrastructure_failure": 15,
+    "invalid": 2,
+    "model_escalation_required": 13,
+    "partial_effect": 16,
+    "proof_failed": 10,
+    "rejected": 3,
+    "repair_required": 17,
+    "simulated": 4,
+    "stale": 6,
+    "succeeded": 0,
+    "timeout": 7,
+    "unavailable": 5,
+    "verification_failed": 9
+  },
+  "x-pcce-human-report-sections": [
+    "task",
+    "revision",
+    "routing",
+    "context",
+    "changes",
+    "verification",
+    "proof_reuse",
+    "assurance",
+    "escalation",
+    "costs",
+    "review",
+    "receipts",
+    "seal"
+  ],
+  "x-pcce-interface": "ProofContextCLI@0.1",
+  "x-pcce-live-success-exit-code": 0,
+  "x-pcce-nonzero-provenances": [
+    "simulated",
+    "replayed"
+  ],
+  "x-pcce-pcce-006-content-id": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+  "x-pcce-identity-fields": [
+    "repository_id",
+    "repository_state_cid",
+    "task_id",
+    "run_id",
+    "trace_id",
+    "patch_id",
+    "evidence_cid",
+    "artifact_id"
+  ],
+  "x-pcce-required-identity-fields": [
+    "repository_id",
+    "task_id",
+    "run_id",
+    "patch_id"
+  ],
+  "x-pcce-required-output-fields": [
+    "schema",
+    "schema_version",
+    "status",
+    "exit_code",
+    "correlation_id",
+    "trace_id",
+    "identities",
+    "artifact_cids"
+  ],
+  "x-pcce-schema": "ipfs-accelerate.proof-context.v0.1/cli-output",
+  "x-pcce-status-taxonomy-content-id": "sha256:5f206feebb6213d3a1c113e37373ac8402003170cea609035ec9b871ca9fdd19"
+}
