@@ -24,6 +24,19 @@ _SUPERVISOR = "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_su
 _COMPLETED = frozenset({"completed", "complete", "done", "skipped"})
 _real_import = builtins.__import__
 
+
+def _persist_quack_token_vault() -> None:
+    """Keep the owner vault on disk so recycle/status/attach survive launch."""
+
+    try:
+        from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+            persist_quack_attach_token_vault,
+        )
+
+        persist_quack_attach_token_vault()
+    except Exception:
+        _LOG.exception("failed to persist Quack attach token vault")
+
 _script = Path(sys.argv[0]).name if sys.argv else ""
 if _script == "implementation_supervisor_entry.py":
     if "--no-reconciliation-guardrail" not in sys.argv:
@@ -230,6 +243,8 @@ def _watch_for_daemon_module() -> None:
         time.sleep(0.05)
 
 
+_persist_quack_token_vault()
+_patch_loaded_modules()
 threading.Thread(
     target=_watch_for_daemon_module,
     name="pcce-r6-sitecustomize-patch",

@@ -1975,37 +1975,25 @@ def state_owner(config_path: Path) -> int:
     return 0
 
 
-def _unlink_token_vault(path: Path) -> None:
-    """Remove one validated token file after trusted processes inherit it."""
-
-    observed = path.lstat()
-    if (
-        path.is_symlink()
-        or not stat.S_ISREG(observed.st_mode)
-        or observed.st_uid != os.getuid()
-        or stat.S_IMODE(observed.st_mode) != 0o600
-        or observed.st_nlink != 1
-    ):
-        raise OperatorError("refusing to unlink an unsafe Quack token vault")
-    path.unlink()
-    descriptor = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
-    try:
-        os.fsync(descriptor)
-    finally:
-        os.close(descriptor)
-
-
-def _launch_with_one_use_owner_token(
+def _launch_with_retained_owner_token(
     launch: Any,
     launch_args: Sequence[str],
     *,
     token_path: Path,
 ) -> int:
-    """Consume the one-use vault only after the trusted launcher succeeds."""
+    """Launch the supervisor while keeping the owner token vault on disk.
 
+    The exclusive state-owner watch recycles the Quack process when the board
+    needs a pre-listen unstall. That restart, operator status, and later
+    ATTACH all read the 0600 vault. Unlinking after launch made remaining
+    todos fail closed even though the live daemon still held the credential.
+    """
+
+    if not token_path.is_file():
+        raise OperatorError("Quack token vault file is missing")
     result = int(launch(list(launch_args)))
-    if result == 0:
-        _unlink_token_vault(token_path)
+    if result == 0 and not token_path.is_file():
+        raise OperatorError("Quack token vault disappeared during supervisor launch")
     return result
 
 
@@ -2015,12 +2003,12 @@ def launch_supervisor(
     dry_run: bool = False,
     duration_seconds: float = float("inf"),
 ) -> int:
-    """Launch the configured parallel supervisor without a credential file.
+    """Launch the configured parallel supervisor with a retained owner vault.
 
-    Preflight runs while the owner token is still recoverable.  For a real
-    launch, this process becomes non-dumpable, unlinks the single validated
-    token file, and passes the credential only through trusted control-process
-    memory.  Provider subprocesses use the canonical scrubbed environment.
+    Preflight and launch still inject the credential into trusted control
+    processes. The 0600 owner vault stays in place so watch recycle, operator
+    status, and Quack ATTACH can keep draining remaining todos. Provider
+    subprocesses continue to use the canonical scrubbed environment.
     """
 
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
@@ -2071,7 +2059,7 @@ def launch_supervisor(
             raise OperatorError("supervisor duration must be positive")
         launch_args.extend(["--duration-seconds", str(duration_seconds)])
     harden_state_authority_process()
-    return _launch_with_one_use_owner_token(
+    return _launch_with_retained_owner_token(
         configured_board_main,
         launch_args,
         token_path=token_path,
@@ -2190,7 +2178,19 @@ def status(config_path: Path) -> dict[str, Any]:
     connection = None
     try:
         if live_ready:
-            token = _read_owner_token(_token_path(paths["owner"], program.endpoint_secret_handle))
+            token_path = _token_path(paths["owner"], program.endpoint_secret_handle)
+            try:
+                token = _read_owner_token(token_path)
+            except OperatorError:
+                from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+                    persist_quack_attach_token_vault,
+                    resolve_quack_attach_token,
+                )
+
+                persist_quack_attach_token_vault()
+                token = resolve_quack_attach_token()
+                if not token:
+                    raise
             connection = open_quack_transport_connection(
                 program.quack_endpoint,
                 token=token,
@@ -2248,7 +2248,7 @@ def status(config_path: Path) -> dict[str, Any]:
     }
 
 
-def _owner_python_env() -> dict[str, str]:
+def _owner_python_env(config_path: Path | None = None) -> dict[str, str]:
     env = dict(os.environ)
     sitecustomize = str(ROOT / "scripts" / "ops" / "agent_supervisor" / "pcce_r6_pythonpath")
     prefixes = [str(ACCEL_ROOT), sitecustomize]
@@ -2257,6 +2257,18 @@ def _owner_python_env() -> dict[str, str]:
         prefixes + ([existing] if existing else [])
     )
     env["PYTHONUNBUFFERED"] = "1"
+    if config_path is not None:
+        try:
+            board, _config = _load_config(config_path)
+            paths = _runtime_paths(board)
+            program = board.resolved_database_program()
+            token_path = _token_path(paths["owner"], program.endpoint_secret_handle)
+            token = _read_owner_token(token_path)
+        except OperatorError:
+            pass
+        else:
+            env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = token
+            env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN_FILE"] = str(token_path)
     return env
 
 
@@ -2350,7 +2362,7 @@ def watch_state_owner(config_path: Path) -> int:
             child = subprocess.Popen(
                 argv,
                 cwd=str(ROOT),
-                env=_owner_python_env(),
+                env=_owner_python_env(config_path),
                 stdin=subprocess.DEVNULL,
                 stdout=log_fh,
                 stderr=subprocess.STDOUT,
@@ -2406,7 +2418,7 @@ def start_state_owner_daemon(config_path: Path) -> dict[str, Any]:
         proc = subprocess.Popen(
             argv,
             cwd=str(ROOT),
-            env=_owner_python_env(),
+            env=_owner_python_env(config_path),
             stdin=subprocess.DEVNULL,
             stdout=log_fh,
             stderr=subprocess.STDOUT,
@@ -2474,7 +2486,7 @@ def _parser() -> argparse.ArgumentParser:
     launch_parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="render the launch without unlinking the state credential or starting workers",
+        help="render the launch without starting workers",
     )
     launch_parser.add_argument(
         "--duration-seconds",
