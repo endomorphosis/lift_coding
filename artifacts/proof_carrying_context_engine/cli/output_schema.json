@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ipfs-accelerate.dev/schemas/proof-context/v0.1/cli-output.schema.json",
+  "title": "PCCE CLI Output@0.1",
+  "description": "Stable machine envelope for every proof-context CLI command result. Schema version, status, exit code, trace/correlation ID, repository/task/run/patch identities, and artifact CIDs are required. Unavailable, failure, and simulation never map to exit zero. additionalProperties is false.",
+  "$comment": "PCCE-043. Version 0.1 is immutable after admission; incompatible changes require a new version. Exit codes: 0 live succeeded only; 1 typed failure; 2 invalid/usage; 3 rejected; 4 simulated; 5 unavailable; 6 stale. Simulated provenance on succeeded is 4, never 0.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "contract_version",
+    "status",
+    "exit_code",
+    "correlation_id",
+    "trace_id",
+    "identities",
+    "artifact_cid",
+    "artifact_cids"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "ipfs-accelerate.proof-context.v0.1/cli-output"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "contract_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "schema_cid": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "interface": {
+      "type": "string",
+      "const": "ProofContextCLIOutput@0.1"
+    },
+    "command": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "exit_code": {
+      "type": "integer",
+      "enum": [0, 1, 2, 3, 4, 5, 6]
+    },
+    "provenance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/provenance"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "policy": {
+      "type": ["string", "null"],
+      "maxLength": 64
+    },
+    "correlation_id": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "trace_id": {
+      "type": ["string", "null"],
+      "maxLength": 256
+    },
+    "identities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_id",
+        "task_id",
+        "run_id",
+        "patch_id",
+        "trace_id"
+      ],
+      "properties": {
+        "repository_id": {
+          "type": ["string", "null"],
+          "maxLength": 256
+        },
+        "repository_state_cid": {
+          "type": ["string", "null"],
+          "maxLength": 128
+        },
+        "task_id": {
+          "type": ["string", "null"],
+          "maxLength": 128
+        },
+        "run_id": {
+          "type": ["string", "null"],
+          "maxLength": 256
+        },
+        "trace_id": {
+          "type": ["string", "null"],
+          "maxLength": 256
+        },
+        "patch_id": {
+          "type": ["string", "null"],
+          "maxLength": 256
+        },
+        "evidence_cid": {
+          "type": ["string", "null"],
+          "maxLength": 128
+        },
+        "artifact_id": {
+          "type": ["string", "null"],
+          "maxLength": 256
+        },
+        "contract_version": {
+          "type": "string",
+          "const": "0.1"
+        }
+      }
+    },
+    "artifact_cid": {
+      "type": ["string", "null"],
+      "maxLength": 128
+    },
+    "artifact_cids": {
+      "type": "object",
+      "required": ["primary"],
+      "properties": {
+        "primary": {
+          "type": ["string", "null"],
+          "maxLength": 128
+        }
+      },
+      "additionalProperties": {
+        "type": ["string", "null"],
+        "maxLength": 256
+      }
+    },
+    "contract": {
+      "type": ["string", "null"],
+      "maxLength": 256
+    },
+    "error": {
+      "type": ["string", "null"],
+      "maxLength": 64
+    },
+    "payload": {
+      "type": "object",
+      "maxProperties": 64
+    },
+    "provider_bound": {
+      "type": "boolean",
+      "const": false
+    },
+    "sibling_layout_required": {
+      "type": "boolean",
+      "const": false
+    },
+    "status_taxonomy_content_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "rejected",
+        "verification_failed",
+        "proof_failed",
+        "assurance_failed",
+        "context_insufficient",
+        "model_escalation_required",
+        "human_review_required",
+        "unavailable",
+        "timeout",
+        "cancelled",
+        "invalid",
+        "stale",
+        "simulated",
+        "infrastructure_failure",
+        "partial_effect",
+        "repair_required"
+      ]
+    },
+    "provenance": {
+      "type": "string",
+      "enum": ["live", "replayed", "simulated"]
+    },
+    "exitCodeMatrix": {
+      "description": "Status to exit-code mapping for live provenance. Simulated provenance never returns 0.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "succeeded",
+        "invalid",
+        "rejected",
+        "simulated",
+        "unavailable",
+        "stale",
+        "timeout",
+        "cancelled",
+        "verification_failed",
+        "proof_failed",
+        "assurance_failed",
+        "context_insufficient",
+        "model_escalation_required",
+        "human_review_required",
+        "infrastructure_failure",
+        "partial_effect",
+        "repair_required"
+      ],
+      "properties": {
+        "succeeded": { "const": 0 },
+        "invalid": { "const": 2 },
+        "rejected": { "const": 3 },
+        "simulated": { "const": 4 },
+        "unavailable": { "const": 5 },
+        "stale": { "const": 6 },
+        "timeout": { "const": 1 },
+        "cancelled": { "const": 1 },
+        "verification_failed": { "const": 1 },
+        "proof_failed": { "const": 1 },
+        "assurance_failed": { "const": 1 },
+        "context_insufficient": { "const": 1 },
+        "model_escalation_required": { "const": 1 },
+        "human_review_required": { "const": 1 },
+        "infrastructure_failure": { "const": 1 },
+        "partial_effect": { "const": 1 },
+        "repair_required": { "const": 1 }
+      }
+    }
+  }
+}
