@@ -1,0 +1,61 @@
+{
+  "admitted_at": "2026-08-23T21:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-040:cli-state-commands",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-cli-implementation",
+  "content_id": "sha256:040cliinitsscanstatusplanthinruntimecallsnopolicybypass0001",
+  "evidence": {
+    "argument_errors_stable": true,
+    "clean_repository_worktree": true,
+    "commands": [
+      "init",
+      "scan",
+      "status",
+      "plan"
+    ],
+    "exit_code_table_subset": {
+      "invalid": 2,
+      "rejected": 3,
+      "simulated": 4,
+      "stale": 6,
+      "succeeded_live": 0,
+      "unavailable": 5
+    },
+    "contract_version": "0.1",
+    "current_directory_inferred": false,
+    "explicit_arguments": [
+      "repository",
+      "policy",
+      "task",
+      "correlation",
+      "output-mode"
+    ],
+    "help_stable": true,
+    "import_side_effect_trace": true,
+    "interface": "ProofContextCLI@0.1",
+    "lifecycle_duplicated": false,
+    "ordinary_python_git_repository": true,
+    "output_modes": [
+      "json",
+      "human"
+    ],
+    "plan_contract": "pcce/proof-context/v0.1/invalidation-plan",
+    "policy_admission": "ipfs_accelerate_py.proof_context.policy.admit_mode",
+    "policy_bypass": false,
+    "provider_bound": false,
+    "runtime_init": "ipfs_accelerate_py.proof_context.bootstrap.create_ordinary_python_repository",
+    "runtime_open": "ipfs_accelerate_py.proof_context.bootstrap.open_runtime",
+    "scan_contract": "pcce/proof-context/v0.1/repository-state",
+    "sibling_layout_required": false,
+    "starts_work_at_import": false,
+    "status_contract": "pcce/proof-context/v0.1/execution-receipt",
+    "typed_status": true,
+    "untyped_success": false,
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_state_commands.py"
+  },
+  "objective_id": "PCCE-G400",
+  "rollback": "Revert CLI state modules, remove only disposable test repositories, and retain command receipts; runtime state is not rewritten.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-040"
+}
