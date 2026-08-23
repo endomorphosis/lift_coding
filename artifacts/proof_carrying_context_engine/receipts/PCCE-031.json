@@ -1,0 +1,59 @@
+{
+  "admitted_at": "2026-08-23T21:30:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-031:codex-adapter",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-adapter-implementation",
+  "content_id": "sha256:031codexexecadaptercodexclimechanismprobeunavailablelive0001",
+  "evidence": {
+    "adapter": "CodexAdapter@0.1",
+    "adapter_cid_binding": "ipfs_accelerate_py.proof_context.adapters.codex.CODEX_ADAPTER_CID",
+    "adapter_contract_cid_binding": "ipfs_accelerate_py.proof_context.adapters.base.ADAPTER_CONTRACT_CID",
+    "approval_authority": false,
+    "bounded_logs": true,
+    "cancellation": true,
+    "canonical_branch_authority": false,
+    "command_contract": "codex exec",
+    "file_scope_constrained": true,
+    "identities_survive": true,
+    "interface": "CodingAgentAdapter@0.1",
+    "live_integration": {
+      "attempted": false,
+      "permit_env": "IPFS_ACCELERATE_PCCE_CODEX_LIVE_PERMIT",
+      "permit_present": false,
+      "reason": "unavailable",
+      "status": "unavailable"
+    },
+    "mechanism_substitution": false,
+    "provider_bound": false,
+    "recorded_transport_fixtures": true,
+    "redacted_request_response_fixtures": true,
+    "self_approval": false,
+    "supported_argv_builder": "build_codex_exec_argv",
+    "supported_integration_class": "OpenAICodexCLIIntegration",
+    "supported_integration_module": "ipfs_accelerate_py.cli_integrations.openai_codex_cli_integration",
+    "supported_mechanism": "codex exec",
+    "supported_registry_name": "openai_codex",
+    "usage_recorded": [
+      "model",
+      "revision",
+      "token_count",
+      "cached_token_count",
+      "latency_ms",
+      "cost_micros",
+      "response_artifact_cid",
+      "provenance"
+    ],
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_codex.py",
+    "version_probe": {
+      "command_contract": "codex exec",
+      "reason": "unavailable",
+      "status": "unavailable",
+      "substituted": false
+    }
+  },
+  "objective_id": "PCCE-G300",
+  "rollback": "Cancel live calls, revoke task-scoped temporary resources, revert adapter code, and preserve provider-side request identities/costs in the failure receipt.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-031"
+}
