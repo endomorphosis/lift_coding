@@ -97,14 +97,16 @@ def _patch_daemon(module: Any) -> None:
         original = database_cls.sync_ready_tasks_into_coordination
 
         def sync_ready_tasks_into_coordination(self: Any) -> list[str]:
-            try:
-                mirrored = _mirror_completed_duckdb_tasks(self)
-                _LOG.info(
-                    "mirrored %s completed DuckDB tasks into coordination",
-                    mirrored,
-                )
-            except Exception:
-                _LOG.exception("failed to mirror completed DuckDB tasks")
+            if not getattr(self, "_pcce_r6_completed_mirrored", False):
+                try:
+                    mirrored = _mirror_completed_duckdb_tasks(self)
+                    self._pcce_r6_completed_mirrored = True
+                    _LOG.info(
+                        "mirrored %s completed DuckDB tasks into coordination",
+                        mirrored,
+                    )
+                except Exception:
+                    _LOG.exception("failed to mirror completed DuckDB tasks")
             return original(self)
 
         database_cls.sync_ready_tasks_into_coordination = (
