@@ -151,6 +151,10 @@ def _patch_daemon(module: Any) -> None:
                         "authentication failed" in lowered
                         or "quack control-plane attach contended" in lowered
                         or "could not connect to server" in lowered
+                        or "failed to send message" in lowered
+                        or "mutation rejected" in lowered
+                        or "timed out waiting for quack state-owner" in lowered
+                        or "quack owner mutation failed" in lowered
                     ):
                         _LOG.warning(
                             "deferring portal reconciliation while Quack attach is contended"

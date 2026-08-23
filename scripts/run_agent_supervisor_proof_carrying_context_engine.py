@@ -1782,10 +1782,18 @@ def _process_owner_commands(
     token: str,
     expected_store_id: str,
     expected_store_generation: str,
+    exclusive_writer: bool = True,
 ) -> None:
     del token, expected_store_id, expected_store_generation
     command_dir.mkdir(parents=True, exist_ok=True)
     os.chmod(command_dir, 0o700)
+    if not exclusive_writer:
+        from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+            defer_owner_inbox_until_recycle,
+        )
+
+        defer_owner_inbox_until_recycle(command_dir)
+        return
     owner_connection = repository
     if owner_connection is None or not hasattr(owner_connection, "execute"):
         return
@@ -1968,6 +1976,7 @@ def state_owner(config_path: Path) -> int:
             token=owner_token,
             expected_store_id=program.store_id,
             expected_store_generation=program.store_generation,
+            exclusive_writer=False,
         )
         time.sleep(0.05)
     result = server.stop()

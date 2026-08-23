@@ -55,3 +55,30 @@ def test_launch_helper_refuses_missing_vault(tmp_path: Path) -> None:
         assert "missing" in str(exc)
     else:
         raise AssertionError("expected OperatorError")
+
+
+def test_serve_loop_does_not_execute_dml_on_listen_handle(tmp_path: Path) -> None:
+    operator = _load_operator()
+    inbox = tmp_path / "mutations"
+    inbox.mkdir()
+    request = inbox / "abc.request.json"
+    request.write_text(
+        '{"sql":"UPDATE tasks SET status = \'retrying\'","parameters":null}\n',
+        encoding="utf-8",
+    )
+
+    class _Boom:
+        def execute(self, *_args, **_kwargs):
+            raise AssertionError("listen handle must not run owner DML")
+
+    operator._process_owner_commands(
+        _Boom(),
+        inbox,
+        token="",
+        expected_store_id="store",
+        expected_store_generation="gen",
+        exclusive_writer=False,
+    )
+    assert request.is_file()
+    assert (inbox / "board-unstall.bounce").is_file()
+    assert list(inbox.glob("*.done.json")) == []
