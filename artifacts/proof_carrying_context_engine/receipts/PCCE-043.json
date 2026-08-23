@@ -1,0 +1,163 @@
+{
+  "admitted_at": "2026-08-23T22:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-043:cli-output-report",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-reporting-implementation",
+  "content_id": "sha256:043stablejsonoutputexitcodeshumanreportschemahonestlabel0001",
+  "evidence": {
+    "artifact_identities_required": [
+      "repository_id",
+      "repository_state_cid",
+      "task_id",
+      "run_id",
+      "patch_id"
+    ],
+    "bounded_output": true,
+    "contract_version": "0.1",
+    "estimated_savings_labeled_observed": false,
+    "estimated_savings_require_baseline": true,
+    "exit_code_matrix": {
+      "assurance_failed": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "cancelled": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "context_insufficient": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "human_review_required": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "infrastructure_failure": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "invalid": {
+        "live": 2,
+        "replayed": 2,
+        "simulated": 2
+      },
+      "model_escalation_required": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "partial_effect": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "proof_failed": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "rejected": {
+        "live": 3,
+        "replayed": 3,
+        "simulated": 3
+      },
+      "repair_required": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "simulated": {
+        "live": 4,
+        "replayed": 4,
+        "simulated": 4
+      },
+      "stale": {
+        "live": 6,
+        "replayed": 6,
+        "simulated": 6
+      },
+      "succeeded": {
+        "live": 0,
+        "replayed": 1,
+        "simulated": 4
+      },
+      "timeout": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      },
+      "unavailable": {
+        "live": 5,
+        "replayed": 5,
+        "simulated": 5
+      },
+      "verification_failed": {
+        "live": 1,
+        "replayed": 1,
+        "simulated": 1
+      }
+    },
+    "golden_human_reports": [
+      "pass",
+      "fail",
+      "unavailable",
+      "simulated"
+    ],
+    "human_report_sections": [
+      "task",
+      "revision",
+      "routing",
+      "context",
+      "changes",
+      "verification",
+      "proof_reuse",
+      "assurance",
+      "escalation",
+      "costs",
+      "review",
+      "receipts",
+      "seal"
+    ],
+    "interface": "ProofContextCLI@0.1",
+    "missing_evidence_labeled": true,
+    "output_schema": "pcce/proof-context/v0.1/cli-output",
+    "output_schema_cid_binding": "ipfs_accelerate_py.proof_context.cli.output.OUTPUT_SCHEMA_CID",
+    "output_schema_path": "artifacts/proof_carrying_context_engine/cli/output_schema.json",
+    "provider_bound": false,
+    "redaction": true,
+    "report_schema": "pcce/proof-context/v0.1/cli-report",
+    "required_output_fields": [
+      "schema",
+      "schema_version",
+      "status",
+      "exit_code",
+      "trace_id",
+      "correlation_id",
+      "identities",
+      "artifact_cids"
+    ],
+    "schema_version": "0.1",
+    "secrets_omitted": true,
+    "sibling_layout_required": false,
+    "source_dumps_omitted": true,
+    "unavailable_collapsed": false,
+    "unbounded_logs": false,
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_output.py && python -m json.tool artifacts/proof_carrying_context_engine/cli/output_schema.json",
+    "zero_exit": {
+      "exit_code": 0,
+      "provenance": "live",
+      "status": "succeeded"
+    }
+  },
+  "objective_id": "PCCE-G400",
+  "rollback": "Revert renderer/schema commit and invalidate CLI outputs generated under it; underlying runtime artifacts remain immutable.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-043"
+}

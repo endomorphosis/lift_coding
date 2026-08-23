@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ipfs-accelerate.dev/schemas/proof-context/v0.1/cli-output.schema.json",
+  "title": "PCCE CLI CommandResult@0.1",
+  "description": "Stable machine output envelope for every proof-context CLI command. Live succeeded is the only zero exit. Simulated, unavailable, and failed results remain nonzero. additionalProperties is false on the command envelope.",
+  "$comment": "PCCE-043. Version 0.1 is immutable after admission; incompatible changes require a new schema version.",
+  "schema": "pcce/proof-context/v0.1/cli-output",
+  "schema_version": "0.1",
+  "contract_version": "0.1",
+  "interface": "ProofContextCLI@0.1",
+  "cid_binding": "ipfs_accelerate_py.proof_context.cli.output.OUTPUT_SCHEMA_CID",
+  "report_schema": "pcce/proof-context/v0.1/cli-report",
+  "required_output_fields": [
+    "schema",
+    "schema_version",
+    "status",
+    "exit_code",
+    "trace_id",
+    "correlation_id",
+    "identities",
+    "artifact_cids"
+  ],
+  "required_identity_fields": [
+    "repository_id",
+    "repository_state_cid",
+    "task_id",
+    "run_id",
+    "patch_id"
+  ],
+  "report_sections": [
+    "task",
+    "revision",
+    "routing",
+    "context",
+    "changes",
+    "verification",
+    "proof_reuse",
+    "assurance",
+    "escalation",
+    "costs",
+    "review",
+    "receipts",
+    "seal"
+  ],
+  "evidence_kinds": [
+    "observed",
+    "estimated",
+    "baseline",
+    "missing",
+    "unavailable",
+    "simulated",
+    "replayed"
+  ],
+  "output_modes": [
+    "json",
+    "human"
+  ],
+  "zero_exit": {
+    "status": "succeeded",
+    "provenance": "live",
+    "exit_code": 0
+  },
+  "exit_codes": {
+    "succeeded": 0,
+    "rejected": 3,
+    "verification_failed": 1,
+    "proof_failed": 1,
+    "assurance_failed": 1,
+    "context_insufficient": 1,
+    "model_escalation_required": 1,
+    "human_review_required": 1,
+    "unavailable": 5,
+    "timeout": 1,
+    "cancelled": 1,
+    "invalid": 2,
+    "stale": 6,
+    "simulated": 4,
+    "infrastructure_failure": 1,
+    "partial_effect": 1,
+    "repair_required": 1
+  },
+  "pcce_006_content_id": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+  "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+  "status_taxonomy_content_id": "sha256:5f206feebb6213d3a1c113e37373ac8402003170cea609035ec9b871ca9fdd19",
+  "error_taxonomy_content_id": "sha256:570d43769cd47207f7c5f77bb7434252e6cefb1b4cf10791ccb82208db216a38",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "status",
+    "exit_code",
+    "trace_id",
+    "correlation_id",
+    "identities",
+    "artifact_cids"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "pcce/proof-context/v0.1/cli-output"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "contract_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "interface": {
+      "type": "string",
+      "const": "ProofContextCLI@0.1"
+    },
+    "command": {
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "exit_code": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 255
+    },
+    "policy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "provenance": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/provenance"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "correlation_id": {
+      "type": "string"
+    },
+    "trace_id": {
+      "type": "string"
+    },
+    "identities": {
+      "$ref": "#/$defs/identities"
+    },
+    "artifact_cids": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "$ref": "#/$defs/cid"
+      }
+    },
+    "output_schema_cid": {
+      "$ref": "#/$defs/cid"
+    },
+    "contract": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "accepted": {
+      "type": "boolean"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "output_mode": {
+      "type": "string",
+      "enum": [
+        "json",
+        "human"
+      ]
+    },
+    "report": {
+      "type": "object",
+      "description": "Optional labeled human-report sections. Estimates require a baseline; simulated/unavailable/missing evidence cannot be labeled observed."
+    }
+  },
+  "$defs": {
+    "cid": {
+      "type": "string",
+      "description": "CIDv1 base32. Pseudo-CIDs (sha256:, urn: without codec, hex digests, Qm placeholders) are rejected.",
+      "pattern": "^b[a-z2-7]{58,}$",
+      "minLength": 59,
+      "maxLength": 128
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "rejected",
+        "verification_failed",
+        "proof_failed",
+        "assurance_failed",
+        "context_insufficient",
+        "model_escalation_required",
+        "human_review_required",
+        "unavailable",
+        "timeout",
+        "cancelled",
+        "invalid",
+        "stale",
+        "simulated",
+        "infrastructure_failure",
+        "partial_effect",
+        "repair_required"
+      ]
+    },
+    "provenance": {
+      "type": "string",
+      "enum": [
+        "live",
+        "replayed",
+        "simulated"
+      ]
+    },
+    "evidenceKind": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "estimated",
+        "baseline",
+        "missing",
+        "unavailable",
+        "simulated",
+        "replayed"
+      ]
+    },
+    "identities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_id",
+        "repository_state_cid",
+        "task_id",
+        "run_id",
+        "patch_id"
+      ],
+      "properties": {
+        "repository_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repository_state_cid": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "task_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "run_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "patch_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
