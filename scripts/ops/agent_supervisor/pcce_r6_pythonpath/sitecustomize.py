@@ -15,6 +15,7 @@ import builtins
 import logging
 import sys
 import threading
+import time
 from pathlib import Path
 from typing import Any
 
@@ -157,10 +158,20 @@ def _patch_daemon(module: Any) -> None:
                         or "quack owner mutation failed" in lowered
                         or "not the latest fencing epoch" in lowered
                         or "stale fence" in lowered
+                        or "invalid connection id" in lowered
                     ):
+                        try:
+                            from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+                                reset_quack_transport_cache,
+                            )
+
+                            reset_quack_transport_cache()
+                        except Exception:
+                            pass
                         _LOG.warning(
                             "deferring portal reconciliation while Quack attach is contended"
                         )
+                        time.sleep(5.0)
                         return []
                     raise
 
