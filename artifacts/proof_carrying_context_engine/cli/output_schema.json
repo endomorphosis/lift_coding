@@ -1,0 +1,351 @@
+{
+  "$comment": "PCCE-043. Version 0.1 is immutable after admission; incompatible changes require a new version. Exit-code matrix: succeeded/live=0; typed-failure=1; invalid=2; rejected=3; simulated=4; unavailable=5; stale=6; verification_failed=7; proof_failed=8; assurance_failed=9; context_insufficient=10; model_escalation_required=11; human_review_required=12; timeout=13; cancelled=14; infrastructure_failure=15; partial_effect=16; repair_required=17. succeeded with simulated provenance exits 4; succeeded with any non-live provenance never exits 0.",
+  "$id": "https://ipfs-accelerate.dev/schemas/proof-context/v0.1/cli-output.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Stable machine output for every proof-context CLI command. Required fields are schema version, status, exit code, trace/correlation ID, repository/task/run/patch identities, and artifact CIDs. Simulated, unavailable, and failed results never use exit code 0. Estimated costs cannot be labeled observed. additionalProperties is false.",
+  "properties": {
+    "accepted": {
+      "description": "True only for succeeded + live provenance.",
+      "type": "boolean"
+    },
+    "artifact_cids": {
+      "additionalProperties": false,
+      "properties": {
+        "all": {
+          "items": {
+            "$ref": "#/$defs/cid"
+          },
+          "maxItems": 64,
+          "type": "array"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "primary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "report": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "seal": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "primary",
+        "all"
+      ],
+      "type": "object"
+    },
+    "command": {
+      "maxLength": 128,
+      "minLength": 0,
+      "type": "string"
+    },
+    "contract_version": {
+      "const": "0.1",
+      "type": "string"
+    },
+    "correlation_id": {
+      "maxLength": 128,
+      "minLength": 0,
+      "type": "string"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/errorCode"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "evidence_labels": {
+      "additionalProperties": {
+        "$ref": "#/$defs/evidenceLabel"
+      },
+      "description": "Honesty map. Estimates, baselines, and missing evidence are labeled as such and never as observed.",
+      "type": "object"
+    },
+    "exit_code": {
+      "maximum": 17,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "identities": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contract_version": {
+          "const": "0.1",
+          "type": "string"
+        },
+        "evidence_cid": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "patch_id": {
+          "description": "Always present. Null means missing, never omitted.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repository_id": {
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "repository_state_cid": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cid"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "run_id": {
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "task_id": {
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "trace_id": {
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository_id",
+        "repository_state_cid",
+        "task_id",
+        "run_id",
+        "trace_id",
+        "patch_id"
+      ],
+      "type": "object"
+    },
+    "interface": {
+      "const": "ProofContextCLIOutput@0.1",
+      "type": "string"
+    },
+    "output_schema_cid": {
+      "$ref": "#/$defs/cid"
+    },
+    "payload": {
+      "description": "Bounded, redacted command payload. No secrets or unbounded source.",
+      "type": "object"
+    },
+    "policy": {
+      "enum": [
+        "production",
+        "supervised",
+        "evaluation",
+        "simulation"
+      ],
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "report": {
+      "description": "Optional structured patch-report projection.",
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "schema": {
+      "const": "ipfs-accelerate.proof-context.v0.1/cli-output",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "0.1",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "trace_id": {
+      "maxLength": 128,
+      "minLength": 0,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "schema_version",
+    "contract_version",
+    "status",
+    "exit_code",
+    "correlation_id",
+    "trace_id",
+    "identities",
+    "artifact_cids",
+    "provenance",
+    "command",
+    "accepted",
+    "output_schema_cid"
+  ],
+  "title": "PCCE CLI CommandOutput@0.1",
+  "type": "object",
+  "x-compatibility-matrix-content-id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+  "x-contract-version": "0.1",
+  "x-error-taxonomy-content-id": "sha256:570d43769cd47207f7c5f77bb7434252e6cefb1b4cf10791ccb82208db216a38",
+  "x-exit-code-matrix": {
+    "assurance_failed": 9,
+    "cancelled": 14,
+    "context_insufficient": 10,
+    "human_review_required": 12,
+    "infrastructure_failure": 15,
+    "invalid": 2,
+    "model_escalation_required": 11,
+    "partial_effect": 16,
+    "proof_failed": 8,
+    "rejected": 3,
+    "repair_required": 17,
+    "simulated": 4,
+    "stale": 6,
+    "succeeded": 0,
+    "timeout": 13,
+    "unavailable": 5,
+    "verification_failed": 7
+  },
+  "x-pcce-006-content-id": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+  "x-schema-path": "artifacts/proof_carrying_context_engine/cli/output_schema.json",
+  "x-status-taxonomy-content-id": "sha256:5f206feebb6213d3a1c113e37373ac8402003170cea609035ec9b871ca9fdd19",
+  "$defs": {
+    "cid": {
+      "description": "CIDv1 raw sha2-256 base32. Pseudo-CIDs (sha256:, urn:, Qm) are rejected.",
+      "maxLength": 128,
+      "minLength": 59,
+      "pattern": "^b[a-z2-7]{58,}$",
+      "type": "string"
+    },
+    "errorCode": {
+      "enum": [
+        "unknown_field",
+        "malformed",
+        "identity_inconsistent",
+        "stale_root",
+        "simulated_promoted",
+        "pseudo_cid",
+        "schema_mismatch",
+        "boundary_violation",
+        "unavailable_capability",
+        "timeout",
+        "cancelled",
+        "verification_failed",
+        "proof_failed",
+        "assurance_failed",
+        "context_insufficient",
+        "infrastructure_failure",
+        "partial_effect",
+        "repair_required",
+        "human_review_required"
+      ],
+      "type": "string"
+    },
+    "evidenceLabel": {
+      "enum": [
+        "observed",
+        "estimated",
+        "baseline",
+        "missing"
+      ],
+      "type": "string"
+    },
+    "provenance": {
+      "enum": [
+        "live",
+        "replayed",
+        "simulated"
+      ],
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "succeeded",
+        "rejected",
+        "verification_failed",
+        "proof_failed",
+        "assurance_failed",
+        "context_insufficient",
+        "model_escalation_required",
+        "human_review_required",
+        "unavailable",
+        "timeout",
+        "cancelled",
+        "invalid",
+        "stale",
+        "simulated",
+        "infrastructure_failure",
+        "partial_effect",
+        "repair_required"
+      ],
+      "type": "string"
+    }
+  }
+}
