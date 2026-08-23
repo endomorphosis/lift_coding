@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ipfs-accelerate.dev/schemas/proof-context/v0.1/cli-output.schema.json",
+  "title": "PCCE CommandOutput@0.1",
+  "description": "Stable CLI machine output. Every command result binds schema version, status, exit code, trace/correlation ID, repository/task/run/patch identities, and artifact CIDs. Simulated, unavailable, and failed results never map to exit zero. Estimated savings cannot be labeled observed. additionalProperties is false.",
+  "$comment": "PCCE-043. Version 0.1 is immutable after admission; incompatible changes require a new version.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "status",
+    "exit_code",
+    "trace_id",
+    "correlation_id",
+    "identities",
+    "artifact_cids"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "ipfs-accelerate.proof-context.v0.1/cli-output"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "contract_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+    "interface": {
+      "type": "string",
+      "const": "ProofContextCLI@0.1"
+    },
+    "command": {
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/status"
+    },
+    "exit_code": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6,
+      "description": "0 live succeeded; 1 typed failure; 2 invalid; 3 rejected; 4 simulated; 5 unavailable; 6 stale."
+    },
+    "policy": {
+      "type": "string",
+      "enum": [
+        "production",
+        "supervised",
+        "evaluation",
+        "simulation"
+      ]
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "accepted": {
+      "type": "boolean"
+    },
+    "failed": {
+      "type": "boolean"
+    },
+    "unavailable": {
+      "type": "boolean"
+    },
+    "output_mode": {
+      "type": "string",
+      "enum": [
+        "json",
+        "human"
+      ]
+    },
+    "trace_id": {
+      "type": "string"
+    },
+    "correlation_id": {
+      "type": "string"
+    },
+    "identities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_id",
+        "repository_state_cid",
+        "task_id",
+        "run_id",
+        "patch_id"
+      ],
+      "properties": {
+        "repository_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repository_state_cid": {
+          "$ref": "#/$defs/cid"
+        },
+        "task_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "run_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "patch_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "trace_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_cid": {
+          "$ref": "#/$defs/cid"
+        },
+        "artifact_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contract_version": {
+          "type": "string"
+        }
+      }
+    },
+    "artifact_cids": {
+      "type": "object",
+      "maxProperties": 32,
+      "additionalProperties": {
+        "$ref": "#/$defs/cid"
+      }
+    },
+    "artifact_cid": {
+      "$ref": "#/$defs/cid"
+    },
+    "contract": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "output_schema_cid": {
+      "$ref": "#/$defs/cid"
+    },
+    "provider_bound": {
+      "type": "boolean",
+      "const": false
+    },
+    "sibling_layout_required": {
+      "type": "boolean",
+      "const": false
+    }
+  },
+  "$defs": {
+    "cid": {
+      "description": "CIDv1 base32 or null when the named artifact is missing evidence. Pseudo-CIDs (sha256:, urn: without codec, hex digests, Qm placeholders) are rejected when a value is present.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^b[a-z2-7]{58,}$",
+          "minLength": 59,
+          "maxLength": 128
+        }
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "rejected",
+        "verification_failed",
+        "proof_failed",
+        "assurance_failed",
+        "context_insufficient",
+        "model_escalation_required",
+        "human_review_required",
+        "unavailable",
+        "timeout",
+        "cancelled",
+        "invalid",
+        "stale",
+        "simulated",
+        "infrastructure_failure",
+        "partial_effect",
+        "repair_required"
+      ]
+    },
+    "provenance": {
+      "type": "string",
+      "enum": [
+        "live",
+        "replayed",
+        "simulated"
+      ]
+    },
+    "costKind": {
+      "type": "string",
+      "enum": [
+        "observed",
+        "estimate",
+        "baseline",
+        "missing"
+      ],
+      "description": "Honest cost/evidence kind. Estimates and baselines are never labeled observed. Missing values are labeled missing."
+    },
+    "exitCode": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  }
+}
