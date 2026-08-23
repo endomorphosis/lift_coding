@@ -1,0 +1,251 @@
+{
+  "bootstrap": "ipfs_accelerate_py.proof_context.bootstrap",
+  "cid": "bafkreihxffr7ppivqrjwb3pafumcoh6mg7vyoglc6gpnmbtjgnq2pdajru",
+  "compatibility_matrix_content_id": "sha256:bfe49d9f3b6d2f472ae58d369b2138fc4e8e6320fccdd181e07a5564e075e920",
+  "contract_schema_prefix": "pcce/proof-context/v0.1/",
+  "contract_version": "0.1",
+  "datasets_port": "ipfs_datasets_py.proof_context.provider",
+  "epic_a_gate_content_id": "sha256:da97b6cd1307bf42b2109b2647a79e64f0c754f85e19ed1d73f549b580b14ce6",
+  "epic_a_gate_task": "PCCE-011",
+  "errors": [
+    "unknown_field",
+    "malformed",
+    "identity_inconsistent",
+    "stale_root",
+    "simulated_promoted",
+    "pseudo_cid",
+    "schema_mismatch",
+    "boundary_violation",
+    "unavailable_capability",
+    "timeout",
+    "cancelled",
+    "verification_failed",
+    "proof_failed",
+    "assurance_failed",
+    "context_insufficient",
+    "infrastructure_failure",
+    "partial_effect",
+    "repair_required",
+    "human_review_required"
+  ],
+  "forbidden_evidence": [
+    "simulated",
+    "replayed",
+    "stale",
+    "invalid",
+    "unavailable",
+    "pseudo-cid",
+    "unsigned-required",
+    "unsealed"
+  ],
+  "instance_operations": [
+    "scan",
+    "status",
+    "plan",
+    "context-pack",
+    "route",
+    "run",
+    "verify",
+    "expand-context",
+    "assurance",
+    "seal",
+    "report",
+    "resume"
+  ],
+  "interface": "ProofCarryingContextEngine@0.1",
+  "kit_port": "ipfs_kit_py.proof_context.state_store",
+  "lifecycle_cid": "bafkreicxn3zxwm3aw3b7654wh5v4iaxwaaugo4cc66ewzfp7ykojuagehi",
+  "lifecycle_cid_binding": "ipfs_accelerate_py.proof_context.lifecycle.LIFECYCLE_CID",
+  "live_modes": [
+    "production",
+    "supervised"
+  ],
+  "modes": [
+    "production",
+    "supervised",
+    "evaluation",
+    "simulation"
+  ],
+  "operation_contracts": {
+    "assurance": "pcce/proof-context/v0.1/qualification-result",
+    "context-pack": "pcce/proof-context/v0.1/context-pack",
+    "expand-context": "pcce/proof-context/v0.1/context-pack",
+    "plan": "pcce/proof-context/v0.1/invalidation-plan",
+    "report": "pcce/proof-context/v0.1/qualification-result",
+    "resume": "pcce/proof-context/v0.1/execution-receipt",
+    "route": "pcce/proof-context/v0.1/model-route-decision",
+    "run": "pcce/proof-context/v0.1/execution-receipt",
+    "scan": "pcce/proof-context/v0.1/repository-state",
+    "seal": "pcce/proof-context/v0.1/incremental-seal",
+    "status": "pcce/proof-context/v0.1/execution-receipt",
+    "verify": "pcce/proof-context/v0.1/verification-plan"
+  },
+  "operations": [
+    "open",
+    "scan",
+    "status",
+    "plan",
+    "context-pack",
+    "route",
+    "run",
+    "verify",
+    "expand-context",
+    "assurance",
+    "seal",
+    "report",
+    "resume"
+  ],
+  "package": "ipfs_accelerate_py.proof_context",
+  "pcce_006_content_id": "sha256:b5503d2c2ec22e34091b3f747241fbde0519a9f0b213a03e0456a8f980a43f37",
+  "policy_cid": "bafkreiequzmarsuklr45ytgzk5b7bonpxhit5dyhwv2y25kqcy66jtmym4",
+  "policy_cid_binding": "ipfs_accelerate_py.proof_context.policy.POLICY_CID",
+  "provenances": [
+    "live",
+    "replayed",
+    "simulated"
+  ],
+  "provider_bound": false,
+  "public_signature_snapshot": {
+    "assurance": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "context_pack": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "expand_context": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "open": {
+      "keyword_only": [
+        "ports",
+        "identities",
+        "mode"
+      ],
+      "parameters": [
+        "repository",
+        "ports",
+        "identities",
+        "mode"
+      ],
+      "return": "ProofCarryingContextEngine"
+    },
+    "plan": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "report": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "resume": {
+      "keyword_only": [],
+      "parameters": [
+        "checkpoint"
+      ],
+      "return": "EngineRecord"
+    },
+    "route": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "run": {
+      "keyword_only": [],
+      "parameters": [
+        "proposal"
+      ],
+      "return": "EngineRecord"
+    },
+    "scan": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "seal": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "status": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    },
+    "verify": {
+      "keyword_only": [],
+      "parameters": [],
+      "return": "EngineRecord"
+    }
+  },
+  "recovery_cid": "bafkreid3vyh6bapa65b2g3itohcvr7eoukl62hy6jdljq236nstoymu4ai",
+  "recovery_cid_binding": "ipfs_accelerate_py.proof_context.recovery.RECOVERY_CID",
+  "result_state_cid": "bafkreiarkkbsnysg65nbbup6bnxc52mr7edcm5sdzmzj3a3qwd2an6zcxm",
+  "result_state_cid_binding": "ipfs_accelerate_py.proof_context.results.RESULT_STATE_CID",
+  "runtime_cid_binding": "ipfs_accelerate_py.proof_context.bootstrap.RUNTIME_CID",
+  "schema": "ipfs-accelerate.proof-context.v0.1/runtime",
+  "sibling_layout_required": false,
+  "simulation_watermark": "pcce/proof-context/v0.1/simulation-watermark",
+  "stage_contracts": {
+    "assurance": "pcce/proof-context/v0.1/qualification-result",
+    "context-pack": "pcce/proof-context/v0.1/context-pack",
+    "disposition": "pcce/proof-context/v0.1/qualification-result",
+    "escalate": "pcce/proof-context/v0.1/context-pack",
+    "identify-operator": "pcce/proof-context/v0.1/task-specification",
+    "impact": "pcce/proof-context/v0.1/repository-state",
+    "incremental-verify": "pcce/proof-context/v0.1/verification-plan",
+    "invalidate": "pcce/proof-context/v0.1/invalidation-plan",
+    "isolated-apply": "pcce/proof-context/v0.1/execution-receipt",
+    "proposal": "pcce/proof-context/v0.1/patch-proposal",
+    "resolve-repository": "pcce/proof-context/v0.1/repository-state",
+    "route": "pcce/proof-context/v0.1/model-route-decision",
+    "scan-semantic": "pcce/proof-context/v0.1/semantic-capsule",
+    "scope-check": "pcce/proof-context/v0.1/patch-proposal",
+    "seal": "pcce/proof-context/v0.1/incremental-seal",
+    "sufficiency": "pcce/proof-context/v0.1/context-pack"
+  },
+  "stages": [
+    "identify-operator",
+    "resolve-repository",
+    "scan-semantic",
+    "invalidate",
+    "context-pack",
+    "sufficiency",
+    "route",
+    "proposal",
+    "scope-check",
+    "isolated-apply",
+    "impact",
+    "incremental-verify",
+    "escalate",
+    "assurance",
+    "seal",
+    "disposition"
+  ],
+  "statuses": [
+    "succeeded",
+    "rejected",
+    "verification_failed",
+    "proof_failed",
+    "assurance_failed",
+    "context_insufficient",
+    "model_escalation_required",
+    "human_review_required",
+    "unavailable",
+    "timeout",
+    "cancelled",
+    "invalid",
+    "stale",
+    "simulated",
+    "infrastructure_failure",
+    "partial_effect",
+    "repair_required"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "admitted_at": "2026-08-23T20:05:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-025:runtime-package",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-runtime-implementation",
+  "content_id": "sha256:025a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef025runtime",
+  "evidence": {
+    "api_descriptor": "artifacts/proof_carrying_context_engine/runtime/runtime_api.json",
+    "cold_import_hermetic": true,
+    "datasets_port": "ipfs_datasets_py.proof_context.provider",
+    "external_patch_isolated_worktree": true,
+    "kit_port": "ipfs_kit_py.proof_context.state_store",
+    "lifecycle_cid": "bafkreicxn3zxwm3aw3b7654wh5v4iaxwaaugo4cc66ewzfp7ykojuagehi",
+    "no_network_import": true,
+    "ordinary_python_git_repository": true,
+    "policy_cid": "bafkreiequzmarsuklr45ytgzk5b7bonpxhit5dyhwv2y25kqcy66jtmym4",
+    "provider_bound": false,
+    "recovery_cid": "bafkreid3vyh6bapa65b2g3itohcvr7eoukl62hy6jdljq236nstoymu4ai",
+    "result_state_cid": "bafkreiarkkbsnysg65nbbup6bnxc52mr7edcm5sdzmzj3a3qwd2an6zcxm",
+    "runtime_cid": "bafkreihxffr7ppivqrjwb3pafumcoh6mg7vyoglc6gpnmbtjgnq2pdajru",
+    "runtime_schema": "ipfs-accelerate.proof-context.v0.1/runtime",
+    "sibling_layout_required": false,
+    "typed_failure_modes": true,
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_runtime_integration.py"
+  },
+  "objective_id": "PCCE-G200",
+  "rollback": "Revert wiring/exports, invalidate downstream adapter/CLI work, discard test worktrees, and preserve any failed integration receipts.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-025"
+}
