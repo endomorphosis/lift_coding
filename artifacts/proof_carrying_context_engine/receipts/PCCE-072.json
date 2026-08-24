@@ -1,0 +1,190 @@
+{
+  "artifact_identity": "bafkreiaugowmsz2qz62hvpw4ellppuufxnzvfh5f2vr5vtxx4vdjp75wze",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of canonical trust.py bytes",
+  "authority": {
+    "candidate_only": true,
+    "duckdb_or_quack_mutated": false,
+    "production_admission_authority_installed": false,
+    "requires_supervisor_reconciliation": true
+  },
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-read-only-trust-admission-observed-tested-limited",
+  "evidence": {
+    "acceptance_disposition": {
+      "cache_or_seal_publication_performed": false,
+      "external_live_provenance_authority_observed": false,
+      "production_signature_authority_observed": false,
+      "qualification_credit": false,
+      "runtime_integration_observed": false,
+      "status": "observed_tested_limited_not_integrated",
+      "trust_contract_implemented": true
+    },
+    "admission_contract": {
+      "closed_reason_code_count": 35,
+      "descriptor_limits": {
+        "max_descriptor_bytes": 1048576,
+        "max_references": 128,
+        "max_signature_bytes": 64,
+        "max_text_bytes": 4096
+      },
+      "interface": "KitProofContextTrustAdmission@1",
+      "read_only": true,
+      "schemas": {
+        "evidence": "ipfs-kit.proof-context/trust-evidence@1",
+        "expectation": "ipfs-kit.proof-context/trust-expectation@1",
+        "grant": "ipfs-kit.proof-context/trust-grant@1"
+      },
+      "verification_order": [
+        "descriptor byte length and claimed CID",
+        "closed schema and canonical JSON",
+        "exact subject, producer, repository, tree, environment, policy, generation, parent, status, mode, cache-key, and reference bindings",
+        "signature policy through an injected authority when required",
+        "subject bytes, CID, canonical JSON, and schema",
+        "every declared reference's bytes, CID, canonical JSON, and schema",
+        "complete declared transitive CID closure",
+        "current live provenance through an injected authority",
+        "read-only trust grant construction"
+      ]
+    },
+    "cache_nonpublication_proof": {
+      "admission_api_writes_blocks": false,
+      "admission_api_writes_cache_index": false,
+      "admission_api_writes_current_seal": false,
+      "cache_candidate_requires_candidate_role": true,
+      "cache_candidate_requires_fresh_verification": true,
+      "cache_candidate_is_acceptance_authority": false,
+      "hostile_rejection_fixture_observed_mutations": 0,
+      "publication_authority_granted": false
+    },
+    "independent_review": {
+      "disposition": "APPROVED",
+      "reviewer": "/root (Codex independent nested review)",
+      "subjects": {
+        "nested_base_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+        "nested_commit": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+        "nested_tree": "b4413c1ad92b85df2e110c0185d2449e56fc6497",
+        "outer_base_commit": "f1110f29499f92d9db79e1e839d0d6a3856babfe"
+      },
+      "verification": {
+        "combined_proof_context_tests_passed": 58,
+        "diff_check": "passed",
+        "focused_tests_passed": 41,
+        "focused_tests_skipped": 0,
+        "py_compile": "passed",
+        "ruff_format": "passed",
+        "ruff_lint": "passed",
+        "scope": "exactly-two-authorized-nested-files-clean"
+      }
+    },
+    "nested_source": {
+      "base_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+      "base_tree": "8ab49ede68b03714b846334eeada6ad5d45f3449",
+      "files": {
+        "ipfs_kit_py/proof_context/trust.py": {
+          "blob": "7578cdae99de719c7d49fe39880a6db8e621ec4e",
+          "cid_v1_raw": "bafkreiaugowmsz2qz62hvpw4ellppuufxnzvfh5f2vr5vtxx4vdjp75wze",
+          "mode": "100644",
+          "sha256": "1433acc96750cfb47abedc22d6f7d285bb73529fa5d563dacef7e54697ffb6c9",
+          "size": 51328
+        },
+        "tests/proof_context/test_trust_admission.py": {
+          "blob": "5fc4bfd10e4e2cd3a969ba1ca2ecaa81b587db76",
+          "cid_v1_raw": "bafkreifwfb57rt7rocohuljtlm6fgurie7agmzvtnmvvgqg6kmha7bdkqa",
+          "mode": "100644",
+          "sha256": "b6287bf8cff1709c7a2d335b3c53522827c06666b36b2b5340de530e0f846a80",
+          "size": 31612
+        }
+      },
+      "implementation_commit": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+      "implementation_tree": "b4413c1ad92b85df2e110c0185d2449e56fc6497",
+      "repository": "external/ipfs_kit"
+    },
+    "outer_composition": {
+      "allowed_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-072.json",
+        "external/ipfs_kit"
+      ],
+      "base_commit": "f1110f29499f92d9db79e1e839d0d6a3856babfe",
+      "base_tree": "abbff2e36caf7a31c0ea24781c3f47cd5a30eb2d",
+      "candidate_gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "020284642f438dd35e6bc2d6ff41cdeb8b47bbd0",
+        "external/ipfs_datasets": "da671b50ee600538cbb3cdb508aa755ef34dfdf7",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      },
+      "kit_base_gitlink": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+      "kit_candidate_gitlink": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+    },
+    "predecessor": {
+      "outer_merge_commit": "827c3a6d6ea9b3575f24dfef70cfa514a3638060",
+      "status": "completed",
+      "task_id": "PCCE-070"
+    },
+    "prohibited_effects": {
+      "block_store_mutated": false,
+      "cache_index_mutated": false,
+      "canonical_branch_mutated": false,
+      "current_seal_mutated": false,
+      "external_authority_fabricated": false,
+      "network_used_for_validation": false,
+      "new_cache_or_signer_implemented": false,
+      "provider_dispatched": false,
+      "stored_immutable_bytes_repaired": false,
+      "supervisor_state_mutated": false
+    },
+    "signature_authority": {
+      "algorithm_contract": "Ed25519",
+      "invalid_or_wrong_binding_rejected": true,
+      "missing_when_required_rejected": true,
+      "production_authority_available": false,
+      "test_fixture": "ephemeral Ed25519 verification authority",
+      "unavailable_exception_or_non_boolean_rejected": true,
+      "unit_fixture_is_production_evidence": false
+    },
+    "task_authority": {
+      "live_quack_duckdb": {
+        "revision": 1,
+        "status_at_review": "todo",
+        "task_cid": "baguqeerav5ovimddoeyqbxqcdmgh3czh7k5i2rzivapbc6fbhggjqv435kjq"
+      },
+      "static_board": {
+        "canonical_task_cid": "baguqeeraef65mson7bz4lp2rs34n3fdfgv7whil2f7mp37esadtiwpofbuza",
+        "canonical_task_key": "task/v1/217dd649cdf873c5bf5196f8dd9465357f63a17a2fd8fdfc9200e68b3dc50d32"
+      }
+    },
+    "test_matrix": {
+      "negative_classes": [
+        "descriptor CID forgery",
+        "non-canonical, duplicate, unknown, malformed, and over-budget fields",
+        "subject, producer, repository, tree, environment, policy, generation, parent, status, mode, reference, and cache-key mismatch",
+        "replayed, stale, synthetic, or simulated provenance",
+        "missing, unavailable, invalid, or wrongly bound required signature",
+        "missing, corrupt, non-canonical, or wrong-schema subject/reference bytes",
+        "missing, orphaned, undeclared, or corrupt transitive CID closure",
+        "missing, unavailable, exceptional, non-boolean, or invalid live provenance authority",
+        "poisoned cache role, freshness, acceptance-authority, key, or artifact binding"
+      ],
+      "positive_classes": [
+        "unsigned local integrity evidence when signature is not required",
+        "test-fixture Ed25519 signature verification",
+        "proof, receipt, and seal roots through one read-only gate",
+        "exact cache candidate after complete fresh verification"
+      ],
+      "qualification_credit_on_success": false,
+      "rejection_precedes_reuse_or_publication": true
+    },
+    "validation": [
+      "python3.12 -P -m pytest -q -p no:cacheprovider tests/proof_context/test_trust_admission.py",
+      "python3.12 -P -m pytest -q -p no:cacheprovider tests/proof_context",
+      "python3.12 -m ruff check ipfs_kit_py/proof_context/trust.py tests/proof_context/test_trust_admission.py",
+      "python3.12 -m ruff format --check ipfs_kit_py/proof_context/trust.py tests/proof_context/test_trust_admission.py",
+      "python3.12 -m py_compile ipfs_kit_py/proof_context/trust.py tests/proof_context/test_trust_admission.py",
+      "git diff --check"
+    ]
+  },
+  "objective_id": "PCCE-G700",
+  "rollback": "Revert this receipt, the kit gitlink, and the exact two nested files; invalidate grants produced by the candidate wrapper and restore a prior immutable CAS root only through canonical recovery.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-072"
+}
