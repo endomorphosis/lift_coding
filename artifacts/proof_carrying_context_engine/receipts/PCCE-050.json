@@ -1,0 +1,37 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-050",
+  "objective_id": "PCCE-G500",
+  "status": "completed",
+  "completion_mode": "supervised-packaging-implementation",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-050:datasets-proof-context-package",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "evidence": {
+    "artifacts": {
+      "sdist": {
+        "filename": "ipfs_datasets_py-0.2.0.tar.gz",
+        "sha256": "8a16fba87d450ffb3db336cd3f7724e9f06b3984fad10dccd3d4cd48947f21a2"
+      },
+      "wheel": {
+        "filename": "ipfs_datasets_py-0.2.0-cp312-cp312-linux_aarch64.whl",
+        "sha256": "322fa1d5642c8f8112326a2df3a5aa986f193ea32365d3e988712c0903a14a44"
+      }
+    },
+    "public_surface": "ipfs_datasets_py.proof_context",
+    "provider": {
+      "schema": "ipfs-datasets.proof-context.v0.1",
+      "interface": "DatasetsProofContextProvider@0.1",
+      "compatible_versions": {"proof_context": "0.1"},
+      "extra": "proof-context"
+    },
+    "core_install": {
+      "dependencies": [],
+      "cold_import": "lazy provider export with no sibling, model, prover, browser, or network integration import"
+    },
+    "validation": [
+      "python -m pytest -q external/ipfs_datasets/tests/proof_context/test_install_profile.py",
+      "python -m build external/ipfs_datasets"
+    ]
+  },
+  "rollback": "Revert only the datasets proof-context export, package metadata, install-profile test, and this receipt; discard unpromoted build artifacts."
+}
