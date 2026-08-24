@@ -1,0 +1,289 @@
+{
+  "artifact_identity": "bafkreihkjzndxuy5iuhf5fxrmsdy4yhil6le36zzriyqunhkun6kj4fene",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of the explicit-artifact-root clean-install matrix",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "manual-reviewed-external-candidate-with-explicit-no-go",
+  "evidence": {
+    "acceptance_disposition": {
+      "clean_install": "NO-GO: zero of five profiles qualifies because every frozen lock selects source-only transitive archives",
+      "container": "NO-GO: core and verification builds both fail closed at the qualification gate before venv or pip; no image exists",
+      "immutable_inputs": "passed: exact PCCE-053 artifact manifest, all ten lock/receipt identities, seven available artifact bytes, raw CIDs, and risk ledgers verified",
+      "optional_unsupported_items": "explicitly limited: no package imports, resource-byte parity, CLI smoke, installed-distribution hashes, or clean-install claims were made",
+      "source_layout_isolation": "passed with an isolated python -I probe outside the source tree",
+      "workflow": "implemented fail-closed and statically tested; no GitHub Actions run was dispatched or claimed"
+    },
+    "container_no_go": {
+      "base": {
+        "architecture": "linux/arm64",
+        "image": "docker.io/library/python:3.12.3-slim-bookworm",
+        "manifest_digest": "sha256:c27c26153fdf6863da2a1d85b474d1be004c42cc8ea2fd647004a8d4007a34d5"
+      },
+      "build_frontend_digest": "sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",
+      "images_created": [],
+      "profiles": {
+        "core": {
+          "build_exit_code": 1,
+          "cid_v1_raw": "bafkreiatncg6i4wbyqjxu3uribymitylpfjx6fggeuak6qeuad3tpzwp6y",
+          "harness_exit_code": 5,
+          "image_created": false,
+          "log_sha256": "13688de472c1c4137a6e914070c44f0b79537f14c62500af409400f737e6cff6",
+          "log_size": 37723,
+          "result": "explicit-no-go-source-archives-not-qualified"
+        },
+        "verification": {
+          "build_exit_code": 1,
+          "cid_v1_raw": "bafkreiaxu5bql5wkud657uhcakymmzsy6xsgactvuwabry6vkoapzd43kq",
+          "harness_exit_code": 5,
+          "image_created": false,
+          "log_sha256": "17a74305f6caa0fddfd0e202b0c66658f5e4600a75a58018e3d55380fc8f9b54",
+          "log_size": 38313,
+          "result": "explicit-no-go-source-archives-not-qualified"
+        }
+      },
+      "runtime_user": "65532:65532",
+      "stages_not_reached": [
+        "virtual-environment creation",
+        "wheel installation",
+        "package imports",
+        "CLI smoke",
+        "runtime image export"
+      ]
+    },
+    "deterministic_evidence": {
+      "explicit_artifact_root_matrix": {
+        "artifact_bytes_verified": 7,
+        "cid_v1_raw": "bafkreihkjzndxuy5iuhf5fxrmsdy4yhil6le36zzriyqunhkun6kj4fene",
+        "exit_code": 0,
+        "identity_derived_unavailable_artifacts": 1,
+        "no_go_profile_count": 5,
+        "qualified_install_profile_count": 0,
+        "require_qualified_exit_code": 5,
+        "sha256": "ea4e5a3bd31d450e5e96f164878e60e85f964dfb398a310a34eaa37ca4f0a469",
+        "size": 103609
+      },
+      "no_artifact_root_matrix": {
+        "artifact_bytes_verification_status": "artifact-bytes-not-verified-artifact-root-not-provided",
+        "cid_v1_raw": "bafkreigmaapykqa7g2orqkw4iessihdqmjk6wee7shnsb3rlzmdk7og3hm",
+        "exit_code": 0,
+        "qualified_install_profile_count": 0,
+        "sha256": "cc001f85401f369d182adc4125241c706255eb109f91db20ee2bcb06afb8db3b",
+        "size": 103212
+      },
+      "raw_cid_binding_checked": true,
+      "report_generation": "canonical UTF-8 JSON with sorted object keys, two-space indentation, and final newline"
+    },
+    "frozen_pcce053_inputs": {
+      "artifact_hashes": {
+        "cid_v1_raw": "bafkreifvwoezkuqk5xjtskrakfzrqlola66egnq2las3knrzxgc4wrqk3y",
+        "sha256": "b5b38995520aedd3392a205173182dcb07bc43361a5825b53639b985cb460ade"
+      },
+      "environment_manifest": {
+        "cid_v1_raw": "bafkreidnqdikfqa54om765g4ng7gimjdugdfcar7ydzssai7vmrbbtmaxy",
+        "sha256": "6d80d0a2c01de399ff74dc69be643123a18651023fc0f329011fab2210cd80be"
+      },
+      "locks": {
+        "codex": {
+          "lock_cid_v1_raw": "bafkreic7svzbzc27k7mhjabych7z3lmpbnd2ibwgqtvnewyapbxl6wdc5q",
+          "lock_sha256": "5f95721c8b5f57d874803811ff9dad8f0b47a406c684ead25b00786ebf5862ec",
+          "resolver_cid_v1_raw": "bafkreihe4w5ess2bocjeqetijq7ryhtsa4i25dljjpmwir77qz2rsdrhvq",
+          "resolver_sha256": "e4e5ba494b4170924812684c3f1c1e720711ae8d694bd96447ff8675190e27ac"
+        },
+        "core": {
+          "lock_cid_v1_raw": "bafkreig26shdemmk6syhzrzswqvlr7ub4uugfwr5euiunlfmixx5kfhrde",
+          "lock_sha256": "daf48e32318af4b07cc732b42ab8fe81e52862da3d251146acac45efd514f119",
+          "resolver_cid_v1_raw": "bafkreihj4ry5unvu3xbj3b2kbjkwdt7lmuoe47sqd6jhv23k5r423sh2im",
+          "resolver_sha256": "e9e471da36b4ddc29d874a0a5561cfeb651c4e7e501f927aeb6aec79adc8fa43"
+        },
+        "evaluation": {
+          "lock_cid_v1_raw": "bafkreieheco3mympr6jronjogwvhthxoijr3xqhbn25rabhhx7jdqiugda",
+          "lock_sha256": "87209db6618f8f9317352e35aa799eee4263bbc0e16ebb1004e7bfd238228618",
+          "resolver_cid_v1_raw": "bafkreidzm5pyzg2rk2faenea4ph2bdafo4rhhoho3pfwwyidg4ccil5mv4",
+          "resolver_sha256": "79675f8c9b51568a023480e3cfa08c05772273b8eedbcb6b61033704242facaf"
+        },
+        "local-model": {
+          "lock_cid_v1_raw": "bafkreibteb4yclidi7l2vxujnzmqcgitzo3vi2a6h424ftt46mqmwqnjaq",
+          "lock_sha256": "332079812d0347d7aade896e59011913cbb754681e3f35c2ce7cf320cb41a904",
+          "resolver_cid_v1_raw": "bafkreiciixgsb76atlkk7ksjfdqeum6oyn44bo3j5b625357q5a345eypu",
+          "resolver_sha256": "4845cd20ffc09ad4afaa4928e04a33cec379c0bb69e87daeefbf8741be74987d"
+        },
+        "verification": {
+          "lock_cid_v1_raw": "bafkreib6qxn6qn5uyzjvwmx4ngx6zjyuhe3nmou75ufuppaqdjfkr7zwym",
+          "lock_sha256": "3e85dbe837b4c6535b32fc69afeca7143936d63a9fed0b47bc101a4aa8ff36c3",
+          "resolver_cid_v1_raw": "bafkreian3rscpjqt3xizr7zjstyw2t2dgsontw5xocbo5o7w3tiarprvsu",
+          "resolver_sha256": "0ddc6427a613ddd198ff2994f16d4f43349cd9dbb77082eebbf6dcd008be3595"
+        }
+      },
+      "requirement_risk_ledger": {
+        "inactive_mutable_vcs_declaration_count_per_profile": 3,
+        "policy_status": "passed",
+        "selected_unsafe_requirements_by_class": {
+          "editable": [],
+          "local-path": [],
+          "mutable-vcs": [],
+          "unadmitted-direct-url": []
+        }
+      },
+      "source_commit": "0d2acde7fd0356e1cd944c615b5980cd2e568cc7"
+    },
+    "nested_source": {
+      "base_commit": "0d2acde7fd0356e1cd944c615b5980cd2e568cc7",
+      "files": {
+        ".github/workflows/proof-context-clean-install.yml": {
+          "blob": "fd61d26b5579d9fe871b49e334819ba055a1767e",
+          "cid_v1_raw": "bafkreica5zaflxkohf4pd3baemamfvcyjm42nzxollybwyavzzxi4jk2yy",
+          "mode": "100644",
+          "sha256": "40ee4055dd4e3978f1ec202300c2d4584b39a6e6ee5af01b6015ce6e8e255ac6"
+        },
+        "docker/proof-context/Dockerfile": {
+          "blob": "aefc3a2a330c501d1da6c23cb1372e8832a3cd3d",
+          "cid_v1_raw": "bafkreigovdl34atwjmeiredqdgfv7khcvdlegzdfdddnyluvky5rcg7rta",
+          "mode": "100644",
+          "sha256": "cea8d7be02764b08889070198b5fa8e2a8d643646518c6dc2e95563b111bf198"
+        },
+        "scripts/proof_context/test_clean_install.py": {
+          "blob": "a34f23fbff8bfa8d684644b6fa43d333ea3fcb49",
+          "cid_v1_raw": "bafkreibvm7fsdoetot5izb623u7hknszzxb5l5oiu2w7ozsu7nui5yl4su",
+          "mode": "100644",
+          "sha256": "3567cb21b89374fa8c87dadd3e753659cdc3d5f5c8a6adf76654fb688ee17c95"
+        },
+        "test/proof_context/test_clean_install.py": {
+          "blob": "43669377600467a9d500f9a094b415af334f7f71",
+          "cid_v1_raw": "bafkreidkrvp5ssv7eaxomtkxlsynpj5lutpn73gbva2mdcpa3aoulseqra",
+          "mode": "100644",
+          "sha256": "6a8d5fd94abf202ee64d575cb0d7a7aba4dedfecc1a834c189e0d81d45c89088"
+        }
+      },
+      "focused_fix_commit": "4953f09d79dc30149ac44034bfa03c38c0732a63",
+      "focused_fix_parent": "31ffd98d4d2c2e32aa598901f5059ac1fe4f21f5",
+      "implementation_commit": "4953f09d79dc30149ac44034bfa03c38c0732a63",
+      "initial_implementation_commit": "31ffd98d4d2c2e32aa598901f5059ac1fe4f21f5",
+      "repository": "external/ipfs_accelerate",
+      "repository_tree": "1b3b0054b93e67b5bcba99f837f3daa72193134f",
+      "workflow_checkout_binding": {
+        "persist_credentials": false,
+        "ref": "${{ job.workflow_sha }}",
+        "repository": "${{ job.workflow_repository }}"
+      }
+    },
+    "profiles": {
+      "codex": {
+        "result": "NO-GO",
+        "selected_source_archives": [
+          "python-baseconv-1.2.2.tar.gz",
+          "varint-1.0.2.tar.gz"
+        ]
+      },
+      "core": {
+        "result": "NO-GO",
+        "selected_source_archives": [
+          "python-baseconv-1.2.2.tar.gz",
+          "varint-1.0.2.tar.gz"
+        ]
+      },
+      "evaluation": {
+        "result": "NO-GO",
+        "selected_source_archives": [
+          "llama_cpp_python-0.3.35.tar.gz",
+          "python-baseconv-1.2.2.tar.gz",
+          "varint-1.0.2.tar.gz"
+        ]
+      },
+      "local-model": {
+        "result": "NO-GO",
+        "selected_source_archives": [
+          "llama_cpp_python-0.3.35.tar.gz",
+          "python-baseconv-1.2.2.tar.gz",
+          "varint-1.0.2.tar.gz"
+        ]
+      },
+      "verification": {
+        "result": "NO-GO",
+        "selected_source_archives": [
+          "python-baseconv-1.2.2.tar.gz",
+          "varint-1.0.2.tar.gz"
+        ]
+      }
+    },
+    "provenance": {
+      "candidate_source": "manual-reviewed external nested candidate",
+      "canonical_branch_mutated": false,
+      "nested_candidate_pushed": false,
+      "provider_dispatch": false,
+      "provider_result_claimed": false,
+      "provider_route": "manual-reviewed-external-candidate",
+      "review_history": [
+        "initial implementation independently reviewed",
+        "cross-repository reusable-workflow checkout blocker repaired in focused follow-up",
+        "focused follow-up independently reviewed and approved"
+      ]
+    },
+    "task_authority": {
+      "live_quack": {
+        "dependency_cids": [
+          "baguqeeraj4pfbyksidqlqziggxxuitg2kqeziizrdgd4rzfjrczrqbj6wtuq"
+        ],
+        "revision": 1,
+        "task_cid": "baguqeera2d56ardt4hdce4b4bgmbkwkhf4nyjbeonf2famwf6hr7ydgivsya",
+        "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_clean_install.py && python external/ipfs_accelerate/scripts/proof_context/test_clean_install.py --artifacts artifacts/proof_carrying_context_engine/environment/artifact_hashes.json"
+      },
+      "static_board_projection": {
+        "canonical_task_cid": "baguqeeramdrw33d47x4fdztjgrf4btcsgtgoxr4kyqyt574t3odkbixly42a",
+        "canonical_task_key": "task/v1/60e36dec7cfdf851e669344bc0cc5234ccebc78ac4313eff93db86a0a2ebc734",
+        "status_at_base": "todo"
+      }
+    },
+    "task_contract": {
+      "acceptance": "Clean installs and the optional container are reproducible from immutable artifacts without source-layout assumptions.",
+      "acceptance_criteria": "Each supported Python/profile matrix installs all required distributions from wheels with hashes after every source tree is removed from import reach, imports, validates schema/vector resource bytes, runs CLI smoke, and proves no sibling requirement; container uses pinned base and non-root runtime where supported; any unsupported runner is explicitly failed/no-go.",
+      "allowed_effects": "Add required clean-install workflow, pinned Dockerfile, clean-install harness/tests, and receipt; build disposable environments/images.",
+      "conflict_policy": "CI and image consume frozen locks/artifacts only; they cannot repair packaging during validation.",
+      "dependency": "PCCE-053",
+      "objective": "Test installation solely from built immutable artifacts in fresh environments and provide a pinned optional container build for the supported core/verification profile.",
+      "priority": "P0",
+      "prohibited_effects": "Install from source siblings or editable paths; use mutable base tags without digest; download undeclared dependencies; mark unavailable builds passed; use continue-on-error or equivalent.",
+      "required_evidence": "Fresh-environment transcripts; installed-distribution hashes; workflow result; container digest/build log or explicit unsupported no-go; no-source-path trace.",
+      "required_tests": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_clean_install.py; python external/ipfs_accelerate/scripts/proof_context/test_clean_install.py --artifacts artifacts/proof_carrying_context_engine/environment/artifact_hashes.json",
+      "risk_classification": "high-installation",
+      "title": "Add clean-install CI and optional container profile"
+    },
+    "validation": {
+      "canonical_no_root_command": {
+        "command": "python external/ipfs_accelerate/scripts/proof_context/test_clean_install.py --artifacts artifacts/proof_carrying_context_engine/environment/artifact_hashes.json",
+        "exit_code": 0,
+        "result": "truthful-evidence-mode-no-go-artifact-bytes-not-verified"
+      },
+      "focused_nested": [
+        {
+          "command": "python -m pytest -q test/proof_context/test_clean_install.py",
+          "result": "14 passed"
+        },
+        {
+          "command": "ruff check scripts/proof_context/test_clean_install.py test/proof_context/test_clean_install.py",
+          "result": "passed"
+        },
+        {
+          "command": "ruff format --check scripts/proof_context/test_clean_install.py test/proof_context/test_clean_install.py",
+          "result": "2 files already formatted"
+        },
+        {
+          "command": "python -m py_compile scripts/proof_context/test_clean_install.py test/proof_context/test_clean_install.py",
+          "result": "passed"
+        },
+        {
+          "command": "python -I scripts/proof_context/test_clean_install.py --artifacts <PCCE-053-artifact-hashes> --artifact-root <explicit-frozen-artifact-root> --output <matrix> --require-qualified",
+          "exit_code": 5,
+          "result": "expected fail-closed NO-GO"
+        }
+      ],
+      "workflow_execution": {
+        "dispatched": false,
+        "result": "not-run-no-success-claimed"
+      }
+    }
+  },
+  "objective_id": "PCCE-G500",
+  "rollback": "Revert only the PCCE-054 accelerator gitlink promotion and this receipt; discard disposable environments and retain the immutable NO-GO logs and packages. No image was created.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-054"
+}
