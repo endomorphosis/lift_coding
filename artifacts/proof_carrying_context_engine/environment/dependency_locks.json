@@ -1,0 +1,489 @@
+{
+  "artifact_byte_availability_status": "partial-one-admitted-sdist-unavailable",
+  "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+  "cid_policy": "CIDv1 with raw multicodec and sha2-256 multihash",
+  "environment_id": "cpython312-linux-aarch64",
+  "hash_gate_validation": {
+    "archive_set": "fully materialized exact selected archives with no index access",
+    "command": [
+      "<hash-gate-frontend-venv>/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "--dry-run",
+      "--ignore-installed",
+      "--no-cache-dir",
+      "--require-hashes",
+      "--no-index",
+      "--find-links",
+      "<exact-selected-archive-directory>",
+      "--no-build-isolation",
+      "-r",
+      "<profile-lock>"
+    ],
+    "frontend_environment": {
+      "pip": "24.0",
+      "provisioned_from_wheels": [
+        {
+          "filename": "setuptools-82.0.1-py3-none-any.whl",
+          "sha256": "a59e362652f08dcd477c78bb6e7bd9d80a7995bc73ce773050228a348ce2e5bb"
+        },
+        {
+          "filename": "wheel-0.42.0-py3-none-any.whl",
+          "sha256": "177f9c9b0d45c47873b619f5b650346d632cdc35fb5e4d25058e09c9e581433d"
+        }
+      ],
+      "python": "CPython 3.12.3",
+      "scikit_build_core": "absent",
+      "setuptools": "82.0.1",
+      "wheel": "0.42.0"
+    },
+    "profiles": {
+      "codex": {
+        "exit_code": 0,
+        "log_sha256": "76ab3b813adc6ea2359e9c7aecc903046dcd09a8efa6db441c3f85e622b44555",
+        "outcome": "hash-gate-resolution-passed"
+      },
+      "core": {
+        "exit_code": 0,
+        "log_sha256": "cb2fd33659bc9c14b083f0373a5e585463483b4cff2c47cf13d9d1a4f69905c7",
+        "outcome": "hash-gate-resolution-passed"
+      },
+      "evaluation": {
+        "exit_code": 2,
+        "failure": "ModuleNotFoundError: No module named 'scikit_build_core' while preparing selected llama-cpp-python sdist metadata",
+        "log_sha256": "94f5e2d9aabcf3fc57aeab5eb8002f213bb61a3de176985b9fa63d203c13811b",
+        "outcome": "no-go-native-sdist-build-backend-unavailable"
+      },
+      "local-model": {
+        "exit_code": 2,
+        "failure": "ModuleNotFoundError: No module named 'scikit_build_core' while preparing selected llama-cpp-python sdist metadata",
+        "log_sha256": "eea4e7a2297b71438f9ada0e967b0d17ff3a695a41ca3d41b3b5031af614f211",
+        "outcome": "no-go-native-sdist-build-backend-unavailable"
+      },
+      "verification": {
+        "exit_code": 0,
+        "log_sha256": "1e8b470ec41b5acb78985ed0c20dee8d3e829ddfa23fe34f0363daa9d2900dda",
+        "outcome": "hash-gate-resolution-passed"
+      }
+    },
+    "selected_archive_identity_count": 107
+  },
+  "locks": [
+    {
+      "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+      "cid_binding_status": "bytes-verified",
+      "cid_v1_raw": "bafkreig26shdemmk6syhzrzswqvlr7ub4uugfwr5euiunlfmixx5kfhrde",
+      "distribution_count": 80,
+      "native_build_status": "not-required-by-profile",
+      "path": "packaging/proof_context/locks/cpython312-linux-aarch64/core.txt",
+      "profile": "core",
+      "qualification": "supported hash-bound dependency resolution; clean installation is not qualified because the selected varint and python-baseconv artifacts are sdists whose builds are outside PCCE-053",
+      "raw_pip_report_sha256": "2c8bcc503705e3ef695658141c9505f54bba4a4516256b0ac5f298be216ad42e",
+      "resolution_status": "supported-hash-bound",
+      "resolver_receipt_cid_binding_status": "bytes-verified",
+      "resolver_receipt_cid_v1_raw": "bafkreihj4ry5unvu3xbj3b2kbjkwdt7lmuoe47sqd6jhv23k5r423sh2im",
+      "resolver_receipt_path": "packaging/proof_context/locks/cpython312-linux-aarch64/core.resolver.json",
+      "resolver_receipt_sha256": "e9e471da36b4ddc29d874a0a5561cfeb651c4e7e501f927aeb6aec79adc8fa43",
+      "selected_source_distributions": [
+        "python-baseconv-1.2.2.tar.gz",
+        "varint-1.0.2.tar.gz"
+      ],
+      "sha256": "daf48e32318af4b07cc732b42ab8fe81e52862da3d251146acac45efd514f119"
+    },
+    {
+      "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+      "cid_binding_status": "bytes-verified",
+      "cid_v1_raw": "bafkreib6qxn6qn5uyzjvwmx4ngx6zjyuhe3nmou75ufuppaqdjfkr7zwym",
+      "distribution_count": 84,
+      "native_build_status": "not-required-by-profile",
+      "path": "packaging/proof_context/locks/cpython312-linux-aarch64/verification.txt",
+      "profile": "verification",
+      "qualification": "supported hash-bound dependency resolution; clean installation is not qualified because the selected varint and python-baseconv artifacts are sdists whose builds are outside PCCE-053",
+      "raw_pip_report_sha256": "373ef622d11aaab50d709a09549c7381dc53d02ff249a6297a6bd227e0e1e05e",
+      "resolution_status": "supported-hash-bound",
+      "resolver_receipt_cid_binding_status": "bytes-verified",
+      "resolver_receipt_cid_v1_raw": "bafkreian3rscpjqt3xizr7zjstyw2t2dgsontw5xocbo5o7w3tiarprvsu",
+      "resolver_receipt_path": "packaging/proof_context/locks/cpython312-linux-aarch64/verification.resolver.json",
+      "resolver_receipt_sha256": "0ddc6427a613ddd198ff2994f16d4f43349cd9dbb77082eebbf6dcd008be3595",
+      "selected_source_distributions": [
+        "python-baseconv-1.2.2.tar.gz",
+        "varint-1.0.2.tar.gz"
+      ],
+      "sha256": "3e85dbe837b4c6535b32fc69afeca7143936d63a9fed0b47bc101a4aa8ff36c3"
+    },
+    {
+      "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+      "cid_binding_status": "bytes-verified",
+      "cid_v1_raw": "bafkreic7svzbzc27k7mhjabych7z3lmpbnd2ibwgqtvnewyapbxl6wdc5q",
+      "distribution_count": 80,
+      "native_build_status": "not-required-by-profile",
+      "path": "packaging/proof_context/locks/cpython312-linux-aarch64/codex.txt",
+      "profile": "codex",
+      "qualification": "supported hash-bound dependency resolution; clean installation is not qualified because the selected varint and python-baseconv artifacts are sdists whose builds are outside PCCE-053; Codex executable availability remains unclaimed",
+      "raw_pip_report_sha256": "5284ff20af91e4846cf74c91194d4016c78ddf3882b81da164c83cde5a2f0e8d",
+      "resolution_status": "supported-hash-bound",
+      "resolver_receipt_cid_binding_status": "bytes-verified",
+      "resolver_receipt_cid_v1_raw": "bafkreihe4w5ess2bocjeqetijq7ryhtsa4i25dljjpmwir77qz2rsdrhvq",
+      "resolver_receipt_path": "packaging/proof_context/locks/cpython312-linux-aarch64/codex.resolver.json",
+      "resolver_receipt_sha256": "e4e5ba494b4170924812684c3f1c1e720711ae8d694bd96447ff8675190e27ac",
+      "selected_source_distributions": [
+        "python-baseconv-1.2.2.tar.gz",
+        "varint-1.0.2.tar.gz"
+      ],
+      "sha256": "5f95721c8b5f57d874803811ff9dad8f0b47a406c684ead25b00786ebf5862ec"
+    },
+    {
+      "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+      "cid_binding_status": "bytes-verified",
+      "cid_v1_raw": "bafkreibteb4yclidi7l2vxujnzmqcgitzo3vi2a6h424ftt46mqmwqnjaq",
+      "distribution_count": 99,
+      "native_build_status": "no-go-native-sdist-only",
+      "path": "packaging/proof_context/locks/cpython312-linux-aarch64/local-model.txt",
+      "profile": "local-model",
+      "qualification": "supported hash-bound dependency resolution; clean installation is not qualified because selected sdists require builds outside PCCE-053, including the native llama-cpp-python build",
+      "raw_pip_report_sha256": "139b030d93cf1473a67fe964ef8aebca07309c5cb0c8a48d2eef70a737d39fae",
+      "resolution_status": "supported-hash-bound",
+      "resolver_receipt_cid_binding_status": "bytes-verified",
+      "resolver_receipt_cid_v1_raw": "bafkreiciixgsb76atlkk7ksjfdqeum6oyn44bo3j5b625357q5a345eypu",
+      "resolver_receipt_path": "packaging/proof_context/locks/cpython312-linux-aarch64/local-model.resolver.json",
+      "resolver_receipt_sha256": "4845cd20ffc09ad4afaa4928e04a33cec379c0bb69e87daeefbf8741be74987d",
+      "selected_source_distributions": [
+        "llama_cpp_python-0.3.35.tar.gz",
+        "python-baseconv-1.2.2.tar.gz",
+        "varint-1.0.2.tar.gz"
+      ],
+      "sha256": "332079812d0347d7aade896e59011913cbb754681e3f35c2ce7cf320cb41a904"
+    },
+    {
+      "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+      "cid_binding_status": "bytes-verified",
+      "cid_v1_raw": "bafkreieheco3mympr6jronjogwvhthxoijr3xqhbn25rabhhx7jdqiugda",
+      "distribution_count": 107,
+      "native_build_status": "no-go-native-sdist-only",
+      "path": "packaging/proof_context/locks/cpython312-linux-aarch64/evaluation.txt",
+      "profile": "evaluation",
+      "qualification": "supported hash-bound dependency resolution; clean installation is not qualified because selected sdists require builds outside PCCE-053, including the native llama-cpp-python build",
+      "raw_pip_report_sha256": "6ca7c6abec1d63ff02beba1fedef3adc9963e1549179ca61535239f862dde810",
+      "resolution_status": "supported-hash-bound",
+      "resolver_receipt_cid_binding_status": "bytes-verified",
+      "resolver_receipt_cid_v1_raw": "bafkreidzm5pyzg2rk2faenea4ph2bdafo4rhhoho3pfwwyidg4ccil5mv4",
+      "resolver_receipt_path": "packaging/proof_context/locks/cpython312-linux-aarch64/evaluation.resolver.json",
+      "resolver_receipt_sha256": "79675f8c9b51568a023480e3cfa08c05772273b8eedbcb6b61033704242facaf",
+      "selected_source_distributions": [
+        "llama_cpp_python-0.3.35.tar.gz",
+        "python-baseconv-1.2.2.tar.gz",
+        "varint-1.0.2.tar.gz"
+      ],
+      "sha256": "87209db6618f8f9317352e35aa799eee4263bbc0e16ebb1004e7bfd238228618"
+    }
+  ],
+  "requirement_source_risk": {
+    "policy": {
+      "disposition": "record-inactive-and-fail-closed-if-unexpected-or-selected",
+      "expected_inactive_declarations": [
+        {
+          "declaration": "ipld-unixfs @ git+https://github.com/storacha/py-ipld-unixfs.git ; extra == \"ipld-github\"",
+          "declared_by": "ipfs-kit-py",
+          "required_extra": "ipld-github",
+          "target_distribution": "ipld-unixfs"
+        },
+        {
+          "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"full\"",
+          "declared_by": "ipfs-kit-py",
+          "required_extra": "full",
+          "target_distribution": "libp2p"
+        },
+        {
+          "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"libp2p\"",
+          "declared_by": "ipfs-kit-py",
+          "required_extra": "libp2p",
+          "target_distribution": "libp2p"
+        }
+      ],
+      "selected_archive_origin_allowlist": [
+        "local-admitted-artifact",
+        "https://pypi.org/simple"
+      ],
+      "selected_unsafe_requirement_classes": [
+        "mutable-vcs",
+        "unadmitted-direct-url",
+        "editable",
+        "local-path"
+      ]
+    },
+    "policy_status": "passed",
+    "profiles": {
+      "codex": {
+        "inactive_mutable_vcs_core_metadata": [
+          {
+            "declaration": "ipld-unixfs @ git+https://github.com/storacha/py-ipld-unixfs.git ; extra == \"ipld-github\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "ipld-github",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "ipld-unixfs",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"full\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "full",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"libp2p\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "libp2p",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          }
+        ],
+        "selected_archive_origin_counts": {
+          "https://pypi.org/simple": 76,
+          "local-admitted-artifact": 4
+        },
+        "selected_archive_origin_policy": "exact local admitted archive or credential-free files.pythonhosted.org URL with SHA-256",
+        "selected_unsafe_requirements_by_class": {
+          "editable": [],
+          "local-path": [],
+          "mutable-vcs": [],
+          "unadmitted-direct-url": []
+        },
+        "selected_unsafe_vcs_direct_editable_path_requirements": []
+      },
+      "core": {
+        "inactive_mutable_vcs_core_metadata": [
+          {
+            "declaration": "ipld-unixfs @ git+https://github.com/storacha/py-ipld-unixfs.git ; extra == \"ipld-github\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "ipld-github",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "ipld-unixfs",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"full\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "full",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"libp2p\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "libp2p",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          }
+        ],
+        "selected_archive_origin_counts": {
+          "https://pypi.org/simple": 76,
+          "local-admitted-artifact": 4
+        },
+        "selected_archive_origin_policy": "exact local admitted archive or credential-free files.pythonhosted.org URL with SHA-256",
+        "selected_unsafe_requirements_by_class": {
+          "editable": [],
+          "local-path": [],
+          "mutable-vcs": [],
+          "unadmitted-direct-url": []
+        },
+        "selected_unsafe_vcs_direct_editable_path_requirements": []
+      },
+      "evaluation": {
+        "inactive_mutable_vcs_core_metadata": [
+          {
+            "declaration": "ipld-unixfs @ git+https://github.com/storacha/py-ipld-unixfs.git ; extra == \"ipld-github\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "ipld-github",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "ipld-unixfs",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"full\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "full",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"libp2p\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "libp2p",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          }
+        ],
+        "selected_archive_origin_counts": {
+          "https://pypi.org/simple": 103,
+          "local-admitted-artifact": 4
+        },
+        "selected_archive_origin_policy": "exact local admitted archive or credential-free files.pythonhosted.org URL with SHA-256",
+        "selected_unsafe_requirements_by_class": {
+          "editable": [],
+          "local-path": [],
+          "mutable-vcs": [],
+          "unadmitted-direct-url": []
+        },
+        "selected_unsafe_vcs_direct_editable_path_requirements": []
+      },
+      "local-model": {
+        "inactive_mutable_vcs_core_metadata": [
+          {
+            "declaration": "ipld-unixfs @ git+https://github.com/storacha/py-ipld-unixfs.git ; extra == \"ipld-github\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "ipld-github",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "ipld-unixfs",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"full\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "full",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"libp2p\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "libp2p",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          }
+        ],
+        "selected_archive_origin_counts": {
+          "https://pypi.org/simple": 95,
+          "local-admitted-artifact": 4
+        },
+        "selected_archive_origin_policy": "exact local admitted archive or credential-free files.pythonhosted.org URL with SHA-256",
+        "selected_unsafe_requirements_by_class": {
+          "editable": [],
+          "local-path": [],
+          "mutable-vcs": [],
+          "unadmitted-direct-url": []
+        },
+        "selected_unsafe_vcs_direct_editable_path_requirements": []
+      },
+      "verification": {
+        "inactive_mutable_vcs_core_metadata": [
+          {
+            "declaration": "ipld-unixfs @ git+https://github.com/storacha/py-ipld-unixfs.git ; extra == \"ipld-github\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "ipld-github",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "ipld-unixfs",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"full\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "full",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          },
+          {
+            "declaration": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@main ; extra == \"libp2p\"",
+            "declared_by": "ipfs-kit-py",
+            "declaring_distribution_requested_extras": [],
+            "required_extra": "libp2p",
+            "required_extra_requested": false,
+            "selection_status": "inactive-unrequested-extra-target-absent",
+            "target_distribution": "libp2p",
+            "target_distribution_selected": false
+          }
+        ],
+        "selected_archive_origin_counts": {
+          "https://pypi.org/simple": 80,
+          "local-admitted-artifact": 4
+        },
+        "selected_archive_origin_policy": "exact local admitted archive or credential-free files.pythonhosted.org URL with SHA-256",
+        "selected_unsafe_requirements_by_class": {
+          "editable": [],
+          "local-path": [],
+          "mutable-vcs": [],
+          "unadmitted-direct-url": []
+        },
+        "selected_unsafe_vcs_direct_editable_path_requirements": []
+      }
+    }
+  },
+  "resolution_basis": "Fresh pip metadata resolution with exact admitted wheels for all four direct packages; every direct lock entry also binds its admitted sdist hash.",
+  "resolution_status": "supported-hash-bound",
+  "resolver": {
+    "command": [
+      "/usr/bin/python3.12",
+      "-m",
+      "pip",
+      "install",
+      "--dry-run",
+      "--ignore-installed",
+      "--no-cache-dir",
+      "--index-url",
+      "https://pypi.org/simple",
+      "--find-links",
+      "<admitted-artifact-dir>",
+      "--report",
+      "<profile>.json",
+      "<explicit-admitted-accelerator-wheel-with-profile-extra>",
+      "<explicit-admitted-datasets-wheel>",
+      "<explicit-admitted-kit-wheel>",
+      "<explicit-admitted-mcp-contracts-wheel>"
+    ],
+    "observed_environment": {
+      "implementation_name": "cpython",
+      "platform_machine": "aarch64",
+      "platform_system": "Linux",
+      "python_full_version": "3.12.3"
+    },
+    "pip_version": "24.0",
+    "resolution_date_utc": "2026-08-24",
+    "resolution_mode": "fresh, ignore-installed, no-cache, dry-run report",
+    "trusted_hosts": []
+  },
+  "schema": "lift_coding.proof-carrying-context-engine.dependency-locks@1",
+  "supported_environment": {
+    "architecture": "aarch64",
+    "implementation": "CPython",
+    "operating_system": "Linux",
+    "python": "3.12"
+  }
+}
