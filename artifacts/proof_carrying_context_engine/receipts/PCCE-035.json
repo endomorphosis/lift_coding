@@ -1,0 +1,49 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-035",
+  "objective_id": "PCCE-G300",
+  "status": "completed",
+  "completion_mode": "supervised-adapter-integration-gate",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-035:closed-adapter-registry-conformance",
+  "content_id": "sha256:7c7a066cec2a895dbd7a2201eb6e00b63b66c87b79c6e85cd00a7b1fef298bf9",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "evidence": {
+    "registry_descriptor_cid": "bafkreib7ptcienaglqv4kysirna4mqeo6fg2du3ojsznjvbpgeurxoyrji",
+    "adapter_contract_cid": "bafkreicsv53vledf4kldlhmpj343knvgznwkmamnezf3ix6p7tznwdnp2y",
+    "registered_names": [
+      "codex",
+      "command",
+      "replay",
+      "external-patch"
+    ],
+    "registry_policy": {
+      "closed_configuration": true,
+      "dynamic_arbitrary_import": false,
+      "implicit_credential_discovery": false,
+      "default_shell_execution": false,
+      "adapter_approval_authority": false,
+      "adapter_canonical_branch_authority": false,
+      "lifecycle_is_sole_acceptance_authority": true
+    },
+    "shared_conformance": {
+      "identity": true,
+      "scope": true,
+      "cancellation": true,
+      "provenance": true,
+      "output_bounds": true,
+      "negative_authority_tests": true
+    },
+    "optional_live_codex": {
+      "attempted": false,
+      "status": "unavailable",
+      "reason": "no explicit live permit or installed supported mechanism"
+    },
+    "validation": {
+      "command": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_conformance.py",
+      "result": "12 passed",
+      "broader_adapter_suite": "87 passed"
+    },
+    "conformance_artifact": "artifacts/proof_carrying_context_engine/adapters/conformance.json"
+  },
+  "rollback": "Revert the registry exports, registry implementation, conformance test, and conformance artifact. Concrete adapters remain installed but unreachable through the v0.1 registry until a newly validated closed registry replaces it."
+}

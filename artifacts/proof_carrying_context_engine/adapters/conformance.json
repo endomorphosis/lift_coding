@@ -1,0 +1,53 @@
+{
+  "schema": "ipfs-accelerate.proof-context.v0.1/adapter-conformance@1",
+  "task_id": "PCCE-035",
+  "objective_id": "PCCE-G300",
+  "registry": {
+    "schema": "ipfs-accelerate.proof-context.v0.1/adapter-registry@1",
+    "descriptor_cid": "bafkreib7ptcienaglqv4kysirna4mqeo6fg2du3ojsznjvbpgeurxoyrji",
+    "names": [
+      "codex",
+      "command",
+      "replay",
+      "external-patch"
+    ],
+    "closed_configuration": true,
+    "dynamic_imports": false,
+    "implicit_credential_discovery": false,
+    "default_shell_execution": false
+  },
+  "shared_contract": {
+    "adapter_contract_cid": "bafkreicsv53vledf4kldlhmpj343knvgznwkmamnezf3ix6p7tznwdnp2y",
+    "identity_preservation": true,
+    "scope_constrained": true,
+    "cancellation_honored": true,
+    "patch_bytes_bounded": true,
+    "log_bytes_bounded": true,
+    "adapter_approval_authority": false,
+    "canonical_branch_authority": false,
+    "lifecycle_is_sole_acceptance_authority": true
+  },
+  "provenance": {
+    "codex_recorded_transport": "replayed",
+    "command": "live",
+    "replay": "replayed",
+    "external_patch": "live-with-explicit-external-admission-record",
+    "live_codex_probe": {
+      "status": "unavailable",
+      "attempted": false,
+      "reason": "no explicit live permit or installed supported mechanism"
+    }
+  },
+  "negative_cases": [
+    "unknown registry name or option",
+    "missing required explicit command, replay, or external-patch configuration",
+    "pre-cancelled invocation",
+    "scope escape",
+    "adapter self-approval or lifecycle bypass configuration"
+  ],
+  "validation": {
+    "command": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_conformance.py",
+    "result": "12 passed",
+    "broader_adapter_suite": "87 passed"
+  }
+}
