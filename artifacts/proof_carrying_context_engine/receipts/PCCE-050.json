@@ -1,0 +1,50 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-050",
+  "objective_id": "PCCE-G500",
+  "status": "completed",
+  "completion_mode": "supervised-packaging-implementation",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-050:datasets-proof-context-package",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "evidence": {
+    "reproducibility": {
+      "source_date_epoch": "0",
+      "build_count": 2,
+      "byte_identical": true
+    },
+    "artifacts": {
+      "wheel": {
+        "filename": "ipfs_datasets_py-0.2.0-cp312-cp312-linux_aarch64.whl",
+        "sha256": "7cd7898808ac5d5db3d587c0f25a4e520858eeb00b6dbe9534cec198aebf5d38",
+        "contents_manifest_sha256": "0672352553b7d0e8b3a9c80d7211c47014628f1be8099ff913e21266566bc342",
+        "member_count": 3947,
+        "record_sha256": "1194dc66e21383375a6f770655050faee1908229064516b334615806c0432b01"
+      },
+      "sdist": {
+        "filename": "ipfs_datasets_py-0.2.0.tar.gz",
+        "sha256": "f118b2ccd2b8a7f7262a95981ae05d8432d26b4c4bf3a29338e073c60786b26f",
+        "contents_manifest_sha256": "cfff27459f3cf64c4ed0ddeea781580c30c367c1c349d07d25f4cf33ff0d1b67",
+        "member_count": 4524
+      }
+    },
+    "public_surface": "ipfs_datasets_py.proof_context",
+    "proof_context_version": "0.1",
+    "build_environment": {
+      "python": "3.12.3",
+      "build": "1.5.0",
+      "setuptools": "82.0.1",
+      "wheel": "0.42.0"
+    },
+    "properties": [
+      "clean-wheel import without the source tree",
+      "no import-time network or installer effects",
+      "canonical extras preserved",
+      "wheel and sdist reproducible at the fixed epoch"
+    ],
+    "validation": [
+      "python -m pytest -q external/ipfs_datasets/tests/proof_context/test_install_profile.py",
+      "python -m build external/ipfs_datasets"
+    ]
+  },
+  "rollback": "Revert only the datasets proof-context export, package metadata, install-profile test, and this receipt; discard unpromoted build artifacts."
+}
