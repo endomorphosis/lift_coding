@@ -1,0 +1,22 @@
+{
+  "admitted_at": "2026-08-24T00:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-041:execution-cli",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-cli-implementation",
+  "content_id": "sha256:pcce041registryboundrunverifypatchidentityresumeidentity",
+  "evidence": {
+    "commands": ["run", "verify", "resume"],
+    "registry_only_adapters": ["codex", "command", "replay", "external-patch"],
+    "run_requires_explicit_adapter_and_task": true,
+    "verify_identity": ["repository_state_cid", "task_id", "run_id", "patch_id", "trace_id"],
+    "resume_idempotent_by_run_id": true,
+    "terminal_status_exit_mapping": "ipfs_accelerate_py.proof_context.cli.app.exit_code_for",
+    "cancellation_and_timeout_propagate": true,
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_execution_commands.py"
+  },
+  "objective_id": "PCCE-G400",
+  "rollback": "Revert the execution CLI layer; retain lifecycle attempt and partial-effect evidence.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-041"
+}
