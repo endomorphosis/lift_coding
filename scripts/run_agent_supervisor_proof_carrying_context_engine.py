@@ -2267,17 +2267,29 @@ def _owner_python_env(config_path: Path | None = None) -> dict[str, str]:
     )
     env["PYTHONUNBUFFERED"] = "1"
     if config_path is not None:
+        board, _config = _load_config(config_path)
+        paths = _runtime_paths(board)
+        program = board.resolved_database_program()
+        token_path = _token_path(paths["owner"], program.endpoint_secret_handle)
         try:
-            board, _config = _load_config(config_path)
-            paths = _runtime_paths(board)
-            program = board.resolved_database_program()
-            token_path = _token_path(paths["owner"], program.endpoint_secret_handle)
             token = _read_owner_token(token_path)
-        except OperatorError:
-            pass
-        else:
-            env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = token
-            env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN_FILE"] = str(token_path)
+        except FileNotFoundError as exc:
+            # A graceful Quack stop destroys its generation-local token file
+            # before this detached watch launches the replacement owner.  The
+            # watch itself inherited that exact credential at launch, so it is
+            # the only safe bridge across the short vault-absent interval.  The
+            # replacement child mints/persists its new generation token during
+            # ``server.start()``.  Never fall back around a present but unsafe
+            # or malformed vault: _read_owner_token must fail closed there.
+            token = str(
+                env.get("IPFS_ACCELERATE_AGENT_QUACK_TOKEN") or ""
+            ).strip()
+            if not re.fullmatch(r"[A-Za-z0-9_-]{8,}", token):
+                raise OperatorError(
+                    "Quack owner credential is unavailable after vault removal"
+                ) from exc
+        env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = token
+        env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN_FILE"] = str(token_path)
     return env
 
 
