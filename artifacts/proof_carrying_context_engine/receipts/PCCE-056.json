@@ -1,0 +1,55 @@
+{
+  "artifact_identity": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of qualification.json",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-acceptance-gate-explicit-no-go",
+  "evidence": {
+    "blocking_finding_codes": [
+      "required-artifact-bytes-unavailable",
+      "supported-clean-install-profiles-unqualified",
+      "container-profiles-unqualified"
+    ],
+    "decision": "NO-GO",
+    "nested_source": {
+      "implementation_commit": "78af7999a8190256798a78b4aa51a9ad9c1f0e58",
+      "repository": "external/ipfs_accelerate",
+      "repository_tree": "9d0b786ac7f60db0dd787b5df813fd2d50f8d04f",
+      "test_blob": "197d3fe30666dc76ab83400c37d60d6d63291312"
+    },
+    "predecessor_receipt_cids": {
+      "PCCE-045": "bafkreidebkiezkedp5m5tc2764mrlxiudpiuhp4nkljzdk6u6x7c3svopm",
+      "PCCE-050": "bafkreicat7ukr7o6p6p4itt7dwc7wx46dza2c3k54qdnmkgqupgooxcdva",
+      "PCCE-051": "bafkreigzcztz54s2axdblp3xkkfbohyjndj5nmh2ov5sblbiwnybm3xvwm",
+      "PCCE-052": "bafkreibiactqlg5xkrafdv2cicdoq64exmnzobcbgnsixfy4reiigqhxfe",
+      "PCCE-053": "bafkreid5swewwjlckfsqeuhapznwe2mnunew43nkr2ehj5yvuloyfnayde",
+      "PCCE-054": "bafkreia4kruymhy2sctqprbfzpv7v4ufviwksnccipd2ofczc7fk5cy2te",
+      "PCCE-055": "bafkreifeteoztqahk53hfk6edqpqr3zhzkd4bv4ppsgyeb7e3ve7syzjvu",
+      "PCCE-057": "bafkreifumobpecgma2vybkwo2tc2mpwmol4y3sr6wo6qu5kel3wyldhnwe"
+    },
+    "qualification": {
+      "cid_v1_raw": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+      "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+      "schema": "lift_coding.proof-carrying-context-engine.installability-qualification@1",
+      "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+      "size": 37516
+    },
+    "release_qualified": false,
+    "task_authority": {
+      "dependency_task_cids": [
+        "baguqeera2d56ardt4hdce4b4bgmbkwkhf4nyjbeonf2famwf6hr7ydgivsya",
+        "baguqeera2fvluv2phd4wttmcq62o7ya5dijdoe25dwl2elgipdacyg5w7lqq"
+      ],
+      "revision": 1,
+      "task_cid": "baguqeerawocxhxqnvpqggoyuwaclxboph2jta457ri2z3dcnhwt3ufzpdwzq"
+    },
+    "validation": [
+      "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_installability_gate.py external/ipfs_accelerate/test/proof_context/test_example_repository.py"
+    ],
+    "waivers": []
+  },
+  "objective_id": "PCCE-G500",
+  "rollback": "Publish the retained NO-GO, block benchmark/security release claims, and reopen only PCCE-051/PCCE-053/PCCE-054 as appropriate; do not repair predecessor evidence from the gate worktree.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-056"
+}
