@@ -1,0 +1,37 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-050",
+  "status": "completed",
+  "objective_id": "PCCE-G500",
+  "completion_mode": "supervised-packaging",
+  "admitted_at": "2026-08-24T00:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-050:datasets-proof-context-package",
+  "artifacts": {
+    "wheel": {
+      "filename": "ipfs_datasets_py-0.2.0-cp312-cp312-linux_aarch64.whl",
+      "sha256": "sha256:633a4b5a0615b400b85603b5105de10ed71aa76f951ebfb26162a3f0459bb020"
+    },
+    "sdist": {
+      "filename": "ipfs_datasets_py-0.2.0.tar.gz",
+      "sha256": "sha256:58438a58c8ab140eb48479f691b4a1ee63ee002401fc92d674a854f34942472c"
+    }
+  },
+  "evidence": {
+    "core_dependencies": [],
+    "provider_export": "ipfs_datasets_py.proof_context:get_provider",
+    "provider_metadata": {
+      "schema": "ipfs-datasets.proof-context.v0.1",
+      "interface": "DatasetsProofContextProvider@0.1",
+      "producer": "endomorphosis/ipfs_datasets_py"
+    },
+    "clean_install": "Wheel installed with pip --no-deps in a fresh virtual environment and imported with source tree absent.",
+    "hermetic_import": "The proof-context import uses only installed package files and does not resolve optional capabilities until explicitly requested.",
+    "metadata_policy": "Core metadata contains no sibling file URLs, VCS URLs, mutable branches, or heavy optional dependencies; established extras remain declared."
+  },
+  "validation": [
+    "python -m pytest -q external/ipfs_datasets/tests/proof_context/test_install_profile.py",
+    "python -m build external/ipfs_datasets"
+  ],
+  "rollback": "Revert only datasets package metadata, proof-context exports, install-profile test, and this receipt; withdraw unpromoted package artifacts.",
+  "board_namespace": "proof-carrying-context-engine-v0.1"
+}
