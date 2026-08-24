@@ -1,0 +1,18 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-045",
+  "objective_id": "PCCE-G500",
+  "status": "completed",
+  "completion_mode": "supervised-qualification-harness-implementation",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-045:bounded-self-hosting-harness",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "evidence": {
+    "surface": "ipfs_accelerate_py.agent_supervisor.self_hosting.SelfHostingQualificationHarness",
+    "runtime_boundary": "ipfs_accelerate_py.proof_context.open_runtime(...).engine.run(...)",
+    "evidence_schema": "ipfs-accelerate.self-hosting.v0.1/evidence",
+    "provenance_classes": ["live", "replayed", "simulated"],
+    "authority": {"qualification": false, "canonical_branch_mutation": false, "self_approval": false},
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/api/self_hosting"
+  },
+  "rollback": "Revert only the self-hosting harness, runner, fixtures, focused tests, and this receipt; retain already emitted failed observations and discard disposable worktrees."
+}
