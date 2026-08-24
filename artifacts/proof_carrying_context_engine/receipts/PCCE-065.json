@@ -122,7 +122,8 @@
       "subjects": {
         "hardening_commit": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
         "implementation_commit": "976a95f6bca52dc0b2d1dd341ac58313ae526fcb",
-        "nested_tree": "d616f91350f4e34675d61fa010bc7aa7b8ad9bba",
+        "nested_tree": "a9f612fa4985b84e3f96d765a63af7c269b74b31",
+        "portability_commit": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
         "outer_base_commit": "6333f5bc790c74e3e6f629b3a7d88cc269d55cdf"
       },
       "verification": {
@@ -154,27 +155,27 @@
           "size": 68062
         },
         "test/proof_context/benchmarks/test_configurations_cd.py": {
-          "blob": "739bb56a0e6d0e73b62f1e26e381ec4c6b4cb411",
+          "blob": "a17e131d12b7cff35e6088a10f1ff723a76767b8",
           "mode": "100644",
-          "raw_cid_v1": "bafkreigv27vh6jxcfxxa6hyqazwwysfuenvi24ak53l4c4yrfxsgnljzgi",
-          "sha256": "d5d7ea7f26e22dee0f1f10066d6c48b4236a8d700aeed7c173112de466ad3932",
-          "size": 42970
+          "raw_cid_v1": "bafkreifzgu43hv747zm7urjabavlon6mrgzse72uw7lpf6ikrxe3jp6l64",
+          "sha256": "b93539b3d7fcfe59fa4520082ab737cc89b3227f54b7d6f2f90a8dc9b4bfcbf7",
+          "size": 43032
         }
       },
-      "implementation_commit": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
-      "implementation_parent": "976a95f6bca52dc0b2d1dd341ac58313ae526fcb",
+      "implementation_commit": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
+      "implementation_parent": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
       "repository": "external/ipfs_accelerate",
-      "repository_tree": "d616f91350f4e34675d61fa010bc7aa7b8ad9bba"
+      "repository_tree": "a9f612fa4985b84e3f96d765a63af7c269b74b31"
     },
     "outer_source": {
       "accelerator_base_gitlink": "b0c44f7a2a85cf26e97c0e976ab0029db694be7b",
-      "accelerator_candidate_gitlink": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
+      "accelerator_candidate_gitlink": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
       "base_commit": "6333f5bc790c74e3e6f629b3a7d88cc269d55cdf",
       "base_tree": "55176e00632b8f56d9e88f9dd2560382d4fafc99",
       "branch": "implementation/PCCE-065-outer-20260824",
       "candidate_gitlinks": {
         "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
-        "external/ipfs_accelerate": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
+        "external/ipfs_accelerate": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
         "external/ipfs_datasets": "777f2dc8861bb756141302e014b202a21d363f76",
         "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
       },
@@ -228,6 +229,7 @@
       "reason": "implementation and injected validation do not constitute live benchmark execution or product/provider qualification"
     },
     "review_corrections": {
+      "declared_validation_portability_commit": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
       "initial_candidate_accepted": false,
       "issues_corrected_before_approval": [
         "successful D previously admitted a terminal disposition with neither autonomous nor human acceptance authority",
