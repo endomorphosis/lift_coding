@@ -1,0 +1,153 @@
+{
+  "artifact_identity": "bafkreicqlvr2orogy3xemnyse4x5lkjs6t2w3wsrzd4w4utb4fvmsmif74",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of canonical threat_model.json bytes",
+  "authority": {
+    "candidate_only": true,
+    "duckdb_or_quack_mutated": false,
+    "requires_supervisor_reconciliation": true
+  },
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-threat-analysis-security-unqualified-candidate",
+  "evidence": {
+    "acceptance_disposition": {
+      "all_required_threats_present": true,
+      "all_threats_have_preventive_detective_recovery_mappings": true,
+      "all_threats_map_to_scheduled_acceptance_test_paths": true,
+      "critical_or_high_open_risk_result": "NO-GO",
+      "missing_or_unavailable_evidence_result": "NO-GO",
+      "planned_control_qualification_credit": false,
+      "security_qualified": false,
+      "status": "security_unqualified_no_go"
+    },
+    "deterministic_generation": {
+      "byte_identical": true,
+      "generators": [
+        "closed Markdown JSON extraction plus jq compact sorted-object projection",
+        "validator-owned RFC8785-admitted-subset canonical projection"
+      ],
+      "runs_compared": 2
+    },
+    "inventory": {
+      "actors": 10,
+      "assets": 8,
+      "controls": {
+        "observed_partial": 6,
+        "observed_tested_limited": 4,
+        "planned": 6,
+        "total": 16
+      },
+      "entry_points": 12,
+      "planned_task_mappings": 6,
+      "residual_risks": {
+        "critical": 9,
+        "high": 1,
+        "release_blocking": 10,
+        "total": 10
+      },
+      "threat_ids": [
+        "TH-001",
+        "TH-002",
+        "TH-003",
+        "TH-004",
+        "TH-005",
+        "TH-006",
+        "TH-007",
+        "TH-008",
+        "TH-009",
+        "TH-010",
+        "TH-011",
+        "TH-012",
+        "TH-013",
+        "TH-014"
+      ],
+      "threats": 14,
+      "trust_boundaries": 11
+    },
+    "nested_source": {
+      "base_commit": "78af7999a8190256798a78b4aa51a9ad9c1f0e58",
+      "base_tree": "9d0b786ac7f60db0dd787b5df813fd2d50f8d04f",
+      "document": {
+        "blob_sha1": "00a7d0a3fcde99131fcc121c3b14f1d568361d14",
+        "cid_v1_raw": "bafkreidcmazgw3ldd35urg4y7wj7c5x7tthk7q5jd4r72wdzqevavm6uha",
+        "path": "external/ipfs_accelerate/docs/security/proof-context-v0.1-threat-model.md",
+        "sha256": "6260326b6d631efb489b98fd93f176ff9cceafc3a91f23fd5879812a0ab3d438",
+        "size": 104307
+      },
+      "implementation_commit": "020284642f438dd35e6bc2d6ff41cdeb8b47bbd0",
+      "implementation_tree": "8e4ee1eba33561185e40e3c7353f173588a7685a",
+      "repository": "external/ipfs_accelerate",
+      "validator": {
+        "blob_sha1": "a44f237b50937b77a34cda423fda512b114ccb4f",
+        "cid_v1_raw": "bafkreiaox3emloyiz2ydanbgj2vkdsityme63xvszbojacbb6c7ftavxri",
+        "path": "external/ipfs_accelerate/test/proof_context/security/test_threat_model.py",
+        "sha256": "0ebec8c5bb08ceb03034264eaaa1c913c309eddeb2c85c900821f0be5982b78a",
+        "size": 35465
+      }
+    },
+    "outer_composition": {
+      "base_commit": "bc702978a91cb77099e534fb18c0c689caa83000",
+      "base_tree": "927411368c04347d6bedc49246adfb1425546add",
+      "allowed_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-070.json",
+        "artifacts/proof_carrying_context_engine/security/threat_model.json",
+        "external/ipfs_accelerate"
+      ]
+    },
+    "predecessor": {
+      "artifact_identity": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+      "receipt_cid_v1_raw": "bafkreibiwxtmdtr2wiq5xbez2njp5t5qwsvli2ijwwneyqtlh7iql26wlm",
+      "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+      "receipt_sha256": "28b5e6c1ce3ab221db8499d352fecfb0b4aab46909b59a4c426b3fd105ebd65b",
+      "receipt_size": 2805,
+      "status": "completed",
+      "task_id": "PCCE-056"
+    },
+    "prohibited_effects": {
+      "adversarial_payloads_executed": false,
+      "canonical_branch_mutated": false,
+      "artifact_generation_or_validation_network_required": false,
+      "provider_dispatched": false,
+      "real_secrets_recorded": false,
+      "runtime_repaired": false,
+      "supervisor_state_mutated": false
+    },
+    "review": {
+      "implementation_identity": "ipfs_accelerate_py-agent-supervisor/PCCE-070-implementation",
+      "independent_reviewer_identity": "root/Codex independent security review",
+      "nested_register_status_context": "The authored register remains pending_outer_integration; this outer receipt records the subsequent independent approval.",
+      "reviewed_nested_commit": "020284642f438dd35e6bc2d6ff41cdeb8b47bbd0",
+      "status": "approved",
+      "validation": "20 passed, 0 skipped; Ruff check and format check passed",
+      "verdict": "APPROVE"
+    },
+    "task_authority": {
+      "canonical_task_cid": "baguqeeraqpg53rzd7a5b26jjzjbui67nnm5bj7jwt5hbqrmmyse5zhdrxt2q",
+      "canonical_task_key": "task/v1/83cdddc723f83a1d7929ca43447bed6b3a14fd369f4e18458cc489dc9c71bcf5",
+      "dependency_task_ids": [
+        "PCCE-056"
+      ],
+      "goal_id": "PCCE-G700"
+    },
+    "threat_model": {
+      "canonicalization": "RFC8785-admitted-subset; UTF-8; sorted object keys; stable arrays; no floats; no trailing newline",
+      "cid_v1_raw": "bafkreicqlvr2orogy3xemnyse4x5lkjs6t2w3wsrzd4w4utb4fvmsmif74",
+      "path": "artifacts/proof_carrying_context_engine/security/threat_model.json",
+      "schema": "pcce/proof-context/v0.1/threat-model@1",
+      "sha256": "505d63a745c6c6ee463712272fd5a932f4f56dda51c8f96e5261e16ac93105ff",
+      "size": 63920
+    },
+    "validation": [
+      "python -m pytest -q external/ipfs_accelerate/test/proof_context/security/test_threat_model.py",
+      "python -m json.tool artifacts/proof_carrying_context_engine/security/threat_model.json",
+      "ruff check external/ipfs_accelerate/test/proof_context/security/test_threat_model.py",
+      "ruff format --check external/ipfs_accelerate/test/proof_context/security/test_threat_model.py",
+      "python -m py_compile external/ipfs_accelerate/test/proof_context/security/test_threat_model.py",
+      "git diff --check"
+    ]
+  },
+  "objective_id": "PCCE-G700",
+  "rollback": "Supersede with a versioned threat model before security execution; after tests begin preserve this original model and issue an explicit delta, reverting only the nested document/test, accelerator gitlink, outer register, and this receipt.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-070"
+}
