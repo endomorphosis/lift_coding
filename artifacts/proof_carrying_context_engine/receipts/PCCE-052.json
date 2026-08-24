@@ -1,0 +1,168 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-052",
+  "objective_id": "PCCE-G500",
+  "status": "completed",
+  "completion_mode": "supervised-packaging-implementation",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-052:accelerator-runtime-profiles",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "evidence": {
+    "nested_source": {
+      "repository": "external/ipfs_accelerate",
+      "base_commit": "82ccf017df090f99bf90787d3726269cc12ac218",
+      "implementation_commit": "8b3b08ad3b9705b7981080e5414c6b3aecb06afe",
+      "repository_tree": "0062477b0af59c186fb0ec9954415b022ca81435",
+      "pyproject_blob": "a659f87fa4b514066b69cd614d844f38ca7bb342",
+      "setup_blob": "4004c583e24a2015e11c430e635358668dc81dd9",
+      "install_profile_test_blob": "4b26ea7059d2601b5799adee0d61b7c6ff5dd3a9"
+    },
+    "profiles": {
+      "core": [
+        "ipfs_datasets_py==0.2.0",
+        "ipfs_kit_py==0.3.0",
+        "mcp-plus-plus-contracts==0.1.0"
+      ],
+      "verification": [
+        "jsonschema>=4.22,<5"
+      ],
+      "codex": {
+        "dependencies": [],
+        "command_contract": "codex exec"
+      },
+      "local-model": {
+        "dependencies": [
+          "llama-cpp-python[server]>=0.3.10,<0.4",
+          "huggingface-hub>=0.24,<1"
+        ],
+        "inventory": "ipfs_accelerate_py.utils.llama_cpp",
+        "adapter": "ipfs_accelerate_py.proof_context.adapters.command:CommandAdapter",
+        "command_contract": "local-agent-json-argv@1"
+      },
+      "evaluation": [
+        "jsonschema>=4.22,<5",
+        "llama-cpp-python[server]>=0.3.10,<0.4",
+        "huggingface-hub>=0.24,<1",
+        "pytest>=8,<9"
+      ]
+    },
+    "console": {
+      "script": "proof-context",
+      "target": "ipfs_accelerate_py.proof_context.cli.__main__:main",
+      "clean_wheel_help_smoke": true
+    },
+    "evaluation_surface": {
+      "surface": "ipfs_accelerate_py.agent_supervisor.self_hosting:SelfHostingQualificationHarness",
+      "qualification_authority": false,
+      "canonical_branch_mutation_authority": false,
+      "self_approval_authority": false
+    },
+    "runtime_authority_widened": false,
+    "reproducibility": {
+      "source_date_epoch": "0",
+      "build_count": 2,
+      "byte_identical": true,
+      "warm_tree_modes_tested": true,
+      "warm_tree_file_mode": "0600",
+      "warm_tree_directory_mode": "0700",
+      "umask_077_tested": true
+    },
+    "contents_manifest_contract": {
+      "encoding": "UTF-8 JSON with sorted object keys and separators ',' and ':'",
+      "ordering": "archive members sorted by path",
+      "wheel_member_fields": [
+        "path",
+        "mode",
+        "size",
+        "sha256"
+      ],
+      "wheel_directory_members_included": false,
+      "sdist_member_fields": [
+        "path",
+        "type",
+        "mode",
+        "size",
+        "linkname",
+        "sha256 when regular file"
+      ],
+      "sdist_directory_members_included": true,
+      "digest": "sha256"
+    },
+    "artifacts": {
+      "wheel": {
+        "filename": "ipfs_accelerate_py-0.0.45-py3-none-any.whl",
+        "sha256": "ddc10e3e9f484639ce679c26542689df0e873f0a2214df632ff5a9da99c73c65",
+        "cid": "bafkreig5yehd5h2iiy444z44ezkcnco7b2dt6crcctpwgl7vvhnjtrz4mu",
+        "size": 17826043,
+        "member_count": 2718,
+        "contents_manifest_sha256": "cbecde5b23f8e624097f5c09696b167d7563db21367219231887b6140b513b98",
+        "record_sha256": "16fe3d7be3c9c9e70fddb864cdf5a9f145ae0a599c71af7ba387632d7656658e"
+      },
+      "sdist": {
+        "filename": "ipfs_accelerate_py-0.0.45.tar.gz",
+        "sha256": "7f3883460ec5b7980e3944acd0e67833c460837e8ab30647b12adc1fb465608d",
+        "cid": "bafkreid7hcbumdwfw6ma4okevtiom6btyrqig7ukwmdepmjk3qp3izlaru",
+        "size": 20579108,
+        "member_count": 4222,
+        "contents_manifest_sha256": "d59bb484780c9b439070ee1a35b2e0e7621db6562d0d66ea6dd810b98fd4e74b"
+      }
+    },
+    "build_environment": {
+      "python": "3.12.3",
+      "build": "1.5.0",
+      "setuptools": "82.0.1",
+      "wheel": "0.42.0"
+    },
+    "clean_environment_transcript": {
+      "installation": "wheel installed with --no-deps into a clean venv",
+      "source_tree_on_import_path": false,
+      "console_help": true,
+      "harness_import": true,
+      "optional_dependencies_absent": [
+        "jsonschema",
+        "llama_cpp",
+        "huggingface_hub",
+        "pytest"
+      ]
+    },
+    "clean_profile_resolution_transcripts": {
+      "method": "pip install --dry-run --ignore-installed --report from a clean venv with exact local core wheels",
+      "resolution_only": true,
+      "codex": {
+        "distribution_count": 42,
+        "report_sha256": "fb1f8c951f2c7d3aed353e1b0b68f297dddee0ef9db1724299dbb2a8c1654e7d"
+      },
+      "verification": {
+        "distribution_count": 46,
+        "selected": "jsonschema==4.26.0",
+        "report_sha256": "d2044c2742d575cf79f745850cb8addd2c8224c0d07c87feab365eb2c514f983"
+      },
+      "local-model": {
+        "distribution_count": 66,
+        "selected": [
+          "llama_cpp_python==0.3.35",
+          "huggingface_hub==0.36.2"
+        ],
+        "report_sha256": "1f626b6dc5800648d17224829ef2bc06abe9a60779cc07c30f6704144bb2379e"
+      },
+      "evaluation": {
+        "distribution_count": 74,
+        "selected": [
+          "jsonschema==4.26.0",
+          "llama_cpp_python==0.3.35",
+          "huggingface_hub==0.36.2",
+          "pytest==8.4.2"
+        ],
+        "report_sha256": "cd1a3ecb987d9dcaa04595b67f64df9f016badc1e752de39574e037d325587d0"
+      }
+    },
+    "validation": [
+      "PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/proof_context/test_install_profiles.py (4 passed)",
+      "PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_cli_end_to_end.py external/ipfs_accelerate/test/api/self_hosting (11 passed)",
+      "PYTHONPATH=external/ipfs_accelerate:/opt/ipfs-accelerate-validation-python-74c4a6ff/site-packages /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_database_coordination.py (55 passed)",
+      "ruff check external/ipfs_accelerate/setup.py external/ipfs_accelerate/test/proof_context/test_install_profiles.py",
+      "/usr/bin/python3.12 -m py_compile external/ipfs_accelerate/setup.py external/ipfs_accelerate/test/proof_context/test_install_profiles.py",
+      "SOURCE_DATE_EPOCH=0 /usr/bin/python3.12 -m build external/ipfs_accelerate (twice; second build with warm staging modes and umask 077)"
+    ]
+  },
+  "rollback": "Revert only the accelerator package metadata, deterministic build hooks, focused install-profile test, nested gitlink promotion, and this receipt; discard unpromoted build artifacts and profile-resolution reports."
+}
