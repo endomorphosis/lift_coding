@@ -49,6 +49,27 @@
       "size": 14327
     },
     "artifacts": {
+      "contents_manifest_contract": {
+        "encoding": "UTF-8 JSON with sorted object keys and separators ',' and ':'",
+        "ordering": "archive members sorted by path",
+        "wheel_member_fields": [
+          "path",
+          "size",
+          "sha256",
+          "mode"
+        ],
+        "wheel_directory_members_included": false,
+        "sdist_member_fields": [
+          "path",
+          "type",
+          "mode",
+          "size",
+          "linkname",
+          "sha256 when regular file"
+        ],
+        "sdist_directory_members_included": true,
+        "digest": "sha256"
+      },
       "wheel": {
         "filename": "mcp_plus_plus_contracts-0.1.0-py3-none-any.whl",
         "sha256": "d88cc9ba3562f0b592ddfe234810a596c42a4398e32d11e246ea5ebf831a8c9c",
