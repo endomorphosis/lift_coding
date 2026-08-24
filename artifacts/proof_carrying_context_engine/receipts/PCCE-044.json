@@ -1,0 +1,24 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-044",
+  "status": "completed",
+  "objective_id": "PCCE-G400",
+  "completion_mode": "supervised-integration-gate",
+  "admitted_at": "2026-08-24T00:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-044:complete-cli-module-entrypoint",
+  "command_manifest": {
+    "path": "artifacts/proof_carrying_context_engine/cli/command_manifest.json",
+    "cid": "bafkreiddkqzoeawm3b36qfl5thc3gx44rwvjvac2auzhkkkbfzesute75u",
+    "sha256": "sha256:635432e202ccd877e8157d99c5b35f9c8daa9a805a05327529412e492a4c9fed"
+  },
+  "evidence": {
+    "entrypoint": "python -m ipfs_accelerate_py.proof_context.cli",
+    "commands": ["init", "scan", "status", "plan", "run", "verify", "resume", "expand-context", "explain-impact", "assurance", "seal", "report"],
+    "renderers": ["json", "human", "human_patch_report"],
+    "qualified_flows": ["external-patch live success through isolated governance", "external-patch declared-path rejection", "replay fixture admission failure", "wrong evidence parent rejection", "cross-process resume by durable run identity"],
+    "clean_checkout_execution": "Commands execute with python -m from external/ipfs_accelerate without console-script packaging or provider credentials.",
+    "validation": ["python -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_cli_end_to_end.py", "python -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_state_commands.py external/ipfs_accelerate/test/proof_context/cli/test_execution_commands.py external/ipfs_accelerate/test/proof_context/cli/test_evidence_commands.py external/ipfs_accelerate/test/proof_context/cli/test_output.py", "python -m json.tool artifacts/proof_carrying_context_engine/cli/command_manifest.json"]
+  },
+  "rollback": "Revert only the module entrypoint, exports, documentation, manifest, receipt, and end-to-end test. Existing runtime command modules and immutable lower-level evidence remain retained.",
+  "board_namespace": "proof-carrying-context-engine-v0.1"
+}
