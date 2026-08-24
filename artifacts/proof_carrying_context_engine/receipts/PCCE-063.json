@@ -1,0 +1,240 @@
+{
+  "artifact_identity": "baguqeerad5kehgobu2qcmnu5lq5uttgctw366aj4padpxpnita2vdtasarfa",
+  "artifact_identity_kind": "software-contract structured CID of the frozen mature-Python shard manifest",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-corpus-materialization-with-explicit-historical-answer-missingness",
+  "evidence": {
+    "allowed_scope": {
+      "actual_nested_paths": [
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/LICENSE.django-5.2.5",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/dependencies/asgiref-3.8.1-py3-none-any.whl",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/dependencies/sqlparse-0.5.3-py3-none-any.whl",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/evaluator_manifest.json",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/shard_manifest.json",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/source/django-5.2.5-a3b1107.tar.gz",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/source_verification.json",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/visible_manifest.json",
+        "external/ipfs_datasets/tests/proof_context/benchmarks/test_mature_python_corpus.py"
+      ],
+      "actual_outer_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+        "external/ipfs_datasets"
+      ],
+      "board_allowed_paths": [
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python",
+        "external/ipfs_datasets/tests/proof_context/benchmarks/test_mature_python_corpus.py",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json"
+      ]
+    },
+    "baseline_full_test": {
+      "command": "python3.12 -P tests/runtests.py --parallel 4 --verbosity 1",
+      "first_observation": {
+        "discovered_tests": 18098,
+        "duration_milliseconds": 98182,
+        "errors": 0,
+        "expected_failures": 5,
+        "failures": 0,
+        "ran_tests": 18096,
+        "skipped": 1912
+      },
+      "independent_reproduction": {
+        "discovered_tests": 18098,
+        "duration_milliseconds": 102925,
+        "errors": 0,
+        "expected_failures": 5,
+        "failures": 0,
+        "ran_tests": 18096,
+        "skipped": 1912
+      },
+      "network_during_test": false,
+      "passed": true,
+      "source_edits": false
+    },
+    "historical_cutoff_and_missingness": {
+      "future_commits_or_pr_patches_accessed": false,
+      "historical_answer_materialized": false,
+      "historical_task_disposition": "unavailable-no-future-patch-access",
+      "hidden_evaluator_partition_provider_visible": false,
+      "live_execution_eligible": false,
+      "network_during_task_execution": false,
+      "reason": "the exact source and baseline are verified, but fabricating or obtaining a later hidden answer would violate the frozen historical cutoff"
+    },
+    "independent_review": {
+      "disposition": "APPROVED",
+      "reviewer": "/root/audit_pcce063_materialized (independent Codex reviewer)",
+      "subject": {
+        "nested_base_commit": "777f2dc8861bb756141302e014b202a21d363f76",
+        "nested_candidate_commit": "f160d84a452a6ce5b1e3abeddea15c7f879806bc",
+        "nested_candidate_tree": "7a49645de526c97d2c5dc56ceabce70faf542eca"
+      },
+      "verification": {
+        "archive_and_dependency_hashes": "independently-matched",
+        "canonical_json_and_cids": "recomputed-and-matched",
+        "focused_tests_passed": 20,
+        "full_benchmark_tests_passed": 62,
+        "hidden_partition": "separate-and-not-visible",
+        "license": "exact-BSD-3-Clause-bytes-matched",
+        "nested_scope": "exactly-nine-authorized-additions",
+        "reconstructed_upstream_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "ruff_format": "passed",
+        "ruff_lint": "passed",
+        "upstream_full_baseline": "independently-reproduced-passing"
+      }
+    },
+    "nested_source": {
+      "base_commit": "777f2dc8861bb756141302e014b202a21d363f76",
+      "files": {
+        "benchmarks/proof_context/corpus/mature_python/LICENSE.django-5.2.5": {
+          "blob": "5f4f225dd282aa7e4361ec3c2750bbbaaed8ab1f",
+          "raw_cid_v1": "bafkreifyizav2g2rj2ob37yuuiw6xednpff4krwkmeu7sufbrtijdyvgne",
+          "sha256": "b846415d1b514e9c1dff14a22deb906d794bc546ca6129f950a18cd091e2a669",
+          "size": 1552
+        },
+        "benchmarks/proof_context/corpus/mature_python/dependencies/asgiref-3.8.1-py3-none-any.whl": {
+          "blob": "244dc23b8b53deae9e2c42c260a288acaa3e9805",
+          "raw_cid_v1": "bafkreib6dy7mzbeygl7ffthszntinn5fl6blwhlk5zzklcbgi4jzam26i4",
+          "sha256": "3e1e3ecc849832fe52ccf2cb6686b7a55f82bb1d6aee72a58826471390335e47",
+          "size": 23828
+        },
+        "benchmarks/proof_context/corpus/mature_python/dependencies/sqlparse-0.5.3-py3-none-any.whl": {
+          "blob": "0ac32bae065409fd4259e56b2be7ba395d906870",
+          "raw_cid_v1": "bafkreigpeglo2nay6o5f3zvpp2bmnffj7pn75tgn7rzofakuqulqqhywzi",
+          "sha256": "cf2196ed3418f3ba5de6af7e82c694a9fbdbfecccdfc72e281548517081f16ca",
+          "size": 44415
+        },
+        "benchmarks/proof_context/corpus/mature_python/evaluator_manifest.json": {
+          "blob": "6f7200bbf0a88de924813fcbcd46f55ebd07c42c",
+          "raw_cid_v1": "bafkreign5mtdpq6mnqnxl7qyrykioxwuywess7zkfwgm2qbk4ppwqienxy",
+          "sha256": "cdeb2637c3cc6c1b75fe188e14875ed4c589297f2a2d8ccd402ae3df68208dbe",
+          "size": 28928,
+          "structured_cid": "baguqeeraa3b5a46e27piufmnmfdw3wo7txygzpmu2rl6gva2o55f57lm6qrq"
+        },
+        "benchmarks/proof_context/corpus/mature_python/shard_manifest.json": {
+          "blob": "b908d9acb58d5b0e52bcef6d010a93415dbb968b",
+          "raw_cid_v1": "bafkreie5hv7m6aeirsvh6eafbl6exvapmoalprffa3nldatsj7tyi7tg6e",
+          "sha256": "9d3d7ecf00888caa7f10050afc4bd40f6380b7c4a506dab182724fe7847e66f1",
+          "size": 11094,
+          "structured_cid": "baguqeerad5kehgobu2qcmnu5lq5uttgctw366aj4padpxpnita2vdtasarfa"
+        },
+        "benchmarks/proof_context/corpus/mature_python/source/django-5.2.5-a3b1107.tar.gz": {
+          "blob": "0265fac075ce34554fe98e3ddd56ea95a0d50ed5",
+          "raw_cid_v1": "bafkreidabjda3nswrgmwtr65jmohbtrgr2w2pre7uc2x5fbnu6idb6vhv4",
+          "sha256": "600a460db656899969c7dd4b1c70ce268eada7c49fa0b57e942da79030faa7af",
+          "size": 10551627
+        },
+        "benchmarks/proof_context/corpus/mature_python/source_verification.json": {
+          "blob": "575391e53832aa82eaf677fc57d5251e4d34a054",
+          "raw_cid_v1": "bafkreicutiix3xvpx5znuq4ieql7qwkv3jthrqj2rkmstmvzqgmkue2lum",
+          "sha256": "549a117ddeafbf72da43882417f85955da6678c13a8a9929b2b98198aa134ba3",
+          "size": 3155,
+          "structured_cid": "baguqeerahuyku6nombp6ph72x2w37bkrhswkhdd43h4nkzvmvxul2mf4i7oa"
+        },
+        "benchmarks/proof_context/corpus/mature_python/visible_manifest.json": {
+          "blob": "1fb5eec82e81039f8b48c5442be3fce61aba360a",
+          "raw_cid_v1": "bafkreifiyxm5jj3tsexhktj4isturcknmqpi2edxayd2tub3gclskevzy4",
+          "sha256": "a8c5d9d4a773912e754d3c44a748894d641e8d10770607a9d03b30972512b9c7",
+          "size": 23294,
+          "structured_cid": "baguqeera5hzu6jvajc2auchzntt2tn2432hl2qvqty3pl6httosqgpfcry4q"
+        },
+        "tests/proof_context/benchmarks/test_mature_python_corpus.py": {
+          "blob": "1c7f60e1bf11df632da0ae6f7d3b51e51893ddc7",
+          "raw_cid_v1": "bafkreid3gxt4m7joeqiywa2b6w6kazjxdxkxpljs3s7pxb2u6s6s36rcoq",
+          "sha256": "7b35e7c67d2e24118b0341f5bca065371dd577ad32dcbefb8754f4bd2dfa2274",
+          "size": 23263
+        }
+      },
+      "implementation_commit": "f160d84a452a6ce5b1e3abeddea15c7f879806bc",
+      "implementation_tree": "7a49645de526c97d2c5dc56ceabce70faf542eca",
+      "repository": "external/ipfs_datasets"
+    },
+    "outer_composition": {
+      "base_commit": "ed97ee2dd11e0409afaeeb539b645d7b718869af",
+      "base_tree": "fad980c6c139aaa9902160daaf045d5aa00a6778",
+      "branch": "implementation/PCCE-063-outer-20260824",
+      "candidate_gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "489da803b9a778d41d8576d0c90a5384fb943eb5",
+        "external/ipfs_datasets": "f160d84a452a6ce5b1e3abeddea15c7f879806bc",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      },
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+        "external/ipfs_datasets"
+      ],
+      "datasets_base_gitlink": "777f2dc8861bb756141302e014b202a21d363f76",
+      "datasets_candidate_gitlink": "f160d84a452a6ce5b1e3abeddea15c7f879806bc"
+    },
+    "pcce056_runtime_gate": {
+      "decision": "NO-GO",
+      "live_execution_eligible": false,
+      "production_qualified": false,
+      "qualification": {
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "raw_cid_v1": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+        "size": 37516
+      },
+      "release_qualified": false
+    },
+    "prohibited_effects": {
+      "corpus_revision_repin_after_results": false,
+      "future_commit_or_pr_patch_accessed": false,
+      "hidden_answer_exposed_to_agent_or_provider": false,
+      "incompatible_license_included": false,
+      "live_provider_or_benchmark_invoked": false,
+      "network_used_during_task_execution": false,
+      "production_or_live_qualification_claimed": false,
+      "supervisor_quack_or_duckdb_mutated_during_review": false
+    },
+    "source_materialization": {
+      "archive_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+      "archive_sha256": "600a460db656899969c7dd4b1c70ce268eada7c49fa0b57e942da79030faa7af",
+      "archive_size": 10551627,
+      "construction_network_scope": "exact-Django-archive-and-two-pinned-wheels-only",
+      "license_sha256": "b846415d1b514e9c1dff14a22deb906d794bc546ca6129f950a18cd091e2a669",
+      "license_spdx": "BSD-3-Clause",
+      "permit": "operator-confirmed-resume-after-narrow-fetch-disclosure",
+      "reconstructed_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48"
+    },
+    "task_authority": {
+      "live_quack_duckdb_read_only": {
+        "mutated": false,
+        "revision": 1,
+        "status_at_review": "todo",
+        "task_cid": "baguqeerapraozmka5hq626owp6lo4vc35lbnacq2hk4q543zh3y5crs5zvfa",
+        "transport": "quack:127.0.0.1:41347"
+      },
+      "static_board": {
+        "canonical_task_cid": "baguqeeraw2pkevrhmy7r5vdmyodstnvimnqdjrvfyanffsz6dbddyxupmqgq",
+        "canonical_task_key": "task/v1/b69ea25627663f1ed46cc38729b6a8636034c6a5c01a52cb3e18463c5e8f640d",
+        "dependency_task_ids": [
+          "PCCE-060"
+        ],
+        "goal_id": "PCCE-G600"
+      }
+    },
+    "validation": {
+      "archive_safe_extraction_and_tree_reconstruction": "passed",
+      "canonical_json_and_partition_cids": "passed",
+      "focused_validator": {
+        "passed": 20,
+        "seeds": [
+          0,
+          777
+        ]
+      },
+      "full_benchmark_suite": {
+        "passed": 62,
+        "seed": 23
+      },
+      "ruff_format": "passed",
+      "ruff_lint": "passed",
+      "upstream_baseline_reproductions": 2
+    }
+  },
+  "objective_id": "PCCE-G600",
+  "rollback": "Remove or revert the unadmitted outer receipt and datasets gitlink; preserve the immutable shard and its explicit unavailable historical-answer disposition for any later versioned retry.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-063"
+}
