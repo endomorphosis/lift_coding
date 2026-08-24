@@ -5,29 +5,116 @@
   "description": "Stable, bounded projection. Null identity values mean missing evidence and are never inferred.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "contract_version", "command", "status", "exit_code", "trace_id", "correlation_id", "identities", "artifact_cids", "provenance", "details", "error"],
+  "required": [
+    "schema_version",
+    "contract_version",
+    "command",
+    "status",
+    "exit_code",
+    "trace_id",
+    "correlation_id",
+    "identities",
+    "artifact_cids",
+    "provenance",
+    "details",
+    "error"
+  ],
   "properties": {
-    "schema_version": {"const": "ipfs-accelerate.proof-context.v0.1/command-result@1"},
+    "schema_version": {
+      "const": "ipfs-accelerate.proof-context.v0.1/command-result@1"
+    },
     "contract_version": {"const": "0.1"},
-    "command": {"type": ["string", "null"], "maxLength": 4096},
-    "status": {"type": "string", "enum": ["succeeded", "failed", "timeout", "cancelled", "verification_failed", "proof_failed", "assurance_failed", "context_insufficient", "model_escalation_required", "human_review_required", "infrastructure_failure", "partial_effect", "repair_required", "invalid", "rejected", "simulated", "unavailable", "stale"]},
+    "command": {"type": ["string", "null"], "maxLength": 240},
+    "status": {
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "rejected",
+        "verification_failed",
+        "proof_failed",
+        "assurance_failed",
+        "context_insufficient",
+        "model_escalation_required",
+        "human_review_required",
+        "unavailable",
+        "timeout",
+        "cancelled",
+        "invalid",
+        "stale",
+        "simulated",
+        "infrastructure_failure",
+        "partial_effect",
+        "repair_required"
+      ]
+    },
     "exit_code": {"type": "integer", "minimum": 0, "maximum": 6},
-    "trace_id": {"type": "string", "minLength": 1, "maxLength": 4096},
-    "correlation_id": {"type": "string", "minLength": 1, "maxLength": 4096},
+    "trace_id": {"type": "string", "minLength": 1, "maxLength": 240},
+    "correlation_id": {"type": "string", "minLength": 1, "maxLength": 240},
     "identities": {
       "type": "object",
       "additionalProperties": false,
       "required": ["repository_id", "task_id", "run_id", "patch_id"],
       "properties": {
-        "repository_id": {"type": ["string", "null"], "maxLength": 4096},
-        "task_id": {"type": ["string", "null"], "maxLength": 4096},
-        "run_id": {"type": ["string", "null"], "maxLength": 4096},
-        "patch_id": {"type": ["string", "null"], "maxLength": 4096}
+        "repository_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 240},
+        "task_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 240},
+        "run_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 240},
+        "patch_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 240},
+        "repository_state_cid": {"oneOf": [{"$ref": "#/$defs/cid"}, {"type": "null"}]},
+        "trace_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 240},
+        "evidence_cid": {"oneOf": [{"$ref": "#/$defs/cid"}, {"type": "null"}]},
+        "artifact_id": {"type": ["string", "null"], "minLength": 1, "maxLength": 240},
+        "contract_version": {"const": "0.1"}
       }
     },
-    "artifact_cids": {"type": "array", "maxItems": 64, "items": {"type": "string", "minLength": 1, "maxLength": 4096}},
-    "provenance": {"type": ["string", "null"], "maxLength": 4096},
+    "artifact_cids": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {"$ref": "#/$defs/cid"}
+    },
+    "provenance": {"enum": ["live", "replayed", "simulated", null]},
     "details": {"type": "object"},
-    "error": {"type": ["object", "string", "null"]}
+    "error": {
+      "oneOf": [
+        {"type": "object"},
+        {"type": "string", "maxLength": 240},
+        {"type": "null"}
+      ]
+    },
+    "schema": {"const": "ipfs-accelerate.proof-context.v0.1/cli-result"},
+    "interface": {"const": "ProofContextCLI@0.1"},
+    "policy": {"type": ["string", "null"], "maxLength": 240},
+    "output_mode": {"enum": ["json", "human"]},
+    "artifact_cid": {"oneOf": [{"$ref": "#/$defs/cid"}, {"type": "null"}]},
+    "contract": {"type": ["string", "null"], "maxLength": 240},
+    "payload": {"type": "object"},
+    "provider_bound": {"type": "boolean"},
+    "sibling_layout_required": {"type": "boolean"}
+  },
+  "$defs": {
+    "cid": {
+      "type": "string",
+      "pattern": "^b[a-z2-7]{58,127}$",
+      "minLength": 59,
+      "maxLength": 128
+    }
+  },
+  "x-status-exit-codes": {
+    "succeeded": 0,
+    "rejected": 3,
+    "verification_failed": 1,
+    "proof_failed": 1,
+    "assurance_failed": 1,
+    "context_insufficient": 1,
+    "model_escalation_required": 1,
+    "human_review_required": 1,
+    "unavailable": 5,
+    "timeout": 1,
+    "cancelled": 1,
+    "invalid": 2,
+    "stale": 6,
+    "simulated": 4,
+    "infrastructure_failure": 1,
+    "partial_effect": 1,
+    "repair_required": 1
   }
 }
