@@ -1,0 +1,20 @@
+{
+  "admitted_at": "2026-08-24T00:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-042:evidence-cli",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-cli-implementation",
+  "content_id": "sha256:pcce042evidencecommandsidentityparentfreshnessimmutableartifacts",
+  "evidence": {
+    "commands": ["expand-context", "explain-impact", "assurance", "seal", "report"],
+    "identity_slots": ["repository_id", "task_id", "run_id", "patch_id", "trace_id"],
+    "immutable_parent": true,
+    "parent_chain": {"expand-context": "context-pack", "explain-impact": "run", "assurance": "verify", "seal": "assurance", "report": "seal"},
+    "rejects": ["wrong-parent", "stale", "failed", "unavailable", "simulated"],
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_evidence_commands.py"
+  },
+  "objective_id": "PCCE-G400",
+  "rollback": "Revert the CLI evidence layer; immutable parent artifacts and seals are retained.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-042"
+}
