@@ -1,0 +1,195 @@
+{
+  "artifact_identity": "bafkreib7oplhwookasl2k4chg2u4wsg7x2fva6n6aiq7pah2hp5ltg6xfq",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of the canonical sandbox boundary descriptor",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-security-boundary-implementation-observed-tested-limited",
+  "evidence": {
+    "allowed_scope": {
+      "actual_nested_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sandbox.py",
+        "external/ipfs_accelerate/test/proof_context/security/test_sandbox.py"
+      ],
+      "actual_outer_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json",
+        "external/ipfs_accelerate"
+      ],
+      "board_allowed_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sandbox.py",
+        "external/ipfs_accelerate/test/proof_context/security/test_sandbox.py",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json"
+      ]
+    },
+    "boundary_contract": {
+      "approval_authority": false,
+      "backend": "CommandPolicy/invoke_command+descriptor-inner-gate@1",
+      "canonical_branch_authority": false,
+      "enforcement_disposition": "observed_tested_limited",
+      "network_modes": {
+        "deny_all": "direct-observed-testable",
+        "route_endpoint_allowlist": "typed-unavailable-before-spawn"
+      },
+      "production_eligible": false,
+      "publication_authority": false,
+      "runtime_integration_status": "not_integrated",
+      "schema": "pcce/proof-context/v0.1/sandbox-descriptor@1",
+      "unsupported_features": [
+        "authoritative adapter-registry routing",
+        "InstalledCodex credential and network mediation",
+        "bootstrap, lifecycle, verification, apply, or publication integration",
+        "route-scoped live endpoint enforcement",
+        "kernel or container isolation on non-Linux platforms",
+        "issuer-authenticated permits and durable cross-process replay prevention",
+        "same-UID host-actor mutation exclusion",
+        "dynamic or shebang executable targets",
+        "production, benchmark, CI, release, or security qualification"
+      ]
+    },
+    "denial_and_cleanup_evidence": {
+      "canonical_and_publication": "detached exact-base disposable worktree guard, protected-ref snapshot checks, cleanup proof, canonical-drift partial-effect handling, and permanently false approval/publication fields exercised",
+      "credentials": "parent credential and loader variables stripped; plain, JSON, nested JSON, Python-literal, bearer-like, repeated, and high-field-count secret outputs redacted and made unpublishable",
+      "executables": "exact regular static-ELF identity and literal argv binding exercised; symlink, replacement, dynamic target, descendant exec, metacharacter, and argv widening cases denied",
+      "network": "IPv4, IPv6, UDP, pathname Unix, and abstract Unix sockets denied by the direct backend; route-endpoint mode returns typed unavailable before spawn because endpoint enforcement is not implemented",
+      "paths": "descriptor-rooted O_NOFOLLOW/openat2 access and Landlock mediation exercised against absolute, traversal, NUL, .git, symlink, magiclink, hardlink, rename-race, cross-root, host-read, and host-write cases",
+      "resources": "timeout, cancellation, aggregate output, CPU, memory, open-file, and process bounds are represented; timeout, cancellation, output, CPU, double-fork, setsid, backend-failure, and cleanup-failure cases were exercised",
+      "scope_of_claim": "evidence applies only to the direct PCCE-071 boundary on the observed Linux host and does not claim that existing production execution paths consume it"
+    },
+    "independent_review": {
+      "disposition": "APPROVED_AS_LIMITED_UNINTEGRATED_BOUNDARY",
+      "review_correction": {
+        "corrective_commit": "491348440a012e88510c803049007a16b90104ca",
+        "issue": "the first exact outer-checkout validation exposed a cold-import test that derived PYTHONPATH from the caller working directory",
+        "result": "the test now derives the nested repository root from its own file path; the exact board command passes from the outer candidate checkout"
+      },
+      "reviewer": "/root (Codex independent reviewer)",
+      "subjects": {
+        "hardening_commit": "f012017424b87e80bf0701e7cb82d3c7b64d5d7d",
+        "implementation_commit": "f2706ae96c32c56224aa04dd86dec2a92722e98e",
+        "nested_candidate_commit": "491348440a012e88510c803049007a16b90104ca",
+        "nested_candidate_tree": "7bf98d70f82b482b17f90e0a6974625b1e9f57c0",
+        "nested_parent_base": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
+        "outer_base_commit": "32474528e8422a29e203430968122995e340b829"
+      },
+      "verification": {
+        "combined_sandbox_command_lifecycle_tests_passed": 127,
+        "descriptor_cid_recomputed_and_matched": true,
+        "diff_check": "passed",
+        "exact_outer_board_command_tests_passed": 32,
+        "focused_nested_tests_passed": 32,
+        "nested_scope": "exactly two authorized files",
+        "py_compile": "passed",
+        "ruff_format": "passed",
+        "ruff_lint": "passed"
+      }
+    },
+    "nested_source": {
+      "base_commit": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
+      "files": {
+        "ipfs_accelerate_py/proof_context/sandbox.py": {
+          "blob": "4a331a184310e5818cd789f5db01d688d8a5bf9e",
+          "mode": "100644",
+          "raw_cid_v1": "bafkreieknkgwe77sp7mgi2dbpwtuex4d34ktftbbf6uv67s6gakrez7hqa",
+          "sha256": "229aa3589ffc9ff6191a185f69d097e0f7c54cb3084bea57df978c054499f9e0",
+          "size": 124769
+        },
+        "test/proof_context/security/test_sandbox.py": {
+          "blob": "e4f85331ec0ba346a1a416404e367d22aa76ab24",
+          "mode": "100644",
+          "raw_cid_v1": "bafkreiuqxux6234jth55cav2hhjn6r2tvpqg2zqzqc7o27zlcitv34sx2a",
+          "sha256": "a42f4bfb5be2667ef440ae8e74b7d1d4eaf81b5986602fbb5fcac489d77c95f4",
+          "size": 46946
+        }
+      },
+      "implementation_commit": "491348440a012e88510c803049007a16b90104ca",
+      "implementation_tree": "7bf98d70f82b482b17f90e0a6974625b1e9f57c0",
+      "repository": "external/ipfs_accelerate"
+    },
+    "outer_composition": {
+      "accelerator_base_gitlink": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
+      "accelerator_candidate_gitlink": "491348440a012e88510c803049007a16b90104ca",
+      "base_commit": "32474528e8422a29e203430968122995e340b829",
+      "base_tree": "7e9e2c6be862f1bfcf44f5f8bd64825fe02ffc69",
+      "branch": "implementation/PCCE-071-outer-20260824",
+      "candidate_gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "491348440a012e88510c803049007a16b90104ca",
+        "external/ipfs_datasets": "777f2dc8861bb756141302e014b202a21d363f76",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      },
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json",
+        "external/ipfs_accelerate"
+      ]
+    },
+    "prohibited_effects": {
+      "arbitrary_network_or_provider_route_enabled": false,
+      "canonical_branch_or_protected_ref_mutated_by_sandbox": false,
+      "credentials_or_private_data_embedded": false,
+      "kernel_or_container_isolation_overclaimed": false,
+      "live_provider_or_benchmark_invoked": false,
+      "production_or_publication_authority_granted": false,
+      "supervisor_quack_or_duckdb_mutated_during_review": false
+    },
+    "qualification_boundary": {
+      "benchmark_qualified": false,
+      "live_execution_eligible": false,
+      "production_qualified": false,
+      "provider_qualified": false,
+      "release_qualified": false,
+      "security_qualified": false,
+      "reason": "the direct boundary is observed and tested on this Linux host but is not integrated into authoritative runtime paths; route-scoped endpoint enforcement is explicitly unavailable and PCCE-075/PCCE-076 evidence is still pending"
+    },
+    "task_authority": {
+      "live_quack_duckdb_read_only": {
+        "mutated": false,
+        "revision": 1,
+        "status_at_review": "todo",
+        "task_cid": "baguqeeraxkidpqi2tdgzdsymr4hc667d6fhzle7ctfvq7aozk63jrzbmnthq",
+        "transport": "quack:127.0.0.1:41347"
+      },
+      "static_board": {
+        "dependency_task_ids": [
+          "PCCE-070"
+        ],
+        "goal_id": "PCCE-G700"
+      }
+    },
+    "validation": {
+      "combined_suite": {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-P",
+          "-m",
+          "pytest",
+          "-q",
+          "test/proof_context/security/test_sandbox.py",
+          "test/proof_context/adapters/test_command.py",
+          "test/proof_context/test_lifecycle.py"
+        ],
+        "passed": 127,
+        "skipped": 0
+      },
+      "declared_outer_suite": {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-P",
+          "-m",
+          "pytest",
+          "-q",
+          "external/ipfs_accelerate/test/proof_context/security/test_sandbox.py"
+        ],
+        "passed": 32,
+        "skipped": 0
+      },
+      "diff_check": "passed",
+      "json_validation": "passed",
+      "py_compile": "passed",
+      "ruff_format": "passed",
+      "ruff_lint": "passed"
+    }
+  },
+  "objective_id": "PCCE-G700",
+  "rollback": "Fence or cancel any direct executions, prove descendant cleanup, discard disposable worktrees, revert the nested sandbox commits and outer gitlink/receipt, and invalidate every result rooted in the reverted descriptor CID.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-071"
+}
