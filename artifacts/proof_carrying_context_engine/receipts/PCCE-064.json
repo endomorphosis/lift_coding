@@ -1,0 +1,366 @@
+{
+  "artifact_identity": "baguqeeral365qpuhscm3ejzq6ntzfmob5oaqj2rejrl7z7kadfqbcfswmo2a",
+  "artifact_identity_kind": "software-contract structured CID of the PCCE-064 A/B runner descriptor",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-evaluation-implementation-no-live-execution",
+  "evidence": {
+    "allowed_scope": {
+      "actual_nested_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py",
+        "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py"
+      ],
+      "actual_outer_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json",
+        "external/ipfs_accelerate"
+      ],
+      "board_allowed_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py",
+        "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json"
+      ]
+    },
+    "benchmark_execution": {
+      "benchmark_results_observed": false,
+      "benchmark_runs_started": false,
+      "completion_claim": "provider-neutral A/B runner implementation and injected test evidence only",
+      "live_execution_eligible": false,
+      "live_model_or_provider_invoked": false,
+      "performance_or_cost_claims_allowed": false,
+      "production_or_live_qualification": false,
+      "provenance_exercised": [
+        "replayed",
+        "simulated",
+        "injected-adversarial"
+      ],
+      "reason": "PCCE-056 is NO-GO; PCCE-064 authorizes implementation and deterministic injected tests, while bounded live execution belongs to PCCE-067 under a separate permit"
+    },
+    "configuration_contracts": {
+      "A": {
+        "cid": "baguqeerab5ltrfd6dasxes2r76svhxbbcbj7hcjqgxpwsgi2rfbn53x2lmha",
+        "descriptor": {
+          "assurance_enabled": false,
+          "configuration_id": "A",
+          "context_estimator": "utf8-bytes-ceiling-divide-by-four-no-calibration@1",
+          "context_expansion_enabled": false,
+          "context_method": "ordinary-lexical-raw-retrieval@1",
+          "environment_policy": "exact-pcce-056-qualified-environment-or-unavailable",
+          "hidden_full_scoring": true,
+          "human_escalation_enabled": false,
+          "incremental_seal_enabled": false,
+          "incremental_verification_enabled": false,
+          "model_policy": "execution-permit-exact-frontier-pair@1",
+          "prompt_policy": "pcce-benchmark-prompt-policy-v1",
+          "proof_reuse_enabled": false,
+          "routing_enabled": false,
+          "schema": "ipfs-datasets.proof-context.benchmark-configuration@1",
+          "seed_policy": "sha256-corpus-task-first-unsigned-64-v1",
+          "sufficiency_enabled": false,
+          "verification_policy": "full-runtime-verification@1"
+        }
+      },
+      "B": {
+        "cid": "baguqeeravan66pqbuayxtc6wzsqcn5ocbzwflqbdbeoowlvtore26hqmwzrq",
+        "descriptor": {
+          "assurance_enabled": false,
+          "configuration_id": "B",
+          "context_estimator": "utf8-bytes-ceiling-divide-by-four-no-calibration@1",
+          "context_expansion_enabled": false,
+          "context_method": "semantic-context-pack-v0.1",
+          "environment_policy": "exact-pcce-056-qualified-environment-or-unavailable",
+          "hidden_full_scoring": true,
+          "human_escalation_enabled": false,
+          "incremental_seal_enabled": false,
+          "incremental_verification_enabled": false,
+          "model_policy": "execution-permit-exact-frontier-pair@1",
+          "prompt_policy": "pcce-benchmark-prompt-policy-v1",
+          "proof_reuse_enabled": false,
+          "routing_enabled": false,
+          "schema": "ipfs-datasets.proof-context.benchmark-configuration@1",
+          "seed_policy": "sha256-corpus-task-first-unsigned-64-v1",
+          "sufficiency_enabled": false,
+          "verification_policy": "full-runtime-verification@1"
+        }
+      },
+      "runner": {
+        "cid": "baguqeeral365qpuhscm3ejzq6ntzfmob5oaqj2rejrl7z7kadfqbcfswmo2a",
+        "descriptor": {
+          "configuration_cids": {
+            "A": "baguqeerab5ltrfd6dasxes2r76svhxbbcbj7hcjqgxpwsgi2rfbn53x2lmha",
+            "B": "baguqeeravan66pqbuayxtc6wzsqcn5ocbzwflqbdbeoowlvtore26hqmwzrq"
+          },
+          "evaluator_namespace_policy": "deny-before-dispatch-and-revalidate-provider-inputs",
+          "expansion_policy": "disabled-and-zero-recorded",
+          "held_constant_fields": [
+            "corpus_manifest_cid",
+            "task_record_cid",
+            "visible_projection_cid",
+            "repository_state_cid",
+            "environment_cid",
+            "task_id",
+            "provider_id",
+            "model_id",
+            "model_revision",
+            "seed",
+            "attempt"
+          ],
+          "hidden_scoring_phase": "after-patch-proposal",
+          "identity_profile": "software-contract-cid-profile-v1",
+          "live_dispatch": "exact-available-eligible-permit-only",
+          "only_a_to_b_difference": [
+            "context_method"
+          ],
+          "projection_binding": "both-arms-exact-visible-projection-cid-before-dispatch",
+          "provider_visibility": "task-agent-view-plus-visible-context-only",
+          "schema": "ipfs-accelerate.proof-context.benchmark-configurations-ab@1",
+          "simulation_policy": "force-simulated-terminal-never-accepted",
+          "unavailable_policy": "preserve-unavailable-never-impute-live",
+          "verification": "full-runtime-verification-both-arms",
+          "verification_exception_policy": "infrastructure-failure-retain-observed-provider-cost-null-unknown-cost"
+        }
+      }
+    },
+    "independent_review": {
+      "disposition": "APPROVED",
+      "reviewer": "/root (Codex independent reviewer)",
+      "subjects": {
+        "hardening_commit": "b0c44f7a2a85cf26e97c0e976ab0029db694be7b",
+        "implementation_commit": "28edea1379becd90eddb53884eb1aa065769fb8d",
+        "nested_tree": "6c0fe9f057bfc8a4f5d38c4d998c962eb245d040",
+        "outer_base_commit": "7e0a0af18d364e20a4adf97b984496e07b81edcd"
+      },
+      "verification": {
+        "combined_tests_passed": 146,
+        "combined_tests_skipped": 0,
+        "configuration_cids": "recomputed-and-matched-pcce060",
+        "diff_check": "passed",
+        "focused_tests_passed": 56,
+        "focused_tests_skipped": 0,
+        "hardening_commit_reviewed": true,
+        "hidden_data_denial": "passed",
+        "metric_fields_per_raw_row": 78,
+        "missingness_and_raw_schema": "exact-cross-validation-passed",
+        "nested_scope": "exactly-two-authorized-files-clean",
+        "provider_neutrality": "injected-ports-only-no-live-dispatch",
+        "py_compile": "passed",
+        "raw_rows_cross_validated": 10,
+        "replay_simulation_and_adversarial_cases": "passed",
+        "ruff_format": "passed",
+        "ruff_lint": "passed",
+        "runner_cid": "recomputed-and-matched"
+      }
+    },
+    "nested_source": {
+      "base_commit": "020284642f438dd35e6bc2d6ff41cdeb8b47bbd0",
+      "base_tree": "8e4ee1eba33561185e40e3c7353f173588a7685a",
+      "candidate_parent": "28edea1379becd90eddb53884eb1aa065769fb8d",
+      "files": {
+        "ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py": {
+          "blob": "2eebf178aeec11d7dd8f7666659f4fcc93461bf7",
+          "mode": "100644",
+          "raw_cid_v1": "bafkreibdvqkzpnuhoxhwkhgc5zcbm2u675dzj6tqqtkakrezlhtqu6jtpm",
+          "sha256": "23ac1597b68775cf651cc2ee44166a9eff4794fa7084d405449959e70a79337b",
+          "size": 47206
+        },
+        "test/proof_context/benchmarks/test_configurations_ab.py": {
+          "blob": "13668bdc9673de53ffcda9ab42512aa33a37c02d",
+          "mode": "100644",
+          "raw_cid_v1": "bafkreie3ke4j7dhcaobwegxj2x6duuv3ouejx7iwafohmz2n4omfaakaay",
+          "sha256": "9b51389f8ce20383621ae9d5fc3a52bb75089bfd16015c76674de39850014006",
+          "size": 30007
+        }
+      },
+      "implementation_commit": "b0c44f7a2a85cf26e97c0e976ab0029db694be7b",
+      "implementation_parent": "28edea1379becd90eddb53884eb1aa065769fb8d",
+      "repository": "external/ipfs_accelerate",
+      "repository_tree": "6c0fe9f057bfc8a4f5d38c4d998c962eb245d040"
+    },
+    "outer_source": {
+      "accelerator_base_gitlink": "020284642f438dd35e6bc2d6ff41cdeb8b47bbd0",
+      "accelerator_candidate_gitlink": "b0c44f7a2a85cf26e97c0e976ab0029db694be7b",
+      "base_commit": "7e0a0af18d364e20a4adf97b984496e07b81edcd",
+      "base_tree": "9db556031834e7e276351506fb93453c63275d20",
+      "branch": "operator/PCCE-064-configurations-ab-20260824",
+      "candidate_gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "b0c44f7a2a85cf26e97c0e976ab0029db694be7b",
+        "external/ipfs_datasets": "777f2dc8861bb756141302e014b202a21d363f76",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      },
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json",
+        "external/ipfs_accelerate"
+      ]
+    },
+    "pairing_and_safety": {
+      "cross_validated_result_population": {
+        "metric_fields_per_row": 78,
+        "raw_rows": 10,
+        "schema": "ipfs-datasets.proof-context.benchmark-raw-result@1"
+      },
+      "full_verification": "required-late-and-proposal-bound-for-both-arms",
+      "held_constant_fields": [
+        "corpus_manifest_cid",
+        "task_record_cid",
+        "visible_projection_cid",
+        "repository_state_cid",
+        "environment_cid",
+        "task_id",
+        "provider_id",
+        "model_id",
+        "model_revision",
+        "seed",
+        "attempt"
+      ],
+      "hidden_data_shared_with_provider": false,
+      "missingness_policy": "every-null-metric-has-exact-typed-reason",
+      "only_treatment_difference": "context_method",
+      "provider_implementation": "injected-provider-neutral-port",
+      "replay_determinism": "content-addressed-and-passed",
+      "simulation_policy": "simulated-success-forced-to-rejected-simulation",
+      "unavailable_policy": "unavailable-preserved-never-imputed-live"
+    },
+    "pcce056_runtime_gate": {
+      "live_execution_eligible": false,
+      "production_qualified": false,
+      "qualification": {
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "raw_cid_v1": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+        "size": 37516,
+        "status": "NO-GO"
+      },
+      "qualification_receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+        "raw_cid_v1": "bafkreibiwxtmdtr2wiq5xbez2njp5t5qwsvli2ijwwneyqtlh7iql26wlm",
+        "sha256": "28b5e6c1ce3ab221db8499d352fecfb0b4aab46909b59a4c426b3fd105ebd65b",
+        "size": 2805
+      },
+      "release_qualified": false,
+      "waivers": []
+    },
+    "pcce060_freeze": {
+      "configuration_cids_unchanged": {
+        "A": "baguqeerab5ltrfd6dasxes2r76svhxbbcbj7hcjqgxpwsgi2rfbn53x2lmha",
+        "B": "baguqeeravan66pqbuayxtc6wzsqcn5ocbzwflqbdbeoowlvtore26hqmwzrq"
+      },
+      "dependency_receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-060.json",
+        "raw_cid_v1": "bafkreidqxb2vd2nao2cf4hzce3uhtfbgd4i735pol4mt3vr5c37lwz3h3e",
+        "sha256": "70b87551e9a076845e1f2226e87994261f11fdf5ee5f193dd63d16febb6767d9",
+        "size": 10120
+      },
+      "frozen_configuration_semantics_unchanged": true,
+      "threshold_set": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+        "raw_cid_v1": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+        "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b",
+        "size": 2373,
+        "structured_cid": "baguqeeraqbhgjlvhrdrwfashgtvwsb5e4k3fac5mg75j6f4p4gvxbaz75b6q"
+      }
+    },
+    "prohibited_effects": {
+      "benchmark_result_or_performance_claim_created": false,
+      "credentials_or_private_data_embedded": false,
+      "hidden_data_exposed_to_provider": false,
+      "incremental_verification_enabled_for_a_or_b": false,
+      "live_provider_or_benchmark_invoked": false,
+      "model_revision_or_prompt_policy_drift_between_arms": false,
+      "provider_cost_claim_created": false,
+      "replay_or_simulation_counted_as_live_quality": false,
+      "supervisor_quack_or_duckdb_mutated": false
+    },
+    "qualification_boundary": {
+      "benchmark_qualified": false,
+      "live_execution_eligible": false,
+      "performance_qualified": false,
+      "production_qualified": false,
+      "provider_qualified": false,
+      "reason": "implementation and injected validation do not constitute live benchmark execution or product/provider qualification"
+    },
+    "task_authority": {
+      "live_quack_duckdb_read_only": {
+        "dependency_task_cids": [
+          "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa"
+        ],
+        "mutated": false,
+        "revision": 1,
+        "status_at_review": "todo",
+        "task_cid": "baguqeerakdl4zky3knfnske6znqisszcyxxvb3eh7fv2da5g64uw2ylzqvka"
+      },
+      "static_board": {
+        "canonical_task_cid": "baguqeeram2iem7jubfiy2v5lnzfvkhters4g5rkzmfuqtegpw5qyzsdy45iq",
+        "canonical_task_key": "task/v1/6690467d3409518d57ab6e4b551e648cb86ec55961690990cfb7618cc878e751",
+        "dependency_task_ids": [
+          "PCCE-060"
+        ],
+        "execution_authority": "agent-supervisor/v1",
+        "projection_path": "artifacts/proof_carrying_context_engine/control/bundle_index.json"
+      }
+    },
+    "validation": {
+      "combined_suite": {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-P",
+          "-m",
+          "pytest",
+          "-q",
+          "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py",
+          "external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py",
+          "external/ipfs_accelerate/test/proof_context/test_lifecycle.py",
+          "external/ipfs_accelerate/test/proof_context/test_result_taxonomy.py"
+        ],
+        "passed": 146,
+        "skipped": 0
+      },
+      "diff_check": {
+        "command": "git diff --cached --check",
+        "result": "passed"
+      },
+      "focused_suite": {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-P",
+          "-m",
+          "pytest",
+          "-q",
+          "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py"
+        ],
+        "passed": 56,
+        "skipped": 0
+      },
+      "identity_recomputation": {
+        "configuration_a": "passed",
+        "configuration_b": "passed",
+        "nested_file_raw_cids": "passed",
+        "runner_descriptor": "passed"
+      },
+      "json_validation": {
+        "files": [
+          "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json"
+        ],
+        "result": "passed"
+      },
+      "py_compile": {
+        "files": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py",
+          "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py"
+        ],
+        "result": "passed"
+      },
+      "ruff_format": {
+        "files_checked": 2,
+        "result": "passed"
+      },
+      "ruff_lint": {
+        "files_checked": 2,
+        "result": "passed"
+      }
+    }
+  },
+  "objective_id": "PCCE-G600",
+  "rollback": "Revert the unadmitted A/B runner files, accelerator gitlink, and this receipt together. Any later PCCE-067 raw results that bind these CIDs must be retained and invalidated rather than rewritten.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-064"
+}
