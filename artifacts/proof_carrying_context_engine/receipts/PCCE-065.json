@@ -1,0 +1,259 @@
+{
+  "artifact_identity": "baguqeera7ehgn7vsetzjygsda4hzyn5r7k3ov6axjydqk6vsnn32w7sxgj6q",
+  "artifact_identity_kind": "software-contract structured CID of the PCCE-065 C/D runner descriptor",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-evaluation-implementation-no-live-execution",
+  "evidence": {
+    "allowed_scope": {
+      "actual_nested_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_cd.py",
+        "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_cd.py"
+      ],
+      "actual_outer_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-065.json",
+        "external/ipfs_accelerate"
+      ],
+      "board_allowed_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_cd.py",
+        "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_cd.py",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-065.json"
+      ]
+    },
+    "benchmark_execution": {
+      "benchmark_results_observed": false,
+      "benchmark_runs_started": false,
+      "completion_claim": "provider-neutral C/D runner implementation and injected deterministic test evidence only",
+      "live_execution_eligible": false,
+      "live_model_or_provider_invoked": false,
+      "performance_or_cost_claims_allowed": false,
+      "production_or_live_qualification": false,
+      "provenance_exercised": [
+        "replayed",
+        "simulated",
+        "injected-adversarial"
+      ],
+      "reason": "PCCE-056 is NO-GO; PCCE-065 authorizes implementation and deterministic injected tests, while bounded live execution belongs to PCCE-067 under a separate permit"
+    },
+    "configuration_contracts": {
+      "C": {
+        "cid": "baguqeeraqrsu4psh7r6ehgwt5ebcqvjqckgyrwdgl2twxcku7ihknoxrzz5q",
+        "controls": {
+          "assurance_enabled": false,
+          "context_expansion_enabled": false,
+          "context_method": "semantic-context-pack-v0.1",
+          "human_escalation_enabled": false,
+          "incremental_seal_enabled": false,
+          "incremental_verification_enabled": true,
+          "proof_reuse_enabled": true,
+          "routing_enabled": true,
+          "sufficiency_enabled": false
+        }
+      },
+      "D": {
+        "cid": "baguqeeranxarzlueyd5lsmabqgke7bt7qvarxaevuazzces6gf7cozkdmxxq",
+        "controls": {
+          "assurance_enabled": true,
+          "context_expansion_enabled": true,
+          "context_method": "semantic-context-pack-v0.1",
+          "human_escalation_enabled": true,
+          "incremental_seal_enabled": true,
+          "incremental_verification_enabled": true,
+          "proof_reuse_enabled": true,
+          "routing_enabled": true,
+          "sufficiency_enabled": true
+        }
+      },
+      "runner": {
+        "cid": "baguqeera7ehgn7vsetzjygsda4hzyn5r7k3ov6axjydqk6vsnn32w7sxgj6q",
+        "configuration_c_stages": [
+          "context-pack",
+          "route",
+          "proposal",
+          "incremental-verify",
+          "hidden-full-scoring",
+          "disposition"
+        ],
+        "configuration_d_stages": [
+          "identify-operator",
+          "resolve-repository",
+          "scan-semantic",
+          "invalidate",
+          "context-pack",
+          "sufficiency",
+          "route",
+          "proposal",
+          "scope-check",
+          "isolated-apply",
+          "impact",
+          "incremental-verify",
+          "escalate",
+          "assurance",
+          "seal",
+          "disposition"
+        ],
+        "cost_policy": "observed-components-retained-unknowns-null-never-imputed-zero",
+        "failure_policy": "stale-simulated-unavailable-invalid-never-accepted",
+        "identity_profile": "software-contract-cid-profile-v1",
+        "live_dispatch": "exact-pcce-067-permit-only-pcce-056-no-go-preserved",
+        "provider_binding": "none-injected-configuration-cd-port-only",
+        "route_policy": "exact-visible-decision-no-silent-frontier-fallback",
+        "schema": "ipfs-accelerate.proof-context.benchmark-configurations-cd@1",
+        "verification_policy": "incremental-reuse-plus-post-proposal-hidden-full-scoring"
+      }
+    },
+    "governance_and_measurement": {
+      "accepted_disposition_authorities": [
+        "autonomous_accept=true with no required or performed human review",
+        "human_review_required=true, performed=true, correct=true, autonomous_accept=false"
+      ],
+      "assurance": "sample, mutant, failure, critical acceptance, and observed cost fields retained",
+      "context_sufficiency": "initially sufficient forbids expansion; initially insufficient success requires a positive expansion and true post-expansion decision",
+      "full_fallback": "allowed only when explicitly recorded",
+      "human_review": "neither, dual, incomplete, or incorrect acceptance authority is invalid",
+      "incremental_seal": "successful D acceptance requires an incremental seal bound to the proposal CID",
+      "lifecycle_identity": "every stage carries exact task, configuration, repository, environment, provider, model, seed, and attempt identity",
+      "raw_metric_vocabulary_size": 78,
+      "reuse": "hit, miss, stale, and unavailable outcomes are explicit; stale and unavailable cannot be accepted",
+      "route_visibility": "route class, decision kind, previous route, reason, provider, model, revision, and escalation metrics are explicit"
+    },
+    "independent_review": {
+      "disposition": "APPROVED",
+      "reviewer": "/root (Codex independent reviewer)",
+      "subjects": {
+        "hardening_commit": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
+        "implementation_commit": "976a95f6bca52dc0b2d1dd341ac58313ae526fcb",
+        "nested_tree": "d616f91350f4e34675d61fa010bc7aa7b8ad9bba",
+        "outer_base_commit": "6333f5bc790c74e3e6f629b3a7d88cc269d55cdf"
+      },
+      "verification": {
+        "combined_accelerator_tests_passed": 205,
+        "configuration_cids": "recomputed-and-matched-pcce060",
+        "datasets_specification_tests_passed": 12,
+        "diff_check": "passed",
+        "disposition_state_space": "all valid boolean-and-null combinations independently enumerated; exactly two authorized acceptance modes",
+        "focused_tests_passed": 54,
+        "metric_fields_per_raw_row": 78,
+        "nested_scope": "exactly-two-authorized-files-clean",
+        "provider_neutrality": "injected-ports-only-no-live-dispatch",
+        "py_compile": "passed",
+        "raw_rows_cross_validated": 2,
+        "ruff_format": "passed",
+        "ruff_lint": "passed",
+        "runner_cid": "recomputed-and-matched",
+        "schema_validation": "C-and-D-raw-rows-accepted-by-frozen-datasets-validator"
+      }
+    },
+    "nested_source": {
+      "base_commit": "b0c44f7a2a85cf26e97c0e976ab0029db694be7b",
+      "files": {
+        "ipfs_accelerate_py/proof_context/benchmarks/configurations_cd.py": {
+          "blob": "51c88a52764a9fdc8dc45e3fa3fb1fbe6ba548c7",
+          "mode": "100644",
+          "raw_cid_v1": "bafkreihsdbfu7zxvyv4qgypx3y2ivkkz77bxqcd4377vap5qajvqzadaqi",
+          "sha256": "f2184b4fe6f5c5790361f7de348aa959ffc378087cdfff503fb0026b0c806082",
+          "size": 68062
+        },
+        "test/proof_context/benchmarks/test_configurations_cd.py": {
+          "blob": "739bb56a0e6d0e73b62f1e26e381ec4c6b4cb411",
+          "mode": "100644",
+          "raw_cid_v1": "bafkreigv27vh6jxcfxxa6hyqazwwysfuenvi24ak53l4c4yrfxsgnljzgi",
+          "sha256": "d5d7ea7f26e22dee0f1f10066d6c48b4236a8d700aeed7c173112de466ad3932",
+          "size": 42970
+        }
+      },
+      "implementation_commit": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
+      "implementation_parent": "976a95f6bca52dc0b2d1dd341ac58313ae526fcb",
+      "repository": "external/ipfs_accelerate",
+      "repository_tree": "d616f91350f4e34675d61fa010bc7aa7b8ad9bba"
+    },
+    "outer_source": {
+      "accelerator_base_gitlink": "b0c44f7a2a85cf26e97c0e976ab0029db694be7b",
+      "accelerator_candidate_gitlink": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
+      "base_commit": "6333f5bc790c74e3e6f629b3a7d88cc269d55cdf",
+      "base_tree": "55176e00632b8f56d9e88f9dd2560382d4fafc99",
+      "branch": "implementation/PCCE-065-outer-20260824",
+      "candidate_gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
+        "external/ipfs_datasets": "777f2dc8861bb756141302e014b202a21d363f76",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      },
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-065.json",
+        "external/ipfs_accelerate"
+      ]
+    },
+    "pcce056_runtime_gate": {
+      "live_execution_eligible": false,
+      "qualification": {
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "raw_cid_v1": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+        "size": 37516,
+        "status": "NO-GO"
+      },
+      "release_qualified": false,
+      "waivers": []
+    },
+    "pcce060_freeze": {
+      "configuration_cids_unchanged": {
+        "C": "baguqeeraqrsu4psh7r6ehgwt5ebcqvjqckgyrwdgl2twxcku7ihknoxrzz5q",
+        "D": "baguqeeranxarzlueyd5lsmabqgke7bt7qvarxaevuazzces6gf7cozkdmxxq"
+      },
+      "dependency_receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-060.json",
+        "raw_cid_v1": "bafkreidqxb2vd2nao2cf4hzce3uhtfbgd4i735pol4mt3vr5c37lwz3h3e",
+        "sha256": "70b87551e9a076845e1f2226e87994261f11fdf5ee5f193dd63d16febb6767d9",
+        "size": 10120
+      },
+      "frozen_configuration_semantics_unchanged": true
+    },
+    "prohibited_effects": {
+      "benchmark_result_or_performance_claim_created": false,
+      "credentials_or_private_data_embedded": false,
+      "governance_bypassed_in_d": false,
+      "hidden_answers_exposed": false,
+      "live_provider_or_benchmark_invoked": false,
+      "replay_or_simulation_counted_as_live_quality": false,
+      "silent_frontier_or_full-verification_fallback": false,
+      "stale_capsule_or_proof_accepted": false,
+      "supervisor_quack_or_duckdb_mutated": false
+    },
+    "qualification_boundary": {
+      "benchmark_qualified": false,
+      "live_execution_eligible": false,
+      "performance_qualified": false,
+      "production_qualified": false,
+      "provider_qualified": false,
+      "reason": "implementation and injected validation do not constitute live benchmark execution or product/provider qualification"
+    },
+    "review_corrections": {
+      "initial_candidate_accepted": false,
+      "issues_corrected_before_approval": [
+        "successful D previously admitted a terminal disposition with neither autonomous nor human acceptance authority",
+        "successful D previously admitted an initially sufficient context carrying a contradictory post-expansion decision"
+      ],
+      "post_correction_commit": "25f2b38820cfbb9c90d24b896249e37d0c81232c"
+    },
+    "task_authority": {
+      "live_quack_duckdb_read_only": {
+        "mutated": false,
+        "revision": 1,
+        "status_at_review": "todo",
+        "task_cid": "baguqeeradjg42onr6stv3dy3i6rnhhvqhmgewqhqsynghki5jnmyia45raia",
+        "transport": "quack:127.0.0.1:41347"
+      },
+      "static_board": {
+        "canonical_task_cid": "baguqeerazfyr4jnf77oamsty4kfft2edjj2whqtrobyryce42ezga27llwvq",
+        "canonical_task_key": "task/v1/c9711e25a5ffdc064a78e28a59e8834a7563c27170711c089cd132606beb5dab",
+        "dependency_task_ids": [
+          "PCCE-060"
+        ],
+        "goal_id": "PCCE-G600"
+      }
+    }
+  },
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-065"
+}
