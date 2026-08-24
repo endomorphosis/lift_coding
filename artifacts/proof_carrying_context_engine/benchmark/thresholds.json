@@ -1,0 +1,69 @@
+{
+  "analysis": {
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 60060,
+    "confidence_bp": 9500,
+    "confidence_side": "one-sided-lower",
+    "failed_and_abstained_patch_tasks_score": 0,
+    "insufficient_population": "inconclusive-no-go",
+    "method": "seeded-percentile-paired-task-cluster-bootstrap",
+    "zero_denominator": "unavailable-no-go"
+  },
+  "benchmark_id": "pcce-external-generalization-v0.1",
+  "corpus_manifest_cid": "baguqeeraedh4m4sadrllnzrp7zi4bherd2dbp5injbvv7myzybjjnju3mlwa",
+  "evidence_policy": {
+    "estimated_cost_can_pass": false,
+    "failed_attempt_costs_included": true,
+    "live_quality_required": true,
+    "missing_live_provider": "unavailable-no-go",
+    "observed_cost_required": true,
+    "replay_counts_as_live": false,
+    "simulation_counts_as_live": false
+  },
+  "freeze_state": "pre-execution-preregistered",
+  "frozen_at": "2026-08-24T17:07:45Z",
+  "primary_comparisons": {
+    "accepted_patch_noninferiority": {
+      "baseline": "A",
+      "candidate": "D",
+      "decision_rule": "lower-confidence-bound-greater-than-or-equal-minus-margin",
+      "direction": "candidate-minus-baseline",
+      "margin_bp": 500,
+      "metric": "correct_accepted_patch_rate_bp"
+    },
+    "context_reduction": {
+      "baseline": "A",
+      "candidate": "D",
+      "isolated_diagnostic": "B-vs-A",
+      "metric": "context_reduction_bp",
+      "minimum_bp": 5000,
+      "target_bp": 6000
+    },
+    "routine_frontier_escalation": {
+      "configuration": "D",
+      "maximum_bp": 2500,
+      "metric": "routine_frontier_escalation_rate_bp",
+      "target_bp": 2000
+    },
+    "total_cost_reduction": {
+      "baseline": "A",
+      "candidate": "D",
+      "evidence": "observed-live-only",
+      "metric": "total_cost_reduction_bp",
+      "minimum_bp": 3000,
+      "target_bp": 5000
+    }
+  },
+  "results_observed_before_freeze": false,
+  "schema": "ipfs-datasets.proof-context.benchmark-threshold-set@1",
+  "schema_catalog_cid": "baguqeeraxjtfwbm4ci3yimo4u2c6ow74ziryk45npuzp3bkezgjr4camagba",
+  "zero_tolerance": {
+    "controlled_selected_test_false_negative_count": 0,
+    "critical_mutant_accepted_count": 0,
+    "critical_regression_accepted_count": 0,
+    "negative_review_autonomous_accept_count": 0,
+    "simulated_success_accepted_count": 0,
+    "stale_capsule_accepted_count": 0,
+    "stale_proof_accepted_count": 0
+  }
+}
