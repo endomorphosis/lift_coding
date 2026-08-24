@@ -1,0 +1,65 @@
+{
+  "admitted_at": "2026-08-24T03:46:50Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-033:deterministic-replay-adapter",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-adapter-implementation",
+  "content_id": "sha256:9cacdc723cd2cbb3046cbbf4e9b503ca137639a1cb7b548a7fa1b69a4af3f8c1",
+  "evidence": {
+    "adapter": "ipfs_accelerate_py.proof_context.adapters.replay.ReplayAdapter",
+    "canonical_base64": "decode-and-reencode equality required for response, patch, and log fields",
+    "external_effects": false,
+    "fail_closed": [
+      "missing or empty original response evidence",
+      "missing or empty patch evidence",
+      "non-live source invocation or proposal",
+      "task-pack-route mismatch",
+      "provider-model-revision mismatch",
+      "adapter-fixture-response selector mismatch",
+      "invalid fixture CID",
+      "invalid original response artifact CID",
+      "noncanonical base64",
+      "unbounded replay binding or recorded log"
+    ],
+    "fixture_schema": "ipfs-accelerate.proof-context.v0.1/replay-fixture@1",
+    "full_adapter_validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters (63 passed)",
+    "original_source_records": {
+      "invocation_and_proposal_provenance": "live",
+      "response_artifact_cid_verified_against_exact_bytes": true,
+      "usage_and_cost_required": true
+    },
+    "provenance": "replayed",
+    "replay_projection": {
+      "invocation_and_proposal_ids_preserved": true,
+      "live_response_claim_removed": true,
+      "provenance_relabelled": "replayed",
+      "usage_and_cost_preserved": true
+    },
+    "result_binding": {
+      "channel": "canonical first line of bounded AdapterResult.log_bytes",
+      "fields": [
+        "adapter_id",
+        "fixture_cid",
+        "response_artifact_cid",
+        "task_cid",
+        "pack_cid",
+        "route_cid",
+        "invocation_cid",
+        "proposal_cid",
+        "binding_cid"
+      ],
+      "schema": "ipfs-accelerate.proof-context.v0.1/replay-binding@1"
+    },
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_replay.py",
+    "validation_results": {
+      "focused_replay_suite": "18 passed",
+      "full_adapter_suite": "63 passed",
+      "ruff_check": "passed",
+      "ruff_format_check": "passed"
+    }
+  },
+  "objective_id": "PCCE-G300",
+  "rollback": "Revert the replay adapter and invalidate only replay-derived results; live evidence remains unaffected.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-033"
+}
