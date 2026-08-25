@@ -1,0 +1,171 @@
+{
+  "artifact_identity": "bafkreieafpmng6gcm4z2vqkdcvfscajmoqm3nbq6l2egnrb5xgwrrl3ddi",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of the exact required-job manifest bytes",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-local-ci-contract-external-authority-explicit-no-go",
+  "evidence": {
+    "acceptance_disposition": {
+      "branch_ruleset_authority_observed": false,
+      "complete_job_logs_observed": false,
+      "current_head_ci_run_observed": false,
+      "decision": "NO-GO",
+      "dependency_license_run_findings_observed": false,
+      "local_contract_implemented": true,
+      "release_qualified": false,
+      "required_job_count": 9,
+      "waivers": []
+    },
+    "allowed_scope": {
+      "actual_nested_paths": [
+        "external/ipfs_accelerate/.github/workflows/proof-context-v0.1.yml",
+        "external/ipfs_accelerate/scripts/proof_context/verify_release_ci.py",
+        "external/ipfs_accelerate/test/proof_context/test_release_ci_contract.py"
+      ],
+      "actual_outer_paths": [
+        "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json",
+        "external/ipfs_accelerate"
+      ],
+      "board_allowed_paths": [
+        "external/ipfs_accelerate/.github/workflows/proof-context-v0.1.yml",
+        "external/ipfs_accelerate/scripts/proof_context/verify_release_ci.py",
+        "external/ipfs_accelerate/test/proof_context/test_release_ci_contract.py",
+        "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json"
+      ]
+    },
+    "external_authority": {
+      "branch_ruleset_id": null,
+      "branch_ruleset_url": null,
+      "current_head_sha": null,
+      "dependency_license_findings": null,
+      "job_logs": [],
+      "required_check_configuration_observed": false,
+      "status": "unavailable-not-observed",
+      "workflow_run_id": null,
+      "workflow_run_url": null
+    },
+    "local_contract": {
+      "action_pins_full_commit": true,
+      "aggregate_needs_all_upstream_jobs": true,
+      "bounded_evidence_uploads": 9,
+      "continue_on_error_occurrences": 0,
+      "error_swallow_occurrences": 0,
+      "explicit_immutable_evidence_input_required": true,
+      "local_contract_test_count": 15,
+      "local_contract_tests_passed": 15,
+      "mutable_action_refs": 0,
+      "required_jobs": [
+        "release-contract",
+        "clean-install",
+        "unit-integration",
+        "security",
+        "benchmark-smoke",
+        "receipt-seal",
+        "container",
+        "dependency-license",
+        "release-gate"
+      ],
+      "skip_or_deselect_occurrences": 0
+    },
+    "nested_source": {
+      "base_commit": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+      "base_tree": "ef570b0c958bd672bc68da58d17813b223f00c6a",
+      "files": {
+        ".github/workflows/proof-context-v0.1.yml": {
+          "blob": "1333acfdfff40632dabce453584e1677b13c3927",
+          "cid_v1_raw": "bafkreiezzjimg336bs4lpc52wsw2he42zannjphs3xq6vxvhhp4upht66m",
+          "sha256": "99ca50c36f7e0cb8b78bbab4ada3939ac81ad4bcf2dde1eadea73bf9479e7ef3",
+          "size": 30566
+        },
+        "scripts/proof_context/verify_release_ci.py": {
+          "blob": "be79e2ac236466e7fc60f6bd846007e47fbd3b59",
+          "cid_v1_raw": "bafkreig4mjbcsh2w22x6o77qbkpbna7dmoc3fmx4znshmvefzvomcktqbq",
+          "sha256": "dc6242291f56d6afe77ff00a9e1683e36385b2b2fccb64765485cd5cc12a700c",
+          "size": 39094
+        },
+        "test/proof_context/test_release_ci_contract.py": {
+          "blob": "6dd9b9ab42fdbc4b98f5d9168f68da1d8758c630",
+          "cid_v1_raw": "bafkreierczycul5zb2sivjptluezmq6y7sevhbg6wcqe7qbdzabpcsz3me",
+          "sha256": "9116702a2fb90ea48aa5f35d099643d8fc895384deb0a04fc023c802f14b3b61",
+          "size": 8358
+        }
+      },
+      "implementation_commit": "409944511f47857b8fbbedfebd9fbfc82ec86f7e",
+      "implementation_tree": "9070f8ff95646d124cf23254bd5e84b69b7d299b",
+      "repository": "external/ipfs_accelerate"
+    },
+    "outer_composition": {
+      "accelerator_base_gitlink": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+      "accelerator_candidate_gitlink": "409944511f47857b8fbbedfebd9fbfc82ec86f7e",
+      "base_commit": "43457c396be7a9116152e4414dadc4625eff2c2e",
+      "base_tree": "d2a3e450154cbf0b200d7eaae5db0f9eec8bbd66",
+      "branch": "agent/pcce080-ci-author",
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json",
+        "external/ipfs_accelerate"
+      ]
+    },
+    "predecessor_disposition": {
+      "PCCE-068": "receipt-and-benchmark-qualification-unavailable-at-historical-evidence-cut",
+      "PCCE-076": "receipt-and-security-qualification-unavailable-at-historical-evidence-cut",
+      "historical_evidence_cut": "43457c396be7a9116152e4414dadc4625eff2c2e"
+    },
+    "prohibited_effects": {
+      "branch_protection_or_ruleset_claim_fabricated": false,
+      "continue_on_error_or_error_swallow_added": false,
+      "current_head_ci_success_claimed": false,
+      "database_or_supervisor_state_mutated": false,
+      "external_workflow_dispatched": false,
+      "job_log_or_run_url_fabricated": false,
+      "mutable_action_or_source_dependency_added": false,
+      "provider_or_model_invoked": false,
+      "source_or_editable_install_added": false
+    },
+    "required_job_manifest": {
+      "cid_v1_raw": "bafkreieafpmng6gcm4z2vqkdcvfscajmoqm3nbq6l2egnrb5xgwrrl3ddi",
+      "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+      "schema": "lift_coding.proof-carrying-context-engine.required-ci-jobs@1",
+      "sha256": "802bd8d378c26733aac143154b21012c7419b6861e5e8866c43db9ad18af631a",
+      "size": 10271
+    },
+    "task_authority": {
+      "database_mutated_by_author": false,
+      "live_task_cid": "baguqeerax65k5eln5awrgysj33pt6gsatg2po2leftgrmg25m3f47ojhnnga",
+      "reviewed_revision": 1,
+      "static_board_cid_non_authoritative_for_runtime": "baguqeeramdjzkg3vpqgtq5oa4i2frfcwzinebpr27qwfwztf2hweutvtuyxq"
+    },
+    "validation": [
+      {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_release_ci_contract.py",
+        "outcome": "15 passed"
+      },
+      {
+        "command": "python external/ipfs_accelerate/scripts/proof_context/verify_release_ci.py --workflow external/ipfs_accelerate/.github/workflows/proof-context-v0.1.yml",
+        "outcome": "local contract passed; qualification remained NO-GO"
+      },
+      {
+        "command": "python -m ruff check scripts/proof_context/verify_release_ci.py test/proof_context/test_release_ci_contract.py",
+        "outcome": "passed"
+      },
+      {
+        "command": "python -m ruff format --check scripts/proof_context/verify_release_ci.py test/proof_context/test_release_ci_contract.py",
+        "outcome": "passed"
+      },
+      {
+        "command": "python YAML SafeLoader parse of .github/workflows/proof-context-v0.1.yml",
+        "outcome": "passed with 9 jobs and exact trigger set"
+      },
+      {
+        "command": "git diff --check",
+        "outcome": "passed"
+      }
+    ]
+  },
+  "objective_id": "PCCE-G800",
+  "rollback": "Preserve the NO-GO manifest and unavailable-authority record; revert only the workflow/verifier/test, accelerator gitlink, manifest, and receipt. Never remove or soften a required check to obtain green status.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-080"
+}
