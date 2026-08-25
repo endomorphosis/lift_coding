@@ -1,0 +1,293 @@
+{
+  "artifact_identity": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of the exact v0.1-rc1 release_manifest.json bytes",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "evidence-task-completed-deterministic-release-assembly-explicit-no-go",
+  "evidence": {
+    "acceptance_disposition": {
+      "assembly_completed": true,
+      "blocker_count": 7,
+      "decision": "NO-GO",
+      "evidence_task_completed": true,
+      "external_publication_performed": false,
+      "promotable": false,
+      "qualification_level_assigned": false,
+      "release_qualified": false,
+      "release_tag_created": false,
+      "waivers": []
+    },
+    "allowed_scope": {
+      "actual_nested_paths": [
+        "external/ipfs_accelerate/scripts/proof_context/build_release_candidate.py"
+      ],
+      "actual_outer_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/VERIFY.md",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/known_limitations.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/qualification.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/rollback.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/verification.json",
+        "external/ipfs_accelerate"
+      ],
+      "board_allowed_paths": [
+        "external/ipfs_accelerate/scripts/proof_context/build_release_candidate.py",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json"
+      ]
+    },
+    "builder": {
+      "base_commit": "36021e09d8f3d8d5878108f64e3bb9cb73ebafdd",
+      "base_tree": "ebd9b42ba48a71ca908e86a9467e581446be5930",
+      "blob": "ef861d11df80dc23ea1c2c36e2e2ab9ae2f96bb9",
+      "cid_v1_raw": "bafkreig6f7cewjmll4lxqb7a5t7jet4dgxdvqyjqmel6dz4zzafvy6d7tm",
+      "implementation_commit": "8d629ce7f2ee5a6109dc92e84b47664ae896ddc6",
+      "implementation_parent": "777ea403b8c6cbd2a1974c7594e81b03a1b58c70",
+      "implementation_tree": "6f40999059d861ef5bdde24f5d4228a6e84b2e30",
+      "initial_builder_commit": "777ea403b8c6cbd2a1974c7594e81b03a1b58c70",
+      "initial_builder_tree": "2d856d70cbff07b08b6c2b9e273a1d08cf52bd70",
+      "path": "external/ipfs_accelerate/scripts/proof_context/build_release_candidate.py",
+      "sha256": "de2fc44b258b5f177807e0ecfe924f8335c75861306117e1e799c80b5c787f9b",
+      "size": 45339
+    },
+    "determinism": {
+      "build_count": 2,
+      "build_identities": {
+        "build_a": {
+          "release_manifest_cid_v1_raw": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+          "release_manifest_sha256": "f0002a16bc97d8b49a15b7097ea1e63f2edbaf4c3a75275faa89026e4f3ed385"
+        },
+        "build_b": {
+          "release_manifest_cid_v1_raw": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+          "release_manifest_sha256": "f0002a16bc97d8b49a15b7097ea1e63f2edbaf4c3a75275faa89026e4f3ed385"
+        },
+        "identical": true
+      },
+      "comparison": "exact relative-path set and byte equality",
+      "deterministic_reconstruction": "passed",
+      "network_access_required": false,
+      "output_file_count": 6,
+      "secret_and_hidden_body_scan": "passed"
+    },
+    "evidence_cut": {
+      "gitlinks": {
+        "Mcp-Plus-Plus": {
+          "commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+          "tree": "3a57e33053d6007cb99cbe265c6608954d9cea7c"
+        },
+        "external/ipfs_accelerate": {
+          "commit": "36021e09d8f3d8d5878108f64e3bb9cb73ebafdd",
+          "tree": "ebd9b42ba48a71ca908e86a9467e581446be5930"
+        },
+        "external/ipfs_datasets": {
+          "commit": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+          "tree": "839980ccaba593b146213928bc5e8bf95e7a1fd9"
+        },
+        "external/ipfs_kit": {
+          "commit": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+          "tree": "b4413c1ad92b85df2e110c0185d2449e56fc6497"
+        }
+      },
+      "historical_not_current_head_claim": true,
+      "outer_commit": "c5bdde1482a9afab7c5827a52bdf4f7b1d63f090",
+      "outer_tree": "bb7849ac3bc92ad80e0bc7dff9d3b421d08ce872"
+    },
+    "limitations": {
+      "benchmark_qualification": {
+        "decision": "NO-GO",
+        "evidence_present_and_bound": true,
+        "live_provider_or_model_execution_observed": false,
+        "release_qualified": false
+      },
+      "ci_qualification": {
+        "current_head_ci_run_observed": false,
+        "decision": "NO-GO",
+        "evidence_present_and_bound": true,
+        "external_required_check_authority_observed": false,
+        "release_qualified": false
+      },
+      "installation_qualification": {
+        "decision": "NO-GO",
+        "evidence_present_and_bound": true,
+        "release_qualified": false
+      },
+      "longitudinal_self_hosting_qualification": {
+        "decision": "NO-GO",
+        "evidence_present_and_bound": true,
+        "qualification_cap": "NOT-QUALIFIED",
+        "release_qualified": false,
+        "status": "unavailable"
+      },
+      "missing_predecessor_receipts": [],
+      "missing_required_inputs": [],
+      "package_archive_bytes_copied_into_rc1": 0,
+      "package_signature_results_observed": 0,
+      "security_qualification": {
+        "decision": "NO-GO",
+        "evidence_present_and_bound": true,
+        "release_qualified": false
+      }
+    },
+    "outer_composition": {
+      "accelerator_base_gitlink": "36021e09d8f3d8d5878108f64e3bb9cb73ebafdd",
+      "accelerator_candidate_gitlink": "8d629ce7f2ee5a6109dc92e84b47664ae896ddc6",
+      "accelerator_candidate_tree": "6f40999059d861ef5bdde24f5d4228a6e84b2e30",
+      "base_commit": "b087fa0b1561f099fa7c3577e559b38e9bb2e43d",
+      "base_tree": "bb7849ac3bc92ad80e0bc7dff9d3b421d08ce872",
+      "branch": "integration/PCCE-081-final-20260825",
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/VERIFY.md",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/known_limitations.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/qualification.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/rollback.json",
+        "artifacts/proof_carrying_context_engine/release/v0.1-rc1/verification.json",
+        "external/ipfs_accelerate"
+      ],
+      "evidence_task_completed": true,
+      "independent_review_status": "passed",
+      "provisional": false
+    },
+    "package_evidence": {
+      "data_only_mcp_plus_plus_pair_bound": true,
+      "distributions": 4,
+      "package_archive_bytes_copied_into_rc1": 0,
+      "package_hash_descriptors": 8,
+      "package_signature_results_observed": 0,
+      "unavailable_admitted_artifacts": [
+        "ipfs_kit_py-0.3.0.tar.gz"
+      ],
+      "wheel_sdist_pairs": 4
+    },
+    "predecessor_evidence": {
+      "missing_receipts": 0,
+      "present_receipts": 64,
+      "required_predecessors": 64,
+      "transitive_receipt_digests_in_manifest": true
+    },
+    "prohibited_effects": {
+      "blocked_or_failed_evidence_omitted": false,
+      "credentials_or_hidden_benchmark_bodies_included": false,
+      "database_or_supervisor_state_mutated": false,
+      "inputs_rebuilt_or_repaired": false,
+      "package_or_release_published": false,
+      "release_qualification_claimed": false,
+      "release_tag_created": false
+    },
+    "release_bundle": {
+      "bundle_identity": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+      "files": {
+        "VERIFY.md": {
+          "cid_v1_raw": "bafkreicnij547aaao36esxot3sls7uavz2gjkoumpm73eodnzfpvxsar7a",
+          "sha256": "4d427bcf800076fc495dd3dc972fd015ce8c953a8c7b3fb2386dc95f5bc811f8",
+          "size": 883
+        },
+        "known_limitations.json": {
+          "cid_v1_raw": "bafkreidnyxn5acwzbaoajrh54cdit2yfefzqa5rmdsg3l7y3toogipthe4",
+          "sha256": "6dc5dbd00ad9081c04c4fde08689eb05217300762c1c8db5ff1b9b9c643e6727",
+          "size": 1449
+        },
+        "qualification.json": {
+          "cid_v1_raw": "bafkreieyecor6dhks3336fgojntkne5z3ctxqkectsw5p4pp5ghkqkrjii",
+          "sha256": "98209d1f0cea96f7bf14ce4b66a693b9d8a77828829cadd7f1efe98ea82a2942",
+          "size": 631
+        },
+        "release_manifest.json": {
+          "cid_v1_raw": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+          "sha256": "f0002a16bc97d8b49a15b7097ea1e63f2edbaf4c3a75275faa89026e4f3ed385",
+          "size": 90632
+        },
+        "rollback.json": {
+          "cid_v1_raw": "bafkreicfxnc5ub4c7pc2eh6dml7fjx5vkutjr4bs7cw2xzc2gidjafeqoq",
+          "sha256": "45bb45da0782fbc5a21fc362fe54dfb5552698f032f8adabe45a320690149074",
+          "size": 532
+        },
+        "verification.json": {
+          "cid_v1_raw": "bafkreicfs2bdx6q2t5bheodt5jxs7au45xjx5ujdfnabiigbdze5cionpy",
+          "sha256": "4596823bfa1a9f42723873ea6f2f829cedd37ed1232b401420c11e49d121cd7e",
+          "size": 881
+        }
+      },
+      "manifest_schema": "lift_coding.proof-carrying-context-engine.release-manifest@1",
+      "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1"
+    },
+    "required_input_evidence": {
+      "missing_inputs": 0,
+      "present_inputs": 34,
+      "required_inputs": 34,
+      "transitive_artifact_digests_in_manifest": true
+    },
+    "rollback": {
+      "evidence_change_requires": "v0.1-rc2",
+      "rc1_overwrite_allowed": false,
+      "retains_failure_evidence": true
+    },
+    "source_admission": {
+      "admitted_candidate_commit": "c5bdde1482a9afab7c5827a52bdf4f7b1d63f090",
+      "admitted_candidate_tree": "bb7849ac3bc92ad80e0bc7dff9d3b421d08ce872",
+      "canonical_merge_commit": "b087fa0b1561f099fa7c3577e559b38e9bb2e43d",
+      "canonical_merge_tree": "bb7849ac3bc92ad80e0bc7dff9d3b421d08ce872",
+      "source_snapshot_remains_admitted_candidate_bytes": true,
+      "source_task": {
+        "artifact_identity": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+        "evidence_task_status": "completed",
+        "live_task_cid": "baguqeerax65k5eln5awrgysj33pt6gsatg2po2leftgrmg25m3f47ojhnnga",
+        "live_task_revision": 3,
+        "live_task_status": "completed",
+        "task_id": "PCCE-080"
+      }
+    },
+    "task_authority": {
+      "database_completion_by_author": false,
+      "database_mutated_by_author": false,
+      "evidence_task_completed": true,
+      "live_status_at_authoring": "todo",
+      "live_task_authority_observed": true,
+      "live_task_cid": "baguqeerafrcsh2er4rissdyxq5ikb34kqbvrmb3a6drtys7k3tdlhbualp6q",
+      "live_task_revision": 1,
+      "static_board": {
+        "canonical_task_cid": "baguqeeraavz2sz7b7nlia2llpvb4epjldsqmvl3anqxszvsfqkzidi7imfqq",
+        "canonical_task_key": "task/v1/0573a967e1fb5680696b7d43c23d2b1ca0caaf606c2f2cd64582b281a3e86161",
+        "status": "todo"
+      }
+    },
+    "validation": [
+      {
+        "command": "python external/ipfs_accelerate/scripts/proof_context/build_release_candidate.py --build artifacts/proof_carrying_context_engine/release/v0.1-rc1",
+        "outcome": "passed; internal deterministic two-build byte comparison passed"
+      },
+      {
+        "command": "python external/ipfs_accelerate/scripts/proof_context/build_release_candidate.py --check artifacts/proof_carrying_context_engine/release/v0.1-rc1",
+        "outcome": "passed; deterministic reconstruction and bounded secret/hidden-body scan passed"
+      },
+      {
+        "command": "python -m json.tool on all JSON bundle files and PCCE-081 receipt",
+        "outcome": "passed"
+      },
+      {
+        "command": "python -m ruff check scripts/proof_context/build_release_candidate.py",
+        "outcome": "passed"
+      },
+      {
+        "command": "python -m ruff format --check scripts/proof_context/build_release_candidate.py",
+        "outcome": "passed"
+      },
+      {
+        "command": "python manifest/transitive SHA256, raw-CID, package-pair, MCP contract, predecessor/input and NO-GO audit",
+        "outcome": "passed"
+      },
+      {
+        "command": "git diff --check and exact outer/nested path-scope audit",
+        "outcome": "passed"
+      }
+    ]
+  },
+  "evidence_task_completed": true,
+  "independent_review_status": "passed",
+  "objective_id": "PCCE-G800",
+  "rollback": "Retain the immutable unpromoted rc1 manifest and NO-GO receipt, repair only through owning predecessor tasks, and assemble v0.1-rc2 rather than overwrite rc1.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-081"
+}
