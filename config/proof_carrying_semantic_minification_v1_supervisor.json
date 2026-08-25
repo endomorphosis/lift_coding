@@ -1,0 +1,357 @@
+{
+  "accepted_plan_revision_alias": "PCSM-PLAN-V1",
+  "authority_policy": {
+    "canonical_semantic_authority": "ipfs_datasets_py",
+    "duckdb_transactional_authority": true,
+    "ducklake_projection_authority": false,
+    "exact_bytes_storage_authority": "ipfs_kit_py",
+    "m2_or_m3_mutation_authority": false,
+    "m3_status": "experimental_advisory_only",
+    "model_or_advisor_output_is_completion_authority": false,
+    "orchestration_admission_authority": "ipfs_accelerate_py",
+    "quack_exclusive_owner_transport": true,
+    "unknown_ambiguous_stale_or_unsupported_disposition": "abstain_quarantine_or_require_approval"
+  },
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "budget_policy": {
+    "max_automatically_generated_tasks_per_refill": 10,
+    "max_frontier_model_calls": 130,
+    "max_initial_tasks": 70,
+    "max_replan_epochs": 20,
+    "max_total_tasks": 130,
+    "missing_budget_evidence_disposition": "typed_unavailable_or_non_promoted",
+    "validation_token_and_compute_reserve_percent": 40
+  },
+  "check_interval_seconds": 20,
+  "codebase_refill_enabled": false,
+  "daemon_interval_seconds": 20,
+  "database_program": {
+    "authority_mode": "quack",
+    "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
+    "event_store_path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/events",
+    "explicit_legacy": false,
+    "export_profile": "pcsm-v1",
+    "failover_policy": "fail_closed",
+    "quack_endpoint": "quack:127.0.0.1:41467",
+    "runtime_registry_path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/registry",
+    "schema_revision": "1",
+    "store_generation": "pcsm-v1",
+    "store_id": "data/agent_supervisor/proof_carrying_semantic_minification_v1/control.duckdb",
+    "task_source_kind": "duckdb",
+    "worktree_root": "data/agent_supervisor/proof_carrying_semantic_minification_v1/worktrees"
+  },
+  "dependency_guardrail_enabled": true,
+  "ducklake_projection_program": {
+    "acceptance_prerequisite": false,
+    "authority": false,
+    "catalog_path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/ducklake/catalog.duckdb",
+    "completion_prerequisite": false,
+    "data_path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/ducklake/data",
+    "logical_datasets": [
+      "bootstrap_history"
+    ],
+    "may_grant_authority": false,
+    "mode": "enabled_non_authoritative",
+    "outage_policy": "typed unavailable and replayable; never block DuckDB authority",
+    "scheduling_prerequisite": false
+  },
+  "exit_when_all_tracks_terminal": false,
+  "goal_prefix": "PCSM-G",
+  "idle_lane_work_stealing": "virgin-transfer",
+  "implementation_log_stall_seconds": 1200,
+  "implementation_max_timeout_seconds": 21600,
+  "implementation_retry_budget": 1,
+  "implementation_timeout_seconds": 7200,
+  "initial_projection": {
+    "blocked_task_ids": [],
+    "completed_task_ids": [],
+    "goal_count": 11,
+    "ready_task_ids": [
+      "PCSM-000",
+      "PCSM-001",
+      "PCSM-002",
+      "PCSM-003"
+    ],
+    "root_goal_id": "PCSM-G000",
+    "task_count": 70,
+    "task_dependency_count": 111,
+    "terminal_task_id": "PCSM-119"
+  },
+  "lanes": [
+    {
+      "index": 0,
+      "initial_focus": "inventory-identities",
+      "name": "pcsm-lane-0",
+      "strict_shard_remainder": 0
+    },
+    {
+      "index": 1,
+      "initial_focus": "contracts-compiler",
+      "name": "pcsm-lane-1",
+      "strict_shard_remainder": 1
+    },
+    {
+      "index": 2,
+      "initial_focus": "projection-linker",
+      "name": "pcsm-lane-2",
+      "strict_shard_remainder": 2
+    },
+    {
+      "index": 3,
+      "initial_focus": "assurance-evaluation",
+      "name": "pcsm-lane-3",
+      "strict_shard_remainder": 3
+    }
+  ],
+  "max_lanes": 4,
+  "max_restarts": 3,
+  "max_task_attempts": 1,
+  "merge_retry_budget": 2,
+  "merge_target_branch": "agent/proof-carrying-semantic-minification-v1",
+  "objective_goal_refinement_enabled": true,
+  "objective_refill_enabled": true,
+  "objective_submission": {
+    "campaign_count": 1,
+    "canonical_handoff": "configured_board_git_seal_then_database_task_source_materialize",
+    "direct_interface_status": "unavailable_no_admitted_materialization_path",
+    "proposal_only_interface": "PromptSupervisorService.preview",
+    "requested_interface": "supervisor.objectives.submit",
+    "submission_event": "successful DuckDB materialization receipt"
+  },
+  "objectives_path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
+  "operational_control_plane": {
+    "automatic_file_fallback_permitted": false,
+    "direct_multi_process_duckdb_file_open_permitted": false,
+    "duckdb_role": "authoritative transactional goals, tasks, lifecycle, CAS, fences, receipts, and event cursor",
+    "ducklake_role": "rebuildable non-authoritative append-only analytics projection",
+    "markdown_is_bootstrap_only": true,
+    "name": "DuckDB + Quack with optional DuckLake projection",
+    "outage_policy": "fail_closed",
+    "quack_role": "authenticated loopback transport and exclusive state-owner boundary"
+  },
+  "plan_path": "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md",
+  "poll_interval_seconds": 5,
+  "program_identifier": "proof-carrying-semantic-minification-v1",
+  "protected_paths": [
+    "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md",
+    "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
+    "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
+    "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scripts/generate_proof_carrying_semantic_minification_board.py",
+    "scripts/validate_proof_carrying_semantic_minification_board.py",
+    "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+    "scripts/ops/agent_supervisor/implementation_supervisor_entry.py"
+  ],
+  "provider": {
+    "fallback_model_id": "gpt-5.6-terra",
+    "fallback_provider_id": "codex",
+    "fallback_reasoning_effort": "high",
+    "fallback_trigger": "primary_quota_exhausted",
+    "max_concurrency": 4,
+    "primary_model_id": "grok-4.6",
+    "primary_provider_id": "grok_cli",
+    "secrets_from_environment_only": true,
+    "secrets_in_argv_prompts_logs_or_receipts": false
+  },
+  "reconciliation_guardrail_enabled": true,
+  "refill_policy": {
+    "append_only": true,
+    "content_addressed": true,
+    "derived_refill": {
+      "cooldown_seconds": 300,
+      "max_epochs": 20,
+      "max_goals_per_epoch": 8,
+      "max_open_tasks": 40,
+      "max_refinement_depth": 3,
+      "max_tasks_per_epoch": 10,
+      "max_total_tasks": 130,
+      "max_unchanged_failure_retries": 2,
+      "min_open_tasks": 8,
+      "mutate_seed_board": false
+    },
+    "empty_scan_may_claim_completion": false,
+    "named_refill_tranches": [
+      [
+        "PCSM-091",
+        "PCSM-092",
+        "PCSM-093",
+        "PCSM-094",
+        "PCSM-095",
+        "PCSM-096",
+        "PCSM-100",
+        "PCSM-101",
+        "PCSM-102",
+        "PCSM-103"
+      ],
+      [
+        "PCSM-104",
+        "PCSM-105",
+        "PCSM-106",
+        "PCSM-107",
+        "PCSM-108",
+        "PCSM-109",
+        "PCSM-110",
+        "PCSM-111",
+        "PCSM-112",
+        "PCSM-113"
+      ],
+      [
+        "PCSM-114",
+        "PCSM-115",
+        "PCSM-116",
+        "PCSM-117",
+        "PCSM-118",
+        "PCSM-119"
+      ]
+    ],
+    "root_terminal_task_id": "PCSM-119",
+    "seed_tasks_are_immutable": true,
+    "source": "objective_heap",
+    "unscoped_codebase_refill_allowed": false
+  },
+  "retry_budget_guardrail_enabled": true,
+  "runtime_paths": {
+    "evidence": "data/agent_supervisor/proof_carrying_semantic_minification_v1/evidence",
+    "generated_runtime_artifacts_are_completion_authority": false,
+    "logs": "data/agent_supervisor/proof_carrying_semantic_minification_v1/logs",
+    "merge_queue": "data/agent_supervisor/proof_carrying_semantic_minification_v1/merge-queue",
+    "quack_owner": "data/agent_supervisor/proof_carrying_semantic_minification_v1/quack-owner",
+    "root": "data/agent_supervisor/proof_carrying_semantic_minification_v1",
+    "state": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state",
+    "worktrees": "data/agent_supervisor/proof_carrying_semantic_minification_v1/worktrees"
+  },
+  "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
+  "source_binding": {
+    "accelerator_planning_revision": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "accelerator_planning_tree": "b1dd163fe6ad7ab52cb3639d05fcbc0fbe64ff84",
+    "accelerator_required_ancestor": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "accelerator_required_branch": "agent/proof-carrying-semantic-minification-v1",
+    "bootstrap_task_source": "duckdb",
+    "changed_revision_requires_fresh_inventory_and_baseline": true,
+    "ipfs_accelerate_origin_main_revision": "accc03b165d6b7150ab688a4fca51ff508d4f9ac",
+    "ipfs_accelerate_planning_revision": "dc71d92392b7bc542bcd730bcef848263f36eded",
+    "ipfs_accelerate_planning_tree": "97a69559937e8d3c2292557546a0ff4f43f557ed",
+    "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
+    "ipfs_datasets_origin_main_revision": "c30ccbec997868b061c4cadac38d30468c46ea2d",
+    "ipfs_datasets_planning_revision": "719083b59637558d2338281a63435021e994a875",
+    "ipfs_datasets_planning_tree": "6ec131d1b71484e8244266f993b2b19edccee636",
+    "ipfs_datasets_submodule_path": "external/ipfs_datasets",
+    "ipfs_kit_origin_main_revision": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
+    "ipfs_kit_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "ipfs_kit_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+    "ipfs_kit_submodule_path": "external/ipfs_kit",
+    "mcp_plus_plus_origin_main_revision": "838261c04a4b6f2643d75017e0b472876597c673",
+    "mcp_plus_plus_planning_revision": "838261c04a4b6f2643d75017e0b472876597c673",
+    "mcp_plus_plus_planning_tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253",
+    "mcp_plus_plus_submodule_path": "Mcp-Plus-Plus",
+    "planning_revision_is_runtime_completion_evidence": false,
+    "record_recursive_repository_forest_at_launch": true,
+    "require_clean_nested_worktree_at_task_start": true,
+    "require_initialized_gitlinks": true,
+    "require_origin_main_as_ancestor": true,
+    "require_superproject_gitlink_equals_nested_head": true
+  },
+  "stale_seconds": 1800,
+  "strict_task_sharding": true,
+  "task_groups": {
+    "PCSM-G100": [
+      "PCSM-000",
+      "PCSM-001",
+      "PCSM-002",
+      "PCSM-003",
+      "PCSM-004"
+    ],
+    "PCSM-G200": [
+      "PCSM-010",
+      "PCSM-011",
+      "PCSM-012",
+      "PCSM-013",
+      "PCSM-014",
+      "PCSM-015",
+      "PCSM-016",
+      "PCSM-017",
+      "PCSM-018",
+      "PCSM-019"
+    ],
+    "PCSM-G300": [
+      "PCSM-020",
+      "PCSM-021",
+      "PCSM-022",
+      "PCSM-023",
+      "PCSM-024",
+      "PCSM-025",
+      "PCSM-026",
+      "PCSM-027",
+      "PCSM-028",
+      "PCSM-030",
+      "PCSM-031",
+      "PCSM-032",
+      "PCSM-033",
+      "PCSM-034",
+      "PCSM-035",
+      "PCSM-036"
+    ],
+    "PCSM-G400": [
+      "PCSM-040",
+      "PCSM-041",
+      "PCSM-042",
+      "PCSM-043",
+      "PCSM-044",
+      "PCSM-045",
+      "PCSM-046",
+      "PCSM-047"
+    ],
+    "PCSM-G500": [
+      "PCSM-050",
+      "PCSM-051",
+      "PCSM-052",
+      "PCSM-053",
+      "PCSM-054",
+      "PCSM-055",
+      "PCSM-056",
+      "PCSM-057"
+    ],
+    "PCSM-G600": [
+      "PCSM-060",
+      "PCSM-061",
+      "PCSM-062",
+      "PCSM-063",
+      "PCSM-064",
+      "PCSM-065",
+      "PCSM-066",
+      "PCSM-067",
+      "PCSM-068",
+      "PCSM-070",
+      "PCSM-071",
+      "PCSM-072",
+      "PCSM-073",
+      "PCSM-074",
+      "PCSM-075",
+      "PCSM-076"
+    ],
+    "PCSM-G700": [
+      "PCSM-080",
+      "PCSM-081",
+      "PCSM-082",
+      "PCSM-083",
+      "PCSM-084",
+      "PCSM-085"
+    ],
+    "PCSM-G800": [
+      "PCSM-090"
+    ],
+    "PCSM-G900": [],
+    "PCSM-G950": []
+  },
+  "task_prefix": "PCSM-",
+  "taskboard_path": "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
+  "validation_retry_budget": 2,
+  "validator_path": "scripts/validate_proof_carrying_semantic_minification_board.py",
+  "watchdog_startup_grace_seconds": 600,
+  "worktree_submodule_paths": [
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "Mcp-Plus-Plus"
+  ]
+}
