@@ -1,0 +1,278 @@
+{
+  "artifact_identity": "baguqeeraxdcsravklkrwuqftkaf3nuqvqnrnnj6ypwydsnntxv4l45veuxca",
+  "artifact_identity_kind": "software-contract structured CID of the PCCE-068 benchmark qualification projection",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_disposition": "completed-with-explicit-benchmark-no-go",
+  "completion_mode": "supervised-deterministic-benchmark-qualification-projection-no-execution",
+  "decision": "NO-GO",
+  "evidence": {
+    "accepted_pcce067_evidence_cut": {
+      "admission_scope": "immutable input commit supplied for PCCE-068 candidate authoring; no board or database mutation is claimed here",
+      "dependency_artifact_identity": "baguqeeracruwjey3ittkczloj74nxtamwnbme22tiptck3ftb4c647h7olwq",
+      "dependency_decision": "NO-GO",
+      "dependency_live_task_cid": "baguqeeraozzrsd26abvatqptb5bhvxa5dw7mymfcryemk355ieqlmczvtzjq",
+      "dependency_status": "completed",
+      "dependency_task_id": "PCCE-067",
+      "gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+        "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      },
+      "outer_commit": "caefdd51db180e43885ef3bf51e0794ac6b00e45",
+      "outer_parent": "d23e861fd4fc6293c888a6dc3377e8c94d4129d9",
+      "outer_tree": "6512c396bbf2c086d69e91b5fa5df4df280337a6"
+    },
+    "admission_composition": {
+      "base_commit": "0758f8c265b1c1e8868af53cd756c37811c3451e",
+      "base_tree": "7dba70342019d610ea3a3bb9bedbd3c31e14a52c",
+      "branch": "implementation/PCCE-068-benchmark-integrated-20260825",
+      "changed_paths": [
+        "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "artifacts/proof_carrying_context_engine/benchmark/report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json"
+      ],
+      "composition_preserves_frozen_input_evidence": true
+    },
+    "allowed_scope": {
+      "actual_paths": [
+        "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "artifacts/proof_carrying_context_engine/benchmark/report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json"
+      ],
+      "board_files_mutated": false,
+      "board_owned_paths": [
+        "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "artifacts/proof_carrying_context_engine/benchmark/report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json"
+      ],
+      "canonical_worktree_mutated": false,
+      "epic_f_report_created": false,
+      "quack_or_duckdb_mutated": false,
+      "submodule_gitlinks_mutated": false
+    },
+    "inputs": {
+      "corpus_manifest": {
+        "path": "external/ipfs_datasets/benchmarks/proof_context/corpus_manifest.json",
+        "raw_cid_v1": "bafkreidbngeh7k7knauskpw4ztbv2wuy65ia6ybs6lvdoosrknx4fwqnwq",
+        "sha256": "6169887fabea6829253edcccc35d5a98f7500f6032f2ea373a51536fc2da0db4",
+        "size": 9021,
+        "structured_cid": "baguqeeraedh4m4sadrllnzrp7zi4bherd2dbp5injbvv7myzybjjnju3mlwa"
+      },
+      "execution_receipt": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+        "raw_cid_v1": "bafkreie3rdkhtrfd44ol4ajvo4prwuyzs454htrld3juuzanl7pjz3ibze",
+        "sha256": "9b88d479c4a3e71cbe0135771f1b5319973bc3ce2b1ed34a640d5fde9ced01c9",
+        "size": 11851,
+        "structured_cid": "baguqeeracruwjey3ittkczloj74nxtamwnbme22tiptck3ftb4c647h7olwq"
+      },
+      "pcce067_task_receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json",
+        "raw_cid_v1": "bafkreibwhvh72zrioo7ybkulxvyexppuimcn6nnyirjseig2iyvoomwyye",
+        "sha256": "363d4ffd662873bf80aa8bbd704bbdf44304df35b844532220da462ae732d8c1",
+        "size": 9654,
+        "structured_cid": "baguqeerabhtpvxxanndurequvfpbgpc3rxmnnrer4idjf6sjm3f45jpeuqxa"
+      },
+      "raw_results": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+        "raw_cid_v1": "bafkreibjooqmsrumufg5uuevpda5u6q5msnurxytzeuslextjj4hfjtmfi",
+        "sha256": "2973a0c9468ca14dda509578c1da7a1d649b48df13c9292592f34a7872a66c2a",
+        "size": 738788
+      },
+      "run_manifest": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+        "raw_cid_v1": "bafkreiacslsundktuyeaaykq45d7v33omuacp6bjaujk64pwxwdxgxgan4",
+        "sha256": "0292e5468d53a608006150e747faef6e650027f8290512af71f6bd87735cc06f",
+        "size": 46438,
+        "structured_cid": "baguqeeraem6tjti2y3bjbsdyyr2klsdkfxhvo6xywfmbw2zmgils244jjd4q"
+      },
+      "threshold_set": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+        "raw_cid_v1": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+        "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b",
+        "size": 2373,
+        "structured_cid": "baguqeeraqbhgjlvhrdrwfashgtvwsb5e4k3fac5mg75j6f4p4gvxbaz75b6q"
+      }
+    },
+    "interpretation": {
+      "benchmark_or_model_execution_performed_by_pcce068": false,
+      "cost_disposition": "unavailable-not-zero",
+      "derived_zero_quality_interpretation": "preregistered failure/abstention scoring penalty only; not observed quality",
+      "observed_total_cost_micros": null,
+      "provider_call_count": 0,
+      "provider_call_count_is_cost": false,
+      "raw_quality_observed": false
+    },
+    "limitations": [
+      "All 84 terminal records end unavailable before provider dispatch; they are population-accounting evidence, not model executions.",
+      "Context, cost, latency, patch, test, proof, assurance, and provider/model observations required by qualification are absent.",
+      "Provider-call count zero is observed, but monetary cost remains null and cannot be reported as zero.",
+      "The derived accepted-patch score of zero is the frozen failure/abstention penalty, not an observed quality measurement or a measured threshold failure.",
+      "Only simulated_success_accepted_count is structurally proven zero; the six other zero-tolerance checks remain unavailable.",
+      "Per-class results preserve 24 typed-structured, 28 dynamic-plugin, and 32 mature-Python rows without dropping failures.",
+      "Independent review and outer composition admission are pending; this artifact does not update the board or database."
+    ],
+    "metric_integrity": {
+      "all_required_metrics_present": true,
+      "confidence_and_missingness_published": true,
+      "dropped_rows": 0,
+      "failed_attempt_ledger_published": true,
+      "failed_or_unavailable_rows_retained": 84,
+      "metric_catalog_count": 78,
+      "per_repository_class_rows": {
+        "dynamic_plugins": 28,
+        "mature_python": 32,
+        "typed_structured": 24
+      },
+      "raw_metric_slot_count": 6552,
+      "raw_null_slot_count": 6258,
+      "raw_observed_slot_count": 294
+    },
+    "outputs": {
+      "metrics": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "raw_cid_v1": "bafkreiajyugiiwwbyibyxnv6hkdzqvnjcpwc3hwwmrgt6etogks6ecdgmq",
+        "sha256": "09c50c845ac1c2038bb6be3a879855a913ec2d9ed6644d3f126e32a5e2086664",
+        "size": 186473,
+        "structured_cid": "baguqeerasfa2mtggtcmtqsfguoyzckjsjmryzzji7fq2vcuirqmnjxzgoava"
+      },
+      "qualification": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "raw_cid_v1": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+        "sha256": "13dcaf260fcbbed9dd72b53954e6bdfd12db27a423ee96343d18afca8bf1c077",
+        "size": 24864,
+        "structured_cid": "baguqeeraxdcsravklkrwuqftkaf3nuqvqnrnnj6ypwydsnntxv4l45veuxca"
+      },
+      "report": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/report.md",
+        "raw_cid_v1": "bafkreifccdwqbuih2buruqkovhuc32ezyhga7yxusbsuv43zlhedz7ix2i",
+        "sha256": "a210ed00d107d0691a414ea9e82de899c1cc0fe2f490654af37959c83cfd17d2",
+        "size": 7184
+      }
+    },
+    "population": {
+      "attempt_count": 84,
+      "configuration_count": 4,
+      "dropped_terminal_row_count": 0,
+      "paired_A_D_task_cluster_count": 21,
+      "provider_call_count": 0,
+      "result_count": 84,
+      "route_unavailable_count": 84,
+      "rows_per_configuration": {
+        "A": 21,
+        "B": 21,
+        "C": 21,
+        "D": 21
+      },
+      "rows_per_repository_class": {
+        "dynamic_plugins": 28,
+        "mature_python": 32,
+        "typed_structured": 24
+      },
+      "task_count": 21,
+      "tasks_per_repository_class": {
+        "dynamic_plugins": 7,
+        "mature_python": 8,
+        "typed_structured": 6
+      },
+      "terminal_status_counts": {
+        "unavailable": 84
+      },
+      "unmatched_A_D_task_cluster_count": 0
+    },
+    "prohibited_effects": {
+      "causality_beyond_paired_design_claimed": false,
+      "denominators_or_thresholds_changed": false,
+      "estimates_reported_as_observations": false,
+      "failed_tasks_dropped": false,
+      "release_or_production_qualification_issued": false,
+      "runtime_or_corpus_repaired": false,
+      "unavailable_live_evidence_passed": false
+    },
+    "qualification": {
+      "benchmark_qualified": false,
+      "blocker_count": 10,
+      "cost_claim_allowed": false,
+      "decision_kind": "unavailable-evidence-no-go-not-measured-threshold-failure",
+      "measured_threshold_failure_count": 0,
+      "not_measured_failure": true,
+      "performance_claim_allowed": false,
+      "primary_gate_decisions": {
+        "accepted_patch_noninferiority": "unavailable-no-go",
+        "context_reduction": "unavailable-no-go",
+        "routine_frontier_escalation": "unavailable-no-go",
+        "total_cost_reduction": "unavailable-no-go"
+      },
+      "production_qualified": false,
+      "quality_claim_allowed": false,
+      "release_qualified": false,
+      "status": "NO-GO",
+      "structural_passes": [
+        "simulated_success_accepted_count"
+      ],
+      "threshold_blocker_count": 10,
+      "waiver_count": 0,
+      "waivers": [],
+      "zero_tolerance_decisions": {
+        "controlled_selected_test_false_negative_count": "unavailable-no-go",
+        "critical_mutant_accepted_count": "unavailable-no-go",
+        "critical_regression_accepted_count": "unavailable-no-go",
+        "negative_review_autonomous_accept_count": "unavailable-no-go",
+        "simulated_success_accepted_count": "pass",
+        "stale_capsule_accepted_count": "unavailable-no-go",
+        "stale_proof_accepted_count": "unavailable-no-go"
+      }
+    },
+    "review_and_admission": {
+      "board_or_database_completion_written": false,
+      "composition_refresh_required_after_pcce067_admission": false,
+      "independent_review_claimed": false,
+      "independent_review_state": "pending",
+      "merged": false,
+      "self_approval": false,
+      "task_completion_claimed": true
+    },
+    "source": {
+      "branch": "implementation/PCCE-068-benchmark-qualification-20260825",
+      "gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+        "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      },
+      "outer_base_commit": "caefdd51db180e43885ef3bf51e0794ac6b00e45",
+      "outer_base_tree": "6512c396bbf2c086d69e91b5fa5df4df280337a6",
+      "outer_parent": "d23e861fd4fc6293c888a6dc3377e8c94d4129d9"
+    },
+    "task_authority": {
+      "live_quack_duckdb_task_cid": "baguqeera6b73j6caxykusogroe3y2xnduagvyng5v4nguahom5rtgux3m2tq",
+      "live_revision": 1,
+      "static_board_task_cid": "baguqeeracljqjzu7eqymeh4v5z6kuqchktl4arwfnyes2lq4rjt3frbfrpka",
+      "task_id": "PCCE-068"
+    },
+    "validation": {
+      "diff_check": "passed",
+      "exact_metrics_suite": {
+        "collected": 124,
+        "command": "PYTHONPATH=external/ipfs_datasets python -m pytest -q external/ipfs_datasets/tests/proof_context/benchmarks/test_metrics.py",
+        "failed": 0,
+        "passed": 124,
+        "result": "passed"
+      },
+      "hash_cid_cross_binding_audit": "passed-before-candidate-freeze",
+      "independent_recomputation_by_author": "passed-but-not-independent-review",
+      "json_tool": [
+        "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "artifacts/proof_carrying_context_engine/benchmark/qualification.json"
+      ]
+    }
+  },
+  "objective_id": "PCCE-G600",
+  "rollback": "Revert only the four unmerged PCCE-068 projection files; preserve immutable PCCE-067 raw evidence and thresholds. Recompute under a new candidate identity after any admitted input change.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-068"
+}
