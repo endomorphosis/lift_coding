@@ -1,5 +1,5 @@
 {
-  "artifact_identity": "bafkreighejydjqvq7zmxialsajadph4ytwsu6cv55gf2r3kshocd3sfqhu",
+  "artifact_identity": "bafkreibcg255bgaqv2yyczgf2l7xpmvivrrdsgvpc2s54sygiazjb5exia",
   "artifact_identity_kind": "CIDv1(raw,sha2-256) of exact final/supervisor_report.json bytes",
   "board_namespace": "proof-carrying-context-engine-v0.1",
   "completion_mode": "evidence-task-completed-final-supervisor-projection-explicit-research-demo-and-no-go",
@@ -111,21 +111,21 @@
     "outputs": {
       "dependency_graph": {
         "path": "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
-        "raw_cid": "bafkreig2pixmdlzfnldiqpq2t5gveajaantrs4ggultnpauubuxklznmue",
-        "sha256": "da7a2ec1af256ac6883e1a9f4d52012003671970c6a2e6d782940d2ea5e5aca1",
-        "size": 100535
+        "raw_cid": "bafkreicsvoux7k22vqz5lonfqb4mtikf2mnxbwlun7tfxjo2odkkbs2rae",
+        "sha256": "52aba97fab5aac33d5b9a58078c9a145d31b70d9746fe65ba5da70d4a0cb5101",
+        "size": 104540
       },
       "supervisor_report_json": {
         "path": "artifacts/proof_carrying_context_engine/final/supervisor_report.json",
-        "raw_cid": "bafkreighejydjqvq7zmxialsajadph4ytwsu6cv55gf2r3kshocd3sfqhu",
-        "sha256": "c7227034c2b0fe597401720240379f989da54f0abde98ba8ed523b843dc8b03d",
-        "size": 77635
+        "raw_cid": "bafkreibcg255bgaqv2yyczgf2l7xpmvivrrdsgvpc2s54sygiazjb5exia",
+        "sha256": "2236bbd09810aeb18164c5d2ff77b2a8ac62391aaf16a5de4b06403290f49740",
+        "size": 97629
       },
       "supervisor_report_markdown": {
         "path": "artifacts/proof_carrying_context_engine/final/supervisor_report.md",
-        "raw_cid": "bafkreiewsasnd3rr7u24wv4qpylcgcthx35drpy5izsschq47fbs2sk2aq",
-        "sha256": "969024d1ee31fd35cb57907e16230a67befa38bf1d4665211e1cf9432d495a04",
-        "size": 4264
+        "raw_cid": "bafkreiezwqxb6ts7aew7n2x6xkmphx5eb4wte4npdx47vj4yxnrrkxq6ia",
+        "sha256": "99b42e1f4e5f012df6eafeba98f3dfa40f2d3271af1df9faa798bb63155e1e40",
+        "size": 9086
       }
     },
     "pcce082": {
@@ -170,6 +170,14 @@
       "reason": "The PCCE-083 receipt binds this graph; its own identity is sealed externally after commit to avoid a recursive hash claim.",
       "receipt_digest_embedded": false
     },
+    "source_blocker_ledger_counts": {
+      "benchmark": 10,
+      "ci": 6,
+      "installation": 3,
+      "release_candidate": 7,
+      "security": 10,
+      "self_hosting": 6
+    },
     "task_authority": {
       "evidence_task_completed": true,
       "live_status_at_authoring": "todo",
@@ -177,14 +185,60 @@
       "reviewed_revision": 1
     },
     "validation": {
-      "board_validator": "passed",
       "canonical_json": "passed",
+      "configured_control_board_validator": "failed-preserved-eight-errors-no-waiver",
       "cross_file_identity_audit": "passed",
       "dependency_and_receipt_completeness": "passed",
       "diff_check": "passed",
       "live_authority_read": "passed",
       "machine_human_decision_consistency": "passed",
+      "r6_frozen_graph_validator": "passed",
       "terminal_sentence": "passed"
+    },
+    "validator_observations": {
+      "configured_control_board_validator": {
+        "command": "python scripts/validate_proof_carrying_context_engine_board.py --check-all --no-write",
+        "normalized_result_identity": {
+          "raw_cid": "bafkreifwu47sm2sw6gmoi2ug3ohmympyvnufa7ch4hncjs2nyzj72jtgxe",
+          "sha256": "b6a73f266a56f198e46a86db8ecc31f8ab68507c47e1da24cb4dc653fd2666b9",
+          "size": 658
+        },
+        "result": {
+          "configured_board_valid": false,
+          "errors": [
+            "configured-board profile is invalid: provider.primary_model_id must be 'grok-4.6' for the ordered provider contract",
+            "historical r2 admission commit is not an ancestor of control HEAD",
+            "historical r3 control commit is not an ancestor of control HEAD",
+            "historical r4 control commit is not an ancestor of control HEAD",
+            "active PCCE-000 r5 evidence mismatch: board_projection_id",
+            "active PCCE-000 r5 evidence mismatch: dependency_graph_id",
+            "active PCCE-000 r5 evidence mismatch: repository_gitlinks",
+            "active PCCE-000 r5 accelerator gitlink is not the reviewed repair pin"
+          ],
+          "task_count": 67,
+          "valid": false,
+          "warnings": []
+        },
+        "returncode": 1,
+        "stderr": ""
+      },
+      "r6_frozen_graph_validator": {
+        "command": "python scripts/validate_proof_carrying_context_engine_board_r6.py --check-all",
+        "normalized_result_identity": {
+          "raw_cid": "bafkreifuyfpj5qbow6e32uk6cpadikti7l56wd3kr3oulje7wpbqjukjee",
+          "sha256": "b4c15e9ec02eb789bd515e13c0342a68fafbeb0f6a8edd45a49fb3c304d14921",
+          "size": 87
+        },
+        "result": {
+          "configured_board_valid": null,
+          "errors": [],
+          "task_count": 67,
+          "valid": true,
+          "warnings": []
+        },
+        "returncode": 0,
+        "stderr": ""
+      }
     }
   },
   "evidence_task_completed": true,

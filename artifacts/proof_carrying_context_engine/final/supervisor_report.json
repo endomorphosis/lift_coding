@@ -1521,9 +1521,9 @@
   },
   "dependency_graph": {
     "path": "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
-    "raw_cid": "bafkreig2pixmdlzfnldiqpq2t5gveajaantrs4ggultnpauubuxklznmue",
-    "sha256": "da7a2ec1af256ac6883e1a9f4d52012003671970c6a2e6d782940d2ea5e5aca1",
-    "size": 100535
+    "raw_cid": "bafkreicsvoux7k22vqz5lonfqb4mtikf2mnxbwlun7tfxjo2odkkbs2rae",
+    "sha256": "52aba97fab5aac33d5b9a58078c9a145d31b70d9746fe65ba5da70d4a0cb5101",
+    "size": 104540
   },
   "evidence_cut": {
     "gitlinks": {
@@ -1779,7 +1779,8 @@
     "Board and evidence-task completion do not imply installability qualification, benchmark passage, security passage, CI passage, pilot readiness, release readiness, or production readiness.",
     "Measured quality, context-reduction, route, reuse, and cost outcomes are unavailable and are not represented as zero.",
     "The clean-install gate, benchmark, security, CI, longitudinal self-hosting, package-byte completeness, package signatures, release candidate, and adversarial concurrency evidence remain NO-GO or blocking.",
-    "The word installable in the required terminal claim describes the integrated package surface; it does not override PCCE-056 clean-install NO-GO or imply release qualification."
+    "The word installable in the required terminal claim describes the integrated package surface; it does not override PCCE-056 clean-install NO-GO or imply release qualification.",
+    "The r6 frozen graph validator passes, but the broader configured control-board validator fails with eight preserved provider/configuration and historical r2-r5 control-lineage errors."
   ],
   "objective": {
     "live_objective_id": "objective:pcce-root",
@@ -2056,6 +2057,427 @@
       "type": "security_qualification"
     }
   },
+  "source_no_go_blocker_ledgers": {
+    "benchmark": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "raw_cid": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+        "sha256": "13dcaf260fcbbed9dd72b53954e6bdfd12db27a423ee96343d18afca8bf1c077",
+        "size": 24864
+      },
+      "blocker_count": 10,
+      "blockers": [
+        {
+          "category": "primary-threshold",
+          "code": "primary-gate-unavailable:accepted_patch_noninferiority",
+          "decision": "unavailable-no-go",
+          "metric": "correct_accepted_patch_rate_bp",
+          "reason": "required-live-observed-evidence-is-absent"
+        },
+        {
+          "category": "primary-threshold",
+          "code": "primary-gate-unavailable:context_reduction",
+          "decision": "unavailable-no-go",
+          "metric": "context_reduction_bp",
+          "reason": "zero-or-missing-denominator"
+        },
+        {
+          "category": "primary-threshold",
+          "code": "primary-gate-unavailable:routine_frontier_escalation",
+          "decision": "unavailable-no-go",
+          "metric": "routine_frontier_escalation_rate_bp",
+          "reason": "routine-frontier-denominator-or-numerator-missing"
+        },
+        {
+          "category": "primary-threshold",
+          "code": "primary-gate-unavailable:total_cost_reduction",
+          "decision": "unavailable-no-go",
+          "metric": "total_cost_reduction_bp",
+          "reason": "one-or-more-paired-total-cost-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:controlled_selected_test_false_negative_count",
+          "decision": "unavailable-no-go",
+          "metric": "controlled_selected_test_false_negative_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:critical_mutant_accepted_count",
+          "decision": "unavailable-no-go",
+          "metric": "critical_mutant_accepted_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:critical_regression_accepted_count",
+          "decision": "unavailable-no-go",
+          "metric": "critical_regression_accepted_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:negative_review_autonomous_accept_count",
+          "decision": "unavailable-no-go",
+          "metric": "negative_review_autonomous_accept_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:stale_capsule_accepted_count",
+          "decision": "unavailable-no-go",
+          "metric": "stale_capsule_accepted_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:stale_proof_accepted_count",
+          "decision": "unavailable-no-go",
+          "metric": "stale_proof_accepted_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        }
+      ]
+    },
+    "ci": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "raw_cid": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+        "sha256": "eacb6d323c9350a233a83f5344ff1f5972b22775365d011d3f80445c516fd553",
+        "size": 14767
+      },
+      "blocker_count": 6,
+      "blockers": [
+        {
+          "decision": "NO-GO",
+          "id": "predecessor-benchmark-qualification-no-go",
+          "qualification_cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+          "source_task": "PCCE-068",
+          "waiver": null
+        },
+        {
+          "decision": "NO-GO",
+          "id": "predecessor-security-qualification-no-go",
+          "qualification_cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+          "source_task": "PCCE-076",
+          "waiver": null
+        },
+        {
+          "id": "current-head-workflow-run-unavailable",
+          "workflow_run_id": null,
+          "workflow_run_url": null
+        },
+        {
+          "id": "required-check-ruleset-authority-unavailable",
+          "ruleset_id": null,
+          "ruleset_url": null
+        },
+        {
+          "id": "complete-job-logs-unavailable",
+          "observed_log_count": 0,
+          "required_log_count": 9
+        },
+        {
+          "findings": null,
+          "id": "dependency-license-run-findings-unavailable"
+        }
+      ]
+    },
+    "installation": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "raw_cid": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+        "size": 37516
+      },
+      "blocker_count": 3,
+      "blockers": [
+        {
+          "code": "required-artifact-bytes-unavailable",
+          "disposition": "no substitute or waiver accepted",
+          "evidence": {
+            "bytes_available": false,
+            "bytes_verified": false,
+            "cid_binding_status": "identity-derived-bytes-unavailable",
+            "cid_v1_raw": "bafkreienw4uz6lgbisau22y3agueo25c3kthqmefmuj7fbr4n6wev47ncu",
+            "distribution": "ipfs-kit-py",
+            "filename": "ipfs_kit_py-0.3.0.tar.gz",
+            "kind": "sdist",
+            "sha256": "8db7299f2cc144814d6b1b01a8476ba2daa67830856513f2863c6fac4af3ed15",
+            "size": null,
+            "source_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+            "unavailability_evidence": {
+              "bounded_provider_replay_candidate_sha256": "66a52a69252858dc96947aa6d26af14c48e6ed211bcd4170f25ced0ffab516cf",
+              "bounded_provider_replay_candidate_size": 6893895,
+              "disposition": "rejected-hash-mismatch"
+            },
+            "unavailability_reason": "The exact admitted identity is retained, but bounded replay of the original provider environment could not reproduce per-member PAX subsecond timestamps; no mismatched reconstruction is substituted.",
+            "version": "0.3.0"
+          },
+          "status": "unavailable"
+        },
+        {
+          "code": "supported-clean-install-profiles-unqualified",
+          "disposition": "all supported profiles remain release-blocking NO-GO",
+          "profiles": {
+            "codex": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            },
+            "core": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            },
+            "evaluation": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "llama_cpp_python-0.3.35.tar.gz",
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            },
+            "local-model": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "llama_cpp_python-0.3.35.tar.gz",
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            },
+            "verification": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            }
+          },
+          "status": "verification-failed-closed"
+        },
+        {
+          "code": "container-profiles-unqualified",
+          "disposition": "no image or container qualification claimed",
+          "profiles": {
+            "core": {
+              "cid_v1_raw": "bafkreiatncg6i4wbyqjxu3uribymitylpfjx6fggeuak6qeuad3tpzwp6y",
+              "image_created": false,
+              "log_sha256": "13688de472c1c4137a6e914070c44f0b79537f14c62500af409400f737e6cff6",
+              "result": "explicit-no-go-source-archives-not-qualified"
+            },
+            "verification": {
+              "cid_v1_raw": "bafkreiaxu5bql5wkud657uhcakymmzsy6xsgactvuwabry6vkoapzd43kq",
+              "image_created": false,
+              "log_sha256": "17a74305f6caa0fddfd0e202b0c66658f5e4600a75a58018e3d55380fc8f9b54",
+              "result": "explicit-no-go-source-archives-not-qualified"
+            }
+          },
+          "status": "verification-failed-closed"
+        }
+      ]
+    },
+    "release_candidate": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+        "raw_cid": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+        "sha256": "f0002a16bc97d8b49a15b7097ea1e63f2edbaf4c3a75275faa89026e4f3ed385",
+        "size": 90632
+      },
+      "blocker_count": 7,
+      "blockers": [
+        {
+          "id": "installability-no-go",
+          "observed_decision": "NO-GO",
+          "source": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+          "waiver": null
+        },
+        {
+          "id": "package-byte-set-incomplete",
+          "rc1_contains_archive_bytes": false,
+          "unavailable_artifacts": [
+            "ipfs_kit_py-0.3.0.tar.gz"
+          ],
+          "waiver": null
+        },
+        {
+          "id": "package-signature-evidence-unavailable",
+          "signature_results_observed": 0,
+          "signed_package_claim": false,
+          "waiver": null
+        },
+        {
+          "id": "bounded-self-hosting-qualification-no-go",
+          "observed_decision": "NO-GO",
+          "qualification_status": "unavailable",
+          "source": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+          "source_cid_v1_raw": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+          "source_task": "PCCE-079",
+          "waiver": null
+        },
+        {
+          "id": "benchmark-qualification-no-go",
+          "observed_decision": "NO-GO",
+          "provider_or_model_runs_claimed": false,
+          "release_qualified": false,
+          "source": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+          "source_cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+          "source_tasks": [
+            "PCCE-067",
+            "PCCE-068"
+          ],
+          "waiver": null
+        },
+        {
+          "id": "security-qualification-no-go",
+          "observed_decision": "NO-GO",
+          "release_qualified": false,
+          "security_release_claim": false,
+          "source": "artifacts/proof_carrying_context_engine/security/qualification.json",
+          "source_cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+          "source_task": "PCCE-076",
+          "waiver": null
+        },
+        {
+          "ci_run_claimed": false,
+          "external_ci_authority_available": false,
+          "id": "current-head-ci-qualification-no-go",
+          "observed_decision": "NO-GO",
+          "release_qualified": false,
+          "source": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+          "source_cid_v1_raw": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+          "source_task": "PCCE-080",
+          "waiver": null
+        }
+      ]
+    },
+    "security": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+        "raw_cid": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+        "sha256": "94034723fddfa547266c794961c3c88d005f1d097c6e2524ccfbedd49a7dc8f4",
+        "size": 7425
+      },
+      "blocker_count": 10,
+      "blocker_ids": [
+        "RR-001",
+        "RR-002",
+        "RR-003",
+        "RR-004",
+        "RR-005",
+        "RR-006",
+        "RR-007",
+        "RR-008",
+        "RR-009",
+        "RR-010"
+      ],
+      "observed_release_blockers": [
+        {
+          "blocker_id": "PCCE-075-double-publication",
+          "disposition": "no-go-runtime-storage-owner-reopen-required",
+          "evidence": {
+            "expected_maximum_accepted_records": 1,
+            "expected_maximum_published_settlements": 1,
+            "observed_accepted_records": 2,
+            "observed_published_settlements": 2,
+            "overlap_proven": true,
+            "shared_kit_root": true
+          },
+          "schedule_id": "two-runtime-stores-one-generation-minimized-failure"
+        },
+        {
+          "blocker_id": "PCCE-075-lost-durable-checkpoint-false-success",
+          "disposition": "no-go-lost-durable-checkpoint-false-success",
+          "evidence": {
+            "durable_resume_observed": false,
+            "no_cleanup_restart_status": "unavailable",
+            "post_cleanup_fresh_restart_accepted": true,
+            "post_cleanup_fresh_restart_published": true,
+            "post_cleanup_fresh_restart_status": "succeeded"
+          },
+          "schedule_id": "bounded-process-apply-during"
+        },
+        {
+          "blocker_id": "PCCE-075-synthetic-only-aba",
+          "disposition": "no-go-insufficient-not-runtime-kit-repository-integrated",
+          "evidence": {
+            "delayed_generation_one_outcome": "stale_root:generation",
+            "integration_scope": "synthetic-in-process-store-only",
+            "qualification_credit": false
+          },
+          "schedule_id": "delayed-generation-one-after-aba"
+        },
+        {
+          "blocker_id": "PCCE-075-authoritative-integration-gaps",
+          "disposition": "no-go-authoritative-integration-owner-reopen-required",
+          "evidence": {
+            "accepted_despite_gaps": true,
+            "authoritative_hidden_evaluator": "not_integrated",
+            "authoritative_sandbox": "not_integrated",
+            "proof_execution": "unavailable-no-go",
+            "verification_execution": "marker-only-no-command-or-test-receipt"
+          },
+          "schedule_id": "authoritative-runtime-integration-gaps"
+        },
+        {
+          "blocker_id": "PCCE-074-non-authoritative-isolation",
+          "disposition": "no-go-unintegrated-limited-boundary",
+          "evidence": {
+            "authoritative_accelerator_or_provider_consumes_module": false,
+            "live_benchmark_or_provider_invoked": false,
+            "outer_composed_proof_context_suite_clean": false,
+            "trusted_evaluator_callbacks_sandboxed_by_module": false
+          },
+          "schedule_id": null
+        }
+      ]
+    },
+    "self_hosting": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+        "raw_cid": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+        "sha256": "6c5ffee3b265d013e6069f394106e950825d0bfedc3c0278bfb98522ae97fc8f",
+        "size": 10273
+      },
+      "blocker_count": 6,
+      "blockers": [
+        {
+          "code": "pcce-056-install-gate-no-go",
+          "detail": "The exact PCCE-056 installation qualification remains NO-GO with no waiver; this observation cannot make live benchmark or product execution eligible.",
+          "status": "blocked"
+        },
+        {
+          "code": "frozen-benchmark-runners-not-executed",
+          "detail": "The packaged SelfHostingQualificationHarness accepts configuration_id and configuration_cid as identity fields but does not dispatch the frozen A/B or C/D benchmark runners. The four successes are generic proof-context runtime lifecycle observations only.",
+          "status": "unavailable"
+        },
+        {
+          "code": "insufficient-elapsed-longitudinal-epochs",
+          "detail": "All four retained observations belong to one current-head epoch on 2026-08-24. No genuinely time-separated later epoch exists, and no longitudinal duration is inferred from same-session attempts.",
+          "status": "unavailable"
+        },
+        {
+          "code": "historical-replay-evidence-unavailable",
+          "detail": "Repository history contains the PCCE-045 harness implementation receipt and fixture but no exact immutable historical raw harness attempt suitable for genuine replay. No replay record was manufactured.",
+          "status": "unavailable"
+        },
+        {
+          "code": "provider-cost-test-proof-assurance-receipts-unavailable",
+          "detail": "No provider/model invocation, provider permit, provider-reported cost, frozen benchmark result, test receipt, proof receipt, or benchmark assurance receipt was observed. Generic lifecycle stages with similarly named contracts are not substituted.",
+          "status": "unavailable"
+        },
+        {
+          "code": "interruption-resume-evidence-unavailable",
+          "detail": "No interruption was injected and the packaged CLI exposes no resume token or resume operation. A same-plan B rerun demonstrated stable logical identities but is not resume evidence.",
+          "status": "unavailable"
+        }
+      ]
+    }
+  },
   "task_id": "PCCE-083",
   "tests_and_ci": {
     "aggregate_current_head_test_run_claimed": false,
@@ -2063,7 +2485,52 @@
     "configured_or_local_tests_count_as_external_ci": false,
     "current_head_ci_decision": "NO-GO",
     "external_current_head_ci_authority_available": false,
-    "receipt_level_validations_present": true
+    "receipt_level_validations_present": true,
+    "validator_observations": {
+      "configured_control_board_validator": {
+        "command": "python scripts/validate_proof_carrying_context_engine_board.py --check-all --no-write",
+        "normalized_result_identity": {
+          "raw_cid": "bafkreifwu47sm2sw6gmoi2ug3ohmympyvnufa7ch4hncjs2nyzj72jtgxe",
+          "sha256": "b6a73f266a56f198e46a86db8ecc31f8ab68507c47e1da24cb4dc653fd2666b9",
+          "size": 658
+        },
+        "result": {
+          "configured_board_valid": false,
+          "errors": [
+            "configured-board profile is invalid: provider.primary_model_id must be 'grok-4.6' for the ordered provider contract",
+            "historical r2 admission commit is not an ancestor of control HEAD",
+            "historical r3 control commit is not an ancestor of control HEAD",
+            "historical r4 control commit is not an ancestor of control HEAD",
+            "active PCCE-000 r5 evidence mismatch: board_projection_id",
+            "active PCCE-000 r5 evidence mismatch: dependency_graph_id",
+            "active PCCE-000 r5 evidence mismatch: repository_gitlinks",
+            "active PCCE-000 r5 accelerator gitlink is not the reviewed repair pin"
+          ],
+          "task_count": 67,
+          "valid": false,
+          "warnings": []
+        },
+        "returncode": 1,
+        "stderr": ""
+      },
+      "r6_frozen_graph_validator": {
+        "command": "python scripts/validate_proof_carrying_context_engine_board_r6.py --check-all",
+        "normalized_result_identity": {
+          "raw_cid": "bafkreifuyfpj5qbow6e32uk6cpadikti7l56wd3kr3oulje7wpbqjukjee",
+          "sha256": "b4c15e9ec02eb789bd515e13c0342a68fafbeb0f6a8edd45a49fb3c304d14921",
+          "size": 87
+        },
+        "result": {
+          "configured_board_valid": null,
+          "errors": [],
+          "task_count": 67,
+          "valid": true,
+          "warnings": []
+        },
+        "returncode": 0,
+        "stderr": ""
+      }
+    }
   },
   "truthfulness_canaries": {
     "author_or_generator_mutated_database": false,
@@ -2128,6 +2595,12 @@
         "sha256": "4acf1f619c748183a3ab3968cc35d45068ba0296422e6d4676795e0451fd4595",
         "size": 6604
       },
+      "waiver": null
+    },
+    {
+      "code": "CONFIGURED_CONTROL_BOARD_VALIDATOR_FAILED",
+      "disposition": "control-history-and-provider-configuration-reconciliation-required",
+      "error_count": 8,
       "waiver": null
     }
   ]
