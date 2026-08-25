@@ -134,7 +134,7 @@
       "accelerator_candidate_tree": "6f40999059d861ef5bdde24f5d4228a6e84b2e30",
       "base_commit": "b087fa0b1561f099fa7c3577e559b38e9bb2e43d",
       "base_tree": "bb7849ac3bc92ad80e0bc7dff9d3b421d08ce872",
-      "branch": "agent/proof-carrying-context-engine-v0.1",
+      "branch": "integration/PCCE-081-final-20260825",
       "changed_paths_expected": [
         "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
         "artifacts/proof_carrying_context_engine/release/v0.1-rc1/VERIFY.md",
@@ -146,7 +146,7 @@
         "external/ipfs_accelerate"
       ],
       "evidence_task_completed": true,
-      "independent_review_status": "pending",
+      "independent_review_status": "passed",
       "provisional": false
     },
     "package_evidence": {
@@ -284,7 +284,7 @@
     ]
   },
   "evidence_task_completed": true,
-  "independent_review_status": "pending",
+  "independent_review_status": "passed",
   "objective_id": "PCCE-G800",
   "rollback": "Retain the immutable unpromoted rc1 manifest and NO-GO receipt, repair only through owning predecessor tasks, and assemble v0.1-rc2 rather than overwrite rc1.",
   "schema": "proof-carrying-context-engine/task-receipt@1",
