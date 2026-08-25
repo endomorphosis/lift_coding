@@ -1,0 +1,143 @@
+{
+  "artifact_identity": "bafkreib4r2njyfnfi5pssta5ngeyjxtsf5pltkd3vuawlwonh4xytqfdy4",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of the adversarial concurrency schedule population",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-adversarial-integration-observed-tested-no-go",
+  "decision": "NO-GO",
+  "evidence": {
+    "acceptance_disposition": {
+      "production_eligible": false,
+      "qualification_credit": false,
+      "runtime_integration_status": "observed_with_release_blocking_failures",
+      "status": "completed_test_task_with_preserved_owner_reopen_findings"
+    },
+    "cleanup_audit": {
+      "canonical_head_mutated_by_tests": false,
+      "probe_process_groups_remaining": 0,
+      "crash_workers_remaining": 0,
+      "sleep_descendants_remaining": 0,
+      "pytest_temporary_cleanup_warnings": 4,
+      "warning_scope": "racing pytest garbage-directory cleanup; no live descendant process remained"
+    },
+    "findings": {
+      "authoritative_integration": {
+        "accepted_despite_marker_only_verification_and_missing_proof": true,
+        "authoritative_hidden_evaluator": "not_integrated",
+        "authoritative_sandbox": "not_integrated",
+        "disposition": "no-go-authoritative-integration-owner-reopen-required"
+      },
+      "concurrent_publication": {
+        "expected_maximum_accepted_records": 1,
+        "expected_maximum_published_settlements": 1,
+        "observed_accepted_records": 2,
+        "observed_published_settlements": 2,
+        "overlap_proven": true,
+        "shared_kit_root": true,
+        "disposition": "no-go-runtime-storage-owner-reopen-required"
+      },
+      "post_crash_restart": {
+        "durable_resume_observed": false,
+        "no_cleanup_restart_status": "unavailable",
+        "post_cleanup_fresh_restart_accepted": true,
+        "post_cleanup_fresh_restart_published": true,
+        "disposition": "no-go-lost-durable-checkpoint-false-success"
+      },
+      "synthetic_aba": {
+        "delayed_generation_one_outcome": "stale_root:generation",
+        "integration_scope": "synthetic-in-process-store-only",
+        "qualification_credit": false,
+        "disposition": "no-go-insufficient-not-runtime-kit-repository-integrated"
+      }
+    },
+    "independent_review": {
+      "disposition": "APPROVED_TEST_EVIDENCE",
+      "reviewer": "/root/review_pcce075_v7",
+      "subject": {
+        "author_base_commit": "489da803b9a778d41d8576d0c90a5384fb943eb5",
+        "author_commit": "b2fdaf198d6f3b13d3a3c52c1445d4f64bd81d8b",
+        "author_tree": "62a89807d59f0cbc84b7ff4a3f34ad5835e5623b",
+        "integrated_base_commit": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+        "integrated_commit": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+        "integrated_tree": "4862e4b49c91acb65894670a2b7f5546f7886a11"
+      },
+      "verification": {
+        "dedicated_worker_dispatch": "exactly three closed operations with no ordinary test-mode entrypoint",
+        "fixture_and_executable_claims": "consistent",
+        "limitations": "explicit and release blocking",
+        "scope": "exactly one schedule fixture and one adversarial test module"
+      }
+    },
+    "nested_source": {
+      "repository": "external/ipfs_accelerate",
+      "scope": {
+        "added_files": 2,
+        "runtime_files_changed": 0,
+        "schedule_fixture": {
+          "blob": "eaa86d26da469aff6df46d55f274cfd527258dac",
+          "cid": "bafkreib4r2njyfnfi5pssta5ngeyjxtsf5pltkd3vuawlwonh4xytqfdy4",
+          "path": "test/proof_context/security/fixtures/concurrency/schedules.v1.json",
+          "sha256": "3c8e9a9c15a5475f294c1d698984de722f5eb9a87bad0165d9cd3f2f89c0a3c7",
+          "size": 8098
+        },
+        "test": {
+          "blob": "0c6457e6a3f361bd47c461de4866f37eee5288fb",
+          "cid": "bafkreiacc72zlsgesk5wcnzi2vys5qhdi4mbbxlllygnl66limwr5kr3qi",
+          "path": "test/proof_context/security/test_adversarial_concurrency.py",
+          "sha256": "0217f595c8c492bb613728d5712ec0e3471810dd6b5e0cd5fbcb432d1eaa3b82",
+          "size": 121838
+        },
+        "portability_repair": {
+          "changed_lines": 6,
+          "scope": "test harness only",
+          "effect": "resolve inherited PYTHONPATH entries before crash workers change cwd",
+          "runtime_files_changed": 0
+        }
+      }
+    },
+    "outer_composition": {
+      "accelerator_base_gitlink": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+      "accelerator_candidate_gitlink": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+      "base_commit": "268801f6312dc3b338dbda9ce88e0424a347052f",
+      "base_tree": "57ef4bc71ba968ab39779168d8fe9883a76fef18",
+      "branch": "implementation/PCCE-075-concurrency-20260825",
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+        "external/ipfs_accelerate"
+      ]
+    },
+    "preserved_passing_controls": {
+      "concurrent_duplicate_terminal_resume_idempotent": true,
+      "lease_loss_after_seal_cannot_publish": true,
+      "fence_loss_after_seal_cannot_publish": true,
+      "bounded_probe_process_group_cleanup": true
+    },
+    "prohibited_effects": {
+      "ambiguity_resolved_as_success_in_evidence": false,
+      "canonical_branch_used_by_tests": false,
+      "provider_dispatched": false,
+      "race_failures_hidden": false,
+      "runtime_or_storage_code_changed": false,
+      "supervisor_or_database_state_mutated_during_implementation": false
+    },
+    "task_authority": {
+      "database_revision_at_composition": 1,
+      "database_status_at_composition": "todo",
+      "database_task_cid": "baguqeera24wipnfzevagzrgxdhl2zu5vazvy4enprtyqr2tobtetjjijihsq",
+      "goal_id": "PCCE-G700",
+      "transport": "quack:127.0.0.1:41347"
+    },
+    "validation": {
+      "command": "env PYTHONHASHSEED=20260825 PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate:Mcp-Plus-Plus python -m pytest -q external/ipfs_accelerate/test/proof_context/security/test_adversarial_concurrency.py",
+      "passed": 21,
+      "python_hash_seed": 20260825,
+      "relative_pythonpath_child_resolution": "passed",
+      "git_diff_check": "passed",
+      "process_audit": "passed"
+    }
+  },
+  "objective_id": "PCCE-G700",
+  "rollback": "Terminate any process groups, discard disposable roots, revert only this receipt and accelerator gitlink, preserve all failing schedules, and reopen the runtime/storage owners rather than weakening the expected invariants.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-075"
+}
