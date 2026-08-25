@@ -1,0 +1,52 @@
+{
+  "claims_not_made": [
+    "current-head CI passed",
+    "live provider or model benchmark completed",
+    "package signatures verified",
+    "production sandbox resistance established",
+    "release package archive set is complete",
+    "security or benchmark qualification passed",
+    "time-separated self-hosting qualification passed"
+  ],
+  "decision": "NO-GO",
+  "limitations": [
+    {
+      "id": "installability-no-go",
+      "release_effect": "blocks-promotion",
+      "waived": false
+    },
+    {
+      "id": "package-byte-set-incomplete",
+      "release_effect": "blocks-promotion",
+      "waived": false
+    },
+    {
+      "id": "package-signature-evidence-unavailable",
+      "release_effect": "blocks-promotion",
+      "waived": false
+    },
+    {
+      "id": "bounded-self-hosting-qualification-no-go",
+      "release_effect": "blocks-promotion",
+      "waived": false
+    },
+    {
+      "id": "benchmark-qualification-no-go",
+      "release_effect": "blocks-promotion",
+      "waived": false
+    },
+    {
+      "id": "security-qualification-no-go",
+      "release_effect": "blocks-promotion",
+      "waived": false
+    },
+    {
+      "id": "current-head-ci-qualification-no-go",
+      "release_effect": "blocks-promotion",
+      "waived": false
+    }
+  ],
+  "qualification_level_assignment": "deferred-to-PCCE-082",
+  "release_candidate": "v0.1-rc1",
+  "schema": "lift_coding.proof-carrying-context-engine.release-limitations@1"
+}

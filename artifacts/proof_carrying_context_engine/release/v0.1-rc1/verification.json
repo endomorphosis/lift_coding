@@ -1,0 +1,25 @@
+{
+  "checks": [
+    "frozen commit/tree availability",
+    "all manifest input SHA-256 and raw CID bindings",
+    "exact bundle path set and byte-for-byte reconstruction",
+    "decision is fail-closed while blockers are nonempty",
+    "bounded credential-pattern and hidden-body-key scan"
+  ],
+  "deterministic_two_build": {
+    "comparison": "exact relative-path set and byte equality",
+    "performed_by_build_command": true,
+    "required": true
+  },
+  "release_candidate": "v0.1-rc1",
+  "scan": {
+    "credential_or_hidden_body_matches": 0,
+    "result": "passed-by-build-and-check-command",
+    "scope": "all six files in the bounded rc1 directory"
+  },
+  "schema": "lift_coding.proof-carrying-context-engine.release-verification@1",
+  "source_snapshot": {
+    "commit": "c5bdde1482a9afab7c5827a52bdf4f7b1d63f090",
+    "tree": "bb7849ac3bc92ad80e0bc7dff9d3b421d08ce872"
+  }
+}
