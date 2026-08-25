@@ -1,0 +1,253 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.benchmark-inventory-receipt@1",
+  "task_id": "PCSM-003",
+  "title": "Inventory current semantic-compression and proof-reuse benchmarks",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G100",
+  "status": "completed",
+  "completion_authoritative": false,
+  "inventory_disposition": "complete_current_head_inventory_no_new_benchmark_delta",
+  "scope": {
+    "language": "Python",
+    "mode": "read_only_inventory",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json"
+    ],
+    "implementation_delta": "none; existing benchmark harnesses and artifacts are reused without mutation"
+  },
+  "current_head_binding": {
+    "binding_kind": "exact_git_commit_and_tree",
+    "portal": {
+      "commit": "0c6c27169330d2ccae20c3119c1fe06f51a1066f",
+      "tree": "922852a5516946908f996719ee98769cc96c3b40"
+    },
+    "source_forest": {
+      "ipfs_accelerate_py": {
+        "gitlink_commit": "87ab6e9b0022e51e5da2ec7c9d10acd02ec84881",
+        "tree": "1e01421bf0db28fbbe90b0423d671f0babd48a57"
+      },
+      "ipfs_datasets_py": {
+        "gitlink_commit": "719083b59637558d2338281a63435021e994a875",
+        "tree": "6ec131d1b71484e8244266f993b2b19edccee636"
+      },
+      "ipfs_kit_py": {
+        "gitlink_commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      },
+      "Mcp-Plus-Plus": {
+        "gitlink_commit": "838261c04a4b6f2643d75017e0b472876597c673",
+        "tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253"
+      }
+    },
+    "freshness_rule": "This inventory binds only the listed commits and trees. Any source, benchmark artifact, contract, tokenizer, provider, or toolchain change requires a new inventory receipt."
+  },
+  "authority_boundary": {
+    "ipfs_datasets_py": "owns semantic contracts and canonical semantic/proof relationships consumed by the governor benchmark",
+    "ipfs_kit_py": "owns immutable bytes and CID/storage facilities; it does not promote benchmark outcomes",
+    "ipfs_accelerate_py": "owns benchmark execution, routing, validation, and reuse admission; none of the inventoried artifacts confers PCSM patch authority",
+    "local_receipt": "records inventory evidence only and neither creates a competing benchmark authority nor promotes M1, M2, or M3"
+  },
+  "benchmark_inventory": [
+    {
+      "id": "semantic_compression_governor",
+      "role": "current semantic-compression equivalent",
+      "interface": "SemanticGovernorBenchmark@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/semantic-governor-benchmark@1",
+      "evidence_schema": "scg/benchmark-results@1",
+      "source": {
+        "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/semantic_compression_governor.py",
+        "git_blob": "6d9e4497586eab08cfc2fafbe59042666d565d80",
+        "sha256": "c735c05b221a61aa1d1d81b80f5107261bd7fd78adb648819d74d645ab1c403b"
+      },
+      "artifacts": [
+        {
+          "path": "external/ipfs_accelerate/artifacts/agent_supervisor/semantic_compression_governor/benchmark.json",
+          "git_blob": "7b566c0c3e722478b71119147c290ee0a3a15fe3",
+          "sha256": "40a64d49405abbaaecee16c4002ed4c3f6f57bd903c3f387853cdde3ec572ea6",
+          "benchmark_content_id": "sha256:d81682507918b1211c7652deb7be1facff14edb14f9b35a84f3b482a86cdabe5",
+          "summary_content_id": "sha256:2f78a161e27b8457d84e08841a37dde47e405dd6d74aed11a86161456bea069b",
+          "metric_report_cid": "baguqeeratlc2lkuj4ekqtd3kut52duhzbikifpa2zq3wbpxdk23dydadwuna"
+        },
+        {
+          "path": "external/ipfs_accelerate/artifacts/agent_supervisor/semantic_compression_governor/summary.json",
+          "git_blob": "43e4860176cf4ce7429354cd49759e03bffbcb70",
+          "sha256": "da9061f672aeed49dadfa62ae7542b7d8409afc96befd74761f094b1784c8893"
+        }
+      ],
+      "determinism": {
+        "required": true,
+        "check": "semantic_compression_governor.py --check",
+        "result": "passed; 60 published fixture cases matched after recomputation with observational fields excluded"
+      },
+      "coverage": {
+        "controlled_fixture_cases": 60,
+        "positive_controls": "compression accounting, target-threshold evaluation, CID-bearing receipt structure, stale and injection rejection accounting",
+        "negative_controls": "intentional omissions, stale input, and prompt injection are represented; no simulated critical omission was accepted"
+      },
+      "reuse_decision": "reuse as the semantic-compression baseline; it is not a complete PCSM M1/M2 paired benchmark"
+    },
+    {
+      "id": "incremental_proof_sealer",
+      "role": "current proof-reuse equivalent",
+      "interface": "IncrementalProofBenchmark@1",
+      "schema": "incremental-proof-sealer-benchmark-results@2",
+      "evidence_schema": "ips/benchmark-workload@1",
+      "source": {
+        "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/incremental_proof_sealer.py",
+        "git_blob": "b789a12a13cd783675148b3444d54f6effe3b32f",
+        "sha256": "df8a0dc865ccfbe21be94c3d812fdda866348f2b93199fb5e8415e2e2aa5e825"
+      },
+      "artifact": {
+        "path": "external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/benchmark.json",
+        "git_blob": "c5c12ef0ac18b4c27ba10e2c178258db958fb96a",
+        "sha256": "f33fbdb928f523e11e75d22cc2808594bcb1e2fb83b9fcf7837d49608afa2de6",
+        "benchmark_id": "incremental-proof-sealer-40-transition@1",
+        "seed": 20260811,
+        "transition_count": 40
+      },
+      "determinism": {
+        "required": true,
+        "result": "passed; rerun emitted 40 transitions with all deterministic full/incremental seal roots equal"
+      },
+      "coverage": {
+        "positive_controls": "same-seed stability, localized invalidation, unrelated-edit reuse, and full checkpoints",
+        "negative_controls": "wrong-parent attempt is recorded stale_parent, cache corruption forces full sealing, and all simulated required-unit counts are zero"
+      },
+      "reuse_decision": "reuse as the proof-reuse workload; its cost fields remain non-promotional estimates"
+    },
+    {
+      "id": "incremental_verification",
+      "role": "adjacent proof/test reuse and stale-rejection benchmark",
+      "interface": "IncrementalVerificationBenchmark@2",
+      "schema": "ipfs_accelerate_py/agent-supervisor/incremental-verification-benchmark@2",
+      "evidence_schema": "ivp/benchmark@2",
+      "source": {
+        "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/incremental_verification.py",
+        "git_blob": "0526a66414d16c1b1d74939d02ced833e7668d21",
+        "sha256": "998d54cb92a543fff23c722af5e5e6ca7b6c3ac159fc46823b4d4d8c6f9d1298"
+      },
+      "artifact": {
+        "path": "external/ipfs_accelerate/artifacts/agent_supervisor/incremental_verification/benchmark.json",
+        "git_blob": "e0315d26e95e5da1cac972ff143a2a6f4eab7069",
+        "sha256": "f9443645327bf389238016bc2b52c44f98061b11e0c65078863bdc5d3d866d29",
+        "case_count": 20,
+        "zero_stale_simulated_accepted": true
+      },
+      "coverage": {
+        "positive_controls": "same-tree reuse, affected-change invalidation, selected-versus-full test accounting, and cache historical preservation",
+        "negative_controls": "cross-tree reuse is explicitly unmet, controlled false-negative target is red, simulated receipts are rejected for production, and missing provers are typed unavailable"
+      },
+      "reuse_decision": "reuse only as adjacent evidence; its current sealed-environment test dependency is unavailable"
+    }
+  ],
+  "evidence_by_kind": {
+    "measured": [
+      {
+        "subject": "SCG deterministic recomputation",
+        "value": "60 current checked-in fixture cases matched",
+        "meaning": "measured execution of the verifier, not live provider/model evidence"
+      },
+      {
+        "subject": "IPS current rerun",
+        "value": "40 transitions; deterministic_roots_match=true for every row",
+        "meaning": "measured local execution of a deterministic synthetic workload"
+      },
+      {
+        "subject": "focused harness tests",
+        "value": "65 passed, 1 explicitly deselected due to its independent launch-path defect",
+        "meaning": "current source test execution"
+      }
+    ],
+    "simulated": [
+      {
+        "subject": "SCG controlled corpus",
+        "value": "60 cases; live observation count is 0",
+        "meaning": "fixture-only semantic-compression evidence; production_eligible=false"
+      }
+    ],
+    "estimated": [
+      {
+        "subject": "SCG costs",
+        "value": "scg-local-cost-estimator/v1; observed artifact reports net_savings_micros=-10417",
+        "meaning": "local estimator, never live billing"
+      },
+      {
+        "subject": "IPS proof costs",
+        "value": "all cost metric provenance is estimated or unavailable, never measured",
+        "meaning": "synthetic planning cost, not prover execution"
+      },
+      {
+        "subject": "IVP token and reused-time values",
+        "value": "ivp-estimator/utf8-bytes-div4@1 and estimated_selected_vs_full_aggregate",
+        "meaning": "bounded estimator output, not provider economics"
+      }
+    ],
+    "unavailable": [
+      {
+        "subject": "live semantic-compression evidence",
+        "value": ["live_provider_receipts", "live_model_quality_cohort", "live_billing_cost_sensors", "post_execution_omission_detection_sensors", "zk_seal_scope"],
+        "meaning": "SCG reports these as missing; no zero or success substitution"
+      },
+      {
+        "subject": "formal provers in sealed PATH",
+        "value": ["z3", "lean", "coqc", "isabelle"],
+        "meaning": "all absent under PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin; typed unavailable"
+      },
+      {
+        "subject": "IVP test dependency",
+        "value": "typing_extensions",
+        "meaning": "absent from the sealed interpreter, so the incremental-verification planner benchmark suite cannot collect"
+      }
+    ]
+  },
+  "validation": {
+    "environment": {
+      "python": "/usr/bin/python3.12 (3.12.3)",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "python_no_user_site": true,
+      "home": "fresh private temporary directory per command"
+    },
+    "positive": [
+      {
+        "command": "PYTHONPATH=../ipfs_datasets:../ipfs_kit:. python3.12 benchmarks/agent_supervisor/semantic_compression_governor.py --check --json",
+        "result": "passed: benchmark_match=true, summary_match=true, 60 cases"
+      },
+      {
+        "command": "PYTHONPATH=../ipfs_datasets:../ipfs_kit:. python3.12 benchmarks/agent_supervisor/incremental_proof_sealer.py --json-output <temp>/benchmark.json --csv-output <temp>/benchmark.csv --repo-root <accelerate-root>",
+        "result": "passed: 40 closed transitions and deterministic roots matched"
+      },
+      {
+        "command": "PYTHONPATH=../ipfs_datasets:../ipfs_kit:. python3.12 -m pytest -q -k 'not test_check_cli_passes_against_published_artifacts' test/benchmarks/test_semantic_compression_governor_benchmark.py test/benchmarks/test_incremental_proof_sealer_benchmark.py",
+        "result": "passed: 65 passed, 1 deselected"
+      }
+    ],
+    "negative": [
+      {
+        "command": "same focused pytest invocation without deselection",
+        "result": "failed as expected for one existing test: test_check_cli_passes_against_published_artifacts launches with PYTHONPATH=ipfs_kit_py:ipfs_datasets_py:. and cannot import sibling ipfs_datasets_py.logic; direct sealed SCG --check above passes with the required forest paths",
+        "classification": "known current-head harness-path defect; out of receipt-only edit scope"
+      },
+      {
+        "command": "PYTHONPATH=../ipfs_datasets:../ipfs_kit:. python3.12 -m pytest -q test/benchmarks/test_incremental_verification_planner_benchmark.py",
+        "result": "collection blocked: ModuleNotFoundError: typing_extensions",
+        "classification": "sealed-environment dependency unavailable; no claim that IVP suite passed"
+      },
+      {
+        "command": "sealed PATH capability probe",
+        "result": "z3, lean, coqc, and isabelle unavailable",
+        "classification": "typed unavailable; no formal-proof execution claim"
+      }
+    ],
+    "required_task_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json",
+      "result": "passed under the sealed Python 3.12 validation environment"
+    }
+  },
+  "limitations_and_next_delta": {
+    "promotion": "not evaluated and not authorized. Existing SCG is yellow with a median-context-reduction target miss; IVP is red with one controlled false negative; IPS is an estimated synthetic workload.",
+    "pcsm_gap": "No existing artifact provides the full PCSM v1 raw/M1/M2-plus-M1 paired corpus, exact current-tree M1 source-link evidence, live-shadow cohort, or provider-cost evidence.",
+    "smallest_versioned_delta": "defer to PCSM-100 through PCSM-119; this inventory task must not create a duplicate harness or weaken any gate.",
+    "rollback": "Remove only this receipt and invalidate it for any listed source-forest identity change; preserve existing benchmark artifacts and all unrelated bytes."
+  }
+}
