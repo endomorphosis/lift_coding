@@ -1,0 +1,316 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "task_id": "PCSM-000",
+  "title": "Inventory current PGIR, ContextPack, compression, proof, and source-map systems",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G100",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-000@1",
+  "scope": {
+    "language": "Python",
+    "mutation": "receipt_only",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json"
+    ],
+    "source_mutation": false
+  },
+  "current_tree_binding": {
+    "outer_repository": "ipfs_accelerate_py portal",
+    "outer_commit": "0c6c27169330d2ccae20c3119c1fe06f51a1066f",
+    "outer_tree": "922852a5516946908f996719ee98769cc96c3b40",
+    "gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "838261c04a4b6f2643d75017e0b472876597c673",
+        "tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "87ab6e9b0022e51e5da2ec7c9d10acd02ec84881",
+        "tree": "1e01421bf0db28fbbe90b0423d671f0babd48a57"
+      },
+      "external/ipfs_datasets": {
+        "commit": "719083b59637558d2338281a63435021e994a875",
+        "tree": "6ec131d1b71484e8244266f993b2b19edccee636"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "method": "git diff --quiet -- Mcp-Plus-Plus external/ipfs_accelerate external/ipfs_datasets external/ipfs_kit",
+      "result": "pass",
+      "meaning": "No tracked submodule overlay was present when the inventory binding was measured. The binding becomes stale if any listed commit, tree, or source digest changes."
+    }
+  },
+  "authority_boundary": {
+    "canonical_semantic_identity": "ipfs_datasets_py",
+    "exact_bytes_cid_and_immutable_storage": "ipfs_kit_py",
+    "slice_route_model_budget_link_admission_and_validation": "ipfs_accelerate_py",
+    "wire_contract_only": "Mcp-Plus-Plus",
+    "confirmed": true,
+    "negative_assertions": [
+      "No local alias is claimed as canonical identity.",
+      "No model output is claimed as proof, mutation, or validation authority.",
+      "No M2 or M3 abstraction is granted mutation authority.",
+      "No competing ContextPack, proof store, semantic compiler, or source-map authority was created."
+    ]
+  },
+  "inventory": [
+    {
+      "system": "PGIR semantic public API and canonical structured-text IR",
+      "disposition": "reuse_as_datasets_semantic_authority",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "SemanticPublicAPI@1",
+        "pgir-semantic-api/v1",
+        "CanonicalStructuredTextCompiler@1",
+        "CanonicalTranslationReceipt@1"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/semantic/catalog.py",
+          "sha256": "df9de84a142d18474844989d9a76d881d50ed8e3437d04c4a7b3a562348ee41a"
+        }
+      ],
+      "finding": "The existing PGIR catalog is a versioned discovery surface with canonical compile, decompile, translation, verification, and publication operations. It is reusable as semantic authority, but it is not a current-tree Python AST/CFG/data-flow compiler or M1 source linker."
+    },
+    {
+      "system": "ContextPack construction and sufficiency",
+      "disposition": "reuse_datasets_builder_and_mcpp_wire_contract",
+      "authority": "ipfs_datasets_py builds identity; ipfs_accelerate_py consumes it; Mcp-Plus-Plus owns wire schema only",
+      "interfaces": [
+        "DatasetsContextPackAuthority@0.1",
+        "ipfs-datasets.proof-context.v0.1",
+        "pcce/proof-context/v0.1/context-pack"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+          "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
+          "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182"
+        },
+        {
+          "path": "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json",
+          "sha256": "0a4966fccb7cba741c2519a05b5a40bd6bbc815f623f1b41c909ad987fd919e6"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+          "sha256": "698ae219ec099160dbc8d1d36b49a81df9a3fcec32ea590fb54ed6bc5471772d"
+        }
+      ],
+      "finding": "The builder deterministically derives a pack CID from schema, interface, repository state, exact source CIDs, capsule CIDs, scanned tree, and freshness inputs; stale, unavailable, and opaque-without-exact-tree cases fail closed. PCSM must consume this authority rather than fork it."
+    },
+    {
+      "system": "Semantic-compression measurement and policy",
+      "disposition": "reuse_for_routing_metrics_only",
+      "authority": "ipfs_accelerate_py",
+      "interfaces": [
+        "ipfs-accelerate.agent-supervisor.semantic-governor.compression-metrics@1",
+        "SemanticContextPack"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_governor/metrics.py",
+          "sha256": "47197a2d69b37b93b91c70733dfee6aa6f413a37a119b14079d5b0419a857bc0"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py",
+          "sha256": "23ac1597b68775cf651cc2ee44166a9eff4794fa7084d405449959e70a79337b"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/cache/compression_encoding.py",
+          "sha256": "fb9d4b2bcab31e84ea5e6a6166d452373ded1b51d67be952f9969bae5dfc91ff"
+        }
+      ],
+      "finding": "Accelerator has unavailable-aware semantic-compression metrics and paired ContextPack benchmark support. Kit's compression encoding is byte/storage compression, not semantic minification; it must not be used as a semantic-equivalence claim."
+    },
+    {
+      "system": "Proof-carrying artifact and immutable proof bytes",
+      "disposition": "reuse_datasets_validation_and_kit_storage",
+      "authority": "ipfs_datasets_py validates semantic proof lineage; ipfs_kit_py verifies exact bytes and CIDv1 storage",
+      "interfaces": [
+        "ProofCarryingArtifact@1",
+        "CIDv1 base32 immutable artifact helpers"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/proof_carrying_artifact.py",
+          "sha256": "f582806363384f70dde5d6954d1ef0cf94fa16eb9dbe4f10f50d1d69f1587748"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/proof_context/artifacts.py",
+          "sha256": "1a9fc36d8388ff09f74da2ad414cbfe5752f7e6147068a92c540cd024936d804"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
+          "sha256": "86a13c7965a9f7aca6a196a3c08f8673cd5d0fc143baf74041675493b883b318"
+        }
+      ],
+      "finding": "Existing proof artifacts bind mandatory semantic, contract, proof, test, static, security, policy, and authority lineage and reject forged IDs, stale roots, missing lineage, and producer flags. Kit rejects byte/CID disagreement and verifies fetched bytes."
+    },
+    {
+      "system": "Deterministic source maps",
+      "disposition": "reuse_as_source-map_contract_component_only",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "LogicSourceMap@1",
+        "LogicSourceMap@1 deterministic token/trivia mapping"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/syntax_core/contracts.py",
+          "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/syntax_core/diagnostics.py",
+          "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+        }
+      ],
+      "finding": "The syntax-core source-map contract is deterministic and versioned, but it maps syntax-core documents/tokens rather than exact current Python AST node and mutable-span identity. It is a reusable contract component, not an M1 Python source-link receipt."
+    }
+  ],
+  "version_and_cid_controls": {
+    "schema_bound": true,
+    "current_tree_bound": true,
+    "content_addressing_bound": true,
+    "relevant_controls": [
+      "ContextPack CID derives from exact source and scanned-tree inputs.",
+      "Kit verifies supplied bytes against CIDv1 base32 identity.",
+      "MCP++ CID behavior schema is RFC 8785 canonicalization-bound and rejects pseudo-CID new mints."
+    ],
+    "cid_behavior_schema": {
+      "path": "Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json",
+      "sha256": "b8cca6c23b9df3c8621959e5d45649e6b1f87cb9b72b7f57827ce3b2b6a96cae"
+    }
+  },
+  "minimum_versioned_delta": {
+    "status": "unavailable_pending_named_follow_on_packages",
+    "reason": "No existing component simultaneously provides a Python current-tree CanonicalCodeIR, exact Python AST/CFG/data-flow identity, M1 mutable-span source map, alias-to-canonical relinking, and deterministic bounded source rewrite. Inventing that delta in an inventory receipt would violate task scope and authority boundaries.",
+    "required_follow_on_tasks": [
+      "PCSM-010",
+      "PCSM-020",
+      "PCSM-022",
+      "PCSM-050",
+      "PCSM-051",
+      "PCSM-052",
+      "PCSM-054",
+      "PCSM-057"
+    ],
+    "non_promotion_effect": "No PCSM projection, patch plan, source link, or automatic mutation is admitted by this task."
+  },
+  "coverage": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+        "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+        "coverage": [
+          "identical inputs yield identical ContextPack CID",
+          "stale, unavailable, and opaque wrong-tree inputs fail closed"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_not_run_by_this_receipt_only_task"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_verification/test_proof_carrying_artifact.py",
+        "sha256": "d9b9c3d4391cbecc811059f81108989fa3b01dd5642469cc108bf9ed12fc6829",
+        "coverage": [
+          "round-trip and independent replay positive cases",
+          "forged CID, stale roots, missing lineage, producer flags, omitted checks, and lineage mismatch rejection"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_not_run_by_this_receipt_only_task"
+      },
+      {
+        "path": "Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py",
+        "sha256": "bb2219f2392e87e4257e10655614ae4a021a81e34720b5e4551bafb4eb5cd02f",
+        "coverage": [
+          "canonical CID positive vectors and equivalent-input determinism",
+          "negative vectors and NaN/infinity canonicalization rejection"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_not_run_by_this_receipt_only_task"
+      },
+      {
+        "path": "Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py",
+        "sha256": "5fd9059d28faba9e6d58e0f6351c6d69c668140e38baf8e5c32e177c96d14328",
+        "coverage": [
+          "valid schema instances and RFC 8785 canonicalization",
+          "unknown fields/statuses, pseudo-CIDs, wrong schema markers, and simulated provenance rejection"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_not_run_by_this_receipt_only_task"
+      },
+      {
+        "path": "external/ipfs_kit/tests/test_external_agent_context_pack.py",
+        "sha256": "afbaf935ad6dfac935c972bdbc45d90954d276f139d64d2bcec64ddee2377095",
+        "coverage": [
+          "bounded content-addressed pack positive case",
+          "heuristic-critical replacement, item limit, and non-identity rejection"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_not_run_by_this_receipt_only_task"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py",
+        "sha256": "9b51389f8ce20383621ae9d5fc3a52bb75089bfd16015c76674de39850014006",
+        "coverage": [
+          "paired raw/semantic ContextPack benchmark behavior",
+          "semantic ContextPack and reproducible token-accounting rejection paths"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_not_run_by_this_receipt_only_task"
+      }
+    ],
+    "PCSM_specific_test_gap": {
+      "kind": "unavailable",
+      "statement": "No current-head test was found for a PCSM-specific Python CanonicalCodeIR-to-source-link pipeline because that pipeline is not yet implemented; this receipt does not relabel adjacent-system tests as PCSM validation."
+    }
+  },
+  "evidence_classification": {
+    "measured": [
+      "Outer HEAD/tree, four gitlinks, four nested trees, clean tracked-submodule check, and every listed SHA-256 were directly observed.",
+      "Existing positive and negative test source declarations were directly inspected."
+    ],
+    "estimated": [],
+    "simulated": [],
+    "unavailable": [
+      "PCSM-specific Python semantic compiler, M1 source map/linker, and linker test suite are absent at this current head.",
+      "Existing upstream/nested test suites were inventoried but not executed by this receipt-only task.",
+      "No external prover execution is claimed or required for a read-only inventory."
+    ]
+  },
+  "validation": {
+    "commands": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json"
+    ],
+    "results": [
+      {
+        "kind": "measured",
+        "status": "pass",
+        "assertions": [
+          "receipt parses as JSON",
+          "receipt contains current-tree bindings, source digests, authority decisions, positive/negative test inventory, and typed unavailable evidence"
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "This artifact is an inventory receipt, not a semantic proof, promotion decision, or source-link receipt.",
+    "All source digests bind the exact tree above; freshness must be rechecked before any follow-on reuse.",
+    "The receipt intentionally records no estimated or simulated result."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this receipt; do not alter the inventoried source forest or reuse the receipt after its tree binding becomes stale."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
