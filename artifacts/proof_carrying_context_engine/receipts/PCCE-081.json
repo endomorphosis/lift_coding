@@ -132,9 +132,9 @@
       "accelerator_base_gitlink": "36021e09d8f3d8d5878108f64e3bb9cb73ebafdd",
       "accelerator_candidate_gitlink": "8d629ce7f2ee5a6109dc92e84b47664ae896ddc6",
       "accelerator_candidate_tree": "6f40999059d861ef5bdde24f5d4228a6e84b2e30",
-      "base_commit": "c5bdde1482a9afab7c5827a52bdf4f7b1d63f090",
+      "base_commit": "b087fa0b1561f099fa7c3577e559b38e9bb2e43d",
       "base_tree": "bb7849ac3bc92ad80e0bc7dff9d3b421d08ce872",
-      "branch": "implementation/PCCE-081-rc-final-20260825",
+      "branch": "agent/proof-carrying-context-engine-v0.1",
       "changed_paths_expected": [
         "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
         "artifacts/proof_carrying_context_engine/release/v0.1-rc1/VERIFY.md",
@@ -147,7 +147,7 @@
       ],
       "evidence_task_completed": true,
       "independent_review_status": "pending",
-      "provisional": true
+      "provisional": false
     },
     "package_evidence": {
       "data_only_mcp_plus_plus_pair_bound": true,
