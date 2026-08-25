@@ -7,7 +7,6 @@ import json
 import subprocess
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 NAMESPACE = "proof-carrying-semantic-minification-v1"
 PLAN_PATH = ROOT / "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md"
@@ -656,7 +655,7 @@ def render_config() -> dict[str, object]:
         },
         "max_lanes": 4,
         "strict_task_sharding": True,
-        "idle_lane_work_stealing": "virgin-transfer",
+        "idle_lane_work_stealing": "",
         "exit_when_all_tracks_terminal": False,
         "objective_refill_enabled": True,
         "codebase_refill_enabled": False,
