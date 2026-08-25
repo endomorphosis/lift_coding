@@ -1,48 +1,123 @@
 {
   "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
   "task_id": "PCSM-000",
   "title": "Inventory current PGIR, ContextPack, compression, proof, and source-map systems",
   "board_namespace": "proof-carrying-semantic-minification-v1",
   "goal_id": "PCSM-G100",
+  "objective_id": "PCSM-000",
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-000@1",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v2",
+  "observed_at": "2026-08-25T23:10:23Z",
   "scope": {
     "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 inventory only",
     "mutation": "receipt_only",
     "changed_paths": [
       "artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json"
     ],
-    "source_mutation": false
+    "source_mutation": false,
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json"
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used by this receipt.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
   },
   "current_tree_binding": {
-    "outer_repository": "ipfs_accelerate_py portal",
-    "outer_commit": "0c6c27169330d2ccae20c3119c1fe06f51a1066f",
-    "outer_tree": "922852a5516946908f996719ee98769cc96c3b40",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "36e9f4d35edc2933ac580ba62f9284aa05bdd8cc",
+    "outer_tree": "4dc46cff8a4a51fe91b5142d39c291667ca1d7af",
+    "git_object_format": "sha1",
+    "clean_before_receipt_write": true,
+    "evidence_kind": "measured",
     "gitlinks": {
       "Mcp-Plus-Plus": {
         "commit": "838261c04a4b6f2643d75017e0b472876597c673",
-        "tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253"
+        "tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253",
+        "superproject_gitlink": "838261c04a4b6f2643d75017e0b472876597c673",
+        "configured_origin_main": "838261c04a4b6f2643d75017e0b472876597c673",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
       },
       "external/ipfs_accelerate": {
-        "commit": "87ab6e9b0022e51e5da2ec7c9d10acd02ec84881",
-        "tree": "1e01421bf0db28fbbe90b0423d671f0babd48a57"
+        "commit": "5af405cc87abf684b32d920afd5346411581876a",
+        "tree": "e8bdd2bdcc5f990c5369a21d36b9a108308eda32",
+        "superproject_gitlink": "5af405cc87abf684b32d920afd5346411581876a",
+        "configured_origin_main": "7df9491c9182b685d32b04cd4bdb5890056084b4",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
       },
       "external/ipfs_datasets": {
         "commit": "719083b59637558d2338281a63435021e994a875",
-        "tree": "6ec131d1b71484e8244266f993b2b19edccee636"
+        "tree": "6ec131d1b71484e8244266f993b2b19edccee636",
+        "superproject_gitlink": "719083b59637558d2338281a63435021e994a875",
+        "configured_origin_main": "c30ccbec997868b061c4cadac38d30468c46ea2d",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
       },
       "external/ipfs_kit": {
         "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
-        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "superproject_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "configured_origin_main": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
       }
     },
     "freshness_check": {
       "kind": "measured",
-      "method": "git diff --quiet -- Mcp-Plus-Plus external/ipfs_accelerate external/ipfs_datasets external/ipfs_kit",
+      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git diff --quiet -- Mcp-Plus-Plus external/ipfs_accelerate external/ipfs_datasets external/ipfs_kit; git merge-base --is-ancestor <origin/main> HEAD",
       "result": "pass",
-      "meaning": "No tracked submodule overlay was present when the inventory binding was measured. The binding becomes stale if any listed commit, tree, or source digest changes."
+      "meaning": "The outer tree was clean before this receipt was written. Each listed nested commit equals the superproject gitlink and the scheduler planning revision. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+    },
+    "stale_prior_receipt_rejected": {
+      "kind": "measured",
+      "prior_outer_commit": "0c6c27169330d2ccae20c3119c1fe06f51a1066f",
+      "prior_outer_tree": "922852a5516946908f996719ee98769cc96c3b40",
+      "prior_accelerate_gitlink": "87ab6e9b0022e51e5da2ec7c9d10acd02ec84881",
+      "result": "rejected_as_stale",
+      "meaning": "The previously committed PCSM-000 receipt bound a different outer commit/tree and a different ipfs_accelerate gitlink. Current-head inventory required a fresh receipt."
+    }
+  },
+  "policy_bindings": {
+    "scheduler_config": {
+      "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
+      "sha256": "1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93",
+      "git_blob": "4c19b2a6b1911deb00f52d4d142422a31a8c0bce",
+      "evidence_kind": "measured"
+    },
+    "plan": {
+      "path": "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md",
+      "sha256": "5031a4e4588ef9f6589199f37e3551c5c059c25f7a04cbf9f3ec00f3f026ae0e",
+      "git_blob": "d76fbc8f9a37648c5ddbaa5b198223121b9d2231",
+      "evidence_kind": "measured"
+    },
+    "objectives": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
+      "sha256": "712c844b2a40856a677f5d7258d6bfdcb1f3ec08410e026922c93c4f6951121b",
+      "git_blob": "9f97656be213dc0f898701a04c851376b5eb6f16",
+      "evidence_kind": "measured"
+    },
+    "task_specification": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
+      "sha256": "63e745843899d95ac59e7080a2b744c87e7ac929871125d1b6efc8e392e4bfbe",
+      "git_blob": "a34f3b5773fc0a48b9665bc76e75f9e0a44fa682",
+      "evidence_kind": "measured"
     }
   },
   "authority_boundary": {
@@ -51,11 +126,15 @@
     "slice_route_model_budget_link_admission_and_validation": "ipfs_accelerate_py",
     "wire_contract_only": "Mcp-Plus-Plus",
     "confirmed": true,
+    "evidence_kind": "measured",
     "negative_assertions": [
       "No local alias is claimed as canonical identity.",
       "No model output is claimed as proof, mutation, or validation authority.",
       "No M2 or M3 abstraction is granted mutation authority.",
-      "No competing ContextPack, proof store, semantic compiler, or source-map authority was created."
+      "No competing ContextPack, proof store, semantic compiler, or source-map authority was created.",
+      "Accelerator ContextPacker.V01_PRODUCTION_AUTHORITY is False; datasets DatasetsContextPackAuthority@0.1 is the production builder.",
+      "Kit byte/storage compression is not a semantic-equivalence claim.",
+      "Legal-IR and syntax-core source maps are not PCSM M1 Python source-link receipts."
     ]
   },
   "inventory": [
@@ -67,15 +146,38 @@
         "SemanticPublicAPI@1",
         "pgir-semantic-api/v1",
         "CanonicalStructuredTextCompiler@1",
+        "CanonicalStructuredTextDecompiler@1",
+        "CanonicalRoundTripIR@1",
         "CanonicalTranslationReceipt@1"
       ],
       "current_sources": [
         {
           "path": "external/ipfs_datasets/ipfs_datasets_py/logic/semantic/catalog.py",
-          "sha256": "df9de84a142d18474844989d9a76d881d50ed8e3437d04c4a7b3a562348ee41a"
+          "sha256": "df9de84a142d18474844989d9a76d881d50ed8e3437d04c4a7b3a562348ee41a",
+          "git_blob": "e68d27b602ce80bf57dfd88f5c87537eecf40d05",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/semantic/operations.py",
+          "sha256": "3234f9d2c3b4a1c5a7088e6bed1773b5e89a950f05f276a6960f06f19007aa69",
+          "git_blob": "b67e5edac934abe2d69291d2fcbc5ec4f9d63fed",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+          "git_blob": "1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+          "sha256": "ea23d878c00337e8b1e42c6c06faa976a61c3ef6b446b63c5a04327a34678b12",
+          "git_blob": "e4271aef7274c54716bedc84594caf15c5175b02",
+          "evidence_kind": "measured"
         }
       ],
-      "finding": "The existing PGIR catalog is a versioned discovery surface with canonical compile, decompile, translation, verification, and publication operations. It is reusable as semantic authority, but it is not a current-tree Python AST/CFG/data-flow compiler or M1 source linker."
+      "finding": "SemanticPublicAPI@1 (pgir-semantic-api/v1) is a versioned discovery surface. compile delegates to TypedDeonticCanonicalCompiler.compile under CanonicalStructuredTextCompiler@1; decompile delegates to SourceWithheldCanonicalDecompiler. Persistent identities are CIDv1. This is reusable semantic authority for structured-text/legal IR. It is not a current-tree Python AST/CFG/data-flow compiler or M1 source linker.",
+      "reuse_decision": "Reuse as datasets-owned semantic API and IR contracts. Do not fork a second PGIR catalog. Python CanonicalCodeIR remains a named follow-on delta."
     },
     {
       "system": "ContextPack construction and sufficiency",
@@ -84,51 +186,102 @@
       "interfaces": [
         "DatasetsContextPackAuthority@0.1",
         "ipfs-datasets.proof-context.v0.1",
-        "pcce/proof-context/v0.1/context-pack"
+        "DatasetsProofContextProvider@0.1",
+        "pcce/proof-context/v0.1/context-pack",
+        "ContextPackView",
+        "ContextPack@1"
       ],
       "current_sources": [
         {
           "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
-          "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed"
+          "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+          "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
-          "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182"
+          "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182",
+          "git_blob": "8e738fa2d21eba5db7258d3c630f550c5cb8be51",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
+          "sha256": "6a8a72bb02f0ad21eb355d8a48e143f0a06db30fc93eb52dde38f015da01965c",
+          "git_blob": "77a4ba670303ac9c2a5ffe0fbfc1c7e9260d371e",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+          "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d",
+          "git_blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
+          "evidence_kind": "measured"
         },
         {
           "path": "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json",
-          "sha256": "0a4966fccb7cba741c2519a05b5a40bd6bbc815f623f1b41c909ad987fd919e6"
+          "sha256": "0a4966fccb7cba741c2519a05b5a40bd6bbc815f623f1b41c909ad987fd919e6",
+          "git_blob": "2aae1504848e76a0a58a99c6c2f1c7465b4c43e3",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
-          "sha256": "698ae219ec099160dbc8d1d36b49a81df9a3fcec32ea590fb54ed6bc5471772d"
+          "sha256": "698ae219ec099160dbc8d1d36b49a81df9a3fcec32ea590fb54ed6bc5471772d",
+          "git_blob": "f2263a6acb88b58b471bcc2e95e8ffa11e234e8c",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+          "sha256": "fd72987f59219b466e0aa3dd7f65ba5ddb23eeb135ddf6849c92d8ea9dfffcef",
+          "git_blob": "7ca43d6b64903aebd9cb85923958ed0d529fb09b",
+          "evidence_kind": "measured"
         }
       ],
-      "finding": "The builder deterministically derives a pack CID from schema, interface, repository state, exact source CIDs, capsule CIDs, scanned tree, and freshness inputs; stale, unavailable, and opaque-without-exact-tree cases fail closed. PCSM must consume this authority rather than fork it."
+      "finding": "Datasets build_context_pack is the sole production builder. Pack CID derives from schema, interface, repository state, exact source CIDs, capsule CIDs, scanned tree, and freshness; stale, unavailable, and opaque-without-exact-tree cases fail closed. Accelerator semantic_bridge delegates and must not reconstruct packs. ContextPacker remains a token-budget compatibility surface with V01_PRODUCTION_AUTHORITY=False. SemanticCapsuleCompiler@1 (ipfs-datasets.software-contracts.semantic-capsule@1) is the capsule compiler consumed by packs, not a second ContextPack authority.",
+      "reuse_decision": "Consume DatasetsContextPackAuthority@0.1 and the MCP++ v0.1 wire schema. Do not fork a pack builder. Do not promote ContextPacker to production identity authority."
     },
     {
       "system": "Semantic-compression measurement and policy",
       "disposition": "reuse_for_routing_metrics_only",
-      "authority": "ipfs_accelerate_py",
+      "authority": "ipfs_accelerate_py owns routing metrics; ipfs_datasets_py owns compression policy contracts; ipfs_kit_py owns byte/storage compression only",
       "interfaces": [
-        "ipfs-accelerate.agent-supervisor.semantic-governor.compression-metrics@1",
+        "ipfs_accelerate_py/agent-supervisor/semantic-governor/compression-metrics@1",
+        "GovernorMetricsCollector@1",
+        "CompressionPolicy",
         "SemanticContextPack"
       ],
       "current_sources": [
         {
           "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_governor/metrics.py",
-          "sha256": "47197a2d69b37b93b91c70733dfee6aa6f413a37a119b14079d5b0419a857bc0"
+          "sha256": "47197a2d69b37b93b91c70733dfee6aa6f413a37a119b14079d5b0419a857bc0",
+          "git_blob": "30d1e70b8515fc33e70ec50ee1e5c4f8f98ca333",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_governor/contracts.py",
+          "sha256": "b11645016093ecb7f7e6f2083c75b39a65e29427681d86dcf781894a6b5bfeb5",
+          "git_blob": "a6be500bf53c94e8d994e36f851cbd0ea395fba0",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py",
-          "sha256": "23ac1597b68775cf651cc2ee44166a9eff4794fa7084d405449959e70a79337b"
+          "sha256": "23ac1597b68775cf651cc2ee44166a9eff4794fa7084d405449959e70a79337b",
+          "git_blob": "2eebf178aeec11d7dd8f7666659f4fcc93461bf7",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/policy_contracts.py",
+          "sha256": "aa05382bab8c968bf85c10e0301c434b86a16ac224d5cf4a656c0a39108f90ee",
+          "git_blob": "4d435fd7efd23357d918f26f0bc7ea32d6d6ee77",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_kit/ipfs_kit_py/cache/compression_encoding.py",
-          "sha256": "fb9d4b2bcab31e84ea5e6a6166d452373ded1b51d67be952f9969bae5dfc91ff"
+          "sha256": "fb9d4b2bcab31e84ea5e6a6166d452373ded1b51d67be952f9969bae5dfc91ff",
+          "git_blob": "38d1ded0aa48e248bc3531b135ed71138e4279f4",
+          "evidence_kind": "measured"
         }
       ],
-      "finding": "Accelerator has unavailable-aware semantic-compression metrics and paired ContextPack benchmark support. Kit's compression encoding is byte/storage compression, not semantic minification; it must not be used as a semantic-equivalence claim."
+      "finding": "Accelerator compression-metrics@1 is unavailable-aware and supports paired raw/semantic ContextPack measurement. Datasets CompressionPolicy is a semantic-governor policy contract, not a Python minifier. Kit CompressionProfile is byte/storage encoding. None of these is a ProofCarryingSemanticProjection or M1 lossless structural projection.",
+      "reuse_decision": "Reuse governor metrics and datasets policy contracts for routing accounting. Do not treat kit encoding as semantic minification."
     },
     {
       "system": "Proof-carrying artifact and immutable proof bytes",
@@ -136,23 +289,50 @@
       "authority": "ipfs_datasets_py validates semantic proof lineage; ipfs_kit_py verifies exact bytes and CIDv1 storage",
       "interfaces": [
         "ProofCarryingArtifact@1",
+        "ProofCarryingArtifactVerifier@1",
+        "ipfs_datasets_py/logic/software-verification/proof-carrying-artifact@1",
         "CIDv1 base32 immutable artifact helpers"
       ],
       "current_sources": [
         {
           "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/proof_carrying_artifact.py",
-          "sha256": "f582806363384f70dde5d6954d1ef0cf94fa16eb9dbe4f10f50d1d69f1587748"
+          "sha256": "f582806363384f70dde5d6954d1ef0cf94fa16eb9dbe4f10f50d1d69f1587748",
+          "git_blob": "b5e88980fcf4df59a7ee87ae9dc91ca3afc96e83",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_kit/ipfs_kit_py/proof_context/artifacts.py",
-          "sha256": "1a9fc36d8388ff09f74da2ad414cbfe5752f7e6147068a92c540cd024936d804"
+          "sha256": "1a9fc36d8388ff09f74da2ad414cbfe5752f7e6147068a92c540cd024936d804",
+          "git_blob": "144571fd1b502f64c26dec48b9909c59a307d8b2",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
-          "sha256": "86a13c7965a9f7aca6a196a3c08f8673cd5d0fc143baf74041675493b883b318"
+          "sha256": "86a13c7965a9f7aca6a196a3c08f8673cd5d0fc143baf74041675493b883b318",
+          "git_blob": "7dff02d6d93c254b8ad2685462e92136260ac8dd",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/proof_seal_store/contracts.py",
+          "sha256": "de197d68bea3df3d0447b982489cc4443cbb047d75df830a9cb96a2a8921c93d",
+          "git_blob": "7d4edbd3fb369c91ed9c54ef826963f0f3e922d2",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/proof_seal_store/local_store.py",
+          "sha256": "6a6d25c40a30d2d9393080d95647abf09d1bd3f940d179b3396c18bd6c96bcb5",
+          "git_blob": "5bd118392f02cf39ee92d0d9844a5172248d6c16",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json",
+          "sha256": "0e8747db6b20c0e7fbc1618f3c216bf5dea9e1a970bff1609bdf3dfc303cc285",
+          "git_blob": "fe837b0633d3acdc4f695f49eeefce142ab10955",
+          "evidence_kind": "measured"
         }
       ],
-      "finding": "Existing proof artifacts bind mandatory semantic, contract, proof, test, static, security, policy, and authority lineage and reject forged IDs, stale roots, missing lineage, and producer flags. Kit rejects byte/CID disagreement and verifies fetched bytes."
+      "finding": "ProofCarryingArtifact@1 binds mandatory semantic, contract, abstract, proof, test, static, security, policy, and authority lineage and rejects forged CIDs, stale roots, missing lineage, omitted compact checks, lineage mismatch, and producer flags. Kit put/get helpers reject byte/CID disagreement and require CIDv1 base32. Kit does not judge semantic soundness.",
+      "reuse_decision": "Reuse datasets proof-carrying artifacts and kit immutable storage. Do not create a competing proof store."
     },
     {
       "system": "Deterministic source maps",
@@ -160,19 +340,31 @@
       "authority": "ipfs_datasets_py",
       "interfaces": [
         "LogicSourceMap@1",
-        "LogicSourceMap@1 deterministic token/trivia mapping"
+        "syntax-source-map/v1",
+        "CanonicalStructuredTextCompiler@1 source-map entries"
       ],
       "current_sources": [
         {
           "path": "external/ipfs_datasets/ipfs_datasets_py/logic/syntax_core/contracts.py",
-          "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+          "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8",
+          "git_blob": "09d79a0e6ae23d8e71f31fbba9bbebfdb84f4546",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_datasets/ipfs_datasets_py/logic/syntax_core/diagnostics.py",
-          "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+          "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f",
+          "git_blob": "4b436f9aa0346ede2ef01a0f5a2400bc63abe0d5",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+          "git_blob": "1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b",
+          "evidence_kind": "measured"
         }
       ],
-      "finding": "The syntax-core source-map contract is deterministic and versioned, but it maps syntax-core documents/tokens rather than exact current Python AST node and mutable-span identity. It is a reusable contract component, not an M1 Python source-link receipt."
+      "finding": "LogicSourceMap@1 wraps syntax-source-map/v1 token/trivia maps and is deterministic and versioned. Legal-IR SourceMapEntry travels beside source-withheld canonical IR and is CIDv1-bound. Neither map is exact current Python AST node and mutable-span identity for M1 linking. No PCSM SourceLinkReceipt or current-tree Python source-map CID exists at this head.",
+      "reuse_decision": "Reuse syntax-core and legal-IR map contracts as components. Do not treat them as PCSM M1 Python source-link receipts."
     }
   ],
   "version_and_cid_controls": {
@@ -182,11 +374,20 @@
     "relevant_controls": [
       "ContextPack CID derives from exact source and scanned-tree inputs.",
       "Kit verifies supplied bytes against CIDv1 base32 identity.",
-      "MCP++ CID behavior schema is RFC 8785 canonicalization-bound and rejects pseudo-CID new mints."
+      "MCP++ CID behavior schema is RFC 8785 canonicalization-bound and rejects pseudo-CID and Qm new mints.",
+      "ProofCarryingArtifact reconstructed_cid must equal artifact_cid.",
+      "PGIR compile/decompile persistent identities are CIDv1."
     ],
     "cid_behavior_schema": {
       "path": "Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json",
-      "sha256": "b8cca6c23b9df3c8621959e5d45649e6b1f87cb9b72b7f57827ce3b2b6a96cae"
+      "sha256": "b8cca6c23b9df3c8621959e5d45649e6b1f87cb9b72b7f57827ce3b2b6a96cae",
+      "git_blob": "b68a14e295b03b8e0b2862c36d86762e64609d57",
+      "evidence_kind": "measured"
+    },
+    "receipt_cid": {
+      "status": "unavailable",
+      "reason": "ipfs was absent from the sealed validation PATH and no admitted immutable receipt-store write was available. A SHA-256 string is not substituted for a CID.",
+      "evidence_kind": "unavailable"
     }
   },
   "minimum_versioned_delta": {
@@ -202,69 +403,107 @@
       "PCSM-054",
       "PCSM-057"
     ],
-    "non_promotion_effect": "No PCSM projection, patch plan, source link, or automatic mutation is admitted by this task."
+    "non_promotion_effect": "No PCSM projection, patch plan, source link, or automatic mutation is admitted by this task.",
+    "evidence_kind": "unavailable"
   },
   "coverage": {
     "positive_and_negative_test_sources": [
       {
         "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
         "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+        "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
         "coverage": [
           "identical inputs yield identical ContextPack CID",
           "stale, unavailable, and opaque wrong-tree inputs fail closed"
         ],
         "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_not_run_by_this_receipt_only_task"
+        "execution": "unavailable_pytest_absent_from_sealed_path"
       },
       {
         "path": "external/ipfs_datasets/tests/unit/logic/software_verification/test_proof_carrying_artifact.py",
         "sha256": "d9b9c3d4391cbecc811059f81108989fa3b01dd5642469cc108bf9ed12fc6829",
+        "git_blob": "67e85976feac379181af1308d2c6bf2e9f91e58f",
         "coverage": [
           "round-trip and independent replay positive cases",
           "forged CID, stale roots, missing lineage, producer flags, omitted checks, and lineage mismatch rejection"
         ],
         "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_not_run_by_this_receipt_only_task"
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/syntax_core/test_lexer_diagnostics.py",
+        "sha256": "50084a12e9c74f197fb4d1558112ea041487c1e7b9b63a3d2470281ad3ccce4a",
+        "git_blob": "f2c5d73fbe2a5095c6559afcd6bacaf6b28da17d",
+        "coverage": [
+          "deterministic lexing and LogicSourceMap coverage of tokens and trivia",
+          "unknown character, unterminated string/comment, confusable character, and whitespace lexeme rejection"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_roundtrip_schema.py",
+        "sha256": "83f7931aa17ecb260c1829857aaed01d9cfea2d18462c5504a50662d3f7bfb37",
+        "git_blob": "eabf979f172ddd760c72250bdbf5055b8b814280",
+        "coverage": [
+          "canonical round-trip schema and source-map contract positive cases"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/integration/logic/test_ir_compatibility_exports.py",
+        "sha256": "fe9d93cedbe12c6173ed9899ddc617e1439a9f684d5872f3c4d63baf0fedefb6",
+        "git_blob": "95416c61d6510821fde74d0e2306c0fa6ea146d5",
+        "coverage": [
+          "SemanticPublicAPI@1 and pgir-semantic-api/v1 export identity"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
       },
       {
         "path": "Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py",
         "sha256": "bb2219f2392e87e4257e10655614ae4a021a81e34720b5e4551bafb4eb5cd02f",
+        "git_blob": "3b98c0277bb02f5551fbdcbaf48346c49361a7db",
         "coverage": [
           "canonical CID positive vectors and equivalent-input determinism",
           "negative vectors and NaN/infinity canonicalization rejection"
         ],
         "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_not_run_by_this_receipt_only_task"
+        "execution": "unavailable_pytest_absent_from_sealed_path"
       },
       {
         "path": "Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py",
         "sha256": "5fd9059d28faba9e6d58e0f6351c6d69c668140e38baf8e5c32e177c96d14328",
+        "git_blob": "401ab569c290c9662537fd72776f6e84b756db11",
         "coverage": [
           "valid schema instances and RFC 8785 canonicalization",
-          "unknown fields/statuses, pseudo-CIDs, wrong schema markers, and simulated provenance rejection"
+          "unknown fields/statuses, pseudo-CIDs, Qm new mints, wrong schema markers, and simulated provenance rejection"
         ],
         "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_not_run_by_this_receipt_only_task"
+        "execution": "unavailable_pytest_absent_from_sealed_path"
       },
       {
         "path": "external/ipfs_kit/tests/test_external_agent_context_pack.py",
         "sha256": "afbaf935ad6dfac935c972bdbc45d90954d276f139d64d2bcec64ddee2377095",
+        "git_blob": "cbfac459f631263c9cb28c5decd810d12fe084f8",
         "coverage": [
           "bounded content-addressed pack positive case",
           "heuristic-critical replacement, item limit, and non-identity rejection"
         ],
         "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_not_run_by_this_receipt_only_task"
+        "execution": "unavailable_pytest_absent_from_sealed_path"
       },
       {
         "path": "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py",
         "sha256": "9b51389f8ce20383621ae9d5fc3a52bb75089bfd16015c76674de39850014006",
+        "git_blob": "13668bdc9673de53ffcda9ab42512aa33a37c02d",
         "coverage": [
           "paired raw/semantic ContextPack benchmark behavior",
           "semantic ContextPack and reproducible token-accounting rejection paths"
         ],
         "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_not_run_by_this_receipt_only_task"
+        "execution": "unavailable_pytest_absent_from_sealed_path"
       }
     ],
     "PCSM_specific_test_gap": {
@@ -272,38 +511,144 @@
       "statement": "No current-head test was found for a PCSM-specific Python CanonicalCodeIR-to-source-link pipeline because that pipeline is not yet implemented; this receipt does not relabel adjacent-system tests as PCSM validation."
     }
   },
+  "validation": {
+    "commands": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json",
+      "status": "passed",
+      "evidence_kind": "measured"
+    },
+    "positive_tests": [
+      {
+        "name": "nested gitlinks, heads, trees, and scheduler planning revisions agree",
+        "status": "passed",
+        "observed_roots": 4,
+        "also_checked": [
+          "nested worktrees clean",
+          "superproject gitlink equals nested head",
+          "configured origin/main revision is an ancestor of each nested head",
+          "listed source SHA-256 and git blob identities match live files"
+        ],
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "receipt is well-formed JSON under the sealed interpreter",
+        "status": "passed",
+        "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json",
+        "evidence_kind": "measured"
+      }
+    ],
+    "negative_tests": [
+      {
+        "name": "stale prior PCSM-000 outer commit and accelerate gitlink rejection",
+        "status": "passed",
+        "method": "Compared current outer commit 36e9f4d35edc2933ac580ba62f9284aa05bdd8cc and accelerate gitlink 5af405cc87abf684b32d920afd5346411581876a against the previously committed receipt bindings 0c6c27169330d2ccae20c3119c1fe06f51a1066f and 87ab6e9b0022e51e5da2ec7c9d10acd02ec84881; both differed and were rejected as stale.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged nested tree identity rejection",
+        "status": "passed",
+        "method": "A same-length all-zero tree value was compared to the measured ipfs_kit tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged catalog SHA-256 rejection",
+        "status": "passed",
+        "method": "A same-length all-zero digest was compared to the measured catalog.py SHA-256 df9de84a142d18474844989d9a76d881d50ed8e3437d04c4a7b3a562348ee41a and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "provider-local formal tools are not accepted as sealed-environment evidence",
+        "status": "passed",
+        "method": "The authoritative PATH excluded z3, lean, lake, ipfs, and pytest; each was recorded unavailable rather than usable.",
+        "evidence_kind": "measured"
+      }
+    ],
+    "proof_results": {
+      "status": "not_selected",
+      "reason": "This receipt-only inventory made no source mutation and no PCSM proof obligation was emitted. Absent optional provers remain unavailable rather than a passing proof result.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "evidence_kind": "measured",
+    "optional_capabilities": [
+      {
+        "capability": "pytest",
+        "status": "unavailable",
+        "reason": "pytest was absent from the sealed validation PATH. Adjacent-system tests were inventoried from source and not executed.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "IPFS CLI / receipt CID issuance",
+        "status": "unavailable",
+        "reason": "ipfs was absent from the sealed validation PATH.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Z3 prover",
+        "status": "unavailable",
+        "reason": "z3 was absent from the sealed validation PATH.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Lean and Lake",
+        "status": "unavailable",
+        "reason": "lean and lake were absent from the sealed validation PATH.",
+        "evidence_kind": "unavailable"
+      }
+    ]
+  },
   "evidence_classification": {
     "measured": [
-      "Outer HEAD/tree, four gitlinks, four nested trees, clean tracked-submodule check, and every listed SHA-256 were directly observed.",
+      "Outer HEAD 36e9f4d35edc2933ac580ba62f9284aa05bdd8cc and tree 4dc46cff8a4a51fe91b5142d39c291667ca1d7af.",
+      "Four admitted gitlinks, nested trees, clean tracked-submodule check, origin/main ancestor checks, and scheduler planning-revision equality.",
+      "Every listed SHA-256 and git blob identity.",
+      "Authority, schema, and interface constants read from current sources.",
+      "Receipt-level positive and negative identity checks.",
+      "Sealed PATH, Python 3.12.3, and json.tool parse of this receipt.",
       "Existing positive and negative test source declarations were directly inspected."
     ],
     "estimated": [],
     "simulated": [],
     "unavailable": [
-      "PCSM-specific Python semantic compiler, M1 source map/linker, and linker test suite are absent at this current head.",
-      "Existing upstream/nested test suites were inventoried but not executed by this receipt-only task.",
-      "No external prover execution is claimed or required for a read-only inventory."
+      "PCSM-specific Python semantic compiler, M1 source map/linker, SourceLinkReceipt, and linker test suite are absent at this current head.",
+      "Existing upstream/nested pytest suites were inventoried but not executed because pytest is absent from the sealed PATH.",
+      "No external prover execution is claimed or required for a read-only inventory.",
+      "No immutable receipt CID could be issued because ipfs was absent from the sealed PATH.",
+      "The smallest versioned Python CanonicalCodeIR/M1 delta is deferred to named follow-on packages."
     ]
   },
-  "validation": {
-    "commands": [
-      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json"
-    ],
-    "results": [
-      {
-        "kind": "measured",
-        "status": "pass",
-        "assertions": [
-          "receipt parses as JSON",
-          "receipt contains current-tree bindings, source digests, authority decisions, positive/negative test inventory, and typed unavailable evidence"
-        ]
-      }
-    ]
+  "evidence_summary": {
+    "measured": {
+      "count": 7,
+      "description": "Current-head forest identities, source digests, authority decisions, sealed-environment facts, and receipt-level positive/negative checks."
+    },
+    "estimated": {
+      "count": 0,
+      "description": "No estimates were used."
+    },
+    "simulated": {
+      "count": 0,
+      "description": "No simulations were used."
+    },
+    "unavailable": {
+      "count": 5,
+      "description": "PCSM Python compiler/linker, pytest execution, optional provers, receipt CID issuance, and the deferred versioned delta."
+    }
   },
   "limitations": [
     "This artifact is an inventory receipt, not a semantic proof, promotion decision, or source-link receipt.",
     "All source digests bind the exact tree above; freshness must be rechecked before any follow-on reuse.",
-    "The receipt intentionally records no estimated or simulated result."
+    "The receipt intentionally records no estimated or simulated result.",
+    "The uncommitted receipt itself is not claimed as part of the pre-write sealed outer tree.",
+    "Independent supervisor admission remains required; worker completion is insufficient."
   ],
   "rollback": {
     "destructive_effects": false,
