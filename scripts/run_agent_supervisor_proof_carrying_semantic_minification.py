@@ -1299,14 +1299,12 @@ class _ExecutorBootstrapBroker:
         server: Any,
         board: Any,
         paths: Mapping[str, Path],
-        route_policy_provider: _ExecutionRoutePolicyProvider,
         initial_execution_route_policy: Any,
     ) -> None:
         self.channel = channel
         self.server = server
         self.board = board
         self.paths = paths
-        self.route_policy_provider = route_policy_provider
         self.execution_route_policy = initial_execution_route_policy
         self.allowed_client_ids = _executor_client_ids(board)
         self.allowed_supervisor_client_ids = frozenset(
@@ -1528,8 +1526,13 @@ class _ExecutorBootstrapBroker:
             if prior_grant_id:
                 self.server.revoke_typed_client_grant(prior_grant_id)
 
-        execution_route_policy = self.route_policy_provider.seal()
-        self.execution_route_policy = execution_route_policy
+        # A route policy is immutable for one materialized plan epoch. Claims and
+        # lifecycle writes advance the task-store revision, but they do not change
+        # the admitted task population. Re-sealing here would make a restarted
+        # process disagree with the lane's stable Quack sidecar authority. A
+        # population-changing refill must instead quiesce the lanes, seal a new
+        # policy, and relaunch them as an explicit epoch transition.
+        execution_route_policy = self.execution_route_policy
         allowed_operations = (
             tuple(sorted(_DAEMON_REQUIRED_OWNER_OPERATIONS))
             if is_executor
@@ -2197,7 +2200,6 @@ def launch_supervisor(
             server=server,
             board=board,
             paths=paths,
-            route_policy_provider=route_policy_provider,
             initial_execution_route_policy=route_policy,
         )
         broker.start()
