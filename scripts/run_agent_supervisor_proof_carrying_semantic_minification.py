@@ -23,6 +23,7 @@ import os
 import re
 import signal
 import socket
+import stat as stat_module
 import subprocess
 import sys
 import threading
@@ -164,6 +165,45 @@ def _safe_path(root: Path, value: Any, *, field: str) -> Path:
     except ValueError as exc:
         raise OperatorError(f"{field} escapes repository") from exc
     return resolved
+
+
+def _ensure_private_runtime_directory(path: Path) -> None:
+    """Create or harden one same-user runtime directory for lane sidecars."""
+
+    path.mkdir(parents=True, exist_ok=True, mode=0o700)
+    nofollow = getattr(os, "O_NOFOLLOW", None)
+    if nofollow is None:
+        raise OperatorError("private runtime directories require no-follow access")
+    before = path.stat(follow_symlinks=False)
+    flags = (
+        os.O_RDONLY
+        | getattr(os, "O_DIRECTORY", 0)
+        | getattr(os, "O_CLOEXEC", 0)
+        | nofollow
+    )
+    try:
+        descriptor = os.open(path, flags)
+    except OSError as exc:
+        raise OperatorError(f"runtime directory cannot be opened safely: {path}") from exc
+    try:
+        opened = os.fstat(descriptor)
+        if (
+            not stat_module.S_ISDIR(opened.st_mode)
+            or opened.st_uid != os.geteuid()
+            or (opened.st_dev, opened.st_ino) != (before.st_dev, before.st_ino)
+        ):
+            raise OperatorError(f"runtime directory is not an owned directory: {path}")
+        os.fchmod(descriptor, 0o700)
+        hardened = os.fstat(descriptor)
+        named = path.stat(follow_symlinks=False)
+        if (
+            stat_module.S_IMODE(hardened.st_mode) != 0o700
+            or (named.st_dev, named.st_ino) != (hardened.st_dev, hardened.st_ino)
+            or named.st_uid != os.geteuid()
+        ):
+            raise OperatorError(f"runtime directory could not be hardened: {path}")
+    finally:
+        os.close(descriptor)
 
 
 def _git(*arguments: str, check: bool = True, binary: bool = False) -> str | bytes:
@@ -574,6 +614,10 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
             raise OperatorError(f"{task_id} refers to unknown goal {goal_id}")
         output_paths = _split_csv(fields.get("outputs") or fields.get("predicted_files"))
         task = dict(fields)
+        if fields.get("owning_repository") != "ipfs_accelerate_py":
+            raise OperatorError(
+                f"{task_id} does not use the sealed Portal root execution authority"
+            )
         task.update(
             {
                 "task_cid": task_cids[task_id],
@@ -608,9 +652,11 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                 "accepted_plan_root_cid": plan_root,
                 "base_revision": head,
                 "base_repository_tree_id": tree,
-                "owning_repository": str(
-                    fields.get("owning_repository") or "cross-repository"
-                ),
+                # PCSM task paths and receipts are outer-root-relative and may
+                # span several configured submodules. DatabasePortalBridge's
+                # owner is the execution worktree scope; semantic authority is
+                # governed independently by the sealed campaign plan.
+                "owning_repository": "ipfs_accelerate_py",
             }
         )
         tasks.append(task)
@@ -868,7 +914,7 @@ def materialize(config_path: Path) -> dict[str, Any]:
             "board_validation": board_validation,
         }
 
-    paths["runtime"].mkdir(parents=True, exist_ok=True)
+    _ensure_private_runtime_directory(paths["runtime"])
     with DatabaseTaskSource(
         paths["database"],
         owner_id="pcsm-bootstrap:single-writer",
@@ -2117,6 +2163,8 @@ def launch_supervisor(
     paths = _runtime_paths(board)
     if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
         raise OperatorError("materialize the sealed PCSM board before launch")
+    _ensure_private_runtime_directory(paths["runtime"])
+    _ensure_private_runtime_directory(paths["runtime"] / "state")
     receipt = _json_object(paths["bootstrap_receipt"])
     population = _population(board, config)
     if any(
@@ -2159,6 +2207,10 @@ def launch_supervisor(
             detach=False,
             duration_seconds=duration_seconds,
         )
+        for lane_index in range(int(plan["lanes"])):
+            _ensure_private_runtime_directory(
+                paths["runtime"] / "state" / f"lane-{lane_index}"
+            )
         runner_args = list(plan["argv"])
         for value in (
             "--database-owner-session-id",

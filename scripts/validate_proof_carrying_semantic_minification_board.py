@@ -13,7 +13,6 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[1]
 GENERATOR_PATH = ROOT / "scripts/generate_proof_carrying_semantic_minification_board.py"
 TASK_RE = re.compile(r"^## (PCSM-\d{3}) (.+)$", re.MULTILINE)
@@ -148,6 +147,39 @@ def validate() -> dict[str, Any]:
             errors.append(f"{task_id} namespace differs")
         if fields.get("goal_id") != generator.goal_for(task_id):
             errors.append(f"{task_id} goal mapping differs")
+        expected_owner, expected_source_scope, expected_receipt = generator.scope_for(
+            task_id
+        )
+        expected_scoped_paths = f"{expected_source_scope}, {expected_receipt}"
+        if fields.get("owning_repository") != expected_owner:
+            errors.append(
+                f"{task_id} owning repository is not the sealed Portal root authority"
+            )
+        if fields.get("owning_repository") in {
+            "cross-repository",
+            "endomorphosis/ipfs_accelerate_py",
+            "endomorphosis/ipfs_datasets_py",
+            "endomorphosis/ipfs_kit_py",
+        }:
+            errors.append(f"{task_id} uses a non-Portal repository authority token")
+        for field in ("owned_paths", "predicted_files", "allowed_paths"):
+            if fields.get(field) != expected_scoped_paths:
+                errors.append(f"{task_id} {field} differs from its outer-root scope")
+        if fields.get("outputs") != expected_receipt:
+            errors.append(f"{task_id} output is not its outer campaign receipt")
+        if fields.get("validation") != generator.validation_for(task_id):
+            errors.append(f"{task_id} validation differs from its outer-root command")
+        if not expected_receipt.startswith(
+            "artifacts/proof_carrying_semantic_minification/receipts/"
+        ):
+            errors.append(f"{task_id} receipt escaped the outer campaign receipt root")
+        if task_id not in {"PCSM-000", "PCSM-001", "PCSM-002", "PCSM-003", "PCSM-004"}:
+            if not any(
+                expected_source_scope == f"{root}/"
+                or expected_source_scope.startswith(f"{root}/")
+                for root in generator.WORKTREE_SUBMODULE_PATHS
+            ):
+                errors.append(f"{task_id} source scope is outside configured worktrees")
 
     dependencies = {
         task_id: split_csv(fields.get("depends_on", ""))
@@ -162,6 +194,20 @@ def validate() -> dict[str, Any]:
     expected_ready = ["PCSM-000", "PCSM-001", "PCSM-002", "PCSM-003"]
     if ready != expected_ready:
         errors.append(f"initial readiness frontier differs: {ready}")
+
+    task_fields = {task_id: fields for task_id, _title, fields in tasks}
+    pcsm_080 = task_fields.get("PCSM-080", {})
+    for phrase in (
+        "closed owner-side PlanDelta admission path",
+        "Markdown-only objective findings remain non-authoritative",
+        "projection_only_task_count=0",
+        "reseals the exact execution-route policy",
+        "initial 70 remain the only executable population",
+    ):
+        if phrase not in " ".join(
+            (pcsm_080.get("objective", ""), pcsm_080.get("acceptance", ""))
+        ):
+            errors.append(f"PCSM-080 is missing refill admission gate: {phrase}")
 
     goals = [item[0] for item in GOAL_RE.findall(objectives)]
     if goals != ["PCSM-G000", *(item[0] for item in generator.GOALS)]:
@@ -187,6 +233,9 @@ def validate() -> dict[str, Any]:
         "typed PatchPlan",
         "deterministic linking",
         "selected-test false negatives",
+        "current `TypedDatabaseTaskSource` cannot admit an objective refill",
+        "projection_only_task_count=0",
+        "initial 70 tasks are therefore the only executable population",
     ):
         if phrase not in plan:
             errors.append(f"plan is missing required invariant: {phrase}")
@@ -226,6 +275,10 @@ def validate() -> dict[str, Any]:
     grouped = [task_id for values in groups.values() for task_id in values]
     if Counter(grouped) != Counter(task_ids):
         errors.append("task_groups do not partition the initial task population")
+    if config.get("worktree_submodule_paths") != list(
+        generator.WORKTREE_SUBMODULE_PATHS
+    ):
+        errors.append("configured worktree submodule paths differ from board scope roots")
 
     if config.get("exit_when_all_tracks_terminal") is not False:
         errors.append("refill board must not exit at initial-drain terminal state")

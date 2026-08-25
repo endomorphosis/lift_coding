@@ -26,6 +26,14 @@ The bound supervisor source has no callable `supervisor.objectives.submit` or eq
 - Four supervisor lanes; DuckDB/`DatabaseTaskSource@1` is task and objective authority, authenticated loopback Quack is the live owner/transport, and DuckLake is optional append-only analytics only.
 - `PCSM-119` is the root completion barrier. `PCSM-090` ending the initial materialization must not terminalize the objective.
 
+### Portal repository and receipt scope
+
+`Owning repository` is the Portal filesystem/Git mutation namespace, not the semantic authority named below. Every task uses the Portal root authority `ipfs_accelerate_py` because its output set always includes an outer-superproject receipt and may also include an outer-root-relative path inside one configured nested worktree. A configured nested owner would prefix every output, incorrectly move the outer receipt into that submodule, and double-prefix the already outer-root-relative source paths. The only admitted nested source roots are `external/ipfs_accelerate`, `external/ipfs_datasets`, `external/ipfs_kit`, and `Mcp-Plus-Plus`; receipts remain under `artifacts/proof_carrying_semantic_minification/receipts/`. This common mutation namespace does not transfer canonical semantic, exact-byte storage, or patch-admission authority between repositories.
+
+### Fail-closed refill admission gate
+
+At bootstrap the current `TypedDatabaseTaskSource` cannot admit an objective refill, and Markdown-only objective findings are non-authoritative. The initial 70 tasks are therefore the only executable population until PCSM-080 adds or reuses a closed owner-side PlanDelta admission path before the first below-eight-open-task refill. Each admitted delta must remain within 10 tasks per refill, 130 total tasks, and 20 epochs; report `projection_only_task_count=0`; reseal the exact execution-route policy for the new population; and recycle the four lanes onto that policy. Until this gate passes, `objective_refill_enabled` remains configured for the later qualified path but must fail closed without materializing a refill.
+
 The initial board contains PCSM-000–004, 010–019, 020–028, 030–036, 040–047, 050–057, 060–068, 070–076, 080–085, and 090. Refill 1 admits 091–096 and 100–103 (10); refill 2 admits 104–109 and 110–113 (10); refill 3 admits 114–119 (6). Further remediation tasks must name failed canonical evidence, use `PCSM-R<epoch>-<n>`, and remain within all ceilings.
 
 ## Non-negotiable authority boundaries

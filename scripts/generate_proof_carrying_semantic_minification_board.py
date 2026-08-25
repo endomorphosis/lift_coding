@@ -13,6 +13,13 @@ PLAN_PATH = ROOT / "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PL
 OBJECTIVES_PATH = ROOT / "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md"
 BOARD_PATH = ROOT / "docs/architecture/proof_carrying_semantic_minification_v1.todo.md"
 CONFIG_PATH = ROOT / "config/proof_carrying_semantic_minification_v1_supervisor.json"
+PORTAL_ROOT_AUTHORITY = "ipfs_accelerate_py"
+WORKTREE_SUBMODULE_PATHS = (
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "Mcp-Plus-Plus",
+)
 
 
 PACKAGES = {
@@ -253,6 +260,17 @@ DEPENDENCIES = dependencies()
 
 
 def scope_for(task_id: str) -> tuple[str, str, str]:
+    """Return the Portal owner, outer-root source scope, and outer receipt.
+
+    Every PCSM task writes a campaign receipt in the outer superproject and
+    may also mutate one configured nested Git worktree.  The Portal bridge has
+    one repository owner per task and treats a nested owner as a prefix for
+    *every* output.  The only truthful common mutation namespace is therefore
+    its configured root authority.  Semantic ownership remains governed by
+    the cross-repository authority policy; this field controls filesystem and
+    Git mutation scope only.
+    """
+
     value = task_number(task_id)
     receipt = f"artifacts/proof_carrying_semantic_minification/receipts/{task_id}.json"
     if value <= 4:
@@ -263,23 +281,23 @@ def scope_for(task_id: str) -> tuple[str, str, str]:
             3: "artifacts/proof_carrying_semantic_minification/inventory/benchmarks/",
             4: "artifacts/proof_carrying_semantic_minification/architecture/",
         }
-        return "cross-repository", bootstrap_scopes[value], receipt
+        return PORTAL_ROOT_AUTHORITY, bootstrap_scopes[value], receipt
     if 10 <= value <= 36 or value in {51, 60, 61, 63, 64, 65, 68}:
         return (
-            "endomorphosis/ipfs_datasets_py",
+            PORTAL_ROOT_AUTHORITY,
             "external/ipfs_datasets/ipfs_datasets_py/proof_context/",
             receipt,
         )
     if value in {82, 83}:
         return (
-            "endomorphosis/ipfs_kit_py",
+            PORTAL_ROOT_AUTHORITY,
             "external/ipfs_kit/ipfs_kit_py/proof_context/",
             receipt,
         )
     if value == 93:
-        return "cross-repository", "Mcp-Plus-Plus/", receipt
+        return PORTAL_ROOT_AUTHORITY, "Mcp-Plus-Plus/", receipt
     return (
-        "endomorphosis/ipfs_accelerate_py",
+        PORTAL_ROOT_AUTHORITY,
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/",
         receipt,
     )
@@ -327,6 +345,14 @@ The bound supervisor source has no callable `supervisor.objectives.submit` or eq
 - Validation reserve: 40% of token and compute budget, including counterexamples, held-out evaluation, qualification, and audit.
 - Four supervisor lanes; DuckDB/`DatabaseTaskSource@1` is task and objective authority, authenticated loopback Quack is the live owner/transport, and DuckLake is optional append-only analytics only.
 - `PCSM-119` is the root completion barrier. `PCSM-090` ending the initial materialization must not terminalize the objective.
+
+### Portal repository and receipt scope
+
+`Owning repository` is the Portal filesystem/Git mutation namespace, not the semantic authority named below. Every task uses the Portal root authority `ipfs_accelerate_py` because its output set always includes an outer-superproject receipt and may also include an outer-root-relative path inside one configured nested worktree. A configured nested owner would prefix every output, incorrectly move the outer receipt into that submodule, and double-prefix the already outer-root-relative source paths. The only admitted nested source roots are `external/ipfs_accelerate`, `external/ipfs_datasets`, `external/ipfs_kit`, and `Mcp-Plus-Plus`; receipts remain under `artifacts/proof_carrying_semantic_minification/receipts/`. This common mutation namespace does not transfer canonical semantic, exact-byte storage, or patch-admission authority between repositories.
+
+### Fail-closed refill admission gate
+
+At bootstrap the current `TypedDatabaseTaskSource` cannot admit an objective refill, and Markdown-only objective findings are non-authoritative. The initial 70 tasks are therefore the only executable population until PCSM-080 adds or reuses a closed owner-side PlanDelta admission path before the first below-eight-open-task refill. Each admitted delta must remain within 10 tasks per refill, 130 total tasks, and 20 epochs; report `projection_only_task_count=0`; reseal the exact execution-route policy for the new population; and recycle the four lanes onto that policy. Until this gate passes, `objective_refill_enabled` remains configured for the later qualified path but must fail closed without materializing a refill.
 
 The initial board contains PCSM-000–004, 010–019, 020–028, 030–036, 040–047, 050–057, 060–068, 070–076, 080–085, and 090. Refill 1 admits 091–096 and 100–103 (10); refill 2 admits 104–109 and 110–113 (10); refill 3 admits 114–119 (6). Further remediation tasks must name failed canonical evidence, use `PCSM-R<epoch>-<n>`, and remain within all ceilings.
 
@@ -491,6 +517,28 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
         repository, source_scope, receipt = scope_for(task_id)
         validation = validation_for(task_id)
         risk = "high-assurance" if task_number(task_id) >= 10 else "high-integrity-discovery"
+        objective = (
+            f"{title} for the exact current PCSM source forest. Reuse existing "
+            "equivalents first; implement only the smallest versioned delta needed "
+            "for Python v1 and preserve the declared authority boundaries."
+        )
+        acceptance = (
+            f"{title} is supported by current-tree implementation and independent "
+            "validation, or ends in a typed honest non-promotion/unavailable "
+            "disposition without blocking unrelated work."
+        )
+        if task_id == "PCSM-080":
+            objective += (
+                " Before the first below-eight-open-task refill, add or reuse a "
+                "closed owner-side PlanDelta admission path; Markdown-only objective "
+                "findings remain non-authoritative and must not create executable tasks."
+            )
+            acceptance += (
+                " Refill admission proves caps of 10 tasks per delta, 130 total tasks, "
+                "and 20 epochs; reports projection_only_task_count=0; reseals the exact "
+                "execution-route policy; and recycles all lanes. Without that proof, "
+                "the initial 70 remain the only executable population."
+            )
         lines.append(f"""
 ## {task_id} {title}
 
@@ -500,7 +548,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Review only: false
 - Owning repository: {repository}
 - Owned paths: {source_scope}, {receipt}
-- Objective: {title} for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
+- Objective: {objective}
 {dependency_line}
 - Priority: P0
 - Risk classification: {risk}
@@ -524,7 +572,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Predicted files: {source_scope}, {receipt}
 - Allowed paths: {source_scope}, {receipt}
 - Conflict policy: Serialize overlapping semantic authority files through the merge queue; rebase nested changes on the latest accepted gitlink and rerun affected validation.
-- Acceptance: {title} is supported by current-tree implementation and independent validation, or ends in a typed honest non-promotion/unavailable disposition without blocking unrelated work.
+- Acceptance: {acceptance}
 """)
     return "\n".join(lines)
 
@@ -676,12 +724,7 @@ def render_config() -> dict[str, object]:
         "implementation_timeout_seconds": 7200,
         "implementation_max_timeout_seconds": 21600,
         "implementation_log_stall_seconds": 1200,
-        "worktree_submodule_paths": [
-            "external/ipfs_accelerate",
-            "external/ipfs_datasets",
-            "external/ipfs_kit",
-            "Mcp-Plus-Plus",
-        ],
+        "worktree_submodule_paths": list(WORKTREE_SUBMODULE_PATHS),
         "protected_paths": [
             PLAN_PATH.relative_to(ROOT).as_posix(),
             OBJECTIVES_PATH.relative_to(ROOT).as_posix(),

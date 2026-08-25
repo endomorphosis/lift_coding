@@ -19,7 +19,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: cross-repository
+- Owning repository: ipfs_accelerate_py
 - Owned paths: artifacts/proof_carrying_semantic_minification/inventory/current_systems/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-000.json
 - Objective: Inventory current PGIR, ContextPack, compression, proof, and source-map systems for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on:
@@ -54,7 +54,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: cross-repository
+- Owning repository: ipfs_accelerate_py
 - Owned paths: artifacts/proof_carrying_semantic_minification/baseline/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-001.json
 - Objective: Seal exact repositories, trees, policies, providers, and baseline for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on:
@@ -89,7 +89,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: cross-repository
+- Owning repository: ipfs_accelerate_py
 - Owned paths: artifacts/proof_carrying_semantic_minification/inventory/code_ir/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-002.json
 - Objective: Inventory existing code IRs, symbol indexes, AST tools, and patch systems for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on:
@@ -124,7 +124,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: cross-repository
+- Owning repository: ipfs_accelerate_py
 - Owned paths: artifacts/proof_carrying_semantic_minification/inventory/benchmarks/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json
 - Objective: Inventory current semantic-compression and proof-reuse benchmarks for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on:
@@ -159,7 +159,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: cross-repository
+- Owning repository: ipfs_accelerate_py
 - Owned paths: artifacts/proof_carrying_semantic_minification/architecture/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-004.json
 - Objective: Define canonical-versus-projection authority boundary for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-000, PCSM-001, PCSM-002, PCSM-003
@@ -194,7 +194,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-010.json
 - Objective: Define CanonicalCodeIR contract or select existing authority for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-004
@@ -229,7 +229,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-011.json
 - Objective: Define SemanticCapsule contract for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010
@@ -264,7 +264,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-012.json
 - Objective: Define TaskSemanticSlice contract for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010
@@ -299,7 +299,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-013.json
 - Objective: Define ModelTokenCostProfile for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010
@@ -334,7 +334,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-014.json
 - Objective: Define AliasDictionary for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010
@@ -369,7 +369,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-015.json
 - Objective: Define ProofCarryingSemanticProjection for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010
@@ -404,7 +404,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-016.json
 - Objective: Define SemanticIRPatchPlan for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010
@@ -439,7 +439,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json
 - Objective: Define ExpansionRequest for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010
@@ -474,7 +474,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-018.json
 - Objective: Define ProjectionValidationReceipt for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010
@@ -509,7 +509,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-019.json
 - Objective: Add canonical-byte and CID vectors for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-010, PCSM-011, PCSM-012, PCSM-013, PCSM-014, PCSM-015, PCSM-016, PCSM-017, PCSM-018
@@ -544,7 +544,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-020.json
 - Objective: Implement Python semantic compiler for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-019
@@ -579,7 +579,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-021.json
 - Objective: Implement module and symbol identity for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-020
@@ -614,7 +614,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-022.json
 - Objective: Implement AST and source-span maps for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-020
@@ -649,7 +649,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-023.json
 - Objective: Implement CFG and data-flow relationships for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-021, PCSM-022
@@ -684,7 +684,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-024.json
 - Objective: Implement read/write/call/effect summaries for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-023
@@ -719,7 +719,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-025.json
 - Objective: Integrate contracts and proof obligations for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-024
@@ -754,7 +754,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-026.json
 - Objective: Add dynamic-feature risk classification for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-020
@@ -789,7 +789,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-027.json
 - Objective: Add incremental changed-region compilation for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-021, PCSM-022, PCSM-026
@@ -824,7 +824,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-028.json
 - Objective: Add compiler round-trip and identity tests for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-023, PCSM-024, PCSM-025, PCSM-026, PCSM-027
@@ -859,7 +859,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-030.json
 - Objective: Implement semantic capsule builder for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-028
@@ -894,7 +894,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-031.json
 - Objective: Implement dependency and reverse-dependency slicing for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-030
@@ -929,7 +929,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-032.json
 - Objective: Implement test and proof-obligation slicing for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-030, PCSM-031
@@ -964,7 +964,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-033.json
 - Objective: Implement completeness witness for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-031, PCSM-032
@@ -999,7 +999,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-034.json
 - Objective: Integrate current receipts and prior failures for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-033
@@ -1034,7 +1034,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-035.json
 - Objective: Add assumption-guarantee capsule substitution for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-025, PCSM-030
@@ -1069,7 +1069,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-036.json
 - Objective: Add capsule invalidation and delta updates for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-034, PCSM-035
@@ -1104,7 +1104,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-040.json
 - Objective: Design compact model grammar for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-019
@@ -1139,7 +1139,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-041.json
 - Objective: Implement grammar parser and serializer for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-040
@@ -1174,7 +1174,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-042.json
 - Objective: Implement tokenizer cost profiling for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-040
@@ -1209,7 +1209,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-043.json
 - Objective: Implement alias optimization for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-042
@@ -1244,7 +1244,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-044.json
 - Objective: Implement semantic-anchor preservation for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-043
@@ -1279,7 +1279,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-045.json
 - Objective: Implement bounded alias-table construction for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-043, PCSM-044
@@ -1314,7 +1314,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-046.json
 - Objective: Add projection builder for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-036, PCSM-041, PCSM-045
@@ -1349,7 +1349,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-047.json
 - Objective: Add projection receipts and token accounting for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-046
@@ -1384,7 +1384,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-050.json
 - Objective: Implement typed IR patch parser for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-019, PCSM-041
@@ -1419,7 +1419,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-051.json
 - Objective: Implement source-map resolver for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-028, PCSM-050
@@ -1454,7 +1454,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-052.json
 - Objective: Implement bounded Python linker/rewriter for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-051
@@ -1489,7 +1489,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-053.json
 - Objective: Implement formatting and unchanged-span preservation for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-052
@@ -1524,7 +1524,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-054.json
 - Objective: Implement stale-tree and stale-map rejection for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-052
@@ -1559,7 +1559,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-055.json
 - Objective: Implement semantic-nonempty validation for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-052
@@ -1594,7 +1594,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-056.json
 - Objective: Implement scope and path enforcement for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-052
@@ -1629,7 +1629,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-057.json
 - Objective: Add linker positive and negative vectors for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-053, PCSM-054, PCSM-055, PCSM-056
@@ -1664,7 +1664,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-060.json
 - Objective: Integrate abstract interpretation for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-028
@@ -1699,7 +1699,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-061.json
 - Objective: Integrate assume-guarantee validation for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-035, PCSM-060
@@ -1734,7 +1734,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-062.json
 - Objective: Integrate selected tests for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-057
@@ -1769,7 +1769,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-063.json
 - Objective: Integrate incremental SMT for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-061, PCSM-062
@@ -1804,7 +1804,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-064.json
 - Objective: Integrate qualified Craig interpolation for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-063
@@ -1839,7 +1839,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-065.json
 - Objective: Integrate unsat-core fallback for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-063
@@ -1874,7 +1874,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-066.json
 - Objective: Integrate CEGAR semantic paging for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-064, PCSM-065
@@ -1909,7 +1909,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-067.json
 - Objective: Integrate qualified e-graph normalization for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-066
@@ -1944,7 +1944,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_datasets_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-068.json
 - Objective: Integrate theorem-prover admission for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-063, PCSM-067
@@ -1979,7 +1979,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-070.json
 - Objective: Add semantic expansion service for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-047
@@ -2014,7 +2014,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-071.json
 - Objective: Add symbol and capsule expansion for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-070
@@ -2049,7 +2049,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-072.json
 - Objective: Add source-span expansion for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-070
@@ -2084,7 +2084,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-073.json
 - Objective: Add counterexample expansion for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-066, PCSM-070
@@ -2119,7 +2119,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-074.json
 - Objective: Add test/proof expansion for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-062, PCSM-070
@@ -2154,7 +2154,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-075.json
 - Objective: Add bounded refinement controller for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-071, PCSM-072, PCSM-073, PCSM-074
@@ -2189,7 +2189,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-076.json
 - Objective: Add nonconvergence and fallback behavior for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-075
@@ -2224,9 +2224,9 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-080.json
-- Objective: Integrate projection events with supervisor state for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
+- Objective: Integrate projection events with supervisor state for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries. Before the first below-eight-open-task refill, add or reuse a closed owner-side PlanDelta admission path; Markdown-only objective findings remain non-authoritative and must not create executable tasks.
 - Depends on: PCSM-036, PCSM-047, PCSM-057, PCSM-076
 - Priority: P0
 - Risk classification: high-assurance
@@ -2250,7 +2250,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-080.json
 - Allowed paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-080.json
 - Conflict policy: Serialize overlapping semantic authority files through the merge queue; rebase nested changes on the latest accepted gitlink and rerun affected validation.
-- Acceptance: Integrate projection events with supervisor state is supported by current-tree implementation and independent validation, or ends in a typed honest non-promotion/unavailable disposition without blocking unrelated work.
+- Acceptance: Integrate projection events with supervisor state is supported by current-tree implementation and independent validation, or ends in a typed honest non-promotion/unavailable disposition without blocking unrelated work. Refill admission proves caps of 10 tasks per delta, 130 total tasks, and 20 epochs; reports projection_only_task_count=0; reseals the exact execution-route policy; and recycles all lanes. Without that proof, the initial 70 remain the only executable population.
 
 
 ## PCSM-081 Add tree and symbol invalidation
@@ -2259,7 +2259,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-081.json
 - Objective: Add tree and symbol invalidation for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-080
@@ -2294,7 +2294,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_kit_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_kit/ipfs_kit_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-082.json
 - Objective: Add projection and alias root CAS through Kit for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-081
@@ -2329,7 +2329,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_kit_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_kit/ipfs_kit_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-083.json
 - Objective: Add durable projection storage and recovery for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-082
@@ -2364,7 +2364,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-084.json
 - Objective: Add projection reuse and stale rejection for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-081, PCSM-083
@@ -2399,7 +2399,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-085.json
 - Objective: Add event-driven delta projections for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-084
@@ -2434,7 +2434,7 @@ Initial readiness frontier: PCSM-000, PCSM-001, PCSM-002, PCSM-003. Root termina
 - Completion: auto
 - Is schedulable: true
 - Review only: false
-- Owning repository: endomorphosis/ipfs_accelerate_py
+- Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-090.json
 - Objective: Add Python API for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.
 - Depends on: PCSM-046, PCSM-057, PCSM-085
