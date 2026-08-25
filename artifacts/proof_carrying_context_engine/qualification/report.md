@@ -1,10 +1,10 @@
-# Proof-Carrying Context Engine v0.1 provisional qualification
+# Proof-Carrying Context Engine v0.1 independently reviewed qualification
 
 ## Decision
 
 The highest level supported by the immutable evidence at canonical admission baseline `b8cadc3fb3f492cc2f27276e750ecb488bea541d` is **`research_demo`**. Release, internal pilot, external supervised pilot, production candidate, and production use are **NO-GO**. Internal development may proceed only with restrictions appropriate to unqualified research code.
 
-PCCE-081 source candidate `c1b3a46f863594a5d513b2162c08860b8115ea08` passed independent review, its reviewed receipt is bound, and the live task is completed at revision 3 with CID `baguqeerafrcsh2er4rissdyxq5ikb34kqbvrmb3a6drtys7k3tdlhbualp6q`. This PCCE-082 candidate remains provisional only for its own independent review and supervisor admission. Completed predecessor authority cannot raise the level: installation, benchmark, security, current-head CI, longitudinal self-hosting, and the release candidate all retain explicit NO-GO decisions without waivers.
+PCCE-081 source candidate `c1b3a46f863594a5d513b2162c08860b8115ea08` passed independent review, its reviewed receipt is bound, and the live task is completed at revision 3 with CID `baguqeerafrcsh2er4rissdyxq5ikb34kqbvrmb3a6drtys7k3tdlhbualp6q`. PCCE-082 candidate commit `11f5e995348f442bfe568c75d569ded9b8ca3a3d` (tree `502e26584c5569f8e6f56e30f1bb6b2509e2a483`) passed independent review without fixes; this sealing update records that disposition and requires no recomposition. Supervisor admission and live PCCE-082 database completion are not claimed. Completed predecessor or task authority cannot raise the level: installation, benchmark, security, current-head CI, longitudinal self-hosting, and the release candidate all retain explicit NO-GO decisions without waivers.
 
 ## Deterministic policy result
 
@@ -50,7 +50,7 @@ The independently reviewed PCCE-081 bundle has all 64 predecessor receipts, exac
 - Do not infer cost zero, quality zero, provider execution, current-head CI passage, dependency/license passage, security passage, signatures, hidden evaluation, or longitudinal stability.
 - Do not use this evidence for an internal pilot, external use, release promotion, or production.
 - `research_demo` permits only bounded research/development examination under controls chosen outside this artifact.
-- The PCCE-082 evidence task is complete, but its candidate remains provisional until independent review and supervisor admission. Any review sealing change must refresh every affected PCCE-082 output identity before admission.
+- The PCCE-082 evidence task is complete and its exact three-path candidate passed independent review without fixes. The sealed candidate is not provisional and requires no recomposition; PCCE-082 nevertheless remains live `todo` at revision 1, and neither supervisor admission nor database mutation is claimed.
 
 ## Rollback and supersession
 

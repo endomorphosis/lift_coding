@@ -12,7 +12,7 @@
     "internal_pilot": "NO-GO",
     "production_candidate": false,
     "production_use": "NO-GO",
-    "projection_status": "candidate-complete-pending-independent-review",
+    "projection_status": "independently-reviewed-final-candidate",
     "reason_codes": [
       "INSTALLATION_GATE_NO_GO",
       "RELEASE_CANDIDATE_PRESENT_BUT_NO_GO",
@@ -346,7 +346,8 @@
     "The PCCE-081 release manifest is present and deterministically reconstructed, but it is an immutable NO-GO bundle rather than a qualified release.",
     "No live model/provider benchmark, measured cost or quality result, current-head CI run, package signature result, security passage, release publication, or time-separated self-hosting passage is claimed.",
     "Task or board completion, local contract tests, the benchmark structural zero, and generic self-hosting lifecycle success receive no qualification credit.",
-    "research_demo is a restrictive upper-bound disposition, not an assertion that every research use is safe or successful."
+    "research_demo is a restrictive upper-bound disposition, not an assertion that every research use is safe or successful.",
+    "PCCE-082 independent review passed without fixes; supervisor admission and live database completion remain outside this sealed evidence candidate and are not claimed."
   ],
   "next_level": {
     "level": "internal_alpha",
@@ -368,8 +369,10 @@
       "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json"
     ],
     "evidence_task_completed": true,
-    "independent_review_status": "pending",
-    "provisional": true
+    "independent_review_status": "passed",
+    "provisional": false,
+    "reviewed_candidate_commit": "11f5e995348f442bfe568c75d569ded9b8ca3a3d",
+    "reviewed_candidate_tree": "502e26584c5569f8e6f56e30f1bb6b2509e2a483"
   },
   "policy": {
     "default_target": "internal_alpha",
@@ -455,23 +458,21 @@
     "refresh_required_after_supervisor_admission": false,
     "task_id": "PCCE-081"
   },
-  "provisional": {
-    "candidate_frozen_for_review": true,
-    "final_handoff_frozen": true,
-    "reason": "PCCE-082 independent review and supervisor admission are pending.",
-    "required_finalization": [
-      "Independently review the exact three-path PCCE-082 candidate and its fail-closed evidence bindings.",
-      "Admit the reviewed candidate through the supervisor without rewriting its evidence decision.",
-      "If a sealing receipt update changes bytes, recompute every affected SHA-256 and raw CID binding before admission."
-    ],
-    "status": "pending-pcce082-independent-review"
-  },
+  "provisional": false,
   "recomposition": {
     "admission_requires_reviewed_predecessor_refresh": false,
-    "finalization_requires_independent_review": true,
+    "finalization_requires_independent_review": false,
     "finalization_requires_live_predecessor_completion": false,
-    "supersession_rule": "New immutable evidence produces a new projection identity; existing bytes are never relabeled.",
-    "trigger": "PCCE-082 independent review or genuinely new immutable gate evidence"
+    "required": false,
+    "supersession_rule": "New immutable evidence produces a new projection identity; existing bytes are never relabeled."
+  },
+  "review": {
+    "disposition": "PASS",
+    "fixes_required": false,
+    "independent_review_status": "passed",
+    "reviewed_candidate_commit": "11f5e995348f442bfe568c75d569ded9b8ca3a3d",
+    "reviewed_candidate_tree": "502e26584c5569f8e6f56e30f1bb6b2509e2a483",
+    "sealed_for_handoff": true
   },
   "rollback": "Supersede this projection only after binding new immutable evidence; retain the evidence-cut identity and never relabel it to a higher level.",
   "schema": "pcce/proof-context/v0.1/qualification-level@1",

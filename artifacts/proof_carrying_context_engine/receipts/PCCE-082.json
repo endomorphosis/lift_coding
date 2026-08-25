@@ -1,5 +1,5 @@
 {
-  "artifact_identity": "bafkreigvxaro5nylx4lge7rp3rmqrjpyrceco4signdsnkd2w7plmmsyve",
+  "artifact_identity": "bafkreig5rmt5f6ilkehkr5kay7rqbjt6vrzuvzz7l5q4q7rawrjpccqzry",
   "artifact_identity_kind": "CIDv1(raw,sha2-256) of exact qualification/level.json candidate bytes",
   "board_namespace": "proof-carrying-context-engine-v0.1",
   "completion_mode": "evidence-task-completed-fail-closed-qualification-projection",
@@ -23,7 +23,7 @@
       "internal_development": "proceed-with-restrictions",
       "internal_pilot": "NO-GO",
       "production_use": "NO-GO",
-      "projection_status": "candidate-complete-pending-independent-review",
+      "projection_status": "independently-reviewed-final-candidate",
       "release_disposition": "NO-GO"
     },
     "evidence_cut": {
@@ -95,7 +95,7 @@
     "limitations": [
       "PCCE-081 independent review passed, its reviewed receipt is bound, and live completion revision 3 is admitted at canonical merge b8cadc3f.",
       "The assigned research_demo level is an upper-bound NO-GO disposition, not a positive release claim.",
-      "PCCE-082 evidence authoring is complete, but independent review and supervisor admission remain pending."
+      "PCCE-082 independent review passed without fixes; supervisor admission and live database completion remain outside this sealed evidence candidate and are not claimed."
     ],
     "outer_composition": {
       "baseline_commit": "b8cadc3fb3f492cc2f27276e750ecb488bea541d",
@@ -106,21 +106,23 @@
         "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json"
       ],
       "evidence_task_completed": true,
-      "independent_review_status": "pending",
-      "provisional": true
+      "independent_review_status": "passed",
+      "provisional": false,
+      "reviewed_candidate_commit": "11f5e995348f442bfe568c75d569ded9b8ca3a3d",
+      "reviewed_candidate_tree": "502e26584c5569f8e6f56e30f1bb6b2509e2a483"
     },
     "outputs": {
       "level": {
         "path": "artifacts/proof_carrying_context_engine/qualification/level.json",
-        "raw_cid": "bafkreigvxaro5nylx4lge7rp3rmqrjpyrceco4signdsnkd2w7plmmsyve",
-        "sha256": "d5b822eeb70bbf16627e2fdc5908a5f88888277248334726a87ab7deb63258a9",
-        "size": 21652
+        "raw_cid": "bafkreig5rmt5f6ilkehkr5kay7rqbjt6vrzuvzz7l5q4q7rawrjpccqzry",
+        "sha256": "dd8b27d2f90b510ea8f540c7e300a67eac734ae73f5f61c87e20b452f10a198e",
+        "size": 21629
       },
       "report": {
         "path": "artifacts/proof_carrying_context_engine/qualification/report.md",
-        "raw_cid": "bafkreicooc4awodftdkqfnjsapwe6hjhap2hw2np37se6gc54zivrre7fu",
-        "sha256": "4e70b80b386598d502b53203ec4f1d2703f47b69afdfe44f185de65158c49f2d",
-        "size": 6840
+        "raw_cid": "bafkreiestklv2e2otkhfbh5pcfb5xgn3oys3cfwe7f4ar7vzbyyhima55u",
+        "sha256": "929a975d134e9a8e509faf1143db99bb7625b116c4f97808feb90e3074301ded",
+        "size": 7149
       }
     },
     "pcce081_candidate": {
@@ -175,14 +177,14 @@
       "provider_or_ci_dispatched": false,
       "release_input_rebuilt_or_repaired": false
     },
-    "recomposition_required": {
-      "before_final_handoff": false,
-      "before_supervisor_admission": true,
-      "refreshes": [
-        "PCCE-082 independent review disposition",
-        "Any PCCE-082 sealing-commit fields introduced after review",
-        "Every affected output SHA-256 raw CID and size if review changes bytes"
-      ]
+    "recomposition_required": false,
+    "review": {
+      "disposition": "PASS",
+      "fixes_required": false,
+      "independent_review_status": "passed",
+      "reviewed_candidate_commit": "11f5e995348f442bfe568c75d569ded9b8ca3a3d",
+      "reviewed_candidate_tree": "502e26584c5569f8e6f56e30f1bb6b2509e2a483",
+      "sealed_for_handoff": true
     },
     "task_authority": {
       "database_completion_by_author": false,
@@ -203,9 +205,9 @@
     }
   },
   "evidence_task_completed": true,
-  "independent_review_status": "pending",
+  "independent_review_status": "passed",
   "objective_id": "PCCE-G800",
-  "rollback": "Supersede this candidate only after independent review or genuinely new immutable evidence; never relabel the same evidence to a higher level.",
+  "rollback": "Supersede this independently reviewed candidate only after genuinely new immutable evidence; never relabel the same evidence to a higher level.",
   "schema": "proof-carrying-context-engine/task-receipt@1",
   "status": "completed",
   "task_id": "PCCE-082"
