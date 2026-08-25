@@ -1,0 +1,189 @@
+{
+  "artifact_identity": "baguqeeracruwjey3ittkczloj74nxtamwnbme22tiptck3ftb4c647h7olwq",
+  "artifact_identity_kind": "software-contract structured CID of the PCCE-067 execution receipt binding the complete 84-row unavailable population",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_disposition": "completed-with-explicit-external-blocker-no-go",
+  "completion_mode": "supervised-complete-route-unavailable-population-no-provider-execution",
+  "decision": "NO-GO",
+  "evidence": {
+    "admission_composition": {
+      "base_commit": "d23e861fd4fc6293c888a6dc3377e8c94d4129d9",
+      "base_tree": "be83ad730f756ed170e174650165a088f5116323",
+      "branch": "implementation/PCCE-067-unavailable-integrated-20260825",
+      "changed_paths": [
+        "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+        "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+        "artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json"
+      ],
+      "composition_preserves_frozen_execution_source": true,
+      "gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+        "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      }
+    },
+    "allowed_scope": {
+      "actual_paths": [
+        "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+        "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+        "artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json"
+      ],
+      "board_files_mutated": false,
+      "board_owned_paths": [
+        "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+        "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+        "artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json"
+      ],
+      "canonical_worktree_mutated": false,
+      "quack_or_duckdb_mutated": false,
+      "submodule_gitlinks_mutated": false
+    },
+    "authoritative_computation": {
+      "aggregate_set_cid": "baguqeerapfe3u56yaqccjp3ogvexdb7sqefw4sl2zilf4t6eu5ucuqwjeqpa",
+      "benchmark_qualification_status": "no-go",
+      "comparison_report_cid": "baguqeerauzrslzgeyq6cxn2k5rsluxhjjpynbcuuptapfhxg7fml7sjwafzq",
+      "primary_gate_decisions": {
+        "accepted_patch_noninferiority": "unavailable-no-go",
+        "context_reduction": "unavailable-no-go",
+        "routine_frontier_escalation": "unavailable-no-go",
+        "total_cost_reduction": "unavailable-no-go"
+      }
+    },
+    "isolation": {
+      "benchmark_worktrees_created": 0,
+      "hidden_answer_or_future_patch_accessed": false,
+      "hidden_evaluator_partition_mounted": false,
+      "missing_lease_fence_and_provider_receipts": "explicitly unavailable because route admission ended before those stages",
+      "proposal_or_patch_created": false,
+      "stale_simulated_or_replayed_result_accepted": false
+    },
+    "limitations": [
+      "No provider permit, provider dispatch, model revision, model output, or provider receipt exists.",
+      "The records prove route unavailability and complete population accounting, not benchmark execution.",
+      "All observed provider cost, quality, latency, token, patch, test, proof, and assurance values remain null; zero provider calls is a separate control fact.",
+      "The frozen comparison correctly returns no-go because all four primary measurements and most zero-tolerance observations are unavailable.",
+      "No benchmark worktree, lease, fence, proposal, or hidden-access receipt exists because execution stopped before those stages.",
+      "The row provenance value live denotes a current route-admission observation only and must not be described as live-model evidence."
+    ],
+    "outputs": {
+      "execution_receipt": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+        "raw_cid_v1": "bafkreie3rdkhtrfd44ol4ajvo4prwuyzs454htrld3juuzanl7pjz3ibze",
+        "sha256": "9b88d479c4a3e71cbe0135771f1b5319973bc3ce2b1ed34a640d5fde9ced01c9",
+        "size": 11851,
+        "structured_cid": "baguqeeracruwjey3ittkczloj74nxtamwnbme22tiptck3ftb4c647h7olwq"
+      },
+      "raw_results": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+        "raw_cid_v1": "bafkreibjooqmsrumufg5uuevpda5u6q5msnurxytzeuslextjj4hfjtmfi",
+        "sha256": "2973a0c9468ca14dda509578c1da7a1d649b48df13c9292592f34a7872a66c2a",
+        "size": 738788
+      },
+      "run_manifest": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+        "raw_cid_v1": "bafkreiacslsundktuyeaaykq45d7v33omuacp6bjaujk64pwxwdxgxgan4",
+        "sha256": "0292e5468d53a608006150e747faef6e650027f8290512af71f6bd87735cc06f",
+        "size": 46438,
+        "structured_cid": "baguqeeraem6tjti2y3bjbsdyyr2klsdkfxhvo6xywfmbw2zmgils244jjd4q"
+      }
+    },
+    "population": {
+      "configuration_ids": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "expected_result_count": 84,
+      "frozen_task_count": 21,
+      "metric_fields_per_row": 78,
+      "missingness_complete": true,
+      "null_metric_slot_count": 6258,
+      "provider_call_count": 0,
+      "raw_result_line_cid_count": 84,
+      "recorded_result_count": 84,
+      "route_unavailable_count": 84,
+      "routine_localized_counts": {
+        "C": 14,
+        "D": 14
+      },
+      "terminal_status_counts": {
+        "unavailable": 84
+      }
+    },
+    "prohibited_effects": {
+      "corpus_configuration_metric_or_threshold_bytes_changed": false,
+      "failure_or_cost_concealed": false,
+      "hidden_answer_or_future_patch_accessed": false,
+      "provider_or_network_benchmark_invoked": false,
+      "release_or_production_qualification_issued": false,
+      "synthetic_replay_or_simulation_reported_as_live_model_quality": false
+    },
+    "review": {
+      "independent_review_claimed": false,
+      "state": "candidate-awaiting-independent-composition-review"
+    },
+    "route_and_provider": {
+      "benchmark_execution_performed": false,
+      "cost_disposition": "unavailable-not-zero",
+      "latency_disposition": "unavailable-null-not-zero",
+      "provenance_live_interpretation": "current unavailable route-admission observation only; not live provider or live model execution evidence",
+      "provider_dispatch_attempted": false,
+      "provider_model_revision_observed": false,
+      "provider_or_model_called": false,
+      "provider_permit_observed": false,
+      "quality_disposition": "unavailable-null-not-zero"
+    },
+    "source": {
+      "branch": "implementation/PCCE-067-unavailable-population-20260825",
+      "gitlinks": {
+        "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "external/ipfs_accelerate": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+        "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+        "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      },
+      "outer_base_commit": "268801f6312dc3b338dbda9ce88e0424a347052f",
+      "outer_base_tree": "57ef4bc71ba968ab39779168d8fe9883a76fef18"
+    },
+    "task_authority": {
+      "canonical_static_task_cid": "baguqeera5zw2sgetx6yvihhl5a2mmd7vanmuepxef2bbhet3nfgknzqqoogq",
+      "live_quack_duckdb_task_cid": "baguqeeraozzrsd26abvatqptb5bhvxa5dw7mymfcryemk355ieqlmczvtzjq",
+      "live_revision_transport": "Quack/DuckDB supervisor authority supplied for this candidate"
+    },
+    "validation": {
+      "declared_three_suite_command": {
+        "command": "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python -m pytest -q external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_cd.py external/ipfs_datasets/tests/proof_context/benchmarks/test_metrics.py",
+        "failed": 0,
+        "passed": 234,
+        "result": "passed"
+      },
+      "json_checks": [
+        "python -m json.tool artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+        "python -m json.tool artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+        "python -m json.tool artifacts/proof_carrying_context_engine/receipts/PCCE-067.json"
+      ],
+      "raw_population_validation": {
+        "checks": [
+          "strict JSONL parse",
+          "validate_raw_result for every row",
+          "raw_result_cid semantic admission for every row",
+          "validate_result_population over all 84 rows",
+          "aggregate_results over A-D",
+          "compare_frozen_ad over paired A/D population",
+          "exact 21-by-4 cardinality and route-unavailable count audit",
+          "null metric and missingness completeness audit"
+        ],
+        "result": "passed"
+      }
+    }
+  },
+  "objective_id": "PCCE-G600",
+  "rollback": "Preserve the immutable raw unavailable records and cost-null semantics; remove only the three derived manifests/receipts if composition rejects the candidate, or supersede all four outputs with a separately identified permitted population without rewriting these observations.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-067"
+}

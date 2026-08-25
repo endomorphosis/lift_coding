@@ -1,0 +1,294 @@
+{
+  "authoritative_metrics_validation": {
+    "aggregate_scope": "descriptive-pure-aggregation-not-benchmark-qualification",
+    "aggregate_set_cid": "baguqeerapfe3u56yaqccjp3ogvexdb7sqefw4sl2zilf4t6eu5ucuqwjeqpa",
+    "comparison": {
+      "decision_scope": "frozen-benchmark-evidence-only-not-live-provider-execution-or-production-qualification",
+      "pairing": {
+        "arm_execution_identity_fields": [
+          "provider_id",
+          "model_id",
+          "model_revision"
+        ],
+        "baseline_attempt_count": 21,
+        "candidate_attempt_count": 21,
+        "differing_retry_count_task_cluster_count": 0,
+        "held_identity_fields": [
+          "corpus_manifest_cid",
+          "task_record_cid",
+          "visible_projection_cid",
+          "repository_state_cid",
+          "environment_cid",
+          "seed",
+          "attempt",
+          "provenance"
+        ],
+        "held_task_identity_fields": [
+          "corpus_manifest_cid",
+          "task_record_cid",
+          "visible_projection_cid",
+          "repository_state_cid",
+          "environment_cid",
+          "seed",
+          "provenance"
+        ],
+        "paired_attempt_count": 21,
+        "paired_task_cluster_count": 21,
+        "unmatched_baseline_count": 0,
+        "unmatched_baseline_result_cids": [],
+        "unmatched_candidate_count": 0,
+        "unmatched_candidate_result_cids": []
+      },
+      "primary_gates": {
+        "accepted_patch_noninferiority": {
+          "decision": "unavailable-no-go",
+          "evidence_class": "descriptive-nonlive",
+          "metric": "correct_accepted_patch_rate_bp",
+          "reason": "required-live-observed-evidence-is-absent"
+        },
+        "context_reduction": {
+          "decision": "unavailable-no-go",
+          "evidence_class": "identity-paired-observation",
+          "metric": "context_reduction_bp",
+          "reason": "zero-or-missing-denominator"
+        },
+        "routine_frontier_escalation": {
+          "decision": "unavailable-no-go",
+          "evidence_class": "descriptive-nonlive",
+          "metric": "routine_frontier_escalation_rate_bp",
+          "reason": "routine-frontier-denominator-or-numerator-missing"
+        },
+        "total_cost_reduction": {
+          "decision": "unavailable-no-go",
+          "evidence_class": "descriptive-or-missing-cost",
+          "metric": "total_cost_reduction_bp",
+          "reason": "one-or-more-paired-total-cost-observations-missing"
+        }
+      },
+      "qualification_blockers": [
+        "context_reduction",
+        "accepted_patch_noninferiority",
+        "total_cost_reduction",
+        "routine_frontier_escalation",
+        "critical_regression_accepted_count",
+        "stale_capsule_accepted_count",
+        "stale_proof_accepted_count",
+        "controlled_selected_test_false_negative_count",
+        "critical_mutant_accepted_count",
+        "negative_review_autonomous_accept_count"
+      ],
+      "qualification_status": "no-go",
+      "zero_tolerance": {
+        "controlled_selected_test_false_negative_count": {
+          "decision": "unavailable-no-go",
+          "missing_result_count": 42,
+          "observed": null,
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        "critical_mutant_accepted_count": {
+          "decision": "unavailable-no-go",
+          "missing_result_count": 21,
+          "observed": null,
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        "critical_regression_accepted_count": {
+          "decision": "unavailable-no-go",
+          "missing_result_count": 84,
+          "observed": null,
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        "negative_review_autonomous_accept_count": {
+          "decision": "unavailable-no-go",
+          "missing_result_count": 21,
+          "observed": null,
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        "simulated_success_accepted_count": {
+          "decision": "pass",
+          "missing_result_count": 0,
+          "observed": 0,
+          "reason": "exact-zero-tolerance-invariant-satisfied"
+        },
+        "stale_capsule_accepted_count": {
+          "decision": "unavailable-no-go",
+          "missing_result_count": 42,
+          "observed": null,
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        "stale_proof_accepted_count": {
+          "decision": "unavailable-no-go",
+          "missing_result_count": 42,
+          "observed": null,
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        }
+      }
+    },
+    "comparison_report_cid": "baguqeerauzrslzgeyq6cxn2k5rsluxhjjpynbcuuptapfhxg7fml7sjwafzq",
+    "configuration_metric_summaries": {
+      "A": {
+        "context_reduction_bp": null,
+        "correct_accepted_patch_rate_bp": 0,
+        "eligible_task_count": 21,
+        "provider_call_count": 0,
+        "result_count": 21,
+        "route_unavailable_count": 21,
+        "routine_frontier_escalation_rate_bp": null,
+        "routine_localized_task_count": null,
+        "task_cluster_count": 21,
+        "total_cost_micros": null
+      },
+      "B": {
+        "context_reduction_bp": null,
+        "correct_accepted_patch_rate_bp": 0,
+        "eligible_task_count": 21,
+        "provider_call_count": 0,
+        "result_count": 21,
+        "route_unavailable_count": 21,
+        "routine_frontier_escalation_rate_bp": null,
+        "routine_localized_task_count": null,
+        "task_cluster_count": 21,
+        "total_cost_micros": null
+      },
+      "C": {
+        "context_reduction_bp": null,
+        "correct_accepted_patch_rate_bp": 0,
+        "eligible_task_count": 21,
+        "provider_call_count": 0,
+        "result_count": 21,
+        "route_unavailable_count": 21,
+        "routine_frontier_escalation_rate_bp": null,
+        "routine_localized_task_count": 14,
+        "task_cluster_count": 21,
+        "total_cost_micros": null
+      },
+      "D": {
+        "context_reduction_bp": null,
+        "correct_accepted_patch_rate_bp": 0,
+        "eligible_task_count": 21,
+        "provider_call_count": 0,
+        "result_count": 21,
+        "route_unavailable_count": 21,
+        "routine_frontier_escalation_rate_bp": null,
+        "routine_localized_task_count": 14,
+        "task_cluster_count": 21,
+        "total_cost_micros": null
+      }
+    },
+    "metric_count_per_row": 78,
+    "population_validated_row_count": 84,
+    "raw_result_schema": "ipfs-datasets.proof-context.benchmark-raw-result@1",
+    "schema_validated_row_count": 84,
+    "semantic_validated_row_count": 84,
+    "unique_raw_result_cid_count": 84,
+    "unique_run_key_count": 84
+  },
+  "benchmark_id": "pcce-external-generalization-v0.1",
+  "completion_disposition": "complete-explicit-provider-route-unavailable-population",
+  "decision": "NO-GO",
+  "execution": {
+    "benchmark_execution_performed": false,
+    "configuration_ids": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "cost_disposition": "unavailable-not-zero",
+    "latency_observations": "unavailable-null-not-zero",
+    "provider_call_count": 0,
+    "provider_dispatch_attempted": false,
+    "provider_or_model_called": false,
+    "provider_reported_cost_micros": null,
+    "quality_observations": "unavailable-null-not-zero",
+    "result_record_count": 84,
+    "route_unavailable_count": 84,
+    "rows_per_configuration": {
+      "A": 21,
+      "B": 21,
+      "C": 21,
+      "D": 21
+    },
+    "task_count": 21,
+    "terminal_status_counts": {
+      "unavailable": 84
+    },
+    "token_observations": "unavailable-null-not-zero",
+    "total_cost_micros": null
+  },
+  "isolation_and_security": {
+    "benchmark_worktrees_created": 0,
+    "explanation": "Route admission failed before worktree creation, provider dispatch, proposal, or evaluator mount; absence of those receipts is explicit rather than fabricated.",
+    "hidden_answer_or_future_patch_accessed": false,
+    "hidden_evaluator_partition_mounted": false,
+    "hidden_tests_executed": false,
+    "proposal_created": false,
+    "stale_or_simulated_result_accepted": false
+  },
+  "limitations": [
+    "No provider permit, provider dispatch, model revision, model output, or provider receipt exists.",
+    "The records prove route unavailability and complete population accounting, not benchmark execution.",
+    "All observed provider cost, quality, latency, token, patch, test, proof, and assurance values remain null; zero provider calls is a separate control fact.",
+    "The frozen comparison correctly returns no-go because all four primary measurements and most zero-tolerance observations are unavailable.",
+    "No benchmark worktree, lease, fence, proposal, or hidden-access receipt exists because execution stopped before those stages.",
+    "The row provenance value live denotes a current route-admission observation only and must not be described as live-model evidence."
+  ],
+  "non_claims": {
+    "benchmark_performance_claim": false,
+    "cost_reduction_claim": false,
+    "production_readiness_claim": false,
+    "quality_noninferiority_claim": false,
+    "release_qualification_claim": false
+  },
+  "rollback": "Preserve this immutable unavailable population and its cost-null semantics; a future permitted provider execution must publish a separately identified population rather than rewrite these terminal records.",
+  "runtime_gate": {
+    "disposition": "blocked-before-provider-dispatch",
+    "installation_live_execution_eligible": false,
+    "installation_qualification_status": "NO-GO",
+    "provider_or_model_permit_observed": false,
+    "self_hosting_benchmark_execution": false,
+    "self_hosting_decision": "NO-GO"
+  },
+  "schema": "lift_coding.proof-carrying-context-engine.benchmark-execution-receipt@1",
+  "source_artifacts": {
+    "raw_results": {
+      "path": "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+      "raw_cid_v1": "bafkreibjooqmsrumufg5uuevpda5u6q5msnurxytzeuslextjj4hfjtmfi",
+      "sha256": "2973a0c9468ca14dda509578c1da7a1d649b48df13c9292592f34a7872a66c2a",
+      "size": 738788
+    },
+    "run_manifest": {
+      "path": "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+      "raw_cid_v1": "bafkreiacslsundktuyeaaykq45d7v33omuacp6bjaujk64pwxwdxgxgan4",
+      "sha256": "0292e5468d53a608006150e747faef6e650027f8290512af71f6bd87735cc06f",
+      "size": 46438,
+      "structured_cid": "baguqeeraem6tjti2y3bjbsdyyr2klsdkfxhvo6xywfmbw2zmgils244jjd4q"
+    }
+  },
+  "task_authority": {
+    "live_quack_duckdb_task_cid": "baguqeeraozzrsd26abvatqptb5bhvxa5dw7mymfcryemk355ieqlmczvtzjq",
+    "static_board_task_cid": "baguqeera5zw2sgetx6yvihhl5a2mmd7vanmuepxef2bbhet3nfgknzqqoogq"
+  },
+  "task_id": "PCCE-067",
+  "validation": {
+    "declared_runner_and_metrics_suite": {
+      "command": "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python -m pytest -q external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_cd.py external/ipfs_datasets/tests/proof_context/benchmarks/test_metrics.py",
+      "failed": 0,
+      "passed": 234,
+      "result": "passed"
+    },
+    "raw_population": {
+      "checks": [
+        "strict JSONL parse",
+        "validate_raw_result for every row",
+        "raw_result_cid semantic admission for every row",
+        "validate_result_population over all 84 rows",
+        "aggregate_results over A-D",
+        "compare_frozen_ad over paired A/D population",
+        "exact 21-by-4 cardinality and route-unavailable count audit",
+        "null metric and missingness completeness audit"
+      ],
+      "result": "passed"
+    },
+    "run_manifest_json": "passed"
+  }
+}
