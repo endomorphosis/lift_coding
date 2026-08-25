@@ -107,7 +107,18 @@
       "unique_live_task_cids": true,
       "unique_task_ids": true
     },
-    "independent_review_status": "pending",
+    "independent_review": {
+      "candidate_commit": "1c042c53972038a84d2e5e1725f830831cbda475",
+      "candidate_tree": "dc66cbf1d37644973fe0696a6114de72742cff4b",
+      "required_fixes": [],
+      "reviewers": [
+        "/root/author_pcce082",
+        "/root/review_pcce081_final"
+      ],
+      "scope": "exact-four-path-candidate",
+      "verdict": "PASS"
+    },
+    "independent_review_status": "passed",
     "outputs": {
       "dependency_graph": {
         "path": "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
@@ -190,6 +201,7 @@
       "cross_file_identity_audit": "passed",
       "dependency_and_receipt_completeness": "passed",
       "diff_check": "passed",
+      "independent_review": "passed",
       "live_authority_read": "passed",
       "machine_human_decision_consistency": "passed",
       "r6_frozen_graph_validator": "passed",
@@ -242,10 +254,10 @@
     }
   },
   "evidence_task_completed": true,
-  "independent_review_status": "pending",
+  "independent_review_status": "passed",
   "objective_id": "PCCE-G800",
   "parent_objective_id": "PCCE-G000",
-  "provisional": true,
+  "provisional": false,
   "rollback": "Preserve this immutable pre-completion projection and supersede it only with corrected source evidence; never rewrite predecessor receipts or convert NO-GO evidence into passage.",
   "schema": "proof-carrying-context-engine/task-receipt@1",
   "status": "completed",
