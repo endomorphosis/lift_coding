@@ -1,0 +1,168 @@
+{
+  "artifact_bindings": {
+    "findings": {
+      "cid_v1_raw": "bafkreiaj5oj6sqxpybal2q5rejdmtusbuqrhulbnkfhglw3gxbtjyz5ub4",
+      "path": "artifacts/proof_carrying_context_engine/security/findings.json",
+      "sha256": "09eb93e942efc040bd43b12246c9d241a4227a2c2d514e65db66b8669c67b40f",
+      "size": 18145
+    },
+    "report": {
+      "cid_v1_raw": "bafkreidmqtyrnxh42o7jx6lj6zujsdk6x7pezkkp4ext5eek44b2o535ti",
+      "path": "artifacts/proof_carrying_context_engine/security/report.md",
+      "sha256": "6c84f116dcfcd3be9bf969f668990d5ebfde4ca94fe12f3e908ae703a7777d9a",
+      "size": 9022
+    },
+    "threat_model": {
+      "cid_v1_raw": "bafkreicqlvr2orogy3xemnyse4x5lkjs6t2w3wsrzd4w4utb4fvmsmif74",
+      "path": "artifacts/proof_carrying_context_engine/security/threat_model.json",
+      "sha256": "505d63a745c6c6ee463712272fd5a932f4f56dda51c8f96e5261e16ac93105ff",
+      "size": 63920
+    }
+  },
+  "authority_observations": {
+    "authoritative_hidden_evaluator_integrated": false,
+    "authoritative_sandbox_integrated": false,
+    "external_ci_run_observed": false,
+    "immutable_full_test_log_available": false,
+    "live_benchmark_invoked": false,
+    "live_provider_invoked": false,
+    "production_publication_observed": false,
+    "security_scan_observed": false,
+    "signer_authority_observed": false
+  },
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "decision": "NO-GO",
+  "evidence_cut": {
+    "gitlinks": {
+      "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+      "external/ipfs_accelerate": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+      "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+      "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+    },
+    "outer_commit": "d23e861fd4fc6293c888a6dc3377e8c94d4129d9",
+    "outer_tree": "be83ad730f756ed170e174650165a088f5116323"
+  },
+  "local_validation": {
+    "declared_board_command": {
+      "command": "python -m pytest -q external/ipfs_accelerate/test/proof_context/security/test_threat_model.py external/ipfs_accelerate/test/proof_context/security/test_sandbox.py external/ipfs_kit/tests/proof_context/test_trust_admission.py external/ipfs_accelerate/test/proof_context/security/test_adversarial_patch_and_agent.py external/ipfs_datasets/tests/proof_context/benchmarks/test_isolation.py external/ipfs_accelerate/test/proof_context/security/test_adversarial_concurrency.py",
+      "error_class": "ModuleNotFoundError",
+      "missing_module": "ipfs_datasets_py.logic.software_contracts.content",
+      "status": "collection-error-no-go"
+    },
+    "immutable_full_log_artifact": null,
+    "qualification_effect": "none-declared-command-failed-and-source-root-pass-does-not-close-release-blockers",
+    "source_root_bound_suite": {
+      "command": "env PYTHONHASHSEED=20260825 PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate:Mcp-Plus-Plus python -m pytest -q external/ipfs_accelerate/test/proof_context/security/test_threat_model.py external/ipfs_accelerate/test/proof_context/security/test_sandbox.py external/ipfs_kit/tests/proof_context/test_trust_admission.py external/ipfs_accelerate/test/proof_context/security/test_adversarial_patch_and_agent.py external/ipfs_datasets/tests/proof_context/benchmarks/test_isolation.py external/ipfs_accelerate/test/proof_context/security/test_adversarial_concurrency.py",
+      "passed": 438,
+      "pytest_temporary_cleanup_warnings": 4,
+      "skipped": 0,
+      "status": "passed-diagnostic-only"
+    }
+  },
+  "observed_release_blockers": [
+    {
+      "blocker_id": "PCCE-075-double-publication",
+      "disposition": "no-go-runtime-storage-owner-reopen-required",
+      "evidence": {
+        "expected_maximum_accepted_records": 1,
+        "expected_maximum_published_settlements": 1,
+        "observed_accepted_records": 2,
+        "observed_published_settlements": 2,
+        "overlap_proven": true,
+        "shared_kit_root": true
+      },
+      "schedule_id": "two-runtime-stores-one-generation-minimized-failure"
+    },
+    {
+      "blocker_id": "PCCE-075-lost-durable-checkpoint-false-success",
+      "disposition": "no-go-lost-durable-checkpoint-false-success",
+      "evidence": {
+        "durable_resume_observed": false,
+        "no_cleanup_restart_status": "unavailable",
+        "post_cleanup_fresh_restart_accepted": true,
+        "post_cleanup_fresh_restart_published": true,
+        "post_cleanup_fresh_restart_status": "succeeded"
+      },
+      "schedule_id": "bounded-process-apply-during"
+    },
+    {
+      "blocker_id": "PCCE-075-synthetic-only-aba",
+      "disposition": "no-go-insufficient-not-runtime-kit-repository-integrated",
+      "evidence": {
+        "delayed_generation_one_outcome": "stale_root:generation",
+        "integration_scope": "synthetic-in-process-store-only",
+        "qualification_credit": false
+      },
+      "schedule_id": "delayed-generation-one-after-aba"
+    },
+    {
+      "blocker_id": "PCCE-075-authoritative-integration-gaps",
+      "disposition": "no-go-authoritative-integration-owner-reopen-required",
+      "evidence": {
+        "accepted_despite_gaps": true,
+        "authoritative_hidden_evaluator": "not_integrated",
+        "authoritative_sandbox": "not_integrated",
+        "proof_execution": "unavailable-no-go",
+        "verification_execution": "marker-only-no-command-or-test-receipt"
+      },
+      "schedule_id": "authoritative-runtime-integration-gaps"
+    },
+    {
+      "blocker_id": "PCCE-074-non-authoritative-isolation",
+      "disposition": "no-go-unintegrated-limited-boundary",
+      "evidence": {
+        "authoritative_accelerator_or_provider_consumes_module": false,
+        "live_benchmark_or_provider_invoked": false,
+        "outer_composed_proof_context_suite_clean": false,
+        "trusted_evaluator_callbacks_sandboxed_by_module": false
+      },
+      "schedule_id": null
+    }
+  ],
+  "policy": {
+    "high_or_critical_open_result": "NO-GO",
+    "missing_or_unavailable_result": "NO-GO",
+    "planned_or_limited_control_release_credit": false,
+    "required_release_blockers_closed": false
+  },
+  "qualification": {
+    "benchmark_qualified": false,
+    "production_eligible": false,
+    "provider_qualified": false,
+    "release_qualified": false,
+    "security_qualified": false
+  },
+  "release_blocking_finding_ids": [
+    "RR-001",
+    "RR-002",
+    "RR-003",
+    "RR-004",
+    "RR-005",
+    "RR-006",
+    "RR-007",
+    "RR-008",
+    "RR-009",
+    "RR-010"
+  ],
+  "rollback": "Preserve every adverse schedule and finding; revert only the PCCE-076 findings/report/qualification/receipt candidate and reopen owning controls. Never weaken or waive a required security observation.",
+  "schema": "lift_coding.proof-carrying-context-engine.security-qualification@1",
+  "status": "release_blocked",
+  "task_authority": {
+    "database_mutated_by_author": false,
+    "dependency_task_cid": "baguqeera24wipnfzevagzrgxdhl2zu5vazvy4enprtyqr2tobtetjjijihsq",
+    "live_task_cid": "baguqeera75yoyff76ew7hitxvpsyk7jqxa2vhgiddmnpyma5spkazkzxr3yq",
+    "live_task_revision": 1,
+    "live_task_status": "todo",
+    "task_completion_claimed": false,
+    "transport": "quack:127.0.0.1:41347"
+  },
+  "task_id": "PCCE-076",
+  "threat_summary": {
+    "critical_release_blockers": 9,
+    "high_release_blockers": 1,
+    "open_release_blockers": 10,
+    "threat_areas_no_go": 14,
+    "threat_areas_total": 14
+  },
+  "waivers": []
+}

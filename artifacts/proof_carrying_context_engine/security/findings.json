@@ -1,0 +1,580 @@
+{
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "decision": "NO-GO",
+  "evidence_cut": {
+    "gitlinks": {
+      "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+      "external/ipfs_accelerate": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+      "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+      "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+    },
+    "outer_commit": "d23e861fd4fc6293c888a6dc3377e8c94d4129d9",
+    "outer_tree": "be83ad730f756ed170e174650165a088f5116323"
+  },
+  "findings": [
+    {
+      "description": "Source semantics can influence an agent without enforced instruction/data separation or semantic policy invariants.",
+      "finding_id": "RR-001",
+      "owner_tasks": [
+        "PCCE-073",
+        "PCCE-074"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-001",
+        "TH-003"
+      ]
+    },
+    {
+      "description": "Tests, Codex, and arbitrary adapters are outside the tested CommandAdapter process boundary.",
+      "finding_id": "RR-002",
+      "owner_tasks": [
+        "PCCE-071",
+        "PCCE-073"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-002",
+        "TH-005",
+        "TH-007",
+        "TH-013",
+        "TH-014"
+      ]
+    },
+    {
+      "description": "Live Codex has broad network and credential-bearing environment access.",
+      "finding_id": "RR-003",
+      "owner_tasks": [
+        "PCCE-071"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-006",
+        "TH-007",
+        "TH-011",
+        "TH-014"
+      ]
+    },
+    {
+      "description": "Lexical worktree path checks do not prove symlink-safe descriptor-rooted containment.",
+      "finding_id": "RR-004",
+      "owner_tasks": [
+        "PCCE-071"
+      ],
+      "release_blocking": true,
+      "severity": "high",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-004"
+      ]
+    },
+    {
+      "description": "Receipt, seal, signature, parent, environment, and transitive byte trust is incomplete.",
+      "finding_id": "RR-005",
+      "owner_tasks": [
+        "PCCE-072"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-008",
+        "TH-009"
+      ]
+    },
+    {
+      "description": "Hidden benchmark and least-disclosure provider projections are absent.",
+      "finding_id": "RR-006",
+      "owner_tasks": [
+        "PCCE-074"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-010",
+        "TH-011"
+      ]
+    },
+    {
+      "description": "In-process fencing does not prove cross-process CAS atomicity or ABA safety.",
+      "finding_id": "RR-007",
+      "owner_tasks": [
+        "PCCE-075"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-009",
+        "TH-012"
+      ]
+    },
+    {
+      "description": "Interruption cleanup is not proven across every process and lifecycle stage.",
+      "finding_id": "RR-008",
+      "owner_tasks": [
+        "PCCE-071",
+        "PCCE-075"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-002",
+        "TH-005",
+        "TH-013",
+        "TH-014"
+      ]
+    },
+    {
+      "description": "Optional authorities, synthetic persistence, and marker-only verification can overstate evidence.",
+      "finding_id": "RR-009",
+      "owner_tasks": [
+        "PCCE-072",
+        "PCCE-073",
+        "PCCE-074"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-002",
+        "TH-008"
+      ]
+    },
+    {
+      "description": "New security modules can exist without authoritative runtime call-path integration.",
+      "finding_id": "RR-010",
+      "owner_tasks": [
+        "PCCE-075",
+        "PCCE-076"
+      ],
+      "release_blocking": true,
+      "severity": "critical",
+      "source_status": "open_no_go",
+      "threat_ids": [
+        "TH-001",
+        "TH-002",
+        "TH-003",
+        "TH-004",
+        "TH-005",
+        "TH-006",
+        "TH-007",
+        "TH-008",
+        "TH-009",
+        "TH-010",
+        "TH-011",
+        "TH-012",
+        "TH-013",
+        "TH-014"
+      ]
+    }
+  ],
+  "observed_release_failures": {
+    "PCCE-074": {
+      "authoritative_accelerator_or_provider_consumes_module": false,
+      "live_benchmark_or_provider_invoked": false,
+      "outer_composed_proof_context_suite_clean": false,
+      "outer_suite_blocker": "PCCE-050 wheel and sdist artifact bindings do not match after the datasets gitlink changes",
+      "qualification_gate": "NO-GO until integrated observation and PCCE-076",
+      "trusted_evaluator_callbacks_sandboxed_by_module": false
+    },
+    "PCCE-075": {
+      "authoritative_integration": {
+        "accepted_despite_gaps": true,
+        "authoritative_hidden_evaluator": "not_integrated",
+        "authoritative_sandbox": "not_integrated",
+        "disposition": "no-go-authoritative-integration-owner-reopen-required",
+        "proof_execution": "unavailable-no-go",
+        "schedule_id": "authoritative-runtime-integration-gaps",
+        "verification_execution": "marker-only-no-command-or-test-receipt"
+      },
+      "concurrent_publication": {
+        "disposition": "no-go-runtime-storage-owner-reopen-required",
+        "expected_maximum_accepted_records": 1,
+        "expected_maximum_published_settlements": 1,
+        "observed_accepted_records": 2,
+        "observed_published_settlements": 2,
+        "overlap_proven": true,
+        "schedule_id": "two-runtime-stores-one-generation-minimized-failure",
+        "shared_kit_root": true
+      },
+      "post_crash_restart": {
+        "disposition": "no-go-lost-durable-checkpoint-false-success",
+        "durable_resume_observed": false,
+        "no_cleanup_restart_status": "unavailable",
+        "post_cleanup_fresh_restart_accepted": true,
+        "post_cleanup_fresh_restart_published": true,
+        "post_cleanup_fresh_restart_status": "succeeded",
+        "schedule_id": "bounded-process-apply-during"
+      },
+      "synthetic_aba": {
+        "delayed_generation_one_outcome": "stale_root:generation",
+        "disposition": "no-go-insufficient-not-runtime-kit-repository-integrated",
+        "integration_scope": "synthetic-in-process-store-only",
+        "qualification_credit": false,
+        "schedule_id": "delayed-generation-one-after-aba"
+      }
+    }
+  },
+  "policy": {
+    "all_fourteen_threat_areas_must_be_qualified_for_go": true,
+    "high_or_critical_open_result": "NO-GO",
+    "missing_or_unavailable_result": "NO-GO",
+    "planned_or_limited_control_credit_for_release": false,
+    "waiver_count": 0
+  },
+  "schema": "lift_coding.proof-carrying-context-engine.security-findings@1",
+  "source_evidence": {
+    "PCCE-070": {
+      "artifact_identity": "bafkreicqlvr2orogy3xemnyse4x5lkjs6t2w3wsrzd4w4utb4fvmsmif74",
+      "live_task_cid": "baguqeerarm7v7cmisoyixe4zjghmeaqesudyaibazwhqofmwl4vppt6qprpq",
+      "live_task_revision": 3,
+      "live_task_status": "completed",
+      "receipt": {
+        "cid_v1_raw": "bafkreify3t6xihrs4m35pv73glygdm6qcryldyjkbuodz6upwoo2rnaa7i",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-070.json",
+        "sha256": "b8dcfd741e32e337d7d7fb32f061b3d01470b1e12a0d1c3cfa8fb39da8b400fa",
+        "size": 6587
+      }
+    },
+    "PCCE-071": {
+      "artifact_identity": "bafkreib7oplhwookasl2k4chg2u4wsg7x2fva6n6aiq7pah2hp5ltg6xfq",
+      "live_task_cid": "baguqeeraxkidpqi2tdgzdsymr4hc667d6fhzle7ctfvq7aozk63jrzbmnthq",
+      "live_task_revision": 3,
+      "live_task_status": "completed",
+      "receipt": {
+        "cid_v1_raw": "bafkreiarjiqih3he6twziiulgzc6tdx7aydlxk2cvs4nqdkcjgvalichp4",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json",
+        "sha256": "114a2083ece4f4ed94228b3645e98eff0606bbab42acb8d80d4249aa05a0477f",
+        "size": 9706
+      }
+    },
+    "PCCE-072": {
+      "artifact_identity": "bafkreiaugowmsz2qz62hvpw4ellppuufxnzvfh5f2vr5vtxx4vdjp75wze",
+      "live_task_cid": "baguqeerav5ovimddoeyqbxqcdmgh3czh7k5i2rzivapbc6fbhggjqv435kjq",
+      "live_task_revision": 3,
+      "live_task_status": "completed",
+      "receipt": {
+        "cid_v1_raw": "bafkreig5kfcvi6rlhp3ebk46x7yghdw45gu745znf6b7wen6lzhfxtyeym",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-072.json",
+        "sha256": "dd5145547a2b3bf640ab9ebff0638edce9a9fe772d2f83fb11be5e4e5bcf04c3",
+        "size": 8786
+      }
+    },
+    "PCCE-073": {
+      "artifact_identity": "bafkreif535gd4tuokudj2djynif5uspk3lq56pro3zjwulxqyflrgk3xta",
+      "live_task_cid": "baguqeerahk74pqi4yfawsiqoxb7w5kmdwuojrvllpecm3vn5biw7pcqedl2q",
+      "live_task_revision": 3,
+      "live_task_status": "completed",
+      "receipt": {
+        "cid_v1_raw": "bafkreieyukobizn6jmk6r5rflvoojhls6t4qnllji6q7ghe4a22bt4huoy",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-073.json",
+        "sha256": "98a29c1465be4b15e8f6255d5ce49d72f4f906ad6947a1f31c9c06b419f0f476",
+        "size": 6047
+      }
+    },
+    "PCCE-074": {
+      "artifact_identity": "baguqeera5ifpsadums6lrug6jcoi34hsvj7rhq4gv2xoordagmsvtbzr3cta",
+      "live_task_cid": "baguqeeraxgdyeia2nzxvhbdg7n33swyvteygipqo3l5ho53gxtznhcueyseq",
+      "live_task_revision": 3,
+      "live_task_status": "completed",
+      "receipt": {
+        "cid_v1_raw": "bafkreiexjllqaezxl3ew473inaiw5dr5ianyxpxkapntz7gj5fw67noncu",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-074.json",
+        "sha256": "974ad70013375ec96e7f6868116e8e3d401b8bbeea03db3cfcc9e96defb5cd15",
+        "size": 6482
+      }
+    },
+    "PCCE-075": {
+      "artifact_identity": "bafkreib4r2njyfnfi5pssta5ngeyjxtsf5pltkd3vuawlwonh4xytqfdy4",
+      "live_task_cid": "baguqeera24wipnfzevagzrgxdhl2zu5vazvy4enprtyqr2tobtetjjijihsq",
+      "live_task_revision": 3,
+      "live_task_status": "completed",
+      "receipt": {
+        "cid_v1_raw": "bafkreickz4pwdhduqgb2hkzzndgdlvcqnc5affscfzwum5tzlycfd7kfsu",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+        "sha256": "4acf1f619c748183a3ab3968cc35d45068ba0296422e6d4676795e0451fd4595",
+        "size": 6604
+      }
+    }
+  },
+  "summary": {
+    "critical_release_blockers": 9,
+    "high_release_blockers": 1,
+    "open_release_blockers": 10,
+    "release_qualified": false,
+    "security_qualified": false,
+    "threat_areas_no_go": 14,
+    "threat_areas_total": 14,
+    "waiver_count": 0
+  },
+  "task_authority": {
+    "database_mutated_by_author": false,
+    "dependency_task_cids": [
+      "baguqeera24wipnfzevagzrgxdhl2zu5vazvy4enprtyqr2tobtetjjijihsq"
+    ],
+    "live_task_cid": "baguqeera75yoyff76ew7hitxvpsyk7jqxa2vhgiddmnpyma5spkazkzxr3yq",
+    "live_task_revision": 1,
+    "live_task_status": "todo",
+    "transport": "quack:127.0.0.1:41347"
+  },
+  "task_id": "PCCE-076",
+  "threat_dispositions": [
+    {
+      "category": "source_prompt_injection",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-073",
+        "PCCE-074"
+      ],
+      "residual_risk_ids": [
+        "RR-001",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "observed-local-tests-pass-limited-boundaries-only",
+      "threat_id": "TH-001",
+      "title": "Untrusted repository and source prompt injection"
+    },
+    {
+      "category": "malicious_tests_fixtures",
+      "control_disposition": "absent_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-073",
+        "PCCE-075"
+      ],
+      "residual_risk_ids": [
+        "RR-002",
+        "RR-008",
+        "RR-009",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "observed-release-blocking-authoritative-integration-failure",
+      "threat_id": "TH-002",
+      "title": "Malicious tests and fixtures"
+    },
+    {
+      "category": "untrusted_agents_patches",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-073"
+      ],
+      "residual_risk_ids": [
+        "RR-001",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "observed-local-tests-pass-limited-boundaries-only",
+      "threat_id": "TH-003",
+      "title": "Untrusted agent patch and policy weakening"
+    },
+    {
+      "category": "scope_path_escape",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-073"
+      ],
+      "residual_risk_ids": [
+        "RR-004",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "observed-local-tests-pass-limited-boundaries-only",
+      "threat_id": "TH-004",
+      "title": "Scope and path escape"
+    },
+    {
+      "category": "process_escape",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-073"
+      ],
+      "residual_risk_ids": [
+        "RR-002",
+        "RR-008",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "observed-local-tests-pass-limited-boundaries-only",
+      "threat_id": "TH-005",
+      "title": "Process and command escape"
+    },
+    {
+      "category": "network_escape",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071"
+      ],
+      "residual_risk_ids": [
+        "RR-003",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "route-scoped-live-endpoint-enforcement-unavailable",
+      "threat_id": "TH-006",
+      "title": "Network escape"
+    },
+    {
+      "category": "secret_escape",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-074"
+      ],
+      "residual_risk_ids": [
+        "RR-002",
+        "RR-003",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "observed-local-tests-pass-limited-boundaries-only",
+      "threat_id": "TH-007",
+      "title": "Secret and credential escape"
+    },
+    {
+      "category": "evidence_forgery",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-072"
+      ],
+      "residual_risk_ids": [
+        "RR-005",
+        "RR-009",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "authoritative-signer-and-live-provenance-unavailable",
+      "threat_id": "TH-008",
+      "title": "Evidence, receipt, and seal forgery"
+    },
+    {
+      "category": "evidence_replay_poisoning",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-072",
+        "PCCE-075"
+      ],
+      "residual_risk_ids": [
+        "RR-005",
+        "RR-007",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "synthetic-aba-only-and-runtime-storage-failures-observed",
+      "threat_id": "TH-009",
+      "title": "Replay, stale cache, poisoning, and wrong parent"
+    },
+    {
+      "category": "benchmark_leakage",
+      "control_disposition": "absent_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-074"
+      ],
+      "residual_risk_ids": [
+        "RR-006",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "authoritative-hidden-evaluator-not-integrated",
+      "threat_id": "TH-010",
+      "title": "Hidden benchmark and future-answer leakage"
+    },
+    {
+      "category": "provider_disclosure",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-074"
+      ],
+      "residual_risk_ids": [
+        "RR-003",
+        "RR-006",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "no-live-provider-or-authoritative-provider-payload-observation",
+      "threat_id": "TH-011",
+      "title": "Provider over-disclosure"
+    },
+    {
+      "category": "concurrent_mutation",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-072",
+        "PCCE-075"
+      ],
+      "residual_risk_ids": [
+        "RR-007",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "two-accepted-records-and-two-publications-observed",
+      "threat_id": "TH-012",
+      "title": "Concurrent mutation, stale or ABA writer, and duplicate result"
+    },
+    {
+      "category": "interruption",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-075"
+      ],
+      "residual_risk_ids": [
+        "RR-002",
+        "RR-008",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "lost-durable-checkpoint-and-false-success-observed",
+      "threat_id": "TH-013",
+      "title": "Interruption and ambiguous terminal execution"
+    },
+    {
+      "category": "compromised_adapter",
+      "control_disposition": "partial_no_go",
+      "decision": "NO-GO",
+      "evidence_task_ids": [
+        "PCCE-071",
+        "PCCE-073",
+        "PCCE-075"
+      ],
+      "residual_risk_ids": [
+        "RR-002",
+        "RR-003",
+        "RR-008",
+        "RR-010"
+      ],
+      "severity": "critical",
+      "test_disposition": "authoritative-sandbox-and-evaluator-not-integrated",
+      "threat_id": "TH-014",
+      "title": "Compromised adapter or transport"
+    }
+  ]
+}
