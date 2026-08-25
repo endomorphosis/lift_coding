@@ -1,0 +1,1698 @@
+{
+  "blockers": [
+    {
+      "id": "installability-no-go",
+      "observed_decision": "NO-GO",
+      "source": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+      "waiver": null
+    },
+    {
+      "id": "package-byte-set-incomplete",
+      "rc1_contains_archive_bytes": false,
+      "unavailable_artifacts": [
+        "ipfs_kit_py-0.3.0.tar.gz"
+      ],
+      "waiver": null
+    },
+    {
+      "id": "package-signature-evidence-unavailable",
+      "signature_results_observed": 0,
+      "signed_package_claim": false,
+      "waiver": null
+    },
+    {
+      "id": "bounded-self-hosting-qualification-no-go",
+      "observed_decision": "NO-GO",
+      "qualification_status": "unavailable",
+      "source": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+      "source_cid_v1_raw": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+      "source_task": "PCCE-079",
+      "waiver": null
+    },
+    {
+      "id": "benchmark-qualification-no-go",
+      "observed_decision": "NO-GO",
+      "provider_or_model_runs_claimed": false,
+      "release_qualified": false,
+      "source": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+      "source_cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+      "source_tasks": [
+        "PCCE-067",
+        "PCCE-068"
+      ],
+      "waiver": null
+    },
+    {
+      "id": "security-qualification-no-go",
+      "observed_decision": "NO-GO",
+      "release_qualified": false,
+      "security_release_claim": false,
+      "source": "artifacts/proof_carrying_context_engine/security/qualification.json",
+      "source_cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+      "source_task": "PCCE-076",
+      "waiver": null
+    },
+    {
+      "ci_run_claimed": false,
+      "external_ci_authority_available": false,
+      "id": "current-head-ci-qualification-no-go",
+      "observed_decision": "NO-GO",
+      "release_qualified": false,
+      "source": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+      "source_cid_v1_raw": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+      "source_task": "PCCE-080",
+      "waiver": null
+    }
+  ],
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "builder": {
+    "cid_v1_raw": "bafkreig6f7cewjmll4lxqb7a5t7jet4dgxdvqyjqmel6dz4zzafvy6d7tm",
+    "deterministic_json": "UTF-8, sorted keys, two-space indentation, LF",
+    "network_access_required": false,
+    "path": "external/ipfs_accelerate/scripts/proof_context/build_release_candidate.py",
+    "sha256": "de2fc44b258b5f177807e0ecfe924f8335c75861306117e1e799c80b5c787f9b",
+    "size": 45339
+  },
+  "bundle_files": [
+    {
+      "cid_v1_raw": "bafkreicnij547aaao36esxot3sls7uavz2gjkoumpm73eodnzfpvxsar7a",
+      "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/VERIFY.md",
+      "sha256": "4d427bcf800076fc495dd3dc972fd015ce8c953a8c7b3fb2386dc95f5bc811f8",
+      "size": 883
+    },
+    {
+      "cid_v1_raw": "bafkreidnyxn5acwzbaoajrh54cdit2yfefzqa5rmdsg3l7y3toogipthe4",
+      "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/known_limitations.json",
+      "sha256": "6dc5dbd00ad9081c04c4fde08689eb05217300762c1c8db5ff1b9b9c643e6727",
+      "size": 1449
+    },
+    {
+      "cid_v1_raw": "bafkreieyecor6dhks3336fgojntkne5z3ctxqkectsw5p4pp5ghkqkrjii",
+      "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/qualification.json",
+      "sha256": "98209d1f0cea96f7bf14ce4b66a693b9d8a77828829cadd7f1efe98ea82a2942",
+      "size": 631
+    },
+    {
+      "cid_v1_raw": "bafkreicfxnc5ub4c7pc2eh6dml7fjx5vkutjr4bs7cw2xzc2gidjafeqoq",
+      "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/rollback.json",
+      "sha256": "45bb45da0782fbc5a21fc362fe54dfb5552698f032f8adabe45a320690149074",
+      "size": 532
+    },
+    {
+      "cid_v1_raw": "bafkreicfs2bdx6q2t5bheodt5jxs7au45xjx5ujdfnabiigbdze5cionpy",
+      "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/verification.json",
+      "sha256": "4596823bfa1a9f42723873ea6f2f829cedd37ed1232b401420c11e49d121cd7e",
+      "size": 881
+    }
+  ],
+  "contracts": {
+    "canonical_vectors": {
+      "packaged": {
+        "cid": "bafkreie7urfyjucsnsccdigt72cis2zsuzorgv7oaxdd3lsp72j26ldjpq",
+        "path": "conformance/vectors/proof-context-v0.1.json",
+        "sha256": "9fa44b84d0526c8421a0d3fe84896b32a65d1357ee05c63dae4ffe93af2c697c",
+        "size": 14327
+      },
+      "sha256": "sha256:9fa44b84d0526c8421a0d3fe84896b32a65d1357ee05c63dae4ffe93af2c697c",
+      "task_id": "PCCE-007"
+    },
+    "data_only_contract_package": {
+      "artifacts": {
+        "contents_manifest_contract": {
+          "digest": "sha256",
+          "encoding": "UTF-8 JSON with sorted object keys and separators ',' and ':'",
+          "ordering": "archive members sorted by path",
+          "sdist_directory_members_included": true,
+          "sdist_member_fields": [
+            "path",
+            "type",
+            "mode",
+            "size",
+            "linkname",
+            "sha256 when regular file"
+          ],
+          "wheel_directory_members_included": false,
+          "wheel_member_fields": [
+            "path",
+            "size",
+            "sha256",
+            "mode"
+          ]
+        },
+        "sdist": {
+          "cid": "bafkreicpfsn6omd4zc2v6l3v4jhhgk3aqknbphldkqeqgbxqh3rwrftljy",
+          "contents_manifest_sha256": "02fdb500f00eba7b70edb394c0a7bea5e6990e25d61d0907283c46c03e12a581",
+          "filename": "mcp_plus_plus_contracts-0.1.0.tar.gz",
+          "member_count": 15,
+          "sha256": "4f2c9be7307cc8b55f2f75e24e732b60829a179d6354090306f03ee368966b4e",
+          "size": 20373
+        },
+        "wheel": {
+          "cid": "bafkreigyrte3unlc6c2zfxp6enebbjmwyqvehghdfui6erxkl27yggumtq",
+          "contents_manifest_sha256": "8f22923419e79bba9ce6c78453e921fb92e5a4ad360ccacd1702fe78b73e27af",
+          "filename": "mcp_plus_plus_contracts-0.1.0-py3-none-any.whl",
+          "member_count": 7,
+          "record_sha256": "941b578e59f3a0db138cb9c7d9a85ce3a5c53a735c01cc7cd277d0194192207e",
+          "sha256": "d88cc9ba3562f0b592ddfe234810a596c42a4398e32d11e246ea5ebf831a8c9c",
+          "size": 18516
+        }
+      },
+      "contract_bundle": {
+        "cid": "bafkreifxd75vhhblmfeujlukld7pziwxjwcbmhbbvzq3qpcbzei54mv3em",
+        "contract_version": "0.1",
+        "filename": "mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+        "runtime_authority": false,
+        "schema": "mcp++/proof-context-v0.1-contract-bundle@1",
+        "sha256": "b71ffb539c2b614944ae8a58fefca2d74d84161c21ae61b83c41c911de32bb23",
+        "size": 89090
+      },
+      "runtime_authority": false,
+      "schema_cids": {
+        "canonicalization.schema.json": "bafkreift2l4b35pceavxzguilmcyqupmnkyzrpi5irw6wzlxtr5tcgpjty",
+        "cid-behavior.schema.json": "bafkreifyzstmeo456pegegkz4xkfmspgwh4hzonxfn7vpat44ozlnklmvy",
+        "coding-agent-invocation.schema.json": "bafkreigecsrqoubrbfulqfgfjgkwwnlww54ushpviulio54nr67wcj2rje",
+        "context-pack.schema.json": "bafkreiakjftpzs34xj2byjizubnvuqf5no6icx3ch4nudsijvwmh7wiz4y",
+        "error-taxonomy.schema.json": "bafkreicxbvbxnhguoid7prpxpo3ugqss43hpwg2m6edzdtfyeienwilkha",
+        "execution-receipt.schema.json": "bafkreicxka3j4zuvvqz6jppveanjtaq4ifr5m6lnmgtdabtrywozovjvby",
+        "incremental-seal.schema.json": "bafkreidktxfuy3gqjw3yk25vxsggtmmvjpenoez4x3lkeathfttv6fubs4",
+        "invalidation-plan.schema.json": "bafkreifndqw33xpg2xxzfi6mfxbjzitaulggzsxe7yowwxz6rv5uste4ym",
+        "model-route-decision.schema.json": "bafkreid5n2xbrbosnhbkv3tpvomrrwgoayfqz5vawo73utcqmjyrha37si",
+        "patch-proposal.schema.json": "bafkreidhrhx5l525gwdb34sk4g2gnlpn3m25coz66oe2ounm6pf3rpnsie",
+        "proof-unit.schema.json": "bafkreiaoq5d5w2zaydt7xqlbr46cc27v32u6dklqx7ywbg67hx6dapgcqu",
+        "qualification-result.schema.json": "bafkreifgrrlrd3ilgxabdgoe5e2jxpqy2dxog35vktef4zsjdsqsoniw7i",
+        "repository-state.schema.json": "bafkreiaor4t2gf2ufkqbwuw7vvplhzrpxd55zrhmswwf3rmdojk266sy7i",
+        "semantic-capsule.schema.json": "bafkreigmwo75psa2qshpdxhvy7pgd2vfbispzcp2pdv7lpy6mqe6y3ngkm",
+        "status-taxonomy.schema.json": "bafkreic7ebx65o3ccpj2dqit4nzxhleeaiadc4gouyeqgxwjxby4vh65de",
+        "task-specification.schema.json": "bafkreicl5shclhuwgst5mdijxflmwx3ryavszhas2xsetw4a2nj5tehzdu",
+        "verification-plan.schema.json": "bafkreiedg4qshnu5a43ttfpq2c7gezjr2hcvyqnn2t2s5vygmg2eksexde"
+      },
+      "task_id": "PCCE-057"
+    },
+    "schema_source": {
+      "commit": "5a4b14439245a9c54804b3eb1d7f198e3e25e7de",
+      "schema_count": 17,
+      "schema_digests": {
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json": "sha256:b3d2f81df5e2202b7c9a885b058851ec6ab198bd1d446deb65779c7b3119e99e",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json": "sha256:b8cca6c23b9df3c8621959e5d45649e6b1f87cb9b72b7f57827ce3b2b6a96cae",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json": "sha256:c414a30750310968b814c549956b3576b779491df5451687778d8fbf61275149",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json": "sha256:0a4966fccb7cba741c2519a05b5a40bd6bbc815f623f1b41c909ad987fd919e6",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json": "sha256:570d43769cd47207f7c5f77bb7434252e6cefb1b4cf10791ccb82208db216a38",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json": "sha256:5750369e6695ac33e4bdf5201a99821c4163d6796d61a6300671c59d9755350e",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json": "sha256:6a9dcb4c6cd04db7856bb5bc8c69b1954bc8d7133cbed6a202672ce75f168197",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json": "sha256:ad1c2dbddde6d5ef92a3cc2dc29ca260a2cc6ccae4fe1d6b5f3e8d7b494c9cc3",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json": "sha256:7d6eae1885d269c2aaee6fab9918d8ce060b0cf6a0b3bfba4c50627113837f92",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json": "sha256:6789efd5f75d35861df24ae1b466adeddb35d13b3ef389a751acf3cbb8bdb241",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json": "sha256:0e8747db6b20c0e7fbc1618f3c216bf5dea9e1a970bff1609bdf3dfc303cc285",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json": "sha256:a68c5711ed0b35c01199c4e9349bbe18d0eee36fb554c85e66491ca1273516fa",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json": "sha256:0e8f27a317542aa01b52dfad5eb3e62fb8fbdcc4ec95ac5dc5837255af7a58fa",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json": "sha256:ccb3bfd7c81a848ef1dcf5c7de61eaa50a24fc89fa78ebf5bf1e6409ec6da653",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json": "sha256:5f206feebb6213d3a1c113e37373ac8402003170cea609035ec9b871ca9fdd19",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json": "sha256:4bec8e259e9634a7d60d09b956cb5f71c02b2c9c12d5e449db80d353d990f91d",
+        "Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json": "sha256:83372123b69d07373995f0d0be626531d1c55c41add4f52ed70661b445489719",
+        "Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py": "sha256:5fd9059d28faba9e6d58e0f6351c6d69c668140e38baf8e5c32e177c96d14328"
+      },
+      "task_id": "PCCE-006",
+      "tree": "442a84f4a4c054e8d3615e9e0d70047cfc6be61c"
+    }
+  },
+  "corpus": {
+    "corpus_manifest": {
+      "cid": "baguqeeraedh4m4sadrllnzrp7zi4bherd2dbp5injbvv7myzybjjnju3mlwa",
+      "cid_profile": "software-contract-cid-profile-v1",
+      "path": "external/ipfs_datasets/benchmarks/proof_context/corpus_manifest.json",
+      "raw_cid_v1": "bafkreidbngeh7k7knauskpw4ztbv2wuy65ia6ybs6lvdoosrknx4fwqnwq",
+      "results_observed_before_freeze": false,
+      "schema": "ipfs-datasets.proof-context.benchmark-corpus-manifest@1",
+      "sha256": "6169887fabea6829253edcccc35d5a98f7500f6032f2ea373a51536fc2da0db4",
+      "size": 9021
+    },
+    "isolation_claim_at_evidence_cut": {
+      "access_policy": {
+        "agent_mounts": [
+          "visible_manifest.json",
+          "LICENSE"
+        ],
+        "control_mounts": [
+          "shard_manifest.json"
+        ],
+        "evaluator_mounts_after_terminal_patch": [
+          "evaluator_manifest.json"
+        ],
+        "hardlinks": "denied",
+        "path_escape": "denied",
+        "symlinks": "denied"
+      },
+      "answer_bytes_visible_to_agent": false,
+      "hidden_answer_or_test_payloads_in_visible_partition": 0,
+      "sensitive_evaluator_identity_leaks_in_visible_partition": 0,
+      "visible_and_evaluator_paths_overlap": false
+    },
+    "sealed_evaluator_partition_identity": {
+      "body_included": false,
+      "path": "benchmarks/proof_context/corpus/typed_structured/evaluator_manifest.json",
+      "raw_cid_v1": "bafkreigh2vlt7lh5i7o4jm72zfghoha2dxi4gpehbpbx4k45ks3mgqr4rm",
+      "sha256": "c7d5573facfd47ddc4b3fac94c771c1a1dd1c33c870bc37e2b9d54b6c3423c8b",
+      "structured_cid": "baguqeeraovf4uescwf35z3uojzclp2qruonfn3ezdftrnubvjpzd4yaqw2gq"
+    },
+    "thresholds": {
+      "cid": "baguqeeraqbhgjlvhrdrwfashgtvwsb5e4k3fac5mg75j6f4p4gvxbaz75b6q",
+      "frozen_at": "2026-08-24T17:07:45Z",
+      "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+      "raw_cid_v1": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+      "results_observed_before_freeze": false,
+      "schema": "ipfs-datasets.proof-context.benchmark-threshold-set@1",
+      "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b",
+      "size": 2373
+    },
+    "visible_partition_identity": {
+      "path": "benchmarks/proof_context/corpus/typed_structured/visible_manifest.json",
+      "raw_cid_v1": "bafkreie6me36zhm442xohcm7ieeh264x6zjk5twn6jah3dh3cgmjhywete",
+      "sha256": "9e6137ec9d9ce6aee3899f41087d7b97f652aececdf2407d8cfb119893e2c499",
+      "structured_cid": "baguqeeraz2thoqg5s2isjh6ueh4m47wmxhp4d4vpvpu25nv6cezyrlhmmqha"
+    }
+  },
+  "decision": {
+    "blocker_count": 7,
+    "promotable": false,
+    "release_qualified": false,
+    "status": "NO-GO",
+    "waiver_count": 0
+  },
+  "environment": {
+    "artifact_byte_availability_status": "partial-one-admitted-sdist-unavailable",
+    "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+    "dependency_locks_bound": true,
+    "environment_id": "cpython312-linux-aarch64",
+    "manifest_path": "artifacts/proof_carrying_context_engine/environment/manifest.json",
+    "sbom_bound": true
+  },
+  "evidence_cut": {
+    "gitlinks": [
+      {
+        "commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "path": "Mcp-Plus-Plus",
+        "tree": "3a57e33053d6007cb99cbe265c6608954d9cea7c",
+        "tree_observation": "verified from the local submodule object at rc1 authoring"
+      },
+      {
+        "commit": "36021e09d8f3d8d5878108f64e3bb9cb73ebafdd",
+        "path": "external/ipfs_accelerate",
+        "tree": "ebd9b42ba48a71ca908e86a9467e581446be5930",
+        "tree_observation": "verified from the local submodule object at rc1 authoring"
+      },
+      {
+        "commit": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+        "path": "external/ipfs_datasets",
+        "tree": "839980ccaba593b146213928bc5e8bf95e7a1fd9",
+        "tree_observation": "verified from the local submodule object at rc1 authoring"
+      },
+      {
+        "commit": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+        "path": "external/ipfs_kit",
+        "tree": "b4413c1ad92b85df2e110c0185d2449e56fc6497",
+        "tree_observation": "verified from the local submodule object at rc1 authoring"
+      }
+    ],
+    "historical_not_current_head_claim": true,
+    "outer_commit": "c5bdde1482a9afab7c5827a52bdf4f7b1d63f090",
+    "outer_tree": "bb7849ac3bc92ad80e0bc7dff9d3b421d08ce872"
+  },
+  "external_publication_performed": false,
+  "harness_and_example": {
+    "bounded_self_hosting_disposition": {
+      "decision": "NO-GO",
+      "qualification": {
+        "cid_v1_raw": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+        "sha256": "6c5ffee3b265d013e6069f394106e950825d0bfedc3c0278bfb98522ae97fc8f",
+        "size": 10273
+      },
+      "qualification_cap": "NOT-QUALIFIED",
+      "qualification_credit": false,
+      "qualification_status": "unavailable",
+      "receipt_artifact_identity": "bafkreigarvlp6lnksv7xnb3j3cwji5q5delpjzoswzhpf7uynn3j6mcitm",
+      "release_qualified": false,
+      "status": "present-and-bound-no-go",
+      "task_id": "PCCE-079"
+    },
+    "example": {
+      "acceptance": {
+        "all_16_governed_stages": true,
+        "canonical_mutated": false,
+        "disposable_worktree_removed": true,
+        "execution_receipt_cid": "bafkreif2m3cxirborzm5jyfjykavz7raxjdeyj2vmyueczi55ca7m54biq",
+        "patch_id": "bafkreige4t2ywk7s3dypgkmogkperlvw5lvefvfeco2knagcsdyg27ngpu",
+        "status": "succeeded"
+      },
+      "artifact_identity": "urn:pcce:task-receipt:PCCE-055:governed-example-walkthrough",
+      "nested_repository": {
+        "commit": "ae94e1aeed74e27635d8c15ecd9d4d4fbaab9617",
+        "fixture_tree": "524f435d66bc033f1d3ad92bace43c3c46831a78",
+        "path": "external/ipfs_accelerate",
+        "repository_tree": "cb5730bc453b0d38ea287f408285342232930c56",
+        "test_blob": "9928eef9b3a436f060407d76632b27c12024ff82"
+      },
+      "proof_reuse": {
+        "exact_candidate_tree_match": true,
+        "runtime_verification_receipt_reuse_count": 1,
+        "selected_test_receipt_cid": "bafkreiezd4ojk3pk2ewhx2honggjo7u22t4yxzaft4pdorsxbyp4i6c354",
+        "verification_calls": 2,
+        "verification_receipt_cid": "bafkreie2ippipgjt76e2eoajkj774d5coayouoccai5mank6rqhtmz4mue",
+        "verification_stage_count": 1
+      },
+      "seal": {
+        "artifact_cid": "bafkreidu5pysxtt4pdqc5lnt56d4pl5fj2bsgdmxjzipjntg23gumfzabq",
+        "provenance": "live",
+        "seal_cid": "bafkreidrrzr2so7q4tsn6ag524m67n3c53thhaoaduq3up7trdvnhuo4le",
+        "status": "succeeded"
+      },
+      "task_id": "PCCE-055",
+      "walkthrough": {
+        "credentials_required": false,
+        "deterministic_fresh_clone_runs": 2,
+        "fixture_commit": "5a6ec12c2a5697c5654b2daaf1769669210ea937",
+        "fixture_tree": "524f435d66bc033f1d3ad92bace43c3c46831a78",
+        "network_required": false,
+        "provider_bound": false,
+        "schema": "ipfs-accelerate.proof-context.v0.1/example-walkthrough@1",
+        "transcript_bytes": 6209,
+        "transcript_cid": "bafkreihiykw56dxjmludq7vqdeiz7rsbw7tjcz56ey2p43qoph7wlhrvxy",
+        "transcript_sha256": "sha256:5513ef2d41075ea7fbaa2603cf64bc5853d3f2f840acda496b7483148995421b"
+      }
+    },
+    "packaged_self_hosting_harness": {
+      "artifact_identity": "urn:pcce:task-receipt:PCCE-045:bounded-self-hosting-harness",
+      "authority": {
+        "canonical_branch_mutation": false,
+        "qualification": false,
+        "self_approval": false
+      },
+      "evidence_schema": "ipfs-accelerate.self-hosting.v0.1/evidence",
+      "surface": "ipfs_accelerate_py.agent_supervisor.self_hosting.SelfHostingQualificationHarness",
+      "task_id": "PCCE-045"
+    }
+  },
+  "identity_policy": {
+    "bundle_identity": "manifest identity plus its transitively bound bundle_files",
+    "manifest_identity": "CIDv1(raw,sha2-256) of exact release_manifest.json bytes",
+    "manifest_identity_recorded_by": "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json"
+  },
+  "packages": {
+    "archive_bytes_copied_count": 0,
+    "distribution_count": 4,
+    "records": [
+      {
+        "bytes_copied_into_rc1": false,
+        "cid_v1_raw": "bafkreid7hcbumdwfw6ma4okevtiom6btyrqig7ukwmdepmjk3qp3izlaru",
+        "descriptor_bytes_available": true,
+        "descriptor_bytes_verified": true,
+        "distribution": "ipfs-accelerate-py",
+        "filename": "ipfs_accelerate_py-0.0.45.tar.gz",
+        "hash_evidence": "admitted-PCCE-053-descriptor",
+        "kind": "sdist",
+        "qualification_credit": false,
+        "sha256": "7f3883460ec5b7980e3944acd0e67833c460837e8ab30647b12adc1fb465608d",
+        "signature_evidence": "unavailable-not-observed",
+        "size": 20579108,
+        "source_commit": "8b3b08ad3b9705b7981080e5414c6b3aecb06afe",
+        "version": "0.0.45"
+      },
+      {
+        "bytes_copied_into_rc1": false,
+        "cid_v1_raw": "bafkreig5yehd5h2iiy444z44ezkcnco7b2dt6crcctpwgl7vvhnjtrz4mu",
+        "descriptor_bytes_available": true,
+        "descriptor_bytes_verified": true,
+        "distribution": "ipfs-accelerate-py",
+        "filename": "ipfs_accelerate_py-0.0.45-py3-none-any.whl",
+        "hash_evidence": "admitted-PCCE-053-descriptor",
+        "kind": "wheel",
+        "qualification_credit": false,
+        "sha256": "ddc10e3e9f484639ce679c26542689df0e873f0a2214df632ff5a9da99c73c65",
+        "signature_evidence": "unavailable-not-observed",
+        "size": 17826043,
+        "source_commit": "8b3b08ad3b9705b7981080e5414c6b3aecb06afe",
+        "version": "0.0.45"
+      },
+      {
+        "bytes_copied_into_rc1": false,
+        "cid_v1_raw": "bafkreihrdczmzuvyu73smkuvtanoaxmegljgwtcl6orjgohaopdapbvsn4",
+        "descriptor_bytes_available": true,
+        "descriptor_bytes_verified": true,
+        "distribution": "ipfs-datasets-py",
+        "filename": "ipfs_datasets_py-0.2.0.tar.gz",
+        "hash_evidence": "admitted-PCCE-053-descriptor",
+        "kind": "sdist",
+        "qualification_credit": false,
+        "sha256": "f118b2ccd2b8a7f7262a95981ae05d8432d26b4c4bf3a29338e073c60786b26f",
+        "signature_evidence": "unavailable-not-observed",
+        "size": 41102914,
+        "source_commit": "6eb5803548b070a55c81d4631f13996d5c28137b",
+        "version": "0.2.0"
+      },
+      {
+        "bytes_copied_into_rc1": false,
+        "cid_v1_raw": "bafkreid426eyqcfmlvo3hvmhydzfutssbbmo5malnw7jkngoygmk5p25ha",
+        "descriptor_bytes_available": true,
+        "descriptor_bytes_verified": true,
+        "distribution": "ipfs-datasets-py",
+        "filename": "ipfs_datasets_py-0.2.0-cp312-cp312-linux_aarch64.whl",
+        "hash_evidence": "admitted-PCCE-053-descriptor",
+        "kind": "wheel",
+        "qualification_credit": false,
+        "sha256": "7cd7898808ac5d5db3d587c0f25a4e520858eeb00b6dbe9534cec198aebf5d38",
+        "signature_evidence": "unavailable-not-observed",
+        "size": 44053405,
+        "source_commit": "6eb5803548b070a55c81d4631f13996d5c28137b",
+        "version": "0.2.0"
+      },
+      {
+        "bytes_copied_into_rc1": false,
+        "cid_v1_raw": "bafkreienw4uz6lgbisau22y3agueo25c3kthqmefmuj7fbr4n6wev47ncu",
+        "descriptor_bytes_available": false,
+        "descriptor_bytes_verified": false,
+        "distribution": "ipfs-kit-py",
+        "filename": "ipfs_kit_py-0.3.0.tar.gz",
+        "hash_evidence": "admitted-PCCE-053-descriptor",
+        "kind": "sdist",
+        "qualification_credit": false,
+        "sha256": "8db7299f2cc144814d6b1b01a8476ba2daa67830856513f2863c6fac4af3ed15",
+        "signature_evidence": "unavailable-not-observed",
+        "size": null,
+        "source_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+        "version": "0.3.0"
+      },
+      {
+        "bytes_copied_into_rc1": false,
+        "cid_v1_raw": "bafkreihradcws2a47rjuyvyfwupitpbhgs72mnzabn7tb27i3kyxbpb34m",
+        "descriptor_bytes_available": true,
+        "descriptor_bytes_verified": true,
+        "distribution": "ipfs-kit-py",
+        "filename": "ipfs_kit_py-0.3.0-py3-none-any.whl",
+        "hash_evidence": "admitted-PCCE-053-descriptor",
+        "kind": "wheel",
+        "qualification_credit": false,
+        "sha256": "f100c569681cfc534c5705b51e89bc2734bfa637200b7f30ebe8dab170bc3be3",
+        "signature_evidence": "unavailable-not-observed",
+        "size": 7318209,
+        "source_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+        "version": "0.3.0"
+      },
+      {
+        "bytes_copied_into_rc1": false,
+        "cid_v1_raw": "bafkreicpfsn6omd4zc2v6l3v4jhhgk3aqknbphldkqeqgbxqh3rwrftljy",
+        "descriptor_bytes_available": true,
+        "descriptor_bytes_verified": true,
+        "distribution": "mcp-plus-plus-contracts",
+        "filename": "mcp_plus_plus_contracts-0.1.0.tar.gz",
+        "hash_evidence": "admitted-PCCE-053-descriptor",
+        "kind": "sdist",
+        "qualification_credit": false,
+        "sha256": "4f2c9be7307cc8b55f2f75e24e732b60829a179d6354090306f03ee368966b4e",
+        "signature_evidence": "unavailable-not-observed",
+        "size": 20373,
+        "source_commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "version": "0.1.0"
+      },
+      {
+        "bytes_copied_into_rc1": false,
+        "cid_v1_raw": "bafkreigyrte3unlc6c2zfxp6enebbjmwyqvehghdfui6erxkl27yggumtq",
+        "descriptor_bytes_available": true,
+        "descriptor_bytes_verified": true,
+        "distribution": "mcp-plus-plus-contracts",
+        "filename": "mcp_plus_plus_contracts-0.1.0-py3-none-any.whl",
+        "hash_evidence": "admitted-PCCE-053-descriptor",
+        "kind": "wheel",
+        "qualification_credit": false,
+        "sha256": "d88cc9ba3562f0b592ddfe234810a596c42a4398e32d11e246ea5ebf831a8c9c",
+        "signature_evidence": "unavailable-not-observed",
+        "size": 18516,
+        "source_commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "version": "0.1.0"
+      }
+    ],
+    "signature_results_observed": 0,
+    "unavailable_descriptor_bytes": [
+      "ipfs_kit_py-0.3.0.tar.gz"
+    ],
+    "wheel_sdist_descriptor_count": 8
+  },
+  "predecessors": {
+    "missing_receipt_count": 0,
+    "present_receipt_count": 64,
+    "records": [
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r2",
+        "canonical_task_cid": "baguqeerav7hwcsmuhp7ijqldclbhvdicjm2khfvzds3wyxkh4plvn6zwewjq",
+        "canonical_task_key": "task/v1/afcf6149943bfe84c16312c27a8d024b34a396b91cb76c5d47e3d756fb362593",
+        "completion_mode": "manual-operator-bootstrap",
+        "receipt_cid_v1_raw": "bafkreift6uonog5g2mmaibdungvahimyebnt46tv4ydzfhahocnen6gt4q",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+        "receipt_sha256": "b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+        "receipt_size": 4373,
+        "receipt_status": "completed",
+        "task_id": "PCCE-000"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-001:inventory",
+        "canonical_task_cid": "baguqeerasqk6k57o5o4i5rajyfcitczs7j4svpdjmo2qijrqktygwfslvzna",
+        "canonical_task_key": "task/v1/9415e577eeebb88ec409c144898b32fa792abc6963b504263054f06b164bae5a",
+        "completion_mode": "operator-read-only-inventory",
+        "receipt_cid_v1_raw": "bafkreid7hilqwgqelhcc2se5spp4buswz2jsyyen2uuhqxbhlrisreves4",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-001.json",
+        "receipt_sha256": "7f3a170b1a0459c42d489d93dfc0d256ce932c608dd528785c275c512892a497",
+        "receipt_size": 1106,
+        "receipt_status": "completed",
+        "task_id": "PCCE-001"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-002:inventory",
+        "canonical_task_cid": "baguqeeraebc5gjbjdvcyda3ok3apa6t77kpowwbhiazcmthbfvwizo3gxvuq",
+        "canonical_task_key": "task/v1/2045d324291d4581836e56c0f07a7ffa9eeb58274032264ce12d6c8cbb66bd69",
+        "completion_mode": "operator-read-only-inventory",
+        "receipt_cid_v1_raw": "bafkreia2yyxr7nnj3qracmsuft352nf2jkixo6sqrmmvjzt6hoaldtl7u4",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-002.json",
+        "receipt_sha256": "1ac62f1fb5a9dc220132542cf7dd34ba4a91777a508b1954e67e3b80b1cd7fa7",
+        "receipt_size": 1100,
+        "receipt_status": "completed",
+        "task_id": "PCCE-002"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-003:inventory",
+        "canonical_task_cid": "baguqeerakon4ykyeoqeowidcaz75wv6lmusfksscugrdnex3ii3k6gx3vyba",
+        "canonical_task_key": "task/v1/539bcc2b047408eb2062067fdb57cb6524554a42a1a23692fb4236af1afbae02",
+        "completion_mode": "operator-read-only-inventory",
+        "receipt_cid_v1_raw": "bafkreid5ds3oiret5r3gflarmlupytnspnaplieqjhbo7ilrg5zzzkscra",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-003.json",
+        "receipt_sha256": "7d1cb6e44493ec7662ac1162e8fc4db27b40f5a09049c2efa17137739caa4288",
+        "receipt_size": 1108,
+        "receipt_status": "completed",
+        "task_id": "PCCE-003"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-004:inventory",
+        "canonical_task_cid": "baguqeera7tbyyj67czlvai7wlvtgpagfhnrpgjtawlsq2jfy7zjjfmodntlq",
+        "canonical_task_key": "task/v1/fcc38c27df16575023f65d666780c53b62f32660b2e50d24b8fe5292b1c36cd7",
+        "completion_mode": "operator-read-only-inventory",
+        "receipt_cid_v1_raw": "bafkreibboglldjrf4raiv5i65pbtbovrdpw662vwy57ku4nuasngvfmoby",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-004.json",
+        "receipt_sha256": "217196b1a625e4408af51eebc330bab11bedef6ab6c77eaa71b4049a6a958e0e",
+        "receipt_size": 1105,
+        "receipt_status": "completed",
+        "task_id": "PCCE-004"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-005:ownership-migration",
+        "canonical_task_cid": "baguqeeradizwusolvksomecetxj3fvw5ooimaduxhu4uohpf3gm4duvtl54q",
+        "canonical_task_key": "task/v1/1a336a49cbaaa4e610449dd3b2d6dd7390c00e973d39471de5d999c1d2b35f79",
+        "completion_mode": "operator-evidence-synthesis",
+        "receipt_cid_v1_raw": "bafkreif3texasox3gjikqdlk7ikx7mtmgdvy6cj5w3nkbeyqazm5fcovqa",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-005.json",
+        "receipt_sha256": "bb992e093afb3250a80d6afa157fb26c30eb8f093db6daa093100659d289d580",
+        "receipt_size": 1937,
+        "receipt_status": "completed",
+        "task_id": "PCCE-005"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-006:schema-freeze",
+        "canonical_task_cid": "baguqeerac75kqoabfulypuitkbknzk62m2nun2tybqve4nlaoonkcddvljgq",
+        "canonical_task_key": "task/v1/17faa838012d1787d1135054dcabda669b46ea780c2a4e3560739aa10c755a4d",
+        "completion_mode": "operator-schema-implementation",
+        "receipt_cid_v1_raw": "bafkreial4mztbbvclu3nkxivkxlv2dwvnmouvikz3ufzpxiksoqhddno3q",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
+        "receipt_sha256": "0be3333086a25d36d55d1555d75d0ed56b1d4aa159dd0b97dd0a93a0718daedc",
+        "receipt_size": 4065,
+        "receipt_status": "completed",
+        "task_id": "PCCE-006"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-007:vectors-compatibility",
+        "canonical_task_cid": "baguqeeraphqffh654bdbaxtylq3trw7pe7gacifouee3oxhqwd6puv6fevha",
+        "canonical_task_key": "task/v1/79e0529fdde046105e785c3738dbef27cc0120aea109b75cf0b0fcfa57c5254e",
+        "completion_mode": "operator-conformance-implementation",
+        "receipt_cid_v1_raw": "bafkreigwsgp2yarrs7wfdio6waud5222zzunltneqirv5c5fjhwpvgdhji",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-007.json",
+        "receipt_sha256": "d6919fac023197ec51a1deb0283eeb5ace68d5cda482235e8ba549ecfa98674a",
+        "receipt_size": 1392,
+        "receipt_status": "completed",
+        "task_id": "PCCE-007"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-008:datasets-port",
+        "canonical_task_cid": "baguqeeragchk5ta2p754kbihzr5iuzmpiw2dvy6xzgyqf6oblqsb66yqyxaa",
+        "canonical_task_key": "task/v1/308eaecc1a7ffbc50507cc7a8a658f45b43ae3d7c9b102f9c15c241f7b10c5c0",
+        "completion_mode": "operator-bounded-port",
+        "receipt_cid_v1_raw": "bafkreid7fjolichp2vfawrpbpivszaohwbmr7nnxnre3wzj33nzxwq6iea",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-008.json",
+        "receipt_sha256": "7f2a5cb408efd54a0b45e17a2b2c81c7b0591fb5b76c49bb653bdb737b43c820",
+        "receipt_size": 1177,
+        "receipt_status": "completed",
+        "task_id": "PCCE-008"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-009:kit-port",
+        "canonical_task_cid": "baguqeerafdstzsjjc7f7ibqqzvb5bzqayfe5wfen2h7fli4ovb5lcrcfcppq",
+        "canonical_task_key": "task/v1/28e53cc92917cbf40610cd43d0e600c149db148dd1fe55a38ea87ab1444513df",
+        "completion_mode": "operator-bounded-port",
+        "receipt_cid_v1_raw": "bafkreiag3ecitrg2javakw35i3s2m45rljhgrh4qiubgfj3siw2ekf4kqy",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-009.json",
+        "receipt_sha256": "06d90489c4da482a055b7d46e5a673b15a4e689f90450262a77245b445178a86",
+        "receipt_size": 1165,
+        "receipt_status": "completed",
+        "task_id": "PCCE-009"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-010:accelerate-loader",
+        "canonical_task_cid": "baguqeeradkpozzij72xtpawkpg6jk5y3k7iejinfz5axd3j3yjuezi4tky5q",
+        "canonical_task_key": "task/v1/1a9eece509feaf3782ca79bc95771b57d044a1a5cf4171ed3bc2684ca393563b",
+        "completion_mode": "operator-bounded-port",
+        "receipt_cid_v1_raw": "bafkreibkdape2xqd4qaryen7ffmtlc34wk7evmvbnj7gkyxvnqeowdcmfu",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
+        "receipt_sha256": "2a181e4d5e03e4011c11bf2959358b7cb2be4ab2a16a7e6562f56c08eb0c4c2d",
+        "receipt_size": 1240,
+        "receipt_status": "completed",
+        "task_id": "PCCE-010"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-017:datasets-incremental-sealing",
+        "canonical_task_cid": "baguqeera6qpjgr5nqwbrdcquoeyguhflpja3apcwv3m7qzhltne27ddcqvwq",
+        "canonical_task_key": "task/v1/f41e9347ad8583118a1471306a1cab7a41b03c56aed9f864eb9b49af8c62856d",
+        "completion_mode": "operator-immutable-candidate-present",
+        "receipt_cid_v1_raw": "bafkreiae3q35zwm2s7gvu4mnlpnfbdxz6coi6afpsp5m7a5xyog5ornpnq",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-017.json",
+        "receipt_sha256": "04dc37dcd99a97cd5a718d5bda508ef9f09c8f00af93facf83b7c38dd745af6c",
+        "receipt_size": 1295,
+        "receipt_status": "completed",
+        "task_id": "PCCE-017"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-018:datasets-assurance-specification",
+        "canonical_task_cid": "baguqeerac3omz66hh5svlgm6xkhk3hu63o6yxtbw4rhb7ivapw7g4wwoo6fa",
+        "canonical_task_key": "task/v1/16dcccfbc73f6555999eba8ead9e9edbbd8bcc36e44e1fa2a07dbe6e5ace778a",
+        "completion_mode": "operator-immutable-candidate-binding",
+        "receipt_cid_v1_raw": "bafkreibkbgrb5yuqkdj2mjs2pmpf2zrfx73o6dwfbljrq7eb2fovwupw54",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-018.json",
+        "receipt_sha256": "2a09a21ee29050d3a6265a7b1e5d6625bff6ef0ec50ad3187c81d15d5b51f6ef",
+        "receipt_size": 1399,
+        "receipt_status": "completed",
+        "task_id": "PCCE-018"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-012:context-pack-authority",
+        "canonical_task_cid": "baguqeera5pzcoybdqrofkuq75navfm2sdhux4j3fyxwjhxpr5xghmhdv4dcq",
+        "canonical_task_key": "task/v1/ebf2276023845c55521feb4152b35219e97e2765c5ec93ddf1edcc761c75e0c5",
+        "completion_mode": "operator-bounded-cross-repo-migration",
+        "receipt_cid_v1_raw": "bafkreieghhueijajxstmrqagpw6kcspcisrpoj2vy3wrari72sa7ouakhe",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-012.json",
+        "receipt_sha256": "8639e8442409bca6c8c0067dbca149e244a2f72755c6ed10451fd481f7500a39",
+        "receipt_size": 1633,
+        "receipt_status": "completed",
+        "task_id": "PCCE-012"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-013:verification-store",
+        "canonical_task_cid": "baguqeeranswphctvsqcwkoigiio5qzvx26erjs3y3eo7gdj3u27skqxeu7ia",
+        "canonical_task_key": "task/v1/6cacf38a759405653906421dd866b7d78914cb78d91df30d3ba6bf2542e4a7d0",
+        "completion_mode": "operator-bounded-cross-repo-migration",
+        "receipt_cid_v1_raw": "bafkreibbb5shnkh66pzwxfnr6ej3ibgvhfb5ajsigcbyebdts7sy2vcoum",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-013.json",
+        "receipt_sha256": "210f6476a8fef3f36b95b1f113b404d53943d02648308382047397e58d544ea3",
+        "receipt_size": 1588,
+        "receipt_status": "completed",
+        "task_id": "PCCE-013"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-019:kit-assurance-store",
+        "canonical_task_cid": "baguqeeranbjpbxomytyb3mpfmvasvcopohtydf35htwd5wfjbs7y7bizzb6q",
+        "canonical_task_key": "task/v1/6852f0ddccc4f01db1e565412a89cf71e781977d3cec3ed8a90cbf8f8519c87d",
+        "completion_mode": "operator-immutable-candidate-qualification",
+        "receipt_cid_v1_raw": "bafkreifcz6tls5e34ob6bwr57fkac4mz3klsvd6najivb4affuuu37fzhe",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-019.json",
+        "receipt_sha256": "a2cfa6b9749be383e0da3df954017199da972a8fcd025150f0052d294dfcb939",
+        "receipt_size": 1310,
+        "receipt_status": "completed",
+        "task_id": "PCCE-019"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-014:incremental-proof-sealer",
+        "canonical_task_cid": "baguqeerasbmy2fxn4ohmo3aelvlyjp5xvkhgenhhaibzp5lslfwsfipv4rsq",
+        "canonical_task_key": "task/v1/90598d16ede38ec76c045d5784bfb7aa8e6234e7020397f572596d22a1f5e465",
+        "completion_mode": "operator-candidate-qualification",
+        "receipt_cid_v1_raw": "bafkreicjx35jnd5uccbzslmt756jzg2bcpudbwk6fz4lsi4igzjhssygei",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-014.json",
+        "receipt_sha256": "49befa968fb41083992d93ff7c9c9b4113e830d95e2e78b923883652794b0622",
+        "receipt_size": 1584,
+        "receipt_status": "completed",
+        "task_id": "PCCE-014"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-016:incremental-verification-conformance",
+        "canonical_task_cid": "baguqeeramqjwsezgavmbtupvco6cdzojbsj756fxxghca6thzlaqxwjglisq",
+        "canonical_task_key": "task/v1/6413691326055819d1f513bc21e5c90c93fef8b7b98e207a67cac10bd9265a25",
+        "completion_mode": "operator-current-tree-qualification",
+        "receipt_cid_v1_raw": "bafkreibc37dc52h46a7pv4daz32gvq46z4pvbnafs4bl463taklf3ctazy",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-016.json",
+        "receipt_sha256": "22dfc62ee8fcf03efaf060cef46ac39ecf1f50b4059702be7b7302965d8a60ce",
+        "receipt_size": 1208,
+        "receipt_status": "completed",
+        "task_id": "PCCE-016"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-015:adversarial-assurance-runtime",
+        "canonical_task_cid": "baguqeeravnhidhdptmldm4oocu64bav7kcb3afe3nhprd4qqegyhc4k2jylq",
+        "canonical_task_key": "task/v1/ab4e819c6f9b163671ce153dc082bf5083b0149b69df11f21021b071715a4e17",
+        "completion_mode": "operator-candidate-qualification",
+        "receipt_cid_v1_raw": "bafkreif73qstw4buv23lhblnz4oky7jrve2qxushyj3j4sa47qx4ompjl4",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-015.json",
+        "receipt_sha256": "bfdc253b7034aeb6b3856dcf1cac7d31a9350bd247c2769e481cfc2fc731e95f",
+        "receipt_size": 1727,
+        "receipt_status": "completed",
+        "task_id": "PCCE-015"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-011:epic-a-gate",
+        "canonical_task_cid": "baguqeerabn5u2iqjqygfoaojmyp55rxcus4ad5aqftnoqf6r6grxt3wakrqq",
+        "canonical_task_key": "task/v1/0b7b4d2209860c5701c9661fdec6e2a4b801f4102cdae817d1f1a379eec05461",
+        "completion_mode": "operator-acceptance-gate",
+        "receipt_cid_v1_raw": "bafkreiectfsizphemewo5pa7w2junrtuacunmcrpcvrwgu3apvujxanbby",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-011.json",
+        "receipt_sha256": "8299648cbce4612ceebc1fb69346c67400a8d60a2f15636353607d689b81a10e",
+        "receipt_size": 2643,
+        "receipt_status": "completed",
+        "task_id": "PCCE-011"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-020:provider-neutral-engine-facade",
+        "canonical_task_cid": "baguqeerax6hdynd46wcwperweckwz7vsrhixl4iptv4xe2cweqswmf4qggaa",
+        "canonical_task_key": "task/v1/bf8e3c347cf58567923620956cfeb289d175f10f9d7972685624256617903180",
+        "completion_mode": "supervised-runtime-implementation",
+        "receipt_cid_v1_raw": "bafkreifmkcx4ofynhyvlr7dqiqpugq2hq5usxju6pgf24l7gogngcqriye",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-020.json",
+        "receipt_sha256": "ac50afc7170d3e2ab8fc70441f43434787692ba69e798bae2fe6719a614228c1",
+        "receipt_size": 2123,
+        "receipt_status": "completed",
+        "task_id": "PCCE-020"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-022:runtime-modes-policy",
+        "canonical_task_cid": "baguqeerativ7cgumzbbx3eahgxw6xieigkizpnwz7j7mj4zklvakylty6knq",
+        "canonical_task_key": "task/v1/9a2bf11a8cc8437d900735edeba088329197b6d9fa7ec4f32a5d40ac2e78f29b",
+        "completion_mode": "supervised-policy-implementation",
+        "receipt_cid_v1_raw": "bafkreigyecx6gurlhhdv2jsy5zn25ugrwyktmcy33jnjzr3tmtqawgkezy",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-022.json",
+        "receipt_sha256": "d820afe3522b39c75d2658ee5baed0d1b615360b1bda5a9cc77364e00b1944ce",
+        "receipt_size": 2017,
+        "receipt_status": "completed",
+        "task_id": "PCCE-022"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-023:typed-result-taxonomy",
+        "canonical_task_cid": "baguqeerayl4ul3ax53st3wpefx3poqsbuozq5o54ilz37fppzcr62frxztsq",
+        "canonical_task_key": "task/v1/c2f945ec17eee53dd9e42df6f74241a3b30ebbbc42f3bf95efc8a3ed1637cce5",
+        "completion_mode": "supervised-contract-implementation",
+        "receipt_cid_v1_raw": "bafkreib6oa74aqvcyoil6sg7tgvcwezjpygc56biaqma4non6i3gfky67q",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-023.json",
+        "receipt_sha256": "3e703fc042a2c390bf48df99aa2b13297e0c2ef82804180e35cdf23662ab1efc",
+        "receipt_size": 2824,
+        "receipt_status": "completed",
+        "task_id": "PCCE-023"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-021:governed-patch-lifecycle",
+        "canonical_task_cid": "baguqeerawmx47kididcnrohu4tspwxvar42qdqshrwbldbb2e3zmaeqljdkq",
+        "canonical_task_key": "task/v1/b32fcfa90340c4d8b8f4e4e4fb5ea08f3501c2478d82b1843a26f2c0120b48d5",
+        "completion_mode": "supervised-runtime-implementation",
+        "receipt_cid_v1_raw": "bafkreihfjj7v6s3viwaw3jifthgcjqxfn5hpcaxw7z22ngm4rzcizw5gxq",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-021.json",
+        "receipt_sha256": "e54a7f5f4b7545816da50599cc24c2e56f4ef102f6fe75a6999c8e448cdba6bc",
+        "receipt_size": 2298,
+        "receipt_status": "completed",
+        "task_id": "PCCE-021"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-024:interruption-recovery",
+        "canonical_task_cid": "baguqeerafniamvg42ehfcwwbjt62kq6dpba44g3evhj4ockx5n3ueaqwkxrq",
+        "canonical_task_key": "task/v1/2b500654dcd10e515ac14cfda543c37841ce1b64a9d3c70957eb7742021655e3",
+        "completion_mode": "supervised-runtime-implementation",
+        "receipt_cid_v1_raw": "bafkreihwkt36hdadxbcsfpgsde47bjf5hnl3etekx734sdi5oxbif2x3qe",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-024.json",
+        "receipt_sha256": "f654f7e38c03b84522bcd21939f0a4bd3b57b24c8abff7c90d1d75c282eafb81",
+        "receipt_size": 2834,
+        "receipt_status": "completed",
+        "task_id": "PCCE-024"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-025:runtime-package",
+        "canonical_task_cid": "baguqeerabrr5pndy6xajhv2vqw3ythq2kzgnpc2nktz2mvmkqvqnwsp6frqa",
+        "canonical_task_key": "task/v1/0c63d7b478f5c093d75585b7899e1a564cd78b4d54f3a6558a8560db49fe2c60",
+        "completion_mode": "supervised-runtime-implementation",
+        "receipt_cid_v1_raw": "bafkreiggmaopcssvuudshvl5a4ozhbq5cqhuktrdhzcfetydbe75gxut5q",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-025.json",
+        "receipt_sha256": "c6601cf14a55a50723d57d071d93861d140f454e233e44524f03093fd35e93ec",
+        "receipt_size": 1708,
+        "receipt_status": "completed",
+        "task_id": "PCCE-025"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-030:coding-agent-adapter",
+        "canonical_task_cid": "baguqeerajlfjc5wkugzs2r7dakvwsm3vjdtxetzgvyf6sjcfxvki242zw2ma",
+        "canonical_task_key": "task/v1/4aca9176caa1b32d47e302ab69337548e7724f26ae0be92445bd548d7359b698",
+        "completion_mode": "supervised-runtime-implementation",
+        "receipt_cid_v1_raw": "bafkreidbdfc6crfmlpixxemddtgo4o4zzluavviyndzgtzw6bekgnbjjdi",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-030.json",
+        "receipt_sha256": "611945e144ac5bd17b91831cccee3b99cae80ad51868f269e6de09146685291a",
+        "receipt_size": 1374,
+        "receipt_status": "completed",
+        "task_id": "PCCE-030"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-040:cli-state-commands",
+        "canonical_task_cid": "baguqeerakqzznqnh3b2hmo5vp32fsapxh3ii6liw7crghv5qgw3fola7cxmq",
+        "canonical_task_key": "task/v1/543396c1a7d874763bb57ef45901f73ed08f2d16f8a263d7b035b6572c1f15d9",
+        "completion_mode": "supervised-cli-implementation",
+        "receipt_cid_v1_raw": "bafkreihk6j36pjjq4ket5g23qtl5sclbhnm2qjyuqpdj2mda4zcemaefwi",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-040.json",
+        "receipt_sha256": "eaf277e7a530e2893e9b5b84d7d909613b59a8271483c69d3060e644460085b2",
+        "receipt_size": 2157,
+        "receipt_status": "completed",
+        "task_id": "PCCE-040"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-043:stable-output-and-human-report",
+        "canonical_task_cid": "baguqeerahgqp3vv55fbpzbwltabrgwe6zhn33qnvchxqaumffsywl634xo6q",
+        "canonical_task_key": "task/v1/39a0fdd6bde942fc86cb980313589ec9dbbdc1b511ef0051852cb165fb7cbbbd",
+        "completion_mode": "supervised-reporting-implementation",
+        "receipt_cid_v1_raw": "bafkreia7fsyddr4qh26rj4vlwlbuo24wl7nlysqruidcwyoiqmuh2kfjua",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-043.json",
+        "receipt_sha256": "1f2cb031c7903ebd14f2abb2c3476b965fdabc4a11a2062b61c883287d28a9a0",
+        "receipt_size": 2631,
+        "receipt_status": "completed",
+        "task_id": "PCCE-043"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-031:codex-adapter",
+        "canonical_task_cid": "baguqeeraov7mvlv672xsgg3tu5analrwvvmc5glwr44o5flzt6tx4iajczha",
+        "canonical_task_key": "task/v1/757ecaaebefeaf231b73a740d02e36ad582e99768f38ee95799fa77e2009164e",
+        "completion_mode": "supervised-adapter-implementation",
+        "receipt_cid_v1_raw": "bafkreifsfjjrauper4c72asueczz7ff7k4tjqdrgolyyiecjgs52n2bope",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-031.json",
+        "receipt_sha256": "b22a531051e48f05fd025420b39f94bf5726980e2672f184104934bba6e82e79",
+        "receipt_size": 2356,
+        "receipt_status": "completed",
+        "task_id": "PCCE-031"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-032:bounded-command-adapter",
+        "canonical_task_cid": "baguqeera3vve3y2zbuy6z4dai2id4rmbmgw3gqp7ax6pr327df3vzxkrqh3q",
+        "canonical_task_key": "task/v1/dd6a4de3590d31ecf06046903e458161adb341ff05fcf8ef5f19775cdd5181f7",
+        "completion_mode": "supervised-adapter-implementation",
+        "receipt_cid_v1_raw": "bafkreiglousogcxmelgkwlenolyfx6t4lrzegllkyuphdjzwgwbntyeye4",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-032.json",
+        "receipt_sha256": "cb7524e30aec22ccab2c8d72f05bfa7c5c72432d6ac51e71a7363582d9e09827",
+        "receipt_size": 1378,
+        "receipt_status": "completed",
+        "task_id": "PCCE-032"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-033:deterministic-replay-adapter",
+        "canonical_task_cid": "baguqeeralukbaot3xlbrxldc4hcefx3wbtmjawmi5zn47gceoa3vr72vzi5q",
+        "canonical_task_key": "task/v1/5d14103a7bbac31bac62e1c442df760cd8905988ee5bcf9844703758ff55ca3b",
+        "completion_mode": "supervised-adapter-implementation",
+        "receipt_cid_v1_raw": "bafkreie3bsy46uf4rwswvtzj2f6dvlbnq4rceg4nj54amf4tozyjyhoa6q",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-033.json",
+        "receipt_sha256": "9b0cb1cf50bc8da56acf29d17c3aac2d8722221b8d4f7806179376709c1dc0f4",
+        "receipt_size": 2641,
+        "receipt_status": "completed",
+        "task_id": "PCCE-033"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-034:external-patch-adapter",
+        "canonical_task_cid": "baguqeera6r4drqohj54bdkrbcogabq2umsolo6jvsfkr6bcqqavt2tcoaola",
+        "canonical_task_key": "task/v1/f47838c1c74f7811aa21138c00c354649cb7793591551f0450802b3d4c4e0396",
+        "completion_mode": "supervised-adapter-implementation",
+        "receipt_cid_v1_raw": "bafkreihvfdl5dkgt2uy5leyx42f2dozr3czc4csgdj6vzniji4vsstvkf4",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-034.json",
+        "receipt_sha256": "f528d7d1a8d3d531d59317e68ba1bb31d8b22e0a461a7d5cb509472b294eaa2f",
+        "receipt_size": 1220,
+        "receipt_status": "completed",
+        "task_id": "PCCE-034"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-042:evidence-cli",
+        "canonical_task_cid": "baguqeera5k52diefnvdxu5bgsmpgldzdtbsm77j7slv4ifiypmgzi543rsaa",
+        "canonical_task_key": "task/v1/eabba1a0856d477a7426931e658f239864cffd3f92ebc415187b0d94779b8c80",
+        "completion_mode": "supervised-cli-implementation",
+        "receipt_cid_v1_raw": "bafkreic6w4dk736wilkjmooed4tmbxwgo6mrmfswhjq7wlae3dmess4gv4",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-042.json",
+        "receipt_sha256": "5eb706afefd642d49639c41f26c0dec677991616563a61fb2c04d8d8494b86af",
+        "receipt_size": 1129,
+        "receipt_status": "completed",
+        "task_id": "PCCE-042"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-035:closed-adapter-registry-conformance",
+        "canonical_task_cid": "baguqeeratv6xhwm53km6y5ux3mc735ppzhwec4yxvc4rysqnhhiay7jcajca",
+        "canonical_task_key": "task/v1/9d7d73d99dda99ec7697db05fdf5efc9ec417317a8b91c4a0d39d00c7d220244",
+        "completion_mode": "supervised-adapter-integration-gate",
+        "receipt_cid_v1_raw": "bafkreibaelblkhotvhgnllb6q2fvdqdsnh66fozugxubytvdae5z3ms6qe",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-035.json",
+        "receipt_sha256": "2022c2b51dd3a9ccd5ac3e868b51c07269fde2bb3435e81c4ea3013b9db25e81",
+        "receipt_size": 2034,
+        "receipt_status": "completed",
+        "task_id": "PCCE-035"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-041:execution-cli",
+        "canonical_task_cid": "baguqeerashk4ftpzasbms2kraikdxgzaonv7l2mgy3v35bgyvhvksbeqozua",
+        "canonical_task_key": "task/v1/91d5c2cdf90482c9695102143b9b20736bf5e986c6ebbe84d8a9eaa904907668",
+        "completion_mode": "supervised-cli-implementation",
+        "receipt_cid_v1_raw": "bafkreigrigwavmhrrgybow2dwaz34hpj4de3ju3ws6nragi7pelof2pzfe",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-041.json",
+        "receipt_sha256": "d141ac0ab0f189b0175b43b033be1de9e0c9b4d376979b10191f7916e2e9f929",
+        "receipt_size": 1157,
+        "receipt_status": "completed",
+        "task_id": "PCCE-041"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-044:complete-cli-module-entrypoint",
+        "canonical_task_cid": "baguqeeraxzvwll3lkw3snolvc7lcqvma2aqbcwgwmlrln2c54zpcqc4gdtra",
+        "canonical_task_key": "task/v1/be6b65af6b55b726b97517d6285580d0201158d662e2b6e85de65e280b861ce2",
+        "completion_mode": "supervised-integration-gate",
+        "receipt_cid_v1_raw": "bafkreia43zd6qt6llv25w5tmzvtftp6oqbi35cy3mwc4gdmoyjotw3s534",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-044.json",
+        "receipt_sha256": "1cde47e84fcb5d75db766ccd6659bfce8051be8b1b6585c30d8ec25d3b6e5ddf",
+        "receipt_size": 2070,
+        "receipt_status": "completed",
+        "task_id": "PCCE-044"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-045:bounded-self-hosting-harness",
+        "canonical_task_cid": "baguqeera4tltx2s3ycvdddm5t2pg5h4pewmsarbr4eyebo32iheftyxoshsa",
+        "canonical_task_key": "task/v1/e4d73bea5bc0aa318d9d9e9e6e9f8f2599204431e13040bb7a41c859e2ee91e4",
+        "completion_mode": "supervised-qualification-harness-implementation",
+        "receipt_cid_v1_raw": "bafkreidebkiezkedp5m5tc2764mrlxiudpiuhp4nkljzdk6u6x7c3svopm",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+        "receipt_sha256": "640a904ca8837f59d98b5ff71915dd141bd143bf8d52d391abd4f5fe2dcaae7b",
+        "receipt_size": 1090,
+        "receipt_status": "completed",
+        "task_id": "PCCE-045"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-050:datasets-proof-context-package",
+        "canonical_task_cid": "baguqeeraqephe7qazuwg7uy4wvooxwxk6cjecwh5wtivq6zemg3phnndqsea",
+        "canonical_task_key": "task/v1/811e727e00cd2c6fd31cb55cebdaeaf0924158fdb4d1587b2461b6f3b5a38488",
+        "completion_mode": "supervised-packaging-implementation",
+        "receipt_cid_v1_raw": "bafkreicat7ukr7o6p6p4itt7dwc7wx46dza2c3k54qdnmkgqupgooxcdva",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-050.json",
+        "receipt_sha256": "409fe8a8fdde7f9fc44e7f1d85fb5f9e1e41a16d5de406d628d0a3cce75c43a8",
+        "receipt_size": 2019,
+        "receipt_status": "completed",
+        "task_id": "PCCE-050"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-051:kit-proof-context-package",
+        "canonical_task_cid": "baguqeerarjvfij6gk6y36owdt6qw5unfrzun2l2kjbpbtzskrp53sumghdpa",
+        "canonical_task_key": "task/v1/8a6a5427c657b1bf3ac39fa16ed1a58e68dd2f4a485e19e64a8bfbb9518638de",
+        "completion_mode": "supervised-packaging-implementation",
+        "receipt_cid_v1_raw": "bafkreigzcztz54s2axdblp3xkkfbohyjndj5nmh2ov5sblbiwnybm3xvwm",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-051.json",
+        "receipt_sha256": "d916679ef25a05c615bf77528a171f0968d3d6b0fa757b20ac28b370166ef5b3",
+        "receipt_size": 1355,
+        "receipt_status": "completed",
+        "task_id": "PCCE-051"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-055:governed-example-walkthrough",
+        "canonical_task_cid": "baguqeera2lnptlheera3o3bneocxcnzsd25d7b6hl6n55rrijn4jalozvwma",
+        "canonical_task_key": "task/v1/d2daf9ace42441b76c2d23857137321eba3f87c75f9bdec6284b78902dd9ad98",
+        "completion_mode": "operator-external-reconciliation-candidate",
+        "receipt_cid_v1_raw": "bafkreifeteoztqahk53hfk6edqpqr3zhzkd4bv4ppsgyeb7e3ve7syzjvu",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-055.json",
+        "receipt_sha256": "a4991d99c007577672abc41c1f08ef27ca87c0d78f7c8d8207e4dd49f96329ad",
+        "receipt_size": 4866,
+        "receipt_status": "completed",
+        "task_id": "PCCE-055"
+      },
+      {
+        "artifact_identity": "bafkreifxd75vhhblmfeujlukld7pziwxjwcbmhbbvzq3qpcbzei54mv3em",
+        "canonical_task_cid": "baguqeeracx32cztlbeepukztx2dwnnkhkdeyi55qe2nn6tpmqahdwwtvtxja",
+        "canonical_task_key": "task/v1/15f7a1666b0908fa2b33be8766b54750c98477b0269adf4dec800e3b5a759dd2",
+        "completion_mode": "supervised-data-only-packaging",
+        "receipt_cid_v1_raw": "bafkreifumobpecgma2vybkwo2tc2mpwmol4y3sr6wo6qu5kel3wyldhnwe",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+        "receipt_sha256": "b46382f208cc06ab80aaced4c5a63ecc72f98dca3eb3bd0a75445eed858cedb1",
+        "receipt_size": 5770,
+        "receipt_status": "completed",
+        "task_id": "PCCE-057"
+      },
+      {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-052:accelerator-runtime-profiles",
+        "canonical_task_cid": "baguqeerallz7muq6n4ajtkejvesayqhdv7t4db7jomgqm7zi4knh3pdsgxwq",
+        "canonical_task_key": "task/v1/5af3f6521e6f0099a889a9240c40e3afe7c187e9730d067f28e29a7dbc7235ed",
+        "completion_mode": "supervised-packaging-implementation",
+        "receipt_cid_v1_raw": "bafkreibiactqlg5xkrafdv2cicdoq64exmnzobcbgnsixfy4reiigqhxfe",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-052.json",
+        "receipt_sha256": "2800a7059bb7544051d7424086e87b84bb1b97044133648b971c89108340f729",
+        "receipt_size": 6824,
+        "receipt_status": "completed",
+        "task_id": "PCCE-052"
+      },
+      {
+        "artifact_identity": "bafkreidnqdikfqa54om765g4ng7gimjdugdfcar7ydzssai7vmrbbtmaxy",
+        "canonical_task_cid": "baguqeerab3sc4lis3taxqc5lv452onpr2bveshtj2xi5ri4ykyvpshvuljia",
+        "canonical_task_key": "task/v1/0ee42e2d12dcc1780babaf3ba735f1d06a491e69d5d1d8a398562af91eb45a50",
+        "completion_mode": "supervised-reproducibility-implementation",
+        "receipt_cid_v1_raw": "bafkreid5swewwjlckfsqeuhapznwe2mnunew43nkr2ehj5yvuloyfnayde",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-053.json",
+        "receipt_sha256": "7d95896b256251650250e07e5b62698da3496e6daa8e8874f715a2dd82b41819",
+        "receipt_size": 22334,
+        "receipt_status": "completed",
+        "task_id": "PCCE-053"
+      },
+      {
+        "artifact_identity": "bafkreihkjzndxuy5iuhf5fxrmsdy4yhil6le36zzriyqunhkun6kj4fene",
+        "canonical_task_cid": "baguqeeramdrw33d47x4fdztjgrf4btcsgtgoxr4kyqyt574t3odkbixly42a",
+        "canonical_task_key": "task/v1/60e36dec7cfdf851e669344bc0cc5234ccebc78ac4313eff93db86a0a2ebc734",
+        "completion_mode": "manual-reviewed-external-candidate-with-explicit-no-go",
+        "receipt_cid_v1_raw": "bafkreia4kruymhy2sctqprbfzpv7v4ufviwksnccipd2ofczc7fk5cy2te",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-054.json",
+        "receipt_sha256": "1c5469861f1a90a707c425cbebfaf285aa2ca9344243c7a7145917caae8b1a99",
+        "receipt_size": 14884,
+        "receipt_status": "completed",
+        "task_id": "PCCE-054"
+      },
+      {
+        "artifact_identity": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "canonical_task_cid": "baguqeeraghkszmidk3bdxsaagnp62palact7ux77cav6ymeollxougppm3aa",
+        "canonical_task_key": "task/v1/31d52cb10356c23bc800335fed3c0b00a7fa5fff102bec308e5aeeea19ef66c0",
+        "completion_mode": "supervised-acceptance-gate-explicit-no-go",
+        "receipt_cid_v1_raw": "bafkreibiwxtmdtr2wiq5xbez2njp5t5qwsvli2ijwwneyqtlh7iql26wlm",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+        "receipt_sha256": "28b5e6c1ce3ab221db8499d352fecfb0b4aab46909b59a4c426b3fd105ebd65b",
+        "receipt_size": 2805,
+        "receipt_status": "completed",
+        "task_id": "PCCE-056"
+      },
+      {
+        "artifact_identity": "baguqeeraill7pfg6f7ymdtwz2ot35wsfmgu2rvv46cadpn3afkegenyepaiq",
+        "canonical_task_cid": "baguqeerad676dzstuii524wli6hnfdfxgsfsmxgk2behffki6xtf3udcdvdq",
+        "canonical_task_key": "task/v1/1fbfe1e653a211dd72cb478ed28cb7348b265ccad048729548f5e65dd0621d47",
+        "completion_mode": "supervised-benchmark-design-freeze-no-execution",
+        "receipt_cid_v1_raw": "bafkreidqxb2vd2nao2cf4hzce3uhtfbgd4i735pol4mt3vr5c37lwz3h3e",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-060.json",
+        "receipt_sha256": "70b87551e9a076845e1f2226e87994261f11fdf5ee5f193dd63d16febb6767d9",
+        "receipt_size": 10120,
+        "receipt_status": "completed",
+        "task_id": "PCCE-060"
+      },
+      {
+        "artifact_identity": "bafkreicqlvr2orogy3xemnyse4x5lkjs6t2w3wsrzd4w4utb4fvmsmif74",
+        "canonical_task_cid": "baguqeeraqpg53rzd7a5b26jjzjbui67nnm5bj7jwt5hbqrmmyse5zhdrxt2q",
+        "canonical_task_key": "task/v1/83cdddc723f83a1d7929ca43447bed6b3a14fd369f4e18458cc489dc9c71bcf5",
+        "completion_mode": "supervised-threat-analysis-security-unqualified-candidate",
+        "receipt_cid_v1_raw": "bafkreify3t6xihrs4m35pv73glygdm6qcryldyjkbuodz6upwoo2rnaa7i",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-070.json",
+        "receipt_sha256": "b8dcfd741e32e337d7d7fb32f061b3d01470b1e12a0d1c3cfa8fb39da8b400fa",
+        "receipt_size": 6587,
+        "receipt_status": "completed",
+        "task_id": "PCCE-070"
+      },
+      {
+        "artifact_identity": "baguqeerawbghl4vyrckxxtjjhyhdjavpj77lkcavptyep2dq7zxolw2am2aa",
+        "canonical_task_cid": "baguqeerauxteuetqz7ne7ik23vfntmljmk5w3qa4wzfouju7luydfzpjuwta",
+        "canonical_task_key": "task/v1/a5e64a1270cfda4fa15add4ad9b16962bb6dc01cb64aea269f5d3032e5e9a5a6",
+        "completion_mode": "supervised-corpus-construction-no-live-execution",
+        "receipt_cid_v1_raw": "bafkreievfhepnqwi3mnba4tic3bk26huevei6dyubakibos3pykyo6tw6a",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-061.json",
+        "receipt_sha256": "9529c8f6c2c8db1a10726816c2ad78f425488f0f14081480ba5b7e15877a76f0",
+        "receipt_size": 18639,
+        "receipt_status": "completed",
+        "task_id": "PCCE-061"
+      },
+      {
+        "artifact_identity": "baguqeerancjiitatoyeqbb45jc37m2nbysze2tm2brj5uqqfmfifxrumhnwa",
+        "canonical_task_cid": "baguqeerazgm7k4qwspv4kvg5dwh4yca6l2qhv6aairy7vxezctjlso6tw6aq",
+        "canonical_task_key": "task/v1/c999f5721693ebc554dd1d8fcc081e5ea07af8004471fadc9914d2b93bd3b781",
+        "completion_mode": "supervised-corpus-construction-no-live-execution",
+        "receipt_cid_v1_raw": "bafkreiewxitn2mogotacuzbjmxn3w5moi7ps3gfj2lwzcke2ase6inwxvy",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-062.json",
+        "receipt_sha256": "96ba26dd31c674c02a642965dbbb758e47df2d98a9d2ed91289a0489e436d7ae",
+        "receipt_size": 21188,
+        "receipt_status": "completed",
+        "task_id": "PCCE-062"
+      },
+      {
+        "artifact_identity": "baguqeerac4n6fpukzig3at67mihsl7ehnme5fwjo7jywirglaxjthane7r3q",
+        "canonical_task_cid": "baguqeerayemy2fgsric3jrevak67k2ksnszjx3c6cdzxv5tni2yuigdyji3q",
+        "canonical_task_key": "task/v1/c1198d14d28a05b4c49502bdf569526cb29bec5e10f37af66d46b14418784a37",
+        "completion_mode": "supervised-corpus-materialization-with-truthful-host-visible-baseline-replay",
+        "receipt_cid_v1_raw": "bafkreigzqvfys2mjmybgrwqzefy5rnd3k7znffivrxnpq34wywbrzy2p2q",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+        "receipt_sha256": "d9854b896989660268da192171d8b47b57f2d295158ddaf86f96c5831ce34fd4",
+        "receipt_size": 9310,
+        "receipt_status": "completed",
+        "task_id": "PCCE-063"
+      },
+      {
+        "artifact_identity": "baguqeeral365qpuhscm3ejzq6ntzfmob5oaqj2rejrl7z7kadfqbcfswmo2a",
+        "canonical_task_cid": "baguqeeram2iem7jubfiy2v5lnzfvkhters4g5rkzmfuqtegpw5qyzsdy45iq",
+        "canonical_task_key": "task/v1/6690467d3409518d57ab6e4b551e648cb86ec55961690990cfb7618cc878e751",
+        "completion_mode": "supervised-evaluation-implementation-no-live-execution",
+        "receipt_cid_v1_raw": "bafkreibediroh4drfnagcvu4do5ufuecyqngdh4stvzrjtsl3pxs2iwgum",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json",
+        "receipt_sha256": "241a22e3f0712b4061569c1bbb42d082c41a619f929d7314ce4bdbef2d22c6a3",
+        "receipt_size": 15961,
+        "receipt_status": "completed",
+        "task_id": "PCCE-064"
+      },
+      {
+        "artifact_identity": "baguqeera7ehgn7vsetzjygsda4hzyn5r7k3ov6axjydqk6vsnn32w7sxgj6q",
+        "canonical_task_cid": "baguqeerazfyr4jnf77oamsty4kfft2edjj2whqtrobyryce42ezga27llwvq",
+        "canonical_task_key": "task/v1/c9711e25a5ffdc064a78e28a59e8834a7563c27170711c089cd132606beb5dab",
+        "completion_mode": "supervised-evaluation-implementation-no-live-execution",
+        "receipt_cid_v1_raw": "bafkreibamisqliuouul7p2a3k3g5mnmzf56xqbh2pibj2tkmrfppwtxe3e",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-065.json",
+        "receipt_sha256": "20622505a28ea517f7e81b56cdd635992f7d7804fa7a029d4d4c895efb4ee4d9",
+        "receipt_size": 12096,
+        "receipt_status": "completed",
+        "task_id": "PCCE-065"
+      },
+      {
+        "artifact_identity": "baguqeeraerwkjdr7rwsqpojrqodp5mletrpojpogtg3mrh52whztabxxoxpa",
+        "canonical_task_cid": "baguqeeranj6c7wxgf2bzkwlrejvhittvznicytj4hkpa5kgogrblvzcumfuq",
+        "canonical_task_key": "task/v1/6a7c2fdae62e83955971226a744e75cb502c4d3c3a9e0ea8ce3442bae4546169",
+        "completion_mode": "supervised-pure-metric-implementation-no-benchmark-execution",
+        "receipt_cid_v1_raw": "bafkreihyaluh5hdrsndap6p3fvaiuejpmy2h3nybp73y2cwkbnrg32korm",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-066.json",
+        "receipt_sha256": "f802e87e9c71934607f9fb2d408a112f66347db7017ff78d0aca0b626de94e8b",
+        "receipt_size": 6112,
+        "receipt_status": "completed",
+        "task_id": "PCCE-066"
+      },
+      {
+        "artifact_identity": "bafkreib7oplhwookasl2k4chg2u4wsg7x2fva6n6aiq7pah2hp5ltg6xfq",
+        "canonical_task_cid": "baguqeera5yj7ewblfkbnp7vyqimokeopuqo7xsb4ch6mpi5x6xfh3ztawibq",
+        "canonical_task_key": "task/v1/ee13f2582b2a82d7feb88218e511cfa41dfbc83c11fcc7a3b7f5ca7de660b203",
+        "completion_mode": "supervised-security-boundary-implementation-observed-tested-limited",
+        "receipt_cid_v1_raw": "bafkreiarjiqih3he6twziiulgzc6tdx7aydlxk2cvs4nqdkcjgvalichp4",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json",
+        "receipt_sha256": "114a2083ece4f4ed94228b3645e98eff0606bbab42acb8d80d4249aa05a0477f",
+        "receipt_size": 9706,
+        "receipt_status": "completed",
+        "task_id": "PCCE-071"
+      },
+      {
+        "artifact_identity": "bafkreiaugowmsz2qz62hvpw4ellppuufxnzvfh5f2vr5vtxx4vdjp75wze",
+        "canonical_task_cid": "baguqeerahc36qm7ztotc55mwtztkjitywmguuyujgcie4vku74qdnght4req",
+        "canonical_task_key": "task/v1/38b7e833f99ba62ef5969e66a4a278b30d4a628930904e5554ff203698f3e449",
+        "completion_mode": "supervised-read-only-trust-admission-observed-tested-limited",
+        "receipt_cid_v1_raw": "bafkreig5kfcvi6rlhp3ebk46x7yghdw45gu745znf6b7wen6lzhfxtyeym",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-072.json",
+        "receipt_sha256": "dd5145547a2b3bf640ab9ebff0638edce9a9fe772d2f83fb11be5e4e5bcf04c3",
+        "receipt_size": 8786,
+        "receipt_status": "completed",
+        "task_id": "PCCE-072"
+      },
+      {
+        "artifact_identity": "bafkreif535gd4tuokudj2djynif5uspk3lq56pro3zjwulxqyflrgk3xta",
+        "canonical_task_cid": "baguqeerasa6qv4brnpivr2qzgx24n2zzlghm3lhbrashmuxkoyihg7wznjra",
+        "canonical_task_key": "task/v1/903d0af0316bd158ea1935f5c6eb39598ecdace188247652ea7610737ed96a62",
+        "completion_mode": "supervised-adversarial-test-implementation-observed-tested-limited",
+        "receipt_cid_v1_raw": "bafkreieyukobizn6jmk6r5rflvoojhls6t4qnllji6q7ghe4a22bt4huoy",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-073.json",
+        "receipt_sha256": "98a29c1465be4b15e8f6255d5ce49d72f4f906ad6947a1f31c9c06b419f0f476",
+        "receipt_size": 6047,
+        "receipt_status": "completed",
+        "task_id": "PCCE-073"
+      },
+      {
+        "artifact_identity": "baguqeera5ifpsadums6lrug6jcoi34hsvj7rhq4gv2xoordagmsvtbzr3cta",
+        "canonical_task_cid": "baguqeera7nlmbwpqoymhipvdo5r2hwhf2vq3a7isrm7qzi776wmhxctz7cya",
+        "canonical_task_key": "task/v1/fb56c0d9f07618743ea37763a3d8e5d561b07d128b3f0ca3fff5987b8a79f8b0",
+        "completion_mode": "supervised-security-hardening-observed-tested-limited",
+        "receipt_cid_v1_raw": "bafkreiexjllqaezxl3ew473inaiw5dr5ianyxpxkapntz7gj5fw67noncu",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-074.json",
+        "receipt_sha256": "974ad70013375ec96e7f6868116e8e3d401b8bbeea03db3cfcc9e96defb5cd15",
+        "receipt_size": 6482,
+        "receipt_status": "completed",
+        "task_id": "PCCE-074"
+      },
+      {
+        "artifact_identity": "bafkreigarvlp6lnksv7xnb3j3cwji5q5delpjzoswzhpf7uynn3j6mcitm",
+        "canonical_task_cid": "baguqeeraeyzlruzl7j5cw5bzfsa7z63gjydabt3oqxjq53qq2lqdvvvv7mwq",
+        "canonical_task_key": "task/v1/2632b8d32bfa7a2b74392c81fcfb664e0600cf6e85d30eee10d2e03ad6b5fb2d",
+        "completion_mode": "supervised-bounded-self-hosting-evidence-only",
+        "receipt_cid_v1_raw": "bafkreia6fevhtrt6wnvloajvyw6vxqw6hf7kwaseyxbdjlsvsemxqji7ay",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+        "receipt_sha256": "1e292a79c67eb36ab70135c5bd5bc2de397eab0244c5c234ae55911978251f06",
+        "receipt_size": 6474,
+        "receipt_status": "completed",
+        "task_id": "PCCE-079"
+      },
+      {
+        "artifact_identity": "bafkreib4r2njyfnfi5pssta5ngeyjxtsf5pltkd3vuawlwonh4xytqfdy4",
+        "canonical_task_cid": "baguqeeraztljl676f3s6bsspsoly573f626nvtxqvjasmkk7a5p2kycg5kuq",
+        "canonical_task_key": "task/v1/ccd695fbfe2ee5e0ca4f93978eff65f6bcdacef0aa4126295f075fa56046eaa9",
+        "completion_mode": "supervised-adversarial-integration-observed-tested-no-go",
+        "receipt_cid_v1_raw": "bafkreickz4pwdhduqgb2hkzzndgdlvcqnc5affscfzwum5tzlycfd7kfsu",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+        "receipt_sha256": "4acf1f619c748183a3ab3968cc35d45068ba0296422e6d4676795e0451fd4595",
+        "receipt_size": 6604,
+        "receipt_status": "completed",
+        "task_id": "PCCE-075"
+      },
+      {
+        "artifact_identity": "baguqeeracruwjey3ittkczloj74nxtamwnbme22tiptck3ftb4c647h7olwq",
+        "canonical_task_cid": "baguqeera5zw2sgetx6yvihhl5a2mmd7vanmuepxef2bbhet3nfgknzqqoogq",
+        "canonical_task_key": "task/v1/ee6da91893bfb1541cebe834c60ff50359423ee42e8213927b694ca6e610738d",
+        "completion_mode": "supervised-complete-route-unavailable-population-no-provider-execution",
+        "receipt_cid_v1_raw": "bafkreibwhvh72zrioo7ybkulxvyexppuimcn6nnyirjseig2iyvoomwyye",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json",
+        "receipt_sha256": "363d4ffd662873bf80aa8bbd704bbdf44304df35b844532220da462ae732d8c1",
+        "receipt_size": 9654,
+        "receipt_status": "completed",
+        "task_id": "PCCE-067"
+      },
+      {
+        "artifact_identity": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+        "canonical_task_cid": "baguqeeraezsvo72fvqmi4pld2a6qqufkh5zrz4bljx733slloerjtnw77ewa",
+        "canonical_task_key": "task/v1/2665577f45ac188e3d63d03d0850aa3f731cf02b4dffbdc96b712299b6dff92c",
+        "completion_mode": "supervised-security-acceptance-gate-explicit-release-blocking-no-go",
+        "receipt_cid_v1_raw": "bafkreicyoqp5dljl5w3csdmrfbkzkxacbowmdypnc5mvnvbbvso24qauue",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-076.json",
+        "receipt_sha256": "58741fd1ad2bedb6290d912855955c020bacc1e1ed175956d421ac9dae4014a1",
+        "receipt_size": 8915,
+        "receipt_status": "completed",
+        "task_id": "PCCE-076"
+      },
+      {
+        "artifact_identity": "baguqeeraxdcsravklkrwuqftkaf3nuqvqnrnnj6ypwydsnntxv4l45veuxca",
+        "canonical_task_cid": "baguqeeracljqjzu7eqymeh4v5z6kuqchktl4arwfnyes2lq4rjt3frbfrpka",
+        "canonical_task_key": "task/v1/12d304e69f2430c21f95ee7caa404754d7c046c56e092d2e1c8a67b2c4258bd4",
+        "completion_mode": "supervised-deterministic-benchmark-qualification-projection-no-execution",
+        "receipt_cid_v1_raw": "bafkreicfo3thta45nvvderosgk2y5wvnsilq26befdkecbegdcx3gosuna",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json",
+        "receipt_sha256": "4576e679839d6d6a3245d232b58edaad92170d782428d441048618afb33a5468",
+        "receipt_size": 13262,
+        "receipt_status": "completed",
+        "task_id": "PCCE-068"
+      },
+      {
+        "artifact_identity": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+        "canonical_task_cid": "baguqeeramdjzkg3vpqgtq5oa4i2frfcwzinebpr27qwfwztf2hweutvtuyxq",
+        "canonical_task_key": "task/v1/60d3951b757c0d3875c0e234589456ca1a40be3afc2c5b6665d1ec4a4eb3a62f",
+        "completion_mode": "evidence-task-completed-local-ci-contract-predecessor-no-go-external-authority-no-go",
+        "receipt_cid_v1_raw": "bafkreid4c32sxdvmxwe57bbo6uyw455jnsou7qtsid2yaxtfaur3wbduci",
+        "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json",
+        "receipt_sha256": "7c16f52b8eacbd89df842ef5316e77a96c9d4fc27240f5805e650523bb047412",
+        "receipt_size": 12974,
+        "receipt_status": "completed",
+        "task_id": "PCCE-080"
+      }
+    ],
+    "required_count": 64
+  },
+  "qualification_inputs": {
+    "benchmark": {
+      "binding": {
+        "cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "sha256": "13dcaf260fcbbed9dd72b53954e6bdfd12db27a423ee96343d18afca8bf1c077",
+        "size": 24864
+      },
+      "decision": "NO-GO",
+      "decision_kind": "unavailable-evidence-no-go-not-measured-threshold-failure",
+      "release_qualified": false,
+      "status": "present-and-bound-no-go"
+    },
+    "current_head_ci": {
+      "binding": {
+        "cid_v1_raw": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+        "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "sha256": "eacb6d323c9350a233a83f5344ff1f5972b22775365d011d3f80445c516fd553",
+        "size": 14767
+      },
+      "decision": "NO-GO",
+      "external_ci_authority_available": false,
+      "release_qualified": false,
+      "status": "present-and-bound-no-go"
+    },
+    "installation": {
+      "binding": {
+        "cid_v1_raw": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+        "size": 37516
+      },
+      "decision": "NO-GO",
+      "release_qualified": false,
+      "status": "present-and-bound-no-go",
+      "waivers": []
+    },
+    "longitudinal_self_hosting": {
+      "binding": {
+        "cid_v1_raw": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+        "sha256": "6c5ffee3b265d013e6069f394106e950825d0bfedc3c0278bfb98522ae97fc8f",
+        "size": 10273
+      },
+      "decision": "NO-GO",
+      "qualification_cap": "NOT-QUALIFIED",
+      "qualification_status": "unavailable",
+      "release_qualified": false,
+      "status": "present-and-bound-no-go"
+    },
+    "security": {
+      "binding": {
+        "cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+        "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+        "sha256": "94034723fddfa547266c794961c3c88d005f1d097c6e2524ccfbedd49a7dc8f4",
+        "size": 7425
+      },
+      "decision": "NO-GO",
+      "release_qualified": false,
+      "status": "present-and-bound-no-go"
+    }
+  },
+  "release_candidate": "v0.1-rc1",
+  "release_tag_created": false,
+  "schema": "lift_coding.proof-carrying-context-engine.release-manifest@1",
+  "source_and_input_artifacts": {
+    "missing_count": 0,
+    "present_count": 34,
+    "records": [
+      {
+        "category": "control",
+        "cid_v1_raw": "bafkreih37r3uhf4m5zekixb5jzjwdt3s3lqil7zzhsumvuhvpuajkijcwi",
+        "path": "artifacts/proof_carrying_context_engine/control/task_board.json",
+        "producer_task": "PCCE-000",
+        "sha256": "fbfc7743978cee48a45c3d4e5361cf72dae085ff393ca8cad0f57d00952122b2",
+        "size": 371001,
+        "status": "present"
+      },
+      {
+        "category": "control",
+        "cid_v1_raw": "bafkreibbitvh5hh62atfaadf7y5leczc6v3xq254ktney4bwf2jbhqlmf4",
+        "path": "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
+        "producer_task": "PCCE-000",
+        "sha256": "2144ea7e9cfed026500065fe3ab20b22f577786bbc54da4c70362e9213c16c2f",
+        "size": 10015,
+        "status": "present"
+      },
+      {
+        "category": "source",
+        "cid_v1_raw": "bafkreid2f3ecch4hkoangkaldynihurvjohcsuch3s2jeg2dn4x6epyc5a",
+        "path": "artifacts/proof_carrying_context_engine/inventory/ipfs_accelerate.json",
+        "producer_task": "PCCE-003",
+        "sha256": "7a2ec8211f875380d3280b1e1a83d2354b8e295047dcb4921b436f2fe23f02e8",
+        "size": 13079,
+        "status": "present"
+      },
+      {
+        "category": "source",
+        "cid_v1_raw": "bafkreic5wfdxqp673adnfceeru5daz4seudzrt7qxzmsojweed2rdsq3lu",
+        "path": "artifacts/proof_carrying_context_engine/inventory/ipfs_datasets.json",
+        "producer_task": "PCCE-001",
+        "sha256": "5db147783fdfd806d288848d3a306792250798cff0be592726c420f511ca1b5d",
+        "size": 12452,
+        "status": "present"
+      },
+      {
+        "category": "source",
+        "cid_v1_raw": "bafkreicjgj664bzgr77pevtfzzw677fhlkozfagqyttd3tu65gyzh3g3ty",
+        "path": "artifacts/proof_carrying_context_engine/inventory/ipfs_kit.json",
+        "producer_task": "PCCE-002",
+        "sha256": "49327dee07268ffef25665ce6deffca75a9d9280d0c4e63dce9ee9b193ecdb9e",
+        "size": 8181,
+        "status": "present"
+      },
+      {
+        "category": "source",
+        "cid_v1_raw": "bafkreiaoi6xrqavjoeip7men4rksla35scc3slghpkdcbsz2pchvxsqzuu",
+        "path": "artifacts/proof_carrying_context_engine/inventory/mcp_plus_plus.json",
+        "producer_task": "PCCE-004",
+        "sha256": "0e47af1802a97110ffb08de45525837d9085b92cc77a8620cb3a788f5bca19a5",
+        "size": 7872,
+        "status": "present"
+      },
+      {
+        "category": "contracts",
+        "cid_v1_raw": "bafkreibpr4un6btf5llld5xcldxqaz33iourcvcamvvi7upuywu3iokfcy",
+        "path": "artifacts/proof_carrying_context_engine/contracts/canonical_ownership.json",
+        "producer_task": "PCCE-005",
+        "sha256": "2f8f28df0665ead6b1f6e258ef00677b43a9115440656a8fd1f4c5a9b4394516",
+        "size": 14873,
+        "status": "present"
+      },
+      {
+        "category": "contracts",
+        "cid_v1_raw": "bafkreibfvkej6qwvz7jf33ellv5ed5mmxyefm5eb5afdce5qzifdl4daqa",
+        "path": "artifacts/proof_carrying_context_engine/contracts/compatibility_matrix.json",
+        "producer_task": "PCCE-007",
+        "sha256": "25aa889f42d5cfd25dec8b5d7a41f58cbe08567481e80a3113b0ca0a35f06080",
+        "size": 2938,
+        "status": "present"
+      },
+      {
+        "category": "contracts",
+        "cid_v1_raw": "bafkreifvmjpwtdbjjqias34zegzyonvnafnqi4h7buoj575lpjz3anrwb4",
+        "path": "artifacts/proof_carrying_context_engine/contracts/epic_a_gate.json",
+        "producer_task": "PCCE-011",
+        "sha256": "b5625f698c294c10096f9921b38736ad015b0470ff0d1c9effab7a73b036360f",
+        "size": 3816,
+        "status": "present"
+      },
+      {
+        "category": "runtime",
+        "cid_v1_raw": "bafkreiewktogguwwmwe7oehhx5uw4wbb535kc6eopfq5kektc6sueimuoe",
+        "path": "artifacts/proof_carrying_context_engine/runtime/runtime_api.json",
+        "producer_task": "PCCE-020",
+        "sha256": "9654dc6352d66589f710e7bf696e5821eefaa1788e7961d5115317a542219471",
+        "size": 7080,
+        "status": "present"
+      },
+      {
+        "category": "adapters",
+        "cid_v1_raw": "bafkreid4pidgz3bkrfo326rcahvw4afwhntmq63zy3ufzuakpmp66kml7e",
+        "path": "artifacts/proof_carrying_context_engine/adapters/conformance.json",
+        "producer_task": "PCCE-035",
+        "sha256": "7c7a066cec2a895dbd7a2201eb6e00b63b66c87b79c6e85cd00a7b1fef298bf9",
+        "size": 1776,
+        "status": "present"
+      },
+      {
+        "category": "cli",
+        "cid_v1_raw": "bafkreiddkqzoeawm3b36qfl5thc3gx44rwvjvac2auzhkkkbfzesute75u",
+        "path": "artifacts/proof_carrying_context_engine/cli/command_manifest.json",
+        "producer_task": "PCCE-044",
+        "sha256": "635432e202ccd877e8157d99c5b35f9c8daa9a805a05327529412e492a4c9fed",
+        "size": 1261,
+        "status": "present"
+      },
+      {
+        "category": "cli",
+        "cid_v1_raw": "bafkreihiiqxgklrvu4ho7ghslq6hvseps2enx7mffybkvtygnyyj5ndh7e",
+        "path": "artifacts/proof_carrying_context_engine/cli/output_schema.json",
+        "producer_task": "PCCE-043",
+        "sha256": "e8442e652e35a70eef98f25c3c7ac88f9688dbfd852e02aacf066e309eb467f9",
+        "size": 3905,
+        "status": "present"
+      },
+      {
+        "category": "environment",
+        "cid_v1_raw": "bafkreifvwoezkuqk5xjtskrakfzrqlola66egnq2las3knrzxgc4wrqk3y",
+        "path": "artifacts/proof_carrying_context_engine/environment/artifact_hashes.json",
+        "producer_task": "PCCE-053",
+        "sha256": "b5b38995520aedd3392a205173182dcb07bc43361a5825b53639b985cb460ade",
+        "size": 5845,
+        "status": "present"
+      },
+      {
+        "category": "environment",
+        "cid_v1_raw": "bafkreigmh6jgr4s2fudo5uhxvhw6pyrhff6ysnyepprvhclmppwkmo6dl4",
+        "path": "artifacts/proof_carrying_context_engine/environment/dependency_locks.json",
+        "producer_task": "PCCE-053",
+        "sha256": "cc3f9268f25a2d06eed0f7a9ede7e227297d8937047be353896c7beca63bc35f",
+        "size": 22734,
+        "status": "present"
+      },
+      {
+        "category": "environment",
+        "cid_v1_raw": "bafkreibz3qpnhoxoyc7mqqn2k5nrdan5bkq4rpdltzxcg6lqpxs5l7dvzi",
+        "path": "artifacts/proof_carrying_context_engine/environment/sbom.spdx.json",
+        "producer_task": "PCCE-053",
+        "sha256": "39dc1ed3baeec0bec841ba575b1181bd0aa1c8bc6b9e6e2379707de5d5fc75ca",
+        "size": 139128,
+        "status": "present"
+      },
+      {
+        "category": "environment",
+        "cid_v1_raw": "bafkreidnqdikfqa54om765g4ng7gimjdugdfcar7ydzssai7vmrbbtmaxy",
+        "path": "artifacts/proof_carrying_context_engine/environment/manifest.json",
+        "producer_task": "PCCE-053",
+        "sha256": "6d80d0a2c01de399ff74dc69be643123a18651023fc0f329011fab2210cd80be",
+        "size": 22120,
+        "status": "present"
+      },
+      {
+        "category": "installation",
+        "cid_v1_raw": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "producer_task": "PCCE-056",
+        "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+        "size": 37516,
+        "status": "present"
+      },
+      {
+        "category": "benchmark",
+        "cid_v1_raw": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+        "producer_task": "PCCE-060",
+        "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b",
+        "size": 2373,
+        "status": "present"
+      },
+      {
+        "category": "benchmark",
+        "cid_v1_raw": "bafkreibjooqmsrumufg5uuevpda5u6q5msnurxytzeuslextjj4hfjtmfi",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+        "producer_task": "PCCE-067",
+        "sha256": "2973a0c9468ca14dda509578c1da7a1d649b48df13c9292592f34a7872a66c2a",
+        "size": 738788,
+        "status": "present"
+      },
+      {
+        "category": "benchmark",
+        "cid_v1_raw": "bafkreiacslsundktuyeaaykq45d7v33omuacp6bjaujk64pwxwdxgxgan4",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+        "producer_task": "PCCE-067",
+        "sha256": "0292e5468d53a608006150e747faef6e650027f8290512af71f6bd87735cc06f",
+        "size": 46438,
+        "status": "present"
+      },
+      {
+        "category": "benchmark",
+        "cid_v1_raw": "bafkreie3rdkhtrfd44ol4ajvo4prwuyzs454htrld3juuzanl7pjz3ibze",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+        "producer_task": "PCCE-067",
+        "sha256": "9b88d479c4a3e71cbe0135771f1b5319973bc3ce2b1ed34a640d5fde9ced01c9",
+        "size": 11851,
+        "status": "present"
+      },
+      {
+        "category": "benchmark",
+        "cid_v1_raw": "bafkreiajyugiiwwbyibyxnv6hkdzqvnjcpwc3hwwmrgt6etogks6ecdgmq",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "producer_task": "PCCE-068",
+        "sha256": "09c50c845ac1c2038bb6be3a879855a913ec2d9ed6644d3f126e32a5e2086664",
+        "size": 186473,
+        "status": "present"
+      },
+      {
+        "category": "benchmark",
+        "cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "producer_task": "PCCE-068",
+        "sha256": "13dcaf260fcbbed9dd72b53954e6bdfd12db27a423ee96343d18afca8bf1c077",
+        "size": 24864,
+        "status": "present"
+      },
+      {
+        "category": "benchmark",
+        "cid_v1_raw": "bafkreifccdwqbuih2buruqkovhuc32ezyhga7yxusbsuv43zlhedz7ix2i",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/report.md",
+        "producer_task": "PCCE-068",
+        "sha256": "a210ed00d107d0691a414ea9e82de899c1cc0fe2f490654af37959c83cfd17d2",
+        "size": 7184,
+        "status": "present"
+      },
+      {
+        "category": "self_hosting",
+        "cid_v1_raw": "bafkreifimvt2uhibvp6gwciqdhowj3j3pab6qiebek5mvqjxfrbdtri2tm",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl",
+        "producer_task": "PCCE-079",
+        "sha256": "a86567aa1d01abfc6b091019dd64ed3b7803e8208122bacac1372c4239c51a9b",
+        "size": 6395589,
+        "status": "present"
+      },
+      {
+        "category": "self_hosting",
+        "cid_v1_raw": "bafkreigarvlp6lnksv7xnb3j3cwji5q5delpjzoswzhpf7uynn3j6mcitm",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+        "producer_task": "PCCE-079",
+        "sha256": "c08d56ff2daa957f768769d8ac94761d1916f4e5d2b64ef2fe986b769f30489b",
+        "size": 17837,
+        "status": "present"
+      },
+      {
+        "category": "self_hosting",
+        "cid_v1_raw": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+        "producer_task": "PCCE-079",
+        "sha256": "6c5ffee3b265d013e6069f394106e950825d0bfedc3c0278bfb98522ae97fc8f",
+        "size": 10273,
+        "status": "present"
+      },
+      {
+        "category": "self_hosting",
+        "cid_v1_raw": "bafkreigqzvb4y6mm2owgsxn7ss7vlpwjr52cdvaczkunf6xypbaykltili",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md",
+        "producer_task": "PCCE-079",
+        "sha256": "d0cd43cc798cd3ac695dbf94bf55bec98f7421d402caa8d2faf87841852e685a",
+        "size": 5827,
+        "status": "present"
+      },
+      {
+        "category": "security",
+        "cid_v1_raw": "bafkreicqlvr2orogy3xemnyse4x5lkjs6t2w3wsrzd4w4utb4fvmsmif74",
+        "path": "artifacts/proof_carrying_context_engine/security/threat_model.json",
+        "producer_task": "PCCE-070",
+        "sha256": "505d63a745c6c6ee463712272fd5a932f4f56dda51c8f96e5261e16ac93105ff",
+        "size": 63920,
+        "status": "present"
+      },
+      {
+        "category": "security",
+        "cid_v1_raw": "bafkreiaj5oj6sqxpybal2q5rejdmtusbuqrhulbnkfhglw3gxbtjyz5ub4",
+        "path": "artifacts/proof_carrying_context_engine/security/findings.json",
+        "producer_task": "PCCE-076",
+        "sha256": "09eb93e942efc040bd43b12246c9d241a4227a2c2d514e65db66b8669c67b40f",
+        "size": 18145,
+        "status": "present"
+      },
+      {
+        "category": "security",
+        "cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+        "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+        "producer_task": "PCCE-076",
+        "sha256": "94034723fddfa547266c794961c3c88d005f1d097c6e2524ccfbedd49a7dc8f4",
+        "size": 7425,
+        "status": "present"
+      },
+      {
+        "category": "security",
+        "cid_v1_raw": "bafkreidmqtyrnxh42o7jx6lj6zujsdk6x7pezkkp4ext5eek44b2o535ti",
+        "path": "artifacts/proof_carrying_context_engine/security/report.md",
+        "producer_task": "PCCE-076",
+        "sha256": "6c84f116dcfcd3be9bf969f668990d5ebfde4ca94fe12f3e908ae703a7777d9a",
+        "size": 9022,
+        "status": "present"
+      },
+      {
+        "category": "ci",
+        "cid_v1_raw": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+        "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "producer_task": "PCCE-080",
+        "sha256": "eacb6d323c9350a233a83f5344ff1f5972b22775365d011d3f80445c516fd553",
+        "size": 14767,
+        "status": "present"
+      }
+    ],
+    "required_count": 34
+  },
+  "task_authority": {
+    "canonical_task_cid": "baguqeeraavz2sz7b7nlia2llpvb4epjldsqmvl3anqxszvsfqkzidi7imfqq",
+    "canonical_task_key": "task/v1/0573a967e1fb5680696b7d43c23d2b1ca0caaf606c2f2cd64582b281a3e86161",
+    "database_mutated_by_builder": false,
+    "task_id": "PCCE-081"
+  }
+}

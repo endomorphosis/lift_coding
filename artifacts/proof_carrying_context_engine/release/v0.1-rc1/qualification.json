@@ -1,0 +1,20 @@
+{
+  "basis": "frozen-evidence-cut-only",
+  "blocker_ids": [
+    "installability-no-go",
+    "package-byte-set-incomplete",
+    "package-signature-evidence-unavailable",
+    "bounded-self-hosting-qualification-no-go",
+    "benchmark-qualification-no-go",
+    "security-qualification-no-go",
+    "current-head-ci-qualification-no-go"
+  ],
+  "decision": "NO-GO",
+  "promotable": false,
+  "qualification_level": null,
+  "qualification_level_owner": "PCCE-082",
+  "release_candidate": "v0.1-rc1",
+  "release_qualified": false,
+  "schema": "lift_coding.proof-carrying-context-engine.release-candidate-qualification@1",
+  "waivers": []
+}
