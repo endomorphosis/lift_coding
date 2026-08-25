@@ -1,0 +1,651 @@
+{
+  "accepted_pcce067_evidence_cut": {
+    "admission_scope": "immutable input commit supplied for PCCE-068 candidate authoring; no board or database mutation is claimed here",
+    "dependency_artifact_identity": "baguqeeracruwjey3ittkczloj74nxtamwnbme22tiptck3ftb4c647h7olwq",
+    "dependency_decision": "NO-GO",
+    "dependency_live_task_cid": "baguqeeraozzrsd26abvatqptb5bhvxa5dw7mymfcryemk355ieqlmczvtzjq",
+    "dependency_status": "completed",
+    "dependency_task_id": "PCCE-067",
+    "gitlinks": {
+      "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+      "external/ipfs_accelerate": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+      "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+      "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+    },
+    "outer_commit": "caefdd51db180e43885ef3bf51e0794ac6b00e45",
+    "outer_parent": "d23e861fd4fc6293c888a6dc3377e8c94d4129d9",
+    "outer_tree": "6512c396bbf2c086d69e91b5fa5df4df280337a6"
+  },
+  "benchmark_id": "pcce-external-generalization-v0.1",
+  "blockers": [
+    {
+      "category": "primary-threshold",
+      "code": "primary-gate-unavailable:accepted_patch_noninferiority",
+      "decision": "unavailable-no-go",
+      "metric": "correct_accepted_patch_rate_bp",
+      "reason": "required-live-observed-evidence-is-absent"
+    },
+    {
+      "category": "primary-threshold",
+      "code": "primary-gate-unavailable:context_reduction",
+      "decision": "unavailable-no-go",
+      "metric": "context_reduction_bp",
+      "reason": "zero-or-missing-denominator"
+    },
+    {
+      "category": "primary-threshold",
+      "code": "primary-gate-unavailable:routine_frontier_escalation",
+      "decision": "unavailable-no-go",
+      "metric": "routine_frontier_escalation_rate_bp",
+      "reason": "routine-frontier-denominator-or-numerator-missing"
+    },
+    {
+      "category": "primary-threshold",
+      "code": "primary-gate-unavailable:total_cost_reduction",
+      "decision": "unavailable-no-go",
+      "metric": "total_cost_reduction_bp",
+      "reason": "one-or-more-paired-total-cost-observations-missing"
+    },
+    {
+      "category": "zero-tolerance",
+      "code": "zero-tolerance-unavailable:controlled_selected_test_false_negative_count",
+      "decision": "unavailable-no-go",
+      "metric": "controlled_selected_test_false_negative_count",
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+    },
+    {
+      "category": "zero-tolerance",
+      "code": "zero-tolerance-unavailable:critical_mutant_accepted_count",
+      "decision": "unavailable-no-go",
+      "metric": "critical_mutant_accepted_count",
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+    },
+    {
+      "category": "zero-tolerance",
+      "code": "zero-tolerance-unavailable:critical_regression_accepted_count",
+      "decision": "unavailable-no-go",
+      "metric": "critical_regression_accepted_count",
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+    },
+    {
+      "category": "zero-tolerance",
+      "code": "zero-tolerance-unavailable:negative_review_autonomous_accept_count",
+      "decision": "unavailable-no-go",
+      "metric": "negative_review_autonomous_accept_count",
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+    },
+    {
+      "category": "zero-tolerance",
+      "code": "zero-tolerance-unavailable:stale_capsule_accepted_count",
+      "decision": "unavailable-no-go",
+      "metric": "stale_capsule_accepted_count",
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+    },
+    {
+      "category": "zero-tolerance",
+      "code": "zero-tolerance-unavailable:stale_proof_accepted_count",
+      "decision": "unavailable-no-go",
+      "metric": "stale_proof_accepted_count",
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+    }
+  ],
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "confidence": {
+    "confidence_bp": 9500,
+    "interpretation": "No confidence result upgrades unavailable evidence. The zero-valued accepted-patch bootstrap is a preregistered failure/abstention scoring projection, not an observed live-quality measurement.",
+    "method": "seeded-percentile-paired-task-cluster-bootstrap",
+    "primary_gate_bootstraps": {
+      "accepted_patch_noninferiority": {
+        "baseline_attempt_count": 21,
+        "candidate_attempt_count": 21,
+        "confidence_bp": 9500,
+        "confidence_side": "one-sided-lower",
+        "defined_replicates": 10000,
+        "lower_confidence_bound_bp": 0,
+        "method": "seeded-percentile-paired-task-cluster-bootstrap",
+        "paired_attempt_count": 21,
+        "point_estimate_bp": 0,
+        "replicates_drawn": 10000,
+        "replicates_requested": 10000,
+        "seed": 60060,
+        "task_cluster_count": 21,
+        "undefined_replicates": 0,
+        "upper_confidence_bound_bp": 0
+      },
+      "context_reduction": {
+        "baseline_attempt_count": 21,
+        "candidate_attempt_count": 21,
+        "confidence_bp": 9500,
+        "confidence_side": "one-sided-lower",
+        "defined_replicates": 0,
+        "lower_confidence_bound_bp": null,
+        "method": "seeded-percentile-paired-task-cluster-bootstrap",
+        "paired_attempt_count": 21,
+        "point_estimate_bp": null,
+        "replicates_drawn": 0,
+        "replicates_requested": 10000,
+        "seed": 60060,
+        "task_cluster_count": 21,
+        "undefined_replicates": 0,
+        "upper_confidence_bound_bp": null
+      },
+      "routine_frontier_escalation": {
+        "baseline_attempt_count": 14,
+        "candidate_attempt_count": 14,
+        "confidence_bp": 9500,
+        "confidence_side": "one-sided-lower",
+        "defined_replicates": 0,
+        "lower_confidence_bound_bp": null,
+        "method": "seeded-percentile-paired-task-cluster-bootstrap",
+        "paired_attempt_count": 14,
+        "point_estimate_bp": null,
+        "replicates_drawn": 0,
+        "replicates_requested": 10000,
+        "seed": 60060,
+        "task_cluster_count": 14,
+        "undefined_replicates": 0,
+        "upper_confidence_bound_bp": null
+      },
+      "total_cost_reduction": {
+        "baseline_attempt_count": 21,
+        "candidate_attempt_count": 21,
+        "confidence_bp": 9500,
+        "confidence_side": "one-sided-lower",
+        "defined_replicates": 0,
+        "lower_confidence_bound_bp": null,
+        "method": "seeded-percentile-paired-task-cluster-bootstrap",
+        "paired_attempt_count": 21,
+        "point_estimate_bp": null,
+        "replicates_drawn": 0,
+        "replicates_requested": 10000,
+        "seed": 60060,
+        "task_cluster_count": 21,
+        "undefined_replicates": 0,
+        "upper_confidence_bound_bp": null
+      }
+    },
+    "seed": 60060
+  },
+  "decision": {
+    "benchmark_qualified": false,
+    "cost_claim_allowed": false,
+    "decision_kind": "unavailable-evidence-no-go-not-measured-threshold-failure",
+    "measured_threshold_failure_count": 0,
+    "performance_claim_allowed": false,
+    "production_qualified": false,
+    "quality_claim_allowed": false,
+    "release_qualified": false,
+    "status": "NO-GO",
+    "threshold_blocker_count": 10,
+    "waiver_count": 0
+  },
+  "deterministic_computation": {
+    "aggregate_function": "metrics.aggregate_results",
+    "aggregate_set_cid": "baguqeerapfe3u56yaqccjp3ogvexdb7sqefw4sl2zilf4t6eu5ucuqwjeqpa",
+    "comparison_function": "comparison.compare_frozen_ad",
+    "comparison_report_cid": "baguqeerauzrslzgeyq6cxn2k5rsluxhjjpynbcuuptapfhxg7fml7sjwafzq",
+    "datasets_gitlink": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+    "result_order_invariant": true,
+    "validator": "specification.validate_raw_result plus metrics.validate_result_population"
+  },
+  "failed_attempt_and_cost_ledger": {
+    "cost_disposition": "unavailable-not-zero",
+    "failed_attempt_cost_micros": null,
+    "latency_disposition": "unavailable-not-zero",
+    "observed_provider_cost_result_count": 0,
+    "observed_total_cost_micros": null,
+    "provider_call_count": 0,
+    "quality_disposition": "raw quality outcomes unavailable; scorer-derived penalties are not observed quality zeroes",
+    "terminal_unavailable_count": 84
+  },
+  "inputs": {
+    "corpus_manifest": {
+      "path": "external/ipfs_datasets/benchmarks/proof_context/corpus_manifest.json",
+      "raw_cid_v1": "bafkreidbngeh7k7knauskpw4ztbv2wuy65ia6ybs6lvdoosrknx4fwqnwq",
+      "sha256": "6169887fabea6829253edcccc35d5a98f7500f6032f2ea373a51536fc2da0db4",
+      "size": 9021,
+      "structured_cid": "baguqeeraedh4m4sadrllnzrp7zi4bherd2dbp5injbvv7myzybjjnju3mlwa"
+    },
+    "execution_receipt": {
+      "path": "artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+      "raw_cid_v1": "bafkreie3rdkhtrfd44ol4ajvo4prwuyzs454htrld3juuzanl7pjz3ibze",
+      "sha256": "9b88d479c4a3e71cbe0135771f1b5319973bc3ce2b1ed34a640d5fde9ced01c9",
+      "size": 11851,
+      "structured_cid": "baguqeeracruwjey3ittkczloj74nxtamwnbme22tiptck3ftb4c647h7olwq"
+    },
+    "pcce067_task_receipt": {
+      "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json",
+      "raw_cid_v1": "bafkreibwhvh72zrioo7ybkulxvyexppuimcn6nnyirjseig2iyvoomwyye",
+      "sha256": "363d4ffd662873bf80aa8bbd704bbdf44304df35b844532220da462ae732d8c1",
+      "size": 9654,
+      "structured_cid": "baguqeerabhtpvxxanndurequvfpbgpc3rxmnnrer4idjf6sjm3f45jpeuqxa"
+    },
+    "raw_results": {
+      "path": "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+      "raw_cid_v1": "bafkreibjooqmsrumufg5uuevpda5u6q5msnurxytzeuslextjj4hfjtmfi",
+      "sha256": "2973a0c9468ca14dda509578c1da7a1d649b48df13c9292592f34a7872a66c2a",
+      "size": 738788
+    },
+    "run_manifest": {
+      "path": "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+      "raw_cid_v1": "bafkreiacslsundktuyeaaykq45d7v33omuacp6bjaujk64pwxwdxgxgan4",
+      "sha256": "0292e5468d53a608006150e747faef6e650027f8290512af71f6bd87735cc06f",
+      "size": 46438,
+      "structured_cid": "baguqeeraem6tjti2y3bjbsdyyr2klsdkfxhvo6xywfmbw2zmgils244jjd4q"
+    },
+    "threshold_set": {
+      "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+      "raw_cid_v1": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+      "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b",
+      "size": 2373,
+      "structured_cid": "baguqeeraqbhgjlvhrdrwfashgtvwsb5e4k3fac5mg75j6f4p4gvxbaz75b6q"
+    }
+  },
+  "limitations": [
+    "All 84 terminal records end unavailable before provider dispatch; they are population-accounting evidence, not model executions.",
+    "Context, cost, latency, patch, test, proof, assurance, and provider/model observations required by qualification are absent.",
+    "Provider-call count zero is observed, but monetary cost remains null and cannot be reported as zero.",
+    "The derived accepted-patch score of zero is the frozen failure/abstention penalty, not an observed quality measurement or a measured threshold failure.",
+    "Only simulated_success_accepted_count is structurally proven zero; the six other zero-tolerance checks remain unavailable.",
+    "Per-class results preserve 24 typed-structured, 28 dynamic-plugin, and 32 mature-Python rows without dropping failures.",
+    "Independent review and outer composition admission are pending; this artifact does not update the board or database."
+  ],
+  "metrics_artifact": {
+    "path": "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+    "raw_cid_v1": "bafkreiajyugiiwwbyibyxnv6hkdzqvnjcpwc3hwwmrgt6etogks6ecdgmq",
+    "sha256": "09c50c845ac1c2038bb6be3a879855a913ec2d9ed6644d3f126e32a5e2086664",
+    "size": 186473,
+    "structured_cid": "baguqeerasfa2mtggtcmtqsfguoyzckjsjmryzzji7fq2vcuirqmnjxzgoava"
+  },
+  "missingness": {
+    "by_configuration": {
+      "A": {
+        "null_slot_count": 1575,
+        "observed_slot_count": 63,
+        "result_count": 21
+      },
+      "B": {
+        "null_slot_count": 1575,
+        "observed_slot_count": 63,
+        "result_count": 21
+      },
+      "C": {
+        "null_slot_count": 1554,
+        "observed_slot_count": 84,
+        "result_count": 21
+      },
+      "D": {
+        "null_slot_count": 1554,
+        "observed_slot_count": 84,
+        "result_count": 21
+      }
+    },
+    "interpretation": "Every raw null retains its reason identity; unknown cost, context, latency, test, proof, and assurance data are never imputed.",
+    "raw_metric_slot_count": 6552,
+    "raw_null_slot_count": 6258,
+    "raw_observed_slot_count": 294
+  },
+  "next_admissible_action": "Independent review must recompute all identities and decisions. Admission may record this completed projection as NO-GO, but cannot upgrade it without a separately permitted, observed benchmark population.",
+  "non_claims": {
+    "context_reduction_measured": false,
+    "cost_reduction_measured": false,
+    "monetary_cost_zero_claim": false,
+    "provider_or_model_execution_observed": false,
+    "quality_noninferiority_measured": false,
+    "raw_quality_zero_claim": false,
+    "release_readiness_claim": false,
+    "routine_frontier_rate_measured": false
+  },
+  "population": {
+    "attempt_count": 84,
+    "configuration_count": 4,
+    "dropped_terminal_row_count": 0,
+    "paired_A_D_task_cluster_count": 21,
+    "provider_call_count": 0,
+    "repository_classes": {
+      "dynamic_plugins": {
+        "aggregate_set_cid": "baguqeerat6yt5ys3g2aor7r6kz4mz6h2p3dkgivxavdgpaqaibqqokjhn3oa",
+        "comparison_report_cid": "baguqeeray42bcxguuhxo5aja6bys2rzot3xsr3qicxqnhz2yytwkoowivooa",
+        "qualification_status": "no-go",
+        "result_count": 28,
+        "rows_per_configuration": {
+          "A": 7,
+          "B": 7,
+          "C": 7,
+          "D": 7
+        },
+        "task_count": 7
+      },
+      "mature_python": {
+        "aggregate_set_cid": "baguqeerac7ykenkg5iv7vwgbcmbu3xdmlobwgmemk2el6t6r4mjsik6kitlq",
+        "comparison_report_cid": "baguqeeravvhprovuqfcxrkagzz74nbz72csbyhiccg4rkzlr7owymlnwvc6q",
+        "qualification_status": "no-go",
+        "result_count": 32,
+        "rows_per_configuration": {
+          "A": 8,
+          "B": 8,
+          "C": 8,
+          "D": 8
+        },
+        "task_count": 8
+      },
+      "typed_structured": {
+        "aggregate_set_cid": "baguqeeragwzmqkwgcjlyaqdqozsvynnftcsgyurj6h5ixshm4qhrjmgqkwcq",
+        "comparison_report_cid": "baguqeera7iep5gdoxtdpagriwdrwmw3kvvi5z7gfds5odny3izzmdwn4h4wq",
+        "qualification_status": "no-go",
+        "result_count": 24,
+        "rows_per_configuration": {
+          "A": 6,
+          "B": 6,
+          "C": 6,
+          "D": 6
+        },
+        "task_count": 6
+      }
+    },
+    "result_count": 84,
+    "route_unavailable_count": 84,
+    "rows_per_configuration": {
+      "A": 21,
+      "B": 21,
+      "C": 21,
+      "D": 21
+    },
+    "rows_per_repository_class": {
+      "dynamic_plugins": 28,
+      "mature_python": 32,
+      "typed_structured": 24
+    },
+    "task_count": 21,
+    "tasks_per_repository_class": {
+      "dynamic_plugins": 7,
+      "mature_python": 8,
+      "typed_structured": 6
+    },
+    "terminal_status_counts": {
+      "unavailable": 84
+    },
+    "unmatched_A_D_task_cluster_count": 0
+  },
+  "primary_thresholds": {
+    "accepted_patch_noninferiority": {
+      "bootstrap": {
+        "baseline_attempt_count": 21,
+        "candidate_attempt_count": 21,
+        "confidence_bp": 9500,
+        "confidence_side": "one-sided-lower",
+        "defined_replicates": 10000,
+        "lower_confidence_bound_bp": 0,
+        "method": "seeded-percentile-paired-task-cluster-bootstrap",
+        "paired_attempt_count": 21,
+        "point_estimate_bp": 0,
+        "replicates_drawn": 10000,
+        "replicates_requested": 10000,
+        "seed": 60060,
+        "task_cluster_count": 21,
+        "undefined_replicates": 0,
+        "upper_confidence_bound_bp": 0
+      },
+      "decision": "unavailable-no-go",
+      "evidence_class": "descriptive-nonlive",
+      "evidence_eligible": false,
+      "metric": "correct_accepted_patch_rate_bp",
+      "reason": "required-live-observed-evidence-is-absent",
+      "threshold": {
+        "baseline": "A",
+        "candidate": "D",
+        "decision_rule": "lower-confidence-bound-greater-than-or-equal-minus-margin",
+        "direction": "candidate-minus-baseline",
+        "margin_bp": 500,
+        "metric": "correct_accepted_patch_rate_bp"
+      }
+    },
+    "context_reduction": {
+      "bootstrap": {
+        "baseline_attempt_count": 21,
+        "candidate_attempt_count": 21,
+        "confidence_bp": 9500,
+        "confidence_side": "one-sided-lower",
+        "defined_replicates": 0,
+        "lower_confidence_bound_bp": null,
+        "method": "seeded-percentile-paired-task-cluster-bootstrap",
+        "paired_attempt_count": 21,
+        "point_estimate_bp": null,
+        "replicates_drawn": 0,
+        "replicates_requested": 10000,
+        "seed": 60060,
+        "task_cluster_count": 21,
+        "undefined_replicates": 0,
+        "upper_confidence_bound_bp": null
+      },
+      "decision": "unavailable-no-go",
+      "evidence_class": "identity-paired-observation",
+      "evidence_eligible": true,
+      "metric": "context_reduction_bp",
+      "reason": "zero-or-missing-denominator",
+      "threshold": {
+        "baseline": "A",
+        "candidate": "D",
+        "isolated_diagnostic": "B-vs-A",
+        "metric": "context_reduction_bp",
+        "minimum_bp": 5000,
+        "target_bp": 6000
+      }
+    },
+    "routine_frontier_escalation": {
+      "bootstrap": {
+        "baseline_attempt_count": 14,
+        "candidate_attempt_count": 14,
+        "confidence_bp": 9500,
+        "confidence_side": "one-sided-lower",
+        "defined_replicates": 0,
+        "lower_confidence_bound_bp": null,
+        "method": "seeded-percentile-paired-task-cluster-bootstrap",
+        "paired_attempt_count": 14,
+        "point_estimate_bp": null,
+        "replicates_drawn": 0,
+        "replicates_requested": 10000,
+        "seed": 60060,
+        "task_cluster_count": 14,
+        "undefined_replicates": 0,
+        "upper_confidence_bound_bp": null
+      },
+      "decision": "unavailable-no-go",
+      "evidence_class": "descriptive-nonlive",
+      "evidence_eligible": false,
+      "metric": "routine_frontier_escalation_rate_bp",
+      "reason": "routine-frontier-denominator-or-numerator-missing",
+      "threshold": {
+        "configuration": "D",
+        "maximum_bp": 2500,
+        "metric": "routine_frontier_escalation_rate_bp",
+        "target_bp": 2000
+      }
+    },
+    "total_cost_reduction": {
+      "bootstrap": {
+        "baseline_attempt_count": 21,
+        "candidate_attempt_count": 21,
+        "confidence_bp": 9500,
+        "confidence_side": "one-sided-lower",
+        "defined_replicates": 0,
+        "lower_confidence_bound_bp": null,
+        "method": "seeded-percentile-paired-task-cluster-bootstrap",
+        "paired_attempt_count": 21,
+        "point_estimate_bp": null,
+        "replicates_drawn": 0,
+        "replicates_requested": 10000,
+        "seed": 60060,
+        "task_cluster_count": 21,
+        "undefined_replicates": 0,
+        "upper_confidence_bound_bp": null
+      },
+      "decision": "unavailable-no-go",
+      "evidence_class": "descriptive-or-missing-cost",
+      "evidence_eligible": false,
+      "metric": "total_cost_reduction_bp",
+      "reason": "one-or-more-paired-total-cost-observations-missing",
+      "threshold": {
+        "baseline": "A",
+        "candidate": "D",
+        "evidence": "observed-live-only",
+        "metric": "total_cost_reduction_bp",
+        "minimum_bp": 3000,
+        "target_bp": 5000
+      }
+    }
+  },
+  "projection_state": "completed-evidence-projection-pending-independent-review-and-admission",
+  "review_and_composition": {
+    "board_or_quack_mutated": false,
+    "composition_state": "candidate-over-immutable-pcce067-evidence-cut",
+    "independent_review": "pending-not-claimed",
+    "merged": false,
+    "metric_recomputation_requirement": "recompute and compare; do not rewrite results if PCCE-067 input bytes are unchanged",
+    "refresh_required_after_pcce067_admission": true,
+    "refresh_scope": [
+      "outer parent/commit/tree identities",
+      "PCCE-067 admission or review disposition",
+      "PCCE-068 candidate commit/tree and final output byte identities"
+    ],
+    "self_approval": false,
+    "task_completion_claimed": false
+  },
+  "schema": "lift_coding.proof-carrying-context-engine.benchmark-qualification@1",
+  "task_authority": {
+    "live_quack_duckdb_task_cid": "baguqeera6b73j6caxykusogroe3y2xnduagvyng5v4nguahom5rtgux3m2tq",
+    "live_revision": 1,
+    "static_board_task_cid": "baguqeeracljqjzu7eqymeh4v5z6kuqchktl4arwfnyes2lq4rjt3frbfrpka",
+    "task_id": "PCCE-068"
+  },
+  "threshold_summary": {
+    "measured_failure_names": [],
+    "primary_measured_fail": 0,
+    "primary_pass": 0,
+    "primary_unavailable_no_go": 4,
+    "structural_pass_names": [
+      "simulated_success_accepted_count"
+    ],
+    "structural_pass_scope": "proven non-simulated provenance implies simulated-success acceptance count zero; no provider quality is inferred",
+    "unavailable_primary_names": [
+      "accepted_patch_noninferiority",
+      "context_reduction",
+      "routine_frontier_escalation",
+      "total_cost_reduction"
+    ],
+    "unavailable_zero_tolerance_names": [
+      "controlled_selected_test_false_negative_count",
+      "critical_mutant_accepted_count",
+      "critical_regression_accepted_count",
+      "negative_review_autonomous_accept_count",
+      "stale_capsule_accepted_count",
+      "stale_proof_accepted_count"
+    ],
+    "zero_tolerance_measured_fail": 0,
+    "zero_tolerance_pass": 1,
+    "zero_tolerance_unavailable_no_go": 6
+  },
+  "waivers": [],
+  "zero_tolerance": {
+    "controlled_selected_test_false_negative_count": {
+      "applicable_configurations": [
+        "C",
+        "D"
+      ],
+      "applicable_result_count": 42,
+      "decision": "unavailable-no-go",
+      "derived_structural_zero_count": 0,
+      "missing_result_count": 42,
+      "observed": null,
+      "observed_result_count": 0,
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing",
+      "required": 0
+    },
+    "critical_mutant_accepted_count": {
+      "applicable_configurations": [
+        "D"
+      ],
+      "applicable_result_count": 21,
+      "decision": "unavailable-no-go",
+      "derived_structural_zero_count": 0,
+      "missing_result_count": 21,
+      "observed": null,
+      "observed_result_count": 0,
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing",
+      "required": 0
+    },
+    "critical_regression_accepted_count": {
+      "applicable_configurations": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "applicable_result_count": 84,
+      "decision": "unavailable-no-go",
+      "derived_structural_zero_count": 0,
+      "missing_result_count": 84,
+      "observed": null,
+      "observed_result_count": 0,
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing",
+      "required": 0
+    },
+    "negative_review_autonomous_accept_count": {
+      "applicable_configurations": [
+        "D"
+      ],
+      "applicable_result_count": 21,
+      "decision": "unavailable-no-go",
+      "derived_structural_zero_count": 0,
+      "missing_result_count": 21,
+      "observed": null,
+      "observed_result_count": 0,
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing",
+      "required": 0
+    },
+    "simulated_success_accepted_count": {
+      "applicable_configurations": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "applicable_result_count": 84,
+      "decision": "pass",
+      "derived_structural_zero_count": 84,
+      "missing_result_count": 0,
+      "observed": 0,
+      "observed_result_count": 0,
+      "reason": "exact-zero-tolerance-invariant-satisfied",
+      "required": 0
+    },
+    "stale_capsule_accepted_count": {
+      "applicable_configurations": [
+        "C",
+        "D"
+      ],
+      "applicable_result_count": 42,
+      "decision": "unavailable-no-go",
+      "derived_structural_zero_count": 0,
+      "missing_result_count": 42,
+      "observed": null,
+      "observed_result_count": 0,
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing",
+      "required": 0
+    },
+    "stale_proof_accepted_count": {
+      "applicable_configurations": [
+        "C",
+        "D"
+      ],
+      "applicable_result_count": 42,
+      "decision": "unavailable-no-go",
+      "derived_structural_zero_count": 0,
+      "missing_result_count": 42,
+      "observed": null,
+      "observed_result_count": 0,
+      "reason": "one-or-more-applicable-zero-tolerance-observations-missing",
+      "required": 0
+    }
+  }
+}
