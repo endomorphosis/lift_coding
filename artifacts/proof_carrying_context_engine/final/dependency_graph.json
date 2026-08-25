@@ -1,0 +1,2459 @@
+{
+  "authority": {
+    "current_pre_completion": {
+      "authoritative": true,
+      "completed_count": 66,
+      "dependency_count": 121,
+      "event_cursor": 368,
+      "formal_plan_id": "baguqeerawecx64quxjz7b2rsuiduvbl3pad6vievexeojsttdcb6bvyzhrja",
+      "pcce083": {
+        "revision": 1,
+        "status": "todo",
+        "task_cid": "baguqeerawci4ok5xn45k3pnf5ybbhs5dffhuufwzbvrlb2kxlgp3n372qzfq"
+      },
+      "plan_root_cid": "baguqeerawecx64quxjz7b2rsuiduvbl3pad6vievexeojsttdcb6bvyzhrja",
+      "projection_cid": "baguqeerae4dip44ogmmitwn5iocj2wkina7736sm7ode2u6j7lhkltnjz4ia",
+      "revision": 368,
+      "source_identity": "baguqeeraf3hbxty3fqzb2ku55eyujpvxpgyhplmrbeipoohxdpks3gqb7csa",
+      "task_count": 67,
+      "todo_count": 1,
+      "transport": "quack:127.0.0.1:41347"
+    },
+    "projected_post_completion": {
+      "authoritative": false,
+      "expected_completed": 67,
+      "expected_todo": 0,
+      "projection_cid": null,
+      "revision": null,
+      "status": "projected-after-reviewed-admission-and-quack-completion"
+    },
+    "static_board": {
+      "authoritative_for_live_status": false,
+      "completed": 1,
+      "path": "artifacts/proof_carrying_context_engine/control/task_board.json",
+      "raw_cid": "bafkreih37r3uhf4m5zekixb5jzjwdt3s3lqil7zzhsumvuhvpuajkijcwi",
+      "sha256": "fbfc7743978cee48a45c3d4e5361cf72dae085ff393ca8cad0f57d00952122b2",
+      "size": 371001,
+      "todo": 66
+    }
+  },
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "canonical_receipt_paths": [
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-001.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-002.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-003.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-004.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-005.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-007.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-008.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-009.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-017.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-018.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-012.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-013.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-019.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-014.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-016.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-015.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-011.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-020.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-022.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-023.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-021.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-024.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-025.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-030.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-040.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-043.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-031.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-032.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-033.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-034.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-042.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-035.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-041.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-044.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-050.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-051.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-055.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-052.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-053.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-054.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-060.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-070.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-061.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-062.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-065.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-066.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-072.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-073.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-074.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-076.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-083.json"
+  ],
+  "completeness": {
+    "canonical_receipt_references": 67,
+    "dependency_edges": 121,
+    "existing_predecessor_receipts_byte_bound": 66,
+    "missing_predecessor_receipts": 0,
+    "retained_noncanonical_attempt_receipts": 3,
+    "self_output_receipt_references": 1,
+    "task_nodes": 67,
+    "unique_canonical_receipt_paths": true,
+    "unique_live_task_cids": true,
+    "unique_task_ids": true
+  },
+  "evidence_cut": {
+    "canonical_path_list_identity": {
+      "raw_cid": "bafkreid6k2qf2bpoqcziy3akloww6ov332kr4wbjepzh6g3mvcreujlqae",
+      "sha256": "7e56a05d05ee80b28c6c0a5bad6f3abbde951e582923f27f1b6ca8a24a257001",
+      "size": 4357
+    },
+    "existing_receipt_descriptor_set_identity": {
+      "raw_cid": "bafkreifarmpn3f37lwxtdn4mgudvulzylusbz4272zulm2vxqy2xa4rzyq",
+      "sha256": "a08b1edd977f5daf31b78c35075a2f385d241cf35fd668b66ab78635707239c4",
+      "size": 15456
+    },
+    "gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "tree": "3a57e33053d6007cb99cbe265c6608954d9cea7c"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "8d629ce7f2ee5a6109dc92e84b47664ae896ddc6",
+        "tree": "6f40999059d861ef5bdde24f5d4228a6e84b2e30"
+      },
+      "external/ipfs_datasets": {
+        "commit": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+        "tree": "839980ccaba593b146213928bc5e8bf95e7a1fd9"
+      },
+      "external/ipfs_kit": {
+        "commit": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+        "tree": "b4413c1ad92b85df2e110c0185d2449e56fc6497"
+      }
+    },
+    "live_task_list_identity": {
+      "raw_cid": "bafkreicmvriy7tycpgolxz3z25zvxq7lzreiuurl4vk4wpu47cpexnzt4m",
+      "sha256": "4cac518fcf02799cbbe779d7735bc3ebcc488a522be555cb3e9cf89e4bb733e3",
+      "size": 20271
+    },
+    "repository_commit": "013fb36c824013804ce00d055b03241fbcdef077",
+    "repository_tree": "1bbf772069662eb8a8339ff242794039c08f5011",
+    "static_dependency_graph": {
+      "path": "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
+      "raw_cid": "bafkreibbitvh5hh62atfaadf7y5leczc6v3xq254ktney4bwf2jbhqlmf4",
+      "sha256": "2144ea7e9cfed026500065fe3ab20b22f577786bbc54da4c70362e9213c16c2f",
+      "size": 10015
+    }
+  },
+  "nodes": [
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+        "raw_cid": "bafkreift6uonog5g2mmaibdungvahimyebnt46tv4ydzfhahocnen6gt4q",
+        "sha256": "b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+        "size": 4373,
+        "task_id": "PCCE-000"
+      },
+      "dependencies": [],
+      "dependency_cids": [],
+      "goal": {
+        "live_goal_cid": "baguqeera2bmg5gfxggr6o65zgrx7yp5u43vcyzlj4x2u2nmqcpjrar4eg2mq",
+        "static_goal_id": "PCCE-G000"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerapp6daupvxfrgb4umkbe72mfuw2c3a4wtz63jk2znp34fw6enpwqa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerav7hwcsmuhp7ijqldclbhvdicjm2khfvzds3wyxkh4plvn6zwewjq",
+        "canonical_task_key": "task/v1/afcf6149943bfe84c16312c27a8d024b34a396b91cb76c5d47e3d756fb362593"
+      },
+      "task_id": "PCCE-000"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-001.json",
+        "raw_cid": "bafkreid7hilqwgqelhcc2se5spp4buswz2jsyyen2uuhqxbhlrisreves4",
+        "sha256": "7f3a170b1a0459c42d489d93dfc0d256ce932c608dd528785c275c512892a497",
+        "size": 1106,
+        "task_id": "PCCE-001"
+      },
+      "dependencies": [
+        "PCCE-000"
+      ],
+      "dependency_cids": [
+        "baguqeerapp6daupvxfrgb4umkbe72mfuw2c3a4wtz63jk2znp34fw6enpwqa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraedcilfrz5hrtgj7wugjf5fdurprl23barzhkq2gn3qd37c25dipq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerasqk6k57o5o4i5rajyfcitczs7j4svpdjmo2qijrqktygwfslvzna",
+        "canonical_task_key": "task/v1/9415e577eeebb88ec409c144898b32fa792abc6963b504263054f06b164bae5a"
+      },
+      "task_id": "PCCE-001"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-002.json",
+        "raw_cid": "bafkreia2yyxr7nnj3qracmsuft352nf2jkixo6sqrmmvjzt6hoaldtl7u4",
+        "sha256": "1ac62f1fb5a9dc220132542cf7dd34ba4a91777a508b1954e67e3b80b1cd7fa7",
+        "size": 1100,
+        "task_id": "PCCE-002"
+      },
+      "dependencies": [
+        "PCCE-000"
+      ],
+      "dependency_cids": [
+        "baguqeerapp6daupvxfrgb4umkbe72mfuw2c3a4wtz63jk2znp34fw6enpwqa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeramkzbtxxqeiqgfmyjts5ylzajtqovim4vnlrpdwzfl2klqcsvan3q",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraebc5gjbjdvcyda3ok3apa6t77kpowwbhiazcmthbfvwizo3gxvuq",
+        "canonical_task_key": "task/v1/2045d324291d4581836e56c0f07a7ffa9eeb58274032264ce12d6c8cbb66bd69"
+      },
+      "task_id": "PCCE-002"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-003.json",
+        "raw_cid": "bafkreid5ds3oiret5r3gflarmlupytnspnaplieqjhbo7ilrg5zzzkscra",
+        "sha256": "7d1cb6e44493ec7662ac1162e8fc4db27b40f5a09049c2efa17137739caa4288",
+        "size": 1108,
+        "task_id": "PCCE-003"
+      },
+      "dependencies": [
+        "PCCE-000"
+      ],
+      "dependency_cids": [
+        "baguqeerapp6daupvxfrgb4umkbe72mfuw2c3a4wtz63jk2znp34fw6enpwqa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeragzkpcba6r7ecy2wskzdzzhgoasgezll3zniqi4ag6hsajf3nsjda",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerakon4ykyeoqeowidcaz75wv6lmusfksscugrdnex3ii3k6gx3vyba",
+        "canonical_task_key": "task/v1/539bcc2b047408eb2062067fdb57cb6524554a42a1a23692fb4236af1afbae02"
+      },
+      "task_id": "PCCE-003"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-004.json",
+        "raw_cid": "bafkreibboglldjrf4raiv5i65pbtbovrdpw662vwy57ku4nuasngvfmoby",
+        "sha256": "217196b1a625e4408af51eebc330bab11bedef6ab6c77eaa71b4049a6a958e0e",
+        "size": 1105,
+        "task_id": "PCCE-004"
+      },
+      "dependencies": [
+        "PCCE-000"
+      ],
+      "dependency_cids": [
+        "baguqeerapp6daupvxfrgb4umkbe72mfuw2c3a4wtz63jk2znp34fw6enpwqa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeralxye4qdnzwhk5avplbv5mbj7rqnaecez2kw3b7fyzwr4nz2uwpwa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera7tbyyj67czlvai7wlvtgpagfhnrpgjtawlsq2jfy7zjjfmodntlq",
+        "canonical_task_key": "task/v1/fcc38c27df16575023f65d666780c53b62f32660b2e50d24b8fe5292b1c36cd7"
+      },
+      "task_id": "PCCE-004"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-005.json",
+        "raw_cid": "bafkreif3texasox3gjikqdlk7ikx7mtmgdvy6cj5w3nkbeyqazm5fcovqa",
+        "sha256": "bb992e093afb3250a80d6afa157fb26c30eb8f093db6daa093100659d289d580",
+        "size": 1937,
+        "task_id": "PCCE-005"
+      },
+      "dependencies": [
+        "PCCE-001",
+        "PCCE-003",
+        "PCCE-004",
+        "PCCE-002"
+      ],
+      "dependency_cids": [
+        "baguqeeraedcilfrz5hrtgj7wugjf5fdurprl23barzhkq2gn3qd37c25dipq",
+        "baguqeeragzkpcba6r7ecy2wskzdzzhgoasgezll3zniqi4ag6hsajf3nsjda",
+        "baguqeeralxye4qdnzwhk5avplbv5mbj7rqnaecez2kw3b7fyzwr4nz2uwpwa",
+        "baguqeeramkzbtxxqeiqgfmyjts5ylzajtqovim4vnlrpdwzfl2klqcsvan3q"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerarlz5luq3kpaenysvidxbdj2277qs7wzkvdu5jwzlraqyt3h2sflq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeradizwusolvksomecetxj3fvw5ooimaduxhu4uohpf3gm4duvtl54q",
+        "canonical_task_key": "task/v1/1a336a49cbaaa4e610449dd3b2d6dd7390c00e973d39471de5d999c1d2b35f79"
+      },
+      "task_id": "PCCE-005"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
+        "raw_cid": "bafkreial4mztbbvclu3nkxivkxlv2dwvnmouvikz3ufzpxiksoqhddno3q",
+        "sha256": "0be3333086a25d36d55d1555d75d0ed56b1d4aa159dd0b97dd0a93a0718daedc",
+        "size": 4065,
+        "task_id": "PCCE-006"
+      },
+      "dependencies": [
+        "PCCE-005"
+      ],
+      "dependency_cids": [
+        "baguqeerarlz5luq3kpaenysvidxbdj2277qs7wzkvdu5jwzlraqyt3h2sflq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerakh34sjpxcs7yifr7jk22hlzo3lwwg6o2jssqe5oqlz5heg63mi4a",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerac75kqoabfulypuitkbknzk62m2nun2tybqve4nlaoonkcddvljgq",
+        "canonical_task_key": "task/v1/17faa838012d1787d1135054dcabda669b46ea780c2a4e3560739aa10c755a4d"
+      },
+      "task_id": "PCCE-006"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-007.json",
+        "raw_cid": "bafkreigwsgp2yarrs7wfdio6waud5222zzunltneqirv5c5fjhwpvgdhji",
+        "sha256": "d6919fac023197ec51a1deb0283eeb5ace68d5cda482235e8ba549ecfa98674a",
+        "size": 1392,
+        "task_id": "PCCE-007"
+      },
+      "dependencies": [
+        "PCCE-006"
+      ],
+      "dependency_cids": [
+        "baguqeerakh34sjpxcs7yifr7jk22hlzo3lwwg6o2jssqe5oqlz5heg63mi4a"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraqzvxwp4acn6rsftfrvelkvre7nkxkgyjtvibuomh6cyxlj2cawrq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraphqffh654bdbaxtylq3trw7pe7gacifouee3oxhqwd6puv6fevha",
+        "canonical_task_key": "task/v1/79e0529fdde046105e785c3738dbef27cc0120aea109b75cf0b0fcfa57c5254e"
+      },
+      "task_id": "PCCE-007"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-008.json",
+        "raw_cid": "bafkreid7fjolichp2vfawrpbpivszaohwbmr7nnxnre3wzj33nzxwq6iea",
+        "sha256": "7f2a5cb408efd54a0b45e17a2b2c81c7b0591fb5b76c49bb653bdb737b43c820",
+        "size": 1177,
+        "task_id": "PCCE-008"
+      },
+      "dependencies": [
+        "PCCE-007"
+      ],
+      "dependency_cids": [
+        "baguqeeraqzvxwp4acn6rsftfrvelkvre7nkxkgyjtvibuomh6cyxlj2cawrq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera4ime5wzfkfitm5edwvfm5mgpitvwhaml6zgpfe23t2rradp3b6pa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeragchk5ta2p754kbihzr5iuzmpiw2dvy6xzgyqf6oblqsb66yqyxaa",
+        "canonical_task_key": "task/v1/308eaecc1a7ffbc50507cc7a8a658f45b43ae3d7c9b102f9c15c241f7b10c5c0"
+      },
+      "task_id": "PCCE-008"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-009.json",
+        "raw_cid": "bafkreiag3ecitrg2javakw35i3s2m45rljhgrh4qiubgfj3siw2ekf4kqy",
+        "sha256": "06d90489c4da482a055b7d46e5a673b15a4e689f90450262a77245b445178a86",
+        "size": 1165,
+        "task_id": "PCCE-009"
+      },
+      "dependencies": [
+        "PCCE-007"
+      ],
+      "dependency_cids": [
+        "baguqeeraqzvxwp4acn6rsftfrvelkvre7nkxkgyjtvibuomh6cyxlj2cawrq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera4io44r6fauprz6jt7555imxeeq3b6v7q36gxchrebgrv5xzgysla",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerafdstzsjjc7f7ibqqzvb5bzqayfe5wfen2h7fli4ovb5lcrcfcppq",
+        "canonical_task_key": "task/v1/28e53cc92917cbf40610cd43d0e600c149db148dd1fe55a38ea87ab1444513df"
+      },
+      "task_id": "PCCE-009"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
+        "raw_cid": "bafkreibkdape2xqd4qaryen7ffmtlc34wk7evmvbnj7gkyxvnqeowdcmfu",
+        "sha256": "2a181e4d5e03e4011c11bf2959358b7cb2be4ab2a16a7e6562f56c08eb0c4c2d",
+        "size": 1240,
+        "task_id": "PCCE-010"
+      },
+      "dependencies": [
+        "PCCE-007"
+      ],
+      "dependency_cids": [
+        "baguqeeraqzvxwp4acn6rsftfrvelkvre7nkxkgyjtvibuomh6cyxlj2cawrq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeravswkmio5ig623b32rzxaxby7torzqedlftocujcq6hwv2i2pikaq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeradkpozzij72xtpawkpg6jk5y3k7iejinfz5axd3j3yjuezi4tky5q",
+        "canonical_task_key": "task/v1/1a9eece509feaf3782ca79bc95771b57d044a1a5cf4171ed3bc2684ca393563b"
+      },
+      "task_id": "PCCE-010"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-017.json",
+        "raw_cid": "bafkreiae3q35zwm2s7gvu4mnlpnfbdxz6coi6afpsp5m7a5xyog5ornpnq",
+        "sha256": "04dc37dcd99a97cd5a718d5bda508ef9f09c8f00af93facf83b7c38dd745af6c",
+        "size": 1295,
+        "task_id": "PCCE-017"
+      },
+      "dependencies": [
+        "PCCE-007"
+      ],
+      "dependency_cids": [
+        "baguqeeraqzvxwp4acn6rsftfrvelkvre7nkxkgyjtvibuomh6cyxlj2cawrq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraokvb46aqhshravd35nbk6jszunsmvjvvavxizpc3hvrvw2thcvna",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera6qpjgr5nqwbrdcquoeyguhflpja3apcwv3m7qzhltne27ddcqvwq",
+        "canonical_task_key": "task/v1/f41e9347ad8583118a1471306a1cab7a41b03c56aed9f864eb9b49af8c62856d"
+      },
+      "task_id": "PCCE-017"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-018.json",
+        "raw_cid": "bafkreibkbgrb5yuqkdj2mjs2pmpf2zrfx73o6dwfbljrq7eb2fovwupw54",
+        "sha256": "2a09a21ee29050d3a6265a7b1e5d6625bff6ef0ec50ad3187c81d15d5b51f6ef",
+        "size": 1399,
+        "task_id": "PCCE-018"
+      },
+      "dependencies": [
+        "PCCE-007"
+      ],
+      "dependency_cids": [
+        "baguqeeraqzvxwp4acn6rsftfrvelkvre7nkxkgyjtvibuomh6cyxlj2cawrq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraygilbdkyufitbezjx5nvoiazpwwk7zhhuz6py5rk67txnltsuh3q",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerac3omz66hh5svlgm6xkhk3hu63o6yxtbw4rhb7ivapw7g4wwoo6fa",
+        "canonical_task_key": "task/v1/16dcccfbc73f6555999eba8ead9e9edbbd8bcc36e44e1fa2a07dbe6e5ace778a"
+      },
+      "task_id": "PCCE-018"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-012.json",
+        "raw_cid": "bafkreieghhueijajxstmrqagpw6kcspcisrpoj2vy3wrari72sa7ouakhe",
+        "sha256": "8639e8442409bca6c8c0067dbca149e244a2f72755c6ed10451fd481f7500a39",
+        "size": 1633,
+        "task_id": "PCCE-012"
+      },
+      "dependencies": [
+        "PCCE-008",
+        "PCCE-010"
+      ],
+      "dependency_cids": [
+        "baguqeera4ime5wzfkfitm5edwvfm5mgpitvwhaml6zgpfe23t2rradp3b6pa",
+        "baguqeeravswkmio5ig623b32rzxaxby7torzqedlftocujcq6hwv2i2pikaq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeratlobewbrtwn6ez62s37rxwooaamxki7hc273rvksve4hw6jla7na",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera5pzcoybdqrofkuq75navfm2sdhux4j3fyxwjhxpr5xghmhdv4dcq",
+        "canonical_task_key": "task/v1/ebf2276023845c55521feb4152b35219e97e2765c5ec93ddf1edcc761c75e0c5"
+      },
+      "task_id": "PCCE-012"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-013.json",
+        "raw_cid": "bafkreibbb5shnkh66pzwxfnr6ej3ibgvhfb5ajsigcbyebdts7sy2vcoum",
+        "sha256": "210f6476a8fef3f36b95b1f113b404d53943d02648308382047397e58d544ea3",
+        "size": 1588,
+        "task_id": "PCCE-013"
+      },
+      "dependencies": [
+        "PCCE-009",
+        "PCCE-017",
+        "PCCE-010"
+      ],
+      "dependency_cids": [
+        "baguqeera4io44r6fauprz6jt7555imxeeq3b6v7q36gxchrebgrv5xzgysla",
+        "baguqeeraokvb46aqhshravd35nbk6jszunsmvjvvavxizpc3hvrvw2thcvna",
+        "baguqeeravswkmio5ig623b32rzxaxby7torzqedlftocujcq6hwv2i2pikaq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerapdjuw6s53vty5efbahqdvn5s7omctcgjk4zz7nqgvmat7j2o3urq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeranswphctvsqcwkoigiio5qzvx26erjs3y3eo7gdj3u27skqxeu7ia",
+        "canonical_task_key": "task/v1/6cacf38a759405653906421dd866b7d78914cb78d91df30d3ba6bf2542e4a7d0"
+      },
+      "task_id": "PCCE-013"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-019.json",
+        "raw_cid": "bafkreifcz6tls5e34ob6bwr57fkac4mz3klsvd6najivb4affuuu37fzhe",
+        "sha256": "a2cfa6b9749be383e0da3df954017199da972a8fcd025150f0052d294dfcb939",
+        "size": 1310,
+        "task_id": "PCCE-019"
+      },
+      "dependencies": [
+        "PCCE-009",
+        "PCCE-018"
+      ],
+      "dependency_cids": [
+        "baguqeera4io44r6fauprz6jt7555imxeeq3b6v7q36gxchrebgrv5xzgysla",
+        "baguqeeraygilbdkyufitbezjx5nvoiazpwwk7zhhuz6py5rk67txnltsuh3q"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera3qvsaiqxuomwtmpmt2shv3tsldnqvmxvtsc7yxpujrh2apaf4lsa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeranbjpbxomytyb3mpfmvasvcopohtydf35htwd5wfjbs7y7bizzb6q",
+        "canonical_task_key": "task/v1/6852f0ddccc4f01db1e565412a89cf71e781977d3cec3ed8a90cbf8f8519c87d"
+      },
+      "task_id": "PCCE-019"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-014.json",
+        "raw_cid": "bafkreicjx35jnd5uccbzslmt756jzg2bcpudbwk6fz4lsi4igzjhssygei",
+        "sha256": "49befa968fb41083992d93ff7c9c9b4113e830d95e2e78b923883652794b0622",
+        "size": 1584,
+        "task_id": "PCCE-014"
+      },
+      "dependencies": [
+        "PCCE-017",
+        "PCCE-013"
+      ],
+      "dependency_cids": [
+        "baguqeeraokvb46aqhshravd35nbk6jszunsmvjvvavxizpc3hvrvw2thcvna",
+        "baguqeerapdjuw6s53vty5efbahqdvn5s7omctcgjk4zz7nqgvmat7j2o3urq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerajgtsvposnhtnt3h5ransjpns5vvhkqllo2qiuobol3sw5o4m27qq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerasbmy2fxn4ohmo3aelvlyjp5xvkhgenhhaibzp5lslfwsfipv4rsq",
+        "canonical_task_key": "task/v1/90598d16ede38ec76c045d5784bfb7aa8e6234e7020397f572596d22a1f5e465"
+      },
+      "task_id": "PCCE-014"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-016.json",
+        "raw_cid": "bafkreibc37dc52h46a7pv4daz32gvq46z4pvbnafs4bl463taklf3ctazy",
+        "sha256": "22dfc62ee8fcf03efaf060cef46ac39ecf1f50b4059702be7b7302965d8a60ce",
+        "size": 1208,
+        "task_id": "PCCE-016"
+      },
+      "dependencies": [
+        "PCCE-013",
+        "PCCE-010"
+      ],
+      "dependency_cids": [
+        "baguqeerapdjuw6s53vty5efbahqdvn5s7omctcgjk4zz7nqgvmat7j2o3urq",
+        "baguqeeravswkmio5ig623b32rzxaxby7torzqedlftocujcq6hwv2i2pikaq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerawruivwuhlryjeken6apeokcwkzhjl2dyjltt5vma3g64nts4yasa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeramqjwsezgavmbtupvco6cdzojbsj756fxxghca6thzlaqxwjglisq",
+        "canonical_task_key": "task/v1/6413691326055819d1f513bc21e5c90c93fef8b7b98e207a67cac10bd9265a25"
+      },
+      "task_id": "PCCE-016"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-015.json",
+        "raw_cid": "bafkreif73qstw4buv23lhblnz4oky7jrve2qxushyj3j4sa47qx4ompjl4",
+        "sha256": "bfdc253b7034aeb6b3856dcf1cac7d31a9350bd247c2769e481cfc2fc731e95f",
+        "size": 1727,
+        "task_id": "PCCE-015"
+      },
+      "dependencies": [
+        "PCCE-019",
+        "PCCE-014",
+        "PCCE-010",
+        "PCCE-018"
+      ],
+      "dependency_cids": [
+        "baguqeera3qvsaiqxuomwtmpmt2shv3tsldnqvmxvtsc7yxpujrh2apaf4lsa",
+        "baguqeerajgtsvposnhtnt3h5ransjpns5vvhkqllo2qiuobol3sw5o4m27qq",
+        "baguqeeravswkmio5ig623b32rzxaxby7torzqedlftocujcq6hwv2i2pikaq",
+        "baguqeeraygilbdkyufitbezjx5nvoiazpwwk7zhhuz6py5rk67txnltsuh3q"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeradcycnws5dhar6obga72cosgfk4ex4lutdtrtvfmrulxv2w6xc2ha",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeravnhidhdptmldm4oocu64bav7kcb3afe3nhprd4qqegyhc4k2jylq",
+        "canonical_task_key": "task/v1/ab4e819c6f9b163671ce153dc082bf5083b0149b69df11f21021b071715a4e17"
+      },
+      "task_id": "PCCE-015"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-011.json",
+        "raw_cid": "bafkreiectfsizphemewo5pa7w2junrtuacunmcrpcvrwgu3apvujxanbby",
+        "sha256": "8299648cbce4612ceebc1fb69346c67400a8d60a2f15636353607d689b81a10e",
+        "size": 2643,
+        "task_id": "PCCE-011"
+      },
+      "dependencies": [
+        "PCCE-019",
+        "PCCE-015",
+        "PCCE-014",
+        "PCCE-017",
+        "PCCE-013",
+        "PCCE-012",
+        "PCCE-016",
+        "PCCE-018"
+      ],
+      "dependency_cids": [
+        "baguqeera3qvsaiqxuomwtmpmt2shv3tsldnqvmxvtsc7yxpujrh2apaf4lsa",
+        "baguqeeradcycnws5dhar6obga72cosgfk4ex4lutdtrtvfmrulxv2w6xc2ha",
+        "baguqeerajgtsvposnhtnt3h5ransjpns5vvhkqllo2qiuobol3sw5o4m27qq",
+        "baguqeeraokvb46aqhshravd35nbk6jszunsmvjvvavxizpc3hvrvw2thcvna",
+        "baguqeerapdjuw6s53vty5efbahqdvn5s7omctcgjk4zz7nqgvmat7j2o3urq",
+        "baguqeeratlobewbrtwn6ez62s37rxwooaamxki7hc273rvksve4hw6jla7na",
+        "baguqeerawruivwuhlryjeken6apeokcwkzhjl2dyjltt5vma3g64nts4yasa",
+        "baguqeeraygilbdkyufitbezjx5nvoiazpwwk7zhhuz6py5rk67txnltsuh3q"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeranfwczidpuaiocgi7dvluf6v7am5wnlhyrydxoagppjgyzm5drlwq",
+        "static_goal_id": "PCCE-G100"
+      },
+      "live_revision": 2,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerayqad7spgzxw7kuyzhlloqwnaeijuvh6byxzbwhb25xb7h7fknlcq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerabn5u2iqjqygfoaojmyp55rxcus4ad5aqftnoqf6r6grxt3wakrqq",
+        "canonical_task_key": "task/v1/0b7b4d2209860c5701c9661fdec6e2a4b801f4102cdae817d1f1a379eec05461"
+      },
+      "task_id": "PCCE-011"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-020.json",
+        "raw_cid": "bafkreifmkcx4ofynhyvlr7dqiqpugq2hq5usxju6pgf24l7gogngcqriye",
+        "sha256": "ac50afc7170d3e2ab8fc70441f43434787692ba69e798bae2fe6719a614228c1",
+        "size": 2123,
+        "task_id": "PCCE-020"
+      },
+      "dependencies": [
+        "PCCE-011"
+      ],
+      "dependency_cids": [
+        "baguqeerayqad7spgzxw7kuyzhlloqwnaeijuvh6byxzbwhb25xb7h7fknlcq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerayzwyr62np35b4pg3qysrma42muabpi5tyxjh3verrmmmwdev7ofq",
+        "static_goal_id": "PCCE-G200"
+      },
+      "live_revision": 10,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerauwigonreg5feplblky4yqsok7isknan6r4fowdtuv2iwtsbhfcra",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerax6hdynd46wcwperweckwz7vsrhixl4iptv4xe2cweqswmf4qggaa",
+        "canonical_task_key": "task/v1/bf8e3c347cf58567923620956cfeb289d175f10f9d7972685624256617903180"
+      },
+      "task_id": "PCCE-020"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-022.json",
+        "raw_cid": "bafkreigyecx6gurlhhdv2jsy5zn25ugrwyktmcy33jnjzr3tmtqawgkezy",
+        "sha256": "d820afe3522b39c75d2658ee5baed0d1b615360b1bda5a9cc77364e00b1944ce",
+        "size": 2017,
+        "task_id": "PCCE-022"
+      },
+      "dependencies": [
+        "PCCE-011"
+      ],
+      "dependency_cids": [
+        "baguqeerayqad7spgzxw7kuyzhlloqwnaeijuvh6byxzbwhb25xb7h7fknlcq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerayzwyr62np35b4pg3qysrma42muabpi5tyxjh3verrmmmwdev7ofq",
+        "static_goal_id": "PCCE-G200"
+      },
+      "live_revision": 12,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeralrhcgl5kx43u2r4d5vmgxqnixkp5bfpcuhl3amuoikvxcnibukrq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerativ7cgumzbbx3eahgxw6xieigkizpnwz7j7mj4zklvakylty6knq",
+        "canonical_task_key": "task/v1/9a2bf11a8cc8437d900735edeba088329197b6d9fa7ec4f32a5d40ac2e78f29b"
+      },
+      "task_id": "PCCE-022"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-023.json",
+        "raw_cid": "bafkreib6oa74aqvcyoil6sg7tgvcwezjpygc56biaqma4non6i3gfky67q",
+        "sha256": "3e703fc042a2c390bf48df99aa2b13297e0c2ef82804180e35cdf23662ab1efc",
+        "size": 2824,
+        "task_id": "PCCE-023"
+      },
+      "dependencies": [
+        "PCCE-011"
+      ],
+      "dependency_cids": [
+        "baguqeerayqad7spgzxw7kuyzhlloqwnaeijuvh6byxzbwhb25xb7h7fknlcq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerayzwyr62np35b4pg3qysrma42muabpi5tyxjh3verrmmmwdev7ofq",
+        "static_goal_id": "PCCE-G200"
+      },
+      "live_revision": 14,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeralnphl5l5mqdk4veuckri7feg5uszjjtoksh3jwchdt6ufztja3hq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerayl4ul3ax53st3wpefx3poqsbuozq5o54ilz37fppzcr62frxztsq",
+        "canonical_task_key": "task/v1/c2f945ec17eee53dd9e42df6f74241a3b30ebbbc42f3bf95efc8a3ed1637cce5"
+      },
+      "task_id": "PCCE-023"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-021.json",
+        "raw_cid": "bafkreihfjj7v6s3viwaw3jifthgcjqxfn5hpcaxw7z22ngm4rzcizw5gxq",
+        "sha256": "e54a7f5f4b7545816da50599cc24c2e56f4ef102f6fe75a6999c8e448cdba6bc",
+        "size": 2298,
+        "task_id": "PCCE-021"
+      },
+      "dependencies": [
+        "PCCE-023",
+        "PCCE-022",
+        "PCCE-020"
+      ],
+      "dependency_cids": [
+        "baguqeeralnphl5l5mqdk4veuckri7feg5uszjjtoksh3jwchdt6ufztja3hq",
+        "baguqeeralrhcgl5kx43u2r4d5vmgxqnixkp5bfpcuhl3amuoikvxcnibukrq",
+        "baguqeerauwigonreg5feplblky4yqsok7isknan6r4fowdtuv2iwtsbhfcra"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerayzwyr62np35b4pg3qysrma42muabpi5tyxjh3verrmmmwdev7ofq",
+        "static_goal_id": "PCCE-G200"
+      },
+      "live_revision": 41,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeravzjzjxx32jrnny4mxcsfedmw2m353zwpidxnpbg2szdwmeg6qexa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerawmx47kididcnrohu4tspwxvar42qdqshrwbldbb2e3zmaeqljdkq",
+        "canonical_task_key": "task/v1/b32fcfa90340c4d8b8f4e4e4fb5ea08f3501c2478d82b1843a26f2c0120b48d5"
+      },
+      "task_id": "PCCE-021"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-024.json",
+        "raw_cid": "bafkreihwkt36hdadxbcsfpgsde47bjf5hnl3etekx734sdi5oxbif2x3qe",
+        "sha256": "f654f7e38c03b84522bcd21939f0a4bd3b57b24c8abff7c90d1d75c282eafb81",
+        "size": 2834,
+        "task_id": "PCCE-024"
+      },
+      "dependencies": [
+        "PCCE-021"
+      ],
+      "dependency_cids": [
+        "baguqeeravzjzjxx32jrnny4mxcsfedmw2m353zwpidxnpbg2szdwmeg6qexa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerayzwyr62np35b4pg3qysrma42muabpi5tyxjh3verrmmmwdev7ofq",
+        "static_goal_id": "PCCE-G200"
+      },
+      "live_revision": 8,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerasebpaimycx3jrfxhotsnhj6qefo36r5ag2zoy5tn7fb4vy3cluaa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerafniamvg42ehfcwwbjt62kq6dpba44g3evhj4ockx5n3ueaqwkxrq",
+        "canonical_task_key": "task/v1/2b500654dcd10e515ac14cfda543c37841ce1b64a9d3c70957eb7742021655e3"
+      },
+      "task_id": "PCCE-024"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-025.json",
+        "raw_cid": "bafkreiggmaopcssvuudshvl5a4ozhbq5cqhuktrdhzcfetydbe75gxut5q",
+        "sha256": "c6601cf14a55a50723d57d071d93861d140f454e233e44524f03093fd35e93ec",
+        "size": 1708,
+        "task_id": "PCCE-025"
+      },
+      "dependencies": [
+        "PCCE-023",
+        "PCCE-022",
+        "PCCE-024",
+        "PCCE-020",
+        "PCCE-021"
+      ],
+      "dependency_cids": [
+        "baguqeeralnphl5l5mqdk4veuckri7feg5uszjjtoksh3jwchdt6ufztja3hq",
+        "baguqeeralrhcgl5kx43u2r4d5vmgxqnixkp5bfpcuhl3amuoikvxcnibukrq",
+        "baguqeerasebpaimycx3jrfxhotsnhj6qefo36r5ag2zoy5tn7fb4vy3cluaa",
+        "baguqeerauwigonreg5feplblky4yqsok7isknan6r4fowdtuv2iwtsbhfcra",
+        "baguqeeravzjzjxx32jrnny4mxcsfedmw2m353zwpidxnpbg2szdwmeg6qexa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerayzwyr62np35b4pg3qysrma42muabpi5tyxjh3verrmmmwdev7ofq",
+        "static_goal_id": "PCCE-G200"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerad72vnc43fogq7fks4lo7g3en67v3okyeblhlp3evmkeprjrwit4q",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerabrr5pndy6xajhv2vqw3ythq2kzgnpc2nktz2mvmkqvqnwsp6frqa",
+        "canonical_task_key": "task/v1/0c63d7b478f5c093d75585b7899e1a564cd78b4d54f3a6558a8560db49fe2c60"
+      },
+      "task_id": "PCCE-025"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-030.json",
+        "raw_cid": "bafkreidbdfc6crfmlpixxemddtgo4o4zzluavviyndzgtzw6bekgnbjjdi",
+        "sha256": "611945e144ac5bd17b91831cccee3b99cae80ad51868f269e6de09146685291a",
+        "size": 1374,
+        "task_id": "PCCE-030"
+      },
+      "dependencies": [
+        "PCCE-025"
+      ],
+      "dependency_cids": [
+        "baguqeerad72vnc43fogq7fks4lo7g3en67v3okyeblhlp3evmkeprjrwit4q"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera43e72mczfypob67ocjlnjtpmcz2jqaw37x6kajtulqptchzbd45q",
+        "static_goal_id": "PCCE-G300"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeravzjahzg4s2dtzvwr2ekbjdxmqd7tkgcpgca6hykcyc74qqctzpna",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerajlfjc5wkugzs2r7dakvwsm3vjdtxetzgvyf6sjcfxvki242zw2ma",
+        "canonical_task_key": "task/v1/4aca9176caa1b32d47e302ab69337548e7724f26ae0be92445bd548d7359b698"
+      },
+      "task_id": "PCCE-030"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-040.json",
+        "raw_cid": "bafkreihk6j36pjjq4ket5g23qtl5sclbhnm2qjyuqpdj2mda4zcemaefwi",
+        "sha256": "eaf277e7a530e2893e9b5b84d7d909613b59a8271483c69d3060e644460085b2",
+        "size": 2157,
+        "task_id": "PCCE-040"
+      },
+      "dependencies": [
+        "PCCE-025"
+      ],
+      "dependency_cids": [
+        "baguqeerad72vnc43fogq7fks4lo7g3en67v3okyeblhlp3evmkeprjrwit4q"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeraes6f6cvppvc4xucj4deqx65g6afa6iovjlbvrcaxttyn4ydbt4vq",
+        "static_goal_id": "PCCE-G400"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraicog2k57zqbo6knrpoibmqmj6lmzywbhvle4jppiyas2use44u3a",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerakqzznqnh3b2hmo5vp32fsapxh3ii6liw7crghv5qgw3fola7cxmq",
+        "canonical_task_key": "task/v1/543396c1a7d874763bb57ef45901f73ed08f2d16f8a263d7b035b6572c1f15d9"
+      },
+      "task_id": "PCCE-040"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-043.json",
+        "raw_cid": "bafkreia7fsyddr4qh26rj4vlwlbuo24wl7nlysqruidcwyoiqmuh2kfjua",
+        "sha256": "1f2cb031c7903ebd14f2abb2c3476b965fdabc4a11a2062b61c883287d28a9a0",
+        "size": 2631,
+        "task_id": "PCCE-043"
+      },
+      "dependencies": [
+        "PCCE-025"
+      ],
+      "dependency_cids": [
+        "baguqeerad72vnc43fogq7fks4lo7g3en67v3okyeblhlp3evmkeprjrwit4q"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeraes6f6cvppvc4xucj4deqx65g6afa6iovjlbvrcaxttyn4ydbt4vq",
+        "static_goal_id": "PCCE-G400"
+      },
+      "live_revision": 54,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerat56xiufzslqpkautomjjy65qzg5ipmjvwicbcwkdxyydtjugqsfq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerahgqp3vv55fbpzbwltabrgwe6zhn33qnvchxqaumffsywl634xo6q",
+        "canonical_task_key": "task/v1/39a0fdd6bde942fc86cb980313589ec9dbbdc1b511ef0051852cb165fb7cbbbd"
+      },
+      "task_id": "PCCE-043"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-031.json",
+        "raw_cid": "bafkreifsfjjrauper4c72asueczz7ff7k4tjqdrgolyyiecjgs52n2bope",
+        "sha256": "b22a531051e48f05fd025420b39f94bf5726980e2672f184104934bba6e82e79",
+        "size": 2356,
+        "task_id": "PCCE-031"
+      },
+      "dependencies": [
+        "PCCE-030"
+      ],
+      "dependency_cids": [
+        "baguqeeravzjahzg4s2dtzvwr2ekbjdxmqd7tkgcpgca6hykcyc74qqctzpna"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera43e72mczfypob67ocjlnjtpmcz2jqaw37x6kajtulqptchzbd45q",
+        "static_goal_id": "PCCE-G300"
+      },
+      "live_revision": 13,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraaqjdtxu7j6dymwoqlxbtlpwloi4n5gzxkmz52kg3jfi4sxz5gwda",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraov7mvlv672xsgg3tu5analrwvvmc5glwr44o5flzt6tx4iajczha",
+        "canonical_task_key": "task/v1/757ecaaebefeaf231b73a740d02e36ad582e99768f38ee95799fa77e2009164e"
+      },
+      "task_id": "PCCE-031"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-032.json",
+        "raw_cid": "bafkreiglousogcxmelgkwlenolyfx6t4lrzegllkyuphdjzwgwbntyeye4",
+        "sha256": "cb7524e30aec22ccab2c8d72f05bfa7c5c72432d6ac51e71a7363582d9e09827",
+        "size": 1378,
+        "task_id": "PCCE-032"
+      },
+      "dependencies": [
+        "PCCE-030"
+      ],
+      "dependency_cids": [
+        "baguqeeravzjahzg4s2dtzvwr2ekbjdxmqd7tkgcpgca6hykcyc74qqctzpna"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera43e72mczfypob67ocjlnjtpmcz2jqaw37x6kajtulqptchzbd45q",
+        "static_goal_id": "PCCE-G300"
+      },
+      "live_revision": 6,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerazax73phmm5chlir5wcl3mhwguvr7zezvlkuuf7umq5nctpysswpq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera3vve3y2zbuy6z4dai2id4rmbmgw3gqp7ax6pr327df3vzxkrqh3q",
+        "canonical_task_key": "task/v1/dd6a4de3590d31ecf06046903e458161adb341ff05fcf8ef5f19775cdd5181f7"
+      },
+      "task_id": "PCCE-032"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-033.json",
+        "raw_cid": "bafkreie3bsy46uf4rwswvtzj2f6dvlbnq4rceg4nj54amf4tozyjyhoa6q",
+        "sha256": "9b0cb1cf50bc8da56acf29d17c3aac2d8722221b8d4f7806179376709c1dc0f4",
+        "size": 2641,
+        "task_id": "PCCE-033"
+      },
+      "dependencies": [
+        "PCCE-030"
+      ],
+      "dependency_cids": [
+        "baguqeeravzjahzg4s2dtzvwr2ekbjdxmqd7tkgcpgca6hykcyc74qqctzpna"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera43e72mczfypob67ocjlnjtpmcz2jqaw37x6kajtulqptchzbd45q",
+        "static_goal_id": "PCCE-G300"
+      },
+      "live_revision": 5,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerafta5fddtptmy4wgihx7llwszbah5rtwwm5aylwouklt3njrrawnq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeralukbaot3xlbrxldc4hcefx3wbtmjawmi5zn47gceoa3vr72vzi5q",
+        "canonical_task_key": "task/v1/5d14103a7bbac31bac62e1c442df760cd8905988ee5bcf9844703758ff55ca3b"
+      },
+      "task_id": "PCCE-033"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-034.json",
+        "raw_cid": "bafkreihvfdl5dkgt2uy5leyx42f2dozr3czc4csgdj6vzniji4vsstvkf4",
+        "sha256": "f528d7d1a8d3d531d59317e68ba1bb31d8b22e0a461a7d5cb509472b294eaa2f",
+        "size": 1220,
+        "task_id": "PCCE-034"
+      },
+      "dependencies": [
+        "PCCE-030"
+      ],
+      "dependency_cids": [
+        "baguqeeravzjahzg4s2dtzvwr2ekbjdxmqd7tkgcpgca6hykcyc74qqctzpna"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera43e72mczfypob67ocjlnjtpmcz2jqaw37x6kajtulqptchzbd45q",
+        "static_goal_id": "PCCE-G300"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraqsymp7wxx5bigfuzc3nnph4ojsg24ih6exsyecuyakjrgfapbkvq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera6r4drqohj54bdkrbcogabq2umsolo6jvsfkr6bcqqavt2tcoaola",
+        "canonical_task_key": "task/v1/f47838c1c74f7811aa21138c00c354649cb7793591551f0450802b3d4c4e0396"
+      },
+      "task_id": "PCCE-034"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-042.json",
+        "raw_cid": "bafkreic6w4dk736wilkjmooed4tmbxwgo6mrmfswhjq7wlae3dmess4gv4",
+        "sha256": "5eb706afefd642d49639c41f26c0dec677991616563a61fb2c04d8d8494b86af",
+        "size": 1129,
+        "task_id": "PCCE-042"
+      },
+      "dependencies": [
+        "PCCE-025",
+        "PCCE-040"
+      ],
+      "dependency_cids": [
+        "baguqeerad72vnc43fogq7fks4lo7g3en67v3okyeblhlp3evmkeprjrwit4q",
+        "baguqeeraicog2k57zqbo6knrpoibmqmj6lmzywbhvle4jppiyas2use44u3a"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeraes6f6cvppvc4xucj4deqx65g6afa6iovjlbvrcaxttyn4ydbt4vq",
+        "static_goal_id": "PCCE-G400"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraku7k5pruzt6236iztcncydszsmnmhcf4d74dyeu32dg6xm5kwdgq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera5k52diefnvdxu5bgsmpgldzdtbsm77j7slv4ifiypmgzi543rsaa",
+        "canonical_task_key": "task/v1/eabba1a0856d477a7426931e658f239864cffd3f92ebc415187b0d94779b8c80"
+      },
+      "task_id": "PCCE-042"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-035.json",
+        "raw_cid": "bafkreibaelblkhotvhgnllb6q2fvdqdsnh66fozugxubytvdae5z3ms6qe",
+        "sha256": "2022c2b51dd3a9ccd5ac3e868b51c07269fde2bb3435e81c4ea3013b9db25e81",
+        "size": 2034,
+        "task_id": "PCCE-035"
+      },
+      "dependencies": [
+        "PCCE-031",
+        "PCCE-033",
+        "PCCE-034",
+        "PCCE-032"
+      ],
+      "dependency_cids": [
+        "baguqeeraaqjdtxu7j6dymwoqlxbtlpwloi4n5gzxkmz52kg3jfi4sxz5gwda",
+        "baguqeerafta5fddtptmy4wgihx7llwszbah5rtwwm5aylwouklt3njrrawnq",
+        "baguqeeraqsymp7wxx5bigfuzc3nnph4ojsg24ih6exsyecuyakjrgfapbkvq",
+        "baguqeerazax73phmm5chlir5wcl3mhwguvr7zezvlkuuf7umq5nctpysswpq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera43e72mczfypob67ocjlnjtpmcz2jqaw37x6kajtulqptchzbd45q",
+        "static_goal_id": "PCCE-G300"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera6erxmsr6temmww24ougdw7eielfqciiisckrid6mwdmbgrbzmnsq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeratv6xhwm53km6y5ux3mc735ppzhwec4yxvc4rysqnhhiay7jcajca",
+        "canonical_task_key": "task/v1/9d7d73d99dda99ec7697db05fdf5efc9ec417317a8b91c4a0d39d00c7d220244"
+      },
+      "task_id": "PCCE-035"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-041.json",
+        "raw_cid": "bafkreigrigwavmhrrgybow2dwaz34hpj4de3ju3ws6nragi7pelof2pzfe",
+        "sha256": "d141ac0ab0f189b0175b43b033be1de9e0c9b4d376979b10191f7916e2e9f929",
+        "size": 1157,
+        "task_id": "PCCE-041"
+      },
+      "dependencies": [
+        "PCCE-035",
+        "PCCE-040"
+      ],
+      "dependency_cids": [
+        "baguqeera6erxmsr6temmww24ougdw7eielfqciiisckrid6mwdmbgrbzmnsq",
+        "baguqeeraicog2k57zqbo6knrpoibmqmj6lmzywbhvle4jppiyas2use44u3a"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeraes6f6cvppvc4xucj4deqx65g6afa6iovjlbvrcaxttyn4ydbt4vq",
+        "static_goal_id": "PCCE-G400"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerat4qtnygetakm5rr6g77xc3qdfqf2jokxfkg7xgltp4et6cvjrvuq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerashk4ftpzasbms2kraikdxgzaonv7l2mgy3v35bgyvhvksbeqozua",
+        "canonical_task_key": "task/v1/91d5c2cdf90482c9695102143b9b20736bf5e986c6ebbe84d8a9eaa904907668"
+      },
+      "task_id": "PCCE-041"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-044.json",
+        "raw_cid": "bafkreia43zd6qt6llv25w5tmzvtftp6oqbi35cy3mwc4gdmoyjotw3s534",
+        "sha256": "1cde47e84fcb5d75db766ccd6659bfce8051be8b1b6585c30d8ec25d3b6e5ddf",
+        "size": 2070,
+        "task_id": "PCCE-044"
+      },
+      "dependencies": [
+        "PCCE-035",
+        "PCCE-042",
+        "PCCE-041",
+        "PCCE-043"
+      ],
+      "dependency_cids": [
+        "baguqeera6erxmsr6temmww24ougdw7eielfqciiisckrid6mwdmbgrbzmnsq",
+        "baguqeeraku7k5pruzt6236iztcncydszsmnmhcf4d74dyeu32dg6xm5kwdgq",
+        "baguqeerat4qtnygetakm5rr6g77xc3qdfqf2jokxfkg7xgltp4et6cvjrvuq",
+        "baguqeerat56xiufzslqpkautomjjy65qzg5ipmjvwicbcwkdxyydtjugqsfq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeraes6f6cvppvc4xucj4deqx65g6afa6iovjlbvrcaxttyn4ydbt4vq",
+        "static_goal_id": "PCCE-G400"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerabo5dkyly65v6fp5hr3d2ptz2ttaksjtqtotlxictrtlcazescbbq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraxzvwll3lkw3snolvc7lcqvma2aqbcwgwmlrln2c54zpcqc4gdtra",
+        "canonical_task_key": "task/v1/be6b65af6b55b726b97517d6285580d0201158d662e2b6e85de65e280b861ce2"
+      },
+      "task_id": "PCCE-044"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+        "raw_cid": "bafkreidebkiezkedp5m5tc2764mrlxiudpiuhp4nkljzdk6u6x7c3svopm",
+        "sha256": "640a904ca8837f59d98b5ff71915dd141bd143bf8d52d391abd4f5fe2dcaae7b",
+        "size": 1090,
+        "task_id": "PCCE-045"
+      },
+      "dependencies": [
+        "PCCE-035",
+        "PCCE-044"
+      ],
+      "dependency_cids": [
+        "baguqeera6erxmsr6temmww24ougdw7eielfqciiisckrid6mwdmbgrbzmnsq",
+        "baguqeerabo5dkyly65v6fp5hr3d2ptz2ttaksjtqtotlxictrtlcazescbbq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera5z77tgn6urftwlm3tjpj2clsqkwh6cknozngqffl7vk5tltjdo2q",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera4tltx2s3ycvdddm5t2pg5h4pewmsarbr4eyebo32iheftyxoshsa",
+        "canonical_task_key": "task/v1/e4d73bea5bc0aa318d9d9e9e6e9f8f2599204431e13040bb7a41c859e2ee91e4"
+      },
+      "task_id": "PCCE-045"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-050.json",
+        "raw_cid": "bafkreicat7ukr7o6p6p4itt7dwc7wx46dza2c3k54qdnmkgqupgooxcdva",
+        "sha256": "409fe8a8fdde7f9fc44e7f1d85fb5f9e1e41a16d5de406d628d0a3cce75c43a8",
+        "size": 2019,
+        "task_id": "PCCE-050"
+      },
+      "dependencies": [
+        "PCCE-044"
+      ],
+      "dependency_cids": [
+        "baguqeerabo5dkyly65v6fp5hr3d2ptz2ttaksjtqtotlxictrtlcazescbbq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 28,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera4kpkzmm4o6uuolf3qnljmad5j3glwufdv3i7gkyaaz363snz5jwa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraqephe7qazuwg7uy4wvooxwxk6cjecwh5wtivq6zemg3phnndqsea",
+        "canonical_task_key": "task/v1/811e727e00cd2c6fd31cb55cebdaeaf0924158fdb4d1587b2461b6f3b5a38488"
+      },
+      "task_id": "PCCE-050"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-051.json",
+        "raw_cid": "bafkreigzcztz54s2axdblp3xkkfbohyjndj5nmh2ov5sblbiwnybm3xvwm",
+        "sha256": "d916679ef25a05c615bf77528a171f0968d3d6b0fa757b20ac28b370166ef5b3",
+        "size": 1355,
+        "task_id": "PCCE-051"
+      },
+      "dependencies": [
+        "PCCE-044"
+      ],
+      "dependency_cids": [
+        "baguqeerabo5dkyly65v6fp5hr3d2ptz2ttaksjtqtotlxictrtlcazescbbq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraoxaz63ugbe5tzvs26vpywlzwhft5saowy5q6he4wxryrary3pera",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerarjvfij6gk6y36owdt6qw5unfrzun2l2kjbpbtzskrp53sumghdpa",
+        "canonical_task_key": "task/v1/8a6a5427c657b1bf3ac39fa16ed1a58e68dd2f4a485e19e64a8bfbb9518638de"
+      },
+      "task_id": "PCCE-051"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-055.json",
+        "raw_cid": "bafkreifeteoztqahk53hfk6edqpqr3zhzkd4bv4ppsgyeb7e3ve7syzjvu",
+        "sha256": "a4991d99c007577672abc41c1f08ef27ca87c0d78f7c8d8207e4dd49f96329ad",
+        "size": 4866,
+        "task_id": "PCCE-055"
+      },
+      "dependencies": [
+        "PCCE-044"
+      ],
+      "dependency_cids": [
+        "baguqeerabo5dkyly65v6fp5hr3d2ptz2ttaksjtqtotlxictrtlcazescbbq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 16,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera2fvluv2phd4wttmcq62o7ya5dijdoe25dwl2elgipdacyg5w7lqq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera2lnptlheera3o3bneocxcnzsd25d7b6hl6n55rrijn4jalozvwma",
+        "canonical_task_key": "task/v1/d2daf9ace42441b76c2d23857137321eba3f87c75f9bdec6284b78902dd9ad98"
+      },
+      "task_id": "PCCE-055"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+        "raw_cid": "bafkreifumobpecgma2vybkwo2tc2mpwmol4y3sr6wo6qu5kel3wyldhnwe",
+        "sha256": "b46382f208cc06ab80aaced4c5a63ecc72f98dca3eb3bd0a75445eed858cedb1",
+        "size": 5770,
+        "task_id": "PCCE-057"
+      },
+      "dependencies": [
+        "PCCE-044"
+      ],
+      "dependency_cids": [
+        "baguqeerabo5dkyly65v6fp5hr3d2ptz2ttaksjtqtotlxictrtlcazescbbq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeravktzkbtzaldqviwrgepd6kxc4bft3ioyedehtqlx76udbp5iwzpq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeracx32cztlbeepukztx2dwnnkhkdeyi55qe2nn6tpmqahdwwtvtxja",
+        "canonical_task_key": "task/v1/15f7a1666b0908fa2b33be8766b54750c98477b0269adf4dec800e3b5a759dd2"
+      },
+      "task_id": "PCCE-057"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-052.json",
+        "raw_cid": "bafkreibiactqlg5xkrafdv2cicdoq64exmnzobcbgnsixfy4reiigqhxfe",
+        "sha256": "2800a7059bb7544051d7424086e87b84bb1b97044133648b971c89108340f729",
+        "size": 6824,
+        "task_id": "PCCE-052"
+      },
+      "dependencies": [
+        "PCCE-050",
+        "PCCE-045",
+        "PCCE-051",
+        "PCCE-057"
+      ],
+      "dependency_cids": [
+        "baguqeera4kpkzmm4o6uuolf3qnljmad5j3glwufdv3i7gkyaaz363snz5jwa",
+        "baguqeera5z77tgn6urftwlm3tjpj2clsqkwh6cknozngqffl7vk5tltjdo2q",
+        "baguqeeraoxaz63ugbe5tzvs26vpywlzwhft5saowy5q6he4wxryrary3pera",
+        "baguqeeravktzkbtzaldqviwrgepd6kxc4bft3ioyedehtqlx76udbp5iwzpq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeralt3weswsppqveia5onr2z5mljduidsv4r65euvj2gl44mgclxelq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerallz7muq6n4ajtkejvesayqhdv7t4db7jomgqm7zi4knh3pdsgxwq",
+        "canonical_task_key": "task/v1/5af3f6521e6f0099a889a9240c40e3afe7c187e9730d067f28e29a7dbc7235ed"
+      },
+      "task_id": "PCCE-052"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-053.json",
+        "raw_cid": "bafkreid5swewwjlckfsqeuhapznwe2mnunew43nkr2ehj5yvuloyfnayde",
+        "sha256": "7d95896b256251650250e07e5b62698da3496e6daa8e8874f715a2dd82b41819",
+        "size": 22334,
+        "task_id": "PCCE-053"
+      },
+      "dependencies": [
+        "PCCE-050",
+        "PCCE-052",
+        "PCCE-051"
+      ],
+      "dependency_cids": [
+        "baguqeera4kpkzmm4o6uuolf3qnljmad5j3glwufdv3i7gkyaaz363snz5jwa",
+        "baguqeeralt3weswsppqveia5onr2z5mljduidsv4r65euvj2gl44mgclxelq",
+        "baguqeeraoxaz63ugbe5tzvs26vpywlzwhft5saowy5q6he4wxryrary3pera"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraj4pfbyksidqlqziggxxuitg2kqeziizrdgd4rzfjrczrqbj6wtuq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerab3sc4lis3taxqc5lv452onpr2bveshtj2xi5ri4ykyvpshvuljia",
+        "canonical_task_key": "task/v1/0ee42e2d12dcc1780babaf3ba735f1d06a491e69d5d1d8a398562af91eb45a50"
+      },
+      "task_id": "PCCE-053"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-054.json",
+        "raw_cid": "bafkreia4kruymhy2sctqprbfzpv7v4ufviwksnccipd2ofczc7fk5cy2te",
+        "sha256": "1c5469861f1a90a707c425cbebfaf285aa2ca9344243c7a7145917caae8b1a99",
+        "size": 14884,
+        "task_id": "PCCE-054"
+      },
+      "dependencies": [
+        "PCCE-053"
+      ],
+      "dependency_cids": [
+        "baguqeeraj4pfbyksidqlqziggxxuitg2kqeziizrdgd4rzfjrczrqbj6wtuq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera2d56ardt4hdce4b4bgmbkwkhf4nyjbeonf2famwf6hr7ydgivsya",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeramdrw33d47x4fdztjgrf4btcsgtgoxr4kyqyt574t3odkbixly42a",
+        "canonical_task_key": "task/v1/60e36dec7cfdf851e669344bc0cc5234ccebc78ac4313eff93db86a0a2ebc734"
+      },
+      "task_id": "PCCE-054"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+        "raw_cid": "bafkreibiwxtmdtr2wiq5xbez2njp5t5qwsvli2ijwwneyqtlh7iql26wlm",
+        "sha256": "28b5e6c1ce3ab221db8499d352fecfb0b4aab46909b59a4c426b3fd105ebd65b",
+        "size": 2805,
+        "task_id": "PCCE-056"
+      },
+      "dependencies": [
+        "PCCE-054",
+        "PCCE-055"
+      ],
+      "dependency_cids": [
+        "baguqeera2d56ardt4hdce4b4bgmbkwkhf4nyjbeonf2famwf6hr7ydgivsya",
+        "baguqeera2fvluv2phd4wttmcq62o7ya5dijdoe25dwl2elgipdacyg5w7lqq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeerao7tcvjg75ozi2pkdenti7elg37hdcz4n5gbo4fqu6tfvbcpn63nq",
+        "static_goal_id": "PCCE-G500"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerawocxhxqnvpqggoyuwaclxboph2jta457ri2z3dcnhwt3ufzpdwzq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraghkszmidk3bdxsaagnp62palact7ux77cav6ymeollxougppm3aa",
+        "canonical_task_key": "task/v1/31d52cb10356c23bc800335fed3c0b00a7fa5fff102bec308e5aeeea19ef66c0"
+      },
+      "task_id": "PCCE-056"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-060.json",
+        "raw_cid": "bafkreidqxb2vd2nao2cf4hzce3uhtfbgd4i735pol4mt3vr5c37lwz3h3e",
+        "sha256": "70b87551e9a076845e1f2226e87994261f11fdf5ee5f193dd63d16febb6767d9",
+        "size": 10120,
+        "task_id": "PCCE-060"
+      },
+      "dependencies": [
+        "PCCE-056"
+      ],
+      "dependency_cids": [
+        "baguqeerawocxhxqnvpqggoyuwaclxboph2jta457ri2z3dcnhwt3ufzpdwzq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerad676dzstuii524wli6hnfdfxgsfsmxgk2behffki6xtf3udcdvdq",
+        "canonical_task_key": "task/v1/1fbfe1e653a211dd72cb478ed28cb7348b265ccad048729548f5e65dd0621d47"
+      },
+      "task_id": "PCCE-060"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-070.json",
+        "raw_cid": "bafkreify3t6xihrs4m35pv73glygdm6qcryldyjkbuodz6upwoo2rnaa7i",
+        "sha256": "b8dcfd741e32e337d7d7fb32f061b3d01470b1e12a0d1c3cfa8fb39da8b400fa",
+        "size": 6587,
+        "task_id": "PCCE-070"
+      },
+      "dependencies": [
+        "PCCE-056"
+      ],
+      "dependency_cids": [
+        "baguqeerawocxhxqnvpqggoyuwaclxboph2jta457ri2z3dcnhwt3ufzpdwzq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera6b5dsqu5myyihwic7tsltggdqbbvqy4sfu2stlm6qz7bnzyf326q",
+        "static_goal_id": "PCCE-G700"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerarm7v7cmisoyixe4zjghmeaqesudyaibazwhqofmwl4vppt6qprpq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraqpg53rzd7a5b26jjzjbui67nnm5bj7jwt5hbqrmmyse5zhdrxt2q",
+        "canonical_task_key": "task/v1/83cdddc723f83a1d7929ca43447bed6b3a14fd369f4e18458cc489dc9c71bcf5"
+      },
+      "task_id": "PCCE-070"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-061.json",
+        "raw_cid": "bafkreievfhepnqwi3mnba4tic3bk26huevei6dyubakibos3pykyo6tw6a",
+        "sha256": "9529c8f6c2c8db1a10726816c2ad78f425488f0f14081480ba5b7e15877a76f0",
+        "size": 18639,
+        "task_id": "PCCE-061"
+      },
+      "dependencies": [
+        "PCCE-060"
+      ],
+      "dependency_cids": [
+        "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraznuphyoa5rbpo7sjxd2tlkhmhnksfiypdkgrtwrjdsuirp4dnbka",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerauxteuetqz7ne7ik23vfntmljmk5w3qa4wzfouju7luydfzpjuwta",
+        "canonical_task_key": "task/v1/a5e64a1270cfda4fa15add4ad9b16962bb6dc01cb64aea269f5d3032e5e9a5a6"
+      },
+      "task_id": "PCCE-061"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-062.json",
+        "raw_cid": "bafkreiewxitn2mogotacuzbjmxn3w5moi7ps3gfj2lwzcke2ase6inwxvy",
+        "sha256": "96ba26dd31c674c02a642965dbbb758e47df2d98a9d2ed91289a0489e436d7ae",
+        "size": 21188,
+        "task_id": "PCCE-062"
+      },
+      "dependencies": [
+        "PCCE-060"
+      ],
+      "dependency_cids": [
+        "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 7,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerac5sloia5qn53ofkafwubpsjkbfyfjd4kzv55jo3odme3naaa4wrq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerazgm7k4qwspv4kvg5dwh4yca6l2qhv6aairy7vxezctjlso6tw6aq",
+        "canonical_task_key": "task/v1/c999f5721693ebc554dd1d8fcc081e5ea07af8004471fadc9914d2b93bd3b781"
+      },
+      "task_id": "PCCE-062"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+        "raw_cid": "bafkreigzqvfys2mjmybgrwqzefy5rnd3k7znffivrxnpq34wywbrzy2p2q",
+        "sha256": "d9854b896989660268da192171d8b47b57f2d295158ddaf86f96c5831ce34fd4",
+        "size": 9310,
+        "task_id": "PCCE-063"
+      },
+      "dependencies": [
+        "PCCE-060"
+      ],
+      "dependency_cids": [
+        "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerapraozmka5hq626owp6lo4vc35lbnacq2hk4q543zh3y5crs5zvfa",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerayemy2fgsric3jrevak67k2ksnszjx3c6cdzxv5tni2yuigdyji3q",
+        "canonical_task_key": "task/v1/c1198d14d28a05b4c49502bdf569526cb29bec5e10f37af66d46b14418784a37"
+      },
+      "task_id": "PCCE-063"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json",
+        "raw_cid": "bafkreibediroh4drfnagcvu4do5ufuecyqngdh4stvzrjtsl3pxs2iwgum",
+        "sha256": "241a22e3f0712b4061569c1bbb42d082c41a619f929d7314ce4bdbef2d22c6a3",
+        "size": 15961,
+        "task_id": "PCCE-064"
+      },
+      "dependencies": [
+        "PCCE-060"
+      ],
+      "dependency_cids": [
+        "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerakdl4zky3knfnske6znqisszcyxxvb3eh7fv2da5g64uw2ylzqvka",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeram2iem7jubfiy2v5lnzfvkhters4g5rkzmfuqtegpw5qyzsdy45iq",
+        "canonical_task_key": "task/v1/6690467d3409518d57ab6e4b551e648cb86ec55961690990cfb7618cc878e751"
+      },
+      "task_id": "PCCE-064"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-065.json",
+        "raw_cid": "bafkreibamisqliuouul7p2a3k3g5mnmzf56xqbh2pibj2tkmrfppwtxe3e",
+        "sha256": "20622505a28ea517f7e81b56cdd635992f7d7804fa7a029d4d4c895efb4ee4d9",
+        "size": 12096,
+        "task_id": "PCCE-065"
+      },
+      "dependencies": [
+        "PCCE-060"
+      ],
+      "dependency_cids": [
+        "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeradjg42onr6stv3dy3i6rnhhvqhmgewqhqsynghki5jnmyia45raia",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerazfyr4jnf77oamsty4kfft2edjj2whqtrobyryce42ezga27llwvq",
+        "canonical_task_key": "task/v1/c9711e25a5ffdc064a78e28a59e8834a7563c27170711c089cd132606beb5dab"
+      },
+      "task_id": "PCCE-065"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-066.json",
+        "raw_cid": "bafkreihyaluh5hdrsndap6p3fvaiuejpmy2h3nybp73y2cwkbnrg32korm",
+        "sha256": "f802e87e9c71934607f9fb2d408a112f66347db7017ff78d0aca0b626de94e8b",
+        "size": 6112,
+        "task_id": "PCCE-066"
+      },
+      "dependencies": [
+        "PCCE-060"
+      ],
+      "dependency_cids": [
+        "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 7,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeranklklq4uste5bkfa6vizzpnnwd4uiqeyseehz7niw3pbi3e3bkuq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeranj6c7wxgf2bzkwlrejvhittvznicytj4hkpa5kgogrblvzcumfuq",
+        "canonical_task_key": "task/v1/6a7c2fdae62e83955971226a744e75cb502c4d3c3a9e0ea8ce3442bae4546169"
+      },
+      "task_id": "PCCE-066"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json",
+        "raw_cid": "bafkreiarjiqih3he6twziiulgzc6tdx7aydlxk2cvs4nqdkcjgvalichp4",
+        "sha256": "114a2083ece4f4ed94228b3645e98eff0606bbab42acb8d80d4249aa05a0477f",
+        "size": 9706,
+        "task_id": "PCCE-071"
+      },
+      "dependencies": [
+        "PCCE-070"
+      ],
+      "dependency_cids": [
+        "baguqeerarm7v7cmisoyixe4zjghmeaqesudyaibazwhqofmwl4vppt6qprpq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera6b5dsqu5myyihwic7tsltggdqbbvqy4sfu2stlm6qz7bnzyf326q",
+        "static_goal_id": "PCCE-G700"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraxkidpqi2tdgzdsymr4hc667d6fhzle7ctfvq7aozk63jrzbmnthq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera5yj7ewblfkbnp7vyqimokeopuqo7xsb4ch6mpi5x6xfh3ztawibq",
+        "canonical_task_key": "task/v1/ee13f2582b2a82d7feb88218e511cfa41dfbc83c11fcc7a3b7f5ca7de660b203"
+      },
+      "task_id": "PCCE-071"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-072.json",
+        "raw_cid": "bafkreig5kfcvi6rlhp3ebk46x7yghdw45gu745znf6b7wen6lzhfxtyeym",
+        "sha256": "dd5145547a2b3bf640ab9ebff0638edce9a9fe772d2f83fb11be5e4e5bcf04c3",
+        "size": 8786,
+        "task_id": "PCCE-072"
+      },
+      "dependencies": [
+        "PCCE-070"
+      ],
+      "dependency_cids": [
+        "baguqeerarm7v7cmisoyixe4zjghmeaqesudyaibazwhqofmwl4vppt6qprpq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera6b5dsqu5myyihwic7tsltggdqbbvqy4sfu2stlm6qz7bnzyf326q",
+        "static_goal_id": "PCCE-G700"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerav5ovimddoeyqbxqcdmgh3czh7k5i2rzivapbc6fbhggjqv435kjq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerahc36qm7ztotc55mwtztkjitywmguuyujgcie4vku74qdnght4req",
+        "canonical_task_key": "task/v1/38b7e833f99ba62ef5969e66a4a278b30d4a628930904e5554ff203698f3e449"
+      },
+      "task_id": "PCCE-072"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-073.json",
+        "raw_cid": "bafkreieyukobizn6jmk6r5rflvoojhls6t4qnllji6q7ghe4a22bt4huoy",
+        "sha256": "98a29c1465be4b15e8f6255d5ce49d72f4f906ad6947a1f31c9c06b419f0f476",
+        "size": 6047,
+        "task_id": "PCCE-073"
+      },
+      "dependencies": [
+        "PCCE-070"
+      ],
+      "dependency_cids": [
+        "baguqeerarm7v7cmisoyixe4zjghmeaqesudyaibazwhqofmwl4vppt6qprpq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera6b5dsqu5myyihwic7tsltggdqbbvqy4sfu2stlm6qz7bnzyf326q",
+        "static_goal_id": "PCCE-G700"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerahk74pqi4yfawsiqoxb7w5kmdwuojrvllpecm3vn5biw7pcqedl2q",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerasa6qv4brnpivr2qzgx24n2zzlghm3lhbrashmuxkoyihg7wznjra",
+        "canonical_task_key": "task/v1/903d0af0316bd158ea1935f5c6eb39598ecdace188247652ea7610737ed96a62"
+      },
+      "task_id": "PCCE-073"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-074.json",
+        "raw_cid": "bafkreiexjllqaezxl3ew473inaiw5dr5ianyxpxkapntz7gj5fw67noncu",
+        "sha256": "974ad70013375ec96e7f6868116e8e3d401b8bbeea03db3cfcc9e96defb5cd15",
+        "size": 6482,
+        "task_id": "PCCE-074"
+      },
+      "dependencies": [
+        "PCCE-070"
+      ],
+      "dependency_cids": [
+        "baguqeerarm7v7cmisoyixe4zjghmeaqesudyaibazwhqofmwl4vppt6qprpq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera6b5dsqu5myyihwic7tsltggdqbbvqy4sfu2stlm6qz7bnzyf326q",
+        "static_goal_id": "PCCE-G700"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraxgdyeia2nzxvhbdg7n33swyvteygipqo3l5ho53gxtznhcueyseq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera7nlmbwpqoymhipvdo5r2hwhf2vq3a7isrm7qzi776wmhxctz7cya",
+        "canonical_task_key": "task/v1/fb56c0d9f07618743ea37763a3d8e5d561b07d128b3f0ca3fff5987b8a79f8b0"
+      },
+      "task_id": "PCCE-074"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+        "raw_cid": "bafkreia6fevhtrt6wnvloajvyw6vxqw6hf7kwaseyxbdjlsvsemxqji7ay",
+        "sha256": "1e292a79c67eb36ab70135c5bd5bc2de397eab0244c5c234ae55911978251f06",
+        "size": 6474,
+        "task_id": "PCCE-079"
+      },
+      "dependencies": [
+        "PCCE-045",
+        "PCCE-035",
+        "PCCE-025",
+        "PCCE-015",
+        "PCCE-065",
+        "PCCE-064"
+      ],
+      "dependency_cids": [
+        "baguqeera5z77tgn6urftwlm3tjpj2clsqkwh6cknozngqffl7vk5tltjdo2q",
+        "baguqeera6erxmsr6temmww24ougdw7eielfqciiisckrid6mwdmbgrbzmnsq",
+        "baguqeerad72vnc43fogq7fks4lo7g3en67v3okyeblhlp3evmkeprjrwit4q",
+        "baguqeeradcycnws5dhar6obga72cosgfk4ex4lutdtrtvfmrulxv2w6xc2ha",
+        "baguqeeradjg42onr6stv3dy3i6rnhhvqhmgewqhqsynghki5jnmyia45raia",
+        "baguqeerakdl4zky3knfnske6znqisszcyxxvb3eh7fv2da5g64uw2ylzqvka"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera3i37ur3w7bdfglpgsu77ghwe25e2lpsgtrdw7ysvq2qhai6ymxia",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraeyzlruzl7j5cw5bzfsa7z63gjydabt3oqxjq53qq2lqdvvvv7mwq",
+        "canonical_task_key": "task/v1/2632b8d32bfa7a2b74392c81fcfb664e0600cf6e85d30eee10d2e03ad6b5fb2d"
+      },
+      "task_id": "PCCE-079"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+        "raw_cid": "bafkreickz4pwdhduqgb2hkzzndgdlvcqnc5affscfzwum5tzlycfd7kfsu",
+        "sha256": "4acf1f619c748183a3ab3968cc35d45068ba0296422e6d4676795e0451fd4595",
+        "size": 6604,
+        "task_id": "PCCE-075"
+      },
+      "dependencies": [
+        "PCCE-073",
+        "PCCE-072",
+        "PCCE-074",
+        "PCCE-071"
+      ],
+      "dependency_cids": [
+        "baguqeerahk74pqi4yfawsiqoxb7w5kmdwuojrvllpecm3vn5biw7pcqedl2q",
+        "baguqeerav5ovimddoeyqbxqcdmgh3czh7k5i2rzivapbc6fbhggjqv435kjq",
+        "baguqeeraxgdyeia2nzxvhbdg7n33swyvteygipqo3l5ho53gxtznhcueyseq",
+        "baguqeeraxkidpqi2tdgzdsymr4hc667d6fhzle7ctfvq7aozk63jrzbmnthq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera6b5dsqu5myyihwic7tsltggdqbbvqy4sfu2stlm6qz7bnzyf326q",
+        "static_goal_id": "PCCE-G700"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera24wipnfzevagzrgxdhl2zu5vazvy4enprtyqr2tobtetjjijihsq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraztljl676f3s6bsspsoly573f626nvtxqvjasmkk7a5p2kycg5kuq",
+        "canonical_task_key": "task/v1/ccd695fbfe2ee5e0ca4f93978eff65f6bcdacef0aa4126295f075fa56046eaa9"
+      },
+      "task_id": "PCCE-075"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json",
+        "raw_cid": "bafkreibwhvh72zrioo7ybkulxvyexppuimcn6nnyirjseig2iyvoomwyye",
+        "sha256": "363d4ffd662873bf80aa8bbd704bbdf44304df35b844532220da462ae732d8c1",
+        "size": 9654,
+        "task_id": "PCCE-067"
+      },
+      "dependencies": [
+        "PCCE-079",
+        "PCCE-062",
+        "PCCE-065",
+        "PCCE-064",
+        "PCCE-066",
+        "PCCE-063",
+        "PCCE-061"
+      ],
+      "dependency_cids": [
+        "baguqeera3i37ur3w7bdfglpgsu77ghwe25e2lpsgtrdw7ysvq2qhai6ymxia",
+        "baguqeerac5sloia5qn53ofkafwubpsjkbfyfjd4kzv55jo3odme3naaa4wrq",
+        "baguqeeradjg42onr6stv3dy3i6rnhhvqhmgewqhqsynghki5jnmyia45raia",
+        "baguqeerakdl4zky3knfnske6znqisszcyxxvb3eh7fv2da5g64uw2ylzqvka",
+        "baguqeeranklklq4uste5bkfa6vizzpnnwd4uiqeyseehz7niw3pbi3e3bkuq",
+        "baguqeerapraozmka5hq626owp6lo4vc35lbnacq2hk4q543zh3y5crs5zvfa",
+        "baguqeeraznuphyoa5rbpo7sjxd2tlkhmhnksfiypdkgrtwrjdsuirp4dnbka"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeraozzrsd26abvatqptb5bhvxa5dw7mymfcryemk355ieqlmczvtzjq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeera5zw2sgetx6yvihhl5a2mmd7vanmuepxef2bbhet3nfgknzqqoogq",
+        "canonical_task_key": "task/v1/ee6da91893bfb1541cebe834c60ff50359423ee42e8213927b694ca6e610738d"
+      },
+      "task_id": "PCCE-067"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-076.json",
+        "raw_cid": "bafkreicyoqp5dljl5w3csdmrfbkzkxacbowmdypnc5mvnvbbvso24qauue",
+        "sha256": "58741fd1ad2bedb6290d912855955c020bacc1e1ed175956d421ac9dae4014a1",
+        "size": 8915,
+        "task_id": "PCCE-076"
+      },
+      "dependencies": [
+        "PCCE-075"
+      ],
+      "dependency_cids": [
+        "baguqeera24wipnfzevagzrgxdhl2zu5vazvy4enprtyqr2tobtetjjijihsq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera6b5dsqu5myyihwic7tsltggdqbbvqy4sfu2stlm6qz7bnzyf326q",
+        "static_goal_id": "PCCE-G700"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera75yoyff76ew7hitxvpsyk7jqxa2vhgiddmnpyma5spkazkzxr3yq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraezsvo72fvqmi4pld2a6qqufkh5zrz4bljx733slloerjtnw77ewa",
+        "canonical_task_key": "task/v1/2665577f45ac188e3d63d03d0850aa3f731cf02b4dffbdc96b712299b6dff92c"
+      },
+      "task_id": "PCCE-076"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json",
+        "raw_cid": "bafkreicfo3thta45nvvderosgk2y5wvnsilq26befdkecbegdcx3gosuna",
+        "sha256": "4576e679839d6d6a3245d232b58edaad92170d782428d441048618afb33a5468",
+        "size": 13262,
+        "task_id": "PCCE-068"
+      },
+      "dependencies": [
+        "PCCE-067"
+      ],
+      "dependency_cids": [
+        "baguqeeraozzrsd26abvatqptb5bhvxa5dw7mymfcryemk355ieqlmczvtzjq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeera7unruqzzdq5lfghx5h7kd6mpiwr5d5td5yi6dy3gr56xuu2jxqna",
+        "static_goal_id": "PCCE-G600"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeera6b73j6caxykusogroe3y2xnduagvyng5v4nguahom5rtgux3m2tq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeracljqjzu7eqymeh4v5z6kuqchktl4arwfnyes2lq4rjt3frbfrpka",
+        "canonical_task_key": "task/v1/12d304e69f2430c21f95ee7caa404754d7c046c56e092d2e1c8a67b2c4258bd4"
+      },
+      "task_id": "PCCE-068"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json",
+        "raw_cid": "bafkreid4c32sxdvmxwe57bbo6uyw455jnsou7qtsid2yaxtfaur3wbduci",
+        "sha256": "7c16f52b8eacbd89df842ef5316e77a96c9d4fc27240f5805e650523bb047412",
+        "size": 12974,
+        "task_id": "PCCE-080"
+      },
+      "dependencies": [
+        "PCCE-068",
+        "PCCE-076"
+      ],
+      "dependency_cids": [
+        "baguqeera6b73j6caxykusogroe3y2xnduagvyng5v4nguahom5rtgux3m2tq",
+        "baguqeera75yoyff76ew7hitxvpsyk7jqxa2vhgiddmnpyma5spkazkzxr3yq"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeratgdjm47oofwqfkbhtnxkbnodqvz4h7rxlo3c46pegqzwq663hvrq",
+        "static_goal_id": "PCCE-G800"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerax65k5eln5awrgysj33pt6gsatg2po2leftgrmg25m3f47ojhnnga",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeramdjzkg3vpqgtq5oa4i2frfcwzinebpr27qwfwztf2hweutvtuyxq",
+        "canonical_task_key": "task/v1/60d3951b757c0d3875c0e234589456ca1a40be3afc2c5b6665d1ec4a4eb3a62f"
+      },
+      "task_id": "PCCE-080"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
+        "raw_cid": "bafkreiesr275sdrlyzx5bspbf7ushfhdnawp7upihreiwb2duk4rz4lhny",
+        "sha256": "928ebfd90e2bc66fd0c9e12fe92394e3682cffd1e83c488b0743a2b91cf1676e",
+        "size": 12926,
+        "task_id": "PCCE-081"
+      },
+      "dependencies": [
+        "PCCE-080"
+      ],
+      "dependency_cids": [
+        "baguqeerax65k5eln5awrgysj33pt6gsatg2po2leftgrmg25m3f47ojhnnga"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeratgdjm47oofwqfkbhtnxkbnodqvz4h7rxlo3c46pegqzwq663hvrq",
+        "static_goal_id": "PCCE-G800"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeerafrcsh2er4rissdyxq5ikb34kqbvrmb3a6drtys7k3tdlhbualp6q",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeeraavz2sz7b7nlia2llpvb4epjldsqmvl3anqxszvsfqkzidi7imfqq",
+        "canonical_task_key": "task/v1/0573a967e1fb5680696b7d43c23d2b1ca0caaf606c2f2cd64582b281a3e86161"
+      },
+      "task_id": "PCCE-081"
+    },
+    {
+      "canonical_receipt": {
+        "declared_status": "completed",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json",
+        "raw_cid": "bafkreibtybxpf37rkbkpiokmybdcwnmiwvadg6jmkjuz7yohmmeougehxy",
+        "sha256": "33c06ef2eff15054f4394cc0462b3588b54033792c52699fe1c76308ea1887be",
+        "size": 9694,
+        "task_id": "PCCE-082"
+      },
+      "dependencies": [
+        "PCCE-081"
+      ],
+      "dependency_cids": [
+        "baguqeerafrcsh2er4rissdyxq5ikb34kqbvrmb3a6drtys7k3tdlhbualp6q"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeratgdjm47oofwqfkbhtnxkbnodqvz4h7rxlo3c46pegqzwq663hvrq",
+        "static_goal_id": "PCCE-G800"
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeralwimrbcuddpc5hlficwrhivlkosmj4p7kmtgjk77vjng7fpw2eua",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerapw7qks3breerkbhbzydrhu7bfau32gwqd34625oph7vbnrckfmsa",
+        "canonical_task_key": "task/v1/7dbf054b6189091504e1ce0713d3e12829bd1ad01ef9ed75cf3fea16c44a2b24"
+      },
+      "task_id": "PCCE-082"
+    },
+    {
+      "canonical_receipt": {
+        "external_seal_required": true,
+        "identity_state": "self-output-reference-no-recursive-digest",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-083.json",
+        "raw_cid": null,
+        "sha256": null,
+        "size": null
+      },
+      "dependencies": [
+        "PCCE-082"
+      ],
+      "dependency_cids": [
+        "baguqeeralwimrbcuddpc5hlficwrhivlkosmj4p7kmtgjk77vjng7fpw2eua"
+      ],
+      "goal": {
+        "live_goal_cid": "baguqeeratgdjm47oofwqfkbhtnxkbnodqvz4h7rxlo3c46pegqzwq663hvrq",
+        "static_goal_id": "PCCE-G800"
+      },
+      "live_revision": 1,
+      "live_status": "todo",
+      "live_task_cid": "baguqeerawci4ok5xn45k3pnf5ybbhs5dffhuufwzbvrlb2kxlgp3n372qzfq",
+      "objective_id": "objective:pcce-root",
+      "receipt_declared_status": "completed-evidence-projection-live-completion-pending",
+      "static_identity": {
+        "authoritative_for_live_status": false,
+        "canonical_task_cid": "baguqeerao72epmmmmr7jm42isnj4rcip2umpeypzbv5juez6lu2wlsav776q",
+        "canonical_task_key": "task/v1/77f447b18c647e9673489353c8890fd518f261f90d7a9a133e5d3565c815fffd"
+      },
+      "task_id": "PCCE-083"
+    }
+  ],
+  "objective_id": "objective:pcce-root",
+  "owning_goal_id": "PCCE-G800",
+  "parent_objective_id": "PCCE-G000",
+  "retained_attempt_receipts": [
+    {
+      "canonical_task_receipt": false,
+      "declared_status": "completed",
+      "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+      "raw_cid": "bafkreihwotnfucotjyczfqq72mw3woegzquy26yo3neup2qvez2mswtgqu",
+      "sha256": "f674da5a09d34e0592c21fd32dbb3886cc298d7b0edb4947ea152674c95a6685",
+      "size": 13083,
+      "task_id": "PCCE-000"
+    },
+    {
+      "canonical_task_receipt": false,
+      "declared_status": "blocked_external_prerequisite",
+      "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+      "raw_cid": "bafkreiat2osyigg3m7b647kvvm3udzjhu6f7ygm53igkb7yswbn6lp3okm",
+      "sha256": "13d3a58418db67c3ee7d55ab3741e527a78bfc199dda0ca0ff12b05be5bf6e53",
+      "size": 11340,
+      "task_id": "PCCE-000"
+    },
+    {
+      "canonical_task_receipt": false,
+      "declared_status": "pending_external_launch_receipt",
+      "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r5.json",
+      "raw_cid": "bafkreia4rbs3gdtz2ni5kzowkuvxspviakatikgstwfpht6y4ovs22udre",
+      "sha256": "1c8865b30e79d351d565d6552b793ea802813428d29d8af3cfd8e3ab2d6a8389",
+      "size": 11404,
+      "task_id": "PCCE-000"
+    }
+  ],
+  "schema": "pcce/proof-context/v0.1/final-task-disposition-graph@1",
+  "schema_version": 1,
+  "self_reference_policy": {
+    "pcce083_receipt_path_represented_exactly_once": true,
+    "reason": "The PCCE-083 receipt binds this graph; its own identity is sealed externally after commit to avoid a recursive hash claim.",
+    "receipt_digest_embedded": false
+  },
+  "task_id": "PCCE-083",
+  "topological_order": [
+    "PCCE-000",
+    "PCCE-001",
+    "PCCE-002",
+    "PCCE-003",
+    "PCCE-004",
+    "PCCE-005",
+    "PCCE-006",
+    "PCCE-007",
+    "PCCE-008",
+    "PCCE-009",
+    "PCCE-010",
+    "PCCE-017",
+    "PCCE-018",
+    "PCCE-012",
+    "PCCE-013",
+    "PCCE-019",
+    "PCCE-014",
+    "PCCE-016",
+    "PCCE-015",
+    "PCCE-011",
+    "PCCE-020",
+    "PCCE-022",
+    "PCCE-023",
+    "PCCE-021",
+    "PCCE-024",
+    "PCCE-025",
+    "PCCE-030",
+    "PCCE-040",
+    "PCCE-043",
+    "PCCE-031",
+    "PCCE-032",
+    "PCCE-033",
+    "PCCE-034",
+    "PCCE-042",
+    "PCCE-035",
+    "PCCE-041",
+    "PCCE-044",
+    "PCCE-045",
+    "PCCE-050",
+    "PCCE-051",
+    "PCCE-055",
+    "PCCE-057",
+    "PCCE-052",
+    "PCCE-053",
+    "PCCE-054",
+    "PCCE-056",
+    "PCCE-060",
+    "PCCE-070",
+    "PCCE-061",
+    "PCCE-062",
+    "PCCE-063",
+    "PCCE-064",
+    "PCCE-065",
+    "PCCE-066",
+    "PCCE-071",
+    "PCCE-072",
+    "PCCE-073",
+    "PCCE-074",
+    "PCCE-079",
+    "PCCE-075",
+    "PCCE-067",
+    "PCCE-076",
+    "PCCE-068",
+    "PCCE-080",
+    "PCCE-081",
+    "PCCE-082",
+    "PCCE-083"
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "artifact_identity": "bafkreighejydjqvq7zmxialsajadph4ytwsu6cv55gf2r3kshocd3sfqhu",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of exact final/supervisor_report.json bytes",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "evidence-task-completed-final-supervisor-projection-explicit-research-demo-and-no-go",
+  "evidence": {
+    "allowed_scope": {
+      "actual_paths": [
+        "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+        "artifacts/proof_carrying_context_engine/final/supervisor_report.json",
+        "artifacts/proof_carrying_context_engine/final/supervisor_report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-083.json"
+      ],
+      "board_allowed_paths": [
+        "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+        "artifacts/proof_carrying_context_engine/final/supervisor_report.json",
+        "artifacts/proof_carrying_context_engine/final/supervisor_report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-083.json"
+      ]
+    },
+    "authority": {
+      "authoritative_pre_completion": {
+        "authoritative": true,
+        "completed_count": 66,
+        "dependency_count": 121,
+        "event_cursor": 368,
+        "formal_plan_id": "baguqeerawecx64quxjz7b2rsuiduvbl3pad6vievexeojsttdcb6bvyzhrja",
+        "pcce083": {
+          "revision": 1,
+          "status": "todo",
+          "task_cid": "baguqeerawci4ok5xn45k3pnf5ybbhs5dffhuufwzbvrlb2kxlgp3n372qzfq"
+        },
+        "plan_root_cid": "baguqeerawecx64quxjz7b2rsuiduvbl3pad6vievexeojsttdcb6bvyzhrja",
+        "projection_cid": "baguqeerae4dip44ogmmitwn5iocj2wkina7736sm7ode2u6j7lhkltnjz4ia",
+        "revision": 368,
+        "source_identity": "baguqeeraf3hbxty3fqzb2ku55eyujpvxpgyhplmrbeipoohxdpks3gqb7csa",
+        "task_count": 67,
+        "todo_count": 1,
+        "transport": "quack:127.0.0.1:41347"
+      },
+      "database_completion_by_author": false,
+      "database_mutated_by_author": false,
+      "projected_post_completion": {
+        "authoritative": false,
+        "expected_completed": 67,
+        "expected_todo": 0,
+        "projection_cid": null,
+        "revision": null,
+        "status": "projected-after-reviewed-admission-and-quack-completion"
+      }
+    },
+    "decision": {
+      "assigned_level": "research_demo",
+      "evidence_task_report_final": true,
+      "reason_codes": [
+        "INSTALLATION_GATE_NO_GO",
+        "RELEASE_CANDIDATE_PRESENT_BUT_NO_GO",
+        "BENCHMARK_QUALIFICATION_NO_GO",
+        "SECURITY_GATE_NO_GO",
+        "CI_QUALIFICATION_NO_GO",
+        "LONGITUDINAL_SELF_HOSTING_NO_GO",
+        "PACKAGE_BYTE_SET_INCOMPLETE",
+        "PACKAGE_SIGNATURE_EVIDENCE_UNAVAILABLE"
+      ],
+      "recommendations": {
+        "external_supervised_pilot": "NO-GO",
+        "internal_development": "proceed-with-restrictions",
+        "internal_pilot": "NO-GO",
+        "production_use": "NO-GO",
+        "release": "NO-GO"
+      },
+      "release_qualified": false,
+      "report_status": "final-evidence-projection-pre-pcce083-live-completion",
+      "waivers": []
+    },
+    "evidence_cut": {
+      "gitlinks": {
+        "Mcp-Plus-Plus": {
+          "commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+          "tree": "3a57e33053d6007cb99cbe265c6608954d9cea7c"
+        },
+        "external/ipfs_accelerate": {
+          "commit": "8d629ce7f2ee5a6109dc92e84b47664ae896ddc6",
+          "tree": "6f40999059d861ef5bdde24f5d4228a6e84b2e30"
+        },
+        "external/ipfs_datasets": {
+          "commit": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+          "tree": "839980ccaba593b146213928bc5e8bf95e7a1fd9"
+        },
+        "external/ipfs_kit": {
+          "commit": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+          "tree": "b4413c1ad92b85df2e110c0185d2449e56fc6497"
+        }
+      },
+      "repository_commit": "013fb36c824013804ce00d055b03241fbcdef077",
+      "repository_tree": "1bbf772069662eb8a8339ff242794039c08f5011"
+    },
+    "graph_completeness": {
+      "canonical_receipt_references": 67,
+      "dependency_edges": 121,
+      "existing_predecessor_receipts_byte_bound": 66,
+      "missing_predecessor_receipts": 0,
+      "retained_noncanonical_attempt_receipts": 3,
+      "self_output_receipt_references": 1,
+      "task_nodes": 67,
+      "unique_canonical_receipt_paths": true,
+      "unique_live_task_cids": true,
+      "unique_task_ids": true
+    },
+    "independent_review_status": "pending",
+    "outputs": {
+      "dependency_graph": {
+        "path": "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+        "raw_cid": "bafkreig2pixmdlzfnldiqpq2t5gveajaantrs4ggultnpauubuxklznmue",
+        "sha256": "da7a2ec1af256ac6883e1a9f4d52012003671970c6a2e6d782940d2ea5e5aca1",
+        "size": 100535
+      },
+      "supervisor_report_json": {
+        "path": "artifacts/proof_carrying_context_engine/final/supervisor_report.json",
+        "raw_cid": "bafkreighejydjqvq7zmxialsajadph4ytwsu6cv55gf2r3kshocd3sfqhu",
+        "sha256": "c7227034c2b0fe597401720240379f989da54f0abde98ba8ed523b843dc8b03d",
+        "size": 77635
+      },
+      "supervisor_report_markdown": {
+        "path": "artifacts/proof_carrying_context_engine/final/supervisor_report.md",
+        "raw_cid": "bafkreiewsasnd3rr7u24wv4qpylcgcthx35drpy5izsschq47fbs2sk2aq",
+        "sha256": "969024d1ee31fd35cb57907e16230a67befa38bf1d4665211e1cf9432d495a04",
+        "size": 4264
+      }
+    },
+    "pcce082": {
+      "assigned_level": "research_demo",
+      "level": {
+        "path": "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "raw_cid": "bafkreig5rmt5f6ilkehkr5kay7rqbjt6vrzuvzz7l5q4q7rawrjpccqzry",
+        "sha256": "dd8b27d2f90b510ea8f540c7e300a67eac734ae73f5f61c87e20b452f10a198e",
+        "size": 21629
+      },
+      "live_revision": 3,
+      "live_status": "completed",
+      "live_task_cid": "baguqeeralwimrbcuddpc5hlficwrhivlkosmj4p7kmtgjk77vjng7fpw2eua",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json",
+        "raw_cid": "bafkreibtybxpf37rkbkpiokmybdcwnmiwvadg6jmkjuz7yohmmeougehxy",
+        "sha256": "33c06ef2eff15054f4394cc0462b3588b54033792c52699fe1c76308ea1887be",
+        "size": 9694
+      },
+      "report": {
+        "path": "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "raw_cid": "bafkreiestklv2e2otkhfbh5pcfb5xgn3oys3cfwe7f4ar7vzbyyhima55u",
+        "sha256": "929a975d134e9a8e509faf1143db99bb7625b116c4f97808feb90e3074301ded",
+        "size": 7149
+      }
+    },
+    "prohibited_effects": {
+      "board_or_database_mutated": false,
+      "failed_or_blocked_evidence_omitted": false,
+      "metrics_invented": false,
+      "production_readiness_overstated": false,
+      "provider_or_ci_dispatched": false,
+      "release_published_or_tagged": false,
+      "waivers_created": false
+    },
+    "required_terminal_claim": {
+      "asserted": true,
+      "text": "The completed semantic-compression, incremental verification, model-routing, assurance, and proof-sealing subsystems were integrated into one installable Proof-Carrying Context Engine. The engine was evaluated against the frozen task corpus and qualified only to the level supported by the current installation, quality, security, context-reduction, cost, and verification evidence."
+    },
+    "self_reference_policy": {
+      "pcce083_receipt_path_represented_exactly_once": true,
+      "reason": "The PCCE-083 receipt binds this graph; its own identity is sealed externally after commit to avoid a recursive hash claim.",
+      "receipt_digest_embedded": false
+    },
+    "task_authority": {
+      "evidence_task_completed": true,
+      "live_status_at_authoring": "todo",
+      "live_task_cid": "baguqeerawci4ok5xn45k3pnf5ybbhs5dffhuufwzbvrlb2kxlgp3n372qzfq",
+      "reviewed_revision": 1
+    },
+    "validation": {
+      "board_validator": "passed",
+      "canonical_json": "passed",
+      "cross_file_identity_audit": "passed",
+      "dependency_and_receipt_completeness": "passed",
+      "diff_check": "passed",
+      "live_authority_read": "passed",
+      "machine_human_decision_consistency": "passed",
+      "terminal_sentence": "passed"
+    }
+  },
+  "evidence_task_completed": true,
+  "independent_review_status": "pending",
+  "objective_id": "PCCE-G800",
+  "parent_objective_id": "PCCE-G000",
+  "provisional": true,
+  "rollback": "Preserve this immutable pre-completion projection and supersede it only with corrected source evidence; never rewrite predecessor receipts or convert NO-GO evidence into passage.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-083"
+}
