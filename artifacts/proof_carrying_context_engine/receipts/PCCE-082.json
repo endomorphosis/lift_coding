@@ -1,0 +1,214 @@
+{
+  "artifact_identity": "bafkreig5rmt5f6ilkehkr5kay7rqbjt6vrzuvzz7l5q4q7rawrjpccqzry",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of exact qualification/level.json candidate bytes",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "evidence-task-completed-fail-closed-qualification-projection",
+  "evidence": {
+    "allowed_scope": {
+      "actual_paths": [
+        "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json"
+      ],
+      "board_allowed_paths": [
+        "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json"
+      ]
+    },
+    "decision": {
+      "assigned_level": "research_demo",
+      "external_supervised_pilot": "NO-GO",
+      "higher_level_claimed": false,
+      "internal_development": "proceed-with-restrictions",
+      "internal_pilot": "NO-GO",
+      "production_use": "NO-GO",
+      "projection_status": "independently-reviewed-final-candidate",
+      "release_disposition": "NO-GO"
+    },
+    "evidence_cut": {
+      "base_commit": "b8cadc3fb3f492cc2f27276e750ecb488bea541d",
+      "base_tree": "5ac7523e00e08677689aaa0826bfddda3b3f9b81",
+      "predecessor_081_evidence_task_completed": true,
+      "predecessor_081_independent_review_status": "passed",
+      "predecessor_081_live_database_completion_claimed": true,
+      "predecessor_081_live_task_cid": "baguqeerafrcsh2er4rissdyxq5ikb34kqbvrmb3a6drtys7k3tdlhbualp6q",
+      "predecessor_081_live_task_revision": 3,
+      "predecessor_081_live_task_status": "completed",
+      "static_task_cid": "baguqeerapw7qks3breerkbhbzydrhu7bfau32gwqd34625oph7vbnrckfmsa"
+    },
+    "evidence_integrity": {
+      "benchmark_or_cost_result_invented": false,
+      "board_completion_used_as_gate_credit": false,
+      "ci_passage_claimed": false,
+      "final_pcce081_reviewed_receipt_identity_claimed": true,
+      "live_model_or_provider_invoked": false,
+      "live_pcce081_database_completion_claimed": true,
+      "missing_input_marked_passed": false,
+      "package_or_release_signature_claimed": false,
+      "security_passage_claimed": false,
+      "self_hosting_passage_claimed": false,
+      "waivers": []
+    },
+    "gate_summary": {
+      "benchmark": {
+        "decision": "NO-GO",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "raw_cid": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+        "release_qualified": false
+      },
+      "current_head_ci": {
+        "decision": "NO-GO",
+        "external_ci_authority_available": false,
+        "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "raw_cid": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+        "release_qualified": false
+      },
+      "installation": {
+        "decision": "NO-GO",
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "raw_cid": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "release_qualified": false
+      },
+      "longitudinal_self_hosting": {
+        "decision": "NO-GO",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+        "qualification_cap": "NOT-QUALIFIED",
+        "raw_cid": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+        "status": "unavailable"
+      },
+      "release_candidate": {
+        "decision": "NO-GO",
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+        "promotable": false,
+        "raw_cid": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+        "release_qualified": false
+      },
+      "security": {
+        "decision": "NO-GO",
+        "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+        "raw_cid": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+        "release_qualified": false,
+        "security_qualified": false
+      }
+    },
+    "limitations": [
+      "PCCE-081 independent review passed, its reviewed receipt is bound, and live completion revision 3 is admitted at canonical merge b8cadc3f.",
+      "The assigned research_demo level is an upper-bound NO-GO disposition, not a positive release claim.",
+      "PCCE-082 independent review passed without fixes; supervisor admission and live database completion remain outside this sealed evidence candidate and are not claimed."
+    ],
+    "outer_composition": {
+      "baseline_commit": "b8cadc3fb3f492cc2f27276e750ecb488bea541d",
+      "baseline_tree": "5ac7523e00e08677689aaa0826bfddda3b3f9b81",
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json"
+      ],
+      "evidence_task_completed": true,
+      "independent_review_status": "passed",
+      "provisional": false,
+      "reviewed_candidate_commit": "11f5e995348f442bfe568c75d569ded9b8ca3a3d",
+      "reviewed_candidate_tree": "502e26584c5569f8e6f56e30f1bb6b2509e2a483"
+    },
+    "outputs": {
+      "level": {
+        "path": "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "raw_cid": "bafkreig5rmt5f6ilkehkr5kay7rqbjt6vrzuvzz7l5q4q7rawrjpccqzry",
+        "sha256": "dd8b27d2f90b510ea8f540c7e300a67eac734ae73f5f61c87e20b452f10a198e",
+        "size": 21629
+      },
+      "report": {
+        "path": "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "raw_cid": "bafkreiestklv2e2otkhfbh5pcfb5xgn3oys3cfwe7f4ar7vzbyyhima55u",
+        "sha256": "929a975d134e9a8e509faf1143db99bb7625b116c4f97808feb90e3074301ded",
+        "size": 7149
+      }
+    },
+    "pcce081_candidate": {
+      "candidate_commit": "c1b3a46f863594a5d513b2162c08860b8115ea08",
+      "candidate_tree": "5ac7523e00e08677689aaa0826bfddda3b3f9b81",
+      "current_receipt": {
+        "artifact_identity": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+        "final_reviewed_identity_claimed": true,
+        "independent_review_status": "passed",
+        "live_database_completion_claimed": true,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
+        "raw_cid": "bafkreiesr275sdrlyzx5bspbf7ushfhdnawp7upihreiwb2duk4rz4lhny",
+        "sha256": "928ebfd90e2bc66fd0c9e12fe92394e3682cffd1e83c488b0743a2b91cf1676e",
+        "size": 12926,
+        "status": "completed"
+      },
+      "evidence_task_completed": true,
+      "live_completion_refresh_required": false,
+      "live_database_completion_claimed": true,
+      "live_database_revision": 3,
+      "live_database_status": "completed",
+      "live_task_cid": "baguqeerafrcsh2er4rissdyxq5ikb34kqbvrmb3a6drtys7k3tdlhbualp6q",
+      "manifest": {
+        "blocker_count": 7,
+        "decision": "NO-GO",
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+        "promotable": false,
+        "raw_cid": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+        "release_qualified": false,
+        "sha256": "f0002a16bc97d8b49a15b7097ea1e63f2edbaf4c3a75275faa89026e4f3ed385",
+        "size": 90632,
+        "waiver_count": 0
+      },
+      "review_refresh_required": false
+    },
+    "policy": {
+      "explicit_no_go_can_only_hold_or_lower_level": true,
+      "highest_fully_supported_level_selected": true,
+      "missing_evidence_passes": false,
+      "ordered_levels_low_to_high": [
+        "research_demo",
+        "internal_alpha",
+        "internal_pilot",
+        "external_supervised_pilot",
+        "production_candidate"
+      ]
+    },
+    "prohibited_effects": {
+      "board_or_database_mutated": false,
+      "external_publication_or_tag_created": false,
+      "hidden_benchmark_content_accessed": false,
+      "provider_or_ci_dispatched": false,
+      "release_input_rebuilt_or_repaired": false
+    },
+    "recomposition_required": false,
+    "review": {
+      "disposition": "PASS",
+      "fixes_required": false,
+      "independent_review_status": "passed",
+      "reviewed_candidate_commit": "11f5e995348f442bfe568c75d569ded9b8ca3a3d",
+      "reviewed_candidate_tree": "502e26584c5569f8e6f56e30f1bb6b2509e2a483",
+      "sealed_for_handoff": true
+    },
+    "task_authority": {
+      "database_completion_by_author": false,
+      "database_mutated_by_author": false,
+      "evidence_task_completed": true,
+      "live_status_at_authoring": "todo",
+      "live_task_cid": "baguqeeralwimrbcuddpc5hlficwrhivlkosmj4p7kmtgjk77vjng7fpw2eua",
+      "reviewed_revision": 1,
+      "static_board_cid_non_authoritative_for_runtime": "baguqeerapw7qks3breerkbhbzydrhu7bfau32gwqd34625oph7vbnrckfmsa"
+    },
+    "validation": {
+      "canonical_json_and_binding_audit": "passed",
+      "declared_json_command": "passed",
+      "diff_check": "passed",
+      "evidence_cross_check": "passed",
+      "pcce081_deterministic_check": "passed",
+      "scope_audit": "passed"
+    }
+  },
+  "evidence_task_completed": true,
+  "independent_review_status": "passed",
+  "objective_id": "PCCE-G800",
+  "rollback": "Supersede this independently reviewed candidate only after genuinely new immutable evidence; never relabel the same evidence to a higher level.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-082"
+}
