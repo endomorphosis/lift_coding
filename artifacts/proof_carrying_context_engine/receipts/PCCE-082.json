@@ -1,0 +1,102 @@
+{
+  "artifact_identity": "bafkreigj2xzksmc7ykpdzmgiza6aw35ervno5ah6yji44eyglrhbsjuczi",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of qualification/level.json",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-fail-closed-qualification-projection-candidate",
+  "evidence": {
+    "allowed_scope": {
+      "actual_paths": [
+        "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json"
+      ],
+      "board_allowed_paths": [
+        "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json"
+      ]
+    },
+    "decision": {
+      "assigned_level": "research_demo",
+      "external_supervised_pilot": "NO-GO",
+      "higher_level_claimed": false,
+      "internal_development": "proceed-with-restrictions",
+      "internal_pilot": "NO-GO",
+      "production_use": "NO-GO",
+      "release_disposition": "NO-GO"
+    },
+    "evidence_cut": {
+      "base_commit": "43457c396be7a9116152e4414dadc4625eff2c2e",
+      "base_tree": "d2a3e450154cbf0b200d7eaae5db0f9eec8bbd66",
+      "predecessor_081_present": false,
+      "static_task_cid": "baguqeerapw7qks3breerkbhbzydrhu7bfau32gwqd34625oph7vbnrckfmsa"
+    },
+    "evidence_integrity": {
+      "benchmark_or_cost_result_invented": false,
+      "board_completion_used_as_gate_credit": false,
+      "ci_passage_claimed": false,
+      "live_model_or_provider_invoked": false,
+      "missing_input_marked_passed": false,
+      "package_or_release_signature_claimed": false,
+      "security_passage_claimed": false,
+      "self_hosting_passage_claimed": false,
+      "waivers": []
+    },
+    "limitations": [
+      "The required PCCE-081 predecessor is unavailable at this historical evidence cut.",
+      "This candidate is not admission-ready against a later composed head until all exact evidence identities and the policy trace are refreshed.",
+      "The assigned research_demo level is an upper-bound NO-GO disposition, not a positive release claim."
+    ],
+    "outputs": {
+      "level": {
+        "path": "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "raw_cid": "bafkreigj2xzksmc7ykpdzmgiza6aw35ervno5ah6yji44eyglrhbsjuczi",
+        "sha256": "c9d5f2a9305fc29e3cb0c8c83c0b6fa48d5aee80fec251ce13065c4e192682ca"
+      },
+      "report": {
+        "path": "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "raw_cid": "bafkreiclqnugl3fqhtioh5symyjbbehh3bkkl4wvdgmq226v2nbb3on7di",
+        "sha256": "4b836865ecb03cd0e3f65866121090e7d854a5f2d519990d6bd5d3421db9bf1a"
+      }
+    },
+    "policy": {
+      "explicit_no_go_can_only_hold_or_lower_level": true,
+      "highest_fully_supported_level_selected": true,
+      "missing_evidence_passes": false,
+      "ordered_levels_low_to_high": [
+        "research_demo",
+        "internal_alpha",
+        "internal_pilot",
+        "external_supervised_pilot",
+        "production_candidate"
+      ]
+    },
+    "prohibited_effects": {
+      "board_or_database_mutated": false,
+      "external_publication_or_tag_created": false,
+      "hidden_benchmark_content_accessed": false,
+      "provider_or_ci_dispatched": false,
+      "release_input_rebuilt_or_repaired": false
+    },
+    "recomposition_required": {
+      "before_admission_against_later_head": true,
+      "inputs": [
+        "PCCE-068 benchmark qualification",
+        "PCCE-076 security qualification",
+        "PCCE-079 longitudinal self-hosting qualification",
+        "PCCE-080 current-head CI evidence",
+        "PCCE-081 release manifest, qualification, limitations, rollback, verification, and receipt"
+      ]
+    },
+    "validation": {
+      "declared_command": "python -m json.tool artifacts/proof_carrying_context_engine/qualification/level.json",
+      "evidence_cross_check": "passed-for-declared-historical-cut",
+      "json_parse": "passed"
+    }
+  },
+  "objective_id": "PCCE-G800",
+  "rollback": "Supersede the qualification projection only when new immutable evidence exists; never relabel the same evidence to a higher level.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "candidate-pending-predecessor-composition",
+  "task_id": "PCCE-082"
+}
