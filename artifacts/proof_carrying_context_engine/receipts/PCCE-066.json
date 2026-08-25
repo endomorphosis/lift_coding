@@ -1,0 +1,149 @@
+{
+  "artifact_identity": "baguqeeraerwkjdr7rwsqpojrqodp5mletrpojpogtg3mrh52whztabxxoxpa",
+  "artifact_identity_kind": "software-contract structured CID of the PCCE-066 metric-set descriptor",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-pure-metric-implementation-no-benchmark-execution",
+  "evidence": {
+    "allowed_scope": {
+      "actual_nested_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/benchmarks/comparison.py",
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/benchmarks/metrics.py",
+        "external/ipfs_datasets/tests/proof_context/benchmarks/test_metrics.py"
+      ],
+      "actual_outer_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-066.json",
+        "external/ipfs_datasets"
+      ],
+      "board_allowed_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/benchmarks/metrics.py",
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/benchmarks/comparison.py",
+        "external/ipfs_datasets/tests/proof_context/benchmarks/test_metrics.py",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-066.json"
+      ]
+    },
+    "benchmark_execution": {
+      "benchmark_results_observed": false,
+      "benchmark_runs_started": false,
+      "live_model_or_provider_invoked": false,
+      "performance_or_cost_claims_allowed": false,
+      "reason": "PCCE-066 implements and tests pure aggregation; bounded benchmark execution remains owned by PCCE-067"
+    },
+    "descriptor": {
+      "comparison_descriptor_cid": "baguqeera5pkfnjkl7l4cwhrgkzsm53t4ijlnfk574nklm36dg5ql7jr2au6a",
+      "metric_set_descriptor_cid": "baguqeeraerwkjdr7rwsqpojrqodp5mletrpojpogtg3mrh52whztabxxoxpa"
+    },
+    "independent_review": {
+      "disposition": "APPROVED",
+      "reviewer": "/root/fix_pcce075_v3 (independent Codex reviewer)",
+      "subject": {
+        "base_commit": "40a8b22ba093e19bae56e7c72a8f192946ae6a98",
+        "implementation_commit": "817a665897467b44e6b6fc413d757d9ade719d4d",
+        "implementation_tree": "7b395108ecde75bcbfa7445073a4fd824d92de4e"
+      },
+      "verification": {
+        "all_proof_context_tests_passed": 208,
+        "benchmark_tests_passed": 188,
+        "determinism_permutations": 100,
+        "diff_check": "passed",
+        "focused_metric_tests_passed_per_seed": 124,
+        "focused_seeds": [
+          0,
+          1,
+          66,
+          777
+        ],
+        "formula_and_missingness_review": "passed",
+        "ruff_format": "passed",
+        "ruff_lint": "passed"
+      }
+    },
+    "metric_integrity": {
+      "all_attempt_costs_included": true,
+      "estimated_values_labeled": true,
+      "failed_attempt_costs_excluded": false,
+      "missing_denominators_imputed": false,
+      "observed_values_labeled": true,
+      "paired_and_unpaired_explicit": true,
+      "preregistered_thresholds_mutated": false,
+      "seeded_bootstrap": "one-sided-integer-deterministic",
+      "semantic_trace_disclosure": "counts-cids-and-closed-taxonomy-fields-only",
+      "zero_denominator_disposition": "typed-no-go"
+    },
+    "nested_source": {
+      "base_commit": "40a8b22ba093e19bae56e7c72a8f192946ae6a98",
+      "files": {
+        "ipfs_datasets_py/proof_context/benchmarks/comparison.py": {
+          "blob": "38496f3b4e2954c6fcaaa646e0c4db28761ceb0d",
+          "mode": "100644",
+          "sha256": "01a4ceee38cd10e11beb4a0daa52839fface09e44eecbccde2a96ab0e5e25136",
+          "size": 46581
+        },
+        "ipfs_datasets_py/proof_context/benchmarks/metrics.py": {
+          "blob": "222cb904996d2740ed34ae2a753ee2694f2349ff",
+          "mode": "100644",
+          "sha256": "d8c43fced1643b9ff7967f0105ee74fe6b52afef4e6c86a9588ebfaec0118879",
+          "size": 53733
+        },
+        "tests/proof_context/benchmarks/test_metrics.py": {
+          "blob": "8e976392f4fe5b54c5d4fe20c2d5d915039f790b",
+          "mode": "100644",
+          "sha256": "b00d5ace86c618ac486cc47700f3112d1a5817dd5b66709239739159f89a045e",
+          "size": 64917
+        }
+      },
+      "implementation_commit": "817a665897467b44e6b6fc413d757d9ade719d4d",
+      "implementation_tree": "7b395108ecde75bcbfa7445073a4fd824d92de4e",
+      "repository": "external/ipfs_datasets"
+    },
+    "outer_composition": {
+      "base_commit": "c8ad31574a3ca774e9e19a34acfacfe5cdc104c1",
+      "base_tree": "1d531d8008c1667a366bad32611734faaf852e61",
+      "branch": "implementation/PCCE-066-metrics-20260825",
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-066.json",
+        "external/ipfs_datasets"
+      ],
+      "datasets_base_gitlink": "40a8b22ba093e19bae56e7c72a8f192946ae6a98",
+      "datasets_candidate_gitlink": "817a665897467b44e6b6fc413d757d9ade719d4d"
+    },
+    "prohibited_effects": {
+      "failed_attempt_costs_excluded": false,
+      "hidden_answers_accessed_outside_scorer": false,
+      "live_provider_or_benchmark_invoked": false,
+      "preregistered_denominators_or_thresholds_changed": false,
+      "unavailable_results_imputed_as_pass_or_zero_cost": false
+    },
+    "task_authority": {
+      "database_task_cid": "baguqeeranklklq4uste5bkfa6vizzpnnwd4uiqeyseehz7niw3pbi3e3bkuq",
+      "reviewed_database_revision": 1,
+      "reviewed_database_status": "todo",
+      "transport": "quack:127.0.0.1:41347"
+    },
+    "validation": {
+      "combined_benchmark_suite": {
+        "passed": 188
+      },
+      "declared_metric_suite": {
+        "passed": 124,
+        "python_hash_seeds": [
+          0,
+          1,
+          66,
+          777
+        ]
+      },
+      "full_proof_context_suite": {
+        "passed": 208,
+        "python_hash_seed": 23
+      },
+      "python_compile": "passed",
+      "ruff_format": "passed",
+      "ruff_lint": "passed"
+    }
+  },
+  "objective_id": "PCCE-G600",
+  "rollback": "Revert the outer receipt and datasets gitlink; preserve raw benchmark inputs and the immutable reviewed metric commit for a versioned retry.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-066"
+}
