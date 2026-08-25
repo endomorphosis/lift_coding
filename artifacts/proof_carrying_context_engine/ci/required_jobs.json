@@ -1,0 +1,388 @@
+{
+  "blockers": [
+    {
+      "decision": "NO-GO",
+      "id": "predecessor-benchmark-qualification-no-go",
+      "qualification_cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+      "source_task": "PCCE-068",
+      "waiver": null
+    },
+    {
+      "decision": "NO-GO",
+      "id": "predecessor-security-qualification-no-go",
+      "qualification_cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+      "source_task": "PCCE-076",
+      "waiver": null
+    },
+    {
+      "id": "current-head-workflow-run-unavailable",
+      "workflow_run_id": null,
+      "workflow_run_url": null
+    },
+    {
+      "id": "required-check-ruleset-authority-unavailable",
+      "ruleset_id": null,
+      "ruleset_url": null
+    },
+    {
+      "id": "complete-job-logs-unavailable",
+      "observed_log_count": 0,
+      "required_log_count": 9
+    },
+    {
+      "findings": null,
+      "id": "dependency-license-run-findings-unavailable"
+    }
+  ],
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "candidate_composition": {
+    "accelerator_base_gitlink": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+    "accelerator_candidate_gitlink": "36021e09d8f3d8d5878108f64e3bb9cb73ebafdd",
+    "accelerator_candidate_tree": "ebd9b42ba48a71ca908e86a9467e581446be5930",
+    "evidence_task_completed": true,
+    "independent_review_status": "pending",
+    "outer_base_commit": "ec5f94326acf0f4876ee0dcfb2a705ec6eb742c5",
+    "outer_base_tree": "89a90dbe0ff30984cc8d20319ac062888ec3fb3f",
+    "provisional": false
+  },
+  "evidence_cut": {
+    "gitlinks": {
+      "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+      "external/ipfs_accelerate": "54c594a40a3bdfab18e672d5ba2d7338313f0cb1",
+      "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+      "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+    },
+    "historical_not_current_head_claim": true,
+    "outer_commit": "ec5f94326acf0f4876ee0dcfb2a705ec6eb742c5",
+    "outer_tree": "89a90dbe0ff30984cc8d20319ac062888ec3fb3f",
+    "provisional": false
+  },
+  "evidence_task_status": "completed",
+  "external_authority": {
+    "branch_ruleset_id": null,
+    "branch_ruleset_url": null,
+    "current_head_sha": null,
+    "dependency_license_findings": null,
+    "job_logs": [],
+    "status": "unavailable-not-observed",
+    "workflow_run_id": null,
+    "workflow_run_url": null
+  },
+  "file_identities": {
+    "contract_test": {
+      "cid_v1_raw": "bafkreierczycul5zb2sivjptluezmq6y7sevhbg6wcqe7qbdzabpcsz3me",
+      "path": "external/ipfs_accelerate/test/proof_context/test_release_ci_contract.py",
+      "sha256": "9116702a2fb90ea48aa5f35d099643d8fc895384deb0a04fc023c802f14b3b61",
+      "size": 8358
+    },
+    "verifier": {
+      "cid_v1_raw": "bafkreig4mjbcsh2w22x6o77qbkpbna7dmoc3fmx4znshmvefzvomcktqbq",
+      "path": "external/ipfs_accelerate/scripts/proof_context/verify_release_ci.py",
+      "sha256": "dc6242291f56d6afe77ff00a9e1683e36385b2b2fccb64765485cd5cc12a700c",
+      "size": 39094
+    },
+    "workflow": {
+      "cid_v1_raw": "bafkreiezzjimg336bs4lpc52wsw2he42zannjphs3xq6vxvhhp4upht66m",
+      "path": "external/ipfs_accelerate/.github/workflows/proof-context-v0.1.yml",
+      "sha256": "99ca50c36f7e0cb8b78bbab4ada3939ac81ad4bcf2dde1eadea73bf9479e7ef3",
+      "size": 30566
+    }
+  },
+  "finalization": {
+    "ci_qualified": false,
+    "database_completion_by_author": false,
+    "evidence_task_completed": true,
+    "independent_review_status": "pending",
+    "release_qualified": false,
+    "status": "completed-with-explicit-ci-release-no-go"
+  },
+  "policy": {
+    "aggregate_job": "release-gate",
+    "artifact_download": "one explicit numeric immutable workflow run ID; no latest-run fallback",
+    "branch_ruleset_required": true,
+    "continue_on_error_allowed": false,
+    "dependency_install": "no-index, only-binary, require-hashes; no source or editable install",
+    "mutable_action_refs_allowed": false,
+    "required_job_count": 9,
+    "triggers": [
+      "merge_group",
+      "pull_request",
+      "push:main",
+      "workflow_dispatch-with-explicit-identities"
+    ]
+  },
+  "predecessor_evidence": {
+    "PCCE-068": {
+      "authored_candidate_commit": "6e2b1a3bcb1e276bb52cd03f793b20d01198cd5b",
+      "canonical_merge_commit": "ec5f94326acf0f4876ee0dcfb2a705ec6eb742c5",
+      "decision": "NO-GO",
+      "input_authority": "canonical-merged-evidence",
+      "live_task_cid": "baguqeera6b73j6caxykusogroe3y2xnduagvyng5v4nguahom5rtgux3m2tq",
+      "live_task_revision": 3,
+      "live_task_status": "completed",
+      "metrics": {
+        "cid_v1_raw": "bafkreiajyugiiwwbyibyxnv6hkdzqvnjcpwc3hwwmrgt6etogks6ecdgmq",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "sha256": "09c50c845ac1c2038bb6be3a879855a913ec2d9ed6644d3f126e32a5e2086664",
+        "size": 186473
+      },
+      "qualification": {
+        "cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+        "decision_kind": "unavailable-evidence-no-go-not-measured-threshold-failure",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "release_qualified": false,
+        "sha256": "13dcaf260fcbbed9dd72b53954e6bdfd12db27a423ee96343d18afca8bf1c077",
+        "size": 24864,
+        "status": "NO-GO",
+        "structured_artifact_identity": "baguqeeraxdcsravklkrwuqftkaf3nuqvqnrnnj6ypwydsnntxv4l45veuxca"
+      },
+      "receipt": {
+        "artifact_identity": "baguqeeraxdcsravklkrwuqftkaf3nuqvqnrnnj6ypwydsnntxv4l45veuxca",
+        "cid_v1_raw": "bafkreicfo3thta45nvvderosgk2y5wvnsilq26befdkecbegdcx3gosuna",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json",
+        "sha256": "4576e679839d6d6a3245d232b58edaad92170d782428d441048618afb33a5468",
+        "size": 13262,
+        "status": "completed"
+      },
+      "source_commit": "ec5f94326acf0f4876ee0dcfb2a705ec6eb742c5",
+      "source_tree": "89a90dbe0ff30984cc8d20319ac062888ec3fb3f"
+    },
+    "PCCE-076": {
+      "canonical_merge_commit": "0758f8c265b1c1e8868af53cd756c37811c3451e",
+      "decision": "NO-GO",
+      "findings": {
+        "cid_v1_raw": "bafkreiaj5oj6sqxpybal2q5rejdmtusbuqrhulbnkfhglw3gxbtjyz5ub4",
+        "path": "artifacts/proof_carrying_context_engine/security/findings.json",
+        "sha256": "09eb93e942efc040bd43b12246c9d241a4227a2c2d514e65db66b8669c67b40f",
+        "size": 18145
+      },
+      "input_authority": "canonical-merged-evidence",
+      "live_task_cid": "baguqeera75yoyff76ew7hitxvpsyk7jqxa2vhgiddmnpyma5spkazkzxr3yq",
+      "live_task_revision": 3,
+      "live_task_status": "completed",
+      "qualification": {
+        "cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+        "decision": "NO-GO",
+        "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+        "release_qualified": false,
+        "sha256": "94034723fddfa547266c794961c3c88d005f1d097c6e2524ccfbedd49a7dc8f4",
+        "size": 7425
+      },
+      "receipt": {
+        "artifact_identity": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+        "cid_v1_raw": "bafkreicyoqp5dljl5w3csdmrfbkzkxacbowmdypnc5mvnvbbvso24qauue",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-076.json",
+        "sha256": "58741fd1ad2bedb6290d912855955c020bacc1e1ed175956d421ac9dae4014a1",
+        "size": 8915,
+        "status": "completed"
+      }
+    }
+  },
+  "qualification": {
+    "decision": "NO-GO",
+    "external_ci_authority_available": false,
+    "local_contract_verified": true,
+    "release_qualified": false,
+    "waivers": []
+  },
+  "required_check_contexts": [
+    "PCCE / release contract",
+    "PCCE / clean install",
+    "PCCE / unit and integration",
+    "PCCE / security",
+    "PCCE / benchmark smoke",
+    "PCCE / receipt and seal verification",
+    "PCCE / supported container",
+    "PCCE / dependency and license",
+    "PCCE / required release gate"
+  ],
+  "required_jobs": [
+    {
+      "check_name": "PCCE / release contract",
+      "command_sha256": "0936f560f8217cb7fc4db7875c7d42b3548fb787f350af7d9961b02dc6b0aa65",
+      "evidence_artifact": "proof-context-release-contract-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "release-contract",
+      "needs": [],
+      "purpose": "verify the exact workflow/manifest contract and require external current-head authority",
+      "required": true,
+      "runner": "ubuntu-24.04"
+    },
+    {
+      "check_name": "PCCE / clean install",
+      "command_sha256": "e704bcbf4c1d5d6078db84e4f3184c40ae07fbb64479b7a624ad9730d3a7fe89",
+      "evidence_artifact": "proof-context-clean-install-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "clean-install",
+      "needs": [],
+      "purpose": "require immutable supported-profile installation and its container prerequisite",
+      "required": true,
+      "runner": "ubuntu-24.04-arm"
+    },
+    {
+      "check_name": "PCCE / unit and integration",
+      "command_sha256": "8113078dd85489793328750c86092637e2d446df160fc5f581317173fd9ac655",
+      "evidence_artifact": "proof-context-unit-integration-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "unit-integration",
+      "needs": [],
+      "purpose": "run required import, schema/vector, runtime, CLI, integration, and example tests",
+      "required": true,
+      "runner": "ubuntu-24.04-arm"
+    },
+    {
+      "check_name": "PCCE / security",
+      "command_sha256": "5a69db348928f2ea2607c802a630a46ceb24f89571ddd701434e8c7467e3280b",
+      "evidence_artifact": "proof-context-security-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "security",
+      "needs": [],
+      "purpose": "run every required threat, sandbox, adversarial, isolation, trust, and concurrency test",
+      "required": true,
+      "runner": "ubuntu-24.04-arm"
+    },
+    {
+      "check_name": "PCCE / benchmark smoke",
+      "command_sha256": "31e80bcd361b2a3c31135a10609610206b69d805c5871ff92aec0267ce0bd601",
+      "evidence_artifact": "proof-context-benchmark-smoke-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "benchmark-smoke",
+      "needs": [],
+      "purpose": "run the frozen A-D configuration and metric contract, then require benchmark qualification",
+      "required": true,
+      "runner": "ubuntu-24.04-arm"
+    },
+    {
+      "check_name": "PCCE / receipt and seal verification",
+      "command_sha256": "a317b45b55b539c88cfe67daa6e4a582e5638e605f3bdc533cfbaeacb517fb68",
+      "evidence_artifact": "proof-context-receipt-seal-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "receipt-seal",
+      "needs": [],
+      "purpose": "verify predecessor receipts and content-addressed seal bindings",
+      "required": true,
+      "runner": "ubuntu-24.04"
+    },
+    {
+      "check_name": "PCCE / supported container",
+      "command_sha256": "c4aced273c529a5ac42a64be50bb55d2c52e213c41c4b1252c64d75e459c7d43",
+      "evidence_artifact": "proof-context-container-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "container",
+      "needs": [],
+      "purpose": "build the digest-pinned supported arm64 container with no network",
+      "required": true,
+      "runner": "ubuntu-24.04-arm"
+    },
+    {
+      "check_name": "PCCE / dependency and license",
+      "command_sha256": "b87dd1bc7f64f5f4cd91cadc6c11cd89abae4bf5bc9c6c1b8a7bec62bd382399",
+      "evidence_artifact": "proof-context-dependency-license-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "dependency-license",
+      "needs": [],
+      "purpose": "audit the exact lock/SBOM population and retain dependency/license findings",
+      "required": true,
+      "runner": "ubuntu-24.04"
+    },
+    {
+      "check_name": "PCCE / required release gate",
+      "command_sha256": "fab764b158816afc6b5fb9deacd4119b0cf50a34fe8cdf26bd93bb9f6c9420fe",
+      "evidence_artifact": "proof-context-release-gate-<run-attempt>",
+      "external_result": {
+        "check_run_id": null,
+        "conclusion": null,
+        "log_cid": null,
+        "log_sha256": null,
+        "status": "unavailable-not-run",
+        "url": null
+      },
+      "job_id": "release-gate",
+      "needs": [
+        "release-contract",
+        "clean-install",
+        "unit-integration",
+        "security",
+        "benchmark-smoke",
+        "receipt-seal",
+        "container",
+        "dependency-license"
+      ],
+      "purpose": "fail unless all eight upstream required jobs report success",
+      "required": true,
+      "runner": "ubuntu-24.04"
+    }
+  ],
+  "required_predecessor_receipts": [
+    "PCCE-068",
+    "PCCE-076"
+  ],
+  "rollback": "Revert only the local workflow/verifier/test and this manifest after preserving failed evidence; never remove or soften a required check to obtain green status.",
+  "schema": "lift_coding.proof-carrying-context-engine.required-ci-jobs@1",
+  "task_authority": {
+    "database_completion_by_author": false,
+    "database_mutated_by_author": false,
+    "evidence_task_completed": true,
+    "live_status_at_authoring": "todo",
+    "live_task_cid": "baguqeerax65k5eln5awrgysj33pt6gsatg2po2leftgrmg25m3f47ojhnnga",
+    "reviewed_revision": 1,
+    "static_board_cid_non_authoritative_for_runtime": "baguqeeramdjzkg3vpqgtq5oa4i2frfcwzinebpr27qwfwztf2hweutvtuyxq"
+  },
+  "task_id": "PCCE-080"
+}
