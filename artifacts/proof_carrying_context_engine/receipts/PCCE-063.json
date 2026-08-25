@@ -1,0 +1,195 @@
+{
+  "artifact_identity": "baguqeerac4n6fpukzig3at67mihsl7ehnme5fwjo7jywirglaxjthane7r3q",
+  "artifact_identity_kind": "software-contract structured CID of the frozen mature-Python shard manifest",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-corpus-materialization-with-truthful-host-visible-baseline-replay",
+  "evidence": {
+    "allowed_scope": {
+      "actual_nested_paths": [
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/LICENSE.django-5.2.5",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/baseline_replay.json",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/dependencies/asgiref-3.8.1-py3-none-any.whl",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/dependencies/sqlparse-0.5.3-py3-none-any.whl",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/evaluator_manifest.json",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/shard_manifest.json",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/source/django-5.2.5-a3b1107.tar.gz",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/source_verification.json",
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python/visible_manifest.json",
+        "external/ipfs_datasets/tests/proof_context/benchmarks/test_mature_python_corpus.py"
+      ],
+      "actual_outer_paths": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+        "external/ipfs_datasets"
+      ],
+      "board_allowed_paths": [
+        "external/ipfs_datasets/benchmarks/proof_context/corpus/mature_python",
+        "external/ipfs_datasets/tests/proof_context/benchmarks/test_mature_python_corpus.py",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json"
+      ]
+    },
+    "baseline_full_test": {
+      "command": "env -i <recorded-environment> python3.12 -P tests/runtests.py --parallel 4 --verbosity 1",
+      "execution_boundary": "host-filesystem-visible-not-chroot-or-container-rootfs-isolated",
+      "observations": [
+        {
+          "command_execution_id": "exec-e81cb2f7-21f5-44e3-be58-b8494e77cede",
+          "discovered_tests": 18098,
+          "django_duration_milliseconds": 91819,
+          "errors": 0,
+          "expected_failures": 5,
+          "failures": 0,
+          "python_hash_seed": 0,
+          "ran_tests": 18096,
+          "skipped": 1912,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "645323ce6173c2d8f7287ac6683b9722731fbf0a7ae306bbbb25362dbec0d03d",
+          "wall_duration_nanoseconds": 103376432838
+        },
+        {
+          "command_execution_id": "exec-0476ce8d-4990-48ed-92e2-b9c14d41f2d6",
+          "discovered_tests": 18098,
+          "django_duration_milliseconds": 92038,
+          "errors": 0,
+          "expected_failures": 5,
+          "failures": 0,
+          "python_hash_seed": 777,
+          "ran_tests": 18096,
+          "skipped": 1912,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_sha256": "8e881b644f8980c673cdf4e2fe56a15fc41ccc57c91501264e2fa78b126b9fb2",
+          "wall_duration_nanoseconds": 103718371241
+        }
+      ],
+      "passed": true,
+      "reproduction_count": 2,
+      "source_edits": false
+    },
+    "historical_cutoff_and_missingness": {
+      "future_commits_or_pr_patches_accessed": false,
+      "historical_answer_materialized": false,
+      "historical_task_disposition": "unavailable-no-future-patch-access",
+      "hidden_evaluator_partition_provider_visible": false,
+      "live_execution_eligible": false,
+      "reason": "the exact source and full baseline are verified; no later hidden answer was fabricated or fetched"
+    },
+    "independent_review": {
+      "disposition": "APPROVED",
+      "reviewer": "/root/audit_pcce063_v3 (independent Codex reviewer)",
+      "subject": {
+        "nested_base_commit": "777f2dc8861bb756141302e014b202a21d363f76",
+        "nested_candidate_commit": "40a8b22ba093e19bae56e7c72a8f192946ae6a98",
+        "nested_candidate_tree": "e2a0d1175f24ccb3073669145b392788639ad410",
+        "superseded_rejected_candidates": [
+          {
+            "commit": "f160d84a452a6ce5b1e3abeddea15c7f879806bc",
+            "tree": "7a49645de526c97d2c5dc56ceabce70faf542eca"
+          },
+          {
+            "commit": null,
+            "tree": "e6c556e2e70d8f6fd1b6212eff179f01a0d29ba0"
+          }
+        ]
+      },
+      "verification": {
+        "canonical_json_and_cids": "recomputed-and-matched",
+        "focused_tests_passed": 22,
+        "full_benchmark_tests_passed": 64,
+        "host_visible_boundary_disclosed": true,
+        "network_namespace_isolated": false,
+        "ruff_format": "passed",
+        "ruff_lint": "passed",
+        "stale_counts_or_image_isolation_claims": 0,
+        "upstream_full_baseline": "two-independent-observations-passed"
+      }
+    },
+    "nested_source": {
+      "base_commit": "777f2dc8861bb756141302e014b202a21d363f76",
+      "implementation_commit": "40a8b22ba093e19bae56e7c72a8f192946ae6a98",
+      "implementation_tree": "e2a0d1175f24ccb3073669145b392788639ad410",
+      "repository": "external/ipfs_datasets",
+      "records": {
+        "baseline_replay": {
+          "blob": "dc7f24c2c0fcc5aefbbebedf21e9f22603bcd7a6",
+          "raw_cid_v1": "bafkreigeeljnvjdyqlsigr23jvcgnoit67iz4vm674ons5s2gsdppkpgam",
+          "sha256": "c422d2daa47882e483475b4d4466b913f7d19e559eff1cd9765a3486f7a9e603",
+          "size": 10551,
+          "structured_cid": "baguqeeraekkxhc5fhgyvirryn35blbaq3lmpmdzpinuxi3jeelvgozv2ycfa"
+        },
+        "shard_manifest": {
+          "blob": "cbc9fa2b963a4bb11fb6378d0804f1ef80982fb7",
+          "raw_cid_v1": "bafkreictp6ue7nlwsmdrhveauuwpkdhahnrm7algkszn5skhowtzj32oti",
+          "sha256": "537fa84fb576930713d480a52cf50ce03b62cf816654b2dec94775a794ef4e9a",
+          "size": 11767,
+          "structured_cid": "baguqeerac4n6fpukzig3at67mihsl7ehnme5fwjo7jywirglaxjthane7r3q"
+        },
+        "source_verification": {
+          "blob": "ade64d47f75d98b7d8bffe3dcc81d3442dc33f5a",
+          "raw_cid_v1": "bafkreicfavand4p7tcn5xg4vekmwzpmrrirs7oj2yrrkkyzirw2u6hvpcu",
+          "sha256": "450540d1f1ff989bdb9b9522996cbd918a232fb93ac462a563288db54f1eaf15",
+          "size": 6793,
+          "structured_cid": "baguqeerapb32avsobnjpf5hqaijquuhpgetgt27bvagnyjxw6rcdb2s7yema"
+        },
+        "validator": {
+          "blob": "5320490f21bf72a02c91460b6d97c8a4aca19405",
+          "raw_cid_v1": "bafkreifhbsbl5lbnwgaoo4smsfk7ilrs4kqt3iy4ubdqrkt5s7k4t2pmxy",
+          "sha256": "a70c82beac2db180e7724c9155f42e32e2a13da31ca04708aa7d97d5c9e9ecbe",
+          "size": 36643
+        }
+      }
+    },
+    "outer_composition": {
+      "base_commit": "ed97ee2dd11e0409afaeeb539b645d7b718869af",
+      "base_tree": "fad980c6c139aaa9902160daaf045d5aa00a6778",
+      "branch": "implementation/PCCE-063-outer-v3-20260825",
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+        "external/ipfs_datasets"
+      ],
+      "datasets_base_gitlink": "777f2dc8861bb756141302e014b202a21d363f76",
+      "datasets_candidate_gitlink": "40a8b22ba093e19bae56e7c72a8f192946ae6a98"
+    },
+    "pcce056_runtime_gate": {
+      "decision": "NO-GO",
+      "live_execution_eligible": false,
+      "production_qualified": false,
+      "release_qualified": false
+    },
+    "prohibited_effects": {
+      "corpus_revision_repin_after_results": false,
+      "future_commit_or_pr_patch_accessed": false,
+      "hidden_answer_exposed_to_agent_or_provider": false,
+      "incompatible_license_included": false,
+      "live_provider_or_benchmark_invoked": false,
+      "network_used_during_task_execution": false,
+      "production_or_live_qualification_claimed": false,
+      "supervisor_quack_or_duckdb_mutated_during_review": false
+    },
+    "runtime_limitations": {
+      "chroot": false,
+      "container_rootfs_isolated": false,
+      "host_filesystem_visible": true,
+      "host_system_libraries_visible": true,
+      "network_namespace_isolated": false,
+      "site_packages": "isolated-venv-only"
+    },
+    "source_materialization": {
+      "archive_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+      "archive_sha256": "600a460db656899969c7dd4b1c70ce268eada7c49fa0b57e942da79030faa7af",
+      "archive_size": 10551627,
+      "license_sha256": "b846415d1b514e9c1dff14a22deb906d794bc546ca6129f950a18cd091e2a669",
+      "license_spdx": "BSD-3-Clause",
+      "reconstructed_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48"
+    },
+    "task_authority": {
+      "database_revision": 1,
+      "database_status_at_review": "todo",
+      "database_task_cid": "baguqeerapraozmka5hq626owp6lo4vc35lbnacq2hk4q543zh3y5crs5zvfa",
+      "transport": "quack:127.0.0.1:41347"
+    }
+  },
+  "objective_id": "PCCE-G600",
+  "rollback": "Revert the unadmitted outer receipt and datasets gitlink; preserve immutable reviewed corpus evidence for a versioned retry.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-063"
+}
