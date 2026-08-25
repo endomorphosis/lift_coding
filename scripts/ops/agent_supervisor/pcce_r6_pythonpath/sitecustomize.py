@@ -19,10 +19,11 @@ import time
 from pathlib import Path
 from typing import Any
 
+from pcce_r6_completion_mirror import mirror_completed_duckdb_tasks
+
 _LOG = logging.getLogger("pcce.r6.coordination_mirror")
 _DAEMON = "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon"
 _SUPERVISOR = "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor"
-_COMPLETED = frozenset({"completed", "complete", "done", "skipped"})
 _real_import = builtins.__import__
 
 
@@ -42,55 +43,6 @@ _script = Path(sys.argv[0]).name if sys.argv else ""
 if _script == "implementation_supervisor_entry.py":
     if "--no-reconciliation-guardrail" not in sys.argv:
         sys.argv.append("--no-reconciliation-guardrail")
-
-
-def _mirrored_task_cids(daemon: Any) -> set[str]:
-    seen = getattr(daemon, "_pcce_r6_mirrored_task_cids", None)
-    if seen is None:
-        seen = set()
-        daemon._pcce_r6_mirrored_task_cids = seen
-    return seen
-
-
-def _mirror_completed_duckdb_tasks(daemon: Any) -> int:
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
-        TASK_SOURCE_QUERY_LIMIT,
-    )
-
-    seen = _mirrored_task_cids(daemon)
-    mirrored = 0
-    page = daemon.task_source.list_tasks(limit=TASK_SOURCE_QUERY_LIMIT)
-    for task in page.tasks:
-        status = str(task.status or "").strip().lower()
-        if status not in _COMPLETED:
-            continue
-        task_cid = str(task.task_cid)
-        if task_cid in seen:
-            continue
-        daemon.coordinator.register_task(
-            task_cid=task.task_cid,
-            task_id=task.task_alias or task.task_cid,
-            dependency_task_cids=tuple(str(dep) for dep in task.dependencies),
-            body={
-                "task_alias": task.task_alias,
-                "status": task.status,
-                "producer": "pcce-r6-completed-dependency-mirror",
-            },
-        )
-        daemon.coordinator.mark_task_complete(
-            task.task_cid,
-            status="succeeded",
-            body={
-                "schema": "pcce-r6-coordination-bootstrap-completion@1",
-                "authority": "duckdb_completed_mirror",
-                "source_status": status,
-                "task_alias": task.task_alias,
-                "task_revision": int(task.revision),
-            },
-        )
-        seen.add(task_cid)
-        mirrored += 1
-    return mirrored
 
 
 def _install_recovery_skip(cls: Any) -> None:
@@ -124,15 +76,12 @@ def _patch_daemon(module: Any) -> None:
         original = database_cls.sync_ready_tasks_into_coordination
 
         def sync_ready_tasks_into_coordination(self: Any) -> list[str]:
-            try:
-                mirrored = _mirror_completed_duckdb_tasks(self)
-                if mirrored:
-                    _LOG.info(
-                        "mirrored %s completed DuckDB tasks into coordination",
-                        mirrored,
-                    )
-            except Exception:
-                _LOG.exception("failed to mirror completed DuckDB tasks")
+            mirrored = mirror_completed_duckdb_tasks(self)
+            if mirrored:
+                _LOG.info(
+                    "mirrored %s completed DuckDB tasks into coordination",
+                    mirrored,
+                )
             return original(self)
 
         database_cls.sync_ready_tasks_into_coordination = (

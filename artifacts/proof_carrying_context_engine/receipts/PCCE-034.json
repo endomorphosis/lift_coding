@@ -1,0 +1,21 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-034",
+  "objective_id": "PCCE-G300",
+  "status": "completed",
+  "completion_mode": "supervised-adapter-implementation",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-034:external-patch-adapter",
+  "content_id": "sha256:55361a08aa95c7efe986afcb1a8bd1b778da933b99fbd2e4d9272c39b8628d89",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "evidence": {
+    "adapter": "ipfs_accelerate_py.proof_context.adapters.external_patch.ExternalPatchAdapter",
+    "external_provenance": "ipfs-accelerate.proof-context.v0.1/external-patch-admission@1",
+    "patch_identity": "CIDv1 raw sha2-256 over exact supplied patch bytes",
+    "no_apply": true,
+    "no_approval": true,
+    "fail_closed": ["invalid UTF-8 or NUL", "non-unified diff", "path traversal or absolute path", "declared/parsed mismatch", "scope escape", "insufficient ContextPack", "cancellation"],
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_external_patch.py",
+    "validation_result": "12 passed"
+  },
+  "rollback": "Revert the adapter; no repository mutation or applied patch is created by ingestion."
+}

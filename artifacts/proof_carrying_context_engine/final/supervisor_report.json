@@ -1,0 +1,2607 @@
+{
+  "assurance": {
+    "component_evidence_receipts": [
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-070.json",
+        "raw_cid": "bafkreify3t6xihrs4m35pv73glygdm6qcryldyjkbuodz6upwoo2rnaa7i",
+        "sha256": "b8dcfd741e32e337d7d7fb32f061b3d01470b1e12a0d1c3cfa8fb39da8b400fa",
+        "size": 6587
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json",
+        "raw_cid": "bafkreiarjiqih3he6twziiulgzc6tdx7aydlxk2cvs4nqdkcjgvalichp4",
+        "sha256": "114a2083ece4f4ed94228b3645e98eff0606bbab42acb8d80d4249aa05a0477f",
+        "size": 9706
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-072.json",
+        "raw_cid": "bafkreig5kfcvi6rlhp3ebk46x7yghdw45gu745znf6b7wen6lzhfxtyeym",
+        "sha256": "dd5145547a2b3bf640ab9ebff0638edce9a9fe772d2f83fb11be5e4e5bcf04c3",
+        "size": 8786
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-073.json",
+        "raw_cid": "bafkreieyukobizn6jmk6r5rflvoojhls6t4qnllji6q7ghe4a22bt4huoy",
+        "sha256": "98a29c1465be4b15e8f6255d5ce49d72f4f906ad6947a1f31c9c06b419f0f476",
+        "size": 6047
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-074.json",
+        "raw_cid": "bafkreiexjllqaezxl3ew473inaiw5dr5ianyxpxkapntz7gj5fw67noncu",
+        "sha256": "974ad70013375ec96e7f6868116e8e3d401b8bbeea03db3cfcc9e96defb5cd15",
+        "size": 6482
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+        "raw_cid": "bafkreickz4pwdhduqgb2hkzzndgdlvcqnc5affscfzwum5tzlycfd7kfsu",
+        "sha256": "4acf1f619c748183a3ab3968cc35d45068ba0296422e6d4676795e0451fd4595",
+        "size": 6604
+      }
+    ],
+    "disposition": "component-evidence-present-final-security-and-concurrency-no-go",
+    "qualification_credit": false,
+    "summary": "Threat modeling, sandbox boundaries, seal admission, adversarial injection, hidden-provider isolation, and concurrency tests are represented; open security and concurrency findings prevent passage."
+  },
+  "benchmark_context_cost_route_reuse_and_assurance": {
+    "benchmark_qualification": {
+      "decision_fields": {
+        "benchmark_qualified": false,
+        "decision_kind": "unavailable-evidence-no-go-not-measured-threshold-failure",
+        "production_qualified": false,
+        "provider_call_count": 0,
+        "release_qualified": false,
+        "status": "NO-GO"
+      },
+      "evidence_class": "observed-explicit-no-go",
+      "metrics": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "raw_cid": "bafkreiajyugiiwwbyibyxnv6hkdzqvnjcpwc3hwwmrgt6etogks6ecdgmq",
+        "sha256": "09c50c845ac1c2038bb6be3a879855a913ec2d9ed6644d3f126e32a5e2086664",
+        "size": 186473
+      },
+      "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+      "present": true,
+      "raw_cid": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+      "receipt": {
+        "artifact_identity": "baguqeeraxdcsravklkrwuqftkaf3nuqvqnrnnj6ypwydsnntxv4l45veuxca",
+        "artifact_identity_kind": "structured-software-contract-cid",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json",
+        "raw_cid": "bafkreicfo3thta45nvvderosgk2y5wvnsilq26befdkecbegdcx3gosuna",
+        "sha256": "4576e679839d6d6a3245d232b58edaad92170d782428d441048618afb33a5468",
+        "size": 13262,
+        "status": "completed"
+      },
+      "sha256": "13dcaf260fcbbed9dd72b53954e6bdfd12db27a423ee96343d18afca8bf1c077",
+      "size": 24864,
+      "task_id": "PCCE-068",
+      "type": "benchmark_qualification"
+    },
+    "context_reduction_bp": null,
+    "cost_reduction_bp": null,
+    "cost_semantics": "unavailable-not-zero",
+    "live_model_or_provider_execution_observed": false,
+    "quality_result": null,
+    "quality_semantics": "unavailable-not-zero",
+    "reuse_result": null,
+    "route_result": null,
+    "structural_zero_grants_qualification_credit": false
+  },
+  "board": {
+    "all_task_dispositions": {
+      "completed_task_ids": [
+        "PCCE-000",
+        "PCCE-001",
+        "PCCE-002",
+        "PCCE-003",
+        "PCCE-004",
+        "PCCE-005",
+        "PCCE-006",
+        "PCCE-007",
+        "PCCE-008",
+        "PCCE-009",
+        "PCCE-010",
+        "PCCE-017",
+        "PCCE-018",
+        "PCCE-012",
+        "PCCE-013",
+        "PCCE-019",
+        "PCCE-014",
+        "PCCE-016",
+        "PCCE-015",
+        "PCCE-011",
+        "PCCE-020",
+        "PCCE-022",
+        "PCCE-023",
+        "PCCE-021",
+        "PCCE-024",
+        "PCCE-025",
+        "PCCE-030",
+        "PCCE-040",
+        "PCCE-043",
+        "PCCE-031",
+        "PCCE-032",
+        "PCCE-033",
+        "PCCE-034",
+        "PCCE-042",
+        "PCCE-035",
+        "PCCE-041",
+        "PCCE-044",
+        "PCCE-045",
+        "PCCE-050",
+        "PCCE-051",
+        "PCCE-055",
+        "PCCE-057",
+        "PCCE-052",
+        "PCCE-053",
+        "PCCE-054",
+        "PCCE-056",
+        "PCCE-060",
+        "PCCE-070",
+        "PCCE-061",
+        "PCCE-062",
+        "PCCE-063",
+        "PCCE-064",
+        "PCCE-065",
+        "PCCE-066",
+        "PCCE-071",
+        "PCCE-072",
+        "PCCE-073",
+        "PCCE-074",
+        "PCCE-079",
+        "PCCE-075",
+        "PCCE-067",
+        "PCCE-076",
+        "PCCE-068",
+        "PCCE-080",
+        "PCCE-081",
+        "PCCE-082"
+      ],
+      "todo_task_ids": [
+        "PCCE-083"
+      ]
+    },
+    "authoritative_pre_completion": {
+      "authoritative": true,
+      "completed_count": 66,
+      "dependency_count": 121,
+      "event_cursor": 368,
+      "formal_plan_id": "baguqeerawecx64quxjz7b2rsuiduvbl3pad6vievexeojsttdcb6bvyzhrja",
+      "pcce083": {
+        "revision": 1,
+        "status": "todo",
+        "task_cid": "baguqeerawci4ok5xn45k3pnf5ybbhs5dffhuufwzbvrlb2kxlgp3n372qzfq"
+      },
+      "plan_root_cid": "baguqeerawecx64quxjz7b2rsuiduvbl3pad6vievexeojsttdcb6bvyzhrja",
+      "projection_cid": "baguqeerae4dip44ogmmitwn5iocj2wkina7736sm7ode2u6j7lhkltnjz4ia",
+      "revision": 368,
+      "source_identity": "baguqeeraf3hbxty3fqzb2ku55eyujpvxpgyhplmrbeipoohxdpks3gqb7csa",
+      "task_count": 67,
+      "todo_count": 1,
+      "transport": "quack:127.0.0.1:41347"
+    },
+    "canonical_receipt_coverage": {
+      "canonical_receipt_references": 67,
+      "dependency_edges": 121,
+      "existing_predecessor_receipts_byte_bound": 66,
+      "missing_predecessor_receipts": 0,
+      "retained_noncanonical_attempt_receipts": 3,
+      "self_output_receipt_references": 1,
+      "task_nodes": 67,
+      "unique_canonical_receipt_paths": true,
+      "unique_live_task_cids": true,
+      "unique_task_ids": true
+    },
+    "projected_post_completion": {
+      "authoritative": false,
+      "expected_completed": 67,
+      "expected_todo": 0,
+      "projection_cid": null,
+      "revision": null,
+      "status": "projected-after-reviewed-admission-and-quack-completion"
+    },
+    "static_projection": {
+      "authoritative_for_live_status": false,
+      "completed": 1,
+      "path": "artifacts/proof_carrying_context_engine/control/task_board.json",
+      "raw_cid": "bafkreih37r3uhf4m5zekixb5jzjwdt3s3lqil7zzhsumvuhvpuajkijcwi",
+      "sha256": "fbfc7743978cee48a45c3d4e5361cf72dae085ff393ca8cad0f57d00952122b2",
+      "size": 371001,
+      "todo": 66
+    }
+  },
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "canonical_ownership": {
+    "artifact": {
+      "path": "artifacts/proof_carrying_context_engine/contracts/canonical_ownership.json",
+      "raw_cid": "bafkreibpr4un6btf5llld5xcldxqaz33iourcvcamvvi7upuywu3iokfcy",
+      "sha256": "2f8f28df0665ead6b1f6e258ef00677b43a9115440656a8fd1f4c5a9b4394516",
+      "size": 14873
+    },
+    "boundary_violation_count_at_bound_snapshot": 2,
+    "mcp_runtime_authority": false,
+    "repository_boundaries": {
+      "Mcp-Plus-Plus": {
+        "not_authority": "production runtime state, orchestration, persistence, model selection, CID recomputation",
+        "v0_1_authority": "shared invocation/receipt schemas, canonical vectors, and narrow interoperability contracts only"
+      },
+      "ipfs_accelerate_py": {
+        "not_authority": "canonical semantic construction, durable receipt/proof-forest writers, MCP++ runtime",
+        "v0_1_authority": "engine facade, lifecycle orchestration, adapters, worktrees, routing, verification/proof scheduling, cancellation/timeouts/admission/retry, shadow and assurance campaigns"
+      },
+      "ipfs_datasets_py": {
+        "not_authority": "persistence, orchestration, MCP++ runtime",
+        "v0_1_authority": "semantic repository state, capsules, ContextPacks and sufficiency views, invalidation, task/benchmark specifications, semantic outcome comparison"
+      },
+      "ipfs_kit_py": {
+        "not_authority": "semantic construction, model routing, MCP++ runtime",
+        "v0_1_authority": "immutable artifacts, state/receipt/proof-forest persistence, CAS roots, WAL transitions, local hermetic storage, optional IPFS transport"
+      }
+    },
+    "snapshot_authoritative_for_current_runtime": false
+  },
+  "change_inventory": {
+    "baseline_commit": "91e2504bcb2d0604c641c80c658fbd4ba69babd3",
+    "evidence_cut_commit": "013fb36c824013804ce00d055b03241fbcdef077",
+    "outer_changed_file_count": 90,
+    "outer_changed_files": [
+      {
+        "path": "Mcp-Plus-Plus",
+        "status": "M"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/adapters/conformance.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/execution_receipt.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/report.md",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/run_manifest.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/cli/command_manifest.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/cli/output_schema.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/environment/artifact_hashes.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/environment/dependency_locks.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/environment/manifest.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/environment/sbom.spdx.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/qualification/level.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/qualification/report.md",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-020.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-021.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-022.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-023.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-024.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-025.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-030.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-031.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-032.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-033.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-034.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-035.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-040.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-041.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-042.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-043.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-044.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-050.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-051.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-052.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-053.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-054.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-055.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-060.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-061.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-062.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-065.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-066.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-067.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-070.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-071.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-072.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-073.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-074.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-076.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/VERIFY.md",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/known_limitations.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/qualification.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/rollback.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/verification.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/runtime/runtime_api.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/security/findings.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/security/report.md",
+        "status": "A"
+      },
+      {
+        "path": "artifacts/proof_carrying_context_engine/security/threat_model.json",
+        "status": "A"
+      },
+      {
+        "path": "external/ipfs_accelerate",
+        "status": "M"
+      },
+      {
+        "path": "external/ipfs_datasets",
+        "status": "M"
+      },
+      {
+        "path": "external/ipfs_kit",
+        "status": "M"
+      },
+      {
+        "path": "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
+        "status": "M"
+      },
+      {
+        "path": "scripts/ops/agent_supervisor/pcce_r6_pythonpath/pcce_r6_completion_mirror.py",
+        "status": "A"
+      },
+      {
+        "path": "scripts/ops/agent_supervisor/pcce_r6_pythonpath/sitecustomize.py",
+        "status": "A"
+      },
+      {
+        "path": "scripts/run_agent_supervisor_proof_carrying_context_engine.py",
+        "status": "M"
+      },
+      {
+        "path": "test/test_pcce_r6_completion_mirror.py",
+        "status": "A"
+      },
+      {
+        "path": "test/test_pcce_r6_operator_quack_token.py",
+        "status": "A"
+      },
+      {
+        "path": "test/test_pcce_r6_owner_recycle_pacing.py",
+        "status": "A"
+      }
+    ],
+    "repositories_represented": [
+      "lift_coding",
+      "Mcp-Plus-Plus",
+      "external/ipfs_accelerate",
+      "external/ipfs_datasets",
+      "external/ipfs_kit"
+    ],
+    "submodule_changes": {
+      "Mcp-Plus-Plus": {
+        "baseline_commit": "85b8d03e767cd0ca7f4c8994013c27d31f03e817",
+        "changed_file_count": 5,
+        "changed_files": [
+          {
+            "path": "mcp_plus_plus_contracts/__init__.py",
+            "status": "A"
+          },
+          {
+            "path": "mcp_plus_plus_contracts/proof_context.py",
+            "status": "A"
+          },
+          {
+            "path": "mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+            "status": "A"
+          },
+          {
+            "path": "pyproject.toml",
+            "status": "M"
+          },
+          {
+            "path": "tests-py/test_contract_package.py",
+            "status": "A"
+          }
+        ],
+        "current_commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11"
+      },
+      "external/ipfs_accelerate": {
+        "baseline_commit": "b36be53bfe92e536b95f84adbe45e89a2446c54b",
+        "changed_file_count": 143,
+        "changed_files": [
+          {
+            "path": ".github/workflows/proof-context-clean-install.yml",
+            "status": "A"
+          },
+          {
+            "path": ".github/workflows/proof-context-v0.1.yml",
+            "status": "A"
+          },
+          {
+            "path": "docker/proof-context/Dockerfile",
+            "status": "A"
+          },
+          {
+            "path": "docs/guides/proof-context-cli.md",
+            "status": "A"
+          },
+          {
+            "path": "docs/security/proof-context-v0.1-threat-model.md",
+            "status": "A"
+          },
+          {
+            "path": "examples/proof_context_repository/README.md",
+            "status": "A"
+          },
+          {
+            "path": "examples/proof_context_repository/pyproject.toml",
+            "status": "A"
+          },
+          {
+            "path": "examples/proof_context_repository/src/demo/__init__.py",
+            "status": "A"
+          },
+          {
+            "path": "examples/proof_context_repository/src/demo/labels.py",
+            "status": "A"
+          },
+          {
+            "path": "examples/proof_context_repository/tests/__init__.py",
+            "status": "A"
+          },
+          {
+            "path": "examples/proof_context_repository/tests/test_demo.py",
+            "status": "A"
+          },
+          {
+            "path": "examples/proof_context_repository/tests/test_labels.py",
+            "status": "A"
+          },
+          {
+            "path": "examples/proof_context_repository/walkthrough.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_implementation_route.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/merge/README.md",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/merge/database_coordination.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/merge/protected_recovery_clearance.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/merge/protected_recovery_fence.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/task_sources/database_task_source.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/task_sources/intent_repository.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/__init__.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/adapters/__init__.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/adapters/base.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/adapters/codex.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/adapters/command.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/adapters/external_patch.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/adapters/models.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/adapters/registry.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/adapters/replay.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/benchmarks/configurations_cd.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/bootstrap.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/cli/__init__.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/cli/__main__.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/cli/app.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/cli/evidence_commands.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/cli/execution_commands.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/cli/output.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/cli/report.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/cli/state_commands.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/errors.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/facade.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/lifecycle.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/policy.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/recovery.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/results.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_accelerate_py/proof_context/sandbox.py",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/README.md",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/codex.resolver.json",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/codex.txt",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/core.resolver.json",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/core.txt",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/evaluation.resolver.json",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/evaluation.txt",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/local-model.resolver.json",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/local-model.txt",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/verification.resolver.json",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/cpython312-linux-aarch64/verification.txt",
+            "status": "A"
+          },
+          {
+            "path": "packaging/proof_context/locks/inputs.json",
+            "status": "A"
+          },
+          {
+            "path": "pyproject.toml",
+            "status": "M"
+          },
+          {
+            "path": "scripts/proof_context/build_environment_manifest.py",
+            "status": "A"
+          },
+          {
+            "path": "scripts/proof_context/build_release_candidate.py",
+            "status": "A"
+          },
+          {
+            "path": "scripts/proof_context/run_self_hosting_qualification.py",
+            "status": "A"
+          },
+          {
+            "path": "scripts/proof_context/test_clean_install.py",
+            "status": "A"
+          },
+          {
+            "path": "scripts/proof_context/verify_release_ci.py",
+            "status": "A"
+          },
+          {
+            "path": "setup.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/self_hosting/test_experiment_plan.py",
+            "status": "A"
+          },
+          {
+            "path": "test/api/self_hosting/test_harness.py",
+            "status": "A"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_database_coordination.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_database_implementation_daemon.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_database_portal_bridge.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_grok_quota_terra_gate.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_implementation_auto_rescue.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_implementation_daemon_runner.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_implementation_protected_paths.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_intent_repository.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_protected_recovery_clearance.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_protected_recovery_fence.py",
+            "status": "A"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_quack_state_server.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_quack_transport_defaults.py",
+            "status": "M"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_reconciliation_json_safe.py",
+            "status": "A"
+          },
+          {
+            "path": "test/api/test_agent_supervisor_task_attempt_limit.py",
+            "status": "M"
+          },
+          {
+            "path": "test/fixtures/proof_context_self_hosting/live-plan.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/adapters/test_base.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/adapters/test_codex.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/adapters/test_command.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/adapters/test_conformance.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/adapters/test_external_patch.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/adapters/test_replay.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/benchmarks/test_configurations_ab.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/benchmarks/test_configurations_cd.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/cli/test_cli_end_to_end.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/cli/test_evidence_commands.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/cli/test_execution_commands.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/cli/test_output.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/cli/test_state_commands.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/concurrency/schedules.v1.json",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/compromised_adapter_authority.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/argv_process_vectors.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/limitations.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/population_manifest.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/compromised-adapter-authority.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/model-policy-edit.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/out-of-scope-edit.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/required-test-deletion.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/response-scope-lie.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/shell-argv-injection.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/source-comment-prompt-injection.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/valid-control-patch.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/receipts/weakened-proof-obligation.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/evidence/sandbox_probe.c.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/model_policy_edit.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/out_of_scope_edit.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/required_test_deletion.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/response_scope_lie.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/shell_argv_injection.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/source_comment_prompt_injection.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/valid_control_patch.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/fixtures/patch_and_agent/weakened_proof_obligation.json.fixture",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/test_adversarial_concurrency.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/test_adversarial_patch_and_agent.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/test_sandbox.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/security/test_threat_model.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_clean_install.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_example_repository.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_facade.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_install_profiles.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_installability_gate.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_lifecycle.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_policy.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_recovery.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_release_ci_contract.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_result_taxonomy.py",
+            "status": "A"
+          },
+          {
+            "path": "test/proof_context/test_runtime_integration.py",
+            "status": "A"
+          }
+        ],
+        "current_commit": "8d629ce7f2ee5a6109dc92e84b47664ae896ddc6"
+      },
+      "external/ipfs_datasets": {
+        "baseline_commit": "3594db6492c9d84a682e5d4770069f7804e73044",
+        "changed_file_count": 32,
+        "changed_files": [
+          {
+            "path": "benchmarks/proof_context/corpus/dynamic_plugins/LICENSE",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/dynamic_plugins/evaluator_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/dynamic_plugins/shard_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/dynamic_plugins/visible_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/LICENSE.django-5.2.5",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/baseline_replay.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/dependencies/asgiref-3.8.1-py3-none-any.whl",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/dependencies/sqlparse-0.5.3-py3-none-any.whl",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/evaluator_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/shard_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/source/django-5.2.5-a3b1107.tar.gz",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/source_verification.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/mature_python/visible_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/typed_structured/LICENSE",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/typed_structured/evaluator_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/typed_structured/shard_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus/typed_structured/visible_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "benchmarks/proof_context/corpus_manifest.json",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_datasets_py/proof_context/__init__.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_datasets_py/proof_context/benchmarks/comparison.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_datasets_py/proof_context/benchmarks/isolation.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_datasets_py/proof_context/benchmarks/metrics.py",
+            "status": "A"
+          },
+          {
+            "path": "ipfs_datasets_py/proof_context/benchmarks/specification.py",
+            "status": "A"
+          },
+          {
+            "path": "pyproject.toml",
+            "status": "M"
+          },
+          {
+            "path": "setup.py",
+            "status": "M"
+          },
+          {
+            "path": "tests/proof_context/benchmarks/test_dynamic_plugins_corpus.py",
+            "status": "A"
+          },
+          {
+            "path": "tests/proof_context/benchmarks/test_isolation.py",
+            "status": "A"
+          },
+          {
+            "path": "tests/proof_context/benchmarks/test_mature_python_corpus.py",
+            "status": "A"
+          },
+          {
+            "path": "tests/proof_context/benchmarks/test_metrics.py",
+            "status": "A"
+          },
+          {
+            "path": "tests/proof_context/benchmarks/test_specification.py",
+            "status": "A"
+          },
+          {
+            "path": "tests/proof_context/benchmarks/test_typed_structured_corpus.py",
+            "status": "A"
+          },
+          {
+            "path": "tests/proof_context/test_install_profile.py",
+            "status": "A"
+          }
+        ],
+        "current_commit": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407"
+      },
+      "external/ipfs_kit": {
+        "baseline_commit": "ba5508d940fb5b23a6d0d9b2084f5195cd26a671",
+        "changed_file_count": 6,
+        "changed_files": [
+          {
+            "path": "ipfs_kit_py/proof_context/__init__.py",
+            "status": "M"
+          },
+          {
+            "path": "ipfs_kit_py/proof_context/trust.py",
+            "status": "A"
+          },
+          {
+            "path": "pyproject.toml",
+            "status": "M"
+          },
+          {
+            "path": "setup.py",
+            "status": "M"
+          },
+          {
+            "path": "tests/proof_context/test_install_profile.py",
+            "status": "A"
+          },
+          {
+            "path": "tests/proof_context/test_trust_admission.py",
+            "status": "A"
+          }
+        ],
+        "current_commit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+      }
+    },
+    "terminal_candidate_expected_paths": [
+      "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+      "artifacts/proof_carrying_context_engine/final/supervisor_report.json",
+      "artifacts/proof_carrying_context_engine/final/supervisor_report.md",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-083.json"
+    ]
+  },
+  "cli_and_installation": {
+    "cli": {
+      "commands": {
+        "evidence": [
+          "expand-context",
+          "explain-impact",
+          "assurance",
+          "seal",
+          "report"
+        ],
+        "execution": [
+          "run",
+          "verify",
+          "resume"
+        ],
+        "state": [
+          "init",
+          "scan",
+          "status",
+          "plan"
+        ]
+      },
+      "entrypoint": "python -m ipfs_accelerate_py.proof_context.cli",
+      "manifest": {
+        "path": "artifacts/proof_carrying_context_engine/cli/command_manifest.json",
+        "raw_cid": "bafkreiddkqzoeawm3b36qfl5thc3gx44rwvjvac2auzhkkkbfzesute75u",
+        "sha256": "635432e202ccd877e8157d99c5b35f9c8daa9a805a05327529412e492a4c9fed",
+        "size": 1261
+      }
+    },
+    "examples": [
+      "python -m ipfs_accelerate_py.proof_context.cli init",
+      "python -m ipfs_accelerate_py.proof_context.cli scan",
+      "python -m ipfs_accelerate_py.proof_context.cli run",
+      "python -m ipfs_accelerate_py.proof_context.cli verify",
+      "python -m ipfs_accelerate_py.proof_context.cli report"
+    ],
+    "installation_qualification": {
+      "decision_fields": {
+        "completion_disposition": "completed-with-explicit-no-go",
+        "decision": "NO-GO",
+        "qualified_install_profile_count": 0,
+        "release_qualified": false
+      },
+      "evidence_class": "observed-explicit-no-go",
+      "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+      "present": true,
+      "raw_cid": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+        "raw_cid": "bafkreibiwxtmdtr2wiq5xbez2njp5t5qwsvli2ijwwneyqtlh7iql26wlm",
+        "sha256": "28b5e6c1ce3ab221db8499d352fecfb0b4aab46909b59a4c426b3fd105ebd65b",
+        "size": 2805,
+        "status": "completed"
+      },
+      "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+      "size": 37516,
+      "task_id": "PCCE-056",
+      "type": "installation_qualification"
+    },
+    "working_clean_install_example_claimed": false
+  },
+  "concurrency": {
+    "decision": "NO-GO",
+    "findings": {
+      "authoritative_integration": {
+        "accepted_despite_marker_only_verification_and_missing_proof": true,
+        "authoritative_hidden_evaluator": "not_integrated",
+        "authoritative_sandbox": "not_integrated",
+        "disposition": "no-go-authoritative-integration-owner-reopen-required"
+      },
+      "concurrent_publication": {
+        "disposition": "no-go-runtime-storage-owner-reopen-required",
+        "expected_maximum_accepted_records": 1,
+        "expected_maximum_published_settlements": 1,
+        "observed_accepted_records": 2,
+        "observed_published_settlements": 2,
+        "overlap_proven": true,
+        "shared_kit_root": true
+      },
+      "post_crash_restart": {
+        "disposition": "no-go-lost-durable-checkpoint-false-success",
+        "durable_resume_observed": false,
+        "no_cleanup_restart_status": "unavailable",
+        "post_cleanup_fresh_restart_accepted": true,
+        "post_cleanup_fresh_restart_published": true
+      },
+      "synthetic_aba": {
+        "delayed_generation_one_outcome": "stale_root:generation",
+        "disposition": "no-go-insufficient-not-runtime-kit-repository-integrated",
+        "integration_scope": "synthetic-in-process-store-only",
+        "qualification_credit": false
+      }
+    },
+    "qualification_credit": false,
+    "receipt": {
+      "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+      "raw_cid": "bafkreickz4pwdhduqgb2hkzzndgdlvcqnc5affscfzwum5tzlycfd7kfsu",
+      "sha256": "4acf1f619c748183a3ab3968cc35d45068ba0296422e6d4676795e0451fd4595",
+      "size": 6604
+    }
+  },
+  "decision": {
+    "assigned_level": "research_demo",
+    "evidence_task_report_final": true,
+    "reason_codes": [
+      "INSTALLATION_GATE_NO_GO",
+      "RELEASE_CANDIDATE_PRESENT_BUT_NO_GO",
+      "BENCHMARK_QUALIFICATION_NO_GO",
+      "SECURITY_GATE_NO_GO",
+      "CI_QUALIFICATION_NO_GO",
+      "LONGITUDINAL_SELF_HOSTING_NO_GO",
+      "PACKAGE_BYTE_SET_INCOMPLETE",
+      "PACKAGE_SIGNATURE_EVIDENCE_UNAVAILABLE"
+    ],
+    "recommendations": {
+      "external_supervised_pilot": "NO-GO",
+      "internal_development": "proceed-with-restrictions",
+      "internal_pilot": "NO-GO",
+      "production_use": "NO-GO",
+      "release": "NO-GO"
+    },
+    "release_qualified": false,
+    "report_status": "final-evidence-projection-pre-pcce083-live-completion",
+    "waivers": []
+  },
+  "dependency_graph": {
+    "path": "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+    "raw_cid": "bafkreicsvoux7k22vqz5lonfqb4mtikf2mnxbwlun7tfxjo2odkkbs2rae",
+    "sha256": "52aba97fab5aac33d5b9a58078c9a145d31b70d9746fe65ba5da70d4a0cb5101",
+    "size": 104540
+  },
+  "evidence_cut": {
+    "gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+        "tree": "3a57e33053d6007cb99cbe265c6608954d9cea7c"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "8d629ce7f2ee5a6109dc92e84b47664ae896ddc6",
+        "tree": "6f40999059d861ef5bdde24f5d4228a6e84b2e30"
+      },
+      "external/ipfs_datasets": {
+        "commit": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+        "tree": "839980ccaba593b146213928bc5e8bf95e7a1fd9"
+      },
+      "external/ipfs_kit": {
+        "commit": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+        "tree": "b4413c1ad92b85df2e110c0185d2449e56fc6497"
+      }
+    },
+    "repository_commit": "013fb36c824013804ce00d055b03241fbcdef077",
+    "repository_tree": "1bbf772069662eb8a8339ff242794039c08f5011"
+  },
+  "evidence_register": [
+    {
+      "decision_fields": {
+        "completion_disposition": "completed-with-explicit-no-go",
+        "decision": "NO-GO",
+        "qualified_install_profile_count": 0,
+        "release_qualified": false
+      },
+      "evidence_class": "observed-explicit-no-go",
+      "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+      "present": true,
+      "raw_cid": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+        "raw_cid": "bafkreibiwxtmdtr2wiq5xbez2njp5t5qwsvli2ijwwneyqtlh7iql26wlm",
+        "sha256": "28b5e6c1ce3ab221db8499d352fecfb0b4aab46909b59a4c426b3fd105ebd65b",
+        "size": 2805,
+        "status": "completed"
+      },
+      "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+      "size": 37516,
+      "task_id": "PCCE-056",
+      "type": "installation_qualification"
+    },
+    {
+      "decision_fields": {
+        "freeze_state": "pre-execution-preregistered",
+        "live_quality_required": true,
+        "results_observed_before_freeze": false
+      },
+      "evidence_class": "policy-only-no-execution-credit",
+      "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+      "present": true,
+      "raw_cid": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+      "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b",
+      "size": 2373,
+      "task_id": "PCCE-060",
+      "type": "benchmark_thresholds"
+    },
+    {
+      "decision_fields": {
+        "benchmark_qualified": false,
+        "decision_kind": "unavailable-evidence-no-go-not-measured-threshold-failure",
+        "production_qualified": false,
+        "provider_call_count": 0,
+        "release_qualified": false,
+        "status": "NO-GO"
+      },
+      "evidence_class": "observed-explicit-no-go",
+      "metrics": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/metrics.json",
+        "raw_cid": "bafkreiajyugiiwwbyibyxnv6hkdzqvnjcpwc3hwwmrgt6etogks6ecdgmq",
+        "sha256": "09c50c845ac1c2038bb6be3a879855a913ec2d9ed6644d3f126e32a5e2086664",
+        "size": 186473
+      },
+      "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+      "present": true,
+      "raw_cid": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+      "receipt": {
+        "artifact_identity": "baguqeeraxdcsravklkrwuqftkaf3nuqvqnrnnj6ypwydsnntxv4l45veuxca",
+        "artifact_identity_kind": "structured-software-contract-cid",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-068.json",
+        "raw_cid": "bafkreicfo3thta45nvvderosgk2y5wvnsilq26befdkecbegdcx3gosuna",
+        "sha256": "4576e679839d6d6a3245d232b58edaad92170d782428d441048618afb33a5468",
+        "size": 13262,
+        "status": "completed"
+      },
+      "sha256": "13dcaf260fcbbed9dd72b53954e6bdfd12db27a423ee96343d18afca8bf1c077",
+      "size": 24864,
+      "task_id": "PCCE-068",
+      "type": "benchmark_qualification"
+    },
+    {
+      "decision_fields": {
+        "critical_release_blockers": 9,
+        "decision": "NO-GO",
+        "high_release_blockers": 1,
+        "open_release_blockers": 10,
+        "release_qualified": false,
+        "security_qualified": false,
+        "status": "release_blocked"
+      },
+      "evidence_class": "observed-explicit-no-go",
+      "findings": {
+        "path": "artifacts/proof_carrying_context_engine/security/findings.json",
+        "raw_cid": "bafkreiaj5oj6sqxpybal2q5rejdmtusbuqrhulbnkfhglw3gxbtjyz5ub4",
+        "sha256": "09eb93e942efc040bd43b12246c9d241a4227a2c2d514e65db66b8669c67b40f",
+        "size": 18145
+      },
+      "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+      "present": true,
+      "raw_cid": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-076.json",
+        "raw_cid": "bafkreicyoqp5dljl5w3csdmrfbkzkxacbowmdypnc5mvnvbbvso24qauue",
+        "sha256": "58741fd1ad2bedb6290d912855955c020bacc1e1ed175956d421ac9dae4014a1",
+        "size": 8915,
+        "status": "completed"
+      },
+      "sha256": "94034723fddfa547266c794961c3c88d005f1d097c6e2524ccfbedd49a7dc8f4",
+      "size": 7425,
+      "task_id": "PCCE-076",
+      "type": "security_qualification"
+    },
+    {
+      "decision_fields": {
+        "benchmark_attempt_count": 0,
+        "decision": "NO-GO",
+        "epoch_count": 1,
+        "generic_runtime_lifecycle_success_count": 4,
+        "later_time_separated_epoch_count": 0,
+        "provider_attempt_count": 0,
+        "qualification_cap": "NOT-QUALIFIED",
+        "qualification_status": "unavailable"
+      },
+      "evidence_class": "observed-generic-runtime-success-with-explicit-product-no-go",
+      "manifest": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+        "raw_cid": "bafkreigarvlp6lnksv7xnb3j3cwji5q5delpjzoswzhpf7uynn3j6mcitm",
+        "sha256": "c08d56ff2daa957f768769d8ac94761d1916f4e5d2b64ef2fe986b769f30489b",
+        "size": 17837
+      },
+      "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+      "present": true,
+      "raw_cid": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+        "raw_cid": "bafkreia6fevhtrt6wnvloajvyw6vxqw6hf7kwaseyxbdjlsvsemxqji7ay",
+        "sha256": "1e292a79c67eb36ab70135c5bd5bc2de397eab0244c5c234ae55911978251f06",
+        "size": 6474,
+        "status": "completed"
+      },
+      "sha256": "6c5ffee3b265d013e6069f394106e950825d0bfedc3c0278bfb98522ae97fc8f",
+      "size": 10273,
+      "task_id": "PCCE-079",
+      "type": "longitudinal_self_hosting_qualification"
+    },
+    {
+      "decision_fields": {
+        "ci_qualified": false,
+        "decision": "NO-GO",
+        "external_ci_authority_available": false,
+        "local_contract_verified": true,
+        "release_qualified": false,
+        "required_job_count": 9,
+        "required_job_external_success_count": 0
+      },
+      "evidence_class": "local-contract-passed-external-authority-unavailable-no-go",
+      "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+      "present": true,
+      "raw_cid": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json",
+        "raw_cid": "bafkreid4c32sxdvmxwe57bbo6uyw455jnsou7qtsid2yaxtfaur3wbduci",
+        "sha256": "7c16f52b8eacbd89df842ef5316e77a96c9d4fc27240f5805e650523bb047412",
+        "size": 12974,
+        "status": "completed"
+      },
+      "sha256": "eacb6d323c9350a233a83f5344ff1f5972b22775365d011d3f80445c516fd553",
+      "size": 14767,
+      "task_id": "PCCE-080",
+      "type": "current_head_ci_qualification"
+    },
+    {
+      "bundle_files": [
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/VERIFY.md",
+          "raw_cid": "bafkreicnij547aaao36esxot3sls7uavz2gjkoumpm73eodnzfpvxsar7a",
+          "sha256": "4d427bcf800076fc495dd3dc972fd015ce8c953a8c7b3fb2386dc95f5bc811f8",
+          "size": 883
+        },
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/known_limitations.json",
+          "raw_cid": "bafkreidnyxn5acwzbaoajrh54cdit2yfefzqa5rmdsg3l7y3toogipthe4",
+          "sha256": "6dc5dbd00ad9081c04c4fde08689eb05217300762c1c8db5ff1b9b9c643e6727",
+          "size": 1449
+        },
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/qualification.json",
+          "raw_cid": "bafkreieyecor6dhks3336fgojntkne5z3ctxqkectsw5p4pp5ghkqkrjii",
+          "sha256": "98209d1f0cea96f7bf14ce4b66a693b9d8a77828829cadd7f1efe98ea82a2942",
+          "size": 631
+        },
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/rollback.json",
+          "raw_cid": "bafkreicfxnc5ub4c7pc2eh6dml7fjx5vkutjr4bs7cw2xzc2gidjafeqoq",
+          "sha256": "45bb45da0782fbc5a21fc362fe54dfb5552698f032f8adabe45a320690149074",
+          "size": 532
+        },
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/verification.json",
+          "raw_cid": "bafkreicfs2bdx6q2t5bheodt5jxs7au45xjx5ujdfnabiigbdze5cionpy",
+          "sha256": "4596823bfa1a9f42723873ea6f2f829cedd37ed1232b401420c11e49d121cd7e",
+          "size": 881
+        }
+      ],
+      "decision_fields": {
+        "blocker_count": 7,
+        "decision": "NO-GO",
+        "deterministic_two_build_identical": true,
+        "live_task_revision": 3,
+        "live_task_status": "completed",
+        "missing_predecessor_receipt_count": 0,
+        "promotable": false,
+        "release_qualified": false,
+        "waiver_count": 0
+      },
+      "evidence_class": "present-deterministically-verified-no-go-independent-review-passed-live-completed",
+      "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+      "present": true,
+      "raw_cid": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+      "receipt_reviewed": {
+        "final_reviewed_identity_claimed": true,
+        "independent_review_status": "passed",
+        "live_database_completion_claimed": true,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
+        "raw_cid": "bafkreiesr275sdrlyzx5bspbf7ushfhdnawp7upihreiwb2duk4rz4lhny",
+        "sha256": "928ebfd90e2bc66fd0c9e12fe92394e3682cffd1e83c488b0743a2b91cf1676e",
+        "size": 12926,
+        "status": "completed"
+      },
+      "sha256": "f0002a16bc97d8b49a15b7097ea1e63f2edbaf4c3a75275faa89026e4f3ed385",
+      "size": 90632,
+      "task_id": "PCCE-081",
+      "type": "release_candidate_manifest"
+    }
+  ],
+  "limitations": [
+    "Authoritative live state is 66/67 before PCCE-083 completion; 67/67 is only a contingent post-admission projection in this artifact.",
+    "Board and evidence-task completion do not imply installability qualification, benchmark passage, security passage, CI passage, pilot readiness, release readiness, or production readiness.",
+    "Measured quality, context-reduction, route, reuse, and cost outcomes are unavailable and are not represented as zero.",
+    "The clean-install gate, benchmark, security, CI, longitudinal self-hosting, package-byte completeness, package signatures, release candidate, and adversarial concurrency evidence remain NO-GO or blocking.",
+    "The word installable in the required terminal claim describes the integrated package surface; it does not override PCCE-056 clean-install NO-GO or imply release qualification.",
+    "The r6 frozen graph validator passes, but the broader configured control-board validator fails with eight preserved provider/configuration and historical r2-r5 control-lineage errors."
+  ],
+  "objective": {
+    "live_objective_id": "objective:pcce-root",
+    "owning_goal_id": "PCCE-G800",
+    "parent_objective_id": "PCCE-G000",
+    "title": "Installable Proof-Carrying Context Engine v0.1"
+  },
+  "public_api": {
+    "artifact": {
+      "path": "artifacts/proof_carrying_context_engine/runtime/runtime_api.json",
+      "raw_cid": "bafkreiewktogguwwmwe7oehhx5uw4wbb535kc6eopfq5kektc6sueimuoe",
+      "sha256": "9654dc6352d66589f710e7bf696e5821eefaa1788e7961d5115317a542219471",
+      "size": 7080
+    },
+    "interface": "ProofCarryingContextEngine@0.1",
+    "operations": [
+      "open",
+      "scan",
+      "status",
+      "plan",
+      "context-pack",
+      "route",
+      "run",
+      "verify",
+      "expand-context",
+      "assurance",
+      "seal",
+      "report",
+      "resume"
+    ],
+    "package": "ipfs_accelerate_py.proof_context",
+    "provider_bound": false
+  },
+  "qualification_and_release": {
+    "level": {
+      "path": "artifacts/proof_carrying_context_engine/qualification/level.json",
+      "raw_cid": "bafkreig5rmt5f6ilkehkr5kay7rqbjt6vrzuvzz7l5q4q7rawrjpccqzry",
+      "sha256": "dd8b27d2f90b510ea8f540c7e300a67eac734ae73f5f61c87e20b452f10a198e",
+      "size": 21629
+    },
+    "level_evaluations": [
+      {
+        "level": "research_demo",
+        "satisfaction_kind": "fail-closed-fallback",
+        "satisfied": true,
+        "support": [
+          "All decision inputs are content-addressed and every negative or unavailable gate is preserved.",
+          "The level grants no installation, benchmark, security, CI, self-hosting, release, pilot, or production claim."
+        ]
+      },
+      {
+        "level": "internal_alpha",
+        "satisfied": false,
+        "unmet_criteria": [
+          "PCCE-056 reports decision=NO-GO, release_qualified=false, and zero qualified clean-install profiles.",
+          "The present PCCE-081 bundle is deterministic but decision=NO-GO, release_qualified=false, and promotable=false.",
+          "PCCE-068 reports unavailable-evidence NO-GO rather than a measured benchmark threshold passage.",
+          "PCCE-076 reports security NO-GO with nine critical and one high release blocker open.",
+          "PCCE-080 validates a local workflow contract but has no external current-head CI authority and remains NO-GO."
+        ]
+      },
+      {
+        "level": "internal_pilot",
+        "satisfied": false,
+        "unmet_criteria": [
+          "Every internal_alpha blocker remains open.",
+          "Frozen thresholds exist, but the benchmark qualification is NO-GO with no provider execution and unavailable primary measurements.",
+          "PCCE-079 has one same-session epoch, zero benchmark/provider attempts, and no time-separated longitudinal passage."
+        ]
+      },
+      {
+        "level": "external_supervised_pilot",
+        "satisfied": false,
+        "unmet_criteria": [
+          "Every internal_pilot blocker remains open.",
+          "No explicit external-supervision policy passage or qualified external evidence exists.",
+          "Installation, benchmark, security, CI, and longitudinal evidence prohibit an external-use claim."
+        ]
+      },
+      {
+        "level": "production_candidate",
+        "satisfied": false,
+        "unmet_criteria": [
+          "Every external_supervised_pilot blocker remains open.",
+          "The release candidate is unpromotable and lacks one package archive plus all package-signature evidence.",
+          "No production policy, security, benchmark, CI, or longitudinal passage exists."
+        ]
+      }
+    ],
+    "next_level": {
+      "level": "internal_alpha",
+      "unmet_gate_ids": [
+        "installation-qualified",
+        "release-candidate-qualified",
+        "benchmark-qualified",
+        "security-qualified",
+        "current-head-ci-qualified"
+      ]
+    },
+    "pcce082_live_authority": {
+      "revision": 3,
+      "status": "completed",
+      "task_cid": "baguqeeralwimrbcuddpc5hlficwrhivlkosmj4p7kmtgjk77vjng7fpw2eua"
+    },
+    "qualification_receipt": {
+      "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-082.json",
+      "raw_cid": "bafkreibtybxpf37rkbkpiokmybdcwnmiwvadg6jmkjuz7yohmmeougehxy",
+      "sha256": "33c06ef2eff15054f4394cc0462b3588b54033792c52699fe1c76308ea1887be",
+      "size": 9694
+    },
+    "qualification_report": {
+      "path": "artifacts/proof_carrying_context_engine/qualification/report.md",
+      "raw_cid": "bafkreiestklv2e2otkhfbh5pcfb5xgn3oys3cfwe7f4ar7vzbyyhima55u",
+      "sha256": "929a975d134e9a8e509faf1143db99bb7625b116c4f97808feb90e3074301ded",
+      "size": 7149
+    },
+    "release_candidate": {
+      "bundle_files": [
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/VERIFY.md",
+          "raw_cid": "bafkreicnij547aaao36esxot3sls7uavz2gjkoumpm73eodnzfpvxsar7a",
+          "sha256": "4d427bcf800076fc495dd3dc972fd015ce8c953a8c7b3fb2386dc95f5bc811f8",
+          "size": 883
+        },
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/known_limitations.json",
+          "raw_cid": "bafkreidnyxn5acwzbaoajrh54cdit2yfefzqa5rmdsg3l7y3toogipthe4",
+          "sha256": "6dc5dbd00ad9081c04c4fde08689eb05217300762c1c8db5ff1b9b9c643e6727",
+          "size": 1449
+        },
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/qualification.json",
+          "raw_cid": "bafkreieyecor6dhks3336fgojntkne5z3ctxqkectsw5p4pp5ghkqkrjii",
+          "sha256": "98209d1f0cea96f7bf14ce4b66a693b9d8a77828829cadd7f1efe98ea82a2942",
+          "size": 631
+        },
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/rollback.json",
+          "raw_cid": "bafkreicfxnc5ub4c7pc2eh6dml7fjx5vkutjr4bs7cw2xzc2gidjafeqoq",
+          "sha256": "45bb45da0782fbc5a21fc362fe54dfb5552698f032f8adabe45a320690149074",
+          "size": 532
+        },
+        {
+          "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/verification.json",
+          "raw_cid": "bafkreicfs2bdx6q2t5bheodt5jxs7au45xjx5ujdfnabiigbdze5cionpy",
+          "sha256": "4596823bfa1a9f42723873ea6f2f829cedd37ed1232b401420c11e49d121cd7e",
+          "size": 881
+        }
+      ],
+      "decision_fields": {
+        "blocker_count": 7,
+        "decision": "NO-GO",
+        "deterministic_two_build_identical": true,
+        "live_task_revision": 3,
+        "live_task_status": "completed",
+        "missing_predecessor_receipt_count": 0,
+        "promotable": false,
+        "release_qualified": false,
+        "waiver_count": 0
+      },
+      "evidence_class": "present-deterministically-verified-no-go-independent-review-passed-live-completed",
+      "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+      "present": true,
+      "raw_cid": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+      "receipt_reviewed": {
+        "final_reviewed_identity_claimed": true,
+        "independent_review_status": "passed",
+        "live_database_completion_claimed": true,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
+        "raw_cid": "bafkreiesr275sdrlyzx5bspbf7ushfhdnawp7upihreiwb2duk4rz4lhny",
+        "sha256": "928ebfd90e2bc66fd0c9e12fe92394e3682cffd1e83c488b0743a2b91cf1676e",
+        "size": 12926,
+        "status": "completed"
+      },
+      "sha256": "f0002a16bc97d8b49a15b7097ea1e63f2edbaf4c3a75275faa89026e4f3ed385",
+      "size": 90632,
+      "task_id": "PCCE-081",
+      "type": "release_candidate_manifest"
+    }
+  },
+  "required_terminal_claim": "The completed semantic-compression, incremental verification, model-routing, assurance, and proof-sealing subsystems were integrated into one installable Proof-Carrying Context Engine. The engine was evaluated against the frozen task corpus and qualified only to the level supported by the current installation, quality, security, context-reduction, cost, and verification evidence.",
+  "schema": "pcce/proof-context/v0.1/final-supervisor-report@1",
+  "schema_version": 1,
+  "security_ci_and_self_hosting": {
+    "ci": {
+      "decision_fields": {
+        "ci_qualified": false,
+        "decision": "NO-GO",
+        "external_ci_authority_available": false,
+        "local_contract_verified": true,
+        "release_qualified": false,
+        "required_job_count": 9,
+        "required_job_external_success_count": 0
+      },
+      "evidence_class": "local-contract-passed-external-authority-unavailable-no-go",
+      "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+      "present": true,
+      "raw_cid": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-080.json",
+        "raw_cid": "bafkreid4c32sxdvmxwe57bbo6uyw455jnsou7qtsid2yaxtfaur3wbduci",
+        "sha256": "7c16f52b8eacbd89df842ef5316e77a96c9d4fc27240f5805e650523bb047412",
+        "size": 12974,
+        "status": "completed"
+      },
+      "sha256": "eacb6d323c9350a233a83f5344ff1f5972b22775365d011d3f80445c516fd553",
+      "size": 14767,
+      "task_id": "PCCE-080",
+      "type": "current_head_ci_qualification"
+    },
+    "longitudinal_self_hosting": {
+      "decision_fields": {
+        "benchmark_attempt_count": 0,
+        "decision": "NO-GO",
+        "epoch_count": 1,
+        "generic_runtime_lifecycle_success_count": 4,
+        "later_time_separated_epoch_count": 0,
+        "provider_attempt_count": 0,
+        "qualification_cap": "NOT-QUALIFIED",
+        "qualification_status": "unavailable"
+      },
+      "evidence_class": "observed-generic-runtime-success-with-explicit-product-no-go",
+      "manifest": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+        "raw_cid": "bafkreigarvlp6lnksv7xnb3j3cwji5q5delpjzoswzhpf7uynn3j6mcitm",
+        "sha256": "c08d56ff2daa957f768769d8ac94761d1916f4e5d2b64ef2fe986b769f30489b",
+        "size": 17837
+      },
+      "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+      "present": true,
+      "raw_cid": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+        "raw_cid": "bafkreia6fevhtrt6wnvloajvyw6vxqw6hf7kwaseyxbdjlsvsemxqji7ay",
+        "sha256": "1e292a79c67eb36ab70135c5bd5bc2de397eab0244c5c234ae55911978251f06",
+        "size": 6474,
+        "status": "completed"
+      },
+      "sha256": "6c5ffee3b265d013e6069f394106e950825d0bfedc3c0278bfb98522ae97fc8f",
+      "size": 10273,
+      "task_id": "PCCE-079",
+      "type": "longitudinal_self_hosting_qualification"
+    },
+    "security": {
+      "decision_fields": {
+        "critical_release_blockers": 9,
+        "decision": "NO-GO",
+        "high_release_blockers": 1,
+        "open_release_blockers": 10,
+        "release_qualified": false,
+        "security_qualified": false,
+        "status": "release_blocked"
+      },
+      "evidence_class": "observed-explicit-no-go",
+      "findings": {
+        "path": "artifacts/proof_carrying_context_engine/security/findings.json",
+        "raw_cid": "bafkreiaj5oj6sqxpybal2q5rejdmtusbuqrhulbnkfhglw3gxbtjyz5ub4",
+        "sha256": "09eb93e942efc040bd43b12246c9d241a4227a2c2d514e65db66b8669c67b40f",
+        "size": 18145
+      },
+      "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+      "present": true,
+      "raw_cid": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+      "receipt": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-076.json",
+        "raw_cid": "bafkreicyoqp5dljl5w3csdmrfbkzkxacbowmdypnc5mvnvbbvso24qauue",
+        "sha256": "58741fd1ad2bedb6290d912855955c020bacc1e1ed175956d421ac9dae4014a1",
+        "size": 8915,
+        "status": "completed"
+      },
+      "sha256": "94034723fddfa547266c794961c3c88d005f1d097c6e2524ccfbedd49a7dc8f4",
+      "size": 7425,
+      "task_id": "PCCE-076",
+      "type": "security_qualification"
+    }
+  },
+  "source_no_go_blocker_ledgers": {
+    "benchmark": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+        "raw_cid": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+        "sha256": "13dcaf260fcbbed9dd72b53954e6bdfd12db27a423ee96343d18afca8bf1c077",
+        "size": 24864
+      },
+      "blocker_count": 10,
+      "blockers": [
+        {
+          "category": "primary-threshold",
+          "code": "primary-gate-unavailable:accepted_patch_noninferiority",
+          "decision": "unavailable-no-go",
+          "metric": "correct_accepted_patch_rate_bp",
+          "reason": "required-live-observed-evidence-is-absent"
+        },
+        {
+          "category": "primary-threshold",
+          "code": "primary-gate-unavailable:context_reduction",
+          "decision": "unavailable-no-go",
+          "metric": "context_reduction_bp",
+          "reason": "zero-or-missing-denominator"
+        },
+        {
+          "category": "primary-threshold",
+          "code": "primary-gate-unavailable:routine_frontier_escalation",
+          "decision": "unavailable-no-go",
+          "metric": "routine_frontier_escalation_rate_bp",
+          "reason": "routine-frontier-denominator-or-numerator-missing"
+        },
+        {
+          "category": "primary-threshold",
+          "code": "primary-gate-unavailable:total_cost_reduction",
+          "decision": "unavailable-no-go",
+          "metric": "total_cost_reduction_bp",
+          "reason": "one-or-more-paired-total-cost-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:controlled_selected_test_false_negative_count",
+          "decision": "unavailable-no-go",
+          "metric": "controlled_selected_test_false_negative_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:critical_mutant_accepted_count",
+          "decision": "unavailable-no-go",
+          "metric": "critical_mutant_accepted_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:critical_regression_accepted_count",
+          "decision": "unavailable-no-go",
+          "metric": "critical_regression_accepted_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:negative_review_autonomous_accept_count",
+          "decision": "unavailable-no-go",
+          "metric": "negative_review_autonomous_accept_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:stale_capsule_accepted_count",
+          "decision": "unavailable-no-go",
+          "metric": "stale_capsule_accepted_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        },
+        {
+          "category": "zero-tolerance",
+          "code": "zero-tolerance-unavailable:stale_proof_accepted_count",
+          "decision": "unavailable-no-go",
+          "metric": "stale_proof_accepted_count",
+          "reason": "one-or-more-applicable-zero-tolerance-observations-missing"
+        }
+      ]
+    },
+    "ci": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+        "raw_cid": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+        "sha256": "eacb6d323c9350a233a83f5344ff1f5972b22775365d011d3f80445c516fd553",
+        "size": 14767
+      },
+      "blocker_count": 6,
+      "blockers": [
+        {
+          "decision": "NO-GO",
+          "id": "predecessor-benchmark-qualification-no-go",
+          "qualification_cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+          "source_task": "PCCE-068",
+          "waiver": null
+        },
+        {
+          "decision": "NO-GO",
+          "id": "predecessor-security-qualification-no-go",
+          "qualification_cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+          "source_task": "PCCE-076",
+          "waiver": null
+        },
+        {
+          "id": "current-head-workflow-run-unavailable",
+          "workflow_run_id": null,
+          "workflow_run_url": null
+        },
+        {
+          "id": "required-check-ruleset-authority-unavailable",
+          "ruleset_id": null,
+          "ruleset_url": null
+        },
+        {
+          "id": "complete-job-logs-unavailable",
+          "observed_log_count": 0,
+          "required_log_count": 9
+        },
+        {
+          "findings": null,
+          "id": "dependency-license-run-findings-unavailable"
+        }
+      ]
+    },
+    "installation": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "raw_cid": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+        "size": 37516
+      },
+      "blocker_count": 3,
+      "blockers": [
+        {
+          "code": "required-artifact-bytes-unavailable",
+          "disposition": "no substitute or waiver accepted",
+          "evidence": {
+            "bytes_available": false,
+            "bytes_verified": false,
+            "cid_binding_status": "identity-derived-bytes-unavailable",
+            "cid_v1_raw": "bafkreienw4uz6lgbisau22y3agueo25c3kthqmefmuj7fbr4n6wev47ncu",
+            "distribution": "ipfs-kit-py",
+            "filename": "ipfs_kit_py-0.3.0.tar.gz",
+            "kind": "sdist",
+            "sha256": "8db7299f2cc144814d6b1b01a8476ba2daa67830856513f2863c6fac4af3ed15",
+            "size": null,
+            "source_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+            "unavailability_evidence": {
+              "bounded_provider_replay_candidate_sha256": "66a52a69252858dc96947aa6d26af14c48e6ed211bcd4170f25ced0ffab516cf",
+              "bounded_provider_replay_candidate_size": 6893895,
+              "disposition": "rejected-hash-mismatch"
+            },
+            "unavailability_reason": "The exact admitted identity is retained, but bounded replay of the original provider environment could not reproduce per-member PAX subsecond timestamps; no mismatched reconstruction is substituted.",
+            "version": "0.3.0"
+          },
+          "status": "unavailable"
+        },
+        {
+          "code": "supported-clean-install-profiles-unqualified",
+          "disposition": "all supported profiles remain release-blocking NO-GO",
+          "profiles": {
+            "codex": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            },
+            "core": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            },
+            "evaluation": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "llama_cpp_python-0.3.35.tar.gz",
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            },
+            "local-model": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "llama_cpp_python-0.3.35.tar.gz",
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            },
+            "verification": {
+              "result": "NO-GO",
+              "selected_source_archives": [
+                "python-baseconv-1.2.2.tar.gz",
+                "varint-1.0.2.tar.gz"
+              ]
+            }
+          },
+          "status": "verification-failed-closed"
+        },
+        {
+          "code": "container-profiles-unqualified",
+          "disposition": "no image or container qualification claimed",
+          "profiles": {
+            "core": {
+              "cid_v1_raw": "bafkreiatncg6i4wbyqjxu3uribymitylpfjx6fggeuak6qeuad3tpzwp6y",
+              "image_created": false,
+              "log_sha256": "13688de472c1c4137a6e914070c44f0b79537f14c62500af409400f737e6cff6",
+              "result": "explicit-no-go-source-archives-not-qualified"
+            },
+            "verification": {
+              "cid_v1_raw": "bafkreiaxu5bql5wkud657uhcakymmzsy6xsgactvuwabry6vkoapzd43kq",
+              "image_created": false,
+              "log_sha256": "17a74305f6caa0fddfd0e202b0c66658f5e4600a75a58018e3d55380fc8f9b54",
+              "result": "explicit-no-go-source-archives-not-qualified"
+            }
+          },
+          "status": "verification-failed-closed"
+        }
+      ]
+    },
+    "release_candidate": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/release/v0.1-rc1/release_manifest.json",
+        "raw_cid": "bafkreihqaavbnpex3c2jufnxbf7kdzr7f3n26tb2outv7kujajxe6pwtqu",
+        "sha256": "f0002a16bc97d8b49a15b7097ea1e63f2edbaf4c3a75275faa89026e4f3ed385",
+        "size": 90632
+      },
+      "blocker_count": 7,
+      "blockers": [
+        {
+          "id": "installability-no-go",
+          "observed_decision": "NO-GO",
+          "source": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+          "waiver": null
+        },
+        {
+          "id": "package-byte-set-incomplete",
+          "rc1_contains_archive_bytes": false,
+          "unavailable_artifacts": [
+            "ipfs_kit_py-0.3.0.tar.gz"
+          ],
+          "waiver": null
+        },
+        {
+          "id": "package-signature-evidence-unavailable",
+          "signature_results_observed": 0,
+          "signed_package_claim": false,
+          "waiver": null
+        },
+        {
+          "id": "bounded-self-hosting-qualification-no-go",
+          "observed_decision": "NO-GO",
+          "qualification_status": "unavailable",
+          "source": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+          "source_cid_v1_raw": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+          "source_task": "PCCE-079",
+          "waiver": null
+        },
+        {
+          "id": "benchmark-qualification-no-go",
+          "observed_decision": "NO-GO",
+          "provider_or_model_runs_claimed": false,
+          "release_qualified": false,
+          "source": "artifacts/proof_carrying_context_engine/benchmark/qualification.json",
+          "source_cid_v1_raw": "bafkreiat3sxsmd6lx3m524vvhfkonpp5clnspjbd52ldipiyv7fix4oao4",
+          "source_tasks": [
+            "PCCE-067",
+            "PCCE-068"
+          ],
+          "waiver": null
+        },
+        {
+          "id": "security-qualification-no-go",
+          "observed_decision": "NO-GO",
+          "release_qualified": false,
+          "security_release_claim": false,
+          "source": "artifacts/proof_carrying_context_engine/security/qualification.json",
+          "source_cid_v1_raw": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+          "source_task": "PCCE-076",
+          "waiver": null
+        },
+        {
+          "ci_run_claimed": false,
+          "external_ci_authority_available": false,
+          "id": "current-head-ci-qualification-no-go",
+          "observed_decision": "NO-GO",
+          "release_qualified": false,
+          "source": "artifacts/proof_carrying_context_engine/ci/required_jobs.json",
+          "source_cid_v1_raw": "bafkreihkznwtepetkcrdhkb7kncp6h2zokzco5jwluar2p4airofc36vkm",
+          "source_task": "PCCE-080",
+          "waiver": null
+        }
+      ]
+    },
+    "security": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/security/qualification.json",
+        "raw_cid": "bafkreieuandsh7o7uvdsm3dzjfq4hsenabpr2cl4nyssjth35xkju7oi6q",
+        "sha256": "94034723fddfa547266c794961c3c88d005f1d097c6e2524ccfbedd49a7dc8f4",
+        "size": 7425
+      },
+      "blocker_count": 10,
+      "blocker_ids": [
+        "RR-001",
+        "RR-002",
+        "RR-003",
+        "RR-004",
+        "RR-005",
+        "RR-006",
+        "RR-007",
+        "RR-008",
+        "RR-009",
+        "RR-010"
+      ],
+      "observed_release_blockers": [
+        {
+          "blocker_id": "PCCE-075-double-publication",
+          "disposition": "no-go-runtime-storage-owner-reopen-required",
+          "evidence": {
+            "expected_maximum_accepted_records": 1,
+            "expected_maximum_published_settlements": 1,
+            "observed_accepted_records": 2,
+            "observed_published_settlements": 2,
+            "overlap_proven": true,
+            "shared_kit_root": true
+          },
+          "schedule_id": "two-runtime-stores-one-generation-minimized-failure"
+        },
+        {
+          "blocker_id": "PCCE-075-lost-durable-checkpoint-false-success",
+          "disposition": "no-go-lost-durable-checkpoint-false-success",
+          "evidence": {
+            "durable_resume_observed": false,
+            "no_cleanup_restart_status": "unavailable",
+            "post_cleanup_fresh_restart_accepted": true,
+            "post_cleanup_fresh_restart_published": true,
+            "post_cleanup_fresh_restart_status": "succeeded"
+          },
+          "schedule_id": "bounded-process-apply-during"
+        },
+        {
+          "blocker_id": "PCCE-075-synthetic-only-aba",
+          "disposition": "no-go-insufficient-not-runtime-kit-repository-integrated",
+          "evidence": {
+            "delayed_generation_one_outcome": "stale_root:generation",
+            "integration_scope": "synthetic-in-process-store-only",
+            "qualification_credit": false
+          },
+          "schedule_id": "delayed-generation-one-after-aba"
+        },
+        {
+          "blocker_id": "PCCE-075-authoritative-integration-gaps",
+          "disposition": "no-go-authoritative-integration-owner-reopen-required",
+          "evidence": {
+            "accepted_despite_gaps": true,
+            "authoritative_hidden_evaluator": "not_integrated",
+            "authoritative_sandbox": "not_integrated",
+            "proof_execution": "unavailable-no-go",
+            "verification_execution": "marker-only-no-command-or-test-receipt"
+          },
+          "schedule_id": "authoritative-runtime-integration-gaps"
+        },
+        {
+          "blocker_id": "PCCE-074-non-authoritative-isolation",
+          "disposition": "no-go-unintegrated-limited-boundary",
+          "evidence": {
+            "authoritative_accelerator_or_provider_consumes_module": false,
+            "live_benchmark_or_provider_invoked": false,
+            "outer_composed_proof_context_suite_clean": false,
+            "trusted_evaluator_callbacks_sandboxed_by_module": false
+          },
+          "schedule_id": null
+        }
+      ]
+    },
+    "self_hosting": {
+      "artifact": {
+        "path": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+        "raw_cid": "bafkreidml77ohmtf2aj6mbu7hfaqn2kqqjoqx7w4hqbhrp5zqurk5f74r4",
+        "sha256": "6c5ffee3b265d013e6069f394106e950825d0bfedc3c0278bfb98522ae97fc8f",
+        "size": 10273
+      },
+      "blocker_count": 6,
+      "blockers": [
+        {
+          "code": "pcce-056-install-gate-no-go",
+          "detail": "The exact PCCE-056 installation qualification remains NO-GO with no waiver; this observation cannot make live benchmark or product execution eligible.",
+          "status": "blocked"
+        },
+        {
+          "code": "frozen-benchmark-runners-not-executed",
+          "detail": "The packaged SelfHostingQualificationHarness accepts configuration_id and configuration_cid as identity fields but does not dispatch the frozen A/B or C/D benchmark runners. The four successes are generic proof-context runtime lifecycle observations only.",
+          "status": "unavailable"
+        },
+        {
+          "code": "insufficient-elapsed-longitudinal-epochs",
+          "detail": "All four retained observations belong to one current-head epoch on 2026-08-24. No genuinely time-separated later epoch exists, and no longitudinal duration is inferred from same-session attempts.",
+          "status": "unavailable"
+        },
+        {
+          "code": "historical-replay-evidence-unavailable",
+          "detail": "Repository history contains the PCCE-045 harness implementation receipt and fixture but no exact immutable historical raw harness attempt suitable for genuine replay. No replay record was manufactured.",
+          "status": "unavailable"
+        },
+        {
+          "code": "provider-cost-test-proof-assurance-receipts-unavailable",
+          "detail": "No provider/model invocation, provider permit, provider-reported cost, frozen benchmark result, test receipt, proof receipt, or benchmark assurance receipt was observed. Generic lifecycle stages with similarly named contracts are not substituted.",
+          "status": "unavailable"
+        },
+        {
+          "code": "interruption-resume-evidence-unavailable",
+          "detail": "No interruption was injected and the packaged CLI exposes no resume token or resume operation. A same-plan B rerun demonstrated stable logical identities but is not resume evidence.",
+          "status": "unavailable"
+        }
+      ]
+    }
+  },
+  "task_id": "PCCE-083",
+  "tests_and_ci": {
+    "aggregate_current_head_test_run_claimed": false,
+    "board_validator_required_for_candidate": true,
+    "configured_or_local_tests_count_as_external_ci": false,
+    "current_head_ci_decision": "NO-GO",
+    "external_current_head_ci_authority_available": false,
+    "receipt_level_validations_present": true,
+    "validator_observations": {
+      "configured_control_board_validator": {
+        "command": "python scripts/validate_proof_carrying_context_engine_board.py --check-all --no-write",
+        "normalized_result_identity": {
+          "raw_cid": "bafkreifwu47sm2sw6gmoi2ug3ohmympyvnufa7ch4hncjs2nyzj72jtgxe",
+          "sha256": "b6a73f266a56f198e46a86db8ecc31f8ab68507c47e1da24cb4dc653fd2666b9",
+          "size": 658
+        },
+        "result": {
+          "configured_board_valid": false,
+          "errors": [
+            "configured-board profile is invalid: provider.primary_model_id must be 'grok-4.6' for the ordered provider contract",
+            "historical r2 admission commit is not an ancestor of control HEAD",
+            "historical r3 control commit is not an ancestor of control HEAD",
+            "historical r4 control commit is not an ancestor of control HEAD",
+            "active PCCE-000 r5 evidence mismatch: board_projection_id",
+            "active PCCE-000 r5 evidence mismatch: dependency_graph_id",
+            "active PCCE-000 r5 evidence mismatch: repository_gitlinks",
+            "active PCCE-000 r5 accelerator gitlink is not the reviewed repair pin"
+          ],
+          "task_count": 67,
+          "valid": false,
+          "warnings": []
+        },
+        "returncode": 1,
+        "stderr": ""
+      },
+      "r6_frozen_graph_validator": {
+        "command": "python scripts/validate_proof_carrying_context_engine_board_r6.py --check-all",
+        "normalized_result_identity": {
+          "raw_cid": "bafkreifuyfpj5qbow6e32uk6cpadikti7l56wd3kr3oulje7wpbqjukjee",
+          "sha256": "b4c15e9ec02eb789bd515e13c0342a68fafbeb0f6a8edd45a49fb3c304d14921",
+          "size": 87
+        },
+        "result": {
+          "configured_board_valid": null,
+          "errors": [],
+          "task_count": 67,
+          "valid": true,
+          "warnings": []
+        },
+        "returncode": 0,
+        "stderr": ""
+      }
+    }
+  },
+  "truthfulness_canaries": {
+    "author_or_generator_mutated_database": false,
+    "benchmark_or_cost_metrics_invented": false,
+    "board_completion_used_as_product_qualification": false,
+    "ci_passage_claimed": false,
+    "hidden_benchmark_body_accessed": false,
+    "installation_passage_claimed": false,
+    "post_completion_67_of_67_claimed_authoritative": false,
+    "provider_execution_claimed": false,
+    "release_published_or_tagged": false,
+    "security_passage_claimed": false,
+    "waivers": []
+  },
+  "unresolved_blockers": [
+    {
+      "code": "INSTALLATION_GATE_NO_GO",
+      "disposition": "blocks-internal-alpha-and-release",
+      "waiver": null
+    },
+    {
+      "code": "RELEASE_CANDIDATE_PRESENT_BUT_NO_GO",
+      "disposition": "blocks-internal-alpha-and-release",
+      "waiver": null
+    },
+    {
+      "code": "BENCHMARK_QUALIFICATION_NO_GO",
+      "disposition": "blocks-internal-alpha-and-release",
+      "waiver": null
+    },
+    {
+      "code": "SECURITY_GATE_NO_GO",
+      "disposition": "blocks-internal-alpha-and-release",
+      "waiver": null
+    },
+    {
+      "code": "CI_QUALIFICATION_NO_GO",
+      "disposition": "blocks-internal-alpha-and-release",
+      "waiver": null
+    },
+    {
+      "code": "LONGITUDINAL_SELF_HOSTING_NO_GO",
+      "disposition": "blocks-internal-alpha-and-release",
+      "waiver": null
+    },
+    {
+      "code": "PACKAGE_BYTE_SET_INCOMPLETE",
+      "disposition": "blocks-internal-alpha-and-release",
+      "waiver": null
+    },
+    {
+      "code": "PACKAGE_SIGNATURE_EVIDENCE_UNAVAILABLE",
+      "disposition": "blocks-internal-alpha-and-release",
+      "waiver": null
+    },
+    {
+      "code": "ADVERSARIAL_CONCURRENCY_NO_GO",
+      "disposition": "runtime-and-storage-owner-reopen-required",
+      "source": {
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-075.json",
+        "raw_cid": "bafkreickz4pwdhduqgb2hkzzndgdlvcqnc5affscfzwum5tzlycfd7kfsu",
+        "sha256": "4acf1f619c748183a3ab3968cc35d45068ba0296422e6d4676795e0451fd4595",
+        "size": 6604
+      },
+      "waiver": null
+    },
+    {
+      "code": "CONFIGURED_CONTROL_BOARD_VALIDATOR_FAILED",
+      "disposition": "control-history-and-provider-configuration-reconciliation-required",
+      "error_count": 8,
+      "waiver": null
+    }
+  ]
+}

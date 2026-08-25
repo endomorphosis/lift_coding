@@ -1,0 +1,95 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-055",
+  "objective_id": "PCCE-G500",
+  "status": "completed",
+  "completion_mode": "operator-external-reconciliation-candidate",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-055:governed-example-walkthrough",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "recorded_at": "2026-08-24T13:25:27Z",
+  "authority": {
+    "candidate_only": true,
+    "duckdb_or_quack_mutated": false,
+    "requires_supervisor_reconciliation": true
+  },
+  "evidence": {
+    "nested_repository": {
+      "path": "external/ipfs_accelerate",
+      "commit": "ae94e1aeed74e27635d8c15ecd9d4d4fbaab9617",
+      "repository_tree": "cb5730bc453b0d38ea287f408285342232930c56",
+      "fixture_tree": "524f435d66bc033f1d3ad92bace43c3c46831a78",
+      "test_blob": "9928eef9b3a436f060407d76632b27c12024ff82"
+    },
+    "walkthrough": {
+      "schema": "ipfs-accelerate.proof-context.v0.1/example-walkthrough@1",
+      "fixture_commit": "5a6ec12c2a5697c5654b2daaf1769669210ea937",
+      "fixture_tree": "524f435d66bc033f1d3ad92bace43c3c46831a78",
+      "transcript_cid": "bafkreihiykw56dxjmludq7vqdeiz7rsbw7tjcz56ey2p43qoph7wlhrvxy",
+      "transcript_sha256": "sha256:5513ef2d41075ea7fbaa2603cf64bc5853d3f2f840acda496b7483148995421b",
+      "transcript_bytes": 6209,
+      "deterministic_fresh_clone_runs": 2,
+      "network_required": false,
+      "credentials_required": false,
+      "provider_bound": false
+    },
+    "context": {
+      "estimator": "whitespace-v1",
+      "before_tokens": 2101,
+      "compressed_tokens": 24,
+      "expanded_tokens": 83,
+      "before_cid": "sha256:9bb1498b8fb6944a646a6d9e140238cde567ea42a7bddebbada9089567f0b2f2",
+      "compressed_cid": "sha256:76bf50f4529c4d4f3ca65d50f1414e7af9a18c9698f51d7369492340c18330aa",
+      "expanded_cid": "sha256:bb23a1483e9373e77a01526408277778998b18e97eb9087bb381961061be3830"
+    },
+    "execution_receipts": {
+      "schema": "ipfs-accelerate.proof-context.v0.1/example-execution-receipt@1",
+      "rejected_cid": "bafkreihoz444p52bf2ns5ofoxiom35cmxfrmajczzutdptbubxssnlgvqi",
+      "accepted_cid": "bafkreif2m3cxirborzm5jyfjykavz7raxjdeyj2vmyueczi55ca7m54biq",
+      "distinct": true
+    },
+    "bad_patch": {
+      "status": "rejected",
+      "reason": "boundary_violation",
+      "failure_stage_receipt_cid": "bafkreihrykl2io3xc6xw2ibdbgbpp2p62chyl7en6kiy5cwcqqreuec5rq",
+      "execution_receipt_cid": "bafkreihoz444p52bf2ns5ofoxiom35cmxfrmajczzutdptbubxssnlgvqi",
+      "canonical_head_unchanged": true,
+      "escape_created": false
+    },
+    "selected_tests": {
+      "command": "python -m unittest -q tests.test_demo tests.test_labels tests.test_double",
+      "candidate_tree": "4e9f81afd74a7422098d22b1efb0474cc9c638e4",
+      "receipt_cid": "bafkreiezd4ojk3pk2ewhx2honggjo7u22t4yxzaft4pdorsxbyp4i6c354",
+      "status": "passed",
+      "execution_count": 1
+    },
+    "proof_reuse": {
+      "exact_candidate_tree_match": true,
+      "selected_test_receipt_cid": "bafkreiezd4ojk3pk2ewhx2honggjo7u22t4yxzaft4pdorsxbyp4i6c354",
+      "verification_calls": 2,
+      "verification_stage_count": 1,
+      "runtime_verification_receipt_reuse_count": 1,
+      "verification_receipt_cid": "bafkreie2ippipgjt76e2eoajkj774d5coayouoccai5mank6rqhtmz4mue"
+    },
+    "acceptance": {
+      "status": "succeeded",
+      "patch_id": "bafkreige4t2ywk7s3dypgkmogkperlvw5lvefvfeco2knagcsdyg27ngpu",
+      "execution_receipt_cid": "bafkreif2m3cxirborzm5jyfjykavz7raxjdeyj2vmyueczi55ca7m54biq",
+      "all_16_governed_stages": true,
+      "canonical_mutated": false,
+      "disposable_worktree_removed": true
+    },
+    "seal": {
+      "status": "succeeded",
+      "provenance": "live",
+      "seal_cid": "bafkreidrrzr2so7q4tsn6ag524m67n3c53thhaoaduq3up7trdvnhuo4le",
+      "artifact_cid": "bafkreidu5pysxtt4pdqc5lnt56d4pl5fj2bsgdmxjzipjntg23gumfzabq"
+    },
+    "validation": [
+      "PYTHONNOUSERSITE=1 PYTHONPATH=external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/proof_context/test_example_repository.py",
+      "PYTHONNOUSERSITE=1 PYTHONPATH=external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/proof_context/test_runtime_integration.py external/ipfs_accelerate/test/proof_context/cli/test_cli_end_to_end.py",
+      "ruff check external/ipfs_accelerate/examples/proof_context_repository external/ipfs_accelerate/test/proof_context/test_example_repository.py",
+      "ruff format --check external/ipfs_accelerate/examples/proof_context_repository external/ipfs_accelerate/test/proof_context/test_example_repository.py"
+    ]
+  },
+  "rollback": "Revert only the example fixture directory, its focused test, the accelerator gitlink update, and this candidate receipt; retain failed validation evidence and remove only disposable example worktrees."
+}

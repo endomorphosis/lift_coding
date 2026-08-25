@@ -1,0 +1,14 @@
+{
+  "destructive_cleanup_required": false,
+  "next_candidate_on_evidence_change": "v0.1-rc2",
+  "published_externally": false,
+  "release_candidate": "v0.1-rc1",
+  "rollback_steps": [
+    "retain rc1 manifest, receipt, and NO-GO evidence",
+    "withdraw or ignore the unpromoted rc1 directory identity",
+    "repair only through the owning predecessor tasks",
+    "assemble v0.1-rc2; never overwrite rc1 with different bytes"
+  ],
+  "schema": "lift_coding.proof-carrying-context-engine.release-rollback@1",
+  "tag_created": false
+}

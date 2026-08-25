@@ -1,0 +1,225 @@
+{
+  "artifact_identity": "baguqeeraill7pfg6f7ymdtwz2ot35wsfmgu2rvv46cadpn3afkegenyepaiq",
+  "artifact_identity_kind": "software-contract structured CID of the corpus-manifest and threshold-set freeze bundle",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-benchmark-design-freeze-no-execution",
+  "evidence": {
+    "benchmark_execution": {
+      "benchmark_results_observed": false,
+      "benchmark_runs_started": false,
+      "corpus_materialized": false,
+      "design_completion_allowed_by_pcce056": true,
+      "live_execution_eligible": false,
+      "reason": "PCCE-056 completed with an explicit installability NO-GO",
+      "release_or_performance_claims_allowed": false
+    },
+    "catalog_cids": {
+      "configuration_catalog_cid": "baguqeerawkkjkycel5hybwjmbtmdjaxljjzleespr4gdpuvcmu6jgd7yorqq",
+      "isolation_policy_cid": "baguqeeranng5ntf2bgqe7tsdb7mn5i4ikbwx5bvawkndgybyozfoo4ww4ala",
+      "metric_catalog_cid": "baguqeera2vl3nwxx4zytbrjuh5jlvnr5myeshaeheh2eexac65gm2zb3nbxq",
+      "metric_completeness_matrix_cid": "baguqeeraye7lwnyrelx3feqqn54h5yc7csnxgpjha3jvv5pess7jidiazc4q",
+      "schema_catalog_cid": "baguqeeraxjtfwbm4ci3yimo4u2c6ow74ziryk45npuzp3bkezgjr4camagba"
+    },
+    "configuration_freeze": {
+      "configuration_ids": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "diff_whitelist": {
+        "A->B": [
+          "context_method"
+        ],
+        "B->C": [
+          "incremental_verification_enabled",
+          "model_policy",
+          "proof_reuse_enabled",
+          "routing_enabled",
+          "verification_policy"
+        ],
+        "C->D": [
+          "assurance_enabled",
+          "context_expansion_enabled",
+          "human_escalation_enabled",
+          "incremental_seal_enabled",
+          "sufficiency_enabled"
+        ]
+      },
+      "hidden_full_scoring_for_all_arms": true
+    },
+    "corpus_manifest": {
+      "cid": "baguqeeraedh4m4sadrllnzrp7zi4bherd2dbp5injbvv7myzybjjnju3mlwa",
+      "cid_profile": "software-contract-cid-profile-v1",
+      "path": "external/ipfs_datasets/benchmarks/proof_context/corpus_manifest.json",
+      "raw_cid_v1": "bafkreidbngeh7k7knauskpw4ztbv2wuy65ia6ybs6lvdoosrknx4fwqnwq",
+      "results_observed_before_freeze": false,
+      "schema": "ipfs-datasets.proof-context.benchmark-corpus-manifest@1",
+      "sha256": "6169887fabea6829253edcccc35d5a98f7500f6032f2ea373a51536fc2da0db4",
+      "size": 9021
+    },
+    "freeze_bundle": {
+      "corpus_manifest_cid": "baguqeeraedh4m4sadrllnzrp7zi4bherd2dbp5injbvv7myzybjjnju3mlwa",
+      "schema": "lift_coding.proof-carrying-context-engine.benchmark-freeze-bundle@1",
+      "threshold_set_cid": "baguqeeraqbhgjlvhrdrwfashgtvwsb5e4k3fac5mg75j6f4p4gvxbaz75b6q"
+    },
+    "independent_review": {
+      "disposition": "APPROVED",
+      "reviewer": "root/Codex independent benchmark-design review",
+      "subjects": {
+        "nested_commit": "182a454a88c487983a976266d79fbf0680b019ee",
+        "outer_artifacts": [
+          "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+          "artifacts/proof_carrying_context_engine/receipts/PCCE-060.json"
+        ]
+      },
+      "verification": {
+        "configuration_count": 4,
+        "focused_tests_passed": 12,
+        "focused_tests_skipped": 0,
+        "json_validation": "passed",
+        "leakage_and_no_live_policy": "passed",
+        "metric_count": 78,
+        "nested_scope": "exactly-three-authorized-files-clean",
+        "ruff_format": "passed",
+        "ruff_lint": "passed",
+        "truthful_pcce056_no_go": "passed"
+      }
+    },
+    "isolation": {
+      "answer_bytes_visible_to_agent": false,
+      "contamination_disposition": "invalidate-v1-and-create-new-version",
+      "descendant_git_objects_visible_to_agent": false,
+      "future_commits_visible_to_agent": false,
+      "hidden_evaluator_mount_time": "after-patch-proposal",
+      "provider_conversation_reuse_across_arms": false,
+      "repair_feedback_from_hidden_evaluation": false
+    },
+    "metric_completeness": {
+      "category_counts": {
+        "assurance": 13,
+        "context": 11,
+        "economics": 11,
+        "quality": 14,
+        "routing": 10,
+        "verification": 19
+      },
+      "metric_count": 78,
+      "missing_categories": []
+    },
+    "nested_source": {
+      "base_commit": "6eb5803548b070a55c81d4631f13996d5c28137b",
+      "files": {
+        "benchmarks/proof_context/corpus_manifest.json": {
+          "blob": "10ae2b4cf5558d78786d0a1e779b3d1267a4dd82",
+          "cid_v1_raw": "bafkreidbngeh7k7knauskpw4ztbv2wuy65ia6ybs6lvdoosrknx4fwqnwq",
+          "mode": "100644",
+          "sha256": "6169887fabea6829253edcccc35d5a98f7500f6032f2ea373a51536fc2da0db4",
+          "size": 9021
+        },
+        "ipfs_datasets_py/proof_context/benchmarks/specification.py": {
+          "blob": "0209c01af98321f47412960201f36cefa6db398e",
+          "cid_v1_raw": "bafkreiehntuosefm3lk2abzp3d2x7bto62oalk6dmul4c7log6wba3llma",
+          "mode": "100644",
+          "sha256": "876ce8e910acdad5a0072fd8f57f866ef69c05abc36517c17d6e37ac106d6b60",
+          "size": 50595
+        },
+        "tests/proof_context/benchmarks/test_specification.py": {
+          "blob": "c32589dbfa6464212be55eb4a8f704402e5e8594",
+          "cid_v1_raw": "bafkreideyeuj2swy3qpiozoa2ny4ac623ejtrbif5tns4vjnyfve2rqrry",
+          "mode": "100644",
+          "sha256": "64c1289d4ad8dc1e8765c0d371c00bdad913388505ecdb2e552dc16a4d46118e",
+          "size": 14287
+        }
+      },
+      "implementation_commit": "182a454a88c487983a976266d79fbf0680b019ee",
+      "repository": "external/ipfs_datasets",
+      "repository_tree": "8b5cfb14bde0f8569abb931c995ac48b3a92b5b5"
+    },
+    "pcce056_runtime_gate": {
+      "database_completion_receipt_sha256": "edb1dd67fcde38ed0e753df3519cfd0dfbd8654d1f6f2d1515935e3568b2c876",
+      "live_execution_eligible": false,
+      "qualification": {
+        "cid_v1_raw": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+        "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+        "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+        "size": 37516,
+        "status": "NO-GO"
+      },
+      "qualification_receipt": {
+        "cid_v1_raw": "bafkreibiwxtmdtr2wiq5xbez2njp5t5qwsvli2ijwwneyqtlh7iql26wlm",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
+        "sha256": "28b5e6c1ce3ab221db8499d352fecfb0b4aab46909b59a4c426b3fd105ebd65b",
+        "size": 2805
+      },
+      "release_qualified": false,
+      "waivers": []
+    },
+    "source_pins": [
+      {
+        "archive_sha256": "61aae3bc10caff0a26598c38bcfa1270ae3d67914a8e4b89e8074f5a0323c568",
+        "archive_size": 812534,
+        "commit": "3dca08ce5bbe673d7df25f44f3dda92505d1043d",
+        "license_sha256": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f",
+        "observed_at": "2026-08-24T17:07:45Z",
+        "repository": "python-attrs/attrs",
+        "repository_class": "typed_structured",
+        "tree": "2f143c350d12dc394f3320a2d4e259dda86874d7"
+      },
+      {
+        "archive_sha256": "d5f397694a7b520e09127a384369d94004acd8bef1810bcb184d0cf7567e506f",
+        "archive_size": 64481,
+        "commit": "fd08ab5f811a9b2fa9124ae8cbbd393221151e2c",
+        "license_sha256": "d6b65e6c213a5d0b577911d34d6e5949b9f59d76c238c5071a2f3fc16cfb2606",
+        "observed_at": "2026-08-24T17:07:45Z",
+        "repository": "pytest-dev/pluggy",
+        "repository_class": "dynamic_plugins",
+        "tree": "d3aac17eab19c9e8f6f6358ad2dcaec02d734020"
+      },
+      {
+        "archive_sha256": "600a460db656899969c7dd4b1c70ce268eada7c49fa0b57e942da79030faa7af",
+        "archive_size": 10551627,
+        "commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "license_sha256": "b846415d1b514e9c1dff14a22deb906d794bc546ca6129f950a18cd091e2a669",
+        "observed_at": "2026-08-24T17:07:45Z",
+        "repository": "django/django",
+        "repository_class": "mature_python",
+        "tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48"
+      }
+    ],
+    "task_authority": {
+      "live_quack_duckdb": {
+        "dependency_task_cids": [
+          "baguqeerawocxhxqnvpqggoyuwaclxboph2jta457ri2z3dcnhwt3ufzpdwzq"
+        ],
+        "revision": 1,
+        "task_cid": "baguqeerakbga4mjv7oy2k67gelnvpgessyret5mshnby6qhnsjbex5rxdyoa"
+      },
+      "static_board": {
+        "canonical_task_cid": "baguqeerad676dzstuii524wli6hnfdfxgsfsmxgk2behffki6xtf3udcdvdq",
+        "canonical_task_key": "task/v1/1fbfe1e653a211dd72cb478ed28cb7348b265ccad048729548f5e65dd0621d47"
+      }
+    },
+    "thresholds": {
+      "cid": "baguqeeraqbhgjlvhrdrwfashgtvwsb5e4k3fac5mg75j6f4p4gvxbaz75b6q",
+      "frozen_at": "2026-08-24T17:07:45Z",
+      "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+      "raw_cid_v1": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+      "results_observed_before_freeze": false,
+      "schema": "ipfs-datasets.proof-context.benchmark-threshold-set@1",
+      "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b",
+      "size": 2373
+    },
+    "validation": [
+      "python -m pytest -q external/ipfs_datasets/tests/proof_context/benchmarks/test_specification.py",
+      "python -m json.tool external/ipfs_datasets/benchmarks/proof_context/corpus_manifest.json",
+      "python -m json.tool artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+      "ruff check external/ipfs_datasets/ipfs_datasets_py/proof_context/benchmarks/specification.py external/ipfs_datasets/tests/proof_context/benchmarks/test_specification.py"
+    ]
+  },
+  "objective_id": "PCCE-G600",
+  "rollback": "Before execution, revert the benchmark schema, manifest, thresholds, nested gitlink, and this receipt together. After any execution starts, do not edit the freeze in place; create a new corpus/version and invalidate the affected comparisons.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-060"
+}

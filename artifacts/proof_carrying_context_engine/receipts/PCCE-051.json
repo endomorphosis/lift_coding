@@ -1,0 +1,30 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-051",
+  "objective_id": "PCCE-G500",
+  "status": "completed",
+  "completion_mode": "supervised-packaging-implementation",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-051:kit-proof-context-package",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "evidence": {
+    "artifacts": {
+      "sdist": {
+        "filename": "ipfs_kit_py-0.3.0.tar.gz",
+        "sha256": "8db7299f2cc144814d6b1b01a8476ba2daa67830856513f2863c6fac4af3ed15"
+      },
+      "wheel": {
+        "filename": "ipfs_kit_py-0.3.0-py3-none-any.whl",
+        "sha256": "f100c569681cfc534c5705b51e89bc2734bfa637200b7f30ebe8dab170bc3be3"
+      }
+    },
+    "public_surface": "ipfs_kit_py.proof_context",
+    "core_storage": ["hermetic local CAS", "receipt persistence", "seal WAL"],
+    "ipfs_transport": {"extra": "proof-context-ipfs", "default_install": false, "explicit": true},
+    "compatible_versions": {"proof_context": "0.1", "proof_seal_store": "1.0.0"},
+    "validation": [
+      "python -m pytest -q external/ipfs_kit/tests/proof_context/test_install_profile.py",
+      "python -m build external/ipfs_kit"
+    ]
+  },
+  "rollback": "Revert only the kit proof-context export, package metadata, install-profile test, and this receipt; discard unpromoted build artifacts."
+}

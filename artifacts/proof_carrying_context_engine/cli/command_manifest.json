@@ -1,0 +1,12 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.cli-command-manifest@1",
+  "contract_version": "0.1",
+  "entrypoint": "python -m ipfs_accelerate_py.proof_context.cli",
+  "console_script": "deferred_to_PCCE-052",
+  "commands": {"state": ["init", "scan", "status", "plan"], "execution": ["run", "verify", "resume"], "evidence": ["expand-context", "explain-impact", "assurance", "seal", "report"]},
+  "required_arguments": ["repository", "task", "correlation"],
+  "input_contracts": {"run": {"request_schema": "ipfs-accelerate.proof-context.v0.1/cli-run-request@1", "requires": ["run-id", "request"]}, "verify": {"requires_exactly_one_of": ["run-record", "patch-id"]}, "resume": {"optional": ["checkpoint"], "requires": ["run-id"]}, "evidence": {"requires": ["run-id", "repository-id", "patch-id", "parent"]}},
+  "renderers": {"json": "default", "human": "--output-mode human", "human_patch_report": "--human-report"},
+  "exit_codes": {"succeeded_live": 0, "typed_failure": 1, "invalid": 2, "rejected": 3, "simulated": 4, "unavailable": 5, "stale": 6},
+  "guarantees": ["no implicit repository cwd", "no live provider credentials required", "closed adapter registry", "canonical branch is not modified by run", "replay never promotes to live evidence"]
+}

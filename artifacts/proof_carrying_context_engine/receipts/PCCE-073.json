@@ -1,0 +1,129 @@
+{
+  "artifact_identity": "bafkreif535gd4tuokudj2djynif5uspk3lq56pro3zjwulxqyflrgk3xta",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of the sealed adversarial fixture population descriptor",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-adversarial-test-implementation-observed-tested-limited",
+  "evidence": {
+    "acceptance_disposition": {
+      "attack_cases_rejected": 8,
+      "canonical_runtime_changed": false,
+      "nearby_valid_control_admitted": true,
+      "production_eligible": false,
+      "qualification_credit": false,
+      "runtime_integration_status": "not_integrated",
+      "status": "observed_tested_limited"
+    },
+    "attack_result_matrix": {
+      "compromised-adapter-authority": "rejected-boundary_violation",
+      "model-policy-edit": "rejected-boundary_violation",
+      "out-of-scope-edit": "rejected-boundary_violation",
+      "required-test-deletion": "rejected-boundary_violation",
+      "response-scope-lie": "rejected-boundary_violation",
+      "shell-argv-injection": "rejected-boundary_violation",
+      "source-comment-prompt-injection": "rejected-boundary_violation",
+      "valid-control-patch": "admitted-unpublished",
+      "weakened-proof-obligation": "rejected-boundary_violation"
+    },
+    "effect_observations": {
+      "all_attack_receipts_bounded_and_redacted": true,
+      "canonical_commit_tree_policy_tests_and_proofs_unchanged": true,
+      "escaped_network_effect_observed": false,
+      "escaped_path_effect_observed": false,
+      "escaped_process_effect_observed": false,
+      "proposing_adapter_judged_acceptance": false,
+      "publication_performed": false
+    },
+    "fixture_population": {
+      "attack_receipts": 8,
+      "control_receipts": 1,
+      "fixture_files": 22,
+      "manifest_blob": "43bd863f95e1199f4e1227f2faac052867909a30",
+      "manifest_path": "external/ipfs_accelerate/test/proof_context/security/fixtures/patch_and_agent/evidence/population_manifest.json.fixture",
+      "manifest_sha256": "dbc836b04d60f8ff6b0e6891c3e8fd8c641e78f2b878006be465e0f91229e210",
+      "manifest_size": 5952,
+      "population_cid": "bafkreif535gd4tuokudj2djynif5uspk3lq56pro3zjwulxqyflrgk3xta",
+      "sealed_receipt_schema": "pcce-073.sealed-receipt@1"
+    },
+    "independent_review": {
+      "disposition": "APPROVED",
+      "reviewer": "/root (Codex independent nested review before outer composition)",
+      "subject": {
+        "base_commit": "489da803b9a778d41d8576d0c90a5384fb943eb5",
+        "implementation_commit": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+        "implementation_tree": "ef570b0c958bd672bc68da58d17813b223f00c6a"
+      },
+      "verification": {
+        "authorized_nested_paths": 23,
+        "diff_check": "passed",
+        "runtime_source_changed": false,
+        "scope": "one adversarial test plus one fixture subtree"
+      }
+    },
+    "limitations": {
+      "authoritative_runtime_sandbox_integration_observed": false,
+      "control_test_process_pcce071_containment_observed": false,
+      "live_credentials_or_provider_transport_used": false,
+      "native_syscalls_outside_in_process_fixtures_observed": false,
+      "same_uid_hostile_actor_resistance_claimed": false,
+      "source": "external/ipfs_accelerate/test/proof_context/security/fixtures/patch_and_agent/evidence/limitations.json.fixture",
+      "test_harness_denial_traces_are_production_evidence": false
+    },
+    "nested_source": {
+      "base_commit": "489da803b9a778d41d8576d0c90a5384fb943eb5",
+      "base_tree": "85b5452f203b2836cd57422d01e4f9a9ce3db4f7",
+      "implementation_commit": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+      "implementation_tree": "ef570b0c958bd672bc68da58d17813b223f00c6a",
+      "repository": "external/ipfs_accelerate",
+      "scope": {
+        "added_files": 23,
+        "fixture_directory": "test/proof_context/security/fixtures/patch_and_agent",
+        "runtime_files_changed": 0,
+        "test": {
+          "blob": "ee3d18ec5c8b4dbd441e0eb54fb29ea70c2ca0b1",
+          "path": "test/proof_context/security/test_adversarial_patch_and_agent.py",
+          "sha256": "f9b9e8e735701a7baa0642f7690d3970188f41067acf6ea5bb695391eb7f8225",
+          "size": 56948
+        }
+      }
+    },
+    "outer_composition": {
+      "accelerator_base_gitlink": "489da803b9a778d41d8576d0c90a5384fb943eb5",
+      "accelerator_candidate_gitlink": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+      "base_commit": "268e350b659921a7dfd1d7160dce508dd313740a",
+      "base_tree": "de2e171b6e1bdb43f39a81b00050d8fc97488818",
+      "branch": "implementation/PCCE-073-adversarial-20260825",
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-073.json",
+        "external/ipfs_accelerate"
+      ]
+    },
+    "prohibited_effects": {
+      "canonical_branch_or_host_payload_targeted": false,
+      "fixtures_weakened_to_pass": false,
+      "live_credentials_used": false,
+      "provider_dispatched": false,
+      "runtime_code_changed": false,
+      "supervisor_or_database_state_mutated_during_implementation": false
+    },
+    "task_authority": {
+      "database_revision_at_composition": 1,
+      "database_status_at_composition": "todo",
+      "database_task_cid": "baguqeerahk74pqi4yfawsiqoxb7w5kmdwuojrvllpecm3vn5biw7pcqedl2q",
+      "goal_id": "PCCE-G700",
+      "transport": "quack:127.0.0.1:41347"
+    },
+    "validation": {
+      "declared_test": {
+        "command": "python -m pytest -q external/ipfs_accelerate/test/proof_context/security/test_adversarial_patch_and_agent.py",
+        "passed": 13,
+        "python_hash_seed": 73
+      },
+      "git_diff_check": "passed"
+    }
+  },
+  "objective_id": "PCCE-G700",
+  "rollback": "Revert only this receipt, the accelerator gitlink, and the immutable adversarial fixtures/test commit; any revealed runtime failure reopens its owning implementation task instead of weakening expected rejection.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-073"
+}

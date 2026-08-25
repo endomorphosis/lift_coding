@@ -106,6 +106,17 @@ TERMINAL_STATUSES: Final = (
 OWNER_COMMAND_ENVELOPE_MAX_BYTES: Final = 1_048_576
 OWNER_WATCH_INTERVAL_SECONDS: Final = 15.0
 OWNER_DAEMON_COMMAND: Final = "state-owner-daemon"
+OWNER_MUTATION_REQUEST_MIN_AGE_SECONDS: Final = 15.0
+OWNER_EXACT_DML_RECYCLE_FLOOR_SECONDS: Final = 15.0
+OWNER_BOARD_UNSTALL_RECYCLE_FLOOR_SECONDS: Final = 600.0
+OWNER_RECYCLE_EXACT_DML: Final = "owner_dml"
+OWNER_RECYCLE_BOARD_UNSTALL: Final = "board_unstall"
+_OWNER_DML_SQL_PREFIXES: Final = (
+    "UPDATE ",
+    "DELETE ",
+    "MERGE ",
+    "INSERT ",
+)
 
 
 class OperatorError(RuntimeError):
@@ -2267,17 +2278,29 @@ def _owner_python_env(config_path: Path | None = None) -> dict[str, str]:
     )
     env["PYTHONUNBUFFERED"] = "1"
     if config_path is not None:
+        board, _config = _load_config(config_path)
+        paths = _runtime_paths(board)
+        program = board.resolved_database_program()
+        token_path = _token_path(paths["owner"], program.endpoint_secret_handle)
         try:
-            board, _config = _load_config(config_path)
-            paths = _runtime_paths(board)
-            program = board.resolved_database_program()
-            token_path = _token_path(paths["owner"], program.endpoint_secret_handle)
             token = _read_owner_token(token_path)
-        except OperatorError:
-            pass
-        else:
-            env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = token
-            env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN_FILE"] = str(token_path)
+        except FileNotFoundError as exc:
+            # A graceful Quack stop destroys its generation-local token file
+            # before this detached watch launches the replacement owner.  The
+            # watch itself inherited that exact credential at launch, so it is
+            # the only safe bridge across the short vault-absent interval.  The
+            # replacement child mints/persists its new generation token during
+            # ``server.start()``.  Never fall back around a present but unsafe
+            # or malformed vault: _read_owner_token must fail closed there.
+            token = str(
+                env.get("IPFS_ACCELERATE_AGENT_QUACK_TOKEN") or ""
+            ).strip()
+            if not re.fullmatch(r"[A-Za-z0-9_-]{8,}", token):
+                raise OperatorError(
+                    "Quack owner credential is unavailable after vault removal"
+                ) from exc
+        env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = token
+        env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN_FILE"] = str(token_path)
     return env
 
 
@@ -2327,14 +2350,151 @@ def _owner_listen_port(config_path: Path) -> int:
     return int(matched.group(2))
 
 
-def _owner_should_recycle_for_board_unstall(mutation_dir: Path) -> bool:
+def _read_owner_mutation_request(
+    request_path: Path,
+) -> tuple[dict[str, Any], float] | None:
+    """Read one private mutation request without following filesystem aliases."""
+
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
     try:
-        from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
-            owner_should_recycle_for_board_unstall,
-        )
-    except ImportError:
-        return False
-    return bool(owner_should_recycle_for_board_unstall(mutation_dir))
+        descriptor = os.open(request_path, flags)
+    except OSError:
+        return None
+    try:
+        try:
+            metadata = os.fstat(descriptor)
+        except OSError:
+            return None
+        if (
+            not stat.S_ISREG(metadata.st_mode)
+            or metadata.st_uid != os.getuid()
+            or metadata.st_nlink != 1
+            or metadata.st_size <= 0
+            or metadata.st_size > OWNER_COMMAND_ENVELOPE_MAX_BYTES
+        ):
+            return None
+        chunks: list[bytes] = []
+        remaining = OWNER_COMMAND_ENVELOPE_MAX_BYTES + 1
+        while remaining > 0:
+            try:
+                chunk = os.read(descriptor, min(65_536, remaining))
+            except OSError:
+                return None
+            if not chunk:
+                break
+            chunks.append(chunk)
+            remaining -= len(chunk)
+        encoded = b"".join(chunks)
+        if not encoded or len(encoded) > OWNER_COMMAND_ENVELOPE_MAX_BYTES:
+            return None
+    finally:
+        os.close(descriptor)
+    try:
+        payload = json.loads(encoded.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return None
+    if not isinstance(payload, dict):
+        return None
+    return payload, float(metadata.st_mtime)
+
+
+def _owner_mutation_request_kind(payload: Mapping[str, Any]) -> str:
+    """Classify only requests the exclusive owner can structurally execute."""
+
+    raw_op = payload.get("op")
+    if raw_op is not None and not isinstance(raw_op, str):
+        return ""
+    op = str(raw_op or "").strip()
+    if op == OWNER_RECYCLE_BOARD_UNSTALL:
+        stale_raw = payload.get("stale_seconds", 16_200)
+        if isinstance(stale_raw, bool) or not isinstance(stale_raw, int):
+            return ""
+        return OWNER_RECYCLE_BOARD_UNSTALL if stale_raw > 0 else ""
+
+    sql = payload.get("sql")
+    if not isinstance(sql, str):
+        return ""
+    normalized = " ".join(sql.strip().upper().split())
+    if not normalized.startswith(_OWNER_DML_SQL_PREFIXES):
+        return ""
+    if ";" in normalized.rstrip(";"):
+        return ""
+    parameters = payload.get("parameters")
+    if parameters is not None and not isinstance(parameters, (Mapping, list)):
+        return ""
+    return OWNER_RECYCLE_EXACT_DML
+
+
+def _pending_owner_recycle_kind(
+    mutation_dir: Path,
+    *,
+    now_epoch_seconds: float | None = None,
+) -> str:
+    """Return the safest urgency justified by aged, valid pending requests.
+
+    Exact DML wins over a generic board unstall only when an independently
+    parsed request proves that exact operation. Malformed, unsafe, young, or
+    already answered requests never authorize a recycle.
+    """
+
+    now = time.time() if now_epoch_seconds is None else float(now_epoch_seconds)
+    exact_dml_pending = False
+    board_unstall_pending = False
+    try:
+        requests = sorted(mutation_dir.glob("*.request.json"))
+    except OSError:
+        return ""
+    for request in requests:
+        done = request.with_name(request.name.replace(".request.json", ".done.json"))
+        try:
+            if done.is_file():
+                continue
+        except OSError:
+            continue
+        loaded = _read_owner_mutation_request(request)
+        if loaded is None:
+            continue
+        payload, modified_at = loaded
+        if now - modified_at < OWNER_MUTATION_REQUEST_MIN_AGE_SECONDS:
+            continue
+        kind = _owner_mutation_request_kind(payload)
+        if kind == OWNER_RECYCLE_EXACT_DML:
+            exact_dml_pending = True
+        elif kind == OWNER_RECYCLE_BOARD_UNSTALL:
+            board_unstall_pending = True
+    if exact_dml_pending:
+        return OWNER_RECYCLE_EXACT_DML
+    if board_unstall_pending:
+        return OWNER_RECYCLE_BOARD_UNSTALL
+    return ""
+
+
+def _owner_recycle_due(
+    mutation_dir: Path,
+    *,
+    last_recycle_monotonic: float | None,
+    now_monotonic: float | None = None,
+    now_epoch_seconds: float | None = None,
+) -> str:
+    """Return the eligible recycle kind after its operation-specific floor."""
+
+    kind = _pending_owner_recycle_kind(
+        mutation_dir,
+        now_epoch_seconds=now_epoch_seconds,
+    )
+    if not kind:
+        return ""
+    floor = (
+        OWNER_EXACT_DML_RECYCLE_FLOOR_SECONDS
+        if kind == OWNER_RECYCLE_EXACT_DML
+        else OWNER_BOARD_UNSTALL_RECYCLE_FLOOR_SECONDS
+    )
+    if last_recycle_monotonic is None:
+        return kind
+    observed = time.monotonic() if now_monotonic is None else float(now_monotonic)
+    if observed - float(last_recycle_monotonic) < floor:
+        return ""
+    return kind
 
 
 def watch_state_owner(config_path: Path) -> int:
@@ -2359,14 +2519,14 @@ def watch_state_owner(config_path: Path) -> int:
     log_path = paths["runtime"] / "logs" / "state-owner.daemon.log"
     log_path.parent.mkdir(parents=True, exist_ok=True)
     mutation_dir = paths["owner"] / "mutations"
-    last_board_unstall_bounce = 0.0
+    last_owner_recycle: float | None = None
     while True:
         if _loopback_port_listening(port):
             time.sleep(OWNER_WATCH_INTERVAL_SECONDS)
             continue
         with log_path.open("ab", buffering=0) as log_fh:
             log_fh.write(
-                f"\n# restarting state-owner at {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}\n".encode("utf-8")
+                f"\n# restarting state-owner at {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}\n".encode()
             )
             child = subprocess.Popen(
                 argv,
@@ -2378,12 +2538,18 @@ def watch_state_owner(config_path: Path) -> int:
                 close_fds=True,
             )
             while child.poll() is None:
-                if (
-                    time.monotonic() - last_board_unstall_bounce >= 600.0
-                    and _owner_should_recycle_for_board_unstall(mutation_dir)
-                ):
+                recycle_kind = _owner_recycle_due(
+                    mutation_dir,
+                    last_recycle_monotonic=last_owner_recycle,
+                )
+                if recycle_kind:
+                    reason = (
+                        "exact owner DML"
+                        if recycle_kind == OWNER_RECYCLE_EXACT_DML
+                        else "board unstall"
+                    )
                     log_fh.write(
-                        b"\n# recycling state-owner to apply board unstall\n"
+                        f"\n# recycling state-owner to apply {reason}\n".encode()
                     )
                     child.send_signal(signal.SIGTERM)
                     try:
@@ -2391,7 +2557,7 @@ def watch_state_owner(config_path: Path) -> int:
                     except subprocess.TimeoutExpired:
                         child.kill()
                         child.wait(timeout=5)
-                    last_board_unstall_bounce = time.monotonic()
+                    last_owner_recycle = time.monotonic()
                     break
                 time.sleep(1.0)
         time.sleep(2.0)

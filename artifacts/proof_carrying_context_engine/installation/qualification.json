@@ -1,0 +1,846 @@
+{
+  "blocking_findings": [
+    {
+      "code": "required-artifact-bytes-unavailable",
+      "disposition": "no substitute or waiver accepted",
+      "evidence": {
+        "bytes_available": false,
+        "bytes_verified": false,
+        "cid_binding_status": "identity-derived-bytes-unavailable",
+        "cid_v1_raw": "bafkreienw4uz6lgbisau22y3agueo25c3kthqmefmuj7fbr4n6wev47ncu",
+        "distribution": "ipfs-kit-py",
+        "filename": "ipfs_kit_py-0.3.0.tar.gz",
+        "kind": "sdist",
+        "sha256": "8db7299f2cc144814d6b1b01a8476ba2daa67830856513f2863c6fac4af3ed15",
+        "size": null,
+        "source_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+        "unavailability_evidence": {
+          "bounded_provider_replay_candidate_sha256": "66a52a69252858dc96947aa6d26af14c48e6ed211bcd4170f25ced0ffab516cf",
+          "bounded_provider_replay_candidate_size": 6893895,
+          "disposition": "rejected-hash-mismatch"
+        },
+        "unavailability_reason": "The exact admitted identity is retained, but bounded replay of the original provider environment could not reproduce per-member PAX subsecond timestamps; no mismatched reconstruction is substituted.",
+        "version": "0.3.0"
+      },
+      "status": "unavailable"
+    },
+    {
+      "code": "supported-clean-install-profiles-unqualified",
+      "disposition": "all supported profiles remain release-blocking NO-GO",
+      "profiles": {
+        "codex": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "core": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "evaluation": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "llama_cpp_python-0.3.35.tar.gz",
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "local-model": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "llama_cpp_python-0.3.35.tar.gz",
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "verification": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        }
+      },
+      "status": "verification-failed-closed"
+    },
+    {
+      "code": "container-profiles-unqualified",
+      "disposition": "no image or container qualification claimed",
+      "profiles": {
+        "core": {
+          "cid_v1_raw": "bafkreiatncg6i4wbyqjxu3uribymitylpfjx6fggeuak6qeuad3tpzwp6y",
+          "image_created": false,
+          "log_sha256": "13688de472c1c4137a6e914070c44f0b79537f14c62500af409400f737e6cff6",
+          "result": "explicit-no-go-source-archives-not-qualified"
+        },
+        "verification": {
+          "cid_v1_raw": "bafkreiaxu5bql5wkud657uhcakymmzsy6xsgactvuwabry6vkoapzd43kq",
+          "image_created": false,
+          "log_sha256": "17a74305f6caa0fddfd0e202b0c66658f5e4600a75a58018e3d55380fc8f9b54",
+          "result": "explicit-no-go-source-archives-not-qualified"
+        }
+      },
+      "status": "verification-failed-closed"
+    }
+  ],
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_disposition": "completed-with-explicit-no-go",
+  "decision": "NO-GO",
+  "downstream": {
+    "benchmark_and_security_evidence_design_allowed": true,
+    "benchmark_or_security_release_claims_allowed": false,
+    "blocked_release_epics": [
+      "PCCE-G600",
+      "PCCE-G700"
+    ],
+    "release_qualification_allowed": false
+  },
+  "evidence": {
+    "clean_install": {
+      "artifact_root_matrix": {
+        "artifact_bytes_verified": 7,
+        "cid_v1_raw": "bafkreihkjzndxuy5iuhf5fxrmsdy4yhil6le36zzriyqunhkun6kj4fene",
+        "exit_code": 0,
+        "identity_derived_unavailable_artifacts": 1,
+        "no_go_profile_count": 5,
+        "qualified_install_profile_count": 0,
+        "require_qualified_exit_code": 5,
+        "sha256": "ea4e5a3bd31d450e5e96f164878e60e85f964dfb398a310a34eaa37ca4f0a469",
+        "size": 103609
+      },
+      "checks_not_reached": {
+        "cli_smoke": "not-run-blocked-by-unqualified-source-archive-builds",
+        "installed_distribution_hashes": "not-run-blocked-by-unqualified-source-archive-builds",
+        "package_imports": "not-run-blocked-by-unqualified-source-archive-builds",
+        "schema_resource_byte_parity": "not-run-blocked-by-unqualified-source-archive-builds",
+        "vector_resource_byte_parity": "not-run-blocked-by-unqualified-source-archive-builds"
+      },
+      "container": {
+        "base": {
+          "architecture": "linux/arm64",
+          "image": "docker.io/library/python:3.12.3-slim-bookworm",
+          "manifest_digest": "sha256:c27c26153fdf6863da2a1d85b474d1be004c42cc8ea2fd647004a8d4007a34d5"
+        },
+        "build_frontend_digest": "sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",
+        "images_created": [],
+        "profiles": {
+          "core": {
+            "build_exit_code": 1,
+            "cid_v1_raw": "bafkreiatncg6i4wbyqjxu3uribymitylpfjx6fggeuak6qeuad3tpzwp6y",
+            "harness_exit_code": 5,
+            "image_created": false,
+            "log_sha256": "13688de472c1c4137a6e914070c44f0b79537f14c62500af409400f737e6cff6",
+            "log_size": 37723,
+            "result": "explicit-no-go-source-archives-not-qualified"
+          },
+          "verification": {
+            "build_exit_code": 1,
+            "cid_v1_raw": "bafkreiaxu5bql5wkud657uhcakymmzsy6xsgactvuwabry6vkoapzd43kq",
+            "harness_exit_code": 5,
+            "image_created": false,
+            "log_sha256": "17a74305f6caa0fddfd0e202b0c66658f5e4600a75a58018e3d55380fc8f9b54",
+            "log_size": 38313,
+            "result": "explicit-no-go-source-archives-not-qualified"
+          }
+        },
+        "runtime_user": "65532:65532",
+        "stages_not_reached": [
+          "virtual-environment creation",
+          "wheel installation",
+          "package imports",
+          "CLI smoke",
+          "runtime image export"
+        ]
+      },
+      "profiles": {
+        "codex": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "core": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "evaluation": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "llama_cpp_python-0.3.35.tar.gz",
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "local-model": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "llama_cpp_python-0.3.35.tar.gz",
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "verification": {
+          "result": "NO-GO",
+          "selected_source_archives": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        }
+      },
+      "qualified_install_profile_count": 0,
+      "source_layout_isolation": "passed-isolated-python-I-probe",
+      "workflow_execution": {
+        "dispatched": false,
+        "result": "not-run-no-success-claimed"
+      }
+    },
+    "contract_resources": {
+      "canonical_vectors": {
+        "cid": "bafkreie7urfyjucsnsccdigt72cis2zsuzorgv7oaxdd3lsp72j26ldjpq",
+        "path": "conformance/vectors/proof-context-v0.1.json",
+        "sha256": "9fa44b84d0526c8421a0d3fe84896b32a65d1357ee05c63dae4ffe93af2c697c",
+        "size": 14327
+      },
+      "clean_install_schema_byte_parity": "not-run-blocked-by-unqualified-source-archive-builds",
+      "clean_install_vector_byte_parity": "not-run-blocked-by-unqualified-source-archive-builds",
+      "contract_bundle": {
+        "cid": "bafkreifxd75vhhblmfeujlukld7pziwxjwcbmhbbvzq3qpcbzei54mv3em",
+        "contract_version": "0.1",
+        "filename": "mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+        "runtime_authority": false,
+        "schema": "mcp++/proof-context-v0.1-contract-bundle@1",
+        "sha256": "b71ffb539c2b614944ae8a58fefca2d74d84161c21ae61b83c41c911de32bb23",
+        "size": 89090
+      },
+      "packaged_resource_smoke": {
+        "distribution": "mcp-plus-plus-contracts==0.1.0",
+        "imported_contract_version": "0.1",
+        "installation": "wheel installed with --no-deps into an empty target directory",
+        "network_or_installer_effects_at_import": false,
+        "schema_count": 17,
+        "source_tree_on_import_path": false
+      },
+      "required_clean_install_resource_parity_satisfied": false,
+      "schema_cids": {
+        "canonicalization.schema.json": "bafkreift2l4b35pceavxzguilmcyqupmnkyzrpi5irw6wzlxtr5tcgpjty",
+        "cid-behavior.schema.json": "bafkreifyzstmeo456pegegkz4xkfmspgwh4hzonxfn7vpat44ozlnklmvy",
+        "coding-agent-invocation.schema.json": "bafkreigecsrqoubrbfulqfgfjgkwwnlww54ushpviulio54nr67wcj2rje",
+        "context-pack.schema.json": "bafkreiakjftpzs34xj2byjizubnvuqf5no6icx3ch4nudsijvwmh7wiz4y",
+        "error-taxonomy.schema.json": "bafkreicxbvbxnhguoid7prpxpo3ugqss43hpwg2m6edzdtfyeienwilkha",
+        "execution-receipt.schema.json": "bafkreicxka3j4zuvvqz6jppveanjtaq4ifr5m6lnmgtdabtrywozovjvby",
+        "incremental-seal.schema.json": "bafkreidktxfuy3gqjw3yk25vxsggtmmvjpenoez4x3lkeathfttv6fubs4",
+        "invalidation-plan.schema.json": "bafkreifndqw33xpg2xxzfi6mfxbjzitaulggzsxe7yowwxz6rv5uste4ym",
+        "model-route-decision.schema.json": "bafkreid5n2xbrbosnhbkv3tpvomrrwgoayfqz5vawo73utcqmjyrha37si",
+        "patch-proposal.schema.json": "bafkreidhrhx5l525gwdb34sk4g2gnlpn3m25coz66oe2ounm6pf3rpnsie",
+        "proof-unit.schema.json": "bafkreiaoq5d5w2zaydt7xqlbr46cc27v32u6dklqx7ywbg67hx6dapgcqu",
+        "qualification-result.schema.json": "bafkreifgrrlrd3ilgxabdgoe5e2jxpqy2dxog35vktef4zsjdsqsoniw7i",
+        "repository-state.schema.json": "bafkreiaor4t2gf2ufkqbwuw7vvplhzrpxd55zrhmswwf3rmdojk266sy7i",
+        "semantic-capsule.schema.json": "bafkreigmwo75psa2qshpdxhvy7pgd2vfbispzcp2pdv7lpy6mqe6y3ngkm",
+        "status-taxonomy.schema.json": "bafkreic7ebx65o3ccpj2dqit4nzxhleeaiadc4gouyeqgxwjxby4vh65de",
+        "task-specification.schema.json": "bafkreicl5shclhuwgst5mdijxflmwx3ryavszhas2xsetw4a2nj5tehzdu",
+        "verification-plan.schema.json": "bafkreiedg4qshnu5a43ttfpq2c7gezjr2hcvyqnn2t2s5vygmg2eksexde"
+      },
+      "source_to_packaged_resource_parity": "passed-by-PCCE-057"
+    },
+    "dependency_hygiene": {
+      "editable_dependencies": [],
+      "inactive_mutable_vcs_declaration_count_per_profile": 3,
+      "mutable_vcs_dependencies": [],
+      "policy_status": "passed",
+      "profiles": {
+        "codex": {
+          "inactive_mutable_vcs_declaration_count": 3,
+          "selected_unsafe_requirements_by_class": {
+            "editable": [],
+            "local-path": [],
+            "mutable-vcs": [],
+            "unadmitted-direct-url": []
+          }
+        },
+        "core": {
+          "inactive_mutable_vcs_declaration_count": 3,
+          "selected_unsafe_requirements_by_class": {
+            "editable": [],
+            "local-path": [],
+            "mutable-vcs": [],
+            "unadmitted-direct-url": []
+          }
+        },
+        "evaluation": {
+          "inactive_mutable_vcs_declaration_count": 3,
+          "selected_unsafe_requirements_by_class": {
+            "editable": [],
+            "local-path": [],
+            "mutable-vcs": [],
+            "unadmitted-direct-url": []
+          }
+        },
+        "local-model": {
+          "inactive_mutable_vcs_declaration_count": 3,
+          "selected_unsafe_requirements_by_class": {
+            "editable": [],
+            "local-path": [],
+            "mutable-vcs": [],
+            "unadmitted-direct-url": []
+          }
+        },
+        "verification": {
+          "inactive_mutable_vcs_declaration_count": 3,
+          "selected_unsafe_requirements_by_class": {
+            "editable": [],
+            "local-path": [],
+            "mutable-vcs": [],
+            "unadmitted-direct-url": []
+          }
+        }
+      },
+      "selected_sibling_or_local_path_requirements": [],
+      "source_layout_import_isolation": "passed-isolated-python-I-probe",
+      "unadmitted_direct_url_dependencies": []
+    },
+    "environment": {
+      "artifact_byte_availability_status": "partial-one-admitted-sdist-unavailable",
+      "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+      "artifacts": [
+        {
+          "bytes_available": true,
+          "bytes_verified": true,
+          "cid_binding_status": "bytes-verified",
+          "cid_v1_raw": "bafkreid7hcbumdwfw6ma4okevtiom6btyrqig7ukwmdepmjk3qp3izlaru",
+          "distribution": "ipfs-accelerate-py",
+          "filename": "ipfs_accelerate_py-0.0.45.tar.gz",
+          "kind": "sdist",
+          "sha256": "7f3883460ec5b7980e3944acd0e67833c460837e8ab30647b12adc1fb465608d",
+          "size": 20579108,
+          "source_commit": "8b3b08ad3b9705b7981080e5414c6b3aecb06afe",
+          "version": "0.0.45"
+        },
+        {
+          "bytes_available": true,
+          "bytes_verified": true,
+          "cid_binding_status": "bytes-verified",
+          "cid_v1_raw": "bafkreig5yehd5h2iiy444z44ezkcnco7b2dt6crcctpwgl7vvhnjtrz4mu",
+          "distribution": "ipfs-accelerate-py",
+          "filename": "ipfs_accelerate_py-0.0.45-py3-none-any.whl",
+          "kind": "wheel",
+          "sha256": "ddc10e3e9f484639ce679c26542689df0e873f0a2214df632ff5a9da99c73c65",
+          "size": 17826043,
+          "source_commit": "8b3b08ad3b9705b7981080e5414c6b3aecb06afe",
+          "version": "0.0.45"
+        },
+        {
+          "bytes_available": true,
+          "bytes_verified": true,
+          "cid_binding_status": "bytes-verified",
+          "cid_v1_raw": "bafkreihrdczmzuvyu73smkuvtanoaxmegljgwtcl6orjgohaopdapbvsn4",
+          "distribution": "ipfs-datasets-py",
+          "filename": "ipfs_datasets_py-0.2.0.tar.gz",
+          "kind": "sdist",
+          "sha256": "f118b2ccd2b8a7f7262a95981ae05d8432d26b4c4bf3a29338e073c60786b26f",
+          "size": 41102914,
+          "source_commit": "6eb5803548b070a55c81d4631f13996d5c28137b",
+          "version": "0.2.0"
+        },
+        {
+          "bytes_available": true,
+          "bytes_verified": true,
+          "cid_binding_status": "bytes-verified",
+          "cid_v1_raw": "bafkreid426eyqcfmlvo3hvmhydzfutssbbmo5malnw7jkngoygmk5p25ha",
+          "distribution": "ipfs-datasets-py",
+          "filename": "ipfs_datasets_py-0.2.0-cp312-cp312-linux_aarch64.whl",
+          "kind": "wheel",
+          "sha256": "7cd7898808ac5d5db3d587c0f25a4e520858eeb00b6dbe9534cec198aebf5d38",
+          "size": 44053405,
+          "source_commit": "6eb5803548b070a55c81d4631f13996d5c28137b",
+          "version": "0.2.0"
+        },
+        {
+          "bytes_available": false,
+          "bytes_verified": false,
+          "cid_binding_status": "identity-derived-bytes-unavailable",
+          "cid_v1_raw": "bafkreienw4uz6lgbisau22y3agueo25c3kthqmefmuj7fbr4n6wev47ncu",
+          "distribution": "ipfs-kit-py",
+          "filename": "ipfs_kit_py-0.3.0.tar.gz",
+          "kind": "sdist",
+          "sha256": "8db7299f2cc144814d6b1b01a8476ba2daa67830856513f2863c6fac4af3ed15",
+          "size": null,
+          "source_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+          "unavailability_evidence": {
+            "bounded_provider_replay_candidate_sha256": "66a52a69252858dc96947aa6d26af14c48e6ed211bcd4170f25ced0ffab516cf",
+            "bounded_provider_replay_candidate_size": 6893895,
+            "disposition": "rejected-hash-mismatch"
+          },
+          "unavailability_reason": "The exact admitted identity is retained, but bounded replay of the original provider environment could not reproduce per-member PAX subsecond timestamps; no mismatched reconstruction is substituted.",
+          "version": "0.3.0"
+        },
+        {
+          "bytes_available": true,
+          "bytes_verified": true,
+          "cid_binding_status": "bytes-verified",
+          "cid_v1_raw": "bafkreihradcws2a47rjuyvyfwupitpbhgs72mnzabn7tb27i3kyxbpb34m",
+          "distribution": "ipfs-kit-py",
+          "filename": "ipfs_kit_py-0.3.0-py3-none-any.whl",
+          "kind": "wheel",
+          "sha256": "f100c569681cfc534c5705b51e89bc2734bfa637200b7f30ebe8dab170bc3be3",
+          "size": 7318209,
+          "source_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+          "version": "0.3.0"
+        },
+        {
+          "bytes_available": true,
+          "bytes_verified": true,
+          "cid_binding_status": "bytes-verified",
+          "cid_v1_raw": "bafkreicpfsn6omd4zc2v6l3v4jhhgk3aqknbphldkqeqgbxqh3rwrftljy",
+          "distribution": "mcp-plus-plus-contracts",
+          "filename": "mcp_plus_plus_contracts-0.1.0.tar.gz",
+          "kind": "sdist",
+          "sha256": "4f2c9be7307cc8b55f2f75e24e732b60829a179d6354090306f03ee368966b4e",
+          "size": 20373,
+          "source_commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+          "version": "0.1.0"
+        },
+        {
+          "bytes_available": true,
+          "bytes_verified": true,
+          "cid_binding_status": "bytes-verified",
+          "cid_v1_raw": "bafkreigyrte3unlc6c2zfxp6enebbjmwyqvehghdfui6erxkl27yggumtq",
+          "distribution": "mcp-plus-plus-contracts",
+          "filename": "mcp_plus_plus_contracts-0.1.0-py3-none-any.whl",
+          "kind": "wheel",
+          "sha256": "d88cc9ba3562f0b592ddfe234810a596c42a4398e32d11e246ea5ebf831a8c9c",
+          "size": 18516,
+          "source_commit": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+          "version": "0.1.0"
+        }
+      ],
+      "environment_id": "cpython312-linux-aarch64",
+      "files": {
+        "artifact_hashes.json": {
+          "cid_v1_raw": "bafkreifvwoezkuqk5xjtskrakfzrqlola66egnq2las3knrzxgc4wrqk3y",
+          "path": "artifacts/proof_carrying_context_engine/environment/artifact_hashes.json",
+          "sha256": "b5b38995520aedd3392a205173182dcb07bc43361a5825b53639b985cb460ade",
+          "size": 5845
+        },
+        "dependency_locks.json": {
+          "cid_v1_raw": "bafkreigmh6jgr4s2fudo5uhxvhw6pyrhff6ysnyepprvhclmppwkmo6dl4",
+          "path": "artifacts/proof_carrying_context_engine/environment/dependency_locks.json",
+          "sha256": "cc3f9268f25a2d06eed0f7a9ede7e227297d8937047be353896c7beca63bc35f",
+          "size": 22734
+        },
+        "manifest.json": {
+          "cid_v1_raw": "bafkreidnqdikfqa54om765g4ng7gimjdugdfcar7ydzssai7vmrbbtmaxy",
+          "path": "artifacts/proof_carrying_context_engine/environment/manifest.json",
+          "sha256": "6d80d0a2c01de399ff74dc69be643123a18651023fc0f329011fab2210cd80be",
+          "size": 22120
+        },
+        "sbom.spdx.json": {
+          "cid_v1_raw": "bafkreibz3qpnhoxoyc7mqqn2k5nrdan5bkq4rpdltzxcg6lqpxs5l7dvzi",
+          "path": "artifacts/proof_carrying_context_engine/environment/sbom.spdx.json",
+          "sha256": "39dc1ed3baeec0bec841ba575b1181bd0aa1c8bc6b9e6e2379707de5d5fc75ca",
+          "size": 139128
+        }
+      },
+      "hash_gate_profiles": {
+        "codex": {
+          "exit_code": 0,
+          "outcome": "hash-gate-resolution-passed"
+        },
+        "core": {
+          "exit_code": 0,
+          "outcome": "hash-gate-resolution-passed"
+        },
+        "evaluation": {
+          "exit_code": 2,
+          "outcome": "no-go-native-sdist-build-backend-unavailable"
+        },
+        "local-model": {
+          "exit_code": 2,
+          "outcome": "no-go-native-sdist-build-backend-unavailable"
+        },
+        "verification": {
+          "exit_code": 0,
+          "outcome": "hash-gate-resolution-passed"
+        }
+      },
+      "identity_only_artifacts": [
+        {
+          "bytes_available": false,
+          "bytes_verified": false,
+          "cid_binding_status": "identity-derived-bytes-unavailable",
+          "cid_v1_raw": "bafkreienw4uz6lgbisau22y3agueo25c3kthqmefmuj7fbr4n6wev47ncu",
+          "distribution": "ipfs-kit-py",
+          "filename": "ipfs_kit_py-0.3.0.tar.gz",
+          "kind": "sdist",
+          "sha256": "8db7299f2cc144814d6b1b01a8476ba2daa67830856513f2863c6fac4af3ed15",
+          "size": null,
+          "source_commit": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+          "unavailability_evidence": {
+            "bounded_provider_replay_candidate_sha256": "66a52a69252858dc96947aa6d26af14c48e6ed211bcd4170f25ced0ffab516cf",
+            "bounded_provider_replay_candidate_size": 6893895,
+            "disposition": "rejected-hash-mismatch"
+          },
+          "unavailability_reason": "The exact admitted identity is retained, but bounded replay of the original provider environment could not reproduce per-member PAX subsecond timestamps; no mismatched reconstruction is substituted.",
+          "version": "0.3.0"
+        }
+      ],
+      "locks": {
+        "codex": {
+          "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+          "distribution_count": 80,
+          "lock": {
+            "cid_v1_raw": "bafkreic7svzbzc27k7mhjabych7z3lmpbnd2ibwgqtvnewyapbxl6wdc5q",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/codex.txt",
+            "sha256": "5f95721c8b5f57d874803811ff9dad8f0b47a406c684ead25b00786ebf5862ec"
+          },
+          "native_build_status": "not-required-by-profile",
+          "resolution_status": "supported-hash-bound",
+          "resolver_receipt": {
+            "cid_v1_raw": "bafkreihe4w5ess2bocjeqetijq7ryhtsa4i25dljjpmwir77qz2rsdrhvq",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/codex.resolver.json",
+            "sha256": "e4e5ba494b4170924812684c3f1c1e720711ae8d694bd96447ff8675190e27ac"
+          },
+          "selected_source_distributions": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "core": {
+          "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+          "distribution_count": 80,
+          "lock": {
+            "cid_v1_raw": "bafkreig26shdemmk6syhzrzswqvlr7ub4uugfwr5euiunlfmixx5kfhrde",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/core.txt",
+            "sha256": "daf48e32318af4b07cc732b42ab8fe81e52862da3d251146acac45efd514f119"
+          },
+          "native_build_status": "not-required-by-profile",
+          "resolution_status": "supported-hash-bound",
+          "resolver_receipt": {
+            "cid_v1_raw": "bafkreihj4ry5unvu3xbj3b2kbjkwdt7lmuoe47sqd6jhv23k5r423sh2im",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/core.resolver.json",
+            "sha256": "e9e471da36b4ddc29d874a0a5561cfeb651c4e7e501f927aeb6aec79adc8fa43"
+          },
+          "selected_source_distributions": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "evaluation": {
+          "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+          "distribution_count": 107,
+          "lock": {
+            "cid_v1_raw": "bafkreieheco3mympr6jronjogwvhthxoijr3xqhbn25rabhhx7jdqiugda",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/evaluation.txt",
+            "sha256": "87209db6618f8f9317352e35aa799eee4263bbc0e16ebb1004e7bfd238228618"
+          },
+          "native_build_status": "no-go-native-sdist-only",
+          "resolution_status": "supported-hash-bound",
+          "resolver_receipt": {
+            "cid_v1_raw": "bafkreidzm5pyzg2rk2faenea4ph2bdafo4rhhoho3pfwwyidg4ccil5mv4",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/evaluation.resolver.json",
+            "sha256": "79675f8c9b51568a023480e3cfa08c05772273b8eedbcb6b61033704242facaf"
+          },
+          "selected_source_distributions": [
+            "llama_cpp_python-0.3.35.tar.gz",
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "local-model": {
+          "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+          "distribution_count": 99,
+          "lock": {
+            "cid_v1_raw": "bafkreibteb4yclidi7l2vxujnzmqcgitzo3vi2a6h424ftt46mqmwqnjaq",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/local-model.txt",
+            "sha256": "332079812d0347d7aade896e59011913cbb754681e3f35c2ce7cf320cb41a904"
+          },
+          "native_build_status": "no-go-native-sdist-only",
+          "resolution_status": "supported-hash-bound",
+          "resolver_receipt": {
+            "cid_v1_raw": "bafkreiciixgsb76atlkk7ksjfdqeum6oyn44bo3j5b625357q5a345eypu",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/local-model.resolver.json",
+            "sha256": "4845cd20ffc09ad4afaa4928e04a33cec379c0bb69e87daeefbf8741be74987d"
+          },
+          "selected_source_distributions": [
+            "llama_cpp_python-0.3.35.tar.gz",
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        },
+        "verification": {
+          "artifact_clean_install_status": "no-go-sdist-builds-not-qualified",
+          "distribution_count": 84,
+          "lock": {
+            "cid_v1_raw": "bafkreib6qxn6qn5uyzjvwmx4ngx6zjyuhe3nmou75ufuppaqdjfkr7zwym",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/verification.txt",
+            "sha256": "3e85dbe837b4c6535b32fc69afeca7143936d63a9fed0b47bc101a4aa8ff36c3"
+          },
+          "native_build_status": "not-required-by-profile",
+          "resolution_status": "supported-hash-bound",
+          "resolver_receipt": {
+            "cid_v1_raw": "bafkreian3rscpjqt3xizr7zjstyw2t2dgsontw5xocbo5o7w3tiarprvsu",
+            "path": "external/ipfs_accelerate/packaging/proof_context/locks/cpython312-linux-aarch64/verification.resolver.json",
+            "sha256": "0ddc6427a613ddd198ff2994f16d4f43349cd9dbb77082eebbf6dcd008be3595"
+          },
+          "selected_source_distributions": [
+            "python-baseconv-1.2.2.tar.gz",
+            "varint-1.0.2.tar.gz"
+          ]
+        }
+      },
+      "resolution_status": "supported-hash-bound",
+      "sbom": {
+        "data_license": "CC0-1.0",
+        "direct_packages": [
+          "ipfs-accelerate-py",
+          "ipfs-datasets-py",
+          "ipfs-kit-py",
+          "mcp-plus-plus-contracts"
+        ],
+        "document_namespace": "https://github.com/endomorphosis/ipfs_accelerate_py/spdx/PCCE-053/0e88fc42167a1215f509f112ad6f481b1c0db2a0d89e356652dba5798f48091a",
+        "package_count": 107,
+        "relationship_count": 213,
+        "spdx_version": "SPDX-2.3"
+      },
+      "semantic_surrogates": [],
+      "source_commits": {
+        "ipfs_accelerate_py": "8b3b08ad3b9705b7981080e5414c6b3aecb06afe",
+        "ipfs_datasets_py": "6eb5803548b070a55c81d4631f13996d5c28137b",
+        "ipfs_kit_py": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+        "mcp_plus_plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11"
+      }
+    },
+    "example": {
+      "acceptance": {
+        "all_16_governed_stages": true,
+        "canonical_mutated": false,
+        "disposable_worktree_removed": true,
+        "execution_receipt_cid": "bafkreif2m3cxirborzm5jyfjykavz7raxjdeyj2vmyueczi55ca7m54biq",
+        "patch_id": "bafkreige4t2ywk7s3dypgkmogkperlvw5lvefvfeco2knagcsdyg27ngpu",
+        "status": "succeeded"
+      },
+      "bad_patch": {
+        "canonical_head_unchanged": true,
+        "escape_created": false,
+        "execution_receipt_cid": "bafkreihoz444p52bf2ns5ofoxiom35cmxfrmajczzutdptbubxssnlgvqi",
+        "failure_stage_receipt_cid": "bafkreihrykl2io3xc6xw2ibdbgbpp2p62chyl7en6kiy5cwcqqreuec5rq",
+        "reason": "boundary_violation",
+        "status": "rejected"
+      },
+      "execution_receipts": {
+        "accepted_cid": "bafkreif2m3cxirborzm5jyfjykavz7raxjdeyj2vmyueczi55ca7m54biq",
+        "distinct": true,
+        "rejected_cid": "bafkreihoz444p52bf2ns5ofoxiom35cmxfrmajczzutdptbubxssnlgvqi",
+        "schema": "ipfs-accelerate.proof-context.v0.1/example-execution-receipt@1"
+      },
+      "independent_example_workflow_status": "passed-by-PCCE-055",
+      "nested_repository": {
+        "commit": "ae94e1aeed74e27635d8c15ecd9d4d4fbaab9617",
+        "fixture_tree": "524f435d66bc033f1d3ad92bace43c3c46831a78",
+        "path": "external/ipfs_accelerate",
+        "repository_tree": "cb5730bc453b0d38ea287f408285342232930c56",
+        "test_blob": "9928eef9b3a436f060407d76632b27c12024ff82"
+      },
+      "proof_reuse": {
+        "exact_candidate_tree_match": true,
+        "runtime_verification_receipt_reuse_count": 1,
+        "selected_test_receipt_cid": "bafkreiezd4ojk3pk2ewhx2honggjo7u22t4yxzaft4pdorsxbyp4i6c354",
+        "verification_calls": 2,
+        "verification_receipt_cid": "bafkreie2ippipgjt76e2eoajkj774d5coayouoccai5mank6rqhtmz4mue",
+        "verification_stage_count": 1
+      },
+      "qualified_clean_environment_replay": "not-run-blocked-by-unqualified-source-archive-builds",
+      "seal": {
+        "artifact_cid": "bafkreidu5pysxtt4pdqc5lnt56d4pl5fj2bsgdmxjzipjntg23gumfzabq",
+        "provenance": "live",
+        "seal_cid": "bafkreidrrzr2so7q4tsn6ag524m67n3c53thhaoaduq3up7trdvnhuo4le",
+        "status": "succeeded"
+      },
+      "selected_tests": {
+        "candidate_tree": "4e9f81afd74a7422098d22b1efb0474cc9c638e4",
+        "command": "python -m unittest -q tests.test_demo tests.test_labels tests.test_double",
+        "execution_count": 1,
+        "receipt_cid": "bafkreiezd4ojk3pk2ewhx2honggjo7u22t4yxzaft4pdorsxbyp4i6c354",
+        "status": "passed"
+      },
+      "walkthrough": {
+        "credentials_required": false,
+        "deterministic_fresh_clone_runs": 2,
+        "fixture_commit": "5a6ec12c2a5697c5654b2daaf1769669210ea937",
+        "fixture_tree": "524f435d66bc033f1d3ad92bace43c3c46831a78",
+        "network_required": false,
+        "provider_bound": false,
+        "schema": "ipfs-accelerate.proof-context.v0.1/example-walkthrough@1",
+        "transcript_bytes": 6209,
+        "transcript_cid": "bafkreihiykw56dxjmludq7vqdeiz7rsbw7tjcz56ey2p43qoph7wlhrvxy",
+        "transcript_sha256": "sha256:5513ef2d41075ea7fbaa2603cf64bc5853d3f2f840acda496b7483148995421b"
+      }
+    },
+    "packaged_self_hosting": {
+      "clean_install_matrix_import": "not-run-blocked-by-unqualified-source-archive-builds",
+      "harness_surface": "ipfs_accelerate_py.agent_supervisor.self_hosting.SelfHostingQualificationHarness",
+      "packaged_wheel_no_deps_import_smoke": true,
+      "qualification_authority": false,
+      "runtime_clean_environment_transcript": {
+        "console_help": true,
+        "harness_import": true,
+        "installation": "wheel installed with --no-deps into a clean venv",
+        "optional_dependencies_absent": [
+          "jsonschema",
+          "llama_cpp",
+          "huggingface_hub",
+          "pytest"
+        ],
+        "source_tree_on_import_path": false
+      }
+    },
+    "predecessor_receipts": {
+      "PCCE-045": {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-045:bounded-self-hosting-harness",
+        "cid_v1_raw": "bafkreidebkiezkedp5m5tc2764mrlxiudpiuhp4nkljzdk6u6x7c3svopm",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+        "sha256": "640a904ca8837f59d98b5ff71915dd141bd143bf8d52d391abd4f5fe2dcaae7b",
+        "size": 1090
+      },
+      "PCCE-050": {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-050:datasets-proof-context-package",
+        "cid_v1_raw": "bafkreicat7ukr7o6p6p4itt7dwc7wx46dza2c3k54qdnmkgqupgooxcdva",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-050.json",
+        "sha256": "409fe8a8fdde7f9fc44e7f1d85fb5f9e1e41a16d5de406d628d0a3cce75c43a8",
+        "size": 2019
+      },
+      "PCCE-051": {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-051:kit-proof-context-package",
+        "cid_v1_raw": "bafkreigzcztz54s2axdblp3xkkfbohyjndj5nmh2ov5sblbiwnybm3xvwm",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-051.json",
+        "sha256": "d916679ef25a05c615bf77528a171f0968d3d6b0fa757b20ac28b370166ef5b3",
+        "size": 1355
+      },
+      "PCCE-052": {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-052:accelerator-runtime-profiles",
+        "cid_v1_raw": "bafkreibiactqlg5xkrafdv2cicdoq64exmnzobcbgnsixfy4reiigqhxfe",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-052.json",
+        "sha256": "2800a7059bb7544051d7424086e87b84bb1b97044133648b971c89108340f729",
+        "size": 6824
+      },
+      "PCCE-053": {
+        "artifact_identity": "bafkreidnqdikfqa54om765g4ng7gimjdugdfcar7ydzssai7vmrbbtmaxy",
+        "cid_v1_raw": "bafkreid5swewwjlckfsqeuhapznwe2mnunew43nkr2ehj5yvuloyfnayde",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-053.json",
+        "sha256": "7d95896b256251650250e07e5b62698da3496e6daa8e8874f715a2dd82b41819",
+        "size": 22334
+      },
+      "PCCE-054": {
+        "artifact_identity": "bafkreihkjzndxuy5iuhf5fxrmsdy4yhil6le36zzriyqunhkun6kj4fene",
+        "cid_v1_raw": "bafkreia4kruymhy2sctqprbfzpv7v4ufviwksnccipd2ofczc7fk5cy2te",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-054.json",
+        "sha256": "1c5469861f1a90a707c425cbebfaf285aa2ca9344243c7a7145917caae8b1a99",
+        "size": 14884
+      },
+      "PCCE-055": {
+        "artifact_identity": "urn:pcce:task-receipt:PCCE-055:governed-example-walkthrough",
+        "cid_v1_raw": "bafkreifeteoztqahk53hfk6edqpqr3zhzkd4bv4ppsgyeb7e3ve7syzjvu",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-055.json",
+        "sha256": "a4991d99c007577672abc41c1f08ef27ca87c0d78f7c8d8207e4dd49f96329ad",
+        "size": 4866
+      },
+      "PCCE-057": {
+        "artifact_identity": "bafkreifxd75vhhblmfeujlukld7pziwxjwcbmhbbvzq3qpcbzei54mv3em",
+        "cid_v1_raw": "bafkreifumobpecgma2vybkwo2tc2mpwmol4y3sr6wo6qu5kel3wyldhnwe",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+        "sha256": "b46382f208cc06ab80aaced4c5a63ecc72f98dca3eb3bd0a75445eed858cedb1",
+        "size": 5770
+      }
+    }
+  },
+  "limitations": [
+    "The exact admitted ipfs-kit-py 0.3.0 sdist bytes are unavailable; the rejected replay is not a semantic surrogate.",
+    "Zero of five supported profiles completed a clean immutable-artifact installation because every lock selects source archives whose builds are not qualified.",
+    "Core and verification container builds failed closed before environment creation; no image exists.",
+    "Clean-install package imports, CLI smoke, installed-distribution hashes, and schema/vector byte parity were not reached and are not passed.",
+    "The clean-install GitHub Actions workflow was not dispatched.",
+    "The example independently passed with a live seal, but was not replayed inside a qualified clean installation."
+  ],
+  "objective_id": "PCCE-G500",
+  "obligations": [
+    {
+      "name": "immutable-predecessor-receipts",
+      "status": "passed"
+    },
+    {
+      "name": "environment-file-identities-and-raw-cids",
+      "status": "passed"
+    },
+    {
+      "name": "all-required-artifact-bytes",
+      "status": "failed"
+    },
+    {
+      "name": "hash-bound-profile-resolution",
+      "status": "passed-with-declared-no-go"
+    },
+    {
+      "name": "selected-dependency-hygiene",
+      "status": "passed"
+    },
+    {
+      "name": "sbom-completeness",
+      "status": "passed"
+    },
+    {
+      "name": "packaged-self-hosting-wheel-smoke",
+      "status": "passed"
+    },
+    {
+      "name": "supported-profile-clean-install",
+      "status": "failed"
+    },
+    {
+      "name": "clean-install-schema-vector-parity",
+      "status": "not-run-blocked"
+    },
+    {
+      "name": "optional-container-profile",
+      "status": "failed"
+    },
+    {
+      "name": "independent-example-workflow-and-seal",
+      "status": "passed"
+    },
+    {
+      "name": "combined-clean-install-and-example-qualification",
+      "status": "failed"
+    }
+  ],
+  "release_qualified": false,
+  "schema": "lift_coding.proof-carrying-context-engine.installability-qualification@1",
+  "subject": "proof-carrying-context-engine-v0.1-installability-and-example-gate",
+  "task_authority": {
+    "live_quack_duckdb_projection": {
+      "dependency_task_cids": [
+        "baguqeera2d56ardt4hdce4b4bgmbkwkhf4nyjbeonf2famwf6hr7ydgivsya",
+        "baguqeera2fvluv2phd4wttmcq62o7ya5dijdoe25dwl2elgipdacyg5w7lqq"
+      ],
+      "revision": 1,
+      "task_cid": "baguqeerawocxhxqnvpqggoyuwaclxboph2jta457ri2z3dcnhwt3ufzpdwzq"
+    },
+    "static_board": {
+      "dependencies": [
+        "PCCE-054",
+        "PCCE-055"
+      ],
+      "static_canonical_task_cid": "baguqeeraghkszmidk3bdxsaagnp62palact7ux77cav6ymeollxougppm3aa",
+      "title": "Seal installability and example acceptance gate"
+    }
+  },
+  "task_id": "PCCE-056",
+  "waivers": []
+}

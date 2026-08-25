@@ -1,0 +1,119 @@
+{
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "task_id": "PCCE-057",
+  "objective_id": "PCCE-G500",
+  "status": "completed",
+  "completion_mode": "supervised-data-only-packaging",
+  "artifact_identity": "bafkreifxd75vhhblmfeujlukld7pziwxjwcbmhbbvzq3qpcbzei54mv3em",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "evidence": {
+    "contract_bundle": {
+      "schema": "mcp++/proof-context-v0.1-contract-bundle@1",
+      "contract_version": "0.1",
+      "filename": "mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+      "sha256": "b71ffb539c2b614944ae8a58fefca2d74d84161c21ae61b83c41c911de32bb23",
+      "cid": "bafkreifxd75vhhblmfeujlukld7pziwxjwcbmhbbvzq3qpcbzei54mv3em",
+      "size": 89090,
+      "runtime_authority": false
+    },
+    "generated_from": {
+      "repository": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+      "schema_commit": "5a4b14439245a9c54804b3eb1d7f198e3e25e7de",
+      "schema_tree": "442a84f4a4c054e8d3615e9e0d70047cfc6be61c",
+      "vector_commit": "85b8d03e767cd0ca7f4c8994013c27d31f03e817",
+      "vector_tree": "0b65dff9e2ff2be513ffac32c9fcd27838de4ead"
+    },
+    "schema_cids": {
+      "canonicalization.schema.json": "bafkreift2l4b35pceavxzguilmcyqupmnkyzrpi5irw6wzlxtr5tcgpjty",
+      "cid-behavior.schema.json": "bafkreifyzstmeo456pegegkz4xkfmspgwh4hzonxfn7vpat44ozlnklmvy",
+      "coding-agent-invocation.schema.json": "bafkreigecsrqoubrbfulqfgfjgkwwnlww54ushpviulio54nr67wcj2rje",
+      "context-pack.schema.json": "bafkreiakjftpzs34xj2byjizubnvuqf5no6icx3ch4nudsijvwmh7wiz4y",
+      "error-taxonomy.schema.json": "bafkreicxbvbxnhguoid7prpxpo3ugqss43hpwg2m6edzdtfyeienwilkha",
+      "execution-receipt.schema.json": "bafkreicxka3j4zuvvqz6jppveanjtaq4ifr5m6lnmgtdabtrywozovjvby",
+      "incremental-seal.schema.json": "bafkreidktxfuy3gqjw3yk25vxsggtmmvjpenoez4x3lkeathfttv6fubs4",
+      "invalidation-plan.schema.json": "bafkreifndqw33xpg2xxzfi6mfxbjzitaulggzsxe7yowwxz6rv5uste4ym",
+      "model-route-decision.schema.json": "bafkreid5n2xbrbosnhbkv3tpvomrrwgoayfqz5vawo73utcqmjyrha37si",
+      "patch-proposal.schema.json": "bafkreidhrhx5l525gwdb34sk4g2gnlpn3m25coz66oe2ounm6pf3rpnsie",
+      "proof-unit.schema.json": "bafkreiaoq5d5w2zaydt7xqlbr46cc27v32u6dklqx7ywbg67hx6dapgcqu",
+      "qualification-result.schema.json": "bafkreifgrrlrd3ilgxabdgoe5e2jxpqy2dxog35vktef4zsjdsqsoniw7i",
+      "repository-state.schema.json": "bafkreiaor4t2gf2ufkqbwuw7vvplhzrpxd55zrhmswwf3rmdojk266sy7i",
+      "semantic-capsule.schema.json": "bafkreigmwo75psa2qshpdxhvy7pgd2vfbispzcp2pdv7lpy6mqe6y3ngkm",
+      "status-taxonomy.schema.json": "bafkreic7ebx65o3ccpj2dqit4nzxhleeaiadc4gouyeqgxwjxby4vh65de",
+      "task-specification.schema.json": "bafkreicl5shclhuwgst5mdijxflmwx3ryavszhas2xsetw4a2nj5tehzdu",
+      "verification-plan.schema.json": "bafkreiedg4qshnu5a43ttfpq2c7gezjr2hcvyqnn2t2s5vygmg2eksexde"
+    },
+    "canonical_vectors": {
+      "path": "conformance/vectors/proof-context-v0.1.json",
+      "sha256": "9fa44b84d0526c8421a0d3fe84896b32a65d1357ee05c63dae4ffe93af2c697c",
+      "cid": "bafkreie7urfyjucsnsccdigt72cis2zsuzorgv7oaxdd3lsp72j26ldjpq",
+      "size": 14327
+    },
+    "artifacts": {
+      "contents_manifest_contract": {
+        "encoding": "UTF-8 JSON with sorted object keys and separators ',' and ':'",
+        "ordering": "archive members sorted by path",
+        "wheel_member_fields": [
+          "path",
+          "size",
+          "sha256",
+          "mode"
+        ],
+        "wheel_directory_members_included": false,
+        "sdist_member_fields": [
+          "path",
+          "type",
+          "mode",
+          "size",
+          "linkname",
+          "sha256 when regular file"
+        ],
+        "sdist_directory_members_included": true,
+        "digest": "sha256"
+      },
+      "wheel": {
+        "filename": "mcp_plus_plus_contracts-0.1.0-py3-none-any.whl",
+        "sha256": "d88cc9ba3562f0b592ddfe234810a596c42a4398e32d11e246ea5ebf831a8c9c",
+        "cid": "bafkreigyrte3unlc6c2zfxp6enebbjmwyqvehghdfui6erxkl27yggumtq",
+        "size": 18516,
+        "member_count": 7,
+        "contents_manifest_sha256": "8f22923419e79bba9ce6c78453e921fb92e5a4ad360ccacd1702fe78b73e27af",
+        "record_sha256": "941b578e59f3a0db138cb9c7d9a85ce3a5c53a735c01cc7cd277d0194192207e"
+      },
+      "sdist": {
+        "filename": "mcp_plus_plus_contracts-0.1.0.tar.gz",
+        "sha256": "4f2c9be7307cc8b55f2f75e24e732b60829a179d6354090306f03ee368966b4e",
+        "cid": "bafkreicpfsn6omd4zc2v6l3v4jhhgk3aqknbphldkqeqgbxqh3rwrftljy",
+        "size": 20373,
+        "member_count": 15,
+        "contents_manifest_sha256": "02fdb500f00eba7b70edb394c0a7bea5e6990e25d61d0907283c46c03e12a581"
+      }
+    },
+    "clean_environment_transcript": {
+      "distribution": "mcp-plus-plus-contracts==0.1.0",
+      "installation": "wheel installed with --no-deps into an empty target directory",
+      "source_tree_on_import_path": false,
+      "imported_contract_version": "0.1",
+      "schema_count": 17,
+      "network_or_installer_effects_at_import": false
+    },
+    "no_code_authority_audit": {
+      "dependencies": [],
+      "console_scripts": [],
+      "runtime_authority": false,
+      "forbidden_surfaces_absent": [
+        "canonicalizer",
+        "executor",
+        "installer",
+        "persistence service",
+        "provider",
+        "model router",
+        "validator"
+      ]
+    },
+    "validation": [
+      "python -m pytest -q Mcp-Plus-Plus/tests-py/test_contract_package.py",
+      "python -m build Mcp-Plus-Plus"
+    ]
+  },
+  "rollback": "Revert only the MCP++ package metadata, immutable resource accessor and bundle, parity test, and this receipt; preserve the frozen source schemas and vectors and discard unpromoted build artifacts."
+}

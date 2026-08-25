@@ -5,6 +5,8 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parents[1]
 OPERATOR = ROOT / "scripts" / "run_agent_supervisor_proof_carrying_context_engine.py"
 
@@ -55,6 +57,90 @@ def test_launch_helper_refuses_missing_vault(tmp_path: Path) -> None:
         assert "missing" in str(exc)
     else:
         raise AssertionError("expected OperatorError")
+
+
+def _configure_owner_env(operator, tmp_path: Path, monkeypatch) -> Path:
+    class _Program:
+        endpoint_secret_handle = "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN"
+
+    class _Board:
+        @staticmethod
+        def resolved_database_program():
+            return _Program()
+
+    monkeypatch.setattr(
+        operator,
+        "_load_config",
+        lambda _config_path: (_Board(), object()),
+    )
+    monkeypatch.setattr(
+        operator,
+        "_runtime_paths",
+        lambda _board: {"owner": tmp_path},
+    )
+    return tmp_path / "env___IPFS_ACCELERATE_AGENT_QUACK_TOKEN.quack-token"
+
+
+def test_owner_python_env_reuses_inherited_token_after_recycle_removes_vault(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    operator = _load_operator()
+    vault = _configure_owner_env(operator, tmp_path, monkeypatch)
+    token = "liveTok_value1234567890"
+    vault.write_text(f"{token}\n", encoding="utf-8")
+    vault.chmod(0o600)
+
+    first_child_env = operator._owner_python_env(tmp_path / "config.json")
+    assert first_child_env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] == token
+
+    # The detached watch inherits the first launch environment.  A graceful
+    # state-owner stop destroys its generation-local vault before the watch
+    # starts the replacement child.
+    monkeypatch.setenv("IPFS_ACCELERATE_AGENT_QUACK_TOKEN", token)
+    vault.unlink()
+    replacement_env = operator._owner_python_env(tmp_path / "config.json")
+
+    assert replacement_env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] == token
+    assert replacement_env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN_FILE"] == str(vault)
+    assert not vault.exists()
+
+
+def test_owner_python_env_prefers_new_vault_over_stale_inherited_token(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    operator = _load_operator()
+    vault = _configure_owner_env(operator, tmp_path, monkeypatch)
+    vault.write_text("newGeneration_token123456\n", encoding="utf-8")
+    vault.chmod(0o600)
+    monkeypatch.setenv(
+        "IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
+        "staleGeneration_token123456",
+    )
+
+    child_env = operator._owner_python_env(tmp_path / "config.json")
+
+    assert (
+        child_env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"]
+        == "newGeneration_token123456"
+    )
+    assert child_env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN_FILE"] == str(vault)
+
+
+def test_owner_python_env_rejects_missing_vault_without_inherited_token(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    operator = _load_operator()
+    vault = _configure_owner_env(operator, tmp_path, monkeypatch)
+    monkeypatch.delenv("IPFS_ACCELERATE_AGENT_QUACK_TOKEN", raising=False)
+    monkeypatch.delenv("IPFS_ACCELERATE_AGENT_QUACK_TOKEN_FILE", raising=False)
+
+    with pytest.raises(operator.OperatorError, match="credential is unavailable"):
+        operator._owner_python_env(tmp_path / "config.json")
+
+    assert not vault.exists()
 
 
 def test_serve_loop_does_not_execute_dml_on_listen_handle(tmp_path: Path) -> None:

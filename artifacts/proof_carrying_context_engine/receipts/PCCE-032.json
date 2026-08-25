@@ -1,0 +1,33 @@
+{
+  "admitted_at": "2026-08-24T00:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-032:bounded-command-adapter",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-adapter-implementation",
+  "content_id": "sha256:37da2a402561defe4b6450d095807c1983ae092c311234eb8629bdf54560c87b",
+  "evidence": {
+    "adapter": "ipfs_accelerate_py.proof_context.adapters.command.CommandAdapter",
+    "command_contract": "local-agent-json-argv@1",
+    "fail_closed": [
+      "relative_or_non_allowlisted_executable",
+      "non_allowlisted_cwd",
+      "shell_or_argument_injection",
+      "inherited_credentials_or_environment",
+      "timeout_or_cancellation",
+      "oversized_or_secret_bearing_logs",
+      "malformed_or_nonclosed_json",
+      "out_of_scope_patch"
+    ],
+    "process_boundary": {
+      "argv_only": true,
+      "isolated_environment": true,
+      "process_group_cleanup": true,
+      "shell": false
+    },
+    "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_command.py"
+  },
+  "objective_id": "PCCE-G300",
+  "rollback": "Terminate any captured command process group, revert the command adapter and its tests, and retain partial-effect process evidence.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-032"
+}

@@ -1,0 +1,57 @@
+{
+  "admitted_at": "2026-08-24T00:00:00Z",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-043:stable-output-and-human-report",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-reporting-implementation",
+  "content_id": "sha256:e8442e652e35a70eef98f25c3c7ac88f9688dbfd852e02aacf066e309eb467f9",
+  "evidence": {
+    "artifact_cid_policy": "Every envelope has artifact_cids; observed values are admitted CIDv1 base32 identities and an empty array means no artifact CID was observed.",
+    "bounded_output": {
+      "max_collection_items": 64,
+      "max_text_length": 240,
+      "maximum_nesting": 8
+    },
+    "command_result_schema": "ipfs-accelerate.proof-context.v0.1/command-result@1",
+    "contract_version": "0.1",
+    "exit_code_matrix": {
+      "typed_failure": 1,
+      "invalid": 2,
+      "rejected": 3,
+      "simulated": 4,
+      "stale": 6,
+      "succeeded_live": 0,
+      "unavailable": 5
+    },
+    "human_report_required_sections": [
+      "task",
+      "revision",
+      "routing",
+      "context",
+      "changes",
+      "verification/proof reuse",
+      "assurance",
+      "escalation",
+      "costs",
+      "review",
+      "receipts",
+      "seal"
+    ],
+    "human_report_vectors": ["succeeded", "verification_failed", "unavailable", "simulated"],
+    "identity_slots": ["repository_id", "task_id", "run_id", "patch_id"],
+    "missing_evidence_representation": "null identity slot or missing_evidence report label; values are never synthesized.",
+    "redaction": "The canonical proof-context redactor handles secret-bearing keys plus bearer, sk-, ghp_, and xox credential forms; identity values are rejected rather than rewritten.",
+    "schema_artifact": "artifacts/proof_carrying_context_engine/cli/output_schema.json",
+    "schema_artifact_cid": "bafkreihiiqxgklrvu4ho7ghslq6hvseps2enx7mffybkvtygnyyj5ndh7e",
+    "schema_artifact_sha256": "sha256:e8442e652e35a70eef98f25c3c7ac88f9688dbfd852e02aacf066e309eb467f9",
+    "validation": [
+      "python -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_output.py",
+      "python -m pytest -q external/ipfs_accelerate/test/proof_context/cli/test_state_commands.py",
+      "python -m json.tool artifacts/proof_carrying_context_engine/cli/output_schema.json"
+    ]
+  },
+  "objective_id": "PCCE-G400",
+  "rollback": "Revert the output/report/schema change and invalidate CLI projections rendered under this schema version; immutable runtime artifacts and receipts are retained.",
+  "schema": "lift_coding.proof-carrying-context-engine.task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-043"
+}

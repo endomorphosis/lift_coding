@@ -1,0 +1,162 @@
+{
+  "artifact_identity": "baguqeera5ifpsadums6lrug6jcoi34hsvj7rhq4gv2xoordagmsvtbzr3cta",
+  "artifact_identity_kind": "CIDv1(dag-json,sha2-256) of the cold benchmark-isolation descriptor",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-security-hardening-observed-tested-limited",
+  "evidence": {
+    "acceptance_disposition": {
+      "enforcement_disposition": "observed_tested_limited",
+      "production_eligible": false,
+      "qualification_credit": false,
+      "runtime_integration_status": "not_integrated",
+      "status": "completed_testable_boundary_no_go_for_live_qualification"
+    },
+    "descriptor": {
+      "cid": "baguqeera5ifpsadums6lrug6jcoi34hsvj7rhq4gv2xoordagmsvtbzr3cta",
+      "controls": [
+        "PC-074"
+      ],
+      "evaluator_mount_time": "after-exact-terminal-proposal",
+      "filename_only_access_authority": false,
+      "future_ref_access_authority": false,
+      "live_benchmark_authority": false,
+      "provider_call_authority": false,
+      "schema": "ipfs-datasets.proof-context.benchmark-isolation-descriptor@1",
+      "threats": [
+        "TH-001",
+        "TH-007",
+        "TH-010",
+        "TH-011"
+      ]
+    },
+    "independent_review": {
+      "disposition": "APPROVED_NESTED_IMPLEMENTATION",
+      "reviewer": "/root/review_pcce075_v7 (independent parser and nested evidence review before outer receipt composition)",
+      "subject": {
+        "author_base_commit": "777f2dc8861bb756141302e014b202a21d363f76",
+        "author_commit": "3293176327e18b4aaf7c9dda7e8e1055ed6d3b35",
+        "author_tree": "98dfedecfc7f472f27d171c733c0d6d52218695a",
+        "integrated_base_commit": "817a665897467b44e6b6fc413d757d9ade719d4d",
+        "integrated_commit": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+        "integrated_tree": "839980ccaba593b146213928bc5e8bf95e7a1fd9"
+      },
+      "verification": {
+        "benign_controls": "passed",
+        "closed_git_command_model": "passed after two rejected precursor trees",
+        "provider_failure_and_denial_audit": "passed",
+        "recursive_parser_bound": "passed",
+        "scope": "exactly one isolation module and one focused test module"
+      }
+    },
+    "isolation_boundary": {
+      "agent_projection": [
+        "history-stripped-baseline",
+        "objective",
+        "owned-paths",
+        "public-tests"
+      ],
+      "evaluator_projection": [
+        "hidden-tests",
+        "historical-answers",
+        "negative-review-data",
+        "assurance-data"
+      ],
+      "provider_forbidden": [
+        "body-bytes",
+        "filenames",
+        "paths",
+        "answers",
+        "evaluator-identities",
+        "future-refs"
+      ],
+      "provider_manifest": [
+        "redacted-objective-preview",
+        "visible-content-cids",
+        "visible-byte-counts",
+        "opaque-ordinal-slots"
+      ]
+    },
+    "limitations": {
+      "authoritative_accelerator_or_provider_consumes_module": false,
+      "live_benchmark_or_provider_invoked": false,
+      "outer_composed_proof_context_suite_clean": false,
+      "outer_suite_blocker": "PCCE-050 wheel and sdist artifact bindings do not match after the datasets gitlink changes",
+      "same_process_python_introspection_is_an_agent_boundary": false,
+      "trusted_evaluator_callbacks_sandboxed_by_module": false,
+      "qualification_gate": "NO-GO until integrated observation and PCCE-076"
+    },
+    "nested_source": {
+      "repository": "external/ipfs_datasets",
+      "scope": {
+        "added_files": 2,
+        "runtime_files_changed": 1,
+        "isolation_module": {
+          "blob": "3b68b61fce29246c898d4a6352b7f6d38547dc0b",
+          "path": "ipfs_datasets_py/proof_context/benchmarks/isolation.py",
+          "sha256": "e98a8f1f9301c967ff8a0a60e2302f1035a8da5e7a4c1c78f7e345ff3bcf6baa",
+          "size": 128739
+        },
+        "test": {
+          "blob": "568c3c4c17db1892b1526727adab445434ab8dba",
+          "path": "tests/proof_context/benchmarks/test_isolation.py",
+          "sha256": "520af64c962ac4f02384f545f6df499d9f18ab20f2c4be6aaae2bb12f47a84d8",
+          "size": 75833
+        }
+      }
+    },
+    "outer_composition": {
+      "base_commit": "43457c396be7a9116152e4414dadc4625eff2c2e",
+      "base_tree": "d2a3e450154cbf0b200d7eaae5db0f9eec8bbd66",
+      "branch": "implementation/PCCE-074-isolation-20260825",
+      "datasets_base_gitlink": "817a665897467b44e6b6fc413d757d9ade719d4d",
+      "datasets_candidate_gitlink": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+      "changed_paths_expected": [
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-074.json",
+        "external/ipfs_datasets"
+      ]
+    },
+    "prohibited_effects": {
+      "arbitrary_filesystem_paths_authorized": false,
+      "corpus_seals_weakened": false,
+      "future_answers_or_refs_sent_to_provider": false,
+      "hidden_bodies_logged": false,
+      "provider_dispatched": false,
+      "supervisor_or_database_state_mutated_during_implementation": false
+    },
+    "task_authority": {
+      "database_revision_at_composition": 1,
+      "database_status_at_composition": "todo",
+      "database_task_cid": "baguqeeraxgdyeia2nzxvhbdg7n33swyvteygipqo3l5ho53gxtznhcueyseq",
+      "goal_id": "PCCE-G700",
+      "transport": "quack:127.0.0.1:41347"
+    },
+    "validation": {
+      "focused": {
+        "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context/benchmarks/test_isolation.py",
+        "passed": 311,
+        "python_hash_seed": 20260825
+      },
+      "standalone_nested_pre_outer_composition": {
+        "command": "python -m pytest -q tests/proof_context",
+        "passed": 519,
+        "python_hash_seed": 20260825
+      },
+      "final_outer_composition": {
+        "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+        "errors": 2,
+        "error_scope": "PCCE-050 package-artifact receipt wheel/sdist SHA bindings",
+        "passed": 517,
+        "python_hash_seed": 20260825,
+        "status": "NO-GO"
+      },
+      "ruff_check": "passed",
+      "ruff_format_check": "passed",
+      "git_diff_check": "passed"
+    }
+  },
+  "objective_id": "PCCE-G700",
+  "rollback": "Revert only this receipt and the datasets gitlink, invalidate benchmark results produced under this non-integrated boundary, and preserve all frozen visible and hidden corpus objects unchanged.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "completed",
+  "task_id": "PCCE-074"
+}
