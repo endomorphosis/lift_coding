@@ -1,0 +1,1062 @@
+{
+  "benchmark_id": "pcce-external-generalization-v0.1",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "cost_ledger": {
+    "disposition": "unavailable-not-zero",
+    "failed_attempt_cost_micros": null,
+    "provider_call_count": 0,
+    "provider_reported_cost_micros": null,
+    "total_cost_micros": null
+  },
+  "evidence_cut": {
+    "gitlinks": {
+      "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+      "external/ipfs_accelerate": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+      "external/ipfs_datasets": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+      "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+    },
+    "outer_commit": "268801f6312dc3b338dbda9ce88e0424a347052f",
+    "outer_tree": "57ef4bc71ba968ab39779168d8fe9883a76fef18"
+  },
+  "frozen_inputs": {
+    "catalog_cids": {
+      "configuration_catalog_cid": "baguqeerawkkjkycel5hybwjmbtmdjaxljjzleespr4gdpuvcmu6jgd7yorqq",
+      "isolation_policy_cid": "baguqeeranng5ntf2bgqe7tsdb7mn5i4ikbwx5bvawkndgybyozfoo4ww4ala",
+      "metric_catalog_cid": "baguqeera2vl3nwxx4zytbrjuh5jlvnr5myeshaeheh2eexac65gm2zb3nbxq",
+      "metric_completeness_matrix_cid": "baguqeeraye7lwnyrelx3feqqn54h5yc7csnxgpjha3jvv5pess7jidiazc4q",
+      "schema_catalog_cid": "baguqeeraxjtfwbm4ci3yimo4u2c6ow74ziryk45npuzp3bkezgjr4camagba"
+    },
+    "configuration_cids": {
+      "A": "baguqeerab5ltrfd6dasxes2r76svhxbbcbj7hcjqgxpwsgi2rfbn53x2lmha",
+      "B": "baguqeeravan66pqbuayxtc6wzsqcn5ocbzwflqbdbeoowlvtore26hqmwzrq",
+      "C": "baguqeeraqrsu4psh7r6ehgwt5ebcqvjqckgyrwdgl2twxcku7ihknoxrzz5q",
+      "D": "baguqeeranxarzlueyd5lsmabqgke7bt7qvarxaevuazzces6gf7cozkdmxxq"
+    },
+    "corpus_manifest": {
+      "path": "external/ipfs_datasets/benchmarks/proof_context/corpus_manifest.json",
+      "raw_cid_v1": "bafkreidbngeh7k7knauskpw4ztbv2wuy65ia6ybs6lvdoosrknx4fwqnwq",
+      "sha256": "6169887fabea6829253edcccc35d5a98f7500f6032f2ea373a51536fc2da0db4",
+      "size": 9021,
+      "structured_cid": "baguqeeraedh4m4sadrllnzrp7zi4bherd2dbp5injbvv7myzybjjnju3mlwa"
+    },
+    "metric_set_descriptor_cid": "baguqeeraerwkjdr7rwsqpojrqodp5mletrpojpogtg3mrh52whztabxxoxpa",
+    "precursor_receipts": [
+      {
+        "artifact_identity": "baguqeerawbghl4vyrckxxtjjhyhdjavpj77lkcavptyep2dq7zxolw2am2aa",
+        "decision": null,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-061.json",
+        "raw_cid_v1": "bafkreievfhepnqwi3mnba4tic3bk26huevei6dyubakibos3pykyo6tw6a",
+        "receipt_status": "completed",
+        "sha256": "9529c8f6c2c8db1a10726816c2ad78f425488f0f14081480ba5b7e15877a76f0",
+        "size": 18639,
+        "task_id": "PCCE-061"
+      },
+      {
+        "artifact_identity": "baguqeerancjiitatoyeqbb45jc37m2nbysze2tm2brj5uqqfmfifxrumhnwa",
+        "decision": null,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-062.json",
+        "raw_cid_v1": "bafkreiewxitn2mogotacuzbjmxn3w5moi7ps3gfj2lwzcke2ase6inwxvy",
+        "receipt_status": "completed",
+        "sha256": "96ba26dd31c674c02a642965dbbb758e47df2d98a9d2ed91289a0489e436d7ae",
+        "size": 21188,
+        "task_id": "PCCE-062"
+      },
+      {
+        "artifact_identity": "baguqeerac4n6fpukzig3at67mihsl7ehnme5fwjo7jywirglaxjthane7r3q",
+        "decision": null,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-063.json",
+        "raw_cid_v1": "bafkreigzqvfys2mjmybgrwqzefy5rnd3k7znffivrxnpq34wywbrzy2p2q",
+        "receipt_status": "completed",
+        "sha256": "d9854b896989660268da192171d8b47b57f2d295158ddaf86f96c5831ce34fd4",
+        "size": 9310,
+        "task_id": "PCCE-063"
+      },
+      {
+        "artifact_identity": "baguqeeral365qpuhscm3ejzq6ntzfmob5oaqj2rejrl7z7kadfqbcfswmo2a",
+        "decision": null,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-064.json",
+        "raw_cid_v1": "bafkreibediroh4drfnagcvu4do5ufuecyqngdh4stvzrjtsl3pxs2iwgum",
+        "receipt_status": "completed",
+        "sha256": "241a22e3f0712b4061569c1bbb42d082c41a619f929d7314ce4bdbef2d22c6a3",
+        "size": 15961,
+        "task_id": "PCCE-064"
+      },
+      {
+        "artifact_identity": "baguqeera7ehgn7vsetzjygsda4hzyn5r7k3ov6axjydqk6vsnn32w7sxgj6q",
+        "decision": null,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-065.json",
+        "raw_cid_v1": "bafkreibamisqliuouul7p2a3k3g5mnmzf56xqbh2pibj2tkmrfppwtxe3e",
+        "receipt_status": "completed",
+        "sha256": "20622505a28ea517f7e81b56cdd635992f7d7804fa7a029d4d4c895efb4ee4d9",
+        "size": 12096,
+        "task_id": "PCCE-065"
+      },
+      {
+        "artifact_identity": "baguqeeraerwkjdr7rwsqpojrqodp5mletrpojpogtg3mrh52whztabxxoxpa",
+        "decision": null,
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-066.json",
+        "raw_cid_v1": "bafkreihyaluh5hdrsndap6p3fvaiuejpmy2h3nybp73y2cwkbnrg32korm",
+        "receipt_status": "completed",
+        "sha256": "f802e87e9c71934607f9fb2d408a112f66347db7017ff78d0aca0b626de94e8b",
+        "size": 6112,
+        "task_id": "PCCE-066"
+      },
+      {
+        "artifact_identity": "bafkreigarvlp6lnksv7xnb3j3cwji5q5delpjzoswzhpf7uynn3j6mcitm",
+        "decision": "NO-GO",
+        "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+        "raw_cid_v1": "bafkreia6fevhtrt6wnvloajvyw6vxqw6hf7kwaseyxbdjlsvsemxqji7ay",
+        "receipt_status": "completed",
+        "sha256": "1e292a79c67eb36ab70135c5bd5bc2de397eab0244c5c234ae55911978251f06",
+        "size": 6474,
+        "task_id": "PCCE-079"
+      }
+    ],
+    "threshold_set": {
+      "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+      "raw_cid_v1": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+      "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b",
+      "size": 2373,
+      "structured_cid": "baguqeeraqbhgjlvhrdrwfashgtvwsb5e4k3fac5mg75j6f4p4gvxbaz75b6q"
+    }
+  },
+  "isolation_and_audit": {
+    "benchmark_worktrees_created": 0,
+    "fence_receipts": [],
+    "hidden_answer_or_future_patch_accessed": false,
+    "hidden_evaluator_partition_mounted": false,
+    "lease_receipts": [],
+    "network_benchmark_call_attempted": false,
+    "provider_conversation_started": false,
+    "reason_no_worktree_or_lease_receipts": "route admission failed before any arm worktree, provider call, proposal, or evaluator mount"
+  },
+  "population": {
+    "measured_cost_quality_latency_outcomes": "null-not-zero; eligible_task_count and provider_call_count are control/denominator facts, not measured outcomes",
+    "attempt_count": 84,
+    "category_observations": {
+      "assurance": {
+        "metric_field_count": 13,
+        "null_slot_count": 1092,
+        "observed_slot_count": 0,
+        "population_slot_count": 1092
+      },
+      "context": {
+        "metric_field_count": 11,
+        "null_slot_count": 924,
+        "observed_slot_count": 0,
+        "population_slot_count": 924
+      },
+      "economics": {
+        "metric_field_count": 11,
+        "null_slot_count": 840,
+        "observed_slot_count": 84,
+        "population_slot_count": 924
+      },
+      "quality": {
+        "metric_field_count": 14,
+        "null_slot_count": 1092,
+        "observed_slot_count": 84,
+        "population_slot_count": 1176
+      },
+      "routing": {
+        "metric_field_count": 10,
+        "null_slot_count": 714,
+        "observed_slot_count": 126,
+        "population_slot_count": 840
+      },
+      "verification": {
+        "metric_field_count": 19,
+        "null_slot_count": 1596,
+        "observed_slot_count": 0,
+        "population_slot_count": 1596
+      }
+    },
+    "configuration_count": 4,
+    "expected_result_count": 84,
+    "metric_fields_per_row": 78,
+    "metric_population_slot_count": 6552,
+    "missingness_reason": "provider-route-unavailable-no-execution",
+    "null_metric_slot_count": 6258,
+    "observed_metric_slot_count": 294,
+    "provider_call_count": 0,
+    "recorded_result_count": 84,
+    "route_unavailable_count": 84,
+    "routine_localized_counts": {
+      "C": 14,
+      "D": 14
+    },
+    "rows_per_configuration": {
+      "A": 21,
+      "B": 21,
+      "C": 21,
+      "D": 21
+    },
+    "rows_per_repository_class": {
+      "dynamic_plugins": 28,
+      "mature_python": 32,
+      "typed_structured": 24
+    },
+    "task_count": 21,
+    "tasks": [
+      {
+        "agent_view_cid": "baguqeera7b367ykdzyhfkdj4wuvkz5ofoafftxpqx7ekxdsbhhwi3zacn6ta",
+        "base_commit": "3dca08ce5bbe673d7df25f44f3dda92505d1043d",
+        "base_tree": "2f143c350d12dc394f3320a2d4e259dda86874d7",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "typed_structured",
+        "routine_localized": true,
+        "seed": 61001,
+        "source_pin_id": "python-attrs-attrs-25.3.0",
+        "task_control_cid": "baguqeerafgnjzbtcc6j2drk6dpbwirslxfcsfde3ze5oceilmjgnqxx5t7ba",
+        "task_id": "typed-historical-001",
+        "visible_projection_cid": "baguqeerau3r7vankgrb3ejfehsb64g2xqcwx55wpx37wynwyqe2t47u6mpja"
+      },
+      {
+        "agent_view_cid": "baguqeeraedq7kh7yjprqqlmooh2m62bv35qq2kpf6fc63pnemi4rjtjyowma",
+        "base_commit": "3dca08ce5bbe673d7df25f44f3dda92505d1043d",
+        "base_tree": "2f143c350d12dc394f3320a2d4e259dda86874d7",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "typed_structured",
+        "routine_localized": true,
+        "seed": 61002,
+        "source_pin_id": "python-attrs-attrs-25.3.0",
+        "task_control_cid": "baguqeera2hb5udqpnk2twfzgutx2jf2bxlot7yd6sqgeztdcinbo77qggpvq",
+        "task_id": "typed-synthetic-001",
+        "visible_projection_cid": "baguqeeragxaip3eqp722irikvq25a6bmgnncsxhru4rb3fcyqwzzeqk4damq"
+      },
+      {
+        "agent_view_cid": "baguqeerad2uac5647r4zy6lfmjva3mil6f7juvpq5r4dwmf6ssw7pssmuyfa",
+        "base_commit": "3dca08ce5bbe673d7df25f44f3dda92505d1043d",
+        "base_tree": "2f143c350d12dc394f3320a2d4e259dda86874d7",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "typed_structured",
+        "routine_localized": true,
+        "seed": 61003,
+        "source_pin_id": "python-attrs-attrs-25.3.0",
+        "task_control_cid": "baguqeera62dsli4td5euynhd7cco35vajthws3ptmdsu3nnlemrxtta6puta",
+        "task_id": "typed-assurance-omission-001",
+        "visible_projection_cid": "baguqeerarpxcl4u3rmqoeeoafgtatbzd7fi5gbfgbupsq45wbmiitd55s6zq"
+      },
+      {
+        "agent_view_cid": "baguqeerahj6pguyc5b3ulupmv3dz3vvpomt6fhja7wylabammedcbqpmymbq",
+        "base_commit": "3dca08ce5bbe673d7df25f44f3dda92505d1043d",
+        "base_tree": "2f143c350d12dc394f3320a2d4e259dda86874d7",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "typed_structured",
+        "routine_localized": true,
+        "seed": 61004,
+        "source_pin_id": "python-attrs-attrs-25.3.0",
+        "task_control_cid": "baguqeerag24vlictisf47bhy65io7vn2eot22fy6hmeckuz23cseb7exbnda",
+        "task_id": "typed-assurance-vacuity-001",
+        "visible_projection_cid": "baguqeeralmadkcqnjffrtpo7n336kzpg7ueavcuwvr76ompulodhd3evivwa"
+      },
+      {
+        "agent_view_cid": "baguqeerahmtn6lsmxgnreup3dvucgylosa5euuganqg7j2q4r7ogpai53e2q",
+        "base_commit": "3dca08ce5bbe673d7df25f44f3dda92505d1043d",
+        "base_tree": "2f143c350d12dc394f3320a2d4e259dda86874d7",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "typed_structured",
+        "routine_localized": false,
+        "seed": 61005,
+        "source_pin_id": "python-attrs-attrs-25.3.0",
+        "task_control_cid": "baguqeerariixu7wcw2uewb5u5qjcg6u4wded3sfmllyho4d6ojnueocvoypq",
+        "task_id": "typed-assurance-context-expansion-001",
+        "visible_projection_cid": "baguqeera4suapyzgz2ym77gjydwdi3usjjmrzhpx6mmtlbtx4rsgtwkwwcaq"
+      },
+      {
+        "agent_view_cid": "baguqeera5xm7wdc3i7m4iuo37glpxdcp5jfhxkwedezlfhxfjqxtvkoxdeiq",
+        "base_commit": "3dca08ce5bbe673d7df25f44f3dda92505d1043d",
+        "base_tree": "2f143c350d12dc394f3320a2d4e259dda86874d7",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "typed_structured",
+        "routine_localized": false,
+        "seed": 61006,
+        "source_pin_id": "python-attrs-attrs-25.3.0",
+        "task_control_cid": "baguqeera2ml2r23s3ezmzl5tsxrjjx7ssmuqy7ogqb7t3r5pcnf6getqlaya",
+        "task_id": "typed-negative-review-001",
+        "visible_projection_cid": "baguqeeravu6yoeaop4ehywbwonsmcro5dyk3cmhgezfrbnul6qkgwq4wex6q"
+      },
+      {
+        "agent_view_cid": "baguqeera2kinqksphdzzriu6k22y3bhjdrapbbouskimdjvytjpj6rnzuoma",
+        "base_commit": "fd08ab5f811a9b2fa9124ae8cbbd393221151e2c",
+        "base_tree": "d3aac17eab19c9e8f6f6358ad2dcaec02d734020",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "dynamic_plugins",
+        "routine_localized": true,
+        "seed": 62001,
+        "source_pin_id": "pytest-dev-pluggy-1.6.0",
+        "task_control_cid": "baguqeerakddkdbl3ffcgiambtm54cjlltnecsufwmwtgapw7uhkm6wfucrrq",
+        "task_id": "dynamic-historical-001",
+        "visible_projection_cid": "baguqeerarcfdkcp23277d4mregppkhw5gnnqup6nav6mxoliwmzvysht7cda"
+      },
+      {
+        "agent_view_cid": "baguqeeraavisralxmnlu3pln4coujdfeou4t6upy5hb67ffgpr4d7frvlhva",
+        "base_commit": "fd08ab5f811a9b2fa9124ae8cbbd393221151e2c",
+        "base_tree": "d3aac17eab19c9e8f6f6358ad2dcaec02d734020",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "dynamic_plugins",
+        "routine_localized": true,
+        "seed": 62002,
+        "source_pin_id": "pytest-dev-pluggy-1.6.0",
+        "task_control_cid": "baguqeeraqjdz4xe5pkavnrdw4xsm6sdu4xjxtmc5evyiidbzkvgwa6it67ja",
+        "task_id": "dynamic-synthetic-plugin-discovery-001",
+        "visible_projection_cid": "baguqeera52xiwfxep6u23nwwl3cyn5budcuvytcxiiq5cd6isfrqtwyv4dqq"
+      },
+      {
+        "agent_view_cid": "baguqeerammf7vvwfd2iazh3up45fewks6jpunxaaeyn5fu3mamscd4js7r3a",
+        "base_commit": "fd08ab5f811a9b2fa9124ae8cbbd393221151e2c",
+        "base_tree": "d3aac17eab19c9e8f6f6358ad2dcaec02d734020",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "dynamic_plugins",
+        "routine_localized": false,
+        "seed": 62003,
+        "source_pin_id": "pytest-dev-pluggy-1.6.0",
+        "task_control_cid": "baguqeerau7seeneholoqcdxyzeqpxcnnvonlosg2tonh7j2glywxmn4ffaha",
+        "task_id": "dynamic-assurance-opaque-fallback-001",
+        "visible_projection_cid": "baguqeeranzbrguyelikdgrkuj4h7f5txaknw6v6kguvnsk3m35gvxstpkl4a"
+      },
+      {
+        "agent_view_cid": "baguqeeranvusfb47lzmlgt7b7sxnqjiauakc7p3jriy53p6fibbtfxkdvt2a",
+        "base_commit": "fd08ab5f811a9b2fa9124ae8cbbd393221151e2c",
+        "base_tree": "d3aac17eab19c9e8f6f6358ad2dcaec02d734020",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "dynamic_plugins",
+        "routine_localized": true,
+        "seed": 62004,
+        "source_pin_id": "pytest-dev-pluggy-1.6.0",
+        "task_control_cid": "baguqeerad5moqfhgyse563osyj5inxatw4ufqhpndl26wz5vmvkh53zj4rbq",
+        "task_id": "dynamic-assurance-registration-omission-001",
+        "visible_projection_cid": "baguqeerak5gqaej2p2aoepggz4knyg3jxke3ck23qwlr4vzmdgmsp3oxbp2q"
+      },
+      {
+        "agent_view_cid": "baguqeeraihgvayibpur7afsgtosgq4lkbnz7k2c4tpuhwbiskaa7bhckebqa",
+        "base_commit": "fd08ab5f811a9b2fa9124ae8cbbd393221151e2c",
+        "base_tree": "d3aac17eab19c9e8f6f6358ad2dcaec02d734020",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "dynamic_plugins",
+        "routine_localized": true,
+        "seed": 62005,
+        "source_pin_id": "pytest-dev-pluggy-1.6.0",
+        "task_control_cid": "baguqeerae3cjc35h44bui5jwm6sahwpwff6vkylan7mzqmrbp5pj2nkeuitq",
+        "task_id": "dynamic-assurance-vacuity-001",
+        "visible_projection_cid": "baguqeerand2kyci4xwaflkmato7pldxf4na4mk2brlwfqsn722gqdhvdzxwq"
+      },
+      {
+        "agent_view_cid": "baguqeerafuqbz3lpp6fpuq5sl7q6aypymdi4hj4r43imtusqh3nxtyo7i6fa",
+        "base_commit": "fd08ab5f811a9b2fa9124ae8cbbd393221151e2c",
+        "base_tree": "d3aac17eab19c9e8f6f6358ad2dcaec02d734020",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "dynamic_plugins",
+        "routine_localized": false,
+        "seed": 62006,
+        "source_pin_id": "pytest-dev-pluggy-1.6.0",
+        "task_control_cid": "baguqeeratnlxvtfedh3g2t5ki4oqkxp6lwx56a52rcu2gkbfh7fnnz3jabpq",
+        "task_id": "dynamic-assurance-context-expansion-001",
+        "visible_projection_cid": "baguqeerahu5subigyeqczeh2qmvuz2yolsymhnvjcabckq4ihoypnkiadg3a"
+      },
+      {
+        "agent_view_cid": "baguqeeraifvea4texgut4oxdrqlyxsg5hyto3ihaqd7vwmyh5p5vzqeh3tvq",
+        "base_commit": "fd08ab5f811a9b2fa9124ae8cbbd393221151e2c",
+        "base_tree": "d3aac17eab19c9e8f6f6358ad2dcaec02d734020",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "dynamic_plugins",
+        "routine_localized": false,
+        "seed": 62007,
+        "source_pin_id": "pytest-dev-pluggy-1.6.0",
+        "task_control_cid": "baguqeera6qsx3zqfspvuzo6oggmigjidjjrgrgrcbwz2koksxtybcrukpipq",
+        "task_id": "dynamic-negative-review-001",
+        "visible_projection_cid": "baguqeera2fbg54dbwom7j6wx7s76r6kz76ntbzkmlnrykjgba6ggray6zvdq"
+      },
+      {
+        "agent_view_cid": "baguqeeraubtpjyq2cg4gtzrz6jp37anb3qm4v6xn566bkmxi3wjb4vdysxwq",
+        "base_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "base_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "mature_python",
+        "routine_localized": true,
+        "seed": 63001,
+        "source_pin_id": "django-django-5.2.5",
+        "task_control_cid": "baguqeerabp4bsetym5xpqy5uboweer4nfpmhwsbmuzeyhrcw2lctkobpfghq",
+        "task_id": "mature-historical-001",
+        "visible_projection_cid": "baguqeeralqaosyznypzplyzbayak6y2mvayxuq4b2dov653d2d2t76dacota"
+      },
+      {
+        "agent_view_cid": "baguqeeraonbsoagwblzlgvu7r6f3nkgtbpnkjctvabo526lqedpzmm3hdewq",
+        "base_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "base_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "mature_python",
+        "routine_localized": true,
+        "seed": 63002,
+        "source_pin_id": "django-django-5.2.5",
+        "task_control_cid": "baguqeeralovbgfqma6ilzptvdrbon37tgztye6trxdeeltfzujc3pyxbo3tq",
+        "task_id": "mature-synthetic-model-registry-001",
+        "visible_projection_cid": "baguqeerax5sytsc2t3idbcygdctrjrp77txdfs4g2fvvood7u5bq6evniuoa"
+      },
+      {
+        "agent_view_cid": "baguqeera22c2srv2hfuqukw6l2ppuudoxbryx63nxcukwxj2ijgiwqxfj5ka",
+        "base_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "base_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "mature_python",
+        "routine_localized": true,
+        "seed": 63003,
+        "source_pin_id": "django-django-5.2.5",
+        "task_control_cid": "baguqeeralkrh6nqmgkn2cfiouohigxljzdry2y2bls56k4un7cu25wn7r6aq",
+        "task_id": "mature-synthetic-middleware-order-001",
+        "visible_projection_cid": "baguqeeramapgdj4y2vlclj5y7pxixayqsucu3ut5veahuslmstj34ino56vq"
+      },
+      {
+        "agent_view_cid": "baguqeeram4ibwk35hwyrzsh65numbyfuxrewiov66uhkyyp2mpqs6cnsi65a",
+        "base_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "base_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "mature_python",
+        "routine_localized": true,
+        "seed": 63004,
+        "source_pin_id": "django-django-5.2.5",
+        "task_control_cid": "baguqeeraz36frtuc5gj73jropbdjh22ruff2nfiacywnz6d5n433hyn4s7aq",
+        "task_id": "mature-assurance-omission-001",
+        "visible_projection_cid": "baguqeeratwavwzzfyvhrhrfs33s5vpsp3uwttbvyd6uea7ecm56cpsyvvywa"
+      },
+      {
+        "agent_view_cid": "baguqeera4uq3lqiqpydieo2bz3n6ykjdbxhgybwkqryfqpxd6hwmea35mnea",
+        "base_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "base_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "mature_python",
+        "routine_localized": true,
+        "seed": 63005,
+        "source_pin_id": "django-django-5.2.5",
+        "task_control_cid": "baguqeeraffnkgrzpncsgzsnxey6dxdadgozrn7lmr4k4ffi4qhp3jmat2moq",
+        "task_id": "mature-assurance-vacuity-001",
+        "visible_projection_cid": "baguqeeradfc4jziwjwwvvu5yoobkvvtamcxdjljcpkbnns45vcyjndf3hcfa"
+      },
+      {
+        "agent_view_cid": "baguqeera4f6nobnszkap4gqmj2uv3i4nievjuaxso2rk34gs4puufx54tj6q",
+        "base_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "base_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "mature_python",
+        "routine_localized": true,
+        "seed": 63006,
+        "source_pin_id": "django-django-5.2.5",
+        "task_control_cid": "baguqeeraifkxqarfldccvafii6kwpvsqv6df3cpsywcctimjlbfb4diteita",
+        "task_id": "mature-assurance-context-expansion-001",
+        "visible_projection_cid": "baguqeerakawx6duek4vpy3v2tdtvmappl7x5rykjtyo4vxtnip46xtcw4lla"
+      },
+      {
+        "agent_view_cid": "baguqeerakydad4vx5wq46k3tb3gun6c4tlujmylpi4i4sibgchhebwc5yqya",
+        "base_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "base_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "mature_python",
+        "routine_localized": false,
+        "seed": 63007,
+        "source_pin_id": "django-django-5.2.5",
+        "task_control_cid": "baguqeeralpvthfcjnfh5kwxad7erutg756ctrtaz5xkqm5zcem2lcjvezfgq",
+        "task_id": "mature-assurance-cutoff-001",
+        "visible_projection_cid": "baguqeera6bxkvbm7ye62c677pja43s2kqn574gyiyc6o7sxgalthmtvnavma"
+      },
+      {
+        "agent_view_cid": "baguqeeraxztx2i5qbquewgc566ltngvw7ufoxatrseipo3cx4hhvfldi46da",
+        "base_commit": "a3b1107a4955bdd994908efb4c6e1d03c281e69f",
+        "base_tree": "0d45857fbbe288b56ddd4d8e124a1657421f9c48",
+        "eligible_configurations": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "repository_class": "mature_python",
+        "routine_localized": false,
+        "seed": 63008,
+        "source_pin_id": "django-django-5.2.5",
+        "task_control_cid": "baguqeerakyo3kuh422refkqmabalaodx6hcsj7a3hshbsu6mmwqwi6znecpa",
+        "task_id": "mature-negative-review-001",
+        "visible_projection_cid": "baguqeeraaf4x6v7smmbh3yb3ywj3hykm46hg2legcien44sv4useok2lr7tq"
+      }
+    ],
+    "terminal_status_counts": {
+      "unavailable": 84
+    }
+  },
+  "provenance_interpretation": {
+    "accepted_stale_or_simulated_result_count": 0,
+    "meaning": "current route-admission observation ending unavailable before dispatch; not observed live-model quality, cost, or latency",
+    "replayed_result_count": 0,
+    "row_value": "live",
+    "simulated_result_count": 0
+  },
+  "publication": {
+    "benchmark_executed": false,
+    "benchmark_quality_or_performance_claim_allowed": false,
+    "decision": "NO-GO",
+    "downstream_qualification_required": true,
+    "limitations": [
+      "The 84 records are current provider-route-unavailable terminal records, not model executions.",
+      "No patch proposal, hidden evaluation, proof, assurance, latency, quality, token, or cost observation exists.",
+      "A zero provider-call count does not turn unknown monetary cost into observed zero cost.",
+      "The frozen failure/abstention scoring policy may derive zero accepted-patch outcomes downstream, but raw quality fields remain null.",
+      "C/D routine localization is copied only from the frozen agent-visible task flag; frontier routing remains unobserved."
+    ]
+  },
+  "raw_results": {
+    "line_count": 84,
+    "ordered_line_records": [
+      {
+        "line": 1,
+        "raw_result_cid": "baguqeeravefmepoqq2n37wzbc3azcczv7azrpjd2cqoljena6jknhzvojumq",
+        "run_key": "pcce-067/typed-historical-001/A/seed-61001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 2,
+        "raw_result_cid": "baguqeera7ljdky3rrse2oq546kmn32h2wrurjfsyqoc2h4y5th7wbzgso5rq",
+        "run_key": "pcce-067/typed-synthetic-001/A/seed-61002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 3,
+        "raw_result_cid": "baguqeerare3d4gryiyplve3c6glefawq3up4hjevfmmgbqefhpvbiw5gqtzq",
+        "run_key": "pcce-067/typed-assurance-omission-001/A/seed-61003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 4,
+        "raw_result_cid": "baguqeera5go26hyo7gg4bscdalxryq5dapvebajockj7hb5vrbfomgojgata",
+        "run_key": "pcce-067/typed-assurance-vacuity-001/A/seed-61004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 5,
+        "raw_result_cid": "baguqeerabrtf665uyc5j2j7wvprqrf4gtfkqanp323ctpodsx3sc5fjqs42a",
+        "run_key": "pcce-067/typed-assurance-context-expansion-001/A/seed-61005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 6,
+        "raw_result_cid": "baguqeerahubbbwoqxqpr6l2a3iyipdrdamju2a3cqs3776y5fz6aliaosmta",
+        "run_key": "pcce-067/typed-negative-review-001/A/seed-61006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 7,
+        "raw_result_cid": "baguqeeraa5v7te4n6h7x4j7eargvps2e5zdvwmot47uftoca6zkomqqfv6zq",
+        "run_key": "pcce-067/dynamic-historical-001/A/seed-62001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 8,
+        "raw_result_cid": "baguqeerar35twui3m6pbrs3rfqazdyofn5jpddoojkejj7zzybbwekc3a3kq",
+        "run_key": "pcce-067/dynamic-synthetic-plugin-discovery-001/A/seed-62002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 9,
+        "raw_result_cid": "baguqeeraivjwyc7z6rnd5s6dljbfl2roo5p6zi5ein4vjruyjx2jbugpi7dq",
+        "run_key": "pcce-067/dynamic-assurance-opaque-fallback-001/A/seed-62003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 10,
+        "raw_result_cid": "baguqeerasgszfqd4nlol7zs7iomsrz6fufgz25pofrvttcnpugq437v4reua",
+        "run_key": "pcce-067/dynamic-assurance-registration-omission-001/A/seed-62004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 11,
+        "raw_result_cid": "baguqeerajb6owsl7mumjzzpovfktybqhkae3cr27wutqpuglogkwlpwpx6cq",
+        "run_key": "pcce-067/dynamic-assurance-vacuity-001/A/seed-62005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 12,
+        "raw_result_cid": "baguqeeraurbhsa3evqum47bekbwjm5neriptrbqxtii7rt3yrpj765ezhbwq",
+        "run_key": "pcce-067/dynamic-assurance-context-expansion-001/A/seed-62006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 13,
+        "raw_result_cid": "baguqeerakkhza5h76rgbkmjuqu6lklyfayr7vzhstbxljwlmty3j6a5ri6va",
+        "run_key": "pcce-067/dynamic-negative-review-001/A/seed-62007/attempt-1/route-unavailable"
+      },
+      {
+        "line": 14,
+        "raw_result_cid": "baguqeerato6rriuf6j6sch2tag26s7zzrff7fcnsvucjyv4m2oywjltbdpjq",
+        "run_key": "pcce-067/mature-historical-001/A/seed-63001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 15,
+        "raw_result_cid": "baguqeerakteqlkxlieltehucb2vmmtuquzo26lhdduuaopu4z6zgzr3rkn2q",
+        "run_key": "pcce-067/mature-synthetic-model-registry-001/A/seed-63002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 16,
+        "raw_result_cid": "baguqeeramafc7b3sbceeqpxq5qqmp5yhz2eerjpjxhnprxdh6zzslnvesxhq",
+        "run_key": "pcce-067/mature-synthetic-middleware-order-001/A/seed-63003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 17,
+        "raw_result_cid": "baguqeeraf7nbpbncmzcgt6ezi7o3w4jypwk57tmj6ia44jzj2lkenb4t4w7q",
+        "run_key": "pcce-067/mature-assurance-omission-001/A/seed-63004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 18,
+        "raw_result_cid": "baguqeeranqtx7f27fxjiuyfsk4d2gi3dkegrd4irw35w4b6ramy3kuf4re4a",
+        "run_key": "pcce-067/mature-assurance-vacuity-001/A/seed-63005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 19,
+        "raw_result_cid": "baguqeerab2oeo4i3lxkftrnxdmxsrabuxxz3dypokpqqqn4mldxv25o65urq",
+        "run_key": "pcce-067/mature-assurance-context-expansion-001/A/seed-63006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 20,
+        "raw_result_cid": "baguqeerapwbowxvtpkjl6h5ltbsaxrkl7qnt5wuqqvewkiscxl4mh3jeu3fa",
+        "run_key": "pcce-067/mature-assurance-cutoff-001/A/seed-63007/attempt-1/route-unavailable"
+      },
+      {
+        "line": 21,
+        "raw_result_cid": "baguqeeraf4loyu57mehjavykxm5mbtyst2psceyzsxyhtzhnjzxgnl2qlkea",
+        "run_key": "pcce-067/mature-negative-review-001/A/seed-63008/attempt-1/route-unavailable"
+      },
+      {
+        "line": 22,
+        "raw_result_cid": "baguqeeraefkqq2jzc6xkarqdyrj4ysjjd6xyony26t7wx632rj4zmptuqmaq",
+        "run_key": "pcce-067/typed-historical-001/B/seed-61001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 23,
+        "raw_result_cid": "baguqeerawex2ty25tlfmdxdtvabqnxasy3h232a5n67zs2efkjfhmlb7n57a",
+        "run_key": "pcce-067/typed-synthetic-001/B/seed-61002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 24,
+        "raw_result_cid": "baguqeeraaoedxoc4rat57doej6f6jz7lo2rsvvfnnk2hhcqbonwsm5lghhma",
+        "run_key": "pcce-067/typed-assurance-omission-001/B/seed-61003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 25,
+        "raw_result_cid": "baguqeeray5emqs6pvvjic3rilzhb3rd4ni2ecco7kk26hhox72tpjmvm4cpq",
+        "run_key": "pcce-067/typed-assurance-vacuity-001/B/seed-61004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 26,
+        "raw_result_cid": "baguqeerawolfoagomhfowlwmo43slkhys26wjc4bwcytp5nassq5grvvwzqq",
+        "run_key": "pcce-067/typed-assurance-context-expansion-001/B/seed-61005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 27,
+        "raw_result_cid": "baguqeeraipntc72pt4rbblzqu4vuz2zgtl6r6e7bdbzvvqfdgggxaj43rvyq",
+        "run_key": "pcce-067/typed-negative-review-001/B/seed-61006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 28,
+        "raw_result_cid": "baguqeerajwvj5y7fmwqpntaefejt2obxas2caj22vvdnrp4gs46m5bjms74a",
+        "run_key": "pcce-067/dynamic-historical-001/B/seed-62001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 29,
+        "raw_result_cid": "baguqeeracukd2juznwghkiu2cib5ddlvyogl3d7jkscjzccujwv6ekyz4iyq",
+        "run_key": "pcce-067/dynamic-synthetic-plugin-discovery-001/B/seed-62002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 30,
+        "raw_result_cid": "baguqeerafun245k5lxy7dfs4a57dhit64p2ou24yusfvtekhvpv3fudqw3za",
+        "run_key": "pcce-067/dynamic-assurance-opaque-fallback-001/B/seed-62003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 31,
+        "raw_result_cid": "baguqeeravqeevognnlxuropmkecczgaqsfsujnwjqx3kncbu2ktpsgbqw5ca",
+        "run_key": "pcce-067/dynamic-assurance-registration-omission-001/B/seed-62004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 32,
+        "raw_result_cid": "baguqeeragimp6tphckg2gna4mn5nniupcp3ij7f4xznliuormg2w722elioq",
+        "run_key": "pcce-067/dynamic-assurance-vacuity-001/B/seed-62005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 33,
+        "raw_result_cid": "baguqeeragf2otc4zxdzqndecrhqo46yiu6jmo2iz4xrs5ity5zpeprpbfbmq",
+        "run_key": "pcce-067/dynamic-assurance-context-expansion-001/B/seed-62006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 34,
+        "raw_result_cid": "baguqeeradm4nhjhnuklrh3ras3ltdoxhqdcqbw6jsupxc5pitv4urupauqva",
+        "run_key": "pcce-067/dynamic-negative-review-001/B/seed-62007/attempt-1/route-unavailable"
+      },
+      {
+        "line": 35,
+        "raw_result_cid": "baguqeerax24qzynzu4jzo25snxnehwy4suv5miss4aj6sks4qa5vzmvajb2q",
+        "run_key": "pcce-067/mature-historical-001/B/seed-63001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 36,
+        "raw_result_cid": "baguqeerax6debgssznqja3iqk5il6n2z4kwwqizkuyyiltfcuvm3ryg43dwa",
+        "run_key": "pcce-067/mature-synthetic-model-registry-001/B/seed-63002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 37,
+        "raw_result_cid": "baguqeera5s7ylisqp4f3qvqhrio7eyn6pffsfio2dkb6asrkgum7bmbyn6qq",
+        "run_key": "pcce-067/mature-synthetic-middleware-order-001/B/seed-63003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 38,
+        "raw_result_cid": "baguqeerah7zqxhqaplkejkqdkqinb3gntos5sl67zlgurdnz5d7rlrqukhja",
+        "run_key": "pcce-067/mature-assurance-omission-001/B/seed-63004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 39,
+        "raw_result_cid": "baguqeera4mvswesijwpj5gt235ycz5y3ehrwklri7maueqpamiqzmy4xacuq",
+        "run_key": "pcce-067/mature-assurance-vacuity-001/B/seed-63005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 40,
+        "raw_result_cid": "baguqeera7lh36n76ywrjdcqm5jgcy2g4a5hkb2jsellrtysyzcp4vrv4txcq",
+        "run_key": "pcce-067/mature-assurance-context-expansion-001/B/seed-63006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 41,
+        "raw_result_cid": "baguqeera2dwwufkff6pq6ggx3afnttgstgovnh6g5ppedffqfdyv6zs2362a",
+        "run_key": "pcce-067/mature-assurance-cutoff-001/B/seed-63007/attempt-1/route-unavailable"
+      },
+      {
+        "line": 42,
+        "raw_result_cid": "baguqeera3fbrtminybgpsvxmnu5tg3zagw6bqipi3o37u6w3pvijcykgyjqq",
+        "run_key": "pcce-067/mature-negative-review-001/B/seed-63008/attempt-1/route-unavailable"
+      },
+      {
+        "line": 43,
+        "raw_result_cid": "baguqeerawhin3xkclk6eyf4yjvj6zitycvogup44vaqxe4f3yldzpvhxlnoa",
+        "run_key": "pcce-067/typed-historical-001/C/seed-61001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 44,
+        "raw_result_cid": "baguqeera6d4uypg6ct5ntjon7vxfs5kg4puse3z4tjfd5y23ncagkpz5immq",
+        "run_key": "pcce-067/typed-synthetic-001/C/seed-61002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 45,
+        "raw_result_cid": "baguqeeranoetrywmg2eo3bpiunfy4hwsjksf7zd7scaspl7mb5mbk4sok7ba",
+        "run_key": "pcce-067/typed-assurance-omission-001/C/seed-61003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 46,
+        "raw_result_cid": "baguqeeras6a5ssg4mbzopfozggq7hvewh4wkpbayg6isicg5qspkf75jv2jq",
+        "run_key": "pcce-067/typed-assurance-vacuity-001/C/seed-61004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 47,
+        "raw_result_cid": "baguqeeradrbxf6ek6qqgfic2zrp6xycuq6qic6rm75bp5nvyykdkra7jyqfq",
+        "run_key": "pcce-067/typed-assurance-context-expansion-001/C/seed-61005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 48,
+        "raw_result_cid": "baguqeerazmeq5tvm4rde2cl5sipp3ps5gwtttflqma5i6amwmjcemifeej6a",
+        "run_key": "pcce-067/typed-negative-review-001/C/seed-61006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 49,
+        "raw_result_cid": "baguqeeraswontlaoynoyyptgcxhoqsezjlipklwj6d4oa65pi5hzzgok7ota",
+        "run_key": "pcce-067/dynamic-historical-001/C/seed-62001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 50,
+        "raw_result_cid": "baguqeerajzz7zjlqyrcpslx276dqpluglwh4gdmnwf7hcengnq7vqmjqhima",
+        "run_key": "pcce-067/dynamic-synthetic-plugin-discovery-001/C/seed-62002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 51,
+        "raw_result_cid": "baguqeeraiabeapax4wtebjukwdbf6hmioroiqk6zwbn765tel34ajlwz4rpq",
+        "run_key": "pcce-067/dynamic-assurance-opaque-fallback-001/C/seed-62003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 52,
+        "raw_result_cid": "baguqeeraxzrazlzpcqnnnipgibaokjvncnahahjmtbdxwspe2sqiwntz5hba",
+        "run_key": "pcce-067/dynamic-assurance-registration-omission-001/C/seed-62004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 53,
+        "raw_result_cid": "baguqeeraik7vaqefrulovx3ou27gw7wmaok5sndkv437m6l3ibzt5zxdspcq",
+        "run_key": "pcce-067/dynamic-assurance-vacuity-001/C/seed-62005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 54,
+        "raw_result_cid": "baguqeerak3x7xwyb7fxatbwtdl56h6hhxhmppe4taaobtgp33f3bwmloho6a",
+        "run_key": "pcce-067/dynamic-assurance-context-expansion-001/C/seed-62006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 55,
+        "raw_result_cid": "baguqeerataeo2b2z6v7movvymrdugynw26z7opgelyk2fdgi3gphhgpwvxjq",
+        "run_key": "pcce-067/dynamic-negative-review-001/C/seed-62007/attempt-1/route-unavailable"
+      },
+      {
+        "line": 56,
+        "raw_result_cid": "baguqeeravcbqzfbwdxa7j2uuw7qmg77khjkbpdwaiwhndslvhqnrmvw554bq",
+        "run_key": "pcce-067/mature-historical-001/C/seed-63001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 57,
+        "raw_result_cid": "baguqeera3apl26ytdic7dtzm3u3d7lypd63unxazmcouhur3ktje265yyr5q",
+        "run_key": "pcce-067/mature-synthetic-model-registry-001/C/seed-63002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 58,
+        "raw_result_cid": "baguqeerayl7ynpjwvbneumm2k3slflmtpb6oyub6syqwib23hfq2xugwe24a",
+        "run_key": "pcce-067/mature-synthetic-middleware-order-001/C/seed-63003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 59,
+        "raw_result_cid": "baguqeeraofqty6myfrbzt4jcjbnkysnwl52l44fctbu6xiy7fdgwxv6q3weq",
+        "run_key": "pcce-067/mature-assurance-omission-001/C/seed-63004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 60,
+        "raw_result_cid": "baguqeera4t4lsvxzaicco6xbynimk5piua6dg55evetozjgtnomrhhdli3la",
+        "run_key": "pcce-067/mature-assurance-vacuity-001/C/seed-63005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 61,
+        "raw_result_cid": "baguqeera2hoauo7hyc2htevxtbbio7bitdebza4latqeffghs37y7cm3g57a",
+        "run_key": "pcce-067/mature-assurance-context-expansion-001/C/seed-63006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 62,
+        "raw_result_cid": "baguqeeraf2xzt4a5vva5rmlzxrcqk3qggxb4d7flfh5knenmv6mmgfluck2q",
+        "run_key": "pcce-067/mature-assurance-cutoff-001/C/seed-63007/attempt-1/route-unavailable"
+      },
+      {
+        "line": 63,
+        "raw_result_cid": "baguqeeraobhjpsrvafh76enhlm7kh56q4luoy6emf5nzhgbnm3vx2pphgyja",
+        "run_key": "pcce-067/mature-negative-review-001/C/seed-63008/attempt-1/route-unavailable"
+      },
+      {
+        "line": 64,
+        "raw_result_cid": "baguqeeray7bdtp2kveu2qla6jq6k5ik6j3xwdfhorcud4sxqexvd64gpoasq",
+        "run_key": "pcce-067/typed-historical-001/D/seed-61001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 65,
+        "raw_result_cid": "baguqeeraxx65r5ojwec2fxynckrtpezmt2i6z4iu7kij5j7alcvyag6cy72q",
+        "run_key": "pcce-067/typed-synthetic-001/D/seed-61002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 66,
+        "raw_result_cid": "baguqeeramx3fiuwimgfryf774hkudymae2lukdul5vzintiinz6njfxfebzq",
+        "run_key": "pcce-067/typed-assurance-omission-001/D/seed-61003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 67,
+        "raw_result_cid": "baguqeerancms5wajx4rm3sl6kenha7ywiwffaa5ohtojhbx5gepmmmclrklq",
+        "run_key": "pcce-067/typed-assurance-vacuity-001/D/seed-61004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 68,
+        "raw_result_cid": "baguqeera52ugwdyql5ed2da644mpoxhx3bhvs3vcb5hlotbejpr75d73mhta",
+        "run_key": "pcce-067/typed-assurance-context-expansion-001/D/seed-61005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 69,
+        "raw_result_cid": "baguqeeradyrz7jqgvetgaeezranqu2q62y3y7grg6ewfdujynmvu63j4ya2q",
+        "run_key": "pcce-067/typed-negative-review-001/D/seed-61006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 70,
+        "raw_result_cid": "baguqeera6mvw6dkzg3nxavvq5pdbadkdv5utup74iaui2qbovbvwv6kgkriq",
+        "run_key": "pcce-067/dynamic-historical-001/D/seed-62001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 71,
+        "raw_result_cid": "baguqeerac3hbbkkb3f7vacmtbs55bjg7uwiiqxks4jdihocor5lncapx6x5q",
+        "run_key": "pcce-067/dynamic-synthetic-plugin-discovery-001/D/seed-62002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 72,
+        "raw_result_cid": "baguqeerapzrvfle6ezpyteyc6wcfny5qzl5e2gfxhibpgjrjhjyprsa4fa2q",
+        "run_key": "pcce-067/dynamic-assurance-opaque-fallback-001/D/seed-62003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 73,
+        "raw_result_cid": "baguqeera2ly2ysiey3zemrmh3cy52lh4c675mjgegvewzm72p2owqvliycza",
+        "run_key": "pcce-067/dynamic-assurance-registration-omission-001/D/seed-62004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 74,
+        "raw_result_cid": "baguqeeraq6e2ghwbxq64z3zw7ja6nufmdf2xufos6csidfw67lhmyelumaya",
+        "run_key": "pcce-067/dynamic-assurance-vacuity-001/D/seed-62005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 75,
+        "raw_result_cid": "baguqeerat7age556damgi6x5kf4rxjd3tynv7iv5mnbss5ojlev2ymnaycbq",
+        "run_key": "pcce-067/dynamic-assurance-context-expansion-001/D/seed-62006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 76,
+        "raw_result_cid": "baguqeeraffrneqpmn5b6gzvlnqas2d6bqlzc4wkiyrpcj3mlpc47wrznlhfq",
+        "run_key": "pcce-067/dynamic-negative-review-001/D/seed-62007/attempt-1/route-unavailable"
+      },
+      {
+        "line": 77,
+        "raw_result_cid": "baguqeeraaozsnr57fnr7x7cjo76c3bnj5ock476h7gl6znelts7ocf4ryjpa",
+        "run_key": "pcce-067/mature-historical-001/D/seed-63001/attempt-1/route-unavailable"
+      },
+      {
+        "line": 78,
+        "raw_result_cid": "baguqeeraw7mn7firrpp244jlkxhsn2644rf2xnzak2jz2foo4bdnxmnqwiwq",
+        "run_key": "pcce-067/mature-synthetic-model-registry-001/D/seed-63002/attempt-1/route-unavailable"
+      },
+      {
+        "line": 79,
+        "raw_result_cid": "baguqeera7x5y6ipejpvp77uw2keeshps77wdqzlzu4hsx6wvo6o75n4v7kia",
+        "run_key": "pcce-067/mature-synthetic-middleware-order-001/D/seed-63003/attempt-1/route-unavailable"
+      },
+      {
+        "line": 80,
+        "raw_result_cid": "baguqeeraxyfngbfi4e3kh74yizimr7v72t2hjm6e75hxb56iphadr5vi4yuq",
+        "run_key": "pcce-067/mature-assurance-omission-001/D/seed-63004/attempt-1/route-unavailable"
+      },
+      {
+        "line": 81,
+        "raw_result_cid": "baguqeeraxtfc6z5vo43qvx6v6wmvterzc5k5wfcu6o2dgcbt7r2xr6u3hqea",
+        "run_key": "pcce-067/mature-assurance-vacuity-001/D/seed-63005/attempt-1/route-unavailable"
+      },
+      {
+        "line": 82,
+        "raw_result_cid": "baguqeerai4wzuenjyae7vpgm3djj72pxmwgzvb3dwosgqxt2gz4p6qp3qeva",
+        "run_key": "pcce-067/mature-assurance-context-expansion-001/D/seed-63006/attempt-1/route-unavailable"
+      },
+      {
+        "line": 83,
+        "raw_result_cid": "baguqeeraiay2wn5cuyan5djij5zr6o4qdyperqv2lozuaska34xzpd3mc22a",
+        "run_key": "pcce-067/mature-assurance-cutoff-001/D/seed-63007/attempt-1/route-unavailable"
+      },
+      {
+        "line": 84,
+        "raw_result_cid": "baguqeerauanpnl6e65bpzdotf3visdzll6qj2j72ofbibwhlmeqtp5vkktrq",
+        "run_key": "pcce-067/mature-negative-review-001/D/seed-63008/attempt-1/route-unavailable"
+      }
+    ],
+    "path": "artifacts/proof_carrying_context_engine/benchmark/raw_results.jsonl",
+    "raw_cid_v1": "bafkreibjooqmsrumufg5uuevpda5u6q5msnurxytzeuslextjj4hfjtmfi",
+    "schema": "ipfs-datasets.proof-context.benchmark-raw-result@1",
+    "sha256": "2973a0c9468ca14dda509578c1da7a1d649b48df13c9292592f34a7872a66c2a",
+    "size": 738788
+  },
+  "route_admission": {
+    "decision": "NO-GO",
+    "environment_cid": "baguqeeracbe2apgtnnbt6zqajbb7eodgoo2ubhq6xoirkkp6tvnpnum4kikq",
+    "environment_descriptor": {
+      "accelerator_gitlink": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+      "datasets_gitlink": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+      "network_permit": "not-issued",
+      "outer_commit": "268801f6312dc3b338dbda9ce88e0424a347052f",
+      "provider_environment": "unallocated",
+      "provider_permit": "not-issued",
+      "schema": "lift_coding.proof-carrying-context-engine.route-admission-environment@1"
+    },
+    "model_id_sentinel": "unavailable-no-model-dispatch",
+    "model_revision_sentinel": "unavailable-no-model-revision",
+    "provider_dispatch_attempted": false,
+    "provider_id_sentinel": "unavailable-no-provider-permit",
+    "provider_model_revision_observed": false,
+    "provider_or_model_called": false,
+    "provider_permits": [],
+    "reason": "PCCE-056 installation qualification is NO-GO and PCCE-079 reports no provider/model permit or frozen benchmark execution evidence",
+    "terminal_status": "unavailable"
+  },
+  "schema": "lift_coding.proof-carrying-context-engine.benchmark-run-manifest@1",
+  "task_authority": {
+    "live_quack_duckdb_task_cid": "baguqeeraozzrsd26abvatqptb5bhvxa5dw7mymfcryemk355ieqlmczvtzjq",
+    "static_board_task_cid": "baguqeera5zw2sgetx6yvihhl5a2mmd7vanmuepxef2bbhet3nfgknzqqoogq",
+    "task_id": "PCCE-067"
+  }
+}
