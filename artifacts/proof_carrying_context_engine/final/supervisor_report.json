@@ -1,0 +1,300 @@
+{
+  "benchmark_and_assurance": {
+    "benchmark": {
+      "context_reduction_bp": null,
+      "cost_reduction_bp": null,
+      "execution_receipt_present": false,
+      "qualification_present": false,
+      "quality_result": null,
+      "raw_results_present": false,
+      "reason": "PCCE-067 and PCCE-068 terminal artifacts are absent at this evidence cut.",
+      "reuse_result": null,
+      "route_result": null,
+      "thresholds": {
+        "freeze_state": "pre-execution-preregistered",
+        "path": "artifacts/proof_carrying_context_engine/benchmark/thresholds.json",
+        "raw_cid": "bafkreidbxdx5lnfipffzopuromspjeobbz633zcblyc3auk2u4cocgrfnm",
+        "results_observed_before_freeze": false,
+        "sha256": "61b8efd5b4a8794b973e917324f491c10e7dbde4415e05b0515aa704e11a256b"
+      }
+    },
+    "security": {
+      "current_qualification": "no_go",
+      "release_gate_present": false,
+      "release_gate_task": "PCCE-076",
+      "threat_model": {
+        "path": "artifacts/proof_carrying_context_engine/security/threat_model.json",
+        "raw_cid": "bafkreicqlvr2orogy3xemnyse4x5lkjs6t2w3wsrzd4w4utb4fvmsmif74",
+        "sha256": "505d63a745c6c6ee463712272fd5a932f4f56dda51c8f96e5261e16ac93105ff"
+      },
+      "unavailable_or_open_high_critical_result": "NO-GO"
+    },
+    "self_hosting": {
+      "harness_receipt_present": true,
+      "longitudinal_qualification_present": false,
+      "qualification_authority_claimed": false,
+      "task_045_receipt_raw_cid": "bafkreidebkiezkedp5m5tc2764mrlxiudpiuhp4nkljzdk6u6x7c3svopm",
+      "task_079_receipt_present": false
+    }
+  },
+  "board": {
+    "historical_receipt_coverage": {
+      "canonical_receipts_present": 57,
+      "canonical_receipts_total": 67,
+      "extra_retained_attempt_receipts": 3,
+      "receipt_files_present": 60
+    },
+    "live_board": {
+      "all_tasks_completed_claimed": false,
+      "completed_count": null,
+      "revision": null,
+      "status": "not-captured-by-this-historical-source-tree-projection",
+      "total_count": null
+    },
+    "static_projection": {
+      "authoritative": false,
+      "completed": 1,
+      "path": "artifacts/proof_carrying_context_engine/control/task_board.json",
+      "projection_id": "sha256:5a3b74e77f1710edf234532636c7519966da541db9adbcef6785eb412d1800e4",
+      "raw_cid": "bafkreih37r3uhf4m5zekixb5jzjwdt3s3lqil7zzhsumvuhvpuajkijcwi",
+      "sha256": "fbfc7743978cee48a45c3d4e5361cf72dae085ff393ca8cad0f57d00952122b2",
+      "todo": 66,
+      "total": 67
+    }
+  },
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "canonical_ownership": {
+    "artifact": {
+      "path": "artifacts/proof_carrying_context_engine/contracts/canonical_ownership.json",
+      "raw_cid": "bafkreibpr4un6btf5llld5xcldxqaz33iourcvcamvvi7upuywu3iokfcy",
+      "sha256": "2f8f28df0665ead6b1f6e258ef00677b43a9115440656a8fd1f4c5a9b4394516"
+    },
+    "boundaries": {
+      "Mcp-Plus-Plus": "shared schemas, vectors, and narrow interoperability contracts only; no production runtime authority",
+      "ipfs_accelerate_py": "engine facade, lifecycle orchestration, adapters, routing, verification/proof scheduling, cancellation, admission, and campaigns",
+      "ipfs_datasets_py": "semantic repository state, capsules, ContextPacks/sufficiency, invalidation, benchmark specifications, and semantic comparison",
+      "ipfs_kit_py": "immutable artifacts, state/receipt/proof-forest persistence, CAS/WAL, hermetic storage, and optional IPFS transport"
+    },
+    "historical_snapshot_limitations": [
+      "The ownership snapshot records ContextPack Builder and Verification Receipt Cache boundary violations that require migration evidence.",
+      "The snapshot predates later receipt-backed implementation work and is not by itself a final current-tree ownership audit."
+    ],
+    "mcp_runtime_authority": false
+  },
+  "change_inventory": {
+    "complete_final_file_inventory_present": false,
+    "current_gitlinks": {
+      "Mcp-Plus-Plus": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+      "external/ipfs_accelerate": "bb10a620a4c33246352ba1f4ca5579e610bf194a",
+      "external/ipfs_datasets": "817a665897467b44e6b6fc413d757d9ade719d4d",
+      "external/ipfs_kit": "f591ce1404df68bc597031141e483ae6e58b4dbb"
+    },
+    "repositories_represented": [
+      "lift_coding",
+      "Mcp-Plus-Plus",
+      "external/ipfs_accelerate",
+      "external/ipfs_datasets",
+      "external/ipfs_kit"
+    ],
+    "status": "pending-final-composition",
+    "truthfulness_note": "A final changed-file inventory must be derived from the composed Git history and terminal receipts; predicted board paths are not substituted for actual diffs."
+  },
+  "cli_and_installation": {
+    "cli": {
+      "commands": {
+        "evidence": [
+          "expand-context",
+          "explain-impact",
+          "assurance",
+          "seal",
+          "report"
+        ],
+        "execution": [
+          "run",
+          "verify",
+          "resume"
+        ],
+        "state": [
+          "init",
+          "scan",
+          "status",
+          "plan"
+        ]
+      },
+      "entrypoint": "python -m ipfs_accelerate_py.proof_context.cli",
+      "manifest_path": "artifacts/proof_carrying_context_engine/cli/command_manifest.json",
+      "manifest_raw_cid": "bafkreiddkqzoeawm3b36qfl5thc3gx44rwvjvac2auzhkkkbfzesute75u",
+      "manifest_sha256": "635432e202ccd877e8157d99c5b35f9c8daa9a805a05327529412e492a4c9fed"
+    },
+    "installation": {
+      "completion_disposition": "completed-with-explicit-no-go",
+      "decision": "NO-GO",
+      "path": "artifacts/proof_carrying_context_engine/installation/qualification.json",
+      "raw_cid": "bafkreibxr5ztwmp65yzmhfksy525rz3u6dhosoazedaa6fdetxh5v6y664",
+      "release_qualified": false,
+      "sha256": "378f733b31feee32c39552c775d8e774f0cee9381920c00f14649dcfdafb1ef7",
+      "supported_clean_install_profiles_passed": 0,
+      "supported_clean_install_profiles_total": 5
+    },
+    "installation_example_claimed_working": false
+  },
+  "decision": {
+    "final": false,
+    "internal_development": "proceed-with-restrictions",
+    "internal_pilot": "NO-GO",
+    "production_use": "NO-GO",
+    "release": "NO-GO",
+    "status": "PENDING_PREDECESSOR_AND_LIVE_BOARD_COMPOSITION",
+    "supervised_external_pilot": "NO-GO"
+  },
+  "dependency_graph": {
+    "path": "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+    "raw_cid": "bafkreif7le77qyliftf37kga5derjka4oa7taxohmbzj7mid36mj7apyvy",
+    "sha256": "bf593ff861682ccbbfa8c0e8c914a81c703f305dc760729fb103df989f81f8ae",
+    "task_nodes": 67,
+    "unique_receipt_files": 60
+  },
+  "evidence_cut": {
+    "repository_commit": "43457c396be7a9116152e4414dadc4625eff2c2e",
+    "repository_tree": "d2a3e450154cbf0b200d7eaae5db0f9eec8bbd66",
+    "scope": "historical-source-tree-only"
+  },
+  "limitations": [
+    "This historical projection does not capture or claim the current Quack/DuckDB task revision or completion count.",
+    "Receipt presence proves only that immutable receipt bytes exist at this cut; task completion authority remains external to this report.",
+    "PCCE-067, PCCE-068, PCCE-074, PCCE-075, PCCE-076, PCCE-079, PCCE-080, PCCE-081, PCCE-082, and PCCE-083 canonical receipts are absent.",
+    "No benchmark, cost, route, reuse, context-reduction, current-head CI, release-candidate, or final qualification result is invented for an absent artifact.",
+    "The exact terminal acceptance claim is withheld until predecessor composition, live-board completion verification, and report regeneration."
+  ],
+  "objective": {
+    "goal_id": "PCCE-G000",
+    "objective_heap": {
+      "path": "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
+      "raw_cid": "bafkreif52cz6c3hnjinvj6mrzdmygjm2sk5ysldh6inbt2gm6rueccdkhu",
+      "sha256": "bdd0b3e16ced4a1b54f991c8d983259a92bb892c67f21a19e8ccf46841086a3d"
+    },
+    "status_at_historical_cut": "active",
+    "title": "Installable Proof-Carrying Context Engine v0.1"
+  },
+  "public_api": {
+    "artifact_path": "artifacts/proof_carrying_context_engine/runtime/runtime_api.json",
+    "artifact_raw_cid": "bafkreiewktogguwwmwe7oehhx5uw4wbb535kc6eopfq5kektc6sueimuoe",
+    "artifact_sha256": "9654dc6352d66589f710e7bf696e5821eefaa1788e7961d5115317a542219471",
+    "interface": "ProofCarryingContextEngine@0.1",
+    "operations": [
+      "open",
+      "scan",
+      "status",
+      "plan",
+      "context-pack",
+      "route",
+      "run",
+      "verify",
+      "expand-context",
+      "assurance",
+      "seal",
+      "report",
+      "resume"
+    ],
+    "package": "ipfs_accelerate_py.proof_context",
+    "provider_bound": false,
+    "runtime_conformance_claim": "receipt-backed implementation evidence only; no final current-head release qualification"
+  },
+  "qualification_and_release": {
+    "pcce_081": {
+      "release_manifest_present": false,
+      "receipt_present": false,
+      "status": "unavailable-at-cut"
+    },
+    "pcce_082": {
+      "assigned_level": null,
+      "level_present": false,
+      "receipt_present": false,
+      "status": "unavailable-at-cut"
+    },
+    "recommendations_cannot_exceed_pcce_082": true
+  },
+  "recomposition": {
+    "admission_ready": false,
+    "required_refreshes": [
+      "Compose and bind exact terminal artifacts and receipts for PCCE-067, PCCE-068, PCCE-074, PCCE-075, PCCE-076, PCCE-079, PCCE-080, PCCE-081, and PCCE-082.",
+      "Query the authoritative Quack/DuckDB board after PCCE-082 admission and bind its exact revision, board CID, 67 unique task dispositions, and terminal receipt identities.",
+      "Rebuild the dependency graph from the composed board and receipts, retaining failed, blocked, cancelled, partial, superseded, and unavailable attempts.",
+      "Derive the actual repository and changed-file inventory from the final Git histories, not predicted paths.",
+      "Bind final benchmark, security, CI, release, and qualification CIDs without converting NO-GO evidence into passage.",
+      "Recalculate dependency-graph, machine-report, human-report, and PCCE-083 receipt hashes/CIDs, then cross-check machine/human recommendations.",
+      "Assert the board-required terminal claim only if its installability wording is supported by the final immutable evidence; otherwise preserve the contradiction as a blocker rather than asserting it."
+    ]
+  },
+  "required_terminal_claim": {
+    "asserted": false,
+    "reason": "The predecessor qualification is absent and the observed installation evidence is NO-GO."
+  },
+  "schema": "pcce/proof-context/v0.1/historical-supervisor-report@1",
+  "schema_version": 1,
+  "task_id": "PCCE-083",
+  "tests_and_ci": {
+    "aggregate_current_head_test_run_claimed": false,
+    "configured_or_declared_tests_count_as_ci_passage": false,
+    "github_clean_install_workflow_dispatched": false,
+    "pcce_080_current_head_ci_present": false,
+    "receipt_level_validations_present": true,
+    "status": "NO-GO"
+  },
+  "truthfulness_canaries": {
+    "all_67_tasks_completed_claimed": false,
+    "benchmark_or_cost_metrics_invented": false,
+    "board_completion_used_as_production_evidence": false,
+    "ci_passage_claimed": false,
+    "final_qualification_claimed": false,
+    "hidden_benchmark_body_accessed": false,
+    "installation_passage_claimed": false,
+    "provider_execution_claimed": false,
+    "release_published_or_tagged": false,
+    "security_passage_claimed": false,
+    "terminal_acceptance_claim_asserted": false,
+    "waivers": []
+  },
+  "unresolved_blockers": [
+    {
+      "code": "LIVE_BOARD_NOT_BOUND",
+      "disposition": "pending-composition"
+    },
+    {
+      "code": "TEN_CANONICAL_RECEIPTS_ABSENT",
+      "disposition": "pending-composition"
+    },
+    {
+      "code": "INSTALLATION_GATE_NO_GO",
+      "disposition": "release-blocking"
+    },
+    {
+      "code": "BENCHMARK_QUALIFICATION_ABSENT",
+      "disposition": "release-blocking"
+    },
+    {
+      "code": "SECURITY_QUALIFICATION_ABSENT_AND_THREAT_MODEL_NO_GO",
+      "disposition": "release-blocking"
+    },
+    {
+      "code": "CURRENT_HEAD_CI_ABSENT",
+      "disposition": "release-blocking"
+    },
+    {
+      "code": "LONGITUDINAL_SELF_HOSTING_ABSENT",
+      "disposition": "release-blocking"
+    },
+    {
+      "code": "RELEASE_CANDIDATE_ABSENT",
+      "disposition": "release-blocking"
+    },
+    {
+      "code": "QUALIFICATION_LEVEL_ABSENT",
+      "disposition": "final-report-blocking"
+    },
+    {
+      "code": "FINAL_CHANGED_FILE_INVENTORY_ABSENT",
+      "disposition": "final-report-blocking"
+    }
+  ]
+}

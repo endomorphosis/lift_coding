@@ -1,0 +1,96 @@
+{
+  "artifact_identity": "bafkreibcw4cj5cqdmaooesglnni2cjfp6q6gl7o5m2t5rflkjrqgspniwe",
+  "artifact_identity_kind": "CIDv1(raw,sha2-256) of final/supervisor_report.json historical candidate",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "completion_mode": "supervised-historical-final-projection-candidate-pending-composition",
+  "evidence": {
+    "allowed_scope": {
+      "actual_paths": [
+        "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+        "artifacts/proof_carrying_context_engine/final/supervisor_report.json",
+        "artifacts/proof_carrying_context_engine/final/supervisor_report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-083.json"
+      ],
+      "board_allowed_paths": [
+        "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+        "artifacts/proof_carrying_context_engine/final/supervisor_report.json",
+        "artifacts/proof_carrying_context_engine/final/supervisor_report.md",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-083.json"
+      ]
+    },
+    "decision": {
+      "final": false,
+      "internal_development": "proceed-with-restrictions",
+      "internal_pilot": "NO-GO",
+      "production_use": "NO-GO",
+      "release": "NO-GO",
+      "status": "PENDING_PREDECESSOR_AND_LIVE_BOARD_COMPOSITION",
+      "supervised_external_pilot": "NO-GO"
+    },
+    "evidence_cut": {
+      "base_commit": "43457c396be7a9116152e4414dadc4625eff2c2e",
+      "base_tree": "d2a3e450154cbf0b200d7eaae5db0f9eec8bbd66",
+      "live_board_queried_or_mutated": false,
+      "predecessor_082_present": false,
+      "static_task_cid": "baguqeerao72epmmmmr7jm42isnj4rcip2umpeypzbv5juez6lu2wlsav776q"
+    },
+    "graph_completeness": {
+      "all_67_completed_claimed": false,
+      "canonical_task_receipts_present": 57,
+      "extra_attempt_receipts_preserved": 3,
+      "receipt_files_represented_exactly_once": 60,
+      "task_nodes_represented_exactly_once": 67
+    },
+    "outputs": {
+      "dependency_graph": {
+        "path": "artifacts/proof_carrying_context_engine/final/dependency_graph.json",
+        "raw_cid": "bafkreif7le77qyliftf37kga5derjka4oa7taxohmbzj7mid36mj7apyvy",
+        "sha256": "bf593ff861682ccbbfa8c0e8c914a81c703f305dc760729fb103df989f81f8ae"
+      },
+      "human_report": {
+        "path": "artifacts/proof_carrying_context_engine/final/supervisor_report.md",
+        "raw_cid": "bafkreiefzme57ka3tatisapw3oqhwsyp36uthvk63chhwjhpkw3626kt6y",
+        "sha256": "85cb09dfa81b98268901f6dba07b4b0fdfa933d55ed88e7b24ef55b7ed7953f6"
+      },
+      "machine_report": {
+        "path": "artifacts/proof_carrying_context_engine/final/supervisor_report.json",
+        "raw_cid": "bafkreibcw4cj5cqdmaooesglnni2cjfp6q6gl7o5m2t5rflkjrqgspniwe",
+        "sha256": "22b7049e8a03601ce248cb6b51a124aff43c65fddd66a7d8956a4c60693da8b1"
+      }
+    },
+    "prohibited_effects": {
+      "board_or_database_mutated": false,
+      "failed_blocked_pending_or_partial_attempts_omitted": false,
+      "hidden_benchmark_content_accessed": false,
+      "metrics_invented": false,
+      "provider_or_ci_dispatched": false,
+      "published_tagged_or_released": false,
+      "terminal_acceptance_claim_asserted": false
+    },
+    "recomposition_required": {
+      "before_admission_against_final_head": true,
+      "refreshes": [
+        "PCCE-067, PCCE-068, PCCE-074, PCCE-075, PCCE-076, PCCE-079, PCCE-080, PCCE-081, and PCCE-082 artifacts and receipts",
+        "authoritative Quack/DuckDB revision, board CID, all 67 task dispositions, and terminal receipt identities",
+        "final outer commit/tree and four submodule gitlinks",
+        "actual repository and changed-file inventory",
+        "benchmark, security, CI, self-hosting, release, and qualification CIDs",
+        "dependency graph, machine report, human report, and receipt hashes/CIDs",
+        "machine/human decision cross-check and evidence support for any terminal claim"
+      ]
+    },
+    "validation": {
+      "dependency_edges_match_static_source": "passed",
+      "json_parse": "passed",
+      "machine_human_decision_cross_check": "passed-for-declared-historical-cut",
+      "r6_static_board_validation": "passed-67-tasks-9-goals-121-dependencies",
+      "receipt_file_identity_population": "60-of-60-exactly-once",
+      "task_population": "67-of-67-exactly-once"
+    }
+  },
+  "objective_id": "PCCE-G000",
+  "rollback": "Supersede only after correcting source evidence through its owning task; retain this historical projection identity and never rewrite predecessor receipts.",
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "status": "candidate-pending-predecessor-and-live-board-composition",
+  "task_id": "PCCE-083"
+}
