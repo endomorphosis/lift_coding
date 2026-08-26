@@ -151,6 +151,30 @@ HANDOFF_REPAIR_PATH: Final = (
     / "handoff"
     / "supervisor-restart-repair.json"
 )
+HANDOFF_REPLAY_REPAIR_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-replay-repair.json"
+)
+HANDOFF_REPLAY_REPAIR_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-restart-replay-repair@1"
+)
+HANDOFF_REPLAY_REPAIR_BASE_COMMIT: Final = "PENDING_REPAIR_BASE_COMMIT"
+HANDOFF_REPAIR_SEALED_OUTER_COMMIT: Final = (
+    "a985e87f77a59afc78f8d73bf0d4c18566000442"
+)
+HANDOFF_REPAIR_SEALED_OUTER_TREE: Final = (
+    "47958a8a04d8a5e7a1fbd9155823597e977ffa8c"
+)
+HANDOFF_REPAIR_SEALED_OPERATOR_IDENTITY: Final = (
+    "sha256:c6b1bb0991c29d07bbd248358039d051956e75e10243a44d4d78b7e72d790e80"
+)
+HANDOFF_REPAIR_SEALED_RECEIPT_ID: Final = (
+    "sha256:e0ce20f7218d7eef119f5853b034e8275870cd527d7df70b398fda8e72455861"
+)
 HANDOFF_REPAIR_MAX_TASK_ATTEMPTS: Final = 2
 HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND: Final = "task.blocked.retry.recover"
 HANDOFF_REPAIR_BLOCKED_RETRY_OPERATION: Final = (
@@ -948,6 +972,164 @@ def _verified_blocked_retry_handoff(
     return handoff
 
 
+def _verified_operator_replay_repair(
+    *,
+    sealed_operator_identity: str,
+    current_operator_identity: str,
+    current_head: str,
+) -> dict[str, Any]:
+    """Admit only the post-generation-6 zero-revision replay correction."""
+
+    payload = _json_mapping_bytes(
+        _tracked_bytes(HANDOFF_REPLAY_REPAIR_PATH, head=current_head),
+        field="PCSM restart replay repair receipt",
+    )
+    expected_fields = {
+        "schema",
+        "reason",
+        "source_handoff_repair_receipt_id",
+        "sealed_outer_commit",
+        "sealed_outer_tree",
+        "sealed_operator_identity",
+        "repair_base_commit",
+        "repair_base_tree",
+        "repair_base_operator_identity",
+        "current_operator_identity",
+        "exact_change",
+        "failed_restart",
+        "recovery_already_committed",
+        "attempt_refunded",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    exact_change = payload.get("exact_change")
+    failed_restart = payload.get("failed_restart")
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    operator_path = Path(__file__).resolve()
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    base_commit = HANDOFF_REPLAY_REPAIR_BASE_COMMIT
+    if (
+        set(payload) != expected_fields
+        or payload.get("schema") != HANDOFF_REPLAY_REPAIR_SCHEMA
+        or payload.get("reason")
+        != "generation_6_valid_zero_store_revision_replay_validation"
+        or payload.get("source_handoff_repair_receipt_id")
+        != HANDOFF_REPAIR_SEALED_RECEIPT_ID
+        or payload.get("sealed_outer_commit")
+        != HANDOFF_REPAIR_SEALED_OUTER_COMMIT
+        or payload.get("sealed_outer_tree")
+        != HANDOFF_REPAIR_SEALED_OUTER_TREE
+        or payload.get("sealed_operator_identity")
+        != HANDOFF_REPAIR_SEALED_OPERATOR_IDENTITY
+        or sealed_operator_identity
+        != HANDOFF_REPAIR_SEALED_OPERATOR_IDENTITY
+        or payload.get("repair_base_commit") != base_commit
+        or payload.get("current_operator_identity")
+        != current_operator_identity
+        or not isinstance(exact_change, Mapping)
+        or dict(exact_change)
+        != {
+            "field": "store_revision_before",
+            "previous_lower_bound": 1,
+            "admitted_lower_bound": 0,
+            "accepted_store_revision_before": 0,
+            "accepted_store_revision_after": 1,
+        }
+        or not isinstance(failed_restart, Mapping)
+        or dict(failed_restart)
+        != {
+            "owner_generation": 6,
+            "owner_fence_epoch": 6,
+            "task_status": "retrying",
+            "task_revision": 5,
+            "command_id": (
+                "cmd:blocked-retry-recovery:"
+                "ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7"
+            ),
+            "idempotency_key": (
+                "executor-blocked-retry-recovery:"
+                "ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7"
+            ),
+            "result_digest": (
+                "sha256:ba3a88d6bd6f2c848b273fb5362919909fa6c9d0813258df089a0cc08bc04f1e"
+            ),
+            "error": "blocked-retry owner command was not exactly admitted",
+        }
+        or payload.get("recovery_already_committed") is not True
+        or payload.get("attempt_refunded") is not False
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError("PCSM restart replay repair receipt is not admitted")
+
+    if (
+        _git_commit_tree(
+            HANDOFF_REPAIR_SEALED_OUTER_COMMIT,
+            field="sealed restart repair commit",
+        )
+        != HANDOFF_REPAIR_SEALED_OUTER_TREE
+        or _git_commit_tree(base_commit, field="restart replay repair base")
+        != payload.get("repair_base_tree")
+    ):
+        raise OperatorError("PCSM restart replay repair tree binding changed")
+    _git_is_ancestor(
+        HANDOFF_REPAIR_SEALED_OUTER_COMMIT,
+        base_commit,
+        field="restart replay repair base lineage",
+    )
+    _git_is_ancestor(
+        base_commit,
+        current_head,
+        field="restart replay repair current lineage",
+    )
+    parents = str(_git("show", "-s", "--format=%P", base_commit)).strip().split()
+    changed_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{HANDOFF_REPAIR_SEALED_OUTER_COMMIT}..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    sealed_bytes = _git_blob_at(
+        head=HANDOFF_REPAIR_SEALED_OUTER_COMMIT,
+        path=operator_path,
+        field="sealed blocked-retry operator",
+    )
+    base_bytes = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="restart replay repair base operator",
+    )
+    current_bytes = _tracked_bytes(operator_path, head=current_head)
+    pending_base = ("PENDING_" + "REPAIR_BASE_COMMIT").encode("ascii")
+    old_bound = b"        or store_revision_before < " + b"1\n"
+    new_bound = b"        or store_revision_before < " + b"0\n"
+    expected_current = base_bytes.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    ).replace(old_bound, new_bound, 1)
+    if (
+        parents != [HANDOFF_REPAIR_SEALED_OUTER_COMMIT]
+        or changed_paths != (relative_operator,)
+        or _identity(sealed_bytes) != HANDOFF_REPAIR_SEALED_OPERATOR_IDENTITY
+        or _identity(base_bytes)
+        != payload.get("repair_base_operator_identity")
+        or base_bytes.count(pending_base) != 1
+        or base_bytes.count(old_bound) != 1
+        or current_bytes != expected_current
+        or _identity(current_bytes) != current_operator_identity
+    ):
+        raise OperatorError("PCSM restart replay repair source delta changed")
+    return payload
+
+
 def _verified_handoff_repair(
     *,
     bootstrap_receipt_id: str,
@@ -1101,11 +1283,12 @@ def _verified_handoff_repair(
         != continuation.get("stable_binding_id")
         or not isinstance(listed_identities, Mapping)
         or set(listed_identities) != _RESTART_REPAIR_SOURCE_NAMES
-        or dict(listed_identities)
-        != {
-            name: current_source_identities[name]
-            for name in sorted(_RESTART_REPAIR_SOURCE_NAMES)
-        }
+        or any(
+            listed_identities[name] != current_source_identities[name]
+            for name in sorted(_RESTART_REPAIR_SOURCE_NAMES - {"operator"})
+        )
+        or listed_identities["operator"]
+        != HANDOFF_REPAIR_SEALED_OPERATOR_IDENTITY
         or not isinstance(datasets_receipt, Mapping)
         or not isinstance(accelerate_merge, Mapping)
         or not isinstance(validations, list)
@@ -1123,6 +1306,12 @@ def _verified_handoff_repair(
         bootstrap_attempt_limit=bootstrap_attempt_limit,
         current_attempt_limit=current_attempt_limit,
     )
+    if listed_identities["operator"] != current_source_identities["operator"]:
+        _verified_operator_replay_repair(
+            sealed_operator_identity=str(listed_identities["operator"]),
+            current_operator_identity=current_source_identities["operator"],
+            current_head=current_head,
+        )
     observed_validations: set[tuple[str, tuple[str, ...]]] = set()
     for index, validation in enumerate(validations):
         if not isinstance(validation, Mapping) or set(validation) != {
