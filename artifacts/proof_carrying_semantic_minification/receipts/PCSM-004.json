@@ -1,0 +1,1023 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-004",
+  "title": "Define canonical-versus-projection authority boundary",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G100",
+  "objective_id": "PCSM-004",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-004@current-head-canonical-versus-projection-boundary-v1",
+  "observed_at": "2026-08-26T11:00:00Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 canonical-versus-projection authority boundary only",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "mutations_to_product_source": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-004.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-004.json",
+    "predicted_architecture_directory_not_written": "artifacts/proof_carrying_semantic_minification/architecture/",
+    "predicted_architecture_directory_reason": "This task's admitted declared output is the receipt only. The boundary is recorded here; no competing architecture tree, contract file, or owner was created.",
+    "implementation_delta": "receipt_only; name CanonicalVersusProjectionAuthorityBoundary@1 as a receipt-bound composition of existing scheduler authority_policy, DatasetsContextPackAuthority@0.1 versus ContextPacker, DuckDB versus DuckLake, ASTRecord versus DuckDBASTStore, SemanticCapsuleCompiler@1 versus RelevantBindingProjection, ProofCarryingArtifact@1 versus kit CIDv1 storage, and M1 versus M2/M3; no new authority, compiler, linker, contract owner, or language scope"
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used by this receipt.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "7c641864b2f224cd1cee906bce8eed7bee3d8360",
+    "outer_tree": "0916011ee986293a03a796068fe65f314edda1fd",
+    "outer_subject": "Merge commit '43f4f3e042c1ca17b3c51ae63939dcba727bd869' into agent/proof-carrying-semantic-minification-v1",
+    "git_object_format": "sha1",
+    "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "origin_main_is_ancestor": true,
+    "accelerator_planning_revision": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "accelerator_planning_tree": "b1dd163fe6ad7ab52cb3639d05fcbc0fbe64ff84",
+    "accelerator_planning_revision_equals_origin_main": true,
+    "accelerator_planning_tree_equals_origin_main_tree": true,
+    "accelerator_planning_revision_is_ancestor_of_head": true,
+    "commits_after_origin_main": 34,
+    "clean_before_receipt_write": true,
+    "evidence_kind": "measured",
+    "gitlinks": {
+      "Mcp-Plus-Plus": {
+        "repository": "endomorphosis/Mcp-Plus-Plus",
+        "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+        "authority_role": "wire_contract_only",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "superproject_gitlink": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "scheduler_planning_tree": "61776431577f0c276546f25e4178a47a64007180",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_accelerate": {
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+        "authority_role": "slice_route_model_budget_link_admission_and_validation",
+        "commit": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "tree": "7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
+        "superproject_gitlink": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "configured_origin_main": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "scheduler_planning_tree": "7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_datasets": {
+        "repository": "endomorphosis/ipfs_datasets_py",
+        "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+        "authority_role": "canonical_semantic_identity",
+        "commit": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "tree": "a8d4daf349506857d370171ae099426f057e56c0",
+        "superproject_gitlink": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "configured_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
+        "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "7169c2a67929044a02350bc26d0a51c853a4981b",
+        "configured_origin_main_tree_equals_planning_tree": false,
+        "scheduler_planning_revision": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "scheduler_planning_tree": "a8d4daf349506857d370171ae099426f057e56c0",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_kit": {
+        "repository": "endomorphosis/ipfs_kit_py",
+        "origin": "https://github.com/endomorphosis/ipfs_kit_py",
+        "authority_role": "exact_bytes_cid_and_immutable_storage",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "superproject_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "configured_origin_main": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "scheduler_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      }
+    },
+    "excluded_gitlinks_not_admitted": [
+      {
+        "path": "external/meta-wearables-dat-android",
+        "superproject_gitlink": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/meta-wearables-dat-ios",
+        "superproject_gitlink": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "hallucinate_app",
+        "superproject_gitlink": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "swissknife",
+        "superproject_gitlink": "75931db15273786ecd579f1089ec5599b9ded352",
+        "admitted": false,
+        "evidence_kind": "measured"
+      }
+    ],
+    "freshness_rule": "Any changed outer commit/tree, admitted nested commit/tree/gitlink, dirty nested worktree, or scheduler source_binding planning identity invalidates this boundary and requires a fresh receipt. Planning revisions are not runtime completion evidence. Datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b is an ancestor identity, not the admitted planning tree.",
+    "freshness_evidence_kind": "measured",
+    "freshness_check": {
+      "kind": "measured",
+      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git status --porcelain=v1; git -C <gitlink> status --porcelain=v1; git merge-base --is-ancestor <configured origin/main> HEAD; compare nested HEAD/tree to scheduler source_binding planning revision/tree",
+      "result": "pass",
+      "meaning": "The outer tree and all four admitted nested worktrees were clean before this receipt was written. Each admitted nested commit equals the superproject gitlink and the scheduler planning revision; each nested tree equals the scheduler planning tree. Configured origin/main is an ancestor of each nested head. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+    },
+    "source_digest_continuity": {
+      "kind": "measured",
+      "result": "first_pcsm_004_issuance_nested_authority_sources_unchanged_from_g100_predecessors",
+      "prior_pcsm_004_receipt": "none",
+      "predecessor_g100_receipts": [
+        "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v4",
+        "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v3",
+        "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v3",
+        "urn:pcsm:task-receipt:PCSM-003@current-head-inventory-v2"
+      ],
+      "nested_gitlinks_changed_versus_predecessor_receipts": [],
+      "nested_gitlinks_unchanged_versus_predecessor_receipts": [
+        "Mcp-Plus-Plus",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit"
+      ],
+      "outer_commit_moved": "Predecessor G100 receipts bound outer commits 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d (PCSM-000/001/003) or 1f7d0a9c10abbdefb1255e812df173a8e40f4d85 (PCSM-002). Current outer commit is 7c641864b2f224cd1cee906bce8eed7bee3d8360 after merging those receipts. Nested gitlinks and listed authority-source SHA-256/git-blob identities were re-hashed and matched the predecessor receipts.",
+      "meaning": "This is the first PCSM-004 receipt. Nested authority-source bytes were reconfirmed at this head against the G100 predecessor inventories. Predecessor receipts cannot be reused as current-head forest identity because the outer commit/tree moved."
+    },
+    "pcsm_source_map": {
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID is present at this boundary task. Related syntax-core maps, legal-IR maps, and accelerator AST spans are not substituted for a bound PCSM SourceLinkReceipt.",
+      "evidence_kind": "unavailable"
+    },
+    "stale_prior_receipt_rejected": {
+      "kind": "measured",
+      "prior_pcsm_004_artifact_identity": "none",
+      "predecessor_outer_commits_rejected_as_current_head": [
+        "4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d",
+        "1f7d0a9c10abbdefb1255e812df173a8e40f4d85"
+      ],
+      "result": "no_prior_pcsm_004_to_reject; predecessor_g100_outer_identities_rejected_as_current_head",
+      "meaning": "No previously committed PCSM-004 receipt exists. Predecessor G100 receipts remain valid inventories of their bound trees but are not current-head forest identity for this task."
+    }
+  },
+  "policy_bindings": {
+    "scheduler_config": {
+      "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
+      "sha256": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
+      "git_blob": "04d7f3becf40c4702e0aeab18f1443ed610259cf",
+      "accepted_plan_revision_alias": "PCSM-PLAN-V1",
+      "source_binding_policy": {
+        "require_initialized_gitlinks": true,
+        "require_superproject_gitlink_equals_nested_head": true,
+        "require_clean_nested_worktree_at_task_start": true,
+        "require_origin_main_as_ancestor": true,
+        "changed_revision_requires_fresh_inventory_and_baseline": true,
+        "planning_revision_is_runtime_completion_evidence": false,
+        "record_recursive_repository_forest_at_launch": true
+      },
+      "authority_policy": {
+        "canonical_semantic_authority": "ipfs_datasets_py",
+        "exact_bytes_storage_authority": "ipfs_kit_py",
+        "orchestration_admission_authority": "ipfs_accelerate_py",
+        "duckdb_transactional_authority": true,
+        "ducklake_projection_authority": false,
+        "m2_or_m3_mutation_authority": false,
+        "m3_status": "experimental_advisory_only",
+        "model_or_advisor_output_is_completion_authority": false
+      },
+      "operational_control_plane": {
+        "duckdb_role": "authoritative transactional goals, tasks, lifecycle, CAS, fences, receipts, and event cursor",
+        "ducklake_role": "rebuildable non-authoritative append-only analytics projection",
+        "markdown_is_bootstrap_only": true,
+        "generated_runtime_artifacts_are_completion_authority": false
+      },
+      "evidence_kind": "measured"
+    },
+    "plan": {
+      "path": "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md",
+      "sha256": "5031a4e4588ef9f6589199f37e3551c5c059c25f7a04cbf9f3ec00f3f026ae0e",
+      "git_blob": "d76fbc8f9a37648c5ddbaa5b198223121b9d2231",
+      "evidence_kind": "measured"
+    },
+    "objectives": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
+      "sha256": "712c844b2a40856a677f5d7258d6bfdcb1f3ec08410e026922c93c4f6951121b",
+      "git_blob": "9f97656be213dc0f898701a04c851376b5eb6f16",
+      "dispatch_objective_revision_cid": "baguqeeraeefquqgjkqccahqtz24cscmsb6et5k62tqhctjeqfnjrxn5embfa",
+      "dispatch_objective_revision_cid_source": "current implementation dispatch packet; not a git blob and not substituted for the file SHA-256",
+      "evidence_kind": "measured"
+    },
+    "task_specification": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
+      "sha256": "63e745843899d95ac59e7080a2b744c87e7ac929871125d1b6efc8e392e4bfbe",
+      "git_blob": "a34f3b5773fc0a48b9665bc76e75f9e0a44fa682",
+      "evidence_kind": "measured"
+    },
+    "implementation_policy": {
+      "policy_id": "policy:implementation-daemon",
+      "policy_revision": "sha256:286fb4f9015e30f0ef65945dd1f1b8a759426211daee9cf8b836d250ac334ecc",
+      "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+      "canonical_task_cid": "baguqeerapnxzcezvnw5d7jdg3277qhtyhdov6xkkvisezi6qihzt4bypqdna",
+      "accepted_plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
+      "source": "current implementation dispatch and database task projection",
+      "evidence_kind": "measured"
+    }
+  },
+  "canonical_versus_projection_authority_boundary": {
+    "contract": "CanonicalVersusProjectionAuthorityBoundary@1",
+    "schema": "ipfs-accelerate.proof-carrying-semantic-minification.canonical-versus-projection-authority-boundary@1",
+    "status": "defined_by_reuse_of_existing_authorities",
+    "language_scope": "Python v1 only",
+    "confirmed": true,
+    "evidence_kind": "measured",
+    "authoritative_chain": {
+      "order": [
+        "canonical_semantic_cid",
+        "local_projection_alias",
+        "typed_output",
+        "canonical_semantic_cid",
+        "exact_current_tree_node_or_span"
+      ],
+      "statement": "A local alias is never canonical identity. The authoritative chain is canonical semantic CID → local projection alias → typed output → canonical semantic CID → exact current-tree node/span.",
+      "owners": {
+        "canonical_semantic_cid": "ipfs_datasets_py",
+        "local_projection_alias": "ipfs_accelerate_py may mint and consume tokenizer-local aliases; they are never identity",
+        "typed_output": "closed versioned grammar; model output is a proposal only",
+        "exact_current_tree_node_or_span": "ipfs_kit_py stores exact bytes and CIDv1; ipfs_datasets_py owns source/IR link metadata; ipfs_accelerate_py admits deterministic linking"
+      },
+      "source": "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md non-negotiable authority boundaries plus current-head scheduler authority_policy and existing owner modules",
+      "evidence_kind": "measured"
+    },
+    "canonical_owners": [
+      {
+        "owner": "ipfs_datasets_py",
+        "owns": [
+          "canonical semantic identity",
+          "source/code IR schemas",
+          "symbols and lineage",
+          "AST/CFG/data-flow relationships",
+          "contracts, assumptions, guarantees, invariants, obligations",
+          "semantic capsules and slices",
+          "qualified rewrites",
+          "source/IR link metadata",
+          "semantic proof-result relationships",
+          "validation of semantic soundness",
+          "future training/evaluation examples"
+        ],
+        "does_not_own": [
+          "exact byte storage or CID verification of stored blobs",
+          "model invocation, tokenizer choice, or patch admission"
+        ],
+        "current_head_equivalents": [
+          "DatasetsContextPackAuthority@0.1",
+          "CanonicalASTRecord / ASTRecord (ipfs-datasets.software-contracts.ast-ir@1.0.0)",
+          "SemanticCapsuleCompiler@1",
+          "ProducerBoundSource@1",
+          "ProofCarryingArtifact@1",
+          "IncrementalSemanticIndex / typed-symbol-graph@1"
+        ],
+        "evidence_kind": "measured"
+      },
+      {
+        "owner": "ipfs_kit_py",
+        "owns": [
+          "exact source bytes",
+          "canonical-IR bytes",
+          "projection bytes",
+          "CID verification",
+          "immutable storage",
+          "source/alias map bytes",
+          "manifests and root CAS",
+          "ContextPack/proof-seal/delta/tombstone/invalidation storage",
+          "WAL, recovery, retention, and optional replication"
+        ],
+        "does_not_own": [
+          "semantic soundness",
+          "proof validity",
+          "patch admission",
+          "reuse admission",
+          "task completion",
+          "model correctness"
+        ],
+        "current_head_equivalents": [
+          "ipfs_kit_py.proof_context.artifacts put/get CIDv1 helpers",
+          "ipfs_kit_py/proof_seal_store/contracts/proof-seal-store@1"
+        ],
+        "evidence_kind": "measured"
+      },
+      {
+        "owner": "ipfs_accelerate_py",
+        "owns": [
+          "tier/slice/model/tokenizer/budget choice",
+          "semantic expansion requests",
+          "model invocation",
+          "typed decoding",
+          "deterministic-link admission",
+          "selected tests/provers/CEGAR",
+          "reuse admission",
+          "objective/task state",
+          "promotion/non-promotion"
+        ],
+        "does_not_own": [
+          "canonical semantic identity",
+          "exact-byte CID minting independent of kit",
+          "production ContextPack construction"
+        ],
+        "current_head_equivalents": [
+          "semantic_bridge delegation to datasets ContextPack",
+          "SemanticGovernorExecution@1 routing contracts",
+          "proposal/CodeEdit admission surfaces"
+        ],
+        "evidence_kind": "measured"
+      }
+    ],
+    "non_identity_surfaces": [
+      {
+        "surface": "local_projection_alias",
+        "owner": "ipfs_accelerate_py",
+        "status": "projection_only",
+        "rule": "A local alias is never canonical identity. Board-local display task IDs may be reused after a task is removed and cannot bind vector context without a strong identity field.",
+        "current_head_equivalent": "implementation_daemon board-local aliases; ContextPacker tokenizer-local budget surface"
+      },
+      {
+        "surface": "DuckLake analytics catalog",
+        "owner": "optional append-only analytics",
+        "status": "projection_only",
+        "rule": "ducklake_projection_authority is false. DuckLake is a rebuildable non-authoritative analytics projection and cannot grant authority, complete tasks, or substitute for DuckDB.",
+        "current_head_equivalent": "scheduler ducklake_projection_program.authority=false and operational_control_plane.ducklake_role"
+      },
+      {
+        "surface": "Markdown task board and objective Markdown",
+        "owner": "bootstrap projection",
+        "status": "projection_only",
+        "rule": "The tracked Markdown board is the immutable initial projection. DuckDB/DatabaseTaskSource@1 is live task/objective authority after materialization. Markdown-only findings are non-authoritative.",
+        "current_head_equivalent": "scheduler operational_control_plane.markdown_is_bootstrap_only=true"
+      },
+      {
+        "surface": "DuckDB AST catalog",
+        "owner": "ipfs_datasets_py as query projection of datasets AST IR",
+        "status": "projection_only",
+        "rule": "DuckDBASTStore@1 projects ASTRecord into a closed asts catalog while preserving source CID and AST IR CID. It is not a second AST schema and is not CanonicalCodeIR.",
+        "current_head_equivalent": "DuckDBASTStore@1 / duckdb-ast-store/v1"
+      },
+      {
+        "surface": "Accelerator ContextPacker",
+        "owner": "ipfs_accelerate_py compatibility consumer",
+        "status": "projection_only",
+        "rule": "ContextPacker.V01_PRODUCTION_AUTHORITY is False. Production pack identity is DatasetsContextPackAuthority@0.1. Accelerator must delegate and must not reconstruct packs.",
+        "current_head_equivalent": "CONTEXT_PACK_V01_AUTHORITY = ipfs_datasets_py.proof_context.context_pack"
+      },
+      {
+        "surface": "Accelerator derived AST, vector, architecture, and program-graph records",
+        "owner": "ipfs_accelerate_py derived evidence",
+        "status": "projection_only",
+        "rule": "ASTBlobRecord, AnalysisASTIndex, DuckDBASTIndex, ArchitectureIR, program-graph, and program-ast adapters are derived evidence, not datasets-owned CanonicalCodeIR.",
+        "current_head_equivalent": "PCSM-002 inventory of accelerator derived AST/vector/program graphs"
+      },
+      {
+        "surface": "RelevantBindingProjection",
+        "owner": "ipfs_datasets_py bindings projection consumed by SemanticCapsuleCompiler@1",
+        "status": "projection_only",
+        "rule": "The capsule compiler never rediscovers binding scope and never treats another capsule or symbol-node CID as a dependency. The projection is not a second capsule authority.",
+        "current_head_equivalent": "SemanticCapsuleCompiler@1 plus relevant_binding_projection_for_symbol"
+      },
+      {
+        "surface": "MCP++ proof-context wire schemas",
+        "owner": "Mcp-Plus-Plus wire_contract_only",
+        "status": "projection_only",
+        "rule": "Wire schemas cannot choose authority identities, apply or admit patches, or promote simulated provenance to live identity.",
+        "current_head_equivalent": "pcce/proof-context/v0.1/context-pack and cid-behavior schemas"
+      },
+      {
+        "surface": "M2 SOUND_SEMANTIC_ABSTRACTION",
+        "owner": "ipfs_accelerate_py planning/routing only",
+        "status": "projection_only",
+        "rule": "M2 may plan, route, and discover likely edits. Mutation requires exact M1 expansion. m2_or_m3_mutation_authority is false.",
+        "current_head_equivalent": "scheduler authority_policy.m2_or_m3_mutation_authority=false"
+      },
+      {
+        "surface": "M3 LEARNED_SEMANTIC_COMPRESSION",
+        "owner": "none in v1",
+        "status": "experimental_advisory_only",
+        "rule": "M3 has no execution, proof, release, or blocking authority in v1.",
+        "current_head_equivalent": "scheduler authority_policy.m3_status=experimental_advisory_only"
+      },
+      {
+        "surface": "model or advisor output",
+        "owner": "none",
+        "status": "proposal_only",
+        "rule": "Model output is a typed PatchPlan, unresolved question, no-change, or refusal. It is not mutation, validation, completion, or identity authority.",
+        "current_head_equivalent": "scheduler model_or_advisor_output_is_completion_authority=false"
+      },
+      {
+        "surface": "scheduler planning revision",
+        "owner": "source_binding",
+        "status": "projection_only",
+        "rule": "planning_revision_is_runtime_completion_evidence is false.",
+        "current_head_equivalent": "scheduler source_binding.planning_revision_is_runtime_completion_evidence=false"
+      },
+      {
+        "surface": "generated runtime artifacts",
+        "owner": "runtime_paths",
+        "status": "projection_only",
+        "rule": "generated_runtime_artifacts_are_completion_authority is false.",
+        "current_head_equivalent": "scheduler runtime_paths.generated_runtime_artifacts_are_completion_authority=false"
+      },
+      {
+        "surface": "kit byte/storage compression",
+        "owner": "ipfs_kit_py encoding only",
+        "status": "projection_only",
+        "rule": "CompressionProfile is byte/storage encoding. It is not a semantic-equivalence claim or ProofCarryingSemanticProjection.",
+        "current_head_equivalent": "ipfs_kit_py/cache/compression_encoding.py"
+      }
+    ],
+    "assurance_classes": {
+      "M1": {
+        "name": "LOSSLESS_STRUCTURAL",
+        "mutation_authority": true,
+        "condition": "Only v1 tier allowed to create an automatically applied mutation. Requires current commit/tree/file CID/source-map identity, exact mutable spans, typed edits, deterministic linking, stale rejection, and preservation of unaffected bytes where supported."
+      },
+      "M2": {
+        "name": "SOUND_SEMANTIC_ABSTRACTION",
+        "mutation_authority": false,
+        "condition": "Planning, routing, impact/test/proof selection, contract propagation, and likely-edit discovery. Every summary names derivation, qualified fragment, assumptions, omitted semantics, and completeness witness. Mutation requires exact M1 expansion."
+      },
+      "M3": {
+        "name": "LEARNED_SEMANTIC_COMPRESSION",
+        "mutation_authority": false,
+        "condition": "experimental_advisory_only; no execution, proof, release, or blocking authority in v1."
+      }
+    },
+    "portal_mutation_namespace": "Owning repository ipfs_accelerate_py is the Portal filesystem/Git mutation namespace for the outer receipt. This common mutation namespace does not transfer canonical semantic, exact-byte storage, or patch-admission authority between repositories.",
+    "authority_isolation": "A local projection alias is not canonical identity; this receipt transfers no semantic, storage, or admission authority and creates no competing owner.",
+    "negative_assertions": [
+      "No local alias, board-local display task ID, vector hit, DuckLake row, Markdown board row, model output, M2 result, or M3 result is canonical identity or mutation authority.",
+      "ContextPacker.V01_PRODUCTION_AUTHORITY is False; DatasetsContextPackAuthority@0.1 is the production builder.",
+      "DuckDBASTStore@1 is a query projection of ASTRecord and is not CanonicalCodeIR@1.",
+      "Accelerator ASTBlobRecord, AnalysisASTIndex, DuckDBASTIndex, ArchitectureIR, program-graph, and program-ast adapters are derived evidence, not datasets-owned CanonicalCodeIR.",
+      "Kit stores exact IR/source/projection bytes and verifies CIDv1; it does not judge semantic soundness, proof validity, or patch admission.",
+      "MCP++ PatchProposal and proof-context schemas are wire contracts only and cannot apply, admit, or prove a patch.",
+      "CodeEditPacket, MutationLedger, and handoff PatchEvent are not a CanonicalCodeIR-to-exact-source linker.",
+      "M2 and M3 have no mutation authority; M3 remains experimental_advisory_only.",
+      "Scheduler planning revisions are not runtime completion evidence.",
+      "Generated runtime artifacts are not completion authority.",
+      "Datasets configured origin/main tree is not the admitted planning-tree identity.",
+      "Excluded gitlinks (swissknife, hallucinate_app, meta-wearables-dat-android, meta-wearables-dat-ios) are not admitted PCSM source roots.",
+      "This receipt creates no competing architecture tree, ContextPack builder, proof store, semantic compiler, alias dictionary, or source-map authority.",
+      "ProofCarryingSemanticProjection@1, ProjectionAliasDictionary@1, CanonicalCodeIR@1, SemanticIRPatchPlan@1, and SourceLinkReceipt@1 remain absent from the four nested repositories and are not substituted by this boundary."
+    ]
+  },
+  "existing_equivalents": [
+    {
+      "split": "DatasetsContextPackAuthority versus accelerator ContextPacker",
+      "canonical": "DatasetsContextPackAuthority@0.1 / ipfs_datasets_py.proof_context.context_pack",
+      "projection": "ContextPacker with V01_PRODUCTION_AUTHORITY=False",
+      "disposition": "reuse_as_primary_canonical_versus_projection_equivalent",
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+          "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+          "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+          "sha256": "698ae219ec099160dbc8d1d36b49a81df9a3fcec32ea590fb54ed6bc5471772d",
+          "git_blob": "f2263a6acb88b58b471bcc2e95e8ffa11e234e8c",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+          "sha256": "fd72987f59219b466e0aa3dd7f65ba5ddb23eeb135ddf6849c92d8ea9dfffcef",
+          "git_blob": "7ca43d6b64903aebd9cb85923958ed0d529fb09b",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py",
+          "sha256": "8ec4d49f2f6937f04e4dfd8b36f47b0aca34413b8226db6ff59e3bfc028caa14",
+          "git_blob": "f64f89ca055694a7162c442ae7a46640851a1712",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "Datasets AUTHORITY and INTERFACE are ipfs_datasets_py.proof_context.context_pack and DatasetsContextPackAuthority@0.1. Accelerator CONTEXT_PACK_V01_AUTHORITY equals that producer string. ContextPacker.V01_PRODUCTION_AUTHORITY is False and V01_DELEGATE points at datasets build_context_pack. semantic_bridge.build_v01_context_pack delegates or raises DependencyUnavailable; it does not reconstruct packs.",
+      "reuse_decision": "Reuse as the production identity-versus-compatibility-projection split. Do not promote ContextPacker."
+    },
+    {
+      "split": "Canonical ASTRecord versus DuckDB AST catalog projection",
+      "canonical": "ipfs-datasets.software-contracts.ast-ir@1.0.0 CanonicalASTRecord/ASTRecord",
+      "projection": "DuckDBASTStore@1 / duckdb-ast-store/v1",
+      "disposition": "reuse_as_code_ir_versus_query_projection_equivalent",
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/ast_ir.py",
+          "sha256": "1461edb7c39f2adc89a70e54decfa291ccceafc50ed23011fbdeea5acb4c8b91",
+          "git_blob": "80a3ad611faec496b04559f8b54eb768841ecd90",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/duckdb_ast_store.py",
+          "sha256": "bbfb50388daeff7864f01ba172cd6ad490f714fcf10d0dac4b6cf783ed5c407b",
+          "git_blob": "93c34793ba1848b12b026b706f64a526da2368cb",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "The store docstring states it reuses the shared AST IR without inventing a second schema. verify_identity fails closed when projected ast_cid or source_cid drifts from ASTRecord, or when the projected schema identifier is not the shared AST IR schema.",
+      "reuse_decision": "Reuse as the datasets query projection. Do not treat the catalog as CanonicalCodeIR."
+    },
+    {
+      "split": "DuckDB transactional authority versus DuckLake analytics projection",
+      "canonical": "DuckDB / DatabaseTaskSource@1",
+      "projection": "DuckLake enabled_non_authoritative",
+      "disposition": "reuse_as_control_plane_canonical_versus_projection_equivalent",
+      "current_sources": [
+        {
+          "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+          "sha256": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
+          "git_blob": "04d7f3becf40c4702e0aeab18f1443ed610259cf",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "authority_policy.duckdb_transactional_authority is true and ducklake_projection_authority is false. operational_control_plane records DuckDB as the authoritative transactional owner and DuckLake as a rebuildable non-authoritative append-only analytics projection. markdown_is_bootstrap_only is true.",
+      "reuse_decision": "Reuse the existing control-plane split. Do not grant DuckLake or Markdown live authority."
+    },
+    {
+      "split": "SemanticCapsuleCompiler versus RelevantBindingProjection",
+      "canonical": "SemanticCapsuleCompiler@1",
+      "projection": "bindings-owned per-symbol RelevantBindingProjection",
+      "disposition": "reuse_as_capsule_versus_binding_projection_equivalent",
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+          "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d",
+          "git_blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+          "sha256": "268ff6aab60e3a8a2e5e9719b637edfd1efb7bc50a4310bd4b1f2660b04cdfcc",
+          "git_blob": "234fea82b071c80f9f7ddc8b33909257cdf6400c",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "The compiler is the sole owner of SemanticCapsuleCompiler@1. It compiles producer-authoritative capsules from a sealed ISI view and a bindings-owned relevant projection. It never rediscovers binding scope and never treats another capsule CID as a dependency.",
+      "reuse_decision": "Reuse capsule identity as datasets-owned. Do not promote the binding projection to capsule or CanonicalCodeIR identity."
+    },
+    {
+      "split": "ProofCarryingArtifact versus kit immutable bytes",
+      "canonical": "ProofCarryingArtifact@1 semantic lineage",
+      "projection": "kit CIDv1 put/get of exact bytes",
+      "disposition": "reuse_as_semantic_versus_byte_authority_equivalent",
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/proof_carrying_artifact.py",
+          "sha256": "f582806363384f70dde5d6954d1ef0cf94fa16eb9dbe4f10f50d1d69f1587748",
+          "git_blob": "b5e88980fcf4df59a7ee87ae9dc91ca3afc96e83",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/proof_context/artifacts.py",
+          "sha256": "1a9fc36d8388ff09f74da2ad414cbfe5752f7e6147068a92c540cd024936d804",
+          "git_blob": "144571fd1b502f64c26dec48b9909c59a307d8b2",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_kit/ipfs_kit_py/proof_seal_store/contracts.py",
+          "sha256": "de197d68bea3df3d0447b982489cc4443cbb047d75df830a9cb96a2a8921c93d",
+          "git_blob": "7d4edbd3fb369c91ed9c54ef826963f0f3e922d2",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "Datasets ProofCarryingArtifact@1 binds semantic/contract/proof/test/static/security/policy/authority lineage and rejects forged CIDs, stale roots, missing lineage, and producer flags. Kit put/get reject byte/CID disagreement and require CIDv1 base32. Kit does not judge semantic soundness.",
+      "reuse_decision": "Reuse this split for later projection-byte storage. Do not create a competing proof store or treat kit CID equality as semantic admission."
+    },
+    {
+      "split": "ProducerBoundSource exact bytes versus later M1 source link",
+      "canonical": "ProducerBoundSource@1 admits exact current bytes and spans",
+      "projection": "not a SourceLinkReceipt",
+      "disposition": "reuse_for_exact_source_admission_not_as_linker",
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/source.py",
+          "sha256": "a431f8fa45ab478a1a21b0d6520c081ca736e10e8746f383c2900481423def35",
+          "git_blob": "60b7d0aad68700e6ab90d7dde0ad1641c8b3d59e",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "ProducerBoundSource@1 reverifies source bytes against CID and fails closed on wrong producer state, missing blob, CID mismatch, TOCTOU reread mismatch, and path fallback. It does not rewrite source and is not SourceLinkReceipt@1.",
+      "reuse_decision": "Reuse as the exact-byte admission surface for later M1 linking. Do not treat it as the linker."
+    },
+    {
+      "split": "MCP++ wire contract versus semantic authority",
+      "canonical": "none in Mcp-Plus-Plus",
+      "projection": "pcce/proof-context/v0.1 wire schemas",
+      "disposition": "reuse_as_wire_contract_only",
+      "current_sources": [
+        {
+          "path": "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json",
+          "sha256": "0a4966fccb7cba741c2519a05b5a40bd6bbc815f623f1b41c909ad987fd919e6",
+          "git_blob": "2aae1504848e76a0a58a99c6c2f1c7465b4c43e3",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json",
+          "sha256": "b8cca6c23b9df3c8621959e5d45649e6b1f87cb9b72b7f57827ce3b2b6a96cae",
+          "git_blob": "b68a14e295b03b8e0b2862c36d86762e64609d57",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "MCP++ owns closed wire schemas. External clients may request or propose typed patches but cannot choose authority identities, override freshness, apply or admit patches, or promote advisory abstractions.",
+      "reuse_decision": "Keep MCP++ as wire_contract_only."
+    }
+  ],
+  "version_and_cid_controls": {
+    "schema_bound": true,
+    "current_tree_bound": true,
+    "content_addressing_bound": true,
+    "relevant_controls": [
+      "Canonical semantic identity is datasets-owned and CID-bound where the existing contract already emits CIDv1.",
+      "Kit verifies supplied bytes against CIDv1 base32 identity and rejects claimed-CID disagreement.",
+      "ContextPack CID derives from schema, interface, repository state, exact source CIDs, capsule CIDs, scanned tree, and freshness.",
+      "DuckDBASTStore projected ast_cid must equal ASTRecord.cid and projected source_cid must equal provenance.source_cid.",
+      "MCP++ CID behavior schema is RFC 8785 canonicalization-bound and rejects pseudo-CID and Qm new mints.",
+      "A local projection alias is never substituted for a canonical semantic CID."
+    ],
+    "receipt_cid": {
+      "status": "unavailable",
+      "reason": "ipfs was absent from the sealed validation PATH and no admitted immutable receipt-store write was available. A SHA-256 string is not substituted for a CID.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "minimum_versioned_delta": {
+    "status": "receipt_bound_composition_only",
+    "named_contract": "CanonicalVersusProjectionAuthorityBoundary@1",
+    "reason": "Existing scheduler authority_policy, DatasetsContextPackAuthority@0.1, DuckDBASTStore@1, SemanticCapsuleCompiler@1, ProofCarryingArtifact@1, kit CIDv1 storage, and M1/M2/M3 flags already encode the required split. Naming that composition in this receipt is the smallest Python v1 delta. Inventing ProjectionAliasDictionary@1, ProofCarryingSemanticProjection@1, CanonicalCodeIR@1, or a new owner would duplicate authority.",
+    "reuse_first_decision": {
+      "canonical_semantic_identity": "reuse ipfs_datasets_py",
+      "exact_bytes": "reuse ipfs_kit_py",
+      "admission_and_projection_construction": "reuse ipfs_accelerate_py without promoting it to identity",
+      "context_pack": "reuse DatasetsContextPackAuthority@0.1; keep ContextPacker non-authoritative",
+      "code_ir_projection": "reuse ASTRecord plus DuckDBASTStore@1 query projection",
+      "control_plane_projection": "reuse DuckDB transactional authority and DuckLake non-authority",
+      "capsule_projection": "reuse SemanticCapsuleCompiler@1 plus RelevantBindingProjection",
+      "proof_bytes": "reuse ProofCarryingArtifact@1 plus kit CIDv1 storage",
+      "wire": "reuse MCP++ v0.1 schemas as wire_contract_only",
+      "alias_dictionary_and_pcsm_projection_records": "defer to named PCSM-014 and PCSM-015"
+    },
+    "required_follow_on_tasks": [
+      "PCSM-010",
+      "PCSM-014",
+      "PCSM-015",
+      "PCSM-050",
+      "PCSM-051",
+      "PCSM-052"
+    ],
+    "non_promotion_effect": "No PCSM projection, alias dictionary, patch plan, source link, or automatic mutation is admitted by this task.",
+    "evidence_kind": "measured"
+  },
+  "coverage": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py",
+        "sha256": "a1b34a94feeef75689ebc5a2d5dfc268e24e855dac368fa363efbfd2e2e9fba9",
+        "git_blob": "dd45f7b21b264b094432da80affdcddd3d03a3aa",
+        "coverage": [
+          "ContextPacker.V01_PRODUCTION_AUTHORITY is False",
+          "datasets_is_v01_authority equals CONTEXT_PACK_V01_AUTHORITY",
+          "bridge delegates or fails closed without reconstructing packs"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+        "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+        "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+        "coverage": [
+          "identical inputs yield identical ContextPack CID",
+          "stale, unavailable, and opaque wrong-tree inputs fail closed"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_duckdb_ast_store.py",
+        "sha256": "dd2d5044f1d897c18a19309bc3a8cdb993d1c702f42c7a98435017a8fe9dee50",
+        "git_blob": "ae10a953a2401a307c04d8376713f64411c589b8",
+        "coverage": [
+          "ASTRecord projects into the closed asts catalog while preserving source CID and AST IR CID",
+          "test_verify_identity_fails_closed_on_drift rejects projected ast_cid disagreement"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_verification/test_proof_carrying_artifact.py",
+        "sha256": "d9b9c3d4391cbecc811059f81108989fa3b01dd5642469cc108bf9ed12fc6829",
+        "git_blob": "67e85976feac379181af1308d2c6bf2e9f91e58f",
+        "coverage": [
+          "round-trip and independent replay positive cases",
+          "forged CID, stale roots, missing lineage, producer flags, omitted checks, and lineage mismatch rejection"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/integration/logic/software_contracts/test_duckdb_ast_authority.py",
+        "sha256": "0178e4c087c072719f1b67deacb5f38559abf6e9c42ca291bf9ae205d956c7ca",
+        "git_blob": "07022910ff902a3c19180d78bd757cb50f25f9df",
+        "coverage": [
+          "DuckDB AST catalog remains a projection of datasets AST IR",
+          "authority drift and incompatible schema fail closed"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py",
+        "sha256": "5fd9059d28faba9e6d58e0f6351c6d69c668140e38baf8e5c32e177c96d14328",
+        "git_blob": "401ab569c290c9662537fd72776f6e84b756db11",
+        "coverage": [
+          "valid schema instances and RFC 8785 canonicalization",
+          "unknown fields/statuses, pseudo-CIDs, Qm new mints, wrong schema markers, and simulated provenance rejection"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      }
+    ],
+    "PCSM_specific_test_gap": {
+      "kind": "unavailable",
+      "statement": "No current-head test was found for ProofCarryingSemanticProjection@1, ProjectionAliasDictionary@1, CanonicalCodeIR@1, or a datasets-owned Python CanonicalCodeIR-to-current-source linker. Adjacent-system tests that already reject alias-as-identity, packer-as-authority, and projection identity drift are inventoried and not relabeled as those missing PCSM contracts."
+    }
+  },
+  "validation": {
+    "commands": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-004.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-004.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-004.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "evidence_kind": "measured"
+    },
+    "positive_tests": [
+      {
+        "name": "nested gitlinks, heads, trees, and scheduler planning revisions agree",
+        "status": "passed",
+        "observed_roots": 4,
+        "also_checked": [
+          "nested worktrees clean",
+          "superproject gitlink equals nested head",
+          "scheduler planning revision equals nested head",
+          "scheduler planning tree equals nested tree",
+          "configured origin/main revision is an ancestor of each nested head",
+          "outer origin/main equals accelerator_planning_revision and is an ancestor of outer HEAD",
+          "outer origin/main tree equals accelerator_planning_tree",
+          "listed source SHA-256 and git blob identities match live files"
+        ],
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "scheduler authority_policy matches the named boundary",
+        "status": "passed",
+        "method": "Read config/proof_carrying_semantic_minification_v1_supervisor.json and observed canonical_semantic_authority=ipfs_datasets_py, exact_bytes_storage_authority=ipfs_kit_py, orchestration_admission_authority=ipfs_accelerate_py, duckdb_transactional_authority=true, ducklake_projection_authority=false, m2_or_m3_mutation_authority=false, m3_status=experimental_advisory_only, model_or_advisor_output_is_completion_authority=false, markdown_is_bootstrap_only=true, generated_runtime_artifacts_are_completion_authority=false, planning_revision_is_runtime_completion_evidence=false.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "DatasetsContextPackAuthority remains production identity and ContextPacker remains a projection",
+        "status": "passed",
+        "method": "Read AUTHORITY and INTERFACE from context_pack.py (ipfs_datasets_py.proof_context.context_pack, DatasetsContextPackAuthority@0.1), CONTEXT_PACK_V01_AUTHORITY from accelerator contracts.py, and ContextPacker.V01_PRODUCTION_AUTHORITY=False with V01_DELEGATE pointing at datasets build_context_pack.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "DuckDBASTStore remains a closed projection of ASTRecord",
+        "status": "passed",
+        "method": "Read duckdb_ast_store.py module contract and verify_identity, which requires projected schema identifier, ast_cid, and source_cid to match the shared ASTRecord.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "receipt is well-formed JSON under the sealed interpreter",
+        "status": "passed",
+        "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-004.json",
+        "evidence_kind": "measured"
+      }
+    ],
+    "negative_tests": [
+      {
+        "name": "predecessor G100 outer commits are not current-head forest identity",
+        "status": "passed",
+        "method": "Compared current outer commit 7c641864b2f224cd1cee906bce8eed7bee3d8360 and tree 0916011ee986293a03a796068fe65f314edda1fd against predecessor receipt bindings 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d/cd81f5731ee64c29161830c9933d6739e0dd3eb3 and 1f7d0a9c10abbdefb1255e812df173a8e40f4d85/dfe61991e7df582f631c67895ec136ffe73fe814; outer identities differed and were rejected as current-head forest identity while nested gitlinks remained equal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "local alias is not canonical identity",
+        "status": "passed",
+        "method": "The plan states a local alias is never canonical identity. Scheduler authority_policy names ipfs_datasets_py as canonical_semantic_authority. implementation_daemon states display task IDs are board-local aliases and must not bind vector context without a strong identity field. No nested-repository ProofCarryingSemanticProjection or ProjectionAliasDictionary identifier exists to contradict this.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "ContextPacker production-authority claim rejected",
+        "status": "passed",
+        "method": "ContextPacker.V01_PRODUCTION_AUTHORITY is False in current source. A claim that the accelerator packer is production identity would contradict DatasetsContextPackAuthority@0.1 and test_legacy_packer_is_compatibility_only.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "DuckLake authority claim rejected",
+        "status": "passed",
+        "method": "scheduler authority_policy.ducklake_projection_authority is false and ducklake_projection_program.authority/may_grant_authority are false. A claim that DuckLake is transactional or completion authority was rejected.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "M2 or M3 mutation-authority claim rejected",
+        "status": "passed",
+        "method": "scheduler authority_policy.m2_or_m3_mutation_authority is false and m3_status is experimental_advisory_only. Only M1 LOSSLESS_STRUCTURAL is recorded as mutation-capable.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged nested tree identity rejection",
+        "status": "passed",
+        "method": "A same-length all-zero tree value was compared to the measured ipfs_kit tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged scheduler SHA-256 rejection",
+        "status": "passed",
+        "method": "A same-length all-zero digest was compared to the measured scheduler SHA-256 f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446 and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "datasets origin/main tree is not admitted planning-tree identity",
+        "status": "passed",
+        "method": "Configured datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b differs from admitted planning tree a8d4daf349506857d370171ae099426f057e56c0 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "excluded gitlinks are not admitted PCSM source roots",
+        "status": "passed",
+        "method": "Superproject gitlinks swissknife, hallucinate_app, external/meta-wearables-dat-android, and external/meta-wearables-dat-ios were observed and classified admitted=false. They are not part of this boundary forest.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "ProofCarryingSemanticProjection, ProjectionAliasDictionary, CanonicalCodeIR, SemanticIRPatchPlan, and SourceLinkReceipt identifier absence",
+        "status": "passed",
+        "method": "Searched *.py, *.json, and *.md under Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit; ProofCarryingSemanticProjection, ProjectionAliasDictionary, CanonicalCodeIR, SemanticIRPatchPlan, SourceLinkReceipt, and CanonicalVersusProjection matched zero nested-repository files.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "provider-local formal tools are not accepted as sealed-environment evidence",
+        "status": "passed",
+        "method": "The authoritative PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin excluded z3, lean, lake, ipfs, pytest, and unqualified python; each executable was recorded unavailable rather than usable.",
+        "evidence_kind": "measured"
+      }
+    ],
+    "proof_results": {
+      "status": "not_selected",
+      "reason": "This receipt-only boundary definition made no source mutation and no PCSM proof obligation was emitted. Absent optional provers remain unavailable rather than a passing proof result.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "git_version": "git version 2.43.0",
+    "toolchain_directories_writable": false,
+    "evidence_kind": "measured",
+    "optional_capabilities": [
+      {
+        "capability": "pytest CLI",
+        "status": "unavailable",
+        "reason": "pytest was absent from the sealed validation PATH. Adjacent-system tests were inventoried from source and not executed. A provider-local pytest executable was intentionally excluded.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "IPFS CLI / receipt CID issuance",
+        "status": "unavailable",
+        "reason": "ipfs was absent from the sealed validation PATH. A SHA-256 string is not substituted for a CID.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Z3 prover",
+        "status": "unavailable",
+        "reason": "z3 was absent from the sealed validation PATH; a provider-local z3 executable was intentionally excluded.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Lean and Lake",
+        "status": "unavailable",
+        "reason": "lean and lake were absent from the sealed validation PATH; provider-local Elan tools were intentionally excluded.",
+        "evidence_kind": "unavailable"
+      }
+    ]
+  },
+  "evidence_classification": {
+    "measured": [
+      "Outer HEAD 7c641864b2f224cd1cee906bce8eed7bee3d8360 and tree 0916011ee986293a03a796068fe65f314edda1fd.",
+      "Four admitted gitlinks, nested trees, clean nested worktrees, origin/main ancestor checks, and scheduler planning-revision/tree equality.",
+      "Four excluded gitlinks observed and classified not admitted.",
+      "Every listed SHA-256 and git blob identity, including the current scheduler-config digest f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446.",
+      "Scheduler authority_policy, operational_control_plane, and source_binding_policy objects that already encode the canonical-versus-projection split.",
+      "DatasetsContextPackAuthority@0.1 versus ContextPacker.V01_PRODUCTION_AUTHORITY=False.",
+      "DuckDBASTStore@1 verify_identity fail-closed on projected CID drift.",
+      "ProofCarryingArtifact@1 versus kit CIDv1 byte verification.",
+      "Identifier absence of ProofCarryingSemanticProjection, ProjectionAliasDictionary, CanonicalCodeIR, SemanticIRPatchPlan, SourceLinkReceipt, and CanonicalVersusProjection across the four nested roots.",
+      "Predecessor G100 outer-commit staleness versus unchanged nested gitlinks and re-hashed authority-source bytes.",
+      "Datasets origin/main tree mismatch versus admitted planning tree, with origin/main still an ancestor.",
+      "Sealed PATH, Python 3.12.3, git 2.43.0, non-writable toolchain directories, and json.tool parse of this receipt.",
+      "Existing positive and negative test source declarations were directly inspected.",
+      "Dispatch policy_id, policy_revision, repository_id, canonical task CID, and objective revision CID from the current implementation packet."
+    ],
+    "estimated": [],
+    "simulated": [],
+    "unavailable": [
+      "ProofCarryingSemanticProjection@1, ProjectionAliasDictionary@1, CanonicalCodeIR@1, SemanticIRPatchPlan@1, and SourceLinkReceipt@1 are absent at this current head.",
+      "No emitted PCSM current-tree source-map artifact or source-map CID.",
+      "Existing upstream/nested pytest suites were inventoried but not executed because pytest is absent from the sealed PATH.",
+      "No external prover execution is claimed or required for a read-only boundary definition.",
+      "No immutable receipt CID could be issued because ipfs was absent from the sealed PATH.",
+      "No executed provider/model/tokenizer revision; configuration is not execution evidence."
+    ]
+  },
+  "evidence_summary": {
+    "measured": {
+      "count": 14,
+      "description": "Current-head forest identities, source digests, existing canonical-versus-projection splits, identifier absences, sealed-environment facts, and receipt-level positive/negative checks."
+    },
+    "estimated": {
+      "count": 0,
+      "description": "No estimates were used."
+    },
+    "simulated": {
+      "count": 0,
+      "description": "No simulations were used."
+    },
+    "unavailable": {
+      "count": 6,
+      "description": "PCSM projection/alias/code-IR/linker records, source-map artifact, pytest execution, optional provers, receipt CID issuance, and provider/tokenizer execution identity."
+    }
+  },
+  "limitations": [
+    "This artifact is a receipt-bound authority-boundary definition, not a semantic proof, promotion decision, source-link receipt, alias dictionary, or projection builder.",
+    "All source digests bind the exact tree above; freshness must be rechecked before any follow-on reuse.",
+    "The receipt intentionally records no estimated or simulated result.",
+    "The uncommitted receipt itself is not claimed as part of the pre-write sealed outer tree.",
+    "Independent supervisor admission remains required; worker completion is insufficient.",
+    "Declared output is the receipt only; no architecture/ tree was written because that path is outside this task's admitted edit set.",
+    "CanonicalVersusProjectionAuthorityBoundary@1 is named here as a composition of existing owners. It is not a new competing repository authority."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this receipt and invalidate consumers of this boundary; do not alter the inventoried source forest, protected policy documents, or unrelated source bytes, and do not reuse the receipt after its tree binding becomes stale."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "deterministic_identity_checks": true,
+    "schema_version_bound": true,
+    "contract_blob_bound": true,
+    "cid_bound_where_available": false,
+    "cid_unavailability_explicit": true,
+    "positive_and_negative_tests_recorded": true,
+    "evidence_classes_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "canonical_versus_projection_boundary_defined": true,
+    "local_alias_is_not_canonical_identity": true,
+    "promotion_status": "non_promoted_unmeasured"
+  }
+}
