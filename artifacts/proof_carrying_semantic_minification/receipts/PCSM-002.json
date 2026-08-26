@@ -9,18 +9,22 @@
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v2",
-  "observed_at": "2026-08-25T23:21:00Z",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v3",
+  "observed_at": "2026-08-26T10:52:00Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
-    "assurance_scope": "PCSM Python v1 inventory only",
+    "assurance_scope": "PCSM Python v1 inventory of existing code IRs, symbol indexes, AST tools, and patch systems only",
     "mutation": "receipt_only",
+    "source_mutation": false,
+    "mutations_to_product_source": false,
     "changed_paths": [
       "artifacts/proof_carrying_semantic_minification/receipts/PCSM-002.json"
     ],
-    "source_mutation": false,
-    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-002.json"
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-002.json",
+    "predicted_inventory_directory_not_written": "artifacts/proof_carrying_semantic_minification/inventory/code_ir/",
+    "predicted_inventory_directory_reason": "This task's admitted declared output is the receipt only. The inventory is recorded here; no competing inventory tree was created.",
+    "implementation_delta": "receipt_reseal_only; reuse existing datasets AST IR, Python frontend, semantic index, resolver, producer-bound source, accelerator derived AST/vector/program graphs, MCP++ patch-proposal wire schema, and accelerator proposal/CodeEdit admission; no new authority, compiler, linker, contract, or language scope"
   },
   "evidence_legend": {
     "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
@@ -31,74 +35,185 @@
   "current_tree_binding": {
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "outer_commit": "e4cc38e05042a13ace6f9331242969a54d789d42",
-    "outer_tree": "b7d1e6db6cc3af89272f38566ac02ee453ed1b7c",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "1f7d0a9c10abbdefb1255e812df173a8e40f4d85",
+    "outer_tree": "dfe61991e7df582f631c67895ec136ffe73fe814",
+    "outer_subject": "Merge commit 'e42976507d846fe7c491f0ba02f6df39fbbb20b1' into agent/proof-carrying-semantic-minification-v1",
     "git_object_format": "sha1",
+    "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "origin_main_is_ancestor": true,
+    "accelerator_planning_revision": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "accelerator_planning_tree": "b1dd163fe6ad7ab52cb3639d05fcbc0fbe64ff84",
+    "accelerator_planning_revision_equals_origin_main": true,
+    "accelerator_planning_tree_equals_origin_main_tree": true,
+    "accelerator_planning_revision_is_ancestor_of_head": true,
+    "commits_after_origin_main": 30,
     "clean_before_receipt_write": true,
     "evidence_kind": "measured",
     "gitlinks": {
       "Mcp-Plus-Plus": {
-        "commit": "838261c04a4b6f2643d75017e0b472876597c673",
-        "tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253",
-        "superproject_gitlink": "838261c04a4b6f2643d75017e0b472876597c673",
-        "configured_origin_main": "838261c04a4b6f2643d75017e0b472876597c673",
+        "repository": "endomorphosis/Mcp-Plus-Plus",
+        "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+        "authority_role": "wire_contract_only",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "superproject_gitlink": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main": "31096be86103f29faef80a01e03d09b1ad7345c6",
         "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "scheduler_planning_tree": "61776431577f0c276546f25e4178a47a64007180",
         "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
         "clean_at_observation": true,
         "evidence_kind": "measured"
       },
       "external/ipfs_accelerate": {
-        "commit": "5af405cc87abf684b32d920afd5346411581876a",
-        "tree": "e8bdd2bdcc5f990c5369a21d36b9a108308eda32",
-        "superproject_gitlink": "5af405cc87abf684b32d920afd5346411581876a",
-        "configured_origin_main": "7df9491c9182b685d32b04cd4bdb5890056084b4",
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+        "authority_role": "slice_route_model_budget_link_admission_and_validation",
+        "commit": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "tree": "7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
+        "superproject_gitlink": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "configured_origin_main": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
         "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "scheduler_planning_tree": "7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
         "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
         "clean_at_observation": true,
         "evidence_kind": "measured"
       },
       "external/ipfs_datasets": {
-        "commit": "719083b59637558d2338281a63435021e994a875",
-        "tree": "6ec131d1b71484e8244266f993b2b19edccee636",
-        "superproject_gitlink": "719083b59637558d2338281a63435021e994a875",
-        "configured_origin_main": "c30ccbec997868b061c4cadac38d30468c46ea2d",
+        "repository": "endomorphosis/ipfs_datasets_py",
+        "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+        "authority_role": "canonical_semantic_identity",
+        "commit": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "tree": "a8d4daf349506857d370171ae099426f057e56c0",
+        "superproject_gitlink": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "configured_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
         "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "7169c2a67929044a02350bc26d0a51c853a4981b",
+        "configured_origin_main_tree_equals_planning_tree": false,
+        "scheduler_planning_revision": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "scheduler_planning_tree": "a8d4daf349506857d370171ae099426f057e56c0",
         "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
         "clean_at_observation": true,
         "evidence_kind": "measured"
       },
       "external/ipfs_kit": {
+        "repository": "endomorphosis/ipfs_kit_py",
+        "origin": "https://github.com/endomorphosis/ipfs_kit_py",
+        "authority_role": "exact_bytes_cid_and_immutable_storage",
         "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
         "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
         "superproject_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
         "configured_origin_main": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
         "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "scheduler_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
         "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
         "clean_at_observation": true,
         "evidence_kind": "measured"
       }
     },
+    "excluded_gitlinks_not_admitted": [
+      {
+        "path": "external/meta-wearables-dat-android",
+        "superproject_gitlink": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/meta-wearables-dat-ios",
+        "superproject_gitlink": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "hallucinate_app",
+        "superproject_gitlink": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "swissknife",
+        "superproject_gitlink": "75931db15273786ecd579f1089ec5599b9ded352",
+        "admitted": false,
+        "evidence_kind": "measured"
+      }
+    ],
+    "freshness_rule": "Any changed outer commit/tree, admitted nested commit/tree/gitlink, dirty nested worktree, or scheduler source_binding planning identity invalidates this inventory and requires a fresh receipt. Planning revisions are not runtime completion evidence. Datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b is an ancestor identity, not the admitted planning tree.",
+    "freshness_evidence_kind": "measured",
     "freshness_check": {
       "kind": "measured",
-      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git status --porcelain=v1; git merge-base --is-ancestor <origin/main> HEAD",
+      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git status --porcelain=v1; git -C <gitlink> diff --quiet; git merge-base --is-ancestor <configured origin/main> HEAD; compare nested HEAD/tree to scheduler source_binding planning revision/tree",
       "result": "pass",
-      "meaning": "The outer tree was clean before this receipt was written. Each listed nested commit equals the superproject gitlink and the scheduler planning revision. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+      "meaning": "The outer tree and all four admitted nested worktrees were clean before this receipt was written. Each admitted nested commit equals the superproject gitlink and the scheduler planning revision; each nested tree equals the scheduler planning tree. Configured origin/main is an ancestor of each nested head. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+    },
+    "source_digest_continuity": {
+      "kind": "measured",
+      "result": "inventoried_code_ir_ast_index_and_patch_source_bytes_unchanged",
+      "prior_receipt_artifact_identity": "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v2",
+      "nested_gitlinks_changed": [
+        "Mcp-Plus-Plus",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets"
+      ],
+      "nested_gitlinks_unchanged": [
+        "external/ipfs_kit"
+      ],
+      "datasets_delta": "Commit/tree moved from 719083b59637558d2338281a63435021e994a875/6ec131d1b71484e8244266f993b2b19edccee636 to a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648/a8d4daf349506857d370171ae099426f057e56c0. 22 files changed, all under data/ir_learning successor-v1 corpora/evaluations/splits plus tests/unit/logic/ir_learning/source/test_successor_rights.py. No byte change under inventoried software_contracts or ir_core paths. Configured origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 is an ancestor and has a different tree 7169c2a67929044a02350bc26d0a51c853a4981b; that origin/main tree is not substituted for the admitted planning tree.",
+      "accelerate_delta": "Commit/tree moved from 5af405cc87abf684b32d920afd5346411581876a/e8bdd2bdcc5f990c5369a21d36b9a108308eda32 to 19a44398735b15de6f6c8c09cc501691c3a95094/7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c. 184 files changed versus the v2 gitlink, concentrated in external-agent admission/validation and unrelated tests. No byte change under inventoried analysis AST/vector/architecture/program-graph, proof CodeEdit, core ASTBlobRecord, or handoff PatchEvent paths.",
+      "mcp_plus_plus_delta": "Commit/tree moved from 838261c04a4b6f2643d75017e0b472876597c673/8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253 to 31096be86103f29faef80a01e03d09b1ad7345c6/61776431577f0c276546f25e4178a47a64007180. Only tests/test_durable_executor.py and tests/test_state_ref.py changed. No byte change under inventoried schemas/proof-context/v0.1 or tests-py proof-context vectors/schemas.",
+      "kit_delta": "Unchanged at b6c65ba732733d7e33852713ba18aa3b12235668 / 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2.",
+      "scheduler_config_digest_changed": true,
+      "meaning": "Every listed v2 inventory and coverage source SHA-256 and git blob was re-hashed at this head and matched the v2 receipt. Additional current-head AST/patch surfaces were hashed and recorded as new inventory entries. Inventory findings were therefore reconfirmed against current-head bytes, not copied from a stale tree binding."
+    },
+    "pcsm_source_map": {
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID is present at this inventory task. Related syntax-core maps and accelerator AST spans are not substituted for a bound PCSM SourceLinkReceipt.",
+      "evidence_kind": "unavailable"
     },
     "stale_prior_receipt_rejected": {
       "kind": "measured",
-      "prior_outer_commit": "b0afc12a0a32b3659a0e05c358ca81df770a5d03",
-      "prior_outer_tree": "603423c687eccfd36fc3ac05812331880a232aa1",
-      "prior_accelerate_gitlink": "87ab6e9b0022e51e5da2ec7c9d10acd02ec84881",
+      "prior_artifact_identity": "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v2",
+      "prior_outer_commit": "e4cc38e05042a13ace6f9331242969a54d789d42",
+      "prior_outer_tree": "b7d1e6db6cc3af89272f38566ac02ee453ed1b7c",
+      "prior_accelerate_gitlink": "5af405cc87abf684b32d920afd5346411581876a",
+      "prior_datasets_gitlink": "719083b59637558d2338281a63435021e994a875",
+      "prior_mcp_plus_plus_gitlink": "838261c04a4b6f2643d75017e0b472876597c673",
+      "prior_scheduler_sha256": "1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93",
       "result": "rejected_as_stale",
-      "meaning": "The previously committed PCSM-002 receipt bound a different outer commit/tree and a different ipfs_accelerate gitlink, and omitted the datasets-owned AST IR / semantic-index authorities. Current-head inventory required a fresh receipt."
+      "meaning": "The previously committed PCSM-002 receipt bound a different outer commit/tree, different ipfs_accelerate, ipfs_datasets, and Mcp-Plus-Plus gitlinks, and a different scheduler-config digest. Current-head inventory required a fresh receipt."
     }
   },
   "policy_bindings": {
     "scheduler_config": {
       "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
       "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
-      "sha256": "1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93",
-      "git_blob": "4c19b2a6b1911deb00f52d4d142422a31a8c0bce",
+      "sha256": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
+      "git_blob": "04d7f3becf40c4702e0aeab18f1443ed610259cf",
+      "accepted_plan_revision_alias": "PCSM-PLAN-V1",
+      "source_binding_policy": {
+        "require_initialized_gitlinks": true,
+        "require_superproject_gitlink_equals_nested_head": true,
+        "require_clean_nested_worktree_at_task_start": true,
+        "require_origin_main_as_ancestor": true,
+        "changed_revision_requires_fresh_inventory_and_baseline": true,
+        "planning_revision_is_runtime_completion_evidence": false,
+        "record_recursive_repository_forest_at_launch": true
+      },
+      "authority_policy": {
+        "canonical_semantic_authority": "ipfs_datasets_py",
+        "exact_bytes_storage_authority": "ipfs_kit_py",
+        "orchestration_admission_authority": "ipfs_accelerate_py",
+        "m2_or_m3_mutation_authority": false,
+        "m3_status": "experimental_advisory_only",
+        "model_or_advisor_output_is_completion_authority": false,
+        "ducklake_projection_authority": false
+      },
       "evidence_kind": "measured"
     },
     "plan": {
@@ -111,12 +226,21 @@
       "path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
       "sha256": "712c844b2a40856a677f5d7258d6bfdcb1f3ec08410e026922c93c4f6951121b",
       "git_blob": "9f97656be213dc0f898701a04c851376b5eb6f16",
+      "dispatch_objective_revision_cid": "baguqeera4niuxrvjsovnuhqwkz4se2qwztb4m77hiwsxj2rxc4yt543fakya",
+      "dispatch_objective_revision_cid_source": "current implementation dispatch packet; not a git blob and not substituted for the file SHA-256",
       "evidence_kind": "measured"
     },
     "task_specification": {
       "path": "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
       "sha256": "63e745843899d95ac59e7080a2b744c87e7ac929871125d1b6efc8e392e4bfbe",
       "git_blob": "a34f3b5773fc0a48b9665bc76e75f9e0a44fa682",
+      "evidence_kind": "measured"
+    },
+    "implementation_policy": {
+      "policy_id": "policy:implementation-daemon",
+      "policy_revision": "sha256:a147c11a35b06c36e1b6de648d17180b876b74ad050e246b2dc7fdf887f1eaef",
+      "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+      "source": "current implementation dispatch packet",
       "evidence_kind": "measured"
     }
   },
@@ -125,15 +249,21 @@
     "exact_bytes_cid_and_immutable_storage": "ipfs_kit_py",
     "slice_route_model_budget_link_admission_and_validation": "ipfs_accelerate_py",
     "wire_contract_only": "Mcp-Plus-Plus",
+    "portal_mutation_namespace": "Owning repository ipfs_accelerate_py is the Portal filesystem/Git mutation namespace for the outer receipt. This common mutation namespace does not transfer canonical semantic, exact-byte storage, or patch-admission authority.",
+    "authority_isolation": "A local projection alias is not canonical identity; this receipt transfers no semantic, storage, or admission authority.",
     "confirmed": true,
     "evidence_kind": "measured",
     "negative_assertions": [
       "No local alias, vector hit, model output, M2 result, or M3 result is canonical identity or mutation authority.",
-      "Accelerator ASTBlobRecord, AnalysisASTIndex, DuckDBASTIndex, ArchitectureIR, and program-graph records are derived evidence, not datasets-owned CanonicalCodeIR.",
+      "Accelerator ASTBlobRecord, AnalysisASTIndex, DuckDBASTIndex, ArchitectureIR, program-graph, program-ast adapters, and program-dependency-graph records are derived evidence, not datasets-owned CanonicalCodeIR.",
       "The datasets python_frontend ASTBlobRecord name is a compatibility alias of ASTRecord and is not the accelerator ASTBlobRecord schema.",
+      "The datasets TypeScript frontend and crypto-exchange PythonASTExtractor are not the Python v1 AST tool.",
       "MCP++ PatchProposal is a wire schema only and cannot apply, admit, or prove a patch.",
       "CodeEditPacket, CodeEditMaterialize, MutationLedger, and handoff PatchEvent are not a CanonicalCodeIR-to-exact-source linker.",
       "ipfs_kit_py stores exact IR/source bytes and does not own a code IR schema.",
+      "Excluded gitlinks (swissknife, hallucinate_app, meta-wearables-dat-android, meta-wearables-dat-ios) are not admitted PCSM source roots.",
+      "Scheduler planning revisions are not runtime completion evidence.",
+      "Datasets configured origin/main tree is not the admitted planning-tree identity.",
       "This receipt creates no code IR, symbol index, parser, source linker, patch executor, or competing authority."
     ]
   },
@@ -327,6 +457,25 @@
       "reuse_decision": "Reuse as the exact-byte admission surface for later M1 linking. It is not SourceLinkReceipt@1."
     },
     {
+      "system": "Datasets TypeScript AST frontend",
+      "disposition": "do_not_select_as_python_v1_frontend",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "TypeScriptFrontend",
+        "TypeScriptASTWorker"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/typescript_frontend.py",
+          "sha256": "526ef6177773cb3f84064362df2e0afec9f5607a2c2e6601c23a457517ff2709",
+          "git_blob": "1818c19f03e0be3850a7d55b684a8fb89a90e955",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "Emits lexical facts into the same ASTRecord contract through a pinned Node TypeScript compiler-API worker. Compiler absence, version mismatch, and protocol failure become unsupported AST evidence. Other languages are out of PCSM Python v1 scope.",
+      "reuse_decision": "Do not select as the Python v1 AST tool. Keep as an adjacent same-IR frontend for later language work only."
+    },
+    {
       "system": "Accelerator path-independent AST blob record and query index",
       "disposition": "reuse_as_accelerator_derived_analysis_input_only",
       "authority": "ipfs_accelerate_py",
@@ -425,6 +574,39 @@
       "reuse_decision": "Consume for accelerator planning/evidence graphs only."
     },
     {
+      "system": "Accelerator program-AST adapters and dependency graph",
+      "disposition": "reuse_as_accelerator_derived_analysis_input_only",
+      "authority": "ipfs_accelerate_py",
+      "interfaces": [
+        "ipfs_accelerate_py/agent-supervisor/program-ast-adapter-result@1",
+        "vfs/incremental-ast-index@1",
+        "vfs/language-edge-resolution@1",
+        "ipfs_accelerate_py/agent-supervisor/program-dependency-graph@1"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/program_ast_adapters.py",
+          "sha256": "a4928012c95688152e42e858913e4b8a211f38224bb0bf3c9b5304e011c9f516",
+          "git_blob": "2b6c442472e2d0dd8617d60cb405be77387cf057",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/program_dependency_graph.py",
+          "sha256": "3c0cd213d62f860dcd209c5a96863b8d8e50c09feee29ae803c3dbd1edfcf529",
+          "git_blob": "b2f722eb3cdd94ddb3a1b7a0fd36f67421fc1005",
+          "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/program_call_resolver.py",
+          "sha256": "18fef3019a7881b5b7dcedfeaaf7902b2cb84d522c0a5f65bdda903a02ed7e5c",
+          "git_blob": "978de0841f78c436a70744844cf9f575aa2d5f47",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "Adapters project Python/JS/TS/JSON/Markdown onto accelerator ASTBlobRecord plus observational sidecars. Ambiguous imports, monkey patches, and dynamic calls stay explicit and never mint resolved call edges. The dependency graph is a snapshot-bound typed ProgramGraph with derived_evidence authority. This is not datasets ASTRecord and not a Python CanonicalCodeIR CFG/data-flow compiler.",
+      "reuse_decision": "Consume as derived analysis only. Do not select as the Python v1 AST tool or CFG authority."
+    },
+    {
       "system": "Accelerator polyglot AST provider",
       "disposition": "do_not_select_as_python_v1_frontend",
       "authority": "ipfs_accelerate_py",
@@ -443,6 +625,25 @@
       "reuse_decision": "Do not select as the Python v1 AST tool."
     },
     {
+      "system": "Accelerator datasets program-analysis capability probe",
+      "disposition": "record_and_do_not_promote",
+      "authority": "ipfs_accelerate_py probes; ipfs_datasets_py remains semantic owner",
+      "interfaces": [
+        "ipfs_accelerate_py/agent-supervisor/ipfs-datasets-program-analysis-capability@1",
+        "ipfs_datasets_py.program_analysis"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_program_analysis_provider.py",
+          "sha256": "abaff4feca8d1bde3b7659b1da3ce4e64c70b742e08284a3b551f3ff23c2cff5",
+          "git_blob": "05f5c4c9d6c79a00a3b41bfabbecc3ab8e4a7c91",
+          "evidence_kind": "measured"
+        }
+      ],
+      "finding": "Closed capability matrix for optional datasets surfaces (CID helpers, GraphRAG, ir_core, solvers, AST producers, ZKP). Package presence is never treated as a capability proof. Current-environment observations, including a limited crypto-exchange AST extractor, are probe diagnostics and not CanonicalCodeIR.",
+      "reuse_decision": "Do not treat probe diagnostics as sealed-environment prover or AST-tool availability. Do not promote to CanonicalCodeIR."
+    },
+    {
       "system": "Accelerator mutation ledger",
       "disposition": "reuse_as_after_the_fact_mutation_evidence_only",
       "authority": "ipfs_accelerate_py",
@@ -459,7 +660,7 @@
           "evidence_kind": "measured"
         }
       ],
-      "finding": "Records admitted byte changes as content-addressed before/after evidence with AST edit lineage. Stale fences and incomplete lineage fail closed. This is a ledger of already-admitted mutations, not a typed IR patch parser or deterministic source linker.",
+      "finding": "Records admitted byte changes as content-addressed before/after evidence with AST edit lineage. Stale fences and incomplete lineage fail closed. Declared authority class is derived_evidence. This is a ledger of already-admitted mutations, not a typed IR patch parser or deterministic source linker.",
       "reuse_decision": "Reuse only as post-admission evidence."
     },
     {
@@ -537,9 +738,15 @@
           "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d",
           "git_blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
           "evidence_kind": "measured"
+        },
+        {
+          "path": "external/ipfs_datasets/ipfs_datasets_py/logic/security_models/crypto_exchange/extractors/python_ast_extractor.py",
+          "sha256": "deeb9d7f630ddfa149fd4795d6b968e1b77218316cadf8eacf0f675dccaf817f",
+          "git_blob": "cb7ae5ddc5da5a65e8686af6c1a2952f2f71b99b",
+          "evidence_kind": "measured"
         }
       ],
-      "finding": "Software-contract IR models callable/effect/exception contracts, not Python AST. Source-lineage records corpus/release provenance, not M1 node/span maps. SemanticCapsuleCompiler@1 compiles capsules from the semantic index and is not CanonicalCodeIR. Kit has no code IR. TypeScript frontend exists and is out of Python v1 scope. No Python CFG or data-flow CanonicalCodeIR was found.",
+      "finding": "Software-contract IR models callable/effect/exception contracts, not Python AST. Source-lineage records corpus/release provenance, not M1 node/span maps. SemanticCapsuleCompiler@1 compiles capsules from the semantic index and is not CanonicalCodeIR. The crypto-exchange PythonASTExtractor emits SecurityModelIR seed facts and is not the software-contracts PythonASTExtractor. Kit has no code IR. No Python CFG or data-flow CanonicalCodeIR was found. libcst, tree-sitter, bowler, and redbaron are not the selected Python v1 frontend.",
       "reuse_decision": "Do not promote these to CanonicalCodeIR, CFG, or source-link authority."
     }
   ],
@@ -657,6 +864,17 @@
         "execution": "unavailable_pytest_absent_from_sealed_path"
       },
       {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_typescript_frontend.py",
+        "sha256": "c61ea228b090c9399432ae18c20aa429f7687c2f3cc63a3b4e6847590cb361d8",
+        "git_blob": "b9cb253e2088ed4e355ec95c186f6a263ba7afc4",
+        "coverage": [
+          "TypeScript frontend emits ASTRecord into the shared contract",
+          "compiler absence, version mismatch, and protocol failure remain unsupported evidence"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
         "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_analysis_ast_index.py",
         "sha256": "1f42f5d270f85b1ab6fd808c429f67248d27ec8888c0495bb57e8a1240e8c47d",
         "git_blob": "745c79a0324e30b16ee064addda02397e970dfa9",
@@ -723,6 +941,28 @@
         "execution": "unavailable_pytest_absent_from_sealed_path"
       },
       {
+        "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_mutation_ledger.py",
+        "sha256": "7fa6848c3ef2c55e588d3e1354a34bbc009e3dc7308c906614f46cc9b3c2dc3c",
+        "git_blob": "38bdb450e60cf5e1ee8f725bc7515f439400de04",
+        "coverage": [
+          "admitted byte changes require AST edit lineage",
+          "stale fences and incomplete lineage reject or quarantine"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_program_ast_adapters.py",
+        "sha256": "69be0be82055237545e46048cc0a49f46d4487597fdf28b5e3f83bb787df9c3a",
+        "git_blob": "f4240198eee664653d5a21cbf329ce4b35c60242",
+        "coverage": [
+          "Python adapter facts remain observational sidecars on ASTBlobRecord",
+          "ambiguous/dynamic constructs do not mint resolved call edges"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_absent_from_sealed_path"
+      },
+      {
         "path": "Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py",
         "sha256": "5fd9059d28faba9e6d58e0f6351c6d69c668140e38baf8e5c32e177c96d14328",
         "git_blob": "401ab569c290c9662537fd72776f6e84b756db11",
@@ -766,13 +1006,19 @@
         "status": "passed",
         "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-002.json",
         "evidence_kind": "measured"
+      },
+      {
+        "name": "v2 inventoried source digests match current-head bytes",
+        "status": "passed",
+        "method": "Re-hashed every v2 inventory and coverage source at this head; SHA-256 and git blob identities matched. Additional current-head AST/patch surfaces were hashed as new entries.",
+        "evidence_kind": "measured"
       }
     ],
     "negative_tests": [
       {
-        "name": "stale prior PCSM-002 outer commit and accelerate gitlink rejection",
+        "name": "stale prior PCSM-002 outer commit, gitlinks, and scheduler digest rejection",
         "status": "passed",
-        "method": "Compared current outer commit e4cc38e05042a13ace6f9331242969a54d789d42 and accelerate gitlink 5af405cc87abf684b32d920afd5346411581876a against the previously committed receipt bindings b0afc12a0a32b3659a0e05c358ca81df770a5d03 and 87ab6e9b0022e51e5da2ec7c9d10acd02ec84881; both differed and were rejected as stale.",
+        "method": "Compared current outer commit 1f7d0a9c10abbdefb1255e812df173a8e40f4d85, accelerate gitlink 19a44398735b15de6f6c8c09cc501691c3a95094, datasets gitlink a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648, Mcp-Plus-Plus gitlink 31096be86103f29faef80a01e03d09b1ad7345c6, and scheduler SHA-256 f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446 against the previously committed receipt bindings e4cc38e05042a13ace6f9331242969a54d789d42, 5af405cc87abf684b32d920afd5346411581876a, 719083b59637558d2338281a63435021e994a875, 838261c04a4b6f2643d75017e0b472876597c673, and 1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93; all differed and were rejected as stale.",
         "evidence_kind": "measured"
       },
       {
@@ -790,7 +1036,13 @@
       {
         "name": "CanonicalCodeIR identifier absence",
         "status": "passed",
-        "method": "Searched *.py and *.json under Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit; CanonicalCodeIR matched zero files.",
+        "method": "Searched *.py, *.json, and *.md under Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit; CanonicalCodeIR matched zero nested-repository files.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "TypeScript frontend and crypto-exchange extractor are not the Python v1 AST tool",
+        "status": "passed",
+        "method": "typescript_frontend.py and crypto_exchange/extractors/python_ast_extractor.py exist at current-head and were recorded as non-selected; Python v1 selection remains datasets PythonASTExtractor / cpython-ast@1.2.1.",
         "evidence_kind": "measured"
       },
       {
@@ -811,6 +1063,7 @@
     "python": "/usr/bin/python3.12",
     "python_version": "Python 3.12.3",
     "git_path": "/usr/bin/git",
+    "git_version": "git version 2.43.0",
     "evidence_kind": "measured",
     "optional_capabilities": [
       {
@@ -841,13 +1094,13 @@
   },
   "evidence_classification": {
     "measured": [
-      "Outer HEAD e4cc38e05042a13ace6f9331242969a54d789d42 and tree b7d1e6db6cc3af89272f38566ac02ee453ed1b7c.",
+      "Outer HEAD 1f7d0a9c10abbdefb1255e812df173a8e40f4d85 and tree dfe61991e7df582f631c67895ec136ffe73fe814.",
       "Four admitted gitlinks, nested trees, clean tracked-submodule check, origin/main ancestor checks, and scheduler planning-revision equality.",
-      "Every listed SHA-256 and git blob identity.",
+      "Every listed SHA-256 and git blob identity, including v2 continuity and newly inventoried current-head AST/patch surfaces.",
       "Authority, schema, and interface constants read from current sources.",
       "CanonicalCodeIR identifier absence across the four nested roots.",
       "Receipt-level positive and negative identity checks, including stale prior PCSM-002 rejection.",
-      "Sealed PATH, Python 3.12.3, and json.tool parse of this receipt.",
+      "Sealed PATH, Python 3.12.3, git 2.43.0, and json.tool parse of this receipt.",
       "Existing positive and negative test source declarations were directly inspected."
     ],
     "estimated": [],
@@ -882,14 +1135,29 @@
     "This artifact is an inventory receipt, not a semantic proof, promotion decision, canonical CodeIR, source-link receipt, or patch admission.",
     "All source digests and reuse decisions bind the exact tree above; freshness must be rechecked before a later task consumes an inventoried component.",
     "The receipt intentionally records no estimated or simulated result.",
+    "The uncommitted receipt itself is not claimed as part of the pre-write sealed outer tree.",
+    "Independent supervisor admission remains required; worker completion is insufficient.",
     "Declared output is the receipt only; no inventory/code_ir tree was written because that path is outside this task's admitted edit set."
   ],
   "rollback": {
     "destructive_effects": false,
-    "procedure": "Revert only this receipt; do not alter the inventoried source forest or reuse the receipt after its current-tree binding becomes stale."
+    "procedure": "Revert only this receipt and invalidate consumers of this inventory; do not alter the inventoried source forest, protected policy documents, or unrelated source bytes, and do not reuse the receipt after its tree binding becomes stale."
   },
   "supervisor_acceptance": {
     "state": "pending_independent_fenced_supervisor",
     "completion_authoritative": false
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "deterministic_identity_checks": true,
+    "schema_version_bound": true,
+    "contract_blob_bound": true,
+    "cid_bound_where_available": false,
+    "cid_unavailability_explicit": true,
+    "positive_and_negative_tests_recorded": true,
+    "evidence_classes_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_unmeasured"
   }
 }
