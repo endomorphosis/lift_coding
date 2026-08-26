@@ -252,6 +252,14 @@ def validate() -> dict[str, Any]:
     for field, expected in expected_paths.items():
         if config.get(field) != expected:
             errors.append(f"config {field} differs")
+    if config.get("max_task_attempts") != 2:
+        errors.append(
+            "max_task_attempts must retain one bounded retry after the initial attempt"
+        )
+    if config.get("implementation_retry_budget") != 1:
+        errors.append("implementation_retry_budget differs")
+    if config.get("validation_retry_budget") != 2:
+        errors.append("validation_retry_budget differs")
     submission = config.get("objective_submission") or {}
     if submission.get("campaign_count") != 1 or submission.get("submission_event") != "successful DuckDB materialization receipt":
         errors.append("objective submission must bind exactly one campaign to materialization")

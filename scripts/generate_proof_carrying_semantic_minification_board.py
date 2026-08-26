@@ -717,7 +717,10 @@ def render_config() -> dict[str, object]:
         "stale_seconds": 1800,
         "watchdog_startup_grace_seconds": 600,
         "max_restarts": 3,
-        "max_task_attempts": 1,
+        # One implementation attempt is insufficient for the bounded generic
+        # candidate-retry path: a terminal provider classification must retain
+        # one fresh, independently validated retry after a handoff repair.
+        "max_task_attempts": 2,
         "implementation_retry_budget": 1,
         "validation_retry_budget": 2,
         "merge_retry_budget": 2,

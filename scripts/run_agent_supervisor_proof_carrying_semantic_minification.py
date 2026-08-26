@@ -59,6 +59,9 @@ BOOTSTRAP_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-bootstrap@1"
 )
+DATABASE_TASK_SOURCE_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/database-task-source@1"
+)
 DUCKLAKE_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-ducklake-projection@1"
@@ -99,6 +102,132 @@ INTERNAL_CLIENT_GRANT_TTL_SECONDS: Final = 86_400.0
 EXECUTOR_BOOTSTRAP_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-executor-bootstrap@1"
+)
+OWNER_RESTART_ADMISSION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-owner-restart-admission@1"
+)
+OWNER_RESTART_RECEIPT_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-owner-restart-receipt@1"
+)
+OWNER_DATABASE_VERIFICATION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-owner-database-verification@1"
+)
+QUACK_STATE_SERVER_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/quack-state-server@1"
+)
+QUACK_STATE_SERVER_INTERFACE: Final = "QuackStateServer@1"
+STATE_SERVER_IDENTITY_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/state-server-identity@1"
+)
+STATE_SERVER_IDENTITY_INTERFACE: Final = "StateServerIdentity@1"
+HANDOFF_REPAIR_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-handoff-repair@1"
+)
+HANDOFF_REPAIR_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-repair.json"
+)
+HANDOFF_REPAIR_MAX_TASK_ATTEMPTS: Final = 2
+HANDOFF_REPAIR_TASK_CID: Final = (
+    "baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa"
+)
+HANDOFF_REPAIR_COMPLETION_RECEIPT_ID: Final = (
+    "sha256:e00019f28ba2031bf94076661378b1de877c843512c7a41071968a56001361a3"
+)
+HANDOFF_REPAIR_SOURCE_ATTEMPT: Final = {
+    "attempt_id": "attempt:53a9ee3f434e4551932f258aa9c903c6",
+    "claim_id": "claim:617b52197f564c58ade577daf8430602",
+    "lease_id": "lease:b562bfc2ae884a958362697b3c5c7185",
+    "owner_session_id": "pcsm-v1-executor:shard:0-of-4:track:ef26cb9db64a",
+    "attempt_number": 1,
+    "fencing_token": 1,
+    "fence_epoch": 1,
+    "task_revision": 4,
+}
+HANDOFF_REPAIR_REQUIRED_VALIDATIONS: Final = frozenset(
+    {
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "py_compile",
+                "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+                "scripts/generate_proof_carrying_semantic_minification_board.py",
+                "scripts/validate_proof_carrying_semantic_minification_board.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "scripts/generate_proof_carrying_semantic_minification_board.py",
+                "--check",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "scripts/validate_proof_carrying_semantic_minification_board.py",
+                "--check-all",
+            ),
+        ),
+        (
+            ".",
+            (
+                "env",
+                "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:"
+                "external/ipfs_kit:Mcp-Plus-Plus",
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "external/ipfs_datasets/tests/proof_context",
+            ),
+        ),
+        (
+            "external/ipfs_accelerate",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/api/test_agent_supervisor_database_portal_bridge.py",
+                "test/api/test_agent_supervisor_merge_train.py",
+                "test/api/test_agent_supervisor_task_attempt_limit.py",
+                "test/api/test_agent_supervisor_multi_supervisor_shutdown.py",
+            ),
+        ),
+    }
+)
+_RESTART_IMMUTABLE_SOURCE_NAMES: Final = frozenset(
+    {"objectives", "plan", "taskboard"}
+)
+_RESTART_REPAIR_SOURCE_NAMES: Final = frozenset(
+    {"config", "generator", "operator", "validator"}
+)
+_RESTART_ALLOWED_SOURCE_BINDING_FIELDS: Final = frozenset(
+    {
+        "ipfs_accelerate_origin_main_revision",
+        "ipfs_accelerate_planning_revision",
+        "ipfs_accelerate_planning_tree",
+        "ipfs_datasets_planning_revision",
+        "ipfs_datasets_planning_tree",
+    }
+)
+_RESTART_SOURCE_FOREST_REPOSITORIES: Final = frozenset(
+    {"ipfs_accelerate", "ipfs_datasets", "ipfs_kit", "mcp_plus_plus"}
+)
+_RESTART_SOURCE_FOREST_ENTRY_FIELDS: Final = frozenset(
+    {"repository", "path", "head", "tree", "access"}
 )
 
 
@@ -271,46 +400,751 @@ def _tracked_bytes(path: Path, *, head: str) -> bytes:
     return working
 
 
+def _git_commit_tree(
+    commit: Any,
+    *,
+    field: str,
+    repository: Path = ROOT,
+) -> str:
+    revision = str(commit or "").strip()
+    if re.fullmatch(r"[0-9a-f]{40}", revision) is None:
+        raise OperatorError(f"{field} must be an exact Git commit")
+    try:
+        object_type = subprocess.run(
+            ["git", "cat-file", "-t", revision],
+            cwd=repository,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        tree_result = subprocess.run(
+            ["git", "rev-parse", f"{revision}^{{tree}}"],
+            cwd=repository,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+    except OSError as exc:
+        raise OperatorError(f"{field} is unavailable") from exc
+    tree = tree_result.stdout.strip()
+    if (
+        object_type.returncode != 0
+        or object_type.stdout.strip() != "commit"
+        or tree_result.returncode != 0
+        or re.fullmatch(r"[0-9a-f]{40}", tree) is None
+    ):
+        raise OperatorError(f"{field} is not an available Git commit")
+    return tree
+
+
+def _git_is_ancestor(
+    ancestor: Any,
+    descendant: Any,
+    *,
+    field: str,
+    repository: Path = ROOT,
+) -> None:
+    older = str(ancestor or "").strip()
+    newer = str(descendant or "").strip()
+    if not older or not newer:
+        raise OperatorError(f"{field} has an empty revision")
+    completed = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", older, newer],
+        cwd=repository,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode == 0:
+        return
+    if completed.returncode == 1:
+        raise OperatorError(f"{field} is not monotonic")
+    raise OperatorError(f"cannot verify {field}")
+
+
+def _git_blob_at(*, head: str, path: Path, field: str) -> bytes:
+    try:
+        relative = path.relative_to(ROOT).as_posix()
+    except ValueError as exc:
+        raise OperatorError(f"{field} escapes repository") from exc
+    try:
+        value = _git("show", f"{head}:{relative}", binary=True)
+    except OperatorError as exc:
+        raise OperatorError(f"{field} is absent from the sealed source") from exc
+    if not isinstance(value, bytes):
+        raise OperatorError(f"{field} could not be read as bytes")
+    return value
+
+
+def _json_mapping_bytes(value: bytes, *, field: str) -> dict[str, Any]:
+    try:
+        decoded = json.loads(value.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise OperatorError(f"{field} must be a JSON object") from exc
+    if not isinstance(decoded, dict):
+        raise OperatorError(f"{field} must be a JSON object")
+    return decoded
+
+
+def _exact_int(value: Any, *, field: str, minimum: int = 0) -> int:
+    if type(value) is not int or value < minimum:
+        raise OperatorError(f"{field} must be an integer >= {minimum}")
+    return value
+
+
+def _restart_source_paths(board: Any) -> dict[str, Path]:
+    return {
+        "config": board.config_path,
+        "taskboard": board.path(board.taskboard_path),
+        "objectives": board.path(board.objectives_path),
+        "plan": board.path(board.plan_path),
+        "validator": board.path(board.validator_path),
+        "generator": (
+            ROOT / "scripts/generate_proof_carrying_semantic_minification_board.py"
+        ),
+        "operator": Path(__file__).resolve(),
+    }
+
+
+def _restart_static_config(config: Mapping[str, Any], *, label: str) -> dict[str, Any]:
+    try:
+        normalized = json.loads(_canonical_bytes(config))
+    except (TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise OperatorError(f"{label} config is not canonical JSON") from exc
+    if not isinstance(normalized, dict):
+        raise OperatorError(f"{label} config must be an object")
+    source_binding = normalized.get("source_binding")
+    if not isinstance(source_binding, dict):
+        raise OperatorError(f"{label} config has no source_binding object")
+    for field in _RESTART_ALLOWED_SOURCE_BINDING_FIELDS:
+        source_binding.pop(field, None)
+    normalized.pop("max_task_attempts", None)
+    return normalized
+
+
+def _verified_restart_forest_transition(
+    bootstrap_forest: Any,
+    current_forest: Mapping[str, Any],
+    *,
+    bootstrap_head: str,
+    current_head: str,
+) -> dict[str, Any]:
+    if not isinstance(bootstrap_forest, Mapping):
+        raise OperatorError("bootstrap source forest is absent")
+    bootstrap_body = dict(bootstrap_forest)
+    bootstrap_root = str(bootstrap_body.pop("source_forest_root", "") or "")
+    if (
+        set(bootstrap_body)
+        != {"source_head", "nested_repositories", "cross_repository_writes"}
+        or bootstrap_body.get("cross_repository_writes") is not True
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", bootstrap_root) is None
+        or _identity(bootstrap_body) != bootstrap_root
+        or bootstrap_body.get("source_head") != bootstrap_head
+    ):
+        raise OperatorError("bootstrap source forest identity is invalid")
+    current_body = dict(current_forest)
+    current_root = str(current_body.pop("source_forest_root", "") or "")
+    if (
+        set(current_body)
+        != {"source_head", "nested_repositories", "cross_repository_writes"}
+        or current_body.get("cross_repository_writes") is not True
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", current_root) is None
+        or _identity(current_body) != current_root
+        or current_body.get("source_head") != current_head
+    ):
+        raise OperatorError("current source forest identity is invalid")
+    prior_items = bootstrap_forest.get("nested_repositories")
+    current_items = current_forest.get("nested_repositories")
+    if not isinstance(prior_items, list) or not isinstance(current_items, list):
+        raise OperatorError("restart source forests have no nested repositories")
+    if any(
+        not isinstance(item, Mapping)
+        or set(item) != _RESTART_SOURCE_FOREST_ENTRY_FIELDS
+        for item in (*prior_items, *current_items)
+    ):
+        raise OperatorError("restart source forest entry is malformed")
+    prior = {str(item.get("repository") or ""): item for item in prior_items}
+    current = {str(item.get("repository") or ""): item for item in current_items}
+    if (
+        len(prior) != len(prior_items)
+        or len(current) != len(current_items)
+        or set(prior) != _RESTART_SOURCE_FOREST_REPOSITORIES
+        or set(current) != _RESTART_SOURCE_FOREST_REPOSITORIES
+    ):
+        raise OperatorError("restart source forest repository set changed")
+    transitions: list[dict[str, Any]] = []
+    for repository_name in sorted(prior):
+        older = prior[repository_name]
+        newer = current[repository_name]
+        if not isinstance(older, Mapping) or not isinstance(newer, Mapping):
+            raise OperatorError("restart source forest entry is malformed")
+        path = str(older.get("path") or "")
+        if (
+            path != str(newer.get("path") or "")
+            or older.get("access") != newer.get("access")
+        ):
+            raise OperatorError(
+                f"{repository_name} restart source authority changed"
+            )
+        nested = _safe_path(ROOT, path, field=f"{repository_name}.path")
+        old_head = str(older.get("head") or "")
+        new_head = str(newer.get("head") or "")
+        old_tree = _git_commit_tree(
+            old_head,
+            field=f"{repository_name}.bootstrap_head",
+            repository=nested,
+        )
+        new_tree = _git_commit_tree(
+            new_head,
+            field=f"{repository_name}.current_head",
+            repository=nested,
+        )
+        if (
+            old_tree != str(older.get("tree") or "")
+            or new_tree != str(newer.get("tree") or "")
+        ):
+            raise OperatorError(f"{repository_name} restart tree binding changed")
+        _git_is_ancestor(
+            old_head,
+            new_head,
+            field=f"{repository_name} bootstrap-to-current lineage",
+            repository=nested,
+        )
+        transitions.append(
+            {
+                "repository": repository_name,
+                "path": path,
+                "bootstrap_head": old_head,
+                "bootstrap_tree": old_tree,
+                "current_head": new_head,
+                "current_tree": new_tree,
+                "changed": old_head != new_head,
+            }
+        )
+    return {
+        "bootstrap_source_forest_root": bootstrap_root,
+        "current_source_forest_root": current_root,
+        "repositories": transitions,
+    }
+
+
+def _verified_handoff_repair(
+    *,
+    bootstrap_receipt_id: str,
+    plan_root_cid: str,
+    bootstrap_attempt_limit: int,
+    current_attempt_limit: int,
+    current_source_identities: Mapping[str, str],
+    forest_transition: Mapping[str, Any],
+    current_source_binding: Mapping[str, Any],
+    current_head: str,
+) -> dict[str, Any]:
+    payload = _json_mapping_bytes(
+        _tracked_bytes(HANDOFF_REPAIR_PATH, head=current_head),
+        field="PCSM handoff repair receipt",
+    )
+    expected_fields = {
+        "schema",
+        "reason",
+        "bootstrap_receipt_id",
+        "plan_root_cid",
+        "task_alias",
+        "task_cid",
+        "source_attempt",
+        "source_completion_receipt_id",
+        "max_task_attempts_before",
+        "max_task_attempts_after",
+        "current_authority_source_identities",
+        "accelerate_origin_main_merge",
+        "datasets_current_head_receipt",
+        "validations",
+        "historical_receipt_preserved",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    source_attempt = payload.get("source_attempt")
+    datasets_receipt = payload.get("datasets_current_head_receipt")
+    accelerate_merge = payload.get("accelerate_origin_main_merge")
+    validations = payload.get("validations")
+    listed_identities = payload.get("current_authority_source_identities")
+    if (
+        set(payload) != expected_fields
+        or payload.get("schema") != HANDOFF_REPAIR_SCHEMA
+        or payload.get("reason")
+        != "pcsm_010_current_head_validation_handoff_repair"
+        or payload.get("bootstrap_receipt_id") != bootstrap_receipt_id
+        or payload.get("plan_root_cid") != plan_root_cid
+        or payload.get("task_alias") != "PCSM-010"
+        or payload.get("task_cid") != HANDOFF_REPAIR_TASK_CID
+        or not isinstance(source_attempt, Mapping)
+        or dict(source_attempt) != HANDOFF_REPAIR_SOURCE_ATTEMPT
+        or any(
+            type(source_attempt.get(field)) is not int
+            for field in (
+                "attempt_number",
+                "fencing_token",
+                "fence_epoch",
+                "task_revision",
+            )
+        )
+        or payload.get("source_completion_receipt_id")
+        != HANDOFF_REPAIR_COMPLETION_RECEIPT_ID
+        or type(payload.get("max_task_attempts_before")) is not int
+        or type(payload.get("max_task_attempts_after")) is not int
+        or payload.get("max_task_attempts_before") != bootstrap_attempt_limit
+        or payload.get("max_task_attempts_after") != current_attempt_limit
+        or bootstrap_attempt_limit != 1
+        or current_attempt_limit != HANDOFF_REPAIR_MAX_TASK_ATTEMPTS
+        or not isinstance(listed_identities, Mapping)
+        or set(listed_identities) != _RESTART_REPAIR_SOURCE_NAMES
+        or dict(listed_identities)
+        != {
+            name: current_source_identities[name]
+            for name in sorted(_RESTART_REPAIR_SOURCE_NAMES)
+        }
+        or not isinstance(datasets_receipt, Mapping)
+        or not isinstance(accelerate_merge, Mapping)
+        or not isinstance(validations, list)
+        or not validations
+        or payload.get("historical_receipt_preserved") is not True
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError("PCSM handoff repair receipt is not admitted")
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    for index, validation in enumerate(validations):
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+            "measurement_status",
+        }:
+            raise OperatorError(f"PCSM handoff validation {index} is malformed")
+        command = validation.get("command")
+        cwd = validation.get("cwd")
+        if (
+            not isinstance(cwd, str)
+            or not cwd
+            or not isinstance(command, list)
+            or not command
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or validation.get("measurement_status") != "measured"
+            or not isinstance(validation.get("summary"), str)
+            or not validation.get("summary")
+        ):
+            raise OperatorError(f"PCSM handoff validation {index} is not passed")
+        observed_validations.add((cwd, tuple(command)))
+    if (
+        len(observed_validations) != len(validations)
+        or observed_validations != HANDOFF_REPAIR_REQUIRED_VALIDATIONS
+    ):
+        raise OperatorError("PCSM handoff validations are not the exact required set")
+
+    transition_items = forest_transition.get("repositories")
+    transition_fields = {
+        "repository",
+        "path",
+        "bootstrap_head",
+        "bootstrap_tree",
+        "current_head",
+        "current_tree",
+        "changed",
+    }
+    if (
+        not isinstance(transition_items, list)
+        or any(
+            not isinstance(item, Mapping) or set(item) != transition_fields
+            for item in transition_items
+        )
+    ):
+        raise OperatorError("PCSM handoff forest transition is malformed")
+    dataset_transition = next(
+        (
+            item
+            for item in transition_items
+            if item.get("repository") == "ipfs_datasets"
+        ),
+        None,
+    )
+    accelerator_transition = next(
+        (
+            item
+            for item in transition_items
+            if item.get("repository") == "ipfs_accelerate"
+        ),
+        None,
+    )
+    changed_repositories = {
+        str(item.get("repository") or "")
+        for item in transition_items
+        if item.get("changed") is True
+    }
+    if set(datasets_receipt) != {"path", "identity", "source_commit", "source_tree"}:
+        raise OperatorError("PCSM datasets handoff receipt binding is not exact")
+    receipt_path = str(datasets_receipt.get("path") or "")
+    receipt_identity = str(datasets_receipt.get("identity") or "")
+    if (
+        not isinstance(dataset_transition, Mapping)
+        or dataset_transition.get("changed") is not True
+        or changed_repositories != {"ipfs_accelerate", "ipfs_datasets"}
+        or receipt_path
+        != "artifacts/proof_carrying_semantic_minification/handoff/"
+        "datasets-proof-context-current-head.json"
+    ):
+        raise OperatorError("PCSM datasets handoff transition is not exact")
+    if (
+        not isinstance(accelerator_transition, Mapping)
+        or accelerator_transition.get("changed") is not True
+        or set(accelerate_merge)
+        != {
+            "bootstrap_commit",
+            "origin_main_commit",
+            "merged_commit",
+            "merged_tree",
+        }
+        or accelerate_merge.get("bootstrap_commit")
+        != accelerator_transition.get("bootstrap_head")
+        or accelerate_merge.get("merged_commit")
+        != accelerator_transition.get("current_head")
+        or accelerate_merge.get("merged_tree")
+        != accelerator_transition.get("current_tree")
+        or accelerate_merge.get("origin_main_commit")
+        != current_source_binding.get("ipfs_accelerate_origin_main_revision")
+    ):
+        raise OperatorError("PCSM accelerator origin/main transition is not exact")
+    accelerator_repository = _safe_path(
+        ROOT,
+        str(accelerator_transition.get("path") or ""),
+        field="accelerate_origin_main_merge.path",
+    )
+    _git_is_ancestor(
+        accelerate_merge.get("origin_main_commit"),
+        accelerate_merge.get("merged_commit"),
+        field="accelerator origin/main merge lineage",
+        repository=accelerator_repository,
+    )
+    merge_parents = subprocess.run(
+        [
+            "git",
+            "show",
+            "-s",
+            "--format=%P",
+            str(accelerate_merge.get("merged_commit") or ""),
+        ],
+        cwd=accelerator_repository,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if (
+        merge_parents.returncode != 0
+        or set(merge_parents.stdout.strip().split())
+        != {
+            str(accelerate_merge.get("bootstrap_commit") or ""),
+            str(accelerate_merge.get("origin_main_commit") or ""),
+        }
+    ):
+        raise OperatorError("PCSM accelerator transition is not the exact merge")
+    current_dataset_receipt = _safe_path(
+        ROOT,
+        receipt_path,
+        field="datasets_current_head_receipt.path",
+    )
+    receipt_bytes = _tracked_bytes(current_dataset_receipt, head=current_head)
+    receipt_body = _json_mapping_bytes(
+        receipt_bytes,
+        field="datasets current-head receipt",
+    )
+    receipt_source = receipt_body.get("source_binding")
+    historical_receipt = receipt_body.get("historical_receipt")
+    if (
+        _identity(receipt_bytes) != receipt_identity
+        or receipt_body.get("schema")
+        != "lift_coding.proof-carrying-semantic-minification."
+        "datasets-package-current-head@1"
+        or receipt_body.get("status") != "qualified_current_head"
+        or receipt_body.get("authority") != "composed_workspace_validation_only"
+        or datasets_receipt.get("source_commit")
+        != dataset_transition.get("current_head")
+        or datasets_receipt.get("source_tree")
+        != dataset_transition.get("current_tree")
+        or not isinstance(receipt_source, Mapping)
+        or receipt_source.get("repository") != "ipfs_datasets_py"
+        or receipt_source.get("commit")
+        != dataset_transition.get("current_head")
+        or receipt_source.get("tree")
+        != dataset_transition.get("current_tree")
+        or receipt_source.get("origin_main_is_ancestor") is not True
+        or receipt_source.get("origin_main_commit")
+        != current_source_binding.get("ipfs_datasets_origin_main_revision")
+        or not isinstance(historical_receipt, Mapping)
+        or historical_receipt.get("preserved_unchanged") is not True
+    ):
+        raise OperatorError("PCSM datasets current-head receipt changed identity")
+    return payload
+
+
+def _owner_restart_admission(
+    board: Any,
+    config: Mapping[str, Any],
+    paths: Mapping[str, Path],
+) -> dict[str, Any]:
+    """Admit the exact bootstrap or one receipt-bound descendant repair."""
+
+    current_head, current_tree = _assert_clean_current_tree(config)
+    bootstrap = _json_object(paths["bootstrap_receipt"])
+    if bootstrap.get("schema") != BOOTSTRAP_SCHEMA:
+        raise OperatorError("owner restart bootstrap schema is not admitted")
+    bootstrap_receipt_id = str(bootstrap.get("bootstrap_receipt_id") or "")
+    bootstrap_body = dict(bootstrap)
+    bootstrap_body.pop("bootstrap_receipt_id", None)
+    if (
+        re.fullmatch(r"sha256:[0-9a-f]{64}", bootstrap_receipt_id) is None
+        or _identity(bootstrap_body) != bootstrap_receipt_id
+    ):
+        raise OperatorError("owner restart bootstrap receipt identity is invalid")
+    bootstrap_head = str(bootstrap.get("source_head") or "")
+    bootstrap_tree = str(bootstrap.get("repository_tree_id") or "")
+    if _git_commit_tree(bootstrap_head, field="bootstrap source_head") != bootstrap_tree:
+        raise OperatorError("bootstrap source tree does not match its commit")
+    _git_is_ancestor(
+        bootstrap_head,
+        current_head,
+        field="bootstrap-to-current source ancestry",
+    )
+
+    plan_root_cid = str(bootstrap.get("plan_root_cid") or "")
+    database_receipt = bootstrap.get("database_task_source_receipt")
+    if (
+        not isinstance(database_receipt, Mapping)
+        or database_receipt.get("schema") != DATABASE_TASK_SOURCE_SCHEMA
+        or database_receipt.get("repository_tree_id") != bootstrap_tree
+        or database_receipt.get("plan_root_cid") != plan_root_cid
+    ):
+        raise OperatorError("bootstrap database authority roots are inconsistent")
+    task_cids_raw = database_receipt.get("task_cids")
+    if not isinstance(task_cids_raw, list):
+        raise OperatorError("bootstrap database task identities are absent")
+    if any(not isinstance(item, str) or not item for item in task_cids_raw):
+        raise OperatorError("bootstrap database task identities are invalid")
+    task_cids = tuple(task_cids_raw)
+    database_task_count = _exact_int(
+        database_receipt.get("task_count"),
+        field="bootstrap database task_count",
+        minimum=1,
+    )
+    database_goal_count = _exact_int(
+        database_receipt.get("goal_count"),
+        field="bootstrap database goal_count",
+        minimum=1,
+    )
+    database_plan_count = _exact_int(
+        database_receipt.get("plan_count"),
+        field="bootstrap database plan_count",
+        minimum=1,
+    )
+    if (
+        len(set(task_cids)) != len(task_cids)
+        or database_task_count != len(task_cids)
+    ):
+        raise OperatorError("bootstrap database task identities are invalid")
+
+    source_identities = bootstrap.get("source_identities")
+    source_paths = _restart_source_paths(board)
+    if (
+        not isinstance(source_identities, Mapping)
+        or set(source_identities) != set(source_paths)
+    ):
+        raise OperatorError("bootstrap source identity key set is not exact")
+    bootstrap_sources: dict[str, bytes] = {}
+    current_sources: dict[str, bytes] = {}
+    current_source_identities: dict[str, str] = {}
+    for name, path in source_paths.items():
+        expected = str(source_identities.get(name) or "")
+        bootstrap_bytes = _git_blob_at(
+            head=bootstrap_head,
+            path=path,
+            field=f"bootstrap {name}",
+        )
+        if (
+            re.fullmatch(r"sha256:[0-9a-f]{64}", expected) is None
+            or _identity(bootstrap_bytes) != expected
+        ):
+            raise OperatorError(f"bootstrap {name} bytes differ from their seal")
+        current_bytes = _tracked_bytes(path, head=current_head)
+        if name in _RESTART_IMMUTABLE_SOURCE_NAMES and _identity(current_bytes) != expected:
+            raise OperatorError(f"current {name} bytes differ from bootstrap")
+        bootstrap_sources[name] = bootstrap_bytes
+        current_sources[name] = current_bytes
+        current_source_identities[name] = _identity(current_bytes)
+
+    bootstrap_config = _json_mapping_bytes(
+        bootstrap_sources["config"],
+        field="bootstrap config",
+    )
+    current_config = _json_mapping_bytes(
+        current_sources["config"],
+        field="current config",
+    )
+    if _canonical_bytes(current_config) != _canonical_bytes(config):
+        raise OperatorError("loaded config differs from tracked current config")
+    if _canonical_bytes(
+        _restart_static_config(bootstrap_config, label="bootstrap")
+    ) != _canonical_bytes(_restart_static_config(current_config, label="current")):
+        raise OperatorError(
+            "current config changes fields outside the admitted accelerator/datasets "
+            "bindings and retry policy"
+        )
+    bootstrap_attempt_limit = _exact_int(
+        bootstrap_config.get("max_task_attempts"),
+        field="bootstrap max_task_attempts",
+        minimum=1,
+    )
+    current_attempt_limit = _exact_int(
+        current_config.get("max_task_attempts"),
+        field="current max_task_attempts",
+        minimum=1,
+    )
+    current_forest = _source_forest(current_config, head=current_head)
+    forest_transition = _verified_restart_forest_transition(
+        bootstrap.get("source_forest"),
+        current_forest,
+        bootstrap_head=bootstrap_head,
+        current_head=current_head,
+    )
+    exact_bootstrap = (
+        current_head == bootstrap_head
+        and current_tree == bootstrap_tree
+        and current_attempt_limit == bootstrap_attempt_limit
+        and all(
+            current_source_identities[name] == str(source_identities[name])
+            for name in source_paths
+        )
+    )
+    repair: dict[str, Any] = {}
+    if not exact_bootstrap:
+        current_source_binding = current_config.get("source_binding")
+        if not isinstance(current_source_binding, Mapping):
+            raise OperatorError("current source_binding is absent")
+        repair = _verified_handoff_repair(
+            bootstrap_receipt_id=bootstrap_receipt_id,
+            plan_root_cid=plan_root_cid,
+            bootstrap_attempt_limit=bootstrap_attempt_limit,
+            current_attempt_limit=current_attempt_limit,
+            current_source_identities=current_source_identities,
+            forest_transition=forest_transition,
+            current_source_binding=current_source_binding,
+            current_head=current_head,
+        )
+    admission: dict[str, Any] = {
+        "schema": OWNER_RESTART_ADMISSION_SCHEMA,
+        "mode": "exact_bootstrap" if exact_bootstrap else "verified_handoff_repair",
+        "bootstrap_receipt_id": bootstrap_receipt_id,
+        "bootstrap_source_head": bootstrap_head,
+        "bootstrap_source_tree": bootstrap_tree,
+        "current_source_head": current_head,
+        "current_source_tree": current_tree,
+        "plan_root_cid": plan_root_cid,
+        "max_task_attempts_before": bootstrap_attempt_limit,
+        "max_task_attempts_after": current_attempt_limit,
+        "source_identities": current_source_identities,
+        "forest_transition": forest_transition,
+        "handoff_repair_receipt_id": str(repair.get("receipt_id") or ""),
+        "handoff_repair": repair,
+        "database_authority": {
+            "receipt_identity": _identity(database_receipt),
+            "schema": DATABASE_TASK_SOURCE_SCHEMA,
+            "repository_tree_id": bootstrap_tree,
+            "source_head": bootstrap_head,
+            "plan_root_cid": plan_root_cid,
+            "projection_cid": str(database_receipt.get("projection_cid") or ""),
+            "task_cids": sorted(task_cids),
+            "task_count": len(task_cids),
+            "goal_count": database_goal_count,
+            "plan_count": database_plan_count,
+        },
+    }
+    admission["admission_id"] = _identity(admission)
+    return admission
+
+
 def _source_forest(config: Mapping[str, Any], *, head: str) -> dict[str, Any]:
     """Verify the exact clean four-repository PCSM source forest."""
 
     binding = config.get("source_binding")
-    binding = binding if isinstance(binding, Mapping) else {}
+    if not isinstance(binding, Mapping):
+        raise OperatorError("source_binding must be an object")
+    if binding.get("require_origin_main_as_ancestor") is not True:
+        raise OperatorError("source forest requires origin/main ancestry")
     nested: list[dict[str, str]] = []
     configured_repositories = (
         (
             "ipfs_accelerate",
             ("ipfs_accelerate_submodule_path",),
             ("ipfs_accelerate_planning_revision",),
+            ("ipfs_accelerate_planning_tree",),
+            ("ipfs_accelerate_origin_main_revision",),
         ),
         (
             "ipfs_datasets",
             ("ipfs_datasets_submodule_path", "datasets_submodule_path"),
             ("ipfs_datasets_planning_revision", "datasets_planning_revision"),
+            ("ipfs_datasets_planning_tree", "datasets_planning_tree"),
+            ("ipfs_datasets_origin_main_revision",),
         ),
         (
             "ipfs_kit",
             ("ipfs_kit_submodule_path", "kit_submodule_path"),
             ("ipfs_kit_planning_revision", "kit_planning_revision"),
+            ("ipfs_kit_planning_tree", "kit_planning_tree"),
+            ("ipfs_kit_origin_main_revision",),
         ),
         (
             "mcp_plus_plus",
             ("mcp_plus_plus_submodule_path",),
             ("mcp_plus_plus_planning_revision",),
+            ("mcp_plus_plus_planning_tree",),
+            ("mcp_plus_plus_origin_main_revision",),
         ),
     )
-    for prefix, path_fields, revision_fields in configured_repositories:
-        raw_path = next(
-            (binding.get(field) for field in path_fields if binding.get(field)),
-            None,
+
+    def binding_value(fields: Sequence[str], *, field: str) -> Any:
+        present = [binding.get(name) for name in fields if binding.get(name) not in (None, "")]
+        if not present:
+            return None
+        if any(value != present[0] for value in present[1:]):
+            raise OperatorError(f"{field} has conflicting canonical and legacy values")
+        return present[0]
+
+    for (
+        prefix,
+        path_fields,
+        revision_fields,
+        tree_fields,
+        origin_fields,
+    ) in configured_repositories:
+        raw_path = binding_value(
+            path_fields,
+            field=f"source_binding.{prefix}_submodule_path",
         )
-        raw_revision = next(
-            (binding.get(field) for field in revision_fields if binding.get(field)),
-            None,
+        raw_revision = binding_value(
+            revision_fields,
+            field=f"source_binding.{prefix}_planning_revision",
         )
-        if raw_path in (None, "") and raw_revision in (None, ""):
-            continue
-        if raw_path in (None, "") or raw_revision in (None, ""):
+        raw_tree = binding_value(
+            tree_fields,
+            field=f"source_binding.{prefix}_planning_tree",
+        )
+        raw_origin = binding_value(
+            origin_fields,
+            field=f"source_binding.{prefix}_origin_main_revision",
+        )
+        if any(value in (None, "") for value in (raw_path, raw_revision, raw_tree, raw_origin)):
             raise OperatorError(f"{prefix} source binding is incomplete")
         nested_path = _safe_path(
             ROOT,
@@ -348,9 +1182,29 @@ def _source_forest(config: Mapping[str, Any], *, head: str) -> dict[str, Any]:
             nested_head.returncode != 0
             or nested_tree.returncode != 0
             or revision != str(raw_revision)
-            or not tree
+            or tree != str(raw_tree)
         ):
             raise OperatorError(f"{prefix} nested revision differs from its seal")
+        origin_main = subprocess.run(
+            ["git", "rev-parse", "origin/main"],
+            cwd=nested_path,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if (
+            origin_main.returncode != 0
+            or origin_main.stdout.strip() != str(raw_origin)
+        ):
+            raise OperatorError(
+                f"{prefix} configured origin/main differs from its fetched ref"
+            )
+        _git_is_ancestor(
+            raw_origin,
+            revision,
+            field=f"{prefix} origin/main-to-planning lineage",
+            repository=nested_path,
+        )
         relative = nested_path.relative_to(ROOT).as_posix()
         tree_row = str(_git("ls-tree", head, "--", relative)).strip().split()
         if (
@@ -369,6 +1223,8 @@ def _source_forest(config: Mapping[str, Any], *, head: str) -> dict[str, Any]:
                 "access": "supervisor_scoped_cross_repository_worktree",
             }
         )
+    if {item["repository"] for item in nested} != _RESTART_SOURCE_FOREST_REPOSITORIES:
+        raise OperatorError("source forest does not contain the exact four repositories")
     result: dict[str, Any] = {
         "source_head": head,
         "nested_repositories": nested,
@@ -1099,13 +1955,57 @@ def state_owner(config_path: Path) -> int:
         ServerLifecycle,
     )
 
-    board, _config = _load_config(config_path)
+    board, config = _load_config(config_path)
     paths = _runtime_paths(board)
     if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
         raise OperatorError("materialize the sealed PCSM board before starting Quack")
+    restart_admission = _owner_restart_admission(board, config, paths)
+    prior_owner = _owner_restart_prior_status(
+        paths["owner"] / "quack-state-server.status.json"
+    )
+    _require_prior_owner_continuity(restart_admission, prior_owner)
     server = _build_state_owner(board, paths)
-    identity = server.start()
-    ready = server.ready()
+    try:
+        identity = server.start()
+        ready = server.ready()
+        route_policy_provider = _ExecutionRoutePolicyProvider(
+            server=server,
+            board=board,
+            restart_admission=restart_admission,
+        )
+        route_policy_provider.seal()
+        after_head, after_tree = _assert_clean_current_tree(config)
+        if (
+            after_head != restart_admission["current_source_head"]
+            or after_tree != restart_admission["current_source_tree"]
+        ):
+            raise OperatorError("owner restart source changed during admission")
+        restart_receipt = _owner_restart_receipt(
+            restart_admission,
+            identity,
+            expected_store_id=_control_plane_store_id(
+                board.resolved_database_program()
+            ),
+            prior_owner=prior_owner,
+            database_verification=route_policy_provider.database_verification,
+        )
+        restart_receipt_path = (
+            paths["runtime"]
+            / "evidence"
+            / "runtime"
+            / "owner-restarts"
+            / (
+                f"{int(identity.generation):020d}-"
+                f"{restart_receipt['receipt_id'].removeprefix('sha256:')}.json"
+            )
+        )
+        _atomic_json(restart_receipt_path, restart_receipt)
+    except Exception:
+        try:
+            server.stop()
+        except Exception:
+            pass
+        raise
     print(
         json.dumps(
             {
@@ -1115,6 +2015,8 @@ def state_owner(config_path: Path) -> int:
                 "identity": identity.to_dict(),
                 "live": ready,
                 "mutation_dir": str((paths["owner"] / "mutations").relative_to(ROOT)),
+                "restart_receipt": str(restart_receipt_path.relative_to(ROOT)),
+                "restart_receipt_id": restart_receipt["receipt_id"],
             },
             sort_keys=True,
         ),
@@ -1176,6 +2078,366 @@ def _supervisor_client_bindings(board: Any) -> dict[str, int]:
     }
 
 
+def _owner_restart_prior_status(path: Path) -> dict[str, Any]:
+    """Admit only a stopped or provably dead prior combined owner."""
+
+    from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import (
+        process_birth_id,
+    )
+    from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import (
+        ProcessBirthIdentity,
+    )
+
+    try:
+        metadata = path.lstat()
+    except FileNotFoundError:
+        return {
+            "state": "absent",
+            "status_identity": "",
+            "server_id": "",
+            "database_uuid": "",
+            "store_id": "",
+            "schema_revision": 0,
+            "schema_fingerprint": "",
+            "generation": 0,
+            "fence_epoch": 0,
+            "process_birth_id": "",
+        }
+    except OSError as exc:
+        raise OperatorError("prior state-owner status cannot be inspected") from exc
+    if (
+        not stat_module.S_ISREG(metadata.st_mode)
+        or metadata.st_uid != os.getuid()
+        or metadata.st_nlink != 1
+        or stat_module.S_IMODE(metadata.st_mode) != 0o600
+    ):
+        raise OperatorError("prior state-owner status is not a private regular file")
+    payload = _json_object(path)
+    if (
+        payload.get("schema") != QUACK_STATE_SERVER_SCHEMA
+        or payload.get("interface") != QUACK_STATE_SERVER_INTERFACE
+    ):
+        raise OperatorError("prior state-owner status schema is not admitted")
+    lifecycle = str(payload.get("lifecycle") or "")
+    liveness = _owner_liveness(payload)
+    if lifecycle == "ready" and liveness in {"alive", "unknown"}:
+        raise OperatorError(
+            f"prior ready state owner has {liveness} process-birth liveness"
+        )
+    if lifecycle != "stopped" and liveness != "dead":
+        raise OperatorError("prior state owner is neither stopped nor dead")
+    identity = payload.get("identity")
+    if (
+        not isinstance(identity, Mapping)
+        or identity.get("schema") != STATE_SERVER_IDENTITY_SCHEMA
+        or identity.get("interface") != STATE_SERVER_IDENTITY_INTERFACE
+    ):
+        raise OperatorError("prior state-owner identity schema is not admitted")
+    birth_payload = identity.get("process_birth")
+    try:
+        birth = (
+            ProcessBirthIdentity.from_dict(dict(birth_payload))
+            if isinstance(birth_payload, Mapping)
+            else None
+        )
+    except Exception as exc:
+        raise OperatorError("prior state-owner process birth is malformed") from exc
+    claimed_birth_id = str(identity.get("process_birth_id") or "")
+    if birth is None or process_birth_id(birth) != claimed_birth_id:
+        raise OperatorError("prior state-owner process birth identity differs")
+    schema_revision = _exact_int(
+        identity.get("schema_revision"),
+        field="prior state-owner schema_revision",
+        minimum=1,
+    )
+    generation = _exact_int(
+        identity.get("generation"),
+        field="prior state-owner generation",
+        minimum=1,
+    )
+    fence_epoch = _exact_int(
+        identity.get("fence_epoch"),
+        field="prior state-owner fence_epoch",
+        minimum=1,
+    )
+    result = {
+        "state": "stopped" if lifecycle == "stopped" else "dead",
+        "lifecycle": lifecycle,
+        "liveness": liveness,
+        "status_identity": _identity(payload),
+        "server_id": str(identity.get("server_id") or ""),
+        "database_uuid": str(identity.get("database_uuid") or ""),
+        "store_id": str(identity.get("store_id") or ""),
+        "schema_revision": schema_revision,
+        "schema_fingerprint": str(identity.get("schema_fingerprint") or ""),
+        "generation": generation,
+        "fence_epoch": fence_epoch,
+        "process_birth_id": claimed_birth_id,
+    }
+    if (
+        not result["server_id"]
+        or not result["database_uuid"]
+        or not result["store_id"]
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", result["schema_fingerprint"])
+        is None
+        or not result["process_birth_id"]
+        or str(payload.get("store_id") or "") != result["store_id"]
+    ):
+        raise OperatorError("prior state-owner identity is incomplete")
+    return result
+
+
+def _require_prior_owner_continuity(
+    admission: Mapping[str, Any],
+    prior_owner: Mapping[str, Any],
+) -> None:
+    """Require durable owner continuity for every descendant-source restart."""
+
+    if admission.get("mode") != "verified_handoff_repair":
+        return
+    if prior_owner.get("state") not in {"stopped", "dead"}:
+        raise OperatorError(
+            "descendant owner restart requires a stopped or dead prior identity"
+        )
+    if any(
+        not prior_owner.get(field)
+        for field in (
+            "server_id",
+            "database_uuid",
+            "store_id",
+            "schema_fingerprint",
+            "process_birth_id",
+        )
+    ):
+        raise OperatorError("descendant owner restart has incomplete prior continuity")
+    for field in ("schema_revision", "generation", "fence_epoch"):
+        _exact_int(
+            prior_owner.get(field),
+            field=f"prior state-owner {field}",
+            minimum=1,
+        )
+
+
+def _restart_database_verification(source: Any, admission: Mapping[str, Any]) -> dict[str, Any]:
+    """Reproduce the immutable population and exact repair source task."""
+
+    authority = admission.get("database_authority")
+    if not isinstance(authority, Mapping):
+        raise OperatorError("restart admission has no database authority")
+    snapshot = source.snapshot()
+    page = source.list_tasks(limit=500)
+    if page.next_cursor:
+        raise OperatorError("restart database task population exceeds its bound")
+    task_cids = sorted(str(task.task_cid) for task in page.tasks)
+    expected_task_cids = sorted(str(item) for item in authority.get("task_cids", ()))
+    if (
+        task_cids != expected_task_cids
+        or int(snapshot.task_count) != int(authority.get("task_count") or 0)
+        or int(snapshot.goal_count) != int(authority.get("goal_count") or 0)
+        or int(snapshot.plan_count) != int(authority.get("plan_count") or 0)
+        or snapshot.plan_root_cid != authority.get("plan_root_cid")
+        or snapshot.repository_tree_id != authority.get("repository_tree_id")
+    ):
+        raise OperatorError("restart database population differs from bootstrap")
+
+    repair = admission.get("handoff_repair")
+    task_projection: dict[str, Any] = {}
+    if isinstance(repair, Mapping) and repair:
+        task = source.get_task(str(repair.get("task_alias") or ""))
+        attempt = repair.get("source_attempt")
+        receipt = (
+            task.body.get("completion_receipt")
+            if task is not None and isinstance(task.body, Mapping)
+            else None
+        )
+        if (
+            task is None
+            or task.task_cid != repair.get("task_cid")
+            or task.status != "blocked"
+            or not isinstance(attempt, Mapping)
+            or int(task.revision) != int(attempt.get("task_revision") or 0)
+            or not isinstance(receipt, Mapping)
+            or _identity(receipt) != HANDOFF_REPAIR_COMPLETION_RECEIPT_ID
+            or receipt.get("operation") != "database_portal_terminal_failure"
+            or receipt.get("reason") != "portal_provider_failed"
+            or receipt.get("retryable") is not False
+            or receipt.get("control_expected_status") != "in_progress"
+            or receipt.get("control_expected_revision") != int(task.revision) - 1
+            or any(
+                receipt.get(field) != attempt.get(field)
+                for field in (
+                    "attempt_id",
+                    "claim_id",
+                    "lease_id",
+                    "owner_session_id",
+                    "attempt_number",
+                    "fencing_token",
+                    "fence_epoch",
+                )
+            )
+        ):
+            raise OperatorError("restart repair source task changed authority")
+        task_projection = {
+            "task_alias": task.task_alias,
+            "task_cid": task.task_cid,
+            "status": task.status,
+            "revision": int(task.revision),
+            "terminal_receipt_identity": _identity(receipt),
+            "attempt_identity": dict(attempt),
+        }
+
+    verification: dict[str, Any] = {
+        "schema": OWNER_DATABASE_VERIFICATION_SCHEMA,
+        "bootstrap_database_receipt_identity": str(
+            authority.get("receipt_identity") or ""
+        ),
+        "repository_tree_id": snapshot.repository_tree_id,
+        "plan_root_cid": snapshot.plan_root_cid,
+        "task_cids": task_cids,
+        "task_count": int(snapshot.task_count),
+        "goal_count": int(snapshot.goal_count),
+        "plan_count": int(snapshot.plan_count),
+        "store_revision": int(snapshot.revision),
+        "repair_source_task": task_projection,
+    }
+    verification["verification_id"] = _identity(verification)
+    return verification
+
+
+def _owner_restart_receipt(
+    admission: Mapping[str, Any],
+    identity: Any,
+    *,
+    expected_store_id: str,
+    prior_owner: Mapping[str, Any],
+    database_verification: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Bind one admitted descendant restart to its newly fenced owner."""
+
+    _require_prior_owner_continuity(admission, prior_owner)
+    admission_id = str(admission.get("admission_id") or "")
+    admission_body = dict(admission)
+    admission_body.pop("admission_id", None)
+    authority = admission.get("database_authority")
+    if (
+        admission.get("schema") != OWNER_RESTART_ADMISSION_SCHEMA
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", admission_id) is None
+        or _identity(admission_body) != admission_id
+        or not isinstance(authority, Mapping)
+    ):
+        raise OperatorError("owner restart admission identity is invalid")
+    verification_id = str(database_verification.get("verification_id") or "")
+    verification_body = dict(database_verification)
+    verification_body.pop("verification_id", None)
+    verified_task_cids = database_verification.get("task_cids")
+    authority_task_cids = authority.get("task_cids")
+    if (
+        database_verification.get("schema") != OWNER_DATABASE_VERIFICATION_SCHEMA
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", verification_id) is None
+        or _identity(verification_body) != verification_id
+        or str(
+            database_verification.get("bootstrap_database_receipt_identity") or ""
+        )
+        != str(authority.get("receipt_identity") or "")
+        or str(database_verification.get("plan_root_cid") or "")
+        != str(admission.get("plan_root_cid") or "")
+        or str(database_verification.get("repository_tree_id") or "")
+        != str(admission.get("bootstrap_source_tree") or "")
+        or not isinstance(verified_task_cids, list)
+        or not isinstance(authority_task_cids, list)
+        or verified_task_cids != sorted(str(item) for item in authority_task_cids)
+        or type(database_verification.get("task_count")) is not int
+        or database_verification.get("task_count") != authority.get("task_count")
+        or type(database_verification.get("goal_count")) is not int
+        or database_verification.get("goal_count") != authority.get("goal_count")
+        or type(database_verification.get("plan_count")) is not int
+        or database_verification.get("plan_count") != authority.get("plan_count")
+    ):
+        raise OperatorError("bound restart database verification is invalid")
+    store_id = str(getattr(identity, "store_id", "") or "")
+    database_uuid = str(getattr(identity, "database_uuid", "") or "")
+    generation = _exact_int(
+        getattr(identity, "generation", None),
+        field="new state-owner generation",
+        minimum=1,
+    )
+    fence_epoch = _exact_int(
+        getattr(identity, "fence_epoch", None),
+        field="new state-owner fence_epoch",
+        minimum=1,
+    )
+    schema_revision = _exact_int(
+        getattr(identity, "schema_revision", None),
+        field="new state-owner schema_revision",
+        minimum=1,
+    )
+    if (
+        store_id != expected_store_id
+        or not database_uuid
+        or not str(getattr(identity, "server_id", "") or "")
+        or generation < 1
+        or fence_epoch < 1
+        or schema_revision < 1
+        or not str(getattr(identity, "schema_fingerprint", "") or "")
+        or not str(getattr(identity, "process_birth_id", "") or "")
+    ):
+        raise OperatorError("new state-owner identity is invalid")
+    prior_generation = int(prior_owner.get("generation") or 0)
+    prior_fence_epoch = int(prior_owner.get("fence_epoch") or 0)
+    if prior_generation and (
+        generation <= prior_generation
+        or fence_epoch <= prior_fence_epoch
+        or str(prior_owner.get("server_id") or "")
+        == str(getattr(identity, "server_id", "") or "")
+        or str(prior_owner.get("database_uuid") or "") != database_uuid
+        or str(prior_owner.get("store_id") or "") != store_id
+        or int(prior_owner.get("schema_revision") or 0) != schema_revision
+        or str(prior_owner.get("schema_fingerprint") or "")
+        != str(getattr(identity, "schema_fingerprint", "") or "")
+        or str(prior_owner.get("process_birth_id") or "")
+        == str(getattr(identity, "process_birth_id", "") or "")
+    ):
+        raise OperatorError("new state-owner fence does not advance prior owner")
+    receipt: dict[str, Any] = {
+        "schema": OWNER_RESTART_RECEIPT_SCHEMA,
+        "admission_id": str(admission.get("admission_id") or ""),
+        "mode": str(admission.get("mode") or ""),
+        "bootstrap_receipt_id": str(admission.get("bootstrap_receipt_id") or ""),
+        "bootstrap_source_head": str(admission.get("bootstrap_source_head") or ""),
+        "bootstrap_source_tree": str(admission.get("bootstrap_source_tree") or ""),
+        "current_source_head": str(admission.get("current_source_head") or ""),
+        "current_source_tree": str(admission.get("current_source_tree") or ""),
+        "plan_root_cid": str(admission.get("plan_root_cid") or ""),
+        "handoff_repair_receipt_id": str(
+            admission.get("handoff_repair_receipt_id") or ""
+        ),
+        "max_task_attempts_before": int(
+            admission.get("max_task_attempts_before") or 0
+        ),
+        "max_task_attempts_after": int(
+            admission.get("max_task_attempts_after") or 0
+        ),
+        "prior_state_owner": dict(prior_owner),
+        "database_verification": dict(database_verification),
+        "state_owner": {
+            "server_id": str(getattr(identity, "server_id", "") or ""),
+            "store_id": store_id,
+            "database_uuid": database_uuid,
+            "schema_revision": schema_revision,
+            "schema_fingerprint": str(
+                getattr(identity, "schema_fingerprint", "") or ""
+            ),
+            "generation": generation,
+            "fence_epoch": fence_epoch,
+            "process_birth_id": str(
+                getattr(identity, "process_birth_id", "") or ""
+            ),
+        },
+    }
+    receipt["receipt_id"] = _identity(receipt)
+    return receipt
+
+
 def _process_argv(pid: int) -> tuple[str, ...]:
     try:
         payload = Path(f"/proc/{int(pid)}/cmdline").read_bytes()
@@ -1213,9 +2475,17 @@ def _argv_values(argv: Sequence[str], option: str) -> tuple[str, ...]:
 class _ExecutionRoutePolicyProvider:
     """Seal the current exact task population through the typed owner surface."""
 
-    def __init__(self, *, server: Any, board: Any) -> None:
+    def __init__(
+        self,
+        *,
+        server: Any,
+        board: Any,
+        restart_admission: Mapping[str, Any],
+    ) -> None:
         self.server = server
         self.board = board
+        self.restart_admission = dict(restart_admission)
+        self.database_verification: dict[str, Any] = {}
         self._lock = threading.Lock()
 
     def seal(self) -> Any:
@@ -1276,6 +2546,10 @@ class _ExecutionRoutePolicyProvider:
                         raise OperatorError(
                             "execution route exceeds the bounded typed task page"
                         )
+                    self.database_verification = _restart_database_verification(
+                        source,
+                        self.restart_admission,
+                    )
                     return source.seal_execution_route_policy(
                         {
                             task.task_alias: GROK_CODEX_EXECUTION_MODE
@@ -2132,11 +3406,20 @@ def launch_supervisor(
     )
 
     board, config = _load_config(config_path)
-    current_head, current_tree = _assert_clean_current_tree(config)
+    paths = _runtime_paths(board)
+    if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
+        raise OperatorError("materialize the sealed PCSM board before launch")
+    restart_admission = _owner_restart_admission(board, config, paths)
     common = ["--repo-root", str(ROOT), "--config", str(config_path)]
     preflight = int(configured_board_main([*common, "preflight"]))
     if preflight != 0:
         return preflight
+    preflight_head, preflight_tree = _assert_clean_current_tree(config)
+    if (
+        preflight_head != restart_admission["current_source_head"]
+        or preflight_tree != restart_admission["current_source_tree"]
+    ):
+        raise OperatorError("owner restart source changed during preflight")
     if dry_run:
         plan = configured_board_launch_plan(
             board,
@@ -2155,6 +3438,14 @@ def launch_supervisor(
                     "authority_mode": plan["database_program"]["authority_mode"],
                     "task_source_kind": plan["database_program"]["task_source_kind"],
                     "credential_transport": "private_inherited_socket",
+                    "restart_admission_mode": restart_admission["mode"],
+                    "restart_admission_id": restart_admission["admission_id"],
+                    "max_task_attempts_before": restart_admission[
+                        "max_task_attempts_before"
+                    ],
+                    "max_task_attempts_after": restart_admission[
+                        "max_task_attempts_after"
+                    ],
                 },
                 sort_keys=True,
             )
@@ -2163,23 +3454,12 @@ def launch_supervisor(
     if duration_seconds != float("inf") and duration_seconds <= 0:
         raise OperatorError("supervisor duration must be positive")
 
-    paths = _runtime_paths(board)
-    if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
-        raise OperatorError("materialize the sealed PCSM board before launch")
+    prior_owner = _owner_restart_prior_status(
+        paths["owner"] / "quack-state-server.status.json"
+    )
+    _require_prior_owner_continuity(restart_admission, prior_owner)
     _ensure_private_runtime_directory(paths["runtime"])
     _ensure_private_runtime_directory(paths["runtime"] / "state")
-    receipt = _json_object(paths["bootstrap_receipt"])
-    population = _population(board, config)
-    if any(
-        receipt.get(field) != expected
-        for field, expected in (
-            ("source_head", current_head),
-            ("repository_tree_id", current_tree),
-            ("plan_root_cid", population["plan_root_cid"]),
-            ("source_forest", population["source_forest"]),
-        )
-    ):
-        raise OperatorError("bootstrap authority differs from the exact current source tree")
     _quarantine_stale_executor_bootstrap(paths)
     server = _build_state_owner(board, paths)
     listener: socket.socket | None = None
@@ -2192,8 +3472,35 @@ def launch_supervisor(
         route_policy_provider = _ExecutionRoutePolicyProvider(
             server=server,
             board=board,
+            restart_admission=restart_admission,
         )
         route_policy = route_policy_provider.seal()
+        after_head, after_tree = _assert_clean_current_tree(config)
+        if (
+            after_head != restart_admission["current_source_head"]
+            or after_tree != restart_admission["current_source_tree"]
+        ):
+            raise OperatorError("owner restart source changed during admission")
+        restart_receipt = _owner_restart_receipt(
+            restart_admission,
+            identity,
+            expected_store_id=_control_plane_store_id(
+                board.resolved_database_program()
+            ),
+            prior_owner=prior_owner,
+            database_verification=route_policy_provider.database_verification,
+        )
+        restart_receipt_path = (
+            paths["runtime"]
+            / "evidence"
+            / "runtime"
+            / "owner-restarts"
+            / (
+                f"{int(identity.generation):020d}-"
+                f"{restart_receipt['receipt_id'].removeprefix('sha256:')}.json"
+            )
+        )
+        _atomic_json(restart_receipt_path, restart_receipt)
         listener = _bootstrap_listener()
         broker = _ExecutorBootstrapBroker(
             channel=listener,
@@ -2246,6 +3553,10 @@ def launch_supervisor(
                     "live": ready,
                     "lanes": int(plan["lanes"]),
                     "execution_route_policy": route_policy.public_summary(),
+                    "owner_restart_receipt": restart_receipt,
+                    "owner_restart_receipt_path": str(
+                        restart_receipt_path.relative_to(ROOT)
+                    ),
                     "credential_transport": "private_inherited_socket",
                     "raw_token_in_argv_or_environment": False,
                 },
