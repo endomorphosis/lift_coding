@@ -1,71 +1,225 @@
 {
   "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
   "task_id": "PCSM-003",
   "title": "Inventory current semantic-compression and proof-reuse benchmarks",
   "board_namespace": "proof-carrying-semantic-minification-v1",
   "goal_id": "PCSM-G100",
+  "objective_id": "PCSM-003",
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-003@1",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-003@current-head-inventory-v2",
+  "observed_at": "2026-08-26T10:41:45Z",
   "scope": {
     "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 inventory of current semantic-compression and proof-reuse benchmarks only",
     "mutation": "receipt_only",
     "changed_paths": [
       "artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json"
     ],
     "source_mutation": false,
-    "implementation_delta": "none; existing benchmark harnesses and published artifacts are reused without mutation"
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json",
+    "predicted_inventory_directory_not_written": "artifacts/proof_carrying_semantic_minification/inventory/benchmarks/",
+    "predicted_inventory_directory_reason": "This task's admitted declared output is the receipt only. The inventory is recorded here; no competing benchmark tree, corpus, or harness was created.",
+    "implementation_delta": "receipt_reseal_only; reuse existing SCG, IPS, IVP, A/B, C/D, and AAE harnesses and published artifacts without mutation"
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation from a named estimator; never live billing or a promotion fact.",
+    "simulated": "A fixture or deliberate non-production exercise; never relabeled live or production-eligible.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
   },
   "current_tree_binding": {
-    "outer_repository": "ipfs_accelerate_py portal",
+    "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "outer_commit": "36e9f4d35edc2933ac580ba62f9284aa05bdd8cc",
-    "outer_tree": "4dc46cff8a4a51fe91b5142d39c291667ca1d7af",
+    "outer_commit": "4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d",
+    "outer_tree": "cd81f5731ee64c29161830c9933d6739e0dd3eb3",
+    "outer_subject": "fix(pcsm): reseal current upstream handoff",
+    "git_object_format": "sha1",
+    "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "origin_main_is_ancestor": true,
+    "accelerator_planning_revision": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "accelerator_planning_revision_equals_origin_main": true,
+    "commits_after_origin_main": 26,
+    "clean_before_receipt_write": true,
+    "evidence_kind": "measured",
     "gitlinks": {
       "Mcp-Plus-Plus": {
         "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
-        "commit": "838261c04a4b6f2643d75017e0b472876597c673",
-        "tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253"
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "superproject_gitlink": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "scheduler_planning_tree": "61776431577f0c276546f25e4178a47a64007180",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
       },
       "external/ipfs_accelerate": {
         "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
-        "commit": "5af405cc87abf684b32d920afd5346411581876a",
-        "tree": "e8bdd2bdcc5f990c5369a21d36b9a108308eda32"
+        "commit": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "tree": "7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
+        "superproject_gitlink": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "configured_origin_main": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "scheduler_planning_tree": "7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
       },
       "external/ipfs_datasets": {
         "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
-        "commit": "719083b59637558d2338281a63435021e994a875",
-        "tree": "6ec131d1b71484e8244266f993b2b19edccee636"
+        "commit": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "tree": "a8d4daf349506857d370171ae099426f057e56c0",
+        "superproject_gitlink": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "configured_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "scheduler_planning_tree": "a8d4daf349506857d370171ae099426f057e56c0",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
       },
       "external/ipfs_kit": {
         "origin": "https://github.com/endomorphosis/ipfs_kit_py",
         "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
-        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "superproject_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "configured_origin_main": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "scheduler_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
       }
     },
+    "excluded_gitlinks_not_admitted": [
+      {
+        "path": "external/meta-wearables-dat-android",
+        "superproject_gitlink": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/meta-wearables-dat-ios",
+        "superproject_gitlink": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "hallucinate_app",
+        "superproject_gitlink": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "swissknife",
+        "superproject_gitlink": "75931db15273786ecd579f1089ec5599b9ded352",
+        "admitted": false,
+        "evidence_kind": "measured"
+      }
+    ],
     "freshness_check": {
       "kind": "measured",
-      "method": "git rev-parse HEAD^{commit}; git rev-parse HEAD^{tree}; git -C <gitlink> rev-parse HEAD^{commit}; git -C <gitlink> rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git status --porcelain=v1; git -C <gitlink> status --porcelain=v1",
+      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git status --porcelain=v1; git -C <gitlink> status --porcelain=v1; git merge-base --is-ancestor <configured origin/main> HEAD; compare nested HEAD/tree to scheduler source_binding planning revision/tree",
       "result": "pass",
-      "meaning": "The outer tree and all four nested worktrees were clean before this receipt was written. Superproject gitlink SHA-1 values equal nested HEADs. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+      "meaning": "The outer tree and all four admitted nested worktrees were clean before this receipt was written. Each admitted nested commit equals the superproject gitlink and the scheduler planning revision; each nested tree equals the scheduler planning tree. Configured origin/main is an ancestor of each nested head. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+    },
+    "source_digest_continuity": {
+      "kind": "measured",
+      "result": "inventoried_harness_and_artifact_bytes_unchanged",
+      "prior_receipt_artifact_identity": "urn:pcsm:task-receipt:PCSM-003@1",
+      "nested_gitlinks_changed": [
+        "Mcp-Plus-Plus",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets"
+      ],
+      "nested_gitlinks_unchanged": [
+        "external/ipfs_kit"
+      ],
+      "datasets_tree_unchanged": "a8d4daf349506857d370171ae099426f057e56c0",
+      "accelerate_delta": "origin/main merge into agent/proof-carrying-semantic-minification-v1; every previously inventoried SCG/IPS/IVP/A/B harness, published artifact, and test SHA-256/git-blob re-hashed identically at this head",
+      "added_current_head_equivalent": "Proof-context configurations C/D, previously omitted from PCSM-003@1, is inventoried as an adjacent proof-reuse and governed-lifecycle runner",
+      "meaning": "Listed SCG/IPS/IVP/A/B source and published-artifact digests were re-hashed at this head and matched the stale v1 receipt. Inventory findings were therefore reconfirmed against current-head bytes, not copied from a stale tree binding."
+    },
+    "stale_prior_receipt_rejected": {
+      "kind": "measured",
+      "prior_artifact_identity": "urn:pcsm:task-receipt:PCSM-003@1",
+      "prior_outer_commit": "36e9f4d35edc2933ac580ba62f9284aa05bdd8cc",
+      "prior_outer_tree": "4dc46cff8a4a51fe91b5142d39c291667ca1d7af",
+      "prior_accelerate_gitlink": "5af405cc87abf684b32d920afd5346411581876a",
+      "prior_datasets_gitlink": "719083b59637558d2338281a63435021e994a875",
+      "prior_mcp_plus_plus_gitlink": "838261c04a4b6f2643d75017e0b472876597c673",
+      "prior_scheduler_sha256": "1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93",
+      "result": "rejected_as_stale",
+      "meaning": "The previously committed PCSM-003 receipt bound a different outer commit/tree, different ipfs_accelerate, ipfs_datasets, and Mcp-Plus-Plus gitlinks, and a different scheduler-config digest. Current-head inventory required a fresh receipt."
     },
     "pcsm_source_map": {
       "status": "unavailable",
-      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID is present at this inventory task. Related syntax-core maps are not substituted for a bound PCSM map."
+      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID is present at this inventory task. Related syntax-core maps are not substituted for a bound PCSM map.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "policy_bindings": {
+    "scheduler_config": {
+      "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
+      "sha256": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
+      "git_blob": "04d7f3becf40c4702e0aeab18f1443ed610259cf",
+      "evidence_kind": "measured"
+    },
+    "plan": {
+      "path": "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md",
+      "sha256": "5031a4e4588ef9f6589199f37e3551c5c059c25f7a04cbf9f3ec00f3f026ae0e",
+      "git_blob": "d76fbc8f9a37648c5ddbaa5b198223121b9d2231",
+      "evidence_kind": "measured"
+    },
+    "objectives": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
+      "sha256": "712c844b2a40856a677f5d7258d6bfdcb1f3ec08410e026922c93c4f6951121b",
+      "git_blob": "9f97656be213dc0f898701a04c851376b5eb6f16",
+      "dispatch_objective_revision_cid": "baguqeera47al6hbyyfycxzkbwlcyurwexwqxmk2bqhani22f6jsb47v42z5q",
+      "dispatch_objective_revision_cid_source": "current implementation dispatch packet; not a git blob and not substituted for the file SHA-256",
+      "evidence_kind": "measured"
+    },
+    "task_specification": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
+      "sha256": "63e745843899d95ac59e7080a2b744c87e7ac929871125d1b6efc8e392e4bfbe",
+      "git_blob": "a34f3b5773fc0a48b9665bc76e75f9e0a44fa682",
+      "evidence_kind": "measured"
+    },
+    "implementation_policy": {
+      "policy_id": "policy:implementation-daemon",
+      "policy_revision": "sha256:dada35cbe764e424779361e2652f67889a8570a54a0cc8599abbf8706bf73584",
+      "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+      "source": "current implementation dispatch packet",
+      "evidence_kind": "measured"
     }
   },
   "authority_boundary": {
     "canonical_semantic_identity_and_python_code_ir": "ipfs_datasets_py",
     "exact_bytes_cid_and_immutable_storage": "ipfs_kit_py",
-    "routing_index_consumption_patch_admission_and_validation": "ipfs_accelerate_py",
+    "slice_route_model_budget_link_admission_and_validation": "ipfs_accelerate_py",
     "wire_contract_only": "Mcp-Plus-Plus",
     "confirmed": true,
+    "evidence_kind": "measured",
     "negative_assertions": [
       "No inventoried benchmark confers PCSM patch, promotion, or mutation authority.",
       "No local alias, model output, M2 result, or M3 result is promoted to a canonical identity or mutation authority.",
       "Published SCG/IPS/IVP artifacts are not current-tree promotion evidence; their observed heads differ from the bound accelerate gitlink.",
       "Kit compression encoding is byte/storage compression, not semantic minification, and is not a semantic-equivalence claim.",
+      "Configuration A/B disable routing, incremental verification, and proof reuse by contract.",
+      "Configuration C/D are PCCE measurement runners, not PCSM M1/M2 paired corpora.",
       "This receipt creates no competing benchmark authority, corpus, harness, or gate-weakening delta."
     ]
   },
@@ -85,22 +239,26 @@
         {
           "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/semantic_compression_governor.py",
           "sha256": "c735c05b221a61aa1d1d81b80f5107261bd7fd78adb648819d74d645ab1c403b",
-          "git_blob": "6d9e4497586eab08cfc2fafbe59042666d565d80"
+          "git_blob": "6d9e4497586eab08cfc2fafbe59042666d565d80",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_governor/metrics.py",
           "sha256": "47197a2d69b37b93b91c70733dfee6aa6f413a37a119b14079d5b0419a857bc0",
-          "git_blob": "30d1e70b8515fc33e70ec50ee1e5c4f8f98ca333"
+          "git_blob": "30d1e70b8515fc33e70ec50ee1e5c4f8f98ca333",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_governor/contracts.py",
           "sha256": "b11645016093ecb7f7e6f2083c75b39a65e29427681d86dcf781894a6b5bfeb5",
-          "git_blob": "a6be500bf53c94e8d994e36f851cbd0ea395fba0"
+          "git_blob": "a6be500bf53c94e8d994e36f851cbd0ea395fba0",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/__init__.py",
           "sha256": "e6e76c0440f05449c08164a51a7aec6d9a7e30443a080210b967ade0ac0fecd6",
-          "git_blob": "f766688def76a0edace0e9e0b65aea9abd4e79d6"
+          "git_blob": "f766688def76a0edace0e9e0b65aea9abd4e79d6",
+          "evidence_kind": "measured"
         }
       ],
       "published_artifacts": [
@@ -113,19 +271,22 @@
           "metric_report_cid": "baguqeeratlc2lkuj4ekqtd3kut52duhzbikifpa2zq3wbpxdk23dydadwuna",
           "corpus_cid": "baguqeerap4oqoz6ymvntiawim5wihcsic4yxp2xro2gmymxc2pnmyi4tspmq",
           "observed_head": "40ebd4c550412a7a8c70241849a4c1423064ee62",
-          "observed_head_vs_current_accelerate_gitlink": "stale_relative_to_5af405cc87abf684b32d920afd5346411581876a"
+          "observed_head_vs_current_accelerate_gitlink": "stale_relative_to_19a44398735b15de6f6c8c09cc501691c3a95094",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_accelerate/artifacts/agent_supervisor/semantic_compression_governor/summary.json",
           "sha256": "da9061f672aeed49dadfa62ae7542b7d8409afc96befd74761f094b1784c8893",
           "git_blob": "43e4860176cf4ce7429354cd49759e03bffbcb70",
-          "summary_content_id": "sha256:2f78a161e27b8457d84e08841a37dde47e405dd6d74aed11a86161456bea069b"
+          "summary_content_id": "sha256:2f78a161e27b8457d84e08841a37dde47e405dd6d74aed11a86161456bea069b",
+          "evidence_kind": "measured"
         }
       ],
       "determinism": {
         "required": true,
-        "check": "PYTHONPATH=<datasets>:<kit>:<accelerate> /usr/bin/python3.12 benchmarks/agent_supervisor/semantic_compression_governor.py --check --json",
-        "result": "passed; benchmark_match=true, summary_match=true, 60 published fixture cases matched after recomputation with observational fields excluded"
+        "check": "PYTHONPATH=<datasets>:<kit>:<accelerate> PYTHONNOUSERSITE=1 /usr/bin/python3.12 benchmarks/agent_supervisor/semantic_compression_governor.py --check --json",
+        "result": "passed; ok=true, benchmark_match=true, summary_match=true, case_count=60, status=yellow after recomputation with observational fields excluded",
+        "evidence_kind": "measured"
       },
       "published_outcome": {
         "status": "yellow",
@@ -140,7 +301,8 @@
         ],
         "critical_omissions_accepted_count": 0,
         "live_observation_count": 0,
-        "simulated_observation_count": 60
+        "simulated_observation_count": 60,
+        "evidence_kind": "measured_from_published_artifact_and_current_head_check"
       },
       "finding": "The harness is the current-head semantic-compression equivalent. It is schema/interface bound, CID-bearing, and deterministic under --check. It is not a PCSM M1/M2 paired benchmark, not live provider evidence, and not promotion-authoritative. The checked-in artifact remains bound to historical accelerate HEAD 40ebd4c55; current-head reuse is of the harness and of the --check equivalence, not of that observed_head as a current-tree seal."
     },
@@ -158,17 +320,20 @@
         {
           "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/incremental_proof_sealer.py",
           "sha256": "df8a0dc865ccfbe21be94c3d812fdda866348f2b93199fb5e8415e2e2aa5e825",
-          "git_blob": "b789a12a13cd783675148b3444d54f6effe3b32f"
+          "git_blob": "b789a12a13cd783675148b3444d54f6effe3b32f",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/planner.py",
           "sha256": "8b06a67f3b101a2c7115e4c9bcc721fed08a17507c6ed524336df6cd1db6b05b",
-          "git_blob": "d3aa4df383a19ddd2407128ad776e6dd01869235"
+          "git_blob": "d3aa4df383a19ddd2407128ad776e6dd01869235",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
           "sha256": "86a13c7965a9f7aca6a196a3c08f8673cd5d0fc143baf74041675493b883b318",
-          "git_blob": "7dff02d6d93c254b8ad2685462e92136260ac8dd"
+          "git_blob": "7dff02d6d93c254b8ad2685462e92136260ac8dd",
+          "evidence_kind": "measured"
         }
       ],
       "published_artifact": {
@@ -183,18 +348,22 @@
           "datasets": "1480ea2b4c54dda94c64b792c0af621cd764dbbb",
           "kit": "8799e8d3cc39bd8f2e58b819dacb6b3879b517c0"
         },
-        "published_source_revisions_vs_current_forest": "stale; not the bound PCSM gitlinks"
+        "published_source_revisions_vs_current_forest": "stale; not the bound PCSM gitlinks",
+        "evidence_kind": "measured"
       },
       "published_summary": {
         "path": "external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/summary.json",
         "sha256": "e76123068ebe94557647f90044155c06126ab3f6cc33efb27ab0c2e3033f00f6",
         "git_blob": "0253600b2a0366955a7ec09a7f691248a74b3e38",
-        "schema_version": "incremental-proof-sealer-benchmark-summary@1"
+        "schema_version": "incremental-proof-sealer-benchmark-summary@1",
+        "measurement_counts_measured": 0,
+        "evidence_kind": "measured"
       },
       "determinism": {
         "required": true,
         "current_head_rerun": "passed; 40 closed transitions, every deterministic_roots_match=true, every simulated_required_units=0, wrong-parent attempt recorded stale_parent at index 37",
-        "layout_limit": "The harness binds datasets/kit by git-walking repo_root/ipfs_datasets_py and repo_root/ipfs_kit_py. In this portal forest those identities are sibling gitlinks, so an accelerate-rooted rerun cannot independently bind datasets/kit HEADs. Workload roots remain the reuse evidence; naive rerun source_revisions fields are not datasets/kit identities."
+        "layout_limit": "The harness binds datasets/kit by git-walking repo_root/ipfs_datasets_py and repo_root/ipfs_kit_py. In this portal forest those identities are sibling gitlinks, so an accelerate-rooted rerun reported source_revisions/source_trees equal to the accelerate gitlink 19a44398735b15de6f6c8c09cc501691c3a95094 / tree 7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c for all three fields. Workload roots remain the reuse evidence; naive rerun source_revisions fields are not datasets/kit identities.",
+        "evidence_kind": "measured"
       },
       "finding": "The 40-transition closed workload is the current-head proof-reuse equivalent. All cost fields remain estimated or unavailable. It is not a production prover, not a PCSM M1 source-link receipt, and not promotion-authoritative."
     },
@@ -213,17 +382,20 @@
         {
           "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/incremental_verification.py",
           "sha256": "998d54cb92a543fff23c722af5e5e6ca7b6c3ac159fc46823b4d4d8c6f9d1298",
-          "git_blob": "0526a66414d16c1b1d74939d02ced833e7668d21"
+          "git_blob": "0526a66414d16c1b1d74939d02ced833e7668d21",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/source_snapshot.py",
           "sha256": "23ec13e9f83b6dea14b05811845be6ab7ab43b8b33b9fa799ce8ca9906e581df",
-          "git_blob": "1654f4c5ffdc8c049652b8ed2b42f67841c78ece"
+          "git_blob": "1654f4c5ffdc8c049652b8ed2b42f67841c78ece",
+          "evidence_kind": "measured"
         },
         {
           "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/incremental_verification.py",
           "sha256": "bc5bee5461be237b5ff83320d8bfa5409a188a026bee8a0d409fc19e5eeb7029",
-          "git_blob": "a2609ef06aebe8f42b31cefe502cf0d91568bf6b"
+          "git_blob": "a2609ef06aebe8f42b31cefe502cf0d91568bf6b",
+          "evidence_kind": "measured"
         }
       ],
       "published_artifact": {
@@ -233,16 +405,20 @@
         "content_id": "baguqeeram6jtyce43lbhoazqxpw5zfltxu3qibiezbvzrsexfkxaidhksctq",
         "commitment_cid": "baguqeerapkswlsalqvc3o3jcoaic42ta7ca2t46ffb64hnqjqulzyn2ybu3a",
         "source_snapshot_id": "sha256:32bf46ccd07392b0c1dd4b7006f21e67fad0f5e439b034a586ebb3610065939c",
+        "metrics_digest": "baguqeeralpl6umixxwvdhbeqeeoya7ogh2iitepabzjmgjbd4zkksn4w3viq",
         "case_count": 20,
         "status": "red",
         "zero_stale_simulated_accepted": true,
         "controlled_false_negatives": 1,
+        "cross_tree_unaffected_reuse": "explicitly_unmet",
         "observed_head": "8c7800cedc5e1b848367db9952f912428466f8cc",
-        "observed_head_vs_current_accelerate_gitlink": "stale_relative_to_5af405cc87abf684b32d920afd5346411581876a"
+        "observed_head_vs_current_accelerate_gitlink": "stale_relative_to_19a44398735b15de6f6c8c09cc501691c3a95094",
+        "evidence_kind": "measured"
       },
       "sealed_execution": {
         "kind": "unavailable",
-        "reason": "Collection of test/benchmarks/test_incremental_verification_planner_benchmark.py fails with ModuleNotFoundError: typing_extensions under the sealed interpreter. No IVP suite-pass claim is made."
+        "reason": "Collection of test/benchmarks/test_incremental_verification_planner_benchmark.py fails with ModuleNotFoundError: typing_extensions under PYTHONNOUSERSITE=1. No IVP suite-pass claim is made.",
+        "evidence_kind": "unavailable"
       },
       "finding": "Reuse only as adjacent evidence. Cross-tree unaffected reuse is explicitly unmet in the published artifact. Missing provers are typed unavailable. The red controlled false-negative target must not be relabeled green."
     },
@@ -260,15 +436,43 @@
         {
           "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py",
           "sha256": "23ac1597b68775cf651cc2ee44166a9eff4794fa7084d405449959e70a79337b",
-          "git_blob": "2eebf178aeec11d7dd8f7666659f4fcc93461bf7"
+          "git_blob": "2eebf178aeec11d7dd8f7666659f4fcc93461bf7",
+          "evidence_kind": "measured"
         }
       ],
       "cid_bindings": {
         "configuration_a_cid": "baguqeerab5ltrfd6dasxes2r76svhxbbcbj7hcjqgxpwsgi2rfbn53x2lmha",
         "configuration_b_cid": "baguqeeravan66pqbuayxtc6wzsqcn5ocbzwflqbdbeoowlvtore26hqmwzrq",
-        "runner_descriptor_cid": "baguqeeral365qpuhscm3ejzq6ntzfmob5oaqj2rejrl7z7kadfqbcfswmo2a"
+        "runner_descriptor_cid": "baguqeeral365qpuhscm3ejzq6ntzfmob5oaqj2rejrl7z7kadfqbcfswmo2a",
+        "evidence_kind": "measured"
       },
       "finding": "Configuration A is ordinary lexical retrieval; B changes only the context method to the frozen semantic ContextPack contract. Both disable routing, incremental verification, and proof reuse. Simulated success is forced to rejected simulation; replay cannot be relabeled live. This is not a PCSM M1/M2 projection benchmark."
+    },
+    {
+      "system": "Proof-context configurations C/D paired runner",
+      "disposition": "reuse_as_adjacent_proof_reuse_and_governed_lifecycle_runner",
+      "role": "adjacent C/D measurement: C adds routing plus incremental verification and proof reuse to semantic ContextPacks; D adds the complete governed lifecycle",
+      "authority": "ipfs_accelerate_py runs the provider-neutral runner; ipfs_datasets_py owns ContextPack identity; Mcp-Plus-Plus owns the wire schema only",
+      "interfaces": [
+        "ipfs-accelerate.proof-context.benchmark-configurations-cd@1",
+        "ipfs-accelerate.proof-context.benchmark-pair-cd@1",
+        "ipfs-datasets.proof-context.benchmark-configuration@1"
+      ],
+      "current_sources": [
+        {
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_cd.py",
+          "sha256": "f2184b4fe6f5c5790361f7de348aa959ffc378087cdfff503fb0026b0c806082",
+          "git_blob": "51c88a52764a9fdc8dc45e3fa3fb1fbe6ba548c7",
+          "evidence_kind": "measured"
+        }
+      ],
+      "cid_bindings": {
+        "configuration_c_cid": "baguqeeraqrsu4psh7r6ehgwt5ebcqvjqckgyrwdgl2twxcku7ihknoxrzz5q",
+        "configuration_d_cid": "baguqeeranxarzlueyd5lsmabqgke7bt7qvarxaevuazzces6gf7cozkdmxxq",
+        "runner_descriptor_cid": "baguqeera7ehgn7vsetzjygsda4hzyn5r7k3ov6axjydqk6vsnn32w7sxgj6q",
+        "evidence_kind": "measured"
+      },
+      "finding": "Configuration C is the current-head adjacent runner that actually enables proof reuse together with incremental verification. Configuration D adds sufficiency, bounded expansion, assurance, incremental sealing, and human escalation. Simulated, stale, unavailable, malformed, or partially bound evidence cannot become an accepted result. This is not a PCSM M1/M2 paired corpus and is not promotion-authoritative."
     },
     {
       "system": "Adversarial-assurance SCG calibration harness",
@@ -277,15 +481,25 @@
       "authority": "ipfs_accelerate_py executes; ipfs_datasets_py owns adversarial-assurance contracts",
       "interfaces": [
         "AssuranceBenchmarkReport@1",
-        "aae/seal-benchmark@1"
+        "aae/seal-benchmark@1",
+        "ScgCalibrationEvidence@1"
       ],
       "current_sources": [
         {
           "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/adversarial_assurance.py",
           "sha256": "9506ceeea3121d048a6b9868ce0b365315d20f1eb2fe30bf11aa9c888cd53126",
-          "git_blob": "98ec6059b6dcb766c4e075aa3745fff7049e659d"
+          "git_blob": "98ec6059b6dcb766c4e075aa3745fff7049e659d",
+          "evidence_kind": "measured"
         }
       ],
+      "published_artifact": {
+        "path": "external/ipfs_accelerate/artifacts/agent_supervisor/adversarial_assurance/scg_calibration.json",
+        "sha256": "826ce6041066f706979b52c0fb7050f72dcf013cd429abf984217580777299c3",
+        "git_blob": "001487f889a657e8f43814ca9ed834a91f9b2f33",
+        "authoritative_for_production_policy": false,
+        "production_policy_change_allowed": false,
+        "evidence_kind": "measured"
+      },
       "finding": "Produces non-authoritative SCG calibration evidence and must not be treated as production policy or as a PCSM corpus. It is not a replacement for SCG-045 or IPS-052."
     }
   ],
@@ -296,11 +510,17 @@
     },
     {
       "system": "pytest proof_reuse plugin",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+      "sha256": "8343c51001f1b999e9e9461ac57caf5e8110d8f4ad974246b1d4637a9a174c10",
+      "git_blob": "a8d9d918b8df599a3617998510cd63dffcc0e60e",
       "reason": "Runtime test-reuse activation, not a versioned semantic-compression or proof-reuse benchmark harness."
     },
     {
-      "system": "semantic_state run_benchmark",
-      "reason": "Semantic-state task corpus, not a compression or proof-reuse benchmark."
+      "system": "semantic_state run_benchmark / SemanticStateBenchmark@1",
+      "path": "external/ipfs_accelerate/benchmarks/semantic_state/run_benchmark.py",
+      "sha256": "fa2a6c0deb84fc67ae684ebd944fcbddbba9a4b6eb1e02e253dc866ffdda5595",
+      "git_blob": "fb7d7da9739e21ba23ace5354c98a160daabf1d9",
+      "reason": "Semantic-state task corpus (SCH), not a PCSM paired compression or proof-reuse benchmark."
     }
   ],
   "version_and_cid_controls": {
@@ -311,20 +531,26 @@
       "SemanticGovernorBenchmark@1, IncrementalVerificationBenchmark@2, and IncrementalProofBenchmark results@2 are versioned closed schemas.",
       "SCG published benchmark content_id, summary_content_id, commitment_cid, corpus_cid, and governor-metric report_cid are content-addressed.",
       "IVP published content_id, commitment_cid, source_snapshot_id, and metrics_digest are content-addressed.",
-      "Configuration A/B descriptors are dag-json CIDv1 bound.",
+      "Configuration A/B and C/D descriptors are dag-json CIDv1 bound.",
       "SCG --check excludes observational fields and still requires deterministic case/summary match.",
       "IPS seed 20260811 and transition_count 40 are reviewed constants; other seeds/counts raise BenchmarkError.",
       "Published SCG/IPS/IVP observed heads are historical and must not be treated as the bound current accelerate gitlink."
-    ]
+    ],
+    "receipt_cid": {
+      "status": "unavailable",
+      "reason": "ipfs was absent from the sealed validation PATH and no admitted immutable receipt-store write was available. A SHA-256 string is not substituted for a CID.",
+      "evidence_kind": "unavailable"
+    }
   },
   "minimum_versioned_delta": {
     "status": "unavailable_pending_named_follow_on_packages",
-    "reason": "Current-head equivalents already exist for semantic compression (SCG) and proof reuse (IPS), with adjacent IVP and A/B runners. No inspected current-head package simultaneously provides the PCSM v1 raw/M1/M2-plus-M1 paired corpus, exact current-tree M1 source-link evidence, live-shadow cohort, or provider-cost evidence. Implementing a duplicate harness here would exceed the receipt-only output and create a competing authority.",
+    "reason": "Current-head equivalents already exist for semantic compression (SCG) and proof reuse (IPS), with adjacent IVP, A/B, and C/D runners. No inspected current-head package simultaneously provides the PCSM v1 raw/M1/M2-plus-M1 paired corpus, exact current-tree M1 source-link evidence, live-shadow cohort, or provider-cost evidence. Implementing a duplicate harness here would exceed the receipt-only output and create a competing authority.",
     "reuse_first_decision": {
       "semantic_compression": "reuse SemanticGovernorBenchmark@1 as the PCSM-101 current-compression baseline; do not fork it",
       "proof_reuse": "reuse IncrementalProofBenchmark 40-transition workload as the proof-reuse equivalent",
       "selected_test_reuse": "consume IVP only as adjacent evidence after typing_extensions or an approved digest-bound dependency is present",
       "paired_raw_versus_semantic": "consume configurations A/B as the existing raw vs semantic ContextPack runner",
+      "paired_proof_reuse_and_lifecycle": "consume configurations C/D as the existing proof-reuse / governed-lifecycle runner",
       "pcsm_paired_routes": "defer raw, current-compression, M1, and M2-plus-M1 paired routes to PCSM-100 through PCSM-103"
     },
     "required_follow_on_tasks": [
@@ -349,7 +575,8 @@
       "PCSM-118",
       "PCSM-119"
     ],
-    "non_promotion_effect": "No PCSM projection, typed patch, source link, automatic mutation, or gate weakening is admitted solely from this receipt. SCG remains yellow; IVP remains red."
+    "non_promotion_effect": "No PCSM projection, typed patch, source link, automatic mutation, or gate weakening is admitted solely from this receipt. SCG remains yellow; IVP remains red.",
+    "evidence_kind": "unavailable"
   },
   "coverage": {
     "positive_and_negative_test_sources": [
@@ -362,7 +589,7 @@
           "stale/injection rejection accounting, zero critical-omission acceptance, targets as thresholds, and non-production fixture labeling"
         ],
         "evidence_kind": "measured_execution",
-        "execution": "15 of 16 tests passed under the sealed interpreter with forest PYTHONPATH; test_check_cli_passes_against_published_artifacts failed as recorded below"
+        "execution": "15 of 16 tests passed under PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest with forest PYTHONPATH; test_check_cli_passes_against_published_artifacts failed as recorded below"
       },
       {
         "path": "external/ipfs_accelerate/test/benchmarks/test_incremental_proof_sealer_benchmark.py",
@@ -396,6 +623,17 @@
         ],
         "evidence_kind": "measured_execution",
         "execution": "56 passed"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_cd.py",
+        "sha256": "b93539b3d7fcfe59fa4520082ab737cc89b3227f54b7d6f2f90a8dc9b4bfcbf7",
+        "git_blob": "a17e131d12b7cff35e6088a10f1ff723a76767b8",
+        "coverage": [
+          "frozen C/D CID descriptors, reuse-hit receipt CID requirement, stale reuse rejection, and wrong-parent seal rejection",
+          "simulated execution never accepted, replay cannot be relabelled live, and incomplete lifecycle/assurance cannot accept"
+        ],
+        "evidence_kind": "measured_execution",
+        "execution": "54 passed"
       }
     ],
     "PCSM_specific_test_gap": {
@@ -403,17 +641,190 @@
       "statement": "No current-head test was found for a PCSM v1 raw/M1/M2-plus-M1 paired corpus, exact current-tree M1 source-link benchmark, live-shadow cohort, or provider-cost sensor. Adjacent-system tests above are not relabeled as PCSM semantic validation."
     }
   },
+  "validation": {
+    "commands": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json",
+      "status": "passed_via_usr_bin_python3.12",
+      "note": "Unversioned python is absent from the sealed PATH; json.tool was executed with /usr/bin/python3.12.",
+      "evidence_kind": "measured"
+    },
+    "positive": [
+      {
+        "name": "nested gitlinks, heads, trees, and scheduler planning revisions agree",
+        "status": "passed",
+        "observed_roots": 4,
+        "also_checked": [
+          "nested worktrees clean",
+          "superproject gitlink equals nested head",
+          "configured origin/main revision is an ancestor of each nested head",
+          "listed source SHA-256 and git blob identities match live files"
+        ],
+        "evidence_kind": "measured"
+      },
+      {
+        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate PYTHONNOUSERSITE=1 /usr/bin/python3.12 external/ipfs_accelerate/benchmarks/agent_supervisor/semantic_compression_governor.py --check --json",
+        "result": "passed: ok=true, benchmark_match=true, summary_match=true, 60 cases, status=yellow",
+        "evidence_kind": "measured"
+      },
+      {
+        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate PYTHONNOUSERSITE=1 /usr/bin/python3.12 external/ipfs_accelerate/benchmarks/agent_supervisor/incremental_proof_sealer.py --json-output <temp>/benchmark.json --csv-output <temp>/benchmark.csv --repo-root external/ipfs_accelerate",
+        "result": "passed: 40 closed transitions and deterministic roots matched; simulated_required_units=0; stale_parent at index 37",
+        "evidence_kind": "measured"
+      },
+      {
+        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/benchmarks/test_incremental_proof_sealer_benchmark.py",
+        "result": "passed: 50 passed",
+        "evidence_kind": "measured"
+      },
+      {
+        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py",
+        "result": "passed: 56 passed",
+        "evidence_kind": "measured"
+      },
+      {
+        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_cd.py",
+        "result": "passed: 54 passed",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "A/B and C/D CID constants recomputed from current sources",
+        "status": "passed",
+        "observed": {
+          "A": "baguqeerab5ltrfd6dasxes2r76svhxbbcbj7hcjqgxpwsgi2rfbn53x2lmha",
+          "B": "baguqeeravan66pqbuayxtc6wzsqcn5ocbzwflqbdbeoowlvtore26hqmwzrq",
+          "C": "baguqeeraqrsu4psh7r6ehgwt5ebcqvjqckgyrwdgl2twxcku7ihknoxrzz5q",
+          "D": "baguqeeranxarzlueyd5lsmabqgke7bt7qvarxaevuazzces6gf7cozkdmxxq"
+        },
+        "evidence_kind": "measured"
+      }
+    ],
+    "negative": [
+      {
+        "name": "stale prior PCSM-003 outer commit and gitlink rejection",
+        "status": "passed",
+        "method": "Compared current outer commit 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, accelerate gitlink 19a44398735b15de6f6c8c09cc501691c3a95094, datasets gitlink a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648, Mcp-Plus-Plus gitlink 31096be86103f29faef80a01e03d09b1ad7345c6, and scheduler SHA-256 f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446 against the previously committed receipt bindings 36e9f4d35edc2933ac580ba62f9284aa05bdd8cc, 5af405cc87abf684b32d920afd5346411581876a, 719083b59637558d2338281a63435021e994a875, 838261c04a4b6f2643d75017e0b472876597c673, and 1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93; all differed and were rejected as stale.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "published SCG/IPS/IVP observed heads are not the bound accelerate gitlink",
+        "status": "passed",
+        "method": "SCG observed_head 40ebd4c550412a7a8c70241849a4c1423064ee62, IPS published accelerate revision b11c1e84ce70840f99df66fd01f78a38985ec617, and IVP observed_head 8c7800cedc5e1b848367db9952f912428466f8cc were compared to current accelerate gitlink 19a44398735b15de6f6c8c09cc501691c3a95094 and rejected as current-tree seals.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged nested tree identity rejection",
+        "status": "passed",
+        "method": "A same-length all-zero tree value was compared to the measured ipfs_kit tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged SCG harness SHA-256 rejection",
+        "status": "passed",
+        "method": "A same-length all-zero digest was compared to the measured semantic_compression_governor.py SHA-256 c735c05b221a61aa1d1d81b80f5107261bd7fd78adb648819d74d645ab1c403b and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "command": "same SCG pytest file including test_check_cli_passes_against_published_artifacts",
+        "result": "failed as expected: the test launches with PYTHONPATH=ipfs_kit_py:ipfs_datasets_py:. and cannot import ipfs_datasets_py.logic. Direct sealed SCG --check with forest PYTHONPATH passes.",
+        "classification": "known current-head harness-path defect; out of receipt-only edit scope",
+        "evidence_kind": "measured"
+      },
+      {
+        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q --collect-only external/ipfs_accelerate/test/benchmarks/test_incremental_verification_planner_benchmark.py",
+        "result": "collection blocked: ModuleNotFoundError: typing_extensions from ipfs_accelerate_py.agent_supervisor.verification.receipt_store",
+        "classification": "sealed-environment dependency unavailable; no claim that IVP suite passed",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "command": "sealed PATH capability probe",
+        "result": "unversioned python, pytest CLI, z3, lean, lake, coqc, isabelle, and ipfs unavailable; typing_extensions absent under PYTHONNOUSERSITE=1",
+        "classification": "typed unavailable; no formal-proof or receipt-store CID claim",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "provider-local formal tools are not accepted as sealed-environment evidence",
+        "status": "passed",
+        "method": "Operator PATH contained ~/.local/bin/z3 and ~/.elan/bin/{lean,lake}; the authoritative PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin excluded them. Each was recorded unavailable rather than usable.",
+        "evidence_kind": "measured"
+      }
+    ],
+    "proof_results": {
+      "status": "not_selected",
+      "reason": "This receipt-only inventory made no source mutation and no PCSM proof obligation was emitted. Absent optional provers remain unavailable rather than a passing proof result.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "python_no_user_site": true,
+    "git_path": "/usr/bin/git",
+    "home": "fresh private temporary directory whose name starts with ipfs-accelerate-validation-home-",
+    "pythonpath_for_nested_harnesses": "external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate",
+    "evidence_kind": "measured",
+    "optional_capabilities": [
+      {
+        "capability": "pytest CLI",
+        "status": "unavailable",
+        "reason": "pytest was absent from the sealed validation PATH. /usr/bin/python3.12 -m pytest is present via /usr/local/lib/python3.12/dist-packages and was used for A/B, C/D, SCG, and IPS suites.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "typing_extensions",
+        "status": "unavailable",
+        "reason": "typing_extensions is absent from the sealed interpreter under PYTHONNOUSERSITE=1, so the IVP planner benchmark suite cannot collect.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "IPFS CLI / receipt CID issuance",
+        "status": "unavailable",
+        "reason": "ipfs was absent from the sealed validation PATH.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Z3 prover",
+        "status": "unavailable",
+        "reason": "z3 was absent from the sealed validation PATH.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Lean and Lake",
+        "status": "unavailable",
+        "reason": "lean and lake were absent from the sealed validation PATH.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "coqc and isabelle",
+        "status": "unavailable",
+        "reason": "coqc and isabelle were absent from the sealed validation PATH.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "unversioned python",
+        "status": "unavailable",
+        "reason": "Unversioned python is absent from the sealed PATH; json.tool was executed with /usr/bin/python3.12.",
+        "evidence_kind": "unavailable"
+      }
+    ]
+  },
   "evidence_classification": {
     "measured": [
-      "Outer HEAD/tree 36e9f4d35edc2933ac580ba62f9284aa05bdd8cc / 4dc46cff8a4a51fe91b5142d39c291667ca1d7af, four gitlinks, four nested trees, clean pre-edit worktrees, and every listed source SHA-256/git-blob were directly observed.",
-      "SCG --check in the sealed PATH with forest PYTHONPATH returned ok=true, benchmark_match=true, summary_match=true, case_count=60.",
-      "IPS current-head rerun emitted 40 transitions with deterministic_roots_match=true on every row and simulated_required_units=0 on every row.",
-      "Focused SCG+IPS pytest: 65 passed, 1 deselected. Configurations A/B pytest: 56 passed.",
-      "Sealed PATH probe: /usr/bin/python3.12 is Python 3.12.3; unversioned python, pytest CLI, ipfs, z3, lean, lake, coqc, and isabelle are absent."
+      "Outer HEAD/tree 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d / cd81f5731ee64c29161830c9933d6739e0dd3eb3, four admitted gitlinks, four nested trees, clean pre-edit worktrees, origin/main ancestor checks, scheduler planning-revision equality, and every listed source SHA-256/git-blob were directly observed.",
+      "Scheduler-config digest f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446.",
+      "Inventoried SCG/IPS/IVP/A/B source bytes were re-hashed and matched the stale v1 receipt despite accelerate, datasets, and Mcp-Plus-Plus gitlink movement.",
+      "SCG --check in the sealed PATH with forest PYTHONPATH and PYTHONNOUSERSITE=1 returned ok=true, benchmark_match=true, summary_match=true, case_count=60, status=yellow.",
+      "IPS current-head rerun emitted 40 transitions with deterministic_roots_match=true on every row and simulated_required_units=0 on every row; stale_parent at index 37.",
+      "SCG pytest: 15 passed, 1 failed (known CLI PYTHONPATH defect). IPS pytest: 50 passed. Configurations A/B pytest: 56 passed. Configurations C/D pytest: 54 passed.",
+      "A/B and C/D CID constants recomputed from current sources.",
+      "Sealed PATH probe: /usr/bin/python3.12 is Python 3.12.3; unversioned python, pytest CLI, ipfs, z3, lean, lake, coqc, and isabelle are absent; typing_extensions is absent under PYTHONNOUSERSITE=1."
     ],
     "estimated": [
       "SCG cost and overhead fields use scg-local-cost-estimator/v1; published summary reports net_savings_micros=-10417. This is a local estimator, never live billing.",
-      "IPS proof/compute/memory/time fields are estimated or mixed planner costs; published summary measurement_counts.measured=0.",
+      "IPS proof/compute/memory/time fields are estimated or mixed planner costs; published summary measurement_counts.measured=0; current-head rerun measurement_provenance=mixed on all 40 rows.",
       "IVP token savings use ivp-estimator/utf8-bytes-div4@1 and reused_time uses estimated_selected_vs_full. These values were read from the published artifact, not re-executed."
     ],
     "simulated": [
@@ -427,71 +838,35 @@
       "typing_extensions is absent from the sealed interpreter, so the IVP planner benchmark suite cannot collect.",
       "ipfs CLI / receipt CID issuance is absent; this receipt is not assigned an immutable store CID.",
       "PCSM source-map artifact, raw/M1/M2-plus-M1 paired corpus, live-shadow cohort, and provider tokenizer revision are absent.",
-      "Unversioned python is absent from the sealed PATH; json.tool was executed with /usr/bin/python3.12."
+      "Unversioned python is absent from the sealed PATH; json.tool was executed with /usr/bin/python3.12.",
+      "The smallest versioned PCSM paired-benchmark delta is deferred to named follow-on packages."
     ]
   },
-  "validation": {
-    "environment": {
-      "python": "/usr/bin/python3.12 (3.12.3)",
-      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-      "python_no_user_site": true,
-      "home": "fresh private temporary directory whose name starts with ipfs-accelerate-validation-home-",
-      "pythonpath_for_nested_harnesses": "external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate"
+  "evidence_summary": {
+    "measured": {
+      "count": 8,
+      "description": "Current-head forest identities, source digests, digest continuity across gitlink movement, sealed SCG --check, IPS rerun, A/B/C/D/IPS pytest, CID recomputation, and sealed-environment facts."
     },
-    "commands": [
-      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-003.json"
-    ],
-    "results": [
-      {
-        "kind": "measured",
-        "status": "pass",
-        "assertions": [
-          "receipt parses as JSON",
-          "receipt binds the current tree, records reusable benchmark systems and their authority limits, lists positive and negative coverage sources, and separates measured, estimated, simulated, and unavailable evidence"
-        ]
-      }
-    ],
-    "positive": [
-      {
-        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate /usr/bin/python3.12 external/ipfs_accelerate/benchmarks/agent_supervisor/semantic_compression_governor.py --check --json",
-        "result": "passed: ok=true, benchmark_match=true, summary_match=true, 60 cases, status=yellow"
-      },
-      {
-        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate /usr/bin/python3.12 external/ipfs_accelerate/benchmarks/agent_supervisor/incremental_proof_sealer.py --json-output <temp>/benchmark.json --csv-output <temp>/benchmark.csv --repo-root external/ipfs_accelerate",
-        "result": "passed: 40 closed transitions and deterministic roots matched; simulated_required_units=0"
-      },
-      {
-        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q -k 'not test_check_cli_passes_against_published_artifacts' external/ipfs_accelerate/test/benchmarks/test_semantic_compression_governor_benchmark.py external/ipfs_accelerate/test/benchmarks/test_incremental_proof_sealer_benchmark.py",
-        "result": "passed: 65 passed, 1 deselected"
-      },
-      {
-        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py",
-        "result": "passed: 56 passed"
-      }
-    ],
-    "negative": [
-      {
-        "command": "same SCG pytest file including test_check_cli_passes_against_published_artifacts",
-        "result": "failed as expected: the test launches with PYTHONPATH=ipfs_kit_py:ipfs_datasets_py:. and cannot import ipfs_datasets_py.logic. Direct sealed SCG --check with forest PYTHONPATH passes.",
-        "classification": "known current-head harness-path defect; out of receipt-only edit scope"
-      },
-      {
-        "command": "PYTHONPATH=external/ipfs_datasets:external/ipfs_kit:external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --collect-only external/ipfs_accelerate/test/benchmarks/test_incremental_verification_planner_benchmark.py",
-        "result": "collection blocked: ModuleNotFoundError: typing_extensions from ipfs_accelerate_py.agent_supervisor.verification.receipt_store",
-        "classification": "sealed-environment dependency unavailable; no claim that IVP suite passed"
-      },
-      {
-        "command": "sealed PATH capability probe",
-        "result": "z3, lean, lake, coqc, isabelle, and ipfs unavailable",
-        "classification": "typed unavailable; no formal-proof or receipt-store CID claim"
-      }
-    ]
+    "estimated": {
+      "count": 3,
+      "description": "Named SCG/IPS/IVP cost and token estimators; never treated as live billing or promotion facts."
+    },
+    "simulated": {
+      "count": 3,
+      "description": "SCG 60-case fixture corpus, IPS 40-transition synthetic planner workload, and IVP controlled 20-case catalog."
+    },
+    "unavailable": {
+      "count": 7,
+      "description": "Live provider/cost/quality sensors, formal provers, typing_extensions, ipfs CID issuance, PCSM source-map and paired corpora, unversioned python, and the deferred versioned delta."
+    }
   },
   "limitations": [
     "This artifact is an inventory receipt, not a semantic proof, promotion decision, canonical CodeIR, source-link receipt, or patch admission.",
-    "Published SCG, IPS, and IVP artifacts bind historical observed heads, not the current accelerate gitlink 5af405cc87abf684b32d920afd5346411581876a.",
+    "Published SCG, IPS, and IVP artifacts bind historical observed heads, not the current accelerate gitlink 19a44398735b15de6f6c8c09cc501691c3a95094.",
     "SCG is yellow with a median-context-reduction target miss; IVP is red with one controlled false negative; IPS costs are estimated synthetic planner values.",
+    "An accelerate-rooted IPS rerun cannot independently bind datasets/kit HEADs in this portal forest; those source_revisions fields are not datasets/kit identities.",
     "All source digests and reuse decisions bind the exact tree above; freshness must be rechecked before a later task consumes an inventoried component.",
+    "The uncommitted receipt itself is not claimed as part of the pre-write sealed outer tree.",
     "Independent supervisor admission and any durable receipt-store publication remain required."
   ],
   "rollback": {
