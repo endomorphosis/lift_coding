@@ -1,0 +1,55 @@
+{
+  "schema": "lift_coding.proof-carrying-semantic-minification.datasets-package-current-head@1",
+  "status": "qualified_current_head",
+  "authority": "composed_workspace_validation_only",
+  "source_binding": {
+    "repository": "ipfs_datasets_py",
+    "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+    "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+    "origin_main_commit": "58ec3ab476ae8362b824934bb16f2507c21771a2",
+    "origin_main_is_ancestor": true
+  },
+  "historical_receipt": {
+    "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-050.json",
+    "sha256": "409fe8a8fdde7f9fc44e7f1d85fb5f9e1e41a16d5de406d628d0a3cce75c43a8",
+    "cid_v1_raw": "bafkreicat7ukr7o6p6p4itt7dwc7wx46dza2c3k54qdnmkgqupgooxcdva",
+    "preserved_unchanged": true
+  },
+  "evidence": {
+    "reproducibility": {
+      "source_date_epoch": "0",
+      "build_count": 2,
+      "byte_identical": true,
+      "measurement_status": "measured"
+    },
+    "artifacts": {
+      "wheel": {
+        "filename": "ipfs_datasets_py-0.2.0-cp312-cp312-linux_aarch64.whl",
+        "sha256": "8c3ecddb2db935f847dfb267e424e0dffac3db380e7e2f6883b63aba563afda8",
+        "contents_manifest_sha256": "8f6cd753a1d57691bc0b046b94ee1c7255afecbb569ab3830e4c9dfdc26b90bb",
+        "member_count": 4137,
+        "record_sha256": "10a58ad4d8454a3913f3be3e0ab5053c71c9c8b1f8e1bf79a138becf376170bb",
+        "measurement_status": "measured"
+      },
+      "sdist": {
+        "filename": "ipfs_datasets_py-0.2.0.tar.gz",
+        "sha256": "5a9d2f00ff4c3bd8d4f44550d9ac8d886ba9cf35ad799652a5c66d5b8b2bd14f",
+        "contents_manifest_sha256": "1f300e927e57441ea04d7920cca8c1ec6f58ece4e8fb533f04f31659b8490b71",
+        "member_count": 4718,
+        "measurement_status": "measured"
+      }
+    },
+    "build_environment": {
+      "python": "3.12.3",
+      "build": "1.5.0",
+      "setuptools": "82.0.1",
+      "wheel": "0.42.0"
+    }
+  },
+  "limitations": [
+    "This receipt qualifies only the exact current datasets commit and tree for composed-workspace validation.",
+    "It does not supersede, rewrite, or promote the historical PCCE v0.1-rc1 release.",
+    "Any datasets commit or tree change invalidates this receipt and must fail closed until independently rebuilt twice."
+  ],
+  "rollback": "Remove this current-head receipt and revert only the source-bound selector commit; retain historical PCCE-050 and its release manifests unchanged."
+}
