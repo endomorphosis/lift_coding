@@ -180,6 +180,29 @@ HANDOFF_GENERATION_REPLAY_REPAIR_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-restart-generation-replay-repair@1"
 )
+HANDOFF_COMMAND_AUTHORITY_REPAIR_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-command-authority-repair.json"
+)
+HANDOFF_COMMAND_AUTHORITY_REPAIR_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-command-authority-repair@1"
+)
+HANDOFF_COMMAND_AUTHORITY_REPAIR_BASE_COMMIT: Final = (
+    "PENDING_HANDOFF_COMMAND_AUTHORITY_REPAIR_BASE_COMMIT"
+)
+HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_COMMIT: Final = (
+    "307c97ebcdee425ecdd93813c8898712b46b3fc8"
+)
+HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_TREE: Final = (
+    "209d81f01b3a900d1d041721bd235b86a7319950"
+)
+HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OPERATOR_IDENTITY: Final = (
+    "sha256:691345158b9bfac25b5124b8e2b5bbe5bac2e35492fc0c292a6feec8fa585131"
+)
 HANDOFF_GENERATION_REPLAY_REPAIR_BASE_COMMIT: Final = (
     "3208c41917944182865889c48e57bc128ab8a463"
 )
@@ -1241,10 +1264,327 @@ def _verified_generation_replay_repair(
         or base_bytes.count(call_start) != 1
         or base_bytes.count(call_end) != 1
         or base_bytes.count(old_revision_checks) != 1
+    ):
+        raise OperatorError("PCSM generation replay repair source delta changed")
+    if current_bytes != expected_current:
+        _verified_handoff_command_authority_repair(
+            sealed_operator_identity=_identity(expected_current),
+            current_operator_identity=current_operator_identity,
+            current_head=current_head,
+        )
+    elif _identity(current_bytes) != current_operator_identity:
+        raise OperatorError("PCSM generation replay repair identity changed")
+    return payload
+
+
+def _verified_handoff_command_authority_repair(
+    *,
+    sealed_operator_identity: str,
+    current_operator_identity: str,
+    current_head: str,
+) -> dict[str, Any]:
+    """Admit only separation of current-head and durable retry identities."""
+
+    payload = _json_mapping_bytes(
+        _tracked_bytes(HANDOFF_COMMAND_AUTHORITY_REPAIR_PATH, head=current_head),
+        field="PCSM restart command-authority repair receipt",
+    )
+    expected_fields = {
+        "schema",
+        "reason",
+        "source_generation_replay_repair_receipt_id",
+        "sealed_outer_commit",
+        "sealed_outer_tree",
+        "sealed_operator_identity",
+        "repair_base_commit",
+        "repair_base_tree",
+        "repair_base_operator_identity",
+        "current_operator_identity",
+        "current_source_handoff",
+        "historical_command_authority",
+        "exact_change",
+        "durable_replay",
+        "nested_accelerator_repair",
+        "validation",
+        "historical_replay_receipts_preserved",
+        "attempt_refunded",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    current_handoff = payload.get("current_source_handoff")
+    historical = payload.get("historical_command_authority")
+    exact_change = payload.get("exact_change")
+    durable_replay = payload.get("durable_replay")
+    accelerator_repair = payload.get("nested_accelerator_repair")
+    validation = payload.get("validation")
+    operator_path = Path(__file__).resolve()
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    base_commit = HANDOFF_COMMAND_AUTHORITY_REPAIR_BASE_COMMIT
+    expected_accelerator_paths = [
+        "ipfs_accelerate_py/agent_supervisor/task_sources/"
+        "control_plane_contracts.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/"
+        "quack_state_client.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/"
+        "typed_database_task_source.py",
+        "ipfs_accelerate_py/agent_supervisor/task_sources/"
+        "typed_state_owner.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_daemon.py",
+        "scripts/run_agent_supervisor_causal_event_federation.py",
+        "test/api/causal_federation/test_admitted_executor.py",
+        "test/api/test_agent_supervisor_database_implementation_daemon.py",
+    ]
+    expected_exact_change = {
+        "field": "operator_handoff_receipt_id",
+        "previous_authority": "current_source_handoff_receipt_id",
+        "admitted_authority": "historical_sealed_handoff_receipt_id",
+        "expected_recovery_receipt_changed": True,
+        "recovery_command_changed": True,
+        "owner_restart_admission_reporting_changed": False,
+        "current_source_handoff_remains_content_addressed": True,
+    }
+    expected_durable_replay = {
+        "task_cid": HANDOFF_REPAIR_TASK_CID,
+        "task_status_after_recovery": "retrying",
+        "task_revision_after_recovery": 5,
+        "operator_handoff_receipt_id": HANDOFF_REPAIR_SEALED_RECEIPT_ID,
+        "command_id": (
+            "cmd:blocked-retry-recovery:"
+            "ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7"
+        ),
+        "idempotency_key": (
+            "executor-blocked-retry-recovery:"
+            "ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7"
+        ),
+        "result_digest": (
+            "sha256:ba3a88d6bd6f2c848b273fb5362919909fa6c9d0813258df089a0cc08bc04f1e"
+        ),
+        "replay_outcome": "idempotent_replay",
+        "replay_changed": False,
+    }
+    expected_accelerator_repair = {
+        "repository": "external/ipfs_accelerate",
+        "prior_commit": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
+        "prior_tree": "c2a1f18bb0d383d90ebae74037a489fb3034d428",
+        "repair_commit": "45f8abca891ce304d56aac0ea5113b4cde9a7b60",
+        "repair_tree": "f1048b00fb4df02824bcbf2bcc85951df0546eab",
+        "merge_commit": "82f31f60cadb4b243d9d4d38e6040d3118fb90a8",
+        "merge_tree": "f1048b00fb4df02824bcbf2bcc85951df0546eab",
+        "merge_parents": [
+            "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
+            "45f8abca891ce304d56aac0ea5113b4cde9a7b60",
+        ],
+        "changed_paths": expected_accelerator_paths,
+    }
+    if (
+        set(payload) != expected_fields
+        or payload.get("schema") != HANDOFF_COMMAND_AUTHORITY_REPAIR_SCHEMA
+        or payload.get("reason")
+        != "typed_attempt_terminal_transition_command_authority_separation"
+        or payload.get("source_generation_replay_repair_receipt_id")
+        != "sha256:4af075a3eecf56687c90ebd416132f83630c646a0c44210ca680aefca2bb0b67"
+        or payload.get("sealed_outer_commit")
+        != HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_COMMIT
+        or payload.get("sealed_outer_tree")
+        != HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_TREE
+        or payload.get("sealed_operator_identity")
+        != HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OPERATOR_IDENTITY
+        or sealed_operator_identity
+        != HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OPERATOR_IDENTITY
+        or payload.get("repair_base_commit") != base_commit
+        or payload.get("current_operator_identity")
+        != current_operator_identity
+        or not isinstance(current_handoff, Mapping)
+        or set(current_handoff) != {"path", "receipt_id"}
+        or current_handoff.get("path")
+        != HANDOFF_REPAIR_PATH.relative_to(ROOT).as_posix()
+        or not isinstance(historical, Mapping)
+        or dict(historical)
+        != {
+            "path": HANDOFF_REPAIR_PATH.relative_to(ROOT).as_posix(),
+            "sealed_outer_commit": HANDOFF_REPAIR_SEALED_OUTER_COMMIT,
+            "receipt_id": HANDOFF_REPAIR_SEALED_RECEIPT_ID,
+        }
+        or not isinstance(exact_change, Mapping)
+        or dict(exact_change) != expected_exact_change
+        or not isinstance(durable_replay, Mapping)
+        or dict(durable_replay) != expected_durable_replay
+        or not isinstance(accelerator_repair, Mapping)
+        or dict(accelerator_repair) != expected_accelerator_repair
+        or not isinstance(validation, Mapping)
+        or dict(validation)
+        != {
+            "typed_admission_lifecycle_tests": 15,
+            "typed_admission_lifecycle_outcome": "passed",
+            "current_handoff_required_validations": 6,
+            "current_handoff_required_outcome": "passed",
+            "measurement_status": "measured",
+        }
+        or payload.get("historical_replay_receipts_preserved") is not True
+        or payload.get("attempt_refunded") is not False
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError("PCSM command-authority repair receipt is not admitted")
+
+    current_handoff_bytes = _tracked_bytes(HANDOFF_REPAIR_PATH, head=current_head)
+    current_handoff_body = _json_mapping_bytes(
+        current_handoff_bytes,
+        field="PCSM current-source handoff receipt",
+    )
+    historical_handoff_bytes = _git_blob_at(
+        head=HANDOFF_REPAIR_SEALED_OUTER_COMMIT,
+        path=HANDOFF_REPAIR_PATH,
+        field="historical PCSM handoff receipt",
+    )
+    historical_handoff_body = _json_mapping_bytes(
+        historical_handoff_bytes,
+        field="historical PCSM handoff receipt",
+    )
+    if (
+        current_handoff.get("receipt_id")
+        != current_handoff_body.get("receipt_id")
+        or current_handoff.get("receipt_id") == HANDOFF_REPAIR_SEALED_RECEIPT_ID
+        or _identity(
+            {
+                key: value
+                for key, value in current_handoff_body.items()
+                if key != "receipt_id"
+            }
+        )
+        != current_handoff.get("receipt_id")
+        or historical_handoff_body.get("receipt_id")
+        != HANDOFF_REPAIR_SEALED_RECEIPT_ID
+        or _identity(
+            {
+                key: value
+                for key, value in historical_handoff_body.items()
+                if key != "receipt_id"
+            }
+        )
+        != HANDOFF_REPAIR_SEALED_RECEIPT_ID
+    ):
+        raise OperatorError("PCSM current and historical handoff identities diverged")
+
+    accelerator_repository = ROOT / "external" / "ipfs_accelerate"
+    for field, commit, tree in (
+        (
+            "prior accelerator",
+            expected_accelerator_repair["prior_commit"],
+            expected_accelerator_repair["prior_tree"],
+        ),
+        (
+            "typed-admission repair",
+            expected_accelerator_repair["repair_commit"],
+            expected_accelerator_repair["repair_tree"],
+        ),
+        (
+            "typed-admission merge",
+            expected_accelerator_repair["merge_commit"],
+            expected_accelerator_repair["merge_tree"],
+        ),
+    ):
+        if _git_commit_tree(commit, field=field, repository=accelerator_repository) != tree:
+            raise OperatorError(f"{field} tree changed")
+    merge_parents = subprocess.run(
+        ["git", "show", "-s", "--format=%P", expected_accelerator_repair["merge_commit"]],
+        cwd=accelerator_repository,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    changed_paths = subprocess.run(
+        [
+            "git",
+            "diff",
+            "--name-only",
+            f"{expected_accelerator_repair['prior_commit']}.."
+            f"{expected_accelerator_repair['repair_commit']}",
+        ],
+        cwd=accelerator_repository,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if (
+        merge_parents.returncode != 0
+        or merge_parents.stdout.strip().split()
+        != expected_accelerator_repair["merge_parents"]
+        or changed_paths.returncode != 0
+        or sorted(changed_paths.stdout.splitlines()) != expected_accelerator_paths
+    ):
+        raise OperatorError("PCSM typed-admission accelerator repair lineage changed")
+
+    if (
+        _git_commit_tree(
+            HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_COMMIT,
+            field="sealed command-authority repair commit",
+        )
+        != HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_TREE
+        or _git_commit_tree(base_commit, field="command-authority repair base")
+        != payload.get("repair_base_tree")
+    ):
+        raise OperatorError("PCSM command-authority repair tree binding changed")
+    _git_is_ancestor(
+        base_commit,
+        current_head,
+        field="command-authority repair current lineage",
+    )
+    parents = str(_git("show", "-s", "--format=%P", base_commit)).strip().split()
+    changed_outer_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_COMMIT}.."
+                f"{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    sealed_bytes = _git_blob_at(
+        head=HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_COMMIT,
+        path=operator_path,
+        field="sealed command-authority operator",
+    )
+    base_bytes = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="command-authority repair base operator",
+    )
+    current_bytes = _tracked_bytes(operator_path, head=current_head)
+    pending_base = (
+        "PENDING_" + "HANDOFF_COMMAND_AUTHORITY_REPAIR_BASE_COMMIT"
+    ).encode("ascii")
+    expected_current = base_bytes.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    stable_expected_receipt = (
+        b'"operator_handoff_receipt_id": HANDOFF_REPAIR_SEALED_RECEIPT_ID'
+    )
+    stable_command_argument = (
+        b"handoff_receipt_id = HANDOFF_REPAIR_SEALED_RECEIPT_ID"
+    )
+    if (
+        parents != [HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_COMMIT]
+        or changed_outer_paths != (relative_operator,)
+        or _identity(sealed_bytes)
+        != HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OPERATOR_IDENTITY
+        or _identity(base_bytes) != payload.get("repair_base_operator_identity")
+        or base_bytes.count(pending_base) != 1
+        or base_bytes.count(stable_expected_receipt) != 1
+        or base_bytes.count(stable_command_argument) != 1
         or current_bytes != expected_current
         or _identity(current_bytes) != current_operator_identity
     ):
-        raise OperatorError("PCSM generation replay repair source delta changed")
+        raise OperatorError("PCSM command-authority repair source delta changed")
     return payload
 
 
@@ -3206,7 +3546,7 @@ def _restart_database_verification(source: Any, admission: Mapping[str, Any]) ->
             "source_completion_receipt_id": (
                 HANDOFF_REPAIR_COMPLETION_RECEIPT_ID
             ),
-            "operator_handoff_receipt_id": str(repair.get("receipt_id") or ""),
+            "operator_handoff_receipt_id": HANDOFF_REPAIR_SEALED_RECEIPT_ID,
             "sidecar_evidence_id": sealed_evidence_id,
             "recovered_from_revision": source_revision,
             "max_task_attempts_before": blocked_retry.get(
@@ -4152,7 +4492,7 @@ def _apply_blocked_retry_recovery(
         else None
     )
     evidence_id = str(sidecar_evidence.get("evidence_id") or "")
-    handoff_receipt_id = str(repair.get("receipt_id") or "")
+    handoff_receipt_id = HANDOFF_REPAIR_SEALED_RECEIPT_ID
     source_attempt = repair.get("source_attempt")
     if (
         blocked_retry_state
