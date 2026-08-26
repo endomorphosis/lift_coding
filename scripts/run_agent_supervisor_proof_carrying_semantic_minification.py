@@ -17,6 +17,7 @@ Quack authentication token.
 from __future__ import annotations
 
 import argparse
+import fcntl
 import hashlib
 import json
 import os
@@ -127,6 +128,10 @@ HANDOFF_REPAIR_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-handoff-repair@1"
 )
+HANDOFF_EXECUTION_ROUTE_CONTINUATION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-execution-route-continuation@1"
+)
 HANDOFF_REPAIR_PATH: Final = (
     ROOT
     / "artifacts"
@@ -140,6 +145,15 @@ HANDOFF_REPAIR_TASK_CID: Final = (
 )
 HANDOFF_REPAIR_COMPLETION_RECEIPT_ID: Final = (
     "sha256:e00019f28ba2031bf94076661378b1de877c843512c7a41071968a56001361a3"
+)
+HANDOFF_REPAIR_ROUTE_POLICY_ID: Final = (
+    "baguqeerahvwjwfbexnsqdflng54qvtuqoiwf4junsjaafyuhvl2fmjkeettq"
+)
+HANDOFF_REPAIR_ROUTE_SOURCE_PROJECTION_CID: Final = (
+    "baguqeeraortwkvzwu52ibvbutlskq5e7c65ubmop67fgsou5twrmmj3uawaq"
+)
+HANDOFF_REPAIR_STABLE_BINDING_ID: Final = (
+    "baguqeeranwwwzvu237trolqpqxsireo7cqhhgzkrsxgyhy4px2wz6m2jc6la"
 )
 HANDOFF_REPAIR_SOURCE_ATTEMPT: Final = {
     "attempt_id": "attempt:53a9ee3f434e4551932f258aa9c903c6",
@@ -248,6 +262,14 @@ def _canonical_bytes(value: Any) -> bytes:
 def _identity(value: Any) -> str:
     payload = value if isinstance(value, bytes) else _canonical_bytes(value)
     return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+
+def _semantic_identity(value: Mapping[str, Any]) -> str:
+    from ipfs_accelerate_py.agent_supervisor.task_sources.control_plane_contracts import (
+        content_identity,
+    )
+
+    return content_identity(value)
 
 
 def _atomic_json(path: Path, payload: Mapping[str, Any], *, mode: int = 0o600) -> None:
@@ -632,6 +654,8 @@ def _verified_handoff_repair(
     *,
     bootstrap_receipt_id: str,
     plan_root_cid: str,
+    bootstrap_tree: str,
+    database_task_count: int,
     bootstrap_attempt_limit: int,
     current_attempt_limit: int,
     current_source_identities: Mapping[str, str],
@@ -654,6 +678,7 @@ def _verified_handoff_repair(
         "source_completion_receipt_id",
         "max_task_attempts_before",
         "max_task_attempts_after",
+        "execution_route_continuation",
         "current_authority_source_identities",
         "accelerate_origin_main_merge",
         "datasets_current_head_receipt",
@@ -667,8 +692,40 @@ def _verified_handoff_repair(
     source_attempt = payload.get("source_attempt")
     datasets_receipt = payload.get("datasets_current_head_receipt")
     accelerate_merge = payload.get("accelerate_origin_main_merge")
+    continuation = payload.get("execution_route_continuation")
     validations = payload.get("validations")
     listed_identities = payload.get("current_authority_source_identities")
+    continuation_fields = {
+        "schema",
+        "policy_id",
+        "plan_root_cid",
+        "repository_tree_id",
+        "source_revision",
+        "source_projection_cid",
+        "origin_task_revision",
+        "execution_mode",
+        "task_count",
+        "lane_count",
+        "stable_binding_id",
+        "stable_authority",
+    }
+    stable_authority_fields = {
+        "interface",
+        "store_id",
+        "database_uuid",
+        "schema_fingerprint",
+        "repository_id",
+        "schema_revision",
+        "route_policy_id",
+        "plan_root_cid",
+        "repository_tree_id",
+        "source_projection_cid",
+    }
+    stable_authority = (
+        continuation.get("stable_authority")
+        if isinstance(continuation, Mapping)
+        else None
+    )
     if (
         set(payload) != expected_fields
         or payload.get("schema") != HANDOFF_REPAIR_SCHEMA
@@ -697,6 +754,50 @@ def _verified_handoff_repair(
         or payload.get("max_task_attempts_after") != current_attempt_limit
         or bootstrap_attempt_limit != 1
         or current_attempt_limit != HANDOFF_REPAIR_MAX_TASK_ATTEMPTS
+        or not isinstance(continuation, Mapping)
+        or set(continuation) != continuation_fields
+        or continuation.get("schema")
+        != HANDOFF_EXECUTION_ROUTE_CONTINUATION_SCHEMA
+        or continuation.get("policy_id") != HANDOFF_REPAIR_ROUTE_POLICY_ID
+        or continuation.get("plan_root_cid") != plan_root_cid
+        or continuation.get("repository_tree_id") != bootstrap_tree
+        or type(continuation.get("source_revision")) is not int
+        or continuation.get("source_revision") != 1
+        or continuation.get("source_projection_cid")
+        != HANDOFF_REPAIR_ROUTE_SOURCE_PROJECTION_CID
+        or type(continuation.get("origin_task_revision")) is not int
+        or continuation.get("origin_task_revision") != 1
+        or continuation.get("execution_mode") != "grok-codex"
+        or type(continuation.get("task_count")) is not int
+        or continuation.get("task_count") != database_task_count
+        or type(continuation.get("lane_count")) is not int
+        or continuation.get("lane_count") != 4
+        or continuation.get("stable_binding_id")
+        != HANDOFF_REPAIR_STABLE_BINDING_ID
+        or not isinstance(stable_authority, Mapping)
+        or set(stable_authority) != stable_authority_fields
+        or stable_authority.get("interface")
+        != "TypedDatabaseTaskSourceStableQuackAuthority@1"
+        or stable_authority.get("route_policy_id")
+        != continuation.get("policy_id")
+        or stable_authority.get("plan_root_cid") != plan_root_cid
+        or stable_authority.get("repository_tree_id") != bootstrap_tree
+        or stable_authority.get("source_projection_cid")
+        != continuation.get("source_projection_cid")
+        or type(stable_authority.get("schema_revision")) is not int
+        or stable_authority.get("schema_revision", 0) < 1
+        or any(
+            not isinstance(stable_authority.get(field), str)
+            or not stable_authority.get(field)
+            for field in (
+                "store_id",
+                "database_uuid",
+                "schema_fingerprint",
+                "repository_id",
+            )
+        )
+        or _semantic_identity(stable_authority)
+        != continuation.get("stable_binding_id")
         or not isinstance(listed_identities, Mapping)
         or set(listed_identities) != _RESTART_REPAIR_SOURCE_NAMES
         or dict(listed_identities)
@@ -1034,6 +1135,8 @@ def _owner_restart_admission(
         repair = _verified_handoff_repair(
             bootstrap_receipt_id=bootstrap_receipt_id,
             plan_root_cid=plan_root_cid,
+            bootstrap_tree=bootstrap_tree,
+            database_task_count=database_task_count,
             bootstrap_attempt_limit=bootstrap_attempt_limit,
             current_attempt_limit=current_attempt_limit,
             current_source_identities=current_source_identities,
@@ -2472,8 +2575,302 @@ def _argv_values(argv: Sequence[str], option: str) -> tuple[str, ...]:
     return tuple(values)
 
 
+def _continued_execution_route_policy(
+    tasks: Sequence[Any],
+    continuation: Mapping[str, Any],
+) -> tuple[Any, list[dict[str, Any]]]:
+    """Reconstitute the one carried PCSM epoch policy without resealing heads."""
+
+    from ipfs_accelerate_py.agent_supervisor.task_sources.task_execution_route_policy import (
+        TaskExecutionRouteBinding,
+        TaskExecutionRouteEntry,
+        TaskExecutionRoutePolicy,
+        task_execution_contract_cid,
+    )
+
+    expected_policy_id = str(continuation.get("policy_id") or "")
+    expected_plan_root = str(continuation.get("plan_root_cid") or "")
+    expected_tree = str(continuation.get("repository_tree_id") or "")
+    expected_projection = str(continuation.get("source_projection_cid") or "")
+    expected_mode = str(continuation.get("execution_mode") or "")
+    source_revision = _exact_int(
+        continuation.get("source_revision"),
+        field="continued route source_revision",
+        minimum=1,
+    )
+    origin_revision = _exact_int(
+        continuation.get("origin_task_revision"),
+        field="continued route origin_task_revision",
+        minimum=1,
+    )
+    expected_task_count = _exact_int(
+        continuation.get("task_count"),
+        field="continued route task_count",
+        minimum=1,
+    )
+    if (
+        expected_policy_id != HANDOFF_REPAIR_ROUTE_POLICY_ID
+        or expected_projection != HANDOFF_REPAIR_ROUTE_SOURCE_PROJECTION_CID
+        or source_revision != 1
+        or origin_revision != 1
+        or expected_mode != "grok-codex"
+        or len(tasks) != expected_task_count
+    ):
+        raise OperatorError("continued execution route header changed authority")
+
+    entries: list[Any] = []
+    advanced: list[dict[str, Any]] = []
+    for task in tasks:
+        current_revision = int(getattr(task, "revision", 0) or 0)
+        if current_revision < origin_revision:
+            raise OperatorError("continued execution route task revision regressed")
+        current_contract = task_execution_contract_cid(task)
+        if current_revision == origin_revision:
+            entry = TaskExecutionRouteEntry(
+                task_cid=task.task_cid,
+                task_alias=task.task_alias,
+                task_revision=origin_revision,
+                task_contract_cid=current_contract,
+                execution_mode=expected_mode,
+            )
+        else:
+            body = task.body if isinstance(task.body, Mapping) else {}
+            receipt = body.get("completion_receipt")
+            route = (
+                receipt.get("execution_route_binding")
+                if isinstance(receipt, Mapping)
+                else None
+            )
+            try:
+                binding = (
+                    TaskExecutionRouteBinding.from_dict(route)
+                    if isinstance(route, Mapping)
+                    else None
+                )
+            except Exception as exc:
+                raise OperatorError(
+                    "advanced task has malformed carried execution-route lineage"
+                ) from exc
+            if (
+                binding is None
+                or binding.policy_id != expected_policy_id
+                or binding.plan_root_cid != expected_plan_root
+                or binding.repository_tree_id != expected_tree
+                or binding.source_revision != source_revision
+                or binding.task_cid != task.task_cid
+                or binding.task_alias != task.task_alias
+                or binding.task_revision != origin_revision
+                or binding.task_contract_cid != current_contract
+                or binding.execution_mode != expected_mode
+                or receipt.get("execution_route_policy_id") != expected_policy_id
+                or receipt.get("execution_route_origin_revision") != origin_revision
+            ):
+                raise OperatorError(
+                    "advanced task differs from its carried execution-route lineage"
+                )
+            entry = TaskExecutionRouteEntry(
+                task_cid=binding.task_cid,
+                task_alias=binding.task_alias,
+                task_revision=binding.task_revision,
+                task_contract_cid=binding.task_contract_cid,
+                execution_mode=binding.execution_mode,
+            )
+            advanced.append(
+                {
+                    "task_alias": task.task_alias,
+                    "task_cid": task.task_cid,
+                    "origin_revision": origin_revision,
+                    "current_revision": current_revision,
+                }
+            )
+        entries.append(entry)
+
+    try:
+        policy = TaskExecutionRoutePolicy(
+            plan_root_cid=expected_plan_root,
+            repository_tree_id=expected_tree,
+            source_revision=source_revision,
+            source_projection_cid=expected_projection,
+            entries=tuple(sorted(entries, key=lambda item: item.task_cid)),
+            policy_id=expected_policy_id,
+        )
+    except Exception as exc:
+        raise OperatorError(
+            "continued execution route does not reproduce its immutable policy"
+        ) from exc
+    if (
+        len(policy.entries) != expected_task_count
+        or not advanced
+        or HANDOFF_REPAIR_TASK_CID
+        not in {str(item["task_cid"]) for item in advanced}
+    ):
+        raise OperatorError("continued execution route has no exact repair lineage")
+    return policy, sorted(advanced, key=lambda item: str(item["task_cid"]))
+
+
+def _acquire_exact_sidecar_lock(path: Path, expected: bytes) -> int:
+    """Hold one private no-follow lane lock while its sidecar is inspected."""
+
+    descriptor = -1
+    try:
+        before = path.lstat()
+        flags = (
+            os.O_RDWR
+            | getattr(os, "O_CLOEXEC", 0)
+            | getattr(os, "O_NOFOLLOW", 0)
+        )
+        if not getattr(os, "O_NOFOLLOW", 0):
+            raise OperatorError("continued route sidecar lock requires no-follow access")
+        descriptor = os.open(path, flags)
+        opened = os.fstat(descriptor)
+        if (
+            not stat_module.S_ISREG(opened.st_mode)
+            or opened.st_uid != os.geteuid()
+            or opened.st_nlink != 1
+            or stat_module.S_IMODE(opened.st_mode) != 0o600
+            or (before.st_dev, before.st_ino) != (opened.st_dev, opened.st_ino)
+        ):
+            raise OperatorError("continued route sidecar lock is not an exact private file")
+        fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        observed = os.read(descriptor, len(expected) + 1)
+        named = path.lstat()
+        if (
+            observed != expected
+            or (named.st_dev, named.st_ino) != (opened.st_dev, opened.st_ino)
+        ):
+            raise OperatorError("continued route sidecar lock changed authority")
+        return descriptor
+    except OperatorError:
+        if descriptor >= 0:
+            os.close(descriptor)
+        raise
+    except OSError as exc:
+        if descriptor >= 0:
+            os.close(descriptor)
+        raise OperatorError("continued route sidecar lock is unavailable") from exc
+
+
+def _verify_continued_route_sidecars(
+    *,
+    board: Any,
+    paths: Mapping[str, Path],
+    continuation: Mapping[str, Any],
+    stable_authority: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Verify, but never rewrite, the lane sidecars for the carried epoch."""
+
+    try:
+        import duckdb
+    except Exception as exc:
+        raise OperatorError("continued route sidecar verifier requires DuckDB") from exc
+
+    expected_binding = str(continuation.get("stable_binding_id") or "")
+    expected_lock = (expected_binding + "\n").encode("utf-8")
+    lane_count = _exact_int(
+        continuation.get("lane_count"),
+        field="continued route lane_count",
+        minimum=1,
+    )
+    if lane_count != int(board.max_lanes) or expected_binding != _semantic_identity(
+        stable_authority
+    ):
+        raise OperatorError("continued route stable authority differs from its seal")
+
+    held: list[int] = []
+    execution_paths: list[tuple[int, Path]] = []
+    try:
+        for lane_index in range(lane_count):
+            lane = paths["runtime"] / "state" / f"lane-{lane_index}"
+            _ensure_private_runtime_directory(lane)
+            prefix = f"pcsm_lane_{lane_index}_database"
+            coordination = lane / f"{prefix}_coordination.duckdb"
+            execution = lane / f"{prefix}_execution.duckdb"
+            for sidecar in (coordination, execution):
+                lock_path = sidecar.with_name(f".{sidecar.name}.writer.lock")
+                held.append(_acquire_exact_sidecar_lock(lock_path, expected_lock))
+            execution_paths.append((lane_index, execution))
+
+        observations: list[dict[str, Any]] = []
+        for lane_index, execution in execution_paths:
+            before = execution.lstat()
+            if (
+                not stat_module.S_ISREG(before.st_mode)
+                or before.st_uid != os.geteuid()
+                or before.st_nlink != 1
+                or stat_module.S_IMODE(before.st_mode) != 0o600
+            ):
+                raise OperatorError(
+                    "continued route execution sidecar is not an exact private file"
+                )
+            connection = None
+            try:
+                connection = duckdb.connect(str(execution), read_only=True)
+                rows = connection.execute(
+                    "SELECT key, value FROM daemon_execution_metadata "
+                    "WHERE key IN "
+                    "('typed_quack_stable_binding_id', "
+                    "'typed_quack_stable_authority') ORDER BY key"
+                ).fetchall()
+                metadata = {str(key): str(value) for key, value in rows}
+                status_rows = connection.execute(
+                    "SELECT status, count(*) FROM database_task_attempts "
+                    "GROUP BY status ORDER BY status LIMIT 32"
+                ).fetchall()
+            except Exception as exc:
+                raise OperatorError(
+                    "continued route execution sidecar cannot be verified"
+                ) from exc
+            finally:
+                if connection is not None:
+                    connection.close()
+            after = execution.lstat()
+            try:
+                observed_authority = json.loads(
+                    metadata.get("typed_quack_stable_authority", "")
+                )
+            except json.JSONDecodeError as exc:
+                raise OperatorError(
+                    "continued route sidecar authority is malformed"
+                ) from exc
+            if (
+                set(metadata)
+                != {
+                    "typed_quack_stable_authority",
+                    "typed_quack_stable_binding_id",
+                }
+                or metadata.get("typed_quack_stable_binding_id") != expected_binding
+                or not isinstance(observed_authority, dict)
+                or observed_authority != dict(stable_authority)
+                or (before.st_dev, before.st_ino) != (after.st_dev, after.st_ino)
+            ):
+                raise OperatorError("continued route execution sidecar changed authority")
+            observations.append(
+                {
+                    "lane_index": lane_index,
+                    "attempt_status_counts": {
+                        str(status): int(count) for status, count in status_rows
+                    },
+                }
+            )
+        return {
+            "stable_binding_id": expected_binding,
+            "writer_lock_count": len(held),
+            "execution_metadata_count": len(observations),
+            "lanes": observations,
+        }
+    except FileNotFoundError as exc:
+        raise OperatorError("continued route sidecar evidence is absent") from exc
+    finally:
+        for descriptor in reversed(held):
+            try:
+                fcntl.flock(descriptor, fcntl.LOCK_UN)
+            finally:
+                os.close(descriptor)
+
+
 class _ExecutionRoutePolicyProvider:
-    """Seal the current exact task population through the typed owner surface."""
+    """Seal bootstrap tasks or continue the one receipt-bound route epoch."""
 
     def __init__(
         self,
@@ -2547,16 +2944,103 @@ class _ExecutionRoutePolicyProvider:
                         raise OperatorError(
                             "execution route exceeds the bounded typed task page"
                         )
-                    self.database_verification = _restart_database_verification(
-                        source,
-                        self.restart_admission,
+                    modes = {
+                        task.task_alias: GROK_CODEX_EXECUTION_MODE
+                        for task in page.tasks
+                    }
+                    if self.restart_admission.get("mode") == "exact_bootstrap":
+                        self.database_verification = _restart_database_verification(
+                            source,
+                            self.restart_admission,
+                        )
+                        return source.seal_execution_route_policy(modes)
+
+                    repair = self.restart_admission.get("handoff_repair")
+                    continuation = (
+                        repair.get("execution_route_continuation")
+                        if isinstance(repair, Mapping)
+                        else None
                     )
-                    return source.seal_execution_route_policy(
-                        {
-                            task.task_alias: GROK_CODEX_EXECUTION_MODE
-                            for task in page.tasks
-                        }
+                    if not isinstance(continuation, Mapping):
+                        raise OperatorError(
+                            "verified handoff has no execution-route continuation"
+                        )
+                    policy, advanced = _continued_execution_route_policy(
+                        page.tasks,
+                        continuation,
                     )
+                    with TypedDatabaseTaskSource(
+                        client,
+                        execution_route_policy=policy,
+                        owns_client=False,
+                    ) as continued_source:
+                        continued_page = continued_source.list_tasks(limit=500)
+                        if (
+                            continued_page.next_cursor
+                            or tuple(task.task_cid for task in continued_page.tasks)
+                            != tuple(task.task_cid for task in page.tasks)
+                        ):
+                            raise OperatorError(
+                                "continued execution route changed task population"
+                            )
+                        for task in continued_page.tasks:
+                            if int(task.revision) > int(
+                                continuation.get("origin_task_revision") or 0
+                            ):
+                                continued_source.execution_route_binding_for_task(task)
+                        self.database_verification = _restart_database_verification(
+                            continued_source,
+                            self.restart_admission,
+                        )
+
+                    session = client.session
+                    store_identity = (
+                        session.store_identity if session is not None else None
+                    )
+                    if store_identity is None:
+                        raise OperatorError(
+                            "continued execution route has no store identity"
+                        )
+                    stable_authority = {
+                        "interface": "TypedDatabaseTaskSourceStableQuackAuthority@1",
+                        "store_id": store_identity.store_id,
+                        "database_uuid": store_identity.database_uuid,
+                        "schema_fingerprint": store_identity.schema_fingerprint,
+                        "repository_id": store_identity.repository_id,
+                        "schema_revision": int(store_identity.schema_revision),
+                        "route_policy_id": policy.policy_id,
+                        "plan_root_cid": policy.plan_root_cid,
+                        "repository_tree_id": policy.repository_tree_id,
+                        "source_projection_cid": policy.source_projection_cid,
+                    }
+                    if stable_authority != dict(
+                        continuation.get("stable_authority") or {}
+                    ) or _semantic_identity(stable_authority) != str(
+                        continuation.get("stable_binding_id") or ""
+                    ):
+                        raise OperatorError(
+                            "continued execution route differs from live store authority"
+                        )
+                    sidecars = _verify_continued_route_sidecars(
+                        board=self.board,
+                        paths=_runtime_paths(self.board),
+                        continuation=continuation,
+                        stable_authority=stable_authority,
+                    )
+                    verification_body = dict(self.database_verification)
+                    verification_body.pop("verification_id", None)
+                    verification_body["execution_route_continuation"] = {
+                        "schema": HANDOFF_EXECUTION_ROUTE_CONTINUATION_SCHEMA,
+                        "policy": policy.public_summary(),
+                        "source_projection_cid": policy.source_projection_cid,
+                        "advanced_tasks": advanced,
+                        "sidecars": sidecars,
+                    }
+                    verification_body["verification_id"] = _identity(
+                        verification_body
+                    )
+                    self.database_verification = verification_body
+                    return policy
             finally:
                 try:
                     client.close()
