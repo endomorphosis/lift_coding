@@ -16,6 +16,206 @@
     "task_revision": 4
   },
   "source_completion_receipt_id": "sha256:e00019f28ba2031bf94076661378b1de877c843512c7a41071968a56001361a3",
+  "blocked_retry_handoff": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-blocked-retry-handoff@1",
+    "command_operation": "task.blocked.retry.recover",
+    "control_operation": "database_operator_blocked_retry_recovery",
+    "queue_reason": "database_operator_blocked_retry_recovery",
+    "source_status": "blocked",
+    "source_revision": 4,
+    "source_task_body": {
+      "accepted_plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
+      "allowed_effects": "Read the exact sealed source forest; modify only task-owned semantic-minification implementation/test scope and this task receipt through an isolated worktree and reviewed merge.",
+      "allowed_paths": "external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-010.json",
+      "assigned_worktree": "pcsm-pcsm-010",
+      "base_repository_tree_id": "cd81f5731ee64c29161830c9933d6739e0dd3eb3",
+      "base_revision": "4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d",
+      "board_namespace": "proof-carrying-semantic-minification-v1",
+      "bundle": "pcsm/pcsm-g200/pcsm-010",
+      "completion": "auto",
+      "completion_receipt": {
+        "attempt_id": "attempt:53a9ee3f434e4551932f258aa9c903c6",
+        "attempt_number": 1,
+        "claim_id": "claim:617b52197f564c58ade577daf8430602",
+        "control_expected_revision": 3,
+        "control_expected_status": "in_progress",
+        "coordination": {},
+        "execution_finished_at_ms": 1787742964256,
+        "execution_phase": "failed",
+        "execution_revision": 3,
+        "execution_route_binding": {
+          "execution_mode": "grok-codex",
+          "plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
+          "policy_id": "baguqeerahvwjwfbexnsqdflng54qvtuqoiwf4junsjaafyuhvl2fmjkeettq",
+          "repository_tree_id": "cd81f5731ee64c29161830c9933d6739e0dd3eb3",
+          "schema": "ipfs_accelerate_py/agent-supervisor/task-execution-route-binding@1",
+          "source_revision": 1,
+          "task_alias": "PCSM-010",
+          "task_cid": "baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa",
+          "task_contract_cid": "baguqeeraocpycvicz2wxo636rp7a3s4pfzpth7xy5re7bl7fnbjask4geswa",
+          "task_revision": 1
+        },
+        "execution_route_origin_revision": 1,
+        "execution_route_policy_id": "baguqeerahvwjwfbexnsqdflng54qvtuqoiwf4junsjaafyuhvl2fmjkeettq",
+        "fence_epoch": 1,
+        "fencing_token": 1,
+        "lease_id": "lease:b562bfc2ae884a958362697b3c5c7185",
+        "operation": "database_portal_terminal_failure",
+        "owner_session_id": "pcsm-v1-executor:shard:0-of-4:track:ef26cb9db64a",
+        "reason": "portal_provider_failed",
+        "retryable": false
+      },
+      "conflict_policy": "Serialize overlapping semantic authority files through the merge queue; rebase nested changes on the latest accepted gitlink and rerun affected validation.",
+      "execution_mode": "execute_with_confirmations",
+      "final_result_cid_or_artifact_identity": "pending CID for artifacts/proof_carrying_semantic_minification/receipts/PCSM-010.json",
+      "implementation_timeout_seconds": "7200",
+      "is_schedulable": "true",
+      "objective": "Define CanonicalCodeIR contract or select existing authority for the exact current PCSM source forest. Reuse existing equivalents first; implement only the smallest versioned delta needed for Python v1 and preserve the declared authority boundaries.",
+      "owned_paths": "external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-010.json",
+      "owning_repository": "ipfs_accelerate_py",
+      "parallel_lane": "pcsm-2",
+      "predicted_files": "external/ipfs_datasets/ipfs_datasets_py/proof_context/, artifacts/proof_carrying_semantic_minification/receipts/PCSM-010.json",
+      "prohibited_effects": "Create a competing authority or subsystem; use aliases as canonical identity; treat model output as evidence; permit M2/M3 mutation; weaken tests/proofs/gates; expand beyond Python v1; mutate protected handoff files.",
+      "required_evidence": "Exact commit/tree/source-map and contract identities; changed paths; test/proof results; limitations; authority and freshness checks; typed unavailable evidence for absent optional capability.",
+      "required_tests": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "resource_class": "cpu-medium",
+      "review_only": "false",
+      "risk_classification": "high-assurance",
+      "rollback_procedure": "Revert only this task's accepted commits and invalidate dependent projections/receipts; preserve unrelated source bytes and prior admitted history.",
+      "source_line": 191,
+      "title": "Define CanonicalCodeIR contract or select existing authority",
+      "validation": "python -m pytest -q external/ipfs_datasets/tests/proof_context"
+    },
+    "source_task_body_id": "sha256:8992ab06d2296750d97d9c40011b1e2fb517df37d222871f28adbded0bed8bb1",
+    "source_completion_receipt_id": "sha256:e00019f28ba2031bf94076661378b1de877c843512c7a41071968a56001361a3",
+    "source_cooldown_absent": true,
+    "target_status": "retrying",
+    "target_revision": 5,
+    "max_task_attempts_before": 1,
+    "max_task_attempts_after": 2,
+    "attempt_refunded": false,
+    "fresh_attempt_number": 2,
+    "delay_ms": 0,
+    "started_at_ms": 1787752417955,
+    "retry_not_before_ms": 1787752417955,
+    "sidecar_evidence": {
+      "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-blocked-retry-sidecar-evidence@1",
+      "evidence_id": "sha256:2fbd223c865cc8bcbe1ff55a3899a66089462f2303c12386cce5cd43a9ee6984",
+      "lane_index": 0,
+      "stable_binding_id": "baguqeeranwwwzvu237trolqpqxsireo7cqhhgzkrsxgyhy4px2wz6m2jc6la",
+      "files": [
+        {
+          "role": "coordination",
+          "path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state/lane-0/pcsm_lane_0_database_coordination.duckdb",
+          "sha256": "sha256:0840c9e20699b9d7ed09a047b1d296fffbb3fe76aabf2745444cc424c9173a05",
+          "size_bytes": 6828032
+        },
+        {
+          "role": "execution",
+          "path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state/lane-0/pcsm_lane_0_database_execution.duckdb",
+          "sha256": "sha256:47b7d96ee0c4d2d2cfb89931b50d765265c74020c39d4fd37c035e775a4386a9",
+          "size_bytes": 12288
+        },
+        {
+          "role": "portal_attempt_binding",
+          "path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state/lane-0/pcsm_lane_0_database_portal_attempts/9a0e3458b52874ca9098d9f5/database-attempt-binding.json",
+          "sha256": "sha256:0396f44b430e2b07e90899fda705e37b18c732995b9a21641938aa1be02a60a2",
+          "size_bytes": 1510
+        },
+        {
+          "role": "portal_events",
+          "path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state/lane-0/pcsm_lane_0_database_portal_attempts/9a0e3458b52874ca9098d9f5/portal-events.jsonl",
+          "sha256": "sha256:9aabaa23a5a1a01d4fb30d369f5b9debbae0b39ed82efc18b68e878c2f04e273",
+          "size_bytes": 159739
+        },
+        {
+          "role": "diagnostic_receipt",
+          "path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state/lane-0/pcsm_lane_0_database_portal_attempts/9a0e3458b52874ca9098d9f5/implementation-logs/pcsm-010-diagnostic-receipt.json",
+          "sha256": "sha256:01ec499100fd1d242d1f2b08f8fba6e735f6a3a4569611e72ba8005d656cb34d",
+          "size_bytes": 3555
+        }
+      ],
+      "facts": {
+        "source_attempt": {
+          "attempt_id": "attempt:53a9ee3f434e4551932f258aa9c903c6",
+          "claim_id": "claim:617b52197f564c58ade577daf8430602",
+          "lease_id": "lease:b562bfc2ae884a958362697b3c5c7185",
+          "owner_session_id": "pcsm-v1-executor:shard:0-of-4:track:ef26cb9db64a",
+          "attempt_number": 1,
+          "fencing_token": 1,
+          "fence_epoch": 1,
+          "task_revision": 4
+        },
+        "coordination_task": {
+          "status": "blocked",
+          "revision": 4
+        },
+        "coordination_attempt": {
+          "status": "expired",
+          "revision": 2,
+          "finished_at_ms": 1787743027778
+        },
+        "coordination_claim": {
+          "state": "expired",
+          "revision": 34,
+          "expires_at_ms": 1787743011400
+        },
+        "coordination_lease": {
+          "state": "expired",
+          "revision": 34,
+          "expires_at_ms": 1787743011400
+        },
+        "coordination_task_completion_count": 0,
+        "coordination_newer_attempt_count": 0,
+        "coordination_newer_fence_count": 0,
+        "execution_attempt": {
+          "status": "failed",
+          "revision": 3,
+          "committed_phase": "failed",
+          "started_at_ms": 1787742329266,
+          "finished_at_ms": 1787742964256
+        },
+        "execution_phase_sequence": [
+          {
+            "phase": "claimed",
+            "revision": 1
+          },
+          {
+            "phase": "context",
+            "revision": 2
+          },
+          {
+            "phase": "failed",
+            "revision": 3
+          }
+        ],
+        "execution_provider_invocation": {
+          "callback_state": "started_outcome_unknown",
+          "provider_effect_state": "unknown_may_have_started",
+          "failure_fingerprint": "sha256:e8a21d888af199e829abba3128a06e576bed90c02ccb60969b241b8f11ed3246"
+        },
+        "execution_effect_claim_count": 0,
+        "portal_attempt_binding": {
+          "binding_id": "sha256:76a22ab25ce1a82aa6faa8d14e5730ddc4eeadd1a10f4a4ff7ef41856356e450",
+          "task_revision": 3,
+          "repository_tree_id": "cd81f5731ee64c29161830c9933d6739e0dd3eb3"
+        },
+        "portal_implementation_finished": {
+          "event_id": "sha256:7ac8f6ca2076822f6b6711e99fcf16e5b90189109d0dadba502c02252beb8e91",
+          "projected_task_cid": "baguqeerafge4blotsftqdygafum7kp2kaipqk5n6f5gcbgg54ileqkdh2u4a",
+          "attempt": 1,
+          "provider_dispatched": true,
+          "attempt_consumed": true,
+          "returncode": 78
+        },
+        "diagnostic_receipt": {
+          "receipt_id": "baguqeerajm2bu5i3iejl4lmxf3nrew3ljnkxwl3odujmxfp26dxnqx6wygja",
+          "failure_id": "baguqeeraseeqvjzceffsvxnadwjymhzmje6kzraydbjnr35q63wmccmx42bq",
+          "reason_code": "stale_proposal_replay"
+        }
+      }
+    }
+  },
   "max_task_attempts_before": 1,
   "max_task_attempts_after": 2,
   "execution_route_continuation": {
@@ -44,16 +244,18 @@
     }
   },
   "current_authority_source_identities": {
-    "config": "sha256:2a4b4c68f6de26abd16c3b8e72c8c4b2facd214652ba73f6de74e2aad1e799bf",
+    "config": "sha256:2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079",
     "generator": "sha256:a99394eba3ac5ae4a88c8d8fba0235a1ded115dc59e63dad160366dbe7a9a695",
-    "operator": "sha256:68f41054d661b684dd5473476032d030afd83dca71158fa7b01a285724811f7d",
+    "operator": "sha256:c6b1bb0991c29d07bbd248358039d051956e75e10243a44d4d78b7e72d790e80",
     "validator": "sha256:276a1599cd902d5de0aa41bee6afd3c9b0e6c0503dd7cbf1bc31cfb5daaf6333"
   },
   "accelerate_origin_main_merge": {
     "bootstrap_commit": "19a44398735b15de6f6c8c09cc501691c3a95094",
     "origin_main_commit": "db887c3695e1e2950e74fe7fd4fb80e195a3851f",
     "merged_commit": "3cabd28a5015c5ff1c552aafe2e774f579441c9a",
-    "merged_tree": "6cca6fc15ba32b3b3fe1193d0fb482e4d59f056c"
+    "merged_tree": "6cca6fc15ba32b3b3fe1193d0fb482e4d59f056c",
+    "current_commit": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
+    "current_tree": "c2a1f18bb0d383d90ebae74037a489fb3034d428"
   },
   "datasets_current_head_receipt": {
     "path": "artifacts/proof_carrying_semantic_minification/handoff/datasets-proof-context-current-head.json",
@@ -110,7 +312,7 @@
         "external/ipfs_datasets/tests/proof_context"
       ],
       "outcome": "passed",
-      "summary": "The complete ipfs_datasets proof-context suite passed: 519 tests in 93.12 seconds.",
+      "summary": "The complete ipfs_datasets proof-context suite passed at the sealed current head: 519 tests in 75.96 seconds.",
       "measurement_status": "measured"
     },
     {
@@ -126,11 +328,27 @@
         "test/api/test_agent_supervisor_multi_supervisor_shutdown.py"
       ],
       "outcome": "passed",
-      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed: 423 tests in 108.88 seconds; four unrelated temporary-directory cleanup warnings were reported.",
+      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed at the sealed accelerator head: 424 tests in 79.78 seconds; four unrelated temporary-directory cleanup warnings were reported.",
+      "measurement_status": "measured"
+    },
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/api/causal_federation/test_admitted_executor.py::test_operator_blocked_retry_recovers_once_and_replays_after_restart",
+        "test/api/causal_federation/test_admitted_executor.py::test_typed_daemon_promotes_local_attempt_before_provider",
+        "test/api/causal_federation/test_admitted_executor.py::test_executor_typed_operation_catalog_is_closed_and_full_fidelity",
+        "test/api/test_agent_supervisor_validation_retry_seed_conflict_recovery.py"
+      ],
+      "outcome": "passed",
+      "summary": "The exact blocked-retry, typed-history, operation-catalog, and pooled-recovery qualification set passed: 10 tests in 68.31 seconds; four unrelated temporary-directory cleanup warnings were reported.",
       "measurement_status": "measured"
     }
   ],
   "historical_receipt_preserved": true,
   "manual_database_mutation": false,
-  "receipt_id": "sha256:7ac11d7cef9404023f4114f1a2aa94bb9677a535c7afc18d5c8f5bba34455f47"
+  "receipt_id": "sha256:e0ce20f7218d7eef119f5853b034e8275870cd527d7df70b398fda8e72455861"
 }

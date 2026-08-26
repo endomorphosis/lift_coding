@@ -132,6 +132,18 @@ HANDOFF_EXECUTION_ROUTE_CONTINUATION_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-execution-route-continuation@1"
 )
+HANDOFF_BLOCKED_RETRY_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-blocked-retry-handoff@1"
+)
+HANDOFF_BLOCKED_RETRY_SIDECAR_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-blocked-retry-sidecar-evidence@1"
+)
+TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "typed-database-blocked-retry-recovery@1"
+)
 HANDOFF_REPAIR_PATH: Final = (
     ROOT
     / "artifacts"
@@ -140,6 +152,23 @@ HANDOFF_REPAIR_PATH: Final = (
     / "supervisor-restart-repair.json"
 )
 HANDOFF_REPAIR_MAX_TASK_ATTEMPTS: Final = 2
+HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND: Final = "task.blocked.retry.recover"
+HANDOFF_REPAIR_BLOCKED_RETRY_OPERATION: Final = (
+    "database_operator_blocked_retry_recovery"
+)
+HANDOFF_REPAIR_BLOCKED_RETRY_REASON: Final = (
+    "database_operator_blocked_retry_recovery"
+)
+HANDOFF_REPAIR_SOURCE_TASK_BODY_ID: Final = (
+    "sha256:8992ab06d2296750d97d9c40011b1e2fb517df37d222871f28adbded0bed8bb1"
+)
+HANDOFF_REPAIR_PORTAL_ATTEMPT_RELATIVE: Final = (
+    RUNTIME_RELATIVE
+    / "state"
+    / "lane-0"
+    / "pcsm_lane_0_database_portal_attempts"
+    / "9a0e3458b52874ca9098d9f5"
+)
 HANDOFF_REPAIR_TASK_CID: Final = (
     "baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa"
 )
@@ -218,6 +247,23 @@ HANDOFF_REPAIR_REQUIRED_VALIDATIONS: Final = frozenset(
                 "test/api/test_agent_supervisor_merge_train.py",
                 "test/api/test_agent_supervisor_task_attempt_limit.py",
                 "test/api/test_agent_supervisor_multi_supervisor_shutdown.py",
+            ),
+        ),
+        (
+            "external/ipfs_accelerate",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/api/causal_federation/test_admitted_executor.py::"
+                "test_operator_blocked_retry_recovers_once_and_replays_after_restart",
+                "test/api/causal_federation/test_admitted_executor.py::"
+                "test_typed_daemon_promotes_local_attempt_before_provider",
+                "test/api/causal_federation/test_admitted_executor.py::"
+                "test_executor_typed_operation_catalog_is_closed_and_full_fidelity",
+                "test/api/"
+                "test_agent_supervisor_validation_retry_seed_conflict_recovery.py",
             ),
         ),
     }
@@ -650,6 +696,258 @@ def _verified_restart_forest_transition(
     }
 
 
+def _verified_blocked_retry_handoff(
+    value: Any,
+    *,
+    source_attempt: Mapping[str, Any],
+    source_completion_receipt_id: str,
+    bootstrap_attempt_limit: int,
+    current_attempt_limit: int,
+) -> dict[str, Any]:
+    """Validate the one exact, attempt-preserving PCSM-010 retry handoff."""
+
+    if not isinstance(value, Mapping):
+        raise OperatorError("PCSM blocked-retry handoff is absent")
+    handoff = dict(value)
+    expected_fields = {
+        "schema",
+        "command_operation",
+        "control_operation",
+        "queue_reason",
+        "source_status",
+        "source_revision",
+        "source_task_body",
+        "source_task_body_id",
+        "source_completion_receipt_id",
+        "source_cooldown_absent",
+        "target_status",
+        "target_revision",
+        "max_task_attempts_before",
+        "max_task_attempts_after",
+        "attempt_refunded",
+        "fresh_attempt_number",
+        "delay_ms",
+        "started_at_ms",
+        "retry_not_before_ms",
+        "sidecar_evidence",
+    }
+    source_body = handoff.get("source_task_body")
+    terminal_receipt = (
+        source_body.get("completion_receipt")
+        if isinstance(source_body, Mapping)
+        else None
+    )
+    evidence = handoff.get("sidecar_evidence")
+    evidence_body = dict(evidence) if isinstance(evidence, Mapping) else {}
+    evidence_id = str(evidence_body.pop("evidence_id", "") or "")
+    files = evidence.get("files") if isinstance(evidence, Mapping) else None
+    facts = evidence.get("facts") if isinstance(evidence, Mapping) else None
+    expected_file_paths = {
+        "coordination": (
+            RUNTIME_RELATIVE
+            / "state/lane-0/pcsm_lane_0_database_coordination.duckdb"
+        ).as_posix(),
+        "execution": (
+            RUNTIME_RELATIVE
+            / "state/lane-0/pcsm_lane_0_database_execution.duckdb"
+        ).as_posix(),
+        "portal_attempt_binding": (
+            HANDOFF_REPAIR_PORTAL_ATTEMPT_RELATIVE
+            / "database-attempt-binding.json"
+        ).as_posix(),
+        "portal_events": (
+            HANDOFF_REPAIR_PORTAL_ATTEMPT_RELATIVE / "portal-events.jsonl"
+        ).as_posix(),
+        "diagnostic_receipt": (
+            HANDOFF_REPAIR_PORTAL_ATTEMPT_RELATIVE
+            / "implementation-logs/pcsm-010-diagnostic-receipt.json"
+        ).as_posix(),
+    }
+    file_map: dict[str, Mapping[str, Any]] = {}
+    if isinstance(files, list):
+        for item in files:
+            if not isinstance(item, Mapping):
+                raise OperatorError("PCSM blocked-retry file evidence is malformed")
+            role = str(item.get("role") or "")
+            if role in file_map:
+                raise OperatorError("PCSM blocked-retry file evidence is duplicated")
+            file_map[role] = item
+    expected_fact_fields = {
+        "source_attempt",
+        "coordination_task",
+        "coordination_attempt",
+        "coordination_claim",
+        "coordination_lease",
+        "coordination_task_completion_count",
+        "coordination_newer_attempt_count",
+        "coordination_newer_fence_count",
+        "execution_attempt",
+        "execution_phase_sequence",
+        "execution_provider_invocation",
+        "execution_effect_claim_count",
+        "portal_attempt_binding",
+        "portal_implementation_finished",
+        "diagnostic_receipt",
+    }
+    coordination_task = facts.get("coordination_task") if isinstance(facts, Mapping) else None
+    coordination_attempt = (
+        facts.get("coordination_attempt") if isinstance(facts, Mapping) else None
+    )
+    coordination_claim = (
+        facts.get("coordination_claim") if isinstance(facts, Mapping) else None
+    )
+    coordination_lease = (
+        facts.get("coordination_lease") if isinstance(facts, Mapping) else None
+    )
+    execution_attempt = (
+        facts.get("execution_attempt") if isinstance(facts, Mapping) else None
+    )
+    provider = (
+        facts.get("execution_provider_invocation")
+        if isinstance(facts, Mapping)
+        else None
+    )
+    portal_binding = (
+        facts.get("portal_attempt_binding") if isinstance(facts, Mapping) else None
+    )
+    portal_finished = (
+        facts.get("portal_implementation_finished")
+        if isinstance(facts, Mapping)
+        else None
+    )
+    diagnostic = (
+        facts.get("diagnostic_receipt") if isinstance(facts, Mapping) else None
+    )
+    started_at_ms = handoff.get("started_at_ms")
+    if (
+        set(handoff) != expected_fields
+        or handoff.get("schema") != HANDOFF_BLOCKED_RETRY_SCHEMA
+        or handoff.get("command_operation")
+        != HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND
+        or handoff.get("control_operation")
+        != HANDOFF_REPAIR_BLOCKED_RETRY_OPERATION
+        or handoff.get("queue_reason") != HANDOFF_REPAIR_BLOCKED_RETRY_REASON
+        or handoff.get("source_status") != "blocked"
+        or handoff.get("source_revision") != source_attempt.get("task_revision")
+        or not isinstance(source_body, Mapping)
+        or handoff.get("source_task_body_id")
+        != HANDOFF_REPAIR_SOURCE_TASK_BODY_ID
+        or _identity(source_body) != HANDOFF_REPAIR_SOURCE_TASK_BODY_ID
+        or not isinstance(terminal_receipt, Mapping)
+        or _identity(terminal_receipt) != source_completion_receipt_id
+        or terminal_receipt.get("operation")
+        != "database_portal_terminal_failure"
+        or terminal_receipt.get("reason") != "portal_provider_failed"
+        or terminal_receipt.get("retryable") is not False
+        or handoff.get("source_completion_receipt_id")
+        != source_completion_receipt_id
+        or handoff.get("source_cooldown_absent") is not True
+        or handoff.get("target_status") != "retrying"
+        or handoff.get("target_revision") != int(source_attempt["task_revision"]) + 1
+        or handoff.get("max_task_attempts_before") != bootstrap_attempt_limit
+        or handoff.get("max_task_attempts_after") != current_attempt_limit
+        or bootstrap_attempt_limit != int(source_attempt["attempt_number"])
+        or current_attempt_limit != int(source_attempt["attempt_number"]) + 1
+        or handoff.get("attempt_refunded") is not False
+        or handoff.get("fresh_attempt_number") != current_attempt_limit
+        or handoff.get("delay_ms") != 0
+        or type(started_at_ms) is not int
+        or started_at_ms <= 1787743027778
+        or handoff.get("retry_not_before_ms") != started_at_ms
+        or not isinstance(evidence, Mapping)
+        or set(evidence) != {
+            "schema",
+            "evidence_id",
+            "lane_index",
+            "stable_binding_id",
+            "files",
+            "facts",
+        }
+        or evidence.get("schema") != HANDOFF_BLOCKED_RETRY_SIDECAR_SCHEMA
+        or evidence.get("lane_index") != 0
+        or evidence.get("stable_binding_id")
+        != HANDOFF_REPAIR_STABLE_BINDING_ID
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", evidence_id) is None
+        or _identity(evidence_body) != evidence_id
+        or set(file_map) != set(expected_file_paths)
+        or not isinstance(facts, Mapping)
+        or set(facts) != expected_fact_fields
+        or facts.get("source_attempt") != dict(source_attempt)
+        or not isinstance(coordination_task, Mapping)
+        or coordination_task.get("status") != "blocked"
+        or coordination_task.get("revision") != source_attempt.get("task_revision")
+        or not isinstance(coordination_attempt, Mapping)
+        or coordination_attempt.get("status") != "expired"
+        or coordination_attempt.get("revision") != 2
+        or coordination_attempt.get("finished_at_ms") != 1787743027778
+        or not isinstance(coordination_claim, Mapping)
+        or coordination_claim.get("state") != "expired"
+        or coordination_claim.get("revision") != 34
+        or coordination_claim.get("expires_at_ms") != 1787743011400
+        or not isinstance(coordination_lease, Mapping)
+        or coordination_lease.get("state") != "expired"
+        or coordination_lease.get("revision") != 34
+        or coordination_lease.get("expires_at_ms") != 1787743011400
+        or facts.get("coordination_task_completion_count") != 0
+        or facts.get("coordination_newer_attempt_count") != 0
+        or facts.get("coordination_newer_fence_count") != 0
+        or not isinstance(execution_attempt, Mapping)
+        or execution_attempt.get("status") != "failed"
+        or execution_attempt.get("revision") != 3
+        or execution_attempt.get("committed_phase") != "failed"
+        or execution_attempt.get("started_at_ms") != 1787742329266
+        or execution_attempt.get("finished_at_ms") != 1787742964256
+        or facts.get("execution_phase_sequence")
+        != [
+            {"phase": "claimed", "revision": 1},
+            {"phase": "context", "revision": 2},
+            {"phase": "failed", "revision": 3},
+        ]
+        or not isinstance(provider, Mapping)
+        or provider.get("callback_state") != "started_outcome_unknown"
+        or provider.get("provider_effect_state") != "unknown_may_have_started"
+        or provider.get("failure_fingerprint")
+        != "sha256:e8a21d888af199e829abba3128a06e576bed90c02ccb60969b241b8f11ed3246"
+        or facts.get("execution_effect_claim_count") != 0
+        or not isinstance(portal_binding, Mapping)
+        or portal_binding.get("binding_id")
+        != "sha256:76a22ab25ce1a82aa6faa8d14e5730ddc4eeadd1a10f4a4ff7ef41856356e450"
+        or portal_binding.get("task_revision") != 3
+        or portal_binding.get("repository_tree_id")
+        != "cd81f5731ee64c29161830c9933d6739e0dd3eb3"
+        or not isinstance(portal_finished, Mapping)
+        or portal_finished.get("event_id")
+        != "sha256:7ac8f6ca2076822f6b6711e99fcf16e5b90189109d0dadba502c02252beb8e91"
+        or portal_finished.get("projected_task_cid")
+        != "baguqeerafge4blotsftqdygafum7kp2kaipqk5n6f5gcbgg54ileqkdh2u4a"
+        or portal_finished.get("attempt") != 1
+        or portal_finished.get("provider_dispatched") is not True
+        or portal_finished.get("attempt_consumed") is not True
+        or portal_finished.get("returncode") != 78
+        or not isinstance(diagnostic, Mapping)
+        or diagnostic.get("receipt_id")
+        != "baguqeerajm2bu5i3iejl4lmxf3nrew3ljnkxwl3odujmxfp26dxnqx6wygja"
+        or diagnostic.get("failure_id")
+        != "baguqeeraseeqvjzceffsvxnadwjymhzmje6kzraydbjnr35q63wmccmx42bq"
+        or diagnostic.get("reason_code") != "stale_proposal_replay"
+    ):
+        raise OperatorError("PCSM blocked-retry handoff is not admitted")
+    for role, expected_path in expected_file_paths.items():
+        item = file_map[role]
+        if (
+            set(item) != {"role", "path", "sha256", "size_bytes"}
+            or item.get("role") != role
+            or item.get("path") != expected_path
+            or re.fullmatch(r"sha256:[0-9a-f]{64}", str(item.get("sha256") or ""))
+            is None
+            or type(item.get("size_bytes")) is not int
+            or int(item["size_bytes"]) < 1
+        ):
+            raise OperatorError("PCSM blocked-retry file evidence is not exact")
+        _safe_path(ROOT, expected_path, field=f"blocked_retry_handoff.{role}")
+    return handoff
+
+
 def _verified_handoff_repair(
     *,
     bootstrap_receipt_id: str,
@@ -676,6 +974,7 @@ def _verified_handoff_repair(
         "task_cid",
         "source_attempt",
         "source_completion_receipt_id",
+        "blocked_retry_handoff",
         "max_task_attempts_before",
         "max_task_attempts_after",
         "execution_route_continuation",
@@ -690,6 +989,7 @@ def _verified_handoff_repair(
     body = dict(payload)
     receipt_id = str(body.pop("receipt_id", "") or "")
     source_attempt = payload.get("source_attempt")
+    blocked_retry_handoff = payload.get("blocked_retry_handoff")
     datasets_receipt = payload.get("datasets_current_head_receipt")
     accelerate_merge = payload.get("accelerate_origin_main_merge")
     continuation = payload.get("execution_route_continuation")
@@ -748,6 +1048,7 @@ def _verified_handoff_repair(
         )
         or payload.get("source_completion_receipt_id")
         != HANDOFF_REPAIR_COMPLETION_RECEIPT_ID
+        or not isinstance(blocked_retry_handoff, Mapping)
         or type(payload.get("max_task_attempts_before")) is not int
         or type(payload.get("max_task_attempts_after")) is not int
         or payload.get("max_task_attempts_before") != bootstrap_attempt_limit
@@ -815,6 +1116,13 @@ def _verified_handoff_repair(
         or _identity(body) != receipt_id
     ):
         raise OperatorError("PCSM handoff repair receipt is not admitted")
+    _verified_blocked_retry_handoff(
+        blocked_retry_handoff,
+        source_attempt=source_attempt,
+        source_completion_receipt_id=HANDOFF_REPAIR_COMPLETION_RECEIPT_ID,
+        bootstrap_attempt_limit=bootstrap_attempt_limit,
+        current_attempt_limit=current_attempt_limit,
+    )
     observed_validations: set[tuple[str, tuple[str, ...]]] = set()
     for index, validation in enumerate(validations):
         if not isinstance(validation, Mapping) or set(validation) != {
@@ -907,15 +1215,27 @@ def _verified_handoff_repair(
             "origin_main_commit",
             "merged_commit",
             "merged_tree",
+            "current_commit",
+            "current_tree",
         }
         or accelerate_merge.get("bootstrap_commit")
         != accelerator_transition.get("bootstrap_head")
-        or accelerate_merge.get("merged_commit")
+        or accelerate_merge.get("current_commit")
         != accelerator_transition.get("current_head")
-        or accelerate_merge.get("merged_tree")
+        or accelerate_merge.get("current_tree")
         != accelerator_transition.get("current_tree")
         or accelerate_merge.get("origin_main_commit")
         != current_source_binding.get("ipfs_accelerate_origin_main_revision")
+        or _git_commit_tree(
+            accelerate_merge.get("merged_commit"),
+            field="accelerator admitted origin/main merge",
+            repository=_safe_path(
+                ROOT,
+                str(accelerator_transition.get("path") or ""),
+                field="accelerate_origin_main_merge.path",
+            ),
+        )
+        != accelerate_merge.get("merged_tree")
     ):
         raise OperatorError("PCSM accelerator origin/main transition is not exact")
     accelerator_repository = _safe_path(
@@ -925,8 +1245,14 @@ def _verified_handoff_repair(
     )
     _git_is_ancestor(
         accelerate_merge.get("origin_main_commit"),
-        accelerate_merge.get("merged_commit"),
+        accelerate_merge.get("current_commit"),
         field="accelerator origin/main merge lineage",
+        repository=accelerator_repository,
+    )
+    _git_is_ancestor(
+        accelerate_merge.get("merged_commit"),
+        accelerate_merge.get("current_commit"),
+        field="accelerator handoff repair lineage",
         repository=accelerator_repository,
     )
     merge_parents = subprocess.run(
@@ -2348,6 +2674,17 @@ def _restart_database_verification(source: Any, admission: Mapping[str, Any]) ->
     if isinstance(repair, Mapping) and repair:
         task = source.get_task(str(repair.get("task_alias") or ""))
         attempt = repair.get("source_attempt")
+        blocked_retry = repair.get("blocked_retry_handoff")
+        sealed_source_body = (
+            blocked_retry.get("source_task_body")
+            if isinstance(blocked_retry, Mapping)
+            else None
+        )
+        sidecar_evidence = (
+            blocked_retry.get("sidecar_evidence")
+            if isinstance(blocked_retry, Mapping)
+            else None
+        )
         receipt = (
             task.body.get("completion_receipt")
             if task is not None and isinstance(task.body, Mapping)
@@ -2356,18 +2693,94 @@ def _restart_database_verification(source: Any, admission: Mapping[str, Any]) ->
         if (
             task is None
             or task.task_cid != repair.get("task_cid")
-            or task.status != "blocked"
             or not isinstance(attempt, Mapping)
-            or int(task.revision) != int(attempt.get("task_revision") or 0)
             or not isinstance(receipt, Mapping)
-            or _identity(receipt) != HANDOFF_REPAIR_COMPLETION_RECEIPT_ID
-            or receipt.get("operation") != "database_portal_terminal_failure"
-            or receipt.get("reason") != "portal_provider_failed"
-            or receipt.get("retryable") is not False
-            or receipt.get("control_expected_status") != "in_progress"
-            or receipt.get("control_expected_revision") != int(task.revision) - 1
-            or any(
-                receipt.get(field) != attempt.get(field)
+            or not isinstance(sealed_source_body, Mapping)
+            or _identity(sealed_source_body) != HANDOFF_REPAIR_SOURCE_TASK_BODY_ID
+            or not isinstance(sidecar_evidence, Mapping)
+        ):
+            raise OperatorError("restart repair source task changed authority")
+        source_revision = int(attempt.get("task_revision") or 0)
+        target_revision = int(blocked_retry.get("target_revision") or 0)
+        source_receipt = sealed_source_body.get("completion_receipt")
+        sealed_evidence_id = str(
+            sidecar_evidence.get("evidence_id")
+            if isinstance(sidecar_evidence, Mapping)
+            else ""
+        )
+        source_route = (
+            source_receipt.get("execution_route_binding")
+            if isinstance(source_receipt, Mapping)
+            else None
+        )
+        expected_recovery_receipt = {
+            "schema": TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA,
+            "operation": HANDOFF_REPAIR_BLOCKED_RETRY_OPERATION,
+            **{
+                field: attempt[field]
+                for field in (
+                    "attempt_id",
+                    "claim_id",
+                    "lease_id",
+                    "owner_session_id",
+                    "attempt_number",
+                    "fencing_token",
+                    "fence_epoch",
+                )
+            },
+            "terminal_operation": "database_portal_terminal_failure",
+            "terminal_reason": "portal_provider_failed",
+            "source_completion_receipt_id": (
+                HANDOFF_REPAIR_COMPLETION_RECEIPT_ID
+            ),
+            "operator_handoff_receipt_id": str(repair.get("receipt_id") or ""),
+            "sidecar_evidence_id": sealed_evidence_id,
+            "recovered_from_revision": source_revision,
+            "max_task_attempts_before": blocked_retry.get(
+                "max_task_attempts_before"
+            ),
+            "max_task_attempts_after": blocked_retry.get(
+                "max_task_attempts_after"
+            ),
+            "attempt_refunded": False,
+            "fresh_attempt_number": blocked_retry.get(
+                "fresh_attempt_number"
+            ),
+            "queue_reason": HANDOFF_REPAIR_BLOCKED_RETRY_REASON,
+            "backoff_ms": 0,
+            "retry_not_before_ms": blocked_retry.get(
+                "retry_not_before_ms"
+            ),
+            "control_expected_status": "blocked",
+            "control_expected_revision": source_revision,
+            "execution_route_binding": (
+                dict(source_route) if isinstance(source_route, Mapping) else {}
+            ),
+            "execution_route_binding_cid": (
+                _semantic_identity(
+                    {"task_execution_route_binding": dict(source_route)}
+                )
+                if isinstance(source_route, Mapping)
+                else ""
+            ),
+            "execution_route_policy_id": HANDOFF_REPAIR_ROUTE_POLICY_ID,
+            "execution_route_origin_revision": 1,
+        }
+        expected_recovery_body = dict(sealed_source_body)
+        expected_recovery_body["completion_receipt"] = expected_recovery_receipt
+        exact_source = bool(
+            task.status == "blocked"
+            and int(task.revision) == source_revision
+            and task.body == sealed_source_body
+            and receipt == source_receipt
+            and _identity(receipt) == HANDOFF_REPAIR_COMPLETION_RECEIPT_ID
+            and receipt.get("operation") == "database_portal_terminal_failure"
+            and receipt.get("reason") == "portal_provider_failed"
+            and receipt.get("retryable") is False
+            and receipt.get("control_expected_status") == "in_progress"
+            and receipt.get("control_expected_revision") == source_revision - 1
+            and all(
+                receipt.get(field) == attempt.get(field)
                 for field in (
                     "attempt_id",
                     "claim_id",
@@ -2378,15 +2791,92 @@ def _restart_database_verification(source: Any, admission: Mapping[str, Any]) ->
                     "fence_epoch",
                 )
             )
-        ):
-            raise OperatorError("restart repair source task changed authority")
+        )
+        if exact_source:
+            if source.get_queue_entry(task.task_cid) is not None:
+                raise OperatorError(
+                    "restart repair source task already has a retry cooldown"
+                )
+            handoff_state = "pending_apply"
+        else:
+            route = receipt.get("execution_route_binding")
+            allowed_post_statuses = {
+                "retrying",
+                "in_progress",
+                "completed",
+                "complete",
+                "done",
+                "skipped",
+                "blocked",
+                "failed",
+                "quarantined",
+                "cancelled",
+                "canceled",
+            }
+            if (
+                int(task.revision) < target_revision
+                or task.status not in allowed_post_statuses
+                or not isinstance(route, Mapping)
+                or route.get("task_cid") != task.task_cid
+                or route.get("task_alias") != task.task_alias
+                or route.get("policy_id") != HANDOFF_REPAIR_ROUTE_POLICY_ID
+                or route.get("task_revision") != 1
+                or receipt.get("execution_route_policy_id")
+                != HANDOFF_REPAIR_ROUTE_POLICY_ID
+                or receipt.get("execution_route_origin_revision") != 1
+            ):
+                raise OperatorError(
+                    "restart repair post-command task changed authority"
+                )
+            if int(task.revision) == target_revision:
+                if (
+                    task.status != "retrying"
+                    or receipt != expected_recovery_receipt
+                    or task.body != expected_recovery_body
+                ):
+                    raise OperatorError(
+                        "restart repair revision-5 recovery receipt changed authority"
+                    )
+                queue = source.validate_retrying_task_cooldown(
+                    task.task_cid,
+                    expected_attempt_identity={
+                        field: attempt[field]
+                        for field in (
+                            "attempt_id",
+                            "claim_id",
+                            "lease_id",
+                            "owner_session_id",
+                            "attempt_number",
+                            "fencing_token",
+                            "fence_epoch",
+                        )
+                    },
+                    expected_reason=HANDOFF_REPAIR_BLOCKED_RETRY_REASON,
+                    expected_delay_ms=0,
+                )
+                if (
+                    queue.attempt != int(attempt["attempt_number"])
+                    or queue.retry_not_before_ms
+                    != blocked_retry.get("retry_not_before_ms")
+                    or queue.selection_penalty != 0
+                    or queue.consecutive_failures
+                    != int(attempt["attempt_number"])
+                    or queue.state != "released"
+                    or queue.reason != HANDOFF_REPAIR_BLOCKED_RETRY_REASON
+                ):
+                    raise OperatorError(
+                        "restart repair revision-5 cooldown changed authority"
+                    )
+            handoff_state = "command_replay_required"
         task_projection = {
             "task_alias": task.task_alias,
             "task_cid": task.task_cid,
             "status": task.status,
             "revision": int(task.revision),
-            "terminal_receipt_identity": _identity(receipt),
+            "receipt_operation": str(receipt.get("operation") or ""),
+            "receipt_identity": _identity(receipt),
             "attempt_identity": dict(attempt),
+            "blocked_retry_handoff_state": handoff_state,
         }
 
     verification: dict[str, Any] = {
@@ -2751,14 +3241,620 @@ def _acquire_exact_sidecar_lock(path: Path, expected: bytes) -> int:
         raise OperatorError("continued route sidecar lock is unavailable") from exc
 
 
+def _runtime_file_evidence(role: str, path: Path) -> dict[str, Any]:
+    """Hash one owned, non-linked runtime file without following a symlink."""
+
+    descriptor = -1
+    try:
+        before = path.lstat()
+        no_follow = getattr(os, "O_NOFOLLOW", 0)
+        if not no_follow:
+            raise OperatorError("blocked-retry evidence requires no-follow access")
+        descriptor = os.open(
+            path,
+            os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | no_follow,
+        )
+        opened = os.fstat(descriptor)
+        if (
+            not stat_module.S_ISREG(opened.st_mode)
+            or opened.st_uid != os.geteuid()
+            or opened.st_nlink != 1
+            or (before.st_dev, before.st_ino) != (opened.st_dev, opened.st_ino)
+            or opened.st_size < 1
+            or opened.st_size > 64 * 1024 * 1024
+        ):
+            raise OperatorError(
+                f"blocked-retry {role} is not an exact owned file"
+            )
+        digest = hashlib.sha256()
+        size = 0
+        while True:
+            chunk = os.read(descriptor, 1024 * 1024)
+            if not chunk:
+                break
+            size += len(chunk)
+            digest.update(chunk)
+        after = os.fstat(descriptor)
+        named = path.lstat()
+        if (
+            size != opened.st_size
+            or (opened.st_dev, opened.st_ino, opened.st_size)
+            != (after.st_dev, after.st_ino, after.st_size)
+            or (named.st_dev, named.st_ino, named.st_size)
+            != (after.st_dev, after.st_ino, after.st_size)
+        ):
+            raise OperatorError(f"blocked-retry {role} changed while hashing")
+        return {
+            "role": role,
+            "path": path.relative_to(ROOT).as_posix(),
+            "sha256": "sha256:" + digest.hexdigest(),
+            "size_bytes": size,
+        }
+    except OSError as exc:
+        raise OperatorError(f"blocked-retry {role} cannot be hashed safely") from exc
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+
+
+def _verify_blocked_retry_sidecar_evidence(
+    *,
+    coordination_path: Path,
+    execution_path: Path,
+    blocked_retry_handoff: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Reproduce the exact expired attempt-1 and Portal failure evidence."""
+
+    try:
+        import duckdb
+    except Exception as exc:
+        raise OperatorError("blocked-retry sidecar verifier requires DuckDB") from exc
+
+    source_attempt = HANDOFF_REPAIR_SOURCE_ATTEMPT
+    task_cid = HANDOFF_REPAIR_TASK_CID
+    coordination = None
+    execution = None
+    try:
+        coordination = duckdb.connect(str(coordination_path), read_only=True)
+        coordination_task_rows = coordination.execute(
+            "SELECT ready, body_json FROM coordination_tasks "
+            "WHERE task_cid = ? LIMIT 2",
+            [task_cid],
+        ).fetchall()
+        coordination_attempt_rows = coordination.execute(
+            "SELECT attempt_id, task_cid, attempt_number, owner_session_id, "
+            "fencing_token, fence_epoch, started_at_ms, finished_at_ms, "
+            "status, revision FROM task_attempts WHERE task_cid = ? "
+            "ORDER BY attempt_number",
+            [task_cid],
+        ).fetchall()
+        coordination_claim_rows = coordination.execute(
+            "SELECT claim_id, task_cid, owner_session_id, fencing_token, "
+            "fence_epoch, expires_at_ms, state, revision, attempt_id, "
+            "attempt_number, lease_id FROM task_claims WHERE task_cid = ? "
+            "ORDER BY attempt_number",
+            [task_cid],
+        ).fetchall()
+        coordination_lease_rows = coordination.execute(
+            "SELECT lease_id, owner_session_id, fencing_token, fence_epoch, "
+            "expires_at_ms, state, revision, task_cid, claim_id, attempt_id, "
+            "attempt_number FROM fenced_leases WHERE task_cid = ? "
+            "ORDER BY attempt_number",
+            [task_cid],
+        ).fetchall()
+        completion_count = int(
+            coordination.execute(
+                "SELECT count(*) FROM task_completions WHERE task_cid = ?",
+                [task_cid],
+            ).fetchone()[0]
+        )
+        newer_attempt_count = int(
+            coordination.execute(
+                "SELECT count(*) FROM task_attempts WHERE task_cid = ? "
+                "AND attempt_number > 1",
+                [task_cid],
+            ).fetchone()[0]
+        )
+        newer_fence_count = int(
+            coordination.execute(
+                "SELECT count(*) FROM fenced_leases WHERE task_cid = ? "
+                "AND (fencing_token > 1 OR fence_epoch > 1)",
+                [task_cid],
+            ).fetchone()[0]
+        )
+
+        execution = duckdb.connect(str(execution_path), read_only=True)
+        execution_attempt_rows = execution.execute(
+            "SELECT attempt_id, claim_id, task_cid, task_alias, attempt_number, "
+            "owner_session_id, fencing_token, fence_epoch, lease_id, "
+            "committed_phase, status, started_at_ms, finished_at_ms, revision, "
+            "body_json FROM database_task_attempts WHERE task_cid = ? "
+            "ORDER BY attempt_number",
+            [task_cid],
+        ).fetchall()
+        phase_rows = execution.execute(
+            "SELECT phase, revision, body_json FROM attempt_phases "
+            "WHERE attempt_id = ? ORDER BY revision",
+            [source_attempt["attempt_id"]],
+        ).fetchall()
+        provider_rows = execution.execute(
+            "SELECT invocation_id, result_json FROM provider_invocations "
+            "WHERE attempt_id = ? LIMIT 2",
+            [source_attempt["attempt_id"]],
+        ).fetchall()
+        effect_count = int(
+            execution.execute(
+                "SELECT count(*) FROM effect_claims WHERE attempt_id = ?",
+                [source_attempt["attempt_id"]],
+            ).fetchone()[0]
+        )
+    except Exception as exc:
+        raise OperatorError("blocked-retry sidecar rows cannot be verified") from exc
+    finally:
+        if coordination is not None:
+            coordination.close()
+        if execution is not None:
+            execution.close()
+
+    if (
+        len(coordination_task_rows) != 1
+        or len(coordination_attempt_rows) != 1
+        or len(coordination_claim_rows) != 1
+        or len(coordination_lease_rows) != 1
+        or len(execution_attempt_rows) != 1
+        or len(provider_rows) != 1
+    ):
+        raise OperatorError("blocked-retry sidecar identity is absent or ambiguous")
+    try:
+        coordination_task_body = json.loads(str(coordination_task_rows[0][1]))
+        execution_attempt_body = json.loads(str(execution_attempt_rows[0][14]))
+        phase_bodies = [json.loads(str(row[2])) for row in phase_rows]
+        provider_body = json.loads(str(provider_rows[0][1]))
+    except (TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise OperatorError("blocked-retry sidecar JSON is malformed") from exc
+
+    expected_attempt = (
+        source_attempt["attempt_id"],
+        task_cid,
+        1,
+        source_attempt["owner_session_id"],
+        1,
+        1,
+        1787742329266,
+        1787743027778,
+        "expired",
+        2,
+    )
+    expected_claim = (
+        source_attempt["claim_id"],
+        task_cid,
+        source_attempt["owner_session_id"],
+        1,
+        1,
+        1787743011400,
+        "expired",
+        34,
+        source_attempt["attempt_id"],
+        1,
+        source_attempt["lease_id"],
+    )
+    expected_lease = (
+        source_attempt["lease_id"],
+        source_attempt["owner_session_id"],
+        1,
+        1,
+        1787743011400,
+        "expired",
+        34,
+        task_cid,
+        source_attempt["claim_id"],
+        source_attempt["attempt_id"],
+        1,
+    )
+    execution_row = execution_attempt_rows[0]
+    route = (
+        execution_attempt_body.get("execution_route_binding")
+        if isinstance(execution_attempt_body, Mapping)
+        else None
+    )
+    expected_execution_prefix = (
+        source_attempt["attempt_id"],
+        source_attempt["claim_id"],
+        task_cid,
+        "PCSM-010",
+        1,
+        source_attempt["owner_session_id"],
+        1,
+        1,
+        source_attempt["lease_id"],
+        "failed",
+        "failed",
+        1787742329266,
+        1787742964256,
+        3,
+    )
+    if (
+        coordination_task_rows[0][0] is not False
+        or coordination_task_body
+        != {
+            "authoritative_attempt_floor": 0,
+            "authoritative_attempt_floor_source": "",
+            "authoritative_revision": 4,
+            "authoritative_status": "blocked",
+            "authority": "task_source",
+            "restart_recovery_binding": {},
+            "restart_recovery_owner_session_id": "",
+            "restart_recovery_ready": False,
+        }
+        or tuple(coordination_attempt_rows[0]) != expected_attempt
+        or tuple(coordination_claim_rows[0]) != expected_claim
+        or tuple(coordination_lease_rows[0]) != expected_lease
+        or completion_count != 0
+        or newer_attempt_count != 0
+        or newer_fence_count != 0
+        or tuple(execution_row[:14]) != expected_execution_prefix
+        or not isinstance(route, Mapping)
+        or route.get("policy_id") != HANDOFF_REPAIR_ROUTE_POLICY_ID
+        or route.get("task_cid") != task_cid
+        or route.get("task_revision") != 1
+        or [(str(row[0]), int(row[1])) for row in phase_rows]
+        != [("claimed", 1), ("context", 2), ("failed", 3)]
+        or phase_bodies[-1]
+        != {
+            "attempt_consumed": "unknown",
+            "backoff_seconds": 0,
+            "deferred": False,
+            "portal_retryable_failure": False,
+            "portal_terminal_failure": True,
+            "provider_dispatched": "unknown",
+            "reason": "portal_provider_failed",
+            "typed_deferral_slot_consumed": "unknown",
+        }
+        or not isinstance(provider_body, Mapping)
+        or provider_body.get("callback_state") != "started_outcome_unknown"
+        or provider_body.get("provider_effect_state") != "unknown_may_have_started"
+        or provider_body.get("failure_fingerprint")
+        != "sha256:e8a21d888af199e829abba3128a06e576bed90c02ccb60969b241b8f11ed3246"
+        or effect_count != 0
+    ):
+        raise OperatorError("blocked-retry sidecar state changed authority")
+
+    portal_root = ROOT / HANDOFF_REPAIR_PORTAL_ATTEMPT_RELATIVE
+    binding_path = portal_root / "database-attempt-binding.json"
+    events_path = portal_root / "portal-events.jsonl"
+    diagnostic_path = (
+        portal_root / "implementation-logs/pcsm-010-diagnostic-receipt.json"
+    )
+    binding = _json_object(binding_path)
+    diagnostic = _json_object(diagnostic_path)
+    try:
+        events = [
+            json.loads(line)
+            for line in events_path.read_text(encoding="utf-8").splitlines()
+            if line
+        ]
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise OperatorError("blocked-retry Portal events are malformed") from exc
+    finished = [
+        event
+        for event in events
+        if isinstance(event, Mapping)
+        and event.get("type") == "implementation_finished"
+        and event.get("task_id") == "PCSM-010"
+        and event.get("attempt") == 1
+    ]
+    reason_codes = (
+        diagnostic.get("failure", {})
+        .get("proposal_gate", {})
+        .get("reason_codes", [])
+    )
+    if (
+        binding.get("binding_id")
+        != "sha256:76a22ab25ce1a82aa6faa8d14e5730ddc4eeadd1a10f4a4ff7ef41856356e450"
+        or binding.get("task_cid") != task_cid
+        or binding.get("attempt_id") != source_attempt["attempt_id"]
+        or binding.get("claim_id") != source_attempt["claim_id"]
+        or binding.get("lease_id") != source_attempt["lease_id"]
+        or binding.get("owner_session_id") != source_attempt["owner_session_id"]
+        or binding.get("attempt_number") != 1
+        or binding.get("fencing_token") != 1
+        or binding.get("fence_epoch") != 1
+        or binding.get("task_revision") != 3
+        or binding.get("repository_tree_id") != "cd81f5731ee64c29161830c9933d6739e0dd3eb3"
+        or len(finished) != 1
+        or finished[0].get("event_id")
+        != "sha256:7ac8f6ca2076822f6b6711e99fcf16e5b90189109d0dadba502c02252beb8e91"
+        or finished[0].get("provider_dispatched") is not True
+        or finished[0].get("attempt_consumed") is not True
+        or finished[0].get("returncode") != 78
+        or diagnostic.get("receipt_id")
+        != "baguqeerajm2bu5i3iejl4lmxf3nrew3ljnkxwl3odujmxfp26dxnqx6wygja"
+        or diagnostic.get("failure_id")
+        != "baguqeeraseeqvjzceffsvxnadwjymhzmje6kzraydbjnr35q63wmccmx42bq"
+        or reason_codes != ["stale_proposal_replay"]
+    ):
+        raise OperatorError("blocked-retry Portal evidence changed authority")
+
+    observed: dict[str, Any] = {
+        "schema": HANDOFF_BLOCKED_RETRY_SIDECAR_SCHEMA,
+        "lane_index": 0,
+        "stable_binding_id": HANDOFF_REPAIR_STABLE_BINDING_ID,
+        "files": [
+            _runtime_file_evidence("coordination", coordination_path),
+            _runtime_file_evidence("execution", execution_path),
+            _runtime_file_evidence("portal_attempt_binding", binding_path),
+            _runtime_file_evidence("portal_events", events_path),
+            _runtime_file_evidence("diagnostic_receipt", diagnostic_path),
+        ],
+        "facts": {
+            "source_attempt": dict(source_attempt),
+            "coordination_task": {"status": "blocked", "revision": 4},
+            "coordination_attempt": {
+                "status": "expired",
+                "revision": 2,
+                "finished_at_ms": 1787743027778,
+            },
+            "coordination_claim": {
+                "state": "expired",
+                "revision": 34,
+                "expires_at_ms": 1787743011400,
+            },
+            "coordination_lease": {
+                "state": "expired",
+                "revision": 34,
+                "expires_at_ms": 1787743011400,
+            },
+            "coordination_task_completion_count": completion_count,
+            "coordination_newer_attempt_count": newer_attempt_count,
+            "coordination_newer_fence_count": newer_fence_count,
+            "execution_attempt": {
+                "status": "failed",
+                "revision": 3,
+                "committed_phase": "failed",
+                "started_at_ms": 1787742329266,
+                "finished_at_ms": 1787742964256,
+            },
+            "execution_phase_sequence": [
+                {"phase": str(row[0]), "revision": int(row[1])}
+                for row in phase_rows
+            ],
+            "execution_provider_invocation": {
+                "callback_state": provider_body["callback_state"],
+                "provider_effect_state": provider_body["provider_effect_state"],
+                "failure_fingerprint": provider_body["failure_fingerprint"],
+            },
+            "execution_effect_claim_count": effect_count,
+            "portal_attempt_binding": {
+                "binding_id": binding["binding_id"],
+                "task_revision": int(binding["task_revision"]),
+                "repository_tree_id": binding["repository_tree_id"],
+            },
+            "portal_implementation_finished": {
+                "event_id": finished[0]["event_id"],
+                "projected_task_cid": finished[0]["canonical_task_cid"],
+                "attempt": int(finished[0]["attempt"]),
+                "provider_dispatched": bool(finished[0]["provider_dispatched"]),
+                "attempt_consumed": bool(finished[0]["attempt_consumed"]),
+                "returncode": int(finished[0]["returncode"]),
+            },
+            "diagnostic_receipt": {
+                "receipt_id": diagnostic["receipt_id"],
+                "failure_id": diagnostic["failure_id"],
+                "reason_code": reason_codes[0],
+            },
+        },
+    }
+    observed["evidence_id"] = _identity(observed)
+    expected = blocked_retry_handoff.get("sidecar_evidence")
+    if not isinstance(expected, Mapping) or observed != dict(expected):
+        raise OperatorError("blocked-retry sidecar evidence differs from its seal")
+    return observed
+
+
+def _apply_blocked_retry_recovery(
+    *,
+    server: Any,
+    board: Any,
+    repair: Mapping[str, Any],
+    blocked_retry_handoff: Mapping[str, Any],
+    blocked_retry_state: str,
+    sidecar_evidence: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Submit or replay the one process-bound, task-scoped recovery command."""
+
+    from ipfs_accelerate_py.agent_supervisor.task_sources.quack_state_client import (
+        QuackStateClient,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+        TypedStateOwnerConnection,
+    )
+
+    identity = server.identity
+    if identity is None:
+        raise OperatorError("state owner has no blocked-retry identity")
+    task_body = blocked_retry_handoff.get("source_task_body")
+    terminal_receipt = (
+        task_body.get("completion_receipt")
+        if isinstance(task_body, Mapping)
+        else None
+    )
+    evidence_id = str(sidecar_evidence.get("evidence_id") or "")
+    handoff_receipt_id = str(repair.get("receipt_id") or "")
+    source_attempt = repair.get("source_attempt")
+    if (
+        blocked_retry_state
+        not in {"pending_apply", "command_replay_required"}
+        or not isinstance(task_body, Mapping)
+        or not isinstance(terminal_receipt, Mapping)
+        or not isinstance(source_attempt, Mapping)
+        or evidence_id
+        != str(
+            (blocked_retry_handoff.get("sidecar_evidence") or {}).get(
+                "evidence_id"
+            )
+        )
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", handoff_receipt_id) is None
+    ):
+        raise OperatorError("blocked-retry recovery inputs are not sealed")
+
+    client_id = "pcsm-state-owner:blocked-retry-handoff"
+    allowed_operations = (
+        "whoami_metadata",
+        "load_store_generation",
+        "executor_retry_cooldown_by_task",
+        "txn_load_generation",
+        "txn_lookup_idempotency",
+        "txn_advance_store_revision",
+        "txn_record_idempotency",
+        "executor_insert_retry_cooldown",
+        "executor_cas_task_status_receipt",
+        "executor_insert_task_revision",
+    )
+    store_id = _control_plane_store_id(board.resolved_database_program())
+    token, grant = server.issue_typed_client_grant_record(
+        client_id=client_id,
+        process_birth_id=identity.process_birth_id,
+        allowed_operations=allowed_operations,
+        allowed_command_operations=(HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND,),
+        entity_scopes={"task_cid": HANDOFF_REPAIR_TASK_CID},
+        peer_pid=os.getpid(),
+        ttl_seconds=60.0,
+    )
+    client: Any | None = None
+    try:
+        client = QuackStateClient(
+            owner_id=client_id,
+            store_id=store_id,
+            process_birth_id=identity.process_birth_id,
+            connection_factory=lambda _endpoint: TypedStateOwnerConnection(
+                socket_path=server.typed_command_socket_path(),
+                token=token,
+                client_id=client_id,
+                process_birth_id=identity.process_birth_id,
+                store_id=store_id,
+            ),
+        )
+        client.attach(
+            board.resolved_database_program().quack_endpoint,
+            server_id=identity.server_id,
+        )
+        result = client.recover_blocked_task_retry(
+            task_cid=HANDOFF_REPAIR_TASK_CID,
+            expected_task_revision=int(
+                blocked_retry_handoff.get("source_revision") or 0
+            ),
+            task_body=dict(task_body),
+            terminal_receipt=dict(terminal_receipt),
+            max_task_attempts_before=int(
+                blocked_retry_handoff.get("max_task_attempts_before") or 0
+            ),
+            max_task_attempts_after=int(
+                blocked_retry_handoff.get("max_task_attempts_after") or 0
+            ),
+            operator_handoff_receipt_id=handoff_receipt_id,
+            sidecar_evidence_id=evidence_id,
+            now_ms=int(blocked_retry_handoff.get("started_at_ms") or -1),
+        )
+    finally:
+        try:
+            if client is not None:
+                client.close()
+        finally:
+            server.revoke_typed_client_grant(grant.grant_id)
+
+    outcome = result.outcome.value
+    expected_outcome = (
+        "accepted"
+        if blocked_retry_state == "pending_apply"
+        else "idempotent_replay"
+    )
+    route = terminal_receipt.get("execution_route_binding")
+    result_body = dict(result.result)
+    store_revision_before = result_body.get("store_revision_before")
+    expected_result = {
+        "schema": TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA,
+        "operation": HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND,
+        "task_cid": HANDOFF_REPAIR_TASK_CID,
+        "attempt_id": source_attempt["attempt_id"],
+        "attempt_number": source_attempt["attempt_number"],
+        "fresh_attempt_number": blocked_retry_handoff[
+            "fresh_attempt_number"
+        ],
+        "task_revision": blocked_retry_handoff["target_revision"],
+        "queue_revision": 1,
+        "retry_not_before_ms": blocked_retry_handoff[
+            "retry_not_before_ms"
+        ],
+        "source_completion_receipt_id": HANDOFF_REPAIR_COMPLETION_RECEIPT_ID,
+        "operator_handoff_receipt_id": handoff_receipt_id,
+        "sidecar_evidence_id": evidence_id,
+        "max_task_attempts_before": blocked_retry_handoff[
+            "max_task_attempts_before"
+        ],
+        "max_task_attempts_after": blocked_retry_handoff[
+            "max_task_attempts_after"
+        ],
+        "attempt_refunded": False,
+        "execution_route_binding_cid": (
+            _semantic_identity({"task_execution_route_binding": dict(route)})
+            if isinstance(route, Mapping)
+            else ""
+        ),
+        "execution_route_policy_id": HANDOFF_REPAIR_ROUTE_POLICY_ID,
+        "execution_route_origin_revision": 1,
+        "store_revision_before": store_revision_before,
+    }
+    command_prefix = "cmd:blocked-retry-recovery:"
+    idempotency_prefix = "executor-blocked-retry-recovery:"
+    command_digest = result.command_id.removeprefix(command_prefix)
+    if (
+        outcome != expected_outcome
+        or result.changed is not (blocked_retry_state == "pending_apply")
+        or result.conflict_kind is not None
+        or result_body != expected_result
+        or type(store_revision_before) is not int
+        or store_revision_before < 1
+        or not result.command_id.startswith(command_prefix)
+        or re.fullmatch(r"[0-9a-f]{64}", command_digest) is None
+        or result.idempotency_key
+        != f"{idempotency_prefix}{command_digest}"
+        or result.result_digest != _identity(result_body)
+        or result.revision < store_revision_before + 1
+        or (
+            blocked_retry_state == "pending_apply"
+            and result.revision != store_revision_before + 1
+        )
+        or result.generation != int(identity.generation)
+        or result.fence_epoch != int(identity.fence_epoch)
+    ):
+        raise OperatorError("blocked-retry owner command was not exactly admitted")
+    return {
+        "authorization": {
+            "client_id": client_id,
+            "process_birth_id": identity.process_birth_id,
+            "peer_pid": os.getpid(),
+            "allowed_operations": list(allowed_operations),
+            "allowed_command_operations": [
+                HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND
+            ],
+            "entity_scopes": {"task_cid": HANDOFF_REPAIR_TASK_CID},
+            "revoked": True,
+        },
+        "command": result.to_dict(),
+    }
+
+
 def _verify_continued_route_sidecars(
     *,
     board: Any,
     paths: Mapping[str, Path],
     continuation: Mapping[str, Any],
     stable_authority: Mapping[str, Any],
+    blocked_retry_handoff: Mapping[str, Any] | None = None,
+    blocked_retry_state: str = "",
+    recovery_callback: Any | None = None,
 ) -> dict[str, Any]:
-    """Verify, but never rewrite, the lane sidecars for the carried epoch."""
+    """Fence every lane sidecar while applying the one sealed owner recovery."""
 
     try:
         import duckdb
@@ -2778,7 +3874,7 @@ def _verify_continued_route_sidecars(
         raise OperatorError("continued route stable authority differs from its seal")
 
     held: list[int] = []
-    execution_paths: list[tuple[int, Path]] = []
+    sidecar_paths: list[tuple[int, Path, Path]] = []
     try:
         for lane_index in range(lane_count):
             lane = paths["runtime"] / "state" / f"lane-{lane_index}"
@@ -2789,19 +3885,24 @@ def _verify_continued_route_sidecars(
             for sidecar in (coordination, execution):
                 lock_path = sidecar.with_name(f".{sidecar.name}.writer.lock")
                 held.append(_acquire_exact_sidecar_lock(lock_path, expected_lock))
-            execution_paths.append((lane_index, execution))
+            sidecar_paths.append((lane_index, coordination, execution))
 
         observations: list[dict[str, Any]] = []
-        for lane_index, execution in execution_paths:
+        for lane_index, coordination, execution in sidecar_paths:
+            coordination_stat = coordination.lstat()
             before = execution.lstat()
             if (
-                not stat_module.S_ISREG(before.st_mode)
+                not stat_module.S_ISREG(coordination_stat.st_mode)
+                or coordination_stat.st_uid != os.geteuid()
+                or coordination_stat.st_nlink != 1
+                or stat_module.S_IMODE(coordination_stat.st_mode) != 0o600
+                or not stat_module.S_ISREG(before.st_mode)
                 or before.st_uid != os.geteuid()
                 or before.st_nlink != 1
                 or stat_module.S_IMODE(before.st_mode) != 0o600
             ):
                 raise OperatorError(
-                    "continued route execution sidecar is not an exact private file"
+                    "continued route sidecar is not an exact private file"
                 )
             connection = None
             try:
@@ -2853,11 +3954,52 @@ def _verify_continued_route_sidecars(
                     },
                 }
             )
+
+        if not isinstance(blocked_retry_handoff, Mapping):
+            raise OperatorError("continued route has no blocked-retry handoff")
+        if blocked_retry_state == "pending_apply":
+            lane_zero = next(
+                (
+                    (coordination, execution)
+                    for lane_index, coordination, execution in sidecar_paths
+                    if lane_index == 0
+                ),
+                None,
+            )
+            if lane_zero is None:
+                raise OperatorError("blocked-retry lane-0 sidecars are absent")
+            sealed_evidence = _verify_blocked_retry_sidecar_evidence(
+                blocked_retry_handoff=blocked_retry_handoff,
+                coordination_path=lane_zero[0],
+                execution_path=lane_zero[1],
+            )
+        elif blocked_retry_state == "command_replay_required":
+            existing = blocked_retry_handoff.get("sidecar_evidence")
+            if not isinstance(existing, Mapping):
+                raise OperatorError("blocked-retry sealed evidence is absent")
+            sealed_evidence = dict(existing)
+        else:
+            raise OperatorError("blocked-retry handoff state is not closed")
+        if not callable(recovery_callback):
+            raise OperatorError("blocked-retry recovery callback is absent")
+        recovery = recovery_callback(
+            blocked_retry_state=blocked_retry_state,
+            sidecar_evidence=sealed_evidence,
+        )
+        if not isinstance(recovery, Mapping):
+            raise OperatorError("blocked-retry recovery result is malformed")
         return {
             "stable_binding_id": expected_binding,
             "writer_lock_count": len(held),
             "execution_metadata_count": len(observations),
             "lanes": observations,
+            "blocked_retry": {
+                "handoff_state": blocked_retry_state,
+                "sidecar_evidence_id": str(
+                    sealed_evidence.get("evidence_id") or ""
+                ),
+                "recovery": dict(recovery),
+            },
         }
     except FileNotFoundError as exc:
         raise OperatorError("continued route sidecar evidence is absent") from exc
@@ -2913,6 +4055,7 @@ class _ExecutionRoutePolicyProvider:
                 "executor_control_snapshot",
                 "executor_task_projection_page",
                 "executor_task_projection_by_identity",
+                "executor_retry_cooldown_by_task",
             )
             token, grant = self.server.issue_typed_client_grant_record(
                 client_id=client_id,
@@ -2992,55 +4135,209 @@ class _ExecutionRoutePolicyProvider:
                             continued_source,
                             self.restart_admission,
                         )
+                        repair_projection = self.database_verification.get(
+                            "repair_source_task"
+                        )
+                        blocked_retry = repair.get("blocked_retry_handoff")
+                        if (
+                            not isinstance(repair_projection, Mapping)
+                            or not isinstance(blocked_retry, Mapping)
+                        ):
+                            raise OperatorError(
+                                "continued route has no blocked-retry projection"
+                            )
+                        blocked_retry_state = str(
+                            repair_projection.get(
+                                "blocked_retry_handoff_state"
+                            )
+                            or ""
+                        )
 
-                    session = client.session
-                    store_identity = (
-                        session.store_identity if session is not None else None
-                    )
-                    if store_identity is None:
-                        raise OperatorError(
-                            "continued execution route has no store identity"
+                        session = client.session
+                        store_identity = (
+                            session.store_identity
+                            if session is not None
+                            else None
                         )
-                    stable_authority = {
-                        "interface": "TypedDatabaseTaskSourceStableQuackAuthority@1",
-                        "store_id": store_identity.store_id,
-                        "database_uuid": store_identity.database_uuid,
-                        "schema_fingerprint": store_identity.schema_fingerprint,
-                        "repository_id": store_identity.repository_id,
-                        "schema_revision": int(store_identity.schema_revision),
-                        "route_policy_id": policy.policy_id,
-                        "plan_root_cid": policy.plan_root_cid,
-                        "repository_tree_id": policy.repository_tree_id,
-                        "source_projection_cid": policy.source_projection_cid,
-                    }
-                    if stable_authority != dict(
-                        continuation.get("stable_authority") or {}
-                    ) or _semantic_identity(stable_authority) != str(
-                        continuation.get("stable_binding_id") or ""
-                    ):
-                        raise OperatorError(
-                            "continued execution route differs from live store authority"
+                        if store_identity is None:
+                            raise OperatorError(
+                                "continued execution route has no store identity"
+                            )
+                        stable_authority = {
+                            "interface": (
+                                "TypedDatabaseTaskSourceStableQuackAuthority@1"
+                            ),
+                            "store_id": store_identity.store_id,
+                            "database_uuid": store_identity.database_uuid,
+                            "schema_fingerprint": (
+                                store_identity.schema_fingerprint
+                            ),
+                            "repository_id": store_identity.repository_id,
+                            "schema_revision": int(
+                                store_identity.schema_revision
+                            ),
+                            "route_policy_id": policy.policy_id,
+                            "plan_root_cid": policy.plan_root_cid,
+                            "repository_tree_id": policy.repository_tree_id,
+                            "source_projection_cid": (
+                                policy.source_projection_cid
+                            ),
+                        }
+                        if stable_authority != dict(
+                            continuation.get("stable_authority") or {}
+                        ) or _semantic_identity(stable_authority) != str(
+                            continuation.get("stable_binding_id") or ""
+                        ):
+                            raise OperatorError(
+                                "continued execution route differs from live "
+                                "store authority"
+                            )
+
+                        def recover_while_fenced(
+                            *,
+                            blocked_retry_state: str,
+                            sidecar_evidence: Mapping[str, Any],
+                        ) -> dict[str, Any]:
+                            command_result = _apply_blocked_retry_recovery(
+                                server=self.server,
+                                board=self.board,
+                                repair=repair,
+                                blocked_retry_handoff=blocked_retry,
+                                blocked_retry_state=blocked_retry_state,
+                                sidecar_evidence=sidecar_evidence,
+                            )
+                            post_verification = (
+                                _restart_database_verification(
+                                    continued_source,
+                                    self.restart_admission,
+                                )
+                            )
+                            post_repair = post_verification.get(
+                                "repair_source_task"
+                            )
+                            if (
+                                not isinstance(post_repair, Mapping)
+                                or post_repair.get(
+                                    "blocked_retry_handoff_state"
+                                )
+                                != "command_replay_required"
+                                or (
+                                    blocked_retry_state == "pending_apply"
+                                    and (
+                                        post_repair.get("status")
+                                        != blocked_retry.get("target_status")
+                                        or post_repair.get("revision")
+                                        != blocked_retry.get("target_revision")
+                                        or post_repair.get(
+                                            "receipt_operation"
+                                        )
+                                        != HANDOFF_REPAIR_BLOCKED_RETRY_OPERATION
+                                    )
+                                )
+                            ):
+                                raise OperatorError(
+                                    "blocked-retry post-command task state is "
+                                    "not exact"
+                                )
+                            post_page = continued_source.list_tasks(limit=500)
+                            if (
+                                post_page.next_cursor
+                                or tuple(
+                                    task.task_cid for task in post_page.tasks
+                                )
+                                != tuple(
+                                    task.task_cid
+                                    for task in continued_page.tasks
+                                )
+                            ):
+                                raise OperatorError(
+                                    "blocked-retry recovery changed the task "
+                                    "population"
+                                )
+                            post_policy, post_advanced = (
+                                _continued_execution_route_policy(
+                                    post_page.tasks,
+                                    continuation,
+                                )
+                            )
+                            if (
+                                post_policy.policy_id != policy.policy_id
+                                or post_policy.public_summary()
+                                != policy.public_summary()
+                                or post_policy.source_projection_cid
+                                != policy.source_projection_cid
+                            ):
+                                raise OperatorError(
+                                    "blocked-retry recovery changed the carried "
+                                    "execution route"
+                                )
+                            return {
+                                "owner_command": command_result,
+                                "database_verification": post_verification,
+                                "execution_route_policy": (
+                                    post_policy.public_summary()
+                                ),
+                                "advanced_tasks": post_advanced,
+                            }
+
+                        sidecars = _verify_continued_route_sidecars(
+                            board=self.board,
+                            paths=_runtime_paths(self.board),
+                            continuation=continuation,
+                            stable_authority=stable_authority,
+                            blocked_retry_handoff=blocked_retry,
+                            blocked_retry_state=blocked_retry_state,
+                            recovery_callback=recover_while_fenced,
                         )
-                    sidecars = _verify_continued_route_sidecars(
-                        board=self.board,
-                        paths=_runtime_paths(self.board),
-                        continuation=continuation,
-                        stable_authority=stable_authority,
-                    )
-                    verification_body = dict(self.database_verification)
-                    verification_body.pop("verification_id", None)
-                    verification_body["execution_route_continuation"] = {
-                        "schema": HANDOFF_EXECUTION_ROUTE_CONTINUATION_SCHEMA,
-                        "policy": policy.public_summary(),
-                        "source_projection_cid": policy.source_projection_cid,
-                        "advanced_tasks": advanced,
-                        "sidecars": sidecars,
-                    }
-                    verification_body["verification_id"] = _identity(
-                        verification_body
-                    )
-                    self.database_verification = verification_body
-                    return policy
+                        recovery = (
+                            sidecars.get("blocked_retry", {}).get(
+                                "recovery"
+                            )
+                            if isinstance(
+                                sidecars.get("blocked_retry"), Mapping
+                            )
+                            else None
+                        )
+                        if (
+                            not isinstance(recovery, Mapping)
+                            or not isinstance(
+                                recovery.get("database_verification"),
+                                Mapping,
+                            )
+                            or not isinstance(
+                                recovery.get("advanced_tasks"), list
+                            )
+                        ):
+                            raise OperatorError(
+                                "blocked-retry post-command evidence is absent"
+                            )
+                        self.database_verification = dict(
+                            recovery["database_verification"]
+                        )
+                        advanced = list(recovery["advanced_tasks"])
+
+                        verification_body = dict(
+                            self.database_verification
+                        )
+                        verification_body.pop("verification_id", None)
+                        verification_body[
+                            "execution_route_continuation"
+                        ] = {
+                            "schema": (
+                                HANDOFF_EXECUTION_ROUTE_CONTINUATION_SCHEMA
+                            ),
+                            "policy": policy.public_summary(),
+                            "source_projection_cid": (
+                                policy.source_projection_cid
+                            ),
+                            "advanced_tasks": advanced,
+                            "sidecars": sidecars,
+                        }
+                        verification_body["verification_id"] = _identity(
+                            verification_body
+                        )
+                        self.database_verification = verification_body
+                        return policy
             finally:
                 try:
                     client.close()
