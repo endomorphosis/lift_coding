@@ -1,0 +1,111 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-handoff-repair@1",
+  "reason": "pcsm_010_current_head_validation_handoff_repair",
+  "bootstrap_receipt_id": "sha256:d4c575b3a9d8f841958f7d14d97c38613d6ab9dcef440aa201a1967bdf165bb4",
+  "plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
+  "task_alias": "PCSM-010",
+  "task_cid": "baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa",
+  "source_attempt": {
+    "attempt_id": "attempt:53a9ee3f434e4551932f258aa9c903c6",
+    "claim_id": "claim:617b52197f564c58ade577daf8430602",
+    "lease_id": "lease:b562bfc2ae884a958362697b3c5c7185",
+    "owner_session_id": "pcsm-v1-executor:shard:0-of-4:track:ef26cb9db64a",
+    "attempt_number": 1,
+    "fencing_token": 1,
+    "fence_epoch": 1,
+    "task_revision": 4
+  },
+  "source_completion_receipt_id": "sha256:e00019f28ba2031bf94076661378b1de877c843512c7a41071968a56001361a3",
+  "max_task_attempts_before": 1,
+  "max_task_attempts_after": 2,
+  "current_authority_source_identities": {
+    "config": "sha256:2a4b4c68f6de26abd16c3b8e72c8c4b2facd214652ba73f6de74e2aad1e799bf",
+    "generator": "sha256:a99394eba3ac5ae4a88c8d8fba0235a1ded115dc59e63dad160366dbe7a9a695",
+    "operator": "sha256:248844a613187c8fdbca2a6a028a78baa222aa05cddc869e29f514e2bb00953b",
+    "validator": "sha256:276a1599cd902d5de0aa41bee6afd3c9b0e6c0503dd7cbf1bc31cfb5daaf6333"
+  },
+  "accelerate_origin_main_merge": {
+    "bootstrap_commit": "19a44398735b15de6f6c8c09cc501691c3a95094",
+    "origin_main_commit": "db887c3695e1e2950e74fe7fd4fb80e195a3851f",
+    "merged_commit": "3cabd28a5015c5ff1c552aafe2e774f579441c9a",
+    "merged_tree": "6cca6fc15ba32b3b3fe1193d0fb482e4d59f056c"
+  },
+  "datasets_current_head_receipt": {
+    "path": "artifacts/proof_carrying_semantic_minification/handoff/datasets-proof-context-current-head.json",
+    "identity": "sha256:b57d70264e9557adb901db4e8ad147bad98204958ec5bf078be84bd6ad247326",
+    "source_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+    "source_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+  },
+  "validations": [
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "py_compile",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "scripts/generate_proof_carrying_semantic_minification_board.py",
+        "scripts/validate_proof_carrying_semantic_minification_board.py"
+      ],
+      "outcome": "passed",
+      "summary": "Three Python operator, generator, and validator modules compiled successfully.",
+      "measurement_status": "measured"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/generate_proof_carrying_semantic_minification_board.py",
+        "--check"
+      ],
+      "outcome": "passed",
+      "summary": "Generated board matched sealed artifacts: 96 packages, 70 initial tasks, and refill batches of 10, 10, and 6.",
+      "measurement_status": "measured"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all"
+      ],
+      "outcome": "passed",
+      "summary": "Canonical board validation passed with 11 goals, 96 packages, 70 materialized tasks, and no errors or warnings.",
+      "measurement_status": "measured"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "env",
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit:Mcp-Plus-Plus",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_datasets/tests/proof_context"
+      ],
+      "outcome": "passed",
+      "summary": "The complete ipfs_datasets proof-context suite passed: 519 tests in 80.39 seconds.",
+      "measurement_status": "measured"
+    },
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/api/test_agent_supervisor_database_portal_bridge.py",
+        "test/api/test_agent_supervisor_merge_train.py",
+        "test/api/test_agent_supervisor_task_attempt_limit.py",
+        "test/api/test_agent_supervisor_multi_supervisor_shutdown.py"
+      ],
+      "outcome": "passed",
+      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed: 423 tests in 75.37 seconds; four unrelated temporary-directory cleanup warnings were reported.",
+      "measurement_status": "measured"
+    }
+  ],
+  "historical_receipt_preserved": true,
+  "manual_database_mutation": false,
+  "receipt_id": "sha256:1933774de68bdff9be23420505c45d4d3986dd8113c3bcc3990c475332f15b1b"
+}
