@@ -2515,6 +2515,7 @@ class _ExecutionRoutePolicyProvider:
                 "load_store_generation",
                 "executor_control_snapshot",
                 "executor_task_projection_page",
+                "executor_task_projection_by_identity",
             )
             token, grant = self.server.issue_typed_client_grant_record(
                 client_id=client_id,
