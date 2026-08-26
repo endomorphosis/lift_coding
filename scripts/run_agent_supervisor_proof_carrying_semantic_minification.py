@@ -163,6 +163,32 @@ HANDOFF_REPLAY_REPAIR_SCHEMA: Final = (
     "proof-carrying-semantic-minification-restart-replay-repair@1"
 )
 HANDOFF_REPLAY_REPAIR_BASE_COMMIT: Final = "fe8331645cc4276e2684737e3b0999a9009a2fae"
+HANDOFF_REPLAY_REPAIR_SEALED_OPERATOR_IDENTITY: Final = (
+    "sha256:a4506885482cd8442cd7646f44d9106f9913c7cde4bfd521fe71cd38cb7b1164"
+)
+HANDOFF_REPLAY_REPAIR_SEALED_RECEIPT_ID: Final = (
+    "sha256:8c2da662fbc39c2eb3fcfffe973baf7a9fe70bc05e655d02187696a721569c1e"
+)
+HANDOFF_GENERATION_REPLAY_REPAIR_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-generation-replay-repair.json"
+)
+HANDOFF_GENERATION_REPLAY_REPAIR_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-restart-generation-replay-repair@1"
+)
+HANDOFF_GENERATION_REPLAY_REPAIR_BASE_COMMIT: Final = (
+    "PENDING_GENERATION_REPLAY_REPAIR_BASE_COMMIT"
+)
+HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_COMMIT: Final = (
+    "f40c309b948514e6ad74ea9b29b13abadc74b478"
+)
+HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_TREE: Final = (
+    "7f85ea44e369bd725ac9366f170725ee8e2546b1"
+)
 HANDOFF_REPAIR_SEALED_OUTER_COMMIT: Final = (
     "a985e87f77a59afc78f8d73bf0d4c18566000442"
 )
@@ -972,6 +998,256 @@ def _verified_blocked_retry_handoff(
     return handoff
 
 
+def _verified_generation_replay_repair(
+    *,
+    sealed_operator_identity: str,
+    current_operator_identity: str,
+    current_head: str,
+) -> dict[str, Any]:
+    """Admit only the generation-7 idempotent-replay revision correction."""
+
+    payload = _json_mapping_bytes(
+        _tracked_bytes(HANDOFF_GENERATION_REPLAY_REPAIR_PATH, head=current_head),
+        field="PCSM restart generation replay repair receipt",
+    )
+    expected_fields = {
+        "schema",
+        "reason",
+        "source_replay_repair_receipt_id",
+        "sealed_outer_commit",
+        "sealed_outer_tree",
+        "sealed_operator_identity",
+        "repair_base_commit",
+        "repair_base_tree",
+        "repair_base_operator_identity",
+        "current_operator_identity",
+        "exact_change",
+        "failed_restart",
+        "durable_generation_evidence",
+        "recovery_already_committed",
+        "attempt_refunded",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    exact_change = payload.get("exact_change")
+    failed_restart = payload.get("failed_restart")
+    generation_evidence = payload.get("durable_generation_evidence")
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    operator_path = Path(__file__).resolve()
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    base_commit = HANDOFF_GENERATION_REPLAY_REPAIR_BASE_COMMIT
+    if (
+        set(payload) != expected_fields
+        or payload.get("schema")
+        != HANDOFF_GENERATION_REPLAY_REPAIR_SCHEMA
+        or payload.get("reason")
+        != "generation_7_zero_revision_idempotent_replay"
+        or payload.get("source_replay_repair_receipt_id")
+        != HANDOFF_REPLAY_REPAIR_SEALED_RECEIPT_ID
+        or payload.get("sealed_outer_commit")
+        != HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_COMMIT
+        or payload.get("sealed_outer_tree")
+        != HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_TREE
+        or payload.get("sealed_operator_identity")
+        != HANDOFF_REPLAY_REPAIR_SEALED_OPERATOR_IDENTITY
+        or sealed_operator_identity
+        != HANDOFF_REPLAY_REPAIR_SEALED_OPERATOR_IDENTITY
+        or payload.get("repair_base_commit") != base_commit
+        or payload.get("current_operator_identity")
+        != current_operator_identity
+        or not isinstance(exact_change, Mapping)
+        or dict(exact_change)
+        != {
+            "field": "idempotent_replay_store_revision",
+            "previous_invariant": (
+                "result_revision_at_least_original_store_revision_plus_one"
+            ),
+            "admitted_invariant": (
+                "result_matches_unchanged_current_generation_revision"
+            ),
+            "accepted_generation": 7,
+            "accepted_fence_epoch": 7,
+            "accepted_revision_before": 0,
+            "accepted_revision_after": 0,
+        }
+        or not isinstance(failed_restart, Mapping)
+        or dict(failed_restart)
+        != {
+            "owner_generation": 7,
+            "owner_fence_epoch": 7,
+            "task_status": "retrying",
+            "task_revision": 5,
+            "command_id": (
+                "cmd:blocked-retry-recovery:"
+                "ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7"
+            ),
+            "idempotency_key": (
+                "executor-blocked-retry-recovery:"
+                "ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7"
+            ),
+            "result_digest": (
+                "sha256:ba3a88d6bd6f2c848b273fb5362919909fa6c9d0813258df089a0cc08bc04f1e"
+            ),
+            "error": "blocked-retry owner command was not exactly admitted",
+        }
+        or not isinstance(generation_evidence, Mapping)
+        or dict(generation_evidence)
+        != {
+            "accepted_command_generation": {
+                "generation": 6,
+                "fence_epoch": 6,
+                "revision_after": 1,
+                "store_revision_before": 0,
+                "birth_id": "birth:e787b5521732b8e883cd5b37f7792218",
+            },
+            "failed_replay_generation": {
+                "generation": 7,
+                "fence_epoch": 7,
+                "revision_before": 0,
+                "revision_after": 0,
+                "birth_id": "birth:588998262d8d7feac01bc2982b080d52",
+            },
+        }
+        or payload.get("recovery_already_committed") is not True
+        or payload.get("attempt_refunded") is not False
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError(
+            "PCSM restart generation replay repair receipt is not admitted"
+        )
+
+    if (
+        _git_commit_tree(
+            HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_COMMIT,
+            field="sealed generation replay repair commit",
+        )
+        != HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_TREE
+        or _git_commit_tree(base_commit, field="generation replay repair base")
+        != payload.get("repair_base_tree")
+    ):
+        raise OperatorError("PCSM generation replay repair tree binding changed")
+    _git_is_ancestor(
+        HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_COMMIT,
+        base_commit,
+        field="generation replay repair base lineage",
+    )
+    _git_is_ancestor(
+        base_commit,
+        current_head,
+        field="generation replay repair current lineage",
+    )
+    parents = str(_git("show", "-s", "--format=%P", base_commit)).strip().split()
+    changed_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_COMMIT}"
+                f"..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    sealed_bytes = _git_blob_at(
+        head=HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_COMMIT,
+        path=operator_path,
+        field="sealed zero-revision replay operator",
+    )
+    base_bytes = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="generation replay repair base operator",
+    )
+    current_bytes = _tracked_bytes(operator_path, head=current_head)
+    pending_base = (
+        "PENDING_" + "GENERATION_REPLAY_REPAIR_BASE_COMMIT"
+    ).encode("ascii")
+    call_start = b"        result = client." + b"recover_blocked_task_retry(\n"
+    call_start_with_generation = (
+        b"        generation_before = client.load_generation()\n" + call_start
+    )
+    call_end = b"".join(
+        (
+            b"            now_ms=int(blocked_retry_handoff.get(\"started_at_ms\") ",
+            b"or -1),\n",
+            b"        )\n",
+            b"    finally:\n",
+        )
+    )
+    call_end_with_generation = b"".join(
+        (
+            b"            now_ms=int(blocked_retry_handoff.get(\"started_at_ms\") ",
+            b"or -1),\n",
+            b"        )\n",
+            b"        generation_after = client.load_generation()\n",
+            b"    finally:\n",
+        )
+    )
+    old_revision_checks = b"".join(
+        (
+            b"        or result.result_digest != _identity(result_body)\n",
+            b"        or result.revision < store_revision_before + 1\n",
+            b"        or (\n",
+            b"            blocked_retry_state == \"pending_apply\"\n",
+            b"            and result.revision != store_revision_before + 1\n",
+            b"        )\n",
+            b"        or result.generation != int(identity.generation)\n",
+            b"        or result.fence_epoch != int(identity.fence_epoch)\n",
+        )
+    )
+    new_revision_checks = b"".join(
+        (
+            b"        or result.result_digest != _identity(result_body)\n",
+            b"        or generation_before.generation != int(identity.generation)\n",
+            b"        or generation_before.fence_epoch != int(identity.fence_epoch)\n",
+            b"        or generation_after.generation != int(identity.generation)\n",
+            b"        or generation_after.fence_epoch != int(identity.fence_epoch)\n",
+            b"        or result.generation != generation_after.generation\n",
+            b"        or result.fence_epoch != generation_after.fence_epoch\n",
+            b"        or result.revision != generation_after.revision\n",
+            b"        or (\n",
+            b"            blocked_retry_state == \"pending_apply\"\n",
+            b"            and (\n",
+            b"                generation_before.revision != store_revision_before\n",
+            b"                or generation_after.revision\n",
+            b"                != store_revision_before + 1\n",
+            b"            )\n",
+            b"        )\n",
+            b"        or (\n",
+            b"            blocked_retry_state == \"command_replay_required\"\n",
+            b"            and generation_after.to_dict()\n",
+            b"            != generation_before.to_dict()\n",
+            b"        )\n",
+        )
+    )
+    expected_current = (
+        base_bytes.replace(pending_base, base_commit.encode("ascii"), 1)
+        .replace(call_start, call_start_with_generation, 1)
+        .replace(call_end, call_end_with_generation, 1)
+        .replace(old_revision_checks, new_revision_checks, 1)
+    )
+    if (
+        parents != [HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_COMMIT]
+        or changed_paths != (relative_operator,)
+        or _identity(sealed_bytes)
+        != HANDOFF_REPLAY_REPAIR_SEALED_OPERATOR_IDENTITY
+        or _identity(base_bytes)
+        != payload.get("repair_base_operator_identity")
+        or base_bytes.count(pending_base) != 1
+        or base_bytes.count(call_start) != 1
+        or base_bytes.count(call_end) != 1
+        or base_bytes.count(old_revision_checks) != 1
+        or current_bytes != expected_current
+        or _identity(current_bytes) != current_operator_identity
+    ):
+        raise OperatorError("PCSM generation replay repair source delta changed")
+    return payload
+
+
 def _verified_operator_replay_repair(
     *,
     sealed_operator_identity: str,
@@ -1026,7 +1302,7 @@ def _verified_operator_replay_repair(
         != HANDOFF_REPAIR_SEALED_OPERATOR_IDENTITY
         or payload.get("repair_base_commit") != base_commit
         or payload.get("current_operator_identity")
-        != current_operator_identity
+        != HANDOFF_REPLAY_REPAIR_SEALED_OPERATOR_IDENTITY
         or not isinstance(exact_change, Mapping)
         or dict(exact_change)
         != {
@@ -1110,7 +1386,7 @@ def _verified_operator_replay_repair(
     pending_base = ("PENDING_" + "REPAIR_BASE_COMMIT").encode("ascii")
     old_bound = b"        or store_revision_before < " + b"1\n"
     new_bound = b"        or store_revision_before < " + b"0\n"
-    expected_current = base_bytes.replace(
+    expected_repaired = base_bytes.replace(
         pending_base,
         base_commit.encode("ascii"),
         1,
@@ -1123,10 +1399,18 @@ def _verified_operator_replay_repair(
         != payload.get("repair_base_operator_identity")
         or base_bytes.count(pending_base) != 1
         or base_bytes.count(old_bound) != 1
-        or current_bytes != expected_current
-        or _identity(current_bytes) != current_operator_identity
+        or _identity(expected_repaired)
+        != HANDOFF_REPLAY_REPAIR_SEALED_OPERATOR_IDENTITY
     ):
         raise OperatorError("PCSM restart replay repair source delta changed")
+    if current_bytes != expected_repaired:
+        _verified_generation_replay_repair(
+            sealed_operator_identity=_identity(expected_repaired),
+            current_operator_identity=current_operator_identity,
+            current_head=current_head,
+        )
+    elif _identity(current_bytes) != current_operator_identity:
+        raise OperatorError("PCSM restart replay repair identity changed")
     return payload
 
 
