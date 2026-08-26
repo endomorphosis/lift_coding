@@ -9,8 +9,8 @@
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v2",
-  "observed_at": "2026-08-25T23:10:23Z",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v3",
+  "observed_at": "2026-08-26T00:04:19Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -31,8 +31,8 @@
   "current_tree_binding": {
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "outer_commit": "36e9f4d35edc2933ac580ba62f9284aa05bdd8cc",
-    "outer_tree": "4dc46cff8a4a51fe91b5142d39c291667ca1d7af",
+    "outer_commit": "04c4d3e95745e434654ef4930b599411493285f5",
+    "outer_tree": "440e9f3f7ba6cb88a3dec233cf7f072ccf72f716",
     "git_object_format": "sha1",
     "clean_before_receipt_write": true,
     "evidence_kind": "measured",
@@ -48,9 +48,9 @@
         "evidence_kind": "measured"
       },
       "external/ipfs_accelerate": {
-        "commit": "5af405cc87abf684b32d920afd5346411581876a",
-        "tree": "e8bdd2bdcc5f990c5369a21d36b9a108308eda32",
-        "superproject_gitlink": "5af405cc87abf684b32d920afd5346411581876a",
+        "commit": "4c3a2105ec1160fbf282cbea7625e0b25d6c4a76",
+        "tree": "ba222856f42fa303bb00e45850e16cc1d9e576d9",
+        "superproject_gitlink": "4c3a2105ec1160fbf282cbea7625e0b25d6c4a76",
         "configured_origin_main": "7df9491c9182b685d32b04cd4bdb5890056084b4",
         "configured_origin_main_is_ancestor": true,
         "scheduler_planning_revision_matches_head": true,
@@ -58,10 +58,10 @@
         "evidence_kind": "measured"
       },
       "external/ipfs_datasets": {
-        "commit": "719083b59637558d2338281a63435021e994a875",
-        "tree": "6ec131d1b71484e8244266f993b2b19edccee636",
-        "superproject_gitlink": "719083b59637558d2338281a63435021e994a875",
-        "configured_origin_main": "c30ccbec997868b061c4cadac38d30468c46ea2d",
+        "commit": "4818befbee509162303dd038fadcd1a3766f722d",
+        "tree": "a8d4daf349506857d370171ae099426f057e56c0",
+        "superproject_gitlink": "4818befbee509162303dd038fadcd1a3766f722d",
+        "configured_origin_main": "2a06dfe8546cdde78ff6d101a94708be0e6bf6e6",
         "configured_origin_main_is_ancestor": true,
         "scheduler_planning_revision_matches_head": true,
         "clean_at_observation": true,
@@ -80,25 +80,44 @@
     },
     "freshness_check": {
       "kind": "measured",
-      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git diff --quiet -- Mcp-Plus-Plus external/ipfs_accelerate external/ipfs_datasets external/ipfs_kit; git merge-base --is-ancestor <origin/main> HEAD",
+      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git status --porcelain=v1; git -C <gitlink> merge-base --is-ancestor <origin/main> HEAD",
       "result": "pass",
-      "meaning": "The outer tree was clean before this receipt was written. Each listed nested commit equals the superproject gitlink and the scheduler planning revision. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+      "meaning": "The outer tree was clean before this receipt was written. Each listed nested commit equals the superproject gitlink and the scheduler planning revision. Configured origin/main is an ancestor of each nested head. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+    },
+    "source_digest_continuity": {
+      "kind": "measured",
+      "result": "inventoried_source_bytes_unchanged",
+      "prior_receipt_artifact_identity": "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v2",
+      "nested_gitlinks_changed": [
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets"
+      ],
+      "nested_gitlinks_unchanged": [
+        "Mcp-Plus-Plus",
+        "external/ipfs_kit"
+      ],
+      "datasets_delta": "PGIR-200/201/202/204 corpus rights admission and holdout/baseline qualification; no byte change under inventoried semantic, proof_context, legal_ir, syntax_core, software_verification, or software_contracts paths",
+      "accelerate_delta": "supervisor portal merge-claim isolation; no byte change under inventoried proof_context or semantic_governor/semantic_state paths",
+      "meaning": "Every listed inventory and coverage source SHA-256 and git blob was re-hashed at this head and matched the v2 receipt. Inventory findings were therefore reconfirmed against current-head bytes, not copied from a stale tree binding."
     },
     "stale_prior_receipt_rejected": {
       "kind": "measured",
-      "prior_outer_commit": "0c6c27169330d2ccae20c3119c1fe06f51a1066f",
-      "prior_outer_tree": "922852a5516946908f996719ee98769cc96c3b40",
-      "prior_accelerate_gitlink": "87ab6e9b0022e51e5da2ec7c9d10acd02ec84881",
+      "prior_artifact_identity": "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v2",
+      "prior_outer_commit": "36e9f4d35edc2933ac580ba62f9284aa05bdd8cc",
+      "prior_outer_tree": "4dc46cff8a4a51fe91b5142d39c291667ca1d7af",
+      "prior_accelerate_gitlink": "5af405cc87abf684b32d920afd5346411581876a",
+      "prior_datasets_gitlink": "719083b59637558d2338281a63435021e994a875",
+      "prior_scheduler_sha256": "1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93",
       "result": "rejected_as_stale",
-      "meaning": "The previously committed PCSM-000 receipt bound a different outer commit/tree and a different ipfs_accelerate gitlink. Current-head inventory required a fresh receipt."
+      "meaning": "The previously committed PCSM-000 receipt bound a different outer commit/tree, different ipfs_accelerate and ipfs_datasets gitlinks, and a different scheduler-config digest. Current-head inventory required a fresh receipt."
     }
   },
   "policy_bindings": {
     "scheduler_config": {
       "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
       "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
-      "sha256": "1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93",
-      "git_blob": "4c19b2a6b1911deb00f52d4d142422a31a8c0bce",
+      "sha256": "368fdb79955438384c2663030090c2df198b12243cf80dff363ef404696ac15e",
+      "git_blob": "46f93f3704dbd37d8e8c4e931afdc5d7ecf70dac",
       "evidence_kind": "measured"
     },
     "plan": {
@@ -176,7 +195,7 @@
           "evidence_kind": "measured"
         }
       ],
-      "finding": "SemanticPublicAPI@1 (pgir-semantic-api/v1) is a versioned discovery surface. compile delegates to TypedDeonticCanonicalCompiler.compile under CanonicalStructuredTextCompiler@1; decompile delegates to SourceWithheldCanonicalDecompiler. Persistent identities are CIDv1. This is reusable semantic authority for structured-text/legal IR. It is not a current-tree Python AST/CFG/data-flow compiler or M1 source linker.",
+      "finding": "SemanticPublicAPI@1 (pgir-semantic-api/v1) is a versioned discovery surface. compile delegates to TypedDeonticCanonicalCompiler.compile under CanonicalStructuredTextCompiler@1; decompile delegates to SourceWithheldCanonicalDecompiler. Persistent identities are CIDv1. This is reusable semantic authority for structured-text/legal IR. It is not a current-tree Python AST/CFG/data-flow compiler or M1 source linker. CanonicalCodeIR@1 remains absent from all four nested repositories.",
       "reuse_decision": "Reuse as datasets-owned semantic API and IR contracts. Do not fork a second PGIR catalog. Python CanonicalCodeIR remains a named follow-on delta."
     },
     {
@@ -235,7 +254,7 @@
           "evidence_kind": "measured"
         }
       ],
-      "finding": "Datasets build_context_pack is the sole production builder. Pack CID derives from schema, interface, repository state, exact source CIDs, capsule CIDs, scanned tree, and freshness; stale, unavailable, and opaque-without-exact-tree cases fail closed. Accelerator semantic_bridge delegates and must not reconstruct packs. ContextPacker remains a token-budget compatibility surface with V01_PRODUCTION_AUTHORITY=False. SemanticCapsuleCompiler@1 (ipfs-datasets.software-contracts.semantic-capsule@1) is the capsule compiler consumed by packs, not a second ContextPack authority.",
+      "finding": "Datasets build_context_pack is the sole production builder (DatasetsContextPackAuthority@0.1). Pack CID derives from schema, interface, repository state, exact source CIDs, capsule CIDs, scanned tree, and freshness; stale, unavailable, and opaque-without-exact-tree cases fail closed. Accelerator semantic_bridge delegates and must not reconstruct packs. CONTEXT_PACK_V01_AUTHORITY is ipfs_datasets_py.proof_context.context_pack. ContextPacker remains a token-budget compatibility surface with V01_PRODUCTION_AUTHORITY=False. SemanticCapsuleCompiler@1 (ipfs-datasets.software-contracts.semantic-capsule-compiler@1) is the capsule compiler consumed by packs, not a second ContextPack authority.",
       "reuse_decision": "Consume DatasetsContextPackAuthority@0.1 and the MCP++ v0.1 wire schema. Do not fork a pack builder. Do not promote ContextPacker to production identity authority."
     },
     {
@@ -542,9 +561,9 @@
     ],
     "negative_tests": [
       {
-        "name": "stale prior PCSM-000 outer commit and accelerate gitlink rejection",
+        "name": "stale prior PCSM-000 outer commit, gitlinks, and scheduler digest rejection",
         "status": "passed",
-        "method": "Compared current outer commit 36e9f4d35edc2933ac580ba62f9284aa05bdd8cc and accelerate gitlink 5af405cc87abf684b32d920afd5346411581876a against the previously committed receipt bindings 0c6c27169330d2ccae20c3119c1fe06f51a1066f and 87ab6e9b0022e51e5da2ec7c9d10acd02ec84881; both differed and were rejected as stale.",
+        "method": "Compared current outer commit 04c4d3e95745e434654ef4930b599411493285f5, accelerate gitlink 4c3a2105ec1160fbf282cbea7625e0b25d6c4a76, datasets gitlink 4818befbee509162303dd038fadcd1a3766f722d, and scheduler SHA-256 368fdb79955438384c2663030090c2df198b12243cf80dff363ef404696ac15e against the previously committed receipt bindings 36e9f4d35edc2933ac580ba62f9284aa05bdd8cc, 5af405cc87abf684b32d920afd5346411581876a, 719083b59637558d2338281a63435021e994a875, and 1bc2ff90e70db5544db193a433b8bf805f390acd11a18f3308c156a9308ccc93; all differed and were rejected as stale.",
         "evidence_kind": "measured"
       },
       {
@@ -562,7 +581,13 @@
       {
         "name": "provider-local formal tools are not accepted as sealed-environment evidence",
         "status": "passed",
-        "method": "The authoritative PATH excluded z3, lean, lake, ipfs, and pytest; each was recorded unavailable rather than usable.",
+        "method": "The authoritative PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin excluded z3, lean, lake, ipfs, and pytest; each was recorded unavailable rather than usable.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "CanonicalCodeIR identifier absence",
+        "status": "passed",
+        "method": "Searched *.py and *.json under Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit; CanonicalCodeIR matched zero nested-repository files.",
         "evidence_kind": "measured"
       }
     ],
@@ -607,11 +632,12 @@
   },
   "evidence_classification": {
     "measured": [
-      "Outer HEAD 36e9f4d35edc2933ac580ba62f9284aa05bdd8cc and tree 4dc46cff8a4a51fe91b5142d39c291667ca1d7af.",
+      "Outer HEAD 04c4d3e95745e434654ef4930b599411493285f5 and tree 440e9f3f7ba6cb88a3dec233cf7f072ccf72f716.",
       "Four admitted gitlinks, nested trees, clean tracked-submodule check, origin/main ancestor checks, and scheduler planning-revision equality.",
-      "Every listed SHA-256 and git blob identity.",
+      "Every listed SHA-256 and git blob identity, including the current scheduler-config digest 368fdb79955438384c2663030090c2df198b12243cf80dff363ef404696ac15e.",
       "Authority, schema, and interface constants read from current sources.",
-      "Receipt-level positive and negative identity checks.",
+      "Inventoried source bytes were re-hashed and matched the v2 receipt despite accelerate and datasets gitlink movement.",
+      "Receipt-level positive and negative identity checks, including CanonicalCodeIR absence across the four nested roots.",
       "Sealed PATH, Python 3.12.3, and json.tool parse of this receipt.",
       "Existing positive and negative test source declarations were directly inspected."
     ],
@@ -627,8 +653,8 @@
   },
   "evidence_summary": {
     "measured": {
-      "count": 7,
-      "description": "Current-head forest identities, source digests, authority decisions, sealed-environment facts, and receipt-level positive/negative checks."
+      "count": 8,
+      "description": "Current-head forest identities, source digests, authority decisions, digest continuity across gitlink movement, sealed-environment facts, and receipt-level positive/negative checks."
     },
     "estimated": {
       "count": 0,
