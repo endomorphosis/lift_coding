@@ -203,6 +203,29 @@ HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OUTER_TREE: Final = (
 HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OPERATOR_IDENTITY: Final = (
     "sha256:691345158b9bfac25b5124b8e2b5bbe5bac2e35492fc0c292a6feec8fa585131"
 )
+HANDOFF_COMMAND_VERIFIER_REPAIR_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-command-verifier-repair.json"
+)
+HANDOFF_COMMAND_VERIFIER_REPAIR_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-command-verifier-repair@1"
+)
+HANDOFF_COMMAND_VERIFIER_REPAIR_BASE_COMMIT: Final = (
+    "PENDING_HANDOFF_COMMAND_VERIFIER_REPAIR_BASE_COMMIT"
+)
+HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_COMMIT: Final = (
+    "c16dd9b8c0920c5a690abe48542957af0fc44593"
+)
+HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_TREE: Final = (
+    "369f064026ac82a049bc15bab8ccc060bfe82796"
+)
+HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OPERATOR_IDENTITY: Final = (
+    "sha256:4c93ab0e5732c7cd8e055daec07b4d27958f3feb49794e942a11cb1d8d746f63"
+)
 HANDOFF_GENERATION_REPLAY_REPAIR_BASE_COMMIT: Final = (
     "3208c41917944182865889c48e57bc128ab8a463"
 )
@@ -1579,12 +1602,161 @@ def _verified_handoff_command_authority_repair(
         != HANDOFF_COMMAND_AUTHORITY_REPAIR_SEALED_OPERATOR_IDENTITY
         or _identity(base_bytes) != payload.get("repair_base_operator_identity")
         or base_bytes.count(pending_base) != 1
-        or base_bytes.count(stable_expected_receipt) != 1
-        or base_bytes.count(stable_command_argument) != 1
+        or base_bytes.count(stable_expected_receipt) != 3
+        or base_bytes.count(stable_command_argument) != 2
+    ):
+        raise OperatorError("PCSM command-authority repair source delta changed")
+    if current_bytes != expected_current:
+        _verified_handoff_command_authority_verifier_repair(
+            sealed_operator_identity=_identity(expected_current),
+            current_operator_identity=current_operator_identity,
+            current_head=current_head,
+        )
+    elif _identity(current_bytes) != current_operator_identity:
+        raise OperatorError("PCSM command-authority repair identity changed")
+    return payload
+
+
+def _verified_handoff_command_authority_verifier_repair(
+    *,
+    sealed_operator_identity: str,
+    current_operator_identity: str,
+    current_head: str,
+) -> dict[str, Any]:
+    """Admit only corrected self-witness counts and descendant delegation."""
+
+    payload = _json_mapping_bytes(
+        _tracked_bytes(HANDOFF_COMMAND_VERIFIER_REPAIR_PATH, head=current_head),
+        field="PCSM restart command-verifier repair receipt",
+    )
+    expected_fields = {
+        "schema",
+        "reason",
+        "source_command_authority_repair_receipt_id",
+        "sealed_outer_commit",
+        "sealed_outer_tree",
+        "sealed_operator_identity",
+        "repair_base_commit",
+        "repair_base_tree",
+        "repair_base_operator_identity",
+        "current_operator_identity",
+        "exact_change",
+        "validation",
+        "attempt_refunded",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    exact_change = payload.get("exact_change")
+    validation = payload.get("validation")
+    operator_path = Path(__file__).resolve()
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    base_commit = HANDOFF_COMMAND_VERIFIER_REPAIR_BASE_COMMIT
+    if (
+        set(payload) != expected_fields
+        or payload.get("schema") != HANDOFF_COMMAND_VERIFIER_REPAIR_SCHEMA
+        or payload.get("reason")
+        != "command_authority_source_witness_count_correction"
+        or payload.get("source_command_authority_repair_receipt_id")
+        != "sha256:a21810696ed9824fcd872ae7a0b6efe90204a03b96b73d24970afbeb74c3d3b3"
+        or payload.get("sealed_outer_commit")
+        != HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_COMMIT
+        or payload.get("sealed_outer_tree")
+        != HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_TREE
+        or payload.get("sealed_operator_identity")
+        != HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OPERATOR_IDENTITY
+        or sealed_operator_identity
+        != HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OPERATOR_IDENTITY
+        or payload.get("repair_base_commit") != base_commit
+        or payload.get("current_operator_identity")
+        != current_operator_identity
+        or not isinstance(exact_change, Mapping)
+        or dict(exact_change)
+        != {
+            "stable_expected_receipt_pattern_previous_count": 1,
+            "stable_expected_receipt_pattern_observed_count": 3,
+            "stable_command_argument_pattern_previous_count": 1,
+            "stable_command_argument_pattern_observed_count": 2,
+            "current_operator_mismatch_action_before": "reject",
+            "current_operator_mismatch_action_after": (
+                "verify_exact_descendant_repair"
+            ),
+            "durable_command_identity_changed": False,
+            "database_state_changed": False,
+        }
+        or not isinstance(validation, Mapping)
+        or dict(validation)
+        != {
+            "base_source_counts_measured": True,
+            "base_expected_receipt_pattern_count": 3,
+            "base_command_argument_pattern_count": 2,
+            "measurement_status": "measured",
+        }
+        or payload.get("attempt_refunded") is not False
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError("PCSM command-verifier repair receipt is not admitted")
+    if (
+        _git_commit_tree(
+            HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_COMMIT,
+            field="sealed command-verifier repair commit",
+        )
+        != HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_TREE
+        or _git_commit_tree(base_commit, field="command-verifier repair base")
+        != payload.get("repair_base_tree")
+    ):
+        raise OperatorError("PCSM command-verifier repair tree binding changed")
+    _git_is_ancestor(
+        base_commit,
+        current_head,
+        field="command-verifier repair current lineage",
+    )
+    parents = str(_git("show", "-s", "--format=%P", base_commit)).strip().split()
+    changed_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_COMMIT}.."
+                f"{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    sealed_bytes = _git_blob_at(
+        head=HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_COMMIT,
+        path=operator_path,
+        field="sealed command-verifier operator",
+    )
+    base_bytes = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="command-verifier repair base operator",
+    )
+    current_bytes = _tracked_bytes(operator_path, head=current_head)
+    pending_base = (
+        "PENDING_" + "HANDOFF_COMMAND_VERIFIER_REPAIR_BASE_COMMIT"
+    ).encode("ascii")
+    expected_current = base_bytes.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    if (
+        parents != [HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_COMMIT]
+        or changed_paths != (relative_operator,)
+        or _identity(sealed_bytes)
+        != HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OPERATOR_IDENTITY
+        or _identity(base_bytes) != payload.get("repair_base_operator_identity")
+        or base_bytes.count(pending_base) != 1
         or current_bytes != expected_current
         or _identity(current_bytes) != current_operator_identity
     ):
-        raise OperatorError("PCSM command-authority repair source delta changed")
+        raise OperatorError("PCSM command-verifier repair source delta changed")
     return payload
 
 
