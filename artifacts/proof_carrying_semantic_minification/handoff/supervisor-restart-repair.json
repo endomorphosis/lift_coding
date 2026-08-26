@@ -244,7 +244,7 @@
     }
   },
   "current_authority_source_identities": {
-    "config": "sha256:2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079",
+    "config": "sha256:0e06cc120b4c1528e5e3cd72cb6328ab9cc699696b295a68ea84254fcfa6ff8c",
     "generator": "sha256:a99394eba3ac5ae4a88c8d8fba0235a1ded115dc59e63dad160366dbe7a9a695",
     "operator": "sha256:c6b1bb0991c29d07bbd248358039d051956e75e10243a44d4d78b7e72d790e80",
     "validator": "sha256:276a1599cd902d5de0aa41bee6afd3c9b0e6c0503dd7cbf1bc31cfb5daaf6333"
@@ -254,8 +254,8 @@
     "origin_main_commit": "db887c3695e1e2950e74fe7fd4fb80e195a3851f",
     "merged_commit": "3cabd28a5015c5ff1c552aafe2e774f579441c9a",
     "merged_tree": "6cca6fc15ba32b3b3fe1193d0fb482e4d59f056c",
-    "current_commit": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
-    "current_tree": "c2a1f18bb0d383d90ebae74037a489fb3034d428"
+    "current_commit": "82f31f60cadb4b243d9d4d38e6040d3118fb90a8",
+    "current_tree": "f1048b00fb4df02824bcbf2bcc85951df0546eab"
   },
   "datasets_current_head_receipt": {
     "path": "artifacts/proof_carrying_semantic_minification/handoff/datasets-proof-context-current-head.json",
@@ -312,7 +312,7 @@
         "external/ipfs_datasets/tests/proof_context"
       ],
       "outcome": "passed",
-      "summary": "The complete ipfs_datasets proof-context suite passed at the sealed current head: 519 tests in 75.96 seconds.",
+      "summary": "The complete ipfs_datasets proof-context suite passed at the resealed current head: 519 tests in 104.66 seconds.",
       "measurement_status": "measured"
     },
     {
@@ -328,7 +328,7 @@
         "test/api/test_agent_supervisor_multi_supervisor_shutdown.py"
       ],
       "outcome": "passed",
-      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed at the sealed accelerator head: 424 tests in 79.78 seconds; four unrelated temporary-directory cleanup warnings were reported.",
+      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed at the typed-admission accelerator head: 424 tests in 109.57 seconds; four unrelated temporary-directory cleanup warnings were reported.",
       "measurement_status": "measured"
     },
     {
@@ -344,11 +344,11 @@
         "test/api/test_agent_supervisor_validation_retry_seed_conflict_recovery.py"
       ],
       "outcome": "passed",
-      "summary": "The exact blocked-retry, typed-history, operation-catalog, and pooled-recovery qualification set passed: 10 tests in 68.31 seconds; four unrelated temporary-directory cleanup warnings were reported.",
+      "summary": "The exact blocked-retry, typed-history, operation-catalog, and pooled-recovery qualification set passed: 10 tests in 98.15 seconds; four unrelated temporary-directory cleanup warnings were reported.",
       "measurement_status": "measured"
     }
   ],
   "historical_receipt_preserved": true,
   "manual_database_mutation": false,
-  "receipt_id": "sha256:e0ce20f7218d7eef119f5853b034e8275870cd527d7df70b398fda8e72455861"
+  "receipt_id": "sha256:8d3d9b447a6b8e57548ec847755828865d48f0c67c2f54543c832e5364f71bb4"
 }

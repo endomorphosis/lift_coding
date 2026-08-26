@@ -1,0 +1,75 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-command-authority-repair@1",
+  "reason": "typed_attempt_terminal_transition_command_authority_separation",
+  "source_generation_replay_repair_receipt_id": "sha256:4af075a3eecf56687c90ebd416132f83630c646a0c44210ca680aefca2bb0b67",
+  "sealed_outer_commit": "307c97ebcdee425ecdd93813c8898712b46b3fc8",
+  "sealed_outer_tree": "209d81f01b3a900d1d041721bd235b86a7319950",
+  "sealed_operator_identity": "sha256:691345158b9bfac25b5124b8e2b5bbe5bac2e35492fc0c292a6feec8fa585131",
+  "repair_base_commit": "9eb2077b661e137dd4459945886ef0979df0b56e",
+  "repair_base_tree": "be911d33671571ab4ca708fb24e605099564953c",
+  "repair_base_operator_identity": "sha256:64b5c51fb09d46c0ca16afba06b60d2aab9e68142f288d9e9e4bb1f97fea15b5",
+  "current_operator_identity": "sha256:4c93ab0e5732c7cd8e055daec07b4d27958f3feb49794e942a11cb1d8d746f63",
+  "current_source_handoff": {
+    "path": "artifacts/proof_carrying_semantic_minification/handoff/supervisor-restart-repair.json",
+    "receipt_id": "sha256:8d3d9b447a6b8e57548ec847755828865d48f0c67c2f54543c832e5364f71bb4"
+  },
+  "historical_command_authority": {
+    "path": "artifacts/proof_carrying_semantic_minification/handoff/supervisor-restart-repair.json",
+    "sealed_outer_commit": "a985e87f77a59afc78f8d73bf0d4c18566000442",
+    "receipt_id": "sha256:e0ce20f7218d7eef119f5853b034e8275870cd527d7df70b398fda8e72455861"
+  },
+  "exact_change": {
+    "field": "operator_handoff_receipt_id",
+    "previous_authority": "current_source_handoff_receipt_id",
+    "admitted_authority": "historical_sealed_handoff_receipt_id",
+    "expected_recovery_receipt_changed": true,
+    "recovery_command_changed": true,
+    "owner_restart_admission_reporting_changed": false,
+    "current_source_handoff_remains_content_addressed": true
+  },
+  "durable_replay": {
+    "task_cid": "baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa",
+    "task_status_after_recovery": "retrying",
+    "task_revision_after_recovery": 5,
+    "operator_handoff_receipt_id": "sha256:e0ce20f7218d7eef119f5853b034e8275870cd527d7df70b398fda8e72455861",
+    "command_id": "cmd:blocked-retry-recovery:ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7",
+    "idempotency_key": "executor-blocked-retry-recovery:ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7",
+    "result_digest": "sha256:ba3a88d6bd6f2c848b273fb5362919909fa6c9d0813258df089a0cc08bc04f1e",
+    "replay_outcome": "idempotent_replay",
+    "replay_changed": false
+  },
+  "nested_accelerator_repair": {
+    "repository": "external/ipfs_accelerate",
+    "prior_commit": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
+    "prior_tree": "c2a1f18bb0d383d90ebae74037a489fb3034d428",
+    "repair_commit": "45f8abca891ce304d56aac0ea5113b4cde9a7b60",
+    "repair_tree": "f1048b00fb4df02824bcbf2bcc85951df0546eab",
+    "merge_commit": "82f31f60cadb4b243d9d4d38e6040d3118fb90a8",
+    "merge_tree": "f1048b00fb4df02824bcbf2bcc85951df0546eab",
+    "merge_parents": [
+      "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
+      "45f8abca891ce304d56aac0ea5113b4cde9a7b60"
+    ],
+    "changed_paths": [
+      "ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_contracts.py",
+      "ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py",
+      "ipfs_accelerate_py/agent_supervisor/task_sources/typed_database_task_source.py",
+      "ipfs_accelerate_py/agent_supervisor/task_sources/typed_state_owner.py",
+      "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+      "scripts/run_agent_supervisor_causal_event_federation.py",
+      "test/api/causal_federation/test_admitted_executor.py",
+      "test/api/test_agent_supervisor_database_implementation_daemon.py"
+    ]
+  },
+  "validation": {
+    "typed_admission_lifecycle_tests": 15,
+    "typed_admission_lifecycle_outcome": "passed",
+    "current_handoff_required_validations": 6,
+    "current_handoff_required_outcome": "passed",
+    "measurement_status": "measured"
+  },
+  "historical_replay_receipts_preserved": true,
+  "attempt_refunded": false,
+  "manual_database_mutation": false,
+  "receipt_id": "sha256:a21810696ed9824fcd872ae7a0b6efe90204a03b96b73d24970afbeb74c3d3b3"
+}
