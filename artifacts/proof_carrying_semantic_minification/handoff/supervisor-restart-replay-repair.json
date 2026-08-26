@@ -1,0 +1,33 @@
+{
+  "attempt_refunded": false,
+  "current_operator_identity": "sha256:a4506885482cd8442cd7646f44d9106f9913c7cde4bfd521fe71cd38cb7b1164",
+  "exact_change": {
+    "accepted_store_revision_after": 1,
+    "accepted_store_revision_before": 0,
+    "admitted_lower_bound": 0,
+    "field": "store_revision_before",
+    "previous_lower_bound": 1
+  },
+  "failed_restart": {
+    "command_id": "cmd:blocked-retry-recovery:ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7",
+    "error": "blocked-retry owner command was not exactly admitted",
+    "idempotency_key": "executor-blocked-retry-recovery:ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7",
+    "owner_fence_epoch": 6,
+    "owner_generation": 6,
+    "result_digest": "sha256:ba3a88d6bd6f2c848b273fb5362919909fa6c9d0813258df089a0cc08bc04f1e",
+    "task_revision": 5,
+    "task_status": "retrying"
+  },
+  "manual_database_mutation": false,
+  "reason": "generation_6_valid_zero_store_revision_replay_validation",
+  "recovery_already_committed": true,
+  "repair_base_commit": "fe8331645cc4276e2684737e3b0999a9009a2fae",
+  "repair_base_operator_identity": "sha256:7a0129c773a1dc99882f4454ce5aaf1f5fc1c26d37863cdbcdb14c395c897c34",
+  "repair_base_tree": "be88763f7b14fc3910090ee71370a1aee582a02c",
+  "receipt_id": "sha256:8c2da662fbc39c2eb3fcfffe973baf7a9fe70bc05e655d02187696a721569c1e",
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-restart-replay-repair@1",
+  "sealed_operator_identity": "sha256:c6b1bb0991c29d07bbd248358039d051956e75e10243a44d4d78b7e72d790e80",
+  "sealed_outer_commit": "a985e87f77a59afc78f8d73bf0d4c18566000442",
+  "sealed_outer_tree": "47958a8a04d8a5e7a1fbd9155823597e977ffa8c",
+  "source_handoff_repair_receipt_id": "sha256:e0ce20f7218d7eef119f5853b034e8275870cd527d7df70b398fda8e72455861"
+}

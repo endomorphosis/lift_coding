@@ -162,7 +162,7 @@ HANDOFF_REPLAY_REPAIR_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-restart-replay-repair@1"
 )
-HANDOFF_REPLAY_REPAIR_BASE_COMMIT: Final = "PENDING_REPAIR_BASE_COMMIT"
+HANDOFF_REPLAY_REPAIR_BASE_COMMIT: Final = "fe8331645cc4276e2684737e3b0999a9009a2fae"
 HANDOFF_REPAIR_SEALED_OUTER_COMMIT: Final = (
     "a985e87f77a59afc78f8d73bf0d4c18566000442"
 )
@@ -4002,7 +4002,7 @@ def _apply_blocked_retry_recovery(
         or result.conflict_kind is not None
         or result_body != expected_result
         or type(store_revision_before) is not int
-        or store_revision_before < 1
+        or store_revision_before < 0
         or not result.command_id.startswith(command_prefix)
         or re.fullmatch(r"[0-9a-f]{64}", command_digest) is None
         or result.idempotency_key
