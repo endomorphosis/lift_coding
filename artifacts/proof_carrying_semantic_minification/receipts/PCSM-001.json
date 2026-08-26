@@ -9,8 +9,8 @@
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v2",
-  "observed_at": "2026-08-26T00:08:49Z",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v3",
+  "observed_at": "2026-08-26T10:39:30Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -38,15 +38,17 @@
       "repository": "endomorphosis/lift_coding",
       "origin": "https://github.com/endomorphosis/lift_coding.git",
       "owning_repository_for_receipts": "ipfs_accelerate_py",
-      "head_commit": "04c4d3e95745e434654ef4930b599411493285f5",
-      "tree": "440e9f3f7ba6cb88a3dec233cf7f072ccf72f716",
-      "subject": "fix(pcsm): reseal merge handoff and current upstream",
+      "head_commit": "4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d",
+      "tree": "cd81f5731ee64c29161830c9933d6739e0dd3eb3",
+      "subject": "fix(pcsm): reseal current upstream handoff",
       "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
       "origin_main_is_ancestor": true,
       "accelerator_planning_revision": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+      "accelerator_planning_tree": "b1dd163fe6ad7ab52cb3639d05fcbc0fbe64ff84",
       "accelerator_planning_revision_equals_origin_main": true,
+      "accelerator_planning_tree_equals_origin_main_tree": true,
       "accelerator_planning_revision_is_ancestor_of_head": true,
-      "commits_after_origin_main": 21,
+      "commits_after_origin_main": 26,
       "clean_before_receipt_write": true,
       "evidence_kind": "measured"
     },
@@ -56,14 +58,14 @@
         "repository": "endomorphosis/ipfs_accelerate_py",
         "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
         "authority_role": "slice_route_model_budget_link_admission_and_validation",
-        "head_commit": "4c3a2105ec1160fbf282cbea7625e0b25d6c4a76",
-        "tree": "ba222856f42fa303bb00e45850e16cc1d9e576d9",
-        "superproject_gitlink": "4c3a2105ec1160fbf282cbea7625e0b25d6c4a76",
-        "scheduler_planning_revision": "4c3a2105ec1160fbf282cbea7625e0b25d6c4a76",
-        "scheduler_planning_tree": "ba222856f42fa303bb00e45850e16cc1d9e576d9",
+        "head_commit": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "tree": "7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
+        "superproject_gitlink": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "scheduler_planning_revision": "19a44398735b15de6f6c8c09cc501691c3a95094",
+        "scheduler_planning_tree": "7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
         "scheduler_planning_revision_matches_head": true,
         "scheduler_planning_tree_matches_head": true,
-        "configured_origin_main": "7df9491c9182b685d32b04cd4bdb5890056084b4",
+        "configured_origin_main": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
         "configured_origin_main_is_ancestor": true,
         "clean_at_observation": true,
         "evidence_kind": "measured"
@@ -73,14 +75,14 @@
         "repository": "endomorphosis/ipfs_datasets_py",
         "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
         "authority_role": "canonical_semantic_identity",
-        "head_commit": "4818befbee509162303dd038fadcd1a3766f722d",
+        "head_commit": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
         "tree": "a8d4daf349506857d370171ae099426f057e56c0",
-        "superproject_gitlink": "4818befbee509162303dd038fadcd1a3766f722d",
-        "scheduler_planning_revision": "4818befbee509162303dd038fadcd1a3766f722d",
+        "superproject_gitlink": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
+        "scheduler_planning_revision": "a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648",
         "scheduler_planning_tree": "a8d4daf349506857d370171ae099426f057e56c0",
         "scheduler_planning_revision_matches_head": true,
         "scheduler_planning_tree_matches_head": true,
-        "configured_origin_main": "2a06dfe8546cdde78ff6d101a94708be0e6bf6e6",
+        "configured_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
         "configured_origin_main_is_ancestor": true,
         "clean_at_observation": true,
         "evidence_kind": "measured"
@@ -107,14 +109,14 @@
         "repository": "endomorphosis/Mcp-Plus-Plus",
         "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
         "authority_role": "wire_contract_only",
-        "head_commit": "838261c04a4b6f2643d75017e0b472876597c673",
-        "tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253",
-        "superproject_gitlink": "838261c04a4b6f2643d75017e0b472876597c673",
-        "scheduler_planning_revision": "838261c04a4b6f2643d75017e0b472876597c673",
-        "scheduler_planning_tree": "8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253",
+        "head_commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "superproject_gitlink": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "scheduler_planning_revision": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "scheduler_planning_tree": "61776431577f0c276546f25e4178a47a64007180",
         "scheduler_planning_revision_matches_head": true,
         "scheduler_planning_tree_matches_head": true,
-        "configured_origin_main": "838261c04a4b6f2643d75017e0b472876597c673",
+        "configured_origin_main": "31096be86103f29faef80a01e03d09b1ad7345c6",
         "configured_origin_main_is_ancestor": true,
         "clean_at_observation": true,
         "evidence_kind": "measured"
@@ -154,25 +156,46 @@
       "result": "pass",
       "meaning": "The outer tree and all four admitted nested worktrees were clean before this receipt was written. Each admitted nested commit equals the superproject gitlink and the scheduler planning revision; each nested tree equals the scheduler planning tree. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
     },
+    "source_digest_continuity": {
+      "kind": "measured",
+      "result": "contract_blobs_unchanged_scheduler_and_gitlinks_moved",
+      "prior_receipt_artifact_identity": "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v2",
+      "nested_gitlinks_changed": [
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "Mcp-Plus-Plus"
+      ],
+      "nested_gitlinks_unchanged": [
+        "external/ipfs_kit"
+      ],
+      "datasets_tree_unchanged": true,
+      "datasets_delta": "gitlink moved from 4818befbee509162303dd038fadcd1a3766f722d to a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648; tree remained a8d4daf349506857d370171ae099426f057e56c0",
+      "accelerate_delta": "gitlink moved from 4c3a2105ec1160fbf282cbea7625e0b25d6c4a76 to 19a44398735b15de6f6c8c09cc501691c3a95094; tree moved from ba222856f42fa303bb00e45850e16cc1d9e576d9 to 7e3d6a8d10b46d6a660b9b9a2322c57e5cd5440c",
+      "mcp_plus_plus_delta": "gitlink moved from 838261c04a4b6f2643d75017e0b472876597c673 to 31096be86103f29faef80a01e03d09b1ad7345c6; tree moved from 8e5cc4ea045c87ff378a4eb717b6b3c5a40a5253 to 61776431577f0c276546f25e4178a47a64007180",
+      "contract_blob_sha256_unchanged": true,
+      "scheduler_config_digest_changed": true,
+      "meaning": "Every listed contract-blob SHA-256 and git blob was re-hashed at this head and matched the v2 receipt. Three admitted gitlinks and the scheduler planning identities moved, so the forest seal itself is new and the v2 receipt is stale."
+    },
     "stale_prior_receipt_rejected": {
       "kind": "measured",
-      "prior_artifact_identity": "urn:pcsm:receipt:PCSM-001@source-forest-seal-v1",
-      "prior_outer_commit": "0c6c27169330d2ccae20c3119c1fe06f51a1066f",
-      "prior_outer_tree": "922852a5516946908f996719ee98769cc96c3b40",
-      "prior_accelerate_gitlink": "87ab6e9b0022e51e5da2ec7c9d10acd02ec84881",
-      "prior_accelerate_tree": "1e01421bf0db28fbbe90b0423d671f0babd48a57",
-      "prior_datasets_gitlink": "719083b59637558d2338281a63435021e994a875",
-      "prior_scheduler_sha256": "49d71ea215a118d144b7b9d2f498a00a98981a211eaed6c4fec6add01180db56",
+      "prior_artifact_identity": "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v2",
+      "prior_outer_commit": "04c4d3e95745e434654ef4930b599411493285f5",
+      "prior_outer_tree": "440e9f3f7ba6cb88a3dec233cf7f072ccf72f716",
+      "prior_accelerate_gitlink": "4c3a2105ec1160fbf282cbea7625e0b25d6c4a76",
+      "prior_accelerate_tree": "ba222856f42fa303bb00e45850e16cc1d9e576d9",
+      "prior_datasets_gitlink": "4818befbee509162303dd038fadcd1a3766f722d",
+      "prior_mcp_plus_plus_gitlink": "838261c04a4b6f2643d75017e0b472876597c673",
+      "prior_scheduler_sha256": "368fdb79955438384c2663030090c2df198b12243cf80dff363ef404696ac15e",
       "result": "rejected_as_stale",
-      "meaning": "The previously committed PCSM-001 receipt bound a different outer commit/tree, different ipfs_accelerate and ipfs_datasets gitlinks, and a different scheduler-config digest. Current-head baseline required a fresh receipt."
+      "meaning": "The previously committed PCSM-001 receipt bound a different outer commit/tree, different ipfs_accelerate, ipfs_datasets, and Mcp-Plus-Plus gitlinks, and a different scheduler-config digest. Current-head baseline required a fresh receipt."
     }
   },
   "policy_bindings": {
     "scheduler_config": {
       "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
       "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
-      "sha256": "368fdb79955438384c2663030090c2df198b12243cf80dff363ef404696ac15e",
-      "git_blob": "46f93f3704dbd37d8e8c4e931afdc5d7ecf70dac",
+      "sha256": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
+      "git_blob": "04d7f3becf40c4702e0aeab18f1443ed610259cf",
       "accepted_plan_revision_alias": "PCSM-PLAN-V1",
       "source_binding_policy": {
         "require_initialized_gitlinks": true,
@@ -204,7 +227,7 @@
       "path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
       "sha256": "712c844b2a40856a677f5d7258d6bfdcb1f3ec08410e026922c93c4f6951121b",
       "git_blob": "9f97656be213dc0f898701a04c851376b5eb6f16",
-      "dispatch_objective_revision_cid": "baguqeerabktb5bsvrpiic24l5iucmjcj34dzzw7tx4pemrh7fbu3dh65cksa",
+      "dispatch_objective_revision_cid": "baguqeeravcgnkcukcjhy4ne2n5aphdzvdxrawpd4vxw4thvqidzb36ch7f4a",
       "dispatch_objective_revision_cid_source": "current implementation dispatch packet; not a git blob and not substituted for the file SHA-256",
       "evidence_kind": "measured"
     },
@@ -216,10 +239,10 @@
     },
     "implementation_policy": {
       "policy_id": "policy:implementation-daemon",
-      "policy_revision": "sha256:2556d4275bb348d34974ac6c00d853a5aa744b214a8ca51cd749b594b81663ad",
+      "policy_revision": "sha256:87920d6f6fd8445f0ccce2ecb16c721376c2b97828492c14a62bd5b80dbdb368",
       "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
-      "canonical_task_cid": "baguqeeraydu2rokcy3rokrh5xhecmpxbxqh5wmfveidpurfjb25clwdrawna",
-      "accepted_plan_root_cid": "baguqeeramyxfd2fphknxy3nsfrx32rejykewcngwfymvr7yl3d322wr5kooa",
+      "canonical_task_cid": "baguqeeraouxtfxexwjucpczftubgpy5cm2aqgfzbmpzreiujeohdsgut6vma",
+      "accepted_plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
       "source": "current implementation dispatch and database task projection",
       "evidence_kind": "measured"
     }
@@ -287,7 +310,9 @@
         "current_forest_identity": false,
         "seal_accelerate_commit": "80cfe8ac6e353a63af7eeae33e5ca9caaffc29dd",
         "seal_datasets_commit": "b572255d5f8f4f4f8136df43f58dae44f8e1b941",
-        "freshness": "The seal file is present at the current datasets tree, but its embedded accelerate and datasets commits are not the admitted PCSM gitlinks. It is not substituted for this baseline forest identity.",
+        "seal_kit_commit": "05ba9375923cd5fb52e2c9c18b98b530d57d077f",
+        "seal_mcp_plus_plus_commit": "dc3164653a48d059ae9812078359daeafb451c07",
+        "freshness": "The seal file is present at the current datasets tree, but its embedded accelerate, datasets, kit, and MCP++ commits are not the admitted PCSM gitlinks. It is not substituted for this baseline forest identity.",
         "evidence_kind": "measured"
       }
     ],
@@ -352,7 +377,7 @@
       {
         "capability": "pytest CLI",
         "status": "unavailable",
-        "reason": "pytest was absent from the sealed validation PATH. A provider-local ~/.local/bin/pytest was intentionally excluded.",
+        "reason": "pytest was absent from the sealed validation PATH. A provider-local pytest executable was intentionally excluded.",
         "evidence_kind": "unavailable"
       },
       {
@@ -398,6 +423,7 @@
           "scheduler planning tree equals nested tree",
           "configured origin/main revision is an ancestor of each nested head",
           "outer origin/main equals accelerator_planning_revision and is an ancestor of outer HEAD",
+          "outer origin/main tree equals accelerator_planning_tree",
           "listed policy and contract SHA-256 and git blob identities match live files"
         ],
         "evidence_kind": "measured"
@@ -411,9 +437,9 @@
     ],
     "negative_tests": [
       {
-        "name": "stale prior PCSM-001 outer commit, accelerate gitlink, and scheduler digest rejection",
+        "name": "stale prior PCSM-001 outer commit, gitlinks, and scheduler digest rejection",
         "status": "passed",
-        "method": "Compared current outer commit 04c4d3e95745e434654ef4930b599411493285f5, accelerate gitlink 4c3a2105ec1160fbf282cbea7625e0b25d6c4a76, and scheduler SHA-256 368fdb79955438384c2663030090c2df198b12243cf80dff363ef404696ac15e against the previously committed receipt bindings 0c6c27169330d2ccae20c3119c1fe06f51a1066f, 87ab6e9b0022e51e5da2ec7c9d10acd02ec84881, and 49d71ea215a118d144b7b9d2f498a00a98981a211eaed6c4fec6add01180db56; all differed and were rejected as stale.",
+        "method": "Compared current outer commit 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, accelerate gitlink 19a44398735b15de6f6c8c09cc501691c3a95094, datasets gitlink a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648, MCP++ gitlink 31096be86103f29faef80a01e03d09b1ad7345c6, and scheduler SHA-256 f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446 against the previously committed receipt bindings 04c4d3e95745e434654ef4930b599411493285f5, 4c3a2105ec1160fbf282cbea7625e0b25d6c4a76, 4818befbee509162303dd038fadcd1a3766f722d, 838261c04a4b6f2643d75017e0b472876597c673, and 368fdb79955438384c2663030090c2df198b12243cf80dff363ef404696ac15e; all differed and were rejected as stale.",
         "evidence_kind": "measured"
       },
       {
@@ -425,7 +451,7 @@
       {
         "name": "forged scheduler SHA-256 rejection",
         "status": "passed",
-        "method": "A same-length all-zero digest was compared to the measured scheduler SHA-256 368fdb79955438384c2663030090c2df198b12243cf80dff363ef404696ac15e and rejected as unequal.",
+        "method": "A same-length all-zero digest was compared to the measured scheduler SHA-256 f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446 and rejected as unequal.",
         "evidence_kind": "measured"
       },
       {
@@ -437,7 +463,7 @@
       {
         "name": "semantic-state dependency seal is not current forest identity",
         "status": "passed",
-        "method": "The seal's accelerate commit 80cfe8ac6e353a63af7eeae33e5ca9caaffc29dd and datasets commit b572255d5f8f4f4f8136df43f58dae44f8e1b941 differ from admitted gitlinks 4c3a2105ec1160fbf282cbea7625e0b25d6c4a76 and 4818befbee509162303dd038fadcd1a3766f722d and were rejected as current-head forest identities.",
+        "method": "The seal's accelerate commit 80cfe8ac6e353a63af7eeae33e5ca9caaffc29dd, datasets commit b572255d5f8f4f4f8136df43f58dae44f8e1b941, kit commit 05ba9375923cd5fb52e2c9c18b98b530d57d077f, and MCP++ commit dc3164653a48d059ae9812078359daeafb451c07 differ from admitted gitlinks 19a44398735b15de6f6c8c09cc501691c3a95094, a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648, b6c65ba732733d7e33852713ba18aa3b12235668, and 31096be86103f29faef80a01e03d09b1ad7345c6 and were rejected as current-head forest identities.",
         "evidence_kind": "measured"
       },
       {
@@ -461,11 +487,12 @@
   },
   "evidence_classification": {
     "measured": [
-      "Outer HEAD 04c4d3e95745e434654ef4930b599411493285f5 and tree 440e9f3f7ba6cb88a3dec233cf7f072ccf72f716.",
+      "Outer HEAD 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d and tree cd81f5731ee64c29161830c9933d6739e0dd3eb3.",
       "Four admitted gitlinks, nested trees, clean nested worktrees, origin/main ancestor checks, and scheduler planning-revision/tree equality.",
       "Four excluded gitlinks observed and classified not admitted.",
-      "Every listed policy and contract SHA-256 and git blob identity.",
+      "Every listed policy and contract SHA-256 and git blob identity, including the current scheduler-config digest f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446.",
       "Scheduler authority_policy, source_binding_policy, and provider configuration objects.",
+      "Contract-blob digest continuity across accelerate/datasets/MCP++ gitlink movement; kit gitlink and datasets tree unchanged.",
       "Stale prior PCSM-001 identity rejection and forged digest/tree rejection.",
       "CanonicalCodeIR identifier absence across admitted nested roots.",
       "Semantic-state seal freshness mismatch versus admitted gitlinks.",
@@ -484,8 +511,8 @@
   },
   "evidence_summary": {
     "measured": {
-      "count": 10,
-      "description": "Current-head forest identities, policy/contract digests, authority decisions, sealed-environment facts, and receipt-level positive/negative checks."
+      "count": 11,
+      "description": "Current-head forest identities, policy/contract digests, authority decisions, digest continuity across gitlink movement, sealed-environment facts, and receipt-level positive/negative checks."
     },
     "estimated": {
       "count": 0,
