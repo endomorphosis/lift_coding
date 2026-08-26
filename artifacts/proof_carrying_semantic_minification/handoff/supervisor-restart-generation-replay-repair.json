@@ -1,0 +1,51 @@
+{
+  "attempt_refunded": false,
+  "current_operator_identity": "sha256:691345158b9bfac25b5124b8e2b5bbe5bac2e35492fc0c292a6feec8fa585131",
+  "durable_generation_evidence": {
+    "accepted_command_generation": {
+      "birth_id": "birth:e787b5521732b8e883cd5b37f7792218",
+      "fence_epoch": 6,
+      "generation": 6,
+      "revision_after": 1,
+      "store_revision_before": 0
+    },
+    "failed_replay_generation": {
+      "birth_id": "birth:588998262d8d7feac01bc2982b080d52",
+      "fence_epoch": 7,
+      "generation": 7,
+      "revision_after": 0,
+      "revision_before": 0
+    }
+  },
+  "exact_change": {
+    "accepted_fence_epoch": 7,
+    "accepted_generation": 7,
+    "accepted_revision_after": 0,
+    "accepted_revision_before": 0,
+    "admitted_invariant": "result_matches_unchanged_current_generation_revision",
+    "field": "idempotent_replay_store_revision",
+    "previous_invariant": "result_revision_at_least_original_store_revision_plus_one"
+  },
+  "failed_restart": {
+    "command_id": "cmd:blocked-retry-recovery:ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7",
+    "error": "blocked-retry owner command was not exactly admitted",
+    "idempotency_key": "executor-blocked-retry-recovery:ee9b5a7a09bbc060ac83799b4c31474499a69580534f160f5605b30d0a147cd7",
+    "owner_fence_epoch": 7,
+    "owner_generation": 7,
+    "result_digest": "sha256:ba3a88d6bd6f2c848b273fb5362919909fa6c9d0813258df089a0cc08bc04f1e",
+    "task_revision": 5,
+    "task_status": "retrying"
+  },
+  "manual_database_mutation": false,
+  "reason": "generation_7_zero_revision_idempotent_replay",
+  "recovery_already_committed": true,
+  "repair_base_commit": "3208c41917944182865889c48e57bc128ab8a463",
+  "repair_base_operator_identity": "sha256:7a1b9a2812447b6a65e75e28425cdbaf06e1d6055068d20f2c3a956e35335537",
+  "repair_base_tree": "92502d730d2d47840cefcf4f02594f1e06af1e5d",
+  "receipt_id": "sha256:4af075a3eecf56687c90ebd416132f83630c646a0c44210ca680aefca2bb0b67",
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-restart-generation-replay-repair@1",
+  "sealed_operator_identity": "sha256:a4506885482cd8442cd7646f44d9106f9913c7cde4bfd521fe71cd38cb7b1164",
+  "sealed_outer_commit": "f40c309b948514e6ad74ea9b29b13abadc74b478",
+  "sealed_outer_tree": "7f85ea44e369bd725ac9366f170725ee8e2546b1",
+  "source_replay_repair_receipt_id": "sha256:8c2da662fbc39c2eb3fcfffe973baf7a9fe70bc05e655d02187696a721569c1e"
+}

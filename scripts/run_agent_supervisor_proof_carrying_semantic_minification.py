@@ -181,7 +181,7 @@ HANDOFF_GENERATION_REPLAY_REPAIR_SCHEMA: Final = (
     "proof-carrying-semantic-minification-restart-generation-replay-repair@1"
 )
 HANDOFF_GENERATION_REPLAY_REPAIR_BASE_COMMIT: Final = (
-    "PENDING_GENERATION_REPLAY_REPAIR_BASE_COMMIT"
+    "3208c41917944182865889c48e57bc128ab8a463"
 )
 HANDOFF_GENERATION_REPLAY_REPAIR_SEALED_OUTER_COMMIT: Final = (
     "f40c309b948514e6ad74ea9b29b13abadc74b478"
@@ -4211,6 +4211,7 @@ def _apply_blocked_retry_recovery(
             board.resolved_database_program().quack_endpoint,
             server_id=identity.server_id,
         )
+        generation_before = client.load_generation()
         result = client.recover_blocked_task_retry(
             task_cid=HANDOFF_REPAIR_TASK_CID,
             expected_task_revision=int(
@@ -4228,6 +4229,7 @@ def _apply_blocked_retry_recovery(
             sidecar_evidence_id=evidence_id,
             now_ms=int(blocked_retry_handoff.get("started_at_ms") or -1),
         )
+        generation_after = client.load_generation()
     finally:
         try:
             if client is not None:
@@ -4292,13 +4294,26 @@ def _apply_blocked_retry_recovery(
         or result.idempotency_key
         != f"{idempotency_prefix}{command_digest}"
         or result.result_digest != _identity(result_body)
-        or result.revision < store_revision_before + 1
+        or generation_before.generation != int(identity.generation)
+        or generation_before.fence_epoch != int(identity.fence_epoch)
+        or generation_after.generation != int(identity.generation)
+        or generation_after.fence_epoch != int(identity.fence_epoch)
+        or result.generation != generation_after.generation
+        or result.fence_epoch != generation_after.fence_epoch
+        or result.revision != generation_after.revision
         or (
             blocked_retry_state == "pending_apply"
-            and result.revision != store_revision_before + 1
+            and (
+                generation_before.revision != store_revision_before
+                or generation_after.revision
+                != store_revision_before + 1
+            )
         )
-        or result.generation != int(identity.generation)
-        or result.fence_epoch != int(identity.fence_epoch)
+        or (
+            blocked_retry_state == "command_replay_required"
+            and generation_after.to_dict()
+            != generation_before.to_dict()
+        )
     ):
         raise OperatorError("blocked-retry owner command was not exactly admitted")
     return {
