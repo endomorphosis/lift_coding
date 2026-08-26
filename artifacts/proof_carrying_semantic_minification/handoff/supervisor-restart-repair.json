@@ -18,10 +18,35 @@
   "source_completion_receipt_id": "sha256:e00019f28ba2031bf94076661378b1de877c843512c7a41071968a56001361a3",
   "max_task_attempts_before": 1,
   "max_task_attempts_after": 2,
+  "execution_route_continuation": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-execution-route-continuation@1",
+    "policy_id": "baguqeerahvwjwfbexnsqdflng54qvtuqoiwf4junsjaafyuhvl2fmjkeettq",
+    "plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
+    "repository_tree_id": "cd81f5731ee64c29161830c9933d6739e0dd3eb3",
+    "source_revision": 1,
+    "source_projection_cid": "baguqeeraortwkvzwu52ibvbutlskq5e7c65ubmop67fgsou5twrmmj3uawaq",
+    "origin_task_revision": 1,
+    "execution_mode": "grok-codex",
+    "task_count": 70,
+    "lane_count": 4,
+    "stable_binding_id": "baguqeeranwwwzvu237trolqpqxsireo7cqhhgzkrsxgyhy4px2wz6m2jc6la",
+    "stable_authority": {
+      "interface": "TypedDatabaseTaskSourceStableQuackAuthority@1",
+      "store_id": "pcsm-v1",
+      "database_uuid": "028b504a-e425-4163-9392-762b40585fa8",
+      "schema_fingerprint": "sha256:4c3a16d5d172e3984681de291616553e34c7d924694a2deef6661e33080b73d6",
+      "repository_id": "repository:local",
+      "schema_revision": 3,
+      "route_policy_id": "baguqeerahvwjwfbexnsqdflng54qvtuqoiwf4junsjaafyuhvl2fmjkeettq",
+      "plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
+      "repository_tree_id": "cd81f5731ee64c29161830c9933d6739e0dd3eb3",
+      "source_projection_cid": "baguqeeraortwkvzwu52ibvbutlskq5e7c65ubmop67fgsou5twrmmj3uawaq"
+    }
+  },
   "current_authority_source_identities": {
     "config": "sha256:2a4b4c68f6de26abd16c3b8e72c8c4b2facd214652ba73f6de74e2aad1e799bf",
     "generator": "sha256:a99394eba3ac5ae4a88c8d8fba0235a1ded115dc59e63dad160366dbe7a9a695",
-    "operator": "sha256:cfc11422c5aac53bd29b316b50a78e333865ed0d1d92f0e8cf1fcd4e7fbe7331",
+    "operator": "sha256:68f41054d661b684dd5473476032d030afd83dca71158fa7b01a285724811f7d",
     "validator": "sha256:276a1599cd902d5de0aa41bee6afd3c9b0e6c0503dd7cbf1bc31cfb5daaf6333"
   },
   "accelerate_origin_main_merge": {
@@ -85,7 +110,7 @@
         "external/ipfs_datasets/tests/proof_context"
       ],
       "outcome": "passed",
-      "summary": "The complete ipfs_datasets proof-context suite passed: 519 tests in 80.39 seconds.",
+      "summary": "The complete ipfs_datasets proof-context suite passed: 519 tests in 93.12 seconds.",
       "measurement_status": "measured"
     },
     {
@@ -101,11 +126,11 @@
         "test/api/test_agent_supervisor_multi_supervisor_shutdown.py"
       ],
       "outcome": "passed",
-      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed: 423 tests in 75.37 seconds; four unrelated temporary-directory cleanup warnings were reported.",
+      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed: 423 tests in 108.88 seconds; four unrelated temporary-directory cleanup warnings were reported.",
       "measurement_status": "measured"
     }
   ],
   "historical_receipt_preserved": true,
   "manual_database_mutation": false,
-  "receipt_id": "sha256:7b2e3b7a7e0dfd3f31f6b034fc7173873419c3569fd0ff9d62df4f185ddbd6df"
+  "receipt_id": "sha256:7ac11d7cef9404023f4114f1a2aa94bb9677a535c7afc18d5c8f5bba34455f47"
 }
