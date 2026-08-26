@@ -1,0 +1,31 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-command-verifier-repair@1",
+  "reason": "command_authority_source_witness_count_correction",
+  "source_command_authority_repair_receipt_id": "sha256:a21810696ed9824fcd872ae7a0b6efe90204a03b96b73d24970afbeb74c3d3b3",
+  "sealed_outer_commit": "c16dd9b8c0920c5a690abe48542957af0fc44593",
+  "sealed_outer_tree": "369f064026ac82a049bc15bab8ccc060bfe82796",
+  "sealed_operator_identity": "sha256:4c93ab0e5732c7cd8e055daec07b4d27958f3feb49794e942a11cb1d8d746f63",
+  "repair_base_commit": "e8a75491066ba25afd2b7d08012c3dd1e401a5e3",
+  "repair_base_tree": "7e8dfda5f8ad3dbc05375d6b19717a197834368c",
+  "repair_base_operator_identity": "sha256:e04022f50c6f591bd6fa71e1c37e23e84ba9589edb6bb74a68c67032de45fa63",
+  "current_operator_identity": "sha256:c1bcb0c761ab42a6c7e59ec85007ec647fb31574ab6040731de32c5327de0940",
+  "exact_change": {
+    "stable_expected_receipt_pattern_previous_count": 1,
+    "stable_expected_receipt_pattern_observed_count": 3,
+    "stable_command_argument_pattern_previous_count": 1,
+    "stable_command_argument_pattern_observed_count": 2,
+    "current_operator_mismatch_action_before": "reject",
+    "current_operator_mismatch_action_after": "verify_exact_descendant_repair",
+    "durable_command_identity_changed": false,
+    "database_state_changed": false
+  },
+  "validation": {
+    "base_source_counts_measured": true,
+    "base_expected_receipt_pattern_count": 3,
+    "base_command_argument_pattern_count": 2,
+    "measurement_status": "measured"
+  },
+  "attempt_refunded": false,
+  "manual_database_mutation": false,
+  "receipt_id": "sha256:bf05d1a412d17becf0042570dd27be6eb3c5ca04f19488ecb9b8633b5042a134"
+}
