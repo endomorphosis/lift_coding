@@ -9,8 +9,8 @@
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v1",
-  "observed_at": "2026-08-26T14:41:00Z",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v2",
+  "observed_at": "2026-08-27T16:44:27Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -24,7 +24,7 @@
     "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-010.json",
     "predicted_proof_context_directory_not_written": "external/ipfs_datasets/ipfs_datasets_py/proof_context/",
     "predicted_proof_context_directory_reason": "This task's admitted declared output is the receipt only. Existing datasets AST IR is selected in place. No competing CanonicalCodeIR schema, wrapper, or proof_context mutation was created.",
-    "implementation_delta": "receipt_only; select existing ipfs-datasets.software-contracts.ast-ir@1.0.0 CanonicalASTRecord/ASTRecord as CanonicalCodeIR@1 for Python v1 via PythonASTExtractor/cpython-ast@1.2.1; no new schema, owner, compiler, linker, or language scope"
+    "implementation_delta": "receipt_reseal_only; reaffirm existing ipfs-datasets.software-contracts.ast-ir@1.0.0 CanonicalASTRecord/ASTRecord as CanonicalCodeIR@1 for Python v1 via PythonASTExtractor/cpython-ast@1.2.1; no new schema, owner, compiler, linker, or language scope"
   },
   "evidence_legend": {
     "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
@@ -36,9 +36,9 @@
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
     "owning_repository_for_receipts": "ipfs_accelerate_py",
-    "outer_commit": "baee33cad2cdad3c0c0aae059dc6e3e28301c83e",
-    "outer_tree": "8a068b5c27f04624c58bdffa21b50a00a0e0deb1",
-    "outer_subject": "Admit cross-generation recovery replay",
+    "outer_commit": "7e6f00774a53025d55904b71b0410a4f5c3f5fb3",
+    "outer_tree": "2417609d507692322080b4723316c61be2e081b4",
+    "outer_subject": "Reseal PCSM supervisor after DuckDB ART-index recovery",
     "git_object_format": "sha1",
     "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
     "origin_main_is_ancestor": true,
@@ -47,8 +47,8 @@
     "accelerator_planning_revision_equals_origin_main": true,
     "accelerator_planning_tree_equals_origin_main_tree": true,
     "accelerator_planning_revision_is_ancestor_of_head": true,
-    "commits_after_origin_main": 50,
-    "dispatch_tree_id": "baee33cad2cdad3c0c0aae059dc6e3e28301c83e",
+    "commits_after_origin_main": 78,
+    "dispatch_tree_id": "7e6f00774a53025d55904b71b0410a4f5c3f5fb3",
     "dispatch_tree_id_equals_outer_commit": true,
     "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
@@ -74,14 +74,18 @@
         "repository": "endomorphosis/ipfs_accelerate_py",
         "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
         "authority_role": "slice_route_model_budget_link_admission_and_validation",
-        "commit": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
-        "tree": "c2a1f18bb0d383d90ebae74037a489fb3034d428",
-        "superproject_gitlink": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
-        "configured_origin_main": "db887c3695e1e2950e74fe7fd4fb80e195a3851f",
+        "commit": "a6340b088023122c3c71b5dca9c9b3854ad795b0",
+        "tree": "64ff5a3ecde25512297807c6095ae73099c9d5fb",
+        "superproject_gitlink": "a6340b088023122c3c71b5dca9c9b3854ad795b0",
+        "configured_origin_main": "024bf40a6c35735b84e7faff844f862dec63abf3",
         "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "a9ab7e480237608a30f3f73ba7ecc9575e05ff6d",
+        "configured_origin_main_tree_equals_planning_tree": false,
         "prior_pcsm_004_origin_main_still_ancestor": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
-        "scheduler_planning_revision": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
-        "scheduler_planning_tree": "c2a1f18bb0d383d90ebae74037a489fb3034d428",
+        "prior_pcsm_010_v1_origin_main_still_ancestor": "db887c3695e1e2950e74fe7fd4fb80e195a3851f",
+        "prior_pcsm_010_v1_commit_still_ancestor": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
+        "scheduler_planning_revision": "a6340b088023122c3c71b5dca9c9b3854ad795b0",
+        "scheduler_planning_tree": "64ff5a3ecde25512297807c6095ae73099c9d5fb",
         "scheduler_planning_revision_matches_head": true,
         "scheduler_planning_tree_matches_head": true,
         "clean_at_observation": true,
@@ -115,6 +119,8 @@
         "superproject_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
         "configured_origin_main": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
         "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "543ccd2bd78994d4e3d55cd44993ae6ca65e4c28",
+        "configured_origin_main_tree_equals_planning_tree": false,
         "scheduler_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
         "scheduler_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
         "scheduler_planning_revision_matches_head": true,
@@ -149,7 +155,7 @@
         "evidence_kind": "measured"
       }
     ],
-    "freshness_rule": "Any changed outer commit/tree, admitted nested commit/tree/gitlink, dirty nested worktree, or scheduler source_binding planning identity invalidates this selection and requires a fresh receipt. Planning revisions are not runtime completion evidence. Datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b is an ancestor identity, not the admitted planning tree.",
+    "freshness_rule": "Any changed outer commit/tree, admitted nested commit/tree/gitlink, dirty nested worktree, or scheduler source_binding planning identity invalidates this selection and requires a fresh receipt. Planning revisions are not runtime completion evidence. Datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b, accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d, and kit origin/main tree 543ccd2bd78994d4e3d55cd44993ae6ca65e4c28 are ancestor identities, not admitted planning trees.",
     "freshness_evidence_kind": "measured",
     "freshness_check": {
       "kind": "measured",
@@ -159,24 +165,27 @@
     },
     "source_digest_continuity": {
       "kind": "measured",
-      "result": "first_pcsm_010_issuance; ast_ir_authority_bytes_unchanged_from_g100_predecessors; nested_datasets_and_accelerate_gitlinks_moved",
-      "prior_pcsm_010_receipt": "none",
+      "result": "pcsm_010_reseal; ast_ir_authority_bytes_unchanged_from_g100_predecessors_and_v1; nested_accelerate_gitlink_moved",
+      "prior_pcsm_010_receipt": "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v1",
+      "prior_pcsm_010_receipt_sha256": "9b76137f817ef2757e6e5862f7745ac38e4f2cc94797545e398213b3eabcf627",
+      "prior_pcsm_010_receipt_git_blob": "e17f919ef500310b2ea876cc972baf7004c19f38",
       "predecessor_receipts": [
         "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v4",
         "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v3",
         "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v3",
         "urn:pcsm:task-receipt:PCSM-003@current-head-inventory-v2",
-        "urn:pcsm:task-receipt:PCSM-004@current-head-canonical-versus-projection-boundary-v1"
+        "urn:pcsm:task-receipt:PCSM-004@current-head-canonical-versus-projection-boundary-v1",
+        "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v1"
       ],
-      "nested_gitlinks_changed_versus_pcsm_004": [
-        "external/ipfs_accelerate",
-        "external/ipfs_datasets"
+      "nested_gitlinks_changed_versus_pcsm_010_v1": [
+        "external/ipfs_accelerate"
       ],
-      "nested_gitlinks_unchanged_versus_pcsm_004": [
+      "nested_gitlinks_unchanged_versus_pcsm_010_v1": [
         "Mcp-Plus-Plus",
+        "external/ipfs_datasets",
         "external/ipfs_kit"
       ],
-      "selected_authority_source_bytes_unchanged_versus_pcsm_002_and_pcsm_004": [
+      "selected_authority_source_bytes_unchanged_versus_pcsm_002_pcsm_004_and_pcsm_010_v1": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/ast_ir.py",
         "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/schema_versions.py",
         "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
@@ -184,8 +193,8 @@
         "external/ipfs_datasets/tests/unit/logic/software_contracts/test_ast_ir.py",
         "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py"
       ],
-      "outer_commit_moved": "Predecessor PCSM-004 bound outer commit 7c641864b2f224cd1cee906bce8eed7bee3d8360 and tree 0916011ee986293a03a796068fe65f314edda1fd. Current outer commit is baee33cad2cdad3c0c0aae059dc6e3e28301c83e and tree 8a068b5c27f04624c58bdffa21b50a00a0e0deb1. Datasets gitlink moved a9eb139ebd0d6fc6a6ca5f4de6a43eb44e08d648 -> 8b9c45106c0ace6107b8b90357a3ce71caf57584. Accelerator gitlink moved 19a44398735b15de6f6c8c09cc501691c3a95094 -> 4d4f361c424c2543dc3b25597af12cdd5d961e0c. Selected AST IR SHA-256/git-blob identities were re-hashed and matched PCSM-002/PCSM-004.",
-      "meaning": "This is the first PCSM-010 receipt. Predecessor G100/G200-boundary receipts cannot be reused as current-head forest identity because the outer commit/tree and two nested gitlinks moved. The selected CanonicalCodeIR source bytes themselves are unchanged."
+      "outer_commit_moved": "Predecessor PCSM-010 v1 bound outer commit baee33cad2cdad3c0c0aae059dc6e3e28301c83e and tree 8a068b5c27f04624c58bdffa21b50a00a0e0deb1. Current outer commit is 7e6f00774a53025d55904b71b0410a4f5c3f5fb3 and tree 2417609d507692322080b4723316c61be2e081b4. Accelerator gitlink moved 4d4f361c424c2543dc3b25597af12cdd5d961e0c -> a6340b088023122c3c71b5dca9c9b3854ad795b0. Datasets, kit, and MCP++ gitlinks are unchanged from v1. Selected AST IR SHA-256/git-blob identities were re-hashed and matched PCSM-002, PCSM-004, and PCSM-010 v1.",
+      "meaning": "The committed PCSM-010 v1 receipt is stale as current-head forest identity because the outer commit/tree, accelerator gitlink, and scheduler-config digest moved. The selected CanonicalCodeIR source bytes themselves are unchanged."
     },
     "pcsm_source_map": {
       "status": "unavailable",
@@ -194,22 +203,28 @@
     },
     "stale_prior_receipt_rejected": {
       "kind": "measured",
-      "prior_pcsm_010_artifact_identity": "none",
+      "prior_pcsm_010_artifact_identity": "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v1",
+      "prior_outer_commit": "baee33cad2cdad3c0c0aae059dc6e3e28301c83e",
+      "prior_outer_tree": "8a068b5c27f04624c58bdffa21b50a00a0e0deb1",
+      "prior_accelerate_gitlink": "4d4f361c424c2543dc3b25597af12cdd5d961e0c",
+      "prior_accelerate_tree": "c2a1f18bb0d383d90ebae74037a489fb3034d428",
+      "prior_scheduler_sha256": "2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079",
       "predecessor_outer_commits_rejected_as_current_head": [
         "4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d",
         "1f7d0a9c10abbdefb1255e812df173a8e40f4d85",
-        "7c641864b2f224cd1cee906bce8eed7bee3d8360"
+        "7c641864b2f224cd1cee906bce8eed7bee3d8360",
+        "baee33cad2cdad3c0c0aae059dc6e3e28301c83e"
       ],
-      "result": "no_prior_pcsm_010_to_reject; predecessor_g100_and_pcsm_004_outer_identities_rejected_as_current_head",
-      "meaning": "No previously committed PCSM-010 receipt exists. Predecessor receipts remain valid inventories/boundaries of their bound trees but are not current-head forest identity for this task."
+      "result": "rejected_as_stale",
+      "meaning": "The previously committed PCSM-010 v1 receipt bound a different outer commit/tree, a different ipfs_accelerate gitlink, and a different scheduler-config digest. Current-head CanonicalCodeIR selection required a fresh receipt. Predecessor G100 receipts remain valid inventories/boundaries of their bound trees but are not current-head forest identity for this task."
     }
   },
   "policy_bindings": {
     "scheduler_config": {
       "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
       "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
-      "sha256": "2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079",
-      "git_blob": "3bec5a45f80f8bf214cc019bc2113c6e54c4a78a",
+      "sha256": "9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced",
+      "git_blob": "9ffe1809de80ee8068f03d9a7292ab88b5b124b6",
       "accepted_plan_revision_alias": "PCSM-PLAN-V1",
       "source_binding_policy": {
         "require_initialized_gitlinks": true,
@@ -237,6 +252,7 @@
         "generated_runtime_artifacts_are_completion_authority": false
       },
       "pcsm_004_scheduler_digest_rejected_as_current": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
+      "pcsm_010_v1_scheduler_digest_rejected_as_current": "2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079",
       "evidence_kind": "measured"
     },
     "plan": {
@@ -261,12 +277,24 @@
     },
     "implementation_policy": {
       "policy_id": "policy:implementation-daemon",
-      "policy_revision": "sha256:bfa36919a5dc39f87958723b34112075efcd356070d16fecad9927ae02cfa6e8",
+      "policy_revision": "sha256:a5d76e2d2f0d9cfe2042bfcf5562c7d16db98e890644227af04c82006c204583",
       "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
-      "canonical_task_cid": "baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa",
-      "accepted_plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
-      "dependency_task_cid": "baguqeerapnxzcezvnw5d7jdg3277qhtyhdov6xkkvisezi6qihzt4bypqdna",
-      "source": "current implementation dispatch and database task projection",
+      "canonical_task_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include a canonical_task_cid. The v1 receipt value baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa is not reused.",
+        "evidence_kind": "unavailable"
+      },
+      "accepted_plan_root_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include an accepted_plan_root_cid. The v1 receipt value baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla is not reused.",
+        "evidence_kind": "unavailable"
+      },
+      "dependency_task_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include a dependency_task_cid. The v1 receipt value baguqeerapnxzcezvnw5d7jdg3277qhtyhdov6xkkvisezi6qihzt4bypqdna is not reused.",
+        "evidence_kind": "unavailable"
+      },
+      "source": "current implementation dispatch packet",
       "evidence_kind": "measured"
     },
     "datasets_proof_context_current_head_handoff": {
@@ -698,7 +726,7 @@
       "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
       "status": "unavailable",
       "sealed_result": "python: command not found (exit 127). /usr/bin/python3.12 -m pytest with PYTHONNOUSERSITE=1 and a private validation HOME raises ImportError: Error importing plugin 'anyio.pytest_plugin': No module named 'anyio'.",
-      "provider_home_probe_excluded": "A run under operator HOME with user site-packages collected 519 passing items and is not sealed-environment evidence.",
+      "provider_home_probe_excluded": "A run under operator HOME with user site-packages is not sealed-environment evidence and was not used as a passing result.",
       "evidence_kind": "unavailable"
     },
     "json_parse_command": {
@@ -737,9 +765,9 @@
         "evidence_kind": "measured"
       },
       {
-        "name": "selected AST IR source bytes are unchanged from PCSM-002/PCSM-004",
+        "name": "selected AST IR source bytes are unchanged from PCSM-002/PCSM-004/PCSM-010 v1",
         "status": "passed",
-        "method": "Re-hashed ast_ir.py, schema_versions.py, content.py, python_frontend.py, test_ast_ir.py, and test_python_frontend.py; SHA-256 and git blob identities matched the predecessor receipts even though the datasets gitlink moved.",
+        "method": "Re-hashed ast_ir.py, schema_versions.py, content.py, python_frontend.py, test_ast_ir.py, and test_python_frontend.py; SHA-256 and git blob identities matched the predecessor receipts even though the outer tree and accelerator gitlink moved.",
         "evidence_kind": "measured"
       },
       {
@@ -759,7 +787,7 @@
       {
         "name": "predecessor outer commits are not current-head forest identity",
         "status": "passed",
-        "method": "Compared current outer commit baee33cad2cdad3c0c0aae059dc6e3e28301c83e and tree 8a068b5c27f04624c58bdffa21b50a00a0e0deb1 against predecessor bindings 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, 1f7d0a9c10abbdefb1255e812df173a8e40f4d85, and 7c641864b2f224cd1cee906bce8eed7bee3d8360; outer identities differed and were rejected as current-head forest identity.",
+        "method": "Compared current outer commit 7e6f00774a53025d55904b71b0410a4f5c3f5fb3 and tree 2417609d507692322080b4723316c61be2e081b4 against predecessor bindings 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, 1f7d0a9c10abbdefb1255e812df173a8e40f4d85, 7c641864b2f224cd1cee906bce8eed7bee3d8360, and baee33cad2cdad3c0c0aae059dc6e3e28301c83e; outer identities differed and were rejected as current-head forest identity.",
         "evidence_kind": "measured"
       },
       {
@@ -805,9 +833,21 @@
         "evidence_kind": "measured"
       },
       {
-        "name": "PCSM-004 scheduler digest is not current-head scheduler identity",
+        "name": "accelerator origin/main tree is not admitted planning-tree identity",
         "status": "passed",
-        "method": "Predecessor scheduler SHA-256 f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446 differs from current 2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079 and was rejected.",
+        "method": "Configured accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d differs from admitted planning tree 64ff5a3ecde25512297807c6095ae73099c9d5fb and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "kit origin/main tree is not admitted planning-tree identity",
+        "status": "passed",
+        "method": "Configured kit origin/main tree 543ccd2bd78994d4e3d55cd44993ae6ca65e4c28 differs from admitted planning tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "PCSM-004 and PCSM-010 v1 scheduler digests are not current-head scheduler identity",
+        "status": "passed",
+        "method": "Predecessor scheduler SHA-256 values f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446 and 2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079 differ from current 9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced and were rejected.",
         "evidence_kind": "measured"
       },
       {
@@ -888,18 +928,18 @@
   },
   "evidence_classification": {
     "measured": [
-      "Outer HEAD baee33cad2cdad3c0c0aae059dc6e3e28301c83e and tree 8a068b5c27f04624c58bdffa21b50a00a0e0deb1.",
+      "Outer HEAD 7e6f00774a53025d55904b71b0410a4f5c3f5fb3 and tree 2417609d507692322080b4723316c61be2e081b4.",
       "Four admitted gitlinks, nested trees, clean nested worktrees, origin/main ancestor checks, and scheduler planning-revision/tree equality.",
       "Four excluded gitlinks observed and classified not admitted.",
-      "Every listed SHA-256 and git blob identity, including current scheduler-config digest 2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079 and ast_ir.py digest 1461edb7c39f2adc89a70e54decfa291ccceafc50ed23011fbdeea5acb4c8b91.",
+      "Every listed SHA-256 and git blob identity, including current scheduler-config digest 9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced and ast_ir.py digest 1461edb7c39f2adc89a70e54decfa291ccceafc50ed23011fbdeea5acb4c8b91.",
       "Selected schema identifiers ipfs-datasets.software-contracts.ast-ir@1.0.0, frontend-capability@1.0.0, ast-ir-descriptor@1, and software-contract-cid-profile-v1.",
       "Python v1 producer cpython-ast@1.2.1 / PythonASTExtractor.",
       "CanonicalCodeIR@1 unregistered; CanonicalCodeIR identifier absent from the four nested roots.",
-      "AST IR authority source bytes unchanged from PCSM-002/PCSM-004 despite datasets and accelerator gitlink movement.",
-      "Datasets origin/main tree mismatch versus admitted planning tree, with origin/main still an ancestor.",
+      "AST IR authority source bytes unchanged from PCSM-002/PCSM-004/PCSM-010 v1 despite outer-tree and accelerator gitlink movement.",
+      "Datasets, accelerator, and kit origin/main trees mismatch versus admitted planning trees, with origin/main still an ancestor.",
       "Sealed PATH, Python 3.12.3, git 2.43.0, non-writable toolchain directories, PYTHONNOUSERSITE schema import, duplicate-key/float rejection, and json.tool parse of this receipt.",
       "Existing positive and negative test source declarations were directly inspected.",
-      "Dispatch policy_id, policy_revision, repository_id, canonical task CID, dependency task CID, and objective revision CID from the current implementation packet."
+      "Dispatch policy_id, policy_revision, repository_id, and objective revision CID from the current implementation packet."
     ],
     "estimated": [],
     "simulated": [],
@@ -911,7 +951,8 @@
       "Live sample ASTRecord CID minting is unavailable without multiformats in the sealed interpreter.",
       "No immutable receipt CID could be issued because ipfs was absent from the sealed PATH.",
       "No external prover execution is claimed or required for a read-only selection.",
-      "No executed provider/model/tokenizer revision; configuration is not execution evidence."
+      "No executed provider/model/tokenizer revision; configuration is not execution evidence.",
+      "canonical_task_cid, accepted_plan_root_cid, and dependency_task_cid were absent from the current implementation dispatch packet."
     ]
   },
   "evidence_summary": {
@@ -928,8 +969,8 @@
       "description": "No simulations were used."
     },
     "unavailable": {
-      "count": 8,
-      "description": "Registered CanonicalCodeIR schema string, CFG/linker records, source-map artifact, sealed pytest execution, live sample CID minting, optional provers, receipt CID issuance, and provider/tokenizer execution identity."
+      "count": 9,
+      "description": "Registered CanonicalCodeIR schema string, CFG/linker records, source-map artifact, sealed pytest execution, live sample CID minting, optional provers, receipt CID issuance, provider/tokenizer execution identity, and dispatch packet task/plan CIDs absent from this attempt."
     }
   },
   "limitations": [
