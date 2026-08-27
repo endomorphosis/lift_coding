@@ -1,0 +1,30 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-bootstrap-broker-resilience-repair@1",
+  "reason": "executor_bootstrap_per_client_admit_must_not_sigterm",
+  "source_command_verifier_repair_receipt_id": "sha256:bf05d1a412d17becf0042570dd27be6eb3c5ca04f19488ecb9b8633b5042a134",
+  "sealed_outer_commit": "bc4cbda714b0e7f9052d4a6efdc3ae9abefa2c0d",
+  "sealed_outer_tree": "8b57998dd5fce8c35c03f97ff6b9d342ff93c9dd",
+  "sealed_operator_identity": "sha256:c1bcb0c761ab42a6c7e59ec85007ec647fb31574ab6040731de32c5327de0940",
+  "repair_base_commit": "9cc27d09f18532dccdc68ef9e429150905823ae2",
+  "repair_base_tree": "0053871020cbbb1cf561a6395f80464472f0f451",
+  "repair_base_operator_identity": "sha256:a703dca87e3e2a6586198f78079aa834fe511754e9b7c63d883b3d9782d7e453",
+  "current_operator_identity": "sha256:125612467dbf9b0c40da9bee9b9e1bfa59dce4e79df3a0bcccef3e9e5b8be433",
+  "exact_change": {
+    "timeout_after_accept_action_before": "sigterm_supervisor",
+    "timeout_after_accept_action_after": "continue",
+    "peer_oserror_action_before": "sigterm_supervisor",
+    "peer_oserror_action_after": "continue",
+    "per_client_admit_error_action_before": "sigterm_supervisor",
+    "per_client_admit_error_action_after": "continue",
+    "listener_oserror_action": "fail_closed",
+    "durable_command_identity_changed": false,
+    "database_state_changed": false
+  },
+  "validation": {
+    "casf_timeout_continue_matched": true,
+    "measurement_status": "measured"
+  },
+  "attempt_refunded": false,
+  "manual_database_mutation": false,
+  "receipt_id": "sha256:7f4351f49dcde4a8199012167c922019670686bb8dae0e6828fc7d3c45b75b1a"
+}
