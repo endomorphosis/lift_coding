@@ -1,0 +1,1092 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-012",
+  "title": "Define TaskSemanticSlice contract",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G200",
+  "objective_id": "PCSM-012",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-012@current-head-task-semantic-slice-selection-v1",
+  "observed_at": "2026-08-27T19:08:39Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 TaskSemanticSlice authority selection only",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "mutations_to_product_source": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-012.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-012.json",
+    "predicted_proof_context_directory_not_written": "external/ipfs_datasets/ipfs_datasets_py/proof_context/",
+    "predicted_proof_context_directory_reason": "This task's admitted declared output is the receipt only. Existing ContextCoverageManifest@1 bound to DatasetsContextPackAuthority@0.1 is selected in place. No competing TaskSemanticSlice schema, wrapper, or proof_context mutation was created.",
+    "implementation_delta": "receipt_only; reaffirm existing ContextCoverageManifest@1 / build_context_coverage_manifest@1 as TaskSemanticSlice@1 for Python v1, bound to DatasetsContextPackAuthority@0.1 pack identity and SemanticCapsule@1 members; no new schema, owner, compiler, linker, or language scope"
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used by this receipt.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "457fcbd243d99a4c0f0eda420b0da1a07fad8cf0",
+    "outer_tree": "8b7578409f46e209835794b76d14a4e5e64548c1",
+    "outer_subject": "Reseal PCSM supervisor after orphan in_progress unstall",
+    "git_object_format": "sha1",
+    "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "origin_main_is_ancestor": true,
+    "accelerator_planning_revision": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "accelerator_planning_tree": "b1dd163fe6ad7ab52cb3639d05fcbc0fbe64ff84",
+    "accelerator_planning_revision_equals_origin_main": true,
+    "accelerator_planning_tree_equals_origin_main_tree": true,
+    "accelerator_planning_revision_is_ancestor_of_head": true,
+    "commits_after_origin_main": 91,
+    "dispatch_tree_id": "457fcbd243d99a4c0f0eda420b0da1a07fad8cf0",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "evidence_kind": "measured",
+    "gitlinks": {
+      "Mcp-Plus-Plus": {
+        "repository": "endomorphosis/Mcp-Plus-Plus",
+        "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+        "authority_role": "wire_contract_only",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "superproject_gitlink": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "scheduler_planning_tree": "61776431577f0c276546f25e4178a47a64007180",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_accelerate": {
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+        "authority_role": "slice_route_model_budget_link_admission_and_validation",
+        "commit": "99b746b02fb2d6535978b3b1ba2a0523764e06f4",
+        "tree": "a2804aad7e0f2d3fbb3f046de008f501f02b1a07",
+        "superproject_gitlink": "99b746b02fb2d6535978b3b1ba2a0523764e06f4",
+        "configured_origin_main": "024bf40a6c35735b84e7faff844f862dec63abf3",
+        "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "a9ab7e480237608a30f3f73ba7ecc9575e05ff6d",
+        "configured_origin_main_tree_equals_planning_tree": false,
+        "prior_pcsm_004_origin_main_still_ancestor": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
+        "prior_pcsm_010_v3_commit_still_ancestor": "589229c87ff8dbfca43e95b8e6b8088ebbe34f24",
+        "scheduler_planning_revision": "99b746b02fb2d6535978b3b1ba2a0523764e06f4",
+        "scheduler_planning_tree": "a2804aad7e0f2d3fbb3f046de008f501f02b1a07",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_datasets": {
+        "repository": "endomorphosis/ipfs_datasets_py",
+        "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+        "authority_role": "canonical_semantic_identity",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "superproject_gitlink": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "configured_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
+        "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "7169c2a67929044a02350bc26d0a51c853a4981b",
+        "configured_origin_main_tree_equals_planning_tree": false,
+        "scheduler_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "scheduler_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "datasets_proof_context_current_head_handoff_commit_matches": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_kit": {
+        "repository": "endomorphosis/ipfs_kit_py",
+        "origin": "https://github.com/endomorphosis/ipfs_kit_py",
+        "authority_role": "exact_bytes_cid_and_immutable_storage",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "superproject_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "configured_origin_main": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
+        "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "543ccd2bd78994d4e3d55cd44993ae6ca65e4c28",
+        "configured_origin_main_tree_equals_planning_tree": false,
+        "scheduler_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "scheduler_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      }
+    },
+    "excluded_gitlinks_not_admitted": [
+      {
+        "path": "external/meta-wearables-dat-android",
+        "superproject_gitlink": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/meta-wearables-dat-ios",
+        "superproject_gitlink": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "hallucinate_app",
+        "superproject_gitlink": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "swissknife",
+        "superproject_gitlink": "75931db15273786ecd579f1089ec5599b9ded352",
+        "admitted": false,
+        "evidence_kind": "measured"
+      }
+    ],
+    "freshness_rule": "Any changed outer commit/tree, admitted nested commit/tree/gitlink, dirty nested worktree, or scheduler source_binding planning identity invalidates this selection and requires a fresh receipt. Planning revisions are not runtime completion evidence. Datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b, accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d, and kit origin/main tree 543ccd2bd78994d4e3d55cd44993ae6ca65e4c28 are ancestor identities, not admitted planning trees.",
+    "freshness_evidence_kind": "measured",
+    "freshness_check": {
+      "kind": "measured",
+      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git status --porcelain=v1; git -C <gitlink> status --porcelain=v1; git merge-base --is-ancestor <configured origin/main> HEAD; compare nested HEAD/tree to scheduler source_binding planning revision/tree",
+      "result": "pass",
+      "meaning": "The outer tree and all four admitted nested worktrees were clean before this receipt was written. Each admitted nested commit equals the superproject gitlink and the scheduler planning revision; each nested tree equals the scheduler planning tree. Configured origin/main is an ancestor of each nested head. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+    },
+    "source_digest_continuity": {
+      "kind": "measured",
+      "result": "first_pcsm_012_issuance; slice_authority_bytes_unchanged_from_g100_and_pcsm_010; nested_accelerate_gitlink_moved",
+      "prior_pcsm_012_receipt": "none",
+      "predecessor_receipts": [
+        "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v4",
+        "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v3",
+        "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v3",
+        "urn:pcsm:task-receipt:PCSM-003@current-head-inventory-v2",
+        "urn:pcsm:task-receipt:PCSM-004@current-head-canonical-versus-projection-boundary-v1",
+        "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v3"
+      ],
+      "prior_pcsm_010_receipt": "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v3",
+      "prior_pcsm_010_receipt_sha256": "1d1b1fe304921cf7b672759958a255a75b02fccddeaab66e70e98440e0dcc566",
+      "prior_pcsm_010_receipt_git_blob": "d3f80a023ff7ea3a8703465e40f5164ef0e6d593",
+      "nested_gitlinks_changed_versus_pcsm_010_v3": [
+        "external/ipfs_accelerate"
+      ],
+      "nested_gitlinks_unchanged_versus_pcsm_010_v3": [
+        "Mcp-Plus-Plus",
+        "external/ipfs_datasets",
+        "external/ipfs_kit"
+      ],
+      "selected_authority_source_bytes_unchanged_versus_pcsm_004_and_pcsm_010": [
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py"
+      ],
+      "outer_commit_moved": "Predecessor PCSM-010 v3 bound outer commit 57bf1084f9ca39a608dc43389a458b1fdf72a047 and tree 5e9330a8908767a6ab68061f7007cfe4ac1742fa. Current outer commit is 457fcbd243d99a4c0f0eda420b0da1a07fad8cf0 and tree 8b7578409f46e209835794b76d14a4e5e64548c1. Accelerator gitlink moved 589229c87ff8dbfca43e95b8e6b8088ebbe34f24 -> 99b746b02fb2d6535978b3b1ba2a0523764e06f4. Datasets, kit, and MCP++ gitlinks are unchanged from PCSM-010 v3. Selected ContextPack, capsule, binding, sufficiency, and accelerator delegation SHA-256/git-blob identities were re-hashed and matched PCSM-004 and PCSM-010.",
+      "meaning": "This is the first PCSM-012 receipt. Predecessor G100 and PCSM-010 receipts cannot be reused as current-head forest identity because the outer commit/tree, accelerator gitlink, and scheduler-config digest moved. The selected TaskSemanticSlice source bytes themselves are unchanged."
+    },
+    "pcsm_source_map": {
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID is present at this selection task. Related syntax-core maps, legal-IR maps, and accelerator AST spans are not substituted for a bound PCSM SourceLinkReceipt.",
+      "evidence_kind": "unavailable"
+    },
+    "stale_prior_receipt_rejected": {
+      "kind": "measured",
+      "prior_pcsm_012_artifact_identity": "none",
+      "predecessor_outer_commits_rejected_as_current_head": [
+        "4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d",
+        "1f7d0a9c10abbdefb1255e812df173a8e40f4d85",
+        "7c641864b2f224cd1cee906bce8eed7bee3d8360",
+        "7e6f00774a53025d55904b71b0410a4f5c3f5fb3",
+        "57bf1084f9ca39a608dc43389a458b1fdf72a047"
+      ],
+      "result": "no_prior_pcsm_012_to_reject; predecessor_outer_identities_rejected_as_current_head",
+      "meaning": "No previously committed PCSM-012 receipt exists. Predecessor G100 and PCSM-010 receipts remain valid inventories/selections of their bound trees but are not current-head forest identity for this task."
+    }
+  },
+  "policy_bindings": {
+    "scheduler_config": {
+      "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
+      "sha256": "2c3121e96646692fe285a0aaf8d23384b8e969d2520f48620eb8422cddac2d6a",
+      "git_blob": "cfa996ac1cb4e9e977ff9719c4e586f40c63858f",
+      "accepted_plan_revision_alias": "PCSM-PLAN-V1",
+      "source_binding_policy": {
+        "require_initialized_gitlinks": true,
+        "require_superproject_gitlink_equals_nested_head": true,
+        "require_clean_nested_worktree_at_task_start": true,
+        "require_origin_main_as_ancestor": true,
+        "changed_revision_requires_fresh_inventory_and_baseline": true,
+        "planning_revision_is_runtime_completion_evidence": false,
+        "record_recursive_repository_forest_at_launch": true
+      },
+      "authority_policy": {
+        "canonical_semantic_authority": "ipfs_datasets_py",
+        "exact_bytes_storage_authority": "ipfs_kit_py",
+        "orchestration_admission_authority": "ipfs_accelerate_py",
+        "duckdb_transactional_authority": true,
+        "ducklake_projection_authority": false,
+        "m2_or_m3_mutation_authority": false,
+        "m3_status": "experimental_advisory_only",
+        "model_or_advisor_output_is_completion_authority": false
+      },
+      "operational_control_plane": {
+        "duckdb_role": "authoritative transactional goals, tasks, lifecycle, CAS, fences, receipts, and event cursor",
+        "ducklake_role": "rebuildable non-authoritative append-only analytics projection",
+        "markdown_is_bootstrap_only": true,
+        "generated_runtime_artifacts_are_completion_authority": false
+      },
+      "pcsm_004_scheduler_digest_rejected_as_current": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
+      "pcsm_010_v3_scheduler_digest_rejected_as_current": "86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137",
+      "evidence_kind": "measured"
+    },
+    "plan": {
+      "path": "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md",
+      "sha256": "5031a4e4588ef9f6589199f37e3551c5c059c25f7a04cbf9f3ec00f3f026ae0e",
+      "git_blob": "d76fbc8f9a37648c5ddbaa5b198223121b9d2231",
+      "evidence_kind": "measured"
+    },
+    "objectives": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
+      "sha256": "712c844b2a40856a677f5d7258d6bfdcb1f3ec08410e026922c93c4f6951121b",
+      "git_blob": "9f97656be213dc0f898701a04c851376b5eb6f16",
+      "dispatch_objective_revision_cid": "baguqeerarvrvet7jztnylrkn2nxdfpkxuu5nuuyrcrn6i3jw3m3ewfgcsceq",
+      "dispatch_objective_revision_cid_source": "current implementation dispatch packet; not a git blob and not substituted for the file SHA-256",
+      "evidence_kind": "measured"
+    },
+    "task_specification": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
+      "sha256": "63e745843899d95ac59e7080a2b744c87e7ac929871125d1b6efc8e392e4bfbe",
+      "git_blob": "a34f3b5773fc0a48b9665bc76e75f9e0a44fa682",
+      "evidence_kind": "measured"
+    },
+    "implementation_policy": {
+      "policy_id": "policy:implementation-daemon",
+      "policy_revision": "sha256:1dd449078e11230b9e87747af157b546e2e598ff605e483758b3a79cac5b82af",
+      "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+      "canonical_task_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include a canonical_task_cid. Database task-projection value baguqeeraoueelzng4kjxz4pv423sznqseyq6ccs6xdd32qrpyi7uoavvmeza has projection_authority=false and is not substituted for dispatch or runtime completion evidence.",
+        "evidence_kind": "unavailable"
+      },
+      "accepted_plan_root_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include an accepted_plan_root_cid. Database task-projection value baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla has projection_authority=false and is not substituted for dispatch or runtime completion evidence.",
+        "evidence_kind": "unavailable"
+      },
+      "dependency_task_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include a dependency_task_cid. Database task-projection value baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa has projection_authority=false and is not substituted for dispatch or runtime completion evidence.",
+        "evidence_kind": "unavailable"
+      },
+      "source": "current implementation dispatch packet",
+      "evidence_kind": "measured"
+    },
+    "datasets_proof_context_current_head_handoff": {
+      "path": "artifacts/proof_carrying_semantic_minification/handoff/datasets-proof-context-current-head.json",
+      "sha256": "b57d70264e9557adb901db4e8ad147bad98204958ec5bf078be84bd6ad247326",
+      "git_blob": "f89a54f9ef7b14a5289cd8c6265b6107808d5727",
+      "bound_datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "bound_datasets_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "matches_admitted_datasets_gitlink": true,
+      "evidence_kind": "measured"
+    }
+  },
+  "task_semantic_slice": {
+    "contract": "TaskSemanticSlice@1",
+    "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-semantic-slice-selection@1",
+    "status": "selected_existing_authority",
+    "language_scope": "Python v1 only",
+    "confirmed": true,
+    "evidence_kind": "measured",
+    "selection": {
+      "decision": "reuse_existing_context_coverage_manifest_bound_to_datasets_context_pack_as_task_semantic_slice",
+      "owner": "ipfs_datasets_py",
+      "selected_schema": "ipfs-datasets.software-contracts.semantic-governor-context-coverage-manifest@1",
+      "selected_interface": "ContextCoverageManifest@1",
+      "selected_builder_interface": "build_context_coverage_manifest@1",
+      "selected_builder_schema": "ipfs-datasets.software-contracts.semantic-governor-coverage-builder@1",
+      "identity_envelope": {
+        "authority": "ipfs_datasets_py.proof_context.context_pack",
+        "interface": "DatasetsContextPackAuthority@0.1",
+        "schema": "ipfs-datasets.proof-context.v0.1",
+        "view_schema": "ipfs-datasets.software-contracts.semantic-governor-context-pack-view@1"
+      },
+      "member_unit": {
+        "schema": "ipfs-datasets.software-contracts.semantic-capsule@1",
+        "compiler_interface": "SemanticCapsuleCompiler@1",
+        "compiler_schema": "ipfs-datasets.software-contracts.semantic-capsule-compiler@1",
+        "role": "per_symbol_member_not_the_task_slice"
+      },
+      "python_v1_producer": {
+        "coverage_builder": "build_context_coverage_manifest",
+        "pack_builder": "build_context_pack",
+        "sufficiency_evaluator": "evaluate_context_sufficiency@1",
+        "never_rescans_repository": true,
+        "never_invents_graph_edges": true,
+        "identical_inputs_yield_identical_manifest_cid": true
+      },
+      "identifier_status": {
+        "task_semantic_slice_string_in_nested_repositories": false,
+        "task_semantic_slice_registered_as_software_contract_schema": false,
+        "context_coverage_manifest_module_constant_present": true,
+        "context_coverage_manifest_registered_in_dscon_g105_schema_versions": false,
+        "meaning": "TaskSemanticSlice@1 is a receipt-bound selection alias of ContextCoverageManifest@1 bound to a DatasetsContextPackAuthority@0.1 pack CID. It is not a second registered schema and is not present as an identifier in the four nested repositories. DSCON-G105 schema_versions.py registers only ast-ir@1.0.0 and frontend-capability@1.0.0; capsule and coverage-manifest identifiers live as module constants, not in that registry."
+      },
+      "covers": [
+        "task-bound capsule CID set and exact required source CIDs",
+        "target symbol IDs for one ContextPack",
+        "closed inclusion kinds: raw_source, exact_capsule, conservative_capsule, proof, test, schema, configuration, fixture, state_read, state_write",
+        "closed exclusion reasons with graph or state binding",
+        "known coverage gaps and opaque dependency IDs",
+        "token budget, included/excluded token totals, and raw versus capsule inclusion counts",
+        "deterministic manifest_cid and pack_cid from identical verified inputs",
+        "fail-closed stale, unavailable, and opaque-without-exact-tree pack minting"
+      ],
+      "does_not_cover": [
+        "per-symbol SemanticCapsule@1 identity (member unit; PCSM-011)",
+        "full SemanticStateBundle / SemanticStateRoot (not task-sliced)",
+        "PCSM completeness witness (PCSM-033)",
+        "tokenizer-facing ProofCarryingSemanticProjection@1 or ProjectionAliasDictionary@1",
+        "accelerator PTR SemanticSliceManifest@1 test-reuse plan record",
+        "SourceLinkReceipt@1 or M1 source linking",
+        "TypeScript or non-Python v1 slices"
+      ],
+      "authoritative_chain": {
+        "order": [
+          "canonical_semantic_cid",
+          "local_projection_alias",
+          "typed_output",
+          "canonical_semantic_cid",
+          "exact_current_tree_node_or_span"
+        ],
+        "statement": "A local alias is never canonical identity. TaskSemanticSlice identity is the datasets ContextCoverageManifest CIDv1 bound to a DatasetsContextPackAuthority@0.1 pack CID, not a projection alias, DuckDB row, model output, or accelerator PTR slice.",
+        "source": "PCSM-004 CanonicalVersusProjectionAuthorityBoundary@1 plus current-head coverage-manifest and ContextPack schemas",
+        "evidence_kind": "measured"
+      }
+    },
+    "current_sources": [
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/audit_contracts.py",
+        "sha256": "de7d8884494c6fd1d5fe2864c8da969036967cc3722fd5d0eac5dc04f9c6cd78",
+        "git_blob": "89c4ed8c871a6d9e3f3913b0377d876550ea81be",
+        "role": "selected_task_semantic_slice_schema_owner",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/coverage.py",
+        "sha256": "feb4b320b10e65bf340e60be20b7b7e3bdb5426bbbff2df5f93fc8a26b2cf33f",
+        "git_blob": "4960d2cc37aaf93e3030d0aeb3a251ed6d5a4cf4",
+        "role": "python_v1_slice_coverage_builder",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+        "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+        "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+        "role": "task_bound_identity_envelope",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
+        "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182",
+        "git_blob": "8e738fa2d21eba5db7258d3c630f550c5cb8be51",
+        "role": "datasets_proof_context_port_not_task_semantic_slice",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
+        "sha256": "6a8a72bb02f0ad21eb355d8a48e143f0a06db30fc93eb52dde38f015da01965c",
+        "git_blob": "77a4ba670303ac9c2a5ffe0fbfc1c7e9260d371e",
+        "role": "context_pack_view_and_sufficiency_not_completeness_witness",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+        "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d",
+        "git_blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
+        "role": "semantic_capsule_member_unit_not_task_slice",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/models.py",
+        "sha256": "488fa256322807b895a3f7e277fef5b4d5dc6ac1f3619696a6c288340aae0586",
+        "git_blob": "b86dae240c3f90bc3de0967bd7cde14f795c53b4",
+        "role": "semantic_capsule_and_test_selection_records",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/test_selection.py",
+        "sha256": "ef59615ecb9a0a09a06b0da4f1aed962eaa7becae0e93e5829971c2fa6bb9e6a",
+        "git_blob": "bdf50221a97a7b48cc4a901bf56912751264b8d5",
+        "role": "test_and_proof_cone_companion_not_task_slice",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+        "sha256": "268ff6aab60e3a8a2e5e9719b637edfd1efb7bc50a4310bd4b1f2660b04cdfcc",
+        "git_blob": "234fea82b071c80f9f7ddc8b33909257cdf6400c",
+        "role": "per_symbol_binding_projection_not_task_slice",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/schema_versions.py",
+        "sha256": "fd7270cada2126606c00870dcb7291d27d7f8182e0e861d4f83905031668bbc6",
+        "git_blob": "016f1d4678dea65ef17ce08ef16edca1ae22cad7",
+        "role": "dscon_g105_registry_does_not_name_task_semantic_slice",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+        "sha256": "698ae219ec099160dbc8d1d36b49a81df9a3fcec32ea590fb54ed6bc5471772d",
+        "git_blob": "f2263a6acb88b58b471bcc2e95e8ffa11e234e8c",
+        "role": "accelerator_delegate_not_slice_authority",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+        "sha256": "fd72987f59219b466e0aa3dd7f65ba5ddb23eeb135ddf6849c92d8ea9dfffcef",
+        "git_blob": "7ca43d6b64903aebd9cb85923958ed0d529fb09b",
+        "role": "context_packer_projection_not_task_slice",
+        "evidence_kind": "measured"
+      }
+    ],
+    "sealed_interpreter_identity_checks": {
+      "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=$ipfs-accelerate-validation-home-* PYTHONNOUSERSITE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 importing coverage, audit, context_pack, capsules, sufficiency, test_selection, and schema_versions constants",
+      "context_coverage_manifest_interface": "ContextCoverageManifest@1",
+      "context_coverage_manifest_schema": "ipfs-datasets.software-contracts.semantic-governor-context-coverage-manifest@1",
+      "coverage_builder_interface": "build_context_coverage_manifest@1",
+      "coverage_builder_schema": "ipfs-datasets.software-contracts.semantic-governor-coverage-builder@1",
+      "pack_authority": "ipfs_datasets_py.proof_context.context_pack",
+      "pack_interface": "DatasetsContextPackAuthority@0.1",
+      "port_schema": "ipfs-datasets.proof-context.v0.1",
+      "capsule_schema": "ipfs-datasets.software-contracts.semantic-capsule@1",
+      "capsule_compiler_interface": "SemanticCapsuleCompiler@1",
+      "test_selection_interface": "TestSelection@1",
+      "proof_selection_interface": "ProofSelection@1",
+      "context_pack_view_schema": "ipfs-datasets.software-contracts.semantic-governor-context-pack-view@1",
+      "sufficiency_interface": "evaluate_context_sufficiency@1",
+      "get_schema_version_ast_ir": "registered",
+      "get_schema_version_task_semantic_slice": "SchemaVersionError unknown shared schema: TaskSemanticSlice@1",
+      "get_schema_version_task_semantic_slice_schema": "SchemaVersionError unknown shared schema: ipfs-datasets.software-contracts.task-semantic-slice@1",
+      "get_schema_version_context_coverage_manifest": "SchemaVersionError unknown shared schema: ContextCoverageManifest@1",
+      "get_schema_version_semantic_capsule": "SchemaVersionError unknown shared schema: ipfs-datasets.software-contracts.semantic-capsule@1",
+      "live_sample_cid_roundtrip": "unavailable; cid_for_bytes requires multiformats which is absent from the sealed interpreter without user site-packages",
+      "evidence_kind": "measured"
+    },
+    "negative_assertions": [
+      "TaskSemanticSlice@1 is not a second registered software-contract schema.",
+      "The identifier TaskSemanticSlice is absent from Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit.",
+      "SemanticCapsule@1 is the per-symbol member unit, not the task slice.",
+      "SemanticStateBundle / SemanticStateRoot is full producer state, not a task-relevant slice.",
+      "TestSelection@1 / ProofSelection@1 is the test/proof cone companion, not TaskSemanticSlice.",
+      "RelevantBindingProjection is a per-symbol binding subset, not a task slice.",
+      "ContextSufficiencyClaim@1 is pre-execution sufficiency, not the PCSM-033 completeness witness.",
+      "ContextPacker.V01_PRODUCTION_AUTHORITY is False; DatasetsContextPackAuthority@0.1 remains the production identity envelope.",
+      "Accelerator PTR SemanticSliceManifest@1 exists only as a plan-document identifier in AGENT_SUPERVISOR_PROOF_CARRYING_TEST_REUSE_PLAN.md; no Python or JSON implementation exists and it is not datasets semantic identity.",
+      "proof_context remains DatasetsProofContextProvider@0.1 / ContextPack authority; adding a TaskSemanticSlice wrapper there would duplicate the selected coverage-manifest authority.",
+      "Kit stores exact IR/source/projection bytes and does not own the slice schema.",
+      "MCP++ proof-context schemas are wire_contract_only.",
+      "A local projection alias, DuckLake row, Markdown board row, model output, M2 result, or M3 result is not TaskSemanticSlice identity.",
+      "This receipt creates no competing owner, proof_context wrapper, compiler, or language-scope expansion."
+    ]
+  },
+  "existing_equivalents": [
+    {
+      "system": "Datasets ContextCoverageManifest and coverage builder",
+      "disposition": "selected_as_task_semantic_slice",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "ContextCoverageManifest@1",
+        "ipfs-datasets.software-contracts.semantic-governor-context-coverage-manifest@1",
+        "build_context_coverage_manifest@1",
+        "ipfs-datasets.software-contracts.semantic-governor-coverage-builder@1"
+      ],
+      "finding": "ContextCoverageManifest@1 is the closed coverage inventory for one ContextPack: target symbols, inclusions, exclusions, known gaps, opaque dependencies, token budgets, and raw versus capsule inclusion counts. build_context_coverage_manifest@1 attributes verified views only, never rescans a repository, never invents graph edges, rejects heuristic exclusion of critical dependencies, preserves exact capsules and exact required raw spans, and yields identical manifest_cid for identical inputs. This is the selected TaskSemanticSlice inventory.",
+      "reuse_decision": "Select this schema as TaskSemanticSlice@1. Do not fork a second slice schema or add a proof_context wrapper."
+    },
+    {
+      "system": "Datasets ContextPack production identity",
+      "disposition": "selected_as_task_bound_identity_envelope",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "DatasetsContextPackAuthority@0.1",
+        "ipfs-datasets.proof-context.v0.1",
+        "ipfs-datasets.software-contracts.semantic-governor-context-pack-view@1",
+        "build_context_pack"
+      ],
+      "finding": "build_context_pack binds task_id, repository_state_cid, capsule_cids, required source CIDs, scanned_tree_oid, and freshness into a deterministic pack CID. Stale, unavailable, and opaque-without-exact-tree cases fail closed. ContextPackView requires coverage_manifest.header.context_pack_cid to equal context_pack_cid. This envelope is not a second slice schema and is not a tokenizer-facing projection.",
+      "reuse_decision": "Select as the task-bound identity envelope of TaskSemanticSlice. Do not promote ContextPacker."
+    },
+    {
+      "system": "Datasets SemanticCapsule compiler",
+      "disposition": "reuse_as_member_unit_not_task_slice",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "SemanticCapsule@1",
+        "ipfs-datasets.software-contracts.semantic-capsule@1",
+        "SemanticCapsuleCompiler@1"
+      ],
+      "finding": "A SemanticCapsule is the deterministic authoritative record for one symbol version. Capsules never reference other capsule or symbol-node CIDs as dependencies. source_slice_path is a per-symbol path field, not TaskSemanticSlice@1. PCSM-011 names this member-unit contract separately.",
+      "reuse_decision": "Reuse as slice members. Do not treat a capsule as the task slice."
+    },
+    {
+      "system": "Datasets test and proof selection",
+      "disposition": "reuse_as_companion_not_task_slice",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "TestSelection@1",
+        "ProofSelection@1",
+        "ipfs-datasets.software-contracts.semantic-test-selection@1"
+      ],
+      "finding": "TestSelection walks reverse callers/imports, fixtures, schemas, proofs, and deletion evidence and fails closed into visible full fallback on dynamic plugins, opaque reachability, or unknown universe. It selects tests/proofs for a change cone; it does not inventory the task-relevant semantic slice.",
+      "reuse_decision": "Reuse as the test/proof cone companion. Do not promote it to TaskSemanticSlice."
+    },
+    {
+      "system": "Datasets RelevantBindingProjection",
+      "disposition": "reuse_as_per_symbol_projection_not_task_slice",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "RelevantBindingProjection"
+      ],
+      "finding": "Bindings-owned per-symbol relevant projection consumed by SemanticCapsuleCompiler@1. PCSM-004 already recorded it as a projection of capsule compilation, not capsule or CanonicalCodeIR identity.",
+      "reuse_decision": "Reuse as a per-symbol companion. Do not promote it to TaskSemanticSlice."
+    },
+    {
+      "system": "Datasets context sufficiency claim",
+      "disposition": "reuse_as_sufficiency_not_completeness_witness",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "ContextSufficiencyClaim@1",
+        "evaluate_context_sufficiency@1"
+      ],
+      "finding": "Pre-execution sufficiency joins coverage, repository-state signals, and task-class acceptance. It is not the named PCSM-033 completeness witness and does not establish that omitted leaves never mattered.",
+      "reuse_decision": "Reuse as a related sufficiency claim. Completeness witness remains PCSM-033."
+    },
+    {
+      "system": "Accelerator ContextPacker and semantic_bridge",
+      "disposition": "do_not_promote_to_task_semantic_slice",
+      "authority": "ipfs_accelerate_py compatibility consumer",
+      "interfaces": [
+        "CONTEXT_PACK_V01_AUTHORITY",
+        "ContextPacker"
+      ],
+      "finding": "CONTEXT_PACK_V01_AUTHORITY equals ipfs_datasets_py.proof_context.context_pack. ContextPacker.V01_PRODUCTION_AUTHORITY is False. semantic_bridge delegates and must not reconstruct packs.",
+      "reuse_decision": "Keep as a non-authoritative consumer. Do not treat token-budget packing as TaskSemanticSlice."
+    },
+    {
+      "system": "Accelerator PTR SemanticSliceManifest@1",
+      "disposition": "do_not_select",
+      "authority": "none in admitted Python/JSON; plan document only",
+      "interfaces": [
+        "SemanticSliceManifest@1"
+      ],
+      "finding": "The identifier occurs only in external/ipfs_accelerate/docs/architecture/AGENT_SUPERVISOR_PROOF_CARRYING_TEST_REUSE_PLAN.md. No Python module, JSON schema, or test implements it. Predicted path ipfs_accelerate_py/agent_supervisor/validation/semantic_slice.py is absent. PTR test-reuse slices are accelerator validation surfaces, not datasets-owned PCSM Python v1 semantic identity.",
+      "reuse_decision": "Do not select. Do not treat a plan identifier as a live contract."
+    },
+    {
+      "system": "Datasets proof-context port",
+      "disposition": "do_not_relocate_task_semantic_slice_here",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "ipfs-datasets.proof-context.v0.1",
+        "DatasetsProofContextProvider@0.1",
+        "DatasetsContextPackAuthority@0.1"
+      ],
+      "finding": "proof_context owns ContextPack construction and the v0.1 provider port. It already consumes ContextCoverageManifest when minting packs. Adding a TaskSemanticSlice wrapper there would create a competing identifier without adding schema authority and exceeds this task's admitted declared output.",
+      "reuse_decision": "Leave proof_context unchanged. TaskSemanticSlice remains the coverage-manifest bound to the pack CID."
+    }
+  ],
+  "version_and_cid_controls": {
+    "schema_bound": true,
+    "current_tree_bound": true,
+    "content_addressing_bound": true,
+    "relevant_controls": [
+      "Selected TaskSemanticSlice identity is datasets ContextCoverageManifest CIDv1 bound to a DatasetsContextPackAuthority@0.1 pack CID.",
+      "Identical verified coverage inputs yield identical manifest_cid; identical pack inputs yield identical pack_cid.",
+      "ContextPackView fails closed when coverage_manifest.header.context_pack_cid disagrees with context_pack_cid.",
+      "Stale, unavailable, and opaque-without-exact-scanned-tree pack minting fail closed.",
+      "Coverage builder rejects heuristic exclusion of critical dependencies, unknown exclusion reasons, include/exclude overlap, budget overflow, and missing target inclusion.",
+      "get_schema_version('TaskSemanticSlice@1') fails closed; the name is a receipt-bound selection alias.",
+      "A local projection alias is never substituted for a canonical semantic CID.",
+      "Kit remains exact-byte/CID storage authority and does not own this schema."
+    ],
+    "sample_manifest_cid": {
+      "status": "unavailable",
+      "reason": "Live CID minting of a sample ContextCoverageManifest requires multiformats, which is absent from the sealed interpreter when user site-packages are disabled. Existing golden CID tests are inventoried from source and not re-executed here.",
+      "evidence_kind": "unavailable"
+    },
+    "receipt_cid": {
+      "status": "unavailable",
+      "reason": "ipfs was absent from the sealed validation PATH and no admitted immutable receipt-store write was available. A SHA-256 string is not substituted for a CID.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "minimum_versioned_delta": {
+    "status": "receipt_bound_selection_only",
+    "named_contract": "TaskSemanticSlice@1",
+    "selected_existing_schema": "ipfs-datasets.software-contracts.semantic-governor-context-coverage-manifest@1",
+    "reason": "The identifier TaskSemanticSlice@1 is unregistered and absent from nested source. Existing ContextCoverageManifest@1 already inventories the smallest task-relevant inclusion/exclusion/gap set for one ContextPack, and DatasetsContextPackAuthority@0.1 already binds that inventory to task_id, capsule CIDs, exact source CIDs, and scanned tree. Naming that composition as TaskSemanticSlice@1 in this receipt is the smallest Python v1 delta. Implementing a proof_context wrapper or new schema would duplicate authority and exceeds declared outputs.",
+    "reuse_first_decision": {
+      "task_semantic_slice": "select ContextCoverageManifest@1 bound to DatasetsContextPackAuthority@0.1",
+      "python_v1_producer": "select build_context_coverage_manifest@1 plus build_context_pack",
+      "member_unit": "reuse SemanticCapsule@1; do not promote a capsule to the slice",
+      "test_proof_cone": "reuse TestSelection@1 / ProofSelection@1; do not promote",
+      "binding_projection": "reuse RelevantBindingProjection; do not promote",
+      "sufficiency": "reuse ContextSufficiencyClaim@1; completeness witness remains PCSM-033",
+      "ptr_semantic_slice_manifest": "do not select; plan-document only",
+      "proof_context": "leave unchanged; it is ContextPack authority",
+      "projection_and_aliases": "defer to PCSM-014/PCSM-015",
+      "source_linker": "defer to PCSM-051/PCSM-052/PCSM-057"
+    },
+    "required_follow_on_tasks": [
+      "PCSM-011",
+      "PCSM-015",
+      "PCSM-030",
+      "PCSM-031",
+      "PCSM-032",
+      "PCSM-033",
+      "PCSM-036"
+    ],
+    "non_promotion_effect": "No PCSM compiler, CFG/data-flow IR, source linker, alias dictionary, tokenizer projection, or automatic mutation is admitted by this task.",
+    "evidence_kind": "measured"
+  },
+  "coverage": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_governor/test_coverage.py",
+        "sha256": "0196618fb93bc58e510879fa7c5bdfdc0038cc5531ab50bc2fcd0a9ddd4a5ce0",
+        "git_blob": "d41c38c8a4ac418262a701010061d9a45eb0fdba",
+        "coverage": [
+          "identical inputs yield identical manifest_cid and order independence",
+          "exact capsules and exact required raw spans are not force-expanded",
+          "critical heuristic irrelevance, unknown exclusion reasons, overlap, budget overflow, and missing target inclusion reject"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_governor/test_audit_contracts.py",
+        "sha256": "76eb6d364f23d55515c7607c561bdfa85b6a879e13463b01c8b8927379b4da30",
+        "git_blob": "00985147b329059b82a75d1a01ae0a98ede1f0b8",
+        "coverage": [
+          "closed exclusion reasons and graph/state binding",
+          "inconsistent token totals, over-budget inclusions, and path/span escape reject",
+          "verification-pass-only cannot establish sufficient"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+        "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+        "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+        "coverage": [
+          "identical inputs yield identical ContextPack CID",
+          "stale, unavailable, and opaque wrong-tree inputs fail closed"
+        ],
+        "note": "Required validation path. These tests cover the identity envelope of TaskSemanticSlice, not a new TaskSemanticSlice schema.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_capsules.py",
+        "sha256": "849e4b9ba7e034d9ff0c7435d13091e84031669f895302e5524a91d3d18b0769",
+        "git_blob": "82ec04a927c76bf35a8dab258644c1aacbb7e5d4",
+        "coverage": [
+          "deterministic capsule compilation and producer-key binding",
+          "capsules never reference other capsule or node CIDs as dependencies",
+          "tampered previous blocks and unknown symbols fail closed"
+        ],
+        "note": "Covers the member unit, not TaskSemanticSlice.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_test_selection.py",
+        "sha256": "f400da29ebffca3d7acc0c24ae9e85ad0266cb00944ef52b10de310e08819286",
+        "git_blob": "cacc9462997c3e981c7ad6a415d61b399732573c",
+        "coverage": [
+          "direct, reverse-caller, fixture, and proof selection",
+          "dynamic plugin, opaque reachability, unknown universe, and root-CID mismatch fail closed"
+        ],
+        "note": "Covers the test/proof cone companion, not TaskSemanticSlice.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_governor/test_sufficiency.py",
+        "sha256": "3ddb385957a21c3b98befaebac358ab3c7a90a0bef5d0e94be79df4cc682a674",
+        "git_blob": "abe8cc1e2abb4a61b534b08626a3220f4d15f651",
+        "coverage": [
+          "pre-execution sufficiency evaluation"
+        ],
+        "note": "Covers ContextSufficiencyClaim, not the PCSM-033 completeness witness.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_provider.py",
+        "sha256": "f3d15f7780ea3ffa561a21880ff4e26f65f096818e70c14d8e56ab01f65329b3",
+        "git_blob": "d9b32641e22d9fd026570907e79cfcceafa8c23a",
+        "coverage": [
+          "datasets v0.1 provider port"
+        ],
+        "note": "Required validation path. These tests cover the proof-context provider, not TaskSemanticSlice.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
+        "sha256": "ea4ef0ee64e83b65238c18960c6e49aa071753252842cf57fd68a50ac6cf9892",
+        "git_blob": "fe531c0d76397442bc6a248131ec038d67338472",
+        "coverage": [
+          "datasets v0.1 semantic outcome records"
+        ],
+        "note": "Required validation path. These tests do not define TaskSemanticSlice.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+        "sha256": "1a30652e469c5010acc895a62893e0c1fe590c4b6891ddc7794ce2e160a1b5e5",
+        "git_blob": "81319a0e160c88d064b8eea4f7e7d2952de6b666",
+        "coverage": [
+          "datasets proof-context assurance specification"
+        ],
+        "note": "Required validation path. These tests do not define TaskSemanticSlice.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_install_profile.py",
+        "sha256": "298b403794366cf76cb9615d007ae9ff91c4fd474f835ef33558272d9dca13d1",
+        "git_blob": "f55679341bdd5cc6ff0dbfaece0967ecc4effde3",
+        "coverage": [
+          "datasets proof-context install profile"
+        ],
+        "note": "Required validation path. These tests do not define TaskSemanticSlice.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      }
+    ],
+    "required_validation_suite": {
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "source_test_function_count": 189,
+      "covers_task_semantic_slice": false,
+      "covers_context_pack_identity_envelope": true,
+      "covers_context_pack_and_provider_port": true,
+      "execution": "unavailable_in_sealed_validation_environment"
+    },
+    "PCSM_specific_test_gap": {
+      "kind": "unavailable",
+      "statement": "No current-head test names TaskSemanticSlice@1 because that identifier is a receipt-bound selection of ContextCoverageManifest@1 bound to DatasetsContextPackAuthority@0.1 rather than a new schema. Adjacent coverage-manifest, ContextPack, capsule, and test-selection tests already cover the selected contract and are not relabeled as a new PCSM suite. Required proof_context tests cover ContextPack/provider behavior, not a new TaskSemanticSlice identifier."
+    }
+  },
+  "validation": {
+    "commands": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-012.json"
+    ],
+    "required_command": {
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=$ipfs-accelerate-validation-home-* PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "unavailable",
+      "sealed_result": "python: command not found on sealed PATH. /usr/bin/python3.12 -m pytest with PYTHONNOUSERSITE=1 and a private validation HOME raises ImportError: Error importing plugin 'anyio.pytest_plugin': No module named 'anyio'.",
+      "provider_home_probe_excluded": "A run under operator HOME with user site-packages is not sealed-environment evidence and was not used as a passing result.",
+      "evidence_kind": "unavailable"
+    },
+    "json_parse_command": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-012.json",
+      "status": "passed",
+      "evidence_kind": "measured"
+    },
+    "positive_tests": [
+      {
+        "name": "nested gitlinks, heads, trees, and scheduler planning revisions agree",
+        "status": "passed",
+        "observed_roots": 4,
+        "also_checked": [
+          "nested worktrees clean",
+          "superproject gitlink equals nested head",
+          "scheduler planning revision equals nested head",
+          "scheduler planning tree equals nested tree",
+          "configured origin/main revision is an ancestor of each nested head",
+          "outer origin/main equals accelerator_planning_revision and is an ancestor of outer HEAD",
+          "outer origin/main tree equals accelerator_planning_tree",
+          "listed source SHA-256 and git blob identities match live files",
+          "datasets-proof-context-current-head handoff commit/tree equals admitted datasets gitlink"
+        ],
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "existing ContextCoverageManifest@1 is the selected TaskSemanticSlice inventory",
+        "status": "passed",
+        "method": "Sealed PYTHONNOUSERSITE interpreter imported CONTEXT_COVERAGE_MANIFEST_INTERFACE=ContextCoverageManifest@1, CONTEXT_COVERAGE_MANIFEST_SCHEMA=ipfs-datasets.software-contracts.semantic-governor-context-coverage-manifest@1, BUILD_CONTEXT_COVERAGE_MANIFEST_INTERFACE=build_context_coverage_manifest@1, and COVERAGE_BUILDER_SCHEMA=ipfs-datasets.software-contracts.semantic-governor-coverage-builder@1. ContextCoverageManifest is a closed record.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "DatasetsContextPackAuthority remains the task-bound identity envelope",
+        "status": "passed",
+        "method": "Sealed import confirmed AUTHORITY=ipfs_datasets_py.proof_context.context_pack, INTERFACE=DatasetsContextPackAuthority@0.1, PORT_SCHEMA=ipfs-datasets.proof-context.v0.1, and CONTEXT_PACK_VIEW_SCHEMA=ipfs-datasets.software-contracts.semantic-governor-context-pack-view@1. Accelerator CONTEXT_PACK_V01_AUTHORITY equals that producer string. ContextPacker.V01_PRODUCTION_AUTHORITY is False.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "SemanticCapsule remains the member unit and TestSelection remains the test/proof cone",
+        "status": "passed",
+        "method": "Sealed import confirmed SEMANTIC_CAPSULE_SCHEMA=ipfs-datasets.software-contracts.semantic-capsule@1, SEMANTIC_CAPSULE_COMPILER_INTERFACE=SemanticCapsuleCompiler@1, TEST_SELECTION_INTERFACE=TestSelection@1, and PROOF_SELECTION_INTERFACE=ProofSelection@1.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "selected slice-authority source bytes are unchanged from PCSM-004/PCSM-010",
+        "status": "passed",
+        "method": "Re-hashed context_pack.py, contracts.py, capsules.py, bindings.py, sufficiency.py, semantic_bridge.py, accelerator context_pack.py, and accelerator contracts.py; SHA-256 and git blob identities matched PCSM-004 and PCSM-010 even though the outer tree and accelerator gitlink moved.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "receipt is well-formed JSON under the sealed interpreter",
+        "status": "passed",
+        "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-012.json",
+        "evidence_kind": "measured"
+      }
+    ],
+    "negative_tests": [
+      {
+        "name": "predecessor outer commits are not current-head forest identity",
+        "status": "passed",
+        "method": "Compared current outer commit 457fcbd243d99a4c0f0eda420b0da1a07fad8cf0 and tree 8b7578409f46e209835794b76d14a4e5e64548c1 against predecessor bindings 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, 1f7d0a9c10abbdefb1255e812df173a8e40f4d85, 7c641864b2f224cd1cee906bce8eed7bee3d8360, 7e6f00774a53025d55904b71b0410a4f5c3f5fb3, and 57bf1084f9ca39a608dc43389a458b1fdf72a047; outer identities differed and were rejected as current-head forest identity.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "TaskSemanticSlice@1 is not a registered software-contract schema",
+        "status": "passed",
+        "method": "Sealed get_schema_version('TaskSemanticSlice@1') and get_schema_version('ipfs-datasets.software-contracts.task-semantic-slice@1') raised SchemaVersionError unknown shared schema. get_schema_version('ContextCoverageManifest@1') and get_schema_version('ipfs-datasets.software-contracts.semantic-capsule@1') likewise fail closed because DSCON-G105 schema_versions.py registers only ast-ir and frontend-capability.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "TaskSemanticSlice identifier absence in nested repositories",
+        "status": "passed",
+        "method": "Searched *.py, *.json, and *.md under Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit; TaskSemanticSlice matched zero nested-repository files. CanonicalCodeIR, ModelTokenCostProfile, ProjectionAliasDictionary, ProofCarryingSemanticProjection, SemanticIRPatchPlan, SemanticProjectionExpansionRequest, SemanticProjectionValidationReceipt, and SourceLinkReceipt also matched zero nested-repository files.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "SemanticSliceManifest is not an implemented TaskSemanticSlice",
+        "status": "passed",
+        "method": "SemanticSliceManifest matched one nested markdown plan file and zero Python files. Predicted accelerator semantic_slice.py is absent. The plan identifier was rejected as datasets-owned TaskSemanticSlice identity.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "SemanticCapsule is not TaskSemanticSlice",
+        "status": "passed",
+        "method": "SemanticCapsule is documented as the deterministic authoritative capsule for one symbol version. source_slice_path is a per-symbol path field. Capsules never reference other capsule CIDs as dependencies. This selection does not promote a capsule to the task slice.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "proof_context is not a new TaskSemanticSlice schema owner",
+        "status": "passed",
+        "method": "proof_context/__init__.py and contracts.py expose ipfs-datasets.proof-context.v0.1 / DatasetsProofContextProvider@0.1 only. No TaskSemanticSlice identifier is defined there. context_pack.py already consumes ContextCoverageManifest when minting packs.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "ContextPacker is not TaskSemanticSlice",
+        "status": "passed",
+        "method": "ContextPacker.V01_PRODUCTION_AUTHORITY is False. A claim that the accelerator packer is production slice identity would contradict DatasetsContextPackAuthority@0.1.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "datasets origin/main tree is not admitted planning-tree identity",
+        "status": "passed",
+        "method": "Configured datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b differs from admitted planning tree 6a186a24c424fdce0035033ebbf8a8476d96bbb7 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "accelerator origin/main tree is not admitted planning-tree identity",
+        "status": "passed",
+        "method": "Configured accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d differs from admitted planning tree a2804aad7e0f2d3fbb3f046de008f501f02b1a07 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "kit origin/main tree is not admitted planning-tree identity",
+        "status": "passed",
+        "method": "Configured kit origin/main tree 543ccd2bd78994d4e3d55cd44993ae6ca65e4c28 differs from admitted planning tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "PCSM-004 and PCSM-010 v3 scheduler digests are not current-head scheduler identity",
+        "status": "passed",
+        "method": "Predecessor scheduler SHA-256 values f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446 and 86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137 differ from current 2c3121e96646692fe285a0aaf8d23384b8e969d2520f48620eb8422cddac2d6a and were rejected.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged nested tree identity rejection",
+        "status": "passed",
+        "method": "A same-length all-zero tree value was compared to the measured ipfs_kit tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged ContextCoverageManifest source SHA-256 rejection",
+        "status": "passed",
+        "method": "A same-length all-zero digest was compared to the measured audit_contracts.py SHA-256 de7d8884494c6fd1d5fe2864c8da969036967cc3722fd5d0eac5dc04f9c6cd78 and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "excluded gitlinks are not admitted PCSM source roots",
+        "status": "passed",
+        "method": "Superproject gitlinks swissknife, hallucinate_app, external/meta-wearables-dat-android, and external/meta-wearables-dat-ios were observed and classified admitted=false.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "provider-local pytest and formal tools are not accepted as sealed-environment evidence",
+        "status": "passed",
+        "method": "The authoritative PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin has no unqualified python, pytest CLI, z3, lean, lake, or ipfs. /usr/bin/python3.12 -m pytest under a private validation HOME with PYTHONNOUSERSITE=1 cannot import anyio. Operator-HOME user-site pytest success is excluded.",
+        "evidence_kind": "measured"
+      }
+    ],
+    "proof_results": {
+      "status": "not_selected",
+      "reason": "This receipt-only TaskSemanticSlice selection made no source mutation and no PCSM proof obligation was emitted. Absent optional provers remain unavailable rather than a passing proof result.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "git_version": "git version 2.43.0",
+    "toolchain_directories_writable": false,
+    "validation_home_prefix": "ipfs-accelerate-validation-home-",
+    "PYTHONNOUSERSITE": "1",
+    "evidence_kind": "measured",
+    "optional_capabilities": [
+      {
+        "capability": "pytest CLI and sealed pytest execution of external/ipfs_datasets/tests/proof_context",
+        "status": "unavailable",
+        "reason": "Unqualified python and pytest are absent from the sealed PATH. /usr/bin/python3.12 -m pytest under a private validation HOME with PYTHONNOUSERSITE=1 fails importing plugin anyio.pytest_plugin. A provider-local user-site pytest executable was intentionally excluded.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "multiformats CID minting for a live ContextCoverageManifest sample",
+        "status": "unavailable",
+        "reason": "importing cid_for_bytes without user site-packages raises ModuleNotFoundError: No module named 'multiformats'. Golden CID tests remain source-inventoried.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "IPFS CLI / receipt CID issuance",
+        "status": "unavailable",
+        "reason": "ipfs was absent from the sealed validation PATH. A SHA-256 string is not substituted for a CID.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Z3 prover",
+        "status": "unavailable",
+        "reason": "z3 was absent from the sealed validation PATH; a provider-local z3 executable was intentionally excluded.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Lean and Lake",
+        "status": "unavailable",
+        "reason": "lean and lake were absent from the sealed validation PATH; provider-local Elan tools were intentionally excluded.",
+        "evidence_kind": "unavailable"
+      }
+    ]
+  },
+  "evidence_classification": {
+    "measured": [
+      "Outer HEAD 457fcbd243d99a4c0f0eda420b0da1a07fad8cf0 and tree 8b7578409f46e209835794b76d14a4e5e64548c1.",
+      "Four admitted gitlinks, nested trees, clean nested worktrees, origin/main ancestor checks, and scheduler planning-revision/tree equality.",
+      "Four excluded gitlinks observed and classified not admitted.",
+      "Every listed SHA-256 and git blob identity, including current scheduler-config digest 2c3121e96646692fe285a0aaf8d23384b8e969d2520f48620eb8422cddac2d6a and audit_contracts.py digest de7d8884494c6fd1d5fe2864c8da969036967cc3722fd5d0eac5dc04f9c6cd78.",
+      "Selected schema identifiers ContextCoverageManifest@1, build_context_coverage_manifest@1, DatasetsContextPackAuthority@0.1, SemanticCapsule@1, TestSelection@1, and evaluate_context_sufficiency@1.",
+      "TaskSemanticSlice@1 unregistered; TaskSemanticSlice identifier absent from the four nested roots.",
+      "SemanticSliceManifest present only as a PTR plan-document identifier with zero Python implementations.",
+      "Slice-authority source bytes unchanged from PCSM-004/PCSM-010 despite outer-tree and accelerator gitlink movement.",
+      "Datasets, accelerator, and kit origin/main trees mismatch versus admitted planning trees, with origin/main still an ancestor.",
+      "Sealed PATH, Python 3.12.3, git 2.43.0, non-writable toolchain directories, PYTHONNOUSERSITE schema import, TaskSemanticSlice registry rejection, and json.tool parse of this receipt.",
+      "Existing positive and negative test source declarations were directly inspected.",
+      "Dispatch policy_id, policy_revision, repository_id, and objective revision CID from the current implementation packet."
+    ],
+    "estimated": [],
+    "simulated": [],
+    "unavailable": [
+      "No new registered TaskSemanticSlice@1 schema exists; the name is a receipt-bound selection of ContextCoverageManifest@1 bound to DatasetsContextPackAuthority@0.1.",
+      "PCSM completeness witness, ProofCarryingSemanticProjection@1, ProjectionAliasDictionary@1, and SourceLinkReceipt@1 remain absent.",
+      "No emitted PCSM current-tree source-map artifact or source-map CID.",
+      "Required proof_context pytest suite is not runnable in the sealed validation HOME; operator-HOME user-site success is excluded.",
+      "Live sample ContextCoverageManifest CID minting is unavailable without multiformats in the sealed interpreter.",
+      "No immutable receipt CID could be issued because ipfs was absent from the sealed PATH.",
+      "No external prover execution is claimed or required for a read-only selection.",
+      "No executed provider/model/tokenizer revision; configuration is not execution evidence.",
+      "canonical_task_cid, accepted_plan_root_cid, and dependency_task_cid were absent from the current implementation dispatch packet."
+    ]
+  },
+  "evidence_summary": {
+    "measured": {
+      "count": 12,
+      "description": "Current-head forest identities, source digests, selected coverage-manifest/ContextPack identities, identifier absences, sealed-environment facts, and receipt-level positive/negative checks."
+    },
+    "estimated": {
+      "count": 0,
+      "description": "No estimates were used."
+    },
+    "simulated": {
+      "count": 0,
+      "description": "No simulations were used."
+    },
+    "unavailable": {
+      "count": 9,
+      "description": "Registered TaskSemanticSlice schema string, completeness-witness/projection/linker records, source-map artifact, sealed pytest execution, live sample CID minting, optional provers, receipt CID issuance, provider/tokenizer execution identity, and dispatch packet task/plan CIDs absent from this attempt."
+    }
+  },
+  "limitations": [
+    "This artifact is a receipt-bound TaskSemanticSlice selection, not a semantic proof, promotion decision, source-link receipt, compiler, completeness witness, or tokenizer-facing projection.",
+    "TaskSemanticSlice@1 is an alias of existing ContextCoverageManifest@1 bound to DatasetsContextPackAuthority@0.1. It is not minted as a second schema and is not present as an identifier in nested source.",
+    "All source digests bind the exact tree above; freshness must be rechecked before any follow-on reuse.",
+    "The receipt intentionally records no estimated or simulated result.",
+    "The uncommitted receipt itself is not claimed as part of the pre-write sealed outer tree.",
+    "Independent supervisor admission remains required; worker completion is insufficient.",
+    "Declared output is the receipt only; proof_context/ was not mutated because a wrapper would duplicate the selected coverage-manifest authority and is outside this task's admitted edit set.",
+    "Required proof_context tests validate ContextPack/provider behavior, not a new TaskSemanticSlice identifier."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this receipt and invalidate consumers of this TaskSemanticSlice selection; do not alter the inventoried source forest, protected policy documents, or unrelated source bytes, and do not reuse the receipt after its tree binding becomes stale."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "deterministic_identity_checks": true,
+    "schema_version_bound": true,
+    "contract_blob_bound": true,
+    "cid_bound_where_available": false,
+    "cid_unavailability_explicit": true,
+    "positive_and_negative_tests_recorded": true,
+    "evidence_classes_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "existing_authority_selected": true,
+    "task_semantic_slice_selected": true,
+    "local_alias_is_not_canonical_identity": true,
+    "python_v1_only": true,
+    "promotion_status": "non_promoted_unmeasured"
+  }
+}
