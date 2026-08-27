@@ -244,18 +244,18 @@
     }
   },
   "current_authority_source_identities": {
-    "config": "sha256:90fffc0e7bb3c38c9294508587c36cc09157e35e28a825ba5ef783720ff8ab59",
+    "config": "sha256:cedf3e747097840fed883eee2089139b9f1b1d014fe15a457efef9abcc407971",
     "generator": "sha256:a99394eba3ac5ae4a88c8d8fba0235a1ded115dc59e63dad160366dbe7a9a695",
     "operator": "sha256:c6b1bb0991c29d07bbd248358039d051956e75e10243a44d4d78b7e72d790e80",
     "validator": "sha256:276a1599cd902d5de0aa41bee6afd3c9b0e6c0503dd7cbf1bc31cfb5daaf6333"
   },
   "accelerate_origin_main_merge": {
     "bootstrap_commit": "19a44398735b15de6f6c8c09cc501691c3a95094",
-    "origin_main_commit": "db887c3695e1e2950e74fe7fd4fb80e195a3851f",
-    "merged_commit": "3cabd28a5015c5ff1c552aafe2e774f579441c9a",
-    "merged_tree": "6cca6fc15ba32b3b3fe1193d0fb482e4d59f056c",
-    "current_commit": "ab37dc9df49840425b82fc27f3db59cc36768d27",
-    "current_tree": "f85398ca51e53f122ad58cb681aa205bfb26103c"
+    "origin_main_commit": "024bf40a6c35735b84e7faff844f862dec63abf3",
+    "merged_commit": "89b4a75e803f76d92b3d3c73a2c65ede460e0adf",
+    "merged_tree": "d9c9304b8f7fb39e18f006289348a5a2e775241a",
+    "current_commit": "44c15bdc929cf7d267333d5b44901fdcc70cd685",
+    "current_tree": "d9c9304b8f7fb39e18f006289348a5a2e775241a"
   },
   "datasets_current_head_receipt": {
     "path": "artifacts/proof_carrying_semantic_minification/handoff/datasets-proof-context-current-head.json",
@@ -312,7 +312,7 @@
         "external/ipfs_datasets/tests/proof_context"
       ],
       "outcome": "passed",
-      "summary": "The complete ipfs_datasets proof-context suite passed at the resealed current head: 519 tests in 73.83 seconds.",
+      "summary": "The complete ipfs_datasets proof-context suite passed at the resealed current head: 519 tests in 78.96 seconds.",
       "measurement_status": "measured"
     },
     {
@@ -328,7 +328,7 @@
         "test/api/test_agent_supervisor_multi_supervisor_shutdown.py"
       ],
       "outcome": "passed",
-      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed at the post-merge callback recovery accelerator head: 493 tests in 88.50 seconds; four unrelated temporary-directory cleanup warnings were reported.",
+      "summary": "The combined restart, portal, retry-limit, and merge-train regression set passed at the origin/main-integrated accelerator head: 540 tests in 97.92 seconds.",
       "measurement_status": "measured"
     },
     {
@@ -344,11 +344,11 @@
         "test/api/test_agent_supervisor_validation_retry_seed_conflict_recovery.py"
       ],
       "outcome": "passed",
-      "summary": "The exact blocked-retry, typed-history, operation-catalog, and pooled-recovery qualification set passed: 10 tests in 74.24 seconds; four unrelated temporary-directory cleanup warnings were reported.",
+      "summary": "The exact blocked-retry, typed-history, operation-catalog, and pooled-recovery qualification set passed: 10 tests in 73.32 seconds.",
       "measurement_status": "measured"
     }
   ],
   "historical_receipt_preserved": true,
   "manual_database_mutation": false,
-  "receipt_id": "sha256:69e3f372902802767a0055266c9583e09884a802ab88aaed88e5e14b31dc9730"
+  "receipt_id": "sha256:d3e5e14466554af0b09ad5e96c586876ad71d20f405b4c6ef13aaa825c5bf38a"
 }
