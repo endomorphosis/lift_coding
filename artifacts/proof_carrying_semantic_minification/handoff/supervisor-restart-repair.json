@@ -244,7 +244,7 @@
     }
   },
   "current_authority_source_identities": {
-    "config": "sha256:02baddfc635bc4326c1be3e92ab6725128a077bd4db093112b947df3d85bec94",
+    "config": "sha256:0f97d51cf93a0018c87bbca10bb9de13faf906d3e376840accbbe7316ed0f252",
     "generator": "sha256:a99394eba3ac5ae4a88c8d8fba0235a1ded115dc59e63dad160366dbe7a9a695",
     "operator": "sha256:c6b1bb0991c29d07bbd248358039d051956e75e10243a44d4d78b7e72d790e80",
     "validator": "sha256:276a1599cd902d5de0aa41bee6afd3c9b0e6c0503dd7cbf1bc31cfb5daaf6333"
@@ -254,8 +254,8 @@
     "origin_main_commit": "024bf40a6c35735b84e7faff844f862dec63abf3",
     "merged_commit": "89b4a75e803f76d92b3d3c73a2c65ede460e0adf",
     "merged_tree": "d9c9304b8f7fb39e18f006289348a5a2e775241a",
-    "current_commit": "5fd18149010e6821118206308810b1d555c4f1ba",
-    "current_tree": "3b56e3c64215cc582e34e5345c903cf2c65669ba"
+    "current_commit": "3226a7ba74ca71a68f355511b81bcfba1bdb6e37",
+    "current_tree": "6c87bcc3a011428f0498dc596b0bce717594790d"
   },
   "datasets_current_head_receipt": {
     "path": "artifacts/proof_carrying_semantic_minification/handoff/datasets-proof-context-current-head.json",
@@ -350,5 +350,5 @@
   ],
   "historical_receipt_preserved": true,
   "manual_database_mutation": false,
-  "receipt_id": "sha256:fec48aa9aa6db519a76d63155a7ee31a9a465a5eb983d5990b3f33553ca12e0c"
+  "receipt_id": "sha256:bbcd6c9f7429bc1de1661b71a9fa846b045218d57c2c170b66902af0ac5a8611"
 }
