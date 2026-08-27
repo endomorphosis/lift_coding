@@ -226,6 +226,29 @@ HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OUTER_TREE: Final = (
 HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OPERATOR_IDENTITY: Final = (
     "sha256:4c93ab0e5732c7cd8e055daec07b4d27958f3feb49794e942a11cb1d8d746f63"
 )
+HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-bootstrap-broker-resilience-repair.json"
+)
+HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-bootstrap-broker-resilience-repair@1"
+)
+HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_BASE_COMMIT: Final = (
+    "PENDING_HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_BASE_COMMIT"
+)
+HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_COMMIT: Final = (
+    "bc4cbda714b0e7f9052d4a6efdc3ae9abefa2c0d"
+)
+HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_TREE: Final = (
+    "8b57998dd5fce8c35c03f97ff6b9d342ff93c9dd"
+)
+HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OPERATOR_IDENTITY: Final = (
+    "sha256:c1bcb0c761ab42a6c7e59ec85007ec647fb31574ab6040731de32c5327de0940"
+)
 HANDOFF_GENERATION_REPLAY_REPAIR_BASE_COMMIT: Final = (
     "3208c41917944182865889c48e57bc128ab8a463"
 )
@@ -1753,10 +1776,174 @@ def _verified_handoff_command_authority_verifier_repair(
         != HANDOFF_COMMAND_VERIFIER_REPAIR_SEALED_OPERATOR_IDENTITY
         or _identity(base_bytes) != payload.get("repair_base_operator_identity")
         or base_bytes.count(pending_base) != 1
+    ):
+        raise OperatorError("PCSM command-verifier repair source delta changed")
+    if current_bytes != expected_current:
+        _verified_bootstrap_broker_resilience_repair(
+            sealed_operator_identity=_identity(expected_current),
+            current_operator_identity=current_operator_identity,
+            current_head=current_head,
+        )
+    elif _identity(current_bytes) != current_operator_identity:
+        raise OperatorError("PCSM command-verifier repair identity changed")
+    return payload
+
+
+def _verified_bootstrap_broker_resilience_repair(
+    *,
+    sealed_operator_identity: str,
+    current_operator_identity: str,
+    current_head: str,
+) -> dict[str, Any]:
+    """Admit only the per-client bootstrap continue-instead-of-SIGTERM delta."""
+
+    payload = _json_mapping_bytes(
+        _tracked_bytes(
+            HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_PATH,
+            head=current_head,
+        ),
+        field="PCSM bootstrap broker resilience repair receipt",
+    )
+    expected_fields = {
+        "schema",
+        "reason",
+        "source_command_verifier_repair_receipt_id",
+        "sealed_outer_commit",
+        "sealed_outer_tree",
+        "sealed_operator_identity",
+        "repair_base_commit",
+        "repair_base_tree",
+        "repair_base_operator_identity",
+        "current_operator_identity",
+        "exact_change",
+        "validation",
+        "attempt_refunded",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    exact_change = payload.get("exact_change")
+    validation = payload.get("validation")
+    operator_path = Path(__file__).resolve()
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    base_commit = HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_BASE_COMMIT
+    if (
+        set(payload) != expected_fields
+        or payload.get("schema") != HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SCHEMA
+        or payload.get("reason")
+        != "executor_bootstrap_per_client_admit_must_not_sigterm"
+        or payload.get("source_command_verifier_repair_receipt_id")
+        != "sha256:bf05d1a412d17becf0042570dd27be6eb3c5ca04f19488ecb9b8633b5042a134"
+        or payload.get("sealed_outer_commit")
+        != HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_COMMIT
+        or payload.get("sealed_outer_tree")
+        != HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_TREE
+        or payload.get("sealed_operator_identity")
+        != HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OPERATOR_IDENTITY
+        or sealed_operator_identity
+        != HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OPERATOR_IDENTITY
+        or payload.get("repair_base_commit") != base_commit
+        or payload.get("current_operator_identity")
+        != current_operator_identity
+        or not isinstance(exact_change, Mapping)
+        or dict(exact_change)
+        != {
+            "timeout_after_accept_action_before": "sigterm_supervisor",
+            "timeout_after_accept_action_after": "continue",
+            "peer_oserror_action_before": "sigterm_supervisor",
+            "peer_oserror_action_after": "continue",
+            "per_client_admit_error_action_before": "sigterm_supervisor",
+            "per_client_admit_error_action_after": "continue",
+            "listener_oserror_action": "fail_closed",
+            "durable_command_identity_changed": False,
+            "database_state_changed": False,
+        }
+        or not isinstance(validation, Mapping)
+        or dict(validation)
+        != {
+            "casf_timeout_continue_matched": True,
+            "measurement_status": "measured",
+        }
+        or payload.get("attempt_refunded") is not False
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError(
+            "PCSM bootstrap broker resilience repair receipt is not admitted"
+        )
+    if (
+        _git_commit_tree(
+            HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_COMMIT,
+            field="sealed bootstrap broker resilience commit",
+        )
+        != HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_TREE
+        or _git_commit_tree(
+            base_commit,
+            field="bootstrap broker resilience repair base",
+        )
+        != payload.get("repair_base_tree")
+    ):
+        raise OperatorError(
+            "PCSM bootstrap broker resilience repair tree binding changed"
+        )
+    _git_is_ancestor(
+        HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_COMMIT,
+        base_commit,
+        field="bootstrap broker resilience repair base lineage",
+    )
+    _git_is_ancestor(
+        base_commit,
+        current_head,
+        field="bootstrap broker resilience repair current lineage",
+    )
+    parents = str(_git("show", "-s", "--format=%P", base_commit)).strip().split()
+    changed_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_COMMIT}.."
+                f"{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    sealed_bytes = _git_blob_at(
+        head=HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_COMMIT,
+        path=operator_path,
+        field="sealed bootstrap broker operator",
+    )
+    base_bytes = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="bootstrap broker resilience repair base operator",
+    )
+    current_bytes = _tracked_bytes(operator_path, head=current_head)
+    pending_base = (
+        "PENDING_" + "HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_BASE_COMMIT"
+    ).encode("ascii")
+    expected_current = base_bytes.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    if (
+        parents
+        != [HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OUTER_COMMIT]
+        or changed_paths != (relative_operator,)
+        or _identity(sealed_bytes)
+        != HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OPERATOR_IDENTITY
+        or _identity(base_bytes) != payload.get("repair_base_operator_identity")
+        or base_bytes.count(pending_base) != 1
         or current_bytes != expected_current
         or _identity(current_bytes) != current_operator_identity
     ):
-        raise OperatorError("PCSM command-verifier repair source delta changed")
+        raise OperatorError(
+            "PCSM bootstrap broker resilience repair source delta changed"
+        )
     return payload
 
 
@@ -5702,16 +5889,18 @@ class _ExecutorBootstrapBroker:
                 )
                 _send_frame(accepted, response)
             except TimeoutError:
-                if accepted is not None:
-                    self._fail("executor_bootstrap_request_timeout")
-                    return
+                # accept() uses a 1s poll timeout.  A peer that connected but
+                # stalled on its request must not SIGTERM the supervisor; the
+                # lane retries bootstrap on the next rotation.
+                continue
             except OSError as exc:
-                if not self.stopping.is_set():
+                if not self.stopping.is_set() and accepted is None:
                     self._fail(exc)
                     return
             except BaseException as exc:
-                self._fail(exc)
-                return
+                if accepted is None:
+                    self._fail(exc)
+                    return
             finally:
                 if accepted is not None:
                     with self._lock:
