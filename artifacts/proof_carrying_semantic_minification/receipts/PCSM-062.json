@@ -1,0 +1,245 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-062",
+  "title": "Integrate selected tests",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-062",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-062@current-head-selected-tests-capability-assessment-v1",
+  "observed_at": "2026-08-28T07:41:44Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 selected-test capability assessment for the exact current admitted accelerator source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-062.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-062.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "The exact current accelerator forest already supplies a dedicated, versioned selected-test authority: AffectedCheckSelector@1 deterministically expands supplied exact dependency edges and falls back when uncertain; DatasetsVerificationInputAdapter@1 maps reviewed validation IDs to exact pytest node IDs or requires broader selection; and PytestVerificationAdapter@1 binds explicit pytest argv, selector, configuration, fixture, and environment CIDs before executing. The declared-output boundary permits only this receipt, so no duplicate selector, test runner, or PCSM-only test package was created.",
+    "non_promotion_reason": "The reusable selected-test components and their current-head positive/negative tests are available, but an actual PCSM selection cannot be bound to a canonical current aggregate source-map CID or canonical CodeIR/source identity. The required PCSM suite covers structured decoding, not selected-test integration. This receipt therefore records the qualified reusable capability without authorizing promotion, mutation, or a claim that a PCSM current-forest test selection has run."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish selector behavior, current-tree identity, CID binding, or test success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "6e3cc7efc836b0177ed7a236528dc245de269f2b",
+    "outer_tree": "8a115240a7fb7fa87e987ee6edd2d2e922c23ce6",
+    "dispatch_tree_id": "6e3cc7efc836b0177ed7a236528dc245de269f2b",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "task_cid": "baguqeerafqmd4fhmnpgshys6gmy3x7a65axqfsnecdjtaw3gqchp3eb4ctrq",
+    "accepted_plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract boundary only; no selected-test implementation authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "named Python-v1 selected-test implementation and test boundary",
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "canonical semantic/source identity boundary; no current aggregate PCSM source-map authority selected",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no selected-test execution authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted nested HEAD and HEAD^{tree}; inspected outer and nested porcelain before receipt creation; resolved the required-test symlink; recorded selected implementation/test Git blobs and SHA-256 values; searched the exact PCSM implementation/test roots for current source-map contract identifiers; and used fresh private HOME directories under the prescribed sealed PATH for validation.",
+      "result": "The dispatch commit equals outer HEAD; each recorded nested commit/tree pair equals its checked-out head; the inspected worktrees were clean before receipt creation; the required test root resolves to one PCSM structured-decoding module; and the exact accelerator PCSM roots contain no SourceMapResolver@1, SourceLinkReceipt@1, aggregate source-map, or source_map_resolver identifier.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink head/tree, scheduler digest, listed source digest, required-test topology/result, selected-test contract, or current source-map contract/CID requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM source-map CID or canonical CodeIR/source identity to exact current file/node/span resolution is present in the task-owned PCSM implementation/test roots. The prior PCSM-057 assessment was consulted and this receipt independently repeated the current-head absence search. Git trees, blobs, validation IDs, and local pytest node IDs are not substitutes for canonical PCSM identity."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "components": [
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.verification.selection.AffectedCheckSelector@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/affected-verification-selection@1",
+        "evidence": "ivp/test-selection@1",
+        "role": "Pure deterministic affected-test/static/type/proof selection from supplied semantic and dependency edges. Output is lexicographically stable and uncertain, opaque, dynamic, uncovered, truncated, conflicting, or incomplete inputs require broader or full-suite fallback."
+      },
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.verification.datasets_adapter.DatasetsVerificationInputAdapter@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/datasets-validation-selection@1",
+        "role": "Non-authoritative adapter that sorts/deduplicates validation IDs, accepts only exact pytest node shapes, and marks missing or malformed mappings as requiring broader selection."
+      },
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.verification.adapters.pytest_adapter.PytestVerificationAdapter@1",
+        "schema": "pytest-verification-adapter@1",
+        "evidence": "ivp/pytest-adapter@1",
+        "role": "Builds explicit python -m pytest argv and rejects a selector CID mismatch; its request/receipt contracts bind selector argv, configuration bytes, fixture bytes, environment observation, and applicable repository-tree CID inputs before execution."
+      }
+    ],
+    "cid_binding": {
+      "kind": "measured",
+      "profile": "The pytest adapter computes and verifies selector CID inputs from exact argv and requires configuration, fixture, and environment CID bindings. The generic selector is non-authoritative and intentionally does not promote opaque repository_tree_id values to receipt repository_tree_cid values.",
+      "current_pcsm_execution_binding": "unavailable because the required canonical PCSM source-map/CID inputs are absent; no selected PCSM test execution is represented as having occurred."
+    },
+    "authority_boundary": "All datasets adapter outputs are non-authoritative. Selection does not execute tests or invent exact coverage, and the pytest adapter produces evidence only after its contract bindings validate. Neither component grants model output mutation authority."
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py",
+      "git_blob": "7d22ff355b39dbd89c9ef4f6dc9efe1a20ff4c99",
+      "sha256": "e3032be55aabef8a65b3abad2663c8203b58400faf470637ce2a6998d7f07d1b",
+      "role": "Deterministic exact/broader/full-suite selected-test policy and reason-chain implementation."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/datasets_adapter.py",
+      "git_blob": "bdde6a5a6f6d78b7c76f0358cc380ccbc88da435",
+      "sha256": "212b259f46a7196d4039914467b5eed81a46f2bdb003fe134c6568cae11ac8eb",
+      "role": "Versioned validation-ID to exact pytest-node mapping and fail-closed broader-selection observation."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/adapters/pytest_adapter.py",
+      "git_blob": "abb621a5915e26b7f2af6faa325136215a40ba8d",
+      "sha256": "c5600a19ded6627ec26dcec4b79af97acf68597391419193fe6cf3ee18e76293",
+      "role": "Versioned pytest execution adapter with explicit argv and selector/configuration/fixture/environment binding checks."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_verification_selection.py",
+      "git_blob": "3d9d4167759b3e6829fd6add85e62aabc0f5c453",
+      "sha256": "f02b97cf23052331a15617c072c4c68ca8192bbab232e12ba7ba09c737dbdba8",
+      "role": "Dedicated positive and negative selected-test behavior coverage."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_verification_datasets_adapter.py",
+      "git_blob": "00ebc7744814aef0aa5e97273f896e027643d4a2",
+      "sha256": "be942a5ffe6120231977d2595eed85740c42ab1fcc7f2baa46ef0d28222e07d6",
+      "role": "Exact mapping and malformed/missing-mapping broader-selection coverage."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_pytest_verification_adapter.py",
+      "git_blob": "f085ed414625d4636f499304bda8957f5b65a050",
+      "sha256": "708f61b18e7e4e328e7c0927326a67e4f85ad6faafd32273cc4465b37450ee68",
+      "role": "Positive and negative pytest execution, selector-CID, and terminal-status projection coverage."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Only module reached by the required PCSM symlinked suite; its result is recorded separately and is not relabelled as selected-test integration coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "selected_test_positive_and_negative_coverage": {
+      "kind": "measured",
+      "positive_coverage": [
+        "Direct and transitive symbol/path, fixture, and configuration edges choose affected pytest nodes without choosing unrelated tests.",
+        "Selection order and reason chains are deterministic; selector object and function output round-trip identically.",
+        "Reviewed validation IDs map to sorted exact pytest node IDs, and explicit python -m pytest selected-node and full-suite argv are reproducible.",
+        "Selector, configuration, fixture, and environment bindings are retained in a passing pytest receipt."
+      ],
+      "negative_coverage": [
+        "Opaque, dynamic, unknown, uncovered, truncated, conflicting, and incomplete validation mappings force broader or full-suite selection instead of being claimed exact.",
+        "Malformed mappings and non-pytest node shapes are rejected to unmapped IDs; opaque repository tree IDs remain distinct from receipt tree CIDs.",
+        "Empty selected-node input, selector CID mismatch, timeouts, cancellation, unavailable executables, setup/teardown failure, XPASS, collection failure, malformed reports, unmodeled skips/XFAILs, and simulated mode cannot produce a production passing result."
+      ],
+      "coverage_limit": "These are existing accelerator verification tests. They establish generic selected-test behavior, not a current PCSM source-map-bound selection invocation."
+    },
+    "selected_authority_validation": {
+      "kind": "measured",
+      "status": "passed_with_optional_skip",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm062-focus-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_verification_selection.py test/api/test_agent_supervisor_verification_datasets_adapter.py test/api/test_agent_supervisor_pytest_verification_adapter.py",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, fresh private HOME, prescribed PATH, and accelerator source only on PYTHONPATH.",
+      "result": "80 passed, 1 skipped in 1.73s",
+      "skip": "test_live_leaf_probes_when_pythonpath_includes_datasets skipped because optional ipfs_datasets_py leaf modules were intentionally not on PYTHONPATH. The same suite positively tests this absence/fail-closed mode; no live datasets-leaf capability is inferred.",
+      "scope_limit": "The focused tests are measured existing-capability validation, not a replacement for a PCSM current-source-map-bound selected-test run."
+    },
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm062-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME.",
+      "result": "11 passed in 0.37s",
+      "scope_limit": "The required root resolves only the PCSM structured-decoding test module, so it is a required-suite result rather than selected-test integration coverage."
+    },
+    "provider_validation": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No provider-environment execution was needed or substituted for the sealed results; no simulated success is claimed."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "Selected-test integration is executable validation infrastructure. No PCSM-062 theorem-prover obligation or approved digest-bound prover deployment is present in the authoritative sealed environment, and no formal-proof success is inferred."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; scheduler digest; clean/freshness checks; required-suite topology; selected implementation/test blobs and SHA-256 values; versioned schemas/interfaces; absence of a PCSM source-map contract in the exact PCSM roots; sealed focused selected-test validation (80 passed, 1 optional skip); and sealed required validation (11 passed).",
+    "estimated": "None. No estimate is used to establish selected-test behavior, identity, CID binding, validation, or promotion.",
+    "simulated": "None. No provider execution is substituted for the sealed validation evidence.",
+    "unavailable": "Current aggregate PCSM source-map CID; canonical CodeIR/source identity to current file/node/span resolution; an actual PCSM current-forest selected-test receipt; optional live ipfs_datasets_py leaf capability under the focused validation PYTHONPATH; formal-prover result; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It selects and validates an existing current-head authority but does not modify accelerator implementation/tests or create a competing selected-test subsystem.",
+    "AffectedCheckSelector operates only on supplied edges and catalog data; it does not discover or invent semantic/test dependencies and remains non-authoritative until a separately admitted consumer supplies canonical bindings.",
+    "The datasets adapter's opaque repository_tree_id and local pytest node IDs are deliberately not canonical PCSM source identities or receipt repository-tree CIDs.",
+    "The required PCSM suite passed but covers structured decoding only; it cannot be relabelled as selected-test integration validation.",
+    "No model output is accepted as evidence or mutation authority, and no M2/M3 mutation, generated-source mutation, automatic source materialization, or promotion is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head selected-test capability assessment. Do not alter protected planning documents, existing verification components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, required-test topology/result, selected-test contract, or PCSM source-map capability change."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalents_reused_first": true,
+    "selected_test_capability_implemented": true,
+    "selected_test_capability_deterministic": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "authoritative_sealed_selected_authority_validation_passed": true,
+    "authoritative_sealed_required_validation_passed": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_selected_test_execution_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_pcsm_identity_binding"
+  }
+}
