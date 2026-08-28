@@ -168,6 +168,10 @@ VALIDATION_PATH_COMPATIBILITY_TRANSITION_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-validation-path-compatibility-transition@1"
 )
+DATABASE_WATCHDOG_ACTIVITY_TRANSITION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-database-watchdog-activity-transition@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -293,6 +297,13 @@ VALIDATION_PATH_COMPATIBILITY_TRANSITION_PATH: Final = (
     / "handoff"
     / "supervisor-restart-validation-path-compatibility-transition.json"
 )
+DATABASE_WATCHDOG_ACTIVITY_TRANSITION_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-database-watchdog-activity-transition.json"
+)
 STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT: Final = (
     "8b8be83c6d9c578c4cec450092e140b929ce12e9"
 )
@@ -316,6 +327,21 @@ VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD: Final = (
 )
 VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_TREE: Final = (
     "c9b3e3d9acf2983465cf84f4f93e770a7444872d"
+)
+DATABASE_WATCHDOG_ACTIVITY_TRANSITION_BASE_COMMIT: Final = (
+    "PENDING_DATABASE_WATCHDOG_ACTIVITY_TRANSITION_BASE_COMMIT"
+)
+DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD: Final = (
+    "c757022cf3b2ad35031afe4912ff20cbe6144a5d"
+)
+DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_TREE: Final = (
+    "a1e7239ea168a881be333733cb6baf570b9a4595"
+)
+DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD: Final = (
+    "7ecaa95972cd772051930c6ecc7626b333846b0d"
+)
+DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_TREE: Final = (
+    "751fc8d37e7bb7746082a39f2623b3d2291b5f38"
 )
 CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
     "db9304284cfe857f08377ef756b4896192dd5111"
@@ -2189,7 +2215,6 @@ def _verified_validation_path_compatibility_operator_descendant(
         or sealed_source.get("operator_identity")
         != _identity(expected_operator)
         or sealed_operator != expected_operator
-        or current_operator != expected_operator
     ):
         raise OperatorError(
             "validation-path compatibility operator delta changed"
@@ -2243,6 +2268,263 @@ def _verified_validation_path_compatibility_operator_descendant(
         artifact_commit,
         current_head,
         field="validation-path compatibility artifact-to-current lineage",
+    )
+    database_watchdog_activity_transition: dict[str, Any] = {}
+    if current_operator != expected_operator:
+        database_watchdog_activity_transition = (
+            _verified_database_watchdog_activity_operator_descendant(
+                current_operator=current_operator,
+                current_head=current_head,
+                operator_path=operator_path,
+            )
+        )
+    return {
+        "receipt": payload,
+        "receipt_bytes": receipt_bytes,
+        "artifact_commit": artifact_commit,
+        "base_commit": base_commit,
+        "base_operator": base_operator,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "expected_operator": expected_operator,
+        "database_watchdog_activity_transition": (
+            database_watchdog_activity_transition
+        ),
+    }
+
+
+def _database_watchdog_activity_transition_payload(
+    *,
+    current_head: str,
+) -> tuple[bytes, dict[str, Any]]:
+    """Load the exact add-only database-watchdog activity receipt."""
+
+    receipt_bytes = _tracked_bytes(
+        DATABASE_WATCHDOG_ACTIVITY_TRANSITION_PATH,
+        head=current_head,
+    )
+    payload = _json_mapping_bytes(
+        receipt_bytes,
+        field="database-watchdog activity transition receipt",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "prior_checkpoint",
+        "repair_base",
+        "sealed_source",
+        "watchdog_activity_contract",
+        "validations",
+        "historical_receipts_preserved",
+        "database_authority_preserved",
+        "task_state_mutation",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema")
+        != DATABASE_WATCHDOG_ACTIVITY_TRANSITION_SCHEMA
+        or payload.get("reason")
+        != "defer_stale_projection_watchdog_for_exact_successor_database_activity"
+        or not isinstance(payload.get("prior_checkpoint"), Mapping)
+        or not isinstance(payload.get("repair_base"), Mapping)
+        or not isinstance(payload.get("sealed_source"), Mapping)
+        or not isinstance(payload.get("watchdog_activity_contract"), Mapping)
+        or not isinstance(payload.get("validations"), list)
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get("database_authority_preserved") is not True
+        or payload.get("task_state_mutation") is not False
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError(
+            "database-watchdog activity transition seal is invalid"
+        )
+    return receipt_bytes, payload
+
+
+def _verified_database_watchdog_activity_operator_descendant(
+    *,
+    current_operator: bytes,
+    current_head: str,
+    operator_path: Path,
+) -> dict[str, Any]:
+    """Admit only the exact watchdog B/S/A source transition."""
+
+    base_commit = DATABASE_WATCHDOG_ACTIVITY_TRANSITION_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError(
+            "database-watchdog activity transition base is unsealed"
+        )
+    receipt_bytes, payload = _database_watchdog_activity_transition_payload(
+        current_head=current_head
+    )
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    if (
+        checkpoint.get("source_head")
+        != DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit")
+        != "c6e4a75f03662d9fe2ed26246735638d9be3ae88"
+        or checkpoint.get(
+            "validation_path_compatibility_transition_receipt_id"
+        )
+        != "sha256:e9aa30a3d9e1a1e5603b463bbcc38ba52cee745c66712d5a9d33c83bb4781485"
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD
+        or sealed_source.get("parent") != base_commit
+    ):
+        raise OperatorError(
+            "database-watchdog activity operator checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+            field="database-watchdog activity checkpoint",
+        )
+        != DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_TREE
+        or _git_commit_tree(
+            base_commit,
+            field="database-watchdog activity repair base",
+        )
+        != repair_base.get("repository_tree_id")
+    ):
+        raise OperatorError(
+            "database-watchdog activity operator tree binding changed"
+        )
+
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        relative_operator,
+        "test/test_pcsm_database_watchdog_activity_transition.py",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD}..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="database-watchdog activity base operator",
+    )
+    pending_base = (
+        "PENDING_" + "DATABASE_WATCHDOG_ACTIVITY_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="database-watchdog activity sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="database-watchdog activity sealed operator",
+    )
+    if (
+        base_parents
+        != [DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD]
+        or base_paths != expected_base_paths
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or base_operator.count(pending_base) != 1
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_parents != [base_commit]
+        or sealed_paths != (relative_operator,)
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+        or sealed_source.get("operator_identity")
+        != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or current_operator != expected_operator
+    ):
+        raise OperatorError(
+            "database-watchdog activity operator delta changed"
+        )
+
+    receipt_relative = DATABASE_WATCHDOG_ACTIVITY_TRANSITION_PATH.relative_to(
+        ROOT
+    ).as_posix()
+    additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if len(additions) != 1:
+        raise OperatorError(
+            "database-watchdog activity receipt introduction is not exact"
+        )
+    artifact_commit = additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != (receipt_relative,)
+        or _git_blob_at(
+            head=artifact_commit,
+            path=DATABASE_WATCHDOG_ACTIVITY_TRANSITION_PATH,
+            field="introduced database-watchdog activity receipt",
+        )
+        != receipt_bytes
+    ):
+        raise OperatorError(
+            "database-watchdog activity artifact commit changed"
+        )
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field="database-watchdog activity artifact-to-current lineage",
     )
     return {
         "receipt": payload,
@@ -4261,7 +4543,7 @@ def _verified_validation_path_compatibility_transition(
     current_gitlink = str(
         _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
     ).strip().split()
-    if (
+    exact_validation_path_source = bool(
         current_config_bytes != base_config_bytes
         or _canonical_bytes(current_config) != _canonical_bytes(base_config)
         or current_operator != operator_gate["expected_operator"]
@@ -4282,9 +4564,23 @@ def _verified_validation_path_compatibility_transition(
         or current_gitlink[:2] != ["160000", "commit"]
         or current_gitlink[2]
         != VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD
-    ):
-        raise OperatorError(
-            "validation-path compatibility live source changed"
+    ) is False
+    database_watchdog_activity_transition: dict[str, Any] = {}
+    if not exact_validation_path_source:
+        database_watchdog_activity_transition = (
+            _verified_database_watchdog_activity_transition(
+                board=board,
+                current_head=current_head,
+                current_config=current_config,
+                current_source_identities=current_source_identities,
+                prior_artifact_commit=operator_gate["artifact_commit"],
+                prior_transition_receipt_id=str(
+                    payload.get("receipt_id") or ""
+                ),
+                prior_config_bytes=base_config_bytes,
+                prior_operator_bytes=operator_gate["expected_operator"],
+                prior_validator_bytes=base_validator,
+            )
         )
     source_paths = _restart_source_paths(board)
     for name in ("taskboard", "objectives", "plan", "generator"):
@@ -4308,6 +4604,535 @@ def _verified_validation_path_compatibility_transition(
         "sealed_source_tree": operator_gate["sealed_source_tree"],
         "accelerator_head": VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD,
         "accelerator_tree": VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_TREE,
+        "database_watchdog_activity_transition": (
+            database_watchdog_activity_transition
+        ),
+    }
+
+
+def _verified_database_watchdog_activity_transition(
+    *,
+    board: Any,
+    current_head: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    prior_artifact_commit: str,
+    prior_transition_receipt_id: str,
+    prior_config_bytes: bytes,
+    prior_operator_bytes: bytes,
+    prior_validator_bytes: bytes,
+) -> dict[str, Any]:
+    """Admit one exact guard for live successor database callback work."""
+
+    operator_path = Path(__file__).resolve()
+    operator_gate = _verified_database_watchdog_activity_operator_descendant(
+        current_operator=_tracked_bytes(operator_path, head=current_head),
+        current_head=current_head,
+        operator_path=operator_path,
+    )
+    payload = operator_gate["receipt"]
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    watchdog_contract = payload["watchdog_activity_contract"]
+    validations = payload["validations"]
+
+    checkpoint_fields = {
+        "source_head",
+        "repository_tree_id",
+        "prior_artifact_commit",
+        "validation_path_compatibility_transition_receipt_id",
+        "changed_files",
+    }
+    expected_checkpoint_files = [
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-023.json"
+            ),
+            "bytes_id": (
+                "sha256:b83deef53412fb65ef1890291c97931d4ad3ffcd72ea398750"
+                "7cad1059703adc"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-026.json"
+            ),
+            "bytes_id": (
+                "sha256:4c6d93e833a15ee956b4d9561e5772285cb2d3053c6bb25ee8"
+                "3ed73b098495ba"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-040.json"
+            ),
+            "bytes_id": (
+                "sha256:91a620fd993138a4356bcec8b0572bfa696e3353b2dd95110d"
+                "5efd71f4b58924"
+            ),
+        },
+        {
+            "path": "test/test_pcsm_stale_worktree_cleanup_transition.py",
+            "bytes_id": (
+                "sha256:f170db9ffe7eedc8404a30f22dbb769e711c166bb15903636c"
+                "15fde2d692d67a"
+            ),
+        },
+    ]
+    if (
+        set(checkpoint) != checkpoint_fields
+        or checkpoint.get("source_head")
+        != DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit") != prior_artifact_commit
+        or prior_artifact_commit
+        != "c6e4a75f03662d9fe2ed26246735638d9be3ae88"
+        or checkpoint.get(
+            "validation_path_compatibility_transition_receipt_id"
+        )
+        != prior_transition_receipt_id
+        or prior_transition_receipt_id
+        != "sha256:e9aa30a3d9e1a1e5603b463bbcc38ba52cee745c66712d5a9d33c83bb4781485"
+        or checkpoint.get("changed_files") != expected_checkpoint_files
+    ):
+        raise OperatorError(
+            "database-watchdog activity prior checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+            field="database-watchdog activity checkpoint",
+        )
+        != DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_TREE
+    ):
+        raise OperatorError(
+            "database-watchdog activity checkpoint tree changed"
+        )
+    _git_is_ancestor(
+        prior_artifact_commit,
+        DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+        field="validation artifact-to-watchdog checkpoint lineage",
+    )
+    expected_checkpoint_paths = tuple(
+        item["path"] for item in expected_checkpoint_files
+    )
+    checkpoint_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{prior_artifact_commit}.."
+                f"{DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if checkpoint_paths != expected_checkpoint_paths:
+        raise OperatorError(
+            "database-watchdog activity checkpoint delta changed"
+        )
+    for item in expected_checkpoint_files:
+        path = ROOT / item["path"]
+        checkpoint_bytes = _git_blob_at(
+            head=DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+            path=path,
+            field=f"database-watchdog checkpoint file {item['path']}",
+        )
+        if _identity(checkpoint_bytes) != item["bytes_id"]:
+            raise OperatorError(
+                "database-watchdog activity checkpoint file changed"
+            )
+
+    validator_path = board.path(board.validator_path)
+    checkpoint_config = _git_blob_at(
+        head=DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+        path=board.config_path,
+        field="database-watchdog checkpoint config",
+    )
+    checkpoint_operator = _git_blob_at(
+        head=DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+        path=operator_path,
+        field="database-watchdog checkpoint operator",
+    )
+    checkpoint_validator = _git_blob_at(
+        head=DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+        path=validator_path,
+        field="database-watchdog checkpoint validator",
+    )
+    if (
+        checkpoint_config != prior_config_bytes
+        or checkpoint_operator != prior_operator_bytes
+        or checkpoint_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "database-watchdog activity checkpoint authority changed"
+        )
+
+    base_commit = str(operator_gate["base_commit"])
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "test/test_pcsm_database_watchdog_activity_transition.py",
+    )
+    expected_nested_paths = (
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_supervisor.py",
+        "test/api/"
+        "test_implementation_supervisor_control_plane_pool_lease.py",
+    )
+    repair_base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "config_identity",
+        "validator_identity",
+        "accelerator_head",
+        "accelerator_tree",
+        "changed_paths",
+        "nested_changed_paths",
+    }
+    base_config_bytes = _git_blob_at(
+        head=base_commit,
+        path=board.config_path,
+        field="database-watchdog activity base config",
+    )
+    base_config = _json_mapping_bytes(
+        base_config_bytes,
+        field="database-watchdog activity base config",
+    )
+    base_validator = _git_blob_at(
+        head=base_commit,
+        path=validator_path,
+        field="database-watchdog activity base validator",
+    )
+    if (
+        set(repair_base) != repair_base_fields
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD
+        or repair_base.get("operator_identity")
+        != _identity(operator_gate["base_operator"])
+        or repair_base.get("config_identity") != _identity(base_config_bytes)
+        or repair_base.get("validator_identity") != _identity(base_validator)
+        or repair_base.get("accelerator_head")
+        != DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD
+        or repair_base.get("accelerator_tree")
+        != DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_TREE
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or tuple(repair_base.get("nested_changed_paths") or ())
+        != expected_nested_paths
+        or base_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "database-watchdog activity repair base changed"
+        )
+
+    prior_config = _json_mapping_bytes(
+        prior_config_bytes,
+        field="database-watchdog activity prior config",
+    )
+    expected_config = json.loads(_canonical_bytes(prior_config))
+    expected_binding = expected_config.get("source_binding")
+    if not isinstance(expected_binding, dict):
+        raise OperatorError(
+            "database-watchdog activity source binding is absent"
+        )
+    expected_binding["ipfs_accelerate_planning_revision"] = (
+        DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD
+    )
+    expected_binding["ipfs_accelerate_planning_tree"] = (
+        DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_TREE
+    )
+    if base_config != expected_config:
+        raise OperatorError(
+            "database-watchdog activity config delta changed"
+        )
+
+    base_gitlink = str(
+        _git("ls-tree", base_commit, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        len(base_gitlink) < 3
+        or base_gitlink[:2] != ["160000", "commit"]
+        or base_gitlink[2] != DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "database-watchdog activity accelerator gitlink changed"
+        )
+    accelerator_repository = ROOT / "external/ipfs_accelerate"
+    if (
+        _git_commit_tree(
+            DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD,
+            field="database-watchdog activity accelerator",
+            repository=accelerator_repository,
+        )
+        != DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_TREE
+    ):
+        raise OperatorError(
+            "database-watchdog activity accelerator tree changed"
+        )
+    nested_parents = str(
+        _git_in_repository(
+            accelerator_repository,
+            "show",
+            "-s",
+            "--format=%P",
+            DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD,
+        )
+    ).strip().split()
+    nested_paths = tuple(
+        line
+        for line in str(
+            _git_in_repository(
+                accelerator_repository,
+                "diff",
+                "--name-only",
+                f"{VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD}.."
+                f"{DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if (
+        nested_parents != [VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD]
+        or nested_paths != expected_nested_paths
+    ):
+        raise OperatorError(
+            "database-watchdog activity nested source delta changed"
+        )
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+    }
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("source_head")
+        != operator_gate["sealed_source_head"]
+        or sealed_source.get("repository_tree_id")
+        != operator_gate["sealed_source_tree"]
+        or sealed_source.get("parent") != base_commit
+        or sealed_source.get("operator_identity")
+        != _identity(operator_gate["expected_operator"])
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (
+            "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        )
+    ):
+        raise OperatorError(
+            "database-watchdog activity sealed source changed"
+        )
+
+    expected_contract = {
+        "trigger": "stuck_outer_task_projection",
+        "corroboration_sources": [
+            "active_managed_database_worktree_pool_lease",
+            "active_managed_database_nonterminal_lifecycle_claim",
+        ],
+        "corroboration_scope": "current_managed_child_exact_identity",
+        "decision": "keep_running_before_supervisor_maintenance",
+        "maintenance_invoked": False,
+        "daemon_recycled": False,
+        "attempt_budget_consumed": False,
+        "provider_invocation_consumed": False,
+    }
+    if dict(watchdog_contract) != expected_contract:
+        raise OperatorError(
+            "database-watchdog activity contract changed"
+        )
+
+    required_validations = {
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "external/ipfs_accelerate/test/api/"
+                "test_implementation_supervisor_control_plane_pool_lease.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "external/ipfs_accelerate/test/agent_supervisor",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/test_pcsm_database_watchdog_activity_transition.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/test_pcsm_blocked_retry_batch_recovery.py",
+                "test/test_pcsm_executor_bootstrap_broker_resilience.py",
+                "test/test_pcsm_stale_worktree_cleanup_transition.py",
+                "test/test_pcsm_validation_path_compatibility_transition.py",
+                "test/test_pcsm_database_watchdog_activity_transition.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "scripts/validate_proof_carrying_semantic_minification_board.py",
+                "--check-all",
+            ),
+        ),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    summaries: dict[tuple[str, ...], str] = {}
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError(
+                "database-watchdog activity validation is malformed"
+            )
+        command = validation.get("command")
+        summary = validation.get("summary")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(summary, str)
+            or not summary
+        ):
+            raise OperatorError(
+                "database-watchdog activity validation did not pass"
+            )
+        observed = (str(validation.get("cwd") or ""), tuple(command))
+        observed_validations.add(observed)
+        summaries[tuple(command)] = summary
+    focused_nested = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_implementation_supervisor_control_plane_pool_lease.py",
+    )
+    declared_nested = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/agent_supervisor",
+    )
+    if (
+        len(validations) != len(required_validations)
+        or observed_validations != required_validations
+        or re.search(r"\b38 passed\b", summaries.get(focused_nested, ""))
+        is None
+        or re.search(r"\b11 passed\b", summaries.get(declared_nested, ""))
+        is None
+    ):
+        raise OperatorError(
+            "database-watchdog activity validations are incomplete"
+        )
+
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    current_operator = _tracked_bytes(operator_path, head=current_head)
+    current_validator = _tracked_bytes(validator_path, head=current_head)
+    transition_test_path = (
+        ROOT / "test/test_pcsm_database_watchdog_activity_transition.py"
+    )
+    prior_transition_test_path = (
+        ROOT / "test/test_pcsm_validation_path_compatibility_transition.py"
+    )
+    current_gitlink = str(
+        _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        current_config_bytes != base_config_bytes
+        or _canonical_bytes(current_config) != _canonical_bytes(base_config)
+        or current_operator != operator_gate["expected_operator"]
+        or current_validator != base_validator
+        or _tracked_bytes(transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=base_commit,
+            path=transition_test_path,
+            field="database-watchdog activity focused test",
+        )
+        or _tracked_bytes(prior_transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+            path=prior_transition_test_path,
+            field="prior validation-path focused test",
+        )
+        or current_source_identities.get("config")
+        != _identity(base_config_bytes)
+        or current_source_identities.get("operator")
+        != _identity(operator_gate["expected_operator"])
+        or current_source_identities.get("validator")
+        != _identity(base_validator)
+        or len(current_gitlink) < 3
+        or current_gitlink[:2] != ["160000", "commit"]
+        or current_gitlink[2] != DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "database-watchdog activity live source changed"
+        )
+    for item in expected_checkpoint_files:
+        path = ROOT / item["path"]
+        current_bytes = _tracked_bytes(path, head=current_head)
+        if _identity(current_bytes) != item["bytes_id"]:
+            raise OperatorError(
+                "database-watchdog activity checkpoint evidence changed"
+            )
+    source_paths = _restart_source_paths(board)
+    for name in ("taskboard", "objectives", "plan", "generator"):
+        checkpoint_bytes = _git_blob_at(
+            head=DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
+            path=source_paths[name],
+            field=f"database-watchdog checkpoint {name}",
+        )
+        current_bytes = _tracked_bytes(source_paths[name], head=current_head)
+        if (
+            current_bytes != checkpoint_bytes
+            or current_source_identities.get(name) != _identity(current_bytes)
+        ):
+            raise OperatorError(
+                "database-watchdog activity changed immutable authority"
+            )
+    return {
+        "receipt": payload,
+        "artifact_commit": operator_gate["artifact_commit"],
+        "sealed_source_head": operator_gate["sealed_source_head"],
+        "sealed_source_tree": operator_gate["sealed_source_tree"],
+        "accelerator_head": DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD,
+        "accelerator_tree": DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_TREE,
     }
 
 
@@ -5148,6 +5973,22 @@ def _owner_restart_admission(
         if isinstance(validation_path_transition_receipt, Mapping)
         else {}
     )
+    database_watchdog_activity_transition = validation_path_transition.get(
+        "database_watchdog_activity_transition"
+    )
+    database_watchdog_activity_transition = (
+        database_watchdog_activity_transition
+        if isinstance(database_watchdog_activity_transition, Mapping)
+        else {}
+    )
+    database_watchdog_activity_transition_receipt = (
+        database_watchdog_activity_transition.get("receipt")
+    )
+    database_watchdog_activity_transition_receipt = (
+        database_watchdog_activity_transition_receipt
+        if isinstance(database_watchdog_activity_transition_receipt, Mapping)
+        else {}
+    )
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
         "mode": admission_mode,
@@ -5182,6 +6023,10 @@ def _owner_restart_admission(
         ),
         "validation_path_compatibility_transition_receipt_id": str(
             validation_path_transition_receipt.get("receipt_id") or ""
+        ),
+        "database_watchdog_activity_transition_receipt_id": str(
+            database_watchdog_activity_transition_receipt.get("receipt_id")
+            or ""
         ),
         "current_head_descendant_repair": descendant_repair,
         "database_authority": {
@@ -6897,6 +7742,12 @@ def _owner_restart_receipt(
         "validation_path_compatibility_transition_receipt_id": str(
             admission.get(
                 "validation_path_compatibility_transition_receipt_id"
+            )
+            or ""
+        ),
+        "database_watchdog_activity_transition_receipt_id": str(
+            admission.get(
+                "database_watchdog_activity_transition_receipt_id"
             )
             or ""
         ),
