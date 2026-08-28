@@ -9,8 +9,35 @@
   "status": "implemented_non_promoted",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-028@current-head-python-compiler-round-trip-and-identity-selection-v1",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-028@current-head-python-compiler-round-trip-and-identity-selection-v2",
   "observed_at": "2026-08-28T06:12:13Z",
+  "evidence_amendment": {
+    "schema": "ipfs-accelerate.proof-carrying-semantic-minification.receipt-evidence-amendment@1",
+    "kind": "measured",
+    "non_authoritative": true,
+    "changes_task_status": false,
+    "changes_completion_or_promotion": false,
+    "observed_at_preserved": true,
+    "amendment_scope": "receipt_evidence_only",
+    "amended_at": "2026-08-28T18:22:05Z",
+    "terminal_base_commit": "083cf3415691230f40cd4276a49f7d1cdd739db7",
+    "terminal_base_tree": "17fe4def2df89f01e39ad4a394bb45025223ecc9",
+    "prior_artifact_identity": "urn:pcsm:task-receipt:PCSM-028@current-head-python-compiler-round-trip-and-identity-selection-v1",
+    "prior_receipt": {
+      "git_blob": "d0525bb1de7395495f20998e46704b0b3926b11b",
+      "sha256": "3631475bf96bac744a6d3bb9bf048ab39c98408a996eb2bd6a66805769882b3f"
+    },
+    "corrections": [
+      {
+        "json_pointer": "/source_inventory/6/sha256",
+        "old": "baddc5c5e84a12a47b7d9f7149f6bb0e2b67b187871386a9083dd93c4e8d0c48",
+        "new": "2ee2bf2d98e41143aa1c533a2b91ab50b15348b3f49e8eed67b7f259a5b4a615",
+        "verification_command": "git -C external/ipfs_datasets cat-file -t f58a3d7ac822c3d56411239c037b19433289e6f0 && git -C external/ipfs_datasets cat-file blob f58a3d7ac822c3d56411239c037b19433289e6f0 | sha256sum",
+        "verification_result": "The bound object is blob f58a3d7ac822c3d56411239c037b19433289e6f0 and its measured SHA-256 is 2ee2bf2d98e41143aa1c533a2b91ab50b15348b3f49e8eed67b7f259a5b4a615."
+      }
+    ],
+    "immutable_history_statement": "The prior receipt bytes remain immutable and retrievable as Git blob d0525bb1de7395495f20998e46704b0b3926b11b in Git history; this receipt-only evidence amendment does not rewrite that history or confer completion or promotion authority."
+  },
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -165,7 +192,7 @@
     },
     {
       "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
-      "sha256": "baddc5c5e84a12a47b7d9f7149f6bb0e2b67b187871386a9083dd93c4e8d0c48",
+      "sha256": "2ee2bf2d98e41143aa1c533a2b91ab50b15348b3f49e8eed67b7f259a5b4a615",
       "git_blob": "f58a3d7ac822c3d56411239c037b19433289e6f0",
       "role": "positive and negative CID profile, canonical structured-byte, decode-and-recompute, and fixture-tamper vectors",
       "evidence_kind": "measured"

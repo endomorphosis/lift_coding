@@ -9,8 +9,35 @@
   "status": "implemented_non_promoted",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-020@current-head-python-semantic-compiler-selection-v1",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-020@current-head-python-semantic-compiler-selection-v2",
   "observed_at": "2026-08-28T03:00:57Z",
+  "evidence_amendment": {
+    "schema": "ipfs-accelerate.proof-carrying-semantic-minification.receipt-evidence-amendment@1",
+    "kind": "measured",
+    "non_authoritative": true,
+    "changes_task_status": false,
+    "changes_completion_or_promotion": false,
+    "observed_at_preserved": true,
+    "amendment_scope": "receipt_evidence_only",
+    "amended_at": "2026-08-28T18:22:05Z",
+    "terminal_base_commit": "083cf3415691230f40cd4276a49f7d1cdd739db7",
+    "terminal_base_tree": "17fe4def2df89f01e39ad4a394bb45025223ecc9",
+    "prior_artifact_identity": "urn:pcsm:task-receipt:PCSM-020@current-head-python-semantic-compiler-selection-v1",
+    "prior_receipt": {
+      "git_blob": "8abf52b19c45e6249c9287a2984685f3df491ed9",
+      "sha256": "88c0bfe17eed6e9f01cc9d14832f8d23de31e436ab31a8e0a3d732f59a10b695"
+    },
+    "corrections": [
+      {
+        "json_pointer": "/source_inventory/6/git_blob",
+        "old": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6",
+        "new": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+        "verification_command": "git -C external/ipfs_datasets cat-file -t c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e && git -C external/ipfs_datasets cat-file blob c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e | sha256sum",
+        "verification_result": "The object type is blob and its SHA-256 is 11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba; the prior value omitted the final hexadecimal digit e."
+      }
+    ],
+    "immutable_history_statement": "The prior receipt bytes remain immutable and retrievable as Git blob 8abf52b19c45e6249c9287a2984685f3df491ed9 in Git history; this receipt-only evidence amendment does not rewrite that history or confer completion or promotion authority."
+  },
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -97,7 +124,7 @@
     {"path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/models.py", "sha256": "4b061c97838929a4cdc055998ce71aa854234c7e75d3fbee12595fa1bafa8a75", "git_blob": "87074b234b82bfdde77572b5caf0a9603257b49d", "role": "closed versioned semantic-index, symbol, source-span, edge, state, and invalidation schemas", "evidence_kind": "measured"},
     {"path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py", "sha256": "45f8bf0e045c2fda0131ca05839c88af07b68ca2ef54052ded41fc5376461757", "git_blob": "ac4bb9f9a893943386001fd1a57c872422bf35a2", "role": "positive and negative compiler coverage", "evidence_kind": "measured"},
     {"path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py", "sha256": "a87147cb360f9ce81abeefc2faf48ea63464a99ea6bfd50b6e92db55612287f2", "git_blob": "fc44652cacee42e33c580510ba7a75d11993e8e7", "role": "positive and negative parser/declaration/resource-bound coverage", "evidence_kind": "measured"},
-    {"path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py", "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba", "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6", "role": "deterministic pack-CID and stale/unavailable/opaque fail-closed coverage", "evidence_kind": "measured"}
+    {"path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py", "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba", "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e", "role": "deterministic pack-CID and stale/unavailable/opaque fail-closed coverage", "evidence_kind": "measured"}
   ],
   "compiler_exercise": {
     "kind": "simulated",
