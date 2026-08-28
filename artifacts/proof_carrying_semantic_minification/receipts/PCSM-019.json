@@ -1,0 +1,272 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-019",
+  "title": "Add canonical-byte and CID vectors",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G200",
+  "objective_id": "PCSM-019",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-019@current-head-canonical-byte-and-cid-vectors-selection-v1",
+  "observed_at": "2026-08-28T02:14:22Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 canonical-byte and CID-vector selection only",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-019.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-019.json",
+    "implementation_delta": "Reuse the existing datasets software-contract-cid-profile-v1 encoder, its live deterministic 15-vector document, and its positive/negative identity tests. No competing proof_context schema, vector generator, fixture, wrapper, storage layer, or language scope was created because the task admits only this receipt.",
+    "non_promotion_reason": "The required proof_context pytest command cannot collect in the authoritative sealed Python 3.12 environment because its explicitly configured anyio plugin is absent. This receipt records the existing implementation and does not claim that unavailable sealed validation passed."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "Calculated approximation. No estimated value is used to establish a vector, CID, schema binding, or test result.",
+    "simulated": "A deliberate deterministic fixture or live vector-document exercise; it is not production storage evidence and does not replace the required pytest suite.",
+    "unavailable": "A capability or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "50e72a20b3f97f1c9ef1c0c9622a657901b97646",
+    "outer_tree": "f733212798affa54ecf63363596fb312c21a98de",
+    "outer_subject": "Merge commit '1fe1a1c4793af97962dcc0d95def6a54e8403238' into agent/proof-carrying-semantic-minification-v1",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "50e72a20b3f97f1c9ef1c0c9622a657901b97646",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire_contract_only"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "b9d3b6617cac193b06a50ce9e807772fe7ec86c3",
+        "tree": "01e2f3649db97c179c6e3d2c2d419e4e9c0b9e58",
+        "authority_role": "consumer and scheduler boundary only"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical structured bytes, CID vectors, and recomputation tests"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage; not vector semantics"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "12678901a40c170b5fdcae959d1fe3bbcb881b95ee787c2324aeff2bb65471a8",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for each admitted gitlink; git -C <root> rev-parse HEAD and HEAD^{tree}; git status --porcelain=v1 for the outer repository and admitted roots; and ancestry checks for configured nested origin/main revisions.",
+      "result": "The outer head/tree, four superproject gitlinks, and nested heads/trees agree; the outer and datasets worktrees were clean before this receipt write. Configured datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 (tree 7169c2a67929044a02350bc26d0a51c853a4981b), accelerator origin/main 024bf40a6c35735b84e7faff844f862dec63abf3, kit origin/main 80bbdc3443e560b9bf40339c864a32689ccad8ef, and MCP++ current head are ancestors of their admitted heads.",
+      "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, or dirty admitted root requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID exists for this receipt-only selection. Existing source paths, Git blobs, and file SHA-256 values are not substituted for a SourceLinkReceipt."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "profile_id": "software-contract-cid-profile-v1",
+    "profile_version": "1.0.0",
+    "schema": "ipfs-datasets.software-contract-cid-vectors.v1",
+    "source_domain": {
+      "codec": "raw",
+      "cid": "CIDv1 lowercase base32 sha2-256 over exact bytes"
+    },
+    "structured_domain": {
+      "codec": "dag-json",
+      "canonicalization": "strict reviewed JSON/IPLD values; recursively lexicographically sorted keys; compact separators; ensure_ascii=False; UTF-8; floats, binary values, tuples, sets, Path values, host objects, NaN/infinity, and repr fallback fail closed",
+      "cid": "CIDv1 lowercase base32 sha2-256 over canonical UTF-8 bytes"
+    },
+    "python_api": [
+      "canonical_dag_json_bytes",
+      "cid_for_bytes",
+      "cid_for_obj",
+      "cid_for_structured",
+      "decode_and_recompute_source",
+      "decode_and_recompute_structured",
+      "cid_vectors_document",
+      "load_cid_vectors"
+    ],
+    "authority_boundary": "ipfs_datasets_py owns canonicalization and software-contract CID identity. ipfs_kit_py may store and verify exact bytes but does not own semantics. Local aliases, projection rows, model output, and receipt labels are never canonical identity.",
+    "minimum_delta_reason": "The existing profile already contains deterministic source and structured vectors, explicit schema/profile/version/domain separation, cross-runtime instructions, fixed CID anchors, recomputation, and failure cases. Creating an additional PCSM vector implementation would duplicate the selected authority and violates the exact receipt-only output boundary."
+  },
+  "source_inventory": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "sha256": "89e1fbc694a67f751de3a62d8206442e4904722c20f81827ae0a96a0fbee33a3",
+      "git_blob": "14458fb99ea57c19652398ee479d678ae3fbe507",
+      "role": "sole software-contract CIDv1 profile, strict canonical byte encoder, live golden-vector document, and decode-and-recompute control",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+      "sha256": "2ee2bf2d98e41143aa1c533a2b91ab50b15348b3f49e8eed67b7f259a5b4a615",
+      "git_blob": "f58a3d7ac822c3d56411239c037b19433289e6f0",
+      "role": "positive and negative canonical-byte, CID, vector, fixture-tamper, and recomputation coverage",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+      "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+      "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+      "role": "proof_context consumer that obtains ContextPack identity through cid_for_obj",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+      "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+      "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+      "role": "proof_context deterministic pack-CID and fail-closed stale/unavailable/opaque-source coverage",
+      "evidence_kind": "measured"
+    }
+  ],
+  "canonical_byte_and_cid_vectors": {
+    "kind": "simulated",
+    "generation": "cid_vectors_document() directly exercised against the selected current-head encoder with a fixed in-process corpus; this proves deterministic encoder output only, not external storage or cross-runtime execution.",
+    "document": {
+      "schema": "ipfs-datasets.software-contract-cid-vectors.v1",
+      "vector_count": 15,
+      "canonical_document_byte_length": 8605,
+      "canonical_document_sha256": "832cb2f0d9a0f97e8d03c39de5207e279f8475bdc26d022d8669e42471c024d7"
+    },
+    "cross_runtime_anchors": [
+      {
+        "id": "source.hello",
+        "domain": "source",
+        "exact_bytes_hex": "68656c6c6f",
+        "expected_cid": "bafkreibm6jg3ux5qumhcn2b3flc3tyu6dmlb4xa7u5bf44yegnrjhc4yeq"
+      },
+      {
+        "id": "structured.simple_map",
+        "domain": "structured",
+        "input": {"b": 1, "a": 2},
+        "canonical_utf8": "{\"a\":2,\"b\":1}",
+        "canonical_hex": "7b2261223a322c2262223a317d",
+        "expected_cid": "baguqeera2nrgvqykq7tppjscqiz3hructglwqzp2kueoijt4kqk4o2xxu5za"
+      },
+      {
+        "id": "structured.key_order_independent",
+        "domain": "structured",
+        "input": {"a": 2, "b": 1},
+        "canonical_utf8": "{\"a\":2,\"b\":1}",
+        "canonical_hex": "7b2261223a322c2262223a317d",
+        "expected_cid": "baguqeera2nrgvqykq7tppjscqiz3hructglwqzp2kueoijt4kqk4o2xxu5za",
+        "invariant": "same canonical bytes and CID as structured.simple_map despite opposite insertion order"
+      },
+      {
+        "id": "structured.nested_unicode",
+        "domain": "structured",
+        "canonical_hex": "7b2261223a22756e69636f64652d636166c3a9222c227a223a7b2279223a5b312c2278222c6e756c6c2c747275655d7d7d",
+        "expected_cid": "baguqeeralvh3pi5vx47ncbxrq555rs5oo374rej3a4d4zfng5p7dsdvvgyrq",
+        "invariant": "non-ASCII is stored as UTF-8, not ASCII-escaped"
+      }
+    ],
+    "full_corpus_coverage": "Four raw-byte vectors cover empty, ASCII, UTF-8, and embedded-NUL/binary input. Eleven structured vectors cover null, booleans, signed integers, empty containers, key-order independence, nested Unicode, and heterogeneous reviewed lists. Every vector carries Python and JavaScript instructions plus a CIDv1/base32/sha2-256/codec binding."
+  },
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+        "evidence_kind": "measured",
+        "execution_status": "unavailable_in_authoritative_sealed_environment",
+        "positive_coverage": [
+          "raw source bytes produce fixed CIDv1/base32/raw/sha2-256 anchors",
+          "structured maps produce sorted compact UTF-8 canonical bytes and a fixed dag-json CID anchor",
+          "opposite key insertion orders produce an identical CID",
+          "all 15 live vectors recompute from their exact bytes or canonical structured payloads",
+          "decode-and-recompute accepts matching source and structured payloads",
+          "materialized fixture round-trips byte-identically with the live vector document",
+          "all vectors declare Python and JavaScript parity instructions"
+        ],
+        "negative_coverage": [
+          "non-bytes source input is rejected",
+          "tampered bytes, tampered structured values, and wrong-domain codecs are rejected",
+          "float, NaN, infinity, bytes, sets, tuples, Paths, host objects, and non-string map keys are rejected",
+          "uppercase, empty, garbage, and profile-invalid CIDs are rejected",
+          "a tampered persisted vector fixture is rejected"
+        ]
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+        "evidence_kind": "measured",
+        "execution_status": "unavailable_in_authoritative_sealed_environment",
+        "positive_coverage": ["identical ContextPack inputs produce identical pack CID"],
+        "negative_coverage": ["stale, unavailable, and opaque-without-exact-scanned-tree inputs fail closed"]
+      }
+    ],
+    "live_vector_exercise": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "PYTHONPATH=external/ipfs_datasets python -c <import cid_vectors_document and canonical_dag_json_bytes; emit count, SHA-256, length, and vectors>",
+      "assertions": [
+        "the current-head document emitted 15 deterministic vectors",
+        "the canonical document bytes measured 8605 bytes with SHA-256 832cb2f0d9a0f97e8d03c39de5207e279f8475bdc26d022d8669e42471c024d7",
+        "source.hello and structured.simple_map equal their fixed published anchors",
+        "the two insertion-order variants share canonical bytes and CID"
+      ],
+      "limitation": "This used the provider environment and is explicitly simulated rather than sealed validation evidence."
+    },
+    "provider_vector_unit_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+      "result": "20 passed in 0.30s",
+      "coverage": "The selected vector/profile test file exercised fixed anchors, canonical bytes, recomputation, profile and codec rejection, and fixture-tamper rejection.",
+      "limitation": "The provider environment has additional packages and is not substituted for the authoritative sealed validation environment."
+    },
+    "required_validation": {
+      "kind": "unavailable",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "status": "unavailable",
+      "result": "pytest aborted before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "unqualified_python_on_authoritative_path": "unavailable",
+      "fail_closed_disposition": "No provider-home package, changed plugin configuration, or relaxed test selection was treated as authoritative validation evidence."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only reuse selection."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current-head outer and nested tree bindings; scheduler digest; source/test SHA-256 and Git blobs; the selected CID profile, schema, exact fixed anchors, source-test inventory, and sealed pytest capability failure.",
+    "estimated": "None.",
+    "simulated": "A live deterministic 15-vector encoder exercise and canonical document digest measurement, plus the provider-environment vector unit test (20 passed) only.",
+    "unavailable": "Required sealed proof_context pytest execution, formal-prover result, PCSM source-map artifact/CID, and a self-describing storage CID for this receipt."
+  },
+  "limitations": [
+    "The task is receipt-only; it neither materializes the optional durable cid_vectors.json fixture nor adds a second vector schema or generator.",
+    "The existing vectors are authoritative only under software-contract-cid-profile-v1 and the bound datasets source digest; consumers must recompute and reject any different profile, codec, bytes, or schema version.",
+    "The required proof_context suite cannot collect in the authoritative sealed environment because anyio is absent. Its source tests are inventoried, not represented as sealed execution.",
+    "The provider-environment live vector exercise is simulated evidence and does not establish cross-runtime implementation or immutable storage availability.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change the receipt bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this PCSM selection. Do not alter the inventoried source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, source digest, scheduler binding, profile version, or vector document digest changes."
+  }
+}
