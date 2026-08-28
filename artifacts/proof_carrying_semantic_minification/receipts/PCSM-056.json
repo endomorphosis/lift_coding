@@ -1,0 +1,241 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-056",
+  "title": "Implement scope and path enforcement",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G500",
+  "objective_id": "PCSM-056",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-056@current-head-python-scope-path-capability-v1",
+  "observed_at": "2026-08-28T06:42:14Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 scope and path enforcement assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-056.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-056.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "The exact current Python forest contains mature fail-closed path and scope controls in separate authorities: repository target resolution, deterministic repair-root ownership, and GUI patch scope. None is a PCSM source-link/rewrite admission package bound simultaneously to canonical source identity, current commit/tree, aggregate PCSM source-map CID, exact current file/node/span, and a closed deterministic decision. The declared-output authority for this dispatch permits only this receipt. The smallest authority-preserving delta is therefore a typed unavailable/non-promotion disposition; no competing scope authority or unreviewed source mutation is created.",
+    "non_promotion_reason": "Required general validation passes in the provider and sealed environments, but it exercises structured residual-output decoding, not current-forest source-link/rewrite scope enforcement. PCSM-051 and PCSM-052 record the still-absent source-map/linker prerequisites. No package-specific positive and negative vectors exist, so no completion or promotion is authorized."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish scope/path behavior, current-tree identity, schema binding, or test success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize mutation or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "d170d371aa753f1504d375f594716ca74abe2f4f",
+    "outer_tree": "7a9c96f53d1321d7e3e34a4fc51d2b054883b7cf",
+    "dispatch_tree_id": "d170d371aa753f1504d375f594716ca74abe2f4f",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract only; no Python PCSM scope/path authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "named Python-v1 implementation and test boundary; no PCSM source-forest scope/path package selected",
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "source-CID/source-span boundary only; no aggregate PCSM source-map authority selected",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no PCSM scope/path authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted nested HEAD and HEAD^{tree}; inspected outer porcelain before receipt creation; recorded source Git blobs and SHA-256 values; and searched the exact accelerator implementation and required-test roots for PCSM source scope/path, source-map, source-link, and linker contracts.",
+      "result": "The dispatch commit equals outer HEAD, the recorded nested commit/tree pairs equal their checked-out heads, and outer porcelain was clean before this receipt was added. Generic fail-closed scope/path controls exist, but the focused search found no PCSM source scope/path contract, SourceMapResolver@1, SourceLinkReceipt@1, BoundedPythonLinker@1, SemanticSourceLinker, source_link_receipt, or source_map_resolver identifier.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink/head/tree, scheduler digest, listed source digest, source-search result, current source-map contract/CID, or required-test result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree PCSM SourceMapResolver@1, SourceLinkReceipt@1, canonical aggregate source-map CID, or source-link/rewrite admission receipt exists. Git trees, Git blobs, individual source SHA-256 values, generic repository descriptors, and caller-supplied path strings are not substitutes."
+    }
+  },
+  "required_package_assessment": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_package": "PCSM Python-v1 scope and path enforcement for current source-link/rewrite admission",
+    "required_contract": "A versioned closed admission receipt binding canonical source identity (not an alias), base current commit/tree, aggregate source-map CID, exact current file CID, normalized repository-relative path, resolved node/SourceSpan, allowed semantic scope, and deterministic typed allow/reject reason before any source-link/rewrite operation.",
+    "required_bindings": [
+      "explicit scope/path admission schema and version",
+      "canonical CodeIR or source identity CID rather than an alias",
+      "base current commit and tree identity",
+      "current aggregate source-map CID and exact current file CID",
+      "normalized repository-relative path and resolved node/SourceSpan after symlink-safe containment",
+      "declared allowed semantic scope and closed operation grammar",
+      "deterministic decision, canonical receipt identity, and typed rejection for undeclared, escaped, stale, missing, ambiguous, overlapping, generated, and unsupported targets",
+      "positive in-scope/current-source vectors and negative path-escape, parent traversal, absolute-path, symlink escape, undeclared-path, cross-root, stale-map, ambiguity, overlap, and generated-source vectors"
+    ],
+    "source_search": {
+      "kind": "measured",
+      "method": "rg -n -i --glob '*.py' --glob '*.json' --glob '*.md' 'PCSM.*(scope|path)|ScopePath(Enforcement|Gate)|SourceScope(Receipt|Gate)|SourcePath(Receipt|Gate)|SourceMapResolver|SourceLinkReceipt|BoundedPythonLinker|SemanticSourceLinker|source_link_receipt|source_map_resolver' over external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor and external/ipfs_accelerate/test/agent_supervisor, followed by focused inspection of repository_forest.py, target_resolver.py, root_ownership.py, patch_scope.py, and the required PCSM test module.",
+      "result": "No PCSM source scope/path, source-map resolver, source-link receipt, or bounded Python linker identifier was found. The only matching scope gate is GuiPatchScopeGate@1, a GUI optimizer authority. The required test root contains one symlinked PCSM test module for residual structured decoding.",
+      "meaning": "Existing controls remain in their established repository-resolution, deterministic-repair, or GUI domains and cannot be relabelled as PCSM current-source admission."
+    },
+    "dependency_assessment": {
+      "kind": "measured",
+      "dependency": "PCSM-052, with PCSM-051 as its source-map prerequisite",
+      "receipts": [
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-051.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-052.json"
+      ],
+      "result": "Those receipts record the source-map/linker capability gap. Their historical tree observations are not reused as current identity evidence here; this receipt independently rechecked the current source forest and confirmed that the prerequisites remain absent."
+    },
+    "disposition": "The requested behavior cannot truthfully be claimed implemented as a PCSM current-source admission gate, schema/version/CID bound, or covered by package-specific positive and negative tests. No source mutation, proof acceptance, validation acceptance, promotion, or task completion is authorized."
+  },
+  "nearest_existing_equivalents": [
+    {
+      "kind": "measured",
+      "component": "ipfs_accelerate_py.agent_supervisor.analysis.repository_forest.path_within_repository",
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_forest.py",
+      "git_blob": "a53e0d59b0515d72ffc7868fe2c4b0cb8703f52f",
+      "sha256": "f4c236636e1640e52a34a65a777a41bbf9166989435daa692519ce1e7ed041e6",
+      "authority_boundary": "Resolves a candidate under a RepositoryDescriptor and rejects containment failures after symlink resolution with RepositoryForestError(path_escape).",
+      "rejection_reason": "It has no PCSM schema/version, canonical source identity CID, aggregate source-map CID, exact source node/span binding, declared semantic-scope admission, rewrite decision, or PCSM receipt."
+    },
+    {
+      "kind": "measured",
+      "component": "RepairRootOwnership@1",
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/root_ownership.py",
+      "git_blob": "00fe1b2cc128e95aa72dcaa6b5babade26dd9eb5",
+      "sha256": "20e3a3cbfe56078375e36bea8cd7e48db426ae9ec05642289af9be902a8aa380",
+      "implemented_contracts": [
+        "RepairRootOwnership@1",
+        "ipfs_accelerate_py/agent-supervisor/deterministic-repair-roots@1",
+        "ipfs_accelerate_py/agent-supervisor/repair-root-ownership-receipt@1"
+      ],
+      "authority_boundary": "Binds named Git worktree roots to current head/tree and dirty-overlay fingerprints, canonicalizes write paths, and rejects escaping, ambiguous, cross-root, duplicate, and outside-prefix writes before returning a SHA-256-addressed ownership receipt.",
+      "rejection_reason": "It is deterministic-repair ownership admission, not PCSM source-link/rewrite admission; it does not consume a PCSM source-map CID or resolve a canonical source identity to a current file/node/span."
+    },
+    {
+      "kind": "measured",
+      "component": "GuiPatchScopeGate@1",
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/gui_optimizer/patch_scope.py",
+      "git_blob": "9a1999c917eb83e4ac6b418914d762b0a0221b87",
+      "sha256": "f5745387e3ecfc5798341c05bc983eccbbb7f4de642ffd128ad559d875baa281",
+      "implemented_contracts": [
+        "GuiPatchScopeGate@1",
+        "GuiPatchScopeDecision@1",
+        "ipfs_accelerate_py/agent-supervisor/gui-optimizer/patch-scope-gate@1"
+      ],
+      "authority_boundary": "Fail-closed GUI proposal/diff/invalidation gate that rejects undeclared or unsafe paths and never treats a scope declaration as host authority.",
+      "rejection_reason": "It is constrained to VerifiedGuiOptimizer proposals, GUI authority evidence, components, visual/state/test bounds, and GUI patch limits; it is not a general PCSM source-forest authority and must not be reused as one."
+    },
+    {
+      "kind": "measured",
+      "component": "RepositoryTargetResolver scope-hint resolution",
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/target_resolver.py",
+      "git_blob": "3bdac2988e2bc4d34d578f3f772835ffb10b6a5e",
+      "sha256": "96acd3fbbbeede4410a2dd7125867e2804873e42dc81006e5ccecb77e351a568",
+      "authority_boundary": "Rejects parent traversal and, unless explicitly permitted, symlink scope hints before using repository containment resolution.",
+      "rejection_reason": "It resolves a launch target/scope from resolver evidence; it neither creates an allowed PCSM source-edit scope nor binds source-map/linker identities or rewrite admission."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "package_specific_tests": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM scope/path implementation, versioned source admission receipt, aggregate current-forest source-map CID, or package-specific positive/negative vector module exists in the bound source forest. Adjacent generic controls and residual structured-decoding tests are not substituted."
+    },
+    "nearest_component_positive_and_negative_coverage": {
+      "kind": "measured",
+      "component": "external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py",
+      "source_git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "source_sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "positive_coverage": [
+        "all closed residual task families have grammars",
+        "a valid compact structured output decodes",
+        "a bounded typed patch sketch is valid"
+      ],
+      "negative_coverage": [
+        "parse failures, duplicate JSON fields, unknown fields, and model-created completion reject",
+        "untyped context and invalid ranking vectors reject",
+        "patch sketches reject parent-traversal and absolute paths, zero or excessive line limits, untyped operations, and empty symbol scopes"
+      ],
+      "non_equivalence": "These assertions validate structured residual model-output admission only. They do not bind a path to a current PCSM source-map CID, check source-file/node/span identity, distinguish cross-root/symlink/generated-source cases, or admit/reject a source-link/rewrite operation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "command_executed": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Provider Python 3.12.3 with provider-installed pytest 9.1.1 and plugins.",
+      "status": "passed",
+      "result": "11 passed in 0.39s",
+      "scope_limit": "The passing suite does not establish the absent PCSM current-source scope/path package."
+    },
+    "sealed_required_validation": {
+      "kind": "measured",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm056-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME.",
+      "status": "passed",
+      "result": "11 passed in 0.33s",
+      "scope_limit": "This is a sealed passing result for the required general suite only; it is not package-specific PCSM source scope/path validation."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-056 scope/path proof obligation or approved digest-bound prover deployment is present in the authoritative sealed environment."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; scheduler and source SHA-256 values; source Git blobs; current generic scope/path authority boundaries; absence search; and sealed required-suite result (11 passed in 0.33s).",
+    "estimated": "None. No estimate is used to establish scope/path behavior, identity, validation, or promotion.",
+    "simulated": "Provider required-suite execution (11 passed in 0.39s). It is corroborative only and is not substituted for sealed validation or missing package-specific coverage.",
+    "unavailable": "A PCSM current-source scope/path admission package; versioned source-admission receipt; aggregate current-forest source-map CID; canonical source-to-current-file/node/span resolution; package-specific positive and negative vectors; formal-prover result; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only under exact declared-output authority; no task-owned implementation or test path may be changed by this dispatch.",
+    "The existing repository, repair, resolver, and GUI scope controls remain valid only in their established domains and are not promoted or relabelled as PCSM current-source admission.",
+    "Without a current aggregate PCSM source-map CID and linker receipt, path containment cannot establish source identity, semantic scope, or rewrite authorization.",
+    "The required suite passes in the sealed environment, but it provides no package-specific current-source scope/path positive or negative coverage.",
+    "No aliases are accepted as canonical identity and no M2/M3 mutation, generated-source mutation, or automatic source materialization is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter protected planning documents, existing generic scope/path components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, source-search result, source-map contract/CID, or validation-environment capability change."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalents_reused_first": true,
+    "evidence_classes_distinguished": true,
+    "provider_required_validation_passed": true,
+    "authoritative_sealed_validation_passed": true,
+    "package_specific_positive_and_negative_tests_available": false,
+    "required_package_implemented": false,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_unavailable"
+  }
+}
