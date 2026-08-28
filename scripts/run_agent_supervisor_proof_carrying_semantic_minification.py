@@ -140,6 +140,26 @@ HANDOFF_BLOCKED_RETRY_SIDECAR_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-blocked-retry-sidecar-evidence@1"
 )
+CURRENT_HEAD_BLOCKED_RETRY_BATCH_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-current-head-blocked-retry-batch@1"
+)
+CURRENT_HEAD_BLOCKED_RETRY_BATCH_ENTRY_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-current-head-blocked-retry-entry@1"
+)
+CURRENT_HEAD_BLOCKED_RETRY_BATCH_EVIDENCE_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-current-head-blocked-retry-evidence@1"
+)
+CURRENT_HEAD_BLOCKED_RETRY_BATCH_RESULT_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-current-head-blocked-retry-result@1"
+)
+CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-current-head-descendant-repair@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -237,6 +257,44 @@ HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-bootstrap-broker-resilience-repair@1"
 )
+CURRENT_HEAD_BLOCKED_RETRY_BATCH_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "current-head-blocked-retry-batch.json"
+)
+CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-current-head-blocked-retry-repair.json"
+)
+CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
+    "PENDING_CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT"
+)
+CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_HEAD: Final = (
+    "9c0881ddbd766bb28eee82b25626e990de7a48eb"
+)
+CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_TREE: Final = (
+    "d25161aa168b63cec55dea59cb5eb9880ff7e841"
+)
+CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD: Final = (
+    "aa5cde27b5772a3f26f4b0bf9e00f1c52ce4c8c9"
+)
+CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_TREE: Final = (
+    "92891293dea1aa8e8d10fb7ee731f808c881de9a"
+)
+CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_CONFIG_ID: Final = (
+    "sha256:ecdad8bf8acde7e444c54f3f765b71d46123d52a76dcc3289f932f49011f0b82"
+)
+CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_ACCELERATOR_HEAD: Final = (
+    "e33a439d17aaf8635f5d80520e93c9c52d56fa09"
+)
+CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_ACCELERATOR_TREE: Final = (
+    "e74410285ade6ceb70c42660e5f1372029bb1d1a"
+)
 HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_BASE_COMMIT: Final = (
     "9cc27d09f18532dccdc68ef9e429150905823ae2"
 )
@@ -278,6 +336,103 @@ HANDOFF_REPAIR_BLOCKED_RETRY_OPERATION: Final = (
 HANDOFF_REPAIR_BLOCKED_RETRY_REASON: Final = (
     "database_operator_blocked_retry_recovery"
 )
+CURRENT_HEAD_BLOCKED_RETRY_BATCH_OPERATION: Final = (
+    "task.blocked.retry.recover.batch"
+)
+CURRENT_HEAD_BLOCKED_RETRY_TERMINAL_REASON: Final = (
+    "protected-path preservation event chain is not exact"
+)
+CURRENT_HEAD_BLOCKED_RETRY_POST_RECOVERY_REQUIREMENT: Final = (
+    "fresh_portal_claim_and_current_head_revalidation"
+)
+CURRENT_HEAD_BLOCKED_RETRY_EXPECTATIONS: Final = {
+    "PCSM-013": {
+        "task_cid": (
+            "baguqeera5pkum2zplgdvym6ucu5yhvwo2yfl7el5hhac5cwdhd4uacgya5bq"
+        ),
+        "source_revision": 8,
+        "source_attempt_number": 2,
+        "source_task_body_id": (
+            "sha256:316a90efd6a51a0ac01cf9887cd9ce182f5cef2c7d4ec5e1"
+            "2453eaeccde71046"
+        ),
+        "source_completion_receipt_id": (
+            "sha256:4657ef0be7d634aaf937903f88d1fe5a895d40af56494791"
+            "24ba26d62f0c0880"
+        ),
+    },
+    "PCSM-016": {
+        "task_cid": (
+            "baguqeera5ntif64zvn6jxokaqwjj6t64mjaboxsy2yhmlifs5xwm2i7dlkia"
+        ),
+        "source_revision": 4,
+        "source_attempt_number": 1,
+        "source_task_body_id": (
+            "sha256:6753faa4201e7449a7b14441d3ed22468517e03706a0caa3"
+            "dae41db18372454d"
+        ),
+        "source_completion_receipt_id": (
+            "sha256:c4d0a86fda93ef0addc308ecc33f42c5d39381183bf065a9"
+            "048b413873277e3e"
+        ),
+    },
+    "PCSM-017": {
+        "task_cid": (
+            "baguqeeravik6msftwaidryxvqqb2y6evm7gkeqch5dbhrgvgtjhoymtpfa4a"
+        ),
+        "source_revision": 4,
+        "source_attempt_number": 1,
+        "source_task_body_id": (
+            "sha256:674b43216c1da57eef0a707404b246e6c39831ecdb6d23b2"
+            "b42031eccb1f8692"
+        ),
+        "source_completion_receipt_id": (
+            "sha256:a06ee1539e4c0b48840dbd354b6550554d0a16f48b6b8bd7"
+            "09095f8f8bce0fc5"
+        ),
+    },
+    "PCSM-018": {
+        "task_cid": (
+            "baguqeeraa5k5sw3vgizciinrkscjudqi67b6gqz7hwhbomdj6c47xd3u777q"
+        ),
+        "source_revision": 4,
+        "source_attempt_number": 1,
+        "source_task_body_id": (
+            "sha256:714096554355bd73a2360b8950559e9ecb06ddea72c4df5c"
+            "eddb54507604109d"
+        ),
+        "source_completion_receipt_id": (
+            "sha256:02b82457187480e7ef8c4652c89bbb34124c43b6e10f55a6"
+            "588b9de4e0fcf5e6"
+        ),
+    },
+}
+CURRENT_HEAD_BLOCKED_RETRY_INCIDENT_EXPECTATIONS: Final = {
+    "PCSM-013": {
+        "lane_index": 0,
+        "portal_attempt_id": "5415d64990254cf912239edd",
+        "rescue_commit": "0f2f459e330c087fd224530691a8a9c58f122ed7",
+        "merge_commit": "b723da398df6fabb7602cd2c84146a80d43bb226",
+    },
+    "PCSM-016": {
+        "lane_index": 3,
+        "portal_attempt_id": "1053223fd16c95904203f13d",
+        "rescue_commit": "f42bfaa6da74e8132de7ea3bcc5f0e666438fb86",
+        "merge_commit": "eb52860cd2b1854462dc7ce54be0feae6f64bd49",
+    },
+    "PCSM-017": {
+        "lane_index": 1,
+        "portal_attempt_id": "f122e173dac6c6ed1a59adf8",
+        "rescue_commit": "20880fddd69a69d7a8f06ce5e8626ca7b6b5b8e3",
+        "merge_commit": "8836019efbe5de8e77da6738a6bb9617a271fe32",
+    },
+    "PCSM-018": {
+        "lane_index": 2,
+        "portal_attempt_id": "88fa9dcc6ee1064bcdce5670",
+        "rescue_commit": "00847e788fdd44c99bf7f7afb7cfd9167a338675",
+        "merge_commit": "de272f66e7046105d2ad8c5bed836f18bd4c7ef5",
+    },
+}
 HANDOFF_REPAIR_SOURCE_TASK_BODY_ID: Final = (
     "sha256:8992ab06d2296750d97d9c40011b1e2fb517df37d222871f28adbded0bed8bb1"
 )
@@ -1123,8 +1278,6 @@ def _verified_generation_replay_repair(
         or sealed_operator_identity
         != HANDOFF_REPLAY_REPAIR_SEALED_OPERATOR_IDENTITY
         or payload.get("repair_base_commit") != base_commit
-        or payload.get("current_operator_identity")
-        != current_operator_identity
         or not isinstance(exact_change, Mapping)
         or dict(exact_change)
         != {
@@ -1938,11 +2091,59 @@ def _verified_bootstrap_broker_resilience_repair(
         != HANDOFF_BOOTSTRAP_BROKER_RESILIENCE_REPAIR_SEALED_OPERATOR_IDENTITY
         or _identity(base_bytes) != payload.get("repair_base_operator_identity")
         or base_bytes.count(pending_base) != 1
-        or current_bytes != expected_current
-        or _identity(current_bytes) != current_operator_identity
+        or _identity(expected_current)
+        != payload.get("current_operator_identity")
     ):
         raise OperatorError(
             "PCSM bootstrap broker resilience repair source delta changed"
+        )
+    if current_bytes != expected_current:
+        descendant = _json_mapping_bytes(
+            _tracked_bytes(
+                CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH,
+                head=current_head,
+            ),
+            field="current-head blocked-retry descendant repair",
+        )
+        descendant_body = dict(descendant)
+        descendant_receipt_id = str(
+            descendant_body.pop("receipt_id", "") or ""
+        )
+        repair_base = descendant.get("repair_base")
+        sealed_source = descendant.get("sealed_source")
+        historical_operator = _git_blob_at(
+            head=CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_HEAD,
+            path=operator_path,
+            field="historical blocked-retry operator",
+        )
+        if (
+            descendant.get("schema")
+            != CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_SCHEMA
+            or not isinstance(repair_base, Mapping)
+            or repair_base.get("source_head")
+            != CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT
+            or not isinstance(sealed_source, Mapping)
+            or sealed_source.get("operator_identity")
+            != _identity(current_bytes)
+            or _identity(expected_current) != current_operator_identity
+            or historical_operator != expected_current
+            or re.fullmatch(
+                r"sha256:[0-9a-f]{64}", descendant_receipt_id
+            )
+            is None
+            or _identity(descendant_body) != descendant_receipt_id
+        ):
+            raise OperatorError(
+                "PCSM current-head blocked-retry operator delta changed"
+            )
+        _git_is_ancestor(
+            CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT,
+            current_head,
+            field="blocked-retry operator descendant lineage",
+        )
+    elif _identity(current_bytes) != current_operator_identity:
+        raise OperatorError(
+            "PCSM bootstrap broker resilience repair identity changed"
         )
     return payload
 
@@ -2488,6 +2689,661 @@ def _verified_handoff_repair(
     return payload
 
 
+def _source_forest_at_commit(
+    config: Mapping[str, Any],
+    *,
+    head: str,
+) -> dict[str, Any]:
+    """Reproduce a historical forest without changing live nested checkouts."""
+
+    binding = config.get("source_binding")
+    if not isinstance(binding, Mapping):
+        raise OperatorError("historical source_binding is absent")
+    specifications = (
+        (
+            "ipfs_accelerate",
+            "ipfs_accelerate_submodule_path",
+            "ipfs_accelerate_planning_revision",
+            "ipfs_accelerate_planning_tree",
+            "ipfs_accelerate_origin_main_revision",
+        ),
+        (
+            "ipfs_datasets",
+            "ipfs_datasets_submodule_path",
+            "ipfs_datasets_planning_revision",
+            "ipfs_datasets_planning_tree",
+            "ipfs_datasets_origin_main_revision",
+        ),
+        (
+            "ipfs_kit",
+            "ipfs_kit_submodule_path",
+            "ipfs_kit_planning_revision",
+            "ipfs_kit_planning_tree",
+            "ipfs_kit_origin_main_revision",
+        ),
+        (
+            "mcp_plus_plus",
+            "mcp_plus_plus_submodule_path",
+            "mcp_plus_plus_planning_revision",
+            "mcp_plus_plus_planning_tree",
+            "mcp_plus_plus_origin_main_revision",
+        ),
+    )
+    nested: list[dict[str, str]] = []
+    for repository_name, path_field, revision_field, tree_field, origin_field in (
+        specifications
+    ):
+        relative = str(binding.get(path_field) or "")
+        revision = str(binding.get(revision_field) or "")
+        tree = str(binding.get(tree_field) or "")
+        origin = str(binding.get(origin_field) or "")
+        repository = _safe_path(
+            ROOT,
+            relative,
+            field=f"historical {repository_name} path",
+        )
+        if (
+            not repository.is_dir()
+            or _git_commit_tree(
+                revision,
+                field=f"historical {repository_name} revision",
+                repository=repository,
+            )
+            != tree
+        ):
+            raise OperatorError(
+                f"historical {repository_name} revision differs from its tree"
+            )
+        _git_is_ancestor(
+            origin,
+            revision,
+            field=f"historical {repository_name} origin lineage",
+            repository=repository,
+        )
+        tree_row = str(_git("ls-tree", head, "--", relative)).strip().split()
+        if (
+            len(tree_row) < 3
+            or tree_row[0] != "160000"
+            or tree_row[1] != "commit"
+            or tree_row[2] != revision
+        ):
+            raise OperatorError(
+                f"historical {repository_name} gitlink differs from its seal"
+            )
+        nested.append(
+            {
+                "repository": repository_name,
+                "path": relative,
+                "head": revision,
+                "tree": tree,
+                "access": "supervisor_scoped_cross_repository_worktree",
+            }
+        )
+    result: dict[str, Any] = {
+        "source_head": head,
+        "nested_repositories": nested,
+        "cross_repository_writes": True,
+    }
+    result["source_forest_root"] = _identity(result)
+    return result
+
+
+def _verified_current_head_blocked_retry_descendant_repair(
+    *,
+    board: Any,
+    current_head: str,
+    current_tree: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    current_attempt_limit: int,
+    historical_repair: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Admit the exact 9c→aa5→sealed-base repair and four-task batch."""
+
+    base_commit = CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError("current-head blocked-retry repair base is unsealed")
+    payload = _json_mapping_bytes(
+        _tracked_bytes(
+            CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH,
+            head=current_head,
+        ),
+        field="current-head blocked-retry descendant repair",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "historical_authority",
+        "intermediate_seal",
+        "repair_base",
+        "sealed_source",
+        "blocked_retry_batch",
+        "validations",
+        "historical_receipts_preserved",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    historical = payload.get("historical_authority")
+    intermediate = payload.get("intermediate_seal")
+    repair_base = payload.get("repair_base")
+    sealed_source = payload.get("sealed_source")
+    batch_binding = payload.get("blocked_retry_batch")
+    validations = payload.get("validations")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema")
+        != CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_SCHEMA
+        or payload.get("reason")
+        != "reseal_false_protected_path_blocks_for_fresh_portal_revalidation"
+        or not isinstance(historical, Mapping)
+        or not isinstance(intermediate, Mapping)
+        or not isinstance(repair_base, Mapping)
+        or not isinstance(sealed_source, Mapping)
+        or not isinstance(batch_binding, Mapping)
+        or not isinstance(validations, list)
+        or not validations
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError("current-head blocked-retry descendant seal is invalid")
+
+    historical_fields = {
+        "source_head",
+        "repository_tree_id",
+        "config_identity",
+        "operator_identity",
+        "handoff_repair_receipt_id",
+        "max_task_attempts",
+    }
+    if (
+        set(historical) != historical_fields
+        or historical.get("source_head")
+        != CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_HEAD
+        or historical.get("repository_tree_id")
+        != CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_TREE
+        or historical.get("config_identity")
+        != "sha256:4f404caf87fe4a927875a16bf7a2117128079ae18bebd3399305f9d8963b108c"
+        or historical.get("operator_identity")
+        != "sha256:125612467dbf9b0c40da9bee9b9e1bfa59dce4e79df3a0bcccef3e9e5b8be433"
+        or historical.get("handoff_repair_receipt_id")
+        != historical_repair.get("receipt_id")
+        or historical.get("max_task_attempts") != 2
+    ):
+        raise OperatorError("historical blocked-retry authority changed")
+
+    intermediate_fields = {
+        "source_head",
+        "repository_tree_id",
+        "config_identity",
+        "accelerator_head",
+        "accelerator_tree",
+        "first_parent_chain",
+        "added_receipts",
+    }
+    chain = intermediate.get("first_parent_chain")
+    added_receipts = intermediate.get("added_receipts")
+    if (
+        set(intermediate) != intermediate_fields
+        or intermediate.get("source_head")
+        != CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD
+        or intermediate.get("repository_tree_id")
+        != CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_TREE
+        or intermediate.get("config_identity")
+        != CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_CONFIG_ID
+        or intermediate.get("accelerator_head")
+        != CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_ACCELERATOR_HEAD
+        or intermediate.get("accelerator_tree")
+        != CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_ACCELERATOR_TREE
+        or not isinstance(chain, list)
+        or not chain
+        or not isinstance(added_receipts, list)
+    ):
+        raise OperatorError("intermediate blocked-retry seal changed")
+    observed_chain = tuple(
+        line
+        for line in str(
+            _git(
+                "rev-list",
+                "--first-parent",
+                "--reverse",
+                f"{CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_HEAD}.."
+                f"{CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    sealed_chain: list[str] = []
+    for item in chain:
+        if not isinstance(item, Mapping) or set(item) != {
+            "commit",
+            "tree",
+            "parents",
+        }:
+            raise OperatorError("intermediate first-parent chain is malformed")
+        commit = str(item.get("commit") or "")
+        parents = str(_git("show", "-s", "--format=%P", commit)).strip().split()
+        if (
+            _git_commit_tree(commit, field="intermediate chain commit")
+            != item.get("tree")
+            or parents != item.get("parents")
+        ):
+            raise OperatorError("intermediate first-parent chain changed")
+        sealed_chain.append(commit)
+    if tuple(sealed_chain) != observed_chain:
+        raise OperatorError("intermediate first-parent chain is incomplete")
+
+    expected_receipt_paths = {
+        f"artifacts/proof_carrying_semantic_minification/receipts/PCSM-{number}.json"
+        for number in ("011", "013", "014", "015", "016", "017", "018")
+    }
+    observed_receipt_paths: set[str] = set()
+    for item in added_receipts:
+        if not isinstance(item, Mapping) or set(item) != {"path", "bytes_id"}:
+            raise OperatorError("intermediate added receipt binding is malformed")
+        path = str(item.get("path") or "")
+        observed_receipt_paths.add(path)
+        if _identity(
+            _git_blob_at(
+                head=CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD,
+                path=ROOT / path,
+                field=f"intermediate receipt {path}",
+            )
+        ) != item.get("bytes_id"):
+            raise OperatorError("intermediate receipt bytes changed")
+    intermediate_paths = {
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_HEAD}.."
+                f"{CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD}",
+            )
+        ).splitlines()
+        if line
+    }
+    if (
+        observed_receipt_paths != expected_receipt_paths
+        or intermediate_paths
+        != expected_receipt_paths
+        | {
+            "config/proof_carrying_semantic_minification_v1_supervisor.json",
+            "external/ipfs_accelerate",
+        }
+    ):
+        raise OperatorError("intermediate blocked-retry source delta changed")
+
+    base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "config_identity",
+        "validator_identity",
+        "accelerator_head",
+        "accelerator_tree",
+        "changed_paths",
+        "nested_commits",
+        "max_task_attempts_before",
+        "max_task_attempts_after",
+    }
+    if set(repair_base) != base_fields:
+        raise OperatorError("blocked-retry repair base fields are not exact")
+    base_tree = _git_commit_tree(base_commit, field="blocked-retry repair base")
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD}..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "test/test_pcsm_blocked_retry_batch_recovery.py",
+    )
+    operator_path = Path(__file__).resolve()
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="blocked-retry base operator",
+    )
+    base_config = _git_blob_at(
+        head=base_commit,
+        path=board.config_path,
+        field="blocked-retry base config",
+    )
+    base_validator = _git_blob_at(
+        head=base_commit,
+        path=board.path(board.validator_path),
+        field="blocked-retry base validator",
+    )
+    accelerator_head = str(repair_base.get("accelerator_head") or "")
+    accelerator_tree = str(repair_base.get("accelerator_tree") or "")
+    if (
+        repair_base.get("source_head") != base_commit
+        or repair_base.get("repository_tree_id") != base_tree
+        or repair_base.get("parent")
+        != CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD
+        or base_parents != [CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD]
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or repair_base.get("config_identity") != _identity(base_config)
+        or repair_base.get("validator_identity") != _identity(base_validator)
+        or tuple(repair_base.get("changed_paths") or ()) != expected_base_paths
+        or base_paths != expected_base_paths
+        or repair_base.get("max_task_attempts_before") != 2
+        or repair_base.get("max_task_attempts_after") != 3
+        or current_attempt_limit != 3
+        or current_tree != str(_git("rev-parse", "HEAD^{tree}")).strip()
+    ):
+        raise OperatorError("blocked-retry repair base changed")
+    current_binding = current_config.get("source_binding")
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    if (
+        not isinstance(current_binding, Mapping)
+        or current_config.get("max_task_attempts") != 3
+        or current_binding.get("ipfs_accelerate_planning_revision")
+        != accelerator_head
+        or current_binding.get("ipfs_accelerate_planning_tree")
+        != accelerator_tree
+        or _git_commit_tree(
+            accelerator_head,
+            field="blocked-retry accelerator repair",
+            repository=ROOT / "external/ipfs_accelerate",
+        )
+        != accelerator_tree
+        or current_config_bytes != base_config
+        or _identity(current_config_bytes) != repair_base.get("config_identity")
+        or current_source_identities.get("config")
+        != repair_base.get("config_identity")
+        or current_source_identities.get("validator")
+        != repair_base.get("validator_identity")
+    ):
+        raise OperatorError("blocked-retry current config changed")
+
+    nested_commits = repair_base.get("nested_commits")
+    if not isinstance(nested_commits, list) or len(nested_commits) != 2:
+        raise OperatorError("blocked-retry nested repair chain is absent")
+    previous = CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_ACCELERATOR_HEAD
+    accelerator_repository = ROOT / "external/ipfs_accelerate"
+    for item in nested_commits:
+        if not isinstance(item, Mapping) or set(item) != {
+            "commit",
+            "tree",
+            "parent",
+            "changed_paths",
+        }:
+            raise OperatorError("blocked-retry nested repair is malformed")
+        commit = str(item.get("commit") or "")
+        parents = subprocess.run(
+            ["git", "show", "-s", "--format=%P", commit],
+            cwd=accelerator_repository,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        changed = subprocess.run(
+            ["git", "diff", "--name-only", f"{previous}..{commit}"],
+            cwd=accelerator_repository,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if (
+            parents.returncode != 0
+            or parents.stdout.strip().split() != [previous]
+            or item.get("parent") != previous
+            or _git_commit_tree(
+                commit,
+                field="blocked-retry nested commit",
+                repository=accelerator_repository,
+            )
+            != item.get("tree")
+            or changed.returncode != 0
+            or changed.stdout.splitlines() != item.get("changed_paths")
+        ):
+            raise OperatorError("blocked-retry nested repair chain changed")
+        previous = commit
+    if previous != accelerator_head:
+        raise OperatorError("blocked-retry nested repair endpoint changed")
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+    }
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="blocked-retry sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    pending_base = (
+        "PENDING_" + "CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="blocked-retry sealed operator",
+    )
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_source.get("parent") != base_commit
+        or sealed_parents != [base_commit]
+        or sealed_source.get("operator_identity") != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or tuple(sealed_source.get("changed_paths") or ())
+        != ("scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",)
+        or sealed_paths
+        != ("scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",)
+        or base_operator.count(pending_base) != 1
+    ):
+        raise OperatorError("blocked-retry sealed source changed")
+
+    batch_fields = {
+        "path",
+        "batch_receipt_id",
+        "sealed_source_head",
+        "sealed_source_tree",
+    }
+    if (
+        set(batch_binding) != batch_fields
+        or batch_binding.get("path")
+        != CURRENT_HEAD_BLOCKED_RETRY_BATCH_PATH.relative_to(ROOT).as_posix()
+        or re.fullmatch(
+            r"sha256:[0-9a-f]{64}",
+            str(batch_binding.get("batch_receipt_id") or ""),
+        )
+        is None
+        or batch_binding.get("sealed_source_head") != sealed_head
+        or batch_binding.get("sealed_source_tree") != sealed_tree
+    ):
+        raise OperatorError("blocked-retry batch binding changed")
+    batch_bytes = _tracked_bytes(
+        CURRENT_HEAD_BLOCKED_RETRY_BATCH_PATH,
+        head=current_head,
+    )
+    batch = _json_mapping_bytes(
+        batch_bytes,
+        field="current-head blocked-retry batch",
+    )
+    verified_batch = _verified_current_head_blocked_retry_batch(
+        batch,
+        sealed_source_head=sealed_head,
+        sealed_source_tree=sealed_tree,
+        current_attempt_limit=current_attempt_limit,
+    )
+    if verified_batch.get("batch_receipt_id") != batch_binding.get(
+        "batch_receipt_id"
+    ):
+        raise OperatorError("blocked-retry batch identity changed")
+
+    receipt_relative = (
+        CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH.relative_to(ROOT).as_posix()
+    )
+    batch_relative = CURRENT_HEAD_BLOCKED_RETRY_BATCH_PATH.relative_to(ROOT).as_posix()
+    receipt_additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    batch_additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                batch_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if (
+        len(receipt_additions) != 1
+        or receipt_additions != batch_additions
+    ):
+        raise OperatorError("blocked-retry artifact introduction is not exact")
+    artifact_commit = receipt_additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != tuple(sorted((batch_relative, receipt_relative)))
+        or _git_blob_at(
+            head=artifact_commit,
+            path=CURRENT_HEAD_BLOCKED_RETRY_BATCH_PATH,
+            field="introduced blocked-retry batch",
+        )
+        != batch_bytes
+        or _git_blob_at(
+            head=artifact_commit,
+            path=CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH,
+            field="introduced blocked-retry descendant receipt",
+        )
+        != _tracked_bytes(
+            CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH,
+            head=current_head,
+        )
+    ):
+        raise OperatorError("blocked-retry artifacts changed after introduction")
+
+    required_validations = {
+        (
+            "external/ipfs_accelerate",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/api/causal_federation/test_admitted_executor.py",
+                "-k",
+                "operator_blocked_retry_recovers_once_and_replays_after_restart",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/test_pcsm_blocked_retry_batch_recovery.py",
+            ),
+        ),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError("blocked-retry validation is malformed")
+        command = validation.get("command")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(validation.get("summary"), str)
+            or not validation.get("summary")
+        ):
+            raise OperatorError("blocked-retry validation did not pass")
+        observed_validations.add(
+            (str(validation.get("cwd") or ""), tuple(command))
+        )
+    if observed_validations != required_validations:
+        raise OperatorError("blocked-retry validations are incomplete")
+
+    current_operator = _tracked_bytes(operator_path, head=current_head)
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field="blocked-retry artifact-to-current lineage",
+    )
+    if (
+        current_operator != expected_operator
+        or current_source_identities.get("operator")
+        != _identity(expected_operator)
+    ):
+        raise OperatorError("blocked-retry operator seal changed")
+    return {
+        "receipt": payload,
+        "blocked_retry_batch": verified_batch,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "artifact_commit": artifact_commit,
+    }
+
+
 def _owner_restart_admission(
     board: Any,
     config: Mapping[str, Any],
@@ -2626,25 +3482,97 @@ def _owner_restart_admission(
         )
     )
     repair: dict[str, Any] = {}
+    descendant_repair: dict[str, Any] = {}
+    admission_mode = "exact_bootstrap" if exact_bootstrap else "verified_handoff_repair"
     if not exact_bootstrap:
-        current_source_binding = current_config.get("source_binding")
-        if not isinstance(current_source_binding, Mapping):
-            raise OperatorError("current source_binding is absent")
-        repair = _verified_handoff_repair(
-            bootstrap_receipt_id=bootstrap_receipt_id,
-            plan_root_cid=plan_root_cid,
-            bootstrap_tree=bootstrap_tree,
-            database_task_count=database_task_count,
-            bootstrap_attempt_limit=bootstrap_attempt_limit,
-            current_attempt_limit=current_attempt_limit,
-            current_source_identities=current_source_identities,
-            forest_transition=forest_transition,
-            current_source_binding=current_source_binding,
-            current_head=current_head,
-        )
+        if current_attempt_limit == HANDOFF_REPAIR_MAX_TASK_ATTEMPTS:
+            current_source_binding = current_config.get("source_binding")
+            if not isinstance(current_source_binding, Mapping):
+                raise OperatorError("current source_binding is absent")
+            repair = _verified_handoff_repair(
+                bootstrap_receipt_id=bootstrap_receipt_id,
+                plan_root_cid=plan_root_cid,
+                bootstrap_tree=bootstrap_tree,
+                database_task_count=database_task_count,
+                bootstrap_attempt_limit=bootstrap_attempt_limit,
+                current_attempt_limit=current_attempt_limit,
+                current_source_identities=current_source_identities,
+                forest_transition=forest_transition,
+                current_source_binding=current_source_binding,
+                current_head=current_head,
+            )
+        elif current_attempt_limit == 3:
+            historical_head = CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_HEAD
+            if (
+                _git_commit_tree(
+                    historical_head,
+                    field="blocked-retry historical source",
+                )
+                != CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_TREE
+            ):
+                raise OperatorError("blocked-retry historical tree changed")
+            historical_sources = {
+                name: _git_blob_at(
+                    head=historical_head,
+                    path=path,
+                    field=f"blocked-retry historical {name}",
+                )
+                for name, path in source_paths.items()
+            }
+            historical_config = _json_mapping_bytes(
+                historical_sources["config"],
+                field="blocked-retry historical config",
+            )
+            historical_binding = historical_config.get("source_binding")
+            if (
+                historical_config.get("max_task_attempts")
+                != HANDOFF_REPAIR_MAX_TASK_ATTEMPTS
+                or not isinstance(historical_binding, Mapping)
+            ):
+                raise OperatorError("blocked-retry historical config changed")
+            historical_forest = _source_forest_at_commit(
+                historical_config,
+                head=historical_head,
+            )
+            historical_transition = _verified_restart_forest_transition(
+                bootstrap.get("source_forest"),
+                historical_forest,
+                bootstrap_head=bootstrap_head,
+                current_head=historical_head,
+            )
+            historical_identities = {
+                name: _identity(value)
+                for name, value in historical_sources.items()
+            }
+            repair = _verified_handoff_repair(
+                bootstrap_receipt_id=bootstrap_receipt_id,
+                plan_root_cid=plan_root_cid,
+                bootstrap_tree=bootstrap_tree,
+                database_task_count=database_task_count,
+                bootstrap_attempt_limit=bootstrap_attempt_limit,
+                current_attempt_limit=HANDOFF_REPAIR_MAX_TASK_ATTEMPTS,
+                current_source_identities=historical_identities,
+                forest_transition=historical_transition,
+                current_source_binding=historical_binding,
+                current_head=current_head,
+            )
+            descendant_repair = (
+                _verified_current_head_blocked_retry_descendant_repair(
+                    board=board,
+                    current_head=current_head,
+                    current_tree=current_tree,
+                    current_config=current_config,
+                    current_source_identities=current_source_identities,
+                    current_attempt_limit=current_attempt_limit,
+                    historical_repair=repair,
+                )
+            )
+            admission_mode = "verified_current_head_blocked_retry_batch"
+        else:
+            raise OperatorError("owner restart retry policy is not admitted")
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
-        "mode": "exact_bootstrap" if exact_bootstrap else "verified_handoff_repair",
+        "mode": admission_mode,
         "bootstrap_receipt_id": bootstrap_receipt_id,
         "bootstrap_source_head": bootstrap_head,
         "bootstrap_source_tree": bootstrap_tree,
@@ -2657,6 +3585,21 @@ def _owner_restart_admission(
         "forest_transition": forest_transition,
         "handoff_repair_receipt_id": str(repair.get("receipt_id") or ""),
         "handoff_repair": repair,
+        "current_head_descendant_repair_receipt_id": str(
+            descendant_repair.get("receipt", {}).get("receipt_id")
+            if isinstance(descendant_repair.get("receipt"), Mapping)
+            else ""
+        ),
+        "current_head_blocked_retry_batch_receipt_id": str(
+            descendant_repair.get("blocked_retry_batch", {}).get(
+                "batch_receipt_id"
+            )
+            if isinstance(
+                descendant_repair.get("blocked_retry_batch"), Mapping
+            )
+            else ""
+        ),
+        "current_head_descendant_repair": descendant_repair,
         "database_authority": {
             "receipt_identity": _identity(database_receipt),
             "schema": DATABASE_TASK_SOURCE_SCHEMA,
@@ -3794,8 +4737,14 @@ def _require_prior_owner_continuity(
 ) -> None:
     """Require durable owner continuity for every descendant-source restart."""
 
-    if admission.get("mode") != "verified_handoff_repair":
+    mode = admission.get("mode")
+    if mode == "exact_bootstrap":
         return
+    if mode not in {
+        "verified_handoff_repair",
+        "verified_current_head_blocked_retry_batch",
+    }:
+        raise OperatorError("owner restart admission mode is not recognized")
     if prior_owner.get("state") not in {"stopped", "dead"}:
         raise OperatorError(
             "descendant owner restart requires a stopped or dead prior identity"
@@ -3817,6 +4766,165 @@ def _require_prior_owner_continuity(
             field=f"prior state-owner {field}",
             minimum=1,
         )
+
+
+def _current_head_blocked_retry_database_states(
+    source: Any,
+    batch: Mapping[str, Any],
+) -> tuple[dict[str, str], list[dict[str, Any]]]:
+    """Classify every batch member before any owner command is issued."""
+
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+        TYPED_DATABASE_BLOCKED_RETRY_REVALIDATION_FIELD,
+    )
+
+    entries = batch.get("entries")
+    if not isinstance(entries, list):
+        raise OperatorError("blocked-retry database batch is absent")
+    states: dict[str, str] = {}
+    projections: list[dict[str, Any]] = []
+    post_statuses = {
+        "retrying",
+        "in_progress",
+        "completed",
+        "complete",
+        "done",
+        "skipped",
+        "blocked",
+        "failed",
+        "quarantined",
+        "cancelled",
+        "canceled",
+    }
+    batch_receipt_id = str(batch.get("batch_receipt_id") or "")
+    for entry in entries:
+        if not isinstance(entry, Mapping):
+            raise OperatorError("blocked-retry database entry is malformed")
+        alias = str(entry.get("task_alias") or "")
+        task_cid = str(entry.get("task_cid") or "")
+        task = source.get_task(alias)
+        source_body = entry.get("source_task_body")
+        terminal_receipt = (
+            source_body.get("completion_receipt")
+            if isinstance(source_body, Mapping)
+            else None
+        )
+        if (
+            task is None
+            or task.task_cid != task_cid
+            or not isinstance(source_body, Mapping)
+            or not isinstance(terminal_receipt, Mapping)
+        ):
+            raise OperatorError(f"{alias} blocked-retry database task is absent")
+        source_revision = int(entry["source_revision"])
+        target_revision = int(entry["target_revision"])
+        exact_source = bool(
+            task.status == "blocked"
+            and int(task.revision) == source_revision
+            and task.body == source_body
+        )
+        if exact_source:
+            if source.get_queue_entry(task_cid) is not None:
+                raise OperatorError(
+                    f"{alias} blocked-retry predecessor already has a cooldown"
+                )
+            state = "pending_apply"
+        else:
+            expected_body = _current_head_blocked_retry_expected_task_body(
+                entry=entry,
+                batch_receipt_id=batch_receipt_id,
+            )
+            expected_requirement = expected_body[
+                TYPED_DATABASE_BLOCKED_RETRY_REVALIDATION_FIELD
+            ]
+            body = task.body if isinstance(task.body, Mapping) else {}
+            receipt = body.get("completion_receipt")
+            route = (
+                receipt.get("execution_route_binding")
+                if isinstance(receipt, Mapping)
+                else None
+            )
+            if (
+                int(task.revision) < target_revision
+                or task.status not in post_statuses
+                or body.get(TYPED_DATABASE_BLOCKED_RETRY_REVALIDATION_FIELD)
+                != expected_requirement
+                or not isinstance(receipt, Mapping)
+                or not isinstance(route, Mapping)
+                or route.get("task_alias") != alias
+                or route.get("task_cid") != task_cid
+                or receipt.get("execution_route_policy_id")
+                != route.get("policy_id")
+                or receipt.get("execution_route_origin_revision")
+                != route.get("task_revision")
+            ):
+                raise OperatorError(
+                    f"{alias} blocked-retry post-command task changed authority"
+                )
+            if int(task.revision) == target_revision:
+                if task.status != "retrying" or body != expected_body:
+                    raise OperatorError(
+                        f"{alias} blocked-retry target projection changed"
+                    )
+                queue = source.validate_retrying_task_cooldown(
+                    task_cid,
+                    expected_attempt_identity={
+                        field: terminal_receipt[field]
+                        for field in (
+                            "attempt_id",
+                            "claim_id",
+                            "lease_id",
+                            "owner_session_id",
+                            "attempt_number",
+                            "fencing_token",
+                            "fence_epoch",
+                        )
+                    },
+                    expected_reason=HANDOFF_REPAIR_BLOCKED_RETRY_REASON,
+                    expected_delay_ms=0,
+                )
+                if (
+                    queue.attempt != terminal_receipt["attempt_number"]
+                    or queue.retry_not_before_ms
+                    != entry["retry_not_before_ms"]
+                    or queue.selection_penalty != 0
+                    or queue.consecutive_failures
+                    != terminal_receipt["attempt_number"]
+                    or queue.state != "released"
+                    or queue.reason != HANDOFF_REPAIR_BLOCKED_RETRY_REASON
+                ):
+                    raise OperatorError(
+                        f"{alias} blocked-retry cooldown changed authority"
+                    )
+            state = "command_replay_required"
+        states[alias] = state
+        current_receipt = (
+            task.body.get("completion_receipt")
+            if isinstance(task.body, Mapping)
+            else None
+        )
+        projections.append(
+            {
+                "task_alias": alias,
+                "task_cid": task_cid,
+                "status": task.status,
+                "revision": int(task.revision),
+                "receipt_operation": (
+                    str(current_receipt.get("operation") or "")
+                    if isinstance(current_receipt, Mapping)
+                    else ""
+                ),
+                "receipt_identity": (
+                    _identity(current_receipt)
+                    if isinstance(current_receipt, Mapping)
+                    else ""
+                ),
+                "blocked_retry_state": state,
+            }
+        )
+    if set(states) != set(CURRENT_HEAD_BLOCKED_RETRY_EXPECTATIONS):
+        raise OperatorError("blocked-retry database population is incomplete")
+    return states, projections
 
 
 def _restart_database_verification(source: Any, admission: Mapping[str, Any]) -> dict[str, Any]:
@@ -4051,6 +5159,21 @@ def _restart_database_verification(source: Any, admission: Mapping[str, Any]) ->
             "blocked_retry_handoff_state": handoff_state,
         }
 
+    batch_states: dict[str, str] = {}
+    batch_projections: list[dict[str, Any]] = []
+    if admission.get("mode") == "verified_current_head_blocked_retry_batch":
+        descendant = admission.get("current_head_descendant_repair")
+        batch = (
+            descendant.get("blocked_retry_batch")
+            if isinstance(descendant, Mapping)
+            else None
+        )
+        if not isinstance(batch, Mapping):
+            raise OperatorError("restart admission has no blocked-retry batch")
+        batch_states, batch_projections = (
+            _current_head_blocked_retry_database_states(source, batch)
+        )
+
     verification: dict[str, Any] = {
         "schema": OWNER_DATABASE_VERIFICATION_SCHEMA,
         "bootstrap_database_receipt_identity": str(
@@ -4064,6 +5187,8 @@ def _restart_database_verification(source: Any, admission: Mapping[str, Any]) ->
         "plan_count": int(snapshot.plan_count),
         "store_revision": int(snapshot.revision),
         "repair_source_task": task_projection,
+        "current_head_blocked_retry_states": batch_states,
+        "current_head_blocked_retry_tasks": batch_projections,
     }
     verification["verification_id"] = _identity(verification)
     return verification
@@ -4175,6 +5300,12 @@ def _owner_restart_receipt(
         "plan_root_cid": str(admission.get("plan_root_cid") or ""),
         "handoff_repair_receipt_id": str(
             admission.get("handoff_repair_receipt_id") or ""
+        ),
+        "current_head_descendant_repair_receipt_id": str(
+            admission.get("current_head_descendant_repair_receipt_id") or ""
+        ),
+        "current_head_blocked_retry_batch_receipt_id": str(
+            admission.get("current_head_blocked_retry_batch_receipt_id") or ""
         ),
         "max_task_attempts_before": int(
             admission.get("max_task_attempts_before") or 0
@@ -5031,6 +6162,806 @@ def _apply_blocked_retry_recovery(
     }
 
 
+def _verified_current_head_blocked_retry_evidence(
+    value: Any,
+    *,
+    alias: str,
+    task_cid: str,
+    terminal_receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Validate one closed incident/Portal/rescue evidence binding."""
+
+    expected = CURRENT_HEAD_BLOCKED_RETRY_INCIDENT_EXPECTATIONS.get(alias)
+    required = {
+        "schema",
+        "task_alias",
+        "task_cid",
+        "lane_index",
+        "portal_attempt_id",
+        "portal_attempt_relative_path",
+        "database_attempt_binding_path",
+        "database_attempt_binding_bytes_id",
+        "database_attempt_binding_id",
+        "protected_path_incident_path",
+        "protected_path_incident_bytes_id",
+        "protected_path_incident_identity",
+        "projected_portal_task_cid",
+        "projected_portal_task_key",
+        "portal_implementation_attempt",
+        "attempt_identity",
+        "rescue_commit",
+        "merge_commit",
+    }
+    if not isinstance(value, Mapping) or set(value) != required:
+        raise OperatorError(f"{alias} blocked-retry sidecar evidence is not closed")
+    evidence = dict(value)
+    if not isinstance(expected, Mapping):
+        raise OperatorError(f"{alias} blocked-retry incident is not admitted")
+    lane_index = int(expected["lane_index"])
+    portal_attempt_id = str(expected["portal_attempt_id"])
+    attempt_root = (
+        RUNTIME_RELATIVE
+        / "state"
+        / f"lane-{lane_index}"
+        / f"pcsm_lane_{lane_index}_database_portal_attempts"
+        / portal_attempt_id
+    )
+    binding_path = (attempt_root / "database-attempt-binding.json").as_posix()
+    incident_path = (
+        attempt_root / "implementation-protected-path-incident.json"
+    ).as_posix()
+    attempt_fields = (
+        "attempt_id",
+        "attempt_number",
+        "claim_id",
+        "lease_id",
+        "owner_session_id",
+        "fencing_token",
+        "fence_epoch",
+    )
+    attempt_identity = evidence.get("attempt_identity")
+    expected_attempt = {
+        field: terminal_receipt.get(field) for field in attempt_fields
+    }
+    sha_fields = (
+        "database_attempt_binding_bytes_id",
+        "database_attempt_binding_id",
+        "protected_path_incident_bytes_id",
+        "protected_path_incident_identity",
+    )
+    rescue_commit = str(expected["rescue_commit"])
+    merge_commit = str(expected["merge_commit"])
+    rescue_parents = str(
+        _git("show", "-s", "--format=%P", rescue_commit)
+    ).strip().split()
+    merge_parents = str(
+        _git("show", "-s", "--format=%P", merge_commit)
+    ).strip().split()
+    rescue_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff-tree",
+                "--no-commit-id",
+                "--name-only",
+                "-r",
+                rescue_commit,
+            )
+        ).splitlines()
+        if line
+    )
+    if (
+        evidence.get("schema")
+        != CURRENT_HEAD_BLOCKED_RETRY_BATCH_EVIDENCE_SCHEMA
+        or evidence.get("task_alias") != alias
+        or evidence.get("task_cid") != task_cid
+        or evidence.get("lane_index") != lane_index
+        or evidence.get("portal_attempt_id") != portal_attempt_id
+        or evidence.get("portal_attempt_relative_path") != attempt_root.as_posix()
+        or evidence.get("database_attempt_binding_path") != binding_path
+        or evidence.get("protected_path_incident_path") != incident_path
+        or not isinstance(attempt_identity, Mapping)
+        or dict(attempt_identity) != expected_attempt
+        or any(
+            re.fullmatch(r"sha256:[0-9a-f]{64}", str(evidence.get(field) or ""))
+            is None
+            for field in sha_fields
+        )
+        or type(evidence.get("projected_portal_task_cid")) is not str
+        or not evidence.get("projected_portal_task_cid")
+        or type(evidence.get("projected_portal_task_key")) is not str
+        or not evidence.get("projected_portal_task_key")
+        or type(evidence.get("portal_implementation_attempt")) is not int
+        or evidence.get("portal_implementation_attempt") < 1
+        or evidence.get("rescue_commit") != rescue_commit
+        or evidence.get("merge_commit") != merge_commit
+        or len(rescue_parents) != 1
+        or len(merge_parents) != 2
+        or merge_parents[1] != rescue_commit
+        or rescue_paths
+        != (
+            f"artifacts/proof_carrying_semantic_minification/receipts/{alias}.json",
+        )
+    ):
+        raise OperatorError(f"{alias} blocked-retry sidecar evidence changed")
+    _git_is_ancestor(
+        merge_commit,
+        CURRENT_HEAD_BLOCKED_RETRY_INTERMEDIATE_HEAD,
+        field=f"{alias} rescue merge lineage",
+    )
+    return evidence
+
+
+def _verified_current_head_blocked_retry_batch(
+    value: Any,
+    *,
+    sealed_source_head: str,
+    sealed_source_tree: str,
+    current_attempt_limit: int,
+) -> dict[str, Any]:
+    """Verify the complete, current-head-bound PCSM-013/016/017/018 batch.
+
+    Verification deliberately completes before any owner grant is issued.  The
+    predecessor task bodies and terminal receipts are the authoritative
+    database values, not the receipt files which happened to land in Git.  The
+    caller must first use the restart descendant-repair chain to bind the live
+    outer head to this sealed source head; keeping that ancestry proof outside
+    the batch avoids a commit hashing its own identity.
+    """
+
+    if not isinstance(value, Mapping):
+        raise OperatorError("current-head blocked-retry batch is absent")
+    payload = dict(value)
+    required_top = {
+        "schema",
+        "operation",
+        "source_head",
+        "repository_tree_id",
+        "entries",
+        "batch_receipt_id",
+    }
+    if set(payload) != required_top:
+        raise OperatorError("current-head blocked-retry batch fields are not exact")
+    receipt_id = str(payload.get("batch_receipt_id") or "")
+    receipt_body = dict(payload)
+    receipt_body.pop("batch_receipt_id", None)
+    if (
+        payload.get("schema") != CURRENT_HEAD_BLOCKED_RETRY_BATCH_SCHEMA
+        or payload.get("operation") != CURRENT_HEAD_BLOCKED_RETRY_BATCH_OPERATION
+        or payload.get("source_head") != sealed_source_head
+        or payload.get("repository_tree_id") != sealed_source_tree
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(receipt_body) != receipt_id
+        or re.fullmatch(r"[0-9a-f]{40}", sealed_source_head) is None
+        or re.fullmatch(r"[0-9a-f]{40}", sealed_source_tree) is None
+        or type(current_attempt_limit) is not int
+        or current_attempt_limit < 1
+    ):
+        raise OperatorError("current-head blocked-retry batch seal is invalid")
+
+    entries = payload.get("entries")
+    aliases = tuple(sorted(CURRENT_HEAD_BLOCKED_RETRY_EXPECTATIONS))
+    if not isinstance(entries, list) or len(entries) != len(aliases):
+        raise OperatorError("current-head blocked-retry batch population is not exact")
+    normalized: list[dict[str, Any]] = []
+    required_entry = {
+        "schema",
+        "task_alias",
+        "task_cid",
+        "source_status",
+        "source_revision",
+        "target_status",
+        "target_revision",
+        "source_task_body",
+        "source_task_body_id",
+        "source_completion_receipt_id",
+        "max_task_attempts_before",
+        "max_task_attempts_after",
+        "started_at_ms",
+        "retry_not_before_ms",
+        "sidecar_evidence",
+        "sidecar_evidence_id",
+    }
+    for position, raw in enumerate(entries):
+        if not isinstance(raw, Mapping) or set(raw) != required_entry:
+            raise OperatorError("current-head blocked-retry entry fields are not exact")
+        entry = dict(raw)
+        alias = str(entry.get("task_alias") or "")
+        if alias != aliases[position]:
+            raise OperatorError(
+                "current-head blocked-retry entries are not complete and ordered"
+            )
+        expected = CURRENT_HEAD_BLOCKED_RETRY_EXPECTATIONS[alias]
+        source_revision = _exact_int(
+            entry.get("source_revision"),
+            field=f"{alias} blocked-retry source_revision",
+            minimum=1,
+        )
+        target_revision = _exact_int(
+            entry.get("target_revision"),
+            field=f"{alias} blocked-retry target_revision",
+            minimum=2,
+        )
+        before = _exact_int(
+            entry.get("max_task_attempts_before"),
+            field=f"{alias} blocked-retry max_task_attempts_before",
+            minimum=1,
+        )
+        after = _exact_int(
+            entry.get("max_task_attempts_after"),
+            field=f"{alias} blocked-retry max_task_attempts_after",
+            minimum=2,
+        )
+        started_at_ms = _exact_int(
+            entry.get("started_at_ms"),
+            field=f"{alias} blocked-retry started_at_ms",
+        )
+        retry_not_before_ms = _exact_int(
+            entry.get("retry_not_before_ms"),
+            field=f"{alias} blocked-retry retry_not_before_ms",
+        )
+        task_body = entry.get("source_task_body")
+        terminal_receipt = (
+            task_body.get("completion_receipt")
+            if isinstance(task_body, Mapping)
+            else None
+        )
+        route = (
+            terminal_receipt.get("execution_route_binding")
+            if isinstance(terminal_receipt, Mapping)
+            else None
+        )
+        sidecar_evidence = entry.get("sidecar_evidence")
+        attempt_number = (
+            terminal_receipt.get("attempt_number")
+            if isinstance(terminal_receipt, Mapping)
+            else None
+        )
+        text_attempt_fields = (
+            "attempt_id",
+            "claim_id",
+            "lease_id",
+            "owner_session_id",
+        )
+        integer_attempt_fields = ("fencing_token", "fence_epoch")
+        if (
+            entry.get("schema")
+            != CURRENT_HEAD_BLOCKED_RETRY_BATCH_ENTRY_SCHEMA
+            or entry.get("task_cid") != expected["task_cid"]
+            or entry.get("source_status") != "blocked"
+            or source_revision != expected["source_revision"]
+            or entry.get("target_status") != "retrying"
+            or target_revision != source_revision + 1
+            or not isinstance(task_body, Mapping)
+            or _identity(task_body) != expected["source_task_body_id"]
+            or entry.get("source_task_body_id")
+            != expected["source_task_body_id"]
+            or not isinstance(terminal_receipt, Mapping)
+            or _identity(terminal_receipt)
+            != expected["source_completion_receipt_id"]
+            or entry.get("source_completion_receipt_id")
+            != expected["source_completion_receipt_id"]
+            or terminal_receipt.get("operation")
+            != "database_portal_terminal_failure"
+            or terminal_receipt.get("reason")
+            != CURRENT_HEAD_BLOCKED_RETRY_TERMINAL_REASON
+            or terminal_receipt.get("retryable") is not False
+            or terminal_receipt.get("control_expected_status") != "in_progress"
+            or terminal_receipt.get("control_expected_revision")
+            != source_revision - 1
+            or type(attempt_number) is not int
+            or attempt_number != expected["source_attempt_number"]
+            or before != attempt_number
+            or after != attempt_number + 1
+            or current_attempt_limit < after
+            or started_at_ms != retry_not_before_ms
+            or not isinstance(sidecar_evidence, Mapping)
+            or re.fullmatch(
+                r"sha256:[0-9a-f]{64}",
+                str(entry.get("sidecar_evidence_id") or ""),
+            )
+            is None
+            or any(
+                type(terminal_receipt.get(field)) is not str
+                or not terminal_receipt.get(field)
+                for field in text_attempt_fields
+            )
+            or any(
+                type(terminal_receipt.get(field)) is not int
+                or terminal_receipt.get(field) < 1
+                for field in integer_attempt_fields
+            )
+            or not isinstance(route, Mapping)
+            or route.get("task_alias") != alias
+            or route.get("task_cid") != expected["task_cid"]
+            or type(route.get("policy_id")) is not str
+            or not route.get("policy_id")
+            or type(route.get("task_revision")) is not int
+            or route.get("task_revision") < 1
+            or terminal_receipt.get("execution_route_policy_id")
+            != route.get("policy_id")
+            or terminal_receipt.get("execution_route_origin_revision")
+            != route.get("task_revision")
+        ):
+            raise OperatorError(
+                f"{alias} current-head blocked-retry predecessor is not exact"
+            )
+        verified_evidence = _verified_current_head_blocked_retry_evidence(
+            sidecar_evidence,
+            alias=alias,
+            task_cid=str(expected["task_cid"]),
+            terminal_receipt=terminal_receipt,
+        )
+        if _identity(verified_evidence) != entry.get("sidecar_evidence_id"):
+            raise OperatorError(
+                f"{alias} current-head blocked-retry evidence identity changed"
+            )
+        entry["sidecar_evidence"] = verified_evidence
+        normalized.append(entry)
+
+    verified = dict(payload)
+    verified["entries"] = normalized
+    return verified
+
+
+def _verify_current_head_blocked_retry_live_sidecars(
+    batch: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Reproduce the sealed Portal bindings and protected-path incidents."""
+
+    entries = batch.get("entries")
+    if not isinstance(entries, list):
+        raise OperatorError("current-head blocked-retry entries are absent")
+    observations: list[dict[str, Any]] = []
+    for entry in entries:
+        if not isinstance(entry, Mapping):
+            raise OperatorError("current-head blocked-retry entry is malformed")
+        alias = str(entry.get("task_alias") or "")
+        task_cid = str(entry.get("task_cid") or "")
+        evidence = entry.get("sidecar_evidence")
+        if not isinstance(evidence, Mapping):
+            raise OperatorError(f"{alias} blocked-retry sidecar evidence is absent")
+        binding_path = _safe_path(
+            ROOT,
+            evidence.get("database_attempt_binding_path"),
+            field=f"{alias} database attempt binding path",
+        )
+        incident_path = _safe_path(
+            ROOT,
+            evidence.get("protected_path_incident_path"),
+            field=f"{alias} protected-path incident path",
+        )
+        try:
+            binding_bytes = binding_path.read_bytes()
+            incident_bytes = incident_path.read_bytes()
+        except OSError as exc:
+            raise OperatorError(
+                f"{alias} blocked-retry live sidecar evidence is absent"
+            ) from exc
+        binding = _json_mapping_bytes(
+            binding_bytes,
+            field=f"{alias} database attempt binding",
+        )
+        incident = _json_mapping_bytes(
+            incident_bytes,
+            field=f"{alias} protected-path incident",
+        )
+        attempt = evidence.get("attempt_identity")
+        if not isinstance(attempt, Mapping):
+            raise OperatorError(f"{alias} attempt identity is absent")
+        if (
+            _identity(binding_bytes)
+            != evidence.get("database_attempt_binding_bytes_id")
+            or binding.get("binding_id")
+            != evidence.get("database_attempt_binding_id")
+            or binding.get("schema")
+            != "ipfs_accelerate_py/agent-supervisor/database-portal-attempt-binding@1"
+            or binding.get("task_alias") != alias
+            or binding.get("task_cid") != task_cid
+            or binding.get("canonical_task_key") != task_cid
+            or binding.get("projection_authority") is not False
+            or any(
+                binding.get(field) != attempt.get(field)
+                for field in (
+                    "attempt_id",
+                    "attempt_number",
+                    "claim_id",
+                    "lease_id",
+                    "owner_session_id",
+                    "fencing_token",
+                    "fence_epoch",
+                )
+            )
+            or _identity(incident_bytes)
+            != evidence.get("protected_path_incident_bytes_id")
+            or _identity(incident)
+            != evidence.get("protected_path_incident_identity")
+            or incident.get("schema")
+            != "implementation-protected-path-incident-v1"
+            or incident.get("task_id") != alias
+            or incident.get("reason") != "implementation_protected_path_mutated"
+            or incident.get("requires_operator_clearance") is not True
+            or incident.get("shared_checkout_restored") is not False
+            or incident.get("protected_paths")
+            != ["config/proof_carrying_semantic_minification_v1_supervisor.json"]
+            or incident.get("canonical_task_cid")
+            != evidence.get("projected_portal_task_cid")
+            or incident.get("canonical_task_key")
+            != evidence.get("projected_portal_task_key")
+            or incident.get("attempt")
+            != evidence.get("portal_implementation_attempt")
+        ):
+            raise OperatorError(
+                f"{alias} blocked-retry live sidecar evidence changed"
+            )
+        observations.append(
+            {
+                "task_alias": alias,
+                "task_cid": task_cid,
+                "lane_index": evidence["lane_index"],
+                "database_attempt_binding_bytes_id": _identity(binding_bytes),
+                "protected_path_incident_bytes_id": _identity(incident_bytes),
+                "rescue_commit": evidence["rescue_commit"],
+                "merge_commit": evidence["merge_commit"],
+            }
+        )
+    return {
+        "verified_count": len(observations),
+        "observations": observations,
+    }
+
+
+def _current_head_blocked_retry_expected_task_body(
+    *,
+    entry: Mapping[str, Any],
+    batch_receipt_id: str,
+) -> dict[str, Any]:
+    """Derive the exact retrying body, including its durable Portal guard."""
+
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+        TYPED_DATABASE_BLOCKED_RETRY_REVALIDATION_FIELD,
+        typed_database_blocked_retry_revalidation_requirement,
+    )
+
+    task_body = entry.get("source_task_body")
+    terminal_receipt = (
+        task_body.get("completion_receipt")
+        if isinstance(task_body, Mapping)
+        else None
+    )
+    route = (
+        terminal_receipt.get("execution_route_binding")
+        if isinstance(terminal_receipt, Mapping)
+        else None
+    )
+    if (
+        not isinstance(task_body, Mapping)
+        or not isinstance(terminal_receipt, Mapping)
+        or not isinstance(route, Mapping)
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", batch_receipt_id) is None
+    ):
+        raise OperatorError("current-head blocked-retry expected body is invalid")
+    source_revision = int(entry["source_revision"])
+    fresh_attempt_number = int(entry["max_task_attempts_after"])
+    source_receipt_id = str(entry["source_completion_receipt_id"])
+    sidecar_evidence_id = str(entry["sidecar_evidence_id"])
+    retry_not_before_ms = int(entry["retry_not_before_ms"])
+    recovery_receipt = {
+        "schema": TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA,
+        "operation": HANDOFF_REPAIR_BLOCKED_RETRY_OPERATION,
+        **{
+            field: terminal_receipt[field]
+            for field in (
+                "attempt_id",
+                "claim_id",
+                "lease_id",
+                "owner_session_id",
+                "attempt_number",
+                "fencing_token",
+                "fence_epoch",
+            )
+        },
+        "terminal_operation": terminal_receipt["operation"],
+        "terminal_reason": terminal_receipt["reason"],
+        "source_completion_receipt_id": source_receipt_id,
+        "operator_handoff_receipt_id": batch_receipt_id,
+        "sidecar_evidence_id": sidecar_evidence_id,
+        "recovered_from_revision": source_revision,
+        "max_task_attempts_before": entry["max_task_attempts_before"],
+        "max_task_attempts_after": fresh_attempt_number,
+        "attempt_refunded": False,
+        "fresh_attempt_number": fresh_attempt_number,
+        "queue_reason": HANDOFF_REPAIR_BLOCKED_RETRY_REASON,
+        "backoff_ms": 0,
+        "retry_not_before_ms": retry_not_before_ms,
+        "control_expected_status": "blocked",
+        "control_expected_revision": source_revision,
+        "execution_route_binding": dict(route),
+        "execution_route_binding_cid": _semantic_identity(
+            {"task_execution_route_binding": dict(route)}
+        ),
+        "execution_route_policy_id": route["policy_id"],
+        "execution_route_origin_revision": route["task_revision"],
+    }
+    requirement = typed_database_blocked_retry_revalidation_requirement(
+        task_cid=str(entry["task_cid"]),
+        source_completion_receipt_id=source_receipt_id,
+        operator_handoff_receipt_id=batch_receipt_id,
+        sidecar_evidence_id=sidecar_evidence_id,
+        recovered_from_revision=source_revision,
+        fresh_attempt_number=fresh_attempt_number,
+    )
+    expected = dict(task_body)
+    expected["completion_receipt"] = recovery_receipt
+    expected[TYPED_DATABASE_BLOCKED_RETRY_REVALIDATION_FIELD] = requirement
+    return expected
+
+
+def _apply_current_head_blocked_retry_entry(
+    *,
+    server: Any,
+    board: Any,
+    batch_receipt_id: str,
+    entry: Mapping[str, Any],
+    blocked_retry_state: str,
+) -> dict[str, Any]:
+    """Submit/replay one independently granted member of the verified batch."""
+
+    from ipfs_accelerate_py.agent_supervisor.task_sources.quack_state_client import (
+        QuackStateClient,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+        TypedStateOwnerConnection,
+    )
+
+    identity = server.identity
+    if identity is None:
+        raise OperatorError("state owner has no current-head blocked-retry identity")
+    alias = str(entry.get("task_alias") or "")
+    task_cid = str(entry.get("task_cid") or "")
+    task_body = entry.get("source_task_body")
+    terminal_receipt = (
+        task_body.get("completion_receipt")
+        if isinstance(task_body, Mapping)
+        else None
+    )
+    if (
+        alias not in CURRENT_HEAD_BLOCKED_RETRY_EXPECTATIONS
+        or task_cid
+        != CURRENT_HEAD_BLOCKED_RETRY_EXPECTATIONS[alias]["task_cid"]
+        or blocked_retry_state
+        not in {"pending_apply", "command_replay_required"}
+        or not isinstance(task_body, Mapping)
+        or not isinstance(terminal_receipt, Mapping)
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", batch_receipt_id) is None
+    ):
+        raise OperatorError("current-head blocked-retry command inputs are not exact")
+    expected_task_body = _current_head_blocked_retry_expected_task_body(
+        entry=entry,
+        batch_receipt_id=batch_receipt_id,
+    )
+    revalidation_requirement = expected_task_body.get(
+        "fresh_portal_revalidation_requirement"
+    )
+    if not isinstance(revalidation_requirement, Mapping):
+        raise OperatorError(
+            "current-head blocked-retry command has no fresh Portal guard"
+        )
+
+    client_id = f"pcsm-state-owner:blocked-retry-batch:{alias.lower()}"
+    allowed_operations = (
+        "whoami_metadata",
+        "load_store_generation",
+        "executor_retry_cooldown_by_task",
+        "txn_load_generation",
+        "txn_lookup_idempotency",
+        "txn_advance_store_revision",
+        "txn_record_idempotency",
+        "executor_insert_retry_cooldown",
+        "executor_cas_task_status_receipt",
+        "executor_insert_task_revision",
+    )
+    store_id = _control_plane_store_id(board.resolved_database_program())
+    token, grant = server.issue_typed_client_grant_record(
+        client_id=client_id,
+        process_birth_id=identity.process_birth_id,
+        allowed_operations=allowed_operations,
+        allowed_command_operations=(HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND,),
+        entity_scopes={"task_cid": task_cid},
+        peer_pid=os.getpid(),
+        ttl_seconds=60.0,
+    )
+    client: Any | None = None
+    try:
+        client = QuackStateClient(
+            owner_id=client_id,
+            store_id=store_id,
+            process_birth_id=identity.process_birth_id,
+            connection_factory=lambda _endpoint: TypedStateOwnerConnection(
+                socket_path=server.typed_command_socket_path(),
+                token=token,
+                client_id=client_id,
+                process_birth_id=identity.process_birth_id,
+                store_id=store_id,
+            ),
+        )
+        client.attach(
+            board.resolved_database_program().quack_endpoint,
+            server_id=identity.server_id,
+        )
+        generation_before = client.load_generation()
+        result = client.recover_blocked_task_retry(
+            task_cid=task_cid,
+            expected_task_revision=int(entry["source_revision"]),
+            task_body=dict(task_body),
+            terminal_receipt=dict(terminal_receipt),
+            max_task_attempts_before=int(entry["max_task_attempts_before"]),
+            max_task_attempts_after=int(entry["max_task_attempts_after"]),
+            operator_handoff_receipt_id=batch_receipt_id,
+            sidecar_evidence_id=str(entry["sidecar_evidence_id"]),
+            now_ms=int(entry["started_at_ms"]),
+            require_fresh_portal_revalidation=True,
+        )
+        generation_after = client.load_generation()
+    finally:
+        try:
+            if client is not None:
+                client.close()
+        finally:
+            server.revoke_typed_client_grant(grant.grant_id)
+
+    outcome = result.outcome.value
+    expected_outcome = (
+        "accepted"
+        if blocked_retry_state == "pending_apply"
+        else "idempotent_replay"
+    )
+    route = terminal_receipt["execution_route_binding"]
+    result_body = dict(result.result)
+    store_revision_before = result_body.get("store_revision_before")
+    expected_result = {
+        "schema": TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA,
+        "operation": HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND,
+        "task_cid": task_cid,
+        "attempt_id": terminal_receipt["attempt_id"],
+        "attempt_number": terminal_receipt["attempt_number"],
+        "fresh_attempt_number": entry["max_task_attempts_after"],
+        "task_revision": entry["target_revision"],
+        "queue_revision": 1,
+        "retry_not_before_ms": entry["retry_not_before_ms"],
+        "source_completion_receipt_id": entry[
+            "source_completion_receipt_id"
+        ],
+        "operator_handoff_receipt_id": batch_receipt_id,
+        "sidecar_evidence_id": entry["sidecar_evidence_id"],
+        "max_task_attempts_before": entry["max_task_attempts_before"],
+        "max_task_attempts_after": entry["max_task_attempts_after"],
+        "attempt_refunded": False,
+        "execution_route_binding_cid": _semantic_identity(
+            {"task_execution_route_binding": dict(route)}
+        ),
+        "execution_route_policy_id": route["policy_id"],
+        "execution_route_origin_revision": route["task_revision"],
+        "store_revision_before": store_revision_before,
+        "fresh_portal_revalidation_requirement_id": (
+            revalidation_requirement["requirement_id"]
+        ),
+    }
+    command_prefix = "cmd:blocked-retry-recovery:"
+    command_digest = result.command_id.removeprefix(command_prefix)
+    if (
+        outcome != expected_outcome
+        or result.changed is not (blocked_retry_state == "pending_apply")
+        or result.conflict_kind is not None
+        or result_body != expected_result
+        or type(store_revision_before) is not int
+        or store_revision_before < 0
+        or not result.command_id.startswith(command_prefix)
+        or re.fullmatch(r"[0-9a-f]{64}", command_digest) is None
+        or result.idempotency_key
+        != f"executor-blocked-retry-recovery:{command_digest}"
+        or result.result_digest != _identity(result_body)
+        or generation_before.generation != int(identity.generation)
+        or generation_before.fence_epoch != int(identity.fence_epoch)
+        or generation_after.generation != int(identity.generation)
+        or generation_after.fence_epoch != int(identity.fence_epoch)
+        or result.generation != generation_after.generation
+        or result.fence_epoch != generation_after.fence_epoch
+        or result.revision != generation_after.revision
+        or (
+            blocked_retry_state == "pending_apply"
+            and (
+                generation_before.revision != store_revision_before
+                or generation_after.revision != store_revision_before + 1
+            )
+        )
+        or (
+            blocked_retry_state == "command_replay_required"
+            and generation_after.to_dict() != generation_before.to_dict()
+        )
+    ):
+        raise OperatorError(
+            f"{alias} current-head blocked-retry command was not exactly admitted"
+        )
+    return {
+        "task_alias": alias,
+        "task_cid": task_cid,
+        "post_recovery_requirement": (
+            CURRENT_HEAD_BLOCKED_RETRY_POST_RECOVERY_REQUIREMENT
+        ),
+        "expected_retrying_task_body_id": _identity(expected_task_body),
+        "fresh_portal_revalidation_requirement_id": (
+            revalidation_requirement["requirement_id"]
+        ),
+        "authorization": {
+            "client_id": client_id,
+            "process_birth_id": identity.process_birth_id,
+            "peer_pid": os.getpid(),
+            "allowed_operations": list(allowed_operations),
+            "allowed_command_operations": [HANDOFF_REPAIR_BLOCKED_RETRY_COMMAND],
+            "entity_scopes": {"task_cid": task_cid},
+            "revoked": True,
+        },
+        "command": result.to_dict(),
+    }
+
+
+def _apply_current_head_blocked_retry_batch(
+    *,
+    server: Any,
+    board: Any,
+    handoff: Any,
+    sealed_source_head: str,
+    sealed_source_tree: str,
+    current_attempt_limit: int,
+    blocked_retry_states: Mapping[str, str],
+) -> dict[str, Any]:
+    """Apply an exact four-task batch; mixed-prefix replay is intentional."""
+
+    verified = _verified_current_head_blocked_retry_batch(
+        handoff,
+        sealed_source_head=sealed_source_head,
+        sealed_source_tree=sealed_source_tree,
+        current_attempt_limit=current_attempt_limit,
+    )
+    aliases = tuple(sorted(CURRENT_HEAD_BLOCKED_RETRY_EXPECTATIONS))
+    if (
+        not isinstance(blocked_retry_states, Mapping)
+        or set(blocked_retry_states) != set(aliases)
+        or any(
+            blocked_retry_states[alias]
+            not in {"pending_apply", "command_replay_required"}
+            for alias in aliases
+        )
+    ):
+        raise OperatorError("current-head blocked-retry batch states are not exact")
+
+    recoveries: list[dict[str, Any]] = []
+    for entry in verified["entries"]:
+        alias = str(entry["task_alias"])
+        recoveries.append(
+            _apply_current_head_blocked_retry_entry(
+                server=server,
+                board=board,
+                batch_receipt_id=str(verified["batch_receipt_id"]),
+                entry=entry,
+                blocked_retry_state=str(blocked_retry_states[alias]),
+            )
+        )
+    return {
+        "schema": CURRENT_HEAD_BLOCKED_RETRY_BATCH_RESULT_SCHEMA,
+        "operation": CURRENT_HEAD_BLOCKED_RETRY_BATCH_OPERATION,
+        "batch_receipt_id": verified["batch_receipt_id"],
+        "source_head": sealed_source_head,
+        "repository_tree_id": sealed_source_tree,
+        "recovery_count": len(recoveries),
+        "post_recovery_requirement": (
+            CURRENT_HEAD_BLOCKED_RETRY_POST_RECOVERY_REQUIREMENT
+        ),
+        "recoveries": recoveries,
+    }
+
+
 def _verify_continued_route_sidecars(
     *,
     board: Any,
@@ -5426,6 +7357,103 @@ class _ExecutionRoutePolicyProvider:
                                     "blocked-retry post-command task state is "
                                     "not exact"
                                 )
+                            batch_recovery: dict[str, Any] = {}
+                            if self.restart_admission.get("mode") == (
+                                "verified_current_head_blocked_retry_batch"
+                            ):
+                                descendant = self.restart_admission.get(
+                                    "current_head_descendant_repair"
+                                )
+                                batch = (
+                                    descendant.get("blocked_retry_batch")
+                                    if isinstance(descendant, Mapping)
+                                    else None
+                                )
+                                sealed_source_head = (
+                                    descendant.get("sealed_source_head")
+                                    if isinstance(descendant, Mapping)
+                                    else None
+                                )
+                                sealed_source_tree = (
+                                    descendant.get("sealed_source_tree")
+                                    if isinstance(descendant, Mapping)
+                                    else None
+                                )
+                                initial_states = self.database_verification.get(
+                                    "current_head_blocked_retry_states"
+                                )
+                                pre_batch_states = post_verification.get(
+                                    "current_head_blocked_retry_states"
+                                )
+                                if (
+                                    not isinstance(batch, Mapping)
+                                    or not isinstance(initial_states, Mapping)
+                                    or dict(pre_batch_states or {})
+                                    != dict(initial_states)
+                                    or re.fullmatch(
+                                        r"[0-9a-f]{40}",
+                                        str(sealed_source_head or ""),
+                                    )
+                                    is None
+                                    or re.fullmatch(
+                                        r"[0-9a-f]{40}",
+                                        str(sealed_source_tree or ""),
+                                    )
+                                    is None
+                                ):
+                                    raise OperatorError(
+                                        "blocked-retry batch changed before its fence"
+                                    )
+                                live_sidecars = (
+                                    _verify_current_head_blocked_retry_live_sidecars(
+                                        batch
+                                    )
+                                )
+                                owner_batch = (
+                                    _apply_current_head_blocked_retry_batch(
+                                        server=self.server,
+                                        board=self.board,
+                                        handoff=batch,
+                                        sealed_source_head=str(
+                                            sealed_source_head
+                                        ),
+                                        sealed_source_tree=str(
+                                            sealed_source_tree
+                                        ),
+                                        current_attempt_limit=int(
+                                            self.restart_admission.get(
+                                                "max_task_attempts_after"
+                                            )
+                                            or 0
+                                        ),
+                                        blocked_retry_states=initial_states,
+                                    )
+                                )
+                                post_verification = (
+                                    _restart_database_verification(
+                                        continued_source,
+                                        self.restart_admission,
+                                    )
+                                )
+                                final_states = post_verification.get(
+                                    "current_head_blocked_retry_states"
+                                )
+                                if (
+                                    not isinstance(final_states, Mapping)
+                                    or set(final_states)
+                                    != set(CURRENT_HEAD_BLOCKED_RETRY_EXPECTATIONS)
+                                    or any(
+                                        state != "command_replay_required"
+                                        for state in final_states.values()
+                                    )
+                                ):
+                                    raise OperatorError(
+                                        "blocked-retry batch did not reach exact replay state"
+                                    )
+                                batch_recovery = {
+                                    "live_sidecars": live_sidecars,
+                                    "owner_commands": owner_batch,
+                                }
                             post_page = continued_source.list_tasks(limit=500)
                             if (
                                 post_page.next_cursor
@@ -5460,6 +7488,7 @@ class _ExecutionRoutePolicyProvider:
                                 )
                             return {
                                 "owner_command": command_result,
+                                "current_head_blocked_retry_batch": batch_recovery,
                                 "database_verification": post_verification,
                                 "execution_route_policy": (
                                     post_policy.public_summary()

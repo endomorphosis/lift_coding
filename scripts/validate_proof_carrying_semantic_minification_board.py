@@ -252,9 +252,9 @@ def validate() -> dict[str, Any]:
     for field, expected in expected_paths.items():
         if config.get(field) != expected:
             errors.append(f"config {field} differs")
-    if config.get("max_task_attempts") != 2:
+    if config.get("max_task_attempts") != 3:
         errors.append(
-            "max_task_attempts must retain one bounded retry after the initial attempt"
+            "max_task_attempts must retain two bounded attempts after the initial attempt"
         )
     if config.get("implementation_retry_budget") != 1:
         errors.append("implementation_retry_budget differs")
