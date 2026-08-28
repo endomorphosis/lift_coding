@@ -1,0 +1,215 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-080",
+  "title": "Integrate projection events with supervisor state",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G700",
+  "objective_id": "PCSM-080",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-080@current-head-python-v1-projection-event-refill-admission-capability-assessment-v1",
+  "observed_at": "2026-08-28T17:35:49Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python-v1 projection-event and objective-refill admission capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-080.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-080.json",
+    "implementation_delta": "Reuse the current-head supervisor's bounded objective-refill budget, Quack/DuckDB canonical-versus-projection count check, and generic PlanDelta@1 contract. No PCSM source implementation is changed because the exact PCSM configuration keeps objective refill disabled and the inspected implementation contains no closed PCSM owner-side PlanDelta admission transaction that atomically admits a named tranche, reports projection_only_task_count=0, reseals an exact execution-route policy, and recycles all four PCSM lanes. This receipt records the reusable generic capability and the typed non-promotion gap without creating a competing authority.",
+    "non_promotion_reason": "The generic current-head supervisor has tested cap and projection-integrity guardrails, and PlanDelta@1 has a versioned content identity, but no current-PCSM execution/admission receipt binds a PlanDelta CID, accepted population, exact execution-route reseal, or four-lane recycle. objective_refill_enabled is false in the exact sealed PCSM configuration, so Markdown objective findings remain non-authoritative and no refill may materialize."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate establishes implementation, identity, validation success, execution, proof, or promotion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised generic contract behavior and never substitutes for an exact-PCSM admission or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "d00662bc07617e1819d90d1f4bda749975ce92c8",
+    "outer_tree": "3e27c3b5eec6d228422c5228af09c46023e33b36",
+    "dispatch_tree_id": "d00662bc07617e1819d90d1f4bda749975ce92c8",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "bdb6becdd3499dd32bca9004460f375b8465eb0e",
+    "scheduler_config_sha256": "a83e6f853a7d159af999c9af2eaa2ab6062cb3c8e0a7feafb58eb57578af20a8",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no refill admission authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named current-head Python-v1 supervisor, generic PlanDelta contract, and direct-test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no new kit authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared every admitted gitlink commit/tree with nested HEAD and HEAD^{tree}; inspected outer and nested porcelain before this declared receipt write; calculated the scheduler and selected source/test Git blobs plus SHA-256 values; inspected the configured PCSM flags and the generic supervisor/PlanDelta contracts; searched the exact implementation for an owner-side PlanDelta admission integration; and ran focused plus required tests under the prescribed sealed PATH with fresh private HOME/XDG roots.",
+      "result": "The dispatch commit equals outer HEAD, recorded gitlink commit/tree pairs equal checked-out heads, and inspected worktrees were clean before receipt creation. The exact PCSM config declares a 10-task refill cap, 130 total-task cap, 20-epoch cap, four lanes, Quack/DuckDB authority, and objective_refill_enabled=false. Generic supervisor code can measure projection_only_task_count and enforces tested refill-budget guardrails, while generic PlanDelta@1 is versioned and content-addressed; neither is an observed closed PCSM owner-side admission path or a concrete PCSM admission/reseal/recycle result.",
+      "invalidates_on": "Any change to a bound outer commit/tree, gitlink head/tree, scheduler digest, listed source/test digest, schema/version/identity behavior, PCSM refill flag/policy, owner-side admission integration, or validation result requires a fresh receipt."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "The current-head TodoImplementationSupervisor already maintains a bounded refill budget and fails closed when disabled; its Quack/DuckDB count rejects canonical tasks omitted by the projection and reports projection-only rows. PlanDelta@1 already provides a closed, history-preserving, schema-versioned, content-addressed delta vocabulary. Reusing those components is the smallest possible assessment; adding a PCSM wrapper, a second task authority, or a fabricated admission receipt would exceed this receipt-only dispatch.",
+    "components": [
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor.TodoImplementationSupervisor objective refill budget@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/objective-refill-budget@1",
+        "role": "Generic bounded objective-refill controller: it rejects disabled execution, caps epochs and total tasks, clamps remaining capacity, quarantines unverifiable/excessive postconditions, and queries the Quack/DuckDB task source to reconcile canonical and projection task identities."
+      },
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.planning.plan_revision_contracts.PlanDelta@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/plan-delta@1",
+        "version": 1,
+        "role": "Closed history-preserving delta contract that binds exact base root/revision, authority roots, request, items, expected effects, population digests, evidence, and optional admission receipt through canonical content identity (delta_cid)."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "generic_contract": "PlanDelta@1 canonicalizes item order by content identity, validates a closed operation vocabulary, preserves history, and derives delta_cid from canonical content. The generic budget derives canonical counts from the Quack/DuckDB snapshot plus the immutable projection and refuses a canonical/projection omission.",
+      "pcsm_policy_binding": "The measured PCSM scheduler schema is @1. Its declared policy has max_tasks_per_epoch=10, max_total_tasks=130, max_epochs=20, min_open_tasks=8, seed mutation disabled, and four configured lanes; these configuration values are not an admission receipt or a substitute for an execution-route policy reseal.",
+      "authority_boundary": "The generic supervisor may not treat a Markdown objective finding, model/advisor output, empty scan, generic PlanDelta object, test result, or queue state as completion authority. The exact PCSM config retains objective_refill_enabled=false; no M2/M3 mutation, source mutation, task materialization, or completion/promotion authority is granted by this receipt."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+      "git_blob": "4479a93159d365c874eb0509532a66f595fed7c7",
+      "sha256": "c60ddc345f4f745d4b535c22ab6aea3f35d65529f54b0d1a5ad9aa16d4957635",
+      "role": "Current-head generic objective-refill budget and Quack/DuckDB canonical-versus-projection reconciliation, including projection_only_task_count and disabled fail-closed behavior."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py",
+      "git_blob": "5c7e7fdb99e55e4a9b39696f6ae781ca810fcbed",
+      "sha256": "f18fb8081b1a6a5768b683d3b5f9da38c72a59a664572281aaa89a56e0404430",
+      "role": "Current-head PlanDelta@1 and PlanRevision contracts: closed operations, versioned schema, exact base identities, canonical content identity, population/evidence fields, and history-preservation checks."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py",
+      "git_blob": "dad3b802384727128ce97126529cd82992b2f000",
+      "sha256": "126633befe4a8ad3df617cfb7de6c3308eec516de829f14da9bad9fe0b5ce4ca",
+      "role": "Direct generic positive and negative tests for epoch/total caps, capacity clamp, quarantine, shared lane epoch reservation, and Quack projection-count reconciliation."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Underlying implementation reached by the required PCSM suite; recorded separately and never relabelled as PCSM projection-event/refill-admission coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "focused_generic_projection_and_refill_guardrails": {
+      "kind": "measured",
+      "status": "passed",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm080-focus-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_todo_daemon_port.py -k 'objective_refill_rejects_twentieth_completed_epoch_with_partial_evidence or objective_refill_rejects_board_at_130_task_cap or objective_refill_clamps_findings_to_remaining_total_capacity or objective_refill_quarantines_generator_that_exceeds_total_cap or objective_refill_quarantines_unverifiable_postcondition or objective_refill_epoch_reservation_is_shared_across_lane_directories or objective_refill_quack_count_uses_overlap_and_pending_projection'",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, prescribed PATH, fresh private HOME/XDG root, user-site disabled, and accelerator source only on PYTHONPATH.",
+      "result": "9 passed, 575 deselected in 9.98s",
+      "positive_coverage": [
+        "The generic controller reserves a shared epoch across lane directories, clamps findings to remaining total capacity, and reconciles Quack canonical tasks with overlapping/pending projection tasks.",
+        "The generic controller emits partial non-completion evidence at the twentieth epoch and at the 130-task total cap."
+      ],
+      "negative_coverage": [
+        "A generator that exceeds the total cap is quarantined for returned, raised, and timed-out paths; an unverifiable postcondition is quarantined rather than admitted.",
+        "Canonical task aliases omitted by the Markdown projection are rejected; a cap/exhaustion result is not treated as successful completion."
+      ],
+      "scope_limit": "These are controlled generic supervisor fixtures. They do not exercise the exact disabled PCSM configuration, materialize a PCSM PlanDelta, report an observed zero projection_only_task_count for a PCSM admission, reseal an exact execution-route policy, or recycle all four PCSM lanes."
+    },
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm080-required-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME/XDG root.",
+      "result": "11 passed in 0.34s",
+      "scope_limit": "The required PCSM root verifies structured candidate-output grammar and rejection behavior. It contains positive and negative PCSM boundary coverage, but no projection-event, owner-side PlanDelta admission, policy-reseal, or lane-recycle integration test."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "PCSM-080 concerns supervisor-state admission rather than a formal prover. No source-map-bound PCSM admission campaign, PlanDelta admission receipt, execution-route reseal receipt, or approved digest-bound formal-prover deployment was available in the sealed environment. Passing tests are not relabelled as a formal proof, materialization approval, completion authority, or promotion."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; disabled PCSM refill flag and declared caps/four lanes; generic PlanDelta schema/version/content identity; generic budget/projection reconciliation behavior; sealed focused validation (9 passed); and sealed required validation (11 passed).",
+    "estimated": "None. No estimate supports implementation, identity, test success, a PCSM admission, proof, or promotion.",
+    "simulated": "The focused generic supervisor tests use temporary controlled boards, task sources, lane directories, and generator outcomes. They establish only generic guardrail behavior and are not represented as an exact-PCSM admission, route reseal, lane recycle, or completion result.",
+    "unavailable": "An exact-PCSM owner-side PlanDelta admission transaction and emitted PlanDelta/admission-receipt CID; a measured PCSM projection_only_task_count=0 admission result; an exact execution-route policy reseal binding the admitted population; a four-PCSM-lane recycle receipt; a PCSM source-map-bound admission instance; and an immutable self-CID for this receipt."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_projection_reconciliation_and_plan_delta_contract_available_pcsm_owner_side_admission_integration_unavailable_non_promoted",
+    "available_capability": "A current-head Python-v1 generic supervisor provides bounded refill budget controls, Quack/DuckDB canonical-versus-projection reconciliation, typed disabled/exhausted/quarantined outcomes, and tested epoch/total-cap guardrails. PlanDelta@1 provides a closed, deterministic, schema-versioned content-addressed delta contract.",
+    "unavailable_capability": "A concrete exact-PCSM closed owner-side PlanDelta admission path, enabled only after its policy conditions are met, which deterministically admits a bounded named tranche with all mandated caps, proves projection_only_task_count=0, reseals the exact execution-route policy, recycles pcsm-lane-0 through pcsm-lane-3, and emits the resulting CIDs/receipts.",
+    "missing_bindings": [
+      "a PCSM PlanDelta CID and admission_receipt_cid bound to the exact configured base population/root/revision",
+      "a measured PCSM Quack/DuckDB canonical/projection reconciliation result with projection_only_task_count=0",
+      "a resealed execution-route policy ID/CID for every admitted task",
+      "four generation-bound lane recycle receipts for pcsm-lane-0, pcsm-lane-1, pcsm-lane-2, and pcsm-lane-3"
+    ],
+    "disposition": "The exact configuration remains fail-closed with objective_refill_enabled=false and its initial population as the only executable population. Markdown-only objective findings cannot create executable tasks. No CID, event, route reseal, lane recycle, completion, or promotion is invented."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify the accelerator implementation/tests, protected configuration/board documents, Quack/DuckDB state, scheduler state, routes, lanes, or task population.",
+    "Generic PlanDelta@1 existence and identity binding do not by themselves select an owner, grant admission authority, materialize PCSM tasks, or bind a PCSM route/lane generation.",
+    "The generic objective-refill implementation contains a Markdown projection workflow. The exact PCSM policy explicitly keeps objective refill disabled; its generic fixture behavior is not substituted for the required closed PCSM owner-side admission path.",
+    "The required PCSM suite passed but covers structured decoding only; it cannot be relabelled as projection-event/refill-admission integration validation.",
+    "No model output, Markdown objective finding, queue state, PlanDelta object, test result, or fixture exercise is treated as task-materialization authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, schema/version/identity behavior, PCSM refill policy/flag, admission capability, or validation result changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, generic supervisor components, task authority state, or unrelated admitted history."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalent_reused_first": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "sealed_focused_projection_and_refill_guardrail_validation_passed": true,
+    "sealed_required_validation_passed": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "markdown_only_objective_findings_non_authoritative": true,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "pcsm_owner_side_plan_delta_admission_available": false,
+    "pcsm_measured_projection_only_task_count_zero_available": false,
+    "pcsm_execution_route_policy_reseal_available": false,
+    "pcsm_four_lane_recycle_available": false,
+    "promotion_status": "non_promoted_missing_pcsm_owner_side_admission_integration"
+  }
+}
