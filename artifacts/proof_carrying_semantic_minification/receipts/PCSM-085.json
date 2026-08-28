@@ -1,0 +1,210 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-085",
+  "title": "Add event-driven delta projections",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G700",
+  "objective_id": "PCSM-085",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-085@current-head-python-v1-event-driven-delta-projection-capability-assessment-v1",
+  "observed_at": "2026-08-28T18:08:34Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python-v1 event-driven delta-projection capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-085.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-085.json",
+    "implementation_delta": "Reuse the current-head ProjectionDeltaCheckpointStore@1 and its PortalImplementationDaemon integration. The store canonically serializes a JSON-object projection, binds it to an EventCursor, records only sorted top-level set/remove deltas, derives SHA-256 content identities, atomically publishes changed checkpoints, and makes unchanged projection/cursor pairs zero-write. The daemon binds its runtime checkpoint to the closed asi-117 event-driven-delta-checkpoint-runtime requirement. No PCSM wrapper, alternative projection head, source-map authority, source/test mutation, M2/M3 mutation, or task materialization was introduced under this exact receipt-only authority.",
+    "non_promotion_reason": "The reusable implementation is a generic supervisor runtime checkpoint, not a canonical PCSM projection contract. The exact current source forest has no PCSM ProjectionRoot/projection schema, named PCSM projection identity, aggregate PCSM SourceLinkReceipt/source-map CID, or concrete source-forest projection result. The selected focused fixtures exercise generic synthetic event/projection records, and the full 13-test event-runtime module cannot complete in the sealed environment because duckdb is unavailable for six daemon-integration tests. This receipt therefore preserves the generic capability and its evidence boundary without promoting it to a PCSM semantic projection, source-forest execution, completion, or admission authority."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound current source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate establishes implementation, identity, validation success, execution, proof, or promotion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised generic contract behavior and never substitutes for an exact-PCSM semantic projection or admission.",
+    "unavailable": "A required identity, capability, dependency, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "5c9d7f681544d3091838ff7a2d518c391dde48ec",
+    "outer_tree": "d12f3a0904c03b8e3ff5331d9a018036eceb9ba9",
+    "dispatch_tree_id": "5c9d7f681544d3091838ff7a2d518c391dde48ec",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "bdb6becdd3499dd32bca9004460f375b8465eb0e",
+    "scheduler_config_sha256": "a83e6f853a7d159af999c9af2eaa2ab6062cb3c8e0a7feafb58eb57578af20a8",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no event-driven delta-projection authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named current-head Python-v1 event-driven runtime/checkpoint and direct-test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic-identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no new Kit authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared every admitted gitlink commit/tree with its checked-out nested HEAD and HEAD^{tree}; inspected outer and accelerator porcelain before this declared receipt write; calculated the scheduler and selected source/test Git blobs plus SHA-256 values; searched the exact accelerator roots for PCSM projection/source-map contract identifiers; inspected the store and daemon bindings; and ran the focused plus required tests under the prescribed sealed PATH with fresh private HOME/XDG roots.",
+      "result": "The dispatch commit equals outer HEAD, recorded gitlink commit/tree pairs equal checked-out heads, and inspected worktrees were clean before receipt creation. The exact PCSM scheduler remains schema @1 with DuckDB/Quack authority, four lanes, and objective_refill_enabled=false. ProjectionDeltaCheckpointStore@1 and the daemon integration are present at the admitted accelerator head, but the searched exact roots contain no PCSM ProjectionRoot, PCSM projection contract, SourceLinkReceipt, or source-map CID identifier. The required PCSM test root passed; the full generic event-runtime module exposed a missing sealed duckdb dependency for six integration tests.",
+      "invalidates_on": "Any change to a bound outer commit/tree, gitlink head/tree, scheduler digest, listed source/test digest, checkpoint schema/identity/cursor behavior, daemon requirement binding, PCSM projection/source-map capability, sealed duckdb availability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "absent",
+      "reason": "No current-tree PCSM ProjectionRoot or aggregate PCSM SourceLinkReceipt/source-map CID binds a source forest to this generic runtime projection. Git trees, Git blobs, SHA-256 checkpoint identities, EventCursor tokens, runtime projection IDs, aliases, and arbitrary Kit CIDs are not relabelled as that absent semantic identity."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "ProjectionDeltaCheckpointStore@1 is the smallest current-head implementation that already couples an event cursor with a deterministic projection delta and durable checkpoint. PortalImplementationDaemon is its existing owner-side consumer. Replacing either with a PCSM wrapper or competing projection store would exceed this receipt-only dispatch and duplicate the generic authority.",
+    "components": [
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.task_sources.taskboard_store.ProjectionDeltaCheckpointStore@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/projection-delta-checkpoint@1",
+        "requirement_id": "asi-117:event-driven-delta-checkpoint-runtime",
+        "role": "Atomic, lock-protected generic projection/cursor checkpoint. It validates the record schema and self-content identity on read; rejects wrong-stream, backward, and same-position re-anchored cursors; and emits deterministic top-level deltas plus runtime-projection and checkpoint SHA-256 identities."
+      },
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon.PortalImplementationDaemon event-driven checkpoint integration",
+        "schema": "ipfs_accelerate_py/agent-supervisor/event-driven-runtime-checkpoint@1",
+        "requirement_id": "asi-117:event-driven-delta-checkpoint-runtime",
+        "role": "Existing generic runtime owner that writes the compact result/state projection with the latest canonical event cursor, loads only matching schema/requirement records, and quarantines/replaces invalid checkpoint material before retrying persistence."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "available_binding": "Canonical JSON uses sorted keys, compact separators, UTF-8, and allow_nan=false. The delta orders set keys and removed keys; projection_id and checkpoint_id are SHA-256 content identities; EventCursor parsing and monotonicity checks bind the checkpoint to one ordered event stream; the checkpoint schema is explicit @1; changed records are written through temporary file, fsync, atomic replace, and parent-directory fsync; identical inputs return write_count=0.",
+      "missing_binding": "No selected record names a PCSM projection schema/version, canonical PCSM projection CID, exact PCSM repository/tree/source-map CID, SourceLinkReceipt, or source-map-bound semantic result. Generic SHA-256 content IDs are not CIDv1 identities and do not meet those missing PCSM bindings.",
+      "authority_boundary": "The selected components persist and replay generic supervisor-runtime state only. They do not establish semantic correctness, choose a canonical PCSM identity, authorize aliases, mutate PCSM source, create tasks, admit a projection, authorize M2/M3 work, or decide completion/promotion. The exact PCSM configuration's disabled objective refill remains fail-closed."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/taskboard_store.py",
+      "git_blob": "c6226136c231e70cb44cd1618e36e4c3e3ba34b3",
+      "sha256": "0b3b27a015a2e9849775f1140e6a9fdb3b60f7174892858ec8420a026cc95ea1",
+      "role": "Current-head ProjectionDeltaCheckpointStore@1: canonical serialization, sorted set/remove delta generation, schema/self-identity validation, cursor fencing, atomic publication, and unchanged zero-write result."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+      "git_blob": "e23b15669e0a617e2b95574975fcd7ec89309d8f",
+      "sha256": "09eaa89412f409b4555b7b34e0b4ad0cdb63a9bee1bafd4c957d409a547c438b",
+      "role": "Current-head generic daemon integration: closed requirement identifier, runtime result projection, latest-event cursor checkpointing, validation on load, invalid-checkpoint quarantine/retry, and runtime delta reporting."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_event_driven_runtime.py",
+      "git_blob": "03fdeea5cebe3388d133356aa5efcf914a0ffe3d",
+      "sha256": "87fc5071a4d4ccd953da6f244f7320a269dfd62f6012bcddee8a483e6f28fcaa",
+      "role": "Thirteen generic event-runtime vectors: cursor replay/rotation, two-phase acknowledgement, watcher fallback, bounded metadata, zero unchanged writes, daemon cleanup/wake isolation, low-CPU idle behavior, task-identity preservation, and lease-wake exclusion."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Required PCSM-root structured-output positive/negative boundary suite. It is recorded separately and is not relabelled as event-driven delta-projection coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "focused_generic_event_delta_tests": {
+      "kind": "measured",
+      "status": "passed",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm085-direct-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_event_driven_runtime.py -k '<seven named low-level/runtime-runner vectors>'",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, prescribed PATH, fresh private HOME/XDG root, user-site disabled, and accelerator source only on PYTHONPATH.",
+      "result": "7 passed, 6 deselected in 6.92s",
+      "positive_coverage": [
+        "Gapless exactly-once canonical event-cursor replay across restart and log rotation, with duplicate-tail coalescing.",
+        "All runtime wake kinds use canonical cursors and two-phase acknowledgement; event-loop runner wakes and closes correctly; bounded metadata precedes projection work.",
+        "ProjectionDeltaCheckpointStore computes the expected deterministic set/remove delta, advances its cursor, reloads the persisted projection, and leaves reordered identical input untouched with write_count=0."
+      ],
+      "negative_coverage": [
+        "Acknowledgement is required before a semantic wake stops replaying; re-delivery of an acknowledged canonical revision is a no-op.",
+        "An unsupported native watcher falls back to the blocking timer rather than claiming native event support; bounded metadata truncates oversized trees.",
+        "The selected store vector demonstrates that an unchanged reordered projection/cursor cannot cause an extra atomic write. Source-inspected negative fences reject malformed/oversized records, unsupported schema, forged checkpoint identity, non-object projection/cursor, wrong stream, backward cursor, and a changed cursor anchor at the same position."
+      ],
+      "scope_limit": "These are generic controlled fixtures, not an exact-PCSM ProjectionRoot or source-map-bound projection result. The cursor-fence source behavior is measured by inspection; it is not claimed as separately executed negative-vector coverage."
+    },
+    "full_generic_event_runtime_module": {
+      "kind": "unavailable",
+      "status": "environment_dependency_unavailable_for_six_integration_vectors",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm085-focus-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_event_driven_runtime.py",
+      "result": "7 passed, 6 failed in 14.92s. Each failing vector stopped while constructing PortalImplementationDaemon because the sealed interpreter could not import duckdb from task_sources.duckdb_state.",
+      "dependency": "duckdb",
+      "affected_vectors": [
+        "daemon event-runtime cleanup idempotence",
+        "daemon self-post-pass wake suppression",
+        "parallel-lane bookkeeping repository-wake exclusion",
+        "drained-board ten-minute logical no-write/CPU bound",
+        "idle populated-board typed-identity preservation",
+        "ephemeral merge-consumer lease wake exclusion"
+      ],
+      "scope_limit": "This is an authoritative environment capability gap, not evidence that the six semantic assertions passed or failed. Installing or using a provider-only duckdb would not establish sealed validation."
+    },
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm085-required-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME/XDG root.",
+      "result": "11 passed in 0.35s",
+      "positive_coverage": "Closed task-family grammar, compact structured decode, and bounded explicit abstention.",
+      "negative_coverage": "Malformed output, unknown fields, model-created completion, untyped/abstention context, malformed rankings, unbounded/untyped patch scope, coercion, and duplicate JSON fields are rejected.",
+      "scope_limit": "The required PCSM root provides positive and negative PCSM structured-output boundary coverage only; it contains no event-driven delta-projection or PCSM source-map/projection contract vector."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "No versioned PCSM projection/source-map contract, concrete source-map-bound projection result, or approved digest-bound formal-prover deployment is present. Passing generic/runtime and required PCSM tests are not relabelled as a formal proof, semantic projection admission, completion authority, or promotion."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; checkpoint schema/requirement/atomic-write/canonicalization/cursor-fence behavior visible in source; absence of searched PCSM projection/source-map identifiers; focused sealed result of 7 passed/6 deselected; full-module sealed duckdb gap; and required sealed result of 11 passed.",
+    "estimated": "None. No estimate supports implementation, identity, test success, source-forest execution, proof, admission, or promotion.",
+    "simulated": "The focused generic tests use temporary directories, synthetic event records/cursors, logical clocks/watchers, and synthetic projections. They establish the exercised generic runtime/checkpoint behavior only, not a PCSM source-forest projection, canonical identity, or semantic admission.",
+    "unavailable": "A versioned PCSM ProjectionRoot schema; canonical PCSM projection CID; aggregate PCSM SourceLinkReceipt/source-map CID; exact PCSM repository/tree/source-map binding; a source-map-bound PCSM projection result; direct PCSM positive/negative projection vectors; sealed duckdb needed by six generic daemon-integration vectors; formal proof; and immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify accelerator implementation/tests, install duckdb, define a PCSM projection schema, or alter protected planning/configuration files.",
+    "ProjectionDeltaCheckpointStore@1 has a versioned generic checkpoint schema and SHA-256 content identities, but not a PCSM semantic projection schema or CID binding.",
+    "The PCSM scheduler has objective_refill_enabled=false. No event, generic checkpoint, model output, fixture, or receipt can materialize executable work or override that fail-closed policy.",
+    "The full generic event-runtime module has six environment-blocked daemon integration vectors due to missing duckdb; their source-defined assertions are unavailable rather than passing or failing semantic evidence.",
+    "No current aggregate PCSM SourceLinkReceipt/source-map CID connects the generic runtime projection to exact file/node/span semantics; no Git/tree/blob/SHA-256/alias/runtime-projection identity is relabelled as that absent CID.",
+    "No watcher event, checkpoint, arbitrary artifact identity, test fixture, or generic test result is treated as semantic authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, checkpoint schema/identity/cursor behavior, daemon requirement binding, PCSM projection/source-map capability, sealed duckdb availability, or validation result changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, generic accelerator runtime/checkpoint components, external dependency installation, or unrelated admitted history."
+  }
+}
