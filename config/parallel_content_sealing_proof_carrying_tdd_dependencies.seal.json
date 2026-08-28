@@ -1,6 +1,6 @@
 {
   "artifacts": {
-    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:f1c8b5f2068a997b37a1d160e5d76ad596b7621135857a79fd724365b16b6792",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:a5fe60027d81e34f1b4b8bbc08660216621fee1abc6550358d16d76e75d98efe",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json": "sha256:97af0087f4dba6635ce8c4ee5932b950f3e5e71312bddb8df86c6a8484025b31",
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md": "sha256:9a5bfd111582c4632aac07f9527d014265ba40b5960cb675d6097ede6959b187",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md": "sha256:652d661361ef28835f9fbf92c11e3a949a655dda8b61625c3c55d7a3b9dee6b7",
@@ -13,7 +13,7 @@
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json": "sha256:f37c0280f3b088597ec7fae028a978e912af3c0f1cf73c4bf2ef22ed9a2ee78b",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json": "sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997",
-    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:33d089bfbc91b646175b6cf41af403fc9b2d8356f52b8d4d93d9b1788c867ee2",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:bd0052fccd034800a5a238c92989bb67a4a2718121d71e0a9be87a9d28e2a1d2",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json": "sha256:11c32db94286c8a7006d6d63fb27b5d4f2a6c02d471d406e50b73fcaeabd7998",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py": "sha256:59015bcd72c9bae9e2aec8c60c7d1446d8689d58070896251ed31e197468ca88",
@@ -99,12 +99,12 @@
     {
       "authority": true,
       "dirty": false,
-      "gitlink": "7b864a5e96be17017776448317e64f144a0f1014",
-      "head": "7b864a5e96be17017776448317e64f144a0f1014",
+      "gitlink": "8204255756b152edd98e29c2bd5ac78a076dc367",
+      "head": "8204255756b152edd98e29c2bd5ac78a076dc367",
       "name": "ipfs_accelerate_py",
       "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
       "path": "external/ipfs_accelerate",
-      "tree": "7e0e9a5353f668b2bc3c5ec126cd98a8be7687ec"
+      "tree": "529232e6288749f0c425c781676229a44840c350"
     },
     {
       "authority": true,

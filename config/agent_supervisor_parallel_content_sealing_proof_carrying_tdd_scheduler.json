@@ -9,26 +9,26 @@
   "database_program": {
     "authority_mode": "quack",
     "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
-    "event_store_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/events",
+    "event_store_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/events",
     "explicit_legacy": false,
     "export_profile": "pctdd-v1",
     "failover_policy": "fail_closed",
     "quack_endpoint": "quack:127.0.0.1:42777",
-    "runtime_registry_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/registry",
+    "runtime_registry_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/registry",
     "schema_revision": "1",
-    "store_generation": "pctdd-v1-g3",
-    "store_id": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/control.duckdb",
+    "store_generation": "pctdd-v1-g4",
+    "store_id": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/control.duckdb",
     "task_source_kind": "duckdb",
-    "worktree_root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/worktrees"
+    "worktree_root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/worktrees"
   },
   "dependency_guardrail_enabled": true,
   "dependency_validator_path": "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
   "ducklake_projection_program": {
     "acceptance_prerequisite": false,
     "authority": false,
-    "catalog_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/ducklake/catalog.duckdb",
+    "catalog_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/ducklake/catalog.duckdb",
     "completion_prerequisite": false,
-    "data_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/ducklake/data",
+    "data_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/ducklake/data",
     "logical_datasets": [
       "bootstrap_history"
     ],
@@ -126,9 +126,13 @@
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py"
   ],
   "provider": {
+    "fallback_model_id": "gpt-5.6-terra",
+    "fallback_provider_id": "codex",
+    "fallback_reasoning_effort": "high",
+    "fallback_trigger": "primary_quota_exhausted",
     "max_concurrency": 4,
-    "model_id": "gpt-5.6-terra",
-    "provider_id": "codex",
+    "primary_model_id": "grok-4.6",
+    "primary_provider_id": "grok_cli",
     "secrets_from_environment_only": true,
     "secrets_in_argv_prompts_logs_or_receipts": false
   },
@@ -155,14 +159,14 @@
   ],
   "root_goal_id": "PCTDD-G000",
   "runtime_paths": {
-    "evidence": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/evidence",
+    "evidence": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/evidence",
     "generated_runtime_artifacts_are_completion_authority": false,
-    "logs": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/logs",
-    "merge_queue": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/merge-queue",
-    "quack_owner": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/quack-owner",
-    "root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3",
-    "state": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/state",
-    "worktrees": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g3/worktrees"
+    "logs": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/logs",
+    "merge_queue": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/merge-queue",
+    "quack_owner": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/quack-owner",
+    "root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4",
+    "state": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/state",
+    "worktrees": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g4/worktrees"
   },
   "safety_floors": {
     "escaped_critical_seeded_defects": 0,
@@ -178,14 +182,14 @@
   },
   "schema": "ipfs_accelerate_py.agent_supervisor.parallel-content-sealing-proof-carrying-tdd.scheduler_config@1",
   "source_binding": {
-    "accelerator_planning_revision": "ba1d3d9b5dc4504fb8bc667c38281f1548306fa9",
-    "accelerator_planning_tree": "51ce4cd8c34edf2279de0927d5ad238f669c8bba",
-    "accelerator_required_ancestor": "ba1d3d9b5dc4504fb8bc667c38281f1548306fa9",
+    "accelerator_planning_revision": "0be48679dc0db9db8d4010fd34fc60fed6fd5ace",
+    "accelerator_planning_tree": "0574621832589bdf053a29387534677c71dfa668",
+    "accelerator_required_ancestor": "0be48679dc0db9db8d4010fd34fc60fed6fd5ace",
     "accelerator_required_branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
     "bootstrap_task_source": "duckdb",
     "changed_revision_requires_fresh_inventory_and_baseline": true,
-    "ipfs_accelerate_planning_revision": "7b864a5e96be17017776448317e64f144a0f1014",
-    "ipfs_accelerate_planning_tree": "7e0e9a5353f668b2bc3c5ec126cd98a8be7687ec",
+    "ipfs_accelerate_planning_revision": "8204255756b152edd98e29c2bd5ac78a076dc367",
+    "ipfs_accelerate_planning_tree": "529232e6288749f0c425c781676229a44840c350",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
     "ipfs_datasets_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
     "ipfs_datasets_planning_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
