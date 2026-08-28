@@ -38,10 +38,11 @@
     "kind": "measured",
     "git_object_format": "sha1",
     "outer_repository": "endomorphosis/lift_coding",
-    "outer_commit": "c27bf2123f44524750faf873be995b9e727cd09e",
-    "outer_tree": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "outer_commit": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "outer_tree": "c27bf2123f44524750faf873be995b9e727cd09e",
     "dispatch_tree_id": "05d51aa052087ff64765e208f8a54b5078836a76",
-    "dispatch_tree_id_equals_outer_tree": true,
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
     "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
     "scheduler_config_git_blob": "7632510e067c97ad2414a200ab8eb73384469a11",
     "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
@@ -72,7 +73,7 @@
       "kind": "measured",
       "status": "passed",
       "method": "Recorded outer HEAD and HEAD^{tree}; compared every admitted superproject gitlink with nested HEAD and HEAD^{tree}; inspected outer and admitted nested porcelain before this declared receipt write; calculated scheduler and selected source/test SHA-256 values plus Git blobs; inspected the source-span implementation and tests; and searched accelerator sources for a PCSM SourceMap/SourceLink identity.",
-      "result": "The dispatch tree equals outer HEAD^{tree}, all recorded nested commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before this receipt write. The selected implementation and test sources are current at the recorded accelerator tree. No PCSM SourceMap/SourceLink identity was found, so Git trees/blobs and generic packet identities are not substituted for a concrete PCSM source-map CID.",
+      "result": "The dispatch commit equals outer HEAD, all recorded nested commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before this receipt write. The selected implementation and test sources are current at the recorded accelerator tree. No PCSM SourceMap/SourceLink identity was found, so Git trees/blobs and generic packet identities are not substituted for a concrete PCSM source-map CID.",
       "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, contract version/schema, source-map capability, or validation result requires a fresh receipt."
     },
     "pcsm_source_map": {
