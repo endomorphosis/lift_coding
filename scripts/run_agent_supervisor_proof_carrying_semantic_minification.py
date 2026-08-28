@@ -176,6 +176,10 @@ DATABASE_LIFECYCLE_IDENTITY_TRANSITION_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-database-lifecycle-identity-transition@1"
 )
+SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-supervisor-callback-continuity-transition@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -315,6 +319,13 @@ DATABASE_LIFECYCLE_IDENTITY_TRANSITION_PATH: Final = (
     / "handoff"
     / "supervisor-restart-database-lifecycle-identity-transition.json"
 )
+SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-callback-continuity-transition.json"
+)
 STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT: Final = (
     "8b8be83c6d9c578c4cec450092e140b929ce12e9"
 )
@@ -374,6 +385,45 @@ DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD: Final = (
 )
 DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_TREE: Final = (
     "e2bc16eac7ee8124af71af18d495da89415e815a"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_BASE_COMMIT: Final = (
+    "PENDING_SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_BASE_COMMIT"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_ROUTE_HEAD: Final = (
+    "92bdc6b6635d0bd87ce1f3e9907bc569b0424acd"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_ROUTE_TREE: Final = (
+    "c6a9c7be69d966af9a8e83d356496f766fa582c1"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_GUARD_HEAD: Final = (
+    "79f87a003f8d23f3bd2f19678f3c05ca7559402a"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_GUARD_TREE: Final = (
+    "bd09f4098a08149ba481aabc7db4b98c487ee9f8"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_STATUS_GAP_HEAD: Final = (
+    "a0a2a0b5053bac91e0e3ef89789fd763b5cae874"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_STATUS_GAP_TREE: Final = (
+    "1985947273fbd1eafffcf9ecebf67669bb90ba85"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_CHECKOUT_REPAIR_HEAD: Final = (
+    "b01abb8b97312f4c4860a2fa261c30c005aaefdb"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_CHECKOUT_REPAIR_TREE: Final = (
+    "834330abdfc97689ff4cd6ca799c0d62607c29cb"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD: Final = (
+    "288d681b6dd68683520758010e7c2f10f72a73cf"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_TREE: Final = (
+    "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD: Final = (
+    "4050488f0f8601f257946bd1fbd520e01617b651"
+)
+SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_TREE: Final = (
+    "fba21e2a5f2a5b1edc17bacc9f19ffb4cd1e8488"
 )
 CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
     "db9304284cfe857f08377ef756b4896192dd5111"
@@ -2762,7 +2812,6 @@ def _verified_database_lifecycle_identity_operator_descendant(
         or sealed_source.get("operator_identity")
         != _identity(expected_operator)
         or sealed_operator != expected_operator
-        or current_operator != expected_operator
     ):
         raise OperatorError(
             "database-lifecycle identity operator delta changed"
@@ -2816,6 +2865,269 @@ def _verified_database_lifecycle_identity_operator_descendant(
         artifact_commit,
         current_head,
         field="database-lifecycle identity artifact-to-current lineage",
+    )
+    supervisor_callback_continuity_transition: dict[str, Any] = {}
+    if current_operator != expected_operator:
+        supervisor_callback_continuity_transition = (
+            _verified_supervisor_callback_continuity_operator_descendant(
+                current_operator=current_operator,
+                current_head=current_head,
+                operator_path=operator_path,
+            )
+        )
+    return {
+        "receipt": payload,
+        "receipt_bytes": receipt_bytes,
+        "artifact_commit": artifact_commit,
+        "base_commit": base_commit,
+        "base_operator": base_operator,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "expected_operator": expected_operator,
+        "supervisor_callback_continuity_transition": (
+            supervisor_callback_continuity_transition
+        ),
+    }
+
+
+def _supervisor_callback_continuity_transition_payload(
+    *,
+    current_head: str,
+) -> tuple[bytes, dict[str, Any]]:
+    """Load the exact add-only supervisor callback-continuity receipt."""
+
+    receipt_bytes = _tracked_bytes(
+        SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_PATH,
+        head=current_head,
+    )
+    payload = _json_mapping_bytes(
+        receipt_bytes,
+        field="supervisor callback-continuity transition receipt",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "prior_checkpoint",
+        "repair_base",
+        "sealed_source",
+        "continuity_contracts",
+        "incident_evidence",
+        "validations",
+        "historical_receipts_preserved",
+        "database_authority_preserved",
+        "task_state_mutation",
+        "manual_database_mutation",
+        "manual_worktree_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema")
+        != SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_SCHEMA
+        or payload.get("reason")
+        != "preserve_terminal_callback_and_live_supervisor_generation_continuity"
+        or not isinstance(payload.get("prior_checkpoint"), Mapping)
+        or not isinstance(payload.get("repair_base"), Mapping)
+        or not isinstance(payload.get("sealed_source"), Mapping)
+        or not isinstance(payload.get("continuity_contracts"), Mapping)
+        or not isinstance(payload.get("incident_evidence"), Mapping)
+        or not isinstance(payload.get("validations"), list)
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get("database_authority_preserved") is not True
+        or payload.get("task_state_mutation") is not False
+        or payload.get("manual_database_mutation") is not False
+        or payload.get("manual_worktree_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity transition seal is invalid"
+        )
+    return receipt_bytes, payload
+
+
+def _verified_supervisor_callback_continuity_operator_descendant(
+    *,
+    current_operator: bytes,
+    current_head: str,
+    operator_path: Path,
+) -> dict[str, Any]:
+    """Admit only the exact supervisor callback-continuity B/S/A chain."""
+
+    base_commit = SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError(
+            "supervisor callback-continuity transition base is unsealed"
+        )
+    receipt_bytes, payload = (
+        _supervisor_callback_continuity_transition_payload(
+            current_head=current_head
+        )
+    )
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    if (
+        checkpoint.get("source_head")
+        != SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit")
+        != "c2f40b62eae073798c24adedcb0484b47393dee8"
+        or checkpoint.get("database_lifecycle_identity_transition_receipt_id")
+        != "sha256:3f94f1eee5297d02dde7fcebd54e6afc40423534514caf6e565368ddbb58997f"
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD
+        or sealed_source.get("parent") != base_commit
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity operator checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+            field="supervisor callback-continuity checkpoint",
+        )
+        != SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_TREE
+        or _git_commit_tree(
+            base_commit,
+            field="supervisor callback-continuity repair base",
+        )
+        != repair_base.get("repository_tree_id")
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity operator tree binding changed"
+        )
+
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        relative_operator,
+        "test/test_pcsm_supervisor_callback_continuity_transition.py",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD}..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="supervisor callback-continuity base operator",
+    )
+    pending_base = (
+        "PENDING_"
+        + "SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="supervisor callback-continuity sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="supervisor callback-continuity sealed operator",
+    )
+    if (
+        base_parents != [SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD]
+        or base_paths != expected_base_paths
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or base_operator.count(pending_base) != 1
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_parents != [base_commit]
+        or sealed_paths != (relative_operator,)
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+        or sealed_source.get("operator_identity")
+        != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or current_operator != expected_operator
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity operator delta changed"
+        )
+
+    receipt_relative = (
+        SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_PATH.relative_to(
+            ROOT
+        ).as_posix()
+    )
+    additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if len(additions) != 1:
+        raise OperatorError(
+            "supervisor callback-continuity receipt introduction is not exact"
+        )
+    artifact_commit = additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != (receipt_relative,)
+        or _git_blob_at(
+            head=artifact_commit,
+            path=SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_PATH,
+            field="introduced supervisor callback-continuity receipt",
+        )
+        != receipt_bytes
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity artifact commit changed"
+        )
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field="supervisor callback-continuity artifact-to-current lineage",
     )
     return {
         "receipt": payload,
@@ -6144,7 +6456,7 @@ def _verified_database_lifecycle_identity_transition(
     current_gitlink = str(
         _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
     ).strip().split()
-    if (
+    exact_database_lifecycle_source = bool(
         current_config_bytes != base_config_bytes
         or _canonical_bytes(current_config) != _canonical_bytes(base_config)
         or current_operator != operator_gate["expected_operator"]
@@ -6171,9 +6483,23 @@ def _verified_database_lifecycle_identity_transition(
         or current_gitlink[:2] != ["160000", "commit"]
         or current_gitlink[2]
         != DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD
-    ):
-        raise OperatorError(
-            "database-lifecycle identity live source changed"
+    ) is False
+    supervisor_callback_continuity_transition: dict[str, Any] = {}
+    if not exact_database_lifecycle_source:
+        supervisor_callback_continuity_transition = (
+            _verified_supervisor_callback_continuity_transition(
+                board=board,
+                current_head=current_head,
+                current_config=current_config,
+                current_source_identities=current_source_identities,
+                prior_artifact_commit=operator_gate["artifact_commit"],
+                prior_transition_receipt_id=str(
+                    payload.get("receipt_id") or ""
+                ),
+                prior_config_bytes=base_config_bytes,
+                prior_operator_bytes=operator_gate["expected_operator"],
+                prior_validator_bytes=base_validator,
+            )
         )
     for item in expected_checkpoint_receipts:
         path = ROOT / item["path"]
@@ -6204,6 +6530,837 @@ def _verified_database_lifecycle_identity_transition(
         "sealed_source_tree": operator_gate["sealed_source_tree"],
         "accelerator_head": DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD,
         "accelerator_tree": DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_TREE,
+        "supervisor_callback_continuity_transition": (
+            supervisor_callback_continuity_transition
+        ),
+    }
+
+
+def _verified_supervisor_callback_continuity_transition(
+    *,
+    board: Any,
+    current_head: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    prior_artifact_commit: str,
+    prior_transition_receipt_id: str,
+    prior_config_bytes: bytes,
+    prior_operator_bytes: bytes,
+    prior_validator_bytes: bytes,
+) -> dict[str, Any]:
+    """Admit one exact repair for terminal callback and generation continuity."""
+
+    operator_path = Path(__file__).resolve()
+    operator_gate = (
+        _verified_supervisor_callback_continuity_operator_descendant(
+            current_operator=_tracked_bytes(operator_path, head=current_head),
+            current_head=current_head,
+            operator_path=operator_path,
+        )
+    )
+    payload = operator_gate["receipt"]
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    contracts = payload["continuity_contracts"]
+    incidents = payload["incident_evidence"]
+    validations = payload["validations"]
+
+    checkpoint_fields = {
+        "source_head",
+        "repository_tree_id",
+        "prior_artifact_commit",
+        "database_lifecycle_identity_transition_receipt_id",
+        "changed_receipts",
+        "authority_snapshot",
+    }
+    receipt_digests = (
+        (
+            "027",
+            "5836b2f76182b9ad83005068c81888464d9b2ee7f2a3099ace2bbf3b450f5772",
+        ),
+        (
+            "028",
+            "3631475bf96bac744a6d3bb9bf048ab39c98408a996eb2bd6a66805769882b3f",
+        ),
+        (
+            "030",
+            "c588061ebbd0b388c4c7b2b8301d8ba3f4b3af97594607428cd8a6c13727f10f",
+        ),
+        (
+            "031",
+            "66abc17a7b60b77192514283602a375f343263567845107bd4215bb53df46005",
+        ),
+        (
+            "032",
+            "9f8ec42636058fcafb5f0e24dfb5875444d3704a4bcfb2cc222d6ed314b79859",
+        ),
+        (
+            "033",
+            "636d832015c044126b50ca096d3571a8be33981949c25284071dff05a970e50b",
+        ),
+        (
+            "035",
+            "756e46f6c443eba954c4e938bdbcd1eee6c4f71a2142d0b8b030c3cde2557b4c",
+        ),
+        (
+            "043",
+            "df38e5f5340fa38aa383037b8326f98eca6f2f04ab31fd6d4e708fb33edc42e2",
+        ),
+        (
+            "044",
+            "db5e0de909216bdb8785d2a99026c5952823db2b68633f88eb3ed4e81ee85c3c",
+        ),
+        (
+            "045",
+            "a9acba8f9e46e0ea0e76d74da4e1610dd1b8251b74460358b36b8c6a4fedfa0f",
+        ),
+        (
+            "051",
+            "72a29f5dcd1726156635321afa2cd8ded6a7887eeb75fc38468e8b6be26ce24f",
+        ),
+        (
+            "052",
+            "bcbace9e94e819f09b273988576e4df5b5e955e8b201f7aea59b7c4e5f7c5eea",
+        ),
+        (
+            "053",
+            "15c2ba77680ffcb2ebc96ed263c9ccb6a54825e5a51351a3ae53c4327433cca1",
+        ),
+        (
+            "054",
+            "039c3e7cf1da3ef1356f81fa3c345413f6046ba811cdc2178ab66d5b9ab6f7be",
+        ),
+        (
+            "055",
+            "3588a01a67fef53357d97e0a4e7d44c321b3cbf6a9b40b53c201459abc81a715",
+        ),
+        (
+            "056",
+            "79e6f818ff38a6d65bb32bfc0a4c406a189c1db77333170abde880e33cea7a22",
+        ),
+        (
+            "057",
+            "451a2ff3afdfa4ed4d0bafb4cde060a3ed81e29a329619bb6d3eca98c5474315",
+        ),
+    )
+    expected_checkpoint_receipts = [
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                f"PCSM-{task_id}.json"
+            ),
+            "bytes_id": f"sha256:{digest}",
+        }
+        for task_id, digest in receipt_digests
+    ]
+    expected_authority_snapshot = {
+        "task_count": 70,
+        "goal_count": 11,
+        "package_count": 96,
+        "completed_task_count": 42,
+        "in_progress_task_count": 2,
+        "deferred_task_count": 26,
+        "in_progress_tasks": [
+            {
+                "task_alias": "PCSM-033",
+                "checkpoint_disposition": "landed_but_database_in_progress",
+            },
+            {
+                "task_alias": "PCSM-060",
+                "checkpoint_disposition": "database_in_progress",
+            },
+        ],
+    }
+    if (
+        set(checkpoint) != checkpoint_fields
+        or checkpoint.get("source_head")
+        != SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit") != prior_artifact_commit
+        or prior_artifact_commit
+        != "c2f40b62eae073798c24adedcb0484b47393dee8"
+        or checkpoint.get("database_lifecycle_identity_transition_receipt_id")
+        != prior_transition_receipt_id
+        or prior_transition_receipt_id
+        != "sha256:3f94f1eee5297d02dde7fcebd54e6afc40423534514caf6e565368ddbb58997f"
+        or checkpoint.get("changed_receipts")
+        != expected_checkpoint_receipts
+        or checkpoint.get("authority_snapshot")
+        != expected_authority_snapshot
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity prior checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+            field="supervisor callback-continuity checkpoint",
+        )
+        != SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_TREE
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity checkpoint tree changed"
+        )
+    _git_is_ancestor(
+        prior_artifact_commit,
+        SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+        field="lifecycle artifact-to-callback checkpoint lineage",
+    )
+    expected_checkpoint_paths = tuple(
+        item["path"] for item in expected_checkpoint_receipts
+    )
+    checkpoint_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{prior_artifact_commit}.."
+                f"{SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if checkpoint_paths != expected_checkpoint_paths:
+        raise OperatorError(
+            "supervisor callback-continuity checkpoint delta changed"
+        )
+    for item in expected_checkpoint_receipts:
+        path = ROOT / item["path"]
+        checkpoint_bytes = _git_blob_at(
+            head=SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+            path=path,
+            field=(
+                "supervisor callback-continuity checkpoint receipt "
+                f"{item['path']}"
+            ),
+        )
+        if _identity(checkpoint_bytes) != item["bytes_id"]:
+            raise OperatorError(
+                "supervisor callback-continuity checkpoint receipt changed"
+            )
+
+    validator_path = board.path(board.validator_path)
+    checkpoint_config = _git_blob_at(
+        head=SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+        path=board.config_path,
+        field="supervisor callback-continuity checkpoint config",
+    )
+    checkpoint_operator = _git_blob_at(
+        head=SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+        path=operator_path,
+        field="supervisor callback-continuity checkpoint operator",
+    )
+    checkpoint_validator = _git_blob_at(
+        head=SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+        path=validator_path,
+        field="supervisor callback-continuity checkpoint validator",
+    )
+    if (
+        checkpoint_config != prior_config_bytes
+        or checkpoint_operator != prior_operator_bytes
+        or checkpoint_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity checkpoint authority changed"
+        )
+
+    base_commit = str(operator_gate["base_commit"])
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "test/test_pcsm_supervisor_callback_continuity_transition.py",
+    )
+    expected_nested_paths = (
+        "ipfs_accelerate_py/agent_supervisor/runtime/"
+        "multi_supervisor_runner.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_supervisor.py",
+        "test/api/test_agent_supervisor_multi_supervisor_generation_status.py",
+        "test/api/test_agent_supervisor_multi_supervisor_shutdown.py",
+        "test/api/test_agent_supervisor_reconciliation_auto_unblock.py",
+        "test/api/test_implementation_supervisor_control_plane_pool_lease.py",
+    )
+    expected_nested_commits = [
+        {
+            "purpose": "exact_legacy_and_routed_completion_cleanup",
+            "source_head": SUPERVISOR_CALLBACK_CONTINUITY_ROUTE_HEAD,
+            "repository_tree_id": SUPERVISOR_CALLBACK_CONTINUITY_ROUTE_TREE,
+            "parent": DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "implementation_supervisor.py",
+                "test/api/"
+                "test_agent_supervisor_reconciliation_auto_unblock.py",
+            ],
+        },
+        {
+            "purpose": "merge_queue_terminal_callback_continuity",
+            "source_head": SUPERVISOR_CALLBACK_CONTINUITY_GUARD_HEAD,
+            "repository_tree_id": SUPERVISOR_CALLBACK_CONTINUITY_GUARD_TREE,
+            "parent": SUPERVISOR_CALLBACK_CONTINUITY_ROUTE_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "implementation_supervisor.py",
+                "test/api/"
+                "test_implementation_supervisor_control_plane_pool_lease.py",
+            ],
+        },
+        {
+            "purpose": "post_live_generation_bound_status_gap_grace",
+            "source_head": SUPERVISOR_CALLBACK_CONTINUITY_STATUS_GAP_HEAD,
+            "repository_tree_id": SUPERVISOR_CALLBACK_CONTINUITY_STATUS_GAP_TREE,
+            "parent": SUPERVISOR_CALLBACK_CONTINUITY_GUARD_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/runtime/"
+                "multi_supervisor_runner.py",
+                "test/api/"
+                "test_agent_supervisor_multi_supervisor_generation_status.py",
+                "test/api/test_agent_supervisor_multi_supervisor_shutdown.py",
+            ],
+        },
+        {
+            "purpose": "checkout_repair_watchdog_precedence",
+            "source_head": (
+                SUPERVISOR_CALLBACK_CONTINUITY_CHECKOUT_REPAIR_HEAD
+            ),
+            "repository_tree_id": (
+                SUPERVISOR_CALLBACK_CONTINUITY_CHECKOUT_REPAIR_TREE
+            ),
+            "parent": SUPERVISOR_CALLBACK_CONTINUITY_STATUS_GAP_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "implementation_supervisor.py",
+                "test/api/"
+                "test_implementation_supervisor_control_plane_pool_lease.py",
+            ],
+        },
+        {
+            "purpose": "stable_type_exact_post_state_proof",
+            "source_head": SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD,
+            "repository_tree_id": SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_TREE,
+            "parent": SUPERVISOR_CALLBACK_CONTINUITY_CHECKOUT_REPAIR_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "implementation_supervisor.py",
+                "test/api/"
+                "test_implementation_supervisor_control_plane_pool_lease.py",
+            ],
+        },
+    ]
+    repair_base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "config_identity",
+        "validator_identity",
+        "accelerator_head",
+        "accelerator_tree",
+        "changed_paths",
+        "nested_changed_paths",
+        "nested_commits",
+    }
+    base_config_bytes = _git_blob_at(
+        head=base_commit,
+        path=board.config_path,
+        field="supervisor callback-continuity base config",
+    )
+    base_config = _json_mapping_bytes(
+        base_config_bytes,
+        field="supervisor callback-continuity base config",
+    )
+    base_validator = _git_blob_at(
+        head=base_commit,
+        path=validator_path,
+        field="supervisor callback-continuity base validator",
+    )
+    if (
+        set(repair_base) != repair_base_fields
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD
+        or repair_base.get("operator_identity")
+        != _identity(operator_gate["base_operator"])
+        or repair_base.get("config_identity") != _identity(base_config_bytes)
+        or repair_base.get("validator_identity") != _identity(base_validator)
+        or repair_base.get("accelerator_head")
+        != SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD
+        or repair_base.get("accelerator_tree")
+        != SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_TREE
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or tuple(repair_base.get("nested_changed_paths") or ())
+        != expected_nested_paths
+        or repair_base.get("nested_commits") != expected_nested_commits
+        or base_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity repair base changed"
+        )
+
+    prior_config = _json_mapping_bytes(
+        prior_config_bytes,
+        field="supervisor callback-continuity prior config",
+    )
+    expected_config = json.loads(_canonical_bytes(prior_config))
+    expected_binding = expected_config.get("source_binding")
+    if not isinstance(expected_binding, dict):
+        raise OperatorError(
+            "supervisor callback-continuity source binding is absent"
+        )
+    expected_binding["ipfs_accelerate_planning_revision"] = (
+        SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD
+    )
+    expected_binding["ipfs_accelerate_planning_tree"] = (
+        SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_TREE
+    )
+    if base_config != expected_config:
+        raise OperatorError(
+            "supervisor callback-continuity config delta changed"
+        )
+
+    base_gitlink = str(
+        _git("ls-tree", base_commit, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        len(base_gitlink) < 3
+        or base_gitlink[:2] != ["160000", "commit"]
+        or base_gitlink[2]
+        != SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity accelerator gitlink changed"
+        )
+    accelerator_repository = ROOT / "external/ipfs_accelerate"
+    nested_parent = DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD
+    for nested_commit in expected_nested_commits:
+        nested_head = str(nested_commit["source_head"])
+        nested_tree = _git_commit_tree(
+            nested_head,
+            field="supervisor callback-continuity nested source",
+            repository=accelerator_repository,
+        )
+        nested_parents = str(
+            _git_in_repository(
+                accelerator_repository,
+                "show",
+                "-s",
+                "--format=%P",
+                nested_head,
+            )
+        ).strip().split()
+        nested_paths = tuple(
+            line
+            for line in str(
+                _git_in_repository(
+                    accelerator_repository,
+                    "diff",
+                    "--name-only",
+                    f"{nested_parent}..{nested_head}",
+                )
+            ).splitlines()
+            if line
+        )
+        if (
+            nested_commit.get("parent") != nested_parent
+            or nested_tree != nested_commit.get("repository_tree_id")
+            or nested_parents != [nested_parent]
+            or nested_paths
+            != tuple(nested_commit.get("changed_paths") or ())
+        ):
+            raise OperatorError(
+                "supervisor callback-continuity nested commit changed"
+            )
+        nested_parent = nested_head
+    aggregate_nested_paths = tuple(
+        line
+        for line in str(
+            _git_in_repository(
+                accelerator_repository,
+                "diff",
+                "--name-only",
+                f"{DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD}.."
+                f"{SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if aggregate_nested_paths != expected_nested_paths:
+        raise OperatorError(
+            "supervisor callback-continuity nested source delta changed"
+        )
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+    }
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("source_head")
+        != operator_gate["sealed_source_head"]
+        or sealed_source.get("repository_tree_id")
+        != operator_gate["sealed_source_tree"]
+        or sealed_source.get("parent") != base_commit
+        or sealed_source.get("operator_identity")
+        != _identity(operator_gate["expected_operator"])
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (
+            "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        )
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity sealed source changed"
+        )
+
+    expected_contracts = {
+        "completion_cleanup": {
+            "accepted_completion_receipt_routes": ["legacy", "routed"],
+            "required_identity_match": "exact",
+            "exact_completion_disposition": "cleanup_only",
+            "missing_duplicate_or_tampered_disposition": "fail_closed",
+        },
+        "terminal_callback": {
+            "callback_phase": "merge_queue",
+            "continuity_window": (
+                "after_lifecycle_terminalization_and_checkout_release_"
+                "before_synchronous_merge_train_return"
+            ),
+            "required_exact_bindings": [
+                "managed_child_process_birth",
+                "task_alias",
+                "attempt_id",
+                "claim_id",
+                "lease_id",
+                "worktree_path",
+                "branch",
+                "repository_root",
+                "implementation_lock",
+                "database_attempt_binding",
+                "nested_state",
+            ],
+            "exact_callback_disposition": "defer_recycle",
+            "missing_ambiguous_or_tampered_disposition": "fail_closed",
+        },
+        "post_maintenance_state": {
+            "fresh_database_rereads_required": [
+                "active_pool_checkout",
+                "active_nonterminal_lifecycle_claim",
+                "active_terminal_portal_callback",
+            ],
+            "pre_maintenance_snapshot_is_post_authority": False,
+            "exact_live_disposition": "defer_recycle",
+            "missing_ambiguous_or_tampered_disposition": "fail_closed",
+        },
+        "checkout_repair": {
+            "precedence": "checkout_repair_before_watchdog_stuck_override",
+            "repaired_checkout_disposition": "defer_recycle",
+            "unverified_repair_disposition": "fail_closed",
+        },
+        "stable_post_state": {
+            "proof": "two_identical_type_exact_snapshots",
+            "boolean_is_integer": False,
+            "required_exact_types": True,
+            "unstable_or_malformed_disposition": "fail_closed",
+        },
+        "status_gap": {
+            "scope": "post_live_exact_process_generation",
+            "grace_start": "first_missing_or_generation_invalid_read",
+            "bad_reads_reset_grace": False,
+            "new_process_generation_resets_state": True,
+            "within_grace_disposition": "keep_running",
+            "expired_or_unbound_disposition": "restart_supervisor",
+        },
+        "deferral_budget": {
+            "daemon_recycled": False,
+            "attempt_budget_consumed": False,
+            "provider_invocation_consumed": False,
+        },
+    }
+    expected_incidents = {
+        "generation": 45,
+        "observations": [
+            {
+                "task_alias": "PCSM-043",
+                "failure": "lost_first_enqueue",
+            },
+            {
+                "task_alias": "PCSM-045",
+                "failure": "duplicate_merge",
+            },
+            {
+                "lanes": ["lane1", "lane3"],
+                "failure": (
+                    "repeated_status_missing_whole_supervisor_replacements"
+                ),
+            },
+            {
+                "scope": "completed_tasks",
+                "failure": "post_completion_daemon_churn",
+            },
+        ],
+    }
+    if dict(contracts) != expected_contracts:
+        raise OperatorError(
+            "supervisor callback-continuity contracts changed"
+        )
+    if dict(incidents) != expected_incidents:
+        raise OperatorError(
+            "supervisor callback-continuity incident evidence changed"
+        )
+
+    pool = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_implementation_supervisor_control_plane_pool_lease.py",
+    )
+    reconciliation = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_agent_supervisor_reconciliation_auto_unblock.py",
+    )
+    portal_bridge = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_agent_supervisor_database_portal_bridge.py",
+    )
+    generation_shutdown = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_agent_supervisor_multi_supervisor_generation_status.py",
+        "external/ipfs_accelerate/test/api/"
+        "test_agent_supervisor_multi_supervisor_shutdown.py",
+    )
+    configured_scheduler = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_agent_supervisor_configured_board_scheduler.py",
+    )
+    nested_agent = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/agent_supervisor",
+    )
+    pycompile = (
+        "python",
+        "-m",
+        "py_compile",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_supervisor.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/"
+        "multi_supervisor_runner.py",
+    )
+    ruff = (
+        "ruff",
+        "check",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_supervisor.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/"
+        "multi_supervisor_runner.py",
+    )
+    nested_diff = (
+        "git",
+        "diff",
+        "--check",
+        f"{DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD}.."
+        f"{SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD}",
+    )
+    focused_outer = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_supervisor_callback_continuity_transition.py",
+    )
+    prior_outer_suite = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_blocked_retry_batch_recovery.py",
+        "test/test_pcsm_executor_bootstrap_broker_resilience.py",
+        "test/test_pcsm_stale_worktree_cleanup_transition.py",
+        "test/test_pcsm_validation_path_compatibility_transition.py",
+        "test/test_pcsm_database_watchdog_activity_transition.py",
+        "test/test_pcsm_database_lifecycle_identity_transition.py",
+    )
+    board_validation = (
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all",
+    )
+    dry_run = (
+        "python",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "launch-supervisor",
+        "--dry-run",
+    )
+    required_validations = {
+        (".", pool),
+        (".", reconciliation),
+        (".", portal_bridge),
+        (".", generation_shutdown),
+        (".", configured_scheduler),
+        (".", nested_agent),
+        ("external/ipfs_accelerate", pycompile),
+        ("external/ipfs_accelerate", ruff),
+        ("external/ipfs_accelerate", nested_diff),
+        (".", focused_outer),
+        (".", prior_outer_suite),
+        (".", board_validation),
+        (".", dry_run),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    summaries: dict[tuple[str, ...], str] = {}
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError(
+                "supervisor callback-continuity validation is malformed"
+            )
+        command = validation.get("command")
+        summary = validation.get("summary")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(summary, str)
+            or not summary
+        ):
+            raise OperatorError(
+                "supervisor callback-continuity validation did not pass"
+            )
+        observed = (str(validation.get("cwd") or ""), tuple(command))
+        observed_validations.add(observed)
+        summaries[tuple(command)] = summary
+    if (
+        len(validations) != len(required_validations)
+        or observed_validations != required_validations
+        or re.search(r"\b80 passed\b", summaries.get(pool, "")) is None
+        or re.search(r"\b30 passed\b", summaries.get(reconciliation, ""))
+        is None
+        or re.search(r"\b400 passed\b", summaries.get(portal_bridge, ""))
+        is None
+        or re.search(r"\b33 passed\b", summaries.get(generation_shutdown, ""))
+        is None
+        or re.search(r"\b205 passed\b", summaries.get(configured_scheduler, ""))
+        is None
+        or re.search(r"\b11 passed\b", summaries.get(nested_agent, ""))
+        is None
+        or summaries.get(pycompile, "") != "clean"
+        or summaries.get(ruff, "") != "clean"
+        or summaries.get(nested_diff, "") != "clean"
+        or re.search(r"\b5 passed\b", summaries.get(focused_outer, ""))
+        is None
+        or re.search(r"\b22 passed\b", summaries.get(prior_outer_suite, ""))
+        is None
+        or summaries.get(board_validation, "")
+        != "valid board: 70 tasks, 11 goals, 96 packages"
+        or summaries.get(dry_run, "")
+        != "admission passed without launching runtime"
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity validations are incomplete"
+        )
+
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    current_operator = _tracked_bytes(operator_path, head=current_head)
+    current_validator = _tracked_bytes(validator_path, head=current_head)
+    transition_test_path = (
+        ROOT / "test/test_pcsm_supervisor_callback_continuity_transition.py"
+    )
+    prior_transition_test_path = (
+        ROOT / "test/test_pcsm_database_lifecycle_identity_transition.py"
+    )
+    current_gitlink = str(
+        _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        current_config_bytes != base_config_bytes
+        or _canonical_bytes(current_config) != _canonical_bytes(base_config)
+        or current_operator != operator_gate["expected_operator"]
+        or current_validator != base_validator
+        or _tracked_bytes(transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=base_commit,
+            path=transition_test_path,
+            field="supervisor callback-continuity focused test",
+        )
+        or _tracked_bytes(prior_transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+            path=prior_transition_test_path,
+            field="prior database-lifecycle focused test",
+        )
+        or current_source_identities.get("config")
+        != _identity(base_config_bytes)
+        or current_source_identities.get("operator")
+        != _identity(operator_gate["expected_operator"])
+        or current_source_identities.get("validator")
+        != _identity(base_validator)
+        or len(current_gitlink) < 3
+        or current_gitlink[:2] != ["160000", "commit"]
+        or current_gitlink[2]
+        != SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity live source changed"
+        )
+    for item in expected_checkpoint_receipts:
+        current_bytes = _tracked_bytes(ROOT / item["path"], head=current_head)
+        if _identity(current_bytes) != item["bytes_id"]:
+            raise OperatorError(
+                "supervisor callback-continuity checkpoint evidence changed"
+            )
+    source_paths = _restart_source_paths(board)
+    for name in ("taskboard", "objectives", "plan", "generator"):
+        checkpoint_bytes = _git_blob_at(
+            head=SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
+            path=source_paths[name],
+            field=f"supervisor callback-continuity checkpoint {name}",
+        )
+        current_bytes = _tracked_bytes(source_paths[name], head=current_head)
+        if (
+            current_bytes != checkpoint_bytes
+            or current_source_identities.get(name) != _identity(current_bytes)
+        ):
+            raise OperatorError(
+                "supervisor callback-continuity changed immutable authority"
+            )
+    return {
+        "receipt": payload,
+        "artifact_commit": operator_gate["artifact_commit"],
+        "sealed_source_head": operator_gate["sealed_source_head"],
+        "sealed_source_tree": operator_gate["sealed_source_tree"],
+        "accelerator_head": SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD,
+        "accelerator_tree": SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_TREE,
     }
 
 
@@ -7078,6 +8235,26 @@ def _owner_restart_admission(
         if isinstance(database_lifecycle_identity_transition_receipt, Mapping)
         else {}
     )
+    supervisor_callback_continuity_transition = (
+        database_lifecycle_identity_transition.get(
+            "supervisor_callback_continuity_transition"
+        )
+    )
+    supervisor_callback_continuity_transition = (
+        supervisor_callback_continuity_transition
+        if isinstance(supervisor_callback_continuity_transition, Mapping)
+        else {}
+    )
+    supervisor_callback_continuity_transition_receipt = (
+        supervisor_callback_continuity_transition.get("receipt")
+    )
+    supervisor_callback_continuity_transition_receipt = (
+        supervisor_callback_continuity_transition_receipt
+        if isinstance(
+            supervisor_callback_continuity_transition_receipt, Mapping
+        )
+        else {}
+    )
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
         "mode": admission_mode,
@@ -7119,6 +8296,12 @@ def _owner_restart_admission(
         ),
         "database_lifecycle_identity_transition_receipt_id": str(
             database_lifecycle_identity_transition_receipt.get("receipt_id")
+            or ""
+        ),
+        "supervisor_callback_continuity_transition_receipt_id": str(
+            supervisor_callback_continuity_transition_receipt.get(
+                "receipt_id"
+            )
             or ""
         ),
         "current_head_descendant_repair": descendant_repair,
@@ -8847,6 +10030,12 @@ def _owner_restart_receipt(
         "database_lifecycle_identity_transition_receipt_id": str(
             admission.get(
                 "database_lifecycle_identity_transition_receipt_id"
+            )
+            or ""
+        ),
+        "supervisor_callback_continuity_transition_receipt_id": str(
+            admission.get(
+                "supervisor_callback_continuity_transition_receipt_id"
             )
             or ""
         ),
