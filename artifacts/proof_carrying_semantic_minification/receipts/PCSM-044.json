@@ -1,0 +1,259 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-044",
+  "title": "Implement semantic-anchor preservation",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G400",
+  "objective_id": "PCSM-044",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-044@current-head-semantic-anchor-preservation-capability-assessment-v1",
+  "observed_at": "2026-08-28T06:23:07Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 semantic-anchor-preservation capability assessment for the exact current source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-044.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-044.json",
+    "implementation_delta": "No current-head Python package preserves natural semantic anchors during PCSM alias selection or projection construction. The existing deterministic doctor theorem check preserves required theorem identifiers inside a reviewed proof body, and the supervisor token ledger supplies versioned provider/tokenizer-bound accounting; neither accepts slice-used alias candidates, decides whether a natural anchor is cheaper or semantically useful, emits an alias table, or binds such a decision to a PCSM source map. Exact declared-output authority excludes the missing source and test paths, so this receipt records an honest non-promotion/unavailable disposition instead of creating an untested competing implementation."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "A deterministic approximation bound to its calibration and exact envelope; it is not a native measurement or semantic-anchor preservation decision.",
+    "simulated": "A controlled fixture exercise that establishes only its exercised contract behavior, never PCSM production preservation behavior.",
+    "unavailable": "A missing capability, identity, or result. It is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "bb0438f7b65749cf87639c4272dd08d4fe6578bb",
+    "outer_tree": "7711c387cd91e98191ddfa29b8abc44096b872bb",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "bb0438f7b65749cf87639c4272dd08d4fe6578bb",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only; not semantic-anchor preservation"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07",
+        "authority_role": "existing theorem-anchor and token-accounting controls plus validation suites; no PCSM semantic-anchor-preservation package"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity only; not semantic-anchor preservation"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte CID storage only; not semantic-anchor preservation"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared the four admitted superproject gitlinks with nested HEAD and HEAD^{tree}; checked porcelain before receipt creation; and searched the accelerator agent_supervisor Python and test forests for semantic-anchor/anchor-preservation implementations and adjacent aliases.",
+      "result": "The bound outer head/tree and four admitted gitlinks agree, and all checked worktrees were clean before the declared receipt write. Search found no PCSM semantic-anchor preservation policy, schema, candidate scoring, or dedicated test suite.",
+      "invalidates_on": "Any change to the bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, search result, selected contract, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree PCSM SourceLinkReceipt or canonical source-map CID was emitted for this receipt-only capability assessment. Git blobs and SHA-256 values are not substitutes for that contract."
+    }
+  },
+  "existing_equivalents_assessed": {
+    "kind": "measured",
+    "pcsm_043_prerequisite_assessment": {
+      "artifact": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-043.json",
+      "meaning": "PCSM-043 found no current-head PCSM alias optimizer and explicitly lists semantic-anchor value as an unimplemented plan dimension.",
+      "not_a_preservation_policy": "Its result is a receipt-bound alias-optimization capability assessment, not a semantic-anchor preservation schema or implementation."
+    },
+    "deterministic_doctor_theorem_anchor_check": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.proof.deterministic_doctor_hammer.DoctorReviewedTheorem",
+      "schema": "ipfs_accelerate_py/agent-supervisor/doctor-reviewed-theorem@1",
+      "contract_version": 1,
+      "deterministic_behavior": "The immutable content-addressed theorem contract rejects a reviewed theorem body unless it includes its theorem_id, property_id, claim_id, and consequence_ref plus a semantic relation/operator.",
+      "cid_binding": "The DoctorReviewedTheorem CanonicalContract is content-addressed; its proof-authority roots bind translator, toolchain, and policy identifiers.",
+      "not_a_preservation_policy": "This validates already-required proof identifiers within a theorem body. It has no provider/model/tokenizer envelope, PCSM source-map or slice binding, natural-anchor candidate input, cost or semantic-utility decision, deterministic ranking, alias collision control, alias-table output, or preservation receipt. It cannot be repurposed as PCSM minification authority."
+    },
+    "pcsm_042_token_cost_prerequisite": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.self_improvement.supervisor_token_ledger",
+      "schemas": [
+        "ipfs_accelerate_py/agent-supervisor/provider-model-envelope@1",
+        "ipfs_accelerate_py/agent-supervisor/tokenizer-calibration@1",
+        "ipfs_accelerate_py/agent-supervisor/supervisor-token-ledger@1"
+      ],
+      "determinism_and_binding": "It provides immutable content-addressed provider/model/tokenizer envelopes and deterministic calibrated-fallback accounting. Provider-native usage is measured only when supplied; calibrated fallback is explicitly estimated.",
+      "not_a_preservation_policy": "Token accounting has no natural-anchor candidate input or selection outcome. Token cost alone cannot determine whether requests.get, pytest.fixture, asyncio.Lock, DuckDB, CID, Quack, Lean, or Z3 remains readable or semantically useful."
+    },
+    "current_source_search": {
+      "method": "Searched the accelerator agent_supervisor Python and test forests for semantic anchors, anchor preservation, natural anchors, and alias-preservation terms, then inspected the direct DoctorReviewedTheorem match and existing PCSM-043/PCSM-042 prerequisites.",
+      "result": "Surviving code concerns theorem integrity, compatibility/display/task-CID aliases, or token accounting. No source defines ProjectionSemanticAnchorPolicy@1 or an equivalent PCSM package; no test exercises natural-anchor retention during aliasing or projection serialization.",
+      "fail_closed_interpretation": "Do not infer semantic-anchor preservation from a proof-body marker check, canonical-identity compatibility alias, ambiguity rejection, or token accounting."
+    },
+    "required_plan_dimensions_unimplemented": [
+      "versioned semantic-anchor preservation policy/schema",
+      "exact provider/model/tokenizer-bound anchor cost comparison",
+      "slice-used natural-anchor candidate input",
+      "semantic-utility or readability criterion and deterministic tie breaking",
+      "PCSM source-map/tree/CID binding for each preservation decision",
+      "collision-safe retained-versus-aliased output and bounded alias-table integration",
+      "positive and negative semantic-anchor-preservation test suite"
+    ],
+    "authority_boundary": "Canonical semantic identity remains datasets-owned. Kit may store exact bytes and CIDs but does not decide semantic-anchor policy. The doctor theorem checker, local aliases, model output, token usage, and receipts do not gain semantic identity, proof, mutation, validation, promotion, or completion authority."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_implementation": "A deterministic, versioned Python-v1 policy that accepts only slice-used canonical targets and a bound tokenizer-cost profile, retains named natural anchors when the versioned cost/semantic-utility rule selects retention, records an explicit retained-versus-aliased outcome with stable tie breaking, and binds every outcome to canonical CID plus current tree/source-map identity.",
+    "missing_bindings": [
+      "semantic-anchor policy schema/version and implementation",
+      "provider/model/tokenizer envelope and PCSM-bound cost profile",
+      "canonical slice and PCSM source-map binding",
+      "candidate anchors, deterministic utility inputs, and collision-safe output table",
+      "per-decision canonical-CID/current-tree binding",
+      "positive and negative semantic-anchor-preservation tests"
+    ],
+    "disposition": "No anchor is represented as retained, renamed, cheaper, semantically useful, selected, or safe for this PCSM tree. The existing theorem and accounting controls remain reusable only within their stated authority boundaries; the requested package is absent and cannot be implemented within exact receipt-only edit authority."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/deterministic_doctor_hammer.py",
+      "git_blob": "cde3789700ba41060e5c05467610853110223822",
+      "sha256": "5f8bf311a408d0db9f56531eb64064b0d7463d1e3eef1ec08d8e574d161f2ce4",
+      "role": "adjacent versioned theorem-anchor integrity control; explicitly not PCSM alias/projection anchor preservation"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_token_ledger.py",
+      "git_blob": "be6d58f526d52d427c367d8a683d2d375734cda3",
+      "sha256": "67bca102c9b2ebb9245ad8b492eee982cc9d1f5cfdbfbb7c734c59f69c9329de",
+      "role": "versioned provider/tokenizer cost-accounting prerequisite; explicitly not a semantic-anchor selection policy"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+      "git_blob": "fea50c565815772b7e80401d038a92b9ec6489e2",
+      "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece",
+      "role": "generic context token-estimation consumer; not a provider-bound semantic-anchor preservation implementation"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_doctor_proof_authority.py",
+      "git_blob": "4252f0aef7c1975a09f17bf4c18a51fd2e773525",
+      "sha256": "79cf23138e7a22ed3e971cd8f9b21e2c25b882052ffc9c3ee1ef0e09896dba36",
+      "role": "positive and negative tests for the adjacent theorem-anchor control; not PCSM anchor-preservation coverage"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_token_ledger.py",
+      "git_blob": "946d1e58a73046be054d0f161a3ebc33d7b58bd4",
+      "sha256": "135c0f8bfa5a07a76a4d34428b3cd41b68ad231406438b942dc9612712d81cda",
+      "role": "positive and negative version/CID/token-accounting prerequisite tests; not semantic-anchor-preservation coverage"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_token_ledger.py",
+      "git_blob": "317ad696a67d081466833472277482dc0a256078",
+      "sha256": "723881334120fb0f612a6cbc6d305efac6b5ade08333ea2aaf98881399aacddb",
+      "role": "positive and negative exact-once/cancellation accounting prerequisite tests; not semantic-anchor-preservation coverage"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm044-required-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.34s",
+      "scope_limit": "This required PCSM structured-decoding suite validates closed candidate-output grammar behavior. It does not test the unavailable semantic-anchor preservation package."
+    },
+    "focused_adjacent_and_prerequisite_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm044-focused-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_token_ledger.py external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_token_ledger.py external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_doctor_proof_authority.py",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "30 passed in 1.85s",
+      "scope_limit": "The 21 ledger tests establish only the reusable tokenizer-cost prerequisite; the 9 doctor tests establish only theorem-anchor integrity. Neither suite is represented as semantic-anchor-preservation coverage."
+    },
+    "positive_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "required PCSM suite accepts valid typed compact candidate outputs while retaining candidate-only status",
+        "doctor theorem control requires nonempty reviewed semantic bodies containing each named theorem/property/claim/consequence anchor and a relation/operator",
+        "token-ledger prerequisite preserves immutable content-addressed records, envelope-scoped calibration, and exact-once lifecycle accounting"
+      ]
+    },
+    "negative_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "required PCSM suite rejects malformed, unknown, duplicated, untyped, unbounded, traversal, and model-created completion fields",
+        "doctor theorem tests reject identity-only, raw-mapping, forged-CID, stale-root, wrong-tool/tree/policy, and untrusted proof admissions",
+        "token-ledger tests reject missing, duplicate, foreign-bound, uncalibrated, overlapping, misclassified, forged, and cancellation-inconsistent accounting records",
+        "source search rejects the false equivalence that theorem-anchor validation, compatibility aliases, ambiguity rejection, or token accounting implements semantic-anchor preservation"
+      ]
+    },
+    "semantic_anchor_policy_test_gap": {
+      "kind": "unavailable",
+      "statement": "No current-head test names a PCSM semantic-anchor preservation schema or exercises retained-versus-aliased natural anchors under an exact provider/model/tokenizer revision, source-map/tree/CID binding, deterministic tie breaker, and bounded alias table. Adjacent passing tests are not relabeled as this missing suite."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-044 formal proof obligation or approved digest-bound prover deployment is specified. The doctor suite exercises its own proof-authority implementation and Python tests are not represented as a proof of semantic-anchor preservation."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Exact outer and admitted nested commits/trees, clean/freshness checks, scheduler and listed source/test SHA-256 plus Git-blob identities, source-search result, selected adjacent @1 contracts, sealed required validation (11 passed), and sealed focused adjacent/prerequisite validation (30 passed).",
+    "estimated": "The selected token ledger can derive deterministic calibrated estimates only from a bound calibration, but no PCSM-bound calibration or semantic-anchor utility estimate exists at this head. No numeric estimate is reported.",
+    "simulated": "Focused tests construct synthetic theorem, provider/tokenizer, lifecycle, and accounting fixtures. They establish only exercised contract behavior and are not production semantic-anchor preservation measurements.",
+    "unavailable": "A PCSM semantic-anchor-preservation schema/package, bound provider/model/tokenizer profile, natural-anchor candidate and utility data, deterministic retained-versus-aliased decision, bounded alias-table output/CID, PCSM source-map CID, dedicated tests, formal-prover result, and immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This receipt is a current-head capability assessment and non-promotion disposition, not a semantic-anchor preservation policy, alias table, source linker, semantic proof, or promotion decision.",
+    "DoctorReviewedTheorem checks anchors in a proof body only; it cannot decide whether an alias should be preserved in a semantic-minified projection.",
+    "PCSM-042 token accounting is a reusable prerequisite only. A measured or calibrated token count alone never establishes semantic utility, readability, safe retention, or an alias decision.",
+    "Missing plan dimensions are not reported as zero, passing, or fulfilled by adjacent controls.",
+    "Only the declared receipt changed. The task's exact edit authority excludes the missing product implementation and test paths.",
+    "This receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head assessment. Do not alter adjacent controls, protected planning documents, or unrelated source bytes.",
+    "freshness_requirement": "Do not reuse this receipt after any change to a bound tree or gitlink, scheduler/source/test digest, source-search result, selected contract, or validation result."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalents_assessed_first": true,
+    "required_semantic_anchor_preservation_implemented": false,
+    "unavailable_implementation_recorded_fail_closed": true,
+    "adjacent_contract_determinism_verified": true,
+    "schema_version_and_cid_binding_recorded_where_applicable": true,
+    "positive_and_negative_validation_passed_for_existing_controls": true,
+    "semantic_anchor_policy_test_coverage_available": false,
+    "measured_estimated_simulated_and_unavailable_evidence_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_unavailable"
+  }
+}
