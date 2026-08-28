@@ -1,0 +1,210 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-objective-refill-fail-closed-transition@1",
+  "reason": "disable_unadmitted_objective_refill_fail_closed",
+  "prior_checkpoint": {
+    "source_head": "f50c905534c94aa23289b7e8f4d8fc96f8896dcd",
+    "repository_tree_id": "dafe6456f45dc32c6de8737a7327be40c0ddbdb1",
+    "prior_artifact_commit": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "database_projection_callback_identity_transition_receipt_id": "sha256:71f11363bf5f1b492925edb97ce1e78cff44089efe416d54e8769e719a14f752",
+    "database_projection_callback_identity_transition_receipt_bytes_id": "sha256:993be35843d8d76f8cd427f6d21d295e00963ca75b636e771fc586248eb32031",
+    "changed_receipts": [
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-066.json",
+        "bytes_id": "sha256:bce73d98b75152707617bcd9ca67e27894fc704e6fdf0fba6107a201037cfa71"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-067.json",
+        "bytes_id": "sha256:09274373cf2f947de5f0d3857dc0a150fe7e589b7ccd563044e980af3858aa7b"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-068.json",
+        "bytes_id": "sha256:c8b49cbb1b01ff8242c434987a337ae74537129477877bc9e3b0718f44295b54"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-071.json",
+        "bytes_id": "sha256:47d72c785e2543fffe22b688c2d46fe88399917c5376ab5c0d78c3fd0d17f85d"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-072.json",
+        "bytes_id": "sha256:95b11da462105de2f62e2ce16f039fc47b43c366b61d602ea4731a811364c0fe"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-073.json",
+        "bytes_id": "sha256:3fd4eab09c047dbf967f938089147c8fb4a32111c439234df018f67c4ff42e7d"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-074.json",
+        "bytes_id": "sha256:0b88c46ba4f6326cbd0a1f9e395019739223095d01dafbc53b509f944e315752"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-075.json",
+        "bytes_id": "sha256:4594a7bbd5d80e0cead7bcc1e6e965b645059a28b50547e56350b62a5441ce16"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-076.json",
+        "bytes_id": "sha256:cce51ce588321e9fd488dca982ae9f930b6c320f46f321b53f16d7b939158728"
+      }
+    ]
+  },
+  "repair_base": {
+    "source_head": "8afa8262e7a1d55c6276a95238398bc08d0f26e0",
+    "repository_tree_id": "b0fcb23f2aff42bfc1e5a4e70c771994707b2939",
+    "parent": "f50c905534c94aa23289b7e8f4d8fc96f8896dcd",
+    "config_identity": "sha256:a83e6f853a7d159af999c9af2eaa2ab6062cb3c8e0a7feafb58eb57578af20a8",
+    "generator_identity": "sha256:dc16b02e3d41ee64bc26cb85f3b0c80f0bdefb01ffb34d47dd771afe5fe7af19",
+    "operator_identity": "sha256:1cba5ecd98e01aa18076a0c15d2bd493cd88005b91beba0747ccc0b066444fee",
+    "validator_identity": "sha256:0a7d1ff33737013baf806a3322330aba13e063e40d937d103ef5cc9ee0f18938",
+    "test_identity": "sha256:dced45729f23e54af2b27144b6a6bfda4f7b0ac6acbe6ecb85bbac13bd4b6756",
+    "changed_paths": [
+      "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scripts/generate_proof_carrying_semantic_minification_board.py",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "scripts/validate_proof_carrying_semantic_minification_board.py",
+      "test/test_pcsm_objective_refill_fail_closed_transition.py"
+    ],
+    "changed_status": [
+      "M\tconfig/proof_carrying_semantic_minification_v1_supervisor.json",
+      "M\tscripts/generate_proof_carrying_semantic_minification_board.py",
+      "M\tscripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "M\tscripts/validate_proof_carrying_semantic_minification_board.py",
+      "A\ttest/test_pcsm_objective_refill_fail_closed_transition.py"
+    ]
+  },
+  "sealed_source": {
+    "source_head": "774f052126f4a5275d6beda2777a2764e049a5f4",
+    "repository_tree_id": "98b1a3f58ff0026113b7581914ffb3359e638735",
+    "parent": "8afa8262e7a1d55c6276a95238398bc08d0f26e0",
+    "operator_identity": "sha256:c3dd0dcfb166583f8fbdb5bd1cbe7fa51a2ef42b462c125b32ea66a2fb4195de",
+    "changed_paths": [
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+    ]
+  },
+  "source_forest": [
+    {
+      "name": "ipfs_accelerate",
+      "path": "external/ipfs_accelerate",
+      "head": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+      "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a"
+    },
+    {
+      "name": "ipfs_datasets",
+      "path": "external/ipfs_datasets",
+      "head": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+    },
+    {
+      "name": "ipfs_kit",
+      "path": "external/ipfs_kit",
+      "head": "b6c65ba732733d7e33852713ba18aa3b12235668",
+      "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+    },
+    {
+      "name": "mcp_plus_plus",
+      "path": "Mcp-Plus-Plus",
+      "head": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "tree": "61776431577f0c276546f25e4178a47a64007180"
+    }
+  ],
+  "disabled_refill_contract": {
+    "bootstrap_objective_refill_enabled": true,
+    "bootstrap_objective_goal_refinement_enabled": true,
+    "current_objective_refill_enabled": false,
+    "current_objective_goal_refinement_enabled": false,
+    "codebase_refill_enabled": false,
+    "forbidden_launch_argv_token": "--common-arg=--objective-refill-scan",
+    "disposition": "fail_closed_until_admitted_owner_side_plan_delta",
+    "population_boundary_task_id": "PCSM-080"
+  },
+  "nonpromotion_contract": {
+    "initial_task_count": 70,
+    "initial_goal_count": 11,
+    "initial_plan_count": 1,
+    "plan_delta_admitted": false,
+    "projection_only_task_count": 0,
+    "task_population_changed": false,
+    "plan_changed": false,
+    "taskboard_changed": false,
+    "objectives_changed": false
+  },
+  "validations": [
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_objective_refill_fail_closed_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "13 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_database_projection_callback_identity_transition.py",
+        "-k",
+        "not current_transition_receipt_passes_exact_read_only_verifier"
+      ],
+      "outcome": "passed",
+      "summary": "6 passed, 1 deselected"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "py_compile",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all"
+      ],
+      "outcome": "passed",
+      "summary": "valid board: 70 tasks, 11 goals, 96 packages"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "f50c905534c94aa23289b7e8f4d8fc96f8896dcd..8afa8262e7a1d55c6276a95238398bc08d0f26e0"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    }
+  ],
+  "post_integration_canonical_validation": {
+    "condition": "artifact_commit_integrated_on_configured_merge_target_branch_with_stopped_materialized_authority",
+    "cwd": ".",
+    "command": [
+      "python",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "launch-supervisor",
+      "--dry-run"
+    ],
+    "pre_integration_outcome": "not_run_branch_and_materialization_gated",
+    "required_outcome": "passed",
+    "runtime_launch": false,
+    "authority_mutation": false
+  },
+  "historical_receipts_preserved": true,
+  "database_projection_callback_identity_receipt_preserved": true,
+  "database_authority_preserved": true,
+  "task_state_mutation": false,
+  "manual_database_mutation": false,
+  "manual_worktree_mutation": false,
+  "receipt_id": "sha256:9f4a00ddb4196db034ca9eb1729ccc3ae4a1f62a8d97cfaf312b1f84ab6e3c55"
+}
