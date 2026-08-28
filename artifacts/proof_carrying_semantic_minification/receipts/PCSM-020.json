@@ -10,89 +10,62 @@
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
   "artifact_identity": "urn:pcsm:task-receipt:PCSM-020@current-head-python-semantic-compiler-selection-v1",
-  "observed_at": "2026-08-28T02:24:47Z",
+  "observed_at": "2026-08-28T03:00:57Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
     "assurance_scope": "PCSM Python v1 bounded non-executing semantic compiler selection only",
     "mutation": "receipt_only",
     "source_mutation": false,
-    "changed_paths": [
-      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-020.json"
-    ],
+    "changed_paths": ["artifacts/proof_carrying_semantic_minification/receipts/PCSM-020.json"],
     "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-020.json",
-    "implementation_delta": "Reuse the existing datasets PythonASTExtractor, PythonSemanticAnalyzer, deterministic semantic-index identities, and their tests. No PCSM wrapper, second parser, alternative symbol/CID authority, source-map, persistence layer, or scope beyond Python v1 was created because this task admits only this receipt.",
-    "non_promotion_reason": "The required proof_context pytest command passes in the provider environment but cannot collect in the authoritative sealed Python 3.12 environment: its explicitly configured anyio pytest plugin is absent. Provider execution is recorded as simulated and is not substituted for sealed validation."
+    "implementation_delta": "The current datasets source forest already supplies the Python v1 compiler. This receipt selects that authority; it does not create a proof_context wrapper, a second parser, a competing symbol/CID authority, a source-map authority, or an M2/M3 mutation path.",
+    "non_promotion_reason": "The required proof_context suite cannot collect in the authoritative sealed Python 3.12 environment because its explicitly configured anyio pytest plugin is unavailable. Provider-environment execution is simulated evidence and is not substituted for sealed validation."
   },
   "evidence_legend": {
     "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
-    "estimated": "Calculated approximation. No estimate establishes compiler behavior, identity, or test success.",
-    "simulated": "A deterministic exercise or test run in the provider environment; it does not replace authoritative sealed validation.",
+    "estimated": "Calculated approximation; no estimate establishes compiler behavior, identity, or test success.",
+    "simulated": "A deterministic exercise or test execution in the provider environment; it never replaces authoritative sealed validation.",
     "unavailable": "A capability or result absent from the authoritative environment; it is neither zero nor passing."
   },
   "current_tree_binding": {
     "kind": "measured",
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "outer_commit": "cfffabfd50000509eae0725f919b6821ab7c463b",
-    "outer_tree": "7864e272ea345a81b614cf3f389528b77963fd10",
-    "outer_subject": "Merge commit 'cfa6a4252542bd2a0a7e8f65385f2ad7659e0631' into agent/proof-carrying-semantic-minification-v1",
+    "outer_commit": "28c7e438453636df8b2ffb3c8ffca1a4079d1cdb",
+    "outer_tree": "20de738766296146a1481f52851f247fe2183780",
+    "outer_subject": "Merge commit '4fb01ab6d6922b1c6b86162d936ca982da0638c5' into agent/proof-carrying-semantic-minification-v1",
     "git_object_format": "sha1",
-    "dispatch_tree_id": "cfffabfd50000509eae0725f919b6821ab7c463b",
+    "dispatch_tree_id": "28c7e438453636df8b2ffb3c8ffca1a4079d1cdb",
     "dispatch_tree_id_equals_outer_commit": true,
     "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
     "admitted_gitlinks": {
-      "Mcp-Plus-Plus": {
-        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
-        "tree": "61776431577f0c276546f25e4178a47a64007180",
-        "authority_role": "wire_contract_only"
-      },
-      "external/ipfs_accelerate": {
-        "commit": "b9d3b6617cac193b06a50ce9e807772fe7ec86c3",
-        "tree": "01e2f3649db97c179c6e3d2c2d419e4e9c0b9e58",
-        "authority_role": "consumer and scheduler boundary only"
-      },
-      "external/ipfs_datasets": {
-        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
-        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
-        "authority_role": "bounded Python AST semantic extraction, deterministic semantic-index records, and canonical symbol identity"
-      },
-      "external/ipfs_kit": {
-        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
-        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
-        "authority_role": "exact-byte/CID storage only; not Python semantic-analysis authority"
-      }
+      "Mcp-Plus-Plus": {"commit": "31096be86103f29faef80a01e03d09b1ad7345c6", "tree": "61776431577f0c276546f25e4178a47a64007180", "authority_role": "wire_contract_only"},
+      "external/ipfs_accelerate": {"commit": "059d684952a5cdf3430edf70a43c3b9b31dc650a", "tree": "067b308e8ff0fba4b9017f240ad774e6cdedd3cf", "authority_role": "consumer and scheduler boundary only"},
+      "external/ipfs_datasets": {"commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584", "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7", "authority_role": "bounded Python AST semantic extraction, deterministic semantic-index records, and canonical symbol identity"},
+      "external/ipfs_kit": {"commit": "b6c65ba732733d7e33852713ba18aa3b12235668", "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2", "authority_role": "exact-byte/CID storage only; not Python semantic-analysis authority"}
     },
     "source_binding_policy": {
       "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
-      "scheduler_config_sha256": "12678901a40c170b5fdcae959d1fe3bbcb881b95ee787c2324aeff2bb65471a8",
+      "scheduler_config_sha256": "5f4222672c5da4a409fdd8428d8de588126848a986dbd4a8ec0ff9435bb0000a",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
       "require_initialized_gitlinks": true,
       "require_superproject_gitlink_equals_nested_head": true,
       "require_clean_nested_worktree_at_task_start": true,
       "require_origin_main_as_ancestor": true,
-      "planning_revision_is_runtime_completion_evidence": false,
-      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
-      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      "planning_revision_is_runtime_completion_evidence": false
     },
     "freshness_check": {
       "kind": "measured",
       "status": "passed",
-      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for each admitted gitlink; git -C <root> rev-parse HEAD and HEAD^{tree}; git status --porcelain=v1 for the outer repository and datasets root; compare datasets nested HEAD/tree to scheduler planning revision/tree.",
-      "result": "The outer head/tree, four superproject gitlinks, nested heads/trees, and scheduler datasets planning identity agree. The outer and datasets worktrees were clean before this receipt was written.",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for admitted gitlinks; git -C <root> rev-parse HEAD and HEAD^{tree}; git status --porcelain=v1 for the outer repository and datasets root; compare datasets nested HEAD/tree with the scheduler binding.",
+      "result": "Outer/datasets identities agree with the superproject gitlink and scheduler planning binding; both worktrees were clean before writing this receipt.",
       "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, schema/version, or dirty admitted root requires a fresh receipt."
     },
-    "configured_origin_ancestry": {
-      "kind": "unavailable",
-      "status": "unavailable",
-      "configured_datasets_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
-      "reason": "The configured origin/main object is absent from this local clone, so its ancestry was not inferred. Scheduler planning revision/tree equality and current nested Git identity were measured separately."
-    },
-    "pcsm_source_map": {
-      "kind": "unavailable",
-      "status": "unavailable",
-      "reason": "No emitted PCSM current-tree SourceLinkReceipt or canonical source-map CID exists. PythonASTExtractor spans and Git blobs are not substituted for a PCSM source-map artifact."
-    }
+    "configured_origin_ancestry": {"kind": "unavailable", "status": "unavailable", "configured_datasets_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2", "reason": "The configured origin/main object is absent from this local clone, so ancestry was not inferred. Current nested Git and scheduler identities were measured separately."},
+    "pcsm_source_map": {"kind": "unavailable", "status": "unavailable", "reason": "No emitted PCSM current-tree SourceLinkReceipt or canonical source-map CID exists; PythonASTExtractor spans and Git blobs are not substituted for a PCSM source-map artifact."}
   },
   "selected_existing_authority": {
     "kind": "measured",
@@ -110,167 +83,52 @@
     },
     "determinism_and_boundaries": [
       "The analyzer parses source with ast and never executes the source it examines.",
-      "Results sort facts by stable symbol ID and reject duplicate logical bindings instead of inventing an identity.",
-      "The shared frontend owns parsing, lexical scopes, declarations, diagnostics, and unsupported-construct notices; the analyzer adds only semantic-index projection.",
+      "Facts are sorted by stable symbol ID and duplicate logical bindings are rejected instead of receiving invented identities.",
+      "The shared frontend owns parsing, lexical scopes, declarations, diagnostics, and unsupported-construct notices; the analyzer adds semantic-index projection only.",
       "Dynamic execution, reflection, constructed attributes, native boundaries, monkey patches, metaclass mutation, and runtime code generation downgrade confidence rather than being claimed exact.",
-      "The compiler is bounded Python AST analysis, not whole-CPython semantic equivalence, runtime tracing, M2/M3 mutation, a proof system, or a canonical PCSM source-map authority."
+      "The compiler is bounded Python AST analysis, not whole-CPython semantic equivalence, runtime tracing, a proof system, or a canonical PCSM source-map authority."
     ],
-    "minimum_delta_reason": "The current datasets implementation already provides the required Python-v1 compiler, versioned schema, CID-bound source/symbol identities, fail-closed dynamic-feature classification, and positive/negative test coverage. A new proof_context implementation would duplicate its authority and violate the exact receipt-only edit boundary."
+    "minimum_delta_reason": "The existing current-head implementation supplies Python-v1 static compilation, versioned schemas, CID-bound source/symbol identities, fail-closed dynamic-feature classification, and positive/negative test coverage. Reimplementing it inside proof_context would duplicate authority and violate this task's receipt-only output boundary."
   },
   "source_inventory": [
-    {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/python_frontend.py",
-      "sha256": "baf1c1ec5e6a5f83a0eb640b988850264d35311cdcedc87d22cff610d05308df",
-      "git_blob": "7f1c1c1d629ed34e2e67251ec6a9820fb7b87817",
-      "role": "shared non-executing Python parser, lexical-scope/declaration authority, diagnostics, source spans, and resource limits",
-      "evidence_kind": "measured"
-    },
-    {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
-      "sha256": "99af34e5427faadbb9f7caa0aa025b18c8b43dbf1eb689ef7f140ea8ded7d25f",
-      "git_blob": "e3bea1c9d85e4cf5e0d0ac70f74b2fcf580abfb5",
-      "role": "PythonSemanticAnalyzer, deterministic logical-binding aggregation, source CID, fact/edge extraction, and dynamic-feature confidence classification",
-      "evidence_kind": "measured"
-    },
-    {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/identity.py",
-      "sha256": "373f6f4e99923b58487256b956ebdfd66248485713a91483eca4e6783b59e102",
-      "git_blob": "99660842f38aff730abf7c8ef58250e39b97de62",
-      "role": "canonical stable-symbol and version-CID payload construction plus position-free AST normalization",
-      "evidence_kind": "measured"
-    },
-    {
-      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/models.py",
-      "sha256": "4b061c97838929a4cdc055998ce71aa854234c7e75d3fbee12595fa1bafa8a75",
-      "git_blob": "87074b234b82bfdde77572b5caf0a9603257b49d",
-      "role": "closed versioned semantic-index, symbol, source-span, edge, state, and invalidation record schemas",
-      "evidence_kind": "measured"
-    },
-    {
-      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py",
-      "sha256": "45f8bf0e045c2fda0131ca05839c88af07b68ca2ef54052ded41fc5376461757",
-      "git_blob": "ac4bb9f9a893943386001fd1a57c872422bf35a2",
-      "role": "positive and negative compiler coverage",
-      "evidence_kind": "measured"
-    },
-    {
-      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py",
-      "sha256": "a87147cb360f9ce81abeefc2faf48ea63464a99ea6bfd50b6e92db55612287f2",
-      "git_blob": "fc44652cacee42e33c580510ba7a75d11993e8e7",
-      "role": "positive and negative parser/declaration/resource-bound coverage",
-      "evidence_kind": "measured"
-    },
-    {
-      "path": "external/ipfs_datasets/tests/proof_context/test_v01_provider.py",
-      "sha256": "f3d15f7780ea3ffa561a21880ff4e26f65f096818e70c14d8e56ab01f65329b3",
-      "git_blob": "d9b32641e22d9fd026570907e79cfcceafa8c23a",
-      "role": "proof_context capability routing to the selected semantic-capsule and semantic-state consumers",
-      "evidence_kind": "measured"
-    },
-    {
-      "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
-      "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
-      "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6",
-      "role": "proof_context deterministic pack-CID and fail-closed stale/unavailable/opaque-source coverage",
-      "evidence_kind": "measured"
-    }
+    {"path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/python_frontend.py", "sha256": "baf1c1ec5e6a5f83a0eb640b988850264d35311cdcedc87d22cff610d05308df", "git_blob": "7f1c1c1d629ed34e2e67251ec6a9820fb7b87817", "role": "non-executing parser, lexical scope/declaration authority, diagnostics, source spans, and resource limits", "evidence_kind": "measured"},
+    {"path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py", "sha256": "99af34e5427faadbb9f7caa0aa025b18c8b43dbf1eb689ef7f140ea8ded7d25f", "git_blob": "e3bea1c9d85e4cf5e0d0ac70f74b2fcf580abfb5", "role": "PythonSemanticAnalyzer, source-CID, facts/edges, and dynamic-feature confidence classification", "evidence_kind": "measured"},
+    {"path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/identity.py", "sha256": "373f6f4e99923b58487256b956ebdfd66248485713a91483eca4e6783b59e102", "git_blob": "99660842f38aff730abf7c8ef58250e39b97de62", "role": "stable-symbol and version-CID payload construction plus position-free AST normalization", "evidence_kind": "measured"},
+    {"path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/models.py", "sha256": "4b061c97838929a4cdc055998ce71aa854234c7e75d3fbee12595fa1bafa8a75", "git_blob": "87074b234b82bfdde77572b5caf0a9603257b49d", "role": "closed versioned semantic-index, symbol, source-span, edge, state, and invalidation schemas", "evidence_kind": "measured"},
+    {"path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py", "sha256": "45f8bf0e045c2fda0131ca05839c88af07b68ca2ef54052ded41fc5376461757", "git_blob": "ac4bb9f9a893943386001fd1a57c872422bf35a2", "role": "positive and negative compiler coverage", "evidence_kind": "measured"},
+    {"path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py", "sha256": "a87147cb360f9ce81abeefc2faf48ea63464a99ea6bfd50b6e92db55612287f2", "git_blob": "fc44652cacee42e33c580510ba7a75d11993e8e7", "role": "positive and negative parser/declaration/resource-bound coverage", "evidence_kind": "measured"},
+    {"path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py", "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba", "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6", "role": "deterministic pack-CID and stale/unavailable/opaque fail-closed coverage", "evidence_kind": "measured"}
   ],
   "compiler_exercise": {
     "kind": "simulated",
     "status": "passed",
     "command": "PYTHONPATH=external/ipfs_datasets python - <deterministic analyze_python_source exercise>",
-    "result": {
-      "schema": "ipfs-datasets.software-contracts.python-semantic-analysis@2",
-      "source_cid": "bafkreidgnsmz6d4lsunk6lc5x2jqw5wd3ukfhy2bwyh3icfz27xsnivbza",
-      "answer_stable_id": "baguqeeratcaannw2tmkvkadscyiy734e4cot2yktoilnl2scbchnjzkct6cq",
-      "answer_version_cid": "baguqeerawjj7nihbf3avajowrrlgwmxrkjlxfnpp3cmwbwag7vtd62sr75sa",
-      "whitespace_invariant": true,
-      "dynamic_confidence": "opaque",
-      "dynamic_reasons": [
-        "eval_or_exec",
-        "python.dynamic_execution"
-      ]
-    },
-    "assertions": [
-      "Equivalent function bodies differing only in indentation form retained the same version CID.",
-      "The exact input source emitted a CID and the symbol emitted both a stable ID and version CID bound to the selected schemas.",
-      "eval was not promoted: it was classified opaque with explicit reasons."
-    ],
-    "limitation": "This direct exercise ran in the provider environment and is deliberately not treated as sealed validation."
+    "result": {"schema": "ipfs-datasets.software-contracts.python-semantic-analysis@2", "source_cid": "bafkreia6aswrisumlzfncc4fxovbu5fc6a6azhegvvbhxscjxmhk3iuvny", "answer_stable_id": "baguqeerazjxsguga3mvw7i4wzntac7pbqyryfcaqxsvpt62kif3re2iefblq", "answer_version_cid": "baguqeerakt52js4jwvwpnvg7kqfealulrp2uaptdmo45j2hadz3ydcehxg2q", "whitespace_invariant": true, "dynamic_confidence": "opaque", "dynamic_reasons": ["eval_or_exec"]},
+    "assertions": ["Equivalent function bodies differing only in indentation retained the same version CID.", "The exact input emitted a source CID and the function emitted stable and version CIDs bound to selected schemas.", "eval was classified opaque with an explicit reason rather than promoted."],
+    "limitation": "This provider-environment exercise is deliberately not treated as sealed validation."
   },
   "test_and_validation_evidence": {
     "positive_and_negative_test_sources": [
-      {
-        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py",
-        "evidence_kind": "measured",
-        "positive_coverage": [
-          "position-free AST/version-CID invariance",
-          "stable logical-binding aggregation and local child isolation",
-          "source spans, declarations, overloads, typed models, properties, enums, calls, state effects, serialization, validation, and exception edges"
-        ],
-        "negative_coverage": [
-          "eval/exec, dynamic import, reflection, native boundaries, monkey patches, unknown decorators, conditional definitions, duplicate stable IDs, parse failures, and dynamic constructs are conservatively or opaquely classified rather than treated exact"
-        ]
-      },
-      {
-        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py",
-        "evidence_kind": "measured",
-        "positive_coverage": [
-          "deterministic declaration and scope extraction with source-span support"
-        ],
-        "negative_coverage": [
-          "invalid encoding, syntax errors, non-text inputs, excessive source size, invalid resource limits, and deep ASTs"
-        ]
-      },
-      {
-        "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
-        "evidence_kind": "measured",
-        "positive_coverage": [
-          "identical ContextPack inputs produce identical pack CIDs"
-        ],
-        "negative_coverage": [
-          "stale, unavailable, and opaque-without-exact-scanned-tree inputs fail closed"
-        ]
-      }
+      {"path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py", "evidence_kind": "measured", "positive_coverage": ["position-free AST/version-CID invariance", "logical-binding aggregation, source spans, declarations, typed models, calls, state effects, serialization, validation, and exception edges"], "negative_coverage": ["eval/exec, dynamic import, reflection, native boundaries, monkey patches, unknown decorators, conditional definitions, duplicate stable IDs, parse failures, and dynamic constructs are classified conservatively or opaquely"]},
+      {"path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py", "evidence_kind": "measured", "positive_coverage": ["deterministic declaration and scope extraction with source-span support"], "negative_coverage": ["invalid encoding, syntax errors, non-text inputs, excessive source size, invalid resource limits, and deep ASTs"]},
+      {"path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py", "evidence_kind": "measured", "positive_coverage": ["identical ContextPack inputs produce identical pack CIDs"], "negative_coverage": ["stale, unavailable, and opaque-without-exact-scanned-tree inputs fail closed"]}
     ],
-    "provider_compiler_unit_validation": {
-      "kind": "simulated",
-      "status": "passed",
-      "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py",
-      "result": "33 passed in 0.98s",
-      "limitation": "The provider environment has additional packages and is not substituted for the sealed validation environment."
-    },
-    "required_validation": {
-      "kind": "simulated",
-      "status": "passed",
-      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
-      "result": "519 passed in 78.37s",
-      "limitation": "This exact command was run in the provider environment, not the authoritative sealed environment."
-    },
-    "sealed_required_validation": {
-      "kind": "unavailable",
-      "status": "unavailable",
-      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
-      "result": "pytest aborted before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
-      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
-    },
-    "formal_prover": {
-      "kind": "unavailable",
-      "status": "not_run",
-      "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only existing-authority selection."
-    }
+    "provider_compiler_unit_validation": {"kind": "simulated", "status": "passed", "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py", "result": "33 passed in 0.98s", "limitation": "The provider environment is not substituted for sealed validation."},
+    "required_validation": {"kind": "simulated", "status": "incomplete", "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context", "result": "Provider run collected 519 items and emitted progress through the benchmark corpus before the command wrapper returned without a terminal pytest summary; no provider pass result is claimed.", "limitation": "An incomplete provider observation cannot establish validation success."},
+    "sealed_required_validation": {"kind": "unavailable", "status": "unavailable", "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context", "result": "pytest aborted before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.", "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."},
+    "formal_prover": {"kind": "unavailable", "status": "not_run", "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only existing-authority selection."}
   },
   "evidence_summary": {
-    "measured": "Current-head outer/nested Git and scheduler bindings, clean pre-write state, source/test SHA-256 and Git blobs, selected API/schema/version/CID contract, test inventory, and sealed pytest capability failure.",
+    "measured": "Current outer/nested Git and scheduler bindings, clean pre-write state, source/test SHA-256 and Git blobs, selected API/schema/version/CID contract, test inventory, and sealed pytest capability failure.",
     "estimated": "None.",
-    "simulated": "A direct deterministic compiler exercise, provider compiler/frontend test run (33 passed), and provider required proof_context suite (519 passed).",
-    "unavailable": "Authoritative sealed proof_context pytest result, configured origin/main ancestry object in this clone, PCSM SourceLinkReceipt/source-map CID, formal-prover result, and a self-describing immutable storage CID for this receipt."
+    "simulated": "A direct deterministic compiler exercise and provider compiler/frontend unit validation (33 passed).",
+    "unavailable": "Authoritative sealed proof_context result, configured origin/main ancestry object in this clone, PCSM SourceLinkReceipt/source-map CID, formal-prover result, and a self-describing immutable storage CID for this receipt."
   },
   "limitations": [
     "This task is receipt-only: it selects existing current-head compiler authority and does not create a competing compiler or mutate proof_context/.",
-    "The selected compiler is a bounded static Python AST analysis. It does not execute source and cannot establish whole-CPython runtime semantics, dynamic import results, reflection, native behavior, or generated-code correctness; these inputs are explicitly downgraded or rejected.",
-    "The source/symbol CIDs are valid only under the bound datasets source digests and stated schema/version; a changed source, canonicalization profile, schema, extractor version, or tree invalidates this receipt.",
-    "Provider test passes are simulated evidence only. The authoritative sealed suite remains unavailable because anyio is absent, so this receipt cannot promote completion.",
+    "The selected compiler is bounded static Python AST analysis; it does not establish whole-CPython runtime semantics, dynamic import results, reflection, native behavior, or generated-code correctness.",
+    "The source/symbol CIDs are valid only under the bound datasets source digests and stated schema/version; any change invalidates this receipt.",
+    "The authoritative sealed suite remains unavailable because anyio is absent, so this receipt cannot promote completion.",
     "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
   ],
   "rollback": {
