@@ -10,7 +10,7 @@
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
   "artifact_identity": "urn:pcsm:task-receipt:PCSM-060@current-head-python-abstract-interpretation-selection-v1",
-  "observed_at": "2026-08-28T07:03:11Z",
+  "observed_at": "2026-08-28T07:35:43Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -35,10 +35,10 @@
     "git_object_format": "sha1",
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "outer_commit": "218bf3c5643ad5c1e116482be522d596a62e23f3",
-    "outer_tree": "49a09a1c5679507b87151c9a6de1525aa46b37f2",
-    "outer_subject": "Merge commit '202dc9089079d4f0af1b679b55df9144e593fdbb' into agent/proof-carrying-semantic-minification-v1",
-    "dispatch_tree_id": "218bf3c5643ad5c1e116482be522d596a62e23f3",
+    "outer_commit": "c0141df2fb7260f2237ad002345792db2b5d2444",
+    "outer_tree": "7e7007ad29a7f7f7d9f111979daa08ee1a887637",
+    "outer_subject": "Merge commit 'c954743007a2ec234e4c8329685f5fce493588af' into agent/proof-carrying-semantic-minification-v1",
+    "dispatch_tree_id": "c0141df2fb7260f2237ad002345792db2b5d2444",
     "dispatch_tree_id_equals_outer_commit": true,
     "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
@@ -57,7 +57,7 @@
     },
     "source_binding_policy": {
       "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
-      "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+      "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
       "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
       "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
       "require_initialized_gitlinks": true,
@@ -115,8 +115,8 @@
       "status": "passed",
       "method": "Two fresh Python 3.12 provider processes with PYTHONHASHSEED=1 and PYTHONHASHSEED=777 analyzed identical source and source_uri.",
       "source_uri": "fixture://pcsm-060-determinism.py",
-      "analysis_id": "bafkreifs6it6hpkywqn77atkzmy4ynjhxdkksftwirb2tx6mk5ffpidig4",
-      "source_identity": "bafkreibktyvdgbc6ydncw4a3q4rkidou6rarvrxzbtrzqaxlfcunjewnvm",
+      "analysis_id": "bafkreiac2dr2tpqfw5flf2xx5l6wgcv5dwzqanlr43lr7mhjjo6ucgc33e",
+      "source_identity": "bafkreigia7edm5jd27wzkqehmiu62ntwcf73ftnvkct7dj7vg4b443maui",
       "analyzer_identity": "bafkreih6eikkcz2k3rtbv5bpgpkejzngv6qkbly2hrcfbvciwzv2kqlgp4",
       "schema_version": "software-abstract-analysis/v1",
       "limitation": "Provider replay is simulated evidence and does not replace a sealed-environment deterministic test."
@@ -206,7 +206,7 @@
       "kind": "simulated",
       "status": "passed_same_nested_tree",
       "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
-      "result": "519 passed in 73.88s, recorded by PCSM-028 on the identical external/ipfs_datasets commit 8b9c45106c0ace6107b8b90357a3ce71caf57584 and tree 6a186a24c424fdce0035033ebbf8a8476d96bbb7. This dispatch independently observed provider collection of the same 519 tests before the interactive executor output window ended; it does not replace the recorded completed result.",
+      "result": "519 passed in 76.52s on the bound external/ipfs_datasets commit 8b9c45106c0ace6107b8b90357a3ce71caf57584 and tree 6a186a24c424fdce0035033ebbf8a8476d96bbb7.",
       "limitation": "The suite is proof_context coverage, not a substitute for the dedicated abstract-interpreter tests, and provider execution is not authoritative sealed validation."
     },
     "sealed_required_validation": {
