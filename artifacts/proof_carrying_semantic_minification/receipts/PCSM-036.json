@@ -10,7 +10,7 @@
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
   "artifact_identity": "urn:pcsm:task-receipt:PCSM-036@current-head-python-capsule-invalidation-and-delta-selection-v1",
-  "observed_at": "2026-08-28T07:55:47Z",
+  "observed_at": "2026-08-28T08:02:53Z",
   "scope": {
     "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-036.json",
     "changed_paths": [
@@ -34,9 +34,9 @@
     "git_object_format": "sha1",
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "outer_commit": "1c5b992929023609b70871e5fa70970bff4946f3",
-    "outer_tree": "ff91b84d33b94c3b7c3398111a72c757d826ebd2",
-    "dispatch_tree_id": "1c5b992929023609b70871e5fa70970bff4946f3",
+    "outer_commit": "4c3592b62a016ec1821ffd1bbac50b0bcffe8d02",
+    "outer_tree": "39bc4ce4ac628225b607b12fab6450106c4f8675",
+    "dispatch_tree_id": "4c3592b62a016ec1821ffd1bbac50b0bcffe8d02",
     "dispatch_tree_id_equals_outer_commit": true,
     "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
@@ -124,6 +124,20 @@
     "minimum_delta_reason": "The current head has the exact versioned Python-v1 authority plus direct positive and negative tests. Reimplementing it in proof_context would duplicate the canonical semantic-state authority and exceed this task's exact receipt-only output boundary."
   },
   "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "git_blob": "14458fb99ea57c19652398ee479d678ae3fbe507",
+      "sha256": "89e1fbc694a67f751de3a62d8206442e4904722c20f81827ae0a96a0fbee33a3",
+      "role": "normative software-contract-cid-profile-v1 implementation for CIDv1 lowercase-base32 raw/dag-json sha2-256 identities"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+      "git_blob": "234fea82b071c80f9f7ddc8b33909257cdf6400c",
+      "sha256": "268ff6aab60e3a8a2e5e9719b637edfd1efb7bc50a4310bd4b1f2660b04cdfcc",
+      "role": "sole deterministic diff_environment_bindings producer of the versioned SemanticBindingDelta consumed by invalidation"
+    },
     {
       "evidence_kind": "measured",
       "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/invalidation.py",
@@ -230,7 +244,7 @@
       "kind": "unavailable",
       "status": "unavailable",
       "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
-      "result": "The required provider-side suite was started three times and each execution was terminated by the available command runner's 30-second wall-time ceiling before completion. No aggregate result is claimed.",
+      "result": "The required provider-side suite collected 519 tests, then the available command runner returned at its 30-second wall-time ceiling without a process exit or aggregate summary. No aggregate result is claimed.",
       "fail_closed_disposition": "No partial progress, predecessor provider result, reduced selection, or provider-only dependency is relabeled as a passing required-suite result."
     },
     "sealed_required_validation": {
