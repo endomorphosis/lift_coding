@@ -42,15 +42,24 @@
     "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
     "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only; not proof-context contract or proof-obligation authority"
+      },
       "external/ipfs_datasets": {
         "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
         "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
         "authority_role": "Python proof-context contract, ContextPack, semantic-outcome, assurance-specification, source-CID, and record-CID authority"
       },
       "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
         "authority_role": "exact-byte/CID storage only; not proof-context contract or proof-obligation authority"
       },
       "external/ipfs_accelerate": {
+        "commit": "c757022cf3b2ad35031afe4912ff20cbe6144a5d",
+        "tree": "a1e7239ea168a881be333733cb6baf570b9a4595",
         "authority_role": "consumer and scheduler boundary only"
       }
     },
