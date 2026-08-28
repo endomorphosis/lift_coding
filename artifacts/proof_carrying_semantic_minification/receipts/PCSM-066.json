@@ -1,0 +1,240 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-066",
+  "title": "Integrate CEGAR semantic paging",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-066",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-066@current-head-cegar-semantic-paging-capability-assessment-v1",
+  "observed_at": "2026-08-28T15:13:46Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 CEGAR semantic-paging capability assessment for the exact current admitted source forest",
+    "language": "Python",
+    "language_version": "3.12",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-066.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-066.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "implementation_delta": "The current accelerator head already contains two separately versioned reusable authorities: CounterexampleGuidedProofDevelopment@1 is a bounded verifier-backed CEGAR loop, and DecisionContextCompiler.expand_decision_context is a deterministic CID-bound semantic paging service. The exact current tree has no adapter that binds a CEGAR counterexample/refinement iteration to an expansion request, no dedicated joint integration test, and no canonical PCSM current-source-map CID for exact file/node/span input. The exact-output authority permits only this receipt, so no competing adapter, source-map authority, or untested wiring was created.",
+    "non_promotion_reason": "The reusable components and their direct positive/negative tests are current-head and passed under the sealed test environment, but their independent availability is not evidence of an integrated CEGAR semantic-paging execution. A PCSM source-map-bound request/result, joint adapter contract, joint test, and aggregate current-PCSM SourceLinkReceipt/source-map CID are unavailable. This receipt therefore records a typed honest non-promotion rather than manufacture a CID, expansion, proof, integration, or promotion claim."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish source identity, solver/verifier behavior, CID binding, validation success, or promotion.",
+    "simulated": "A controlled non-authoritative exercise; it cannot replace sealed validation or authorize promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "outer_tree": "c27bf2123f44524750faf873be995b9e727cd09e",
+    "dispatch_tree_id": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "objective_revision": "baguqeera2ddi2uwwfbok4pjo3lvakvscs4mkccvgdsbitfz2qtpxwxow6anq",
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no CEGAR paging authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "current Python-v1 CEGAR-loop and semantic-expansion implementation/test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic-identity boundary only; no PCSM source-map authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no CEGAR paging authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}, accelerator HEAD and HEAD^{tree}, and checked outer/admitted worktree porcelain before the receipt write; recorded selected implementation/test Git blobs and SHA-256 values; searched accelerator implementation and PCSM test roots for canonical SourceMap/SourceLink identities and direct CEGAR-to-DecisionContext integration; and ran the required and focused tests under the prescribed PATH, Python 3.12, and fresh private HOME/XDG directories.",
+      "result": "The dispatch commit equals outer HEAD, every recorded gitlink commit/tree pair equals its checked-out head, and inspected worktrees were clean. The search found neither a PCSM aggregate SourceLinkReceipt/source-map CID nor a direct CounterexampleGuidedProofDevelopment-to-DecisionContext adapter. Git trees, blobs, semantic-node IDs, and generic repository/tree bindings are retained as freshness evidence but are not substituted for the missing PCSM source-map contract.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink head/tree, scheduler digest, listed source/test digest, CEGAR/paging contract version, required-test result, joint adapter/test, or PCSM source-map capability requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical source-map CID resolves exact PCSM file/node/span identities in the named accelerator implementation/test roots. Git object identities and generic semantic graph roots are not falsely relabelled as this missing contract."
+    }
+  },
+  "selected_existing_authorities": {
+    "kind": "measured",
+    "cegar_loop": {
+      "component": "ipfs_accelerate_py.agent_supervisor.proof.counterexample_guided_tactician.CounterexampleGuidedTactician",
+      "interface": "CounterexampleGuidedProofDevelopment@1",
+      "version": "1.0.0",
+      "schema": "ipfs_accelerate_py/agent-supervisor/counterexample-guided-proof-development@1",
+      "result_schema": "ipfs_accelerate_py/agent-supervisor/cegis-loop-result@1",
+      "role": "A bounded CEGIS/CEGAR loop that normalizes/replays a counterexample, independently validates a candidate before rerunning the exact originating verifier, binds witness/candidate/tree/goal/verifier/budget/result per iteration, and closes only on a fresh matching verifier receipt. Timeout, disagreement, unavailable, bound change, cancellation, repeated failure, and budget exhaustion remain open, unknown, or typed terminal non-success."
+    },
+    "semantic_paging": {
+      "component": "ipfs_accelerate_py.agent_supervisor.context.context_compiler.DecisionContextCompiler.expand_decision_context",
+      "request_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1",
+      "budget_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-budget@1",
+      "result_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-retry-capsule@1",
+      "role": "A deterministic semantic-node expansion path that accepts only closure-admitted handles named for the unresolved question, recomputes content identity, checks parent request/context/witness/repository/tree/authority/semantic-root bindings, applies cumulative item/token/byte/latency budgets, rejects repeated requests and drift, and emits a compact retry delta."
+    },
+    "integration_status": {
+      "kind": "unavailable",
+      "status": "no_current_head_joint_authority",
+      "reason": "The sources expose their separate public entry points but do not select one another, define a shared CEGAR semantic-paging schema, or carry a counterexample/refinement-to-expansion CID binding. Reusing both independently cannot honestly be presented as integration."
+    },
+    "determinism_and_authority_boundary": {
+      "kind": "measured",
+      "binding": "CEGAR uses versioned canonical artifacts and a finite CegisBudget whose bound digest is carried in every iteration; closure requires a fresh exact-verifier receipt. Paging derives canonical request/content identities and validates admitted content plus exact parent/repository/tree/authority/semantic-root bindings before emitting a delta.",
+      "boundary": "Candidates, model output, a paging request, a retry delta, tests, and solver/verifier transport success are not mutation, proof, completion, or promotion authority. Neither selected component performs M2/M3 mutation, fabricates a source map, or permits an external caller to override authority/freshness."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/counterexample_guided_tactician.py",
+      "git_blob": "7e507cdd49cdeccbdb5b32fe461e8c7bc0a51dab",
+      "sha256": "4665e1b61ad4deb7e9b31d7b062bf365b3bc0cdfee953333128cab61d7a20f71",
+      "role": "Versioned bounded verifier-backed CEGAR loop, canonical CEGIS contracts, fresh-receipt closure, finite budgets, repeated-failure backoff/termination, and typed non-success outcomes."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+      "git_blob": "fea50c565815772b7e80401d038a92b9ec6489e2",
+      "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece",
+      "role": "Current semantic-paging expansion implementation and public wrapper."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/decision_context.py",
+      "git_blob": "cf3288762f1a2640d3b391cb3da4e4d44c03838e",
+      "sha256": "fe29d9958fe0254b393034225dbebf777f88d0d43310642968429ab584f4ee83",
+      "role": "Canonical expansion request/budget contracts and CID/equivalent-request binding."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_counterexample_guided_tactician.py",
+      "git_blob": "f6fc044980f40095e6c91fd135f452c67324b90b",
+      "sha256": "d9a915dad6d2170d17e15294a139ead31e56872f6eb65c155184073eb66d007c",
+      "role": "Dedicated CEGAR positive and negative contract coverage."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_counterexample_guided_tactician.py",
+      "git_blob": "06db3100e407b0f02c3da7162273d68a8466ce6b",
+      "sha256": "caccc8a87b55432f43dbfc8e0a69ddb48e02da5dbcac070aa99be31cb3d1e747",
+      "role": "Independent detailed CEGAR closure, freshness, budget, error, and non-authority coverage."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_decision_context_delta.py",
+      "git_blob": "0575f74b679c66cc14ca5d7a7397c6686b024c4d",
+      "sha256": "f0504b3e13c143273dc5cb60e3d6c5f85d5da237a49d057de1500f62281d7e19",
+      "role": "Dedicated semantic-paging positive and negative contract coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm066-required-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact prescribed PATH; fresh private HOME/XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.34s",
+      "scope_limit": "This required PCSM suite validates the closed candidate-output grammar and rejects model-created completion. It does not exercise the unavailable joint CEGAR semantic-paging integration."
+    },
+    "focused_existing_authority_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm066-focused-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_counterexample_guided_tactician.py external/ipfs_accelerate/test/api/test_counterexample_guided_tactician.py external/ipfs_accelerate/test/api/test_agent_supervisor_decision_context_delta.py",
+      "environment": "Python 3.12.3; exact prescribed PATH; fresh private HOME/XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "52 passed in 2.21s",
+      "positive_coverage": [
+        "A fresh matching exact-verifier receipt can close a CEGAR witness; canonical loop and iteration artifacts round-trip; fixed budgets terminate; and paging emits a compact question-bound delta that reconstructs its parent while preserving semantic-node identity.",
+        "CEGAR binds its witness, candidate, repaired tree/goal, verifier, policy, bound digest, and result; paging binds admitted content and exact parent/repository/tree/authority/semantic-root metadata and applies cumulative budgets."
+      ],
+      "negative_coverage": [
+        "Stale/mismatched verifier receipts, invalid independent candidates, unavailable/timeout/disagreement verifiers, bound changes, cancellation, repeated failures, malformed budgets, and non-authority candidates cannot close a CEGAR run.",
+        "Unadmitted or cross-boundary handles, repeated or unrelated requests, repository/tree/semantic-root/authority drift, forged retry identities, and count/token/byte/latency budget breaches fail closed in semantic paging."
+      ],
+      "scope_limit": "The 52 tests prove the two existing contracts independently; they are not a joint CEGAR semantic-paging integration test and are not relabelled as one."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run_not_required_for_existing_contract_tests",
+      "reason": "No approved digest-bound theorem-prover deployment or current-PCSM source-map-bound CEGAR paging obligation was available. Contract-test success and verifier receipts are not kernel proofs or promotion authority."
+    }
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "existing_components_available_joint_current_forest_integration_unavailable_non_promoted",
+    "available_capabilities": [
+      "Current-head bounded, deterministic, versioned, receipt-bound CEGAR refinement authority with sealed direct positive and negative coverage.",
+      "Current-head deterministic, versioned, CID-bound semantic paging authority with sealed direct positive and negative coverage."
+    ],
+    "unavailable_capabilities": [
+      "A shared CEGAR semantic-paging adapter/schema that binds a counterexample/refinement iteration to a paging request and retry delta.",
+      "A canonical aggregate PCSM SourceLinkReceipt/source-map CID and exact PCSM source file/node/span bindings.",
+      "A source-map-bound current-PCSM CEGAR paging request/result CID, direct joint integration test, and formal-prover result."
+    ],
+    "disposition": "No joint result, source-map CID, token estimate, proof result, or model-derived evidence is invented. Missing required values are unavailable rather than zero or passing. The exact declared-output boundary prevents creating the otherwise-required implementation/test delta, so this is a typed non-promotion that leaves unrelated reusable capabilities intact."
+  },
+  "evidence_summary": {
+    "measured": "Current outer and nested Git/tree identities; clean/freshness checks; scheduler and selected source/test digests; source search showing no joint adapter or PCSM source-map authority; required sealed validation (11 passed); and focused sealed direct authority validation (52 passed).",
+    "estimated": "None. No estimate establishes integration, source identity, CID binding, test success, proof, or promotion.",
+    "simulated": "None. No provider-only execution is used as implementation or validation evidence.",
+    "unavailable": "Joint current-head CEGAR semantic-paging adapter/schema/test; canonical PCSM aggregate SourceLinkReceipt/source-map CID; a source-map-bound CEGAR paging request/result CID; and a formal-prover result."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not alter the existing accelerator implementation/tests, create a parallel CEGAR/paging subsystem, or materialize source-map data.",
+    "Passing independent CEGAR and paging suites is not evidence that the two services are integrated; the current tree has no direct binding between them.",
+    "The absence of a canonical PCSM source-map CID prevents a truthful exact-current-forest paging instance even if a later adapter is added.",
+    "No model output, candidate, request, retry delta, test result, or verifier transport response is treated as source mutation, proof, completion, or promotion authority; M2/M3 mutation remains excluded.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter protected planning documents, the existing accelerator CEGAR/paging components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, required-test result, contract version, joint integration, or PCSM source-map capability change."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalents_reused_first": true,
+    "cegar_component_available": true,
+    "semantic_paging_component_available": true,
+    "cegar_semantic_paging_joint_integration_available": false,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "sealed_required_validation_passed": true,
+    "sealed_focused_component_validation_passed": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_cegar_paging_instance_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_joint_adapter_test_and_pcsm_source_map_binding"
+  }
+}
