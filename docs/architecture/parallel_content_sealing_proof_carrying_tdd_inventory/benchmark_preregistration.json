@@ -1,0 +1,93 @@
+{
+  "anti_gaming": "No hidden failures, uncounted work, skipped validation, oracle leakage, or denominator exclusions.",
+  "hash_seal_workloads": {
+    "cache": [
+      "cold_memo",
+      "warm_memo"
+    ],
+    "changes": [
+      "clean",
+      "1_percent",
+      "10_percent",
+      "50_percent",
+      "dirty_overlay"
+    ],
+    "layouts": [
+      "many_small",
+      "mixed_repository",
+      "few_large"
+    ],
+    "seal": [
+      "full_checkpoint",
+      "delta_seal"
+    ],
+    "storage": [
+      "local_ssd",
+      "reproducible_slow_io"
+    ],
+    "workers": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ]
+  },
+  "metrics": [
+    "wall_time",
+    "cpu_time",
+    "peak_rss",
+    "files_opened",
+    "bytes_read",
+    "bytes_hashed",
+    "memo_hits_rejections",
+    "root_equality",
+    "phase_times",
+    "selection_recall",
+    "mutation_escapes",
+    "proof_batch_cost",
+    "wal_cas_time",
+    "model_calls_tokens_context",
+    "calls_avoided_by_reuse_procedure_repair"
+  ],
+  "pytest_tdd_workloads": [
+    "no_fixture",
+    "pure",
+    "module_session",
+    "parameterized",
+    "temp_filesystem",
+    "transactional_db",
+    "clock_rng",
+    "service_simulation",
+    "opaque_dynamic",
+    "teardown_finalizer",
+    "xdist",
+    "slow_fast_calls",
+    "proof_hit_miss",
+    "changed_fixture",
+    "changed_plugin_conftest",
+    "changed_environment"
+  ],
+  "revision": "PCTDD-PLAN-V1",
+  "safety_floors": {
+    "escaped_critical_seeded_defects": 0,
+    "false_test_phase_reuse": 0,
+    "identity_divergence": 0,
+    "lost_concurrent_updates": 0,
+    "model_created_proof_authority_completion": 0,
+    "secret_witness_leaks": 0,
+    "selection_false_negative_regressions": 0,
+    "simulated_proof_admissions": 0,
+    "stale_authoritative_reuse": 0,
+    "unauthorized_root_publications": 0
+  },
+  "schema": "pctdd/benchmark-preregistration@1",
+  "status": "frozen_before_implementation",
+  "targets": {
+    "median_model_context_reduction_percent": 30,
+    "repeat_general_llm_call_reduction_percent": 25,
+    "warm_1_percent_delta_prepare_reduction_percent": 50,
+    "warm_bytes_reread_reduction_percent": 90,
+    "warm_selected_loop_reduction_percent": 30
+  }
+}

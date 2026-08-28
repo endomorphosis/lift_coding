@@ -1,0 +1,15 @@
+{
+  "authority_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py"
+  ],
+  "current": [
+    "locator-first seed",
+    "runtime trace",
+    "DI lookup/store/provider/issuer",
+    "controller-owned xdist publication"
+  ],
+  "gap": "exact fixture-instance key becomes safely authoritative only after current setup; add pre-call V2 key and honest composite phase receipt",
+  "schema": "pctdd/pytest-identity@1"
+}

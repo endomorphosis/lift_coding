@@ -1,0 +1,12 @@
+{
+  "authority": "kit stores/verifies bytes; accelerate admits proof/test meaning",
+  "existing": [
+    "immutable proof-seal persistence",
+    "ordered WAL",
+    "current-pointer compare-and-swap",
+    "stale-parent rejection",
+    "crash recovery"
+  ],
+  "required_invariant": "parallel immutable preparation has no publication authority; final ordered WAL and generation-bearing current-root CAS remain serial and fail closed",
+  "schema": "pctdd/storage-recovery@1"
+}

@@ -1,0 +1,11 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "claim": "This tracked receipt identifies the operator control package; it does not itself complete the task.",
+  "completion_authority": "DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane",
+  "dependency_seal": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1",
+  "schema": "pctdd/operator-control-receipt@1",
+  "status": "sealed_pending_evidence_gated_database_completion",
+  "task_id": "PCTDD-000"
+}

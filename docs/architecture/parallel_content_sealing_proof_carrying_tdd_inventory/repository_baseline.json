@@ -1,0 +1,49 @@
+{
+  "branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
+  "captured_utc": "2026-08-28",
+  "dirty_user_tree_preserved": true,
+  "evidence_note": "Hashes bind captured status/diff/path lists without copying user content into the control worktree.",
+  "original_tree_evidence": {
+    "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798",
+    "datasets_status_sha256": "a1b4619c21ab5c19d90aa666b48d10d7f5034a2abe2ce57e0f854892429d9c83",
+    "root_diff_sha256": "72f6c22550da009960d570f8b5128077c9160ef2d4ae2d5cc75498ab69e08fb7",
+    "root_status_sha256": "f0a737302e4455c55e60edc28403da4f339e9b64811cc0b0dcf0c87e2d9629b3",
+    "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac"
+  },
+  "planning_base_head": "8601408d6406681a14a9488d31d1cd9a16164649",
+  "planning_base_tree": "e35dfaebbd229d7e7de988b2e0345444d9284221",
+  "planning_root": "/home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1",
+  "schema": "pctdd/repository-baseline@1",
+  "sources": [
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+      "head": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+      "name": "ipfs_accelerate_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "path": "external/ipfs_accelerate",
+      "tree": "c5ddd043de58349aafac0f9af03c1b018313623d"
+    },
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "name": "ipfs_datasets_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "path": "external/ipfs_datasets",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "name": "ipfs_kit_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "path": "external/ipfs_kit",
+      "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+    }
+  ]
+}

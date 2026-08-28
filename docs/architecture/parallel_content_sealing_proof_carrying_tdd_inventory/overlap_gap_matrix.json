@@ -1,0 +1,41 @@
+{
+  "entries": [
+    {
+      "capability": "IncrementalProofSealer full/delta/WAL/CAS",
+      "classification": "available_with_caveats",
+      "owner": "ipfs_accelerate_py + ipfs_kit_py",
+      "successor": "prepared-seal consumer adapter"
+    },
+    {
+      "capability": "pytest proof reuse/DI/xdist controller publication",
+      "classification": "available_with_caveats",
+      "owner": "ipfs_accelerate_py",
+      "successor": "fixture-staged V2 identity/composite phases"
+    },
+    {
+      "capability": "semantic selection",
+      "classification": "available",
+      "owner": "ipfs_datasets_py consumed by accelerate",
+      "successor": "adapter only"
+    },
+    {
+      "capability": "verified persistent hash memo",
+      "classification": "partial",
+      "owner": "datasets contract + kit store",
+      "successor": "versioned records/store"
+    },
+    {
+      "capability": "aggregate selected-test ZK",
+      "classification": "missing",
+      "owner": "datasets statement + accelerate backend",
+      "successor": "versioned aggregate statement; typed unavailable without admitted production key"
+    },
+    {
+      "capability": "FastTddLoopController",
+      "classification": "partial",
+      "owner": "ipfs_accelerate_py",
+      "successor": "compose current authorities"
+    }
+  ],
+  "schema": "pctdd/overlap-gap@1"
+}

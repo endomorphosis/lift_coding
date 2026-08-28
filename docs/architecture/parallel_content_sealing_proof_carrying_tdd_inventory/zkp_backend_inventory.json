@@ -1,0 +1,22 @@
+{
+  "direct_cpython": {
+    "classification": "research_only",
+    "production_admitted": false
+  },
+  "groth16_binary": {
+    "classification": "real_backend_binary_present_unqualified",
+    "production_admitted": false,
+    "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding",
+    "sha256": "sha256:7cd14f8810fda8c16bf8a3b3ad02fda67b3c85ff0fc05883e21825781e33ce15"
+  },
+  "ordinary_inner_loop": "signed receipts permitted by explicit policy; ZK asynchronous",
+  "provekit": {
+    "classification": "adapter_source_present",
+    "production_admitted": false
+  },
+  "schema": "pctdd/zkp-backend-inventory@1",
+  "simulated": {
+    "classification": "simulated",
+    "production_admitted": false
+  }
+}

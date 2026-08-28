@@ -1,0 +1,131 @@
+{
+  "artifacts": {
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:e87568d8945f7bc93f401c067dc44618a233d581b7d076dc368e77f58b7fbd5f",
+    "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json": "sha256:97af0087f4dba6635ce8c4ee5932b950f3e5e71312bddb8df86c6a8484025b31",
+    "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md": "sha256:9a5bfd111582c4632aac07f9527d014265ba40b5960cb675d6097ede6959b187",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md": "sha256:652d661361ef28835f9fbf92c11e3a949a655dda8b61625c3c55d7a3b9dee6b7",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md": "sha256:2a2ac2bc03aedcbae7aee28e1529d6e71ef5bafcd2a61b9c1bfee16bd17f7d88",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json": "sha256:2ab53517798dcf840dc5aeb6c89b889931b1ed06c6f09592d79568a4a896c827",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json": "sha256:97af0087f4dba6635ce8c4ee5932b950f3e5e71312bddb8df86c6a8484025b31",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json": "sha256:b1ab0748c41944b7c01e0895e930f55c6d7c8907387ff4b71a1141b38d1d3576",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json": "sha256:c9d66ddb8c0533ece06d7a26be36f49d4e46bf6d9c109eb2c1f68a87be320ae4",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json": "sha256:3f6d6a38ee9958a4e7bc854d726d7c5227effc757cf6924568de1ffd4371af6e",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json": "sha256:f37c0280f3b088597ec7fae028a978e912af3c0f1cf73c4bf2ef22ed9a2ee78b",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json": "sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:9968c75a985dce2f51bec0fc3750f50c9b6be32f81dfc4fcc2abcb741e821faa",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json": "sha256:11c32db94286c8a7006d6d63fb27b5d4f2a6c02d471d406e50b73fcaeabd7998",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
+    "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py": "sha256:59015bcd72c9bae9e2aec8c60c7d1446d8689d58070896251ed31e197468ca88",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py": "sha256:ff7fcc2e4c6feff2c46535de498b59cbfd5c6dd37d5459ab725af7f9efd80262",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py": "sha256:545ef58b1347955fc66ce41a3814844b721e20f9d978d46d25bfac9b6f753ddf",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py": "sha256:2445854c5de516f53bca561a84a7cf0f9273e2cad3bf5556146b57f28ad36db0"
+  },
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "environment": {
+    "capabilities": {
+      "coq": {
+        "available": false,
+        "classification": "typed_optional_unavailable_at_capture",
+        "name": "coq",
+        "provisioning": "ipfs_datasets_py managed theorem-prover installer",
+        "required": false,
+        "version": ""
+      },
+      "cvc5": {
+        "available": true,
+        "name": "cvc5",
+        "provisioning": "ipfs_datasets_py managed theorem-prover installer",
+        "required": false,
+        "version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]"
+      },
+      "ducklake": {
+        "available": true,
+        "loaded": true,
+        "name": "ducklake",
+        "required_for_launch": false,
+        "version": "d8a1881e"
+      },
+      "lean": {
+        "available": true,
+        "name": "lean",
+        "provisioning": "ipfs_datasets_py managed theorem-prover installer",
+        "required": false,
+        "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
+      },
+      "quack": {
+        "available": true,
+        "loaded": true,
+        "name": "quack",
+        "required_for_launch": true,
+        "version": "c154811"
+      }
+    },
+    "duckdb_version": "1.5.5",
+    "pytest_version": "9.1.1",
+    "pytest_xdist_version": "3.8.0",
+    "python": {
+      "executable": "/usr/bin/python3.12",
+      "name": "python",
+      "sha256": "sha256:1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+      "version": "3.12.3"
+    }
+  },
+  "plan_revision": "PCTDD-PLAN-V1",
+  "proof_backends": {
+    "direct_cpython": {
+      "classification": "research_only",
+      "production_admitted": false
+    },
+    "groth16_binary": {
+      "classification": "real_backend_binary_present_unqualified",
+      "production_admitted": false,
+      "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding",
+      "sha256": "sha256:7cd14f8810fda8c16bf8a3b3ad02fda67b3c85ff0fc05883e21825781e33ce15"
+    },
+    "ordinary_inner_loop": "signed receipts permitted by explicit policy; ZK asynchronous",
+    "provekit": {
+      "classification": "adapter_source_present",
+      "production_admitted": false
+    },
+    "schema": "pctdd/zkp-backend-inventory@1",
+    "simulated": {
+      "classification": "simulated",
+      "production_admitted": false
+    }
+  },
+  "schema": "pctdd/dependency-source-seal@1",
+  "sources": [
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+      "head": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+      "name": "ipfs_accelerate_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "path": "external/ipfs_accelerate",
+      "tree": "c5ddd043de58349aafac0f9af03c1b018313623d"
+    },
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "name": "ipfs_datasets_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "path": "external/ipfs_datasets",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    {
+      "authority": true,
+      "dirty": false,
+      "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "name": "ipfs_kit_py",
+      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "path": "external/ipfs_kit",
+      "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+    }
+  ],
+  "status": "sealed"
+}

@@ -1,0 +1,25 @@
+{
+  "DirectExecutionProof": {
+    "does_not": "broader correctness",
+    "establishes": "declared machine/program/inputs executed"
+  },
+  "IncrementalCommitSeal": {
+    "does_not": "arbitrary repository correctness",
+    "establishes": "accepted parent plus complete valid changed/reused units"
+  },
+  "IntegrityCommitment": {
+    "does_not": "execution or semantics",
+    "establishes": "exact bytes/digest/CID/Merkle inclusion"
+  },
+  "ReceiptAggregationZkProof": {
+    "does_not": "CPython execution and cannot exceed leaf evidence",
+    "establishes": "committed admitted receipt population satisfies circuit"
+  },
+  "SignedExecutionReceipt": {
+    "does_not": "independent faithful execution",
+    "establishes": "trusted issuer assertion under explicit verifier policy"
+  },
+  "legacy": "TestPassStatementV1 remains unchanged",
+  "production": "simulated or structural proof cannot be admitted",
+  "schema": "pctdd/proof-claim-matrix@1"
+}

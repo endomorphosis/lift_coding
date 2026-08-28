@@ -1,0 +1,20 @@
+{
+  "preserve": [
+    "canonical bytes",
+    "codec",
+    "multicodec",
+    "multihash",
+    "CID version",
+    "multibase",
+    "ordering",
+    "normalization"
+  ],
+  "rules": [
+    "CID is exact byte identity under a versioned profile",
+    "Git blob OID is memo lookup key only",
+    "filesystem metadata nominates a candidate only",
+    "chunk manifest does not replace raw full-stream CID",
+    "ordinary SHA-256 of one stream is not composed from independent chunk hashes"
+  ],
+  "schema": "pctdd/hash-identity@1"
+}
