@@ -6,1008 +6,239 @@
   "board_namespace": "proof-carrying-semantic-minification-v1",
   "goal_id": "PCSM-G200",
   "objective_id": "PCSM-017",
-  "status": "implemented",
+  "status": "implemented_non_promoted",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-017@current-head-expansion-request-selection-v1",
-  "observed_at": "2026-08-27T18:32:43Z",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-017@current-head-expansion-request-selection-v2",
+  "observed_at": "2026-08-28T02:02:05Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
-    "assurance_scope": "PCSM Python v1 ExpansionRequest / SemanticProjectionExpansionRequest@1 selection only",
+    "assurance_scope": "PCSM Python v1 ExpansionRequest selection only",
     "mutation": "receipt_only",
     "source_mutation": false,
-    "mutations_to_product_source": false,
     "changed_paths": [
       "artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json"
     ],
     "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json",
-    "predicted_proof_context_directory_not_written": "external/ipfs_datasets/ipfs_datasets_py/proof_context/",
-    "predicted_proof_context_directory_reason": "This task's admitted declared output is the receipt only. Existing accelerator DecisionContextExpansionRequest is selected in place. No competing ExpansionRequest schema, wrapper, or proof_context mutation was created.",
-    "implementation_delta": "receipt_only; reaffirm existing ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1 DecisionContextExpansionRequest as SemanticProjectionExpansionRequest@1 for Python v1; reuse EvidenceExpansionRequest, ContextCompletenessWitness, ContextSufficiencyClaim@1 / EXPANSION_REQUIRED, and ContextPack.expansion_required as companions; no new schema, owner, compiler, linker, or language scope"
+    "implementation_delta": "Select the existing accelerator DecisionContextExpansionRequest as the receipt-bound Python v1 SemanticProjectionExpansionRequest selection. No competing proof_context record, registered schema, wrapper, owner, compiler, linker, or language scope was created.",
+    "non_promotion_reason": "The required sealed pytest command cannot collect because its explicitly configured anyio plugin is unavailable. This receipt does not promote a source mutation or claim that unavailable test execution passed."
   },
   "evidence_legend": {
-    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
-    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
-    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used by this receipt.",
-    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+    "measured": "Observed directly from the bound source forest or sealed validation environment.",
+    "estimated": "Calculated approximation. No estimated result is used to support this selection.",
+    "simulated": "Deliberate deterministic fixture exercise; it is not production evidence or a replacement for the required pytest suite.",
+    "unavailable": "A capability or result absent from the sealed environment; it is neither a zero nor a pass."
   },
   "current_tree_binding": {
+    "kind": "measured",
     "outer_repository": "endomorphosis/lift_coding",
-    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "owning_repository_for_receipts": "ipfs_accelerate_py",
-    "outer_commit": "e8e914b2460a95566a47395ab4ed597311eacf6e",
-    "outer_tree": "94af01abbd3a4cb82ce830e52437563e9b9509f3",
-    "outer_subject": "Reseal PCSM supervisor after landed-merge retrying completion",
+    "outer_commit": "2e026dedf55f06fab065b63c17a8eeccccc63f8b",
+    "outer_tree": "f7628ed2e5f16645039880fd479f40cfcb463490",
+    "outer_subject": "Seal four current-head blocked retries",
     "git_object_format": "sha1",
-    "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
-    "origin_main_is_ancestor": true,
-    "accelerator_planning_revision": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
-    "accelerator_planning_tree": "b1dd163fe6ad7ab52cb3639d05fcbc0fbe64ff84",
-    "accelerator_planning_revision_equals_origin_main": true,
-    "accelerator_planning_tree_equals_origin_main_tree": true,
-    "accelerator_planning_revision_is_ancestor_of_head": true,
-    "commits_after_origin_main": 90,
-    "dispatch_tree_id": "e8e914b2460a95566a47395ab4ed597311eacf6e",
-    "dispatch_tree_id_equals_outer_commit": true,
-    "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
-    "evidence_kind": "measured",
-    "gitlinks": {
+    "admitted_gitlinks": {
       "Mcp-Plus-Plus": {
-        "repository": "endomorphosis/Mcp-Plus-Plus",
-        "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
-        "authority_role": "wire_contract_only",
         "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
         "tree": "61776431577f0c276546f25e4178a47a64007180",
-        "superproject_gitlink": "31096be86103f29faef80a01e03d09b1ad7345c6",
-        "configured_origin_main": "31096be86103f29faef80a01e03d09b1ad7345c6",
-        "configured_origin_main_is_ancestor": true,
-        "scheduler_planning_revision": "31096be86103f29faef80a01e03d09b1ad7345c6",
-        "scheduler_planning_tree": "61776431577f0c276546f25e4178a47a64007180",
-        "scheduler_planning_revision_matches_head": true,
-        "scheduler_planning_tree_matches_head": true,
-        "clean_at_observation": true,
-        "evidence_kind": "measured"
+        "authority_role": "wire_contract_only"
       },
       "external/ipfs_accelerate": {
-        "repository": "endomorphosis/ipfs_accelerate_py",
-        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
-        "authority_role": "slice_route_model_budget_link_admission_and_validation",
-        "commit": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
-        "tree": "1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627",
-        "superproject_gitlink": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
-        "configured_origin_main": "024bf40a6c35735b84e7faff844f862dec63abf3",
-        "configured_origin_main_is_ancestor": true,
-        "configured_origin_main_tree": "a9ab7e480237608a30f3f73ba7ecc9575e05ff6d",
-        "configured_origin_main_tree_equals_planning_tree": false,
-        "prior_pcsm_004_origin_main_still_ancestor": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
-        "prior_pcsm_010_v3_commit_still_ancestor": "589229c87ff8dbfca43e95b8e6b8088ebbe34f24",
-        "scheduler_planning_revision": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
-        "scheduler_planning_tree": "1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627",
-        "scheduler_planning_revision_matches_head": true,
-        "scheduler_planning_tree_matches_head": true,
-        "clean_at_observation": true,
-        "evidence_kind": "measured"
+        "commit": "b9d3b6617cac193b06a50ce9e807772fe7ec86c3",
+        "tree": "01e2f3649db97c179c6e3d2c2d419e4e9c0b9e58",
+        "authority_role": "semantic expansion request, budget, typed decoding, and deterministic link admission"
       },
       "external/ipfs_datasets": {
-        "repository": "endomorphosis/ipfs_datasets_py",
-        "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
-        "authority_role": "canonical_semantic_identity",
         "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
         "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
-        "superproject_gitlink": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
-        "configured_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
-        "configured_origin_main_is_ancestor": true,
-        "configured_origin_main_tree": "7169c2a67929044a02350bc26d0a51c853a4981b",
-        "configured_origin_main_tree_equals_planning_tree": false,
-        "scheduler_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
-        "scheduler_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
-        "scheduler_planning_revision_matches_head": true,
-        "scheduler_planning_tree_matches_head": true,
-        "datasets_proof_context_current_head_handoff_commit_matches": true,
-        "clean_at_observation": true,
-        "evidence_kind": "measured"
+        "authority_role": "canonical semantic identity and proof-context ContextPack"
       },
       "external/ipfs_kit": {
-        "repository": "endomorphosis/ipfs_kit_py",
-        "origin": "https://github.com/endomorphosis/ipfs_kit_py",
-        "authority_role": "exact_bytes_cid_and_immutable_storage",
         "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
         "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
-        "superproject_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
-        "configured_origin_main": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
-        "configured_origin_main_is_ancestor": true,
-        "configured_origin_main_tree": "543ccd2bd78994d4e3d55cd44993ae6ca65e4c28",
-        "configured_origin_main_tree_equals_planning_tree": false,
-        "scheduler_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
-        "scheduler_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
-        "scheduler_planning_revision_matches_head": true,
-        "scheduler_planning_tree_matches_head": true,
-        "clean_at_observation": true,
-        "evidence_kind": "measured"
+        "authority_role": "exact bytes, CID, and immutable storage"
       }
     },
-    "excluded_gitlinks_not_admitted": [
-      {
-        "path": "external/meta-wearables-dat-android",
-        "superproject_gitlink": "4e56e1864a5e78194bababc3a68775c4196cbed0",
-        "admitted": false,
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/meta-wearables-dat-ios",
-        "superproject_gitlink": "2b5695d16a710f3d2d7341f88570b86d01723d50",
-        "admitted": false,
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "hallucinate_app",
-        "superproject_gitlink": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
-        "admitted": false,
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "swissknife",
-        "superproject_gitlink": "75931db15273786ecd579f1089ec5599b9ded352",
-        "admitted": false,
-        "evidence_kind": "measured"
-      }
-    ],
-    "freshness_rule": "Any changed outer commit/tree, admitted nested commit/tree/gitlink, dirty nested worktree, or scheduler source_binding planning identity invalidates this selection and requires a fresh receipt. Planning revisions are not runtime completion evidence. Datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b, accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d, and kit origin/main tree 543ccd2bd78994d4e3d55cd44993ae6ca65e4c28 are ancestor identities, not admitted planning trees.",
-    "freshness_evidence_kind": "measured",
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "12678901a40c170b5fdcae959d1fe3bbcb881b95ee787c2324aeff2bb65471a8",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false,
+      "planning_revisions_match_admitted_heads": true
+    },
     "freshness_check": {
       "kind": "measured",
-      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git status --porcelain=v1; git -C <gitlink> status --porcelain=v1; git merge-base --is-ancestor <configured origin/main> HEAD; compare nested HEAD/tree to scheduler source_binding planning revision/tree",
-      "result": "pass",
-      "meaning": "The outer tree and all four admitted nested worktrees were clean before this receipt was written. Each admitted nested commit equals the superproject gitlink and the scheduler planning revision; each nested tree equals the scheduler planning tree. Configured origin/main is an ancestor of each nested head. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for each admitted gitlink; git -C <root> rev-parse HEAD and HEAD^{tree}; and git status --porcelain=v1 for the outer repository and four admitted roots.",
+      "result": "The outer head/tree, all four superproject gitlinks, all nested heads/trees, and scheduler planning revisions agree. All five inspected worktrees were clean before this receipt write.",
+      "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, source digest, scheduler binding, or dirty admitted root requires a fresh receipt."
     },
-    "source_digest_continuity": {
+    "prior_receipt_rejection": {
       "kind": "measured",
-      "result": "first_pcsm_017_issuance; datasets_proof_context_and_sufficiency_bytes_unchanged_from_pcsm_010; nested_accelerate_gitlink_moved",
-      "prior_pcsm_017_receipt": "none",
-      "predecessor_receipts": [
-        "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v4",
-        "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v3",
-        "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v3",
-        "urn:pcsm:task-receipt:PCSM-003@current-head-inventory-v2",
-        "urn:pcsm:task-receipt:PCSM-004@current-head-canonical-versus-projection-boundary-v1",
-        "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v3"
-      ],
-      "nested_gitlinks_changed_versus_pcsm_010_v3": [
-        "external/ipfs_accelerate"
-      ],
-      "nested_gitlinks_unchanged_versus_pcsm_010_v3": [
-        "Mcp-Plus-Plus",
-        "external/ipfs_datasets",
-        "external/ipfs_kit"
-      ],
-      "selected_companion_source_bytes_unchanged_versus_pcsm_010_v3": [
-        "external/ipfs_datasets/ipfs_datasets_py/proof_context/__init__.py",
-        "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
-        "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
-        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
-        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/ast_ir.py",
-        "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
-        "external/ipfs_datasets/tests/proof_context/test_v01_provider.py",
-        "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
-        "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
-        "external/ipfs_datasets/tests/proof_context/test_install_profile.py"
-      ],
-      "outer_commit_moved": "Predecessor PCSM-010 v3 bound outer commit 57bf1084f9ca39a608dc43389a458b1fdf72a047 and tree 5e9330a8908767a6ab68061f7007cfe4ac1742fa. Current outer commit is e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3. Accelerator gitlink moved 589229c87ff8dbfca43e95b8e6b8088ebbe34f24 -> eaca0ddb028d754a8ab1f2030cbe060afd9a4837. Datasets, kit, and MCP++ gitlinks are unchanged from PCSM-010 v3. Datasets proof_context and sufficiency SHA-256/git-blob identities were re-hashed and matched PCSM-010 v3.",
-      "meaning": "This is the first PCSM-017 receipt. Predecessor G100/G200 receipts remain valid inventories/selections of their bound trees but are not current-head forest identity because the outer commit/tree, accelerator gitlink, and scheduler-config digest moved."
-    },
-    "pcsm_source_map": {
-      "status": "unavailable",
-      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID is present at this selection task. Related syntax-core maps, legal-IR maps, and accelerator AST spans are not substituted for a bound PCSM SourceLinkReceipt.",
-      "evidence_kind": "unavailable"
-    },
-    "stale_prior_receipt_rejected": {
-      "kind": "measured",
-      "prior_pcsm_017_artifact_identity": "none",
-      "predecessor_outer_commits_rejected_as_current_head": [
-        "4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d",
-        "1f7d0a9c10abbdefb1255e812df173a8e40f4d85",
-        "7c641864b2f224cd1cee906bce8eed7bee3d8360",
-        "baee33cad2cdad3c0c0aae059dc6e3e28301c83e",
-        "7e6f00774a53025d55904b71b0410a4f5c3f5fb3",
-        "57bf1084f9ca39a608dc43389a458b1fdf72a047"
-      ],
-      "result": "no_prior_pcsm_017_to_reject; predecessor_g100_g200_outer_identities_rejected_as_current_head",
-      "meaning": "No previously committed PCSM-017 receipt exists. Predecessor receipts remain valid inventories/selections of their bound trees but are not current-head forest identity for this task."
+      "status": "passed",
+      "rejected_receipt_identity": "urn:pcsm:task-receipt:PCSM-017@current-head-expansion-request-selection-v1",
+      "rejected_outer_commit": "e8e914b2460a95566a47395ab4ed597311eacf6e",
+      "rejected_outer_tree": "94af01abbd3a4cb82ce830e52437563e9b9509f3",
+      "reason": "The prior receipt bound a different outer commit/tree and accelerator gitlink; it is not current-head evidence for this task."
     }
   },
-  "policy_bindings": {
-    "scheduler_config": {
-      "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
-      "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
-      "sha256": "1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135",
-      "git_blob": "a23ef8d403283acfe4403d18f6d4f9db4f33799a",
-      "accepted_plan_revision_alias": "PCSM-PLAN-V1",
-      "source_binding_policy": {
-        "require_initialized_gitlinks": true,
-        "require_superproject_gitlink_equals_nested_head": true,
-        "require_clean_nested_worktree_at_task_start": true,
-        "require_origin_main_as_ancestor": true,
-        "changed_revision_requires_fresh_inventory_and_baseline": true,
-        "planning_revision_is_runtime_completion_evidence": false,
-        "record_recursive_repository_forest_at_launch": true
-      },
-      "authority_policy": {
-        "canonical_semantic_authority": "ipfs_datasets_py",
-        "exact_bytes_storage_authority": "ipfs_kit_py",
-        "orchestration_admission_authority": "ipfs_accelerate_py",
-        "duckdb_transactional_authority": true,
-        "ducklake_projection_authority": false,
-        "m2_or_m3_mutation_authority": false,
-        "m3_status": "experimental_advisory_only",
-        "model_or_advisor_output_is_completion_authority": false
-      },
-      "operational_control_plane": {
-        "duckdb_role": "authoritative transactional goals, tasks, lifecycle, CAS, fences, receipts, and event cursor",
-        "ducklake_role": "rebuildable non-authoritative append-only analytics projection",
-        "markdown_is_bootstrap_only": true,
-        "generated_runtime_artifacts_are_completion_authority": false
-      },
-      "pcsm_004_scheduler_digest_rejected_as_current": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
-      "pcsm_010_v1_scheduler_digest_rejected_as_current": "2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079",
-      "pcsm_010_v2_scheduler_digest_rejected_as_current": "9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced",
-      "pcsm_010_v3_scheduler_digest_rejected_as_current": "86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137",
-      "evidence_kind": "measured"
+  "contract_selection": {
+    "kind": "measured",
+    "named_contract": "SemanticProjectionExpansionRequest@1",
+    "selection_type": "receipt_bound_alias_not_a_second_registered_schema",
+    "selected_python_type": "ipfs_accelerate_py.agent_supervisor.context.decision_context.DecisionContextExpansionRequest",
+    "selected_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1",
+    "contract_version": 1,
+    "source": {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/decision_context.py",
+      "sha256": "fe29d9958fe0254b393034225dbebf777f88d0d43310642968429ab584f4ee83",
+      "git_blob": "cf3288762f1a2640d3b391cb3da4e4d44c03838e"
     },
-    "plan": {
-      "path": "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md",
-      "sha256": "5031a4e4588ef9f6589199f37e3551c5c059c25f7a04cbf9f3ec00f3f026ae0e",
-      "git_blob": "d76fbc8f9a37648c5ddbaa5b198223121b9d2231",
-      "evidence_kind": "measured"
+    "deterministic_identity": {
+      "content_id": "CanonicalContract CIDv1 computed from the closed payload",
+      "equivalent_request_id": "decision-context-expansion-equivalent SHA-256 over parent completeness witness, normalized question, reference id, and referenced content id",
+      "payload_binding": [
+        "parent_decision_request_id",
+        "parent_context_id",
+        "parent_completeness_witness_id",
+        "unresolved_question",
+        "expansion_handle at ContextTier.EXPANSION",
+        "DecisionContextExpansionBudget max_expansions/max_tokens/max_bytes/max_latency_ms",
+        "prior_request_ids",
+        "authority_id",
+        "semantic_graph_root_id",
+        "expansion_index",
+        "elapsed_latency_ms"
+      ],
+      "fixture_cidv1": "baguqeeratpcjoximahrinhyw2rq4jaz4b55gvghxy4ctsdxbccdh74c6oyvq",
+      "fixture_equivalent_request_id": "decision-context-expansion-equivalent:sha256:a338d46d1c8fd8f35e9637409e5e36df9ff2814813b989f4cd94d4fd864ac69f",
+      "fixture_evidence_kind": "simulated"
     },
-    "objectives": {
-      "path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
-      "sha256": "712c844b2a40856a677f5d7258d6bfdcb1f3ec08410e026922c93c4f6951121b",
-      "git_blob": "9f97656be213dc0f898701a04c851376b5eb6f16",
-      "dispatch_objective_revision_cid": "baguqeeraht5aroxxulbjeoyfmhbjo7hb7hxdy7cve65556fzea7ok2jcotra",
-      "dispatch_objective_revision_cid_source": "current implementation dispatch packet; not a git blob and not substituted for the file SHA-256",
-      "evidence_kind": "measured"
+    "companions": {
+      "budget": "DecisionContextExpansionBudget / ipfs_accelerate_py/agent-supervisor/decision-context-expansion-budget@1",
+      "handle": "ContextReference at ContextTier.EXPANSION / ipfs_accelerate_py/agent-supervisor/context-reference@1",
+      "datasets_insufficiency_evidence": "ContextSufficiencyClaim@1 with ContextSufficiencyState.EXPANSION_REQUIRED",
+      "datasets_context_pack_flag": "ContextPackRecord.expansion_required",
+      "evidence_paging_only": "EvidenceExpansionRequest; not selected as ExpansionRequest"
     },
-    "task_specification": {
-      "path": "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
-      "sha256": "63e745843899d95ac59e7080a2b744c87e7ac929871125d1b6efc8e392e4bfbe",
-      "git_blob": "a34f3b5773fc0a48b9665bc76e75f9e0a44fa682",
-      "evidence_kind": "measured"
-    },
-    "implementation_policy": {
-      "policy_id": "policy:implementation-daemon",
-      "policy_revision": "sha256:1f14452a6a09fd53d127d5b82174960db2bbc4ef06d5620a4ae54adff9fdc23c",
-      "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
-      "canonical_task_cid": {
-        "status": "unavailable",
-        "reason": "The current implementation dispatch packet does not include a canonical_task_cid. The database task projection contains baguqeeravik6msftwaidryxvqqb2y6evm7gkeqch5dbhrgvgtjhoymtpfa4a with projection_authority=false and is not substituted for dispatch or runtime completion evidence.",
-        "evidence_kind": "unavailable"
-      },
-      "accepted_plan_root_cid": {
-        "status": "unavailable",
-        "reason": "The current implementation dispatch packet does not include an accepted_plan_root_cid. The database task projection contains baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla with projection_authority=false and is not substituted for dispatch or runtime completion evidence.",
-        "evidence_kind": "unavailable"
-      },
-      "dependency_task_cid": {
-        "status": "unavailable",
-        "reason": "The current implementation dispatch packet does not include a dependency_task_cid. The database task projection lists baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa with projection_authority=false and is not substituted for dispatch or runtime completion evidence.",
-        "evidence_kind": "unavailable"
-      },
-      "source": "current implementation dispatch packet",
-      "evidence_kind": "measured"
-    },
-    "datasets_proof_context_current_head_handoff": {
-      "path": "artifacts/proof_carrying_semantic_minification/handoff/datasets-proof-context-current-head.json",
-      "sha256": "b57d70264e9557adb901db4e8ad147bad98204958ec5bf078be84bd6ad247326",
-      "git_blob": "f89a54f9ef7b14a5289cd8c6265b6107808d5727",
-      "bound_datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
-      "bound_datasets_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
-      "matches_admitted_datasets_gitlink": true,
-      "evidence_kind": "measured"
+    "authority_boundary": "ipfs_accelerate_py owns expansion request admission. ipfs_datasets_py retains canonical semantic identity and ContextPack authority. ipfs_kit_py retains exact byte/CID storage authority. A local PCSM selection name is never canonical identity.",
+    "minimum_delta_reason": "The existing request already binds affected decision/context/witness, a named unresolved fact or obligation, an expansion-tier handle, and an added-token ceiling. A new proof_context wrapper or schema would duplicate authority and exceeds the declared output boundary.",
+    "negative_selection": {
+      "kind": "measured",
+      "SemanticProjectionExpansionRequest_identifier_in_admitted_source": "absent",
+      "proof_context_defines_ExpansionRequest": false,
+      "meaning": "SemanticProjectionExpansionRequest@1 is not minted or registered as a second software-contract schema."
     }
   },
-  "expansion_request": {
-    "contract": "SemanticProjectionExpansionRequest@1",
-    "schema": "ipfs-accelerate.proof-carrying-semantic-minification.semantic-projection-expansion-request-selection@1",
-    "status": "selected_existing_authority",
-    "language_scope": "Python v1 only",
-    "confirmed": true,
-    "evidence_kind": "measured",
-    "selection": {
-      "decision": "reuse_existing_accelerator_decision_context_expansion_request_as_semantic_projection_expansion_request",
-      "owner": "ipfs_accelerate_py",
-      "owner_role": "semantic expansion requests, budget, typed decoding, and deterministic-link admission",
-      "selected_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1",
-      "selected_budget_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-budget@1",
-      "selected_handle_schema": "ipfs_accelerate_py/agent-supervisor/context-reference@1",
-      "selected_witness_schema": "ipfs_accelerate_py/agent-supervisor/context-completeness-witness@1",
-      "selected_records": [
-        "DecisionContextExpansionRequest",
-        "DecisionContextExpansionBudget"
-      ],
-      "contract_version": 1,
-      "expansion_tier": "expansion",
-      "cid": {
-        "version": 1,
-        "base": "base32",
-        "observed_content_id_prefix": "baguqeera",
-        "meaning": "DecisionContextExpansionRequest.content_id is a CanonicalContract CIDv1. equivalent_request_id is a local sha256: identity of parent witness, casefolded question, reference_id, and referenced_content_id; it is not a CID."
-      },
-      "plan_field_coverage": {
-        "missing_cid_fact_contract_span_counterexample_or_obligation": "expansion_handle ContextReference.referenced_content_id plus reference_id/kind/metadata; typed CEGAR counterexample, source-span, capsule, and test/proof expansion kinds are not separate fields",
-        "insufficiency_reason": "unresolved_question; must already be admitted in expansion_handle.metadata.unresolved_questions",
-        "affected_decision": "parent_decision_request_id, parent_context_id, parent_completeness_witness_id, authority_id, semantic_graph_root_id",
-        "added_token_ceiling": "DecisionContextExpansionBudget.max_tokens, intersected at expand time with parent decision budget and compiler effective_input_limit",
-        "bounds": "max_expansions, max_tokens, max_bytes, max_latency_ms, expansion_index, prior_request_ids",
-        "repeated_expansion_hash": "equivalent_request_id plus compiler usage ids; repeated equivalent expansion fails closed",
-        "precision_recall_false_positives_false_negatives": "not a field of this request record; deferred to PCSM-070/075/076 telemetry"
-      },
-      "identifier_status": {
-        "semantic_projection_expansion_request_string_in_nested_repositories": false,
-        "semantic_projection_expansion_request_registered_as_software_contract_schema": false,
-        "decision_context_expansion_request_present_in_accelerator": true,
-        "meaning": "SemanticProjectionExpansionRequest@1 is a receipt-bound selection alias of ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1. It is not a second registered schema and is not present as an identifier in the four nested repositories."
-      },
-      "covers": [
-        "named unresolved question bound to one admitted expansion handle",
-        "parent decision, context, completeness witness, authority, and semantic-graph root binding",
-        "token, byte, count, and latency ceilings",
-        "deterministic equivalent-request identity and repeated-expansion rejection",
-        "expansion-tier ContextReference with repository/tree/content identity",
-        "CIDv1 content identity for the request and budget records"
-      ],
-      "does_not_cover": [
-        "datasets-owned missing-CID/fact identity independent of the accelerator handle",
-        "typed source-span, capsule, counterexample, or test/proof expansion kinds",
-        "precision/recall/false-positive/false-negative expansion telemetry",
-        "CEGAR paging, nonconvergence quarantine, or full-source fallback policy",
-        "ProofCarryingSemanticProjection@1 or SourceLinkReceipt@1",
-        "M2/M3 mutation or model-output-as-request authority",
-        "ContextPack construction or DatasetsProofContextProvider@0.1"
-      ],
-      "authoritative_chain": {
-        "order": [
-          "canonical_semantic_cid",
-          "local_projection_alias",
-          "typed_output",
-          "canonical_semantic_cid",
-          "exact_current_tree_node_or_span"
-        ],
-        "statement": "A local alias is never canonical identity. ExpansionRequest identity is the accelerator DecisionContextExpansionRequest CIDv1. The missing fact itself remains datasets-owned semantic CID or kit-verified bytes referenced by the handle. Accelerator expansion does not mint canonical semantic identity.",
-        "source": "PCSM-004 CanonicalVersusProjectionAuthorityBoundary@1 plus current-head plan ownership of semantic expansion requests by ipfs_accelerate_py",
-        "evidence_kind": "measured"
-      }
-    },
-    "current_sources": [
-      {
-        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/decision_context.py",
-        "sha256": "fe29d9958fe0254b393034225dbebf777f88d0d43310642968429ab584f4ee83",
-        "git_blob": "cf3288762f1a2640d3b391cb3da4e4d44c03838e",
-        "role": "selected_expansion_request_schema_owner",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
-        "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece",
-        "git_blob": "fea50c565815772b7e80401d038a92b9ec6489e2",
-        "role": "expand_decision_context_and_evidence_expansion_request",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_contracts.py",
-        "sha256": "d846e6f41df97541ecd7ab5fab959f9a9211b40c6ee6db7cc83ccc5d7f27b401",
-        "git_blob": "9828bbfd5cd0478bed92642a6cb15cb2d23d23b4",
-        "role": "expansion_tier_context_reference",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
-        "sha256": "6a8a72bb02f0ad21eb355d8a48e143f0a06db30fc93eb52dde38f015da01965c",
-        "git_blob": "77a4ba670303ac9c2a5ffe0fbfc1c7e9260d371e",
-        "role": "datasets_expansion_required_sufficiency_companion_not_request",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/audit_contracts.py",
-        "sha256": "de7d8884494c6fd1d5fe2864c8da969036967cc3722fd5d0eac5dc04f9c6cd78",
-        "git_blob": "89c4ed8c871a6d9e3f3913b0377d876550ea81be",
-        "role": "context_sufficiency_claim_schema_not_request",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/base.py",
-        "sha256": "26138d5d12e1f98fee502bc84d24af2e5dbab82239c2ba000c808187a4559063",
-        "git_blob": "4d1a12383f016d1583f7c067a7f42ad88e27e575",
-        "role": "expansion_required_sufficiency_state_not_request",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
-        "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
-        "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
-        "role": "context_pack_expansion_required_flag_not_request",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py",
-        "sha256": "ccd9ab6e5cde8c92d3dd5c9c8f841bd52298e699e88eb9c01eda437d090fd8fd",
-        "git_blob": "7a3e27951efb540aafd80f878804c2b5a425d301",
-        "role": "expansion_required_packs_are_not_successful_outcomes",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/__init__.py",
-        "sha256": "564935b52acfe63e7ef3240956e9da173c830e990dd727ec4bda8a81a1ccb87a",
-        "git_blob": "f824876a69c9d027f24bbae1d7c21c3ec729a3cf",
-        "role": "datasets_proof_context_port_not_expansion_request",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
-        "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182",
-        "git_blob": "8e738fa2d21eba5db7258d3c630f550c5cb8be51",
-        "role": "datasets_proof_context_port_not_expansion_request",
-        "evidence_kind": "measured"
-      },
-      {
-        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/ast_ir.py",
-        "sha256": "1461edb7c39f2adc89a70e54decfa291ccceafc50ed23011fbdeea5acb4c8b91",
-        "git_blob": "80a3ad611faec496b04559f8b54eb768841ecd90",
-        "role": "pcsm_010_canonical_code_ir_selection_unchanged",
-        "evidence_kind": "measured"
-      }
-    ],
-    "sealed_interpreter_identity_checks": {
-      "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=$ipfs-accelerate-validation-home-* PYTHONNOUSERSITE=1 PYTHONPATH=external/ipfs_accelerate /usr/bin/python3.12 importing DecisionContextExpansionRequest, DecisionContextExpansionBudget, ContextReference, EvidenceExpansionRequest, and datasets proof_context/sufficiency constants",
-      "expansion_request_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1",
-      "expansion_budget_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-budget@1",
-      "context_reference_schema": "ipfs_accelerate_py/agent-supervisor/context-reference@1",
-      "completeness_witness_schema": "ipfs_accelerate_py/agent-supervisor/context-completeness-witness@1",
-      "contract_version": 1,
-      "expansion_tier": "expansion",
-      "datasets_proof_context_schema": "ipfs-datasets.proof-context.v0.1",
-      "datasets_proof_context_interface": "DatasetsProofContextProvider@0.1",
-      "proof_context_has_expansion_request": false,
-      "sufficiency_evaluator_schema": "ipfs-datasets.software-contracts.semantic-governor-sufficiency-evaluator@1",
-      "sufficiency_state_expansion_required": "expansion_required",
-      "get_schema_version_semantic_projection_expansion_request": "SchemaVersionError unknown shared schema: SemanticProjectionExpansionRequest@1",
-      "empty_unresolved_question": "DecisionContextExpansionError expansion requires a named unresolved question",
-      "wrong_handle_tier": "DecisionContextExpansionError expansion handle must use the expansion tier",
-      "forged_content_id": "DecisionContextBindingError expansion request identity mismatch",
-      "forged_equivalent_request_id": "DecisionContextBindingError equivalent expansion request identity mismatch",
-      "unknown_field": "DecisionContextError decision-context expansion request contains unsupported fields; rebuild its canonical payload",
-      "zero_expansion_index": "DecisionContextError expansion_index must be a positive integer",
-      "empty_evidence_reference_ids": "MissingContextReferenceError an evidence expansion request requires a reference ID",
-      "budget_json_roundtrip": true,
-      "request_json_roundtrip": true,
-      "sample_request_content_id": "baguqeeratyygvm6hnviknozqk3wl5ke7shlyncdidfzyymje5vehzax7hnia",
-      "sample_budget_content_id": "baguqeeraes62g6acx2p4nq7kmrepn53oecviir6hxvreh7fip5zcfdfbrg6q",
-      "sample_identity_note": "These CIDv1 values are sealed-interpreter identities of a synthetic in-process request/budget used to exercise CanonicalContract hashing. They are not stored kit artifacts and are not a PCSM receipt CID.",
+  "source_inventory": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+      "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece",
+      "git_blob": "fea50c565815772b7e80401d038a92b9ec6489e2",
+      "role": "expansion admission and EvidenceExpansionRequest companion",
       "evidence_kind": "measured"
     },
-    "negative_assertions": [
-      "SemanticProjectionExpansionRequest@1 is not a second registered software-contract schema.",
-      "The identifier SemanticProjectionExpansionRequest is absent from Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit.",
-      "ipfs_datasets_py.proof_context is DatasetsProofContextProvider@0.1 / ContextPack authority, not ExpansionRequest.",
-      "ContextPack.expansion_required and ContextSufficiencyState.EXPANSION_REQUIRED are insufficiency flags, not the request record.",
-      "EvidenceExpansionRequest is a simpler progressive-disclosure companion and is not the selected SemanticProjectionExpansionRequest.",
-      "A local projection alias, DuckLake row, Markdown board row, model output, M2 result, or M3 result is not an ExpansionRequest.",
-      "Kit stores expansion bytes and verifies CIDv1; it does not own the request schema.",
-      "MCP++ proof-context schemas are wire_contract_only and do not define ExpansionRequest.",
-      "M2 SOUND_SEMANTIC_ABSTRACTION may plan expansion; mutation still requires exact M1 expansion and is not granted by this request record.",
-      "This receipt creates no competing owner, proof_context wrapper, compiler, CEGAR pager, or language-scope expansion."
-    ]
-  },
-  "existing_equivalents": [
     {
-      "system": "Accelerator decision-context expansion request",
-      "disposition": "selected_as_semantic_projection_expansion_request",
-      "authority": "ipfs_accelerate_py",
-      "interfaces": [
-        "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1",
-        "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-budget@1",
-        "DecisionContextExpansionRequest",
-        "DecisionContextExpansionBudget"
-      ],
-      "finding": "DecisionContextExpansionRequest is a frozen CanonicalContract. It names a parent decision/context/completeness witness, a named unresolved question, an expansion-tier ContextReference, and a four-limit budget. expand_decision_context binds the exact parent, admits only the original-closure handle and question, intersects token/byte/count/latency ceilings, rejects repeated equivalent_request_id hashes and omitted prior_request_ids, and emits a delta retry capsule rather than a full replay. This is the selected ExpansionRequest authority. The identifier SemanticProjectionExpansionRequest@1 remains unregistered and absent from nested source.",
-      "reuse_decision": "Select this schema as SemanticProjectionExpansionRequest@1. Do not fork a second request record in datasets proof_context."
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+      "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+      "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+      "role": "ContextPack and expansion_required companion",
+      "evidence_kind": "measured"
     },
     {
-      "system": "Accelerator evidence expansion request",
-      "disposition": "reuse_as_companion_not_selected_record",
-      "authority": "ipfs_accelerate_py",
-      "interfaces": [
-        "EvidenceExpansionRequest"
-      ],
-      "finding": "EvidenceExpansionRequest is a smaller question-plus-reference-ids progressive-disclosure type. It requires at least one reference ID. It has no parent witness, budget, equivalent-request hash, or CIDv1 schema marker.",
-      "reuse_decision": "Reuse as a companion for evidence-value paging. Do not promote it to SemanticProjectionExpansionRequest@1."
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
+      "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182",
+      "git_blob": "8e738fa2d21eba5db7258d3c630f550c5cb8be51",
+      "role": "DatasetsProofContextProvider contract boundary",
+      "evidence_kind": "measured"
     },
     {
-      "system": "Accelerator context completeness witness and expansion-tier handle",
-      "disposition": "reuse_as_parent_and_handle_components",
-      "authority": "ipfs_accelerate_py",
-      "interfaces": [
-        "ipfs_accelerate_py/agent-supervisor/context-completeness-witness@1",
-        "ipfs_accelerate_py/agent-supervisor/context-reference@1",
-        "ContextTier.EXPANSION"
-      ],
-      "finding": "ContextCompletenessWitness lists expansion_reference_ids. ContextReference at tier expansion carries referenced_content_id, repository_id, tree_id, and metadata including unresolved_questions. The selected request must use that handle; a forged or evidence-tier handle fails closed.",
-      "reuse_decision": "Reuse as the admitted missing-fact handle and parent completeness binding. Do not treat the witness as the request."
-    },
-    {
-      "system": "Datasets context sufficiency claim",
-      "disposition": "reuse_as_datasets_insufficiency_companion_not_request",
-      "authority": "ipfs_datasets_py",
-      "interfaces": [
-        "ContextSufficiencyClaim@1",
-        "ipfs-datasets.software-contracts.semantic-governor-context-sufficiency-claim@1",
-        "evaluate_context_sufficiency@1",
-        "ContextSufficiencyState.EXPANSION_REQUIRED"
-      ],
-      "finding": "evaluate_context_sufficiency emits a CID-bound ContextSufficiencyClaim. Opaque critical dependencies, missing proof/test/schema/fixture/config, budget truncation, unresolved invalidation, and low confidence force expansion_required. A verification pass is never sole sufficiency authority. This names why expansion is required; it is not the accelerator request that names the missing handle, affected decision, and token ceiling.",
-      "reuse_decision": "Reuse as datasets-owned insufficiency evidence. Do not relocate ExpansionRequest into sufficiency.py."
-    },
-    {
-      "system": "Datasets ContextPack expansion_required flag",
-      "disposition": "do_not_treat_as_expansion_request",
-      "authority": "ipfs_datasets_py",
-      "interfaces": [
-        "DatasetsContextPackAuthority@0.1",
-        "ContextPackRecord.expansion_required",
-        "DatasetsSemanticOutcome@0.1"
-      ],
-      "finding": "ContextPackRecord.expansion_required is true when sufficiency_state is not sufficient. require_sufficient raises InsufficientContextError for expansion-required packs. proof_context exposes no ExpansionRequest type.",
-      "reuse_decision": "Leave proof_context unchanged. ExpansionRequest remains the accelerator decision-context request."
-    },
-    {
-      "system": "Accelerator semantic-governor expansion loop",
-      "disposition": "reuse_as_routing_audit_not_request",
-      "authority": "ipfs_accelerate_py",
-      "interfaces": [
-        "GovernorMetricsCollector@1",
-        "expanded attempt contracts"
-      ],
-      "finding": "Semantic-governor expansion-loop and expanded-attempt contracts bound retries, tokens, and never-accept expanded production. They do not define SemanticProjectionExpansionRequest fields.",
-      "reuse_decision": "Reuse for later PCSM-070 telemetry. Do not select them as the request schema."
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_governor/sufficiency.py",
+      "sha256": "6a8a72bb02f0ad21eb355d8a48e143f0a06db30fc93eb52dde38f015da01965c",
+      "git_blob": "77a4ba670303ac9c2a5ffe0fbfc1c7e9260d371e",
+      "role": "ContextSufficiencyClaim and EXPANSION_REQUIRED companion",
+      "evidence_kind": "measured"
     }
   ],
-  "version_and_cid_controls": {
-    "schema_bound": true,
-    "current_tree_bound": true,
-    "content_addressing_bound": true,
-    "relevant_controls": [
-      "Selected ExpansionRequest identity is DecisionContextExpansionRequest CIDv1 under CanonicalContract.",
-      "equivalent_request_id hashes parent completeness witness, casefolded question, reference_id, and referenced_content_id.",
-      "from_dict rejects forged content_id, forged equivalent_request_id, unknown fields, empty questions, non-expansion handles, and non-positive expansion_index.",
-      "expand_decision_context rejects unadmitted/cross-boundary handles, omitted prior lineage, repeated equivalent hashes, and each budget axis.",
-      "A local projection alias is never substituted for a canonical semantic CID of the missing fact.",
-      "Kit remains exact-byte/CID storage authority for resolved expansion bytes and does not own this schema.",
-      "get_schema_version('SemanticProjectionExpansionRequest@1') fails closed."
-    ],
-    "sample_request_cid": {
-      "status": "measured_synthetic_in_process",
-      "content_id": "baguqeeratyygvm6hnviknozqk3wl5ke7shlyncdidfzyymje5vehzax7hnia",
-      "budget_content_id": "baguqeeraes62g6acx2p4nq7kmrepn53oecviir6hxvreh7fip5zcfdfbrg6q",
-      "meaning": "Sealed-interpreter CanonicalContract identity of a synthetic request/budget used to prove CIDv1 binding. Not a kit-stored expansion artifact and not this receipt's CID.",
-      "evidence_kind": "measured"
-    },
-    "receipt_cid": {
-      "status": "unavailable",
-      "reason": "ipfs was absent from the sealed validation PATH and no admitted immutable receipt-store write was available. A SHA-256 string is not substituted for a CID.",
-      "evidence_kind": "unavailable"
-    }
-  },
-  "minimum_versioned_delta": {
-    "status": "receipt_bound_selection_only",
-    "named_contract": "SemanticProjectionExpansionRequest@1",
-    "selected_existing_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1",
-    "reason": "The plan requires an ExpansionRequest that names the missing CID/fact/contract/span/counterexample/obligation, insufficiency reason, affected decision, and added-token ceiling, and it assigns semantic expansion requests to ipfs_accelerate_py. DecisionContextExpansionRequest already provides those bindings plus budget and repeated-hash rejection. Naming that existing schema as SemanticProjectionExpansionRequest@1 in this receipt is the smallest Python v1 delta. Implementing a proof_context wrapper or new datasets schema would duplicate authority, contradict accelerate ownership, and exceeds declared outputs.",
-    "reuse_first_decision": {
-      "expansion_request": "select DecisionContextExpansionRequest / decision-context-expansion-request@1",
-      "budget": "select DecisionContextExpansionBudget / decision-context-expansion-budget@1",
-      "handle": "reuse ContextReference at ContextTier.EXPANSION",
-      "parent_completeness": "reuse ContextCompletenessWitness",
-      "insufficiency_evidence": "reuse ContextSufficiencyClaim@1 EXPANSION_REQUIRED",
-      "context_pack_flag": "reuse ContextPackRecord.expansion_required; do not promote",
-      "proof_context": "leave unchanged; it is ContextPack authority",
-      "typed_span_capsule_counterexample_test_proof_kinds": "defer to PCSM-070 through PCSM-074",
-      "refinement_nonconvergence_telemetry": "defer to PCSM-075 and PCSM-076"
-    },
-    "required_follow_on_tasks": [
-      "PCSM-018",
-      "PCSM-070",
-      "PCSM-071",
-      "PCSM-072",
-      "PCSM-073",
-      "PCSM-074",
-      "PCSM-075",
-      "PCSM-076"
-    ],
-    "non_promotion_effect": "No PCSM projection builder, CEGAR pager, source linker, alias dictionary, or automatic mutation is admitted by this task.",
-    "evidence_kind": "measured"
-  },
-  "coverage": {
+  "test_and_validation_evidence": {
     "positive_and_negative_test_sources": [
       {
         "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_decision_context_delta.py",
         "sha256": "f0504b3e13c143273dc5cb60e3d6c5f85d5da237a49d057de1500f62281d7e19",
         "git_blob": "0575f74b679c66cc14ca5d7a7397c6686b024c4d",
         "coverage": [
-          "question-bound expansion is delta-only, reconstructs parent, and JSON-roundtrips",
-          "repeated equivalent expansion fails closed",
-          "unrelated question, unadmitted/cross-boundary handle, and repository/authority drift fail closed",
-          "count, token, byte, and latency budgets each fail closed"
+          "question-bound expansion is delta-only and JSON-round-trips",
+          "repeated equivalent request, unrelated question, cross-boundary handle, repository/authority drift, and each budget limit fail closed"
         ],
-        "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
-      },
-      {
-        "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_evidence_value.py",
-        "sha256": "49fb60c040e0502c05fa0b283c16c0fcef49c624e26473f8df6a6c714e47744e",
-        "git_blob": "c4182ce090cb9593dcba5bccf12a40c10d1cddb4",
-        "coverage": [
-          "question-bound evidence expansion requires a named question and hash handle"
-        ],
-        "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
-      },
-      {
-        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_governor/test_sufficiency.py",
-        "sha256": "3ddb385957a21c3b98befaebac358ab3c7a90a0bef5d0e94be79df4cc682a674",
-        "git_blob": "abe8cc1e2abb4a61b534b08626a3220f4d15f651",
-        "coverage": [
-          "deterministic ContextSufficiencyClaim identity",
-          "opaque/missing-proof/unresolved-invalidation/budget/low-confidence gaps force expansion",
-          "verification pass is not sole sufficiency authority",
-          "stale and human-review precede expansion"
-        ],
-        "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+        "source_inventory_evidence_kind": "measured",
+        "execution_status": "unavailable_in_sealed_environment"
       },
       {
         "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
         "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
         "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
         "coverage": [
-          "identical inputs yield identical ContextPack CID",
+          "identical inputs yield an identical ContextPack CID",
           "stale, unavailable, and opaque wrong-tree inputs fail closed"
         ],
-        "note": "Required validation path. These tests cover ContextPack, not ExpansionRequest.",
-        "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
-      },
-      {
-        "path": "external/ipfs_datasets/tests/proof_context/test_v01_provider.py",
-        "sha256": "f3d15f7780ea3ffa561a21880ff4e26f65f096818e70c14d8e56ab01f65329b3",
-        "git_blob": "d9b32641e22d9fd026570907e79cfcceafa8c23a",
-        "coverage": [
-          "datasets v0.1 provider port"
-        ],
-        "note": "Required validation path. These tests cover the proof-context provider, not ExpansionRequest.",
-        "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
-      },
-      {
-        "path": "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
-        "sha256": "ea4ef0ee64e83b65238c18960c6e49aa071753252842cf57fd68a50ac6cf9892",
-        "git_blob": "fe531c0d76397442bc6a248131ec038d67338472",
-        "coverage": [
-          "datasets v0.1 semantic outcome records",
-          "expansion-required packs are not a successful semantic outcome"
-        ],
-        "note": "Required validation path. These tests do not define ExpansionRequest.",
-        "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
-      },
-      {
-        "path": "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
-        "sha256": "1a30652e469c5010acc895a62893e0c1fe590c4b6891ddc7794ce2e160a1b5e5",
-        "git_blob": "81319a0e160c88d064b8eea4f7e7d2952de6b666",
-        "coverage": [
-          "datasets proof-context assurance specification"
-        ],
-        "note": "Required validation path. These tests do not define ExpansionRequest.",
-        "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
-      },
-      {
-        "path": "external/ipfs_datasets/tests/proof_context/test_install_profile.py",
-        "sha256": "298b403794366cf76cb9615d007ae9ff91c4fd474f835ef33558272d9dca13d1",
-        "git_blob": "f55679341bdd5cc6ff0dbfaece0967ecc4effde3",
-        "coverage": [
-          "datasets proof-context install profile"
-        ],
-        "note": "Required validation path. These tests do not define ExpansionRequest.",
-        "evidence_kind": "measured_source_inventory",
-        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+        "source_inventory_evidence_kind": "measured",
+        "execution_status": "unavailable_in_sealed_environment"
       }
     ],
-    "required_validation_suite": {
-      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
-      "source_test_function_count": 189,
-      "covers_expansion_request": false,
-      "covers_context_pack_and_provider_port": true,
-      "execution": "unavailable_in_sealed_validation_environment"
-    },
-    "PCSM_specific_test_gap": {
-      "kind": "unavailable",
-      "statement": "No current-head test names SemanticProjectionExpansionRequest@1 because that identifier is a receipt-bound selection of decision-context-expansion-request@1 rather than a new schema. Adjacent DecisionContextExpansionRequest, EvidenceExpansionRequest, and ContextSufficiencyClaim tests already cover the selected contract and companions and are not relabeled as a new PCSM suite. Required proof_context tests cover ContextPack, not this selection."
-    }
-  },
-  "validation": {
-    "commands": [
-      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin python -m pytest -q external/ipfs_datasets/tests/proof_context",
-      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json"
-    ],
-    "required_command": {
-      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
-      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=$ipfs-accelerate-validation-home-* PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
-      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
-      "status": "unavailable",
-      "sealed_result": "python: command not found (exit 127). /usr/bin/python3.12 -m pytest with PYTHONNOUSERSITE=1 and a private validation HOME raises ImportError: Error importing plugin 'anyio.pytest_plugin': No module named 'anyio'.",
-      "provider_home_probe_excluded": "A run under operator HOME with user site-packages is not sealed-environment evidence and was not used as a passing result.",
-      "evidence_kind": "unavailable"
-    },
-    "json_parse_command": {
-      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json",
+    "simulated_contract_check": {
+      "kind": "simulated",
       "status": "passed",
-      "evidence_kind": "measured"
+      "command": "sealed /usr/bin/python3.12 with PYTHONNOUSERSITE=1, PYTHONDONTWRITEBYTECODE=1, and PYTHONPATH=external/ipfs_accelerate; construct a fixed DecisionContextExpansionRequest fixture",
+      "positive_assertions": [
+        "selected schema equals decision-context-expansion-request@1",
+        "JSON round-trip equality holds",
+        "to_record/from_dict preserves the computed CIDv1"
+      ],
+      "negative_assertions": [
+        "forged content_id raises DecisionContextBindingError",
+        "empty unresolved_question raises DecisionContextExpansionError",
+        "non-expansion-tier ContextReference raises DecisionContextExpansionError"
+      ],
+      "limitation": "This is a deterministic synthetic exercise and does not replace the required pytest suite."
     },
-    "positive_tests": [
-      {
-        "name": "nested gitlinks, heads, trees, and scheduler planning revisions agree",
-        "status": "passed",
-        "observed_roots": 4,
-        "also_checked": [
-          "nested worktrees clean",
-          "superproject gitlink equals nested head",
-          "scheduler planning revision equals nested head",
-          "scheduler planning tree equals nested tree",
-          "configured origin/main revision is an ancestor of each nested head",
-          "outer origin/main equals accelerator_planning_revision and is an ancestor of outer HEAD",
-          "outer origin/main tree equals accelerator_planning_tree",
-          "listed source SHA-256 and git blob identities match live files",
-          "datasets-proof-context-current-head handoff commit/tree equals admitted datasets gitlink"
-        ],
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "existing decision-context-expansion-request@1 is the selected ExpansionRequest authority",
-        "status": "passed",
-        "method": "Sealed PYTHONNOUSERSITE interpreter imported DECISION_CONTEXT_EXPANSION_REQUEST_SCHEMA=ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1, contract_version=1, ContextTier.EXPANSION=expansion, and DecisionContextExpansionRequest JSON round-trip equality.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "selected request names missing handle, insufficiency reason, affected decision, and token ceiling",
-        "status": "passed",
-        "method": "Read DecisionContextExpansionRequest fields parent_decision_request_id, parent_context_id, parent_completeness_witness_id, unresolved_question, expansion_handle, and budget.max_tokens/max_expansions/max_bytes/max_latency_ms. Plan paging sentence maps onto those existing fields.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "datasets proof_context and sufficiency companion bytes are unchanged from PCSM-010 v3",
-        "status": "passed",
-        "method": "Re-hashed proof_context/__init__.py, contracts.py, context_pack.py, sufficiency.py, ast_ir.py, and the five required proof_context test modules; SHA-256 and git blob identities matched PCSM-010 v3 even though the outer tree and accelerator gitlink moved.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "ContextSufficiencyState.EXPANSION_REQUIRED remains datasets insufficiency evidence",
-        "status": "passed",
-        "method": "Sealed import of ContextSufficiencyState listed expansion_required. evaluate_context_sufficiency@1 / semantic-governor-sufficiency-evaluator@1 remains the datasets companion, not the request schema.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "receipt is well-formed JSON under the sealed interpreter",
-        "status": "passed",
-        "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json",
-        "evidence_kind": "measured"
-      }
-    ],
-    "negative_tests": [
-      {
-        "name": "predecessor outer commits are not current-head forest identity",
-        "status": "passed",
-        "method": "Compared current outer commit e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3 against predecessor bindings 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, 1f7d0a9c10abbdefb1255e812df173a8e40f4d85, 7c641864b2f224cd1cee906bce8eed7bee3d8360, baee33cad2cdad3c0c0aae059dc6e3e28301c83e, 7e6f00774a53025d55904b71b0410a4f5c3f5fb3, and 57bf1084f9ca39a608dc43389a458b1fdf72a047; outer identities differed and were rejected as current-head forest identity.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "SemanticProjectionExpansionRequest@1 is not a registered software-contract schema",
-        "status": "passed",
-        "method": "Sealed get_schema_version('SemanticProjectionExpansionRequest@1') raised SchemaVersionError: unknown shared schema: SemanticProjectionExpansionRequest@1.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "SemanticProjectionExpansionRequest identifier absence in nested repositories",
-        "status": "passed",
-        "method": "Searched *.py, *.json, and *.md under Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit; SemanticProjectionExpansionRequest matched zero nested-repository files. CanonicalCodeIR, TaskSemanticSlice, ModelTokenCostProfile, ProjectionAliasDictionary, ProofCarryingSemanticProjection, SemanticIRPatchPlan, SemanticProjectionValidationReceipt, and SourceLinkReceipt also matched zero nested-repository files. ExpansionRequest matched only the four accelerator decision-context/evidence files listed above.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "proof_context is not ExpansionRequest",
-        "status": "passed",
-        "method": "proof_context/__init__.py and contracts.py expose ipfs-datasets.proof-context.v0.1 / DatasetsProofContextProvider@0.1 only. Sealed import showed no ExpansionRequest or SemanticProjectionExpansionRequest attribute. ContextPackRecord.expansion_required is a boolean flag.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "empty question, wrong-tier handle, forged identities, unknown fields, and empty evidence refs fail closed",
-        "status": "passed",
-        "method": "Sealed constructor/from_dict checks raised DecisionContextExpansionError for empty unresolved_question and evidence-tier handle; DecisionContextBindingError for forged content_id and equivalent_request_id; DecisionContextError for unknown fields and expansion_index=0; MissingContextReferenceError for EvidenceExpansionRequest with no reference IDs.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "datasets origin/main tree is not admitted planning-tree identity",
-        "status": "passed",
-        "method": "Configured datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b differs from admitted planning tree 6a186a24c424fdce0035033ebbf8a8476d96bbb7 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "accelerator origin/main tree is not admitted planning-tree identity",
-        "status": "passed",
-        "method": "Configured accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d differs from admitted planning tree 1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "kit origin/main tree is not admitted planning-tree identity",
-        "status": "passed",
-        "method": "Configured kit origin/main tree 543ccd2bd78994d4e3d55cd44993ae6ca65e4c28 differs from admitted planning tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "PCSM-004 and PCSM-010 scheduler digests are not current-head scheduler identity",
-        "status": "passed",
-        "method": "Predecessor scheduler SHA-256 values f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446, 2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079, 9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced, and 86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137 differ from current 1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135 and were rejected.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "forged nested tree identity rejection",
-        "status": "passed",
-        "method": "A same-length all-zero tree value was compared to the measured ipfs_kit tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and rejected as unequal.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "forged DecisionContextExpansionRequest source SHA-256 rejection",
-        "status": "passed",
-        "method": "A same-length all-zero digest was compared to the measured decision_context.py SHA-256 fe29d9958fe0254b393034225dbebf777f88d0d43310642968429ab584f4ee83 and rejected as unequal.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "excluded gitlinks are not admitted PCSM source roots",
-        "status": "passed",
-        "method": "Superproject gitlinks swissknife, hallucinate_app, external/meta-wearables-dat-android, and external/meta-wearables-dat-ios were observed and classified admitted=false.",
-        "evidence_kind": "measured"
-      },
-      {
-        "name": "provider-local pytest and formal tools are not accepted as sealed-environment evidence",
-        "status": "passed",
-        "method": "The authoritative PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin has no unqualified python, pytest CLI, z3, lean, lake, or ipfs. /usr/bin/python3.12 -m pytest under a private validation HOME with PYTHONNOUSERSITE=1 cannot import anyio. Operator-HOME user-site pytest success is excluded.",
-        "evidence_kind": "measured"
-      }
-    ],
-    "proof_results": {
-      "status": "not_selected",
-      "reason": "This receipt-only ExpansionRequest selection made no source mutation and no PCSM proof obligation was emitted. Absent optional provers remain unavailable rather than a passing proof result.",
-      "evidence_kind": "unavailable"
+    "required_validation": {
+      "kind": "unavailable",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "status": "unavailable",
+      "result": "pytest aborted before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "unqualified_python": "unavailable on the authoritative PATH",
+      "fail_closed_disposition": "No provider-home package or altered plugin configuration was treated as validation evidence."
+    },
+    "receipt_json_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json"
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only selection."
     }
-  },
-  "sealed_validation_environment": {
-    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-    "python_unqualified": "unavailable",
-    "python3": "/usr/bin/python3",
-    "python3_12": "/usr/bin/python3.12",
-    "python_version": "Python 3.12.3",
-    "git_path": "/usr/bin/git",
-    "git_version": "git version 2.43.0",
-    "toolchain_directories_writable": false,
-    "validation_home_prefix": "ipfs-accelerate-validation-home-",
-    "PYTHONNOUSERSITE": "1",
-    "evidence_kind": "measured",
-    "optional_capabilities": [
-      {
-        "capability": "pytest CLI and sealed pytest execution of external/ipfs_datasets/tests/proof_context",
-        "status": "unavailable",
-        "reason": "Unqualified python and pytest are absent from the sealed PATH. /usr/bin/python3.12 -m pytest under a private validation HOME with PYTHONNOUSERSITE=1 fails importing plugin anyio.pytest_plugin. A provider-local user-site pytest executable was intentionally excluded.",
-        "evidence_kind": "unavailable"
-      },
-      {
-        "capability": "IPFS CLI / receipt CID issuance",
-        "status": "unavailable",
-        "reason": "ipfs was absent from the sealed validation PATH. A SHA-256 string is not substituted for a CID.",
-        "evidence_kind": "unavailable"
-      },
-      {
-        "capability": "Z3 prover",
-        "status": "unavailable",
-        "reason": "z3 was absent from the sealed validation PATH; a provider-local z3 executable was intentionally excluded.",
-        "evidence_kind": "unavailable"
-      },
-      {
-        "capability": "Lean and Lake",
-        "status": "unavailable",
-        "reason": "lean and lake were absent from the sealed validation PATH; provider-local Elan tools were intentionally excluded.",
-        "evidence_kind": "unavailable"
-      }
-    ]
-  },
-  "evidence_classification": {
-    "measured": [
-      "Outer HEAD e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3.",
-      "Four admitted gitlinks, nested trees, clean nested worktrees, origin/main ancestor checks, and scheduler planning-revision/tree equality.",
-      "Four excluded gitlinks observed and classified not admitted.",
-      "Every listed SHA-256 and git blob identity, including current scheduler-config digest 1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135 and decision_context.py digest fe29d9958fe0254b393034225dbebf777f88d0d43310642968429ab584f4ee83.",
-      "Selected schema identifiers ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1, decision-context-expansion-budget@1, context-reference@1, and context-completeness-witness@1.",
-      "SemanticProjectionExpansionRequest@1 unregistered; identifier absent from the four nested roots.",
-      "Datasets proof_context and sufficiency source bytes unchanged from PCSM-010 v3 despite outer-tree and accelerator gitlink movement.",
-      "Sealed constructor/from_dict fail-closed behavior and CIDv1 round-trip of a synthetic request/budget.",
-      "Datasets, accelerator, and kit origin/main trees mismatch versus admitted planning trees, with origin/main still an ancestor.",
-      "Sealed PATH, Python 3.12.3, git 2.43.0, non-writable toolchain directories, PYTHONNOUSERSITE imports, and json.tool parse of this receipt.",
-      "Existing positive and negative test source declarations were directly inspected.",
-      "Dispatch policy_id, policy_revision, repository_id, and objective revision CID from the current implementation packet."
-    ],
-    "estimated": [],
-    "simulated": [],
-    "unavailable": [
-      "No new registered SemanticProjectionExpansionRequest@1 schema exists; the name is a receipt-bound selection of decision-context-expansion-request@1.",
-      "Typed source-span, capsule, counterexample, and test/proof expansion kinds remain deferred to PCSM-070 through PCSM-074.",
-      "Precision/recall/false-positive/false-negative expansion telemetry and nonconvergence quarantine remain deferred to PCSM-075/PCSM-076.",
-      "No emitted PCSM current-tree source-map artifact or source-map CID.",
-      "Required proof_context pytest suite is not runnable in the sealed validation HOME; operator-HOME user-site success is excluded.",
-      "No immutable receipt CID could be issued because ipfs was absent from the sealed PATH.",
-      "No external prover execution is claimed or required for a read-only selection.",
-      "No executed provider/model/tokenizer revision; configuration is not execution evidence.",
-      "canonical_task_cid, accepted_plan_root_cid, and dependency_task_cid were absent from the current implementation dispatch packet."
-    ]
   },
   "evidence_summary": {
-    "measured": {
-      "count": 12,
-      "description": "Current-head forest identities, source digests, selected expansion-request schema/producer identities, identifier absences, sealed-environment facts, and receipt-level positive/negative checks."
-    },
-    "estimated": {
-      "count": 0,
-      "description": "No estimates were used."
-    },
-    "simulated": {
-      "count": 0,
-      "description": "No simulations were used."
-    },
-    "unavailable": {
-      "count": 9,
-      "description": "Registered SemanticProjectionExpansionRequest schema string, typed paging kinds, expansion telemetry, source-map artifact, sealed pytest execution, optional provers, receipt CID issuance, provider/tokenizer execution identity, and dispatch packet task/plan CIDs absent from this attempt."
-    }
+    "measured": "Current-head source forest, gitlinks, source digests, schema/version/field bindings, source-test inventory, and sealed pytest capability failure.",
+    "estimated": "None.",
+    "simulated": "Fixed-request deterministic round-trip and fail-closed constructor checks only.",
+    "unavailable": "Required sealed pytest execution, formal-prover result, and a canonical storage CID for this self-describing receipt."
   },
   "limitations": [
-    "This artifact is a receipt-bound ExpansionRequest selection, not a semantic proof, promotion decision, source-link receipt, CEGAR pager, or projection builder.",
-    "SemanticProjectionExpansionRequest@1 is an alias of existing decision-context-expansion-request@1. It is not minted as a second schema and is not present as an identifier in nested source.",
-    "All source digests bind the exact tree above; freshness must be rechecked before any follow-on reuse.",
-    "The receipt intentionally records no estimated or simulated result.",
-    "The uncommitted receipt itself is not claimed as part of the pre-write sealed outer tree.",
-    "Independent supervisor admission remains required; worker completion is insufficient.",
-    "Declared output is the receipt only; proof_context/ was not mutated because a wrapper would duplicate the selected accelerator request authority and is outside this task's admitted edit set.",
-    "Required proof_context tests validate ContextPack/provider behavior, not this ExpansionRequest selection."
+    "SemanticProjectionExpansionRequest@1 is a receipt-bound selection name, not a registered schema and not a canonical identity.",
+    "The required proof_context suite could not collect in the authoritative environment because anyio is absent; its source tests are inventoried but not reported as executed.",
+    "No source-map artifact, projection builder, CEGAR pager, source-link receipt, or promotion decision is produced by this task.",
+    "The receipt's own canonical storage CID is unavailable: issuing one would change the self-describing payload. The selected contract CIDv1 is measured separately."
   ],
   "rollback": {
-    "destructive_effects": false,
-    "procedure": "Revert only this receipt and invalidate consumers of this ExpansionRequest selection; do not alter the inventoried source forest, protected policy documents, or unrelated source bytes, and do not reuse the receipt after its tree binding becomes stale."
-  },
-  "supervisor_acceptance": {
-    "state": "pending_independent_fenced_supervisor",
-    "completion_authoritative": false
-  },
-  "acceptance": {
-    "current_head_bound": true,
-    "deterministic_identity_checks": true,
-    "schema_version_bound": true,
-    "contract_blob_bound": true,
-    "cid_bound_where_available": true,
-    "cid_unavailability_explicit": true,
-    "positive_and_negative_tests_recorded": true,
-    "evidence_classes_distinguished": true,
-    "authority_boundaries_preserved": true,
-    "no_competing_authority_created": true,
-    "existing_authority_selected": true,
-    "expansion_request_selected": true,
-    "local_alias_is_not_canonical_identity": true,
-    "python_v1_only": true,
-    "promotion_status": "non_promoted_unmeasured"
+    "procedure": "Revert only this receipt and invalidate consumers of this selection. Do not alter the inventoried source forest or protected policy documents.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, source digest, or scheduler binding changes."
   }
 }
