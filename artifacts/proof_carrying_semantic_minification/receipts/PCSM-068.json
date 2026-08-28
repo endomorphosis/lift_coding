@@ -1,0 +1,255 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-068",
+  "title": "Integrate theorem-prover admission",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-068",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-068@current-head-theorem-prover-admission-capability-assessment-v1",
+  "observed_at": "2026-08-28T15:34:59Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 theorem-prover-admission capability assessment for the exact current admitted source forest",
+    "language": "Python",
+    "language_version": "3.12",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-068.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-068.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "implementation_delta": "The current datasets head already provides a versioned optional external-prover installer with reviewed target versions and a read-only managed-version status probe. It also provides Leanstral's explicitly non-mutating LegalIR shadow lane, which rejects absent Lean executables and validates only its own LegalIR task/proposal contract. Neither component admits a PCSM theorem obligation: neither consumes a canonical PCSM SourceLinkReceipt/source-map CID nor binds a current PCSM file/node/span, theorem text, tool deployment digest, kernel output, or closed PCSM admission decision. The exact-output authority permits only this receipt, so no wrapper, downloader, source-map authority, test relaxation, or parallel prover subsystem was created.",
+    "non_promotion_reason": "Every managed native prover and Python solver binding is absent in the authoritative sealed environment. The required PCSM datasets suite cannot load its configured anyio plugin, and its non-plugin collection reaches a second missing dependency, multiformats. The passing focused installer tests are mocked contract tests and cannot establish a real prover deployment or PCSM admission. No canonical PCSM source map, source-bound obligation, digest-bound deployment, kernel receipt, or package-specific PCSM admission test exists. This receipt therefore records a typed honest unavailable/non-promotion disposition."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish source identity, tool deployment, proof, validation success, or promotion.",
+    "simulated": "A controlled test or fixture exercise; it establishes only the exercised contract behavior and never replaces a sealed source-bound proof.",
+    "unavailable": "A required identity, capability, dependency, contract, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "9d2bdcf98ceac55adea24d39157115346d9e403e",
+    "outer_tree": "6e134118c2cd29ca469fe1ae0fca28e00ac54fa0",
+    "dispatch_tree_id": "9d2bdcf98ceac55adea24d39157115346d9e403e",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "objective_revision": "baguqeerahjvjal7sa5zgw7pkuk3hrfi2jkitsddsas6ljcmwm52n7pyci6na",
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no theorem-prover admission authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "PCSM orchestration and selected verification boundary; no current source-map-bound theorem-prover admission component found"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "current Python-v1 optional solver installer, LegalIR shadow lane, and datasets proof-context contract authority"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no theorem-prover admission authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed_with_capability_and_validation_blockers",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared all admitted gitlinks with nested HEAD and HEAD^{tree}; checked outer and nested porcelain before receipt creation; recorded selected Git blobs and SHA-256 values; inspected datasets proof-context, optional solver, and Leanstral contracts; searched exact PCSM implementation/test roots for SourceMapResolver, SourceLinkReceipt, and source-map identity; probed native executables, Python solver modules, and managed solver status under the prescribed PATH, Python 3.12, and fresh private HOME/XDG roots; and ran required plus focused validation in that environment.",
+      "result": "The dispatch commit equals outer HEAD, every recorded nested commit/tree pair equals its checked-out head, and inspected worktrees were clean before this receipt write. The solver installer is current and declares managed versions, but all fourteen reported solver capabilities are missing in the sealed environment. The datasets proof-context port has no theorem-prover capability in its closed v0.1 contract, and no canonical PCSM source-map contract or admission implementation was found.",
+      "invalidates_on": "Any bound commit/tree, gitlink head/tree, scheduler digest, listed source/test digest, solver target/deployment, proof-context or admission contract, source-map capability, or validation result change requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt, SourceMapResolver@1, or canonical source-map CID resolves exact PCSM file/node/span identities in the named datasets or accelerator roots. Git trees, blobs, SHA-256 values, local executable names, solver target versions, LegalIR task IDs, and installer status rows are not falsely relabelled as this missing contract."
+    }
+  },
+  "selected_existing_authorities": {
+    "kind": "measured",
+    "minimum_delta_reason": "The datasets solver installer is the only located current-head component that inventories versioned external theorem-prover targets without downloading or changing them. Leanstral is the only located component that invokes Lean, but it is expressly a non-mutating LegalIR shadow lane. Reusing their evidence, rather than creating an adapter across their distinct domains, is the smallest authority-preserving result for this receipt-only dispatch.",
+    "components": [
+      {
+        "component": "ipfs_datasets_py.logic.integration.bridges.prover_installer.managed_solver_version_status@current-head",
+        "role": "Read-only status probe for optional managed solver targets: TLC, Apalache, Tamarin, Maude, ProVerif, cvc5, Vampire, E prover, Lean, Rocq, Isabelle, Z3, SymbolicAI, and ErgoAI.",
+        "version_binding": "Managed targets include Lean v4.31.0, Rocq 9.1.1, Isabelle2025-2, cvc5 1.3.3, Vampire 5.0.1, E prover 3.2.5, and Z3 >=4.12.0,<5.0.0. These are installer compatibility targets, not an installed deployment digest or proof receipt.",
+        "authority_boundary": "The probe reports availability/version drift and performs no download, theorem construction, source-map resolution, proof checking, PCSM admission, mutation, completion, or promotion."
+      },
+      {
+        "component": "ipfs_datasets_py.logic.modal.leanstral.validate_leanstral_proposal@current-head",
+        "role": "LegalIR-only shadow proposal validator that checks an explicitly supplied Lean executable, runs a temporary Lean file, and validates its own Python patch proposal contract.",
+        "version_binding": "Leanstral proposal and task schemas are its own LegalIR contracts; no PCSM theorem-obligation schema, source-map CID, current-forest request CID, deployment digest, or kernel-receipt schema is exposed.",
+        "authority_boundary": "Its configuration is explicitly non-mutating and its result is a shadow-lane validation. It does not select a PCSM source identity, admit an M2/M3 mutation, convert a model proposal or process exit code into proof authority, or authorize completion/promotion."
+      },
+      {
+        "component": "ipfs_datasets_py.proof_context.contracts.DatasetsProofContextProvider@0.1",
+        "role": "Closed datasets proof-context port vocabulary for semantic index, capsule, context-pack, sufficiency, and semantic-state assembly.",
+        "version_binding": "ipfs-datasets.proof-context.v0.1 / DatasetsProofContextProvider@0.1.",
+        "authority_boundary": "The declared canonical capabilities omit theorem-prover admission, source-link/source-map resolution, theorem obligations, kernel receipts, and promotion authority."
+      }
+    ],
+    "determinism_and_authority_boundary": {
+      "kind": "measured",
+      "binding": "managed_solver_version_status deterministically enumerates a fixed ordered solver catalog and reports executable/version presence without installation. The current focused test suite exercises success and failure paths with monkeypatched installers; those tests are simulated contract evidence only. No deterministic PCSM theorem admission CID can be produced without a PCSM source map, source-bound theorem obligation, and installed digest-bound checker.",
+      "boundary": "No local alias, model output, installer result, executable lookup, process return code, fixture, or test result is accepted as canonical semantic identity, proof, M2/M3 mutation authority, completion authority, or promotion authority."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/integration/bridges/prover_installer.py",
+      "git_blob": "e4c1d12d26807ad5e086a64365013417171730f5",
+      "sha256": "b2097d035290c2073d5a3783816eb46d7a4ce31d414cefd941d1c8b331819621",
+      "role": "Optional native/Python solver installer and read-only managed solver version-status inventory; it contains reviewed target versions and download checksums but no PCSM admission request/result or theorem proof receipt."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/modal/leanstral.py",
+      "git_blob": "d3c359f82a357a880134d10708bf80b98f492697",
+      "sha256": "6cabdcafce633ffb0acf1eac15b64384f888c70a9d9095a4c7be1b15ec1a7b39",
+      "role": "Explicitly non-mutating LegalIR Leanstral shadow lane; it rejects unavailable Lean and does not provide PCSM identity or admission authority."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
+      "git_blob": "8e738fa2d21eba5db7258d3c630f550c5cb8be51",
+      "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182",
+      "role": "Closed DatasetsProofContextProvider@0.1 contract, whose canonical capabilities contain no prover admission or PCSM source-map contract."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_datasets/tests/proof_context/test_install_profile.py",
+      "git_blob": "f55679341bdd5cc6ff0dbfaece0967ecc4effde3",
+      "sha256": "298b403794366cf76cb9615d007ae9ff91c4fd474f835ef33558272d9dca13d1",
+      "role": "Required-suite install-profile test source; it names theorem-provers as an optional package extra and asserts the installer console entry point, but it is not PCSM theorem-admission coverage."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit_tests/logic/external_provers/test_lazy_native_solver_installation.py",
+      "git_blob": "d650068d9410a1c235563772b6ce0ea44b5c7327",
+      "sha256": "fc6b2b64513cefde15cb2520f3cab15651e116688d369abce751eadfc253f572",
+      "role": "Focused positive and negative mocked coverage for optional native solver discovery, version mismatch, installation failure, and refusal behavior."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "unavailable",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm068-required-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "environment": "Authoritative sealed Python 3.12.3 and prescribed PATH with a fresh private HOME/XDG root.",
+      "status": "blocked_missing_required_test_dependency",
+      "result": "Pytest aborted during startup: external/ipfs_datasets/pytest.ini explicitly loads anyio.pytest_plugin, but module anyio is unavailable in the sealed environment.",
+      "scope_limit": "No test collection or package result is claimed. This dependency failure is unavailable evidence, not a passing zero-test result."
+    },
+    "non_plugin_collection_probe": {
+      "kind": "unavailable",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm068-focused-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q -o addopts='' external/ipfs_datasets/tests/proof_context",
+      "status": "blocked_missing_required_test_dependency",
+      "result": "Collection reached proof_context benchmark metrics and stopped because Python module multiformats is unavailable.",
+      "scope_limit": "This diagnostic removes the configured anyio-plugin blocker only to locate the next unavailable dependency. It is not a replacement for the required command and does not establish any suite result."
+    },
+    "focused_existing_authority_validation": {
+      "kind": "simulated",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm068-installer-tests-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=. /usr/bin/python3.12 -m pytest -q -o addopts='' tests/unit_tests/logic/external_provers/test_lazy_native_solver_installation.py",
+      "environment": "Authoritative sealed Python 3.12.3, prescribed PATH, fresh private HOME/XDG root, user-site disabled, datasets checkout only on PYTHONPATH, and pytest plugins disabled solely for this focused test.",
+      "status": "passed_with_cleanup_warnings",
+      "result": "37 passed in 0.44s; pytest emitted four non-fatal temporary-directory cleanup warnings (OSError: directory not empty).",
+      "positive_coverage": [
+        "Controlled installer discovery and reviewed-version paths for optional native/Python solver targets.",
+        "Controlled lazy installation dispatch and durable cleanup behavior under test-owned fakes."
+      ],
+      "negative_coverage": [
+        "Missing executable, disabled lazy installation, unsupported platform, version mismatch, failed download/extract, and failed installer routes return refusal/failure rather than a fabricated available solver.",
+        "Tests monkeypatch native solver operations; they do not execute Lean, Rocq, Isabelle, SMT, ATP, or a PCSM theorem obligation."
+      ],
+      "scope_limit": "This is simulated generic installer coverage. It neither cures the required-suite dependency gaps nor proves a deployed solver, PCSM source identity, theorem admission, kernel proof, mutation authorization, completion, or promotion."
+    },
+    "sealed_solver_capability_probe": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm068-prover-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -c '<managed solver status and executable/module probe>'",
+      "status": "completed_all_required_capabilities_unavailable",
+      "result": "No executable was found for apalache-mc, coqc, cvc5, eprover, isabelle, lake, lean, maude, proverif, rocq, tamarin-prover, tlc, vampire, or z3. managed_solver_version_status reported all 14 catalog entries missing. Python modules z3, cvc5, pysmt, and multiformats were all absent.",
+      "scope_limit": "This is a read-only capability observation. It does not invoke installation, broaden PATH, inspect provider-only tools, or treat absence as a proof result."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run_not_available_for_current_obligation",
+      "reason": "No PCSM source-map-bound theorem obligation, allowed current file/node/span binding, solver deployment digest, installed checker, kernel receipt, or PCSM theorem-admission contract exists in the sealed environment. The installer’s target versions/checksums, Leanstral’s LegalIR proposal validation, focused mocked tests, and process-success semantics are not relabelled as a formal proof or promotion authority."
+    }
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "versioned_optional_solver_inventory_available_pcsm_theorem_prover_admission_unavailable_non_promoted",
+    "available_capabilities": [
+      "Current-head read-only inventory of reviewed optional solver target versions and availability states.",
+      "Current-head explicitly non-mutating LegalIR shadow validation that fails closed when Lean is unavailable.",
+      "Focused mocked positive and negative installer-contract coverage."
+    ],
+    "unavailable_capabilities": [
+      "An installed approved digest-bound theorem prover in the authoritative sealed environment.",
+      "A canonical aggregate PCSM SourceLinkReceipt/source-map CID and exact current PCSM file/node/span binding.",
+      "A versioned PCSM theorem-obligation request/result schema and deterministic closed admission decision bound to source map, source tree, obligation, checker deployment, and kernel receipt.",
+      "A source-map-bound PCSM positive proof and negative forged/stale/wrong-tool/wrong-version/wrong-CID/rejected-proof admission test surface.",
+      "A passing required datasets proof-context validation result and an immutable self-CID for this receipt."
+    ],
+    "disposition": "No source-map CID, theorem obligation, deployment digest, kernel proof, validation success, estimated cost, or model-derived evidence is invented. The existing installer and LegalIR lane remain in their own domains. This receipt creates no competing authority and leaves M2/M3 mutation excluded."
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; existing versioned component contracts; sealed solver executable/module probe; and the required-validation and diagnostic collection dependency failures.",
+    "estimated": "None. No estimate establishes source identity, solver deployment, theorem behavior, test success, proof, or promotion.",
+    "simulated": "Focused optional-solver installer tests use test-owned fakes/mocks and passed 37 tests. They establish only the generic installer contract exercised by those fixtures.",
+    "unavailable": "All probed managed prover capabilities; Python modules anyio, multiformats, z3, cvc5, and pysmt in the sealed environment; the required datasets proof-context suite result; canonical PCSM source-map/source-link identity; PCSM theorem-obligation/admission contract and tests; digest-bound deployment; kernel receipt; source-bound formal proof; and immutable self-CID."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not install software, alter datasets/accelerator code or tests, create a PCSM adapter, download a prover, manufacture a source map, or relax a validation gate.",
+    "The solver installer’s managed target versions and artifact checksums are acquisition metadata, not identities of installed sealed binaries and not proof receipts.",
+    "Leanstral is a LegalIR shadow lane with its own task/proposal schemas. Its temporary Lean process result does not bind a PCSM source forest or grant PCSM admission authority.",
+    "The required datasets proof-context suite is unavailable because its configured anyio plugin is absent; a diagnostic plugin-disabled run independently also found multiformats absent. Neither result is a test pass or zero-test success.",
+    "Focused installer tests passed through controlled mocks, so they remain simulated evidence and cannot overcome missing prover deployments, source-map identity, PCSM obligation schema, or formal proof evidence.",
+    "No model output, candidate, installer status, test fixture, test result, local executable name, or transport response is accepted as canonical semantic identity, mutation, proof, completion, or promotion authority.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head theorem-prover-admission capability assessment. Do not modify protected planning documents, optional solver components, LegalIR components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, source-map capability, solver deployment/version/digest, theorem-admission contract, required/focused test result, or sealed dependency capability changes."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalents_reused_first": true,
+    "versioned_optional_prover_inventory_available": true,
+    "deterministic_where_required": false,
+    "schema_version_and_cid_binding_available_where_applicable": false,
+    "package_specific_positive_and_negative_tests_available": false,
+    "focused_generic_positive_and_negative_tests_available": true,
+    "focused_generic_validation_passed": true,
+    "sealed_required_validation_passed": false,
+    "sealed_required_validation_unavailable": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_theorem_obligation_available": false,
+    "digest_bound_prover_deployment_available": false,
+    "formal_prover_result_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_due_to_absent_sealed_provers_missing_pcsm_source_map_and_theorem_admission_contract_and_unavailable_required_test_dependencies"
+  }
+}
