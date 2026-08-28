@@ -1,0 +1,654 @@
+{
+  "acceptance": {
+    "criteria": "Instrument the current cold and warm critical path is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.",
+    "performance_targets_asserted": false,
+    "self_approved": false
+  },
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json"
+  ],
+  "claim": "This receipt reconciles the current cold (full-checkpoint / first-state) and warm (incremental fetch-rehash-verify-admit) critical path against the existing IncrementalProofSealer, ProofMetricsCollector, hashing-critical-path inventory, and frozen benchmark preregistration. It establishes an IntegrityCommitment inventory of the current path and cost-accounting contracts only. It does not establish execution or semantics, does not admit simulated proof, does not upgrade estimates into measurements, does not assert preregistered performance targets, and does not itself complete the task.",
+  "completion_authority": "DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane",
+  "current_authority": {
+    "benchmark_preregistration": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json",
+    "benchmark_preregistration_sha256": "sha256:97af0087f4dba6635ce8c4ee5932b950f3e5e71312bddb8df86c6a8484025b31",
+    "cost_accounting": {
+      "compare": "compare_costs / compare_full_and_incremental",
+      "evidence_subset": "ips/proof-cost@1",
+      "interface": "ProofMetricsCollector",
+      "rule": "unobserved counters stay unknown; observed zero is measured zero; estimates never become measurements; failed or estimated runs keep savings unknown"
+    },
+    "execution_scheduling_admission_authority": "ipfs_accelerate_py",
+    "hashing_critical_path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json",
+    "hashing_critical_path_sha256": "sha256:3f6d6a38ee9958a4e7bc854d726d7c5227effc757cf6924568de1ffd4371af6e",
+    "predecessor": "IncrementalProofSealer full/delta/WAL/CAS plus ProofMetricsCollector; extend, do not duplicate",
+    "proof_claim_matrix": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json",
+    "verified_storage_wal_cas_authority": "ipfs_kit_py"
+  },
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "dependency_seal": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+  "goal_id": "PCTDD-G012",
+  "identity_proof_differential": {
+    "cache_hint_never_fast_path": "warm reusable units follow fetch, rehash, verify, admit; a kit cache hint or prior admission record is never a fast path",
+    "candidate_presence_never_authorizes_reuse": "create_incremental_plan maps candidate_present without admitted to UnitPlanKind.REJECT_REUSE with reason candidate_presence_is_not_reuse_authority",
+    "cid_claim": "CID is exact byte identity under a versioned canonicalization/multicodec/multihash profile, not execution or semantics",
+    "cold_vs_warm_plan_mode": "parent=None or first_state or empty parent.seal_cid selects PlanMode.FULL with fallback_reasons first_state and missing_parent; accepted parent with complete keys may select PlanMode.INCREMENTAL",
+    "estimated_as_measured": false,
+    "git_blob_oid_claim": "Git blob OID is a verified memo lookup key only",
+    "plan_cid_is_not_cidv1": "IncrementalProofPlan.plan_cid is sha256: plus hashlib.sha256 of sorted compact JSON, not CIDv1 dag-json; ContentIdentity@1 remains the protocol CID profile. This duplication is the hashing_critical_path observed gap, not a changed claim.",
+    "root_equality": "full versus incremental seal comparison is a cost and plan comparison; it does not substitute for verification; seal roots are IntegrityCommitments",
+    "source_checks": [
+      {
+        "check": "FETCH_VERIFY_PROVE_ORDER is fetch, rehash, verify, admit",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/executor.py",
+        "result": "matches"
+      },
+      {
+        "check": "ProofCostComparison.to_canonical estimated_as_measured is False",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/metrics.py",
+        "result": "matches"
+      },
+      {
+        "check": "unobserved CostValue provenance is unknown with value None, never a fabricated zero",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/metrics.py",
+        "result": "matches"
+      },
+      {
+        "check": "candidate_present without admitted is REJECT_REUSE",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/planner.py",
+        "result": "matches"
+      },
+      {
+        "check": "IntegrityCommitment establishes exact bytes/digest/CID/Merkle inclusion and does not establish execution or semantics",
+        "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json",
+        "result": "matches"
+      },
+      {
+        "check": "dag-json versus raw profile separation on ContentIdentity@1",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py",
+        "result": "matches"
+      }
+    ],
+    "substitutes_for_verification": false,
+    "unknown_is_not_zero": "ProofMetricsCollector snapshots leave unobserved fields provenance=unknown with value=unknown, never a fabricated zero"
+  },
+  "independent_tests": {
+    "commands": [
+      "/usr/bin/python3.12 -m pytest -q --tb=line external/ipfs_accelerate/test/api/incremental_sealing/test_metrics.py external/ipfs_accelerate/test/api/incremental_sealing/test_planner.py external/ipfs_accelerate/test/api/incremental_sealing/test_scheduling.py external/ipfs_accelerate/test/api/incremental_sealing/test_executor.py external/ipfs_accelerate/test/api/incremental_sealing/test_full_checkpoint.py external/ipfs_accelerate/test/api/incremental_sealing/test_delta_seal.py external/ipfs_accelerate/test/api/incremental_sealing/test_public_api.py external/ipfs_accelerate/test/api/incremental_sealing/test_verification.py external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py external/ipfs_accelerate/test/api/incremental_sealing/test_atomic_sealer.py external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py"
+    ],
+    "cwd": ".",
+    "executed_in_this_provider_process": false,
+    "execution_status": "typed_unavailable_no_command_runner",
+    "import_dependencies": {
+      "datasets_cid_utils": {
+        "import": "ipfs_datasets_py.utils.cid_utils",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+        "present_as_readable_file": true
+      },
+      "datasets_incremental_sealing_evidence": {
+        "classification": "declared_import_path_not_present_as_readable_file",
+        "import": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing/evidence.py",
+        "present_as_readable_file": false,
+        "used_by": [
+          "full_checkpoint.py",
+          "delta_seal.py",
+          "executor.py",
+          "admission.py",
+          "verification.py",
+          "sealer.py",
+          "compaction.py"
+        ]
+      },
+      "kit_proof_seal_store": {
+        "classification": "declared_import_path_not_present_as_readable_file",
+        "import": "ipfs_kit_py.proof_seal_store.local_store.HermeticProofSealStore",
+        "path": "external/ipfs_kit/ipfs_kit_py/proof_seal_store/local_store.py",
+        "present_as_readable_file": false,
+        "used_by": [
+          "sealer.py",
+          "test_atomic_sealer.py"
+        ]
+      }
+    },
+    "independent_validator_must_execute": true,
+    "pythonpath": [
+      "external/ipfs_accelerate",
+      "external/ipfs_datasets",
+      "external/ipfs_kit"
+    ],
+    "reason": "This provider session exposed file tools only. Live pytest was not executed here. Board validation phrases are not POSIX commands; the independent validator must run independent_tests.commands and validation.executable_commands under PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin and /usr/bin/python3.12. Suites that import datasets incremental_sealing.evidence or kit proof_seal_store will fail closed with ImportError unless those packages resolve from the sealed PYTHONPATH.",
+    "suites": [
+      {
+        "import_dependency": "none_beyond_accelerate_metrics",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_metrics.py",
+        "proves": "unknown-versus-zero, estimated-versus-measured, equivalent-work savings, failed/estimated savings stay unknown"
+      },
+      {
+        "import_dependency": "none_beyond_accelerate_planner",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_planner.py",
+        "proves": "first_state/missing_parent full fallback; schema/trust full fallback; candidate presence never authorizes reuse"
+      },
+      {
+        "import_dependency": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_executor.py",
+        "proves": "warm fetch-rehash-verify-admit; stale/poisoned/corrupt/simulated candidates fail closed"
+      },
+      {
+        "import_dependency": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_full_checkpoint.py",
+        "proves": "cold full checkpoint; every required unit freshly verified; simulated/unknown/unverified units cannot seal"
+      },
+      {
+        "import_dependency": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_delta_seal.py",
+        "proves": "warm parent-bound delta seal; fourteen transition invariants; stale reuse rejected"
+      },
+      {
+        "import_dependency": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_verification.py",
+        "proves": "compare_full_and_incremental estimated savings stay unknown; measured records may report savings without substituting for verification"
+      },
+      {
+        "import_dependency": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_public_api.py",
+        "proves": "lazy public IncrementalProofSealer API surface"
+      },
+      {
+        "import_dependency": "none_beyond_accelerate_scheduling",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_scheduling.py",
+        "proves": "critical_path versus full_fallback scheduling classes; GPU never simulated"
+      },
+      {
+        "import_dependency": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py",
+        "proves": "EvidenceVerifier cache admission; evidence class is never promoted"
+      },
+      {
+        "import_dependency": "ipfs_kit_py.proof_seal_store and datasets evidence",
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_atomic_sealer.py",
+        "proves": "serial WAL/CAS publication; stale parent; pre-CAS failure leaves old pointer"
+      },
+      {
+        "import_dependency": "ipfs_datasets_py.utils.cid_utils",
+        "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+        "proves": "CID profile identity; dag-json versus raw profile separation"
+      }
+    ]
+  },
+  "instrumentation": {
+    "cold_path": {
+      "cache_class": "cold_memo",
+      "plan_mode": "full",
+      "seal": "full_checkpoint",
+      "stages": [
+        {
+          "authority": "ipfs_accelerate_py IncrementalProofSealer planner/full_checkpoint",
+          "name": "source discovery",
+          "symbols": [
+            "RepositoryStateView",
+            "create_incremental_plan",
+            "create_full_checkpoint",
+            "CheckpointContext.FIRST_STATE"
+          ]
+        },
+        {
+          "authority": "ipfs_datasets_py identity codecs consumed by accelerate ContentIdentity@1",
+          "name": "canonical serialization",
+          "symbols": [
+            "canonical_dag_json_bytes",
+            "ContentIdentity@1"
+          ]
+        },
+        {
+          "authority": "datasets CID profile for protocol artifacts; accelerate hashlib sha256: label for IncrementalProofPlan.plan_cid",
+          "name": "SHA/CID",
+          "note": "plan_cid is not CIDv1; ContentIdentity@1 remains the protocol CID profile",
+          "symbols": [
+            "cid_for_dag_json",
+            "IncrementalProofPlan.plan_cid"
+          ]
+        },
+        {
+          "authority": "ipfs_accelerate_py full checkpoint builder",
+          "name": "proof verification",
+          "note": "every required unit is freshly verified; cache presence is never a fast path",
+          "symbols": [
+            "create_full_checkpoint",
+            "RequiredUnitEvidence.freshly_verified"
+          ]
+        },
+        {
+          "authority": "ipfs_accelerate_py full checkpoint forest",
+          "name": "Merkle",
+          "symbols": [
+            "FOREST_CATEGORIES",
+            "FullCheckpointSeal"
+          ]
+        },
+        {
+          "authority": "ipfs_kit_py proof seal store (declared import; source file not readable on this leased kit tree)",
+          "name": "immutable store",
+          "symbols": [
+            "HermeticProofSealStore"
+          ]
+        },
+        {
+          "authority": "ipfs_accelerate_py sealer over kit WAL/CAS",
+          "name": "serial WAL/CAS",
+          "note": "publication remains serial, controller-owned, and fail closed",
+          "symbols": [
+            "IncrementalProofSealer",
+            "publish_full_checkpoint"
+          ]
+        }
+      ],
+      "triggers": [
+        "first_state",
+        "missing_parent",
+        "trust_policy_change",
+        "schema_change",
+        "canonicalization_change",
+        "environment_change",
+        "circuit_or_key_change",
+        "full_fallback_required"
+      ],
+      "unit_reprove_not_plan_full": [
+        "incomplete_cache_key"
+      ]
+    },
+    "existing_collector_fields": [
+      "required_units",
+      "reused_units",
+      "invalidated_units",
+      "proved_units",
+      "cache_hits",
+      "leaf_time_ms",
+      "aggregate_time_ms",
+      "verify_time_ms",
+      "wall_time_ms",
+      "cpu_time_ms",
+      "gpu_time_ms",
+      "peak_memory_bytes",
+      "proof_size_bytes",
+      "seal_size_bytes",
+      "storage_growth_bytes",
+      "disposition",
+      "fallback_reason",
+      "estimated"
+    ],
+    "predecessor_ips_benchmark": {
+      "may_be_used_as_current_tree_measurement": false,
+      "path": "external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/benchmark.json",
+      "provenance": "estimated planner resource costs on a different source revision; GPU unavailable; simulated required units are not production proving"
+    },
+    "preregistered_metrics": {
+      "bytes_hashed": {
+        "provenance": "unknown",
+        "status": "not_instrumented_on_current_path"
+      },
+      "bytes_read": {
+        "provenance": "unknown",
+        "status": "not_instrumented_on_current_path"
+      },
+      "calls_avoided_by_reuse_procedure_repair": {
+        "provenance": "unknown",
+        "status": "not_on_this_hash_seal_path"
+      },
+      "cpu_time": {
+        "collector_field": "cpu_time_ms",
+        "status": "instrumented_when_observed"
+      },
+      "files_opened": {
+        "provenance": "unknown",
+        "status": "not_instrumented_on_current_path"
+      },
+      "memo_hits_rejections": {
+        "hits_field": "cache_hits",
+        "rejections": "executor reason codes exist; not a named collector counter",
+        "status": "partial"
+      },
+      "model_calls_tokens_context": {
+        "provenance": "unknown",
+        "status": "not_on_this_hash_seal_path"
+      },
+      "mutation_escapes": {
+        "provenance": "unknown",
+        "status": "safety_floor_not_a_current_collector_metric"
+      },
+      "peak_rss": {
+        "collector_field": "peak_memory_bytes",
+        "status": "instrumented_when_observed"
+      },
+      "phase_times": {
+        "collector_fields": [
+          "leaf_time_ms",
+          "aggregate_time_ms",
+          "verify_time_ms"
+        ],
+        "status": "partial"
+      },
+      "proof_batch_cost": {
+        "collector_fields": [
+          "aggregate_time_ms",
+          "proof_size_bytes"
+        ],
+        "status": "partial"
+      },
+      "root_equality": {
+        "status": "tested_on_seals_not_a_collector_metric"
+      },
+      "selection_recall": {
+        "provenance": "unknown",
+        "status": "pytest_tdd_path_not_this_task"
+      },
+      "wal_cas_time": {
+        "provenance": "unknown",
+        "status": "not_a_named_collector_field"
+      },
+      "wall_time": {
+        "collector_field": "wall_time_ms",
+        "status": "instrumented_when_observed"
+      }
+    },
+    "schema": "pctdd/cold-warm-critical-path-instrumentation@1",
+    "targets": {
+      "median_model_context_reduction_percent": 30,
+      "repeat_general_llm_call_reduction_percent": 25,
+      "status": "frozen_before_implementation_not_measured_on_this_tree",
+      "warm_1_percent_delta_prepare_reduction_percent": 50,
+      "warm_bytes_reread_reduction_percent": 90,
+      "warm_selected_loop_reduction_percent": 30
+    },
+    "warm_path": {
+      "cache_class": "warm_memo",
+      "order": [
+        "fetch",
+        "rehash",
+        "verify",
+        "admit"
+      ],
+      "plan_mode": "incremental",
+      "seal": "delta_seal",
+      "stages": [
+        {
+          "authority": "ipfs_accelerate_py planner over accepted parent",
+          "name": "source discovery",
+          "symbols": [
+            "ParentSealContext",
+            "create_incremental_plan",
+            "build_delta_seal"
+          ]
+        },
+        {
+          "authority": "same versioned canonical profiles as cold",
+          "name": "canonical serialization",
+          "symbols": [
+            "canonical_dag_json_bytes"
+          ]
+        },
+        {
+          "authority": "ipfs_accelerate_py executor",
+          "name": "SHA/CID",
+          "note": "reusable candidates are rehashed; digest mismatch fails closed",
+          "symbols": [
+            "FETCH_VERIFY_PROVE_ORDER",
+            "execute_incremental_plan"
+          ]
+        },
+        {
+          "authority": "ipfs_accelerate_py executor plus admission",
+          "name": "proof verification",
+          "note": "reuse requires fresh cryptographic or signature verification under current policy",
+          "symbols": [
+            "CACHE_REVERIFY_EVIDENCE",
+            "EvidenceVerifier"
+          ]
+        },
+        {
+          "authority": "ipfs_accelerate_py delta seal",
+          "name": "Merkle",
+          "symbols": [
+            "build_delta_seal",
+            "NORMATIVE_INVARIANTS"
+          ]
+        },
+        {
+          "authority": "ipfs_kit_py immutable store (declared import; source file not readable on this leased kit tree)",
+          "name": "immutable store",
+          "symbols": [
+            "HermeticProofSealStore"
+          ]
+        },
+        {
+          "authority": "ipfs_accelerate_py sealer over kit WAL/CAS",
+          "name": "serial WAL/CAS",
+          "note": "stale parent returns stale_parent without overwrite",
+          "symbols": [
+            "publish_delta_seal"
+          ]
+        }
+      ]
+    },
+    "workloads": {
+      "cache": [
+        "cold_memo",
+        "warm_memo"
+      ],
+      "changes": [
+        "clean",
+        "1_percent",
+        "10_percent",
+        "50_percent",
+        "dirty_overlay"
+      ],
+      "current_named_harness": "typed_unavailable",
+      "layouts": [
+        "many_small",
+        "mixed_repository",
+        "few_large"
+      ],
+      "note": "Preregistered hash-seal workloads are frozen. This task maps them onto the current IncrementalProofSealer path. Named layout/change/worker/storage sweeps are not a current measured harness.",
+      "seal": [
+        "full_checkpoint",
+        "delta_seal"
+      ],
+      "storage": [
+        "local_ssd",
+        "reproducible_slow_io"
+      ],
+      "workers": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ]
+    }
+  },
+  "known_limitations": [
+    "Production ZK and key ceremony remain typed unavailable and are not production-admitted.",
+    "Optional native/direct-execution hashing profiles remain candidate methods, not current production instrumentation.",
+    "files_opened, bytes_read, and bytes_hashed are not current ProofMetricsCollector fields.",
+    "Predecessor IPS 40-transition benchmark costs are estimated on a different tree and are not current-tree measurements.",
+    "Preregistered performance targets are frozen and are not asserted as met.",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing does not exist on this tree; current tests live under test/api/incremental_sealing.",
+    "Live pytest was not executed in this provider process because no command runner was available; the independent validator must execute the declared suite under the sealed PATH.",
+    "Board validation phrases are not POSIX commands. Running export PYTHONPATH=... && 'focused owning-repository pytest plus cross-package API tests' is a shell quoting error; use validation.executable_commands.",
+    "Receipt CID is unknown in this provider process because hashlib/multiformats were not invoked here; stored canonical JSON bytes remain the identity preimage.",
+    "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence is imported by IncrementalProofSealer but is not a readable file on this leased datasets tree.",
+    "ipfs_kit_py.proof_seal_store.local_store.HermeticProofSealStore is imported by IncrementalProofSealer but is not a readable file on this leased kit tree.",
+    "Unknown dependency or fixture semantics force full fallback.",
+    "incomplete_cache_key is a named FULL_FALLBACK_REASONS member and a per-unit REPROVE reason; _fallback_reasons does not currently append it as a plan-mode FULL trigger.",
+    "Warm memo never skips rehash/verify; hashing duplication named in hashing_critical_path.json remains an observed gap for later prepare-path work, not a changed claim."
+  ],
+  "markdown_non_authoritative": true,
+  "owning_repository": "endomorphosis/ipfs_accelerate_py",
+  "plan_revision": "PCTDD-PLAN-V1",
+  "predicted_implementation_paths_not_modified": {
+    "note": "task_output_exact allowed only this receipt; existing incremental_sealing authority was reconciled rather than forked",
+    "paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing",
+      "external/ipfs_accelerate/test/api/parallel_content_sealing"
+    ]
+  },
+  "proof_claim_class": {
+    "cost_accounting": "ProofCostRecord is not a proof; estimated values cannot become measurements",
+    "does_not": "execution or semantics; CPython execution; arbitrary repository correctness; independent faithful execution",
+    "establishes": "exact bytes/digest/CID/Merkle inclusion of the inventoried current path and fail-closed cost provenance",
+    "incremental_seal": "IncrementalCommitSeal establishes accepted parent plus complete valid changed/reused units only when a seal is actually published; this receipt does not publish a seal",
+    "legacy": "TestPassStatementV1 remains unchanged",
+    "name": "IntegrityCommitment",
+    "production": "simulated or structural proof cannot be admitted"
+  },
+  "receipt_cid": "unknown",
+  "receipt_cid_algorithm": "CIDv1 base32 dag-json sha2-256 over canonical JSON excluding receipt_cid",
+  "receipt_cid_provenance": "unknown",
+  "rollout_mode": "bootstrap",
+  "schema": "pctdd/task-evidence-receipt@1",
+  "source_forest": {
+    "gitlinks": [
+      {
+        "head": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+        "name": "ipfs_accelerate_py",
+        "observed_from": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json sources and docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json",
+        "path": "external/ipfs_accelerate",
+        "tree": "c7b788c1b23a87f461579bde461a61ecb66e9fa2"
+      },
+      {
+        "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "name": "ipfs_datasets_py",
+        "observed_from": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json sources and docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json",
+        "path": "external/ipfs_datasets",
+        "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+      },
+      {
+        "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "name": "ipfs_kit_py",
+        "observed_from": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json sources and docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json",
+        "path": "external/ipfs_kit",
+        "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+      }
+    ],
+    "leased_tree_id": "c488d97ed5665b5744d983fc4a294989df519361",
+    "parent_git_dir_readable": false,
+    "planning_base_head": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "planning_base_tree": "e35dfaebbd229d7e7de988b2e0345444d9284221",
+    "seal_sources_match_observed_submodule_heads": true
+  },
+  "status": "reconciled_pending_independent_review",
+  "task_id": "PCTDD-004",
+  "title": "Instrument the current cold and warm critical path",
+  "tree_id": "c488d97ed5665b5744d983fc4a294989df519361",
+  "unsupported_unavailable": {
+    "datasets_incremental_sealing_evidence_source": {
+      "classification": "declared_import_path_not_present_as_readable_file",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing/evidence.py",
+      "production_admitted": false,
+      "reason": "Accelerate IncrementalProofSealer imports this datasets evidence module. The path is not a readable file on this leased datasets tree. This is a dependency gap, not a changed claim that datasets owns evidence-class meaning."
+    },
+    "direct_cpython_proof": {
+      "classification": "research_only",
+      "production_admitted": false
+    },
+    "gpu_prover": {
+      "classification": "typed_unavailable_unless_observed",
+      "production_admitted": false
+    },
+    "groth16_binary": {
+      "classification": "real_backend_binary_present_unqualified",
+      "production_admitted": false,
+      "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding"
+    },
+    "kit_proof_seal_store_source": {
+      "classification": "declared_import_path_not_present_as_readable_file",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_seal_store/local_store.py",
+      "production_admitted": false,
+      "reason": "Accelerate IncrementalProofSealer imports HermeticProofSealStore. The path is not a readable file on this leased kit tree. Kit remains WAL/CAS authority; absence is a dependency gap, not a duplicate store."
+    },
+    "named_hash_seal_workload_harness": {
+      "classification": "typed_unavailable",
+      "reason": "preregistered layouts/changes/workers/storage sweeps have no current measured runner; current path is IncrementalProofSealer full versus incremental"
+    },
+    "native_batch_hashing": {
+      "classification": "candidate_method_not_current_production",
+      "production_admitted": false
+    },
+    "parallel_content_sealing_test_package": {
+      "classification": "typed_unavailable",
+      "path": "external/ipfs_accelerate/test/api/parallel_content_sealing",
+      "reason": "directory does not exist on this tree"
+    },
+    "provekit": {
+      "classification": "adapter_source_present",
+      "production_admitted": false
+    },
+    "reproducible_slow_io_harness": {
+      "classification": "typed_unavailable",
+      "production_admitted": false
+    },
+    "simulated_proof": {
+      "classification": "simulated",
+      "production_admitted": false
+    }
+  },
+  "validation": {
+    "board_phrases_are_posix_commands": false,
+    "commands": [
+      "focused owning-repository pytest plus cross-package API tests",
+      "identity/proof differential checks where applicable"
+    ],
+    "cwd": ".",
+    "executable_commands": [
+      {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=line",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_metrics.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_planner.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_scheduling.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_executor.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_full_checkpoint.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_delta_seal.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_public_api.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_verification.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_atomic_sealer.py",
+          "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py"
+        ],
+        "implements": "focused owning-repository pytest plus cross-package API tests",
+        "pythonpath": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit"
+      },
+      {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=line",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_metrics.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_planner.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_verification.py",
+          "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py"
+        ],
+        "implements": "identity/proof differential checks where applicable",
+        "pythonpath": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit"
+      }
+    ],
+    "exact_pytest": "/usr/bin/python3.12 -m pytest -q --tb=line external/ipfs_accelerate/test/api/incremental_sealing/test_metrics.py external/ipfs_accelerate/test/api/incremental_sealing/test_planner.py external/ipfs_accelerate/test/api/incremental_sealing/test_scheduling.py external/ipfs_accelerate/test/api/incremental_sealing/test_executor.py external/ipfs_accelerate/test/api/incremental_sealing/test_full_checkpoint.py external/ipfs_accelerate/test/api/incremental_sealing/test_delta_seal.py external/ipfs_accelerate/test/api/incremental_sealing/test_public_api.py external/ipfs_accelerate/test/api/incremental_sealing/test_verification.py external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py external/ipfs_accelerate/test/api/incremental_sealing/test_atomic_sealer.py external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+    "interpreter": "/usr/bin/python3.12",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "shell_warning": "Do not pass board phrases to export or execute them as a quoted command name. The prior validation failure was: export PYTHONPATH=... && 'focused owning-repository pytest plus cross-package API tests'."
+  },
+  "verifier_admission": {
+    "self_approved": false,
+    "status": "pending_independent_review",
+    "worker_cannot_select_acceptance_policy": true
+  }
+}
