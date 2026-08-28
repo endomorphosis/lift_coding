@@ -9,26 +9,26 @@
   "database_program": {
     "authority_mode": "quack",
     "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
-    "event_store_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/events",
+    "event_store_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/events",
     "explicit_legacy": false,
     "export_profile": "pctdd-v1",
     "failover_policy": "fail_closed",
     "quack_endpoint": "quack:127.0.0.1:42777",
-    "runtime_registry_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/registry",
+    "runtime_registry_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/registry",
     "schema_revision": "1",
-    "store_generation": "pctdd-v1",
-    "store_id": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/control.duckdb",
+    "store_generation": "pctdd-v1-g2",
+    "store_id": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/control.duckdb",
     "task_source_kind": "duckdb",
-    "worktree_root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/worktrees"
+    "worktree_root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/worktrees"
   },
   "dependency_guardrail_enabled": true,
   "dependency_validator_path": "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
   "ducklake_projection_program": {
     "acceptance_prerequisite": false,
     "authority": false,
-    "catalog_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/ducklake/catalog.duckdb",
+    "catalog_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/ducklake/catalog.duckdb",
     "completion_prerequisite": false,
-    "data_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/ducklake/data",
+    "data_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/ducklake/data",
     "logical_datasets": [
       "bootstrap_history"
     ],
@@ -159,14 +159,14 @@
   ],
   "root_goal_id": "PCTDD-G000",
   "runtime_paths": {
-    "evidence": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/evidence",
+    "evidence": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/evidence",
     "generated_runtime_artifacts_are_completion_authority": false,
-    "logs": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/logs",
-    "merge_queue": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/merge-queue",
-    "quack_owner": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/quack-owner",
-    "root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1",
-    "state": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/state",
-    "worktrees": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1/worktrees"
+    "logs": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/logs",
+    "merge_queue": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/merge-queue",
+    "quack_owner": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/quack-owner",
+    "root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2",
+    "state": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/state",
+    "worktrees": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g2/worktrees"
   },
   "safety_floors": {
     "escaped_critical_seeded_defects": 0,
@@ -182,9 +182,9 @@
   },
   "schema": "ipfs_accelerate_py.agent_supervisor.parallel-content-sealing-proof-carrying-tdd.scheduler_config@1",
   "source_binding": {
-    "accelerator_planning_revision": "11ed591e476ee9e0ef9de7b2522b10177d9d60a7",
-    "accelerator_planning_tree": "661347ab0758c308e182ebfd90b8611d36882c49",
-    "accelerator_required_ancestor": "11ed591e476ee9e0ef9de7b2522b10177d9d60a7",
+    "accelerator_planning_revision": "13036ca9626bf2094d45386950c2a307d5eaca4b",
+    "accelerator_planning_tree": "72d8b41fd8a975da9b5fa3fcdda125c1abcdce7b",
+    "accelerator_required_ancestor": "13036ca9626bf2094d45386950c2a307d5eaca4b",
     "accelerator_required_branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
     "bootstrap_task_source": "duckdb",
     "changed_revision_requires_fresh_inventory_and_baseline": true,
