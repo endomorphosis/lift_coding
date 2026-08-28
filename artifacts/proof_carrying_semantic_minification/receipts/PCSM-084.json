@@ -1,0 +1,235 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-084",
+  "title": "Add projection reuse and stale rejection",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G700",
+  "objective_id": "PCSM-084",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-084@current-head-python-v1-projection-reuse-stale-rejection-capability-assessment-v1",
+  "observed_at": "2026-08-28T18:02:33Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python-v1 projection reuse and stale-rejection capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-084.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-084.json",
+    "implementation_delta": "Reuse current-head RuntimeCAS@1 as the smallest existing Python-v1 authority. Its deterministic exact key enables warm reuse only for a matching canonical binding and verified dependency closure; its mutable AuthoritativeProjection@1 pointer admits only fresh authoritative records bound to the current tree, and lookup rejects tree mismatch, expiry, invalidation, corruption, and forged targets. No PCSM wrapper, second projection head, alternate identity, source-map authority, source/test change, or M2/M3 mutation was introduced under this exact receipt-only authority.",
+    "non_promotion_reason": "RuntimeCAS@1 is a tested generic supervisor runtime authority, not a current-PCSM projection contract. The exact source forest has no canonical PCSM ProjectionRoot/projection schema, named PCSM projection key, exact PCSM SourceLinkReceipt/source-map CID, or concrete source-map-bound projection request/result. The direct 8-test result is controlled-fixture evidence, not execution over the PCSM forest. This receipt therefore records reusable generic capability and the missing PCSM binding honestly; it does not promote a generic runtime-artifact SHA-256 identity or projection pointer to canonical PCSM identity."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound current source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish implementation, identity, validation success, source-forest execution, proof, or promotion.",
+    "simulated": "A controlled fixture exercise. It establishes only the generic behavior exercised and never replaces exact-PCSM source-forest evidence.",
+    "unavailable": "A required capability, identity, result, or dependency absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "2426eb03f63f7f8ed9f3f11ac255f8fe37a7669c",
+    "outer_tree": "3d0e27bbbc0e9e223ad618b89c9d8f5e05b57d73",
+    "dispatch_tree_id": "2426eb03f63f7f8ed9f3f11ac255f8fe37a7669c",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "bdb6becdd3499dd32bca9004460f375b8465eb0e",
+    "scheduler_config_sha256": "a83e6f853a7d159af999c9af2eaa2ab6062cb3c8e0a7feafb58eb57578af20a8",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no projection-reuse authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named current-head Python-v1 RuntimeCAS implementation and direct-test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic-identity boundary only; no datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no Kit persistence or recovery authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer and admitted nested HEAD/tree identities; inspected outer and selected accelerator porcelain before receipt creation; computed scheduler/source/test Git blobs and SHA-256 digests; inspected RuntimeCAS schemas, canonical identity, projection publication and lookup paths; searched the exact accelerator supervisor and PCSM-test roots for SourceLinkReceipt, SourceMapResolver, and source_map_resolver; and ran the required and focused suites with prescribed PATH, Python 3.12, fresh private HOME/XDG roots, and user site disabled.",
+      "result": "The dispatch commit equals outer HEAD and the selected accelerator gitlink equals its checked-out HEAD/tree. The inspected worktrees were clean before this receipt write. RuntimeCAS@1 is current at the recorded accelerator tree. No aggregate PCSM SourceLinkReceipt, SourceMapResolver, or canonical PCSM source-map CID was found in the searched exact roots. Required validation passed and focused direct validation passed.",
+      "invalidates_on": "Any bound outer commit/tree, admitted gitlink/head/tree, scheduler/source/test digest, RuntimeCAS schema/identity/projection/invalidation behavior, PCSM source-map capability, or sealed validation result change requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span identities to a projection. Git trees, blobs, SHA-256 digests, RuntimeCAS runtime-artifact:sha256 identities, and fixture tree strings are freshness or generic-contract evidence only and are not relabelled as this missing PCSM contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "RuntimeCAS@1 already unifies exact reuse, dependency-aware invalidation, durable integrity checks, and current-tree projection fencing. A PCSM adapter or separate reuse ledger would duplicate its canonical key, tree, authority, freshness, dependency, invalidation, and projection-pointer decisions and exceeds the receipt-only dispatch.",
+    "components": [
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.runtime.runtime_cas.RuntimeCAS@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/runtime-cas@1",
+        "version": 1,
+        "role": "Tiered dependency-aware store providing deterministic exact-key reuse, durable artifact verification, dependency-closure checks, bounded transitive invalidation, and current-tree-bound projection lookup."
+      },
+      {
+        "component": "RuntimeArtifactKey@1 and CanonicalArtifactIdentity@1",
+        "schemas": [
+          "ipfs_accelerate_py/agent-supervisor/runtime-artifact-key@1",
+          "ipfs_accelerate_py/agent-supervisor/runtime-artifact-identity@1",
+          "ipfs_accelerate_py/agent-supervisor/runtime-artifact@1",
+          "ipfs_accelerate_py/agent-supervisor/runtime-dependency@1"
+        ],
+        "version": 1,
+        "role": "Canonical JSON/SHA-256 identity binds namespace, kind, authority, full ResultBinding revisions, sorted dependency identities, payload schema, payload digest, and freshness."
+      },
+      {
+        "component": "AuthoritativeProjection@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/runtime-projection@1",
+        "version": 1,
+        "role": "Atomically written mutable pointer binding projection key, namespace, tree, authoritative artifact, exact key, update time, and canonical SHA-256 projection digest; stale or forged targets are rejected."
+      },
+      {
+        "component": "CASInvalidationReceipt@1",
+        "schemas": [
+          "ipfs_accelerate_py/agent-supervisor/runtime-invalidation@1",
+          "ipfs_accelerate_py/agent-supervisor/runtime-invalidation-transaction@1"
+        ],
+        "version": 1,
+        "role": "Canonical, crash-recoverable tombstone transaction that invalidates roots and transitive dependents while preserving unrelated artifacts and removing live key/projection pointers."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "reuse": "artifact_key canonicalizes verified dependency IDs and ResultBinding; get_or_compute performs a fresh exact-key lookup before invoking its producer. Canonical JSON is order independent, so identical content/bindings reuse one runtime-artifact:sha256 identity; changed payload, producer, policy, capability, or semantic-dependency revisions produce distinct identities.",
+      "stale_rejection": "project requires an authoritative fresh record with matching namespace and current tree. lookup_projection verifies its schema/digest/path/key/namespace/tree, gets the target with require_fresh=True, rechecks target key and tree, and returns typed projection_binding_mismatch or stale_or_forged_projection rather than reuse. Invalidation tombstones remove affected exact-key and projection pointers.",
+      "authority_boundary": "RuntimeCAS is a derived supervisor runtime cache. It does not make model output evidence, select canonical PCSM source identity, prove semantic equivalence, mutate source, authorize M2/M3 work, or make a completion/promotion decision. RuntimeArtifact aliases and pointers remain non-canonical for the absent PCSM source-map contract."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/runtime_cas.py",
+      "git_blob": "5cc44d570613b25017f791511f505e1ec02c21c1",
+      "sha256": "cb7a6696266ad15013480b4913ab3eadb74cf847a6a597950590142c860bd28f",
+      "role": "Current-head RuntimeCAS@1 implementation: canonical identity/key, authority/freshness closure validation, exact reuse, AuthoritativeProjection@1 publication/lookup, stale/forged rejection, and dependency invalidation."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_cas.py",
+      "git_blob": "5416c6ac78e79d5c2f776ab5b341bfae61027e3f",
+      "sha256": "21033656aeee44c02193aa8b800d7dd7a149e53c7cba1371539692eea697d4c6",
+      "role": "Eight direct controlled positive/negative generic RuntimeCAS vectors, including exact warm reuse, changed-dependency descendant-only invalidation, current-tree mismatch, expiry, forged dependency, corruption, and authority isolation."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Underlying module exercised by the required PCSM suite; its closed output grammar/rejection coverage is recorded without relabelling it as RuntimeCAS or PCSM projection-reuse coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "focused_runtime_cas_positive_and_negative_tests": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm084-direct-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_runtime_cas.py",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, prescribed PATH, fresh private HOME/XDG root, user-site disabled, and accelerator source only on PYTHONPATH.",
+      "result": "8 passed in 1.11s.",
+      "positive_coverage": [
+        "Canonical identity is order independent and binds payload plus producer, policy, capability, and semantic-dependency revisions.",
+        "An exact fresh key performs warm reuse without producer execution, while semantic dependency replacement invalidates only affected descendants and preserves unrelated work.",
+        "A fresh authoritative record can be published and retrieved through an authoritative projection across process/host/shared tiers."
+      ],
+      "negative_coverage": [
+        "Foreign-tree publication/lookup, expired artifacts, explicitly stale evidence, invalidated targets, malformed projections, and forged projection targets are rejected rather than reused.",
+        "Forged/future dependencies, corrupted durable objects, draft-to-authoritative laundering, and immutable-store overwrite are rejected or repaired fail-closed."
+      ],
+      "scope_limit": "All direct vectors use temporary directories and synthetic ResultBinding/tree/dependency values. They establish the selected generic contract only, not a canonical PCSM source-map-bound projection, exact-PCSM source-forest execution, proof, or promotion."
+    },
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm084-required-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME/XDG root.",
+      "result": "11 passed in 0.64s.",
+      "scope_limit": "The required PCSM root verifies structured candidate-output grammar and rejection behavior. It does not import or exercise RuntimeCAS@1 or a concrete PCSM projection reuse/stale-rejection path."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "The selected authority is a deterministic runtime-cache/projection mechanism, not a formal prover. No source-map-bound PCSM projection request/result or approved digest-bound formal-prover deployment was present in the sealed environment; passing tests are not relabelled as formal proof or promotion."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler/source/test digests; RuntimeCAS schemas and source-defined deterministic/authority behavior; absence of the searched PCSM source-map contract; and the sealed required validation result of 11 passed.",
+    "estimated": "None. No estimate supports implementation, identity, validation success, source-forest execution, proof, or promotion.",
+    "simulated": "The focused sealed RuntimeCAS suite executed eight controlled temporary-directory fixtures using synthetic trees, bindings, revisions, and dependencies. Its 8 passed result proves the generic tested contract only.",
+    "unavailable": "A versioned PCSM ProjectionRoot/PCSM projection schema; a canonical named PCSM projection key/head; exact repository/tree/source-map CID admission; aggregate PCSM SourceLinkReceipt/source-map CID; a concrete source-map-bound PCSM projection/reuse/stale-rejection result; formal proof; and immutable self-CID for this receipt."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_runtime_projection_reuse_and_stale_rejection_available_pcsm_projection_binding_unavailable_non_promoted",
+    "available_capability": "Current-head RuntimeCAS@1 provides deterministic exact reuse for an identical canonical key, versioned schema-bound SHA-256 identities, fresh authoritative current-tree projections, integrity/authority/dependency validation, and typed stale/forged/tree-mismatch rejection covered by direct positive and negative fixture tests.",
+    "unavailable_capability": "A current-head PCSM-specific projection reuse and stale-rejection package that accepts a versioned canonical PCSM projection, binds it to exact PCSM repository/tree/source-map CID identities, publishes/retrieves a named PCSM projection head, and has direct source-map-bound positive/negative tests.",
+    "missing_bindings": [
+      "PCSM ProjectionRoot@1 schema and canonical serialization/CID rule",
+      "exact PCSM repository/tree/source-map CID fields and admission checks",
+      "named PCSM projection-head namespace/key and expected-head semantics",
+      "canonical aggregate PCSM SourceLinkReceipt/source-map CID",
+      "concrete PCSM source-forest projection/reuse/stale-rejection request/result CIDs",
+      "direct PCSM-specific positive and negative projection reuse/stale-rejection vectors"
+    ],
+    "disposition": "No RuntimeCAS SHA-256 artifact identity, generic projection digest, fixture tree, cache hit, or test result is promoted to canonical PCSM identity, PCSM source-forest execution, proof, completion authority, or promotion."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify RuntimeCAS implementation/tests, create a PCSM adapter or projection schema, install dependencies, or alter protected planning/configuration files.",
+    "RuntimeCAS stores generic supervisor result envelopes and relies on caller-supplied ResultBinding/tree identity; it cannot infer the missing canonical PCSM source-map relation.",
+    "A RuntimeCAS runtime-artifact:sha256 identity and AuthoritativeProjection projection_digest are SHA-256 identifiers, not IPFS CIDs and not a substitute for the missing PCSM CID binding.",
+    "The required PCSM suite passes but does not exercise the selected runtime authority; direct focused coverage passes only with simulated fixtures.",
+    "No model output, watcher event, arbitrary cache hit, alias, generic artifact identity, receipt, or fixture is treated as semantic authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, RuntimeCAS schema/version/identity/projection/invalidation behavior, PCSM source-map capability, or validation result changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify RuntimeCAS, its tests, protected planning files, external dependencies, or unrelated admitted history."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalent_reused_first": true,
+    "generic_runtime_reuse_deterministic_where_required": true,
+    "generic_runtime_stale_rejection_deterministic_where_required": true,
+    "generic_runtime_schema_version_and_sha256_identity_bound_where_applicable": true,
+    "generic_runtime_direct_positive_and_negative_tests_passed": true,
+    "sealed_required_validation_passed": true,
+    "pcsm_specific_projection_schema_version_and_cid_binding_available": false,
+    "exact_pcsm_source_map_cid_available": false,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "aliases_not_promoted_to_canonical_identity": true,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "promotion_status": "non_promoted_missing_pcsm_projection_schema_source_map_cid_and_source_forest_instance"
+  }
+}
