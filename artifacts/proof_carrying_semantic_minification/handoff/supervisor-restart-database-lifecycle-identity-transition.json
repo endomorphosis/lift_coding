@@ -1,0 +1,239 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-database-lifecycle-identity-transition@1",
+  "reason": "bind_distinct_database_and_portal_lifecycle_identities",
+  "prior_checkpoint": {
+    "source_head": "e9e37e69e0e4ca9728f3661ef96305a3f2a8822e",
+    "repository_tree_id": "e2bc16eac7ee8124af71af18d495da89415e815a",
+    "prior_artifact_commit": "7ce3772ae606c6f8a15dc25a434dd97df929cfde",
+    "database_watchdog_activity_transition_receipt_id": "sha256:8c1b0ed9fbc29f3116ac670405019df3d3ef1f51eb144f5f6e9dca64e5e873f0",
+    "changed_receipts": [
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-022.json",
+        "bytes_id": "sha256:a5212cc3c155b4e73edb7da41271e061f20665786196c27217aa1a38a51cb001"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-024.json",
+        "bytes_id": "sha256:72b9869c58612b1a6a014f785a70286a24a418745cb440da7646abf4516c8d32"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-025.json",
+        "bytes_id": "sha256:fa1cd495342b314476ce8f01025a49c5bbd57af09f64abc481f5135316ca25b8"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-041.json",
+        "bytes_id": "sha256:769c976924565b9faeb13c962d405da360b37832fc1435be48dc7ad7cb98d3b6"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-042.json",
+        "bytes_id": "sha256:dc5c2e351aa436c7ee214b6045c15f8a386b03d5026bf195e04ceaf86eee8eab"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-050.json",
+        "bytes_id": "sha256:fae4dae308bcf1e5dfb5176c56e32734cc1ffb1524b903af2713f3495d773477"
+      }
+    ]
+  },
+  "repair_base": {
+    "source_head": "6669c277371bfbc820ab7896ca20214bc342dfe3",
+    "repository_tree_id": "971951e59a49c58c46d1fca02138c7b24eeeb3ac",
+    "parent": "e9e37e69e0e4ca9728f3661ef96305a3f2a8822e",
+    "operator_identity": "sha256:1a0eb7be30733a98dde278cfee15f7247612c96c3e6f085711bb6c112ef32e15",
+    "config_identity": "sha256:5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "validator_identity": "sha256:57e3b957019ef0ee20cee5d2f50a7bfb5b1172ea8ee04db89a3426d28a290e89",
+    "accelerator_head": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+    "accelerator_tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07",
+    "changed_paths": [
+      "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "external/ipfs_accelerate",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "test/test_pcsm_database_lifecycle_identity_transition.py"
+    ],
+    "nested_changed_paths": [
+      "ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py",
+      "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+      "test/api/test_agent_supervisor_reconciliation_auto_unblock.py",
+      "test/api/test_implementation_supervisor_control_plane_pool_lease.py"
+    ],
+    "nested_commits": [
+      {
+        "purpose": "watchdog_two_identity_corroboration",
+        "source_head": "25449e8915d9a880c45a342aa627d73005e1ee75",
+        "repository_tree_id": "7c0504b9f475100f180db57a0ef9f96b66f1d40b",
+        "parent": "c757022cf3b2ad35031afe4912ff20cbe6144a5d",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "test/api/test_implementation_supervisor_control_plane_pool_lease.py"
+        ]
+      },
+      {
+        "purpose": "completed_rescue_cleanup_portal_identity",
+        "source_head": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "repository_tree_id": "21326b15fe1fdf24f1f93009e162694cc84c6c07",
+        "parent": "25449e8915d9a880c45a342aa627d73005e1ee75",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py",
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "test/api/test_agent_supervisor_reconciliation_auto_unblock.py"
+        ]
+      }
+    ]
+  },
+  "sealed_source": {
+    "source_head": "98bd9add5d8bf0f8dadb9d33da732cbbb706c28b",
+    "repository_tree_id": "5497c277d33612c2bfaf6500aa20769a0c3f88d2",
+    "parent": "6669c277371bfbc820ab7896ca20214bc342dfe3",
+    "operator_identity": "sha256:e11e485c216afe7e369e8299ed0745e9e090b20039fd1a6cc25c909d791c7b89",
+    "changed_paths": [
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+    ]
+  },
+  "watchdog_identity_contract": {
+    "database_projection_identity_domain": "database_task_projection_binding",
+    "portal_lifecycle_identity_domain": "task_projection_allowed_paths_portal_identity",
+    "cross_domain_task_cid_equality_required": false,
+    "mutable_projection_field_excluded_from_immutable_digest": "status",
+    "required_exact_bindings": [
+      "managed_child_process_birth",
+      "task_alias",
+      "database_task_cid",
+      "portal_lifecycle_task_cid",
+      "attempt_id",
+      "lifecycle_attempt_number",
+      "claim_id",
+      "lease_id",
+      "worktree_path",
+      "branch",
+      "repository_root",
+      "projection_immutable_digest",
+      "database_attempt_binding_id",
+      "portal_identity_derivation"
+    ],
+    "decision_on_exact_live_successor": "keep_running_before_supervisor_maintenance",
+    "missing_ambiguous_or_tampered_disposition": "fail_closed",
+    "daemon_recycled": false,
+    "attempt_budget_consumed": false,
+    "provider_invocation_consumed": false
+  },
+  "completed_rescue_cleanup_identity_contract": {
+    "completion_authority": "database_completed_receipt_and_preparation_receipt",
+    "completion_identity_source": "verified_portal_completion_event_identity",
+    "completion_attempt_lookup": "unique_sibling_lane_attempt_by_completion_receipt_attempt_hash",
+    "required_exact_bindings": [
+      "task_alias",
+      "database_task_cid",
+      "task_revision",
+      "attempt_id",
+      "attempt_number",
+      "claim_id",
+      "lease_id",
+      "owner_session_id",
+      "fencing_token",
+      "fence_epoch",
+      "projection_immutable_digest",
+      "database_attempt_binding_id",
+      "portal_identity_derivation",
+      "rescue_branch_portal_fingerprint"
+    ],
+    "rescue_branch_fingerprint_domain": "portal_lifecycle_identity",
+    "mutable_projection_field_excluded_from_immutable_digest": "status",
+    "portal_projection_status_is_cleanup_authority": false,
+    "missing_duplicate_or_tampered_disposition": "canonical_completion_proof_unavailable",
+    "supported_cleanup_only": true,
+    "manual_worktree_mutation": false
+  },
+  "validations": [
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/test_implementation_supervisor_control_plane_pool_lease.py"
+      ],
+      "outcome": "passed",
+      "summary": "46 passed in 31.66s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_reconciliation_auto_unblock.py"
+      ],
+      "outcome": "passed",
+      "summary": "23 passed in 17.90s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_database_portal_bridge.py"
+      ],
+      "outcome": "passed",
+      "summary": "400 passed in 52.38s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/agent_supervisor"
+      ],
+      "outcome": "passed",
+      "summary": "11 passed in 0.21s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_database_lifecycle_identity_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "5 passed in 0.11s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_blocked_retry_batch_recovery.py",
+        "test/test_pcsm_executor_bootstrap_broker_resilience.py",
+        "test/test_pcsm_stale_worktree_cleanup_transition.py",
+        "test/test_pcsm_validation_path_compatibility_transition.py",
+        "test/test_pcsm_database_watchdog_activity_transition.py",
+        "test/test_pcsm_database_lifecycle_identity_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "22 passed, 4 warnings in 1.00s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all"
+      ],
+      "outcome": "passed",
+      "summary": "valid board: 70 tasks, 11 goals, 96 packages"
+    }
+  ],
+  "historical_receipts_preserved": true,
+  "database_authority_preserved": true,
+  "task_state_mutation": false,
+  "manual_database_mutation": false,
+  "manual_worktree_mutation": false,
+  "receipt_id": "sha256:3f94f1eee5297d02dde7fcebd54e6afc40423534514caf6e565368ddbb58997f"
+}
