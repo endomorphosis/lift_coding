@@ -1,0 +1,264 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-database-projection-callback-identity-transition@1",
+  "reason": "stamp_projection_progress_and_normalize_sealed_callback_cid",
+  "prior_checkpoint": {
+    "source_head": "576ccccc88c5b4bc48ac51b947deab3317ee53af",
+    "repository_tree_id": "6e50c230c0a1af9c46a9d6c0d78811cc28f65de8",
+    "prior_artifact_commit": "28dc01c5377a5e1e964453cd79f7a95bd0ae06fa",
+    "supervisor_callback_continuity_transition_receipt_id": "sha256:29f4c4adf68f09ec4e6577214dbcce788f203a188e77e2117c32f89996402cab",
+    "changed_receipts": [
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-034.json",
+        "bytes_id": "sha256:6c36cc8c78ac2a33c9659bb5ca08df23523b9012357e7a231db21ccb8d9c025e"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-036.json",
+        "bytes_id": "sha256:fb15bc6896aecfd7474979f5be8ba4d02b255c823b9b8e78d0ff4723bb0e67d4"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-046.json",
+        "bytes_id": "sha256:f48ebb2498e6541c767b138aed324967a1523636897d3a4e493b5945f33642cf"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-047.json",
+        "bytes_id": "sha256:a765a7ca3538e3c3420ed096ddcb3ea42902f35f7cdb99c942473a9d5c5fe86a"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-060.json",
+        "bytes_id": "sha256:96f3a73030606eff771ed4799ba4928ff23cd1792d84b9b149fcb91c0c21c71d"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-061.json",
+        "bytes_id": "sha256:19b3d03e174fdbd47660422cac94d81315fa16349267ca60c9bcb713cdebb833"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-062.json",
+        "bytes_id": "sha256:3050321e15513c3605afefbfa21d00c7f85da2201ed44fb329f3ce8a55c651b7"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-063.json",
+        "bytes_id": "sha256:e8469fe01517fb37fc08951a287b0c4e69b447a23b5c63faca0bba7cc0696fc2"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-064.json",
+        "bytes_id": "sha256:a553c00b323ebf9b121105b31260aa4486aacae24fc866be6bdd017f69d90ca9"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-065.json",
+        "bytes_id": "sha256:797f24853ebee3ccad3638e8f71c27ef4dcdc06d13fafbc8659cf28b7d9c4ea8"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-070.json",
+        "bytes_id": "sha256:94e6611fab37fd69c54dd0d9b4483f9f8ed8a31e6f0c58908a229f1d59938847"
+      }
+    ]
+  },
+  "repair_base": {
+    "source_head": "7d78463e458db7108ad71d686b77f0c40887c991",
+    "repository_tree_id": "2128bcca335ba16a334b10592ccda9eb5285bfad",
+    "parent": "576ccccc88c5b4bc48ac51b947deab3317ee53af",
+    "operator_identity": "sha256:a0f323a0d21b854af26c6410a506dfe346ff61204d28c4c27633f8e64efced99",
+    "config_identity": "sha256:920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "validator_identity": "sha256:57e3b957019ef0ee20cee5d2f50a7bfb5b1172ea8ee04db89a3426d28a290e89",
+    "accelerator_head": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+    "accelerator_tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+    "changed_paths": [
+      "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "external/ipfs_accelerate",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "test/test_pcsm_database_projection_callback_identity_transition.py"
+    ],
+    "nested_changed_paths": [
+      "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+      "test/api/test_agent_supervisor_database_implementation_daemon.py",
+      "test/api/test_agent_supervisor_merge_train.py",
+      "test/api/test_agent_supervisor_worker_watchdog.py"
+    ],
+    "nested_commits": [
+      {
+        "purpose": "database_compatibility_projection_progress_boundary",
+        "source_head": "5f1f018ebc53eed4fcc094e224449b02602d5ae5",
+        "repository_tree_id": "1ed29cb116fa4da93ecbaa736f7742c44ea43096",
+        "parent": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+          "test/api/test_agent_supervisor_database_implementation_daemon.py",
+          "test/api/test_agent_supervisor_worker_watchdog.py"
+        ]
+      },
+      {
+        "purpose": "sealed_projection_cid_callback_normalization",
+        "source_head": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "repository_tree_id": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "parent": "5f1f018ebc53eed4fcc094e224449b02602d5ae5",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+          "test/api/test_agent_supervisor_merge_train.py"
+        ]
+      }
+    ]
+  },
+  "sealed_source": {
+    "source_head": "20b21a1f7484ff83cb59c0b604264d60778be77f",
+    "repository_tree_id": "49f00c8dfc97776b1a4540dfc9538db4ef5d0879",
+    "parent": "7d78463e458db7108ad71d686b77f0c40887c991",
+    "operator_identity": "sha256:8ca6d2442e7e512124de4053e62b7e2c7155fedbf19a3f7523aae481837c2ec2",
+    "changed_paths": [
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+    ]
+  },
+  "projection_progress_contract": {
+    "projection_schema": "ipfs_accelerate_py/agent-supervisor/database-task-state-compatibility-projection@1",
+    "successful_snapshot_timestamp": "single_utc_now_after_stable_database_snapshot",
+    "successful_snapshot_progress_binding": "heartbeat_at_equals_last_progress_at",
+    "incomplete_projection_progress_authority": false,
+    "missing_or_malformed_progress_disposition": "fail_closed",
+    "frozen_projection_disposition": "heartbeat_stale_after_configured_bound",
+    "terminal_quiescence_fields_changed": false
+  },
+  "callback_cid_normalization_contract": {
+    "scope": "sealed_database_portal_merge_continuation",
+    "accepted_source_cid": "projection_task_cid",
+    "normalized_comparison_cid": "task_cid",
+    "normalization_surface": "in_memory_exact_source_matching_only",
+    "event_log_mutated": false,
+    "foreign_cid_disposition": "merge_queue_reconciliation_producer_source_conflict",
+    "missing_ambiguous_or_tampered_disposition": "fail_closed"
+  },
+  "incident_evidence": {
+    "generation": 46,
+    "observations": [
+      {
+        "scope": "database_compatibility_projection",
+        "failure": "fresh_active_projection_had_no_progress_timestamp"
+      },
+      {
+        "task_alias": "PCSM-036",
+        "failure": "producer_projection_cid_differed_from_database_task_cid"
+      }
+    ],
+    "controlled_stop_checkpoint": {
+      "completed_task_count": 54,
+      "in_progress_task_count": 2,
+      "in_progress_tasks": [
+        "PCSM-071",
+        "PCSM-072"
+      ],
+      "todo_task_count": 14,
+      "blocked_task_count": 0,
+      "task_state_mutation": false,
+      "terminal_quiescence": false,
+      "post_stop_observation": {
+        "provider_process_count": 0,
+        "active_queue_entry_count": 0,
+        "runtime_process_count": 0
+      }
+    }
+  },
+  "validations": [
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/api/test_agent_supervisor_database_implementation_daemon.py::test_database_task_state_compatibility_projection_marks_exact_idle_completion",
+        "test/api/test_agent_supervisor_worker_watchdog.py::test_watchdog_projection_progress_timestamp_has_bounded_grace",
+        "test/api/test_agent_supervisor_worker_watchdog.py::test_watchdog_missing_progress_timestamp_remains_fail_closed",
+        "test/api/test_agent_supervisor_merge_train.py::test_database_portal_retry_normalizes_only_sealed_projection_cid"
+      ],
+      "outcome": "passed",
+      "summary": "5 passed"
+    },
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "python",
+        "-m",
+        "py_compile",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    },
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "288d681b6dd68683520758010e7c2f10f72a73cf..e94f1784a38a44ee5da8f11a78ea42a7faefc9fb"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_database_projection_callback_identity_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "7 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_supervisor_callback_continuity_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "5 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all"
+      ],
+      "outcome": "passed",
+      "summary": "valid board: 70 tasks, 11 goals, 96 packages"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_database_projection_callback_identity_transition.py::test_current_transition_receipt_passes_exact_read_only_verifier"
+      ],
+      "outcome": "passed",
+      "summary": "1 passed"
+    }
+  ],
+  "post_integration_canonical_validation": {
+    "condition": "artifact_commit_integrated_on_configured_merge_target_branch_with_stopped_materialized_authority",
+    "cwd": ".",
+    "command": [
+      "python",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "launch-supervisor",
+      "--dry-run"
+    ],
+    "pre_integration_outcome": "not_run_branch_and_materialization_gated",
+    "required_outcome": "passed",
+    "runtime_launch": false,
+    "authority_mutation": false
+  },
+  "historical_receipts_preserved": true,
+  "supervisor_callback_continuity_receipt_preserved": true,
+  "database_authority_preserved": true,
+  "task_state_mutation": false,
+  "manual_database_mutation": false,
+  "manual_worktree_mutation": false,
+  "receipt_id": "sha256:71f11363bf5f1b492925edb97ce1e78cff44089efe416d54e8769e719a14f752"
+}
