@@ -1,0 +1,112 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-stale-worktree-cleanup-transition@1",
+  "reason": "delegate_daemon_stale_worktree_cleanup_to_supervisor",
+  "prior_checkpoint": {
+    "source_head": "4a1c8dbaf45816939761ccc691c4491f5573c6a3",
+    "repository_tree_id": "c1993d61192e638a8dc6fd9d1698556a009debf4",
+    "prior_artifact_commit": "2e026dedf55f06fab065b63c17a8eeccccc63f8b",
+    "descendant_repair_receipt_id": "sha256:a79a2140924385f796cebfe9fad11c4e7f3cfde86b2aa9d377c99754ec14678e",
+    "blocked_retry_batch_receipt_id": "sha256:ea4208115b088de4f18c607fcd9ad4b004620f766be5e69be41a38a379dcdbc9",
+    "changed_receipts": [
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-013.json",
+        "bytes_id": "sha256:b0bc325fb44fa6d875e37d064b50e0e358e0ad117b3dcc2b114a16279fba7ee9"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-016.json",
+        "bytes_id": "sha256:0720b0b773d0106c9f09c9cd980b7c7978e1c99ff9918ca19a569b5701147307"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json",
+        "bytes_id": "sha256:990450a54f3f1f3257f4a919ba102d7469ba78cfd9c671ac787379f7392b2acb"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-018.json",
+        "bytes_id": "sha256:0632937c6263ccae75753bcffc313a23992c19446b9ed662adf0d5588fec03dd"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-019.json",
+        "bytes_id": "sha256:489439a23537e06ecce7fd9434fd3cca6f34582481458ace2d4f4ba219b170db"
+      }
+    ]
+  },
+  "repair_base": {
+    "source_head": "8b8be83c6d9c578c4cec450092e140b929ce12e9",
+    "repository_tree_id": "7d5f723bc23c24dd4d04a33946b6cb7deb468eec",
+    "parent": "4a1c8dbaf45816939761ccc691c4491f5573c6a3",
+    "operator_identity": "sha256:73624ce8f86e3e148684c6a5568e47309e26931dc318ed7888773cb6bc22c7b8",
+    "config_identity": "sha256:5f4222672c5da4a409fdd8428d8de588126848a986dbd4a8ec0ff9435bb0000a",
+    "validator_identity": "sha256:57e3b957019ef0ee20cee5d2f50a7bfb5b1172ea8ee04db89a3426d28a290e89",
+    "accelerator_head": "059d684952a5cdf3430edf70a43c3b9b31dc650a",
+    "accelerator_tree": "067b308e8ff0fba4b9017f240ad774e6cdedd3cf",
+    "changed_paths": [
+      "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "external/ipfs_accelerate",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "test/test_pcsm_stale_worktree_cleanup_transition.py"
+    ],
+    "nested_changed_paths": [
+      "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+      "test/api/test_agent_supervisor_implementation_daemon_runner.py"
+    ]
+  },
+  "sealed_source": {
+    "source_head": "128f2ea1ad10c6608af3827e432d192edc34d7d3",
+    "repository_tree_id": "51eb5ae4e5133c0908f1d4a45cd08ea5ebf3ce92",
+    "parent": "8b8be83c6d9c578c4cec450092e140b929ce12e9",
+    "operator_identity": "sha256:c6fcfa916619bd6692f0299d9988671ae67c1e83c4bb45640d3c84218534bf72",
+    "changed_paths": [
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+    ]
+  },
+  "safety_policy": {
+    "daemon_stale_cleanup_action": "detect_and_delegate",
+    "destructive_cleanup_authority": "supervisor_worktree_reconciliation",
+    "daemon_stale_cleanup_may_remove_worktree": false,
+    "daemon_stale_cleanup_may_delete_branch": false,
+    "dirty_bytes_require_rescue_before_retirement": true,
+    "peer_active_state_requires_preservation": true
+  },
+  "validations": [
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/api/test_agent_supervisor_implementation_daemon_runner.py::test_stale_worktree_cleanup_delegates_protected_dirty_checkout",
+        "test/api/test_agent_supervisor_incremental_runtime.py::test_completed_rescued_dead_pool_workspace_retires_in_three_passes"
+      ],
+      "outcome": "passed",
+      "summary": "2 passed in 7.29s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_stale_worktree_cleanup_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "4 passed in 0.06s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all"
+      ],
+      "outcome": "passed",
+      "summary": "70 tasks, 96 packages, no warnings"
+    }
+  ],
+  "historical_receipts_preserved": true,
+  "database_authority_preserved": true,
+  "task_state_mutation": false,
+  "manual_database_mutation": false,
+  "receipt_id": "sha256:4d86e1fa4452a720859175d2e228dd09f50f92159577154f96ade16cb6e5e0b7"
+}
