@@ -10,7 +10,7 @@
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
   "artifact_identity": "urn:pcsm:task-receipt:PCSM-062@current-head-selected-tests-capability-assessment-v1",
-  "observed_at": "2026-08-28T07:41:44Z",
+  "observed_at": "2026-08-28T07:47:33Z",
   "scope": {
     "assurance_scope": "PCSM Python v1 selected-test capability assessment for the exact current admitted accelerator source forest",
     "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-062.json",
@@ -34,11 +34,11 @@
     "kind": "measured",
     "git_object_format": "sha1",
     "outer_repository": "endomorphosis/lift_coding",
-    "outer_commit": "6e3cc7efc836b0177ed7a236528dc245de269f2b",
-    "outer_tree": "8a115240a7fb7fa87e987ee6edd2d2e922c23ce6",
-    "dispatch_tree_id": "6e3cc7efc836b0177ed7a236528dc245de269f2b",
-    "dispatch_tree_id_equals_outer_commit": true,
-    "dispatch_tree_id_is_not_git_tree_object": true,
+    "outer_commit": "13c23138340fde6b0eefff912e586fa96cb534e8",
+    "outer_tree": "0fd9f6412897a0c1aa6f4d7a1a7a08e4c39395c0",
+    "dispatch_tree_id": "0fd9f6412897a0c1aa6f4d7a1a7a08e4c39395c0",
+    "dispatch_tree_id_equals_outer_commit": false,
+    "dispatch_tree_id_is_not_git_tree_object": false,
     "task_cid": "baguqeerafqmd4fhmnpgshys6gmy3x7a65axqfsnecdjtaw3gqchp3eb4ctrq",
     "accepted_plan_root_cid": "baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla",
     "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
@@ -68,8 +68,8 @@
     "freshness_check": {
       "kind": "measured",
       "status": "passed",
-      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted nested HEAD and HEAD^{tree}; inspected outer and nested porcelain before receipt creation; resolved the required-test symlink; recorded selected implementation/test Git blobs and SHA-256 values; searched the exact PCSM implementation/test roots for current source-map contract identifiers; and used fresh private HOME directories under the prescribed sealed PATH for validation.",
-      "result": "The dispatch commit equals outer HEAD; each recorded nested commit/tree pair equals its checked-out head; the inspected worktrees were clean before receipt creation; the required test root resolves to one PCSM structured-decoding module; and the exact accelerator PCSM roots contain no SourceMapResolver@1, SourceLinkReceipt@1, aggregate source-map, or source_map_resolver identifier.",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted nested HEAD and HEAD^{tree}; inspected outer and direct admitted nested porcelain before receipt creation; enumerated the required-test root; recorded selected implementation/test Git blobs and SHA-256 values; searched the exact PCSM implementation/test roots for current source-map contract identifiers; and used fresh private HOME directories under the prescribed sealed PATH for validation.",
+      "result": "The dispatch tree equals outer HEAD^{tree}; each recorded nested commit/tree pair equals its checked-out head; the inspected outer and direct admitted nested worktrees were clean before receipt creation; the required test root contains one PCSM structured-decoding module; and the exact accelerator PCSM roots contain no SourceMapResolver@1, SourceLinkReceipt@1, aggregate source-map, or source_map_resolver identifier.",
       "invalidates_on": "Any change to a bound commit/tree, gitlink head/tree, scheduler digest, listed source digest, required-test topology/result, selected-test contract, or current source-map contract/CID requires a fresh receipt."
     },
     "pcsm_source_map": {
@@ -178,7 +178,7 @@
       "status": "passed_with_optional_skip",
       "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm062-focus-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_verification_selection.py test/api/test_agent_supervisor_verification_datasets_adapter.py test/api/test_agent_supervisor_pytest_verification_adapter.py",
       "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, fresh private HOME, prescribed PATH, and accelerator source only on PYTHONPATH.",
-      "result": "80 passed, 1 skipped in 1.73s",
+      "result": "80 passed, 1 skipped in 1.65s",
       "skip": "test_live_leaf_probes_when_pythonpath_includes_datasets skipped because optional ipfs_datasets_py leaf modules were intentionally not on PYTHONPATH. The same suite positively tests this absence/fail-closed mode; no live datasets-leaf capability is inferred.",
       "scope_limit": "The focused tests are measured existing-capability validation, not a replacement for a PCSM current-source-map-bound selected-test run."
     },
@@ -188,7 +188,7 @@
       "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
       "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm062-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
       "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME.",
-      "result": "11 passed in 0.37s",
+      "result": "11 passed in 0.34s",
       "scope_limit": "The required root resolves only the PCSM structured-decoding test module, so it is a required-suite result rather than selected-test integration coverage."
     },
     "provider_validation": {
@@ -203,7 +203,7 @@
     }
   },
   "evidence_summary": {
-    "measured": "Current outer/nested Git and tree identities; scheduler digest; clean/freshness checks; required-suite topology; selected implementation/test blobs and SHA-256 values; versioned schemas/interfaces; absence of a PCSM source-map contract in the exact PCSM roots; sealed focused selected-test validation (80 passed, 1 optional skip); and sealed required validation (11 passed).",
+    "measured": "Current outer/nested Git and tree identities; scheduler digest; clean/freshness checks; required-suite topology; selected implementation/test blobs and SHA-256 values; versioned schemas/interfaces; absence of a PCSM source-map contract in the exact PCSM roots; sealed focused selected-test validation (80 passed, 1 optional skip, 1.65s); and sealed required validation (11 passed, 0.34s).",
     "estimated": "None. No estimate is used to establish selected-test behavior, identity, CID binding, validation, or promotion.",
     "simulated": "None. No provider execution is substituted for the sealed validation evidence.",
     "unavailable": "Current aggregate PCSM source-map CID; canonical CodeIR/source identity to current file/node/span resolution; an actual PCSM current-forest selected-test receipt; optional live ipfs_datasets_py leaf capability under the focused validation PYTHONPATH; formal-prover result; and an immutable self-CID for this receipt."
