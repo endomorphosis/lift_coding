@@ -1,0 +1,220 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-054",
+  "title": "Implement stale-tree and stale-map rejection",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G500",
+  "objective_id": "PCSM-054",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-054@current-head-stale-tree-stale-map-capability-gap-v1",
+  "observed_at": "2026-08-28T06:35:46Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 stale-tree and stale-source-map rejection capability assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-054.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-054.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "No PCSM stale-tree/stale-map admission package, versioned staleness receipt, current aggregate source-map CID, or package-specific positive/negative vector module exists in the exact admitted Python source forest. Existing generic stale-tree checks are scoped to control-plane request identity or repair-packet tree/forest handles; they neither consume a canonical PCSM source-map identity nor reject an obsolete source-map entry before Python source-link/rewrite admission. PCSM-051 and PCSM-052 independently record the missing SourceMapResolver@1, SourceLinkReceipt@1, aggregate source-map CID, and linker. This dispatch permits only the receipt, so the smallest authority-preserving delta is a typed unavailable disposition rather than a competing staleness authority or unreviewed source mutation.",
+    "non_promotion_reason": "The required general agent-supervisor suite passes in provider and sealed environments, but it exercises only structured-decoding grammar admission. The source-map prerequisite and a staleness package bound to the exact current forest remain absent; no completion or promotion is authorized."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish stale-tree/stale-map behavior, current-tree identity, schema binding, or test success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize mutation or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "24d6b5050a569c9375b1b1f134a4f41409edf695",
+    "outer_tree": "0eb9b1447c03a1497b934702bdc82e5cdb973189",
+    "dispatch_tree_id": "24d6b5050a569c9375b1b1f134a4f41409edf695",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract only; no PCSM source-map staleness authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "named Python-v1 implementation boundary; no PCSM stale-tree/stale-map package selected",
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "source-CID/source-span component boundary only; no aggregate PCSM source-map staleness authority selected",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no PCSM source-map staleness authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted nested HEAD and HEAD^{tree}; inspected outer porcelain before receipt creation; searched the exact accelerator implementation and required-test source roots; and inspected the nearest generic stale-tree components.",
+      "result": "The dispatch commit equals outer HEAD, the recorded nested commit/tree pairs equal their checked-out heads, and the outer worktree was clean before this receipt was added. Generic stale-tree checks exist, but the search found no SourceMapResolver, SourceLinkReceipt, source-map resolver, PCSM stale-map admission, or package-specific stale-tree/stale-map test surface.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink/head/tree, scheduler digest, listed source digest, source-search result, current source-map contract/CID, or required-test result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree PCSM SourceMapResolver@1, SourceLinkReceipt@1, or canonical aggregate source-map CID exists. Git blobs, individual source SHA-256 values, AST spans, source CIDs, and generic tree/forest handles are not substitutes for a current PCSM source-map identity. Consequently a stale-map comparison cannot be performed or truthfully claimed."
+    }
+  },
+  "required_package_assessment": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_package": "PCSM stale-tree/stale-map admission behavior for Python v1",
+    "required_contract": "A versioned, closed staleness admission receipt bound to canonical source identity, current commit/tree, aggregate source-map CID, exact file/node/span mapping, and deterministic reject reason",
+    "required_bindings": [
+      "explicit staleness-admission schema and version",
+      "canonical CodeIR or source identity CID rather than an alias",
+      "base current commit and tree identity",
+      "current aggregate source-map CID and exact current file CID",
+      "normalized repository-relative path and resolved node/SourceSpan",
+      "deterministic decision and typed stale-tree versus stale-map reject reason",
+      "positive current-tree/current-map admission and negative stale-tree, stale-map, missing-map, ambiguity, overlap, and path-escape vectors"
+    ],
+    "source_search": {
+      "kind": "measured",
+      "method": "rg -n -i --glob '*.py' --glob '*.json' --glob '*.md' 'Stale(Source|Tree|Map)|SourceLinkReceipt|SourceMapResolver|BoundedPythonLinker|SemanticSourceLinker|source_link_receipt|source_map_resolver|stale[-_ ]map|stale[-_ ]tree' over external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor and external/ipfs_accelerate/test/agent_supervisor, followed by focused inspection of control/control_plane.py and proof/contract_repair_packet.py.",
+      "result": "Generic stale-tree controls were found, including StaleTreeError for a control-plane identity validator and repair-packet tree/forest-handle integrity checks. No SourceMapResolver, SourceLinkReceipt, source-map resolver, aggregate PCSM source-map CID, stale-map admission, or PCSM-specific stale-tree/stale-map test module was found.",
+      "meaning": "The generic controls remain in their own authority domains and cannot be relabelled as current-forest source-map staleness admission."
+    },
+    "dependency_assessment": {
+      "kind": "measured",
+      "dependency": "PCSM-052 (with PCSM-051 as its source-map prerequisite)",
+      "receipts": [
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-051.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-052.json"
+      ],
+      "result": "Those receipts record the same source-map/linker capability gap. Their outer-tree observations are historical and not reused as current identity evidence here; this receipt rechecked the current source forest and independently confirmed the prerequisite remains absent."
+    },
+    "disposition": "The requested behavior cannot truthfully be claimed implemented, deterministic as a current-forest source-map admission gate, schema/version/CID bound, or covered by package-specific positive and negative tests. No source mutation, proof acceptance, validation acceptance, promotion, or task completion is authorized."
+  },
+  "nearest_existing_equivalents": [
+    {
+      "kind": "measured",
+      "component": "ipfs_accelerate_py.agent_supervisor.control.control_plane.StaleTreeError and identity-validator invocation",
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/control_plane.py",
+      "git_blob": "56354e87b95dbbdcd03096c1f246eb460043a7d9",
+      "sha256": "74e11f49840832db64b1f0799343ca44eec702c01f456fd6f444b7b8a10ccb9a",
+      "authority_boundary": "Rejects a control-plane operation whose repository/tree identity validator fails after its repository and state roots have been allowlisted.",
+      "rejection_reason": "It has no PCSM source-map schema/CID, canonical source identity, exact file/node/span resolution, stale-map distinction, or source-link/rewrite admission result."
+    },
+    {
+      "kind": "measured",
+      "component": "ipfs_accelerate_py.agent_supervisor.proof.contract_repair_packet repair-expansion handle integrity checks",
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/contract_repair_packet.py",
+      "git_blob": "dcff31dce132c73a8afd36be09e90841b01adaea",
+      "sha256": "dc4c1ff5f26f0285d3799b9320cc64b1d5534a8e46036ffb20502752a2f45574",
+      "authority_boundary": "Fails closed when a packet expansion handle has a tree_id or forest_id different from its parent packet.",
+      "rejection_reason": "It binds packet handles, not an aggregate PCSM source map or canonical source-to-current-file/node/span map; it provides no stale-map vector or source-link/rewrite authorization."
+    },
+    {
+      "kind": "measured",
+      "component": "ProgramRepairSynthesizer@1 and prove_equality_under_theory",
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py",
+      "git_blob": "0f61644a5b2b0acd23d1cad3747a43b4515a1f39",
+      "sha256": "f48abcb5ac82c242a65377a50838d1b863da50d4c9ada2ac9deaec9dbb43a83d",
+      "authority_boundary": "Bounded deterministic proposal-only term/candidate repair and equality rewriting under a declared theory.",
+      "rejection_reason": "It neither resolves canonical source identities through a current source map nor provides a stale-tree/stale-map source admission decision."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "nearest_component_positive_and_negative_coverage": {
+      "kind": "measured",
+      "component": "structured decoding suite reached through external/ipfs_accelerate/test/agent_supervisor/pcsm symlink",
+      "positive_coverage": [
+        "all closed task families have grammars",
+        "valid compact structured output decodes",
+        "bounded explicit abstention remains valid"
+      ],
+      "negative_coverage": [
+        "parse failures and duplicate JSON fields reject",
+        "unknown outer/payload fields and model-created completion reject",
+        "untyped context, invalid ranking vectors, and unbounded/untyped patch sketches reject"
+      ],
+      "non_equivalence": "These assertions establish structured model-output admission only. They do not test current-tree freshness against a source-map CID, a stale-map decision, or a source-link/rewrite operation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "command_executed": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Provider Python 3.12.3 with provider-installed pytest 9.1.1 and plugins.",
+      "result": "11 passed in 0.41s",
+      "scope_limit": "The passing suite does not establish the absent stale-tree/stale-map package."
+    },
+    "sealed_required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm054-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME.",
+      "result": "11 passed in 0.34s",
+      "scope_limit": "This is a sealed passing result for the required general suite only; it is not package-specific stale-tree/stale-map validation."
+    },
+    "package_specific_tests": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM stale-tree/stale-map implementation, versioned staleness receipt schema, aggregate current-forest source-map CID, or stale-tree/stale-map positive/negative vector module exists in the bound source forest. Adjacent generic controls and structured-decoding tests are not substituted."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-054 stale-tree/stale-map proof obligation or approved digest-bound prover deployment is present in the authoritative environment."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; scheduler and source SHA-256 values; generic stale-tree control boundaries; current absence search; and sealed required-suite result (11 passed in 0.34s).",
+    "estimated": "None. No estimate is used to establish staleness behavior, identity, validation, or promotion.",
+    "simulated": "Provider required-suite execution (11 passed in 0.41s). It is corroborative only and is not substituted for sealed validation or missing package-specific coverage.",
+    "unavailable": "A PCSM stale-tree/stale-map admission package; versioned staleness receipt; aggregate current-forest source-map CID; canonical source-to-current-file/node/span resolution; deterministic stale-map decision; package-specific positive and negative vectors; formal-prover result; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only under exact declared-output authority; no task-owned implementation or test path may be changed by this dispatch.",
+    "Generic stale-tree controls remain valid only in their established control-plane and repair-packet domains and are not promoted or relabelled as PCSM source-map admission.",
+    "Without a current aggregate source-map CID, stale-map rejection cannot be evaluated; treating a Git tree, blob, AST span, or alias as that CID would weaken the required authority boundary.",
+    "The required suite passes under the sealed environment, but it provides no stale-tree/stale-map positive or negative coverage.",
+    "No aliases are accepted as canonical identity and no M2/M3 mutation, generated-source mutation, or automatic source materialization is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter protected planning documents, existing generic stale-tree components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, source-search result, source-map contract/CID, or validation-environment capability changes."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalents_reused_first": true,
+    "typed_unavailable_disposition_recorded": true,
+    "evidence_classes_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "provider_required_validation_passed": true,
+    "authoritative_sealed_validation_passed": true,
+    "package_specific_positive_and_negative_tests_available": false,
+    "required_package_implemented": false,
+    "promotion_status": "non_promoted_unavailable"
+  }
+}
