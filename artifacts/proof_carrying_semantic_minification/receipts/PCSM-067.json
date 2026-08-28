@@ -1,0 +1,267 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-067",
+  "title": "Integrate qualified e-graph normalization",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-067",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-067@current-head-qualified-egraph-normalization-capability-assessment-v1",
+  "observed_at": "2026-08-28T15:29:02Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 qualified e-graph-normalization capability assessment for the exact current admitted source forest",
+    "language": "Python",
+    "language_version": "3.12",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-067.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-067.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "implementation_delta": "The exact current accelerator head already contains ProgramRepairSynthesizer@1's versioned equality-saturation path: typed e-classes, reviewed rules and side conditions, finite depth/node bounds, canonical equality-rewrite receipts, cheapest-representative extraction, replay, independent effect/equivalence checks, and explicit unavailable-feature reporting. ArchitectureIR, ArchitectureGraphBuilder, and DuplicateAuthorityDetector are also current reusable PCAR prerequisites. The exact source forest does not contain the PCAR-009-owned architecture_refactorer/egraph_normalizer.py or its dedicated test, nor an adapter that binds the program-repair equality domain to PCAR-009's reviewed architecture-refactorer domains and multi-objective extractor. The declared-output authority permits only this receipt, so no duplicate normalizer, unsafe adapter, source-map authority, or test alteration was created.",
+    "non_promotion_reason": "Although a narrow deterministic equality-rewrite probe and the required sealed PCSM suite pass, the focused current-head e-graph suite has two failing tests: replay leaves one duplicate redex unreduced, and saturation fails to e-match a newly inserted e-node. These failures invalidate qualification of the reusable path for PCSM-067. In addition, the PCAR-009 module/test, architecture-domain rule catalog, rule-specific proof/translation vectors, multi-objective extraction contract, and canonical aggregate PCSM source-map CID are absent. This receipt records a typed honest non-promotion rather than manufacture an integration, proof, CID, passing validation, or promotion claim."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish source identity, e-graph behavior, CID binding, validation success, proof, or promotion.",
+    "simulated": "A controlled non-authoritative exercise; it cannot replace sealed validation or authorize promotion.",
+    "unavailable": "A required identity, capability, contract, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "61189f6be253aa3cacb45f122673fe1db650f096",
+    "outer_tree": "6c13f78744cd373b924870cbf5da4a19c94f7582",
+    "dispatch_tree_id": "61189f6be253aa3cacb45f122673fe1db650f096",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "objective_revision": "baguqeeraxzdc7ieffyo4uti22tgcq5svdzij66iijhff2z26jm53ycaafl7q",
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no e-graph-normalization authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "current Python-v1 equality-saturation implementation/test and architecture-refactorer prerequisite authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic-identity boundary only; no PCSM source-map authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no e-graph-normalization authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed_with_qualification_blockers",
+      "method": "Compared outer HEAD and HEAD^{tree}, every admitted gitlink HEAD and HEAD^{tree}, and porcelain before receipt creation; recorded selected implementation/test Git blobs and SHA-256 values; searched the exact accelerator architecture_refactorer and PCSM roots for egraph_normalizer, its dedicated test, SourceMapResolver, SourceLinkReceipt, and aggregate source-map identities; checked the sealed interpreter for external e-graph runtimes; and ran required, focused, and deterministic-receipt validation under the prescribed PATH, Python 3.12, and fresh private HOME/XDG directories.",
+      "result": "The dispatch commit equals outer HEAD, each recorded gitlink commit/tree pair equals its checked-out head, and inspected worktrees were clean before the receipt write. The existing equality e-graph is current and CID-bound, but PCAR-009's owned normalizer/test and a PCSM source-map are absent. The focused e-graph suite exposes two current failures, so the implementation is not qualified for this task despite the required suite passing.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink head/tree, scheduler digest, listed source/test digest, equality or architecture-refactorer contract version, required/focused validation result, e-graph-runtime capability, PCAR-009 implementation/test, or PCSM source-map capability requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt, SourceMapResolver@1, or canonical source-map CID resolves exact PCSM file/node/span identities in the named accelerator implementation/test roots. Git trees, blobs, ArchitectureIR provenance, and equality-rewrite CIDs are not falsely relabelled as this missing contract."
+    }
+  },
+  "selected_existing_authorities": {
+    "kind": "measured",
+    "equality_saturation": {
+      "component": "ipfs_accelerate_py.agent_supervisor.planning.program_repair_synthesis.ProgramRepairSynthesizer@1 / EqualityEGraph",
+      "interface": "ProgramRepairSynthesizer@1",
+      "version": "1.0.0",
+      "theory_schema": "ipfs_accelerate_py/agent-supervisor/declared-equality-theory@1",
+      "receipt_schema": "ipfs_accelerate_py/agent-supervisor/equality-rewrite-receipt@1",
+      "capability_schema": "ipfs_accelerate_py/agent-supervisor/equality-saturation-capability@1",
+      "role": "A typed e-graph that accepts only a declared reviewed equality theory; it constrains theory/rule sizes, rewrite depth, e-graph nodes, replay steps, and text sizes; restores congruence by rebuild; rejects unsafe sorts, effects, authority claims, unreviewed side conditions, and malformed terms; derives canonical content identities; and keeps every equality receipt proposal-only with no write or semantic authority."
+    },
+    "architecture_refactorer_prerequisites": {
+      "components": [
+        "ipfs_accelerate_py.agent_supervisor.architecture_refactorer.architecture_ir.ArchitectureIR@1",
+        "ipfs_accelerate_py.agent_supervisor.architecture_refactorer.graph_builder.ArchitectureGraphBuilder@1",
+        "ipfs_accelerate_py.agent_supervisor.architecture_refactorer.duplicate_authority.DuplicateAuthorityDetector@1"
+      ],
+      "role": "Existing deterministic, provenance-bound graph and duplicate-authority analysis prerequisites. They do not define PCAR-009's closed e-graph expression domains, approved rewrite catalog, rule-evidence dispositions, or multi-objective extractor."
+    },
+    "integration_status": {
+      "kind": "unavailable",
+      "status": "no_current_head_pcsm_qualified_egraph_integration",
+      "reason": "The current forest has no architecture_refactorer/egraph_normalizer.py, test_egraph_normalizer.py, PCAR-009 rule catalog, PCAR-009 saturation receipt, or adapter from the program-repair equality grammar to architecture-refactorer operation/effect/policy/result/schema/dependency/validation expressions. The reusable equality path therefore cannot honestly be presented as PCSM-067 integration."
+    },
+    "determinism_and_authority_boundary": {
+      "kind": "measured",
+      "binding": "DeclaredEqualityTheory and EqualityRule require reviewed theory/rule identities; EqualityRewriteReceipt@1 canonically binds the theory, terms, status, applied rules, bounds-derived measurements, replay steps, checks, and capability inventory. A sealed repeated reviewed add-zero probe yielded the identical receipt CID baguqeeratoqyg7edqd7rabk4suabtzksseoucizvwm5fy6qqeitlk5hthkmq twice. Bounded saturation and extraction are deterministic for the covered narrow case.",
+      "boundary": "The equality path emits proposal-only results and rejects write/semantic-authority claims. It neither selects a canonical architecture authority, mutates M2/M3 state, fabricates a PCSM source map, converts a heuristic into proof, nor treats model output, a candidate, a test, or runtime transport success as completion or promotion authority. The two current e-graph regressions prevent broader qualification."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py",
+      "git_blob": "0f61644a5b2b0acd23d1cad3747a43b4515a1f39",
+      "sha256": "f48abcb5ac82c242a65377a50838d1b863da50d4c9ada2ac9deaec9dbb43a83d",
+      "role": "Existing typed bounded equality e-graph, reviewed rule/theory contracts, canonical equality-rewrite receipts, explicit capability inventory, saturation/extraction/replay, independent checks, and proposal-only authority boundary."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_program_repair_egraph.py",
+      "git_blob": "97f50a7f8dda69aeec8b713148f020f60d2ae679",
+      "sha256": "7f78ec8d725080663c2eb98f058abf6df3b8e805eceefd0ea3cbc6b59b0634b5",
+      "role": "Direct equality-saturation positive and negative coverage, including bounds, types, effects, authority refusal, capability honesty, replay, duplicate-redex, and all-e-node matching cases; two final correctness cases currently fail."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/architecture_refactorer/architecture_ir.py",
+      "git_blob": "c9272051d2e49b185f4afbaed420b444b18d7b25",
+      "sha256": "4aa220b7a1539742e57b880c8ed2bdaf09c0ee1b43a787bdc8941cc2d37daf75",
+      "role": "Existing closed ArchitectureIR vocabulary and provenance contracts required by the planned architecture-refactorer domain."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/architecture_refactorer/graph_builder.py",
+      "git_blob": "8ed9f8fbaaaa715b1620bee4fbbb3a95f1528695",
+      "sha256": "946181a28116316e2c2e2811db12247e61b5ec33ec4ec5f8dd6378c59979ff23",
+      "role": "Existing deterministic ArchitectureIR extraction and exact source-span/provenance binding prerequisite."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/architecture_refactorer/duplicate_authority.py",
+      "git_blob": "b7d8236e7583a28ffd94004e433a5f7a589d9f1d",
+      "sha256": "2a28b62e2ff29d87ecb53745c7b0ac30b58e20d527345033db4e7b84392dbe8a",
+      "role": "Existing duplicate-authority detector whose no-remediation/no-canonical-selection boundary prevents it from substituting for qualified normalization."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/architecture_refactorer/test_graph_builder.py",
+      "git_blob": "62bbb290b99ea37b444b197088e2a569dd449371",
+      "sha256": "c050ceae79ced9b01a6c8291f1c6c44d2bd3f1167afa4c76a848559a07d7390b",
+      "role": "Positive and negative ArchitectureGraphBuilder provenance, determinism, source-bound, and fail-closed coverage."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/architecture_refactorer/test_duplicate_authority.py",
+      "git_blob": "e53f278276ac34593b8b9e656331cf8ee764b9fc",
+      "sha256": "51fcbbaf27b88eb8f288d12aec49b4c38ac22097ee0eedda9d13133fd033a89e",
+      "role": "Positive and negative duplicate-authority, heuristic non-promotion, and authority-boundary coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm067-required-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact prescribed PATH; fresh private HOME/XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.33s",
+      "scope_limit": "This required PCSM suite validates closed candidate-output grammar and rejects model-created completion. It does not exercise the absent PCAR-009 adapter or the e-graph regressions."
+    },
+    "focused_existing_authority_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm067-focused-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_program_repair_egraph.py external/ipfs_accelerate/test/api/architecture_refactorer/test_graph_builder.py external/ipfs_accelerate/test/api/architecture_refactorer/test_duplicate_authority.py",
+      "environment": "Python 3.12.3; exact prescribed PATH; fresh private HOME/XDG paths; user-site packages disabled.",
+      "status": "failed",
+      "result": "50 passed, 2 failed in 1.52s",
+      "positive_coverage": [
+        "The current reusable equality path validates typed e-classes, congruence rebuild, reviewed provenance/side conditions, deterministic bounded saturation, cheapest extraction, single-path replay, independent equivalence/effect checks, and proposal-only/no-authority receipts.",
+        "The current ArchitectureGraphBuilder and DuplicateAuthorityDetector suites passed every selected test: deterministic graph roots, exact provenance, fail-closed path handling, collision detection, heuristic non-promotion, and refusal to remediate/select a canonical authority."
+      ],
+      "negative_coverage": [
+        "Malformed or unreviewed rules, unbound pattern variables, unknown side conditions, node/depth budget exhaustion, sort mismatch, effect-changing rewrites, authority-claiming theories, unrelated terms, unsafe paths, unknown ownership, and heuristic evidence are rejected or remain non-promoted.",
+        "The e-graph's duplicate-redex replay and all-e-node e-matching negative-correctness tests fail: replay of (* (+ x 0) (+ x 0)) stops at (* x (+ x 0)), and proving (+ y 0) equivalent to z remains unproved after (+ z 0) is inserted into the e-class."
+      ],
+      "fail_closed_disposition": "The 50 passing selected tests and narrow positive cases are not relabelled as full e-graph qualification. The two failures block PCSM-067 promotion."
+    },
+    "sealed_deterministic_receipt_probe": {
+      "kind": "measured",
+      "status": "passed_narrow_case_only",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm067-probe-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_accelerate /usr/bin/python3.12 - <reviewed add-zero deterministic receipt probe>",
+      "result": "Two sealed runs of the same reviewed DeclaredEqualityTheory@1 add-zero obligation both proved (+ x 0) equivalent to x and yielded equality-rewrite-receipt@1, contract_version=1, content CID baguqeeratoqyg7edqd7rabk4suabtzksseoucizvwm5fy6qqeitlk5hthkmq. The receipt was proposal_only=true with grants_write_authority=false and grants_semantic_authority=false.",
+      "scope_limit": "This narrow passing case demonstrates only deterministic binding for that covered grammar/rule. It cannot override the failing duplicate-redex/e-matching cases, establish the absent PCAR-009 domain adapter, or bind a PCSM source forest."
+    },
+    "external_egraph_runtime": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "probe": "Under /usr/bin/python3.12 with the prescribed PATH, importlib could not resolve egglog, egraph, egraphs, or rustworkx.",
+      "reason": "The existing equality path explicitly exposes external_egg_runtime as unavailable. No runtime was installed, no PATH was expanded, and no provider-only toolchain was treated as authoritative."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run_not_available_for_current_obligation",
+      "reason": "The existing capability inventory marks SMT semantic side conditions and kernel-checked equivalence unavailable; no approved digest-bound theorem-prover deployment, PCAR-009 rule-proof/translation vector catalog, or PCSM source-map-bound obligation exists. Equality-rewrite receipts and test results are not kernel proofs or promotion authority."
+    }
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "existing_equality_egraph_available_but_current_head_qualification_and_pcsm_integration_unavailable_non_promoted",
+    "available_capabilities": [
+      "Current-head Python-v1 typed, bounded, reviewed-rule equality saturation with canonical receipt identity and proposal-only authority boundary.",
+      "A sealed deterministic narrow-case equality-rewrite receipt with schema/version/CID binding.",
+      "Current-head deterministic ArchitectureIR extraction and duplicate-authority prerequisite validation."
+    ],
+    "unavailable_capabilities": [
+      "A passing current-head replay path for duplicate redexes and complete e-matching of all e-nodes in an e-class.",
+      "PCAR-009 architecture_refactorer/egraph_normalizer.py, its dedicated test, its explicit supported-domain/rewrite catalog, rule proof/solver/translation/heuristic dispositions, saturation receipts, and multi-objective extractor.",
+      "A PCSM source-map-bound current-forest normalization request/result CID and direct PCSM-067 integration test.",
+      "External egg runtime, SMT semantic side-condition authority, kernel-checked equivalence, a digest-bound formal prover, and an immutable self-CID for this receipt."
+    ],
+    "disposition": "No integration result, source-map CID, proof result, rule qualification, test success, estimate, or model-derived evidence is invented. The exact declared-output boundary prevents correcting the existing e-graph failures or materializing the required adapter/tests, so this receipt preserves existing authority boundaries and records a typed non-promotion."
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; exact search results; required sealed validation (11 passed); focused sealed validation (50 passed, 2 failed); architecture prerequisite validation; and the sealed narrow deterministic equality-rewrite receipt CID.",
+    "estimated": "None. No estimate establishes e-graph behavior, source identity, CID binding, test success, proof, integration, or promotion.",
+    "simulated": "None. No provider-only execution is used as implementation or validation evidence.",
+    "unavailable": "Qualified current-head e-graph correctness because duplicate-redex replay and all-e-node matching fail; PCAR-009 implementation/test and its domain/rule/extractor contracts; canonical PCSM aggregate source-map CID; source-map-bound PCSM execution; external e-graph runtime; SMT/kernel/formal-prover authority; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not alter accelerator implementation/tests, create a parallel normalizer, manufacture a source map, or change any protected planning/supervisor authority.",
+    "ProgramRepairSynthesizer@1 equality saturation is a reusable but distinct program-repair grammar. It is not a PCAR-009 architecture-refactorer normalizer, and its direct outputs remain proposal-only with no write or semantic authority.",
+    "The current focused e-graph suite fails on duplicate-redex replay and all-e-node matching. A narrow deterministic add-zero receipt cannot be generalized over those failures.",
+    "The required PCSM suite passing validates its own closed grammar only; it is not direct PCSM-067 e-graph validation.",
+    "No canonical PCSM source-map CID exists, so neither an equality-rewrite CID nor ArchitectureIR provenance is claimed to bind an exact current PCSM file/node/span forest.",
+    "No model output, candidate, equality receipt, test, or transport response is accepted as mutation, proof, completion, or promotion authority; M2/M3 mutation remains excluded.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head e-graph capability assessment. Do not alter protected planning documents, existing accelerator equality/architecture components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, required/focused test result, e-graph runtime capability, equality/architecture contract, PCAR-009 implementation/test, or PCSM source-map capability change."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalents_reused_first": true,
+    "existing_equality_egraph_component_available": true,
+    "architecture_refactorer_prerequisites_available": true,
+    "qualified_egraph_normalization_available": false,
+    "deterministic_where_required": false,
+    "narrow_case_deterministic_cid_binding_available": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "focused_package_validation_passed": false,
+    "sealed_required_validation_passed": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_egraph_execution_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_due_to_current_egraph_correctness_failures_and_missing_pcsm_pcar009_integration"
+  }
+}
