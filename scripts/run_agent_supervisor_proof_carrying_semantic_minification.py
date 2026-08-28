@@ -190,6 +190,11 @@ OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_SCHEMA: Final = (
     "proof-carrying-semantic-minification-objective-refill-fail-closed-"
     "transition@1"
 )
+OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-objective-refill-ancestor-"
+    "reachability-transition@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -350,6 +355,13 @@ OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_PATH: Final = (
     / "handoff"
     / "supervisor-restart-objective-refill-fail-closed-transition.json"
 )
+OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-objective-refill-ancestor-reachability-transition.json"
+)
 STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT: Final = (
     "8b8be83c6d9c578c4cec450092e140b929ce12e9"
 )
@@ -484,6 +496,18 @@ OBJECTIVE_REFILL_FAIL_CLOSED_PRIOR_ARTIFACT_COMMIT: Final = (
 )
 OBJECTIVE_REFILL_FAIL_CLOSED_PRIOR_RECEIPT_ID: Final = (
     "sha256:71f11363bf5f1b492925edb97ce1e78cff44089efe416d54e8769e719a14f752"
+)
+OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_BASE_COMMIT: Final = (
+    "PENDING_OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_BASE_COMMIT"
+)
+OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD: Final = (
+    "624cdc178df4305628c236b823853a030898ed99"
+)
+OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_TREE: Final = (
+    "4261e0ee6a5a81166ff203d4f5967f55fe055132"
+)
+OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_PRIOR_RECEIPT_ID: Final = (
+    "sha256:9f4a00ddb4196db034ca9eb1729ccc3ae4a1f62a8d97cfaf312b1f84ab6e3c55"
 )
 CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
     "db9304284cfe857f08377ef756b4896192dd5111"
@@ -3753,7 +3777,6 @@ def _verified_objective_refill_fail_closed_operator_descendant(
         or sealed_source.get("operator_identity")
         != _identity(expected_operator)
         or sealed_operator != expected_operator
-        or current_operator != expected_operator
     ):
         raise OperatorError("objective-refill fail-closed operator delta changed")
 
@@ -3811,6 +3834,311 @@ def _verified_objective_refill_fail_closed_operator_descendant(
         artifact_commit,
         current_head,
         field="objective-refill fail-closed artifact-to-current lineage",
+    )
+    ancestor_reachability_transition: dict[str, Any] = {}
+    if current_operator != expected_operator:
+        ancestor_reachability_transition = (
+            _verified_objective_refill_ancestor_reachability_operator_descendant(
+                current_operator=current_operator,
+                current_head=current_head,
+                operator_path=operator_path,
+            )
+        )
+    return {
+        "receipt": payload,
+        "receipt_bytes": receipt_bytes,
+        "artifact_commit": artifact_commit,
+        "base_commit": base_commit,
+        "base_operator": base_operator,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "expected_operator": expected_operator,
+        "objective_refill_ancestor_reachability_transition": (
+            ancestor_reachability_transition
+        ),
+    }
+
+
+def _objective_refill_ancestor_reachability_transition_payload(
+    *,
+    current_head: str,
+) -> tuple[bytes, dict[str, Any]]:
+    """Load the exact add-only ancestor-reachability receipt."""
+
+    receipt_bytes = _tracked_bytes(
+        OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_PATH,
+        head=current_head,
+    )
+    payload = _json_mapping_bytes(
+        receipt_bytes,
+        field="objective-refill ancestor-reachability transition receipt",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "prior_checkpoint",
+        "repair_base",
+        "sealed_source",
+        "reachability_contract",
+        "validations",
+        "post_integration_canonical_validation",
+        "historical_receipts_preserved",
+        "objective_refill_fail_closed_receipt_preserved",
+        "database_authority_preserved",
+        "task_state_mutation",
+        "manual_database_mutation",
+        "manual_worktree_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema")
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_SCHEMA
+        or payload.get("reason") != "repair_ancestor_generator_reachability"
+        or not isinstance(payload.get("prior_checkpoint"), Mapping)
+        or not isinstance(payload.get("repair_base"), Mapping)
+        or not isinstance(payload.get("sealed_source"), Mapping)
+        or not isinstance(payload.get("reachability_contract"), Mapping)
+        or not isinstance(payload.get("validations"), list)
+        or not isinstance(
+            payload.get("post_integration_canonical_validation"), Mapping
+        )
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get("objective_refill_fail_closed_receipt_preserved")
+        is not True
+        or payload.get("database_authority_preserved") is not True
+        or payload.get("task_state_mutation") is not False
+        or payload.get("manual_database_mutation") is not False
+        or payload.get("manual_worktree_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability transition seal is invalid"
+        )
+    return receipt_bytes, payload
+
+
+def _verified_objective_refill_ancestor_reachability_operator_descendant(
+    *,
+    current_operator: bytes,
+    current_head: str,
+    operator_path: Path,
+) -> dict[str, Any]:
+    """Admit only the exact ancestor-reachability B/S/A chain."""
+
+    base_commit = OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError(
+            "objective-refill ancestor-reachability transition base is unsealed"
+        )
+    receipt_bytes, payload = (
+        _objective_refill_ancestor_reachability_transition_payload(
+            current_head=current_head
+        )
+    )
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    if (
+        checkpoint.get("source_head")
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_TREE
+        or checkpoint.get(
+            "objective_refill_fail_closed_transition_receipt_id"
+        )
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_PRIOR_RECEIPT_ID
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD
+        or sealed_source.get("parent") != base_commit
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD,
+            field="objective-refill ancestor-reachability checkpoint",
+        )
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_TREE
+        or _git_commit_tree(
+            base_commit,
+            field="objective-refill ancestor-reachability repair base",
+        )
+        != repair_base.get("repository_tree_id")
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability tree binding changed"
+        )
+
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    expected_base_paths = (
+        relative_operator,
+        "test/test_pcsm_objective_refill_ancestor_reachability_transition.py",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD}.."
+                f"{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    base_status = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-status",
+                f"{OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD}.."
+                f"{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    expected_base_status = (
+        f"M\t{relative_operator}",
+        "A\ttest/test_pcsm_objective_refill_ancestor_reachability_transition.py",
+    )
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="objective-refill ancestor-reachability base operator",
+    )
+    pending_base = (
+        "PENDING_"
+        + "OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="objective-refill ancestor-reachability sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    sealed_status = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-status", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    expected_sealed_status = (f"M\t{relative_operator}",)
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="objective-refill ancestor-reachability sealed operator",
+    )
+    if (
+        base_parents
+        != [OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD]
+        or base_paths != expected_base_paths
+        or base_status != expected_base_status
+        or tuple(repair_base.get("changed_paths") or ()) != expected_base_paths
+        or tuple(repair_base.get("changed_status") or ())
+        != expected_base_status
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or base_operator.count(pending_base) != 1
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_parents != [base_commit]
+        or sealed_paths != (relative_operator,)
+        or sealed_status != expected_sealed_status
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+        or tuple(sealed_source.get("changed_status") or ())
+        != expected_sealed_status
+        or sealed_source.get("operator_identity")
+        != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or current_operator != expected_operator
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability operator delta changed"
+        )
+
+    receipt_relative = (
+        OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_PATH.relative_to(
+            ROOT
+        ).as_posix()
+    )
+    additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if len(additions) != 1:
+        raise OperatorError(
+            "objective-refill ancestor-reachability receipt introduction "
+            "is not exact"
+        )
+    artifact_commit = additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    artifact_status = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-status", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != (receipt_relative,)
+        or artifact_status != (f"A\t{receipt_relative}",)
+        or _git_blob_at(
+            head=artifact_commit,
+            path=OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_TRANSITION_PATH,
+            field="introduced objective-refill ancestor-reachability receipt",
+        )
+        != receipt_bytes
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability artifact commit changed"
+        )
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field="objective-refill ancestor-reachability artifact lineage",
     )
     return {
         "receipt": payload,
@@ -5869,7 +6197,10 @@ def _verified_validation_path_compatibility_transition(
             )
         )
     source_paths = _restart_source_paths(board)
-    for name in ("taskboard", "objectives", "plan", "generator"):
+    immutable_source_names = ("taskboard", "objectives", "plan")
+    if not database_watchdog_activity_transition:
+        immutable_source_names += ("generator",)
+    for name in immutable_source_names:
         checkpoint_bytes = _git_blob_at(
             head=VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
             path=source_paths[name],
@@ -6412,7 +6743,10 @@ def _verified_database_watchdog_activity_transition(
                 "database-watchdog activity checkpoint evidence changed"
             )
     source_paths = _restart_source_paths(board)
-    for name in ("taskboard", "objectives", "plan", "generator"):
+    immutable_source_names = ("taskboard", "objectives", "plan")
+    if not database_lifecycle_identity_transition:
+        immutable_source_names += ("generator",)
+    for name in immutable_source_names:
         checkpoint_bytes = _git_blob_at(
             head=DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD,
             path=source_paths[name],
@@ -7192,7 +7526,10 @@ def _verified_database_lifecycle_identity_transition(
                 "database-lifecycle identity checkpoint evidence changed"
             )
     source_paths = _restart_source_paths(board)
-    for name in ("taskboard", "objectives", "plan", "generator"):
+    immutable_source_names = ("taskboard", "objectives", "plan")
+    if not supervisor_callback_continuity_transition:
+        immutable_source_names += ("generator",)
+    for name in immutable_source_names:
         checkpoint_bytes = _git_blob_at(
             head=DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
             path=source_paths[name],
@@ -8037,7 +8374,10 @@ def _verified_supervisor_callback_continuity_transition(
                 "supervisor callback-continuity checkpoint evidence changed"
             )
     source_paths = _restart_source_paths(board)
-    for name in ("taskboard", "objectives", "plan", "generator"):
+    immutable_source_names = ("taskboard", "objectives", "plan")
+    if not database_projection_callback_identity_transition:
+        immutable_source_names += ("generator",)
+    for name in immutable_source_names:
         checkpoint_bytes = _git_blob_at(
             head=SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD,
             path=source_paths[name],
@@ -9440,7 +9780,7 @@ def _verified_objective_refill_fail_closed_transition(
     current_operator = _tracked_bytes(operator_path, head=current_head)
     current_validator = _tracked_bytes(validator_path, head=current_head)
     current_test = _tracked_bytes(test_path, head=current_head)
-    if (
+    exact_objective_refill_fail_closed_source = not (
         current_config_bytes != base_config_bytes
         or _canonical_bytes(current_config) != _canonical_bytes(base_config)
         or current_generator != base_generator
@@ -9455,8 +9795,21 @@ def _verified_objective_refill_fail_closed_transition(
         != _identity(operator_gate["expected_operator"])
         or current_source_identities.get("validator")
         != _identity(base_validator)
-    ):
-        raise OperatorError("objective-refill fail-closed live source changed")
+    )
+    ancestor_reachability_transition: dict[str, Any] = {}
+    if not exact_objective_refill_fail_closed_source:
+        ancestor_reachability_transition = (
+            _verified_objective_refill_ancestor_reachability_transition(
+                board=board,
+                current_head=current_head,
+                current_config=current_config,
+                current_source_identities=current_source_identities,
+                prior_artifact_commit=operator_gate["artifact_commit"],
+                prior_transition_receipt_id=str(
+                    payload.get("receipt_id") or ""
+                ),
+            )
+        )
     source_paths = _restart_source_paths(board)
     for name in ("taskboard", "objectives", "plan"):
         checkpoint_bytes = _git_blob_at(
@@ -9486,6 +9839,415 @@ def _verified_objective_refill_fail_closed_transition(
         "sealed_source_head": operator_gate["sealed_source_head"],
         "sealed_source_tree": operator_gate["sealed_source_tree"],
         "source_forest": source_forest,
+        "objective_refill_ancestor_reachability_transition": (
+            ancestor_reachability_transition
+        ),
+    }
+
+
+def _verified_objective_refill_ancestor_reachability_transition(
+    *,
+    board: Any,
+    current_head: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    prior_artifact_commit: str,
+    prior_transition_receipt_id: str,
+) -> dict[str, Any]:
+    """Admit the exact conditional ancestor-generator reachability repair."""
+
+    operator_path = Path(__file__).resolve()
+    operator_gate = (
+        _verified_objective_refill_ancestor_reachability_operator_descendant(
+            current_operator=_tracked_bytes(operator_path, head=current_head),
+            current_head=current_head,
+            operator_path=operator_path,
+        )
+    )
+    payload = operator_gate["receipt"]
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    reachability_contract = payload["reachability_contract"]
+    validations = payload["validations"]
+    post_integration = payload["post_integration_canonical_validation"]
+
+    checkpoint_fields = {
+        "source_head",
+        "repository_tree_id",
+        "objective_refill_fail_closed_transition_receipt_id",
+        "objective_refill_fail_closed_transition_receipt_bytes_id",
+    }
+    if (
+        set(checkpoint) != checkpoint_fields
+        or checkpoint.get("source_head")
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_TREE
+        or checkpoint.get(
+            "objective_refill_fail_closed_transition_receipt_id"
+        )
+        != prior_transition_receipt_id
+        or prior_transition_receipt_id
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_PRIOR_RECEIPT_ID
+        or checkpoint.get(
+            "objective_refill_fail_closed_transition_receipt_bytes_id"
+        )
+        != "sha256:0c29b51a34c03d932d5498e08a9441acfd48087c30a132989773ad906410ed96"
+        or prior_artifact_commit
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD
+        or operator_gate["artifact_commit"] == prior_artifact_commit
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD,
+            field="objective-refill ancestor-reachability checkpoint",
+        )
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_TREE
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability checkpoint tree changed"
+        )
+
+    prior_receipt_at_checkpoint = _git_blob_at(
+        head=OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD,
+        path=OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_PATH,
+        field="objective-refill fail-closed receipt at reachability checkpoint",
+    )
+    if (
+        _identity(prior_receipt_at_checkpoint)
+        != checkpoint.get(
+            "objective_refill_fail_closed_transition_receipt_bytes_id"
+        )
+        or _json_mapping_bytes(
+            prior_receipt_at_checkpoint,
+            field="objective-refill fail-closed receipt at checkpoint",
+        ).get("receipt_id")
+        != prior_transition_receipt_id
+    ):
+        raise OperatorError(
+            "objective-refill fail-closed receipt changed before reachability repair"
+        )
+
+    base_commit = str(operator_gate["base_commit"])
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    test_path = (
+        ROOT
+        / "test/test_pcsm_objective_refill_ancestor_reachability_transition.py"
+    )
+    expected_base_paths = (
+        relative_operator,
+        "test/test_pcsm_objective_refill_ancestor_reachability_transition.py",
+    )
+    expected_base_status = (
+        f"M\t{relative_operator}",
+        "A\ttest/test_pcsm_objective_refill_ancestor_reachability_transition.py",
+    )
+    base_test = _git_blob_at(
+        head=base_commit,
+        path=test_path,
+        field="objective-refill ancestor-reachability focused test",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_status = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-status",
+                f"{OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD}.."
+                f"{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    repair_base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "test_identity",
+        "changed_paths",
+        "changed_status",
+    }
+    if (
+        set(repair_base) != repair_base_fields
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("repository_tree_id")
+        != _git_commit_tree(
+            base_commit,
+            field="objective-refill ancestor-reachability repair base",
+        )
+        or repair_base.get("parent")
+        != OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD
+        or repair_base.get("operator_identity")
+        != _identity(operator_gate["base_operator"])
+        or repair_base.get("test_identity") != _identity(base_test)
+        or tuple(repair_base.get("changed_paths") or ()) != expected_base_paths
+        or tuple(repair_base.get("changed_status") or ())
+        != expected_base_status
+        or base_parents
+        != [OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD]
+        or base_status != expected_base_status
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability repair base changed"
+        )
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+        "changed_status",
+    }
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("source_head") != operator_gate["sealed_source_head"]
+        or sealed_source.get("repository_tree_id")
+        != operator_gate["sealed_source_tree"]
+        or sealed_source.get("parent") != base_commit
+        or sealed_source.get("operator_identity")
+        != _identity(operator_gate["expected_operator"])
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+        or tuple(sealed_source.get("changed_status") or ())
+        != (f"M\t{relative_operator}",)
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability sealed source changed"
+        )
+
+    expected_reachability_contract = {
+        "affected_ancestor_transitions": [
+            "validation_path_compatibility_transition",
+            "database_watchdog_activity_transition",
+            "database_lifecycle_identity_transition",
+            "supervisor_callback_continuity_transition",
+        ],
+        "unconditional_immutable_source_names": [
+            "taskboard",
+            "objectives",
+            "plan",
+        ],
+        "generator_without_verified_child_disposition": (
+            "require_predecessor_checkpoint_bytes"
+        ),
+        "generator_with_verified_child_disposition": (
+            "delegate_to_exact_descendant_transition"
+        ),
+        "generator_only_unsealed_drift_disposition": "fail_closed",
+        "objective_refill_fail_closed_transition_receipt_id": (
+            OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_PRIOR_RECEIPT_ID
+        ),
+    }
+    if dict(reachability_contract) != expected_reachability_contract:
+        raise OperatorError(
+            "objective-refill ancestor-reachability contract changed"
+        )
+
+    expected_post_integration = {
+        "condition": (
+            "artifact_commit_integrated_on_configured_merge_target_branch_"
+            "with_stopped_materialized_authority"
+        ),
+        "cwd": ".",
+        "command": [
+            "python",
+            "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+            "launch-supervisor",
+            "--dry-run",
+        ],
+        "pre_integration_outcome": "not_run_branch_and_materialization_gated",
+        "required_outcome": "passed",
+        "runtime_launch": False,
+        "authority_mutation": False,
+    }
+    if dict(post_integration) != expected_post_integration:
+        raise OperatorError(
+            "objective-refill ancestor-reachability post-integration changed"
+        )
+
+    focused = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_objective_refill_ancestor_reachability_transition.py",
+    )
+    prior = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_objective_refill_fail_closed_transition.py",
+    )
+    pycompile = ("python", "-m", "py_compile", relative_operator)
+    board_validation = (
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all",
+    )
+    diff_check = (
+        "git",
+        "diff",
+        "--check",
+        f"{OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD}..{base_commit}",
+    )
+    required_validations = {
+        (".", focused),
+        (".", prior),
+        (".", pycompile),
+        (".", board_validation),
+        (".", diff_check),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    summaries: dict[tuple[str, ...], str] = {}
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError(
+                "objective-refill ancestor-reachability validation is malformed"
+            )
+        command = validation.get("command")
+        summary = validation.get("summary")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(summary, str)
+            or not summary
+        ):
+            raise OperatorError(
+                "objective-refill ancestor-reachability validation did not pass"
+            )
+        observed = (str(validation.get("cwd") or ""), tuple(command))
+        observed_validations.add(observed)
+        summaries[tuple(command)] = summary
+    if (
+        len(validations) != len(required_validations)
+        or observed_validations != required_validations
+        or summaries.get(focused, "") != "17 passed"
+        or summaries.get(prior, "") != "13 passed"
+        or summaries.get(pycompile, "") != "clean"
+        or summaries.get(board_validation, "")
+        != "valid board: 70 tasks, 11 goals, 96 packages"
+        or summaries.get(diff_check, "") != "clean"
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability validations are incomplete"
+        )
+
+    checkpoint_source_paths = _restart_source_paths(board)
+    for name in ("config", "generator", "validator"):
+        checkpoint_bytes = _git_blob_at(
+            head=OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD,
+            path=checkpoint_source_paths[name],
+            field=f"objective-refill ancestor checkpoint {name}",
+        )
+        current_bytes = _tracked_bytes(
+            checkpoint_source_paths[name],
+            head=current_head,
+        )
+        if (
+            current_bytes != checkpoint_bytes
+            or current_source_identities.get(name) != _identity(current_bytes)
+        ):
+            raise OperatorError(
+                "objective-refill ancestor-reachability changed sealed source"
+            )
+    checkpoint_config = _json_mapping_bytes(
+        _git_blob_at(
+            head=OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD,
+            path=board.config_path,
+            field="objective-refill ancestor checkpoint config",
+        ),
+        field="objective-refill ancestor checkpoint config",
+    )
+    if _canonical_bytes(current_config) != _canonical_bytes(checkpoint_config):
+        raise OperatorError(
+            "objective-refill ancestor-reachability config changed"
+        )
+    prior_test_path = ROOT / "test/test_pcsm_objective_refill_fail_closed_transition.py"
+    if _tracked_bytes(prior_test_path, head=current_head) != _git_blob_at(
+        head=OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD,
+        path=prior_test_path,
+        field="preserved objective-refill fail-closed focused test",
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability prior focused test changed"
+        )
+    if (
+        _tracked_bytes(operator_path, head=current_head)
+        != operator_gate["expected_operator"]
+        or current_source_identities.get("operator")
+        != _identity(operator_gate["expected_operator"])
+        or _tracked_bytes(test_path, head=current_head) != base_test
+    ):
+        raise OperatorError(
+            "objective-refill ancestor-reachability live source changed"
+        )
+    for name in ("taskboard", "objectives", "plan"):
+        checkpoint_bytes = _git_blob_at(
+            head=OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD,
+            path=checkpoint_source_paths[name],
+            field=f"objective-refill ancestor checkpoint {name}",
+        )
+        current_bytes = _tracked_bytes(
+            checkpoint_source_paths[name],
+            head=current_head,
+        )
+        if (
+            current_bytes != checkpoint_bytes
+            or current_source_identities.get(name) != _identity(current_bytes)
+        ):
+            raise OperatorError(
+                "objective-refill ancestor-reachability changed immutable authority"
+            )
+    if _tracked_bytes(
+        OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_PATH,
+        head=current_head,
+    ) != prior_receipt_at_checkpoint:
+        raise OperatorError(
+            "objective-refill ancestor-reachability changed prior receipt"
+        )
+    for path in (
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "Mcp-Plus-Plus",
+    ):
+        checkpoint_entry = str(
+            _git(
+                "ls-tree",
+                OBJECTIVE_REFILL_ANCESTOR_REACHABILITY_CHECKPOINT_HEAD,
+                "--",
+                path,
+            )
+        ).strip()
+        current_entry = str(_git("ls-tree", current_head, "--", path)).strip()
+        if (
+            not checkpoint_entry.startswith("160000 commit ")
+            or current_entry != checkpoint_entry
+        ):
+            raise OperatorError(
+                "objective-refill ancestor-reachability gitlink changed"
+            )
+    return {
+        "receipt": payload,
+        "artifact_commit": operator_gate["artifact_commit"],
+        "sealed_source_head": operator_gate["sealed_source_head"],
+        "sealed_source_tree": operator_gate["sealed_source_tree"],
     }
 
 
@@ -10418,6 +11180,24 @@ def _owner_restart_admission(
             transition=objective_refill_fail_closed_transition,
         )
     )
+    objective_refill_ancestor_reachability_transition = (
+        objective_refill_fail_closed_transition.get(
+            "objective_refill_ancestor_reachability_transition"
+        )
+    )
+    objective_refill_ancestor_reachability_transition = (
+        objective_refill_ancestor_reachability_transition
+        if isinstance(
+            objective_refill_ancestor_reachability_transition,
+            Mapping,
+        )
+        else {}
+    )
+    objective_refill_ancestor_reachability_transition_receipt_id = (
+        _verified_objective_refill_transition_receipt_id(
+            objective_refill_ancestor_reachability_transition
+        )
+    )
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
         "mode": admission_mode,
@@ -10475,6 +11255,9 @@ def _owner_restart_admission(
         ),
         "objective_refill_fail_closed_transition_receipt_id": (
             objective_refill_fail_closed_transition_receipt_id
+        ),
+        "objective_refill_ancestor_reachability_transition_receipt_id": (
+            objective_refill_ancestor_reachability_transition_receipt_id
         ),
         "current_head_descendant_repair": descendant_repair,
         "database_authority": {
@@ -12220,6 +13003,12 @@ def _owner_restart_receipt(
         "objective_refill_fail_closed_transition_receipt_id": str(
             admission.get(
                 "objective_refill_fail_closed_transition_receipt_id"
+            )
+            or ""
+        ),
+        "objective_refill_ancestor_reachability_transition_receipt_id": str(
+            admission.get(
+                "objective_refill_ancestor_reachability_transition_receipt_id"
             )
             or ""
         ),
