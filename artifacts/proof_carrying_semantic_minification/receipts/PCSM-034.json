@@ -1,0 +1,388 @@
+{
+  "acceptance": {
+    "authoritative_sealed_validation_available": false,
+    "authority_boundaries_preserved": true,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "existing_equivalents_reused_first": true,
+    "pcsm_specific_integration_implemented": false,
+    "positive_and_negative_adjacent_tests_available": true,
+    "promotion_status": "non_promoted_unavailable",
+    "provider_required_validation_passed": true,
+    "typed_unavailable_disposition_recorded": true
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-034@current-head-receipt-and-prior-failure-integration-selection-v1",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "completion_authoritative": false,
+  "current_tree_binding": {
+    "admitted_gitlinks": {
+      "external/ipfs_datasets": {
+        "authority_role": "canonical receipt-currentness, stage-translation receipt, prior-stage replay/invalidation, semantic identity, and CID authority; not a PCSM task-receipt aggregator owner",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      }
+    },
+    "clean_before_receipt_write": true,
+    "dispatch_tree_id": "6e3cc7efc836b0177ed7a236528dc245de269f2b",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "freshness_check": {
+      "invalidates_on": "Any changed outer commit/tree, datasets gitlink/head/tree, scheduler digest, named source or test digest, receipt/stage schema or interface, CID profile, source-search result, or authoritative-environment capability requires a fresh receipt.",
+      "kind": "measured",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD external/ipfs_datasets; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; outer and datasets porcelain status before receipt write; git -C external/ipfs_datasets merge-base --is-ancestor 58ec3ab476ae8362b824934bb16f2507c21771a2 HEAD; source SHA-256/Git-blob inventory; and exact sealed capability probe.",
+      "result": "The outer and datasets roots were clean before this receipt write. The datasets nested HEAD equals the superproject gitlink, and configured datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 is an ancestor of the measured datasets HEAD.",
+      "status": "passed"
+    },
+    "git_object_format": "sha1",
+    "kind": "measured",
+    "outer_commit": "6e3cc7efc836b0177ed7a236528dc245de269f2b",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_tree": "8a115240a7fb7fa87e987ee6edd2d2e922c23ce6",
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "reason": "No emitted PCSM current-tree SourceLinkReceipt, aggregate source-map CID, or canonical source-forest CID exists. Git blobs, file SHA-256 values, generic receipt IDs, and graph identities are not substituted for a PCSM source-map artifact.",
+      "status": "unavailable"
+    },
+    "source_binding_policy": {
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "planning_revision_is_runtime_completion_evidence": false,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_initialized_gitlinks": true,
+      "require_origin_main_as_ancestor": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9"
+    }
+  },
+  "evidence_legend": {
+    "estimated": "A calculated approximation; it cannot establish currentness, identity, schema binding, failure disposition, or test success.",
+    "measured": "Observed directly from the bound current source forest or authoritative sealed validation environment.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize mutation or promotion.",
+    "unavailable": "A required capability, identity, package, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "evidence_summary": {
+    "estimated": "None. No estimate is used to establish receipt currentness, failure handling, identity, or validation.",
+    "measured": "Current outer/datasets Git and tree identities; clean/freshness and origin-ancestry checks; scheduler and source/test SHA-256 values; Git blobs; direct source-search absence; existing interface/schema/currentness and invalidation declarations; prior-receipt binding/status inventory; and sealed pytest dependency failure.",
+    "simulated": "Provider focused receipt/currentness/replay tests: 75 passed in 0.60s. Provider required proof_context validation: 519 passed in 82.80s. Neither is substituted for sealed validation or PCSM-specific integration coverage.",
+    "unavailable": "PCSMReceiptFailureIntegration@1; a versioned PCSM task-receipt aggregation/failure-disposition schema; a current PCSM aggregate source-map CID; PCSM-specific positive/negative integration tests; authoritative sealed required-suite result due to missing anyio; formal-prover result; and a self-describing immutable storage CID for this receipt."
+  },
+  "goal_id": "PCSM-G300",
+  "integration_assessment": {
+    "disposition": "The exact PCSM package cannot truthfully be claimed implemented, deterministic as a PCSM task-receipt/failure integrator, schema/version/CID-bound, or covered by PCSM-specific positive and negative tests at this head. Existing current-source controls are reused only as their declared generic receipt-currentness and stage-replay/invalidation authorities; they are not relabeled as a PCSM task-receipt aggregator. No mutation, proof acceptance, promotion, or task completion is authorized.",
+    "kind": "unavailable",
+    "required_bindings": [
+      "explicit PCSM receipt/failure integration schema and version",
+      "canonical task-receipt identity and exact current outer commit/tree plus admitted source-map/source-forest CID",
+      "deterministic ordered input receipt set and prior-failure disposition vocabulary",
+      "currentness checks for every inherited receipt binding and explicit rejection of stale or mismatched entries",
+      "typed linkage from prior failures to named remediation, invalidation, or non-promotion outcomes",
+      "positive deterministic aggregation/replay vectors and negative missing, stale, forged, duplicate, contradictory, unsupported-capability, and incomplete-history vectors"
+    ],
+    "required_contract": "A deterministic, versioned PCSM integration record that consumes current receipt identities and prior failures for an exact current source forest without promoting stale, simulated, or unavailable evidence.",
+    "required_package": "PCSMReceiptFailureIntegration@1",
+    "source_search": {
+      "kind": "measured",
+      "meaning": "The named PCSM integration package and its task-specific typed contract/test surface are absent from the exact current proof_context source and test trees.",
+      "method": "rg -l -i --glob '*.py' --glob '*.json' --glob '*.toml' --glob '*.yaml' --glob '*.yml' --glob '*.md' 'PCSMReceiptFailureIntegration|ReceiptFailureIntegration|receipt.*prior.*failure|prior.*failure.*receipt' external/ipfs_datasets/ipfs_datasets_py/proof_context external/ipfs_datasets/tests/proof_context, followed by package-local inspection.",
+      "result": "The search returned no matching PCSM receipt/failure integration identifier. proof_context has no receipt-history or prior-failure-integration module, and its test tree has no PCSM-specific aggregation vectors."
+    },
+    "status": "unavailable_non_promoted"
+  },
+  "limitations": [
+    "This task is receipt-only: it selects and assesses current-head generic receipt-currentness and prior-stage invalidation controls without mutating proof_context or creating a competing PCSM authority.",
+    "LogicTranslationReceipt@1 and StageTranslationReceipt@1 are descriptive evidence with exact expectation checks; neither by itself proves a translated property, aggregates PCSM task receipts, or supplies a PCSM source-map CID.",
+    "ObligationSlice@1 deterministically replays unchanged stages and invalidates changed or failed prior stage evidence inside its declared pipeline/theorem scope. It does not integrate the PCSM task receipt forest or turn a historical provider pass into current sealed validation.",
+    "Every inspected predecessor receipt binds a different outer commit/tree from this receipt. The stable datasets commit makes them useful historical context only; it does not make any predecessor current-head evidence.",
+    "The authoritative sealed validation environment lacks anyio, so this receipt cannot promote completion despite the provider-side suite passing.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "nearest_existing_authorities": {
+    "logic_translation_receipts": {
+      "authority": "ipfs_datasets_py.logic.software_verification.receipts",
+      "entry_points": [
+        "validate_translation_receipt(receipt, expectation) -> TranslationReceiptValidation",
+        "require_current_translation_receipt(receipt, expectation) -> LogicTranslationReceipt"
+      ],
+      "interface": "LogicTranslationReceipt@1",
+      "kind": "measured",
+      "properties": [
+        "A canonical content-addressed receipt binds source and target identities, family revisions, pinned compiler chain, assumptions, bounds, preservation claim, witnesses, mutations, and evidence-authority ceiling.",
+        "Validation compares every authority-bearing binding to the current expectation and yields effective authority none for missing or mismatched receipts.",
+        "Authority-bearing consumption fails closed with MissingTranslationReceiptError or StaleTranslationReceiptError rather than accepting a prior result."
+      ],
+      "rejection_reason": "This is an exact generic cross-logic translation receipt authority. It neither reads PCSM task receipt JSON, aggregates a deterministic PCSM receipt set, records prior task failures, nor binds a PCSM source map."
+    },
+    "obligation_slice_replay": {
+      "authority": "ipfs_datasets_py.logic.software_verification.obligation_slicing",
+      "entry_points": [
+        "classify_translation_stages(previous_pipeline, mutation, current_pipeline, cone, stage_expectations) -> tuple[StageSliceDecision, ...]",
+        "slice_and_replay_obligations(previous_pipeline, mutation, theorem_graph, obligations, current_pipeline, stage_expectations) -> ObligationSliceReceipt",
+        "require_replayed_stages(receipt) -> tuple[StageSliceDecision, ...]"
+      ],
+      "interface": "ObligationSlice@1",
+      "kind": "measured",
+      "properties": [
+        "Prior stage evidence is reused only after independent receipt replay; current pipeline receipt identity is authoritative when supplied.",
+        "Changed compiler/stage/source identities invalidate the affected stage and downstream stages, while independent exact unchanged-stage replay may retain only verified evidence.",
+        "Changed theorem dependencies, cache-key mismatch, and non-exact evidence are invalidated rather than carried forward by prior disposition or pathname."
+      ],
+      "rejection_reason": "This is a deterministic formalization-pipeline replay and invalidation adapter, not a PCSM task-receipt/failure-history integration package."
+    },
+    "stage_translation_receipts": {
+      "authority": "ipfs_datasets_py.logic.formalization.translation_receipts",
+      "interfaces": [
+        "StageTranslationReceipt@1",
+        "CompilationPipelineReceipt@1"
+      ],
+      "kind": "measured",
+      "properties": [
+        "Each stage receipt binds input/output identities, pinned compiler, source map, supported subset, losses, assumptions, obligations, validation, replay, bounds, and evidence class.",
+        "Missing, stale, tampered, and non-reproduced stage receipts lose authority and fail closed at required consumption."
+      ],
+      "rejection_reason": "Stage-addressed compilation receipts have no PCSM task-receipt catalog, current PCSM source-map CID, or prior-task-failure disposition interface."
+    },
+    "minimum_delta_reason": "Current-head source already supplies versioned deterministic receipt currentness and prior-stage invalidation/replay with direct positive and negative tests. A PCSM wrapper or a second receipt store would introduce the still-missing PCSM semantic authority and is outside this task's exact receipt-only write boundary."
+  },
+  "objective_id": "PCSM-034",
+  "observed_at": "2026-08-28T07:44:33Z",
+  "prior_receipt_and_failure_integration": {
+    "currentness_rule": "A predecessor is historical context only unless all required binding identities equal this receipt's exact current source forest and its evidence class independently permits the intended use. Matching a datasets commit alone is insufficient.",
+    "kind": "measured",
+    "predecessor_receipts": [
+      {
+        "artifact_identity": "urn:pcsm:task-receipt:PCSM-025@current-head-python-contract-and-proof-obligation-selection-v1",
+        "datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "git_blob": "85e94b30f373ea3edfa726e8803c886fa8126692",
+        "outer_commit": "68ce3c333e182f64e90616245866a7e316adee0a",
+        "outer_tree": "12e8f3dae44264a19e8bf6a6d7e2c2d197dca89d",
+        "sha256": "fa1cd495342b314476ce8f01025a49c5bbd57af09f64abc481f5135316ca25b8",
+        "status": "implemented_non_promoted",
+        "task_id": "PCSM-025"
+      },
+      {
+        "artifact_identity": "urn:pcsm:task-receipt:PCSM-026@current-head-python-dynamic-feature-risk-classification-v1",
+        "datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "git_blob": "1c25dd5478535d3ede04baa0d68d1b02f9eb5050",
+        "outer_commit": "9510fdc769800d9435bf06b2590d22a68d203860",
+        "outer_tree": "9d9298b4a8107f7677032932bd061a0abfe44b97",
+        "sha256": "4c6d93e833a15ee956b4d9561e5772285cb2d3053c6bb25ee83ed73b098495ba",
+        "status": "implemented_non_promoted",
+        "task_id": "PCSM-026"
+      },
+      {
+        "artifact_identity": "urn:pcsm:task-receipt:PCSM-027@current-head-python-incremental-changed-region-compilation-v1",
+        "datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "git_blob": "d936e50fc97afc9ed794bc735248b9779d203eb8",
+        "outer_commit": "c2f40b62eae073798c24adedcb0484b47393dee8",
+        "outer_tree": "3dbf8ec84c00097aab124fb2fe540fc029c27f8c",
+        "sha256": "5836b2f76182b9ad83005068c81888464d9b2ee7f2a3099ace2bbf3b450f5772",
+        "status": "implemented_non_promoted",
+        "task_id": "PCSM-027"
+      },
+      {
+        "artifact_identity": "urn:pcsm:task-receipt:PCSM-028@current-head-python-compiler-round-trip-and-identity-selection-v1",
+        "datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "git_blob": "d0525bb1de7395495f20998e46704b0b3926b11b",
+        "outer_commit": "84e7c7c36397330b896d3c488a5cb83766f853a5",
+        "outer_tree": "d310617ba6b53af7e8d42677bcdbfc8b3ab0955b",
+        "sha256": "3631475bf96bac744a6d3bb9bf048ab39c98408a996eb2bd6a66805769882b3f",
+        "status": "implemented_non_promoted",
+        "task_id": "PCSM-028"
+      },
+      {
+        "artifact_identity": "urn:pcsm:task-receipt:PCSM-030@current-head-python-semantic-capsule-builder-selection-v1",
+        "datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "git_blob": "97caff178666e54704681f93054e57c5ca5794f3",
+        "outer_commit": "893afdf845c3f112d98fd50db8a8fc0a8da25f01",
+        "outer_tree": "b78513b97eb069849f5e6240e93ee3bbd5558c5c",
+        "sha256": "c588061ebbd0b388c4c7b2b8301d8ba3f4b3af97594607428cd8a6c13727f10f",
+        "status": "implemented_non_promoted",
+        "task_id": "PCSM-030"
+      },
+      {
+        "artifact_identity": "urn:pcsm:task-receipt:PCSM-031@current-head-python-dependency-reverse-slicing-selection-v1",
+        "datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "git_blob": "149786122e2bfa9c8356435caf1ebc6374f03f33",
+        "outer_commit": "a30f2324f5b3278c1e9614c1f34b3d6d5fdef157",
+        "outer_tree": "4402a256bbd5291c9e92444627016f736a6f0d3f",
+        "sha256": "66abc17a7b60b77192514283602a375f343263567845107bd4215bb53df46005",
+        "status": "implemented_non_promoted",
+        "task_id": "PCSM-031"
+      },
+      {
+        "artifact_identity": "urn:pcsm:task-receipt:PCSM-032@current-head-python-test-proof-obligation-slicing-selection-v1",
+        "datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "git_blob": "d54625620e3eabd689e47de2c9edb13482edc29e",
+        "outer_commit": "e3b4137add19388bad9a181e0f68a2749859fd8b",
+        "outer_tree": "2b9ae82ee212d8f1696b090a7c30f9aa59ec14bc",
+        "sha256": "9f8ec42636058fcafb5f0e24dfb5875444d3704a4bcfb2cc222d6ed314b79859",
+        "status": "implemented_non_promoted",
+        "task_id": "PCSM-032"
+      },
+      {
+        "artifact_identity": "urn:pcsm:task-receipt:PCSM-033@current-head-python-completeness-witness-capability-gap-v1",
+        "datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "git_blob": "586a21b4e57ec2d52941f637630db3051381b4e9",
+        "outer_commit": "8af44ba212c6d1b10ae6f9b8e02fd866fdcd284a",
+        "outer_tree": "28dc01c5377a5e1e964453cd79f7a95bd0ae06fa",
+        "sha256": "e6ce97b0baf2b176e51afdfd313518e2b0fb3969c8e7238b01160e8b0578eb1e",
+        "status": "implemented_non_promoted",
+        "task_id": "PCSM-033"
+      }
+    ],
+    "prior_failures": [
+      {
+        "disposition": "unavailable_non_promoted",
+        "evidence_kind": "measured",
+        "meaning": "PCSM-033 records that CompletenessWitness@1, its schema, aggregate PCSM source-map/source-forest CID, and witness-specific test surface are absent. This remains a blocking capability gap rather than a success inherited from graph-local complete=true.",
+        "source_receipt": "PCSM-033"
+      },
+      {
+        "disposition": "stale_as_current_head",
+        "evidence_kind": "measured",
+        "meaning": "Each listed predecessor has a different outer commit/tree than 6e3cc7efc836b0177ed7a236528dc245de269f2b/8a115240a7fb7fa87e987ee6edd2d2e922c23ce6. It remains immutable historical evidence only and is rejected as current-head proof for PCSM-034.",
+        "source_receipts": [
+          "PCSM-025",
+          "PCSM-026",
+          "PCSM-027",
+          "PCSM-028",
+          "PCSM-030",
+          "PCSM-031",
+          "PCSM-032",
+          "PCSM-033"
+        ]
+      },
+      {
+        "disposition": "unavailable",
+        "evidence_kind": "measured",
+        "meaning": "The current authoritative sealed probe exits 1 before collection because the configured anyio.pytest_plugin cannot import anyio. This failure is not converted into a passing or zero result.",
+        "source": "PCSM-034 sealed required validation"
+      }
+    ],
+    "result": "All integrated predecessor receipts are rejected as current-head authority because their outer bindings are stale. Their current stable datasets source binding and recorded limitations remain historical input only. The selected generic controls provide deterministic currentness/replay rejection within their own interfaces, but no PCSM aggregation artifact is emitted.",
+    "status": "historical_context_only"
+  },
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, predecessor artifact digest/binding/status, source-search result, selected interface/schema/version, CID profile, or validation-environment capability changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter protected planning documents, existing source components, or unrelated admitted history."
+  },
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "scope": {
+    "assurance_scope": "PCSM Python v1 deterministic integration assessment for current receipts and prior failures over the exact current admitted source forest",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-034.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-034.json",
+    "implementation_delta": "No PCSMReceiptFailureIntegration@1 implementation, schema, deterministic receipt catalog, prior-failure disposition model, aggregate PCSM source-map CID binding, or package-specific test module exists in the exact current proof_context source forest. Existing LogicTranslationReceipt@1, StageTranslationReceipt@1 / CompilationPipelineReceipt@1, and ObligationSlice@1 already supply canonical currentness validation, independently reproduced receipt replay, and fail-closed prior-stage invalidation in their own bounded domains. Reimplementing or wrapping them under proof_context would create a competing PCSM authority and is outside this dispatch's exact receipt-only write authority.",
+    "language": "Python",
+    "language_version": "3.12",
+    "mutation": "receipt_only",
+    "non_promotion_reason": "The PCSM-specific package, schema/CID binding, and package-specific positive/negative tests are absent. The required proof_context suite passes only in a provider environment, which is simulated evidence; it aborts before collection in the authoritative sealed Python 3.12 environment because the explicitly configured anyio pytest plugin is unavailable. No sealed passing result, stale predecessor promotion, or PCSM integration claim is made.",
+    "source_mutation": false
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "git_blob": "d31f366484eb06d238d725b994e8b1d756c9ce68",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/receipts.py",
+      "role": "canonical LogicTranslationReceipt@1 currentness validation and fail-closed missing/stale receipt consumption",
+      "sha256": "4065833e8fa766e587035c456b381fead715f39c1e4e4619ea0d0bb969a609ea"
+    },
+    {
+      "evidence_kind": "measured",
+      "git_blob": "f2070deadcfe5eb31f137d846d8379327a787838",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/translation_receipts.py",
+      "role": "canonical StageTranslationReceipt@1 and CompilationPipelineReceipt@1 binding, replay, stale-proof, and authority-ceiling controls",
+      "sha256": "0ee2b7ee55b57d6a6fd20cfbb8230d455eb3a71a0d511fccb97ef2d494c60fa9"
+    },
+    {
+      "evidence_kind": "measured",
+      "git_blob": "6b6f3129fea9fc4d646847b8c59c47aa683a9c58",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/obligation_slicing.py",
+      "role": "canonical ObligationSlice@1 deterministic unchanged-stage replay and prior evidence invalidation adapter",
+      "sha256": "6895bb479e22156f37e0124bd11607be7531a600dc996fbbea622ea19fa8d166"
+    },
+    {
+      "evidence_kind": "measured",
+      "git_blob": "38d19ffb9de7aaace1370811089ba4ccef4bd6ae",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_verification/test_translations.py",
+      "role": "direct positive and negative vectors for current receipt acceptance, missing/stale binding rejection, and tamper rejection",
+      "sha256": "442453bbd0e1a4e0f0e7da7255506b14a1e22deab5a7afe1faac5da15739c767"
+    },
+    {
+      "evidence_kind": "measured",
+      "git_blob": "c721e6b13efc97284e1c57f6db4f8677f1840cc8",
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/test_translation_receipts.py",
+      "role": "direct positive and negative vectors for stage replay, moved inputs, stale proof bindings, missing receipts, and tampered canonical payload rejection",
+      "sha256": "1a321b9bced0237ee9dd28b796947d6a5e68ca419dad8e81a934b380f06e7548"
+    },
+    {
+      "evidence_kind": "measured",
+      "git_blob": "005c57e004e53f04e56e21fde91ddb017596801c",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_verification/test_obligation_slicing.py",
+      "role": "direct positive and negative vectors for receipt-identity replay, replay failure, compiler mutation/downstream invalidation, cache mismatch, and non-exact evidence rejection",
+      "sha256": "487194ddf108167e647f5fe2cdce624854a7162f45d46b6a88f28395a608d65e"
+    },
+    {
+      "evidence_kind": "measured",
+      "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+      "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+      "role": "required-suite positive deterministic CID and negative stale/unavailable/opaque context coverage; not PCSM receipt-integration coverage",
+      "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba"
+    }
+  ],
+  "status": "implemented_non_promoted",
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "task_id": "PCSM-034",
+  "test_and_validation_evidence": {
+    "focused_currentness_and_prior_failure_validation": {
+      "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_verification/test_translations.py external/ipfs_datasets/tests/unit/logic/software_verification/test_obligation_slicing.py external/ipfs_datasets/tests/unit/logic/formalization/test_translation_receipts.py",
+      "kind": "simulated",
+      "result": "75 passed in 0.60s",
+      "scope_limit": "This validates the selected generic currentness, replay, and invalidation controls in the provider environment. It is not sealed validation and does not create PCSM-specific receipt/failure integration coverage.",
+      "status": "passed"
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "reason": "No PCSM-034 proof obligation or approved digest-bound prover deployment is present. The sealed PATH probe also found no z3 or cvc5 executable; absence is not treated as a passing proof result.",
+      "status": "not_run"
+    },
+    "positive_and_negative_test_sources": {
+      "kind": "measured",
+      "negative_coverage": [
+        "missing translation receipt, every current-binding mismatch, stale proof, missing stage receipt, moved replay input, unknown fields, and tampered receipt identity fail closed",
+        "failed unchanged-stage replay, changed compiler/stage, downstream mutation, cache-key mismatch, and non-exact evidence invalidate prior evidence rather than retaining its prior disposition",
+        "stale, unavailable, and opaque-without-exact-scanned-tree ContextPack inputs fail closed"
+      ],
+      "non_equivalence": "These direct tests cover the selected generic controls only. They do not create positive or negative coverage for the absent PCSMReceiptFailureIntegration@1 package.",
+      "positive_coverage": [
+        "an exact current LogicTranslationReceipt retains its declared authority ceiling",
+        "an unchanged stage replays only after independent reproduction and a current pipeline's matching stage receipt identity is authoritative",
+        "identical exact ContextPack inputs mint the same CID"
+      ]
+    },
+    "required_validation": {
+      "environment": "Provider Python 3.12.3 with provider-installed pytest plugins and dependencies.",
+      "kind": "simulated",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "519 passed in 82.80s",
+      "scope_limit": "The suite validates proof_context behavior, including deterministic CID-bound context freshness controls. It does not establish the absent PCSM receipt/failure integration package.",
+      "status": "passed"
+    },
+    "sealed_required_validation": {
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used.",
+      "kind": "unavailable",
+      "result": "pytest exited 1 before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "status": "unavailable"
+    }
+  },
+  "title": "Integrate current receipts and prior failures",
+  "worker_completion_insufficient": true
+}
