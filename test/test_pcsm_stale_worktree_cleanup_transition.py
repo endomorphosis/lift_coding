@@ -434,6 +434,16 @@ def test_bootstrap_broker_verifier_binds_exact_cleanup_operator_descendant(
             (str(ancestor), str(descendant))
         ),
     )
+    def reject_validation_path_successor(**_kwargs):
+        raise operator.OperatorError(
+            "validation-path successor is not admitted"
+        )
+
+    monkeypatch.setattr(
+        operator,
+        "_verified_validation_path_compatibility_operator_descendant",
+        reject_validation_path_successor,
+    )
     kwargs = {
         "expected_historical_operator": historical_operator,
         "historical_operator_identity": operator._identity(historical_operator),
