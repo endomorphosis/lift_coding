@@ -43,10 +43,25 @@
     "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
     "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
     "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract boundary only; no qualified Craig interpolation implementation authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "integration consumer only; no duplicate interpolation authority selected",
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149"
+      },
       "external/ipfs_datasets": {
         "authority_role": "named Python-v1 qualified interpolation implementation, checked public facade, tests, and canonical source-identity boundary",
         "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
         "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no qualified Craig interpolation implementation authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
       }
     },
     "freshness_check": {
