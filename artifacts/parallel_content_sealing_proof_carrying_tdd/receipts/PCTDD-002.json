@@ -1,0 +1,537 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json"
+  ],
+  "claim": "This tracked receipt inventories and reconciles current pytest proof-reuse identity and DI paths against the existing pctdd/pytest-identity@1 authority on the leased tree. It does not itself complete the task, admit production skip, introduce TestExecutionKeyV2, or change TestPassStatementV1 or IntegrityCommitment meaning.",
+  "completion_authoritative": false,
+  "completion_authority": "DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "dependency_seal": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+  "existing_current_authority": {
+    "claim_meaning_unchanged": true,
+    "gap": "exact fixture-instance key becomes safely authoritative only after current setup; add pre-call V2 key and honest composite phase receipt",
+    "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json",
+    "reconciled": true,
+    "schema": "pctdd/pytest-identity@1",
+    "sealed_sha256": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997"
+  },
+  "goal_id": "PCTDD-G011",
+  "identity_differential": {
+    "bootstrap_current_capabilities": [
+      {
+        "capability": "locator-first seed",
+        "live_interfaces": [
+          "ProofReuseCollectionSeed@1",
+          "LocatorFirstItemIdentityAssembler@1",
+          "DefaultIdentityServiceFactory@1",
+          "DefaultItemStaticIdentity@1"
+        ],
+        "live_paths": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/collection_seed.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/default_identity_services.py"
+        ],
+        "status": "present_and_matching",
+        "truth": "Collection attaches a stable locator and static seed before any runtime trace, fixture setup, final execution key, cache hit, or skip authority. Seed action is always RUN; authorizes_skip is always false."
+      },
+      {
+        "capability": "runtime trace",
+        "live_interfaces": [
+          "PytestRuntimeTraceLifecycle@1",
+          "RuntimeTestDependencyTrace@1",
+          "PostPassRuntimeTraceCapture@1",
+          "CurrentRuntimeTraceEvidence@1"
+        ],
+        "live_paths": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_trace_lifecycle.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_revalidation.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/item_identity.py"
+        ],
+        "status": "present_and_matching",
+        "truth": "Cold-pass observation starts immediately before setup and stops after teardown without re-invoking the test body. Historical traces are never accepted as current. Authoritative execution-key assembly requires CurrentRuntimeTraceEvidence@1 from a fresh controlled preflight."
+      },
+      {
+        "capability": "DI lookup/store/provider/issuer",
+        "live_interfaces": [
+          "ProofReuseServices@1",
+          "ProofReuseLookup@1",
+          "TwoStageCandidateLookup@2",
+          "LazyRealTestCertificateIssuer@1",
+          "TestCandidateContextStore@1",
+          "CurrentContextProvider@1"
+        ],
+        "live_paths": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lookup.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_candidate_context_store.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_proof_cache.py"
+        ],
+        "status": "present_and_matching",
+        "truth": "Explicit injected lookup, store, candidate_store, provider, issuer, installer, resolver, and identity-service handles always win. Missing optional resolution degrades to RUN. Collection and lookup never prove."
+      },
+      {
+        "capability": "controller-owned xdist publication",
+        "live_interfaces": [
+          "ProofReuseXdistCoordination@1",
+          "ControllerCandidatePublisher@2",
+          "DeferredIssuanceEnvelope@1"
+        ],
+        "live_paths": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py"
+        ],
+        "status": "present_and_matching",
+        "truth": "Workers remain read/execute-only and return bounded public publication intents. The single controller deduplicates and invokes the fenced store entrypoint. Missing or stale coordination disables skips and writes; ordinary pytest execution remains."
+      }
+    ],
+    "bootstrap_gap_still_true": true,
+    "eligibility_class_vs_fixture_adapter_closed_set": {
+      "execution_key_eligibility_class": [
+        "pure",
+        "snapshot_bound",
+        "repository_forest_bound",
+        "non_reusable"
+      ],
+      "fixture_adapter_closed_reuse_classes": [
+        "pure",
+        "deterministic_snapshot",
+        "transactional",
+        "idempotent_external",
+        "effectful_replayable",
+        "effectful_nonreplayable",
+        "opaque"
+      ],
+      "status": "related_but_not_the_same_closed_set",
+      "truth": "This is a successor contract gap, not a change to current TestExecutionKey@1 or fixture-adapter inventory meaning. Default adapter class remains opaque."
+    },
+    "skip_labeling": {
+      "collection_seed_authorizes_skip": false,
+      "current_verified_hit_mechanism": "pytest.mark.skip with reason prefix proof-cache-hit:<certificate_cid>",
+      "ordinary_pytest_skip_is_completion_evidence": false,
+      "pctdd_successor_rule": "Never label proof reuse as pytest skip",
+      "status": "predecessor_uses_prefixed_pytest_skip_for_authoritative_certificate_hits_only",
+      "truth": "Current lookup apply_verified_skip attaches a standard pytest skip marker only after ReuseDecision is SKIP, PROOF_CACHE_HIT, AUTHORITATIVE, and both certificate_cid and receipt_cid are present. That is predecessor skip application, not successor phase-reuse labeling, and does not make ordinary pytest skip completion evidence."
+    },
+    "test_execution_key_v1_vs_v2": {
+      "current_interface": "TestExecutionKey@1",
+      "current_schema": "ipfs_accelerate_py/agent-supervisor/test-execution-key@1",
+      "fixture_fields_on_v1": [
+        "fixture_cids",
+        "conftest_closure_cid",
+        "hook_plugin_cids"
+      ],
+      "missing_on_this_tree": [
+        "TestExecutionKeyV2",
+        "fixture-instance commitment field",
+        "setup-bound pre-call key",
+        "composite phase receipt distinct from TestPassReceipt@1"
+      ],
+      "status": "v2_absent_gap_confirmed",
+      "test_pass_receipt_current": "TestPassReceipt@1 binds setup/call/teardown outcomes on one whole-item receipt under one execution-key CID"
+    }
+  },
+  "independent_tests": {
+    "cross_package_api_surface": [
+      {
+        "check": "accelerate pytest11 entry point ipfs-proof-reuse -> ipfs_accelerate_py.testing.proof_reuse.plugin",
+        "path": "external/ipfs_accelerate/pyproject.toml",
+        "result": "present"
+      },
+      {
+        "check": "kit pytest11 entry point ipfs-proof-reuse -> same accelerate plugin",
+        "path": "external/ipfs_kit/pyproject.toml",
+        "result": "present"
+      },
+      {
+        "check": "kit source-checkout conftest optionally imports the same plugin when the entry point is absent",
+        "path": "external/ipfs_kit/conftest.py",
+        "result": "present"
+      },
+      {
+        "check": "datasets pytest11 entry point",
+        "path": "external/ipfs_datasets/pyproject.toml",
+        "result": "absent"
+      },
+      {
+        "check": "datasets pytest_proof_reuse shim",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py",
+        "result": "absent"
+      },
+      {
+        "check": "kit pytest_proof_reuse shim",
+        "path": "external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py",
+        "result": "absent"
+      },
+      {
+        "check": "accelerate root conftest proof-reuse loader",
+        "path": "external/ipfs_accelerate/conftest.py",
+        "result": "absent"
+      }
+    ],
+    "focused_owning_repository_pytest_targets": [
+      "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_item_identity.py",
+      "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_plugin.py",
+      "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_lookup.py",
+      "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_receipt.py",
+      "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py",
+      "external/ipfs_accelerate/test/api/test_proof_reuse_locator_first_collection.py",
+      "external/ipfs_accelerate/test/api/test_proof_reuse_runtime_composition.py",
+      "external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py",
+      "external/ipfs_accelerate/test/api/test_proof_reuse_default_identity_services.py",
+      "external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_test_execution_identity.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_test_execution_identity_vectors.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_test_static_dependency_trace.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_test_runtime_dependency_trace.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_test_reuse_eligibility.py"
+    ],
+    "identity_proof_differentials": [
+      {
+        "id": "D1",
+        "name": "bootstrap authority_paths exist on this tree",
+        "result": "pass"
+      },
+      {
+        "id": "D2",
+        "name": "bootstrap current capabilities map to live interfaces without claim change",
+        "result": "pass"
+      },
+      {
+        "id": "D3",
+        "name": "bootstrap gap remains true: no TestExecutionKeyV2, no fixture-instance key, no successor composite phase receipt",
+        "result": "pass"
+      },
+      {
+        "id": "D4",
+        "name": "collection seed never authorizes skip or lookup",
+        "result": "pass"
+      },
+      {
+        "id": "D5",
+        "name": "item identity assembly without CurrentRuntimeTraceEvidence@1 fails open to RUN",
+        "result": "pass"
+      },
+      {
+        "id": "D6",
+        "name": "TestPassStatementV1 remains the unchanged datasets statement module; accelerate groth16 path pins TestPassStatementV5 as a circuit profile without replacing V1",
+        "result": "pass"
+      },
+      {
+        "id": "D7",
+        "name": "CID identity compiler uses CIDv1 dag-json sha2-256; missing multiformats is a typed non-reusable path, never a kit pseudo-CID",
+        "result": "pass"
+      },
+      {
+        "id": "D8",
+        "name": "board Validation text is a descriptive obligation, not argv; PYTHONPATH wrapping of the phrase is not a pytest regression",
+        "result": "pass"
+      }
+    ],
+    "method": "exact-tree source inspection of live modules, contracts, pytest11 metadata, named test files, and the sealed pytest-identity@1 inventory; this provider session has no shell/command runner so pytest process execution remains typed unavailable rather than fabricated",
+    "pytest_execution": {
+      "classification": "typed_unavailable_in_provider_process",
+      "reason": "this provider session exposes read/search/edit tools only and cannot invoke /usr/bin/python3.12 -m pytest under the sealed validation PATH/HOME; fabricating a green pytest result would change independent-test meaning",
+      "validator_must_execute": true,
+      "validator_must_not_exec_board_description_as_command_name": true
+    }
+  },
+  "inventory": {
+    "authority_matrix_owners": {
+      "canonical_semantic_and_statement_authority": "ipfs_datasets_py",
+      "execution_scheduling_admission_authority": "ipfs_accelerate_py",
+      "verified_storage_wal_cas_authority": "ipfs_kit_py"
+    },
+    "bootstrap_authority_paths_confirmed": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py"
+    ],
+    "di_config_attributes": [
+      "_ipfs_proof_reuse_config",
+      "_ipfs_proof_reuse_lookup_service",
+      "_ipfs_proof_reuse_store_service",
+      "_ipfs_proof_reuse_candidate_store_service",
+      "_ipfs_proof_reuse_provider_service",
+      "_ipfs_proof_reuse_issuer_service",
+      "_ipfs_proof_reuse_dependency_installer",
+      "_ipfs_proof_reuse_service_resolver",
+      "_ipfs_proof_reuse_service_resolution",
+      "_ipfs_proof_reuse_identity_services",
+      "_ipfs_proof_reuse_identity_factory",
+      "_ipfs_proof_reuse_xdist_coordinator",
+      "_ipfs_proof_reuse_default_services",
+      "_ipfs_proof_reuse_runtime_composition"
+    ],
+    "di_injection_entrypoints": [
+      "set_proof_reuse_services(lookup, store, candidate_store, provider, issuer)",
+      "set_proof_reuse_dependency_installer(installer)",
+      "set_proof_reuse_service_resolver(resolver)",
+      "set_proof_reuse_identity_services(ItemIdentityAssemblyServices)"
+    ],
+    "di_item_attributes": [
+      "_ipfs_proof_reuse_metadata",
+      "_ipfs_proof_reuse_locator",
+      "_ipfs_proof_reuse_execution_key",
+      "_ipfs_proof_reuse_collection_seed",
+      "_ipfs_proof_reuse_identity_assembly",
+      "_ipfs_proof_reuse_eligibility",
+      "_ipfs_proof_reuse_policy",
+      "_ipfs_proof_reuse_lookup_request",
+      "_ipfs_proof_reuse_decision",
+      "_ipfs_proof_reuse_runtime_trace",
+      "_ipfs_proof_reuse_runtime_trace_lifecycle",
+      "_ipfs_proof_reuse_runtime_trace_capture",
+      "_ipfs_proof_reuse_receipt_collector",
+      "_ipfs_proof_reuse_deferred_request"
+    ],
+    "identity_compiler": {
+      "cid_profile": {
+        "base": "base32",
+        "codec": "dag-json",
+        "mh_type": "sha2-256",
+        "version": 1
+      },
+      "interface": "TestExecutionIdentityCompiler@1",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_execution_identity.py",
+      "produces": [
+        "TestLocatorKey@1",
+        "TestExecutionKey@1",
+        "ContentIdentity@1"
+      ],
+      "pseudo_cid_policy": "reject_pseudo_cid; missing CID support returns non-reusable artifacts and never labels a fallback digest as a CID"
+    },
+    "identity_contracts": {
+      "ReuseDecision": "ReuseDecision@1",
+      "SignedTestPassReceipt": "SignedTestPassReceiptV2",
+      "TestExecutionKey": "TestExecutionKey@1",
+      "TestLocatorKey": "TestLocatorKey@1",
+      "TestPassReceipt": "TestPassReceipt@1",
+      "TestProofCertificate": "TestProofCertificate@1",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py"
+    },
+    "item_identity_assembly_services": [
+      "repository_forest_provider",
+      "analysis_index_provider",
+      "component_inputs_provider",
+      "policy_inputs_provider",
+      "runtime_evidence_provider",
+      "identity_compiler"
+    ],
+    "modes": [
+      "off",
+      "shadow",
+      "read",
+      "write",
+      "readwrite"
+    ],
+    "plugin": {
+      "markers": [
+        "proof_reuse_disabled",
+        "proof_reuse_effects"
+      ],
+      "module_hooks": [
+        "pytest_addoption",
+        "pytest_configure",
+        "pytest_collection_modifyitems",
+        "pytest_configure_node",
+        "pytest_testnodedown",
+        "pytest_sessionfinish",
+        "pytest_terminal_summary"
+      ],
+      "name": "ipfs-proof-reuse",
+      "package_import_surface": "standard-library config only; pytest and optional providers are loaded after an enabled mode",
+      "receipt_module_hook": "pytest_runtest_logreport in receipt.py",
+      "runtime_plugin_hooks_after_enabled_configure": [
+        "pytest_runtest_protocol",
+        "pytest_runtest_makereport"
+      ]
+    },
+    "predecessor_proof_reuse_modules": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/__init__.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/activation_contracts.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/candidate_publication.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/collection_seed.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/config.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/current_context_provider.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/default_identity_services.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/item_identity.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lookup.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/provisioning_cli.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/reporting.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/rollout.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_revalidation.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_trace_lifecycle.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py"
+    ],
+    "pytest11_registration": {
+      "accelerate": "external/ipfs_accelerate/pyproject.toml [project.entry-points.pytest11] ipfs-proof-reuse",
+      "datasets": "none",
+      "kit": "external/ipfs_kit/pyproject.toml [project.entry-points.pytest11] ipfs-proof-reuse"
+    },
+    "related_overlap_gap": {
+      "capability": "pytest proof reuse/DI/xdist controller publication",
+      "classification": "available_with_caveats",
+      "owner": "ipfs_accelerate_py",
+      "successor": "fixture-staged V2 identity/composite phases"
+    },
+    "statement_authority": {
+      "accelerate_groth16_circuit_profile": "TestPassStatementV5 / TestPassGroth16CircuitV5 pinned in proof_reuse/services.py",
+      "legacy_unchanged": "TestPassStatementV1 in external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py",
+      "truth": "V5 is a current circuit profile pin, not a replacement of TestPassStatementV1 meaning"
+    }
+  },
+  "limitations": [
+    "Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.",
+    "Exact fixture-instance identity is not safely authoritative until after current setup; collection seeds and locator-first warm lookup are not skip authority.",
+    "TestExecutionKeyV2, fixture-definition closure contracts, reviewed fixture-instance commitment adapters, and successor composite phase receipts are absent on this tree and belong to later PCTDD tasks.",
+    "runner_pass_attestation.py exists as an authority path but hard-imports dag_cbor, cryptography, and multiformats; those imports are outside the cold plugin surface.",
+    "This receipt does not embed a self-referential CID; the verifier mints CIDv1 dag-json sha2-256 over exact file bytes.",
+    "The board Validation field is a descriptive obligation, not shell argv. Executing the phrase as a command name after PYTHONPATH wrapping is a board-template/argv mismatch and is not inventory evidence."
+  ],
+  "markdown_non_authoritative": true,
+  "objective_id": "PCTDD-002",
+  "objective_revision": "baguqeerafcwob2vwd3ay6pgcpowxeuamqbdfzfa5wqfbp7g2aymshw5tdh5q",
+  "plan_revision": "PCTDD-PLAN-V1",
+  "proof_claim_class": "IntegrityCommitment",
+  "proof_claim_does_not": "execution or semantics",
+  "proof_claim_establishes": "exact bytes/digest/CID/Merkle inclusion of the inventoried current pytest proof-reuse identity and DI paths",
+  "receipt_cid_policy": "verifier mints CIDv1 dag-json sha2-256 lowercase-base32 over exact file bytes using the same profile as ipfs_accelerate_py.agent_supervisor.proof.formal_verification_contracts.content_identity; this file does not embed a self-referential CID",
+  "rescue": {
+    "diagnosis": "The board Validation text is a descriptive obligation ('focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable'), not argv. The token pytest inside that phrase caused PYTHONPATH wrapping; the sealed validation shell then flattened the quoted phrase and treated && as an export operand. That failure is not a pytest regression and does not change inventory claim meaning.",
+    "failed_command": "export PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit && 'focused owning-repository pytest plus cross-package API tests'",
+    "prior_failure": "validation_command_failed",
+    "this_session": "re-verified live proof_reuse identity/DI paths, pytest11 surfaces, TestExecutionKey@1 versus absent V2, collection-seed skip denial, apply_verified_skip prefix, and TestPassStatementV1 authority by exact-tree source inspection"
+  },
+  "schema": "pctdd/task-inventory-receipt@1",
+  "source_forest": {
+    "git_rev_parse": {
+      "classification": "typed_unavailable_in_provider_process",
+      "reason": "provider session has no command runner; .git paths are denied by permission policy"
+    },
+    "leased_tree_id": "c488d97ed5665b5744d983fc4a294989df519361",
+    "planning_base_head": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "planning_base_tree": "e35dfaebbd229d7e7de988b2e0345444d9284221",
+    "sealed_sources": [
+      {
+        "gitlink": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+        "name": "ipfs_accelerate_py",
+        "path": "external/ipfs_accelerate",
+        "tree": "c7b788c1b23a87f461579bde461a61ecb66e9fa2"
+      },
+      {
+        "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "name": "ipfs_datasets_py",
+        "path": "external/ipfs_datasets",
+        "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+      },
+      {
+        "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "name": "ipfs_kit_py",
+        "path": "external/ipfs_kit",
+        "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+      }
+    ],
+    "sealed_sources_origin": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json and config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json"
+  },
+  "status": "inventory_reconciled_pending_evidence_gated_database_completion",
+  "task_id": "PCTDD-002",
+  "title": "Inventory current pytest proof-reuse identity and DI paths",
+  "track": "pctdd-g011",
+  "unsupported_unavailable": [
+    {
+      "artifact": "TestExecutionKeyV2",
+      "classification": "missing_successor_contract",
+      "truth": "Current identity remains TestExecutionKey@1. Successor V2 is PCTDD-025 and must not be back-labeled onto this inventory."
+    },
+    {
+      "artifact": "fixture-definition closure and fixture-instance commitment",
+      "classification": "missing_successor_contract",
+      "truth": "Current keys bind fixture_cids / conftest_closure_cid / hook_plugin_cids as source-side component CIDs. Instance commitment after setup is the recorded gap."
+    },
+    {
+      "artifact": "composite phase receipt successor",
+      "classification": "missing_successor_contract",
+      "truth": "TestPassReceipt@1 already records setup/call/teardown outcomes on one whole-item receipt. Guarded post-setup/pre-call reuse with current teardown is PCTDD-026/028, not current behavior."
+    },
+    {
+      "artifact": "external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py",
+      "classification": "typed_unavailable_on_this_tree",
+      "truth": "Predecessor PTR-140/161 shim is absent. Cross-package tests that import ipfs_datasets_py.pytest_proof_reuse cannot run as production discovery on this tree."
+    },
+    {
+      "artifact": "external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py",
+      "classification": "typed_unavailable_on_this_tree",
+      "truth": "Predecessor PTR-141/162 shim is absent. Kit still registers the accelerate plugin via pytest11 and optional root conftest."
+    },
+    {
+      "artifact": "accelerate root conftest proof-reuse autoload",
+      "classification": "typed_unavailable_on_uninstalled_accelerate_checkout",
+      "truth": "external/ipfs_accelerate/conftest.py does not import the plugin. Uninstalled accelerate source discovery depends on the pytest11 entry point from an installed distribution."
+    },
+    {
+      "artifact": "production groth16/provekit skip admission",
+      "classification": "typed_unavailable_without_admitted_ceremony",
+      "truth": "zkp_backend_inventory.json: groth16 binary present but unqualified; provekit adapter source present; simulated never production-admitted. Missing proving capability retains receipts and runs future tests."
+    },
+    {
+      "artifact": "provider-process pytest execution and git rev-parse",
+      "classification": "typed_unavailable_in_provider_process",
+      "truth": "Independent source differentials were performed on the exact tree. Process pytest and git identity hashing are left to the sealed validation runner rather than fabricated."
+    },
+    {
+      "artifact": "board Validation text as shell argv",
+      "classification": "typed_non_operative_board_template",
+      "truth": "The worker-task Validation field is the generic phrase 'focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable'. That phrase is not a command name. The executable interpretation is the focused accelerate API tests listed in this receipt plus the identity differentials already performed by exact-tree inspection."
+    }
+  ],
+  "validation_commands": {
+    "authoritative_environment": {
+      "HOME_prefix": "ipfs-accelerate-validation-home-",
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "python": "/usr/bin/python3.12"
+    },
+    "board_declaration": [
+      "focused owning-repository pytest plus cross-package API tests",
+      "identity/proof differential checks where applicable"
+    ],
+    "board_declaration_is_argv": false,
+    "cross_package_api_tests": [
+      "confirm external/ipfs_accelerate/pyproject.toml and external/ipfs_kit/pyproject.toml both declare pytest11 ipfs-proof-reuse = ipfs_accelerate_py.testing.proof_reuse.plugin",
+      "confirm external/ipfs_datasets/pyproject.toml has no pytest11 proof-reuse entry",
+      "confirm datasets and kit pytest_proof_reuse.py shims are absent",
+      "confirm kit conftest optionally loads the accelerate plugin"
+    ],
+    "executable_interpretation": [
+      "cd external/ipfs_accelerate && /usr/bin/python3.12 -m pytest test/api/test_pytest_proof_reuse_item_identity.py test/api/test_pytest_proof_reuse_plugin.py test/api/test_pytest_proof_reuse_lookup.py test/api/test_pytest_proof_reuse_receipt.py test/api/test_pytest_proof_reuse_xdist.py test/api/test_proof_reuse_locator_first_collection.py test/api/test_proof_reuse_runtime_composition.py test/api/test_proof_reuse_default_runtime_services.py test/api/test_proof_reuse_default_identity_services.py test/api/test_proof_reuse_accelerator_zero_config.py test/api/test_agent_supervisor_test_execution_identity.py test/api/test_agent_supervisor_test_execution_identity_vectors.py test/api/test_agent_supervisor_test_static_dependency_trace.py test/api/test_agent_supervisor_test_runtime_dependency_trace.py test/api/test_agent_supervisor_test_reuse_eligibility.py -q --tb=short"
+    ],
+    "focused_owning_repository_pytest": [
+      "cd external/ipfs_accelerate && /usr/bin/python3.12 -m pytest test/api/test_pytest_proof_reuse_item_identity.py test/api/test_pytest_proof_reuse_plugin.py test/api/test_pytest_proof_reuse_lookup.py test/api/test_pytest_proof_reuse_receipt.py test/api/test_pytest_proof_reuse_xdist.py test/api/test_proof_reuse_locator_first_collection.py test/api/test_proof_reuse_runtime_composition.py test/api/test_proof_reuse_default_runtime_services.py test/api/test_proof_reuse_default_identity_services.py test/api/test_proof_reuse_accelerator_zero_config.py test/api/test_agent_supervisor_test_execution_identity.py test/api/test_agent_supervisor_test_execution_identity_vectors.py test/api/test_agent_supervisor_test_static_dependency_trace.py test/api/test_agent_supervisor_test_runtime_dependency_trace.py test/api/test_agent_supervisor_test_reuse_eligibility.py -q --tb=short"
+    ],
+    "identity_proof_differentials": [
+      "compare docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json current/gap against live proof_reuse modules",
+      "assert TestExecutionKeyV2 is absent",
+      "assert ProofReuseCollectionSeed.authorizes_skip is false",
+      "assert apply_verified_skip uses prefix proof-cache-hit:",
+      "assert TestPassStatementV1 module remains the datasets statement authority"
+    ]
+  },
+  "verifier_admission": {
+    "admits_production_skip": false,
+    "admits_simulated_proof": false,
+    "changes_test_pass_statement_v1": false,
+    "introduces_test_execution_key_v2": false,
+    "self_approval": false,
+    "task_completion": "not granted by this receipt; DuckDB/Quack evidence-gated CAS only"
+  }
+}
