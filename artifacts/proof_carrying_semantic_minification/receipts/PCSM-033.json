@@ -1,0 +1,254 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-033",
+  "title": "Implement completeness witness",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G300",
+  "objective_id": "PCSM-033",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-033@current-head-python-completeness-witness-capability-gap-v1",
+  "observed_at": "2026-08-28T07:06:06Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 deterministic completeness witness for a qualified semantic slice over the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-033.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-033.json",
+    "implementation_delta": "No CompletenessWitness@1 implementation, schema, versioned constructor, aggregate current-forest/source-map CID binding, or witness-specific positive/negative test module exists in the exact current admitted source forest. The closest reusable selectors are dependency_closure, impact_from_index, and mandatory_semantic_closure in the canonical code-evidence adapter. They deterministically select bounded graph/index closures and may report graph-local complete=true, but none enumerates or proves the completeness of a qualified PCSM source forest, declares omitted semantics or assumptions, binds a selected slice to a canonical source-map CID, or emits a completeness-witness artifact. The implementation directory is outside this dispatch's exact receipt-only write authority, so this receipt records the typed unavailable disposition rather than creating an unreviewed competing authority.",
+    "non_promotion_reason": "The named witness package and its positive/negative test surface are absent. The required proof_context suite is passing only in a provider environment, which is simulated evidence; in the authoritative sealed Python 3.12 environment it aborts before collection because the explicitly configured anyio pytest plugin is unavailable. No sealed passing result or completeness claim is made."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish completeness, identity, schema binding, or test success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize mutation or promotion.",
+    "unavailable": "A required capability, identity, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "218bf3c5643ad5c1e116482be522d596a62e23f3",
+    "outer_tree": "49a09a1c5679507b87151c9a6de1525aa46b37f2",
+    "outer_subject": "Merge commit '202dc9089079d4f0af1b679b55df9144e593fdbb' into agent/proof-carrying-semantic-minification-v1",
+    "dispatch_tree_id": "218bf3c5643ad5c1e116482be522d596a62e23f3",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical Python code-evidence graph, code-impact index, semantic dependency graph, and bounded graph closure authority; not a PCSM completeness-witness authority"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for external/ipfs_datasets; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; porcelain status for both roots before receipt write; git -C external/ipfs_datasets merge-base --is-ancestor origin/main HEAD.",
+      "result": "The datasets nested HEAD equals the superproject gitlink; both roots were clean before receipt write; configured datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 is an ancestor of the measured datasets HEAD.",
+      "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, source-search result, graph/index schema, identity profile, or dirty admitted root requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree SourceLinkReceipt, aggregate source-map CID, or canonical source-forest CID exists. Git blobs, source SHA-256 values, and graph/index content identities are not substituted for a completeness-witness source binding."
+    }
+  },
+  "required_package_assessment": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_package": "CompletenessWitness@1",
+    "required_contract": "A deterministic, versioned witness for a qualified PCSM semantic slice, bound to canonical source identities and an exact current source forest.",
+    "required_bindings": [
+      "explicit witness schema and version",
+      "canonical qualified-fragment identity rather than an alias",
+      "exact current commit, tree, and aggregate source-map/source-forest CID",
+      "deterministic included and omitted semantic coverage claims",
+      "explicit assumptions, dynamic-feature limitations, and expansion requirements",
+      "linkage to dependency, reverse-dependency, selected test, and mandatory proof-obligation closures",
+      "positive determinism/completeness vectors and negative stale, missing, ambiguous, unsupported-dynamic-feature, and incomplete-coverage vectors"
+    ],
+    "source_search": {
+      "kind": "measured",
+      "method": "rg -l -i --glob '*.py' --glob '*.json' --glob '*.toml' --glob '*.yaml' --glob '*.yml' --glob '*.md' 'completeness[_ -]?witness|CompletenessWitness' external/ipfs_datasets, followed by package-local inspection of external/ipfs_datasets/ipfs_datasets_py/proof_context and external/ipfs_datasets/tests/proof_context.",
+      "result": "No matching CompletenessWitness or completeness-witness identifier was found in the admitted datasets source forest. The proof_context package has no witness module, and its test tree has no witness-specific vectors.",
+      "meaning": "The named package and its required typed contract/test surface are absent from the exact current Python source forest."
+    },
+    "disposition": "The named package cannot truthfully be claimed implemented, deterministic as a PCSM source-forest witness, schema/version/CID-bound, or covered by witness-specific positive and negative tests at this head. No automatic mutation, proof acceptance, validation acceptance, promotion, or task completion is authorized."
+  },
+  "nearest_existing_components": {
+    "kind": "measured",
+    "code_evidence_adapter": {
+      "authority": "ipfs_datasets_py.knowledge_graphs.adapters.code_evidence",
+      "entry_points": [
+        "dependency_closure(seed_ids, edges, direction, max_depth, max_nodes, max_edges, authoritative_only, edge_kinds) -> dict",
+        "impact_from_index(index, changed_symbols, changed_paths) -> dict",
+        "mandatory_semantic_closure(graph, decision_id, max_nodes, max_edges, max_depth) -> dict"
+      ],
+      "schemas": [
+        "code-evidence-dependency-query/v1",
+        "ipfs_accelerate_py.agent_supervisor.code-impact-index@1",
+        "ipfs_accelerate_py.agent_supervisor.code-impact-result@1",
+        "ipfs_accelerate_py/agent-supervisor/mandatory-dependency-closure@1"
+      ],
+      "deterministic_properties": [
+        "dependency_closure normalizes nonempty seed IDs in lexical order, returns sorted node IDs and paths, and fail-closes invalid directions and invalid or overflowing bounds.",
+        "impact_from_index normalizes changed symbols and paths, returns sorted reverse impact and validation selection, and exposes unknown changes as uncovered impact rather than silently treating them as complete.",
+        "mandatory_semantic_closure sorts traversed edges, returns sorted node and edge IDs plus lexical shortest paths, and accepts only an authoritative decision seed and authoritative mandatory edges."
+      ],
+      "rejection_reason": "These are bounded closure/impact selectors over a supplied canonical graph or index. mandatory_semantic_closure's complete=true means that its finite traversal completed within its graph and bounds; it is not a statement that a PCSM source forest or semantic slice is complete. None emits a versioned completeness witness, binds included/omitted source semantics to a forest source-map CID, or declares assumptions and expansion requirements."
+    },
+    "context_pack_component": {
+      "authority": "ipfs_datasets_py.proof_context.context_pack.build_context_pack",
+      "schema": "ipfs-datasets.proof-context.v0.1",
+      "interface": "DatasetsContextPackAuthority@0.1",
+      "properties": [
+        "derives a deterministic ContextPack CID from caller-supplied source CIDs and tree OIDs",
+        "rejects stale, unavailable, and opaque-without-exact-scanned-tree inputs"
+      ],
+      "rejection_reason": "It establishes pre-execution context sufficiency from caller-supplied inputs, not completeness of a PCSM semantic slice. It neither enumerates the current source forest nor emits CompletenessWitness@1."
+    },
+    "minimum_delta_reason": "The existing components are retained only as nearby bounded-selection and fail-closed context controls. Building a witness wrapper around them would introduce the missing PCSM semantic authority outside this dispatch's exact receipt-only edit boundary."
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/knowledge_graphs/adapters/code_evidence.py",
+      "git_blob": "519c4dccd666c7084444fd4ed22a9e0b00f7f508",
+      "sha256": "fa4b6bdecc05606dc301324b774c4629675ee1c6266b574770944fcb8f0064ca",
+      "role": "canonical bounded dependency, reverse-impact, and mandatory graph-closure authority; not a source-forest completeness witness"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+      "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+      "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+      "role": "deterministic CID-bound ContextPack and stale/unavailable/opaque fail-closed component; not a completeness witness"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
+      "git_blob": "7a8cfa7f939d4f2154eb110fb0048bc89428b0fd",
+      "sha256": "0e2ffacfad4c3b2dd5f6a25c934e0a8bd1feaf1ce993fa2174d9601d5bfc7c52",
+      "role": "positive and negative tests for adjacent bounded graph/index selectors; not witness-specific coverage"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+      "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+      "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+      "role": "positive and negative tests for CID-bound ContextPack construction and stale/unavailable/opaque rejection; not witness-specific coverage"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "nearest_component_positive_and_negative_coverage": {
+      "kind": "measured",
+      "code_evidence_adapter": {
+        "positive_coverage": [
+          "forward and reverse dependency closures select deterministic paths",
+          "reverse symbol/path impact selects validation IDs",
+          "mandatory decision-to-obligation-to-proof closure returns graph-local complete=true"
+        ],
+        "negative_coverage": [
+          "missing/corrupt/checksum-mismatched graph artifacts and forged identities fail closed",
+          "unknown impact remains uncovered and invalid closure seeds or bounds raise CodeEvidenceAdapterError"
+        ]
+      },
+      "context_pack_component": {
+        "positive_coverage": [
+          "identical inputs yield an identical ContextPack CID"
+        ],
+        "negative_coverage": [
+          "stale, unavailable, and opaque-without-exact-scanned-tree inputs fail closed"
+        ]
+      },
+      "non_equivalence": "These adjacent tests do not create positive or negative coverage for CompletenessWitness@1 because no witness implementation, schema, or test module exists."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "environment": "Provider Python 3.12.3 with provider-installed pytest plugins and dependencies.",
+      "result": "519 passed",
+      "scope_limit": "The suite validates proof_context behavior, including CID-bound ContextPack freshness controls. It does not establish the absent PCSM CompletenessWitness@1."
+    },
+    "focused_adjacent_control_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
+      "result": "22 passed in 0.17s",
+      "scope_limit": "This validates the nearest bounded graph/index controls only; it is not witness-specific coverage or sealed validation."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited 1 before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "package_specific_tests": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No CompletenessWitness@1 implementation, versioned witness schema, aggregate current-forest/source-map CID binding, or witness-specific positive/negative test module exists in the bound current source forest. Adjacent component tests are not substituted."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-033 completeness-witness proof obligation or approved digest-bound prover deployment is present."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities, clean/freshness and origin-ancestry checks, scheduler and source SHA-256 values, Git blobs, source-search absence, adjacent schemas/bindings and test-source coverage, and the sealed pytest dependency failure.",
+    "estimated": "None. No estimate is used to establish completeness, identity, or validation.",
+    "simulated": "Provider required proof_context validation: 519 passed; focused adjacent code-evidence validation: 22 passed in 0.17s. Neither is substituted for sealed validation or witness-specific coverage.",
+    "unavailable": "CompletenessWitness@1; a versioned witness schema; aggregate PCSM source-map/source-forest CID; deterministic qualified-fragment included/omitted semantics witness; witness-specific positive and negative tests; authoritative sealed required-suite result; formal-prover result; and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it assesses existing current-head controls without mutating proof_context or creating a competing completeness authority.",
+    "Bounded graph closure complete=true concerns only traversal of a supplied graph under finite bounds. It cannot be promoted into a source-forest completeness or semantic-equivalence assertion.",
+    "ContextPack source CIDs and freshness flags are caller-supplied context sufficiency inputs, not aggregate PCSM source-map/forest coverage or a completeness witness.",
+    "The authoritative sealed validation environment lacks anyio, so this receipt cannot promote completion despite the provider-side suite passing.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter protected planning documents, existing source components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, source-search result, component schema/version, CID profile, or validation-environment capability changes."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalents_reused_first": true,
+    "typed_unavailable_disposition_recorded": true,
+    "evidence_classes_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "provider_required_validation_passed": true,
+    "authoritative_sealed_validation_available": false,
+    "package_specific_positive_and_negative_tests_available": false,
+    "required_package_implemented": false,
+    "promotion_status": "non_promoted_unavailable"
+  }
+}
