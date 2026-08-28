@@ -160,6 +160,10 @@ CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-current-head-descendant-repair@1"
 )
+STALE_WORKTREE_CLEANUP_TRANSITION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-stale-worktree-cleanup-transition@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -270,6 +274,22 @@ CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH: Final = (
     / "proof_carrying_semantic_minification"
     / "handoff"
     / "supervisor-restart-current-head-blocked-retry-repair.json"
+)
+STALE_WORKTREE_CLEANUP_TRANSITION_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-stale-worktree-cleanup-transition.json"
+)
+STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT: Final = (
+    "PENDING_STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT"
+)
+STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD: Final = (
+    "059d684952a5cdf3430edf70a43c3b9b31dc650a"
+)
+STALE_WORKTREE_CLEANUP_ACCELERATOR_TREE: Final = (
+    "067b308e8ff0fba4b9017f240ad774e6cdedd3cf"
 )
 CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
     "db9304284cfe857f08377ef756b4896192dd5111"
@@ -1942,6 +1962,161 @@ def _verified_handoff_command_authority_verifier_repair(
     return payload
 
 
+def _verified_bootstrap_broker_operator_descendant(
+    *,
+    expected_historical_operator: bytes,
+    historical_operator_identity: str,
+    current_operator: bytes,
+    current_head: str,
+    operator_path: Path,
+) -> None:
+    """Bind the blocked-retry seal and its one admitted operator successor."""
+
+    descendant = _json_mapping_bytes(
+        _tracked_bytes(
+            CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH,
+            head=current_head,
+        ),
+        field="current-head blocked-retry descendant repair",
+    )
+    descendant_body = dict(descendant)
+    descendant_receipt_id = str(descendant_body.pop("receipt_id", "") or "")
+    repair_base = descendant.get("repair_base")
+    sealed_source = descendant.get("sealed_source")
+    if (
+        descendant.get("schema")
+        != CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_SCHEMA
+        or not isinstance(repair_base, Mapping)
+        or repair_base.get("source_head")
+        != CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT
+        or not isinstance(sealed_source, Mapping)
+        or re.fullmatch(
+            r"[0-9a-f]{40}", str(sealed_source.get("source_head") or "")
+        )
+        is None
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", descendant_receipt_id) is None
+        or _identity(descendant_body) != descendant_receipt_id
+    ):
+        raise OperatorError("PCSM current-head blocked-retry operator delta changed")
+
+    blocked_retry_head = str(sealed_source["source_head"])
+    historical_operator = _git_blob_at(
+        head=CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_HEAD,
+        path=operator_path,
+        field="historical blocked-retry operator",
+    )
+    blocked_retry_operator = _git_blob_at(
+        head=blocked_retry_head,
+        path=operator_path,
+        field="sealed blocked-retry operator",
+    )
+    if (
+        historical_operator != expected_historical_operator
+        or _identity(expected_historical_operator) != historical_operator_identity
+        or sealed_source.get("operator_identity")
+        != _identity(blocked_retry_operator)
+    ):
+        raise OperatorError("PCSM current-head blocked-retry operator delta changed")
+    _git_is_ancestor(
+        CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT,
+        current_head,
+        field="blocked-retry operator descendant lineage",
+    )
+    if current_operator == blocked_retry_operator:
+        return
+
+    transition = _json_mapping_bytes(
+        _tracked_bytes(STALE_WORKTREE_CLEANUP_TRANSITION_PATH, head=current_head),
+        field="stale-worktree cleanup transition receipt",
+    )
+    transition_body = dict(transition)
+    transition_receipt_id = str(transition_body.pop("receipt_id", "") or "")
+    checkpoint = transition.get("prior_checkpoint")
+    transition_base = transition.get("repair_base")
+    transition_seal = transition.get("sealed_source")
+    if (
+        transition.get("schema") != STALE_WORKTREE_CLEANUP_TRANSITION_SCHEMA
+        or transition.get("reason")
+        != "delegate_daemon_stale_worktree_cleanup_to_supervisor"
+        or not isinstance(checkpoint, Mapping)
+        or checkpoint.get("descendant_repair_receipt_id")
+        != descendant_receipt_id
+        or not isinstance(transition_base, Mapping)
+        or transition_base.get("source_head")
+        != STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT
+        or not isinstance(transition_seal, Mapping)
+        or transition_seal.get("parent")
+        != STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT
+        or re.fullmatch(
+            r"[0-9a-f]{40}", str(transition_seal.get("source_head") or "")
+        )
+        is None
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", transition_receipt_id) is None
+        or _identity(transition_body) != transition_receipt_id
+    ):
+        raise OperatorError("PCSM stale-worktree cleanup operator delta changed")
+
+    transition_base_operator = _git_blob_at(
+        head=STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT,
+        path=operator_path,
+        field="stale-worktree cleanup base operator",
+    )
+    pending_base = (
+        "PENDING_" + "STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_transition_operator = transition_base_operator.replace(
+        pending_base,
+        STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT.encode("ascii"),
+        1,
+    )
+    transition_head = str(transition_seal["source_head"])
+    transition_operator = _git_blob_at(
+        head=transition_head,
+        path=operator_path,
+        field="stale-worktree cleanup sealed operator",
+    )
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    transition_parents = str(
+        _git("show", "-s", "--format=%P", transition_head)
+    ).strip().split()
+    transition_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT}.."
+                f"{transition_head}",
+            )
+        ).splitlines()
+        if line
+    )
+    if (
+        transition_base_operator.count(pending_base) != 1
+        or transition_base.get("operator_identity")
+        != _identity(transition_base_operator)
+        or transition_parents != [STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT]
+        or transition_paths != (relative_operator,)
+        or tuple(transition_seal.get("changed_paths") or ())
+        != (relative_operator,)
+        or _git_commit_tree(
+            transition_head,
+            field="stale-worktree cleanup sealed operator",
+        )
+        != transition_seal.get("repository_tree_id")
+        or transition_seal.get("operator_identity")
+        != _identity(expected_transition_operator)
+        or transition_operator != expected_transition_operator
+        or current_operator != expected_transition_operator
+    ):
+        raise OperatorError("PCSM stale-worktree cleanup operator delta changed")
+    _git_is_ancestor(
+        transition_head,
+        current_head,
+        field="stale-worktree cleanup operator descendant lineage",
+    )
+
+
 def _verified_bootstrap_broker_resilience_repair(
     *,
     sealed_operator_identity: str,
@@ -2098,48 +2273,12 @@ def _verified_bootstrap_broker_resilience_repair(
             "PCSM bootstrap broker resilience repair source delta changed"
         )
     if current_bytes != expected_current:
-        descendant = _json_mapping_bytes(
-            _tracked_bytes(
-                CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_PATH,
-                head=current_head,
-            ),
-            field="current-head blocked-retry descendant repair",
-        )
-        descendant_body = dict(descendant)
-        descendant_receipt_id = str(
-            descendant_body.pop("receipt_id", "") or ""
-        )
-        repair_base = descendant.get("repair_base")
-        sealed_source = descendant.get("sealed_source")
-        historical_operator = _git_blob_at(
-            head=CURRENT_HEAD_BLOCKED_RETRY_HISTORICAL_HEAD,
-            path=operator_path,
-            field="historical blocked-retry operator",
-        )
-        if (
-            descendant.get("schema")
-            != CURRENT_HEAD_BLOCKED_RETRY_DESCENDANT_REPAIR_SCHEMA
-            or not isinstance(repair_base, Mapping)
-            or repair_base.get("source_head")
-            != CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT
-            or not isinstance(sealed_source, Mapping)
-            or sealed_source.get("operator_identity")
-            != _identity(current_bytes)
-            or _identity(expected_current) != current_operator_identity
-            or historical_operator != expected_current
-            or re.fullmatch(
-                r"sha256:[0-9a-f]{64}", descendant_receipt_id
-            )
-            is None
-            or _identity(descendant_body) != descendant_receipt_id
-        ):
-            raise OperatorError(
-                "PCSM current-head blocked-retry operator delta changed"
-            )
-        _git_is_ancestor(
-            CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT,
-            current_head,
-            field="blocked-retry operator descendant lineage",
+        _verified_bootstrap_broker_operator_descendant(
+            expected_historical_operator=expected_current,
+            historical_operator_identity=current_operator_identity,
+            current_operator=current_bytes,
+            current_head=current_head,
+            operator_path=operator_path,
         )
     elif _identity(current_bytes) != current_operator_identity:
         raise OperatorError(
@@ -2788,6 +2927,513 @@ def _source_forest_at_commit(
     return result
 
 
+def _verified_stale_worktree_cleanup_transition(
+    *,
+    board: Any,
+    current_head: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    prior_artifact_commit: str,
+    prior_descendant_repair_receipt_id: str,
+    prior_batch_receipt_id: str,
+    prior_config_bytes: bytes,
+    prior_operator_bytes: bytes,
+    prior_validator_bytes: bytes,
+) -> dict[str, Any]:
+    """Admit one exact daemon-to-supervisor stale-cleanup transition."""
+
+    base_commit = STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError("stale-worktree cleanup transition base is unsealed")
+    receipt_bytes = _tracked_bytes(
+        STALE_WORKTREE_CLEANUP_TRANSITION_PATH,
+        head=current_head,
+    )
+    payload = _json_mapping_bytes(
+        receipt_bytes,
+        field="stale-worktree cleanup transition receipt",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "prior_checkpoint",
+        "repair_base",
+        "sealed_source",
+        "safety_policy",
+        "validations",
+        "historical_receipts_preserved",
+        "database_authority_preserved",
+        "task_state_mutation",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    checkpoint = payload.get("prior_checkpoint")
+    repair_base = payload.get("repair_base")
+    sealed_source = payload.get("sealed_source")
+    safety_policy = payload.get("safety_policy")
+    validations = payload.get("validations")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema") != STALE_WORKTREE_CLEANUP_TRANSITION_SCHEMA
+        or payload.get("reason")
+        != "delegate_daemon_stale_worktree_cleanup_to_supervisor"
+        or not isinstance(checkpoint, Mapping)
+        or not isinstance(repair_base, Mapping)
+        or not isinstance(sealed_source, Mapping)
+        or not isinstance(safety_policy, Mapping)
+        or not isinstance(validations, list)
+        or not validations
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get("database_authority_preserved") is not True
+        or payload.get("task_state_mutation") is not False
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError("stale-worktree cleanup transition seal is invalid")
+
+    expected_safety_policy = {
+        "daemon_stale_cleanup_action": "detect_and_delegate",
+        "destructive_cleanup_authority": "supervisor_worktree_reconciliation",
+        "daemon_stale_cleanup_may_remove_worktree": False,
+        "daemon_stale_cleanup_may_delete_branch": False,
+        "dirty_bytes_require_rescue_before_retirement": True,
+        "peer_active_state_requires_preservation": True,
+    }
+    if dict(safety_policy) != expected_safety_policy:
+        raise OperatorError("stale-worktree cleanup safety policy changed")
+
+    checkpoint_fields = {
+        "source_head",
+        "repository_tree_id",
+        "prior_artifact_commit",
+        "descendant_repair_receipt_id",
+        "blocked_retry_batch_receipt_id",
+        "changed_receipts",
+    }
+    checkpoint_head = str(checkpoint.get("source_head") or "")
+    checkpoint_receipts = checkpoint.get("changed_receipts")
+    if (
+        set(checkpoint) != checkpoint_fields
+        or _git_commit_tree(
+            checkpoint_head,
+            field="stale-worktree cleanup prior checkpoint",
+        )
+        != checkpoint.get("repository_tree_id")
+        or checkpoint.get("prior_artifact_commit") != prior_artifact_commit
+        or checkpoint.get("descendant_repair_receipt_id")
+        != prior_descendant_repair_receipt_id
+        or checkpoint.get("blocked_retry_batch_receipt_id")
+        != prior_batch_receipt_id
+        or not isinstance(checkpoint_receipts, list)
+        or not checkpoint_receipts
+    ):
+        raise OperatorError("stale-worktree cleanup prior checkpoint changed")
+    _git_is_ancestor(
+        prior_artifact_commit,
+        checkpoint_head,
+        field="blocked-retry artifact-to-cleanup checkpoint lineage",
+    )
+    receipt_path_pattern = re.compile(
+        r"artifacts/proof_carrying_semantic_minification/receipts/"
+        r"PCSM-[0-9]{3}\.json"
+    )
+    checkpoint_paths = tuple(
+        sorted(
+            line
+            for line in str(
+                _git(
+                    "diff",
+                    "--name-only",
+                    f"{prior_artifact_commit}..{checkpoint_head}",
+                )
+            ).splitlines()
+            if line
+        )
+    )
+    listed_checkpoint_paths: list[str] = []
+    for item in checkpoint_receipts:
+        if not isinstance(item, Mapping) or set(item) != {"path", "bytes_id"}:
+            raise OperatorError("cleanup checkpoint receipt binding is malformed")
+        path = str(item.get("path") or "")
+        if (
+            receipt_path_pattern.fullmatch(path) is None
+            or _identity(
+                _git_blob_at(
+                    head=checkpoint_head,
+                    path=ROOT / path,
+                    field=f"cleanup checkpoint receipt {path}",
+                )
+            )
+            != item.get("bytes_id")
+        ):
+            raise OperatorError("cleanup checkpoint receipt binding changed")
+        listed_checkpoint_paths.append(path)
+    if (
+        len(set(listed_checkpoint_paths)) != len(listed_checkpoint_paths)
+        or tuple(sorted(listed_checkpoint_paths)) != checkpoint_paths
+    ):
+        raise OperatorError(
+            "cleanup checkpoint contains non-receipt or unbound descendants"
+        )
+
+    operator_path = Path(__file__).resolve()
+    validator_path = board.path(board.validator_path)
+    if (
+        _git_blob_at(
+            head=checkpoint_head,
+            path=board.config_path,
+            field="cleanup checkpoint config",
+        )
+        != prior_config_bytes
+        or _git_blob_at(
+            head=checkpoint_head,
+            path=operator_path,
+            field="cleanup checkpoint operator",
+        )
+        != prior_operator_bytes
+        or _git_blob_at(
+            head=checkpoint_head,
+            path=validator_path,
+            field="cleanup checkpoint validator",
+        )
+        != prior_validator_bytes
+    ):
+        raise OperatorError("cleanup checkpoint changed prior source authority")
+    checkpoint_gitlink = str(
+        _git("ls-tree", checkpoint_head, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        len(checkpoint_gitlink) < 3
+        or checkpoint_gitlink[:2] != ["160000", "commit"]
+        or checkpoint_gitlink[2]
+        != str(
+            _json_mapping_bytes(
+                prior_config_bytes,
+                field="prior blocked-retry config",
+            )["source_binding"]["ipfs_accelerate_planning_revision"]
+        )
+    ):
+        raise OperatorError("cleanup checkpoint accelerator gitlink changed")
+
+    repair_base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "config_identity",
+        "validator_identity",
+        "accelerator_head",
+        "accelerator_tree",
+        "changed_paths",
+        "nested_changed_paths",
+    }
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "test/test_pcsm_stale_worktree_cleanup_transition.py",
+    )
+    expected_nested_paths = (
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_daemon.py",
+        "test/api/test_agent_supervisor_implementation_daemon_runner.py",
+    )
+    base_tree = _git_commit_tree(
+        base_commit,
+        field="stale-worktree cleanup repair base",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{checkpoint_head}..{base_commit}")
+        ).splitlines()
+        if line
+    )
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="stale-worktree cleanup base operator",
+    )
+    base_config_bytes = _git_blob_at(
+        head=base_commit,
+        path=board.config_path,
+        field="stale-worktree cleanup base config",
+    )
+    base_config = _json_mapping_bytes(
+        base_config_bytes,
+        field="stale-worktree cleanup base config",
+    )
+    base_validator = _git_blob_at(
+        head=base_commit,
+        path=validator_path,
+        field="stale-worktree cleanup base validator",
+    )
+    expected_config = _json_mapping_bytes(
+        prior_config_bytes,
+        field="prior blocked-retry config",
+    )
+    expected_binding = expected_config.get("source_binding")
+    if not isinstance(expected_binding, dict):
+        raise OperatorError("prior blocked-retry source binding is absent")
+    expected_binding["ipfs_accelerate_planning_revision"] = (
+        STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD
+    )
+    expected_binding["ipfs_accelerate_planning_tree"] = (
+        STALE_WORKTREE_CLEANUP_ACCELERATOR_TREE
+    )
+    base_gitlink = str(
+        _git("ls-tree", base_commit, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        set(repair_base) != repair_base_fields
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("repository_tree_id") != base_tree
+        or repair_base.get("parent") != checkpoint_head
+        or base_parents != [checkpoint_head]
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or repair_base.get("config_identity") != _identity(base_config_bytes)
+        or repair_base.get("validator_identity") != _identity(base_validator)
+        or base_validator != prior_validator_bytes
+        or repair_base.get("accelerator_head")
+        != STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD
+        or repair_base.get("accelerator_tree")
+        != STALE_WORKTREE_CLEANUP_ACCELERATOR_TREE
+        or tuple(repair_base.get("changed_paths") or ()) != expected_base_paths
+        or base_paths != expected_base_paths
+        or tuple(repair_base.get("nested_changed_paths") or ())
+        != expected_nested_paths
+        or base_config != expected_config
+        or len(base_gitlink) < 3
+        or base_gitlink[:2] != ["160000", "commit"]
+        or base_gitlink[2] != STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD
+    ):
+        raise OperatorError("stale-worktree cleanup repair base changed")
+
+    accelerator_repository = ROOT / "external/ipfs_accelerate"
+    if (
+        _git_commit_tree(
+            STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD,
+            field="stale-worktree cleanup accelerator",
+            repository=accelerator_repository,
+        )
+        != STALE_WORKTREE_CLEANUP_ACCELERATOR_TREE
+    ):
+        raise OperatorError("stale-worktree cleanup accelerator tree changed")
+    nested_parents = subprocess.run(
+        [
+            "git",
+            "show",
+            "-s",
+            "--format=%P",
+            STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD,
+        ],
+        cwd=accelerator_repository,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    nested_paths = subprocess.run(
+        [
+            "git",
+            "diff",
+            "--name-only",
+            f"{checkpoint_gitlink[2]}..{STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD}",
+        ],
+        cwd=accelerator_repository,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if (
+        nested_parents.returncode != 0
+        or nested_parents.stdout.strip().split() != [checkpoint_gitlink[2]]
+        or nested_paths.returncode != 0
+        or tuple(nested_paths.stdout.splitlines()) != expected_nested_paths
+    ):
+        raise OperatorError("stale-worktree cleanup nested delta changed")
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+    }
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="stale-worktree cleanup sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    pending_base = (
+        "PENDING_" + "STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="stale-worktree cleanup sealed operator",
+    )
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_source.get("parent") != base_commit
+        or sealed_parents != [base_commit]
+        or sealed_source.get("operator_identity") != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or tuple(sealed_source.get("changed_paths") or ())
+        != ("scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",)
+        or sealed_paths
+        != ("scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",)
+        or base_operator.count(pending_base) != 1
+    ):
+        raise OperatorError("stale-worktree cleanup sealed source changed")
+
+    required_validations = {
+        (
+            "external/ipfs_accelerate",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/api/test_agent_supervisor_implementation_daemon_runner.py::"
+                "test_stale_worktree_cleanup_delegates_protected_dirty_checkout",
+                "test/api/test_agent_supervisor_incremental_runtime.py::"
+                "test_completed_rescued_dead_pool_workspace_retires_in_three_passes",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/test_pcsm_stale_worktree_cleanup_transition.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "scripts/validate_proof_carrying_semantic_minification_board.py",
+                "--check-all",
+            ),
+        ),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError("stale-worktree cleanup validation is malformed")
+        command = validation.get("command")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(validation.get("summary"), str)
+            or not validation.get("summary")
+        ):
+            raise OperatorError("stale-worktree cleanup validation did not pass")
+        observed_validations.add(
+            (str(validation.get("cwd") or ""), tuple(command))
+        )
+    if observed_validations != required_validations:
+        raise OperatorError("stale-worktree cleanup validations are incomplete")
+
+    receipt_relative = STALE_WORKTREE_CLEANUP_TRANSITION_PATH.relative_to(
+        ROOT
+    ).as_posix()
+    receipt_additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if len(receipt_additions) != 1:
+        raise OperatorError("stale-worktree cleanup receipt introduction is not exact")
+    artifact_commit = receipt_additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != (receipt_relative,)
+        or _git_blob_at(
+            head=artifact_commit,
+            path=STALE_WORKTREE_CLEANUP_TRANSITION_PATH,
+            field="introduced stale-worktree cleanup receipt",
+        )
+        != receipt_bytes
+    ):
+        raise OperatorError("stale-worktree cleanup artifact commit changed")
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field="stale-worktree cleanup artifact-to-current lineage",
+    )
+
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    current_operator = _tracked_bytes(operator_path, head=current_head)
+    current_validator = _tracked_bytes(validator_path, head=current_head)
+    if (
+        _canonical_bytes(current_config) != _canonical_bytes(base_config)
+        or current_config_bytes != base_config_bytes
+        or current_operator != expected_operator
+        or current_validator != base_validator
+        or current_source_identities.get("config") != _identity(base_config_bytes)
+        or current_source_identities.get("operator") != _identity(expected_operator)
+        or current_source_identities.get("validator") != _identity(base_validator)
+    ):
+        raise OperatorError("stale-worktree cleanup live source changed")
+    return {
+        "receipt": payload,
+        "artifact_commit": artifact_commit,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "accelerator_head": STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD,
+        "accelerator_tree": STALE_WORKTREE_CLEANUP_ACCELERATOR_TREE,
+    }
+
+
 def _verified_current_head_blocked_retry_descendant_repair(
     *,
     board: Any,
@@ -3050,14 +3696,17 @@ def _verified_current_head_blocked_retry_descendant_repair(
         or current_tree != str(_git("rev-parse", "HEAD^{tree}")).strip()
     ):
         raise OperatorError("blocked-retry repair base changed")
-    current_binding = current_config.get("source_binding")
-    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    base_config_payload = _json_mapping_bytes(
+        base_config,
+        field="blocked-retry base config",
+    )
+    base_binding = base_config_payload.get("source_binding")
     if (
-        not isinstance(current_binding, Mapping)
-        or current_config.get("max_task_attempts") != 3
-        or current_binding.get("ipfs_accelerate_planning_revision")
+        not isinstance(base_binding, Mapping)
+        or base_config_payload.get("max_task_attempts") != 3
+        or base_binding.get("ipfs_accelerate_planning_revision")
         != accelerator_head
-        or current_binding.get("ipfs_accelerate_planning_tree")
+        or base_binding.get("ipfs_accelerate_planning_tree")
         != accelerator_tree
         or _git_commit_tree(
             accelerator_head,
@@ -3065,14 +3714,8 @@ def _verified_current_head_blocked_retry_descendant_repair(
             repository=ROOT / "external/ipfs_accelerate",
         )
         != accelerator_tree
-        or current_config_bytes != base_config
-        or _identity(current_config_bytes) != repair_base.get("config_identity")
-        or current_source_identities.get("config")
-        != repair_base.get("config_identity")
-        or current_source_identities.get("validator")
-        != repair_base.get("validator_identity")
     ):
-        raise OperatorError("blocked-retry current config changed")
+        raise OperatorError("blocked-retry base config changed")
 
     nested_commits = repair_base.get("nested_commits")
     if not isinstance(nested_commits, list) or len(nested_commits) != 2:
@@ -3323,24 +3966,52 @@ def _verified_current_head_blocked_retry_descendant_repair(
     if observed_validations != required_validations:
         raise OperatorError("blocked-retry validations are incomplete")
 
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
     current_operator = _tracked_bytes(operator_path, head=current_head)
+    current_validator = _tracked_bytes(
+        board.path(board.validator_path),
+        head=current_head,
+    )
     _git_is_ancestor(
         artifact_commit,
         current_head,
         field="blocked-retry artifact-to-current lineage",
     )
-    if (
-        current_operator != expected_operator
-        or current_source_identities.get("operator")
-        != _identity(expected_operator)
-    ):
-        raise OperatorError("blocked-retry operator seal changed")
+    exact_blocked_retry_source = bool(
+        current_config_bytes == base_config
+        and _canonical_bytes(current_config)
+        == _canonical_bytes(base_config_payload)
+        and current_operator == expected_operator
+        and current_validator == base_validator
+        and current_source_identities.get("config") == _identity(base_config)
+        and current_source_identities.get("operator")
+        == _identity(expected_operator)
+        and current_source_identities.get("validator")
+        == _identity(base_validator)
+    )
+    cleanup_transition: dict[str, Any] = {}
+    if not exact_blocked_retry_source:
+        cleanup_transition = _verified_stale_worktree_cleanup_transition(
+            board=board,
+            current_head=current_head,
+            current_config=current_config,
+            current_source_identities=current_source_identities,
+            prior_artifact_commit=artifact_commit,
+            prior_descendant_repair_receipt_id=receipt_id,
+            prior_batch_receipt_id=str(
+                verified_batch.get("batch_receipt_id") or ""
+            ),
+            prior_config_bytes=base_config,
+            prior_operator_bytes=expected_operator,
+            prior_validator_bytes=base_validator,
+        )
     return {
         "receipt": payload,
         "blocked_retry_batch": verified_batch,
         "sealed_source_head": sealed_head,
         "sealed_source_tree": sealed_tree,
         "artifact_commit": artifact_commit,
+        "stale_worktree_cleanup_transition": cleanup_transition,
     }
 
 
@@ -3570,6 +4241,20 @@ def _owner_restart_admission(
             admission_mode = "verified_current_head_blocked_retry_batch"
         else:
             raise OperatorError("owner restart retry policy is not admitted")
+    cleanup_transition = descendant_repair.get(
+        "stale_worktree_cleanup_transition"
+    )
+    cleanup_transition = (
+        cleanup_transition
+        if isinstance(cleanup_transition, Mapping)
+        else {}
+    )
+    cleanup_transition_receipt = cleanup_transition.get("receipt")
+    cleanup_transition_receipt = (
+        cleanup_transition_receipt
+        if isinstance(cleanup_transition_receipt, Mapping)
+        else {}
+    )
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
         "mode": admission_mode,
@@ -3598,6 +4283,9 @@ def _owner_restart_admission(
                 descendant_repair.get("blocked_retry_batch"), Mapping
             )
             else ""
+        ),
+        "stale_worktree_cleanup_transition_receipt_id": str(
+            cleanup_transition_receipt.get("receipt_id") or ""
         ),
         "current_head_descendant_repair": descendant_repair,
         "database_authority": {
@@ -5306,6 +5994,9 @@ def _owner_restart_receipt(
         ),
         "current_head_blocked_retry_batch_receipt_id": str(
             admission.get("current_head_blocked_retry_batch_receipt_id") or ""
+        ),
+        "stale_worktree_cleanup_transition_receipt_id": str(
+            admission.get("stale_worktree_cleanup_transition_receipt_id") or ""
         ),
         "max_task_attempts_before": int(
             admission.get("max_task_attempts_before") or 0
