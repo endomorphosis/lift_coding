@@ -1,0 +1,261 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-025",
+  "title": "Integrate contracts and proof obligations",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G300",
+  "objective_id": "PCSM-025",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-025@current-head-python-contract-and-proof-obligation-selection-v1",
+  "observed_at": "2026-08-28T05:13:09Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 current-head contract, ContextPack, semantic-outcome, and assurance-specification authority selection",
+    "language": "Python",
+    "language_version": "3.12",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-025.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-025.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "implementation_delta": "The current datasets source forest already supplies the smallest versioned Python-v1 delta: a closed proof-context port that delegates only to canonical semantic authorities; deterministic, CID-bound ContextPack construction; fail-closed semantic-outcome comparison; and an assurance-specification binding that accepts only datasets plan and receipt types. This receipt selects and binds that authority; it does not create a second contract, proof-obligation registry, ContextPack builder, CID authority, or M2/M3 mutation path.",
+    "non_promotion_reason": "The required proof_context suite cannot collect in the authoritative sealed Python 3.12 environment because its explicitly configured anyio pytest plugin is unavailable. In addition, no PCSM-specific formal proof-obligation artifact or approved digest-bound formal prover deployment exists at this head. Provider-environment tests are simulated evidence and cannot replace the sealed gate."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "Calculated approximation; no estimate establishes contract behavior, identity, or test success.",
+    "simulated": "A deterministic provider-environment exercise or test execution; it never replaces authoritative sealed validation.",
+    "unavailable": "A required capability, authority, or result absent from the current sealed environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "68ce3c333e182f64e90616245866a7e316adee0a",
+    "outer_tree": "12e8f3dae44264a19e8bf6a6d7e2c2d197dca89d",
+    "outer_subject": "Merge commit '9b1e2b1f89a711f0f312eaafa967122669ed02c8' into agent/proof-carrying-semantic-minification-v1",
+    "dispatch_tree_id": "68ce3c333e182f64e90616245866a7e316adee0a",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "Python proof-context contract, ContextPack, semantic-outcome, assurance-specification, source-CID, and record-CID authority"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage only; not proof-context contract or proof-obligation authority"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "consumer and scheduler boundary only"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "484afb3f094125a341945bcf2706f646f1a89ee189489907e6f77ef93914fe78",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for the datasets gitlink; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; clean-status checks before receipt write; origin/main and planning-revision merge-base checks; and Git-blob/SHA-256 capture for selected source and tests.",
+      "result": "The datasets nested HEAD equals the superproject gitlink; the scheduler planning revision/tree equal the measured datasets head/tree; configured origin/main and the planning revision are ancestors of nested datasets HEAD; and both worktrees were clean before this receipt was written.",
+      "invalidates_on": "Any change to the outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, selected schema/version, CID profile, or validation-environment capability requires a new receipt."
+    },
+    "configured_origin_ancestry": {
+      "kind": "measured",
+      "status": "passed",
+      "configured_datasets_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
+      "result": "Configured origin/main and the datasets planning revision are ancestors of nested datasets HEAD 8b9c45106c0ace6107b8b90357a3ce71caf57584."
+    },
+    "pcsm_source_link_receipt": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No PCSM SourceLinkReceipt or aggregate PCSM source-map CID is emitted at this head. ContextPack source CIDs and Git blobs are not misrepresented as a PCSM linker receipt."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "provider_api": "ipfs_datasets_py.proof_context.provider.DatasetsProofContextProvider@0.1",
+    "context_pack_api": "ipfs_datasets_py.proof_context.context_pack.build_context_pack",
+    "semantic_outcome_api": "ipfs_datasets_py.proof_context.semantic_outcome.compare_context_packs",
+    "assurance_specification_api": "ipfs_datasets_py.proof_context.assurance_specification.specification_catalog",
+    "contracts": {
+      "port_schema": "ipfs-datasets.proof-context.v0.1",
+      "port_interface": "DatasetsProofContextProvider@0.1",
+      "context_pack_interface": "DatasetsContextPackAuthority@0.1",
+      "semantic_outcome_interface": "DatasetsSemanticOutcome@0.1",
+      "assurance_specification_schema": "ipfs-datasets.proof-context.assurance-specification@0.1",
+      "assurance_specification_interface": "DatasetsAssuranceSpecification@0.1",
+      "mutation_campaign_plan_interface": "MutationCampaignPlan@1",
+      "assurance_campaign_receipt_interface": "AssuranceCampaignReceipt@1"
+    },
+    "cid_profile": {
+      "profile_id": "software-contract-cid-profile-v1",
+      "profile_version": "1.0.0",
+      "cid_version": 1,
+      "base": "base32",
+      "multihash": "sha2-256",
+      "source_codec": "raw",
+      "structured_codec": "dag-json",
+      "case": "lowercase"
+    },
+    "contract_and_obligation_boundary": [
+      "CANONICAL_CAPABILITIES is a closed five-entry delegation list; prove_compatibility resolves each canonical symbol and rejects missing authority.",
+      "ContextPack identity contains the closed port schema/interface, repository state CID, required source CIDs, capsule CIDs, scanned-tree OID, freshness, and opacity; identical inputs produce the same CID.",
+      "Stale, unavailable, insufficient, opaque, simulated, and expansion-required outcomes fail closed and are not promoted as live semantic success.",
+      "The assurance specification is a typed binding only: it exposes closed outcomes and rejects mapping-shaped substitute plans/receipts; it explicitly has no runtime or persistence authority.",
+      "No named PCSM formal proof obligation, formal proof certificate, or digest-bound prover deployment is present. The selected assurance contract must not be promoted into an assertion that a theorem was proved."
+    ],
+    "minimum_delta_reason": "The current-head implementation and direct positive/negative tests already cover the Python-v1 contract delegation, deterministic CID identity, stale/opaque/unavailable/simulated rejection, typed assurance binding, and schema/version boundaries. Reimplementing these in proof_context would create a competing authority and violates this task's receipt-only declared output boundary."
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
+      "git_blob": "8e738fa2d21eba5db7258d3c630f550c5cb8be51",
+      "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182",
+      "role": "closed v0.1 port schema/interface, canonical delegation list, and typed fail-closed errors"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/provider.py",
+      "git_blob": "febf1bda093ed8a745cc373d6d76c49893c9af77",
+      "sha256": "f3dec1cf4a3fb7c869f2e4e6de491ed9979c130330d2a8de87fc3b9e646edb01",
+      "role": "lazy canonical-authority delegation and compatibility resolution without a competing analyzer or builder"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+      "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+      "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+      "role": "sole production ContextPack builder with exact source/tree inputs, deterministic CID identity, and stale/opaque/unavailable rejection"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py",
+      "git_blob": "7a3e27951efb540aafd80f878804c2b5a425d301",
+      "sha256": "ccd9ab6e5cde8c92d3dd5c9c8f841bd52298e699e88eb9c01eda437d090fd8fd",
+      "role": "fail-closed pack comparison and sufficient-context admission that rejects stale, unavailable, simulated, and expansion-required outcomes"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py",
+      "git_blob": "a8881bab7224fda552eff8101f1ec8af274fe3d0",
+      "sha256": "749e250b1771e5bcd9b9b88f2d21648d96fa7cb42d4cab0f91af0122c1eb6a57",
+      "role": "closed assurance outcome catalog and datasets-type-only plan/receipt binding with no runtime or persistence authority"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "git_blob": "14458fb99ea57c19652398ee479d678ae3fbe507",
+      "sha256": "89e1fbc694a67f751de3a62d8206442e4904722c20f81827ae0a96a0fbee33a3",
+      "role": "canonical raw-byte and DAG-JSON CID authority used by the selected ContextPack identity"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance/mutation_contracts.py",
+      "git_blob": "64581a60143f060822f1e0e69cd5c0cfde0a3032",
+      "sha256": "f4eba3b02d53f535ae8547b39f0a648e30518f1c27bff05eac02cc0db666eacb",
+      "role": "datasets MutationCampaignPlan@1 type authority selected by assurance-specification binding"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance/receipt_contracts.py",
+      "git_blob": "8e971d343318806ada0904cd4966237844324018",
+      "sha256": "60cd2ba0dd2ebaede7b4f9aa139d825ca5789ce11b901139cd8ef2d796f34d8f",
+      "role": "datasets AssuranceCampaignReceipt@1 type authority selected by assurance-specification binding"
+    }
+  ],
+  "test_coverage": {
+    "kind": "measured",
+    "positive_and_negative_inventory": [
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+        "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+        "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+        "coverage": "identical-input CID determinism plus negative stale, unavailable, and opaque-tree mismatch rejection"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_provider.py",
+        "git_blob": "d9b32641e22d9fd026570907e79cfcceafa8c23a",
+        "sha256": "f3d15f7780ea3ffa561a21880ff4e26f65f096818e70c14d8e56ab01f65329b3",
+        "coverage": "canonical-symbol compatibility plus negative stale, unavailable, opaque, and source-tree mismatch rejection"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
+        "git_blob": "fe531c0d76397442bc6a248131ec038d67338472",
+        "sha256": "ea4ef0ee64e83b65238c18960c6e49aa071753252842cf57fd68a50ac6cf9892",
+        "coverage": "equal/unequal pack comparison plus negative simulated-promotion and stale-comparison rejection"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+        "git_blob": "81319a0e160c88d064b8eea4f7e7d2952de6b666",
+        "sha256": "1a30652e469c5010acc895a62893e0c1fe590c4b6891ddc7794ce2e160a1b5e5",
+        "coverage": "closed non-authoritative catalog plus negative unknown-outcome rejection"
+      }
+    ],
+    "required_validation": {
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "authoritative_environment": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin; /usr/bin/python3.12; fresh private HOME/XDG paths",
+      "kind": "unavailable",
+      "status": "not_collected",
+      "result": "pytest failed during configuration before collection: ImportError importing configured plugin anyio.pytest_plugin because module anyio is absent.",
+      "exit_status": 1,
+      "does_not_mean": "This unavailable sealed result is not a test pass, a test failure in selected contract behavior, or authority to alter tests/plugins."
+    },
+    "focused_provider_validation": {
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py external/ipfs_datasets/tests/proof_context/test_v01_provider.py external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+      "kind": "simulated",
+      "status": "passed",
+      "result": "17 passed in 0.29s under the provider environment.",
+      "does_not_promote": "This focused provider run is narrower than the required suite and outside the sealed validation environment."
+    }
+  },
+  "proof_obligations": {
+    "kind": "unavailable",
+    "formal_prover": {
+      "status": "not_run",
+      "reason": "No PCSM-specific formal proof-obligation schema, certificate, or approved digest-bound prover deployment is present at this head; z3, cvc5, lean, lake, and coqchk are absent from the authoritative PATH."
+    },
+    "bounded_contract_obligations": {
+      "kind": "measured",
+      "status": "implemented_and_tested_in_source_inventory",
+      "obligations": [
+        "identity determinism for exactly equal ContextPack inputs",
+        "source/tree equality for opaque inputs",
+        "rejection of stale, unavailable, insufficient, simulated, and expansion-required outcomes",
+        "closed schema/interface and datasets-type binding for assurance plans and receipts",
+        "canonical capability resolution without a replacement authority"
+      ],
+      "limit": "These are executable contract checks, not a formal proof certificate."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and scheduler bindings, clean pre-write state, configured-origin ancestry, named source/test Git blobs and SHA-256 values, closed schemas/interfaces/CID profile, source-level positive/negative test inventory, sealed pytest collection failure, and sealed formal-tool availability probe.",
+    "estimated": "None.",
+    "simulated": "Focused provider-environment contract validation passed 17 tests in 0.29s; it is non-authoritative and is not used to promote this receipt.",
+    "unavailable": "Authoritative proof_context test result due to missing anyio, PCSM SourceLinkReceipt/source-map CID, PCSM formal proof-obligation/certificate, formal prover deployment, and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it selects existing current-head authority and does not mutate proof_context or create a competing contract/proof-obligation subsystem.",
+    "The selected authority is bounded static contract and ContextPack behavior, not a proof of whole-program Python semantics, runtime effects, source rewriting, or model-output correctness.",
+    "The assurance specification is expressly non-authoritative for runtime execution and persistence, and it does not itself execute a campaign or establish theorem-prover assurance.",
+    "The authoritative sealed suite remains unavailable because anyio is absent, so this receipt cannot promote completion.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this PCSM contract/proof-obligation authority selection. Do not alter the selected datasets source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, contract schema/interface, CID profile, formal-prover capability, or validation-environment capability changes."
+  }
+}
