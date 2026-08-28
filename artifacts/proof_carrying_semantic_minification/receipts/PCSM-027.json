@@ -1,0 +1,242 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-027",
+  "title": "Add incremental changed-region compilation",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G300",
+  "objective_id": "PCSM-027",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-027@current-head-python-incremental-changed-region-compilation-v1",
+  "observed_at": "2026-08-28T06:05:23Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 bounded, non-executing, CID-bound incremental changed-region compilation selection",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-027.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-027.json",
+    "implementation_delta": "Current-head ipfs_datasets already supplies the smallest authority-complete delta: RepositoryScanner@1 re-analyzes only changed source-CID regions after verified prior-state admission while always recomputing live graph resolution, and SemanticCapsuleCompiler@1 reuses only CID- and byte-reverified unchanged capsule blocks. This receipt selects and binds those authorities; it does not add a proof_context wrapper, competing compiler/CID/source-map authority, or an M2/M3 mutation path.",
+    "non_promotion_reason": "The required proof_context suite cannot collect in the authoritative sealed Python 3.12 environment because the explicitly configured anyio pytest plugin is unavailable. Provider-side executions are simulated evidence and are not substituted for sealed validation."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "Calculated approximation; no estimate establishes compilation behavior, identity, or test success.",
+    "simulated": "A deterministic test execution in the provider environment; it never replaces authoritative sealed validation.",
+    "unavailable": "A capability or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "c2f40b62eae073798c24adedcb0484b47393dee8",
+    "outer_tree": "3dbf8ec84c00097aab124fb2fe540fc029c27f8c",
+    "outer_subject": "Record database lifecycle identity transition",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "c2f40b62eae073798c24adedcb0484b47393dee8",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07",
+        "authority_role": "consumer and scheduler boundary only"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "bounded Python AST analysis, deterministic incremental semantic indexing, semantic-capsule compilation, and canonical source/symbol identity"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage only; not Python semantic-analysis authority"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for admitted gitlinks; git -C <root> rev-parse HEAD and HEAD^{tree}; git status --porcelain=v1 for outer and datasets roots before receipt write; merge-base --is-ancestor for configured datasets origin/main and the planning revision.",
+      "result": "The nested datasets HEAD equals the superproject gitlink; both roots were clean before receipt write; configured datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 and the planning revision are ancestors of the measured datasets head.",
+      "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, schema/version, CID profile, or dirty admitted root requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree SourceLinkReceipt or canonical source-map CID exists. Scanner source-CID and AST-span facts are not substituted for a PCSM source-map artifact."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "changed_region_authority": "ipfs_datasets_py.logic.software_contracts.semantic_index.scanner.RepositoryScanner@1",
+    "changed_region_api": "RepositoryScanner.scan(repository, previous_state=None, snapshot=None) and scan_snapshot(snapshot, sources, previous_state=None)",
+    "scan_reuse_diagnostics_schema": "ipfs-datasets.software-contracts.semantic-index-scan-reuse@1",
+    "repository_state_schema": "ipfs-datasets.software-contracts.semantic-repository-state@1",
+    "semantic_index_schema": "ipfs-datasets.software-contracts.semantic-index@2",
+    "capsule_compiler_authority": "ipfs_datasets_py.logic.software_contracts.semantic_state.capsules.compile_semantic_capsules / SemanticCapsuleCompiler@1",
+    "capsule_compiler_schema": "ipfs-datasets.software-contracts.semantic-capsule-compiler@1",
+    "capsule_compiler_version": "1",
+    "semantic_capsule_schema": "ipfs-datasets.software-contracts.semantic-capsule@1",
+    "semantic_state_schema": "ipfs-datasets.software-contracts.semantic-state@1",
+    "cid_profile": {
+      "profile_id": "software-contract-cid-profile-v1",
+      "profile_version": "1.0.0",
+      "cid_version": 1,
+      "base": "base32",
+      "multihash": "sha2-256",
+      "source_codec": "raw",
+      "structured_codec": "dag-json",
+      "case": "lowercase"
+    },
+    "algorithm_and_fail_closed_invariants": [
+      "A prior RepositoryState is admitted only when repository identity, schema, extractor name, and extractor version match; otherwise all current source regions are re-analyzed and a typed reject reason is retained in ephemeral diagnostics.",
+      "For an admitted prior state, only paths with matching current snapshot source CIDs reuse previous verified SymbolRecords. Changed source-CID paths are re-analyzed from current captured bytes.",
+      "Pytest unification, dependency-lock wiring, and symbol-graph resolution always recompute from the current inventory, so reuse cannot preserve stale dependent edges. Reuse diagnostics never enter the durable repository-state root.",
+      "The changed-region result is fully recomputed to a current RepositoryState CID; a cold scan over the same bytes must equal the incremental state and state CID.",
+      "Capsule compilation first rederives every current capsule/index block and then reuses prior bytes only when the computed CID is equal and the bytes are canonical and byte-identical. Divergent or malformed prior blocks are not trusted.",
+      "The scanner parses source and never imports or executes examined modules. This is bounded static Python v1 analysis, not runtime equivalence, a source rewriter, a formal proof system, or a PCSM SourceLinkReceipt authority."
+    ],
+    "minimum_delta_reason": "The current-head authorities are already versioned, schema-closed, CID-bound, deterministic where required, and covered by direct positive and negative tests. Reimplementation would duplicate canonical semantic-analysis authority and violates the receipt-only declared output boundary."
+  },
+  "source_inventory": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/scanner.py",
+      "sha256": "0dd22f59cd1af93e229752194d0415506d2cf0177727da5f15cb09715297b8ba",
+      "git_blob": "c3f8fc4d69117f2d1b8ebe36cdb1a2ee8cc7e42a",
+      "role": "RepositoryScanner@1 changed-source-CID admission, reuse diagnostics, mandatory current graph resolution, and cold/incremental equality path",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/models.py",
+      "sha256": "4b061c97838929a4cdc055998ce71aa854234c7e75d3fbee12595fa1bafa8a75",
+      "git_blob": "87074b234b82bfdde77572b5caf0a9603257b49d",
+      "role": "closed RepositoryState, symbol, edge, source-span, delta, and invalidation schemas",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+      "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d",
+      "git_blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
+      "role": "SemanticCapsuleCompiler@1 rederivation and verified unchanged-block reuse",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/models.py",
+      "sha256": "488fa256322807b895a3f7e277fef5b4d5dc6ac1f3619696a6c288340aae0586",
+      "git_blob": "b86dae240c3f90bc3de0967bd7cde14f795c53b4",
+      "role": "closed semantic-state and capsule schemas and compiler version",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_scanner.py",
+      "sha256": "3e1540787c768721aec9e3dc0687376a82b9c069e1ef41d10307d3abef000a1a",
+      "git_blob": "73b752f929defd74b10259232d3995cb6cbc2d8d",
+      "role": "positive and negative current-region scanner/reuse coverage",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_capsules.py",
+      "sha256": "849e4b9ba7e034d9ff0c7435d13091e84031669f895302e5524a91d3d18b0769",
+      "git_blob": "82ec04a927c76bf35a8dab258644c1aacbb7e5d4",
+      "role": "positive and negative capsule incremental-reuse coverage",
+      "evidence_kind": "measured"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_scanner.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "unchanged regions skip Python re-analysis",
+          "only a changed source region is re-analyzed",
+          "current graph resolution recomputes and cold/incremental states and CIDs are equal",
+          "formatting and unrelated edits preserve unaffected symbol version CIDs"
+        ],
+        "negative_coverage": [
+          "forged repository, schema, extractor name, and extractor version prior states are rejected and cannot reuse records",
+          "syntax failure and post-snapshot byte mutation become typed opaque artifacts",
+          "unsafe or unavailable snapshot inputs cannot silently become semantic source"
+        ]
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_capsules.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "cold and verified-incremental blocks, capsule CIDs, and index CID are byte-identical for identical current inputs",
+          "an unchanged capsule reuses its verified CID while a changed capsule is recomputed"
+        ],
+        "negative_coverage": [
+          "unknown symbols and bad previous bundles fail closed",
+          "an unrelated or divergent prior block is excluded rather than trusted"
+        ]
+      }
+    ],
+    "provider_incremental_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_scanner.py external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_capsules.py",
+      "result": "26 passed in 2.31s",
+      "limitation": "The provider environment is not substituted for sealed validation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "unavailable",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "This invocation collected 519 tests and reached 96% during provider-side capture; its detached final exit result was unavailable to this task, so no passing result is claimed.",
+      "limitation": "Partial provider progress is not a suite-pass claim and is not sealed validation."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited 1 before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only existing-authority selection."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and scheduler bindings, clean pre-write state, configured-origin ancestry, named source/test SHA-256 and Git blobs, selected versioned schemas/CID profile, direct test-source inventory, and sealed pytest capability failure.",
+    "estimated": "None.",
+    "simulated": "Focused provider incremental-authority validation: 26 passed in 2.31s.",
+    "unavailable": "Authoritative sealed proof_context result due to missing anyio; final result of the detached provider required-suite invocation; PCSM SourceLinkReceipt/source-map CID; formal-prover result; and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it selects existing current-head incremental authority and does not mutate proof_context or create a second compiler.",
+    "The selected authority is bounded static Python AST analysis and content-addressed capsule materialization. It does not establish whole-CPython runtime semantics, runtime dynamic-import outcomes, reflection/native behavior, or generated-code correctness.",
+    "A changed source region is determined from a sealed snapshot source CID, not an editor diff. Unchanged source records may be reused only after prior-state admission; dependent graph resolution and current root construction still rerun.",
+    "All identities are valid only under the bound source digests, schemas, extractor/CID profile, and snapshot coordinates; any change invalidates this receipt.",
+    "The authoritative sealed suite remains unavailable because anyio is absent, so this receipt cannot promote completion.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this PCSM incremental changed-region authority selection. Do not alter the selected datasets source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, schema/version, CID profile, snapshot policy, or validation-environment capability changes."
+  }
+}
