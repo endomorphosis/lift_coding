@@ -1,0 +1,239 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-057",
+  "title": "Add linker positive and negative vectors",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G500",
+  "objective_id": "PCSM-057",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-057@current-head-linker-vectors-capability-gap-v1",
+  "observed_at": "2026-08-28T06:51:12Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 linker positive and negative vector capability assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-057.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-057.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "No PCSM BoundedPythonLinker@1, SourceLinkReceipt@1, closed versioned Python rewrite grammar, current-forest aggregate source-map CID, or linker-specific positive/negative vector module exists in the exact admitted accelerator source forest. The closest current component, ProgramRepairSynthesizer@1, is a bounded deterministic proposal-only repair/equality-rewrite component; it neither resolves canonical CodeIR/source identities through a current source map nor writes Python source. This exact-output dispatch permits only the receipt, so the smallest authority-preserving delta is this typed unavailable disposition rather than a competing linker, invented vectors, or unreviewed source/test mutation.",
+    "non_promotion_reason": "The required general agent-supervisor suite passes in provider and sealed environments, but its only PCSM module covers closed residual structured decoding rather than source linking. Without the linker package, contract, source-map identity, and package-specific positive/negative vectors, completion or promotion is not authorized."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish linker behavior, current-tree identity, schema binding, or test success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize mutation or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "330c70bd59091c16696b26e5ce19e6f09b8b7c32",
+    "outer_tree": "2b293652c8d3341282d8b54783b31836174dac6f",
+    "dispatch_tree_id": "330c70bd59091c16696b26e5ce19e6f09b8b7c32",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract only; no Python source linker or vector authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "named Python-v1 implementation and test boundary; no BoundedPythonLinker@1 selected",
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "source-CID/source-span component boundary only; no forest-wide linker or source-map authority selected",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no source linker or vector authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted nested HEAD and HEAD^{tree}; inspected outer and accelerator porcelain before receipt creation; recorded selected source Git blobs and SHA-256 values; resolved the required-test PCSM symlink; and searched the exact accelerator implementation and required-test roots for linker/source-map contract identifiers.",
+      "result": "The dispatch commit equals outer HEAD; the recorded nested commit/tree pairs equal their checked-out heads; and both inspected worktrees were clean before this receipt was added. The required test root has one PCSM symlink to test_structured_decoding.py. The contract search returned no BoundedPythonLinker@1, SourceLinkReceipt@1, source_link_receipt, SemanticSourceLinker, PythonLinker@, or source_map_resolver identifier.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink/head/tree, scheduler digest, listed source digest, source-search result, current source-map contract/CID, or required-test result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "PCSM-051 and PCSM-052 record that SourceMapResolver@1 and SourceLinkReceipt@1 are absent. No current-tree aggregate source-map CID or canonical CodeIR/source identity to exact current file/node/span resolution exists. Git trees, blobs, individual source SHA-256 values, and ordinary source-map variables are not substitutes."
+    }
+  },
+  "required_package_assessment": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_package": "PCSM Python-v1 linker positive and negative vectors for BoundedPythonLinker@1",
+    "required_contract": "SourceLinkReceipt@1 binding canonical identity to exact current Python source-map resolution and closed deterministic rewrite admission",
+    "required_bindings": [
+      "explicit linker/vector and receipt schema/version",
+      "canonical CodeIR or source identity CID rather than an alias",
+      "base current commit and tree identity",
+      "current aggregate source-map CID, exact current file CID, normalized repository-relative path, and resolved node/SourceSpan",
+      "closed operation grammar and deterministic operation order",
+      "deterministic rewritten bytes plus changed-span and unchanged-span evidence",
+      "positive current-source rewrite vectors and negative stale, ambiguity, missing-target, overlap, path-escape, generated-source, and unsupported-operation vectors"
+    ],
+    "source_search": {
+      "kind": "measured",
+      "method": "rg -n -i --glob '*.py' --glob '*.json' --glob '*.md' 'SourceLinkReceipt|PythonLinker@|BoundedPythonLinker|source_link_receipt|SemanticSourceLinker|source_map_resolver' over external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor and external/ipfs_accelerate/test/agent_supervisor.",
+      "result": "No matches.",
+      "meaning": "The named linker, receipt schema, source-map resolver, and package-specific positive/negative vector surface are absent from the exact task-owned Python implementation/test forest."
+    },
+    "dependency_assessment": {
+      "kind": "measured",
+      "dependencies": [
+        "PCSM-051",
+        "PCSM-052",
+        "PCSM-053",
+        "PCSM-054",
+        "PCSM-055",
+        "PCSM-056"
+      ],
+      "receipts_consulted": [
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-051.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-052.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-053.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-054.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-055.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-056.json"
+      ],
+      "result": "The prerequisite receipts record unavailable PCSM source-map/linker and related admission capabilities. Their historical bindings are not reused as current identity evidence here; this receipt independently rechecked the current head and confirmed that the mandatory linker/vector prerequisites remain absent."
+    },
+    "disposition": "The requested behavior cannot truthfully be claimed implemented, deterministic as a current-forest linker vector package, schema/version/CID bound, or covered by linker-specific positive and negative tests. No source mutation, proof acceptance, validation acceptance, promotion, or task completion is authorized."
+  },
+  "nearest_existing_equivalent": {
+    "kind": "measured",
+    "component": "ipfs_accelerate_py.agent_supervisor.planning.program_repair_synthesis.ProgramRepairSynthesizer@1 and prove_equality_under_theory",
+    "schemas": [
+      "ipfs_accelerate_py/agent-supervisor/program-repair-request@1",
+      "ipfs_accelerate_py/agent-supervisor/program-repair-receipt@1",
+      "ipfs_accelerate_py/agent-supervisor/equality-rewrite-receipt@1"
+    ],
+    "deterministic_properties": [
+      "bounded candidate, search-state, rewrite-step, depth, node, path, span, and file-byte limits",
+      "declared equality theory with replayable equality rewrites",
+      "deterministic mode declares zero model calls"
+    ],
+    "authority_boundary": "The module states that every candidate remains proposal-only and grants no write, semantic, or proof authority.",
+    "rejection_reason": "It rewrites terms/candidates under a declared theory; it does not consume canonical CodeIR/source CIDs, resolve the current source forest or SourceMapResolver@1 output, bind a file/node/span to a current tree, materialize Python source bytes, preserve unchanged spans, emit SourceLinkReceipt@1, or supply linker vectors. It is therefore not reused as the required linker/vector package."
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py",
+      "git_blob": "0f61644a5b2b0acd23d1cad3747a43b4515a1f39",
+      "sha256": "f48abcb5ac82c242a65377a50838d1b863da50d4c9ada2ac9deaec9dbb43a83d",
+      "role": "Nearest bounded deterministic proposal-only repair/equality-rewrite component; explicitly not a source linker or writer."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/residual_intelligence/structured_decoding.py",
+      "git_blob": "3bb1dae4dca193a7c393c0e3ac71cd95f3fa47e6",
+      "sha256": "7de11f7193498a456932c7511adf21f44342105f18c90cdfa4f6cc04508e92d4",
+      "role": "Closed structured-output decoder reached by the required suite; not a source linker."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Only PCSM test module, reached through external/ipfs_accelerate/test/agent_supervisor/pcsm symlink; positive/negative structured-decoding tests, not linker vectors."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "nearest_component_positive_and_negative_coverage": {
+      "kind": "measured",
+      "component": "external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py",
+      "positive_coverage": [
+        "all closed residual task families have grammars",
+        "valid compact structured output decodes",
+        "bounded explicit abstention and a bounded typed patch sketch are valid"
+      ],
+      "negative_coverage": [
+        "parse failures, duplicate JSON fields, unknown fields, and model-created completion reject",
+        "untyped context and invalid ranking vectors reject",
+        "patch sketches reject parent traversal, absolute paths, invalid line limits, untyped operations, and empty symbol scopes"
+      ],
+      "non_equivalence": "These assertions establish only closed residual model-output admission. They do not exercise canonical identity/CID or source-map resolution, current-tree freshness, exact spans, source rewriting, deterministic rewritten bytes, unchanged-span preservation, or linker rejection vectors."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "command_executed": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Provider Python 3.12.3 with pytest 9.1.1 and provider-installed plugins.",
+      "result": "11 passed in 0.46s",
+      "scope_limit": "The passing suite does not establish the absent linker/vector package."
+    },
+    "sealed_required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm057-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME.",
+      "result": "11 passed in 0.51s",
+      "scope_limit": "This is a sealed passing result for the required general suite only; it is not linker-specific validation."
+    },
+    "package_specific_tests": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No BoundedPythonLinker@1 implementation, SourceLinkReceipt@1 schema, closed rewrite grammar, current-forest source-map CID, or linker-specific positive/negative vector module exists in the bound source forest. Adjacent program-repair and structured-decoding tests are not substituted."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-057 linker-vector proof obligation or approved digest-bound prover deployment is present in the authoritative sealed environment."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; scheduler and selected-source SHA-256 values; Git blobs; clean/freshness and contract-absence search; required-test symlink topology; adjacent component authority boundary; and sealed required-suite result (11 passed in 0.51s).",
+    "estimated": "None. No estimate is used to establish linker behavior, identity, validation, or promotion.",
+    "simulated": "Provider required-suite execution (11 passed in 0.46s). It is corroborative only and is not substituted for sealed validation or missing linker coverage.",
+    "unavailable": "BoundedPythonLinker@1; SourceLinkReceipt@1; versioned closed Python rewrite grammar; aggregate current-forest source-map CID; canonical identity-to-current-file/node/span resolution; deterministic rewritten-byte and unchanged-span evidence; linker-specific positive and negative vectors; formal-prover result; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only under exact declared-output authority; no task-owned implementation or test path may be changed by this dispatch.",
+    "ProgramRepairSynthesizer@1 is bounded but proposal-only; its term/equality-rewrite behavior cannot be relabelled as a current-source linker or as linker-vector evidence.",
+    "The passing required suite is structurally unrelated to current-source linking and does not compensate for the unavailable package-specific vectors.",
+    "No aliases are accepted as canonical identity and no M2/M3 mutation, generated-source mutation, automatic source materialization, or proof acceptance is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter protected planning documents, existing generic components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, source-search result, source-map contract/CID, or validation-environment capability change."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalents_reused_first": true,
+    "evidence_classes_distinguished": true,
+    "provider_required_validation_passed": true,
+    "authoritative_sealed_validation_passed": true,
+    "package_specific_positive_and_negative_tests_available": false,
+    "required_package_implemented": false,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_unavailable"
+  }
+}
