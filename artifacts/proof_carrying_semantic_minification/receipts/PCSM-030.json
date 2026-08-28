@@ -1,0 +1,265 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-030",
+  "title": "Implement semantic capsule builder",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G300",
+  "objective_id": "PCSM-030",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-030@current-head-python-semantic-capsule-builder-selection-v1",
+  "observed_at": "2026-08-28T06:21:03Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 deterministic, CID-bound SemanticCapsule construction from the current sealed datasets semantic-index and binding-projection authorities",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-030.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-030.json",
+    "implementation_delta": "The exact current-head datasets source forest already contains the sole canonical Python-v1 builder: SemanticCapsuleCompiler@1, exposed as compile_semantic_capsule and compile_semantic_capsules. This receipt selects and binds that existing implementation. No proof_context wrapper, second capsule compiler, alternative schema, identity alias, source-map authority, or M2/M3 mutation was introduced.",
+    "non_promotion_reason": "The required proof_context suite cannot collect in the authoritative sealed Python 3.12 environment because its configured anyio pytest plugin is absent. A provider-side run is not substituted for sealed validation."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "Calculated approximation; no estimate establishes builder behavior, identity, or test success.",
+    "simulated": "A deterministic execution outside the authoritative sealed environment; it never replaces sealed validation.",
+    "unavailable": "A required capability or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "893afdf845c3f112d98fd50db8a8fc0a8da25f01",
+    "outer_tree": "b78513b97eb069849f5e6240e93ee3bbd5558c5c",
+    "outer_subject": "Merge commit 'e675f6c5419ba167b8f6951af977d515eea07cc4' into agent/proof-carrying-semantic-minification-v1",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "893afdf845c3f112d98fd50db8a8fc0a8da25f01",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07",
+        "authority_role": "consumer and scheduler boundary only"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical Python semantic-state, SemanticCapsule, binding projection, DAG-JSON, and CID authority"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage only; not Python semantic-capsule authority"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for admitted gitlinks; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; porcelain status for outer and datasets roots before receipt write; merge-base --is-ancestor for configured datasets origin/main and planning revision.",
+      "result": "The datasets nested HEAD equals the superproject gitlink; both roots were clean before receipt write; configured datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 and the planning revision are ancestors of the measured datasets HEAD.",
+      "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, schema/version, CID profile, or dirty admitted root requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree SourceLinkReceipt or canonical source-map CID exists. Git blob, source-CID, and AST-span facts are not substituted for a PCSM source-map artifact."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "record": "ipfs_datasets_py.logic.software_contracts.semantic_state.models.SemanticCapsule",
+    "record_schema": "ipfs-datasets.software-contracts.semantic-capsule@1",
+    "compiler_interface": "SemanticCapsuleCompiler@1",
+    "compiler_schema": "ipfs-datasets.software-contracts.semantic-capsule-compiler@1",
+    "compiler_version": "1",
+    "compiler_module": "ipfs_datasets_py.logic.software_contracts.semantic_state.capsules",
+    "entry_points": [
+      "compile_semantic_capsule(semantic_index, stable_symbol_id, ...) -> SemanticCapsule",
+      "compile_semantic_capsules(semantic_index, ...) -> CapsuleCompileResult",
+      "verify_capsule_compile_result(result) -> CapsuleCompileResult"
+    ],
+    "input_authorities": [
+      "RepositoryState / sealed SemanticIndexForCapsules view",
+      "SymbolRecord stable_symbol_id, version_cid, semantic_index_schema, and extractor_version",
+      "bindings-owned RelevantBindingProjection / EnvironmentBindingSet"
+    ],
+    "cid_profile": {
+      "profile_id": "software-contract-cid-profile-v1",
+      "profile_version": "1.0.0",
+      "cid_version": 1,
+      "base": "base32",
+      "multihash": "sha2-256",
+      "source_codec": "raw",
+      "structured_codec": "dag-json",
+      "case": "lowercase"
+    },
+    "invariants": [
+      "The capsule constructor accepts only the closed semantic-capsule schema and compiler version, binds stable symbol identity, version CID, semantic-index schema, extractor version, source/fact CIDs, and relevant binding projection CID into its identity payload, then derives capsule_cid from that canonical structured payload.",
+      "Batch compilation sorts symbols by stable ID, rejects duplicate symbols and invalid edge values, and produces a sorted capsule index with canonical DAG-JSON blocks whose claimed CIDs are recomputed before return.",
+      "Single-symbol and batch compilation use the same authoritative construction path.",
+      "Cold and verified-incremental compilation with identical inputs is byte-identical; prior blocks are reusable only after complete re-verification and byte equality.",
+      "Dependency entries bind stable IDs, version CIDs, fact CIDs, and link IDs; a capsule never uses other capsule or symbol-node CIDs as dependencies.",
+      "Confidence is monotonic toward less certainty only; heuristic/model-summary metadata is excluded and cannot raise semantic confidence or become evidence.",
+      "Result verification rejects missing, noncanonical, CID-mismatched, or record-mismatched blocks and verifies the capsule index as well."
+    ],
+    "minimum_delta_reason": "Current-head source already supplies the exact versioned Python-v1 builder and direct test coverage. Reimplementation under proof_context would duplicate canonical authority and violates this task's exact receipt-only declared output boundary."
+  },
+  "source_inventory": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+      "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d",
+      "git_blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
+      "role": "sole deterministic SemanticCapsuleCompiler@1 implementation and canonical block re-verification",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/models.py",
+      "sha256": "488fa256322807b895a3f7e277fef5b4d5dc6ac1f3619696a6c288340aae0586",
+      "git_blob": "b86dae240c3f90bc3de0967bd7cde14f795c53b4",
+      "role": "closed SemanticCapsule, SemanticStateBundle, binding, index, version, and CID-bound identity models",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+      "sha256": "268ff6aab60e3a8a2e5e9719b637edfd1efb7bc50a4310bd4b1f2660b04cdfcc",
+      "git_blob": "234fea82b071c80f9f7ddc8b33909257cdf6400c",
+      "role": "sole relevant-binding projection authority consumed by the capsule builder",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "sha256": "89e1fbc694a67f751de3a62d8206442e4904722c20f81827ae0a96a0fbee33a3",
+      "git_blob": "14458fb99ea57c19652398ee479d678ae3fbe507",
+      "role": "strict CIDv1 raw and canonical DAG-JSON profile authority",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_capsules.py",
+      "sha256": "849e4b9ba7e034d9ff0c7435d13091e84031669f895302e5524a91d3d18b0769",
+      "git_blob": "82ec04a927c76bf35a8dab258644c1aacbb7e5d4",
+      "role": "direct positive and negative acceptance vectors for deterministic and incremental capsule compilation",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/proof_context/test_v01_provider.py",
+      "sha256": "f3d15f7780ea3ffa561a21880ff4e26f65f096818e70c14d8e56ab01f65329b3",
+      "git_blob": "d9b32641e22d9fd026570907e79cfcceafa8c23a",
+      "role": "proof_context capability port delegates compile_semantic_capsule to the selected datasets authority",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+      "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+      "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+      "role": "proof_context deterministic pack-CID and stale/unavailable/opaque fail-closed coverage for consumers of capsule CIDs",
+      "evidence_kind": "measured"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_capsules.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "deterministic sorted, order-independent batch construction",
+          "single-capsule construction matches the batch entry",
+          "producer key, source fact, dependencies, binding projection, canonical block, CID, and result verification bind together",
+          "cold and incremental paths are byte-identical and only reverified unchanged blocks reuse",
+          "shuffled/repeated inputs remain stable"
+        ],
+        "negative_coverage": [
+          "capsule and symbol-node CIDs cannot masquerade as dependencies",
+          "confidence cannot be raised from edges",
+          "tampered previous blocks are not trusted",
+          "unknown symbols, bad previous bundles, and projections whose membership differs from the binding set fail closed"
+        ]
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_provider.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "the v0.1 provider exposes the selected compile_semantic_capsule capability"
+        ],
+        "negative_coverage": [
+          "provider authority remains datasets-owned rather than a proof_context reimplementation"
+        ]
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "equal exact context inputs, including capsule CIDs, mint the same ContextPack CID"
+        ],
+        "negative_coverage": [
+          "stale, unavailable, and opaque-without-exact-tree context cannot mint a pack"
+        ]
+      }
+    ],
+    "provider_capsule_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_capsules.py",
+      "result": "15 passed in 0.64s",
+      "limitation": "The provider environment is not substituted for sealed validation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "unavailable",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "The provider runner imposed a 30-second process lifetime and did not return a completed result for this 519-test suite; no provider passing result is claimed by this receipt.",
+      "limitation": "A prior receipt at the same datasets commit reported a provider-only pass, but it is not reused here as a current execution result."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only selection."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and scheduler bindings; clean pre-write state; configured-origin ancestry; named source/test SHA-256 and Git blobs; versioned schema/compiler/CID declarations; direct positive/negative test-source inventory; focused capsule test pass; and the sealed pytest capability failure.",
+    "estimated": "None.",
+    "simulated": "Focused direct capsule validation (15 passed in 0.64s). The required provider suite has no completed result in this attempt.",
+    "unavailable": "Authoritative sealed proof_context result due to missing anyio; completed provider required-suite result in this attempt; PCSM SourceLinkReceipt/source-map CID; formal-prover result; and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it selects existing current-head canonical capsule construction and does not mutate proof_context or create a second builder.",
+    "The selected authority is bounded static Python semantic state. It does not establish whole-CPython runtime semantics, dynamic import/reflection/native behavior, generated-code correctness, or a PCSM source-link artifact.",
+    "All identities are valid only under the bound tree, source digests, schemas, compiler version, CID profile, and exact test inputs; any change invalidates this receipt.",
+    "The authoritative sealed suite remains unavailable because anyio is absent, so this receipt cannot promote completion despite the focused provider-side test pass.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this PCSM capsule-builder selection. Do not alter the selected datasets source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, schema/version, CID profile, compiler version, or validation-environment capability changes."
+  }
+}
