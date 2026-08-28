@@ -21,6 +21,7 @@ import argparse
 import json
 import os
 import re
+import signal
 import stat
 import subprocess
 import sys
@@ -28,6 +29,7 @@ import time
 from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
+from types import MappingProxyType
 from typing import Any, Final
 
 ROOT: Final = Path(__file__).resolve().parents[3]
@@ -795,30 +797,14 @@ def _start_owner(board: Any, paths: Mapping[str, Path], *, timeout: float) -> di
     if existing["liveness"] == "unknown":
         raise OperatorError("existing Quack owner liveness is unknown")
 
-    match = QUACK_ENDPOINT_RE.fullmatch(program.quack_endpoint)
-    assert match is not None
-    host, port = match.group(1), int(match.group(2))
     for item in (paths["runtime"], paths["state"], paths["logs"], paths["owner"]):
         _private_directory(item)
     argv = [
         sys.executable,
-        str(QUACK_SERVER),
-        "--database",
-        str(paths["database"]),
-        "--state-dir",
-        str(paths["owner"]),
-        "--host",
-        host,
-        "--port",
-        str(port),
-        "--store-id",
-        str(program.store_id),
-        "--repository-id",
-        f"repository:{PROGRAM_ID}",
-        "--secret-handle",
-        str(program.endpoint_secret_handle),
-        "--json",
-        "start",
+        str(Path(__file__).resolve()),
+        "--config",
+        str(board.config_path),
+        "state-owner",
     ]
     descriptor = os.open(
         paths["owner_log"],
@@ -857,6 +843,132 @@ def _start_owner(board: Any, paths: Mapping[str, Path], *, timeout: float) -> di
             "log": str(paths["owner_log"].relative_to(ROOT)),
         }
     raise OperatorError("detached Quack owner did not reach authenticated readiness")
+
+
+def _serve_state_owner(config_path: Path) -> dict[str, Any]:
+    """Run the existing QuackStateServer with the pinned beta API adapter.
+
+    The generic state-owner opens its DuckDB connection with the ordinary
+    supervisor policy, which intentionally disables external access and locks
+    the configuration before ``LOAD quack``.  Quack 1.5.5 therefore rejects
+    the load with ``PermissionException``.  This bounded adapter changes only
+    the owner connection/serve call: it loads the already-installed, sealed
+    Quack extension before serving a loopback-only endpoint.  The existing
+    server still owns migration, lease/fence, token vault, status, identity,
+    stop, and cleanup semantics.
+    """
+
+    board, _payload = _load_board(config_path)
+    paths = _runtime_paths(board)
+    program = board.resolved_database_program()
+    match = QUACK_ENDPOINT_RE.fullmatch(program.quack_endpoint)
+    if match is None:
+        raise OperatorError("state owner requires a sealed loopback endpoint")
+    host, port = match.group(1), int(match.group(2))
+
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server import (
+        InProcessQuackTransport,
+        build_server,
+        listen_uri,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+        DuckDBConnection,
+    )
+
+    def owner_connection(path: Path) -> Any:
+        import duckdb
+
+        raw = duckdb.connect(
+            str(path),
+            config={
+                "autoinstall_known_extensions": "false",
+                "autoload_known_extensions": "false",
+                "allow_unsigned_extensions": "false",
+            },
+        )
+        try:
+            raw.execute("LOAD quack")
+        except BaseException:
+            raw.close()
+            raise
+        return DuckDBConnection.wrap(raw)
+
+    class LoopbackQuackTransport(InProcessQuackTransport):
+        def start(
+            self,
+            connection: Any,
+            *,
+            host: str,
+            port: int,
+            token: str,
+            identity: Any,
+        ) -> Mapping[str, Any]:
+            uri = listen_uri(host, port)
+            connection.execute(
+                "SELECT * FROM quack_serve(?, token := ?, "
+                "allow_other_hostname := false, disable_ssl := true)",
+                [uri, token],
+            )
+            self._started = True
+            self._listen_uri = uri
+            self._server_identity = {
+                "server_id": identity.server_id,
+                "store_id": identity.store_id,
+                "database_uuid": identity.database_uuid,
+                "schema_revision": identity.schema_revision,
+                "schema_fingerprint": identity.schema_fingerprint,
+                "generation": identity.generation,
+                "process_birth_id": identity.process_birth_id,
+                "listen_uri": uri,
+            }
+            return MappingProxyType(dict(self._server_identity))
+
+        def stop(self, connection: Any | None = None) -> None:
+            if connection is not None:
+                try:
+                    connection.execute("SELECT quack_stop()")
+                except Exception:
+                    pass
+            super().stop(connection)
+
+    for item in (paths["runtime"], paths["state"], paths["logs"], paths["owner"]):
+        _private_directory(item)
+    server = build_server(
+        database_path=paths["database"],
+        state_dir=paths["owner"],
+        host=host,
+        port=port,
+        repository_id=f"repository:{PROGRAM_ID}",
+        store_id=str(program.store_id),
+        secret_handle=str(program.endpoint_secret_handle),
+        transport=LoopbackQuackTransport(),
+        connection_factory=owner_connection,
+    )
+    identity = server.start()
+    stop_requested = {"value": False}
+
+    def request_stop(_signum: int, _frame: Any) -> None:
+        stop_requested["value"] = True
+
+    previous_int = signal.signal(signal.SIGINT, request_stop)
+    previous_term = signal.signal(signal.SIGTERM, request_stop)
+    try:
+        control = server.stop_control_path()
+        while server.lifecycle.value == "ready" and not stop_requested["value"]:
+            if control.is_file():
+                break
+            time.sleep(0.25)
+        stopped = server.stop()
+    finally:
+        signal.signal(signal.SIGINT, previous_int)
+        signal.signal(signal.SIGTERM, previous_term)
+    return {
+        "schema": OPERATOR_SCHEMA,
+        "command": "state-owner",
+        "identity": identity.to_dict(),
+        "stopped": stopped,
+    }
 
 
 def _scheduler_command(config_path: Path, *, dry_run: bool) -> tuple[str, ...]:
@@ -966,6 +1078,10 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("validate", help="run the sealed dependency and board validators")
     commands.add_parser("materialize", help="materialize goals/tasks into DuckDB")
     commands.add_parser("preflight", help="run canonical configured-board preflight")
+    commands.add_parser(
+        "state-owner",
+        help="internal existing QuackStateServer loopback owner adapter",
+    )
     launch_parser = commands.add_parser(
         "launch",
         help="dry-run or really launch the canonical detached supervisor",
@@ -1007,6 +1123,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = materialize(config_path)
         elif arguments.command == "preflight":
             result = preflight(config_path)
+        elif arguments.command == "state-owner":
+            result = _serve_state_owner(config_path)
         elif arguments.command == "launch":
             result = launch(
                 config_path,
