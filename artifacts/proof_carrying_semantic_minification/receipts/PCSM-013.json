@@ -1,0 +1,1101 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-013",
+  "title": "Define ModelTokenCostProfile",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G200",
+  "objective_id": "PCSM-013",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-013@current-head-model-token-cost-profile-selection-v1",
+  "observed_at": "2026-08-27T18:40:00Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 ModelTokenCostProfile authority selection only",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "mutations_to_product_source": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-013.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-013.json",
+    "predicted_proof_context_directory_not_written": "external/ipfs_datasets/ipfs_datasets_py/proof_context/",
+    "predicted_proof_context_directory_reason": "This task's admitted declared output is the receipt only. Tokenizer and budget choice are accelerate-owned. Existing accelerator CalibratedTokenEstimator, tokenizer-revision identity, and invocation usage fields are selected in place. No competing ModelTokenCostProfile schema, wrapper, or proof_context mutation was created.",
+    "implementation_delta": "receipt_only; select existing ipfs_accelerate_py tokenizer/budget surfaces as ModelTokenCostProfile@1; character-count estimators remain estimated-only; no new schema, owner, compiler, linker, or language scope"
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used as measured token counts by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live tokenizer identity by this receipt.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "e8e914b2460a95566a47395ab4ed597311eacf6e",
+    "outer_tree": "94af01abbd3a4cb82ce830e52437563e9b9509f3",
+    "outer_subject": "Reseal PCSM supervisor after landed-merge retrying completion",
+    "git_object_format": "sha1",
+    "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "origin_main_is_ancestor": true,
+    "accelerator_planning_revision": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
+    "accelerator_planning_tree": "b1dd163fe6ad7ab52cb3639d05fcbc0fbe64ff84",
+    "accelerator_planning_revision_equals_origin_main": true,
+    "accelerator_planning_tree_equals_origin_main_tree": true,
+    "accelerator_planning_revision_is_ancestor_of_head": true,
+    "commits_after_origin_main": 90,
+    "dispatch_tree_id": "e8e914b2460a95566a47395ab4ed597311eacf6e",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "evidence_kind": "measured",
+    "gitlinks": {
+      "Mcp-Plus-Plus": {
+        "repository": "endomorphosis/Mcp-Plus-Plus",
+        "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+        "authority_role": "wire_contract_only",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "superproject_gitlink": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "configured_origin_main_is_ancestor": true,
+        "scheduler_planning_revision": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "scheduler_planning_tree": "61776431577f0c276546f25e4178a47a64007180",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_accelerate": {
+        "repository": "endomorphosis/ipfs_accelerate_py",
+        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+        "authority_role": "slice_route_model_budget_link_admission_and_validation",
+        "commit": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
+        "tree": "1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627",
+        "superproject_gitlink": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
+        "configured_origin_main": "024bf40a6c35735b84e7faff844f862dec63abf3",
+        "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "a9ab7e480237608a30f3f73ba7ecc9575e05ff6d",
+        "configured_origin_main_tree_equals_planning_tree": false,
+        "prior_pcsm_004_origin_main_still_ancestor": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
+        "prior_pcsm_010_v3_commit_still_ancestor": "589229c87ff8dbfca43e95b8e6b8088ebbe34f24",
+        "scheduler_planning_revision": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
+        "scheduler_planning_tree": "1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_datasets": {
+        "repository": "endomorphosis/ipfs_datasets_py",
+        "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+        "authority_role": "canonical_semantic_identity",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "superproject_gitlink": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "configured_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
+        "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "7169c2a67929044a02350bc26d0a51c853a4981b",
+        "configured_origin_main_tree_equals_planning_tree": false,
+        "scheduler_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "scheduler_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "datasets_proof_context_current_head_handoff_commit_matches": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      },
+      "external/ipfs_kit": {
+        "repository": "endomorphosis/ipfs_kit_py",
+        "origin": "https://github.com/endomorphosis/ipfs_kit_py",
+        "authority_role": "exact_bytes_cid_and_immutable_storage",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "superproject_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "configured_origin_main": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
+        "configured_origin_main_is_ancestor": true,
+        "configured_origin_main_tree": "543ccd2bd78994d4e3d55cd44993ae6ca65e4c28",
+        "configured_origin_main_tree_equals_planning_tree": false,
+        "scheduler_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "scheduler_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "scheduler_planning_revision_matches_head": true,
+        "scheduler_planning_tree_matches_head": true,
+        "clean_at_observation": true,
+        "evidence_kind": "measured"
+      }
+    },
+    "excluded_gitlinks_not_admitted": [
+      {
+        "path": "external/meta-wearables-dat-android",
+        "superproject_gitlink": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/meta-wearables-dat-ios",
+        "superproject_gitlink": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "hallucinate_app",
+        "superproject_gitlink": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+        "admitted": false,
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "swissknife",
+        "superproject_gitlink": "75931db15273786ecd579f1089ec5599b9ded352",
+        "admitted": false,
+        "evidence_kind": "measured"
+      }
+    ],
+    "freshness_rule": "Any changed outer commit/tree, admitted nested commit/tree/gitlink, dirty nested worktree, or scheduler source_binding planning identity invalidates this selection and requires a fresh receipt. Planning revisions are not runtime completion evidence. Datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b, accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d, and kit origin/main tree 543ccd2bd78994d4e3d55cd44993ae6ca65e4c28 are ancestor identities, not admitted planning trees. Character counts are never substituted for token counts, and a configured provider/model ID is never substituted for an executed tokenizer revision.",
+    "freshness_evidence_kind": "measured",
+    "freshness_check": {
+      "kind": "measured",
+      "method": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git ls-tree HEAD <gitlink>; git -C <gitlink> rev-parse HEAD^{commit,tree}; git status --porcelain=v1; git -C <gitlink> status --porcelain=v1; git merge-base --is-ancestor <configured origin/main> HEAD; compare nested HEAD/tree to scheduler source_binding planning revision/tree",
+      "result": "pass",
+      "meaning": "The outer tree and all four admitted nested worktrees were clean before this receipt was written. Each admitted nested commit equals the superproject gitlink and the scheduler planning revision; each nested tree equals the scheduler planning tree. Configured origin/main is an ancestor of each nested head. Reuse must reject this receipt when any bound revision, tree, or listed source digest differs."
+    },
+    "source_digest_continuity": {
+      "kind": "measured",
+      "result": "pcsm_013_first_selection; datasets_and_kit_and_mcp_plus_plus_gitlinks_unchanged_from_pcsm_010_v3; nested_accelerate_gitlink_moved",
+      "prior_pcsm_010_receipt": "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v3",
+      "prior_pcsm_010_receipt_sha256": "1d1b1fe304921cf7b672759958a255a75b02fccddeaab66e70e98440e0dcc566",
+      "prior_pcsm_010_receipt_git_blob": "d3f80a023ff7ea3a8703465e40f5164ef0e6d593",
+      "predecessor_receipts": [
+        "urn:pcsm:task-receipt:PCSM-000@current-head-inventory-v4",
+        "urn:pcsm:task-receipt:PCSM-001@current-head-source-forest-seal-v3",
+        "urn:pcsm:task-receipt:PCSM-002@current-head-inventory-v3",
+        "urn:pcsm:task-receipt:PCSM-003@current-head-inventory-v2",
+        "urn:pcsm:task-receipt:PCSM-004@current-head-canonical-versus-projection-boundary-v1",
+        "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v3"
+      ],
+      "nested_gitlinks_changed_versus_pcsm_010_v3": [
+        "external/ipfs_accelerate"
+      ],
+      "nested_gitlinks_unchanged_versus_pcsm_010_v3": [
+        "Mcp-Plus-Plus",
+        "external/ipfs_datasets",
+        "external/ipfs_kit"
+      ],
+      "datasets_proof_context_source_bytes_unchanged_versus_pcsm_010_v3": [
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/__init__.py",
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
+        "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py"
+      ],
+      "outer_commit_moved": "Predecessor PCSM-010 v3 bound outer commit 57bf1084f9ca39a608dc43389a458b1fdf72a047 and tree 5e9330a8908767a6ab68061f7007cfe4ac1742fa. Current outer commit is e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3. Accelerator gitlink moved 589229c87ff8dbfca43e95b8e6b8088ebbe34f24 -> eaca0ddb028d754a8ab1f2030cbe060afd9a4837. Datasets, kit, and MCP++ gitlinks are unchanged from PCSM-010 v3. Datasets proof_context SHA-256/git-blob identities were re-hashed and matched PCSM-010 v3.",
+      "meaning": "This is the first current-head ModelTokenCostProfile selection. It binds a later outer commit/tree and accelerator gitlink than PCSM-010 v3. Datasets proof_context bytes are unchanged and remain ContextPack authority, not tokenizer-cost authority."
+    },
+    "pcsm_source_map": {
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID is present at this selection task. Related syntax-core maps, legal-IR maps, and accelerator AST spans are not substituted for a bound PCSM SourceLinkReceipt.",
+      "evidence_kind": "unavailable"
+    },
+    "stale_prior_receipt_rejected": {
+      "kind": "measured",
+      "prior_pcsm_013_artifact_identity": "none; this is the first PCSM-013 receipt",
+      "prior_pcsm_010_v3_outer_commit": "57bf1084f9ca39a608dc43389a458b1fdf72a047",
+      "prior_pcsm_010_v3_outer_tree": "5e9330a8908767a6ab68061f7007cfe4ac1742fa",
+      "prior_accelerate_gitlink": "589229c87ff8dbfca43e95b8e6b8088ebbe34f24",
+      "prior_accelerate_tree": "bb3e2f74407c7e609526058acacb644248ad7650",
+      "prior_scheduler_sha256": "86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137",
+      "predecessor_outer_commits_rejected_as_current_head": [
+        "4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d",
+        "1f7d0a9c10abbdefb1255e812df173a8e40f4d85",
+        "7c641864b2f224cd1cee906bce8eed7bee3d8360",
+        "baee33cad2cdad3c0c0aae059dc6e3e28301c83e",
+        "7e6f00774a53025d55904b71b0410a4f5c3f5fb3",
+        "57bf1084f9ca39a608dc43389a458b1fdf72a047"
+      ],
+      "result": "no_stale_pcsm_013_to_reject; predecessor_g100_and_pcsm_010_identities_rejected_as_current_head",
+      "meaning": "No previously committed PCSM-013 receipt existed. Predecessor G100 receipts and PCSM-010 v3 remain valid inventories/selections of their bound trees but are not current-head forest identity for this task."
+    }
+  },
+  "policy_bindings": {
+    "scheduler_config": {
+      "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
+      "sha256": "1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135",
+      "git_blob": "a23ef8d403283acfe4403d18f6d4f9db4f33799a",
+      "accepted_plan_revision_alias": "PCSM-PLAN-V1",
+      "source_binding_policy": {
+        "require_initialized_gitlinks": true,
+        "require_superproject_gitlink_equals_nested_head": true,
+        "require_clean_nested_worktree_at_task_start": true,
+        "require_origin_main_as_ancestor": true,
+        "changed_revision_requires_fresh_inventory_and_baseline": true,
+        "planning_revision_is_runtime_completion_evidence": false,
+        "record_recursive_repository_forest_at_launch": true
+      },
+      "authority_policy": {
+        "canonical_semantic_authority": "ipfs_datasets_py",
+        "exact_bytes_storage_authority": "ipfs_kit_py",
+        "orchestration_admission_authority": "ipfs_accelerate_py",
+        "duckdb_transactional_authority": true,
+        "ducklake_projection_authority": false,
+        "m2_or_m3_mutation_authority": false,
+        "m3_status": "experimental_advisory_only",
+        "model_or_advisor_output_is_completion_authority": false
+      },
+      "operational_control_plane": {
+        "duckdb_role": "authoritative transactional goals, tasks, lifecycle, CAS, fences, receipts, and event cursor",
+        "ducklake_role": "rebuildable non-authoritative append-only analytics projection",
+        "markdown_is_bootstrap_only": true,
+        "generated_runtime_artifacts_are_completion_authority": false
+      },
+      "provider_configuration": {
+        "primary_provider_id": "grok_cli",
+        "primary_model_id": "grok-4.6",
+        "fallback_provider_id": "codex",
+        "fallback_model_id": "gpt-5.6-terra",
+        "provider_execution_observed": false,
+        "tokenizer_revision_observed": false,
+        "meaning": "Configured provider and model IDs are not executed tokenizer identity and are not measured token counts."
+      },
+      "pcsm_004_scheduler_digest_rejected_as_current": "f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446",
+      "pcsm_010_v1_scheduler_digest_rejected_as_current": "2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079",
+      "pcsm_010_v2_scheduler_digest_rejected_as_current": "9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced",
+      "pcsm_010_v3_scheduler_digest_rejected_as_current": "86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137",
+      "evidence_kind": "measured"
+    },
+    "plan": {
+      "path": "docs/architecture/PROOF_CARRYING_SEMANTIC_MINIFICATION_V1_PLAN.md",
+      "sha256": "5031a4e4588ef9f6589199f37e3551c5c059c25f7a04cbf9f3ec00f3f026ae0e",
+      "git_blob": "d76fbc8f9a37648c5ddbaa5b198223121b9d2231",
+      "evidence_kind": "measured"
+    },
+    "objectives": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.objectives.md",
+      "sha256": "712c844b2a40856a677f5d7258d6bfdcb1f3ec08410e026922c93c4f6951121b",
+      "git_blob": "9f97656be213dc0f898701a04c851376b5eb6f16",
+      "dispatch_objective_revision_cid": "baguqeera7rmqusdc54koh67q4pzgqwnxdbptfylyaasy4ootyx6fhhmblthq",
+      "dispatch_objective_revision_cid_source": "current implementation dispatch packet; not a git blob and not substituted for the file SHA-256",
+      "evidence_kind": "measured"
+    },
+    "task_specification": {
+      "path": "docs/architecture/proof_carrying_semantic_minification_v1.todo.md",
+      "sha256": "63e745843899d95ac59e7080a2b744c87e7ac929871125d1b6efc8e392e4bfbe",
+      "git_blob": "a34f3b5773fc0a48b9665bc76e75f9e0a44fa682",
+      "evidence_kind": "measured"
+    },
+    "implementation_policy": {
+      "policy_id": "policy:implementation-daemon",
+      "policy_revision": "sha256:b9672f8f1b6db53101d9ffb703459ae21e54955f725746ebd467179239bdbe3c",
+      "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+      "canonical_task_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include a canonical_task_cid. Database task-projection value baguqeera5pkum2zplgdvym6ucu5yhvwo2yfl7el5hhac5cwdhd4uacgya5bq has projection_authority=false and is not substituted for dispatch or runtime completion evidence.",
+        "evidence_kind": "unavailable"
+      },
+      "accepted_plan_root_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include an accepted_plan_root_cid. Database task-projection value baguqeerax2gqeo7n5uy3uw3q7h5zn7ruicibrzfy65yv2vachdvbfnnvyfla has projection_authority=false and is not substituted for dispatch or runtime completion evidence.",
+        "evidence_kind": "unavailable"
+      },
+      "dependency_task_cid": {
+        "status": "unavailable",
+        "reason": "The current implementation dispatch packet does not include a dependency_task_cid. Todo/projection values naming PCSM-010 as baguqeera6mvj3326qcksmlmwafo3s7ppd4s22vnbsn4tjnk4ylbjyqiesypa have projection_authority=false and are not substituted for dispatch or runtime completion evidence.",
+        "evidence_kind": "unavailable"
+      },
+      "source": "current implementation dispatch packet",
+      "evidence_kind": "measured"
+    },
+    "datasets_proof_context_current_head_handoff": {
+      "path": "artifacts/proof_carrying_semantic_minification/handoff/datasets-proof-context-current-head.json",
+      "sha256": "b57d70264e9557adb901db4e8ad147bad98204958ec5bf078be84bd6ad247326",
+      "git_blob": "f89a54f9ef7b14a5289cd8c6265b6107808d5727",
+      "bound_datasets_commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "bound_datasets_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "matches_admitted_datasets_gitlink": true,
+      "evidence_kind": "measured"
+    }
+  },
+  "model_token_cost_profile": {
+    "contract": "ModelTokenCostProfile@1",
+    "schema": "ipfs-accelerate.proof-carrying-semantic-minification.model-token-cost-profile-selection@1",
+    "status": "selected_existing_composition",
+    "language_scope": "Python v1 only",
+    "confirmed": true,
+    "evidence_kind": "measured",
+    "selection": {
+      "decision": "reuse_existing_accelerator_tokenizer_budget_surfaces_as_model_token_cost_profile",
+      "owner": "ipfs_accelerate_py",
+      "owner_role": "tier_slice_model_tokenizer_budget_choice",
+      "not_owner": [
+        "ipfs_datasets_py owns canonical semantic identity, not tokenizer or budget choice",
+        "ipfs_kit_py owns exact bytes and CID storage, not tokenizer or budget choice",
+        "Mcp-Plus-Plus is wire_contract_only"
+      ],
+      "selected_counting_surface": "CalibratedTokenEstimator",
+      "selected_named_estimated_fallback": "context-compiler-calibrated_utf8@1",
+      "selected_identity_binding": [
+        "FrozenDecisionIdentity.provider_id",
+        "FrozenDecisionIdentity.provider_revision",
+        "FrozenDecisionIdentity.tokenizer_id",
+        "FrozenDecisionIdentity.tokenizer_revision"
+      ],
+      "selected_receipt_witness": "ipfs_accelerate_py/agent-supervisor/context-compilation-receipt@2 estimator_name and estimator_error_bps",
+      "selected_usage_telemetry": [
+        "pcce/proof-context/v0.1/coding-agent-invocation token_count",
+        "pcce/proof-context/v0.1/coding-agent-invocation cached_token_count",
+        "pcce/proof-context/v0.1/coding-agent-invocation cost_micros"
+      ],
+      "selected_category_accounting": "ContextTokenEstimate bound to estimator_version",
+      "selected_prefix_cache_surface": "ipfs_accelerate_py/agent-supervisor/prefix-reuse-receipt@1",
+      "modes": {
+        "provider_tokenizer": {
+          "estimator_name": "provider_tokenizer",
+          "provider_aware": true,
+          "evidence_kind_when_bound": "measured",
+          "error_bps_when_bound": 0,
+          "meaning": "A callable tokenizer or encode() implementation bound to the exact provider/model/tokenizer revision is the only measured token-count path."
+        },
+        "calibrated_utf8": {
+          "estimator_name": "calibrated_utf8",
+          "named_version": "context-compiler-calibrated_utf8@1",
+          "provider_aware": false,
+          "evidence_kind": "estimated",
+          "uncalibrated_error_bps": 10000,
+          "heuristic": "max(1, ceil(utf8_byte_count / chars_per_token)) with chars_per_token default 4",
+          "meaning": "UTF-8 byte or character heuristics are estimated only. They never stand in for measured token counts and cannot satisfy a tokenizer-revision identity."
+        }
+      },
+      "identifier_status": {
+        "model_token_cost_profile_string_in_nested_repositories": false,
+        "model_token_cost_profile_registered_as_software_contract_schema": false,
+        "context_compiler_calibrated_utf8_named_estimator_present": true,
+        "calibrated_token_estimator_class_present": true,
+        "meaning": "ModelTokenCostProfile@1 is a receipt-bound composition of existing accelerator tokenizer/budget surfaces. It is not a second registered schema and is not present as an identifier in the four nested repositories."
+      },
+      "covers": [
+        "exact provider/model/tokenizer revision identity fields",
+        "measured token counts only when a provider tokenizer is bound",
+        "estimated UTF-8/4 fallback with explicit error_bps, never as measured tokens",
+        "prefix-cache related usage via cached_token_count and prefix-reuse-receipt@1",
+        "per-category token accounting bound to a named estimator_version",
+        "context-compilation receipt estimator_name and estimator_error_bps",
+        "fail-closed rejection of forged understated reference token_count against canonical provider-tokenized input"
+      ],
+      "does_not_cover": [
+        "frequency of aliases as a closed profile field",
+        "dictionary and grammar overhead as a closed profile field",
+        "semantic-anchor value as a closed profile field",
+        "expansion probability as a closed profile field",
+        "ambiguity as a closed profile field",
+        "an executed live provider/model/tokenizer revision for this forest",
+        "datasets proof_context as tokenizer-cost owner",
+        "datasets legal/patent or BM25 tokenizer_revision as LLM cost identity",
+        "character counts as measured token counts",
+        "ContextPacker as production ContextPack or canonical identity",
+        "kit CID storage as tokenizer authority"
+      ],
+      "plan_rule": {
+        "statement": "Alias selection uses the exact provider/model/tokenizer revision and measures token cost, frequency, dictionary and grammar overhead, prefix caching, semantic-anchor value, expansion probability, and ambiguity. Character counts never stand in for token counts.",
+        "current_head_satisfaction": "Identity and measured-versus-estimated counting rules are selected now. Frequency, dictionary/grammar overhead, semantic-anchor value, expansion probability, and ambiguity remain unavailable closed-profile fields deferred to PCSM-042 through PCSM-045 and PCSM-047. Prefix caching has usage and prefix-reuse surfaces but is not a complete cost profile.",
+        "evidence_kind": "measured"
+      },
+      "authoritative_chain": {
+        "order": [
+          "canonical_semantic_cid",
+          "local_projection_alias",
+          "typed_output",
+          "canonical_semantic_cid",
+          "exact_current_tree_node_or_span"
+        ],
+        "statement": "A local alias is never canonical identity. ModelTokenCostProfile measures tokenizer-local cost of a projection; it does not mint canonical semantic identity. Token counts are measured only from a bound provider tokenizer revision. Estimated UTF-8/4 values remain estimated.",
+        "source": "PCSM-004 CanonicalVersusProjectionAuthorityBoundary@1 plus current-head accelerate tokenizer/budget surfaces",
+        "evidence_kind": "measured"
+      }
+    },
+    "current_sources": [
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+        "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece",
+        "git_blob": "fea50c565815772b7e80401d038a92b9ec6489e2",
+        "role": "selected_counting_surface_and_compilation_receipt_witness",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+        "sha256": "fd72987f59219b466e0aa3dd7f65ba5ddb23eeb135ddf6849c92d8ea9dfffcef",
+        "git_blob": "7ca43d6b64903aebd9cb85923958ed0d529fb09b",
+        "role": "named_estimated_fallback_identity_and_category_accounting",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/decision_runtime_benchmark.py",
+        "sha256": "a2baab4ff453d5ed036f97a697fe532bf5a03726d69826bc34cdd972b3739193",
+        "git_blob": "7fc5dc306dcf244b73b556890bd24c92dbdd78cc",
+        "role": "tokenizer_id_and_tokenizer_revision_identity_binding",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/proof_context.py",
+        "sha256": "4c0489e97781bd2477e53c19c1522738c7e37a8e0a8d3e2b3658416dcfc098b0",
+        "git_blob": "c86b1eae98ce122a93168b46951dabb34e2f918b",
+        "role": "tokenizer_independent_estimated_only_four_byte_heuristic",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/benchmarks/configurations_ab.py",
+        "sha256": "23ac1597b68775cf651cc2ee44166a9eff4794fa7084d405449959e70a79337b",
+        "git_blob": "2eebf178aeec11d7dd8f7666659f4fcc93461bf7",
+        "role": "frozen_uncalibrated_benchmark_estimator_not_measured_profile",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/models.py",
+        "sha256": "331f442acdb4f541383e820499a073cd7e4d9ef4e5524c3d9821808963ce8050",
+        "git_blob": "9b5cecf176f523145c8f9fcd40023825b8304a84",
+        "role": "invocation_usage_telemetry_not_the_profile",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+        "sha256": "698ae219ec099160dbc8d1d36b49a81df9a3fcec32ea590fb54ed6bc5471772d",
+        "git_blob": "f2263a6acb88b58b471bcc2e95e8ffa11e234e8c",
+        "role": "contextpacker_is_not_v01_pack_authority",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/__init__.py",
+        "sha256": "564935b52acfe63e7ef3240956e9da173c830e990dd727ec4bda8a81a1ccb87a",
+        "git_blob": "f824876a69c9d027f24bbae1d7c21c3ec729a3cf",
+        "role": "datasets_proof_context_port_not_model_token_cost_profile",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
+        "sha256": "41fadfc5cf1577bd118c7bfda5a91036f439b7fae3cad4313a600fd650c29182",
+        "git_blob": "8e738fa2d21eba5db7258d3c630f550c5cb8be51",
+        "role": "datasets_proof_context_port_not_model_token_cost_profile",
+        "evidence_kind": "measured"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+        "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+        "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+        "role": "datasets_context_pack_authority_not_model_token_cost_profile",
+        "evidence_kind": "measured"
+      }
+    ],
+    "sealed_interpreter_identity_checks": {
+      "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=$ipfs-accelerate-validation-home-* PYTHONNOUSERSITE=1 PYTHONPATH=external/ipfs_accelerate or external/ipfs_datasets /usr/bin/python3.12 importing CalibratedTokenEstimator, estimate_context_tokens, and datasets proof_context metadata",
+      "calibrated_token_estimator_fallback_name": "calibrated_utf8",
+      "calibrated_token_estimator_fallback_provider_aware": false,
+      "calibrated_token_estimator_uncalibrated_error_bps": 10000,
+      "calibrated_token_estimator_estimate_abcdefgh": 2,
+      "calibrated_token_estimator_provider_name": "provider_tokenizer",
+      "calibrated_token_estimator_provider_estimate_one_two_three": 3,
+      "calibrated_token_estimator_provider_error_bps": 0,
+      "context_compilation_receipt_schema": "ipfs_accelerate_py/agent-supervisor/context-compilation-receipt@2",
+      "estimate_context_tokens_abcdefgh": 2,
+      "estimate_context_tokens_empty": 0,
+      "datasets_proof_context_schema": "ipfs-datasets.proof-context.v0.1",
+      "datasets_proof_context_interface": "DatasetsProofContextProvider@0.1",
+      "datasets_proof_context_has_model_token_cost_profile": false,
+      "datasets_proof_context_contracts_token_or_cost_names": [],
+      "token_estimator_version_source_constant": "context-compiler-calibrated_utf8@1",
+      "token_estimator_version_sealed_import": "unavailable; importing semantic_state.context_pack pulls mcp_server.mcplusplus which requires anyio, absent from PYTHONNOUSERSITE",
+      "contextpacker_v01_production_authority_from_source": false,
+      "evidence_kind": "measured"
+    },
+    "negative_assertions": [
+      "ModelTokenCostProfile@1 is not a second registered software-contract schema.",
+      "The identifier ModelTokenCostProfile is absent from Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit.",
+      "ipfs_datasets_py.proof_context is DatasetsProofContextProvider@0.1 / ContextPack authority, not ModelTokenCostProfile.",
+      "ContextPacker.V01_PRODUCTION_AUTHORITY is False; it is a tokenizer-local budget consumer, not production pack identity and not this profile.",
+      "calibrated_utf8 and estimate_context_tokens are estimated UTF-8/4 heuristics; they never stand in for measured token counts.",
+      "FrozenDecisionIdentity.tokenizer_revision='sha256:frozen-tokenizer' is a fixture identity, not an executed tokenizer revision.",
+      "pcce/proof-context/v0.1/coding-agent-invocation token_count, cached_token_count, and cost_micros are usage telemetry, not the profile itself.",
+      "Datasets legal, patent, Solidity-CPT, and BM25 tokenizer_revision fields are domain embedding or legal-search identity, not LLM ModelTokenCostProfile.",
+      "Kit stores exact IR/source/projection bytes and does not own tokenizer or budget choice.",
+      "MCP++ proof-context schemas are wire_contract_only.",
+      "A local projection alias, DuckLake row, Markdown board row, model output, M2 result, or M3 result is not tokenizer-cost identity.",
+      "Configured scheduler provider/model IDs are not executed tokenizer identity.",
+      "This receipt creates no competing owner, proof_context wrapper, compiler, or language-scope expansion."
+    ]
+  },
+  "existing_equivalents": [
+    {
+      "system": "Accelerator CalibratedTokenEstimator",
+      "disposition": "selected_as_counting_surface",
+      "authority": "ipfs_accelerate_py",
+      "interfaces": [
+        "CalibratedTokenEstimator",
+        "provider_tokenizer",
+        "calibrated_utf8",
+        "ipfs_accelerate_py/agent-supervisor/context-compilation-receipt@2"
+      ],
+      "finding": "CalibratedTokenEstimator is the current-head token-count surface. When a tokenizer callable or encode() object is bound, name is provider_tokenizer, provider_aware is true, error_bps is 0, and counts are measured. Without a tokenizer, name is calibrated_utf8, uncalibrated error_bps is 10000, and counts are ceil(utf8_bytes/4). ContextCompilationReceipt records estimator_name and estimator_error_bps. Canonical provider-tokenized input defeats a forged understated reference token_count.",
+      "reuse_decision": "Select as the ModelTokenCostProfile counting surface. Treat provider_tokenizer as measured and calibrated_utf8 as estimated. Do not fork a second estimator."
+    },
+    {
+      "system": "Named estimator context-compiler-calibrated_utf8@1",
+      "disposition": "selected_as_named_estimated_fallback_identity",
+      "authority": "ipfs_accelerate_py",
+      "interfaces": [
+        "TOKEN_ESTIMATOR_VERSION",
+        "context-compiler-calibrated_utf8@1",
+        "ContextTokenEstimate"
+      ],
+      "finding": "semantic_state.context_pack.TOKEN_ESTIMATOR_VERSION is the exact string context-compiler-calibrated_utf8@1. ContextTokenEstimate requires estimator_version and rejects category-sum disagreement. This is the named estimated fallback identity, not a measured tokenizer revision.",
+      "reuse_decision": "Select as the named estimated fallback identity. Never promote it to measured token cost."
+    },
+    {
+      "system": "FrozenDecisionIdentity tokenizer binding",
+      "disposition": "selected_as_identity_binding",
+      "authority": "ipfs_accelerate_py",
+      "interfaces": [
+        "FrozenDecisionIdentity.provider_id",
+        "FrozenDecisionIdentity.provider_revision",
+        "FrozenDecisionIdentity.tokenizer_id",
+        "FrozenDecisionIdentity.tokenizer_revision"
+      ],
+      "finding": "Decision-runtime frozen identity requires tokenizer_id and tokenizer_revision together with provider_id and provider_revision. The benchmark fixture uses tokenizer_revision=sha256:frozen-tokenizer, which is simulated fixture identity, not an executed live tokenizer.",
+      "reuse_decision": "Select the field set as ModelTokenCostProfile identity binding. Do not treat the frozen-tokenizer fixture as live execution evidence."
+    },
+    {
+      "system": "Coding-agent invocation usage telemetry",
+      "disposition": "reuse_as_usage_telemetry_not_the_profile",
+      "authority": "ipfs_accelerate_py wire_contract_only via MCP++ closed projection",
+      "interfaces": [
+        "pcce/proof-context/v0.1/coding-agent-invocation",
+        "token_count",
+        "cached_token_count",
+        "cost_micros"
+      ],
+      "finding": "Invocation records optionally carry token_count, cached_token_count, latency_ms, and cost_micros. cached_token_count is the current prefix-cache usage field. These are observed usage fields, not a closed cost profile covering frequency, dictionary overhead, anchors, expansion probability, or ambiguity.",
+      "reuse_decision": "Reuse as usage telemetry. Do not promote the wire record to ModelTokenCostProfile."
+    },
+    {
+      "system": "Prefix-reuse receipt",
+      "disposition": "reuse_as_prefix_cache_surface_not_complete_profile",
+      "authority": "ipfs_accelerate_py",
+      "interfaces": [
+        "ipfs_accelerate_py/agent-supervisor/prefix-reuse-receipt@1",
+        "ipfs_accelerate_py/agent-supervisor/prefix-stable-context-capsule@1"
+      ],
+      "finding": "Prefix reuse arranges provider input as a canonical stable prefix plus volatile evidence delta and records reuse_bps against MIN_WARM_PREFIX_REUSE_BPS. This is a prefix-cache related surface, not a complete ModelTokenCostProfile.",
+      "reuse_decision": "Reuse as the prefix-caching surface. Defer complete prefix-cache economics to PCSM-042/PCSM-047."
+    },
+    {
+      "system": "Frozen four-byte estimate_context_tokens",
+      "disposition": "reuse_as_estimated_only_benchmark_counter",
+      "authority": "ipfs_accelerate_py",
+      "interfaces": [
+        "ipfs_accelerate_py.agent_supervisor.proof.proof_context.estimate_context_tokens",
+        "ipfs_accelerate_py.proof_context.benchmarks.configurations_ab.estimate_context_tokens"
+      ],
+      "finding": "Both copies compute (utf8_byte_count + 3) // 4. The proof-context copy is documented as tokenizer-independent. The A/B copy is a frozen uncalibrated estimator and requires SemanticContextPack.declared_tokens to match it. Character counts stand in for tokens here and therefore remain estimated.",
+      "reuse_decision": "Reuse as estimated-only frozen benchmark accounting. Never report these values as measured token counts."
+    },
+    {
+      "system": "Accelerator ContextPacker",
+      "disposition": "reuse_as_tokenizer_local_budget_consumer_not_the_profile",
+      "authority": "ipfs_accelerate_py compatibility consumer",
+      "interfaces": [
+        "ContextPacker",
+        "ContextPacker.V01_PRODUCTION_AUTHORITY=False"
+      ],
+      "finding": "ContextPacker remains the legacy token/budget consumer and is not v0.1 construction authority. Production pack identity is DatasetsContextPackAuthority@0.1.",
+      "reuse_decision": "Leave as a budget consumer. Do not treat it as ModelTokenCostProfile or ContextPack authority."
+    },
+    {
+      "system": "Datasets proof-context port",
+      "disposition": "do_not_relocate_model_token_cost_profile_here",
+      "authority": "ipfs_datasets_py",
+      "interfaces": [
+        "ipfs-datasets.proof-context.v0.1",
+        "DatasetsProofContextProvider@0.1",
+        "DatasetsContextPackAuthority@0.1"
+      ],
+      "finding": "proof_context owns ContextPack construction and the v0.1 provider port. Sealed import exposes SCHEMA, INTERFACE, and PRODUCER only. contracts.py has no token or cost names. Adding a ModelTokenCostProfile wrapper there would mix canonical semantic authority with tokenizer/budget authority and exceeds declared outputs.",
+      "reuse_decision": "Leave proof_context unchanged. ModelTokenCostProfile remains accelerate-owned."
+    },
+    {
+      "system": "Datasets legal, patent, Solidity-CPT, and BM25 tokenizer_revision fields",
+      "disposition": "do_not_select_as_llm_model_token_cost_profile",
+      "authority": "ipfs_datasets_py domain processors",
+      "interfaces": [
+        "PINNED_TOKENIZER_REVISION",
+        "open_us_law BM25 tokenizer revision"
+      ],
+      "finding": "These fields pin embedding or legal-search tokenizer revisions. They are not provider/model LLM token-cost profiles for PCSM alias selection.",
+      "reuse_decision": "Do not select. They remain domain-processor identity."
+    }
+  ],
+  "version_and_cid_controls": {
+    "schema_bound": true,
+    "current_tree_bound": true,
+    "content_addressing_bound": true,
+    "relevant_controls": [
+      "Selected ModelTokenCostProfile identity is the exact provider/model/tokenizer revision plus estimator_name.",
+      "Measured token counts require a bound provider tokenizer; calibrated_utf8 remains estimated.",
+      "ContextCompilationReceipt records estimator_name and estimator_error_bps on the same capsule identity.",
+      "ContextTokenEstimate.total must equal the sum of category totals and carries estimator_version.",
+      "SemanticContextPack.declared_tokens must equal the frozen four-byte estimator of rendered_context; that equality is estimated-only.",
+      "A local projection alias is never substituted for a canonical semantic CID.",
+      "A character or UTF-8 byte count is never substituted for a measured token count.",
+      "Kit remains exact-byte/CID storage authority and does not own this profile."
+    ],
+    "sample_provider_tokenizer_cid": {
+      "status": "unavailable",
+      "reason": "No executed provider/model/tokenizer revision was available in the sealed environment. Configuration IDs grok_cli/grok-4.6 are not execution evidence.",
+      "evidence_kind": "unavailable"
+    },
+    "receipt_cid": {
+      "status": "unavailable",
+      "reason": "ipfs was absent from the sealed validation PATH and no admitted immutable receipt-store write was available. A SHA-256 string is not substituted for a CID.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "minimum_versioned_delta": {
+    "status": "receipt_bound_selection_only",
+    "named_contract": "ModelTokenCostProfile@1",
+    "selected_existing_composition": [
+      "CalibratedTokenEstimator",
+      "context-compiler-calibrated_utf8@1",
+      "FrozenDecisionIdentity tokenizer_id/tokenizer_revision",
+      "context-compilation-receipt@2 estimator_name/estimator_error_bps",
+      "coding-agent-invocation token_count/cached_token_count/cost_micros as usage telemetry"
+    ],
+    "reason": "The identifier ModelTokenCostProfile@1 is unregistered and absent from nested source. Existing accelerator tokenizer/budget surfaces already distinguish measured provider-tokenizer counts from estimated UTF-8/4 fallbacks and bind tokenizer_revision fields. Naming that composition as ModelTokenCostProfile@1 in this receipt is the smallest Python v1 delta. Implementing a datasets proof_context wrapper or new schema would mix authority, duplicate the counting surface, and exceeds declared outputs. Full alias-optimization dimensions remain later packages.",
+    "reuse_first_decision": {
+      "model_token_cost_profile": "select existing accelerator CalibratedTokenEstimator plus tokenizer-revision identity fields",
+      "measured_counts": "only provider_tokenizer when a tokenizer is bound",
+      "estimated_counts": "calibrated_utf8 / context-compiler-calibrated_utf8@1 / estimate_context_tokens",
+      "proof_context": "leave unchanged; it is ContextPack authority",
+      "character_counts": "never stand in for measured token counts",
+      "alias_optimization": "defer frequency, dictionary/grammar overhead, semantic-anchor, expansion probability, and ambiguity to PCSM-042 through PCSM-045",
+      "tokenizer_cost_profiling_implementation": "defer to PCSM-042",
+      "projection_receipts_and_token_accounting": "defer to PCSM-047"
+    },
+    "required_follow_on_tasks": [
+      "PCSM-014",
+      "PCSM-042",
+      "PCSM-043",
+      "PCSM-044",
+      "PCSM-045",
+      "PCSM-047"
+    ],
+    "non_promotion_effect": "No PCSM alias dictionary, projection builder, tokenizer-cost profiler, source linker, or automatic mutation is admitted by this task.",
+    "evidence_kind": "measured"
+  },
+  "coverage": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_context_compiler.py",
+        "sha256": "0a2f6ed703bf87cf8a4fb356681555ce961daf978adbe63560cb3c1e324462ce",
+        "git_blob": "e154f6fa9a071c99fbdd1c8225f03e7217809366",
+        "coverage": [
+          "test_estimator_uses_provider_tokenizer_and_records_fallback_calibration distinguishes measured provider counts from calibrated_utf8",
+          "test_canonical_provider_input_defeats_forged_reference_token_count rejects understated token_count",
+          "compilation receipt records estimator_name"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/api/semantic_state/test_context_pack.py",
+        "sha256": "c57e3dc53dd3a26156aa49ad9e82bc0209e7f90fea6ac36ec4f79f05d40ebb7b",
+        "git_blob": "5ff86219ab24a33263b9736bb174c15ef638e425",
+        "coverage": [
+          "pack.estimator_version equals TOKEN_ESTIMATOR_VERSION context-compiler-calibrated_utf8@1",
+          "ContextTokenEstimate category totals must match total"
+        ],
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/proof_context/benchmarks/test_configurations_ab.py",
+        "sha256": "9b51389f8ce20383621ae9d5fc3a52bb75089bfd16015c76674de39850014006",
+        "git_blob": "13668bdc9673de53ffcda9ab42512aa33a37c02d",
+        "coverage": [
+          "context.token_count equals estimate_context_tokens(rendered_context)",
+          "exact_source_tokens is strictly less than token_count on the ordinary fixture"
+        ],
+        "note": "These tests exercise the frozen four-byte estimated counter, not a measured tokenizer.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/proof_context/adapters/test_conformance.py",
+        "sha256": "82c94ec5d932e5d8cb7d58ff8acfbb38fc4948063a4b644f6fb3d18155fc9e99",
+        "git_blob": "9796e620f63a3e1ca0b1763d2aed86cd9faa3815",
+        "coverage": [
+          "invocation token_count and cached_token_count are admitted non-negative integers"
+        ],
+        "note": "Usage telemetry, not ModelTokenCostProfile.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+        "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+        "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+        "coverage": [
+          "identical inputs yield identical ContextPack CID",
+          "stale, unavailable, and opaque wrong-tree inputs fail closed"
+        ],
+        "note": "Required validation path. These tests cover ContextPack, not ModelTokenCostProfile.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_provider.py",
+        "sha256": "f3d15f7780ea3ffa561a21880ff4e26f65f096818e70c14d8e56ab01f65329b3",
+        "git_blob": "d9b32641e22d9fd026570907e79cfcceafa8c23a",
+        "coverage": [
+          "datasets v0.1 provider port"
+        ],
+        "note": "Required validation path. These tests cover the proof-context provider, not ModelTokenCostProfile.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
+        "sha256": "ea4ef0ee64e83b65238c18960c6e49aa071753252842cf57fd68a50ac6cf9892",
+        "git_blob": "fe531c0d76397442bc6a248131ec038d67338472",
+        "coverage": [
+          "datasets v0.1 semantic outcome records"
+        ],
+        "note": "Required validation path. These tests do not define ModelTokenCostProfile.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+        "sha256": "1a30652e469c5010acc895a62893e0c1fe590c4b6891ddc7794ce2e160a1b5e5",
+        "git_blob": "81319a0e160c88d064b8eea4f7e7d2952de6b666",
+        "coverage": [
+          "datasets proof-context assurance specification"
+        ],
+        "note": "Required validation path. These tests do not define ModelTokenCostProfile.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/proof_context/test_install_profile.py",
+        "sha256": "298b403794366cf76cb9615d007ae9ff91c4fd474f835ef33558272d9dca13d1",
+        "git_blob": "f55679341bdd5cc6ff0dbfaece0967ecc4effde3",
+        "coverage": [
+          "datasets proof-context install profile"
+        ],
+        "note": "Required validation path. These tests do not define ModelTokenCostProfile.",
+        "evidence_kind": "measured_source_inventory",
+        "execution": "unavailable_pytest_not_runnable_in_sealed_validation_home"
+      }
+    ],
+    "required_validation_suite": {
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "source_test_function_count": 189,
+      "covers_model_token_cost_profile": false,
+      "covers_context_pack_and_provider_port": true,
+      "execution": "unavailable_in_sealed_validation_environment"
+    },
+    "PCSM_specific_test_gap": {
+      "kind": "unavailable",
+      "statement": "No current-head test names ModelTokenCostProfile@1 because that identifier is a receipt-bound composition of existing accelerator tokenizer/budget surfaces rather than a new schema. Adjacent CalibratedTokenEstimator, ContextTokenEstimate, and invocation usage tests already cover the selected surfaces and are not relabeled as a new PCSM suite. Required proof_context tests cover ContextPack, not this selection. Frequency, dictionary/grammar overhead, semantic-anchor, expansion probability, and ambiguity lack closed-profile tests."
+    }
+  },
+  "validation": {
+    "commands": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-013.json"
+    ],
+    "required_command": {
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=$ipfs-accelerate-validation-home-* PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "unavailable",
+      "sealed_result": "python: command not found (exit 127). /usr/bin/python3.12 -m pytest with PYTHONNOUSERSITE=1 and a private validation HOME raises ImportError: Error importing plugin 'anyio.pytest_plugin': No module named 'anyio'.",
+      "provider_home_probe_excluded": "A run under operator HOME with user site-packages is not sealed-environment evidence and was not used as a passing result.",
+      "evidence_kind": "unavailable"
+    },
+    "json_parse_command": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-013.json",
+      "status": "passed",
+      "evidence_kind": "measured"
+    },
+    "positive_tests": [
+      {
+        "name": "nested gitlinks, heads, trees, and scheduler planning revisions agree",
+        "status": "passed",
+        "observed_roots": 4,
+        "also_checked": [
+          "nested worktrees clean",
+          "superproject gitlink equals nested head",
+          "scheduler planning revision equals nested head",
+          "scheduler planning tree equals nested tree",
+          "configured origin/main revision is an ancestor of each nested head",
+          "outer origin/main equals accelerator_planning_revision and is an ancestor of outer HEAD",
+          "outer origin/main tree equals accelerator_planning_tree",
+          "listed source SHA-256 and git blob identities match live files",
+          "datasets-proof-context-current-head handoff commit/tree equals admitted datasets gitlink"
+        ],
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "CalibratedTokenEstimator provider tokenizer is the measured counting path",
+        "status": "passed",
+        "method": "Sealed PYTHONNOUSERSITE interpreter constructed CalibratedTokenEstimator(lambda text: text.split()); name=provider_tokenizer, provider_aware=true, estimate('one two three')=3, error_bps=0.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "calibrated_utf8 fallback is estimated with uncalibrated error_bps=10000",
+        "status": "passed",
+        "method": "Sealed CalibratedTokenEstimator(chars_per_token=4); name=calibrated_utf8, provider_aware=false, estimate('abcdefgh')=2, error_bps=10000. The same UTF-8/4 result from estimate_context_tokens('abcdefgh')=2 is recorded as estimated, not measured.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "named estimated fallback identity is context-compiler-calibrated_utf8@1",
+        "status": "passed",
+        "method": "Read TOKEN_ESTIMATOR_VERSION from semantic_state/context_pack.py line 48 as the exact string context-compiler-calibrated_utf8@1. Sealed import of that module was unavailable due to anyio and was not substituted as a passing import.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "datasets proof_context remains ContextPack authority without ModelTokenCostProfile",
+        "status": "passed",
+        "method": "Sealed import of ipfs_datasets_py.proof_context yielded SCHEMA=ipfs-datasets.proof-context.v0.1, INTERFACE=DatasetsProofContextProvider@0.1, hasattr ModelTokenCostProfile=false, and contracts.py token/cost names=[].",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "receipt is well-formed JSON under the sealed interpreter",
+        "status": "passed",
+        "method": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_semantic_minification/receipts/PCSM-013.json",
+        "evidence_kind": "measured"
+      }
+    ],
+    "negative_tests": [
+      {
+        "name": "predecessor outer commits are not current-head forest identity",
+        "status": "passed",
+        "method": "Compared current outer commit e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3 against predecessor bindings 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, 1f7d0a9c10abbdefb1255e812df173a8e40f4d85, 7c641864b2f224cd1cee906bce8eed7bee3d8360, baee33cad2cdad3c0c0aae059dc6e3e28301c83e, 7e6f00774a53025d55904b71b0410a4f5c3f5fb3, and 57bf1084f9ca39a608dc43389a458b1fdf72a047; outer identities differed and were rejected as current-head forest identity.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "ModelTokenCostProfile identifier absence in nested repositories",
+        "status": "passed",
+        "method": "Searched *.py, *.json, and *.md under Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, and external/ipfs_kit; ModelTokenCostProfile matched zero nested-repository files.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "proof_context is not ModelTokenCostProfile",
+        "status": "passed",
+        "method": "proof_context/__init__.py and contracts.py expose ipfs-datasets.proof-context.v0.1 / DatasetsProofContextProvider@0.1 only. No ModelTokenCostProfile, CalibratedTokenEstimator, or tokenizer-cost schema is defined there.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "character counts are not measured token counts",
+        "status": "passed",
+        "method": "Sealed calibrated_utf8 estimate('abcdefgh')=2 equals ceil(8/4) and estimate_context_tokens('abcdefgh')=2. These equalities are estimated UTF-8/4 heuristics. They are not recorded as measured token counts and do not bind a tokenizer revision.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "configured provider/model IDs are not executed tokenizer identity",
+        "status": "passed",
+        "method": "Scheduler provider.primary_provider_id=grok_cli and primary_model_id=grok-4.6 were read from config. No executed provider receipt, model revision, or tokenizer revision was present. Configuration is not execution evidence.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "datasets origin/main tree is not admitted planning-tree identity",
+        "status": "passed",
+        "method": "Configured datasets origin/main tree 7169c2a67929044a02350bc26d0a51c853a4981b differs from admitted planning tree 6a186a24c424fdce0035033ebbf8a8476d96bbb7 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "accelerator origin/main tree is not admitted planning-tree identity",
+        "status": "passed",
+        "method": "Configured accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d differs from admitted planning tree 1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "kit origin/main tree is not admitted planning-tree identity",
+        "status": "passed",
+        "method": "Configured kit origin/main tree 543ccd2bd78994d4e3d55cd44993ae6ca65e4c28 differs from admitted planning tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "PCSM-004 and PCSM-010 scheduler digests are not current-head scheduler identity",
+        "status": "passed",
+        "method": "Predecessor scheduler SHA-256 values f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446, 2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079, 9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced, and 86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137 differ from current 1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135 and were rejected.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged nested tree identity rejection",
+        "status": "passed",
+        "method": "A same-length all-zero tree value was compared to the measured ipfs_kit tree 14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2 and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "forged CalibratedTokenEstimator source SHA-256 rejection",
+        "status": "passed",
+        "method": "A same-length all-zero digest was compared to the measured context_compiler.py SHA-256 d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece and rejected as unequal.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "excluded gitlinks are not admitted PCSM source roots",
+        "status": "passed",
+        "method": "Superproject gitlinks swissknife, hallucinate_app, external/meta-wearables-dat-android, and external/meta-wearables-dat-ios were observed and classified admitted=false.",
+        "evidence_kind": "measured"
+      },
+      {
+        "name": "provider-local pytest and formal tools are not accepted as sealed-environment evidence",
+        "status": "passed",
+        "method": "The authoritative PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin has no unqualified python, pytest CLI, z3, lean, lake, or ipfs. /usr/bin/python3.12 -m pytest under a private validation HOME with PYTHONNOUSERSITE=1 cannot import anyio. Operator-HOME user-site pytest success is excluded.",
+        "evidence_kind": "measured"
+      }
+    ],
+    "proof_results": {
+      "status": "not_selected",
+      "reason": "This receipt-only ModelTokenCostProfile selection made no source mutation and no PCSM proof obligation was emitted. Absent optional provers remain unavailable rather than a passing proof result.",
+      "evidence_kind": "unavailable"
+    }
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "git_version": "git version 2.43.0",
+    "toolchain_directories_writable": false,
+    "validation_home_prefix": "ipfs-accelerate-validation-home-",
+    "PYTHONNOUSERSITE": "1",
+    "evidence_kind": "measured",
+    "optional_capabilities": [
+      {
+        "capability": "pytest CLI and sealed pytest execution of external/ipfs_datasets/tests/proof_context",
+        "status": "unavailable",
+        "reason": "Unqualified python and pytest are absent from the sealed PATH. /usr/bin/python3.12 -m pytest under a private validation HOME with PYTHONNOUSERSITE=1 fails importing plugin anyio.pytest_plugin. A provider-local user-site pytest executable was intentionally excluded.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "sealed import of TOKEN_ESTIMATOR_VERSION via semantic_state.context_pack",
+        "status": "unavailable",
+        "reason": "Importing ipfs_accelerate_py.agent_supervisor.semantic_state.context_pack pulls mcp_server.mcplusplus.task_queue which requires anyio, absent from PYTHONNOUSERSITE. The constant was read from source instead and is not claimed as a sealed import.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "executed provider/model/tokenizer revision",
+        "status": "unavailable",
+        "reason": "The sealed scheduler configuration names provider/model IDs but no executed provider receipt, model revision, or tokenizer revision was available. Configuration is not execution evidence, and character counts are not substituted for token counts.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "IPFS CLI / receipt CID issuance",
+        "status": "unavailable",
+        "reason": "ipfs was absent from the sealed validation PATH. A SHA-256 string is not substituted for a CID.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Z3 prover",
+        "status": "unavailable",
+        "reason": "z3 was absent from the sealed validation PATH; a provider-local z3 executable was intentionally excluded.",
+        "evidence_kind": "unavailable"
+      },
+      {
+        "capability": "Lean and Lake",
+        "status": "unavailable",
+        "reason": "lean and lake were absent from the sealed validation PATH; provider-local Elan tools were intentionally excluded.",
+        "evidence_kind": "unavailable"
+      }
+    ]
+  },
+  "evidence_classification": {
+    "measured": [
+      "Outer HEAD e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3.",
+      "Four admitted gitlinks, nested trees, clean nested worktrees, origin/main ancestor checks, and scheduler planning-revision/tree equality.",
+      "Four excluded gitlinks observed and classified not admitted.",
+      "Every listed SHA-256 and git blob identity, including current scheduler-config digest 1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135 and context_compiler.py digest d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece.",
+      "Selected counting surface CalibratedTokenEstimator with provider_tokenizer measured path and calibrated_utf8 estimated path.",
+      "Named estimated fallback identity context-compiler-calibrated_utf8@1 from source.",
+      "ModelTokenCostProfile identifier absent from the four nested roots.",
+      "Datasets proof_context remains ipfs-datasets.proof-context.v0.1 without ModelTokenCostProfile.",
+      "Datasets, accelerator, and kit origin/main trees mismatch versus admitted planning trees, with origin/main still an ancestor.",
+      "Sealed PATH, Python 3.12.3, git 2.43.0, non-writable toolchain directories, PYTHONNOUSERSITE CalibratedTokenEstimator import, and json.tool parse of this receipt.",
+      "Existing positive and negative test source declarations were directly inspected.",
+      "Dispatch policy_id, policy_revision, repository_id, and objective revision CID from the current implementation packet."
+    ],
+    "estimated": [
+      "calibrated_utf8 / estimate_context_tokens UTF-8/4 values, including estimate('abcdefgh')=2, are estimated token counts and are never used as measured tokenizer results."
+    ],
+    "simulated": [
+      "FrozenDecisionIdentity tokenizer_revision=sha256:frozen-tokenizer is a benchmark fixture, not live tokenizer identity."
+    ],
+    "unavailable": [
+      "No new registered ModelTokenCostProfile@1 schema exists; the name is a receipt-bound composition of existing accelerator surfaces.",
+      "Frequency, dictionary/grammar overhead, semantic-anchor value, expansion probability, and ambiguity remain absent closed-profile fields.",
+      "No executed provider/model/tokenizer revision; configuration is not execution evidence.",
+      "No emitted PCSM current-tree source-map artifact or source-map CID.",
+      "Required proof_context pytest suite is not runnable in the sealed validation HOME; operator-HOME user-site success is excluded.",
+      "Sealed import of TOKEN_ESTIMATOR_VERSION via context_pack.py requires anyio, which is absent from PYTHONNOUSERSITE.",
+      "No immutable receipt CID could be issued because ipfs was absent from the sealed PATH.",
+      "No external prover execution is claimed or required for a read-only selection.",
+      "canonical_task_cid, accepted_plan_root_cid, and dependency_task_cid were absent from the current implementation dispatch packet."
+    ]
+  },
+  "evidence_summary": {
+    "measured": {
+      "count": 12,
+      "description": "Current-head forest identities, source digests, selected tokenizer/budget surfaces, identifier absences, sealed-environment facts, and receipt-level positive/negative checks."
+    },
+    "estimated": {
+      "count": 1,
+      "description": "UTF-8/4 calibrated_utf8 and estimate_context_tokens values, recorded as estimated and never as measured token counts."
+    },
+    "simulated": {
+      "count": 1,
+      "description": "FrozenDecisionIdentity tokenizer_revision fixture, not live execution evidence."
+    },
+    "unavailable": {
+      "count": 9,
+      "description": "Registered ModelTokenCostProfile schema string, closed alias-optimization fields, executed tokenizer revision, source-map artifact, sealed pytest execution, sealed TOKEN_ESTIMATOR_VERSION import, optional provers, receipt CID issuance, and dispatch packet task/plan CIDs absent from this attempt."
+    }
+  },
+  "limitations": [
+    "This artifact is a receipt-bound ModelTokenCostProfile selection, not a semantic proof, promotion decision, source-link receipt, tokenizer-cost profiler, alias dictionary, or projection builder.",
+    "ModelTokenCostProfile@1 is a composition of existing accelerator tokenizer/budget surfaces. It is not minted as a second schema and is not present as an identifier in nested source.",
+    "Character counts and UTF-8/4 heuristics never stand in for measured token counts.",
+    "Frequency, dictionary/grammar overhead, semantic-anchor value, expansion probability, and ambiguity are named plan dimensions that remain unavailable at this head.",
+    "All source digests bind the exact tree above; freshness must be rechecked before any follow-on reuse.",
+    "The uncommitted receipt itself is not claimed as part of the pre-write sealed outer tree.",
+    "Independent supervisor admission remains required; worker completion is insufficient.",
+    "Declared output is the receipt only; proof_context/ was not mutated because a wrapper would mix datasets semantic authority with accelerate tokenizer/budget authority and is outside this task's admitted edit set.",
+    "Required proof_context tests validate ContextPack/provider behavior, not this ModelTokenCostProfile selection."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this receipt and invalidate consumers of this ModelTokenCostProfile selection; do not alter the inventoried source forest, protected policy documents, or unrelated source bytes, and do not reuse the receipt after its tree binding becomes stale."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "deterministic_identity_checks": true,
+    "schema_version_bound": true,
+    "contract_blob_bound": true,
+    "cid_bound_where_available": false,
+    "cid_unavailability_explicit": true,
+    "positive_and_negative_tests_recorded": true,
+    "evidence_classes_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "existing_authority_selected": true,
+    "model_token_cost_profile_selected": true,
+    "character_counts_never_stand_in_for_measured_token_counts": true,
+    "local_alias_is_not_canonical_identity": true,
+    "python_v1_only": true,
+    "promotion_status": "non_promoted_unmeasured"
+  }
+}
