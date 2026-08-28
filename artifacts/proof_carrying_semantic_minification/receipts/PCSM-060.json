@@ -49,9 +49,13 @@
         "authority_role": "bounded Python abstract interpretation, canonical identity, and verification API adapter"
       },
       "external/ipfs_accelerate": {
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149",
         "authority_role": "consumer and scheduler boundary only; not abstract-analysis authority"
       },
       "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
         "authority_role": "exact-byte/CID storage only; not Python semantic-analysis or proof authority"
       }
     },
