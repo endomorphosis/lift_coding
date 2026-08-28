@@ -1,0 +1,261 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-051",
+  "title": "Implement source-map resolver",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G500",
+  "objective_id": "PCSM-051",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-051@current-head-python-source-map-resolver-capability-gap-v1",
+  "observed_at": "2026-08-28T06:21:20Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 source-map resolver capability assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-051.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-051.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "No PCSM SourceMapResolver@1, SourceLinkReceipt@1, aggregate current-forest source-map CID, or resolver-specific test module exists in the exact admitted source forest. The nearest reusable components are PythonASTExtractor._SourceMap, which deterministically maps one supplied Python source byte string to AST spans bound to its source CID, and proof_context.build_context_pack, which carries caller-supplied source CIDs and rejects stale/unavailable inputs. Neither resolves alias to canonical CID to an exact current-tree file/node/span map, nor emits a SourceLinkReceipt. The implementation directory is outside this dispatch's exact write authority, so this receipt records the typed unavailable disposition rather than introducing an unreviewed competing resolver.",
+    "non_promotion_reason": "The required proof_context suite passes only in the provider environment, which is simulated evidence. In the authoritative sealed Python 3.12 environment pytest aborts before collection because its explicitly configured anyio pytest plugin is unavailable; no sealed passing result is claimed."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish resolver behavior, current-tree identity, schema binding, or test success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize mutation or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "893afdf845c3f112d98fd50db8a8fc0a8da25f01",
+    "outer_tree": "b78513b97eb069849f5e6240e93ee3bbd5558c5c",
+    "dispatch_tree_id": "893afdf845c3f112d98fd50db8a8fc0a8da25f01",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract only; no source-map resolver selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "consumer and scheduler boundary only; no source-map resolver selected",
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "Python AST/source-span and source-CID component authority only; no forest-wide PCSM resolver selected",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage only; no source-map resolver selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted superproject gitlink with nested HEAD and HEAD^{tree}; checked outer and datasets porcelain before receipt creation; and verified configured datasets origin/main is an ancestor of the admitted datasets HEAD.",
+      "result": "The outer head/tree and all four admitted gitlinks agree, the checked outer and datasets worktrees were clean before receipt creation, and datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 is an ancestor of datasets HEAD.",
+      "invalidates_on": "Any change to the bound outer commit/tree, gitlink/head/tree, scheduler digest, listed source digest, source-search result, source-map contract, or required-test result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree PCSM SourceLinkReceipt, SourceMapResolver@1 contract, or canonical aggregate source-map CID has been emitted. AST spans, source CIDs, Git blobs, and SHA-256 values do not substitute for that absent resolver output."
+    }
+  },
+  "required_package_assessment": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_package": "SourceMapResolver@1",
+    "required_contract": "SourceLinkReceipt@1 for alias-to-canonical-CID-to-exact-current-source-map resolution",
+    "required_bindings": [
+      "explicit resolver schema and version",
+      "canonical CodeIR or source identity CID rather than an alias",
+      "base current commit and tree identity",
+      "exact current file CID and normalized repository-relative path",
+      "exact resolved node and mutable SourceSpan",
+      "deterministic result and aggregate source-map identity",
+      "stale, ambiguity, missing-target, overlap, and path-escape rejection"
+    ],
+    "source_search": {
+      "kind": "measured",
+      "method": "rg -n --glob '*.py' --glob '*.json' --glob '*.md' 'SourceLinkReceipt|SourceMapResolver|source_map_resolver' Mcp-Plus-Plus external/ipfs_accelerate external/ipfs_datasets external/ipfs_kit, followed by package-local source-map/resolver search under external/ipfs_datasets/ipfs_datasets_py/proof_context and external/ipfs_datasets/tests/proof_context",
+      "result": "No PCSM SourceLinkReceipt, SourceMapResolver, or source_map_resolver identifier was found in the admitted source forest or the task-owned proof_context package/tests.",
+      "meaning": "The named resolver and its required typed contract/test surface are absent from the exact current Python source forest."
+    },
+    "disposition": "The package cannot truthfully be claimed implemented, deterministic as a forest resolver, schema/version/CID-bound as a source-link receipt, or covered by resolver-specific positive and negative tests at this head. No automatic mutation, proof acceptance, validation acceptance, promotion, or task completion is authorized."
+  },
+  "nearest_existing_components": {
+    "kind": "measured",
+    "python_ast_source_span_component": {
+      "authority": "ipfs_datasets_py.logic.software_contracts.python_frontend.PythonASTExtractor and _SourceMap",
+      "schemas": [
+        "ipfs-datasets.software-contracts.ast-ir@1.0.0",
+        "ipfs-datasets.software-contracts.frontend-capability@1.0.0",
+        "ipfs-datasets.software-contracts.semantic-source-span@1"
+      ],
+      "frontend": "cpython-ast@1.2.1",
+      "identity_binding": "ASTRecord binds source provenance CID, path, repository_id, revision, source spans, frontend, and schema metadata. Source spans are half-open UTF-8 byte intervals with one-based lines and zero-based columns.",
+      "deterministic_properties": [
+        "absolute byte offsets derive from UTF-8 source lines and CPython AST byte columns",
+        "canonical ASTRecord serialization and CID verification are strict",
+        "the examined source is parsed and never imported or executed"
+      ],
+      "rejection_reason": "It maps a single caller-supplied source byte string. It does not resolve aliases, enumerate/bind the current source forest, verify current file CIDs against a base tree, select a mutable node/span, or emit SourceLinkReceipt@1."
+    },
+    "proof_context_component": {
+      "authority": "ipfs_datasets_py.proof_context.context_pack.build_context_pack",
+      "schema": "ipfs-datasets.proof-context.v0.1",
+      "interface": "DatasetsContextPackAuthority@0.1",
+      "properties": [
+        "derives a deterministic ContextPack CID from caller-provided source CIDs and tree OIDs",
+        "rejects unavailable inputs, stale freshness, and opaque content without an exact scanned tree"
+      ],
+      "rejection_reason": "It carries three caller-supplied source CIDs for context sufficiency. It neither produces a source map nor resolves a canonical identity to current file/node/span, and it is not SourceLinkReceipt@1."
+    },
+    "minimum_delta_reason": "These components are reused only as existing source-CID/span and fail-closed freshness components. Constructing a new resolver around them would create the missing PCSM semantic authority outside the exact receipt-only edit boundary."
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/python_frontend.py",
+      "git_blob": "7f1c1c1d629ed34e2e67251ec6a9820fb7b87817",
+      "sha256": "baf1c1ec5e6a5f83a0eb640b988850264d35311cdcedc87d22cff610d05308df",
+      "role": "PythonASTExtractor/_SourceMap exact UTF-8 AST-span component; not a forest resolver"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/ast_ir.py",
+      "git_blob": "80a3ad611faec496b04559f8b54eb768841ecd90",
+      "sha256": "1461edb7c39f2adc89a70e54decfa291ccceafc50ed23011fbdeea5acb4c8b91",
+      "role": "strict ASTRecord, source provenance, canonical serialization, and CID verification component"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "git_blob": "14458fb99ea57c19652398ee479d678ae3fbe507",
+      "sha256": "89e1fbc694a67f751de3a62d8206442e4904722c20f81827ae0a96a0fbee33a3",
+      "role": "strict CIDv1 raw/canonical-DAG-JSON profile component"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+      "git_blob": "866a1767c45cd17612a8019c74dfe97983e19cbc",
+      "sha256": "e5373b143543c7e25acf4ea9c88260d79911b3bc54c23e24974c4df2cffb40ed",
+      "role": "deterministic source-CID-carrying ContextPack and stale/unavailable/opaque fail-closed component; not a source map"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py",
+      "git_blob": "fc44652cacee42e33c580510ba7a75d11993e8e7",
+      "sha256": "a87147cb360f9ce81abeefc2faf48ea63464a99ea6bfd50b6e92db55612287f2",
+      "role": "positive/negative test source for the non-equivalent AST/source-span component"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+      "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+      "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+      "role": "positive/negative test source for deterministic ContextPack identity and its fail-closed input states"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "nearest_component_positive_and_negative_coverage": {
+      "kind": "measured",
+      "ast_source_span_component": {
+        "positive_coverage": [
+          "deterministic lexical extraction with source-CID provenance",
+          "exact UTF-8 byte spans across Unicode and CRLF",
+          "source is parsed without import or execution"
+        ],
+        "negative_coverage": [
+          "invalid encodings, syntax errors, non-text inputs, invalid limits, and excessive AST depth reject or report fail-closed"
+        ]
+      },
+      "context_pack_component": {
+        "positive_coverage": [
+          "identical inputs yield an identical ContextPack CID"
+        ],
+        "negative_coverage": [
+          "stale, unavailable, and opaque-without-exact-scanned-tree inputs fail closed"
+        ]
+      },
+      "non_equivalence": "These tests do not create positive or negative coverage for SourceMapResolver@1 because the resolver, SourceLinkReceipt@1, and associated test module are absent."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "command_executed": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "environment": "Provider Python 3.12.3 with provider-installed pytest plugins and dependencies.",
+      "result": "519 passed in 78.45s",
+      "scope_limit": "The suite validates proof_context behavior, including ContextPack source-CID/freshness tests. It does not establish the absent PCSM SourceMapResolver@1."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited 1 before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "package_specific_tests": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No SourceMapResolver@1 implementation, SourceLinkReceipt@1 schema, or resolver-specific positive/negative test module exists in the bound current source forest. Adjacent component tests are not substituted."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-051 resolver proof obligation or approved digest-bound prover deployment is present."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities, clean/freshness and origin-ancestry checks, scheduler and source SHA-256 values, Git blobs, source-search absence, component schemas/bindings, component test-source coverage, and the sealed pytest dependency failure.",
+    "estimated": "None. No estimate is used to establish resolver behavior, identity, or validation.",
+    "simulated": "Provider required proof_context validation: 519 passed in 78.45s. It is not substituted for sealed validation or resolver-specific coverage.",
+    "unavailable": "SourceMapResolver@1; SourceLinkReceipt@1; aggregate PCSM source-map CID; canonical CodeIR-to-current-file/node/span resolution; resolver-specific positive and negative tests; authoritative sealed required-suite result; formal-prover result; and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it assesses and selects existing components without mutating proof_context or creating a competing resolver authority.",
+    "PythonASTExtractor spans bind only the exact source bytes supplied to it. They do not bind an alias to a canonical PCSM identity or establish that a file/node/span remains current in a source forest.",
+    "ContextPack source CIDs and freshness flags are caller-supplied context sufficiency inputs, not an aggregate source map or source-link receipt.",
+    "The authoritative sealed validation environment lacks anyio, so this receipt cannot promote completion despite the provider-side suite passing.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter protected planning documents, existing source-map components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, source-search result, component schema/version, CID profile, or validation-environment capability changes."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalents_reused_first": true,
+    "typed_unavailable_disposition_recorded": true,
+    "evidence_classes_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "provider_required_validation_passed": true,
+    "authoritative_sealed_validation_available": false,
+    "package_specific_positive_and_negative_tests_available": false,
+    "required_package_implemented": false,
+    "promotion_status": "non_promoted_unavailable"
+  }
+}
