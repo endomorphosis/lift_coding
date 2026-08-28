@@ -172,6 +172,10 @@ DATABASE_WATCHDOG_ACTIVITY_TRANSITION_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-database-watchdog-activity-transition@1"
 )
+DATABASE_LIFECYCLE_IDENTITY_TRANSITION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-database-lifecycle-identity-transition@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -304,6 +308,13 @@ DATABASE_WATCHDOG_ACTIVITY_TRANSITION_PATH: Final = (
     / "handoff"
     / "supervisor-restart-database-watchdog-activity-transition.json"
 )
+DATABASE_LIFECYCLE_IDENTITY_TRANSITION_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-database-lifecycle-identity-transition.json"
+)
 STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT: Final = (
     "8b8be83c6d9c578c4cec450092e140b929ce12e9"
 )
@@ -342,6 +353,27 @@ DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_HEAD: Final = (
 )
 DATABASE_WATCHDOG_ACTIVITY_CHECKPOINT_TREE: Final = (
     "751fc8d37e7bb7746082a39f2623b3d2291b5f38"
+)
+DATABASE_LIFECYCLE_IDENTITY_TRANSITION_BASE_COMMIT: Final = (
+    "PENDING_DATABASE_LIFECYCLE_IDENTITY_TRANSITION_BASE_COMMIT"
+)
+DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD: Final = (
+    "3f7d99541e8a08f89452765dfad1bb2810bc44ff"
+)
+DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_TREE: Final = (
+    "21326b15fe1fdf24f1f93009e162694cc84c6c07"
+)
+DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_HEAD: Final = (
+    "25449e8915d9a880c45a342aa627d73005e1ee75"
+)
+DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_TREE: Final = (
+    "7c0504b9f475100f180db57a0ef9f96b66f1d40b"
+)
+DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD: Final = (
+    "e9e37e69e0e4ca9728f3661ef96305a3f2a8822e"
+)
+DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_TREE: Final = (
+    "e2bc16eac7ee8124af71af18d495da89415e815a"
 )
 CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
     "db9304284cfe857f08377ef756b4896192dd5111"
@@ -2471,7 +2503,6 @@ def _verified_database_watchdog_activity_operator_descendant(
         or sealed_source.get("operator_identity")
         != _identity(expected_operator)
         or sealed_operator != expected_operator
-        or current_operator != expected_operator
     ):
         raise OperatorError(
             "database-watchdog activity operator delta changed"
@@ -2525,6 +2556,266 @@ def _verified_database_watchdog_activity_operator_descendant(
         artifact_commit,
         current_head,
         field="database-watchdog activity artifact-to-current lineage",
+    )
+    database_lifecycle_identity_transition: dict[str, Any] = {}
+    if current_operator != expected_operator:
+        database_lifecycle_identity_transition = (
+            _verified_database_lifecycle_identity_operator_descendant(
+                current_operator=current_operator,
+                current_head=current_head,
+                operator_path=operator_path,
+            )
+        )
+    return {
+        "receipt": payload,
+        "receipt_bytes": receipt_bytes,
+        "artifact_commit": artifact_commit,
+        "base_commit": base_commit,
+        "base_operator": base_operator,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "expected_operator": expected_operator,
+        "database_lifecycle_identity_transition": (
+            database_lifecycle_identity_transition
+        ),
+    }
+
+
+def _database_lifecycle_identity_transition_payload(
+    *,
+    current_head: str,
+) -> tuple[bytes, dict[str, Any]]:
+    """Load the exact add-only database-lifecycle identity receipt."""
+
+    receipt_bytes = _tracked_bytes(
+        DATABASE_LIFECYCLE_IDENTITY_TRANSITION_PATH,
+        head=current_head,
+    )
+    payload = _json_mapping_bytes(
+        receipt_bytes,
+        field="database-lifecycle identity transition receipt",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "prior_checkpoint",
+        "repair_base",
+        "sealed_source",
+        "watchdog_identity_contract",
+        "completed_rescue_cleanup_identity_contract",
+        "validations",
+        "historical_receipts_preserved",
+        "database_authority_preserved",
+        "task_state_mutation",
+        "manual_database_mutation",
+        "manual_worktree_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema")
+        != DATABASE_LIFECYCLE_IDENTITY_TRANSITION_SCHEMA
+        or payload.get("reason")
+        != "bind_distinct_database_and_portal_lifecycle_identities"
+        or not isinstance(payload.get("prior_checkpoint"), Mapping)
+        or not isinstance(payload.get("repair_base"), Mapping)
+        or not isinstance(payload.get("sealed_source"), Mapping)
+        or not isinstance(payload.get("watchdog_identity_contract"), Mapping)
+        or not isinstance(
+            payload.get("completed_rescue_cleanup_identity_contract"), Mapping
+        )
+        or not isinstance(payload.get("validations"), list)
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get("database_authority_preserved") is not True
+        or payload.get("task_state_mutation") is not False
+        or payload.get("manual_database_mutation") is not False
+        or payload.get("manual_worktree_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError(
+            "database-lifecycle identity transition seal is invalid"
+        )
+    return receipt_bytes, payload
+
+
+def _verified_database_lifecycle_identity_operator_descendant(
+    *,
+    current_operator: bytes,
+    current_head: str,
+    operator_path: Path,
+) -> dict[str, Any]:
+    """Admit only the exact database-lifecycle identity B/S/A transition."""
+
+    base_commit = DATABASE_LIFECYCLE_IDENTITY_TRANSITION_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError(
+            "database-lifecycle identity transition base is unsealed"
+        )
+    receipt_bytes, payload = _database_lifecycle_identity_transition_payload(
+        current_head=current_head
+    )
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    if (
+        checkpoint.get("source_head")
+        != DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit")
+        != "7ce3772ae606c6f8a15dc25a434dd97df929cfde"
+        or checkpoint.get("database_watchdog_activity_transition_receipt_id")
+        != "sha256:8c1b0ed9fbc29f3116ac670405019df3d3ef1f51eb144f5f6e9dca64e5e873f0"
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD
+        or sealed_source.get("parent") != base_commit
+    ):
+        raise OperatorError(
+            "database-lifecycle identity operator checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+            field="database-lifecycle identity checkpoint",
+        )
+        != DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_TREE
+        or _git_commit_tree(
+            base_commit,
+            field="database-lifecycle identity repair base",
+        )
+        != repair_base.get("repository_tree_id")
+    ):
+        raise OperatorError(
+            "database-lifecycle identity operator tree binding changed"
+        )
+
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        relative_operator,
+        "test/test_pcsm_database_lifecycle_identity_transition.py",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD}..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="database-lifecycle identity base operator",
+    )
+    pending_base = (
+        "PENDING_" + "DATABASE_LIFECYCLE_IDENTITY_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="database-lifecycle identity sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="database-lifecycle identity sealed operator",
+    )
+    if (
+        base_parents != [DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD]
+        or base_paths != expected_base_paths
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or base_operator.count(pending_base) != 1
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_parents != [base_commit]
+        or sealed_paths != (relative_operator,)
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+        or sealed_source.get("operator_identity")
+        != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or current_operator != expected_operator
+    ):
+        raise OperatorError(
+            "database-lifecycle identity operator delta changed"
+        )
+
+    receipt_relative = DATABASE_LIFECYCLE_IDENTITY_TRANSITION_PATH.relative_to(
+        ROOT
+    ).as_posix()
+    additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if len(additions) != 1:
+        raise OperatorError(
+            "database-lifecycle identity receipt introduction is not exact"
+        )
+    artifact_commit = additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != (receipt_relative,)
+        or _git_blob_at(
+            head=artifact_commit,
+            path=DATABASE_LIFECYCLE_IDENTITY_TRANSITION_PATH,
+            field="introduced database-lifecycle identity receipt",
+        )
+        != receipt_bytes
+    ):
+        raise OperatorError(
+            "database-lifecycle identity artifact commit changed"
+        )
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field="database-lifecycle identity artifact-to-current lineage",
     )
     return {
         "receipt": payload,
@@ -5074,7 +5365,7 @@ def _verified_database_watchdog_activity_transition(
     current_gitlink = str(
         _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
     ).strip().split()
-    if (
+    exact_database_watchdog_source = bool(
         current_config_bytes != base_config_bytes
         or _canonical_bytes(current_config) != _canonical_bytes(base_config)
         or current_operator != operator_gate["expected_operator"]
@@ -5100,9 +5391,23 @@ def _verified_database_watchdog_activity_transition(
         or len(current_gitlink) < 3
         or current_gitlink[:2] != ["160000", "commit"]
         or current_gitlink[2] != DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD
-    ):
-        raise OperatorError(
-            "database-watchdog activity live source changed"
+    ) is False
+    database_lifecycle_identity_transition: dict[str, Any] = {}
+    if not exact_database_watchdog_source:
+        database_lifecycle_identity_transition = (
+            _verified_database_lifecycle_identity_transition(
+                board=board,
+                current_head=current_head,
+                current_config=current_config,
+                current_source_identities=current_source_identities,
+                prior_artifact_commit=operator_gate["artifact_commit"],
+                prior_transition_receipt_id=str(
+                    payload.get("receipt_id") or ""
+                ),
+                prior_config_bytes=base_config_bytes,
+                prior_operator_bytes=operator_gate["expected_operator"],
+                prior_validator_bytes=base_validator,
+            )
         )
     for item in expected_checkpoint_files:
         path = ROOT / item["path"]
@@ -5133,6 +5438,772 @@ def _verified_database_watchdog_activity_transition(
         "sealed_source_tree": operator_gate["sealed_source_tree"],
         "accelerator_head": DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD,
         "accelerator_tree": DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_TREE,
+        "database_lifecycle_identity_transition": (
+            database_lifecycle_identity_transition
+        ),
+    }
+
+
+def _verified_database_lifecycle_identity_transition(
+    *,
+    board: Any,
+    current_head: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    prior_artifact_commit: str,
+    prior_transition_receipt_id: str,
+    prior_config_bytes: bytes,
+    prior_operator_bytes: bytes,
+    prior_validator_bytes: bytes,
+) -> dict[str, Any]:
+    """Admit one exact repair for the two lifecycle identity domains."""
+
+    operator_path = Path(__file__).resolve()
+    operator_gate = _verified_database_lifecycle_identity_operator_descendant(
+        current_operator=_tracked_bytes(operator_path, head=current_head),
+        current_head=current_head,
+        operator_path=operator_path,
+    )
+    payload = operator_gate["receipt"]
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    watchdog_contract = payload["watchdog_identity_contract"]
+    cleanup_contract = payload["completed_rescue_cleanup_identity_contract"]
+    validations = payload["validations"]
+
+    checkpoint_fields = {
+        "source_head",
+        "repository_tree_id",
+        "prior_artifact_commit",
+        "database_watchdog_activity_transition_receipt_id",
+        "changed_receipts",
+    }
+    expected_checkpoint_receipts = [
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-022.json"
+            ),
+            "bytes_id": (
+                "sha256:a5212cc3c155b4e73edb7da41271e061f20665786196c2721"
+                "7aa1a38a51cb001"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-024.json"
+            ),
+            "bytes_id": (
+                "sha256:72b9869c58612b1a6a014f785a70286a24a418745cb440da7"
+                "646abf4516c8d32"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-025.json"
+            ),
+            "bytes_id": (
+                "sha256:fa1cd495342b314476ce8f01025a49c5bbd57af09f64abc48"
+                "1f5135316ca25b8"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-041.json"
+            ),
+            "bytes_id": (
+                "sha256:769c976924565b9faeb13c962d405da360b37832fc1435be4"
+                "8dc7ad7cb98d3b6"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-042.json"
+            ),
+            "bytes_id": (
+                "sha256:dc5c2e351aa436c7ee214b6045c15f8a386b03d5026bf195e"
+                "04ceaf86eee8eab"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-050.json"
+            ),
+            "bytes_id": (
+                "sha256:fae4dae308bcf1e5dfb5176c56e32734cc1ffb1524b903af2"
+                "713f3495d773477"
+            ),
+        },
+    ]
+    if (
+        set(checkpoint) != checkpoint_fields
+        or checkpoint.get("source_head")
+        != DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit") != prior_artifact_commit
+        or prior_artifact_commit
+        != "7ce3772ae606c6f8a15dc25a434dd97df929cfde"
+        or checkpoint.get("database_watchdog_activity_transition_receipt_id")
+        != prior_transition_receipt_id
+        or prior_transition_receipt_id
+        != "sha256:8c1b0ed9fbc29f3116ac670405019df3d3ef1f51eb144f5f6e9dca64e5e873f0"
+        or checkpoint.get("changed_receipts")
+        != expected_checkpoint_receipts
+    ):
+        raise OperatorError(
+            "database-lifecycle identity prior checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+            field="database-lifecycle identity checkpoint",
+        )
+        != DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_TREE
+    ):
+        raise OperatorError(
+            "database-lifecycle identity checkpoint tree changed"
+        )
+    _git_is_ancestor(
+        prior_artifact_commit,
+        DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+        field="watchdog artifact-to-lifecycle checkpoint lineage",
+    )
+    expected_checkpoint_paths = tuple(
+        item["path"] for item in expected_checkpoint_receipts
+    )
+    checkpoint_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{prior_artifact_commit}.."
+                f"{DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if checkpoint_paths != expected_checkpoint_paths:
+        raise OperatorError(
+            "database-lifecycle identity checkpoint delta changed"
+        )
+    for item in expected_checkpoint_receipts:
+        path = ROOT / item["path"]
+        checkpoint_bytes = _git_blob_at(
+            head=DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+            path=path,
+            field=f"database-lifecycle checkpoint receipt {item['path']}",
+        )
+        if _identity(checkpoint_bytes) != item["bytes_id"]:
+            raise OperatorError(
+                "database-lifecycle identity checkpoint receipt changed"
+            )
+
+    validator_path = board.path(board.validator_path)
+    checkpoint_config = _git_blob_at(
+        head=DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+        path=board.config_path,
+        field="database-lifecycle checkpoint config",
+    )
+    checkpoint_operator = _git_blob_at(
+        head=DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+        path=operator_path,
+        field="database-lifecycle checkpoint operator",
+    )
+    checkpoint_validator = _git_blob_at(
+        head=DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+        path=validator_path,
+        field="database-lifecycle checkpoint validator",
+    )
+    if (
+        checkpoint_config != prior_config_bytes
+        or checkpoint_operator != prior_operator_bytes
+        or checkpoint_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "database-lifecycle identity checkpoint authority changed"
+        )
+
+    base_commit = str(operator_gate["base_commit"])
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "test/test_pcsm_database_lifecycle_identity_transition.py",
+    )
+    expected_nested_paths = (
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "database_portal_bridge.py",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_supervisor.py",
+        "test/api/test_agent_supervisor_reconciliation_auto_unblock.py",
+        "test/api/"
+        "test_implementation_supervisor_control_plane_pool_lease.py",
+    )
+    expected_nested_commits = [
+        {
+            "purpose": "watchdog_two_identity_corroboration",
+            "source_head": DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_HEAD,
+            "repository_tree_id": DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_TREE,
+            "parent": DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "implementation_supervisor.py",
+                "test/api/"
+                "test_implementation_supervisor_control_plane_pool_lease.py",
+            ],
+        },
+        {
+            "purpose": "completed_rescue_cleanup_portal_identity",
+            "source_head": DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD,
+            "repository_tree_id": DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_TREE,
+            "parent": DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "database_portal_bridge.py",
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "implementation_supervisor.py",
+                "test/api/"
+                "test_agent_supervisor_reconciliation_auto_unblock.py",
+            ],
+        },
+    ]
+    repair_base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "config_identity",
+        "validator_identity",
+        "accelerator_head",
+        "accelerator_tree",
+        "changed_paths",
+        "nested_changed_paths",
+        "nested_commits",
+    }
+    base_config_bytes = _git_blob_at(
+        head=base_commit,
+        path=board.config_path,
+        field="database-lifecycle identity base config",
+    )
+    base_config = _json_mapping_bytes(
+        base_config_bytes,
+        field="database-lifecycle identity base config",
+    )
+    base_validator = _git_blob_at(
+        head=base_commit,
+        path=validator_path,
+        field="database-lifecycle identity base validator",
+    )
+    if (
+        set(repair_base) != repair_base_fields
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD
+        or repair_base.get("operator_identity")
+        != _identity(operator_gate["base_operator"])
+        or repair_base.get("config_identity") != _identity(base_config_bytes)
+        or repair_base.get("validator_identity") != _identity(base_validator)
+        or repair_base.get("accelerator_head")
+        != DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD
+        or repair_base.get("accelerator_tree")
+        != DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_TREE
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or tuple(repair_base.get("nested_changed_paths") or ())
+        != expected_nested_paths
+        or repair_base.get("nested_commits") != expected_nested_commits
+        or base_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "database-lifecycle identity repair base changed"
+        )
+
+    prior_config = _json_mapping_bytes(
+        prior_config_bytes,
+        field="database-lifecycle identity prior config",
+    )
+    expected_config = json.loads(_canonical_bytes(prior_config))
+    expected_binding = expected_config.get("source_binding")
+    if not isinstance(expected_binding, dict):
+        raise OperatorError(
+            "database-lifecycle identity source binding is absent"
+        )
+    expected_binding["ipfs_accelerate_planning_revision"] = (
+        DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD
+    )
+    expected_binding["ipfs_accelerate_planning_tree"] = (
+        DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_TREE
+    )
+    if base_config != expected_config:
+        raise OperatorError(
+            "database-lifecycle identity config delta changed"
+        )
+
+    base_gitlink = str(
+        _git("ls-tree", base_commit, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        len(base_gitlink) < 3
+        or base_gitlink[:2] != ["160000", "commit"]
+        or base_gitlink[2] != DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "database-lifecycle identity accelerator gitlink changed"
+        )
+    accelerator_repository = ROOT / "external/ipfs_accelerate"
+    if (
+        _git_commit_tree(
+            DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD,
+            field="database-lifecycle identity accelerator",
+            repository=accelerator_repository,
+        )
+        != DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_TREE
+    ):
+        raise OperatorError(
+            "database-lifecycle identity accelerator tree changed"
+        )
+    watchdog_tree = _git_commit_tree(
+        DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_HEAD,
+        field="database-lifecycle watchdog identity accelerator",
+        repository=accelerator_repository,
+    )
+    watchdog_parents = str(
+        _git_in_repository(
+            accelerator_repository,
+            "show",
+            "-s",
+            "--format=%P",
+            DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_HEAD,
+        )
+    ).strip().split()
+    watchdog_paths = tuple(
+        line
+        for line in str(
+            _git_in_repository(
+                accelerator_repository,
+                "diff",
+                "--name-only",
+                f"{DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD}.."
+                f"{DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    cleanup_parents = str(
+        _git_in_repository(
+            accelerator_repository,
+            "show",
+            "-s",
+            "--format=%P",
+            DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD,
+        )
+    ).strip().split()
+    cleanup_paths = tuple(
+        line
+        for line in str(
+            _git_in_repository(
+                accelerator_repository,
+                "diff",
+                "--name-only",
+                f"{DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_HEAD}.."
+                f"{DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    nested_paths = tuple(
+        line
+        for line in str(
+            _git_in_repository(
+                accelerator_repository,
+                "diff",
+                "--name-only",
+                f"{DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD}.."
+                f"{DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if (
+        watchdog_tree != DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_TREE
+        or watchdog_parents != [DATABASE_WATCHDOG_ACTIVITY_ACCELERATOR_HEAD]
+        or watchdog_paths
+        != tuple(expected_nested_commits[0]["changed_paths"])
+        or cleanup_parents != [DATABASE_LIFECYCLE_IDENTITY_WATCHDOG_HEAD]
+        or cleanup_paths != tuple(expected_nested_commits[1]["changed_paths"])
+        or nested_paths != expected_nested_paths
+    ):
+        raise OperatorError(
+            "database-lifecycle identity nested source delta changed"
+        )
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+    }
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("source_head")
+        != operator_gate["sealed_source_head"]
+        or sealed_source.get("repository_tree_id")
+        != operator_gate["sealed_source_tree"]
+        or sealed_source.get("parent") != base_commit
+        or sealed_source.get("operator_identity")
+        != _identity(operator_gate["expected_operator"])
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (
+            "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        )
+    ):
+        raise OperatorError(
+            "database-lifecycle identity sealed source changed"
+        )
+
+    expected_watchdog_contract = {
+        "database_projection_identity_domain": (
+            "database_task_projection_binding"
+        ),
+        "portal_lifecycle_identity_domain": (
+            "task_projection_allowed_paths_portal_identity"
+        ),
+        "cross_domain_task_cid_equality_required": False,
+        "mutable_projection_field_excluded_from_immutable_digest": "status",
+        "required_exact_bindings": [
+            "managed_child_process_birth",
+            "task_alias",
+            "database_task_cid",
+            "portal_lifecycle_task_cid",
+            "attempt_id",
+            "lifecycle_attempt_number",
+            "claim_id",
+            "lease_id",
+            "worktree_path",
+            "branch",
+            "repository_root",
+            "projection_immutable_digest",
+            "database_attempt_binding_id",
+            "portal_identity_derivation",
+        ],
+        "decision_on_exact_live_successor": (
+            "keep_running_before_supervisor_maintenance"
+        ),
+        "missing_ambiguous_or_tampered_disposition": "fail_closed",
+        "daemon_recycled": False,
+        "attempt_budget_consumed": False,
+        "provider_invocation_consumed": False,
+    }
+    expected_cleanup_contract = {
+        "completion_authority": (
+            "database_completed_receipt_and_preparation_receipt"
+        ),
+        "completion_identity_source": (
+            "verified_portal_completion_event_identity"
+        ),
+        "completion_attempt_lookup": (
+            "unique_sibling_lane_attempt_by_completion_receipt_attempt_hash"
+        ),
+        "required_exact_bindings": [
+            "task_alias",
+            "database_task_cid",
+            "task_revision",
+            "attempt_id",
+            "attempt_number",
+            "claim_id",
+            "lease_id",
+            "owner_session_id",
+            "fencing_token",
+            "fence_epoch",
+            "projection_immutable_digest",
+            "database_attempt_binding_id",
+            "portal_identity_derivation",
+            "rescue_branch_portal_fingerprint",
+        ],
+        "rescue_branch_fingerprint_domain": "portal_lifecycle_identity",
+        "mutable_projection_field_excluded_from_immutable_digest": "status",
+        "portal_projection_status_is_cleanup_authority": False,
+        "missing_duplicate_or_tampered_disposition": (
+            "canonical_completion_proof_unavailable"
+        ),
+        "supported_cleanup_only": True,
+        "manual_worktree_mutation": False,
+    }
+    if dict(watchdog_contract) != expected_watchdog_contract:
+        raise OperatorError(
+            "database-lifecycle watchdog identity contract changed"
+        )
+    if dict(cleanup_contract) != expected_cleanup_contract:
+        raise OperatorError(
+            "database-lifecycle cleanup identity contract changed"
+        )
+
+    required_validations = {
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "external/ipfs_accelerate/test/api/"
+                "test_implementation_supervisor_control_plane_pool_lease.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "external/ipfs_accelerate/test/api/"
+                "test_agent_supervisor_reconciliation_auto_unblock.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "external/ipfs_accelerate/test/api/"
+                "test_agent_supervisor_database_portal_bridge.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "external/ipfs_accelerate/test/agent_supervisor",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/test_pcsm_database_lifecycle_identity_transition.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/test_pcsm_blocked_retry_batch_recovery.py",
+                "test/test_pcsm_executor_bootstrap_broker_resilience.py",
+                "test/test_pcsm_stale_worktree_cleanup_transition.py",
+                "test/test_pcsm_validation_path_compatibility_transition.py",
+                "test/test_pcsm_database_watchdog_activity_transition.py",
+                "test/test_pcsm_database_lifecycle_identity_transition.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "scripts/validate_proof_carrying_semantic_minification_board.py",
+                "--check-all",
+            ),
+        ),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    summaries: dict[tuple[str, ...], str] = {}
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError(
+                "database-lifecycle identity validation is malformed"
+            )
+        command = validation.get("command")
+        summary = validation.get("summary")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(summary, str)
+            or not summary
+        ):
+            raise OperatorError(
+                "database-lifecycle identity validation did not pass"
+            )
+        observed = (str(validation.get("cwd") or ""), tuple(command))
+        observed_validations.add(observed)
+        summaries[tuple(command)] = summary
+    focused_watchdog = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_implementation_supervisor_control_plane_pool_lease.py",
+    )
+    focused_cleanup = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_agent_supervisor_reconciliation_auto_unblock.py",
+    )
+    full_portal_bridge = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/"
+        "test_agent_supervisor_database_portal_bridge.py",
+    )
+    declared_nested = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/agent_supervisor",
+    )
+    focused_outer = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_database_lifecycle_identity_transition.py",
+    )
+    outer_transition_suite = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_blocked_retry_batch_recovery.py",
+        "test/test_pcsm_executor_bootstrap_broker_resilience.py",
+        "test/test_pcsm_stale_worktree_cleanup_transition.py",
+        "test/test_pcsm_validation_path_compatibility_transition.py",
+        "test/test_pcsm_database_watchdog_activity_transition.py",
+        "test/test_pcsm_database_lifecycle_identity_transition.py",
+    )
+    board_validation = (
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all",
+    )
+    if (
+        len(validations) != len(required_validations)
+        or observed_validations != required_validations
+        or re.search(r"\b46 passed\b", summaries.get(focused_watchdog, ""))
+        is None
+        or re.search(r"\b23 passed\b", summaries.get(focused_cleanup, ""))
+        is None
+        or re.search(r"\b400 passed\b", summaries.get(full_portal_bridge, ""))
+        is None
+        or re.search(r"\b11 passed\b", summaries.get(declared_nested, ""))
+        is None
+        or re.search(r"\b5 passed\b", summaries.get(focused_outer, ""))
+        is None
+        or re.search(
+            r"\b22 passed\b",
+            summaries.get(outer_transition_suite, ""),
+        )
+        is None
+        or summaries.get(board_validation, "")
+        != "valid board: 70 tasks, 11 goals, 96 packages"
+    ):
+        raise OperatorError(
+            "database-lifecycle identity validations are incomplete"
+        )
+
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    current_operator = _tracked_bytes(operator_path, head=current_head)
+    current_validator = _tracked_bytes(validator_path, head=current_head)
+    transition_test_path = (
+        ROOT / "test/test_pcsm_database_lifecycle_identity_transition.py"
+    )
+    prior_transition_test_path = (
+        ROOT / "test/test_pcsm_database_watchdog_activity_transition.py"
+    )
+    current_gitlink = str(
+        _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        current_config_bytes != base_config_bytes
+        or _canonical_bytes(current_config) != _canonical_bytes(base_config)
+        or current_operator != operator_gate["expected_operator"]
+        or current_validator != base_validator
+        or _tracked_bytes(transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=base_commit,
+            path=transition_test_path,
+            field="database-lifecycle identity focused test",
+        )
+        or _tracked_bytes(prior_transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+            path=prior_transition_test_path,
+            field="prior database-watchdog focused test",
+        )
+        or current_source_identities.get("config")
+        != _identity(base_config_bytes)
+        or current_source_identities.get("operator")
+        != _identity(operator_gate["expected_operator"])
+        or current_source_identities.get("validator")
+        != _identity(base_validator)
+        or len(current_gitlink) < 3
+        or current_gitlink[:2] != ["160000", "commit"]
+        or current_gitlink[2]
+        != DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "database-lifecycle identity live source changed"
+        )
+    for item in expected_checkpoint_receipts:
+        path = ROOT / item["path"]
+        current_bytes = _tracked_bytes(path, head=current_head)
+        if _identity(current_bytes) != item["bytes_id"]:
+            raise OperatorError(
+                "database-lifecycle identity checkpoint evidence changed"
+            )
+    source_paths = _restart_source_paths(board)
+    for name in ("taskboard", "objectives", "plan", "generator"):
+        checkpoint_bytes = _git_blob_at(
+            head=DATABASE_LIFECYCLE_IDENTITY_CHECKPOINT_HEAD,
+            path=source_paths[name],
+            field=f"database-lifecycle checkpoint {name}",
+        )
+        current_bytes = _tracked_bytes(source_paths[name], head=current_head)
+        if (
+            current_bytes != checkpoint_bytes
+            or current_source_identities.get(name) != _identity(current_bytes)
+        ):
+            raise OperatorError(
+                "database-lifecycle identity changed immutable authority"
+            )
+    return {
+        "receipt": payload,
+        "artifact_commit": operator_gate["artifact_commit"],
+        "sealed_source_head": operator_gate["sealed_source_head"],
+        "sealed_source_tree": operator_gate["sealed_source_tree"],
+        "accelerator_head": DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_HEAD,
+        "accelerator_tree": DATABASE_LIFECYCLE_IDENTITY_ACCELERATOR_TREE,
     }
 
 
@@ -5989,6 +7060,24 @@ def _owner_restart_admission(
         if isinstance(database_watchdog_activity_transition_receipt, Mapping)
         else {}
     )
+    database_lifecycle_identity_transition = (
+        database_watchdog_activity_transition.get(
+            "database_lifecycle_identity_transition"
+        )
+    )
+    database_lifecycle_identity_transition = (
+        database_lifecycle_identity_transition
+        if isinstance(database_lifecycle_identity_transition, Mapping)
+        else {}
+    )
+    database_lifecycle_identity_transition_receipt = (
+        database_lifecycle_identity_transition.get("receipt")
+    )
+    database_lifecycle_identity_transition_receipt = (
+        database_lifecycle_identity_transition_receipt
+        if isinstance(database_lifecycle_identity_transition_receipt, Mapping)
+        else {}
+    )
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
         "mode": admission_mode,
@@ -6026,6 +7115,10 @@ def _owner_restart_admission(
         ),
         "database_watchdog_activity_transition_receipt_id": str(
             database_watchdog_activity_transition_receipt.get("receipt_id")
+            or ""
+        ),
+        "database_lifecycle_identity_transition_receipt_id": str(
+            database_lifecycle_identity_transition_receipt.get("receipt_id")
             or ""
         ),
         "current_head_descendant_repair": descendant_repair,
@@ -7748,6 +8841,12 @@ def _owner_restart_receipt(
         "database_watchdog_activity_transition_receipt_id": str(
             admission.get(
                 "database_watchdog_activity_transition_receipt_id"
+            )
+            or ""
+        ),
+        "database_lifecycle_identity_transition_receipt_id": str(
+            admission.get(
+                "database_lifecycle_identity_transition_receipt_id"
             )
             or ""
         ),
