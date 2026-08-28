@@ -64,6 +64,7 @@ OPERATOR_SCHEMA: Final = (
 PROGRAM_ID: Final = "parallel-content-sealing-proof-carrying-tdd-v1"
 TASK_PREFIX: Final = "PCTDD-"
 DEFAULT_MONITOR_SECONDS: Final = 180.0
+MIN_STABLE_HEALTH_SECONDS: Final = 15.0
 MAX_JSON_BYTES: Final = 8 * 1024 * 1024
 QUACK_ENDPOINT_RE: Final = re.compile(
     r"^quack:(?://)?(127(?:\.\d{1,3}){3}|localhost|::1):(\d{1,5})$",
@@ -959,10 +960,16 @@ def _serve_state_owner(config_path: Path) -> dict[str, Any]:
     previous_term = signal.signal(signal.SIGTERM, request_stop)
     try:
         control = server.stop_control_path()
+        service_mutations = getattr(server, "service_mutation_inbox", None)
+        if not callable(service_mutations):
+            raise OperatorError(
+                "Quack owner lacks the reviewed closed mutation-inbox authority"
+            )
         while server.lifecycle.value == "ready" and not stop_requested["value"]:
             if control.is_file():
                 break
-            time.sleep(0.25)
+            processed = int(service_mutations())
+            time.sleep(0.01 if processed else 0.05)
         stopped = server.stop()
     finally:
         signal.signal(signal.SIGINT, previous_int)
@@ -1019,6 +1026,8 @@ def launch(
         raise OperatorError("--monitor-seconds must be positive")
     paths = _runtime_paths(board)
     owner = _start_owner(board, paths, timeout=min(120.0, monitor_seconds))
+    initial_authority = _authenticated_projection(board, paths)
+    initial_completed = int(initial_authority.get("completed_count") or 0)
     token = _read_owner_token(
         _token_path(paths["owner"], board.resolved_database_program().endpoint_secret_handle)
     )
@@ -1037,22 +1046,66 @@ def launch(
 
     deadline = time.monotonic() + monitor_seconds
     last: dict[str, Any] = {}
+    healthy_since: float | None = None
+    healthy_processes: tuple[int, ...] = ()
+    progress_observed = False
     while time.monotonic() < deadline:
         last = status(config_path)
-        if last["operational_ready"] is True:
-            return {
-                "schema": OPERATOR_SCHEMA,
-                "command": "launch",
-                "mode": "real",
-                "launched": True,
-                "monitored": True,
-                "state_owner": owner,
-                "scheduler": result["json"] if result["json"] is not None else {
-                    "stdout": result["stdout"],
-                    "stderr": result["stderr"],
-                },
-                "status": last,
-            }
+        authority = last.get("task_authority")
+        authority = authority if isinstance(authority, Mapping) else {}
+        progress_observed = progress_observed or bool(
+            int(authority.get("in_progress_count") or 0) > 0
+            or int(authority.get("completed_count") or 0) > initial_completed
+            or authority.get("accepted_terminal") is True
+        )
+        supervisor = last.get("supervisor")
+        supervisor = supervisor if isinstance(supervisor, Mapping) else {}
+        lanes = supervisor.get("lanes")
+        lanes = lanes if isinstance(lanes, list) else []
+        process_signature = (
+            int(supervisor.get("master_pid") or 0),
+            *(
+                process_id
+                for lane in lanes
+                if isinstance(lane, Mapping)
+                for process_id in (
+                    int(lane.get("supervisor_pid") or 0),
+                    int(lane.get("daemon_pid") or 0),
+                )
+            ),
+        )
+        now = time.monotonic()
+        if (
+            last["operational_ready"] is True
+            and progress_observed
+            and process_signature
+            and all(process_id > 1 for process_id in process_signature)
+        ):
+            if healthy_processes != process_signature:
+                healthy_processes = process_signature
+                healthy_since = now
+            elif healthy_since is not None and (
+                now - healthy_since >= MIN_STABLE_HEALTH_SECONDS
+            ):
+                return {
+                    "schema": OPERATOR_SCHEMA,
+                    "command": "launch",
+                    "mode": "real",
+                    "launched": True,
+                    "monitored": True,
+                    "stable_health_seconds": now - healthy_since,
+                    "authoritative_progress_observed": True,
+                    "initial_completed_count": initial_completed,
+                    "state_owner": owner,
+                    "scheduler": result["json"] if result["json"] is not None else {
+                        "stdout": result["stdout"],
+                        "stderr": result["stderr"],
+                    },
+                    "status": last,
+                }
+        else:
+            healthy_since = None
+            healthy_processes = ()
         if last.get("program_state") in {
             "blocked",
             "stalled_dependency_frontier",
@@ -1067,7 +1120,15 @@ def launch(
                     f"supervisor reached non-progress state: {last['program_state']}"
                 )
         time.sleep(1.0)
-    raise OperatorError("supervisor did not become healthy before the monitor deadline")
+    if not progress_observed:
+        raise OperatorError(
+            "supervisor remained live but made no authoritative task progress "
+            "before the monitor deadline"
+        )
+    raise OperatorError(
+        "supervisor did not sustain healthy, unblocked execution before the "
+        "monitor deadline"
+    )
 
 
 def _parser() -> argparse.ArgumentParser:
