@@ -13,8 +13,56 @@
     "state": "pending_independent_fenced_supervisor",
     "completion_authoritative": false
   },
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-083@current-head-python-v1-durable-projection-storage-and-recovery-capability-assessment-v1",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-083@current-head-python-v1-durable-projection-storage-and-recovery-capability-assessment-v2",
   "observed_at": "2026-08-28T17:56:03Z",
+  "evidence_amendment": {
+    "schema": "ipfs-accelerate.proof-carrying-semantic-minification.receipt-evidence-amendment@1",
+    "kind": "measured",
+    "non_authoritative": true,
+    "changes_task_status": false,
+    "changes_completion_or_promotion": false,
+    "observed_at_preserved": true,
+    "amendment_scope": "receipt_evidence_only",
+    "amended_at": "2026-08-28T18:22:05Z",
+    "terminal_base_commit": "083cf3415691230f40cd4276a49f7d1cdd739db7",
+    "terminal_base_tree": "17fe4def2df89f01e39ad4a394bb45025223ecc9",
+    "prior_artifact_identity": "urn:pcsm:task-receipt:PCSM-083@current-head-python-v1-durable-projection-storage-and-recovery-capability-assessment-v1",
+    "prior_receipt": {
+      "git_blob": "3e70cd1976895d796743c9c8f48fb867c903299d",
+      "sha256": "51169d03a03976beb8645ce9840bb5212978867bfe7e52f10e31e2ead75fad2e"
+    },
+    "corrections": [
+      {
+        "json_pointer": "/test_and_validation_evidence/required_validation/environment",
+        "old": "Authoritative sealed Python 3.12.3 and pytest 9.1.1 with prescribed PATH, fresh private HOME/XDG root, and user-site disabled.",
+        "new": "Authoritative sealed Python 3.12.3 and pytest 8.1.1 with prescribed PATH, fresh private HOME/XDG root, and user-site disabled.",
+        "verification_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh-private-home> XDG_CACHE_HOME=<fresh-private-home>/.cache XDG_CONFIG_HOME=<fresh-private-home>/.config XDG_DATA_HOME=<fresh-private-home>/.local/share XDG_STATE_HOME=<fresh-private-home>/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest --version",
+        "verification_result": "pytest 8.1.1"
+      },
+      {
+        "json_pointer": "/current_tree_binding/admitted_gitlinks/Mcp-Plus-Plus/tree",
+        "old": {"member_state": "absent"},
+        "new": {"member_state": "present", "value": "61776431577f0c276546f25e4178a47a64007180"},
+        "verification_command": "git -C Mcp-Plus-Plus rev-parse '31096be86103f29faef80a01e03d09b1ad7345c6^{tree}'",
+        "verification_result": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      {
+        "json_pointer": "/current_tree_binding/admitted_gitlinks/external~1ipfs_accelerate/tree",
+        "old": {"member_state": "absent"},
+        "new": {"member_state": "present", "value": "5dee438e132ad068ddb30ec8c1e0066efa36067a"},
+        "verification_command": "git -C external/ipfs_accelerate rev-parse 'e94f1784a38a44ee5da8f11a78ea42a7faefc9fb^{tree}'",
+        "verification_result": "5dee438e132ad068ddb30ec8c1e0066efa36067a"
+      },
+      {
+        "json_pointer": "/current_tree_binding/admitted_gitlinks/external~1ipfs_datasets/tree",
+        "old": {"member_state": "absent"},
+        "new": {"member_state": "present", "value": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"},
+        "verification_command": "git -C external/ipfs_datasets rev-parse '8b9c45106c0ace6107b8b90357a3ce71caf57584^{tree}'",
+        "verification_result": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      }
+    ],
+    "immutable_history_statement": "The prior receipt bytes remain immutable and retrievable as Git blob 3e70cd1976895d796743c9c8f48fb867c903299d in Git history; this receipt-only evidence amendment does not rewrite that history or confer completion or promotion authority."
+  },
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -50,14 +98,17 @@
     "admitted_gitlinks": {
       "Mcp-Plus-Plus": {
         "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
         "authority_role": "wire-contract boundary only; no PCSM projection-storage authority selected"
       },
       "external/ipfs_accelerate": {
         "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
         "authority_role": "PCSM/supervisor boundary only; no Kit persistence authority selected"
       },
       "external/ipfs_datasets": {
         "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
         "authority_role": "canonical semantic-identity boundary; no new datasets authority selected"
       },
       "external/ipfs_kit": {
@@ -193,7 +244,7 @@
       "status": "environment_dependency_unavailable_before_collection",
       "requested_command": "python -m pytest -q external/ipfs_kit/tests/proof_context",
       "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm083-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_kit/tests/proof_context",
-      "environment": "Authoritative sealed Python 3.12.3 and pytest 9.1.1 with prescribed PATH, fresh private HOME/XDG root, and user-site disabled.",
+      "environment": "Authoritative sealed Python 3.12.3 and pytest 8.1.1 with prescribed PATH, fresh private HOME/XDG root, and user-site disabled.",
       "result": "ImportError while loading external/ipfs_kit/tests/conftest.py: ModuleNotFoundError: No module named 'aiohttp'. No tests collected or executed.",
       "dependency_probe": "Under the same sealed command environment, conftest's direct aiohttp import failed. A provider-side interpreter probe without PYTHONNOUSERSITE is not substituted for this authoritative result.",
       "scope_limit": "This is unavailable validation capability, not a failed semantic assertion and not a passing test result. Installing or relying on a provider-only dependency would not establish the sealed result."
