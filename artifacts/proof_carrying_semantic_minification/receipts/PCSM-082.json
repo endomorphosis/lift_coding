@@ -1,0 +1,267 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-082",
+  "title": "Add projection and alias root CAS through Kit",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G700",
+  "objective_id": "PCSM-082",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-082@current-head-python-v1-projection-and-alias-root-cas-capability-assessment-v1",
+  "observed_at": "2026-08-28T17:50:45Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python-v1 projection-root and alias-root CAS capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-082.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-082.json",
+    "implementation_delta": "Reuse the current KitProofContextStateStore@0.1 byte/CID CAS boundary and reject it as a complete projection/alias-root equivalent: it stores arbitrary immutable bytes under verified CIDv1-base32 identities, but exposes neither a versioned ProjectionRoot nor AliasRoot record, typed root/reference relations, an alias namespace, an atomic compare-and-swap head, or a retrieval/admission path for such roots. IncrementalSealStore@0.1 and KitVerificationStore@0.1 add limited caller-supplied parent/generation checks, respectively, but neither persists or compares a named projection/alias root. The exact-output authority permits only this receipt, so no source or test mutation is made and no competing authority is created.",
+    "non_promotion_reason": "No current-head Kit package supplies the named versioned CAS contract or package-specific positive/negative tests. The prescribed sealed validation cannot load the existing proof-context suite because its mandatory tests conftest imports aiohttp and aiohttp_available=False. The generic byte-CAS implementation and its unexecuted generic tests are not promoted to a projection/alias-root implementation, a passing validation result, an exact-PCSM source-forest instance, or a formal proof."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate establishes implementation, identity, validation success, source-forest execution, proof, or promotion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised generic contract behavior and never substitutes for source-forest evidence or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "dd908b7e47c458b1f643dc6f9fd3849f96263eaa",
+    "outer_tree": "8781ce5cb9c7fc23eb79e3786223355bd15631fe",
+    "dispatch_tree_id": "dd908b7e47c458b1f643dc6f9fd3849f96263eaa",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "bdb6becdd3499dd32bca9004460f375b8465eb0e",
+    "scheduler_config_sha256": "a83e6f853a7d159af999c9af2eaa2ab6062cb3c8e0a7feafb58eb57578af20a8",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no projection/alias-root CAS authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "PCSM/supervisor boundary only; no Kit-root CAS owner selected"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "named current-head exact-byte/CID storage boundary assessed for the requested root-CAS capability"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared each admitted gitlink commit/tree with its checked-out nested HEAD and HEAD^{tree}; inspected outer and Kit porcelain before receipt creation; calculated the scheduler and selected Kit source/test Git blobs and SHA-256 digests; inspected all current proof_context provider modules and their focused tests; searched the exact Kit proof_context roots and PCSM supervisor implementation/test roots for a versioned projection-root/alias-root CAS contract; and ran the required suite under the prescribed sealed PATH with fresh private HOME/XDG roots.",
+      "result": "The dispatch commit equals outer HEAD and the selected Kit commit/tree equals its checked-out head. The inspected worktrees were clean before the declared receipt write. KitProofContextStateStore@0.1 is current and verifies byte-to-CID agreement, but the inspected roots contain no ProjectionRoot, AliasRoot, projection_root, alias_root, ProjectionAlias, or typed root-CAS contract. The required suite failed before collection solely because the sealed test conftest imports unavailable aiohttp; it did not execute any test, so no passing or failing semantic assertion is claimed.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, version/schema/identity behavior, root-CAS implementation, aiohttp availability, PCSM source-map capability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span identities to a projection root or alias root. Repository trees, Git blobs, SHA-256 digests, arbitrary Kit object CIDs, and generic fixture roots are freshness or generic-storage evidence only and are not relabelled as this missing PCSM contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "KitProofContextStateStore@0.1 is the smallest existing Kit authority for immutable byte storage with CIDv1 verification. Its contract is deliberately generic. A PCSM wrapper, alias dictionary, root table, named head, or compare-and-swap layer cannot be truthfully inferred from that API and would be a new authority; the exact receipt-only dispatch cannot add it.",
+    "components": [
+      {
+        "component": "ipfs_kit_py.proof_context.state_store.KitProofContextStateStore@0.1",
+        "schema": "ipfs-kit.proof-context.v0.1",
+        "version": "0.1",
+        "role": "Current Kit byte storage facade. It requires an explicit local root, delegates immutable byte writes to HermeticProofSealStore, and exposes put/get/cid_for with CIDv1-base32 verification.",
+        "equivalence_limit": "It has no projection-root/alias-root record schema, alias-to-canonical binding, named root lookup, compare-and-swap operation, generation/head state, root graph traversal, or PCSM source-map binding."
+      },
+      {
+        "component": "ipfs_kit_py.proof_context.incremental_seal_store.IncrementalSealStore@0.1",
+        "schema": "interface-only: KitIncrementalSealStore@0.1",
+        "version": "0.1",
+        "role": "Generic checkpoint/delta-seal byte writer with a caller-supplied expected_parent_cid equality guard and simulated-provenance rejection.",
+        "equivalence_limit": "The parent relationship is not persisted in the stored payload by this API and no named projection or alias root is loaded or atomically updated, so it is not root CAS."
+      },
+      {
+        "component": "ipfs_kit_py.proof_context.verification_store.KitVerificationStore@0.1",
+        "schema": "ipfs-kit.proof-context.verification-store@0.1",
+        "version": "0.1",
+        "role": "Generic proof-receipt byte writer with simulated-provenance rejection and a caller-supplied generation consistency check.",
+        "equivalence_limit": "It does not retain a root head or atomically compare it against an expected projection/alias root, so its generation check is not a projection/alias-root CAS implementation."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "generic_storage": "artifacts.cid_for_bytes derives the Kit content CID and rejects a non-base32 result; put_bytes rejects a claimed CID unequal to bytes and get_bytes recomputes the CID after verified retrieval. Identical byte writes are intended to deduplicate in the hermetic immutable store.",
+      "available_binding": "The selected generic contract binds stored bytes to an ArtifactReference CID. The public namespace pins proof_context=0.1 and proof_seal_store=1.0.0 compatibility metadata.",
+      "missing_binding": "No versioned projection/alias root payload has schema fields for canonical projection CID, alias CID/name/namespace, alias-target relation, exact repository/tree/source-map CID, expected root, resulting root, or an atomic linearization boundary. No arbitrary byte CID is treated as any of those semantic bindings.",
+      "authority_boundary": "Kit byte persistence establishes exact-byte identity only. It does not judge semantic soundness, select canonical identity, authorize aliasing, mutate source, authorize M2/M3 work, admit a projection, or make a completion/promotion decision. Aliases, if later implemented, must never replace canonical identity."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/__init__.py",
+      "git_blob": "045dbaa79a907cd121a79cbab747eec185f11c2b",
+      "sha256": "cfcbf8ecc3567d325ed31758cfb7226e904746ccd543ae6fdc83cb2adb6a97c9",
+      "role": "Inert public proof-context namespace with schema/version compatibility metadata and lazy generic-store exports; no requested root-CAS export."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/artifacts.py",
+      "git_blob": "144571fd1b502f64c26dec48b9909c59a307d8b2",
+      "sha256": "1a9fc36d8388ff09f74da2ad414cbfe5752f7e6147068a92c540cd024936d804",
+      "role": "Generic CIDv1-base32 byte identity, immutable write, claimed-CID mismatch rejection, and verified read implementation."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/state_store.py",
+      "git_blob": "678784b76c0fd6e5c0e9d4e0d5edb2574a199fad",
+      "sha256": "8423b83eacc19b5605b3a5d9691836fdad4e7162d8922040ff4ed13e72a51778",
+      "role": "KitProofContextStateStore@0.1 generic local byte/CID store and optional unavailable transport boundary."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
+      "git_blob": "7dff02d6d93c254b8ad2685462e92136260ac8dd",
+      "sha256": "86a13c7965a9f7aca6a196a3c08f8673cd5d0fc143baf74041675493b883b318",
+      "role": "Generic incremental seal writer; parent equality is caller-supplied and not a named root CAS."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py",
+      "git_blob": "9bc8b3b9c8f150deab34b39ee50ccb5af5a613aa",
+      "sha256": "7ebe8404e165f9b0dc713fe7ffebbed9a2c080cc2c56fe60819e26111f861978",
+      "role": "Generic verification receipt writer with a limited generation consistency check; not projection/alias-root CAS."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/tests/proof_context/test_v01_state_store.py",
+      "git_blob": "296e2846f69d1c650c34a336e41efc3481d07590",
+      "sha256": "a5c4a58977606bac6151f791678df9da3c6526846e88f5b77cea2ff2427ecf58",
+      "role": "Unexecuted generic byte-CAS positive/negative tests: round trip, CID agreement, deduplication, claimed-CID rejection, and optional-IPFS unavailability."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py",
+      "git_blob": "4e8fa36faa1bc243df7509e028a7ecbb42b9bb45",
+      "sha256": "e5e7ebf9a8d432c56f8b43cae861d84e3254e655aeae4c49ea44ca42eb8b3d3a",
+      "role": "Unexecuted generic seal positive/negative tests: checkpoint round trip, wrong parent rejection, and simulated provenance rejection."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/tests/proof_context/test_verification_store.py",
+      "git_blob": "33dd9f0de0ca962c24dbb7b574fa3b687ac2a8b2",
+      "sha256": "a13ea965c415434e421dc4b5dfaaf75ee384ad3b8c845f3b7410f0eb8f5191e8",
+      "role": "Unexecuted generic receipt positive/negative tests: round trip, claimed-CID rejection, simulated provenance rejection, ABA rejection, and optional-IPFS unavailability."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "package_specific_projection_and_alias_root_tests": {
+      "kind": "unavailable",
+      "status": "absent",
+      "result": "No current proof_context source or test file contains a versioned ProjectionRoot, AliasRoot, projection_root, alias_root, ProjectionAlias, or typed projection-to-alias root CAS contract. Therefore package-specific positive and negative coverage for deterministic root construction, expected-root mismatch, alias collision/rebinding, schema/version rejection, CID mismatch, source-map/tree mismatch, or atomic concurrent root update is unavailable.",
+      "scope_limit": "Generic byte/seal/receipt tests cannot establish the absent semantic root-CAS contract."
+    },
+    "generic_test_inventory": {
+      "kind": "measured",
+      "status": "present_unexecuted",
+      "result": "The focused proof_context test directory contains 37 test functions. Its generic storage tests define positive byte round trips/deduplication and negative claimed-CID, stale-parent/generation, simulated-artifact, and unavailable-transport cases.",
+      "positive_coverage_present_but_unexecuted": [
+        "Generic byte writes return CIDv1-base32 references whose verified reads recover the original bytes.",
+        "Identical generic byte writes deduplicate; checkpoint and verification receipt helpers have generic round-trip tests."
+      ],
+      "negative_coverage_present_but_unexecuted": [
+        "Generic stores reject claimed CID mismatch, simulated writes, wrong seal parent, invalid receipt generation, and explicit unavailable IPFS transport.",
+        "These generic checks do not include a projection-root expected-head mismatch, alias collision/rebinding, or root-CAS atomicity assertion."
+      ],
+      "scope_limit": "The inventory is source inspection, not test execution. It does not make a generic fixture a measured PCSM source-forest run or a package-specific root-CAS validation."
+    },
+    "required_validation": {
+      "kind": "unavailable",
+      "status": "environment_dependency_unavailable_before_collection",
+      "requested_command": "python -m pytest -q external/ipfs_kit/tests/proof_context",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm082-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_kit/tests/proof_context",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, prescribed PATH, fresh private HOME/XDG root, and user-site disabled.",
+      "result": "ImportError while loading external/ipfs_kit/tests/conftest.py: ModuleNotFoundError: No module named 'aiohttp'. No tests collected or executed.",
+      "dependency_probe": "aiohttp_available=False and ipfs_kit_importable=True under the same sealed Python/PATH/HOME/XDG constraints.",
+      "scope_limit": "This is an unavailable validation capability, not a failed semantic assertion and not a passing test result. Installing or using a provider-only dependency would not establish the authoritative sealed result."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "No versioned projection/alias-root contract, current-PCSM source-map CID, concrete root-CAS request/result, or approved digest-bound formal-prover deployment was present in the sealed environment. Generic CID checks and unexecuted tests are not relabelled as a formal proof or promotion."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; the public schema/version metadata; generic byte/CID verification and helper guard behavior; absence of the requested named root-CAS symbols/contracts in the searched exact roots; test inventory count; and sealed dependency probe reporting aiohttp_available=False.",
+    "estimated": "None. No estimate supports implementation, identity, test success, source-forest execution, proof, or promotion.",
+    "simulated": "Existing generic proof_context tests use controlled temporary storage roots and byte fixtures. They are not represented as executed in the sealed environment and, even if executed, would establish only generic storage/seal/receipt behavior rather than an exact-PCSM projection/alias-root CAS run.",
+    "unavailable": "A versioned Kit ProjectionRoot/AliasRoot CAS contract; typed alias/canonical/root relations; atomic expected-root update semantics; direct package-specific positive/negative tests; a sealed execution of the required suite because aiohttp is absent; a canonical PCSM aggregate SourceLinkReceipt/source-map CID; a source-map/tree-bound root-CAS instance/result CID; formal proof; and an immutable self-CID for this receipt."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_kit_byte_cas_available_projection_and_alias_root_cas_unavailable_non_promoted",
+    "available_capability": "The current-head Python-v1 Kit proof-context provider offers explicit-root, deterministic immutable byte storage with verified CIDv1-base32 identities, generic claimed-CID mismatch rejection, and generic simulated/stale/transport guards in related helpers.",
+    "unavailable_capability": "A current-head versioned and schema-bound Kit implementation that models a canonical projection root and a separate alias root, binds each to the exact PCSM repository/tree/source-map, preserves alias non-canonicality, and atomically updates/retrieves them through an expected-root CAS API with direct sealed positive and negative validation.",
+    "missing_bindings": [
+      "ProjectionRoot@1 schema/interface and canonical serialization/CID rule",
+      "AliasRoot@1 schema/interface with namespace, alias-to-canonical relation, and explicit non-canonical authority boundary",
+      "exact PCSM repository/tree/source-map CID fields and validation",
+      "expected-root/result-root atomic compare-and-swap operation and durable named-root lookup",
+      "current-PCSM source-map-bound request/result CIDs",
+      "package-specific positive/negative root-CAS tests executable in the sealed environment",
+      "aiohttp in the sealed Python 3.12 environment to collect the currently required suite"
+    ],
+    "disposition": "No arbitrary Kit artifact CID is promoted to a projection root or alias root; no alias is promoted to canonical identity; no generic generation/parent argument is promoted to atomic root CAS; no missing CID/schema/test/proof is invented. The existing Kit byte-CAS authority remains limited to exact-byte persistence and no competing PCSM authority is created."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify Kit implementation/tests, install aiohttp, create root schemas, add a named-root store, or alter protected planning/configuration files.",
+    "KitProofContextStateStore@0.1 verifies bytes and CIDs but accepts untyped arbitrary payloads. It cannot supply the missing root/alias semantic constraints by convention.",
+    "IncrementalSealStore@0.1 compares caller arguments before an immutable write; KitVerificationStore@0.1 checks supplied generations. Neither establishes durable named-root state or an atomic expected-root update.",
+    "The sealed required suite stops at conftest import due to missing aiohttp; its 37 test definitions are unavailable rather than passing or failing execution evidence.",
+    "No current aggregate PCSM SourceLinkReceipt/source-map CID binds an exact source forest to a projection or alias root, and no generic Git/tree/digest identity is relabelled as that CID.",
+    "No watcher event, model output, arbitrary artifact CID, test definition, receipt, or generic fixture is treated as semantic authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, schema/version/CID behavior, named root-CAS capability, source-map capability, aiohttp availability, or validation result changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, generic Kit storage components, external dependency installation, or unrelated admitted history."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalent_reused_first": true,
+    "generic_byte_cas_deterministic_where_required": true,
+    "generic_byte_cas_schema_version_and_cid_bound": true,
+    "projection_and_alias_root_schema_version_and_cid_binding_available": false,
+    "projection_and_alias_root_cas_atomicity_available": false,
+    "package_specific_positive_and_negative_tests_present": false,
+    "sealed_required_validation_passed": false,
+    "sealed_required_validation_unavailable_reason": "aiohttp is absent from the authoritative sealed Python 3.12 environment, so pytest cannot import tests/conftest.py and no test executes.",
+    "exact_pcsm_source_map_cid_available": false,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "aliases_not_promoted_to_canonical_identity": true,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "promotion_status": "non_promoted_missing_versioned_projection_alias_root_cas_contract_and_sealed_validation_capability"
+  }
+}
