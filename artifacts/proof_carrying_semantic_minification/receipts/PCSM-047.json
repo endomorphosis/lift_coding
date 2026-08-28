@@ -1,0 +1,273 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-047",
+  "title": "Add projection receipts and token accounting",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G400",
+  "objective_id": "PCSM-047",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-047@current-head-python-v1-projection-receipt-and-token-accounting-capability-assessment-v1",
+  "observed_at": "2026-08-28T08:16:07Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 projection-receipt and token-accounting capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-047.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-047.json",
+    "implementation_delta": "Reuse SupervisorTokenLedger@1 as the sole current-head Python-v1 token-accounting authority. It provides deterministic envelope-bound calibrated fallback estimates, content-derived identities, exact-once reconciliation, and dedicated positive and negative tests. No current-head package emits a PCSM compact-projection receipt binding a canonical slice, bounded alias/anchor decisions, exact PCSM source-map/tree identity, projection CID, and a complete token ledger. PCSM-046 independently established that the prerequisite projection builder is absent, and this receipt independently rechecked that absence at the current tree. Exact declared-output authority excludes the missing package and direct tests, so this receipt records a typed fail-closed unavailable/non-promotion disposition rather than creating a wrapper, a new receipt schema, or a competing token ledger."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "A deterministic approximation bound to its calibration and exact provider/model/tokenizer envelope; it is not provider-native measurement and cannot establish PCSM projection validity, correctness, promotion, or completion.",
+    "simulated": "A controlled fixture exercise that establishes only the adjacent contract behavior exercised by the fixture; it is never production PCSM projection or usage evidence.",
+    "unavailable": "A required capability, identity, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "245726769ab4e7420ffd26da5bf597fcfc9bf095",
+    "outer_tree": "dfc789aa10acebc76534d4f33b534cf9ac75e658",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "245726769ab4e7420ffd26da5bf597fcfc9bf095",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only; not PCSM projection receipt or token accounting"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149",
+        "authority_role": "selected token ledger and adjacent non-PCSM projection records; no PCSM projection builder or receipt package"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity and PCSM-018-selected validation composition only; not PCSM projection construction or accounting"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage only; not PCSM projection construction, receipt issuance, or token accounting"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared every admitted superproject gitlink with nested HEAD and HEAD^{tree}; checked outer and admitted nested porcelain before receipt creation; calculated the scheduler and listed source/test SHA-256 values plus Git blobs; searched the accelerator agent_supervisor and required PCSM-test forests for PCSMProjectionBuilder, ProofCarryingSemanticProjectionBuilder, SourceLinkReceipt, PCSMTokenLedger, and PCSMProjectionReceipt; and inspected the direct non-PCSM projection and token-ledger candidates.",
+      "result": "The bound outer head/tree and all four admitted gitlinks agree, and all checked worktrees were clean before the declared receipt write. Each exact PCSM package-name search returned zero matching Python files. Existing ProjectionReceipt is an explicitly non-authoritative DuckLake event-range record; SemanticProjectionStore persists caller-supplied opaque dataset references; neither is a PCSM compact-projection receipt. SupervisorTokenLedger@1 is the reusable accounting authority, but no PCSM-bound ProviderModelEnvelope, usage observation, calibration, or ledger instance was found.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, search result, selected schema/version, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree PCSM SourceLinkReceipt or canonical aggregate PCSM source-map CID exists. Git blobs, SHA-256 values, opaque federation content references, and caller-supplied tree IDs are not substitutes for that contract."
+    }
+  },
+  "existing_equivalents_assessed": {
+    "kind": "measured",
+    "supervisor_token_ledger": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.self_improvement.supervisor_token_ledger.ProviderModelEnvelope, TokenizerCalibrationSample, FallbackTokenizerCalibration, ProviderTokenUsage, TokenAttribution, and SupervisorTokenLedger",
+      "interfaces": [
+        "ProviderModelEnvelope@1",
+        "FallbackTokenizerCalibration@1",
+        "ProviderTokenUsage@1",
+        "TokenAttribution@1",
+        "SupervisorTokenLedger@1"
+      ],
+      "schemas": [
+        "ipfs_accelerate_py/agent-supervisor/provider-model-envelope@1",
+        "ipfs_accelerate_py/agent-supervisor/tokenizer-calibration@1",
+        "ipfs_accelerate_py/agent-supervisor/provider-token-usage@1",
+        "ipfs_accelerate_py/agent-supervisor/token-attribution@1",
+        "ipfs_accelerate_py/agent-supervisor/token-ledger-report@1",
+        "ipfs_accelerate_py/agent-supervisor/supervisor-token-ledger@1"
+      ],
+      "determinism_and_cid_binding": "Every selected record inherits CanonicalContract and has a content-derived identity. ProviderModelEnvelope binds provider, model, model revision, tokenizer, envelope revision, and context limit. A fallback calibration binds that envelope, calibration revision, and sorted source-free byte/token samples; estimate_bytes deterministically computes the ceiling of the calibrated byte/token ratio and identifies itself by calibration_id. SupervisorTokenLedger binds its ResultBinding, complete lifecycle population, terminal attributions, token attributions, and calibrations; claimed identities and derived report fields are recomputed and rejected on mismatch.",
+      "measurement_boundary": "Provider-native usage is measured only when supplied in ProviderTokenUsage. Calibrated fallback is explicitly estimated and requires the matching envelope-bound calibration. The ledger's authority-bound constants are false for provider settlement, usage authorization, correctness, and completion; token totals never become proof, mutation, validation, promotion, or completion authority.",
+      "non_equivalence": "The ledger does not accept a canonical PCSM semantic slice, bounded alias table, semantic-anchor decision, PCSM source-map CID, compact projection bytes/CID, or a PCSM projection receipt. It cannot mint a truthful current-PCSM ledger instance without a bound provider/model/tokenizer envelope, complete lifecycle events, terminal attributions, and measured usage or a calibration. It is reused only as the accounting authority, not relabelled as the missing projection receipt package."
+    },
+    "ducklake_projection_receipt": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.federation.ducklake_projection.ProjectionReceipt",
+      "schema": "ipfs_accelerate_py/agent-supervisor/causal-federation/ducklake-projection-receipt@1",
+      "behavior": "A closed observational record of a DuckLake event-range projection with source root, tree ID, watermarks, checksum, cursor, and partition IDs. Its authoritative field is fixed false.",
+      "non_equivalence": "It neither creates nor validates a PCSM semantic projection; it has no canonical slice, alias/anchor input, PCSM source-map CID, compact projection bytes/CID, token ledger, provider/model/tokenizer envelope, semantic proof, or promotion authority. Its source and direct tests are additionally unavailable to run in the sealed validation environment because importing the projection path requires the unavailable anyio dependency."
+    },
+    "semantic_projection_store": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.federation.semantic_projection.SemanticProjectionStore",
+      "behavior": "It persists caller-supplied opaque datasets semantic-root and capsule identities under a federation tree binding, and rejects sibling paths and inconsistent bound identities.",
+      "non_equivalence": "It neither builds a compact PCSM projection nor issues a PCSM receipt. It has no PCSM slice, alias table, semantic-anchor policy, source-map CID, compact serializer/CID, or token accounting input. It cannot be upgraded to PCSM authority by its tree checks or opaque content references."
+    },
+    "pcsm_018_validation_composition": {
+      "artifact": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-018.json",
+      "contract": "SemanticProjectionValidationReceipt@1",
+      "meaning": "A historical receipt-bound composition selecting datasets semantic-outcome, proof-carrying-artifact, assurance, sufficiency, MCP++ wire, and kit storage contracts for validation evidence.",
+      "non_equivalence": "The composition deliberately is not a second registered software-contract schema and does not construct ProofCarryingSemanticProjection@1, a source linker, a compact projection receipt, or a token ledger. Its prior tree observations are not reused as current identity evidence here."
+    },
+    "dependency_receipt": {
+      "artifact": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-046.json",
+      "currentness_rule": "PCSM-046 is historical dependency context only. This receipt independently measured the current outer/nested identities, source files, absence searches, and sealed validation results.",
+      "result": "The prerequisite PCSM projection builder remains absent at the bound current head, so there is no projection material from which the requested receipt and complete accounting instance could be derived."
+    },
+    "authority_boundary": "Canonical semantic identity remains datasets-owned; kit may store exact bytes/CIDs but does not decide projection semantics; a local alias never becomes canonical identity; model output is candidate-only. This receipt creates no builder, projection, source mutation, source-map/linker, token ledger, proof acceptance, validation acceptance, promotion, M2, M3, or completion authority."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_implementation": "A versioned deterministic Python-v1 PCSM projection-receipt package that accepts only a current canonical semantic slice and the projection builder's bounded alias/semantic-anchor decisions; verifies exact tree and canonical PCSM source-map identities; emits deterministic compact projection bytes, canonical target relinking, projection CID, and a receipt that binds the builder/schema policy and a complete SupervisorTokenLedger instance. The ledger must name an exact provider/model/tokenizer envelope and distinguish provider-native measured from envelope-calibrated estimated token usage.",
+    "missing_bindings": [
+      "PCSM projection builder and versioned compact-projection/receipt contract",
+      "canonical PCSM semantic slice, bounded alias table, and semantic-anchor decision",
+      "canonical aggregate PCSM source-map CID and projection CID",
+      "PCSM-bound provider/model/tokenizer envelope, provider-native usage or matching calibration, lifecycle population, terminal attributions, and ledger CID",
+      "package-specific positive and negative projection-receipt/accounting vectors"
+    ],
+    "disposition": "No PCSM projection, projection receipt, projection CID, source-map CID, provider-native token observation, calibration, numeric token estimate, or complete PCSM ledger CID is reported. Missing values are unavailable rather than zero. Adjacent records and the reusable ledger remain within their own stated authority boundaries."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_token_ledger.py",
+      "git_blob": "be6d58f526d52d427c367d8a683d2d375734cda3",
+      "sha256": "67bca102c9b2ebb9245ad8b492eee982cc9d1f5cfdbfbb7c734c59f69c9329de",
+      "role": "selected closed versioned accounting contracts, calibrated fallback estimator, exact-once reconciliation, content-derived identities, and explicit non-authority boundary"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_v2_contracts.py",
+      "git_blob": "456afd41956b191acd9a2554c638246ce0133fd3",
+      "sha256": "79e12d2d4af3a0c7e83a4fd00260f45f0488fe80b07788bc63f2ff656847cf0b",
+      "role": "ResultBinding and lifecycle-event identities used by the selected token ledger"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/federation/ducklake_projection.py",
+      "git_blob": "c1e07a4fbdc62085db5fa0627cdea07351a1d016",
+      "sha256": "a9fca5374aa234df935c9ab51dbc1850289c084b538128c898225d67ac8bad59",
+      "role": "adjacent explicitly non-authoritative DuckLake event-range projection receipt, not PCSM projection evidence"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/federation/semantic_projection.py",
+      "git_blob": "022a2e393df3828ceb9b9ec3536c8453b446a47c",
+      "sha256": "1476da93897422ad539a99d1127a8334ee2cc6fe30ef85a85fb7595c00d55fc9",
+      "role": "adjacent opaque federation semantic-root/capsule persistence, not PCSM projection construction or receipt issuance"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_token_ledger.py",
+      "git_blob": "946d1e58a73046be054d0f161a3ebc33d7b58bd4",
+      "sha256": "135c0f8bfa5a07a76a4d34428b3cd41b68ad231406438b942dc9612712d81cda",
+      "role": "positive and negative version/CID/calibration/exact-once/authority-boundary tests for the selected accounting authority"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_token_ledger.py",
+      "git_blob": "317ad696a67d081466833472277482dc0a256078",
+      "sha256": "723881334120fb0f612a6cbc6d305efac6b5ade08333ea2aaf98881399aacddb",
+      "role": "positive and negative cancellation, span-binding, accounting-limit, and report-round-trip tests for the selected accounting authority"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm047-required-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.32s",
+      "scope_limit": "This required PCSM structured-decoding suite validates closed candidate-output grammar behavior. It does not exercise the unavailable PCSM projection-receipt package or mint an accounting instance."
+    },
+    "focused_token_ledger_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm047-ledger-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_token_ledger.py external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_token_ledger.py",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "21 passed in 0.86s",
+      "scope_limit": "These tests establish only the selected generic accounting authority. They are not represented as tests of a PCSM projection receipt or a current-PCSM accounting instance."
+    },
+    "adjacent_projection_validation": {
+      "kind": "unavailable",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm047-focused-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/causal_federation/test_semantic_projection.py external/ipfs_accelerate/test/api/causal_federation/test_ducklake_projection.py",
+      "status": "not_run_dependency_unavailable",
+      "result": "Collection failed before execution: ModuleNotFoundError: No module named 'anyio', imported by ipfs_accelerate_py.mcp_server.mcplusplus.task_queue through semantic-state/federation imports.",
+      "meaning": "The sealed validation environment lacks the dependency. This is not a test pass, does not establish an adjacent projection contract, and must not be repaired by provider-local dependencies or treated as PCSM coverage."
+    },
+    "positive_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "required PCSM suite accepts valid typed compact candidate outputs while retaining candidate-only status",
+        "selected ledger tests accept immutable content-addressed envelope, calibration, usage, attribution, ledger, and report round trips with exact-once lifecycle reconciliation",
+        "selected ledger tests exercise deterministic envelope-scoped calibrated fallback and explicit charging of native, retry, failed, reused, speculative, tool, and cancelled classifications without double charging",
+        "selected ledger tests confirm accounting cannot authorize provider usage or claim completion/correctness"
+      ]
+    },
+    "negative_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "required PCSM suite rejects malformed, unknown, duplicated, untyped, unbounded, traversal, and model-created completion fields",
+        "selected ledger tests reject missing, duplicate, foreign-bound, terminally unattributed, unused-terminal, forged, uncalibrated, overlapping, negative, misclassified, and cancellation-inconsistent records",
+        "source search rejects the false equivalence that DuckLake event projection, opaque federation semantic persistence, historical receipt compositions, or generic token accounting implements a PCSM projection receipt"
+      ]
+    },
+    "pcsm_projection_receipt_test_gap": {
+      "kind": "unavailable",
+      "statement": "No current-head test names a PCSM projection-receipt schema or exercises canonical slice/alias/anchor input, stale tree or source-map rejection, deterministic compact serialization, projection-CID replay, PCSM-bound ledger association, or measured-versus-estimated token evidence. Adjacent passing tests are not relabelled as this missing coverage."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-047 formal proof obligation or approved digest-bound prover deployment is specified. Python tests are not represented as a formal proof."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Exact outer and admitted nested commits/trees, clean/freshness checks, scheduler and listed source/test SHA-256 plus Git-blob identities, zero-result PCSM package searches, selected ledger schemas/content-derived identities/deterministic fallback behavior, sealed required validation (11 passed), and sealed focused ledger validation (21 passed).",
+    "estimated": "SupervisorTokenLedger can calculate a deterministic calibrated fallback estimate only from a named envelope-bound calibration. No PCSM-bound calibration or numeric estimate exists at this head, so this receipt reports no numeric estimate.",
+    "simulated": "The passing focused ledger tests create synthetic provider/tokenizer envelopes, lifecycle records, and counters. They establish only exercised generic-contract behavior and are not production PCSM projection or token measurements.",
+    "unavailable": "A PCSM projection builder and receipt package; canonical PCSM source-map and projection CIDs; a current PCSM projection; a PCSM-bound provider/model/tokenizer envelope, provider-native use, calibration, complete ledger, and numeric accounting value; package-specific tests; adjacent projection-suite execution under the sealed dependency set; formal-prover result; and immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This is a current-head capability assessment and non-promotion disposition, not a PCSM projection builder, compact projection, projection receipt, source-link receipt, token ledger instance, semantic proof, or promotion decision.",
+    "The selected ledger is reusable accounting infrastructure, not proof that the current PCSM tree has a measured or estimated token cost. Provider-native data is measured only when supplied; calibrated fallback remains estimated evidence.",
+    "DuckLake ProjectionReceipt and SemanticProjectionStore are adjacent non-PCSM records. Their tree checks, opaque references, and status fields never establish PCSM semantic projection validity or canonical identity.",
+    "The missing projection test execution is a sealed-environment dependency/capability gap caused by absent anyio. It is unavailable, not a passing result, and no provider-side package may substitute for it.",
+    "Only the declared receipt changed. Exact edit authority excludes the missing implementation and test paths.",
+    "This receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head assessment. Do not alter selected adjacent controls, protected planning documents, or unrelated source bytes.",
+    "freshness_requirement": "Do not reuse this receipt after any change to a bound tree or gitlink, scheduler/source/test digest, source-search result, selected contract, validation result, or sealed dependency availability."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalents_assessed_first": true,
+    "token_accounting_authority_reused": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_bound_where_applicable": true,
+    "positive_and_negative_tests_passed_for_reused_authority": true,
+    "required_validation_passed": true,
+    "measured_estimated_simulated_and_unavailable_evidence_distinguished": true,
+    "pcsm_projection_receipt_package_implemented": false,
+    "pcsm_projection_and_accounting_instance_available": false,
+    "typed_unavailable_disposition_recorded_fail_closed": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "implemented_non_promoting"
+  }
+}
