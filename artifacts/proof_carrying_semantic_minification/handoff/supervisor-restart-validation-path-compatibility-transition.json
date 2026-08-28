@@ -1,0 +1,111 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-validation-path-compatibility-transition@1",
+  "reason": "restore_declared_agent_supervisor_validation_path",
+  "prior_checkpoint": {
+    "source_head": "8be57ea10aaf3d32897581f26523bb139d659a4c",
+    "repository_tree_id": "c9b3e3d9acf2983465cf84f4f93e770a7444872d",
+    "prior_artifact_commit": "9b056251a42aac444478745b3ccb73e3507215e8",
+    "stale_worktree_cleanup_transition_receipt_id": "sha256:4d86e1fa4452a720859175d2e228dd09f50f92159577154f96ade16cb6e5e0b7",
+    "changed_receipts": [
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-020.json",
+        "bytes_id": "sha256:88c0bfe17eed6e9f01cc9d14832f8d23de31e436ab31a8e0a3d732f59a10b695"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-021.json",
+        "bytes_id": "sha256:6a4a3a64ddc6ed552a3c3fcecf5931ec3a396e02c91a813a8e793341ae071127"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-022.json",
+        "bytes_id": "sha256:b7fe0f17fcc708f1e09f65de233c00b4019f037b08937502a2fcc88dd67b14d2"
+      }
+    ]
+  },
+  "repair_base": {
+    "source_head": "ab977725e0444c25cf2f55473839ee006abbe697",
+    "repository_tree_id": "308dd8a8df1910f169da3c9a0456db3af44f63bd",
+    "parent": "8be57ea10aaf3d32897581f26523bb139d659a4c",
+    "operator_identity": "sha256:6275142743dd853ed6c1ad7e969ea8e0988b7db3f78b4e5f002faf6303a10f07",
+    "config_identity": "sha256:ebc8ca6a09df8a6829f2c0aa0ed10d83500b2840c7099badf0306f814daf4f19",
+    "validator_identity": "sha256:57e3b957019ef0ee20cee5d2f50a7bfb5b1172ea8ee04db89a3426d28a290e89",
+    "accelerator_head": "a668ee23c76a69916d3214e7db07651d22f0dda1",
+    "accelerator_tree": "5edcbd2baae9c38785a2832eedec6c893cc3c924",
+    "changed_paths": [
+      "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "external/ipfs_accelerate",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "test/test_pcsm_validation_path_compatibility_transition.py"
+    ],
+    "nested_changed_paths": [
+      "ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "test/agent_supervisor/pcsm"
+    ]
+  },
+  "sealed_source": {
+    "source_head": "e1066e688f2b5dbd4c81ec2f699efb904ef2b9ef",
+    "repository_tree_id": "ca9497897e22a913523131071eabb9af380a9336",
+    "parent": "ab977725e0444c25cf2f55473839ee006abbe697",
+    "operator_identity": "sha256:1432d79d31ce0bf930ddf2fa19bca485963f033cf441f1ec94b0f8f824151ae4",
+    "changed_paths": [
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+    ]
+  },
+  "validation_surface": {
+    "declared_command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "external/ipfs_accelerate/test/agent_supervisor"
+    ],
+    "declared_path": "external/ipfs_accelerate/test/agent_supervisor",
+    "nested_bridge_path": "test/agent_supervisor/pcsm",
+    "nested_bridge_kind": "relative_directory_symlink",
+    "nested_bridge_target": "../../ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification",
+    "product_test_root": "ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification",
+    "minimum_collected_tests": 11,
+    "taskboard_validation_changed": false,
+    "generator_validation_changed": false
+  },
+  "validations": [
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/agent_supervisor"
+      ],
+      "outcome": "passed",
+      "summary": "11 passed in 0.23s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_validation_path_compatibility_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "4 passed in 0.07s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all"
+      ],
+      "outcome": "passed",
+      "summary": "valid; 70 tasks; 96 packages; no warnings"
+    }
+  ],
+  "historical_receipts_preserved": true,
+  "database_authority_preserved": true,
+  "task_state_mutation": false,
+  "manual_database_mutation": false,
+  "receipt_id": "sha256:e9aa30a3d9e1a1e5603b463bbcc38ba52cee745c66712d5a9d33c83bb4781485"
+}
