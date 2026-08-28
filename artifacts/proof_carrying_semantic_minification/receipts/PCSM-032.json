@@ -1,0 +1,216 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-032",
+  "title": "Implement test and proof-obligation slicing",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G300",
+  "objective_id": "PCSM-032",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-032@current-head-python-test-proof-obligation-slicing-selection-v1",
+  "observed_at": "2026-08-28T06:42:32Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 deterministic test-target and mandatory proof-obligation closure selection over the current sealed code-impact-index and semantic-dependency-graph authorities",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-032.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-032.json",
+    "implementation_delta": "The exact current-head datasets source forest already contains the selected Python-v1 authorities: impact_from_index and CodeEvidenceCorpusAdapter.impact_query select validation IDs from a canonical code-impact index, while mandatory_semantic_closure and CodeEvidenceCorpusAdapter.semantic_mandatory_closure select the authoritative mandatory decision-to-obligation-to-proof closure. This receipt selects and binds those existing authorities. No proof_context wrapper, competing selector, alternate schema or identity, source-map authority, or M2/M3 mutation was introduced.",
+    "non_promotion_reason": "The provider-side required suite passed, but it is simulated evidence under the authoritative-environment policy. In the sealed Python 3.12 environment pytest aborts before collection because the explicitly configured anyio pytest plugin is absent; no sealed passing result is claimed."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "Calculated approximation; no estimate establishes selection behavior, identity, or test success.",
+    "simulated": "A deterministic execution outside the authoritative sealed environment; it never replaces sealed validation.",
+    "unavailable": "A required capability or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "e3b4137add19388bad9a181e0f68a2749859fd8b",
+    "outer_tree": "2b9ae82ee212d8f1696b090a7c30f9aa59ec14bc",
+    "outer_subject": "Merge commit '2f648e65248d07f7336441db162f072b969a2fda' into agent/proof-carrying-semantic-minification-v1",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "e3b4137add19388bad9a181e0f68a2749859fd8b",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical Python code-impact index, validation-target selection, semantic dependency graph, mandatory closure, canonical JSON identity, and slicing authority"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for external/ipfs_datasets; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; porcelain status for both roots before receipt write; git -C external/ipfs_datasets merge-base --is-ancestor origin/main HEAD.",
+      "result": "The datasets nested HEAD equals the superproject gitlink; both roots were clean before receipt write; configured datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 is an ancestor of the measured datasets HEAD.",
+      "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, graph/index schema or identity profile, or dirty admitted root requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree SourceLinkReceipt or canonical source-map CID exists. Git blob and source SHA-256 facts are not substituted for a PCSM source-map artifact."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "module": "ipfs_datasets_py.knowledge_graphs.adapters.code_evidence",
+    "entry_points": [
+      "impact_from_index(index, changed_symbols, changed_paths) -> dict",
+      "CodeEvidenceCorpusAdapter.impact_query(changed_symbols, changed_paths, include_evidence_reverse) -> dict",
+      "mandatory_semantic_closure(graph, decision_id, max_nodes, max_edges, max_depth) -> dict",
+      "CodeEvidenceCorpusAdapter.semantic_mandatory_closure(decision_id, **bounds) -> dict"
+    ],
+    "schemas": {
+      "code_impact_index": "ipfs_accelerate_py.agent_supervisor.code-impact-index@1",
+      "code_impact_result": "ipfs_accelerate_py.agent_supervisor.code-impact-result@1",
+      "semantic_dependency_graph": "ipfs_accelerate_py/agent-supervisor/semantic-dependency-graph@1",
+      "mandatory_dependency_closure": "ipfs_accelerate_py/agent-supervisor/mandatory-dependency-closure@1"
+    },
+    "version": "1",
+    "identity_and_determinism": [
+      "normalize_impact_index accepts only the declared v1 schema, canonicalizes symbol/path dependencies and validation targets in lexical order, requires every target to be known, and derives index_id as a SHA-256 content identity over the canonical identity payload containing repository_tree_id and index_version.",
+      "impact_from_index canonicalizes changed symbols and paths, computes reverse dependency closures, returns sorted changed/affected symbols, paths, validation IDs, reasons, and dependency chains, and binds the result to the input repository_tree_id and index_id.",
+      "Unknown changed symbols or paths remain in uncovered_symbols or uncovered_paths and set uncovered_impact=true; an empty selected-test set is therefore not a claim of complete coverage.",
+      "mandatory_semantic_closure accepts only an authoritative decision seed and traverses only authoritative mandatory edges. It sorts each outgoing edge by kind, target, and edge ID; returns sorted node and edge IDs plus lexical shortest paths; and binds the result to the semantic graph root_id and v1 closure schema.",
+      "The selected graph/index contracts expose canonical SHA-256 content identities (graph_id/index_id), not a CID field. No CID is claimed for these slice results; the repository tree, schema, version, and canonical identity profile are bound explicitly."
+    ],
+    "fail_closed_invariants": [
+      "An unsupported impact-index schema, missing repository_tree_id, unknown validation target, corrupt artifact, checksum mismatch, or forged graph/index identity fails before selection.",
+      "An unknown decision, a non-decision seed, a non-authoritative seed, a mandatory edge reaching a non-authoritative node, or max-depth/node/edge overflow raises CodeEvidenceAdapterError.",
+      "Empty dependency seeds and invalid dependency bounds raise CodeEvidenceAdapterError; unknown changed impact remains visible rather than being promoted to complete.",
+      "Neither a test selection nor a mandatory closure executes a test, proves an obligation, or authorizes mutation; those results require separate validation/proof evidence."
+    ],
+    "minimum_delta_reason": "Current-head source already supplies the exact versioned Python-v1 test-target and proof-obligation selection authority with direct positive and negative integration coverage. Reimplementation under proof_context would duplicate canonical authority and violates this task's exact receipt-only declared output boundary."
+  },
+  "source_inventory": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/knowledge_graphs/adapters/code_evidence.py",
+      "sha256": "fa4b6bdecc05606dc301324b774c4629675ee1c6266b574770944fcb8f0064ca",
+      "git_blob": "519c4dccd666c7084444fd4ed22a9e0b00f7f508",
+      "role": "canonical v1 impact-index normalization, deterministic validation-target selection, semantic mandatory decision/obligation/proof closure, identity checks, and public adapter interfaces",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
+      "sha256": "0e2ffacfad4c3b2dd5f6a25c934e0a8bd1feaf1ce993fa2174d9601d5bfc7c52",
+      "git_blob": "7a8cfa7f939d4f2154eb110fb0048bc89428b0fd",
+      "role": "direct positive vectors for semantic decision-to-obligation-to-proof mandatory closure and reverse impact to selected validation IDs, plus artifact-integrity fail-closed vectors",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+      "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+      "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+      "role": "required-suite consumer coverage for deterministic CID-bound context packs and stale/unavailable/opaque fail-closed context handling; it does not replace direct slicer vectors",
+      "evidence_kind": "measured"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "semantic dependency selection from decision:KGP-027 reaches obligation:impl and proof:receipt-1",
+          "semantic_mandatory_closure returns the v1 closure, preserves the decision root, includes the obligation and proof, and reports complete=true",
+          "reverse symbol/path impact reaches dependent symbols and paths, selects affected validation IDs, and preserves the evidence reverse closure"
+        ],
+        "negative_coverage": [
+          "missing graph artifact, corrupt graph artifact, checksum mismatch, forged node identity, and unauthorized enrichment proof edges fail closed",
+          "the source authority explicitly represents unknown impact as uncovered_impact instead of treating it as an empty complete selection"
+        ]
+      },
+      {
+        "path": "provider inline test/proof slicing probe",
+        "evidence_kind": "simulated",
+        "positive_coverage": [
+          "two independent mandatory closures over the same fixture were byte-for-byte equal and included obligation:impl, proof:receipt-1, and validation:pytest",
+          "changed pkg.mod.helper selected the sorted validation IDs test_code_evidence and test_other from the bound v1 impact index"
+        ],
+        "negative_coverage": [
+          "unknown changed symbol set uncovered_impact=true",
+          "unknown decision seed, max_nodes overflow, and empty dependency seeds each raised CodeEvidenceAdapterError"
+        ]
+      }
+    ],
+    "focused_authority_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
+      "result": "22 passed in 0.86s",
+      "limitation": "The provider environment is not substituted for sealed validation."
+    },
+    "inline_slicing_probe": {
+      "kind": "simulated",
+      "status": "passed",
+      "result": "deterministic_test_and_proof_slice_positive_negative=passed",
+      "observed_fixture_identity": {
+        "mandatory_closure_schema": "ipfs_accelerate_py/agent-supervisor/mandatory-dependency-closure@1",
+        "impact_result_schema": "ipfs_accelerate_py.agent_supervisor.code-impact-result@1",
+        "impact_index_id": "7b7823e6998b327aaecf438618124687d6060069d0fb21d9d37efe0577741810",
+        "fixture_repository_tree_id": "tree-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "limitation": "This deterministic generated-fixture probe supplements the direct source suite; it is not a current-source-forest proof or sealed validation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "519 passed in 82.71s",
+      "limitation": "This provider-side execution is simulated evidence under the task's authoritative-environment policy."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only authority selection; the sealed environment also has no z3, cvc5, Lean, or Coq executable."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and scheduler bindings; clean pre-write state; configured-origin ancestry; source/test SHA-256 and Git blobs; v1 schema/version/identity declarations; direct source-test inventory; and the sealed pytest capability failure.",
+    "estimated": "None.",
+    "simulated": "Focused code-evidence integration validation (22 passed in 0.86s); explicit deterministic test/proof selection positive and negative probe; and the provider required proof_context suite (519 passed in 82.71s).",
+    "unavailable": "Authoritative sealed proof_context result due to missing anyio; PCSM SourceLinkReceipt/source-map CID; formal-prover result; a CID-native slice artifact (the selected authorities expose canonical SHA-256 content identities instead); and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it selects existing current-head canonical test-target and proof-obligation slicing and does not mutate proof_context or create a second selector.",
+    "The selected authority is bounded static graph/index analysis. It does not establish whole-CPython runtime semantics, dynamic import/reflection/native behavior, generated-code correctness, test completeness beyond indexed targets, proof truth, or a PCSM source-link artifact.",
+    "A selected validation ID is an indexed requirement, not an executable command or proof of test success. A mandatory closure identifies graph-recorded authority dependencies, not a formal theorem proof.",
+    "Determinism and coverage are bound to canonically normalized, identity-checked graph/index artifacts; arbitrary caller-supplied unordered graphs and indexes are not a canonical authority artifact under this receipt.",
+    "All identities are valid only under the bound tree, source digests, schemas/version, identity profile, and exact test inputs; any change invalidates this receipt.",
+    "The authoritative sealed suite remains unavailable because anyio is absent, so this receipt cannot promote completion despite provider-side passes.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this PCSM test/proof-obligation slicing authority selection. Do not alter the selected datasets source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, graph/index schema or identity profile, slicing contract, or validation-environment capability changes."
+  }
+}
