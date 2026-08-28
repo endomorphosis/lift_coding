@@ -1,0 +1,224 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-070",
+  "title": "Add semantic expansion service",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-070",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-070@current-head-python-v1-semantic-expansion-service-capability-assessment-v1",
+  "observed_at": "2026-08-28T08:21:14Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 semantic-expansion service capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-070.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-070.json",
+    "implementation_delta": "Reuse the current-head DecisionContextCompiler.expand_decision_context service with DecisionContextExpansionRequest@1. It resolves exactly one closure-admitted semantic node by content identity, admits only an expansion-tier handle named for the request question, checks exact parent request/context/witness/repository/tree/authority/semantic-root bindings, produces a compact retry delta, and fail-closes on changed inputs, repeated requests, malformed content, or budget exhaustion. No competing PCSM schema, source-map authority, resolver, model authority, or mutation path was created.",
+    "non_promotion_reason": "The reusable service and its direct positive/negative tests are current-head and pass in the authoritative sealed environment, but no canonical PCSM aggregate SourceLinkReceipt/source-map CID currently binds the named PCSM forest's concrete file/node/span identities. The service therefore cannot truthfully report a source-forest expansion instance, result CID, or promotion from this receipt-only task."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate is used to establish this service, source identity, validation success, or promotion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised contract behavior and never replaces sealed validation or source-forest evidence.",
+    "unavailable": "A required capability, identity, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "621c3e05e7eec6756c7c2bddd5151c047683551d",
+    "outer_tree": "edd0bd70585a9f5513d152491477226ef59087e7",
+    "dispatch_tree_id": "621c3e05e7eec6756c7c2bddd5151c047683551d",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no semantic-expansion authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149",
+        "authority_role": "named current-head Python-v1 semantic-expansion request, compiler, content-addressed resolver, and direct test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no new kit authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared every admitted superproject gitlink with nested HEAD and HEAD^{tree}; inspected outer and admitted nested porcelain before receipt creation; calculated the scheduler and selected source/test SHA-256 values plus Git blobs; inspected the service and direct tests; and searched the exact accelerator implementation and required-PCSM-test roots for a PCSM SourceMap/SourceLink identity.",
+      "result": "The dispatch commit equals outer HEAD, all four recorded nested commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before this declared receipt write. The selected service and test sources are current at the recorded accelerator tree. The exact PCSM SourceMap/SourceLink search produced no result, so a Git tree/blob or generic semantic-graph root is not substituted for a concrete PCSM source-map CID.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, contract version/schema, source-map capability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span identities in the named accelerator implementation/test roots. The service's repository/tree, semantic-graph-root, semantic-node content IDs, Git trees, Git blobs, and SHA-256 file digests are valuable freshness bindings but are not falsely relabelled as this missing source-map contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "service": {
+      "component": "ipfs_accelerate_py.agent_supervisor.context.context_compiler.DecisionContextCompiler.expand_decision_context",
+      "public_wrapper": "ipfs_accelerate_py.agent_supervisor.context.context_compiler.expand_decision_context",
+      "request_type": "ipfs_accelerate_py.agent_supervisor.context.decision_context.DecisionContextExpansionRequest",
+      "request_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-request@1",
+      "budget_type": "DecisionContextExpansionBudget",
+      "budget_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-expansion-budget@1",
+      "contract_version": 1,
+      "resolver": "ContentAddressedContextStore",
+      "result": "DecisionContextRetryResult containing a compact DecisionContextRetryCapsule",
+      "result_schema": "ipfs_accelerate_py/agent-supervisor/decision-context-retry-capsule@1"
+    },
+    "determinism_and_binding": {
+      "kind": "measured",
+      "identity": "The request and budget inherit CanonicalContract: canonical JSON determines content_id/cid, caller-supplied content IDs are recomputed and rejected on mismatch, and the request has a separately deterministic equivalent_request_id over the completeness witness, normalized question, reference ID, and referenced content ID.",
+      "request_binding": [
+        "parent_decision_request_id",
+        "parent_context_id",
+        "parent_completeness_witness_id",
+        "unresolved_question",
+        "expansion-tier ContextReference and referenced content ID",
+        "versioned max_expansions/max_tokens/max_bytes/max_latency_ms budget",
+        "prior_request_ids and expansion_index",
+        "authority_id",
+        "semantic_graph_root_id",
+        "elapsed_latency_ms"
+      ],
+      "admission": "The compiler requires that the handle was admitted by the original closure/witness, that its repository/tree/semantic-root metadata exactly matches the parent bindings, and that its named unresolved question is one of the handle's admitted questions. It resolves bytes by exact SHA-256 content ID, decodes a canonical SemanticNode, and verifies its node/content identity against the admitted dependency before constructing an inline delta.",
+      "budgeting": "The service intersects request, parent, and compiler item/token/byte limits; preserves one cumulative budget identity per witness; rejects repeated equivalent requests, omitted lineage, incorrect index, count/token/artifact/wire-byte/latency budget breaches, and changed parent roots or authority.",
+      "authority_boundary": "The accelerator compiler controls expansion admission and retry-delta construction only. ipfs_datasets retains canonical semantic identity; ipfs_kit retains exact-byte/CID storage; a PCSM local name does not become canonical identity. Model output is not a request, a semantic node, evidence, mutation authority, or promotion authority. This service neither performs M2/M3 mutation nor accepts a result as proof or completion authority."
+    },
+    "minimum_delta_reason": "The existing service already provides a versioned, CID-bound, deterministic semantic-node expansion path and fail-closed boundaries required for Python v1. Adding a PCSM wrapper/schema or a second resolver would duplicate authority and exceeds exact declared-output authority."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+      "git_blob": "fea50c565815772b7e80401d038a92b9ec6489e2",
+      "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece",
+      "role": "DecisionContextCompiler semantic expansion service, exact content-addressed resolver, closure/tree/authority and cumulative-budget admission, canonical SemanticNode verification, compact retry-delta construction, and public wrapper"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/decision_context.py",
+      "git_blob": "cf3288762f1a2640d3b391cb3da4e4d44c03838e",
+      "sha256": "fe29d9958fe0254b393034225dbebf777f88d0d43310642968429ab584f4ee83",
+      "role": "Versioned canonical DecisionContextExpansionRequest and DecisionContextExpansionBudget contracts, canonical content identities, equivalent-request identity, strict typed decoding, and mismatch rejection"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_decision_context_delta.py",
+      "git_blob": "0575f74b679c66cc14ca5d7a7397c6686b024c4d",
+      "sha256": "f0504b3e13c143273dc5cb60e3d6c5f85d5da237a49d057de1500f62281d7e19",
+      "role": "Dedicated positive and negative semantic-expansion service coverage"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm070-required-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.33s",
+      "scope_limit": "The required PCSM suite validates typed, closed candidate-output grammar behavior and rejects model-created completions. It does not itself instantiate a concrete PCSM source-forest expansion because the canonical PCSM source-map CID is unavailable."
+    },
+    "focused_service_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm070-focused-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_decision_context_delta.py",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "17 passed in 1.66s",
+      "positive_coverage": [
+        "A question-bound closure-admitted expansion yields only a compact delta, reconstructs the exact parent, preserves semantic-node identity, reduces replay tokens, and JSON-round-trips the expansion request.",
+        "Retry deltas preserve omissions and exact parent reconstruction, and repeated paired retries retain mandatory closure coverage while reducing token input."
+      ],
+      "negative_coverage": [
+        "Repeated equivalent requests and unrelated questions fail closed.",
+        "Unadmitted/cross-boundary handles and repository/tree/semantic-root/authority drift fail closed.",
+        "Count, token, artifact-byte, and latency budget breaches fail closed.",
+        "Forged retry identities, unknown fields, corpus browsing, structural dependency change, cancellation, and stale root/authority states remain rejected or invalidated."
+      ],
+      "scope_limit": "This direct suite proves the selected reusable service behavior, not a PCSM source-map-bound production expansion or promotion."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "This deterministic admission/resolution service has no kernel-checkable theorem-prover obligation declared by PCSM-070. Passing contract tests do not become a proof, mutation approval, or promotion authority."
+    }
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "service_available_source_forest_instance_unavailable_non_promoted",
+    "available_capability": "A current-head, deterministic, versioned, CID-bound Python-v1 semantic expansion service is present and independently exercised by sealed positive and negative tests.",
+    "unavailable_capability": "A concrete expansion request/result for the exact PCSM source forest, including a canonical PCSM source-map/SourceLinkReceipt CID that identifies its file/node/span source material.",
+    "missing_bindings": [
+      "canonical aggregate PCSM SourceLinkReceipt or source-map CID",
+      "current PCSM forest nodes/spans linked to that source map",
+      "a source-map-bound PCSM expansion request and emitted retry result CID"
+    ],
+    "disposition": "No PCSM source-map CID, concrete source-forest request, service result CID, proof result, estimated token figure, or model-derived evidence is invented. Missing values are unavailable rather than zero. The reusable service remains within its existing authority boundary and is ready for a later source-map-bound consumer."
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; the selected schemas/contracts/bindings; sealed required validation (11 passed); and sealed focused service validation (17 passed).",
+    "estimated": "None. No estimate supports implementation, identity, test success, source-forest execution, proof, or promotion.",
+    "simulated": "None. No simulated result is presented as production or sealed validation evidence.",
+    "unavailable": "Canonical current-PCSM aggregate SourceLinkReceipt/source-map CID; a corresponding exact-PCSM source-forest request/result CID; and a formal-prover result, which is not applicable to this service task."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify the selected accelerator service/tests, create a parallel PCSM service, or materialize generated source.",
+    "The generic semantic-graph-root and repository/tree bindings are not substitutes for the unavailable canonical PCSM file/node/span source-map CID.",
+    "The ContentAddressedContextStore is an in-memory resolver in this implementation; storage durability remains an external authority concern and is not claimed here.",
+    "The service constrains one closure-admitted semantic-node expansion and a compact retry delta; it does not itself implement later PCSM-071 through PCSM-076 symbol/span/counterexample/test expansion, refinement, or fallback policies.",
+    "No model output, test result, or request is treated as evidence, proof, source mutation, M2/M3 mutation, promotion, or completion authority.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, the existing accelerator semantic-expansion implementation, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, schema/version/identity behavior, source-map capability, or sealed validation result changes."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalent_reused_first": true,
+    "semantic_expansion_service_available": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "sealed_required_validation_passed": true,
+    "sealed_focused_service_validation_passed": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_expansion_instance_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_pcsm_source_map_bound_instance"
+  }
+}
