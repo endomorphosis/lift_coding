@@ -1,0 +1,437 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-supervisor-callback-continuity-transition@1",
+  "reason": "preserve_terminal_callback_and_live_supervisor_generation_continuity",
+  "prior_checkpoint": {
+    "source_head": "4050488f0f8601f257946bd1fbd520e01617b651",
+    "repository_tree_id": "fba21e2a5f2a5b1edc17bacc9f19ffb4cd1e8488",
+    "prior_artifact_commit": "c2f40b62eae073798c24adedcb0484b47393dee8",
+    "database_lifecycle_identity_transition_receipt_id": "sha256:3f94f1eee5297d02dde7fcebd54e6afc40423534514caf6e565368ddbb58997f",
+    "changed_receipts": [
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-027.json",
+        "bytes_id": "sha256:5836b2f76182b9ad83005068c81888464d9b2ee7f2a3099ace2bbf3b450f5772"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-028.json",
+        "bytes_id": "sha256:3631475bf96bac744a6d3bb9bf048ab39c98408a996eb2bd6a66805769882b3f"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-030.json",
+        "bytes_id": "sha256:c588061ebbd0b388c4c7b2b8301d8ba3f4b3af97594607428cd8a6c13727f10f"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-031.json",
+        "bytes_id": "sha256:66abc17a7b60b77192514283602a375f343263567845107bd4215bb53df46005"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-032.json",
+        "bytes_id": "sha256:9f8ec42636058fcafb5f0e24dfb5875444d3704a4bcfb2cc222d6ed314b79859"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-033.json",
+        "bytes_id": "sha256:636d832015c044126b50ca096d3571a8be33981949c25284071dff05a970e50b"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-035.json",
+        "bytes_id": "sha256:756e46f6c443eba954c4e938bdbcd1eee6c4f71a2142d0b8b030c3cde2557b4c"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-043.json",
+        "bytes_id": "sha256:df38e5f5340fa38aa383037b8326f98eca6f2f04ab31fd6d4e708fb33edc42e2"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-044.json",
+        "bytes_id": "sha256:db5e0de909216bdb8785d2a99026c5952823db2b68633f88eb3ed4e81ee85c3c"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-045.json",
+        "bytes_id": "sha256:a9acba8f9e46e0ea0e76d74da4e1610dd1b8251b74460358b36b8c6a4fedfa0f"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-051.json",
+        "bytes_id": "sha256:72a29f5dcd1726156635321afa2cd8ded6a7887eeb75fc38468e8b6be26ce24f"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-052.json",
+        "bytes_id": "sha256:bcbace9e94e819f09b273988576e4df5b5e955e8b201f7aea59b7c4e5f7c5eea"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-053.json",
+        "bytes_id": "sha256:15c2ba77680ffcb2ebc96ed263c9ccb6a54825e5a51351a3ae53c4327433cca1"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-054.json",
+        "bytes_id": "sha256:039c3e7cf1da3ef1356f81fa3c345413f6046ba811cdc2178ab66d5b9ab6f7be"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-055.json",
+        "bytes_id": "sha256:3588a01a67fef53357d97e0a4e7d44c321b3cbf6a9b40b53c201459abc81a715"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-056.json",
+        "bytes_id": "sha256:79e6f818ff38a6d65bb32bfc0a4c406a189c1db77333170abde880e33cea7a22"
+      },
+      {
+        "path": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-057.json",
+        "bytes_id": "sha256:451a2ff3afdfa4ed4d0bafb4cde060a3ed81e29a329619bb6d3eca98c5474315"
+      }
+    ],
+    "authority_snapshot": {
+      "task_count": 70,
+      "goal_count": 11,
+      "package_count": 96,
+      "completed_task_count": 42,
+      "in_progress_task_count": 2,
+      "deferred_task_count": 26,
+      "in_progress_tasks": [
+        {
+          "task_alias": "PCSM-033",
+          "checkpoint_disposition": "landed_but_database_in_progress"
+        },
+        {
+          "task_alias": "PCSM-060",
+          "checkpoint_disposition": "database_in_progress"
+        }
+      ]
+    }
+  },
+  "repair_base": {
+    "source_head": "30153934f36656cb54bbfeb3b748504b072e13f2",
+    "repository_tree_id": "adcdcb4735c63b1d039e6a3ea7329f62c5fe52b7",
+    "parent": "4050488f0f8601f257946bd1fbd520e01617b651",
+    "operator_identity": "sha256:82e14e82547e782ba9d17b7c4fd6077716c428a3e744103c40b32eca54b0a757",
+    "config_identity": "sha256:3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "validator_identity": "sha256:57e3b957019ef0ee20cee5d2f50a7bfb5b1172ea8ee04db89a3426d28a290e89",
+    "accelerator_head": "288d681b6dd68683520758010e7c2f10f72a73cf",
+    "accelerator_tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149",
+    "changed_paths": [
+      "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "external/ipfs_accelerate",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "test/test_pcsm_supervisor_callback_continuity_transition.py"
+    ],
+    "nested_changed_paths": [
+      "ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+      "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+      "test/api/test_agent_supervisor_multi_supervisor_generation_status.py",
+      "test/api/test_agent_supervisor_multi_supervisor_shutdown.py",
+      "test/api/test_agent_supervisor_reconciliation_auto_unblock.py",
+      "test/api/test_implementation_supervisor_control_plane_pool_lease.py"
+    ],
+    "nested_commits": [
+      {
+        "purpose": "exact_legacy_and_routed_completion_cleanup",
+        "source_head": "92bdc6b6635d0bd87ce1f3e9907bc569b0424acd",
+        "repository_tree_id": "c6a9c7be69d966af9a8e83d356496f766fa582c1",
+        "parent": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "test/api/test_agent_supervisor_reconciliation_auto_unblock.py"
+        ]
+      },
+      {
+        "purpose": "merge_queue_terminal_callback_continuity",
+        "source_head": "79f87a003f8d23f3bd2f19678f3c05ca7559402a",
+        "repository_tree_id": "bd09f4098a08149ba481aabc7db4b98c487ee9f8",
+        "parent": "92bdc6b6635d0bd87ce1f3e9907bc569b0424acd",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "test/api/test_implementation_supervisor_control_plane_pool_lease.py"
+        ]
+      },
+      {
+        "purpose": "post_live_generation_bound_status_gap_grace",
+        "source_head": "a0a2a0b5053bac91e0e3ef89789fd763b5cae874",
+        "repository_tree_id": "1985947273fbd1eafffcf9ecebf67669bb90ba85",
+        "parent": "79f87a003f8d23f3bd2f19678f3c05ca7559402a",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py",
+          "test/api/test_agent_supervisor_multi_supervisor_generation_status.py",
+          "test/api/test_agent_supervisor_multi_supervisor_shutdown.py"
+        ]
+      },
+      {
+        "purpose": "checkout_repair_watchdog_precedence",
+        "source_head": "b01abb8b97312f4c4860a2fa261c30c005aaefdb",
+        "repository_tree_id": "834330abdfc97689ff4cd6ca799c0d62607c29cb",
+        "parent": "a0a2a0b5053bac91e0e3ef89789fd763b5cae874",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "test/api/test_implementation_supervisor_control_plane_pool_lease.py"
+        ]
+      },
+      {
+        "purpose": "stable_type_exact_post_state_proof",
+        "source_head": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "repository_tree_id": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149",
+        "parent": "b01abb8b97312f4c4860a2fa261c30c005aaefdb",
+        "changed_paths": [
+          "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "test/api/test_implementation_supervisor_control_plane_pool_lease.py"
+        ]
+      }
+    ]
+  },
+  "sealed_source": {
+    "source_head": "ab716c7b2c873758e84f0a7e17abb4acb0fa5c28",
+    "repository_tree_id": "68a4f3cb474c77f09125c6eb4be49b4fbc6262f3",
+    "parent": "30153934f36656cb54bbfeb3b748504b072e13f2",
+    "operator_identity": "sha256:d260b4de228dced9a2059d3141808e129cf4aed7ba476433c0d0c5cd397776ad",
+    "changed_paths": [
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+    ]
+  },
+  "continuity_contracts": {
+    "completion_cleanup": {
+      "accepted_completion_receipt_routes": [
+        "legacy",
+        "routed"
+      ],
+      "required_identity_match": "exact",
+      "exact_completion_disposition": "cleanup_only",
+      "missing_duplicate_or_tampered_disposition": "fail_closed"
+    },
+    "terminal_callback": {
+      "callback_phase": "merge_queue",
+      "continuity_window": "after_lifecycle_terminalization_and_checkout_release_before_synchronous_merge_train_return",
+      "required_exact_bindings": [
+        "managed_child_process_birth",
+        "task_alias",
+        "attempt_id",
+        "claim_id",
+        "lease_id",
+        "worktree_path",
+        "branch",
+        "repository_root",
+        "implementation_lock",
+        "database_attempt_binding",
+        "nested_state"
+      ],
+      "exact_callback_disposition": "defer_recycle",
+      "missing_ambiguous_or_tampered_disposition": "fail_closed"
+    },
+    "post_maintenance_state": {
+      "fresh_database_rereads_required": [
+        "active_pool_checkout",
+        "active_nonterminal_lifecycle_claim",
+        "active_terminal_portal_callback"
+      ],
+      "pre_maintenance_snapshot_is_post_authority": false,
+      "exact_live_disposition": "defer_recycle",
+      "missing_ambiguous_or_tampered_disposition": "fail_closed"
+    },
+    "checkout_repair": {
+      "precedence": "checkout_repair_before_watchdog_stuck_override",
+      "repaired_checkout_disposition": "defer_recycle",
+      "unverified_repair_disposition": "fail_closed"
+    },
+    "stable_post_state": {
+      "proof": "two_identical_type_exact_snapshots",
+      "boolean_is_integer": false,
+      "required_exact_types": true,
+      "unstable_or_malformed_disposition": "fail_closed"
+    },
+    "status_gap": {
+      "scope": "post_live_exact_process_generation",
+      "grace_start": "first_missing_or_generation_invalid_read",
+      "bad_reads_reset_grace": false,
+      "new_process_generation_resets_state": true,
+      "within_grace_disposition": "keep_running",
+      "expired_or_unbound_disposition": "restart_supervisor"
+    },
+    "deferral_budget": {
+      "daemon_recycled": false,
+      "attempt_budget_consumed": false,
+      "provider_invocation_consumed": false
+    }
+  },
+  "incident_evidence": {
+    "generation": 45,
+    "observations": [
+      {
+        "task_alias": "PCSM-043",
+        "failure": "lost_first_enqueue"
+      },
+      {
+        "task_alias": "PCSM-045",
+        "failure": "duplicate_merge"
+      },
+      {
+        "lanes": [
+          "lane1",
+          "lane3"
+        ],
+        "failure": "repeated_status_missing_whole_supervisor_replacements"
+      },
+      {
+        "scope": "completed_tasks",
+        "failure": "post_completion_daemon_churn"
+      }
+    ]
+  },
+  "validations": [
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/test_implementation_supervisor_control_plane_pool_lease.py"
+      ],
+      "outcome": "passed",
+      "summary": "80 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_reconciliation_auto_unblock.py"
+      ],
+      "outcome": "passed",
+      "summary": "30 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_database_portal_bridge.py"
+      ],
+      "outcome": "passed",
+      "summary": "400 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_multi_supervisor_generation_status.py",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_multi_supervisor_shutdown.py"
+      ],
+      "outcome": "passed",
+      "summary": "33 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_configured_board_scheduler.py"
+      ],
+      "outcome": "passed",
+      "summary": "205 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "external/ipfs_accelerate/test/agent_supervisor"
+      ],
+      "outcome": "passed",
+      "summary": "11 passed"
+    },
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "python",
+        "-m",
+        "py_compile",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    },
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "ruff",
+        "check",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+        "ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    },
+    {
+      "cwd": "external/ipfs_accelerate",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "3f7d99541e8a08f89452765dfad1bb2810bc44ff..288d681b6dd68683520758010e7c2f10f72a73cf"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_supervisor_callback_continuity_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "5 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_blocked_retry_batch_recovery.py",
+        "test/test_pcsm_executor_bootstrap_broker_resilience.py",
+        "test/test_pcsm_stale_worktree_cleanup_transition.py",
+        "test/test_pcsm_validation_path_compatibility_transition.py",
+        "test/test_pcsm_database_watchdog_activity_transition.py",
+        "test/test_pcsm_database_lifecycle_identity_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "22 passed, 4 warnings in 1.25s"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all"
+      ],
+      "outcome": "passed",
+      "summary": "valid board: 70 tasks, 11 goals, 96 packages"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "launch-supervisor",
+        "--dry-run"
+      ],
+      "outcome": "passed",
+      "summary": "admission passed without launching runtime"
+    }
+  ],
+  "historical_receipts_preserved": true,
+  "database_authority_preserved": true,
+  "task_state_mutation": false,
+  "manual_database_mutation": false,
+  "manual_worktree_mutation": false,
+  "receipt_id": "sha256:29f4c4adf68f09ec4e6577214dbcce788f203a188e77e2117c32f89996402cab"
+}
