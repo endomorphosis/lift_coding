@@ -9,6 +9,10 @@
   "status": "implemented_non_promoted",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
   "artifact_identity": "urn:pcsm:task-receipt:PCSM-017@current-head-expansion-request-selection-v2",
   "observed_at": "2026-08-28T02:02:05Z",
   "scope": {
@@ -22,7 +26,7 @@
     ],
     "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-017.json",
     "implementation_delta": "Select the existing accelerator DecisionContextExpansionRequest as the receipt-bound Python v1 SemanticProjectionExpansionRequest selection. No competing proof_context record, registered schema, wrapper, owner, compiler, linker, or language scope was created.",
-    "non_promotion_reason": "The required sealed pytest command cannot collect because its explicitly configured anyio plugin is unavailable. This receipt does not promote a source mutation or claim that unavailable test execution passed."
+    "non_promotion_reason": "This receipt-only selection creates no source mutation or promotion. A direct private-HOME PYTHONNOUSERSITE interpreter probe could not collect because its explicitly configured anyio plugin was unavailable; the later Portal validator passed the required suite against the candidate tree, but that historical validation is not completion authority for this receipt-only evidence amendment."
   },
   "evidence_legend": {
     "measured": "Observed directly from the bound source forest or sealed validation environment.",
@@ -76,6 +80,11 @@
       "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for each admitted gitlink; git -C <root> rev-parse HEAD and HEAD^{tree}; and git status --porcelain=v1 for the outer repository and four admitted roots.",
       "result": "The outer head/tree, all four superproject gitlinks, all nested heads/trees, and scheduler planning revisions agree. All five inspected worktrees were clean before this receipt write.",
       "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, source digest, scheduler binding, or dirty admitted root requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree source-map artifact or canonical source-map CID is present at this selection task. Related syntax-core maps, legal-IR maps, and accelerator AST spans are not substituted for a bound PCSM SourceLinkReceipt.",
+      "evidence_kind": "unavailable"
     },
     "prior_receipt_rejection": {
       "kind": "measured",
@@ -207,12 +216,56 @@
     },
     "required_validation": {
       "kind": "unavailable",
+      "observation_scope": "direct_private_home_python3_12_capability_probe_before_portal_validation",
       "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
       "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
       "status": "unavailable",
       "result": "pytest aborted before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
       "unqualified_python": "unavailable on the authoritative PATH",
-      "fail_closed_disposition": "No provider-home package or altered plugin configuration was treated as validation evidence."
+      "fail_closed_disposition": "No provider-home package or altered plugin configuration was treated as evidence for this direct probe.",
+      "does_not_override_portal_validation": true
+    },
+    "portal_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "result": "519 passed in 64.28s",
+      "command": "export PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit:Mcp-Plus-Plus && python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "database_attempt_id": "attempt:5df33bfc3b8b462596d46f6638d506eb",
+      "database_attempt_number": 2,
+      "database_binding_id": "sha256:d8323c76679224513145a612e0d382f82b92809e825fe8adbcac4c90d7b16015",
+      "database_task_cid": "baguqeeravik6msftwaidryxvqqb2y6evm7gkeqch5dbhrgvgtjhoymtpfa4a",
+      "claim_id": "claim:11065fa6fa524c88976bd986812e0203",
+      "fence_epoch": 2,
+      "fencing_token": 2,
+      "portal_attempt": 1,
+      "portal_canonical_task_cid": "baguqeeraht5aroxxulbjeoyfmhbjo7hb7hxdy7cve65556fzea7ok2jcotra",
+      "portal_canonical_task_key": "task/v1/3cfa08baf7a2c2923b0561c2977ce1f9ee3c7c5527bbdef8b9203ee5692274e2",
+      "event_stream_id": "event-log:sha256:357ba1a997b72c35a6a7e25bb25572919d36010e027cfa8bea8e6d11845f657b",
+      "event_sequence": 44,
+      "event_id": "sha256:86bba1a918516614e004cf4c5894e690dd5ec644ea7425757ea7eb0ce6488f14",
+      "validation_id": "declared:f6aa4bcc0576a3234fb6d6c4cb00b4da8751f2207981f3fc035be7e1210e8794",
+      "validation_result_digest": "e60ff4ac2c0614c73f34947a578a182ad816d2533726af02731e37ec2cef03fd",
+      "validation_dag_receipt_id": "e0b7fb42d5b3ada6f901f14dc058670b6181e1a75cc44ce202b8677d79ad7af2",
+      "proposal_receipt_id": "5e8a67011a3e48885e713ff831f04bd7981c79ac8b67cc301195f87f1c539ef0",
+      "baseline_ref": "2e026dedf55f06fab065b63c17a8eeccccc63f8b",
+      "implementation_commit": "0a8fae0811a85e139843c3e8098a374566fb391a",
+      "candidate_tree": "599b519e3a2822dc9e75fd119d6124d57fdbdb81",
+      "returncode": 0,
+      "timed_out": false,
+      "started_at": "2026-08-28T02:06:02.650528+00:00",
+      "finished_at": "2026-08-28T02:07:07.734918+00:00",
+      "execution_elapsed_seconds": 65.51999250496738,
+      "launcher_mode": "linux:sealed-memfd",
+      "launcher_sealed": true,
+      "launcher_policy_sha256": "75192d2d6843d39c589bf2204a2ad25437374d49151b3dee454902db2edc96ac",
+      "completion_authoritative": false,
+      "proof_authoritative": false,
+      "observation_scope": "historical_portal_validation_of_candidate_before_this_receipt_only_evidence_amendment",
+      "amendment_base_commit": "50e72a20b3f97f1c9ef1c0c9622a657901b97646",
+      "amendment_validation": "Sequence 44 validates candidate tree 599b519e3a2822dc9e75fd119d6124d57fdbdb81 at implementation commit 0a8fae0811a85e139843c3e8098a374566fb391a. This later receipt-only amendment is operator-checked with json.tool, an exact event cross-check, and git diff --check; the historical Portal result is not claimed as Portal validation or Portal completion authority for the amended bytes.",
+      "event_log_path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state/lane-1/pcsm_lane_1_database_portal_attempts/9d8e96451cf242d829f2c99d/portal-events.jsonl",
+      "database_attempt_binding_path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state/lane-1/pcsm_lane_1_database_portal_attempts/9d8e96451cf242d829f2c99d/database-attempt-binding.json",
+      "implementation_log_path": "data/agent_supervisor/proof_carrying_semantic_minification_v1/state/lane-1/pcsm_lane_1_database_portal_attempts/9d8e96451cf242d829f2c99d/implementation-logs/pcsm-017-attempt-1.log"
     },
     "receipt_json_validation": {
       "kind": "measured",
@@ -226,14 +279,14 @@
     }
   },
   "evidence_summary": {
-    "measured": "Current-head source forest, gitlinks, source digests, schema/version/field bindings, source-test inventory, and sealed pytest capability failure.",
+    "measured": "Current-head source forest, gitlinks, source digests, schema/version/field bindings, source-test inventory, and the exact historical Portal validation event that passed 519 tests for candidate tree 599b519e3a2822dc9e75fd119d6124d57fdbdb81.",
     "estimated": "None.",
     "simulated": "Fixed-request deterministic round-trip and fail-closed constructor checks only.",
-    "unavailable": "Required sealed pytest execution, formal-prover result, and a canonical storage CID for this self-describing receipt."
+    "unavailable": "The direct private-HOME PYTHONNOUSERSITE pytest capability probe, a formal-prover result, and a canonical storage CID for this self-describing receipt."
   },
   "limitations": [
     "SemanticProjectionExpansionRequest@1 is a receipt-bound selection name, not a registered schema and not a canonical identity.",
-    "The required proof_context suite could not collect in the authoritative environment because anyio is absent; its source tests are inventoried but not reported as executed.",
+    "The direct private-HOME PYTHONNOUSERSITE probe could not collect because anyio was absent. The later Portal sealed-launcher validation passed 519 tests for candidate tree 599b519e3a2822dc9e75fd119d6124d57fdbdb81; it is recorded separately and is not claimed as Portal validation of this receipt-only amendment.",
     "No source-map artifact, projection builder, CEGAR pager, source-link receipt, or promotion decision is produced by this task.",
     "The receipt's own canonical storage CID is unavailable: issuing one would change the self-describing payload. The selected contract CIDv1 is measured separately."
   ],
