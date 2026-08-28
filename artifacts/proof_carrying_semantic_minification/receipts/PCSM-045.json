@@ -10,7 +10,7 @@
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
   "artifact_identity": "urn:pcsm:task-receipt:PCSM-045@current-head-bounded-alias-table-capability-assessment-v1",
-  "observed_at": "2026-08-28T06:37:25Z",
+  "observed_at": "2026-08-28T06:42:44Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -32,10 +32,10 @@
   "current_tree_binding": {
     "kind": "measured",
     "outer_repository": "endomorphosis/lift_coding",
-    "outer_commit": "e3b4137add19388bad9a181e0f68a2749859fd8b",
-    "outer_tree": "2b9ae82ee212d8f1696b090a7c30f9aa59ec14bc",
+    "outer_commit": "2fbeaa1469598840b09d3d664c32e96be91507b9",
+    "outer_tree": "fbbb94d9fbc6c70efc26462184eb4b9d74c78a66",
     "git_object_format": "sha1",
-    "dispatch_tree_id": "e3b4137add19388bad9a181e0f68a2749859fd8b",
+    "dispatch_tree_id": "2fbeaa1469598840b09d3d664c32e96be91507b9",
     "dispatch_tree_id_equals_outer_commit": true,
     "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
