@@ -1,0 +1,260 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-083",
+  "title": "Add durable projection storage and recovery",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G700",
+  "objective_id": "PCSM-083",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-083@current-head-python-v1-durable-projection-storage-and-recovery-capability-assessment-v1",
+  "observed_at": "2026-08-28T17:56:03Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python-v1 durable projection storage and recovery capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-083.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-083.json",
+    "implementation_delta": "Reuse and assess the current-head Kit persistence layers before proposing any new PCSM code. KitProofContextStateStore@0.1 supplies durable immutable byte/CID storage; HermeticProofSealStore and recover_seal_transitions@1 supply atomic object publication, durable WAL-prefix recovery, current-seal-pointer recognition, deterministic/idempotent recovery decisions, and stale-parent fencing. Neither layer defines a versioned PCSM ProjectionRoot record, binds a projection to an exact PCSM repository/tree/source-map CID, persists a named PCSM projection head, or recovers a PCSM projection. The exact declared-output boundary permits only this receipt, so no duplicate storage/recovery subsystem, wrapper, schema, or test mutation is created.",
+    "non_promotion_reason": "The requested complete capability is absent: current Kit recovery is seal-transition recovery, not PCSM projection recovery, and current proof_context tests contain no typed projection storage/recovery contract. The required sealed suite cannot import its conftest because aiohttp is unavailable with the mandated fresh HOME/XDG roots and PYTHONNOUSERSITE=1. Generic storage/recovery source and unexecuted tests are not promoted to an exact-PCSM implementation, successful validation, concrete source-forest projection, proof, or completion decision."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate establishes implementation, identity, validation success, source-forest execution, proof, or promotion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised generic contract behavior and never substitutes for source-forest evidence or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "a118f77c97a8ab43ce0405abfa938ab9e79696d9",
+    "outer_tree": "51dbd7dc6941c2354f957a73e00304011638494f",
+    "dispatch_tree_id": "a118f77c97a8ab43ce0405abfa938ab9e79696d9",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "bdb6becdd3499dd32bca9004460f375b8465eb0e",
+    "scheduler_config_sha256": "a83e6f853a7d159af999c9af2eaa2ab6062cb3c8e0a7feafb58eb57578af20a8",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "authority_role": "wire-contract boundary only; no PCSM projection-storage authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "authority_role": "PCSM/supervisor boundary only; no Kit persistence authority selected"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "authority_role": "canonical semantic-identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "current-head exact-byte durability and seal-transition recovery boundary assessed for the requested capability"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared the direct admitted gitlinks with their checked-out nested HEADs; inspected outer and Kit porcelain before the receipt write; calculated scheduler and selected source/test Git blobs and SHA-256 digests; searched the current proof_context and proof_seal_store roots and their focused tests for versioned PCSM projection storage/recovery symbols; and ran the required suite under the prescribed PATH with a fresh private HOME/XDG root and user-site disabled.",
+      "result": "The dispatch commit equals outer HEAD and the selected Kit commit/tree equals its checked-out head. Both inspected worktrees were clean before the declared receipt write. Kit contains deterministic durable bytes and deterministic seal-transition recovery, but no ProjectionRoot, projection-root persistence, projection store, projection-recovery entry point, or PCSM tree/source-map binding in the inspected exact roots. The sealed required suite failed before collection solely because tests/conftest.py imports unavailable aiohttp; no test was collected or executed.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, storage or recovery version/schema/identity behavior, PCSM projection/source-map capability, aiohttp availability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span identities to a durable projection. Repository trees, Git blobs, SHA-256 digests, arbitrary Kit object CIDs, and generic seal pointers are freshness or generic-storage evidence only and are not relabelled as this missing PCSM contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "The selected Kit layers are the closest reusable durability/recovery authorities already present at current head. Replacing or wrapping them would create a competing persistence/recovery authority; extending them with PCSM projection semantics would require source and direct tests outside this exact receipt-only dispatch.",
+    "components": [
+      {
+        "component": "ipfs_kit_py.proof_context.state_store.KitProofContextStateStore@0.1",
+        "schema": "ipfs-kit.proof-context.v0.1",
+        "version": "0.1",
+        "role": "Explicit-root durable facade over HermeticProofSealStore. It delegates immutable byte writes, verified reads, and CIDv1-base32 byte identity to artifacts helpers.",
+        "equivalence_limit": "It accepts arbitrary bytes and has no ProjectionRoot schema, canonical projection serialization, named projection-head lookup, projection-CID-to-source-map/tree validation, projection recovery entry point, or recovery report."
+      },
+      {
+        "component": "ipfs_kit_py.proof_seal_store.local_store.HermeticProofSealStore",
+        "schema": "ipfs_kit_py/proof_seal_store contracts",
+        "version": "current-head selected implementation",
+        "role": "Lower-layer immutable artifact store. Its object write path verifies bytes/CID, writes a temporary file, fsyncs the file, atomically replaces the object, and fsyncs the parent directory; duplicate bytes return the same artifact identity.",
+        "equivalence_limit": "It persists generic artifact kinds rather than a typed PCSM projection; it does not own semantic authority, parse PCSM projections, bind a PCSM source forest, select canonical identity, or recover a named PCSM projection head."
+      },
+      {
+        "component": "ipfs_kit_py.proof_seal_store.recovery.recover_seal_transitions@1",
+        "schema": "ipfs_kit_py/proof_seal_store/recovery@1",
+        "version": 1,
+        "role": "Explicit-root deterministic and idempotent recovery of durable seal-transition WAL records. It emits only closed dispositions (resume, replay, verify-existing, discard-uncommitted, repair, full-reproof), recognizes current seal pointers, repairs corrupt WAL tails, and fences stale parents without inferring prover success.",
+        "equivalence_limit": "Its durable unit is a seal transition keyed by repository_id/branch_id and current-seal pointer, not a PCSM projection. It has no PCSM ProjectionRoot schema, projection/alias records, exact PCSM tree/source-map fields, projection replay semantics, or direct proof_context exposure/test vector."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "available_binding": "artifacts.cid_for_bytes derives CIDv1-base32 byte identity; the state facade verifies claimed-CID agreement on writes and recomputes identity on reads. Seal recovery has schema ipfs_kit_py/proof_seal_store/recovery@1, contract version 1, a closed disposition vocabulary, canonical decision sorting by repository_id/branch_id/transition_id, and idempotence/stale-parent rules documented in its public function.",
+      "missing_binding": "No versioned PCSM projection payload identifies a canonical projection CID, exact repository/tree/source-map CID, projection schema version, expected/result projection head, durable source-map proof, or recovery-result CID. No Kit byte CID, seal CID, current-seal pointer, or alias is treated as any of these absent semantic bindings.",
+      "authority_boundary": "Kit durability establishes exact-byte identity and seal-transition recovery only. It does not decide projection semantic correctness, select canonical semantic identity, authorize aliases, mutate PCSM source, authorize M2/M3 work, admit a projection, or make a completion/promotion decision. A future alias must remain non-canonical."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/state_store.py",
+      "git_blob": "678784b76c0fd6e5c0e9d4e0d5edb2574a199fad",
+      "sha256": "8423b83eacc19b5605b3a5d9691836fdad4e7162d8922040ff4ed13e72a51778",
+      "role": "Current proof-context durable generic byte/CID facade; no typed PCSM projection/recovery surface."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/artifacts.py",
+      "git_blob": "144571fd1b502f64c26dec48b9909c59a307d8b2",
+      "sha256": "1a9fc36d8388ff09f74da2ad414cbfe5752f7e6147068a92c540cd024936d804",
+      "role": "CIDv1-base32 byte identity, immutable write, claimed-CID rejection, and verified read helpers."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
+      "git_blob": "7dff02d6d93c254b8ad2685462e92136260ac8dd",
+      "sha256": "86a13c7965a9f7aca6a196a3c08f8673cd5d0fc143baf74041675493b883b318",
+      "role": "Generic checkpoint/delta-seal persistence with caller-supplied parent equality and simulated-provenance rejection; no persisted projection relation or recovery API."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py",
+      "git_blob": "9bc8b3b9c8f150deab34b39ee50ccb5af5a613aa",
+      "sha256": "7ebe8404e165f9b0dc713fe7ffebbed9a2c080cc2c56fe60819e26111f861978",
+      "role": "Generic proof-receipt persistence with simulated-provenance and stale-generation guards; no durable PCSM projection recovery."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_seal_store/local_store.py",
+      "git_blob": "5bd118392f02cf39ee92d0d9844a5172248d6c16",
+      "sha256": "6a6d25c40a30d2d9393080d95647abf09d1bd3f940d179b3396c18bd6c96bcb5",
+      "role": "Atomic fsync-backed generic immutable object persistence selected beneath proof_context."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_seal_store/recovery.py",
+      "git_blob": "171f05aae7f1407fdb21659085e21324c1bb239d",
+      "sha256": "50bb19c9f3fb2123af689be037a45ca840ff06e79fcdef76d6fd84fd4c7ad405",
+      "role": "Versioned deterministic seal-transition recovery and typed recovery reports; selected as an adjacent reusable lower-layer recovery authority only."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_seal_store/wal.py",
+      "git_blob": "14c2578953a1475f7d3ba9bd2ead15a342151d88",
+      "sha256": "f5e71aeb0954fcc37e4a7cab59edef2a2908386e8149d7822e2cf0c652f88974",
+      "role": "Durable seal-transition WAL persistence/recovery input; it contains no PCSM projection schema."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/tests/proof_context",
+      "role": "Thirty-seven source-defined focused test functions. They cover generic proof-context storage, seal/receipt guards, installation profile, and trust admission; no source file defines projection storage/recovery test vectors."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_kit/tests/proof_seal_store/test_recovery.py",
+      "git_blob": "9bbcd5758f4f2bf2d7237d4ebdf2f2590579ee4b",
+      "sha256": "fcd4377fdfbaf1d8dacf1f67b2c5fe794f0853ab3489f6a0facc0b8aea688b30",
+      "role": "Fourteen source-defined generic seal-transition recovery vectors, including closed dispositions, explicit roots, idempotent restart, corrupt-tail repair, and stale-parent rejection; not a PCSM projection test module."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "package_specific_projection_storage_and_recovery_tests": {
+      "kind": "unavailable",
+      "status": "absent",
+      "result": "No current proof_context or proof_seal_store source/test file defines a versioned PCSM ProjectionRoot, named projection persistence/retrieval, exact tree/source-map admission, projection recovery report, deterministic restart of a PCSM projection, projection corruption handling, stale projection-head rejection, or schema/CID/source-map negative vector.",
+      "scope_limit": "Generic byte, seal, and current-seal recovery vectors cannot establish the absent PCSM projection-storage/recovery contract."
+    },
+    "generic_test_inventory": {
+      "kind": "measured",
+      "status": "present_unexecuted",
+      "result": "The required proof_context directory contains 37 test functions. Its generic positive source vectors cover byte/receipt/seal round trips, byte deduplication, and admission. Its generic negative source vectors cover claimed-CID mismatch, simulated provenance, wrong parent, stale generation/ABA, unavailable transport, corruption, and trust/admission rejection. The adjacent recovery test module contains 14 generic recovery vectors for closed disposition selection, explicit root rejection, idempotence, corrupt-tail repair, post-CAS cleanup, and stale-parent fencing.",
+      "scope_limit": "This is source inventory, not executed test evidence. Its temporary-root fixtures are not an exact-PCSM source-forest projection or promotion result."
+    },
+    "required_validation": {
+      "kind": "unavailable",
+      "status": "environment_dependency_unavailable_before_collection",
+      "requested_command": "python -m pytest -q external/ipfs_kit/tests/proof_context",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm083-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_kit/tests/proof_context",
+      "environment": "Authoritative sealed Python 3.12.3 and pytest 9.1.1 with prescribed PATH, fresh private HOME/XDG root, and user-site disabled.",
+      "result": "ImportError while loading external/ipfs_kit/tests/conftest.py: ModuleNotFoundError: No module named 'aiohttp'. No tests collected or executed.",
+      "dependency_probe": "Under the same sealed command environment, conftest's direct aiohttp import failed. A provider-side interpreter probe without PYTHONNOUSERSITE is not substituted for this authoritative result.",
+      "scope_limit": "This is unavailable validation capability, not a failed semantic assertion and not a passing test result. Installing or relying on a provider-only dependency would not establish the sealed result."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "No versioned PCSM durable-projection/recovery contract, canonical PCSM source-map CID, concrete PCSM projection recovery request/result, or approved digest-bound formal-prover deployment is present. Generic byte verification and unexecuted source tests are not relabelled as a formal proof or promotion."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; generic byte/CID storage behavior visible in source; atomic file/directory durability procedure; recovery schema/version, closed deterministic/idempotent seal-recovery behavior; absence of PCSM projection storage/recovery symbols in searched exact roots; focused test function inventories; and the sealed aiohttp import failure before collection.",
+    "estimated": "None. No estimate supports implementation, identity, test success, source-forest execution, proof, or promotion.",
+    "simulated": "The inspected generic test definitions use controlled temporary storage roots, synthetic byte/seal payloads, and mocked/reconstructed recovery states. They are not represented as executed in the sealed environment and, even if executed, would establish only the generic Kit storage/seal-recovery contract rather than an exact-PCSM projection recovery.",
+    "unavailable": "A versioned PCSM ProjectionRoot storage schema; canonical projection serialization/CID rule; durable named PCSM projection head; exact repository/tree/source-map binding and canonical source-map CID; PCSM projection recovery/replay/corruption semantics and report; package-specific positive/negative tests; sealed required-suite execution; concrete PCSM source-forest projection/recovery result CID; formal proof; and immutable self-CID for this receipt."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_kit_durability_and_seal_recovery_available_pcsm_projection_storage_and_recovery_unavailable_non_promoted",
+    "available_capability": "The current-head Python-v1 Kit boundary provides explicit-root immutable byte/CID persistence and a separate versioned deterministic/idempotent seal-transition WAL recovery mechanism with closed fail-closed dispositions, stale-parent fencing, and no inferred prover success.",
+    "unavailable_capability": "A current-head versioned PCSM projection-storage/recovery implementation that accepts only a schema-bound canonical projection, binds it to exact PCSM repository/tree/source-map identities, persists/retrieves a durable named projection root, deterministically recovers a concrete PCSM projection after interruption/corruption/staleness, and is directly covered by sealed positive and negative tests.",
+    "missing_bindings": [
+      "ProjectionRoot@1 schema/interface and canonical serialization/CID rule",
+      "exact PCSM repository/tree/source-map CID fields and validation",
+      "durable named projection-head lookup and expected-head publication semantics",
+      "PCSM projection-recovery dispositions/report bound to the projection root",
+      "current-PCSM source-map-bound projection and recovery request/result CIDs",
+      "package-specific positive/negative projection persistence/recovery tests executable in the sealed environment",
+      "aiohttp in the sealed Python 3.12 environment to collect the currently required suite"
+    ],
+    "disposition": "No generic Kit artifact CID, seal CID, recovery report, or current-seal pointer is promoted to a PCSM projection or canonical identity. No generic recovery decision is promoted to PCSM projection recovery, no missing CID/schema/test/proof is invented, and no competing authority is created."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify Kit implementation/tests, install aiohttp, define a projection schema, add a named projection store, or alter protected planning/configuration files.",
+    "KitProofContextStateStore@0.1 verifies untyped arbitrary bytes and CIDs; it cannot supply missing PCSM projection semantics by convention.",
+    "HermeticProofSealStore and recover_seal_transitions@1 are generic lower-layer seal authorities. Their repository/branch current-seal state is not a PCSM projection-head authority.",
+    "The sealed required suite stops at conftest import due to missing aiohttp; its 37 test definitions are unavailable rather than passing or failing execution evidence.",
+    "No current aggregate PCSM SourceLinkReceipt/source-map CID binds an exact source forest to a durable projection, and no generic Git/tree/digest/seal identity is relabelled as that CID.",
+    "No watcher event, model output, arbitrary artifact CID, test definition, receipt, or generic fixture is treated as semantic authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, storage/recovery schema/version/CID behavior, PCSM projection/source-map capability, aiohttp availability, or validation result changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, generic Kit persistence/recovery components, external dependency installation, or unrelated admitted history."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalent_reused_first": true,
+    "generic_kit_durability_deterministic_where_required": true,
+    "generic_kit_seal_recovery_deterministic_where_required": true,
+    "generic_kit_schema_version_and_cid_bound_where_applicable": true,
+    "pcsm_projection_storage_and_recovery_schema_version_and_cid_binding_available": false,
+    "pcsm_projection_storage_and_recovery_positive_and_negative_tests_present": false,
+    "sealed_required_validation_passed": false,
+    "sealed_required_validation_unavailable_reason": "aiohttp is absent from the authoritative sealed Python 3.12 environment, so pytest cannot import tests/conftest.py and no test executes.",
+    "exact_pcsm_source_map_cid_available": false,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "aliases_not_promoted_to_canonical_identity": true,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "promotion_status": "non_promoted_missing_versioned_pcsm_projection_storage_recovery_contract_and_sealed_validation_capability"
+  }
+}
