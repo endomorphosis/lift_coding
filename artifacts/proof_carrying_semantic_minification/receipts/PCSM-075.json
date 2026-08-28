@@ -1,0 +1,217 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-075",
+  "title": "Add bounded refinement controller",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-075",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-075@current-head-python-v1-bounded-refinement-controller-capability-assessment-v1",
+  "observed_at": "2026-08-28T15:33:55Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python-v1 bounded refinement-controller capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-075.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-075.json",
+    "implementation_delta": "Reuse the current-head LogicPredictionCEGIS@1 bounded counterexample-guided refinement controller rather than introduce a PCSM wrapper or second refinement authority. Its versioned bounds cap rounds, goals, subgoals, premises, counterexamples, repeated states, residual gaps, context, wall time, CPU time, and memory; policy may tighten but not exceed hard ceilings. The controller is monotonic, content-addresses state and terminal receipts, preserves original goals/facets, terminates repeated states and cycles, returns typed residual feedback for bound/cancellation outcomes, and permits hypothesis narrowing only from replayed validation or a proof of negation. Raw solver and model material remains diagnostic-only. No PCSM source-map, solver, proof, mutation, completion, M2, or M3 authority was created.",
+    "non_promotion_reason": "The reusable controller and direct positive/negative tests are current-head and pass in the sealed validation environment, but no canonical aggregate PCSM SourceLinkReceipt/source-map CID binds this named forest's concrete goals, hypotheses, facets, premises, countermodels, or refinement campaign. This receipt therefore reports a bounded generic capability and intentionally does not invent a PCSM controller request/result CID, source-map CID, proof result, or promotion."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate establishes implementation, identity, validation success, source-forest execution, proof, or promotion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised generic contract behavior and never substitutes for source-forest evidence or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "45d9b6b12b5ac91c11308c40b6bb9af7cf6bee71",
+    "outer_tree": "3ed60fcdfa445ec174ad65c99691ad714d12ff5b",
+    "dispatch_tree_id": "45d9b6b12b5ac91c11308c40b6bb9af7cf6bee71",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "7632510e067c97ad2414a200ab8eb73384469a11",
+    "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no refinement-controller authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named current-head Python-v1 bounded refinement controller and direct-test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no new kit authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared the selected accelerator gitlink with nested HEAD and HEAD^{tree}; inspected outer and selected nested porcelain before receipt creation; calculated scheduler and selected source/test SHA-256 values plus Git blobs; inspected the controller and direct tests; searched the exact accelerator implementation and required-PCSM-test roots for a canonical PCSM SourceMap/SourceLink identity; and ran required plus focused suites under the prescribed sealed PATH with fresh private HOME/XDG roots.",
+      "result": "The dispatch commit equals outer HEAD, the selected accelerator commit/tree equals its checked-out head, and the inspected worktrees were clean before this declared receipt write. The controller and direct test are current at the recorded accelerator tree. No SourceMapResolver@1, SourceLinkReceipt@1, aggregate source-map, or source_map_resolver identity was found in the exact PCSM roots, so Git trees/blobs and generic refinement receipt identities are not substituted for a concrete PCSM source-map CID.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, contract version/schema/identity behavior, source-map capability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span and refinement-input identities in the named accelerator implementation/test roots. Repository trees, Git blobs, SHA-256 file digests, generic LogicRefinementReceipt identities, and fixture roots are freshness or generic-contract evidence only and are not falsely relabelled as the missing PCSM contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "PCSM-073 already selected the generic counterexample authority, while LogicPredictionCEGIS@1 is the current-head smallest controller that composes bounded counterexample evidence into deterministic, monotonic refinement. A PCSM wrapper, separate loop, second state identity, or competing receipt schema would exceed this receipt-only dispatch and duplicate authority.",
+    "components": [
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.proof.logic_prediction_cegis.LogicPredictionCEGIS@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/logic-refinement-receipt@1",
+        "version": 1,
+        "role": "Deterministic bounded controller over program-logic goals, hypotheses, premises, subgoals, countermodels, and residual gaps; it content-addresses terminal receipts and fail-closes authority violations."
+      },
+      {
+        "component": "LogicRefinementBounds@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/logic-refinement-bounds@1",
+        "role": "Versioned policy bounds with hard ceilings; it controls rounds, state growth, evidence volume, context, wall/CPU time, and memory."
+      },
+      {
+        "component": "LogicRefinementState@1 / LogicRefinementRound@1 / LogicRefinementReceipt@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/logic-refinement-state@1; ipfs_accelerate_py/agent-supervisor/logic-refinement-round@1; ipfs_accelerate_py/agent-supervisor/logic-refinement-receipt@1",
+        "role": "Versioned identity-bearing state, round, and terminal-receipt contracts that preserve originals, detect cycles, bind outcomes, and produce typed residual feedback."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "identity": "State and terminal receipt identities derive from canonical content; the direct suite verifies deterministic replay is identity-equivalent and dictionary round trips preserve contracts.",
+      "bounded_control": "The controller enforces policy-tightenable hard ceilings and terminates on fixed point, resolved hypotheses, repeated state, cycle, max rounds, resource/context exhaustion, cancellation, timeout, no progress, authority violation, or inconclusive input.",
+      "authority_boundary": "Raw solver countermodels may drive diagnostic retrieval only. Hypothesis rejection/narrowing requires a validation receipt replayed against originating LogicIR semantics or a proof of negation. Model-proposed decomposition and unauthorized premises fail closed; the controller does not execute solvers, mutate source, admit predictions, grant completion, or promote results."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_prediction_cegis.py",
+      "git_blob": "be08d95870b665db951ee6f2973f8fb834036c60",
+      "sha256": "c57b01f6c0450a56534ab57d638bae68defb4219647a7491ef76bbcb390d4839",
+      "role": "Current-head LogicPredictionCEGIS@1 implementation, versioned bounds/state/round/receipt schemas, identity binding, authority checks, and bounded termination."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_logic_prediction_cegis.py",
+      "git_blob": "c234e19859906e23525fc0806f7894fdf3db1100",
+      "sha256": "4b0dec29175ac91efd98e259cbf419f9b6318ac5bdb624b71f533cd32685ec69",
+      "role": "Direct positive and negative bounded-controller tests."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Underlying module reached by the required PCSM suite; recorded separately and never relabelled as bounded-refinement integration coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "focused_bounded_refinement_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm075-focus-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_logic_prediction_cegis.py",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, prescribed PATH, fresh private HOME/XDG root, user-site disabled, and accelerator source only on PYTHONPATH.",
+      "result": "29 passed in 0.54s",
+      "positive_coverage": [
+        "Policy bounds tighten under hard ceilings; originals/facets remain monotonic; validated replay or proof-of-negation evidence can refine hypotheses; authorized subgoal refinement preserves the original goal; residual gaps feed tactician feedback; and deterministic replay is identity-equivalent.",
+        "Repeated states/cycles terminate, max rounds and counterexamples yield typed bound exhaustion with residuals, resource accounting is enforced, cancellation is typed, and schemas round-trip."
+      ],
+      "negative_coverage": [
+        "Original goals cannot be dropped; raw or cross-root solver countermodels remain diagnostic-only; diagnostic receipts cannot eliminate hypotheses; model decomposition without authority, decomposition without a refinement proof, unauthorized premise addition, and re-adding an excluded premise are rejected.",
+        "Bounds above hard ceilings and invalid memory measurement fail closed rather than weakening policy or accepting an unmeasured campaign."
+      ],
+      "scope_limit": "These are controlled generic LogicIR/controller fixtures. They establish the reusable contract only; they do not run a concrete current-PCSM source-map-bound refinement campaign, solver, or proof."
+    },
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm075-required-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME/XDG root.",
+      "result": "11 passed in 0.33s",
+      "scope_limit": "The required PCSM root resolves to structured-decoding tests. It verifies closed candidate-output grammar and rejection behavior, not a source-map-bound bounded-refinement controller instance."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "The selected controller consumes already validated replay receipts or proofs of negation but does not execute a prover. No source-map-bound PCSM refinement campaign, kernel receipt, or approved digest-bound prover deployment was present in the authoritative sealed environment. Passing contract tests are not relabelled as a formal proof, mutation approval, completion authority, or promotion."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; versioned schemas, hard ceilings, and identity behavior; absence search for exact-PCSM source-map contract; sealed required validation (11 passed); and sealed focused controller validation (29 passed).",
+    "estimated": "None. No estimate supports implementation, controller behavior, identity, test success, source-forest execution, proof, or promotion.",
+    "simulated": "The direct controller suite uses controlled LogicIR, countermodel, and cancellation fixtures. Its exercises establish only generic bounded-controller behavior and are not represented as a PCSM source-forest execution, solver result, or proof.",
+    "unavailable": "A canonical current-PCSM aggregate SourceLinkReceipt/source-map CID; PCSM file/node/span and logic-input bindings; a source-map-bound PCSM controller request/result CID; an actual solver/proof execution and kernel-verified result; and an immutable self-CID for this receipt."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_bounded_refinement_controller_available_pcsm_source_forest_instance_unavailable_non_promoted",
+    "available_capability": "A current-head Python-v1 deterministic, monotonic, bounded refinement controller is available with versioned schemas and content identities, explicit policy/hard bounds, fail-closed authority checks, and typed terminal dispositions/residual feedback.",
+    "unavailable_capability": "A concrete exact-PCSM bounded refinement campaign whose goals, countermodels, premises, source spans, request, controller receipt, and proof/solver results are bound by a canonical PCSM SourceLinkReceipt/source-map CID.",
+    "missing_bindings": [
+      "canonical aggregate PCSM SourceLinkReceipt or source-map CID",
+      "current PCSM forest file/node/span and program-logic input records linked to that source map",
+      "a source-map-bound PCSM refinement request and emitted LogicRefinementReceipt CID",
+      "a solver/proof execution and kernel-verified result bound to that campaign"
+    ],
+    "disposition": "No PCSM source-map CID, campaign/result CID, proof result, estimated cost, or model-derived evidence is invented. Missing values are unavailable rather than zero. The selected existing controller stays within its original authority boundary and no competing PCSM authority is created."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify the selected accelerator implementation/tests, create a PCSM controller, execute a solver or proof, or materialize source.",
+    "LogicPredictionCEGIS consumes supplied goals, authority roots, and evidence; it does not discover a missing PCSM source map or transform generic fixture identities into PCSM source-forest identities.",
+    "Generic LogicRefinementReceipt identities and fixture roots are deliberately not canonical PCSM source identities, source-map CIDs, source-link records, solver results, or proof results.",
+    "The required PCSM suite passed but covers structured decoding only; it cannot be relabelled as bounded-refinement-controller integration validation.",
+    "No model output, countermodel, test result, controller request, or fixture exercise is treated as semantic authority, solver/proof authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, schema/version/identity behavior, source-map capability, focused-test result, or required-validation result changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, existing controller components, or unrelated admitted history."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalent_reused_first": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "sealed_focused_bounded_refinement_validation_passed": true,
+    "sealed_required_validation_passed": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "model_output_is_not_mutation_authority": true,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_refinement_instance_available": false,
+    "formal_proof_execution_available": false,
+    "promotion_status": "non_promoted_missing_pcsm_source_map_bound_instance"
+  }
+}
