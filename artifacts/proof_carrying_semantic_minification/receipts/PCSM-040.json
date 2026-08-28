@@ -1,0 +1,191 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-040",
+  "title": "Design compact model grammar",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G400",
+  "objective_id": "PCSM-040",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-040@current-head-compact-model-grammar-selection-v1",
+  "observed_at": "2026-08-28T04:24:08Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 compact model-response grammar selection only",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-040.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-040.json",
+    "implementation_delta": "Reuse the current residual-expert grammar and its decoder, typed candidate output, and dedicated PCSM test suite. The declared output authority permits no source change; creating a second PCSM grammar, parser, serializer, or model-output authority would duplicate the existing equivalent and violate that boundary."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish grammar validity, identity, schema binding, or test success.",
+    "simulated": "A controlled non-production exercise; it cannot replace sealed validation or an authority decision.",
+    "unavailable": "A capability or result not present in the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "9d9298b4a8107f7677032932bd061a0abfe44b97",
+    "outer_tree": "9510fdc769800d9435bf06b2590d22a68d203860",
+    "outer_subject": "Update cleanup transition successor fixture",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "9510fdc769800d9435bf06b2590d22a68d203860",
+    "dispatch_tree_id_is_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "ebc8ca6a09df8a6829f2c0aa0ed10d83500b2840c7099badf0306f814daf4f19",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire_contract_only"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "a668ee23c76a69916d3214e7db07651d22f0dda1",
+        "tree": "5edcbd2baae9c38785a2832eedec6c893cc3c924",
+        "authority_role": "selected compact grammar, candidate-only model-output contract, and validation suite"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity only; not model grammar"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte CID storage only; not model grammar"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted superproject gitlink to nested HEAD and HEAD^{tree}; checked outer and admitted-worktree porcelain status; and verified configured origin/main revisions are ancestors of their admitted nested heads.",
+      "result": "The bound outer head/tree and all four admitted gitlinks agree; all checked worktrees were clean before receipt creation. Accelerator origin/main 024bf40a6c35735b84e7faff844f862dec63abf3, datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2, kit origin/main 80bbdc3443e560b9bf40339c864a32689ccad8ef, and MCP++ origin/main 31096be86103f29faef80a01e03d09b1ad7345c6 are ancestors of their admitted heads.",
+      "invalidates_on": "Any changed bound outer commit/tree, admitted gitlink/head/tree, scheduler-config digest, listed source digest, or dirty admitted worktree requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted current-tree PCSM SourceLinkReceipt or canonical source-map CID exists for this receipt-only selection. Git blobs and SHA-256 values below are not substituted for that absent contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "schema": "ipfs_accelerate_py/agent-supervisor/residual-expert-grammar@1",
+    "decode_result_schema": "ipfs_accelerate_py/agent-supervisor/residual-structured-decode-result@1",
+    "candidate_schema": "ipfs_accelerate_py/agent-supervisor/residual-task-output@1",
+    "selection": "residual_intelligence.structured_decoding.DEFAULT_GRAMMARS and decode_structured_output",
+    "version_binding": "The grammar, result, field-contract, and candidate schemas are explicit @1 strings. Each grammar has a content-derived grammar_id; grammar IDs are derived from a sorted typed representation, not from model text.",
+    "grammar_catalog": {
+      "kind": "measured",
+      "task_family_count": 24,
+      "grammar_count": 24,
+      "canonical_catalog_bytes": 28950,
+      "canonical_catalog_sha256": "50ced64fff133a1a00b5770eb79dbf27f9dcbab4478289f079a92cb6a2757c8c",
+      "canonical_catalog_cid": "baguqeerakdhnmt77cm5buafvo4hlphn7e745zovui6bit4dzvewlnitvpsga",
+      "maximum_decoder_input_bytes": 32768,
+      "grammar_ids": {
+        "FAILURE_ATTRIBUTION": "baguqeeravwam5bzfracfr4jduqvcjra4jklypxj27sv2frfo4zqydinswrhq",
+        "PATCH_SKETCH_GENERATION": "baguqeeran3xtzlicmol4suq2rtfdjr4atut3ptbiaftrea3lnwcf6gk7eenq",
+        "EVIDENCE_RANKING": "baguqeeraafbdml7rznng7lydnuv2elzylbv4cg267cb5ma7elh353dwncfwa",
+        "NOVEL_UNBOUNDED_REASONING": "baguqeeravehiasuvfp2r7sbeyg57ot5ipeaug3duheogfuvvsm3igb3b435a"
+      },
+      "catalog_identity_rule": "Consumers must recompute the entire sorted typed catalog digest and every grammar_id from the bound source, then reject any schema, count, digest, or ID mismatch. The four IDs are anchors, not a substitute for full-catalog recomputation."
+    },
+    "grammar_design": {
+      "wire_form": "One strict UTF-8 JSON object with exactly output_class, structured_payload, confidence_or_score, calibration_group, abstained, reason_codes, evidence_references, and candidate_only.",
+      "closedness": "Unknown and missing outer fields are rejected; unknown payload fields are rejected; duplicate JSON keys are rejected through object_pairs_hook; only declared task-family output classes and typed field contracts are accepted.",
+      "bounds_and_safety": "The decoder bounds input bytes. Field contracts bound text and arrays, reject untyped values and duplicate list entries where required, constrain integer ranges, require aligned ranking vectors and descending scores, and reject absolute or traversal paths.",
+      "response_classes": "Family-specific candidate response plus ABSTAIN; NOVEL_UNBOUNDED_REASONING admits only ABSTAIN. Invalid text, malformed JSON, or contract violations produce invalid_output without prose recovery.",
+      "authority_boundary": "ResidualTaskOutput requires candidate_only=true. It is a candidate producer: neither its grammar, decoded output, model response, nor this receipt grants mutation, proof acceptance, promotion, validation acceptance, or task completion. Independent supervisor authorities remain required."
+    },
+    "minimum_delta_reason": "This current-head equivalent satisfies the plan's deterministic, versioned, closed, parser-validated, bounded, duplicate-key-rejecting, safe-escaping, typed-response, and non-authoritative requirements. A new PCSM-specific grammar would be an unnecessary competing authority."
+  },
+  "source_inventory": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/residual_intelligence/structured_decoding.py",
+      "sha256": "7de11f7193498a456932c7511adf21f44342105f18c90cdfa4f6cc04508e92d4",
+      "git_blob": "3bb1dae4dca193a7c393c0e3ac71cd95f3fa47e6",
+      "role": "versioned closed grammar declarations, strict duplicate-key-rejecting decoder, bounds, typed payload validation, safe relative-path handling, and invalid-output disposition",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/residual_intelligence/contracts.py",
+      "sha256": "e1a150c4a2088570b992b81339d68da44f9a5dcdbe3f4b0ff6f69f6178bf9aea",
+      "git_blob": "282e0d958e30c0ef725809de5b31268d688a10d2",
+      "role": "closed shared contract bounds and forbidden authority-key policy",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/residual_intelligence/residual_ir.py",
+      "sha256": "898903b95a7a9715af3c419690a6d45b76b7ef9164156217df4a77f6fc27d2d7",
+      "git_blob": "a676ba940e4f69c7cb271b8173e508196ad7f707",
+      "role": "typed residual task output whose candidate_only flag is required true",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "role": "current required-command positive and negative grammar coverage",
+      "evidence_kind": "measured"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_source": {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py",
+      "positive_coverage": [
+        "all 24 closed task families have exactly one typed grammar and field-contract coverage",
+        "a compact valid structured candidate decodes as valid and remains candidate_only",
+        "explicit bounded ABSTAIN output is valid",
+        "aligned, bounded, descending ranking vectors and a bounded patch sketch are accepted"
+      ],
+      "negative_coverage": [
+        "non-JSON prose is invalid_output with no best-effort recovery",
+        "unknown outer and payload fields, including a model-created completion field, are rejected",
+        "untyped scalars and arbitrary abstention payloads are rejected",
+        "misaligned, ascending, oversized, untyped, or duplicate ranking values are rejected",
+        "absolute/traversal paths, untyped operations, empty symbols, and invalid patch line bounds are rejected",
+        "wrong outer sequence/calibration types and duplicate JSON fields are rejected"
+      ]
+    },
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm040-20260828 XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "status": "passed",
+      "result": "11 passed in 0.33s",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; no user-site packages."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-040 formal proof obligation or approved digest-bound prover deployment is specified for this receipt-only existing-authority selection."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Bound current tree and admitted gitlinks; scheduler and source SHA-256/Git-blob identities; explicit @1 schemas; 24-grammar catalog digest and anchor grammar IDs; source/test inspection; and the sealed required pytest result of 11 passed.",
+    "estimated": "None. No estimate establishes grammar behavior, identity, or validation.",
+    "simulated": "None. No provider-only or fixture exercise is represented as validation evidence.",
+    "unavailable": "A formal-prover result, an emitted PCSM SourceLinkReceipt/source-map CID, and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "The selected grammar is a compact candidate-output grammar for current residual task families, not an authorization or mutation protocol.",
+    "Grammar identity is source- and schema-bound; consumers must reject changed source digests, catalog digest, grammar IDs, schemas, or bound tree identities and obtain a fresh receipt.",
+    "Only the declared receipt was changed. Parser/serializer expansion work belongs to PCSM-041 and later tasks; this task does not claim it created a new PCSM grammar implementation.",
+    "This receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this selection. Do not modify the selected existing implementation, protected planning documents, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, scheduler digest, grammar/result/candidate schema, catalog digest, listed source digest, or required-test result changes."
+  }
+}
