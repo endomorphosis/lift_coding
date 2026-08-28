@@ -1,0 +1,242 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-060",
+  "title": "Integrate abstract interpretation",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-060",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-060@current-head-python-abstract-interpretation-selection-v1",
+  "observed_at": "2026-08-28T07:03:11Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 bounded abstract interpretation for the exact current admitted datasets source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-060.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-060.json",
+    "implementation_delta": "The exact current-head datasets forest already contains the smallest versioned Python-v1 abstract-interpreter authority: immutable product lattices, a deterministic bounded worklist with widening/narrowing, a conservative Python adapter, content-addressed source/config/result identities, explicit opaque frontiers, candidate-tier contracts, and an existing verification API adapter. This receipt selects and binds that authority. It adds neither a proof_context wrapper nor a second interpreter, source-map authority, proof authority, or M2/M3 mutation path.",
+    "non_promotion_reason": "The required proof_context suite has same-nested-tree provider evidence, but the authoritative sealed Python 3.12 attempt aborts before collection because the explicitly configured anyio pytest plugin is absent. The analysis also intentionally emits candidate-tier semantic evidence, not kernel-checked proof evidence. Neither sealed validation nor proof promotion is claimed."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish abstract-analysis behavior, identity, or test success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "218bf3c5643ad5c1e116482be522d596a62e23f3",
+    "outer_tree": "49a09a1c5679507b87151c9a6de1525aa46b37f2",
+    "outer_subject": "Merge commit '202dc9089079d4f0af1b679b55df9144e593fdbb' into agent/proof-carrying-semantic-minification-v1",
+    "dispatch_tree_id": "218bf3c5643ad5c1e116482be522d596a62e23f3",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "bounded Python abstract interpretation, canonical identity, and verification API adapter"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "consumer and scheduler boundary only; not abstract-analysis authority"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage only; not Python semantic-analysis or proof authority"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for the datasets gitlink; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; git status --porcelain=v1 for outer and datasets roots before receipt write; git -C external/ipfs_datasets merge-base --is-ancestor origin/main HEAD; SHA-256 and git-blob inspection of every named source/test authority.",
+      "result": "The superproject gitlink equals the measured datasets HEAD. Both roots were clean before receipt write, and configured datasets origin/main is an ancestor of the measured datasets head.",
+      "invalidates_on": "Any changed outer commit/tree, datasets gitlink/head/tree, scheduler digest, named source digest, schema/version, CID profile, test input, or validation-environment capability requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree SourceLinkReceipt or canonical aggregate source-map CID exists. Git/tree/blob and per-source canonical identities are not substituted for that missing PCSM artifact."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "module": "ipfs_datasets_py.logic.software_verification.abstract_interpretation",
+    "public_adapter": "ipfs_datasets_py.logic.verification_api.VerificationAPI.analyze_abstract_state",
+    "interface": "AbstractAnalysisResult@1",
+    "python_adapter_interface": "PythonAbstractInterpreter@1",
+    "python_adapter_version": "python-abstract-interpreter/1.0.0",
+    "schema_version": "software-abstract-analysis/v1",
+    "identity_domains": {
+      "source": "logic.software-verification.python-source",
+      "analyzer": "logic.software-verification.abstract-analyzer",
+      "summary": "logic.software-verification.abstract-summary",
+      "analysis": "logic.software-verification.abstract-analysis"
+    },
+    "cid_profile": {
+      "profile": "ir-canonical-identity-v1",
+      "canonicalization": "ir-canonical-json-v1",
+      "cid_version": 1,
+      "multicodec": "raw",
+      "multihash": "sha2-256",
+      "multibase": "base32",
+      "case": "lowercase"
+    },
+    "semantic_contract": [
+      "The immutable product domain combines flat canonical scalar constants, integer intervals, nullness, possible exceptions, and effects; joins, meets, widening, and narrowing are explicit operations.",
+      "solve_worklist_fixpoint uses a deterministic queue and sorted state representation, applies widening per destination after a configured threshold, and performs bounded narrowing only after convergence.",
+      "AnalysisConfig version-binds max iterations, widening/narrowing budgets, path/context sensitivity, and call-string limit into the analyzer identity.",
+      "PythonAbstractInterpreter parses source without importing or executing it, records source coordinates, summarizes only local functions interprocedurally, and binds source URI/text, analyzer configuration, summaries, support class, and limitations into CIDs.",
+      "Reflection, dynamic code/module loading, native extensions, uncontrolled I/O, and opaque callbacks become explicit opaque state/reasons rather than an exact semantic claim.",
+      "AbstractContractCandidate is expressly candidate-tier; an independently admitted consumer must compile and discharge it before treating it as contract or proof evidence."
+    ],
+    "deterministic_replay": {
+      "kind": "simulated",
+      "status": "passed",
+      "method": "Two fresh Python 3.12 provider processes with PYTHONHASHSEED=1 and PYTHONHASHSEED=777 analyzed identical source and source_uri.",
+      "source_uri": "fixture://pcsm-060-determinism.py",
+      "analysis_id": "bafkreifs6it6hpkywqn77atkzmy4ynjhxdkksftwirb2tx6mk5ffpidig4",
+      "source_identity": "bafkreibktyvdgbc6ydncw4a3q4rkidou6rarvrxzbtrzqaxlfcunjewnvm",
+      "analyzer_identity": "bafkreih6eikkcz2k3rtbv5bpgpkejzngv6qkbly2hrcfbvciwzv2kqlgp4",
+      "schema_version": "software-abstract-analysis/v1",
+      "limitation": "Provider replay is simulated evidence and does not replace a sealed-environment deterministic test."
+    },
+    "minimum_delta_reason": "Reimplementation under proof_context would duplicate a current canonical authority and violate the exact receipt-only output boundary. Existing dedicated unit coverage and the public adapter provide the required integration selection without a competing subsystem."
+  },
+  "source_inventory": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/abstract_interpretation.py",
+      "sha256": "9e1e2e864851f517dac5b0ca9c42e4563895f3677de929182870833f8e7ed3bd",
+      "git_blob": "ac8b259d074a9604855d6e52e8307791ef77dd30",
+      "role": "versioned Python-v1 product domains, bounded fixpoint solver, conservative adapter, source/config/summary/result CIDs, opaque-frontier handling, and candidate contracts",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/verification_api.py",
+      "sha256": "707138ae366a92cae6ed99927b690044bdfed69dead4c9282329732493b66a35",
+      "git_blob": "6278972e3da8f99dace7bbfb735040b1980fbb09",
+      "role": "additive checked public analyze_abstract_state adapter; it delegates to the datasets-owned interpreter rather than creating a second authority",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/identity.py",
+      "sha256": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e",
+      "git_blob": "69d77e91f4ec671c6355b0f035017b1fed2b38d0",
+      "role": "dependency-independent ir-canonical-identity-v1 canonical envelope and CIDv1 raw/sha2-256/base32 identity profile",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/canonical.py",
+      "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0",
+      "git_blob": "fa63fd302dad6340556a937b73883a25376f5f6b",
+      "role": "canonical JSON serialization used by abstract result bytes and identities",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/software_verification/test_abstract_interpretation.py",
+      "sha256": "4223eed6bccac20670712f8a5b5560c58cd14d3407079974dc6efdfa21d91c64",
+      "git_blob": "a732b124cec2d7679833ba746c9fcb88b16f220e",
+      "role": "dedicated positive and negative executable laws, bounded-loop, exception, interprocedural, opaque-frontier, and identity coverage",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/test_compositional_verification_public_api.py",
+      "sha256": "ba35600a11a8d11e2a9c28bb03f0c258eedffdd0e7cfea011bbde166c62bf00e",
+      "git_blob": "74a520f62cc459269202072b87745c28ef936ad2",
+      "role": "public API integration and fail-closed missing-input coverage for analyze_abstract_state",
+      "evidence_kind": "measured"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_verification/test_abstract_interpretation.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "five abstract component domains satisfy ordering, join, meet, and idempotence laws",
+          "product joins are sound upper bounds; interval widening converges and bounded narrowing recovers a finite bound",
+          "a bounded cyclic worklist converges with a widened node; unreachable points, exceptional flow, conditionally unbound locals, local-call summaries, context policy, and a loop invariant are retained conservatively",
+          "identical source/configuration replays bind identical analysis and source identities while changed source/configuration changes their required identities"
+        ],
+        "negative_coverage": [
+          "eval, opaque callbacks, ctypes/native import, getattr, input, and importlib dynamic-module frontiers become explicit opaque results rather than exact support",
+          "the division case retains ZeroDivisionError where the interval domain cannot express a non-zero hole",
+          "identity tests reject equivalence of changed source or changed analyzer configuration"
+        ]
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/test_compositional_verification_public_api.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "the public adapter returns the versioned abstract-analysis interface and preserves analysis artifact identities"
+        ],
+        "negative_coverage": [
+          "empty source is rejected by the checked public adapter rather than being analyzed as a valid program"
+        ]
+      }
+    ],
+    "dedicated_abstract_interpretation_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_verification/test_abstract_interpretation.py",
+      "result": "21 passed in 0.11s",
+      "limitation": "This provider-environment result is simulated evidence only and does not replace sealed validation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed_same_nested_tree",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "519 passed in 73.88s, recorded by PCSM-028 on the identical external/ipfs_datasets commit 8b9c45106c0ace6107b8b90357a3ce71caf57584 and tree 6a186a24c424fdce0035033ebbf8a8476d96bbb7. This dispatch independently observed provider collection of the same 519 tests before the interactive executor output window ended; it does not replace the recorded completed result.",
+      "limitation": "The suite is proof_context coverage, not a substitute for the dedicated abstract-interpreter tests, and provider execution is not authoritative sealed validation."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm060-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited before collection with ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, profile-state reuse, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM abstract-analysis proof obligation or approved digest-bound prover deployment is present for this receipt-only existing-authority selection. The interpreter itself marks its results as non-kernel-checked candidate evidence; no theorem-prover success is inferred."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/datasets Git and scheduler bindings, clean pre-write state, configured-origin ancestry, named source/test SHA-256 and Git blobs, versioned interfaces/schemas/identity domains/CID profile, direct positive/negative test-source inventory, and the sealed pytest capability failure.",
+    "estimated": "None.",
+    "simulated": "Fresh-process deterministic abstract-analysis replay, dedicated abstract-interpreter validation (21 passed in 0.11s), and the completed same-nested-tree required proof_context validation recorded by PCSM-028 (519 passed in 73.88s).",
+    "unavailable": "Authoritative sealed proof_context result due to missing anyio; PCSM SourceLinkReceipt/current aggregate source-map CID; formal-prover result; and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it selects existing current-head abstract interpretation and public-adapter coverage and does not mutate proof_context or create a competing interpreter.",
+    "The selected authority is a bounded, conservative static analysis of a Python subset. It does not establish whole-CPython runtime semantics, aliases, descriptors, metaclasses, native extensions, dynamic code/module loading, opaque callbacks, generated-code correctness, or PCSM source linking.",
+    "Widening, iteration, sensitivity, and call-string budgets deliberately bound precision and may produce conservative or opaque outcomes; candidate contracts require independent downstream discharge.",
+    "The authoritative sealed suite remains unavailable because anyio is absent, so this receipt cannot promote completion despite provider-side positive evidence.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this PCSM abstract-analysis selection. Do not alter the selected datasets source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, schema/version, CID profile, analyzer configuration, test input, or validation-environment capability changes."
+  }
+}
