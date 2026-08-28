@@ -1,0 +1,232 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-043",
+  "title": "Implement alias optimization",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G400",
+  "objective_id": "PCSM-043",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-043@current-head-alias-optimization-capability-assessment-v1",
+  "observed_at": "2026-08-28T06:15:00Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 alias-optimization capability assessment for the exact current source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-043.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-043.json",
+    "implementation_delta": "No current-head Python implementation is an alias optimizer for PCSM. PCSM-014 supplies only the receipt-bound alias-to-canonical identity boundary, while the existing supervisor token ledger supplies deterministic provider/tokenizer-bound cost accounting. Neither selects aliases using token cost, frequency, dictionary/grammar overhead, prefix reuse, semantic-anchor value, expansion probability, or ambiguity. The exact declared-output authority forbids implementing the missing source package or tests here, so this receipt makes the gap explicit rather than creating a competing or untested optimizer."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "A deterministic approximation bound to its calibration and exact envelope; it is not a native measurement and cannot establish this missing implementation.",
+    "simulated": "A controlled fixture exercise that establishes only the exercised contract behavior, never production alias-optimization performance.",
+    "unavailable": "A missing capability, identity, or result. It is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "84e7c7c36397330b896d3c488a5cb83766f853a5",
+    "outer_tree": "d310617ba6b53af7e8d42677bcdbfc8b3ab0955b",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "84e7c7c36397330b896d3c488a5cb83766f853a5",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only; not alias optimization"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07",
+        "authority_role": "existing alias/cost prerequisite implementations and validation suites; no PCSM alias optimizer"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity only; not alias optimization"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte CID storage only; not alias optimization"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each admitted superproject gitlink with nested HEAD and HEAD^{tree}; and checked outer plus admitted nested porcelain before writing the receipt.",
+      "result": "The bound outer head/tree and all four admitted gitlinks agree, and all checked worktrees were clean before this receipt was created.",
+      "invalidates_on": "Any change to the bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, search result, selected contract, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree PCSM SourceLinkReceipt or canonical source-map CID was emitted for this receipt-only capability assessment. Git blobs and SHA-256 values are not substitutes for that contract."
+    }
+  },
+  "existing_equivalents_assessed": {
+    "kind": "measured",
+    "pcsm_014_alias_boundary": {
+      "artifact": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-014.json",
+      "contract_name": "ProjectionAliasDictionary@1",
+      "meaning": "A receipt-bound composition of local-name-to-canonical-CID bindings and collision controls. A local alias is never canonical identity.",
+      "not_an_optimizer": "It deliberately defers tokenizer-optimized alias selection to PCSM-043 through PCSM-045 and is neither a registered optimizer schema nor a construction algorithm."
+    },
+    "pcsm_042_cost_prerequisite": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.self_improvement.supervisor_token_ledger",
+      "schemas": [
+        "ipfs_accelerate_py/agent-supervisor/provider-model-envelope@1",
+        "ipfs_accelerate_py/agent-supervisor/tokenizer-calibration@1",
+        "ipfs_accelerate_py/agent-supervisor/supervisor-token-ledger@1"
+      ],
+      "determinism_and_binding": "It provides immutable content-addressed provider/model/tokenizer envelopes and deterministic calibrated-fallback accounting. Provider-native use is measured only from supplied provider usage; calibrated fallback is explicitly estimated.",
+      "not_an_optimizer": "It has no alias candidate input, deterministic score/ranking, collision-safe alias selection, alias-table output, or alias-to-canonical relinking. Token accounting cannot be substituted for optimization."
+    },
+    "current_source_search": {
+      "method": "Searched Python files in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor for alias terms co-located with optimization, cost, frequency, ambiguity, dictionary, or canonicalization; then inspected the surviving alias and token-accounting candidates.",
+      "result": "Surviving alias code is compatibility/display/task-CID canonicalization or ambiguity rejection. No source defines a PCSM ProjectionAliasDictionary implementation, an alias optimization contract, provider/tokenizer-bound candidate scoring, deterministic alias ranking, alias-table constructor, or tests for those behaviors.",
+      "fail_closed_interpretation": "The existing ambiguous-alias rejections are useful safety controls but are not evidence that an alias optimizer exists."
+    },
+    "required_plan_dimensions_unimplemented": [
+      "exact provider/model/tokenizer revision-bound token cost",
+      "alias frequency",
+      "dictionary and grammar overhead",
+      "prefix caching",
+      "semantic-anchor value",
+      "expansion probability",
+      "ambiguity-aware utility and deterministic tie breaking",
+      "collision-safe bounded alias-table output"
+    ],
+    "authority_boundary": "Canonical semantic identity remains datasets-owned. Kit may store exact bytes and CIDs but does not decide semantic optimization. Local aliases, model output, token usage, receipts, and task display aliases do not gain canonical identity, proof, mutation, validation, promotion, or completion authority."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_implementation": "A deterministic, versioned Python-v1 optimizer that accepts only slice-used canonical targets and a bound tokenizer-cost profile, computes a stable score from the required plan dimensions, emits a collision-safe bounded local alias table, and binds every entry to canonical CID and current tree/source-map identity.",
+    "missing_bindings": [
+      "optimizer schema/version",
+      "optimizer implementation and deterministic test vectors",
+      "provider/model/tokenizer envelope and profile for this PCSM tree",
+      "canonical slice and source-map binding",
+      "candidate alias dictionary/table CID",
+      "positive and negative alias-optimization test suite"
+    ],
+    "disposition": "No numeric alias saving, ranking, selected alias, alias-table CID, or performance claim is reported. The prerequisite implementations remain reusable, but the requested optimizer is absent at the current head and cannot be implemented within this task's exact edit authority."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_token_ledger.py",
+      "git_blob": "be6d58f526d52d427c367d8a683d2d375734cda3",
+      "sha256": "67bca102c9b2ebb9245ad8b492eee982cc9d1f5cfdbfbb7c734c59f69c9329de",
+      "role": "versioned provider/tokenizer cost-accounting prerequisite; explicitly not alias selection"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+      "git_blob": "fea50c565815772b7e80401d038a92b9ec6489e2",
+      "sha256": "d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece",
+      "role": "context token-estimation consumer; its generic fallback is not a provider-bound alias optimizer"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_token_ledger.py",
+      "git_blob": "946d1e58a73046be054d0f161a3ebc33d7b58bd4",
+      "sha256": "135c0f8bfa5a07a76a4d34428b3cd41b68ad231406438b942dc9612712d81cda",
+      "role": "positive and negative version/CID/cost-accounting prerequisite tests; not alias-optimizer coverage"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_token_ledger.py",
+      "git_blob": "317ad696a67d081466833472277482dc0a256078",
+      "sha256": "723881334120fb0f612a6cbc6d305efac6b5ade08333ea2aaf98881399aacddb",
+      "role": "positive and negative exact-once/cancellation prerequisite tests; not alias-optimizer coverage"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm043-20260828 XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.24s",
+      "scope_limit": "This required PCSM structured-decoding suite validates closed candidate-output grammar behavior. It does not test the unavailable alias optimizer."
+    },
+    "focused_prerequisite_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm043-focused-20260828 XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_token_ledger.py external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_token_ledger.py",
+      "environment": "Python 3.12.3; exact required PATH; private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "21 passed in 0.84s",
+      "scope_limit": "These tests establish only the selected cost-accounting prerequisite; they are not passed off as alias-optimization tests."
+    },
+    "positive_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "required PCSM suite accepts valid typed compact candidate outputs while retaining candidate-only status",
+        "token-ledger prerequisite preserves immutable content-addressed records, envelope-scoped calibration, and exact-once lifecycle accounting"
+      ]
+    },
+    "negative_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "required PCSM suite rejects malformed, unknown, duplicated, untyped, unbounded, traversal, and model-created completion fields",
+        "token-ledger prerequisite rejects missing, duplicate, foreign-bound, uncalibrated, overlapping, misclassified, and forged accounting records",
+        "source search rejects the false equivalence that compatibility aliases, ambiguous-alias rejection, token accounting, or generic UTF-8 estimation implement alias optimization"
+      ]
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-043 formal proof obligation or approved digest-bound prover deployment is specified. Python tests are not represented as a formal proof."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Exact outer and admitted nested commits/trees, clean/freshness checks, scheduler and listed source/test SHA-256 plus Git-blob identities, source-search result, sealed required validation (11 passed), and sealed focused prerequisite validation (21 passed).",
+    "estimated": "The selected ledger can derive deterministic calibrated token estimates when given a bound calibration, but no PCSM-bound calibration, alias-optimization score, or numeric optimization estimate exists at this head. No estimate is reported.",
+    "simulated": "Focused token-ledger tests use synthetic provider/tokenizer envelopes and counters. They establish only fixture contract behavior and are not PCSM production measurements or alias-optimization results.",
+    "unavailable": "The PCSM alias optimizer, its schema/version, provider/tokenizer-bound optimization input, deterministic ranking, selected aliases, bounded alias table and CID, PCSM source-map CID, alias-optimizer tests, formal-prover result, and immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This receipt is a current-head capability assessment and non-promotion disposition, not an alias optimizer, alias table, source linker, semantic proof, or promotion decision.",
+    "PCSM-014's local alias/CID boundary and PCSM-042's token ledger are prerequisites only. Neither may be relabeled as a provider/tokenizer-bound alias optimizer.",
+    "The plan-required dimensions have no current implementation or measured data. Missing is never reported as zero or passing.",
+    "Only the declared receipt changed. The task's exact edit authority excludes the missing product implementation and test paths.",
+    "This receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head assessment. Do not alter prerequisite implementations, protected planning documents, or unrelated source bytes.",
+    "freshness_requirement": "Do not reuse this receipt after any change to a bound tree/gitlink, scheduler/source/test digest, source-search result, selected prerequisite contract, or validation result."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalents_assessed_first": true,
+    "required_alias_optimizer_implemented": false,
+    "unavailable_implementation_recorded_fail_closed": true,
+    "prerequisite_determinism_verified": true,
+    "schema_version_and_cid_binding_recorded_where_applicable": true,
+    "positive_and_negative_validation_passed_for_existing_prerequisites": true,
+    "alias_optimizer_test_coverage_available": false,
+    "measured_estimated_simulated_and_unavailable_evidence_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_unavailable"
+  }
+}
