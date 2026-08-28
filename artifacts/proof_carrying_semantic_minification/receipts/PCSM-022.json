@@ -1,0 +1,265 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-022",
+  "title": "Implement AST and source-span maps",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G300",
+  "objective_id": "PCSM-022",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-022@current-head-python-ast-source-span-map-selection-v1",
+  "observed_at": "2026-08-28T03:21:35Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 current-head AST and source-span mapping authority selection only",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-022.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-022.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "implementation_delta": "The current datasets source forest already supplies the versioned Python AST record, deterministic UTF-8 source-span mapper, source-CID binding, and strict validation. This receipt selects that authority and does not create a proof_context wrapper, a second parser, a competing source-map or CID authority, or an M2/M3 mutation path.",
+    "language": "Python",
+    "language_version": "3.12",
+    "non_promotion_reason": "The required proof_context suite cannot collect in the authoritative sealed Python 3.12 environment because its explicitly configured anyio pytest plugin is unavailable. The sealed environment also lacks multiformats, which prevents a live CID-bound AST extraction exercise. Provider-environment evidence is simulated and is not substituted for sealed validation."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "Calculated approximation; no estimate establishes AST/source-span behavior, identity, or test success.",
+    "simulated": "A deterministic exercise or test execution in the provider environment; it never replaces authoritative sealed validation.",
+    "unavailable": "A capability or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "7fa0e92ec7c669506588a4227091e0f77322a5dc",
+    "outer_tree": "7f78bc5ff03eed33a646fdaaaf0fe437c1cdc77a",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "authority_role": "wire-contract only"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "059d684952a5cdf3430edf70a43c3b9b31dc650a",
+        "authority_role": "consumer and scheduler boundary only"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "Python AST/source-span extraction, shared AST schema, and CID-bound source identity"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "authority_role": "exact-byte/CID storage only; not AST/source-span semantic authority"
+      }
+    },
+    "clean_before_receipt_write": true,
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for admitted gitlinks; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; git status --porcelain=v1 for the outer repository and datasets root before receipt write.",
+      "result": "The datasets nested HEAD equals the superproject gitlink, and both worktrees were clean before this receipt was written.",
+      "invalidates_on": "Any change to the outer commit/tree, datasets gitlink/head/tree, named source digest, schema/version, or a dirty admitted root requires a new receipt."
+    },
+    "pcsm_source_link_receipt": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No PCSM SourceLinkReceipt or aggregate PCSM source-map CID has been emitted at this head. The selected ASTRecord source spans are exact source facts bound to each examined source CID; they are not misrepresented as a linker receipt."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "extractor_api": "PythonASTExtractor.extract(source, path, repository_id, revision)",
+    "extractor_id": "ipfs_datasets_py.logic.software_contracts.python_frontend.PythonASTExtractor",
+    "frontend": "cpython-ast@1.2.1",
+    "ast_record_schema": "ipfs-datasets.software-contracts.ast-ir@1.0.0",
+    "frontend_capability_schema": "ipfs-datasets.software-contracts.frontend-capability@1.0.0",
+    "source_span_schema": "ipfs-datasets.software-contracts.semantic-source-span@1",
+    "source_span_convention": {
+      "byte_interval": "half-open",
+      "byte_encoding": "utf-8",
+      "line_base": 1,
+      "column_base": 0
+    },
+    "identity_binding": {
+      "source_cid": "CIDv1 lowercase base32 sha2-256/raw over the exact examined UTF-8 source bytes",
+      "ast_record": "ASTRecord carries SourceProvenance.source_cid together with extracted spans, path, repository_id, revision, and versioned frontend/schema metadata",
+      "canonicality": "A local alias is not used as canonical identity."
+    },
+    "determinism_and_boundaries": [
+      "_SourceMap derives absolute byte offsets from UTF-8 encoded source lines and CPython AST byte columns.",
+      "For syntax errors, one-based Unicode offsets are re-encoded before producing byte spans.",
+      "ASTRecord is a strict, closed, language-neutral shared schema; malformed or ambiguous values are rejected.",
+      "The extractor parses and never imports or executes the source under examination.",
+      "This is bounded static Python v1 analysis, not whole-CPython runtime semantics, a general source rewriter, or a PCSM SourceLinkReceipt authority."
+    ],
+    "minimum_delta_reason": "The existing current-head implementation already supplies the necessary Python-v1 AST and exact byte-span functionality, schema versions, CID-bound source identity, and positive/negative tests. Reimplementing that functionality in proof_context would duplicate datasets authority and violate the task's receipt-only declared output boundary."
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/python_frontend.py",
+      "git_blob": "7f1c1c1d629ed34e2e67251ec6a9820fb7b87817",
+      "sha256": "baf1c1ec5e6a5f83a0eb640b988850264d35311cdcedc87d22cff610d05308df",
+      "role": "PythonASTExtractor and _SourceMap: non-executing CPython AST parsing, UTF-8 byte-span mapping, lexical extraction, syntax-error spans, diagnostics, and resource limits"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/ast_ir.py",
+      "git_blob": "80a3ad611faec496b04559f8b54eb768841ecd90",
+      "sha256": "1461edb7c39f2adc89a70e54decfa291ccceafc50ed23011fbdeea5acb4c8b91",
+      "role": "strict ASTRecord and shared SourceSpan serialization/validation with a declared half-open UTF-8 convention"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/schema_versions.py",
+      "git_blob": "016f1d4678dea65ef17ce08ef16edca1ae22cad7",
+      "sha256": "fd7270cada2126606c00870dcb7291d27d7f8182e0e861d4f83905031668bbc6",
+      "role": "registered AST-IR and frontend-capability schema versions"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/models.py",
+      "git_blob": "87074b234b82bfdde77572b5caf0a9603257b49d",
+      "sha256": "4b061c97838929a4cdc055998ce71aa854234c7e75d3fbee12595fa1bafa8a75",
+      "role": "closed semantic-source-span@1 model used by the deterministic semantic index"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py",
+      "git_blob": "fc44652cacee42e33c580510ba7a75d11993e8e7",
+      "sha256": "a87147cb360f9ce81abeefc2faf48ea63464a99ea6bfd50b6e92db55612287f2",
+      "role": "positive and negative Python frontend/source-span tests, including exact UTF-8 spans across Unicode and CRLF"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_ast_ir.py",
+      "git_blob": "39428df11c64f8fcbedbe3d6f6def9fb8c74378a",
+      "sha256": "df185b86f30a4daebac51b279e78e4d6a1f1c1642d63f0fd6178cc36fe22450c",
+      "role": "positive and negative ASTRecord/SourceSpan schema and serialization tests"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_models.py",
+      "git_blob": "d32bf10e69f66be765a5a59839268110e0e4483d",
+      "sha256": "e4d94ab959d7f8016eb7d6087f39c21f13f4ce284e5f91bd30e9b97462973e7f",
+      "role": "positive and negative closed semantic-index/source-span model tests"
+    }
+  ],
+  "deterministic_exercise": {
+    "kind": "simulated",
+    "status": "passed",
+    "command": "PYTHONPATH=external/ipfs_datasets python - <PythonASTExtractor Unicode/CRLF exercise>",
+    "limitation": "This provider-environment exercise is deliberately not treated as sealed validation.",
+    "result": {
+      "ast_ir_schema": "ipfs-datasets.software-contracts.ast-ir@1.0.0",
+      "frontend": "cpython-ast@1.2.1",
+      "source_cid": "bafkreifzsm3stlxfbplfhubsyev5v5hbsujm5j2jwponf5c76yhvcdyl7e",
+      "recomputed_source_cid": "bafkreifzsm3stlxfbplfhubsyev5v5hbsujm5j2jwponf5c76yhvcdyl7e",
+      "source_span": {
+        "start_byte": 17,
+        "end_byte": 22,
+        "start_line": 2,
+        "start_column": 6,
+        "end_line": 2,
+        "end_column": 11
+      },
+      "byte_slice_utf8": "café",
+      "byte_slice_hex": "636166c3a9",
+      "identical_repeat_record": true,
+      "assertions": [
+        "source CID equals a recomputation over exact UTF-8 source bytes",
+        "the half-open byte range slices exactly the read identifier café",
+        "two extractions from identical input yield identical ASTRecord dictionaries"
+      ]
+    }
+  },
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": [
+      {
+        "evidence_kind": "measured",
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py",
+        "positive_coverage": [
+          "deterministic lexical extraction and source-CID provenance",
+          "exact UTF-8 byte spans across Unicode and CRLF",
+          "source is never imported or executed"
+        ],
+        "negative_coverage": [
+          "invalid encoding, syntax errors, non-text inputs, excessive source size, invalid limits, and excessive AST depth are rejected or reported fail-closed"
+        ]
+      },
+      {
+        "evidence_kind": "measured",
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_ast_ir.py",
+        "positive_coverage": [
+          "canonical AST facts and SourceSpan serialization",
+          "declared half-open UTF-8 span convention"
+        ],
+        "negative_coverage": [
+          "malformed spans, unsupported schema variants, language-specific SourceSpan subclasses, and ambiguous records are rejected"
+        ]
+      },
+      {
+        "evidence_kind": "measured",
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_models.py",
+        "positive_coverage": [
+          "closed semantic-source-span model round trips"
+        ],
+        "negative_coverage": [
+          "invalid paths, malformed spans, wrong schemas, and non-closed payloads are rejected"
+        ]
+      }
+    ],
+    "provider_targeted_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py external/ipfs_datasets/tests/unit/logic/software_contracts/test_ast_ir.py external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_models.py",
+      "result": "61 passed in 0.71s",
+      "limitation": "The provider environment is not substituted for sealed validation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "incomplete",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "The provider run collected 519 items and emitted progress through 93% before the command wrapper returned without a terminal pytest summary. No provider pass result is claimed.",
+      "limitation": "An incomplete provider observation cannot establish validation success."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited 1 before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "sealed_cid_exercise": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "result": "A sealed PythonASTExtractor exercise reached CID construction and raised ModuleNotFoundError: No module named multiformats.",
+      "reason": "multiformats is absent from the authoritative sealed interpreter; this missing dependency is not hidden by the provider exercise."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only existing-authority selection."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer and nested Git/tree/gitlink bindings, clean pre-write state, named source and test blobs/SHA-256 values, extractor/schema/source-span/CID contract, test inventory, and sealed dependency failures.",
+    "estimated": "None.",
+    "simulated": "Provider deterministic Unicode/CRLF AST and source-span exercise; provider targeted validation of 61 positive/negative tests; incomplete provider required-suite observation through 93%.",
+    "unavailable": "Authoritative sealed proof_context result due to missing anyio, sealed live CID extraction due to missing multiformats, PCSM SourceLinkReceipt/aggregate source-map CID, formal-prover result, and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it selects existing current-head datasets AST/source-span authority and does not mutate proof_context or create a competing implementation.",
+    "The selected mapper provides exact spans only for the source bytes supplied to PythonASTExtractor and bound by that ASTRecord source CID; it is not an emitted forest-wide PCSM SourceLinkReceipt.",
+    "The extractor is bounded static Python AST analysis. It does not establish whole-CPython runtime semantics, dynamic import results, reflection, native behavior, metaclass effects, monkey patches, or generated-code correctness.",
+    "The sealed validation environment lacks required dependencies. This receipt is therefore non-promoted despite positive provider-side coverage.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this AST/source-span authority selection. Do not alter the selected datasets source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, named source digest, schema/version, source-span convention, or validation-environment capability changes."
+  }
+}
