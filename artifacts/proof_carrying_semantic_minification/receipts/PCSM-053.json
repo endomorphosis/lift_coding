@@ -1,0 +1,217 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-053",
+  "title": "Implement formatting and unchanged-span preservation",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G500",
+  "objective_id": "PCSM-053",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-053@current-head-python-formatting-unchanged-span-capability-v1",
+  "observed_at": "2026-08-28T06:36:18Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 formatting and unchanged-span preservation assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-053.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-053.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "The exact current Python forest already provides AnalyticalChangeTransformer@1. It preserves caller-supplied surrounding span text while rendering closed edits, binds the supplied span and replacement with SHA-256 hashes, emits versioned canonical receipts with CIDv1 DAG-JSON replay identities, deterministically orders batches, and is proposal-only. Under the exact receipt-only authority no source delta is allowed or needed. This component is not a current-forest PCSM source linker: it never opens or writes files and does not establish an aggregate source-map CID or prove byte preservation outside a supplied span.",
+    "non_promotion_reason": "The reusable formatter has sealed positive and negative test coverage, but PCSM-051 and PCSM-052 establish that the required forest-wide SourceMapResolver@1 and SourceLinkReceipt@1 remain absent. Therefore this receipt records the verified local formatting capability without promoting it to a source-forest rewrite authority."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish formatting behavior, unchanged-span preservation, current-tree identity, schema binding, or test success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize mutation or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "24d6b5050a569c9375b1b1f134a4f41409edf695",
+    "outer_tree": "0eb9b1447c03a1497b934702bdc82e5cdb973189",
+    "dispatch_tree_id": "24d6b5050a569c9375b1b1f134a4f41409edf695",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract only; no Python formatter selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "named Python-v1 component and test boundary",
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "source-CID/source-span boundary only; no aggregate PCSM source map selected",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared every admitted nested HEAD and HEAD^{tree}; inspected porcelain before receipt creation; recorded source Git blobs and SHA-256 values; and searched the accelerator implementation and required test roots for SourceMapResolver/SourceLinkReceipt/linker/unchanged-span contracts.",
+      "result": "The dispatch commit equals outer HEAD, all recorded nested commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before adding this receipt. AnalyticalChangeTransformer@1 is present. The search found no SourceMapResolver@1, SourceLinkReceipt@1, BoundedPythonLinker@1, source_link_receipt, SemanticSourceLinker, or forest-wide unchanged-span contract.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink/head/tree, scheduler digest, listed source digest, source-search result, contract/schema, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "PCSM-051 records SourceMapResolver@1 and SourceLinkReceipt@1 as unavailable, and PCSM-052 records no aggregate current-forest source-map CID. A caller-supplied TransformSourceSpan hash, a Git blob, or a source SHA-256 is not a substitute for a current forest-wide source map."
+    }
+  },
+  "required_capability_assessment": {
+    "kind": "measured",
+    "status": "implemented_scope_limited_non_promoted",
+    "required_capability": "Deterministic Python formatting and unchanged-span preservation for closed, authority-bound edit spans",
+    "reused_component": "ipfs_accelerate_py.agent_supervisor.planning.analytical_change_transforms.AnalyticalChangeTransformer@1",
+    "implemented_contracts": [
+      "ipfs_accelerate_py/agent-supervisor/analytical-transform-site@1",
+      "ipfs_accelerate_py/agent-supervisor/analytical-transform-edit@1",
+      "ipfs_accelerate_py/agent-supervisor/analytical-transform-render-receipt@1",
+      "ipfs_accelerate_py/agent-supervisor/analytical-transform-batch-receipt@1"
+    ],
+    "binding_and_determinism": [
+      "TransformSourceSpan requires a normalized relative path, exact half-open character bounds, exact caller-supplied span text, and sha256(span_text); a mismatch rejects as stale_span.",
+      "TransformEdit repeats path, bounds, artifact identity, before hash, replacement, and sha256(replacement); an inconsistent expected-after hash rejects.",
+      "Canonical receipts inherit CIDv1 DAG-JSON/sha2-256 content identities, and TransformRenderReceipt derives a replay identity from its canonical payload.",
+      "Rendering is a pure function of the supplied span text and closed parameters; render_many sorts by site content identity rather than input order.",
+      "Closed renderers preserve surrounding text in their supplied span and return the supplied text unchanged for supported already-present no-op forms."
+    ],
+    "authority_boundary": "The component never opens or writes repository files. It requires authority roots, proof/obligation and target-decision checks where applicable, returns proposals/receipts only, and grants no edit for rejected transforms.",
+    "non_equivalence_to_forest_linker": "The component receives a caller-supplied span and artifact identifier. It does not resolve a canonical PCSM identity to a current file/node/span, compare that span to a source forest, materialize rewritten file bytes, or emit unchanged-byte evidence for regions outside the supplied span.",
+    "disposition": "The local capability is implemented, versioned, deterministic, and sealed-test-covered. Promotion to PCSM current-forest formatting/unchanged-byte preservation is unavailable until the missing source-map/linker contract binds those supplied spans to the exact forest."
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/analytical_change_transforms.py",
+      "git_blob": "1043897b8c22550a1b6e1c8bee09c4459ea625f0",
+      "sha256": "e3efb24e4a601108d0b2c3855ed956304f2e97ce066a630b7dae8f2bffba69af",
+      "role": "AnalyticalChangeTransformer@1; versioned closed Python-span renderer with stale-span hashing, byte-stable replay, formatting-preserving rendering, deterministic batch order, and proposal-only authority."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_analytical_change_transforms.py",
+      "git_blob": "990616cf23fcca6ed015ce1297993098a471a72e",
+      "sha256": "e862b790c435fd11d0ce582a148e3ee8e94790d59a601cc856ac988da17cc50b",
+      "role": "Focused positive and negative tests for the existing formatter, including spacing preservation, idempotence, stale-span rejection, deterministic replay, hashes, authority roots, and fail-closed unsupported shapes."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "The general required supervisor suite reached through test/agent_supervisor/pcsm; it is independent structured-decoding coverage, not formatter coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "formatter_positive_and_negative_coverage": {
+      "kind": "measured",
+      "test_module": "external/ipfs_accelerate/test/api/test_agent_supervisor_analytical_change_transforms.py",
+      "positive_coverage": [
+        "keyword and positional argument rendering preserve observed spacing style",
+        "already-present arguments/imports are idempotent",
+        "closed add/rename/reorder/thread/import/export/registration/adapter/constructor/schema shapes render",
+        "repeated rendering is byte-equivalent and yields the same replay identity and canonical record",
+        "before and after hashes bind exact source and replacement text"
+      ],
+      "negative_coverage": [
+        "dynamic splats and unsupported syntax reject",
+        "ambiguous overloads and non-total mappings reject",
+        "stale before hashes reject as stale_span",
+        "non-unique values, expression/root mismatches, invented behavior, new dependencies, unauthorized paths, missing proofs, and scope escapes reject",
+        "rejected transforms grant neither target paths nor edits"
+      ],
+      "scope_limit": "The vectors prove supplied-span rendering, not forest-wide unchanged-byte preservation or source-map resolution."
+    },
+    "focused_provider_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command_executed": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_analytical_change_transforms.py",
+      "environment": "Provider Python 3.12.3 with provider-installed pytest 9.1.1 and plugins.",
+      "result": "37 passed in 0.86s",
+      "scope_limit": "Corroborative only; sealed validation is authoritative."
+    },
+    "focused_sealed_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm053-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_analytical_change_transforms.py",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME.",
+      "result": "37 passed in 0.82s"
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "command_executed": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Provider Python 3.12.3 with provider-installed pytest 9.1.1 and plugins.",
+      "result": "11 passed in 0.39s",
+      "scope_limit": "The required suite tests structured decoding; it does not replace focused formatter coverage."
+    },
+    "sealed_required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm053-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME.",
+      "result": "11 passed in 0.34s",
+      "scope_limit": "This seals the requested general suite only; focused sealed formatter validation is recorded separately."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-053 forest-wide unchanged-span proof obligation or approved digest-bound prover deployment is present in the authoritative environment."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; source Git blobs and SHA-256 values; component source, contracts, and test assertions; absence of the forest linker/source-map contracts; focused sealed validation (37 passed in 0.82s); and sealed required validation (11 passed in 0.34s).",
+    "estimated": "None. No estimate is used to establish formatting behavior, unchanged-span preservation, identity, validation, or promotion.",
+    "simulated": "Provider focused formatter validation (37 passed in 0.86s) and provider required-suite validation (11 passed in 0.39s). They corroborate but do not replace sealed evidence.",
+    "unavailable": "Current-forest SourceMapResolver@1, SourceLinkReceipt@1, aggregate source-map CID, canonical identity-to-current-file/node/span resolution, materialized rewritten-file bytes, forest-wide unchanged-byte evidence, PCSM-053 formal-prover result, and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only under exact declared-output authority; no implementation or test source was changed.",
+    "AnalyticalChangeTransformer@1 preserves formatting only within a supplied closed span and never reads or writes source files.",
+    "The span uses character offsets and a SHA-256 before hash; without the unavailable source map it is not proof that an arbitrary caller-supplied span is current in the complete PCSM forest.",
+    "No aliases are accepted as canonical source identity, and no M2/M3 mutation, generated-source mutation, or automatic source materialization is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter protected planning documents, the existing proposal-only formatter, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, source-search result, component schema/version, source-map/linker capability, or validation-environment capability changes."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalents_reused_first": true,
+    "local_formatting_and_supplied_span_preservation_implemented": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_bound_where_applicable": true,
+    "positive_and_negative_tests_available": true,
+    "provider_validation_passed": true,
+    "authoritative_sealed_validation_passed": true,
+    "evidence_classes_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "forest_wide_source_link_and_unchanged_byte_evidence_available": false,
+    "promotion_status": "non_promoted_scope_limited"
+  }
+}
