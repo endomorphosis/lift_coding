@@ -1,0 +1,218 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-071",
+  "title": "Add symbol and capsule expansion",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-071",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-071@current-head-python-v1-symbol-capsule-expansion-capability-assessment-v1",
+  "observed_at": "2026-08-28T00:00:00Z",
+  "scope": {
+    "assurance_scope": "PCSM Python-v1 symbol and capsule expansion capability assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-071.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-071.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "Reuse the current-head semantic_capsule projection rather than introduce a PCSM wrapper or a second symbol authority. compile_semantic_capsules deterministically projects authority-admitted graph symbols and related capsule kinds into a versioned CapsuleIndex, binds each capsule to node/source/root/authority/evidence/dependency identities, and supports bounded incremental recomputation with explicit invalidation paths. No source-map, graph, model, proof, storage, M2, or M3 authority is created.",
+    "non_promotion_reason": "The reusable implementation and focused positive/negative contract tests are current-head and pass, but no canonical aggregate PCSM SourceLinkReceipt/source-map CID or exact PCSM semantic graph/index is available to bind a concrete source-forest symbol/capsule expansion. This receipt therefore records capability only and does not invent capsule CIDs, a graph/index CID, a source-map CID, or a promoted result."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "existing_equivalent_reused_first": true,
+    "no_competing_authority_created": true,
+    "authority_boundaries_preserved": true,
+    "model_output_is_not_mutation_authority": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "sealed_required_validation_passed": true,
+    "evidence_classes_distinguished": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_symbol_capsule_expansion_instance_available": false,
+    "typed_unavailable_disposition_recorded": true,
+    "promotion_status": "non_promoted_missing_pcsm_source_map_and_semantic_graph_binding"
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate establishes implementation, identity, validation success, or promotion.",
+    "simulated": "A deterministic fixture exercise. It establishes only the tested contract behavior and never substitutes for a current-PCSM source-forest instance.",
+    "unavailable": "A required capability, identity, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "outer_commit": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "outer_tree": "c27bf2123f44524750faf873be995b9e727cd09e",
+    "admitted_gitlinks": {
+      "external/ipfs_accelerate": {
+        "authority_role": "named Python-v1 semantic-capsule projection, semantic graph consumer, and direct focused-test authority",
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no new kit authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      },
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract boundary only; no semantic-capsule authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      }
+    },
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "A current-tree search of the named accelerator implementation and required PCSM test roots found no SourceLinkReceipt or canonical PCSM source-map identity. Generic source-map helpers, Git trees/blobs, repository/tree bindings, source_cids, and fixture graph roots are not relabelled as this absent contract."
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer and admitted nested HEAD/tree identities; checked their porcelain state before the declared receipt write; calculated selected source/test/config SHA-256 values and Git blobs; inspected the selected implementation and test; and searched the named accelerator implementation and required-PCSM-test roots for a PCSM SourceLinkReceipt/source-map identity.",
+      "result": "The dispatch commit equals outer HEAD and all recorded admitted gitlink/tree pairs equal their checked-out heads. The selected source and test are current at the recorded accelerator tree. No aggregate PCSM SourceLinkReceipt/source-map CID or concrete PCSM semantic graph/index was found, so a generic graph root, fixture identity, Git object, or source digest is not substituted for a concrete expansion binding.",
+      "invalidates_on": "Any change to a recorded outer/admitted commit or tree, selected source/test/config digest, contract schema/version/identity behavior, source-map or semantic-graph capability, or validation result requires a fresh receipt."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "The current-head semantic_capsule module already supplies the smallest Python-v1 authority-consumer for symbol and capsule expansion. A PCSM-named projection, alternate CID scheme, duplicate graph, or capsule-body store would compete with existing authorities and exceeds the exact declared-output boundary.",
+    "service": {
+      "module": "ipfs_accelerate_py.agent_supervisor.analysis.semantic_capsule",
+      "entry_points": [
+        "compile_semantic_capsules",
+        "update_semantic_capsules",
+        "invalidate_capsules",
+        "verify_capsule_compile_result"
+      ],
+      "capsule_schema": "facp/semantic-capsule@1",
+      "index_schema": "facp/semantic-capsule-index@1",
+      "invalidation_schema": "facp/invalidation-soundness@1",
+      "analyzer_version": "semantic-capsule/v1",
+      "result": "CapsuleCompileResult containing a deterministic CapsuleIndex, per-symbol SemanticCapsuleRecord values, reuse/invalidation/demotion evidence, and optional hermetic Datalog derivation"
+    },
+    "determinism_and_binding": {
+      "kind": "measured",
+      "identity": "SemanticCapsuleRecord derives capsule_cid from canonical schema/kind/node/node-content/root/source-root/authority/trust/provenance/version/evidence/dependency/edge data. CapsuleIndex derives index_cid from exact graph_id and ordered capsule identities. Forged capsule or index identities are rejected during decoding/reverification.",
+      "symbol_and_capsule_expansion": "Only authority-admitted graph nodes project into capsules. Symbols project to the symbol capsule kind; connected required nodes project to contract/effect/policy/proof/test/environment/release kinds. Incremental recomputation uses explicit seed nodes, preserves unrelated capsule identities, supplies minimal explanation paths, demotes stale historical receipts, and refuses reuse with unknown required dependencies.",
+      "bounds": "The index has deterministic maximum capsule, Datalog-fact, and Datalog-iteration limits. Bounds and malformed, noncanonical, forged, unknown, or proposal-only data fail closed.",
+      "authority_boundary": "SemanticDependencyGraph remains the sole graph/edge authority; datasets remains canonical semantic identity authority; ipfs_kit remains exact-byte/CID storage authority. The selected projection does not embed raw repository source, rebuild graph authority, promote a local symbol alias to canonical identity, accept model output as evidence, or authorize proof/completion/M2/M3 mutation."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_capsule.py",
+      "git_blob": "5a74391bc0351e29300b7d3399e4ec9fe45868d8",
+      "sha256": "b3e9a8d76c523fb70fa9eb306d56ac2d24b278e6605486c02908c35dbce7e440",
+      "role": "Versioned deterministic semantic-capsule projection/index identity, incremental compilation, explicit invalidation/reuse/demotion evidence, bounded hermetic derivation, and strict re-verification."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/semantic_dependency_graph.py",
+      "git_blob": "ccc9c787c5062641ab5dad4a1b69b2491301d553",
+      "sha256": "b44a6eeebb98d3f1a541ebb9c7bddf4d605657c287cd32c4a3289000226b656b",
+      "role": "Existing sole semantic graph/node/edge authority consumed by capsule projection."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_semantic_capsule.py",
+      "git_blob": "21fd850cd5b410d7f43c9ba99390a851a722d2c6",
+      "sha256": "0decae8511066253a117b80911a6d2ae4bd332f87445283223c25230dff487d0",
+      "role": "Focused positive and negative fixture coverage for capsule/symbol projection, determinism, invalidation, authority boundaries, and CID/schema rejection."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Required PCSM closed-output and model-non-authority validation."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm071-required-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "result": "11 passed in 0.35s",
+      "scope_limit": "This required PCSM suite validates closed candidate-output grammar and rejects model-created completions; it does not instantiate the unavailable source-map-bound PCSM graph/index."
+    },
+    "focused_capsule_validation": {
+      "kind": "simulated",
+      "execution_evidence_kind": "measured",
+      "status": "passed",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm071-capsules-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_semantic_capsule.py",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "result": "19 passed in 0.82s",
+      "positive_coverage": [
+        "Symbol and connected semantic nodes project to deterministic, content-addressed capsules and indexes independent of input order.",
+        "Incremental update equals clean rebuild; source/environment identities participate; explicit seeded symbol changes invalidate downstream proof/test/release capsules while unrelated capsules remain reusable.",
+        "Every reuse/invalidation path is minimal; stale historical receipts demote; hermetic Datalog derivation and canonical round-trip verification succeed."
+      ],
+      "negative_coverage": [
+        "Proposal-only annotations never become capsules and the capsule layer cannot rebuild graph authority or embed raw source.",
+        "Forged capsule CID/schema, unknown mandatory dependencies, and requests to compile an unknown node fail closed."
+      ],
+      "scope_limit": "The graph is a controlled fixture, so this proves contract behavior only. It is not evidence of an exact current-PCSM source-forest expansion, a PCSM source-map identity, or promotion."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "PCSM-071 declares no kernel-checkable theorem-prover obligation for this deterministic projection. Tests do not become proof, mutation approval, or promotion authority."
+    }
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "service_available_source_forest_instance_unavailable_non_promoted",
+    "available_capability": "A current-head deterministic versioned/CID-bound semantic-capsule projection exists for authority-admitted symbols and related graph nodes, with bounded incremental invalidation and independently exercised positive/negative contract behavior.",
+    "unavailable_capability": "A concrete symbol/capsule expansion result for the exact PCSM source forest, bound to a canonical PCSM SourceLinkReceipt/source-map CID and exact semantic graph/index CID.",
+    "missing_bindings": [
+      "canonical aggregate PCSM SourceLinkReceipt or source-map CID",
+      "current PCSM forest nodes/symbols bound to that source map",
+      "a source-map-bound PCSM semantic graph/capsule index and emitted expansion result CID"
+    ],
+    "disposition": "No source-forest graph, symbol, capsule, index, expansion result, proof result, token estimate, or model-derived evidence is fabricated. Absent values remain unavailable rather than zero, passing, or promotion evidence."
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; selected source/test/config digests and Git blobs; selected schemas/contracts/boundaries; and sealed required validation with 11 passing tests.",
+    "estimated": "None. No estimate supports implementation, identity, validation success, source-forest execution, proof, or promotion.",
+    "simulated": "The focused semantic-capsule suite exercised deterministic contract behavior against controlled graph fixtures; its sealed execution and pass count are measured, while its fixture behavior is not treated as exact-PCSM forest evidence.",
+    "unavailable": "Canonical PCSM aggregate SourceLinkReceipt/source-map CID; corresponding exact-PCSM semantic graph/capsule-index and expansion result CIDs; and a formal-prover result not applicable to this task."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only and does not alter the selected accelerator implementation or focused tests.",
+    "The selected FACP semantic capsule records are a reusable projection; they do not claim to be the datasets SemanticCapsule@1 producer record or establish a new canonical semantic identity authority.",
+    "No exact-PCSM source-map-bound graph/index exists in the authoritative forest, so this receipt cannot truthfully produce a PCSM symbol/capsule expansion instance or CID.",
+    "Git trees/blobs, file SHA-256s, fixture graph identities, source_cids, and generic source-map utilities remain freshness or fixture evidence only; none is substituted for the missing PCSM SourceLinkReceipt/source-map contract.",
+    "No model output, test result, or request is treated as evidence, proof, source mutation, M2/M3 mutation, promotion, or completion authority.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this capability assessment. Preserve the existing accelerator semantic-capsule implementation, protected planning files, and unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, selected source/test/config digest, schema/version/identity behavior, source-map/semantic-graph capability, or sealed validation result changes."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  }
+}
