@@ -40,11 +40,12 @@
     "git_object_format": "sha1",
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "outer_commit": "9d9298b4a8107f7677032932bd061a0abfe44b97",
-    "outer_tree": "9510fdc769800d9435bf06b2590d22a68d203860",
+    "outer_commit": "9510fdc769800d9435bf06b2590d22a68d203860",
+    "outer_tree": "9d9298b4a8107f7677032932bd061a0abfe44b97",
     "outer_subject": "Update cleanup transition successor fixture",
     "dispatch_tree_id": "9510fdc769800d9435bf06b2590d22a68d203860",
-    "dispatch_tree_id_is_git_tree_object": true,
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
     "admitted_gitlinks": {
       "Mcp-Plus-Plus": {
