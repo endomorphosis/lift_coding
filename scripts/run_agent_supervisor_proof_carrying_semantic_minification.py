@@ -180,6 +180,11 @@ SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-supervisor-callback-continuity-transition@1"
 )
+DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-database-projection-callback-"
+    "identity-transition@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -326,6 +331,13 @@ SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_PATH: Final = (
     / "handoff"
     / "supervisor-restart-callback-continuity-transition.json"
 )
+DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-database-projection-callback-identity-transition.json"
+)
 STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT: Final = (
     "8b8be83c6d9c578c4cec450092e140b929ce12e9"
 )
@@ -424,6 +436,27 @@ SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_HEAD: Final = (
 )
 SUPERVISOR_CALLBACK_CONTINUITY_CHECKPOINT_TREE: Final = (
     "fba21e2a5f2a5b1edc17bacc9f19ffb4cd1e8488"
+)
+DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_BASE_COMMIT: Final = (
+    "PENDING_DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_BASE_COMMIT"
+)
+DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD: Final = (
+    "576ccccc88c5b4bc48ac51b947deab3317ee53af"
+)
+DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_TREE: Final = (
+    "6e50c230c0a1af9c46a9d6c0d78811cc28f65de8"
+)
+DATABASE_PROJECTION_CALLBACK_IDENTITY_PROJECTION_HEAD: Final = (
+    "5f1f018ebc53eed4fcc094e224449b02602d5ae5"
+)
+DATABASE_PROJECTION_CALLBACK_IDENTITY_PROJECTION_TREE: Final = (
+    "1ed29cb116fa4da93ecbaa736f7742c44ea43096"
+)
+DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD: Final = (
+    "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb"
+)
+DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_TREE: Final = (
+    "5dee438e132ad068ddb30ec8c1e0066efa36067a"
 )
 CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
     "db9304284cfe857f08377ef756b4896192dd5111"
@@ -3072,7 +3105,6 @@ def _verified_supervisor_callback_continuity_operator_descendant(
         or sealed_source.get("operator_identity")
         != _identity(expected_operator)
         or sealed_operator != expected_operator
-        or current_operator != expected_operator
     ):
         raise OperatorError(
             "supervisor callback-continuity operator delta changed"
@@ -3128,6 +3160,289 @@ def _verified_supervisor_callback_continuity_operator_descendant(
         artifact_commit,
         current_head,
         field="supervisor callback-continuity artifact-to-current lineage",
+    )
+    database_projection_callback_identity_transition: dict[str, Any] = {}
+    if current_operator != expected_operator:
+        database_projection_callback_identity_transition = (
+            _verified_database_projection_callback_identity_operator_descendant(
+                current_operator=current_operator,
+                current_head=current_head,
+                operator_path=operator_path,
+            )
+        )
+    return {
+        "receipt": payload,
+        "receipt_bytes": receipt_bytes,
+        "artifact_commit": artifact_commit,
+        "base_commit": base_commit,
+        "base_operator": base_operator,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "expected_operator": expected_operator,
+        "database_projection_callback_identity_transition": (
+            database_projection_callback_identity_transition
+        ),
+    }
+
+
+def _database_projection_callback_identity_transition_payload(
+    *,
+    current_head: str,
+) -> tuple[bytes, dict[str, Any]]:
+    """Load the exact add-only projection/callback identity receipt."""
+
+    receipt_bytes = _tracked_bytes(
+        DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_PATH,
+        head=current_head,
+    )
+    payload = _json_mapping_bytes(
+        receipt_bytes,
+        field="database projection/callback identity transition receipt",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "prior_checkpoint",
+        "repair_base",
+        "sealed_source",
+        "projection_progress_contract",
+        "callback_cid_normalization_contract",
+        "incident_evidence",
+        "validations",
+        "post_integration_canonical_validation",
+        "historical_receipts_preserved",
+        "supervisor_callback_continuity_receipt_preserved",
+        "database_authority_preserved",
+        "task_state_mutation",
+        "manual_database_mutation",
+        "manual_worktree_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_SCHEMA
+        or payload.get("reason")
+        != "stamp_projection_progress_and_normalize_sealed_callback_cid"
+        or not isinstance(payload.get("prior_checkpoint"), Mapping)
+        or not isinstance(payload.get("repair_base"), Mapping)
+        or not isinstance(payload.get("sealed_source"), Mapping)
+        or not isinstance(payload.get("projection_progress_contract"), Mapping)
+        or not isinstance(
+            payload.get("callback_cid_normalization_contract"), Mapping
+        )
+        or not isinstance(payload.get("incident_evidence"), Mapping)
+        or not isinstance(payload.get("validations"), list)
+        or not isinstance(
+            payload.get("post_integration_canonical_validation"), Mapping
+        )
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get("supervisor_callback_continuity_receipt_preserved")
+        is not True
+        or payload.get("database_authority_preserved") is not True
+        or payload.get("task_state_mutation") is not False
+        or payload.get("manual_database_mutation") is not False
+        or payload.get("manual_worktree_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError(
+            "database projection/callback identity transition seal is invalid"
+        )
+    return receipt_bytes, payload
+
+
+def _verified_database_projection_callback_identity_operator_descendant(
+    *,
+    current_operator: bytes,
+    current_head: str,
+    operator_path: Path,
+) -> dict[str, Any]:
+    """Admit only the exact projection/callback identity B/S/A chain."""
+
+    base_commit = DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError(
+            "database projection/callback identity transition base is unsealed"
+        )
+    receipt_bytes, payload = (
+        _database_projection_callback_identity_transition_payload(
+            current_head=current_head
+        )
+    )
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    if (
+        checkpoint.get("source_head")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit")
+        != "28dc01c5377a5e1e964453cd79f7a95bd0ae06fa"
+        or checkpoint.get(
+            "supervisor_callback_continuity_transition_receipt_id"
+        )
+        != "sha256:29f4c4adf68f09ec4e6577214dbcce788f203a188e77e2117c32f89996402cab"
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD
+        or sealed_source.get("parent") != base_commit
+    ):
+        raise OperatorError(
+            "database projection/callback identity operator checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+            field="database projection/callback identity checkpoint",
+        )
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_TREE
+        or _git_commit_tree(
+            base_commit,
+            field="database projection/callback identity repair base",
+        )
+        != repair_base.get("repository_tree_id")
+    ):
+        raise OperatorError(
+            "database projection/callback identity operator tree binding changed"
+        )
+
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        relative_operator,
+        "test/test_pcsm_database_projection_callback_identity_transition.py",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD}.."
+                f"{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="database projection/callback identity base operator",
+    )
+    pending_base = (
+        "PENDING_"
+        + "DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="database projection/callback identity sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="database projection/callback identity sealed operator",
+    )
+    if (
+        base_parents
+        != [DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD]
+        or base_paths != expected_base_paths
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or base_operator.count(pending_base) != 1
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_parents != [base_commit]
+        or sealed_paths != (relative_operator,)
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+        or sealed_source.get("operator_identity")
+        != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or current_operator != expected_operator
+    ):
+        raise OperatorError(
+            "database projection/callback identity operator delta changed"
+        )
+
+    receipt_relative = (
+        DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_PATH.relative_to(
+            ROOT
+        ).as_posix()
+    )
+    additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if len(additions) != 1:
+        raise OperatorError(
+            "database projection/callback identity receipt introduction "
+            "is not exact"
+        )
+    artifact_commit = additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != (receipt_relative,)
+        or _git_blob_at(
+            head=artifact_commit,
+            path=DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_PATH,
+            field=(
+                "introduced database projection/callback identity receipt"
+            ),
+        )
+        != receipt_bytes
+    ):
+        raise OperatorError(
+            "database projection/callback identity artifact commit changed"
+        )
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field=(
+            "database projection/callback identity artifact-to-current lineage"
+        ),
     )
     return {
         "receipt": payload,
@@ -7302,7 +7617,7 @@ def _verified_supervisor_callback_continuity_transition(
     current_gitlink = str(
         _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
     ).strip().split()
-    if (
+    exact_supervisor_callback_continuity_source = not (
         current_config_bytes != base_config_bytes
         or _canonical_bytes(current_config) != _canonical_bytes(base_config)
         or current_operator != operator_gate["expected_operator"]
@@ -7329,9 +7644,23 @@ def _verified_supervisor_callback_continuity_transition(
         or current_gitlink[:2] != ["160000", "commit"]
         or current_gitlink[2]
         != SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD
-    ):
-        raise OperatorError(
-            "supervisor callback-continuity live source changed"
+    )
+    database_projection_callback_identity_transition: dict[str, Any] = {}
+    if not exact_supervisor_callback_continuity_source:
+        database_projection_callback_identity_transition = (
+            _verified_database_projection_callback_identity_transition(
+                board=board,
+                current_head=current_head,
+                current_config=current_config,
+                current_source_identities=current_source_identities,
+                prior_artifact_commit=operator_gate["artifact_commit"],
+                prior_transition_receipt_id=str(
+                    payload.get("receipt_id") or ""
+                ),
+                prior_config_bytes=base_config_bytes,
+                prior_operator_bytes=operator_gate["expected_operator"],
+                prior_validator_bytes=base_validator,
+            )
         )
     for item in expected_checkpoint_receipts:
         current_bytes = _tracked_bytes(ROOT / item["path"], head=current_head)
@@ -7361,6 +7690,775 @@ def _verified_supervisor_callback_continuity_transition(
         "sealed_source_tree": operator_gate["sealed_source_tree"],
         "accelerator_head": SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD,
         "accelerator_tree": SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_TREE,
+        "database_projection_callback_identity_transition": (
+            database_projection_callback_identity_transition
+        ),
+    }
+
+
+def _verified_database_projection_callback_identity_transition(
+    *,
+    board: Any,
+    current_head: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    prior_artifact_commit: str,
+    prior_transition_receipt_id: str,
+    prior_config_bytes: bytes,
+    prior_operator_bytes: bytes,
+    prior_validator_bytes: bytes,
+) -> dict[str, Any]:
+    """Admit the exact projection-progress and callback-CID transition."""
+
+    operator_path = Path(__file__).resolve()
+    operator_gate = (
+        _verified_database_projection_callback_identity_operator_descendant(
+            current_operator=_tracked_bytes(operator_path, head=current_head),
+            current_head=current_head,
+            operator_path=operator_path,
+        )
+    )
+    payload = operator_gate["receipt"]
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    projection_contract = payload["projection_progress_contract"]
+    callback_contract = payload["callback_cid_normalization_contract"]
+    incidents = payload["incident_evidence"]
+    validations = payload["validations"]
+    post_integration = payload["post_integration_canonical_validation"]
+
+    checkpoint_fields = {
+        "source_head",
+        "repository_tree_id",
+        "prior_artifact_commit",
+        "supervisor_callback_continuity_transition_receipt_id",
+        "changed_receipts",
+    }
+    expected_checkpoint_receipts = [
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-034.json"
+            ),
+            "bytes_id": (
+                "sha256:6c36cc8c78ac2a33c9659bb5ca08df23523b9012357e7a"
+                "231db21ccb8d9c025e"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-036.json"
+            ),
+            "bytes_id": (
+                "sha256:fb15bc6896aecfd7474979f5be8ba4d02b255c823b9b8e"
+                "78d0ff4723bb0e67d4"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-046.json"
+            ),
+            "bytes_id": (
+                "sha256:f48ebb2498e6541c767b138aed324967a1523636897d3a4"
+                "e493b5945f33642cf"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-047.json"
+            ),
+            "bytes_id": (
+                "sha256:a765a7ca3538e3c3420ed096ddcb3ea42902f35f7cdb99c"
+                "942473a9d5c5fe86a"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-060.json"
+            ),
+            "bytes_id": (
+                "sha256:96f3a73030606eff771ed4799ba4928ff23cd1792d84b9b"
+                "149fcb91c0c21c71d"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-061.json"
+            ),
+            "bytes_id": (
+                "sha256:19b3d03e174fdbd47660422cac94d81315fa16349267ca6"
+                "0c9bcb713cdebb833"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-062.json"
+            ),
+            "bytes_id": (
+                "sha256:3050321e15513c3605afefbfa21d00c7f85da2201ed44f"
+                "b329f3ce8a55c651b7"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-063.json"
+            ),
+            "bytes_id": (
+                "sha256:e8469fe01517fb37fc08951a287b0c4e69b447a23b5c63"
+                "faca0bba7cc0696fc2"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-064.json"
+            ),
+            "bytes_id": (
+                "sha256:a553c00b323ebf9b121105b31260aa4486aacae24fc866be"
+                "6bdd017f69d90ca9"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-065.json"
+            ),
+            "bytes_id": (
+                "sha256:797f24853ebee3ccad3638e8f71c27ef4dcdc06d13fafbc"
+                "8659cf28b7d9c4ea8"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-070.json"
+            ),
+            "bytes_id": (
+                "sha256:94e6611fab37fd69c54dd0d9b4483f9f8ed8a31e6f0c589"
+                "08a229f1d59938847"
+            ),
+        },
+    ]
+    if (
+        set(checkpoint) != checkpoint_fields
+        or checkpoint.get("source_head")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit") != prior_artifact_commit
+        or prior_artifact_commit
+        != "28dc01c5377a5e1e964453cd79f7a95bd0ae06fa"
+        or checkpoint.get(
+            "supervisor_callback_continuity_transition_receipt_id"
+        )
+        != prior_transition_receipt_id
+        or prior_transition_receipt_id
+        != "sha256:29f4c4adf68f09ec4e6577214dbcce788f203a188e77e2117c32f89996402cab"
+        or checkpoint.get("changed_receipts")
+        != expected_checkpoint_receipts
+    ):
+        raise OperatorError(
+            "database projection/callback identity prior checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+            field="database projection/callback identity checkpoint",
+        )
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_TREE
+    ):
+        raise OperatorError(
+            "database projection/callback identity checkpoint tree changed"
+        )
+    _git_is_ancestor(
+        prior_artifact_commit,
+        DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+        field="callback artifact-to-projection checkpoint lineage",
+    )
+    expected_checkpoint_paths = tuple(
+        item["path"] for item in expected_checkpoint_receipts
+    )
+    checkpoint_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{prior_artifact_commit}.."
+                f"{DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if checkpoint_paths != expected_checkpoint_paths:
+        raise OperatorError(
+            "database projection/callback identity checkpoint delta changed"
+        )
+    for item in expected_checkpoint_receipts:
+        checkpoint_bytes = _git_blob_at(
+            head=DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+            path=ROOT / item["path"],
+            field=(
+                "database projection/callback identity checkpoint receipt "
+                f"{item['path']}"
+            ),
+        )
+        if _identity(checkpoint_bytes) != item["bytes_id"]:
+            raise OperatorError(
+                "database projection/callback identity checkpoint receipt changed"
+            )
+
+    validator_path = board.path(board.validator_path)
+    checkpoint_config = _git_blob_at(
+        head=DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+        path=board.config_path,
+        field="database projection/callback identity checkpoint config",
+    )
+    checkpoint_operator = _git_blob_at(
+        head=DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+        path=operator_path,
+        field="database projection/callback identity checkpoint operator",
+    )
+    checkpoint_validator = _git_blob_at(
+        head=DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+        path=validator_path,
+        field="database projection/callback identity checkpoint validator",
+    )
+    if (
+        checkpoint_config != prior_config_bytes
+        or checkpoint_operator != prior_operator_bytes
+        or checkpoint_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "database projection/callback identity checkpoint authority changed"
+        )
+
+    base_commit = str(operator_gate["base_commit"])
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "test/test_pcsm_database_projection_callback_identity_transition.py",
+    )
+    expected_nested_paths = (
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_daemon.py",
+        "test/api/test_agent_supervisor_database_implementation_daemon.py",
+        "test/api/test_agent_supervisor_merge_train.py",
+        "test/api/test_agent_supervisor_worker_watchdog.py",
+    )
+    expected_nested_commits = [
+        {
+            "purpose": "database_compatibility_projection_progress_boundary",
+            "source_head": (
+                DATABASE_PROJECTION_CALLBACK_IDENTITY_PROJECTION_HEAD
+            ),
+            "repository_tree_id": (
+                DATABASE_PROJECTION_CALLBACK_IDENTITY_PROJECTION_TREE
+            ),
+            "parent": SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "implementation_daemon.py",
+                "test/api/"
+                "test_agent_supervisor_database_implementation_daemon.py",
+                "test/api/test_agent_supervisor_worker_watchdog.py",
+            ],
+        },
+        {
+            "purpose": "sealed_projection_cid_callback_normalization",
+            "source_head": (
+                DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD
+            ),
+            "repository_tree_id": (
+                DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_TREE
+            ),
+            "parent": DATABASE_PROJECTION_CALLBACK_IDENTITY_PROJECTION_HEAD,
+            "changed_paths": [
+                "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+                "implementation_daemon.py",
+                "test/api/test_agent_supervisor_merge_train.py",
+            ],
+        },
+    ]
+    repair_base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "config_identity",
+        "validator_identity",
+        "accelerator_head",
+        "accelerator_tree",
+        "changed_paths",
+        "nested_changed_paths",
+        "nested_commits",
+    }
+    base_config_bytes = _git_blob_at(
+        head=base_commit,
+        path=board.config_path,
+        field="database projection/callback identity base config",
+    )
+    base_config = _json_mapping_bytes(
+        base_config_bytes,
+        field="database projection/callback identity base config",
+    )
+    base_validator = _git_blob_at(
+        head=base_commit,
+        path=validator_path,
+        field="database projection/callback identity base validator",
+    )
+    if (
+        set(repair_base) != repair_base_fields
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD
+        or repair_base.get("operator_identity")
+        != _identity(operator_gate["base_operator"])
+        or repair_base.get("config_identity") != _identity(base_config_bytes)
+        or repair_base.get("validator_identity") != _identity(base_validator)
+        or repair_base.get("accelerator_head")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD
+        or repair_base.get("accelerator_tree")
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_TREE
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or tuple(repair_base.get("nested_changed_paths") or ())
+        != expected_nested_paths
+        or repair_base.get("nested_commits") != expected_nested_commits
+        or base_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "database projection/callback identity repair base changed"
+        )
+
+    prior_config = _json_mapping_bytes(
+        prior_config_bytes,
+        field="database projection/callback identity prior config",
+    )
+    expected_config = json.loads(_canonical_bytes(prior_config))
+    expected_binding = expected_config.get("source_binding")
+    if not isinstance(expected_binding, dict):
+        raise OperatorError(
+            "database projection/callback identity source binding is absent"
+        )
+    expected_binding["ipfs_accelerate_planning_revision"] = (
+        DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD
+    )
+    expected_binding["ipfs_accelerate_planning_tree"] = (
+        DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_TREE
+    )
+    if base_config != expected_config:
+        raise OperatorError(
+            "database projection/callback identity config delta changed"
+        )
+
+    base_gitlink = str(
+        _git("ls-tree", base_commit, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        len(base_gitlink) < 3
+        or base_gitlink[:2] != ["160000", "commit"]
+        or base_gitlink[2]
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "database projection/callback identity accelerator gitlink changed"
+        )
+    accelerator_repository = ROOT / "external/ipfs_accelerate"
+    nested_parent = SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD
+    for nested_commit in expected_nested_commits:
+        nested_head = str(nested_commit["source_head"])
+        nested_tree = _git_commit_tree(
+            nested_head,
+            field="database projection/callback identity nested source",
+            repository=accelerator_repository,
+        )
+        nested_parents = str(
+            _git_in_repository(
+                accelerator_repository,
+                "show",
+                "-s",
+                "--format=%P",
+                nested_head,
+            )
+        ).strip().split()
+        nested_paths = tuple(
+            line
+            for line in str(
+                _git_in_repository(
+                    accelerator_repository,
+                    "diff",
+                    "--name-only",
+                    f"{nested_parent}..{nested_head}",
+                )
+            ).splitlines()
+            if line
+        )
+        if (
+            nested_commit.get("parent") != nested_parent
+            or nested_tree != nested_commit.get("repository_tree_id")
+            or nested_parents != [nested_parent]
+            or nested_paths
+            != tuple(nested_commit.get("changed_paths") or ())
+        ):
+            raise OperatorError(
+                "database projection/callback identity nested commit changed"
+            )
+        nested_parent = nested_head
+    aggregate_nested_paths = tuple(
+        line
+        for line in str(
+            _git_in_repository(
+                accelerator_repository,
+                "diff",
+                "--name-only",
+                f"{SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD}.."
+                f"{DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if aggregate_nested_paths != expected_nested_paths:
+        raise OperatorError(
+            "database projection/callback identity nested source delta changed"
+        )
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+    }
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("source_head")
+        != operator_gate["sealed_source_head"]
+        or sealed_source.get("repository_tree_id")
+        != operator_gate["sealed_source_tree"]
+        or sealed_source.get("parent") != base_commit
+        or sealed_source.get("operator_identity")
+        != _identity(operator_gate["expected_operator"])
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (
+            "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        )
+    ):
+        raise OperatorError(
+            "database projection/callback identity sealed source changed"
+        )
+
+    expected_projection_contract = {
+        "projection_schema": (
+            "ipfs_accelerate_py/agent-supervisor/"
+            "database-task-state-compatibility-projection@1"
+        ),
+        "successful_snapshot_timestamp": (
+            "single_utc_now_after_stable_database_snapshot"
+        ),
+        "successful_snapshot_progress_binding": (
+            "heartbeat_at_equals_last_progress_at"
+        ),
+        "incomplete_projection_progress_authority": False,
+        "missing_or_malformed_progress_disposition": "fail_closed",
+        "frozen_projection_disposition": (
+            "heartbeat_stale_after_configured_bound"
+        ),
+        "terminal_quiescence_fields_changed": False,
+    }
+    expected_callback_contract = {
+        "scope": "sealed_database_portal_merge_continuation",
+        "accepted_source_cid": "projection_task_cid",
+        "normalized_comparison_cid": "task_cid",
+        "normalization_surface": "in_memory_exact_source_matching_only",
+        "event_log_mutated": False,
+        "foreign_cid_disposition": (
+            "merge_queue_reconciliation_producer_source_conflict"
+        ),
+        "missing_ambiguous_or_tampered_disposition": "fail_closed",
+    }
+    expected_incidents = {
+        "generation": 46,
+        "observations": [
+            {
+                "scope": "database_compatibility_projection",
+                "failure": "fresh_active_projection_had_no_progress_timestamp",
+            },
+            {
+                "task_alias": "PCSM-036",
+                "failure": (
+                    "producer_projection_cid_differed_from_database_task_cid"
+                ),
+            },
+        ],
+        "controlled_stop_checkpoint": {
+            "completed_task_count": 54,
+            "in_progress_task_count": 2,
+            "in_progress_tasks": ["PCSM-071", "PCSM-072"],
+            "todo_task_count": 14,
+            "blocked_task_count": 0,
+            "task_state_mutation": False,
+            "terminal_quiescence": False,
+            "post_stop_observation": {
+                "provider_process_count": 0,
+                "active_queue_entry_count": 0,
+                "runtime_process_count": 0,
+            },
+        },
+    }
+    if dict(projection_contract) != expected_projection_contract:
+        raise OperatorError(
+            "database projection/callback progress contract changed"
+        )
+    if dict(callback_contract) != expected_callback_contract:
+        raise OperatorError(
+            "database projection/callback CID contract changed"
+        )
+    if dict(incidents) != expected_incidents:
+        raise OperatorError(
+            "database projection/callback incident evidence changed"
+        )
+
+    expected_post_integration = {
+        "condition": (
+            "artifact_commit_integrated_on_configured_merge_target_branch_"
+            "with_stopped_materialized_authority"
+        ),
+        "cwd": ".",
+        "command": [
+            "python",
+            "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+            "launch-supervisor",
+            "--dry-run",
+        ],
+        "pre_integration_outcome": (
+            "not_run_branch_and_materialization_gated"
+        ),
+        "required_outcome": "passed",
+        "runtime_launch": False,
+        "authority_mutation": False,
+    }
+    if dict(post_integration) != expected_post_integration:
+        raise OperatorError(
+            "database projection/callback post-integration validation changed"
+        )
+
+    nested_focused = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/api/test_agent_supervisor_database_implementation_daemon.py::"
+        "test_database_task_state_compatibility_projection_marks_exact_idle_completion",
+        "test/api/test_agent_supervisor_worker_watchdog.py::"
+        "test_watchdog_projection_progress_timestamp_has_bounded_grace",
+        "test/api/test_agent_supervisor_worker_watchdog.py::"
+        "test_watchdog_missing_progress_timestamp_remains_fail_closed",
+        "test/api/test_agent_supervisor_merge_train.py::"
+        "test_database_portal_retry_normalizes_only_sealed_projection_cid",
+    )
+    pycompile = (
+        "python",
+        "-m",
+        "py_compile",
+        "ipfs_accelerate_py/agent_supervisor/todo_daemon/"
+        "implementation_daemon.py",
+    )
+    nested_diff = (
+        "git",
+        "diff",
+        "--check",
+        f"{SUPERVISOR_CALLBACK_CONTINUITY_ACCELERATOR_HEAD}.."
+        f"{DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD}",
+    )
+    focused_outer = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_database_projection_callback_identity_transition.py",
+    )
+    prior_outer = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_supervisor_callback_continuity_transition.py",
+    )
+    board_validation = (
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all",
+    )
+    read_only_verifier = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_database_projection_callback_identity_transition.py::"
+        "test_current_transition_receipt_passes_exact_read_only_verifier",
+    )
+    required_validations = {
+        ("external/ipfs_accelerate", nested_focused),
+        ("external/ipfs_accelerate", pycompile),
+        ("external/ipfs_accelerate", nested_diff),
+        (".", focused_outer),
+        (".", prior_outer),
+        (".", board_validation),
+        (".", read_only_verifier),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    summaries: dict[tuple[str, ...], str] = {}
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError(
+                "database projection/callback identity validation is malformed"
+            )
+        command = validation.get("command")
+        summary = validation.get("summary")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(summary, str)
+            or not summary
+        ):
+            raise OperatorError(
+                "database projection/callback identity validation did not pass"
+            )
+        observed = (str(validation.get("cwd") or ""), tuple(command))
+        observed_validations.add(observed)
+        summaries[tuple(command)] = summary
+    if (
+        len(validations) != len(required_validations)
+        or observed_validations != required_validations
+        or re.search(r"\b5 passed\b", summaries.get(nested_focused, ""))
+        is None
+        or summaries.get(pycompile, "") != "clean"
+        or summaries.get(nested_diff, "") != "clean"
+        or re.search(r"\b7 passed\b", summaries.get(focused_outer, ""))
+        is None
+        or re.search(r"\b5 passed\b", summaries.get(prior_outer, ""))
+        is None
+        or summaries.get(board_validation, "")
+        != "valid board: 70 tasks, 11 goals, 96 packages"
+        or re.search(r"\b1 passed\b", summaries.get(read_only_verifier, ""))
+        is None
+    ):
+        raise OperatorError(
+            "database projection/callback identity validations are incomplete"
+        )
+
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    current_operator = _tracked_bytes(operator_path, head=current_head)
+    current_validator = _tracked_bytes(validator_path, head=current_head)
+    transition_test_path = (
+        ROOT
+        / "test/test_pcsm_database_projection_callback_identity_transition.py"
+    )
+    prior_transition_test_path = (
+        ROOT / "test/test_pcsm_supervisor_callback_continuity_transition.py"
+    )
+    current_gitlink = str(
+        _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        current_config_bytes != base_config_bytes
+        or _canonical_bytes(current_config) != _canonical_bytes(base_config)
+        or current_operator != operator_gate["expected_operator"]
+        or current_validator != base_validator
+        or _tracked_bytes(transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=base_commit,
+            path=transition_test_path,
+            field="database projection/callback identity focused test",
+        )
+        or _tracked_bytes(prior_transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+            path=prior_transition_test_path,
+            field="prior supervisor callback-continuity focused test",
+        )
+        or current_source_identities.get("config")
+        != _identity(base_config_bytes)
+        or current_source_identities.get("operator")
+        != _identity(operator_gate["expected_operator"])
+        or current_source_identities.get("validator")
+        != _identity(base_validator)
+        or len(current_gitlink) < 3
+        or current_gitlink[:2] != ["160000", "commit"]
+        or current_gitlink[2]
+        != DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "database projection/callback identity live source changed"
+        )
+    old_receipt_bytes = _tracked_bytes(
+        SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_PATH,
+        head=current_head,
+    )
+    if (
+        old_receipt_bytes
+        != _git_blob_at(
+            head=prior_artifact_commit,
+            path=SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_PATH,
+            field="preserved supervisor callback-continuity receipt",
+        )
+        or _json_mapping_bytes(
+            old_receipt_bytes,
+            field="preserved supervisor callback-continuity receipt",
+        ).get("receipt_id")
+        != prior_transition_receipt_id
+    ):
+        raise OperatorError(
+            "supervisor callback-continuity receipt was not preserved"
+        )
+    for item in expected_checkpoint_receipts:
+        current_bytes = _tracked_bytes(ROOT / item["path"], head=current_head)
+        if _identity(current_bytes) != item["bytes_id"]:
+            raise OperatorError(
+                "database projection/callback checkpoint evidence changed"
+            )
+    source_paths = _restart_source_paths(board)
+    for name in ("taskboard", "objectives", "plan", "generator"):
+        checkpoint_bytes = _git_blob_at(
+            head=DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
+            path=source_paths[name],
+            field=f"database projection/callback checkpoint {name}",
+        )
+        current_bytes = _tracked_bytes(source_paths[name], head=current_head)
+        if (
+            current_bytes != checkpoint_bytes
+            or current_source_identities.get(name) != _identity(current_bytes)
+        ):
+            raise OperatorError(
+                "database projection/callback changed immutable authority"
+            )
+    return {
+        "receipt": payload,
+        "artifact_commit": operator_gate["artifact_commit"],
+        "sealed_source_head": operator_gate["sealed_source_head"],
+        "sealed_source_tree": operator_gate["sealed_source_tree"],
+        "accelerator_head": (
+            DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD
+        ),
+        "accelerator_tree": (
+            DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_TREE
+        ),
     }
 
 
@@ -8255,6 +9353,29 @@ def _owner_restart_admission(
         )
         else {}
     )
+    database_projection_callback_identity_transition = (
+        supervisor_callback_continuity_transition.get(
+            "database_projection_callback_identity_transition"
+        )
+    )
+    database_projection_callback_identity_transition = (
+        database_projection_callback_identity_transition
+        if isinstance(
+            database_projection_callback_identity_transition, Mapping
+        )
+        else {}
+    )
+    database_projection_callback_identity_transition_receipt = (
+        database_projection_callback_identity_transition.get("receipt")
+    )
+    database_projection_callback_identity_transition_receipt = (
+        database_projection_callback_identity_transition_receipt
+        if isinstance(
+            database_projection_callback_identity_transition_receipt,
+            Mapping,
+        )
+        else {}
+    )
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
         "mode": admission_mode,
@@ -8300,6 +9421,12 @@ def _owner_restart_admission(
         ),
         "supervisor_callback_continuity_transition_receipt_id": str(
             supervisor_callback_continuity_transition_receipt.get(
+                "receipt_id"
+            )
+            or ""
+        ),
+        "database_projection_callback_identity_transition_receipt_id": str(
+            database_projection_callback_identity_transition_receipt.get(
                 "receipt_id"
             )
             or ""
@@ -10036,6 +11163,12 @@ def _owner_restart_receipt(
         "supervisor_callback_continuity_transition_receipt_id": str(
             admission.get(
                 "supervisor_callback_continuity_transition_receipt_id"
+            )
+            or ""
+        ),
+        "database_projection_callback_identity_transition_receipt_id": str(
+            admission.get(
+                "database_projection_callback_identity_transition_receipt_id"
             )
             or ""
         ),
