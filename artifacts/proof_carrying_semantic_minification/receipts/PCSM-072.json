@@ -1,0 +1,214 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-072",
+  "title": "Add source-span expansion",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-072",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-072@current-head-python-v1-source-span-expansion-capability-assessment-v1",
+  "observed_at": "2026-08-28T15:13:41Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 source-span expansion capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-072.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-072.json",
+    "implementation_delta": "Reuse the current-head ContractRepairPacket bounded source-span and content-addressed expansion-handle authority. BoundedSourceSpan@1 carries a path, closed line interval, optional redacted excerpt, optional content ID, and deterministic span identity; the compiler applies deterministic count and byte bounds and defers over-budget material to SOURCE handles. expand_repair_handle resolves only a packet-admitted handle against an explicitly supplied content-addressed store and rejects unbound, stale-tree, stale-forest, and missing targets. No PCSM wrapper, resolver, source-map authority, mutation path, or test relaxation was created.",
+    "non_promotion_reason": "The reusable component is current-head and its selected positive and negative source-span tests pass, but it is a generic VFS repair-packet authority. No canonical PCSM aggregate SourceLinkReceipt/source-map CID binds the exact PCSM forest's file/node/span identities, no source-map-bound PCSM request/result exists, and the component's full legacy test module has one unrelated failed formal-replanner composition test. This receipt therefore reports a bounded reusable capability, not a PCSM source-forest expansion instance or promotion."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "A deterministic approximation; it does not establish a PCSM source-forest expansion, proof, validation success, or promotion.",
+    "simulated": "A controlled fixture exercise that establishes only the exercised generic contract behavior and never replaces source-forest evidence.",
+    "unavailable": "A required capability, identity, result, or dependency absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "c27bf2123f44524750faf873be995b9e727cd09e",
+    "outer_tree": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "dispatch_tree_id": "05d51aa052087ff64765e208f8a54b5078836a76",
+    "dispatch_tree_id_equals_outer_tree": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "7632510e067c97ad2414a200ab8eb73384469a11",
+    "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no source-span expansion authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named current-head Python-v1 bounded source-span and expansion-handle implementation and direct-test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no new kit authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared every admitted superproject gitlink with nested HEAD and HEAD^{tree}; inspected outer and admitted nested porcelain before this declared receipt write; calculated scheduler and selected source/test SHA-256 values plus Git blobs; inspected the source-span implementation and tests; and searched accelerator sources for a PCSM SourceMap/SourceLink identity.",
+      "result": "The dispatch tree equals outer HEAD^{tree}, all recorded nested commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before this receipt write. The selected implementation and test sources are current at the recorded accelerator tree. No PCSM SourceMap/SourceLink identity was found, so Git trees/blobs and generic packet identities are not substituted for a concrete PCSM source-map CID.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, contract version/schema, source-map capability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span identities in the named accelerator implementation/test roots. Repository/tree bindings, Git trees/blobs, file SHA-256 digests, and generic packet/span IDs are freshness or component identities, not this missing PCSM source-map contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "component": "ipfs_accelerate_py.agent_supervisor.proof.contract_repair_packet",
+    "public_surface": "ipfs_accelerate_py.agent_supervisor.contract_repair_packet",
+    "contracts": {
+      "bounded_source_span": "ipfs_accelerate_py/agent-supervisor/contract-repair-source-span@1",
+      "repair_packet": "ipfs_accelerate_py/agent-supervisor/contract-repair-packet@1",
+      "repair_packet_request": "ipfs_accelerate_py/agent-supervisor/contract-repair-packet-request@1",
+      "repair_expansion_handle": "ipfs_accelerate_py/agent-supervisor/contract-repair-expansion-handle@1",
+      "contract_version": 1
+    },
+    "selected_behavior": {
+      "bounded_span": "BoundedSourceSpan validates a nonempty path and a closed positive line interval, redacts its inline excerpt, limits it to 2,048 UTF-8 bytes, requires a content-ID handle for intervals exceeding 40 lines, and derives span_id from canonical identity payload fields.",
+      "deterministic_compilation": "The packet compiler canonicalizes request data, keeps source spans as a separately bounded budget, admits at most eight inline spans, converts over-byte excerpts and excess spans to deterministic SOURCE expansion handles, and uses canonical content identities for packet, receipt, span, and handle values.",
+      "expansion_admission": "expand_repair_handle accepts only a handle already admitted on the packet; it verifies matching tree and forest bindings, requires a caller-supplied content-addressed store, rejects missing content, and re-sanitizes returned data rather than returning raw forbidden private material.",
+      "authority_boundary": "RepairAuthority is proposal-only and forces semantic_authority, completion_authoritative, and proof_authoritative false. The generic packet authority does not establish PCSM semantic authority, a PCSM source-map, a proof, completion, M2/M3 mutation, or a whole-file/full-forest expansion."
+    },
+    "minimum_delta_reason": "This versioned, CID-bound, deterministic source-span/handle service already supplies the smallest reusable Python-v1 behavior. A PCSM-specific span schema or second resolver would duplicate authority and is disallowed by this receipt-only dispatch."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/contract_repair_packet.py",
+      "git_blob": "dcff31dce132c73a8afd36be09e90841b01adaea",
+      "sha256": "dc4c1ff5f26f0285d3799b9320cc64b1d5534a8e46036ffb20502752a2f45574",
+      "role": "Versioned BoundedSourceSpan@1 and RepairExpansionHandle contracts; canonical identity; bounded span admission/defer policy; content-addressed expansion resolver; stale/binding checks; and proposal-only authority boundary"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_contract_repair_packet.py",
+      "git_blob": "1c4af7ada9d6062e4a5163da3c79f7c658c7127c",
+      "sha256": "702dd2007aa3ca68b2703f828d41623639db41cdfb618fa227f361e00fef00c7",
+      "role": "Current-head positive and negative bounded-source-span, content-identity, expansion-handle, stale-binding, and proposal-authority regression coverage"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm072-required-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.33s",
+      "scope_limit": "The required PCSM suite validates closed candidate-output grammar and rejects model-created completions. It does not instantiate an exact PCSM source-map-bound source-span expansion."
+    },
+    "focused_source_span_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm072-span-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_contract_repair_packet.py::test_packet_contains_required_identity_scope_and_commands external/ipfs_accelerate/test/api/test_agent_supervisor_contract_repair_packet.py::test_packet_is_content_addressed_and_round_trips external/ipfs_accelerate/test/api/test_agent_supervisor_contract_repair_packet.py::test_default_packet_core_within_16kib_plus_bounded_spans external/ipfs_accelerate/test/api/test_agent_supervisor_contract_repair_packet.py::test_expansion_handle_resolve_and_stale_rejection external/ipfs_accelerate/test/api/test_agent_supervisor_contract_repair_packet.py::test_delta_stale_expansion_handle_fails_closed external/ipfs_accelerate/test/api/test_agent_supervisor_contract_repair_packet.py::test_model_proposal_authority_cannot_be_forged",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "6 passed in 0.52s",
+      "positive_coverage": [
+        "A packet retains required identity/scope fields, separates bounded source-span bytes from its 16 KiB core budget, and never embeds full source/AST/graph/proof/witness bodies.",
+        "Canonical packet/span identities round-trip exactly.",
+        "Multiple bounded source spans remain within the default deterministic limits."
+      ],
+      "negative_coverage": [
+        "Unknown, unadmitted, stale-tree, stale-forest, and missing-store expansion handles fail closed.",
+        "A stale handle on a retry delta fails closed.",
+        "Model-proposal packets cannot forge semantic, completion, or proof authority."
+      ],
+      "scope_limit": "These are generic current-head contract tests using controlled VFS fixtures; they prove no concrete PCSM forest span or SourceLinkReceipt binding."
+    },
+    "broader_component_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm072-focused-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_contract_repair_packet.py",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "failed",
+      "result": "22 passed, 1 failed in 0.57s",
+      "failure": {
+        "test": "test_formal_replanner_composition_compiles_compact_packets",
+        "observed_reason": "The test asserts that external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/formal_replanner.py exists; it is absent at this current head.",
+        "impact": "This is a measured dependency/composition gap for the legacy VFS formal-replanner surface. It does not turn the six selected source-span tests or required PCSM suite into failures, but it prevents any claim that the whole legacy component module is green."
+      }
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "PCSM-072 declares no kernel-checkable theorem-prover obligation for the reused deterministic packet contract. Its internal helper names such as prove_compact_repair_packet are not an external formal-prover result; passing tests are not promoted to proof, mutation approval, or completion authority."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities, clean/freshness checks, scheduler and selected source/test digests, selected schema/version/binding behavior, the sealed required suite (11 passed), selected source-span checks (6 passed), and the broader component result (22 passed, 1 failed).",
+    "estimated": "The component contains a deterministic bytes-per-token estimator for compact packet budgeting, but no token estimate was generated or used to establish this PCSM source-forest capability, validation result, proof, or promotion.",
+    "simulated": "The selected contract tests use controlled VFS packet/store fixtures, including a bounded source expansion body. They establish only the generic exercised behavior and are not represented as a PCSM forest execution.",
+    "unavailable": "A canonical current-PCSM aggregate SourceLinkReceipt/source-map CID; PCSM file/node/span bindings; a source-map-bound PCSM request/result CID; an external formal-prover result; and the missing current-head formal_replanner.py composition dependency."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_source_span_service_available_pcsm_source_forest_instance_unavailable_non_promoted",
+    "available_capability": "A current-head Python-v1 generic bounded source-span and content-addressed expansion-handle service, with deterministic schema/version/CID binding and selected sealed positive/negative tests.",
+    "unavailable_capability": "A concrete exact-PCSM source-forest expansion whose paths, nodes, spans, request, and result are bound by a canonical PCSM SourceLinkReceipt/source-map CID.",
+    "missing_bindings": [
+      "canonical aggregate PCSM SourceLinkReceipt or source-map CID",
+      "current PCSM forest file/node/span records linked to that source map",
+      "a source-map-bound PCSM source-span expansion request and emitted result CID"
+    ],
+    "disposition": "No PCSM source-map CID, source-forest request/result CID, formal proof, estimated cost, or model-derived evidence is invented. Missing values are unavailable rather than zero. The selected existing service remains within its original generic authority boundary, and no competing PCSM authority is created."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify the selected accelerator service/tests, create a parallel PCSM source-span service, or materialize generated source.",
+    "The selected BoundedSourceSpan carries paths and line intervals but does not itself resolve those values against a PCSM SourceLinkReceipt or provide a PCSM aggregate source-map CID.",
+    "An expansion handle validates packet admission and tree/forest equality, but the supplied generic store is not a canonical PCSM source-map resolver and its fixture content is not source-forest evidence.",
+    "The generic packet component's full direct module is not green at this head: 22 tests pass and its formal-replanner composition test fails because the expected file is absent. This receipt does not suppress or relabel that failure.",
+    "No model output, test result, request, helper claim, or token estimate is treated as evidence, proof, source mutation, M2/M3 mutation, promotion, or completion authority.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, the existing accelerator source-span implementation, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, schema/version/identity behavior, source-map capability, direct-test result, or required validation result changes."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalent_reused_first": true,
+    "generic_source_span_expansion_available": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "selected_positive_and_negative_tests_passed": true,
+    "sealed_required_validation_passed": true,
+    "broader_component_module_green": false,
+    "broader_component_failure_recorded": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_source_span_instance_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_pcsm_source_map_bound_instance"
+  }
+}
