@@ -1,0 +1,224 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-064",
+  "title": "Integrate qualified Craig interpolation",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-064",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-064@current-head-qualified-craig-interpolation-capability-assessment-v1",
+  "observed_at": "2026-08-28T08:20:02Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 qualified Craig-interpolation capability assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-064.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-064.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "The exact current ipfs_datasets source forest already supplies the reusable, versioned ValidatedCraigInterpolation@1 authority and its checked public facade. It qualifies cvc5 only for QF_LIA production, requires fresh independent Z3 checks for A => I and I & B unsatisfiability, structurally limits interpolant vocabulary to the shared vocabulary, carries explicit bounds, and canonically binds partitions, interpolant, validation checks, and receipt identities. The declared-output boundary permits only this receipt, so no duplicate interpolation adapter, source mutation, or competing PCSM authority was created.",
+    "non_promotion_reason": "The existing implementation and direct positive/negative tests are present and pass in the provider environment, but the authoritative sealed environment has neither the cvc5 producer API nor the independent z3 validator. Its required pytest command also aborts before collection because its explicitly configured anyio plugin is unavailable. No canonical PCSM current-source-map CID binds a current source file/node/span forest to an interpolation partition. This receipt therefore records the reusable authority without claiming sealed interpolation usability, a current-forest execution, or promotion."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish source identity, solver behavior, CID binding, or validation success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "245726769ab4e7420ffd26da5bf597fcfc9bf095",
+    "outer_tree": "dfc789aa10acebc76534d4f33b534cf9ac75e658",
+    "dispatch_tree_id": "245726769ab4e7420ffd26da5bf597fcfc9bf095",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "objective_revision": "baguqeerazutd4bvvt7ld7x2jxsux3ajtxit3gjh4ja5p2bc7c2waxrtkbioa",
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "admitted_gitlinks": {
+      "external/ipfs_datasets": {
+        "authority_role": "named Python-v1 qualified interpolation implementation, checked public facade, tests, and canonical source-identity boundary",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared the selected nested HEAD and HEAD^{tree}; inspected outer and selected nested porcelain before receipt creation; recorded selected implementation, facade, and test Git blobs and SHA-256 values; searched the exact datasets logic and proof_context roots for canonical PCSM source-map contract identifiers; and probed qualified interpolation APIs under a fresh private HOME using the prescribed sealed PATH.",
+      "result": "The dispatch commit equals outer HEAD, the recorded datasets commit/tree pair equals its checked-out head, and the inspected worktrees were clean before receipt creation. The sealed capability probe found cvc5 and z3 Python APIs unavailable without installation or network access. The searched PCSM roots contain no SourceMapResolver@1, SourceLinkReceipt@1, aggregate source-map, source_map_resolver, or CodeIR-to-current-source identity authority.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink head/tree, scheduler digest, listed source digest, required-test configuration/result, cvc5/z3 capability, interpolation contract, or current PCSM source-map capability requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM source-map CID or canonical CodeIR/source identity to exact current file/node/span resolution is present in the task-owned implementation/test roots. Interpolation partition CIDs identify SMT terms, not the absent PCSM current-source identities; Git trees, blobs, and local test node IDs are not substitutes."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "components": [
+      {
+        "component": "ipfs_datasets_py.logic.backends.smt.interpolation.ValidatedCraigInterpolation@1",
+        "interface": "ValidatedCraigInterpolation@1",
+        "receipt_schema": "validated-craig-interpolant/v1",
+        "capability_schema": "interpolation-capability/v1",
+        "bounds_schema": "interpolation-bounds/v1",
+        "role": "cvc5 is the sole qualified producer for QF_LIA. A returned term is admitted only after independently opening fresh Z3 sessions to validate A => I and I & B unsatisfiability, checking structural shared vocabulary, and checking partition/interpolant/receipt identities and resource bounds."
+      },
+      {
+        "component": "ipfs_datasets_py.logic.verification_api.compute_and_validate_interpolant",
+        "interface": "ValidatedCraigInterpolation@1",
+        "receipt_schema": "validated-craig-interpolant/v1",
+        "role": "Checked public facade that requires present partitions and verifies that the returned object has the declared schema, interface, and receipt_cid before exposing it."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "profile": "InterpolationBounds canonicalizes timeout, memory, symbol, term-node, theory, and schema limits. ValidatedInterpolantReceipt canonicalizes vocabularies and fallback-core names; receipt_cid is a canonical identity over the schema-bound receipt. Partition CIDs, interpolant CID, independent validation receipt CIDs, and the aggregate receipt CID bind the result. A validated status requires every admission check; a fallback status must have no interpolant and must carry separately validated unsat-core authority.",
+      "authority_boundary": "Z3 availability is not interpolation support; it is an independent validator only. Unsupported theory, producer/API absence, validator absence, failed validation, satisfiable partitions, and bound failure produce typed non-success. Unsat-core fallback is explicitly labelled fallback and is never rewritten as an interpolant. Independent solver diversity is not kernel reconstruction or mutation authority.",
+      "current_pcsm_execution_binding": "unavailable because canonical PCSM source-map/CID inputs and a usable sealed qualified producer/validator are both absent."
+    }
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/backends/smt/interpolation.py",
+      "git_blob": "81fcab9ca29a948dd3964b2eab003f497342d603",
+      "sha256": "ed5c2cb85abee7daa340fadca2253bc6a46b87b9d0c88b0a23dec1497b5a5647",
+      "role": "Versioned qualified Craig-interpolation implementation, deterministic semantic identities, explicit bounds, independent Z3 admission, typed unavailable dispositions, and explicitly non-interpolant unsat-core fallback."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/verification_api.py",
+      "git_blob": "6278972e3da8f99dace7bbfb735040b1980fbb09",
+      "sha256": "707138ae366a92cae6ed99927b690044bdfed69dead4c9282329732493b66a35",
+      "role": "Checked public API exposure of ValidatedCraigInterpolation@1 and validated-craig-interpolant/v1."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/backends/test_interpolation.py",
+      "git_blob": "b937af91558bb6dab17e1c1f903fd3fa2a419cc9",
+      "sha256": "67ad17496543a9731c5f91a2298986be5389e6597a82073c1e1151b41277648d",
+      "role": "Direct positive and negative qualified-interpolation contract coverage."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/test_compositional_verification_public_api.py",
+      "git_blob": "74a520f62cc459269202072b87745c28ef936ad2",
+      "sha256": "ba35600a11a8d11e2a9c28bb03f0c258eedffdd0e7cfea011bbde166c62bf00e",
+      "role": "Public-facade interpolation schema/interface/receipt-CID coverage and malformed-partition rejection."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": {
+      "kind": "measured",
+      "positive_coverage": [
+        "A live QF_LIA cvc5 interpolant is independently validated by Z3: A => I, I & B unsatisfiability, structural shared vocabulary, identity, and bounds must all pass.",
+        "Equivalent admitted interpolants have stable canonical identities; partition, interpolant, validation-receipt, and aggregate receipt CIDs are asserted.",
+        "The public facade returns the declared ValidatedCraigInterpolation@1 interface and validated-craig-interpolant/v1 receipt schema."
+      ],
+      "negative_coverage": [
+        "Unsupported theories and unqualified Z3 production are rejected; solver availability alone is not interpolation support.",
+        "Absent providers, missing producer API, blocked independent validator, jointly satisfiable partitions, malformed requests, invalid receipt schema, and incomplete validated/fallback receipts produce exceptions or typed non-success rather than a fabricated interpolant.",
+        "Unavailable interpolation can expose only a validated unsat-core fallback, never an interpolant; optional solver imports remain cold until requested."
+      ],
+      "coverage_limit": "The direct tests validate the reusable interpolation authority and checked facade. They do not create a PCSM source-map-bound current-forest partition or turn solver observations into kernel-checked proofs."
+    },
+    "provider_qualified_capability_probe": {
+      "kind": "simulated",
+      "status": "passed",
+      "command_executed": "python -c '<qualified QF_LIA cvc5-plus-z3 interpolation probe and deterministic receipt inspection>'",
+      "environment": "Provider Python 3.12.3 with cvc5 1.3.3 and z3 4.15.4 installed.",
+      "result": "cvc5 QF_LIA capability was qualified and a disjoint-x partition produced validated-craig-interpolant/v1 / ValidatedCraigInterpolation@1 with every admission check true. Measured provider-run result IDs: partition_a_cid=bafkreifh5zmqrcasaasoz4ztppa4btgbhi3jmiw4rscusjrcjfrug2nwku; partition_b_cid=bafkreic7p2j4oehi57oq3uyu2xsrrr65lcnmqq5nxdtmhqll3uh5slebte; interpolant_cid=bafkreigsdxpcyy3ueq6ihodxqayy3lpwgjpmlwkykhxzcqn6kh6tywivhi; receipt_cid=bafkreiduryhkbdzgn3alyhs7ij7elkzfqcfbrr6ku3jo4paqgpxtjq6b3y.",
+      "limitation": "This provider-environment result is simulated evidence only and cannot establish sealed qualified capability or authorize promotion."
+    },
+    "sealed_capability_probe": {
+      "kind": "measured",
+      "status": "unavailable",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm064-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -c '<probe_interpolation_support for cvc5 and z3 in QF_LIA>'",
+      "environment": "Authoritative sealed Python 3.12.3, fresh private HOME, prescribed PATH, no installation, and no network access.",
+      "result": "The cvc5 capability reports provider_installed=false, interpolation_api=false, independent_validator_installed=false, qualified=false, reason='cvc5 Python API is not installed'. The z3 capability reports provider_installed=false, qualified=false, reason='z3 Python API is not installed'.",
+      "fail_closed_disposition": "No provider installation, PATH expansion, profile-state reuse, alternate solver, fallback relabelling, or simulated result is treated as sealed qualified interpolation usability."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "command_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm064-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited before collection with ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, profile-state reuse, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "provider_dedicated_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command_executed": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/backends/test_interpolation.py external/ipfs_datasets/tests/unit/logic/test_compositional_verification_public_api.py",
+      "environment": "Provider Python 3.12.3 with pytest 9.1.1, cvc5 1.3.3, z3 4.15.4, and provider-installed plugins.",
+      "result": "32 passed in 0.96s.",
+      "limitation": "This provider-environment result is simulated evidence only and cannot establish sealed solver usability or authorize promotion."
+    },
+    "required_validation_provider_attempt": {
+      "kind": "simulated",
+      "status": "passed",
+      "command_executed": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "environment": "Provider Python 3.12.3 with pytest 9.1.1 and provider-installed plugins; bytecode writes were disabled and pytest cache was redirected outside the repository.",
+      "result": "519 passed in 76.49s.",
+      "limitation": "The required suite is proof_context coverage rather than dedicated interpolation coverage, and provider execution cannot replace sealed validation."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No approved digest-bound theorem-prover deployment or kernel-checkable PCSM-064 obligation is present in the authoritative sealed environment. Independent solver validation is not kernel proof reconstruction; no formal-proof success is inferred."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; scheduler digest; clean/freshness checks; implementation/facade/test blobs and SHA-256 values; schemas/interfaces; deterministic CID mechanics; current PCSM source-map absence search; sealed pytest collection failure; and sealed cvc5/z3 absence probe.",
+    "estimated": "None. No estimate is used to establish interpolation behavior, identity, CID binding, test success, or promotion.",
+    "simulated": "Provider cvc5 1.3.3 plus independent z3 4.15.4 qualified-QF_LIA probe with all admission checks true; focused interpolation/public-facade validation (32 passed in 0.96s); and required proof_context validation (519 passed in 76.49s).",
+    "unavailable": "Sealed cvc5 and z3 Python APIs; sealed required-suite collection because anyio.pytest_plugin is absent; canonical PCSM aggregate source-map CID; current source-map-bound PCSM interpolation execution; formal-prover result; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It selects and validates an existing current-head authority but does not modify the datasets implementation/tests or create a competing interpolation subsystem.",
+    "Qualified production is limited to cvc5 QF_LIA with the experimental interpolation API and independent Z3 validation; independent solver diversity is not kernel reconstruction.",
+    "Both required Python APIs are absent in the authoritative sealed environment. The available provider-environment solvers do not satisfy that sealed-environment gate.",
+    "A validated unsat core is fallback authority only and is never an interpolant; no failure or unavailable disposition is promoted into a success.",
+    "A current aggregate PCSM source-map CID is unavailable, so no interpolation partition is claimed to bind an exact current PCSM file/node/span forest.",
+    "The required PCSM suite passed only in the provider environment and could not collect in the sealed environment; it cannot be relabelled as a sealed package validation pass.",
+    "No model output is accepted as evidence or mutation authority, and no M2/M3 mutation, generated-source mutation, automatic source materialization, or promotion is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head qualified-interpolation capability assessment. Do not alter protected planning documents, existing datasets verification components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, required-test configuration/result, sealed cvc5/z3/plugin capability, interpolation contract, or PCSM source-map capability change."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalent_reused_first": true,
+    "qualified_craig_interpolation_capability_implemented": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "provider_dedicated_positive_and_negative_validation_passed": true,
+    "sealed_qualified_producer_and_validator_available": false,
+    "sealed_required_validation_passed": false,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_interpolation_execution_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_sealed_cvc5_z3_pytest_and_pcsm_identity_binding"
+  }
+}
