@@ -1,0 +1,209 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-090",
+  "title": "Add Python API",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G800",
+  "objective_id": "PCSM-090",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-090@current-head-python-v1-api-capability-assessment-v1",
+  "observed_at": "2026-08-28T18:15:00Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 API capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-090.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-090.json",
+    "implementation_delta": "The exact current accelerator head has a versioned ExternalHandoffAPI@1, but that API owns external-agent handoff operations and no PCSM semantic-minification input/output contract. Its generic SemanticProjectionStore@1 and ProofProjectionStore@1 persist opaque tree-bound references while explicitly refusing to reinterpret semantics or mint authority. The searched source and PCSM test forests contain no PCSM Python API, PCSM ProjectionRoot, PCSM source-map CID, or SourceLinkReceipt identifier. PCSM-046, PCSM-057, and PCSM-085 independently record the same missing PCSM projection/source-map chain. The declared authority permits only this receipt, so no wrapper, alias, competing API, schema, CID, or test alteration was created.",
+    "non_promotion_reason": "No current-head PCSM API package is available to qualify. The required suite supplies structured-output boundary coverage only, not direct PCSM API positive/negative vectors. A sealed direct import of the closest generic projection modules is blocked by the absent anyio dependency before its assertions can execute. Consequently neither generic API behavior nor the passing required suite is relabelled as a PCSM API implementation, semantic authority, CID binding, or promotion."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish source identity, API behavior, schema/CID binding, test success, proof, or promotion.",
+    "simulated": "A controlled non-authoritative fixture exercise; it cannot replace a sealed PCSM API validation or create authority.",
+    "unavailable": "A required capability, identity, package, dependency, contract, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "git_object_format": "sha1",
+    "outer_commit": "057587ffcad5fbbc193276461c11f6ca47ad6eb7",
+    "outer_tree": "bf6560ca1e83d844664b4949919c61a6a18bd6f5",
+    "dispatch_tree_id": "057587ffcad5fbbc193276461c11f6ca47ad6eb7",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "bdb6becdd3499dd32bca9004460f375b8465eb0e",
+    "scheduler_config_sha256": "a83e6f853a7d159af999c9af2eaa2ab6062cb3c8e0a7feafb58eb57578af20a8",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no PCSM Python API authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named Python-v1 implementation and test boundary; no PCSM API package is present"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic-identity boundary; no PCSM API or forest-wide source-map CID selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no PCSM Python API authority selected"
+      }
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "absent",
+      "reason": "No current-tree PCSM ProjectionRoot, SourceLinkReceipt, or aggregate PCSM source-map CID binds an exact source forest to a PCSM API. Git commits, trees, blobs, SHA-256 values, generic content references, aliases, and arbitrary CIDs are not substitutes."
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared every admitted superproject gitlink with the nested HEAD and HEAD^{tree}; inspected outer and accelerator porcelain before receipt creation; calculated scheduler and selected source/test SHA-256 values and Git blobs; searched the accelerator agent_supervisor and PCSM test forests for PCSM API/projection/source-map identifiers; and ran the required suite under the prescribed PATH with a fresh private HOME/XDG root.",
+      "result": "The dispatch commit equals outer HEAD, all recorded gitlink commit/tree pairs equal checked-out heads, and the inspected worktrees were clean before this receipt write. The exact identifier search returned no PCSM API, ProofCarryingSemanticMinification API, PCSM ProjectionRoot, SourceLinkReceipt, source_map_cid, or semantic-minification API match."
+    }
+  },
+  "existing_equivalents_assessed": {
+    "kind": "measured",
+    "candidates": [
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.api.ExternalHandoffAPI@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/external-handoff-api@1",
+        "role": "Versioned in-process external-agent handoff API with request, receipt, authority, event, and export schemas.",
+        "disposition": "not_reusable",
+        "reason": "Its external-handoff operations do not accept or return a PCSM source-forest semantic-minification contract, canonical PCSM identity, source-map CID, semantic proof, or PCSM projection. Re-exporting it as PCSM would be an unsafe alias and competing authority."
+      },
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.federation.SemanticProjectionStore@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/causal-federation/semantic-root-projection@1",
+        "role": "Generic typed persistence for opaque tree-bound semantic-root and capsule references.",
+        "disposition": "not_reusable",
+        "reason": "It deliberately does not reinterpret dataset semantics, and it lacks a PCSM API schema/version, ProjectionRoot, source-map CID, source-forest input, semantic-minification output, and direct PCSM vectors."
+      },
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.federation.ProofProjectionStore@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/causal-federation/proof-projection@1",
+        "role": "Generic opaque proof/test/cache/seal reference persistence.",
+        "disposition": "not_reusable",
+        "reason": "The source explicitly states that projections cannot establish authority or completion; it has no PCSM API or source-map-bound semantic-minification contract."
+      }
+    ],
+    "minimum_delta_reason": "No existing equivalent is a PCSM API. A new PCSM API would require a prior versioned source-map-bound projection/input/output contract and direct vectors, all absent here. Creating an adapter would therefore invent the missing semantic authority and exceed this receipt-only dispatch."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/api/__init__.py",
+      "git_blob": "46804e7f007e24a53f026ec1e26c6a164589b170",
+      "sha256": "504b942faf1441b323e04a9ab18de93a1ab0db768c01d9dd80655c2a005e81ba",
+      "role": "Public export surface for ExternalHandoffAPI@1, not a PCSM API."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/api/external_handoff.py",
+      "git_blob": "82e01328cc083f55b294811ffe65a753f3cb3c40",
+      "sha256": "50ddc7dbe53c30fe8b53591def06157e7e320822ef077269fb3bfdeb9874e808",
+      "role": "Defines ExternalHandoffAPI@1 and its non-PCSM contracts."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/federation/semantic_projection.py",
+      "git_blob": "022a2e393df3828ceb9b9ec3536c8453b446a47c",
+      "sha256": "1476da93897422ad539a99d1127a8334ee2cc6fe30ef85a85fb7595c00d55fc9",
+      "role": "Generic opaque tree-bound semantic projections and SemanticProjectionStore@1; it refuses semantic reinterpretation."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/federation/proof_projection.py",
+      "git_blob": "8e588613d20beb30f4ae92e8aadc931af09cb6ba",
+      "sha256": "087f656b7745cb7f1f81d280d8aaf2525501236de5a00e0285e00d910958b52d",
+      "role": "Generic opaque proof/test/cache/seal projections; source explicitly blocks authority minting."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Required PCSM structured-output positive/negative boundary suite; no direct PCSM API coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm090-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, prescribed PATH, fresh private HOME/XDG roots, and user-site disabled.",
+      "result": "11 passed in 0.34s",
+      "positive_coverage": [
+        "Closed task-family grammar is accepted.",
+        "Compact structured output is decoded.",
+        "Bounded explicit abstention is accepted."
+      ],
+      "negative_coverage": [
+        "Malformed output and unknown fields are rejected.",
+        "Model-created completion and untyped or abstention context are rejected.",
+        "Malformed rankings, unbounded or untyped patch scope, type coercion, and duplicate JSON fields are rejected."
+      ],
+      "scope_limit": "These are PCSM structured-output boundary vectors only. They do not execute a PCSM Python API, establish its absent schema/CID/source-map binding, or qualify a generic adjacent API as a PCSM interface."
+    },
+    "direct_generic_projection_import": {
+      "kind": "unavailable",
+      "status": "dependency_unavailable",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm090-probe-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_accelerate /usr/bin/python3.12 - <generic projection positive/negative probe>",
+      "attempted_positive_vector": "Construct a valid closed SemanticRootProjection and assert that the generic semantic/proof projection surfaces do not mint authority.",
+      "attempted_negative_vector": "Construct SemanticRootProjection with an unknown semantic kind and require FederationContractError.",
+      "result": "The probe could not import semantic_projection or proof_projection because the sealed interpreter raised ModuleNotFoundError: No module named 'anyio' through semantic_state's MCP++ import chain before either vector executed.",
+      "scope_limit": "This is an authoritative environment capability gap, not a passing or failing generic/PCSM API result. Installing or relying on a provider-only dependency would not establish sealed validation."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "No versioned PCSM API contract, source-map-bound PCSM input/output, concrete PCSM result, direct vectors, or approved digest-bound prover deployment exists at this head. Generic source inspection and the required suite are not relabelled as formal proof."
+    }
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "non_promoted_capability_gap",
+    "required_package": "ProofCarryingSemanticMinificationPythonAPI@1",
+    "required_contract": "A deterministic Python v1 API with an explicit versioned schema; exact PCSM repository/tree/source-map CID-bound input; canonical PCSM projection/proof-relevant output and CID where applicable; authority and freshness checks; no M2/M3 mutation or completion authority; and dedicated positive and negative vectors.",
+    "result": "Absent. No existing current-head package satisfies this contract, and receipt-only authority forbids defining it."
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; exact no-match API/source-map search; candidate API/projection schemas and authority boundaries visible in source; and the sealed required-suite result of 11 passed.",
+    "estimated": "None. No estimate is used to establish implementation, identity, API behavior, schema/CID binding, test success, proof, authority, or promotion.",
+    "simulated": "None. No simulated result is used as production PCSM API evidence.",
+    "unavailable": "ProofCarryingSemanticMinificationPythonAPI@1; its schema/version; canonical PCSM ProjectionRoot; aggregate PCSM SourceLinkReceipt/source-map CID; exact source-map-bound PCSM input/output; direct API positive/negative vectors; sealed generic-projection import execution because anyio is absent; formal proof; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not add an API, adapter, schema, source-map, CID, tests, dependencies, or protected-plan/configuration changes.",
+    "ExternalHandoffAPI@1 is versioned but belongs to the external-agent-handoff domain and is not an aliasable PCSM authority.",
+    "Generic semantic/proof projections are opaque references and explicitly cannot reinterpret semantics or mint authority/completion; their schemas and generic content references are not PCSM API/CID bindings.",
+    "The required suite is green but has no direct PCSM API vectors. Its covered positive and negative structured-output behavior is not overclaimed.",
+    "The sealed generic-projection import is blocked by missing anyio; that capability is unavailable rather than a test failure or success.",
+    "No receipt, model output, generic projection, fixture, Git identity, or arbitrary artifact is treated as semantic authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, generic accelerator API/projection components, dependencies, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, scheduler/source/test digest, source-search result, generic API/projection boundary, sealed dependency availability, PCSM source-map/API capability, or validation result changes."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
