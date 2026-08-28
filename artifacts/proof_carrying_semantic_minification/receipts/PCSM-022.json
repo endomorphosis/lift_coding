@@ -39,10 +39,12 @@
     "admitted_gitlinks": {
       "Mcp-Plus-Plus": {
         "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
         "authority_role": "wire-contract only"
       },
       "external/ipfs_accelerate": {
         "commit": "059d684952a5cdf3430edf70a43c3b9b31dc650a",
+        "tree": "067b308e8ff0fba4b9017f240ad774e6cdedd3cf",
         "authority_role": "consumer and scheduler boundary only"
       },
       "external/ipfs_datasets": {
@@ -52,6 +54,7 @@
       },
       "external/ipfs_kit": {
         "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
         "authority_role": "exact-byte/CID storage only; not AST/source-span semantic authority"
       }
     },
