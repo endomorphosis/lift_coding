@@ -1,0 +1,218 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-076",
+  "title": "Add nonconvergence and fallback behavior",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-076",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-076@current-head-python-v1-nonconvergence-fallback-capability-assessment-v1",
+  "observed_at": "2026-08-28T15:40:35Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python-v1 nonconvergence and fallback capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-076.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-076.json",
+    "implementation_delta": "Reuse current-head LogicPredictionCEGIS@1 rather than introduce a PCSM wrapper, a second refinement loop, or a separate fallback authority. The versioned controller detects repeated state, cycles, no progress, cancellations, timeouts, and bounded-resource exhaustion; it emits a deterministic terminal receipt plus typed residual feedback for Tactician. Raw solver material stays diagnostic-only, and neither the fallback nor a test result can mutate source, promote a result, or grant completion.",
+    "non_promotion_reason": "The reusable nonconvergence and residual-feedback fallback contract is current-head and sealed-test validated, but no canonical aggregate PCSM SourceLinkReceipt/source-map CID binds this forest's concrete goals, spans, countermodels, residuals, or fallback request/result. This receipt therefore does not invent a source-map-bound PCSM campaign, fallback CID, solver/proof result, or promotion."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate establishes implementation, identity, validation success, source-forest execution, proof, or promotion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised generic contract behavior and never substitutes for source-forest evidence or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "5437cc765f6636536f55988f4826d02ad1317472",
+    "outer_tree": "8b04df670144b0631e132703db13310becdb5415",
+    "dispatch_tree_id": "5437cc765f6636536f55988f4826d02ad1317472",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "7632510e067c97ad2414a200ab8eb73384469a11",
+    "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no nonconvergence authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named current-head Python-v1 nonconvergence, residual-feedback fallback, and direct-test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no new kit authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared every admitted gitlink with nested HEAD and HEAD^{tree}; inspected outer and selected nested porcelain before receipt creation; calculated scheduler and selected source/test Git blobs plus SHA-256 values; inspected the controller and direct tests; searched the exact accelerator implementation and required-PCSM-test roots for canonical PCSM SourceMap/SourceLink identities; and ran focused plus required suites under the prescribed sealed PATH with fresh private HOME/XDG roots.",
+      "result": "The dispatch commit equals outer HEAD, all recorded gitlink commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before this declared receipt write. The controller and tests are current at the recorded accelerator tree. No aggregate PCSM SourceLinkReceipt, SourceMapResolver@1, or canonical PCSM source-map CID was found in the exact PCSM roots; Git trees/blobs, SHA-256 digests, generic refinement identities, and fixture roots are therefore not substituted for that missing contract.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, contract version/schema/identity behavior, source-map capability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span and fallback-input identities in the named accelerator implementation/test roots. Repository trees, Git blobs, SHA-256 digests, generic LogicRefinementReceipt identities, and fixture roots are freshness or generic-contract evidence only."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "PCSM-075 already selected LogicPredictionCEGIS@1 as the smallest bounded refinement authority. Its closed terminal reason/disposition contracts and TacticianResidualFeedback@1 already supply the required deterministic nonconvergence and fallback behavior. A PCSM adapter, new fallback schema, or second state machine would duplicate authority and exceed this receipt-only dispatch.",
+    "components": [
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.proof.logic_prediction_cegis.LogicPredictionCEGIS@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/logic-refinement-receipt@1",
+        "version": 1,
+        "role": "Deterministic bounded controller that returns content-addressed terminal receipts, preserves originals/facets, detects nonconvergence, and fail-closes authority violations."
+      },
+      {
+        "component": "RefinementStopReason@1 / RefinementDisposition@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/logic-refinement-round@1; ipfs_accelerate_py/agent-supervisor/logic-refinement-receipt@1",
+        "role": "Closed typed terminals distinguish repeated state, cycle, no progress, bounds, resource exhaustion, cancellation, timeout, authority violation, and inconclusive result without a silent success path."
+      },
+      {
+        "component": "TacticianResidualFeedback@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/tactician-residual-feedback@1",
+        "role": "CID-bound explicit fallback packet for unresolved gaps, diagnostic countermodels, exclusions, query hints, reason codes, and stop reason; it does not itself prove, mutate, or promote."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "identity": "State, rounds, terminal receipts, and residual feedback derive identities from canonical content. The direct suite verifies identity-equivalent deterministic replay and dictionary round trips.",
+      "nonconvergence_behavior": "Repeated state and cycles end as INCONCLUSIVE with residual feedback; progressing work that reaches a hard limit ends as BOUND_EXHAUSTED with residuals; cancellation is typed CANCELLED; invalid memory accounting fails closed as MEMORY_EXHAUSTED. Every terminal retains original goals and routes residual work explicitly rather than claiming refinement or silently retrying.",
+      "authority_boundary": "Raw solver countermodels may guide diagnostic retrieval only. Rejection/narrowing requires validated replay against originating LogicIR semantics or proof of negation. Model-proposed decomposition and unauthorized premises fail closed. The controller does not execute solvers, mutate source, admit predictions, grant completion, or promote results."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/logic_prediction_cegis.py",
+      "git_blob": "be08d95870b665db951ee6f2973f8fb834036c60",
+      "sha256": "c57b01f6c0450a56534ab57d638bae68defb4219647a7491ef76bbcb390d4839",
+      "role": "Current-head LogicPredictionCEGIS@1 implementation: versioned schemas, canonical identities, closed nonconvergence terminals, bounds, authority checks, and deterministic residual feedback."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_logic_prediction_cegis.py",
+      "git_blob": "c234e19859906e23525fc0806f7894fdf3db1100",
+      "sha256": "4b0dec29175ac91efd98e259cbf419f9b6318ac5bdb624b71f533cd32685ec69",
+      "role": "Direct positive and negative tests for deterministic refinement, nonconvergence, bounds, cancellation, residual fallback, CID identity, and authority rejection."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Underlying module reached by the required PCSM suite; recorded separately and never relabelled as nonconvergence/fallback integration coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "focused_nonconvergence_and_fallback_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm076-focused-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_logic_prediction_cegis.py",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, prescribed PATH, fresh private HOME/XDG root, user-site disabled, and accelerator source only on PYTHONPATH.",
+      "result": "29 passed in 0.54s",
+      "positive_coverage": [
+        "Repeated states/cycles deterministically terminate with an INCONCLUSIVE receipt retaining residual gaps and Tactician feedback; max rounds produces BOUND_EXHAUSTED with residuals; cancellation returns typed CANCELLED with residuals.",
+        "State identity is monotonic and canonical, deterministic replay is identity-equivalent, round/state contracts round-trip, originals/facets remain preserved, and validated evidence can refine only within the versioned policy bounds."
+      ],
+      "negative_coverage": [
+        "Invalid memory measurement fails closed as MEMORY_EXHAUSTED; counterexample caps are enforced; raw or cross-root solver material stays diagnostic-only; and diagnostic receipts cannot eliminate hypotheses.",
+        "Original goals cannot be dropped; model decomposition without authority, decomposition without a refinement proof, unauthorized premise addition, and re-adding excluded premises are rejected rather than falling through to success."
+      ],
+      "scope_limit": "These are controlled generic LogicIR/controller fixtures. They establish the reusable nonconvergence/fallback contract only; they do not run a current-PCSM source-map-bound campaign, solver, or proof."
+    },
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm076-required-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME/XDG root.",
+      "result": "11 passed in 0.34s",
+      "scope_limit": "The required PCSM root resolves to structured-decoding tests. It verifies closed candidate-output grammar and rejection behavior, not a source-map-bound nonconvergence/fallback instance."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "The selected controller consumes already validated replay receipts or proofs of negation but does not execute a prover. No source-map-bound PCSM campaign, kernel receipt, or approved digest-bound prover deployment was available in the authoritative sealed environment. Passing contract tests are not relabelled as a formal proof, mutation approval, completion authority, or promotion."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; versioned schemas, canonical identity behavior, closed terminals, bounds, residual feedback, and authority checks; absence search for exact-PCSM source-map contract; sealed focused validation (29 passed); and sealed required validation (11 passed).",
+    "estimated": "None. No estimate supports implementation, identity, test success, source-forest execution, proof, or promotion.",
+    "simulated": "The direct controller suite uses controlled LogicIR, countermodel, cancellation, repeated-state, and bound-exhaustion fixtures. These exercises establish only generic contract behavior and are not represented as PCSM source-forest execution, solver result, or proof.",
+    "unavailable": "A canonical current-PCSM aggregate SourceLinkReceipt/source-map CID; PCSM file/node/span and logic-input bindings; a source-map-bound PCSM fallback request/result CID; an actual solver/proof execution and kernel-verified result; and an immutable self-CID for this receipt."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_nonconvergence_and_residual_fallback_available_pcsm_source_forest_instance_unavailable_non_promoted",
+    "available_capability": "A current-head Python-v1 deterministic, versioned, CID-bound bounded-refinement controller provides closed nonconvergence terminals and typed residual-feedback fallback, with positive and negative sealed validation.",
+    "unavailable_capability": "A concrete exact-PCSM nonconvergence or fallback execution whose goals, spans, countermodels, residuals, request, terminal receipt, and proof/solver result are bound by a canonical PCSM SourceLinkReceipt/source-map CID.",
+    "missing_bindings": [
+      "canonical aggregate PCSM SourceLinkReceipt or source-map CID",
+      "current PCSM forest file/node/span and program-logic input records linked to that source map",
+      "a source-map-bound PCSM fallback request and emitted LogicRefinementReceipt CID",
+      "a solver/proof execution and kernel-verified result bound to that campaign"
+    ],
+    "disposition": "No PCSM source-map CID, campaign/result CID, proof result, estimated cost, or model-derived evidence is invented. Missing values are unavailable rather than zero. The selected controller stays within its existing authority boundary and no competing PCSM authority is created."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify the selected accelerator implementation/tests, create a PCSM fallback subsystem, execute a solver or proof, or materialize source.",
+    "LogicPredictionCEGIS consumes supplied goals, authority roots, and evidence; it cannot discover a missing PCSM source map or transform generic fixture identities into PCSM source-forest identities.",
+    "Generic LogicRefinementReceipt and TacticianResidualFeedback identities are deliberately not canonical PCSM source identities, source-map CIDs, source-link records, solver results, or proof results.",
+    "The required PCSM suite passed but covers structured decoding only; it cannot be relabelled as source-map-bound nonconvergence/fallback integration validation.",
+    "No model output, countermodel, test result, residual-feedback packet, controller request, or fixture exercise is semantic authority, solver/proof authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, schema/version/identity behavior, source-map capability, focused-test result, or required-validation result changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, existing controller components, or unrelated admitted history."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalent_reused_first": true,
+    "nonconvergence_and_fallback_behavior_available": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "sealed_focused_nonconvergence_and_fallback_validation_passed": true,
+    "sealed_required_validation_passed": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "model_output_is_not_mutation_authority": true,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_nonconvergence_fallback_instance_available": false,
+    "formal_proof_execution_available": false,
+    "promotion_status": "non_promoted_missing_pcsm_source_map_bound_instance"
+  }
+}
