@@ -1,0 +1,231 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-081",
+  "title": "Add tree and symbol invalidation",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G700",
+  "objective_id": "PCSM-081",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-081@current-head-python-v1-tree-and-symbol-invalidation-capability-assessment-v1",
+  "observed_at": "2026-08-28T17:46:15Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python-v1 tree and symbol invalidation capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-081.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-081.json",
+    "implementation_delta": "Reuse the current-head DatabaseRepositoryIndexer@1 and ASTInvalidation@1 rather than introduce a PCSM wrapper, a second tree identity, or a competing invalidation authority. The selected indexer completes a full, incremental, or reconciliation scan before advancing the authoritative head; binds that head to repository/tree/overlay/parser/policy/scanner identities and a deterministic file ledger; records typed path invalidations; and invalidates symbol, impact, cache, and proof facts on path, parser, or policy drift. The exact-output authority permits only this receipt, so no source or test change was made.",
+    "non_promotion_reason": "The exact current source forest contains a versioned deterministic invalidation authority and a direct positive/negative test module, but the authoritative sealed Python 3.12 environment reports duckdb_available=False. Its 12 direct tests are dependency-skipped rather than passed. There is also no canonical aggregate PCSM SourceLinkReceipt/source-map CID binding this forest's concrete files, symbols, and scan results. This is therefore a typed capability/dependency-gap assessment, not a promoted PCSM invalidation execution."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "A calculated approximation. No estimate establishes implementation, identity, validation success, source-forest execution, proof, or promotion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised generic contract behavior and never substitutes for source-forest evidence or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "3ca4f94765dc31a57da9194fe376c4140fbc847b",
+    "outer_tree": "8ef98a7083d48e4f91630f4779d8c1abac03832b",
+    "dispatch_tree_id": "3ca4f94765dc31a57da9194fe376c4140fbc847b",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "bdb6becdd3499dd32bca9004460f375b8465eb0e",
+    "scheduler_config_sha256": "a83e6f853a7d159af999c9af2eaa2ab6062cb3c8e0a7feafb58eb57578af20a8",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no tree/symbol invalidation authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named current-head Python-v1 tree/symbol invalidation implementation and direct-test authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no new kit authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared the selected accelerator gitlink with nested HEAD and HEAD^{tree}; inspected outer and selected nested porcelain before receipt creation; calculated scheduler and selected source/test Git blobs and SHA-256 digests; inspected the versioned contracts and direct tests; searched the exact accelerator PCSM roots for canonical PCSM source-map contracts; and ran the required and direct suites under the prescribed sealed PATH with fresh private HOME/XDG roots.",
+      "result": "The dispatch commit equals outer HEAD and the selected accelerator commit/tree equals its checked-out head. The inspected worktrees were clean before the declared receipt write. DatabaseRepositoryIndexer@1 and ASTInvalidation@1 are current at the recorded accelerator tree. No SourceMapResolver@1, SourceLinkReceipt@1, or source_map_resolver identity was found in the exact accelerator implementation/PCSM-test roots. The required suite passed; direct indexer coverage was skipped solely because sealed duckdb_available=False.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, contract version/schema/identity behavior, dependency availability, source-map capability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span and invalidation-input identities in the named accelerator implementation/test roots. Repository trees, Git blobs, SHA-256 file digests, generic scan/snapshot identities, and fixture roots are freshness or generic-contract evidence only and are not relabelled as the missing PCSM contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "minimum_delta_reason": "DatabaseRepositoryIndexer@1 is the current-head smallest authority that already couples authoritative tree advancement, AST/path invalidation, and dependent symbol currency. Creating a PCSM adapter or a separate invalidation ledger would duplicate its source-tree, parser, policy, snapshot, and fact-currency authorities and exceeds this receipt-only dispatch.",
+    "components": [
+      {
+        "component": "ipfs_accelerate_py.agent_supervisor.analysis.database_repository_indexer.DatabaseRepositoryIndexer@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/database-repository-indexer@1",
+        "version": 1,
+        "role": "Deterministic full/incremental/reconciliation scanner. It promotes an authoritative head only after a complete scan, binding repository, tree, overlay, parser, policy, scanner version, scan-run, snapshot, and canonical file ledger."
+      },
+      {
+        "component": "ASTInvalidation@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/ast-invalidation@1",
+        "version": 1,
+        "role": "Durable, canonical-content-identified receipt for source change, deletion, rename, parser drift, policy drift, submodule, and untracked-policy invalidations."
+      },
+      {
+        "component": "DependentFact@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/dependent-fact@1",
+        "version": 1,
+        "role": "Versioned symbol, impact, cache, and proof facts whose current/invalidated currency is bound to snapshot, parser, and policy identity."
+      },
+      {
+        "component": "CoverageReceipt@1",
+        "schema": "ipfs_accelerate_py/agent-supervisor/scan-coverage-receipt@1",
+        "version": 1,
+        "role": "Canonical-content-identified bounded scan coverage/frontier receipt which distinguishes complete authoritative scans from partial work."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "identity": "AST invalidation and coverage receipt identities derive from canonical JSON with their versioned schemas. Snapshot/head/fact bindings carry exact repository/tree/overlay/parser/policy/scanner/file-ledger or snapshot/parser/policy dimensions. These are content identities, not falsely claimed IPFS CIDs.",
+      "tree_invalidation": "The indexer calculates deterministic added, changed, deleted, renamed, and unchanged path deltas from the prior and current canonical file ledgers. Notifications are hints only; reconciliation rechecks identity, and a partial/crashed scan does not advance the authoritative head.",
+      "symbol_invalidation": "For current dependent facts, a path invalidation invalidates facts on that path. Parser or policy drift invalidates all affected current facts; facts on unchanged paths are rebound only when no drift applies. Fact kinds include symbol, impact, cache, and proof.",
+      "authority_boundary": "The component is derived evidence only. It does not treat a watcher event, model output, scan cursor, partial scan, generic fixture, or receipt as completion, source mutation, M2/M3 mutation, semantic proof, or promotion authority."
+    }
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/database_repository_indexer.py",
+      "git_blob": "37b01bb6680eef64a2de73e836a2c885de453b75",
+      "sha256": "da519c6d99b332223cb85d7b9640d4dc7c3e6589304ea379aca2d165a81b11f2",
+      "role": "Current-head DatabaseRepositoryIndexer@1, ASTInvalidation@1, DependentFact@1, authoritative-head advancement, deterministic delta/reconciliation, and tree/symbol invalidation implementation."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_database_repository_indexer.py",
+      "git_blob": "4c9b02f2be402da6a24d6e12dd3e66fe5f8756b1",
+      "sha256": "394bb88fe6776837ee6225707ef88827601300563c13ec79a57c450ae9ec7885",
+      "role": "Direct positive and negative tree/path/symbol invalidation test module; it is explicitly dependency-gated on DuckDB."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Underlying module reached by the required PCSM suite; recorded separately and never relabelled as tree/symbol invalidation coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "direct_tree_and_symbol_invalidation_validation": {
+      "kind": "unavailable",
+      "status": "dependency_skipped",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm081-focus-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=ipfs_accelerate_py /usr/bin/python3.12 -m pytest -q test/api/test_agent_supervisor_database_repository_indexer.py",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1, prescribed PATH, fresh private HOME/XDG root, user-site disabled, and accelerator source only on PYTHONPATH.",
+      "result": "12 skipped in 0.54s; module gate reports DuckDB is required for hermetic tests.",
+      "dependency_probe": "duckdb_available=False under the same sealed Python/PATH/HOME/XDG constraints.",
+      "positive_coverage_present_but_unexecuted": [
+        "Full scan advances a tree-bound authoritative head; incremental scan equals a clean full rebuild; missed notification reconciliation recovers a source change; and unchanged facts rebind to the new snapshot.",
+        "Rename/delete/submodule handling retires path bindings; notifications coalesce; and untracked files require explicit file-ledger admission."
+      ],
+      "negative_coverage_present_but_unexecuted": [
+        "A partial/crashed scan must not advance the authoritative head.",
+        "Source drift invalidates path-bound symbol/cache/proof facts; parser and policy drift invalidate current facts rather than retaining stale currency."
+      ],
+      "scope_limit": "The direct fixture module describes the selected generic contract but did not execute in the authoritative environment. It cannot support a passing claim, PCSM source-forest execution, formal proof, mutation approval, completion authority, or promotion."
+    },
+    "required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm081-required-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Authoritative sealed Python 3.12.3 with pytest 8.1.1 and a fresh private HOME/XDG root.",
+      "result": "11 passed in 0.35s",
+      "scope_limit": "The required PCSM root verifies structured candidate-output grammar and rejection behavior. It does not import, configure DuckDB for, or exercise DatabaseRepositoryIndexer@1 tree/symbol invalidation."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "The selected invalidation authority is a deterministic derived-evidence indexer, not a formal prover. No source-map-bound PCSM invalidation run, proof result, or approved digest-bound prover deployment was available in the sealed environment. Passing required tests are not relabelled as a formal proof or promotion."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests; versioned schemas and deterministic identity behavior; absence search for the exact PCSM source-map contract; sealed dependency probe reporting duckdb_available=False; and sealed required validation (11 passed).",
+    "estimated": "None. No estimate supports implementation, identity, test success, source-forest execution, proof, or promotion.",
+    "simulated": "The direct indexer test module is composed of controlled temporary DuckDB/file-ledger fixtures, but no simulated exercise was available in the sealed environment because its DuckDB capability gate skipped all 12 tests. The listed fixture behaviors are not represented as measured execution.",
+    "unavailable": "DuckDB in the authoritative sealed environment; an executed direct positive/negative invalidation result; a canonical current-PCSM aggregate SourceLinkReceipt/source-map CID; PCSM file/node/span and symbol bindings; a source-map-bound PCSM invalidation request/result CID; a formal proof result; and an immutable self-CID for this receipt."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_tree_and_symbol_invalidation_authority_available_direct_sealed_validation_and_pcsm_source_forest_instance_unavailable_non_promoted",
+    "available_capability": "A current-head Python-v1 versioned deterministic indexer authority is available. It has canonical-content identity for invalidation/coverage records, exact tree/snapshot/parser/policy bindings, typed invalidation reasons, and modeled currency invalidation for symbol, impact, cache, and proof facts.",
+    "unavailable_capability": "An independently executed direct tree/symbol invalidation validation in the authoritative sealed environment and a concrete exact-PCSM invalidation instance bound to a canonical PCSM source-map CID.",
+    "missing_bindings": [
+      "DuckDB available to the sealed Python 3.12 validation environment",
+      "a passing sealed execution of the direct indexer positive/negative suite",
+      "canonical aggregate PCSM SourceLinkReceipt or source-map CID",
+      "current PCSM forest file/node/span and symbol records linked to that source map",
+      "a source-map-bound PCSM tree/symbol invalidation request, scan, and result identity"
+    ],
+    "disposition": "No skipped test is promoted to passing; no PCSM source-map CID, scan/result CID, proof result, estimated cost, or model-derived evidence is invented. The selected existing authority remains within its derived-evidence boundary and no competing PCSM authority is created."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify the selected accelerator implementation/tests, install DuckDB, create a PCSM adapter, execute a concrete source-map-bound scan, or materialize source.",
+    "The authoritative sealed environment has no DuckDB, so the direct test module's 12 tests are unavailable rather than passing; the required PCSM suite does not cover this authority.",
+    "DatabaseRepositoryIndexer@1 consumes supplied file ledgers and identities. It does not discover a missing PCSM source map or turn generic scan/snapshot identities into PCSM source-forest source-link identities.",
+    "Canonical JSON/content identities in the selected authority are not IPFS CIDs and are not relabelled as such.",
+    "No watcher hint, model output, partial scan, fixture description, required-suite result, or this receipt is treated as semantic authority, source mutation, M2/M3 mutation, completion authority, or promotion evidence.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, schema/version/identity behavior, dependency availability, source-map capability, direct-test result, or required-validation result changes.",
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, existing indexer components, or unrelated admitted history."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalent_reused_first": true,
+    "deterministic_where_required": true,
+    "schema_version_and_content_identity_binding_available_where_applicable": true,
+    "schema_version_and_cid_binding_available_where_applicable": false,
+    "cid_binding_unavailable_reason": "The selected current-head authority uses explicit versioned canonical-content identities rather than IPFS CIDs; a PCSM source-map CID is unavailable and is not fabricated.",
+    "package_specific_positive_and_negative_tests_present": true,
+    "sealed_direct_positive_and_negative_validation_passed": false,
+    "sealed_direct_validation_unavailable_reason": "DuckDB is absent in the authoritative sealed environment; all 12 direct tests were dependency-skipped.",
+    "sealed_required_validation_passed": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "model_output_is_not_mutation_authority": true,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_invalidation_instance_available": false,
+    "formal_proof_execution_available": false,
+    "promotion_status": "non_promoted_missing_sealed_duckdb_validation_and_pcsm_source_map_bound_instance"
+  }
+}
