@@ -1,0 +1,246 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-065",
+  "title": "Integrate unsat-core fallback",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-065",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-065@current-head-unsat-core-fallback-capability-assessment-v1",
+  "observed_at": "2026-08-28T08:14:13Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 unsat-core fallback capability assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-065.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-065.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "The exact current ipfs_datasets source forest already supplies the reusable ValidatedCraigInterpolation@1 authority. Its versioned fallback computes an independently core-validated Z3 UNSAT result for A and B when the qualified cvc5 interpolation path is unavailable or unqualified, binds named partitions and their canonical term CIDs to the fallback result receipt, and returns status=fallback with no interpolant. The declared-output boundary permits only this receipt, so no duplicate fallback, solver adapter, source mutation, or competing PCSM authority was created.",
+    "non_promotion_reason": "The existing implementation and dedicated positive/negative tests are present and pass in the provider environment, but the authoritative sealed environment has neither cvc5 nor z3 Python APIs, so the fallback itself is typed unavailable there. The sealed required pytest command also cannot collect because its explicitly configured anyio plugin is absent. No canonical PCSM current-source-map CID binds PCSM source nodes/spans to a fallback request. This receipt therefore records the current-head reusable capability without claiming a sealed fallback result or promotion."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish source identity, solver behavior, CID binding, or validation success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "91785f31698d565e2c138a1cfa04a3bbba9a2f31",
+    "outer_tree": "658d80b199fa681d3f63648fce168449fb33a5e8",
+    "dispatch_tree_id": "91785f31698d565e2c138a1cfa04a3bbba9a2f31",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "objective_revision": "baguqeerashvgjxihkqncme6clmjatjzwhciyguseihxi6dclkrmn3mxlurea",
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract boundary only; no unsat-core fallback implementation authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "integration consumer only; no duplicate fallback authority selected",
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "named Python-v1 interpolation and unsat-core-fallback implementation, public facade, tests, and canonical term-identity boundary",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no unsat-core fallback implementation authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared selected nested HEAD and HEAD^{tree}; inspected outer and selected nested porcelain before receipt creation; recorded selected implementation/test Git blobs and SHA-256 values; searched the exact datasets proof_context and logic roots for PCSM SourceMapResolver@1 and SourceLinkReceipt@1 identities; and probed interpolation support under a fresh private HOME using the prescribed sealed PATH.",
+      "result": "The dispatch commit equals outer HEAD, all recorded nested commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before receipt creation. The sealed capability probe found cvc5 and z3 unavailable without installing or contacting a network. The searched exact datasets roots contain no PCSM source-map resolver, source-link receipt, or aggregate PCSM source-map authority.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink head/tree, scheduler digest, listed source digest, required-test configuration/result, solver capability, interpolation/fallback contract, or current PCSM source-map capability requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM source-map CID or canonical CodeIR/source identity resolving exact PCSM file/node/span identities is present in the named implementation/test roots. ValidatedCraigInterpolation@1 binds structural SMT partitions with canonical term CIDs and names its fallback assertions, but it cannot manufacture the absent PCSM source identity; Git trees, blobs, term CIDs, and local test node IDs are not substitutes."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "components": [
+      {
+        "component": "ipfs_datasets_py.logic.backends.smt.interpolation.ValidatedCraigInterpolation@1",
+        "schema": "validated-craig-interpolant/v1",
+        "capability_schema": "interpolation-capability/v1",
+        "bounds_schema": "interpolation-bounds/v1",
+        "role": "Capability-negotiated QF_LIA interpolation authority. It uses cvc5 only as the declared producer and Z3 only as an independent validator or typed UNSAT-core fallback; solver availability is not interpolation qualification."
+      },
+      {
+        "component": "ipfs_datasets_py.logic.backends.smt.interpolation.compute_and_validate_interpolant",
+        "interface": "ValidatedCraigInterpolation@1",
+        "fallback_environment": "local-unsat-core-fallback@1",
+        "role": "For an unavailable or unqualified interpolation producer, it submits named partition-a and partition-b assertions to the existing IncrementalSmtSession@1 path. It emits a fallback receipt only after result.status is UNSAT and result.core_validated is true; satisfiable, unknown, rejected, absent-validator, and provider errors remain typed non-success."
+      },
+      {
+        "component": "ipfs_datasets_py.logic.backends.smt.incremental.IncrementalSmtSession@1",
+        "schema": "incremental-smt-session/v1",
+        "result_schema": "incremental-smt-result/v1",
+        "role": "Existing reusable session selected by the fallback. It binds named assertions, source_ref values, obligation IDs, deterministic session fingerprints, canonical result identities, and independently rechecked sorted UNSAT cores; it does not treat a core as a theorem proof."
+      },
+      {
+        "component": "ipfs_datasets_py.logic.verification_api.compute_and_validate_interpolant",
+        "interface": "CompositionalVerificationApi@1",
+        "role": "Checked public facade for the selected interpolation/fallback authority; no parallel PCSM facade was introduced."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "profile": "InterpolationBounds fixes timeout, memory, symbol, term-node, theory, and schema values. The request root canonically binds partition-A CID, partition-B CID, provider version, and theory. Fallback assertions use stable names partition-a and partition-b, term-CID source_ref values, and obligation_id=core-fallback. ValidatedInterpolantReceipt sorts vocabulary, limitations, and fallback core entries, rejects a fallback containing an interpolant, requires fallback_validated/fallback_kind/fallback_receipt for status=fallback, and derives receipt_cid with canonical_identity under validated-craig-interpolant/v1.",
+      "authority_boundary": "The core is diagnostic fallback authority only: fallback limitations explicitly include fallback_is_not_an_interpolant. A validated interpolant requires separate A=>I, I-and-B UNSAT, vocabulary, identity, and bounds checks. Opening/using the fallback does not install a solver, manufacture a PCSM source link, supply a kernel proof, or authorize mutation or promotion.",
+      "current_pcsm_execution_binding": "unavailable because a canonical PCSM source-map/CID and usable sealed cvc5/z3 capabilities are both absent."
+    }
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/backends/smt/interpolation.py",
+      "git_blob": "81fcab9ca29a948dd3964b2eab003f497342d603",
+      "sha256": "ed5c2cb85abee7daa340fadca2253bc6a46b87b9d0c88b0a23dec1497b5a5647",
+      "role": "Versioned qualified interpolation authority, independently validated unsat-core fallback implementation, receipt schema/status invariants, canonical partition/interpolant identities, and sealed-capability probe."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/backends/smt/incremental.py",
+      "git_blob": "1b8d733051b054eacbff18d03d2c5f352c5565d6",
+      "sha256": "0f77c623f9f693837e7761280ddc118c66995110d4a99db253c63ebf64551258",
+      "role": "Existing session/result/replay authority used to bind and independently validate the fallback UNSAT core."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/verification_api.py",
+      "git_blob": "6278972e3da8f99dace7bbfb735040b1980fbb09",
+      "sha256": "707138ae366a92cae6ed99927b690044bdfed69dead4c9282329732493b66a35",
+      "role": "Public checked facade that exposes the selected interpolation/fallback authority."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/backends/test_interpolation.py",
+      "git_blob": "b937af91558bb6dab17e1c1f903fd3fa2a419cc9",
+      "sha256": "67ad17496543a9731c5f91a2298986be5389e6597a82073c1e1151b41277648d",
+      "role": "Dedicated positive and negative interpolation/fallback contract coverage."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/backends/test_incremental_smt.py",
+      "git_blob": "da4a735d24e902008f1c9a9425fdfb80838676b8",
+      "sha256": "9c0225bd334bd845446d0d37ca2a0232d297cbd829201cb046de385452bdd5c4",
+      "role": "Dedicated positive and negative deterministic named-session and independently rechecked UNSAT-core coverage used by the fallback."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": {
+      "kind": "measured",
+      "positive_coverage": [
+        "A qualified cvc5 QF_LIA interpolant is independently checked with fresh Z3 sessions, has canonical partition/interpolant/receipt CIDs, and retains only shared vocabulary.",
+        "An unavailable mathsat producer and an unqualified z3 producer both produce status=fallback only when the named A-and-B core is independently validated; fallback_core is bounded to the named partition assertions and fallback_receipt is content addressed.",
+        "Repeated admission produces a stable receipt identity, and IncrementalSmtSession coverage verifies sorted independently rechecked cores, source/obligation binding, scoped state, deterministic replay identities, and public interface checks."
+      ],
+      "negative_coverage": [
+        "A fallback receipt cannot contain an interpolant and cannot omit validated fallback authority; a core is never called an interpolant.",
+        "Unknown or absent independent validators, absent/unqualified producers, jointly satisfiable partitions, invalid vocabulary, invalid implication, invalid I-and-B inconsistency, malformed requests, oversized terms, unsupported theory, and closed/cancelled/stale session states remain typed rejection, unavailable, unsupported, invalid, or unknown outcomes.",
+        "Importing the interpolation module leaves optional solver modules cold; fallback use neither installs a provider nor permits arbitrary proof output as authority."
+      ],
+      "coverage_limit": "The dedicated tests validate reusable interpolation/fallback and incremental-session behavior. They do not create a PCSM source-map-bound obligation, prove a theorem in a kernel, or turn a solver observation into mutation authority."
+    },
+    "sealed_capability_probe": {
+      "kind": "measured",
+      "status": "unavailable",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm065-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -c '<probe_interpolation_support>'",
+      "environment": "Authoritative sealed Python 3.12.3, fresh private HOME and exact XDG directories, prescribed PATH, no installation, and no network access.",
+      "result": "InterpolationCapability reported cvc5 Python API unavailable, z3 independent validator unavailable, interpolation_api=false, and qualified=false for the only qualified producer/theory pair cvc5/QF_LIA.",
+      "fail_closed_disposition": "No provider installation, PATH expansion, profile-state reuse, alternate solver, or simulated result is treated as sealed fallback usability."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "command_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm065-pytest-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited before collection with ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, profile-state reuse, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "dedicated_fallback_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command_executed": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/backends/test_interpolation.py external/ipfs_datasets/tests/unit/logic/backends/test_incremental_smt.py",
+      "environment": "Provider Python 3.12.3 with pytest 9.1.1, z3-solver, cvc5, and provider-installed plugins.",
+      "result": "27 passed in 0.49s",
+      "limitation": "This provider-environment result is simulated evidence only and cannot establish sealed solver usability, a PCSM source binding, or promotion."
+    },
+    "required_validation_provider_attempt": {
+      "kind": "simulated",
+      "status": "terminal_result_unavailable",
+      "command_executed": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "The provider invocation collected 519 tests and emitted passing progress through the listed proof_context modules, but the command transport did not retain a terminal summary. This is not relabelled as a pass; the sealed command separately failed before collection.",
+      "limitation": "The required suite is proof_context coverage rather than dedicated unsat-core fallback coverage, and provider execution cannot replace sealed validation."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No approved digest-bound theorem-prover deployment or kernel-checkable PCSM-065 obligation is present in the authoritative sealed environment. A core-validated SMT result is not a kernel proof, and no formal-proof success is inferred."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; scheduler digest; clean/freshness checks; implementation/public-facade/test blobs and SHA-256 values; schemas/interfaces; deterministic fallback binding and receipt mechanics; current PCSM source-map absence search; sealed pytest collection failure; and sealed cvc5/z3 absence probe.",
+    "estimated": "None. No estimate is used to establish solver behavior, identity, CID binding, test success, or promotion.",
+    "simulated": "Provider Python 3.12.3 dedicated interpolation-plus-incremental-SMT validation (27 passed in 0.49s), and a provider required-suite attempt that collected 519 tests but whose terminal summary was unavailable from command transport.",
+    "unavailable": "Sealed cvc5 and z3 modules; sealed required-suite collection because anyio.pytest_plugin is absent; canonical PCSM aggregate source-map CID; current source-map-bound PCSM fallback execution; formal-prover result; provider required-suite terminal summary; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It selects and validates an existing current-head authority but does not modify datasets implementation/tests or create a competing fallback subsystem.",
+    "A fallback core is not an interpolant, theorem certificate, kernel proof, or source mutation authority. It is emitted only after the existing session reports UNSAT and core_validated=true.",
+    "The sole qualified interpolation producer is cvc5/QF_LIA and the independent fallback/validation adapter is Z3. Both Python APIs are absent in the authoritative sealed environment; provider-environment solvers do not satisfy that gate.",
+    "Canonical structural SMT term CIDs bind fallback partitions, but they do not establish PCSM current-forest file/node/span identity until a separate canonical PCSM source-map/CID authority exists.",
+    "The required PCSM suite cannot collect in the sealed environment and the provider invocation's terminal summary was not retained; neither result is a sealed package-validation pass.",
+    "No model output is accepted as evidence or mutation authority, and no M2/M3 mutation, generated-source mutation, automatic source materialization, or promotion is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head unsat-core-fallback capability assessment. Do not alter protected planning documents, existing datasets verification components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, required-test configuration/result, sealed solver/plugin capability, interpolation/fallback contract, or PCSM source-map capability change."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalent_reused_first": true,
+    "unsat_core_fallback_capability_implemented": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "provider_dedicated_positive_and_negative_validation_passed": true,
+    "sealed_fallback_capability_available": false,
+    "sealed_required_validation_passed": false,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_fallback_execution_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_sealed_solver_pytest_and_pcsm_identity_binding"
+  }
+}
