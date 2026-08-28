@@ -1,0 +1,248 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-055",
+  "title": "Implement semantic-nonempty validation",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G500",
+  "objective_id": "PCSM-055",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-055@current-head-semantic-nonempty-validation-capability-gap-v1",
+  "observed_at": "2026-08-28T06:46:26Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 semantic-nonempty validation capability assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-055.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-055.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "The exact current Python forest has two narrower, reusable fail-closed controls: SemanticBindingAdmission@1 rejects missing or sentinel record bindings, and AnalyticalChangeTransformer@1 rejects an empty caller-supplied source span. Neither defines PCSM semantic nonemptiness over a canonical current CodeIR/source identity, an aggregate current source-map CID, exact resolved file/node/span, and the requested semantic witness. PCSM-051 and PCSM-052 independently record that SourceMapResolver@1, SourceLinkReceipt@1, the aggregate source-map CID, and the forest linker are absent. Under this dispatch's exact receipt-only authority, the smallest versioned delta is therefore an honest unavailable/non-promoted disposition; no competing semantic authority, source mutation, or test relaxation is permitted.",
+    "non_promotion_reason": "The required general suite passes, but it covers structured model-output decoding rather than a PCSM semantic-nonempty package. No versioned PCSM semantic witness schema, canonical source-map binding, or package-specific positive and negative vector surface exists at this head."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the fixed-PATH, fresh-HOME Python 3.12 validation environment.",
+    "estimated": "A calculated approximation; it cannot establish semantic nonemptiness, current-tree identity, schema binding, canonical CID binding, or test success.",
+    "simulated": "A controlled provider-environment execution; it corroborates but cannot replace fixed-toolchain validation or authorize mutation or promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "7e76b661b92d183bedafee49b4c99ab1b90e8dde",
+    "outer_tree": "0ae58f7b46171529ef3fa6b3a3c2eebff220ad04",
+    "dispatch_tree_id": "7e76b661b92d183bedafee49b4c99ab1b90e8dde",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract boundary only; no PCSM semantic-nonempty authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "named Python-v1 implementation and required-test boundary",
+        "commit": "3f7d99541e8a08f89452765dfad1bb2810bc44ff",
+        "tree": "21326b15fe1fdf24f1f93009e162694cc84c6c07"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "source-CID/source-span component boundary only; no aggregate PCSM source map selected",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no PCSM semantic-nonempty authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared every admitted nested HEAD and HEAD^{tree}; inspected outer and admitted nested porcelain before receipt creation; recorded source Git blobs and SHA-256 values; and searched the exact accelerator implementation and required-test roots for PCSM semantic-nonempty, source-map, source-link, and linker contract identifiers.",
+      "result": "The dispatch commit equals outer HEAD, every recorded nested commit/tree pair equals its checked-out head, and all inspected worktrees were clean before this receipt was added. SemanticBindingAdmission@1 and AnalyticalChangeTransformer@1 exist as narrow local controls. No PCSM semantic-nonempty validator/witness schema, SourceMapResolver@1, SourceLinkReceipt@1, BoundedPythonLinker@1, aggregate current-forest source-map CID, or package-specific test surface was found.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink/head/tree, scheduler digest, listed source digest, source-search result, contract/schema, canonical source-map CID, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "PCSM-051 records SourceMapResolver@1 and SourceLinkReceipt@1 as absent, and PCSM-052 records no aggregate current-forest source-map CID. A Git tree or blob, an individual source SHA-256 value, an AST span, a caller-supplied string, or an alias is not a substitute for the canonical current PCSM source-map identity required to evaluate semantic nonemptiness."
+    }
+  },
+  "required_package_assessment": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_package": "PCSM semantic-nonempty validation for Python v1",
+    "required_contract": "A versioned, closed semantic-nonempty admission receipt bound to canonical source or CodeIR identity, exact current commit/tree, aggregate source-map CID, exact resolved file/node/span, semantic witness, and deterministic decision/reject reason",
+    "required_bindings": [
+      "explicit semantic-nonempty validator and witness schema/version",
+      "canonical CodeIR or source identity CID rather than an alias",
+      "base current commit and tree identity",
+      "current aggregate source-map CID and exact current file CID",
+      "normalized repository-relative path and exact resolved node/SourceSpan",
+      "closed witness grammar that distinguishes empty syntax from nonempty admitted semantics",
+      "deterministic decision record and stable typed reject reason",
+      "positive nonempty/current-source admission and negative empty, whitespace-only, comment-only, stale-tree, stale-map, missing-target, ambiguity, overlap, path-escape, generated-source, and unsupported-witness vectors"
+    ],
+    "source_search": {
+      "kind": "measured",
+      "method": "rg -n -i --glob '*.py' --glob '*.json' --glob '*.md' 'semantic[-_ ]nonempty|SemanticNonempty|semantic[_-]witness|SourceLinkReceipt|SourceMapResolver|BoundedPythonLinker|SemanticSourceLinker|source_link_receipt|source_map_resolver' over external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor and external/ipfs_accelerate/test/agent_supervisor, followed by focused inspection of planning/semantic_binding_admission.py and planning/analytical_change_transforms.py.",
+      "result": "No PCSM semantic-nonempty validator, semantic witness schema, SourceMapResolver, SourceLinkReceipt, source-map resolver, BoundedPythonLinker, or package-specific vector module was found. The focused files expose only record-field presence/sentinel checks and rejection of an empty caller-supplied span, respectively.",
+      "meaning": "The nearby controls remain in their own record-admission and supplied-span rendering domains. They cannot be relabelled as semantic validation for the exact current PCSM source forest."
+    },
+    "dependency_assessment": {
+      "kind": "measured",
+      "dependencies": [
+        "PCSM-051",
+        "PCSM-052",
+        "PCSM-054"
+      ],
+      "receipts": [
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-051.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-052.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-054.json"
+      ],
+      "result": "The earlier receipts record the same source-map/linker prerequisite gap. Their historical tree observations are not reused as current identity evidence: this receipt independently rechecked the current source forest and confirms that the prerequisite remains absent."
+    },
+    "disposition": "The requested package cannot truthfully be claimed implemented, deterministic as an exact-current-forest semantic validation gate, schema/version/CID bound, or covered by package-specific positive and negative tests at this head. No source mutation, proof acceptance, validation acceptance, promotion, or task completion is authorized."
+  },
+  "nearest_existing_equivalents": {
+    "semantic_binding_admission": {
+      "kind": "measured",
+      "component": "ipfs_accelerate_py.agent_supervisor.planning.semantic_binding_admission.SemanticBindingAdmission@1",
+      "schema": "lgswf/semantic-binding-admission@1",
+      "source_path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_binding_admission.py",
+      "git_blob": "a46f22d69519d8c3a341798dd3ab4cb8c8714e48",
+      "sha256": "673054ae412a5a3dedd870e0b1c98a335d56d87eddbdfd6b7a11d566a5eb2409",
+      "implemented_behavior": [
+        "projects a closed set of task-record fields",
+        "returns deterministic missing or sentinel reasons for falsey required fields",
+        "rejects Markdown as semantic authority, immutable-history claims, and stale bindings"
+      ],
+      "non_equivalence": "It establishes nonempty values only for caller record fields. It neither parses or evaluates Python source semantics nor binds a current PCSM source-map CID, canonical identity, resolved node/span, semantic witness, or forest freshness."
+    },
+    "analytical_change_transformer": {
+      "kind": "measured",
+      "component": "ipfs_accelerate_py.agent_supervisor.planning.analytical_change_transforms.AnalyticalChangeTransformer@1",
+      "schemas": [
+        "ipfs_accelerate_py/agent-supervisor/analytical-transform-site@1",
+        "ipfs_accelerate_py/agent-supervisor/analytical-transform-edit@1",
+        "ipfs_accelerate_py/agent-supervisor/analytical-transform-render-receipt@1",
+        "ipfs_accelerate_py/agent-supervisor/analytical-transform-batch-receipt@1"
+      ],
+      "source_path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/analytical_change_transforms.py",
+      "git_blob": "1043897b8c22550a1b6e1c8bee09c4459ea625f0",
+      "sha256": "e3efb24e4a601108d0b2c3855ed956304f2e97ce066a630b7dae8f2bffba69af",
+      "implemented_behavior": [
+        "rejects an empty supplied source span and closed unsupported transform shapes",
+        "binds supplied spans and replacements with SHA-256 hashes",
+        "emits deterministic canonical receipts with CIDv1 DAG-JSON replay identities"
+      ],
+      "non_equivalence": "It renders only closed edits over a caller-supplied span, never opens or writes repository files, and cannot show that the supplied span is semantically nonempty or current in the PCSM source forest. Its local CIDv1 replay identity is not an aggregate PCSM source-map CID."
+    }
+  },
+  "source_inventory": {
+    "kind": "measured",
+    "files": [
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/semantic_binding_admission.py",
+        "git_blob": "a46f22d69519d8c3a341798dd3ab4cb8c8714e48",
+        "sha256": "673054ae412a5a3dedd870e0b1c98a335d56d87eddbdfd6b7a11d566a5eb2409",
+        "role": "nearest record-field nonempty equivalent"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/analytical_change_transforms.py",
+        "git_blob": "1043897b8c22550a1b6e1c8bee09c4459ea625f0",
+        "sha256": "e3efb24e4a601108d0b2c3855ed956304f2e97ce066a630b7dae8f2bffba69af",
+        "role": "nearest supplied-span nonempty and deterministic-receipt equivalent"
+      },
+      {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+        "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+        "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+        "role": "required-suite structured-decoding coverage; not package-specific semantic-nonempty coverage"
+      }
+    ],
+    "test_path_resolution": "external/ipfs_accelerate/test/agent_supervisor/pcsm is a symlink to ../../ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification."
+  },
+  "test_and_validation_evidence": {
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-055 semantic-nonempty proof obligation or approved digest-bound prover deployment is present in the authoritative environment."
+    },
+    "nearest_component_positive_and_negative_coverage": {
+      "kind": "measured",
+      "component": "required structured-decoding suite reached through external/ipfs_accelerate/test/agent_supervisor/pcsm symlink",
+      "positive_coverage": [
+        "all closed task families have grammars",
+        "valid compact structured output decodes",
+        "bounded explicit abstention remains valid"
+      ],
+      "negative_coverage": [
+        "parse failures and duplicate JSON fields reject",
+        "unknown outer/payload fields and model-created completion reject",
+        "untyped context, invalid ranking vectors, and unbounded/untyped patch sketches reject"
+      ],
+      "non_equivalence": "These assertions establish structured model-output admission only. They do not exercise an exact-current-source semantic witness, empty/whitespace/comment-only source rejection, a source-map CID, or a PCSM semantic-nonempty decision."
+    },
+    "package_specific_tests": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM semantic-nonempty validator/witness schema, aggregate current-forest source-map CID, or package-specific positive/negative vector module exists in the bound source forest. Adjacent controls and structured-decoding tests are not substituted."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "command_executed": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Provider Python 3.12.3 with provider-installed pytest 9.1.1 and plugins.",
+      "result": "11 passed in 0.39s",
+      "scope_limit": "The passing suite does not establish the absent PCSM semantic-nonempty package."
+    },
+    "sealed_required_validation": {
+      "kind": "measured",
+      "status": "passed",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm055-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Fixed-PATH, fresh-private-HOME Python 3.12.3 with pytest 8.1.1.",
+      "result": "11 passed in 0.34s",
+      "scope_limit": "This is the required general-suite result only; it is not package-specific semantic-nonempty validation."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and source SHA-256 values; Git blobs; the current contract-absence search; nearest-component boundaries; and fixed-PATH/fresh-HOME required-suite validation (11 passed in 0.34s).",
+    "estimated": "None. No estimate is used to establish semantic nonemptiness, identity, validation, or promotion.",
+    "simulated": "Provider required-suite execution: 11 passed in 0.39s. It corroborates but does not replace fixed-toolchain validation or missing package-specific coverage.",
+    "unavailable": "A PCSM semantic-nonempty validator and witness schema; canonical CodeIR/source identity; aggregate current-forest source-map CID; exact canonical identity-to-current-file/node/span resolution; deterministic semantic decision/reject record; semantic-nonempty positive and negative vectors; formal-prover result; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only under exact declared-output authority; no implementation or test source was changed.",
+    "SemanticBindingAdmission@1 validates caller task-record fields, not Python source semantics or the exact PCSM source forest.",
+    "AnalyticalChangeTransformer@1 rejects an empty supplied span and has CIDv1 replay identities, but it neither resolves that span from canonical PCSM identity nor proves semantic nonemptiness in the forest.",
+    "Without a current aggregate source-map CID, treating a Git tree/blob, AST span, caller string, or alias as semantic evidence would weaken the required authority boundary.",
+    "The required suite passes under the fixed-toolchain environment, but it provides no package-specific positive or negative coverage.",
+    "No aliases are accepted as canonical source identity and no M2/M3 mutation, generated-source mutation, or automatic source materialization is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Remove only artifacts/proof_carrying_semantic_minification/receipts/PCSM-055.json and invalidate dependent projections/receipts; preserve unrelated source bytes and prior admitted history.",
+    "source_rollback_required": false
+  },
+  "supervisor_acceptance": {
+    "kind": "unavailable",
+    "status": "pending_external_authority",
+    "reason": "completion_authoritative is false. This worker receipt records evidence and a non-promotion disposition only; the supervisor remains the authority for any completion state."
+  },
+  "acceptance": {
+    "status": "honest_non_promotion",
+    "result": "The receipt is current-head bound and distinguishes measured, estimated, simulated, and unavailable evidence. The named semantic-nonempty package remains unavailable at this head, so the task is not promoted or claimed complete as a source-forest semantic authority."
+  }
+}
