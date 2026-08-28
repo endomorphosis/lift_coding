@@ -1,0 +1,234 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-042",
+  "title": "Implement tokenizer cost profiling",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G400",
+  "objective_id": "PCSM-042",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-042@current-head-tokenizer-cost-profiling-selection-v1",
+  "observed_at": "2026-08-28T05:14:34Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 tokenizer-cost profiling implementation selection and current-tree capability assessment",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-042.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-042.json",
+    "implementation_delta": "Reuse self_improvement.supervisor_token_ledger as the current-head tokenizer cost-profiling authority. It has explicit versioned provider/model/tokenizer envelopes, content-addressed native and calibrated-fallback token records, exact-once lifecycle reconciliation, and dedicated positive and negative tests. The declared output authority permits no source change; creating a second PCSM profiler, tokenizer, or token ledger would duplicate the existing authority. No actual provider-native observation or calibration is admitted for this PCSM tree, so the receipt records those profile values as unavailable rather than inventing measurements or estimates."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "A deterministic approximation bound to its calibration and exact provider/model/tokenizer envelope; it is not a provider-native measurement and cannot establish validation or completion.",
+    "simulated": "A controlled fixture exercise; it establishes only the exercised contract behavior and cannot be reported as production usage.",
+    "unavailable": "A capability, identity, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "fbe62aea728d79f50c2f6955074f83d85017e821",
+    "outer_tree": "2ca509d10ba6d53c34013d0af3a17bdd1be3e125",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "fbe62aea728d79f50c2f6955074f83d85017e821",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "484afb3f094125a341945bcf2706f646f1a89ee189489907e6f77ef93914fe78",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only; not tokenizer cost profiling"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "c757022cf3b2ad35031afe4912ff20cbe6144a5d",
+        "tree": "a1e7239ea168a881be333733cb6baf570b9a4595",
+        "authority_role": "selected token-cost profiler, canonical content-identity support, and validation suites"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity only; not tokenizer cost profiling"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d674c1a3ef7ef1e1bc2",
+        "authority_role": "exact-byte CID storage only; not tokenizer cost profiling"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared each superproject gitlink with nested HEAD and HEAD^{tree}; checked outer and all admitted nested worktree porcelain before receipt creation; and verified configured origin/main revisions are ancestors of admitted heads.",
+      "result": "The bound outer head/tree and all four admitted gitlinks agree; all checked worktrees were clean before receipt creation. Accelerator origin/main 024bf40a6c35735b84e7faff844f862dec63abf3, datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2, kit origin/main 80bbdc3443e560b9bf40339c864a32689ccad8ef, and MCP++ origin/main 31096be86103f29faef80a01e03d09b1ad7345c6 are ancestors of their admitted heads.",
+      "invalidates_on": "Any changed bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source or test digest, selected schema/version, source-search result, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted current-tree PCSM SourceLinkReceipt or canonical source-map CID exists for this receipt-only existing-authority selection. Git blobs and SHA-256 values are not substituted for that absent contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "selection": "ipfs_accelerate_py.agent_supervisor.self_improvement.supervisor_token_ledger.ProviderModelEnvelope, TokenizerCalibrationSample, FallbackTokenizerCalibration, ProviderTokenUsage, TokenAttribution, and SupervisorTokenLedger",
+    "minimum_delta_reason": "This is the smallest existing Python-v1 implementation that profiles tokenizer cost without treating a token count as authority: it records measured native usage, permits only envelope-bound replayable fallback estimates, reconciles every lifecycle event exactly once, and keeps failed, rejected, abandoned, retry, reused, speculative, tool, and cancelled tokens explicit without double charging.",
+    "schemas": {
+      "provider_model_envelope": "ipfs_accelerate_py/agent-supervisor/provider-model-envelope@1",
+      "tokenizer_calibration_sample": "ipfs_accelerate_py/agent-supervisor/tokenizer-calibration-sample@1",
+      "fallback_tokenizer_calibration": "ipfs_accelerate_py/agent-supervisor/tokenizer-calibration@1",
+      "provider_token_usage": "ipfs_accelerate_py/agent-supervisor/provider-token-usage@1",
+      "token_attribution": "ipfs_accelerate_py/agent-supervisor/token-attribution@1",
+      "token_ledger_report": "ipfs_accelerate_py/agent-supervisor/token-ledger-report@1",
+      "supervisor_token_ledger": "ipfs_accelerate_py/agent-supervisor/supervisor-token-ledger@1"
+    },
+    "version_and_cid_binding": "Every selected record inherits CanonicalContract and has a content-derived identity. A ProviderModelEnvelope binds provider_id, model_id, model_revision, tokenizer_id, envelope_revision, and max_context_tokens. A fallback calibration carries a content-derived calibration_id over that exact envelope, calibration revision, and sorted source-free byte/token samples; calibrated use must name that ID. A SupervisorTokenLedger is content-addressed and binds its ResultBinding, complete lifecycle population, terminal attributions, token attributions, and calibration population. Claimed IDs and derived report fields are recomputed and rejected on mismatch.",
+    "measurement_and_estimation_contract": {
+      "measured_provider_native": "UsageSource.PROVIDER_NATIVE records supplied input, output, tool, reused, speculative, retry, failed-attempt, cancelled, and cost counters in ProviderTokenUsage. These are usage observations only, not proof, mutation, validation, promotion, or completion authority.",
+      "estimated_calibrated_fallback": "UsageSource.CALIBRATED_FALLBACK requires a matching envelope-bound calibration_id. FallbackTokenizerCalibration.estimate_bytes deterministically computes ceil(utf8_bytes * sum(provider_tokens) / sum(utf8_bytes)) from its admitted samples, and exposes maximum_absolute_error_bps over those samples. It is explicitly estimated evidence, never provider-native measured evidence.",
+      "simulated_fixture_boundary": "The focused test fixtures construct synthetic envelopes and counters to exercise contract invariants. Their numbers are simulated test data and are not PCSM production measurements or estimates.",
+      "unavailable_current_pcsm_profile": "No provider/model/tokenizer envelope, provider-native usage observation, fallback calibration, or sealed PCSM profile ledger bound to this outer tree is present in the admitted current source forest. The current PCSM token cost therefore has no measured or calibrated estimated value in this receipt."
+    },
+    "reconciliation_and_authority_boundary": "The ledger requires a non-empty complete lifecycle population, exactly one attribution per event, unique measurements and calibrations, matching result bindings, and terminal attribution reconciliation. Its fixed authority bounds are false for authorizes_usage, rewrites_provider_settlement, is_completion_evidence, and is_correctness_evidence. It profiles costs but cannot authorize M2/M3 mutation, proof acceptance, validation acceptance, promotion, or task completion."
+  },
+  "current_pcsm_profile": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_binding": [
+      "bound outer commit and tree",
+      "provider/model/tokenizer envelope identity",
+      "provider-native usage observation or matching fallback calibration",
+      "complete lifecycle and terminal-attribution population",
+      "content-derived profile/ledger identity"
+    ],
+    "source_search": {
+      "kind": "measured",
+      "method": "Searched the current external/ipfs_accelerate agent_supervisor Python forest for tokenizer, token_count, token cost, and token_cost, then inspected the candidate context compiler, residual packet estimator, and supervisor token ledger implementations and their tests.",
+      "result": "The selected supervisor token ledger is the complete existing equivalent. The residual benchmark explicitly states that there is no admitted learned tokenizer or model, and no current PCSM-bound ProviderModelEnvelope, ProviderTokenUsage, FallbackTokenizerCalibration, or SupervisorTokenLedger artifact was found.",
+      "meaning": "A concrete current-PCSM token-cost total cannot truthfully be reported as zero, measured, estimated, or passing. The reusable profiling package remains implemented and tested."
+    },
+    "disposition": "The profiling implementation is current-head and reusable, but this receipt does not mint a profile instance without an exact envelope and observations. Future consumers must bind a newly emitted ledger to the then-current PCSM tree and reject stale bindings."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_token_ledger.py",
+      "git_blob": "be6d58f526d52d427c367d8a683d2d375734cda3",
+      "sha256": "67bca102c9b2ebb9245ad8b492eee982cc9d1f5cfdbfbb7c734c59f69c9329de",
+      "role": "selected closed versioned tokenizer-cost contracts, calibration algorithm, exact-once ledger reconciliation, content-addressed identities, report projection, and non-authority boundary"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_v2_contracts.py",
+      "git_blob": "456afd41956b191acd9a2554c638246ce0133fd3",
+      "sha256": "79e12d2d4af3a0c7e83a4fd00260f45f0488fe80b07788bc63f2ff656847cf0b",
+      "role": "ResultBinding and lifecycle-event identities used to bind each ledger to one supervisor task and tree"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/formal_verification_contracts.py",
+      "git_blob": "7c312d15cd55ec14d6d26b7dc8b274d27b4ab8d0",
+      "sha256": "ce71dafce57749672340c89f91d8ddd9afda70148c8e29c525ae61520422ef87",
+      "role": "canonical content-identity implementation inherited by selected ledger contracts"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_token_ledger.py",
+      "git_blob": "946d1e58a73046be054d0f161a3ebc33d7b58bd4",
+      "sha256": "135c0f8bfa5a07a76a4d34428b3cd41b68ad231406438b942dc9612712d81cda",
+      "role": "focused positive and negative calibration, accounting, identity, exact-once, counter-classification, and authority-boundary tests"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_token_ledger.py",
+      "git_blob": "317ad696a67d081466833472277482dc0a256078",
+      "sha256": "723881334120fb0f612a6cbc6d305efac6b5ade08333ea2aaf98881399aacddb",
+      "role": "focused positive and negative cancellation, span binding, exactness, limit, and round-trip tests"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm042-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.33s",
+      "scope_limit": "This required PCSM command validates the compact grammar suite; it does not exercise the selected token-ledger package."
+    },
+    "focused_package_validation": {
+      "kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm042-focused-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_token_ledger.py external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_token_ledger.py",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "21 passed in 0.87s"
+    },
+    "positive_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "provider-native input, output, tool, retry, failed, reused, speculative, cancelled, and monetary counters reconcile without double charging",
+        "fallback calibration is envelope-scoped, content-addressed, source-free, deterministic, and JSON round-trippable",
+        "ledger and report are immutable, content-addressed, and reject mismatched claimed identities or report fields",
+        "reconciled endpoint events, lifecycle events, terminal criteria, and span bindings are attributed exactly once",
+        "token accounting is explicitly non-authoritative for usage, settlement, correctness, and completion"
+      ]
+    },
+    "negative_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "missing, duplicated, terminally-unattributed, unused-terminal, foreign-bound, and duplicate-measurement populations fail closed",
+        "negative, overlapping, uncalibrated fallback, over-limit, and misclassified counters fail closed",
+        "foreign fallback calibration, forged terminal claims, partial cancelled classifications, duplicate endpoint usage, unknown fields, and conflicting span bindings fail closed"
+      ]
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-042 formal proof obligation or approved digest-bound prover deployment is specified for this existing-authority selection. Passing Python tests are not represented as a formal proof."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Bound outer and admitted gitlink identities, clean/freshness checks, scheduler and source/test SHA-256 and Git-blob identities, selected explicit @1 schemas and content-identity behavior, source-search result, sealed required pytest result (11 passed), and sealed focused package result (21 passed).",
+    "estimated": "The selected implementation has a deterministic calibrated fallback algorithm, but no PCSM-bound calibration or derived token-cost estimate exists at this head; this receipt reports no numeric estimate.",
+    "simulated": "Focused-test fixtures use synthetic provider/tokenizer envelopes and counters. They prove the exercised contract checks only and are not production profile evidence.",
+    "unavailable": "A PCSM-bound provider/model/tokenizer envelope; provider-native usage; fallback calibration and numeric estimate; a complete PCSM ledger/profile CID; emitted PCSM SourceLinkReceipt/source-map CID; formal-prover result; and a self-describing immutable CID for this receipt."
+  },
+  "limitations": [
+    "The selected ledger is a reusable profiler, not a claim that the current PCSM tree has a measured token cost. A count cannot be manufactured from grammar byte bounds or test fixtures.",
+    "Provider-native usage is measured only when supplied by the bound provider envelope; fallback usage remains calibrated estimated evidence and must never be relabeled measured.",
+    "The current residual benchmark says no learned tokenizer or model is admitted. Its tokenizer identifiers and the context compiler's generic UTF-8 fallback do not substitute for a bound profile ledger.",
+    "Only the declared receipt was changed. A later task that emits an actual profile must create it through the selected existing contract, bind the then-current tree, and add its own receipt rather than mutating this conclusion.",
+    "This receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head selection. Do not alter the selected implementation, protected planning documents, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after a change to any bound tree or gitlink, scheduler/source/test digest, selected schema/version or content-identity behavior, source-search result, or validation result."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalent_reused_first": true,
+    "required_package_implemented": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_bound_where_applicable": true,
+    "positive_and_negative_tests_passed": true,
+    "required_validation_passed": true,
+    "measured_estimated_simulated_and_unavailable_evidence_distinguished": true,
+    "pcsm_profile_instance_available": false,
+    "typed_unavailable_current_profile_recorded": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "implemented_non_promoting"
+  }
+}
