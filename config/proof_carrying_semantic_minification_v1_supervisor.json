@@ -108,8 +108,8 @@
   "max_task_attempts": 3,
   "merge_retry_budget": 2,
   "merge_target_branch": "agent/proof-carrying-semantic-minification-v1",
-  "objective_goal_refinement_enabled": true,
-  "objective_refill_enabled": true,
+  "objective_goal_refinement_enabled": false,
+  "objective_refill_enabled": false,
   "objective_submission": {
     "campaign_count": 1,
     "canonical_handoff": "configured_board_git_seal_then_database_task_source_materialize",

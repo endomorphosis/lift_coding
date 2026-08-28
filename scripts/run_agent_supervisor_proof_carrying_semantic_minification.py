@@ -185,6 +185,11 @@ DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_SCHEMA: Final = (
     "proof-carrying-semantic-minification-database-projection-callback-"
     "identity-transition@1"
 )
+OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-objective-refill-fail-closed-"
+    "transition@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -338,6 +343,13 @@ DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_PATH: Final = (
     / "handoff"
     / "supervisor-restart-database-projection-callback-identity-transition.json"
 )
+OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-objective-refill-fail-closed-transition.json"
+)
 STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT: Final = (
     "8b8be83c6d9c578c4cec450092e140b929ce12e9"
 )
@@ -457,6 +469,21 @@ DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD: Final = (
 )
 DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_TREE: Final = (
     "5dee438e132ad068ddb30ec8c1e0066efa36067a"
+)
+OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_BASE_COMMIT: Final = (
+    "PENDING_OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_BASE_COMMIT"
+)
+OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD: Final = (
+    "f50c905534c94aa23289b7e8f4d8fc96f8896dcd"
+)
+OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_TREE: Final = (
+    "dafe6456f45dc32c6de8737a7327be40c0ddbdb1"
+)
+OBJECTIVE_REFILL_FAIL_CLOSED_PRIOR_ARTIFACT_COMMIT: Final = (
+    "05d51aa052087ff64765e208f8a54b5078836a76"
+)
+OBJECTIVE_REFILL_FAIL_CLOSED_PRIOR_RECEIPT_ID: Final = (
+    "sha256:71f11363bf5f1b492925edb97ce1e78cff44089efe416d54e8769e719a14f752"
 )
 CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
     "db9304284cfe857f08377ef756b4896192dd5111"
@@ -1074,6 +1101,81 @@ def _restart_static_config(config: Mapping[str, Any], *, label: str) -> dict[str
         source_binding.pop(field, None)
     normalized.pop("max_task_attempts", None)
     return normalized
+
+
+def _verified_objective_refill_static_config_transition(
+    bootstrap_config: Mapping[str, Any],
+    current_config: Mapping[str, Any],
+) -> bool:
+    """Normalize only the exact receipt-bound true-to-false refill delta."""
+
+    fields = (
+        "objective_refill_enabled",
+        "objective_goal_refinement_enabled",
+    )
+    bootstrap_static = _restart_static_config(
+        bootstrap_config,
+        label="bootstrap",
+    )
+    current_static = _restart_static_config(current_config, label="current")
+    bootstrap_values = {field: bootstrap_static.get(field) for field in fields}
+    current_values = {field: current_static.get(field) for field in fields}
+    if any(type(value) is not bool for value in bootstrap_values.values()):
+        raise OperatorError("bootstrap objective-refill flags are not exact booleans")
+    if any(type(value) is not bool for value in current_values.values()):
+        raise OperatorError("current objective-refill flags are not exact booleans")
+    if bootstrap_values != {field: True for field in fields}:
+        raise OperatorError("bootstrap objective-refill flags changed")
+    transition_required = current_values == {field: False for field in fields}
+    if current_values != bootstrap_values and not transition_required:
+        raise OperatorError("objective-refill flags are not an exact paired transition")
+    for field in fields:
+        bootstrap_static.pop(field)
+        current_static.pop(field)
+    if _canonical_bytes(bootstrap_static) != _canonical_bytes(current_static):
+        raise OperatorError(
+            "current config changes fields outside the admitted accelerator/datasets "
+            "bindings, retry policy, and objective-refill transition"
+        )
+    return transition_required
+
+
+def _verified_objective_refill_transition_receipt_id(
+    transition: Mapping[str, Any],
+) -> str:
+    """Return one valid successor receipt ID, or empty for no transition."""
+
+    if not transition:
+        return ""
+    receipt = transition.get("receipt")
+    if not isinstance(receipt, Mapping):
+        raise OperatorError("objective-refill successor receipt is absent")
+    receipt_id = str(receipt.get("receipt_id") or "")
+    body = dict(receipt)
+    body.pop("receipt_id", None)
+    if (
+        re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError("objective-refill successor receipt is invalid")
+    return receipt_id
+
+
+def _verified_objective_refill_transition_parity(
+    *,
+    transition_required: bool,
+    transition: Mapping[str, Any],
+) -> str:
+    """Require the paired config delta and successor receipt together."""
+
+    if type(transition_required) is not bool:
+        raise OperatorError("objective-refill transition requirement is not boolean")
+    receipt_id = _verified_objective_refill_transition_receipt_id(transition)
+    if transition_required != bool(receipt_id):
+        raise OperatorError(
+            "objective-refill static transition and successor receipt differ"
+        )
+    return receipt_id
 
 
 def _verified_restart_forest_transition(
@@ -3382,7 +3484,6 @@ def _verified_database_projection_callback_identity_operator_descendant(
         or sealed_source.get("operator_identity")
         != _identity(expected_operator)
         or sealed_operator != expected_operator
-        or current_operator != expected_operator
     ):
         raise OperatorError(
             "database projection/callback identity operator delta changed"
@@ -3443,6 +3544,273 @@ def _verified_database_projection_callback_identity_operator_descendant(
         field=(
             "database projection/callback identity artifact-to-current lineage"
         ),
+    )
+    objective_refill_fail_closed_transition: dict[str, Any] = {}
+    if current_operator != expected_operator:
+        objective_refill_fail_closed_transition = (
+            _verified_objective_refill_fail_closed_operator_descendant(
+                current_operator=current_operator,
+                current_head=current_head,
+                operator_path=operator_path,
+            )
+        )
+    return {
+        "receipt": payload,
+        "receipt_bytes": receipt_bytes,
+        "artifact_commit": artifact_commit,
+        "base_commit": base_commit,
+        "base_operator": base_operator,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "expected_operator": expected_operator,
+        "objective_refill_fail_closed_transition": (
+            objective_refill_fail_closed_transition
+        ),
+    }
+
+
+def _objective_refill_fail_closed_transition_payload(
+    *,
+    current_head: str,
+) -> tuple[bytes, dict[str, Any]]:
+    """Load the exact add-only objective-refill fail-closed receipt."""
+
+    receipt_bytes = _tracked_bytes(
+        OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_PATH,
+        head=current_head,
+    )
+    payload = _json_mapping_bytes(
+        receipt_bytes,
+        field="objective-refill fail-closed transition receipt",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "prior_checkpoint",
+        "repair_base",
+        "sealed_source",
+        "source_forest",
+        "disabled_refill_contract",
+        "nonpromotion_contract",
+        "validations",
+        "post_integration_canonical_validation",
+        "historical_receipts_preserved",
+        "database_projection_callback_identity_receipt_preserved",
+        "database_authority_preserved",
+        "task_state_mutation",
+        "manual_database_mutation",
+        "manual_worktree_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema")
+        != OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_SCHEMA
+        or payload.get("reason")
+        != "disable_unadmitted_objective_refill_fail_closed"
+        or not isinstance(payload.get("prior_checkpoint"), Mapping)
+        or not isinstance(payload.get("repair_base"), Mapping)
+        or not isinstance(payload.get("sealed_source"), Mapping)
+        or not isinstance(payload.get("source_forest"), list)
+        or not isinstance(payload.get("disabled_refill_contract"), Mapping)
+        or not isinstance(payload.get("nonpromotion_contract"), Mapping)
+        or not isinstance(payload.get("validations"), list)
+        or not isinstance(
+            payload.get("post_integration_canonical_validation"), Mapping
+        )
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get(
+            "database_projection_callback_identity_receipt_preserved"
+        )
+        is not True
+        or payload.get("database_authority_preserved") is not True
+        or payload.get("task_state_mutation") is not False
+        or payload.get("manual_database_mutation") is not False
+        or payload.get("manual_worktree_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError("objective-refill fail-closed transition seal is invalid")
+    return receipt_bytes, payload
+
+
+def _verified_objective_refill_fail_closed_operator_descendant(
+    *,
+    current_operator: bytes,
+    current_head: str,
+    operator_path: Path,
+) -> dict[str, Any]:
+    """Admit only the exact objective-refill fail-closed B/S/A chain."""
+
+    base_commit = OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError("objective-refill fail-closed transition base is unsealed")
+    receipt_bytes, payload = _objective_refill_fail_closed_transition_payload(
+        current_head=current_head
+    )
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    if (
+        checkpoint.get("source_head")
+        != OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit")
+        != OBJECTIVE_REFILL_FAIL_CLOSED_PRIOR_ARTIFACT_COMMIT
+        or checkpoint.get(
+            "database_projection_callback_identity_transition_receipt_id"
+        )
+        != OBJECTIVE_REFILL_FAIL_CLOSED_PRIOR_RECEIPT_ID
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD
+        or sealed_source.get("parent") != base_commit
+    ):
+        raise OperatorError("objective-refill fail-closed checkpoint changed")
+    if (
+        _git_commit_tree(
+            OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+            field="objective-refill fail-closed checkpoint",
+        )
+        != OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_TREE
+        or _git_commit_tree(
+            base_commit,
+            field="objective-refill fail-closed repair base",
+        )
+        != repair_base.get("repository_tree_id")
+    ):
+        raise OperatorError("objective-refill fail-closed tree binding changed")
+
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "scripts/generate_proof_carrying_semantic_minification_board.py",
+        relative_operator,
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "test/test_pcsm_objective_refill_fail_closed_transition.py",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD}..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="objective-refill fail-closed base operator",
+    )
+    pending_base = (
+        "PENDING_" + "OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="objective-refill fail-closed sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="objective-refill fail-closed sealed operator",
+    )
+    if (
+        base_parents != [OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD]
+        or base_paths != expected_base_paths
+        or tuple(repair_base.get("changed_paths") or ()) != expected_base_paths
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or base_operator.count(pending_base) != 1
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_parents != [base_commit]
+        or sealed_paths != (relative_operator,)
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+        or sealed_source.get("operator_identity")
+        != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or current_operator != expected_operator
+    ):
+        raise OperatorError("objective-refill fail-closed operator delta changed")
+
+    receipt_relative = OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_PATH.relative_to(
+        ROOT
+    ).as_posix()
+    additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if len(additions) != 1:
+        raise OperatorError(
+            "objective-refill fail-closed receipt introduction is not exact"
+        )
+    artifact_commit = additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    artifact_status = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-status", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != (receipt_relative,)
+        or artifact_status != (f"A\t{receipt_relative}",)
+        or _git_blob_at(
+            head=artifact_commit,
+            path=OBJECTIVE_REFILL_FAIL_CLOSED_TRANSITION_PATH,
+            field="introduced objective-refill fail-closed receipt",
+        )
+        != receipt_bytes
+    ):
+        raise OperatorError("objective-refill fail-closed artifact commit changed")
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field="objective-refill fail-closed artifact-to-current lineage",
     )
     return {
         "receipt": payload,
@@ -8370,17 +8738,26 @@ def _verified_database_projection_callback_identity_transition(
         ROOT
         / "test/test_pcsm_database_projection_callback_identity_transition.py"
     )
+    generator_path = (
+        ROOT / "scripts/generate_proof_carrying_semantic_minification_board.py"
+    )
     prior_transition_test_path = (
         ROOT / "test/test_pcsm_supervisor_callback_continuity_transition.py"
     )
     current_gitlink = str(
         _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
     ).strip().split()
-    if (
+    exact_database_projection_callback_identity_source = not (
         current_config_bytes != base_config_bytes
         or _canonical_bytes(current_config) != _canonical_bytes(base_config)
         or current_operator != operator_gate["expected_operator"]
         or current_validator != base_validator
+        or _tracked_bytes(generator_path, head=current_head)
+        != _git_blob_at(
+            head=OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+            path=generator_path,
+            field="database projection/callback identity generator",
+        )
         or _tracked_bytes(transition_test_path, head=current_head)
         != _git_blob_at(
             head=base_commit,
@@ -8403,9 +8780,20 @@ def _verified_database_projection_callback_identity_transition(
         or current_gitlink[:2] != ["160000", "commit"]
         or current_gitlink[2]
         != DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_HEAD
-    ):
-        raise OperatorError(
-            "database projection/callback identity live source changed"
+    )
+    objective_refill_fail_closed_transition: dict[str, Any] = {}
+    if not exact_database_projection_callback_identity_source:
+        objective_refill_fail_closed_transition = (
+            _verified_objective_refill_fail_closed_transition(
+                board=board,
+                current_head=current_head,
+                current_config=current_config,
+                current_source_identities=current_source_identities,
+                prior_artifact_commit=operator_gate["artifact_commit"],
+                prior_transition_receipt_id=str(
+                    payload.get("receipt_id") or ""
+                ),
+            )
         )
     old_receipt_bytes = _tracked_bytes(
         SUPERVISOR_CALLBACK_CONTINUITY_TRANSITION_PATH,
@@ -8434,7 +8822,7 @@ def _verified_database_projection_callback_identity_transition(
                 "database projection/callback checkpoint evidence changed"
             )
     source_paths = _restart_source_paths(board)
-    for name in ("taskboard", "objectives", "plan", "generator"):
+    for name in ("taskboard", "objectives", "plan"):
         checkpoint_bytes = _git_blob_at(
             head=DATABASE_PROJECTION_CALLBACK_IDENTITY_CHECKPOINT_HEAD,
             path=source_paths[name],
@@ -8459,6 +8847,645 @@ def _verified_database_projection_callback_identity_transition(
         "accelerator_tree": (
             DATABASE_PROJECTION_CALLBACK_IDENTITY_ACCELERATOR_TREE
         ),
+        "objective_refill_fail_closed_transition": (
+            objective_refill_fail_closed_transition
+        ),
+    }
+
+
+def _verified_objective_refill_fail_closed_transition(
+    *,
+    board: Any,
+    current_head: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    prior_artifact_commit: str,
+    prior_transition_receipt_id: str,
+) -> dict[str, Any]:
+    """Admit the exact fail-closed policy transition at the f50 checkpoint."""
+
+    operator_path = Path(__file__).resolve()
+    operator_gate = _verified_objective_refill_fail_closed_operator_descendant(
+        current_operator=_tracked_bytes(operator_path, head=current_head),
+        current_head=current_head,
+        operator_path=operator_path,
+    )
+    payload = operator_gate["receipt"]
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    source_forest = payload["source_forest"]
+    disabled_refill_contract = payload["disabled_refill_contract"]
+    nonpromotion_contract = payload["nonpromotion_contract"]
+    validations = payload["validations"]
+    post_integration = payload["post_integration_canonical_validation"]
+
+    expected_checkpoint_receipts = [
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-066.json"
+            ),
+            "bytes_id": (
+                "sha256:bce73d98b75152707617bcd9ca67e27894fc704e6fdf0f"
+                "ba6107a201037cfa71"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-067.json"
+            ),
+            "bytes_id": (
+                "sha256:09274373cf2f947de5f0d3857dc0a150fe7e589b7ccd563"
+                "044e980af3858aa7b"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-068.json"
+            ),
+            "bytes_id": (
+                "sha256:c8b49cbb1b01ff8242c434987a337ae74537129477877bc"
+                "9e3b0718f44295b54"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-071.json"
+            ),
+            "bytes_id": (
+                "sha256:47d72c785e2543fffe22b688c2d46fe88399917c5376ab5"
+                "c0d78c3fd0d17f85d"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-072.json"
+            ),
+            "bytes_id": (
+                "sha256:95b11da462105de2f62e2ce16f039fc47b43c366b61d602"
+                "ea4731a811364c0fe"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-073.json"
+            ),
+            "bytes_id": (
+                "sha256:3fd4eab09c047dbf967f938089147c8fb4a32111c439234"
+                "df018f67c4ff42e7d"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-074.json"
+            ),
+            "bytes_id": (
+                "sha256:0b88c46ba4f6326cbd0a1f9e395019739223095d01dafbc"
+                "53b509f944e315752"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-075.json"
+            ),
+            "bytes_id": (
+                "sha256:4594a7bbd5d80e0cead7bcc1e6e965b645059a28b50547e"
+                "56350b62a5441ce16"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-076.json"
+            ),
+            "bytes_id": (
+                "sha256:cce51ce588321e9fd488dca982ae9f930b6c320f46f321b"
+                "53f16d7b939158728"
+            ),
+        },
+    ]
+    checkpoint_fields = {
+        "source_head",
+        "repository_tree_id",
+        "prior_artifact_commit",
+        "database_projection_callback_identity_transition_receipt_id",
+        "database_projection_callback_identity_transition_receipt_bytes_id",
+        "changed_receipts",
+    }
+    if (
+        set(checkpoint) != checkpoint_fields
+        or checkpoint.get("source_head")
+        != OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit") != prior_artifact_commit
+        or prior_artifact_commit
+        != OBJECTIVE_REFILL_FAIL_CLOSED_PRIOR_ARTIFACT_COMMIT
+        or checkpoint.get(
+            "database_projection_callback_identity_transition_receipt_id"
+        )
+        != prior_transition_receipt_id
+        or prior_transition_receipt_id
+        != OBJECTIVE_REFILL_FAIL_CLOSED_PRIOR_RECEIPT_ID
+        or checkpoint.get(
+            "database_projection_callback_identity_transition_receipt_bytes_id"
+        )
+        != "sha256:993be35843d8d76f8cd427f6d21d295e00963ca75b636e771fc586248eb32031"
+        or checkpoint.get("changed_receipts")
+        != expected_checkpoint_receipts
+    ):
+        raise OperatorError("objective-refill fail-closed checkpoint changed")
+    if (
+        _git_commit_tree(
+            OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+            field="objective-refill fail-closed checkpoint",
+        )
+        != OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_TREE
+    ):
+        raise OperatorError("objective-refill fail-closed checkpoint tree changed")
+    _git_is_ancestor(
+        prior_artifact_commit,
+        OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+        field="projection/callback artifact-to-refill checkpoint lineage",
+    )
+    expected_checkpoint_status = tuple(
+        f"A\t{item['path']}" for item in expected_checkpoint_receipts
+    )
+    checkpoint_status = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-status",
+                f"{prior_artifact_commit}.."
+                f"{OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if checkpoint_status != expected_checkpoint_status:
+        raise OperatorError("objective-refill fail-closed checkpoint delta changed")
+    for item in expected_checkpoint_receipts:
+        checkpoint_bytes = _git_blob_at(
+            head=OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+            path=ROOT / item["path"],
+            field=f"objective-refill checkpoint receipt {item['path']}",
+        )
+        if _identity(checkpoint_bytes) != item["bytes_id"]:
+            raise OperatorError("objective-refill checkpoint receipt changed")
+
+    prior_receipt_at_checkpoint = _git_blob_at(
+        head=OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+        path=DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_PATH,
+        field="preserved database projection/callback identity receipt",
+    )
+    prior_receipt_at_artifact = _git_blob_at(
+        head=prior_artifact_commit,
+        path=DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_PATH,
+        field="database projection/callback identity receipt at artifact",
+    )
+    if (
+        prior_receipt_at_checkpoint != prior_receipt_at_artifact
+        or _identity(prior_receipt_at_checkpoint)
+        != checkpoint.get(
+            "database_projection_callback_identity_transition_receipt_bytes_id"
+        )
+        or _json_mapping_bytes(
+            prior_receipt_at_checkpoint,
+            field="preserved database projection/callback identity receipt",
+        ).get("receipt_id")
+        != prior_transition_receipt_id
+    ):
+        raise OperatorError(
+            "database projection/callback identity receipt was not preserved"
+        )
+
+    validator_path = board.path(board.validator_path)
+    generator_path = (
+        ROOT / "scripts/generate_proof_carrying_semantic_minification_board.py"
+    )
+    test_path = ROOT / "test/test_pcsm_objective_refill_fail_closed_transition.py"
+    checkpoint_config_bytes = _git_blob_at(
+        head=OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+        path=board.config_path,
+        field="objective-refill checkpoint config",
+    )
+    checkpoint_generator = _git_blob_at(
+        head=OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+        path=generator_path,
+        field="objective-refill checkpoint generator",
+    )
+    checkpoint_validator = _git_blob_at(
+        head=OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+        path=validator_path,
+        field="objective-refill checkpoint validator",
+    )
+    base_commit = str(operator_gate["base_commit"])
+    base_config_bytes = _git_blob_at(
+        head=base_commit,
+        path=board.config_path,
+        field="objective-refill base config",
+    )
+    base_generator = _git_blob_at(
+        head=base_commit,
+        path=generator_path,
+        field="objective-refill base generator",
+    )
+    base_validator = _git_blob_at(
+        head=base_commit,
+        path=validator_path,
+        field="objective-refill base validator",
+    )
+    base_test = _git_blob_at(
+        head=base_commit,
+        path=test_path,
+        field="objective-refill focused test",
+    )
+    checkpoint_config = _json_mapping_bytes(
+        checkpoint_config_bytes,
+        field="objective-refill checkpoint config",
+    )
+    expected_config = json.loads(_canonical_bytes(checkpoint_config))
+    expected_config["objective_refill_enabled"] = False
+    expected_config["objective_goal_refinement_enabled"] = False
+    expected_config_bytes = checkpoint_config_bytes
+    config_replacements = (
+        (
+            b'"objective_refill_enabled": true,',
+            b'"objective_refill_enabled": false,',
+        ),
+        (
+            b'"objective_goal_refinement_enabled": true,',
+            b'"objective_goal_refinement_enabled": false,',
+        ),
+    )
+    for before, after in config_replacements:
+        if expected_config_bytes.count(before) != 1:
+            raise OperatorError("objective-refill checkpoint config bytes changed")
+        expected_config_bytes = expected_config_bytes.replace(before, after, 1)
+    base_config = _json_mapping_bytes(
+        base_config_bytes,
+        field="objective-refill base config",
+    )
+    expected_generator = checkpoint_generator
+    generator_replacements = (
+        (
+            b'"objective_refill_enabled": True,',
+            b'"objective_refill_enabled": False,',
+        ),
+        (
+            b'"objective_goal_refinement_enabled": True,',
+            b'"objective_goal_refinement_enabled": False,',
+        ),
+    )
+    for before, after in generator_replacements:
+        if expected_generator.count(before) != 1:
+            raise OperatorError("objective-refill checkpoint generator changed")
+        expected_generator = expected_generator.replace(before, after, 1)
+    prior_validator_block = (
+        b'    if config.get("objective_refill_enabled") is not True:\n'
+        b'        errors.append("objective refill must be enabled")\n'
+    )
+    current_validator_block = (
+        b'    if config.get("objective_refill_enabled") is not False:\n'
+        b'        errors.append("objective refill must remain disabled before '
+        b'PCSM-080 admission")\n'
+        b'    if config.get("objective_goal_refinement_enabled") is not False:\n'
+        b'        errors.append(\n'
+        b'            "objective goal refinement must remain disabled before '
+        b'PCSM-080 admission"\n'
+        b'        )\n'
+    )
+    if checkpoint_validator.count(prior_validator_block) != 1:
+        raise OperatorError("objective-refill checkpoint validator changed")
+    expected_validator = checkpoint_validator.replace(
+        prior_validator_block,
+        current_validator_block,
+        1,
+    )
+
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "scripts/generate_proof_carrying_semantic_minification_board.py",
+        relative_operator,
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "test/test_pcsm_objective_refill_fail_closed_transition.py",
+    )
+    expected_base_status = (
+        f"M\t{expected_base_paths[0]}",
+        f"M\t{expected_base_paths[1]}",
+        f"M\t{expected_base_paths[2]}",
+        f"M\t{expected_base_paths[3]}",
+        f"A\t{expected_base_paths[4]}",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_status = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-status",
+                f"{OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD}..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    repair_base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "config_identity",
+        "generator_identity",
+        "operator_identity",
+        "validator_identity",
+        "test_identity",
+        "changed_paths",
+        "changed_status",
+    }
+    if (
+        set(repair_base) != repair_base_fields
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("repository_tree_id")
+        != _git_commit_tree(base_commit, field="objective-refill repair base")
+        or repair_base.get("parent")
+        != OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD
+        or repair_base.get("config_identity") != _identity(base_config_bytes)
+        or repair_base.get("generator_identity") != _identity(base_generator)
+        or repair_base.get("operator_identity")
+        != _identity(operator_gate["base_operator"])
+        or repair_base.get("validator_identity") != _identity(base_validator)
+        or repair_base.get("test_identity") != _identity(base_test)
+        or tuple(repair_base.get("changed_paths") or ()) != expected_base_paths
+        or tuple(repair_base.get("changed_status") or ()) != expected_base_status
+        or base_parents != [OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD]
+        or base_status != expected_base_status
+        or base_config_bytes != expected_config_bytes
+        or base_config != expected_config
+        or base_generator != expected_generator
+        or base_validator != expected_validator
+    ):
+        raise OperatorError("objective-refill fail-closed repair base changed")
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+    }
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("source_head") != operator_gate["sealed_source_head"]
+        or sealed_source.get("repository_tree_id")
+        != operator_gate["sealed_source_tree"]
+        or sealed_source.get("parent") != base_commit
+        or sealed_source.get("operator_identity")
+        != _identity(operator_gate["expected_operator"])
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+    ):
+        raise OperatorError("objective-refill fail-closed sealed source changed")
+
+    expected_source_forest = [
+        {
+            "name": "ipfs_accelerate",
+            "path": "external/ipfs_accelerate",
+            "head": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+            "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        },
+        {
+            "name": "ipfs_datasets",
+            "path": "external/ipfs_datasets",
+            "head": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+            "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        },
+        {
+            "name": "ipfs_kit",
+            "path": "external/ipfs_kit",
+            "head": "b6c65ba732733d7e33852713ba18aa3b12235668",
+            "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        },
+        {
+            "name": "mcp_plus_plus",
+            "path": "Mcp-Plus-Plus",
+            "head": "31096be86103f29faef80a01e03d09b1ad7345c6",
+            "tree": "61776431577f0c276546f25e4178a47a64007180",
+        },
+    ]
+    if source_forest != expected_source_forest:
+        raise OperatorError("objective-refill fail-closed source forest changed")
+    binding = current_config.get("source_binding")
+    if not isinstance(binding, Mapping):
+        raise OperatorError("objective-refill current source binding is absent")
+    for item in expected_source_forest:
+        name = str(item["name"])
+        expected_head = str(item["head"])
+        expected_tree = str(item["tree"])
+        if (
+            binding.get(f"{name}_planning_revision") != expected_head
+            or binding.get(f"{name}_planning_tree") != expected_tree
+        ):
+            raise OperatorError("objective-refill source binding changed")
+        for head in (
+            OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+            current_head,
+        ):
+            entry = str(_git("ls-tree", head, "--", str(item["path"]))).split()
+            if (
+                len(entry) < 3
+                or entry[:2] != ["160000", "commit"]
+                or entry[2] != expected_head
+            ):
+                raise OperatorError("objective-refill gitlink binding changed")
+
+    expected_disabled_refill_contract = {
+        "bootstrap_objective_refill_enabled": True,
+        "bootstrap_objective_goal_refinement_enabled": True,
+        "current_objective_refill_enabled": False,
+        "current_objective_goal_refinement_enabled": False,
+        "codebase_refill_enabled": False,
+        "forbidden_launch_argv_token": "--common-arg=--objective-refill-scan",
+        "disposition": "fail_closed_until_admitted_owner_side_plan_delta",
+        "population_boundary_task_id": "PCSM-080",
+    }
+    expected_nonpromotion_contract = {
+        "initial_task_count": 70,
+        "initial_goal_count": 11,
+        "initial_plan_count": 1,
+        "plan_delta_admitted": False,
+        "projection_only_task_count": 0,
+        "task_population_changed": False,
+        "plan_changed": False,
+        "taskboard_changed": False,
+        "objectives_changed": False,
+    }
+    if (
+        dict(disabled_refill_contract) != expected_disabled_refill_contract
+        or dict(nonpromotion_contract) != expected_nonpromotion_contract
+        or not _verified_objective_refill_static_config_transition(
+            checkpoint_config,
+            current_config,
+        )
+    ):
+        raise OperatorError("objective-refill fail-closed contract changed")
+
+    expected_post_integration = {
+        "condition": (
+            "artifact_commit_integrated_on_configured_merge_target_branch_"
+            "with_stopped_materialized_authority"
+        ),
+        "cwd": ".",
+        "command": [
+            "python",
+            "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+            "launch-supervisor",
+            "--dry-run",
+        ],
+        "pre_integration_outcome": "not_run_branch_and_materialization_gated",
+        "required_outcome": "passed",
+        "runtime_launch": False,
+        "authority_mutation": False,
+    }
+    if dict(post_integration) != expected_post_integration:
+        raise OperatorError("objective-refill post-integration validation changed")
+
+    focused = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_objective_refill_fail_closed_transition.py",
+    )
+    prior = (
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_database_projection_callback_identity_transition.py",
+        "-k",
+        "not current_transition_receipt_passes_exact_read_only_verifier",
+    )
+    pycompile = (
+        "python",
+        "-m",
+        "py_compile",
+        relative_operator,
+    )
+    board_validation = (
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all",
+    )
+    diff_check = (
+        "git",
+        "diff",
+        "--check",
+        f"{OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD}..{base_commit}",
+    )
+    required_validations = {
+        (".", focused),
+        (".", prior),
+        (".", pycompile),
+        (".", board_validation),
+        (".", diff_check),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    summaries: dict[tuple[str, ...], str] = {}
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError("objective-refill validation is malformed")
+        command = validation.get("command")
+        summary = validation.get("summary")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(summary, str)
+            or not summary
+        ):
+            raise OperatorError("objective-refill validation did not pass")
+        observed = (str(validation.get("cwd") or ""), tuple(command))
+        observed_validations.add(observed)
+        summaries[tuple(command)] = summary
+    if (
+        len(validations) != len(required_validations)
+        or observed_validations != required_validations
+        or re.search(r"\b13 passed\b", summaries.get(focused, "")) is None
+        or re.search(r"\b6 passed\b", summaries.get(prior, "")) is None
+        or summaries.get(pycompile, "") != "clean"
+        or summaries.get(board_validation, "")
+        != "valid board: 70 tasks, 11 goals, 96 packages"
+        or summaries.get(diff_check, "") != "clean"
+    ):
+        raise OperatorError("objective-refill validations are incomplete")
+
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    current_generator = _tracked_bytes(generator_path, head=current_head)
+    current_operator = _tracked_bytes(operator_path, head=current_head)
+    current_validator = _tracked_bytes(validator_path, head=current_head)
+    current_test = _tracked_bytes(test_path, head=current_head)
+    if (
+        current_config_bytes != base_config_bytes
+        or _canonical_bytes(current_config) != _canonical_bytes(base_config)
+        or current_generator != base_generator
+        or current_operator != operator_gate["expected_operator"]
+        or current_validator != base_validator
+        or current_test != base_test
+        or current_source_identities.get("config")
+        != _identity(base_config_bytes)
+        or current_source_identities.get("generator")
+        != _identity(base_generator)
+        or current_source_identities.get("operator")
+        != _identity(operator_gate["expected_operator"])
+        or current_source_identities.get("validator")
+        != _identity(base_validator)
+    ):
+        raise OperatorError("objective-refill fail-closed live source changed")
+    source_paths = _restart_source_paths(board)
+    for name in ("taskboard", "objectives", "plan"):
+        checkpoint_bytes = _git_blob_at(
+            head=OBJECTIVE_REFILL_FAIL_CLOSED_CHECKPOINT_HEAD,
+            path=source_paths[name],
+            field=f"objective-refill checkpoint {name}",
+        )
+        current_bytes = _tracked_bytes(source_paths[name], head=current_head)
+        if (
+            current_bytes != checkpoint_bytes
+            or current_source_identities.get(name) != _identity(current_bytes)
+        ):
+            raise OperatorError("objective-refill changed immutable authority")
+    current_prior_receipt = _tracked_bytes(
+        DATABASE_PROJECTION_CALLBACK_IDENTITY_TRANSITION_PATH,
+        head=current_head,
+    )
+    if current_prior_receipt != prior_receipt_at_checkpoint:
+        raise OperatorError("objective-refill changed prior transition receipt")
+    for item in expected_checkpoint_receipts:
+        current_bytes = _tracked_bytes(ROOT / item["path"], head=current_head)
+        if _identity(current_bytes) != item["bytes_id"]:
+            raise OperatorError("objective-refill changed checkpoint evidence")
+    return {
+        "receipt": payload,
+        "artifact_commit": operator_gate["artifact_commit"],
+        "sealed_source_head": operator_gate["sealed_source_head"],
+        "sealed_source_tree": operator_gate["sealed_source_tree"],
+        "source_forest": source_forest,
     }
 
 
@@ -9147,13 +10174,12 @@ def _owner_restart_admission(
     )
     if _canonical_bytes(current_config) != _canonical_bytes(config):
         raise OperatorError("loaded config differs from tracked current config")
-    if _canonical_bytes(
-        _restart_static_config(bootstrap_config, label="bootstrap")
-    ) != _canonical_bytes(_restart_static_config(current_config, label="current")):
-        raise OperatorError(
-            "current config changes fields outside the admitted accelerator/datasets "
-            "bindings and retry policy"
+    objective_refill_transition_required = (
+        _verified_objective_refill_static_config_transition(
+            bootstrap_config,
+            current_config,
         )
+    )
     bootstrap_attempt_limit = _exact_int(
         bootstrap_config.get("max_task_attempts"),
         field="bootstrap max_task_attempts",
@@ -9376,6 +10402,22 @@ def _owner_restart_admission(
         )
         else {}
     )
+    objective_refill_fail_closed_transition = (
+        database_projection_callback_identity_transition.get(
+            "objective_refill_fail_closed_transition"
+        )
+    )
+    objective_refill_fail_closed_transition = (
+        objective_refill_fail_closed_transition
+        if isinstance(objective_refill_fail_closed_transition, Mapping)
+        else {}
+    )
+    objective_refill_fail_closed_transition_receipt_id = (
+        _verified_objective_refill_transition_parity(
+            transition_required=objective_refill_transition_required,
+            transition=objective_refill_fail_closed_transition,
+        )
+    )
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
         "mode": admission_mode,
@@ -9430,6 +10472,9 @@ def _owner_restart_admission(
                 "receipt_id"
             )
             or ""
+        ),
+        "objective_refill_fail_closed_transition_receipt_id": (
+            objective_refill_fail_closed_transition_receipt_id
         ),
         "current_head_descendant_repair": descendant_repair,
         "database_authority": {
@@ -11169,6 +12214,12 @@ def _owner_restart_receipt(
         "database_projection_callback_identity_transition_receipt_id": str(
             admission.get(
                 "database_projection_callback_identity_transition_receipt_id"
+            )
+            or ""
+        ),
+        "objective_refill_fail_closed_transition_receipt_id": str(
+            admission.get(
+                "objective_refill_fail_closed_transition_receipt_id"
             )
             or ""
         ),

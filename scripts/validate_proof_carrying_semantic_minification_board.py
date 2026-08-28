@@ -290,8 +290,12 @@ def validate() -> dict[str, Any]:
 
     if config.get("exit_when_all_tracks_terminal") is not False:
         errors.append("refill board must not exit at initial-drain terminal state")
-    if config.get("objective_refill_enabled") is not True:
-        errors.append("objective refill must be enabled")
+    if config.get("objective_refill_enabled") is not False:
+        errors.append("objective refill must remain disabled before PCSM-080 admission")
+    if config.get("objective_goal_refinement_enabled") is not False:
+        errors.append(
+            "objective goal refinement must remain disabled before PCSM-080 admission"
+        )
     if config.get("codebase_refill_enabled") is not False:
         errors.append("unscoped codebase refill must be disabled")
     refill = config.get("refill_policy") or {}
