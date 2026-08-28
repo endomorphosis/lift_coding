@@ -1,0 +1,278 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-061",
+  "title": "Integrate assume-guarantee validation",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-061",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-061@current-head-python-assume-guarantee-validation-v1",
+  "observed_at": "2026-08-28T07:57:49Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 deterministic, CID-bound assumption-guarantee substitution for the exact current admitted datasets source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-061.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-061.json",
+    "implementation_delta": "The exact current-head datasets source forest already supplies the sole canonical Python-v1 assumption-guarantee substitution authority: CapsuleFreshness@1, assessed by assess_capsule_freshness and consumed through is_safe_substitute/requires_raw_source. This receipt selects and binds that authority. No proof_context wrapper, competing evaluator, alternate identity, source-map authority, or M2/M3 mutation was introduced.",
+    "non_promotion_reason": "The reusable authority and its direct positive/negative tests passed in the provider environment, but the authoritative sealed Python 3.12 attempt aborts before collection because its explicitly configured anyio pytest plugin is unavailable. No sealed passing result, proof result, source-map binding, or mutation authority is claimed."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; no estimate establishes substitution behavior, identity, or test success.",
+    "simulated": "A deterministic provider-environment execution; it cannot replace authoritative sealed validation or authorize promotion.",
+    "unavailable": "A required capability or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "1c5b992929023609b70871e5fa70970bff4946f3",
+    "outer_tree": "ff91b84d33b94c3b7c3398111a72c757d826ebd2",
+    "outer_subject": "Merge commit '1ffc34fe276652351fb8eb69754409852a9a024c' into agent/proof-carrying-semantic-minification-v1",
+    "dispatch_tree_id": "1c5b992929023609b70871e5fa70970bff4946f3",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "objective_revision_cid": "baguqeera2biqmz3padwvpshiuwyyef52pyhzydnccvypw2ovvdk7sukuis7a",
+    "checkpoint_manifest_cid": "baguqeera3gqslunyd6dki4m6ruwetihstso2fyqc4ucgp2nxp62nsobksofq",
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149",
+        "authority_role": "consumer and scheduler boundary only; not assumption-guarantee authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical Python semantic-state, SemanticCapsule, freshness, invalidation, DAG-JSON, and CID authority"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage only; not Python substitution authority"
+      }
+    },
+    "source_binding_policy": {
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared every admitted gitlink to nested HEAD and HEAD^{tree}; inspected outer and datasets porcelain before receipt write; verified datasets origin/main ancestry; recorded named source/test Git blobs and SHA-256 values; and searched exact PCSM roots for a canonical current-tree source-map identity.",
+      "result": "The dispatch commit equals outer HEAD; the datasets gitlink equals its checked-out HEAD; inspected outer and datasets worktrees were clean before receipt creation; and configured datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 is an ancestor of the measured datasets HEAD.",
+      "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, schema/version, CID profile, test input, or validation-environment capability requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree SourceLinkReceipt or canonical aggregate source-map CID exists in the exact proof_context roots. Git trees, blobs, per-record CIDs, and AST/span facts are not substituted for that missing PCSM artifact."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "assessment_record": "ipfs_datasets_py.logic.software_contracts.semantic_state.models.CapsuleFreshness",
+    "assessment_schema": "ipfs-datasets.software-contracts.semantic-capsule-freshness@1",
+    "assessment_interface": "CapsuleFreshness@1",
+    "assessor_schema": "ipfs-datasets.software-contracts.semantic-capsule-freshness-assessor@1",
+    "assessor_module": "ipfs_datasets_py.logic.software_contracts.semantic_state.freshness",
+    "entry_points": [
+      "assess_capsule_freshness(capsule, current_state, invalidation=None) -> CapsuleFreshness",
+      "is_safe_substitute(assessment) -> bool",
+      "requires_raw_source(assessment) -> bool"
+    ],
+    "bound_record_schemas": {
+      "capsule": "ipfs-datasets.software-contracts.semantic-capsule@1",
+      "semantic_state_root": "ipfs-datasets.software-contracts.semantic-state-root@1",
+      "semantic_invalidation_plan": "ipfs-datasets.software-contracts.semantic-invalidation-plan@1"
+    },
+    "version_bindings": {
+      "capsule_compiler_version": "1",
+      "semantic_capsule_schema": "ipfs-datasets.software-contracts.semantic-capsule@1",
+      "semantic_state_root_requires_matching_capsule_schema_and_compiler_version": true
+    },
+    "cid_profile": {
+      "profile_id": "software-contract-cid-profile-v1",
+      "profile_version": "1.0.0",
+      "cid_version": 1,
+      "base": "base32",
+      "multihash": "sha2-256",
+      "source_codec": "raw",
+      "structured_codec": "dag-json",
+      "case": "lowercase"
+    },
+    "assumption_guarantee_contract": {
+      "assumptions": [
+        "The candidate is a closed SemanticCapsule whose claimed capsule CID recomputes from its canonical identity payload.",
+        "The current state is a verified SemanticStateView with a closed SemanticStateRoot, matching capsule schema/compiler version, producer identity, relevant binding projection, and retrievable canonical capsule index/block.",
+        "Applicable invalidation obligations are provided and their reason/remediation classes are evaluated fail-closed."
+      ],
+      "guarantees": [
+        "A fresh exact capsule receives exact_substitute only when its index and canonical stored block reverify, producer and binding facts agree, and no blocking obligation applies.",
+        "A fresh conservative capsule may receive conservative_substitute_with_caveats only with visible caveats; is_safe_substitute preserves that caveat requirement.",
+        "Heuristic/opaque confidence, stale or unknown state, missing/corrupt/mismatched index or block, producer/schema/compiler/binding mismatch, and raw-source/full-fallback obligations yield raw_source_required or an input-validation failure; they cannot be admitted as exact substitutes."
+      ]
+    },
+    "determinism_and_closure": [
+      "CapsuleFreshness canonicalizes applicable obligation IDs and caveats as unique sorted tuples, and derives its assessment CID from its closed DAG-JSON identity payload.",
+      "The assessor re-verifies both the candidate capsule CID and the stored index/capsule blocks before admitting substitution.",
+      "AdmissionDecision is a closed three-value vocabulary: exact_substitute, conservative_substitute_with_caveats, and raw_source_required."
+    ],
+    "minimum_delta_reason": "Current-head source already supplies the exact versioned Python-v1 substitution authority and direct positive/negative coverage. Reimplementation under proof_context would duplicate canonical authority and violates this task's receipt-only declared output boundary."
+  },
+  "source_inventory": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/freshness.py",
+      "sha256": "3871a3d520993de1706582a674475711716286b8c39d059aea82e5625bdcdc05",
+      "git_blob": "789d777975dc07963b3ef2945b1a20de6e3e4d63",
+      "role": "sole CapsuleFreshness@1 assessment and fail-closed substitution admission implementation",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/models.py",
+      "sha256": "488fa256322807b895a3f7e277fef5b4d5dc6ac1f3619696a6c288340aae0586",
+      "git_blob": "b86dae240c3f90bc3de0967bd7cde14f795c53b4",
+      "role": "closed SemanticCapsule, CapsuleFreshness, invalidation, schema/version, and CID-bound identity models",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+      "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d",
+      "git_blob": "f2162e00dc4e6f17755463141cf153a02443d65a",
+      "role": "canonical SemanticCapsuleCompiler@1 producer whose capsules are assessed",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+      "sha256": "268ff6aab60e3a8a2e5e9719b637edfd1efb7bc50a4310bd4b1f2660b04cdfcc",
+      "git_blob": "234fea82b071c80f9f7ddc8b33909257cdf6400c",
+      "role": "relevant binding-projection authority assessed for substitution freshness",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "sha256": "89e1fbc694a67f751de3a62d8206442e4904722c20f81827ae0a96a0fbee33a3",
+      "git_blob": "14458fb99ea57c19652398ee479d678ae3fbe507",
+      "role": "strict CIDv1 raw and canonical DAG-JSON recomputation authority",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_freshness.py",
+      "sha256": "2546a6184093606d33b09bf2337becc86458ea858e85a0610f444cb14dde8e26",
+      "git_blob": "02f0ae56a16685b069dd3b10aeaaa6df799a7233",
+      "role": "direct positive and negative CapsuleFreshness substitution acceptance vectors",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_regressions.py",
+      "sha256": "4b92d06785bd60d853135dd29d65d1230d8433c835d3fb714dd224d7ea4b1458",
+      "git_blob": "847c041a6b937262b8897a35b684d2dfd6ea38ad",
+      "role": "cross-state regression coverage preserving raw-source fallback semantics",
+      "evidence_kind": "measured"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": {
+      "kind": "measured",
+      "positive_coverage": [
+        "Fresh exact capsules are admitted only as exact_substitute; their schema/compiler, producer, root, CID, and durable record round-trip are verified.",
+        "Fresh conservative capsules are admitted only as conservative_substitute_with_caveats and retain a visible confidence:conservative caveat.",
+        "Deterministic durable assessment records canonicalize and reverify their content-addressed identity."
+      ],
+      "negative_coverage": [
+        "Heuristic and opaque confidence, stale invalidation obligations, environment-lock and full-fallback obligations, index CID mismatch, missing index, missing/corrupt stored block, producer mismatch, and unsafe capsules require raw source.",
+        "Invalid capsule, state-view, and invalidation inputs raise FreshnessError rather than producing an admission.",
+        "No raw-source-required outcome is reported as safe substitution."
+      ]
+    },
+    "dedicated_authority_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_state/test_freshness.py",
+      "result": "14 passed in 0.53s",
+      "environment": "Provider Python 3.12.3 with the provider pytest/plugin set.",
+      "limitation": "This provider-environment result is simulated evidence only and does not replace sealed validation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed_same_nested_tree",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "519 passed in 78.27s on the bound external/ipfs_datasets commit 8b9c45106c0ace6107b8b90357a3ce71caf57584 and tree 6a186a24c424fdce0035033ebbf8a8476d96bbb7.",
+      "environment": "Provider Python 3.12.3 with pytest 9.1.1 and provider-installed plugins.",
+      "limitation": "The suite validates proof_context, not a PCSM current-source-map-bound substitution invocation, and provider execution cannot substitute for sealed validation."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "command_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm061-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited before collection with ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, profile-state reuse, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No approved digest-bound theorem prover deployment or PCSM-061 kernel-checkable prover obligation is present in the authoritative sealed environment. No theorem-prover success is inferred from the substitution evaluator."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; scheduler digest; clean/freshness checks; configured-origin ancestry; named source/test SHA-256 and Git blobs; versioned interfaces/schemas/CID profile; direct positive/negative test-source inventory; absence of a PCSM source-map artifact; and the sealed pytest capability failure.",
+    "estimated": "None. No estimate is used to establish substitution behavior, identity, CID binding, validation, or promotion.",
+    "simulated": "Dedicated CapsuleFreshness validation (14 passed in 0.53s) and required proof_context validation (519 passed in 78.27s) in the provider environment.",
+    "unavailable": "Authoritative sealed proof_context result due to missing anyio; PCSM SourceLinkReceipt/current aggregate source-map CID; formal-prover result; an actual PCSM current-forest substitution invocation; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It selects and validates existing current-head authority but does not modify proof_context or create a competing assumption-guarantee subsystem.",
+    "CapsuleFreshness establishes a conditional substitution decision for a supplied closed capsule and verified state view; it does not discover source identity, create semantic state, or establish whole-program semantic equivalence.",
+    "The required proof_context suite passed only in the provider environment. Its sealed equivalent is unavailable because anyio is absent, so this receipt cannot promote completion.",
+    "A current aggregate PCSM source-map CID is unavailable; no substitution invocation is claimed to bind an exact PCSM file/node/span forest.",
+    "No model output is accepted as evidence or mutation authority, and no M2/M3 mutation, generated-source mutation, automatic source materialization, or promotion is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head assumption-guarantee capability assessment. Do not alter the selected datasets source forest, protected policy documents, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, schema/version, CID profile, test input, or validation-environment capability change."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalents_reused_first": true,
+    "assumption_guarantee_capability_implemented": true,
+    "assumption_guarantee_capability_deterministic": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "provider_dedicated_authority_validation_passed": true,
+    "provider_required_validation_passed": true,
+    "authoritative_sealed_required_validation_passed": false,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_substitution_invocation_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_sealed_validation_and_pcsm_identity_binding"
+  }
+}
