@@ -1,0 +1,212 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-031",
+  "title": "Implement dependency and reverse-dependency slicing",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G300",
+  "objective_id": "PCSM-031",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-031@current-head-python-dependency-reverse-slicing-selection-v1",
+  "observed_at": "2026-08-28T06:29:48Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 deterministic dependency and reverse-dependency slicing over the current sealed code-evidence, semantic-dependency, objective, and impact-index authorities",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-031.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-031.json",
+    "implementation_delta": "The exact current-head datasets source forest already contains the sole selected Python-v1 slicing authority: dependency_closure, CodeEvidenceCorpusAdapter.dependency_query, impact_from_index, and CodeEvidenceCorpusAdapter.impact_query. They provide bounded forward dependency closure, bounded reverse dependent closure, deterministic canonical graph traversal, and reverse symbol/path impact with validation-target selection. This receipt selects and binds those existing authorities; it does not create a proof_context wrapper, second slicer, alternate graph/index schema, identity alias, source-map authority, or M2/M3 mutation.",
+    "non_promotion_reason": "The required proof_context suite cannot collect in the authoritative sealed Python 3.12 environment because its explicitly configured anyio pytest plugin is absent. Provider-side results are not substituted for sealed validation."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "Calculated approximation; no estimate establishes slicing behavior, identity, or test success.",
+    "simulated": "A deterministic execution outside the authoritative sealed environment; it never replaces sealed validation.",
+    "unavailable": "A required capability or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "a30f2324f5b3278c1e9614c1f34b3d6d5fdef157",
+    "outer_tree": "4402a256bbd5291c9e92444627016f736a6f0d3f",
+    "outer_subject": "Merge commit '94c874f53598fee5c30e431a41134e4ef4ab69c8' into agent/proof-carrying-semantic-minification-v1",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "a30f2324f5b3278c1e9614c1f34b3d6d5fdef157",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical Python code-evidence graph, semantic dependency graph, impact index, canonical JSON identity, and slicing authority"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for external/ipfs_datasets; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; porcelain status for both roots before receipt write; git -C external/ipfs_datasets merge-base --is-ancestor origin/main HEAD.",
+      "result": "The datasets nested HEAD equals the superproject gitlink; both roots were clean before receipt write; configured datasets origin/main 58ec3ab476ae8362b824934bb16f2507c21771a2 is an ancestor of the measured datasets HEAD.",
+      "invalidates_on": "Any changed outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, graph/index schema, graph/index identity profile, or dirty admitted root requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No emitted PCSM current-tree SourceLinkReceipt or canonical source-map CID exists. Git blob and source SHA-256 facts are not substituted for a PCSM source-map artifact."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "module": "ipfs_datasets_py.knowledge_graphs.adapters.code_evidence",
+    "entry_points": [
+      "dependency_closure(seed_ids, edges, direction, max_depth, max_nodes, max_edges, authoritative_only, edge_kinds) -> dict",
+      "CodeEvidenceCorpusAdapter.dependency_query(family, seed_ids, direction, max_depth, authoritative_only, edge_kinds) -> dict",
+      "impact_from_index(index, changed_symbols, changed_paths) -> dict",
+      "CodeEvidenceCorpusAdapter.impact_query(changed_symbols, changed_paths, include_evidence_reverse) -> dict"
+    ],
+    "schemas": {
+      "code_evidence_graph": "ipfs_accelerate_py.agent_supervisor.code-evidence-graph@1",
+      "semantic_dependency_graph": "supervisor_semantic_dependency_graph",
+      "code_impact_index": "ipfs_accelerate_py.agent_supervisor.code-impact-index@1",
+      "code_impact_result": "ipfs_accelerate_py.agent_supervisor.code-impact-result@1",
+      "dependency_query_result": "code-evidence-dependency-query/v1"
+    },
+    "version": "1",
+    "identity_and_determinism": [
+      "Graph and semantic-graph normalization sorts nodes and edges by their canonical identifiers before graph identities are derived; graph IDs are content identities over canonical payloads.",
+      "dependency_closure normalizes seeds by text and lexical sort, records shortest lexical tie-broken paths, returns sorted node IDs, paths, and depths, and is bounded by max_depth, max_nodes, and max_edges.",
+      "For reverse traversal, the selected authority follows target-to-source edges, producing dependents rather than falsely treating reverse impact as a forward dependency slice.",
+      "impact_from_index constructs reverse symbol and path maps, returns sorted affected symbols/paths and validation IDs, preserves dependency chains, and marks uncovered symbols or paths rather than silently claiming complete impact.",
+      "The query is identity-bound to the selected graph_id/root_id or impact index_id and repository_tree_id supplied by the canonical loaded artifact. No CID is claimed where the authority exposes a graph/index content identity instead."
+    ],
+    "fail_closed_invariants": [
+      "Invalid direction, negative bounds, empty seeds, max-edge overflow, and max-node overflow raise CodeEvidenceAdapterError.",
+      "authoritative_only excludes non-authoritative edges; edge_kinds restricts traversal to an explicit allowlist.",
+      "Missing, corrupt, checksum-mismatched, or forged graph artifacts fail before their graph/index can be selected for slicing.",
+      "Unknown changed symbols and paths remain explicitly uncovered_impact rather than being converted into a complete slice."
+    ],
+    "minimum_delta_reason": "Current-head source already supplies the exact versioned Python-v1 dependency, reverse-dependency, and impact slicing authority with direct integration coverage. Reimplementation under proof_context would duplicate canonical authority and violates this task's exact receipt-only declared output boundary."
+  },
+  "source_inventory": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/knowledge_graphs/adapters/code_evidence.py",
+      "sha256": "fa4b6bdecc05606dc301324b774c4629675ee1c6266b574770944fcb8f0064ca",
+      "git_blob": "519c4dccd666c7084444fd4ed22a9e0b00f7f508",
+      "role": "canonical graph normalization/identity, bounded dependency_closure, reverse impact_from_index, and public corpus adapter query interfaces",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
+      "sha256": "0e2ffacfad4c3b2dd5f6a25c934e0a8bd1feaf1ce993fa2174d9601d5bfc7c52",
+      "git_blob": "7a8cfa7f939d4f2154eb110fb0048bc89428b0fd",
+      "role": "direct positive dependency/reverse-impact vectors and fail-closed graph artifact vectors",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+      "sha256": "11f4eaaa22ba97fb612ef9e70300b31f06f216a7bd67fc0ad974e9cc5dcc0dba",
+      "git_blob": "c8dd932f7c4bcc26a0cae9e6bb9719158da64b6e",
+      "role": "required-suite consumer coverage for deterministic CID-bound context-pack behavior and stale/unavailable/opaque fail-closed handling",
+      "evidence_kind": "measured"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": [
+      {
+        "path": "external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
+        "evidence_kind": "measured",
+        "positive_coverage": [
+          "forward code-evidence dependency query returns the seed, reachable typed dependencies, schema, family, revision, and nonempty edges",
+          "reverse query starts from a symbol and reaches dependents through target-to-source traversal",
+          "reverse symbol/path impact reaches caller and downstream paths, selects validation IDs, and attaches the evidence reverse closure",
+          "path-only impact infers changed symbols and returns the reverse affected path closure"
+        ],
+        "negative_coverage": [
+          "missing graph artifact fails closed",
+          "corrupt graph artifact fails closed",
+          "checksum mismatch fails closed",
+          "forged node identity and unauthorized enrichment proof edges fail closed"
+        ]
+      },
+      {
+        "path": "provider inline dependency_closure probe",
+        "evidence_kind": "simulated",
+        "positive_coverage": [
+          "forward a->b->c and reverse c->b->a closure paths matched exactly"
+        ],
+        "negative_coverage": [
+          "invalid direction, negative bound, empty seeds, and max-node overflow each raised the required CodeEvidenceAdapterError"
+        ]
+      }
+    ],
+    "focused_authority_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
+      "result": "22 passed in 1.17s",
+      "limitation": "The provider environment is not substituted for sealed validation."
+    },
+    "inline_slicing_probe": {
+      "kind": "simulated",
+      "status": "passed",
+      "result": "dependency_closure_positive_and_negative=passed",
+      "assertions": "Verified exact forward/reverse chain paths and the invalid-direction, negative-bound, empty-seed, and max-node fail-closed errors.",
+      "limitation": "This small deterministic probe supplements, but does not replace, the source test suite or sealed validation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "519 tests collected; a completed repeat invocation exited 0.",
+      "limitation": "The provider Python environment is not the authoritative sealed environment."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM proof obligation or approved digest-bound prover deployment is present for this receipt-only authority selection."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and scheduler bindings; clean pre-write state; configured-origin ancestry; selected source/test SHA-256 and Git blobs; schema/version/identity declarations; direct source-test inventory; and the sealed pytest capability failure.",
+    "estimated": "None.",
+    "simulated": "Focused code-evidence integration validation (22 passed in 1.17s); explicit forward/reverse and negative closure probe; and the required provider proof_context suite (519 collected, completed repeat exited 0).",
+    "unavailable": "Authoritative sealed proof_context result due to missing anyio; PCSM SourceLinkReceipt/source-map CID; formal-prover result; a CID-native slice artifact (the selected graph/index authorities expose canonical content identities); and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it selects existing current-head canonical slicing and does not mutate proof_context or create a second slicer.",
+    "The authority is bounded static graph/index analysis. It does not establish whole-CPython runtime semantics, dynamic import/reflection/native behavior, generated-code correctness, or a PCSM source-link artifact.",
+    "Determinism is bound to canonically normalized, identity-checked graph/index artifacts; arbitrary caller-supplied unordered edge lists are not represented as a canonical authority artifact by this receipt.",
+    "All identities are valid only under the bound tree, source digests, schemas/version, identity profile, and exact test inputs; any change invalidates this receipt.",
+    "The authoritative sealed suite remains unavailable because anyio is absent, so this receipt cannot promote completion despite the provider-side passes.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this PCSM dependency/reverse-dependency slicing authority selection. Do not alter the selected datasets source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, graph/index schema, identity profile, slicing contract, or validation-environment capability changes."
+  }
+}
