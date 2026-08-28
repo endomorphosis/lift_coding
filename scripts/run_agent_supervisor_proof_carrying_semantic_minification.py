@@ -164,6 +164,10 @@ STALE_WORKTREE_CLEANUP_TRANSITION_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "proof-carrying-semantic-minification-stale-worktree-cleanup-transition@1"
 )
+VALIDATION_PATH_COMPATIBILITY_TRANSITION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "proof-carrying-semantic-minification-validation-path-compatibility-transition@1"
+)
 TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "typed-database-blocked-retry-recovery@1"
@@ -282,6 +286,13 @@ STALE_WORKTREE_CLEANUP_TRANSITION_PATH: Final = (
     / "handoff"
     / "supervisor-restart-stale-worktree-cleanup-transition.json"
 )
+VALIDATION_PATH_COMPATIBILITY_TRANSITION_PATH: Final = (
+    ROOT
+    / "artifacts"
+    / "proof_carrying_semantic_minification"
+    / "handoff"
+    / "supervisor-restart-validation-path-compatibility-transition.json"
+)
 STALE_WORKTREE_CLEANUP_TRANSITION_BASE_COMMIT: Final = (
     "8b8be83c6d9c578c4cec450092e140b929ce12e9"
 )
@@ -290,6 +301,21 @@ STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD: Final = (
 )
 STALE_WORKTREE_CLEANUP_ACCELERATOR_TREE: Final = (
     "067b308e8ff0fba4b9017f240ad774e6cdedd3cf"
+)
+VALIDATION_PATH_COMPATIBILITY_TRANSITION_BASE_COMMIT: Final = (
+    "PENDING_VALIDATION_PATH_COMPATIBILITY_TRANSITION_BASE_COMMIT"
+)
+VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD: Final = (
+    "a668ee23c76a69916d3214e7db07651d22f0dda1"
+)
+VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_TREE: Final = (
+    "5edcbd2baae9c38785a2832eedec6c893cc3c924"
+)
+VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD: Final = (
+    "8be57ea10aaf3d32897581f26523bb139d659a4c"
+)
+VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_TREE: Final = (
+    "c9b3e3d9acf2983465cf84f4f93e770a7444872d"
 )
 CURRENT_HEAD_BLOCKED_RETRY_REPAIR_BASE_COMMIT: Final = (
     "db9304284cfe857f08377ef756b4896192dd5111"
@@ -711,6 +737,31 @@ def _git(*arguments: str, check: bool = True, binary: bool = False) -> str | byt
             error = error.decode("utf-8", errors="replace")
         raise OperatorError(
             f"git {' '.join(arguments)} failed: {str(error).strip()}"
+        )
+    return completed.stdout
+
+
+def _git_in_repository(
+    repository: Path,
+    *arguments: str,
+    binary: bool = False,
+) -> str | bytes:
+    """Read one exact Git object or relationship from a bound repository."""
+
+    completed = subprocess.run(
+        ["git", *arguments],
+        cwd=repository,
+        capture_output=True,
+        text=not binary,
+        check=False,
+    )
+    if completed.returncode != 0:
+        error = completed.stderr or completed.stdout
+        if isinstance(error, bytes):
+            error = error.decode("utf-8", errors="replace")
+        raise OperatorError(
+            f"git {' '.join(arguments)} failed in {repository}: "
+            f"{str(error).strip()}"
         )
     return completed.stdout
 
@@ -1962,6 +2013,249 @@ def _verified_handoff_command_authority_verifier_repair(
     return payload
 
 
+def _validation_path_compatibility_transition_payload(
+    *,
+    current_head: str,
+) -> tuple[bytes, dict[str, Any]]:
+    """Load the exact add-only validation-path compatibility receipt."""
+
+    receipt_bytes = _tracked_bytes(
+        VALIDATION_PATH_COMPATIBILITY_TRANSITION_PATH,
+        head=current_head,
+    )
+    payload = _json_mapping_bytes(
+        receipt_bytes,
+        field="validation-path compatibility transition receipt",
+    )
+    required_fields = {
+        "schema",
+        "reason",
+        "prior_checkpoint",
+        "repair_base",
+        "sealed_source",
+        "validation_surface",
+        "validations",
+        "historical_receipts_preserved",
+        "database_authority_preserved",
+        "task_state_mutation",
+        "manual_database_mutation",
+        "receipt_id",
+    }
+    body = dict(payload)
+    receipt_id = str(body.pop("receipt_id", "") or "")
+    if (
+        set(payload) != required_fields
+        or payload.get("schema")
+        != VALIDATION_PATH_COMPATIBILITY_TRANSITION_SCHEMA
+        or payload.get("reason")
+        != "restore_declared_agent_supervisor_validation_path"
+        or not isinstance(payload.get("prior_checkpoint"), Mapping)
+        or not isinstance(payload.get("repair_base"), Mapping)
+        or not isinstance(payload.get("sealed_source"), Mapping)
+        or not isinstance(payload.get("validation_surface"), Mapping)
+        or not isinstance(payload.get("validations"), list)
+        or payload.get("historical_receipts_preserved") is not True
+        or payload.get("database_authority_preserved") is not True
+        or payload.get("task_state_mutation") is not False
+        or payload.get("manual_database_mutation") is not False
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", receipt_id) is None
+        or _identity(body) != receipt_id
+    ):
+        raise OperatorError(
+            "validation-path compatibility transition seal is invalid"
+        )
+    return receipt_bytes, payload
+
+
+def _verified_validation_path_compatibility_operator_descendant(
+    *,
+    current_operator: bytes,
+    current_head: str,
+    operator_path: Path,
+) -> dict[str, Any]:
+    """Admit only the placeholder-sealed operator and add-only receipt chain."""
+
+    base_commit = VALIDATION_PATH_COMPATIBILITY_TRANSITION_BASE_COMMIT
+    if re.fullmatch(r"[0-9a-f]{40}", base_commit) is None:
+        raise OperatorError(
+            "validation-path compatibility transition base is unsealed"
+        )
+    receipt_bytes, payload = _validation_path_compatibility_transition_payload(
+        current_head=current_head
+    )
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    if (
+        checkpoint.get("source_head")
+        != VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit")
+        != "9b056251a42aac444478745b3ccb73e3507215e8"
+        or checkpoint.get("stale_worktree_cleanup_transition_receipt_id")
+        != "sha256:4d86e1fa4452a720859175d2e228dd09f50f92159577154f96ade16cb6e5e0b7"
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD
+        or sealed_source.get("parent") != base_commit
+    ):
+        raise OperatorError(
+            "validation-path compatibility operator checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
+            field="validation-path compatibility checkpoint",
+        )
+        != VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_TREE
+        or _git_commit_tree(
+            base_commit,
+            field="validation-path compatibility repair base",
+        )
+        != repair_base.get("repository_tree_id")
+    ):
+        raise OperatorError(
+            "validation-path compatibility operator tree binding changed"
+        )
+
+    relative_operator = operator_path.relative_to(ROOT).as_posix()
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        relative_operator,
+        "test/test_pcsm_validation_path_compatibility_transition.py",
+    )
+    base_parents = str(
+        _git("show", "-s", "--format=%P", base_commit)
+    ).strip().split()
+    base_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD}..{base_commit}",
+            )
+        ).splitlines()
+        if line
+    )
+    base_operator = _git_blob_at(
+        head=base_commit,
+        path=operator_path,
+        field="validation-path compatibility base operator",
+    )
+    pending_base = (
+        "PENDING_" + "VALIDATION_PATH_COMPATIBILITY_TRANSITION_BASE_COMMIT"
+    ).encode("ascii")
+    expected_operator = base_operator.replace(
+        pending_base,
+        base_commit.encode("ascii"),
+        1,
+    )
+    sealed_head = str(sealed_source.get("source_head") or "")
+    sealed_tree = _git_commit_tree(
+        sealed_head,
+        field="validation-path compatibility sealed source",
+    )
+    sealed_parents = str(
+        _git("show", "-s", "--format=%P", sealed_head)
+    ).strip().split()
+    sealed_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{base_commit}..{sealed_head}")
+        ).splitlines()
+        if line
+    )
+    sealed_operator = _git_blob_at(
+        head=sealed_head,
+        path=operator_path,
+        field="validation-path compatibility sealed operator",
+    )
+    if (
+        base_parents
+        != [VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD]
+        or base_paths != expected_base_paths
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or repair_base.get("operator_identity") != _identity(base_operator)
+        or base_operator.count(pending_base) != 1
+        or sealed_source.get("repository_tree_id") != sealed_tree
+        or sealed_parents != [base_commit]
+        or sealed_paths != (relative_operator,)
+        or tuple(sealed_source.get("changed_paths") or ())
+        != (relative_operator,)
+        or sealed_source.get("operator_identity")
+        != _identity(expected_operator)
+        or sealed_operator != expected_operator
+        or current_operator != expected_operator
+    ):
+        raise OperatorError(
+            "validation-path compatibility operator delta changed"
+        )
+
+    receipt_relative = VALIDATION_PATH_COMPATIBILITY_TRANSITION_PATH.relative_to(
+        ROOT
+    ).as_posix()
+    additions = tuple(
+        line
+        for line in str(
+            _git(
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                receipt_relative,
+            )
+        ).splitlines()
+        if line
+    )
+    if len(additions) != 1:
+        raise OperatorError(
+            "validation-path compatibility receipt introduction is not exact"
+        )
+    artifact_commit = additions[0]
+    artifact_parents = str(
+        _git("show", "-s", "--format=%P", artifact_commit)
+    ).strip().split()
+    artifact_paths = tuple(
+        line
+        for line in str(
+            _git("diff", "--name-only", f"{sealed_head}..{artifact_commit}")
+        ).splitlines()
+        if line
+    )
+    if (
+        artifact_parents != [sealed_head]
+        or artifact_paths != (receipt_relative,)
+        or _git_blob_at(
+            head=artifact_commit,
+            path=VALIDATION_PATH_COMPATIBILITY_TRANSITION_PATH,
+            field="introduced validation-path compatibility receipt",
+        )
+        != receipt_bytes
+    ):
+        raise OperatorError(
+            "validation-path compatibility artifact commit changed"
+        )
+    _git_is_ancestor(
+        artifact_commit,
+        current_head,
+        field="validation-path compatibility artifact-to-current lineage",
+    )
+    return {
+        "receipt": payload,
+        "receipt_bytes": receipt_bytes,
+        "artifact_commit": artifact_commit,
+        "base_commit": base_commit,
+        "base_operator": base_operator,
+        "sealed_source_head": sealed_head,
+        "sealed_source_tree": sealed_tree,
+        "expected_operator": expected_operator,
+    }
+
+
 def _verified_bootstrap_broker_operator_descendant(
     *,
     expected_historical_operator: bytes,
@@ -1970,7 +2264,7 @@ def _verified_bootstrap_broker_operator_descendant(
     current_head: str,
     operator_path: Path,
 ) -> None:
-    """Bind the blocked-retry seal and its one admitted operator successor."""
+    """Bind the blocked-retry seal and its admitted operator successors."""
 
     descendant = _json_mapping_bytes(
         _tracked_bytes(
@@ -2107,7 +2401,6 @@ def _verified_bootstrap_broker_operator_descendant(
         or transition_seal.get("operator_identity")
         != _identity(expected_transition_operator)
         or transition_operator != expected_transition_operator
-        or current_operator != expected_transition_operator
     ):
         raise OperatorError("PCSM stale-worktree cleanup operator delta changed")
     _git_is_ancestor(
@@ -2115,6 +2408,17 @@ def _verified_bootstrap_broker_operator_descendant(
         current_head,
         field="stale-worktree cleanup operator descendant lineage",
     )
+    if current_operator != expected_transition_operator:
+        try:
+            _verified_validation_path_compatibility_operator_descendant(
+                current_operator=current_operator,
+                current_head=current_head,
+                operator_path=operator_path,
+            )
+        except OperatorError as exc:
+            raise OperatorError(
+                "PCSM stale-worktree cleanup operator delta changed"
+            ) from exc
 
 
 def _verified_bootstrap_broker_resilience_repair(
@@ -3414,16 +3718,33 @@ def _verified_stale_worktree_cleanup_transition(
     current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
     current_operator = _tracked_bytes(operator_path, head=current_head)
     current_validator = _tracked_bytes(validator_path, head=current_head)
-    if (
-        _canonical_bytes(current_config) != _canonical_bytes(base_config)
-        or current_config_bytes != base_config_bytes
-        or current_operator != expected_operator
-        or current_validator != base_validator
-        or current_source_identities.get("config") != _identity(base_config_bytes)
-        or current_source_identities.get("operator") != _identity(expected_operator)
-        or current_source_identities.get("validator") != _identity(base_validator)
-    ):
-        raise OperatorError("stale-worktree cleanup live source changed")
+    exact_cleanup_source = bool(
+        _canonical_bytes(current_config) == _canonical_bytes(base_config)
+        and current_config_bytes == base_config_bytes
+        and current_operator == expected_operator
+        and current_validator == base_validator
+        and current_source_identities.get("config")
+        == _identity(base_config_bytes)
+        and current_source_identities.get("operator")
+        == _identity(expected_operator)
+        and current_source_identities.get("validator")
+        == _identity(base_validator)
+    )
+    validation_path_transition: dict[str, Any] = {}
+    if not exact_cleanup_source:
+        validation_path_transition = (
+            _verified_validation_path_compatibility_transition(
+                board=board,
+                current_head=current_head,
+                current_config=current_config,
+                current_source_identities=current_source_identities,
+                prior_artifact_commit=artifact_commit,
+                prior_transition_receipt_id=receipt_id,
+                prior_config_bytes=base_config_bytes,
+                prior_operator_bytes=expected_operator,
+                prior_validator_bytes=base_validator,
+            )
+        )
     return {
         "receipt": payload,
         "artifact_commit": artifact_commit,
@@ -3431,6 +3752,562 @@ def _verified_stale_worktree_cleanup_transition(
         "sealed_source_tree": sealed_tree,
         "accelerator_head": STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD,
         "accelerator_tree": STALE_WORKTREE_CLEANUP_ACCELERATOR_TREE,
+        "validation_path_compatibility_transition": validation_path_transition,
+    }
+
+
+def _verified_validation_path_compatibility_transition(
+    *,
+    board: Any,
+    current_head: str,
+    current_config: Mapping[str, Any],
+    current_source_identities: Mapping[str, str],
+    prior_artifact_commit: str,
+    prior_transition_receipt_id: str,
+    prior_config_bytes: bytes,
+    prior_operator_bytes: bytes,
+    prior_validator_bytes: bytes,
+) -> dict[str, Any]:
+    """Admit one exact restoration of the declared supervisor test path."""
+
+    operator_path = Path(__file__).resolve()
+    operator_gate = _verified_validation_path_compatibility_operator_descendant(
+        current_operator=_tracked_bytes(operator_path, head=current_head),
+        current_head=current_head,
+        operator_path=operator_path,
+    )
+    payload = operator_gate["receipt"]
+    checkpoint = payload["prior_checkpoint"]
+    repair_base = payload["repair_base"]
+    sealed_source = payload["sealed_source"]
+    validation_surface = payload["validation_surface"]
+    validations = payload["validations"]
+
+    checkpoint_fields = {
+        "source_head",
+        "repository_tree_id",
+        "prior_artifact_commit",
+        "stale_worktree_cleanup_transition_receipt_id",
+        "changed_receipts",
+    }
+    expected_checkpoint_receipts = [
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-020.json"
+            ),
+            "bytes_id": (
+                "sha256:88c0bfe17eed6e9f01cc9d14832f8d23de31e436ab31a8e0"
+                "a3d732f59a10b695"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-021.json"
+            ),
+            "bytes_id": (
+                "sha256:6a4a3a64ddc6ed552a3c3fcecf5931ec3a396e02c91a813a"
+                "8e793341ae071127"
+            ),
+        },
+        {
+            "path": (
+                "artifacts/proof_carrying_semantic_minification/receipts/"
+                "PCSM-022.json"
+            ),
+            "bytes_id": (
+                "sha256:b7fe0f17fcc708f1e09f65de233c00b4019f037b08937502a"
+                "2fcc88dd67b14d2"
+            ),
+        },
+    ]
+    if (
+        set(checkpoint) != checkpoint_fields
+        or checkpoint.get("source_head")
+        != VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD
+        or checkpoint.get("repository_tree_id")
+        != VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_TREE
+        or checkpoint.get("prior_artifact_commit") != prior_artifact_commit
+        or prior_artifact_commit
+        != "9b056251a42aac444478745b3ccb73e3507215e8"
+        or checkpoint.get("stale_worktree_cleanup_transition_receipt_id")
+        != prior_transition_receipt_id
+        or prior_transition_receipt_id
+        != "sha256:4d86e1fa4452a720859175d2e228dd09f50f92159577154f96ade16cb6e5e0b7"
+        or checkpoint.get("changed_receipts")
+        != expected_checkpoint_receipts
+    ):
+        raise OperatorError(
+            "validation-path compatibility prior checkpoint changed"
+        )
+    if (
+        _git_commit_tree(
+            VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
+            field="validation-path compatibility checkpoint",
+        )
+        != VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_TREE
+    ):
+        raise OperatorError(
+            "validation-path compatibility checkpoint tree changed"
+        )
+    _git_is_ancestor(
+        prior_artifact_commit,
+        VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
+        field="cleanup artifact-to-validation checkpoint lineage",
+    )
+    expected_checkpoint_paths = tuple(
+        item["path"] for item in expected_checkpoint_receipts
+    )
+    checkpoint_paths = tuple(
+        line
+        for line in str(
+            _git(
+                "diff",
+                "--name-only",
+                f"{prior_artifact_commit}.."
+                f"{VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    if checkpoint_paths != expected_checkpoint_paths:
+        raise OperatorError(
+            "validation-path compatibility checkpoint source delta changed"
+        )
+    for item in expected_checkpoint_receipts:
+        path = ROOT / item["path"]
+        if (
+            _identity(
+                _git_blob_at(
+                    head=VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
+                    path=path,
+                    field=f"validation checkpoint receipt {item['path']}",
+                )
+            )
+            != item["bytes_id"]
+        ):
+            raise OperatorError(
+                "validation-path compatibility checkpoint receipt changed"
+            )
+
+    validator_path = board.path(board.validator_path)
+    checkpoint_config = _git_blob_at(
+        head=VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
+        path=board.config_path,
+        field="validation-path compatibility checkpoint config",
+    )
+    checkpoint_operator = _git_blob_at(
+        head=VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
+        path=operator_path,
+        field="validation-path compatibility checkpoint operator",
+    )
+    checkpoint_validator = _git_blob_at(
+        head=VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
+        path=validator_path,
+        field="validation-path compatibility checkpoint validator",
+    )
+    if (
+        checkpoint_config != prior_config_bytes
+        or checkpoint_operator != prior_operator_bytes
+        or checkpoint_validator != prior_validator_bytes
+        or _identity(checkpoint_config)
+        != "sha256:5f4222672c5da4a409fdd8428d8de588126848a986dbd4a8ec0ff9435bb0000a"
+        or _identity(checkpoint_operator)
+        != "sha256:c6fcfa916619bd6692f0299d9988671ae67c1e83c4bb45640d3c84218534bf72"
+        or _identity(checkpoint_validator)
+        != "sha256:57e3b957019ef0ee20cee5d2f50a7bfb5b1172ea8ee04db89a3426d28a290e89"
+    ):
+        raise OperatorError(
+            "validation-path compatibility checkpoint authority changed"
+        )
+
+    base_commit = str(operator_gate["base_commit"])
+    expected_base_paths = (
+        "config/proof_carrying_semantic_minification_v1_supervisor.json",
+        "external/ipfs_accelerate",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+        "test/test_pcsm_validation_path_compatibility_transition.py",
+    )
+    expected_nested_paths = (
+        "ipfs_accelerate_py/agent_supervisor/tests/"
+        "proof_carrying_semantic_minification/test_structured_decoding.py",
+        "test/agent_supervisor/pcsm",
+    )
+    repair_base_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "config_identity",
+        "validator_identity",
+        "accelerator_head",
+        "accelerator_tree",
+        "changed_paths",
+        "nested_changed_paths",
+    }
+    base_config_bytes = _git_blob_at(
+        head=base_commit,
+        path=board.config_path,
+        field="validation-path compatibility base config",
+    )
+    base_config = _json_mapping_bytes(
+        base_config_bytes,
+        field="validation-path compatibility base config",
+    )
+    base_validator = _git_blob_at(
+        head=base_commit,
+        path=validator_path,
+        field="validation-path compatibility base validator",
+    )
+    if (
+        set(repair_base) != repair_base_fields
+        or repair_base.get("source_head") != base_commit
+        or repair_base.get("parent")
+        != VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD
+        or repair_base.get("operator_identity")
+        != _identity(operator_gate["base_operator"])
+        or repair_base.get("config_identity") != _identity(base_config_bytes)
+        or repair_base.get("validator_identity") != _identity(base_validator)
+        or repair_base.get("accelerator_head")
+        != VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD
+        or repair_base.get("accelerator_tree")
+        != VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_TREE
+        or tuple(repair_base.get("changed_paths") or ())
+        != expected_base_paths
+        or tuple(repair_base.get("nested_changed_paths") or ())
+        != expected_nested_paths
+        or base_validator != prior_validator_bytes
+    ):
+        raise OperatorError(
+            "validation-path compatibility repair base changed"
+        )
+
+    prior_config = _json_mapping_bytes(
+        prior_config_bytes,
+        field="validation-path compatibility prior config",
+    )
+    expected_config = json.loads(_canonical_bytes(prior_config))
+    expected_binding = expected_config.get("source_binding")
+    if not isinstance(expected_binding, dict):
+        raise OperatorError(
+            "validation-path compatibility source binding is absent"
+        )
+    expected_binding["ipfs_accelerate_planning_revision"] = (
+        VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD
+    )
+    expected_binding["ipfs_accelerate_planning_tree"] = (
+        VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_TREE
+    )
+    if base_config != expected_config:
+        raise OperatorError(
+            "validation-path compatibility config delta changed"
+        )
+
+    base_gitlink = str(
+        _git("ls-tree", base_commit, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        len(base_gitlink) < 3
+        or base_gitlink[:2] != ["160000", "commit"]
+        or base_gitlink[2]
+        != VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "validation-path compatibility accelerator gitlink changed"
+        )
+
+    accelerator_repository = ROOT / "external/ipfs_accelerate"
+    if (
+        _git_commit_tree(
+            VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD,
+            field="validation-path compatibility accelerator",
+            repository=accelerator_repository,
+        )
+        != VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_TREE
+    ):
+        raise OperatorError(
+            "validation-path compatibility accelerator tree changed"
+        )
+    nested_parents = str(
+        _git_in_repository(
+            accelerator_repository,
+            "show",
+            "-s",
+            "--format=%P",
+            VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD,
+        )
+    ).strip().split()
+    nested_paths = tuple(
+        line
+        for line in str(
+            _git_in_repository(
+                accelerator_repository,
+                "diff",
+                "--name-only",
+                f"{STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD}.."
+                f"{VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD}",
+            )
+        ).splitlines()
+        if line
+    )
+    bridge_path = "test/agent_supervisor/pcsm"
+    product_root = (
+        "ipfs_accelerate_py/agent_supervisor/tests/"
+        "proof_carrying_semantic_minification"
+    )
+    product_module = f"{product_root}/test_structured_decoding.py"
+    bridge_entry = str(
+        _git_in_repository(
+            accelerator_repository,
+            "ls-tree",
+            VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD,
+            "--",
+            bridge_path,
+        )
+    ).strip().split(maxsplit=3)
+    bridge_parent_entry = str(
+        _git_in_repository(
+            accelerator_repository,
+            "ls-tree",
+            VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD,
+            "--",
+            "test/agent_supervisor",
+        )
+    ).strip().split(maxsplit=3)
+    product_root_entry = str(
+        _git_in_repository(
+            accelerator_repository,
+            "ls-tree",
+            VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD,
+            "--",
+            product_root,
+        )
+    ).strip().split(maxsplit=3)
+    product_module_entry = str(
+        _git_in_repository(
+            accelerator_repository,
+            "ls-tree",
+            VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD,
+            "--",
+            product_module,
+        )
+    ).strip().split(maxsplit=3)
+    bridge_bytes = _git_in_repository(
+        accelerator_repository,
+        "show",
+        f"{VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD}:{bridge_path}",
+        binary=True,
+    )
+    product_module_bytes = _git_in_repository(
+        accelerator_repository,
+        "show",
+        f"{VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD}:{product_module}",
+        binary=True,
+    )
+    expected_bridge_target = (
+        b"../../ipfs_accelerate_py/agent_supervisor/tests/"
+        b"proof_carrying_semantic_minification"
+    )
+    if (
+        nested_parents != [STALE_WORKTREE_CLEANUP_ACCELERATOR_HEAD]
+        or nested_paths != expected_nested_paths
+        or bridge_parent_entry[:2] != ["040000", "tree"]
+        or bridge_parent_entry[3:] != ["test/agent_supervisor"]
+        or bridge_entry
+        != [
+            "120000",
+            "blob",
+            "302b67f7129dcafc103c6414e027f8b67f541b0d",
+            bridge_path,
+        ]
+        or bridge_bytes != expected_bridge_target
+        or product_root_entry[:2] != ["040000", "tree"]
+        or product_root_entry[3:] != [product_root]
+        or product_module_entry
+        != [
+            "100644",
+            "blob",
+            "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+            product_module,
+        ]
+        or not isinstance(product_module_bytes, bytes)
+        or not product_module_bytes
+    ):
+        raise OperatorError(
+            "validation-path compatibility nested path contract changed"
+        )
+
+    sealed_fields = {
+        "source_head",
+        "repository_tree_id",
+        "parent",
+        "operator_identity",
+        "changed_paths",
+    }
+    if (
+        set(sealed_source) != sealed_fields
+        or sealed_source.get("source_head")
+        != operator_gate["sealed_source_head"]
+        or sealed_source.get("repository_tree_id")
+        != operator_gate["sealed_source_tree"]
+        or sealed_source.get("parent") != base_commit
+        or sealed_source.get("operator_identity")
+        != _identity(operator_gate["expected_operator"])
+        or tuple(sealed_source.get("changed_paths") or ())
+        != ("scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",)
+    ):
+        raise OperatorError(
+            "validation-path compatibility sealed source changed"
+        )
+
+    expected_validation_surface = {
+        "declared_command": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/agent_supervisor",
+        ],
+        "declared_path": "external/ipfs_accelerate/test/agent_supervisor",
+        "nested_bridge_path": "test/agent_supervisor/pcsm",
+        "nested_bridge_kind": "relative_directory_symlink",
+        "nested_bridge_target": (
+            "../../ipfs_accelerate_py/agent_supervisor/tests/"
+            "proof_carrying_semantic_minification"
+        ),
+        "product_test_root": product_root,
+        "minimum_collected_tests": 11,
+        "taskboard_validation_changed": False,
+        "generator_validation_changed": False,
+    }
+    if dict(validation_surface) != expected_validation_surface:
+        raise OperatorError(
+            "validation-path compatibility validation surface changed"
+        )
+    required_validations = {
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "external/ipfs_accelerate/test/agent_supervisor",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "-m",
+                "pytest",
+                "-q",
+                "test/test_pcsm_validation_path_compatibility_transition.py",
+            ),
+        ),
+        (
+            ".",
+            (
+                "python",
+                "scripts/validate_proof_carrying_semantic_minification_board.py",
+                "--check-all",
+            ),
+        ),
+    }
+    observed_validations: set[tuple[str, tuple[str, ...]]] = set()
+    declared_validation_summary = ""
+    for validation in validations:
+        if not isinstance(validation, Mapping) or set(validation) != {
+            "cwd",
+            "command",
+            "outcome",
+            "summary",
+        }:
+            raise OperatorError(
+                "validation-path compatibility validation is malformed"
+            )
+        command = validation.get("command")
+        summary = validation.get("summary")
+        if (
+            not isinstance(command, list)
+            or any(not isinstance(item, str) or not item for item in command)
+            or validation.get("outcome") != "passed"
+            or not isinstance(summary, str)
+            or not summary
+        ):
+            raise OperatorError(
+                "validation-path compatibility validation did not pass"
+            )
+        observed = (str(validation.get("cwd") or ""), tuple(command))
+        observed_validations.add(observed)
+        if command == expected_validation_surface["declared_command"]:
+            declared_validation_summary = summary
+    if (
+        len(validations) != len(required_validations)
+        or observed_validations != required_validations
+        or re.search(r"\b11 passed\b", declared_validation_summary) is None
+    ):
+        raise OperatorError(
+            "validation-path compatibility validations are incomplete"
+        )
+
+    current_config_bytes = _tracked_bytes(board.config_path, head=current_head)
+    current_operator = _tracked_bytes(operator_path, head=current_head)
+    current_validator = _tracked_bytes(validator_path, head=current_head)
+    transition_test_path = (
+        ROOT / "test/test_pcsm_validation_path_compatibility_transition.py"
+    )
+    current_gitlink = str(
+        _git("ls-tree", current_head, "--", "external/ipfs_accelerate")
+    ).strip().split()
+    if (
+        current_config_bytes != base_config_bytes
+        or _canonical_bytes(current_config) != _canonical_bytes(base_config)
+        or current_operator != operator_gate["expected_operator"]
+        or current_validator != base_validator
+        or _tracked_bytes(transition_test_path, head=current_head)
+        != _git_blob_at(
+            head=base_commit,
+            path=transition_test_path,
+            field="validation-path compatibility focused test",
+        )
+        or current_source_identities.get("config")
+        != _identity(base_config_bytes)
+        or current_source_identities.get("operator")
+        != _identity(operator_gate["expected_operator"])
+        or current_source_identities.get("validator")
+        != _identity(base_validator)
+        or len(current_gitlink) < 3
+        or current_gitlink[:2] != ["160000", "commit"]
+        or current_gitlink[2]
+        != VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD
+    ):
+        raise OperatorError(
+            "validation-path compatibility live source changed"
+        )
+    source_paths = _restart_source_paths(board)
+    for name in ("taskboard", "objectives", "plan", "generator"):
+        checkpoint_bytes = _git_blob_at(
+            head=VALIDATION_PATH_COMPATIBILITY_CHECKPOINT_HEAD,
+            path=source_paths[name],
+            field=f"validation-path checkpoint {name}",
+        )
+        current_bytes = _tracked_bytes(source_paths[name], head=current_head)
+        if (
+            current_bytes != checkpoint_bytes
+            or current_source_identities.get(name) != _identity(current_bytes)
+        ):
+            raise OperatorError(
+                "validation-path compatibility changed immutable authority"
+            )
+    return {
+        "receipt": payload,
+        "artifact_commit": operator_gate["artifact_commit"],
+        "sealed_source_head": operator_gate["sealed_source_head"],
+        "sealed_source_tree": operator_gate["sealed_source_tree"],
+        "accelerator_head": VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_HEAD,
+        "accelerator_tree": VALIDATION_PATH_COMPATIBILITY_ACCELERATOR_TREE,
     }
 
 
@@ -4255,6 +5132,22 @@ def _owner_restart_admission(
         if isinstance(cleanup_transition_receipt, Mapping)
         else {}
     )
+    validation_path_transition = cleanup_transition.get(
+        "validation_path_compatibility_transition"
+    )
+    validation_path_transition = (
+        validation_path_transition
+        if isinstance(validation_path_transition, Mapping)
+        else {}
+    )
+    validation_path_transition_receipt = validation_path_transition.get(
+        "receipt"
+    )
+    validation_path_transition_receipt = (
+        validation_path_transition_receipt
+        if isinstance(validation_path_transition_receipt, Mapping)
+        else {}
+    )
     admission: dict[str, Any] = {
         "schema": OWNER_RESTART_ADMISSION_SCHEMA,
         "mode": admission_mode,
@@ -4286,6 +5179,9 @@ def _owner_restart_admission(
         ),
         "stale_worktree_cleanup_transition_receipt_id": str(
             cleanup_transition_receipt.get("receipt_id") or ""
+        ),
+        "validation_path_compatibility_transition_receipt_id": str(
+            validation_path_transition_receipt.get("receipt_id") or ""
         ),
         "current_head_descendant_repair": descendant_repair,
         "database_authority": {
@@ -5997,6 +6893,12 @@ def _owner_restart_receipt(
         ),
         "stale_worktree_cleanup_transition_receipt_id": str(
             admission.get("stale_worktree_cleanup_transition_receipt_id") or ""
+        ),
+        "validation_path_compatibility_transition_receipt_id": str(
+            admission.get(
+                "validation_path_compatibility_transition_receipt_id"
+            )
+            or ""
         ),
         "max_task_attempts_before": int(
             admission.get("max_task_attempts_before") or 0
