@@ -29,7 +29,6 @@ import time
 from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
 from pathlib import Path
-from types import MappingProxyType
 from typing import Any, Final
 
 ROOT: Final = Path(__file__).resolve().parents[3]
@@ -847,16 +846,14 @@ def _start_owner(board: Any, paths: Mapping[str, Path], *, timeout: float) -> di
 
 
 def _serve_state_owner(config_path: Path) -> dict[str, Any]:
-    """Run the existing QuackStateServer with the pinned beta API adapter.
+    """Run the existing QuackStateServer's reviewed real transport path.
 
-    The generic state-owner opens its DuckDB connection with the ordinary
-    supervisor policy, which intentionally disables external access and locks
-    the configuration before ``LOAD quack``.  Quack 1.5.5 therefore rejects
-    the load with ``PermissionException``.  This bounded adapter changes only
-    the owner connection/serve call: it loads the already-installed, sealed
-    Quack extension before serving a loopback-only endpoint.  The existing
-    server still owns migration, lease/fence, token vault, status, identity,
-    stop, and cleanup semantics.
+    The authoritative writer remains external-access-disabled.  The state
+    server checkpoints it into a verified read-only replica and loads the
+    already-qualified Quack/httpfs extensions only on that transport replica.
+    Mutation results therefore carry the exact fresh-replica proof required by
+    remote clients instead of the deliberately non-admissible injected-test
+    observation.
     """
 
     board, _payload = _load_board(config_path)
@@ -869,73 +866,8 @@ def _serve_state_owner(config_path: Path) -> dict[str, Any]:
 
     _ensure_import_path()
     from ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server import (
-        InProcessQuackTransport,
         build_server,
-        listen_uri,
     )
-    from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
-        DuckDBConnection,
-    )
-
-    def owner_connection(path: Path) -> Any:
-        import duckdb
-
-        raw = duckdb.connect(
-            str(path),
-            config={
-                "autoinstall_known_extensions": "false",
-                "autoload_known_extensions": "false",
-                "allow_unsigned_extensions": "false",
-            },
-        )
-        try:
-            # Quack's HTTP request path lazily needs the installed core
-            # ``httpfs`` extension. Autoload stays disabled, so load that
-            # exact local dependency explicitly before starting Quack.
-            raw.execute("LOAD httpfs")
-            raw.execute("LOAD quack")
-        except BaseException:
-            raw.close()
-            raise
-        return DuckDBConnection.wrap(raw)
-
-    class LoopbackQuackTransport(InProcessQuackTransport):
-        def start(
-            self,
-            connection: Any,
-            *,
-            host: str,
-            port: int,
-            token: str,
-            identity: Any,
-        ) -> Mapping[str, Any]:
-            uri = listen_uri(host, port)
-            connection.execute(
-                "SELECT * FROM quack_serve(?, token := ?, "
-                "allow_other_hostname := false, disable_ssl := true)",
-                [uri, token],
-            )
-            self._started = True
-            self._listen_uri = uri
-            self._server_identity = {
-                "server_id": identity.server_id,
-                "store_id": identity.store_id,
-                "database_uuid": identity.database_uuid,
-                "schema_revision": identity.schema_revision,
-                "schema_fingerprint": identity.schema_fingerprint,
-                "generation": identity.generation,
-                "process_birth_id": identity.process_birth_id,
-                "listen_uri": uri,
-            }
-            return MappingProxyType(dict(self._server_identity))
-
-        def stop(self, connection: Any | None = None) -> None:
-            if connection is not None:
-                try:
-                    connection.execute("SELECT quack_stop()")
-                except Exception:
-                    pass
-            super().stop(connection)
 
     for item in (paths["runtime"], paths["state"], paths["logs"], paths["owner"]):
         _private_directory(item)
@@ -947,8 +879,6 @@ def _serve_state_owner(config_path: Path) -> dict[str, Any]:
         repository_id=f"repository:{PROGRAM_ID}",
         store_id=str(program.store_id),
         secret_handle=str(program.endpoint_secret_handle),
-        transport=LoopbackQuackTransport(),
-        connection_factory=owner_connection,
     )
     identity = server.start()
     stop_requested = {"value": False}
