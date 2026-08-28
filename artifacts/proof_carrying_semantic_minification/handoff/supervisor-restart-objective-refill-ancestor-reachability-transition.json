@@ -1,0 +1,133 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-carrying-semantic-minification-objective-refill-ancestor-reachability-transition@1",
+  "reason": "repair_ancestor_generator_reachability",
+  "prior_checkpoint": {
+    "source_head": "624cdc178df4305628c236b823853a030898ed99",
+    "repository_tree_id": "4261e0ee6a5a81166ff203d4f5967f55fe055132",
+    "objective_refill_fail_closed_transition_receipt_id": "sha256:9f4a00ddb4196db034ca9eb1729ccc3ae4a1f62a8d97cfaf312b1f84ab6e3c55",
+    "objective_refill_fail_closed_transition_receipt_bytes_id": "sha256:0c29b51a34c03d932d5498e08a9441acfd48087c30a132989773ad906410ed96"
+  },
+  "repair_base": {
+    "source_head": "29584e3b4d13c86c38bdb12b9776082c974e7935",
+    "repository_tree_id": "a517370ad077cc90e89f37351e1d6b424fdb87b1",
+    "parent": "624cdc178df4305628c236b823853a030898ed99",
+    "operator_identity": "sha256:dff5e4439c7312c19cea2905eace670506cd747f346b70500609522d97a1e99d",
+    "test_identity": "sha256:8151a0473440459e04d88d6ff06a174b7918d0b98dcd02d900f0514cd23f3529",
+    "changed_paths": [
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "test/test_pcsm_objective_refill_ancestor_reachability_transition.py"
+    ],
+    "changed_status": [
+      "M\tscripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "A\ttest/test_pcsm_objective_refill_ancestor_reachability_transition.py"
+    ]
+  },
+  "sealed_source": {
+    "source_head": "254c9129f2c55050506aca0d161b49edcec1baa4",
+    "repository_tree_id": "54f642028843c20a54ecbb6b6486e34bc228320b",
+    "parent": "29584e3b4d13c86c38bdb12b9776082c974e7935",
+    "operator_identity": "sha256:95825a218614afbceb63d03e66e4c838c0f08ac5b7d80a65ac3676d63c035508",
+    "changed_paths": [
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+    ],
+    "changed_status": [
+      "M\tscripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+    ]
+  },
+  "reachability_contract": {
+    "affected_ancestor_transitions": [
+      "validation_path_compatibility_transition",
+      "database_watchdog_activity_transition",
+      "database_lifecycle_identity_transition",
+      "supervisor_callback_continuity_transition"
+    ],
+    "unconditional_immutable_source_names": [
+      "taskboard",
+      "objectives",
+      "plan"
+    ],
+    "generator_without_verified_child_disposition": "require_predecessor_checkpoint_bytes",
+    "generator_with_verified_child_disposition": "delegate_to_exact_descendant_transition",
+    "generator_only_unsealed_drift_disposition": "fail_closed",
+    "objective_refill_fail_closed_transition_receipt_id": "sha256:9f4a00ddb4196db034ca9eb1729ccc3ae4a1f62a8d97cfaf312b1f84ab6e3c55"
+  },
+  "validations": [
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_objective_refill_ancestor_reachability_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "17 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test/test_pcsm_objective_refill_fail_closed_transition.py"
+      ],
+      "outcome": "passed",
+      "summary": "13 passed"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "-m",
+        "py_compile",
+        "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "python",
+        "scripts/validate_proof_carrying_semantic_minification_board.py",
+        "--check-all"
+      ],
+      "outcome": "passed",
+      "summary": "valid board: 70 tasks, 11 goals, 96 packages"
+    },
+    {
+      "cwd": ".",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "624cdc178df4305628c236b823853a030898ed99..29584e3b4d13c86c38bdb12b9776082c974e7935"
+      ],
+      "outcome": "passed",
+      "summary": "clean"
+    }
+  ],
+  "post_integration_canonical_validation": {
+    "condition": "artifact_commit_integrated_on_configured_merge_target_branch_with_stopped_materialized_authority",
+    "cwd": ".",
+    "command": [
+      "python",
+      "scripts/run_agent_supervisor_proof_carrying_semantic_minification.py",
+      "launch-supervisor",
+      "--dry-run"
+    ],
+    "pre_integration_outcome": "not_run_branch_and_materialization_gated",
+    "required_outcome": "passed",
+    "runtime_launch": false,
+    "authority_mutation": false
+  },
+  "historical_receipts_preserved": true,
+  "objective_refill_fail_closed_receipt_preserved": true,
+  "database_authority_preserved": true,
+  "task_state_mutation": false,
+  "manual_database_mutation": false,
+  "manual_worktree_mutation": false,
+  "receipt_id": "sha256:bc4fd7753403e1f618d20315182687cf703c1773318762b9960a97ed5e37306d"
+}
