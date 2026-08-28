@@ -1,0 +1,277 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-024",
+  "title": "Implement read/write/call/effect summaries",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G300",
+  "objective_id": "PCSM-024",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-024@current-head-python-read-write-call-effect-summary-selection-v1",
+  "observed_at": "2026-08-28T05:05:16Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 current-head bounded read/write/call/effect summary authority selection",
+    "language": "Python",
+    "language_version": "3.12",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-024.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-024.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "implementation_delta": "The current datasets source forest already supplies the smallest versioned Python-v1 delta: a closed, CID-bound ASTRecord with lexical ReferenceRecord read/write contexts, CallRecord call sites, EffectRecord effects, and a deterministic semantic-index projection with calls, reads_state, and writes_state DependencyEdges. This receipt selects and binds that authority; it does not add a proof_context wrapper, a second parser/resolver/CID authority, or an M2/M3 mutation path.",
+    "non_promotion_reason": "The required proof_context suite cannot collect in the authoritative sealed Python 3.12 environment because its explicitly configured anyio pytest plugin is unavailable. The provider-side successful run is simulated evidence and is not substituted for sealed validation."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "Calculated approximation; no estimate establishes summary behavior, identity, or test success.",
+    "simulated": "A deterministic provider-environment exercise or test execution; it never replaces authoritative sealed validation.",
+    "unavailable": "A required capability, authority, or result absent from the current sealed environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
+    "outer_commit": "7ce3772ae606c6f8a15dc25a434dd97df929cfde",
+    "outer_tree": "b1d6e58d791b9f451e3629b29998ef20b6d811b5",
+    "outer_subject": "Record database watchdog activity transition",
+    "dispatch_tree_id": "7ce3772ae606c6f8a15dc25a434dd97df929cfde",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "c757022cf3b2ad35031afe4912ff20cbe6144a5d",
+        "tree": "a1e7239ea168a881be333733cb6baf570b9a4595",
+        "authority_role": "consumer and scheduler boundary only"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "Python AST lexical-reference/call/effect extraction, deterministic semantic-index relation summaries, source-CID and record-CID authority"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage only; not Python semantic-summary authority"
+      }
+    },
+    "source_binding_policy": {
+      "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+      "scheduler_config_sha256": "484afb3f094125a341945bcf2706f646f1a89ee189489907e6f77ef93914fe78",
+      "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+      "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+      "require_initialized_gitlinks": true,
+      "require_superproject_gitlink_equals_nested_head": true,
+      "require_clean_nested_worktree_at_task_start": true,
+      "require_origin_main_as_ancestor": true,
+      "planning_revision_is_runtime_completion_evidence": false
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "git rev-parse HEAD and HEAD^{tree}; git ls-tree HEAD for admitted gitlinks; git -C external/ipfs_datasets rev-parse HEAD and HEAD^{tree}; git status --porcelain=v1 for outer and datasets roots before receipt write; git show-ref and merge-base checks for configured datasets origin/main and planning revision; source/test Git blob and SHA-256 capture.",
+      "result": "The datasets nested HEAD equals the superproject gitlink; the scheduler planning revision/tree equal the measured datasets head/tree; configured datasets origin/main and planning revision are ancestors of nested HEAD; and both worktrees were clean before this receipt was written.",
+      "invalidates_on": "Any change to the outer commit/tree, admitted gitlink/head/tree, scheduler digest, named source digest, selected schema/version, CID profile, or validation-environment capability requires a new receipt."
+    },
+    "configured_origin_ancestry": {
+      "kind": "measured",
+      "status": "passed",
+      "configured_datasets_origin_main": "58ec3ab476ae8362b824934bb16f2507c21771a2",
+      "result": "Configured origin/main and the datasets planning revision are ancestors of nested datasets HEAD 8b9c45106c0ace6107b8b90357a3ce71caf57584."
+    },
+    "pcsm_source_link_receipt": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No PCSM SourceLinkReceipt or aggregate PCSM source-map CID has been emitted at this head. Existing AST source spans and Git blobs are not misrepresented as a linker receipt."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "lexical_summary_api": "ipfs_datasets_py.logic.software_contracts.python_frontend.PythonASTExtractor.extract(source, path, repository_id, revision)",
+    "semantic_summary_api": "ipfs_datasets_py.logic.software_contracts.semantic_index.python_analysis.PythonSemanticAnalyzer.analyze(source, path)",
+    "frontend": "cpython-ast@1.2.1",
+    "schemas": {
+      "ast_record": "ipfs-datasets.software-contracts.ast-ir@1.0.0",
+      "frontend_capability": "ipfs-datasets.software-contracts.frontend-capability@1.0.0",
+      "semantic_index": "ipfs-datasets.software-contracts.semantic-index@2",
+      "dependency_edge": "ipfs-datasets.software-contracts.semantic-edge@1",
+      "python_semantic_analysis": "ipfs-datasets.software-contracts.python-semantic-analysis@2"
+    },
+    "summary_contract": {
+      "reads_and_writes": "ReferenceRecord.context is a closed lexical choice containing read and write. The semantic projection emits RelationType.READS_STATE and RelationType.WRITES_STATE DependencyEdges for bound names, attributes, subscriptions, and augmented assignment as applicable.",
+      "calls": "CallRecord is a closed unresolved lexical call-site record bound to its scope, source span, callee reference, callee name, call kind, arity, named argument names, and await flag. The semantic projection emits RelationType.CALLS edges with exact, conservative, or opaque confidence rather than claiming unavailable resolution.",
+      "effects": "EffectRecord is a closed scope-and-source-span-bound record with a controlled effect kind and operation. PythonASTExtractor emits bounded global/object-state, await, exception, and context-manager effects; it does not claim whole-runtime effect completeness.",
+      "canonicality": "ASTRecord canonicalizes source-ordered record collections, validates all cross-record scope/reference links, serializes strict DAG-JSON, and binds the exact source CID. DependencyEdge computes and verifies an edge CID over its closed identity payload."
+    },
+    "cid_profile": {
+      "profile_id": "software-contract-cid-profile-v1",
+      "profile_version": "1.0.0",
+      "cid_version": 1,
+      "base": "base32",
+      "multihash": "sha2-256",
+      "source_codec": "raw",
+      "structured_codec": "dag-json",
+      "case": "lowercase"
+    },
+    "determinism_and_boundaries": [
+      "The frontend uses CPython ast and does not import, evaluate, compile, or execute the source under examination.",
+      "Exact input bytes are bound by SourceProvenance.source_cid; source spans use the declared half-open UTF-8 byte convention.",
+      "Records are frozen, closed, and canonically source-ordered; duplicate IDs and dangling scope or callee-reference links fail closed.",
+      "Semantic-index edges carry bounded extraction method and confidence. Dynamic calls, eval/exec, dynamic import, reflection, native boundaries, monkey patches, metaclass effects, and runtime generation are not promoted to exact semantics.",
+      "The selected authority is bounded static Python v1 analysis, not whole-CPython runtime tracing, an effect-completeness proof, a general rewriter, or a PCSM SourceLinkReceipt authority."
+    ],
+    "minimum_delta_reason": "The current-head implementation and direct positive/negative tests already cover the required Python-v1 read/write/call/effect facts, deterministic canonical serialization, schemas, CIDs, and conservative uncertainty boundaries. Reimplementing it in proof_context would create a competing authority and violate the receipt-only declared output boundary."
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/ast_ir.py",
+      "git_blob": "80a3ad611faec496b04559f8b54eb768841ecd90",
+      "sha256": "1461edb7c39f2adc89a70e54decfa291ccceafc50ed23011fbdeea5acb4c8b91",
+      "role": "closed ASTRecord, ReferenceRecord, CallRecord, EffectRecord, canonical ordering, scope/reference integrity, strict DAG-JSON serialization, and record CID verification"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/python_frontend.py",
+      "git_blob": "7f1c1c1d629ed34e2e67251ec6a9820fb7b87817",
+      "sha256": "baf1c1ec5e6a5f83a0eb640b988850264d35311cdcedc87d22cff610d05308df",
+      "role": "non-executing cpython-ast@1.2.1 extractor of lexical read/write references, call sites, bounded effects, source spans, diagnostics, and dynamic-feature notices"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/models.py",
+      "git_blob": "87074b234b82bfdde77572b5caf0a9603257b49d",
+      "sha256": "4b061c97838929a4cdc055998ce71aa854234c7e75d3fbee12595fa1bafa8a75",
+      "role": "closed RelationType, DependencyEdge@1 with edge CID verification, and semantic-index@2 record authority"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+      "git_blob": "e3bea1c9d85e4cf5e0d0ac70f74b2fcf580abfb5",
+      "sha256": "99af34e5427faadbb9f7caa0aa025b18c8b43dbf1eb689ef7f140ea8ded7d25f",
+      "role": "deterministic Python semantic projection of calls, reads_state, writes_state, raises, serializes, validates, and confidence-bounded dynamic behavior"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py",
+      "git_blob": "fc44652cacee42e33c580510ba7a75d11993e8e7",
+      "sha256": "a87147cb360f9ce81abeefc2faf48ea63464a99ea6bfd50b6e92db55612287f2",
+      "role": "positive and negative frontend coverage for calls, effects, lexical facts, dynamic calls, invalid input, source bounds, and non-execution"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_ast_ir.py",
+      "git_blob": "39428df11c64f8fcbedbe3d6f6def9fb8c74378a",
+      "sha256": "df185b86f30a4daebac51b279e78e4d6a1f1c1642d63f0fd6178cc36fe22450c",
+      "role": "positive and negative closed record, canonical ordering, CID round-trip, dangling-reference, malformed schema, and escape-hatch rejection coverage"
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py",
+      "git_blob": "ac4bb9f9a893943386001fd1a57c872422bf35a2",
+      "sha256": "45f8bf0e045c2fda0131ca05839c88af07b68ca2ef54052ded41fc5376461757",
+      "role": "positive and negative semantic call/read/write/effect-relation integration and opaque dynamic-feature coverage"
+    }
+  ],
+  "deterministic_exercise": {
+    "kind": "simulated",
+    "status": "passed",
+    "command": "PYTHONPATH=external/ipfs_datasets python - <two identical PythonASTExtractor and analyze_python_source executions>",
+    "limitation": "This provider-environment exercise is deliberately not treated as sealed validation.",
+    "result": {
+      "ast_ir_schema": "ipfs-datasets.software-contracts.ast-ir@1.0.0",
+      "frontend": "cpython-ast@1.2.1",
+      "source_cid": "bafkreifnszcke2iiuevjeoimxptqgjjhkwfc2os5ctbpsjnbgkfbjpt5ii",
+      "semantic_analysis_schema": "ipfs-datasets.software-contracts.python-semantic-analysis@2",
+      "repeat_equal": true,
+      "reference_contexts": ["call", "read", "write"],
+      "calls": [
+        {"callee": "RuntimeError", "kind": "direct", "awaited": false},
+        {"callee": "client.fetch", "kind": "method", "awaited": true}
+      ],
+      "effects": [
+        {"kind": "await", "operation": "await", "subject": "client.fetch"},
+        {"kind": "exception", "operation": "raise", "subject": "RuntimeError"},
+        {"kind": "global_state", "operation": "write", "subject": "state"},
+        {"kind": "object_state", "operation": "read", "subject": "self.value"},
+        {"kind": "object_state", "operation": "write", "subject": "self.value"}
+      ],
+      "semantic_run_edge_relations": ["calls", "raises", "reads_state", "writes_state"],
+      "semantic_run_edge_confidence": ["conservative", "exact"]
+    }
+  },
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": [
+      {
+        "evidence_kind": "measured",
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py",
+        "positive_coverage": ["lexical call records and callee-reference linkage", "await/object-state/exception effects", "deterministic source-CID and non-executing extraction"],
+        "negative_coverage": ["unbound/dynamic calls remain lexical and diagnosed", "invalid encoding, syntax, non-text input, excessive source size, invalid limits, and excessive AST depth fail closed"]
+      },
+      {
+        "evidence_kind": "measured",
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_ast_ir.py",
+        "positive_coverage": ["canonical AST records, call/effect round trips, deterministic CID and source ordering"],
+        "negative_coverage": ["forged resolution fields, dangling callee references, malformed schemas, duplicate IDs, and language-specific escape hatches are rejected"]
+      },
+      {
+        "evidence_kind": "measured",
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py",
+        "positive_coverage": ["calls, reads_state, writes_state, catches, serializes, and validates relations on bounded source"],
+        "negative_coverage": ["eval/exec, dynamic import, unknown decorators, monkey patches, native boundaries, invalid syntax, and conditional bindings cannot claim exact runtime semantics"]
+      }
+    ],
+    "provider_targeted_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command": "PYTHONPATH=external/ipfs_datasets python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/test_python_frontend.py external/ipfs_datasets/tests/unit/logic/software_contracts/test_ast_ir.py external/ipfs_datasets/tests/unit/logic/software_contracts/semantic_index/test_python_analysis.py",
+      "result": "60 passed in 0.91s",
+      "limitation": "The provider environment is not substituted for sealed validation."
+    },
+    "required_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "519 passed in 73.32s (0:01:13)",
+      "limitation": "The provider environment is not substituted for authoritative sealed validation. The proof_context suite does not itself instantiate every selected semantic-summary record."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "sealed_equivalent_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited 1 before collection: ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM read/write/call/effect proof obligation or approved digest-bound prover deployment exists at this head."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git/tree/gitlink and scheduler bindings, clean pre-write state, configured-origin ancestry, source/test blobs and SHA-256 values, source/schema/CID contract inspection, test inventory, and sealed anyio dependency failure.",
+    "estimated": "None.",
+    "simulated": "Provider deterministic read/write/call/effect exercise; provider targeted positive/negative validation (60 passed); provider required proof_context validation (519 passed in 73.32s).",
+    "unavailable": "Authoritative sealed proof_context result due to missing anyio, PCSM SourceLinkReceipt/aggregate source-map CID, formal-prover result, and a self-describing immutable storage CID for this receipt."
+  },
+  "limitations": [
+    "This task is receipt-only: it selects existing current-head datasets authority and does not mutate proof_context or create a competing summary implementation.",
+    "ReferenceRecord facts are lexical and CallRecord targets are unresolved; semantic-index relation confidence is bounded rather than a claim of whole-program resolution.",
+    "EffectRecord reports bounded syntactic effects only. It does not establish complete runtime effects across reflection, import hooks, native code, concurrency, metaclasses, monkey patches, generated code, or unobserved callees.",
+    "The sealed validation environment lacks the configured anyio plugin. This receipt is therefore non-promoted despite positive provider-side coverage.",
+    "The receipt's own canonical storage CID is unavailable because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this PCSM read/write/call/effect authority selection. Do not alter the selected datasets source forest, protected policy documents, or prior admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, semantic-summary schema, CID profile, extractor identity, or validation-environment capability changes."
+  }
+}
