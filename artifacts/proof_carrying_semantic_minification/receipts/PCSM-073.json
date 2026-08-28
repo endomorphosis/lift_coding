@@ -1,0 +1,224 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-073",
+  "title": "Add counterexample expansion",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-073",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  },
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-073@current-head-python-v1-counterexample-expansion-capability-assessment-v1",
+  "observed_at": "2026-08-28T15:28:05Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 counterexample-expansion capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-073.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-073.json",
+    "implementation_delta": "Reuse the current-head CounterexampleMinimizer@1 and CounterexampleReceipt@1 authority. It deterministically reduces already-bounded failure material to a compact, content-addressed receipt, binds the result to the failed verification key/receipt/selector, failure identity, affected symbols, environment, dependency lock, source spans, reproduction argv, and artifact references, and only reports minimized=true after a separate bounded-lease rerun preserves the same failure identity. It redacts private diagnostic fields, preserves unavailable/not-applicable states, and fails closed when rerun, identity, bounds, or receipt bindings do not hold. No PCSM wrapper, source-map authority, synthetic counterexample, source mutation, or test relaxation was created.",
+    "non_promotion_reason": "The reusable component is current-head and its selected positive and negative tests pass, but no canonical PCSM aggregate SourceLinkReceipt/source-map CID, exact-PCSM failed verification receipt, or source-map-bound counterexample expansion request/result exists at this tree. The component's controlled fixtures demonstrate its generic contract only. This receipt therefore records an available bounded generic service and an honest unavailable PCSM source-forest instance, not promotion."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or authoritative sealed validation environment.",
+    "estimated": "A deterministic approximation; it does not establish an expansion, proof, validation success, or promotion.",
+    "simulated": "A controlled fixture exercise that establishes only the exercised generic contract behavior and never replaces source-forest evidence.",
+    "unavailable": "A required capability, identity, result, or dependency absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "61189f6be253aa3cacb45f122673fe1db650f096",
+    "outer_tree": "6c13f78744cd373b924870cbf5da4a19c94f7582",
+    "dispatch_tree_id": "61189f6be253aa3cacb45f122673fe1db650f096",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_git_blob": "7632510e067c97ad2414a200ab8eb73384469a11",
+    "scheduler_config_sha256": "920176bbcabe15ac3f0a7cdb84fc467705faae60c11cbb74c12bdb7cdea01299",
+    "clean_before_receipt_write": true,
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract boundary only; no counterexample-expansion authority selected"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "e94f1784a38a44ee5da8f11a78ea42a7faefc9fb",
+        "tree": "5dee438e132ad068ddb30ec8c1e0066efa36067a",
+        "authority_role": "named current-head Python-v1 counterexample minimization and verification-receipt authority"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity boundary; no new datasets authority selected"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage boundary only; no new kit authority selected"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Recorded outer HEAD and HEAD^{tree}; compared every admitted superproject gitlink with nested HEAD and HEAD^{tree}; inspected outer and admitted nested porcelain before this declared receipt write; calculated scheduler and selected source/test SHA-256 values plus Git blobs; inspected the counterexample contracts and tests; and searched the admitted PCSM source roots for an aggregate PCSM SourceLinkReceipt/source-map identity.",
+      "result": "The dispatch commit equals outer HEAD, all recorded nested commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before this receipt write. The selected implementation and tests are current at the recorded accelerator tree. No aggregate PCSM SourceLinkReceipt/source-map identity or exact-PCSM counterexample expansion request/result was found, so Git trees/blobs, generic counterexample IDs, and fixture artifact CIDs are not substituted for that missing PCSM binding.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, contract version/schema, source-map capability, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM SourceLinkReceipt or canonical PCSM source-map CID resolves exact PCSM file/node/span identities in the named accelerator implementation/test roots. Repository/tree bindings, Git trees/blobs, file SHA-256 digests, generic verification receipt IDs, and generic CounterexampleReceipt IDs are freshness or component identities, not this missing PCSM source-map contract."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "component": "ipfs_accelerate_py.agent_supervisor.verification.counterexamples",
+    "public_surface": "ipfs_accelerate_py.agent_supervisor.verification.counterexamples",
+    "entry_points": [
+      "CounterexampleMinimizer.minimize",
+      "minimize_counterexample",
+      "extract_failure_material_from_pytest_output",
+      "compute_failure_identity_cid"
+    ],
+    "contracts": {
+      "minimizer_interface": "CounterexampleMinimizer@1",
+      "minimizer_schema": "ipfs_accelerate_py/agent-supervisor/counterexample-minimizer@1",
+      "minimization_result_schema": "ipfs_accelerate_py/agent-supervisor/counterexample-minimization-result@1",
+      "failure_identity_schema": "ipfs_accelerate_py/agent-supervisor/verification-failure-identity@1",
+      "counterexample_evidence": "ivp/counterexample@1",
+      "counterexample_receipt_interface": "CounterexampleReceipt@1",
+      "counterexample_receipt_schema": "ipfs_accelerate_py/agent-supervisor/verification-counterexample-receipt@1",
+      "algorithm_version": "ivp-counterexample-minimizer/1.0.0"
+    },
+    "selected_behavior": {
+      "deterministic_minimization": "Failure material is bounded and normalized, tracebacks and logs are sliced by an explicit semantic cone, private diagnostics are redacted, source spans are pruned and normalized, and reproduction argv candidates are deterministically generated within closed limits.",
+      "cid_and_receipt_binding": "The failure identity is content-addressed from the failed selector, node, exception, assertion, primary source, terminal status, environment CID, and dependency-lock CID. CounterexampleReceipt derives counterexample_id from canonical bytes and binds the failed key/receipt/selector, failure identity, allowed affected-symbol versions, environment/dependency identities, reproduction argv, source spans, artifact CIDs, minimized state, and any proof obligation. Bundle validation rejects inconsistent, duplicate, passing, non-bundle, selector, environment, symbol, argv, or proof-obligation bindings.",
+      "rerun_admission": "The minimizer only claims minimized=true and rerun_validated after an independent candidate rerun under a fresh bounded lease reproduces the same failure identity. Missing oracle, passed rerun, unavailable/timed-out/cancelled rerun, process-start failure, identity drift, exhausted budgets, malformed inputs, and byte-limit violations fail closed or emit an explicit non-minimized bounded-artifact receipt.",
+      "bounds": "Default limits are 16 traceback frames, 32 log lines, 16 source spans, 16 candidate argv values, 16 oracle reruns, and a 262144-byte counterexample receipt. Bounded previews and content-addressed artifact references replace full logs.",
+      "authority_boundary": "This service consumes already-admitted failed verification evidence. It neither creates canonical semantic/source-map authority nor accepts a model response, fixture outcome, generic counterexample, test result, or request as proof, source mutation, patch admission, completion, or promotion authority."
+    },
+    "minimum_delta_reason": "This versioned, content-addressed, deterministic current-head minimizer and receipt contract already supplies the smallest Python-v1 counterexample-expansion behavior. A PCSM-specific duplicate counterexample schema, source-map resolver, store, or expansion wrapper would compete with existing authorities and is disallowed by this receipt-only dispatch."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/counterexamples.py",
+      "git_blob": "1c9fea31572c7461ac177a8ffbb412124b769814",
+      "sha256": "ca47279e24da74d28dcad6991dce3e0384540440454962de6df051dc129f19ce",
+      "role": "Versioned deterministic counterexample minimization, failure identity, bounded semantic-cone slicing, diagnostic redaction/state typing, separate-lease rerun admission, bounded artifact-only failure disposition, and counterexample result identity."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/contracts.py",
+      "git_blob": "f71b3d80052d16c0df9363bdca950163b7468197",
+      "sha256": "7bff26e334c7200964d4cc29b448ae243cbac44502fd15a358cd1026c6837a7b",
+      "role": "Versioned CounterexampleReceipt@1 canonical record, byte limit, content identity, strict decode, and verification-bundle cross-binding checks."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_verification_counterexamples.py",
+      "git_blob": "155f43ac5cdad77b5e0af82cb00f4f6bc9fde05d",
+      "sha256": "506998a851298fdf9a08c9dcd39c34dec36a1aa7ecea3b264284d35edf219ff2",
+      "role": "Focused current-head positive and negative fixture coverage for extraction, deterministic identity, bounded minimization/rerun admission, redaction, unavailable/not-applicable values, byte bounds, and failure dispositions."
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "Required PCSM closed-output and model-non-authority validation."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm073-required-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.34s",
+      "scope_limit": "The required PCSM suite validates closed candidate-output grammar and rejects model-created completions. It does not instantiate an exact PCSM source-map-bound counterexample expansion."
+    },
+    "focused_counterexample_validation": {
+      "kind": "simulated",
+      "execution_evidence_kind": "measured",
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm073-counterexample-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_verification_counterexamples.py",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "26 passed in 0.95s",
+      "positive_coverage": [
+        "A selected failed test is minimized only after a separate lease rerun preserves the deterministic failure identity, while the compact receipt preserves the failed verification, selector, environment, dependency, symbol, span, artifact, and argv bindings.",
+        "Traceback/log pruning removes irrelevant runtime noise; reproduction argv stays list-shaped; bounded receipts round-trip; deterministic identity is stable and sensitive to failure facts; and size limits hold under stress.",
+        "Typed diagnostic states preserve present, redacted, unavailable, and not_applicable meanings without embedding private values."
+      ],
+      "negative_coverage": [
+        "A missing oracle, a passing rerun, identity drift, invalid/passing input receipt, and a non-positive budget cannot claim a minimized counterexample.",
+        "Minimization failure remains explicit and references bounded artifact CIDs instead of full logs; private fields are redacted; absent values remain unavailable; and source-symbol/environment bindings are constrained by the failed receipt key."
+      ],
+      "scope_limit": "The focused suite uses controlled verification receipts, process observations, paths, artifact CIDs, and rerun oracles. Its sealed execution/pass count is measured, but the demonstrated generic contract behavior is simulated and is not an exact-PCSM forest counterexample expansion."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_applicable_not_run",
+      "reason": "PCSM-073 declares no kernel-checkable theorem-prover obligation for the reused deterministic counterexample receipt/minimization contract. Tests and a rerun-preserved generic failure identity are not promoted to a proof, source mutation, patch admission, completion, or promotion authority."
+    }
+  },
+  "evidence_classification": {
+    "measured": "Current outer/nested Git and tree identities; clean/freshness checks; scheduler and selected source/test digests and Git blobs; selected schema/version/binding behavior; the sealed required suite (11 passed); and sealed focused counterexample-suite execution (26 passed).",
+    "estimated": "None. The component's deterministic quality score and any token/context counters were not run against a PCSM forest and do not support implementation, identity, validation success, proof, source-forest execution, or promotion.",
+    "simulated": "The focused counterexample tests use controlled failure receipts, bounded output, artifact identifiers, semantic cones, and rerun oracles. They establish only the exercised generic contract behavior and are not represented as a PCSM forest execution.",
+    "unavailable": "A canonical PCSM aggregate SourceLinkReceipt/source-map CID; a current PCSM forest failed verification receipt with bound file/node/span records; a source-map-bound PCSM counterexample expansion request and emitted CounterexampleReceipt/result CID; and an external formal-prover result not applicable to this task."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "generic_counterexample_expansion_service_available_pcsm_source_forest_instance_unavailable_non_promoted",
+    "available_capability": "A current-head Python-v1 generic deterministic, bounded, redaction-aware, content-addressed counterexample minimizer and CounterexampleReceipt service with rerun-preserved failure identity and selected sealed positive/negative tests.",
+    "unavailable_capability": "A concrete exact-PCSM source-forest counterexample expansion whose failed verification, source spans, symbols, request, and result are bound by a canonical PCSM SourceLinkReceipt/source-map CID.",
+    "missing_bindings": [
+      "canonical aggregate PCSM SourceLinkReceipt or source-map CID",
+      "current PCSM forest failed verification receipt and file/node/span records linked to that source map",
+      "a source-map-bound PCSM counterexample expansion request and emitted counterexample result CID"
+    ],
+    "disposition": "No PCSM source-map CID, failed receipt CID, counterexample/result CID, formal proof, token estimate, cost, or model-derived evidence is invented. Missing values are unavailable rather than zero. The selected existing service remains inside its generic verification authority boundary, and no competing PCSM authority is created."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It does not modify the selected accelerator implementation/tests, create a parallel PCSM counterexample service, or materialize a generated counterexample.",
+    "The selected CounterexampleReceipt binds generic failed verification evidence and normalized source spans but does not resolve those spans against a PCSM SourceLinkReceipt or provide a PCSM aggregate source-map CID.",
+    "A rerun-preserved failure identity establishes only the bounded generic failure contract. The focused test oracles and artifact CIDs are fixtures, not current-PCSM verification evidence.",
+    "No model output, test result, request, quality score, helper claim, or token estimate is treated as proof, source mutation, M2/M3 mutation, promotion, or completion authority.",
+    "This receipt has no immutable self-CID because adding one would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not modify protected planning documents, the existing accelerator counterexample implementation, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source/test digest, scheduler binding, schema/version/identity behavior, source-map capability, direct-test result, or required validation result changes."
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalent_reused_first": true,
+    "generic_counterexample_expansion_available": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "selected_positive_and_negative_tests_passed": true,
+    "sealed_required_validation_passed": true,
+    "evidence_classes_distinguished": true,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_counterexample_expansion_instance_available": false,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_pcsm_source_map_bound_counterexample_instance"
+  }
+}
