@@ -10,7 +10,7 @@
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
   "artifact_identity": "urn:pcsm:task-receipt:PCSM-033@current-head-python-completeness-witness-capability-gap-v1",
-  "observed_at": "2026-08-28T07:35:58Z",
+  "observed_at": "2026-08-28T07:06:06Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -35,13 +35,12 @@
     "git_object_format": "sha1",
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
-    "outer_commit": "8af44ba212c6d1b10ae6f9b8e02fd866fdcd284a",
-    "outer_tree": "28dc01c5377a5e1e964453cd79f7a95bd0ae06fa",
-    "outer_subject": "Record supervisor callback continuity transition",
-    "dispatch_tree_id": "28dc01c5377a5e1e964453cd79f7a95bd0ae06fa",
-    "dispatch_tree_id_equals_outer_commit": false,
-    "dispatch_tree_id_equals_outer_tree": true,
-    "dispatch_tree_id_is_not_git_tree_object": false,
+    "outer_commit": "218bf3c5643ad5c1e116482be522d596a62e23f3",
+    "outer_tree": "49a09a1c5679507b87151c9a6de1525aa46b37f2",
+    "outer_subject": "Merge commit '202dc9089079d4f0af1b679b55df9144e593fdbb' into agent/proof-carrying-semantic-minification-v1",
+    "dispatch_tree_id": "218bf3c5643ad5c1e116482be522d596a62e23f3",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
     "admitted_gitlinks": {
       "external/ipfs_datasets": {
@@ -52,7 +51,7 @@
     },
     "source_binding_policy": {
       "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
-      "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+      "scheduler_config_sha256": "5c5e22a1f6ebd588ea1895be96294c77dedbd7417c04754b3b8ebb4d2b8a3237",
       "datasets_planning_revision": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
       "datasets_planning_tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
       "require_initialized_gitlinks": true,
@@ -189,14 +188,14 @@
       "status": "passed",
       "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
       "environment": "Provider Python 3.12.3 with provider-installed pytest plugins and dependencies.",
-      "result": "519 passed in 71.93s",
+      "result": "519 passed",
       "scope_limit": "The suite validates proof_context behavior, including CID-bound ContextPack freshness controls. It does not establish the absent PCSM CompletenessWitness@1."
     },
     "focused_adjacent_control_validation": {
       "kind": "simulated",
       "status": "passed",
       "command": "python -m pytest -q external/ipfs_datasets/tests/integration/knowledge_graphs/corpora/test_code_evidence.py",
-      "result": "22 passed in 0.87s",
+      "result": "22 passed in 0.17s",
       "scope_limit": "This validates the nearest bounded graph/index controls only; it is not witness-specific coverage or sealed validation."
     },
     "sealed_required_validation": {
@@ -220,7 +219,7 @@
   "evidence_summary": {
     "measured": "Current outer/nested Git and tree identities, clean/freshness and origin-ancestry checks, scheduler and source SHA-256 values, Git blobs, source-search absence, adjacent schemas/bindings and test-source coverage, and the sealed pytest dependency failure.",
     "estimated": "None. No estimate is used to establish completeness, identity, or validation.",
-    "simulated": "Provider required proof_context validation: 519 passed in 71.93s; focused adjacent code-evidence validation: 22 passed in 0.87s. Neither is substituted for sealed validation or witness-specific coverage.",
+    "simulated": "Provider required proof_context validation: 519 passed; focused adjacent code-evidence validation: 22 passed in 0.17s. Neither is substituted for sealed validation or witness-specific coverage.",
     "unavailable": "CompletenessWitness@1; a versioned witness schema; aggregate PCSM source-map/source-forest CID; deterministic qualified-fragment included/omitted semantics witness; witness-specific positive and negative tests; authoritative sealed required-suite result; formal-prover result; and a self-describing immutable storage CID for this receipt."
   },
   "limitations": [
