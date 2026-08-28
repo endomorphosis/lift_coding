@@ -1,0 +1,236 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-063",
+  "title": "Integrate incremental SMT",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G600",
+  "objective_id": "PCSM-063",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-063@current-head-incremental-smt-capability-assessment-v1",
+  "observed_at": "2026-08-28T08:06:00Z",
+  "scope": {
+    "assurance_scope": "PCSM Python v1 incremental-SMT capability assessment for the exact current admitted source forest",
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-063.json",
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-063.json"
+    ],
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "language": "Python",
+    "language_version": "3.12",
+    "implementation_delta": "The exact current ipfs_datasets source forest already supplies the reusable, versioned IncrementalSmtSession@1 authority and its checked public façade. It binds mutable-context reuse to a deterministic fingerprint, retains named assertion source/obligation references, and emits content-addressed result and replay-manifest identities. The declared-output boundary permits only this receipt, so no duplicate SMT adapter, source mutation, or competing PCSM authority was created.",
+    "non_promotion_reason": "The existing implementation and dedicated positive/negative tests are present, but the authoritative sealed environment has neither the z3 Python API required by the sole qualified adapter nor cvc5, and the required pytest command cannot collect because its explicitly configured anyio plugin is absent. In addition, no canonical PCSM current-source-map CID binds supplied source_ref values to exact current file/node/span identities. This receipt records the reusable implementation honestly without claiming an authoritative PCSM solver run or promotion."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named current source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish source identity, solver behavior, CID binding, or validation success.",
+    "simulated": "A controlled provider-environment execution; it cannot replace sealed validation or authorize promotion.",
+    "unavailable": "A required identity, capability, or result absent from the authoritative environment; it is neither zero nor passing."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "git_object_format": "sha1",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "6a2f51b7c197b1fb479c552f1d6e869e29d2099f",
+    "outer_tree": "3dea1eeb9f16c4155f6c86099128d090c333e894",
+    "dispatch_tree_id": "6a2f51b7c197b1fb479c552f1d6e869e29d2099f",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "objective_revision": "baguqeeravhhuwwrfkyqfc5d6rvaucvxt2d7qjvyv2lahapgcn2fkvjd7xojq",
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "authority_role": "wire-contract boundary only; no incremental-SMT implementation authority selected",
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180"
+      },
+      "external/ipfs_accelerate": {
+        "authority_role": "integration consumer only; no duplicate incremental-SMT authority selected",
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149"
+      },
+      "external/ipfs_datasets": {
+        "authority_role": "named Python-v1 incremental-SMT implementation, public façade, tests, and canonical source-identity boundary",
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7"
+      },
+      "external/ipfs_kit": {
+        "authority_role": "exact-byte/CID storage boundary only; no incremental-SMT implementation authority selected",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared selected nested HEAD and HEAD^{tree}; inspected outer and selected nested porcelain before receipt creation; recorded selected implementation/test Git blobs and SHA-256 values; searched the exact datasets implementation and proof_context roots for the PCSM source-map contract identifiers; and probed optional solver APIs under a fresh private HOME using the prescribed sealed PATH.",
+      "result": "The dispatch commit equals outer HEAD, all recorded nested commit/tree pairs equal their checked-out heads, and the inspected worktrees were clean before receipt creation. The sealed capability probe found z3 and cvc5 unavailable without installing or contacting a network. The exact PCSM roots contain no SourceMapResolver@1, SourceLinkReceipt@1, aggregate source-map, or source_map_resolver authority.",
+      "invalidates_on": "Any change to a bound commit/tree, gitlink head/tree, scheduler digest, listed source digest, required-test configuration/result, solver capability, incremental-SMT contract, or current PCSM source-map capability requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree aggregate PCSM source-map CID or canonical CodeIR/source identity to exact current file/node/span resolution is present in the task-owned implementation/test roots. The IncrementalSmtSession requires callers to supply source_ref values but cannot manufacture this absent PCSM identity; Git trees, blobs, and local test node IDs are not substitutes."
+    }
+  },
+  "selected_existing_authority": {
+    "kind": "measured",
+    "components": [
+      {
+        "component": "ipfs_datasets_py.logic.backends.smt.incremental.IncrementalSmtSession@1",
+        "schema": "incremental-smt-session/v1",
+        "result_schema": "incremental-smt-result/v1",
+        "replay_schema": "incremental-smt-replay-manifest/v1",
+        "role": "Provider-neutral, Z3-backed reusable session. It supports declared symbols, named assertions, scoped push/pop, checked assumptions, deterministic cancellation/closed/stale behavior, model validation, and independently rechecked UNSAT cores. It is a cache/replay optimization and never a new proof authority."
+      },
+      {
+        "component": "ipfs_datasets_py.logic.verification_api.open_incremental_smt_session",
+        "interface": "IncrementalSmtSession@1",
+        "schema": "incremental-smt-session/v1",
+        "role": "Checked public façade that rejects an interface, fingerprint schema, or required session-method mismatch before returning the reusable session."
+      }
+    ],
+    "determinism_and_binding": {
+      "kind": "measured",
+      "profile": "IncrementalSmtFingerprint canonicalizes provider/version, logic, translator identity, theory fingerprint, policy/configuration/environment roots, deterministic seed, timeout, memory limit, and schema into a canonical identity digest. NamedSessionAssertion binds a stable assertion ID, source_ref, obligation ID, and structural SMT term. IncrementalSmtResult sorts identity-relevant collections and deliberately excludes process-local solver statistics from receipt_id. snapshot_or_replay_manifest canonically binds fingerprint, declarations, active assertions, frame sizes, transcript, and a manifest CID.",
+      "authority_boundary": "Opening a session never installs a provider; only z3 has a qualified reusable adapter; unsupported or absent providers raise IncrementalSmtUnavailable; get_proof raises rather than presenting solver output as a proof object; and session reuse does not raise evidence or mutation authority.",
+      "current_pcsm_execution_binding": "unavailable because a canonical PCSM source-map/CID and a usable sealed solver are both absent."
+    }
+  },
+  "source_inventory": [
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/backends/smt/incremental.py",
+      "git_blob": "1b8d733051b054eacbff18d03d2c5f352c5565d6",
+      "sha256": "0f77c623f9f693837e7761280ddc118c66995110d4a99db253c63ebf64551258",
+      "role": "Versioned incremental-SMT implementation, deterministic semantic identities, source/obligation binding, typed unavailable dispositions, and replay-manifest CID construction."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/verification_api.py",
+      "git_blob": "6278972e3da8f99dace7bbfb735040b1980fbb09",
+      "sha256": "707138ae366a92cae6ed99927b690044bdfed69dead4c9282329732493b66a35",
+      "role": "Checked public API exposure of IncrementalSmtSession@1 and incremental-smt-session/v1."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/backends/test_incremental_smt.py",
+      "git_blob": "da4a735d24e902008f1c9a9425fdfb80838676b8",
+      "sha256": "9c0225bd334bd845446d0d37ca2a0232d297cbd829201cb046de385452bdd5c4",
+      "role": "Dedicated positive and negative incremental-SMT contract coverage."
+    },
+    {
+      "evidence_kind": "measured",
+      "path": "external/ipfs_datasets/tests/unit/logic/test_compositional_verification_public_api.py",
+      "git_blob": "74a520f62cc459269202072b87745c28ef936ad2",
+      "sha256": "ba35600a11a8d11e2a9c28bb03f0c258eedffdd0e7cfea011bbde166c62bf00e",
+      "role": "Public façade interface/schema, replay-identity, cancellation, and unqualified-provider coverage."
+    }
+  ],
+  "test_and_validation_evidence": {
+    "positive_and_negative_test_sources": {
+      "kind": "measured",
+      "positive_coverage": [
+        "Named lower/upper assertions prove scoped push/pop behavior and an independently rechecked, sorted UNSAT core.",
+        "Assumption checks return validated SAT models, replay manifests bind fingerprint and assertion source_ref values, and semantic receipt identities remain stable despite changed process-local solver statistics.",
+        "The public façade returns the declared IncrementalSmtSession@1 interface and incremental-smt-session/v1 fingerprint schema."
+      ],
+      "negative_coverage": [
+        "Fingerprint mismatch is typed stale reuse; cancellation and closed sessions are typed rather than silently reused.",
+        "cvc5/unqualified providers are typed unavailable; importing the module leaves optional solvers cold; malformed terms, identifiers, unsupported raw terms, duplicate declarations/assertions, and invalid frame operations fail before unsafe state reuse.",
+        "The public façade rejects unqualified providers and does not elevate cancellation to authority."
+      ],
+      "coverage_limit": "The dedicated tests validate reusable SMT-session behavior and public contract enforcement. They do not create a PCSM source-map-bound obligation or turn solver observations into kernel-checked proofs."
+    },
+    "sealed_capability_probe": {
+      "kind": "measured",
+      "status": "unavailable",
+      "command_executed": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm063-capability-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=external/ipfs_datasets /usr/bin/python3.12 -c '<probe_incremental_smt_capabilities>'",
+      "environment": "Authoritative sealed Python 3.12.3, fresh private HOME, prescribed PATH, no installation, and no network access.",
+      "result": "IncrementalSmtSession@1 capability probe reported z3 unavailable (module_not_installed) and cvc5 unavailable (module_not_installed).",
+      "fail_closed_disposition": "No provider installation, PATH expansion, profile-state reuse, alternate solver, or simulated result is treated as sealed solver usability."
+    },
+    "sealed_required_validation": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "requested_command": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "command_attempted": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh ipfs-accelerate-validation-home-pcsm063-required-*> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "pytest exited before collection with ImportError importing explicitly configured anyio.pytest_plugin because module anyio is not installed in the sealed interpreter.",
+      "fail_closed_disposition": "No provider-home package, profile-state reuse, plugin-configuration change, test-selection relaxation, or claim of sealed success was used."
+    },
+    "dedicated_incremental_smt_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command_executed": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/backends/test_incremental_smt.py",
+      "environment": "Provider Python 3.12.3 with pytest 9.1.1, z3-solver, and provider-installed plugins.",
+      "result": "8 passed in 0.30s",
+      "limitation": "This provider-environment result is simulated evidence only and cannot establish sealed solver usability or authorize promotion."
+    },
+    "public_facade_validation": {
+      "kind": "simulated",
+      "status": "passed",
+      "command_executed": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/test_compositional_verification_public_api.py",
+      "environment": "Provider Python 3.12.3 with pytest 9.1.1, z3-solver, cvc5, and provider-installed plugins.",
+      "result": "13 passed in 0.63s",
+      "limitation": "This provider-environment result is simulated evidence only and cannot establish sealed solver usability or authorize promotion."
+    },
+    "required_validation_provider_attempt": {
+      "kind": "simulated",
+      "status": "terminal_result_unavailable",
+      "command_executed": "python -m pytest -q external/ipfs_datasets/tests/proof_context",
+      "result": "The provider invocation collected 519 tests and emitted passing progress through the complete listed proof_context modules; its terminal summary was not retained by the command transport. A previous PCSM-060/PCSM-061 receipt records 519 passed on the same exact ipfs_datasets commit/tree, but that prior result is not relabelled as a sealed or newly measured pass.",
+      "limitation": "The required suite is proof_context coverage rather than dedicated incremental-SMT coverage, and provider execution cannot replace sealed validation."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No approved digest-bound theorem-prover deployment or kernel-checkable PCSM-063 obligation is present in the authoritative sealed environment. Incremental SMT exposes validated SAT models and UNSAT cores, not proof objects; get_proof explicitly raises. No formal-proof success is inferred."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Current outer/nested Git and tree identities; scheduler digest; clean/freshness checks; implementation/public-façade/test blobs and SHA-256 values; schemas/interfaces; deterministic fingerprint/result/replay CID mechanics; current PCSM source-map absence search; sealed pytest collection failure; and sealed z3/cvc5 absence probe.",
+    "estimated": "None. No estimate is used to establish solver behavior, identity, CID binding, test success, or promotion.",
+    "simulated": "Provider Python 3.12.3 focused incremental-SMT validation (8 passed in 0.30s), provider public-façade validation (13 passed in 0.63s), and a provider required-suite attempt whose terminal summary was unavailable after collecting 519 tests.",
+    "unavailable": "Sealed z3 and cvc5 modules; sealed required-suite collection because anyio.pytest_plugin is absent; canonical PCSM aggregate source-map CID; current source-map-bound PCSM incremental-SMT execution; formal-prover result; and an immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This exact-output dispatch is receipt-only. It selects and validates an existing current-head authority but does not modify the datasets implementation/tests or create a competing SMT subsystem.",
+    "Only z3 has a qualified adapter, and it is absent in the authoritative sealed environment. The available provider-environment solvers do not satisfy the sealed-environment gate.",
+    "Incremental solver outcomes, validated models, and independently checked cores are not theorem-prover certificates or mutation authority.",
+    "The session accepts caller-supplied source_ref values but cannot establish PCSM current-forest source identity until a separate canonical source-map/CID authority exists.",
+    "The required PCSM suite could not collect in the sealed environment and is not dedicated incremental-SMT coverage; it cannot be relabelled as a sealed package validation pass.",
+    "No model output is accepted as evidence or mutation authority, and no M2/M3 mutation, generated-source mutation, automatic source materialization, or promotion is authorized.",
+    "The receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head incremental-SMT capability assessment. Do not alter protected planning documents, existing datasets verification components, or unrelated admitted history.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree, gitlink, source digest, scheduler binding, required-test configuration/result, sealed solver/plugin capability, incremental-SMT contract, or PCSM source-map capability change."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "authority_boundaries_preserved": true,
+    "existing_equivalent_reused_first": true,
+    "incremental_smt_capability_implemented": true,
+    "deterministic_where_required": true,
+    "schema_version_and_cid_binding_available_where_applicable": true,
+    "package_specific_positive_and_negative_tests_available": true,
+    "provider_dedicated_positive_and_negative_validation_passed": true,
+    "sealed_solver_capability_available": false,
+    "sealed_required_validation_passed": false,
+    "pcsm_current_source_map_cid_available": false,
+    "pcsm_current_forest_incremental_smt_execution_available": false,
+    "evidence_classes_distinguished": true,
+    "typed_unavailable_disposition_recorded": true,
+    "model_output_is_not_mutation_authority": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_missing_sealed_solver_pytest_and_pcsm_identity_binding"
+  }
+}
