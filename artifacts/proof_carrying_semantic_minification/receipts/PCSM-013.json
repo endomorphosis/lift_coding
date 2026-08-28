@@ -9,8 +9,8 @@
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcsm:task-receipt:PCSM-013@current-head-model-token-cost-profile-selection-v1",
-  "observed_at": "2026-08-27T18:40:00Z",
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-013@current-head-model-token-cost-profile-selection-v2",
+  "observed_at": "2026-08-28T02:06:09Z",
   "scope": {
     "language": "Python",
     "language_version": "3.12",
@@ -36,9 +36,9 @@
     "outer_repository": "endomorphosis/lift_coding",
     "outer_origin": "https://github.com/endomorphosis/lift_coding.git",
     "owning_repository_for_receipts": "ipfs_accelerate_py",
-    "outer_commit": "e8e914b2460a95566a47395ab4ed597311eacf6e",
-    "outer_tree": "94af01abbd3a4cb82ce830e52437563e9b9509f3",
-    "outer_subject": "Reseal PCSM supervisor after landed-merge retrying completion",
+    "outer_commit": "2e026dedf55f06fab065b63c17a8eeccccc63f8b",
+    "outer_tree": "f7628ed2e5f16645039880fd479f40cfcb463490",
+    "outer_subject": "Seal four current-head blocked retries",
     "git_object_format": "sha1",
     "origin_main": "2e7c66f69ce5424ecdc44099ac023a3d8037c726",
     "origin_main_is_ancestor": true,
@@ -47,8 +47,8 @@
     "accelerator_planning_revision_equals_origin_main": true,
     "accelerator_planning_tree_equals_origin_main_tree": true,
     "accelerator_planning_revision_is_ancestor_of_head": true,
-    "commits_after_origin_main": 90,
-    "dispatch_tree_id": "e8e914b2460a95566a47395ab4ed597311eacf6e",
+    "commits_after_origin_main": 112,
+    "dispatch_tree_id": "2e026dedf55f06fab065b63c17a8eeccccc63f8b",
     "dispatch_tree_id_equals_outer_commit": true,
     "dispatch_tree_id_is_not_git_tree_object": true,
     "clean_before_receipt_write": true,
@@ -74,17 +74,17 @@
         "repository": "endomorphosis/ipfs_accelerate_py",
         "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
         "authority_role": "slice_route_model_budget_link_admission_and_validation",
-        "commit": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
-        "tree": "1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627",
-        "superproject_gitlink": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
+        "commit": "b9d3b6617cac193b06a50ce9e807772fe7ec86c3",
+        "tree": "01e2f3649db97c179c6e3d2c2d419e4e9c0b9e58",
+        "superproject_gitlink": "b9d3b6617cac193b06a50ce9e807772fe7ec86c3",
         "configured_origin_main": "024bf40a6c35735b84e7faff844f862dec63abf3",
         "configured_origin_main_is_ancestor": true,
         "configured_origin_main_tree": "a9ab7e480237608a30f3f73ba7ecc9575e05ff6d",
         "configured_origin_main_tree_equals_planning_tree": false,
         "prior_pcsm_004_origin_main_still_ancestor": "1eced7e4cf0b631349f6fb32f3e339e447632b69",
         "prior_pcsm_010_v3_commit_still_ancestor": "589229c87ff8dbfca43e95b8e6b8088ebbe34f24",
-        "scheduler_planning_revision": "eaca0ddb028d754a8ab1f2030cbe060afd9a4837",
-        "scheduler_planning_tree": "1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627",
+        "scheduler_planning_revision": "b9d3b6617cac193b06a50ce9e807772fe7ec86c3",
+        "scheduler_planning_tree": "01e2f3649db97c179c6e3d2c2d419e4e9c0b9e58",
         "scheduler_planning_revision_matches_head": true,
         "scheduler_planning_tree_matches_head": true,
         "clean_at_observation": true,
@@ -164,7 +164,7 @@
     },
     "source_digest_continuity": {
       "kind": "measured",
-      "result": "pcsm_013_first_selection; datasets_and_kit_and_mcp_plus_plus_gitlinks_unchanged_from_pcsm_010_v3; nested_accelerate_gitlink_moved",
+      "result": "pcsm_013_v2_refresh; selected tokenizer/budget source blobs and datasets/kit/MCP++ gitlinks remain unchanged; nested accelerate gitlink moved from the v1 receipt binding",
       "prior_pcsm_010_receipt": "urn:pcsm:task-receipt:PCSM-010@current-head-canonical-code-ir-selection-v3",
       "prior_pcsm_010_receipt_sha256": "1d1b1fe304921cf7b672759958a255a75b02fccddeaab66e70e98440e0dcc566",
       "prior_pcsm_010_receipt_git_blob": "d3f80a023ff7ea3a8703465e40f5164ef0e6d593",
@@ -189,8 +189,8 @@
         "external/ipfs_datasets/ipfs_datasets_py/proof_context/contracts.py",
         "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py"
       ],
-      "outer_commit_moved": "Predecessor PCSM-010 v3 bound outer commit 57bf1084f9ca39a608dc43389a458b1fdf72a047 and tree 5e9330a8908767a6ab68061f7007cfe4ac1742fa. Current outer commit is e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3. Accelerator gitlink moved 589229c87ff8dbfca43e95b8e6b8088ebbe34f24 -> eaca0ddb028d754a8ab1f2030cbe060afd9a4837. Datasets, kit, and MCP++ gitlinks are unchanged from PCSM-010 v3. Datasets proof_context SHA-256/git-blob identities were re-hashed and matched PCSM-010 v3.",
-      "meaning": "This is the first current-head ModelTokenCostProfile selection. It binds a later outer commit/tree and accelerator gitlink than PCSM-010 v3. Datasets proof_context bytes are unchanged and remain ContextPack authority, not tokenizer-cost authority."
+      "outer_commit_moved": "The prior PCSM-013 v1 receipt was committed at 0f2f459e330c087fd224530691a8a9c58f122ed7 (tree e9c73934a2ebc9397f74a18ca9ba0a1cf5c78a79) and bound outer commit e8e914b2460a95566a47395ab4ed597311eacf6e/tree 94af01abbd3a4cb82ce830e52437563e9b9509f3 with accelerator gitlink eaca0ddb028d754a8ab1f2030cbe060afd9a4837. This refresh binds outer commit 2e026dedf55f06fab065b63c17a8eeccccc63f8b/tree f7628ed2e5f16645039880fd479f40cfcb463490 and accelerator gitlink b9d3b6617cac193b06a50ce9e807772fe7ec86c3. The selected accelerator source blobs and Datasets proof_context SHA-256/git-blob identities are unchanged; proof_context remains ContextPack authority, not tokenizer-cost authority.",
+      "meaning": "This v2 receipt refreshes the current-head ModelTokenCostProfile selection without creating a source schema. It binds the later outer commit/tree and accelerator gitlink while preserving the verified selected source-byte identities."
     },
     "pcsm_source_map": {
       "status": "unavailable",
@@ -199,7 +199,11 @@
     },
     "stale_prior_receipt_rejected": {
       "kind": "measured",
-      "prior_pcsm_013_artifact_identity": "none; this is the first PCSM-013 receipt",
+      "prior_pcsm_013_artifact_identity": "urn:pcsm:task-receipt:PCSM-013@current-head-model-token-cost-profile-selection-v1",
+      "prior_pcsm_013_receipt_commit": "0f2f459e330c087fd224530691a8a9c58f122ed7",
+      "prior_pcsm_013_receipt_tree": "e9c73934a2ebc9397f74a18ca9ba0a1cf5c78a79",
+      "prior_pcsm_013_receipt_git_blob": "5a2ad44b74127fb15a524aa2cbd1f46630a39cb8",
+      "prior_pcsm_013_receipt_sha256": "f4f04a7f82528c9a0a947ae59a870cdbb2c4a7869893371e7d6e17c2ddc6e22d",
       "prior_pcsm_010_v3_outer_commit": "57bf1084f9ca39a608dc43389a458b1fdf72a047",
       "prior_pcsm_010_v3_outer_tree": "5e9330a8908767a6ab68061f7007cfe4ac1742fa",
       "prior_accelerate_gitlink": "589229c87ff8dbfca43e95b8e6b8088ebbe34f24",
@@ -213,16 +217,16 @@
         "7e6f00774a53025d55904b71b0410a4f5c3f5fb3",
         "57bf1084f9ca39a608dc43389a458b1fdf72a047"
       ],
-      "result": "no_stale_pcsm_013_to_reject; predecessor_g100_and_pcsm_010_identities_rejected_as_current_head",
-      "meaning": "No previously committed PCSM-013 receipt existed. Predecessor G100 receipts and PCSM-010 v3 remain valid inventories/selections of their bound trees but are not current-head forest identity for this task."
+      "result": "stale_pcsm_013_v1_and_predecessor_g100_and_pcsm_010_identities_rejected_as_current_head",
+      "meaning": "The committed PCSM-013 v1 receipt is valid only for its prior bound forest and is rejected as current-head identity. Predecessor G100 receipts and PCSM-010 v3 remain valid for their respective bound trees but are not current-head forest identity for this task."
     }
   },
   "policy_bindings": {
     "scheduler_config": {
       "path": "config/proof_carrying_semantic_minification_v1_supervisor.json",
       "schema": "ipfs_accelerate_py.agent_supervisor.proof-carrying-semantic-minification.scheduler_config@1",
-      "sha256": "1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135",
-      "git_blob": "a23ef8d403283acfe4403d18f6d4f9db4f33799a",
+      "sha256": "12678901a40c170b5fdcae959d1fe3bbcb881b95ee787c2324aeff2bb65471a8",
+      "git_blob": "59ae311525c648b471145dc3606695e6cc3985ae",
       "accepted_plan_revision_alias": "PCSM-PLAN-V1",
       "source_binding_policy": {
         "require_initialized_gitlinks": true,
@@ -286,7 +290,7 @@
     },
     "implementation_policy": {
       "policy_id": "policy:implementation-daemon",
-      "policy_revision": "sha256:b9672f8f1b6db53101d9ffb703459ae21e54955f725746ebd467179239bdbe3c",
+      "policy_revision": "sha256:5de7f3bef4c2ba02b47444094740a40acb151bdf2d07478aa3cdcfb030f3d968",
       "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
       "canonical_task_cid": {
         "status": "unavailable",
@@ -877,7 +881,7 @@
       {
         "name": "predecessor outer commits are not current-head forest identity",
         "status": "passed",
-        "method": "Compared current outer commit e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3 against predecessor bindings 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, 1f7d0a9c10abbdefb1255e812df173a8e40f4d85, 7c641864b2f224cd1cee906bce8eed7bee3d8360, baee33cad2cdad3c0c0aae059dc6e3e28301c83e, 7e6f00774a53025d55904b71b0410a4f5c3f5fb3, and 57bf1084f9ca39a608dc43389a458b1fdf72a047; outer identities differed and were rejected as current-head forest identity.",
+        "method": "Compared current outer commit 2e026dedf55f06fab065b63c17a8eeccccc63f8b and tree f7628ed2e5f16645039880fd479f40cfcb463490 against the prior PCSM-013 v1 binding e8e914b2460a95566a47395ab4ed597311eacf6e/94af01abbd3a4cb82ce830e52437563e9b9509f3 and predecessor bindings 4577b8a367d68bb8ffc72dc79f9a13ba91d0b90d, 1f7d0a9c10abbdefb1255e812df173a8e40f4d85, 7c641864b2f224cd1cee906bce8eed7bee3d8360, baee33cad2cdad3c0c0aae059dc6e3e28301c83e, 7e6f00774a53025d55904b71b0410a4f5c3f5fb3, and 57bf1084f9ca39a608dc43389a458b1fdf72a047; all prior identities differed and were rejected as current-head forest identity.",
         "evidence_kind": "measured"
       },
       {
@@ -913,7 +917,7 @@
       {
         "name": "accelerator origin/main tree is not admitted planning-tree identity",
         "status": "passed",
-        "method": "Configured accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d differs from admitted planning tree 1ad420d8381b9ba799ef0f90f7ecdf7c07b4c627 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
+        "method": "Configured accelerator origin/main tree a9ab7e480237608a30f3f73ba7ecc9575e05ff6d differs from admitted planning tree 01e2f3649db97c179c6e3d2c2d419e4e9c0b9e58 and was rejected as the current-head forest identity while remaining a valid ancestor of HEAD.",
         "evidence_kind": "measured"
       },
       {
@@ -925,7 +929,7 @@
       {
         "name": "PCSM-004 and PCSM-010 scheduler digests are not current-head scheduler identity",
         "status": "passed",
-        "method": "Predecessor scheduler SHA-256 values f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446, 2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079, 9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced, and 86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137 differ from current 1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135 and were rejected.",
+        "method": "Predecessor scheduler SHA-256 values f02944fc4251c89f35e6bc747d86066d4aca19e95ce9cbe9b661715644195446, 2693b7939de06391e9c7b88db770f4eb0d46bb43f2744f6ccd37e6900838c079, 9ced8da5c99e7941148ac31c5105d49ea68dcf76047c765518ba32b914ec3ced, 86c4195384f4839fe988dbd28cf972f4cf5daabde8b109f9b0ba139577f04137, and 1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135 differ from current 12678901a40c170b5fdcae959d1fe3bbcb881b95ee787c2324aeff2bb65471a8 and were rejected.",
         "evidence_kind": "measured"
       },
       {
@@ -1012,10 +1016,10 @@
   },
   "evidence_classification": {
     "measured": [
-      "Outer HEAD e8e914b2460a95566a47395ab4ed597311eacf6e and tree 94af01abbd3a4cb82ce830e52437563e9b9509f3.",
+      "Outer HEAD 2e026dedf55f06fab065b63c17a8eeccccc63f8b and tree f7628ed2e5f16645039880fd479f40cfcb463490.",
       "Four admitted gitlinks, nested trees, clean nested worktrees, origin/main ancestor checks, and scheduler planning-revision/tree equality.",
       "Four excluded gitlinks observed and classified not admitted.",
-      "Every listed SHA-256 and git blob identity, including current scheduler-config digest 1d2d9f8064869b914ba87b8bb2132f639cdca84f0b87bdffa381603614316135 and context_compiler.py digest d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece.",
+      "Every listed SHA-256 and git blob identity, including current scheduler-config digest 12678901a40c170b5fdcae959d1fe3bbcb881b95ee787c2324aeff2bb65471a8 and context_compiler.py digest d8fec37693df2b61e5479001cb763049381c99541e97b0d4f5d9dd2ce4f39ece.",
       "Selected counting surface CalibratedTokenEstimator with provider_tokenizer measured path and calibrated_utf8 estimated path.",
       "Named estimated fallback identity context-compiler-calibrated_utf8@1 from source.",
       "ModelTokenCostProfile identifier absent from the four nested roots.",
