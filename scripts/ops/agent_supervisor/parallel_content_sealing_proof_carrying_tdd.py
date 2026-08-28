@@ -888,6 +888,10 @@ def _serve_state_owner(config_path: Path) -> dict[str, Any]:
             },
         )
         try:
+            # Quack's HTTP request path lazily needs the installed core
+            # ``httpfs`` extension. Autoload stays disabled, so load that
+            # exact local dependency explicitly before starting Quack.
+            raw.execute("LOAD httpfs")
             raw.execute("LOAD quack")
         except BaseException:
             raw.close()
