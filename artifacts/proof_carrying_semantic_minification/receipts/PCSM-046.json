@@ -1,0 +1,254 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-semantic-minification.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCSM-046",
+  "title": "Add projection builder",
+  "board_namespace": "proof-carrying-semantic-minification-v1",
+  "goal_id": "PCSM-G400",
+  "objective_id": "PCSM-046",
+  "status": "implemented_non_promoted",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcsm:task-receipt:PCSM-046@current-head-python-v1-projection-builder-capability-assessment-v1",
+  "observed_at": "2026-08-28T08:08:19Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCSM Python v1 projection-builder capability assessment for the exact current admitted source forest",
+    "mutation": "receipt_only",
+    "source_mutation": false,
+    "changed_paths": [
+      "artifacts/proof_carrying_semantic_minification/receipts/PCSM-046.json"
+    ],
+    "declared_output": "artifacts/proof_carrying_semantic_minification/receipts/PCSM-046.json",
+    "implementation_delta": "No current-head Python package implements a PCSM projection builder. The closest reusable controls are SymbolicContractGraph@1's deterministic graph projector, SemanticProjectionStore@1's opaque typed-state persistence, and the closed residual candidate-output grammar selected by PCSM-041. None accepts a canonical PCSM semantic slice, bounded alias table, semantic-anchor decision, and exact PCSM source-map/tree identity together; none emits a compact proof-relevant PCSM projection and receipt. Exact declared-output authority excludes the missing package and its direct tests, so this receipt records a fail-closed unavailable/non-promotion disposition rather than creating a wrapper or competing authority.",
+    "non_promotion_reason": "The prescribed suite passes but covers only structured candidate decoding. A versioned PCSM builder contract, source-map-bound input, projection output/CID, and package-specific positive and negative vectors are absent at this exact head."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the bound source forest or the authoritative sealed validation environment.",
+    "estimated": "A calculated approximation; it cannot establish current-tree identity, PCSM projection behavior, schema binding, CID binding, or test success.",
+    "simulated": "A controlled test fixture exercise. It establishes only its exercised adjacent contract behavior and never production PCSM projection behavior.",
+    "unavailable": "A required capability, identity, or result absent from the authoritative environment; it is neither zero, passing, nor promotion evidence."
+  },
+  "current_tree_binding": {
+    "kind": "measured",
+    "outer_repository": "endomorphosis/lift_coding",
+    "outer_commit": "a77ad24456bcb31d46ea164efc0657317990f121",
+    "outer_tree": "1bf81169ffcbc89ce2662d4a04ae28cf6631105c",
+    "git_object_format": "sha1",
+    "dispatch_tree_id": "a77ad24456bcb31d46ea164efc0657317990f121",
+    "dispatch_tree_id_equals_outer_commit": true,
+    "dispatch_tree_id_is_not_git_tree_object": true,
+    "clean_before_receipt_write": true,
+    "scheduler_config": "config/proof_carrying_semantic_minification_v1_supervisor.json",
+    "scheduler_config_sha256": "3bf4e2c236dc9c86b0b25b81ffeabf99201efd9595945853a1084ee026292fa9",
+    "admitted_gitlinks": {
+      "Mcp-Plus-Plus": {
+        "commit": "31096be86103f29faef80a01e03d09b1ad7345c6",
+        "tree": "61776431577f0c276546f25e4178a47a64007180",
+        "authority_role": "wire-contract only; not PCSM projection construction"
+      },
+      "external/ipfs_accelerate": {
+        "commit": "288d681b6dd68683520758010e7c2f10f72a73cf",
+        "tree": "5b2fbe27d21bb2f98c7669ad9b3b23cff61f0149",
+        "authority_role": "adjacent graph projection, federation persistence, closed candidate grammar, and required validation suite; no PCSM projection builder"
+      },
+      "external/ipfs_datasets": {
+        "commit": "8b9c45106c0ace6107b8b90357a3ce71caf57584",
+        "tree": "6a186a24c424fdce0035033ebbf8a8476d96bbb7",
+        "authority_role": "canonical semantic identity only; not a compact PCSM projection builder"
+      },
+      "external/ipfs_kit": {
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "authority_role": "exact-byte/CID storage only; not PCSM projection construction"
+      }
+    },
+    "freshness_check": {
+      "kind": "measured",
+      "status": "passed",
+      "method": "Compared outer HEAD and HEAD^{tree}; compared every admitted superproject gitlink with nested HEAD and HEAD^{tree}; checked outer and admitted nested porcelain before the receipt write; calculated the scheduler and listed source/test SHA-256 values plus Git blobs; and searched the accelerator agent_supervisor and required PCSM-test forests for PCSMProjectionBuilder, ProofCarryingSemanticProjectionBuilder, projection builder, PCSM projection, pcsm_source_map, and SourceLinkReceipt.",
+      "result": "The bound outer head/tree and all four admitted gitlinks agree and all checked worktrees were clean before the declared receipt write. The exact-name searches found zero files for PCSMProjectionBuilder, ProofCarryingSemanticProjectionBuilder, and SourceLinkReceipt. The broader projection search found only non-PCSM graph projection and opaque federation persistence controls.",
+      "invalidates_on": "Any change to a bound outer commit/tree, admitted gitlink/head/tree, scheduler digest, listed source/test digest, search result, selected contract, or validation result requires a fresh receipt."
+    },
+    "pcsm_source_map": {
+      "kind": "unavailable",
+      "status": "unavailable",
+      "reason": "No current-tree PCSM SourceLinkReceipt or canonical aggregate PCSM source-map CID exists. Git blobs, SHA-256 values, a caller-supplied snapshot_id, and opaque federation content references are not substitutes for that contract."
+    }
+  },
+  "existing_equivalents_assessed": {
+    "kind": "measured",
+    "symbolic_contract_graph": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.analysis.symbolic_contract_graph.project_symbolic_contract_graph",
+      "interfaces": [
+        "SymbolicContractGraph@1",
+        "ContentIdentity@1"
+      ],
+      "schemas": [
+        "ipfs_accelerate_py/agent-supervisor/symbolic-contract-graph@1",
+        "ipfs_accelerate_py/agent-supervisor/symbolic-contract-node@1",
+        "ipfs_accelerate_py/agent-supervisor/symbolic-contract-edge@1"
+      ],
+      "determinism_and_cid_binding": "It uses deterministic DAG-JSON canonicalization and strict-dag-json-v1 CIDv1 DAG-JSON content identities. Its private _ProjectionBuilder rejects conflicting stable node keys and project_symbolic_contract_graph builds typed graph nodes and edges from a caller-supplied repository/AST index and snapshot_id.",
+      "non_equivalence": "This is a SwissKnife contract-graph projection, not a PCSM minification builder. It does not discover or bind the exact PCSM source forest itself, require a PCSM source-map CID, accept the PCSM-045 alias-table output or PCSM-044 anchor decision, produce compact projection text/bytes, or issue a PCSM projection receipt. Its version is graph version \"1\", not a versioned PCSM builder contract."
+    },
+    "semantic_projection_store": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.federation.semantic_projection.SemanticProjectionStore",
+      "interface": "SemanticProjectionStore@1",
+      "behavior": "It persistently records already-created opaque semantic-root and capsule projections through an attached typed Quack state client, checks tree-bound federation bindings, and rejects direct database paths.",
+      "non_equivalence": "It neither constructs source projections nor reads the PCSM forest. It requires caller-supplied projections, federation state, revisions, event IDs, and idempotency keys; it has no PCSM slice, alias table, semantic-anchor input, compact projection serializer, PCSM source-map CID, or PCSM projection receipt."
+    },
+    "structured_candidate_grammar": {
+      "selection": "ipfs_accelerate_py.agent_supervisor.residual_intelligence.structured_decoding.DEFAULT_GRAMMARS and decode_structured_output",
+      "schemas": [
+        "ipfs_accelerate_py/agent-supervisor/residual-expert-grammar@1",
+        "ipfs_accelerate_py/agent-supervisor/residual-structured-decode-result@1",
+        "ipfs_accelerate_py/agent-supervisor/residual-task-output@1"
+      ],
+      "behavior": "The PCSM-041-selected closed grammar parser rejects malformed or unbounded candidate model output and uses content-derived grammar/result/output identities.",
+      "non_equivalence": "It parses candidate output only and preserves candidate_only status. It does not build a semantic projection, establish a PCSM source-map/tree binding, or grant mutation, proof, validation, promotion, or completion authority."
+    },
+    "dependency_receipts": {
+      "artifacts": [
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-036.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-041.json",
+        "artifacts/proof_carrying_semantic_minification/receipts/PCSM-045.json"
+      ],
+      "currentness_rule": "Predecessor receipts are historical design context only. This receipt independently rechecked current tree identities, source files, search results, and prescribed validation; it does not reuse predecessor tree bindings as current evidence.",
+      "result": "PCSM-036 supplies a separate canonical capsule-invalidation selection, PCSM-041 selects the candidate grammar, and PCSM-045 records the absent bounded alias-table constructor. None supplies the missing PCSM projection builder."
+    },
+    "authority_boundary": "Datasets retains canonical semantic identity; kit retains exact-byte/CID storage; a local alias never becomes canonical identity; graph retrieval and model output remain context/candidate-only. This receipt creates no source mutation, builder, schema, alias table, source linker, proof acceptance, validation acceptance, promotion, task completion, M2, or M3 authority."
+  },
+  "capability_disposition": {
+    "kind": "unavailable",
+    "status": "unavailable_non_promoted",
+    "required_implementation": "A versioned deterministic Python-v1 PCSM projection builder that accepts only the canonical slice-used semantic targets plus the bounded alias-table and semantic-anchor decisions, validates the exact current source forest and canonical PCSM source-map CID, emits a bounded compact projection with canonical target relinking and an immutable projection CID, and emits a receipt binding those identities and deterministic construction policy.",
+    "missing_bindings": [
+      "PCSM projection-builder schema/version and callable implementation",
+      "canonical PCSM slice input and exact current PCSM source-map CID",
+      "bounded alias-table and semantic-anchor decision inputs from the prerequisite package contracts",
+      "deterministic compact projection serialization, projection CID, and receipt contract",
+      "package-specific positive and negative vectors for determinism, stale-tree/map rejection, identity relinking, bounds, and authority rejection"
+    ],
+    "disposition": "No PCSM projection, projection CID, source-map CID, deterministic-builder result, or package-specific test pass is claimed. The adjacent controls remain reusable only inside their own stated contracts."
+  },
+  "source_inventory": [
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/symbolic_contract_graph.py",
+      "git_blob": "451ea4a45496eedfbccf8c289b19c11a19370985",
+      "sha256": "ed4ae27349e10b338b1869637d4088bf4082ef17dae28d85867966a45e6ddb5c",
+      "role": "closest deterministic content-addressed graph projection builder; explicitly not PCSM compact projection construction"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/federation/semantic_projection.py",
+      "git_blob": "022a2e393df3828ceb9b9ec3536c8453b446a47c",
+      "sha256": "1476da93897422ad539a99d1127a8334ee2cc6fe30ef85a85fb7595c00d55fc9",
+      "role": "tree-bound opaque federation projection persistence; explicitly not source projection construction"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/residual_intelligence/structured_decoding.py",
+      "git_blob": "3bb1dae4dca193a7c393c0e3ac71cd95f3fa47e6",
+      "sha256": "7de11f7193498a456932c7511adf21f44342105f18c90cdfa4f6cc04508e92d4",
+      "role": "closed typed candidate-output grammar selected by PCSM-041; not projection construction"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_token_ledger.py",
+      "git_blob": "be6d58f526d52d427c367d8a683d2d375734cda3",
+      "sha256": "67bca102c9b2ebb9245ad8b492eee982cc9d1f5cfdbfbb7c734c59f69c9329de",
+      "role": "versioned provider/tokenizer accounting prerequisite; not PCSM projection construction"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/tests/proof_carrying_semantic_minification/test_structured_decoding.py",
+      "invoked_via": "external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py symlink",
+      "git_blob": "c25192cb06f20469093e9fc53e4e35d0c1ae171e",
+      "sha256": "3bc38cb4072628075cb6c4f76b233f5b53a9a79ef589b9980da9a763c554ff61",
+      "role": "prescribed-suite positive and negative closed grammar coverage; not PCSM projection-builder coverage"
+    },
+    {
+      "kind": "measured",
+      "path": "external/ipfs_accelerate/test/api/causal_federation/test_semantic_projection.py",
+      "git_blob": "3b9fefd1dd56fdff2f6fa71b680da55aa798627a",
+      "sha256": "e85cc9f0ae846fe6af5d0a22cf4de25ac0fc1a0f04c13ef8a763d1029c7b0fe1",
+      "role": "adjacent federation persistence positive and fail-closed test source; not invoked or relabelled as PCSM projection-builder coverage"
+    }
+  ],
+  "test_and_validation_evidence": {
+    "required_validation": {
+      "kind": "measured",
+      "requested_command": "python -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=/tmp/ipfs-accelerate-validation-home-pcsm046-<fresh> XDG_CACHE_HOME=$HOME/.cache XDG_CONFIG_HOME=$HOME/.config XDG_DATA_HOME=$HOME/.local/share XDG_STATE_HOME=$HOME/.local/state PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.12 -m pytest -q external/ipfs_accelerate/test/agent_supervisor",
+      "environment": "Python 3.12.3; exact required PATH; fresh private HOME and XDG paths; user-site packages disabled.",
+      "status": "passed",
+      "result": "11 passed in 0.36s",
+      "scope_limit": "All collected tests are external/ipfs_accelerate/test/agent_supervisor/pcsm/test_structured_decoding.py. They validate the existing closed candidate-output grammar, not the unavailable PCSM projection builder."
+    },
+    "positive_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "the required suite accepts all 24 closed task-family grammars and a compact typed candidate output",
+        "the required suite accepts explicit bounded abstention and aligned, bounded descending ranking vectors",
+        "the inspected federation projection tests cover preconstructed tree-bound opaque projection persistence"
+      ],
+      "scope_limit": "These are adjacent-control facts only; neither test source defines a PCSM projection-builder vector."
+    },
+    "negative_coverage": {
+      "kind": "measured",
+      "coverage": [
+        "the required suite rejects prose, malformed JSON, duplicate fields, unknown fields, model-created completion fields, untyped values, unbounded scope, invalid paths, and invalid ranking vectors",
+        "the inspected federation projection tests reject tree mismatches, non-tree-bound data, sibling paths, invalid dependency roots, and direct database-path construction"
+      ],
+      "scope_limit": "The tests reject invalid adjacent inputs; they are not relabelled as missing projection-builder coverage."
+    },
+    "projection_builder_test_gap": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No current-head PCSMProjectionBuilder/ProofCarryingSemanticProjectionBuilder package, schema, or direct test module exists. Accordingly no vector exercises canonical PCSM slice input, alias/anchor integration, stale-tree/source-map rejection, deterministic compact serialization, canonical relinking, projection-CID replay, or authority rejection for that package."
+    },
+    "formal_prover": {
+      "kind": "unavailable",
+      "status": "not_run",
+      "reason": "No PCSM-046 formal proof obligation or approved digest-bound prover deployment is specified. Python tests and adjacent content identities are not represented as proof of the unavailable PCSM builder."
+    }
+  },
+  "evidence_summary": {
+    "measured": "Exact outer and admitted nested commits/trees, clean/freshness checks, scheduler and listed source/test SHA-256 plus Git-blob identities, targeted absence/equivalence searches, adjacent contract inspection, and sealed prescribed validation with 11 passed.",
+    "estimated": "None. No estimate is used to establish a projection-builder property, identity, or test result.",
+    "simulated": "The prescribed structured-decoding suite executes controlled candidate fixtures. Those exercises corroborate only the grammar's bounded candidate contract, not production PCSM source projection behavior.",
+    "unavailable": "A PCSM projection-builder schema/package, exact PCSM source-map CID, canonical builder input/output and projection CID, alias/anchor integration, package-specific positive/negative coverage, formal-prover result, and immutable self-CID for this receipt."
+  },
+  "limitations": [
+    "This is a current-head capability assessment and non-promotion disposition, not a PCSM projection builder, compact projection, source-link receipt, semantic proof, or promotion decision.",
+    "SymbolicContractGraph@1 and SemanticProjectionStore@1 are intentionally retained as their own graph and federation authorities. Their deterministic or tree-bound behavior cannot be relabelled as PCSM minification construction.",
+    "The required passing suite validates only closed candidate output. It does not supply the missing PCSM builder's positive or negative vectors.",
+    "Only the declared receipt changed. Exact authority excludes the missing implementation and test paths.",
+    "This receipt has no immutable self-CID because minting a self-describing CID would change its bytes."
+  ],
+  "rollback": {
+    "procedure": "Revert only this receipt and invalidate consumers of this current-head capability assessment. Do not alter adjacent controls, protected planning documents, or unrelated source bytes.",
+    "freshness_requirement": "Do not reuse this receipt after any bound tree or gitlink, scheduler/source/test digest, search result, selected contract, PCSM source-map capability, or validation result changes."
+  },
+  "supervisor_acceptance": {
+    "completion_authoritative": false,
+    "state": "pending_independent_fenced_supervisor"
+  },
+  "acceptance": {
+    "current_head_bound": true,
+    "existing_equivalents_assessed_first": true,
+    "required_pcsm_projection_builder_implemented": false,
+    "unavailable_implementation_recorded_fail_closed": true,
+    "adjacent_contract_determinism_verified": true,
+    "schema_version_and_cid_binding_recorded_where_applicable": true,
+    "positive_and_negative_validation_passed_for_existing_controls": true,
+    "projection_builder_test_coverage_available": false,
+    "measured_estimated_simulated_and_unavailable_evidence_distinguished": true,
+    "authority_boundaries_preserved": true,
+    "no_competing_authority_created": true,
+    "promotion_status": "non_promoted_unavailable"
+  }
+}
