@@ -1,0 +1,146 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "boundaries": {
+    "collection": {
+      "action": "RUN",
+      "assembler_interface": "LocatorFirstItemIdentityAssembler@1",
+      "attaches_execution_key": false,
+      "authority": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py",
+      "authorizes_lookup": false,
+      "authorizes_skip": false,
+      "fixture_setup": false,
+      "hook": "pytest_collection_modifyitems",
+      "seed_interface": "ProofReuseCollectionSeed@1",
+      "test_call": false
+    },
+    "di": {
+      "explicit_injection_overrides_defaults": true,
+      "identity_services": "_ipfs_proof_reuse_identity_services",
+      "issuer": "_ipfs_proof_reuse_issuer_service",
+      "lookup": "_ipfs_proof_reuse_lookup_service",
+      "partial_resolution_injects_authority": false,
+      "provider": "_ipfs_proof_reuse_provider_service",
+      "services_interface": "ProofReuseServices@1",
+      "store": "_ipfs_proof_reuse_store_service"
+    },
+    "fixture_timing": {
+      "collection_instance_key_authoritative": false,
+      "fixture_values_exist_at": "setup",
+      "lifecycle_wraps": [
+        "setup",
+        "call",
+        "teardown"
+      ],
+      "runtime_evidence_provenance": "fresh_controlled_preflight",
+      "warm_rebuild_executes_fixtures": false
+    },
+    "runtime_trace": {
+      "interface": "PytestRuntimeTraceLifecycle@1",
+      "phases": [
+        "setup",
+        "call",
+        "teardown"
+      ],
+      "publication_authority": "complete_pass",
+      "receipt_interface": "ProofReuseReceiptCapture@1",
+      "reenters_test_body": false
+    },
+    "xdist_publication": {
+      "authorizes_skip": false,
+      "controller_transaction": "ProofReuseControllerPublicationTransaction@1",
+      "interface": "ProofReuseXdistCoordination@1",
+      "publication_authority": "controller",
+      "worker_can_write_store": false,
+      "worker_role": "read_execute_only"
+    }
+  },
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json",
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py"
+  ],
+  "claim": "This tracked receipt inventories current pytest proof-reuse identity and DI paths; it does not complete the task, admit reuse, mint an authoritative CID, or approve its own output.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics",
+  "claim_establishes": "exact bytes/digest/CID/Merkle inclusion",
+  "completion_authority": "controller_owned_sealed_validation_and_database_cas",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "inventory": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json",
+  "inventory_schema": "pctdd/pytest-identity@1",
+  "inventory_sha256": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997",
+  "limitations": [
+    "exact fixture-instance key is not safely authoritative at collection",
+    "TestExecutionKeyV2 is absent from the current pytest path",
+    "honest composite phase receipt is not the current pytest authority",
+    "production ZK/key ceremony remains typed unavailable",
+    "unknown fixture or dependency semantics force full execution fallback"
+  ],
+  "mapped_current": [
+    "locator-first seed",
+    "runtime trace",
+    "DI lookup/store/provider/issuer",
+    "controller-owned xdist publication"
+  ],
+  "mapped_gap": "exact fixture-instance key becomes safely authoritative only after current setup; add pre-call V2 key and honest composite phase receipt",
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "receipt_cid": {
+    "classification": "typed_unavailable_worker_cannot_assign_authoritative_cid",
+    "reason": "CID assignment and task-completion CAS remain controller-owned"
+  },
+  "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py",
+  "schema": "pctdd/pytest-identity-inventory-receipt@1",
+  "self_approval": false,
+  "status": "inventory_observation_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-002",
+  "typed_unavailable": [
+    {
+      "claim_unchanged": true,
+      "classification": "not_authoritative_until_current_setup",
+      "reason": "exact fixture-instance key becomes safely authoritative only after current setup; add pre-call V2 key and honest composite phase receipt",
+      "surface": "fixture-instance execution key at collection"
+    },
+    {
+      "claim_unchanged": true,
+      "classification": "absent_from_current_pytest_path",
+      "reason": "current pytest path still uses locator-first collection seed plus post-pass TestExecutionKey; V2 is a successor contract",
+      "surface": "TestExecutionKeyV2"
+    },
+    {
+      "claim_unchanged": true,
+      "classification": "absent_from_current_pytest_path",
+      "reason": "current capture is TestPassReceipt over setup/call/teardown; honest composite successor is not yet the pytest authority",
+      "surface": "composite phase receipt"
+    },
+    {
+      "claim_unchanged": true,
+      "classification": "typed_unavailable",
+      "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding",
+      "surface": "production ZK/key ceremony"
+    },
+    {
+      "claim_unchanged": true,
+      "classification": "research_only_or_unqualified",
+      "reason": "direct_cpython is research_only and not production_admitted",
+      "surface": "optional native/direct-execution profiles"
+    },
+    {
+      "claim_unchanged": true,
+      "classification": "opaque_full_fallback",
+      "reason": "fixture adapter default is opaque; unknown completeness forces full execution",
+      "surface": "unknown fixture/dependency semantics"
+    },
+    {
+      "claim_unchanged": true,
+      "classification": "typed_unavailable_worker_cannot_assign_authoritative_cid",
+      "reason": "CID assignment and task-completion CAS remain controller-owned",
+      "surface": "worker-assigned receipt CID"
+    }
+  ],
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-002@1",
+  "verifier_admission": "controller_owned_independent_validation",
+  "worker_authored_test_is_sufficient_alone": false,
+  "worker_may_complete": false
+}
