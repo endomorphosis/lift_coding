@@ -1,0 +1,556 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py"
+  ],
+  "claim": "every current source-to-CID and seal-publication path is inventoried without changing identity",
+  "completion_authoritative": false,
+  "completion_authority": "controller_owned_sealed_validation_and_database_cas",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "independent_tests": [
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py"
+  ],
+  "limitations": [
+    "Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.",
+    "kit proof_seal_store and datasets incremental_sealing evidence are source-absent on the current gitlinks; IncrementalProofSealer publication APIs remain inventoried from accelerate source without self-approving a store.",
+    "This receipt is not completion evidence and cannot admit, publish, or complete PCTDD-001."
+  ],
+  "markdown_non_authoritative": true,
+  "paths": [
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "raw",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.utils.cid_utils",
+      "multibase": "base32",
+      "multihash": "sha2-256",
+      "path_id": "datasets.cid_utils.raw",
+      "profile": "cidv1-base32-raw-sha2-256",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "cid_for_bytes",
+        "validate_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "dag-json",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.utils.cid_utils",
+      "multibase": "base32",
+      "multihash": "sha2-256",
+      "path_id": "datasets.cid_utils.dag_json",
+      "profile": "cidv1-base32-dag-json-sha2-256",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_dag_json",
+        "validate_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "raw",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.utils.cid_utils",
+      "notes": "permissive canonical_json_bytes default=repr path; not an alias of strict dag-json",
+      "path_id": "datasets.cid_utils.legacy_obj",
+      "profile": "legacy-canonical-json-raw",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "stage": "canonical serialization",
+      "symbols": [
+        "canonical_json_bytes",
+        "cid_for_obj"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "raw",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.logic.software_contracts.content",
+      "path_id": "datasets.software_contracts.content.source",
+      "profile": "software-contract-cid-profile-v1",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "cid_for_bytes",
+        "decode_and_recompute_source",
+        "validate_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "dag-json",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.logic.software_contracts.content",
+      "path_id": "datasets.software_contracts.content.structured",
+      "profile": "software-contract-cid-profile-v1",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_structured",
+        "decode_and_recompute_structured"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.logic.ir_core.canonical",
+      "path_id": "datasets.ir_core.canonical_json",
+      "profile": "ir-canonical-json-v1",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/canonical.py",
+      "stage": "canonical serialization",
+      "symbols": [
+        "CANONICAL_JSON_PROFILE",
+        "canonical_json_bytes"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "raw",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.logic.ir_core.identity",
+      "multibase": "base32",
+      "multihash": "sha2-256",
+      "path_id": "datasets.ir_core.identity",
+      "profile": "ir-canonical-identity-v1",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/identity.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "canonical_identity",
+        "cid_v1",
+        "sha256_digest"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "dag-json",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.logic.ipld_cid",
+      "notes": "ensure_ascii=True; non-ASCII payloads are not interchangeable with cid_utils dag-json",
+      "path_id": "datasets.ipld_cid.dag_json",
+      "profile": "profile-d-dag-json",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/logic/ipld_cid.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "canonical_dag_json",
+        "dag_json_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "dag-json",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.logic.profile_g",
+      "path_id": "datasets.profile_g.dag_json",
+      "profile": "profile-g-dag-json",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/logic/profile_g.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "canonical_profile_g_bytes",
+        "profile_g_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "does_not": "execution or semantics",
+      "module": "ipfs_datasets_py.logic.software_contracts.semantic_state.merkle",
+      "path_id": "datasets.symbol_merkle_dag",
+      "profile": "SymbolMerkleDag@1",
+      "source_file": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_state/merkle.py",
+      "stage": "Merkle",
+      "symbols": [
+        "SYMBOL_MERKLE_DAG_INTERFACE",
+        "SYMBOL_MERKLE_DAG_SCHEMA"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "raw+dag-json",
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.utils.cid_utils",
+      "path_id": "accelerate.cid_utils.closed_profile",
+      "profile": "cidv1-base32-raw+dag-json-sha2-256",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/utils/cid_utils.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_bytes",
+        "cid_for_dag_json"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.agent_supervisor.core.multiformats_identity",
+      "path_id": "accelerate.multiformats_identity",
+      "profile": "vfs/cid-profile@1",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/multiformats_identity.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "cid_for_bytes",
+        "cid_for_dag_json",
+        "canonical_dag_json_bytes"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "dag-json",
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.agent_supervisor.analysis.content_identity_bridge",
+      "path_id": "accelerate.content_identity_bridge.strict_dag_json_v1",
+      "profile": "strict-dag-json-v1",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "identify_strict_artifact",
+        "profiles_are_interchangeable"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "raw",
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.agent_supervisor.analysis.content_identity_bridge",
+      "path_id": "accelerate.content_identity_bridge.ir_canonical_identity_v1",
+      "profile": "ir-canonical-identity-v1",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "identify_logic_ir",
+        "profiles_are_interchangeable"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "dag-cbor",
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.testing.proof_reuse.runner_pass_attestation",
+      "path_id": "accelerate.runner_pass_attestation.dag_cbor",
+      "profile": "RunnerPassAttestation@1",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "canonical_dag_cbor",
+        "cidv1_for_bytes"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "does_not": "execution or semantics",
+      "does_not_establish": "CID or semantic identity",
+      "module": "ipfs_accelerate_py.agent_supervisor.analysis.repository_corpus_index",
+      "path_id": "accelerate.repository_corpus_index.git_blob_oid",
+      "role": "memo_lookup_key_only",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_corpus_index.py",
+      "stage": "source discovery",
+      "symbols": [
+        "CorpusEntry"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.agent_supervisor.analysis.repository_corpus_index",
+      "path_id": "accelerate.repository_corpus_index.dirty_overlay_candidate",
+      "role": "candidate_only",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_corpus_index.py",
+      "stage": "source discovery",
+      "symbols": [
+        "CorpusEntry"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "typed_unavailable",
+      "claim_class": "IntegrityCommitment",
+      "claim_unchanged": true,
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.sealer",
+      "path_id": "accelerate.incremental_sealing.publish_full_checkpoint",
+      "publication_authority": false,
+      "reason_code": "kit_proof_seal_store_or_datasets_seal_evidence_missing",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+      "stage": "serial WAL/CAS",
+      "symbols": [
+        "IncrementalProofSealer",
+        "publish_full_checkpoint"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "typed_unavailable",
+      "claim_class": "IntegrityCommitment",
+      "claim_unchanged": true,
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.sealer",
+      "path_id": "accelerate.incremental_sealing.publish_delta_seal",
+      "publication_authority": false,
+      "reason_code": "kit_proof_seal_store_or_datasets_seal_evidence_missing",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+      "stage": "serial WAL/CAS",
+      "symbols": [
+        "IncrementalProofSealer",
+        "publish_delta_seal"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "availability": "typed_unavailable",
+      "claim_class": "IntegrityCommitment",
+      "claim_unchanged": true,
+      "does_not": "execution or semantics",
+      "module": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.verification",
+      "path_id": "accelerate.incremental_sealing.verify_seal",
+      "reason_code": "kit_proof_seal_store_or_datasets_seal_evidence_missing",
+      "source_file": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/verification.py",
+      "stage": "proof verification",
+      "symbols": [
+        "verify_seal"
+      ]
+    },
+    {
+      "authority": "ipfs_kit_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "raw",
+      "does_not": "execution or semantics",
+      "module": "ipfs_kit_py.proof_certificate_store",
+      "notes": "moves immutable bytes by CID; never decides test-reuse meaning",
+      "path_id": "kit.proof_certificate_store.raw",
+      "source_file": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+      "stage": "immutable store",
+      "symbols": [
+        "cid_for_certificate_bytes",
+        "decode_certificate_cid",
+        "verify_certificate_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_kit_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "codec": "dag-json",
+      "does_not": "execution or semantics",
+      "module": "ipfs_kit_py.mcp_server.mcplusplus.coordination_storage",
+      "path_id": "kit.coordination_storage.dag_json",
+      "source_file": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
+      "stage": "SHA/CID",
+      "symbols": [
+        "cid_for_bytes",
+        "cid_for_artifact"
+      ]
+    },
+    {
+      "authority": "ipfs_kit_py",
+      "availability": "available",
+      "claim_class": "IntegrityCommitment",
+      "does_not": "execution or semantics",
+      "module": "ipfs_kit_py.mcp_server.mcplusplus.coordination_storage",
+      "path_id": "kit.coordination_storage.state_root_cas",
+      "source_file": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
+      "stage": "serial WAL/CAS",
+      "symbols": [
+        "DurableCoordinationStore"
+      ]
+    },
+    {
+      "authority": "ipfs_kit_py",
+      "availability": "typed_unavailable",
+      "claim_class": "IntegrityCommitment",
+      "claim_unchanged": true,
+      "does_not": "execution or semantics",
+      "module": "ipfs_kit_py.proof_seal_store",
+      "path_id": "kit.proof_seal_store.wal_cas",
+      "reason_code": "kit_proof_seal_store_or_datasets_seal_evidence_missing",
+      "source_file": "external/ipfs_kit/ipfs_kit_py/proof_seal_store",
+      "stage": "serial WAL/CAS",
+      "symbols": [
+        "HermeticProofSealStore",
+        "SealTransitionWal",
+        "CurrentSealRepository"
+      ]
+    }
+  ],
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "proof_claim_class": "IntegrityCommitment",
+  "receipt_cid": "baguqeera2nrgvqykq7tppjscqiz3hructglwqzp2kueoijt4kqk4o2xxu5za",
+  "receipt_cid_preimage": {
+    "a": 2,
+    "b": 1
+  },
+  "receipt_cid_preimage_note": "Closed software-contract dag-json golden map; proves the inventoried encoder. The independent test also recomputes a CIDv1 over the full receipt body and requires validation without self-admission.",
+  "schema": "pctdd/task-inventory-receipt@1",
+  "self_approval": false,
+  "source_forest": {
+    "authorities": [
+      {
+        "gitlink": "a14d16cee74f49fd3b51632a026e1d7669b4fa59",
+        "name": "ipfs_accelerate_py",
+        "path": "external/ipfs_accelerate",
+        "tree": "91be9301e3a6b62143ada426bef329411f2a1e97"
+      },
+      {
+        "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "name": "ipfs_datasets_py",
+        "path": "external/ipfs_datasets",
+        "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+      },
+      {
+        "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "name": "ipfs_kit_py",
+        "path": "external/ipfs_kit",
+        "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+      }
+    ],
+    "policy": "frozen authority gitlinks are re-verified live; this inventory does not mint a CID profile or replace existing identities"
+  },
+  "status": "pending_controller_owned_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-001",
+  "typed_unavailable": [
+    {
+      "case_id": "aggregate_selected_test_zk",
+      "claim_class": "ReceiptAggregationZkProof",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "aggregate_statement_and_admitted_key_missing",
+      "self_approving": false
+    },
+    {
+      "case_id": "datasets_incremental_sealing_evidence",
+      "claim_class": "IntegrityCommitment",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "datasets_incremental_sealing_evidence_absent_on_current_gitlink",
+      "self_approving": false
+    },
+    {
+      "case_id": "direct_cpython_research_only",
+      "claim_class": "DirectExecutionProof",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "research_only",
+      "self_approving": false
+    },
+    {
+      "case_id": "groth16_unqualified",
+      "claim_class": "ReceiptAggregationZkProof",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "real_backend_binary_present_unqualified",
+      "self_approving": false
+    },
+    {
+      "case_id": "kit_proof_seal_store",
+      "claim_class": "IntegrityCommitment",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "kit_proof_seal_store_absent_on_current_gitlink",
+      "self_approving": false
+    },
+    {
+      "case_id": "native_batch_hashing",
+      "claim_class": "IntegrityCommitment",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "optional_qualified_native_batch_not_installed",
+      "self_approving": false
+    },
+    {
+      "case_id": "parallel_immutable_preparation",
+      "claim_class": "IntegrityCommitment",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "parallel_immutable_preparation_absent_or_partial",
+      "self_approving": false
+    },
+    {
+      "case_id": "production_key_ceremony",
+      "claim_class": "ReceiptAggregationZkProof",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "production_key_ceremony_unadmitted",
+      "self_approving": false
+    },
+    {
+      "case_id": "provekit_not_production_admitted",
+      "claim_class": "ReceiptAggregationZkProof",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "adapter_source_present",
+      "self_approving": false
+    },
+    {
+      "case_id": "simulated_proof_not_production_admitted",
+      "claim_class": "SignedExecutionReceipt",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "simulated",
+      "self_approving": false
+    },
+    {
+      "case_id": "verified_persistent_hash_memo",
+      "claim_class": "IntegrityCommitment",
+      "does_not_upgrade_claim": true,
+      "observed": "typed_unavailable",
+      "production_admitted": false,
+      "reason_code": "verified_persistent_hash_memo_partial",
+      "self_approving": false
+    }
+  ],
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1",
+  "verifier_admission": "not_self_admitted; controller executes pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
+
