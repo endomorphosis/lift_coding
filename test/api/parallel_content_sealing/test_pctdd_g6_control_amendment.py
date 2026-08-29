@@ -222,7 +222,11 @@ def test_theorem_prover_inventory_distinguishes_installation_from_sealed_admissi
         assert record["provisioning"] == "ipfs_datasets_py managed theorem-prover installer"
         assert record["required"] is False
         assert isinstance(record["installer_discovered"], bool)
-        if not record["available"] and record["installer_discovered"]:
+        if record["available"]:
+            assert record["classification"] == "ipfs_datasets_py_lazy_installer_available"
+            assert record["install_path"]
+            assert record["version"]
+        elif record["installer_discovered"]:
             assert record["classification"] == "installed_unqualified_user_mutable"
 
 

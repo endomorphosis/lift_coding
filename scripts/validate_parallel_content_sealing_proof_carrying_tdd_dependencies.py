@@ -2,9 +2,11 @@
 """Verify the PCTDD dependency/source seal against the current checkout.
 
 The validator is deliberately read-only: it never installs extensions,
-provers, keys, or packages.  Missing optional proof capabilities may be sealed
-as typed unavailable records; a record marked required or production-admitted
-fails closed when it cannot be reproduced exactly.
+keys, or packages.  Optional theorem provers are discovered through the
+ipfs_datasets_py lazy installer (managed bin + already-installed PATH) without
+downloading.  Missing optional proof capabilities may be sealed as typed
+unavailable records; a record marked required or production-admitted fails
+closed when it cannot be reproduced exactly.
 """
 
 from __future__ import annotations
@@ -12,6 +14,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import importlib.metadata
+import importlib.util
 import json
 import os
 import platform
@@ -323,62 +326,33 @@ def _extension_state(name: str, *, extension_directory: str = "") -> dict[str, A
 
 
 def _command_state(name: str, argv: tuple[str, ...]) -> dict[str, Any]:
-    accelerator = ROOT / "external/ipfs_accelerate"
-    if str(accelerator) not in sys.path:
-        sys.path.insert(0, str(accelerator))
-    from ipfs_accelerate_py.agent_supervisor.validation.validation_runtime import (  # noqa: E402
-        build_validation_environment,
+    generator_path = ROOT / "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py"
+    spec = importlib.util.spec_from_file_location(
+        "pctdd_controls_theorem_provers",
+        generator_path,
     )
-
-    # Use the current supervisor's formal-toolchain deployment authority even
-    # when this validator is invoked directly from an operator shell.  A
-    # user-writable elan/pip shim may establish that a tool was installed, but
-    # it is not executable admission for sealed supervisor validation.
-    command_environment = build_validation_environment(os.environ)
-    executable = shutil.which(argv[0], path=command_environment.get("PATH", ""))
-    result: dict[str, Any] = {
+    if spec is None or spec.loader is None:
+        return {
+            "name": name,
+            "command": argv[0],
+            "available": False,
+            "executable": "",
+            "version": "",
+            "error": "PCTDD control generator is unavailable",
+        }
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    probed = module.probe_managed_theorem_prover(name, argv, install=False)
+    return {
         "name": name,
         "command": argv[0],
-        "available": executable is not None,
-        "executable": str(Path(executable).resolve()) if executable else "",
-        "version": "",
-        "error": "",
+        "available": bool(probed.get("available")),
+        "executable": str(probed.get("install_path") or ""),
+        "install_path": str(probed.get("install_path") or ""),
+        "version": str(probed.get("version") or ""),
+        "error": str(probed.get("error") or ""),
+        "loaded": True,
     }
-    if executable is None:
-        return result
-    command_environment["ELAN_NO_UPDATE_CHECK"] = "1"
-    # ``lean`` is commonly an elan shim.  Do not let an explicit dependency
-    # check turn into an implicit toolchain download: first establish that an
-    # installed toolchain already exists locally.
-    if name == "lean" and ("/.elan/" in str(Path(executable).resolve()) or Path(executable).name == "elan"):
-        elan = shutil.which("elan", path=command_environment.get("PATH", ""))
-        if elan is None:
-            result["available"] = False
-            result["error"] = "elan shim present but elan executable is unavailable"
-            return result
-        listed = subprocess.run(
-            [elan, "toolchain", "list"], text=True, capture_output=True,
-            check=False, timeout=10, env=command_environment,
-        )
-        installed = [line.strip() for line in listed.stdout.splitlines() if line.strip()]
-        if listed.returncode != 0 or not installed or installed == ["no installed toolchains"]:
-            result["available"] = False
-            result["error"] = "elan has no locally installed Lean toolchain"
-            return result
-    try:
-        completed = subprocess.run(
-            [executable, *argv[1:]], text=True, capture_output=True,
-            check=False, timeout=20, env=command_environment,
-        )
-        text = (completed.stdout or completed.stderr).strip()
-        result["version"] = text.splitlines()[0] if text else ""
-        if completed.returncode != 0:
-            result["available"] = False
-            result["error"] = f"exit {completed.returncode}: {text[:300]}"
-    except Exception as exc:
-        result["available"] = False
-        result["error"] = f"{type(exc).__name__}: {exc}"
-    return result
 
 
 def _verify_capability_record(
@@ -392,13 +366,30 @@ def _verify_capability_record(
         errors.append(f"dependency seal omits capability record {name}")
         return
     observed = _record_bool(record, "available", "load_ok", "loaded", "operational")
+    actual_available = bool(actual.get("available") and actual.get("loaded", True))
+    required = _record_bool(record, "required", "required_for_launch", "mandatory") is True
     if observed is None:
         errors.append(f"{name} capability record omits explicit availability")
-    elif observed != bool(actual.get("available") and actual.get("loaded", True)):
-        errors.append(
-            f"{name} availability differs: sealed={observed}, "
-            f"actual={bool(actual.get('available') and actual.get('loaded', True))}"
+    elif observed != actual_available:
+        provisioning = str(
+            record.get("provisioning") or record.get("installer_authority") or ""
+        ).lower()
+        optional_lazy_promotion = (
+            not required
+            and not observed
+            and actual_available
+            and "ipfs_datasets" in provisioning
         )
+        if optional_lazy_promotion:
+            warnings.append(
+                f"{name} was sealed unavailable and is now provided by the "
+                "ipfs_datasets_py lazy installer"
+            )
+        else:
+            errors.append(
+                f"{name} availability differs: sealed={observed}, "
+                f"actual={actual_available}"
+            )
     sealed_version = str(record.get("version") or record.get("extension_version") or "").strip()
     actual_version = str(actual.get("version") or "").strip()
     if observed and not sealed_version:
@@ -412,7 +403,6 @@ def _verify_capability_record(
             errors.append(
                 f"{name} {field} differs: sealed={sealed_value!r}, actual={actual_value!r}"
             )
-    required = _record_bool(record, "required", "required_for_launch", "mandatory") is True
     if required and not actual.get("available"):
         errors.append(f"required capability {name} is unavailable: {actual.get('error', '')}")
     elif not actual.get("available"):

@@ -33,13 +33,13 @@
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:323031907b0640bbcebde389c6ade82fd465b359c37e8ff7e66b1f6000cfdcc9",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json": "sha256:11c32db94286c8a7006d6d63fb27b5d4f2a6c02d471d406e50b73fcaeabd7998",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
-    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:bc98034deae99a59f10f08d70684c658a7f924060e55b2f5866a26b72d7c1ded",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:adee989bdc0d9b1a2fd528667d192601df85bae8e5307139d57bbfde99571e82",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py": "sha256:274629d1eba8a92ffa5c6f42c2e93d9203871c6b4e8166c00ea152e344077ad7",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py": "sha256:67e07858b78658f61f772299d59ff692b2bc792f09ef9ec7542da8d3cbbeae3e",
     "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py": "sha256:61757f1a6f66bda791b487a2e96bb7d7dbbe61e8b544b9379a89d7b0e9a04be4",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py": "sha256:11ffd3f7d5f913ff909aa43537e6075ab8636310b2b9f761b837929e5c1e0318",
-    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py": "sha256:d74fe5779e52bed1b07f49e5537de7c4cb1a97aade545ed5881cb9f1ab87c97c",
-    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py": "sha256:bda0c98f5c4d63dce23c2b19e067d475bf7b9e4bea40df0396ed7529d7f6acbe"
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py": "sha256:00b846c144241ba7312213570581e0c4a6c59bb94fea6543f1994dfbb251e365",
+    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py": "sha256:425dfe54f04adae82aa5bdce1367d1347d8673d3cdc59c40a32737bbe8e35a6d"
   },
   "schema": "pctdd/operator-control-manifest@1",
   "task_id": "PCTDD-000"

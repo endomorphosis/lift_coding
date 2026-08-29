@@ -718,61 +718,102 @@ def public_origin(origin: str) -> str:
     return origin
 
 
-def theorem_prover_capabilities() -> dict[str, dict[str, Any]]:
-    accelerator = ROOT / "external/ipfs_accelerate"
-    if str(accelerator) not in sys.path:
-        sys.path.insert(0, str(accelerator))
-    from ipfs_accelerate_py.agent_supervisor.validation.validation_runtime import (
-        build_validation_environment,
+def _datasets_on_path() -> None:
+    datasets = ROOT / "external/ipfs_datasets"
+    if str(datasets) not in sys.path:
+        sys.path.insert(0, str(datasets))
+
+
+def probe_managed_theorem_prover(
+    name: str,
+    argv: tuple[str, ...],
+    *,
+    install: bool,
+) -> dict[str, Any]:
+    """Resolve Lean/CVC5/Coq through the ipfs_datasets_py lazy installer.
+
+    Capture may install missing default-on tools.  Validation only discovers
+    already-managed executables and never downloads.
+    """
+
+    _datasets_on_path()
+    from ipfs_datasets_py.logic.external_provers.lazy_installer import (
+        ensure_prover_executable,
+        find_executable,
     )
 
-    environment = build_validation_environment(os.environ)
-    environment["ELAN_NO_UPDATE_CHECK"] = "1"
-    result: dict[str, dict[str, Any]] = {}
-    for name, command in {
-        "lean": ("lean", "--version"),
-        "cvc5": ("cvc5", "--version"),
-        "coq": ("coqc", "--version"),
-    }.items():
-        executable = shutil.which(command[0], path=environment.get("PATH", ""))
-        installer_discovered = shutil.which(command[0]) is not None
-        available = False
-        version = ""
-        if executable:
+    discovered = find_executable(argv[0])
+    executable = (
+        ensure_prover_executable(
+            name,
+            reason=f"PCTDD {name} theorem-prover via ipfs_datasets_py lazy installer",
+        )
+        if install
+        else discovered
+    )
+    available = False
+    version = ""
+    error = ""
+    install_path = ""
+    if executable:
+        install_path = str(Path(executable).resolve())
+        command_environment = os.environ.copy()
+        command_environment["ELAN_NO_UPDATE_CHECK"] = "1"
+        command_environment["PATH"] = os.pathsep.join(
+            [str(Path(executable).parent), command_environment.get("PATH", "")]
+        )
+        try:
             completed = subprocess.run(
-                [executable, *command[1:]],
+                [executable, *argv[1:]],
                 cwd=ROOT,
-                env=environment,
+                env=command_environment,
                 text=True,
                 capture_output=True,
                 check=False,
                 timeout=20,
             )
+        except Exception as exc:
+            error = f"{type(exc).__name__}: {exc}"
+        else:
             version_text = (completed.stdout or completed.stderr).strip()
             version = version_text.splitlines()[0] if version_text else ""
             available = completed.returncode == 0
-        result[name] = {
-            "name": name,
-            "available": available,
-            "version": version,
-            "required": False,
-            "classification": (
-                "sealed_formal_toolchain_available"
-                if available
-                else (
-                    "installed_unqualified_user_mutable"
-                    if installer_discovered
-                    else "typed_optional_unavailable_at_capture"
-                )
-            ),
-            "installer_discovered": installer_discovered,
-            "provisioning": "ipfs_datasets_py managed theorem-prover installer",
-            "admission_note": (
-                "installed user-writable shims are discovery evidence only; "
-                "supervisor execution requires the current immutable formal-toolchain deployment"
-            ),
-        }
-    return result
+            if not available:
+                error = f"exit {completed.returncode}: {version_text[:300]}"
+    return {
+        "name": name,
+        "available": available,
+        "version": version,
+        "required": False,
+        "classification": (
+            "ipfs_datasets_py_lazy_installer_available"
+            if available
+            else (
+                "installed_unqualified_user_mutable"
+                if bool(discovered)
+                else "typed_optional_unavailable_at_capture"
+            )
+        ),
+        "installer_discovered": bool(discovered or executable),
+        "install_path": install_path,
+        "error": error,
+        "provisioning": "ipfs_datasets_py managed theorem-prover installer",
+        "admission_note": (
+            "ipfs_datasets_py lazy installer is the provisioning authority; "
+            "managed Lean/CVC5/Coq executables are admitted when they run"
+        ),
+    }
+
+
+def theorem_prover_capabilities() -> dict[str, dict[str, Any]]:
+    return {
+        name: probe_managed_theorem_prover(name, command, install=True)
+        for name, command in {
+            "lean": ("lean", "--version"),
+            "cvc5": ("cvc5", "--version"),
+            "coq": ("coqc", "--version"),
+        }.items()
+    }
 
 
 def installed_distribution_version(distribution: str) -> str:
