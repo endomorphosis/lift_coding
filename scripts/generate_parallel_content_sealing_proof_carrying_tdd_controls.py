@@ -800,6 +800,9 @@ def duckdb_extension_capability(
         "available": False,
         "loaded": False,
         "version": "",
+        "extension_directory": "",
+        "install_path": "",
+        "install_sha256": "",
         "required_for_launch": required_for_launch,
         "error": "",
     }
@@ -814,10 +817,17 @@ def duckdb_extension_capability(
             connection.execute(f"LOAD {name}")
             row = connection.execute(
                 "SELECT extension_version, installed, loaded, install_mode, "
-                "installed_from FROM duckdb_extensions() WHERE extension_name = ?",
+                "installed_from, install_path FROM duckdb_extensions() "
+                "WHERE extension_name = ?",
                 [name],
             ).fetchone()
             if row:
+                install_path = Path(str(row[5] or "")).resolve()
+                extension_directory = (
+                    install_path.parents[2]
+                    if install_path.is_file() and len(install_path.parents) >= 3
+                    else None
+                )
                 result.update(
                     {
                         "version": str(row[0] or ""),
@@ -825,6 +835,15 @@ def duckdb_extension_capability(
                         "loaded": bool(row[2]),
                         "install_mode": str(row[3] or ""),
                         "installed_from": str(row[4] or ""),
+                        "install_path": str(install_path) if install_path.is_file() else "",
+                        "extension_directory": (
+                            str(extension_directory)
+                            if extension_directory is not None
+                            else ""
+                        ),
+                        "install_sha256": (
+                            sha256(install_path) if install_path.is_file() else ""
+                        ),
                     }
                 )
             else:

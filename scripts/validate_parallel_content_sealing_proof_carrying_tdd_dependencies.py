@@ -230,7 +230,51 @@ def _safe_path(relative: str) -> Path | None:
     return resolved
 
 
-def _extension_state(name: str) -> dict[str, Any]:
+def _sealed_extension_directory(
+    name: str,
+    record: Mapping[str, Any] | None,
+    errors: list[str],
+) -> str:
+    """Verify and return the exact preinstalled extension directory binding."""
+
+    if record is None or _record_bool(record, "available", "loaded") is not True:
+        return ""
+    raw_directory = str(record.get("extension_directory") or "").strip()
+    raw_install_path = str(record.get("install_path") or "").strip()
+    expected_sha256 = _normalize_sha256(record.get("install_sha256") or "")
+    if not raw_directory or not raw_install_path or not expected_sha256:
+        errors.append(
+            f"{name} available capability omits sealed extension directory, path, or SHA-256"
+        )
+        return ""
+    directory = Path(raw_directory)
+    install_path = Path(raw_install_path)
+    if not directory.is_absolute() or not install_path.is_absolute():
+        errors.append(f"{name} sealed extension paths must be absolute")
+        return ""
+    try:
+        resolved_directory = directory.resolve(strict=True)
+        resolved_install_path = install_path.resolve(strict=True)
+        resolved_install_path.relative_to(resolved_directory)
+    except (OSError, ValueError) as exc:
+        errors.append(f"{name} sealed extension path is unavailable or escapes its directory: {exc}")
+        return ""
+    if not resolved_directory.is_dir() or not resolved_install_path.is_file():
+        errors.append(f"{name} sealed extension binding is not a directory/file pair")
+        return ""
+    if resolved_install_path.name != f"{name}.duckdb_extension":
+        errors.append(f"{name} sealed extension filename is not canonical")
+        return ""
+    actual_sha256 = _sha256_file(resolved_install_path)
+    if actual_sha256 != expected_sha256:
+        errors.append(
+            f"{name} extension bytes differ: sealed={expected_sha256}, actual={actual_sha256}"
+        )
+        return ""
+    return str(resolved_directory)
+
+
+def _extension_state(name: str, *, extension_directory: str = "") -> dict[str, Any]:
     result: dict[str, Any] = {
         "name": name,
         "available": False,
@@ -241,12 +285,19 @@ def _extension_state(name: str) -> dict[str, Any]:
     try:
         import duckdb  # imported only during explicit validation
 
-        connection = duckdb.connect(":memory:")
+        config = {
+            "autoinstall_known_extensions": "false",
+            "autoload_known_extensions": "false",
+        }
+        if extension_directory:
+            config["extension_directory"] = extension_directory
+        connection = duckdb.connect(":memory:", config=config)
         try:
             connection.execute(f"LOAD {name}")
             result["loaded"] = True
             row = connection.execute(
-                "SELECT extension_version, installed, loaded, install_mode, installed_from "
+                "SELECT extension_version, installed, loaded, install_mode, installed_from, "
+                "install_path "
                 "FROM duckdb_extensions() WHERE extension_name = ?",
                 [name],
             ).fetchone()
@@ -257,7 +308,11 @@ def _extension_state(name: str) -> dict[str, Any]:
                     "loaded": bool(row[2]),
                     "install_mode": str(row[3] or ""),
                     "installed_from": str(row[4] or ""),
+                    "install_path": str(row[5] or ""),
                 })
+                install_path = Path(str(row[5] or ""))
+                if install_path.is_file():
+                    result["install_sha256"] = _sha256_file(install_path)
             else:
                 result["available"] = result["loaded"]
         finally:
@@ -350,6 +405,13 @@ def _verify_capability_record(
         errors.append(f"{name} available capability omits exact version")
     elif sealed_version and actual_version and sealed_version not in actual_version and actual_version not in sealed_version:
         errors.append(f"{name} version differs: sealed={sealed_version!r}, actual={actual_version!r}")
+    for field in ("install_path", "install_sha256"):
+        sealed_value = str(record.get(field) or "").strip()
+        actual_value = str(actual.get(field) or "").strip()
+        if observed and sealed_value != actual_value:
+            errors.append(
+                f"{name} {field} differs: sealed={sealed_value!r}, actual={actual_value!r}"
+            )
     required = _record_bool(record, "required", "required_for_launch", "mandatory") is True
     if required and not actual.get("available"):
         errors.append(f"required capability {name} is unavailable: {actual.get('error', '')}")
@@ -669,10 +731,18 @@ def validate() -> dict[str, Any]:
         elif sealed != actual_packages[name]:
             errors.append(f"{name} version differs: sealed={sealed!r}, actual={actual_packages[name]!r}")
 
-    quack_actual = _extension_state("quack")
-    ducklake_actual = _extension_state("ducklake")
-    _verify_capability_record("quack", _named_record(seal, ("quack", "quack_extension")), quack_actual, errors, warnings)
-    _verify_capability_record("ducklake", _named_record(seal, ("ducklake", "ducklake_extension")), ducklake_actual, errors, warnings)
+    quack_record = _named_record(seal, ("quack", "quack_extension"))
+    ducklake_record = _named_record(seal, ("ducklake", "ducklake_extension"))
+    quack_extension_directory = _sealed_extension_directory("quack", quack_record, errors)
+    ducklake_extension_directory = _sealed_extension_directory("ducklake", ducklake_record, errors)
+    quack_actual = _extension_state(
+        "quack", extension_directory=quack_extension_directory
+    )
+    ducklake_actual = _extension_state(
+        "ducklake", extension_directory=ducklake_extension_directory
+    )
+    _verify_capability_record("quack", quack_record, quack_actual, errors, warnings)
+    _verify_capability_record("ducklake", ducklake_record, ducklake_actual, errors, warnings)
     if not (quack_actual.get("available") and quack_actual.get("loaded")):
         errors.append("Quack must be locally installed and loadable for the authoritative state owner")
     if not (ducklake_actual.get("available") and ducklake_actual.get("loaded")):
@@ -687,8 +757,20 @@ def validate() -> dict[str, Any]:
             probe_quack_capabilities,
         )
 
+        def sealed_quack_connection(duckdb_module: Any) -> Any:
+            config = {
+                "autoinstall_known_extensions": "false",
+                "autoload_known_extensions": "false",
+            }
+            if quack_extension_directory:
+                config["extension_directory"] = quack_extension_directory
+            return duckdb_module.connect(database=":memory:", config=config)
+
         report = probe_quack_capabilities(
-            allow_network_install=False, allow_local_load=True, use_cache=False
+            allow_network_install=False,
+            allow_local_load=True,
+            use_cache=False,
+            connection_factory=sealed_quack_connection,
         )
         quack_probe = report.to_dict() if hasattr(report, "to_dict") else {
             "status": str(getattr(report, "status", ""))

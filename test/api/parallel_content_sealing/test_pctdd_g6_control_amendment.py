@@ -238,6 +238,32 @@ def test_dependency_seal_capabilities_are_captured_from_current_runtime() -> Non
             name, required_for_launch=name == "quack"
         )
         assert environment["capabilities"][name] == expected
+        assert Path(expected["extension_directory"]).is_dir()
+        extension = Path(expected["install_path"])
+        assert extension.is_file()
+        assert expected["install_sha256"] == "sha256:" + hashlib.sha256(
+            extension.read_bytes()
+        ).hexdigest()
+
+
+def test_sealed_duckdb_extension_binding_survives_neutral_home() -> None:
+    generator = _load("pctdd_extension_generator", GENERATOR)
+    validator = _load(
+        "pctdd_extension_dependency_validator",
+        ROOT / "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
+    )
+    errors: list[str] = []
+    for name in ("quack", "ducklake"):
+        record = generator.duckdb_extension_capability(
+            name, required_for_launch=name == "quack"
+        )
+        directory = validator._sealed_extension_directory(name, record, errors)
+        state = validator._extension_state(name, extension_directory=directory)
+        assert state["available"] is True
+        assert state["loaded"] is True
+        assert state["install_path"] == record["install_path"]
+        assert state["install_sha256"] == record["install_sha256"]
+    assert errors == []
 
 
 def test_dependency_seal_never_serializes_origin_credentials() -> None:
