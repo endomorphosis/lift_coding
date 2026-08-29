@@ -27,11 +27,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: none
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json, config/parallel_content_sealing_proof_carrying_tdd_benchmark.json, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json, config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json, config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json, scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py, scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py, scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py, scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json, config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json, config/parallel_content_sealing_proof_carrying_tdd_benchmark.json, config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json, config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json, scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py, scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py, scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py, scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py
 - Predicted symbols: Freezeprogramcontrols,baseline,seals,andscheduler; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json, config/parallel_content_sealing_proof_carrying_tdd_benchmark.json, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json, config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json, config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json, scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py, scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py, scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py, scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json, config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json, config/parallel_content_sealing_proof_carrying_tdd_benchmark.json, config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json, config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json, scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py, scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py, scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py, scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-000@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-000
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -66,7 +66,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
 - Predecessor rescue candidate: e623dd43dbc8f8feb503dd8dea2a6afb4bbd26c0; exact-reuse candidate only; independently revalidate against exact g6 source/profile/policy
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py
 - Predicted symbols: InventorycurrentCID,SHA,canonicalization,andsealpaths; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -105,7 +105,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
 - Predecessor rescue candidate: 25b2a4e0fd1ab354a0db5317ec8ea49ce0319a61; exact-reuse candidate only; independently revalidate against exact g6 source/profile/policy
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py
 - Predicted symbols: Inventorycurrentpytestproof-reuseidentityandDIpaths; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -144,7 +144,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
 - Predecessor rescue candidate: 37ccf1a42d7bbf0a6cad0a20a7671ddc0cbffac6; exact-reuse candidate only; independently revalidate against exact g6 source/profile/policy
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py
 - Predicted symbols: InventoryZK,signing,key,andproofclaimboundaries; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -183,11 +183,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
 - Predecessor rescue candidate: 2b37146f4f2f354ced02ca5327d0a7d21344f044; exact-reuse candidate only; independently revalidate against exact g6 source/profile/policy
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py, external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py
 - Predicted symbols: Instrumentthecurrentcoldandwarmcriticalpath; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py, external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-004@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-004
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -222,11 +222,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Definepreparedcanonicalblockandbatchcontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-005
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -261,11 +261,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Implementsource-objectidentitybridging; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-006
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -300,11 +300,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001, PCTDD-003
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-007.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-007.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Implementpersistentverifiedhashmemocontractsindatasets; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-007.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-007@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-007
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -339,11 +339,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-007
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-008.json, external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py
-- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-008.json, external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py, external/ipfs_kit/ipfs_kit_py/proof_seal
 - Predicted symbols: Implementthekithash-memostore; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-008.json, external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py, external/ipfs_kit/ipfs_kit_py/proof_seal; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-008@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-008
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -378,11 +378,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-006
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-009.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-009.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Implementfilechunkmanifestsandauxiliarychange-detectionprofiles; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-009.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-009@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-009
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -417,11 +417,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-004, PCTDD-005, PCTDD-006, PCTDD-007
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-010.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-010.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Implementparallelcanonicalizationandhashscheduling; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-010.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-010@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-010
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -456,11 +456,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-010
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-011.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-011.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Implementoptionalnative/Rustbatchhashingqualification; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-011.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-011@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-011
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -495,11 +495,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-008, PCTDD-010
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-012.json, external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py
-- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-012.json, external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py, external/ipfs_kit/ipfs_kit_py/proof_seal
 - Predicted symbols: Implementverifiedbatchimmutableblockstorage; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-012.json, external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py, external/ipfs_kit/ipfs_kit_py/proof_seal; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-012@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-012
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -534,11 +534,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-010
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-013.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-013.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: ImplementparallelMerkleleaf/level/categoryconstruction; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-013.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-013@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-013
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -573,11 +573,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-008, PCTDD-013
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-014.json, external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py
-- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-014.json, external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py, external/ipfs_kit/ipfs_kit_py/proof_seal
 - Predicted symbols: ImplementMerklebranchmemoizationandproof-forestdeltaupdates; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-014.json, external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py, external/ipfs_kit/ipfs_kit_py/proof_seal; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-014@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-014
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -612,11 +612,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-007, PCTDD-013
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-015.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-015.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Definepreparedfull-checkpointanddelta-sealcontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-015.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-015@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-015
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -651,11 +651,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-012, PCTDD-013, PCTDD-015, PCTDD-018
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-016.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-016.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Implementparallelfull-checkpointpreparation; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-016.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-016@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-016
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -690,11 +690,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-015, PCTDD-018
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-017.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-017.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Implementparalleldelta-sealpreparation; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-017.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-017@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-017
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -729,11 +729,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-032
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-018.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-018.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Implementparallelproof/certificateverification; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-018.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-018@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-018
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -768,11 +768,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-016, PCTDD-017, PCTDD-018
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-019.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-019.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Shortenandhardentheserialcommitboundary; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-019.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-019@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-019
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -807,7 +807,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-018, PCTDD-019
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-020.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-020.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-020.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py
 - Predicted symbols: Qualifyparallelsealingforconcurrency,crash,andcorruption; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -846,11 +846,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-021.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-021.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Definefixture-definitionclosurecontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-021.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-021@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-021
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -885,11 +885,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-021
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-022.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-022.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse
 - Predicted symbols: Implementfixture-definitionclosureextraction; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-022.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-022@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-022
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -924,11 +924,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-023.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-023.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Definefixture-instanceandinjected-dependencycontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-023.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-023@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-023
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -963,11 +963,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-023
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-024.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-024.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse
 - Predicted symbols: Implementrevieweddependency-injectioncommitmentadapters; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-024.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-024@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-024
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1002,11 +1002,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-021, PCTDD-023
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-025.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-025.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: DefineandimplementTestExecutionKeyV2; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-025.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-025@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-025
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1041,11 +1041,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-003, PCTDD-023
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-026.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-026.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Definecompositephasereceiptandstatementcontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-026.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-026@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-026
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1080,11 +1080,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-022, PCTDD-024, PCTDD-025
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-027.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-027.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse
 - Predicted symbols: Integratesetup-boundexecution-keyassemblyintopytest; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-027.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-027@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-027
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1119,11 +1119,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-027, PCTDD-032
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-028.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-028.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse
 - Predicted symbols: Implementguardedpost-setup,pre-callreuse; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-028.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-028@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-028
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1158,11 +1158,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-027, PCTDD-032
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-029.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-029.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse
 - Predicted symbols: Implementnarrowlygatedpre-setupwhole-itemreuse; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-029.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-029@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-029
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1197,11 +1197,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-025, PCTDD-026
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-030.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-030.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse
 - Predicted symbols: Extendxdistcontroller/workerproof-reusecoordination; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-030.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-030@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-030
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1236,11 +1236,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-004, PCTDD-022, PCTDD-030
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-031.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-031.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse
 - Predicted symbols: Implementfixture-andproof-awarexdistscheduling; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-031.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-031@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-031
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1275,11 +1275,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-025, PCTDD-026
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-032.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-032.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse
 - Predicted symbols: Integratecurrentsignedrunnerattestations; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-032.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-032@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-032
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1314,11 +1314,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-003
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-033.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-033.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Defineaggregatetest-batchandleafcontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-033.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-033@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-033
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1353,11 +1353,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-026, PCTDD-033
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-034.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-034.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd
 - Predicted symbols: Defineaggregatetest-passstatementandpublicinputs; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-034.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-034
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1392,11 +1392,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-034
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-035.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-035.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: ImplementaggregateZKcircuit/backendadapter; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-035.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-035@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-035
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1431,11 +1431,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-036.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-036.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: Implementproofbatchcoordinatorandasynchronouspipeline; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-036.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-036@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-036
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1470,11 +1470,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-036
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-037.json, external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py
-- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-037.json, external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py, external/ipfs_kit/ipfs_kit_py/proof_seal
 - Predicted symbols: Implementfixture-cohortandselected-testproof-forestunits; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-037.json, external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py, external/ipfs_kit/ipfs_kit_py/proof_seal; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-037@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-037
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1509,11 +1509,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001, PCTDD-002, PCTDD-007, PCTDD-021, PCTDD-025
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-038.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-038.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Integratedatasetssemantic-statetest/proofselection; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-038.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-038@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-038
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1548,11 +1548,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-035
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-039.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-039.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing
 - Predicted symbols: Addoptionaldirect-executionproofprofiles; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-039.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-039@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-039
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1587,11 +1587,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-019, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-031, PCTDD-036, PCTDD-037, PCTDD-038
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-040.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-040.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: ImplementFastTddLoopController@1; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-040.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-040@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-040
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1626,11 +1626,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-040
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-041.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-041.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: Integratethefastloopwithincrementalverificationandrepair; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-041.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-041@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-041
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1665,11 +1665,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-040, PCTDD-041
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-042.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-042.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: Integratecontextcompressionandproof-carryingprocedurecompilation; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-042.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-042@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-042
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1704,11 +1704,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-036, PCTDD-040
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-043.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-043.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: AddCLI,control-service,anddiagnosticssurfaces; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-043.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-043@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-043
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1743,11 +1743,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-020, PCTDD-040
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-044.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-044.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: Activateshadow_hash; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-044.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-044@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-044
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1782,11 +1782,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-028, PCTDD-036, PCTDD-044
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-045.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-045.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: Activateshadow_reuseandshadow_proof; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-045.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-045@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-045
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1821,11 +1821,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-045
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-046.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-046.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: Activateprotected; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-046.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-046@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-046
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1860,11 +1860,11 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-046
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-047.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-047.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor
 - Predicted symbols: Activaterequiredself-hosting; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py; emit immutable receipt; request reviewed merge through existing authority
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-047.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor; emit immutable receipt; request reviewed merge through existing authority
 - Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-047@1
 - Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-047
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
@@ -1899,7 +1899,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-047
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-048.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-048.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-048.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py
 - Predicted symbols: Runtheend-to-endacceptancematrix; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -1938,7 +1938,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-020, PCTDD-048
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-049.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py, benchmarks/agent_supervisor/parallel_content_sealing/pctdd_049_hash_seal_results.json
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-049.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py, benchmarks/agent_supervisor/parallel_content_sealing/pctdd_049_hash_seal_results.json
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-049.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py, benchmarks/agent_supervisor/parallel_content_sealing/pctdd_049_hash_seal_results.json
 - Predicted symbols: Runhashingandsealbenchmarks; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -1977,7 +1977,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-036, PCTDD-040, PCTDD-048
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-050.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py, benchmarks/agent_supervisor/proof_carrying_tdd/pctdd_050_pytest_proof_tdd_results.json
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-050.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py, benchmarks/agent_supervisor/proof_carrying_tdd/pctdd_050_pytest_proof_tdd_results.json
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-050.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py, benchmarks/agent_supervisor/proof_carrying_tdd/pctdd_050_pytest_proof_tdd_results.json
 - Predicted symbols: Runpytest,proof,andTDD-loopbenchmarks; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -2016,7 +2016,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-048, PCTDD-049, PCTDD-050
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-051.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-051.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-051.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py
 - Predicted symbols: Runadversarial,privacy,andtrustqualification; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -2055,7 +2055,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-042, PCTDD-047, PCTDD-051
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-052.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/fast_tdd/capstone_self_hosting.py, artifacts/parallel_content_sealing_proof_carrying_tdd/capstone/PCTDD-052.json
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-052.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/fast_tdd/capstone_self_hosting.py, artifacts/parallel_content_sealing_proof_carrying_tdd/capstone/PCTDD-052.json
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-052.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/fast_tdd/capstone_self_hosting.py, artifacts/parallel_content_sealing_proof_carrying_tdd/capstone/PCTDD-052.json
 - Predicted symbols: Performtherequired-modeself-hostedcapstone; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
@@ -2094,7 +2094,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052
 - Predecessor rescue candidate: none
 - Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-053.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py, artifacts/parallel_content_sealing_proof_carrying_tdd/PCTDD-053.release.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_RELEASE.md
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-053.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py, artifacts/parallel_content_sealing_proof_carrying_tdd/PCTDD-053.release.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_RELEASE.md
+- Predicted files: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-053.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py, artifacts/parallel_content_sealing_proof_carrying_tdd/PCTDD-053.release.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_RELEASE.md
 - Predicted symbols: Publishcurrent-treerelease,migration,andlimitationreport; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
