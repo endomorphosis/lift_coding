@@ -96,8 +96,9 @@ SOURCE_FOREST = OrderedDict(
             "ipfs_accelerate",
             {
                 "path": "external/ipfs_accelerate",
-                "commit": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
-                "tree": "c52908e40287051336d81c81a8f4799869846f03",
+                "commit": "035527e42ef55ed2f75df700f58a97a524142046",
+                "tree": "ace1375dc0b64521f8511105b1041ef10304cfe2",
+                "origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
             },
         ),
         (
@@ -364,7 +365,9 @@ def render_config() -> dict[str, Any]:
         source_binding[f"{prefix}_submodule_path"] = record["path"]
         source_binding[f"{prefix}_planning_revision"] = record["commit"]
         source_binding[f"{prefix}_planning_tree"] = record["tree"]
-        source_binding[f"{prefix}_origin_main_revision"] = record["commit"]
+        source_binding[f"{prefix}_origin_main_revision"] = record.get(
+            "origin_main", record["commit"]
+        )
 
     return {
         "schema": (

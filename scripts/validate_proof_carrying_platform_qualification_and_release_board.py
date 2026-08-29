@@ -165,12 +165,13 @@ def validate_source_forest(
             ).returncode
             == 0
         )
+        expected_origin_main = expected.get("origin_main", expected["commit"])
         valid = all(
             (
                 exact_top,
                 head == expected["commit"],
                 tree == expected["tree"],
-                origin_main == expected["commit"],
+                origin_main == expected_origin_main,
                 ancestry,
                 not dirty,
                 gitlink == expected["commit"],
@@ -191,7 +192,7 @@ def validate_source_forest(
             errors.append(f"{relative} is not an exact nested Git worktree")
         if head != expected["commit"] or tree != expected["tree"]:
             errors.append(f"{relative} HEAD/tree differs from the sealed source forest")
-        if origin_main != expected["commit"] or not ancestry:
+        if origin_main != expected_origin_main or not ancestry:
             errors.append(f"{relative} does not contain the sealed current origin/main")
         if dirty:
             errors.append(f"{relative} nested worktree is dirty")
