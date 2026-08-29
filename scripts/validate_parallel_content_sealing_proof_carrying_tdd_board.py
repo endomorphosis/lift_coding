@@ -9,6 +9,8 @@ task authority and its independently admitted evidence.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import importlib.util
 import json
 import re
 import subprocess
@@ -22,9 +24,15 @@ PLAN_PATH = ROOT / "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TD
 OBJECTIVES_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md"
 BOARD_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md"
 CONFIG_PATH = ROOT / "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json"
+PROFILE_PATH = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json"
+DISPATCHER_PATH = ROOT / "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py"
+MIGRATION_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json"
 RECEIPT_PATH = ROOT / "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json"
+CONTROL_MANIFEST_PATH = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
 NAMESPACE = "parallel-content-sealing-proof-carrying-tdd-v1"
-PLAN_REVISION = "PCTDD-PLAN-V1"
+PLAN_REVISION = "PCTDD-PLAN-V1.1"
+STORE_GENERATION = "pctdd-v1-g6"
+RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6"
 
 TASK_RE = re.compile(
     r"^##\s+(PCTDD-\d{3})\s*(?:[\u2014\u2013:\-]\s*)?(.+?)\s*$", re.MULTILINE
@@ -91,6 +99,32 @@ TASK_TITLES = (
 )
 EXPECTED_TASK_IDS = tuple(f"PCTDD-{number:03d}" for number in range(54))
 EXPECTED_TITLES = dict(zip(EXPECTED_TASK_IDS, TASK_TITLES, strict=True))
+W1_RESCUE_CANDIDATES = {
+    "PCTDD-001": "e623dd43dbc8f8feb503dd8dea2a6afb4bbd26c0",
+    "PCTDD-002": "25b2a4e0fd1ab354a0db5317ec8ea49ce0319a61",
+    "PCTDD-003": "37ccf1a42d7bbf0a6cad0a20a7671ddc0cbffac6",
+    "PCTDD-004": "2b37146f4f2f354ced02ca5327d0a7d21344f044",
+}
+PCTDD_004_COMPONENT_COMMIT = "48edb688ac31bc3d05fdd5c8efd7e50ab14b755e"
+PCTDD_004_COMPONENT_PARENT = "cfbd381ee6196e818ecd59a438386a60b5d71bd7"
+
+TASK_EXTRA_OUTPUTS = {
+    "PCTDD-000": (CONTROL_MANIFEST_PATH.relative_to(ROOT).as_posix(),),
+    "PCTDD-049": (
+        "benchmarks/agent_supervisor/parallel_content_sealing/pctdd_049_hash_seal_results.json",
+    ),
+    "PCTDD-050": (
+        "benchmarks/agent_supervisor/proof_carrying_tdd/pctdd_050_pytest_proof_tdd_results.json",
+    ),
+    "PCTDD-052": (
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/fast_tdd/capstone_self_hosting.py",
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/capstone/PCTDD-052.json",
+    ),
+    "PCTDD-053": (
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/PCTDD-053.release.json",
+        "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_RELEASE.md",
+    ),
+}
 
 GOAL_PARENTS: dict[str, str | None] = {
     "PCTDD-G000": None,
@@ -158,16 +192,31 @@ PROTECTED_PATHS = {
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json",
     "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py",
+    "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
+    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
 }
 
 REQUIRED_FIELD_GROUPS: tuple[tuple[str, ...], ...] = (
@@ -176,13 +225,14 @@ REQUIRED_FIELD_GROUPS: tuple[tuple[str, ...], ...] = (
     ("priority",), ("track",), ("depends_on", "dependencies"),
     ("bundle",), ("parallel_lane", "lane"), ("resource_class",),
     ("timeout_seconds", "implementation_timeout_seconds", "timeout"),
-    ("provider_role",), ("owning_repository",), ("exact_inputs", "inputs"),
+    ("provider_role",), ("owning_repository",), ("directive",), ("exact_inputs", "inputs"),
+    ("predecessor_rescue_candidate",),
     ("outputs",), ("predicted_paths", "predicted_files"),
     ("predicted_symbols", "symbols"), ("interfaces",),
     ("preconditions",), ("declared_effects", "allowed_effects"),
-    ("validation", "validation_command"), ("required_evidence",),
+    ("validation_profile",), ("validation", "validation_command"), ("required_evidence",),
     ("acceptance_criteria", "acceptance"), ("conflict_policy",),
-    ("context_budget",), ("no_model_route",), ("model_fallback",),
+    ("llm_context_budget_bytes",), ("no_model_route",), ("model_fallback",),
     ("rollout_mode",), ("protected_paths",), ("known_limitations",),
     ("goal_id", "parent_goal"), ("board_namespace",),
 )
@@ -209,6 +259,15 @@ def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=_reject_duplicate_keys)
+
+
+def _load_validation_profiles() -> dict[str, Any]:
+    spec = importlib.util.spec_from_file_location("pctdd_validation_dispatcher", DISPATCHER_PATH)
+    if spec is None or spec.loader is None:
+        raise ValueError("cannot load protected validation dispatcher")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return dict(module.validate_profile_document(_load_json(PROFILE_PATH)))
 
 
 def _normalize_key(value: str) -> str:
@@ -314,6 +373,14 @@ def _git(*args: str) -> str:
     return result.stdout.strip()
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return "sha256:" + digest.hexdigest()
+
+
 def _assert_phrase(corpus: str, alternatives: Iterable[str], label: str, errors: list[str]) -> None:
     if not any(re.search(pattern, corpus, re.IGNORECASE | re.DOTALL) for pattern in alternatives):
         errors.append(f"claim/control corpus missing invariant: {label}")
@@ -322,7 +389,10 @@ def _assert_phrase(corpus: str, alternatives: Iterable[str], label: str, errors:
 def validate() -> dict[str, Any]:
     errors: list[str] = []
     warnings: list[str] = []
-    required_files = (PLAN_PATH, OBJECTIVES_PATH, BOARD_PATH, CONFIG_PATH)
+    required_files = (
+        PLAN_PATH, OBJECTIVES_PATH, BOARD_PATH, CONFIG_PATH, PROFILE_PATH,
+        DISPATCHER_PATH, MIGRATION_PATH, CONTROL_MANIFEST_PATH,
+    )
     missing = [path.relative_to(ROOT).as_posix() for path in required_files if not path.is_file()]
     if missing:
         raise FileNotFoundError("missing control artifacts: " + ", ".join(missing))
@@ -333,6 +403,11 @@ def validate() -> dict[str, Any]:
     config = _load_json(CONFIG_PATH)
     if not isinstance(config, dict):
         raise ValueError("scheduler config must be a JSON object")
+    try:
+        profiles = _load_validation_profiles()
+    except Exception as exc:
+        profiles = {}
+        errors.append(f"validation profiles rejected: {type(exc).__name__}: {exc}")
 
     tasks = _parse_blocks(board, TASK_RE)
     task_ids = tuple(task_id for task_id, _title, _fields in tasks)
@@ -365,6 +440,8 @@ def validate() -> dict[str, Any]:
         owner = _field(fields, "owning_repository")
         if owner not in ALLOWED_REPOSITORIES:
             errors.append(f"{task_id} has invalid owning repository {owner!r}")
+        if task_id == "PCTDD-004" and owner != "endomorphosis/ipfs_accelerate_py":
+            errors.append("PCTDD-004 must be owned by the accelerator instrumentation authority")
 
         dependency_values = _items(_field(fields, "depends_on", "dependencies"))
         dependencies[task_id] = dependency_values
@@ -378,6 +455,19 @@ def validate() -> dict[str, Any]:
         expected_receipt = f"artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/{task_id}.json"
         if expected_receipt not in task_outputs:
             errors.append(f"{task_id} does not own its unique task receipt")
+        profile = profiles.get(task_id, {})
+        expected_test_target = str(profile.get("required_test_target") or "")
+        if not expected_test_target:
+            errors.append(f"{task_id} has no resolved validation-profile test target")
+        expected_outputs = {
+            expected_receipt,
+            expected_test_target,
+            *TASK_EXTRA_OUTPUTS.get(task_id, ()),
+        }
+        if expected_test_target and set(task_outputs) != expected_outputs:
+            errors.append(
+                f"{task_id} output manifest differs from its exact owned outputs"
+            )
         for output in task_outputs:
             prior = outputs_owner.get(output)
             if prior and prior != task_id:
@@ -385,6 +475,16 @@ def validate() -> dict[str, Any]:
             outputs_owner[output] = task_id
 
         predicted = _items(_field(fields, "predicted_paths", "predicted_files"))
+        if expected_test_target and expected_test_target not in predicted:
+            errors.append(f"{task_id} predicted paths omit its exact test target")
+        for extra_output in TASK_EXTRA_OUTPUTS.get(task_id, ()):
+            if extra_output not in predicted:
+                errors.append(f"{task_id} predicted paths omit owned output {extra_output}")
+        if task_id == "PCTDD-004" and (
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py"
+            not in predicted
+        ):
+            errors.append("PCTDD-004 scope omits the exact critical-path instrumentation module")
         write_scope = (
             *predicted,
             *_items(_field(fields, "allowed_paths")),
@@ -417,7 +517,7 @@ def validate() -> dict[str, Any]:
             allowed_modes, rank = {"shadow_reuse", "shadow_proof"}, 3
             if not {"shadow_reuse", "shadow_proof"}.issubset(mode_tokens):
                 errors.append("PCTDD-045 must bind both shadow_reuse and shadow_proof")
-        elif task_id == "PCTDD-046":
+        elif task_id in {"PCTDD-046", "PCTDD-047"}:
             allowed_modes, rank = {"protected"}, 4
         else:
             allowed_modes, rank = {"required"}, 5
@@ -447,9 +547,61 @@ def validate() -> dict[str, Any]:
         completion = _normalize_text(_field(fields, "completion_mode", "completion"))
         if "markdown" in completion:
             errors.append(f"{task_id} permits Markdown-only completion")
-        validation = _field(fields, "validation", "validation_command").strip().lower()
-        if validation in {"", "true", "false", "none", "todo", "tbd", "echo pass"}:
-            errors.append(f"{task_id} validation command is missing or non-operative")
+        validation = _field(fields, "validation", "validation_command").strip()
+        expected_validation = (
+            "python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py "
+            f"--task {task_id}"
+        )
+        if validation != expected_validation:
+            errors.append(
+                f"{task_id} validation must be the exact task-bound protected dispatcher command"
+            )
+        expected_profile = f"pctdd-validation/{PLAN_REVISION}/{task_id}@1"
+        if _field(fields, "validation_profile") != expected_profile:
+            errors.append(f"{task_id} validation profile differs")
+        provider_role = _field(fields, "provider_role")
+        expected_role = "operator-only" if task_id == "PCTDD-000" else "grok-only"
+        if provider_role != expected_role:
+            errors.append(
+                f"{task_id} provider role must be the exact current parser vocabulary {expected_role!r}"
+            )
+        context_budget = _field(fields, "llm_context_budget_bytes")
+        if context_budget != "24000":
+            errors.append(f"{task_id} llm_context_budget_bytes must be exactly 24000")
+        directive = _field(fields, "directive")
+        acceptance = _field(fields, "acceptance_criteria", "acceptance")
+        if task_id not in directive or expected_test_target not in directive:
+            errors.append(f"{task_id} directive is not task/target specific")
+        if expected_profile not in acceptance or expected_test_target not in acceptance:
+            errors.append(f"{task_id} acceptance is not profile/target specific")
+        if task_id != "PCTDD-000" and not all(
+            phrase in acceptance
+            for phrase in (
+                "controller-owned validation authority independently executes",
+                "implementation model cannot fall back",
+                "worker-authored test alone is never sufficient",
+                "machine-readable pytest phase evidence",
+                "protected baseline regressions",
+            )
+        ):
+            errors.append(f"{task_id} lacks independent controller validation and broad baseline acceptance")
+        if task_id == "PCTDD-047" and not all(
+            phrase in acceptance
+            for phrase in ("schema-aware required-mode completion gate", "does not fabricate")
+        ):
+            errors.append("PCTDD-047 must install, not prematurely claim, the required evidence gate")
+        if task_id >= "PCTDD-048" and "PCTDD-047 schema-aware gate" not in acceptance:
+            errors.append(f"{task_id} acceptance omits the PCTDD-047 required-mode gate")
+        rescue = _field(fields, "predecessor_rescue_candidate")
+        if task_id in W1_RESCUE_CANDIDATES:
+            if not (
+                "candidate only" in rescue
+                and "independently revalidate" in rescue
+                and W1_RESCUE_CANDIDATES[task_id] in rescue
+            ):
+                errors.append(f"{task_id} g5 rescue candidate policy differs")
+        elif rescue.lower() != "none":
+            errors.append(f"{task_id} unexpectedly names a predecessor rescue candidate")
         if status in TERMINAL_STATUSES and task_id != "PCTDD-000":
             errors.append(f"{task_id} implementation terminal cannot be asserted by the seed board")
 
@@ -502,6 +654,15 @@ def validate() -> dict[str, Any]:
                 errors.append(f"{goal_id} root parent must be empty/none")
         elif actual_parent != expected_parent:
             errors.append(f"{goal_id} parent {actual_parent!r} != {expected_parent}")
+        expected_producers = []
+        for task_id in EXPECTED_TASK_IDS:
+            current: str | None = TASK_GOALS[task_id]
+            while current is not None and current != goal_id:
+                current = GOAL_PARENTS[current]
+            if current == goal_id:
+                expected_producers.append(task_id)
+        if _items(_field(fields, "producing_tasks")) != tuple(expected_producers):
+            errors.append(f"{goal_id} producing tasks do not match descendant task ownership")
 
     expected_config_paths = {
         "board_namespace": NAMESPACE,
@@ -509,12 +670,16 @@ def validate() -> dict[str, Any]:
         "objectives_path": OBJECTIVES_PATH.relative_to(ROOT).as_posix(),
         "plan_path": PLAN_PATH.relative_to(ROOT).as_posix(),
         "validator_path": "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
+        "validation_profile_path": PROFILE_PATH.relative_to(ROOT).as_posix(),
+        "validation_dispatcher_path": DISPATCHER_PATH.relative_to(ROOT).as_posix(),
     }
     for name, expected in expected_config_paths.items():
         if config.get(name) != expected:
             errors.append(f"scheduler config {name} differs from protected control")
     if config.get("task_prefix") != "PCTDD-":
         errors.append("scheduler config task_prefix differs")
+    if config.get("accepted_plan_revision_alias") != PLAN_REVISION:
+        errors.append("scheduler plan revision differs")
     if config.get("root_goal_id") not in {None, "PCTDD-G000"}:
         errors.append("scheduler root goal differs")
 
@@ -524,17 +689,180 @@ def validate() -> dict[str, Any]:
     missing_protected = sorted(path for path in PROTECTED_PATHS if path.rstrip("/") not in configured_protected)
     if missing_protected:
         errors.append("scheduler protected paths omit: " + ", ".join(missing_protected))
+    control_manifest = _load_json(CONTROL_MANIFEST_PATH)
+    if not isinstance(control_manifest, dict):
+        errors.append("PCTDD-000 control manifest must be an object")
+    else:
+        if (
+            control_manifest.get("schema") != "pctdd/operator-control-manifest@1"
+            or control_manifest.get("task_id") != "PCTDD-000"
+            or control_manifest.get("dependency_seal_must_hash_this_manifest") is not True
+            or control_manifest.get("manifest_is_completion_receipt") is not False
+        ):
+            errors.append("PCTDD-000 control manifest claim boundary differs")
+        prerequisites = control_manifest.get("completion_prerequisites") or []
+        for phrase in (
+            "dependency validator valid=true",
+            "board validator valid=true",
+            "configured-board preflight valid=true",
+            "configured-board implementation dry-run success",
+        ):
+            if phrase not in prerequisites:
+                errors.append(f"PCTDD-000 control manifest omits prerequisite: {phrase}")
+        manifest_hashes = control_manifest.get(
+            "protected_control_hashes_before_manifest_and_seal"
+        )
+        expected_manifest_paths = PROTECTED_PATHS - {
+            CONTROL_MANIFEST_PATH.relative_to(ROOT).as_posix(),
+            "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+        }
+        if not isinstance(manifest_hashes, dict) or set(manifest_hashes) != expected_manifest_paths:
+            errors.append("PCTDD-000 control manifest protected path population differs")
+        else:
+            for relative, claimed in sorted(manifest_hashes.items()):
+                path = ROOT / relative
+                if not path.is_file() or claimed != _sha256_file(path):
+                    errors.append(f"PCTDD-000 control manifest hash differs: {relative}")
 
     database = config.get("database_program") or config.get("task_store") or {}
     if database.get("authority_mode") != "quack" or database.get("task_source_kind") != "duckdb":
         errors.append("authoritative task store must be DuckDB with Quack state ownership")
     if database.get("failover_policy", "fail_closed") != "fail_closed":
         errors.append("task authority failover must be fail_closed")
+    if database.get("store_generation") != STORE_GENERATION:
+        errors.append("task authority must use the fresh g6 store generation")
+    if database.get("quack_endpoint") != "quack:127.0.0.1:42778":
+        errors.append("g6 Quack endpoint differs")
+    for name in ("store_id", "event_store_path", "runtime_registry_path", "worktree_root"):
+        if not str(database.get(name) or "").startswith(RUNTIME_ROOT + "/"):
+            errors.append(f"database_program.{name} does not use the g6 runtime root")
+    if database.get("predecessor_store_generation") != "pctdd-v1-g5" or database.get("predecessor_is_read_only_history") is not True:
+        errors.append("g5 predecessor generation must remain explicit read-only history")
+    projection = config.get("initial_projection") or {}
+    if projection.get("completed_task_ids") != [] or projection.get("ready_task_ids") != []:
+        errors.append("initial projection must leave PCTDD-000 todo and all worker tasks dependency-waiting")
+    if projection.get("post_operator_completed_task_ids") != ["PCTDD-000"]:
+        errors.append("post-operator projection must complete only PCTDD-000")
+    if projection.get("post_operator_ready_task_ids") != [
+        "PCTDD-001", "PCTDD-002", "PCTDD-003", "PCTDD-004"
+    ]:
+        errors.append("post-operator ready frontier differs")
+    provider = config.get("provider") or {}
+    if provider.get("implementation_fallback_authorized") is not False:
+        errors.append("Codex implementation fallback must be explicitly unauthorized")
+    if provider.get("provider_id") != "grok_cli" or provider.get("model_id") != "grok-4.6":
+        errors.append("implementation provider must be the exact Grok-only route")
+    if provider.get("completion_authority") != "controller_owned_sealed_validation_and_database_cas":
+        errors.append("completion authority must remain controller-owned")
+    if any(key.startswith("fallback_") for key in provider):
+        errors.append("Grok-only PCTDD provider policy must not encode a fallback route")
     ducklake = config.get("ducklake_projection_program") or config.get("ducklake") or {}
     if ducklake.get("authority", ducklake.get("authoritative", False)) is not False:
         errors.append("DuckLake analytics/history projection must remain non-authoritative")
     if ducklake.get("scheduling_prerequisite", False) is not False:
         errors.append("DuckLake must not become a scheduling prerequisite")
+    for name in ("catalog_path", "data_path"):
+        if not str(ducklake.get(name) or "").startswith(RUNTIME_ROOT + "/ducklake/"):
+            errors.append(f"DuckLake {name} does not use the g6 projection root")
+
+    amendment = config.get("control_amendment") or {}
+    if amendment.get("revision") != PLAN_REVISION or amendment.get("amends") != "PCTDD-PLAN-V1":
+        errors.append("scheduler control amendment lineage differs")
+    if amendment.get("migration_inventory") != MIGRATION_PATH.relative_to(ROOT).as_posix():
+        errors.append("scheduler migration inventory binding differs")
+    migration = _load_json(MIGRATION_PATH)
+    predecessor = migration.get("predecessor") if isinstance(migration, dict) else {}
+    successor = migration.get("successor") if isinstance(migration, dict) else {}
+    if not isinstance(predecessor, dict) or predecessor.get("bootstrap_event_watermark") != 103:
+        errors.append("g5 migration event watermark differs")
+    expected_predecessor = {
+        "store_generation": "pctdd-v1-g5",
+        "plan_revision": "PCTDD-PLAN-V1",
+        "plan_root_cid": "baguqeeraqwk4z47whu652pvidcaxeyjkp6dmeuxhevmjhkpjehxdpmstsukq",
+        "pctdd_000_completion_receipt_cid": "baguqeeray2wlpjlflnaxx7jpynquwhpenm7hk6pwwkxsmxwzr6eopltnccua",
+        "source_head": "c488d97ed5665b5744d983fc4a294989df519361",
+        "source_tree": "e3fda4eaaecf14a56815f586df05feb94f093979",
+        "frozen_database_sha256": "e7aa5935d452f2df2bff462467799a57994771a8971cd20528d56284bd4ec5a5",
+        "bootstrap_receipt_sha256": "6c65b2ad424683c110867c8842e46b256af93dc7116f35f2c102a857b6893616",
+        "preserved_failed_validation_rescue_branch_count": 29,
+    }
+    if isinstance(predecessor, dict):
+        for name, expected in expected_predecessor.items():
+            if predecessor.get(name) != expected:
+                errors.append(f"g5 migration predecessor {name} differs")
+    if not isinstance(successor, dict) or successor.get("store_generation") != STORE_GENERATION:
+        errors.append("g5 migration successor generation differs")
+    migration_candidates = migration.get("w1_rescue_candidates") if isinstance(migration, dict) else {}
+    if not isinstance(migration_candidates, dict) or {
+        task_id: str(record.get("outer_commit") or "")
+        for task_id, record in migration_candidates.items()
+        if isinstance(record, dict)
+    } != W1_RESCUE_CANDIDATES:
+        errors.append("g5 migration W1 rescue candidate refs differ")
+    if isinstance(migration_candidates, dict):
+        for task_id in ("PCTDD-001", "PCTDD-002", "PCTDD-003"):
+            record = migration_candidates.get(task_id) or {}
+            if record.get("classification") != "receipt-observation-only" or record.get("component_commits") != {}:
+                errors.append(f"{task_id} migration must remain receipt-only history")
+            if "never cherry-pick" not in str(record.get("application_policy") or ""):
+                errors.append(f"{task_id} migration lacks stale outer-commit prohibition")
+        pctdd_004 = migration_candidates.get("PCTDD-004") or {}
+        component = (pctdd_004.get("component_commits") or {}).get("external/ipfs_accelerate") or {}
+        if (
+            pctdd_004.get("classification") != "component-reuse-candidate-only"
+            or component.get("commit") != PCTDD_004_COMPONENT_COMMIT
+            or component.get("prior_gitlink") != PCTDD_004_COMPONENT_PARENT
+            or "never adopt the outer gitlink" not in str(pctdd_004.get("application_policy") or "")
+        ):
+            errors.append("PCTDD-004 migration is not component-safe")
+    g5_db = ROOT / str(predecessor.get("frozen_database_path") or "")
+    g5_receipt = ROOT / str(predecessor.get("bootstrap_receipt_path") or "")
+    for label, path, expected in (
+        ("g5 database", g5_db, str(predecessor.get("frozen_database_sha256") or "")),
+        ("g5 bootstrap receipt", g5_receipt, str(predecessor.get("bootstrap_receipt_sha256") or "")),
+    ):
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            errors.append(f"{label} bytes do not match migration inventory")
+    rescue_refs = [
+        line
+        for line in _git("for-each-ref", "--format=%(refname)", "refs/heads/rescue").splitlines()
+        if line.startswith("refs/heads/rescue/pctdd-")
+    ]
+    if len(rescue_refs) != 29:
+        errors.append("g5 PCTDD failed-validation rescue branch population differs")
+    for task_id, commit in W1_RESCUE_CANDIDATES.items():
+        if subprocess.run(
+            ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+            cwd=ROOT,
+            capture_output=True,
+            check=False,
+        ).returncode != 0:
+            errors.append(f"{task_id} outer migration commit is unavailable")
+    nested = ROOT / "external/ipfs_accelerate"
+    for commit in (PCTDD_004_COMPONENT_COMMIT, PCTDD_004_COMPONENT_PARENT):
+        if subprocess.run(
+            ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+            cwd=nested,
+            capture_output=True,
+            check=False,
+        ).returncode != 0:
+            errors.append(f"PCTDD-004 nested migration commit unavailable: {commit}")
+    outer_gitlink = _git("ls-tree", W1_RESCUE_CANDIDATES["PCTDD-004"], "external/ipfs_accelerate").split()
+    if len(outer_gitlink) < 3 or outer_gitlink[2] != PCTDD_004_COMPONENT_COMMIT:
+        errors.append("PCTDD-004 outer rescue commit does not bind the recorded component commit")
+    outer_parent_gitlink = _git(
+        "ls-tree",
+        W1_RESCUE_CANDIDATES["PCTDD-004"] + "^",
+        "external/ipfs_accelerate",
+    ).split()
+    if len(outer_parent_gitlink) < 3 or outer_parent_gitlink[2] != PCTDD_004_COMPONENT_PARENT:
+        errors.append("PCTDD-004 outer parent does not bind the recorded prior gitlink")
+    runtime_paths = config.get("runtime_paths") or {}
+    if runtime_paths.get("root") != RUNTIME_ROOT:
+        errors.append("runtime_paths.root must be the fresh g6 root")
+    for name in ("state", "worktrees", "merge_queue", "logs", "evidence", "quack_owner"):
+        if not str(runtime_paths.get(name) or "").startswith(RUNTIME_ROOT + "/"):
+            errors.append(f"runtime_paths.{name} does not use the g6 root")
 
     safety = config.get("safety_floors") or {}
     floor_aliases = {

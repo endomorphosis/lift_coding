@@ -6,11 +6,12 @@ This adapter parses them with the agent-supervisor's canonical parsers and
 materializes their semantic records through ``DatabaseTaskSource@1``.  It does
 not issue task SQL and it does not create another scheduler or state owner.
 
-``PCTDD-000`` is deliberately inserted as ``todo`` even when its display
-record changes.  The operator control task becomes complete only after this
-adapter records a current, exact-tree control-program seal and advances it via
-the task source's compare-and-set completion gate.  Consequently Markdown
-status is never completion authority.
+``PCTDD-000`` is deliberately inserted as non-schedulable staged operator
+work even though its Markdown display remains ``todo``.  ``materialize`` never
+completes it.  A separate ``seal-controls`` stage must pass the sealed profile,
+both validators, canonical preflight, and implementation dry-run at one exact
+tree before the task source's compare-and-set completion gate may advance it.
+Consequently Markdown status is never completion authority.
 
 DuckLake is an optional, rebuildable bootstrap-history projection.  A missing
 or unusable extension produces a typed-unavailable receipt and never changes
@@ -21,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -39,7 +41,19 @@ DEFAULT_CONFIG: Final[str] = (
     "proof_carrying_tdd_scheduler.json"
 )
 PROGRAM_ID: Final[str] = "parallel-content-sealing-proof-carrying-tdd-v1"
-PLAN_ALIAS: Final[str] = "PCTDD-PLAN-V1"
+PLAN_ALIAS: Final[str] = "PCTDD-PLAN-V1.1"
+VALIDATION_PROFILE_RELATIVE: Final[str] = (
+    "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json"
+)
+VALIDATION_DISPATCHER_RELATIVE: Final[str] = (
+    "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py"
+)
+CONFIGURED_SCHEDULER_RELATIVE: Final[str] = (
+    "external/ipfs_accelerate/scripts/ops/agent_supervisor/configured_board_scheduler.py"
+)
+CONTROL_MANIFEST_RELATIVE: Final[str] = (
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
+)
 ROOT_GOAL_ID: Final[str] = "PCTDD-G000"
 OPERATOR_TASK_ID: Final[str] = "PCTDD-000"
 TASK_IDS: Final[tuple[str, ...]] = tuple(f"PCTDD-{index:03d}" for index in range(54))
@@ -69,6 +83,27 @@ CONTROL_EVIDENCE_SCHEMA: Final[str] = (
     "ipfs_accelerate_py.agent_supervisor."
     "parallel-content-sealing-proof-carrying-tdd.control-program-seal@1"
 )
+STAGED_SCHEMA: Final[str] = (
+    "ipfs_accelerate_py.agent_supervisor."
+    "parallel-content-sealing-proof-carrying-tdd.staged-materialization@1"
+)
+TASK_EXTRA_OUTPUTS: Final[dict[str, tuple[str, ...]]] = {
+    "PCTDD-000": (CONTROL_MANIFEST_RELATIVE,),
+    "PCTDD-049": (
+        "benchmarks/agent_supervisor/parallel_content_sealing/pctdd_049_hash_seal_results.json",
+    ),
+    "PCTDD-050": (
+        "benchmarks/agent_supervisor/proof_carrying_tdd/pctdd_050_pytest_proof_tdd_results.json",
+    ),
+    "PCTDD-052": (
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/fast_tdd/capstone_self_hosting.py",
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/capstone/PCTDD-052.json",
+    ),
+    "PCTDD-053": (
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/PCTDD-053.release.json",
+        "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_RELEASE.md",
+    ),
+}
 GOAL_RE: Final[re.Pattern[str]] = re.compile(
     r"^##[ \t]+(PCTDD-G\d{3})[ \t]+([^\n]+?)[ \t]*$", re.MULTILINE
 )
@@ -242,6 +277,75 @@ def _load_json_bytes(raw: bytes, *, field: str) -> dict[str, Any]:
     return value
 
 
+def _validated_profiles(payload: Mapping[str, Any]) -> dict[str, Mapping[str, Any]]:
+    dispatcher = ROOT / VALIDATION_DISPATCHER_RELATIVE
+    spec = importlib.util.spec_from_file_location("pctdd_materializer_validation", dispatcher)
+    if spec is None or spec.loader is None:
+        raise MaterializationError("cannot load protected validation dispatcher")
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        profiles = module.validate_profile_document(payload)
+    except Exception as exc:
+        raise MaterializationError(
+            f"sealed validation profiles rejected: {type(exc).__name__}: {exc}"
+        ) from exc
+    return dict(profiles)
+
+
+def _task_validation_binding(
+    task_id: str,
+    fields: Mapping[str, Any],
+    output_paths: Sequence[str],
+    profiles: Mapping[str, Mapping[str, Any]],
+) -> tuple[str, str]:
+    profile = profiles.get(task_id)
+    if not isinstance(profile, Mapping):
+        raise MaterializationError(f"{task_id} has no resolved sealed validation profile")
+    expected_profile_id = f"pctdd-validation/{PLAN_ALIAS}/{task_id}@1"
+    if str(fields.get("validation_profile") or "") != expected_profile_id:
+        raise MaterializationError(f"{task_id} validation profile binding differs")
+    validation = str(
+        fields.get("validation") or fields.get("validation_command") or ""
+    ).strip()
+    expected_validation = f"python {VALIDATION_DISPATCHER_RELATIVE} --task {task_id}"
+    if validation != expected_validation:
+        raise MaterializationError(
+            f"{task_id} validation is unresolved prose or differs from its protected dispatcher"
+        )
+    expected_test_target = str(profile.get("required_test_target") or "")
+    expected_receipt = (
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/"
+        f"{task_id}.json"
+    )
+    expected_outputs = {
+        expected_receipt,
+        expected_test_target,
+        *TASK_EXTRA_OUTPUTS.get(task_id, ()),
+    }
+    if set(output_paths) != expected_outputs:
+        raise MaterializationError(
+            f"{task_id} exact output manifest differs"
+        )
+    expected_role = "operator-only" if task_id == OPERATOR_TASK_ID else "grok-only"
+    if str(fields.get("provider_role") or "") != expected_role:
+        raise MaterializationError(f"{task_id} provider role is not current-parser exact")
+    if str(fields.get("llm_context_budget_bytes") or "") != "24000":
+        raise MaterializationError(f"{task_id} llm_context_budget_bytes differs")
+    acceptance = str(fields.get("acceptance") or fields.get("acceptance_criteria") or "")
+    if task_id != OPERATOR_TASK_ID and not all(
+        phrase in acceptance
+        for phrase in (
+            "controller-owned validation authority independently executes",
+            "implementation model cannot fall back",
+            "worker-authored test alone is never sufficient",
+            "protected baseline regressions",
+        )
+    ):
+        raise MaterializationError(f"{task_id} lacks independent controller admission")
+    return validation, expected_profile_id
+
+
 def _load_board(config_path: Path) -> tuple[Any, dict[str, Any], bytes]:
     _install_import_roots()
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
@@ -261,6 +365,12 @@ def _load_board(config_path: Path) -> tuple[Any, dict[str, Any], bytes]:
         raise MaterializationError("PCTDD requires DuckDB authority served through Quack")
     if program.failover_policy != "fail_closed":
         raise MaterializationError("PCTDD database authority must fail closed")
+    if str(config_payload.get("accepted_plan_revision_alias") or "") != PLAN_ALIAS:
+        raise MaterializationError("PCTDD plan revision is not the V1.1 amendment")
+    if program.store_generation != "pctdd-v1-g6":
+        raise MaterializationError("PCTDD materialization requires the fresh g6 store")
+    if program.quack_endpoint != "quack:127.0.0.1:42778":
+        raise MaterializationError("PCTDD materialization requires the sealed g6 Quack endpoint")
     return board, config_payload, config_bytes
 
 
@@ -455,16 +565,18 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     from ipfs_accelerate_py.agent_supervisor.task_sources.todo_vector_index import (
         parse_todo_blocks,
     )
-    from ipfs_accelerate_py.agent_supervisor.validation.validation_commands import (
-        split_validation_commands,
-    )
-
     head, tree, branch = _assert_clean_current_tree(config)
     source_forest = _source_forest(board, head=head, tree=tree, branch=branch)
     sources = _control_sources(board, board.config_path, head=head)
     source_identities = {
         name: _sha256(value) for name, value in sorted(sources.items())
     }
+    profile_key = f"protected:{VALIDATION_PROFILE_RELATIVE}"
+    if profile_key not in sources:
+        raise MaterializationError("protected validation profile document is not sealed")
+    profiles = _validated_profiles(
+        _load_json_bytes(sources[profile_key], field="validation profiles")
+    )
     plan_root = content_identity(
         {
             "schema": "pctdd-plan-root@1",
@@ -603,13 +715,9 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         ).strip()
         if not acceptance_text:
             raise MaterializationError(f"{task_id} has no acceptance criterion")
-        validations = tuple(
-            split_validation_commands(
-                str(fields.get("validation") or fields.get("validation_command") or "")
-            )
+        validation, expected_profile_id = _task_validation_binding(
+            task_id, fields, output_paths, profiles
         )
-        if not validations:
-            raise MaterializationError(f"{task_id} has no validation command")
         acceptance: list[Mapping[str, Any] | str]
         if task_id == OPERATOR_TASK_ID:
             acceptance = [
@@ -634,7 +742,9 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                 "objective_id": "objective:pctdd-root",
                 "ordinal": ordinal,
                 # Markdown status is display metadata, never completion authority.
-                "status": "todo",
+                # The operator task is staged as non-schedulable in_progress;
+                # only seal-controls may advance it to completed.
+                "status": "in_progress" if task_id == OPERATOR_TASK_ID else "todo",
                 "declared_markdown_status": declared_status,
                 "priority": str(fields.get("priority") or "P1"),
                 "dependencies": [canonical_cids[item] for item in dependencies],
@@ -649,7 +759,8 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                     for path in output_paths
                 ],
                 "acceptance": acceptance,
-                "validations": list(validations),
+                "validations": [validation],
+                "validation_profile_id": expected_profile_id,
                 "accepted_plan_root_cid": plan_root,
                 "base_revision": head,
                 "base_repository_tree_id": tree,
@@ -675,11 +786,11 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     if expected_dependency_count != dependency_count:
         raise MaterializationError("configured task dependency count differs from board")
     configured_completed = tuple(
-        str(item) for item in projection.get("completed_task_ids", (OPERATOR_TASK_ID,))
+        str(item) for item in projection.get("completed_task_ids", ())
     )
-    if configured_completed != (OPERATOR_TASK_ID,):
+    if configured_completed:
         raise MaterializationError(
-            "initial_projection.completed_task_ids must contain only PCTDD-000"
+            "initial_projection.completed_task_ids must be empty before operator sealing"
         )
     anticipated_ready = tuple(
         task_id
@@ -688,11 +799,22 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
         and set(dependency_aliases[task_id]).issubset({OPERATOR_TASK_ID})
     )
     configured_ready = tuple(
-        str(item) for item in projection.get("ready_task_ids", INITIAL_READY)
+        str(item) for item in projection.get("ready_task_ids", ())
     )
-    if anticipated_ready != INITIAL_READY or configured_ready != INITIAL_READY:
+    post_completed = tuple(
+        str(item) for item in projection.get("post_operator_completed_task_ids", ())
+    )
+    post_ready = tuple(
+        str(item) for item in projection.get("post_operator_ready_task_ids", ())
+    )
+    if (
+        anticipated_ready != INITIAL_READY
+        or configured_ready
+        or post_completed != (OPERATOR_TASK_ID,)
+        or post_ready != INITIAL_READY
+    ):
         raise MaterializationError(
-            "post-PCTDD-000 readiness frontier must be PCTDD-001 through PCTDD-004"
+            "staged and post-PCTDD-000 readiness projections differ"
         )
 
     return {
@@ -973,6 +1095,8 @@ def _task_aliases(source: Any) -> tuple[str, ...]:
 def _verify_materialized_source(
     source: Any,
     population: Mapping[str, Any],
+    *,
+    operator_completed: bool,
 ) -> tuple[dict[str, Any], tuple[str, ...]]:
     snapshot = source.snapshot().to_dict()
     if int(snapshot["task_count"]) != len(population["tasks"]):
@@ -985,12 +1109,18 @@ def _verify_materialized_source(
     if aliases != TASK_IDS:
         raise MaterializationError("DuckDB task aliases differ from sealed board")
     operator = source.get_task(OPERATOR_TASK_ID)
-    if operator is None or operator.status not in {"completed", "complete", "done"}:
-        raise MaterializationError("PCTDD-000 lacks evidence-gated completion")
-    ready = tuple(item.task_alias for item in source.ready_tasks(limit=100).tasks)
-    if ready != INITIAL_READY:
+    expected_statuses = (
+        {"completed", "complete", "done"} if operator_completed else {"in_progress"}
+    )
+    if operator is None or operator.status not in expected_statuses:
         raise MaterializationError(
-            "DuckDB ready frontier is not exactly PCTDD-001 through PCTDD-004"
+            "PCTDD-000 completion stage differs from the requested verification"
+        )
+    ready = tuple(item.task_alias for item in source.ready_tasks(limit=100).tasks)
+    expected_ready = INITIAL_READY if operator_completed else ()
+    if ready != expected_ready:
+        raise MaterializationError(
+            "DuckDB ready frontier differs from the operator seal stage"
         )
     return snapshot, ready
 
@@ -1059,7 +1189,12 @@ def materialize(config_path: Path) -> dict[str, Any]:
             repository_tree_id=str(population["repository_tree_id"]),
             plan_root_cid=str(population["plan_root_cid"]),
         ) as source:
-            snapshot, ready = _verify_materialized_source(source, population)
+            sealed = prior.get("operator_controls_sealed") is True
+            snapshot, ready = _verify_materialized_source(
+                source,
+                population,
+                operator_completed=sealed,
+            )
         _assert_source_unchanged(
             config,
             head=str(population["source_head"]),
@@ -1069,6 +1204,7 @@ def materialize(config_path: Path) -> dict[str, Any]:
             "schema": BOOTSTRAP_SCHEMA,
             "mode": "materialize",
             "materialized": True,
+            "operator_controls_sealed": sealed,
             "idempotent_replay": True,
             "bootstrap_receipt": prior,
             "snapshot": snapshot,
@@ -1091,64 +1227,18 @@ def materialize(config_path: Path) -> dict[str, Any]:
             )
         )
         before = source.get_task(OPERATOR_TASK_ID)
-        if before is None or before.status != "todo" or before.revision < 1:
-            raise MaterializationError("PCTDD-000 was not ingested as untrusted todo")
+        if before is None or before.status != "in_progress" or before.revision < 1:
+            raise MaterializationError("PCTDD-000 was not ingested as staged operator work")
         _assert_source_unchanged(
             config,
             head=str(population["source_head"]),
             tree=str(population["repository_tree_id"]),
         )
-        control_evidence = {
-            "schema": CONTROL_EVIDENCE_SCHEMA,
-            "task_id": OPERATOR_TASK_ID,
-            "task_cid": before.task_cid,
-            "source_head": population["source_head"],
-            "repository_tree_id": population["repository_tree_id"],
-            "source_forest_root": population["source_forest"]["source_forest_root"],
-            "plan_root_cid": population["plan_root_cid"],
-            "source_identities": population["source_identities"],
-            "claim": "exact tracked operator controls were materialized through DatabaseTaskSource@1",
-            "claim_limit": (
-                "does not establish ordinary implementation completion or make "
-                "DuckLake authoritative"
-            ),
-        }
-        evidence_digest = content_identity(control_evidence)
-        evidence_receipt = source.record_evidence(
-            task_cid=before.task_cid,
-            evidence_kind="control_program_seal",
-            digest=evidence_digest,
-            body=control_evidence,
+        snapshot, ready = _verify_materialized_source(
+            source,
+            population,
+            operator_completed=False,
         )
-        cas = source.compare_and_set_status(
-            before.task_cid,
-            before.revision,
-            "completed",
-            receipt={
-                "schema": CONTROL_EVIDENCE_SCHEMA,
-                "evidence_digest": evidence_digest,
-                "evidence_event_id": evidence_receipt.event_id,
-                "source_head": population["source_head"],
-                "repository_tree_id": population["repository_tree_id"],
-                "plan_root_cid": population["plan_root_cid"],
-            },
-            evidence_digests=(evidence_digest,),
-        )
-        if not cas.changed or cas.task.status != "completed":
-            raise MaterializationError("PCTDD-000 evidence-gated CAS did not complete")
-        _assert_source_unchanged(
-            config,
-            head=str(population["source_head"]),
-            tree=str(population["repository_tree_id"]),
-        )
-        snapshot, ready = _verify_materialized_source(source, population)
-
-    ducklake = _ducklake_projection(
-        board=board,
-        paths=paths,
-        population=population,
-        control_receipt=control_receipt,
-    )
     _assert_source_unchanged(
         config,
         head=str(population["source_head"]),
@@ -1163,20 +1253,25 @@ def materialize(config_path: Path) -> dict[str, Any]:
         "source_identities": population["source_identities"],
         "plan_root_cid": population["plan_root_cid"],
         "database_task_source_receipt": control_receipt,
-        "pctdd_000_evidence_digest": evidence_digest,
-        "pctdd_000_completion_receipt_cid": cas.receipt_cid,
+        "operator_controls_sealed": False,
+        "operator_stage": "materialized_pending_profile_validators_preflight_dry_run",
         "projection_cid": snapshot["projection_cid"],
         "task_count": snapshot["task_count"],
         "goal_count": snapshot["goal_count"],
         "dependency_count": snapshot["dependency_count"],
-        "initial_ready_task_ids": list(ready),
+        "initial_ready_task_ids": [],
         "authority": {
             "tasks_and_goals": "DuckDB/DatabaseTaskSource@1",
             "live_state_owner_transport": "QuackStateServer@1",
             "ducklake": "optional_non_authoritative_history_projection",
             "markdown_completion_authority": False,
         },
-        "ducklake_projection": ducklake,
+        "ducklake_projection": {
+            "status": "not_attempted_before_operator_seal",
+            "authoritative": False,
+            "scheduling_gate": False,
+            "completion_gate": False,
+        },
     }
     bootstrap["bootstrap_receipt_id"] = content_identity(bootstrap)
     _atomic_json(receipt_path, bootstrap)
@@ -1184,7 +1279,422 @@ def materialize(config_path: Path) -> dict[str, Any]:
         "schema": BOOTSTRAP_SCHEMA,
         "mode": "materialize",
         "materialized": True,
+        "operator_controls_sealed": False,
         "idempotent_replay": False,
+        "bootstrap_receipt": bootstrap,
+        "snapshot": snapshot,
+        "ready_task_ids": list(ready),
+    }
+
+
+def _operator_command_receipt(
+    argv: Sequence[str],
+    *,
+    label: str,
+    timeout_seconds: int,
+) -> dict[str, Any]:
+    dispatcher = ROOT / VALIDATION_DISPATCHER_RELATIVE
+    spec = importlib.util.spec_from_file_location(
+        "pctdd_operator_validation_runtime",
+        dispatcher,
+    )
+    if spec is None or spec.loader is None:
+        raise MaterializationError("cannot load protected validation runtime")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    started = time.monotonic()
+    with module._sealed_validation_environment() as (environment, python, launcher):
+        command = list(argv)
+        if not command or command[0] != "python":
+            raise MaterializationError(f"{label} does not use the sealed Python placeholder")
+        command[0] = python
+        process = subprocess.Popen(
+            command,
+            cwd=ROOT,
+            env=environment,
+            shell=False,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            start_new_session=True,
+            close_fds=True,
+        )
+        try:
+            stdout, stderr = process.communicate(timeout=timeout_seconds)
+        except subprocess.TimeoutExpired:
+            module._terminate_process(process)
+            process.communicate()
+            raise MaterializationError(f"{label} timed out")
+    stdout = bytes(stdout or b"")
+    stderr = bytes(stderr or b"")
+    if process.returncode != 0:
+        diagnostic = (stderr or stdout)[-2000:].decode("utf-8", errors="replace")
+        raise MaterializationError(f"{label} failed: {diagnostic}")
+    return {
+        "label": label,
+        "argv": list(argv),
+        "returncode": int(process.returncode),
+        "stdout_sha256": _sha256(stdout),
+        "stderr_sha256": _sha256(stderr),
+        "elapsed_seconds": round(time.monotonic() - started, 6),
+        "validation_python_launcher": launcher,
+        "stdout_tail": stdout[-1048576:].decode("utf-8", errors="replace"),
+    }
+
+
+def _json_receipt_output(receipt: Mapping[str, Any], *, label: str) -> Mapping[str, Any]:
+    tail = str(receipt.get("stdout_tail") or "").strip()
+    def reject_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise MaterializationError(f"{label} JSON contains duplicate key {key!r}")
+            result[key] = value
+        return result
+    try:
+        payload = json.loads(tail, object_pairs_hook=reject_duplicates)
+    except json.JSONDecodeError as exc:
+        raise MaterializationError(f"{label} did not return a JSON object") from exc
+    if not isinstance(payload, Mapping):
+        raise MaterializationError(f"{label} JSON output is not an object")
+    return payload
+
+
+def check_sealed(config_path: Path) -> dict[str, Any]:
+    _install_import_roots()
+    from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import (
+        DatabaseTaskSource,
+    )
+
+    board, config, _config_bytes = _load_board(config_path)
+    population = _population(board, config)
+    paths = _runtime_paths(board)
+    if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
+        raise MaterializationError("PCTDD authority has not been materialized and sealed")
+    receipt = _read_receipt(paths["bootstrap_receipt"])
+    if receipt.get("operator_controls_sealed") is not True:
+        raise MaterializationError("PCTDD-000 staged controls are not sealed")
+    for key in ("source_head", "repository_tree_id", "plan_root_cid"):
+        if receipt.get(key) != population.get(key):
+            raise MaterializationError("operator seal receipt belongs to another source")
+    with DatabaseTaskSource(
+        paths["database"],
+        owner_id="pctdd-bootstrap:check-sealed",
+        install_schema=False,
+        repository_tree_id=str(population["repository_tree_id"]),
+        plan_root_cid=str(population["plan_root_cid"]),
+    ) as source:
+        snapshot, ready = _verify_materialized_source(
+            source,
+            population,
+            operator_completed=True,
+        )
+    return {
+        "schema": CHECK_SCHEMA,
+        "valid": True,
+        "mode": "check-sealed",
+        "source_head": population["source_head"],
+        "repository_tree_id": population["repository_tree_id"],
+        "operator_controls_sealed": True,
+        "snapshot": snapshot,
+        "ready_task_ids": list(ready),
+    }
+
+
+def _recover_operator_completion_receipt(
+    task: Any,
+    *,
+    exact_head: str,
+    exact_tree: str,
+    plan_root_cid: str,
+    content_identity: Any,
+) -> tuple[str, str]:
+    receipt = task.body.get("completion_receipt") if isinstance(task.body, Mapping) else None
+    expected_fields = {
+        "schema",
+        "evidence_digest",
+        "evidence_event_id",
+        "source_head",
+        "repository_tree_id",
+        "plan_root_cid",
+    }
+    if not isinstance(receipt, Mapping) or set(receipt) != expected_fields:
+        raise MaterializationError("completed PCTDD-000 receipt shape differs")
+    if (
+        receipt.get("schema") != CONTROL_EVIDENCE_SCHEMA
+        or receipt.get("source_head") != exact_head
+        or receipt.get("repository_tree_id") != exact_tree
+        or receipt.get("plan_root_cid") != plan_root_cid
+        or not str(receipt.get("evidence_digest") or "")
+        or not str(receipt.get("evidence_event_id") or "")
+    ):
+        raise MaterializationError("completed PCTDD-000 receipt binding differs")
+    control_evidence_digest = str(receipt["evidence_digest"])
+    transition_evidence_digest = content_identity(
+        {
+            "task_cid": task.task_cid,
+            "revision": task.revision,
+            "receipt": dict(receipt),
+            "evidence_digests": [control_evidence_digest],
+        }
+    )
+    completion_receipt_cid = content_identity(
+        {
+            "namespace": "completion-receipt",
+            "task_cid": task.task_cid,
+            "revision": task.revision,
+            "evidence_digest": transition_evidence_digest,
+        }
+    )
+    return control_evidence_digest, completion_receipt_cid
+
+
+def seal_operator_controls(config_path: Path) -> dict[str, Any]:
+    _install_import_roots()
+    from ipfs_accelerate_py.agent_supervisor.task_sources.control_plane_contracts import (
+        content_identity,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import (
+        DatabaseTaskSource,
+    )
+
+    board, config, _config_bytes = _load_board(config_path)
+    population = _population(board, config)
+    paths = _runtime_paths(board)
+    if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
+        raise MaterializationError("materialize the staged authority before seal-controls")
+    prior = _read_receipt(paths["bootstrap_receipt"])
+    if prior.get("operator_controls_sealed") is True:
+        return check_sealed(config_path)
+    if prior.get("operator_stage") != "materialized_pending_profile_validators_preflight_dry_run":
+        raise MaterializationError("operator staging receipt differs")
+    for key in ("source_head", "repository_tree_id", "plan_root_cid"):
+        if prior.get(key) != population.get(key):
+            raise MaterializationError("staged authority belongs to another source")
+
+    exact_head = str(population["source_head"])
+    exact_tree = str(population["repository_tree_id"])
+    configured_scheduler = ROOT / CONFIGURED_SCHEDULER_RELATIVE
+    prerequisites = (
+        (
+            "sealed_pctdd_000_profile",
+            (
+                "python",
+                VALIDATION_DISPATCHER_RELATIVE,
+                "--task",
+                OPERATOR_TASK_ID,
+            ),
+            3600,
+            False,
+        ),
+        (
+            "dependency_validator",
+            (
+                "python",
+                "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
+                "--check-all",
+            ),
+            900,
+            True,
+        ),
+        (
+            "board_validator",
+            (
+                "python",
+                "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
+                "--check-all",
+            ),
+            900,
+            True,
+        ),
+        (
+            "configured_board_preflight",
+            (
+                "python",
+                configured_scheduler.relative_to(ROOT).as_posix(),
+                "--repo-root",
+                ".",
+                "--config",
+                config_path.relative_to(ROOT).as_posix(),
+                "preflight",
+            ),
+            900,
+            True,
+        ),
+        (
+            "configured_board_implementation_dry_run",
+            (
+                "python",
+                configured_scheduler.relative_to(ROOT).as_posix(),
+                "--repo-root",
+                ".",
+                "--config",
+                config_path.relative_to(ROOT).as_posix(),
+                "launch",
+                "--implement",
+                "--dry-run",
+            ),
+            900,
+            False,
+        ),
+    )
+    receipts: list[dict[str, Any]] = []
+    for label, command, timeout_seconds, require_valid_json in prerequisites:
+        _assert_source_unchanged(config, head=exact_head, tree=exact_tree)
+        receipt = _operator_command_receipt(
+            command,
+            label=label,
+            timeout_seconds=timeout_seconds,
+        )
+        if require_valid_json:
+            payload = _json_receipt_output(receipt, label=label)
+            if payload.get("valid") is not True:
+                raise MaterializationError(f"{label} did not report valid=true")
+            receipt["reported_schema"] = str(payload.get("schema") or "")
+            receipt["reported_source_head"] = str(payload.get("source_head") or "")
+            receipt["reported_source_tree"] = str(payload.get("source_tree") or "")
+            if label != "configured_board_preflight":
+                if (
+                    receipt["reported_source_head"] != exact_head
+                    or receipt["reported_source_tree"] != exact_tree
+                ):
+                    raise MaterializationError(
+                        f"{label} evidence belongs to another source"
+                    )
+            else:
+                # The current configured-board preflight does not publish
+                # these fields.  If a successor does, never ignore them.
+                if receipt["reported_source_head"] not in {"", exact_head}:
+                    raise MaterializationError(
+                        "configured_board_preflight source_head differs"
+                    )
+                if receipt["reported_source_tree"] not in {"", exact_tree}:
+                    raise MaterializationError(
+                        "configured_board_preflight source_tree differs"
+                    )
+                checks = {
+                    str(item.get("name") or ""): item.get("passed")
+                    for item in payload.get("checks", ())
+                    if isinstance(item, Mapping)
+                }
+                if checks.get("checkout_clean") is not True:
+                    raise MaterializationError(
+                        "configured_board_preflight lacks a passing clean-checkout check"
+                    )
+                if checks.get("configured_submodules") is not True:
+                    raise MaterializationError(
+                        "configured_board_preflight lacks passing exact-submodule checks"
+                    )
+            receipt["operator_observed_source_head"] = exact_head
+            receipt["operator_observed_source_tree"] = exact_tree
+        receipt.pop("stdout_tail", None)
+        receipts.append(receipt)
+        _assert_source_unchanged(config, head=exact_head, tree=exact_tree)
+
+    with DatabaseTaskSource(
+        paths["database"],
+        owner_id="pctdd-bootstrap:seal-controls",
+        install_schema=False,
+        repository_tree_id=exact_tree,
+        plan_root_cid=str(population["plan_root_cid"]),
+    ) as source:
+        before = source.get_task(OPERATOR_TASK_ID)
+        recovered_after_cas = False
+        if before is None:
+            raise MaterializationError("PCTDD-000 is absent from the staged authority")
+        if before.status == "in_progress":
+            control_evidence = {
+                "schema": CONTROL_EVIDENCE_SCHEMA,
+                "task_id": OPERATOR_TASK_ID,
+                "task_cid": before.task_cid,
+                "task_revision": before.revision,
+                "source_head": exact_head,
+                "repository_tree_id": exact_tree,
+                "source_forest_root": population["source_forest"]["source_forest_root"],
+                "plan_root_cid": population["plan_root_cid"],
+                "source_identities": population["source_identities"],
+                "prerequisite_receipts": receipts,
+                "claim": "the exact tracked g6 controls passed the sealed profile, both validators, preflight, and implementation dry-run before completion",
+                "claim_limit": "does not establish any ordinary implementation task or make DuckLake authoritative",
+            }
+            evidence_digest = content_identity(control_evidence)
+            evidence_receipt = source.record_evidence(
+                task_cid=before.task_cid,
+                evidence_kind="control_program_seal",
+                digest=evidence_digest,
+                body=control_evidence,
+            )
+            cas = source.compare_and_set_status(
+                before.task_cid,
+                before.revision,
+                "completed",
+                receipt={
+                    "schema": CONTROL_EVIDENCE_SCHEMA,
+                    "evidence_digest": evidence_digest,
+                    "evidence_event_id": evidence_receipt.event_id,
+                    "source_head": exact_head,
+                    "repository_tree_id": exact_tree,
+                    "plan_root_cid": population["plan_root_cid"],
+                },
+                evidence_digests=(evidence_digest,),
+            )
+            if not cas.changed or cas.task.status != "completed":
+                raise MaterializationError("PCTDD-000 evidence-gated CAS did not complete")
+            completion_receipt_cid = cas.receipt_cid
+        elif before.status in {"completed", "complete", "done"}:
+            # Recover the sole crash window after the authoritative CAS and
+            # before publication of the rebuildable bootstrap receipt.  The
+            # CAS receipt is checked against this exact tree and its CID is
+            # recomputed from the current authority's canonical codec.
+            evidence_digest, completion_receipt_cid = (
+                _recover_operator_completion_receipt(
+                    before,
+                    exact_head=exact_head,
+                    exact_tree=exact_tree,
+                    plan_root_cid=str(population["plan_root_cid"]),
+                    content_identity=content_identity,
+                )
+            )
+            recovered_after_cas = True
+        else:
+            raise MaterializationError("PCTDD-000 is not at a sealable operator stage")
+        if not completion_receipt_cid:
+            raise MaterializationError("PCTDD-000 completion receipt CID is absent")
+        snapshot, ready = _verify_materialized_source(
+            source,
+            population,
+            operator_completed=True,
+        )
+
+    ducklake = _ducklake_projection(
+        board=board,
+        paths=paths,
+        population=population,
+        control_receipt=prior.get("database_task_source_receipt") or {},
+    )
+    _assert_source_unchanged(config, head=exact_head, tree=exact_tree)
+    bootstrap = dict(prior)
+    bootstrap.update(
+        {
+            "operator_controls_sealed": True,
+            "operator_stage": "sealed_ready_for_supervisor",
+            "pctdd_000_evidence_digest": evidence_digest,
+            "pctdd_000_completion_receipt_cid": completion_receipt_cid,
+            "operator_prerequisite_receipts": receipts,
+            "operator_receipt_recovered_after_cas": recovered_after_cas,
+            "projection_cid": snapshot["projection_cid"],
+            "initial_ready_task_ids": list(ready),
+            "ducklake_projection": ducklake,
+        }
+    )
+    bootstrap.pop("bootstrap_receipt_id", None)
+    bootstrap["bootstrap_receipt_id"] = content_identity(bootstrap)
+    _atomic_json(paths["bootstrap_receipt"], bootstrap)
+    return {
+        "schema": BOOTSTRAP_SCHEMA,
+        "mode": "seal-controls",
+        "materialized": True,
+        "operator_controls_sealed": True,
         "bootstrap_receipt": bootstrap,
         "snapshot": snapshot,
         "ready_task_ids": list(ready),
@@ -1196,9 +1706,9 @@ def _arguments(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "command",
         nargs="?",
-        choices=("check", "materialize"),
+        choices=("check", "materialize", "seal-controls", "check-sealed"),
         default="materialize",
-        help="validate only or materialize the sealed program (default: materialize)",
+        help="check, stage materialization, seal operator controls, or verify the seal",
     )
     parser.add_argument(
         "--check",
@@ -1218,7 +1728,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         config_path = _repo_path(arguments.config, field="--config")
         command = "check" if arguments.check else arguments.command
-        result = check(config_path) if command == "check" else materialize(config_path)
+        if command == "check":
+            result = check(config_path)
+        elif command == "materialize":
+            result = materialize(config_path)
+        elif command == "seal-controls":
+            result = seal_operator_controls(config_path)
+        else:
+            result = check_sealed(config_path)
     except Exception as exc:
         _print_json(
             {

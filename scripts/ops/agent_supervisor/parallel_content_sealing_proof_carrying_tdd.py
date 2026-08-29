@@ -289,16 +289,35 @@ def _run(
     environment: Mapping[str, str] | None = None,
     timeout: float = 600.0,
 ) -> dict[str, Any]:
-    completed = subprocess.run(
+    process = subprocess.Popen(
         list(argv),
         cwd=ROOT,
         env=dict(environment) if environment is not None else _python_environment(),
         text=True,
-        capture_output=True,
-        check=False,
-        timeout=timeout,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        start_new_session=True,
+        close_fds=True,
     )
-    stdout = completed.stdout.strip()
+    try:
+        stdout_text, stderr_text = process.communicate(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        _ensure_import_path()
+        from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
+            terminate_process_with_grace,
+        )
+
+        terminated = terminate_process_with_grace(
+            process,
+            grace_seconds=5.0,
+            kill_wait_seconds=5.0,
+        )
+        process.communicate()
+        if terminated.timed_out:
+            raise OperatorError("operator child process tree did not terminate")
+        raise OperatorError("operator child process timed out")
+    stdout = stdout_text.strip()
     parsed: Any = None
     if stdout:
         try:
@@ -306,10 +325,10 @@ def _run(
         except (json.JSONDecodeError, OperatorError):
             parsed = None
     return {
-        "returncode": int(completed.returncode),
+        "returncode": int(process.returncode or 0),
         "json": parsed,
         "stdout": stdout[-12000:] if parsed is None else "",
-        "stderr": completed.stderr.strip()[-4000:],
+        "stderr": stderr_text.strip()[-4000:],
     }
 
 
@@ -351,7 +370,16 @@ def materialize(config_path: Path) -> dict[str, Any]:
         owner = _owner_projection(paths)
         if owner["liveness"] in {"alive", "unknown"}:
             raise OperatorError("refusing direct materialization while Quack owns DuckDB")
-    result = _run((sys.executable, str(MATERIALIZER)), timeout=1200.0)
+    result = _run(
+        (
+            sys.executable,
+            str(MATERIALIZER),
+            "materialize",
+            "--config",
+            str(config_path),
+        ),
+        timeout=1200.0,
+    )
     _require_success(result, "PCTDD materialization")
     if not paths["database"].is_file():
         raise OperatorError("materializer returned success without the DuckDB authority")
@@ -369,8 +397,60 @@ def materialize(config_path: Path) -> dict[str, Any]:
     }
 
 
+def seal_controls(config_path: Path) -> dict[str, Any]:
+    board, _payload = _load_board(config_path)
+    paths = _runtime_paths(board)
+    if paths["owner_status"].is_file():
+        owner = _owner_projection(paths)
+        if owner["liveness"] in {"alive", "unknown"}:
+            raise OperatorError("refusing direct operator sealing while Quack owns DuckDB")
+    result = _run(
+        (
+            sys.executable,
+            str(MATERIALIZER),
+            "seal-controls",
+            "--config",
+            str(config_path),
+        ),
+        timeout=7200.0,
+    )
+    _require_success(result, "PCTDD staged operator control sealing")
+    payload = result.get("json")
+    if not isinstance(payload, Mapping) or payload.get("operator_controls_sealed") is not True:
+        raise OperatorError("materializer did not produce an admitted operator seal")
+    return {
+        "schema": OPERATOR_SCHEMA,
+        "command": "seal-controls",
+        "operator_controls_sealed": True,
+        "materializer": payload,
+    }
+
+
+def _require_operator_seal(config_path: Path) -> Mapping[str, Any]:
+    result = _run(
+        (
+            sys.executable,
+            str(MATERIALIZER),
+            "check-sealed",
+            "--config",
+            str(config_path),
+        ),
+        timeout=900.0,
+    )
+    _require_success(result, "PCTDD operator seal check")
+    payload = result.get("json")
+    if (
+        not isinstance(payload, Mapping)
+        or payload.get("valid") is not True
+        or payload.get("operator_controls_sealed") is not True
+    ):
+        raise OperatorError("PCTDD-000 is not sealed at the exact current source")
+    return payload
+
+
 def preflight(config_path: Path) -> dict[str, Any]:
     _load_board(config_path)
+    operator_seal = _require_operator_seal(config_path)
     result = _run(
         (
             sys.executable,
@@ -391,6 +471,7 @@ def preflight(config_path: Path) -> dict[str, Any]:
         "schema": OPERATOR_SCHEMA,
         "command": "preflight",
         "valid": True,
+        "operator_seal": operator_seal,
         "configured_board": report,
     }
 
@@ -1071,7 +1152,11 @@ def _parser() -> argparse.ArgumentParser:
     )
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("validate", help="run the sealed dependency and board validators")
-    commands.add_parser("materialize", help="materialize goals/tasks into DuckDB")
+    commands.add_parser("materialize", help="stage goals/tasks in DuckDB with PCTDD-000 incomplete")
+    commands.add_parser(
+        "seal-controls",
+        help="run the sealed profile, validators, preflight, and dry-run before completing PCTDD-000",
+    )
     commands.add_parser("preflight", help="run canonical configured-board preflight")
     commands.add_parser(
         "state-owner",
@@ -1116,6 +1201,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = validate()
         elif arguments.command == "materialize":
             result = materialize(config_path)
+        elif arguments.command == "seal-controls":
+            result = seal_controls(config_path)
         elif arguments.command == "preflight":
             result = preflight(config_path)
         elif arguments.command == "state-owner":

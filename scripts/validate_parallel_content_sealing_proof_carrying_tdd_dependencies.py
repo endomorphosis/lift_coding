@@ -27,7 +27,13 @@ ROOT = Path(__file__).resolve().parents[1]
 SEAL_PATH = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json"
 SCHEDULER_PATH = ROOT / "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json"
 NAMESPACE = "parallel-content-sealing-proof-carrying-tdd-v1"
-PLAN_REVISION = "PCTDD-PLAN-V1"
+PLAN_REVISION = "PCTDD-PLAN-V1.1"
+CONTROL_MANIFEST_RELATIVE = (
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
+)
+DEPENDENCY_SEAL_RELATIVE = (
+    "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json"
+)
 
 REQUIRED_HASHED_ARTIFACTS = {
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
@@ -44,12 +50,19 @@ REQUIRED_HASHED_ARTIFACTS = {
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json",
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py",
+    "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
+    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
 }
 
 SOURCE_PATHS = {
@@ -255,7 +268,19 @@ def _extension_state(name: str) -> dict[str, Any]:
 
 
 def _command_state(name: str, argv: tuple[str, ...]) -> dict[str, Any]:
-    executable = shutil.which(argv[0])
+    accelerator = ROOT / "external/ipfs_accelerate"
+    if str(accelerator) not in sys.path:
+        sys.path.insert(0, str(accelerator))
+    from ipfs_accelerate_py.agent_supervisor.validation.validation_runtime import (  # noqa: E402
+        build_validation_environment,
+    )
+
+    # Use the current supervisor's formal-toolchain deployment authority even
+    # when this validator is invoked directly from an operator shell.  A
+    # user-writable elan/pip shim may establish that a tool was installed, but
+    # it is not executable admission for sealed supervisor validation.
+    command_environment = build_validation_environment(os.environ)
+    executable = shutil.which(argv[0], path=command_environment.get("PATH", ""))
     result: dict[str, Any] = {
         "name": name,
         "command": argv[0],
@@ -266,13 +291,12 @@ def _command_state(name: str, argv: tuple[str, ...]) -> dict[str, Any]:
     }
     if executable is None:
         return result
-    command_environment = dict(os.environ)
     command_environment["ELAN_NO_UPDATE_CHECK"] = "1"
     # ``lean`` is commonly an elan shim.  Do not let an explicit dependency
     # check turn into an implicit toolchain download: first establish that an
     # installed toolchain already exists locally.
     if name == "lean" and ("/.elan/" in str(Path(executable).resolve()) or Path(executable).name == "elan"):
-        elan = shutil.which("elan")
+        elan = shutil.which("elan", path=command_environment.get("PATH", ""))
         if elan is None:
             result["available"] = False
             result["error"] = "elan shim present but elan executable is unavailable"
@@ -413,6 +437,13 @@ def _validate_sources(seal: Mapping[str, Any], errors: list[str]) -> dict[str, A
         dirty = _git("status", "--porcelain=v1", "--untracked-files=all", cwd=path)
         if dirty:
             errors.append(f"governed source repository is dirty: {relative}")
+        if record.get("dirty") is not False:
+            errors.append(f"{name} seal does not assert an actually clean source")
+        if record.get("gitlink_matches_nested_head") is not True:
+            errors.append(f"{name} seal does not assert exact gitlink/head equality")
+        status_digest = "sha256:" + hashlib.sha256(dirty.encode("utf-8")).hexdigest()
+        if record.get("status_sha256") != status_digest:
+            errors.append(f"{name} sealed status digest differs")
         origin = str(record.get("origin") or record.get("origin_url") or "")
         if origin:
             actual_origin = _git("remote", "get-url", "origin", cwd=path)
@@ -466,9 +497,141 @@ def validate() -> dict[str, Any]:
     revision = seal.get("plan_revision") or _deep_value(seal, ("plan_revision",))
     if revision != PLAN_REVISION:
         errors.append("dependency seal plan revision differs")
+    if seal.get("amends_plan_revision") != "PCTDD-PLAN-V1":
+        errors.append("dependency seal predecessor plan revision differs")
+    if seal.get("store_generation") != "pctdd-v1-g6":
+        errors.append("dependency seal store generation differs")
+    if seal.get("predecessor_generation") != "pctdd-v1-g5":
+        errors.append("dependency seal predecessor generation differs")
+    if seal.get("migration_inventory") != "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json":
+        errors.append("dependency seal migration inventory binding differs")
+    migration_path = ROOT / str(seal.get("migration_inventory") or "")
+    migration = _load_json(migration_path) if migration_path.is_file() else {}
+    predecessor = migration.get("predecessor") if isinstance(migration, Mapping) else {}
+    if not isinstance(predecessor, Mapping):
+        errors.append("g5 migration predecessor record is absent")
+        predecessor = {}
+    for label, path_field, hash_field in (
+        ("g5 database", "frozen_database_path", "frozen_database_sha256"),
+        ("g5 bootstrap receipt", "bootstrap_receipt_path", "bootstrap_receipt_sha256"),
+    ):
+        candidate = _safe_path(str(predecessor.get(path_field) or ""))
+        expected = _normalize_sha256(predecessor.get(hash_field))
+        if candidate is None or not candidate.is_file() or _sha256_file(candidate) != expected:
+            errors.append(f"{label} does not match its preserved migration hash")
+    candidates = migration.get("w1_rescue_candidates") if isinstance(migration, Mapping) else {}
+    if not isinstance(candidates, Mapping):
+        errors.append("g5 migration rescue candidates are absent")
+        candidates = {}
+    for task_id, outer in {
+        "PCTDD-001": "e623dd43dbc8f8feb503dd8dea2a6afb4bbd26c0",
+        "PCTDD-002": "25b2a4e0fd1ab354a0db5317ec8ea49ce0319a61",
+        "PCTDD-003": "37ccf1a42d7bbf0a6cad0a20a7671ddc0cbffac6",
+        "PCTDD-004": "2b37146f4f2f354ced02ca5327d0a7d21344f044",
+    }.items():
+        record = candidates.get(task_id)
+        if not isinstance(record, Mapping) or record.get("outer_commit") != outer:
+            errors.append(f"{task_id} migration candidate binding differs")
+            continue
+        if subprocess.run(
+            ["git", "cat-file", "-e", f"{outer}^{{commit}}"],
+            cwd=ROOT,
+            capture_output=True,
+            check=False,
+        ).returncode != 0:
+            errors.append(f"{task_id} migration commit is unavailable")
+    pctdd_004 = candidates.get("PCTDD-004") if isinstance(candidates, Mapping) else {}
+    component = (
+        (pctdd_004.get("component_commits") or {}).get("external/ipfs_accelerate")
+        if isinstance(pctdd_004, Mapping)
+        else {}
+    ) or {}
+    if (
+        component.get("commit") != "48edb688ac31bc3d05fdd5c8efd7e50ab14b755e"
+        or component.get("prior_gitlink") != "cfbd381ee6196e818ecd59a438386a60b5d71bd7"
+    ):
+        errors.append("PCTDD-004 component-safe migration binding differs")
+    nested = ROOT / "external/ipfs_accelerate"
+    for commit in (
+        "48edb688ac31bc3d05fdd5c8efd7e50ab14b755e",
+        "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+    ):
+        if subprocess.run(
+            ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
+            cwd=nested,
+            capture_output=True,
+            check=False,
+        ).returncode != 0:
+            errors.append(f"PCTDD-004 nested migration commit unavailable: {commit}")
+    outer_gitlink = _git(
+        "ls-tree",
+        "2b37146f4f2f354ced02ca5327d0a7d21344f044",
+        "external/ipfs_accelerate",
+    ).split()
+    outer_parent_gitlink = _git(
+        "ls-tree",
+        "2b37146f4f2f354ced02ca5327d0a7d21344f044^",
+        "external/ipfs_accelerate",
+    ).split()
+    if len(outer_gitlink) < 3 or outer_gitlink[2] != component.get("commit"):
+        errors.append("PCTDD-004 outer rescue commit does not bind the component commit")
+    if len(outer_parent_gitlink) < 3 or outer_parent_gitlink[2] != component.get("prior_gitlink"):
+        errors.append("PCTDD-004 outer parent does not bind the prior component gitlink")
+    rescue_count = sum(
+        1
+        for ref in _git("for-each-ref", "--format=%(refname)", "refs/heads/rescue").splitlines()
+        if ref.startswith("refs/heads/rescue/pctdd-")
+    )
+    if rescue_count != int(predecessor.get("preserved_failed_validation_rescue_branch_count") or -1):
+        errors.append("g5 PCTDD rescue-branch population differs")
 
     artifact_hashes = _validate_artifacts(seal, errors)
+    control_manifest_path = ROOT / CONTROL_MANIFEST_RELATIVE
+    control_manifest = (
+        _load_json(control_manifest_path) if control_manifest_path.is_file() else {}
+    )
+    manifest_hashes = (
+        control_manifest.get("protected_control_hashes_before_manifest_and_seal")
+        if isinstance(control_manifest, Mapping)
+        else None
+    )
+    expected_manifest_paths = REQUIRED_HASHED_ARTIFACTS - {
+        CONTROL_MANIFEST_RELATIVE,
+        DEPENDENCY_SEAL_RELATIVE,
+    }
+    if not isinstance(manifest_hashes, Mapping) or set(manifest_hashes) != expected_manifest_paths:
+        errors.append("PCTDD-000 control manifest protected path population differs")
+    else:
+        for relative, claimed in sorted(manifest_hashes.items()):
+            path = ROOT / relative
+            if not path.is_file() or claimed != _sha256_file(path):
+                errors.append(f"PCTDD-000 control manifest hash differs: {relative}")
     sources = _validate_sources(seal, errors)
+    baseline_path = (
+        ROOT
+        / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json"
+    )
+    baseline = _load_json(baseline_path) if baseline_path.is_file() else {}
+    if not isinstance(baseline, Mapping) or baseline.get("schema") != "pctdd/repository-baseline@2":
+        errors.append("fresh g6 repository baseline schema differs")
+    else:
+        if baseline.get("all_governed_sources_clean_and_gitlink_exact") is not True:
+            errors.append("fresh g6 baseline did not capture clean exact-gitlink sources")
+        baseline_sources = {
+            str(item.get("path") or ""): item
+            for item in baseline.get("sources", ())
+            if isinstance(item, Mapping)
+        }
+        seal_sources = {
+            str(item.get("path") or ""): item
+            for item in _source_records(seal)
+            if isinstance(item, Mapping)
+        }
+        if baseline_sources != seal_sources:
+            errors.append("fresh g6 baseline source records differ from the dependency seal")
+        original = baseline.get("original_user_tree_evidence")
+        if not isinstance(original, Mapping) or not original.get("root_status_sha256"):
+            errors.append("fresh g6 baseline does not preserve original dirty-user-tree evidence")
 
     python_record = _named_record(seal, ("python", "python_runtime"))
     if python_record is None:
@@ -572,9 +735,26 @@ def validate() -> dict[str, Any]:
                 errors.append("scheduler does not bind DuckDB + Quack authority")
             if database.get("failover_policy", "fail_closed") != "fail_closed":
                 errors.append("scheduler task-store failover is not fail_closed")
+            if database.get("store_generation") != "pctdd-v1-g6":
+                errors.append("scheduler task-store generation is not g6")
+            if database.get("quack_endpoint") != "quack:127.0.0.1:42778":
+                errors.append("scheduler Quack endpoint is not the sealed g6 endpoint")
+            if database.get("predecessor_store_generation") != "pctdd-v1-g5" or database.get("predecessor_is_read_only_history") is not True:
+                errors.append("scheduler does not preserve g5 as explicit read-only history")
+            provider = scheduler.get("provider") or {}
+            if provider.get("implementation_fallback_authorized") is not False:
+                errors.append("scheduler does not disable conflicting Codex implementation fallback")
+            if provider.get("provider_id") != "grok_cli" or provider.get("model_id") != "grok-4.6":
+                errors.append("scheduler does not bind the exact Grok-only implementation route")
+            if provider.get("completion_authority") != "controller_owned_sealed_validation_and_database_cas":
+                errors.append("scheduler does not bind controller-owned completion authority")
+            if any(key.startswith("fallback_") for key in provider):
+                errors.append("scheduler encodes an unauthorized implementation fallback")
             ducklake = scheduler.get("ducklake_projection_program") or scheduler.get("ducklake") or {}
             if ducklake.get("authority", ducklake.get("authoritative", False)) is not False:
                 errors.append("scheduler incorrectly makes DuckLake authoritative")
+            if "_g6/ducklake/" not in str(ducklake.get("catalog_path") or ""):
+                errors.append("scheduler DuckLake catalog is not isolated under g6")
 
     status = "passed" if not errors else "failed"
     return {
