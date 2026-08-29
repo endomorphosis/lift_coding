@@ -812,11 +812,11 @@ def _ducklake_projection(
 
 
 def materialize(config_path: Path) -> dict[str, Any]:
+    board, config = _load_config(config_path)
     from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import (
         DatabaseTaskSource,
     )
 
-    board, config = _load_config(config_path)
     paths = _runtime_paths(board)
     owner = _owner_observation(paths, board)
     if owner["liveness"] in {"alive", "unknown"}:
