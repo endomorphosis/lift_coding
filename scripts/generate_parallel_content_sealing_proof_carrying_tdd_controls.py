@@ -636,14 +636,10 @@ def scope_for(n: int, owner: str) -> str:
     if owner.endswith("ipfs_kit_py"):
         return f"external/ipfs_kit/ipfs_kit_py/proof_seal, {test_target_for(n, owner)}"
     if owner == "cross-repository":
-        return ", ".join(
-            (
-                "external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd",
-                "artifacts/parallel_content_sealing_proof_carrying_tdd",
-                test_target_for(n, owner),
-                *TASK_EXTRA_OUTPUTS.get(n, ()),
-            )
-        )
+        # Never grant an ancestor directory that contains PCTDD-000's sealed
+        # operator receipt. Cross-repository workers receive only their exact
+        # output manifest, just like the task-store ownership gate.
+        return ", ".join(outputs_for(n, owner))
     if 21 <= n <= 32:
         return f"external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, {test_target_for(n, owner)}"
     if n <= 20 or n in {37, 38, 39}:
@@ -963,7 +959,7 @@ Namespace: `{NAMESPACE}`. Revision: `{PLAN_REVISION}` (fresh `{STORE_GENERATION}
         )
         if operator:
             acceptance = (
-                f"Execute sealed profile pctdd-validation/{PLAN_REVISION}/{task}@1, both protected validators, canonical configured-board preflight, and implementation dry-run at one exact clean HEAD/tree; then record their digests in the staged operator-seal receipt before the DuckDB CAS may complete PCTDD-000."
+                f"Execute sealed profile pctdd-validation/{PLAN_REVISION}/{task}@1 including {test_target}, both protected validators, canonical configured-board preflight, and implementation dry-run at one exact clean HEAD/tree; then record their digests in the staged operator-seal receipt before the DuckDB CAS may complete PCTDD-000."
             )
         else:
             acceptance = (
