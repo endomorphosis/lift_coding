@@ -266,6 +266,30 @@ def test_sealed_duckdb_extension_binding_survives_neutral_home() -> None:
     assert errors == []
 
 
+def test_operator_prerequisite_receipt_excludes_observational_timing() -> None:
+    materializer = _load("pctdd_operator_receipt_materializer", MATERIALIZER)
+    receipt = materializer._operator_command_receipt(
+        ("python", "-c", "print('{}')"),
+        label="unit_operator_receipt",
+        timeout_seconds=30,
+    )
+    assert "elapsed_seconds" not in receipt
+    assert "elapsed_microseconds" not in receipt
+    assert receipt["returncode"] == 0
+    assert receipt["stdout_tail"].strip() == "{}"
+
+    def contains_float(value: object) -> bool:
+        if isinstance(value, float):
+            return True
+        if isinstance(value, dict):
+            return any(contains_float(item) for item in value.values())
+        if isinstance(value, (list, tuple)):
+            return any(contains_float(item) for item in value)
+        return False
+
+    assert contains_float(receipt) is False
+
+
 def test_dependency_seal_never_serializes_origin_credentials() -> None:
     generator = _load("pctdd_origin_generator", GENERATOR)
     assert generator.public_origin("https://example.invalid/owner/repository.git") == (

@@ -1302,7 +1302,6 @@ def _operator_command_receipt(
         raise MaterializationError("cannot load protected validation runtime")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    started = time.monotonic()
     with module._sealed_validation_environment() as (environment, python, launcher):
         command = list(argv)
         if not command or command[0] != "python":
@@ -1336,7 +1335,6 @@ def _operator_command_receipt(
         "returncode": int(process.returncode),
         "stdout_sha256": _sha256(stdout),
         "stderr_sha256": _sha256(stderr),
-        "elapsed_seconds": round(time.monotonic() - started, 6),
         "validation_python_launcher": launcher,
         "stdout_tail": stdout[-1048576:].decode("utf-8", errors="replace"),
     }
