@@ -1,0 +1,70 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py"
+  ],
+  "claim": "Worker-authored instrumentation of the current cold and warm hashing critical path. Cold and warm stages report timing and byte counters without changing identity, proof, storage, execution, scheduler, or publication behavior. This receipt does not complete PCTDD-004, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; current-root publication; task completion; production ZK; native batch hashing",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-004@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "limitations": {
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "native_batch_hasher": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "native_batch_hasher_not_installed",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "serial_wal_cas_publication": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "instrumentation_has_no_publication_authority",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "never adopt the outer gitlink; cherry-pick or adapt only the nested component diff onto the current supervisor-fix descendant and run fresh g6 validation",
+    "classification": "component-reuse-candidate-only",
+    "outer_commit": "2b37146f4f2f354ced02ca5327d0a7d21344f044"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-004",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-004@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
