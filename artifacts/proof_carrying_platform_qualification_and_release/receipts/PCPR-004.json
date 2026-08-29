@@ -1,0 +1,120 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-004",
+  "title": "Repair and qualify the canonical direct-objective submission path",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G110",
+  "objective_id": "PCPR-004",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-004@current-head-direct-objective-handoff-v1",
+  "observed_at": "2026-08-29T18:58:51Z",
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 canonical direct-objective handoff repair only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/config/agent_supervisor_prompt_only_self_improvement_v3_scheduler.json",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/service_factory.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/runtime_factory.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_workflow.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/plan_supervisor_service.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_python_api.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_cli.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_mcp.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-004.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "implementation_delta": "Connect Supervisor.run, CLI supervisor run, and MCP agent_supervisor_run to observed bindings, PromptWorkflowRequest/PlanCreateRequest construction, admitted PromptSupervisorService and PlanSupervisorService previews with complete materialization inputs, PlanRevisionStore plus DatabaseTaskSource apply, and a separate authorized START control. CompleteLaunchPlan caller injection is no longer required."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "35e9b75490b5bc0e11f83a38e834509163699d64",
+    "outer_tree": "68654d7fe5bbed960d9b2e661ff34d4686c34642",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "7241cde4b05d64c1cc04aa6e825dead7bca68eea",
+    "accelerator_pre_change_tree": "657caa0957016aaa29f18cf01ebd6eea3297e4af",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "production_composition": {
+    "activation_task_id": "ASE3-026",
+    "generation": 1,
+    "composition_cid": "baguqeerauqzq7qsd5l23zxfasd7it6rhxabq747agtnelhkmqnbcgfg5tm3a",
+    "complete_launch_plan_caller_injection_required": false,
+    "start_is_separate_authorized_control_operation": true,
+    "evidence_kind": "measured"
+  },
+  "direct_objective_handoff": {
+    "supervisor_run_constructs_prompt_workflow_request": true,
+    "supervisor_run_constructs_plan_create_request": true,
+    "prompt_supervisor_service_returns_admitted_preview": true,
+    "plan_supervisor_service_returns_admitted_preview_with_materialization_inputs": true,
+    "authorized_apply_uses_plan_revision_store": true,
+    "authorized_apply_uses_database_task_source": true,
+    "start_is_separate_from_materialize": true,
+    "campaign_identifiers_are_not_planner_authority": true,
+    "model_assertion_cannot_complete": true,
+    "empty_queue_cannot_complete": true,
+    "initial_task_ceiling": 80,
+    "named_blueprint_task_count_admitted_in_tests": 66,
+    "evidence_kind": "measured"
+  },
+  "python_cli_mcp_parity": {
+    "same_objective_identity": true,
+    "same_workflow_request_identity": true,
+    "same_plan_create_request_identity": true,
+    "equivalent_admitted_outcomes": true,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "stale_program_root": "fail_closed",
+    "unauthorized_mutation_missing_lease": "fail_closed",
+    "missing_start_runtime": "typed_unavailable",
+    "client_repository_path_without_allowlist": "path_denied",
+    "direct_database_bypass_not_exposed": true,
+    "complete_launch_plan_no_longer_required": true,
+    "evidence_kind": "measured"
+  },
+  "validation": {
+    "commands": [
+      "python -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_python_api.py external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_cli.py external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_mcp.py external/ipfs_accelerate/test/api/test_agent_supervisor_plan_control_conformance.py external/ipfs_accelerate/test/integration/test_agent_supervisor_planner_doctor_e2e.py -q",
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-004.json"
+    ],
+    "pytest_exit_code": 0,
+    "pytest_passed": 84,
+    "pytest_failed": 0,
+    "duration_seconds": 30.33,
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "Markdown taskboard materialization remains bounded to 24 entries; larger admitted populations use DatabaseTaskSource as the durable projection.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit.",
+    "Live configured-board process birth is exercised through the bound START handler contract, not by launching the full operator scheduler in these tests."
+  ]
+}
