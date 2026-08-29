@@ -1053,7 +1053,8 @@ def start_state_owner_daemon(config_path: Path) -> dict[str, Any]:
     prior = _pid(pid_path)
     if _pid_alive(prior):
         raise OperatorError("a combined PCPR owner process is alive but not ready")
-    log_path = paths["logs"] / "pcpr-supervisor.log"
+    launch_id = datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ")
+    log_path = paths["logs"] / f"pcpr-supervisor-{launch_id}.log"
     log_path.parent.mkdir(parents=True, exist_ok=True)
     argv = [
         sys.executable,
@@ -1098,9 +1099,24 @@ def start_state_owner_daemon(config_path: Path) -> dict[str, Any]:
             }
         time.sleep(0.25)
     try:
-        process.terminate()
-    except OSError:
+        os.killpg(process.pid, signal.SIGTERM)
+        process.wait(timeout=15.0)
+    except ProcessLookupError:
         pass
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        try:
+            process.wait(timeout=5.0)
+        except subprocess.TimeoutExpired:
+            pass
+    if _pid(pid_path) == process.pid:
+        try:
+            pid_path.unlink()
+        except FileNotFoundError:
+            pass
     raise OperatorError("detached PCPR supervisor did not become ready within 180 seconds")
 
 
@@ -1255,7 +1271,9 @@ def _parse_time(value: Any) -> float:
         return 0.0
 
 
-def _log_findings(paths: Mapping[str, Path]) -> dict[str, Any]:
+def _log_findings(
+    paths: Mapping[str, Path], *, not_before_epoch: float = 0.0
+) -> dict[str, Any]:
     candidates: list[Path] = []
     for root in (paths["logs"], paths["state"]):
         if root.is_dir():
@@ -1263,7 +1281,12 @@ def _log_findings(paths: Mapping[str, Path]) -> dict[str, Any]:
             # the task's own threat vocabulary (for example "fatal" and
             # "quarantine").  They are candidate evidence, not operational
             # health logs, so recursively scanning them creates false alarms.
-            candidates.extend(path for path in root.glob("*.log") if path.is_file())
+            candidates.extend(
+                path
+                for path in root.glob("*.log")
+                if path.is_file()
+                and path.stat().st_mtime + 5.0 >= not_before_epoch
+            )
     candidates = sorted(candidates, key=lambda path: path.stat().st_mtime, reverse=True)[:24]
     observations: list[dict[str, Any]] = []
     fatal_count = 0
@@ -1286,7 +1309,11 @@ def _log_findings(paths: Mapping[str, Path]) -> dict[str, Any]:
             )
         except OSError:
             continue
-    return {"files": observations, "fatal_or_quarantine_count": fatal_count}
+    return {
+        "files": observations,
+        "fatal_or_quarantine_count": fatal_count,
+        "not_before_epoch": not_before_epoch,
+    }
 
 
 def _supervisor_status(
@@ -1309,28 +1336,10 @@ def _supervisor_status(
     lanes: list[dict[str, Any]] = []
     bad_lane = False
     for index in range(expected):
-        lane_dir = paths["state"] / f"lane-{index}"
-        candidates = (
-            (
-                lane_dir / f"pcpr_lane_{index}_supervisor.pid",
-                lane_dir / f"pcpr_lane_{index}_managed_daemon.pid",
-                lane_dir / f"pcpr_lane_{index}_supervisor_status.json",
-            ),
-            (
-                paths["state"] / "pcpr_supervisor.pid",
-                paths["state"] / "pcpr_managed_daemon.pid",
-                paths["state"] / "pcpr_supervisor_status.json",
-            ),
-        )
-        selected = next(
-            (
-                candidate
-                for candidate in candidates
-                if candidate[0].is_file()
-                or candidate[1].is_file()
-                or candidate[2].is_file()
-            ),
-            candidates[0],
+        selected = (
+            paths["state"] / "pcpr_supervisor.pid",
+            paths["state"] / "pcpr_managed_daemon.pid",
+            paths["state"] / "pcpr_supervisor_status.json",
         )
         supervisor_pid = _pid(selected[0])
         daemon_pid = _pid(selected[1])
@@ -1376,9 +1385,7 @@ def _supervisor_status(
         lanes.append(
             {
                 "lane_index": index,
-                "state_layout": (
-                    "lane_directory" if selected is candidates[0] else "single_track_root"
-                ),
+                "state_layout": "single_track_root",
                 "supervisor_pid": supervisor_pid,
                 "supervisor_alive": supervisor_alive,
                 "daemon_pid": daemon_pid,
@@ -1386,7 +1393,8 @@ def _supervisor_status(
                 "projection": projection,
             }
         )
-    logs = _log_findings(paths)
+    owner_started_at = float(identity.get("startup_epoch") or 0.0)
+    logs = _log_findings(paths, not_before_epoch=owner_started_at)
     live_lanes = sum(1 for lane in lanes if lane["supervisor_alive"])
     live_daemons = sum(1 for lane in lanes if lane["daemon_alive"])
     bootstrap_path = paths["evidence"] / "runtime" / "executor-bootstrap.json"
@@ -1983,6 +1991,7 @@ def launch_supervisor(
     foreground: bool,
     duration_seconds: float,
 ) -> int:
+    board, _config = _load_config(config_path)
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         configured_board_launch_plan,
     )
@@ -1993,7 +2002,6 @@ def launch_supervisor(
         main as multi_supervisor_main,
     )
 
-    board, _config = _load_config(config_path)
     paths = _runtime_paths(board)
     bootstrap_receipt = _assert_materialized_source(paths)
     if duration_seconds != float("inf") and duration_seconds <= 0:
@@ -2068,7 +2076,6 @@ def launch_supervisor(
             detach=False,
             duration_seconds=duration_seconds,
         )
-        _ensure_private_runtime_directory(paths["state"] / "lane-0")
         runner_args = list(plan["argv"])
         for value in (
             "--database-owner-session-id",
