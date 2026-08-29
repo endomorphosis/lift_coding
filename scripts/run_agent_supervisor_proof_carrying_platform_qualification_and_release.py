@@ -1053,7 +1053,7 @@ def _sha256_file(path: Path) -> tuple[str, int]:
                 break
             size += len(chunk)
             digest.update(chunk)
-    return digest.hexdigest(), size
+    return "sha256:" + digest.hexdigest(), size
 
 
 def _task_projection(
