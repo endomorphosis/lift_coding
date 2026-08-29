@@ -1,0 +1,162 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py"
+  ],
+  "claim": "Worker-authored inventory that every current source-to-CID and seal-publication path remains distinctly classified without changing identity. Typed unavailable production ZK, key ceremony, native batch hashing, direct-execution, and serial WAL/CAS publication cases are recorded without changing claim meaning. This receipt does not complete PCTDD-001, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; current-root publication; task completion; production ZK; identity mutation",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "limitations": {
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "native_batch_hasher": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "native_batch_hasher_not_installed",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "serial_wal_cas_publication": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "inventory_has_no_publication_authority",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "never cherry-pick the stale outer receipt commit; independently implement or recover component changes and issue fresh g6 evidence",
+    "classification": "receipt-observation-only",
+    "outer_commit": "e623dd43dbc8f8feb503dd8dea2a6afb4bbd26c0"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "seal_publication_inventory": {
+    "accelerate_incremental_sealer": {
+      "authority": "ipfs_accelerate_py coordinates; ipfs_kit_py owns WAL/CAS",
+      "classification": "available_with_caveats",
+      "interface": "IncrementalProofSealer@1",
+      "kinds": [
+        "full_checkpoint",
+        "delta_seal"
+      ],
+      "publication_authority_invoked": false
+    },
+    "kit_current_root_cas": {
+      "authority": "ipfs_kit_py",
+      "classification": "available",
+      "interface": "DurableCoordinationStore.compare_and_swap_state_root",
+      "publication_authority_invoked": false
+    },
+    "kit_proof_certificate_store": {
+      "authority": "ipfs_kit_py stores/verifies bytes; accelerate admits proof/test meaning",
+      "classification": "available",
+      "interface": "TestCertificateStoreTransport@1",
+      "publication_authority_invoked": false
+    },
+    "required_invariant": "parallel immutable preparation has no publication authority; final ordered WAL and generation-bearing current-root CAS remain serial and fail closed"
+  },
+  "self_approval": false,
+  "source_to_cid_inventory": {
+    "datasets_cid_utils": {
+      "classification": "available",
+      "codec": "raw_or_dag-json",
+      "owner": "ipfs_datasets_py",
+      "profile": "CIDv1/base32/sha2-256"
+    },
+    "accelerate_closed_cid_utils": {
+      "classification": "available",
+      "codec": "raw_or_dag-json",
+      "owner": "ipfs_accelerate_py",
+      "profile": "CIDv1/base32/sha2-256 closed"
+    },
+    "accelerate_multiformats_identity": {
+      "classification": "available",
+      "codec": "raw_or_dag-json",
+      "owner": "ipfs_accelerate_py",
+      "profile": "vfs/cid-profile@1"
+    },
+    "datasets_software_contract_content": {
+      "classification": "available",
+      "codec": "raw_source_or_dag-json_structured",
+      "owner": "ipfs_datasets_py",
+      "profile": "software-contract-cid-profile-v1"
+    },
+    "datasets_ir_core_identity": {
+      "classification": "available",
+      "codec": "raw",
+      "owner": "ipfs_datasets_py",
+      "profile": "ir-canonical-identity-v1"
+    },
+    "accelerate_content_identity_bridge": {
+      "classification": "available",
+      "codec": "profile_tagged",
+      "owner": "ipfs_accelerate_py consumes datasets",
+      "profile": "ContentIdentity@1"
+    },
+    "accelerate_assurance_content_identity": {
+      "classification": "available",
+      "codec": "raw_or_dag-json",
+      "owner": "ipfs_accelerate_py",
+      "profile": "AccelerateContentIdentity@1"
+    },
+    "datasets_ipld_cid": {
+      "classification": "available_distinct_profile",
+      "codec": "dag-json",
+      "owner": "ipfs_datasets_py",
+      "profile": "Profile D ensure_ascii=True"
+    },
+    "datasets_profile_g": {
+      "classification": "available_distinct_profile",
+      "codec": "dag-json",
+      "owner": "ipfs_datasets_py",
+      "profile": "Profile G"
+    },
+    "kit_coordination_cid": {
+      "classification": "available",
+      "codec": "raw_or_dag-json",
+      "owner": "ipfs_kit_py",
+      "profile": "coordination CIDv1/sha2-256"
+    },
+    "kit_proof_certificate_cid": {
+      "classification": "available",
+      "codec": "raw_default",
+      "owner": "ipfs_kit_py",
+      "profile": "certificate CIDv1/sha2-256"
+    }
+  },
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-001",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
