@@ -140,6 +140,12 @@ def _contained(path: Path) -> Path:
     return candidate
 
 
+def _repository_relative_argument(path: Path) -> str:
+    """Return the confined relative spelling required by sealed child CLIs."""
+
+    return _contained(path).relative_to(ROOT).as_posix()
+
+
 def _private_directory(path: Path) -> Path:
     """Create an owned, non-linked, mode-0700 directory inside the checkout."""
 
@@ -376,7 +382,7 @@ def materialize(config_path: Path) -> dict[str, Any]:
             str(MATERIALIZER),
             "materialize",
             "--config",
-            str(config_path),
+            _repository_relative_argument(config_path),
         ),
         timeout=1200.0,
     )
@@ -410,7 +416,7 @@ def seal_controls(config_path: Path) -> dict[str, Any]:
             str(MATERIALIZER),
             "seal-controls",
             "--config",
-            str(config_path),
+            _repository_relative_argument(config_path),
         ),
         timeout=7200.0,
     )
@@ -433,7 +439,7 @@ def _require_operator_seal(config_path: Path) -> Mapping[str, Any]:
             str(MATERIALIZER),
             "check-sealed",
             "--config",
-            str(config_path),
+            _repository_relative_argument(config_path),
         ),
         timeout=900.0,
     )

@@ -649,6 +649,29 @@ def scope_for(n: int, owner: str) -> str:
     return ", ".join((base, *extras))
 
 
+def predicted_files_for(
+    n: int,
+    owner: str | None = None,
+) -> tuple[str, ...]:
+    """Return the stable task-owned write envelope understood by the daemon.
+
+    ``Outputs`` remains the unique exact artifact manifest used by completion
+    and output-presence gates.  ``Predicted files`` is the daemon-recognized
+    write-scope field and must also include those exact outputs so provider
+    and proposal fences see one coherent envelope. Existing source directories
+    in ``scope_for`` are authority scopes, not promises to create a new
+    directory artifact; output-presence gates continue to use ``Outputs``.
+    """
+
+    owner = owner or owner_for(n)
+    scope_paths = tuple(
+        path.strip()
+        for path in scope_for(n, owner).split(",")
+        if path.strip()
+    )
+    return tuple(dict.fromkeys((*outputs_for(n, owner), *scope_paths)))
+
+
 def rollout_for(n: int) -> str:
     if n <= 43: return "bootstrap"
     if n == 44: return "shadow_hash"
@@ -941,7 +964,7 @@ Namespace: `{NAMESPACE}`. Revision: `{PLAN_REVISION}` (fresh `{STORE_GENERATION}
 """]
     for n, (task, title) in enumerate(TASKS.items()):
         owner = owner_for(n)
-        scope = scope_for(n, owner)
+        scope = ", ".join(predicted_files_for(n, owner))
         test_target = test_target_for(n, owner)
         output = ", ".join(outputs_for(n, owner))
         deps = ", ".join(DEPENDENCIES[task]) or "none"
@@ -973,7 +996,7 @@ Namespace: `{NAMESPACE}`. Revision: `{PLAN_REVISION}` (fresh `{STORE_GENERATION}
             acceptance += (
                 " Completion is rejected unless the PCTDD-047 schema-aware gate independently admits the complete required-mode pre/post-root and serial-publication evidence chain."
             )
-        lines += [f"## {task} {title}", "", "- Status: todo", f"- Completion mode: {completion}", f"- Is schedulable: {schedulable}", f"- Operator only: {str(operator).lower()}", "- Priority: P0", f"- Track: {goal_for(n)}", f"- Depends on: {deps}", f"- Bundle: pctdd/{goal_for(n).lower()}/{task.lower()}", f"- Parallel lane: {lane}", "- Resource class: cpu-medium; explicit prover/hash/store reservations when required", "- Timeout seconds: 21600", "- Provider role: operator-only" if operator else "- Provider role: grok-only", f"- Owning repository: {owner}", f"- Directive: {task_directive(n)}", f"- Exact inputs: {PLAN_REVISION}; exact source forest; predecessor APIs; dependency seal; dependency receipts: {deps}", f"- Predecessor rescue candidate: {rescue_policy}", f"- Outputs: {output}", f"- Predicted paths: {scope}", f"- Predicted symbols: {title.replace(' ', '')}; versioned @1/@2 contracts only where the task introduces them", "- Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only", "- Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval", f"- Declared effects: Modify only {scope}; emit immutable receipt; request reviewed merge through existing authority", f"- Validation profile: pctdd-validation/{PLAN_REVISION}/{task}@1", f"- Validation: {validation}", f"- Required evidence: {required_evidence(n)}", f"- Acceptance criteria: {acceptance}", "- Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.", "- LLM context budget bytes: 24000", "- Context policy: send only affected source, contracts, counterexample, and current receipts", f"- No-model route: {no_model}", "- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion", f"- Rollout mode: {rollout_for(n)}", f"- Protected paths: {protected}", "- Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.", f"- Goal id: {goal_for(n)}", f"- Board namespace: {NAMESPACE}", ""]
+        lines += [f"## {task} {title}", "", "- Status: todo", f"- Completion mode: {completion}", f"- Is schedulable: {schedulable}", f"- Operator only: {str(operator).lower()}", "- Priority: P0", f"- Track: {goal_for(n)}", f"- Depends on: {deps}", f"- Bundle: pctdd/{goal_for(n).lower()}/{task.lower()}", f"- Parallel lane: {lane}", "- Resource class: cpu-medium; explicit prover/hash/store reservations when required", "- Timeout seconds: 21600", "- Provider role: operator-only" if operator else "- Provider role: grok-only", f"- Owning repository: {owner}", f"- Directive: {task_directive(n)}", f"- Exact inputs: {PLAN_REVISION}; exact source forest; predecessor APIs; dependency seal; dependency receipts: {deps}", f"- Predecessor rescue candidate: {rescue_policy}", f"- Outputs: {output}", f"- Predicted files: {scope}", f"- Predicted symbols: {title.replace(' ', '')}; versioned @1/@2 contracts only where the task introduces them", "- Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only", "- Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval", f"- Declared effects: Modify only {scope}; emit immutable receipt; request reviewed merge through existing authority", f"- Validation profile: pctdd-validation/{PLAN_REVISION}/{task}@1", f"- Validation: {validation}", f"- Required evidence: {required_evidence(n)}", f"- Acceptance criteria: {acceptance}", "- Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.", "- LLM context budget bytes: 24000", "- Context policy: send only affected source, contracts, counterexample, and current receipts", f"- No-model route: {no_model}", "- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion", f"- Rollout mode: {rollout_for(n)}", f"- Protected paths: {protected}", "- Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.", f"- Goal id: {goal_for(n)}", f"- Board namespace: {NAMESPACE}", ""]
     return "\n".join(lines)
 
 

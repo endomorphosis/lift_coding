@@ -147,12 +147,27 @@ def test_board_uses_recognized_roles_budget_rollout_and_exact_outputs() -> None:
     blocks = validator._parse_blocks(board, validator.TASK_RE)
     assert len(blocks) == 54
     fields_by_task = {task_id: fields for task_id, _title, fields in blocks}
+    all_exact_outputs: list[str] = []
     for number, task_id in enumerate(generator.TASKS):
         fields = fields_by_task[task_id]
         expected_role = "operator-only" if number == 0 else "grok-only"
         assert fields["provider_role"] == expected_role
         assert fields["llm_context_budget_bytes"] == "24000"
-        assert set(validator._items(fields["outputs"])) == set(generator.outputs_for(number))
+        exact_outputs = validator._items(fields["outputs"])
+        predicted_files = validator._items(fields["predicted_files"])
+        owning_scope = validator._items(generator.scope_for(number, generator.owner_for(number)))
+        assert "predicted_paths" not in fields
+        assert exact_outputs == generator.outputs_for(number)
+        assert predicted_files == generator.predicted_files_for(number)
+        assert set(exact_outputs).issubset(predicted_files)
+        assert set(owning_scope).issubset(predicted_files)
+        if number:
+            assert not any(
+                validator._contains_path(path, protected)
+                for path in predicted_files
+                for protected in validator.PROTECTED_PATHS
+            )
+        all_exact_outputs.extend(exact_outputs)
         if number:
             acceptance = fields["acceptance_criteria"]
             assert "controller-owned validation authority independently executes" in acceptance
@@ -160,7 +175,11 @@ def test_board_uses_recognized_roles_budget_rollout_and_exact_outputs() -> None:
             assert "worker-authored test alone is never sufficient" in acceptance
             assert "protected baseline regressions" in acceptance
     assert fields_by_task["PCTDD-004"]["owning_repository"] == "endomorphosis/ipfs_accelerate_py"
-    assert "critical_path.py" in fields_by_task["PCTDD-004"]["predicted_paths"]
+    assert len(all_exact_outputs) == len(set(all_exact_outputs))
+    assert "critical_path.py" in fields_by_task["PCTDD-004"]["predicted_files"]
+    datasets_scope = "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd"
+    assert datasets_scope in validator._items(fields_by_task["PCTDD-005"]["predicted_files"])
+    assert datasets_scope not in validator._items(fields_by_task["PCTDD-005"]["outputs"])
     assert fields_by_task["PCTDD-047"]["rollout_mode"] == "protected"
     assert "schema-aware required-mode completion gate" in fields_by_task["PCTDD-047"]["acceptance_criteria"]
     for number in range(48, 54):
@@ -473,3 +492,46 @@ def test_facade_preflight_and_launch_are_operator_seal_gated(monkeypatch: pytest
     with pytest.raises(facade.OperatorError, match="not sealed"):
         facade.preflight(ROOT / "config/example.json")
     assert calls == ["seal"]
+
+
+def test_facade_passes_confined_relative_config_to_materializer(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_relative_config_facade", FACADE)
+    config = ROOT / "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json"
+
+    class FakePath:
+        def __init__(self, *, present: bool, relative: str) -> None:
+            self.present = present
+            self.relative = relative
+
+        def is_file(self) -> bool:
+            return self.present
+
+        def relative_to(self, _root: Path) -> Path:
+            return Path(self.relative)
+
+    database = FakePath(present=True, relative="data/test/control.duckdb")
+    owner_status = FakePath(present=False, relative="data/test/owner.json")
+    calls: list[list[str]] = []
+    monkeypatch.setattr(facade, "_load_board", lambda _path: (object(), {}))
+    monkeypatch.setattr(
+        facade,
+        "_runtime_paths",
+        lambda _board: {"database": database, "owner_status": owner_status},
+    )
+
+    def successful_child(argv, **_kwargs):
+        calls.append(list(argv))
+        return {"returncode": 0, "json": {"materialized": True}}
+
+    monkeypatch.setattr(facade, "_run", successful_child)
+    result = facade.materialize(config)
+    assert result["materialized"] is True
+    assert calls[0][-2:] == [
+        "--config",
+        "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
+    ]
+    with pytest.raises(facade.OperatorError, match="escapes"):
+        facade._repository_relative_argument(tmp_path / "outside.json")

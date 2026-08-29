@@ -227,7 +227,7 @@ REQUIRED_FIELD_GROUPS: tuple[tuple[str, ...], ...] = (
     ("timeout_seconds", "implementation_timeout_seconds", "timeout"),
     ("provider_role",), ("owning_repository",), ("directive",), ("exact_inputs", "inputs"),
     ("predecessor_rescue_candidate",),
-    ("outputs",), ("predicted_paths", "predicted_files"),
+    ("outputs",), ("predicted_files",),
     ("predicted_symbols", "symbols"), ("interfaces",),
     ("preconditions",), ("declared_effects", "allowed_effects"),
     ("validation_profile",), ("validation", "validation_command"), ("required_evidence",),
@@ -430,6 +430,10 @@ def validate() -> dict[str, Any]:
         for group in REQUIRED_FIELD_GROUPS:
             if not any(_field(fields, name) for name in group):
                 errors.append(f"{task_id} missing field ({' or '.join(group)})")
+        if "predicted_paths" in fields:
+            errors.append(
+                f"{task_id} uses legacy Predicted paths; use daemon-recognized Predicted files"
+            )
         status = _field(fields, "status").lower()
         if status not in ALLOWED_STATUSES:
             errors.append(f"{task_id} has non-closed status {status!r}")
@@ -474,12 +478,18 @@ def validate() -> dict[str, Any]:
                 errors.append(f"output {output} is owned by both {prior} and {task_id}")
             outputs_owner[output] = task_id
 
-        predicted = _items(_field(fields, "predicted_paths", "predicted_files"))
+        predicted = _items(_field(fields, "predicted_files"))
+        missing_predicted_outputs = sorted(set(task_outputs).difference(predicted))
+        if missing_predicted_outputs:
+            errors.append(
+                f"{task_id} predicted files omit exact owned outputs: "
+                f"{missing_predicted_outputs}"
+            )
         if expected_test_target and expected_test_target not in predicted:
-            errors.append(f"{task_id} predicted paths omit its exact test target")
+            errors.append(f"{task_id} predicted files omit its exact test target")
         for extra_output in TASK_EXTRA_OUTPUTS.get(task_id, ()):
             if extra_output not in predicted:
-                errors.append(f"{task_id} predicted paths omit owned output {extra_output}")
+                errors.append(f"{task_id} predicted files omit owned output {extra_output}")
         if task_id == "PCTDD-004" and (
             "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py"
             not in predicted
