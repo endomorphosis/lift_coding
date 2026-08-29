@@ -1,0 +1,380 @@
+{
+  "authorities": {
+    "canonical_semantic_and_statement": "ipfs_datasets_py",
+    "execution_scheduling_admission": "ipfs_accelerate_py",
+    "task_transaction": "DuckDB via exclusive authenticated Quack owner",
+    "verified_storage_wal_cas": "ipfs_kit_py"
+  },
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "claim": "Every current source-to-CID and seal-publication path is inventoried without changing identity. This receipt does not complete PCTDD-001, admit a seal, or approve worker output.",
+  "completion_authority": "controller_owned_sealed_validation_and_database_cas",
+  "dependency_receipt": "PCTDD-000",
+  "identity_changed": false,
+  "identity_rules": [
+    "CID is exact byte identity under a versioned profile",
+    "Git blob OID is memo lookup key only",
+    "filesystem metadata nominates a candidate only",
+    "chunk manifest does not replace raw full-stream CID",
+    "ordinary SHA-256 of one stream is not composed from independent chunk hashes"
+  ],
+  "implementation_fallback_authorized": false,
+  "markdown_non_authoritative": true,
+  "observed_gaps": [
+    "duplicate serialization/hashing requires task instrumentation",
+    "unverified metadata cannot authorize reuse",
+    "parallel immutable preparation absent or partial"
+  ],
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "preserve": [
+    "canonical bytes",
+    "codec",
+    "multicodec",
+    "multihash",
+    "CID version",
+    "multibase",
+    "ordering",
+    "normalization"
+  ],
+  "schema": "pctdd/cid-sha-canonicalization-inventory-receipt@1",
+  "seal_identity_encoding": {
+    "current": "sha256-hex-label-over-sorted-json",
+    "is_cidv1": false,
+    "modules": [
+      "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.full_checkpoint",
+      "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.delta_seal"
+    ],
+    "note": "FullCheckpointSeal.seal_cid and DeltaSeal.seal_cid currently return sha256:<hex> over domain-separated sorted JSON; this is not interchangeable with CIDv1 and is inventoried without change."
+  },
+  "seal_publication_serial_contract": {
+    "fail_closed": true,
+    "identity_changed": false,
+    "plan_stage": "serial WAL/CAS",
+    "source_vocabulary": [
+      "atomic WAL-backed",
+      "expected-parent CAS",
+      "compare-and-swap",
+      "exactly one concurrent valid writer",
+      "fail-closed",
+      "stale_parent"
+    ],
+    "worker_publication_authority": false
+  },
+  "seal_publication_paths": [
+    {
+      "authority": "ipfs_accelerate_py",
+      "module": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.sealer",
+      "path_id": "accelerate.incremental_proof_sealer",
+      "publication_authority": "serial_controller_owned_wal_cas",
+      "role": "seal_publication_coordinator",
+      "stage": "serial WAL/CAS",
+      "symbols": [
+        "IncrementalProofSealer",
+        "SealPublicationResult",
+        "publish_full_checkpoint",
+        "publish_delta_seal"
+      ],
+      "worker_publication_authority": false
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "module": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.full_checkpoint",
+      "path_id": "accelerate.full_checkpoint_seal",
+      "publication_authority": "none_prepare_only",
+      "role": "full_seal_preparation",
+      "stage": "Merkle / immutable store",
+      "symbols": [
+        "create_full_checkpoint",
+        "FullCheckpointSeal.seal_cid"
+      ],
+      "worker_publication_authority": false
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "module": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.delta_seal",
+      "path_id": "accelerate.delta_seal",
+      "publication_authority": "none_prepare_only",
+      "role": "delta_seal_preparation",
+      "stage": "Merkle / immutable store",
+      "symbols": [
+        "build_delta_seal",
+        "DeltaSeal.seal_cid"
+      ],
+      "worker_publication_authority": false
+    },
+    {
+      "authority": "ipfs_kit_py",
+      "module": "ipfs_kit_py.proof_seal_store",
+      "path_id": "kit.proof_seal_store",
+      "publication_authority": "serial_controller_owned_wal_cas",
+      "role": "verified_storage_wal_cas",
+      "stage": "immutable store / serial WAL/CAS",
+      "symbols": [
+        "HermeticProofSealStore",
+        "SealTransitionWal",
+        "CurrentSealRepository",
+        "recover_seal_transitions"
+      ],
+      "worker_publication_authority": false
+    },
+    {
+      "authority": "ipfs_kit_py",
+      "module": "ipfs_kit_py.mcp_server.mcplusplus.coordination_storage",
+      "path_id": "kit.semantic_state_root_cas",
+      "publication_authority": "serial_controller_owned_cas",
+      "role": "verified_storage_wal_cas",
+      "stage": "serial WAL/CAS",
+      "symbols": [
+        "DurableCoordinationStore.compare_and_swap_state_root",
+        "cid_for_bytes",
+        "cid_for_artifact"
+      ],
+      "worker_publication_authority": false
+    }
+  ],
+  "source_to_cid_paths": [
+    {
+      "authority": "ipfs_datasets_py",
+      "module": "ipfs_datasets_py.utils.cid_utils",
+      "path_id": "datasets.cid_utils",
+      "profiles": [
+        "cidv1-raw-sha2-256-base32",
+        "cidv1-dag-json-sha2-256-base32"
+      ],
+      "role": "canonical_semantic_codec",
+      "stage": "canonical serialization / SHA/CID",
+      "symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_bytes",
+        "cid_for_dag_json",
+        "cid_for_obj",
+        "validate_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "module": "ipfs_datasets_py.logic.software_contracts.content",
+      "path_id": "datasets.software_contracts.content",
+      "profiles": [
+        "software-contract-cid-profile-v1"
+      ],
+      "role": "canonical_semantic_codec",
+      "stage": "canonical serialization / SHA/CID",
+      "symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_bytes",
+        "cid_for_obj",
+        "cid_for_structured",
+        "decode_and_recompute_source",
+        "decode_and_recompute_structured"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "module": "ipfs_datasets_py.logic.ir_core.identity",
+      "path_id": "datasets.ir_core.identity",
+      "profiles": [
+        "ir-canonical-identity-v1"
+      ],
+      "role": "canonical_semantic_codec",
+      "stage": "canonical serialization / SHA/CID",
+      "symbols": [
+        "canonical_identity",
+        "cid_v1",
+        "identity_preimage",
+        "sha256_digest"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "module": "ipfs_datasets_py.logic.ipld_cid",
+      "path_id": "datasets.ipld_cid",
+      "profiles": [
+        "profile-d-dag-json-ensure-ascii-true"
+      ],
+      "role": "canonical_semantic_codec",
+      "stage": "canonical serialization / SHA/CID",
+      "symbols": [
+        "canonical_dag_json",
+        "dag_json_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_datasets_py",
+      "module": "ipfs_datasets_py.logic.profile_g",
+      "path_id": "datasets.profile_g",
+      "profiles": [
+        "profile-g-dag-json"
+      ],
+      "role": "canonical_semantic_codec",
+      "stage": "canonical serialization / SHA/CID",
+      "symbols": [
+        "canonical_profile_g_bytes",
+        "profile_g_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "module": "ipfs_accelerate_py.agent_supervisor.analysis.content_identity_bridge",
+      "path_id": "accelerate.content_identity_bridge",
+      "profiles": [
+        "strict-dag-json-v1",
+        "ir-canonical-identity-v1"
+      ],
+      "role": "adapter_over_datasets",
+      "stage": "canonical serialization / SHA/CID",
+      "symbols": [
+        "identify_strict_artifact",
+        "identify_strict_artifact_bytes",
+        "identify_logic_ir"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "module": "ipfs_accelerate_py.utils.cid_utils",
+      "path_id": "accelerate.utils.cid_utils",
+      "profiles": [
+        "cidv1-raw-sha2-256-base32",
+        "cidv1-dag-json-sha2-256-base32"
+      ],
+      "role": "sealed_launch_wire_implementation",
+      "stage": "canonical serialization / SHA/CID",
+      "symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_bytes",
+        "cid_for_dag_json",
+        "validate_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "module": "ipfs_accelerate_py.agent_supervisor.core.multiformats_identity",
+      "path_id": "accelerate.multiformats_identity",
+      "profiles": [
+        "ipfs_accelerate_py/agent-supervisor/cid-profile@1"
+      ],
+      "role": "adapter_over_accelerate_cid_utils",
+      "stage": "canonical serialization / SHA/CID",
+      "symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_bytes",
+        "cid_for_dag_json",
+        "cid_from_sha256_digest"
+      ]
+    },
+    {
+      "authority": "ipfs_accelerate_py",
+      "module": "ipfs_accelerate_py.agent_supervisor.task_sources.control_plane_contracts",
+      "path_id": "accelerate.control_plane_content_identity",
+      "profiles": [
+        "cidv1-dag-json-sha2-256-base32"
+      ],
+      "role": "control_plane_identity",
+      "stage": "SHA/CID",
+      "symbols": [
+        "canonical_json_bytes",
+        "content_identity"
+      ]
+    },
+    {
+      "authority": "ipfs_kit_py",
+      "module": "ipfs_kit_py.proof_certificate_store",
+      "path_id": "kit.proof_certificate_store",
+      "profiles": [
+        "cidv1-raw-sha2-256-base32"
+      ],
+      "role": "verified_storage_transport",
+      "stage": "immutable store",
+      "symbols": [
+        "cid_for_certificate_bytes",
+        "verify_certificate_cid"
+      ]
+    },
+    {
+      "authority": "ipfs_kit_py",
+      "module": "ipfs_kit_py.mcp_server.mcplusplus.coordination_storage",
+      "path_id": "kit.coordination_storage",
+      "profiles": [
+        "cidv1-raw-sha2-256-base32",
+        "cidv1-dag-json-sha2-256-base32"
+      ],
+      "role": "verified_storage_wal_cas",
+      "stage": "immutable store / serial WAL/CAS",
+      "symbols": [
+        "cid_for_bytes",
+        "cid_for_artifact",
+        "DurableCoordinationStore"
+      ]
+    }
+  ],
+  "status": "inventory_pending_independent_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-001",
+  "typed_unavailable": [
+    {
+      "case_id": "kit.proof_seal_store",
+      "claim_unchanged": true,
+      "classification": "typed_unavailable",
+      "production_admitted": false,
+      "reason": "ipfs_kit_py.proof_seal_store is absent from the current governed kit source. IncrementalProofSealer coordinates serial WAL/CAS over that package; absence does not grant worker publication authority or substitute DurableCoordinationStore CAS for proof-seal publication."
+    },
+    {
+      "case_id": "datasets.zkp.incremental_sealing.evidence",
+      "claim_unchanged": true,
+      "classification": "typed_unavailable",
+      "production_admitted": false,
+      "reason": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence is absent from the current governed datasets source. FullCheckpointSeal and DeltaSeal still encode sha256:<hex> identities in source; absence does not change that encoding or grant publication authority."
+    },
+    {
+      "case_id": "zkp.groth16_binary",
+      "claim_unchanged": true,
+      "classification": "real_backend_binary_present_unqualified",
+      "production_admitted": false,
+      "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding"
+    },
+    {
+      "case_id": "zkp.provekit",
+      "claim_unchanged": true,
+      "classification": "adapter_source_present",
+      "production_admitted": false,
+      "reason": "adapter source is not an admitted production prover"
+    },
+    {
+      "case_id": "zkp.simulated",
+      "claim_unchanged": true,
+      "classification": "simulated",
+      "production_admitted": false,
+      "reason": "simulated or structural proof cannot be admitted"
+    },
+    {
+      "case_id": "zkp.direct_cpython",
+      "claim_unchanged": true,
+      "classification": "research_only",
+      "production_admitted": false,
+      "reason": "direct-execution profiles remain optional, explicit, and unqualified"
+    },
+    {
+      "case_id": "zkp.aggregate_selected_test",
+      "claim_unchanged": true,
+      "classification": "missing",
+      "production_admitted": false,
+      "reason": "typed unavailable without an admitted production key"
+    },
+    {
+      "case_id": "hash.native_rust_batch",
+      "claim_unchanged": true,
+      "classification": "typed_unavailable",
+      "production_admitted": false,
+      "reason": "optional native/Rust batch hashing is a successor qualification; absence must not install or weaken identity"
+    },
+    {
+      "case_id": "hash.verified_persistent_memo",
+      "claim_unchanged": true,
+      "classification": "partial",
+      "production_admitted": false,
+      "reason": "unverified metadata cannot authorize reuse; Git blob OID remains a memo lookup key only"
+    }
+  ],
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1",
+  "worker_authored_test_is_sufficient_alone": false,
+  "worker_self_approval": false
+}
