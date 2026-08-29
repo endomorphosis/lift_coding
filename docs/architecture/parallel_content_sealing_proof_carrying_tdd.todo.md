@@ -2137,7 +2137,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 
 ## PCTDD-055 Resolve 1 preflight-conflicting backlogged worktree merges
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Is schedulable: false
 - Review only: true
