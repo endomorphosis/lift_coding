@@ -1,0 +1,105 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py"
+  ],
+  "claim": "Cold and warm stages of the current hashing/sealing critical path report timing and byte counters without changing identity, proof, storage, execution, scheduler, or publication behavior.",
+  "claim_class": "IntegrityCommitment",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-004@1 then DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane",
+  "does_not_establish": [
+    "execution or semantics",
+    "production ZK usability",
+    "publication authority",
+    "task completion"
+  ],
+  "goal_id": "PCTDD-G012",
+  "implementation_model_cannot_approve_output": true,
+  "interface": "CriticalPathInstrumentation@1",
+  "limitations": [
+    "Production ZK, key ceremony, optional native batch hashing, and direct CPython execution remain typed unavailable.",
+    "The datasets incremental-sealing evidence module is typed unavailable in the current g6 forest; Merkle uses accelerator manifest aggregation without publication.",
+    "Observational digest matches never authorize reuse.",
+    "Serial WAL/CAS publication remains controller-owned and is not invoked by this instrumentation.",
+    "This receipt is worker-supplied evidence, not independent admission or completion."
+  ],
+  "markdown_non_authoritative": true,
+  "outputs": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py"
+  ],
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predicted_files": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py"
+  ],
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "never adopt the outer gitlink; independently revalidate nested component changes against exact g6 source/profile/policy",
+    "outer_commit": "2b37146f4f2f354ced02ca5327d0a7d21344f044"
+  },
+  "proof_claim_class": "IntegrityCommitment observational instrumentation only",
+  "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py",
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "worker_supplied_pending_independent_admission",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-004",
+  "title": "Instrument the current cold and warm critical path",
+  "typed_unavailable": [
+    {
+      "capability": "optional_qualified_native_batch",
+      "does_not_establish": "hash identity or reuse",
+      "production_admitted": false,
+      "reason_code": "native_hash_qualification_not_current_path",
+      "status": "unavailable"
+    },
+    {
+      "capability": "datasets_incremental_sealing_evidence",
+      "does_not_establish": "full checkpoint production seal or proof-mode import",
+      "production_admitted": false,
+      "reason_code": "datasets_incremental_sealing_module_not_in_current_path",
+      "status": "unavailable"
+    },
+    {
+      "capability": "groth16_binary",
+      "does_not_establish": "CPython execution or production ZK admission",
+      "production_admitted": false,
+      "reason_code": "presence_does_not_establish_ceremony_allowlist_or_public_input_binding",
+      "status": "unavailable"
+    },
+    {
+      "capability": "provekit",
+      "does_not_establish": "aggregate ZK usability",
+      "production_admitted": false,
+      "reason_code": "adapter_source_present_without_admitted_production_key",
+      "status": "unavailable"
+    },
+    {
+      "capability": "direct_cpython",
+      "does_not_establish": "broader correctness",
+      "production_admitted": false,
+      "reason_code": "research_only",
+      "status": "unavailable"
+    },
+    {
+      "capability": "simulated_proof",
+      "does_not_establish": "production admission",
+      "production_admitted": false,
+      "reason_code": "simulated_or_structural_proof_cannot_be_admitted",
+      "status": "forbidden"
+    },
+    {
+      "capability": "production_key_ceremony",
+      "does_not_establish": "signed execution or aggregate ZK",
+      "production_admitted": false,
+      "reason_code": "key_ceremony_not_in_current_path",
+      "status": "unavailable"
+    }
+  ],
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-004@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
