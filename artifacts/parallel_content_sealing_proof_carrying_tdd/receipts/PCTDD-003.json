@@ -1,0 +1,387 @@
+{
+  "authority_reconciliation": {
+    "current_authorities": {
+      "authority_matrix": {
+        "admission_owner": "ipfs_accelerate_py",
+        "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json",
+        "schema": "pctdd/authority-matrix@1",
+        "sha256": "sha256:2ab53517798dcf840dc5aeb6c89b889931b1ed06c6f09592d79568a4a896c827",
+        "statement_owner": "ipfs_datasets_py",
+        "storage_owner": "ipfs_kit_py"
+      },
+      "dependency_seal": {
+        "path": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+        "schema": "pctdd/dependency-source-seal@1"
+      },
+      "overlap_gap_matrix": {
+        "aggregate_selected_test_zk": "missing",
+        "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json",
+        "successor": "versioned aggregate statement; typed unavailable without admitted production key"
+      },
+      "proof_claim_matrix": {
+        "claim_meaning_changed": false,
+        "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json",
+        "schema": "pctdd/proof-claim-matrix@1",
+        "sha256": "sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133"
+      },
+      "zkp_backend_inventory": {
+        "claim_meaning_changed": false,
+        "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json",
+        "schema": "pctdd/zkp-backend-inventory@1",
+        "sha256": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e"
+      }
+    },
+    "predecessor_claim_wording": {
+      "relationship": "Compatible expanded wording of the same closed classes. PCTDD matrix remains the sealed compact meaning for this program. This receipt does not rewrite either text.",
+      "source": "external/ipfs_accelerate/docs/architecture/INCREMENTAL_PROOF_SEALER_PLAN.md"
+    },
+    "result": "reconciled_against_existing_current_authority"
+  },
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json"
+  ],
+  "claim": "This receipt inventories current-tree ZK, signing, key, and proof claim boundaries against sealed PCTDD authorities. It does not admit production ZK, does not complete the DuckDB task, and does not change claim meaning.",
+  "completion_authority": "DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane",
+  "dependency_seal": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+  "goal_id": "PCTDD-G013",
+  "independent_tests": {
+    "differential_checks": [
+      {
+        "detail": "Sealed pctdd/proof-claim-matrix@1 matches PCTDD-PLAN-V1 claim boundaries for IntegrityCommitment, SignedExecutionReceipt, ReceiptAggregationZkProof, DirectExecutionProof, IncrementalCommitSeal, TestPassStatementV1 unchanged, and simulated/structural non-admission. Predecessor INCREMENTAL_PROOF_SEALER_PLAN.md section 4 is compatible expanded wording of the same closed classes; compact PCTDD matrix remains the sealed meaning.",
+        "id": "claim-matrix-matches-plan",
+        "result": "pass"
+      },
+      {
+        "detail": "Sealed pctdd/zkp-backend-inventory@1 matches dependency-seal proof_backends: groth16 binary present unqualified and not production-admitted; provekit adapter-source-only; simulated not admitted; direct_cpython research_only; ordinary inner loop signed receipts by explicit policy with ZK asynchronous.",
+        "id": "backend-inventory-matches-seal",
+        "result": "pass"
+      },
+      {
+        "detail": "ipfs_datasets_py.logic.zkp.statements.test_pass still pins TEST_PASS_STATEMENT_INTERFACE=TestPassStatementV1 and TEST_PASS_CIRCUIT_REF=test_pass@v1 via format_circuit_ref(test_pass, 1). The module states the circuit relation proves possession of an admitted complete-pass receipt, not general program correctness, CPython execution, or future behavior.",
+        "id": "testpass-v1-unchanged",
+        "result": "pass"
+      },
+      {
+        "detail": "RunnerPassAttestation@1/RunnerTrustPolicy@1/RunnerEd25519PublicKey@1/SignedTestPassReceiptV2 exist in accelerate. ATTESTATION_DOMAIN is ipfs-test-pass-attestation/v1. Signature verification requires a caller-supplied policy CID. Cache cannot nominate a key or turn a signature into skip authority. Possession of a key is not a trust decision. SignedTestPassReceiptV2 is a public linkage record with no signature or witness bytes. _public_value rejects secret/private/witness field names. This matches SignedExecutionReceipt: trusted issuer assertion under explicit verifier policy, not independent faithful execution.",
+        "id": "signed-receipt-is-policy-gated",
+        "result": "pass"
+      },
+      {
+        "detail": "accelerate admission.py rejects simulated required units, unsigned required receipts, unallowlisted signers, and overclaim of direct computation by non-DirectExecutionProof classes. Receipt aggregation is forbidden from claiming tests executed. Live class bodies still import ipfs_datasets_py.logic.zkp.incremental_sealing.evidence, which is absent on this exact datasets tree; the source-level rejection rules are present in accelerate and do not widen sealed claim meaning.",
+        "id": "admission-never-upgrades-class",
+        "result": "pass"
+      },
+      {
+        "detail": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence does not exist in this exact datasets tree. IntegrityCommitment/SignedExecutionReceipt/ReceiptAggregationZkProof/DirectExecutionProof/IncrementalCommitSeal class bodies, ESTABLISHES/DOES_NOT_ESTABLISH constants, and evidence_from_canonical are absent. Accelerate admission and incremental_sealing tests import that missing module. Claim meaning remains the sealed PCTDD matrix, not a reconstructed substitute.",
+        "id": "live-evidence-classes-importable",
+        "result": "typed_unavailable"
+      },
+      {
+        "detail": "Packaged binary exists at external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16. Release-manifest.json is absent. Bundled artifacts/v1 and artifacts/v2 proving/verifying keys exist. Presence and key bytes do not establish ceremony, allowlist, or current public-input binding. Independent byte sha256 of the binary was not recomputed in this provider process because no command runner is available here; sealed inventory digest sha256:7cd14f8810fda8c16bf8a3b3ad02fda67b3c85ff0fc05883e21825781e33ce15 remains the current authority and is not treated as independently rehashed here.",
+        "id": "groth16-binary-present-unqualified",
+        "result": "pass_with_caveat"
+      },
+      {
+        "detail": "Groth16Backend is disabled unless IPFS_DATASETS_ENABLE_GROTH16 is a truthy non-empty value other than 0/false/no/off. generate_proof/verify_proof/setup/ensure_setup raise ZKPError when disabled. Default ZKPProver backend remains simulated and is not production-admitted.",
+        "id": "groth16-default-fail-closed",
+        "result": "pass"
+      },
+      {
+        "detail": "ceremony.py validates mcp++/groth16-mpc-ceremony@1 and refuses to treat deterministic/single-RNG setup as an MPC ceremony. Groth16Backend.setup() in this tree does not implement IPFS_DATASETS_REQUIRE_MPC_CEREMONY or _require_mpc_compatible_backend; no such method exists in any Python module on this tree. tests/unit_tests/logic/zkp/test_mpc_ceremony.py expects those gates.",
+        "id": "mpc-ceremony-gate-on-setup",
+        "result": "typed_gap"
+      },
+      {
+        "detail": "ProveKit backend source, cli.py discovery, and Noir circuit packages are present under logic/zkp/provekit. No packaged provekit-cli binary exists in that tree. Discovery is env/PATH/package. Sealed validation PATH directories /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin do not contain provekit-cli, lean, cvc5, or coqtop. provekit-cli is therefore typed unavailable in the sealed validation environment unless that exact PATH already contains it.",
+        "id": "provekit-adapter-only",
+        "result": "pass"
+      },
+      {
+        "detail": "Nested gitdirs exist as gitdir files. ORIG_HEAD for the three governed checkouts equals the sealed gitlink values: accelerate cfbd381ee6196e818ecd59a438386a60b5d71bd7, datasets ac82107e246b30e35a2bbdcf75e01370d22350c6, kit 6196017ca3df016c7159dce43af60f2a0d96a9ae. Tree OIDs remain the sealed values and were not independently rehashed here. Current HEAD files are managed implementation-branch refs, not a claim that the lease branch rewrote sealed gitlinks.",
+        "id": "source-gitlink-orig-head-matches-seal",
+        "result": "pass"
+      },
+      {
+        "detail": "TrustedProofPolicy production setup origins remain operator_reviewed and ceremony. test_fixture is rejected in production. Proving-key bytes are never public API. generate_key_material and download_key_material fail closed in production. vk_registry.py does not implement Groth16 setup.",
+        "id": "key-policy-production-gates",
+        "result": "pass"
+      }
+    ],
+    "expected_exact_tree_residuals": [
+      "incremental_sealing tests that import ipfs_datasets_py.logic.zkp.incremental_sealing.evidence cannot import on this datasets gitlink",
+      "test_mpc_ceremony.py MPC backend-admission cases expect Groth16Backend._require_mpc_compatible_backend and single-RNG fail-closed text that this groth16.py does not implement"
+    ],
+    "identified_pytest_targets": [
+      "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+      "external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py",
+      "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_zkp_module.py",
+      "external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py",
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py",
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_provers.py"
+    ],
+    "kind": "identity_and_proof_differential_plus_source_existence",
+    "pytest_executed_in_provider_process": false,
+    "pytest_execution_status": "not_spawned_in_this_provider_process; no command-runner tool is available here; the operative validation command is assignment-form PYTHONPATH python3 -m pytest on identified_pytest_targets. The board phrase is not executable shell and must not be quoted after export PYTHONPATH=... &&.",
+    "residual_pytest_targets": [
+      "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py",
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py"
+    ]
+  },
+  "inventory": {
+    "keys": {
+      "accelerate_trust_policy": {
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/trust.py",
+        "production_key_generation_or_download": false,
+        "production_setup_origins": [
+          "operator_reviewed",
+          "ceremony"
+        ],
+        "proving_key_bytes_are_public_api": false,
+        "test_fixture_in_production": false
+      },
+      "bundled_groth16_artifacts": {
+        "paths": [
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v1/proving_key.bin",
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v1/verifying_key.bin",
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v2/proving_key.bin",
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v2/verifying_key.bin"
+        ],
+        "present": true,
+        "production_admitted": false,
+        "reason": "bundled key bytes are not a ceremony, allowlist, or current public-input binding"
+      },
+      "datasets_ceremony": {
+        "deterministic_setup_is_not_mpc": true,
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/ceremony.py",
+        "production_eligible_requires": [
+          "independent contributor quorum >= 2",
+          "signed contribution attestations",
+          "artifact continuity",
+          "complete finalization",
+          "declared transcript verifier"
+        ],
+        "schema": "mcp++/groth16-mpc-ceremony@1"
+      },
+      "datasets_vk_registry": {
+        "implements_groth16_setup": false,
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/vk_registry.py"
+      }
+    },
+    "proof_claim_boundaries": {
+      "DirectExecutionProof": {
+        "does_not": "broader correctness",
+        "establishes": "declared machine/program/inputs executed",
+        "live_class_on_this_tree": "typed_unavailable_missing_datasets_evidence_module",
+        "predecessor_observation_api": "ipfs_accelerate_py.agent_supervisor.verification.contracts.DirectExecutionObservation"
+      },
+      "IncrementalCommitSeal": {
+        "does_not": "arbitrary repository correctness",
+        "establishes": "accepted parent plus complete valid changed/reused units",
+        "live_class_on_this_tree": "typed_unavailable_missing_datasets_evidence_module"
+      },
+      "IntegrityCommitment": {
+        "does_not": "execution or semantics",
+        "establishes": "exact bytes/digest/CID/Merkle inclusion",
+        "live_class_on_this_tree": "typed_unavailable_missing_datasets_evidence_module"
+      },
+      "ReceiptAggregationZkProof": {
+        "does_not": "CPython execution and cannot exceed leaf evidence",
+        "establishes": "committed admitted receipt population satisfies circuit",
+        "live_class_on_this_tree": "typed_unavailable_missing_datasets_evidence_module"
+      },
+      "SignedExecutionReceipt": {
+        "does_not": "independent faithful execution",
+        "establishes": "trusted issuer assertion under explicit verifier policy",
+        "live_class_on_this_tree": "typed_unavailable_missing_datasets_evidence_module",
+        "predecessor_signing_api": "ipfs_accelerate_py.testing.proof_reuse.runner_pass_attestation"
+      },
+      "legacy": "TestPassStatementV1 remains unchanged",
+      "production": "simulated or structural proof cannot be admitted"
+    },
+    "signing": {
+      "algorithm": "Ed25519",
+      "domain": "ipfs-test-pass-attestation/v1",
+      "interfaces": [
+        "RunnerPassAttestation@1",
+        "RunnerTrustPolicy@1",
+        "RunnerEd25519PublicKey@1",
+        "SignedTestPassReceiptV2"
+      ],
+      "paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py"
+      ],
+      "rules": [
+        "verifier-selected policy/key/epoch/revocation is required",
+        "cache cannot nominate a key or convert a signature into skip authority",
+        "SignedTestPassReceiptV2 is a public linkage record and must not carry signature or witness bytes",
+        "private/secret/witness field names are rejected from public DAG-CBOR values"
+      ]
+    },
+    "zk_backends": {
+      "direct_cpython": {
+        "classification": "research_only",
+        "paths": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/contracts.py"
+        ],
+        "production_admitted": false
+      },
+      "groth16": {
+        "binary_path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16",
+        "classification": "real_backend_binary_present_unqualified",
+        "default_enabled": false,
+        "enable_env": "IPFS_DATASETS_ENABLE_GROTH16",
+        "entrypoint": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16.py",
+        "ffi": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16_ffi.py",
+        "independent_byte_hash_recomputed": false,
+        "production_admitted": false,
+        "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding",
+        "release_manifest_path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json",
+        "release_manifest_present": false,
+        "sealed_sha256": "sha256:7cd14f8810fda8c16bf8a3b3ad02fda67b3c85ff0fc05883e21825781e33ce15"
+      },
+      "ordinary_inner_loop": "signed receipts permitted by explicit policy; ZK asynchronous",
+      "provekit": {
+        "binary_packaged": false,
+        "classification": "adapter_source_present",
+        "discovery": [
+          "IPFS_DATASETS_PROVEKIT_CLI",
+          "IPFS_DATASETS_PROVEKIT_HOME",
+          "packaged logic/zkp/provekit paths",
+          "PATH provekit-cli"
+        ],
+        "production_admitted": false,
+        "validation_path_judgment": "provekit-cli is not present under PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin; unavailable is typed, not a simulated fallback"
+      },
+      "simulated": {
+        "classification": "simulated",
+        "default_backend": true,
+        "entrypoint": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/simulated.py",
+        "production_admitted": false
+      }
+    }
+  },
+  "limitations": [
+    "Production ZK and key ceremony remain typed unavailable: groth16 binary/key presence is unqualified; provekit has adapter source only; simulated proofs are not production-admitted; direct CPython proof is research_only.",
+    "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence is missing from this exact datasets tree, so live ESTABLISHES/DOES_NOT_ESTABLISH constants cannot be imported. This does not authorize reconstructing or widening sealed claim meaning.",
+    "Groth16Backend.setup() does not implement the MPC-required fail-closed gate expected by test_mpc_ceremony.py.",
+    "Optional native/direct-execution production profiles are typed unavailable.",
+    "Validation PATH is exactly /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin with a fresh HOME. Operator ~/.elan and other profile toolchains are unavailable. lean/cvc5/coqtop/provekit-cli are absent from those PATH directories. Sealed-at-capture lean/cvc5 availability is not a validation-environment usability claim. coq remains typed_optional_unavailable_at_capture.",
+    "Independent groth16 binary sha256 was not recomputed in this provider process. The independent validator must rehash the binary against sha256:7cd14f8810fda8c16bf8a3b3ad02fda67b3c85ff0fc05883e21825781e33ce15.",
+    "This provider process has no command-runner tool, so pytest was not spawned here. Identity/proof differential checks were re-verified by source inspection of the sealed matrices and live modules. The prior admission failure executed the non-executable board phrase after export PYTHONPATH=... && quoting; receipt commands use assignment-form PYTHONPATH python3 and do not quote that phrase.",
+    "Unknown dependency or fixture semantics continue to force full execution/proving fallback."
+  ],
+  "markdown_non_authoritative": true,
+  "objective_id": "PCTDD-003",
+  "plan_revision": "PCTDD-PLAN-V1",
+  "proof_claim_class": {
+    "does_not": "production ZK, key ceremony, CPython execution, independent faithful execution, or DuckDB task completion",
+    "establishes": "exact inventory of current-tree ZK, signing, key, and proof claim boundaries against sealed PCTDD authorities",
+    "receipt_class": "IntegrityCommitment"
+  },
+  "receipt_cid": "pctdd-003-bind:tree:c488d97ed5665b5744d983fc4a294989df519361:proof_claim_matrix:sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133:zkp_backend_inventory:sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
+  "receipt_cid_profile": "binding-identity-v1; not a self-hash of this JSON. Independent validator should also compute sha256-canonical-json-v1 of this object excluding receipt_cid.",
+  "schema": "pctdd/inventory-receipt@1",
+  "source_binding": {
+    "dispatch_tree_id": "c488d97ed5665b5744d983fc4a294989df519361",
+    "git_objects_readable_in_provider_process": false,
+    "orig_head_matches_sealed_gitlink": true,
+    "sealed_sources": [
+      {
+        "gitlink": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+        "name": "ipfs_accelerate_py",
+        "orig_head": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+        "path": "external/ipfs_accelerate",
+        "tree": "c7b788c1b23a87f461579bde461a61ecb66e9fa2"
+      },
+      {
+        "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "name": "ipfs_datasets_py",
+        "orig_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "path": "external/ipfs_datasets",
+        "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+      },
+      {
+        "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "name": "ipfs_kit_py",
+        "orig_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "path": "external/ipfs_kit",
+        "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+      }
+    ],
+    "source": "dependency seal plus task-packet tree_id plus ORIG_HEAD of nested gitdirs; independent rev-parse of objects was denied"
+  },
+  "status": "inventory_reconciled_pending_independent_review",
+  "task_id": "PCTDD-003",
+  "title": "Inventory ZK, signing, key, and proof claim boundaries",
+  "unsupported_unavailable": [
+    {
+      "case": "production_groth16_zk",
+      "reason": "real backend binary present unqualified; no ceremony/allowlist/current public-input binding",
+      "status": "typed_unavailable"
+    },
+    {
+      "case": "production_key_ceremony",
+      "reason": "ceremony validator exists; bundled keys and single-RNG setup are not production-eligible; setup() does not enforce MPC requirement",
+      "status": "typed_unavailable"
+    },
+    {
+      "case": "provekit_cli",
+      "reason": "adapter source present; no packaged binary; provekit-cli is absent from sealed validation PATH directories",
+      "status": "typed_unavailable"
+    },
+    {
+      "case": "simulated_zk",
+      "reason": "default educational backend; production admission forbidden",
+      "status": "present_not_admitted"
+    },
+    {
+      "case": "direct_cpython_proof",
+      "reason": "optional native/direct-execution profiles are typed unavailable for production; DirectExecutionObservation@1 is a verification observation contract, not an admitted ZK backend",
+      "status": "research_only"
+    },
+    {
+      "case": "datasets_evidence_class_module",
+      "reason": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence missing from this exact tree",
+      "status": "typed_unavailable"
+    },
+    {
+      "case": "aggregate_selected_test_zk",
+      "reason": "overlap_gap_matrix classification; versioned aggregate statement required; unavailable without admitted production key",
+      "status": "missing"
+    },
+    {
+      "case": "coq",
+      "reason": "dependency seal; coqtop absent from sealed PATH directories",
+      "status": "typed_optional_unavailable_at_capture"
+    },
+    {
+      "case": "lean_cvc5_in_validation_environment",
+      "reason": "sealed-at-capture availability used operator profile/toolchain; lean and cvc5 binaries are absent from PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+      "status": "not_claimed_usable"
+    }
+  ],
+  "validation": {
+    "board_phrase_not_executable": true,
+    "commands": [
+      "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit python3 -m pytest -q external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_zkp_module.py external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py external/ipfs_accelerate/test/api/incremental_sealing/test_provers.py"
+    ],
+    "identity_proof_differential_result": "pass",
+    "provider_process_result": "identity/proof differential source checks re-verified on this exact tree; pytest process not spawned here; receipt command uses assignment-form PYTHONPATH python3 -m pytest and does not quote the board phrase after export PYTHONPATH &&"
+  },
+  "verifier_admission": {
+    "inventory_may_be_reviewed": true,
+    "production_zk_admitted": false,
+    "required_independent_checks": [
+      "recompute groth16 binary sha256 and compare to sha256:7cd14f8810fda8c16bf8a3b3ad02fda67b3c85ff0fc05883e21825781e33ce15",
+      "confirm datasets evidence module still absent or, if present, that ESTABLISHES/DOES_NOT_ESTABLISH do not widen sealed PCTDD claim meaning",
+      "run receipt validation.commands: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit python3 -m pytest on identified_pytest_targets; do not execute or quote the board phrase after export PYTHONPATH &&",
+      "do not treat this receipt as production proof or DuckDB completion"
+    ],
+    "self_approval": false,
+    "simulated_proof_admitted": false,
+    "task_completion_admitted": false
+  }
+}
