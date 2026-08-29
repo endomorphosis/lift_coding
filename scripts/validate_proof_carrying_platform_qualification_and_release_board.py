@@ -15,9 +15,9 @@ import json
 import re
 import subprocess
 import sys
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Mapping
-
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATOR_PATH = (
@@ -337,6 +337,7 @@ def validate() -> dict[str, Any]:
             "required_evidence",
             "rollback_procedure",
             "outputs",
+            "predicted_files",
             "validation",
             "board_namespace",
             "parallel_lane",
@@ -362,6 +363,12 @@ def validate() -> dict[str, Any]:
         for field, expected in expected_values.items():
             if fields.get(field) != expected:
                 errors.append(f"PCPR-004 {field} differs from the sealed bootstrap")
+        expected_write_scope = ", ".join(generator.BOOTSTRAP_ALLOWED_PATHS)
+        for field in ("owned_paths", "outputs", "predicted_files", "allowed_paths"):
+            if fields.get(field) != expected_write_scope:
+                errors.append(
+                    f"PCPR-004 {field} must equal the complete sealed write scope"
+                )
 
     if config and config != generator.render_config():
         errors.append("scheduler config differs from its deterministic generator")

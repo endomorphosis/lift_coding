@@ -1259,7 +1259,11 @@ def _log_findings(paths: Mapping[str, Path]) -> dict[str, Any]:
     candidates: list[Path] = []
     for root in (paths["logs"], paths["state"]):
         if root.is_dir():
-            candidates.extend(path for path in root.rglob("*.log") if path.is_file())
+            # Provider transcripts below state/database-portal-attempts contain
+            # the task's own threat vocabulary (for example "fatal" and
+            # "quarantine").  They are candidate evidence, not operational
+            # health logs, so recursively scanning them creates false alarms.
+            candidates.extend(path for path in root.glob("*.log") if path.is_file())
     candidates = sorted(candidates, key=lambda path: path.stat().st_mtime, reverse=True)[:24]
     observations: list[dict[str, Any]] = []
     fatal_count = 0

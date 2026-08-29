@@ -15,7 +15,6 @@ from collections import OrderedDict
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[1]
 NAMESPACE = "proof-carrying-platform-qualification-and-release-v1"
 SHORT_ID = "PCPR"
@@ -319,7 +318,7 @@ Root completion barrier: deferred PCPR-094 after direct objective materializatio
 - Assigned worktree: pcpr-pcpr-004
 - Final result CID or artifact identity: pending CID for {BOOTSTRAP_RECEIPT}
 - Goal id: {BOOTSTRAP_GOAL_ID}
-- Outputs: {BOOTSTRAP_RECEIPT}
+- Outputs: {allowed}
 - Validation: {BOOTSTRAP_VALIDATION}
 - Board namespace: {NAMESPACE}
 - Bundle: pcpr/pcpr-g110/pcpr-004
