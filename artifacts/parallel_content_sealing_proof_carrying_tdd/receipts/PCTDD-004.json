@@ -1,0 +1,606 @@
+{
+  "schema": "pctdd/task-receipt@1",
+  "task_id": "PCTDD-004",
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "plan_revision": "PCTDD-PLAN-V1",
+  "objective_id": "PCTDD-004",
+  "goal_id": "PCTDD-G012",
+  "track": "pctdd-g012",
+  "title": "Instrument the current cold and warm critical path",
+  "status": "reconciled_pending_independent_review",
+  "completion_mode": "independent_evidence_and_review",
+  "markdown_non_authoritative": true,
+  "completion_authority": "DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane",
+  "dependency_seal": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "owning_repository": "endomorphosis/ipfs_accelerate_py",
+  "rollout_mode": "bootstrap",
+  "board_validation_declarations": [
+    "focused owning-repository pytest plus cross-package API tests",
+    "identity/proof differential checks where applicable"
+  ],
+  "board_validation_note": "Those board strings are declarations, not argv. The token pytest in the first declaration caused the daemon to prepend export PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit && and execute the declaration as a shell command. That is the prior validation failure (export received &&, owning-repository, and cross-package as identifier arguments). This receipt maps the declarations onto executable python3 -m pytest commands against current accelerate authorities.",
+  "validation_commands": [
+    "cd external/ipfs_accelerate && python3 -m pytest test/api/incremental_sealing/test_metrics.py test/api/incremental_sealing/test_public_api.py test/api/incremental_sealing/test_full_checkpoint.py test/api/incremental_sealing/test_delta_seal.py test/api/incremental_sealing/test_executor.py test/api/incremental_sealing/test_planner.py test/api/test_agent_supervisor_proof_reuse_benchmark.py test/api/test_proof_reuse_two_stage_warm_lookup.py -q --tb=line",
+    "cd external/ipfs_accelerate && python3 -m pytest test/api/incremental_sealing/test_metrics.py::test_absent_counters_are_unknown_not_zero test/api/incremental_sealing/test_metrics.py::test_observed_zero_is_measured_zero test/api/incremental_sealing/test_metrics.py::test_estimates_never_reported_as_measurements test/api/incremental_sealing/test_metrics.py::test_failed_or_estimated_runs_keep_savings_unknown test/api/test_agent_supervisor_proof_reuse_benchmark.py::test_false_admissions_equal_zero_across_all_scenarios test/api/test_agent_supervisor_proof_reuse_benchmark.py::test_scenarios_cover_off_shadow_cold_warm_and_forced_rerun test/api/test_proof_reuse_two_stage_warm_lookup.py::test_dedicated_candidate_store_returns_retained_bytes_and_rehashes test/api/test_proof_reuse_two_stage_warm_lookup.py::test_exact_match_then_proof_cache_hit_is_only_skip -q --tb=line"
+  ],
+  "claim": "This receipt instruments and reconciles the current cold and warm critical path against existing accelerate, datasets, and kit authorities on the exact leased tree. It freezes how preregistered metrics map onto current collectors. It does not assert that preregistered performance targets are met, does not upgrade estimated or deterministic-model costs into measured wall-clock results, and does not change IntegrityCommitment, SignedExecutionReceipt, ReceiptAggregationZkProof, DirectExecutionProof, IncrementalCommitSeal, or TestPassStatementV1 meaning.",
+  "claim_boundaries": {
+    "IntegrityCommitment": {
+      "establishes": "exact bytes/digest/CID/Merkle inclusion",
+      "does_not": "execution or semantics"
+    },
+    "SignedExecutionReceipt": {
+      "establishes": "trusted issuer assertion under explicit verifier policy",
+      "does_not": "independent faithful execution"
+    },
+    "ReceiptAggregationZkProof": {
+      "establishes": "committed admitted receipt population satisfies circuit",
+      "does_not": "CPython execution and cannot exceed leaf evidence"
+    },
+    "DirectExecutionProof": {
+      "establishes": "declared machine/program/inputs executed",
+      "does_not": "broader correctness"
+    },
+    "IncrementalCommitSeal": {
+      "establishes": "accepted parent plus complete valid changed/reused units",
+      "does_not": "arbitrary repository correctness"
+    },
+    "this_receipt": {
+      "establishes": "current-tree mapping of cold/warm phases onto existing collectors, with typed unavailable gaps",
+      "does_not": "measured promotion evidence, production ZK admission, or a new hashing/CID/proof system"
+    },
+    "legacy": "TestPassStatementV1 remains unchanged",
+    "production": "simulated or structural proof cannot be admitted"
+  },
+  "proof_claim_class": "IntegrityCommitment",
+  "proof_claim_class_note": "Source-identity and collector-contract bindings in this receipt are integrity records of exact tree bytes and existing APIs. This file is not a SignedExecutionReceipt: it has no allowlisted issuer signature, policy, key, epoch, or revocation binding. It is not a ReceiptAggregationZkProof, DirectExecutionProof, or IncrementalCommitSeal.",
+  "source_identity": {
+    "leased_tree_id": "c488d97ed5665b5744d983fc4a294989df519361",
+    "superproject_commit": "c488d97ed5665b5744d983fc4a294989df519361",
+    "superproject_branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
+    "worktree_branch": "implementation/pctdd-004-1f308616e139-attempt-1-1787969295",
+    "planning_base_head": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "planning_base_tree": "e35dfaebbd229d7e7de988b2e0345444d9284221",
+    "gitlinks": [
+      {
+        "name": "ipfs_accelerate_py",
+        "path": "external/ipfs_accelerate",
+        "gitlink": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+        "tree": "c7b788c1b23a87f461579bde461a61ecb66e9fa2",
+        "observed_from": "submodule worktree ref implementation/pctdd-004-1f308616e139-attempt-1-1787969295-submodule-external-ipfs_accelerate; tree from sealed repository_baseline.json for the same gitlink"
+      },
+      {
+        "name": "ipfs_datasets_py",
+        "path": "external/ipfs_datasets",
+        "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "observed_from": "submodule worktree ref implementation/pctdd-004-1f308616e139-attempt-1-1787969295-submodule-external-ipfs_datasets; tree from sealed repository_baseline.json for the same gitlink"
+      },
+      {
+        "name": "ipfs_kit_py",
+        "path": "external/ipfs_kit",
+        "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "tree": "93070c709af29095fdff11f3e2698543449c08ef",
+        "observed_from": "submodule worktree ref implementation/pctdd-004-1f308616e139-attempt-1-1787969295-submodule-external-ipfs_kit; tree from sealed repository_baseline.json for the same gitlink"
+      }
+    ],
+    "tree_sha_rehash_in_this_session": "unavailable_git_object_read_denied_no_command_runner",
+    "identity_rule": "A Git blob OID is a memo lookup key only; filesystem metadata nominates a candidate only; a CID is exact byte identity under its versioned profile and does not prove execution or semantics."
+  },
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json"
+  ],
+  "predicted_paths_not_modified": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing"
+  ],
+  "predicted_paths_note": "Edit policy is task_output_exact on this receipt only. Predicted incremental_sealing sources are the current authority and were reconciled, not duplicated. The accelerate path test/api/parallel_content_sealing is absent on this tree; the superproject placeholder test/api/parallel_content_sealing/README.md is bootstrap-only and is not measured evidence.",
+  "authorities_reconciled": {
+    "canonical_semantic_and_statement_authority": "ipfs_datasets_py",
+    "verified_storage_wal_cas_authority": "ipfs_kit_py",
+    "execution_scheduling_admission_authority": "ipfs_accelerate_py",
+    "task_transaction_authority": "DuckDB via exclusive authenticated Quack owner",
+    "analytics_projection": "DuckLake non-authoritative",
+    "hashing_critical_path": [
+      "source discovery",
+      "canonical serialization",
+      "SHA/CID",
+      "proof verification",
+      "Merkle",
+      "immutable store",
+      "serial WAL/CAS"
+    ],
+    "forbidden_duplicates": [
+      "proof system",
+      "canonical profile",
+      "CID system",
+      "pytest runner",
+      "test selector",
+      "proof cache",
+      "block store",
+      "WAL",
+      "current-root store",
+      "agent framework",
+      "scheduler",
+      "worktree system",
+      "provider router",
+      "merge engine"
+    ]
+  },
+  "cold_warm_instrumentation": {
+    "schema": "pctdd/cold-warm-critical-path@1",
+    "benchmark_freeze": {
+      "config": "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
+      "inventory": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json",
+      "status": "frozen_before_implementation",
+      "targets_are_not_facts": true
+    },
+    "hash_seal": {
+      "cold": {
+        "cache_mode": "cold_memo",
+        "seal_mode": "full_checkpoint",
+        "authority_symbols": [
+          "create_full_checkpoint",
+          "publish_full_checkpoint",
+          "IncrementalProofSealer"
+        ],
+        "authority_modules": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/full_checkpoint.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py"
+        ],
+        "phases": [
+          "source discovery",
+          "canonical serialization",
+          "SHA/CID",
+          "fresh proof verification of every required unit",
+          "Merkle forest/category roots",
+          "immutable store persist",
+          "serial WAL append and generation-bearing current-root CAS"
+        ],
+        "invariants": [
+          "cache presence is never a fast path",
+          "every required unit must be freshly verified under the current policy",
+          "simulated, unknown, unavailable, failed, or unverified required units prevent sealed_full",
+          "parallel immutable preparation has no publication authority"
+        ]
+      },
+      "warm": {
+        "cache_mode": "warm_memo",
+        "seal_mode": "delta_seal",
+        "authority_symbols": [
+          "create_incremental_plan",
+          "execute_incremental_plan",
+          "build_delta_seal",
+          "publish_delta_seal"
+        ],
+        "authority_modules": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/planner.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/executor.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/delta_seal.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py"
+        ],
+        "phases": [
+          "parent-bound incremental plan",
+          "fetch",
+          "rehash",
+          "verify under current admission policy",
+          "admit",
+          "delta forest/manifest rebuild",
+          "serial WAL append and expected-parent CAS"
+        ],
+        "executor_order": [
+          "fetch",
+          "rehash",
+          "verify",
+          "admit"
+        ],
+        "invariants": [
+          "a kit cache hint or prior admission record is never a fast path",
+          "every reusable candidate is fetched and rehashed then cryptographically or signature-verified before reuse",
+          "stale, poisoned, corrupt, mismatched, cancelled, timeout, unavailable, and simulated evidence fail closed",
+          "final ordered WAL and generation-bearing current-root CAS remain serial and fail closed"
+        ]
+      }
+    },
+    "pytest_tdd": {
+      "cold": {
+        "scenario": "cold_readwrite",
+        "mode": "readwrite",
+        "authority_symbols": [
+          "ProofReuseBenchmark",
+          "run_proof_reuse_benchmark",
+          "ProofReuseSessionMetrics"
+        ],
+        "authority_modules": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/proof_reuse_benchmark.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/reporting.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lookup.py"
+        ],
+        "observed_contract": [
+          "skipped equals 0",
+          "executed equals collected",
+          "bytes_written greater than 0",
+          "miss_overhead_ms greater than 0",
+          "false_admissions equals 0"
+        ]
+      },
+      "warm": {
+        "scenario": "warm_read",
+        "mode": "read",
+        "authority_symbols": [
+          "ProofReuseBenchmark",
+          "ProofReuseLookup",
+          "ProofReuseSessionMetrics"
+        ],
+        "authority_modules": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/proof_reuse_benchmark.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lookup.py",
+          "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/reporting.py"
+        ],
+        "observed_contract": [
+          "authoritative skip requires an exact verified candidate",
+          "eligible warm population verifies and skips at the configured threshold",
+          "verification cost is strictly cheaper than execution on the deterministic model",
+          "false admissions remain 0",
+          "two-stage warm lookup starts locator/item-only and rehashes retained bytes before skip"
+        ]
+      },
+      "additional_scenarios": [
+        "off",
+        "shadow",
+        "forced_rerun"
+      ],
+      "timing_provenance": "ProofReuseBenchmark uses a deterministic virtual-millisecond cost model so receipts are bit-for-bit reproducible; those timings are not host wall-clock measurements."
+    },
+    "collectors": [
+      {
+        "name": "ProofMetricsCollector",
+        "interface": "ips/proof-cost@1",
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/metrics.py",
+        "observes": [
+          "required_units",
+          "reused_units",
+          "invalidated_units",
+          "proved_units",
+          "cache_hits",
+          "leaf_time_ms",
+          "aggregate_time_ms",
+          "verify_time_ms",
+          "wall_time_ms",
+          "cpu_time_ms",
+          "gpu_time_ms",
+          "peak_memory_bytes",
+          "proof_size_bytes",
+          "seal_size_bytes",
+          "storage_growth_bytes"
+        ],
+        "provenance_contract": "Absent counters stay unknown. Zeros are recorded only when the collector observed a genuine zero. Estimates never become measurements. compare_costs savings stay unknown when either side is missing, estimated, failed, or fell back."
+      },
+      {
+        "name": "ProofReuseSessionMetrics",
+        "interface": "ProofReuseMetrics@1",
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/reporting.py",
+        "observes": [
+          "outcome counts",
+          "reason codes",
+          "verify_latency_ms",
+          "execution_latency_ms",
+          "bytes_read",
+          "bytes_written"
+        ],
+        "privacy_contract": "Aggregates only. Node ids, paths, parameter values, receipt bodies, exception text, and test output are never accepted."
+      },
+      {
+        "name": "ProofReuseBenchmark",
+        "interface": "ProofReuseBenchmark@1",
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/proof_reuse_benchmark.py",
+        "observes": [
+          "off",
+          "shadow",
+          "cold_readwrite",
+          "warm_read",
+          "forced_rerun"
+        ],
+        "gates": [
+          "false_admissions_zero",
+          "warm_skip_threshold",
+          "verify_cheaper_than_execute",
+          "miss_overhead_bounded",
+          "receipt_reproducible"
+        ]
+      },
+      {
+        "name": "ResourceEstimate",
+        "interface": "ips/incremental-plan@1",
+        "module": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/planner.py",
+        "observes": [
+          "expected_cpu_ms",
+          "expected_storage_bytes",
+          "expected_full_cpu_ms",
+          "expected_full_storage_bytes"
+        ],
+        "provenance": "estimated"
+      }
+    ]
+  },
+  "metric_coverage": [
+    {
+      "metric": "wall_time",
+      "status": "collector_present",
+      "current_authority": "ProofMetricsCollector.wall_time_ms; ProofReuseBenchmark saved_wall_time_ms",
+      "current_tree_limitation": "IPS 40-transition benchmark rows are estimated planner costs, not measured wall-clock. Proof-reuse benchmark wall savings are deterministic virtual milliseconds."
+    },
+    {
+      "metric": "cpu_time",
+      "status": "collector_present",
+      "current_authority": "ProofMetricsCollector.cpu_time_ms",
+      "current_tree_limitation": "Hashing/seal path does not auto-observe CPU; values stay unknown unless a caller records them. Existing IPS benchmark CPU seconds are estimated."
+    },
+    {
+      "metric": "peak_rss",
+      "status": "partial",
+      "current_authority": "ProofMetricsCollector.peak_memory_bytes",
+      "current_tree_limitation": "Collector exists; hashing critical path does not currently observe RSS. Unobserved remains unknown, not zero."
+    },
+    {
+      "metric": "files_opened",
+      "status": "unavailable",
+      "current_authority": null,
+      "current_tree_limitation": "Neither ProofMetricsCollector nor ProofReuseSessionMetrics records files_opened."
+    },
+    {
+      "metric": "bytes_read",
+      "status": "partial",
+      "current_authority": "ProofReuseSessionMetrics.bytes_read and ProofReuseBenchmark fixture bytes_read",
+      "current_tree_limitation": "Hashing/seal path does not record bytes_read. Proof-reuse benchmark bytes_read is a corpus constant, not a filesystem counter."
+    },
+    {
+      "metric": "bytes_hashed",
+      "status": "unavailable",
+      "current_authority": null,
+      "current_tree_limitation": "No distinct bytes_hashed counter exists on the current hashing path. Duplicate serialization/hashing remains the hashing_critical_path observed gap."
+    },
+    {
+      "metric": "memo_hits_rejections",
+      "status": "collector_present",
+      "current_authority": "ProofMetricsCollector.cache_hits; planner UnitPlanKind reuse/reject_reuse; executor reused versus newly_proved",
+      "current_tree_limitation": "A cache hit never authorizes reuse without fetch/rehash/verify/admit."
+    },
+    {
+      "metric": "root_equality",
+      "status": "collector_present",
+      "current_authority": "full versus incremental seal root comparison; deterministic_roots_match on the existing IPS benchmark artifact",
+      "current_tree_limitation": "Root equality is an integrity check, not an execution proof."
+    },
+    {
+      "metric": "phase_times",
+      "status": "partial",
+      "current_authority": "ProofMetricsCollector leaf_time_ms, aggregate_time_ms, verify_time_ms",
+      "current_tree_limitation": "Source discovery, canonicalization, SHA/CID, Merkle, and WAL/CAS are not separately timed."
+    },
+    {
+      "metric": "selection_recall",
+      "status": "unavailable",
+      "current_authority": null,
+      "current_tree_limitation": "Not instrumented in current sealing or proof-reuse collectors. Semantic selection remains datasets-owned and is not measured here."
+    },
+    {
+      "metric": "mutation_escapes",
+      "status": "safety_floor_only",
+      "current_authority": "preregistered safety floor escaped_critical_seeded_defects equals 0",
+      "current_tree_limitation": "No live mutation-escape counter is wired through ProofMetricsCollector."
+    },
+    {
+      "metric": "proof_batch_cost",
+      "status": "partial",
+      "current_authority": "ProofMetricsCollector leaf and aggregate times",
+      "current_tree_limitation": "Production aggregate ZK is typed unavailable. Existing IPS benchmark proof costs are estimated."
+    },
+    {
+      "metric": "wal_cas_time",
+      "status": "unavailable",
+      "current_authority": "kit WAL and current-root CAS exist as the serial publication authority",
+      "current_tree_limitation": "Publication is implemented; a distinct wal_cas_time observation is not collected."
+    },
+    {
+      "metric": "model_calls_tokens_context",
+      "status": "unavailable",
+      "current_authority": null,
+      "current_tree_limitation": "Not present in current sealing or pytest-reuse collectors. Supervisor model-avoidance metrics are a later loop concern, not this freeze."
+    },
+    {
+      "metric": "calls_avoided_by_reuse_procedure_repair",
+      "status": "unavailable",
+      "current_authority": null,
+      "current_tree_limitation": "Not present in current sealing or pytest-reuse collectors."
+    }
+  ],
+  "preregistered_targets_not_measured": {
+    "warm_bytes_reread_reduction_percent": 90,
+    "warm_1_percent_delta_prepare_reduction_percent": 50,
+    "warm_selected_loop_reduction_percent": 30,
+    "repeat_general_llm_call_reduction_percent": 25,
+    "median_model_context_reduction_percent": 30,
+    "note": "Targets remain frozen_before_implementation. Missing performance results produce non-promotion later, never weakened safety, and are not fabricated here."
+  },
+  "independent_tests": {
+    "owning_repository": "endomorphosis/ipfs_accelerate_py",
+    "cwd": "external/ipfs_accelerate",
+    "interpreter": "/usr/bin/python3.12",
+    "validation_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "pythonpath_from_owning_cwd": ".:../ipfs_datasets:../ipfs_kit",
+    "pythonpath_from_superproject_root": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit",
+    "board_declarations_are_not_argv": true,
+    "focused_owning_repository_pytest": [
+      "test/api/incremental_sealing/test_metrics.py",
+      "test/api/incremental_sealing/test_public_api.py",
+      "test/api/incremental_sealing/test_full_checkpoint.py",
+      "test/api/incremental_sealing/test_delta_seal.py",
+      "test/api/incremental_sealing/test_executor.py",
+      "test/api/incremental_sealing/test_planner.py",
+      "test/api/test_agent_supervisor_proof_reuse_benchmark.py",
+      "test/api/test_proof_reuse_two_stage_warm_lookup.py"
+    ],
+    "focused_owning_repository_pytest_command": "cd external/ipfs_accelerate && python3 -m pytest test/api/incremental_sealing/test_metrics.py test/api/incremental_sealing/test_public_api.py test/api/incremental_sealing/test_full_checkpoint.py test/api/incremental_sealing/test_delta_seal.py test/api/incremental_sealing/test_executor.py test/api/incremental_sealing/test_planner.py test/api/test_agent_supervisor_proof_reuse_benchmark.py test/api/test_proof_reuse_two_stage_warm_lookup.py -q --tb=line",
+    "identity_proof_differential_checks": [
+      "test/api/incremental_sealing/test_metrics.py::test_absent_counters_are_unknown_not_zero",
+      "test/api/incremental_sealing/test_metrics.py::test_observed_zero_is_measured_zero",
+      "test/api/incremental_sealing/test_metrics.py::test_estimates_never_reported_as_measurements",
+      "test/api/incremental_sealing/test_metrics.py::test_failed_or_estimated_runs_keep_savings_unknown",
+      "test/api/test_agent_supervisor_proof_reuse_benchmark.py::test_false_admissions_equal_zero_across_all_scenarios",
+      "test/api/test_agent_supervisor_proof_reuse_benchmark.py::test_scenarios_cover_off_shadow_cold_warm_and_forced_rerun",
+      "test/api/test_proof_reuse_two_stage_warm_lookup.py::test_dedicated_candidate_store_returns_retained_bytes_and_rehashes",
+      "test/api/test_proof_reuse_two_stage_warm_lookup.py::test_exact_match_then_proof_cache_hit_is_only_skip"
+    ],
+    "identity_proof_differential_command": "cd external/ipfs_accelerate && python3 -m pytest test/api/incremental_sealing/test_metrics.py::test_absent_counters_are_unknown_not_zero test/api/incremental_sealing/test_metrics.py::test_observed_zero_is_measured_zero test/api/incremental_sealing/test_metrics.py::test_estimates_never_reported_as_measurements test/api/incremental_sealing/test_metrics.py::test_failed_or_estimated_runs_keep_savings_unknown test/api/test_agent_supervisor_proof_reuse_benchmark.py::test_false_admissions_equal_zero_across_all_scenarios test/api/test_agent_supervisor_proof_reuse_benchmark.py::test_scenarios_cover_off_shadow_cold_warm_and_forced_rerun test/api/test_proof_reuse_two_stage_warm_lookup.py::test_dedicated_candidate_store_returns_retained_bytes_and_rehashes test/api/test_proof_reuse_two_stage_warm_lookup.py::test_exact_match_then_proof_cache_hit_is_only_skip -q --tb=line",
+    "executable_commands": [
+      "cd external/ipfs_accelerate && python3 -m pytest test/api/incremental_sealing/test_metrics.py test/api/incremental_sealing/test_public_api.py test/api/incremental_sealing/test_full_checkpoint.py test/api/incremental_sealing/test_delta_seal.py test/api/incremental_sealing/test_executor.py test/api/incremental_sealing/test_planner.py test/api/test_agent_supervisor_proof_reuse_benchmark.py test/api/test_proof_reuse_two_stage_warm_lookup.py -q --tb=line",
+      "cd external/ipfs_accelerate && python3 -m pytest test/api/incremental_sealing/test_metrics.py::test_absent_counters_are_unknown_not_zero test/api/incremental_sealing/test_metrics.py::test_observed_zero_is_measured_zero test/api/incremental_sealing/test_metrics.py::test_estimates_never_reported_as_measurements test/api/incremental_sealing/test_metrics.py::test_failed_or_estimated_runs_keep_savings_unknown test/api/test_agent_supervisor_proof_reuse_benchmark.py::test_false_admissions_equal_zero_across_all_scenarios test/api/test_agent_supervisor_proof_reuse_benchmark.py::test_scenarios_cover_off_shadow_cold_warm_and_forced_rerun test/api/test_proof_reuse_two_stage_warm_lookup.py::test_dedicated_candidate_store_returns_retained_bytes_and_rehashes test/api/test_proof_reuse_two_stage_warm_lookup.py::test_exact_match_then_proof_cache_hit_is_only_skip -q --tb=line"
+    ],
+    "cross_package_api_tests": [
+      "accelerate IncrementalProofSealer consumes datasets incremental-sealing evidence types without copying datasets statement authority",
+      "accelerate sealer is the sole coordinator over kit WAL and current-seal CAS without granting workers publication authority",
+      "pytest proof-reuse lookup rehashes retained candidate bytes before skip and never treats unverified metadata as reuse authority"
+    ],
+    "cross_package_api_source_bindings": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py imports SealStatus from ipfs_datasets_py.logic.zkp.incremental_sealing.evidence and kit CurrentSealRepository/HermeticProofSealStore without redefining statement meaning",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/executor.py FETCH_VERIFY_PROVE_ORDER is fetch, rehash, verify, admit",
+      "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lookup.py ProofReuseLookup is the warm two-stage authority; unverified metadata cannot skip"
+    ],
+    "implementer_execution": {
+      "status": "source_reconciled_board_declaration_mapped_to_executable_pytest",
+      "pytest_process_observation": "unavailable_in_implementer_session",
+      "reason": "This implementation session has no subprocess runner. Pytest is not claimed green from a provider-side probe. Independent pytest belongs to the sealed validation environment executing the executable_commands in this receipt.",
+      "prior_failure": {
+        "failed_command": "export PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit && 'focused owning-repository pytest plus cross-package API tests'",
+        "stderr": "/bin/bash: line 1: export: `&&': not a valid identifier /bin/bash: line 1: export: `owning-repository': not a valid identifier /bin/bash: line 1: export: `cross-package': not a valid identifier",
+        "cause": "Board declaration text was executed as argv after PYTHONPATH binding because it contains the token pytest.",
+        "repair": "Map the declarations onto cd external/ipfs_accelerate && python3 -m pytest commands against current cold/warm collector and sealer tests. Do not execute the declaration text."
+      },
+      "independent_executor": "authoritative validation runner with PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin, interpreter=/usr/bin/python3.12, and a fresh HOME whose name starts with ipfs-accelerate-validation-home-"
+    },
+    "source_reconciliation_performed": true
+  },
+  "existing_measured_or_estimated_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/summary.json",
+      "provenance": "mixed_estimated",
+      "measured_rows": 0,
+      "gpu_time": "unavailable",
+      "limitation": "All cost and timing fields in that run are estimated planner resource costs or unavailable; none are measured wall-clock observations from a production prover. This receipt does not treat that summary as current-tree promotion evidence."
+    },
+    {
+      "path": "external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/benchmark.json",
+      "provenance": "estimated",
+      "real_prover_available": false,
+      "gpu_available": false,
+      "test_execution_cryptographically_proven": false
+    }
+  ],
+  "unsupported_unavailable": [
+    {
+      "case": "production_zk_key_ceremony",
+      "classification": "typed_unavailable",
+      "detail": "zkp_backend_inventory.json: groth16 binary is real_backend_binary_present_unqualified and not production admitted; provekit is adapter_source_present; simulated is never production admitted; direct_cpython is research_only."
+    },
+    {
+      "case": "gpu_prover",
+      "classification": "typed_unavailable",
+      "detail": "ProofMetricsCollector.gpu_time_ms stays unknown unless observed. Current IPS benchmark GPU seconds are unavailable."
+    },
+    {
+      "case": "optional_native_or_direct_execution_profiles",
+      "classification": "typed_unavailable",
+      "detail": "hashing_critical_path candidate_methods include optional qualified native batch; that profile is not a current admitted hashing authority."
+    },
+    {
+      "case": "bytes_hashed_and_files_opened_on_hash_path",
+      "classification": "missing_instrumentation",
+      "detail": "Observed hashing_critical_path gap remains: duplicate serialization/hashing requires task instrumentation. This receipt records the gap; it does not invent counters."
+    },
+    {
+      "case": "wal_cas_time",
+      "classification": "missing_instrumentation",
+      "detail": "Serial WAL/CAS exists; a distinct timed observation is not collected."
+    },
+    {
+      "case": "full_preregistered_hash_seal_workload_matrix",
+      "classification": "not_run",
+      "detail": "layouts many_small/mixed_repository/few_large, changes clean/1/10/50 percent/dirty_overlay, workers 1/2/4/8/16, and local_ssd versus reproducible_slow_io are frozen for later benchmark tasks. They are not executed here."
+    },
+    {
+      "case": "full_preregistered_pytest_tdd_workload_matrix",
+      "classification": "not_run",
+      "detail": "no_fixture, pure, module_session, parameterized, temp_filesystem, transactional_db, clock_rng, service_simulation, opaque_dynamic, teardown_finalizer, xdist, slow_fast_calls, proof_hit_miss, changed_fixture, changed_plugin_conftest, and changed_environment remain preregistered. Current cold/warm pytest instrumentation covers the controlled ProofReuseBenchmark corpus, not that full matrix."
+    },
+    {
+      "case": "cli_json_cost_record_loader",
+      "classification": "typed_unavailable",
+      "detail": "incremental_sealing CLI benchmark reconstruction from JSON raises unavailable and tells callers to use compare_full_and_incremental or ProofMetricsCollector snapshots."
+    },
+    {
+      "case": "cli_kit_cache_status",
+      "classification": "typed_unavailable",
+      "detail": "CLI cache-status reports that the kit cache adapter is not bound in that CLI process."
+    },
+    {
+      "case": "accelerate_test_api_parallel_content_sealing",
+      "classification": "absent_path",
+      "detail": "Predicted path external/ipfs_accelerate/test/api/parallel_content_sealing is not present. Superproject test/api/parallel_content_sealing/README.md is a protected bootstrap placeholder and infers no result."
+    },
+    {
+      "case": "implementer_pytest_process_observation",
+      "classification": "typed_unavailable",
+      "detail": "This implementation session has no subprocess runner. Independent pytest belongs to the sealed validation environment executing independent_tests.executable_commands. The board strings 'focused owning-repository pytest plus cross-package API tests' and 'identity/proof differential checks where applicable' are declarations, not argv, and must not be executed as shell."
+    },
+    {
+      "case": "board_validation_declaration_executed_as_argv",
+      "classification": "typed_unavailable",
+      "detail": "Prior validation failed because export PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit && 'focused owning-repository pytest plus cross-package API tests' is not a legal command. Repair is the executable python3 -m pytest mapping in this receipt, not a claim that the declaration text is runnable."
+    }
+  ],
+  "limitations": [
+    "Production ZK/key ceremony and optional native/direct-execution profiles are typed unavailable.",
+    "Unknown dependency or fixture semantics force full fallback.",
+    "Unverified metadata cannot authorize reuse.",
+    "Parallel immutable preparation is absent or partial and has no publication authority.",
+    "Estimated planner costs and deterministic virtual milliseconds must not be reported as measured wall-clock.",
+    "Board validation strings are declarations, not argv; executable pytest is independent_tests.executable_commands.",
+    "This worker cannot self-admit the receipt. Verifier admission remains pending.",
+    "Receipt CID is bound by the verifier over canonical file bytes; this object does not self-hash a CID into itself."
+  ],
+  "safety_floors": {
+    "identity_divergence": 0,
+    "false_test_phase_reuse": 0,
+    "stale_authoritative_reuse": 0,
+    "selection_false_negative_regressions": 0,
+    "simulated_proof_admissions": 0,
+    "model_created_proof_authority_completion": 0,
+    "unauthorized_root_publications": 0,
+    "lost_concurrent_updates": 0,
+    "escaped_critical_seeded_defects": 0,
+    "secret_witness_leaks": 0
+  },
+  "anti_gaming": "No hidden failures, uncounted work, skipped validation, oracle leakage, or denominator exclusions. Unavailable metrics stay unavailable. Estimated values stay estimated. Frozen targets are not treated as measured results.",
+  "verifier_admission": {
+    "status": "pending_independent_validator",
+    "self_approval": false,
+    "required_evidence": [
+      "exact source commit/tree/gitlinks",
+      "changed paths",
+      "independent tests",
+      "proof/claim class",
+      "receipt CID",
+      "limitations",
+      "verifier admission"
+    ],
+    "receipt_cid": {
+      "status": "verifier_binds",
+      "algorithm": "sha256 of canonical UTF-8 JSON file bytes, reported as sha256:<hex>; optional CIDv1 dag-json sha2-256 via canonical_content_cid of the parsed object",
+      "self_included_cid": false
+    }
+  }
+}
