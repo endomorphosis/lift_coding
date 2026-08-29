@@ -1,0 +1,228 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "boundaries": {
+    "collection": {
+      "assembler_interface": "AutomaticItemIdentityAssembler@1",
+      "authorizes_skip": false,
+      "hook": "pytest_collection_modifyitems",
+      "locator_first_interface": "LocatorFirstItemIdentityAssembler@1",
+      "seed_attaches_execution_key": false,
+      "seed_interface": "ProofReuseCollectionSeed@1",
+      "stage": "before fixture setup, test call, final execution key, and skip authority"
+    },
+    "di": {
+      "attributes": [
+        "_ipfs_proof_reuse_lookup_service",
+        "_ipfs_proof_reuse_store_service",
+        "_ipfs_proof_reuse_candidate_store_service",
+        "_ipfs_proof_reuse_provider_service",
+        "_ipfs_proof_reuse_issuer_service",
+        "_ipfs_proof_reuse_identity_services",
+        "_ipfs_proof_reuse_identity_factory",
+        "_ipfs_proof_reuse_service_resolver"
+      ],
+      "lookup_interface": "ProofReuseLookup@1",
+      "plugin": "ipfs-proof-reuse",
+      "resolution_unavailable_executes": true,
+      "services_interface": "ProofReuseServices@1",
+      "two_stage_lookup_interface": "TwoStageCandidateLookup@2"
+    },
+    "fixture_timing": {
+      "current_context_rebuilds_without_fixture_bodies": true,
+      "exact_fixture_instance_authoritative_after_setup": true,
+      "execution_key_interface": "TestExecutionKey@1",
+      "pre_setup_execution_key_is_authoritative": false,
+      "runtime_evidence_interface": "CurrentRuntimeTraceEvidence@1",
+      "v2_key_present": false
+    },
+    "runtime_trace": {
+      "authority_without_complete_pass": "none",
+      "completeness_required_for_publication": true,
+      "interface": "PytestRuntimeTraceLifecycle@1",
+      "phases": [
+        "setup",
+        "call",
+        "teardown"
+      ],
+      "reinvokes_test_body": false,
+      "receipt_interface": "ProofReuseReceiptCapture@1",
+      "starts_immediately_before_setup": true,
+      "stops_after_teardown": true
+    },
+    "xdist_publication": {
+      "controller_may_publish": true,
+      "hooks": [
+        "pytest_configure_node",
+        "pytest_testnodedown",
+        "pytest_sessionfinish"
+      ],
+      "interface": "ProofReuseXdistCoordination@1",
+      "missing_coordination_disables_skip_and_write": true,
+      "private_witness_transported": false,
+      "worker_may_publish": false
+    }
+  },
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json",
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py"
+  ],
+  "claim": "This receipt inventories current pytest proof-reuse identity and DI paths. It does not complete the task, admit reuse, or promote any predecessor result.",
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-002@1 plus DatabaseTaskSource CAS",
+  "dependency_seal": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+  "gap": "exact fixture-instance key becomes safely authoritative only after current setup; add pre-call V2 key and honest composite phase receipt",
+  "independent_tests": [
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py"
+  ],
+  "known_baseline_exclusions": [
+    {
+      "authoritative_acceptance": false,
+      "node_id": "external/ipfs_accelerate/test/api/test_proof_reuse_locator_first_collection.py::test_plugin_collection_attaches_seed_in_read_mode",
+      "observed_outcome": "failed_only_in_combined_predecessor_process",
+      "reason_code": "pytest_global_class_identity_collision",
+      "treatment": "run the complete locator module in an isolated pytest process; do not count the excluded combined-process observation as acceptance"
+    },
+    {
+      "authoritative_acceptance": false,
+      "node_id": "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_direct_node_pickup_with_entry_point_autoload_modes[root-fallback]",
+      "observed_outcome": "failed_preexisting_baseline",
+      "reason_code": "kit_root_fallback_predecessor_failure",
+      "treatment": "exclude only this exact historical node; require repair before protected promotion"
+    },
+    {
+      "authoritative_acceptance": false,
+      "node_id": "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_verified_hit_skips_before_fixtures_without_ipfs_or_daemon_touch",
+      "observed_outcome": "failed_preexisting_baseline",
+      "reason_code": "legacy_skip_semantics_conflict",
+      "treatment": "exclude only this exact legacy node; composite-phase work must replace rather than bless skip semantics"
+    }
+  ],
+  "limitations": [
+    "TestExecutionKeyV2 and composite phase receipts are successor work and are not present in current source",
+    "Production Groth16 ceremony, provekit, simulated, and direct CPython profiles remain non-admitted",
+    "Opaque or unknown fixture semantics force full execution",
+    "Collection-time runtime evidence is typically unavailable and fails open to RUN",
+    "Known predecessor baseline exclusions are typed observations and are not acceptance",
+    "Worker output cannot complete the task or mint verifier admission"
+  ],
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "proof_claim_class": "IntegrityCommitment",
+  "proof_claim_does_not": "execution or semantics",
+  "proof_claim_establishes": "exact bytes/digest/CID/Merkle inclusion of the inventoried source mapping",
+  "protected_inventory": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json",
+  "protected_inventory_sha256": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997",
+  "receipt_cid": {
+    "authority": "controller_owned_sealed_validation",
+    "profile": "CIDv1/dag-json/sha2-256",
+    "status": "pending_independent_mint",
+    "worker_minted": false
+  },
+  "schema": "pctdd/pytest-identity-inventory-receipt@1",
+  "self_approval": false,
+  "source_identities": {
+    "completion_authority": false,
+    "dirty_overlay_is_identity": false,
+    "identity_class": "planning_gitlink_and_live_nested_observation",
+    "live_superproject_head_is_completion": false,
+    "planning_superproject_head": "bab6a92cc60df871097b78d54629e96cfb96fd8c",
+    "planning_superproject_tree": "2533c520dbe51b30c98af5503500a123223b8f62",
+    "sources": [
+      {
+        "gitlink": "a14d16cee74f49fd3b51632a026e1d7669b4fa59",
+        "gitlink_matches_nested_head": true,
+        "head": "a14d16cee74f49fd3b51632a026e1d7669b4fa59",
+        "name": "ipfs_accelerate_py",
+        "path": "external/ipfs_accelerate",
+        "tree": "91be9301e3a6b62143ada426bef329411f2a1e97"
+      },
+      {
+        "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "gitlink_matches_nested_head": true,
+        "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "name": "ipfs_datasets_py",
+        "path": "external/ipfs_datasets",
+        "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+      },
+      {
+        "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "gitlink_matches_nested_head": true,
+        "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "name": "ipfs_kit_py",
+        "path": "external/ipfs_kit",
+        "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+      }
+    ]
+  },
+  "status": "worker_inventory_pending_independent_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-002",
+  "typed_unavailable": [
+    {
+      "changes_claim_meaning": false,
+      "current_interface": "TestExecutionKey@1",
+      "production_admitted": false,
+      "reason_code": "test_execution_key_v2_absent",
+      "self_approves": false,
+      "successor": "PCTDD-025 TestExecutionKeyV2"
+    },
+    {
+      "changes_claim_meaning": false,
+      "production_admitted": false,
+      "reason_code": "composite_phase_receipt_absent",
+      "self_approves": false,
+      "successor": "PCTDD-026 composite phase receipts"
+    },
+    {
+      "changes_claim_meaning": false,
+      "classification": "real_backend_binary_present_unqualified",
+      "production_admitted": false,
+      "reason_code": "groth16_production_not_admitted",
+      "self_approves": false
+    },
+    {
+      "changes_claim_meaning": false,
+      "classification": "adapter_source_present",
+      "production_admitted": false,
+      "reason_code": "provekit_production_not_admitted",
+      "self_approves": false
+    },
+    {
+      "changes_claim_meaning": false,
+      "classification": "simulated",
+      "production_admitted": false,
+      "reason_code": "simulated_proof_not_admitted",
+      "self_approves": false
+    },
+    {
+      "changes_claim_meaning": false,
+      "classification": "research_only",
+      "production_admitted": false,
+      "reason_code": "direct_cpython_research_only",
+      "self_approves": false
+    },
+    {
+      "changes_claim_meaning": false,
+      "default_class": "opaque",
+      "production_admitted": false,
+      "reason_code": "opaque_fixture_forces_full_execution",
+      "self_approves": false
+    },
+    {
+      "changes_claim_meaning": false,
+      "disposition": "RUN",
+      "production_admitted": false,
+      "reason_code": "collection_runtime_evidence_typically_unavailable",
+      "self_approves": false
+    },
+    {
+      "changes_claim_meaning": false,
+      "production_admitted": false,
+      "reason_code": "legacy_skip_semantics_not_acceptance",
+      "self_approves": false,
+      "treatment": "exclude the exact historical skip node; do not bless skip as proof reuse"
+    }
+  ],
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-002@1",
+  "verifier_admission": "pending_controller_owned_validation",
+  "worker_authored_test_is_sufficient_alone": false
+}
