@@ -28,6 +28,12 @@ ROOT: Final[Path] = Path(__file__).resolve().parents[1]
 PROFILE_PATH: Final[Path] = (
     ROOT / "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json"
 )
+DEPENDENCY_SEAL_PATH: Final[Path] = (
+    ROOT / "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json"
+)
+PCTDD_DUCKDB_EXTENSION_DIRECTORY_ENV: Final[str] = (
+    "IPFS_ACCELERATE_PCTDD_DUCKDB_EXTENSION_DIRECTORY"
+)
 PLAN_REVISION: Final[str] = "PCTDD-PLAN-V1.1"
 TASK_IDS: Final[tuple[str, ...]] = tuple(f"PCTDD-{n:03d}" for n in range(54))
 TASK_RE: Final[re.Pattern[str]] = re.compile(r"^PCTDD-(?:0[0-4][0-9]|05[0-3])$")
@@ -357,6 +363,54 @@ def load_profiles(path: Path = PROFILE_PATH) -> dict[str, Mapping[str, Any]]:
     return validate_profile_document(payload)
 
 
+def _sha256_path(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return "sha256:" + digest.hexdigest()
+
+
+def _sealed_duckdb_extension_directory() -> str:
+    """Return the content-verified Quack/DuckLake directory from the seal."""
+
+    try:
+        payload = json.loads(
+            DEPENDENCY_SEAL_PATH.read_text(encoding="utf-8"),
+            object_pairs_hook=_reject_duplicate_keys,
+        )
+        capabilities = payload["environment"]["capabilities"]
+    except (OSError, UnicodeError, json.JSONDecodeError, KeyError, TypeError) as exc:
+        raise ProfileError(f"cannot resolve sealed DuckDB extension bindings: {exc}") from exc
+    directories: set[Path] = set()
+    for name in ("quack", "ducklake"):
+        record = capabilities.get(name)
+        if not isinstance(record, Mapping):
+            raise ProfileError(f"dependency seal omits {name} extension binding")
+        raw_directory = str(record.get("extension_directory") or "").strip()
+        raw_path = str(record.get("install_path") or "").strip()
+        claimed_sha256 = str(record.get("install_sha256") or "").strip().lower()
+        if not re.fullmatch(r"sha256:[0-9a-f]{64}", claimed_sha256):
+            raise ProfileError(f"dependency seal has malformed {name} extension SHA-256")
+        try:
+            directory = Path(raw_directory).resolve(strict=True)
+            extension = Path(raw_path).resolve(strict=True)
+            extension.relative_to(directory)
+        except (OSError, ValueError) as exc:
+            raise ProfileError(f"sealed {name} extension path is unavailable or escapes") from exc
+        if not directory.is_dir() or not extension.is_file():
+            raise ProfileError(f"sealed {name} extension binding is not a directory/file pair")
+        if extension.name != f"{name}.duckdb_extension":
+            raise ProfileError(f"sealed {name} extension filename differs")
+        actual_sha256 = _sha256_path(extension)
+        if actual_sha256 != claimed_sha256:
+            raise ProfileError(f"sealed {name} extension bytes differ")
+        directories.add(directory)
+    if len(directories) != 1:
+        raise ProfileError("Quack and DuckLake must share one sealed extension directory")
+    return str(next(iter(directories)))
+
+
 def pytest_configure(config: Any) -> None:
     """Initialize the bounded phase collector when loaded as the sealed plugin."""
 
@@ -441,6 +495,12 @@ def _sealed_validation_environment() -> Iterator[tuple[dict[str, str], str, dict
     )
 
     environment = build_validation_environment(os.environ)
+    # HOME/XDG remain neutral.  Expose only the exact content-verified local
+    # extension directory so validation can reproduce the sealed capability
+    # without network installation or ambient user configuration.
+    environment[PCTDD_DUCKDB_EXTENSION_DIRECTORY_ENV] = (
+        _sealed_duckdb_extension_directory()
+    )
     import_roots = [
         str(ROOT / "scripts"),
         str(ROOT),

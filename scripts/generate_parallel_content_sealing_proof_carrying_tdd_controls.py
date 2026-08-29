@@ -38,6 +38,9 @@ G5_MIGRATION_INVENTORY = INVENTORY / "g5_migration_inventory.json"
 CONTROL_MANIFEST = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
 G5_DATABASE = ROOT / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g5/control.duckdb"
 G5_BOOTSTRAP_RECEIPT = ROOT / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g5/evidence/bootstrap/pctdd-bootstrap.json"
+PCTDD_DUCKDB_EXTENSION_DIRECTORY_ENV = (
+    "IPFS_ACCELERATE_PCTDD_DUCKDB_EXTENSION_DIRECTORY"
+)
 
 
 TASK_TITLES = (
@@ -809,7 +812,19 @@ def duckdb_extension_capability(
     try:
         import duckdb
 
-        connection = duckdb.connect(":memory:")
+        extension_directory = str(
+            os.environ.get(PCTDD_DUCKDB_EXTENSION_DIRECTORY_ENV) or ""
+        ).strip()
+        config = {
+            "autoinstall_known_extensions": "false",
+            "autoload_known_extensions": "false",
+        }
+        if extension_directory:
+            candidate = Path(extension_directory).resolve(strict=True)
+            if not candidate.is_dir():
+                raise RuntimeError("sealed DuckDB extension directory is not a directory")
+            config["extension_directory"] = str(candidate)
+        connection = duckdb.connect(":memory:", config=config)
         try:
             # LOAD is deliberately local-only.  Never use INSTALL here: the
             # dependency seal records current capability rather than mutating
