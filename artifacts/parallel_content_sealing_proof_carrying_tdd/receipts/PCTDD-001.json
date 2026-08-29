@@ -1,0 +1,849 @@
+{
+  "schema": "pctdd/hash-identity-inventory-receipt@1",
+  "task_id": "PCTDD-001",
+  "title": "Inventory current CID, SHA, canonicalization, and seal paths",
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "plan_revision": "PCTDD-PLAN-V1",
+  "goal_id": "PCTDD-G011",
+  "track": "pctdd-g011",
+  "objective_id": "PCTDD-001",
+  "objective_revision": "baguqeerahqohbx2u2tgp4xboxah7wyc3yj4rqnoxhu2f7qtf5maaazujpzba",
+  "status": "inventory_recorded_pending_independent_review",
+  "completion_mode": "independent_evidence_and_review",
+  "markdown_non_authoritative": true,
+  "self_approval": false,
+  "completion_authority": "DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane",
+  "dependency_seal": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json"
+  ],
+  "claim": "This receipt inventories current CID, SHA, canonicalization, and seal paths on the exact tree and reconciles them against existing authorities. It is an IntegrityCommitment over observed source paths, profile contracts, and identity-separation rules. It does not prove execution, semantics, pytest passage, or seal publication.",
+  "proof_claim_class": "IntegrityCommitment",
+  "claim_establishes": "exact bytes/digest/CID/Merkle inclusion",
+  "claim_does_not": "execution or semantics",
+  "hash_identity_rules_preserved": [
+    "CID is exact byte identity under a versioned profile",
+    "Git blob OID is memo lookup key only",
+    "filesystem metadata nominates a candidate only",
+    "chunk manifest does not replace raw full-stream CID",
+    "ordinary SHA-256 of one stream is not composed from independent chunk hashes"
+  ],
+  "preserve": [
+    "canonical bytes",
+    "codec",
+    "multicodec",
+    "multihash",
+    "CID version",
+    "multibase",
+    "ordering",
+    "normalization"
+  ],
+  "forbidden_duplicates_honored": [
+    "CID system",
+    "canonical profile",
+    "proof cache",
+    "block store",
+    "WAL",
+    "current-root store"
+  ],
+  "source_binding": {
+    "inspection_method": "static source inventory plus git-ref reads; git CLI and pytest were not executed in this provider process",
+    "supervisor_packet_tree_id": "c488d97ed5665b5744d983fc4a294989df519361",
+    "branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
+    "branch_ref_sha": "c488d97ed5665b5744d983fc4a294989df519361",
+    "planning_base_head": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "planning_base_tree": "e35dfaebbd229d7e7de988b2e0345444d9284221",
+    "planning_revision_is_runtime_completion_evidence": false,
+    "gitlinks_independently_read_from_nested_worktree_refs": true,
+    "sources": [
+      {
+        "name": "ipfs_accelerate_py",
+        "path": "external/ipfs_accelerate",
+        "authority": true,
+        "nested_head_ref": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+        "planning_gitlink": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+        "planning_tree": "c7b788c1b23a87f461579bde461a61ecb66e9fa2",
+        "matches_planning_gitlink": true
+      },
+      {
+        "name": "ipfs_datasets_py",
+        "path": "external/ipfs_datasets",
+        "authority": true,
+        "nested_head_ref": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "planning_gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "planning_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+        "matches_planning_gitlink": true
+      },
+      {
+        "name": "ipfs_kit_py",
+        "path": "external/ipfs_kit",
+        "authority": true,
+        "nested_head_ref": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "planning_gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+        "planning_tree": "93070c709af29095fdff11f3e2698543449c08ef",
+        "matches_planning_gitlink": true
+      }
+    ]
+  },
+  "authorities": {
+    "canonical_semantic_and_statement_authority": "ipfs_datasets_py",
+    "verified_storage_wal_cas_authority": "ipfs_kit_py",
+    "execution_scheduling_admission_authority": "ipfs_accelerate_py",
+    "task_transaction_authority": "DuckDB via exclusive authenticated Quack owner",
+    "analytics_projection": "DuckLake non-authoritative",
+    "markdown": "non-authoritative bootstrap"
+  },
+  "canonical_profiles": [
+    {
+      "profile": "strict-dag-json-v1",
+      "owner": "ipfs_datasets_py.utils.cid_utils adapted by accelerate ContentIdentity@1",
+      "cid_version": 1,
+      "multibase": "base32",
+      "multicodec": "dag-json",
+      "multihash": "sha2-256",
+      "canonical_bytes": "json.dumps sort_keys compact UTF-8 ensure_ascii=False allow_nan=False; rejects non-JSON types and non-finite numbers",
+      "paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py"
+      ],
+      "claim": "exact byte identity of protocol artifacts under this profile"
+    },
+    {
+      "profile": "ir-canonical-identity-v1",
+      "owner": "ipfs_datasets_py.logic.ir_core.identity",
+      "cid_version": 1,
+      "multibase": "base32",
+      "multicodec": "raw",
+      "multihash": "sha2-256",
+      "canonicalization": "ir-canonical-json-v1",
+      "canonical_bytes": "NFC text; finite decimal numbers; set-like/multiset collection rules; domain-separated envelope binding identity_profile, domain, schema_version, collection_semantics, and payload",
+      "paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/canonical.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/identity.py"
+      ],
+      "dependency_independent_cid_encoding": true,
+      "golden_vector": {
+        "digest": "sha256:3d0104b4ad4a380413b0582327ee6406c353af3620d00c646a3b4631bdcb9a70",
+        "cid": "bafkreib5aecljlkkhacbhmcyemt64zagynj26nra2aggi2r3iyy33s42oa",
+        "source": "external/ipfs_datasets/tests/unit/logic/ir_core/test_identity.py"
+      },
+      "claim": "exact byte identity of domain-separated IR envelopes, not payload-only identity"
+    },
+    {
+      "profile": "software-contract-cid-profile-v1",
+      "owner": "ipfs_datasets_py.logic.software_contracts.content",
+      "cid_version": 1,
+      "multibase": "base32",
+      "source_codec": "raw",
+      "structured_codec": "dag-json",
+      "multihash": "sha2-256",
+      "canonical_bytes": "strict DAG-JSON; rejects floats, bytes, sets, Path, NaN/infinity, host objects, and repr fallback",
+      "paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py"
+      ],
+      "note": "cid_for_obj here is dag-json. cid_for_obj in cid_utils remains legacy raw over canonical_json_bytes. Same function name is not the same profile."
+    },
+    {
+      "profile": "ipld_cid Profile D dag-json",
+      "owner": "ipfs_datasets_py.logic.ipld_cid",
+      "cid_version": 1,
+      "multibase": "base32",
+      "multicodec": "dag-json",
+      "multihash": "sha2-256",
+      "canonical_bytes": "json.dumps sort_keys compact ensure_ascii=True",
+      "paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/ipld_cid.py"
+      ],
+      "identity_boundary": "ASCII-only payloads may match strict-dag-json-v1; non-ASCII payloads are a typed canonical-byte/CID contradiction, never an alias"
+    },
+    {
+      "profile": "mcp++ Profile G dag-json",
+      "owner": "ipfs_datasets_py.logic.profile_g",
+      "cid_version": 1,
+      "multibase": "base32",
+      "multicodec": "dag-json",
+      "multihash": "sha2-256",
+      "canonical_bytes": "ensure_ascii=False; rejects floats and integers outside JSON safe range",
+      "paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/profile_g.py"
+      ],
+      "identity_boundary": "unicode DAG-JSON agreement with cid_utils is required by ContentIdentity@1; agreement is not interchange with ir-canonical-identity-v1"
+    },
+    {
+      "profile": "kit operation-contracts content_identity",
+      "owner": "ipfs_kit_py.core.operation_contracts",
+      "cid_version": 1,
+      "multibase": "base32",
+      "multicodec": "dag-json",
+      "multihash": "sha2-256",
+      "canonical_bytes": "ensure_ascii=False; rejects secrets/bodies; set-like sort of sets",
+      "paths": [
+        "external/ipfs_kit/ipfs_kit_py/core/operation_contracts.py"
+      ],
+      "claim": "WAL/operation record identity only; not a replacement CID system"
+    },
+    {
+      "profile": "kit proof-certificate-store exact-bytes CID",
+      "owner": "ipfs_kit_py.proof_certificate_store",
+      "cid_version": 1,
+      "multibase": "base32",
+      "default_codec": "raw",
+      "multihash": "sha2-256",
+      "paths": [
+        "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py"
+      ],
+      "claim": "transport rehashes claimed CID against exact bytes; does not decide test-reuse meaning",
+      "explicit_nonuse": "legacy ipfs_multiformats testing pseudo-CIDs are rejected"
+    },
+    {
+      "profile": "kit MCP++ coordination_storage cid_for_bytes",
+      "owner": "ipfs_kit_py.mcp_server.mcplusplus.coordination_storage",
+      "cid_version": 1,
+      "multibase": "base32",
+      "default_codec": "dag-json",
+      "multihash": "sha2-256",
+      "canonical_bytes": "ensure_ascii=False allow_nan=False sort_keys compact",
+      "paths": [
+        "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py"
+      ]
+    },
+    {
+      "profile": "ips.full_checkpoint.seal.v1 / ips.delta_seal.seal.v1 digest label",
+      "owner": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing",
+      "identifier_form": "sha256:<hex>",
+      "canonical_bytes": "json.dumps sort_keys compact ensure_ascii=True over {domain, payload}",
+      "paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/full_checkpoint.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/delta_seal.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py"
+      ],
+      "claim": "IntegrityCommitment digest of a canonical seal envelope",
+      "must_not_be_labeled": "CID",
+      "identity_boundary": "digest-shaped strings are rejected as CIDs by ContentIdentity@1"
+    }
+  ],
+  "cid_paths": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "symbols": [
+        "canonical_json_bytes",
+        "canonical_dag_json_bytes",
+        "cid_for_bytes",
+        "cid_for_obj",
+        "cid_for_dag_json",
+        "validate_cid"
+      ],
+      "role": "shared multiformats-backed CID utility; cid_for_obj is legacy raw over canonical_json_bytes including default=repr"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/identity.py",
+      "symbols": [
+        "canonical_identity",
+        "cid_v1",
+        "cid_v1_from_digest",
+        "sha256_digest"
+      ],
+      "role": "dependency-independent IR CID encoder"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "symbols": [
+        "cid_for_bytes",
+        "cid_for_obj",
+        "cid_for_structured",
+        "decode_and_recompute_source",
+        "decode_and_recompute_structured"
+      ],
+      "role": "software-contract content identity; reads recompute CID"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py",
+      "symbols": [
+        "identify_strict_artifact",
+        "identify_logic_ir",
+        "compare_provider_identities",
+        "decode_and_verify_cid"
+      ],
+      "role": "accelerate adapter; reuses datasets identity modules; never forks canonicalizers; never treats matching payloads as cross-profile equality"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/activation_contracts.py",
+      "symbols": [
+        "cid_for_public_payload"
+      ],
+      "role": "proof-reuse public payload CID via datasets content identity; private material is a bounded rejection"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/ipfs_multiformats.py",
+      "symbols": [
+        "ipfs_multiformats_py.get_cid"
+      ],
+      "classification": "legacy_non_authoritative_for_pctdd",
+      "reason": "testing_mode emits QmTest pseudo-CIDs; production PCTDD identity must not use this path"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ipld_cid.py",
+      "symbols": [
+        "canonical_dag_json",
+        "dag_json_cid"
+      ],
+      "role": "Profile D dag-json CID; ensure_ascii=True; not an alias of strict-dag-json-v1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/profile_g.py",
+      "symbols": [
+        "canonical_profile_g_bytes",
+        "profile_g_cid"
+      ],
+      "role": "Profile G dag-json CID; unicode agreement with cid_utils is required by ContentIdentity@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/core/operation_contracts.py",
+      "symbols": [
+        "content_identity",
+        "canonical_json_bytes"
+      ],
+      "role": "WAL/operation record identity only; not a replacement CID system"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
+      "symbols": [
+        "cid_for_bytes",
+        "cid_for_artifact",
+        "_canonical_json"
+      ],
+      "role": "MCP++ coordination block identity; rehashes stored bytes against claimed CID"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/common/proof_cache.py",
+      "symbols": [
+        "cid_for_obj"
+      ],
+      "classification": "legacy_non_authoritative_for_pctdd",
+      "reason": "import fallback returns unprefixed SHA-256 hex, not CIDv1; must not be used as PCTDD identity"
+    }
+  ],
+  "sha_paths": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/identity.py",
+      "symbol": "sha256_digest",
+      "form": "sha256:<hex> of exact bytes; CID is assembled from the same digest under ir-canonical-identity-v1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/full_checkpoint.py",
+      "symbol": "_cid",
+      "form": "sha256:<hex> of canonical seal JSON; not a CIDv1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/delta_seal.py",
+      "symbol": "_cid",
+      "form": "sha256:<hex> of canonical seal JSON; not a CIDv1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+      "symbol": "_transition_id",
+      "form": "truncated sha256 hex of canonical transition material; not a CID and not a seal root"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+      "symbol": "cid_for_certificate_bytes",
+      "form": "sha2-256 digest wrapped as CIDv1; default codec raw; claimed CID is rehashed against exact bytes"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/semantic_index/snapshot.py",
+      "symbols": [
+        "git_blob_oid",
+        "head_blob_oid",
+        "index_blob_oids"
+      ],
+      "form": "Git object id hex (40 or 64 chars); memo lookup key only; never a CID; source_cid remains a separate validated CID field"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/doctor_worktree_adapter.py",
+      "symbols": [
+        "before_git_oid",
+        "after_git_oid"
+      ],
+      "form": "Git blob OID from git hash-object; verified memo lookup key only; not a CID and not seal publication authority"
+    },
+    {
+      "candidate_not_current_path": [
+        "hashlib.file_digest",
+        "readinto reusable buffer",
+        "safe mmap",
+        "threaded independent SHA",
+        "process canonicalization",
+        "optional qualified native batch"
+      ],
+      "note": "These remain hashing_critical_path candidate methods. hashlib.file_digest is not the current production CID/SHA path. Iroh BLAKE3-256 is a different hash family and is not SHA-256/CID identity."
+    }
+  ],
+  "canonicalization_paths": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "profiles": [
+        "canonical_json_bytes (legacy, default=repr, allows non-strict objects)",
+        "canonical_dag_json_bytes (fail-closed DAG-JSON)"
+      ]
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/canonical.py",
+      "profile": "ir-canonical-json-v1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py",
+      "profile": "software-contract-cid-profile-v1 structured DAG-JSON"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/ipld_cid.py",
+      "profile": "Profile D ensure_ascii=True DAG-JSON"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/profile_g.py",
+      "profile": "Profile G ensure_ascii=False DAG-JSON with safe-integer checks"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/canonicalization.py",
+      "profile": "theorem/axiom text canonicalization; not a content CID profile"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/core/operation_contracts.py",
+      "profile": "WAL/operation canonical JSON"
+    },
+    {
+      "successor_absent": "PreparedCanonicalBlock@1",
+      "note": "Plan workstream 1 is not implemented on this tree. Canonicalize-once is a successor (PCTDD-005), not a current authority."
+    }
+  ],
+  "seal_paths": [
+    {
+      "capability": "IncrementalProofSealer accelerate coordinator source",
+      "classification": "source_present_runtime_unavailable_on_this_tree",
+      "owner": "ipfs_accelerate_py",
+      "paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/full_checkpoint.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/delta_seal.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/verification.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/bootstrap.py"
+      ],
+      "interfaces": [
+        "IncrementalProofSealer@1",
+        "publish_full_checkpoint",
+        "publish_delta_seal",
+        "verify_seal"
+      ],
+      "publication_invariant": "final ordered WAL append, persisted-byte rehash, generation fence, expected-parent CAS, and current-root publication remain serial, controller-owned, and fail closed"
+    },
+    {
+      "capability": "datasets incremental sealing semantic/evidence package",
+      "classification": "typed_unavailable_on_this_tree",
+      "expected_package": "ipfs_datasets_py.logic.zkp.incremental_sealing",
+      "imported_by": [
+        "full_checkpoint.py",
+        "delta_seal.py",
+        "sealer.py",
+        "compaction.py",
+        "explanations.py"
+      ],
+      "observed": "package directory is absent from external/ipfs_datasets/ipfs_datasets_py/logic/zkp on this exact tree"
+    },
+    {
+      "capability": "kit proof_seal_store WAL/CAS/recovery",
+      "classification": "typed_unavailable_on_this_tree",
+      "expected_package": "ipfs_kit_py.proof_seal_store",
+      "expected_modules": [
+        "contracts",
+        "local_store",
+        "pointer",
+        "recovery",
+        "wal"
+      ],
+      "imported_by": [
+        "sealer.py"
+      ],
+      "observed": "package is absent from external/ipfs_kit/ipfs_kit_py on this exact tree. Planned-but-absent proof_seal_store is not counted as an existing proof path."
+    },
+    {
+      "capability": "kit modern core.wal primitive",
+      "classification": "available_contract_and_writer",
+      "owner": "ipfs_kit_py",
+      "paths": [
+        "external/ipfs_kit/ipfs_kit_py/core/wal/contracts.py",
+        "external/ipfs_kit/ipfs_kit_py/core/wal/writer.py",
+        "external/ipfs_kit/ipfs_kit_py/core/wal/recovery.py",
+        "external/ipfs_kit/ipfs_kit_py/core/wal/segments.py"
+      ],
+      "note": "KITA WALRecord@1 contracts and group-commit writer exist. They are not the missing proof_seal_store current-seal CAS."
+    },
+    {
+      "capability": "kit proof certificate transport",
+      "classification": "available_with_caveats",
+      "owner": "ipfs_kit_py",
+      "path": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+      "does_not": "decide test-reuse or semantic admission"
+    },
+    {
+      "capability": "hermetic IncrementalProofSealer bootstrap",
+      "classification": "available",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/bootstrap.py",
+      "note": "Import creates no process/network/key/state. Default bind has no datasets or kit adapters."
+    }
+  ],
+  "critical_path_reconciliation": {
+    "schema": "pctdd/hashing-critical-path@1",
+    "declared_current_path": [
+      "source discovery",
+      "canonical serialization",
+      "SHA/CID",
+      "proof verification",
+      "Merkle",
+      "immutable store",
+      "serial WAL/CAS"
+    ],
+    "observed_on_this_tree": {
+      "source discovery": "present as repository/source readers and proof-reuse locators; not a unified PreparedCanonicalBlock pipeline",
+      "canonical serialization": "multiple versioned profiles exist and must remain separated",
+      "SHA/CID": "present per profile; raw SHA and CID are retained as distinct fields on ContentIdentity@1",
+      "proof verification": "accelerate proof/verification surfaces exist; simulated proof remains non-admitted",
+      "Merkle": "IncrementalProofSealer category/forest roots are encoded in accelerate source; kit proof-forest persistence package is absent",
+      "immutable store": "kit proof_seal_store local store is absent; certificate transport and core WAL exist",
+      "serial WAL/CAS": "sealer source requires kit proof_seal_store pointer CAS which is absent; kit core.wal exists"
+    },
+    "observed_gaps_confirmed": [
+      "duplicate serialization/hashing requires task instrumentation",
+      "unverified metadata cannot authorize reuse",
+      "parallel immutable preparation absent or partial"
+    ]
+  },
+  "overlap_gap_reconciliation": [
+    {
+      "capability": "IncrementalProofSealer full/delta/WAL/CAS",
+      "board_classification": "available_with_caveats",
+      "exact_tree_classification": "accelerate_source_present_datasets_and_kit_packages_absent",
+      "successor": "prepared-seal consumer adapter after datasets evidence package and kit proof_seal_store exist on the current tree"
+    },
+    {
+      "capability": "verified persistent hash memo",
+      "board_classification": "partial",
+      "exact_tree_classification": "absent_as_versioned_PreparedCanonicalBlock_and_hash_memo_store",
+      "successor": "PCTDD-007 datasets contracts and PCTDD-008 kit store"
+    },
+    {
+      "capability": "file chunk manifests",
+      "board_classification": "not current",
+      "exact_tree_classification": "absent",
+      "identity_rule": "a future chunk manifest must not replace the raw full-stream CID; ordinary SHA-256 of one stream must not be composed from independent chunk hashes"
+    }
+  ],
+  "identity_differential": {
+    "method": "static profile-contract comparison against exact-tree tests that encode the same differentials",
+    "results": [
+      {
+        "left": "cid_utils.canonical_dag_json_bytes",
+        "right": "ipld_cid.canonical_dag_json",
+        "payload": "unicode café plus nested map",
+        "outcome": "typed CANONICAL_BYTES_MISMATCH, DIGEST_MISMATCH, and CID_MISMATCH; not CODEC_MISMATCH",
+        "evidence": "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py::test_cross_module_unicode_canonicalization_is_typed_contradiction"
+      },
+      {
+        "left": "cid_utils",
+        "right": "profile_g",
+        "payload": "unicode café plus nested map",
+        "outcome": "no contradiction on unicode DAG-JSON",
+        "evidence": "test_profile_g_matches_cid_utils_for_unicode_dag_json"
+      },
+      {
+        "left": "strict-dag-json-v1",
+        "right": "ir-canonical-identity-v1",
+        "payload": "{\"a\": 1}",
+        "outcome": "CODEC_MISMATCH, PROFILE_MISMATCH, CANONICAL_BYTES_MISMATCH, CID_MISMATCH; profiles are not interchangeable",
+        "evidence": "test_logic_ir_vs_artifact_is_codec_and_profile_contradiction"
+      },
+      {
+        "left": "cid_utils.cid_for_obj",
+        "right": "cid_utils.cid_for_dag_json",
+        "payload": "{\"a\": 1}",
+        "outcome": "legacy object CID is raw and distinct from dag-json CID of the same mapping",
+        "evidence": "external/ipfs_datasets/tests/unit/utils/test_cid_utils.py::test_legacy_object_cid_remains_raw_and_distinct_from_dag_json"
+      },
+      {
+        "left": "cid_utils.cid_for_bytes(b'{\"a\":1}')",
+        "right": "cid_utils.cid_for_dag_json({\"a\": 1})",
+        "outcome": "raw CID of JSON text bytes is not the dag-json CID of the object",
+        "evidence": "test_raw_and_dag_json_cids_are_canonical_cidv1"
+      },
+      {
+        "left": "ContentIdentity digest field",
+        "right": "ContentIdentity cid field",
+        "outcome": "digest is sha256:<hex>; CID is base32 CIDv1; digest-shaped strings are rejected as CIDs",
+        "evidence": "test_decode_rejects_digest_shaped_string_as_cid and test_digest_field_is_never_copied_into_cid"
+      },
+      {
+        "left": "IncrementalProofSealer seal_cid",
+        "right": "CIDv1 profiles",
+        "outcome": "seal_cid is a sha256: digest label and must not be admitted as a CID"
+      },
+      {
+        "left": "SnapshotEntry.git_blob_oid",
+        "right": "SnapshotEntry.source_cid",
+        "outcome": "Git blob OID is a memo lookup key only; source_cid is a validated CID; they are not interchangeable"
+      },
+      {
+        "left": "proof_cache fallback cid_for_obj hex",
+        "right": "CIDv1 profiles",
+        "outcome": "unprefixed SHA-256 hex is not a CID and must not be admitted as identity"
+      }
+    ]
+  },
+  "board_validation_command_expansion": {
+    "note": "Board Validation fields are inventory declarations, not shell. The token pytest in the declaration is descriptive. Wrapping the declaration with export PYTHONPATH=... && is not a reviewed command and is not an identity test.",
+    "expansions": [
+      {
+        "declaration": "focused owning-repository pytest plus cross-package API tests",
+        "shell_executable": false,
+        "kind": "focused_owning_repository_pytest_plus_cross_package_api_tests",
+        "cwd": "repository root",
+        "env": {
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "PYTHONPATH": "external/ipfs_datasets:external/ipfs_accelerate:external/ipfs_kit"
+        },
+        "argv": [
+          "/usr/bin/python3.12",
+          "-m",
+          "pytest",
+          "-q",
+          "external/ipfs_datasets/tests/unit/utils/test_cid_utils.py",
+          "external/ipfs_datasets/tests/unit/logic/ir_core/test_identity.py",
+          "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+          "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_imports_and_migration.py",
+          "external/ipfs_kit/tests/test_proof_certificate_store.py"
+        ]
+      },
+      {
+        "declaration": "identity/proof differential checks where applicable",
+        "shell_executable": false,
+        "kind": "identity_proof_differential_checks",
+        "cwd": "repository root",
+        "env": {
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "PYTHONPATH": "external/ipfs_datasets:external/ipfs_accelerate:external/ipfs_kit"
+        },
+        "argv": [
+          "/usr/bin/python3.12",
+          "-m",
+          "pytest",
+          "-q",
+          "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+          "external/ipfs_datasets/tests/unit/utils/test_cid_utils.py",
+          "external/ipfs_datasets/tests/unit/logic/ir_core/test_identity.py"
+        ]
+      }
+    ]
+  },
+  "independent_tests": {
+    "provider_execution": {
+      "status": "typed_unavailable_in_provider_process",
+      "reason": "this implementation provider had file/search tools only; it did not execute /usr/bin/python3.12 -m pytest under the sealed validation PATH. Pytest green is not claimed. Board Validation strings were not executed as shell.",
+      "validation_environment": {
+        "required_PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "required_python": "/usr/bin/python3.12",
+        "provider_side_probe_is_not_authority": true
+      }
+    },
+    "independent_validator_commands": [
+      {
+        "cwd": "repository root",
+        "env": {
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "PYTHONPATH": "external/ipfs_datasets:external/ipfs_accelerate:external/ipfs_kit"
+        },
+        "argv": [
+          "/usr/bin/python3.12",
+          "-m",
+          "pytest",
+          "-q",
+          "external/ipfs_datasets/tests/unit/utils/test_cid_utils.py",
+          "external/ipfs_datasets/tests/unit/logic/ir_core/test_identity.py",
+          "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+          "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+          "external/ipfs_accelerate/test/api/incremental_sealing/test_imports_and_migration.py",
+          "external/ipfs_kit/tests/test_proof_certificate_store.py"
+        ],
+        "kind": "focused owning-repository pytest plus cross-package API tests",
+        "board_declaration": "focused owning-repository pytest plus cross-package API tests"
+      },
+      {
+        "cwd": "repository root",
+        "env": {
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "PYTHONPATH": "external/ipfs_datasets:external/ipfs_accelerate:external/ipfs_kit"
+        },
+        "argv": [
+          "/usr/bin/python3.12",
+          "-m",
+          "pytest",
+          "-q",
+          "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+          "external/ipfs_datasets/tests/unit/utils/test_cid_utils.py",
+          "external/ipfs_datasets/tests/unit/logic/ir_core/test_identity.py"
+        ],
+        "kind": "identity/proof differential checks where applicable",
+        "board_declaration": "identity/proof differential checks where applicable"
+      }
+    ],
+    "encoded_on_tree_without_execution": [
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/ir_core/test_identity.py",
+        "binds": "golden ir-canonical-identity-v1 digest and CID"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/utils/test_cid_utils.py",
+        "binds": "raw vs dag-json separation, mapping-order stability, non-finite rejection, legacy cid_for_obj raw codec"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+        "binds": "unicode profile contradiction, Profile G agreement, IR vs artifact codec split, digest-shaped CID rejection"
+      },
+      {
+        "path": "external/ipfs_kit/tests/test_proof_certificate_store.py",
+        "binds": "claimed CID rehash; QmTest pseudo-CID rejection"
+      },
+      {
+        "path": "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+        "binds": "software-contract-cid-profile-v1 source/raw vs structured/dag-json; decode-and-recompute"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_imports_and_migration.py",
+        "binds": "hermetic IncrementalProofSealer bootstrap; simulated legacy evidence never enters cache"
+      }
+    ],
+    "expected_import_failures_on_this_tree": [
+      {
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_full_checkpoint.py",
+        "reason": "imports ipfs_datasets_py.logic.zkp.incremental_sealing.evidence which is absent"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_delta_seal.py",
+        "reason": "imports datasets incremental_sealing evidence which is absent"
+      },
+      {
+        "path": "external/ipfs_accelerate/test/api/incremental_sealing/test_atomic_sealer.py",
+        "reason": "imports ipfs_kit_py.proof_seal_store which is absent"
+      }
+    ]
+  },
+  "unsupported_unavailable": [
+    {
+      "item": "ipfs_datasets_py.logic.zkp.incremental_sealing",
+      "classification": "typed_unavailable_on_this_tree",
+      "does_not_change_claim": "absence is not simulated availability and does not weaken IntegrityCommitment meaning"
+    },
+    {
+      "item": "ipfs_kit_py.proof_seal_store",
+      "classification": "typed_unavailable_on_this_tree",
+      "does_not_change_claim": "planned-but-absent storage is not an existing seal publication path"
+    },
+    {
+      "item": "PreparedCanonicalBlock@1",
+      "classification": "absent_successor",
+      "task": "PCTDD-005"
+    },
+    {
+      "item": "persistent verified hash memo contracts and kit hash-memo store",
+      "classification": "absent_or_partial",
+      "tasks": [
+        "PCTDD-007",
+        "PCTDD-008"
+      ]
+    },
+    {
+      "item": "file chunk manifests and auxiliary change-detection profiles",
+      "classification": "absent_successor",
+      "task": "PCTDD-009",
+      "identity_rule_if_added": "chunk manifest does not replace raw full-stream CID"
+    },
+    {
+      "item": "parallel canonicalization and hash scheduling",
+      "classification": "absent_or_partial",
+      "task": "PCTDD-010"
+    },
+    {
+      "item": "optional native/Rust batch SHA hashing qualification",
+      "classification": "typed_unavailable",
+      "task": "PCTDD-012",
+      "note": "Iroh native BLAKE3 is a different hash family and is not SHA-256/CID identity"
+    },
+    {
+      "item": "production ZK/key ceremony",
+      "classification": "typed_unavailable",
+      "evidence": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json",
+      "production_admitted": false
+    },
+    {
+      "item": "optional direct CPython execution proof profile",
+      "classification": "research_only",
+      "production_admitted": false
+    },
+    {
+      "item": "simulated proof admission",
+      "classification": "forbidden",
+      "production_admitted": false
+    },
+    {
+      "item": "coq",
+      "classification": "typed_optional_unavailable_at_capture",
+      "required": false
+    },
+    {
+      "item": "board Validation strings as shell",
+      "classification": "non_executable_declaration",
+      "declarations": [
+        "focused owning-repository pytest plus cross-package API tests",
+        "identity/proof differential checks where applicable"
+      ],
+      "does_not_change_claim": "executable expansion is independent_validator_commands argv under sealed PATH; the declaration is not a pytest invocation"
+    },
+    {
+      "item": "provider-process pytest execution under sealed validation PATH",
+      "classification": "typed_unavailable_in_provider_process"
+    },
+    {
+      "item": "cryptographic receipt CID assignment in this provider process",
+      "classification": "typed_unassigned",
+      "reason": "no executable hasher was available to this provider; verifier assigns CIDv1 dag-json sha2-256 over canonical bytes of this object with receipt_cid omitted"
+    }
+  ],
+  "limitations": [
+    "This inventory does not implement PreparedCanonicalBlock@1, hash memos, chunk manifests, or parallel hash scheduling.",
+    "IncrementalProofSealer source on accelerate cannot be imported on this exact tree because datasets incremental_sealing and kit proof_seal_store packages are absent.",
+    "Multiple CID/canonicalization profiles exist; matching payloads or SHA-256 hex strings never imply cross-profile identity.",
+    "Git blob OIDs and filesystem metadata are not CIDs and cannot authorize reuse.",
+    "Production ZK, key ceremony, and optional native/direct-execution profiles remain typed unavailable and are not claimed usable.",
+    "Pytest was not executed in this provider process; independent validator execution of independent_validator_commands argv is required before admission.",
+    "Board Validation strings are inventory declarations, not shell programs. The descriptive token pytest must not be executed as a command name.",
+    "Git blob OIDs in semantic-index snapshots and doctor worktree adapters are memo lookup keys only and are not CIDs.",
+    "datasets proof_cache fallback cid_for_obj returns unprefixed SHA-256 hex and is not a CID path.",
+    "receipt_cid is unassigned here so that a digest is not fabricated."
+  ],
+  "verifier_admission": {
+    "self_approval": false,
+    "worker_cannot_select_acceptance_policy": true,
+    "worker_cannot_mark_completion": true,
+    "this_receipt_does_not_complete_the_task": true,
+    "required_before_admission": [
+      "independent validator runs independent_validator_commands argv under the sealed PATH and /usr/bin/python3.12",
+      "board Validation declarations are expanded to those argv and are not executed as shell",
+      "identity differentials remain fail-closed",
+      "unsupported items remain typed unavailable rather than skipped or simulated",
+      "DuckDB/Quack evidence-gated CAS"
+    ]
+  },
+  "receipt_cid": null,
+  "receipt_cid_profile": "strict-dag-json-v1",
+  "receipt_cid_assignment": "Verifier computes CIDv1 / dag-json / sha2-256 / lowercase base32 over canonical_dag_json_bytes of this object with receipt_cid omitted. A digest-shaped string must not be stored as receipt_cid."
+}
