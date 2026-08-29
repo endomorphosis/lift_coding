@@ -1,0 +1,385 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "board_validation": {
+    "description": "focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable",
+    "executable": false,
+    "interpretation": "The board Validation line is a description, not shell. Executable commands are validation_commands. Quoting the description and prepending PYTHONPATH makes bash treat && as an export identifier."
+  },
+  "bound_sealed_authorities": {
+    "authority_matrix": {
+      "digest": "sha256:2ab53517798dcf840dc5aeb6c89b889931b1ed06c6f09592d79568a4a896c827",
+      "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json",
+      "schema": "pctdd/authority-matrix@1"
+    },
+    "dependency_seal": {
+      "path": "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+      "schema": "pctdd/dependency-source-seal@1"
+    },
+    "overlap_gap_matrix": {
+      "digest": "sha256:f37c0280f3b088597ec7fae028a978e912af3c0f1cf73c4bf2ef22ed9a2ee78b",
+      "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json",
+      "schema": "pctdd/overlap-gap@1"
+    },
+    "proof_claim_matrix": {
+      "digest": "sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133",
+      "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json",
+      "schema": "pctdd/proof-claim-matrix@1"
+    },
+    "zkp_backend_inventory": {
+      "digest": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
+      "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json",
+      "schema": "pctdd/zkp-backend-inventory@1"
+    }
+  },
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json"
+  ],
+  "claim": "This receipt inventories current-tree ZK, signing, key, and proof-claim boundaries against sealed PCTDD authority. It establishes only that inventory. It does not admit production ZK, change claim meaning, prove test execution, or complete the task.",
+  "claim_meaning_unchanged": true,
+  "completion_authority": "DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane",
+  "current_tree_inventory": {
+    "claim_string_authority": {
+      "accelerate_admission_copies": "evidence.ESTABLISHES and evidence.DOES_NOT_ESTABLISH from datasets evidence classes",
+      "datasets_evidence_module_present_on_sealed_gitlink": false,
+      "meaning_source": "sealed proof_claim_matrix copied, not rewritten",
+      "path_absent": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing/evidence.py"
+    },
+    "keys": {
+      "accelerate_trust_policy": {
+        "interfaces": [
+          "TrustedProofPolicy",
+          "VerificationKeyRegistry",
+          "SignerTrustRegistry",
+          "ProvingKeyHandle"
+        ],
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/trust.py",
+        "production_never_generates_or_downloads_keys": true,
+        "proving_key_bytes_are_not_public_api": true,
+        "setup_origins": [
+          "operator_reviewed",
+          "ceremony",
+          "test_fixture"
+        ],
+        "test_fixture_origin_not_production": true
+      },
+      "datasets_ceremony": {
+        "cannot_treat_local_setup_as_mpc_ceremony": true,
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/ceremony.py",
+        "schema": "mcp++/groth16-mpc-ceremony@1"
+      },
+      "datasets_vk_registry": {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/vk_registry.py",
+        "role": "off-chain (circuit_id, version) to VK hash map; not setup, prove, or verify"
+      },
+      "groth16_packaged_keys": {
+        "paths": [
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v1/proving_key.bin",
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v1/verifying_key.bin",
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v2/proving_key.bin",
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v2/verifying_key.bin"
+        ],
+        "present_on_current_tree": true,
+        "production_admitted": false,
+        "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding"
+      },
+      "runner_ed25519": {
+        "interfaces": [
+          "RunnerPassAttestation@1",
+          "RunnerTrustPolicy@1",
+          "RunnerEd25519PublicKey@1"
+        ],
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py",
+        "private_material_forbidden_in_public_fields": true,
+        "usage": "pytest-pass-attestation"
+      }
+    },
+    "kit_storage_authority": {
+      "does_not_own": [
+        "proof system",
+        "canonical profile",
+        "CID system"
+      ],
+      "owner": "ipfs_kit_py",
+      "role": "verified immutable storage, WAL, CAS; no semantic or ZK admission"
+    },
+    "proof_claim_boundaries": {
+      "DirectExecutionProof": {
+        "current_tree_confirmation": "accelerate admission allows direct-computation claim language only for this class; other classes overclaim and reject",
+        "does_not": "broader correctness",
+        "establishes": "declared machine/program/inputs executed"
+      },
+      "IncrementalCommitSeal": {
+        "current_tree_confirmation": "sealer/checkpoint consumers bind accepted parent plus complete valid changed/reused units",
+        "does_not": "arbitrary repository correctness",
+        "establishes": "accepted parent plus complete valid changed/reused units"
+      },
+      "IntegrityCommitment": {
+        "current_tree_confirmation": "admission integrity path rehashes digest/CID/Merkle inclusion only",
+        "does_not": "execution or semantics",
+        "establishes": "exact bytes/digest/CID/Merkle inclusion"
+      },
+      "ReceiptAggregationZkProof": {
+        "current_tree_confirmation": "admission rejects aggregation that claims tests executed; default aggregation is Merkle manifest, not recursive verification",
+        "does_not": "CPython execution and cannot exceed leaf evidence",
+        "establishes": "committed admitted receipt population satisfies circuit"
+      },
+      "SignedExecutionReceipt": {
+        "current_tree_confirmation": "runner attestation and admission treat this as allowlisted issuer assertion under verifier-selected policy/key/epoch/revocation; hermetic default is structural signature presence plus allowlist unless a cryptographic VerifierFn is injected",
+        "does_not": "independent faithful execution",
+        "establishes": "trusted issuer assertion under explicit verifier policy"
+      },
+      "TestPassStatementV1": {
+        "current_tree_path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py",
+        "legacy": "TestPassStatementV1 remains unchanged",
+        "predicate": "possession of an admitted complete-pass receipt whose constrained fields match reconstructed public bindings; not general program correctness, dependency-trace completeness, or future behavior"
+      },
+      "production": "simulated or structural proof cannot be admitted"
+    },
+    "signing": {
+      "admission_default_signature_check": "structural presence plus allowlist; production deployments must inject cryptographic VerifierFn",
+      "attestation_domain": "ipfs-test-pass-attestation/v1",
+      "cache_cannot_nominate_key_or_turn_signature_into_skip_authority": true,
+      "cid_profile": "CIDv1/base32/sha2-256",
+      "ordinary_inner_loop": "signed receipts permitted by explicit policy; ZK asynchronous",
+      "paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/admission.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_execution_contracts.py"
+      ],
+      "signed_test_pass_receipt_v2": "SignedTestPassReceiptV2"
+    },
+    "zk_backends": {
+      "direct_cpython": {
+        "classification": "research_only",
+        "production_admitted": false
+      },
+      "groth16": {
+        "binary_path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16",
+        "binary_present_on_current_tree": true,
+        "classification": "real_backend_binary_present_unqualified",
+        "default_disabled_unless_IPFS_DATASETS_ENABLE_GROTH16": true,
+        "discovery_also_considers": [
+          "IPFS_DATASETS_GROTH16_BINARY",
+          "GROTH16_BINARY",
+          "target/release/groth16",
+          "$HOME/.cargo/bin/groth16"
+        ],
+        "independent_binary_rehash_in_provider_session": "typed_unavailable",
+        "production_admitted": false,
+        "reason": "presence and key bytes do not establish ceremony/allowlist/current public-input binding",
+        "release_manifest_path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json",
+        "release_manifest_present": false,
+        "sealed_sha256": "sha256:7cd14f8810fda8c16bf8a3b3ad02fda67b3c85ff0fc05883e21825781e33ce15",
+        "source_paths": [
+          "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16.py",
+          "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16_ffi.py",
+          "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/"
+        ],
+        "validation_home_cargo_bin_not_usable": true
+      },
+      "hermetic_hmac": {
+        "classification": "test_adapter",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/provers.py",
+        "production_admitted": false
+      },
+      "provekit": {
+        "classification": "adapter_source_present",
+        "cli_discovery_env": [
+          "IPFS_DATASETS_PROVEKIT_CLI",
+          "IPFS_DATASETS_PROVEKIT_BIN",
+          "PROVEKIT_CLI",
+          "PROVEKIT_BIN"
+        ],
+        "cli_on_validation_PATH": "not_assumed",
+        "production_admitted": false,
+        "source_paths": [
+          "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/provekit.py",
+          "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/",
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/provekit_setup.py"
+        ]
+      },
+      "recursion": {
+        "default": "merkle_manifest_aggregation",
+        "existing_recursive_backend": "unsupported",
+        "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/backends.py"
+      },
+      "simulated": {
+        "classification": "simulated",
+        "default_backend_when_unspecified": true,
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/simulated.py",
+        "production_admitted": false
+      }
+    }
+  },
+  "declared_task_tree_id": "c488d97ed5665b5744d983fc4a294989df519361",
+  "dependency_receipts": [
+    "PCTDD-000"
+  ],
+  "goal_id": "PCTDD-G013",
+  "independent_tests": {
+    "commands": [
+      "python3 -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py external/ipfs_accelerate/test/api/incremental_sealing/test_provers.py external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py",
+      "python3 -m pytest -q external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_backend_selection.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_vk_registry.py",
+      "python3 -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py::test_evidence_subsets_and_closed_vocabularies external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py::test_evidence_subsets_and_closed_vocabularies external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py"
+    ],
+    "exact_tree_collectability": {
+      "blocked_by_absent_datasets_evidence_module": [
+        "external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py",
+        "external/ipfs_accelerate/test/api/incremental_sealing/test_crypto_trust_negative.py"
+      ],
+      "runnable_without_datasets_evidence_module": [
+        "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+        "external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py",
+        "external/ipfs_accelerate/test/api/incremental_sealing/test_provers.py",
+        "external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py",
+        "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+        "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_backend_selection.py",
+        "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py",
+        "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_vk_registry.py"
+      ]
+    },
+    "identity_proof_differential": [
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py::test_evidence_subsets_and_closed_vocabularies",
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py::test_evidence_subsets_and_closed_vocabularies",
+      "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py"
+    ],
+    "identity_proof_differential_blocked_by_absent_datasets_evidence_module": [
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py::test_receipt_aggregation_never_claims_tests_executed",
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py::test_integrity_admission_issues_verified_record",
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_admission.py::test_simulated_required_unit_rejects",
+      "external/ipfs_accelerate/test/api/incremental_sealing/test_crypto_trust_negative.py"
+    ],
+    "import_risk_on_exact_datasets_gitlink": "accelerate admission/trust-negative tests import ipfs_datasets_py.logic.zkp.incremental_sealing.evidence, which is absent from the sealed datasets gitlink; a site-packages datasets checkout is not this tree",
+    "provider_session_execution": {
+      "does_not_establish": "independent validator admission of this tree",
+      "reason": "provider-side probes are not the sealed validator. The independent validator must execute validation_commands (python3 -m pytest of the listed owning-repository and cross-package files, including identity/proof differential node ids) in the sealed PATH/HOME/python environment. The board Validation description is not a shell program.",
+      "status": "typed_unavailable"
+    }
+  },
+  "limitations": [
+    "Production Groth16/ProveKit key ceremony is typed unavailable: packaged binary and key bytes do not establish ceremony, allowlist, or current public-input binding.",
+    "Optional native/direct-execution profiles remain research_only and are not production admitted.",
+    "Aggregate selected-test ZK is missing; a versioned aggregate statement is typed unavailable without an admitted production key.",
+    "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence is absent from the sealed datasets gitlink even though accelerate imports it as the closed evidence-class authority.",
+    "groth16 release-manifest.json and tests/unit_tests/logic/zkp/test_groth16_native_release.py are absent from this datasets gitlink.",
+    "Independent SHA-256 rehash of the Groth16 binary was typed unavailable in this provider session; verifier admission must rehash the current-tree binary against the sealed digest.",
+    "Authoritative validation PATH is exactly /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin with python /usr/bin/python3.12 and a private HOME; ~/.elan, cargo, and provekit-cli are not assumed usable.",
+    "Coq is sealed typed_optional_unavailable_at_capture. Lean/cvc5 sealed availability does not imply the validation HOME can invoke them.",
+    "IPFS_DATASETS_ENABLE_GROTH16 defaults to disabled. Simulated, mock, structural, hermetic-HMAC, and integrity-only paths cannot be promoted to production.",
+    "Unknown dependency or fixture semantics force full hashing/execution/reproof fallback.",
+    "Markdown, including datasets ZKP README production language, is non-authoritative and must not widen sealed claim meaning.",
+    "The PCTDD-003 board Validation line is a description (focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable), not executable shell. Executable checks are validation_commands."
+  ],
+  "markdown_non_authoritative": true,
+  "objective_id": "PCTDD-003",
+  "plan_revision": "PCTDD-PLAN-V1",
+  "proof_claim_class": "IntegrityCommitment",
+  "reconciliation": {
+    "accelerate_owned_admission_authority": "ipfs_accelerate_py",
+    "datasets_owned_statement_authority": "ipfs_datasets_py",
+    "forbidden_duplicates_unchanged": true,
+    "kit_owned_storage_authority": "ipfs_kit_py",
+    "meaning_delta": "none; sealed establishes/does_not strings are copied, not rewritten",
+    "result": "current-tree code and tests consume the sealed claim matrix; gaps are typed unavailable rather than claim upgrades"
+  },
+  "schema": "pctdd/inventory-receipt@1",
+  "source_binding": {
+    "ipfs_accelerate_py": {
+      "gitlink": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+      "head": "cfbd381ee6196e818ecd59a438386a60b5d71bd7",
+      "path": "external/ipfs_accelerate",
+      "tree": "c7b788c1b23a87f461579bde461a61ecb66e9fa2"
+    },
+    "ipfs_datasets_py": {
+      "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "path": "external/ipfs_datasets",
+      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+    },
+    "ipfs_kit_py": {
+      "gitlink": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "path": "external/ipfs_kit",
+      "tree": "93070c709af29095fdff11f3e2698543449c08ef"
+    },
+    "planning_revision_is_runtime_completion_evidence": false,
+    "sealed_planning_base_head": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "sealed_planning_base_tree": "e35dfaebbd229d7e7de988b2e0345444d9284221"
+  },
+  "status": "inventory_reconciled_pending_evidence_gated_database_completion",
+  "task_id": "PCTDD-003",
+  "title": "Inventory ZK, signing, key, and proof claim boundaries",
+  "unsupported_unavailable": [
+    {
+      "case": "production_groth16_key_ceremony",
+      "classification": "typed_unavailable",
+      "production_admitted": false
+    },
+    {
+      "case": "production_provekit_cli_and_keys",
+      "classification": "typed_unavailable",
+      "production_admitted": false
+    },
+    {
+      "case": "aggregate_selected_test_zk",
+      "classification": "missing",
+      "production_admitted": false
+    },
+    {
+      "case": "direct_cpython_execution_proof_profile",
+      "classification": "research_only",
+      "production_admitted": false
+    },
+    {
+      "case": "datasets_incremental_sealing_evidence_module",
+      "classification": "absent_from_sealed_datasets_gitlink",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing/evidence.py",
+      "production_admitted": false
+    },
+    {
+      "case": "recursive_proof_verification",
+      "classification": "unsupported",
+      "default": "merkle_manifest_aggregation",
+      "production_admitted": false
+    },
+    {
+      "case": "simulated_or_structural_or_hermetic_hmac_proof",
+      "classification": "simulated",
+      "production_admitted": false
+    },
+    {
+      "case": "coq_theorem_prover",
+      "classification": "typed_optional_unavailable_at_capture",
+      "production_admitted": false
+    }
+  ],
+  "validation": "python3 -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py external/ipfs_accelerate/test/api/incremental_sealing/test_provers.py external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py; python3 -m pytest -q external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_backend_selection.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_vk_registry.py; python3 -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py::test_evidence_subsets_and_closed_vocabularies external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py::test_evidence_subsets_and_closed_vocabularies external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+  "validation_commands": [
+    "python3 -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py external/ipfs_accelerate/test/api/incremental_sealing/test_provers.py external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py",
+    "python3 -m pytest -q external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_backend_selection.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_vk_registry.py",
+    "python3 -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py::test_evidence_subsets_and_closed_vocabularies external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py::test_evidence_subsets_and_closed_vocabularies external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py"
+  ],
+  "validation_environment": {
+    "canonical_python": "/usr/bin/python3.12",
+    "home_is_private_validation_home": true,
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "provider_inherited_path_ignored": true,
+    "user_writable_toolchains_rejected": true
+  },
+  "validations": [
+    "python3 -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py external/ipfs_accelerate/test/api/incremental_sealing/test_provers.py external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py",
+    "python3 -m pytest -q external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_backend_selection.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_vk_registry.py",
+    "python3 -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py::test_evidence_subsets_and_closed_vocabularies external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py::test_evidence_subsets_and_closed_vocabularies external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py"
+  ],
+  "verifier_admission": {
+    "does_not": "execution or semantics",
+    "establishes": "exact bytes/digest/CID/Merkle inclusion of this inventory",
+    "proof_claim_class": "IntegrityCommitment",
+    "production_admitted": false,
+    "receipt_cid_computation": "independent verifier SHA-256 of the committed UTF-8 bytes of this file",
+    "receipt_cid_profile": "sha256-canonical-json-v1",
+    "receipt_cid_status": "typed_unavailable_until_independent_rehash",
+    "simulated_proof_admitted": false,
+    "this_receipt_cannot_complete_the_task": true
+  }
+}
