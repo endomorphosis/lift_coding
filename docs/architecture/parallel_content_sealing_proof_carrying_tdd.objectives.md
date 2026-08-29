@@ -1,6 +1,6 @@
 # PCTDD objective hierarchy
 
-Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PLAN-V1`. DuckDB/Quack becomes live authority after evidence-gated materialization; this file is non-authoritative bootstrap intent.
+Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PLAN-V1.1` (amending `PCTDD-PLAN-V1`). DuckDB/Quack becomes live authority after evidence-gated materialization; this file is non-authoritative bootstrap intent.
 
 ## PCTDD-G000 Deliver and self-host parallel content sealing and proof-carrying TDD
 
@@ -22,7 +22,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Priority: P0
 - Track: pctdd-g010
 - Goal: Freeze authorities, claims, baselines, and controls while preserving exact identity, claim, storage, execution, and publication authorities.
-- Producing tasks: PCTDD-000
+- Producing tasks: PCTDD-000, PCTDD-001, PCTDD-002, PCTDD-003, PCTDD-004
 - Evidence: artifacts/parallel_content_sealing_proof_carrying_tdd/goals/PCTDD-G010.json
 - Acceptance: All producing tasks and child goals have independently admitted current-tree evidence or an explicitly permitted typed terminal, with no weakened safety floor.
 
@@ -70,7 +70,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Priority: P0
 - Track: pctdd-g020
 - Goal: Build parallel incremental content preparation while preserving exact identity, claim, storage, execution, and publication authorities.
-- Producing tasks: PCTDD-000, PCTDD-001, PCTDD-002, PCTDD-003, PCTDD-004, PCTDD-005, PCTDD-006, PCTDD-007, PCTDD-008, PCTDD-009, PCTDD-010, PCTDD-011, PCTDD-012, PCTDD-013, PCTDD-014, PCTDD-015, PCTDD-016, PCTDD-017, PCTDD-018, PCTDD-019, PCTDD-020, PCTDD-021, PCTDD-022, PCTDD-023, PCTDD-024, PCTDD-025, PCTDD-026, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-030, PCTDD-031, PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035, PCTDD-036, PCTDD-037, PCTDD-038, PCTDD-039, PCTDD-040, PCTDD-041, PCTDD-042, PCTDD-043, PCTDD-044, PCTDD-045, PCTDD-046, PCTDD-047, PCTDD-048, PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052, PCTDD-053
+- Producing tasks: PCTDD-005, PCTDD-006, PCTDD-007, PCTDD-008, PCTDD-009, PCTDD-010, PCTDD-011, PCTDD-012, PCTDD-013, PCTDD-014, PCTDD-015, PCTDD-016, PCTDD-017, PCTDD-018, PCTDD-019, PCTDD-020
 - Evidence: artifacts/parallel_content_sealing_proof_carrying_tdd/goals/PCTDD-G020.json
 - Acceptance: All producing tasks and child goals have independently admitted current-tree evidence or an explicitly permitted typed terminal, with no weakened safety floor.
 
@@ -118,7 +118,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Priority: P0
 - Track: pctdd-g030
 - Goal: Build fixture-aware exact pytest reuse while preserving exact identity, claim, storage, execution, and publication authorities.
-- Producing tasks: PCTDD-000, PCTDD-001, PCTDD-002, PCTDD-003, PCTDD-004, PCTDD-005, PCTDD-006, PCTDD-007, PCTDD-008, PCTDD-009, PCTDD-010, PCTDD-011, PCTDD-012, PCTDD-013, PCTDD-014, PCTDD-015, PCTDD-016, PCTDD-017, PCTDD-018, PCTDD-019, PCTDD-020, PCTDD-021, PCTDD-022, PCTDD-023, PCTDD-024, PCTDD-025, PCTDD-026, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-030, PCTDD-031, PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035, PCTDD-036, PCTDD-037, PCTDD-038, PCTDD-039, PCTDD-040, PCTDD-041, PCTDD-042, PCTDD-043, PCTDD-044, PCTDD-045, PCTDD-046, PCTDD-047, PCTDD-048, PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052, PCTDD-053
+- Producing tasks: PCTDD-021, PCTDD-022, PCTDD-023, PCTDD-024, PCTDD-025, PCTDD-026, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-030, PCTDD-031
 - Evidence: artifacts/parallel_content_sealing_proof_carrying_tdd/goals/PCTDD-G030.json
 - Acceptance: All producing tasks and child goals have independently admitted current-tree evidence or an explicitly permitted typed terminal, with no weakened safety floor.
 
@@ -166,7 +166,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Priority: P0
 - Track: pctdd-g040
 - Goal: Build batched proof and ZK certification while preserving exact identity, claim, storage, execution, and publication authorities.
-- Producing tasks: PCTDD-000, PCTDD-001, PCTDD-002, PCTDD-003, PCTDD-004, PCTDD-005, PCTDD-006, PCTDD-007, PCTDD-008, PCTDD-009, PCTDD-010, PCTDD-011, PCTDD-012, PCTDD-013, PCTDD-014, PCTDD-015, PCTDD-016, PCTDD-017, PCTDD-018, PCTDD-019, PCTDD-020, PCTDD-021, PCTDD-022, PCTDD-023, PCTDD-024, PCTDD-025, PCTDD-026, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-030, PCTDD-031, PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035, PCTDD-036, PCTDD-037, PCTDD-038, PCTDD-039, PCTDD-040, PCTDD-041, PCTDD-042, PCTDD-043, PCTDD-044, PCTDD-045, PCTDD-046, PCTDD-047, PCTDD-048, PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052, PCTDD-053
+- Producing tasks: PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035, PCTDD-036, PCTDD-037, PCTDD-038, PCTDD-039
 - Evidence: artifacts/parallel_content_sealing_proof_carrying_tdd/goals/PCTDD-G040.json
 - Acceptance: All producing tasks and child goals have independently admitted current-tree evidence or an explicitly permitted typed terminal, with no weakened safety floor.
 
@@ -214,7 +214,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Priority: P0
 - Track: pctdd-g050
 - Goal: Integrate the fast TDD loop with supervisor intelligence while preserving exact identity, claim, storage, execution, and publication authorities.
-- Producing tasks: PCTDD-000, PCTDD-001, PCTDD-002, PCTDD-003, PCTDD-004, PCTDD-005, PCTDD-006, PCTDD-007, PCTDD-008, PCTDD-009, PCTDD-010, PCTDD-011, PCTDD-012, PCTDD-013, PCTDD-014, PCTDD-015, PCTDD-016, PCTDD-017, PCTDD-018, PCTDD-019, PCTDD-020, PCTDD-021, PCTDD-022, PCTDD-023, PCTDD-024, PCTDD-025, PCTDD-026, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-030, PCTDD-031, PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035, PCTDD-036, PCTDD-037, PCTDD-038, PCTDD-039, PCTDD-040, PCTDD-041, PCTDD-042, PCTDD-043, PCTDD-044, PCTDD-045, PCTDD-046, PCTDD-047, PCTDD-048, PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052, PCTDD-053
+- Producing tasks: PCTDD-040, PCTDD-041, PCTDD-042, PCTDD-043, PCTDD-044, PCTDD-045, PCTDD-046, PCTDD-047
 - Evidence: artifacts/parallel_content_sealing_proof_carrying_tdd/goals/PCTDD-G050.json
 - Acceptance: All producing tasks and child goals have independently admitted current-tree evidence or an explicitly permitted typed terminal, with no weakened safety floor.
 
@@ -262,7 +262,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Priority: P0
 - Track: pctdd-g060
 - Goal: Qualify security, performance, recovery, and release while preserving exact identity, claim, storage, execution, and publication authorities.
-- Producing tasks: PCTDD-000, PCTDD-001, PCTDD-002, PCTDD-003, PCTDD-004, PCTDD-005, PCTDD-006, PCTDD-007, PCTDD-008, PCTDD-009, PCTDD-010, PCTDD-011, PCTDD-012, PCTDD-013, PCTDD-014, PCTDD-015, PCTDD-016, PCTDD-017, PCTDD-018, PCTDD-019, PCTDD-020, PCTDD-021, PCTDD-022, PCTDD-023, PCTDD-024, PCTDD-025, PCTDD-026, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-030, PCTDD-031, PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035, PCTDD-036, PCTDD-037, PCTDD-038, PCTDD-039, PCTDD-040, PCTDD-041, PCTDD-042, PCTDD-043, PCTDD-044, PCTDD-045, PCTDD-046, PCTDD-047, PCTDD-048, PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052, PCTDD-053
+- Producing tasks: PCTDD-048, PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052, PCTDD-053
 - Evidence: artifacts/parallel_content_sealing_proof_carrying_tdd/goals/PCTDD-G060.json
 - Acceptance: All producing tasks and child goals have independently admitted current-tree evidence or an explicitly permitted typed terminal, with no weakened safety floor.
 

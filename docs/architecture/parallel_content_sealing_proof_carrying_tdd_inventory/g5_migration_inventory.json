@@ -1,0 +1,85 @@
+{
+  "migration_policy": {
+    "copy_attempt_failures": false,
+    "copy_task_status_or_acceptance": false,
+    "g5_is_immutable_history": true,
+    "no_secrets_recorded": true,
+    "require_fresh_g6_materialization": true,
+    "require_independent_g6_validation": true,
+    "rescue_candidates_are_authority": false
+  },
+  "predecessor": {
+    "bootstrap_event_watermark": 103,
+    "bootstrap_receipt_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g5/evidence/bootstrap/pctdd-bootstrap.json",
+    "bootstrap_receipt_sha256": "6c65b2ad424683c110867c8842e46b256af93dc7116f35f2c102a857b6893616",
+    "frozen_database_path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g5/control.duckdb",
+    "frozen_database_sha256": "e7aa5935d452f2df2bff462467799a57994771a8971cd20528d56284bd4ec5a5",
+    "pctdd_000_completion_receipt_cid": "baguqeeray2wlpjlflnaxx7jpynquwhpenm7hk6pwwkxsmxwzr6eopltnccua",
+    "plan_revision": "PCTDD-PLAN-V1",
+    "plan_root_cid": "baguqeeraqwk4z47whu652pvidcaxeyjkp6dmeuxhevmjhkpjehxdpmstsukq",
+    "preserved_failed_validation_rescue_branch_count": 29,
+    "source_head": "c488d97ed5665b5744d983fc4a294989df519361",
+    "source_tree": "e3fda4eaaecf14a56815f586df05feb94f093979",
+    "store_generation": "pctdd-v1-g5"
+  },
+  "program_id": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "schema": "pctdd/control-generation-migration@1",
+  "successor": {
+    "plan_revision": "PCTDD-PLAN-V1.1",
+    "quack_endpoint": "quack:127.0.0.1:42778",
+    "runtime_root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6",
+    "store_generation": "pctdd-v1-g6"
+  },
+  "w1_rescue_candidates": {
+    "PCTDD-001": {
+      "admitted": false,
+      "application_policy": "never cherry-pick the stale outer receipt commit; independently implement or recover component changes and issue fresh g6 evidence",
+      "classification": "receipt-observation-only",
+      "component_commits": {},
+      "outer_changed_paths": [
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json"
+      ],
+      "outer_commit": "e623dd43dbc8f8feb503dd8dea2a6afb4bbd26c0"
+    },
+    "PCTDD-002": {
+      "admitted": false,
+      "application_policy": "never cherry-pick the stale outer receipt commit; independently implement or recover component changes and issue fresh g6 evidence",
+      "classification": "receipt-observation-only",
+      "component_commits": {},
+      "outer_changed_paths": [
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json"
+      ],
+      "outer_commit": "25b2a4e0fd1ab354a0db5317ec8ea49ce0319a61"
+    },
+    "PCTDD-003": {
+      "admitted": false,
+      "application_policy": "never cherry-pick the stale outer receipt commit; independently implement or recover component changes and issue fresh g6 evidence",
+      "classification": "receipt-observation-only",
+      "component_commits": {},
+      "outer_changed_paths": [
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json"
+      ],
+      "outer_commit": "37ccf1a42d7bbf0a6cad0a20a7671ddc0cbffac6"
+    },
+    "PCTDD-004": {
+      "admitted": false,
+      "application_policy": "never adopt the outer gitlink; cherry-pick or adapt only the nested component diff onto the current supervisor-fix descendant and run fresh g6 validation",
+      "classification": "component-reuse-candidate-only",
+      "component_commits": {
+        "external/ipfs_accelerate": {
+          "changed_paths": [
+            "ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py",
+            "test/api/parallel_content_sealing/test_cold_warm_critical_path.py"
+          ],
+          "commit": "48edb688ac31bc3d05fdd5c8efd7e50ab14b755e",
+          "prior_gitlink": "cfbd381ee6196e818ecd59a438386a60b5d71bd7"
+        }
+      },
+      "outer_changed_paths": [
+        "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json",
+        "external/ipfs_accelerate"
+      ],
+      "outer_commit": "2b37146f4f2f354ced02ca5327d0a7d21344f044"
+    }
+  }
+}

@@ -1,0 +1,2927 @@
+{
+  "dispatcher": "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py",
+  "execution": "argv-only subprocess with shell=False",
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "profiles": {
+    "PCTDD-000": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 900
+        },
+        {
+          "argv": [
+            "python",
+            "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
+            "--check-all"
+          ],
+          "cwd": ".",
+          "evidence_policy": "operator_validator",
+          "timeout_seconds": 900
+        },
+        {
+          "argv": [
+            "python",
+            "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
+            "--check-all"
+          ],
+          "cwd": ".",
+          "evidence_policy": "operator_validator",
+          "timeout_seconds": 900
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-000@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
+      "shell": false,
+      "task_id": "PCTDD-000"
+    },
+    "PCTDD-001": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/utils/test_cid_utils.py",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/ir_core/test_identity.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_multiformats_identity.py",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py",
+      "shell": false,
+      "task_id": "PCTDD-001"
+    },
+    "PCTDD-002": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_item_identity.py",
+            "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_plugin.py",
+            "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_lookup.py",
+            "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_receipt.py",
+            "external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py",
+            "external/ipfs_accelerate/test/api/test_proof_reuse_runtime_composition.py",
+            "external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py",
+            "external/ipfs_accelerate/test/api/test_proof_reuse_default_identity_services.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_test_execution_identity.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_test_execution_identity_vectors.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_proof_reuse_locator_first_collection.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "isolated_predecessor_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_pyproject_declares_shared_pytest_entry_point",
+            "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_direct_node_pickup_with_entry_point_autoload_modes[entry-point]",
+            "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_missing_shared_plugin_executes_normally",
+            "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_missing_store_and_multiformats_execute_normally",
+            "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_explicit_off_mode_executes_normally",
+            "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_coverage_execution_remains_available",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "explicit_green_predecessor_nodes",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [
+        {
+          "authoritative_acceptance": false,
+          "node_id": "external/ipfs_accelerate/test/api/test_proof_reuse_locator_first_collection.py::test_plugin_collection_attaches_seed_in_read_mode",
+          "observed_outcome": "failed_only_in_combined_predecessor_process",
+          "reason_code": "pytest_global_class_identity_collision",
+          "treatment": "run the complete locator module in an isolated pytest process; do not count the excluded combined-process observation as acceptance"
+        },
+        {
+          "authoritative_acceptance": false,
+          "node_id": "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_direct_node_pickup_with_entry_point_autoload_modes[root-fallback]",
+          "observed_outcome": "failed_preexisting_baseline",
+          "reason_code": "kit_root_fallback_predecessor_failure",
+          "treatment": "exclude only this exact historical node; require repair before protected promotion"
+        },
+        {
+          "authoritative_acceptance": false,
+          "node_id": "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py::test_verified_hit_skips_before_fixtures_without_ipfs_or_daemon_touch",
+          "observed_outcome": "failed_preexisting_baseline",
+          "reason_code": "legacy_skip_semantics_conflict",
+          "treatment": "exclude only this exact legacy node; composite-phase work must replace rather than bless skip semantics"
+        }
+      ],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-002@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py",
+      "shell": false,
+      "task_id": "PCTDD-002"
+    },
+    "PCTDD-003": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_zkp_module.py",
+            "external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_backends.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_provers.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-003@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py",
+      "shell": false,
+      "task_id": "PCTDD-003"
+    },
+    "PCTDD-004": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-004@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py",
+      "shell": false,
+      "task_id": "PCTDD-004"
+    },
+    "PCTDD-005": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py",
+      "shell": false,
+      "task_id": "PCTDD-005"
+    },
+    "PCTDD-006": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py",
+      "shell": false,
+      "task_id": "PCTDD-006"
+    },
+    "PCTDD-007": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-007@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py",
+      "shell": false,
+      "task_id": "PCTDD-007"
+    },
+    "PCTDD-008": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-008@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py",
+      "shell": false,
+      "task_id": "PCTDD-008"
+    },
+    "PCTDD-009": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-009@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py",
+      "shell": false,
+      "task_id": "PCTDD-009"
+    },
+    "PCTDD-010": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-010@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py",
+      "shell": false,
+      "task_id": "PCTDD-010"
+    },
+    "PCTDD-011": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-011@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py",
+      "shell": false,
+      "task_id": "PCTDD-011"
+    },
+    "PCTDD-012": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-012@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py",
+      "shell": false,
+      "task_id": "PCTDD-012"
+    },
+    "PCTDD-013": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-013@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py",
+      "shell": false,
+      "task_id": "PCTDD-013"
+    },
+    "PCTDD-014": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-014@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py",
+      "shell": false,
+      "task_id": "PCTDD-014"
+    },
+    "PCTDD-015": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-015@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py",
+      "shell": false,
+      "task_id": "PCTDD-015"
+    },
+    "PCTDD-016": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-016@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py",
+      "shell": false,
+      "task_id": "PCTDD-016"
+    },
+    "PCTDD-017": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-017@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py",
+      "shell": false,
+      "task_id": "PCTDD-017"
+    },
+    "PCTDD-018": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-018@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py",
+      "shell": false,
+      "task_id": "PCTDD-018"
+    },
+    "PCTDD-019": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-019@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py",
+      "shell": false,
+      "task_id": "PCTDD-019"
+    },
+    "PCTDD-020": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-020@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py",
+      "shell": false,
+      "task_id": "PCTDD-020"
+    },
+    "PCTDD-021": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-021@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py",
+      "shell": false,
+      "task_id": "PCTDD-021"
+    },
+    "PCTDD-022": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-022@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py",
+      "shell": false,
+      "task_id": "PCTDD-022"
+    },
+    "PCTDD-023": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-023@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py",
+      "shell": false,
+      "task_id": "PCTDD-023"
+    },
+    "PCTDD-024": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-024@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py",
+      "shell": false,
+      "task_id": "PCTDD-024"
+    },
+    "PCTDD-025": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-025@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py",
+      "shell": false,
+      "task_id": "PCTDD-025"
+    },
+    "PCTDD-026": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-026@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py",
+      "shell": false,
+      "task_id": "PCTDD-026"
+    },
+    "PCTDD-027": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-027@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py",
+      "shell": false,
+      "task_id": "PCTDD-027"
+    },
+    "PCTDD-028": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-028@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py",
+      "shell": false,
+      "task_id": "PCTDD-028"
+    },
+    "PCTDD-029": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-029@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py",
+      "shell": false,
+      "task_id": "PCTDD-029"
+    },
+    "PCTDD-030": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-030@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py",
+      "shell": false,
+      "task_id": "PCTDD-030"
+    },
+    "PCTDD-031": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-031@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py",
+      "shell": false,
+      "task_id": "PCTDD-031"
+    },
+    "PCTDD-032": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-032@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py",
+      "shell": false,
+      "task_id": "PCTDD-032"
+    },
+    "PCTDD-033": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-033@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py",
+      "shell": false,
+      "task_id": "PCTDD-033"
+    },
+    "PCTDD-034": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py",
+      "shell": false,
+      "task_id": "PCTDD-034"
+    },
+    "PCTDD-035": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-035@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py",
+      "shell": false,
+      "task_id": "PCTDD-035"
+    },
+    "PCTDD-036": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-036@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py",
+      "shell": false,
+      "task_id": "PCTDD-036"
+    },
+    "PCTDD-037": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-037@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py",
+      "shell": false,
+      "task_id": "PCTDD-037"
+    },
+    "PCTDD-038": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-038@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py",
+      "shell": false,
+      "task_id": "PCTDD-038"
+    },
+    "PCTDD-039": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-039@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py",
+      "shell": false,
+      "task_id": "PCTDD-039"
+    },
+    "PCTDD-040": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-040@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py",
+      "shell": false,
+      "task_id": "PCTDD-040"
+    },
+    "PCTDD-041": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-041@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py",
+      "shell": false,
+      "task_id": "PCTDD-041"
+    },
+    "PCTDD-042": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-042@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py",
+      "shell": false,
+      "task_id": "PCTDD-042"
+    },
+    "PCTDD-043": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-043@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py",
+      "shell": false,
+      "task_id": "PCTDD-043"
+    },
+    "PCTDD-044": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-044@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py",
+      "shell": false,
+      "task_id": "PCTDD-044"
+    },
+    "PCTDD-045": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-045@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py",
+      "shell": false,
+      "task_id": "PCTDD-045"
+    },
+    "PCTDD-046": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-046@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py",
+      "shell": false,
+      "task_id": "PCTDD-046"
+    },
+    "PCTDD-047": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-047@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py",
+      "shell": false,
+      "task_id": "PCTDD-047"
+    },
+    "PCTDD-048": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-048@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py",
+      "shell": false,
+      "task_id": "PCTDD-048"
+    },
+    "PCTDD-049": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-049@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py",
+      "shell": false,
+      "task_id": "PCTDD-049"
+    },
+    "PCTDD-050": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-050@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py",
+      "shell": false,
+      "task_id": "PCTDD-050"
+    },
+    "PCTDD-051": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-051@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py",
+      "shell": false,
+      "task_id": "PCTDD-051"
+    },
+    "PCTDD-052": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-052@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py",
+      "shell": false,
+      "task_id": "PCTDD-052"
+    },
+    "PCTDD-053": {
+      "commands": [
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "required_acceptance",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing/test_trust.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/test_content_identity.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        },
+        {
+          "argv": [
+            "python",
+            "-m",
+            "pytest",
+            "-q",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_semantic_state_root_cas.py",
+            "--tb=short"
+          ],
+          "cwd": ".",
+          "evidence_policy": "protected_baseline_regression",
+          "timeout_seconds": 3600
+        }
+      ],
+      "known_baseline_exclusions": [],
+      "profile_id": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-053@1",
+      "required_acceptance": {
+        "controller_owned_independent_validation": true,
+        "disallowed_outcomes": [
+          "failed",
+          "skipped",
+          "xfail",
+          "xpass",
+          "error",
+          "rerun"
+        ],
+        "machine_readable_pytest_phase_evidence": true,
+        "worker_authored_test_is_sufficient_alone": false
+      },
+      "required_test_target": "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py",
+      "shell": false,
+      "task_id": "PCTDD-053"
+    }
+  },
+  "schema": "pctdd/task-validation-profiles@1"
+}

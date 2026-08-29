@@ -1,6 +1,23 @@
-# Parallel Content Sealing and Proof-Carrying TDD — PCTDD-PLAN-V1
+# Parallel Content Sealing and Proof-Carrying TDD — PCTDD-PLAN-V1.1
 
-Status: sealed bootstrap control program. Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`.
+Status: sealed bootstrap control amendment. Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`.
+
+## V1.1 control amendment and generation migration
+
+This revision amends `PCTDD-PLAN-V1` after g5 exposed a
+control-plane defect: non-executable validation prose was materialized as a
+command and repeated database claims could outlive the intended attempt cap.
+The g5 database, event watermark, accepted PCTDD-000 receipt, failures, and 29
+rescue branches remain immutable history. Nothing in g5 is reopened or
+silently promoted. The successor is a fresh `pctdd-v1-g6` authority at
+`data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6`, served by `quack:127.0.0.1:42778`.
+
+Every task names one protected validation profile through a task-bound
+dispatcher. Profiles contain argv arrays only and execute with `shell=False`.
+Prose, shell operators, unresolved aliases, mismatched task IDs, incomplete
+profile coverage, and profile drift fail before provider dispatch. Recorded W1
+rescue commits are exact-reuse candidates only and require independent g6
+source/profile/policy validation before admission.
 
 ## Outcome and invariant
 

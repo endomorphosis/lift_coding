@@ -1,6 +1,6 @@
 # PCTDD supervisor task board
 
-Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PLAN-V1`. This is a sealed bootstrap projection; DuckDB through Quack owns live status. Markdown is non-authoritative and is not completion authority. PCTDD-000 remains `todo` here and is completed only by an evidence-gated task-store transaction.
+Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PLAN-V1.1` (fresh `pctdd-v1-g6`, preserving g5 as immutable predecessor history). This is a sealed bootstrap projection; DuckDB through Quack owns live status. Markdown is non-authoritative and is not completion authority. PCTDD-000 remains `todo` here and is completed only by an evidence-gated task-store transaction.
 
 ## Execution invariants
 
@@ -21,24 +21,28 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: operator
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: bootstrap_operator
+- Provider role: operator-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: none
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json
-- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json
+- Directive: Execute PCTDD-000 through the existing repository authorities and prove that the V1.1 amendment, g5 migration record, g6 paths, profiles, seal and dry-run agree. Produce test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: none
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json, config/parallel_content_sealing_proof_carrying_tdd_benchmark.json, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json, config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json, config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json, scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py, scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py, scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py, scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py
 - Predicted symbols: Freezeprogramcontrols,baseline,seals,andscheduler; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json; emit immutable receipt; request reviewed merge through existing authority
-- Validation: python scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py --check-all && python scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py --check-all
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json, config/parallel_content_sealing_proof_carrying_tdd_benchmark.json, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json, config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json, config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json, scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py, scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py, scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py, scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-000@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-000
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Freeze program controls, baseline, seals, and scheduler is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: Execute sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-000@1 including test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py, both protected validators, canonical configured-board preflight, and implementation dry-run at one exact clean HEAD/tree; then record their digests in the staged operator-seal receipt before the DuckDB CAS may complete PCTDD-000.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: operator inventory, deterministic validators, source seals, and scheduler dry-run
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
-- Protected paths: config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json, config/parallel_content_sealing_proof_carrying_tdd_benchmark.json, config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json, scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py, scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py, scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py
+- Protected paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json, config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json, config/parallel_content_sealing_proof_carrying_tdd_benchmark.json, config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json, config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json, config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json, docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json, scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py, scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py, scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py, scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py, scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py, test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
 - Goal id: PCTDD-G010
 - Board namespace: parallel-content-sealing-proof-carrying-tdd-v1
@@ -56,22 +60,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-001 through the existing repository authorities and prove that every current source-to-CID and seal-publication path is inventoried without changing identity. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
+- Predecessor rescue candidate: e623dd43dbc8f8feb503dd8dea2a6afb4bbd26c0; exact-reuse candidate only; independently revalidate against exact g6 source/profile/policy
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py
 - Predicted symbols: InventorycurrentCID,SHA,canonicalization,andsealpaths; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-001
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Inventory current CID, SHA, canonicalization, and seal paths is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that every current source-to-CID and seal-publication path is inventoried without changing identity; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -91,22 +99,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-002 through the existing repository authorities and prove that collection, fixture timing, DI, runtime trace and xdist publication boundaries are mapped. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
+- Predecessor rescue candidate: 25b2a4e0fd1ab354a0db5317ec8ea49ce0319a61; exact-reuse candidate only; independently revalidate against exact g6 source/profile/policy
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py
 - Predicted symbols: Inventorycurrentpytestproof-reuseidentityandDIpaths; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-002.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-002@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-002
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Inventory current pytest proof-reuse identity and DI paths is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_002_pytest_identity_inventory.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-002@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that collection, fixture timing, DI, runtime trace and xdist publication boundaries are mapped; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -126,22 +138,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-003 through the existing repository authorities and prove that real, simulated, signed, aggregate, direct and incremental evidence remain distinctly classified. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
+- Predecessor rescue candidate: 37ccf1a42d7bbf0a6cad0a20a7671ddc0cbffac6; exact-reuse candidate only; independently revalidate against exact g6 source/profile/policy
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py
 - Predicted symbols: InventoryZK,signing,key,andproofclaimboundaries; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-003.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-003@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-003
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Inventory ZK, signing, key, and proof claim boundaries is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_003_proof_claim_inventory.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-003@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that real, simulated, signed, aggregate, direct and incremental evidence remain distinctly classified; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -161,22 +177,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-004 through the existing repository authorities and prove that cold and warm stages report timing and byte counters without changing behavior. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-000
+- Predecessor rescue candidate: 2b37146f4f2f354ced02ca5327d0a7d21344f044; exact-reuse candidate only; independently revalidate against exact g6 source/profile/policy
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-004.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py, external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py
 - Predicted symbols: Instrumentthecurrentcoldandwarmcriticalpath; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/critical_path.py, external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-004@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-004
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Instrument the current cold and warm critical path is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_cold_warm_critical_path.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-004@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that cold and warm stages report timing and byte counters without changing behavior; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -196,22 +216,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-005 through the existing repository authorities and prove that prepared canonical blocks preserve existing canonical bytes and CIDs under golden vectors. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py
 - Predicted symbols: Definepreparedcanonicalblockandbatchcontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-005
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Define prepared canonical block and batch contracts is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that prepared canonical blocks preserve existing canonical bytes and CIDs under golden vectors; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -231,22 +255,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-006 through the existing repository authorities and prove that Git blobs remain memo keys and dirty metadata remains candidate-only. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py
 - Predicted symbols: Implementsource-objectidentitybridging; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-006
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement source-object identity bridging is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that Git blobs remain memo keys and dirty metadata remains candidate-only; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -266,22 +294,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001, PCTDD-003
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-007.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-007 through the existing repository authorities and prove that datasets-owned hash memo schemas bind every authority-relevant profile and invalidator. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001, PCTDD-003
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-007.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py
 - Predicted symbols: Implementpersistentverifiedhashmemocontractsindatasets; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-007@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-007
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement persistent verified hash memo contracts in datasets is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-007@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that datasets-owned hash memo schemas bind every authority-relevant profile and invalidator; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -301,22 +333,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_kit_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-007
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-008.json
-- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal
+- Directive: Execute PCTDD-008 through the existing repository authorities and prove that kit stores and verifies memo bytes while never deciding semantic reuse. Produce external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-007
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-008.json, external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py
+- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py
 - Predicted symbols: Implementthekithash-memostore; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-008@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-008
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement the kit hash-memo store is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_kit/tests/proof_seal/test_pctdd_008_hash_memo_store.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-008@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that kit stores and verifies memo bytes while never deciding semantic reuse; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -336,22 +372,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-006
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-009.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-009 through the existing repository authorities and prove that raw full-stream CIDs remain distinct from ordered chunk-manifest CIDs. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-006
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-009.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py
 - Predicted symbols: Implementfilechunkmanifestsandauxiliarychange-detectionprofiles; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-009@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-009
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement file chunk manifests and auxiliary change-detection profiles is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_009_file_chunk_manifest.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-009@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that raw full-stream CIDs remain distinct from ordered chunk-manifest CIDs; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -371,22 +411,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-004, PCTDD-005, PCTDD-006, PCTDD-007
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-010.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-010 through the existing repository authorities and prove that bounded independent hashing is deterministic across completion order and fallback paths. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-004, PCTDD-005, PCTDD-006, PCTDD-007
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-010.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py
 - Predicted symbols: Implementparallelcanonicalizationandhashscheduling; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-010@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-010
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement parallel canonicalization and hash scheduling is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_010_parallel_hash_scheduler.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-010@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that bounded independent hashing is deterministic across completion order and fallback paths; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -406,22 +450,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-010
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-011.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-011 through the existing repository authorities and prove that native hashing is byte-identical or returns a typed unavailable result without installation. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-010
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-011.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py
 - Predicted symbols: Implementoptionalnative/Rustbatchhashingqualification; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-011@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-011
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement optional native/Rust batch hashing qualification is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_011_native_hash_qualification.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-011@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that native hashing is byte-identical or returns a typed unavailable result without installation; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -441,22 +489,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_kit_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-008, PCTDD-010
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-012.json
-- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal
+- Directive: Execute PCTDD-012 through the existing repository authorities and prove that concurrent immutable puts rehash bytes before reference and cannot publish a root. Produce external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-008, PCTDD-010
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-012.json, external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py
+- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py
 - Predicted symbols: Implementverifiedbatchimmutableblockstorage; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-012@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-012
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement verified batch immutable block storage is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_kit/tests/proof_seal/test_pctdd_012_batch_immutable_block_storage.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-012@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that concurrent immutable puts rehash bytes before reference and cannot publish a root; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -476,22 +528,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-010
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-013.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-013 through the existing repository authorities and prove that parallel leaves, levels and categories reproduce the normative serial root exactly. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-010
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-013.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py
 - Predicted symbols: ImplementparallelMerkleleaf/level/categoryconstruction; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-013@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-013
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement parallel Merkle leaf/level/category construction is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_013_parallel_merkle_construction.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-013@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that parallel leaves, levels and categories reproduce the normative serial root exactly; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -511,22 +567,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_kit_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-008, PCTDD-013
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-014.json
-- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal
+- Directive: Execute PCTDD-014 through the existing repository authorities and prove that only admitted unchanged branches are reused and uncertainty forces full reconstruction. Produce external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-008, PCTDD-013
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-014.json, external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py
+- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py
 - Predicted symbols: ImplementMerklebranchmemoizationandproof-forestdeltaupdates; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-014@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-014
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement Merkle branch memoization and proof-forest delta updates is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_kit/tests/proof_seal/test_pctdd_014_merkle_branch_memo.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-014@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that only admitted unchanged branches are reused and uncertainty forces full reconstruction; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -546,22 +606,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-007, PCTDD-013
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-015.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-015 through the existing repository authorities and prove that prepared full and delta contracts have no current-root advancement authority. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-005, PCTDD-007, PCTDD-013
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-015.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py
 - Predicted symbols: Definepreparedfull-checkpointanddelta-sealcontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-015@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-015
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Define prepared full-checkpoint and delta-seal contracts is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_015_prepared_seal_contracts.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-015@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that prepared full and delta contracts have no current-root advancement authority; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -581,22 +645,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-012, PCTDD-013, PCTDD-015, PCTDD-018
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-016.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-016 through the existing repository authorities and prove that full preparation freshly verifies every required unit while parallelizing immutable work. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-012, PCTDD-013, PCTDD-015, PCTDD-018
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-016.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py
 - Predicted symbols: Implementparallelfull-checkpointpreparation; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-016@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-016
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement parallel full-checkpoint preparation is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_016_parallel_full_checkpoint.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-016@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that full preparation freshly verifies every required unit while parallelizing immutable work; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -616,22 +684,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-015, PCTDD-018
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-017.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-017 through the existing repository authorities and prove that delta preparation recomputes every affected path and checks every transition invariant. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-015, PCTDD-018
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-017.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py
 - Predicted symbols: Implementparalleldelta-sealpreparation; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-017@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-017
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement parallel delta-seal preparation is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_017_parallel_delta_seal.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-017@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that delta preparation recomputes every affected path and checks every transition invariant; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -651,22 +723,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-032
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-018.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-018 through the existing repository authorities and prove that proof, signature, receipt and integrity checks are bounded and deterministically aggregated. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-032
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-018.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py
 - Predicted symbols: Implementparallelproof/certificateverification; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-018@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-018
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement parallel proof/certificate verification is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-018@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that proof, signature, receipt and integrity checks are bounded and deterministically aggregated; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -686,22 +762,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-016, PCTDD-017, PCTDD-018
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-019.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-019 through the existing repository authorities and prove that the prepared-seal consumer preserves WAL order, byte rehash, parent CAS and generation fencing. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-016, PCTDD-017, PCTDD-018
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-019.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py
 - Predicted symbols: Shortenandhardentheserialcommitboundary; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-019@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-019
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Shorten and harden the serial commit boundary is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_019_serial_commit_boundary.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-019@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that the prepared-seal consumer preserves WAL order, byte rehash, parent CAS and generation fencing; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -721,22 +801,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-018, PCTDD-019
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-020.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-020 through the existing repository authorities and prove that differential roots, crashes, corruption, cancellation and concurrent writers fail closed. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-018, PCTDD-019
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-020.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-020.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py
 - Predicted symbols: Qualifyparallelsealingforconcurrency,crash,andcorruption; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-020.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-020@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-020
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Qualify parallel sealing for concurrency, crash, and corruption is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_020_parallel_seal_fault_qualification.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-020@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that differential roots, crashes, corruption, cancellation and concurrent writers fail closed; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -756,22 +840,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-021.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-021 through the existing repository authorities and prove that fixture closure schemas bind transitive definitions, conftests, hooks, policies and finalizers. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-021.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py
 - Predicted symbols: Definefixture-definitionclosurecontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-021@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-021
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Define fixture-definition closure contracts is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_021_fixture_definition_contracts.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-021@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that fixture closure schemas bind transitive definitions, conftests, hooks, policies and finalizers; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -791,22 +879,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-021
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-022.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-022 through the existing repository authorities and prove that collection extracts and memoizes exact fixture closures without executing fixture bodies. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-021
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-022.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py
 - Predicted symbols: Implementfixture-definitionclosureextraction; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-022@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-022
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement fixture-definition closure extraction is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_022_fixture_definition_extraction.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-022@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that collection extracts and memoizes exact fixture closures without executing fixture bodies; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -826,22 +918,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-023.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-023 through the existing repository authorities and prove that fixture instances and injected dependencies use closed reuse and privacy vocabularies. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-023.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py
 - Predicted symbols: Definefixture-instanceandinjected-dependencycontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-023@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-023
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Define fixture-instance and injected-dependency contracts is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_023_fixture_instance_contracts.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-023@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that fixture instances and injected dependencies use closed reuse and privacy vocabularies; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -861,22 +957,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-023
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-024.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-024 through the existing repository authorities and prove that only reviewed adapters commit supported values and all opaque dependencies execute fully. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-023
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-024.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py
 - Predicted symbols: Implementrevieweddependency-injectioncommitmentadapters; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-024@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-024
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement reviewed dependency-injection commitment adapters is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_024_dependency_commitment_adapters.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-024@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that only reviewed adapters commit supported values and all opaque dependencies execute fully; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -896,22 +996,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-021, PCTDD-023
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-025.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-025 through the existing repository authorities and prove that TestExecutionKeyV2 binds every fixture, environment, toolchain, trust and completeness identity. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-021, PCTDD-023
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-025.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py
 - Predicted symbols: DefineandimplementTestExecutionKeyV2; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-025@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-025
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Define and implement TestExecutionKeyV2 is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_025_test_execution_key_v2.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-025@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that TestExecutionKeyV2 binds every fixture, environment, toolchain, trust and completeness identity; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -931,22 +1035,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-003, PCTDD-023
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-026.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-026 through the existing repository authorities and prove that composite phase receipts preserve TestPassStatementV1 and reject incomplete or dishonest phases. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-003, PCTDD-023
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-026.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py
 - Predicted symbols: Definecompositephasereceiptandstatementcontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-026@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-026
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Define composite phase receipt and statement contracts is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_026_composite_phase_receipt.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-026@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that composite phase receipts preserve TestPassStatementV1 and reject incomplete or dishonest phases; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -966,22 +1074,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-022, PCTDD-024, PCTDD-025
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-027.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-027 through the existing repository authorities and prove that the exact V2 key is assembled after setup and before call with normal execution fallback. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-022, PCTDD-024, PCTDD-025
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-027.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py
 - Predicted symbols: Integratesetup-boundexecution-keyassemblyintopytest; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-027@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-027
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Integrate setup-bound execution-key assembly into pytest is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_027_setup_bound_execution_key.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-027@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that the exact V2 key is assembled after setup and before call with normal execution fallback; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1001,22 +1113,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-027, PCTDD-032
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-028.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-028 through the existing repository authorities and prove that an admitted call certificate reuses only call while current setup and teardown execute exactly once. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-027, PCTDD-032
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-028.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py
 - Predicted symbols: Implementguardedpost-setup,pre-callreuse; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-028@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-028
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement guarded post-setup, pre-call reuse is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_028_post_setup_call_reuse.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-028@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that an admitted call certificate reuses only call while current setup and teardown execute exactly once; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1036,22 +1152,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-027, PCTDD-032
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-029.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-029 through the existing repository authorities and prove that whole-item reuse is limited to explicitly pure or replay-safe teardown-compatible populations. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-027, PCTDD-032
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-029.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py
 - Predicted symbols: Implementnarrowlygatedpre-setupwhole-itemreuse; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-029@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-029
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement narrowly gated pre-setup whole-item reuse is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_029_pre_setup_item_reuse.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-029@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that whole-item reuse is limited to explicitly pure or replay-safe teardown-compatible populations; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1071,22 +1191,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-025, PCTDD-026
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-030.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-030 through the existing repository authorities and prove that workers return bounded intents and only the controller may publish accepted reuse evidence. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-025, PCTDD-026
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-030.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py
 - Predicted symbols: Extendxdistcontroller/workerproof-reusecoordination; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-030@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-030
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Extend xdist controller/worker proof-reuse coordination is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_030_xdist_reuse_coordination.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-030@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that workers return bounded intents and only the controller may publish accepted reuse evidence; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1106,22 +1230,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-004, PCTDD-022, PCTDD-030
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-031.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-031 through the existing repository authorities and prove that fixture affinity and proof cost improve placement without omitting tests or merging resource pools. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-004, PCTDD-022, PCTDD-030
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-031.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py
 - Predicted symbols: Implementfixture-andproof-awarexdistscheduling; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-031@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-031
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement fixture- and proof-aware xdist scheduling is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_031_fixture_proof_aware_xdist.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-031@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that fixture affinity and proof cost improve placement without omitting tests or merging resource pools; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1141,22 +1269,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-025, PCTDD-026
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-032.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-032 through the existing repository authorities and prove that runner signatures bind V2/composite evidence to verifier-selected key, issuer, epoch and policy. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-025, PCTDD-026
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-032.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py
 - Predicted symbols: Integratecurrentsignedrunnerattestations; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-032@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-032
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Integrate current signed runner attestations is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-032@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that runner signatures bind V2/composite evidence to verifier-selected key, issuer, epoch and policy; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1176,22 +1308,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-003
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-033.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-033 through the existing repository authorities and prove that aggregate leaves bind the exact selected population, ordering, count, cohorts and trust roots. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-002, PCTDD-003
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-033.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py
 - Predicted symbols: Defineaggregatetest-batchandleafcontracts; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-033@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-033
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Define aggregate test-batch and leaf contracts is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-033@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that aggregate leaves bind the exact selected population, ordering, count, cohorts and trust roots; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1211,22 +1347,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_datasets_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-026, PCTDD-033
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-034.json
-- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd
+- Directive: Execute PCTDD-034 through the existing repository authorities and prove that aggregate public inputs enforce completeness and never upgrade the claim of receipt leaves. Produce external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-026, PCTDD-033
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-034.json, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py
+- Predicted paths: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py
 - Predicted symbols: Defineaggregatetest-passstatementandpublicinputs; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd, external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-034
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Define aggregate test-pass statement and public inputs is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that aggregate public inputs enforce completeness and never upgrade the claim of receipt leaves; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1246,22 +1386,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-034
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-035.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-035 through the existing repository authorities and prove that only an admitted real backend and key may prove; otherwise production proving is typed unavailable. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-003, PCTDD-034
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-035.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py
 - Predicted symbols: ImplementaggregateZKcircuit/backendadapter; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-035@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-035
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement aggregate ZK circuit/backend adapter is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-035@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that only an admitted real backend and key may prove; otherwise production proving is typed unavailable; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1281,22 +1425,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-036.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-036 through the existing repository authorities and prove that receipt batches prove asynchronously and incomplete or self-verified batches remain non-authoritative. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-032, PCTDD-033, PCTDD-034, PCTDD-035
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-036.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py
 - Predicted symbols: Implementproofbatchcoordinatorandasynchronouspipeline; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-036@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-036
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement proof batch coordinator and asynchronous pipeline is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_036_proof_batch_pipeline.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-036@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that receipt batches prove asynchronously and incomplete or self-verified batches remain non-authoritative; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1316,22 +1464,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_kit_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-036
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-037.json
-- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal
+- Directive: Execute PCTDD-037 through the existing repository authorities and prove that fixture cohorts and selection roots update only affected proof-forest branches. Produce external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-014, PCTDD-036
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-037.json, external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py
+- Predicted paths: external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py
 - Predicted symbols: Implementfixture-cohortandselected-testproof-forestunits; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_kit/ipfs_kit_py/proof_seal, external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-037@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-037
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement fixture-cohort and selected-test proof-forest units is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_kit/tests/proof_seal/test_pctdd_037_test_proof_forest_units.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-037@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that fixture cohorts and selection roots update only affected proof-forest branches; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1351,22 +1503,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001, PCTDD-002, PCTDD-007, PCTDD-021, PCTDD-025
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-038.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-038 through the existing repository authorities and prove that the fast loop consumes the datasets selector and broadens execution on incomplete dependency data. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-001, PCTDD-002, PCTDD-007, PCTDD-021, PCTDD-025
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-038.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py
 - Predicted symbols: Integratedatasetssemantic-statetest/proofselection; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-038@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-038
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Integrate datasets semantic-state test/proof selection is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_038_semantic_state_selection.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-038@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that the fast loop consumes the datasets selector and broadens execution on incomplete dependency data; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1386,22 +1542,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-035
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-039.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing
+- Directive: Execute PCTDD-039 through the existing repository authorities and prove that direct execution profiles remain optional, explicit and limited to qualified deterministic kernels. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-035
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-039.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py
 - Predicted symbols: Addoptionaldirect-executionproofprofiles; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-039@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-039
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Add optional direct-execution proof profiles is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_039_direct_execution_profiles.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-039@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that direct execution profiles remain optional, explicit and limited to qualified deterministic kernels; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1421,22 +1581,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-019, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-031, PCTDD-036, PCTDD-037, PCTDD-038
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-040.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-040 through the existing repository authorities and prove that FastTddLoopController composes frozen source through serial publication with exact evidence. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-019, PCTDD-027, PCTDD-028, PCTDD-029, PCTDD-031, PCTDD-036, PCTDD-037, PCTDD-038
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-040.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py
 - Predicted symbols: ImplementFastTddLoopController@1; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-040@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-040
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Implement FastTddLoopController@1 is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_040_fast_tdd_controller.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-040@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that FastTddLoopController composes frozen source through serial publication with exact evidence; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1456,22 +1620,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-040
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-041.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-041 through the existing repository authorities and prove that deterministic and symbolic repair routes precede any typed minimal-context model residual. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-040
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-041.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py
 - Predicted symbols: Integratethefastloopwithincrementalverificationandrepair; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-041@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-041
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Integrate the fast loop with incremental verification and repair is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_041_fast_tdd_repair.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-041@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that deterministic and symbolic repair routes precede any typed minimal-context model residual; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1491,22 +1659,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-040, PCTDD-041
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-042.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-042 through the existing repository authorities and prove that accepted edit-test-proof trajectories become separately verified reusable procedure candidates. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-040, PCTDD-041
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-042.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py
 - Predicted symbols: Integratecontextcompressionandproof-carryingprocedurecompilation; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-042@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-042
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Integrate context compression and proof-carrying procedure compilation is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_042_tdd_procedure_compilation.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-042@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that accepted edit-test-proof trajectories become separately verified reusable procedure candidates; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1526,22 +1698,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-036, PCTDD-040
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-043.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-043 through the existing repository authorities and prove that typed CLI and service operations call existing authorities and emit deterministic JSON. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-036, PCTDD-040
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-043.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py
 - Predicted symbols: AddCLI,control-service,anddiagnosticssurfaces; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-043@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-043
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Add CLI, control-service, and diagnostics surfaces is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_043_fast_tdd_control_surfaces.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-043@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that typed CLI and service operations call existing authorities and emit deterministic JSON; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: bootstrap
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1561,22 +1737,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-020, PCTDD-040
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-044.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-044 through the existing repository authorities and prove that shadow hashing records exact serial parity and cannot influence authority. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-020, PCTDD-040
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-044.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py
 - Predicted symbols: Activateshadow_hash; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-044@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-044
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Activate shadow_hash is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_044_shadow_hash.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-044@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that shadow hashing records exact serial parity and cannot influence authority; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: shadow_hash
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1596,22 +1776,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-028, PCTDD-036, PCTDD-044
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-045.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-045 through the existing repository authorities and prove that shadow reuse and proof predictions still execute the existing authoritative path. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-028, PCTDD-036, PCTDD-044
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-045.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py
 - Predicted symbols: Activateshadow_reuseandshadow_proof; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-045@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-045
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Activate shadow_reuse and shadow_proof is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_045_shadow_reuse_proof.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-045@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that shadow reuse and proof predictions still execute the existing authoritative path; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: shadow_reuse, shadow_proof
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1631,22 +1815,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-045
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-046.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-046 through the existing repository authorities and prove that protected mode admits only measured exact reuse with complete fallback and reviewed policy. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-045
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-046.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py
 - Predicted symbols: Activateprotected; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-046@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-046
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
-- Acceptance criteria: Activate protected is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_046_protected_rollout.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-046@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that protected mode admits only measured exact reuse with complete fallback and reviewed policy; record typed unavailable cases without changing claim meaning or self-approving.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: protected
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1666,23 +1854,27 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: endomorphosis/ipfs_accelerate_py
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-046
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-047.json
-- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd
+- Directive: Execute PCTDD-047 through the existing repository authorities and prove that required mode rejects completion without the complete pre/post root and publication chain. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-046
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-047.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py
+- Predicted paths: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py
 - Predicted symbols: Activaterequiredself-hosting; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
-- Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission; pre_semantic_state_root; pre_proof_seal_root; source_snapshot; overlay_token; hash_preparation_receipt; selected_test_proof_manifest; fixture_test_execution_key_receipts; phase_disposition_receipts; aggregate_proof_or_evidence_tier_receipt; proof_forest_delta; prepared_seal_cid; seal_publication_receipt; post_semantic_state_root; post_proof_seal_root; expected_generation; resulting_generation; rollout_mode_required
-- Acceptance criteria: Activate required self-hosting is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Declared effects: Modify only external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-047@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-047
+- Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_047_required_self_hosting.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-047@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that required mode rejects completion without the complete pre/post root and publication chain; record typed unavailable cases without changing claim meaning or self-approving. This protected transition must install and independently validate the schema-aware required-mode completion gate; it does not fabricate a required-mode evidence chain for itself.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
-- Rollout mode: required
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
+- Rollout mode: protected
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
 - Goal id: PCTDD-G053
@@ -1701,22 +1893,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-047
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-048.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-048 through the existing repository authorities and prove that the positive and negative end-to-end matrices survive restart, conflict and a related second edit. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-047
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-048.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-048.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py
 - Predicted symbols: Runtheend-to-endacceptancematrix; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-048.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-048@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-048
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission; pre_semantic_state_root; pre_proof_seal_root; source_snapshot; overlay_token; hash_preparation_receipt; selected_test_proof_manifest; fixture_test_execution_key_receipts; phase_disposition_receipts; aggregate_proof_or_evidence_tier_receipt; proof_forest_delta; prepared_seal_cid; seal_publication_receipt; post_semantic_state_root; post_proof_seal_root; expected_generation; resulting_generation; rollout_mode_required
-- Acceptance criteria: Run the end-to-end acceptance matrix is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_048_end_to_end_acceptance.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-048@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that the positive and negative end-to-end matrices survive restart, conflict and a related second edit; record typed unavailable cases without changing claim meaning or self-approving. Completion is rejected unless the PCTDD-047 schema-aware gate independently admits the complete required-mode pre/post-root and serial-publication evidence chain.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: required
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1736,22 +1932,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-020, PCTDD-048
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-049.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-049 through the existing repository authorities and prove that preregistered cold, warm, full and delta workloads report bytes, resources, roots and commit time. Produce external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-020, PCTDD-048
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-049.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py, benchmarks/agent_supervisor/parallel_content_sealing/pctdd_049_hash_seal_results.json
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-049.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py, benchmarks/agent_supervisor/parallel_content_sealing/pctdd_049_hash_seal_results.json
 - Predicted symbols: Runhashingandsealbenchmarks; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-049.json, external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py, benchmarks/agent_supervisor/parallel_content_sealing/pctdd_049_hash_seal_results.json; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-049@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-049
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission; pre_semantic_state_root; pre_proof_seal_root; source_snapshot; overlay_token; hash_preparation_receipt; selected_test_proof_manifest; fixture_test_execution_key_receipts; phase_disposition_receipts; aggregate_proof_or_evidence_tier_receipt; proof_forest_delta; prepared_seal_cid; seal_publication_receipt; post_semantic_state_root; post_proof_seal_root; expected_generation; resulting_generation; rollout_mode_required
-- Acceptance criteria: Run hashing and seal benchmarks is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_049_hash_seal_benchmarks.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-049@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that preregistered cold, warm, full and delta workloads report bytes, resources, roots and commit time; record typed unavailable cases without changing claim meaning or self-approving. Completion is rejected unless the PCTDD-047 schema-aware gate independently admits the complete required-mode pre/post-root and serial-publication evidence chain.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: required
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1771,22 +1971,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-2
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-036, PCTDD-040, PCTDD-048
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-050.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-050 through the existing repository authorities and prove that selected pytest and proof loops report phase reuse, batching, forest, publication and model costs. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-036, PCTDD-040, PCTDD-048
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-050.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py, benchmarks/agent_supervisor/proof_carrying_tdd/pctdd_050_pytest_proof_tdd_results.json
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-050.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py, benchmarks/agent_supervisor/proof_carrying_tdd/pctdd_050_pytest_proof_tdd_results.json
 - Predicted symbols: Runpytest,proof,andTDD-loopbenchmarks; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-050.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py, benchmarks/agent_supervisor/proof_carrying_tdd/pctdd_050_pytest_proof_tdd_results.json; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-050@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-050
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission; pre_semantic_state_root; pre_proof_seal_root; source_snapshot; overlay_token; hash_preparation_receipt; selected_test_proof_manifest; fixture_test_execution_key_receipts; phase_disposition_receipts; aggregate_proof_or_evidence_tier_receipt; proof_forest_delta; prepared_seal_cid; seal_publication_receipt; post_semantic_state_root; post_proof_seal_root; expected_generation; resulting_generation; rollout_mode_required
-- Acceptance criteria: Run pytest, proof, and TDD-loop benchmarks is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_050_pytest_proof_tdd_benchmarks.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-050@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that selected pytest and proof loops report phase reuse, batching, forest, publication and model costs; record typed unavailable cases without changing claim meaning or self-approving. Completion is rejected unless the PCTDD-047 schema-aware gate independently admits the complete required-mode pre/post-root and serial-publication evidence chain.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: required
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1806,22 +2010,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-3
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-048, PCTDD-049, PCTDD-050
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-051.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-051 through the existing repository authorities and prove that forgery, staleness, poisoning, omission, leakage and self-selection attacks remain rejected. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-048, PCTDD-049, PCTDD-050
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-051.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-051.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py
 - Predicted symbols: Runadversarial,privacy,andtrustqualification; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-051.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-051@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-051
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission; pre_semantic_state_root; pre_proof_seal_root; source_snapshot; overlay_token; hash_preparation_receipt; selected_test_proof_manifest; fixture_test_execution_key_receipts; phase_disposition_receipts; aggregate_proof_or_evidence_tier_receipt; proof_forest_delta; prepared_seal_cid; seal_publication_receipt; post_semantic_state_root; post_proof_seal_root; expected_generation; resulting_generation; rollout_mode_required
-- Acceptance criteria: Run adversarial, privacy, and trust qualification is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_051_adversarial_privacy_trust.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-051@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that forgery, staleness, poisoning, omission, leakage and self-selection attacks remain rejected; record typed unavailable cases without changing claim meaning or self-approving. Completion is rejected unless the PCTDD-047 schema-aware gate independently admits the complete required-mode pre/post-root and serial-publication evidence chain.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: required
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1841,22 +2049,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-0
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-042, PCTDD-047, PCTDD-051
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-052.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-052 through the existing repository authorities and prove that the supervisor itself delivers one bounded improvement through the required evidence chain. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-042, PCTDD-047, PCTDD-051
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-052.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/fast_tdd/capstone_self_hosting.py, artifacts/parallel_content_sealing_proof_carrying_tdd/capstone/PCTDD-052.json
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-052.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/fast_tdd/capstone_self_hosting.py, artifacts/parallel_content_sealing_proof_carrying_tdd/capstone/PCTDD-052.json
 - Predicted symbols: Performtherequired-modeself-hostedcapstone; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-052.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/fast_tdd/capstone_self_hosting.py, artifacts/parallel_content_sealing_proof_carrying_tdd/capstone/PCTDD-052.json; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-052@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-052
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission; pre_semantic_state_root; pre_proof_seal_root; source_snapshot; overlay_token; hash_preparation_receipt; selected_test_proof_manifest; fixture_test_execution_key_receipts; phase_disposition_receipts; aggregate_proof_or_evidence_tier_receipt; proof_forest_delta; prepared_seal_cid; seal_publication_receipt; post_semantic_state_root; post_proof_seal_root; expected_generation; resulting_generation; rollout_mode_required
-- Acceptance criteria: Perform the required-mode self-hosted capstone is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_052_required_capstone.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-052@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that the supervisor itself delivers one bounded improvement through the required evidence chain; record typed unavailable cases without changing claim meaning or self-approving. Completion is rejected unless the PCTDD-047 schema-aware gate independently admits the complete required-mode pre/post-root and serial-publication evidence chain.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: required
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
@@ -1876,22 +2088,26 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Timeout seconds: 21600
-- Provider role: implementation_worker_then_independent_validator
+- Provider role: grok-only
 - Owning repository: cross-repository
-- Exact inputs: PCTDD-PLAN-V1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052
-- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-053.json
-- Predicted paths: external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd
+- Directive: Execute PCTDD-053 through the existing repository authorities and prove that current-tree release evidence reports exact results, typed limitations, migration and rollback. Produce external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py and the unique task receipt; do not widen identity, proof, storage, execution, scheduler, or publication authority.
+- Exact inputs: PCTDD-PLAN-V1.1; exact source forest; predecessor APIs; dependency seal; dependency receipts: PCTDD-049, PCTDD-050, PCTDD-051, PCTDD-052
+- Predecessor rescue candidate: none
+- Outputs: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-053.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py, artifacts/parallel_content_sealing_proof_carrying_tdd/PCTDD-053.release.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_RELEASE.md
+- Predicted paths: artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-053.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py, artifacts/parallel_content_sealing_proof_carrying_tdd/PCTDD-053.release.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_RELEASE.md
 - Predicted symbols: Publishcurrent-treerelease,migration,andlimitationreport; versioned @1/@2 contracts only where the task introduces them
 - Interfaces: existing datasets semantic/proof contracts; kit immutable store/WAL/CAS; accelerator execution/scheduler/admission; adapters only
 - Preconditions: Exact clean leased worktree; current parent receipts; complete source/environment/policy/toolchain binding; no self-approval
-- Declared effects: Modify only external/ipfs_accelerate/artifacts/parallel_content_sealing_proof_carrying_tdd, artifacts/parallel_content_sealing_proof_carrying_tdd; emit immutable receipt; request reviewed merge through existing authority
-- Validation: focused owning-repository pytest plus cross-package API tests; identity/proof differential checks where applicable
+- Declared effects: Modify only artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-053.json, external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py, artifacts/parallel_content_sealing_proof_carrying_tdd/PCTDD-053.release.json, docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_RELEASE.md; emit immutable receipt; request reviewed merge through existing authority
+- Validation profile: pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-053@1
+- Validation: python scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py --task PCTDD-053
 - Required evidence: exact source commit/tree/gitlinks; changed paths; independent tests; proof/claim class; receipt CID; limitations; verifier admission; pre_semantic_state_root; pre_proof_seal_root; source_snapshot; overlay_token; hash_preparation_receipt; selected_test_proof_manifest; fixture_test_execution_key_receipts; phase_disposition_receipts; aggregate_proof_or_evidence_tier_receipt; proof_forest_delta; prepared_seal_cid; seal_publication_receipt; post_semantic_state_root; post_proof_seal_root; expected_generation; resulting_generation; rollout_mode_required
-- Acceptance criteria: Publish current-tree release, migration, and limitation report is implemented or reconciled against an existing current authority, independently tested on the exact tree, and honestly records unsupported/unavailable cases without changing claim meaning.
+- Acceptance criteria: A grok-only worker supplies the patch and external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_053_release_migration_limitations.py; the controller-owned validation authority independently executes sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-053@1, admits the exact output manifest, and verifies protected baseline regressions before the task-completion CAS. The implementation model cannot fall back to the completion authority or approve its own output. The worker-authored test alone is never sufficient; required acceptance has machine-readable pytest phase evidence with zero failed, skipped, xfail, xpass, error, or rerun outcomes. Verify that current-tree release evidence reports exact results, typed limitations, migration and rollback; record typed unavailable cases without changing claim meaning or self-approving. Completion is rejected unless the PCTDD-047 schema-aware gate independently admits the complete required-mode pre/post-root and serial-publication evidence chain.
 - Conflict policy: Serialize shared schemas, exports, registries, plugin hooks, gitlinks, WAL/CAS, and release artifacts through the current merge queue; rebase and revalidate after any overlap.
-- Context budget: 24000 tokens maximum; send only affected source/contracts/counterexample/current receipts
+- LLM context budget bytes: 24000
+- Context policy: send only affected source, contracts, counterexample, and current receipts
 - No-model route: exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse
-- Model fallback: General model only for a typed unresolved residual after deterministic/symbolic/procedure routes; model output is proposal-only
+- Model fallback: none for implementation; provider unavailability is a typed, non-consuming retry or external capability terminal, and no model output can approve completion
 - Rollout mode: required
 - Protected paths: all scheduler protected_paths; no worker edits
 - Known limitations: Production ZK/key ceremony and optional native/direct-execution profiles may be typed unavailable; unknown dependency or fixture semantics force full fallback.
