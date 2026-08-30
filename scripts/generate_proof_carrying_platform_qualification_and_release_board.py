@@ -627,6 +627,15 @@ def render_config() -> dict[str, Any]:
             "export_profile": "pcpr-v1-c1",
             "failover_policy": "fail_closed",
             "explicit_legacy": False,
+            "claim_policy": {
+                "schema": (
+                    "ipfs_accelerate_py/agent-supervisor/database-claim-policy@1"
+                ),
+                "task_prefix": "PCPR-",
+                "task_shard_count": 3,
+                "strict_task_sharding": True,
+                "idle_lane_work_stealing": "virgin-transfer",
+            },
         },
         "operational_control_plane": {
             "name": "DuckDB + exclusive Quack with non-authoritative DuckLake",
@@ -662,9 +671,9 @@ def render_config() -> dict[str, Any]:
             ),
             "may_grant_authority": False,
         },
-        "max_lanes": 1,
+        "max_lanes": 3,
         "strict_task_sharding": True,
-        "idle_lane_work_stealing": "",
+        "idle_lane_work_stealing": "virgin-transfer",
         "exit_when_all_tracks_terminal": False,
         "objective_refill_enabled": False,
         "codebase_refill_enabled": False,
@@ -700,11 +709,25 @@ def render_config() -> dict[str, Any]:
         "lanes": [
             {
                 "index": 0,
-                "name": BOOTSTRAP_LANE,
+                "name": "pcpr-0",
                 "strict_shard_remainder": 0,
                 "initial_task_ids": list(CAMPAIGN_READY_IDS),
-                "initial_focus": "pcpr-campaign-after-pcpr-004",
-            }
+                "initial_focus": "pcpr-campaign-lane-0",
+            },
+            {
+                "index": 1,
+                "name": "pcpr-1",
+                "strict_shard_remainder": 1,
+                "initial_task_ids": list(CAMPAIGN_READY_IDS),
+                "initial_focus": "pcpr-campaign-lane-1",
+            },
+            {
+                "index": 2,
+                "name": "pcpr-2",
+                "strict_shard_remainder": 2,
+                "initial_task_ids": list(CAMPAIGN_READY_IDS),
+                "initial_focus": "pcpr-campaign-lane-2",
+            },
         ],
         "task_groups": {
             goal: (
@@ -724,7 +747,7 @@ def render_config() -> dict[str, Any]:
             "fallback_model_id": "gpt-5.6-terra",
             "fallback_trigger": "primary_quota_exhausted",
             "fallback_reasoning_effort": "high",
-            "max_concurrency": 1,
+            "max_concurrency": 3,
             "secrets_from_environment_only": True,
             "secrets_in_argv_prompts_logs_or_receipts": False,
         },

@@ -44,6 +44,13 @@
   "daemon_interval_seconds": 20,
   "database_program": {
     "authority_mode": "quack",
+    "claim_policy": {
+      "idle_lane_work_stealing": "virgin-transfer",
+      "schema": "ipfs_accelerate_py/agent-supervisor/database-claim-policy@1",
+      "strict_task_sharding": true,
+      "task_prefix": "PCPR-",
+      "task_shard_count": 3
+    },
     "endpoint_secret_handle": "handle:pcpr-v1",
     "event_store_path": "data/agent_supervisor/proof_carrying_platform_qualification_and_release_v1/events",
     "explicit_legacy": false,
@@ -96,7 +103,7 @@
     "self-authorized promotions",
     "release creation after failed required gates"
   ],
-  "idle_lane_work_stealing": "",
+  "idle_lane_work_stealing": "virgin-transfer",
   "implementation_log_stall_seconds": 1200,
   "implementation_max_timeout_seconds": 21600,
   "implementation_retry_budget": 1,
@@ -119,16 +126,36 @@
   "lanes": [
     {
       "index": 0,
-      "initial_focus": "pcpr-campaign-after-pcpr-004",
+      "initial_focus": "pcpr-campaign-lane-0",
       "initial_task_ids": [
         "PCPR-000",
         "PCPR-001"
       ],
       "name": "pcpr-0",
       "strict_shard_remainder": 0
+    },
+    {
+      "index": 1,
+      "initial_focus": "pcpr-campaign-lane-1",
+      "initial_task_ids": [
+        "PCPR-000",
+        "PCPR-001"
+      ],
+      "name": "pcpr-1",
+      "strict_shard_remainder": 1
+    },
+    {
+      "index": 2,
+      "initial_focus": "pcpr-campaign-lane-2",
+      "initial_task_ids": [
+        "PCPR-000",
+        "PCPR-001"
+      ],
+      "name": "pcpr-2",
+      "strict_shard_remainder": 2
     }
   ],
-  "max_lanes": 1,
+  "max_lanes": 3,
   "max_restarts": 8,
   "max_task_attempts": 2,
   "merge_retry_budget": 2,
@@ -177,7 +204,7 @@
     "fallback_provider_id": "codex",
     "fallback_reasoning_effort": "high",
     "fallback_trigger": "primary_quota_exhausted",
-    "max_concurrency": 1,
+    "max_concurrency": 3,
     "primary_model_id": "grok-4.6",
     "primary_provider_id": "grok_cli",
     "secrets_from_environment_only": true,

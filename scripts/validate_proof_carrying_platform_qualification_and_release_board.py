@@ -390,8 +390,12 @@ def validate() -> dict[str, Any]:
             or projection.get("root_goal_id") != generator.ROOT_GOAL_ID
         ):
             errors.append("initial projection must materialize all 37 goals under PCPR-G000")
-        if config.get("max_lanes") != 1 or len(config.get("lanes") or []) != 1:
-            errors.append("PCPR bootstrap must configure exactly one lane")
+        if config.get("max_lanes") != 3 or len(config.get("lanes") or []) != 3:
+            errors.append("PCPR campaign must configure three parallel lanes")
+        if config.get("idle_lane_work_stealing") != "virgin-transfer":
+            errors.append("PCPR campaign must enable virgin-transfer work stealing")
+        if (config.get("provider") or {}).get("max_concurrency") != 3:
+            errors.append("provider.max_concurrency must match max_lanes")
         groups = config.get("task_groups") or {}
         if generator.BOOTSTRAP_GOAL_ID not in groups or generator.BOOTSTRAP_TASK_ID not in (
             groups.get(generator.BOOTSTRAP_GOAL_ID) or []
@@ -474,7 +478,7 @@ def validate() -> dict[str, Any]:
         )
 
         loaded = load_configured_board(generator.CONFIG_PATH, repo_root=ROOT)
-        if loaded.board_namespace != generator.NAMESPACE or loaded.max_lanes != 1:
+        if loaded.board_namespace != generator.NAMESPACE or loaded.max_lanes != 3:
             errors.append("generic configured-board loader returned wrong PCPR identity")
         program = loaded.resolved_database_program()
         if program.authority_mode != "quack" or program.task_source_kind != "duckdb":

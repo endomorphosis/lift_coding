@@ -1642,6 +1642,10 @@ def _supervisor_client_id() -> str:
     return f"database-implementation-supervisor:{EXECUTOR_OWNER_SESSION}"
 
 
+def _is_pcpr_client(client_id: str, prefix: str) -> bool:
+    return client_id == prefix or client_id.startswith(prefix + ":")
+
+
 class _ExecutorBootstrapBroker:
     """Mint one PID-bound typed grant for each canonical lane birth."""
 
@@ -1654,8 +1658,8 @@ class _ExecutorBootstrapBroker:
         paths: Mapping[str, Path],
         execution_route_policy: Any,
     ) -> None:
-        if int(board.max_lanes) != 1:
-            raise OperatorError("PCPR bootstrap admits exactly one supervisor lane")
+        if int(board.max_lanes) != 3:
+            raise OperatorError("PCPR campaign admits exactly three supervisor lanes")
         self.channel = channel
         self.server = server
         self.board = board
@@ -1733,8 +1737,8 @@ class _ExecutorBootstrapBroker:
             read_process_birth,
         )
 
-        is_executor = client_id == _executor_client_id()
-        if not is_executor and client_id != _supervisor_client_id():
+        is_executor = _is_pcpr_client(client_id, _executor_client_id())
+        if not is_executor and not _is_pcpr_client(client_id, _supervisor_client_id()):
             raise OperatorError("bootstrap client has no admitted lane binding")
         peer_birth = read_process_birth(peer_pid)
         if peer_birth is None or int(peer_birth.parent_pid) <= 1:
@@ -1761,25 +1765,36 @@ class _ExecutorBootstrapBroker:
         )
         if expected_entry not in supervisor_argv:
             raise OperatorError("executor parent is not the configured supervisor entry")
+        lane_count = str(int(self.board.max_lanes))
         exact = {
             "--board-namespace": self.board.board_namespace,
             "--state-owner-bootstrap-fd": str(bootstrap_fd),
-            "--database-owner-session-id": EXECUTOR_OWNER_SESSION,
-            "--task-shard-count": "1",
-            "--task-shard-index": "0",
+            "--task-shard-count": lane_count,
         }
         if any(
             _argv_values(supervisor_argv, option) != (expected,)
             for option, expected in exact.items()
         ):
             raise OperatorError("executor parent differs from its sealed PCPR lane")
+        owner_sessions = _argv_values(supervisor_argv, "--database-owner-session-id")
+        if len(owner_sessions) != 1 or not owner_sessions[0].startswith(
+            EXECUTOR_OWNER_SESSION
+        ):
+            raise OperatorError("executor parent owner session is not the PCPR campaign")
+        shard_indices = _argv_values(supervisor_argv, "--task-shard-index")
+        if (
+            len(shard_indices) != 1
+            or shard_indices[0] not in {str(index) for index in range(int(lane_count))}
+        ):
+            raise OperatorError("executor parent shard index is not a sealed PCPR lane")
         if is_executor:
             daemon_argv = _process_argv(peer_pid)
+            daemon_sessions = _argv_values(daemon_argv, "--owner-session-id")
             if (
-                _argv_values(daemon_argv, "--owner-session-id")
-                != (EXECUTOR_OWNER_SESSION,)
-                or _argv_values(daemon_argv, "--task-shard-count") != ("1",)
-                or _argv_values(daemon_argv, "--task-shard-index") != ("0",)
+                _argv_values(daemon_argv, "--task-shard-count") != (lane_count,)
+                or _argv_values(daemon_argv, "--task-shard-index") != shard_indices
+                or len(daemon_sessions) != 1
+                or not daemon_sessions[0].startswith(EXECUTOR_OWNER_SESSION)
             ):
                 raise OperatorError("executor daemon differs from its sealed PCPR lane")
 
@@ -1841,8 +1856,8 @@ class _ExecutorBootstrapBroker:
         ):
             raise OperatorError("executor bootstrap process birth is stale")
         client_id = str(request.get("client_id") or "")
-        is_executor = client_id == _executor_client_id()
-        is_supervisor = client_id == _supervisor_client_id()
+        is_executor = _is_pcpr_client(client_id, _executor_client_id())
+        is_supervisor = _is_pcpr_client(client_id, _supervisor_client_id())
         store_id = _control_plane_store_id(self.board.resolved_database_program())
         if not (is_executor or is_supervisor) or request.get("store_id") != store_id:
             raise OperatorError("executor bootstrap scope differs from its admission")
@@ -1915,13 +1930,17 @@ class _ExecutorBootstrapBroker:
                     {
                         "schema": EXECUTOR_BOOTSTRAP_SCHEMA,
                         "ready": True,
-                        "accepted_lane_count": int(
-                            _executor_client_id() in self._grants
+                        "accepted_lane_count": sum(
+                            1
+                            for key in self._grants
+                            if _is_pcpr_client(key, _executor_client_id())
                         ),
-                        "accepted_supervisor_reader_count": int(
-                            _supervisor_client_id() in self._grants
+                        "accepted_supervisor_reader_count": sum(
+                            1
+                            for key in self._grants
+                            if _is_pcpr_client(key, _supervisor_client_id())
                         ),
-                        "expected_lane_count": 1,
+                        "expected_lane_count": int(self.board.max_lanes),
                         "server_id": identity.server_id,
                         "state_owner_process_birth_id": identity.process_birth_id,
                         "execution_route_policy": (
@@ -2142,10 +2161,6 @@ def launch_supervisor(
             str(listener.fileno()),
             "--state-owner-bootstrap-store-id",
             _control_plane_store_id(board.resolved_database_program()),
-            "--task-shard-count",
-            "1",
-            "--task-shard-index",
-            "0",
         ):
             runner_args.append(f"--common-arg={value}")
         environment = _python_environment()
