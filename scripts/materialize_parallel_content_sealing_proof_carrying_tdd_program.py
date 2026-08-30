@@ -367,8 +367,12 @@ def _load_board(config_path: Path) -> tuple[Any, dict[str, Any], bytes]:
         raise MaterializationError("PCTDD database authority must fail closed")
     if str(config_payload.get("accepted_plan_revision_alias") or "") != PLAN_ALIAS:
         raise MaterializationError("PCTDD plan revision is not the V1.1 amendment")
-    if program.store_generation != "pctdd-v1-g6":
-        raise MaterializationError("PCTDD materialization requires the fresh g6 store")
+    if program.store_generation not in {"pctdd-v1-g6", "pctdd-v1-g7"}:
+        raise MaterializationError("PCTDD materialization requires the sealed g6 or g7 store")
+    if program.store_generation == "pctdd-v1-g7" and not isinstance(
+        config_payload.get("source_binding_successor_materialization"), Mapping
+    ):
+        raise MaterializationError("PCTDD g7 requires its sealed source-binding successor policy")
     if program.quack_endpoint != "quack:127.0.0.1:27278":
         raise MaterializationError("PCTDD materialization requires the sealed g6 Quack endpoint")
     return board, config_payload, config_bytes
@@ -1163,6 +1167,8 @@ def materialize(config_path: Path) -> dict[str, Any]:
 
     board, config, _config_bytes = _load_board(config_path)
     population = _population(board, config)
+    if board.resolved_database_program().store_generation == "pctdd-v1-g7":
+        return _migrate_source_binding(config=config, population=population)
     _assert_source_unchanged(
         config,
         head=str(population["source_head"]),
@@ -1366,6 +1372,12 @@ def check_sealed(config_path: Path) -> dict[str, Any]:
 
     board, config, _config_bytes = _load_board(config_path)
     population = _population(board, config)
+    if board.resolved_database_program().store_generation == "pctdd-v1-g7":
+        return _check_source_binding(
+            config=config,
+            population=population,
+            allow_progressed=True,
+        )
     paths = _runtime_paths(board)
     if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
         raise MaterializationError("PCTDD authority has not been materialized and sealed")
@@ -1704,7 +1716,14 @@ def _arguments(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "command",
         nargs="?",
-        choices=("check", "materialize", "seal-controls", "check-sealed"),
+        choices=(
+            "check",
+            "materialize",
+            "seal-controls",
+            "migrate-source",
+            "check-source-migration",
+            "check-sealed",
+        ),
         default="materialize",
         help="check, stage materialization, seal operator controls, or verify the seal",
     )
@@ -1721,6 +1740,63 @@ def _arguments(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def _source_successor_module() -> Any:
+    """Load the bounded g7 adapter without creating another task authority."""
+
+    path = ROOT / "scripts/pctdd_g7_source_binding_successor.py"
+    spec = importlib.util.spec_from_file_location("pctdd_g7_source_binding_successor", path)
+    if spec is None or spec.loader is None:
+        raise MaterializationError("cannot load the sealed PCTDD g7 source successor")
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:
+        raise MaterializationError(
+            f"cannot load PCTDD g7 source successor: {type(exc).__name__}: {exc}"
+        ) from exc
+    return module
+
+
+def _migrate_source_binding(
+    *, config: Mapping[str, Any], population: Mapping[str, Any]
+) -> dict[str, Any]:
+    module = _source_successor_module()
+    try:
+        return dict(
+            module.migrate_source_binding(
+                root=ROOT,
+                config=config,
+                population=population,
+            )
+        )
+    except Exception as exc:
+        raise MaterializationError(
+            f"PCTDD g7 source migration refused: {type(exc).__name__}: {exc}"
+        ) from exc
+
+
+def _check_source_binding(
+    *,
+    config: Mapping[str, Any],
+    population: Mapping[str, Any],
+    allow_progressed: bool,
+) -> dict[str, Any]:
+    module = _source_successor_module()
+    try:
+        return dict(
+            module.check_source_binding(
+                root=ROOT,
+                config=config,
+                population=population,
+                allow_progressed=allow_progressed,
+            )
+        )
+    except Exception as exc:
+        raise MaterializationError(
+            f"PCTDD g7 source migration check refused: {type(exc).__name__}: {exc}"
+        ) from exc
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = _arguments(argv)
     try:
@@ -1732,6 +1808,19 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = materialize(config_path)
         elif command == "seal-controls":
             result = seal_operator_controls(config_path)
+        elif command in {"migrate-source", "check-source-migration"}:
+            board, config, _config_bytes = _load_board(config_path)
+            if board.resolved_database_program().store_generation != "pctdd-v1-g7":
+                raise MaterializationError(f"{command} requires the sealed g7 configuration")
+            population = _population(board, config)
+            if command == "migrate-source":
+                result = _migrate_source_binding(config=config, population=population)
+            else:
+                result = _check_source_binding(
+                    config=config,
+                    population=population,
+                    allow_progressed=False,
+                )
         else:
             result = check_sealed(config_path)
     except Exception as exc:
