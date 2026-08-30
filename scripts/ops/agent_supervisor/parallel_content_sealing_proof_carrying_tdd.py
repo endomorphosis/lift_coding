@@ -60,6 +60,9 @@ OPERATOR_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/"
     "parallel-content-sealing-proof-carrying-tdd-operator@1"
 )
+OWNER_PID_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/pctdd-quack-owner-process@1"
+)
 PROGRAM_ID: Final = "parallel-content-sealing-proof-carrying-tdd-v1"
 TASK_PREFIX: Final = "PCTDD-"
 DEFAULT_MONITOR_SECONDS: Final = 180.0
@@ -433,6 +436,9 @@ def seal_controls(config_path: Path) -> dict[str, Any]:
 
 
 def _require_operator_seal(config_path: Path) -> Mapping[str, Any]:
+    board, _payload = _load_board(config_path)
+    paths = _runtime_paths(board)
+    environment = _operator_seal_check_environment(board, paths)
     result = _run(
         (
             sys.executable,
@@ -441,6 +447,7 @@ def _require_operator_seal(config_path: Path) -> Mapping[str, Any]:
             "--config",
             _repository_relative_argument(config_path),
         ),
+        environment=environment,
         timeout=900.0,
     )
     _require_success(result, "PCTDD operator seal check")
@@ -518,6 +525,147 @@ def _owner_projection(paths: Mapping[str, Path]) -> dict[str, Any]:
         "liveness": _owner_liveness(payload),
         "identity": dict(identity) if isinstance(identity, Mapping) else {},
     }
+
+
+def _exact_live_owner_identity(
+    board: Any,
+    owner: Mapping[str, Any],
+) -> tuple[Mapping[str, Any], Any]:
+    """Return the sealed live-owner identity or fail before credential use."""
+
+    if owner.get("lifecycle") != "ready" or owner.get("liveness") != "alive":
+        raise OperatorError("Quack owner is not live-ready")
+    identity = owner.get("identity")
+    if not isinstance(identity, Mapping):
+        raise OperatorError("published Quack identity is unavailable")
+    program = board.resolved_database_program()
+    process_birth = identity.get("process_birth")
+    process_birth = process_birth if isinstance(process_birth, Mapping) else {}
+    if (
+        identity.get("status") != "ready"
+        or identity.get("listen_uri") != program.quack_endpoint
+        or identity.get("store_id") != program.store_id
+        or identity.get("secret_handle") != program.endpoint_secret_handle
+        or int(process_birth.get("pid") or 0) <= 1
+        or int(process_birth.get("start_time_ticks") or 0) <= 0
+    ):
+        raise OperatorError("published Quack identity does not match the sealed program")
+    return identity, program
+
+
+def _operator_seal_check_environment(
+    board: Any,
+    paths: Mapping[str, Path],
+) -> dict[str, str]:
+    """Build the private environment for the trusted sealed-board checker.
+
+    A live DuckDB owner may only be inspected through authenticated Quack.
+    Therefore the token is read only for an exact ready+alive identity and is
+    inherited only by the trusted materializer ``check-sealed`` child.  A
+    stopped or absent owner keeps the ordinary scrubbed environment.  Every
+    ambiguous or transitional projection fails closed before either a token
+    read or a direct database open can occur.
+    """
+
+    owner = _owner_projection(paths)
+    lifecycle = str(owner.get("lifecycle") or "unknown")
+    liveness = str(owner.get("liveness") or "unknown")
+    if lifecycle == "ready" and liveness == "alive":
+        _identity, program = _exact_live_owner_identity(board, owner)
+        token = _read_owner_token(
+            _token_path(paths["owner"], program.endpoint_secret_handle)
+        )
+        return _python_environment(
+            token=token,
+            secret_handle=program.endpoint_secret_handle,
+        )
+    if liveness in {"alive", "unknown"} or lifecycle in {
+        "starting",
+        "ready",
+        "stopping",
+        "unknown",
+        "malformed",
+    }:
+        raise OperatorError(
+            "operator seal check requires an exact ready+alive or stopped owner"
+        )
+    return _python_environment()
+
+
+def _cross_check_owner_lifecycle(
+    owner: Mapping[str, Any],
+    paths: Mapping[str, Path],
+) -> dict[str, Any]:
+    """Bind a stopped JSON projection to the fenced authoritative DB row."""
+
+    result = dict(owner)
+    result["lifecycle_consistent"] = None
+    liveness = str(owner.get("liveness") or "unknown")
+    if liveness == "alive":
+        result["authoritative_lifecycle"] = {
+            "available": False,
+            "reason": "deferred_to_authenticated_live_owner",
+            "direct_database_file_open": False,
+        }
+        return result
+    if liveness == "unknown":
+        result["authoritative_lifecycle"] = {
+            "available": False,
+            "reason": "owner_liveness_unknown",
+            "direct_database_file_open": False,
+        }
+        return result
+
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server import (
+        inspect_state_server_lifecycle,
+    )
+
+    inspection = inspect_state_server_lifecycle(database_path=paths["database"])
+    result["authoritative_lifecycle"] = inspection
+    if inspection.get("available") is not True:
+        return result
+    latest = inspection.get("latest")
+    identity = owner.get("identity")
+    if not isinstance(latest, Mapping) or not isinstance(identity, Mapping):
+        result["lifecycle_consistent"] = latest is None and identity in (None, {})
+        if result["lifecycle_consistent"] is False:
+            result["reason_code"] = "status_projection_lifecycle_mismatch"
+        return result
+    consistent = all(
+        str(latest.get(key)) == str(identity.get(key))
+        for key in (
+            "server_id",
+            "store_id",
+            "database_uuid",
+            "process_birth_id",
+            "listen_uri",
+            "extension_fingerprint",
+            "schema_revision",
+            "generation",
+            "started_at",
+        )
+    ) and (
+        str(latest.get("status") or "")
+        == str(owner.get("lifecycle") or "")
+        == str(identity.get("status") or "")
+    )
+    if str(latest.get("status") or "") == "stopped":
+        try:
+            revisions_current = int(latest.get("revision")) >= int(
+                identity.get("revision")
+            )
+        except (TypeError, ValueError):
+            revisions_current = False
+        consistent = (
+            consistent
+            and revisions_current
+            and latest.get("stopped_at") is not None
+        )
+    result["lifecycle_consistent"] = bool(consistent)
+    if not consistent:
+        result["reason_code"] = "status_projection_lifecycle_mismatch"
+    return result
 
 
 def _token_path(owner_dir: Path, secret_handle: str) -> Path:
@@ -631,19 +779,7 @@ def _task_projection(connection: Any) -> dict[str, Any]:
 
 def _authenticated_projection(board: Any, paths: Mapping[str, Path]) -> dict[str, Any]:
     owner = _owner_projection(paths)
-    if owner["lifecycle"] != "ready" or owner["liveness"] != "alive":
-        raise OperatorError("Quack owner is not live-ready")
-    identity = owner["identity"]
-    program = board.resolved_database_program()
-    process_birth = identity.get("process_birth")
-    process_birth = process_birth if isinstance(process_birth, Mapping) else {}
-    if (
-        identity.get("listen_uri") != program.quack_endpoint
-        or identity.get("store_id") != program.store_id
-        or identity.get("secret_handle") != program.endpoint_secret_handle
-        or int(process_birth.get("pid") or 0) <= 1
-    ):
-        raise OperatorError("published Quack identity does not match the sealed program")
+    identity, program = _exact_live_owner_identity(board, owner)
     token = _read_owner_token(
         _token_path(paths["owner"], program.endpoint_secret_handle)
     )
@@ -660,7 +796,8 @@ def _authenticated_projection(board: Any, paths: Mapping[str, Path]) -> dict[str
         )
         server_row = connection.execute(
             "SELECT server_id, store_id, database_uuid, process_birth_id, "
-            "schema_revision, generation, status FROM state_servers "
+            "listen_uri, extension_fingerprint, schema_revision, generation, "
+            "started_at, status, revision FROM state_servers "
             "WHERE server_id = ? ORDER BY generation DESC LIMIT 1",
             [str(identity.get("server_id") or "")],
         ).fetchone()
@@ -671,21 +808,36 @@ def _authenticated_projection(board: Any, paths: Mapping[str, Path]) -> dict[str
             "store_id": str(server_row[1]),
             "database_uuid": str(server_row[2]),
             "process_birth_id": str(server_row[3]),
-            "schema_revision": int(server_row[4]),
-            "generation": int(server_row[5]),
-            "status": str(server_row[6]),
+            "listen_uri": str(server_row[4]),
+            "extension_fingerprint": str(server_row[5]),
+            "schema_revision": int(server_row[6]),
+            "generation": int(server_row[7]),
+            "started_at": str(server_row[8]),
+            "status": str(server_row[9]),
+            "revision": int(server_row[10]),
         }
         for key in (
             "server_id",
             "store_id",
             "database_uuid",
             "process_birth_id",
+            "listen_uri",
+            "extension_fingerprint",
             "schema_revision",
             "generation",
+            "started_at",
         ):
             expected = identity.get(key)
             if str(observed[key]) != str(expected):
                 raise OperatorError(f"authenticated Quack identity mismatch: {key}")
+        if (
+            observed["status"] != "ready"
+            or str(identity.get("status") or "") != "ready"
+            or observed["revision"] != int(identity.get("revision") or 0) + 1
+        ):
+            raise OperatorError(
+                "authenticated Quack lifecycle differs from the ready projection"
+            )
         tasks = _task_projection(connection)
     finally:
         if connection is not None:
@@ -706,6 +858,91 @@ def _pid(path: Path) -> int:
     except OSError:
         return 0
     return int(value) if value.isdigit() else 0
+
+
+def _owner_process_record(pid: int) -> dict[str, Any]:
+    """Capture the detached owner's PID-reuse-resistant process identity."""
+
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import (
+        read_process_birth,
+    )
+
+    try:
+        birth = read_process_birth(int(pid))
+    except OSError as exc:
+        raise OperatorError("detached Quack owner process birth is unobservable") from exc
+    if birth is None or birth.pid != int(pid) or birth.start_time_ticks <= 0:
+        raise OperatorError("detached Quack owner exited before identity capture")
+    return {
+        "schema": OWNER_PID_SCHEMA,
+        "pid": int(pid),
+        "process_birth": birth.to_dict(),
+        "recorded_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace(
+            "+00:00", "Z"
+        ),
+    }
+
+
+def _write_owner_process_record(path: Path, record: Mapping[str, Any]) -> None:
+    if (
+        record.get("schema") != OWNER_PID_SCHEMA
+        or int(record.get("pid") or 0) <= 1
+        or not isinstance(record.get("process_birth"), Mapping)
+        or int(record["process_birth"].get("pid") or 0) != int(record["pid"])
+        or int(record["process_birth"].get("start_time_ticks") or 0) <= 0
+    ):
+        raise OperatorError("refusing malformed Quack owner process record")
+    _atomic_private_text(
+        path,
+        json.dumps(dict(record), sort_keys=True, separators=(",", ":")) + "\n",
+    )
+
+
+def _cleanup_owned_owner_pid(
+    path: Path,
+    process_birth: Mapping[str, Any],
+) -> bool:
+    """Remove only the exact process record owned by the calling child."""
+
+    target = _contained(path)
+    try:
+        before = os.lstat(target)
+    except FileNotFoundError:
+        return False
+    except OSError:
+        return False
+    if (
+        stat.S_ISLNK(before.st_mode)
+        or not stat.S_ISREG(before.st_mode)
+        or before.st_uid != os.geteuid()
+        or before.st_nlink != 1
+        or before.st_size > MAX_JSON_BYTES
+    ):
+        return False
+    try:
+        payload = _json_object(target)
+    except OperatorError:
+        return False
+    recorded = payload.get("process_birth")
+    if (
+        payload.get("schema") != OWNER_PID_SCHEMA
+        or not isinstance(recorded, Mapping)
+        or int(payload.get("pid") or 0) != int(process_birth.get("pid") or 0)
+        or dict(recorded) != dict(process_birth)
+    ):
+        return False
+    try:
+        current = os.lstat(target)
+    except OSError:
+        return False
+    if (before.st_dev, before.st_ino) != (current.st_dev, current.st_ino):
+        return False
+    try:
+        target.unlink()
+    except OSError:
+        return False
+    return True
 
 
 def _pid_alive(pid: int) -> bool:
@@ -813,7 +1050,7 @@ def _ducklake_projection(payload: Mapping[str, Any]) -> dict[str, Any]:
 def status(config_path: Path) -> dict[str, Any]:
     board, payload = _load_board(config_path)
     paths = _runtime_paths(board)
-    owner = _owner_projection(paths)
+    owner = _cross_check_owner_lifecycle(_owner_projection(paths), paths)
     authority: dict[str, Any]
     try:
         authority = _authenticated_projection(board, paths)
@@ -826,6 +1063,14 @@ def status(config_path: Path) -> dict[str, Any]:
         }
     else:
         authority["available"] = True
+        if owner.get("liveness") == "alive":
+            owner["authoritative_lifecycle"] = {
+                "available": True,
+                "reason": "authenticated_live_quack_query",
+                "direct_database_file_open": False,
+                "latest": dict(authority.get("identity") or {}),
+            }
+            owner["lifecycle_consistent"] = True
     supervisor = _supervisor_projection(board, paths)
 
     ready = int(authority.get("ready_count") or 0)
@@ -910,10 +1155,28 @@ def _start_owner(board: Any, paths: Mapping[str, Path], *, timeout: float) -> di
             start_new_session=True,
             close_fds=True,
         )
-    _atomic_private_text(paths["owner_pid"], f"{process.pid}\n")
+    try:
+        process_record = _owner_process_record(process.pid)
+        _write_owner_process_record(paths["owner_pid"], process_record)
+    except Exception:
+        _ensure_import_path()
+        from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
+            terminate_process_with_grace,
+        )
+
+        terminate_process_with_grace(
+            process,
+            grace_seconds=5.0,
+            kill_wait_seconds=5.0,
+        )
+        raise
     deadline = time.monotonic() + max(1.0, timeout)
     while time.monotonic() < deadline:
         if process.poll() is not None:
+            _cleanup_owned_owner_pid(
+                paths["owner_pid"],
+                process_record["process_birth"],
+            )
             raise OperatorError("detached Quack owner exited before authenticated readiness")
         try:
             projection = _authenticated_projection(board, paths)
@@ -929,6 +1192,21 @@ def _start_owner(board: Any, paths: Mapping[str, Path], *, timeout: float) -> di
             "authenticated_query": projection["authenticated_query"],
             "log": str(paths["owner_log"].relative_to(ROOT)),
         }
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
+        terminate_process_with_grace,
+    )
+
+    terminated = terminate_process_with_grace(
+        process,
+        grace_seconds=5.0,
+        kill_wait_seconds=5.0,
+    )
+    if not terminated.timed_out:
+        _cleanup_owned_owner_pid(
+            paths["owner_pid"],
+            process_record["process_birth"],
+        )
     raise OperatorError("detached Quack owner did not reach authenticated readiness")
 
 
@@ -952,30 +1230,39 @@ def _serve_state_owner(config_path: Path) -> dict[str, Any]:
     host, port = match.group(1), int(match.group(2))
 
     _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import (
+        current_process_birth,
+    )
     from ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server import (
         build_server,
     )
 
     for item in (paths["runtime"], paths["state"], paths["logs"], paths["owner"]):
         _private_directory(item)
-    server = build_server(
-        database_path=paths["database"],
-        state_dir=paths["owner"],
-        host=host,
-        port=port,
-        repository_id=f"repository:{PROGRAM_ID}",
-        store_id=str(program.store_id),
-        secret_handle=str(program.endpoint_secret_handle),
-    )
-    identity = server.start()
+    owned_birth = current_process_birth().to_dict()
+    server: Any | None = None
+    identity: Any | None = None
+    stopped: Mapping[str, Any] | None = None
     stop_requested = {"value": False}
 
     def request_stop(_signum: int, _frame: Any) -> None:
         stop_requested["value"] = True
 
-    previous_int = signal.signal(signal.SIGINT, request_stop)
-    previous_term = signal.signal(signal.SIGTERM, request_stop)
+    previous_int: Any | None = None
+    previous_term: Any | None = None
     try:
+        server = build_server(
+            database_path=paths["database"],
+            state_dir=paths["owner"],
+            host=host,
+            port=port,
+            repository_id=f"repository:{PROGRAM_ID}",
+            store_id=str(program.store_id),
+            secret_handle=str(program.endpoint_secret_handle),
+        )
+        identity = server.start()
+        previous_int = signal.signal(signal.SIGINT, request_stop)
+        previous_term = signal.signal(signal.SIGTERM, request_stop)
         control = server.stop_control_path()
         service_mutations = getattr(server, "service_mutation_inbox", None)
         if not callable(service_mutations):
@@ -988,15 +1275,27 @@ def _serve_state_owner(config_path: Path) -> dict[str, Any]:
             processed = int(service_mutations())
             time.sleep(0.01 if processed else 0.05)
         stopped = server.stop()
+        return {
+            "schema": OPERATOR_SCHEMA,
+            "command": "state-owner",
+            "identity": identity.to_dict(),
+            "stopped": stopped,
+        }
     finally:
-        signal.signal(signal.SIGINT, previous_int)
-        signal.signal(signal.SIGTERM, previous_term)
-    return {
-        "schema": OPERATOR_SCHEMA,
-        "command": "state-owner",
-        "identity": identity.to_dict(),
-        "stopped": stopped,
-    }
+        if previous_int is not None:
+            signal.signal(signal.SIGINT, previous_int)
+        if previous_term is not None:
+            signal.signal(signal.SIGTERM, previous_term)
+        if server is not None and server.lifecycle.value in {
+            "starting",
+            "ready",
+            "stopping",
+        }:
+            try:
+                server.stop()
+            except Exception:
+                pass
+        _cleanup_owned_owner_pid(paths["owner_pid"], owned_birth)
 
 
 def _scheduler_command(config_path: Path, *, dry_run: bool) -> tuple[str, ...]:
