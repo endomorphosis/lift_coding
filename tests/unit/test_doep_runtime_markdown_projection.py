@@ -71,6 +71,93 @@ def _paths(root: Path) -> dict[str, Path]:
     }
 
 
+def _blocked_retry_events(
+    module,
+    *,
+    workspace: str = "/campaign/worktrees/workspace_6b4c063bd5e3_bdd9b20cc1e1",
+) -> list[dict[str, object]]:
+    deferred = {
+        "cleaned": False,
+        "reason": "verification_deferred_checkout_lease_active",
+        "retained": True,
+    }
+    uncommitted = {
+        "committed": False,
+        "reason": "verification_deferred_checkout_lease_active",
+    }
+    return [
+        {
+            "sequence": 12,
+            "event_id": module.BLOCKED_RETRY_EVENT_IDS[12],
+            "type": "implementation_protected_path_verification_lock_timeout",
+            "task_id": module.BLOCKED_RETRY_TASK_ALIAS,
+            "canonical_task_cid": module.BLOCKED_RETRY_TASK_CID,
+            "attempt": 1,
+            "reason": module.BLOCKED_RETRY_REASON,
+            "lock": {"acquired": False, "reason": "lock_exists"},
+            "workspace_path": workspace,
+        },
+        {
+            "sequence": 13,
+            "event_id": module.BLOCKED_RETRY_EVENT_IDS[13],
+            "type": "protected_path_verification_deferred_worktree_retained",
+            "task_id": module.BLOCKED_RETRY_TASK_ALIAS,
+            "canonical_task_cid": module.BLOCKED_RETRY_TASK_CID,
+            "attempt": 1,
+            "reason": "verification_deferred_checkout_lease_active",
+            "cleanup_result": deferred,
+            "commit_result": uncommitted,
+            "implementation_commit": "",
+            "worktree_path": workspace,
+            "branch": module.BLOCKED_RETRY_BRANCH,
+        },
+        {
+            "sequence": 14,
+            "event_id": module.BLOCKED_RETRY_EVENT_IDS[14],
+            "type": "implementation_finished",
+            "task_id": module.BLOCKED_RETRY_TASK_ALIAS,
+            "task_cid": module.BLOCKED_RETRY_TASK_CID,
+            "canonical_task_cid": module.BLOCKED_RETRY_TASK_CID,
+            "attempt": 1,
+            "reason": module.BLOCKED_RETRY_REASON,
+            "provider_dispatched": True,
+            "returncode": 1,
+            "deferred": True,
+            "attempt_consumed": False,
+            "cleanup_result": deferred,
+            "commit_result": uncommitted,
+            "merge_result": {"merged": False, "reason": "not_attempted"},
+            "failed_preservation_result": {"retained": True, "preserved": False},
+            "implementation_commit": "",
+            "worktree_path": workspace,
+            "branch": module.BLOCKED_RETRY_BRANCH,
+            "baseline_ref": module.BLOCKED_RETRY_BASELINE,
+        },
+    ]
+
+
+def _event_payload(events: list[dict[str, object]]) -> bytes:
+    return b"".join(
+        json.dumps(event, sort_keys=True).encode("utf-8") + b"\n" for event in events
+    )
+
+
+def _blocked_task_row(module) -> dict[str, object]:
+    terminal = {
+        "operation": "database_portal_terminal_failure",
+        "reason": module.BLOCKED_RETRY_REASON,
+        "retryable": False,
+        "attempt_number": 1,
+        "control_expected_status": "in_progress",
+        "control_expected_revision": 3,
+    }
+    return {
+        "status": "blocked",
+        "revision": 4,
+        "body_json": json.dumps({"completion_receipt": terminal}, sort_keys=True),
+    }
+
+
 def test_runtime_markdown_is_deterministic_non_authoritative_duckdb_projection() -> None:
     module = _module()
     first = module._render_runtime_taskboard(
@@ -153,3 +240,127 @@ def test_stale_runtime_markdown_publisher_cannot_overwrite_newer_snapshot(tmp_pa
             launch_id="sha256:stale",
         )
     assert paths["task_projection"].read_bytes() == current
+
+
+def test_historical_blocked_retry_accepts_only_exact_nonadmitted_evidence() -> None:
+    module = _module()
+    events = _blocked_retry_events(module)
+
+    timeout, retained, finished = module._validated_blocked_retry_events(
+        _event_payload(events),
+        task_cid=module.BLOCKED_RETRY_TASK_CID,
+    )
+
+    assert timeout["sequence"] == 12
+    assert retained["cleanup_result"]["retained"] is True
+    assert finished["provider_dispatched"] is True
+    assert finished["implementation_commit"] == ""
+
+
+@pytest.mark.parametrize(
+    ("event_index", "field", "replacement"),
+    [
+        (0, "event_id", "sha256:wrong"),
+        (1, "worktree_path", "/outside/worktree"),
+        (2, "provider_dispatched", False),
+        (2, "branch", "implementation/unrelated"),
+        (2, "baseline_ref", "0" * 40),
+        (2, "merge_result", {"merged": True, "reason": "merged"}),
+    ],
+)
+def test_historical_blocked_retry_rejects_evidence_drift(
+    event_index: int,
+    field: str,
+    replacement: object,
+) -> None:
+    module = _module()
+    events = _blocked_retry_events(module)
+    events[event_index][field] = replacement
+
+    with pytest.raises(module.HandoffError, match="exact retained lock-timeout failure"):
+        module._validated_blocked_retry_events(
+            _event_payload(events),
+            task_cid=module.BLOCKED_RETRY_TASK_CID,
+        )
+
+
+def test_historical_blocked_retry_task_identity_is_sealed() -> None:
+    module = _module()
+    population = {
+        "tasks": [
+            {
+                "task_alias": module.BLOCKED_RETRY_TASK_ALIAS,
+                "task_cid": module.BLOCKED_RETRY_TASK_CID,
+            }
+        ]
+    }
+
+    assert module._blocked_retry_task_cid(population) == module.BLOCKED_RETRY_TASK_CID
+    population["tasks"][0]["task_cid"] = "sha256:wrong"
+    with pytest.raises(module.HandoffError, match="unique DOEP-030 identity"):
+        module._blocked_retry_task_cid(population)
+
+
+def test_historical_blocked_retry_authorization_binds_workspace_and_digests(
+    tmp_path: Path,
+) -> None:
+    module = _module()
+    root = tmp_path / "runtime"
+    state = root / "state"
+    workspace = root / "worktrees" / module.BLOCKED_RETRY_WORKSPACE_NAME
+    workspace.mkdir(parents=True)
+    event_path = state / module.BLOCKED_RETRY_ATTEMPT_RELATIVE / "portal-events.jsonl"
+    event_path.parent.mkdir(parents=True)
+    event_path.write_bytes(
+        _event_payload(_blocked_retry_events(module, workspace=str(workspace)))
+    )
+    paths = {
+        "root": root,
+        "state": state,
+        "blocked_retry_sidecar": root / "evidence.json",
+        "blocked_retry_authorization": root / "authorization.json",
+    }
+
+    sidecar, authorization = module._prepare_blocked_retry_authorization(
+        paths=paths,
+        task_cid=module.BLOCKED_RETRY_TASK_CID,
+        task_row=_blocked_task_row(module),
+    )
+    loaded_sidecar, loaded_authorization = module._load_blocked_retry_authorization(
+        paths=paths,
+        task_cid=module.BLOCKED_RETRY_TASK_CID,
+    )
+
+    assert loaded_sidecar == sidecar
+    assert loaded_authorization == authorization
+    assert sidecar["historical_candidate_fingerprint"] == "unavailable"
+    assert sidecar["retained_candidate_admitted"] is False
+    assert authorization["require_fresh_portal_revalidation"] is True
+
+
+def test_historical_blocked_retry_authorization_rejects_workspace_escape(
+    tmp_path: Path,
+) -> None:
+    module = _module()
+    root = tmp_path / "runtime"
+    state = root / "state"
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    event_path = state / module.BLOCKED_RETRY_ATTEMPT_RELATIVE / "portal-events.jsonl"
+    event_path.parent.mkdir(parents=True)
+    event_path.write_bytes(
+        _event_payload(_blocked_retry_events(module, workspace=str(outside)))
+    )
+    paths = {
+        "root": root,
+        "state": state,
+        "blocked_retry_sidecar": root / "evidence.json",
+        "blocked_retry_authorization": root / "authorization.json",
+    }
+
+    with pytest.raises(module.HandoffError, match="retained workspace is unavailable"):
+        module._prepare_blocked_retry_authorization(
+            paths=paths,
+            task_cid=module.BLOCKED_RETRY_TASK_CID,
+            task_row=_blocked_task_row(module),
+        )
