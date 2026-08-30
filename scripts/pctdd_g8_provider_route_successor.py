@@ -79,6 +79,10 @@ QUEUE_ENTRY_SCHEMA: Final[str] = (
     "ipfs_accelerate_py/agent-supervisor/intent-queue-entry@1"
 )
 QUEUE_STATE_SCHEMA: Final[str] = "pctdd/sealed-intent-queue-state@1"
+COORDINATION_STORAGE_NORMALIZATION_SCHEMA: Final[str] = (
+    "pctdd/private-stage-coordination-storage-normalization@1"
+)
+COORDINATION_COPY_BATCH_ROWS: Final[int] = 4096
 MAX_UNKNOWN_OUTCOME_REARMS: Final[int] = 3
 EXPECTED_TASK_ALIASES: Final[tuple[str, str]] = ("PCTDD-001", "PCTDD-029")
 EXPECTED_ROUTE: Final[dict[str, str]] = {
@@ -954,6 +958,282 @@ def _coordination_attempt(
     }
 
 
+def _coordination_storage_catalog(connection: Any) -> dict[str, Any]:
+    tables = [
+        [str(name), str(sql)]
+        for name, sql in connection.execute(
+            "SELECT table_name,sql FROM duckdb_tables() "
+            "WHERE database_name=current_database() AND schema_name='main' "
+            "ORDER BY table_name"
+        ).fetchall()
+    ]
+    indexes = [
+        [str(name), str(table), str(sql)]
+        for name, table, sql in connection.execute(
+            "SELECT index_name,table_name,sql FROM duckdb_indexes() "
+            "WHERE database_name=current_database() AND schema_name='main' "
+            "ORDER BY index_name"
+        ).fetchall()
+    ]
+    views = connection.execute(
+        "SELECT view_name FROM duckdb_views() "
+        "WHERE database_name=current_database() AND schema_name='main' "
+        "AND NOT internal ORDER BY view_name"
+    ).fetchall()
+    if views:
+        _fail("private coordination storage contains non-canonical views")
+    return {"tables": tables, "indexes": indexes}
+
+
+def _coordination_identifier(value: str) -> str:
+    if not value or not value.replace("_", "a").isalnum() or not value[0].isalpha():
+        _fail("private coordination storage has an unsafe identifier")
+    return f'"{value}"'
+
+
+def _normalize_private_coordination_storage(database: Path) -> dict[str, Any]:
+    """Rebuild one copied coordination store under the current schema authority.
+
+    Some stopped predecessor stores contain DuckDB ART pages that remain fully
+    readable but abort the first indexed state transition.  This operator-only
+    migration step copies logical rows through bounded in-memory Arrow batches
+    into a freshly initialized ``DatabaseCoordinator@1`` store.  It never
+    touches the stopped predecessor and requires identical logical projection
+    roots and exact current table/index catalogs before replacing the private
+    staged copy.
+    """
+
+    from ipfs_accelerate_py.agent_supervisor.merge.database_coordination import (
+        DatabaseCoordinator,
+    )
+
+    wal = database.with_name(database.name + ".wal")
+    if os.path.lexists(wal):
+        _fail("private coordination storage normalization found an uncheckpointed WAL")
+    before = g7._coordination_projection(database)
+    source_digest, source_size = g7._stable_file(
+        database,
+        root=database.parent,
+        noun="private pre-normalization coordination store",
+    )
+    source = database.with_name(f".{database.name}.logical-source")
+    if os.path.lexists(source):
+        _fail("private coordination normalization source already exists")
+    os.rename(database, source)
+    g7._fsync_directory(database.parent)
+    with DatabaseCoordinator(database):
+        pass
+    descriptor = os.open(
+        database,
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0),
+    )
+    try:
+        os.fchmod(descriptor, 0o600)
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+    source_connection = g7._open_local_database(source, read_only=True)
+    target_connection = g7._open_local_database(database, read_only=False)
+    row_counts: dict[str, int] = {}
+    try:
+        source_catalog = _coordination_storage_catalog(source_connection)
+        target_catalog = _coordination_storage_catalog(target_connection)
+        if source_catalog != target_catalog:
+            _fail("private coordination storage schema differs from current authority")
+        target_connection.execute("BEGIN TRANSACTION")
+        try:
+            for table_name, _table_sql in source_catalog["tables"]:
+                identifier = _coordination_identifier(table_name)
+                source_description = source_connection.execute(
+                    f"DESCRIBE SELECT * FROM {identifier}"
+                ).fetchall()
+                target_description = target_connection.execute(
+                    f"DESCRIBE SELECT * FROM {identifier}"
+                ).fetchall()
+                if source_description != target_description:
+                    _fail(
+                        f"private coordination table layout differs: {table_name}"
+                    )
+                source_rows = int(
+                    source_connection.execute(
+                        f"SELECT COUNT(*) FROM {identifier}"
+                    ).fetchone()[0]
+                )
+                target_rows = int(
+                    target_connection.execute(
+                        f"SELECT COUNT(*) FROM {identifier}"
+                    ).fetchone()[0]
+                )
+                row_counts[table_name] = source_rows
+                if table_name == "coordination_metadata":
+                    if source_connection.execute(
+                        f"SELECT * FROM {identifier} ORDER BY ALL"
+                    ).fetchall() != target_connection.execute(
+                        f"SELECT * FROM {identifier} ORDER BY ALL"
+                    ).fetchall():
+                        _fail("private coordination metadata differs")
+                    continue
+                if target_rows != 0:
+                    _fail(f"fresh coordination table is not empty: {table_name}")
+                if source_rows == 0:
+                    continue
+                try:
+                    arrow_batches = source_connection.execute(
+                        f"SELECT * FROM {identifier} ORDER BY ALL"
+                    ).to_arrow_reader(COORDINATION_COPY_BATCH_ROWS)
+                except Exception as exc:
+                    _fail("in-memory coordination logical copy is unavailable", exc)
+                view_name = f"pctdd_copy_{table_name}"
+                for arrow_batch in arrow_batches:
+                    target_connection.register(view_name, arrow_batch)
+                    try:
+                        target_connection.execute(
+                            f"INSERT INTO {identifier} SELECT * FROM {view_name}"
+                        )
+                    finally:
+                        target_connection.unregister(view_name)
+            target_connection.execute("COMMIT")
+        except BaseException:
+            try:
+                target_connection.execute("ROLLBACK")
+            except Exception:
+                pass
+            raise
+        for table_name, expected_count in row_counts.items():
+            observed = int(
+                target_connection.execute(
+                    f"SELECT COUNT(*) FROM {_coordination_identifier(table_name)}"
+                ).fetchone()[0]
+            )
+            if observed != expected_count:
+                _fail(f"private coordination row count differs: {table_name}")
+        target_connection.execute("CHECKPOINT")
+    finally:
+        source_connection.close()
+        target_connection.close()
+
+    with DatabaseCoordinator(database) as coordinator:
+        coordinator.coordination_registry_projection()
+    after = g7._coordination_projection(database)
+    if after["projection_root"] != before["projection_root"]:
+        _fail("private coordination logical projection changed during normalization")
+    normalized_digest, normalized_size = g7._stable_file(
+        database,
+        root=database.parent,
+        noun="private normalized coordination store",
+    )
+    source.unlink()
+    g7._fsync_directory(database.parent)
+    catalog_cid = g7._identity(
+        {
+            "schema": "pctdd/coordination-storage-catalog@1",
+            **source_catalog,
+        }
+    )
+    return {
+        "schema": COORDINATION_STORAGE_NORMALIZATION_SCHEMA,
+        "reason": "duckdb_art_index_physical_rebuild",
+        "copy_backend": "duckdb_arrow_in_memory",
+        "batch_rows": COORDINATION_COPY_BATCH_ROWS,
+        "external_access": False,
+        "source_mutated": False,
+        "source_sha256": source_digest,
+        "source_size_bytes": source_size,
+        "normalized_sha256": normalized_digest,
+        "normalized_size_bytes": normalized_size,
+        "pre_projection_root": before["projection_root"],
+        "post_projection_root": after["projection_root"],
+        "schema_catalog_cid": catalog_cid,
+        "table_count": len(source_catalog["tables"]),
+        "index_count": len(source_catalog["indexes"]),
+        "row_counts": dict(sorted(row_counts.items())),
+    }
+
+
+def _validate_coordination_storage_normalizations(
+    records: Sequence[Mapping[str, Any]], policy: Mapping[str, Any]
+) -> list[dict[str, Any]]:
+    expected_keys = {
+        "schema",
+        "lane",
+        "reason",
+        "copy_backend",
+        "batch_rows",
+        "external_access",
+        "source_mutated",
+        "source_sha256",
+        "source_size_bytes",
+        "normalized_sha256",
+        "normalized_size_bytes",
+        "pre_projection_root",
+        "post_projection_root",
+        "schema_catalog_cid",
+        "table_count",
+        "index_count",
+        "row_counts",
+    }
+    by_lane = {
+        int(item["lane"]): dict(item)
+        for item in records
+        if isinstance(item, Mapping) and type(item.get("lane")) is int
+    }
+    policy_by_lane = {
+        int(item["lane"]): dict(item) for item in policy["coordination_stores"]
+    }
+    if (
+        len(records) != 4
+        or len(by_lane) != 4
+        or set(by_lane) != set(range(4))
+        or set(policy_by_lane) != set(range(4))
+    ):
+        _fail("coordination storage normalization does not cover four exact lanes")
+    catalog_cids: set[str] = set()
+    for lane in range(4):
+        record = by_lane[lane]
+        expected_projection = policy_by_lane[lane]["projection_root"]
+        if (
+            set(record) != expected_keys
+            or record["schema"] != COORDINATION_STORAGE_NORMALIZATION_SCHEMA
+            or record["reason"] != "duckdb_art_index_physical_rebuild"
+            or record["copy_backend"] != "duckdb_arrow_in_memory"
+            or record["batch_rows"] != COORDINATION_COPY_BATCH_ROWS
+            or record["external_access"] is not False
+            or record["source_mutated"] is not False
+            or record["pre_projection_root"] != expected_projection
+            or record["post_projection_root"] != expected_projection
+            or type(record["source_size_bytes"]) is not int
+            or int(record["source_size_bytes"]) <= 0
+            or type(record["normalized_size_bytes"]) is not int
+            or int(record["normalized_size_bytes"]) <= 0
+            or type(record["table_count"]) is not int
+            or int(record["table_count"]) <= 0
+            or type(record["index_count"]) is not int
+            or int(record["index_count"]) <= 0
+            or not isinstance(record["row_counts"], Mapping)
+            or not record["row_counts"]
+            or any(
+                not isinstance(value, int) or value < 0
+                for value in record["row_counts"].values()
+            )
+            or any(
+                not isinstance(record[field], str)
+                or len(record[field]) != 64
+                or any(char not in "0123456789abcdef" for char in record[field])
+                for field in ("source_sha256", "normalized_sha256")
+            )
+            or not isinstance(record["schema_catalog_cid"], str)
+            or not str(record["schema_catalog_cid"]).startswith("sha256:")
+            or len(str(record["schema_catalog_cid"])) != 71
+        ):
+            _fail(f"lane {lane} coordination storage normalization is invalid")
+        catalog_cids.add(str(record["schema_catalog_cid"]))
+    if len(catalog_cids) != 1:
+        _fail("coordination storage normalizations use different schemas")
+    return [by_lane[lane] for lane in range(4)]
+
+
 def _settle_coordination_attempt(
     database: Path, settlement: Mapping[str, Any]
 ) -> dict[str, Any]:
@@ -1544,6 +1824,7 @@ def _migration_body(
     route_binding: Mapping[str, Any],
     prior_projection: Mapping[str, Any],
     coordination_settlements: Sequence[Mapping[str, Any]],
+    coordination_storage_normalizations: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
     return {
         "schema": EVIDENCE_SCHEMA,
@@ -1568,6 +1849,9 @@ def _migration_body(
         ],
         "coordination_settlements": [
             dict(item) for item in coordination_settlements
+        ],
+        "coordination_storage_normalizations": [
+            dict(item) for item in coordination_storage_normalizations
         ],
         "pre_effect_evidence_cids": [
             str(_validate_pre_effect_evidence(item)["evidence_cid"])
@@ -1596,6 +1880,7 @@ def _apply_control_suffix(
     route_binding: Mapping[str, Any],
     coordination_settlements: Sequence[Mapping[str, Any]],
     prior_projection: Mapping[str, Any],
+    coordination_storage_normalizations: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
     """Append the one reviewed g8 suffix through canonical repositories."""
 
@@ -1672,6 +1957,9 @@ def _apply_control_suffix(
             route_binding=route_binding,
             prior_projection=prior_projection,
             coordination_settlements=coordination_settlements,
+            coordination_storage_normalizations=(
+                coordination_storage_normalizations
+            ),
         )
         migration_digest = g7._control_plane_content_identity(migration_body)
         evidence = source.record_evidence(
@@ -1846,6 +2134,9 @@ def _apply_control_suffix(
         "migration_digest": migration_digest,
         "status_receipts": status_receipts,
         "provider_role_receipts": role_receipts,
+        "coordination_storage_normalizations": [
+            dict(item) for item in coordination_storage_normalizations
+        ],
         "completed_definition_cids": completed_definitions,
         "prior_task_revision_count": prior_task_revision_count,
     }
@@ -1865,6 +2156,9 @@ def _verify_staged_successor(
         DatabaseTaskSource,
     )
 
+    _validate_coordination_storage_normalizations(
+        suffix.get("coordination_storage_normalizations", ()), policy
+    )
     post = g7._control_projection(database)
     target = dict(policy["target_control_projection"])
     if post["statuses"] != dict(target["statuses"]):
@@ -2512,6 +2806,12 @@ def _verify_target(
     live_owner: Mapping[str, Any] | None,
     allow_progressed: bool,
 ) -> dict[str, Any]:
+    _validate_coordination_storage_normalizations(
+        receipt.get("suffix", {}).get(
+            "coordination_storage_normalizations", ()
+        ),
+        policy,
+    )
     rows = _migration_rows(control_target, receipt)
     if rows["migration_event_prefix_digest"] != receipt[
         "migration_event_prefix_digest"
@@ -2881,6 +3181,17 @@ def migrate_source_provider_route(
             observations.append((f"lane-{lane}-execution", target))
         _assert_pre_effect_attempts(observations, policy["settlements"])
 
+        storage_normalizations = [
+            {
+                "lane": lane,
+                **_normalize_private_coordination_storage(database),
+            }
+            for lane, database in enumerate(coordination_paths)
+        ]
+        storage_normalizations = _validate_coordination_storage_normalizations(
+            storage_normalizations, policy
+        )
+
         settlements: list[dict[str, Any]] = []
         by_lane = {
             int(item["lane"]): dict(item) for item in policy["settlements"]
@@ -2904,6 +3215,7 @@ def migrate_source_provider_route(
             route_binding=route_binding,
             coordination_settlements=settlements,
             prior_projection=prior["control_projection"],
+            coordination_storage_normalizations=storage_normalizations,
         )
         g7._checkpoint_database(stage_control)
         verified = _verify_staged_successor(

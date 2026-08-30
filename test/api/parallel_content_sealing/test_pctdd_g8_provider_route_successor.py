@@ -288,6 +288,56 @@ def _policy(migration: Any, database: Path) -> tuple[dict[str, Any], dict[str, A
     return policy, binding
 
 
+def test_private_coordination_storage_normalization_preserves_authority_and_mutates(
+    migration: Any, tmp_path: Path
+) -> None:
+    from ipfs_accelerate_py.agent_supervisor.merge.database_coordination import (
+        DatabaseCoordinator,
+    )
+
+    database = tmp_path / "quack-lane-coordination.duckdb"
+    with DatabaseCoordinator(database, clock_ms=lambda: 1_000) as coordinator:
+        coordinator.register_task(task_cid="task:pctdd", task_id="PCTDD")
+        claim = coordinator.claim_task(
+            task_cid="task:pctdd",
+            owner_session_id="session:pctdd",
+            lease_ms=60_000,
+        )
+    before = migration.g7._coordination_projection(database)
+
+    receipt = migration._normalize_private_coordination_storage(database)
+
+    after = migration.g7._coordination_projection(database)
+    assert receipt["schema"] == migration.COORDINATION_STORAGE_NORMALIZATION_SCHEMA
+    assert receipt["external_access"] is False
+    assert receipt["source_mutated"] is False
+    assert receipt["pre_projection_root"] == before["projection_root"]
+    assert receipt["post_projection_root"] == before["projection_root"]
+    assert after["projection_root"] == before["projection_root"]
+    assert receipt["source_sha256"] != receipt["normalized_sha256"]
+    assert receipt["row_counts"]["task_claims"] == 1
+    assert not database.with_name(
+        f".{database.name}.logical-source"
+    ).exists()
+
+    with DatabaseCoordinator(
+        database, clock_ms=lambda: int(claim.expires_at_ms) + 1
+    ) as coordinator:
+        expired = coordinator.expire_task_claim(
+            claim, now_ms=int(claim.expires_at_ms) + 1
+        )
+    assert expired.state.value == "expired"
+    final = migration.g7._coordination_projection(database)
+    final_claim = migration.g7._active_claim_for_history(
+        final,
+        {
+            "claim_id": claim.claim_id,
+            "attempt_id": claim.attempt_id,
+        },
+    )
+    assert final_claim["state"] == "expired"
+
+
 def test_control_suffix_revises_only_incomplete_provider_roles(
     migration: Any, tmp_path: Path
 ) -> None:
