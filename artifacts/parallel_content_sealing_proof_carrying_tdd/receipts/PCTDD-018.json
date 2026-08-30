@@ -1,0 +1,117 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-018.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/parallel_verification.py",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_018_parallel_proof_verification.py"
+  ],
+  "claim": "Worker-authored integration that proof, signature, receipt and integrity checks are bounded and deterministically aggregated. Typed unavailable production ZK, key ceremony, groth16-unqualified, provekit, recursive verification, direct-execution, aggregate-selected-test-ZK, and serial WAL/CAS publication cases are recorded without changing claim meaning. This receipt does not complete PCTDD-018, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; current-root publication; production ZK; recursive child verification; underlying test execution; self-approval; task completion",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-018@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "aggregation_label": "manifest_aggregation",
+    "check_kinds": [
+      "integrity",
+      "proof",
+      "receipt",
+      "signature"
+    ],
+    "claim_class": "IntegrityCommitment",
+    "claims_test_execution": false,
+    "does_not": "execution or semantics; current-root publication; production ZK; recursive child verification; underlying test execution; self-approval",
+    "establishes": "proof, signature, receipt and integrity checks are bounded and deterministically aggregated",
+    "interface": "ParallelProofVerification@1",
+    "may_authorize_skip": false,
+    "predecessor_interfaces": [
+      "SealVerification@1",
+      "ProofAggregator@1",
+      "IncrementalProofBackendAdapter@1",
+      "ProofWorkScheduler@1"
+    ],
+    "production_admitted": false,
+    "publication_authority_invoked": false,
+    "recursively_verifies_children": false,
+    "result_interface": "ParallelProofVerificationResult@1",
+    "schema_authority": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.parallel_verification"
+  },
+  "dependency_receipts": [
+    "PCTDD-003",
+    "PCTDD-032"
+  ],
+  "limitations": {
+    "aggregate_selected_test_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "aggregate_selected_test_zk_missing",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "groth16_unqualified": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "groth16_backend_present_unqualified",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "provekit": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "provekit_adapter_source_present_unadmitted",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "recursive_verification": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "recursion_not_admitted",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "serial_wal_cas_publication": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "verification_has_no_publication_authority",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-018",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-018@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
