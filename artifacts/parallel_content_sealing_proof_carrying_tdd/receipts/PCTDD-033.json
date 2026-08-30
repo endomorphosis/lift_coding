@@ -1,0 +1,117 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-033.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/aggregate_test_batch_contracts.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_033_aggregate_test_batch.py"
+  ],
+  "claim": "Worker-authored contracts that aggregate leaves bind the exact selected population, ordering, count, cohorts and trust roots. Typed unavailable aggregate selected-test ZK, composite phase receipt, signed runner attestation, TestExecutionKeyV2, semantic-state selection, production ZK, key ceremony, and direct-execution cases are recorded without changing claim meaning. This receipt does not complete PCTDD-033, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; CPython execution; current-root publication; task completion; production ZK; adapter execution; signed admission; aggregate ZK; upgrade of leaf evidence; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-033@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "aggregate_test_batch": "AggregateTestBatch@1",
+    "aggregate_test_batch_leaf": "AggregateTestBatchLeaf@1",
+    "binds_cohorts": true,
+    "binds_count": true,
+    "binds_ordering": true,
+    "binds_selected_population": true,
+    "binds_trust_roots": true,
+    "cannot_exceed_leaf_evidence": true,
+    "fixture_cohort": "AggregateFixtureCohort@1",
+    "leaf_statement": "TestPassStatementV1",
+    "leaf_statement_version": 1,
+    "may_authorize_skip": false,
+    "production_admitted": false,
+    "required_leaf_bindings": [
+      "population",
+      "ordering",
+      "count",
+      "cohorts",
+      "trust_roots"
+    ],
+    "selected_population": "AggregateSelectedPopulation@1",
+    "successor_proof_claim_class": "ReceiptAggregationZkProof",
+    "trust_root_binding": "AggregateTrustRootBinding@1"
+  },
+  "dependency_receipts": [
+    "PCTDD-002",
+    "PCTDD-003"
+  ],
+  "limitations": {
+    "aggregate_selected_test_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "aggregate_selected_test_zk_missing",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "composite_phase_receipt": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "composite_phase_receipt_not_assembled_by_aggregate_batch",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "semantic_state_selection": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "semantic_state_selection_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "signed_runner_attestation": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "signed_runner_attestation_not_verified",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "test_execution_key_v2": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "test_execution_key_v2_not_assembled_by_aggregate_batch",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-033",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-033@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
