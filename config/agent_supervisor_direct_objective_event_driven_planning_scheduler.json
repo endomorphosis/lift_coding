@@ -1,0 +1,201 @@
+{
+  "accepted_plan_revision_alias": "DOEP-PLAN-V2",
+  "anti_runaway": {
+    "event_debounce_seconds": 5,
+    "max_generated_tasks": 24,
+    "max_replan_epochs": 8,
+    "max_tasks_per_objective": 109,
+    "max_tasks_per_refill": 4,
+    "nonconvergence_quarantine": true,
+    "oscillation_detection": true,
+    "repeated_plan_hash_detection": true,
+    "stable_frontier_detection": true
+  },
+  "board_namespace": "agent-supervisor-direct-objective-and-event-driven-planning-v1",
+  "check_interval_seconds": 20,
+  "codebase_refill_enabled": false,
+  "daemon_interval_seconds": 20,
+  "database_program": {
+    "authority_mode": "quack",
+    "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
+    "event_store_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/events",
+    "explicit_legacy": false,
+    "export_profile": "doep-v1",
+    "failover_policy": "fail_closed",
+    "quack_endpoint": "quack:127.0.0.1:47941",
+    "runtime_registry_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/registry",
+    "schema": "ipfs_accelerate_py/agent-supervisor/database-program-config@1",
+    "schema_revision": "1",
+    "store_generation": "doep-v1-r2",
+    "store_id": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/control.duckdb",
+    "task_source_kind": "duckdb",
+    "worktree_root": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/worktrees"
+  },
+  "dependency_guardrail_enabled": true,
+  "ducklake_projection_program": {
+    "acceptance_prerequisite": false,
+    "authority": false,
+    "catalog_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/ducklake/catalog.duckdb",
+    "completion_prerequisite": false,
+    "data_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/ducklake/data",
+    "may_grant_authority": false,
+    "mode": "enabled_non_authoritative",
+    "outage_policy": "typed unavailable and replayable; never block DuckDB authority",
+    "scheduling_prerequisite": false
+  },
+  "exit_when_all_tracks_terminal": false,
+  "goal_prefix": "DOEP-G",
+  "idle_lane_work_stealing": "",
+  "implementation_log_stall_seconds": 1200,
+  "implementation_max_timeout_seconds": 28800,
+  "implementation_retry_budget": 1,
+  "implementation_timeout_seconds": 7200,
+  "initial_projection": {
+    "blocked_task_ids": [],
+    "completed_task_ids": [],
+    "goal_count": 50,
+    "ready_task_ids": [
+      "DOEP-000",
+      "DOEP-001",
+      "DOEP-002",
+      "DOEP-003"
+    ],
+    "task_count": 85,
+    "task_dependency_count": 226,
+    "terminal_task_id": "DOEP-126"
+  },
+  "lanes": [
+    {
+      "index": 0,
+      "initial_focus": "authority-and-interfaces",
+      "name": "doep-lane-0",
+      "strict_shard_remainder": 0
+    },
+    {
+      "index": 1,
+      "initial_focus": "events-and-state",
+      "name": "doep-lane-1",
+      "strict_shard_remainder": 1
+    },
+    {
+      "index": 2,
+      "initial_focus": "context-and-planning",
+      "name": "doep-lane-2",
+      "strict_shard_remainder": 2
+    },
+    {
+      "index": 3,
+      "initial_focus": "qualification-and-release",
+      "name": "doep-lane-3",
+      "strict_shard_remainder": 3
+    }
+  ],
+  "max_lanes": 4,
+  "max_restarts": 3,
+  "max_task_attempts": 2,
+  "merge_retry_budget": 2,
+  "merge_target_branch": "agent/agent-supervisor-direct-objective-and-event-driven-planning-v1",
+  "objective_goal_refinement_enabled": false,
+  "objective_refill_enabled": false,
+  "objectives_path": "docs/architecture/agent_supervisor_direct_objective_event_driven_planning.objectives.md",
+  "operational_control_plane": {
+    "automatic_file_fallback_permitted": false,
+    "direct_multi_process_duckdb_file_open_permitted": false,
+    "duckdb_role": "authoritative transactional goals/tasks/CAS/fences/receipts/events",
+    "ducklake_role": "rebuildable analytics/history projection",
+    "markdown_is_bootstrap_only": true,
+    "name": "DuckDB + exclusive Quack owner + non-authoritative DuckLake",
+    "outage_policy": "fail_closed",
+    "quack_role": "authenticated exclusive loopback mutation owner"
+  },
+  "plan_path": "docs/architecture/AGENT_SUPERVISOR_DIRECT_OBJECTIVE_AND_EVENT_DRIVEN_PLANNING_V1_PLAN.md",
+  "plan_root_cid": "sha256:3bea3ee75d48e051fae319d6e6748b9a22ccc2de9ac98fb4589934b03f68e33d",
+  "poll_interval_seconds": 5,
+  "program_identifier": "agent-supervisor-direct-objective-and-event-driven-planning-v1",
+  "protected_paths": [
+    "docs/architecture/AGENT_SUPERVISOR_DIRECT_OBJECTIVE_AND_EVENT_DRIVEN_PLANNING_V1_PLAN.md",
+    "docs/architecture/agent_supervisor_direct_objective_event_driven_planning.objectives.md",
+    "docs/architecture/agent_supervisor_direct_objective_event_driven_planning.todo.md",
+    "config/agent_supervisor_direct_objective_event_driven_planning_board.json",
+    "config/agent_supervisor_direct_objective_event_driven_planning_validation_profiles.json",
+    "config/agent_supervisor_direct_objective_event_driven_planning_scheduler.json",
+    "scripts/generate_agent_supervisor_direct_objective_event_driven_planning_board.py",
+    "scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py",
+    "scripts/ops/agent_supervisor/configured_board_scheduler.py",
+    "scripts/ops/agent_supervisor/direct_objective_event_driven_planning_handoff.py",
+    "scripts/ops/agent_supervisor/implementation_supervisor_entry.py"
+  ],
+  "provider": {
+    "completion_authority": "controller-owned sealed validation and database CAS",
+    "max_concurrency": 4,
+    "model_id": "grok-4.6",
+    "provider_id": "grok_cli",
+    "secrets_from_environment_only": true
+  },
+  "reconciliation_guardrail_enabled": true,
+  "retry_budget_guardrail_enabled": true,
+  "root_goal_id": "DOEP-G000",
+  "runtime_paths": {
+    "evidence": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/evidence",
+    "logs": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/logs",
+    "merge_queue": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/merge-queue",
+    "quack_owner": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/quack-owner",
+    "root": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1",
+    "state": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/state",
+    "worktrees": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/worktrees"
+  },
+  "schema": "ipfs_accelerate_py.agent_supervisor.direct-objective-event-driven-planning.scheduler_config@1",
+  "source_binding": {
+    "accelerator_required_ancestor": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "accelerator_required_branch": "agent/agent-supervisor-direct-objective-and-event-driven-planning-v1",
+    "bootstrap_task_source": "duckdb",
+    "changed_revision_requires_fresh_inventory_and_baseline": true,
+    "ipfs_accelerate_planning_revision": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "ipfs_accelerate_planning_tree": "c52908e40287051336d81c81a8f4799869846f03",
+    "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
+    "ipfs_datasets_planning_revision": "f49afc579c22856849ca9f739435e5820003384f",
+    "ipfs_datasets_planning_tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+    "ipfs_datasets_submodule_path": "external/ipfs_datasets",
+    "ipfs_kit_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "ipfs_kit_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+    "ipfs_kit_submodule_path": "external/ipfs_kit",
+    "lift_coding_planning_revision": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "lift_coding_planning_tree": "99e85bfe584b7688ffbeff86da1e612dd6893a42",
+    "require_clean_nested_worktree_at_task_start": true,
+    "require_initialized_gitlinks": true,
+    "require_superproject_gitlink_equals_nested_head": true
+  },
+  "stale_seconds": 1800,
+  "strict_task_sharding": true,
+  "task_prefix": "DOEP-",
+  "taskboard_json_path": "config/agent_supervisor_direct_objective_event_driven_planning_board.json",
+  "taskboard_path": "docs/architecture/agent_supervisor_direct_objective_event_driven_planning.todo.md",
+  "truth_and_safety": {
+    "hard_promotion_gates_must_remain_zero": [
+      "false_completions",
+      "unauthorized_mutations",
+      "simulated_as_live",
+      "stale_cache_or_context_admissions",
+      "stale_lease_or_fence_completions",
+      "confirmation_replays",
+      "double_terminalization",
+      "double_execution",
+      "path_or_scope_escapes",
+      "hidden_validation_reductions",
+      "critical_omissions",
+      "selected_test_false_negatives",
+      "self_authorized_promotions",
+      "sibling_state_writes"
+    ]
+  },
+  "validation_dispatcher_path": "scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py",
+  "validation_profile_path": "config/agent_supervisor_direct_objective_event_driven_planning_validation_profiles.json",
+  "validation_retry_budget": 2,
+  "validator_path": "scripts/generate_agent_supervisor_direct_objective_event_driven_planning_board.py",
+  "watchdog_startup_grace_seconds": 180,
+  "worktree_submodule_paths": [
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit"
+  ]
+}
