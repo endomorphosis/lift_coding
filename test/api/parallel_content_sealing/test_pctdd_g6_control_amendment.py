@@ -49,6 +49,44 @@ def test_g7_control_generator_is_byte_idempotent() -> None:
     }
 
 
+def test_g7_verified_source_successor_is_the_current_operator_seal(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    materializer = _load("pctdd_g7_check_sealed", MATERIALIZER)
+    board = SimpleNamespace(
+        resolved_database_program=lambda: SimpleNamespace(
+            store_generation="pctdd-v1-g7"
+        )
+    )
+    population = {
+        "source_head": "current-head",
+        "repository_tree_id": "current-tree",
+    }
+    monkeypatch.setattr(
+        materializer,
+        "_load_board",
+        lambda _path: (board, {"sealed": True}, b"{}"),
+    )
+    monkeypatch.setattr(materializer, "_population", lambda *_args: population)
+    monkeypatch.setattr(
+        materializer,
+        "_check_source_binding",
+        lambda **_kwargs: {
+            "schema": "pctdd/source-binding-migration-check@1",
+            "valid": True,
+            "receipt": {"receipt_cid": "sha256:current"},
+        },
+    )
+
+    result = materializer.check_sealed(ROOT / "config.json")
+
+    assert result["valid"] is True
+    assert result["operator_controls_sealed"] is True
+    assert result["operator_seal_kind"] == "accepted_source_binding_successor"
+    assert result["source_head"] == "current-head"
+    assert result["repository_tree_id"] == "current-tree"
+
+
 def test_g7_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
     generator = _load("pctdd_g7_generator", GENERATOR)
     config = generator.render_config()

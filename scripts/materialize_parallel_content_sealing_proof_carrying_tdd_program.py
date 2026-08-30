@@ -1373,11 +1373,28 @@ def check_sealed(config_path: Path) -> dict[str, Any]:
     board, config, _config_bytes = _load_board(config_path)
     population = _population(board, config)
     if board.resolved_database_program().store_generation == "pctdd-v1-g7":
-        return _check_source_binding(
+        migration = _check_source_binding(
             config=config,
             population=population,
             allow_progressed=True,
         )
+        if migration.get("valid") is not True:
+            raise MaterializationError(
+                "PCTDD g7 source-binding successor is not admitted"
+            )
+        # PCTDD-000 remains historically completed; the g7 migration adds one
+        # operator-owned evidence node bound to this exact source without
+        # reopening or rewriting that accepted completion.  A successful
+        # independent migration verification is therefore the successor seal
+        # consumed by the configured-board launch gate.
+        return {
+            **migration,
+            "mode": "check-sealed",
+            "operator_controls_sealed": True,
+            "operator_seal_kind": "accepted_source_binding_successor",
+            "source_head": population["source_head"],
+            "repository_tree_id": population["repository_tree_id"],
+        }
     paths = _runtime_paths(board)
     if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
         raise MaterializationError("PCTDD authority has not been materialized and sealed")
