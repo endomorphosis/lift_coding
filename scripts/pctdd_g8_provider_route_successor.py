@@ -2134,6 +2134,9 @@ def _apply_control_suffix(
         "migration_digest": migration_digest,
         "status_receipts": status_receipts,
         "provider_role_receipts": role_receipts,
+        "coordination_settlements": [
+            dict(item) for item in coordination_settlements
+        ],
         "coordination_storage_normalizations": [
             dict(item) for item in coordination_storage_normalizations
         ],

@@ -362,6 +362,7 @@ def test_control_suffix_revises_only_incomplete_provider_roles(
     post = migration.g7._control_projection(database)
     assert post["event_count"] == prior["event_count"] + 9
     assert len(suffix["status_receipts"]) == 2
+    assert suffix["coordination_settlements"] == settled
     assert before != migration.g7._stable_file(database, root=tmp_path, noun="after")
     from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import (
         DatabaseTaskSource,
