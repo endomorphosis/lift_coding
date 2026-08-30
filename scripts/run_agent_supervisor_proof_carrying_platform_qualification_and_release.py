@@ -359,6 +359,10 @@ def _load_config(config_path: Path) -> tuple[Any, dict[str, Any]]:
     ready = [str(item) for item in projection.get("ready_task_ids", ())]
     if not ready or BOOTSTRAP_TASK in ready:
         raise OperatorError("PCPR campaign frontier must be ready without re-claiming PCPR-004")
+    if int(board.max_lanes) != 3:
+        raise OperatorError("PCPR campaign admits exactly three supervisor lanes")
+    if str(config.get("idle_lane_work_stealing") or "") != "virgin-transfer":
+        raise OperatorError("PCPR campaign must enable virgin-transfer work stealing")
     return board, config
 
 
@@ -1313,9 +1317,11 @@ def _log_findings(
             # the task's own threat vocabulary (for example "fatal" and
             # "quarantine").  They are candidate evidence, not operational
             # health logs, so recursively scanning them creates false alarms.
+            patterns = ("*.log", "lane-*/*.log") if root == paths["state"] else ("*.log",)
             candidates.extend(
                 path
-                for path in root.glob("*.log")
+                for pattern in patterns
+                for path in root.glob(pattern)
                 if path.is_file()
                 and path.stat().st_mtime + 5.0 >= not_before_epoch
             )
@@ -1365,17 +1371,17 @@ def _supervisor_status(
     freshness = max(
         120.0, float(board.payload.get("check_interval_seconds") or 20.0) * 4.0
     )
+    state_prefix = re.sub(
+        r"[^a-z0-9._-]+", "-", str(board.task_prefix).strip().lower()
+    ).strip("-") or "pcpr"
     lanes: list[dict[str, Any]] = []
     bad_lane = False
     for index in range(expected):
-        selected = (
-            paths["state"] / "pcpr_supervisor.pid",
-            paths["state"] / "pcpr_managed_daemon.pid",
-            paths["state"] / "pcpr_supervisor_status.json",
-        )
-        supervisor_pid = _pid(selected[0])
-        daemon_pid = _pid(selected[1])
-        status_path = selected[2]
+        lane_dir = paths["state"] / f"lane-{index}"
+        prefix = f"{state_prefix}_lane_{index}"
+        supervisor_pid = _pid(lane_dir / f"{prefix}_supervisor.pid")
+        daemon_pid = _pid(lane_dir / f"{prefix}_managed_daemon.pid")
+        status_path = lane_dir / f"{prefix}_supervisor_status.json"
         projection: dict[str, Any] = {"status": "absent"}
         fresh = False
         bound = False
@@ -1417,7 +1423,7 @@ def _supervisor_status(
         lanes.append(
             {
                 "lane_index": index,
-                "state_layout": "single_track_root",
+                "state_layout": f"lane-{index}",
                 "supervisor_pid": supervisor_pid,
                 "supervisor_alive": supervisor_alive,
                 "daemon_pid": daemon_pid,
