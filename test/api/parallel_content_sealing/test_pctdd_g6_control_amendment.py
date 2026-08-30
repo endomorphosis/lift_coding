@@ -31,7 +31,7 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def test_g7_control_generator_is_byte_idempotent() -> None:
+def test_g8_control_generator_is_byte_idempotent() -> None:
     result = subprocess.run(
         [sys.executable, str(GENERATOR), "--check"],
         cwd=ROOT,
@@ -49,13 +49,13 @@ def test_g7_control_generator_is_byte_idempotent() -> None:
     }
 
 
-def test_g7_verified_source_successor_is_the_current_operator_seal(
+def test_g8_verified_provider_route_successor_is_the_current_operator_seal(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    materializer = _load("pctdd_g7_check_sealed", MATERIALIZER)
+    materializer = _load("pctdd_g8_check_sealed", MATERIALIZER)
     board = SimpleNamespace(
         resolved_database_program=lambda: SimpleNamespace(
-            store_generation="pctdd-v1-g7"
+            store_generation="pctdd-v1-g8"
         )
     )
     population = {
@@ -70,9 +70,9 @@ def test_g7_verified_source_successor_is_the_current_operator_seal(
     monkeypatch.setattr(materializer, "_population", lambda *_args: population)
     monkeypatch.setattr(
         materializer,
-        "_check_source_binding",
+        "_check_source_provider_route",
         lambda **_kwargs: {
-            "schema": "pctdd/source-binding-migration-check@1",
+            "schema": "pctdd/source-provider-route-migration-check@1",
             "valid": True,
             "receipt": {"receipt_cid": "sha256:current"},
         },
@@ -82,22 +82,23 @@ def test_g7_verified_source_successor_is_the_current_operator_seal(
 
     assert result["valid"] is True
     assert result["operator_controls_sealed"] is True
-    assert result["operator_seal_kind"] == "accepted_source_binding_successor"
+    assert result["operator_seal_kind"] == "accepted_source_provider_route_successor"
     assert result["source_head"] == "current-head"
     assert result["repository_tree_id"] == "current-tree"
 
 
-def test_g7_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
-    generator = _load("pctdd_g7_generator", GENERATOR)
+def test_g8_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
+    generator = _load("pctdd_g8_generator", GENERATOR)
     config = generator.render_config()
     assert generator.PLAN_REVISION == "PCTDD-PLAN-V1.1"
     assert config["accepted_plan_revision_alias"] == "PCTDD-PLAN-V1.1"
-    assert config["database_program"]["store_generation"] == "pctdd-v1-g7"
-    assert config["database_program"]["predecessor_store_generation"] == "pctdd-v1-g6"
+    assert config["database_program"]["store_generation"] == "pctdd-v1-g8"
+    assert config["database_program"]["predecessor_store_generation"] == "pctdd-v1-g7"
     assert config["database_program"]["predecessor_is_read_only_history"] is True
     assert config["database_program"]["historical_store_generations"] == [
         "pctdd-v1-g5",
         "pctdd-v1-g6",
+        "pctdd-v1-g7",
     ]
     assert config["database_program"]["quack_endpoint"] == "quack:127.0.0.1:27278"
     owner_management = config["database_program"]["owner_management"]
@@ -106,7 +107,7 @@ def test_g7_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
         "owner_state_dir": str(
             (
                 ROOT
-                / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g7/quack-owner"
+                / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/quack-owner"
             ).resolve()
         ),
         "startup_timeout_seconds": 120.0,
@@ -116,8 +117,8 @@ def test_g7_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
         "max_backoff_seconds": 10.0,
         "termination_grace_seconds": 40.0,
     }
-    assert "_g7/" in config["database_program"]["store_id"]
-    assert "_g7/ducklake/" in config["ducklake_projection_program"]["catalog_path"]
+    assert "_g8/" in config["database_program"]["store_id"]
+    assert "_g8/ducklake/" in config["ducklake_projection_program"]["catalog_path"]
     assert config["ducklake_projection_program"]["authority"] is False
     assert config["ducklake_projection_program"]["completion_prerequisite"] is False
     assert config["initial_projection"]["completed_task_ids"] == []
@@ -126,11 +127,28 @@ def test_g7_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
     assert config["initial_projection"]["post_operator_ready_task_ids"] == [
         "PCTDD-001", "PCTDD-002", "PCTDD-003", "PCTDD-004"
     ]
-    assert config["provider"]["implementation_fallback_authorized"] is False
-    assert config["provider"]["provider_id"] == "grok_cli"
-    assert config["provider"]["model_id"] == "grok-4.6"
+    assert config["provider"]["implementation_fallback_authorized"] is True
+    assert {
+        key: config["provider"][key]
+        for key in (
+            "primary_provider_id",
+            "primary_model_id",
+            "fallback_provider_id",
+            "fallback_model_id",
+            "fallback_trigger",
+            "fallback_reasoning_effort",
+        )
+    } == {
+        "primary_provider_id": "grok_cli",
+        "primary_model_id": "grok-4.6",
+        "fallback_provider_id": "codex",
+        "fallback_model_id": "gpt-5.6-terra",
+        "fallback_trigger": "primary_quota_exhausted",
+        "fallback_reasoning_effort": "medium",
+    }
+    assert "provider_id" not in config["provider"]
+    assert "model_id" not in config["provider"]
     assert config["provider"]["completion_authority"] == "controller_owned_sealed_validation_and_database_cas"
-    assert not any(key.startswith("fallback_") for key in config["provider"])
 
     historical_board = subprocess.check_output(
         ["git", "show", "c8917d039e3f4598a7d29643c621e341318197da:docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md"],
@@ -212,6 +230,55 @@ def test_g7_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
     ]
     assert "execution_observation_stores" in successor["copy_policy"]["not_copied"]
     assert "ducklake_catalog_and_data" in successor["copy_policy"]["not_copied"]
+
+    provider_inventory = generator.g7_provider_route_migration_inventory()
+    tracked_provider_inventory = json.loads(
+        (
+            ROOT
+            / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g7_provider_route_migration_inventory.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert tracked_provider_inventory == provider_inventory
+    provider_successor = provider_inventory[
+        "source_provider_route_successor_materialization"
+    ]
+    assert config["source_provider_route_successor_materialization"] == provider_successor
+    assert provider_successor["schema"] == (
+        "pctdd/source-provider-route-successor-materialization@1"
+    )
+    assert provider_successor["migration_revision"] == "PCTDD-SOURCE-PROVIDER-G8"
+    assert provider_successor["prior_store_generation"] == "pctdd-v1-g7"
+    assert provider_successor["target_store_generation"] == "pctdd-v1-g8"
+    assert provider_successor["control_source_anchor_head"] == (
+        "85aa9bad12e04e97537c4dcbad2eb89941eaa431"
+    )
+    assert provider_successor["control_source_anchor_tree"] == (
+        "5907232e5768dab9d8483c37720165e6b40193ff"
+    )
+    assert provider_successor["provider_route"] == generator.PROVIDER_ROUTE
+    assert provider_successor["prior_control_projection"]["statuses"] == {
+        "blocked": 2,
+        "completed": 14,
+        "retrying": 1,
+        "todo": 37,
+    }
+    assert provider_successor["prior_control_projection"]["event_watermark"] == 192
+    assert [item["task_alias"] for item in provider_successor["settlements"]] == [
+        "PCTDD-001",
+        "PCTDD-029",
+    ]
+    for settlement in provider_successor["settlements"]:
+        queue_state = settlement["prior_queue_state"]
+        assert queue_state["disposition"] == "absent"
+        assert queue_state["entry"] is None
+        assert queue_state["active_task_blocks"] == 0
+        assert settlement["prior_queue_state_cid"].startswith("sha256:")
+    assert provider_successor["target_control_projection"]["statuses"] == {
+        "completed": 14,
+        "retrying": 1,
+        "todo": 39,
+    }
+    assert provider_successor["copy_policy"]["g7_remains_read_only_history"] is True
 
     migration = generator.g5_migration_inventory()
     tracked = json.loads(
@@ -375,6 +442,12 @@ def test_control_manifest_covers_every_preseal_protected_control() -> None:
     )
     assert manifest["source_binding_migration_module"] == (
         "scripts/pctdd_g7_source_binding_successor.py"
+    )
+    assert manifest["source_provider_route_migration_module"] == (
+        "scripts/pctdd_g8_provider_route_successor.py"
+    )
+    assert manifest["source_provider_route_migration_revision"] == (
+        "PCTDD-SOURCE-PROVIDER-G8"
     )
     assert manifest["dependency_seal_must_hash_this_manifest"] is True
     assert manifest["manifest_is_completion_receipt"] is False

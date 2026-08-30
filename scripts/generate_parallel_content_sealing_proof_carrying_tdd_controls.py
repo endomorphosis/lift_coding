@@ -25,12 +25,19 @@ HISTORICAL_STORE_GENERATION = "pctdd-v1-g6"
 HISTORICAL_RUNTIME_ROOT = (
     "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6"
 )
-STORE_GENERATION = "pctdd-v1-g7"
-RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g7"
+G7_STORE_GENERATION = "pctdd-v1-g7"
+G7_RUNTIME_ROOT = (
+    "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g7"
+)
+STORE_GENERATION = "pctdd-v1-g8"
+RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8"
 QUACK_ENDPOINT = "quack:127.0.0.1:27278"
 SOURCE_MIGRATION_REVISION = "PCTDD-SOURCE-G7"
-CONTROL_SOURCE_ANCHOR_HEAD = "c8917d039e3f4598a7d29643c621e341318197da"
-CONTROL_SOURCE_ANCHOR_TREE = "c3e061b62caa3ad0c35c7e167242694a8fec171c"
+PROVIDER_ROUTE_MIGRATION_REVISION = "PCTDD-SOURCE-PROVIDER-G8"
+G7_CONTROL_SOURCE_ANCHOR_HEAD = "c8917d039e3f4598a7d29643c621e341318197da"
+G7_CONTROL_SOURCE_ANCHOR_TREE = "c3e061b62caa3ad0c35c7e167242694a8fec171c"
+CONTROL_SOURCE_ANCHOR_HEAD = "85aa9bad12e04e97537c4dcbad2eb89941eaa431"
+CONTROL_SOURCE_ANCHOR_TREE = "5907232e5768dab9d8483c37720165e6b40193ff"
 BRANCH = "agent/parallel-content-sealing-proof-carrying-tdd-v1"
 INVENTORY = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory"
 PLAN = ROOT / "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md"
@@ -44,6 +51,9 @@ VALIDATION_DISPATCHER = "scripts/run_parallel_content_sealing_proof_carrying_tdd
 CONTROL_TEST = "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py"
 G5_MIGRATION_INVENTORY = INVENTORY / "g5_migration_inventory.json"
 G6_SOURCE_MIGRATION_INVENTORY = INVENTORY / "g6_source_migration_inventory.json"
+G7_PROVIDER_ROUTE_MIGRATION_INVENTORY = (
+    INVENTORY / "g7_provider_route_migration_inventory.json"
+)
 CONTROL_MANIFEST = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
 G5_DATABASE = ROOT / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g5/control.duckdb"
 G5_BOOTSTRAP_RECEIPT = ROOT / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g5/evidence/bootstrap/pctdd-bootstrap.json"
@@ -54,9 +64,18 @@ G6_BOOTSTRAP_RECEIPT = (
 G6_STOPPED_STATUS = (
     ROOT / HISTORICAL_RUNTIME_ROOT / "quack-owner/quack-state-server.status.json"
 )
+G7_DATABASE = ROOT / G7_RUNTIME_ROOT / "control.duckdb"
+G7_GENERATION_RECEIPT = ROOT / G7_RUNTIME_ROOT / "source-migration-receipt.json"
+G7_STOPPED_STATUS = (
+    ROOT / G7_RUNTIME_ROOT / "quack-owner/quack-state-server.status.json"
+)
 SOURCE_MIGRATION_MODULE = "scripts/pctdd_g7_source_binding_successor.py"
 SOURCE_MIGRATION_TEST = (
     "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py"
+)
+PROVIDER_ROUTE_MIGRATION_MODULE = "scripts/pctdd_g8_provider_route_successor.py"
+PROVIDER_ROUTE_MIGRATION_TEST = (
+    "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py"
 )
 QUACK_LIFECYCLE_CONTROL_TEST = (
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py"
@@ -79,6 +98,44 @@ SOURCE_MIGRATION_CONTROL_PATHS = (
     CONTROL_TEST,
     SOURCE_MIGRATION_TEST,
     QUACK_LIFECYCLE_CONTROL_TEST,
+)
+PROVIDER_ROUTE = {
+    "primary_provider_id": "grok_cli",
+    "primary_model_id": "grok-4.6",
+    "fallback_provider_id": "codex",
+    "fallback_model_id": "gpt-5.6-terra",
+    "fallback_trigger": "primary_quota_exhausted",
+    "fallback_reasoning_effort": "medium",
+    "implementation_fallback_authorized": True,
+}
+G7_PRE_EFFECT_LOG_PATHS = {
+    "PCTDD-001": (
+        f"{G7_RUNTIME_ROOT}/state/lane-0/"
+        "pctdd_lane_0_database_portal_attempts/327e6d38324c1e4e6469994b/"
+        "implementation-logs/pctdd-001-attempt-1.log"
+    ),
+    "PCTDD-029": (
+        f"{G7_RUNTIME_ROOT}/state/lane-1/"
+        "pctdd_lane_1_database_portal_attempts/55209a7479fa7b02bd88d64a/"
+        "implementation-logs/pctdd-029-attempt-1.log"
+    ),
+}
+PROVIDER_ROUTE_MIGRATION_CONTROL_PATHS = (
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+    "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g7_provider_route_migration_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json",
+    "external/ipfs_accelerate",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py",
+    "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
+    PROVIDER_ROUTE_MIGRATION_MODULE,
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
+    CONTROL_TEST,
+    PROVIDER_ROUTE_MIGRATION_TEST,
 )
 PCTDD_DUCKDB_EXTENSION_DIRECTORY_ENV = (
     "IPFS_ACCELERATE_PCTDD_DUCKDB_EXTENSION_DIRECTORY"
@@ -730,42 +787,83 @@ def _g6_coordination_stores(
 
 @functools.lru_cache(maxsize=1)
 def g6_source_migration_inventory() -> dict[str, Any]:
-    """Freeze the stopped g6 prefix without treating history as current work."""
+    """Return the accepted g6->g7 inventory byte-for-byte from g7 history."""
 
-    module = _source_migration_module()
+    relative = G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix()
+    result = subprocess.run(
+        ["git", "show", f"{CONTROL_SOURCE_ANCHOR_HEAD}:{relative}"],
+        cwd=ROOT,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode:
+        raise RuntimeError("cannot read the accepted historical g6 migration inventory")
+    try:
+        value = json.loads(result.stdout)
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        raise RuntimeError("historical g6 migration inventory is malformed") from exc
+    if (
+        not isinstance(value, dict)
+        or value.get("schema")
+        != "pctdd/g6-source-binding-migration-inventory@1"
+        or value.get("historical_task_definitions_preserved") is not True
+    ):
+        raise RuntimeError("historical g6 migration inventory claim differs")
+    return value
+
+
+def _provider_route_migration_module() -> Any:
+    path = ROOT / PROVIDER_ROUTE_MIGRATION_MODULE
+    spec = importlib.util.spec_from_file_location(
+        "pctdd_g8_provider_route_successor_inventory", path
+    )
+    if spec is None or spec.loader is None:
+        raise RuntimeError("cannot load the protected g8 provider-route module")
+    accelerator = str(ROOT / "external/ipfs_accelerate")
+    scripts = str(ROOT / "scripts")
+    for entry in (accelerator, scripts):
+        if entry not in sys.path:
+            sys.path.insert(0, entry)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+@functools.lru_cache(maxsize=1)
+def g7_provider_route_migration_inventory() -> dict[str, Any]:
+    """Fence and freeze the exact stopped g7 prefix for the g8 successor."""
+
+    module = _provider_route_migration_module()
     coordination_paths = [
-        f"{HISTORICAL_RUNTIME_ROOT}/state/lane-{lane}/quack-lane-coordination.duckdb"
+        f"{G7_RUNTIME_ROOT}/state/lane-{lane}/quack-lane-coordination.duckdb"
         for lane in range(4)
     ]
     observation_paths = [
-        f"{HISTORICAL_RUNTIME_ROOT}/state/lane-{lane}/quack-lane-control.execution.duckdb"
+        f"{G7_RUNTIME_ROOT}/state/lane-{lane}/quack-lane-control.execution.duckdb"
         for lane in range(4)
     ]
-    captured = module.capture_stopped_source_authority(
+    captured = module.capture_stopped_source_provider_route_authority(
         root=ROOT,
-        control_path=G6_DATABASE.relative_to(ROOT).as_posix(),
-        bootstrap_path=G6_BOOTSTRAP_RECEIPT.relative_to(ROOT).as_posix(),
-        status_path=G6_STOPPED_STATUS.relative_to(ROOT).as_posix(),
+        control_path=G7_DATABASE.relative_to(ROOT).as_posix(),
+        generation_receipt_path=G7_GENERATION_RECEIPT.relative_to(ROOT).as_posix(),
+        status_path=G7_STOPPED_STATUS.relative_to(ROOT).as_posix(),
         coordination_paths=coordination_paths,
         execution_observation_paths=observation_paths,
+        pre_effect_log_paths=G7_PRE_EFFECT_LOG_PATHS,
     )
-    projection = dict(captured["prior_control_projection"])
-    owner = dict(captured["prior_owner_identity"])
-    coordination = _g6_coordination_stores(
-        [dict(record) for record in captured["coordination_stores"]]
-    )
+    route_binding = module._route_binding(PROVIDER_ROUTE)
     policy = {
-        "schema": "pctdd/source-binding-successor-materialization@1",
-        "migration_revision": SOURCE_MIGRATION_REVISION,
-        "prior_store_generation": HISTORICAL_STORE_GENERATION,
+        "schema": "pctdd/source-provider-route-successor-materialization@1",
+        "migration_revision": PROVIDER_ROUTE_MIGRATION_REVISION,
+        "prior_store_generation": G7_STORE_GENERATION,
         "target_store_generation": STORE_GENERATION,
-        "prior_runtime_root": HISTORICAL_RUNTIME_ROOT,
+        "prior_runtime_root": G7_RUNTIME_ROOT,
         "target_runtime_root": RUNTIME_ROOT,
         "target_quack_endpoint": QUACK_ENDPOINT,
-        "receipt_marker": "source-migration-receipt.json",
+        "receipt_marker": "source-provider-route-migration-receipt.json",
         "control_source_anchor_head": CONTROL_SOURCE_ANCHOR_HEAD,
         "control_source_anchor_tree": CONTROL_SOURCE_ANCHOR_TREE,
-        "operator_control_paths": list(SOURCE_MIGRATION_CONTROL_PATHS),
+        "operator_control_paths": list(PROVIDER_ROUTE_MIGRATION_CONTROL_PATHS),
         "governed_gitlinks": {
             relative: git("rev-parse", "HEAD", cwd=ROOT / relative)
             for relative in (
@@ -774,49 +872,35 @@ def g6_source_migration_inventory() -> dict[str, Any]:
                 "external/ipfs_kit",
             )
         },
-        "prior_control_store": dict(captured["prior_control_store"]),
-        "prior_bootstrap_receipt": dict(captured["prior_bootstrap_receipt"]),
-        "prior_stopped_status": dict(captured["prior_stopped_status"]),
-        "prior_owner_identity": owner,
-        "accepted_plan_root_cid": "baguqeeraaiqrxovjj4y3ecx6jtvzqfrrrqwuag7hl2c35i2z3eapax2nzaya",
-        "prior_plan_revision": 1,
-        "prior_control_projection": projection,
-        "coordination_stores": coordination,
-        "target_control_projection": {
-            "statuses": {"completed": 14, "retrying": 3, "todo": 37},
-            "task_revisions": {"PCTDD-001": 17, "PCTDD-029": 7},
-            "ready_frontier": [
-                "PCTDD-001",
-                "PCTDD-018",
-                "PCTDD-029",
-                "PCTDD-031",
-                "PCTDD-033",
-            ],
-        },
+        "provider_route": dict(PROVIDER_ROUTE),
+        "provider_route_binding_cid": module.g7._identity(route_binding),
+        **captured,
         "copy_policy": {
             "copied": ["authoritative_control_store", "coordination_history"],
             "not_copied": [
-                "execution_observation_stores",
+                "execution_observation",
+                "provider_attempt_store",
+                "ducklake",
                 "read_replica",
-                "ducklake_catalog_and_data",
                 "logs",
+                "owner_runtime",
                 "worktrees",
-                "merge_queue",
-                "quack_owner_runtime",
-                "credentials",
-                "runtime_registry",
+                "merge_state",
             ],
-            "publication": "private_stage_hash_verify_then_no_overwrite_links_and_marker_last",
-            "g6_remains_read_only_history": True,
+            "publication": (
+                "private_stage_hash_verify_then_no_overwrite_links_and_marker_last"
+            ),
+            "g7_remains_read_only_history": True,
         },
     }
+    module._policy({"source_provider_route_successor_materialization": policy})
     return {
-        "schema": "pctdd/g6-source-binding-migration-inventory@1",
+        "schema": "pctdd/g7-provider-route-migration-inventory@1",
         "program_id": NAMESPACE,
         "historical_plan_revision": PLAN_REVISION,
-        "historical_task_definitions_preserved": True,
+        "historical_completed_task_definitions_preserved": True,
         "historical_completions_revalidated_for_integrity_not_reissued": True,
-        "source_binding_successor_materialization": policy,
+        "source_provider_route_successor_materialization": policy,
     }
 
 
@@ -1143,7 +1227,7 @@ authority at `{HISTORICAL_RUNTIME_ROOT}`, served by `{QUACK_ENDPOINT}`.
 
 The stopped g6 authority has accepted historical work that must neither be
 reopened nor represented as current-source execution. `PCTDD-SOURCE-G7`
-therefore creates `{STORE_GENERATION}` under `{RUNTIME_ROOT}` from an exact,
+therefore creates `{G7_STORE_GENERATION}` under `{G7_RUNTIME_ROOT}` from an exact,
 sealed g6 prefix. It preserves the 14 accepted completions and V1.1 task/goal
 definitions, independently rehashes their rows and evidence, appends one
 operator source-binding revision, and explicitly retires only the two sealed
@@ -1157,6 +1241,29 @@ captured under the canonical state-owner fence. The managed g7 owner retries
 known stopped/dead startup failures at most eight times with bounded 1–10
 second backoff; persistent or unknown-liveness failures remain typed and
 fail closed.
+
+## G8 exact source and ordered provider-route successor
+
+The stopped g7 authority proved automatic Quack recovery in a live fault
+injection, then exposed an independent external-capacity terminal: Grok Build
+returned an exact HTTP 402 balance-exhausted envelope while the sealed task
+definitions prohibited an implementation fallback. `{PROVIDER_ROUTE_MIGRATION_REVISION}`
+therefore creates `{STORE_GENERATION}` under `{RUNTIME_ROOT}` from the exact
+stopped g7 prefix. It preserves every accepted completion and completed task
+definition, revises only incomplete task provider roles from `grok-only` to
+the canonical `grok-implement` primary role, and binds the reviewed ordered
+route `grok_cli/grok-4.6 -> codex/gpt-5.6-terra` only for
+`primary_quota_exhausted` at medium reasoning effort. Provider output cannot
+approve completion, validation, merge, proof, or publication.
+
+Only PCTDD-001 and PCTDD-029 are re-armed. Their exact stopped task receipts,
+claims, attempts, context-only phase histories, deferred provider dispatches,
+and byte-hashed 402 logs prove that no provider/effect result was admitted.
+The migration expires the one still-active claim, preserves the already
+released claim, consumes one bounded unknown-outcome rearm, and resets their
+ordinary attempt counters. All other blocked/completed/history records remain
+unchanged. Publication again uses a private stage, hash verification,
+no-overwrite links, and a final marker; g7 remains immutable history.
 
 Every task names one protected validation profile through a task-bound
 dispatcher. Profiles contain argv arrays only and execute with `shell=False`.
@@ -1328,8 +1435,11 @@ V11_TASKBOARD_PROTECTED_ARTIFACTS = (
 PROTECTED_ARTIFACTS = (
     *V11_TASKBOARD_PROTECTED_ARTIFACTS,
     G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+    G7_PROVIDER_ROUTE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
     SOURCE_MIGRATION_MODULE,
     SOURCE_MIGRATION_TEST,
+    PROVIDER_ROUTE_MIGRATION_MODULE,
+    PROVIDER_ROUTE_MIGRATION_TEST,
     QUACK_LIFECYCLE_CONTROL_TEST,
 )
 
@@ -1356,13 +1466,16 @@ def source_record(name: str, relative: str) -> dict[str, Any]:
 
 
 def render_config() -> dict[str, Any]:
-    # These are the immutable stopped-g6 control anchors. The runtime migration
-    # receipt, not a self-referential tracked file, binds the eventual clean
+    # The accepted g7 source is the immutable delta anchor. The runtime g8
+    # marker, not a self-referential tracked file, binds the eventual clean
     # successor HEAD/tree.
     base = CONTROL_SOURCE_ANCHOR_HEAD
     tree = CONTROL_SOURCE_ANCHOR_TREE
     source_migration = g6_source_migration_inventory()[
         "source_binding_successor_materialization"
+    ]
+    provider_route_migration = g7_provider_route_migration_inventory()[
+        "source_provider_route_successor_materialization"
     ]
     return {
         "schema": "ipfs_accelerate_py.agent_supervisor.parallel-content-sealing-proof-carrying-tdd.scheduler_config@1",
@@ -1370,19 +1483,26 @@ def render_config() -> dict[str, Any]:
         "taskboard_path": BOARD.relative_to(ROOT).as_posix(), "objectives_path": OBJECTIVES.relative_to(ROOT).as_posix(), "plan_path": PLAN.relative_to(ROOT).as_posix(),
         "validator_path": "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py", "dependency_validator_path": "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py", "materializer_path": "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py", "validation_profile_path": VALIDATION_PROFILES.relative_to(ROOT).as_posix(), "validation_dispatcher_path": VALIDATION_DISPATCHER,
         "task_prefix": "PCTDD-", "goal_prefix": "PCTDD-G", "root_goal_id": "PCTDD-G000", "merge_target_branch": BRANCH,
-        "control_amendment": {"revision": PLAN_REVISION, "amends": PREDECESSOR_PLAN_REVISION, "reason": "preserve the accepted V1.1/g6 program while authorizing one exact g7 source-binding successor", "migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "historical_g6_plan_and_task_definitions_preserved": True, "source_migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "fresh_materialization_required": False, "copy_predecessor_acceptance": True, "historical_completion_reissuance": False},
+        "control_amendment": {"revision": PLAN_REVISION, "amends": PREDECESSOR_PLAN_REVISION, "reason": "preserve the accepted V1.1/g6/g7 history while authorizing one exact g8 source/provider-route successor", "migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "historical_g6_plan_and_task_definitions_preserved": True, "source_migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "provider_route_migration_inventory": G7_PROVIDER_ROUTE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "fresh_materialization_required": False, "copy_predecessor_acceptance": True, "historical_completion_reissuance": False},
         "source_binding": {"accelerator_required_ancestor": base, "accelerator_planning_revision": base, "accelerator_planning_tree": tree, "accelerator_required_branch": BRANCH, "bootstrap_task_source": "duckdb", "ipfs_accelerate_submodule_path": "external/ipfs_accelerate", "ipfs_accelerate_planning_revision": git("rev-parse", "HEAD", cwd=ROOT / "external/ipfs_accelerate"), "ipfs_accelerate_planning_tree": git("rev-parse", "HEAD^{tree}", cwd=ROOT / "external/ipfs_accelerate"), "ipfs_datasets_submodule_path": "external/ipfs_datasets", "ipfs_datasets_planning_revision": git("rev-parse", "HEAD", cwd=ROOT / "external/ipfs_datasets"), "ipfs_datasets_planning_tree": git("rev-parse", "HEAD^{tree}", cwd=ROOT / "external/ipfs_datasets"), "ipfs_kit_submodule_path": "external/ipfs_kit", "ipfs_kit_planning_revision": git("rev-parse", "HEAD", cwd=ROOT / "external/ipfs_kit"), "ipfs_kit_planning_tree": git("rev-parse", "HEAD^{tree}", cwd=ROOT / "external/ipfs_kit"), "require_initialized_gitlinks": True, "require_superproject_gitlink_equals_nested_head": True, "require_clean_nested_worktree_at_task_start": True, "require_origin_main_as_ancestor": False, "record_recursive_repository_forest_at_launch": True, "changed_revision_requires_fresh_inventory_and_baseline": True, "planning_revision_is_runtime_completion_evidence": False},
         "source_binding_successor_materialization": source_migration,
+        "source_provider_route_successor_materialization": provider_route_migration,
         "initial_projection": {"task_count": 54, "task_dependency_count": sum(map(len, DEPENDENCIES.values())), "completed_task_ids": [], "ready_task_ids": [], "post_operator_completed_task_ids": ["PCTDD-000"], "post_operator_ready_task_ids": [f"PCTDD-{n:03d}" for n in range(1, 5)], "blocked_task_ids": [], "terminal_task_id": "PCTDD-053", "goal_count": 24, "root_goal_id": "PCTDD-G000"},
-        "database_program": {"authority_mode": "quack", "task_source_kind": "duckdb", "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN", "quack_endpoint": QUACK_ENDPOINT, "store_id": f"{RUNTIME_ROOT}/control.duckdb", "store_generation": STORE_GENERATION, "schema_revision": "1", "event_store_path": f"{RUNTIME_ROOT}/events", "runtime_registry_path": f"{RUNTIME_ROOT}/registry", "worktree_root": f"{RUNTIME_ROOT}/worktrees", "export_profile": "pctdd-v1", "failover_policy": "fail_closed", "explicit_legacy": False, "owner_management": {"mode": "managed_local", "owner_state_dir": str((ROOT / RUNTIME_ROOT / "quack-owner").resolve()), "startup_timeout_seconds": 120.0, "health_check_interval_seconds": 5.0, "max_restart_attempts": 8, "initial_backoff_seconds": 1.0, "max_backoff_seconds": 10.0, "termination_grace_seconds": 40.0}, "predecessor_store_generation": HISTORICAL_STORE_GENERATION, "predecessor_is_read_only_history": True, "historical_store_generations": ["pctdd-v1-g5", HISTORICAL_STORE_GENERATION]},
+        "database_program": {"authority_mode": "quack", "task_source_kind": "duckdb", "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN", "quack_endpoint": QUACK_ENDPOINT, "store_id": f"{RUNTIME_ROOT}/control.duckdb", "store_generation": STORE_GENERATION, "schema_revision": "1", "event_store_path": f"{RUNTIME_ROOT}/events", "runtime_registry_path": f"{RUNTIME_ROOT}/registry", "worktree_root": f"{RUNTIME_ROOT}/worktrees", "export_profile": "pctdd-v1", "failover_policy": "fail_closed", "explicit_legacy": False, "owner_management": {"mode": "managed_local", "owner_state_dir": str((ROOT / RUNTIME_ROOT / "quack-owner").resolve()), "startup_timeout_seconds": 120.0, "health_check_interval_seconds": 5.0, "max_restart_attempts": 8, "initial_backoff_seconds": 1.0, "max_backoff_seconds": 10.0, "termination_grace_seconds": 40.0}, "predecessor_store_generation": G7_STORE_GENERATION, "predecessor_is_read_only_history": True, "historical_store_generations": ["pctdd-v1-g5", HISTORICAL_STORE_GENERATION, G7_STORE_GENERATION]},
         "operational_control_plane": {"name": "DuckDB + Quack + non-authoritative DuckLake", "duckdb_role": "authoritative transactional goals/tasks/CAS/fences/receipts/events", "quack_role": "authenticated exclusive loopback state owner", "ducklake_role": "rebuildable analytics/history projection", "direct_multi_process_duckdb_file_open_permitted": False, "automatic_file_fallback_permitted": False, "outage_policy": "fail_closed", "markdown_is_bootstrap_only": True},
-        "ducklake_projection_program": {"mode": "enabled_non_authoritative", "authority": False, "may_grant_authority": False, "scheduling_prerequisite": False, "acceptance_prerequisite": False, "completion_prerequisite": False, "catalog_path": f"{RUNTIME_ROOT}/ducklake/catalog.duckdb", "data_path": f"{RUNTIME_ROOT}/ducklake/data", "logical_datasets": ["bootstrap_history", "g5_migration_history", "g6_source_migration_history"], "outage_policy": "typed unavailable and replayable; never block DuckDB authority"},
+        "ducklake_projection_program": {"mode": "enabled_non_authoritative", "authority": False, "may_grant_authority": False, "scheduling_prerequisite": False, "acceptance_prerequisite": False, "completion_prerequisite": False, "catalog_path": f"{RUNTIME_ROOT}/ducklake/catalog.duckdb", "data_path": f"{RUNTIME_ROOT}/ducklake/data", "logical_datasets": ["bootstrap_history", "g5_migration_history", "g6_source_migration_history", "g7_provider_route_migration_history"], "outage_policy": "typed unavailable and replayable; never block DuckDB authority"},
         "max_lanes": 4, "strict_task_sharding": True, "idle_lane_work_stealing": "", "exit_when_all_tracks_terminal": False, "objective_refill_enabled": False, "codebase_refill_enabled": False, "objective_goal_refinement_enabled": False, "retry_budget_guardrail_enabled": True, "dependency_guardrail_enabled": True, "reconciliation_guardrail_enabled": True,
         "poll_interval_seconds": 5, "daemon_interval_seconds": 20, "check_interval_seconds": 20, "stale_seconds": 1800, "watchdog_startup_grace_seconds": 600, "max_restarts": 3, "max_task_attempts": 2, "implementation_retry_budget": 1, "validation_retry_budget": 2, "merge_retry_budget": 2, "implementation_timeout_seconds": 7200, "implementation_max_timeout_seconds": 21600, "implementation_log_stall_seconds": 1200,
         "worktree_submodule_paths": ["external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit"], "protected_paths": list(PROTECTED_ARTIFACTS),
         "runtime_paths": {"root": RUNTIME_ROOT, "state": f"{RUNTIME_ROOT}/state", "worktrees": f"{RUNTIME_ROOT}/worktrees", "merge_queue": f"{RUNTIME_ROOT}/merge-queue", "logs": f"{RUNTIME_ROOT}/logs", "evidence": f"{RUNTIME_ROOT}/evidence", "quack_owner": f"{RUNTIME_ROOT}/quack-owner", "generated_runtime_artifacts_are_completion_authority": False},
         "lanes": [{"index": n, "name": f"pctdd-lane-{n}", "strict_shard_remainder": n, "initial_focus": focus} for n, focus in enumerate(("content-identities", "pytest-fixtures", "proof-batching", "integration-qualification"))],
-        "provider": {"provider_id": "grok_cli", "model_id": "grok-4.6", "implementation_fallback_authorized": False, "completion_authority": "controller_owned_sealed_validation_and_database_cas", "max_concurrency": 4, "secrets_from_environment_only": True, "secrets_in_argv_prompts_logs_or_receipts": False},
+        "provider": {
+            **PROVIDER_ROUTE,
+            "completion_authority": "controller_owned_sealed_validation_and_database_cas",
+            "max_concurrency": 4,
+            "secrets_from_environment_only": True,
+            "secrets_in_argv_prompts_logs_or_receipts": False,
+        },
         "resource_budgets": {"filesystem_readers": 4, "canonicalization_workers": 4, "sha_cid_workers": 4, "proof_verifiers": 2, "prover_workers": 1, "immutable_store_writers": 2, "merkle_reducers": 4, "test_workers": 4},
         "safety_floors": {"identity_divergence": 0, "false_test_phase_reuse": 0, "stale_authoritative_reuse": 0, "selection_false_negative_regressions": 0, "simulated_proof_admissions": 0, "model_created_proof_authority_completion": 0, "unauthorized_root_publications": 0, "lost_concurrent_updates": 0, "escaped_critical_seeded_defects": 0, "secret_witness_leaks": 0},
         "rollout_gates": ["bootstrap", "shadow_hash", "shadow_reuse", "shadow_proof", "protected", "required"], "benchmark_freeze": "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json", "required_evidence_per_task": "board.required_evidence", "current_tree_revalidation_before_launch": True,
@@ -1396,7 +1516,7 @@ def benchmark_config() -> dict[str, Any]:
 def inventories() -> dict[str, dict[str, Any]]:
     sources = [source_record("ipfs_accelerate_py", "external/ipfs_accelerate"), source_record("ipfs_datasets_py", "external/ipfs_datasets"), source_record("ipfs_kit_py", "external/ipfs_kit")]
     return {
-        "repository_baseline.json": {"schema": "pctdd/repository-baseline@2", "captured_utc": "2026-08-30T08:07:01Z", "planning_root": str(ROOT), "control_generation_input_head": CONTROL_SOURCE_ANCHOR_HEAD, "control_generation_input_tree": CONTROL_SOURCE_ANCHOR_TREE, "branch": BRANCH, "sources": sources, "all_governed_sources_clean_and_gitlink_exact": all(not item["dirty"] and item["gitlink_matches_nested_head"] for item in sources), "dirty_user_tree_preserved": True, "original_user_tree_evidence": {"captured_utc": "2026-08-28", "root_status_sha256": "f0a737302e4455c55e60edc28403da4f339e9b64811cc0b0dcf0c87e2d9629b3", "root_diff_sha256": "72f6c22550da009960d570f8b5128077c9160ef2d4ae2d5cc75498ab69e08fb7", "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac", "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798", "datasets_status_sha256": "a1b4619c21ab5c19d90aa666b48d10d7f5034a2abe2ce57e0f854892429d9c83"}, "evidence_note": "The fixed c891 stopped-g6 control anchor and current exact governed gitlinks seed the g7 runtime migration; the runtime marker binds the eventual clean successor HEAD/tree without rewriting historical completion claims."},
+        "repository_baseline.json": {"schema": "pctdd/repository-baseline@3", "captured_utc": "2026-08-30T17:02:36Z", "planning_root": str(ROOT), "control_generation_input_head": CONTROL_SOURCE_ANCHOR_HEAD, "control_generation_input_tree": CONTROL_SOURCE_ANCHOR_TREE, "branch": BRANCH, "sources": sources, "all_governed_sources_clean_and_gitlink_exact": all(not item["dirty"] and item["gitlink_matches_nested_head"] for item in sources), "dirty_user_tree_preserved": True, "original_user_tree_evidence": {"captured_utc": "2026-08-28", "root_status_sha256": "f0a737302e4455c55e60edc28403da4f339e9b64811cc0b0dcf0c87e2d9629b3", "root_diff_sha256": "72f6c22550da009960d570f8b5128077c9160ef2d4ae2d5cc75498ab69e08fb7", "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac", "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798", "datasets_status_sha256": "a1b4619c21ab5c19d90aa666b48d10d7f5034a2abe2ce57e0f854892429d9c83"}, "evidence_note": "The accepted 85aa stopped-g7 source anchor and current exact governed gitlinks seed the g8 provider-route migration; the marker binds the eventual clean successor HEAD/tree without rewriting accepted completions."},
         "authority_matrix.json": {"schema": "pctdd/authority-matrix@1", "canonical_semantic_and_statement_authority": "ipfs_datasets_py", "verified_storage_wal_cas_authority": "ipfs_kit_py", "execution_scheduling_admission_authority": "ipfs_accelerate_py", "task_transaction_authority": "DuckDB via exclusive authenticated Quack owner", "analytics_projection": "DuckLake non-authoritative", "markdown": "non-authoritative bootstrap", "forbidden_duplicates": ["proof system", "canonical profile", "CID system", "pytest runner", "test selector", "proof cache", "block store", "WAL", "current-root store", "agent framework", "scheduler", "worktree system", "provider router", "merge engine"]},
         "overlap_gap_matrix.json": {"schema": "pctdd/overlap-gap@1", "entries": [{"capability": "IncrementalProofSealer full/delta/WAL/CAS", "owner": "ipfs_accelerate_py + ipfs_kit_py", "classification": "available_with_caveats", "successor": "prepared-seal consumer adapter"}, {"capability": "pytest proof reuse/DI/xdist controller publication", "owner": "ipfs_accelerate_py", "classification": "available_with_caveats", "successor": "fixture-staged V2 identity/composite phases"}, {"capability": "semantic selection", "owner": "ipfs_datasets_py consumed by accelerate", "classification": "available", "successor": "adapter only"}, {"capability": "verified persistent hash memo", "owner": "datasets contract + kit store", "classification": "partial", "successor": "versioned records/store"}, {"capability": "aggregate selected-test ZK", "owner": "datasets statement + accelerate backend", "classification": "missing", "successor": "versioned aggregate statement; typed unavailable without admitted production key"}, {"capability": "FastTddLoopController", "owner": "ipfs_accelerate_py", "classification": "partial", "successor": "compose current authorities"}]},
         "hash_identity_inventory.json": {"schema": "pctdd/hash-identity@1", "rules": ["CID is exact byte identity under a versioned profile", "Git blob OID is memo lookup key only", "filesystem metadata nominates a candidate only", "chunk manifest does not replace raw full-stream CID", "ordinary SHA-256 of one stream is not composed from independent chunk hashes"], "preserve": ["canonical bytes", "codec", "multicodec", "multihash", "CID version", "multibase", "ordering", "normalization"]},
@@ -1409,6 +1529,7 @@ def inventories() -> dict[str, dict[str, Any]]:
         "benchmark_preregistration.json": benchmark_config(),
         "g5_migration_inventory.json": g5_migration_inventory(),
         "g6_source_migration_inventory.json": g6_source_migration_inventory(),
+        "g7_provider_route_migration_inventory.json": g7_provider_route_migration_inventory(),
     }
 
 
@@ -1433,6 +1554,9 @@ def render_control_manifest() -> dict[str, Any]:
         "source_binding_migration_revision": SOURCE_MIGRATION_REVISION,
         "source_binding_migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
         "source_binding_migration_module": SOURCE_MIGRATION_MODULE,
+        "source_provider_route_migration_revision": PROVIDER_ROUTE_MIGRATION_REVISION,
+        "source_provider_route_migration_inventory": G7_PROVIDER_ROUTE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "source_provider_route_migration_module": PROVIDER_ROUTE_MIGRATION_MODULE,
         "completion_prerequisites": [
             "required-acceptance pytest phase receipt",
             "dependency validator valid=true",
@@ -1442,10 +1566,13 @@ def render_control_manifest() -> dict[str, Any]:
             "one exact clean source HEAD/tree for every prerequisite",
         ],
         "successor_materialization_prerequisites": [
-            "exact stopped g6 store and event prefix",
+            "accepted g6 to g7 source-binding migration remains byte-identical history",
+            "exact stopped g7 store, coordination prefix, and owner status",
             "historical completion and definition row hashes unchanged",
-            "exact stranded-attempt settlement without old-result reuse",
-            "private staged g7 publication with final marker last",
+            "exact quota-blocked attempts settled without provider-result reuse",
+            "exact queue disposition reconciled and any existing backoff cleared for PCTDD-001 and PCTDD-029",
+            "reviewed Grok hard-quota to Codex fallback route is content-bound",
+            "private staged g8 publication with final marker last",
             "current clean source and governed gitlinks revalidated before publication",
         ],
         "ordinary_worker_may_modify": False,
@@ -1478,9 +1605,14 @@ def render_seal() -> dict[str, Any]:
         "plan_revision": PLAN_REVISION,
         "amends_plan_revision": PREDECESSOR_PLAN_REVISION,
         "store_generation": STORE_GENERATION,
-        "predecessor_generation": HISTORICAL_STORE_GENERATION,
-        "historical_generations": ["pctdd-v1-g5", HISTORICAL_STORE_GENERATION],
-        "migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "predecessor_generation": G7_STORE_GENERATION,
+        "historical_generations": [
+            "pctdd-v1-g5",
+            HISTORICAL_STORE_GENERATION,
+            G7_STORE_GENERATION,
+        ],
+        "migration_inventory": G7_PROVIDER_ROUTE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "historical_g6_source_migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
         "historical_g5_migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
         "artifacts": artifacts,
         "sources": [
@@ -1508,7 +1640,7 @@ REQUIRED_HASHED = (
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md",
-    *(f"docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/{name}" for name in ("repository_baseline.json", "authority_matrix.json", "overlap_gap_matrix.json", "hash_identity_inventory.json", "hashing_critical_path.json", "pytest_identity_inventory.json", "fixture_adapter_inventory.json", "proof_claim_matrix.json", "zkp_backend_inventory.json", "storage_recovery_inventory.json", "benchmark_preregistration.json", "g5_migration_inventory.json", "g6_source_migration_inventory.json")),
+    *(f"docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/{name}" for name in ("repository_baseline.json", "authority_matrix.json", "overlap_gap_matrix.json", "hash_identity_inventory.json", "hashing_critical_path.json", "pytest_identity_inventory.json", "fixture_adapter_inventory.json", "proof_claim_matrix.json", "zkp_backend_inventory.json", "storage_recovery_inventory.json", "benchmark_preregistration.json", "g5_migration_inventory.json", "g6_source_migration_inventory.json", "g7_provider_route_migration_inventory.json")),
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
     "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
@@ -1521,8 +1653,10 @@ REQUIRED_HASHED = (
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
     SOURCE_MIGRATION_MODULE,
+    PROVIDER_ROUTE_MIGRATION_MODULE,
     "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
     SOURCE_MIGRATION_TEST,
+    PROVIDER_ROUTE_MIGRATION_TEST,
     QUACK_LIFECYCLE_CONTROL_TEST,
 )
 
@@ -1535,24 +1669,27 @@ def operator_control_receipt() -> dict[str, Any]:
         "plan_revision": PLAN_REVISION,
         "amends_plan_revision": PREDECESSOR_PLAN_REVISION,
         "store_generation": STORE_GENERATION,
-        "predecessor_generation": HISTORICAL_STORE_GENERATION,
-        "migration_revision": SOURCE_MIGRATION_REVISION,
-        "migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "predecessor_generation": G7_STORE_GENERATION,
+        "migration_revision": PROVIDER_ROUTE_MIGRATION_REVISION,
+        "migration_inventory": G7_PROVIDER_ROUTE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "historical_source_migration_revision": SOURCE_MIGRATION_REVISION,
+        "historical_g6_source_migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
         "historical_g5_migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
-        "status": "sealed_pending_runtime_source_migration",
+        "status": "sealed_pending_runtime_source_provider_route_migration",
         "markdown_non_authoritative": True,
         "historical_completion_reissued": False,
         "historical_plan_and_task_definitions_preserved": True,
         "completion_authority": (
-            "The existing g6 DatabaseTaskSource completion remains historical; "
-            "only operator source-migration evidence and the marker-last g7 receipt "
-            "authorize the current control-plane source."
+            "The existing g7 DatabaseTaskSource completions remain historical; "
+            "only operator source/provider-route migration evidence and the "
+            "marker-last g8 receipt authorize the current control-plane source."
         ),
         "dependency_seal": SEAL.relative_to(ROOT).as_posix(),
         "claim": (
-            "This tracked receipt identifies the V1.1/g7 operator source-binding "
-            "successor package. It neither re-completes PCTDD-000 nor upgrades any "
-            "historical completion into current-source execution evidence."
+            "This tracked receipt identifies the V1.1/g8 operator source/provider-"
+            "route successor package. It neither re-completes PCTDD-000 nor "
+            "upgrades any historical completion into current-source execution "
+            "evidence."
         ),
     }
 
