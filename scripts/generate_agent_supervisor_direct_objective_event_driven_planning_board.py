@@ -18,7 +18,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PROGRAM_ID = "agent-supervisor-direct-objective-and-event-driven-planning-v1"
-PLAN_REVISION = "DOEP-PLAN-V2"
+PLAN_REVISION = "DOEP-PLAN-V3"
 ROOT_GOAL = "DOEP-G000"
 BRANCH = "agent/agent-supervisor-direct-objective-and-event-driven-planning-v1"
 BASES = {
@@ -40,7 +40,18 @@ BASES = {
     },
 }
 
-REPOSITORIES = {
+OPERATIONAL_OWNERS = {
+    # DatabasePortalBridge reserves this identity for the repository that owns
+    # the supervisor runtime.  Keeping Accelerate tasks at this authority also
+    # lets them use the sealed portfolio validation dispatcher instead of
+    # pretending that a newly generated pytest target was already registered
+    # in Accelerate's task-bound V4 dependency contract.
+    "ACC": "ipfs_accelerate_py",
+    "DATA": "external/ipfs_datasets",
+    "KIT": "external/ipfs_kit",
+}
+
+REPOSITORY_PATHS = {
     "ACC": "external/ipfs_accelerate",
     "DATA": "external/ipfs_datasets",
     "KIT": "external/ipfs_kit",
@@ -244,12 +255,15 @@ def parse_tasks() -> list[dict[str, Any]]:
             test_path = f"external/ipfs_accelerate/test/api/doep/test_{task_id.lower().replace('-', '_')}_{slug(title)[:52]}.py"
         receipt = f"artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/{task_id}.json"
         output_manifest = f"artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/{task_id}.json"
-        repository = REPOSITORIES[owner]
+        repository = OPERATIONAL_OWNERS[owner]
+        repository_path = REPOSITORY_PATHS[owner]
         root_owner = repository == "ipfs_accelerate_py"
 
         def owner_relative(path: str) -> str:
-            prefix = repository + "/"
-            return path if root_owner or not path.startswith(prefix) else path[len(prefix):]
+            prefix = repository_path + "/"
+            if root_owner:
+                return path if path.startswith(prefix) else f"{prefix}{path}"
+            return path if not path.startswith(prefix) else path[len(prefix):]
 
         declared_outputs = [
             owner_relative(target),
@@ -258,7 +272,7 @@ def parse_tasks() -> list[dict[str, Any]]:
             owner_relative(receipt),
         ]
         superproject_outputs = [
-            path if root_owner else f"{repository}/{path}"
+            path if root_owner else f"{repository_path}/{path}"
             for path in declared_outputs
         ]
         validation = (
@@ -403,7 +417,7 @@ def render_plan(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], pl
         "- Datasets owns semantic identity, schemas, ContextPack meaning, formal translation and proof relationships. Kit owns exact durable bytes, CIDs, WAL, recovery and current-root CAS. Accelerate owns operational admission, execution, validation, merge, recovery and terminalization.", "",
         "The dormant prompt-first facade is not used as false authority at bootstrap: on the sealed base it fails closed without a production intent factory and complete launch plan. DOEP consolidates and qualifies that intended surface. The reviewed bootstrap route is sealed objective/board → canonical JSON materialization → DuckDB → exclusive Quack owner → existing configured multi-lane supervisor.", "",
         "### Bootstrap revision history", "",
-        "`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires configured local gitlink identities. Its complete DuckDB event stream and logs are retained as a superseded failed generation. `DOEP-PLAN-V2` separates semantic repository authority from operational gitlink identity, declares nested-repository outputs relative to their owner, and seals their exact superproject projections for independent validation.", "",
+        "`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because newly generated Accelerate pytest targets were not, and could not honestly be represented as, pre-existing entries in Accelerate's task-bound V4 dependency contract. Both complete DuckDB event streams and logs are retained as superseded failed generations. `DOEP-PLAN-V3` uses the bridge's reserved `ipfs_accelerate_py` root authority for Accelerate-owned work, keeps Datasets and Kit on their configured gitlink authorities, and runs Accelerate tasks through the sealed root validation dispatcher. The dispatcher still executes each task's exact owner test with `shell=false`; this is an authority correction, not a reduced validation gate.", "",
         "## Compiler and execution sequence", "",
         "1. Deterministically validate, normalize scope/budgets/risk, bind repository and policy, and reject authority/path escapes.",
         "2. Inspect manifests, objective/task state, dependency and symbol indexes, schemas, tests, proofs, capabilities, receipts and relevant failures.",
@@ -599,7 +613,7 @@ def render_config(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], 
         "database_program": {
             "schema": "ipfs_accelerate_py/agent-supervisor/database-program-config@1",
             "authority_mode": "quack", "task_source_kind": "duckdb", "explicit_legacy": False,
-            "store_id": f"{root}/control.duckdb", "store_generation": "doep-v1-r2", "schema_revision": "1",
+            "store_id": f"{root}/control.duckdb", "store_generation": "doep-v1-r3", "schema_revision": "1",
             "quack_endpoint": "quack:127.0.0.1:47941", "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
             "failover_policy": "fail_closed", "event_store_path": f"{root}/events", "runtime_registry_path": f"{root}/registry", "worktree_root": f"{root}/worktrees", "export_profile": "doep-v1",
         },
@@ -637,7 +651,7 @@ def expected_files() -> dict[Path, str]:
     if unknown:
         raise ValueError(f"unknown dependencies: {unknown}")
     admitted_owners = {
-        "external/ipfs_accelerate",
+        "ipfs_accelerate_py",
         "external/ipfs_datasets",
         "external/ipfs_kit",
     }
@@ -646,20 +660,28 @@ def expected_files() -> dict[Path, str]:
         if owner not in admitted_owners:
             raise ValueError(f"{task['task_id']} has no configured worktree owner")
         outputs = task["exact_outputs"]
-        if any(
-            not path
-            or path.startswith(("/", "external/"))
-            or ".." in Path(path).parts
-            for path in outputs
-        ):
-            raise ValueError(f"{task['task_id']} outputs are not owner-relative")
-        projected = [f"{owner}/{path}" for path in outputs]
+        if any(not path or path.startswith("/") or ".." in Path(path).parts for path in outputs):
+            raise ValueError(f"{task['task_id']} outputs are unsafe")
+        if owner == "ipfs_accelerate_py":
+            if any(not path.startswith("external/ipfs_accelerate/") for path in outputs):
+                raise ValueError(f"{task['task_id']} root-authority output escapes Accelerate")
+            projected = list(outputs)
+        else:
+            if any(path.startswith("external/") for path in outputs):
+                raise ValueError(f"{task['task_id']} outputs are not owner-relative")
+            projected = [f"{owner}/{path}" for path in outputs]
         if task["superproject_outputs"] != projected:
             raise ValueError(f"{task['task_id']} superproject projection drift")
         validation = task["execution_validation"]
-        expected_validation = [["python3", "-m", "pytest", "-q", task["test_output"]]]
-        if validation != expected_validation or task["test_output"].startswith("external/"):
-            raise ValueError(f"{task['task_id']} validation is not nested-owner executable")
+        expected_validation = (
+            [["python3", "scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py", "--task", task["task_id"]]]
+            if owner == "ipfs_accelerate_py"
+            else [["python3", "-m", "pytest", "-q", task["test_output"]]]
+        )
+        if validation != expected_validation:
+            raise ValueError(f"{task['task_id']} validation does not match its authority")
+        if owner != "ipfs_accelerate_py" and task["test_output"].startswith("external/"):
+            raise ValueError(f"{task['task_id']} nested validation is not owner-relative")
     # Kahn check; also seals the intended initial frontier.
     pending = {t["task_id"]: set(t["dependencies"]) for t in task_rows}
     emitted: list[str] = []

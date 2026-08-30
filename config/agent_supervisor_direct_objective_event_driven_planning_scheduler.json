@@ -1,5 +1,5 @@
 {
-  "accepted_plan_revision_alias": "DOEP-PLAN-V2",
+  "accepted_plan_revision_alias": "DOEP-PLAN-V3",
   "anti_runaway": {
     "event_debounce_seconds": 5,
     "max_generated_tasks": 24,
@@ -26,7 +26,7 @@
     "runtime_registry_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/registry",
     "schema": "ipfs_accelerate_py/agent-supervisor/database-program-config@1",
     "schema_revision": "1",
-    "store_generation": "doep-v1-r2",
+    "store_generation": "doep-v1-r3",
     "store_id": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/control.duckdb",
     "task_source_kind": "duckdb",
     "worktree_root": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/worktrees"
@@ -109,7 +109,7 @@
     "quack_role": "authenticated exclusive loopback mutation owner"
   },
   "plan_path": "docs/architecture/AGENT_SUPERVISOR_DIRECT_OBJECTIVE_AND_EVENT_DRIVEN_PLANNING_V1_PLAN.md",
-  "plan_root_cid": "sha256:3bea3ee75d48e051fae319d6e6748b9a22ccc2de9ac98fb4589934b03f68e33d",
+  "plan_root_cid": "sha256:d31947c6c532598c8a312703d76158eecb930000a42c8123b58c37c2924758dc",
   "poll_interval_seconds": 5,
   "program_identifier": "agent-supervisor-direct-objective-and-event-driven-planning-v1",
   "protected_paths": [

@@ -1,7 +1,7 @@
-# Agent Supervisor Direct Objective and Event-Driven Planning — DOEP-PLAN-V2
+# Agent Supervisor Direct Objective and Event-Driven Planning — DOEP-PLAN-V3
 
 Program: `agent-supervisor-direct-objective-and-event-driven-planning-v1`
-Plan CID: `sha256:3bea3ee75d48e051fae319d6e6748b9a22ccc2de9ac98fb4589934b03f68e33d`
+Plan CID: `sha256:d31947c6c532598c8a312703d76158eecb930000a42c8123b58c37c2924758dc`
 Status: sealed bootstrap campaign; execution is owned by the existing supervisor.
 
 ## Outcome
@@ -34,7 +34,7 @@ The dormant prompt-first facade is not used as false authority at bootstrap: on 
 
 ### Bootstrap revision history
 
-`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires configured local gitlink identities. Its complete DuckDB event stream and logs are retained as a superseded failed generation. `DOEP-PLAN-V2` separates semantic repository authority from operational gitlink identity, declares nested-repository outputs relative to their owner, and seals their exact superproject projections for independent validation.
+`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because newly generated Accelerate pytest targets were not, and could not honestly be represented as, pre-existing entries in Accelerate's task-bound V4 dependency contract. Both complete DuckDB event streams and logs are retained as superseded failed generations. `DOEP-PLAN-V3` uses the bridge's reserved `ipfs_accelerate_py` root authority for Accelerate-owned work, keeps Datasets and Kit on their configured gitlink authorities, and runs Accelerate tasks through the sealed root validation dispatcher. The dispatcher still executes each task's exact owner test with `shell=false`; this is an authority correction, not a reduced validation gate.
 
 ## Compiler and execution sequence
 
