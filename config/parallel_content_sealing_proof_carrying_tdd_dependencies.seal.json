@@ -2,9 +2,9 @@
   "amends_plan_revision": "PCTDD-PLAN-V1",
   "artifacts": {
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json": "sha256:24ed381bcc6d409582b6fe99bc007de64ad2eaba049a03ce94546b1d2eea5d87",
-    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:93d6b5b24db7449c1b205e196c5cac4f47f8cd3f66ef407a096ca4212d8cf20e",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:a55371cd2e865881679a6c1cf6be46048b05f7fe14e59f779696623a64a928bd",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json": "sha256:326f5ad71f8b5cf3986928587ac956a40de4e358daa4780d9948dcad969e0f3a",
-    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json": "sha256:741cd81a87121e1de9d32700c9348ed244ef9c35c6e63efcf18954e54a32afc1",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json": "sha256:cb25ce0095f43a987a4da47ceefc70d7e74448d6dcaaff7873176021927d68c9",
     "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json": "sha256:1b61f10063e4ae29acbf2c83fa5a951473d20f558b3ff6a442424d1153d2c780",
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md": "sha256:312605bc54dd832c43d8d928763ff3f8f4043e2e43d671f719c7be30ddcea165",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md": "sha256:3771a42d8301cc0a5a904edeada71f068979a7db3158ee58f5a0fe3571c2f6b0",
@@ -18,39 +18,43 @@
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json": "sha256:f37c0280f3b088597ec7fae028a978e912af3c0f1cf73c4bf2ef22ed9a2ee78b",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json": "sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997",
-    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:323031907b0640bbcebde389c6ade82fd465b359c37e8ff7e66b1f6000cfdcc9",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:a42fe5d4ecb877ce44a83d537d89f6f7cabe59389a68df87cd74d32c9c8d6bf2",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json": "sha256:11c32db94286c8a7006d6d63fb27b5d4f2a6c02d471d406e50b73fcaeabd7998",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
-    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:adee989bdc0d9b1a2fd528667d192601df85bae8e5307139d57bbfde99571e82",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:d117067abf3afa560221f6da44640572b0dbf2fad907b966582ecaa7e5e59237",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py": "sha256:274629d1eba8a92ffa5c6f42c2e93d9203871c6b4e8166c00ea152e344077ad7",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py": "sha256:67e07858b78658f61f772299d59ff692b2bc792f09ef9ec7542da8d3cbbeae3e",
     "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py": "sha256:61757f1a6f66bda791b487a2e96bb7d7dbbe61e8b544b9379a89d7b0e9a04be4",
-    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py": "sha256:11ffd3f7d5f913ff909aa43537e6075ab8636310b2b9f761b837929e5c1e0318",
-    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py": "sha256:00b846c144241ba7312213570581e0c4a6c59bb94fea6543f1994dfbb251e365",
-    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py": "sha256:425dfe54f04adae82aa5bdce1367d1347d8673d3cdc59c40a32737bbe8e35a6d"
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py": "sha256:ffd8b5ce941e4024ca9a6857a7495bd371b5932163fb3e014c87a3031d3695e9",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py": "sha256:9c9b805a16219dce2e32fa1e0258e0bebf3e2dca8145af2db706b98cad2eb208",
+    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py": "sha256:871b4818af0799e9634f9eae9070439a8ff6aba8f2869d2935c9188938b256b4"
   },
   "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
   "environment": {
     "capabilities": {
       "coq": {
-        "admission_note": "installed user-writable shims are discovery evidence only; supervisor execution requires the current immutable formal-toolchain deployment",
-        "available": false,
-        "classification": "typed_optional_unavailable_at_capture",
-        "installer_discovered": false,
+        "admission_note": "ipfs_datasets_py lazy installer is the provisioning authority; managed Lean/CVC5/Coq executables are admitted when they run",
+        "available": true,
+        "classification": "ipfs_datasets_py_lazy_installer_available",
+        "error": "",
+        "install_path": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/coqc",
+        "installer_discovered": true,
         "name": "coq",
         "provisioning": "ipfs_datasets_py managed theorem-prover installer",
         "required": false,
-        "version": ""
+        "version": "The Rocq Prover, version 9.1.1"
       },
       "cvc5": {
-        "admission_note": "installed user-writable shims are discovery evidence only; supervisor execution requires the current immutable formal-toolchain deployment",
-        "available": false,
-        "classification": "installed_unqualified_user_mutable",
+        "admission_note": "ipfs_datasets_py lazy installer is the provisioning authority; managed Lean/CVC5/Coq executables are admitted when they run",
+        "available": true,
+        "classification": "ipfs_datasets_py_lazy_installer_available",
+        "error": "",
+        "install_path": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
         "installer_discovered": true,
         "name": "cvc5",
         "provisioning": "ipfs_datasets_py managed theorem-prover installer",
         "required": false,
-        "version": ""
+        "version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]"
       },
       "ducklake": {
         "available": true,
@@ -66,14 +70,16 @@
         "version": "d8a1881e"
       },
       "lean": {
-        "admission_note": "installed user-writable shims are discovery evidence only; supervisor execution requires the current immutable formal-toolchain deployment",
-        "available": false,
-        "classification": "installed_unqualified_user_mutable",
+        "admission_note": "ipfs_datasets_py lazy installer is the provisioning authority; managed Lean/CVC5/Coq executables are admitted when they run",
+        "available": true,
+        "classification": "ipfs_datasets_py_lazy_installer_available",
+        "error": "",
+        "install_path": "/home/barberb/.elan/bin/lean",
         "installer_discovered": true,
         "name": "lean",
         "provisioning": "ipfs_datasets_py managed theorem-prover installer",
         "required": false,
-        "version": ""
+        "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
       },
       "quack": {
         "available": true,
@@ -129,26 +135,26 @@
     {
       "authority": true,
       "dirty": false,
-      "gitlink": "a14d16cee74f49fd3b51632a026e1d7669b4fa59",
+      "gitlink": "0df86df8f83f28daf9778eec6b03671d24227895",
       "gitlink_matches_nested_head": true,
-      "head": "a14d16cee74f49fd3b51632a026e1d7669b4fa59",
+      "head": "0df86df8f83f28daf9778eec6b03671d24227895",
       "name": "ipfs_accelerate_py",
       "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
       "path": "external/ipfs_accelerate",
       "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "tree": "91be9301e3a6b62143ada426bef329411f2a1e97"
+      "tree": "350faa2268a2cbe4d4c8913543fed1e9a07dc7db"
     },
     {
       "authority": true,
       "dirty": false,
-      "gitlink": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "gitlink": "805bb3617e2f2baa980c84d563388f6afb86659f",
       "gitlink_matches_nested_head": true,
-      "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "head": "805bb3617e2f2baa980c84d563388f6afb86659f",
       "name": "ipfs_datasets_py",
       "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
       "path": "external/ipfs_datasets",
       "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47"
+      "tree": "8013c6b4fc49b2246db360c82368b3962a653633"
     },
     {
       "authority": true,
