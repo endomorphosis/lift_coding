@@ -1,5 +1,5 @@
 {
-  "accepted_plan_revision_alias": "DOEP-PLAN-V3",
+  "accepted_plan_revision_alias": "DOEP-PLAN-V4",
   "anti_runaway": {
     "event_debounce_seconds": 5,
     "max_generated_tasks": 24,
@@ -26,7 +26,7 @@
     "runtime_registry_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/registry",
     "schema": "ipfs_accelerate_py/agent-supervisor/database-program-config@1",
     "schema_revision": "1",
-    "store_generation": "doep-v1-r3",
+    "store_generation": "doep-v1-r4",
     "store_id": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/control.duckdb",
     "task_source_kind": "duckdb",
     "worktree_root": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/worktrees"
@@ -61,7 +61,7 @@
       "DOEP-003"
     ],
     "task_count": 85,
-    "task_dependency_count": 226,
+    "task_dependency_count": 233,
     "terminal_task_id": "DOEP-126"
   },
   "lanes": [
@@ -109,7 +109,7 @@
     "quack_role": "authenticated exclusive loopback mutation owner"
   },
   "plan_path": "docs/architecture/AGENT_SUPERVISOR_DIRECT_OBJECTIVE_AND_EVENT_DRIVEN_PLANNING_V1_PLAN.md",
-  "plan_root_cid": "sha256:d31947c6c532598c8a312703d76158eecb930000a42c8123b58c37c2924758dc",
+  "plan_root_cid": "sha256:ca087f36486cdfb9137c0b74c19ca4e4ea5f5f17a3a3188404383009638b9743",
   "poll_interval_seconds": 5,
   "program_identifier": "agent-supervisor-direct-objective-and-event-driven-planning-v1",
   "protected_paths": [
@@ -123,7 +123,9 @@
     "scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py",
     "scripts/ops/agent_supervisor/configured_board_scheduler.py",
     "scripts/ops/agent_supervisor/direct_objective_event_driven_planning_handoff.py",
-    "scripts/ops/agent_supervisor/implementation_supervisor_entry.py"
+    "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
+    "external/ipfs_accelerate/pyproject.toml",
+    "external/ipfs_datasets/pyproject.toml"
   ],
   "provider": {
     "completion_authority": "controller-owned sealed validation and database CAS",
@@ -150,11 +152,11 @@
     "accelerator_required_branch": "agent/agent-supervisor-direct-objective-and-event-driven-planning-v1",
     "bootstrap_task_source": "duckdb",
     "changed_revision_requires_fresh_inventory_and_baseline": true,
-    "ipfs_accelerate_planning_revision": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
-    "ipfs_accelerate_planning_tree": "c52908e40287051336d81c81a8f4799869846f03",
+    "ipfs_accelerate_planning_revision": "e7f17941206a9b0da87f4cc523885e093796ead0",
+    "ipfs_accelerate_planning_tree": "52ab7daeab75104a6250544c6b53d1ddb0ea1957",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_datasets_planning_revision": "f49afc579c22856849ca9f739435e5820003384f",
-    "ipfs_datasets_planning_tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+    "ipfs_datasets_planning_revision": "6c08977c43d48c2b953eb15fee4b8c671b64f8bc",
+    "ipfs_datasets_planning_tree": "5c84bcbdc70e6efb094908c75050c5dd7b51b2cf",
     "ipfs_datasets_submodule_path": "external/ipfs_datasets",
     "ipfs_kit_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
     "ipfs_kit_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",

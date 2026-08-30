@@ -1,6 +1,6 @@
 # DOEP bounded supervisor board
 
-Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158eecb930000a42c8123b58c37c2924758dc`. Markdown is a sealed projection; DuckDB through Quack is operational authority.
+Plan revision: `DOEP-PLAN-V4`. Plan CID: `sha256:ca087f36486cdfb9137c0b74c19ca4e4ea5f5f17a3a3188404383009638b9743`. Markdown is a sealed projection; DuckDB through Quack is operational authority.
 
 ## DOEP-000 Inventory current objective, planner, task, event, and state authorities
 - Status: todo
@@ -8,20 +8,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G010
 - Subgoal id: DOEP-G010.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: none
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/docs/architecture/agent_supervisor/DOEP_AUTHORITY_ADR.md, external/ipfs_accelerate/test/api/doep/test_doep_000_inventory_current_objective_planner_task_event_and_s.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-000.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-000.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: docs/architecture/agent_supervisor/DOEP_AUTHORITY_ADR.md, test/api/doep/test_doep_000_inventory_current_objective_planner_task_event_and_s.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-000.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-000.json
 - Superproject projection: external/ipfs_accelerate/docs/architecture/agent_supervisor/DOEP_AUTHORITY_ADR.md, external/ipfs_accelerate/test/api/doep/test_doep_000_inventory_current_objective_planner_task_event_and_s.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-000.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-000.json
-- Predicted files: external/ipfs_accelerate/docs/architecture/agent_supervisor/DOEP_AUTHORITY_ADR.md, external/ipfs_accelerate/test/api/doep/test_doep_000_inventory_current_objective_planner_task_event_and_s.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-000.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-000.json
+- Predicted files: docs/architecture/agent_supervisor/DOEP_AUTHORITY_ADR.md, test/api/doep/test_doep_000_inventory_current_objective_planner_task_event_and_s.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-000.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-000.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R0
 - Authority requirement: O0
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":600,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":8000,"max_model_calls":1,"max_output_tokens":2000,"max_prover_seconds":0,"max_provider_cost_usd":1,"max_test_seconds":300,"max_wall_seconds":3600,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to inventory current objective, planner, task, event, and state authorities without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-000@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-000
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-000@1
+- Validation: python3 -m pytest test/api/doep/test_doep_000_inventory_current_objective_planner_task_event_and_s.py -q
 - Acceptance: Independently verify that 'Inventory current objective, planner, task, event, and state authorities' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -41,20 +41,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G010
 - Subgoal id: DOEP-G010.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: none
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/baseline_manifest.py, external/ipfs_accelerate/test/api/doep/test_doep_001_seal_current_codex_primed_baseline.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-001.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-001.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: benchmarks/agent_supervisor/doep/baseline_manifest.py, test/api/doep/test_doep_001_seal_current_codex_primed_baseline.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-001.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-001.json
 - Superproject projection: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/baseline_manifest.py, external/ipfs_accelerate/test/api/doep/test_doep_001_seal_current_codex_primed_baseline.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-001.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-001.json
-- Predicted files: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/baseline_manifest.py, external/ipfs_accelerate/test/api/doep/test_doep_001_seal_current_codex_primed_baseline.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-001.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-001.json
+- Predicted files: benchmarks/agent_supervisor/doep/baseline_manifest.py, test/api/doep/test_doep_001_seal_current_codex_primed_baseline.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-001.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-001.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R0
 - Authority requirement: O0
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to seal current codex-primed baseline without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-001@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-001
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-001@1
+- Validation: python3 -m pytest test/api/doep/test_doep_001_seal_current_codex_primed_baseline.py -q
 - Acceptance: Independently verify that 'Seal current Codex-primed baseline' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -74,20 +74,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G010
 - Subgoal id: DOEP-G010.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: none
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/direct_state_writes.json, external/ipfs_accelerate/test/api/doep/test_doep_002_inventory_direct_state_write_and_controller_bypasses.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-002.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-002.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/direct_state_writes.json, test/api/doep/test_doep_002_inventory_direct_state_write_and_controller_bypasses.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-002.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-002.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/direct_state_writes.json, external/ipfs_accelerate/test/api/doep/test_doep_002_inventory_direct_state_write_and_controller_bypasses.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-002.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-002.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/direct_state_writes.json, external/ipfs_accelerate/test/api/doep/test_doep_002_inventory_direct_state_write_and_controller_bypasses.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-002.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-002.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/direct_state_writes.json, test/api/doep/test_doep_002_inventory_direct_state_write_and_controller_bypasses.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-002.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-002.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R0
 - Authority requirement: O0
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":600,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":8000,"max_model_calls":1,"max_output_tokens":2000,"max_prover_seconds":0,"max_provider_cost_usd":1,"max_test_seconds":300,"max_wall_seconds":3600,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to inventory direct-state-write and controller bypasses without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-002@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-002
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-002@1
+- Validation: python3 -m pytest test/api/doep/test_doep_002_inventory_direct_state_write_and_controller_bypasses.py -q
 - Acceptance: Independently verify that 'Inventory direct-state-write and controller bypasses' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -107,20 +107,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G010
 - Subgoal id: DOEP-G010.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: none
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/repository_contract_seal.json, external/ipfs_accelerate/test/api/doep/test_doep_003_seal_current_cross_repository_contracts_and_commits.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-003.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-003.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/repository_contract_seal.json, test/api/doep/test_doep_003_seal_current_cross_repository_contracts_and_commits.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-003.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-003.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/repository_contract_seal.json, external/ipfs_accelerate/test/api/doep/test_doep_003_seal_current_cross_repository_contracts_and_commits.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-003.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-003.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/repository_contract_seal.json, external/ipfs_accelerate/test/api/doep/test_doep_003_seal_current_cross_repository_contracts_and_commits.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-003.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-003.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/repository_contract_seal.json, test/api/doep/test_doep_003_seal_current_cross_repository_contracts_and_commits.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-003.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-003.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R0
 - Authority requirement: O0
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":600,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":8000,"max_model_calls":1,"max_output_tokens":2000,"max_prover_seconds":0,"max_provider_cost_usd":1,"max_test_seconds":300,"max_wall_seconds":3600,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to seal current cross-repository contracts and commits without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-003@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-003
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-003@1
+- Validation: python3 -m pytest test/api/doep/test_doep_003_seal_current_cross_repository_contracts_and_commits.py -q
 - Acceptance: Independently verify that 'Seal current cross-repository contracts and commits' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -142,7 +142,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G020.S1
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-000, DOEP-003
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_010_define_supervisorobjectiveintent_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-010.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-010.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py, external/ipfs_datasets/tests/doep/test_doep_010_define_supervisorobjectiveintent_contract.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-010.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-010.json
 - Predicted files: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_010_define_supervisorobjectiveintent_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-010.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-010.json
@@ -152,8 +152,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to define supervisorobjectiveintent contract without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-010@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_010_define_supervisorobjectiveintent_contract.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-010@1
+- Validation: python3 -m pytest tests/doep/test_doep_010_define_supervisorobjectiveintent_contract.py -q
 - Acceptance: Independently verify that 'Define SupervisorObjectiveIntent contract' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -175,7 +175,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G020.S1
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-010
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_011_define_objectivematerializationreceipt_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-011.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-011.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py, external/ipfs_datasets/tests/doep/test_doep_011_define_objectivematerializationreceipt_contract.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-011.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-011.json
 - Predicted files: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_011_define_objectivematerializationreceipt_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-011.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-011.json
@@ -185,8 +185,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to define objectivematerializationreceipt contract without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-011@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_011_define_objectivematerializationreceipt_contract.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-011@1
+- Validation: python3 -m pytest tests/doep/test_doep_011_define_objectivematerializationreceipt_contract.py -q
 - Acceptance: Independently verify that 'Define ObjectiveMaterializationReceipt contract' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -206,20 +206,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G020
 - Subgoal id: DOEP-G020.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-000, DOEP-010, DOEP-011
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py, external/ipfs_accelerate/test/api/doep/test_doep_012_implement_canonical_objective_submission_service.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-012.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-012.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py, test/api/doep/test_doep_012_implement_canonical_objective_submission_service.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-012.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-012.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py, external/ipfs_accelerate/test/api/doep/test_doep_012_implement_canonical_objective_submission_service.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-012.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-012.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py, external/ipfs_accelerate/test/api/doep/test_doep_012_implement_canonical_objective_submission_service.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-012.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-012.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py, test/api/doep/test_doep_012_implement_canonical_objective_submission_service.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-012.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-012.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to implement canonical objective-submission service without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-012@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-012
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-012@1
+- Validation: python3 -m pytest test/api/doep/test_doep_012_implement_canonical_objective_submission_service.py -q
 - Acceptance: Independently verify that 'Implement canonical objective-submission service' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -239,20 +239,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G020
 - Subgoal id: DOEP-G020.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-012, DOEP-016
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py, external/ipfs_accelerate/test/api/doep/test_doep_013_add_python_client.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-013.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-013.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py, test/api/doep/test_doep_013_add_python_client.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-013.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-013.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py, external/ipfs_accelerate/test/api/doep/test_doep_013_add_python_client.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-013.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-013.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py, external/ipfs_accelerate/test/api/doep/test_doep_013_add_python_client.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-013.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-013.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py, test/api/doep/test_doep_013_add_python_client.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-013.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-013.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add python client without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-013@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-013
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-013@1
+- Validation: python3 -m pytest test/api/doep/test_doep_013_add_python_client.py -q
 - Acceptance: Independently verify that 'Add Python client' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -272,20 +272,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G020
 - Subgoal id: DOEP-G020.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-012, DOEP-016
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py, external/ipfs_accelerate/test/api/doep/test_doep_014_add_cli_client.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-014.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-014.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py, test/api/doep/test_doep_014_add_cli_client.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-014.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-014.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py, external/ipfs_accelerate/test/api/doep/test_doep_014_add_cli_client.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-014.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-014.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py, external/ipfs_accelerate/test/api/doep/test_doep_014_add_cli_client.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-014.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-014.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py, test/api/doep/test_doep_014_add_cli_client.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-014.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-014.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add cli client without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-014@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-014
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-014@1
+- Validation: python3 -m pytest test/api/doep/test_doep_014_add_cli_client.py -q
 - Acceptance: Independently verify that 'Add CLI client' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -305,20 +305,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G020
 - Subgoal id: DOEP-G020.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-012, DOEP-016
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py, external/ipfs_accelerate/test/api/doep/test_doep_015_add_mcp_mcp_adapters.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-015.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-015.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py, test/api/doep/test_doep_015_add_mcp_mcp_adapters.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-015.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-015.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py, external/ipfs_accelerate/test/api/doep/test_doep_015_add_mcp_mcp_adapters.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-015.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-015.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py, external/ipfs_accelerate/test/api/doep/test_doep_015_add_mcp_mcp_adapters.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-015.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-015.json
+- Predicted files: ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py, test/api/doep/test_doep_015_add_mcp_mcp_adapters.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-015.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-015.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add mcp/mcp++ adapters without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-015@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-015
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-015@1
+- Validation: python3 -m pytest test/api/doep/test_doep_015_add_mcp_mcp_adapters.py -q
 - Acceptance: Independently verify that 'Add MCP/MCP++ adapters' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -338,20 +338,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G020
 - Subgoal id: DOEP-G020.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-002, DOEP-010, DOEP-012
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/authority_resolver.py, external/ipfs_accelerate/test/api/doep/test_doep_016_add_authentication_delegation_idempotency_and_typed_.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-016.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-016.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/entrypoints/authority_resolver.py, test/api/doep/test_doep_016_add_authentication_delegation_idempotency_and_typed_.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-016.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-016.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/authority_resolver.py, external/ipfs_accelerate/test/api/doep/test_doep_016_add_authentication_delegation_idempotency_and_typed_.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-016.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-016.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/authority_resolver.py, external/ipfs_accelerate/test/api/doep/test_doep_016_add_authentication_delegation_idempotency_and_typed_.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-016.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-016.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/entrypoints/authority_resolver.py, test/api/doep/test_doep_016_add_authentication_delegation_idempotency_and_typed_.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-016.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-016.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add authentication, delegation, idempotency, and typed errors without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-016@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-016
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-016@1
+- Validation: python3 -m pytest test/api/doep/test_doep_016_add_authentication_delegation_idempotency_and_typed_.py -q
 - Acceptance: Independently verify that 'Add authentication, delegation, idempotency, and typed errors' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -371,20 +371,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G020
 - Subgoal id: DOEP-G020.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-013, DOEP-014, DOEP-015, DOEP-016
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/test/api/doep/test_cross_adapter_identity.py, external/ipfs_accelerate/test/api/doep/test_doep_017_prove_cross_adapter_identity_parity.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-017.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-017.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: test/api/doep/test_cross_adapter_identity.py, test/api/doep/test_doep_017_prove_cross_adapter_identity_parity.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-017.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-017.json
 - Superproject projection: external/ipfs_accelerate/test/api/doep/test_cross_adapter_identity.py, external/ipfs_accelerate/test/api/doep/test_doep_017_prove_cross_adapter_identity_parity.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-017.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-017.json
-- Predicted files: external/ipfs_accelerate/test/api/doep/test_cross_adapter_identity.py, external/ipfs_accelerate/test/api/doep/test_doep_017_prove_cross_adapter_identity_parity.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-017.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-017.json
+- Predicted files: test/api/doep/test_cross_adapter_identity.py, test/api/doep/test_doep_017_prove_cross_adapter_identity_parity.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-017.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-017.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to prove cross-adapter identity parity without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-017@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-017
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-017@1
+- Validation: python3 -m pytest test/api/doep/test_doep_017_prove_cross_adapter_identity_parity.py -q
 - Acceptance: Independently verify that 'Prove cross-adapter identity parity' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -404,20 +404,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G030
 - Subgoal id: DOEP-G030.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-000, DOEP-001, DOEP-003
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py, external/ipfs_accelerate/test/api/doep/test_doep_020_consolidate_objective_compiler.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-020.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-020.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py, test/api/doep/test_doep_020_consolidate_objective_compiler.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-020.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-020.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py, external/ipfs_accelerate/test/api/doep/test_doep_020_consolidate_objective_compiler.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-020.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-020.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py, external/ipfs_accelerate/test/api/doep/test_doep_020_consolidate_objective_compiler.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-020.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-020.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py, test/api/doep/test_doep_020_consolidate_objective_compiler.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-020.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-020.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R1
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to consolidate objective compiler without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-020@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-020
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-020@1
+- Validation: python3 -m pytest test/api/doep/test_doep_020_consolidate_objective_compiler.py -q
 - Acceptance: Independently verify that 'Consolidate objective compiler' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -438,8 +438,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Parent goal: DOEP-G030
 - Subgoal id: DOEP-G030.S1
 - Owning repository: external/ipfs_datasets
-- Depends on: DOEP-010, DOEP-020
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Depends on: DOEP-010, DOEP-011, DOEP-020
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_021_add_deterministic_normalization.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-021.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-021.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py, external/ipfs_datasets/tests/doep/test_doep_021_add_deterministic_normalization.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-021.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-021.json
 - Predicted files: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_021_add_deterministic_normalization.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-021.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-021.json
@@ -449,8 +449,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add deterministic normalization without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-021@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_021_add_deterministic_normalization.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-021@1
+- Validation: python3 -m pytest tests/doep/test_doep_021_add_deterministic_normalization.py -q
 - Acceptance: Independently verify that 'Add deterministic normalization' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -470,20 +470,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G030
 - Subgoal id: DOEP-G030.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-003, DOEP-020
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_context.py, external/ipfs_accelerate/test/api/doep/test_doep_022_add_repository_capability_analysis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-022.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-022.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/planning/formal_plan_context.py, test/api/doep/test_doep_022_add_repository_capability_analysis.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-022.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-022.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_context.py, external/ipfs_accelerate/test/api/doep/test_doep_022_add_repository_capability_analysis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-022.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-022.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_context.py, external/ipfs_accelerate/test/api/doep/test_doep_022_add_repository_capability_analysis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-022.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-022.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/planning/formal_plan_context.py, test/api/doep/test_doep_022_add_repository_capability_analysis.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-022.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-022.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add repository/capability analysis without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-022@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-022
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-022@1
+- Validation: python3 -m pytest test/api/doep/test_doep_022_add_repository_capability_analysis.py -q
 - Acceptance: Independently verify that 'Add repository/capability analysis' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -505,7 +505,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G030.S2
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-021, DOEP-022
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_023_add_rule_driven_objective_decomposition.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-023.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-023.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py, external/ipfs_datasets/tests/doep/test_doep_023_add_rule_driven_objective_decomposition.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-023.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-023.json
 - Predicted files: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_023_add_rule_driven_objective_decomposition.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-023.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-023.json
@@ -515,8 +515,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add rule-driven objective decomposition without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-023@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_023_add_rule_driven_objective_decomposition.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-023@1
+- Validation: python3 -m pytest tests/doep/test_doep_023_add_rule_driven_objective_decomposition.py -q
 - Acceptance: Independently verify that 'Add rule-driven objective decomposition' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -538,7 +538,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G030.S2
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-010, DOEP-023
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_024_add_assumptions_guarantees_non_goals_and_acceptance_.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-024.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-024.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py, external/ipfs_datasets/tests/doep/test_doep_024_add_assumptions_guarantees_non_goals_and_acceptance_.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-024.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-024.json
 - Predicted files: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_024_add_assumptions_guarantees_non_goals_and_acceptance_.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-024.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-024.json
@@ -548,8 +548,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add assumptions, guarantees, non-goals, and acceptance conditions without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-024@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_024_add_assumptions_guarantees_non_goals_and_acceptance_.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-024@1
+- Validation: python3 -m pytest tests/doep/test_doep_024_add_assumptions_guarantees_non_goals_and_acceptance_.py -q
 - Acceptance: Independently verify that 'Add assumptions, guarantees, non-goals, and acceptance conditions' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -571,7 +571,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G030.S2
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-024
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_025_add_unresolved_question_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-025.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-025.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py, external/ipfs_datasets/tests/doep/test_doep_025_add_unresolved_question_contract.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-025.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-025.json
 - Predicted files: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_025_add_unresolved_question_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-025.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-025.json
@@ -581,8 +581,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add unresolved-question contract without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-025@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_025_add_unresolved_question_contract.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-025@1
+- Validation: python3 -m pytest tests/doep/test_doep_025_add_unresolved_question_contract.py -q
 - Acceptance: Independently verify that 'Add unresolved-question contract' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -604,7 +604,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G030.S2
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-022, DOEP-025
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_026_add_logic_constrained_residual_interpretation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-026.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-026.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py, external/ipfs_datasets/tests/doep/test_doep_026_add_logic_constrained_residual_interpretation.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-026.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-026.json
 - Predicted files: ipfs_datasets_py/logic/intent_ir/schema.py, tests/doep/test_doep_026_add_logic_constrained_residual_interpretation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-026.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-026.json
@@ -614,8 +614,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add logic-constrained residual interpretation without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-026@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_026_add_logic_constrained_residual_interpretation.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-026@1
+- Validation: python3 -m pytest tests/doep/test_doep_026_add_logic_constrained_residual_interpretation.py -q
 - Acceptance: Independently verify that 'Add logic-constrained residual interpretation' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -635,20 +635,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G030
 - Subgoal id: DOEP-G030.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-016, DOEP-023, DOEP-024, DOEP-025, DOEP-026
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_validator.py, external/ipfs_accelerate/test/api/doep/test_doep_027_add_plan_validation_and_completeness_witness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-027.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-027.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/planning/formal_plan_validator.py, test/api/doep/test_doep_027_add_plan_validation_and_completeness_witness.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-027.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-027.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_validator.py, external/ipfs_accelerate/test/api/doep/test_doep_027_add_plan_validation_and_completeness_witness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-027.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-027.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_validator.py, external/ipfs_accelerate/test/api/doep/test_doep_027_add_plan_validation_and_completeness_witness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-027.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-027.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/planning/formal_plan_validator.py, test/api/doep/test_doep_027_add_plan_validation_and_completeness_witness.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-027.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-027.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add plan validation and completeness witness without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-027@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-027
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-027@1
+- Validation: python3 -m pytest test/api/doep/test_doep_027_add_plan_validation_and_completeness_witness.py -q
 - Acceptance: Independently verify that 'Add plan validation and completeness witness' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -670,7 +670,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G040.S1
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-000, DOEP-003
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/ir_core/schema_registry.py, tests/doep/test_doep_030_define_canonical_event_schema.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-030.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-030.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/schema_registry.py, external/ipfs_datasets/tests/doep/test_doep_030_define_canonical_event_schema.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-030.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-030.json
 - Predicted files: ipfs_datasets_py/logic/ir_core/schema_registry.py, tests/doep/test_doep_030_define_canonical_event_schema.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-030.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-030.json
@@ -680,8 +680,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to define canonical event schema without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-030@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_030_define_canonical_event_schema.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-030@1
+- Validation: python3 -m pytest tests/doep/test_doep_030_define_canonical_event_schema.py -q
 - Acceptance: Independently verify that 'Define canonical event schema' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -703,7 +703,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G040.S1
 - Owning repository: external/ipfs_kit
 - Depends on: DOEP-030
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py, tests/doep/test_doep_031_add_transactional_event_publication.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-031.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-031.json
 - Superproject projection: external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py, external/ipfs_kit/tests/doep/test_doep_031_add_transactional_event_publication.py, external/ipfs_kit/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-031.json, external/ipfs_kit/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-031.json
 - Predicted files: ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py, tests/doep/test_doep_031_add_transactional_event_publication.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-031.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-031.json
@@ -713,8 +713,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add transactional event publication without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-031@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_031_add_transactional_event_publication.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-031@1
+- Validation: python3 -m pytest tests/doep/test_doep_031_add_transactional_event_publication.py -q
 - Acceptance: Independently verify that 'Add transactional event publication' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -734,20 +734,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G040
 - Subgoal id: DOEP-G040.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-030, DOEP-031
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_032_add_idempotent_event_consumption_and_cursors.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-032.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-032.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, test/api/doep/test_doep_032_add_idempotent_event_consumption_and_cursors.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-032.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-032.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_032_add_idempotent_event_consumption_and_cursors.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-032.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-032.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_032_add_idempotent_event_consumption_and_cursors.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-032.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-032.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, test/api/doep/test_doep_032_add_idempotent_event_consumption_and_cursors.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-032.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-032.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add idempotent event consumption and cursors without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-032@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-032
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-032@1
+- Validation: python3 -m pytest test/api/doep/test_doep_032_add_idempotent_event_consumption_and_cursors.py -q
 - Acceptance: Independently verify that 'Add idempotent event consumption and cursors' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -767,20 +767,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G040
 - Subgoal id: DOEP-G040.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-031, DOEP-032
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_033_add_materialized_state_replay_and_recovery.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-033.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-033.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, test/api/doep/test_doep_033_add_materialized_state_replay_and_recovery.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-033.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-033.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_033_add_materialized_state_replay_and_recovery.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-033.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-033.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_033_add_materialized_state_replay_and_recovery.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-033.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-033.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py, test/api/doep/test_doep_033_add_materialized_state_replay_and_recovery.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-033.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-033.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add materialized-state replay and recovery without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-033@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-033
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-033@1
+- Validation: python3 -m pytest test/api/doep/test_doep_033_add_materialized_state_replay_and_recovery.py -q
 - Acceptance: Independently verify that 'Add materialized-state replay and recovery' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -800,20 +800,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G040
 - Subgoal id: DOEP-G040.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-030, DOEP-032
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_034_add_event_coalescing_and_causal_ordering.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-034.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-034.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/event_log.py, test/api/doep/test_doep_034_add_event_coalescing_and_causal_ordering.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-034.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-034.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_034_add_event_coalescing_and_causal_ordering.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-034.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-034.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/event_log.py, external/ipfs_accelerate/test/api/doep/test_doep_034_add_event_coalescing_and_causal_ordering.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-034.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-034.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/event_log.py, test/api/doep/test_doep_034_add_event_coalescing_and_causal_ordering.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-034.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-034.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add event coalescing and causal ordering without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-034@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-034
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-034@1
+- Validation: python3 -m pytest test/api/doep/test_doep_034_add_event_coalescing_and_causal_ordering.py -q
 - Acceptance: Independently verify that 'Add event coalescing and causal ordering' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -833,20 +833,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G040
 - Subgoal id: DOEP-G040.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-003, DOEP-030, DOEP-032
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_035_add_sibling_supervisor_event_validation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-035.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-035.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, test/api/doep/test_doep_035_add_sibling_supervisor_event_validation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-035.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-035.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_035_add_sibling_supervisor_event_validation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-035.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-035.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_035_add_sibling_supervisor_event_validation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-035.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-035.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, test/api/doep/test_doep_035_add_sibling_supervisor_event_validation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-035.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-035.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add sibling-supervisor event validation without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-035@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-035
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-035@1
+- Validation: python3 -m pytest test/api/doep/test_doep_035_add_sibling_supervisor_event_validation.py -q
 - Acceptance: Independently verify that 'Add sibling-supervisor event validation' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -866,20 +866,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G050
 - Subgoal id: DOEP-G050.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-000, DOEP-030
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_contracts.py, external/ipfs_accelerate/test/api/doep/test_doep_040_formalize_canonical_task_state_machine.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-040.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-040.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_contracts.py, test/api/doep/test_doep_040_formalize_canonical_task_state_machine.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-040.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-040.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_contracts.py, external/ipfs_accelerate/test/api/doep/test_doep_040_formalize_canonical_task_state_machine.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-040.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-040.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_contracts.py, external/ipfs_accelerate/test/api/doep/test_doep_040_formalize_canonical_task_state_machine.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-040.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-040.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_contracts.py, test/api/doep/test_doep_040_formalize_canonical_task_state_machine.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-040.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-040.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to formalize canonical task state machine without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-040@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-040
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-040@1
+- Validation: python3 -m pytest test/api/doep/test_doep_040_formalize_canonical_task_state_machine.py -q
 - Acceptance: Independently verify that 'Formalize canonical task state machine' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -899,20 +899,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G050
 - Subgoal id: DOEP-G050.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-031, DOEP-040
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py, external/ipfs_accelerate/test/api/doep/test_doep_041_enforce_revision_cas_transitions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-041.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-041.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py, test/api/doep/test_doep_041_enforce_revision_cas_transitions.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-041.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-041.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py, external/ipfs_accelerate/test/api/doep/test_doep_041_enforce_revision_cas_transitions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-041.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-041.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py, external/ipfs_accelerate/test/api/doep/test_doep_041_enforce_revision_cas_transitions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-041.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-041.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py, test/api/doep/test_doep_041_enforce_revision_cas_transitions.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-041.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-041.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to enforce revision/cas transitions without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-041@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-041
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-041@1
+- Validation: python3 -m pytest test/api/doep/test_doep_041_enforce_revision_cas_transitions.py -q
 - Acceptance: Independently verify that 'Enforce revision/CAS transitions' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -932,20 +932,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G050
 - Subgoal id: DOEP-G050.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-016, DOEP-041
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/quack_owner_mutation.py, external/ipfs_accelerate/test/api/doep/test_doep_042_enforce_claims_leases_fencing_and_idempotency.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-042.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-042.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/task_sources/quack_owner_mutation.py, test/api/doep/test_doep_042_enforce_claims_leases_fencing_and_idempotency.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-042.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-042.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/quack_owner_mutation.py, external/ipfs_accelerate/test/api/doep/test_doep_042_enforce_claims_leases_fencing_and_idempotency.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-042.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-042.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/quack_owner_mutation.py, external/ipfs_accelerate/test/api/doep/test_doep_042_enforce_claims_leases_fencing_and_idempotency.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-042.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-042.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/task_sources/quack_owner_mutation.py, test/api/doep/test_doep_042_enforce_claims_leases_fencing_and_idempotency.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-042.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-042.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to enforce claims, leases, fencing, and idempotency without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-042@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-042
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-042@1
+- Validation: python3 -m pytest test/api/doep/test_doep_042_enforce_claims_leases_fencing_and_idempotency.py -q
 - Acceptance: Independently verify that 'Enforce claims, leases, fencing, and idempotency' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -965,20 +965,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G050
 - Subgoal id: DOEP-G050.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-040, DOEP-041, DOEP-042
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provider_execution.py, external/ipfs_accelerate/test/api/doep/test_doep_043_add_unknown_provider_outcome_reconciliation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-043.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-043.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/provider_execution.py, test/api/doep/test_doep_043_add_unknown_provider_outcome_reconciliation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-043.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-043.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provider_execution.py, external/ipfs_accelerate/test/api/doep/test_doep_043_add_unknown_provider_outcome_reconciliation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-043.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-043.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provider_execution.py, external/ipfs_accelerate/test/api/doep/test_doep_043_add_unknown_provider_outcome_reconciliation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-043.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-043.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/provider_execution.py, test/api/doep/test_doep_043_add_unknown_provider_outcome_reconciliation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-043.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-043.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add unknown-provider-outcome reconciliation without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-043@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-043
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-043@1
+- Validation: python3 -m pytest test/api/doep/test_doep_043_add_unknown_provider_outcome_reconciliation.py -q
 - Acceptance: Independently verify that 'Add unknown-provider-outcome reconciliation' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -998,20 +998,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G050
 - Subgoal id: DOEP-G050.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-033, DOEP-042, DOEP-043
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/external_quack_owner.py, external/ipfs_accelerate/test/api/doep/test_doep_044_add_owner_loss_and_owner_restart_recovery.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-044.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-044.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/external_quack_owner.py, test/api/doep/test_doep_044_add_owner_loss_and_owner_restart_recovery.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-044.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-044.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/external_quack_owner.py, external/ipfs_accelerate/test/api/doep/test_doep_044_add_owner_loss_and_owner_restart_recovery.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-044.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-044.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/external_quack_owner.py, external/ipfs_accelerate/test/api/doep/test_doep_044_add_owner_loss_and_owner_restart_recovery.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-044.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-044.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/external_quack_owner.py, test/api/doep/test_doep_044_add_owner_loss_and_owner_restart_recovery.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-044.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-044.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add owner-loss and owner-restart recovery without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-044@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-044
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-044@1
+- Validation: python3 -m pytest test/api/doep/test_doep_044_add_owner_loss_and_owner_restart_recovery.py -q
 - Acceptance: Independently verify that 'Add owner-loss and owner-restart recovery' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1031,20 +1031,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G050
 - Subgoal id: DOEP-G050.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-040, DOEP-041
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py, external/ipfs_accelerate/test/api/doep/test_doep_045_add_stale_plan_epoch_handling.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-045.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-045.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py, test/api/doep/test_doep_045_add_stale_plan_epoch_handling.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-045.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-045.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py, external/ipfs_accelerate/test/api/doep/test_doep_045_add_stale_plan_epoch_handling.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-045.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-045.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py, external/ipfs_accelerate/test/api/doep/test_doep_045_add_stale_plan_epoch_handling.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-045.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-045.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py, test/api/doep/test_doep_045_add_stale_plan_epoch_handling.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-045.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-045.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add stale-plan-epoch handling without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-045@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-045
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-045@1
+- Validation: python3 -m pytest test/api/doep/test_doep_045_add_stale_plan_epoch_handling.py -q
 - Acceptance: Independently verify that 'Add stale-plan-epoch handling' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1064,20 +1064,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G050
 - Subgoal id: DOEP-G050.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-030, DOEP-031, DOEP-032, DOEP-033, DOEP-034, DOEP-035, DOEP-040, DOEP-041, DOEP-042, DOEP-043, DOEP-044, DOEP-045
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/test/api/doep/test_control_plane_model.py, external/ipfs_accelerate/test/api/doep/test_doep_046_add_model_based_and_temporal_invariant_tests.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-046.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-046.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: test/api/doep/test_control_plane_model.py, test/api/doep/test_doep_046_add_model_based_and_temporal_invariant_tests.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-046.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-046.json
 - Superproject projection: external/ipfs_accelerate/test/api/doep/test_control_plane_model.py, external/ipfs_accelerate/test/api/doep/test_doep_046_add_model_based_and_temporal_invariant_tests.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-046.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-046.json
-- Predicted files: external/ipfs_accelerate/test/api/doep/test_control_plane_model.py, external/ipfs_accelerate/test/api/doep/test_doep_046_add_model_based_and_temporal_invariant_tests.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-046.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-046.json
+- Predicted files: test/api/doep/test_control_plane_model.py, test/api/doep/test_doep_046_add_model_based_and_temporal_invariant_tests.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-046.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-046.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":14400,"max_frontier_model_calls":0,"max_gpu_seconds":3600,"max_input_tokens":24000,"max_model_calls":2,"max_output_tokens":6000,"max_prover_seconds":3600,"max_provider_cost_usd":10,"max_test_seconds":7200,"max_wall_seconds":86400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add model-based and temporal invariant tests without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-046@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-046
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-046@1
+- Validation: python3 -m pytest test/api/doep/test_doep_046_add_model_based_and_temporal_invariant_tests.py -q
 - Acceptance: Independently verify that 'Add model-based and temporal invariant tests' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1097,20 +1097,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G060
 - Subgoal id: DOEP-G060.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-022, DOEP-027, DOEP-030
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/dynamic_impact_frontier.py, external/ipfs_accelerate/test/api/doep/test_doep_050_implement_incremental_plan_impact_analysis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-050.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-050.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/analysis/dynamic_impact_frontier.py, test/api/doep/test_doep_050_implement_incremental_plan_impact_analysis.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-050.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-050.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/dynamic_impact_frontier.py, external/ipfs_accelerate/test/api/doep/test_doep_050_implement_incremental_plan_impact_analysis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-050.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-050.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/dynamic_impact_frontier.py, external/ipfs_accelerate/test/api/doep/test_doep_050_implement_incremental_plan_impact_analysis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-050.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-050.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/analysis/dynamic_impact_frontier.py, test/api/doep/test_doep_050_implement_incremental_plan_impact_analysis.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-050.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-050.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to implement incremental plan-impact analysis without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-050@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-050
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-050@1
+- Validation: python3 -m pytest test/api/doep/test_doep_050_implement_incremental_plan_impact_analysis.py -q
 - Acceptance: Independently verify that 'Implement incremental plan-impact analysis' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1130,20 +1130,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G060
 - Subgoal id: DOEP-G060.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-032, DOEP-045, DOEP-050
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_event_adapter.py, external/ipfs_accelerate/test/api/doep/test_doep_051_add_event_driven_reassessment.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-051.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-051.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/entrypoints/refill_event_adapter.py, test/api/doep/test_doep_051_add_event_driven_reassessment.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-051.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-051.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_event_adapter.py, external/ipfs_accelerate/test/api/doep/test_doep_051_add_event_driven_reassessment.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-051.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-051.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_event_adapter.py, external/ipfs_accelerate/test/api/doep/test_doep_051_add_event_driven_reassessment.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-051.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-051.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/entrypoints/refill_event_adapter.py, test/api/doep/test_doep_051_add_event_driven_reassessment.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-051.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-051.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add event-driven reassessment without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-051@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-051
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-051@1
+- Validation: python3 -m pytest test/api/doep/test_doep_051_add_event_driven_reassessment.py -q
 - Acceptance: Independently verify that 'Add event-driven reassessment' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1164,8 +1164,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Parent goal: DOEP-G060
 - Subgoal id: DOEP-G060.S1
 - Owning repository: external/ipfs_datasets
-- Depends on: DOEP-030, DOEP-050
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Depends on: DOEP-024, DOEP-030, DOEP-050
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_052_add_plandelta_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-052.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-052.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py, external/ipfs_datasets/tests/doep/test_doep_052_add_plandelta_contract.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-052.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-052.json
 - Predicted files: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_052_add_plandelta_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-052.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-052.json
@@ -1175,8 +1175,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add plandelta contract without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-052@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_052_add_plandelta_contract.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-052@1
+- Validation: python3 -m pytest tests/doep/test_doep_052_add_plandelta_contract.py -q
 - Acceptance: Independently verify that 'Add PlanDelta contract' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1196,20 +1196,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G060
 - Subgoal id: DOEP-G060.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-051, DOEP-052
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_controller.py, external/ipfs_accelerate/test/api/doep/test_doep_053_add_automatic_bounded_task_refill.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-053.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-053.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/entrypoints/refill_controller.py, test/api/doep/test_doep_053_add_automatic_bounded_task_refill.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-053.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-053.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_controller.py, external/ipfs_accelerate/test/api/doep/test_doep_053_add_automatic_bounded_task_refill.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-053.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-053.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_controller.py, external/ipfs_accelerate/test/api/doep/test_doep_053_add_automatic_bounded_task_refill.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-053.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-053.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/entrypoints/refill_controller.py, test/api/doep/test_doep_053_add_automatic_bounded_task_refill.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-053.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-053.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add automatic bounded task refill without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-053@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-053
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-053@1
+- Validation: python3 -m pytest test/api/doep/test_doep_053_add_automatic_bounded_task_refill.py -q
 - Acceptance: Independently verify that 'Add automatic bounded task refill' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1229,20 +1229,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G060
 - Subgoal id: DOEP-G060.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-023, DOEP-053
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/semantic_refill.py, external/ipfs_accelerate/test/api/doep/test_doep_054_add_task_semantic_deduplication.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-054.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-054.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/task_sources/semantic_refill.py, test/api/doep/test_doep_054_add_task_semantic_deduplication.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-054.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-054.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/semantic_refill.py, external/ipfs_accelerate/test/api/doep/test_doep_054_add_task_semantic_deduplication.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-054.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-054.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/semantic_refill.py, external/ipfs_accelerate/test/api/doep/test_doep_054_add_task_semantic_deduplication.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-054.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-054.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/task_sources/semantic_refill.py, test/api/doep/test_doep_054_add_task_semantic_deduplication.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-054.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-054.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add task semantic deduplication without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-054@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-054
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-054@1
+- Validation: python3 -m pytest test/api/doep/test_doep_054_add_task_semantic_deduplication.py -q
 - Acceptance: Independently verify that 'Add task semantic deduplication' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1262,20 +1262,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G060
 - Subgoal id: DOEP-G060.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-052, DOEP-053, DOEP-054
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/campaign_refill_policy.py, external/ipfs_accelerate/test/api/doep/test_doep_055_add_oscillation_runaway_and_nonconvergence_controls.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-055.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-055.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/self_improvement/campaign_refill_policy.py, test/api/doep/test_doep_055_add_oscillation_runaway_and_nonconvergence_controls.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-055.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-055.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/campaign_refill_policy.py, external/ipfs_accelerate/test/api/doep/test_doep_055_add_oscillation_runaway_and_nonconvergence_controls.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-055.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-055.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/campaign_refill_policy.py, external/ipfs_accelerate/test/api/doep/test_doep_055_add_oscillation_runaway_and_nonconvergence_controls.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-055.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-055.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/self_improvement/campaign_refill_policy.py, test/api/doep/test_doep_055_add_oscillation_runaway_and_nonconvergence_controls.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-055.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-055.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add oscillation, runaway, and nonconvergence controls without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-055@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-055
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-055@1
+- Validation: python3 -m pytest test/api/doep/test_doep_055_add_oscillation_runaway_and_nonconvergence_controls.py -q
 - Acceptance: Independently verify that 'Add oscillation, runaway, and nonconvergence controls' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1295,20 +1295,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G060
 - Subgoal id: DOEP-G060.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-027, DOEP-051, DOEP-053, DOEP-055
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py, external/ipfs_accelerate/test/api/doep/test_doep_056_add_objective_satisfaction_and_stop_conditions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-056.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-056.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py, test/api/doep/test_doep_056_add_objective_satisfaction_and_stop_conditions.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-056.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-056.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py, external/ipfs_accelerate/test/api/doep/test_doep_056_add_objective_satisfaction_and_stop_conditions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-056.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-056.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py, external/ipfs_accelerate/test/api/doep/test_doep_056_add_objective_satisfaction_and_stop_conditions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-056.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-056.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py, test/api/doep/test_doep_056_add_objective_satisfaction_and_stop_conditions.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-056.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-056.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add objective satisfaction and stop conditions without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-056@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-056
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-056@1
+- Validation: python3 -m pytest test/api/doep/test_doep_056_add_objective_satisfaction_and_stop_conditions.py -q
 - Acceptance: Independently verify that 'Add objective satisfaction and stop conditions' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1330,7 +1330,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G070.S1
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-003, DOEP-010
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/proof_context/context_pack.py, tests/doep/test_doep_060_define_supervisorcontextpack_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-060.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-060.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py, external/ipfs_datasets/tests/doep/test_doep_060_define_supervisorcontextpack_contract.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-060.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-060.json
 - Predicted files: ipfs_datasets_py/proof_context/context_pack.py, tests/doep/test_doep_060_define_supervisorcontextpack_contract.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-060.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-060.json
@@ -1340,8 +1340,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to define supervisorcontextpack contract without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-060@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_060_define_supervisorcontextpack_contract.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-060@1
+- Validation: python3 -m pytest tests/doep/test_doep_060_define_supervisorcontextpack_contract.py -q
 - Acceptance: Independently verify that 'Define SupervisorContextPack contract' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1363,7 +1363,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G070.S1
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-022, DOEP-060
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/proof_context/context_pack.py, tests/doep/test_doep_061_implement_datasets_semantic_builder.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-061.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-061.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py, external/ipfs_datasets/tests/doep/test_doep_061_implement_datasets_semantic_builder.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-061.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-061.json
 - Predicted files: ipfs_datasets_py/proof_context/context_pack.py, tests/doep/test_doep_061_implement_datasets_semantic_builder.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-061.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-061.json
@@ -1373,8 +1373,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to implement datasets semantic builder without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-061@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_061_implement_datasets_semantic_builder.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-061@1
+- Validation: python3 -m pytest tests/doep/test_doep_061_implement_datasets_semantic_builder.py -q
 - Acceptance: Independently verify that 'Implement Datasets semantic builder' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1396,7 +1396,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G070.S1
 - Owning repository: external/ipfs_kit
 - Depends on: DOEP-003, DOEP-031, DOEP-060
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py, tests/doep/test_doep_062_implement_kit_durable_storage_and_current_root_cas.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-062.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-062.json
 - Superproject projection: external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py, external/ipfs_kit/tests/doep/test_doep_062_implement_kit_durable_storage_and_current_root_cas.py, external/ipfs_kit/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-062.json, external/ipfs_kit/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-062.json
 - Predicted files: ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py, tests/doep/test_doep_062_implement_kit_durable_storage_and_current_root_cas.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-062.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-062.json
@@ -1406,8 +1406,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to implement kit durable storage and current-root cas without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-062@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_062_implement_kit_durable_storage_and_current_root_cas.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-062@1
+- Validation: python3 -m pytest tests/doep/test_doep_062_implement_kit_durable_storage_and_current_root_cas.py -q
 - Acceptance: Independently verify that 'Implement Kit durable storage and current-root CAS' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1427,20 +1427,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G070
 - Subgoal id: DOEP-G070.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-060, DOEP-061, DOEP-062
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py, external/ipfs_accelerate/test/api/doep/test_doep_063_implement_accelerate_freshness_and_selection.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-063.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-063.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/context/context_compiler.py, test/api/doep/test_doep_063_implement_accelerate_freshness_and_selection.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-063.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-063.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py, external/ipfs_accelerate/test/api/doep/test_doep_063_implement_accelerate_freshness_and_selection.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-063.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-063.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py, external/ipfs_accelerate/test/api/doep/test_doep_063_implement_accelerate_freshness_and_selection.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-063.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-063.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/context/context_compiler.py, test/api/doep/test_doep_063_implement_accelerate_freshness_and_selection.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-063.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-063.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to implement accelerate freshness and selection without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-063@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-063
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-063@1
+- Validation: python3 -m pytest test/api/doep/test_doep_063_implement_accelerate_freshness_and_selection.py -q
 - Acceptance: Independently verify that 'Implement Accelerate freshness and selection' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1462,7 +1462,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G070.S2
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-061, DOEP-062, DOEP-063
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/proof_context/context_pack.py, tests/doep/test_doep_064_add_incremental_context_expansion.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-064.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-064.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py, external/ipfs_datasets/tests/doep/test_doep_064_add_incremental_context_expansion.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-064.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-064.json
 - Predicted files: ipfs_datasets_py/proof_context/context_pack.py, tests/doep/test_doep_064_add_incremental_context_expansion.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-064.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-064.json
@@ -1472,8 +1472,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add incremental context expansion without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-064@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_064_add_incremental_context_expansion.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-064@1
+- Validation: python3 -m pytest tests/doep/test_doep_064_add_incremental_context_expansion.py -q
 - Acceptance: Independently verify that 'Add incremental context expansion' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1493,20 +1493,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G070
 - Subgoal id: DOEP-G070.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-030, DOEP-063, DOEP-064
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_contracts.py, external/ipfs_accelerate/test/api/doep/test_doep_065_add_contextpack_invalidation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-065.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-065.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/context/context_contracts.py, test/api/doep/test_doep_065_add_contextpack_invalidation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-065.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-065.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_contracts.py, external/ipfs_accelerate/test/api/doep/test_doep_065_add_contextpack_invalidation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-065.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-065.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_contracts.py, external/ipfs_accelerate/test/api/doep/test_doep_065_add_contextpack_invalidation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-065.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-065.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/context/context_contracts.py, test/api/doep/test_doep_065_add_contextpack_invalidation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-065.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-065.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add contextpack invalidation without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-065@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-065
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-065@1
+- Validation: python3 -m pytest test/api/doep/test_doep_065_add_contextpack_invalidation.py -q
 - Acceptance: Independently verify that 'Add ContextPack invalidation' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1526,20 +1526,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G070
 - Subgoal id: DOEP-G070.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-063, DOEP-064, DOEP-065
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/context_pack.py, external/ipfs_accelerate/test/api/doep/test_doep_066_benchmark_contextpack_reuse_and_omissions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-066.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-066.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: benchmarks/agent_supervisor/doep/context_pack.py, test/api/doep/test_doep_066_benchmark_contextpack_reuse_and_omissions.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-066.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-066.json
 - Superproject projection: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/context_pack.py, external/ipfs_accelerate/test/api/doep/test_doep_066_benchmark_contextpack_reuse_and_omissions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-066.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-066.json
-- Predicted files: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/context_pack.py, external/ipfs_accelerate/test/api/doep/test_doep_066_benchmark_contextpack_reuse_and_omissions.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-066.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-066.json
+- Predicted files: benchmarks/agent_supervisor/doep/context_pack.py, test/api/doep/test_doep_066_benchmark_contextpack_reuse_and_omissions.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-066.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-066.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":14400,"max_frontier_model_calls":0,"max_gpu_seconds":3600,"max_input_tokens":24000,"max_model_calls":2,"max_output_tokens":6000,"max_prover_seconds":3600,"max_provider_cost_usd":10,"max_test_seconds":7200,"max_wall_seconds":86400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to benchmark contextpack reuse and omissions without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-066@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-066
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-066@1
+- Validation: python3 -m pytest test/api/doep/test_doep_066_benchmark_contextpack_reuse_and_omissions.py -q
 - Acceptance: Independently verify that 'Benchmark ContextPack reuse and omissions' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1559,20 +1559,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G080
 - Subgoal id: DOEP-G080.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-000, DOEP-001, DOEP-022
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py, external/ipfs_accelerate/test/api/doep/test_doep_070_consolidate_deterministic_first_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-070.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-070.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/verification/model_route.py, test/api/doep/test_doep_070_consolidate_deterministic_first_routing.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-070.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-070.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py, external/ipfs_accelerate/test/api/doep/test_doep_070_consolidate_deterministic_first_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-070.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-070.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py, external/ipfs_accelerate/test/api/doep/test_doep_070_consolidate_deterministic_first_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-070.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-070.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/verification/model_route.py, test/api/doep/test_doep_070_consolidate_deterministic_first_routing.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-070.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-070.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R1
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to consolidate deterministic-first routing without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-070@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-070
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-070@1
+- Validation: python3 -m pytest test/api/doep/test_doep_070_consolidate_deterministic_first_routing.py -q
 - Acceptance: Independently verify that 'Consolidate deterministic-first routing' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1592,20 +1592,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G080
 - Subgoal id: DOEP-G080.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-003, DOEP-070
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py, external/ipfs_accelerate/test/api/doep/test_doep_071_add_exact_receipt_reuse.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-071.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-071.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py, test/api/doep/test_doep_071_add_exact_receipt_reuse.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-071.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-071.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py, external/ipfs_accelerate/test/api/doep/test_doep_071_add_exact_receipt_reuse.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-071.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-071.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py, external/ipfs_accelerate/test/api/doep/test_doep_071_add_exact_receipt_reuse.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-071.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-071.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py, test/api/doep/test_doep_071_add_exact_receipt_reuse.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-071.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-071.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add exact receipt reuse without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-071@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-071
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-071@1
+- Validation: python3 -m pytest test/api/doep/test_doep_071_add_exact_receipt_reuse.py -q
 - Acceptance: Independently verify that 'Add exact receipt reuse' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1625,20 +1625,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G080
 - Subgoal id: DOEP-G080.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-022, DOEP-070
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/analysis_ast_index.py, external/ipfs_accelerate/test/api/doep/test_doep_072_add_ast_dependency_static_analysis_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-072.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-072.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/analysis/analysis_ast_index.py, test/api/doep/test_doep_072_add_ast_dependency_static_analysis_routing.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-072.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-072.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/analysis_ast_index.py, external/ipfs_accelerate/test/api/doep/test_doep_072_add_ast_dependency_static_analysis_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-072.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-072.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/analysis_ast_index.py, external/ipfs_accelerate/test/api/doep/test_doep_072_add_ast_dependency_static_analysis_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-072.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-072.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/analysis/analysis_ast_index.py, test/api/doep/test_doep_072_add_ast_dependency_static_analysis_routing.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-072.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-072.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add ast/dependency/static analysis routing without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-072@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-072
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-072@1
+- Validation: python3 -m pytest test/api/doep/test_doep_072_add_ast_dependency_static_analysis_routing.py -q
 - Acceptance: Independently verify that 'Add AST/dependency/static analysis routing' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1658,20 +1658,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G080
 - Subgoal id: DOEP-G080.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-060, DOEP-070, DOEP-072
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/task_proposal_router.py, external/ipfs_accelerate/test/api/doep/test_doep_073_add_selected_test_and_prover_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-073.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-073.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/planning/task_proposal_router.py, test/api/doep/test_doep_073_add_selected_test_and_prover_routing.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-073.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-073.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/task_proposal_router.py, external/ipfs_accelerate/test/api/doep/test_doep_073_add_selected_test_and_prover_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-073.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-073.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/task_proposal_router.py, external/ipfs_accelerate/test/api/doep/test_doep_073_add_selected_test_and_prover_routing.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-073.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-073.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/planning/task_proposal_router.py, test/api/doep/test_doep_073_add_selected_test_and_prover_routing.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-073.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-073.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add selected-test and prover routing without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-073@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-073
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-073@1
+- Validation: python3 -m pytest test/api/doep/test_doep_073_add_selected_test_and_prover_routing.py -q
 - Acceptance: Independently verify that 'Add selected-test and prover routing' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1691,20 +1691,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G080
 - Subgoal id: DOEP-G080.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-071, DOEP-072, DOEP-073
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py, external/ipfs_accelerate/test/api/doep/test_doep_074_add_small_medium_frontier_escalation_policy.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-074.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-074.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/verification/model_route.py, test/api/doep/test_doep_074_add_small_medium_frontier_escalation_policy.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-074.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-074.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py, external/ipfs_accelerate/test/api/doep/test_doep_074_add_small_medium_frontier_escalation_policy.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-074.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-074.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py, external/ipfs_accelerate/test/api/doep/test_doep_074_add_small_medium_frontier_escalation_policy.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-074.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-074.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/verification/model_route.py, test/api/doep/test_doep_074_add_small_medium_frontier_escalation_policy.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-074.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-074.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add small/medium/frontier escalation policy without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-074@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-074
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-074@1
+- Validation: python3 -m pytest test/api/doep/test_doep_074_add_small_medium_frontier_escalation_policy.py -q
 - Acceptance: Independently verify that 'Add small/medium/frontier escalation policy' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1724,20 +1724,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G080
 - Subgoal id: DOEP-G080.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-030, DOEP-074
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/decision_receipts.py, external/ipfs_accelerate/test/api/doep/test_doep_075_add_route_explanations_and_receipts.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-075.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-075.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/decision_receipts.py, test/api/doep/test_doep_075_add_route_explanations_and_receipts.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-075.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-075.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/decision_receipts.py, external/ipfs_accelerate/test/api/doep/test_doep_075_add_route_explanations_and_receipts.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-075.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-075.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/decision_receipts.py, external/ipfs_accelerate/test/api/doep/test_doep_075_add_route_explanations_and_receipts.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-075.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-075.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/decision_receipts.py, test/api/doep/test_doep_075_add_route_explanations_and_receipts.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-075.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-075.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add route explanations and receipts without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-075@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-075
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-075@1
+- Validation: python3 -m pytest test/api/doep/test_doep_075_add_route_explanations_and_receipts.py -q
 - Acceptance: Independently verify that 'Add route explanations and receipts' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1757,20 +1757,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G080
 - Subgoal id: DOEP-G080.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-074, DOEP-075
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_efficiency_metrics.py, external/ipfs_accelerate/test/api/doep/test_doep_076_add_unnecessary_escalation_detection.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-076.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-076.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_efficiency_metrics.py, test/api/doep/test_doep_076_add_unnecessary_escalation_detection.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-076.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-076.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_efficiency_metrics.py, external/ipfs_accelerate/test/api/doep/test_doep_076_add_unnecessary_escalation_detection.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-076.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-076.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_efficiency_metrics.py, external/ipfs_accelerate/test/api/doep/test_doep_076_add_unnecessary_escalation_detection.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-076.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-076.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_efficiency_metrics.py, test/api/doep/test_doep_076_add_unnecessary_escalation_detection.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-076.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-076.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add unnecessary-escalation detection without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-076@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-076
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-076@1
+- Validation: python3 -m pytest test/api/doep/test_doep_076_add_unnecessary_escalation_detection.py -q
 - Acceptance: Independently verify that 'Add unnecessary-escalation detection' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1791,8 +1791,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Parent goal: DOEP-G090
 - Subgoal id: DOEP-G090.S1
 - Owning repository: external/ipfs_datasets
-- Depends on: DOEP-024, DOEP-027, DOEP-060
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Depends on: DOEP-024, DOEP-027, DOEP-052, DOEP-060
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_080_add_assume_guarantee_planning_contracts.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-080.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-080.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py, external/ipfs_datasets/tests/doep/test_doep_080_add_assume_guarantee_planning_contracts.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-080.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-080.json
 - Predicted files: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_080_add_assume_guarantee_planning_contracts.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-080.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-080.json
@@ -1802,8 +1802,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add assume-guarantee planning contracts without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-080@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_080_add_assume_guarantee_planning_contracts.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-080@1
+- Validation: python3 -m pytest tests/doep/test_doep_080_add_assume_guarantee_planning_contracts.py -q
 - Acceptance: Independently verify that 'Add assume-guarantee planning contracts' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1823,20 +1823,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G090
 - Subgoal id: DOEP-G090.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-050, DOEP-052, DOEP-080
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, external/ipfs_accelerate/test/api/doep/test_doep_081_add_affected_suffix_replanning.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-081.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-081.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, test/api/doep/test_doep_081_add_affected_suffix_replanning.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-081.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-081.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, external/ipfs_accelerate/test/api/doep/test_doep_081_add_affected_suffix_replanning.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-081.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-081.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, external/ipfs_accelerate/test/api/doep/test_doep_081_add_affected_suffix_replanning.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-081.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-081.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, test/api/doep/test_doep_081_add_affected_suffix_replanning.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-081.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-081.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add affected-suffix replanning without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-081@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-081
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-081@1
+- Validation: python3 -m pytest test/api/doep/test_doep_081_add_affected_suffix_replanning.py -q
 - Acceptance: Independently verify that 'Add affected-suffix replanning' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1858,7 +1858,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G090.S2
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-073, DOEP-080, DOEP-081
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/software_verification/counterexamples/explanation.py, tests/doep/test_doep_082_add_counterexample_and_unsat_core_refinement.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-082.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-082.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/explanation.py, external/ipfs_datasets/tests/doep/test_doep_082_add_counterexample_and_unsat_core_refinement.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-082.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-082.json
 - Predicted files: ipfs_datasets_py/logic/software_verification/counterexamples/explanation.py, tests/doep/test_doep_082_add_counterexample_and_unsat_core_refinement.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-082.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-082.json
@@ -1868,8 +1868,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add counterexample and unsat-core refinement without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-082@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_082_add_counterexample_and_unsat_core_refinement.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-082@1
+- Validation: python3 -m pytest tests/doep/test_doep_082_add_counterexample_and_unsat_core_refinement.py -q
 - Acceptance: Independently verify that 'Add counterexample and unsat-core refinement' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1891,7 +1891,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G090.S2
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-082
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/backends/smt/interpolation.py, tests/doep/test_doep_083_add_bounded_craig_interpolation_planning_assistance_.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-083.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-083.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/backends/smt/interpolation.py, external/ipfs_datasets/tests/doep/test_doep_083_add_bounded_craig_interpolation_planning_assistance_.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-083.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-083.json
 - Predicted files: ipfs_datasets_py/logic/backends/smt/interpolation.py, tests/doep/test_doep_083_add_bounded_craig_interpolation_planning_assistance_.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-083.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-083.json
@@ -1901,8 +1901,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add bounded craig-interpolation planning assistance where qualified without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-083@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_083_add_bounded_craig_interpolation_planning_assistance_.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-083@1
+- Validation: python3 -m pytest tests/doep/test_doep_083_add_bounded_craig_interpolation_planning_assistance_.py -q
 - Acceptance: Independently verify that 'Add bounded Craig-interpolation planning assistance where qualified' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1922,20 +1922,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G090
 - Subgoal id: DOEP-G090.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-081, DOEP-082, DOEP-083
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, external/ipfs_accelerate/test/api/doep/test_doep_084_add_cegar_plan_refinement.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-084.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-084.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, test/api/doep/test_doep_084_add_cegar_plan_refinement.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-084.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-084.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, external/ipfs_accelerate/test/api/doep/test_doep_084_add_cegar_plan_refinement.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-084.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-084.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, external/ipfs_accelerate/test/api/doep/test_doep_084_add_cegar_plan_refinement.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-084.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-084.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py, test/api/doep/test_doep_084_add_cegar_plan_refinement.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-084.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-084.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add cegar plan refinement without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-084@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-084
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-084@1
+- Validation: python3 -m pytest test/api/doep/test_doep_084_add_cegar_plan_refinement.py -q
 - Acceptance: Independently verify that 'Add CEGAR plan refinement' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1957,7 +1957,7 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Subgoal id: DOEP-G090.S3
 - Owning repository: external/ipfs_datasets
 - Depends on: DOEP-054, DOEP-084
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_085_add_equivalent_task_and_equivalent_plan_elimination.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-085.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-085.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py, external/ipfs_datasets/tests/doep/test_doep_085_add_equivalent_task_and_equivalent_plan_elimination.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-085.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-085.json
 - Predicted files: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_085_add_equivalent_task_and_equivalent_plan_elimination.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-085.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-085.json
@@ -1967,8 +1967,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add equivalent-task and equivalent-plan elimination without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-085@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_085_add_equivalent_task_and_equivalent_plan_elimination.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-085@1
+- Validation: python3 -m pytest tests/doep/test_doep_085_add_equivalent_task_and_equivalent_plan_elimination.py -q
 - Acceptance: Independently verify that 'Add equivalent-task and equivalent-plan elimination' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -1989,8 +1989,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Parent goal: DOEP-G100
 - Subgoal id: DOEP-G100.S1
 - Owning repository: external/ipfs_datasets
-- Depends on: DOEP-060, DOEP-080
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Depends on: DOEP-060, DOEP-080, DOEP-085
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_090_define_supervisorpatchplan.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-090.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-090.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py, external/ipfs_datasets/tests/doep/test_doep_090_define_supervisorpatchplan.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-090.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-090.json
 - Predicted files: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_090_define_supervisorpatchplan.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-090.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-090.json
@@ -2000,8 +2000,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":1200,"max_frontier_model_calls":0,"max_gpu_seconds":0,"max_input_tokens":16000,"max_model_calls":2,"max_output_tokens":5000,"max_prover_seconds":600,"max_provider_cost_usd":3,"max_test_seconds":900,"max_wall_seconds":7200,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to define supervisorpatchplan without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-090@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_090_define_supervisorpatchplan.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-090@1
+- Validation: python3 -m pytest tests/doep/test_doep_090_define_supervisorpatchplan.py -q
 - Acceptance: Independently verify that 'Define SupervisorPatchPlan' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2021,20 +2021,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G100
 - Subgoal id: DOEP-G100.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-072, DOEP-090
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, external/ipfs_accelerate/test/api/doep/test_doep_091_add_deterministic_synthesis_allowlist.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-091.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-091.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, test/api/doep/test_doep_091_add_deterministic_synthesis_allowlist.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-091.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-091.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, external/ipfs_accelerate/test/api/doep/test_doep_091_add_deterministic_synthesis_allowlist.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-091.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-091.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, external/ipfs_accelerate/test/api/doep/test_doep_091_add_deterministic_synthesis_allowlist.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-091.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-091.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, test/api/doep/test_doep_091_add_deterministic_synthesis_allowlist.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-091.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-091.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add deterministic synthesis allowlist without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-091@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-091
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-091@1
+- Validation: python3 -m pytest test/api/doep/test_doep_091_add_deterministic_synthesis_allowlist.py -q
 - Acceptance: Independently verify that 'Add deterministic synthesis allowlist' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2054,20 +2054,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G100
 - Subgoal id: DOEP-G100.S2
-- Owning repository: ipfs_accelerate_py
-- Depends on: DOEP-063, DOEP-074, DOEP-090
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, external/ipfs_accelerate/test/api/doep/test_doep_092_add_bounded_model_assisted_synthesis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-092.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-092.json
+- Owning repository: external/ipfs_accelerate
+- Depends on: DOEP-063, DOEP-074, DOEP-090, DOEP-091
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, test/api/doep/test_doep_092_add_bounded_model_assisted_synthesis.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-092.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-092.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, external/ipfs_accelerate/test/api/doep/test_doep_092_add_bounded_model_assisted_synthesis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-092.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-092.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, external/ipfs_accelerate/test/api/doep/test_doep_092_add_bounded_model_assisted_synthesis.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-092.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-092.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py, test/api/doep/test_doep_092_add_bounded_model_assisted_synthesis.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-092.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-092.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add bounded model-assisted synthesis without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-092@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-092
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-092@1
+- Validation: python3 -m pytest test/api/doep/test_doep_092_add_bounded_model_assisted_synthesis.py -q
 - Acceptance: Independently verify that 'Add bounded model-assisted synthesis' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2087,20 +2087,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G100
 - Subgoal id: DOEP-G100.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-090, DOEP-091, DOEP-092
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/scope_adjudication.py, external/ipfs_accelerate/test/api/doep/test_doep_093_add_patch_scope_and_semantic_nonempty_validation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-093.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-093.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/validation/scope_adjudication.py, test/api/doep/test_doep_093_add_patch_scope_and_semantic_nonempty_validation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-093.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-093.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/scope_adjudication.py, external/ipfs_accelerate/test/api/doep/test_doep_093_add_patch_scope_and_semantic_nonempty_validation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-093.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-093.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/scope_adjudication.py, external/ipfs_accelerate/test/api/doep/test_doep_093_add_patch_scope_and_semantic_nonempty_validation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-093.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-093.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/validation/scope_adjudication.py, test/api/doep/test_doep_093_add_patch_scope_and_semantic_nonempty_validation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-093.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-093.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add patch scope and semantic-nonempty validation without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-093@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-093
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-093@1
+- Validation: python3 -m pytest test/api/doep/test_doep_093_add_patch_scope_and_semantic_nonempty_validation.py -q
 - Acceptance: Independently verify that 'Add patch scope and semantic-nonempty validation' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2120,20 +2120,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G100
 - Subgoal id: DOEP-G100.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-042, DOEP-073, DOEP-093
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/post_merge_validation.py, external/ipfs_accelerate/test/api/doep/test_doep_094_add_proof_test_based_merge_admission.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-094.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-094.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/todo_daemon/post_merge_validation.py, test/api/doep/test_doep_094_add_proof_test_based_merge_admission.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-094.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-094.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/post_merge_validation.py, external/ipfs_accelerate/test/api/doep/test_doep_094_add_proof_test_based_merge_admission.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-094.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-094.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/post_merge_validation.py, external/ipfs_accelerate/test/api/doep/test_doep_094_add_proof_test_based_merge_admission.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-094.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-094.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/todo_daemon/post_merge_validation.py, test/api/doep/test_doep_094_add_proof_test_based_merge_admission.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-094.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-094.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add proof/test-based merge admission without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-094@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-094
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-094@1
+- Validation: python3 -m pytest test/api/doep/test_doep_094_add_proof_test_based_merge_admission.py -q
 - Acceptance: Independently verify that 'Add proof/test-based merge admission' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2153,20 +2153,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G110
 - Subgoal id: DOEP-G110.S1
-- Owning repository: ipfs_accelerate_py
-- Depends on: DOEP-003, DOEP-016, DOEP-030
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_100_add_sibling_supervisor_capability_registry.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-100.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-100.json
+- Owning repository: external/ipfs_accelerate
+- Depends on: DOEP-003, DOEP-016, DOEP-030, DOEP-035
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, test/api/doep/test_doep_100_add_sibling_supervisor_capability_registry.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-100.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-100.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_100_add_sibling_supervisor_capability_registry.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-100.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-100.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_100_add_sibling_supervisor_capability_registry.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-100.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-100.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, test/api/doep/test_doep_100_add_sibling_supervisor_capability_registry.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-100.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-100.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add sibling supervisor capability registry without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-100@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-100
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-100@1
+- Validation: python3 -m pytest test/api/doep/test_doep_100_add_sibling_supervisor_capability_registry.py -q
 - Acceptance: Independently verify that 'Add sibling supervisor capability registry' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2187,8 +2187,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Parent goal: DOEP-G110
 - Subgoal id: DOEP-G110.S1
 - Owning repository: external/ipfs_datasets
-- Depends on: DOEP-010, DOEP-060, DOEP-100
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Depends on: DOEP-010, DOEP-060, DOEP-090, DOEP-100
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
 - Exact outputs: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_101_add_cross_supervisor_task_requests.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-101.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-101.json
 - Superproject projection: external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py, external/ipfs_datasets/tests/doep/test_doep_101_add_cross_supervisor_task_requests.py, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-101.json, external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-101.json
 - Predicted files: ipfs_datasets_py/logic/external_work_plan_obligations.py, tests/doep/test_doep_101_add_cross_supervisor_task_requests.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-101.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-101.json
@@ -2198,8 +2198,8 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Authority requirement: S1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to add cross-supervisor task requests without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-101@1
-- Validation: python3 -m pytest -q tests/doep/test_doep_101_add_cross_supervisor_task_requests.py
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-101@1
+- Validation: python3 -m pytest tests/doep/test_doep_101_add_cross_supervisor_task_requests.py -q
 - Acceptance: Independently verify that 'Add cross-supervisor task requests' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2219,20 +2219,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G110
 - Subgoal id: DOEP-G110.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-062, DOEP-101
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_102_add_cross_supervisor_receipts.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-102.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-102.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, test/api/doep/test_doep_102_add_cross_supervisor_receipts.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-102.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-102.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_102_add_cross_supervisor_receipts.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-102.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-102.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_102_add_cross_supervisor_receipts.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-102.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-102.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, test/api/doep/test_doep_102_add_cross_supervisor_receipts.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-102.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-102.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add cross-supervisor receipts without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-102@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-102
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-102@1
+- Validation: python3 -m pytest test/api/doep/test_doep_102_add_cross_supervisor_receipts.py -q
 - Acceptance: Independently verify that 'Add cross-supervisor receipts' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2252,20 +2252,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G110
 - Subgoal id: DOEP-G110.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-035, DOEP-051, DOEP-052, DOEP-102
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_103_add_cross_repository_incremental_reassessment.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-103.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-103.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, test/api/doep/test_doep_103_add_cross_repository_incremental_reassessment.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-103.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-103.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_103_add_cross_repository_incremental_reassessment.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-103.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-103.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, external/ipfs_accelerate/test/api/doep/test_doep_103_add_cross_repository_incremental_reassessment.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-103.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-103.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py, test/api/doep/test_doep_103_add_cross_repository_incremental_reassessment.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-103.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-103.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add cross-repository incremental reassessment without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-103@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-103
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-103@1
+- Validation: python3 -m pytest test/api/doep/test_doep_103_add_cross_repository_incremental_reassessment.py -q
 - Acceptance: Independently verify that 'Add cross-repository incremental reassessment' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2285,20 +2285,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G110
 - Subgoal id: DOEP-G110.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-046, DOEP-100, DOEP-101, DOEP-102, DOEP-103
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/test/api/doep/test_cross_supervisor_isolation.py, external/ipfs_accelerate/test/api/doep/test_doep_104_prove_no_cross_supervisor_direct_state_writes.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-104.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-104.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: test/api/doep/test_cross_supervisor_isolation.py, test/api/doep/test_doep_104_prove_no_cross_supervisor_direct_state_writes.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-104.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-104.json
 - Superproject projection: external/ipfs_accelerate/test/api/doep/test_cross_supervisor_isolation.py, external/ipfs_accelerate/test/api/doep/test_doep_104_prove_no_cross_supervisor_direct_state_writes.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-104.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-104.json
-- Predicted files: external/ipfs_accelerate/test/api/doep/test_cross_supervisor_isolation.py, external/ipfs_accelerate/test/api/doep/test_doep_104_prove_no_cross_supervisor_direct_state_writes.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-104.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-104.json
+- Predicted files: test/api/doep/test_cross_supervisor_isolation.py, test/api/doep/test_doep_104_prove_no_cross_supervisor_direct_state_writes.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-104.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-104.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: A2
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":14400,"max_frontier_model_calls":0,"max_gpu_seconds":3600,"max_input_tokens":24000,"max_model_calls":2,"max_output_tokens":6000,"max_prover_seconds":3600,"max_provider_cost_usd":10,"max_test_seconds":7200,"max_wall_seconds":86400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to prove no cross-supervisor direct state writes without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-104@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-104
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-104@1
+- Validation: python3 -m pytest test/api/doep/test_doep_104_prove_no_cross_supervisor_direct_state_writes.py -q
 - Acceptance: Independently verify that 'Prove no cross-supervisor direct state writes' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2318,20 +2318,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G120
 - Subgoal id: DOEP-G120.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-066, DOEP-075
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/benchmark_telemetry.py, external/ipfs_accelerate/test/api/doep/test_doep_110_instrument_end_to_end_token_and_compute_telemetry.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-110.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-110.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: ipfs_accelerate_py/agent_supervisor/runtime/benchmark_telemetry.py, test/api/doep/test_doep_110_instrument_end_to_end_token_and_compute_telemetry.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-110.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-110.json
 - Superproject projection: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/benchmark_telemetry.py, external/ipfs_accelerate/test/api/doep/test_doep_110_instrument_end_to_end_token_and_compute_telemetry.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-110.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-110.json
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/benchmark_telemetry.py, external/ipfs_accelerate/test/api/doep/test_doep_110_instrument_end_to_end_token_and_compute_telemetry.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-110.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-110.json
+- Predicted files: ipfs_accelerate_py/agent_supervisor/runtime/benchmark_telemetry.py, test/api/doep/test_doep_110_instrument_end_to_end_token_and_compute_telemetry.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-110.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-110.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to instrument end-to-end token and compute telemetry without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-110@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-110
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-110@1
+- Validation: python3 -m pytest test/api/doep/test_doep_110_instrument_end_to_end_token_and_compute_telemetry.py -q
 - Acceptance: Independently verify that 'Instrument end-to-end token and compute telemetry' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2351,20 +2351,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G120
 - Subgoal id: DOEP-G120.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-001, DOEP-110
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/baseline.py, external/ipfs_accelerate/test/api/doep/test_doep_111_build_codex_primed_baseline_harness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-111.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-111.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: benchmarks/agent_supervisor/doep/baseline.py, test/api/doep/test_doep_111_build_codex_primed_baseline_harness.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-111.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-111.json
 - Superproject projection: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/baseline.py, external/ipfs_accelerate/test/api/doep/test_doep_111_build_codex_primed_baseline_harness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-111.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-111.json
-- Predicted files: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/baseline.py, external/ipfs_accelerate/test/api/doep/test_doep_111_build_codex_primed_baseline_harness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-111.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-111.json
+- Predicted files: benchmarks/agent_supervisor/doep/baseline.py, test/api/doep/test_doep_111_build_codex_primed_baseline_harness.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-111.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-111.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to build codex-primed baseline harness without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-111@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-111
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-111@1
+- Validation: python3 -m pytest test/api/doep/test_doep_111_build_codex_primed_baseline_harness.py -q
 - Acceptance: Independently verify that 'Build Codex-primed baseline harness' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2384,20 +2384,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G120
 - Subgoal id: DOEP-G120.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-027, DOEP-056, DOEP-074, DOEP-110
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/candidate.py, external/ipfs_accelerate/test/api/doep/test_doep_112_build_direct_supervisor_candidate_harness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-112.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-112.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: benchmarks/agent_supervisor/doep/candidate.py, test/api/doep/test_doep_112_build_direct_supervisor_candidate_harness.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-112.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-112.json
 - Superproject projection: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/candidate.py, external/ipfs_accelerate/test/api/doep/test_doep_112_build_direct_supervisor_candidate_harness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-112.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-112.json
-- Predicted files: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/candidate.py, external/ipfs_accelerate/test/api/doep/test_doep_112_build_direct_supervisor_candidate_harness.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-112.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-112.json
+- Predicted files: benchmarks/agent_supervisor/doep/candidate.py, test/api/doep/test_doep_112_build_direct_supervisor_candidate_harness.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-112.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-112.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to build direct-supervisor candidate harness without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-112@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-112
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-112@1
+- Validation: python3 -m pytest test/api/doep/test_doep_112_build_direct_supervisor_candidate_harness.py -q
 - Acceptance: Independently verify that 'Build direct-supervisor candidate harness' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2417,20 +2417,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G120
 - Subgoal id: DOEP-G120.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-027, DOEP-110
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/hermetic_objectives.json, external/ipfs_accelerate/test/api/doep/test_doep_113_build_hermetic_objective_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-113.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-113.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: test/fixtures/agent_supervisor_doep/hermetic_objectives.json, test/api/doep/test_doep_113_build_hermetic_objective_corpus.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-113.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-113.json
 - Superproject projection: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/hermetic_objectives.json, external/ipfs_accelerate/test/api/doep/test_doep_113_build_hermetic_objective_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-113.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-113.json
-- Predicted files: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/hermetic_objectives.json, external/ipfs_accelerate/test/api/doep/test_doep_113_build_hermetic_objective_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-113.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-113.json
+- Predicted files: test/fixtures/agent_supervisor_doep/hermetic_objectives.json, test/api/doep/test_doep_113_build_hermetic_objective_corpus.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-113.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-113.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R1
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to build hermetic objective corpus without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-113@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-113
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-113@1
+- Validation: python3 -m pytest test/api/doep/test_doep_113_build_hermetic_objective_corpus.py -q
 - Acceptance: Independently verify that 'Build hermetic objective corpus' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2450,20 +2450,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G120
 - Subgoal id: DOEP-G120.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-001, DOEP-110
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/historical_replays.json, external/ipfs_accelerate/test/api/doep/test_doep_114_build_historical_replay_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-114.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-114.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: test/fixtures/agent_supervisor_doep/historical_replays.json, test/api/doep/test_doep_114_build_historical_replay_corpus.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-114.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-114.json
 - Superproject projection: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/historical_replays.json, external/ipfs_accelerate/test/api/doep/test_doep_114_build_historical_replay_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-114.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-114.json
-- Predicted files: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/historical_replays.json, external/ipfs_accelerate/test/api/doep/test_doep_114_build_historical_replay_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-114.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-114.json
+- Predicted files: test/fixtures/agent_supervisor_doep/historical_replays.json, test/api/doep/test_doep_114_build_historical_replay_corpus.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-114.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-114.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R1
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to build historical replay corpus without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-114@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-114
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-114@1
+- Validation: python3 -m pytest test/api/doep/test_doep_114_build_historical_replay_corpus.py -q
 - Acceptance: Independently verify that 'Build historical replay corpus' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2483,20 +2483,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G120
 - Subgoal id: DOEP-G120.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-027, DOEP-110, DOEP-113
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/held_out_objectives.json, external/ipfs_accelerate/test/api/doep/test_doep_115_build_held_out_objective_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-115.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-115.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: test/fixtures/agent_supervisor_doep/held_out_objectives.json, test/api/doep/test_doep_115_build_held_out_objective_corpus.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-115.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-115.json
 - Superproject projection: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/held_out_objectives.json, external/ipfs_accelerate/test/api/doep/test_doep_115_build_held_out_objective_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-115.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-115.json
-- Predicted files: external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/held_out_objectives.json, external/ipfs_accelerate/test/api/doep/test_doep_115_build_held_out_objective_corpus.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-115.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-115.json
+- Predicted files: test/fixtures/agent_supervisor_doep/held_out_objectives.json, test/api/doep/test_doep_115_build_held_out_objective_corpus.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-115.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-115.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R1
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to build held-out objective corpus without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-115@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-115
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-115@1
+- Validation: python3 -m pytest test/api/doep/test_doep_115_build_held_out_objective_corpus.py -q
 - Acceptance: Independently verify that 'Build held-out objective corpus' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2516,20 +2516,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G120
 - Subgoal id: DOEP-G120.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-017, DOEP-046, DOEP-056, DOEP-103, DOEP-104, DOEP-110, DOEP-115
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/live_shadow.py, external/ipfs_accelerate/test/api/doep/test_doep_116_add_live_shadow_cohort.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-116.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-116.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: benchmarks/agent_supervisor/doep/live_shadow.py, test/api/doep/test_doep_116_add_live_shadow_cohort.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-116.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-116.json
 - Superproject projection: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/live_shadow.py, external/ipfs_accelerate/test/api/doep/test_doep_116_add_live_shadow_cohort.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-116.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-116.json
-- Predicted files: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/live_shadow.py, external/ipfs_accelerate/test/api/doep/test_doep_116_add_live_shadow_cohort.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-116.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-116.json
+- Predicted files: benchmarks/agent_supervisor/doep/live_shadow.py, test/api/doep/test_doep_116_add_live_shadow_cohort.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-116.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-116.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R3
 - Authority requirement: L1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add live shadow cohort without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-116@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-116
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-116@1
+- Validation: python3 -m pytest test/api/doep/test_doep_116_add_live_shadow_cohort.py -q
 - Acceptance: Independently verify that 'Add live shadow cohort' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2549,20 +2549,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G120
 - Subgoal id: DOEP-G120.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-046, DOEP-104, DOEP-116
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/low_risk_canary.py, external/ipfs_accelerate/test/api/doep/test_doep_117_add_low_risk_canary_cohort.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-117.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-117.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: benchmarks/agent_supervisor/doep/low_risk_canary.py, test/api/doep/test_doep_117_add_low_risk_canary_cohort.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-117.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-117.json
 - Superproject projection: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/low_risk_canary.py, external/ipfs_accelerate/test/api/doep/test_doep_117_add_low_risk_canary_cohort.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-117.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-117.json
-- Predicted files: external/ipfs_accelerate/benchmarks/agent_supervisor/doep/low_risk_canary.py, external/ipfs_accelerate/test/api/doep/test_doep_117_add_low_risk_canary_cohort.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-117.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-117.json
+- Predicted files: benchmarks/agent_supervisor/doep/low_risk_canary.py, test/api/doep/test_doep_117_add_low_risk_canary_cohort.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-117.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-117.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R4
 - Authority requirement: H1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to add low-risk canary cohort without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-117@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-117
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-117@1
+- Validation: python3 -m pytest test/api/doep/test_doep_117_add_low_risk_canary_cohort.py -q
 - Acceptance: Independently verify that 'Add low-risk canary cohort' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2582,20 +2582,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G130
 - Subgoal id: DOEP-G130.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-111, DOEP-112, DOEP-113
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/hermetic_paired.json, external/ipfs_accelerate/test/api/doep/test_doep_120_run_hermetic_paired_benchmark.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-120.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-120.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/hermetic_paired.json, test/api/doep/test_doep_120_run_hermetic_paired_benchmark.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-120.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-120.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/hermetic_paired.json, external/ipfs_accelerate/test/api/doep/test_doep_120_run_hermetic_paired_benchmark.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-120.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-120.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/hermetic_paired.json, external/ipfs_accelerate/test/api/doep/test_doep_120_run_hermetic_paired_benchmark.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-120.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-120.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/hermetic_paired.json, test/api/doep/test_doep_120_run_hermetic_paired_benchmark.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-120.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-120.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":28800,"max_frontier_model_calls":4,"max_gpu_seconds":7200,"max_input_tokens":120000,"max_model_calls":20,"max_output_tokens":30000,"max_prover_seconds":7200,"max_provider_cost_usd":75,"max_test_seconds":14400,"max_wall_seconds":172800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to run hermetic paired benchmark without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-120@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-120
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-120@1
+- Validation: python3 -m pytest test/api/doep/test_doep_120_run_hermetic_paired_benchmark.py -q
 - Acceptance: Independently verify that 'Run hermetic paired benchmark' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2615,20 +2615,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G130
 - Subgoal id: DOEP-G130.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-111, DOEP-112, DOEP-114
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/historical_paired.json, external/ipfs_accelerate/test/api/doep/test_doep_121_run_historical_paired_replay.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-121.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-121.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/historical_paired.json, test/api/doep/test_doep_121_run_historical_paired_replay.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-121.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-121.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/historical_paired.json, external/ipfs_accelerate/test/api/doep/test_doep_121_run_historical_paired_replay.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-121.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-121.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/historical_paired.json, external/ipfs_accelerate/test/api/doep/test_doep_121_run_historical_paired_replay.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-121.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-121.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/historical_paired.json, test/api/doep/test_doep_121_run_historical_paired_replay.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-121.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-121.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":28800,"max_frontier_model_calls":4,"max_gpu_seconds":7200,"max_input_tokens":120000,"max_model_calls":20,"max_output_tokens":30000,"max_prover_seconds":7200,"max_provider_cost_usd":75,"max_test_seconds":14400,"max_wall_seconds":172800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to run historical paired replay without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-121@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-121
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-121@1
+- Validation: python3 -m pytest test/api/doep/test_doep_121_run_historical_paired_replay.py -q
 - Acceptance: Independently verify that 'Run historical paired replay' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2648,20 +2648,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G130
 - Subgoal id: DOEP-G130.S1
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-112, DOEP-115
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/held_out_plan_quality.json, external/ipfs_accelerate/test/api/doep/test_doep_122_run_held_out_plan_quality_evaluation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-122.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-122.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/held_out_plan_quality.json, test/api/doep/test_doep_122_run_held_out_plan_quality_evaluation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-122.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-122.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/held_out_plan_quality.json, external/ipfs_accelerate/test/api/doep/test_doep_122_run_held_out_plan_quality_evaluation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-122.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-122.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/held_out_plan_quality.json, external/ipfs_accelerate/test/api/doep/test_doep_122_run_held_out_plan_quality_evaluation.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-122.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-122.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/held_out_plan_quality.json, test/api/doep/test_doep_122_run_held_out_plan_quality_evaluation.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-122.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-122.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R2
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":28800,"max_frontier_model_calls":4,"max_gpu_seconds":7200,"max_input_tokens":120000,"max_model_calls":20,"max_output_tokens":30000,"max_prover_seconds":7200,"max_provider_cost_usd":75,"max_test_seconds":14400,"max_wall_seconds":172800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to run held-out plan-quality evaluation without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-122@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-122
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-122@1
+- Validation: python3 -m pytest test/api/doep/test_doep_122_run_held_out_plan_quality_evaluation.py -q
 - Acceptance: Independently verify that 'Run held-out plan-quality evaluation' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2681,20 +2681,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G130
 - Subgoal id: DOEP-G130.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-046, DOEP-104, DOEP-116, DOEP-120, DOEP-121, DOEP-122
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/live_shadow.json, external/ipfs_accelerate/test/api/doep/test_doep_123_run_live_shadow_campaign.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-123.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-123.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/live_shadow.json, test/api/doep/test_doep_123_run_live_shadow_campaign.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-123.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-123.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/live_shadow.json, external/ipfs_accelerate/test/api/doep/test_doep_123_run_live_shadow_campaign.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-123.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-123.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/live_shadow.json, external/ipfs_accelerate/test/api/doep/test_doep_123_run_live_shadow_campaign.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-123.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-123.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/live_shadow.json, test/api/doep/test_doep_123_run_live_shadow_campaign.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-123.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-123.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R4
 - Authority requirement: L1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":43200,"max_frontier_model_calls":5,"max_gpu_seconds":10800,"max_input_tokens":160000,"max_model_calls":30,"max_output_tokens":40000,"max_prover_seconds":10800,"max_provider_cost_usd":100,"max_test_seconds":21600,"max_wall_seconds":259200,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to run live shadow campaign without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-123@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-123
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-123@1
+- Validation: python3 -m pytest test/api/doep/test_doep_123_run_live_shadow_campaign.py -q
 - Acceptance: Independently verify that 'Run live shadow campaign' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2714,20 +2714,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G130
 - Subgoal id: DOEP-G130.S2
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-117, DOEP-123
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/low_risk_canary.json, external/ipfs_accelerate/test/api/doep/test_doep_124_run_low_risk_canary.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-124.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-124.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/low_risk_canary.json, test/api/doep/test_doep_124_run_low_risk_canary.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-124.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-124.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/low_risk_canary.json, external/ipfs_accelerate/test/api/doep/test_doep_124_run_low_risk_canary.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-124.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-124.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/low_risk_canary.json, external/ipfs_accelerate/test/api/doep/test_doep_124_run_low_risk_canary.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-124.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-124.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/low_risk_canary.json, test/api/doep/test_doep_124_run_low_risk_canary.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-124.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-124.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R4
 - Authority requirement: H1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":43200,"max_frontier_model_calls":5,"max_gpu_seconds":10800,"max_input_tokens":160000,"max_model_calls":30,"max_output_tokens":40000,"max_prover_seconds":10800,"max_provider_cost_usd":100,"max_test_seconds":21600,"max_wall_seconds":259200,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to run low-risk canary without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-124@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-124
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-124@1
+- Validation: python3 -m pytest test/api/doep/test_doep_124_run_low_risk_canary.py -q
 - Acceptance: Independently verify that 'Run low-risk canary' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2747,20 +2747,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G130
 - Subgoal id: DOEP-G130.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-066, DOEP-076, DOEP-104, DOEP-120, DOEP-121, DOEP-122, DOEP-123, DOEP-124
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/release/promotion_decision.json, external/ipfs_accelerate/test/api/doep/test_doep_125_produce_promotion_or_honest_non_promotion_receipt.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-125.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-125.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/release/promotion_decision.json, test/api/doep/test_doep_125_produce_promotion_or_honest_non_promotion_receipt.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-125.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-125.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/release/promotion_decision.json, external/ipfs_accelerate/test/api/doep/test_doep_125_produce_promotion_or_honest_non_promotion_receipt.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-125.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-125.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/release/promotion_decision.json, external/ipfs_accelerate/test/api/doep/test_doep_125_produce_promotion_or_honest_non_promotion_receipt.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-125.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-125.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/release/promotion_decision.json, test/api/doep/test_doep_125_produce_promotion_or_honest_non_promotion_receipt.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-125.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-125.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R4
 - Authority requirement: H1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":7200,"max_frontier_model_calls":1,"max_gpu_seconds":1800,"max_input_tokens":48000,"max_model_calls":5,"max_output_tokens":14000,"max_prover_seconds":1800,"max_provider_cost_usd":20,"max_test_seconds":3600,"max_wall_seconds":28800,"validation_reserve_percent":30}
 - Objective: Extend the current canonical implementation to produce promotion or honest non-promotion receipt without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-125@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-125
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-125@1
+- Validation: python3 -m pytest test/api/doep/test_doep_125_produce_promotion_or_honest_non_promotion_receipt.py -q
 - Acceptance: Independently verify that 'Produce promotion or honest non-promotion receipt' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled
@@ -2780,20 +2780,20 @@ Plan revision: `DOEP-PLAN-V3`. Plan CID: `sha256:d31947c6c532598c8a312703d76158e
 - Root goal: DOEP-G000
 - Parent goal: DOEP-G130
 - Subgoal id: DOEP-G130.S3
-- Owning repository: ipfs_accelerate_py
+- Owning repository: external/ipfs_accelerate
 - Depends on: DOEP-125
-- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"f8c2f633fa6a781b822176fd63e1a229f96b581c","tree":"c52908e40287051336d81c81a8f4799869846f03"},"ipfs_datasets_py":{"commit":"f49afc579c22856849ca9f739435e5820003384f","tree":"47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
-- Exact outputs: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/release/release_report.json, external/ipfs_accelerate/test/api/doep/test_doep_126_publish_residual_gap_and_marginal_return_report.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-126.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-126.json
+- Exact base commits and trees: {"ipfs_accelerate_py":{"commit":"e7f17941206a9b0da87f4cc523885e093796ead0","tree":"52ab7daeab75104a6250544c6b53d1ddb0ea1957"},"ipfs_datasets_py":{"commit":"6c08977c43d48c2b953eb15fee4b8c671b64f8bc","tree":"5c84bcbdc70e6efb094908c75050c5dd7b51b2cf"},"ipfs_kit_py":{"commit":"b6c65ba732733d7e33852713ba18aa3b12235668","tree":"14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2"},"lift_coding":{"commit":"bb8869ed72eb7002434345d9969efee729c4f7f6","tree":"99e85bfe584b7688ffbeff86da1e612dd6893a42"}}
+- Exact outputs: artifacts/agent_supervisor_direct_objective_event_driven_planning/release/release_report.json, test/api/doep/test_doep_126_publish_residual_gap_and_marginal_return_report.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-126.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-126.json
 - Superproject projection: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/release/release_report.json, external/ipfs_accelerate/test/api/doep/test_doep_126_publish_residual_gap_and_marginal_return_report.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-126.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-126.json
-- Predicted files: external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/release/release_report.json, external/ipfs_accelerate/test/api/doep/test_doep_126_publish_residual_gap_and_marginal_return_report.py, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-126.json, external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-126.json
+- Predicted files: artifacts/agent_supervisor_direct_objective_event_driven_planning/release/release_report.json, test/api/doep/test_doep_126_publish_residual_gap_and_marginal_return_report.py, artifacts/agent_supervisor_direct_objective_event_driven_planning/outputs/DOEP-126.json, artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-126.json
 - Preconditions: Exact base commit/tree or a current re-admission receipt for this plan epoch; Every dependency has a current admitted success receipt; Delegated repository, path, method and effect authority is current; At least the declared validation reserve remains available
 - Postconditions: All exact outputs exist inside the declared write scope; The exact validation argv exits zero on the resulting tree; Changed paths, commit, tree, CIDs, authority and limitations are in the canonical receipt; No truth, safety, authority or promotion gate has been weakened
 - Risk class: R1
 - Authority requirement: A1
 - Token and compute budget: {"max_concurrent_tasks":1,"max_cpu_seconds":3600,"max_frontier_model_calls":1,"max_gpu_seconds":900,"max_input_tokens":32000,"max_model_calls":4,"max_output_tokens":10000,"max_prover_seconds":900,"max_provider_cost_usd":10,"max_test_seconds":1800,"max_wall_seconds":14400,"validation_reserve_percent":25}
 - Objective: Extend the current canonical implementation to publish residual-gap and marginal-return report without creating a competing subsystem.
-- Validation profile: doep-validation/DOEP-PLAN-V3/DOEP-126@1
-- Validation: python3 scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py --task DOEP-126
+- Validation profile: doep-validation/DOEP-PLAN-V4/DOEP-126@1
+- Validation: python3 -m pytest test/api/doep/test_doep_126_publish_residual_gap_and_marginal_return_report.py -q
 - Acceptance: Independently verify that 'Publish residual-gap and marginal-return report' satisfies the plan-bound task contract, exact outputs and current-tree tests; a worker or model assertion alone is insufficient.
 - Terminal success: Current independent validation and required receipts are admitted; postconditions hold; no required effect is unknown.
 - Terminal non-success: blocked_dependency, blocked_authority, blocked_policy, budget_exhausted, validation_failed, provider_outcome_unknown, quarantined_nonconvergent, cancelled

@@ -319,7 +319,7 @@ def _seal_route_policy(
                 or snapshot.repository_tree_id != population.get("repository_tree_id")
                 or snapshot.goal_count != len(population.get("goals", ()))
                 or snapshot.task_count != 85
-                or snapshot.dependency_count != 226
+                or snapshot.dependency_count != 233
             ):
                 raise HandoffError("typed snapshot differs from the sealed DOEP identities")
             policy = source.seal_execution_route_policy(

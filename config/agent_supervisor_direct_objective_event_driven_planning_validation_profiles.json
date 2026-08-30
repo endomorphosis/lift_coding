@@ -1,5 +1,5 @@
 {
-  "plan_revision": "DOEP-PLAN-V3",
+  "plan_revision": "DOEP-PLAN-V4",
   "profiles": {
     "DOEP-000": {
       "commands": [
@@ -8,14 +8,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_000_inventory_current_objective_planner_task_event_and_s.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_000_inventory_current_objective_planner_task_event_and_s.py",
+            "-q"
           ],
           "timeout_seconds": 300
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-000@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-000@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-000.json",
       "required_outputs": [
         "external/ipfs_accelerate/docs/architecture/agent_supervisor/DOEP_AUTHORITY_ADR.md",
@@ -35,14 +35,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_001_seal_current_codex_primed_baseline.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_001_seal_current_codex_primed_baseline.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-001@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-001@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-001.json",
       "required_outputs": [
         "external/ipfs_accelerate/benchmarks/agent_supervisor/doep/baseline_manifest.py",
@@ -62,14 +62,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_002_inventory_direct_state_write_and_controller_bypasses.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_002_inventory_direct_state_write_and_controller_bypasses.py",
+            "-q"
           ],
           "timeout_seconds": 300
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-002@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-002@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-002.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/direct_state_writes.json",
@@ -89,14 +89,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_003_seal_current_cross_repository_contracts_and_commits.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_003_seal_current_cross_repository_contracts_and_commits.py",
+            "-q"
           ],
           "timeout_seconds": 300
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-003@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-003@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-003.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/inventory/repository_contract_seal.json",
@@ -116,14 +116,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_010_define_supervisorobjectiveintent_contract.py"
+            "external/ipfs_datasets/tests/doep/test_doep_010_define_supervisorobjectiveintent_contract.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-010@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-010@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-010.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
@@ -143,14 +143,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_011_define_objectivematerializationreceipt_contract.py"
+            "external/ipfs_datasets/tests/doep/test_doep_011_define_objectivematerializationreceipt_contract.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-011@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-011@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-011.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
@@ -170,14 +170,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_012_implement_canonical_objective_submission_service.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_012_implement_canonical_objective_submission_service.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-012@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-012@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-012.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py",
@@ -197,14 +197,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_013_add_python_client.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_013_add_python_client.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-013@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-013@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-013.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
@@ -224,14 +224,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_014_add_cli_client.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_014_add_cli_client.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-014@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-014@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-014.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py",
@@ -251,14 +251,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_015_add_mcp_mcp_adapters.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_015_add_mcp_mcp_adapters.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-015@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-015@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-015.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py",
@@ -278,14 +278,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_016_add_authentication_delegation_idempotency_and_typed_.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_016_add_authentication_delegation_idempotency_and_typed_.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-016@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-016@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-016.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/authority_resolver.py",
@@ -305,14 +305,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_017_prove_cross_adapter_identity_parity.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_017_prove_cross_adapter_identity_parity.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-017@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-017@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-017.json",
       "required_outputs": [
         "external/ipfs_accelerate/test/api/doep/test_cross_adapter_identity.py",
@@ -332,14 +332,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_020_consolidate_objective_compiler.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_020_consolidate_objective_compiler.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-020@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-020@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-020.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py",
@@ -359,14 +359,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_021_add_deterministic_normalization.py"
+            "external/ipfs_datasets/tests/doep/test_doep_021_add_deterministic_normalization.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-021@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-021@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-021.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
@@ -386,14 +386,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_022_add_repository_capability_analysis.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_022_add_repository_capability_analysis.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-022@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-022@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-022.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_context.py",
@@ -413,14 +413,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_023_add_rule_driven_objective_decomposition.py"
+            "external/ipfs_datasets/tests/doep/test_doep_023_add_rule_driven_objective_decomposition.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-023@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-023@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-023.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
@@ -440,14 +440,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_024_add_assumptions_guarantees_non_goals_and_acceptance_.py"
+            "external/ipfs_datasets/tests/doep/test_doep_024_add_assumptions_guarantees_non_goals_and_acceptance_.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-024@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-024@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-024.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py",
@@ -467,14 +467,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_025_add_unresolved_question_contract.py"
+            "external/ipfs_datasets/tests/doep/test_doep_025_add_unresolved_question_contract.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-025@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-025@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-025.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
@@ -494,14 +494,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_026_add_logic_constrained_residual_interpretation.py"
+            "external/ipfs_datasets/tests/doep/test_doep_026_add_logic_constrained_residual_interpretation.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-026@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-026@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-026.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
@@ -521,14 +521,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_027_add_plan_validation_and_completeness_witness.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_027_add_plan_validation_and_completeness_witness.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-027@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-027@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-027.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_validator.py",
@@ -548,14 +548,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_030_define_canonical_event_schema.py"
+            "external/ipfs_datasets/tests/doep/test_doep_030_define_canonical_event_schema.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-030@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-030@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-030.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/schema_registry.py",
@@ -575,14 +575,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_kit/tests/doep/test_doep_031_add_transactional_event_publication.py"
+            "external/ipfs_kit/tests/doep/test_doep_031_add_transactional_event_publication.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-031@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-031@1",
       "receipt": "external/ipfs_kit/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-031.json",
       "required_outputs": [
         "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
@@ -602,14 +602,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_032_add_idempotent_event_consumption_and_cursors.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_032_add_idempotent_event_consumption_and_cursors.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-032@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-032@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-032.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py",
@@ -629,14 +629,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_033_add_materialized_state_replay_and_recovery.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_033_add_materialized_state_replay_and_recovery.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-033@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-033@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-033.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/database_event_log.py",
@@ -656,14 +656,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_034_add_event_coalescing_and_causal_ordering.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_034_add_event_coalescing_and_causal_ordering.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-034@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-034@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-034.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/event_log.py",
@@ -683,14 +683,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_035_add_sibling_supervisor_event_validation.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_035_add_sibling_supervisor_event_validation.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-035@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-035@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-035.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
@@ -710,14 +710,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_040_formalize_canonical_task_state_machine.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_040_formalize_canonical_task_state_machine.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-040@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-040@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-040.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_contracts.py",
@@ -737,14 +737,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_041_enforce_revision_cas_transitions.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_041_enforce_revision_cas_transitions.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-041@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-041@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-041.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py",
@@ -764,14 +764,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_042_enforce_claims_leases_fencing_and_idempotency.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_042_enforce_claims_leases_fencing_and_idempotency.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-042@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-042@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-042.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/quack_owner_mutation.py",
@@ -791,14 +791,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_043_add_unknown_provider_outcome_reconciliation.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_043_add_unknown_provider_outcome_reconciliation.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-043@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-043@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-043.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provider_execution.py",
@@ -818,14 +818,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_044_add_owner_loss_and_owner_restart_recovery.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_044_add_owner_loss_and_owner_restart_recovery.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-044@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-044@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-044.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/external_quack_owner.py",
@@ -845,14 +845,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_045_add_stale_plan_epoch_handling.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_045_add_stale_plan_epoch_handling.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-045@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-045@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-045.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py",
@@ -872,14 +872,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_046_add_model_based_and_temporal_invariant_tests.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_046_add_model_based_and_temporal_invariant_tests.py",
+            "-q"
           ],
           "timeout_seconds": 7200
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-046@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-046@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-046.json",
       "required_outputs": [
         "external/ipfs_accelerate/test/api/doep/test_control_plane_model.py",
@@ -899,14 +899,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_050_implement_incremental_plan_impact_analysis.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_050_implement_incremental_plan_impact_analysis.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-050@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-050@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-050.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/dynamic_impact_frontier.py",
@@ -926,14 +926,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_051_add_event_driven_reassessment.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_051_add_event_driven_reassessment.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-051@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-051@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-051.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_event_adapter.py",
@@ -953,14 +953,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_052_add_plandelta_contract.py"
+            "external/ipfs_datasets/tests/doep/test_doep_052_add_plandelta_contract.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-052@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-052@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-052.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py",
@@ -980,14 +980,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_053_add_automatic_bounded_task_refill.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_053_add_automatic_bounded_task_refill.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-053@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-053@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-053.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_controller.py",
@@ -1007,14 +1007,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_054_add_task_semantic_deduplication.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_054_add_task_semantic_deduplication.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-054@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-054@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-054.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/semantic_refill.py",
@@ -1034,14 +1034,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_055_add_oscillation_runaway_and_nonconvergence_controls.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_055_add_oscillation_runaway_and_nonconvergence_controls.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-055@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-055@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-055.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/campaign_refill_policy.py",
@@ -1061,14 +1061,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_056_add_objective_satisfaction_and_stop_conditions.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_056_add_objective_satisfaction_and_stop_conditions.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-056@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-056@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-056.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/goal_completion.py",
@@ -1088,14 +1088,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_060_define_supervisorcontextpack_contract.py"
+            "external/ipfs_datasets/tests/doep/test_doep_060_define_supervisorcontextpack_contract.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-060@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-060@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-060.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
@@ -1115,14 +1115,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_061_implement_datasets_semantic_builder.py"
+            "external/ipfs_datasets/tests/doep/test_doep_061_implement_datasets_semantic_builder.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-061@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-061@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-061.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
@@ -1142,14 +1142,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_kit/tests/doep/test_doep_062_implement_kit_durable_storage_and_current_root_cas.py"
+            "external/ipfs_kit/tests/doep/test_doep_062_implement_kit_durable_storage_and_current_root_cas.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-062@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-062@1",
       "receipt": "external/ipfs_kit/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-062.json",
       "required_outputs": [
         "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
@@ -1169,14 +1169,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_063_implement_accelerate_freshness_and_selection.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_063_implement_accelerate_freshness_and_selection.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-063@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-063@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-063.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
@@ -1196,14 +1196,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_064_add_incremental_context_expansion.py"
+            "external/ipfs_datasets/tests/doep/test_doep_064_add_incremental_context_expansion.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-064@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-064@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-064.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
@@ -1223,14 +1223,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_065_add_contextpack_invalidation.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_065_add_contextpack_invalidation.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-065@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-065@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-065.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/context/context_contracts.py",
@@ -1250,14 +1250,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_066_benchmark_contextpack_reuse_and_omissions.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_066_benchmark_contextpack_reuse_and_omissions.py",
+            "-q"
           ],
           "timeout_seconds": 7200
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-066@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-066@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-066.json",
       "required_outputs": [
         "external/ipfs_accelerate/benchmarks/agent_supervisor/doep/context_pack.py",
@@ -1277,14 +1277,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_070_consolidate_deterministic_first_routing.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_070_consolidate_deterministic_first_routing.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-070@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-070@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-070.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py",
@@ -1304,14 +1304,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_071_add_exact_receipt_reuse.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_071_add_exact_receipt_reuse.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-071@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-071@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-071.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/test_reuse_eligibility.py",
@@ -1331,14 +1331,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_072_add_ast_dependency_static_analysis_routing.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_072_add_ast_dependency_static_analysis_routing.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-072@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-072@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-072.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/analysis_ast_index.py",
@@ -1358,14 +1358,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_073_add_selected_test_and_prover_routing.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_073_add_selected_test_and_prover_routing.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-073@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-073@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-073.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/task_proposal_router.py",
@@ -1385,14 +1385,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_074_add_small_medium_frontier_escalation_policy.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_074_add_small_medium_frontier_escalation_policy.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-074@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-074@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-074.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py",
@@ -1412,14 +1412,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_075_add_route_explanations_and_receipts.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_075_add_route_explanations_and_receipts.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-075@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-075@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-075.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/decision_receipts.py",
@@ -1439,14 +1439,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_076_add_unnecessary_escalation_detection.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_076_add_unnecessary_escalation_detection.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-076@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-076@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-076.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_efficiency_metrics.py",
@@ -1466,14 +1466,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_080_add_assume_guarantee_planning_contracts.py"
+            "external/ipfs_datasets/tests/doep/test_doep_080_add_assume_guarantee_planning_contracts.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-080@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-080@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-080.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py",
@@ -1493,14 +1493,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_081_add_affected_suffix_replanning.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_081_add_affected_suffix_replanning.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-081@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-081@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-081.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py",
@@ -1520,14 +1520,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_082_add_counterexample_and_unsat_core_refinement.py"
+            "external/ipfs_datasets/tests/doep/test_doep_082_add_counterexample_and_unsat_core_refinement.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-082@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-082@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-082.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/explanation.py",
@@ -1547,14 +1547,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_083_add_bounded_craig_interpolation_planning_assistance_.py"
+            "external/ipfs_datasets/tests/doep/test_doep_083_add_bounded_craig_interpolation_planning_assistance_.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-083@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-083@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-083.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/backends/smt/interpolation.py",
@@ -1574,14 +1574,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_084_add_cegar_plan_refinement.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_084_add_cegar_plan_refinement.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-084@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-084@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-084.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py",
@@ -1601,14 +1601,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_085_add_equivalent_task_and_equivalent_plan_elimination.py"
+            "external/ipfs_datasets/tests/doep/test_doep_085_add_equivalent_task_and_equivalent_plan_elimination.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-085@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-085@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-085.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py",
@@ -1628,14 +1628,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_090_define_supervisorpatchplan.py"
+            "external/ipfs_datasets/tests/doep/test_doep_090_define_supervisorpatchplan.py",
+            "-q"
           ],
           "timeout_seconds": 900
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-090@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-090@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-090.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py",
@@ -1655,14 +1655,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_091_add_deterministic_synthesis_allowlist.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_091_add_deterministic_synthesis_allowlist.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-091@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-091@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-091.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py",
@@ -1682,14 +1682,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_092_add_bounded_model_assisted_synthesis.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_092_add_bounded_model_assisted_synthesis.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-092@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-092@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-092.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py",
@@ -1709,14 +1709,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_093_add_patch_scope_and_semantic_nonempty_validation.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_093_add_patch_scope_and_semantic_nonempty_validation.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-093@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-093@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-093.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/scope_adjudication.py",
@@ -1736,14 +1736,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_094_add_proof_test_based_merge_admission.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_094_add_proof_test_based_merge_admission.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-094@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-094@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-094.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/post_merge_validation.py",
@@ -1763,14 +1763,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_100_add_sibling_supervisor_capability_registry.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_100_add_sibling_supervisor_capability_registry.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-100@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-100@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-100.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
@@ -1790,14 +1790,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_datasets/tests/doep/test_doep_101_add_cross_supervisor_task_requests.py"
+            "external/ipfs_datasets/tests/doep/test_doep_101_add_cross_supervisor_task_requests.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-101@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-101@1",
       "receipt": "external/ipfs_datasets/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-101.json",
       "required_outputs": [
         "external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py",
@@ -1817,14 +1817,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_102_add_cross_supervisor_receipts.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_102_add_cross_supervisor_receipts.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-102@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-102@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-102.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
@@ -1844,14 +1844,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_103_add_cross_repository_incremental_reassessment.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_103_add_cross_repository_incremental_reassessment.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-103@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-103@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-103.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py",
@@ -1871,14 +1871,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_104_prove_no_cross_supervisor_direct_state_writes.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_104_prove_no_cross_supervisor_direct_state_writes.py",
+            "-q"
           ],
           "timeout_seconds": 7200
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-104@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-104@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-104.json",
       "required_outputs": [
         "external/ipfs_accelerate/test/api/doep/test_cross_supervisor_isolation.py",
@@ -1898,14 +1898,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_110_instrument_end_to_end_token_and_compute_telemetry.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_110_instrument_end_to_end_token_and_compute_telemetry.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-110@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-110@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-110.json",
       "required_outputs": [
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/benchmark_telemetry.py",
@@ -1925,14 +1925,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_111_build_codex_primed_baseline_harness.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_111_build_codex_primed_baseline_harness.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-111@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-111@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-111.json",
       "required_outputs": [
         "external/ipfs_accelerate/benchmarks/agent_supervisor/doep/baseline.py",
@@ -1952,14 +1952,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_112_build_direct_supervisor_candidate_harness.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_112_build_direct_supervisor_candidate_harness.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-112@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-112@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-112.json",
       "required_outputs": [
         "external/ipfs_accelerate/benchmarks/agent_supervisor/doep/candidate.py",
@@ -1979,14 +1979,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_113_build_hermetic_objective_corpus.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_113_build_hermetic_objective_corpus.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-113@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-113@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-113.json",
       "required_outputs": [
         "external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/hermetic_objectives.json",
@@ -2006,14 +2006,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_114_build_historical_replay_corpus.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_114_build_historical_replay_corpus.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-114@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-114@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-114.json",
       "required_outputs": [
         "external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/historical_replays.json",
@@ -2033,14 +2033,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_115_build_held_out_objective_corpus.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_115_build_held_out_objective_corpus.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-115@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-115@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-115.json",
       "required_outputs": [
         "external/ipfs_accelerate/test/fixtures/agent_supervisor_doep/held_out_objectives.json",
@@ -2060,14 +2060,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_116_add_live_shadow_cohort.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_116_add_live_shadow_cohort.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-116@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-116@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-116.json",
       "required_outputs": [
         "external/ipfs_accelerate/benchmarks/agent_supervisor/doep/live_shadow.py",
@@ -2087,14 +2087,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_117_add_low_risk_canary_cohort.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_117_add_low_risk_canary_cohort.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-117@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-117@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-117.json",
       "required_outputs": [
         "external/ipfs_accelerate/benchmarks/agent_supervisor/doep/low_risk_canary.py",
@@ -2114,14 +2114,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_120_run_hermetic_paired_benchmark.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_120_run_hermetic_paired_benchmark.py",
+            "-q"
           ],
           "timeout_seconds": 14400
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-120@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-120@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-120.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/hermetic_paired.json",
@@ -2141,14 +2141,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_121_run_historical_paired_replay.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_121_run_historical_paired_replay.py",
+            "-q"
           ],
           "timeout_seconds": 14400
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-121@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-121@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-121.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/historical_paired.json",
@@ -2168,14 +2168,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_122_run_held_out_plan_quality_evaluation.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_122_run_held_out_plan_quality_evaluation.py",
+            "-q"
           ],
           "timeout_seconds": 14400
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-122@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-122@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-122.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/held_out_plan_quality.json",
@@ -2195,14 +2195,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_123_run_live_shadow_campaign.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_123_run_live_shadow_campaign.py",
+            "-q"
           ],
           "timeout_seconds": 21600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-123@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-123@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-123.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/live_shadow.json",
@@ -2222,14 +2222,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_124_run_low_risk_canary.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_124_run_low_risk_canary.py",
+            "-q"
           ],
           "timeout_seconds": 21600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-124@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-124@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-124.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/benchmarks/low_risk_canary.json",
@@ -2249,14 +2249,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_125_produce_promotion_or_honest_non_promotion_receipt.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_125_produce_promotion_or_honest_non_promotion_receipt.py",
+            "-q"
           ],
           "timeout_seconds": 3600
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-125@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-125@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-125.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/release/promotion_decision.json",
@@ -2276,14 +2276,14 @@
             "python3",
             "-m",
             "pytest",
-            "-q",
-            "external/ipfs_accelerate/test/api/doep/test_doep_126_publish_residual_gap_and_marginal_return_report.py"
+            "external/ipfs_accelerate/test/api/doep/test_doep_126_publish_residual_gap_and_marginal_return_report.py",
+            "-q"
           ],
           "timeout_seconds": 1800
         }
       ],
-      "plan_revision": "DOEP-PLAN-V3",
-      "profile_id": "doep-validation/DOEP-PLAN-V3/DOEP-126@1",
+      "plan_revision": "DOEP-PLAN-V4",
+      "profile_id": "doep-validation/DOEP-PLAN-V4/DOEP-126@1",
       "receipt": "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/receipts/DOEP-126.json",
       "required_outputs": [
         "external/ipfs_accelerate/artifacts/agent_supervisor_direct_objective_event_driven_planning/release/release_report.json",

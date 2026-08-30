@@ -1,7 +1,7 @@
-# Agent Supervisor Direct Objective and Event-Driven Planning — DOEP-PLAN-V3
+# Agent Supervisor Direct Objective and Event-Driven Planning — DOEP-PLAN-V4
 
 Program: `agent-supervisor-direct-objective-and-event-driven-planning-v1`
-Plan CID: `sha256:d31947c6c532598c8a312703d76158eecb930000a42c8123b58c37c2924758dc`
+Plan CID: `sha256:ca087f36486cdfb9137c0b74c19ca4e4ea5f5f17a3a3188404383009638b9743`
 Status: sealed bootstrap campaign; execution is owned by the existing supervisor.
 
 ## Outcome
@@ -13,8 +13,8 @@ A human or delegated external agent submits one bounded high-level idea. The exi
 | Repository | Commit | Tree |
 |---|---|---|
 | `lift_coding` | `bb8869ed72eb7002434345d9969efee729c4f7f6` | `99e85bfe584b7688ffbeff86da1e612dd6893a42` |
-| `ipfs_accelerate_py` | `f8c2f633fa6a781b822176fd63e1a229f96b581c` | `c52908e40287051336d81c81a8f4799869846f03` |
-| `ipfs_datasets_py` | `f49afc579c22856849ca9f739435e5820003384f` | `47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b` |
+| `ipfs_accelerate_py` | `e7f17941206a9b0da87f4cc523885e093796ead0` | `52ab7daeab75104a6250544c6b53d1ddb0ea1957` |
+| `ipfs_datasets_py` | `6c08977c43d48c2b953eb15fee4b8c671b64f8bc` | `5c84bcbdc70e6efb094908c75050c5dd7b51b2cf` |
 | `ipfs_kit_py` | `b6c65ba732733d7e33852713ba18aa3b12235668` | `14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2` |
 
 Branch names are navigation only. Every task and receipt is bound to exact commits, trees, plan epoch, policy and validation identity.
@@ -34,7 +34,7 @@ The dormant prompt-first facade is not used as false authority at bootstrap: on 
 
 ### Bootstrap revision history
 
-`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because newly generated Accelerate pytest targets were not, and could not honestly be represented as, pre-existing entries in Accelerate's task-bound V4 dependency contract. Both complete DuckDB event streams and logs are retained as superseded failed generations. `DOEP-PLAN-V3` uses the bridge's reserved `ipfs_accelerate_py` root authority for Accelerate-owned work, keeps Datasets and Kit on their configured gitlink authorities, and runs Accelerate tasks through the sealed root validation dispatcher. The dispatcher still executes each task's exact owner test with `shell=false`; this is an authority correction, not a reduced validation gate.
+`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because the generated pytest targets were absent from the nested projects' task-bound dependency contracts. `DOEP-PLAN-V3` then moved Accelerate tasks to the bridge's reserved root authority and substituted the portfolio dispatcher for the task's direct validation command. That was rejected as a hidden preflight bypass: it avoided the nested Accelerate V4 task/command/output authority check instead of satisfying it. The complete DuckDB event streams and logs for V1 through V3 remain retained as superseded failed generations. `DOEP-PLAN-V4` restores all three configured gitlink owners, owner-relative outputs and direct pytest commands, and reproducibly installs exact task-bound Accelerate V4 and Datasets V3 contract entries before launch. Kit remains on its existing static project-dependency path.
 
 ## Compiler and execution sequence
 
@@ -90,3 +90,4 @@ Functional completion additionally requires direct high-level submission, first 
 ## Deferred backlog
 
 Nonessential hazards discovered during inventory—legacy ContextPack candidates, noncanonical in-memory event helpers, duplicate adapters and retention/tombstone gaps—are recorded by DOEP-000/002 for later disposition. They do not expand this campaign.
+The exact Accelerate base also contains 13 legacy V4 `present` baseline attestations whose stored target digests are stale; four checked-in contract tests therefore fail closed with `v2_present_target_digest_mismatch`. DOEP uses separate exact task identities with `declared-output-absent` baselines, and all 85 DOEP admissions pass. Repairing that unrelated historical attestation debt is deferred and no current-head-suite success is claimed at bootstrap.

@@ -18,7 +18,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PROGRAM_ID = "agent-supervisor-direct-objective-and-event-driven-planning-v1"
-PLAN_REVISION = "DOEP-PLAN-V3"
+PLAN_REVISION = "DOEP-PLAN-V4"
 ROOT_GOAL = "DOEP-G000"
 BRANCH = "agent/agent-supervisor-direct-objective-and-event-driven-planning-v1"
 BASES = {
@@ -27,12 +27,12 @@ BASES = {
         "tree": "99e85bfe584b7688ffbeff86da1e612dd6893a42",
     },
     "ipfs_accelerate_py": {
-        "commit": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
-        "tree": "c52908e40287051336d81c81a8f4799869846f03",
+        "commit": "e7f17941206a9b0da87f4cc523885e093796ead0",
+        "tree": "52ab7daeab75104a6250544c6b53d1ddb0ea1957",
     },
     "ipfs_datasets_py": {
-        "commit": "f49afc579c22856849ca9f739435e5820003384f",
-        "tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+        "commit": "6c08977c43d48c2b953eb15fee4b8c671b64f8bc",
+        "tree": "5c84bcbdc70e6efb094908c75050c5dd7b51b2cf",
     },
     "ipfs_kit_py": {
         "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
@@ -41,12 +41,10 @@ BASES = {
 }
 
 OPERATIONAL_OWNERS = {
-    # DatabasePortalBridge reserves this identity for the repository that owns
-    # the supervisor runtime.  Keeping Accelerate tasks at this authority also
-    # lets them use the sealed portfolio validation dispatcher instead of
-    # pretending that a newly generated pytest target was already registered
-    # in Accelerate's task-bound V4 dependency contract.
-    "ACC": "ipfs_accelerate_py",
+    # All implementation work is owned by one of the configured nested Git
+    # repositories.  DatabasePortalBridge projects owner-relative outputs and
+    # validation commands into the accelerator worktree exactly once.
+    "ACC": "external/ipfs_accelerate",
     "DATA": "external/ipfs_datasets",
     "KIT": "external/ipfs_kit",
 }
@@ -56,6 +54,22 @@ REPOSITORY_PATHS = {
     "DATA": "external/ipfs_datasets",
     "KIT": "external/ipfs_kit",
 }
+
+ACCELERATE_CONTRACT_PATH = ROOT / "external/ipfs_accelerate/pyproject.toml"
+DATASETS_CONTRACT_PATH = ROOT / "external/ipfs_datasets/pyproject.toml"
+DATASETS_SETUP_PATH = ROOT / "external/ipfs_datasets/setup.py"
+ACCELERATE_CONTRACT_BEGIN = (
+    "# BEGIN DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS"
+)
+ACCELERATE_CONTRACT_END = (
+    "# END DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS"
+)
+DATASETS_CONTRACT_BEGIN = (
+    "# BEGIN DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS"
+)
+DATASETS_CONTRACT_END = (
+    "# END DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS"
+)
 
 BUDGETS = {
     "B0": dict(max_input_tokens=8000, max_output_tokens=2000, max_model_calls=1,
@@ -135,7 +149,7 @@ TASK_ROWS = r"""
 016|Add authentication, delegation, idempotency, and typed errors|DOEP-G020|2|ACC|002,010,012|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/authority_resolver.py
 017|Prove cross-adapter identity parity|DOEP-G020|3|ACC|013,014,015,016|R2|A1|B2|external/ipfs_accelerate/test/api/doep/test_cross_adapter_identity.py
 020|Consolidate objective compiler|DOEP-G030|1|ACC|000,001,003|R1|A1|B1|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py
-021|Add deterministic normalization|DOEP-G030|1|DATA|010,020|R2|S1|B2|external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py
+021|Add deterministic normalization|DOEP-G030|1|DATA|010,011,020|R2|S1|B2|external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py
 022|Add repository/capability analysis|DOEP-G030|1|ACC|003,020|R2|A1|B2|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_plan_context.py
 023|Add rule-driven objective decomposition|DOEP-G030|2|DATA|021,022|R2|S1|B2|external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py
 024|Add assumptions, guarantees, non-goals, and acceptance conditions|DOEP-G030|2|DATA|010,023|R1|S1|B1|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
@@ -157,7 +171,7 @@ TASK_ROWS = r"""
 046|Add model-based and temporal invariant tests|DOEP-G050|3|ACC|030,031,032,033,034,035,040,041,042,043,044,045|R3|A2|B4|external/ipfs_accelerate/test/api/doep/test_control_plane_model.py
 050|Implement incremental plan-impact analysis|DOEP-G060|1|ACC|022,027,030|R2|A1|B2|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/dynamic_impact_frontier.py
 051|Add event-driven reassessment|DOEP-G060|2|ACC|032,045,050|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_event_adapter.py
-052|Add PlanDelta contract|DOEP-G060|1|DATA|030,050|R1|S1|B1|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
+052|Add PlanDelta contract|DOEP-G060|1|DATA|024,030,050|R1|S1|B1|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
 053|Add automatic bounded task refill|DOEP-G060|2|ACC|051,052|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/refill_controller.py
 054|Add task semantic deduplication|DOEP-G060|2|ACC|023,053|R2|A1|B2|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/semantic_refill.py
 055|Add oscillation, runaway, and nonconvergence controls|DOEP-G060|3|ACC|052,053,054|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/campaign_refill_policy.py
@@ -176,19 +190,19 @@ TASK_ROWS = r"""
 074|Add small/medium/frontier escalation policy|DOEP-G080|1|ACC|071,072,073|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py
 075|Add route explanations and receipts|DOEP-G080|2|ACC|030,074|R2|A1|B2|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/decision_receipts.py
 076|Add unnecessary-escalation detection|DOEP-G080|2|ACC|074,075|R2|A1|B2|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_efficiency_metrics.py
-080|Add assume-guarantee planning contracts|DOEP-G090|1|DATA|024,027,060|R2|S1|B2|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
+080|Add assume-guarantee planning contracts|DOEP-G090|1|DATA|024,027,052,060|R2|S1|B2|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
 081|Add affected-suffix replanning|DOEP-G090|2|ACC|050,052,080|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py
 082|Add counterexample and unsat-core refinement|DOEP-G090|2|DATA|073,080,081|R2|S1|B3|external/ipfs_datasets/ipfs_datasets_py/logic/software_verification/counterexamples/explanation.py
 083|Add bounded Craig-interpolation planning assistance where qualified|DOEP-G090|2|DATA|082|R2|S1|B3|external/ipfs_datasets/ipfs_datasets_py/logic/backends/smt/interpolation.py
 084|Add CEGAR plan refinement|DOEP-G090|2|ACC|081,082,083|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/formal_replanner.py
 085|Add equivalent-task and equivalent-plan elimination|DOEP-G090|3|DATA|054,084|R2|S1|B3|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
-090|Define SupervisorPatchPlan|DOEP-G100|1|DATA|060,080|R1|S1|B1|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
+090|Define SupervisorPatchPlan|DOEP-G100|1|DATA|060,080,085|R1|S1|B1|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
 091|Add deterministic synthesis allowlist|DOEP-G100|2|ACC|072,090|R2|A1|B2|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py
-092|Add bounded model-assisted synthesis|DOEP-G100|2|ACC|063,074,090|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py
+092|Add bounded model-assisted synthesis|DOEP-G100|2|ACC|063,074,090,091|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/program_repair_synthesis.py
 093|Add patch scope and semantic-nonempty validation|DOEP-G100|3|ACC|090,091,092|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/scope_adjudication.py
 094|Add proof/test-based merge admission|DOEP-G100|3|ACC|042,073,093|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/post_merge_validation.py
-100|Add sibling supervisor capability registry|DOEP-G110|1|ACC|003,016,030|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py
-101|Add cross-supervisor task requests|DOEP-G110|1|DATA|010,060,100|R1|S1|B2|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
+100|Add sibling supervisor capability registry|DOEP-G110|1|ACC|003,016,030,035|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py
+101|Add cross-supervisor task requests|DOEP-G110|1|DATA|010,060,090,100|R1|S1|B2|external/ipfs_datasets/ipfs_datasets_py/logic/external_work_plan_obligations.py
 102|Add cross-supervisor receipts|DOEP-G110|1|ACC|062,101|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py
 103|Add cross-repository incremental reassessment|DOEP-G110|2|ACC|035,051,052,102|R3|A2|B3|external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/supervisor_fabric.py
 104|Prove no cross-supervisor direct state writes|DOEP-G110|2|ACC|046,100,101,102,103|R3|A2|B4|external/ipfs_accelerate/test/api/doep/test_cross_supervisor_isolation.py
@@ -275,11 +289,13 @@ def parse_tasks() -> list[dict[str, Any]]:
             path if root_owner else f"{repository_path}/{path}"
             for path in declared_outputs
         ]
-        validation = (
-            ["python3", "scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py", "--task", task_id]
-            if root_owner
-            else ["python3", "-m", "pytest", "-q", owner_relative(test_path)]
-        )
+        validation = [
+            "python3",
+            "-m",
+            "pytest",
+            owner_relative(test_path),
+            "-q",
+        ]
         task = {
             "stable_task_id": task_id,
             "task_id": task_id,
@@ -417,7 +433,7 @@ def render_plan(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], pl
         "- Datasets owns semantic identity, schemas, ContextPack meaning, formal translation and proof relationships. Kit owns exact durable bytes, CIDs, WAL, recovery and current-root CAS. Accelerate owns operational admission, execution, validation, merge, recovery and terminalization.", "",
         "The dormant prompt-first facade is not used as false authority at bootstrap: on the sealed base it fails closed without a production intent factory and complete launch plan. DOEP consolidates and qualifies that intended surface. The reviewed bootstrap route is sealed objective/board → canonical JSON materialization → DuckDB → exclusive Quack owner → existing configured multi-lane supervisor.", "",
         "### Bootstrap revision history", "",
-        "`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because newly generated Accelerate pytest targets were not, and could not honestly be represented as, pre-existing entries in Accelerate's task-bound V4 dependency contract. Both complete DuckDB event streams and logs are retained as superseded failed generations. `DOEP-PLAN-V3` uses the bridge's reserved `ipfs_accelerate_py` root authority for Accelerate-owned work, keeps Datasets and Kit on their configured gitlink authorities, and runs Accelerate tasks through the sealed root validation dispatcher. The dispatcher still executes each task's exact owner test with `shell=false`; this is an authority correction, not a reduced validation gate.", "",
+        "`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because the generated pytest targets were absent from the nested projects' task-bound dependency contracts. `DOEP-PLAN-V3` then moved Accelerate tasks to the bridge's reserved root authority and substituted the portfolio dispatcher for the task's direct validation command. That was rejected as a hidden preflight bypass: it avoided the nested Accelerate V4 task/command/output authority check instead of satisfying it. The complete DuckDB event streams and logs for V1 through V3 remain retained as superseded failed generations. `DOEP-PLAN-V4` restores all three configured gitlink owners, owner-relative outputs and direct pytest commands, and reproducibly installs exact task-bound Accelerate V4 and Datasets V3 contract entries before launch. Kit remains on its existing static project-dependency path.", "",
         "## Compiler and execution sequence", "",
         "1. Deterministically validate, normalize scope/budgets/risk, bind repository and policy, and reject authority/path escapes.",
         "2. Inspect manifests, objective/task state, dependency and symbol indexes, schemas, tests, proofs, capabilities, receipts and relevant failures.",
@@ -448,7 +464,8 @@ def render_plan(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], pl
         "The terminal release report must include the ADR; versioned contracts; Python/CLI/MCP/MCP++ direct interfaces; objective compiler; event/outbox/replay/recovery; incremental PlanDelta/refill; deterministic-first routing; cross-repository ContextPacks; sibling delegation; telemetry and paired benchmarks; unit/property/state/crash/race/security tests; operator and integration guides; three held-out demonstrations (one generic MCP); exact commits/trees/CIDs and an honest promotion status.", "",
         "Functional completion additionally requires direct high-level submission, first task without custom priming, automatic incremental reassessment and refill, sibling-event safety, external-agent non-bypass, package independence from sibling test layouts, repeated-board draining without manual DB repair, current-head tests, paired measurements and all zero safety gates.", "",
         "## Deferred backlog", "",
-        "Nonessential hazards discovered during inventory—legacy ContextPack candidates, noncanonical in-memory event helpers, duplicate adapters and retention/tombstone gaps—are recorded by DOEP-000/002 for later disposition. They do not expand this campaign.", "",
+        "Nonessential hazards discovered during inventory—legacy ContextPack candidates, noncanonical in-memory event helpers, duplicate adapters and retention/tombstone gaps—are recorded by DOEP-000/002 for later disposition. They do not expand this campaign.",
+        "The exact Accelerate base also contains 13 legacy V4 `present` baseline attestations whose stored target digests are stale; four checked-in contract tests therefore fail closed with `v2_present_target_digest_mismatch`. DOEP uses separate exact task identities with `declared-output-absent` baselines, and all 85 DOEP admissions pass. Repairing that unrelated historical attestation debt is deferred and no current-head-suite success is claimed at bootstrap.", "",
     ]
     return "\n".join(lines)
 
@@ -564,7 +581,7 @@ def render_profiles(tasks: list[dict[str, Any]]) -> str:
             "plan_revision": PLAN_REVISION,
             "receipt": task["superproject_receipt_output"],
             "required_outputs": task["superproject_outputs"],
-            "commands": [{"argv": ["python3", "-m", "pytest", "-q", task["superproject_test_output"]], "timeout_seconds": task["budgets"]["max_test_seconds"]}],
+            "commands": [{"argv": ["python3", "-m", "pytest", task["superproject_test_output"], "-q"], "timeout_seconds": task["budgets"]["max_test_seconds"]}],
             "shell": False,
             "worker_claim_is_completion_authority": False,
         }
@@ -585,6 +602,8 @@ def render_config(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], 
         "scripts/ops/agent_supervisor/configured_board_scheduler.py",
         "scripts/ops/agent_supervisor/direct_objective_event_driven_planning_handoff.py",
         "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
+        "external/ipfs_accelerate/pyproject.toml",
+        "external/ipfs_datasets/pyproject.toml",
     ]
     config = {
         "schema": "ipfs_accelerate_py.agent_supervisor.direct-objective-event-driven-planning.scheduler_config@1",
@@ -613,7 +632,7 @@ def render_config(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], 
         "database_program": {
             "schema": "ipfs_accelerate_py/agent-supervisor/database-program-config@1",
             "authority_mode": "quack", "task_source_kind": "duckdb", "explicit_legacy": False,
-            "store_id": f"{root}/control.duckdb", "store_generation": "doep-v1-r3", "schema_revision": "1",
+            "store_id": f"{root}/control.duckdb", "store_generation": "doep-v1-r4", "schema_revision": "1",
             "quack_endpoint": "quack:127.0.0.1:47941", "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
             "failover_policy": "fail_closed", "event_store_path": f"{root}/events", "runtime_registry_path": f"{root}/registry", "worktree_root": f"{root}/worktrees", "export_profile": "doep-v1",
         },
@@ -641,6 +660,147 @@ def render_config(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], 
     return json.dumps(config, indent=2, sort_keys=True) + "\n"
 
 
+def _post_bridge_validation_command(task: dict[str, Any]) -> str:
+    """Return the exact validation string seen by dependency preflight."""
+
+    argv = task["execution_validation"]
+    if not (
+        isinstance(argv, list)
+        and len(argv) == 1
+        and argv[0]
+        == ["python3", "-m", "pytest", task["test_output"], "-q"]
+    ):
+        raise ValueError(f"{task['task_id']} does not use the sealed pytest argv")
+    owner = task["owning_repository"]
+    if owner not in OPERATIONAL_OWNERS.values():
+        raise ValueError(f"{task['task_id']} has an unconfigured bridge owner")
+    return f"cd {owner} && {' '.join(argv[0])}"
+
+
+def _render_accelerate_contract_block(tasks: list[dict[str, Any]]) -> str:
+    selected = [task for task in tasks if task["repository_authority"] == "ACC"]
+    if len(selected) != 65:
+        raise ValueError("Accelerate DOEP contract must contain exactly 65 tasks")
+    lines = [
+        ACCELERATE_CONTRACT_BEGIN,
+        "# Generated by scripts/generate_agent_supervisor_direct_objective_event_driven_planning_board.py.",
+        "# V4 keeps project-relative closed output lists; DatabasePortalBridge projects",
+        "# them exactly once before equality with the superproject task authority.",
+    ]
+    for task in selected:
+        command = _post_bridge_validation_command(task)
+        lines += [
+            "",
+            "[[tool.ipfs-accelerate-agent-supervisor.project-dependency-preflight.targets]]",
+            f"target = {json.dumps(task['test_output'])}",
+            f"command-target = {json.dumps(task['test_output'])}",
+            'command-kind = "pytest"',
+            "validation-command-sha256 = "
+            + json.dumps(hashlib.sha256(command.encode("utf-8")).hexdigest()),
+            'requirements = ["pytest>=8.0.0"]',
+            "task = { board-namespace = "
+            + json.dumps(PROGRAM_ID)
+            + ", canonical-task-cid = "
+            + json.dumps(task["task_cid"])
+            + ", declared-outputs = "
+            + json.dumps(task["exact_outputs"], separators=(",", ", "))
+            + " }",
+            'baseline = { state = "declared-output-absent" }',
+        ]
+    lines += ["", ACCELERATE_CONTRACT_END]
+    return "\n".join(lines)
+
+
+def _render_datasets_contract_block(tasks: list[dict[str, Any]]) -> str:
+    selected = [task for task in tasks if task["repository_authority"] == "DATA"]
+    if len(selected) != 18:
+        raise ValueError("Datasets DOEP contract must contain exactly 18 tasks")
+    lines = [
+        DATASETS_CONTRACT_BEGIN,
+        "# Generated by scripts/generate_agent_supervisor_direct_objective_event_driven_planning_board.py.",
+        "# V3 records the exact bridge-projected test output used by runtime task",
+        "# authority; all generated test baselines are intentionally absent.",
+    ]
+    for task in selected:
+        command = _post_bridge_validation_command(task)
+        lines += [
+            "",
+            "[[tool.ipfs-accelerate-agent-supervisor.project-dependency-preflight.targets]]",
+            f"target = {json.dumps(task['test_output'])}",
+            "validation-command-sha256 = "
+            + json.dumps(hashlib.sha256(command.encode("utf-8")).hexdigest()),
+            'requirements = ["pytest>=9.0.3,<10.0.0"]',
+            "task = { board-namespace = "
+            + json.dumps(PROGRAM_ID)
+            + ", canonical-task-cid = "
+            + json.dumps(task["task_cid"])
+            + ", declared-output = "
+            + json.dumps(task["superproject_test_output"])
+            + " }",
+            'baseline = { state = "declared-output-absent" }',
+        ]
+    lines += ["", DATASETS_CONTRACT_END]
+    return "\n".join(lines)
+
+
+def _replace_marked_toml_block(
+    text: str,
+    *,
+    begin: str,
+    end: str,
+    anchor: str,
+    block: str,
+) -> str:
+    """Replace one generator-owned block or insert it before one stable table."""
+
+    begin_count = text.count(begin)
+    end_count = text.count(end)
+    if begin_count or end_count:
+        if begin_count != 1 or end_count != 1:
+            raise ValueError(f"malformed generated TOML markers: {begin!r}")
+        start = text.index(begin)
+        finish = text.index(end, start) + len(end)
+        if finish <= start:
+            raise ValueError(f"reversed generated TOML markers: {begin!r}")
+        return text[:start] + block + text[finish:]
+    if text.count(anchor) != 1:
+        raise ValueError(f"TOML insertion anchor is not unique: {anchor!r}")
+    return text.replace(anchor, block + "\n\n" + anchor, 1)
+
+
+def expected_contract_files(tasks: list[dict[str, Any]]) -> dict[Path, str]:
+    """Build exact nested-project dependency contracts without executing setup."""
+
+    accelerate = _replace_marked_toml_block(
+        ACCELERATE_CONTRACT_PATH.read_text(encoding="utf-8"),
+        begin=ACCELERATE_CONTRACT_BEGIN,
+        end=ACCELERATE_CONTRACT_END,
+        anchor="[tool.ipfs-accelerate.proof-context-profiles]",
+        block=_render_accelerate_contract_block(tasks),
+    )
+    datasets = _replace_marked_toml_block(
+        DATASETS_CONTRACT_PATH.read_text(encoding="utf-8"),
+        begin=DATASETS_CONTRACT_BEGIN,
+        end=DATASETS_CONTRACT_END,
+        anchor="[project.optional-dependencies]",
+        block=_render_datasets_contract_block(tasks),
+    )
+    setup_sha256 = hashlib.sha256(DATASETS_SETUP_PATH.read_bytes()).hexdigest()
+    authority_pattern = re.compile(
+        r'(authority = \{ file = "setup\.py", sha256 = ")[0-9a-f]{64}'
+        r'(", extra = "lgcvf-validation", extra-requirements-sha256 = "[0-9a-f]{64}" \})'
+    )
+    datasets, substitutions = authority_pattern.subn(
+        rf"\g<1>{setup_sha256}\g<2>", datasets
+    )
+    if substitutions != 1:
+        raise ValueError("Datasets setup.py authority field is not uniquely refreshable")
+    return {
+        ACCELERATE_CONTRACT_PATH: accelerate,
+        DATASETS_CONTRACT_PATH: datasets,
+    }
+
+
 def expected_files() -> dict[Path, str]:
     task_rows = parse_tasks()
     goal_rows = goals()
@@ -651,7 +811,7 @@ def expected_files() -> dict[Path, str]:
     if unknown:
         raise ValueError(f"unknown dependencies: {unknown}")
     admitted_owners = {
-        "ipfs_accelerate_py",
+        "external/ipfs_accelerate",
         "external/ipfs_datasets",
         "external/ipfs_kit",
     }
@@ -662,25 +822,18 @@ def expected_files() -> dict[Path, str]:
         outputs = task["exact_outputs"]
         if any(not path or path.startswith("/") or ".." in Path(path).parts for path in outputs):
             raise ValueError(f"{task['task_id']} outputs are unsafe")
-        if owner == "ipfs_accelerate_py":
-            if any(not path.startswith("external/ipfs_accelerate/") for path in outputs):
-                raise ValueError(f"{task['task_id']} root-authority output escapes Accelerate")
-            projected = list(outputs)
-        else:
-            if any(path.startswith("external/") for path in outputs):
-                raise ValueError(f"{task['task_id']} outputs are not owner-relative")
-            projected = [f"{owner}/{path}" for path in outputs]
+        if any(path.startswith("external/") for path in outputs):
+            raise ValueError(f"{task['task_id']} outputs are not owner-relative")
+        projected = [f"{owner}/{path}" for path in outputs]
         if task["superproject_outputs"] != projected:
             raise ValueError(f"{task['task_id']} superproject projection drift")
         validation = task["execution_validation"]
-        expected_validation = (
-            [["python3", "scripts/run_agent_supervisor_direct_objective_event_driven_planning_validation.py", "--task", task["task_id"]]]
-            if owner == "ipfs_accelerate_py"
-            else [["python3", "-m", "pytest", "-q", task["test_output"]]]
-        )
+        expected_validation = [[
+            "python3", "-m", "pytest", task["test_output"], "-q"
+        ]]
         if validation != expected_validation:
             raise ValueError(f"{task['task_id']} validation does not match its authority")
-        if owner != "ipfs_accelerate_py" and task["test_output"].startswith("external/"):
+        if task["test_output"].startswith("external/"):
             raise ValueError(f"{task['task_id']} nested validation is not owner-relative")
     # Kahn check; also seals the intended initial frontier.
     pending = {t["task_id"]: set(t["dependencies"]) for t in task_rows}
@@ -710,9 +863,21 @@ def expected_files() -> dict[Path, str]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
+    parser.add_argument(
+        "--write-contracts",
+        action="store_true",
+        help="write only the marked nested-project DOEP TOML contract blocks",
+    )
+    parser.add_argument(
+        "--check-contracts",
+        action="store_true",
+        help="check the marked nested-project DOEP TOML contract blocks",
+    )
     parser.add_argument("--check-all", action="store_true")
     args = parser.parse_args()
     files = expected_files()
+    tasks = parse_tasks()
+    contract_files = expected_contract_files(tasks)
     errors: list[str] = []
     if args.write:
         for path, text in files.items():
@@ -723,8 +888,23 @@ def main() -> int:
             errors.append(f"missing: {path.relative_to(ROOT)}")
         elif path.read_text(encoding="utf-8") != expected:
             errors.append(f"drift: {path.relative_to(ROOT)}")
-    tasks = parse_tasks()
+    check_contracts = bool(
+        args.check_all or args.check_contracts or args.write_contracts
+    )
+    if args.write_contracts:
+        for path, text in contract_files.items():
+            path.write_text(text, encoding="utf-8")
+    if check_contracts:
+        for path, expected in contract_files.items():
+            if not path.is_file():
+                errors.append(f"missing: {path.relative_to(ROOT)}")
+            elif path.read_text(encoding="utf-8") != expected:
+                errors.append(f"drift: {path.relative_to(ROOT)}")
     goal_rows = goals()
+    owner_counts = {
+        owner: sum(task["repository_authority"] == owner for task in tasks)
+        for owner in ("ACC", "DATA", "KIT")
+    }
     report = {
         "valid": not errors,
         "schema": "ipfs_accelerate_py/agent-supervisor/doep-board-validation@1",
@@ -735,6 +915,12 @@ def main() -> int:
         "goal_count": len(goal_rows),
         "dependency_count": sum(len(t["dependencies"]) for t in tasks),
         "initial_frontier": [t["task_id"] for t in tasks if not t["dependencies"]],
+        "contract_files_checked": (
+            [str(path.relative_to(ROOT)) for path in contract_files]
+            if check_contracts
+            else []
+        ),
+        "task_owner_counts": owner_counts,
         "errors": errors,
     }
     print(json.dumps(report, indent=2, sort_keys=True))
