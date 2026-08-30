@@ -72,6 +72,50 @@ def _paths(root: Path) -> dict[str, Path]:
     }
 
 
+def test_bootstrap_accepts_initial_and_canonical_reload_supervisor_entries() -> None:
+    module = _module()
+    entry = str(
+        (
+            ROOT
+            / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py"
+        ).resolve()
+    )
+    canonical_module = (
+        "ipfs_accelerate_py.agent_supervisor.todo_daemon."
+        "implementation_supervisor"
+    )
+
+    assert module._canonical_supervisor_entry(("/usr/bin/python3", entry))
+    assert module._canonical_supervisor_entry(
+        ("/usr/bin/python3", "-m", canonical_module)
+    )
+
+
+@pytest.mark.parametrize(
+    "argv",
+    [
+        ("/usr/bin/python3", "-m", "implementation_supervisor"),
+        (
+            "/usr/bin/python3",
+            "-m",
+            "untrusted.supervisor",
+            "--note",
+            "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor",
+        ),
+        (
+            "/usr/bin/python3",
+            "/tmp/implementation_supervisor_entry.py",
+        ),
+    ],
+)
+def test_bootstrap_rejects_noncanonical_supervisor_entries(
+    argv: tuple[str, ...],
+) -> None:
+    module = _module()
+
+    assert module._canonical_supervisor_entry(argv) is False
+
+
 def _blocked_retry_events(
     module,
     *,

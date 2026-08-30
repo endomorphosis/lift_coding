@@ -562,6 +562,29 @@ def _argv_values(argv: Sequence[str], option: str) -> tuple[str, ...]:
     return tuple(values)
 
 
+def _canonical_supervisor_entry(argv: Sequence[str]) -> bool:
+    """Accept the sealed launcher and its canonical in-place reload form."""
+
+    expected_entry = str(
+        (
+            ROOT
+            / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py"
+        ).resolve()
+    )
+    canonical_module = (
+        "ipfs_accelerate_py.agent_supervisor.todo_daemon."
+        "implementation_supervisor"
+    )
+    return bool(
+        (len(argv) >= 2 and argv[1] == expected_entry)
+        or (
+            len(argv) >= 3
+            and argv[1] == "-m"
+            and argv[2] == canonical_module
+        )
+    )
+
+
 def _pid_alive(pid: int) -> bool:
     return pid > 1 and Path(f"/proc/{pid}").exists()
 
@@ -1337,15 +1360,12 @@ class _BootstrapBroker:
             if int(peer_birth.parent_pid) != os.getpid():
                 raise HandoffError("supervisor is outside the admitted supervisor tree")
         argv = _process_argv(supervisor_pid)
-        expected_entry = str(
-            (ROOT / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py").resolve()
-        )
         expected = {
             "--board-namespace": self.board.board_namespace,
             "--state-owner-bootstrap-fd": str(self.listener.fileno()),
             "--task-shard-count": str(int(self.board.max_lanes)),
         }
-        if expected_entry not in argv or any(
+        if not _canonical_supervisor_entry(argv) or any(
             _argv_values(argv, key) != (value,) for key, value in expected.items()
         ):
             raise HandoffError("bootstrap parent differs from the sealed DOEP lane")
