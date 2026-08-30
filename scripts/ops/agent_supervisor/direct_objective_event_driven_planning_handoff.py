@@ -52,6 +52,30 @@ RUNTIME_PROJECTION_RECEIPT_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/doep-runtime-markdown-projection-receipt@1"
 )
 RUNTIME_PROJECTION_RENDERER: Final = "doep-runtime-markdown-renderer-v1"
+BLOCKED_RETRY_RECOVERY_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/doep-blocked-retry-bootstrap@1"
+)
+BLOCKED_RETRY_EVIDENCE_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/doep-blocked-retry-evidence@1"
+)
+BLOCKED_RETRY_TASK_ALIAS: Final = "DOEP-030"
+BLOCKED_RETRY_TASK_CID: Final = (
+    "sha256:b8cf8ce01eaa5a1ac744d169ba756d37146bfaaef5a52087f005d268b92410b7"
+)
+BLOCKED_RETRY_REASON: Final = "implementation_protected_path_verification_lock_timeout"
+BLOCKED_RETRY_ATTEMPT_RELATIVE: Final = Path(
+    "lane-2/doep_lane_2_database_portal_attempts/4cd6f925e2180fedcf9c9a47"
+)
+BLOCKED_RETRY_WORKSPACE_NAME: Final = "workspace_6b4c063bd5e3_bdd9b20cc1e1"
+BLOCKED_RETRY_BRANCH: Final = (
+    "implementation/doep-030-b8d4ee0e8de3-attempt-1-1788101472"
+)
+BLOCKED_RETRY_BASELINE: Final = "fadf091facbf259fec0ff55af3d2104ed16f66df"
+BLOCKED_RETRY_EVENT_IDS: Final = {
+    12: "sha256:11912cfadf8ba2770ea9fde9d2091b09234eb2b34edf7614e4c8274e60af7829",
+    13: "sha256:9c5ed5bdba7c9b2c7e132842dc45c6ec5453f63c1d8cdf55d0470d39745cd82c",
+    14: "sha256:1b8663745aa9c30d13acded849bcbf4458bd2c4e9a64331b9d07369802de7eea",
+}
 QUACK_RE: Final = re.compile(
     r"^quack:(?://)?(127(?:\.\d{1,3}){3}|localhost):(\d{1,5})$",
     re.IGNORECASE,
@@ -492,6 +516,9 @@ def _runtime_paths(board: Any) -> dict[str, Path]:
         paths["evidence"] / "control-plane/projections/current-objectives.md"
     )
     paths["projection_receipt"] = paths["evidence"] / "control-plane/projections/receipt.json"
+    paths["blocked_retry_sidecar"] = paths["evidence"] / "bootstrap/doep-030-lock-timeout-evidence.json"
+    paths["blocked_retry_authorization"] = paths["evidence"] / "bootstrap/doep-030-lock-timeout-authorization.json"
+    paths["blocked_retry_receipt"] = paths["evidence"] / "bootstrap/doep-030-blocked-retry-recovery.json"
     paths["bootstrap_receipt"] = paths["evidence"] / "bootstrap/bootstrap-materialization.json"
     paths["handoff_receipt"] = paths["evidence"] / "bootstrap/supervisor-handoff.json"
     paths["operator_pid"] = paths["state"] / "doep-handoff.pid"
@@ -556,6 +583,309 @@ def _make_client(server: Any, board: Any, *, client_id: str) -> tuple[Any, Any, 
         server.revoke_typed_client_grant(grant.grant_id)
         raise
     return client, grant, token
+
+
+def _make_blocked_retry_recovery_client(
+    server: Any,
+    board: Any,
+    *,
+    task_cid: str,
+) -> tuple[Any, Any]:
+    """Create the one operator-only client that may re-admit DOEP-030 once."""
+
+    from ipfs_accelerate_py.agent_supervisor.task_sources.quack_state_client import (
+        QuackStateClient,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+        TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_COMMAND,
+        TypedStateOwnerConnection,
+    )
+
+    identity = server.identity
+    if identity is None:
+        raise HandoffError("Quack owner has no process identity")
+    client_id = "doep-bootstrap:blocked-retry:doep-030"
+    allowed_operations = (
+        "whoami_metadata",
+        "load_store_generation",
+        "select_task_by_cid",
+        "executor_retry_cooldown_by_task",
+        "executor_insert_retry_cooldown",
+        "executor_cas_task_status_receipt",
+        "executor_insert_task_revision",
+        "txn_load_generation",
+        "txn_lookup_idempotency",
+        "txn_advance_store_revision",
+        "txn_record_idempotency",
+    )
+    token, grant = server.issue_typed_client_grant_record(
+        client_id=client_id,
+        process_birth_id=identity.process_birth_id,
+        allowed_operations=allowed_operations,
+        allowed_command_operations=(TYPED_DATABASE_BLOCKED_RETRY_RECOVERY_COMMAND,),
+        entity_scopes={"task_cid": task_cid},
+        peer_pid=os.getpid(),
+        ttl_seconds=300.0,
+    )
+    store_id = _store_id(board)
+    client = QuackStateClient(
+        owner_id=client_id,
+        store_id=store_id,
+        process_birth_id=identity.process_birth_id,
+        connection_factory=lambda _endpoint: TypedStateOwnerConnection(
+            socket_path=server.typed_command_socket_path(),
+            token=token,
+            client_id=client_id,
+            process_birth_id=identity.process_birth_id,
+            store_id=store_id,
+        ),
+    )
+    try:
+        client.attach(
+            board.resolved_database_program().quack_endpoint,
+            server_id=identity.server_id,
+        )
+    except BaseException:
+        client.close()
+        server.revoke_typed_client_grant(grant.grant_id)
+        raise
+    return client, grant
+
+
+def _validated_blocked_retry_events(
+    payload: bytes,
+    *,
+    task_cid: str,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    if not payload or len(payload) > 1_048_576:
+        raise HandoffError("DOEP-030 portal event evidence is absent or exceeds its bound")
+    events: dict[int, dict[str, Any]] = {}
+    try:
+        for raw_line in payload.splitlines():
+            if not raw_line:
+                continue
+            value = json.loads(raw_line)
+            if not isinstance(value, dict):
+                raise HandoffError("DOEP-030 portal event is not an object")
+            sequence = value.get("sequence")
+            if isinstance(sequence, bool) or not isinstance(sequence, int) or sequence < 1:
+                raise HandoffError("DOEP-030 portal event sequence is invalid")
+            if sequence in events:
+                raise HandoffError("DOEP-030 portal event sequence is duplicated")
+            events[sequence] = value
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise HandoffError("DOEP-030 portal event evidence is malformed") from exc
+    timeout = events.get(12, {})
+    retained = events.get(13, {})
+    finished = events.get(14, {})
+    common = (
+        timeout.get("event_id") == BLOCKED_RETRY_EVENT_IDS[12]
+        and retained.get("event_id") == BLOCKED_RETRY_EVENT_IDS[13]
+        and finished.get("event_id") == BLOCKED_RETRY_EVENT_IDS[14]
+        and timeout.get("task_id") == BLOCKED_RETRY_TASK_ALIAS
+        and timeout.get("canonical_task_cid") == task_cid
+        and timeout.get("attempt") == 1
+        and retained.get("task_id") == BLOCKED_RETRY_TASK_ALIAS
+        and retained.get("canonical_task_cid") == task_cid
+        and retained.get("attempt") == 1
+        and finished.get("task_id") == BLOCKED_RETRY_TASK_ALIAS
+        and finished.get("task_cid") == task_cid
+        and finished.get("canonical_task_cid") == task_cid
+        and finished.get("attempt") == 1
+    )
+    lock = timeout.get("lock")
+    cleanup = retained.get("cleanup_result")
+    retained_commit = retained.get("commit_result")
+    finished_cleanup = finished.get("cleanup_result")
+    finished_commit = finished.get("commit_result")
+    merge = finished.get("merge_result")
+    preservation = finished.get("failed_preservation_result")
+    if not (
+        common
+        and timeout.get("type") == "implementation_protected_path_verification_lock_timeout"
+        and timeout.get("reason") == BLOCKED_RETRY_REASON
+        and isinstance(lock, Mapping)
+        and lock.get("acquired") is False
+        and lock.get("reason") == "lock_exists"
+        and retained.get("type") == "protected_path_verification_deferred_worktree_retained"
+        and isinstance(cleanup, Mapping)
+        and cleanup.get("retained") is True
+        and cleanup.get("cleaned") is False
+        and cleanup.get("reason") == "verification_deferred_checkout_lease_active"
+        and isinstance(retained_commit, Mapping)
+        and retained_commit.get("committed") is False
+        and retained_commit.get("reason")
+        == "verification_deferred_checkout_lease_active"
+        and finished.get("type") == "implementation_finished"
+        and finished.get("reason") == BLOCKED_RETRY_REASON
+        and finished.get("provider_dispatched") is True
+        and finished.get("returncode") == 1
+        and finished.get("deferred") is True
+        and finished.get("attempt_consumed") is False
+        and isinstance(finished_cleanup, Mapping)
+        and finished_cleanup.get("retained") is True
+        and finished_cleanup.get("cleaned") is False
+        and isinstance(finished_commit, Mapping)
+        and finished_commit.get("committed") is False
+        and isinstance(merge, Mapping)
+        and merge.get("merged") is False
+        and merge.get("reason") == "not_attempted"
+        and isinstance(preservation, Mapping)
+        and preservation.get("retained") is True
+        and preservation.get("preserved") is False
+        and not finished.get("implementation_commit")
+        and timeout.get("workspace_path") == retained.get("worktree_path")
+        and retained.get("worktree_path") == finished.get("worktree_path")
+        and retained.get("branch") == BLOCKED_RETRY_BRANCH
+        and finished.get("branch") == BLOCKED_RETRY_BRANCH
+        and finished.get("baseline_ref") == BLOCKED_RETRY_BASELINE
+    ):
+        raise HandoffError("DOEP-030 is not the exact retained lock-timeout failure admitted for retry")
+    return timeout, retained, finished
+
+
+def _blocked_retry_task_cid(population: Mapping[str, Any]) -> str:
+    matches = [
+        str(task.get("task_cid") or "")
+        for task in population.get("tasks", ())
+        if isinstance(task, Mapping) and task.get("task_alias") == BLOCKED_RETRY_TASK_ALIAS
+    ]
+    if len(matches) != 1 or matches[0] != BLOCKED_RETRY_TASK_CID:
+        raise HandoffError("sealed DOEP population has no unique DOEP-030 identity")
+    return matches[0]
+
+
+def _prepare_blocked_retry_authorization(
+    *,
+    paths: Mapping[str, Path],
+    task_cid: str,
+    task_row: Mapping[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    event_path = paths["state"] / BLOCKED_RETRY_ATTEMPT_RELATIVE / "portal-events.jsonl"
+    try:
+        event_bytes = event_path.read_bytes()
+    except OSError as exc:
+        raise HandoffError("DOEP-030 portal event evidence is unavailable") from exc
+    timeout, retained, finished = _validated_blocked_retry_events(
+        event_bytes,
+        task_cid=task_cid,
+    )
+    try:
+        task_body = json.loads(str(task_row.get("body_json") or ""))
+    except json.JSONDecodeError as exc:
+        raise HandoffError("blocked DOEP-030 task body is malformed") from exc
+    terminal = task_body.get("completion_receipt") if isinstance(task_body, Mapping) else None
+    if not isinstance(terminal, Mapping):
+        raise HandoffError("blocked DOEP-030 has no terminal receipt")
+    expected_revision = int(task_row.get("revision") or 0)
+    if not (
+        task_row.get("status") == "blocked"
+        and expected_revision == 4
+        and terminal.get("operation") == "database_portal_terminal_failure"
+        and terminal.get("reason") == BLOCKED_RETRY_REASON
+        and terminal.get("retryable") is False
+        and terminal.get("attempt_number") == 1
+        and terminal.get("control_expected_status") == "in_progress"
+        and terminal.get("control_expected_revision") == 3
+    ):
+        raise HandoffError("blocked DOEP-030 terminal authority is outside the sealed retry")
+    workspace_text = str(
+        finished.get("worktree_path") or timeout.get("workspace_path") or ""
+    ).strip()
+    if not workspace_text or any(marker in workspace_text for marker in ("\x00", "\n", "\r")):
+        raise HandoffError("DOEP-030 retained workspace identity is invalid")
+    try:
+        workspace_path = Path(workspace_text).resolve(strict=True)
+        expected_workspace = (
+            paths["root"] / "worktrees" / BLOCKED_RETRY_WORKSPACE_NAME
+        ).resolve(strict=True)
+    except OSError as exc:
+        raise HandoffError("DOEP-030 retained workspace is unavailable") from exc
+    if workspace_path != expected_workspace or not workspace_path.is_dir():
+        raise HandoffError("DOEP-030 retained workspace is unavailable")
+    sidecar_material = {
+        "schema": BLOCKED_RETRY_EVIDENCE_SCHEMA,
+        "task_alias": BLOCKED_RETRY_TASK_ALIAS,
+        "task_cid": task_cid,
+        "attempt": 1,
+        "terminal_reason": BLOCKED_RETRY_REASON,
+        "portal_events_path": str(event_path),
+        "portal_events_sha256": _sha256(event_bytes),
+        "timeout_event_id": str(timeout.get("event_id") or ""),
+        "retained_event_id": str(retained.get("event_id") or ""),
+        "finished_event_id": str(finished.get("event_id") or ""),
+        "workspace_path": str(workspace_path),
+        "workspace_branch": str(finished.get("branch") or ""),
+        "workspace_baseline": str(finished.get("baseline_ref") or ""),
+        "provider_dispatched": True,
+        "provider_outcome": "completed_with_verification_deferred",
+        "commit_observed": False,
+        "merge_observed": False,
+        "retained_candidate_admitted": False,
+        "historical_candidate_fingerprint": "unavailable",
+        "required_next_step": "fresh_portal_revalidation",
+        "limitations": [
+            "The historical retained workspace had no durable byte-level candidate fingerprint.",
+            "Its bytes are not admitted as original provider output and are not completion evidence.",
+            "This receipt authorizes one fresh bounded attempt; it does not authorize direct task completion.",
+        ],
+    }
+    sidecar = {
+        **sidecar_material,
+        "evidence_id": _sha256(_canonical_json_bytes(sidecar_material)),
+    }
+    now_ms = int(time.time() * 1_000)
+    authorized_at = _utc_now()
+    authorization_material = {
+        "schema": BLOCKED_RETRY_RECOVERY_SCHEMA,
+        "operation": "operator_sealed_blocked_retry_authorization",
+        "task_alias": BLOCKED_RETRY_TASK_ALIAS,
+        "task_cid": task_cid,
+        "expected_task_revision": expected_revision,
+        "task_body": dict(task_body),
+        "terminal_receipt": dict(terminal),
+        "max_task_attempts_before": 1,
+        "max_task_attempts_after": 2,
+        "sidecar_evidence_id": sidecar["evidence_id"],
+        "now_ms": now_ms,
+        "authorized_at": authorized_at,
+        "require_fresh_portal_revalidation": True,
+        "authority_scope": "DOEP-030 blocked-to-retrying exactly once",
+    }
+    authorization = {
+        **authorization_material,
+        "operator_handoff_receipt_id": _sha256(_canonical_json_bytes(authorization_material)),
+    }
+    _atomic_json(paths["blocked_retry_sidecar"], sidecar)
+    _atomic_json(paths["blocked_retry_authorization"], authorization)
+    return sidecar, authorization
+
+
+def _load_blocked_retry_authorization(
+    *,
+    paths: Mapping[str, Path],
+    task_cid: str,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    sidecar = _json_object(paths["blocked_retry_sidecar"])
+    authorization = _json_object(paths["blocked_retry_authorization"])
+    sidecar_material = {key: value for key, value in sidecar.items() if key != "evidence_id"}
+    authorization_material = {
+        key: value
+        for key, value in authorization.items()
+        if key != "operator_handoff_receipt_id"
+    }
+    if not (
+        sidecar.get("schema") == BLOCKED_RETRY_EVIDENCE_SCHEMA
+        and sidecar.get("task_cid") == task_cid
+        and sidecar.get("evidence_id") == _sha256(_canonical_json_bytes(sidecar_material))
+        and authorization.get("schema") == BLOCKED_RETRY_RECOVERY_SCHEMA
+        and authorization.get("task_cid") == task_cid
+        and authorization.get("sidecar_evidence_id") == sidecar.get("evidence_id")
+        and authorization.get("operator_handoff_receipt_id")
+        == _sha256(_canonical_json_bytes(authorization_material))
+    ):
+        raise HandoffError("stored DOEP-030 retry authorization has drifted")
+    return sidecar, authorization
 
 
 def _objective_observation(
@@ -1255,6 +1585,111 @@ def _build_server(board: Any, paths: Mapping[str, Path]) -> Any:
     )
 
 
+def recover_blocked_lock_timeout() -> int:
+    """Operator-seal the one historical DOEP-030 retry through Quack/CAS."""
+
+    board, population, paths = _load()
+    prior_pid = 0
+    if paths["operator_pid"].is_file():
+        try:
+            prior_pid = int(paths["operator_pid"].read_text(encoding="utf-8").strip())
+        except (OSError, ValueError):
+            prior_pid = 0
+    if _pid_alive(prior_pid):
+        raise HandoffError(
+            f"stop the live DOEP handoff operator at PID {prior_pid} before sealed recovery"
+        )
+    task_cid = _blocked_retry_task_cid(population)
+    server = _build_server(board, paths)
+    client = None
+    grant = None
+    try:
+        identity = server.start()
+        if not server.ready():
+            raise HandoffError("Quack state owner did not become ready for blocked retry recovery")
+        client, grant = _make_blocked_retry_recovery_client(
+            server,
+            board,
+            task_cid=task_cid,
+        )
+        rows = client.execute("select_task_by_cid", {"task_cid": task_cid})
+        if len(rows) != 1:
+            raise HandoffError("DOEP-030 task authority is absent or ambiguous")
+        task_row = dict(rows[0])
+        if (
+            paths["blocked_retry_authorization"].is_file()
+            and paths["blocked_retry_sidecar"].is_file()
+        ):
+            sidecar, authorization = _load_blocked_retry_authorization(
+                paths=paths,
+                task_cid=task_cid,
+            )
+        else:
+            # Both files are immutable once complete.  If the process stopped
+            # between their two atomic renames, reconstruct the same evidence
+            # from the still-blocked row and exact portal-event identities.
+            sidecar, authorization = _prepare_blocked_retry_authorization(
+                paths=paths,
+                task_cid=task_cid,
+                task_row=task_row,
+            )
+        event_path = Path(str(sidecar.get("portal_events_path") or ""))
+        try:
+            current_event_bytes = event_path.read_bytes()
+        except OSError as exc:
+            raise HandoffError("DOEP-030 retry evidence disappeared") from exc
+        if _sha256(current_event_bytes) != sidecar.get("portal_events_sha256"):
+            raise HandoffError("DOEP-030 portal evidence changed after authorization")
+        _validated_blocked_retry_events(current_event_bytes, task_cid=task_cid)
+        result = client.recover_blocked_task_retry(
+            task_cid=task_cid,
+            expected_task_revision=int(authorization["expected_task_revision"]),
+            task_body=dict(authorization["task_body"]),
+            terminal_receipt=dict(authorization["terminal_receipt"]),
+            max_task_attempts_before=int(authorization["max_task_attempts_before"]),
+            max_task_attempts_after=int(authorization["max_task_attempts_after"]),
+            operator_handoff_receipt_id=str(
+                authorization["operator_handoff_receipt_id"]
+            ),
+            sidecar_evidence_id=str(authorization["sidecar_evidence_id"]),
+            now_ms=int(authorization["now_ms"]),
+            require_fresh_portal_revalidation=True,
+        )
+        if not result.accepted:
+            raise HandoffError(
+                f"canonical DOEP-030 blocked retry was not accepted: {result.outcome.value}"
+            )
+        receipt_material = {
+            "schema": BLOCKED_RETRY_RECOVERY_SCHEMA,
+            "operation": "doep_030_blocked_retry_recovered",
+            "recovered_at": _utc_now(),
+            "owner_server_id": identity.server_id,
+            "operator_handoff_receipt_id": authorization[
+                "operator_handoff_receipt_id"
+            ],
+            "sidecar_evidence_id": sidecar["evidence_id"],
+            "fresh_portal_revalidation_required": True,
+            "retained_candidate_admitted": False,
+            "result": result.to_dict(),
+        }
+        receipt_material["receipt_cid"] = _sha256(
+            _canonical_json_bytes(receipt_material)
+        )
+        _atomic_json(paths["blocked_retry_receipt"], receipt_material)
+        print(json.dumps(receipt_material, indent=2, sort_keys=True))
+        return 0
+    finally:
+        try:
+            if client is not None:
+                client.close()
+        finally:
+            try:
+                if grant is not None:
+                    server.revoke_typed_client_grant(grant.grant_id)
+            finally:
+                server.stop()
+
+
 def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         load_configured_board,
@@ -1497,12 +1932,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("run")
+    commands.add_parser("recover-blocked-lock-timeout")
     status_parser = commands.add_parser("status")
     status_parser.add_argument("--require-ready", action="store_true")
     args = parser.parse_args(argv)
     try:
         if args.command == "run":
             return launch()
+        if args.command == "recover-blocked-lock-timeout":
+            return recover_blocked_lock_timeout()
         return status(require_ready=bool(args.require_ready))
     except HandoffError as exc:
         print(
