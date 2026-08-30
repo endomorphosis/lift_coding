@@ -1,4 +1,6 @@
-# DOEP objective heap
+# DOEP objective bootstrap manifest
+
+> **STATIC BOOTSTRAP INPUT, NOT LIVE STATE.** Runtime objective/task progress is read from DuckDB through Quack and exported to the ignored evidence projections. This tracked file is never refreshed from worker state.
 
 - Program: agent-supervisor-direct-objective-and-event-driven-planning-v1
 - Plan revision: DOEP-PLAN-V5
