@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import json
 import os
 from pathlib import Path
 from types import SimpleNamespace
@@ -48,6 +49,126 @@ def _record(facade, birth: dict[str, object]) -> dict[str, object]:
         "process_birth": dict(birth),
         "recorded_at": "2026-08-30T00:00:00Z",
     }
+
+
+def test_json_object_reads_one_bounded_descriptor(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_bounded_descriptor_json")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "runtime" / "status.json"
+    path.parent.mkdir()
+    path.write_text('{"ready":true}\n', encoding="utf-8")
+    monkeypatch.setattr(
+        Path,
+        "read_text",
+        lambda *_args, **_kwargs: pytest.fail("path-based second read is forbidden"),
+    )
+
+    assert facade._json_object(path) == {"ready": True}
+
+
+def test_json_object_rejects_content_beyond_descriptor_bound(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_oversized_descriptor_json")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    monkeypatch.setattr(facade, "MAX_JSON_BYTES", 16)
+    path = tmp_path / "oversized.json"
+    path.write_bytes(b'{"value":"123456789"}')
+
+    with pytest.raises(facade.OperatorError, match="bounded regular file"):
+        facade._json_object(path)
+
+
+def test_json_object_rejects_fifo_without_blocking(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_nonblocking_json_fifo")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "status.json"
+    os.mkfifo(path)
+
+    with pytest.raises(facade.OperatorError, match="bounded regular file"):
+        facade._json_object(path)
+
+
+def test_json_object_rejects_multiply_linked_runtime_artifact(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_linked_runtime_json")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "status.json"
+    path.write_text('{"ready":true}\n', encoding="utf-8")
+    os.link(path, tmp_path / "status-alias.json")
+
+    with pytest.raises(facade.OperatorError, match="bounded regular file"):
+        facade._json_object(path)
+
+
+def test_json_object_rejects_path_replacement_during_descriptor_read(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_replaced_descriptor_json")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "status.json"
+    replacement = tmp_path / "replacement.json"
+    path.write_text('{"generation":1}\n', encoding="utf-8")
+    replacement.write_text('{"generation":2}\n', encoding="utf-8")
+    real_read = facade.os.read
+    replaced = False
+
+    def replacing_read(descriptor: int, count: int) -> bytes:
+        nonlocal replaced
+        if not replaced:
+            replaced = True
+            os.replace(replacement, path)
+        return real_read(descriptor, count)
+
+    monkeypatch.setattr(facade.os, "read", replacing_read)
+
+    with pytest.raises(facade.OperatorError, match="changed while being read"):
+        facade._json_object(path)
+
+
+def test_runtime_path_rejects_intermediate_symlink_without_touching_target(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_intermediate_symlink_custody")
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    repository.mkdir()
+    outside.mkdir()
+    (repository / "runtime").symlink_to(outside, target_is_directory=True)
+    monkeypatch.setattr(facade, "ROOT", repository)
+
+    with pytest.raises(facade.OperatorError, match="custody is unsafe"):
+        facade._private_directory(repository / "runtime" / "owner")
+
+    assert list(outside.iterdir()) == []
+
+
+def test_json_object_rejects_intermediate_symlink_escape(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_json_intermediate_symlink")
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    repository.mkdir()
+    outside.mkdir()
+    (outside / "status.json").write_text(json.dumps({"ready": True}))
+    (repository / "runtime").symlink_to(outside, target_is_directory=True)
+    monkeypatch.setattr(facade, "ROOT", repository)
+
+    with pytest.raises(facade.OperatorError, match="custody is unsafe"):
+        facade._json_object(repository / "runtime" / "status.json")
 
 
 def test_exact_owned_pid_record_is_removed_without_touching_unrelated_state(
@@ -170,6 +291,56 @@ def test_live_owner_status_defers_to_authenticated_transport_without_file_open(
         "reason": "deferred_to_authenticated_live_owner",
         "direct_database_file_open": False,
     }
+
+
+@pytest.mark.parametrize(
+    ("database_status", "owner_liveness"),
+    [("starting", "absent"), ("ready", "dead")],
+)
+def test_nonterminal_database_row_without_live_owner_is_stale(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    database_status: str,
+    owner_liveness: str,
+) -> None:
+    facade = _load(
+        f"pctdd_stale_database_owner_{database_status}_{owner_liveness}"
+    )
+    facade._ensure_import_path()
+    import ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server as runtime
+
+    latest = {
+        "server_id": "server:stale",
+        "store_id": "control.duckdb",
+        "database_uuid": "database:stale",
+        "process_birth_id": "birth:stale",
+        "listen_uri": "quack:127.0.0.1:27278",
+        "extension_fingerprint": "sha256:" + "ab" * 32,
+        "schema_revision": 1,
+        "generation": 7,
+        "started_at": "2026-08-30T00:00:00Z",
+        "status": database_status,
+        "revision": 3,
+    }
+    monkeypatch.setattr(
+        runtime,
+        "inspect_state_server_lifecycle",
+        lambda **_kwargs: {"available": True, "latest": latest},
+    )
+    owner = {
+        "lifecycle": database_status if owner_liveness == "dead" else "absent",
+        "liveness": owner_liveness,
+        "identity": dict(latest) if owner_liveness == "dead" else {},
+    }
+
+    result = facade._cross_check_owner_lifecycle(
+        owner,
+        {"database": tmp_path / "control.duckdb"},
+    )
+
+    assert result["lifecycle"] == "stale"
+    assert result["lifecycle_consistent"] is False
+    assert result["reason_code"] == "authoritative_server_owner_not_live"
 
 
 def test_stopped_status_rejects_database_json_lifecycle_mismatch(

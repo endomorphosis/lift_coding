@@ -43,6 +43,8 @@ CHECK_SCHEMA: Final[str] = "pctdd/source-binding-migration-check@1"
 MIGRATION_EVIDENCE_KIND: Final[str] = "operator_control_plane_source_migration"
 MIGRATION_MARKER: Final[str] = "source-migration-receipt.json"
 PENDING_MARKER: Final[str] = ".source-migration-receipt.pending.json"
+PREPARED_RECEIPT: Final[str] = ".source-migration-prepared-receipt.json"
+PREPARED_STAGE_PREFIX: Final[str] = ".pctdd-g7-prepared."
 LOCK_NAME: Final[str] = ".pctdd-g7-source-migration.lock"
 MAX_JSON_BYTES: Final[int] = 2 * 1024 * 1024
 MAX_UNKNOWN_OUTCOME_REARMS: Final[int] = 3
@@ -95,14 +97,14 @@ def _confined(root: Path, value: Any, *, noun: str) -> Path:
     return resolved_parent / candidate.name
 
 
-def _read_stable_file(
+def _read_stable_file_snapshot(
     path: Path,
     *,
     root: Path,
     noun: str,
     required_links: int | None = 1,
     maximum_bytes: int | None = None,
-) -> tuple[bytes, str, int]:
+) -> tuple[bytes, str, int, tuple[int, ...]]:
     if not path.parent.resolve().is_relative_to(root.resolve()):
         raise SourceBindingMigrationError(f"{noun} escapes the repository")
     flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
@@ -148,9 +150,51 @@ def _read_stable_file(
         )
         if identity_before != identity_after:
             raise SourceBindingMigrationError(f"{noun} changed while read")
-        return bytes(payload), digest.hexdigest(), int(before.st_size)
+        try:
+            named = os.stat(path, follow_symlinks=False)
+        except OSError as exc:
+            raise SourceBindingMigrationError(f"{noun} path changed while read") from exc
+        named_identity = (
+            named.st_dev,
+            named.st_ino,
+            named.st_size,
+            named.st_mtime_ns,
+            named.st_ctime_ns,
+            named.st_nlink,
+        )
+        if not stat.S_ISREG(named.st_mode) or named_identity != identity_after:
+            raise SourceBindingMigrationError(f"{noun} path changed while read")
+        identity = (
+            int(after.st_dev),
+            int(after.st_ino),
+            int(after.st_size),
+            int(after.st_mtime_ns),
+            int(after.st_ctime_ns),
+            int(after.st_nlink),
+            int(after.st_uid),
+            int(stat.S_IMODE(after.st_mode)),
+        )
+        return bytes(payload), digest.hexdigest(), int(before.st_size), identity
     finally:
         os.close(descriptor)
+
+
+def _read_stable_file(
+    path: Path,
+    *,
+    root: Path,
+    noun: str,
+    required_links: int | None = 1,
+    maximum_bytes: int | None = None,
+) -> tuple[bytes, str, int]:
+    payload, digest, size, _identity_value = _read_stable_file_snapshot(
+        path,
+        root=root,
+        noun=noun,
+        required_links=required_links,
+        maximum_bytes=maximum_bytes,
+    )
+    return payload, digest, size
 
 
 def _stable_file(
@@ -169,21 +213,7 @@ def _stable_file(
     return digest, size
 
 
-def _load_json(
-    path: Path,
-    *,
-    root: Path,
-    noun: str,
-    required_links: int = 1,
-) -> dict[str, Any]:
-    payload, _digest, _size = _read_stable_file(
-        path,
-        root=root,
-        noun=noun,
-        required_links=required_links,
-        maximum_bytes=MAX_JSON_BYTES,
-    )
-
+def _decode_json(payload: bytes, *, noun: str) -> dict[str, Any]:
     def closed(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
         result: dict[str, Any] = {}
         for key, value in pairs:
@@ -206,6 +236,23 @@ def _load_json(
     if not isinstance(value, dict):
         raise SourceBindingMigrationError(f"{noun} must contain an object")
     return value
+
+
+def _load_json(
+    path: Path,
+    *,
+    root: Path,
+    noun: str,
+    required_links: int = 1,
+) -> dict[str, Any]:
+    payload, _digest, _size = _read_stable_file(
+        path,
+        root=root,
+        noun=noun,
+        required_links=required_links,
+        maximum_bytes=MAX_JSON_BYTES,
+    )
+    return _decode_json(payload, noun=noun)
 
 
 def _open_local_database(database: Path, *, read_only: bool) -> Any:
@@ -311,6 +358,15 @@ def _assert_source_delta(
     for relative, expected in dict(policy["governed_gitlinks"]).items():
         if _git(root, "rev-parse", f"{current}:{relative}") != expected:
             raise SourceBindingMigrationError(f"governed gitlink differs: {relative}")
+    # Pin HEAD and its tree again after status/diff/gitlink inspection.  A
+    # concurrent commit must not turn a clean check of one revision into an
+    # admission for another revision.
+    final_head = _git(root, "rev-parse", "HEAD")
+    final_tree = _git(root, "rev-parse", f"{final_head}^{{tree}}")
+    if final_head != current or final_tree != population["repository_tree_id"]:
+        raise SourceBindingMigrationError("source head or tree changed during validation")
+    if _git(root, "status", "--porcelain=v1", "--untracked-files=all"):
+        raise SourceBindingMigrationError("source worktree changed during validation")
 
 
 def _assert_listener_stopped(policy: Mapping[str, Any]) -> None:
@@ -1719,11 +1775,94 @@ def _fsync_directory(path: Path) -> None:
         os.close(descriptor)
 
 
+def _fsync_private_file(path: Path, *, noun: str) -> None:
+    descriptor = os.open(
+        path,
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0),
+    )
+    try:
+        metadata = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(metadata.st_mode)
+            or int(metadata.st_uid) != int(os.geteuid())
+            or stat.S_IMODE(metadata.st_mode) != 0o600
+            or int(metadata.st_nlink) != 1
+        ):
+            raise SourceBindingMigrationError(
+                f"{noun} is not private, regular, and singly linked"
+            )
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _open_migration_lock(path: Path) -> tuple[int, tuple[int, int]]:
+    try:
+        descriptor = os.open(
+            path,
+            os.O_RDWR
+            | os.O_CREAT
+            | getattr(os, "O_CLOEXEC", 0)
+            | getattr(os, "O_NOFOLLOW", 0),
+            0o600,
+        )
+    except OSError as exc:
+        raise SourceBindingMigrationError("g7 migration lock is unsafe") from exc
+    try:
+        metadata = os.fstat(descriptor)
+        identity = (int(metadata.st_dev), int(metadata.st_ino))
+        if (
+            not stat.S_ISREG(metadata.st_mode)
+            or int(metadata.st_uid) != int(os.geteuid())
+            or stat.S_IMODE(metadata.st_mode) != 0o600
+            or int(metadata.st_nlink) != 1
+        ):
+            raise SourceBindingMigrationError(
+                "g7 migration lock is not private, regular, and singly linked"
+            )
+        _assert_migration_lock_identity(path, descriptor, identity)
+        return descriptor, identity
+    except BaseException:
+        os.close(descriptor)
+        raise
+
+
+def _assert_migration_lock_identity(
+    path: Path,
+    descriptor: int,
+    identity: tuple[int, int],
+) -> None:
+    opened = os.fstat(descriptor)
+    try:
+        current = os.stat(path, follow_symlinks=False)
+    except OSError as exc:
+        raise SourceBindingMigrationError("g7 migration lock identity changed") from exc
+    if (
+        (int(opened.st_dev), int(opened.st_ino)) != identity
+        or (int(current.st_dev), int(current.st_ino)) != identity
+        or not stat.S_ISREG(opened.st_mode)
+        or not stat.S_ISREG(current.st_mode)
+        or int(opened.st_uid) != int(os.geteuid())
+        or int(current.st_uid) != int(os.geteuid())
+        or stat.S_IMODE(opened.st_mode) != 0o600
+        or stat.S_IMODE(current.st_mode) != 0o600
+        or int(opened.st_nlink) != 1
+        or int(current.st_nlink) != 1
+    ):
+        raise SourceBindingMigrationError("g7 migration lock identity changed")
+
+
 def _ensure_private_directory(path: Path) -> None:
     try:
         path.mkdir(mode=0o700)
     except FileExistsError:
         pass
+    _assert_private_directory(path)
+
+
+def _assert_private_directory(path: Path) -> None:
     try:
         metadata = os.stat(path, follow_symlinks=False)
     except OSError as exc:
@@ -1793,15 +1932,35 @@ def _load_migration_marker(
     target_root: Path,
     noun: str,
 ) -> dict[str, Any]:
+    receipt, _identity_value = _load_migration_marker_snapshot(
+        root=root,
+        target_root=target_root,
+        noun=noun,
+    )
+    return receipt
+
+
+def _load_migration_marker_snapshot(
+    *,
+    root: Path,
+    target_root: Path,
+    noun: str,
+) -> tuple[dict[str, Any], tuple[int, ...]]:
     marker = target_root / MIGRATION_MARKER
     pending = target_root / PENDING_MARKER
     pending_exists = os.path.lexists(pending)
-    receipt = _load_json(
+    payload, _digest, _size, identity = _read_stable_file_snapshot(
         marker,
         root=root,
         noun=noun,
         required_links=2 if pending_exists else 1,
+        maximum_bytes=MAX_JSON_BYTES,
     )
+    receipt = _decode_json(payload, noun=noun)
+    if identity[-2:] != (int(os.geteuid()), 0o600):
+        raise SourceBindingMigrationError(
+            "g7 source migration marker is not private and owner-controlled"
+        )
     if pending_exists:
         marker_stat = os.stat(marker, follow_symlinks=False)
         pending_stat = os.stat(pending, follow_symlinks=False)
@@ -1814,7 +1973,7 @@ def _load_migration_marker(
             raise SourceBindingMigrationError(
                 "g7 pending receipt is not the final marker hardlink"
             )
-    return receipt
+    return receipt, identity
 
 
 def _publication_files(target_root: Path) -> tuple[set[Path], set[Path]]:
@@ -1849,88 +2008,264 @@ def _validate_published_stores(
         )
 
 
+def _prepared_stage_path(
+    target_root: Path,
+    receipt: Mapping[str, Any],
+) -> Path:
+    receipt_cid = str(receipt.get("receipt_cid") or "")
+    prefix = "sha256:"
+    digest = receipt_cid[len(prefix) :] if receipt_cid.startswith(prefix) else ""
+    if len(digest) != 64 or any(character not in "0123456789abcdef" for character in digest):
+        raise SourceBindingMigrationError("prepared stage receipt CID is malformed")
+    return target_root.parent / f"{PREPARED_STAGE_PREFIX}{digest}"
+
+
+def _validate_prepared_stage(
+    *,
+    root: Path,
+    target_root: Path,
+    stage_root: Path,
+    receipt: Mapping[str, Any],
+    require_all_stores: bool,
+) -> None:
+    if stage_root != _prepared_stage_path(target_root, receipt):
+        raise SourceBindingMigrationError("prepared stage path does not bind its receipt")
+    _assert_private_directory(stage_root)
+    expected_files = set(_store_relative_files()) | {Path(PREPARED_RECEIPT)}
+    observed_files: set[Path] = set()
+    for path in stage_root.rglob("*"):
+        if path.is_dir() and not path.is_symlink():
+            _assert_private_directory(path)
+            continue
+        relative = path.relative_to(stage_root)
+        if relative not in expected_files:
+            raise SourceBindingMigrationError(
+                f"prepared stage contains unexpected artifact: {relative.as_posix()}"
+            )
+        observed_files.add(relative)
+    if Path(PREPARED_RECEIPT) not in observed_files:
+        raise SourceBindingMigrationError("prepared stage receipt is absent")
+    if require_all_stores and observed_files != expected_files:
+        raise SourceBindingMigrationError("prepared stage store population is incomplete")
+    prepared_receipt = _load_json(
+        stage_root / PREPARED_RECEIPT,
+        root=root,
+        noun="prepared g7 source migration receipt",
+    )
+    if prepared_receipt != dict(receipt):
+        raise SourceBindingMigrationError("prepared stage receipt bytes differ")
+    for relative in set(_store_relative_files()) & observed_files:
+        _validate_published_store(
+            root=root,
+            target_root=stage_root,
+            receipt=receipt,
+            relative=relative,
+        )
+
+
+def _arm_prepared_stage(
+    *,
+    root: Path,
+    target_root: Path,
+    stage_root: Path,
+    receipt: Mapping[str, Any],
+) -> Path:
+    observation_root = stage_root / ".execution-observation-verification"
+    if os.path.lexists(observation_root):
+        shutil.rmtree(observation_root)
+    _write_new_json(stage_root / PREPARED_RECEIPT, receipt)
+    prepared = _prepared_stage_path(target_root, receipt)
+    if os.path.lexists(prepared):
+        raise SourceBindingMigrationError("prepared g7 stage already exists")
+    _assert_private_directory(stage_root)
+    for relative in _store_relative_files():
+        _fsync_private_file(
+            stage_root / relative,
+            noun=f"staged g7 {relative.as_posix()}",
+        )
+    _fsync_private_file(
+        stage_root / PREPARED_RECEIPT,
+        noun="staged g7 source migration receipt",
+    )
+    for path in stage_root.rglob("*"):
+        if path.is_dir() and not path.is_symlink():
+            _assert_private_directory(path)
+            _fsync_directory(path)
+    _fsync_directory(stage_root)
+    os.rename(stage_root, prepared)
+    _fsync_directory(prepared.parent)
+    _validate_prepared_stage(
+        root=root,
+        target_root=target_root,
+        stage_root=prepared,
+        receipt=receipt,
+        require_all_stores=True,
+    )
+    return prepared
+
+
+def _discover_prepared_stage(
+    *,
+    root: Path,
+    target_root: Path,
+    population: Mapping[str, Any],
+) -> tuple[Path, dict[str, Any]] | None:
+    candidates = sorted(target_root.parent.glob(f"{PREPARED_STAGE_PREFIX}*"))
+    if not candidates:
+        return None
+    if len(candidates) != 1:
+        raise SourceBindingMigrationError("prepared g7 stage population is ambiguous")
+    stage_root = candidates[0]
+    _assert_private_directory(stage_root)
+    receipt = _load_json(
+        stage_root / PREPARED_RECEIPT,
+        root=root,
+        noun="orphan prepared g7 source migration receipt",
+    )
+    _validate_receipt_identity(receipt, root=root, population=population)
+    _validate_prepared_stage(
+        root=root,
+        target_root=target_root,
+        stage_root=stage_root,
+        receipt=receipt,
+        require_all_stores=True,
+    )
+    return stage_root, receipt
+
+
+def _validate_renamed_prepared_target(
+    *,
+    root: Path,
+    target_root: Path,
+    receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    _assert_private_directory(target_root)
+    expected_files = set(_store_relative_files()) | {Path(PREPARED_RECEIPT)}
+    observed_files: set[Path] = set()
+    for path in target_root.rglob("*"):
+        if path.is_dir() and not path.is_symlink():
+            _assert_private_directory(path)
+            continue
+        relative = path.relative_to(target_root)
+        if relative not in expected_files:
+            raise SourceBindingMigrationError(
+                f"renamed prepared target contains unexpected artifact: {relative.as_posix()}"
+            )
+        observed_files.add(relative)
+    if observed_files != expected_files:
+        raise SourceBindingMigrationError("renamed prepared target is incomplete")
+    observed_receipt = _load_json(
+        target_root / PREPARED_RECEIPT,
+        root=root,
+        noun="renamed prepared g7 source migration receipt",
+    )
+    if observed_receipt != dict(receipt):
+        raise SourceBindingMigrationError("renamed prepared receipt bytes differ")
+    _validate_published_stores(root=root, target_root=target_root, receipt=receipt)
+    _assert_published_single_links(target_root)
+    return observed_receipt
+
+
+def _assert_published_single_links(target_root: Path) -> None:
+    for relative in _store_relative_files():
+        metadata = os.stat(target_root / relative, follow_symlinks=False)
+        if not stat.S_ISREG(metadata.st_mode) or int(metadata.st_nlink) != 1:
+            raise SourceBindingMigrationError(
+                f"published g7 store retains an unaccounted hardlink: {relative.as_posix()}"
+            )
+
+
 def _finish_pending_publication(
     *,
     root: Path,
     target_root: Path,
     population: Mapping[str, Any],
 ) -> bool:
-    """Finish only an exact all-five-leaf, receipt-last interrupted publish."""
+    """Recover the atomic prepared-directory publication state machine."""
 
-    if os.path.lexists(target_root):
-        _ensure_private_directory(target_root)
     marker = target_root / MIGRATION_MARKER
     pending = target_root / PENDING_MARKER
-    present, unexpected = _publication_files(target_root)
-    if unexpected:
-        raise SourceBindingMigrationError("g7 runtime contains unrecognized partial artifacts")
-    expected = set(_store_relative_files())
-    if os.path.lexists(marker):
-        links = 2 if os.path.lexists(pending) else 1
-        receipt = _load_json(
-            marker,
+    prepared_receipt_path = target_root / PREPARED_RECEIPT
+    if not os.path.lexists(target_root):
+        discovered = _discover_prepared_stage(
             root=root,
+            target_root=target_root,
+            population=population,
+        )
+        if discovered is None:
+            return False
+        stage_root, receipt = discovered
+        _publish_stage(
+            root,
+            stage_root,
+            target_root,
+            _store_relative_files(),
+            receipt,
+        )
+        return True
+
+    _ensure_private_directory(target_root)
+    if os.path.lexists(marker):
+        receipt = _load_migration_marker(
+            root=root,
+            target_root=target_root,
             noun="g7 source migration marker",
-            required_links=links,
         )
         _validate_receipt_identity(receipt, root=root, population=population)
-        if present != expected:
-            raise SourceBindingMigrationError("g7 marker exists without all five stores")
+        present, unexpected = _publication_files(target_root)
+        if unexpected or present != set(_store_relative_files()):
+            raise SourceBindingMigrationError(
+                "g7 marker exists without the exact store population"
+            )
         _validate_published_stores(root=root, target_root=target_root, receipt=receipt)
+        _assert_published_single_links(target_root)
         if os.path.lexists(pending):
-            marker_stat = os.stat(marker, follow_symlinks=False)
-            pending_stat = os.stat(pending, follow_symlinks=False)
-            if (marker_stat.st_dev, marker_stat.st_ino) != (
-                pending_stat.st_dev,
-                pending_stat.st_ino,
-            ):
-                raise SourceBindingMigrationError("g7 pending marker is not the marker hardlink")
             pending.unlink()
             _fsync_directory(target_root)
         return True
-    if present and present != expected:
-        if not os.path.lexists(pending):
+
+    if os.path.lexists(prepared_receipt_path):
+        if os.path.lexists(pending):
             raise SourceBindingMigrationError(
-                "partial g7 store subset exists without a pending receipt"
+                "renamed prepared target has ambiguous receipt state"
             )
         receipt = _load_json(
-            pending,
+            prepared_receipt_path,
             root=root,
-            noun="partial pending g7 source migration receipt",
+            noun="renamed prepared g7 source migration receipt",
         )
         _validate_receipt_identity(receipt, root=root, population=population)
-        for relative in present:
-            _validate_published_store(
-                root=root,
-                target_root=target_root,
-                receipt=receipt,
-                relative=relative,
-            )
-        # Still fail-closed as an authority (there is no final marker), but a
-        # freshly rebuilt, byte-identical stage may fill the missing leaves.
-        return False
-    if present == expected:
-        if not os.path.lexists(pending):
-            raise SourceBindingMigrationError("all g7 stores exist without a pending receipt")
+        _validate_renamed_prepared_target(
+            root=root,
+            target_root=target_root,
+            receipt=receipt,
+        )
+        os.rename(prepared_receipt_path, pending)
+        _fsync_directory(target_root)
+    elif os.path.lexists(pending):
         receipt = _load_json(
             pending,
             root=root,
             noun="pending g7 source migration receipt",
         )
         _validate_receipt_identity(receipt, root=root, population=population)
+        present, unexpected = _publication_files(target_root)
+        if unexpected or present != set(_store_relative_files()):
+            raise SourceBindingMigrationError(
+                "pending g7 receipt lacks the exact atomic store population"
+            )
         _validate_published_stores(root=root, target_root=target_root, receipt=receipt)
-        os.link(pending, marker, follow_symlinks=False)
-        _fsync_directory(target_root)
-        pending.unlink()
-        _fsync_directory(target_root)
-        return True
-    # A pending receipt written before the first leaf is safe to resume only
-    # after the freshly rebuilt stage proves it is byte-identical.
-    if present == set() and (
-        not os.path.lexists(pending) or pending.is_file() and not pending.is_symlink()
-    ):
-        return False
-    raise SourceBindingMigrationError("g7 pending publication state is malformed")
+        _assert_published_single_links(target_root)
+    else:
+        raise SourceBindingMigrationError(
+            "g7 runtime exists without prepared, pending, or final receipt"
+        )
+
+    os.link(pending, marker, follow_symlinks=False)
+    _fsync_directory(target_root)
+    pending.unlink()
+    _fsync_directory(target_root)
+    return True
 
 
 def _publish_stage(
@@ -1940,49 +2275,41 @@ def _publish_stage(
     relative_files: Sequence[Path],
     receipt: Mapping[str, Any],
 ) -> None:
-    if os.path.lexists(target_root / MIGRATION_MARKER):
-        raise SourceBindingMigrationError("g7 migration marker already exists")
-    _ensure_private_directory(target_root)
+    if tuple(relative_files) != _store_relative_files():
+        raise SourceBindingMigrationError("prepared publication store order differs")
+    if os.path.lexists(target_root):
+        raise SourceBindingMigrationError("g7 target already exists before atomic publish")
+    _validate_prepared_stage(
+        root=root,
+        target_root=target_root,
+        stage_root=stage_root,
+        receipt=receipt,
+        require_all_stores=True,
+    )
+    os.rename(stage_root, target_root)
+    _fsync_directory(target_root.parent)
+    prepared_receipt_path = target_root / PREPARED_RECEIPT
     pending = target_root / PENDING_MARKER
-    if os.path.lexists(pending):
-        pending_receipt = _load_json(
-            pending,
-            root=root,
-            noun="pending g7 source migration receipt",
-        )
-        if pending_receipt != dict(receipt):
-            raise SourceBindingMigrationError("pending g7 receipt differs from rebuilt stage")
-    else:
-        _write_new_json(pending, receipt)
-        _fsync_directory(target_root)
-    created: list[Path] = []
-    for relative in relative_files:
-        source = stage_root / relative
-        target = target_root / relative
-        current_parent = target_root
-        for part in relative.parent.parts:
-            current_parent = current_parent / part
-            _ensure_private_directory(current_parent)
-        if os.path.lexists(target):
-            _validate_published_store(
-                root=root,
-                target_root=target_root,
-                receipt=receipt,
-                relative=relative,
-            )
-            continue
-        _fsync_regular(source)
-        os.link(source, target, follow_symlinks=False)
-        created.append(target)
-        _fsync_directory(target.parent)
-    _validate_published_stores(root=root, target_root=target_root, receipt=receipt)
     marker = target_root / MIGRATION_MARKER
+    published_receipt = _validate_renamed_prepared_target(
+        root=root,
+        target_root=target_root,
+        receipt=receipt,
+    )
+    if published_receipt != dict(receipt):
+        raise SourceBindingMigrationError("atomic prepared receipt changed during rename")
+    os.rename(prepared_receipt_path, pending)
+    _fsync_directory(target_root)
+    _validate_published_stores(root=root, target_root=target_root, receipt=receipt)
+    _assert_published_single_links(target_root)
     os.link(pending, marker, follow_symlinks=False)
     _fsync_directory(target_root)
     pending.unlink()
     _fsync_directory(target_root)
     # The receipt is the last externally meaningful target leaf.
-    if not all(os.path.lexists(path) for path in (*created, marker)):
+    if not all(
+        os.path.lexists(target_root / relative) for relative in (*relative_files, Path(MIGRATION_MARKER))
+    ):
         raise SourceBindingMigrationError("g7 publication did not retain all committed leaves")
 
 
@@ -2018,6 +2345,16 @@ def migrate_source_binding(
             )
             pending.unlink()
             _fsync_directory(target_root)
+        observed = _load_migration_marker(
+            root=root,
+            target_root=target_root,
+            noun="completed g7 source migration marker",
+        )
+        if observed != result["receipt"]:
+            raise SourceBindingMigrationError(
+                "completed g7 source migration marker changed"
+            )
+        _assert_source_delta(root, population, policy)
         return result
     from ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server import (
         offline_state_server_fence,
@@ -2036,6 +2373,7 @@ def migrate_source_binding(
     lock_path = target_root.parent / LOCK_NAME
     lock_path.parent.mkdir(parents=True, mode=0o700, exist_ok=True)
     descriptor: int | None = None
+    lock_identity: tuple[int, int] | None = None
     stage_root: Path | None = None
     try:
         predecessor_connection = predecessor_fence.__enter__()
@@ -2044,11 +2382,7 @@ def migrate_source_binding(
             policy,
             _fenced_connection=predecessor_connection,
         )
-        descriptor = os.open(
-            lock_path,
-            os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0),
-            0o600,
-        )
+        descriptor, lock_identity = _open_migration_lock(lock_path)
         deadline = time.monotonic() + 10.0
         while True:
             try:
@@ -2058,17 +2392,21 @@ def migrate_source_binding(
                 if time.monotonic() >= deadline:
                     raise SourceBindingMigrationError("timed out acquiring g7 migration lock") from exc
                 time.sleep(0.02)
+        _assert_migration_lock_identity(lock_path, descriptor, lock_identity)
         if _finish_pending_publication(
             root=root,
             target_root=target_root,
             population=population,
         ):
-            return check_source_binding(
+            result = check_source_binding(
                 root=root,
                 config=config,
                 population=population,
                 allow_progressed=False,
             )
+            _assert_migration_lock_identity(lock_path, descriptor, lock_identity)
+            _assert_source_delta(root, population, policy)
+            return result
         stage_root = Path(
             tempfile.mkdtemp(prefix=".pctdd-g7-installing.", dir=target_root.parent)
         )
@@ -2138,6 +2476,12 @@ def migrate_source_binding(
             suffix,
         )
         receipt = _receipt(population, policy, prior["control_projection"], verified)
+        stage_root = _arm_prepared_stage(
+            root=root,
+            target_root=target_root,
+            stage_root=stage_root,
+            receipt=receipt,
+        )
         relative_files = _store_relative_files()
         _assert_source_delta(root, population, policy)
         _assert_prior_anchor(
@@ -2145,7 +2489,17 @@ def migrate_source_binding(
             policy,
             _fenced_connection=predecessor_connection,
         )
+        _assert_migration_lock_identity(lock_path, descriptor, lock_identity)
         _publish_stage(root, stage_root, target_root, relative_files, receipt)
+        observed = _load_migration_marker(
+            root=root,
+            target_root=target_root,
+            noun="published g7 source migration marker",
+        )
+        if observed != receipt:
+            raise SourceBindingMigrationError("published g7 migration receipt changed")
+        _assert_migration_lock_identity(lock_path, descriptor, lock_identity)
+        _assert_source_delta(root, population, policy)
         return {
             "schema": CHECK_SCHEMA,
             "valid": True,
@@ -2163,7 +2517,13 @@ def migrate_source_binding(
                 pass
             os.close(descriptor)
         if stage_root is not None and stage_root.exists():
-            shutil.rmtree(stage_root)
+            preserve_for_restart = (
+                stage_root.name.startswith(PREPARED_STAGE_PREFIX)
+                and os.path.lexists(target_root / PENDING_MARKER)
+                and not os.path.lexists(target_root / MIGRATION_MARKER)
+            )
+            if not preserve_for_restart:
+                shutil.rmtree(stage_root)
         if predecessor_connection is not None:
             predecessor_fence.__exit__(None, None, None)
 
@@ -2408,6 +2768,32 @@ def _verify_source_binding_target(
     }
 
 
+def _finalize_source_binding_check(
+    *,
+    root: Path,
+    target_root: Path,
+    population: Mapping[str, Any],
+    policy: Mapping[str, Any],
+    receipt: Mapping[str, Any],
+    marker_identity: tuple[int, ...],
+    result: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Revalidate the two mutable inputs immediately before admission."""
+
+    observed_receipt, observed_identity = _load_migration_marker_snapshot(
+        root=root,
+        target_root=target_root,
+        noun="final g7 source migration marker",
+    )
+    if observed_receipt != dict(receipt) or observed_identity != marker_identity:
+        raise SourceBindingMigrationError(
+            "g7 source migration marker changed during verification"
+        )
+    _validate_receipt_identity(observed_receipt, root=root, population=population)
+    _assert_source_delta(root, population, policy)
+    return dict(result)
+
+
 def check_source_binding(
     *,
     root: Path,
@@ -2425,8 +2811,7 @@ def check_source_binding(
     if not os.path.lexists(target_root):
         raise SourceBindingMigrationError("g7 runtime root is absent")
     _ensure_private_directory(target_root)
-    marker = target_root / MIGRATION_MARKER
-    receipt = _load_migration_marker(
+    receipt, marker_identity = _load_migration_marker_snapshot(
         root=root,
         target_root=target_root,
         noun="g7 source migration marker",
@@ -2462,15 +2847,16 @@ def check_source_binding(
                 ),
             ):
                 # Revalidate the receipt while the canonical owner fence is held.
-                if _load_json(
-                    marker,
+                fenced_receipt, fenced_identity = _load_migration_marker_snapshot(
                     root=root,
+                    target_root=target_root,
                     noun="fenced g7 source migration marker",
-                ) != receipt:
+                )
+                if fenced_receipt != receipt or fenced_identity != marker_identity:
                     raise SourceBindingMigrationError(
                         "g7 source migration marker changed before fenced inspection"
                     )
-                return _verify_source_binding_target(
+                result = _verify_source_binding_target(
                     root=root,
                     population=population,
                     policy=policy,
@@ -2481,13 +2867,22 @@ def check_source_binding(
                     live_owner=None,
                     allow_progressed=allow_progressed,
                 )
+                return _finalize_source_binding_check(
+                    root=root,
+                    target_root=target_root,
+                    population=population,
+                    policy=policy,
+                    receipt=receipt,
+                    marker_identity=marker_identity,
+                    result=result,
+                )
         except SourceBindingMigrationError:
             raise
         except Exception as exc:
             raise SourceBindingMigrationError(
                 "g7 offline authority could not be fenced"
             ) from exc
-    return _verify_source_binding_target(
+    result = _verify_source_binding_target(
         root=root,
         population=population,
         policy=policy,
@@ -2497,6 +2892,15 @@ def check_source_binding(
         control_target=str(policy["target_quack_endpoint"]),
         live_owner=live_owner,
         allow_progressed=allow_progressed,
+    )
+    return _finalize_source_binding_check(
+        root=root,
+        target_root=target_root,
+        population=population,
+        policy=policy,
+        receipt=receipt,
+        marker_identity=marker_identity,
+        result=result,
     )
 
 

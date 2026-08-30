@@ -107,39 +107,114 @@ def _reject_duplicate_keys(pairs: Sequence[tuple[str, Any]]) -> dict[str, Any]:
 
 
 def _json_object(path: Path) -> dict[str, Any]:
-    """Read one bounded regular JSON object without following a final symlink."""
+    """Read one stable bounded JSON object through its checked descriptor."""
 
+    target = _contained(path)
+    flags = (
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+        | getattr(os, "O_NONBLOCK", 0)
+    )
     try:
-        metadata = os.lstat(path)
+        descriptor = os.open(target, flags)
     except OSError as exc:
-        raise OperatorError(f"required JSON artifact is unavailable: {path}") from exc
+        raise OperatorError(f"required JSON artifact is unavailable: {target}") from exc
+    try:
+        before = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(before.st_mode)
+            or before.st_uid != os.geteuid()
+            or before.st_nlink != 1
+            or not 0 <= before.st_size <= MAX_JSON_BYTES
+        ):
+            raise OperatorError(
+                f"JSON artifact is not a bounded regular file: {target}"
+            )
+        raw = bytearray()
+        while len(raw) <= MAX_JSON_BYTES:
+            chunk = os.read(
+                descriptor,
+                min(64 * 1024, MAX_JSON_BYTES + 1 - len(raw)),
+            )
+            if not chunk:
+                break
+            raw.extend(chunk)
+        after = os.fstat(descriptor)
+    except OSError as exc:
+        raise OperatorError(f"JSON artifact cannot be read safely: {target}") from exc
+    finally:
+        os.close(descriptor)
+    if len(raw) > MAX_JSON_BYTES:
+        raise OperatorError(f"JSON artifact is not a bounded regular file: {target}")
+    stable_fields = (
+        "st_dev",
+        "st_ino",
+        "st_mode",
+        "st_size",
+        "st_mtime_ns",
+        "st_ctime_ns",
+        "st_nlink",
+        "st_uid",
+    )
     if (
-        stat.S_ISLNK(metadata.st_mode)
-        or not stat.S_ISREG(metadata.st_mode)
-        or metadata.st_size > MAX_JSON_BYTES
+        any(getattr(before, key) != getattr(after, key) for key in stable_fields)
+        or len(raw) != after.st_size
     ):
-        raise OperatorError(f"JSON artifact is not a bounded regular file: {path}")
+        raise OperatorError(f"JSON artifact changed while being read: {target}")
+    try:
+        current = os.lstat(target)
+    except OSError as exc:
+        raise OperatorError(f"JSON artifact changed while being read: {target}") from exc
+    if (current.st_dev, current.st_ino) != (after.st_dev, after.st_ino):
+        raise OperatorError(f"JSON artifact changed while being read: {target}")
     try:
         payload = json.loads(
-            path.read_text(encoding="utf-8"),
+            raw.decode("utf-8"),
             object_pairs_hook=_reject_duplicate_keys,
             parse_constant=lambda value: (_ for _ in ()).throw(
                 OperatorError(f"non-finite JSON number: {value}")
             ),
         )
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise OperatorError(f"JSON artifact is malformed: {path}") from exc
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise OperatorError(f"JSON artifact is malformed: {target}") from exc
     if not isinstance(payload, dict):
-        raise OperatorError(f"JSON artifact must be an object: {path}")
+        raise OperatorError(f"JSON artifact must be an object: {target}")
     return payload
 
 
 def _contained(path: Path) -> Path:
+    """Confine a runtime path and reject every existing linked component."""
+
+    root = Path(os.path.abspath(ROOT))
     candidate = Path(os.path.abspath(path))
     try:
-        candidate.relative_to(ROOT)
+        relative = candidate.relative_to(root)
     except ValueError as exc:
         raise OperatorError(f"runtime path escapes the repository: {candidate}") from exc
+    components = (
+        root,
+        *(
+            root / Path(*relative.parts[:index])
+            for index in range(1, len(relative.parts) + 1)
+        ),
+    )
+    for index, component in enumerate(components):
+        try:
+            observed = os.lstat(component)
+        except FileNotFoundError:
+            break
+        except OSError as exc:
+            raise OperatorError(
+                f"runtime path custody cannot be verified: {component}"
+            ) from exc
+        is_intermediate = index == 0 or index < len(components) - 1
+        if (
+            stat.S_ISLNK(observed.st_mode)
+            or (is_intermediate and not stat.S_ISDIR(observed.st_mode))
+            or observed.st_uid != os.geteuid()
+        ):
+            raise OperatorError(f"runtime path custody is unsafe: {component}")
     return candidate
 
 
@@ -153,15 +228,32 @@ def _private_directory(path: Path) -> Path:
     """Create an owned, non-linked, mode-0700 directory inside the checkout."""
 
     directory = _contained(path)
-    directory.mkdir(parents=True, exist_ok=True)
-    observed = os.lstat(directory)
-    if (
-        stat.S_ISLNK(observed.st_mode)
-        or not stat.S_ISDIR(observed.st_mode)
-        or observed.st_uid != os.geteuid()
-    ):
-        raise OperatorError(f"runtime directory custody is unsafe: {directory}")
+    root = Path(os.path.abspath(ROOT))
+    current = root
+    for component in directory.relative_to(root).parts:
+        current /= component
+        try:
+            os.mkdir(current, 0o700)
+        except FileExistsError:
+            pass
+        except OSError as exc:
+            raise OperatorError(
+                f"runtime directory cannot be created safely: {current}"
+            ) from exc
+        try:
+            observed = os.lstat(current)
+        except OSError as exc:
+            raise OperatorError(
+                f"runtime directory custody cannot be verified: {current}"
+            ) from exc
+        if (
+            stat.S_ISLNK(observed.st_mode)
+            or not stat.S_ISDIR(observed.st_mode)
+            or observed.st_uid != os.geteuid()
+        ):
+            raise OperatorError(f"runtime directory custody is unsafe: {current}")
     os.chmod(directory, 0o700)
+    _contained(directory)
     return directory
 
 
@@ -311,7 +403,7 @@ def _run(
     )
     try:
         stdout_text, stderr_text = process.communicate(timeout=timeout)
-    except subprocess.TimeoutExpired:
+    except subprocess.TimeoutExpired as exc:
         _ensure_import_path()
         from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
             terminate_process_with_grace,
@@ -324,8 +416,10 @@ def _run(
         )
         process.communicate()
         if terminated.timed_out:
-            raise OperatorError("operator child process tree did not terminate")
-        raise OperatorError("operator child process timed out")
+            raise OperatorError(
+                "operator child process tree did not terminate"
+            ) from exc
+        raise OperatorError("operator child process timed out") from exc
     stdout = stdout_text.strip()
     parsed: Any = None
     if stdout:
@@ -626,6 +720,14 @@ def _cross_check_owner_lifecycle(
     if inspection.get("available") is not True:
         return result
     latest = inspection.get("latest")
+    latest_status = (
+        str(latest.get("status") or "") if isinstance(latest, Mapping) else ""
+    )
+    if liveness in {"absent", "dead"} and latest_status in {"starting", "ready"}:
+        result["lifecycle"] = "stale"
+        result["lifecycle_consistent"] = False
+        result["reason_code"] = "authoritative_server_owner_not_live"
+        return result
     identity = owner.get("identity")
     if not isinstance(latest, Mapping) or not isinstance(identity, Mapping):
         result["lifecycle_consistent"] = latest is None and identity in (None, {})
