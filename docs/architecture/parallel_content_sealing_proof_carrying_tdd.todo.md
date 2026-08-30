@@ -2197,3 +2197,24 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Validation: test -f /home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6/state/discovery/2026-08-30-pctdd-057-reconciliation-dd4e5cb3d841.md
 - Acceptance: Reconciliation guardrail filed this because 2 branch or worktree cleanup candidates are blocked by main_checkout_dirty. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6/state/discovery/2026-08-30-pctdd-057-reconciliation-dd4e5cb3d841.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## PCTDD-058 Resolve dirty main checkout blocking 2 worktree merges
+
+- Status: blocked
+- Completion: manual
+- Is schedulable: false
+- Review only: true
+- Blocked reason: operator_reconciliation_required
+- Priority: P1
+- Track: ops
+- Fingerprint: 3ddfb82613dbd0156fa9cf1bb1257fb4a99f68d0
+- Dedupe key: reconciliation_guardrail:main_checkout_dirty
+- Depends on:
+- Outputs: data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6/state/discovery, docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md
+- Board namespace: parallel-content-sealing-proof-carrying-tdd-v1
+- Goal id: PCTDD-G062
+- Bundle: pctdd/pctdd-g062/pctdd-053
+- Parallel lane: pctdd-lane-1
+- Resource class: cpu-medium; explicit prover/hash/store reservations when required
+- Validation: test -f /home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6/state/discovery/2026-08-30-pctdd-058-reconciliation-3ddfb82613db.md
+- Acceptance: Reconciliation guardrail filed this because 2 branch or worktree cleanup candidates are blocked by main_checkout_dirty. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6/state/discovery/2026-08-30-pctdd-058-reconciliation-3ddfb82613db.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
