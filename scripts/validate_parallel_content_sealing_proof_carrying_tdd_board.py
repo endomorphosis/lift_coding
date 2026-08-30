@@ -105,6 +105,12 @@ W1_RESCUE_CANDIDATES = {
     "PCTDD-003": "37ccf1a42d7bbf0a6cad0a20a7671ddc0cbffac6",
     "PCTDD-004": "2b37146f4f2f354ced02ca5327d0a7d21344f044",
 }
+FROZEN_G5_RESCUE_BRANCH_PREFIX_COUNTS = {
+    "refs/heads/rescue/pctdd-001-3c1c70df54d4-": 7,
+    "refs/heads/rescue/pctdd-002-28ace0eab61e-": 7,
+    "refs/heads/rescue/pctdd-003-783b342df728-": 8,
+    "refs/heads/rescue/pctdd-004-1f308616e139-": 7,
+}
 PCTDD_004_COMPONENT_COMMIT = "48edb688ac31bc3d05fdd5c8efd7e50ab14b755e"
 PCTDD_004_COMPONENT_PARENT = "cfbd381ee6196e818ecd59a438386a60b5d71bd7"
 
@@ -743,6 +749,20 @@ def validate() -> dict[str, Any]:
         errors.append("task authority must use the fresh g6 store generation")
     if database.get("quack_endpoint") != "quack:127.0.0.1:42778":
         errors.append("g6 Quack endpoint differs")
+    expected_owner_management = {
+        "mode": "managed_local",
+        "owner_state_dir": str((ROOT / RUNTIME_ROOT / "quack-owner").resolve()),
+        "startup_timeout_seconds": 120.0,
+        "health_check_interval_seconds": 5.0,
+        "max_restart_attempts": 3,
+        "initial_backoff_seconds": 1.0,
+        "max_backoff_seconds": 10.0,
+        "termination_grace_seconds": 40.0,
+    }
+    if database.get("owner_management") != expected_owner_management:
+        errors.append(
+            "g6 Quack owner management must use the exact fenced managed-local policy"
+        )
     for name in ("store_id", "event_store_path", "runtime_registry_path", "worktree_root"):
         if not str(database.get(name) or "").startswith(RUNTIME_ROOT + "/"):
             errors.append(f"database_program.{name} does not use the g6 runtime root")
@@ -838,8 +858,13 @@ def validate() -> dict[str, Any]:
         for line in _git("for-each-ref", "--format=%(refname)", "refs/heads/rescue").splitlines()
         if line.startswith("refs/heads/rescue/pctdd-")
     ]
-    if len(rescue_refs) != 29:
-        errors.append("g5 PCTDD failed-validation rescue branch population differs")
+    for prefix, expected_count in FROZEN_G5_RESCUE_BRANCH_PREFIX_COUNTS.items():
+        actual_count = sum(ref.startswith(prefix) for ref in rescue_refs)
+        if actual_count != expected_count:
+            errors.append(
+                "g5 PCTDD failed-validation rescue branch population differs "
+                f"for {prefix}: expected {expected_count}, observed {actual_count}"
+            )
     for task_id, commit in W1_RESCUE_CANDIDATES.items():
         if subprocess.run(
             ["git", "cat-file", "-e", f"{commit}^{{commit}}"],

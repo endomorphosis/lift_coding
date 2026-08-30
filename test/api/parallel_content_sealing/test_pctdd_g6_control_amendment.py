@@ -41,6 +41,22 @@ def test_g6_amendment_has_exact_generation_and_component_safe_migration() -> Non
     assert config["database_program"]["predecessor_store_generation"] == "pctdd-v1-g5"
     assert config["database_program"]["predecessor_is_read_only_history"] is True
     assert config["database_program"]["quack_endpoint"] == "quack:127.0.0.1:42778"
+    owner_management = config["database_program"]["owner_management"]
+    assert owner_management == {
+        "mode": "managed_local",
+        "owner_state_dir": str(
+            (
+                ROOT
+                / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6/quack-owner"
+            ).resolve()
+        ),
+        "startup_timeout_seconds": 120.0,
+        "health_check_interval_seconds": 5.0,
+        "max_restart_attempts": 3,
+        "initial_backoff_seconds": 1.0,
+        "max_backoff_seconds": 10.0,
+        "termination_grace_seconds": 40.0,
+    }
     assert "_g6/" in config["database_program"]["store_id"]
     assert "_g6/ducklake/" in config["ducklake_projection_program"]["catalog_path"]
     assert config["initial_projection"]["completed_task_ids"] == []
