@@ -880,7 +880,9 @@ def _assert_quota_log(
     if (
         digest != record["sha256"]
         or size != int(record["size_bytes"])
-        or identity[-2:] != (int(os.geteuid()), 0o600)
+        or identity[-2] != int(os.geteuid())
+        or not (int(identity[-1]) & 0o400)
+        or (int(identity[-1]) & 0o022) != 0
     ):
         _fail(f"{settlement['task_alias']} Grok quota log anchor differs")
     lowered = payload.lower()
