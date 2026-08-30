@@ -73,6 +73,12 @@ SOURCE_PATHS = {
     "ipfs_datasets_py": "external/ipfs_datasets",
     "ipfs_kit_py": "external/ipfs_kit",
 }
+FROZEN_G5_RESCUE_BRANCH_PREFIX_COUNTS = {
+    "refs/heads/rescue/pctdd-001-3c1c70df54d4-": 7,
+    "refs/heads/rescue/pctdd-002-28ace0eab61e-": 7,
+    "refs/heads/rescue/pctdd-003-783b342df728-": 8,
+    "refs/heads/rescue/pctdd-004-1f308616e139-": 7,
+}
 
 
 def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -629,13 +635,25 @@ def validate() -> dict[str, Any]:
         errors.append("PCTDD-004 outer rescue commit does not bind the component commit")
     if len(outer_parent_gitlink) < 3 or outer_parent_gitlink[2] != component.get("prior_gitlink"):
         errors.append("PCTDD-004 outer parent does not bind the prior component gitlink")
-    rescue_count = sum(
-        1
-        for ref in _git("for-each-ref", "--format=%(refname)", "refs/heads/rescue").splitlines()
+    rescue_refs = [
+        ref
+        for ref in _git(
+            "for-each-ref", "--format=%(refname)", "refs/heads/rescue"
+        ).splitlines()
         if ref.startswith("refs/heads/rescue/pctdd-")
-    )
-    if rescue_count != int(predecessor.get("preserved_failed_validation_rescue_branch_count") or -1):
-        errors.append("g5 PCTDD rescue-branch population differs")
+    ]
+    frozen_rescue_count = sum(FROZEN_G5_RESCUE_BRANCH_PREFIX_COUNTS.values())
+    if frozen_rescue_count != int(
+        predecessor.get("preserved_failed_validation_rescue_branch_count") or -1
+    ):
+        errors.append("g5 PCTDD frozen rescue-branch count binding differs")
+    for prefix, expected_count in FROZEN_G5_RESCUE_BRANCH_PREFIX_COUNTS.items():
+        actual_count = sum(ref.startswith(prefix) for ref in rescue_refs)
+        if actual_count != expected_count:
+            errors.append(
+                "g5 PCTDD failed-validation rescue branch population differs "
+                f"for {prefix}: expected {expected_count}, observed {actual_count}"
+            )
 
     artifact_hashes = _validate_artifacts(seal, errors)
     control_manifest_path = ROOT / CONTROL_MANIFEST_RELATIVE
