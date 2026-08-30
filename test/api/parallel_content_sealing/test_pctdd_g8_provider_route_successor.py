@@ -176,14 +176,14 @@ def _policy(migration: Any, database: Path) -> tuple[dict[str, Any], dict[str, A
     for alias, lane in (("PCTDD-001", 0), ("PCTDD-029", 1)):
         task = tasks[alias]
         prior_receipt = dict(task["body"]["completion_receipt"])
-        with DatabaseTaskSource(
-            database,
-            owner_id="pctdd-g8-test:queue",
-            install_schema=False,
-        ) as source:
-            queue = source.intent.get_queue_entry(task["task_cid"])
-            assert queue is not None
-            prior_queue = queue.to_dict()
+        queue_probe = migration.g7._open_local_database(database, read_only=True)
+        try:
+            prior_queue_state = migration._queue_state_from_connection(
+                queue_probe,
+                task_cid=task["task_cid"],
+            )
+        finally:
+            queue_probe.close()
         log_record = {
             "path": f"synthetic/lane-{lane}.log",
             "sha256": "0" * 64,
@@ -236,8 +236,10 @@ def _policy(migration: Any, database: Path) -> tuple[dict[str, Any], dict[str, A
                 "coordination_projection_root": f"projection:prior:{lane}",
                 "prior_completion_receipt": prior_receipt,
                 "prior_completion_receipt_cid": migration.g7._identity(prior_receipt),
-                "prior_queue_entry": prior_queue,
-                "prior_queue_entry_cid": migration.g7._identity(prior_queue),
+                "prior_queue_state": prior_queue_state,
+                "prior_queue_state_cid": migration.g7._identity(
+                    prior_queue_state
+                ),
                 "pre_effect_log": log_record,
                 "pre_effect_evidence": evidence,
                 "retry_budget": {
@@ -340,6 +342,69 @@ def test_control_suffix_revises_only_incomplete_provider_roles(
             assert queue is not None
             assert queue.retry_not_before_ms == 0
             assert queue.selection_penalty == 0
+
+
+def test_absent_queue_rows_are_sealed_and_preserved_without_retry_events(
+    migration: Any, tmp_path: Path
+) -> None:
+    database = _control(migration, tmp_path)
+    connection = migration.g7._open_local_database(database, read_only=False)
+    try:
+        connection.execute(
+            "DELETE FROM leases WHERE task_cid IN "
+            "(SELECT task_cid FROM tasks WHERE task_alias IN (?,?))",
+            list(migration.EXPECTED_TASK_ALIASES),
+        )
+        connection.execute("CHECKPOINT")
+    finally:
+        connection.close()
+    policy, binding = _policy(migration, database)
+    assert {
+        item["prior_queue_state"]["disposition"]
+        for item in policy["settlements"]
+    } == {"absent"}
+    migration._policy({"source_provider_route_successor_materialization": policy})
+    prior = migration.g7._control_projection(database)
+    settled = [
+        {**item, "post_projection_root": f"projection:post:{item['lane']}"}
+        for item in policy["settlements"]
+    ]
+    suffix = migration._apply_control_suffix(
+        database,
+        root=tmp_path,
+        population=_population(),
+        policy={**policy, "repository_root": str(tmp_path)},
+        route_binding=binding,
+        coordination_settlements=settled,
+        prior_projection=prior,
+    )
+    post = migration.g7._control_projection(database)
+    assert post["event_count"] == prior["event_count"] + 7
+    assert all(
+        item["queue_retry_event_id"] is None
+        and item["queue_disposition"] == "absent"
+        for item in suffix["status_receipts"]
+    )
+    connection = migration.g7._open_local_database(database, read_only=True)
+    try:
+        assert connection.execute("SELECT COUNT(*) FROM leases").fetchone()[0] == 0
+    finally:
+        connection.close()
+
+
+def test_queue_policy_rejects_a_cleared_or_fabricated_predecessor(
+    migration: Any, tmp_path: Path
+) -> None:
+    database = _control(migration, tmp_path)
+    policy, _binding = _policy(migration, database)
+    settlement = policy["settlements"][0]
+    state = settlement["prior_queue_state"]
+    state["entry"]["retry_not_before_ms"] = 0
+    settlement["prior_queue_state_cid"] = migration.g7._identity(state)
+    with pytest.raises(migration.ProviderRouteSuccessorError):
+        migration._policy(
+            {"source_provider_route_successor_materialization": policy}
+        )
 
 
 def test_policy_rejects_a_self_authorizing_or_effectful_quota_claim(

@@ -75,6 +75,10 @@ LOCK_NAME: Final[str] = ".pctdd-g8-provider-route-migration.lock"
 DATABASE_RETRY_BUDGET_SCHEMA: Final[str] = (
     "ipfs_accelerate_py/agent-supervisor/database-retry-budget@1"
 )
+QUEUE_ENTRY_SCHEMA: Final[str] = (
+    "ipfs_accelerate_py/agent-supervisor/intent-queue-entry@1"
+)
+QUEUE_STATE_SCHEMA: Final[str] = "pctdd/sealed-intent-queue-state@1"
 MAX_UNKNOWN_OUTCOME_REARMS: Final[int] = 3
 EXPECTED_TASK_ALIASES: Final[tuple[str, str]] = ("PCTDD-001", "PCTDD-029")
 EXPECTED_ROUTE: Final[dict[str, str]] = {
@@ -263,6 +267,143 @@ def _validate_prior_blocked_receipt(
     return receipt
 
 
+def _queue_state_from_connection(
+    connection: Any,
+    *,
+    task_cid: str,
+) -> dict[str, Any]:
+    """Capture one task's exact queue disposition from the fenced control DB."""
+
+    active_blocks = int(
+        connection.execute(
+            "SELECT COUNT(*) FROM task_blocks WHERE task_cid=? AND state='active'",
+            [task_cid],
+        ).fetchone()[0]
+    )
+    if active_blocks:
+        _fail(f"{task_cid} retains an unreviewed active task block")
+    row = connection.execute(
+        "SELECT attempt,retry_not_before_ms,state,release_reason,"
+        "extension_schema,extension_json,revision FROM leases WHERE task_cid=?",
+        [task_cid],
+    ).fetchone()
+    if row is None:
+        return {
+            "schema": QUEUE_STATE_SCHEMA,
+            "task_cid": task_cid,
+            "disposition": "absent",
+            "active_task_blocks": 0,
+            "entry": None,
+            "lease_revision": None,
+            "extension_schema": None,
+        }
+    try:
+        extension = json.loads(str(row[5]))
+    except (TypeError, ValueError, json.JSONDecodeError) as exc:
+        _fail(f"{task_cid} queue extension is not canonical JSON", exc)
+    if not isinstance(extension, Mapping) or set(extension) != {
+        "selection_penalty",
+        "consecutive_failures",
+        "reason",
+    }:
+        _fail(f"{task_cid} queue extension fields differ")
+    if (
+        type(row[0]) is not int
+        or type(row[1]) is not int
+        or type(row[6]) is not int
+        or type(extension["selection_penalty"]) is not int
+        or type(extension["consecutive_failures"]) is not int
+        or not isinstance(extension["reason"], str)
+    ):
+        _fail(f"{task_cid} queue integer/string types differ")
+    entry = {
+        "schema": QUEUE_ENTRY_SCHEMA,
+        "task_cid": task_cid,
+        "attempt": int(row[0]),
+        "retry_not_before_ms": int(row[1] or 0),
+        "selection_penalty": int(extension["selection_penalty"] or 0),
+        "consecutive_failures": int(extension["consecutive_failures"] or 0),
+        "state": str(row[2] or "released"),
+        "reason": str(row[3] or extension["reason"] or ""),
+    }
+    return {
+        "schema": QUEUE_STATE_SCHEMA,
+        "task_cid": task_cid,
+        "disposition": "clear_exact_backoff",
+        "active_task_blocks": 0,
+        "entry": entry,
+        "lease_revision": int(row[6]),
+        "extension_schema": str(row[4] or ""),
+    }
+
+
+def _validate_prior_queue_state(settlement: Mapping[str, Any]) -> dict[str, Any]:
+    raw = settlement.get("prior_queue_state")
+    if not isinstance(raw, Mapping):
+        _fail("g8 settlement lacks its sealed predecessor queue state")
+    state = dict(raw)
+    if (
+        set(state)
+        != {
+            "schema",
+            "task_cid",
+            "disposition",
+            "active_task_blocks",
+            "entry",
+            "lease_revision",
+            "extension_schema",
+        }
+        or state.get("schema") != QUEUE_STATE_SCHEMA
+        or state.get("task_cid") != settlement.get("task_cid")
+        or type(state.get("active_task_blocks")) is not int
+        or state.get("active_task_blocks") != 0
+        or settlement.get("prior_queue_state_cid") != g7._identity(state)
+    ):
+        _fail("g8 predecessor queue-state binding differs")
+    disposition = state.get("disposition")
+    entry = state.get("entry")
+    if disposition == "absent":
+        if (
+            entry is not None
+            or state.get("lease_revision") is not None
+            or state.get("extension_schema") is not None
+        ):
+            _fail("g8 absent queue state contains a lease")
+        return state
+    if disposition != "clear_exact_backoff" or not isinstance(entry, Mapping):
+        _fail("g8 queue disposition is not closed")
+    expected_entry_fields = {
+        "schema",
+        "task_cid",
+        "attempt",
+        "retry_not_before_ms",
+        "selection_penalty",
+        "consecutive_failures",
+        "state",
+        "reason",
+    }
+    if (
+        set(entry) != expected_entry_fields
+        or entry.get("schema") != QUEUE_ENTRY_SCHEMA
+        or entry.get("task_cid") != settlement.get("task_cid")
+        or type(entry.get("attempt")) is not int
+        or entry.get("attempt", 0) < 1
+        or type(entry.get("retry_not_before_ms")) is not int
+        or entry.get("retry_not_before_ms", 0) <= 0
+        or type(entry.get("selection_penalty")) is not int
+        or entry.get("selection_penalty", -1) < 0
+        or type(entry.get("consecutive_failures")) is not int
+        or entry.get("consecutive_failures", 0) < 1
+        or entry.get("state") != "released"
+        or entry.get("reason") != "provider_capacity_backoff"
+        or type(state.get("lease_revision")) is not int
+        or state.get("lease_revision", 0) < 1
+        or state.get("extension_schema") != QUEUE_ENTRY_SCHEMA
+    ):
+        _fail("g8 exact clearable queue backoff differs")
+    return state
+
+
 def _policy(config: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     raw = config.get("source_provider_route_successor_materialization")
     if not isinstance(raw, Mapping):
@@ -328,8 +469,8 @@ def _policy(config: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
             "coordination_projection_root",
             "prior_completion_receipt_cid",
             "pre_effect_log",
-            "prior_queue_entry",
-            "prior_queue_entry_cid",
+            "prior_queue_state",
+            "prior_queue_state_cid",
         )
         if any(not str(item.get(field) or "") for field in required if field != "lane"):
             _fail(f"{item.get('task_alias')} settlement identity is incomplete")
@@ -339,7 +480,6 @@ def _policy(config: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         lanes.append(lane)
         prior_completion = item.get("prior_completion_receipt")
         pre_effect_log = item.get("pre_effect_log")
-        prior_queue = item.get("prior_queue_entry")
         if (
             item.get("prior_task_status") != "blocked"
             or item.get("target_task_status") != "todo"
@@ -370,14 +510,11 @@ def _policy(config: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
             or not isinstance(prior_completion, Mapping)
             or not isinstance(pre_effect_log, Mapping)
             or set(pre_effect_log) != {"path", "sha256", "size_bytes"}
-            or not isinstance(prior_queue, Mapping)
-            or item.get("prior_queue_entry_cid") != g7._identity(prior_queue)
-            or int(prior_queue.get("retry_not_before_ms") or 0) <= 0
-            or int(prior_queue.get("consecutive_failures") or 0) < 1
             or item.get("prior_completion_receipt_cid")
             != g7._identity(prior_completion)
         ):
             _fail("g8 settlement is not the exact stopped blocked predecessor")
+        _validate_prior_queue_state(item)
         _validate_pre_effect_evidence(item)
         _validate_retry_budget(item)
         _validate_prior_blocked_receipt(item)
@@ -1198,38 +1335,13 @@ def capture_stopped_source_provider_route_authority(
             connection = g7._open_local_database(control, read_only=True)
             try:
                 tasks = _control_tasks_from_connection(connection)
-                queue_by_task: dict[str, dict[str, Any]] = {}
+                queue_state_by_task: dict[str, dict[str, Any]] = {}
                 for alias in EXPECTED_TASK_ALIASES:
                     task_cid = str(tasks[alias]["task_cid"])
-                    row = connection.execute(
-                        "SELECT attempt,retry_not_before_ms,state,release_reason,"
-                        "extension_json FROM leases WHERE task_cid=?",
-                        [task_cid],
-                    ).fetchone()
-                    active_blocks = int(
-                        connection.execute(
-                            "SELECT COUNT(*) FROM task_blocks WHERE task_cid=? "
-                            "AND state='active'",
-                            [task_cid],
-                        ).fetchone()[0]
+                    queue_state_by_task[alias] = _queue_state_from_connection(
+                        connection,
+                        task_cid=task_cid,
                     )
-                    if row is None or active_blocks:
-                        _fail(f"{alias} lacks an exact clearable queue backoff")
-                    extension = json.loads(str(row[4]))
-                    queue_by_task[alias] = {
-                        "schema": "ipfs_accelerate_py/agent-supervisor/intent-queue-entry@1",
-                        "task_cid": task_cid,
-                        "attempt": int(row[0]),
-                        "retry_not_before_ms": int(row[1] or 0),
-                        "selection_penalty": int(
-                            extension.get("selection_penalty") or 0
-                        ),
-                        "consecutive_failures": int(
-                            extension.get("consecutive_failures") or 0
-                        ),
-                        "state": str(row[2] or "released"),
-                        "reason": str(row[3] or extension.get("reason") or ""),
-                    }
             finally:
                 connection.close()
             prior_projection = g7._control_projection(control)
@@ -1301,8 +1413,10 @@ def capture_stopped_source_provider_route_authority(
                     ],
                     "prior_completion_receipt": dict(receipt),
                     "prior_completion_receipt_cid": g7._identity(receipt),
-                    "prior_queue_entry": queue_by_task[alias],
-                    "prior_queue_entry_cid": g7._identity(queue_by_task[alias]),
+                    "prior_queue_state": queue_state_by_task[alias],
+                    "prior_queue_state_cid": g7._identity(
+                        queue_state_by_task[alias]
+                    ),
                     "pre_effect_log": log_record,
                     "retry_budget": {
                         "prior_attempts_used": int(receipt["attempts_used"]),
@@ -1340,6 +1454,7 @@ def capture_stopped_source_provider_route_authority(
                 evidence["evidence_cid"] = g7._identity(evidence)
                 base["pre_effect_evidence"] = evidence
                 _validate_prior_blocked_receipt(base, receipt)
+                _validate_prior_queue_state(base)
                 _assert_quota_log(root=root, settlement=base)
                 settlements.append(base)
 
@@ -1598,27 +1713,17 @@ def _apply_control_suffix(
             )
             if prior_receipt.get("validation_spec_cid") != validation_spec_cid:
                 _fail(f"{alias} prior validation-spec binding differs")
-            queue_entry = source.intent.get_queue_entry(task.task_cid)
-            if (
-                queue_entry is None
-                or queue_entry.to_dict() != dict(expected["prior_queue_entry"])
-                or g7._identity(queue_entry.to_dict())
-                != expected["prior_queue_entry_cid"]
-            ):
-                _fail(f"{alias} prior queue backoff differs")
-            block_probe = g7._open_local_database(database, read_only=True)
+            queue_probe = g7._open_local_database(database, read_only=True)
             try:
-                active_blocks = int(
-                    block_probe.execute(
-                        "SELECT COUNT(*) FROM task_blocks WHERE task_cid=? "
-                        "AND state='active'",
-                        [task.task_cid],
-                    ).fetchone()[0]
+                queue_state = _queue_state_from_connection(
+                    queue_probe,
+                    task_cid=task.task_cid,
                 )
             finally:
-                block_probe.close()
-            if active_blocks:
-                _fail(f"{alias} retains an unreviewed active task block")
+                queue_probe.close()
+            expected_queue_state = _validate_prior_queue_state(expected)
+            if queue_state != expected_queue_state:
+                _fail(f"{alias} prior queue state differs")
             pre_effect = _validate_pre_effect_evidence(expected)
             reset_receipt = {
                 "schema": DATABASE_RETRY_BUDGET_SCHEMA,
@@ -1657,7 +1762,9 @@ def _apply_control_suffix(
                     "prior_completion_receipt_cid"
                 ],
             }
-            queue_retry = source.intent.record_queue_retry(task_cid=task.task_cid)
+            queue_retry = None
+            if expected_queue_state["disposition"] == "clear_exact_backoff":
+                queue_retry = source.intent.record_queue_retry(task_cid=task.task_cid)
             reset = source.compare_and_set_status(
                 task.task_cid,
                 task.revision,
@@ -1668,7 +1775,10 @@ def _apply_control_suffix(
                 {
                     "task_alias": alias,
                     "reset_event_id": reset.receipt_cid,
-                    "queue_retry_event_id": queue_retry.event_id,
+                    "queue_retry_event_id": (
+                        None if queue_retry is None else queue_retry.event_id
+                    ),
+                    "queue_disposition": expected_queue_state["disposition"],
                     "resulting_revision": reset.task.revision,
                     "pre_effect_evidence_cid": pre_effect["evidence_cid"],
                 }
@@ -1782,13 +1892,18 @@ def _verify_staged_successor(
     if post["counts"]["plan_revisions"] != prior_projection["counts"]["plan_revisions"] + 1:
         _fail("g8 must append exactly one plan revision")
     role_count = len(policy["provider_role_revisions"])
-    expected_event_delta = role_count + 6
+    queue_retry_count = sum(
+        _validate_prior_queue_state(item)["disposition"]
+        == "clear_exact_backoff"
+        for item in policy["settlements"]
+    )
+    expected_event_delta = role_count + 4 + queue_retry_count
     if (
         post["event_count"] != prior_projection["event_count"] + expected_event_delta
         or post["event_watermark"]
         != prior_projection["event_watermark"] + expected_event_delta
     ):
-        _fail("g8 control event suffix is not exactly N role revisions plus six")
+        _fail("g8 control event suffix differs from its sealed queue dispositions")
 
     connection = g7._open_local_database(database, read_only=True)
     try:
@@ -1924,7 +2039,11 @@ def _receipt(
         "evidence_node_changes": 1,
         "provider_role_revision_changes": len(policy["provider_role_revisions"]),
         "task_status_changes": 2,
-        "queue_retry_changes": 2,
+        "queue_retry_changes": sum(
+            _validate_prior_queue_state(item)["disposition"]
+            == "clear_exact_backoff"
+            for item in policy["settlements"]
+        ),
         "completed_task_definition_changes": 0,
         "accepted_completion_changes": 0,
         "provider_invocation_changes": 0,
