@@ -1769,7 +1769,19 @@ class _ExecutorBootstrapBroker:
                 / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py"
             ).resolve()
         )
-        if expected_entry not in supervisor_argv:
+        invoked_as_entry = expected_entry in supervisor_argv or (
+            len(supervisor_argv) >= 2
+            and Path(supervisor_argv[1]).name == "implementation_supervisor_entry.py"
+        )
+        invoked_as_module = (
+            "-m" in supervisor_argv
+            and (
+                "ipfs_accelerate_py.agent_supervisor.todo_daemon."
+                "implementation_supervisor"
+            )
+            in supervisor_argv
+        )
+        if not (invoked_as_entry or invoked_as_module):
             raise OperatorError("executor parent is not the configured supervisor entry")
         lane_count = str(int(self.board.max_lanes))
         exact = {
