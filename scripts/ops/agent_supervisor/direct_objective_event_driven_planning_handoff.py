@@ -2919,6 +2919,42 @@ def recover_doep031_protected_control_plane_update() -> int:
                 server.stop()
 
 
+def _require_doep_duckdb_authority(board: Any) -> None:
+    """Fail closed unless live scheduling is DuckDB/Quack-only.
+
+    The configured Markdown paths are immutable bootstrap inputs and the
+    runtime ``.md`` files are disposable projections.  Neither Markdown nor
+    DuckLake may become a task authority through configuration drift.
+    """
+
+    program = board.resolved_database_program()
+    control = board.payload.get("operational_control_plane")
+    ducklake = board.payload.get("ducklake_projection_program")
+    if not (
+        program.task_source_kind == "duckdb"
+        and program.authority_mode == "quack"
+        and program.failover_policy == "fail_closed"
+        and program.explicit_legacy is False
+        and bool(program.quack_endpoint)
+        and bool(program.endpoint_secret_handle)
+        and isinstance(control, Mapping)
+        and control.get("markdown_is_bootstrap_only") is True
+        and control.get("automatic_file_fallback_permitted") is False
+        and control.get("direct_multi_process_duckdb_file_open_permitted") is False
+        and control.get("outage_policy") == "fail_closed"
+        and isinstance(ducklake, Mapping)
+        and ducklake.get("authority") is False
+        and ducklake.get("may_grant_authority") is False
+        and ducklake.get("scheduling_prerequisite") is False
+        and ducklake.get("acceptance_prerequisite") is False
+        and ducklake.get("completion_prerequisite") is False
+    ):
+        raise HandoffError(
+            "DOEP requires DuckDB tasks through exclusive fail-closed Quack; "
+            "Markdown and DuckLake must remain non-authoritative projections"
+        )
+
+
 def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         load_configured_board,
@@ -2927,6 +2963,7 @@ def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
     board = load_configured_board(CONFIG, repo_root=ROOT)
     if board.board_namespace != PROGRAM_ID or int(board.max_lanes) != 4:
         raise HandoffError("scheduler configuration is not the sealed DOEP campaign")
+    _require_doep_duckdb_authority(board)
     population = _json_object(BOARD)
     tasks = population.get("tasks")
     if (

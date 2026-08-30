@@ -235,6 +235,62 @@ def test_runtime_markdown_is_deterministic_non_authoritative_duckdb_projection()
     assert b"DOEP-G040.S1" in objectives
 
 
+def _authority_board(**overrides: object) -> SimpleNamespace:
+    program = {
+        "task_source_kind": "duckdb",
+        "authority_mode": "quack",
+        "failover_policy": "fail_closed",
+        "explicit_legacy": False,
+        "quack_endpoint": "quack:127.0.0.1:27942",
+        "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
+    }
+    program.update(overrides)
+    return SimpleNamespace(
+        resolved_database_program=lambda: SimpleNamespace(**program),
+        payload={
+            "operational_control_plane": {
+                "markdown_is_bootstrap_only": True,
+                "automatic_file_fallback_permitted": False,
+                "direct_multi_process_duckdb_file_open_permitted": False,
+                "outage_policy": "fail_closed",
+            },
+            "ducklake_projection_program": {
+                "authority": False,
+                "may_grant_authority": False,
+                "scheduling_prerequisite": False,
+                "acceptance_prerequisite": False,
+                "completion_prerequisite": False,
+            },
+        },
+    )
+
+
+def test_handoff_requires_duckdb_quack_and_projection_only_markdown() -> None:
+    module = _module()
+    module._require_doep_duckdb_authority(_authority_board())
+
+    for drift in (
+        {"task_source_kind": "markdown"},
+        {"authority_mode": "legacy_markdown"},
+        {"failover_policy": "fallback"},
+        {"explicit_legacy": True},
+    ):
+        with pytest.raises(module.HandoffError, match="DuckDB tasks"):
+            module._require_doep_duckdb_authority(_authority_board(**drift))
+
+    ducklake_authority = _authority_board()
+    ducklake_authority.payload["ducklake_projection_program"]["authority"] = True
+    with pytest.raises(module.HandoffError, match="DuckDB tasks"):
+        module._require_doep_duckdb_authority(ducklake_authority)
+
+    markdown_authority = _authority_board()
+    markdown_authority.payload["operational_control_plane"][
+        "markdown_is_bootstrap_only"
+    ] = False
+    with pytest.raises(module.HandoffError, match="DuckDB tasks"):
+        module._require_doep_duckdb_authority(markdown_authority)
+
+
 def test_publish_receipt_binds_exact_projection_and_repairs_tampering(tmp_path: Path) -> None:
     module = _module()
     paths = _paths(tmp_path)
