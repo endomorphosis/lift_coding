@@ -5,6 +5,57 @@
     "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py"
   ],
   "claim": "Worker-authored inventory that every current source-to-CID and seal-publication path remains distinctly classified without changing identity. Typed unavailable production ZK, key ceremony, native batch hashing, direct-execution, and serial WAL/CAS publication cases are recorded without changing claim meaning. This receipt does not complete PCTDD-001, admit its own tests, or promote g5 results.",
+  "candidate_hash_methods": {
+    "hashlib.file_digest": {
+      "claim_unchanged": true,
+      "classification": "candidate",
+      "production_admitted": false,
+      "replaces_current_hasher": false,
+      "self_approved": false,
+      "status": "available_candidate"
+    },
+    "readinto reusable buffer": {
+      "claim_unchanged": true,
+      "classification": "candidate",
+      "production_admitted": false,
+      "replaces_current_hasher": false,
+      "self_approved": false,
+      "status": "available_candidate"
+    },
+    "safe mmap": {
+      "claim_unchanged": true,
+      "classification": "candidate",
+      "production_admitted": false,
+      "replaces_current_hasher": false,
+      "self_approved": false,
+      "status": "available_candidate"
+    },
+    "threaded independent SHA": {
+      "claim_unchanged": true,
+      "classification": "candidate",
+      "production_admitted": false,
+      "replaces_current_hasher": false,
+      "self_approved": false,
+      "status": "available_candidate"
+    },
+    "process canonicalization": {
+      "claim_unchanged": true,
+      "classification": "candidate",
+      "production_admitted": false,
+      "replaces_current_hasher": false,
+      "self_approved": false,
+      "status": "available_candidate"
+    },
+    "optional qualified native batch": {
+      "claim_unchanged": true,
+      "classification": "candidate",
+      "production_admitted": false,
+      "reason_code": "native_batch_hasher_not_installed",
+      "replaces_current_hasher": false,
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
   "claim_class": "IntegrityCommitment",
   "claim_does_not": "execution or semantics; current-root publication; task completion; production ZK; identity mutation",
   "completion_authoritative": false,
@@ -47,9 +98,40 @@
       "reason_code": "inventory_has_no_publication_authority",
       "self_approved": false,
       "status": "typed_unavailable"
+    },
+    "datasets_incremental_sealing_evidence": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "datasets_incremental_sealing_module_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
     }
   },
+  "identity_changed": false,
   "markdown_non_authoritative": true,
+  "non_cid_identity_boundaries": {
+    "git_blob_oid": {
+      "claim_unchanged": true,
+      "classification": "memo_lookup_key_only",
+      "does_not": "CID identity",
+      "production_admitted": false,
+      "self_approved": false
+    },
+    "filesystem_metadata": {
+      "claim_unchanged": true,
+      "classification": "candidate_only",
+      "does_not": "CID identity",
+      "production_admitted": false,
+      "self_approved": false
+    },
+    "chunk_manifest": {
+      "claim_unchanged": true,
+      "classification": "does_not_replace_raw_full_stream_cid",
+      "does_not": "raw full-stream CID",
+      "production_admitted": false,
+      "self_approved": false
+    }
+  },
   "plan_revision": "PCTDD-PLAN-V1.1",
   "predecessor_generation": "pctdd-v1-g5",
   "predecessor_rescue_candidate": {
@@ -63,13 +145,19 @@
   "seal_publication_inventory": {
     "accelerate_incremental_sealer": {
       "authority": "ipfs_accelerate_py coordinates; ipfs_kit_py owns WAL/CAS",
+      "claim_unchanged": true,
       "classification": "available_with_caveats",
+      "datasets_evidence_module": "ipfs_datasets_py.logic.zkp.incremental_sealing.evidence",
+      "datasets_evidence_status": "typed_unavailable",
       "interface": "IncrementalProofSealer@1",
       "kinds": [
         "full_checkpoint",
         "delta_seal"
       ],
-      "publication_authority_invoked": false
+      "production_admitted": false,
+      "publication_authority_invoked": false,
+      "reason_code": "datasets_incremental_sealing_module_unavailable",
+      "self_approved": false
     },
     "kit_current_root_cas": {
       "authority": "ipfs_kit_py",
@@ -152,6 +240,18 @@
       "codec": "raw_default",
       "owner": "ipfs_kit_py",
       "profile": "certificate CIDv1/sha2-256"
+    },
+    "accelerate_kubo_cid": {
+      "classification": "available",
+      "codec": "raw",
+      "owner": "ipfs_accelerate_py",
+      "profile": "CIDv1/base32/sha2-256 kubo-compatible raw"
+    },
+    "datasets_legacy_cid_for_obj": {
+      "classification": "available_distinct_profile",
+      "codec": "raw_of_legacy_canonical_json",
+      "owner": "ipfs_datasets_py",
+      "profile": "legacy canonical_json_bytes hashed as raw"
     }
   },
   "status": "implementation_submitted_pending_controller_validation",
