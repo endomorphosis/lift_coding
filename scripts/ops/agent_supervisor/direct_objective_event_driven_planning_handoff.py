@@ -847,11 +847,40 @@ def _blocked_retry_task_cid(population: Mapping[str, Any]) -> str:
     return matches[0]
 
 
+def _blocked_retry_authority_context(
+    generation: Any,
+    population: Mapping[str, Any],
+) -> dict[str, Any]:
+    record = generation.to_record()
+    context = {
+        "store_id": str(record.get("store_id") or ""),
+        "database_uuid": str(record.get("database_uuid") or ""),
+        "store_generation": record.get("generation"),
+        "fence_epoch": record.get("fence_epoch"),
+        "store_revision": record.get("revision"),
+        "plan_root_cid": str(population.get("plan_root_cid") or ""),
+        "repository_tree_id": str(population.get("repository_tree_id") or ""),
+    }
+    if (
+        not context["store_id"]
+        or not context["database_uuid"]
+        or any(
+            type(context[field]) is not int or int(context[field]) < 0
+            for field in ("store_generation", "fence_epoch", "store_revision")
+        )
+        or not context["plan_root_cid"]
+        or not context["repository_tree_id"]
+    ):
+        raise HandoffError("DOEP-030 retry database authority identity is incomplete")
+    return context
+
+
 def _prepare_blocked_retry_authorization(
     *,
     paths: Mapping[str, Path],
     task_cid: str,
     task_row: Mapping[str, Any],
+    authority_context: Mapping[str, Any],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     event_path = paths["state"] / BLOCKED_RETRY_ATTEMPT_RELATIVE / "portal-events.jsonl"
     try:
@@ -879,6 +908,8 @@ def _prepare_blocked_retry_authorization(
         and terminal.get("attempt_number") == 1
         and terminal.get("control_expected_status") == "in_progress"
         and terminal.get("control_expected_revision") == 3
+        and terminal.get("control_expected_status") == "in_progress"
+        and terminal.get("control_expected_revision") == 3
     ):
         raise HandoffError("blocked DOEP-030 terminal authority is outside the sealed retry")
     workspace_text = str(
@@ -901,6 +932,10 @@ def _prepare_blocked_retry_authorization(
         "task_cid": task_cid,
         "attempt": 1,
         "terminal_reason": BLOCKED_RETRY_REASON,
+        "store_id": authority_context["store_id"],
+        "database_uuid": authority_context["database_uuid"],
+        "plan_root_cid": authority_context["plan_root_cid"],
+        "repository_tree_id": authority_context["repository_tree_id"],
         "portal_events_path": str(event_path),
         "portal_events_sha256": _sha256(event_bytes),
         "timeout_event_id": str(timeout.get("event_id") or ""),
@@ -936,6 +971,13 @@ def _prepare_blocked_retry_authorization(
         "expected_task_revision": expected_revision,
         "task_body": dict(task_body),
         "terminal_receipt": dict(terminal),
+        "store_id": authority_context["store_id"],
+        "database_uuid": authority_context["database_uuid"],
+        "authorized_store_generation": authority_context["store_generation"],
+        "authorized_fence_epoch": authority_context["fence_epoch"],
+        "authorized_store_revision": authority_context["store_revision"],
+        "plan_root_cid": authority_context["plan_root_cid"],
+        "repository_tree_id": authority_context["repository_tree_id"],
         "max_task_attempts_before": 1,
         "max_task_attempts_after": 2,
         "sidecar_evidence_id": sidecar["evidence_id"],
@@ -957,6 +999,7 @@ def _load_blocked_retry_authorization(
     *,
     paths: Mapping[str, Path],
     task_cid: str,
+    authority_context: Mapping[str, Any],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     sidecar = _json_object(paths["blocked_retry_sidecar"])
     authorization = _json_object(paths["blocked_retry_authorization"])
@@ -966,13 +1009,135 @@ def _load_blocked_retry_authorization(
         for key, value in authorization.items()
         if key != "operator_handoff_receipt_id"
     }
+    expected_sidecar_keys = {
+        "schema",
+        "task_alias",
+        "task_cid",
+        "attempt",
+        "terminal_reason",
+        "store_id",
+        "database_uuid",
+        "plan_root_cid",
+        "repository_tree_id",
+        "portal_events_path",
+        "portal_events_sha256",
+        "timeout_event_id",
+        "retained_event_id",
+        "finished_event_id",
+        "workspace_path",
+        "workspace_branch",
+        "workspace_baseline",
+        "provider_dispatched",
+        "provider_outcome",
+        "commit_observed",
+        "merge_observed",
+        "retained_candidate_admitted",
+        "historical_candidate_fingerprint",
+        "required_next_step",
+        "limitations",
+        "evidence_id",
+    }
+    expected_authorization_keys = {
+        "schema",
+        "operation",
+        "task_alias",
+        "task_cid",
+        "expected_task_revision",
+        "task_body",
+        "terminal_receipt",
+        "store_id",
+        "database_uuid",
+        "authorized_store_generation",
+        "authorized_fence_epoch",
+        "authorized_store_revision",
+        "plan_root_cid",
+        "repository_tree_id",
+        "max_task_attempts_before",
+        "max_task_attempts_after",
+        "sidecar_evidence_id",
+        "now_ms",
+        "authorized_at",
+        "require_fresh_portal_revalidation",
+        "authority_scope",
+        "operator_handoff_receipt_id",
+    }
+    terminal = authorization.get("terminal_receipt")
+    task_body = authorization.get("task_body")
+    current_generation = authority_context["store_generation"]
+    current_fence = authority_context["fence_epoch"]
+    current_revision = authority_context["store_revision"]
+    expected_event_path = (
+        paths["state"] / BLOCKED_RETRY_ATTEMPT_RELATIVE / "portal-events.jsonl"
+    )
+    try:
+        expected_workspace = (
+            paths["root"] / "worktrees" / BLOCKED_RETRY_WORKSPACE_NAME
+        ).resolve(strict=True)
+    except OSError as exc:
+        raise HandoffError("DOEP-030 retained workspace is unavailable") from exc
     if not (
-        sidecar.get("schema") == BLOCKED_RETRY_EVIDENCE_SCHEMA
+        set(sidecar) == expected_sidecar_keys
+        and set(authorization) == expected_authorization_keys
+        and sidecar.get("schema") == BLOCKED_RETRY_EVIDENCE_SCHEMA
+        and sidecar.get("task_alias") == BLOCKED_RETRY_TASK_ALIAS
         and sidecar.get("task_cid") == task_cid
+        and sidecar.get("attempt") == 1
+        and sidecar.get("terminal_reason") == BLOCKED_RETRY_REASON
+        and sidecar.get("store_id") == authority_context["store_id"]
+        and sidecar.get("database_uuid") == authority_context["database_uuid"]
+        and sidecar.get("plan_root_cid") == authority_context["plan_root_cid"]
+        and sidecar.get("repository_tree_id")
+        == authority_context["repository_tree_id"]
+        and sidecar.get("portal_events_path") == str(expected_event_path)
+        and sidecar.get("timeout_event_id") == BLOCKED_RETRY_EVENT_IDS[12]
+        and sidecar.get("retained_event_id") == BLOCKED_RETRY_EVENT_IDS[13]
+        and sidecar.get("finished_event_id") == BLOCKED_RETRY_EVENT_IDS[14]
+        and sidecar.get("workspace_path") == str(expected_workspace)
+        and sidecar.get("workspace_branch") == BLOCKED_RETRY_BRANCH
+        and sidecar.get("workspace_baseline") == BLOCKED_RETRY_BASELINE
+        and sidecar.get("provider_dispatched") is True
+        and sidecar.get("provider_outcome")
+        == "completed_with_verification_deferred"
+        and sidecar.get("commit_observed") is False
+        and sidecar.get("merge_observed") is False
+        and sidecar.get("retained_candidate_admitted") is False
+        and sidecar.get("historical_candidate_fingerprint") == "unavailable"
+        and sidecar.get("required_next_step") == "fresh_portal_revalidation"
         and sidecar.get("evidence_id") == _sha256(_canonical_json_bytes(sidecar_material))
         and authorization.get("schema") == BLOCKED_RETRY_RECOVERY_SCHEMA
+        and authorization.get("operation")
+        == "operator_sealed_blocked_retry_authorization"
+        and authorization.get("task_alias") == BLOCKED_RETRY_TASK_ALIAS
         and authorization.get("task_cid") == task_cid
+        and authorization.get("expected_task_revision") == 4
+        and isinstance(task_body, Mapping)
+        and isinstance(terminal, Mapping)
+        and task_body.get("completion_receipt") == terminal
+        and terminal.get("operation") == "database_portal_terminal_failure"
+        and terminal.get("reason") == BLOCKED_RETRY_REASON
+        and terminal.get("retryable") is False
+        and terminal.get("attempt_number") == 1
+        and authorization.get("store_id") == authority_context["store_id"]
+        and authorization.get("database_uuid") == authority_context["database_uuid"]
+        and type(authorization.get("authorized_store_generation")) is int
+        and 0 <= authorization["authorized_store_generation"] <= current_generation
+        and type(authorization.get("authorized_fence_epoch")) is int
+        and 0 <= authorization["authorized_fence_epoch"] <= current_fence
+        and type(authorization.get("authorized_store_revision")) is int
+        and 0 <= authorization["authorized_store_revision"] <= current_revision
+        and authorization.get("plan_root_cid") == authority_context["plan_root_cid"]
+        and authorization.get("repository_tree_id")
+        == authority_context["repository_tree_id"]
+        and authorization.get("max_task_attempts_before") == 1
+        and authorization.get("max_task_attempts_after") == 2
         and authorization.get("sidecar_evidence_id") == sidecar.get("evidence_id")
+        and type(authorization.get("now_ms")) is int
+        and authorization["now_ms"] >= 0
+        and isinstance(authorization.get("authorized_at"), str)
+        and bool(authorization["authorized_at"])
+        and authorization.get("require_fresh_portal_revalidation") is True
+        and authorization.get("authority_scope")
+        == "DOEP-030 blocked-to-retrying exactly once"
         and authorization.get("operator_handoff_receipt_id")
         == _sha256(_canonical_json_bytes(authorization_material))
     ):
@@ -1712,6 +1877,10 @@ def recover_blocked_lock_timeout() -> int:
             board,
             task_cid=task_cid,
         )
+        authority_context = _blocked_retry_authority_context(
+            client.load_generation(),
+            population,
+        )
         rows = client.execute("select_task_by_cid", {"task_cid": task_cid})
         if len(rows) != 1:
             raise HandoffError("DOEP-030 task authority is absent or ambiguous")
@@ -1723,6 +1892,7 @@ def recover_blocked_lock_timeout() -> int:
             sidecar, authorization = _load_blocked_retry_authorization(
                 paths=paths,
                 task_cid=task_cid,
+                authority_context=authority_context,
             )
         else:
             # Both files are immutable once complete.  If the process stopped
@@ -1732,6 +1902,7 @@ def recover_blocked_lock_timeout() -> int:
                 paths=paths,
                 task_cid=task_cid,
                 task_row=task_row,
+                authority_context=authority_context,
             )
         event_path = Path(str(sidecar.get("portal_events_path") or ""))
         try:

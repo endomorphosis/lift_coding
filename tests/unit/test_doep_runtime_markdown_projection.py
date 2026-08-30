@@ -159,6 +159,18 @@ def _blocked_task_row(module) -> dict[str, object]:
     }
 
 
+def _authority_context() -> dict[str, object]:
+    return {
+        "store_id": "doep-v1-r5",
+        "database_uuid": "11111111-1111-4111-8111-111111111111",
+        "store_generation": 5,
+        "fence_epoch": 5,
+        "store_revision": 45,
+        "plan_root_cid": "sha256:plan",
+        "repository_tree_id": "sha256:tree",
+    }
+
+
 def test_runtime_markdown_is_deterministic_non_authoritative_duckdb_projection() -> None:
     module = _module()
     first = module._render_runtime_taskboard(
@@ -407,10 +419,12 @@ def test_historical_blocked_retry_authorization_binds_workspace_and_digests(
         paths=paths,
         task_cid=module.BLOCKED_RETRY_TASK_CID,
         task_row=_blocked_task_row(module),
+        authority_context=_authority_context(),
     )
     loaded_sidecar, loaded_authorization = module._load_blocked_retry_authorization(
         paths=paths,
         task_cid=module.BLOCKED_RETRY_TASK_CID,
+        authority_context=_authority_context(),
     )
 
     assert loaded_sidecar == sidecar
@@ -418,6 +432,14 @@ def test_historical_blocked_retry_authorization_binds_workspace_and_digests(
     assert sidecar["historical_candidate_fingerprint"] == "unavailable"
     assert sidecar["retained_candidate_admitted"] is False
     assert authorization["require_fresh_portal_revalidation"] is True
+
+    changed_database = {**_authority_context(), "database_uuid": "different"}
+    with pytest.raises(module.HandoffError, match="authorization has drifted"):
+        module._load_blocked_retry_authorization(
+            paths=paths,
+            task_cid=module.BLOCKED_RETRY_TASK_CID,
+            authority_context=changed_database,
+        )
 
 
 def test_historical_blocked_retry_authorization_rejects_workspace_escape(
@@ -445,4 +467,5 @@ def test_historical_blocked_retry_authorization_rejects_workspace_escape(
             paths=paths,
             task_cid=module.BLOCKED_RETRY_TASK_CID,
             task_row=_blocked_task_row(module),
+            authority_context=_authority_context(),
         )
