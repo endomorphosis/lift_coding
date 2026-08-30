@@ -1877,6 +1877,24 @@ def _assert_private_directory(path: Path) -> None:
         )
 
 
+def _new_private_stage_root(parent: Path) -> Path:
+    """Create the migration stage and its shared private directory prefix.
+
+    ``Path.mkdir(parents=True, mode=0o700)`` applies ``mode`` only to the
+    final directory.  With a conventional ``0002`` umask, an intermediate
+    ``state`` directory would therefore be created as ``0775`` when the first
+    lane is copied.  Create that shared prefix explicitly so the production
+    migration is independent of the operator's ambient umask.
+    """
+
+    stage_root = Path(
+        tempfile.mkdtemp(prefix=".pctdd-g7-installing.", dir=parent)
+    )
+    _assert_private_directory(stage_root)
+    _ensure_private_directory(stage_root / "state")
+    return stage_root
+
+
 def _validate_published_store(
     *,
     root: Path,
@@ -2407,9 +2425,7 @@ def migrate_source_binding(
             _assert_migration_lock_identity(lock_path, descriptor, lock_identity)
             _assert_source_delta(root, population, policy)
             return result
-        stage_root = Path(
-            tempfile.mkdtemp(prefix=".pctdd-g7-installing.", dir=target_root.parent)
-        )
+        stage_root = _new_private_stage_root(target_root.parent)
         stage_control = stage_root / "control.duckdb"
         _copy_anchored_file(
             prior["control"],

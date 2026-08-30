@@ -403,6 +403,20 @@ def test_historical_row_encoding_distinguishes_null_and_empty(
         )
 
 
+def test_private_stage_layout_does_not_inherit_group_writable_umask(
+    migration: Any,
+    tmp_path: Path,
+) -> None:
+    previous_umask = os.umask(0o002)
+    try:
+        stage = migration._new_private_stage_root(tmp_path)
+    finally:
+        os.umask(previous_umask)
+
+    assert stage.stat().st_mode & 0o777 == 0o700
+    assert (stage / "state").stat().st_mode & 0o777 == 0o700
+
+
 def _small_receipt(
     module: Any, root: Path, stage: Path, *, variant: str = ""
 ) -> dict[str, Any]:
