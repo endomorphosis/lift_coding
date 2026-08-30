@@ -15,9 +15,9 @@ import json
 import re
 import subprocess
 from collections import Counter
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, Iterable
-
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAN_PATH = ROOT / "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md"
@@ -27,12 +27,33 @@ CONFIG_PATH = ROOT / "config/agent_supervisor_parallel_content_sealing_proof_car
 PROFILE_PATH = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json"
 DISPATCHER_PATH = ROOT / "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py"
 MIGRATION_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json"
+SOURCE_MIGRATION_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json"
 RECEIPT_PATH = ROOT / "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json"
 CONTROL_MANIFEST_PATH = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
 NAMESPACE = "parallel-content-sealing-proof-carrying-tdd-v1"
 PLAN_REVISION = "PCTDD-PLAN-V1.1"
-STORE_GENERATION = "pctdd-v1-g6"
-RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6"
+HISTORICAL_STORE_GENERATION = "pctdd-v1-g6"
+STORE_GENERATION = "pctdd-v1-g7"
+RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g7"
+EXPECTED_SOURCE_MIGRATION_CONTROL_PATHS = {
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+    "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json",
+    "external/ipfs_accelerate",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py",
+    "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
+    "scripts/pctdd_g7_source_binding_successor.py",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
+    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
+    "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
+}
 
 TASK_RE = re.compile(
     r"^##\s+(PCTDD-\d{3})\s*(?:[\u2014\u2013:\-]\s*)?(.+?)\s*$", re.MULTILINE
@@ -210,6 +231,7 @@ PROTECTED_PATHS = {
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json",
     "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
@@ -222,7 +244,10 @@ PROTECTED_PATHS = {
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
+    "scripts/pctdd_g7_source_binding_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
+    "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
 }
 
 REQUIRED_FIELD_GROUPS: tuple[tuple[str, ...], ...] = (
@@ -714,6 +739,13 @@ def validate() -> dict[str, Any]:
             or control_manifest.get("task_id") != "PCTDD-000"
             or control_manifest.get("dependency_seal_must_hash_this_manifest") is not True
             or control_manifest.get("manifest_is_completion_receipt") is not False
+            or control_manifest.get("historical_completion_reissued") is not False
+            or control_manifest.get("historical_plan_and_task_definitions_preserved") is not True
+            or control_manifest.get("source_binding_migration_revision") != "PCTDD-SOURCE-G7"
+            or control_manifest.get("source_binding_migration_inventory")
+            != SOURCE_MIGRATION_PATH.relative_to(ROOT).as_posix()
+            or control_manifest.get("source_binding_migration_module")
+            != "scripts/pctdd_g7_source_binding_successor.py"
         ):
             errors.append("PCTDD-000 control manifest claim boundary differs")
         prerequisites = control_manifest.get("completion_prerequisites") or []
@@ -746,28 +778,30 @@ def validate() -> dict[str, Any]:
     if database.get("failover_policy", "fail_closed") != "fail_closed":
         errors.append("task authority failover must be fail_closed")
     if database.get("store_generation") != STORE_GENERATION:
-        errors.append("task authority must use the fresh g6 store generation")
+        errors.append("task authority must use the fresh g7 store generation")
     if database.get("quack_endpoint") != "quack:127.0.0.1:27278":
-        errors.append("g6 Quack endpoint differs")
+        errors.append("g7 Quack endpoint differs")
     expected_owner_management = {
         "mode": "managed_local",
         "owner_state_dir": str((ROOT / RUNTIME_ROOT / "quack-owner").resolve()),
         "startup_timeout_seconds": 120.0,
         "health_check_interval_seconds": 5.0,
-        "max_restart_attempts": 3,
+        "max_restart_attempts": 8,
         "initial_backoff_seconds": 1.0,
         "max_backoff_seconds": 10.0,
         "termination_grace_seconds": 40.0,
     }
     if database.get("owner_management") != expected_owner_management:
         errors.append(
-            "g6 Quack owner management must use the exact fenced managed-local policy"
+            "g7 Quack owner management must use the exact bounded fenced managed-local policy"
         )
     for name in ("store_id", "event_store_path", "runtime_registry_path", "worktree_root"):
         if not str(database.get(name) or "").startswith(RUNTIME_ROOT + "/"):
-            errors.append(f"database_program.{name} does not use the g6 runtime root")
-    if database.get("predecessor_store_generation") != "pctdd-v1-g5" or database.get("predecessor_is_read_only_history") is not True:
-        errors.append("g5 predecessor generation must remain explicit read-only history")
+            errors.append(f"database_program.{name} does not use the g7 runtime root")
+    if database.get("predecessor_store_generation") != HISTORICAL_STORE_GENERATION or database.get("predecessor_is_read_only_history") is not True:
+        errors.append("g6 predecessor generation must remain explicit read-only history")
+    if database.get("historical_store_generations") != ["pctdd-v1-g5", HISTORICAL_STORE_GENERATION]:
+        errors.append("g7 must preserve the exact g5/g6 historical generation chain")
     projection = config.get("initial_projection") or {}
     if projection.get("completed_task_ids") != [] or projection.get("ready_task_ids") != []:
         errors.append("initial projection must leave PCTDD-000 todo and all worker tasks dependency-waiting")
@@ -793,13 +827,163 @@ def validate() -> dict[str, Any]:
         errors.append("DuckLake must not become a scheduling prerequisite")
     for name in ("catalog_path", "data_path"):
         if not str(ducklake.get(name) or "").startswith(RUNTIME_ROOT + "/ducklake/"):
-            errors.append(f"DuckLake {name} does not use the g6 projection root")
+            errors.append(f"DuckLake {name} does not use the g7 projection root")
 
     amendment = config.get("control_amendment") or {}
     if amendment.get("revision") != PLAN_REVISION or amendment.get("amends") != "PCTDD-PLAN-V1":
         errors.append("scheduler control amendment lineage differs")
     if amendment.get("migration_inventory") != MIGRATION_PATH.relative_to(ROOT).as_posix():
         errors.append("scheduler migration inventory binding differs")
+    if amendment.get("source_migration_inventory") != SOURCE_MIGRATION_PATH.relative_to(ROOT).as_posix():
+        errors.append("scheduler g6 source-migration inventory binding differs")
+    if (
+        amendment.get("historical_g6_plan_and_task_definitions_preserved") is not True
+        or amendment.get("copy_predecessor_acceptance") is not True
+        or amendment.get("historical_completion_reissuance") is not False
+        or amendment.get("fresh_materialization_required") is not False
+    ):
+        errors.append("scheduler source successor must preserve, not rematerialize, g6 history")
+
+    source_migration_inventory = _load_json(SOURCE_MIGRATION_PATH)
+    successor_policy = (
+        source_migration_inventory.get("source_binding_successor_materialization")
+        if isinstance(source_migration_inventory, dict)
+        else None
+    )
+    configured_successor = config.get("source_binding_successor_materialization")
+    if source_migration_inventory.get("schema") != "pctdd/g6-source-binding-migration-inventory@1":
+        errors.append("g6 source-migration inventory schema differs")
+    if (
+        source_migration_inventory.get("historical_task_definitions_preserved") is not True
+        or source_migration_inventory.get(
+            "historical_completions_revalidated_for_integrity_not_reissued"
+        )
+        is not True
+    ):
+        errors.append("g6 inventory does not preserve the historical claim boundary")
+    if not isinstance(successor_policy, dict) or configured_successor != successor_policy:
+        errors.append("scheduler source-binding successor policy differs from its inventory")
+        successor_policy = {}
+    expected_successor_keys = {
+        "schema",
+        "migration_revision",
+        "prior_store_generation",
+        "target_store_generation",
+        "prior_runtime_root",
+        "target_runtime_root",
+        "target_quack_endpoint",
+        "receipt_marker",
+        "control_source_anchor_head",
+        "control_source_anchor_tree",
+        "operator_control_paths",
+        "governed_gitlinks",
+        "prior_control_store",
+        "prior_bootstrap_receipt",
+        "prior_stopped_status",
+        "prior_owner_identity",
+        "accepted_plan_root_cid",
+        "prior_plan_revision",
+        "prior_control_projection",
+        "coordination_stores",
+        "target_control_projection",
+        "copy_policy",
+    }
+    if set(successor_policy) != expected_successor_keys:
+        errors.append("source-binding successor policy is not a closed record")
+    expected_successor_identity = {
+        "schema": "pctdd/source-binding-successor-materialization@1",
+        "migration_revision": "PCTDD-SOURCE-G7",
+        "prior_store_generation": HISTORICAL_STORE_GENERATION,
+        "target_store_generation": STORE_GENERATION,
+        "prior_runtime_root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6",
+        "target_runtime_root": RUNTIME_ROOT,
+        "target_quack_endpoint": "quack:127.0.0.1:27278",
+        "receipt_marker": "source-migration-receipt.json",
+        "control_source_anchor_head": "c8917d039e3f4598a7d29643c621e341318197da",
+        "control_source_anchor_tree": "c3e061b62caa3ad0c35c7e167242694a8fec171c",
+        "accepted_plan_root_cid": "baguqeeraaiqrxovjj4y3ecx6jtvzqfrrrqwuag7hl2c35i2z3eapax2nzaya",
+        "prior_plan_revision": 1,
+    }
+    for name, expected in expected_successor_identity.items():
+        if successor_policy.get(name) != expected:
+            errors.append(f"source-binding successor {name} differs")
+    prior_projection = successor_policy.get("prior_control_projection") or {}
+    if (
+        prior_projection.get("statuses")
+        != {"completed": 14, "in_progress": 2, "retrying": 1, "todo": 37}
+        or prior_projection.get("event_watermark") != 182
+        or prior_projection.get("event_count") != 182
+        or any(
+            not re.fullmatch(r"sha256:[0-9a-f]{64}", str(prior_projection.get(name) or ""))
+            for name in (
+                "event_prefix_digest",
+                "task_definition_digest",
+                "accepted_tables_digest",
+            )
+        )
+        or not isinstance(prior_projection.get("historical_row_hashes"), dict)
+    ):
+        errors.append("sealed stopped-g6 control projection differs")
+    target_projection = successor_policy.get("target_control_projection") or {}
+    if target_projection != {
+        "statuses": {"completed": 14, "retrying": 3, "todo": 37},
+        "task_revisions": {"PCTDD-001": 17, "PCTDD-029": 7},
+        "ready_frontier": [
+            "PCTDD-001",
+            "PCTDD-018",
+            "PCTDD-029",
+            "PCTDD-031",
+            "PCTDD-033",
+        ],
+    }:
+        errors.append("g7 target projection differs")
+    coordination = successor_policy.get("coordination_stores") or []
+    if not isinstance(coordination, list) or [
+        item.get("lane") for item in coordination if isinstance(item, dict)
+    ] != [0, 1, 2, 3]:
+        errors.append("g6 source migration must bind four ordered lane stores")
+    else:
+        settlements = {
+            item.get("settlement", {}).get("task_alias")
+            for item in coordination
+            if isinstance(item.get("settlement"), dict)
+        }
+        if settlements != {"PCTDD-001", "PCTDD-029"}:
+            errors.append("g6 source migration settlement population differs")
+        if any(not isinstance(item.get("execution_observation"), dict) for item in coordination):
+            errors.append("every g6 lane must bind a non-copied execution observation")
+    copy_policy = successor_policy.get("copy_policy") or {}
+    if copy_policy != {
+        "copied": ["authoritative_control_store", "coordination_history"],
+        "not_copied": [
+            "execution_observation_stores",
+            "read_replica",
+            "ducklake_catalog_and_data",
+            "logs",
+            "worktrees",
+            "merge_queue",
+            "quack_owner_runtime",
+            "credentials",
+            "runtime_registry",
+        ],
+        "publication": "private_stage_hash_verify_then_no_overwrite_links_and_marker_last",
+        "g6_remains_read_only_history": True,
+    }:
+        errors.append("g7 copy/sidecar policy differs")
+    operator_paths = successor_policy.get("operator_control_paths") or []
+    if (
+        set(operator_paths) != EXPECTED_SOURCE_MIGRATION_CONTROL_PATHS
+        or len(operator_paths) != len(EXPECTED_SOURCE_MIGRATION_CONTROL_PATHS)
+        or len(operator_paths) != len(set(operator_paths))
+        or any(
+            not isinstance(path, str)
+            or path.startswith("/")
+            or ".." in Path(path).parts
+            or "*" in path
+            for path in operator_paths
+        )
+    ):
+        errors.append("g7 operator control path set is not closed and confined")
     migration = _load_json(MIGRATION_PATH)
     predecessor = migration.get("predecessor") if isinstance(migration, dict) else {}
     successor = migration.get("successor") if isinstance(migration, dict) else {}
@@ -820,7 +1004,7 @@ def validate() -> dict[str, Any]:
         for name, expected in expected_predecessor.items():
             if predecessor.get(name) != expected:
                 errors.append(f"g5 migration predecessor {name} differs")
-    if not isinstance(successor, dict) or successor.get("store_generation") != STORE_GENERATION:
+    if not isinstance(successor, dict) or successor.get("store_generation") != HISTORICAL_STORE_GENERATION:
         errors.append("g5 migration successor generation differs")
     migration_candidates = migration.get("w1_rescue_candidates") if isinstance(migration, dict) else {}
     if not isinstance(migration_candidates, dict) or {
@@ -894,10 +1078,10 @@ def validate() -> dict[str, Any]:
         errors.append("PCTDD-004 outer parent does not bind the recorded prior gitlink")
     runtime_paths = config.get("runtime_paths") or {}
     if runtime_paths.get("root") != RUNTIME_ROOT:
-        errors.append("runtime_paths.root must be the fresh g6 root")
+        errors.append("runtime_paths.root must be the fresh g7 root")
     for name in ("state", "worktrees", "merge_queue", "logs", "evidence", "quack_owner"):
         if not str(runtime_paths.get(name) or "").startswith(RUNTIME_ROOT + "/"):
-            errors.append(f"runtime_paths.{name} does not use the g6 root")
+            errors.append(f"runtime_paths.{name} does not use the g7 root")
 
     safety = config.get("safety_floors") or {}
     floor_aliases = {
@@ -925,6 +1109,16 @@ def validate() -> dict[str, Any]:
         receipt = _load_json(RECEIPT_PATH)
         if not isinstance(receipt, dict) or receipt.get("task_id") != "PCTDD-000":
             errors.append("PCTDD-000 receipt task binding differs")
+        elif (
+            receipt.get("store_generation") != STORE_GENERATION
+            or receipt.get("predecessor_generation") != HISTORICAL_STORE_GENERATION
+            or receipt.get("migration_revision") != "PCTDD-SOURCE-G7"
+            or receipt.get("migration_inventory")
+            != SOURCE_MIGRATION_PATH.relative_to(ROOT).as_posix()
+            or receipt.get("historical_completion_reissued") is not False
+            or receipt.get("historical_plan_and_task_definitions_preserved") is not True
+        ):
+            errors.append("PCTDD-000 tracked g7 source-successor claim differs")
         evidence = _normalize_text(json.dumps(receipt, sort_keys=True))
         if "markdown" in evidence and "non_authoritative" not in evidence:
             errors.append("PCTDD-000 receipt may not elevate Markdown to completion authority")

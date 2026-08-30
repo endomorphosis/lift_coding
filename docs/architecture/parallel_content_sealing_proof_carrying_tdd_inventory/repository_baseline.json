@@ -1,11 +1,11 @@
 {
   "all_governed_sources_clean_and_gitlink_exact": true,
   "branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
-  "captured_utc": "2026-08-29T08:21:45Z",
-  "control_generation_input_head": "60ffa3caebab165c8e2c89fd46ccec610e3d15d0",
-  "control_generation_input_tree": "914032d05b19fa172761e47f5ce3037761008f67",
+  "captured_utc": "2026-08-30T08:07:01Z",
+  "control_generation_input_head": "c8917d039e3f4598a7d29643c621e341318197da",
+  "control_generation_input_tree": "c3e061b62caa3ad0c35c7e167242694a8fec171c",
   "dirty_user_tree_preserved": true,
-  "evidence_note": "The fresh g6 observation records actual source dirtiness and exact outer gitlinks; original user-tree hashes remain preserved without copying user content.",
+  "evidence_note": "The fixed c891 stopped-g6 control anchor and current exact governed gitlinks seed the g7 runtime migration; the runtime marker binds the eventual clean successor HEAD/tree without rewriting historical completion claims.",
   "original_user_tree_evidence": {
     "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798",
     "captured_utc": "2026-08-28",
@@ -20,14 +20,14 @@
     {
       "authority": true,
       "dirty": false,
-      "gitlink": "30bb9c7678b630eff2a16c62416d5e25ef20559f",
+      "gitlink": "a12f8a2c4d9711daa3b0d29582e1c09d723686c9",
       "gitlink_matches_nested_head": true,
-      "head": "30bb9c7678b630eff2a16c62416d5e25ef20559f",
+      "head": "a12f8a2c4d9711daa3b0d29582e1c09d723686c9",
       "name": "ipfs_accelerate_py",
       "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
       "path": "external/ipfs_accelerate",
       "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "tree": "6462f259cd02e4b33b6f1f36e7160d914bfecb35"
+      "tree": "b25a1c932bbbb14a1673c40472f94def8655a055"
     },
     {
       "authority": true,

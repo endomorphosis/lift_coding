@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 import hashlib
-import importlib.util
 import importlib.metadata
+import importlib.util
 import json
 import subprocess
-from contextlib import contextmanager
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-
 
 ROOT = Path(__file__).resolve().parents[3]
 GENERATOR = ROOT / "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py"
@@ -32,14 +31,36 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def test_g6_amendment_has_exact_generation_and_component_safe_migration() -> None:
-    generator = _load("pctdd_g6_generator", GENERATOR)
+def test_g7_control_generator_is_byte_idempotent() -> None:
+    result = subprocess.run(
+        [sys.executable, str(GENERATOR), "--check"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr or result.stdout
+    payload = json.loads(result.stdout.splitlines()[-1])
+    assert payload == {
+        "mismatches": [],
+        "mode": "check",
+        "namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+        "valid": True,
+    }
+
+
+def test_g7_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
+    generator = _load("pctdd_g7_generator", GENERATOR)
     config = generator.render_config()
     assert generator.PLAN_REVISION == "PCTDD-PLAN-V1.1"
     assert config["accepted_plan_revision_alias"] == "PCTDD-PLAN-V1.1"
-    assert config["database_program"]["store_generation"] == "pctdd-v1-g6"
-    assert config["database_program"]["predecessor_store_generation"] == "pctdd-v1-g5"
+    assert config["database_program"]["store_generation"] == "pctdd-v1-g7"
+    assert config["database_program"]["predecessor_store_generation"] == "pctdd-v1-g6"
     assert config["database_program"]["predecessor_is_read_only_history"] is True
+    assert config["database_program"]["historical_store_generations"] == [
+        "pctdd-v1-g5",
+        "pctdd-v1-g6",
+    ]
     assert config["database_program"]["quack_endpoint"] == "quack:127.0.0.1:27278"
     owner_management = config["database_program"]["owner_management"]
     assert owner_management == {
@@ -47,18 +68,20 @@ def test_g6_amendment_has_exact_generation_and_component_safe_migration() -> Non
         "owner_state_dir": str(
             (
                 ROOT
-                / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6/quack-owner"
+                / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g7/quack-owner"
             ).resolve()
         ),
         "startup_timeout_seconds": 120.0,
         "health_check_interval_seconds": 5.0,
-        "max_restart_attempts": 3,
+        "max_restart_attempts": 8,
         "initial_backoff_seconds": 1.0,
         "max_backoff_seconds": 10.0,
         "termination_grace_seconds": 40.0,
     }
-    assert "_g6/" in config["database_program"]["store_id"]
-    assert "_g6/ducklake/" in config["ducklake_projection_program"]["catalog_path"]
+    assert "_g7/" in config["database_program"]["store_id"]
+    assert "_g7/ducklake/" in config["ducklake_projection_program"]["catalog_path"]
+    assert config["ducklake_projection_program"]["authority"] is False
+    assert config["ducklake_projection_program"]["completion_prerequisite"] is False
     assert config["initial_projection"]["completed_task_ids"] == []
     assert config["initial_projection"]["ready_task_ids"] == []
     assert config["initial_projection"]["post_operator_completed_task_ids"] == ["PCTDD-000"]
@@ -70,6 +93,87 @@ def test_g6_amendment_has_exact_generation_and_component_safe_migration() -> Non
     assert config["provider"]["model_id"] == "grok-4.6"
     assert config["provider"]["completion_authority"] == "controller_owned_sealed_validation_and_database_cas"
     assert not any(key.startswith("fallback_") for key in config["provider"])
+
+    historical_board = subprocess.check_output(
+        ["git", "show", "c8917d039e3f4598a7d29643c621e341318197da:docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md"],
+        cwd=ROOT,
+    )
+    historical_objectives = subprocess.check_output(
+        ["git", "show", "c8917d039e3f4598a7d29643c621e341318197da:docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md"],
+        cwd=ROOT,
+    )
+    assert generator._serialized(generator.render_board()) == historical_board
+    assert generator._serialized(generator.render_objectives()) == historical_objectives
+
+    source_inventory = generator.g6_source_migration_inventory()
+    tracked_source_inventory = json.loads(
+        (
+            ROOT
+            / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert tracked_source_inventory == source_inventory
+    successor = source_inventory["source_binding_successor_materialization"]
+    assert config["source_binding_successor_materialization"] == successor
+    assert successor["schema"] == "pctdd/source-binding-successor-materialization@1"
+    assert successor["migration_revision"] == "PCTDD-SOURCE-G7"
+    assert successor["control_source_anchor_head"] == "c8917d039e3f4598a7d29643c621e341318197da"
+    assert successor["control_source_anchor_tree"] == "c3e061b62caa3ad0c35c7e167242694a8fec171c"
+    assert (
+        "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py"
+        in successor["operator_control_paths"]
+    )
+    projection = successor["prior_control_projection"]
+    assert projection["statuses"] == {
+        "completed": 14,
+        "in_progress": 2,
+        "retrying": 1,
+        "todo": 37,
+    }
+    assert projection["event_watermark"] == projection["event_count"] == 182
+    for name in (
+        "event_prefix_digest",
+        "task_definition_digest",
+        "accepted_tables_digest",
+    ):
+        assert projection[name].startswith("sha256:")
+        assert len(projection[name]) == len("sha256:") + 64
+        int(projection[name].removeprefix("sha256:"), 16)
+    assert projection["historical_row_hashes"]
+    assert successor["target_control_projection"] == {
+        "statuses": {"completed": 14, "retrying": 3, "todo": 37},
+        "task_revisions": {"PCTDD-001": 17, "PCTDD-029": 7},
+        "ready_frontier": [
+            "PCTDD-001",
+            "PCTDD-018",
+            "PCTDD-029",
+            "PCTDD-031",
+            "PCTDD-033",
+        ],
+    }
+    lanes = successor["coordination_stores"]
+    assert [record["lane"] for record in lanes] == [0, 1, 2, 3]
+    assert {
+        record["settlement"]["task_alias"]
+        for record in lanes
+        if "settlement" in record
+    } == {"PCTDD-001", "PCTDD-029"}
+    for record in lanes:
+        observation = record["execution_observation"]
+        assert set(record) >= {"lane", "path", "sha256", "size_bytes"}
+        assert set(observation) >= {"path", "sha256", "size_bytes"}
+    migration_module = generator._source_migration_module()
+    inspected = migration_module.inspect_stopped_source_authority(
+        root=ROOT,
+        policy=successor,
+    )
+    assert inspected["control_projection"] == projection
+    assert successor["copy_policy"]["copied"] == [
+        "authoritative_control_store",
+        "coordination_history",
+    ]
+    assert "execution_observation_stores" in successor["copy_policy"]["not_copied"]
+    assert "ducklake_catalog_and_data" in successor["copy_policy"]["not_copied"]
 
     migration = generator.g5_migration_inventory()
     tracked = json.loads(
@@ -226,6 +330,14 @@ def test_control_manifest_covers_every_preseal_protected_control() -> None:
     }
     assert set(manifest["protected_control_hashes_before_manifest_and_seal"]) == expected
     assert "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json" in expected
+    assert "scripts/pctdd_g7_source_binding_successor.py" in expected
+    assert (
+        "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py"
+        in expected
+    )
+    assert manifest["source_binding_migration_module"] == (
+        "scripts/pctdd_g7_source_binding_successor.py"
+    )
     assert manifest["dependency_seal_must_hash_this_manifest"] is True
     assert manifest["manifest_is_completion_receipt"] is False
 

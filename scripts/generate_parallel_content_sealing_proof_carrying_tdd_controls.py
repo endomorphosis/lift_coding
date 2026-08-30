@@ -3,26 +3,34 @@
 
 from __future__ import annotations
 
+import argparse
+import functools
 import hashlib
 import importlib.metadata
+import importlib.util
 import json
 import os
 import platform
-import shutil
 import subprocess
 import sys
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
-
 ROOT = Path(__file__).resolve().parents[1]
 NAMESPACE = "parallel-content-sealing-proof-carrying-tdd-v1"
 PLAN_REVISION = "PCTDD-PLAN-V1.1"
 PREDECESSOR_PLAN_REVISION = "PCTDD-PLAN-V1"
-STORE_GENERATION = "pctdd-v1-g6"
-RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6"
+HISTORICAL_STORE_GENERATION = "pctdd-v1-g6"
+HISTORICAL_RUNTIME_ROOT = (
+    "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6"
+)
+STORE_GENERATION = "pctdd-v1-g7"
+RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g7"
 QUACK_ENDPOINT = "quack:127.0.0.1:27278"
+SOURCE_MIGRATION_REVISION = "PCTDD-SOURCE-G7"
+CONTROL_SOURCE_ANCHOR_HEAD = "c8917d039e3f4598a7d29643c621e341318197da"
+CONTROL_SOURCE_ANCHOR_TREE = "c3e061b62caa3ad0c35c7e167242694a8fec171c"
 BRANCH = "agent/parallel-content-sealing-proof-carrying-tdd-v1"
 INVENTORY = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory"
 PLAN = ROOT / "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md"
@@ -35,9 +43,43 @@ VALIDATION_PROFILES = ROOT / "config/parallel_content_sealing_proof_carrying_tdd
 VALIDATION_DISPATCHER = "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py"
 CONTROL_TEST = "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py"
 G5_MIGRATION_INVENTORY = INVENTORY / "g5_migration_inventory.json"
+G6_SOURCE_MIGRATION_INVENTORY = INVENTORY / "g6_source_migration_inventory.json"
 CONTROL_MANIFEST = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
 G5_DATABASE = ROOT / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g5/control.duckdb"
 G5_BOOTSTRAP_RECEIPT = ROOT / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g5/evidence/bootstrap/pctdd-bootstrap.json"
+G6_DATABASE = ROOT / HISTORICAL_RUNTIME_ROOT / "control.duckdb"
+G6_BOOTSTRAP_RECEIPT = (
+    ROOT / HISTORICAL_RUNTIME_ROOT / "evidence/bootstrap/pctdd-bootstrap.json"
+)
+G6_STOPPED_STATUS = (
+    ROOT / HISTORICAL_RUNTIME_ROOT / "quack-owner/quack-state-server.status.json"
+)
+SOURCE_MIGRATION_MODULE = "scripts/pctdd_g7_source_binding_successor.py"
+SOURCE_MIGRATION_TEST = (
+    "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py"
+)
+QUACK_LIFECYCLE_CONTROL_TEST = (
+    "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py"
+)
+SOURCE_MIGRATION_CONTROL_PATHS = (
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+    "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json",
+    "external/ipfs_accelerate",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py",
+    "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
+    SOURCE_MIGRATION_MODULE,
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
+    CONTROL_TEST,
+    SOURCE_MIGRATION_TEST,
+    QUACK_LIFECYCLE_CONTROL_TEST,
+)
 PCTDD_DUCKDB_EXTENSION_DIRECTORY_ENV = (
     "IPFS_ACCELERATE_PCTDD_DUCKDB_EXTENSION_DIRECTORY"
 )
@@ -607,9 +649,9 @@ def g5_migration_inventory() -> dict[str, Any]:
             "preserved_failed_validation_rescue_branch_count": 29,
         },
         "successor": {
-            "store_generation": STORE_GENERATION,
+            "store_generation": HISTORICAL_STORE_GENERATION,
             "plan_revision": PLAN_REVISION,
-            "runtime_root": RUNTIME_ROOT,
+            "runtime_root": HISTORICAL_RUNTIME_ROOT,
             "quack_endpoint": QUACK_ENDPOINT,
         },
         "migration_policy": {
@@ -625,9 +667,165 @@ def g5_migration_inventory() -> dict[str, Any]:
     }
 
 
+def _source_migration_module() -> Any:
+    path = ROOT / SOURCE_MIGRATION_MODULE
+    spec = importlib.util.spec_from_file_location(
+        "pctdd_g7_source_binding_successor_inventory", path
+    )
+    if spec is None or spec.loader is None:
+        raise RuntimeError("cannot load the protected g7 source-migration module")
+    accelerator = str(ROOT / "external/ipfs_accelerate")
+    if accelerator not in sys.path:
+        sys.path.insert(0, accelerator)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _g6_coordination_stores(
+    captured: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    settlements: dict[int, dict[str, Any]] = {
+        0: {
+            "task_alias": "PCTDD-001",
+            "task_cid": "baguqeera3ce62yl3w5ar5ygfoh76tmjzzojm5qfhvirjjjuqeserigpa2cra",
+            "control_revision": 15,
+            "attempt_id": "attempt:6743f55697cf4fc281712cf77a8f6fec",
+            "claim_id": "claim:e468be9408284fa0a03724ee067a11d9",
+            "lease_id": "lease:5516aa2e9ef649f099419ce77eafc7c3",
+            "owner_session_id": "embedded-store:aa8373fcda60e36bd6300fc27e6b2a6c",
+            "fencing_token": 6,
+            "fence_epoch": 6,
+            "dispatch_outcome": "started",
+            "dispatch_body": {"resumed_from": "deferred"},
+            "automatic_retry_admitted": False,
+            "old_result_reusable": False,
+        },
+        1: {
+            "task_alias": "PCTDD-029",
+            "task_cid": "baguqeera2s4tz4myfd7egggeqdj3swxcxfrgws236z7rb7idmmn5jegnbgva",
+            "control_revision": 5,
+            "attempt_id": "attempt:a365561afbac46f680b27f7e0cf5527e",
+            "claim_id": "claim:b4288022fe5c45b68988018384405bce",
+            "lease_id": "lease:d827fd4a0c9a4d019483a5e680e14d51",
+            "owner_session_id": "embedded-store:44dc846d44d5a59744347de494f628bd",
+            "fencing_token": 2,
+            "fence_epoch": 2,
+            "dispatch_outcome": "deferred",
+            "dispatch_body": {"exception_type": "DatabasePortalBridgeDeferred"},
+            "automatic_retry_admitted": False,
+            "old_result_reusable": False,
+        },
+    }
+    if [int(record.get("lane", -1)) for record in captured] != [0, 1, 2, 3]:
+        raise RuntimeError("fenced g6 capture returned an unexpected lane population")
+    records: list[dict[str, Any]] = []
+    for lane, value in enumerate(captured):
+        record = dict(value)
+        if lane in settlements:
+            record["settlement"] = settlements[lane]
+        records.append(record)
+    return records
+
+
+@functools.lru_cache(maxsize=1)
+def g6_source_migration_inventory() -> dict[str, Any]:
+    """Freeze the stopped g6 prefix without treating history as current work."""
+
+    module = _source_migration_module()
+    coordination_paths = [
+        f"{HISTORICAL_RUNTIME_ROOT}/state/lane-{lane}/quack-lane-coordination.duckdb"
+        for lane in range(4)
+    ]
+    observation_paths = [
+        f"{HISTORICAL_RUNTIME_ROOT}/state/lane-{lane}/quack-lane-control.execution.duckdb"
+        for lane in range(4)
+    ]
+    captured = module.capture_stopped_source_authority(
+        root=ROOT,
+        control_path=G6_DATABASE.relative_to(ROOT).as_posix(),
+        bootstrap_path=G6_BOOTSTRAP_RECEIPT.relative_to(ROOT).as_posix(),
+        status_path=G6_STOPPED_STATUS.relative_to(ROOT).as_posix(),
+        coordination_paths=coordination_paths,
+        execution_observation_paths=observation_paths,
+    )
+    projection = dict(captured["prior_control_projection"])
+    owner = dict(captured["prior_owner_identity"])
+    coordination = _g6_coordination_stores(
+        [dict(record) for record in captured["coordination_stores"]]
+    )
+    policy = {
+        "schema": "pctdd/source-binding-successor-materialization@1",
+        "migration_revision": SOURCE_MIGRATION_REVISION,
+        "prior_store_generation": HISTORICAL_STORE_GENERATION,
+        "target_store_generation": STORE_GENERATION,
+        "prior_runtime_root": HISTORICAL_RUNTIME_ROOT,
+        "target_runtime_root": RUNTIME_ROOT,
+        "target_quack_endpoint": QUACK_ENDPOINT,
+        "receipt_marker": "source-migration-receipt.json",
+        "control_source_anchor_head": CONTROL_SOURCE_ANCHOR_HEAD,
+        "control_source_anchor_tree": CONTROL_SOURCE_ANCHOR_TREE,
+        "operator_control_paths": list(SOURCE_MIGRATION_CONTROL_PATHS),
+        "governed_gitlinks": {
+            relative: git("rev-parse", "HEAD", cwd=ROOT / relative)
+            for relative in (
+                "external/ipfs_accelerate",
+                "external/ipfs_datasets",
+                "external/ipfs_kit",
+            )
+        },
+        "prior_control_store": dict(captured["prior_control_store"]),
+        "prior_bootstrap_receipt": dict(captured["prior_bootstrap_receipt"]),
+        "prior_stopped_status": dict(captured["prior_stopped_status"]),
+        "prior_owner_identity": owner,
+        "accepted_plan_root_cid": "baguqeeraaiqrxovjj4y3ecx6jtvzqfrrrqwuag7hl2c35i2z3eapax2nzaya",
+        "prior_plan_revision": 1,
+        "prior_control_projection": projection,
+        "coordination_stores": coordination,
+        "target_control_projection": {
+            "statuses": {"completed": 14, "retrying": 3, "todo": 37},
+            "task_revisions": {"PCTDD-001": 17, "PCTDD-029": 7},
+            "ready_frontier": [
+                "PCTDD-001",
+                "PCTDD-018",
+                "PCTDD-029",
+                "PCTDD-031",
+                "PCTDD-033",
+            ],
+        },
+        "copy_policy": {
+            "copied": ["authoritative_control_store", "coordination_history"],
+            "not_copied": [
+                "execution_observation_stores",
+                "read_replica",
+                "ducklake_catalog_and_data",
+                "logs",
+                "worktrees",
+                "merge_queue",
+                "quack_owner_runtime",
+                "credentials",
+                "runtime_registry",
+            ],
+            "publication": "private_stage_hash_verify_then_no_overwrite_links_and_marker_last",
+            "g6_remains_read_only_history": True,
+        },
+    }
+    return {
+        "schema": "pctdd/g6-source-binding-migration-inventory@1",
+        "program_id": NAMESPACE,
+        "historical_plan_revision": PLAN_REVISION,
+        "historical_task_definitions_preserved": True,
+        "historical_completions_revalidated_for_integrity_not_reissued": True,
+        "source_binding_successor_materialization": policy,
+    }
+
+
 def scope_for(n: int, owner: str) -> str:
     if n == 0:
-        return ", ".join(sorted(PROTECTED_ARTIFACTS))
+        # The accepted V1.1 task definition remains byte-for-byte historical.
+        # New g7 operator controls are protected by the scheduler/manifest,
+        # not retroactively inserted into PCTDD-000's task body.
+        return ", ".join(sorted(V11_TASKBOARD_PROTECTED_ARTIFACTS))
     if n == 4:
         return (
             "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
@@ -938,8 +1136,27 @@ control-plane defect: non-executable validation prose was materialized as a
 command and repeated database claims could outlive the intended attempt cap.
 The g5 database, event watermark, accepted PCTDD-000 receipt, failures, and 29
 rescue branches remain immutable history. Nothing in g5 is reopened or
-silently promoted. The successor is a fresh `{STORE_GENERATION}` authority at
-`{RUNTIME_ROOT}`, served by `{QUACK_ENDPOINT}`.
+silently promoted. The successor is a fresh `{HISTORICAL_STORE_GENERATION}`
+authority at `{HISTORICAL_RUNTIME_ROOT}`, served by `{QUACK_ENDPOINT}`.
+
+## G7 exact source-binding successor
+
+The stopped g6 authority has accepted historical work that must neither be
+reopened nor represented as current-source execution. `PCTDD-SOURCE-G7`
+therefore creates `{STORE_GENERATION}` under `{RUNTIME_ROOT}` from an exact,
+sealed g6 prefix. It preserves the 14 accepted completions and V1.1 task/goal
+definitions, independently rehashes their rows and evidence, appends one
+operator source-binding revision, and explicitly retires only the two sealed
+stranded attempts. Execution observations, read replicas, DuckLake data,
+owner material, logs, worktrees, and merge/runtime state are not copied.
+Publication is private-stage, no-overwrite, and marker-last. DuckLake remains
+non-authoritative. Future assignments bind the current sealed source through
+the scheduler execution/worktree contract; historical task rows are not
+generically rematerialized or rewritten. The stopped predecessor snapshot is
+captured under the canonical state-owner fence. The managed g7 owner retries
+known stopped/dead startup failures at most eight times with bounded 1–10
+second backoff; persistent or unknown-liveness failures remain typed and
+fail closed.
 
 Every task names one protected validation profile through a task-bound
 dispatcher. Profiles contain argv arrays only and execute with `shell=False`.
@@ -1029,7 +1246,7 @@ def render_objectives() -> str:
 def render_board() -> str:
     lines = [f"""# PCTDD supervisor task board
 
-Namespace: `{NAMESPACE}`. Revision: `{PLAN_REVISION}` (fresh `{STORE_GENERATION}`, preserving g5 as immutable predecessor history). This is a sealed bootstrap projection; DuckDB through Quack owns live status. Markdown is non-authoritative and is not completion authority. PCTDD-000 remains `todo` here and is completed only by an evidence-gated task-store transaction.
+Namespace: `{NAMESPACE}`. Revision: `{PLAN_REVISION}` (fresh `{HISTORICAL_STORE_GENERATION}`, preserving g5 as immutable predecessor history). This is a sealed bootstrap projection; DuckDB through Quack owns live status. Markdown is non-authoritative and is not completion authority. PCTDD-000 remains `todo` here and is completed only by an evidence-gated task-store transaction.
 
 ## Execution invariants
 
@@ -1047,7 +1264,7 @@ Namespace: `{NAMESPACE}`. Revision: `{PLAN_REVISION}` (fresh `{STORE_GENERATION}
         completion = "operator_evidence" if operator else "independent_evidence_and_review"
         schedulable = str(not operator).lower()
         lane = "operator" if operator else f"pctdd-lane-{n % 4}"
-        protected = ", ".join(sorted(PROTECTED_ARTIFACTS)) if operator else "all scheduler protected_paths; no worker edits"
+        protected = ", ".join(sorted(V11_TASKBOARD_PROTECTED_ARTIFACTS)) if operator else "all scheduler protected_paths; no worker edits"
         no_model = "operator inventory, deterministic validators, source seals, and scheduler dry-run" if operator else "exact reuse -> deterministic analysis/tests/proofs -> symbolic repair -> procedure reuse"
         validation = validation_command_for(n)
         rescue = W1_RESCUE_CANDIDATES.get(task, "none")
@@ -1075,7 +1292,7 @@ Namespace: `{NAMESPACE}`. Revision: `{PLAN_REVISION}` (fresh `{STORE_GENERATION}
     return "\n".join(lines)
 
 
-PROTECTED_ARTIFACTS = (
+V11_TASKBOARD_PROTECTED_ARTIFACTS = (
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md",
@@ -1106,6 +1323,16 @@ PROTECTED_ARTIFACTS = (
     "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
 )
 
+# Successor controls are operator-owned without changing the already accepted
+# V1.1 task definitions above.
+PROTECTED_ARTIFACTS = (
+    *V11_TASKBOARD_PROTECTED_ARTIFACTS,
+    G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+    SOURCE_MIGRATION_MODULE,
+    SOURCE_MIGRATION_TEST,
+    QUACK_LIFECYCLE_CONTROL_TEST,
+)
+
 
 def source_record(name: str, relative: str) -> dict[str, Any]:
     repo = ROOT / relative
@@ -1129,20 +1356,27 @@ def source_record(name: str, relative: str) -> dict[str, Any]:
 
 
 def render_config() -> dict[str, Any]:
-    base = git("rev-parse", "HEAD")
-    tree = git("rev-parse", "HEAD^{tree}")
+    # These are the immutable stopped-g6 control anchors. The runtime migration
+    # receipt, not a self-referential tracked file, binds the eventual clean
+    # successor HEAD/tree.
+    base = CONTROL_SOURCE_ANCHOR_HEAD
+    tree = CONTROL_SOURCE_ANCHOR_TREE
+    source_migration = g6_source_migration_inventory()[
+        "source_binding_successor_materialization"
+    ]
     return {
         "schema": "ipfs_accelerate_py.agent_supervisor.parallel-content-sealing-proof-carrying-tdd.scheduler_config@1",
         "program_identifier": NAMESPACE, "board_namespace": NAMESPACE, "accepted_plan_revision_alias": PLAN_REVISION,
         "taskboard_path": BOARD.relative_to(ROOT).as_posix(), "objectives_path": OBJECTIVES.relative_to(ROOT).as_posix(), "plan_path": PLAN.relative_to(ROOT).as_posix(),
         "validator_path": "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py", "dependency_validator_path": "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py", "materializer_path": "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py", "validation_profile_path": VALIDATION_PROFILES.relative_to(ROOT).as_posix(), "validation_dispatcher_path": VALIDATION_DISPATCHER,
         "task_prefix": "PCTDD-", "goal_prefix": "PCTDD-G", "root_goal_id": "PCTDD-G000", "merge_target_branch": BRANCH,
-        "control_amendment": {"revision": PLAN_REVISION, "amends": PREDECESSOR_PLAN_REVISION, "reason": "replace unresolved validation prose and isolate retry-bounded g6 authority", "migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "fresh_materialization_required": True, "copy_predecessor_acceptance": False},
+        "control_amendment": {"revision": PLAN_REVISION, "amends": PREDECESSOR_PLAN_REVISION, "reason": "preserve the accepted V1.1/g6 program while authorizing one exact g7 source-binding successor", "migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "historical_g6_plan_and_task_definitions_preserved": True, "source_migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "fresh_materialization_required": False, "copy_predecessor_acceptance": True, "historical_completion_reissuance": False},
         "source_binding": {"accelerator_required_ancestor": base, "accelerator_planning_revision": base, "accelerator_planning_tree": tree, "accelerator_required_branch": BRANCH, "bootstrap_task_source": "duckdb", "ipfs_accelerate_submodule_path": "external/ipfs_accelerate", "ipfs_accelerate_planning_revision": git("rev-parse", "HEAD", cwd=ROOT / "external/ipfs_accelerate"), "ipfs_accelerate_planning_tree": git("rev-parse", "HEAD^{tree}", cwd=ROOT / "external/ipfs_accelerate"), "ipfs_datasets_submodule_path": "external/ipfs_datasets", "ipfs_datasets_planning_revision": git("rev-parse", "HEAD", cwd=ROOT / "external/ipfs_datasets"), "ipfs_datasets_planning_tree": git("rev-parse", "HEAD^{tree}", cwd=ROOT / "external/ipfs_datasets"), "ipfs_kit_submodule_path": "external/ipfs_kit", "ipfs_kit_planning_revision": git("rev-parse", "HEAD", cwd=ROOT / "external/ipfs_kit"), "ipfs_kit_planning_tree": git("rev-parse", "HEAD^{tree}", cwd=ROOT / "external/ipfs_kit"), "require_initialized_gitlinks": True, "require_superproject_gitlink_equals_nested_head": True, "require_clean_nested_worktree_at_task_start": True, "require_origin_main_as_ancestor": False, "record_recursive_repository_forest_at_launch": True, "changed_revision_requires_fresh_inventory_and_baseline": True, "planning_revision_is_runtime_completion_evidence": False},
+        "source_binding_successor_materialization": source_migration,
         "initial_projection": {"task_count": 54, "task_dependency_count": sum(map(len, DEPENDENCIES.values())), "completed_task_ids": [], "ready_task_ids": [], "post_operator_completed_task_ids": ["PCTDD-000"], "post_operator_ready_task_ids": [f"PCTDD-{n:03d}" for n in range(1, 5)], "blocked_task_ids": [], "terminal_task_id": "PCTDD-053", "goal_count": 24, "root_goal_id": "PCTDD-G000"},
-        "database_program": {"authority_mode": "quack", "task_source_kind": "duckdb", "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN", "quack_endpoint": QUACK_ENDPOINT, "store_id": f"{RUNTIME_ROOT}/control.duckdb", "store_generation": STORE_GENERATION, "schema_revision": "1", "event_store_path": f"{RUNTIME_ROOT}/events", "runtime_registry_path": f"{RUNTIME_ROOT}/registry", "worktree_root": f"{RUNTIME_ROOT}/worktrees", "export_profile": "pctdd-v1", "failover_policy": "fail_closed", "explicit_legacy": False, "owner_management": {"mode": "managed_local", "owner_state_dir": str((ROOT / RUNTIME_ROOT / "quack-owner").resolve()), "startup_timeout_seconds": 120.0, "health_check_interval_seconds": 5.0, "max_restart_attempts": 3, "initial_backoff_seconds": 1.0, "max_backoff_seconds": 10.0, "termination_grace_seconds": 40.0}, "predecessor_store_generation": "pctdd-v1-g5", "predecessor_is_read_only_history": True},
+        "database_program": {"authority_mode": "quack", "task_source_kind": "duckdb", "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN", "quack_endpoint": QUACK_ENDPOINT, "store_id": f"{RUNTIME_ROOT}/control.duckdb", "store_generation": STORE_GENERATION, "schema_revision": "1", "event_store_path": f"{RUNTIME_ROOT}/events", "runtime_registry_path": f"{RUNTIME_ROOT}/registry", "worktree_root": f"{RUNTIME_ROOT}/worktrees", "export_profile": "pctdd-v1", "failover_policy": "fail_closed", "explicit_legacy": False, "owner_management": {"mode": "managed_local", "owner_state_dir": str((ROOT / RUNTIME_ROOT / "quack-owner").resolve()), "startup_timeout_seconds": 120.0, "health_check_interval_seconds": 5.0, "max_restart_attempts": 8, "initial_backoff_seconds": 1.0, "max_backoff_seconds": 10.0, "termination_grace_seconds": 40.0}, "predecessor_store_generation": HISTORICAL_STORE_GENERATION, "predecessor_is_read_only_history": True, "historical_store_generations": ["pctdd-v1-g5", HISTORICAL_STORE_GENERATION]},
         "operational_control_plane": {"name": "DuckDB + Quack + non-authoritative DuckLake", "duckdb_role": "authoritative transactional goals/tasks/CAS/fences/receipts/events", "quack_role": "authenticated exclusive loopback state owner", "ducklake_role": "rebuildable analytics/history projection", "direct_multi_process_duckdb_file_open_permitted": False, "automatic_file_fallback_permitted": False, "outage_policy": "fail_closed", "markdown_is_bootstrap_only": True},
-        "ducklake_projection_program": {"mode": "enabled_non_authoritative", "authority": False, "may_grant_authority": False, "scheduling_prerequisite": False, "acceptance_prerequisite": False, "completion_prerequisite": False, "catalog_path": f"{RUNTIME_ROOT}/ducklake/catalog.duckdb", "data_path": f"{RUNTIME_ROOT}/ducklake/data", "logical_datasets": ["bootstrap_history", "g5_migration_history"], "outage_policy": "typed unavailable and replayable; never block DuckDB authority"},
+        "ducklake_projection_program": {"mode": "enabled_non_authoritative", "authority": False, "may_grant_authority": False, "scheduling_prerequisite": False, "acceptance_prerequisite": False, "completion_prerequisite": False, "catalog_path": f"{RUNTIME_ROOT}/ducklake/catalog.duckdb", "data_path": f"{RUNTIME_ROOT}/ducklake/data", "logical_datasets": ["bootstrap_history", "g5_migration_history", "g6_source_migration_history"], "outage_policy": "typed unavailable and replayable; never block DuckDB authority"},
         "max_lanes": 4, "strict_task_sharding": True, "idle_lane_work_stealing": "", "exit_when_all_tracks_terminal": False, "objective_refill_enabled": False, "codebase_refill_enabled": False, "objective_goal_refinement_enabled": False, "retry_budget_guardrail_enabled": True, "dependency_guardrail_enabled": True, "reconciliation_guardrail_enabled": True,
         "poll_interval_seconds": 5, "daemon_interval_seconds": 20, "check_interval_seconds": 20, "stale_seconds": 1800, "watchdog_startup_grace_seconds": 600, "max_restarts": 3, "max_task_attempts": 2, "implementation_retry_budget": 1, "validation_retry_budget": 2, "merge_retry_budget": 2, "implementation_timeout_seconds": 7200, "implementation_max_timeout_seconds": 21600, "implementation_log_stall_seconds": 1200,
         "worktree_submodule_paths": ["external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit"], "protected_paths": list(PROTECTED_ARTIFACTS),
@@ -1162,7 +1396,7 @@ def benchmark_config() -> dict[str, Any]:
 def inventories() -> dict[str, dict[str, Any]]:
     sources = [source_record("ipfs_accelerate_py", "external/ipfs_accelerate"), source_record("ipfs_datasets_py", "external/ipfs_datasets"), source_record("ipfs_kit_py", "external/ipfs_kit")]
     return {
-        "repository_baseline.json": {"schema": "pctdd/repository-baseline@2", "captured_utc": "2026-08-29T08:21:45Z", "planning_root": str(ROOT), "control_generation_input_head": git("rev-parse", "HEAD"), "control_generation_input_tree": git("rev-parse", "HEAD^{tree}"), "branch": git("branch", "--show-current"), "sources": sources, "all_governed_sources_clean_and_gitlink_exact": all(not item["dirty"] and item["gitlink_matches_nested_head"] for item in sources), "dirty_user_tree_preserved": True, "original_user_tree_evidence": {"captured_utc": "2026-08-28", "root_status_sha256": "f0a737302e4455c55e60edc28403da4f339e9b64811cc0b0dcf0c87e2d9629b3", "root_diff_sha256": "72f6c22550da009960d570f8b5128077c9160ef2d4ae2d5cc75498ab69e08fb7", "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac", "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798", "datasets_status_sha256": "a1b4619c21ab5c19d90aa666b48d10d7f5034a2abe2ce57e0f854892429d9c83"}, "evidence_note": "The fresh g6 observation records actual source dirtiness and exact outer gitlinks; original user-tree hashes remain preserved without copying user content."},
+        "repository_baseline.json": {"schema": "pctdd/repository-baseline@2", "captured_utc": "2026-08-30T08:07:01Z", "planning_root": str(ROOT), "control_generation_input_head": CONTROL_SOURCE_ANCHOR_HEAD, "control_generation_input_tree": CONTROL_SOURCE_ANCHOR_TREE, "branch": BRANCH, "sources": sources, "all_governed_sources_clean_and_gitlink_exact": all(not item["dirty"] and item["gitlink_matches_nested_head"] for item in sources), "dirty_user_tree_preserved": True, "original_user_tree_evidence": {"captured_utc": "2026-08-28", "root_status_sha256": "f0a737302e4455c55e60edc28403da4f339e9b64811cc0b0dcf0c87e2d9629b3", "root_diff_sha256": "72f6c22550da009960d570f8b5128077c9160ef2d4ae2d5cc75498ab69e08fb7", "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac", "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798", "datasets_status_sha256": "a1b4619c21ab5c19d90aa666b48d10d7f5034a2abe2ce57e0f854892429d9c83"}, "evidence_note": "The fixed c891 stopped-g6 control anchor and current exact governed gitlinks seed the g7 runtime migration; the runtime marker binds the eventual clean successor HEAD/tree without rewriting historical completion claims."},
         "authority_matrix.json": {"schema": "pctdd/authority-matrix@1", "canonical_semantic_and_statement_authority": "ipfs_datasets_py", "verified_storage_wal_cas_authority": "ipfs_kit_py", "execution_scheduling_admission_authority": "ipfs_accelerate_py", "task_transaction_authority": "DuckDB via exclusive authenticated Quack owner", "analytics_projection": "DuckLake non-authoritative", "markdown": "non-authoritative bootstrap", "forbidden_duplicates": ["proof system", "canonical profile", "CID system", "pytest runner", "test selector", "proof cache", "block store", "WAL", "current-root store", "agent framework", "scheduler", "worktree system", "provider router", "merge engine"]},
         "overlap_gap_matrix.json": {"schema": "pctdd/overlap-gap@1", "entries": [{"capability": "IncrementalProofSealer full/delta/WAL/CAS", "owner": "ipfs_accelerate_py + ipfs_kit_py", "classification": "available_with_caveats", "successor": "prepared-seal consumer adapter"}, {"capability": "pytest proof reuse/DI/xdist controller publication", "owner": "ipfs_accelerate_py", "classification": "available_with_caveats", "successor": "fixture-staged V2 identity/composite phases"}, {"capability": "semantic selection", "owner": "ipfs_datasets_py consumed by accelerate", "classification": "available", "successor": "adapter only"}, {"capability": "verified persistent hash memo", "owner": "datasets contract + kit store", "classification": "partial", "successor": "versioned records/store"}, {"capability": "aggregate selected-test ZK", "owner": "datasets statement + accelerate backend", "classification": "missing", "successor": "versioned aggregate statement; typed unavailable without admitted production key"}, {"capability": "FastTddLoopController", "owner": "ipfs_accelerate_py", "classification": "partial", "successor": "compose current authorities"}]},
         "hash_identity_inventory.json": {"schema": "pctdd/hash-identity@1", "rules": ["CID is exact byte identity under a versioned profile", "Git blob OID is memo lookup key only", "filesystem metadata nominates a candidate only", "chunk manifest does not replace raw full-stream CID", "ordinary SHA-256 of one stream is not composed from independent chunk hashes"], "preserve": ["canonical bytes", "codec", "multicodec", "multihash", "CID version", "multibase", "ordering", "normalization"]},
@@ -1174,6 +1408,7 @@ def inventories() -> dict[str, dict[str, Any]]:
         "storage_recovery_inventory.json": {"schema": "pctdd/storage-recovery@1", "existing": ["immutable proof-seal persistence", "ordered WAL", "current-pointer compare-and-swap", "stale-parent rejection", "crash recovery"], "authority": "kit stores/verifies bytes; accelerate admits proof/test meaning", "required_invariant": "parallel immutable preparation has no publication authority; final ordered WAL and generation-bearing current-root CAS remain serial and fail closed"},
         "benchmark_preregistration.json": benchmark_config(),
         "g5_migration_inventory.json": g5_migration_inventory(),
+        "g6_source_migration_inventory.json": g6_source_migration_inventory(),
     }
 
 
@@ -1193,6 +1428,11 @@ def render_control_manifest() -> dict[str, Any]:
         "plan_revision": PLAN_REVISION,
         "task_id": "PCTDD-000",
         "completion_authority": "DatabaseTaskSource evidence plus compare-and-set after staged seal-controls",
+        "historical_completion_reissued": False,
+        "historical_plan_and_task_definitions_preserved": True,
+        "source_binding_migration_revision": SOURCE_MIGRATION_REVISION,
+        "source_binding_migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "source_binding_migration_module": SOURCE_MIGRATION_MODULE,
         "completion_prerequisites": [
             "required-acceptance pytest phase receipt",
             "dependency validator valid=true",
@@ -1200,6 +1440,13 @@ def render_control_manifest() -> dict[str, Any]:
             "configured-board preflight valid=true",
             "configured-board implementation dry-run success",
             "one exact clean source HEAD/tree for every prerequisite",
+        ],
+        "successor_materialization_prerequisites": [
+            "exact stopped g6 store and event prefix",
+            "historical completion and definition row hashes unchanged",
+            "exact stranded-attempt settlement without old-result reuse",
+            "private staged g7 publication with final marker last",
+            "current clean source and governed gitlinks revalidated before publication",
         ],
         "ordinary_worker_may_modify": False,
         "manifest_is_completion_receipt": False,
@@ -1231,8 +1478,10 @@ def render_seal() -> dict[str, Any]:
         "plan_revision": PLAN_REVISION,
         "amends_plan_revision": PREDECESSOR_PLAN_REVISION,
         "store_generation": STORE_GENERATION,
-        "predecessor_generation": "pctdd-v1-g5",
-        "migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "predecessor_generation": HISTORICAL_STORE_GENERATION,
+        "historical_generations": ["pctdd-v1-g5", HISTORICAL_STORE_GENERATION],
+        "migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "historical_g5_migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
         "artifacts": artifacts,
         "sources": [
             source_record("ipfs_accelerate_py", "external/ipfs_accelerate"),
@@ -1259,7 +1508,7 @@ REQUIRED_HASHED = (
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md",
-    *(f"docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/{name}" for name in ("repository_baseline.json", "authority_matrix.json", "overlap_gap_matrix.json", "hash_identity_inventory.json", "hashing_critical_path.json", "pytest_identity_inventory.json", "fixture_adapter_inventory.json", "proof_claim_matrix.json", "zkp_backend_inventory.json", "storage_recovery_inventory.json", "benchmark_preregistration.json", "g5_migration_inventory.json")),
+    *(f"docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/{name}" for name in ("repository_baseline.json", "authority_matrix.json", "overlap_gap_matrix.json", "hash_identity_inventory.json", "hashing_critical_path.json", "pytest_identity_inventory.json", "fixture_adapter_inventory.json", "proof_claim_matrix.json", "zkp_backend_inventory.json", "storage_recovery_inventory.json", "benchmark_preregistration.json", "g5_migration_inventory.json", "g6_source_migration_inventory.json")),
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
     "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
@@ -1271,12 +1520,76 @@ REQUIRED_HASHED = (
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
+    SOURCE_MIGRATION_MODULE,
     "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
+    SOURCE_MIGRATION_TEST,
+    QUACK_LIFECYCLE_CONTROL_TEST,
 )
 
 
-def main() -> int:
-    if len(TASKS) != 54 or len(GOALS) != 24 or len(TASK_TEST_STEMS) != 54 or len(TASK_ASSERTIONS) != 54: raise SystemExit("sealed cardinality changed")
+def operator_control_receipt() -> dict[str, Any]:
+    return {
+        "schema": "pctdd/operator-control-receipt@1",
+        "task_id": "PCTDD-000",
+        "board_namespace": NAMESPACE,
+        "plan_revision": PLAN_REVISION,
+        "amends_plan_revision": PREDECESSOR_PLAN_REVISION,
+        "store_generation": STORE_GENERATION,
+        "predecessor_generation": HISTORICAL_STORE_GENERATION,
+        "migration_revision": SOURCE_MIGRATION_REVISION,
+        "migration_inventory": G6_SOURCE_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "historical_g5_migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(),
+        "status": "sealed_pending_runtime_source_migration",
+        "markdown_non_authoritative": True,
+        "historical_completion_reissued": False,
+        "historical_plan_and_task_definitions_preserved": True,
+        "completion_authority": (
+            "The existing g6 DatabaseTaskSource completion remains historical; "
+            "only operator source-migration evidence and the marker-last g7 receipt "
+            "authorize the current control-plane source."
+        ),
+        "dependency_seal": SEAL.relative_to(ROOT).as_posix(),
+        "claim": (
+            "This tracked receipt identifies the V1.1/g7 operator source-binding "
+            "successor package. It neither re-completes PCTDD-000 nor upgrades any "
+            "historical completion into current-source execution evidence."
+        ),
+    }
+
+
+def _serialized(value: str | dict[str, Any]) -> bytes:
+    text = value if isinstance(value, str) else json.dumps(value, indent=2, sort_keys=True) + "\n"
+    return text.encode("utf-8")
+
+
+def _preseal_outputs() -> dict[Path, str | dict[str, Any]]:
+    outputs: dict[Path, str | dict[str, Any]] = {
+        PLAN: render_plan(),
+        OBJECTIVES: render_objectives(),
+        BOARD: render_board(),
+        CONFIG: render_config(),
+        BENCHMARK: benchmark_config(),
+        VALIDATION_PROFILES: validation_profiles(),
+        ROOT / "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json": operator_control_receipt(),
+    }
+    for name, value in inventories().items():
+        outputs[INVENTORY / name] = value
+    placeholders = (
+        (ROOT / "test/api/parallel_content_sealing/README.md", "Parallel content sealing API qualification"),
+        (ROOT / "test/api/proof_carrying_tdd/README.md", "Proof-carrying TDD API qualification"),
+        (ROOT / "benchmarks/agent_supervisor/parallel_content_sealing/README.md", "Parallel content sealing benchmarks"),
+        (ROOT / "benchmarks/agent_supervisor/proof_carrying_tdd/README.md", "Proof-carrying TDD benchmarks"),
+    )
+    for path, title in placeholders:
+        outputs[path] = (
+            f"# {title}\n\nProtected bootstrap placeholder. Implementation and measured "
+            "results are owned by the corresponding PCTDD worker tasks; no result "
+            "is inferred from this directory.\n"
+        )
+    return outputs
+
+
+def _assert_governed_sources_safe() -> None:
     governed_sources = [
         source_record("ipfs_accelerate_py", "external/ipfs_accelerate"),
         source_record("ipfs_datasets_py", "external/ipfs_datasets"),
@@ -1292,13 +1605,53 @@ def main() -> int:
             "refusing to generate from dirty or gitlink-mismatched governed sources: "
             + ", ".join(unsafe)
         )
-    write(PLAN, render_plan()); write(OBJECTIVES, render_objectives()); write(BOARD, render_board())
-    write(CONFIG, render_config()); write(BENCHMARK, benchmark_config())
-    write(VALIDATION_PROFILES, validation_profiles())
-    for name, value in inventories().items(): write(INVENTORY / name, value)
-    for path, title in ((ROOT / "test/api/parallel_content_sealing/README.md", "Parallel content sealing API qualification"), (ROOT / "test/api/proof_carrying_tdd/README.md", "Proof-carrying TDD API qualification"), (ROOT / "benchmarks/agent_supervisor/parallel_content_sealing/README.md", "Parallel content sealing benchmarks"), (ROOT / "benchmarks/agent_supervisor/proof_carrying_tdd/README.md", "Proof-carrying TDD benchmarks")):
-        write(path, f"# {title}\n\nProtected bootstrap placeholder. Implementation and measured results are owned by the corresponding PCTDD worker tasks; no result is inferred from this directory.\n")
-    write(ROOT / "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json", {"schema": "pctdd/operator-control-receipt@1", "task_id": "PCTDD-000", "board_namespace": NAMESPACE, "plan_revision": PLAN_REVISION, "amends_plan_revision": PREDECESSOR_PLAN_REVISION, "store_generation": STORE_GENERATION, "predecessor_generation": "pctdd-v1-g5", "migration_inventory": G5_MIGRATION_INVENTORY.relative_to(ROOT).as_posix(), "status": "sealed_pending_evidence_gated_database_completion", "markdown_non_authoritative": True, "completion_authority": "DatabaseTaskSource.record_evidence plus compare_and_set_status through the DuckDB/Quack control plane", "dependency_seal": SEAL.relative_to(ROOT).as_posix(), "claim": "This tracked receipt identifies the V1.1/g6 operator control package; it does not itself complete the task or promote any g5 result."})
+
+
+def _check_generated() -> tuple[str, ...]:
+    mismatches: list[str] = []
+    for path, value in _preseal_outputs().items():
+        expected = _serialized(value)
+        if not path.is_file() or path.read_bytes() != expected:
+            mismatches.append(path.relative_to(ROOT).as_posix())
+    if mismatches:
+        return tuple(sorted(mismatches))
+    expected_manifest = _serialized(render_control_manifest())
+    if not CONTROL_MANIFEST.is_file() or CONTROL_MANIFEST.read_bytes() != expected_manifest:
+        mismatches.append(CONTROL_MANIFEST.relative_to(ROOT).as_posix())
+        return tuple(sorted(mismatches))
+    expected_seal = _serialized(render_seal())
+    if not SEAL.is_file() or SEAL.read_bytes() != expected_seal:
+        mismatches.append(SEAL.relative_to(ROOT).as_posix())
+    return tuple(sorted(mismatches))
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="fail unless every tracked generated control is byte-identical",
+    )
+    arguments = parser.parse_args()
+    if len(TASKS) != 54 or len(GOALS) != 24 or len(TASK_TEST_STEMS) != 54 or len(TASK_ASSERTIONS) != 54:
+        raise SystemExit("sealed cardinality changed")
+    _assert_governed_sources_safe()
+    if arguments.check:
+        mismatches = _check_generated()
+        print(
+            json.dumps(
+                {
+                    "namespace": NAMESPACE,
+                    "mode": "check",
+                    "valid": not mismatches,
+                    "mismatches": list(mismatches),
+                },
+                sort_keys=True,
+            )
+        )
+        return 0 if not mismatches else 1
+    for path, value in _preseal_outputs().items():
+        write(path, value)
     write(CONTROL_MANIFEST, render_control_manifest())
     write(SEAL, render_seal())
     print(json.dumps({"namespace": NAMESPACE, "tasks": len(TASKS), "goals": len(GOALS), "dependencies": sum(map(len, DEPENDENCIES.values())), "sealed_artifacts": len(render_seal()["artifacts"])}, sort_keys=True))

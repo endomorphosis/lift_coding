@@ -9,8 +9,27 @@ control-plane defect: non-executable validation prose was materialized as a
 command and repeated database claims could outlive the intended attempt cap.
 The g5 database, event watermark, accepted PCTDD-000 receipt, failures, and 29
 rescue branches remain immutable history. Nothing in g5 is reopened or
-silently promoted. The successor is a fresh `pctdd-v1-g6` authority at
-`data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6`, served by `quack:127.0.0.1:27278`.
+silently promoted. The successor is a fresh `pctdd-v1-g6`
+authority at `data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6`, served by `quack:127.0.0.1:27278`.
+
+## G7 exact source-binding successor
+
+The stopped g6 authority has accepted historical work that must neither be
+reopened nor represented as current-source execution. `PCTDD-SOURCE-G7`
+therefore creates `pctdd-v1-g7` under `data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g7` from an exact,
+sealed g6 prefix. It preserves the 14 accepted completions and V1.1 task/goal
+definitions, independently rehashes their rows and evidence, appends one
+operator source-binding revision, and explicitly retires only the two sealed
+stranded attempts. Execution observations, read replicas, DuckLake data,
+owner material, logs, worktrees, and merge/runtime state are not copied.
+Publication is private-stage, no-overwrite, and marker-last. DuckLake remains
+non-authoritative. Future assignments bind the current sealed source through
+the scheduler execution/worktree contract; historical task rows are not
+generically rematerialized or rewritten. The stopped predecessor snapshot is
+captured under the canonical state-owner fence. The managed g7 owner retries
+known stopped/dead startup failures at most eight times with bounded 1–10
+second backoff; persistent or unknown-liveness failures remain typed and
+fail closed.
 
 Every task names one protected validation profile through a task-bound
 dispatcher. Profiles contain argv arrays only and execute with `shell=False`.
