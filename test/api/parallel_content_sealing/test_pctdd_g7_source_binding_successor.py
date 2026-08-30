@@ -871,7 +871,8 @@ def test_live_progress_check_never_opens_local_control_or_lanes(
     }
     receipt = {**receipt_body, "receipt_cid": migration._identity(receipt_body)}
     evidence_body = {"source": "migration"}
-    migration_digest = migration._identity(evidence_body)
+    migration_digest = migration._control_plane_content_identity(evidence_body)
+    assert migration_digest != migration._identity(evidence_body)
     receipt["suffix"]["migration_digest"] = migration_digest
     receipt_body = {key: value for key, value in receipt.items() if key != "receipt_cid"}
     receipt["receipt_cid"] = migration._identity(receipt_body)

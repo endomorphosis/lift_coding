@@ -71,6 +71,16 @@ def _identity(value: Any) -> str:
     return "sha256:" + hashlib.sha256(_canonical(value)).hexdigest()
 
 
+def _control_plane_content_identity(value: Any) -> str:
+    """Use the existing task authority's canonical CID identity."""
+
+    from ipfs_accelerate_py.agent_supervisor.task_sources.control_plane_contracts import (
+        content_identity,
+    )
+
+    return str(content_identity(value))
+
+
 def _safe_relative(value: Any, *, noun: str) -> str:
     text = str(value or "").strip()
     path = PurePosixPath(text)
@@ -1438,9 +1448,6 @@ def _apply_control_suffix(
     coordination_settlements: Sequence[Mapping[str, Any]],
     prior_projection: Mapping[str, Any],
 ) -> dict[str, Any]:
-    from ipfs_accelerate_py.agent_supervisor.task_sources.control_plane_contracts import (
-        content_identity,
-    )
     from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import (
         DatabaseTaskSource,
         database_retry_validation_spec_cid,
@@ -1485,7 +1492,7 @@ def _apply_control_suffix(
             coordination_settlements,
             prior_projection,
         )
-        migration_digest = content_identity(migration_body)
+        migration_digest = _control_plane_content_identity(migration_body)
         evidence = source.record_evidence(
             task_cid=operator.task_cid,
             evidence_kind=MIGRATION_EVIDENCE_KIND,
@@ -2770,7 +2777,8 @@ def _verify_source_binding_target(
     if (
         rows["evidence"][0][1] != MIGRATION_EVIDENCE_KIND
         or rows["evidence"][0][2] != receipt["suffix"]["migration_digest"]
-        or _identity(evidence_body) != receipt["suffix"]["migration_digest"]
+        or _control_plane_content_identity(evidence_body)
+        != receipt["suffix"]["migration_digest"]
     ):
         raise SourceBindingMigrationError("g7 source-migration evidence differs")
     _assert_historical_manifests(rows, receipt)
