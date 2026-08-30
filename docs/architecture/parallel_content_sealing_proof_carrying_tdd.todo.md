@@ -2179,7 +2179,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 
 ## PCTDD-057 Resolve dirty main checkout blocking 2 worktree merges
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Is schedulable: false
 - Review only: true
