@@ -31,6 +31,29 @@ known stopped/dead startup failures at most eight times with bounded 1–10
 second backoff; persistent or unknown-liveness failures remain typed and
 fail closed.
 
+## G8 exact source and ordered provider-route successor
+
+The stopped g7 authority proved automatic Quack recovery in a live fault
+injection, then exposed an independent external-capacity terminal: Grok Build
+returned an exact HTTP 402 balance-exhausted envelope while the sealed task
+definitions prohibited an implementation fallback. `PCTDD-SOURCE-PROVIDER-G8`
+therefore creates `pctdd-v1-g8` under `data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8` from the exact
+stopped g7 prefix. It preserves every accepted completion and completed task
+definition, revises only incomplete task provider roles from `grok-only` to
+the canonical `grok-implement` primary role, and binds the reviewed ordered
+route `grok_cli/grok-4.6 -> codex/gpt-5.6-terra` only for
+`primary_quota_exhausted` at medium reasoning effort. Provider output cannot
+approve completion, validation, merge, proof, or publication.
+
+Only PCTDD-001 and PCTDD-029 are re-armed. Their exact stopped task receipts,
+claims, attempts, context-only phase histories, deferred provider dispatches,
+and byte-hashed 402 logs prove that no provider/effect result was admitted.
+The migration expires the one still-active claim, preserves the already
+released claim, consumes one bounded unknown-outcome rearm, and resets their
+ordinary attempt counters. All other blocked/completed/history records remain
+unchanged. Publication again uses a private stage, hash verification,
+no-overwrite links, and a final marker; g7 remains immutable history.
+
 Every task names one protected validation profile through a task-bound
 dispatcher. Profiles contain argv arrays only and execute with `shell=False`.
 Prose, shell operators, unresolved aliases, mismatched task IDs, incomplete

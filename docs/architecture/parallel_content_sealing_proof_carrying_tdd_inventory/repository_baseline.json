@@ -1,11 +1,11 @@
 {
   "all_governed_sources_clean_and_gitlink_exact": true,
   "branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
-  "captured_utc": "2026-08-30T08:07:01Z",
-  "control_generation_input_head": "c8917d039e3f4598a7d29643c621e341318197da",
-  "control_generation_input_tree": "c3e061b62caa3ad0c35c7e167242694a8fec171c",
+  "captured_utc": "2026-08-30T17:02:36Z",
+  "control_generation_input_head": "85aa9bad12e04e97537c4dcbad2eb89941eaa431",
+  "control_generation_input_tree": "5907232e5768dab9d8483c37720165e6b40193ff",
   "dirty_user_tree_preserved": true,
-  "evidence_note": "The fixed c891 stopped-g6 control anchor and current exact governed gitlinks seed the g7 runtime migration; the runtime marker binds the eventual clean successor HEAD/tree without rewriting historical completion claims.",
+  "evidence_note": "The accepted 85aa stopped-g7 source anchor and current exact governed gitlinks seed the g8 provider-route migration; the marker binds the eventual clean successor HEAD/tree without rewriting accepted completions.",
   "original_user_tree_evidence": {
     "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798",
     "captured_utc": "2026-08-28",
@@ -15,19 +15,19 @@
     "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac"
   },
   "planning_root": "/home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1",
-  "schema": "pctdd/repository-baseline@2",
+  "schema": "pctdd/repository-baseline@3",
   "sources": [
     {
       "authority": true,
       "dirty": false,
-      "gitlink": "a12f8a2c4d9711daa3b0d29582e1c09d723686c9",
+      "gitlink": "11ab6e1c63e8c89eeed95e83d9e28db073886932",
       "gitlink_matches_nested_head": true,
-      "head": "a12f8a2c4d9711daa3b0d29582e1c09d723686c9",
+      "head": "11ab6e1c63e8c89eeed95e83d9e28db073886932",
       "name": "ipfs_accelerate_py",
       "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
       "path": "external/ipfs_accelerate",
       "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "tree": "b25a1c932bbbb14a1673c40472f94def8655a055"
+      "tree": "1f61c280c4d9b2d07e58f72e8e3899eac2228324"
     },
     {
       "authority": true,
