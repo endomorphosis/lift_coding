@@ -10,7 +10,7 @@ command and repeated database claims could outlive the intended attempt cap.
 The g5 database, event watermark, accepted PCTDD-000 receipt, failures, and 29
 rescue branches remain immutable history. Nothing in g5 is reopened or
 silently promoted. The successor is a fresh `pctdd-v1-g6` authority at
-`data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6`, served by `quack:127.0.0.1:42778`.
+`data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6`, served by `quack:127.0.0.1:27278`.
 
 Every task names one protected validation profile through a task-bound
 dispatcher. Profiles contain argv arrays only and execute with `shell=False`.

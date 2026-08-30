@@ -827,7 +827,7 @@ def validate() -> dict[str, Any]:
                 errors.append("scheduler task-store failover is not fail_closed")
             if database.get("store_generation") != "pctdd-v1-g6":
                 errors.append("scheduler task-store generation is not g6")
-            if database.get("quack_endpoint") != "quack:127.0.0.1:42778":
+            if database.get("quack_endpoint") != "quack:127.0.0.1:27278":
                 errors.append("scheduler Quack endpoint is not the sealed g6 endpoint")
             if database.get("predecessor_store_generation") != "pctdd-v1-g5" or database.get("predecessor_is_read_only_history") is not True:
                 errors.append("scheduler does not preserve g5 as explicit read-only history")

@@ -747,7 +747,7 @@ def validate() -> dict[str, Any]:
         errors.append("task authority failover must be fail_closed")
     if database.get("store_generation") != STORE_GENERATION:
         errors.append("task authority must use the fresh g6 store generation")
-    if database.get("quack_endpoint") != "quack:127.0.0.1:42778":
+    if database.get("quack_endpoint") != "quack:127.0.0.1:27278":
         errors.append("g6 Quack endpoint differs")
     expected_owner_management = {
         "mode": "managed_local",

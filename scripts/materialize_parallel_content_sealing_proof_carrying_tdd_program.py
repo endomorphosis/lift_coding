@@ -369,7 +369,7 @@ def _load_board(config_path: Path) -> tuple[Any, dict[str, Any], bytes]:
         raise MaterializationError("PCTDD plan revision is not the V1.1 amendment")
     if program.store_generation != "pctdd-v1-g6":
         raise MaterializationError("PCTDD materialization requires the fresh g6 store")
-    if program.quack_endpoint != "quack:127.0.0.1:42778":
+    if program.quack_endpoint != "quack:127.0.0.1:27278":
         raise MaterializationError("PCTDD materialization requires the sealed g6 Quack endpoint")
     return board, config_payload, config_bytes
 
