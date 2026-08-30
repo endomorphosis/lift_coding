@@ -15,7 +15,7 @@
   "program_id": "parallel-content-sealing-proof-carrying-tdd-v1",
   "protected_control_hashes_before_manifest_and_seal": {
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json": "sha256:24ed381bcc6d409582b6fe99bc007de64ad2eaba049a03ce94546b1d2eea5d87",
-    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:5b6cd6961c5daa06935f52e14a080cbbdf2711a751b8942e8e50ce66ed46cdd4",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:8c69edcf6d09c10c1a2ef0a1e0988a90666093d9c1c9479fabb49dd441aa6549",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json": "sha256:326f5ad71f8b5cf3986928587ac956a40de4e358daa4780d9948dcad969e0f3a",
     "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json": "sha256:1b61f10063e4ae29acbf2c83fa5a951473d20f558b3ff6a442424d1153d2c780",
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md": "sha256:d2065cffae2ddad5890a9812d006116b24bb422a06d695d09eeed88ee6ed79cc",
@@ -30,7 +30,7 @@
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json": "sha256:f37c0280f3b088597ec7fae028a978e912af3c0f1cf73c4bf2ef22ed9a2ee78b",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json": "sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997",
-    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:7aa09626c0f494b57689ef89d39bab0fca680f048ad2c2e8de2843613ca43e1d",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:8c2a96a4f6f53e3f233e205b11885a5e34bc78d3da3cd3641ba4c4c349544c46",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json": "sha256:11c32db94286c8a7006d6d63fb27b5d4f2a6c02d471d406e50b73fcaeabd7998",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
     "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:4727c1aa6303fd65db3d1d67ca130ac23badc7f55dc122f0dc48016d4286322e",
@@ -39,7 +39,7 @@
     "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py": "sha256:61757f1a6f66bda791b487a2e96bb7d7dbbe61e8b544b9379a89d7b0e9a04be4",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py": "sha256:a063ab5d5e62f902922767644958256bf5a5a01f549b746c4b3b5da05db244ad",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py": "sha256:34f206e17c446f84ac83f295aef5034dc9889d1e5c0e70f7a70d0657b3bfe12e",
-    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py": "sha256:871b4818af0799e9634f9eae9070439a8ff6aba8f2869d2935c9188938b256b4"
+    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py": "sha256:83590486c39f72efc5ec9f4bf0155e91e247c5d21e60d00f8585768ca1dfc99e"
   },
   "schema": "pctdd/operator-control-manifest@1",
   "task_id": "PCTDD-000"

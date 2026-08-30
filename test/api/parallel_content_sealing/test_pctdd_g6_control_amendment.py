@@ -40,7 +40,7 @@ def test_g6_amendment_has_exact_generation_and_component_safe_migration() -> Non
     assert config["database_program"]["store_generation"] == "pctdd-v1-g6"
     assert config["database_program"]["predecessor_store_generation"] == "pctdd-v1-g5"
     assert config["database_program"]["predecessor_is_read_only_history"] is True
-    assert config["database_program"]["quack_endpoint"] == "quack:127.0.0.1:42778"
+    assert config["database_program"]["quack_endpoint"] == "quack:127.0.0.1:27278"
     owner_management = config["database_program"]["owner_management"]
     assert owner_management == {
         "mode": "managed_local",
