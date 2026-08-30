@@ -1,6 +1,8 @@
-# DOEP bounded supervisor board
+# DOEP bounded supervisor bootstrap manifest
 
-Plan revision: `DOEP-PLAN-V5`. Plan CID: `sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4`. Markdown is a sealed projection; DuckDB through Quack is operational authority.
+> **STATIC BOOTSTRAP INPUT, NOT LIVE STATE.** DuckDB through Quack is the sole operational authority. Current Markdown views are generated under the ignored runtime evidence projection directory and are never consumed by the supervisor.
+
+Plan revision: `DOEP-PLAN-V5`. Plan CID: `sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4`.
 
 ## DOEP-000 Inventory current objective, planner, task, event, and state authorities
 - Status: todo

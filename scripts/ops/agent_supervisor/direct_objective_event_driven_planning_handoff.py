@@ -12,6 +12,7 @@ non-authoritative, rebuildable projection.
 from __future__ import annotations
 
 import argparse
+import fcntl
 import hashlib
 import json
 import os
@@ -35,13 +36,22 @@ for _path in (str(ACCELERATE_ROOT), str(ROOT)):
         sys.path.insert(0, _path)
 
 PROGRAM_ID: Final = "agent-supervisor-direct-objective-and-event-driven-planning-v1"
-CONFIG: Final = ROOT / "config/agent_supervisor_direct_objective_event_driven_planning_scheduler.json"
+CONFIG: Final = (
+    ROOT / "config/agent_supervisor_direct_objective_event_driven_planning_scheduler.json"
+)
 BOARD: Final = ROOT / "config/agent_supervisor_direct_objective_event_driven_planning_board.json"
 OWNER_SESSION: Final = "doep-v1-executor"
 GRANT_TTL_SECONDS: Final = 86_400.0
 OPERATOR_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-bootstrap-handoff@1"
 BROKER_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-bootstrap-broker@1"
 LIVE_STATUS_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-live-status@1"
+RUNTIME_PROJECTION_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/doep-runtime-markdown-projection@1"
+)
+RUNTIME_PROJECTION_RECEIPT_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/doep-runtime-markdown-projection-receipt@1"
+)
+RUNTIME_PROJECTION_RENDERER: Final = "doep-runtime-markdown-renderer-v1"
 QUACK_RE: Final = re.compile(
     r"^quack:(?://)?(127(?:\.\d{1,3}){3}|localhost):(\d{1,5})$",
     re.IGNORECASE,
@@ -107,6 +117,293 @@ def _atomic_json(path: Path, payload: Mapping[str, Any]) -> None:
         raise
 
 
+def _atomic_bytes(path: Path, payload: bytes) -> None:
+    """Replace one disposable projection without exposing partial bytes."""
+
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    temporary = path.with_name(f".{path.name}.tmp.{os.getpid()}.{threading.get_ident()}")
+    descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+        os.chmod(path, 0o600)
+    except BaseException:
+        try:
+            temporary.unlink()
+        except FileNotFoundError:
+            pass
+        raise
+
+
+def _canonical_json_bytes(value: Mapping[str, Any]) -> bytes:
+    return json.dumps(
+        dict(value), sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")
+
+
+def _sha256(payload: bytes) -> str:
+    return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+
+def _markdown_text(value: Any) -> str:
+    return (
+        str(value or "")
+        .replace("\\", "\\\\")
+        .replace("|", "\\|")
+        .replace("\r", " ")
+        .replace("\n", " ")
+        .strip()
+    )
+
+
+def _projection_header(
+    *,
+    title: str,
+    snapshot: Mapping[str, Any],
+    generation: Mapping[str, Any],
+) -> list[str]:
+    return [
+        f"# {title}",
+        "",
+        "> **NON-AUTHORITATIVE RUNTIME PROJECTION.** The sole operational task source is "
+        "> DuckDB through the exclusive Quack state owner. This file is never ingested, "
+        "> claimed from, or used to terminalize work; deleting it only causes regeneration.",
+        "",
+        f"- Projection schema: `{RUNTIME_PROJECTION_SCHEMA}`",
+        f"- Renderer: `{RUNTIME_PROJECTION_RENDERER}`",
+        "- Source authority: `DuckDB -> exclusive QuackStateServer -> TypedDatabaseTaskSource`",
+        f"- Store ID: `{_markdown_text(generation.get('store_id'))}`",
+        f"- Database UUID: `{_markdown_text(generation.get('database_uuid'))}`",
+        f"- Store generation: `{int(generation.get('generation') or 0)}`",
+        f"- Fence epoch: `{int(generation.get('fence_epoch') or 0)}`",
+        f"- Store revision: `{int(snapshot.get('revision') or 0)}`",
+        f"- Event watermark: `{int(snapshot.get('event_cursor') or 0)}`",
+        f"- Database projection CID: `{_markdown_text(snapshot.get('projection_cid'))}`",
+        f"- Plan root CID: `{_markdown_text(snapshot.get('plan_root_cid'))}`",
+        f"- Repository tree identity: `{_markdown_text(snapshot.get('repository_tree_id'))}`",
+        "",
+    ]
+
+
+def _render_runtime_taskboard(
+    *,
+    snapshot: Mapping[str, Any],
+    generation: Mapping[str, Any],
+    tasks: Sequence[Mapping[str, Any]],
+) -> bytes:
+    ordered = sorted(
+        (dict(task) for task in tasks),
+        key=lambda task: (int(task.get("ordinal") or 0), str(task.get("task_alias") or "")),
+    )
+    statuses = Counter(str(task.get("status") or "unknown") for task in ordered)
+    lines = _projection_header(
+        title="DOEP current task board (DuckDB projection)",
+        snapshot=snapshot,
+        generation=generation,
+    )
+    lines += ["## Status summary", "", "| Status | Tasks |", "| --- | ---: |"]
+    lines.extend(
+        f"| `{_markdown_text(status)}` | {count} |" for status, count in sorted(statuses.items())
+    )
+    lines += ["", "## Tasks", ""]
+    for task in ordered:
+        body = task.get("body")
+        body = dict(body) if isinstance(body, Mapping) else {}
+        dependencies = task.get("dependencies")
+        dependencies = list(dependencies) if isinstance(dependencies, (list, tuple)) else []
+        outputs = task.get("outputs")
+        outputs = list(outputs) if isinstance(outputs, (list, tuple)) else []
+        validations = task.get("validations")
+        validations = list(validations) if isinstance(validations, (list, tuple)) else []
+        output_paths = [
+            str(item.get("path") or "")
+            for item in outputs
+            if isinstance(item, Mapping) and str(item.get("path") or "")
+        ]
+        validation_argv = [
+            " ".join(str(token) for token in item.get("argv", ()))
+            for item in validations
+            if isinstance(item, Mapping) and isinstance(item.get("argv"), (list, tuple))
+        ]
+        alias = _markdown_text(task.get("task_alias") or task.get("task_cid"))
+        lines += [
+            f"### {alias} {_markdown_text(body.get('title'))}",
+            "",
+            f"- Status: `{_markdown_text(task.get('status'))}`",
+            f"- Revision: `{int(task.get('revision') or 0)}`",
+            f"- Task CID: `{_markdown_text(task.get('task_cid'))}`",
+            f"- Objective: `{_markdown_text(task.get('objective_id'))}`",
+            f"- Goal CID: `{_markdown_text(task.get('goal_cid'))}`",
+            f"- Goal ID: `{_markdown_text(body.get('subgoal_id') or body.get('goal_id'))}`",
+            f"- Parent goal: `{_markdown_text(body.get('parent_goal_id'))}`",
+            f"- Owning repository: `{_markdown_text(body.get('owning_repository'))}`",
+            f"- Dependencies: {', '.join(f'`{_markdown_text(item)}`' for item in dependencies) or 'none'}",
+            f"- Exact outputs: {', '.join(f'`{_markdown_text(item)}`' for item in output_paths) or 'none'}",
+            f"- Exact validation: {'; '.join(f'`{_markdown_text(item)}`' for item in validation_argv) or 'none'}",
+            "",
+        ]
+    return ("\n".join(lines).rstrip() + "\n").encode("utf-8")
+
+
+def _render_runtime_objectives(
+    *,
+    snapshot: Mapping[str, Any],
+    generation: Mapping[str, Any],
+    tasks: Sequence[Mapping[str, Any]],
+) -> bytes:
+    grouped: dict[str, dict[str, list[Mapping[str, Any]]]] = {}
+    for raw in tasks:
+        task = dict(raw)
+        objective_id = str(task.get("objective_id") or "unbound-objective")
+        goal_cid = str(task.get("goal_cid") or "unbound-goal")
+        grouped.setdefault(objective_id, {}).setdefault(goal_cid, []).append(task)
+    lines = _projection_header(
+        title="DOEP current objective/task satisfaction view (DuckDB projection)",
+        snapshot=snapshot,
+        generation=generation,
+    )
+    lines += [
+        "This is a task-derived operational view. It does not invent objective or goal semantic status; "
+        "those remain canonical database records and are only satisfied by admitted evidence.",
+        "",
+    ]
+    success_statuses = {"completed", "complete", "done", "terminal_succeeded", "skipped"}
+    for objective_id, goals in sorted(grouped.items()):
+        objective_tasks = [task for goal_tasks in goals.values() for task in goal_tasks]
+        objective_counts = Counter(str(task.get("status") or "unknown") for task in objective_tasks)
+        lines += [
+            f"## Objective `{_markdown_text(objective_id)}`",
+            "",
+            f"- Task-state counts: `{json.dumps(dict(sorted(objective_counts.items())), sort_keys=True, separators=(',', ':'))}`",
+            f"- All task obligations currently satisfied: `{bool(objective_tasks) and all(str(task.get('status') or '') in success_statuses for task in objective_tasks)}`",
+            "",
+        ]
+        for goal_cid, goal_tasks in sorted(goals.items()):
+            ordered = sorted(
+                goal_tasks,
+                key=lambda task: (int(task.get("ordinal") or 0), str(task.get("task_alias") or "")),
+            )
+            body = ordered[0].get("body") if ordered else {}
+            body = dict(body) if isinstance(body, Mapping) else {}
+            goal_id = body.get("subgoal_id") or body.get("goal_id") or goal_cid
+            counts = Counter(str(task.get("status") or "unknown") for task in ordered)
+            lines += [
+                f"### Goal `{_markdown_text(goal_id)}`",
+                "",
+                f"- Goal CID: `{_markdown_text(goal_cid)}`",
+                f"- Parent goal: `{_markdown_text(body.get('parent_goal_id'))}`",
+                f"- Task-state counts: `{json.dumps(dict(sorted(counts.items())), sort_keys=True, separators=(',', ':'))}`",
+                f"- Task obligations satisfied: `{bool(ordered) and all(str(task.get('status') or '') in success_statuses for task in ordered)}`",
+                "- Tasks: "
+                + ", ".join(
+                    f"`{_markdown_text(task.get('task_alias'))}`=`{_markdown_text(task.get('status'))}`@r{int(task.get('revision') or 0)}"
+                    for task in ordered
+                ),
+                "",
+            ]
+    return ("\n".join(lines).rstrip() + "\n").encode("utf-8")
+
+
+def _publish_runtime_projections(
+    *,
+    paths: Mapping[str, Path],
+    snapshot: Mapping[str, Any],
+    generation: Mapping[str, Any],
+    tasks: Sequence[Mapping[str, Any]],
+    owner_server_id: str,
+    launch_id: str,
+) -> dict[str, Any]:
+    """Publish disposable views under a stale-writer guard; never mutate authority."""
+
+    taskboard = _render_runtime_taskboard(snapshot=snapshot, generation=generation, tasks=tasks)
+    objectives = _render_runtime_objectives(snapshot=snapshot, generation=generation, tasks=tasks)
+    material = {
+        "schema": RUNTIME_PROJECTION_RECEIPT_SCHEMA,
+        "authority": False,
+        "source_authority": "DuckDB through exclusive QuackStateServer@1",
+        "launch_id": launch_id,
+        "owner_server_id": owner_server_id,
+        "store_id": str(generation.get("store_id") or ""),
+        "database_uuid": str(generation.get("database_uuid") or ""),
+        "store_generation": int(generation.get("generation") or 0),
+        "fence_epoch": int(generation.get("fence_epoch") or 0),
+        "store_revision": int(snapshot.get("revision") or 0),
+        "event_cursor": int(snapshot.get("event_cursor") or 0),
+        "database_projection_cid": str(snapshot.get("projection_cid") or ""),
+        "plan_root_cid": str(snapshot.get("plan_root_cid") or ""),
+        "repository_tree_id": str(snapshot.get("repository_tree_id") or ""),
+        "renderer": RUNTIME_PROJECTION_RENDERER,
+        "task_count": len(tasks),
+        "artifacts": {
+            "taskboard": {
+                "path": str(paths["task_projection"]),
+                "sha256": _sha256(taskboard),
+                "bytes": len(taskboard),
+            },
+            "objectives": {
+                "path": str(paths["objective_projection"]),
+                "sha256": _sha256(objectives),
+                "bytes": len(objectives),
+            },
+        },
+    }
+    material["receipt_cid"] = _sha256(_canonical_json_bytes(material))
+    receipt = {**material, "projected_at": _utc_now()}
+    lock_path = paths["projection_receipt"].with_suffix(".lock")
+    lock_path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    descriptor = os.open(lock_path, os.O_RDWR | os.O_CREAT, 0o600)
+    try:
+        fcntl.flock(descriptor, fcntl.LOCK_EX)
+        prior: dict[str, Any] = {}
+        if paths["projection_receipt"].is_file():
+            try:
+                prior = _json_object(paths["projection_receipt"])
+            except HandoffError:
+                prior = {}
+        same_database = bool(
+            prior
+            and prior.get("store_id") == material["store_id"]
+            and prior.get("database_uuid") == material["database_uuid"]
+        )
+        if same_database:
+            prior_position = (
+                int(prior.get("store_generation") or 0),
+                int(prior.get("store_revision") or 0),
+                int(prior.get("event_cursor") or 0),
+            )
+            current_position = (
+                material["store_generation"],
+                material["store_revision"],
+                material["event_cursor"],
+            )
+            if prior_position > current_position:
+                raise HandoffError(
+                    "stale runtime Markdown publisher refused to overwrite a newer database projection"
+                )
+            if (
+                prior_position == current_position
+                and prior.get("database_projection_cid") == material["database_projection_cid"]
+            ):
+                prior_artifacts = prior.get("artifacts")
+                if (
+                    isinstance(prior_artifacts, Mapping)
+                    and dict(prior_artifacts) != material["artifacts"]
+                ):
+                    raise HandoffError(
+                        "runtime Markdown projection is nondeterministic for one database snapshot"
+                    )
+        _atomic_bytes(paths["task_projection"], taskboard)
+        _atomic_bytes(paths["objective_projection"], objectives)
+        _atomic_json(paths["projection_receipt"], receipt)
+    finally:
+        fcntl.flock(descriptor, fcntl.LOCK_UN)
+        os.close(descriptor)
+    return receipt
+
+
 def _json_object(path: Path) -> dict[str, Any]:
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
@@ -126,9 +423,7 @@ def _process_argv(pid: int) -> tuple[str, ...]:
         raise HandoffError("supervisor process command line is invalid")
     try:
         return tuple(
-            item.decode("utf-8")
-            for item in payload.rstrip(b"\x00").split(b"\x00")
-            if item
+            item.decode("utf-8") for item in payload.rstrip(b"\x00").split(b"\x00") if item
         )
     except UnicodeDecodeError as exc:
         raise HandoffError("supervisor process command line is not UTF-8") from exc
@@ -192,6 +487,11 @@ def _runtime_paths(board: Any) -> dict[str, Path]:
             raise HandoffError(f"runtime path {name} escapes the campaign root") from exc
     paths["broker_evidence"] = paths["evidence"] / "runtime/executor-bootstrap.json"
     paths["live_status"] = paths["evidence"] / "control-plane/live-status.json"
+    paths["task_projection"] = paths["evidence"] / "control-plane/projections/current-taskboard.md"
+    paths["objective_projection"] = (
+        paths["evidence"] / "control-plane/projections/current-objectives.md"
+    )
+    paths["projection_receipt"] = paths["evidence"] / "control-plane/projections/receipt.json"
     paths["bootstrap_receipt"] = paths["evidence"] / "bootstrap/bootstrap-materialization.json"
     paths["handoff_receipt"] = paths["evidence"] / "bootstrap/supervisor-handoff.json"
     paths["operator_pid"] = paths["state"] / "doep-handoff.pid"
@@ -258,7 +558,9 @@ def _make_client(server: Any, board: Any, *, client_id: str) -> tuple[Any, Any, 
     return client, grant, token
 
 
-def _objective_observation(paths: Mapping[str, Path], population: Mapping[str, Any]) -> dict[str, Any]:
+def _objective_observation(
+    paths: Mapping[str, Path], population: Mapping[str, Any]
+) -> dict[str, Any]:
     """Read the objective through its canonical repository before Quack starts."""
 
     from ipfs_accelerate_py.agent_supervisor.task_sources.intent_repository import IntentRepository
@@ -343,7 +645,9 @@ def _seal_route_policy(
                 "plan_count": snapshot.plan_count,
                 "task_count": snapshot.task_count,
                 "dependency_count": snapshot.dependency_count,
-                "initial_ready_task_ids": [task.task_alias for task in source.ready_tasks(limit=85).tasks],
+                "initial_ready_task_ids": [
+                    task.task_alias for task in source.ready_tasks(limit=85).tasks
+                ],
                 "state_authority": "DuckDB through exclusive QuackStateServer@1",
                 "ducklake_authority": False,
             }
@@ -446,19 +750,25 @@ class _BootstrapBroker:
             if int(peer_birth.parent_pid) != os.getpid():
                 raise HandoffError("supervisor is outside the admitted supervisor tree")
         argv = _process_argv(supervisor_pid)
-        expected_entry = str((ROOT / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py").resolve())
+        expected_entry = str(
+            (ROOT / "scripts/ops/agent_supervisor/implementation_supervisor_entry.py").resolve()
+        )
         expected = {
             "--board-namespace": self.board.board_namespace,
             "--state-owner-bootstrap-fd": str(self.listener.fileno()),
             "--task-shard-count": str(int(self.board.max_lanes)),
         }
-        if expected_entry not in argv or any(_argv_values(argv, key) != (value,) for key, value in expected.items()):
+        if expected_entry not in argv or any(
+            _argv_values(argv, key) != (value,) for key, value in expected.items()
+        ):
             raise HandoffError("bootstrap parent differs from the sealed DOEP lane")
         sessions = _argv_values(argv, "--database-owner-session-id")
         shards = _argv_values(argv, "--task-shard-index")
         if len(sessions) != 1 or not sessions[0].startswith(OWNER_SESSION):
             raise HandoffError("bootstrap parent owner session differs")
-        if len(shards) != 1 or shards[0] not in {str(index) for index in range(int(self.board.max_lanes))}:
+        if len(shards) != 1 or shards[0] not in {
+            str(index) for index in range(int(self.board.max_lanes))
+        }:
             raise HandoffError("bootstrap parent shard is outside the sealed lane set")
         if is_daemon:
             daemon_argv = _process_argv(peer_pid)
@@ -472,7 +782,9 @@ class _BootstrapBroker:
                 raise HandoffError("executor daemon differs from its sealed lane")
 
     def _admit(self, request: Mapping[str, Any], *, peer_pid: int, peer_uid: int) -> dict[str, Any]:
-        from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import process_birth_id
+        from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import (
+            process_birth_id,
+        )
         from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import (
             OwnerLiveness,
             ProcessBirthIdentity,
@@ -489,18 +801,30 @@ class _BootstrapBroker:
         )
 
         required = {"schema", "pid", "process_birth", "process_birth_id", "client_id", "store_id"}
-        if set(request) != required or request.get("schema") != STATE_OWNER_BOOTSTRAP_REQUEST_SCHEMA:
+        if (
+            set(request) != required
+            or request.get("schema") != STATE_OWNER_BOOTSTRAP_REQUEST_SCHEMA
+        ):
             raise HandoffError("executor bootstrap request differs from its closed schema")
         raw_pid = request.get("pid")
         raw_birth = request.get("process_birth")
-        if isinstance(raw_pid, bool) or not isinstance(raw_pid, int) or raw_pid <= 1 or not isinstance(raw_birth, Mapping):
+        if (
+            isinstance(raw_pid, bool)
+            or not isinstance(raw_pid, int)
+            or raw_pid <= 1
+            or not isinstance(raw_birth, Mapping)
+        ):
             raise HandoffError("executor bootstrap request has no valid process birth")
         if raw_pid != peer_pid or peer_uid != os.geteuid():
             raise HandoffError("executor bootstrap peer credentials differ")
         observed = read_process_birth(raw_pid)
         supplied = ProcessBirthIdentity.from_dict(dict(raw_birth))
         supplied_birth_id = str(request.get("process_birth_id") or "")
-        if observed is None or observed != supplied or process_birth_id(observed) != supplied_birth_id:
+        if (
+            observed is None
+            or observed != supplied
+            or process_birth_id(observed) != supplied_birth_id
+        ):
             raise HandoffError("executor bootstrap process birth is stale")
         client_id = str(request.get("client_id") or "")
         daemon_prefix = f"database-implementation-daemon:{OWNER_SESSION}"
@@ -518,7 +842,9 @@ class _BootstrapBroker:
             liveness = owner_liveness(identity)
             if liveness is OwnerLiveness.ALIVE:
                 raise HandoffError("prior lane process remains live during grant rotation")
-            if liveness is OwnerLiveness.UNKNOWN and _pid_alive(int(getattr(identity, "pid", 0) or 0)):
+            if liveness is OwnerLiveness.UNKNOWN and _pid_alive(
+                int(getattr(identity, "pid", 0) or 0)
+            ):
                 raise HandoffError("prior lane process liveness is unknown")
             prior_grant = str(prior.get("grant_id") or "")
             if prior_grant:
@@ -574,8 +900,12 @@ class _BootstrapBroker:
                         "launch_id": self.launch_id,
                         "operator_pid": os.getpid(),
                         "updated_at": _utc_now(),
-                        "accepted_lane_count": sum(_client_matches(key, daemon_prefix) for key in self._grants),
-                        "accepted_supervisor_reader_count": sum(_client_matches(key, supervisor_prefix) for key in self._grants),
+                        "accepted_lane_count": sum(
+                            _client_matches(key, daemon_prefix) for key in self._grants
+                        ),
+                        "accepted_supervisor_reader_count": sum(
+                            _client_matches(key, supervisor_prefix) for key in self._grants
+                        ),
                         "expected_lane_count": int(self.board.max_lanes),
                         "server_id": owner_identity.server_id,
                         "state_owner_process_birth_id": owner_identity.process_birth_id,
@@ -619,9 +949,13 @@ class _BootstrapBroker:
                 with self._lock:
                     self._accepted = accepted
                 accepted.settimeout(30.0)
-                raw_peer = accepted.getsockopt(socket.SOL_SOCKET, socket.SO_PEERCRED, struct.calcsize("3i"))
+                raw_peer = accepted.getsockopt(
+                    socket.SOL_SOCKET, socket.SO_PEERCRED, struct.calcsize("3i")
+                )
                 peer_pid, peer_uid, _peer_gid = struct.unpack("3i", raw_peer)
-                response = self._admit(_receive_frame(accepted), peer_pid=int(peer_pid), peer_uid=int(peer_uid))
+                response = self._admit(
+                    _receive_frame(accepted), peer_pid=int(peer_pid), peer_uid=int(peer_uid)
+                )
                 _send_frame(accepted, response)
             except TimeoutError:
                 continue
@@ -667,7 +1001,9 @@ class _LiveMonitor:
         paths: Mapping[str, Path],
         launch_id: str,
     ) -> None:
-        from ipfs_accelerate_py.agent_supervisor.task_sources.typed_database_task_source import TypedDatabaseTaskSource
+        from ipfs_accelerate_py.agent_supervisor.task_sources.typed_database_task_source import (
+            TypedDatabaseTaskSource,
+        )
 
         self.server = server
         self.board = board
@@ -675,7 +1011,11 @@ class _LiveMonitor:
         self.launch_id = launch_id
         self.stopping = threading.Event()
         self.failure = ""
-        self.client, self.grant, _token = _make_client(server, board, client_id="doep-state-owner:live-monitor")
+        self.projection_failure = ""
+        self.projection_receipt: dict[str, Any] = {}
+        self.client, self.grant, _token = _make_client(
+            server, board, client_id="doep-state-owner:live-monitor"
+        )
         self.source = TypedDatabaseTaskSource(self.client, owns_client=True)
         self._thread = threading.Thread(target=self._run, name="doep-live-monitor", daemon=True)
 
@@ -692,21 +1032,72 @@ class _LiveMonitor:
             self.server.revoke_typed_client_grant(self.grant.grant_id)
 
     def _write(self) -> None:
-        snapshot = self.source.snapshot()
-        page = self.source.list_tasks(limit=500)
+        snapshot = None
+        page = None
+        generation = None
+        for _attempt in range(4):
+            before_generation = self.client.load_generation()
+            before_snapshot = self.source.snapshot()
+            candidate_page = self.source.list_tasks(limit=500)
+            after_snapshot = self.source.snapshot()
+            after_generation = self.client.load_generation()
+            if (
+                not candidate_page.next_cursor
+                and before_generation.content_id == after_generation.content_id
+                and before_snapshot.projection_cid == after_snapshot.projection_cid
+                and before_snapshot.revision == after_snapshot.revision == candidate_page.revision
+            ):
+                snapshot = after_snapshot
+                page = candidate_page
+                generation = after_generation
+                break
+        if snapshot is None or page is None or generation is None:
+            raise HandoffError("typed database state changed during the bounded live projection")
         ready = self.source.ready_tasks(limit=85)
         statuses = Counter(task.status for task in page.tasks)
         active = sorted(task.task_alias for task in page.tasks if task.status in ACTIVE_STATUSES)
         failures = sorted(task.task_alias for task in page.tasks if task.status in FAILED_STATUSES)
-        terminal = sorted(task.task_alias for task in page.tasks if task.status in TERMINAL_STATUSES)
+        terminal = sorted(
+            task.task_alias for task in page.tasks if task.status in TERMINAL_STATUSES
+        )
         owner_ready = bool(self.server.ready())
         owner_identity = self.server.identity
+        try:
+            self.projection_receipt = _publish_runtime_projections(
+                paths=self.paths,
+                snapshot=snapshot.to_dict(),
+                generation=generation.to_record(),
+                tasks=[task.to_dict() for task in page.tasks],
+                owner_server_id="" if owner_identity is None else owner_identity.server_id,
+                launch_id=self.launch_id,
+            )
+            self.projection_failure = ""
+        except BaseException as exc:
+            # Markdown is disposable observability. Projection failure may not
+            # stop, mutate, or weaken the DuckDB/Quack task authority.
+            self.projection_failure = f"{type(exc).__name__}: {exc}"
+        projection = {
+            "authority": False,
+            "ready": bool(self.projection_receipt and not self.projection_failure),
+            "error": self.projection_failure,
+            "receipt_cid": str(self.projection_receipt.get("receipt_cid") or ""),
+            "store_revision": int(self.projection_receipt.get("store_revision") or 0),
+            "event_cursor": int(self.projection_receipt.get("event_cursor") or 0),
+            "database_projection_cid": str(
+                self.projection_receipt.get("database_projection_cid") or ""
+            ),
+            "taskboard_path": str(self.paths["task_projection"]),
+            "objectives_path": str(self.paths["objective_projection"]),
+            "receipt_path": str(self.paths["projection_receipt"]),
+        }
         payload = {
             "schema": LIVE_STATUS_SCHEMA,
             "launch_id": self.launch_id,
             "updated_at": _utc_now(),
             "monitor_pid": os.getpid(),
-            "healthy": bool(owner_ready and not failures and (active or ready.tasks or snapshot.terminal)),
+            "healthy": bool(
+                owner_ready and not failures and (active or ready.tasks or snapshot.terminal)
+            ),
             "blocked": bool(failures),
             "owner_ready": owner_ready,
             "owner_server_id": "" if owner_identity is None else owner_identity.server_id,
@@ -728,6 +1119,7 @@ class _LiveMonitor:
             "terminal": snapshot.terminal,
             "credential_transport": "private_inherited_socket",
             "raw_token_in_evidence": False,
+            "runtime_markdown_projection": projection,
             "ducklake": {
                 "configured": True,
                 "authority": False,
@@ -829,7 +1221,9 @@ def _lane_observations(
                 "live": live,
                 "supervisor_pid": supervisor_pid,
                 "supervisor_birth_alive": supervisor_alive,
-                "daemon_pid": int(daemon_birth_raw.get("pid") or 0) if isinstance(daemon_birth_raw, Mapping) else 0,
+                "daemon_pid": int(daemon_birth_raw.get("pid") or 0)
+                if isinstance(daemon_birth_raw, Mapping)
+                else 0,
                 "daemon_birth_alive": daemon_alive,
                 "daemon_birth_matches_status": birth_matches,
                 "status": str(status.get("status") or "missing"),
@@ -862,7 +1256,9 @@ def _build_server(board: Any, paths: Mapping[str, Path]) -> Any:
 
 
 def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
-    from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import load_configured_board
+    from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
+        load_configured_board,
+    )
 
     board = load_configured_board(CONFIG, repo_root=ROOT)
     if board.board_namespace != PROGRAM_ID or int(board.max_lanes) != 4:
@@ -874,8 +1270,7 @@ def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
         or not isinstance(tasks, list)
         or len(tasks) != 85
         or any(
-            not isinstance(task, Mapping)
-            or task.get("board_namespace") != PROGRAM_ID
+            not isinstance(task, Mapping) or task.get("board_namespace") != PROGRAM_ID
             for task in tasks
         )
     ):
@@ -889,12 +1284,18 @@ def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
 def launch() -> int:
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         configured_board_launch_plan,
+    )
+    from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         main as configured_board_main,
     )
-    from ipfs_accelerate_py.agent_supervisor.runtime.multi_supervisor_runner import main as multi_supervisor_main
+    from ipfs_accelerate_py.agent_supervisor.runtime.multi_supervisor_runner import (
+        main as multi_supervisor_main,
+    )
 
     board, population, paths = _load()
-    preflight = int(configured_board_main(["--repo-root", str(ROOT), "--config", str(CONFIG), "preflight"]))
+    preflight = int(
+        configured_board_main(["--repo-root", str(ROOT), "--config", str(CONFIG), "preflight"])
+    )
     if preflight != 0:
         return preflight
     prior_pid = 0
@@ -929,9 +1330,12 @@ def launch() -> int:
             objective_observation,
         )
         _atomic_json(paths["bootstrap_receipt"], bootstrap_receipt)
-        launch_id = "sha256:" + hashlib.sha256(
-            f"{PROGRAM_ID}:{os.getpid()}:{identity.process_birth_id}:{time.time_ns()}".encode()
-        ).hexdigest()
+        launch_id = (
+            "sha256:"
+            + hashlib.sha256(
+                f"{PROGRAM_ID}:{os.getpid()}:{identity.process_birth_id}:{time.time_ns()}".encode()
+            ).hexdigest()
+        )
         listener = _listener()
         broker = _BootstrapBroker(
             listener=listener,
@@ -949,7 +1353,9 @@ def launch() -> int:
             launch_id=launch_id,
         )
         monitor.start()
-        plan = configured_board_launch_plan(board, implement=True, detach=False, duration_seconds=float("inf"))
+        plan = configured_board_launch_plan(
+            board, implement=True, detach=False, duration_seconds=float("inf")
+        )
         runner_args = list(plan["argv"])
         for value in (
             "--database-owner-session-id",
@@ -962,7 +1368,11 @@ def launch() -> int:
             runner_args.append(f"--common-arg={value}")
         environment = dict(os.environ)
         python_paths: list[str] = []
-        for item in (str(ACCELERATE_ROOT), str(ROOT), *environment.get("PYTHONPATH", "").split(os.pathsep)):
+        for item in (
+            str(ACCELERATE_ROOT),
+            str(ROOT),
+            *environment.get("PYTHONPATH", "").split(os.pathsep),
+        ):
             if item and item not in python_paths:
                 python_paths.append(item)
         environment["PYTHONPATH"] = os.pathsep.join(python_paths)
@@ -1019,7 +1429,9 @@ def launch() -> int:
                     server.stop()
                 finally:
                     try:
-                        if paths["operator_pid"].read_text(encoding="utf-8").strip() == str(os.getpid()):
+                        if paths["operator_pid"].read_text(encoding="utf-8").strip() == str(
+                            os.getpid()
+                        ):
                             paths["operator_pid"].unlink()
                     except (FileNotFoundError, OSError):
                         pass
@@ -1039,9 +1451,7 @@ def status(*, require_ready: bool) -> int:
     owner_identity = owner_identity if isinstance(owner_identity, Mapping) else {}
     owner_server_id = str(owner_identity.get("server_id") or "")
     progress_observed = bool(
-        live.get("active_task_ids")
-        or live.get("terminal_task_ids")
-        or live.get("terminal") is True
+        live.get("active_task_ids") or live.get("terminal_task_ids") or live.get("terminal") is True
     )
     ready = bool(
         _pid_alive(pid)
@@ -1095,7 +1505,18 @@ def main(argv: Sequence[str] | None = None) -> int:
             return launch()
         return status(require_ready=bool(args.require_ready))
     except HandoffError as exc:
-        print(json.dumps({"schema": OPERATOR_SCHEMA, "ok": False, "error_class": type(exc).__name__, "error": str(exc)}, sort_keys=True), file=sys.stderr)
+        print(
+            json.dumps(
+                {
+                    "schema": OPERATOR_SCHEMA,
+                    "ok": False,
+                    "error_class": type(exc).__name__,
+                    "error": str(exc),
+                },
+                sort_keys=True,
+            ),
+            file=sys.stderr,
+        )
         return 2
 
 

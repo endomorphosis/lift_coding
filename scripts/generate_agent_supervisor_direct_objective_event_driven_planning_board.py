@@ -482,7 +482,16 @@ def render_plan(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], pl
 
 
 def render_objectives(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], plan_cid: str) -> str:
-    lines = ["# DOEP objective heap", "", f"- Program: {PROGRAM_ID}", f"- Plan revision: {PLAN_REVISION}", f"- Plan CID: {plan_cid}", ""]
+    lines = [
+        "# DOEP objective bootstrap manifest",
+        "",
+        "> **STATIC BOOTSTRAP INPUT, NOT LIVE STATE.** Runtime objective/task progress is read from DuckDB through Quack and exported to the ignored evidence projections. This tracked file is never refreshed from worker state.",
+        "",
+        f"- Program: {PROGRAM_ID}",
+        f"- Plan revision: {PLAN_REVISION}",
+        f"- Plan CID: {plan_cid}",
+        "",
+    ]
     for goal in goal_rows:
         lines += [
             f"## {goal['goal_id']} {goal['title']}",
@@ -500,7 +509,14 @@ def render_objectives(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any
 
 
 def render_board(tasks: list[dict[str, Any]], plan_cid: str) -> str:
-    lines = ["# DOEP bounded supervisor board", "", f"Plan revision: `{PLAN_REVISION}`. Plan CID: `{plan_cid}`. Markdown is a sealed projection; DuckDB through Quack is operational authority.", ""]
+    lines = [
+        "# DOEP bounded supervisor bootstrap manifest",
+        "",
+        "> **STATIC BOOTSTRAP INPUT, NOT LIVE STATE.** DuckDB through Quack is the sole operational authority. Current Markdown views are generated under the ignored runtime evidence projection directory and are never consumed by the supervisor.",
+        "",
+        f"Plan revision: `{PLAN_REVISION}`. Plan CID: `{plan_cid}`.",
+        "",
+    ]
     for task in tasks:
         deps = ", ".join(task["dependencies"]) or "none"
         validation = " ".join(task["execution_validation"][0])
