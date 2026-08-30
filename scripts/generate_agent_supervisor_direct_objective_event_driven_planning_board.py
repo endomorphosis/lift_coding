@@ -18,7 +18,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PROGRAM_ID = "agent-supervisor-direct-objective-and-event-driven-planning-v1"
-PLAN_REVISION = "DOEP-PLAN-V4"
+PLAN_REVISION = "DOEP-PLAN-V5"
 ROOT_GOAL = "DOEP-G000"
 BRANCH = "agent/agent-supervisor-direct-objective-and-event-driven-planning-v1"
 BASES = {
@@ -27,12 +27,12 @@ BASES = {
         "tree": "99e85bfe584b7688ffbeff86da1e612dd6893a42",
     },
     "ipfs_accelerate_py": {
-        "commit": "e7f17941206a9b0da87f4cc523885e093796ead0",
-        "tree": "52ab7daeab75104a6250544c6b53d1ddb0ea1957",
+        "commit": "87715e9295626e7918f7fc8a7b1a1531ab04208f",
+        "tree": "1c9a399cc7a599d5904e5be2ae58c6be3650cff7",
     },
     "ipfs_datasets_py": {
-        "commit": "6c08977c43d48c2b953eb15fee4b8c671b64f8bc",
-        "tree": "5c84bcbdc70e6efb094908c75050c5dd7b51b2cf",
+        "commit": "3668b8857a9aa7b1a3c847be12725b5cd057d2e7",
+        "tree": "456e09b51d6a07a3a5873436df24054768195320",
     },
     "ipfs_kit_py": {
         "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
@@ -59,16 +59,22 @@ ACCELERATE_CONTRACT_PATH = ROOT / "external/ipfs_accelerate/pyproject.toml"
 DATASETS_CONTRACT_PATH = ROOT / "external/ipfs_datasets/pyproject.toml"
 DATASETS_SETUP_PATH = ROOT / "external/ipfs_datasets/setup.py"
 ACCELERATE_CONTRACT_BEGIN = (
-    "# BEGIN DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS"
+    "# BEGIN DOEP GENERATED TASK-BOUND VALIDATION CONTRACTS"
 )
 ACCELERATE_CONTRACT_END = (
-    "# END DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS"
+    "# END DOEP GENERATED TASK-BOUND VALIDATION CONTRACTS"
 )
 DATASETS_CONTRACT_BEGIN = (
-    "# BEGIN DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS"
+    "# BEGIN DOEP GENERATED TASK-BOUND VALIDATION CONTRACTS"
 )
 DATASETS_CONTRACT_END = (
-    "# END DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS"
+    "# END DOEP GENERATED TASK-BOUND VALIDATION CONTRACTS"
+)
+LEGACY_DOEP_V4_CONTRACT_MARKERS = (
+    (
+        "# BEGIN DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS",
+        "# END DOEP-PLAN-V4 GENERATED TASK-BOUND VALIDATION CONTRACTS",
+    ),
 )
 
 BUDGETS = {
@@ -300,6 +306,11 @@ def parse_tasks() -> list[dict[str, Any]]:
             "stable_task_id": task_id,
             "task_id": task_id,
             "task_alias": task_id,
+            # DatabaseTaskSource carries the canonical board namespace inside
+            # each immutable task body.  DatabasePortalBridge then renders it
+            # into the private attempt projection instead of falling back to
+            # the disposable task-projection.md filename.
+            "board_namespace": PROGRAM_ID,
             "title": title,
             "status": "todo",
             "priority": "P0" if not deps else ("P1" if phase in {"DOEP-G020", "DOEP-G030", "DOEP-G040"} else "P2"),
@@ -433,7 +444,7 @@ def render_plan(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], pl
         "- Datasets owns semantic identity, schemas, ContextPack meaning, formal translation and proof relationships. Kit owns exact durable bytes, CIDs, WAL, recovery and current-root CAS. Accelerate owns operational admission, execution, validation, merge, recovery and terminalization.", "",
         "The dormant prompt-first facade is not used as false authority at bootstrap: on the sealed base it fails closed without a production intent factory and complete launch plan. DOEP consolidates and qualifies that intended surface. The reviewed bootstrap route is sealed objective/board → canonical JSON materialization → DuckDB → exclusive Quack owner → existing configured multi-lane supervisor.", "",
         "### Bootstrap revision history", "",
-        "`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because the generated pytest targets were absent from the nested projects' task-bound dependency contracts. `DOEP-PLAN-V3` then moved Accelerate tasks to the bridge's reserved root authority and substituted the portfolio dispatcher for the task's direct validation command. That was rejected as a hidden preflight bypass: it avoided the nested Accelerate V4 task/command/output authority check instead of satisfying it. The complete DuckDB event streams and logs for V1 through V3 remain retained as superseded failed generations. `DOEP-PLAN-V4` restores all three configured gitlink owners, owner-relative outputs and direct pytest commands, and reproducibly installs exact task-bound Accelerate V4 and Datasets V3 contract entries before launch. Kit remains on its existing static project-dependency path.", "",
+        "`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because the generated pytest targets were absent from the nested projects' task-bound dependency contracts. `DOEP-PLAN-V3` then moved Accelerate tasks to the bridge's reserved root authority and substituted the portfolio dispatcher for the task's direct validation command. That was rejected as a hidden preflight bypass: it avoided the nested Accelerate scoped dependency contract instead of satisfying it. `DOEP-PLAN-V4` restored all three configured gitlink owners, owner-relative outputs and direct pytest commands, but its four frontier attempts failed closed before provider dispatch with `v2_validation_task_authority_mismatch`: the immutable database task bodies omitted the board namespace, so the private Portal parser conservatively used the disposable `task-projection.md` filename. The complete DuckDB event streams, worktrees, receipts and logs for V1 through V4 remain retained as superseded failed generations. `DOEP-PLAN-V5` binds the canonical namespace in every immutable task body, keeps the scoped Accelerate dependency contract V4 and Datasets dependency contract V3 semantics, and starts from a fresh state-store generation. Kit remains on its existing static project-dependency path.", "",
         "## Compiler and execution sequence", "",
         "1. Deterministically validate, normalize scope/budgets/risk, bind repository and policy, and reject authority/path escapes.",
         "2. Inspect manifests, objective/task state, dependency and symbol indexes, schemas, tests, proofs, capabilities, receipts and relevant failures.",
@@ -589,7 +600,7 @@ def render_profiles(tasks: list[dict[str, Any]]) -> str:
 
 
 def render_config(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], plan_cid: str) -> str:
-    root = "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1"
+    root = "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5"
     protected = [
         "docs/architecture/AGENT_SUPERVISOR_DIRECT_OBJECTIVE_AND_EVENT_DRIVEN_PLANNING_V1_PLAN.md",
         "docs/architecture/agent_supervisor_direct_objective_event_driven_planning.objectives.md",
@@ -632,8 +643,8 @@ def render_config(tasks: list[dict[str, Any]], goal_rows: list[dict[str, Any]], 
         "database_program": {
             "schema": "ipfs_accelerate_py/agent-supervisor/database-program-config@1",
             "authority_mode": "quack", "task_source_kind": "duckdb", "explicit_legacy": False,
-            "store_id": f"{root}/control.duckdb", "store_generation": "doep-v1-r4", "schema_revision": "1",
-            "quack_endpoint": "quack:127.0.0.1:47941", "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
+            "store_id": f"{root}/control.duckdb", "store_generation": "doep-v1-r5", "schema_revision": "1",
+            "quack_endpoint": "quack:127.0.0.1:47942", "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
             "failover_policy": "fail_closed", "event_store_path": f"{root}/events", "runtime_registry_path": f"{root}/registry", "worktree_root": f"{root}/worktrees", "export_profile": "doep-v1",
         },
         "ducklake_projection_program": {"mode": "enabled_non_authoritative", "authority": False, "may_grant_authority": False, "scheduling_prerequisite": False, "completion_prerequisite": False, "acceptance_prerequisite": False, "catalog_path": f"{root}/ducklake/catalog.duckdb", "data_path": f"{root}/ducklake/data", "outage_policy": "typed unavailable and replayable; never block DuckDB authority"},
@@ -684,7 +695,7 @@ def _render_accelerate_contract_block(tasks: list[dict[str, Any]]) -> str:
     lines = [
         ACCELERATE_CONTRACT_BEGIN,
         "# Generated by scripts/generate_agent_supervisor_direct_objective_event_driven_planning_board.py.",
-        "# V4 keeps project-relative closed output lists; DatabasePortalBridge projects",
+        "# Scoped dependency contract V4 keeps project-relative closed output lists; DatabasePortalBridge projects",
         "# them exactly once before equality with the superproject task authority.",
     ]
     for task in selected:
@@ -718,7 +729,7 @@ def _render_datasets_contract_block(tasks: list[dict[str, Any]]) -> str:
     lines = [
         DATASETS_CONTRACT_BEGIN,
         "# Generated by scripts/generate_agent_supervisor_direct_objective_event_driven_planning_board.py.",
-        "# V3 records the exact bridge-projected test output used by runtime task",
+        "# Datasets dependency contract V3 records the exact bridge-projected test output used by runtime task",
         "# authority; all generated test baselines are intentionally absent.",
     ]
     for task in selected:
@@ -750,18 +761,30 @@ def _replace_marked_toml_block(
     end: str,
     anchor: str,
     block: str,
+    legacy_markers: tuple[tuple[str, str], ...] = (),
 ) -> str:
     """Replace one generator-owned block or insert it before one stable table."""
 
-    begin_count = text.count(begin)
-    end_count = text.count(end)
-    if begin_count or end_count:
-        if begin_count != 1 or end_count != 1:
-            raise ValueError(f"malformed generated TOML markers: {begin!r}")
-        start = text.index(begin)
-        finish = text.index(end, start) + len(end)
+    present_pairs = []
+    for candidate_begin, candidate_end in ((begin, end), *legacy_markers):
+        begin_count = text.count(candidate_begin)
+        end_count = text.count(candidate_end)
+        if begin_count or end_count:
+            if begin_count != 1 or end_count != 1:
+                raise ValueError(
+                    f"malformed generated TOML markers: {candidate_begin!r}"
+                )
+            present_pairs.append((candidate_begin, candidate_end))
+    if len(present_pairs) > 1:
+        raise ValueError("multiple DOEP generated TOML blocks are present")
+    if present_pairs:
+        selected_begin, selected_end = present_pairs[0]
+        start = text.index(selected_begin)
+        finish = text.index(selected_end, start) + len(selected_end)
         if finish <= start:
-            raise ValueError(f"reversed generated TOML markers: {begin!r}")
+            raise ValueError(
+                f"reversed generated TOML markers: {selected_begin!r}"
+            )
         return text[:start] + block + text[finish:]
     if text.count(anchor) != 1:
         raise ValueError(f"TOML insertion anchor is not unique: {anchor!r}")
@@ -775,6 +798,7 @@ def expected_contract_files(tasks: list[dict[str, Any]]) -> dict[Path, str]:
         ACCELERATE_CONTRACT_PATH.read_text(encoding="utf-8"),
         begin=ACCELERATE_CONTRACT_BEGIN,
         end=ACCELERATE_CONTRACT_END,
+        legacy_markers=LEGACY_DOEP_V4_CONTRACT_MARKERS,
         anchor="[tool.ipfs-accelerate.proof-context-profiles]",
         block=_render_accelerate_contract_block(tasks),
     )
@@ -782,6 +806,7 @@ def expected_contract_files(tasks: list[dict[str, Any]]) -> dict[Path, str]:
         DATASETS_CONTRACT_PATH.read_text(encoding="utf-8"),
         begin=DATASETS_CONTRACT_BEGIN,
         end=DATASETS_CONTRACT_END,
+        legacy_markers=LEGACY_DOEP_V4_CONTRACT_MARKERS,
         anchor="[project.optional-dependencies]",
         block=_render_datasets_contract_block(tasks),
     )
@@ -819,6 +844,10 @@ def expected_files() -> dict[Path, str]:
         owner = task["owning_repository"]
         if owner not in admitted_owners:
             raise ValueError(f"{task['task_id']} has no configured worktree owner")
+        if task.get("board_namespace") != PROGRAM_ID:
+            raise ValueError(
+                f"{task['task_id']} does not bind the canonical board namespace"
+            )
         outputs = task["exact_outputs"]
         if any(not path or path.startswith("/") or ".." in Path(path).parts for path in outputs):
             raise ValueError(f"{task['task_id']} outputs are unsafe")

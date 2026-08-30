@@ -1,5 +1,5 @@
 {
-  "accepted_plan_revision_alias": "DOEP-PLAN-V4",
+  "accepted_plan_revision_alias": "DOEP-PLAN-V5",
   "anti_runaway": {
     "event_debounce_seconds": 5,
     "max_generated_tasks": 24,
@@ -18,26 +18,26 @@
   "database_program": {
     "authority_mode": "quack",
     "endpoint_secret_handle": "env://IPFS_ACCELERATE_AGENT_QUACK_TOKEN",
-    "event_store_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/events",
+    "event_store_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/events",
     "explicit_legacy": false,
     "export_profile": "doep-v1",
     "failover_policy": "fail_closed",
-    "quack_endpoint": "quack:127.0.0.1:47941",
-    "runtime_registry_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/registry",
+    "quack_endpoint": "quack:127.0.0.1:47942",
+    "runtime_registry_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/registry",
     "schema": "ipfs_accelerate_py/agent-supervisor/database-program-config@1",
     "schema_revision": "1",
-    "store_generation": "doep-v1-r4",
-    "store_id": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/control.duckdb",
+    "store_generation": "doep-v1-r5",
+    "store_id": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/control.duckdb",
     "task_source_kind": "duckdb",
-    "worktree_root": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/worktrees"
+    "worktree_root": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees"
   },
   "dependency_guardrail_enabled": true,
   "ducklake_projection_program": {
     "acceptance_prerequisite": false,
     "authority": false,
-    "catalog_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/ducklake/catalog.duckdb",
+    "catalog_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/ducklake/catalog.duckdb",
     "completion_prerequisite": false,
-    "data_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/ducklake/data",
+    "data_path": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/ducklake/data",
     "may_grant_authority": false,
     "mode": "enabled_non_authoritative",
     "outage_policy": "typed unavailable and replayable; never block DuckDB authority",
@@ -109,7 +109,7 @@
     "quack_role": "authenticated exclusive loopback mutation owner"
   },
   "plan_path": "docs/architecture/AGENT_SUPERVISOR_DIRECT_OBJECTIVE_AND_EVENT_DRIVEN_PLANNING_V1_PLAN.md",
-  "plan_root_cid": "sha256:ca087f36486cdfb9137c0b74c19ca4e4ea5f5f17a3a3188404383009638b9743",
+  "plan_root_cid": "sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4",
   "poll_interval_seconds": 5,
   "program_identifier": "agent-supervisor-direct-objective-and-event-driven-planning-v1",
   "protected_paths": [
@@ -138,13 +138,13 @@
   "retry_budget_guardrail_enabled": true,
   "root_goal_id": "DOEP-G000",
   "runtime_paths": {
-    "evidence": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/evidence",
-    "logs": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/logs",
-    "merge_queue": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/merge-queue",
-    "quack_owner": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/quack-owner",
-    "root": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1",
-    "state": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/state",
-    "worktrees": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1/worktrees"
+    "evidence": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/evidence",
+    "logs": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/logs",
+    "merge_queue": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/merge-queue",
+    "quack_owner": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/quack-owner",
+    "root": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5",
+    "state": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/state",
+    "worktrees": "data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees"
   },
   "schema": "ipfs_accelerate_py.agent_supervisor.direct-objective-event-driven-planning.scheduler_config@1",
   "source_binding": {
@@ -152,11 +152,11 @@
     "accelerator_required_branch": "agent/agent-supervisor-direct-objective-and-event-driven-planning-v1",
     "bootstrap_task_source": "duckdb",
     "changed_revision_requires_fresh_inventory_and_baseline": true,
-    "ipfs_accelerate_planning_revision": "e7f17941206a9b0da87f4cc523885e093796ead0",
-    "ipfs_accelerate_planning_tree": "52ab7daeab75104a6250544c6b53d1ddb0ea1957",
+    "ipfs_accelerate_planning_revision": "87715e9295626e7918f7fc8a7b1a1531ab04208f",
+    "ipfs_accelerate_planning_tree": "1c9a399cc7a599d5904e5be2ae58c6be3650cff7",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_datasets_planning_revision": "6c08977c43d48c2b953eb15fee4b8c671b64f8bc",
-    "ipfs_datasets_planning_tree": "5c84bcbdc70e6efb094908c75050c5dd7b51b2cf",
+    "ipfs_datasets_planning_revision": "3668b8857a9aa7b1a3c847be12725b5cd057d2e7",
+    "ipfs_datasets_planning_tree": "456e09b51d6a07a3a5873436df24054768195320",
     "ipfs_datasets_submodule_path": "external/ipfs_datasets",
     "ipfs_kit_planning_revision": "b6c65ba732733d7e33852713ba18aa3b12235668",
     "ipfs_kit_planning_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",

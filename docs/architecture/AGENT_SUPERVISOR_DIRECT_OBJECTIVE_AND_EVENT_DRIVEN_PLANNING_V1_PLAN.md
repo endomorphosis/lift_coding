@@ -1,7 +1,7 @@
-# Agent Supervisor Direct Objective and Event-Driven Planning — DOEP-PLAN-V4
+# Agent Supervisor Direct Objective and Event-Driven Planning — DOEP-PLAN-V5
 
 Program: `agent-supervisor-direct-objective-and-event-driven-planning-v1`
-Plan CID: `sha256:ca087f36486cdfb9137c0b74c19ca4e4ea5f5f17a3a3188404383009638b9743`
+Plan CID: `sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4`
 Status: sealed bootstrap campaign; execution is owned by the existing supervisor.
 
 ## Outcome
@@ -13,8 +13,8 @@ A human or delegated external agent submits one bounded high-level idea. The exi
 | Repository | Commit | Tree |
 |---|---|---|
 | `lift_coding` | `bb8869ed72eb7002434345d9969efee729c4f7f6` | `99e85bfe584b7688ffbeff86da1e612dd6893a42` |
-| `ipfs_accelerate_py` | `e7f17941206a9b0da87f4cc523885e093796ead0` | `52ab7daeab75104a6250544c6b53d1ddb0ea1957` |
-| `ipfs_datasets_py` | `6c08977c43d48c2b953eb15fee4b8c671b64f8bc` | `5c84bcbdc70e6efb094908c75050c5dd7b51b2cf` |
+| `ipfs_accelerate_py` | `87715e9295626e7918f7fc8a7b1a1531ab04208f` | `1c9a399cc7a599d5904e5be2ae58c6be3650cff7` |
+| `ipfs_datasets_py` | `3668b8857a9aa7b1a3c847be12725b5cd057d2e7` | `456e09b51d6a07a3a5873436df24054768195320` |
 | `ipfs_kit_py` | `b6c65ba732733d7e33852713ba18aa3b12235668` | `14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2` |
 
 Branch names are navigation only. Every task and receipt is bound to exact commits, trees, plan epoch, policy and validation identity.
@@ -34,7 +34,7 @@ The dormant prompt-first facade is not used as false authority at bootstrap: on 
 
 ### Bootstrap revision history
 
-`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because the generated pytest targets were absent from the nested projects' task-bound dependency contracts. `DOEP-PLAN-V3` then moved Accelerate tasks to the bridge's reserved root authority and substituted the portfolio dispatcher for the task's direct validation command. That was rejected as a hidden preflight bypass: it avoided the nested Accelerate V4 task/command/output authority check instead of satisfying it. The complete DuckDB event streams and logs for V1 through V3 remain retained as superseded failed generations. `DOEP-PLAN-V4` restores all three configured gitlink owners, owner-relative outputs and direct pytest commands, and reproducibly installs exact task-bound Accelerate V4 and Datasets V3 contract entries before launch. Kit remains on its existing static project-dependency path.
+`DOEP-PLAN-V1` failed closed before provider dispatch because task records used GitHub authority names where the existing worktree allocator requires canonical local authorities. `DOEP-PLAN-V2` corrected nested ownership but its four frontier tasks failed closed before provider dispatch because the generated pytest targets were absent from the nested projects' task-bound dependency contracts. `DOEP-PLAN-V3` then moved Accelerate tasks to the bridge's reserved root authority and substituted the portfolio dispatcher for the task's direct validation command. That was rejected as a hidden preflight bypass: it avoided the nested Accelerate scoped dependency contract instead of satisfying it. `DOEP-PLAN-V4` restored all three configured gitlink owners, owner-relative outputs and direct pytest commands, but its four frontier attempts failed closed before provider dispatch with `v2_validation_task_authority_mismatch`: the immutable database task bodies omitted the board namespace, so the private Portal parser conservatively used the disposable `task-projection.md` filename. The complete DuckDB event streams, worktrees, receipts and logs for V1 through V4 remain retained as superseded failed generations. `DOEP-PLAN-V5` binds the canonical namespace in every immutable task body, keeps the scoped Accelerate dependency contract V4 and Datasets dependency contract V3 semantics, and starts from a fresh state-store generation. Kit remains on its existing static project-dependency path.
 
 ## Compiler and execution sequence
 

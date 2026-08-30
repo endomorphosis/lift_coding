@@ -868,7 +868,17 @@ def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
     if board.board_namespace != PROGRAM_ID or int(board.max_lanes) != 4:
         raise HandoffError("scheduler configuration is not the sealed DOEP campaign")
     population = _json_object(BOARD)
-    if population.get("board_namespace") != PROGRAM_ID or len(population.get("tasks", ())) != 85:
+    tasks = population.get("tasks")
+    if (
+        population.get("board_namespace") != PROGRAM_ID
+        or not isinstance(tasks, list)
+        or len(tasks) != 85
+        or any(
+            not isinstance(task, Mapping)
+            or task.get("board_namespace") != PROGRAM_ID
+            for task in tasks
+        )
+    ):
         raise HandoffError("task board is not the sealed DOEP population")
     paths = _runtime_paths(board)
     if not paths["database"].is_file():
