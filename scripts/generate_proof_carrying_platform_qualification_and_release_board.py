@@ -96,8 +96,8 @@ SOURCE_FOREST = OrderedDict(
             "ipfs_accelerate",
             {
                 "path": "external/ipfs_accelerate",
-                "commit": "ee46b9406ae1db4ff701e75cdc5c3fe75445843b",
-                "tree": "3f4509b46da97b86551cae2ed789ed510ee4f184",
+                "commit": "5e045878af7f781e5ae291105364741ac613d980",
+                "tree": "5ec994f0d15e7d8444904649da9cb7402a490bab",
                 "origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
             },
         ),
