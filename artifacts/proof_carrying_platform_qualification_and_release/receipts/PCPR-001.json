@@ -9,8 +9,8 @@
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcpr:task-receipt:PCPR-001@current-head-direct-objective-event-driven-qualification-v1",
-  "observed_at": "2026-08-30T00:35:12Z",
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-001@current-head-direct-objective-event-driven-qualification-v2",
+  "observed_at": "2026-08-30T03:10:26Z",
   "depends_on": ["PCPR-004"],
   "scope": {
     "language": "Python",
@@ -27,7 +27,7 @@
     "every_changed_path_is_allowed": true,
     "protected_paths_unchanged": true,
     "duckdb_or_quack_state_written": false,
-    "implementation_delta": "Add DirectObjectiveEventDrivenQualification@1, a fail-closed evaluator for the required 13-case live cohort and 10 efficiency/hard-zero targets. Simulated, estimated, hermetic, and unavailable evidence cannot satisfy live promotion. The evaluator never emits a closed PCPR release outcome."
+    "implementation_delta": "Rebind PCPR-001 to the post-merge resealed current tree. Add pcpr_phase0_receipt_promotion and pin CURRENT_HEAD_UNAVAILABLE_VERDICT_CID so the outer promotion section is generated from DirectObjectiveEventDrivenQualification@1. Simulated, estimated, hermetic, and unavailable evidence cannot satisfy live promotion. The evaluator never emits a closed PCPR release outcome."
   },
   "evidence_legend": {
     "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
@@ -38,18 +38,20 @@
   "current_tree_binding": {
     "outer_repository": "endomorphosis/lift_coding",
     "owning_repository_for_receipts": "ipfs_accelerate_py",
-    "outer_commit": "b7099c0d3bc6e0e7f3cb42ba5ec39382d851995e",
-    "outer_tree": "aa9be021ea113a21cc0e22e60bb8647aeb4b23ec",
-    "outer_subject": "feat(pcpr): observe three expanded supervisor lanes",
+    "outer_commit": "b609eb4191a4a8f845fe283ad4734a701aae1fb7",
+    "outer_tree": "3f4073c8291dc05ddf36e53c6eb93455bc3d310f",
+    "outer_subject": "chore(pcpr): reseal source forest after PCPR-001 merge",
     "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
     "origin_main_is_ancestor": true,
-    "accelerator_pre_change_commit": "5809d8781317b38fb3ce1034323201fa0e444f9f",
-    "accelerator_pre_change_tree": "88e8921674653cf33fa6f15191cdca02ed5d0d60",
-    "accelerator_gitlink": "5809d8781317b38fb3ce1034323201fa0e444f9f",
+    "accelerator_pre_change_commit": "38deb2ea57b171da90e5f2d4194ef6f100f9795b",
+    "accelerator_pre_change_tree": "765e3408df69965270dea862ab0866cf5f84c27d",
+    "accelerator_gitlink": "38deb2ea57b171da90e5f2d4194ef6f100f9795b",
     "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
     "accelerator_origin_main_is_ancestor": true,
     "accelerator_post_change_commit": "pending nested commit after admission",
     "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "prior_receipt_outer_commit": "b7099c0d3bc6e0e7f3cb42ba5ec39382d851995e",
+    "landed_pcpr_001_nested_commit": "38deb2ea57b171da90e5f2d4194ef6f100f9795b",
     "evidence_kind": "measured"
   },
   "source_artifacts": [
@@ -57,14 +59,14 @@
       "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/direct_objective_event_driven_qualification.py",
       "interface": "DirectObjectiveEventDrivenQualification@1",
       "schema": "ipfs_accelerate_py/agent-supervisor/direct-objective-event-driven-qualification@1",
-      "sha256": "6c0815759c53560d553f33a98f31d4ad986bc98d0c68350936b5c1002550a5c9",
-      "bytes": 26974,
+      "sha256": "1e5ceccd3a511fe07205db38632e64b0f9c74ebc86b67cd2f83fa47c1e80422b",
+      "bytes": 29375,
       "evidence_kind": "measured"
     },
     {
       "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
-      "sha256": "0a13e3d11faaa1ea769265fed70cf95297b2da347aa7b74aa3e39bfce410a268",
-      "bytes": 15613,
+      "sha256": "ca16d6aac87f37c9e0b9f80e4e2299984f8af644662a4f5a96e9e722553dd682",
+      "bytes": 16620,
       "evidence_kind": "measured"
     }
   ],
@@ -80,6 +82,7 @@
     "missed_live_cohort_count": 13,
     "missed_target_count": 10,
     "blockers": [],
+    "duckdb_or_quack_state_written": false,
     "evidence_kind": "measured"
   },
   "required_live_cohort": {
@@ -240,6 +243,7 @@
   "sealed_validation_environment": {
     "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
     "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
     "python3_12": "/usr/bin/python3.12",
     "python_version": "Python 3.12.3",
     "git_path": "/usr/bin/git",
@@ -257,13 +261,13 @@
   },
   "hermetic_candidate_suites": {
     "authority": "candidate_only; cannot satisfy live cohort counts or efficiency targets",
-    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr001-*> PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_prompt_v3_python_api.py test/api/test_agent_supervisor_prompt_v3_cli.py test/api/test_agent_supervisor_prompt_v3_mcp.py test/api/test_agent_supervisor_plan_control_conformance.py test/api/test_agent_supervisor_event_driven_runtime.py test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr001-hermetic-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_prompt_v3_python_api.py test/api/test_agent_supervisor_prompt_v3_cli.py test/api/test_agent_supervisor_prompt_v3_mcp.py test/api/test_agent_supervisor_plan_control_conformance.py test/api/test_agent_supervisor_event_driven_runtime.py test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
     "sealed_result": {
       "exit_code": 1,
       "passed": 76,
       "failed": 7,
       "skipped": 7,
-      "duration_seconds": 11.97,
+      "duration_seconds": 17.81,
       "evidence_kind": "measured"
     },
     "sealed_failures": [
@@ -290,17 +294,14 @@
       "path": "test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
       "sealed_passed": 14,
       "sealed_failed": 0,
-      "duration_seconds": 0.42,
+      "duration_seconds": 0.51,
       "exit_code": 0,
       "evidence_kind": "measured"
     },
     "provider_side_non_authoritative": {
-      "pytest_version": "9.1.1",
-      "passed": 90,
-      "failed": 0,
-      "duration_seconds": 12.13,
+      "executed": false,
       "authority": false,
-      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and are not used as live qualification.",
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
       "evidence_kind": "measured"
     }
   },
@@ -313,6 +314,7 @@
       "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json",
       "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
       "status": "passed",
+      "exit_code": 0,
       "evidence_kind": "measured"
     },
     "token_count": 0,
@@ -342,7 +344,7 @@
     "The required live 10-objective and 20-replay cohort did not run and remains typed unavailable.",
     "Efficiency targets against the prior Codex-primed route were not measured and are not recorded as zero or passing.",
     "Sealed-environment hermetic suites are incomplete: duckdb, anyio, and pytest-asyncio are absent, producing 7 failures and 7 skips that are dependency gaps, not live campaign results.",
-    "Provider-side pytest 9.1.1 with user-site dependencies is recorded only as non-authoritative contrast.",
+    "Provider-side pytest was not executed and is not used as live qualification.",
     "Post-change Accelerate commit and tree identities are pending the accepted nested commit.",
     "This receipt is R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome."
   ],
