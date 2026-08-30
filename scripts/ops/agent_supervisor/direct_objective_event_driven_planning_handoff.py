@@ -87,6 +87,9 @@ DOEP031_TASK_ALIAS: Final = "DOEP-031"
 DOEP031_TASK_CID: Final = (
     "sha256:874d5734293949adf012407213234bfcd05bde51815b9bd2babceb4a752d0306"
 )
+DOEP031_GOAL_CID: Final = (
+    "sha256:a09f46b65a405ce216db97f779a180e4dcf04fcc292cd7ba832f8ac6e775629e"
+)
 DOEP031_TERMINAL_REASON: Final = "protected-path preservation event chain is not exact"
 DOEP031_PORTAL_REASON: Final = "implementation_protected_path_mutated"
 DOEP031_ATTEMPT_RELATIVE: Final = Path(
@@ -1336,23 +1339,28 @@ def _validated_doep031_task_row(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     try:
         body = json.loads(str(task_row.get("body_json") or ""))
-        identity = json.loads(str(task_row.get("identity_json") or "{}"))
     except json.JSONDecodeError as exc:
         raise HandoffError("DOEP-031 canonical task authority is malformed") from exc
-    if not isinstance(body, dict) or not isinstance(identity, dict):
+    if not isinstance(body, dict):
         raise HandoffError("DOEP-031 canonical task authority is malformed")
     terminal = body.get("completion_receipt")
     exact_blocked = task_row.get("status") == "blocked" and task_row.get("revision") == 4
     replay = task_row.get("status") == "retrying" and task_row.get("revision") == 5
     if not (
-        task_row.get("task_alias") == DOEP031_TASK_ALIAS
+        set(task_row)
+        == {
+            "task_alias",
+            "task_cid",
+            "goal_cid",
+            "ordinal",
+            "status",
+            "revision",
+            "body_json",
+        }
+        and task_row.get("task_alias") == DOEP031_TASK_ALIAS
         and task_row.get("task_cid") == DOEP031_TASK_CID
+        and task_row.get("goal_cid") == DOEP031_GOAL_CID
         and task_row.get("ordinal") == 22
-        and task_row.get("objective_id") == PROGRAM_ID
-        and task_row.get("plan_cid")
-        == "sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4"
-        and identity.get("task_alias") == DOEP031_TASK_ALIAS
-        and identity.get("task_cid") == DOEP031_TASK_CID
         and body.get("stable_task_id") == DOEP031_TASK_ALIAS
         and body.get("board_namespace") == PROGRAM_ID
         and body.get("plan_revision") == "DOEP-PLAN-V5"
@@ -1888,15 +1896,10 @@ def _load_doep031_recovery_authorization(
     embedded_row = {
         "task_alias": DOEP031_TASK_ALIAS,
         "task_cid": task_cid,
+        "goal_cid": DOEP031_GOAL_CID,
         "ordinal": 22,
-        "objective_id": PROGRAM_ID,
-        "plan_cid": "sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4",
         "status": "blocked",
         "revision": 4,
-        "identity_json": json.dumps(
-            {"task_alias": DOEP031_TASK_ALIAS, "task_cid": task_cid},
-            sort_keys=True,
-        ),
         "body_json": json.dumps(dict(task_body), sort_keys=True),
     }
     _validated_doep031_task_row(embedded_row)

@@ -596,17 +596,10 @@ def _doep031_row(
     return {
         "task_alias": module.DOEP031_TASK_ALIAS,
         "task_cid": module.DOEP031_TASK_CID,
+        "goal_cid": module.DOEP031_GOAL_CID,
         "ordinal": 22,
-        "objective_id": module.PROGRAM_ID,
-        "plan_cid": "sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4",
         "status": status,
         "revision": revision,
-        "identity_json": json.dumps(
-            {
-                "task_alias": module.DOEP031_TASK_ALIAS,
-                "task_cid": module.DOEP031_TASK_CID,
-            }
-        ),
         "body_json": json.dumps(_doep031_body(module, terminal=terminal)),
     }
 
