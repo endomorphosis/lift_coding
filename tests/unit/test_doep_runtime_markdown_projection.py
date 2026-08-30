@@ -513,3 +513,569 @@ def test_historical_blocked_retry_authorization_rejects_workspace_escape(
             task_row=_blocked_task_row(module),
             authority_context=_authority_context(),
         )
+
+
+def _doep031_body(module, *, terminal: dict[str, object] | None = None) -> dict[str, object]:
+    child_paths = list(module.DOEP031_CHILD_PATHS)
+    return {
+        "stable_task_id": module.DOEP031_TASK_ALIAS,
+        "board_namespace": module.PROGRAM_ID,
+        "plan_revision": "DOEP-PLAN-V5",
+        "owning_repository": "external/ipfs_kit",
+        "exact_outputs": child_paths,
+        "owned_files": child_paths,
+        "write_scope": child_paths,
+        "superproject_outputs": list(module.DOEP031_OUTPUT_SCOPE),
+        "completion_receipt": dict(terminal or module.DOEP031_TERMINAL_RECEIPT),
+    }
+
+
+def _doep031_row(
+    module,
+    *,
+    status: str = "blocked",
+    revision: int = 4,
+    terminal: dict[str, object] | None = None,
+) -> dict[str, object]:
+    return {
+        "task_alias": module.DOEP031_TASK_ALIAS,
+        "task_cid": module.DOEP031_TASK_CID,
+        "ordinal": 22,
+        "objective_id": module.PROGRAM_ID,
+        "plan_cid": "sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4",
+        "status": status,
+        "revision": revision,
+        "identity_json": json.dumps(
+            {
+                "task_alias": module.DOEP031_TASK_ALIAS,
+                "task_cid": module.DOEP031_TASK_CID,
+            }
+        ),
+        "body_json": json.dumps(_doep031_body(module, terminal=terminal)),
+    }
+
+
+def _doep031_events(module, workspace: str) -> list[dict[str, object]]:
+    common = {
+        "task_id": module.DOEP031_TASK_ALIAS,
+        "canonical_task_cid": module.DOEP031_TASK_CID,
+        "canonical_task_key": module.DOEP031_TASK_CID,
+        "attempt": 1,
+    }
+    events: list[dict[str, object]] = []
+    types = {
+        11: "implementation_protected_path_snapshot_recorded",
+        12: "implementation_started",
+        13: "pre_implementation_kernel_evaluated",
+        14: "implementation_protected_path_mutated",
+        15: "cleanup_finished",
+        16: "protected_path_interrupted_worktree_preserved",
+        17: "implementation_finished",
+    }
+    for sequence in range(11, 18):
+        event = {
+            "sequence": sequence,
+            "event_id": module.DOEP031_EVENT_IDS[sequence],
+            "type": types[sequence],
+            "stream_id": module.DOEP031_STREAM_ID,
+            "snapshot_id": module.DOEP031_SNAPSHOT_ID,
+            **({"previous_event_id": module.DOEP031_EVENT_IDS[sequence - 1]} if sequence > 11 else {}),
+            **(common if sequence != 15 else {}),
+            **(
+                {
+                    "workspace_path" if sequence in (11, 14) else "worktree_path": workspace
+                }
+                if sequence != 13
+                else {}
+            ),
+        }
+        events.append(event)
+    by_sequence = {int(event["sequence"]): event for event in events}
+    by_sequence[12].update(
+        {
+            "baseline_ref": module.DOEP031_BASELINE,
+            "branch": module.DOEP031_BRANCH,
+            "outputs": list(module.DOEP031_OUTPUT_SCOPE),
+        }
+    )
+    mutation = {
+        "path": module.DOEP031_PROTECTED_PATH,
+        "scope": "shared_checkout",
+        "change": "content_changed",
+        "before": {"sha256": module.DOEP031_PROTECTED_BEFORE_SHA256},
+        "after": {"sha256": module.DOEP031_PROTECTED_AFTER_SHA256},
+    }
+    by_sequence[14].update(
+        {
+            "reason": module.DOEP031_PORTAL_REASON,
+            "shared_checkout_restored": False,
+            "mutations": [mutation],
+        }
+    )
+    by_sequence[15].update(
+        {"branch": module.DOEP031_BRANCH, "cleaned": True, "deleted_branch": True}
+    )
+    commit_result = {
+        "committed": True,
+        "commit": module.DOEP031_CANDIDATE_COMMIT,
+        "submodule_results": [
+            {
+                "path": "external/ipfs_kit",
+                "committed": True,
+                "commit": module.DOEP031_CANDIDATE_CHILD,
+            }
+        ],
+    }
+    by_sequence[16].update(
+        {
+            "branch": module.DOEP031_BRANCH,
+            "preserved": True,
+            "preserved_commit": module.DOEP031_CANDIDATE_COMMIT,
+            "implementation_commit": module.DOEP031_CANDIDATE_COMMIT,
+            "rescue_branch": module.DOEP031_RESCUE_REF.removeprefix("refs/heads/"),
+            "commit_result": commit_result,
+        }
+    )
+    by_sequence[17].update(
+        {
+            "branch": module.DOEP031_BRANCH,
+            "baseline_ref": module.DOEP031_BASELINE,
+            "implementation_commit": module.DOEP031_CANDIDATE_COMMIT,
+            "provider_dispatched": True,
+            "attempt_consumed": False,
+            "deferred": True,
+            "reason": module.DOEP031_PORTAL_REASON,
+            "returncode": 1,
+            "merge_result": {"merged": False, "reason": "not_attempted"},
+        }
+    )
+    return events
+
+
+def test_doep031_task_authority_binds_exact_blocked_revision_and_terminal_receipt() -> None:
+    module = _module()
+    body, terminal = module._validated_doep031_task_row(_doep031_row(module))
+
+    assert body["superproject_outputs"] == list(module.DOEP031_OUTPUT_SCOPE)
+    assert terminal == module.DOEP031_TERMINAL_RECEIPT
+
+    row = _doep031_row(module)
+    row["status"] = "completed"
+    with pytest.raises(module.HandoffError, match="revision, status, or output scope"):
+        module._validated_doep031_task_row(row)
+
+    terminal_drift = json.loads(json.dumps(module.DOEP031_TERMINAL_RECEIPT))
+    terminal_drift["attempt_id"] = "attempt:wrong"
+    with pytest.raises(module.HandoffError, match="exact sealed failure"):
+        module._validated_doep031_task_row(
+            _doep031_row(module, terminal=terminal_drift)
+        )
+
+
+@pytest.mark.parametrize(
+    ("sequence", "field", "replacement"),
+    [
+        (11, "event_id", "sha256:wrong"),
+        (14, "shared_checkout_restored", True),
+        (15, "deleted_branch", False),
+        (16, "preserved_commit", "0" * 40),
+        (17, "attempt_consumed", True),
+    ],
+)
+def test_doep031_event_chain_fails_closed_on_identity_or_candidate_drift(
+    sequence: int,
+    field: str,
+    replacement: object,
+) -> None:
+    module = _module()
+    workspace = "/campaign/worktrees/" + module.DOEP031_WORKSPACE_NAME
+    events = _doep031_events(module, workspace)
+    module._validated_doep031_events(
+        _event_payload(events),
+        workspace_path=workspace,
+    )
+    next(event for event in events if event["sequence"] == sequence)[field] = replacement
+
+    with pytest.raises(module.HandoffError):
+        module._validated_doep031_events(
+            _event_payload(events),
+            workspace_path=workspace,
+        )
+
+
+def test_doep031_artifacts_bind_snapshot_incident_binding_and_event_bytes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _module()
+    root = tmp_path / "runtime"
+    state = root / "state"
+    attempt = state / module.DOEP031_ATTEMPT_RELATIVE
+    attempt.mkdir(parents=True)
+    workspace = str(root / "worktrees" / module.DOEP031_WORKSPACE_NAME)
+    artifacts: dict[str, bytes] = {
+        "portal-events.jsonl": _event_payload(_doep031_events(module, workspace)),
+        "portal-events.jsonl.manifest.json": json.dumps(
+            {
+                "stream_id": module.DOEP031_STREAM_ID,
+                "snapshot_id": module.DOEP031_SNAPSHOT_ID,
+                "latest_sequence": 18,
+            }
+        ).encode(),
+        "database-attempt-binding.json": json.dumps(
+            {
+                "binding_id": "sha256:025031355642bae02ba1e0358444cdc76b5c13ccf6ccfdb71b32703d51cdd2bd",
+                "task_alias": module.DOEP031_TASK_ALIAS,
+                "task_cid": module.DOEP031_TASK_CID,
+                "canonical_task_key": module.DOEP031_TASK_CID,
+                "task_revision": 3,
+                "attempt_number": 1,
+                "attempt_id": module.DOEP031_TERMINAL_RECEIPT["attempt_id"],
+                "claim_id": module.DOEP031_TERMINAL_RECEIPT["claim_id"],
+                "lease_id": module.DOEP031_TERMINAL_RECEIPT["lease_id"],
+            }
+        ).encode(),
+        "implementation-protected-path-active.json": json.dumps(
+            {
+                "schema": "implementation-protected-path-active-v1",
+                "task_id": module.DOEP031_TASK_ALIAS,
+                "canonical_task_cid": module.DOEP031_TASK_CID,
+                "canonical_task_key": module.DOEP031_TASK_CID,
+                "attempt": 1,
+                "workspace_path": workspace,
+                "snapshot": {
+                    "shared_checkout": {
+                        "git_head": module.DOEP031_BASELINE,
+                        "paths": {
+                            module.DOEP031_PROTECTED_PATH: {
+                                "sha256": module.DOEP031_PROTECTED_BEFORE_SHA256
+                            }
+                        },
+                    }
+                },
+            }
+        ).encode(),
+        "implementation-protected-path-incident.json": json.dumps(
+            {
+                "schema": "implementation-protected-path-incident-v1",
+                "task_id": module.DOEP031_TASK_ALIAS,
+                "canonical_task_cid": module.DOEP031_TASK_CID,
+                "canonical_task_key": module.DOEP031_TASK_CID,
+                "attempt": 1,
+                "workspace_path": workspace,
+                "reason": module.DOEP031_PORTAL_REASON,
+                "requires_operator_clearance": True,
+                "shared_checkout_restored": False,
+                "mutations": [
+                    {
+                        "path": module.DOEP031_PROTECTED_PATH,
+                        "scope": "shared_checkout",
+                        "before": {"sha256": module.DOEP031_PROTECTED_BEFORE_SHA256},
+                        "after": {"sha256": module.DOEP031_PROTECTED_AFTER_SHA256},
+                    }
+                ],
+            }
+        ).encode(),
+    }
+    for name, payload in artifacts.items():
+        (attempt / name).write_bytes(payload)
+    monkeypatch.setattr(
+        module,
+        "DOEP031_ARTIFACT_SHA256",
+        {name: "sha256:" + hashlib.sha256(payload).hexdigest() for name, payload in artifacts.items()},
+    )
+
+    evidence = module._doep031_artifact_evidence(
+        {"root": root, "state": state},
+        task_cid=module.DOEP031_TASK_CID,
+    )
+    assert evidence["candidate_commit"] == module.DOEP031_CANDIDATE_COMMIT
+    assert evidence["incident_path"] == module.DOEP031_PROTECTED_PATH
+
+    (attempt / "implementation-protected-path-incident.json").write_bytes(b"{}")
+    with pytest.raises(module.HandoffError, match="artifact .* drifted"):
+        module._doep031_artifact_evidence(
+            {"root": root, "state": state},
+            task_cid=module.DOEP031_TASK_CID,
+        )
+
+
+def test_doep031_git_proof_requires_clean_strict_forward_disjoint_candidate(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _module()
+    current_head = "c" * 40
+    current_tree = "d" * 40
+    dirty = {"value": ""}
+    before = b"incident-before"
+    after = b"control-after"
+    monkeypatch.setattr(
+        module,
+        "DOEP031_PROTECTED_BEFORE_SHA256",
+        hashlib.sha256(before).hexdigest(),
+    )
+    monkeypatch.setattr(
+        module,
+        "DOEP031_PROTECTED_AFTER_SHA256",
+        hashlib.sha256(after).hexdigest(),
+    )
+
+    def fake_git_read(repository: Path, *arguments: str, binary: bool = False):
+        if arguments[:3] == ("show", "-s", "--format=%H%n%P%n%T%n%s"):
+            commit = arguments[3]
+            if commit == module.DOEP031_CONTROL_COMMIT:
+                return "\n".join(
+                    [
+                        commit,
+                        module.DOEP031_CONTROL_PARENT,
+                        module.DOEP031_CONTROL_TREE,
+                        "Allow sealed supervisor control-plane reloads",
+                    ]
+                )
+            if commit == module.DOEP031_CANDIDATE_COMMIT:
+                return "\n".join(
+                    [
+                        commit,
+                        module.DOEP031_BASELINE,
+                        module.DOEP031_CANDIDATE_TREE,
+                        "DOEP-031: Extend the current canonical implementation to add transactional event publication without creating a competing subsystem.",
+                    ]
+                )
+            return "\n".join(
+                [
+                    module.DOEP031_CANDIDATE_CHILD,
+                    module.DOEP031_BASE_CHILD,
+                    module.DOEP031_CANDIDATE_CHILD_TREE,
+                    "DOEP-031: Extend the current canonical implementation to add transactional event publication without creating a competing subsystem.",
+                ]
+            )
+        if arguments[:2] == ("rev-parse", "HEAD^{commit}"):
+            return current_head
+        if arguments[:2] == ("rev-parse", "HEAD^{tree}"):
+            return current_tree
+        if arguments[0] == "rev-parse":
+            return module.DOEP031_CANDIDATE_COMMIT
+        if arguments[0] == "diff-tree":
+            commit = arguments[-1]
+            if commit == module.DOEP031_CONTROL_COMMIT:
+                return "\n".join(module.DOEP031_CONTROL_PATHS)
+            if commit == module.DOEP031_CANDIDATE_COMMIT:
+                return "M\texternal/ipfs_kit"
+            return "\n".join(f"M\t{path}" for path in module.DOEP031_CHILD_PATHS)
+        if arguments[0] == "ls-tree":
+            child = (
+                module.DOEP031_BASE_CHILD
+                if arguments[1] == module.DOEP031_BASELINE
+                else module.DOEP031_CANDIDATE_CHILD
+            )
+            return f"160000 commit {child}\texternal/ipfs_kit"
+        if arguments[0] == "cat-file":
+            return before if arguments[-1].startswith(module.DOEP031_BASELINE) else after
+        if arguments[0] == "status":
+            return dirty["value"]
+        raise AssertionError(arguments)
+
+    def fake_is_ancestor(repository: Path, older: str, newer: str) -> bool:
+        return not (
+            older == module.DOEP031_CANDIDATE_COMMIT and newer == current_head
+        )
+
+    monkeypatch.setattr(module, "_git_read", fake_git_read)
+    monkeypatch.setattr(module, "_git_is_ancestor", fake_is_ancestor)
+    proof = module._doep031_git_evidence(tmp_path)
+    assert proof["control_candidate_scope_disjoint"] is True
+    assert proof["candidate_merged"] is False
+
+    dirty["value"] = " M " + module.DOEP031_PROTECTED_PATH
+    with pytest.raises(module.HandoffError, match="clean strict-forward"):
+        module._doep031_git_evidence(tmp_path)
+
+
+def test_doep031_authorization_is_immutable_and_revalidates_current_tree(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _module()
+    paths = {
+        "doep031_recovery_sidecar": tmp_path / "sidecar.json",
+        "doep031_recovery_authorization": tmp_path / "authorization.json",
+    }
+    artifacts = {"incident": "exact"}
+    git_evidence = {"current_head": "a" * 40, "current_tree": "b" * 40}
+    monkeypatch.setattr(
+        module,
+        "_doep031_artifact_evidence",
+        lambda paths, task_cid: dict(artifacts),
+    )
+    monkeypatch.setattr(module, "_doep031_git_evidence", lambda: dict(git_evidence))
+    authority = {
+        **_authority_context(),
+        "plan_root_cid": "sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4",
+        "repository_tree_id": "sha256:2de6ca649a36e4ae245d83ae39af8e66d529619ee302b69b34b796f9ae231efe",
+    }
+    sidecar, authorization = module._prepare_doep031_recovery_authorization(
+        paths=paths,
+        task_cid=module.DOEP031_TASK_CID,
+        task_row=_doep031_row(module),
+        authority_context=authority,
+    )
+    loaded = module._load_doep031_recovery_authorization(
+        paths=paths,
+        task_cid=module.DOEP031_TASK_CID,
+        authority_context=authority,
+    )
+    assert loaded == (sidecar, authorization)
+    assert authorization["transition_target"] == "retrying"
+    assert authorization["direct_completion_authorized"] is False
+
+    git_evidence["current_tree"] = "c" * 40
+    with pytest.raises(module.HandoffError, match="authorization has drifted"):
+        module._load_doep031_recovery_authorization(
+            paths=paths,
+            task_cid=module.DOEP031_TASK_CID,
+            authority_context=authority,
+        )
+
+
+def test_doep031_command_uses_typed_retry_cas_and_stops_at_retrying(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _module()
+    paths = {
+        "operator_pid": tmp_path / "operator.pid",
+        "doep031_recovery_sidecar": tmp_path / "sidecar.json",
+        "doep031_recovery_authorization": tmp_path / "authorization.json",
+        "doep031_recovery_receipt": tmp_path / "receipt.json",
+    }
+    population = {
+        "plan_root_cid": "sha256:6c197a4b92682b3b813656123e09956846dc4f5abadf417f37fb7cc0133ddba4",
+        "repository_tree_id": "sha256:2de6ca649a36e4ae245d83ae39af8e66d529619ee302b69b34b796f9ae231efe",
+        "tasks": [
+            {
+                "task_alias": module.DOEP031_TASK_ALIAS,
+                "task_cid": module.DOEP031_TASK_CID,
+            }
+        ],
+    }
+    authorization = {
+        "expected_task_revision": 4,
+        "task_body": _doep031_body(module),
+        "terminal_receipt": dict(module.DOEP031_TERMINAL_RECEIPT),
+        "max_task_attempts_before": 1,
+        "max_task_attempts_after": 2,
+        "operator_handoff_receipt_id": "sha256:authorization",
+        "sidecar_evidence_id": "sha256:evidence",
+        "now_ms": 1234,
+        "authorized_at": "2026-08-30T00:00:00+00:00",
+    }
+    sidecar = {"evidence_id": "sha256:evidence"}
+    calls: dict[str, object] = {}
+
+    class Generation:
+        @staticmethod
+        def to_record():
+            return {
+                "store_id": "doep-v1-r5",
+                "database_uuid": "uuid",
+                "generation": 1,
+                "fence_epoch": 1,
+                "revision": 10,
+            }
+
+    class Result:
+        accepted = True
+        outcome = SimpleNamespace(value="accepted")
+        result = {
+            "task_cid": module.DOEP031_TASK_CID,
+            "task_revision": 5,
+            "attempt_number": 1,
+            "fresh_attempt_number": 2,
+            "max_task_attempts_before": 1,
+            "max_task_attempts_after": 2,
+            "attempt_refunded": False,
+            "operator_handoff_receipt_id": "sha256:authorization",
+            "sidecar_evidence_id": "sha256:evidence",
+            "fresh_portal_revalidation_requirement_id": "sha256:revalidate",
+        }
+
+        @staticmethod
+        def to_dict():
+            return {"outcome": "accepted", "result": dict(Result.result)}
+
+    class Client:
+        selects = 0
+
+        @staticmethod
+        def load_generation():
+            return Generation()
+
+        def execute(self, operation: str, parameters: dict[str, object]):
+            assert operation == "select_task_by_cid"
+            assert parameters == {"task_cid": module.DOEP031_TASK_CID}
+            self.selects += 1
+            if self.selects == 1:
+                return [_doep031_row(module)]
+            return [_doep031_row(module, status="retrying", revision=5)]
+
+        @staticmethod
+        def recover_blocked_task_retry(**kwargs):
+            calls["cas"] = kwargs
+            return Result()
+
+        @staticmethod
+        def close():
+            calls["client_closed"] = True
+
+    client = Client()
+
+    class Server:
+        @staticmethod
+        def start():
+            return SimpleNamespace(server_id="server:test")
+
+        @staticmethod
+        def ready():
+            return True
+
+        @staticmethod
+        def revoke_typed_client_grant(grant_id: str):
+            calls["revoked"] = grant_id
+
+        @staticmethod
+        def stop():
+            calls["stopped"] = True
+
+    monkeypatch.setattr(module, "_load", lambda: (object(), population, paths))
+    monkeypatch.setattr(module, "_build_server", lambda board, paths: Server())
+    monkeypatch.setattr(
+        module,
+        "_make_blocked_retry_recovery_client",
+        lambda server, board, task_cid, task_alias: (
+            client,
+            SimpleNamespace(grant_id="grant:test"),
+        ),
+    )
+    monkeypatch.setattr(
+        module,
+        "_prepare_doep031_recovery_authorization",
+        lambda **kwargs: (sidecar, authorization),
+    )
+    monkeypatch.setattr(
+        module,
+        "_revalidate_doep031_recovery",
+        lambda **kwargs: calls.setdefault("revalidated", True),
+    )
+    monkeypatch.setattr(
+        module,
+        "_immutable_json",
+        lambda path, payload: calls.setdefault("receipt", dict(payload)),
+    )
+
+    assert module.recover_doep031_protected_control_plane_update() == 0
+    assert calls["cas"]["require_fresh_portal_revalidation"] is True
+    assert calls["receipt"]["transition_status"] == "retrying"
+    assert calls["receipt"]["direct_completion_authorized"] is False
+    assert calls["revalidated"] is True
+    assert calls["stopped"] is True
