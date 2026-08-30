@@ -417,6 +417,36 @@ def test_private_stage_layout_does_not_inherit_group_writable_umask(
     assert (stage / "state").stat().st_mode & 0o777 == 0o700
 
 
+def test_private_stage_retires_only_quiescent_empty_coordination_locks(
+    migration: Any,
+    tmp_path: Path,
+) -> None:
+    import fcntl
+
+    stage = tmp_path / "stage"
+    stage.mkdir(mode=0o700)
+    _small_receipt(migration, tmp_path, stage)
+    lock_paths = migration._private_stage_coordination_locks(stage)
+    for path in lock_paths:
+        descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        os.close(descriptor)
+
+    held_descriptor = os.open(lock_paths[0], os.O_RDWR)
+    fcntl.flock(held_descriptor, fcntl.LOCK_EX)
+    try:
+        with pytest.raises(
+            migration.SourceBindingMigrationError,
+            match="still held",
+        ):
+            migration._retire_private_stage_coordination_locks(stage)
+    finally:
+        fcntl.flock(held_descriptor, fcntl.LOCK_UN)
+        os.close(held_descriptor)
+
+    migration._retire_private_stage_coordination_locks(stage)
+    assert not any(path.exists() for path in lock_paths)
+
+
 def _small_receipt(
     module: Any, root: Path, stage: Path, *, variant: str = ""
 ) -> dict[str, Any]:

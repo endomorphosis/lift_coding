@@ -1895,6 +1895,76 @@ def _new_private_stage_root(parent: Path) -> Path:
     return stage_root
 
 
+def _private_stage_coordination_locks(stage_root: Path) -> tuple[Path, ...]:
+    databases = tuple(stage_root / relative for relative in _store_relative_files())
+    control = databases[0]
+    return (
+        control.with_name(f".{control.name}.lock"),
+        control.with_name(f".{control.name}.intent.lock"),
+        *(database.with_name(f".{database.name}.lock") for database in databases[1:]),
+    )
+
+
+def _retire_private_stage_coordination_locks(stage_root: Path) -> None:
+    """Remove only quiescent, empty locks created while staging local DBs."""
+
+    for path in _private_stage_coordination_locks(stage_root):
+        if not os.path.lexists(path):
+            continue
+        descriptor = os.open(
+            path,
+            os.O_RDWR
+            | getattr(os, "O_CLOEXEC", 0)
+            | getattr(os, "O_NOFOLLOW", 0)
+            | getattr(os, "O_NONBLOCK", 0),
+        )
+        acquired = False
+        try:
+            opened = os.fstat(descriptor)
+            current = os.stat(path, follow_symlinks=False)
+            identity = (int(opened.st_dev), int(opened.st_ino))
+            if (
+                not stat.S_ISREG(opened.st_mode)
+                or not stat.S_ISREG(current.st_mode)
+                or identity != (int(current.st_dev), int(current.st_ino))
+                or int(opened.st_uid) != int(os.geteuid())
+                or int(current.st_uid) != int(os.geteuid())
+                or int(opened.st_nlink) != 1
+                or int(current.st_nlink) != 1
+                or int(opened.st_size) != 0
+                or int(current.st_size) != 0
+            ):
+                raise SourceBindingMigrationError(
+                    "private stage coordination lock is unsafe"
+                )
+            try:
+                fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                acquired = True
+            except BlockingIOError as exc:
+                raise SourceBindingMigrationError(
+                    "private stage coordination lock is still held"
+                ) from exc
+            after = os.fstat(descriptor)
+            current = os.stat(path, follow_symlinks=False)
+            if (
+                (int(after.st_dev), int(after.st_ino)) != identity
+                or (int(current.st_dev), int(current.st_ino)) != identity
+                or int(after.st_size) != 0
+                or int(current.st_size) != 0
+                or int(after.st_nlink) != 1
+                or int(current.st_nlink) != 1
+            ):
+                raise SourceBindingMigrationError(
+                    "private stage coordination lock identity changed"
+                )
+            os.unlink(path)
+            _fsync_directory(path.parent)
+        finally:
+            if acquired:
+                fcntl.flock(descriptor, fcntl.LOCK_UN)
+            os.close(descriptor)
+
+
 def _validate_published_store(
     *,
     root: Path,
@@ -2141,6 +2211,7 @@ def _discover_prepared_stage(
         noun="orphan prepared g7 source migration receipt",
     )
     _validate_receipt_identity(receipt, root=root, population=population)
+    _retire_private_stage_coordination_locks(stage_root)
     _validate_prepared_stage(
         root=root,
         target_root=target_root,
@@ -2491,6 +2562,7 @@ def migrate_source_binding(
             prior["control_projection"],
             suffix,
         )
+        _retire_private_stage_coordination_locks(stage_root)
         receipt = _receipt(population, policy, prior["control_projection"], verified)
         stage_root = _arm_prepared_stage(
             root=root,
