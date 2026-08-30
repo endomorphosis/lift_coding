@@ -447,6 +447,34 @@ def test_private_stage_retires_only_quiescent_empty_coordination_locks(
     assert not any(path.exists() for path in lock_paths)
 
 
+def test_offline_fence_probe_is_closed_before_existing_authorities_reopen(
+    migration: Any,
+    tmp_path: Path,
+) -> None:
+    from ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server import (
+        offline_state_server_fence,
+    )
+
+    database = tmp_path / "control.duckdb"
+    connection = migration._open_local_database(database, read_only=False)
+    connection.execute("CREATE TABLE probe(value INTEGER)")
+    connection.execute("INSERT INTO probe VALUES (1)")
+    connection.close()
+
+    with offline_state_server_fence(
+        database_path=database,
+        connection_factory=lambda path: migration._open_local_database(
+            path, read_only=True
+        ),
+    ) as fence_probe:
+        migration._close_offline_fence_probe(fence_probe)
+        reopened = migration._open_local_database(database, read_only=False)
+        try:
+            assert reopened.execute("SELECT value FROM probe").fetchone()[0] == 1
+        finally:
+            reopened.close()
+
+
 def _small_receipt(
     module: Any, root: Path, stage: Path, *, variant: str = ""
 ) -> dict[str, Any]:

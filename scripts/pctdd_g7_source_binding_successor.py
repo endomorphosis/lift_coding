@@ -288,6 +288,12 @@ def _open_control_target(target: Path | str) -> Any:
     return open_duckdb_connection(target)
 
 
+def _close_offline_fence_probe(connection: Any) -> None:
+    """Release the probe connection while retaining the owner-file fence."""
+
+    connection.close()
+
+
 def _git(root: Path, *arguments: str) -> str:
     result = subprocess.run(
         ["git", *arguments],
@@ -2941,7 +2947,13 @@ def check_source_binding(
                 connection_factory=lambda path: _open_local_database(
                     path, read_only=True
                 ),
-            ):
+            ) as fence_probe:
+                # The owner lock remains held by ``offline_state_server_fence``.
+                # Close its read-only probe before existing task authorities
+                # reopen the same DuckDB file with their own connection policy;
+                # DuckDB rejects simultaneous connections whose configurations
+                # differ, even when every operation is logically read-only.
+                _close_offline_fence_probe(fence_probe)
                 # Revalidate the receipt while the canonical owner fence is held.
                 fenced_receipt, fenced_identity = _load_migration_marker_snapshot(
                     root=root,
