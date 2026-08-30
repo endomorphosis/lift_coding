@@ -1,0 +1,357 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-001",
+  "title": "Qualify direct objective and event-driven supervisor",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G120",
+  "objective_id": "PCPR-001",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-001@current-head-direct-objective-event-driven-qualification-v1",
+  "observed_at": "2026-08-30T00:35:12Z",
+  "depends_on": ["PCPR-004"],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-0 direct-objective and event-driven supervisor qualification only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/direct_objective_event_driven_qualification.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add DirectObjectiveEventDrivenQualification@1, a fail-closed evaluator for the required 13-case live cohort and 10 efficiency/hard-zero targets. Simulated, estimated, hermetic, and unavailable evidence cannot satisfy live promotion. The evaluator never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "b7099c0d3bc6e0e7f3cb42ba5ec39382d851995e",
+    "outer_tree": "aa9be021ea113a21cc0e22e60bb8647aeb4b23ec",
+    "outer_subject": "feat(pcpr): observe three expanded supervisor lanes",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "5809d8781317b38fb3ce1034323201fa0e444f9f",
+    "accelerator_pre_change_tree": "88e8921674653cf33fa6f15191cdca02ed5d0d60",
+    "accelerator_gitlink": "5809d8781317b38fb3ce1034323201fa0e444f9f",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/direct_objective_event_driven_qualification.py",
+      "interface": "DirectObjectiveEventDrivenQualification@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/direct-objective-event-driven-qualification@1",
+      "sha256": "6c0815759c53560d553f33a98f31d4ad986bc98d0c68350936b5c1002550a5c9",
+      "bytes": 26974,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
+      "sha256": "0a13e3d11faaa1ea769265fed70cf95297b2da347aa7b74aa3e39bfce410a268",
+      "bytes": 15613,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/direct-objective-event-driven-qualification-verdict@1",
+    "interface": "DirectObjectiveEventDrivenQualification@1",
+    "verdict_cid": "baguqeerateinyeij5jrpdtgtpiehmroe3zdp5h7t5k2va3asqo6dwwz4tg3q",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "missed_live_cohort_count": 13,
+    "missed_target_count": 10,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "required_live_cohort": {
+    "minimum_consecutive_bounded_objectives": 10,
+    "minimum_historical_task_replays": 20,
+    "live_campaign_executed": false,
+    "manual_database_edits_in_this_task": 0,
+    "cases": [
+      {
+        "case_id": "ten_consecutive_bounded_objectives",
+        "live_status": "unavailable",
+        "live_count": null,
+        "evidence_kind": "unavailable",
+        "reason": "No live sequence of 10 consecutive bounded objectives ran in this environment. Hermetic single-objective prompt tests are not substituted."
+      },
+      {
+        "case_id": "twenty_historical_task_replays",
+        "live_status": "unavailable",
+        "live_count": null,
+        "evidence_kind": "unavailable",
+        "reason": "No live historical 20-task replay cohort ran. Event-log cursor replay tests are hermetic candidates only."
+      },
+      {
+        "case_id": "held_out_high_level_decomposition",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No held-out live high-level objective decomposition campaign ran."
+      },
+      {
+        "case_id": "owner_loss_and_restart",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live owner-loss or authoritative-state-owner restart campaign ran."
+      },
+      {
+        "case_id": "stale_task_recovery",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live stale-task recovery campaign ran."
+      },
+      {
+        "case_id": "provider_outcome_unknown_reconciliation",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live provider-outcome-unknown reconciliation campaign ran."
+      },
+      {
+        "case_id": "lease_and_fencing_races",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live lease/fencing race campaign ran."
+      },
+      {
+        "case_id": "event_replay_and_duplicate_delivery",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live duplicate-delivery campaign ran. Hermetic cursor replay is not live."
+      },
+      {
+        "case_id": "automatic_task_frontier_refill",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live automatic task-frontier refill campaign ran."
+      },
+      {
+        "case_id": "incremental_plan_reassessment",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live incremental plan-reassessment campaign ran."
+      },
+      {
+        "case_id": "contextpack_reuse_and_invalidation",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live ContextPack reuse/invalidation campaign ran."
+      },
+      {
+        "case_id": "cross_supervisor_event_handling",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "No live cross-supervisor event campaign ran."
+      },
+      {
+        "case_id": "external_python_and_mcp_submission",
+        "live_status": "unavailable",
+        "evidence_kind": "unavailable",
+        "reason": "Hermetic Python/CLI/MCP identity tests exist and were exercised; they are not a live external-client campaign."
+      }
+    ]
+  },
+  "efficiency_targets": {
+    "median_end_to_end_input_token_reduction": {
+      "required_bps": 3000,
+      "observed_bps": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable",
+      "reason": "No live Codex-primed baseline or current-route token measurements exist. Missing is not recorded as 0%."
+    },
+    "frontier_model_call_reduction": {
+      "required_bps": 4000,
+      "observed_bps": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable"
+    },
+    "net_cost_reduction_after_audit": {
+      "required": "positive integer cost units",
+      "observed_net_cost_units": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable",
+      "reason": "No live provider-cost ledger was observed. Missing is not recorded as zero savings."
+    },
+    "eligible_decisions_without_frontier_model": {
+      "required_bps": 6000,
+      "observed_bps": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable"
+    },
+    "ordinary_refills_without_llm": {
+      "required_bps": 8000,
+      "observed_bps": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable"
+    },
+    "contextpack_reuse_on_eligible_tasks": {
+      "required_bps": 5000,
+      "observed_bps": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable"
+    },
+    "unnecessary_task_churn": {
+      "maximum_bps": 500,
+      "observed_bps": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable"
+    },
+    "manual_recovery": {
+      "maximum_bps": 200,
+      "observed_bps": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable"
+    },
+    "manual_task_table_edits": {
+      "required_count": 0,
+      "observed_count": null,
+      "this_task_direct_writes": 0,
+      "status": "unavailable",
+      "evidence_kind": "unavailable",
+      "reason": "This worker did not write DuckDB or Quack state. That local fact is not substituted for a live 10-objective campaign counter."
+    },
+    "hard_safety_failures": {
+      "required_count": 0,
+      "observed_count": null,
+      "status": "unavailable",
+      "evidence_kind": "unavailable",
+      "reason": "Live campaign hard-zero counters were not observed and are not recorded as zero."
+    }
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live cohort counts or efficiency targets",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr001-*> PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_prompt_v3_python_api.py test/api/test_agent_supervisor_prompt_v3_cli.py test/api/test_agent_supervisor_prompt_v3_mcp.py test/api/test_agent_supervisor_plan_control_conformance.py test/api/test_agent_supervisor_event_driven_runtime.py test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
+    "sealed_result": {
+      "exit_code": 1,
+      "passed": 76,
+      "failed": 7,
+      "skipped": 7,
+      "duration_seconds": 11.97,
+      "evidence_kind": "measured"
+    },
+    "sealed_failures": [
+      {
+        "test": "test_agent_supervisor_prompt_v3_cli.py::test_cold_help_via_product_cli_subprocess",
+        "status": "failed",
+        "reason": "subprocess CLI import requires anyio, which is absent from the sealed environment",
+        "evidence_kind": "measured"
+      },
+      {
+        "test": "test_agent_supervisor_event_driven_runtime.py (six daemon/board cases)",
+        "status": "failed",
+        "reason": "ModuleNotFoundError: duckdb is absent from the sealed environment",
+        "count": 6,
+        "evidence_kind": "measured"
+      }
+    ],
+    "sealed_skips": {
+      "count": 7,
+      "reason": "Two DuckDB-backed apply/start tests skipped; five async plan-control tests skipped because pytest-asyncio is absent",
+      "evidence_kind": "measured"
+    },
+    "qualification_evaluator_suite": {
+      "path": "test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
+      "sealed_passed": 14,
+      "sealed_failed": 0,
+      "duration_seconds": 0.42,
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "pytest_version": "9.1.1",
+      "passed": 90,
+      "failed": 0,
+      "duration_seconds": 12.13,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and are not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_success_cannot_promote": true,
+    "hermetic_pass_cannot_satisfy_live_objective_minimum": true,
+    "estimated_token_reduction_rejected": true,
+    "missing_metrics_not_recorded_as_zero": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "The required live 10-objective and 20-replay cohort did not run and remains typed unavailable.",
+    "Efficiency targets against the prior Codex-primed route were not measured and are not recorded as zero or passing.",
+    "Sealed-environment hermetic suites are incomplete: duckdb, anyio, and pytest-asyncio are absent, producing 7 failures and 7 skips that are dependency gaps, not live campaign results.",
+    "Provider-side pytest 9.1.1 with user-site dependencies is recorded only as non-authoritative contrast.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit.",
+    "This receipt is R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
