@@ -4,7 +4,7 @@
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-001.json",
     "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_001_cid_sha_canonicalization_inventory.py"
   ],
-  "claim": "Worker-authored inventory that every current source-to-CID and seal-publication path remains distinctly classified without changing identity. Typed unavailable production ZK, key ceremony, native batch hashing, direct-execution, and serial WAL/CAS publication cases are recorded without changing claim meaning. This receipt does not complete PCTDD-001, admit its own tests, or promote g5 results.",
+  "claim": "Worker-authored inventory that every current source-to-CID and seal-publication path remains distinctly classified without changing identity. Typed unavailable production ZK, key ceremony, native batch hashing, direct-execution, serial WAL/CAS publication, kit proof-seal-store pin, and datasets incremental-sealing evidence cases are recorded without changing claim meaning. This receipt does not complete PCTDD-001, admit its own tests, or promote g5 results.",
   "claim_class": "IntegrityCommitment",
   "claim_does_not": "execution or semantics; current-root publication; task completion; production ZK; identity mutation",
   "completion_authoritative": false,
@@ -13,6 +13,13 @@
     "PCTDD-000"
   ],
   "limitations": {
+    "datasets_incremental_sealing_evidence": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "incremental_sealing_evidence_module_absent_on_current_datasets_pin",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
     "direct_execution_profile": {
       "claim_unchanged": true,
       "production_admitted": false,
@@ -24,6 +31,13 @@
       "claim_unchanged": true,
       "production_admitted": false,
       "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "kit_proof_seal_store": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "proof_seal_store_module_absent_on_current_kit_pin",
       "self_approved": false,
       "status": "typed_unavailable"
     },
@@ -63,25 +77,44 @@
   "seal_publication_inventory": {
     "accelerate_incremental_sealer": {
       "authority": "ipfs_accelerate_py coordinates; ipfs_kit_py owns WAL/CAS",
+      "claim_unchanged": true,
       "classification": "available_with_caveats",
       "interface": "IncrementalProofSealer@1",
       "kinds": [
         "full_checkpoint",
         "delta_seal"
       ],
-      "publication_authority_invoked": false
+      "publication_authority_invoked": false,
+      "self_approved": false,
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/sealer.py"
     },
     "kit_current_root_cas": {
       "authority": "ipfs_kit_py",
+      "claim_unchanged": true,
       "classification": "available",
       "interface": "DurableCoordinationStore.compare_and_swap_state_root",
-      "publication_authority_invoked": false
+      "publication_authority_invoked": false,
+      "self_approved": false,
+      "source": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py"
     },
     "kit_proof_certificate_store": {
       "authority": "ipfs_kit_py stores/verifies bytes; accelerate admits proof/test meaning",
+      "claim_unchanged": true,
       "classification": "available",
       "interface": "TestCertificateStoreTransport@1",
-      "publication_authority_invoked": false
+      "publication_authority_invoked": false,
+      "self_approved": false,
+      "source": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py"
+    },
+    "kit_proof_seal_store": {
+      "authority": "ipfs_kit_py",
+      "claim_unchanged": true,
+      "classification": "typed_unavailable",
+      "interface": "HermeticProofSealStore / SealTransitionWal",
+      "publication_authority_invoked": false,
+      "reason_code": "proof_seal_store_module_absent_on_current_kit_pin",
+      "self_approved": false,
+      "source": "external/ipfs_kit/ipfs_kit_py/proof_seal_store"
     },
     "required_invariant": "parallel immutable preparation has no publication authority; final ordered WAL and generation-bearing current-root CAS remain serial and fail closed"
   },
@@ -90,68 +123,119 @@
     "datasets_cid_utils": {
       "classification": "available",
       "codec": "raw_or_dag-json",
+      "does_not": "execution or semantics",
       "owner": "ipfs_datasets_py",
-      "profile": "CIDv1/base32/sha2-256"
+      "profile": "CIDv1/base32/sha2-256",
+      "self_approved": false,
+      "source": "external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py"
     },
     "accelerate_closed_cid_utils": {
       "classification": "available",
       "codec": "raw_or_dag-json",
+      "does_not": "execution or semantics",
       "owner": "ipfs_accelerate_py",
-      "profile": "CIDv1/base32/sha2-256 closed"
+      "profile": "CIDv1/base32/sha2-256 closed",
+      "self_approved": false,
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/utils/cid_utils.py"
     },
     "accelerate_multiformats_identity": {
       "classification": "available",
       "codec": "raw_or_dag-json",
+      "does_not": "execution or semantics",
       "owner": "ipfs_accelerate_py",
-      "profile": "vfs/cid-profile@1"
+      "profile": "vfs/cid-profile@1",
+      "self_approved": false,
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/core/multiformats_identity.py"
     },
     "datasets_software_contract_content": {
       "classification": "available",
       "codec": "raw_source_or_dag-json_structured",
+      "does_not": "execution or semantics",
       "owner": "ipfs_datasets_py",
-      "profile": "software-contract-cid-profile-v1"
+      "profile": "software-contract-cid-profile-v1",
+      "self_approved": false,
+      "source": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/content.py"
     },
     "datasets_ir_core_identity": {
       "classification": "available",
       "codec": "raw",
+      "does_not": "execution or semantics",
       "owner": "ipfs_datasets_py",
-      "profile": "ir-canonical-identity-v1"
+      "profile": "ir-canonical-identity-v1",
+      "self_approved": false,
+      "source": "external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/identity.py"
     },
     "accelerate_content_identity_bridge": {
       "classification": "available",
       "codec": "profile_tagged",
+      "does_not": "execution or semantics",
       "owner": "ipfs_accelerate_py consumes datasets",
-      "profile": "ContentIdentity@1"
+      "profile": "ContentIdentity@1",
+      "self_approved": false,
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py"
     },
     "accelerate_assurance_content_identity": {
       "classification": "available",
       "codec": "raw_or_dag-json",
+      "does_not": "execution or semantics",
       "owner": "ipfs_accelerate_py",
-      "profile": "AccelerateContentIdentity@1"
+      "profile": "AccelerateContentIdentity@1",
+      "self_approved": false,
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/content_identity.py"
     },
     "datasets_ipld_cid": {
       "classification": "available_distinct_profile",
       "codec": "dag-json",
+      "does_not": "execution or semantics",
       "owner": "ipfs_datasets_py",
-      "profile": "Profile D ensure_ascii=True"
+      "profile": "Profile D ensure_ascii=True",
+      "self_approved": false,
+      "source": "external/ipfs_datasets/ipfs_datasets_py/logic/ipld_cid.py"
     },
     "datasets_profile_g": {
       "classification": "available_distinct_profile",
       "codec": "dag-json",
+      "does_not": "execution or semantics",
       "owner": "ipfs_datasets_py",
-      "profile": "Profile G"
+      "profile": "Profile G",
+      "self_approved": false,
+      "source": "external/ipfs_datasets/ipfs_datasets_py/logic/profile_g.py"
     },
     "kit_coordination_cid": {
       "classification": "available",
       "codec": "raw_or_dag-json",
+      "does_not": "execution or semantics",
       "owner": "ipfs_kit_py",
-      "profile": "coordination CIDv1/sha2-256"
+      "profile": "coordination CIDv1/sha2-256",
+      "self_approved": false,
+      "source": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py"
     },
     "kit_proof_certificate_cid": {
       "classification": "available",
       "codec": "raw_default",
+      "does_not": "execution or semantics",
       "owner": "ipfs_kit_py",
-      "profile": "certificate CIDv1/sha2-256"
+      "profile": "certificate CIDv1/sha2-256",
+      "self_approved": false,
+      "source": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py"
+    },
+    "datasets_knowledge_graph_ipld": {
+      "classification": "available_distinct_profile",
+      "codec": "dag-cbor_default_or_raw",
+      "does_not": "execution or semantics",
+      "owner": "ipfs_datasets_py",
+      "profile": "knowledge-graph ipfs_ipld CIDv1/sha2-256",
+      "self_approved": false,
+      "source": "external/ipfs_datasets/ipfs_datasets_py/knowledge_graphs/storage/ipld_store.py"
+    },
+    "accelerate_kubo_cid": {
+      "classification": "available",
+      "codec": "raw",
+      "does_not": "execution or semantics",
+      "owner": "ipfs_accelerate_py",
+      "profile": "CIDv1/base32/sha2-256 closed raw helper",
+      "self_approved": false,
+      "source": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/kubo_cid.py"
     }
   },
   "status": "implementation_submitted_pending_controller_validation",
