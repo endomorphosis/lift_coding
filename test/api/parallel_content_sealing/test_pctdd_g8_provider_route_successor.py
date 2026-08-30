@@ -102,6 +102,12 @@ def _control(migration: Any, tmp_path: Path) -> Path:
         for alias, lane in (("PCTDD-001", 0), ("PCTDD-029", 1)):
             task = source.get_task(alias)
             assert task is not None
+            source.record_queue_backoff(
+                task_cid=task.task_cid,
+                delay_ms=86_400_000,
+                reason="provider_capacity_backoff",
+                selection_penalty=10,
+            )
             receipt = {
                 "schema": migration.DATABASE_RETRY_BUDGET_SCHEMA,
                 "operation": "database_unknown_outcome_blocked",
@@ -170,6 +176,14 @@ def _policy(migration: Any, database: Path) -> tuple[dict[str, Any], dict[str, A
     for alias, lane in (("PCTDD-001", 0), ("PCTDD-029", 1)):
         task = tasks[alias]
         prior_receipt = dict(task["body"]["completion_receipt"])
+        with DatabaseTaskSource(
+            database,
+            owner_id="pctdd-g8-test:queue",
+            install_schema=False,
+        ) as source:
+            queue = source.intent.get_queue_entry(task["task_cid"])
+            assert queue is not None
+            prior_queue = queue.to_dict()
         log_record = {
             "path": f"synthetic/lane-{lane}.log",
             "sha256": "0" * 64,
@@ -222,6 +236,8 @@ def _policy(migration: Any, database: Path) -> tuple[dict[str, Any], dict[str, A
                 "coordination_projection_root": f"projection:prior:{lane}",
                 "prior_completion_receipt": prior_receipt,
                 "prior_completion_receipt_cid": migration.g7._identity(prior_receipt),
+                "prior_queue_entry": prior_queue,
+                "prior_queue_entry_cid": migration.g7._identity(prior_queue),
                 "pre_effect_log": log_record,
                 "pre_effect_evidence": evidence,
                 "retry_budget": {
@@ -292,7 +308,7 @@ def test_control_suffix_revises_only_incomplete_provider_roles(
     )
     migration.g7._checkpoint_database(database)
     post = migration.g7._control_projection(database)
-    assert post["event_count"] == prior["event_count"] + 7
+    assert post["event_count"] == prior["event_count"] + 9
     assert len(suffix["status_receipts"]) == 2
     assert before != migration.g7._stable_file(database, root=tmp_path, noun="after")
     from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import (
@@ -316,6 +332,14 @@ def test_control_suffix_revises_only_incomplete_provider_roles(
         assert receipt["unknown_outcome_rearm_count"] == 3
         assert receipt["provider_route_reset_authorized"] is True
         assert receipt["fallback_dispatched"] is False
+    with DatabaseTaskSource(database, install_schema=False) as source:
+        for alias in migration.EXPECTED_TASK_ALIASES:
+            task = source.get_task(alias)
+            assert task is not None
+            queue = source.intent.get_queue_entry(task.task_cid)
+            assert queue is not None
+            assert queue.retry_not_before_ms == 0
+            assert queue.selection_penalty == 0
 
 
 def test_policy_rejects_a_self_authorizing_or_effectful_quota_claim(
