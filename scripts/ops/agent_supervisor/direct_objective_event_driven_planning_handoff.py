@@ -438,6 +438,98 @@ def _json_object(path: Path) -> dict[str, Any]:
     return value
 
 
+def _runtime_projection_integrity(
+    *,
+    paths: Mapping[str, Path],
+    live: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Verify disposable Markdown bytes against the owner's DuckDB snapshot receipt."""
+
+    issues: list[str] = []
+    declared = live.get("runtime_markdown_projection")
+    if not isinstance(declared, Mapping):
+        declared = {}
+        issues.append("live_projection_declaration_absent")
+    receipt: dict[str, Any] = {}
+    try:
+        receipt = _json_object(paths["projection_receipt"])
+    except HandoffError:
+        issues.append("projection_receipt_unavailable")
+    expected_fields = {
+        "schema": RUNTIME_PROJECTION_RECEIPT_SCHEMA,
+        "authority": False,
+        "source_authority": "DuckDB through exclusive QuackStateServer@1",
+        "launch_id": str(live.get("launch_id") or ""),
+        "owner_server_id": str(live.get("owner_server_id") or ""),
+        "store_revision": int(live.get("store_revision") or 0),
+        "event_cursor": int(live.get("event_cursor") or 0),
+        "database_projection_cid": str(live.get("projection_cid") or ""),
+        "plan_root_cid": str(live.get("plan_root_cid") or ""),
+        "repository_tree_id": str(live.get("repository_tree_id") or ""),
+        "renderer": RUNTIME_PROJECTION_RENDERER,
+        "task_count": int(live.get("task_count") or 0),
+    }
+    for field, expected in expected_fields.items():
+        if receipt.get(field) != expected:
+            issues.append(f"projection_receipt_{field}_mismatch")
+    receipt_material = {
+        key: value
+        for key, value in receipt.items()
+        if key not in {"projected_at", "receipt_cid"}
+    }
+    expected_receipt_cid = _sha256(_canonical_json_bytes(receipt_material))
+    if receipt.get("receipt_cid") != expected_receipt_cid:
+        issues.append("projection_receipt_cid_mismatch")
+    if declared.get("authority") is not False:
+        issues.append("live_projection_authority_mismatch")
+    if declared.get("ready") is not True or declared.get("error"):
+        issues.append("live_projection_not_ready")
+    for field, expected in {
+        "receipt_cid": receipt.get("receipt_cid"),
+        "store_revision": receipt.get("store_revision"),
+        "event_cursor": receipt.get("event_cursor"),
+        "database_projection_cid": receipt.get("database_projection_cid"),
+        "taskboard_path": str(paths["task_projection"]),
+        "objectives_path": str(paths["objective_projection"]),
+        "receipt_path": str(paths["projection_receipt"]),
+    }.items():
+        if declared.get(field) != expected:
+            issues.append(f"live_projection_{field}_mismatch")
+    artifacts = receipt.get("artifacts")
+    artifacts = dict(artifacts) if isinstance(artifacts, Mapping) else {}
+    for name, path in {
+        "taskboard": paths["task_projection"],
+        "objectives": paths["objective_projection"],
+    }.items():
+        artifact = artifacts.get(name)
+        artifact = dict(artifact) if isinstance(artifact, Mapping) else {}
+        if artifact.get("path") != str(path):
+            issues.append(f"projection_{name}_path_mismatch")
+        try:
+            payload = path.read_bytes()
+        except OSError:
+            issues.append(f"projection_{name}_unavailable")
+            continue
+        declared_bytes = artifact.get("bytes")
+        if type(declared_bytes) is not int or declared_bytes < 0:
+            issues.append(f"projection_{name}_size_invalid")
+        elif len(payload) != declared_bytes:
+            issues.append(f"projection_{name}_size_mismatch")
+        if _sha256(payload) != artifact.get("sha256"):
+            issues.append(f"projection_{name}_digest_mismatch")
+        if b"NON-AUTHORITATIVE RUNTIME PROJECTION" not in payload:
+            issues.append(f"projection_{name}_authority_banner_missing")
+    return {
+        "ready": not issues,
+        "authority": False,
+        "issues": sorted(set(issues)),
+        "receipt_cid": str(receipt.get("receipt_cid") or ""),
+        "store_revision": int(receipt.get("store_revision") or 0),
+        "event_cursor": int(receipt.get("event_cursor") or 0),
+        "database_projection_cid": str(receipt.get("database_projection_cid") or ""),
+    }
+
+
 def _process_argv(pid: int) -> tuple[str, ...]:
     try:
         payload = Path(f"/proc/{int(pid)}/cmdline").read_bytes()
@@ -1382,7 +1474,15 @@ class _LiveMonitor:
                 generation = after_generation
                 break
         if snapshot is None or page is None or generation is None:
-            raise HandoffError("typed database state changed during the bounded live projection")
+            # A busy authoritative store may advance between every bounded
+            # read.  That is not an owner failure and a disposable Markdown
+            # projection must never terminate task execution.  Leave the last
+            # receipt untouched; readiness ages out if no stable view becomes
+            # available, and the next monitor pass retries from DuckDB.
+            self.projection_failure = (
+                "HandoffError: typed database state changed during the bounded live projection"
+            )
+            return
         ready = self.source.ready_tasks(limit=85)
         statuses = Counter(task.status for task in page.tasks)
         active = sorted(task.task_alias for task in page.tasks if task.status in ACTIVE_STATUSES)
@@ -1885,6 +1985,7 @@ def status(*, require_ready: bool) -> int:
     owner_identity = handoff.get("owner_identity")
     owner_identity = owner_identity if isinstance(owner_identity, Mapping) else {}
     owner_server_id = str(owner_identity.get("server_id") or "")
+    projection_integrity = _runtime_projection_integrity(paths=paths, live=live)
     progress_observed = bool(
         live.get("active_task_ids") or live.get("terminal_task_ids") or live.get("terminal") is True
     )
@@ -1905,6 +2006,7 @@ def status(*, require_ready: bool) -> int:
         and live.get("owner_ready") is True
         and live.get("plan_root_cid") == population.get("plan_root_cid")
         and live.get("repository_tree_id") == population.get("repository_tree_id")
+        and projection_integrity["ready"] is True
         and int(broker.get("accepted_lane_count") or 0) == 4
         and len(lanes) == 4
         and all(lane["live"] for lane in lanes)
@@ -1921,6 +2023,7 @@ def status(*, require_ready: bool) -> int:
         "progress_observed": progress_observed,
         "lanes": lanes,
         "task_authority": live,
+        "runtime_markdown_projection_integrity": projection_integrity,
         "bootstrap_broker": broker,
         "handoff": handoff,
     }

@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -240,6 +241,87 @@ def test_stale_runtime_markdown_publisher_cannot_overwrite_newer_snapshot(tmp_pa
             launch_id="sha256:stale",
         )
     assert paths["task_projection"].read_bytes() == current
+
+
+def test_status_integrity_binds_markdown_bytes_to_live_duckdb_revision(
+    tmp_path: Path,
+) -> None:
+    module = _module()
+    paths = _paths(tmp_path)
+    receipt = module._publish_runtime_projections(
+        paths=paths,
+        snapshot=_snapshot(),
+        generation=_generation(),
+        tasks=_tasks(),
+        owner_server_id="server:test",
+        launch_id="sha256:launch",
+    )
+    live = {
+        "launch_id": "sha256:launch",
+        "owner_server_id": "server:test",
+        "store_revision": 7,
+        "event_cursor": 11,
+        "projection_cid": "baguqeera-database-projection",
+        "plan_root_cid": "sha256:plan",
+        "repository_tree_id": "sha256:tree",
+        "task_count": 1,
+        "runtime_markdown_projection": {
+            "authority": False,
+            "ready": True,
+            "error": "",
+            "receipt_cid": receipt["receipt_cid"],
+            "store_revision": 7,
+            "event_cursor": 11,
+            "database_projection_cid": "baguqeera-database-projection",
+            "taskboard_path": str(paths["task_projection"]),
+            "objectives_path": str(paths["objective_projection"]),
+            "receipt_path": str(paths["projection_receipt"]),
+        },
+    }
+
+    integrity = module._runtime_projection_integrity(paths=paths, live=live)
+    assert integrity["ready"] is True
+    assert integrity["authority"] is False
+    assert integrity["issues"] == []
+
+    paths["objective_projection"].write_text("tampered\n", encoding="utf-8")
+    drifted = module._runtime_projection_integrity(paths=paths, live=live)
+    assert drifted["ready"] is False
+    assert "projection_objectives_digest_mismatch" in drifted["issues"]
+
+
+def test_busy_duckdb_projection_does_not_terminate_task_execution() -> None:
+    module = _module()
+    monitor = object.__new__(module._LiveMonitor)
+    generation_counter = iter(range(1, 9))
+    snapshot_counter = iter(range(1, 9))
+
+    class BusyClient:
+        @staticmethod
+        def load_generation():
+            revision = next(generation_counter)
+            return SimpleNamespace(content_id=f"generation-{revision}")
+
+    class BusySource:
+        @staticmethod
+        def snapshot():
+            revision = next(snapshot_counter)
+            return SimpleNamespace(
+                projection_cid=f"projection-{revision}", revision=revision
+            )
+
+        @staticmethod
+        def list_tasks(*, limit: int):
+            assert limit == 500
+            return SimpleNamespace(next_cursor="", revision=0)
+
+    monitor.client = BusyClient()
+    monitor.source = BusySource()
+    monitor.projection_failure = ""
+
+    monitor._write()
+
+    assert "typed database state changed" in monitor.projection_failure
 
 
 def test_historical_blocked_retry_accepts_only_exact_nonadmitted_evidence() -> None:
