@@ -1,0 +1,91 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-032.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/signed_runner_attestations.py",
+    "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_032_signed_runner_attestations.py"
+  ],
+  "claim": "Worker-authored integration that runner signatures bind V2/composite evidence to verifier-selected key, issuer, epoch and policy. Typed unavailable guarded post-setup reuse, pre-setup item reuse, aggregate selected-test ZK, production ZK, key ceremony, and direct-execution cases are recorded without changing claim meaning. This receipt does not complete PCTDD-032, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; independent faithful execution; current-root publication; task completion; production ZK; adapter execution; aggregate ZK; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-032@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "attestation_claim_class": "SignedExecutionReceipt",
+    "composite_phase_receipt": "CompositePhaseReceipt@1",
+    "establishes": "runner signatures bind V2/composite evidence to verifier-selected key, issuer, epoch and policy",
+    "interface": "SignedRunnerAttestationBinding@1",
+    "may_authorize_skip": false,
+    "predecessor_interface": "RunnerPassAttestation@1",
+    "production_admitted": false,
+    "schema_authority": "ipfs_accelerate_py.testing.proof_reuse.signed_runner_attestations",
+    "signed_execution_does_not": "independent faithful execution",
+    "signed_execution_establishes": "trusted issuer assertion under explicit verifier policy",
+    "test_execution_key": "TestExecutionKeyV2"
+  },
+  "dependency_receipts": [
+    "PCTDD-003",
+    "PCTDD-025",
+    "PCTDD-026"
+  ],
+  "limitations": {
+    "aggregate_selected_test_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "aggregate_selected_test_zk_missing",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "guarded_post_setup_reuse": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "guarded_post_setup_reuse_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "pre_setup_item_reuse": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "pre_setup_item_reuse_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-032",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-032@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
