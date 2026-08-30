@@ -351,11 +351,14 @@ def _load_config(config_path: Path) -> tuple[Any, dict[str, Any]]:
         raise OperatorError("PCPR requires an opaque Quack secret handle")
     projection = config.get("initial_projection")
     projection = projection if isinstance(projection, Mapping) else {}
-    if int(projection.get("task_count") or -1) != 1:
-        raise OperatorError("PCPR immutable bootstrap must declare exactly one task")
+    if int(projection.get("task_count") or -1) < 2:
+        raise OperatorError("PCPR campaign board must declare remaining tasks after PCPR-004")
+    completed = [str(item) for item in projection.get("completed_task_ids", ())]
+    if completed != [BOOTSTRAP_TASK]:
+        raise OperatorError("PCPR-004 must be the completed bootstrap task")
     ready = [str(item) for item in projection.get("ready_task_ids", ())]
-    if ready != [BOOTSTRAP_TASK]:
-        raise OperatorError(f"PCPR initial frontier must be exactly {BOOTSTRAP_TASK}")
+    if not ready or BOOTSTRAP_TASK in ready:
+        raise OperatorError("PCPR campaign frontier must be ready without re-claiming PCPR-004")
     return board, config
 
 
@@ -524,71 +527,80 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
     parsed = parse_todo_blocks(
         sources["taskboard"].decode("utf-8"), task_header_prefix="## PCPR-"
     )
-    if [item[0] for item in parsed] != [BOOTSTRAP_TASK]:
-        raise OperatorError(f"sealed bootstrap board must contain only {BOOTSTRAP_TASK}")
-    task_id, title, source_line, raw_fields = parsed[0]
-    fields = {key: _metadata_value(value) for key, value in raw_fields.items()}
-    dependencies = _csv(fields.get("depends_on"))
-    if dependencies:
-        raise OperatorError(f"{BOOTSTRAP_TASK} cannot depend on a non-materialized task")
-    goal_id = str(
-        fields.get("subgoal_id") or fields.get("goal_id") or fields.get("goal") or ROOT_GOAL
-    ).strip()
-    if goal_id not in goal_cids:
-        raise OperatorError(f"{BOOTSTRAP_TASK} refers to unknown goal {goal_id}")
-    task_cid = content_identity(
-        {
-            "task_id": task_id,
-            "title": title,
-            "source_line": source_line,
-            "metadata": fields,
-            "plan_root_cid": plan_root,
-            "repository_tree_id": tree,
-        }
-    )
-    output_paths = _csv(fields.get("outputs") or fields.get("predicted_files"))
-    task = dict(fields)
-    task.update(
-        {
-            "task_cid": task_cid,
-            "task_id": task_id,
-            "task_alias": task_id,
-            "title": title,
-            "source_line": source_line,
-            "goal_cid": goal_cids[goal_id],
-            "goal_id": goal_id,
-            "plan_cid": plan_root,
-            "objective_id": "objective:pcpr-root",
-            "ordinal": 1,
-            "status": str(fields.get("status") or "todo").lower(),
-            "priority": str(fields.get("priority") or "P0"),
-            "dependencies": [],
-            "depends_on": [],
-            "outputs": [
-                {
-                    "path": path,
-                    "effect_id": content_identity({"task_cid": task_cid, "path": path}),
-                }
-                for path in output_paths
-            ],
-            "acceptance": [
-                str(fields.get("acceptance") or fields.get("acceptance_subset") or "")
-            ],
-            "validations": list(
-                split_validation_commands(str(fields.get("validation") or ""))
-            ),
-            "accepted_plan_root_cid": plan_root,
-            "base_revision": head,
-            "base_repository_tree_id": tree,
-            "owning_repository": "ipfs_accelerate_py",
-        }
-    )
-    if task["status"] not in READY_STATUSES:
-        raise OperatorError(f"{BOOTSTRAP_TASK} must materialize dependency-ready")
+    if not parsed or parsed[0][0] != BOOTSTRAP_TASK:
+        raise OperatorError(f"campaign board must start with completed {BOOTSTRAP_TASK}")
+    if len(parsed) < 2:
+        raise OperatorError("campaign board must include remaining PCPR packages")
+    tasks: list[dict[str, Any]] = []
+    task_cids_by_alias: dict[str, str] = {}
+    for ordinal, (task_id, title, source_line, raw_fields) in enumerate(parsed, start=1):
+        fields = {key: _metadata_value(value) for key, value in raw_fields.items()}
+        dependencies = _csv(fields.get("depends_on"))
+        goal_id = str(
+            fields.get("subgoal_id") or fields.get("goal_id") or fields.get("goal") or ROOT_GOAL
+        ).strip()
+        if goal_id not in goal_cids:
+            raise OperatorError(f"{task_id} refers to unknown goal {goal_id}")
+        task_cid = content_identity(
+            {
+                "task_id": task_id,
+                "title": title,
+                "source_line": source_line,
+                "metadata": fields,
+                "plan_root_cid": plan_root,
+                "repository_tree_id": tree,
+            }
+        )
+        task_cids_by_alias[task_id] = task_cid
+        output_paths = _csv(fields.get("outputs") or fields.get("predicted_files"))
+        status = str(fields.get("status") or "todo").lower()
+        if task_id == BOOTSTRAP_TASK and status not in COMPLETED_STATUSES:
+            raise OperatorError(f"{BOOTSTRAP_TASK} must materialize as complete")
+        if task_id != BOOTSTRAP_TASK and status not in READY_STATUSES | COMPLETED_STATUSES:
+            raise OperatorError(f"{task_id} has a non-executable status")
+        task = dict(fields)
+        task.update(
+            {
+                "task_cid": task_cid,
+                "task_id": task_id,
+                "task_alias": task_id,
+                "title": title,
+                "source_line": source_line,
+                "goal_cid": goal_cids[goal_id],
+                "goal_id": goal_id,
+                "plan_cid": plan_root,
+                "objective_id": "objective:pcpr-root",
+                "ordinal": ordinal,
+                "status": status,
+                "priority": str(fields.get("priority") or "P0"),
+                "dependencies": list(dependencies),
+                "depends_on": list(dependencies),
+                "outputs": [
+                    {
+                        "path": path,
+                        "effect_id": content_identity({"task_cid": task_cid, "path": path}),
+                    }
+                    for path in output_paths
+                ],
+                "acceptance": [
+                    str(fields.get("acceptance") or fields.get("acceptance_subset") or "")
+                ],
+                "validations": list(
+                    split_validation_commands(str(fields.get("validation") or ""))
+                ),
+                "accepted_plan_root_cid": plan_root,
+                "base_revision": head,
+                "base_repository_tree_id": tree,
+                "owning_repository": str(fields.get("owning_repository") or "ipfs_accelerate_py"),
+            }
+        )
+        tasks.append(task)
     projection = config.get("initial_projection")
     projection = projection if isinstance(projection, Mapping) else {}
     if int(projection.get("goal_count") or -1) != len(goals):
         raise OperatorError("configured initial goal count differs from objective heap")
+    if int(projection.get("task_count") or -1) != len(tasks):
+        raise OperatorError("configured initial task count differs from the campaign board")
     population = {
         "schema": POPULATION_SCHEMA,
         "repository_tree_id": tree,
@@ -608,8 +620,8 @@ def _population(board: Any, config: Mapping[str, Any]) -> dict[str, Any]:
                 "repository_tree_id": tree,
             }
         ],
-        "tasks": [task],
-        "task_cids_by_alias": {task_id: task_cid},
+        "tasks": tasks,
+        "task_cids_by_alias": task_cids_by_alias,
         "goal_cids_by_alias": goal_cids,
     }
     return population
@@ -847,12 +859,8 @@ def materialize(config_path: Path) -> dict[str, Any]:
             plan_root_cid=str(population["plan_root_cid"]),
         ) as source:
             snapshot = source.snapshot().to_dict()
-            ready = [item.task_alias for item in source.ready_tasks(limit=10).tasks]
-        if (
-            int(snapshot["task_count"]) != 1
-            or int(snapshot["goal_count"]) != len(population["objectives"])
-            or ready != [BOOTSTRAP_TASK]
-        ):
+            ready = [item.task_alias for item in source.ready_tasks(limit=80).tasks]
+        if not _projection_matches(population, snapshot, ready):
             raise OperatorError("existing DuckDB projection differs from the sealed board")
         return {
             "schema": OPERATOR_SCHEMA,
@@ -872,12 +880,8 @@ def materialize(config_path: Path) -> dict[str, Any]:
     ) as source:
         control = dict(source.materialize(population))
         snapshot = source.snapshot().to_dict()
-        ready = [item.task_alias for item in source.ready_tasks(limit=10).tasks]
-    if (
-        int(snapshot["task_count"]) != 1
-        or int(snapshot["goal_count"]) != len(population["objectives"])
-        or ready != [BOOTSTRAP_TASK]
-    ):
+        ready = [item.task_alias for item in source.ready_tasks(limit=80).tasks]
+    if not _projection_matches(population, snapshot, ready):
         raise OperatorError("DuckDB materialization does not match the sealed projection")
     ducklake = _ducklake_projection(paths=paths, population=population, control=control)
     receipt: dict[str, Any] = {
@@ -911,6 +915,36 @@ def materialize(config_path: Path) -> dict[str, Any]:
         "bootstrap_receipt": receipt,
         "snapshot": snapshot,
     }
+
+
+def _expected_ready(population: Mapping[str, Any]) -> list[str]:
+    completed = {
+        str(item["task_alias"])
+        for item in population["tasks"]
+        if str(item.get("status") or "").lower() in COMPLETED_STATUSES
+    }
+    ready: list[str] = []
+    for item in population["tasks"]:
+        alias = str(item["task_alias"])
+        status = str(item.get("status") or "").lower()
+        if status not in READY_STATUSES or alias in completed:
+            continue
+        deps = [str(dep) for dep in item.get("depends_on") or () if str(dep)]
+        if all(dep in completed for dep in deps):
+            ready.append(alias)
+    return ready
+
+
+def _projection_matches(
+    population: Mapping[str, Any],
+    snapshot: Mapping[str, Any],
+    ready: Sequence[str],
+) -> bool:
+    return (
+        int(snapshot["task_count"]) == len(population["tasks"])
+        and int(snapshot["goal_count"]) == len(population["objectives"])
+        and list(ready) == _expected_ready(population)
+    )
 
 
 def _python_environment() -> dict[str, str]:
@@ -1173,9 +1207,7 @@ def _task_status(connection: Any) -> dict[str, Any]:
         "blocked_count": len(blocked) + status_blocked,
         "terminal_count": sum(counts.get(item, 0) for item in TERMINAL_STATUSES),
         "bootstrap_task": pcpr,
-        "bootstrap_task_active_or_ready": bool(
-            pcpr and (pcpr["active"] or pcpr["dependency_ready"])
-        ),
+        "bootstrap_task_active_or_ready": bool(ready or active),
     }
 
 
@@ -1579,9 +1611,9 @@ class _ExecutionRoutePolicyProvider:
                             "execution route exceeds the bounded typed task page"
                         )
                     aliases = {task.task_alias for task in page.tasks}
-                    if aliases != {BOOTSTRAP_TASK} or snapshot.task_count != 1:
+                    if BOOTSTRAP_TASK not in aliases or snapshot.task_count < 2:
                         raise OperatorError(
-                            "execution route population is not the sealed PCPR bootstrap"
+                            "execution route population is not the sealed PCPR campaign"
                         )
                     if (
                         snapshot.plan_root_cid
@@ -1593,7 +1625,7 @@ class _ExecutionRoutePolicyProvider:
                             "execution route identity differs from bootstrap receipt"
                         )
                     return source.seal_execution_route_policy(
-                        {BOOTSTRAP_TASK: GROK_CODEX_EXECUTION_MODE}
+                        {alias: GROK_CODEX_EXECUTION_MODE for alias in aliases}
                     )
             finally:
                 try:
@@ -1824,8 +1856,16 @@ class _ExecutorBootstrapBroker:
         prior_birth = prior.get("process_birth")
         if isinstance(prior_birth, Mapping):
             prior_identity = ProcessBirthIdentity.from_dict(dict(prior_birth))
-            if owner_liveness(prior_identity) is not OwnerLiveness.DEAD:
+            liveness = owner_liveness(prior_identity)
+            if liveness is OwnerLiveness.UNKNOWN:
+                time.sleep(0.05)
+                liveness = owner_liveness(prior_identity)
+            if liveness is OwnerLiveness.ALIVE:
                 raise OperatorError("prior lane process remains live during rotation")
+            if liveness is OwnerLiveness.UNKNOWN:
+                prior_pid = int(getattr(prior_identity, "pid", 0) or 0)
+                if prior_pid > 1 and Path(f"/proc/{prior_pid}").exists():
+                    raise OperatorError("prior lane process liveness is unknown")
             prior_grant_id = str(prior.get("grant_id") or "")
             if prior_grant_id:
                 self.server.revoke_typed_client_grant(prior_grant_id)
@@ -1918,6 +1958,7 @@ class _ExecutorBootstrapBroker:
         import struct
 
         from ipfs_accelerate_py.agent_supervisor.task_sources.state_owner_bootstrap import (
+            STATE_OWNER_BOOTSTRAP_RESPONSE_SCHEMA,
             _receive_frame,
             _send_frame,
         )
@@ -1943,6 +1984,23 @@ class _ExecutorBootstrapBroker:
                 )
                 _send_frame(accepted, response)
             except TimeoutError:
+                continue
+            except OperatorError as exc:
+                if accepted is None:
+                    self._fail(exc)
+                    return
+                try:
+                    _send_frame(
+                        accepted,
+                        {
+                            "schema": STATE_OWNER_BOOTSTRAP_RESPONSE_SCHEMA,
+                            "ok": False,
+                            "error_class": type(exc).__name__,
+                            "error": str(exc),
+                        },
+                    )
+                except Exception:
+                    pass
                 continue
             except OSError as exc:
                 if not self.stopping.is_set() and accepted is None:

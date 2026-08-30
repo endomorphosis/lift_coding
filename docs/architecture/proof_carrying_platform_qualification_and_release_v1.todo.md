@@ -1,18 +1,18 @@
-# PCPR v1 supervisor bootstrap task board
+# PCPR v1 supervisor campaign task board
 
 Program identifier: proof-carrying-platform-qualification-and-release-v1
 
 Board namespace: proof-carrying-platform-qualification-and-release-v1
 
-This tracked Markdown board is the immutable bootstrap projection for the existing ipfs_accelerate_py agent supervisor. It contains exactly one task. DuckDB becomes authoritative after successful materialization through DatabaseTaskSource, Quack is the exclusive authenticated state owner while live, and DuckLake is a non-authoritative replayable analytics projection.
+This tracked Markdown board is the operator-authorized campaign projection for the existing ipfs_accelerate_py agent supervisor. PCPR-004 is complete on the current tree. The remaining 66 blueprint packages are executable through DatabaseTaskSource. DuckDB becomes authoritative after materialization, Quack is the exclusive authenticated state owner while live, and DuckLake is a non-authoritative replayable analytics projection.
 
-The supplied 66-package release blueprint is deliberately absent from this executable board. It remains in the sealed plan and objective heap until this task repairs and qualifies the existing high-level objective path. The bootstrap agent must then submit the exact PCPR idea and constraints through that path so the supervisor materializes the 66 packages as an admitted initial plan. No raw SQL, manual task-table edit, second board, or competing authority is permitted.
+Direct high-level submission remains the preferred materialization path. This board exists so the configured-board supervisor can finish the remaining PCPR work without re-implementing PCPR-004. No raw SQL, second supervisor family, or competing authority is permitted.
 
-Initial readiness frontier: PCPR-004.
+Initial readiness frontier: PCPR-000, PCPR-001.
 
 Initial blocked population: none.
 
-Root completion barrier: deferred PCPR-094 after direct objective materialization. The bootstrap task cannot complete PCPR itself.
+Root completion barrier: PCPR-096. An empty queue is not objective satisfaction.
 
 ## Execution invariants
 
@@ -30,9 +30,9 @@ Root completion barrier: deferred PCPR-094 after direct objective materializatio
 
 - Stable task id: PCPR-004
 - Completion contract: admitted_current_tree_receipt
-- Status: todo
+- Status: complete
 - Completion: auto
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Owning repository: ipfs_accelerate_py
 - Owned paths: external/ipfs_accelerate/config/agent_supervisor_prompt_only_self_improvement_v3_scheduler.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/service_factory.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/runtime_factory.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_workflow.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/plan_supervisor_service.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py, external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py, external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_python_api.py, external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_cli.py, external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_mcp.py, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-004.json
@@ -61,3 +61,2379 @@ Root completion barrier: deferred PCPR-094 after direct objective materializatio
 - Allowed paths: external/ipfs_accelerate/config/agent_supervisor_prompt_only_self_improvement_v3_scheduler.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/cli.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/service_factory.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/runtime_factory.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_workflow.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/plan_supervisor_service.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/plan_revision_store.py, external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py, external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_python_api.py, external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_cli.py, external/ipfs_accelerate/test/api/test_agent_supervisor_prompt_v3_mcp.py, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-004.json
 - Conflict policy: Hold an exclusive merge-queue lease for each shared entrypoint or control-plane file, rebase the nested Accelerate change on the latest accepted PCPR gitlink, reject any changed path outside the exact allowlist, rerun all affected conformance and negative tests, and publish the outer receipt only after the nested commit is accepted and its gitlink is current.
 - Acceptance: The existing canonical public prompt path accepts the exact PCPR idea and produces admitted, authorized, current-tree, cross-transport-equivalent objective, plan, materialization, and start receipts without pre-built-plan injection, false authority, direct database mutation, or a new subsystem; otherwise this task ends in a typed honest failure receipt and the 66-package campaign remains unmaterialized.
+
+## PCPR-000 Seal repositories, contracts, policies, and supervisor baseline
+
+- Stable task id: PCPR-000
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json
+- Objective: Seal repositories, contracts, policies, and supervisor baseline. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: 
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-000
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json
+- Goal id: PCPR-G110
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g110/pcpr-000
+- Parallel lane: pcpr-0
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Seal repositories, contracts, policies, and supervisor baseline, or a typed unavailable/blocked receipt.
+
+## PCPR-001 Qualify direct objective and event-driven supervisor
+
+- Stable task id: PCPR-001
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json
+- Objective: Qualify direct objective and event-driven supervisor. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-004
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-001
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json
+- Goal id: PCPR-G120
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g120/pcpr-001
+- Parallel lane: pcpr-0
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-001.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify direct objective and event-driven supervisor, or a typed unavailable/blocked receipt.
+
+## PCPR-002 Freeze canonical supervisor contracts or issue non-promotion
+
+- Stable task id: PCPR-002
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json
+- Objective: Freeze canonical supervisor contracts or issue non-promotion. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-001
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-002
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json
+- Goal id: PCPR-G130
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g130/pcpr-002
+- Parallel lane: pcpr-0
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Freeze canonical supervisor contracts or issue non-promotion, or a typed unavailable/blocked receipt.
+
+## PCPR-003 Inventory every legacy bypass and false-authority path
+
+- Stable task id: PCPR-003
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json
+- Objective: Inventory every legacy bypass and false-authority path. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-000
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-003
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json
+- Goal id: PCPR-G130
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g130/pcpr-003
+- Parallel lane: pcpr-0
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Inventory every legacy bypass and false-authority path, or a typed unavailable/blocked receipt.
+
+## PCPR-010 Remove Datasets import-time auto-install
+
+- Stable task id: PCPR-010
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json
+- Objective: Remove Datasets import-time auto-install. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-003
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-010
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json
+- Goal id: PCPR-G200
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g200/pcpr-010
+- Parallel lane: pcpr-1
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Remove Datasets import-time auto-install, or a typed unavailable/blocked receipt.
+
+## PCPR-011 Remove Datasets false-success fallbacks
+
+- Stable task id: PCPR-011
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json
+- Objective: Remove Datasets false-success fallbacks. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-010
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-011
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json
+- Goal id: PCPR-G200
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g200/pcpr-011
+- Parallel lane: pcpr-1
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Remove Datasets false-success fallbacks, or a typed unavailable/blocked receipt.
+
+## PCPR-012 Make typed outcomes canonical
+
+- Stable task id: PCPR-012
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json
+- Objective: Make typed outcomes canonical. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-011
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-012
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json
+- Goal id: PCPR-G200
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g200/pcpr-012
+- Parallel lane: pcpr-1
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Make typed outcomes canonical, or a typed unavailable/blocked receipt.
+
+## PCPR-013 Canonicalize LogicProviderProtocol
+
+- Stable task id: PCPR-013
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json
+- Objective: Canonicalize LogicProviderProtocol. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-012
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-013
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json
+- Goal id: PCPR-G200
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g200/pcpr-013
+- Parallel lane: pcpr-1
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Canonicalize LogicProviderProtocol, or a typed unavailable/blocked receipt.
+
+## PCPR-014 Stabilize semantic APIs and ContextPack contract
+
+- Stable task id: PCPR-014
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json
+- Objective: Stabilize semantic APIs and ContextPack contract. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-013
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-014
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json
+- Goal id: PCPR-G200
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g200/pcpr-014
+- Parallel lane: pcpr-1
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Stabilize semantic APIs and ContextPack contract, or a typed unavailable/blocked receipt.
+
+## PCPR-015 Package schemas and shared vectors
+
+- Stable task id: PCPR-015
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json
+- Objective: Package schemas and shared vectors. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-014
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-015
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json
+- Goal id: PCPR-G200
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g200/pcpr-015
+- Parallel lane: pcpr-1
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Package schemas and shared vectors, or a typed unavailable/blocked receipt.
+
+## PCPR-016 Resolve Datasets license metadata
+
+- Stable task id: PCPR-016
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json
+- Objective: Resolve Datasets license metadata. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-015
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-016
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json
+- Goal id: PCPR-G200
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g200/pcpr-016
+- Parallel lane: pcpr-1
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Resolve Datasets license metadata, or a typed unavailable/blocked receipt.
+
+## PCPR-017 Qualify real Datasets solver paths
+
+- Stable task id: PCPR-017
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json
+- Objective: Qualify real Datasets solver paths. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-016
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-017
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json
+- Goal id: PCPR-G200
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g200/pcpr-017
+- Parallel lane: pcpr-1
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify real Datasets solver paths, or a typed unavailable/blocked receipt.
+
+## PCPR-020 Requalify local Kit backend
+
+- Stable task id: PCPR-020
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-020.json
+- Objective: Requalify local Kit backend. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-020.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-003
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-020.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-020
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-020.json
+- Goal id: PCPR-G300
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-020.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-020.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g300/pcpr-020
+- Parallel lane: pcpr-2
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-020.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-020.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Requalify local Kit backend, or a typed unavailable/blocked receipt.
+
+## PCPR-021 Qualify pinned IPFS backend
+
+- Stable task id: PCPR-021
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json
+- Objective: Qualify pinned IPFS backend. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-020
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-021
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json
+- Goal id: PCPR-G300
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g300/pcpr-021
+- Parallel lane: pcpr-2
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify pinned IPFS backend, or a typed unavailable/blocked receipt.
+
+## PCPR-022 Qualify or de-scope Iroh
+
+- Stable task id: PCPR-022
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json
+- Objective: Qualify or de-scope Iroh. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-021
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-022
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json
+- Goal id: PCPR-G300
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g300/pcpr-022
+- Parallel lane: pcpr-2
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify or de-scope Iroh, or a typed unavailable/blocked receipt.
+
+## PCPR-023 Qualify VFS/WAL/current-root recovery
+
+- Stable task id: PCPR-023
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-023.json
+- Objective: Qualify VFS/WAL/current-root recovery. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-023.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-022
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-023.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-023
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-023.json
+- Goal id: PCPR-G300
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-023.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-023.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g300/pcpr-023
+- Parallel lane: pcpr-2
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-023.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-023.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify VFS/WAL/current-root recovery, or a typed unavailable/blocked receipt.
+
+## PCPR-024 Qualify proof-seal store
+
+- Stable task id: PCPR-024
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-024.json
+- Objective: Qualify proof-seal store. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-024.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-023
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-024.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-024
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-024.json
+- Goal id: PCPR-G300
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-024.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-024.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g300/pcpr-024
+- Parallel lane: pcpr-2
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-024.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-024.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify proof-seal store, or a typed unavailable/blocked receipt.
+
+## PCPR-025 Remove sibling test-tree coupling
+
+- Stable task id: PCPR-025
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-025.json
+- Objective: Remove sibling test-tree coupling. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-025.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-024
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-025.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-025
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-025.json
+- Goal id: PCPR-G300
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-025.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-025.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g300/pcpr-025
+- Parallel lane: pcpr-2
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-025.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-025.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Remove sibling test-tree coupling, or a typed unavailable/blocked receipt.
+
+## PCPR-026 Qualify Python/CLI/MCP/MCP++ parity
+
+- Stable task id: PCPR-026
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json
+- Objective: Qualify Python/CLI/MCP/MCP++ parity. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-025
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-026
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json
+- Goal id: PCPR-G300
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g300/pcpr-026
+- Parallel lane: pcpr-2
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify Python/CLI/MCP/MCP++ parity, or a typed unavailable/blocked receipt.
+
+## PCPR-027 Generate authoritative support matrix
+
+- Stable task id: PCPR-027
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json
+- Objective: Generate authoritative support matrix. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-026
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-027
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json
+- Goal id: PCPR-G300
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g300/pcpr-027
+- Parallel lane: pcpr-2
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Generate authoritative support matrix, or a typed unavailable/blocked receipt.
+
+## PCPR-030 Quarantine Accelerate legacy mock coordinator
+
+- Stable task id: PCPR-030
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-030.json
+- Objective: Quarantine Accelerate legacy mock coordinator. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-030.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-003
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-030.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-030
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-030.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-030.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-030.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-030
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-030.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-030.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Quarantine Accelerate legacy mock coordinator, or a typed unavailable/blocked receipt.
+
+## PCPR-031 Remove fabricated hardware capability
+
+- Stable task id: PCPR-031
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-031.json
+- Objective: Remove fabricated hardware capability. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-031.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-030
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-031.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-031
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-031.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-031.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-031.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-031
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-031.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-031.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Remove fabricated hardware capability, or a typed unavailable/blocked receipt.
+
+## PCPR-032 Remove pseudo-CID identity
+
+- Stable task id: PCPR-032
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json
+- Objective: Remove pseudo-CID identity. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-031
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-032
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-032
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Remove pseudo-CID identity, or a typed unavailable/blocked receipt.
+
+## PCPR-033 Remove fabricated endpoint success
+
+- Stable task id: PCPR-033
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-033.json
+- Objective: Remove fabricated endpoint success. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-033.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-032
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-033.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-033
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-033.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-033.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-033.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-033
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-033.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-033.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Remove fabricated endpoint success, or a typed unavailable/blocked receipt.
+
+## PCPR-034 Consolidate capability ladder
+
+- Stable task id: PCPR-034
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-034.json
+- Objective: Consolidate capability ladder. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-034.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-033
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-034.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-034
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-034.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-034.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-034.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-034
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-034.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-034.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Consolidate capability ladder, or a typed unavailable/blocked receipt.
+
+## PCPR-035 Pin mutable dependencies
+
+- Stable task id: PCPR-035
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json
+- Objective: Pin mutable dependencies. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-034
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-035
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-035
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Pin mutable dependencies, or a typed unavailable/blocked receipt.
+
+## PCPR-036 Correct Python compatibility metadata
+
+- Stable task id: PCPR-036
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-036.json
+- Objective: Correct Python compatibility metadata. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-036.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-035
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-036.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-036
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-036.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-036.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-036.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-036
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-036.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-036.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Correct Python compatibility metadata, or a typed unavailable/blocked receipt.
+
+## PCPR-037 Qualify CPU execution
+
+- Stable task id: PCPR-037
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json
+- Objective: Qualify CPU execution. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-036
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-037
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-037
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify CPU execution, or a typed unavailable/blocked receipt.
+
+## PCPR-038 Qualify real CUDA execution
+
+- Stable task id: PCPR-038
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json
+- Objective: Qualify real CUDA execution. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-037
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-038
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-038
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify real CUDA execution, or a typed unavailable/blocked receipt.
+
+## PCPR-039 Qualify one real model/provider path
+
+- Stable task id: PCPR-039
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json
+- Objective: Qualify one real model/provider path. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-038
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-039
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json
+- Goal id: PCPR-G400
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g400/pcpr-039
+- Parallel lane: pcpr-3
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Qualify one real model/provider path, or a typed unavailable/blocked receipt.
+
+## PCPR-040 Stabilize shared contracts
+
+- Stable task id: PCPR-040
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json
+- Objective: Stabilize shared contracts. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-017, PCPR-027, PCPR-039
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-040
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json
+- Goal id: PCPR-G500
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g500/pcpr-040
+- Parallel lane: pcpr-4
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Stabilize shared contracts, or a typed unavailable/blocked receipt.
+
+## PCPR-041 Add canonical-byte and CID vectors
+
+- Stable task id: PCPR-041
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json
+- Objective: Add canonical-byte and CID vectors. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-040
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-041
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json
+- Goal id: PCPR-G500
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g500/pcpr-041
+- Parallel lane: pcpr-4
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Add canonical-byte and CID vectors, or a typed unavailable/blocked receipt.
+
+## PCPR-042 Add negative and cross-language vectors
+
+- Stable task id: PCPR-042
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json
+- Objective: Add negative and cross-language vectors. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-041
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-042
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json
+- Goal id: PCPR-G500
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g500/pcpr-042
+- Parallel lane: pcpr-4
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Add negative and cross-language vectors, or a typed unavailable/blocked receipt.
+
+## PCPR-043 Add cross-repository compatibility checks
+
+- Stable task id: PCPR-043
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-043.json
+- Objective: Add cross-repository compatibility checks. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-043.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-042
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-043.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-043
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-043.json
+- Goal id: PCPR-G500
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-043.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-043.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g500/pcpr-043
+- Parallel lane: pcpr-4
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-043.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-043.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Add cross-repository compatibility checks, or a typed unavailable/blocked receipt.
+
+## PCPR-050 Build clean Datasets package
+
+- Stable task id: PCPR-050
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_datasets_py
+- Owned paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-050.json
+- Objective: Build clean Datasets package. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-050.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-043
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-050.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-050
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-050.json
+- Goal id: PCPR-G600
+- Outputs: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-050.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-050.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g600/pcpr-050
+- Parallel lane: pcpr-5
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-050.json
+- Allowed paths: external/ipfs_datasets/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-050.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Build clean Datasets package, or a typed unavailable/blocked receipt.
+
+## PCPR-051 Build clean Kit package
+
+- Stable task id: PCPR-051
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_kit_py
+- Owned paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-051.json
+- Objective: Build clean Kit package. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-051.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-050
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-051.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-051
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-051.json
+- Goal id: PCPR-G600
+- Outputs: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-051.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-051.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g600/pcpr-051
+- Parallel lane: pcpr-5
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-051.json
+- Allowed paths: external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-051.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Build clean Kit package, or a typed unavailable/blocked receipt.
+
+## PCPR-052 Build clean Accelerate package
+
+- Stable task id: PCPR-052
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json
+- Objective: Build clean Accelerate package. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-051
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-052
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json
+- Goal id: PCPR-G600
+- Outputs: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g600/pcpr-052
+- Parallel lane: pcpr-5
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json
+- Allowed paths: external/ipfs_accelerate/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Build clean Accelerate package, or a typed unavailable/blocked receipt.
+
+## PCPR-053 Produce dependency locks
+
+- Stable task id: PCPR-053
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json
+- Objective: Produce dependency locks. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-052
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-053
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json
+- Goal id: PCPR-G600
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g600/pcpr-053
+- Parallel lane: pcpr-5
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Produce dependency locks, or a typed unavailable/blocked receipt.
+
+## PCPR-054 Produce SBOMs and provenance
+
+- Stable task id: PCPR-054
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-054.json
+- Objective: Produce SBOMs and provenance. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-054.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-053
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-054.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-054
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-054.json
+- Goal id: PCPR-G600
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-054.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-054.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g600/pcpr-054
+- Parallel lane: pcpr-5
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-054.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-054.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Produce SBOMs and provenance, or a typed unavailable/blocked receipt.
+
+## PCPR-055 Produce signed tags and artifacts
+
+- Stable task id: PCPR-055
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-055.json
+- Objective: Produce signed tags and artifacts. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-055.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-054
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-055.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-055
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-055.json
+- Goal id: PCPR-G600
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-055.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-055.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g600/pcpr-055
+- Parallel lane: pcpr-5
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-055.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-055.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Produce signed tags and artifacts, or a typed unavailable/blocked receipt.
+
+## PCPR-056 Produce portfolio compatibility lock
+
+- Stable task id: PCPR-056
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-056.json
+- Objective: Produce portfolio compatibility lock. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-056.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-055
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-056.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-056
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-056.json
+- Goal id: PCPR-G600
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-056.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-056.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g600/pcpr-056
+- Parallel lane: pcpr-5
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-056.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-056.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Produce portfolio compatibility lock, or a typed unavailable/blocked receipt.
+
+## PCPR-057 Add branch and release gates
+
+- Stable task id: PCPR-057
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-057.json
+- Objective: Add branch and release gates. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-057.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-056
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-057.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-057
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-057.json
+- Goal id: PCPR-G600
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-057.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-057.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g600/pcpr-057
+- Parallel lane: pcpr-5
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-057.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-057.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Add branch and release gates, or a typed unavailable/blocked receipt.
+
+## PCPR-060 Submit reference high-level objective
+
+- Stable task id: PCPR-060
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-060.json
+- Objective: Submit reference high-level objective. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-060.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-002, PCPR-057
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-060.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-060
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-060.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-060.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-060.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-060
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-060.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-060.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Submit reference high-level objective, or a typed unavailable/blocked receipt.
+
+## PCPR-061 Build semantic ContextPack
+
+- Stable task id: PCPR-061
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-061.json
+- Objective: Build semantic ContextPack. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-061.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-060
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-061.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-061
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-061.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-061.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-061.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-061
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-061.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-061.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Build semantic ContextPack, or a typed unavailable/blocked receipt.
+
+## PCPR-062 Persist and publish current ContextPack root
+
+- Stable task id: PCPR-062
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-062.json
+- Objective: Persist and publish current ContextPack root. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-062.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-061
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-062.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-062
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-062.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-062.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-062.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-062
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-062.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-062.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Persist and publish current ContextPack root, or a typed unavailable/blocked receipt.
+
+## PCPR-063 Execute deterministic-first route
+
+- Stable task id: PCPR-063
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-063.json
+- Objective: Execute deterministic-first route. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-063.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-062
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-063.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-063
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-063.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-063.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-063.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-063
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-063.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-063.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Execute deterministic-first route, or a typed unavailable/blocked receipt.
+
+## PCPR-064 Produce bounded patch
+
+- Stable task id: PCPR-064
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-064.json
+- Objective: Produce bounded patch. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-064.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-063
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-064.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-064
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-064.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-064.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-064.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-064
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-064.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-064.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Produce bounded patch, or a typed unavailable/blocked receipt.
+
+## PCPR-065 Run selected tests and proofs
+
+- Stable task id: PCPR-065
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-065.json
+- Objective: Run selected tests and proofs. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-065.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-064
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-065.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-065
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-065.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-065.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-065.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-065
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-065.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-065.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Run selected tests and proofs, or a typed unavailable/blocked receipt.
+
+## PCPR-066 Introduce unrelated state change
+
+- Stable task id: PCPR-066
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-066.json
+- Objective: Introduce unrelated state change. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-066.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-065
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-066.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-066
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-066.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-066.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-066.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-066
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-066.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-066.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Introduce unrelated state change, or a typed unavailable/blocked receipt.
+
+## PCPR-067 Demonstrate safe reuse
+
+- Stable task id: PCPR-067
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-067.json
+- Objective: Demonstrate safe reuse. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-067.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-066
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-067.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-067
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-067.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-067.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-067.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-067
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-067.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-067.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Demonstrate safe reuse, or a typed unavailable/blocked receipt.
+
+## PCPR-068 Introduce relevant interface change
+
+- Stable task id: PCPR-068
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-068.json
+- Objective: Introduce relevant interface change. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-068.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-067
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-068.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-068
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-068.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-068.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-068.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-068
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-068.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-068.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Introduce relevant interface change, or a typed unavailable/blocked receipt.
+
+## PCPR-069 Demonstrate stale rejection and PlanDelta
+
+- Stable task id: PCPR-069
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-069.json
+- Objective: Demonstrate stale rejection and PlanDelta. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-069.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-068
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-069.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-069
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-069.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-069.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-069.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-069
+- Parallel lane: pcpr-6
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-069.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-069.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Demonstrate stale rejection and PlanDelta, or a typed unavailable/blocked receipt.
+
+## PCPR-070 Restart authoritative state owner
+
+- Stable task id: PCPR-070
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-070.json
+- Objective: Restart authoritative state owner. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-070.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-069
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-070.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-070
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-070.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-070.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-070.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-070
+- Parallel lane: pcpr-7
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-070.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-070.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Restart authoritative state owner, or a typed unavailable/blocked receipt.
+
+## PCPR-071 Demonstrate recovery and idempotency
+
+- Stable task id: PCPR-071
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-071.json
+- Objective: Demonstrate recovery and idempotency. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-071.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-070
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-071.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-071
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-071.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-071.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-071.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-071
+- Parallel lane: pcpr-7
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-071.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-071.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Demonstrate recovery and idempotency, or a typed unavailable/blocked receipt.
+
+## PCPR-072 Produce final proof-carrying receipt chain
+
+- Stable task id: PCPR-072
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-072.json
+- Objective: Produce final proof-carrying receipt chain. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-072.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-071
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-072.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-072
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-072.json
+- Goal id: PCPR-G700
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-072.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-072.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g700/pcpr-072
+- Parallel lane: pcpr-7
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-072.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-072.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Produce final proof-carrying receipt chain, or a typed unavailable/blocked receipt.
+
+## PCPR-080 Add Python external-client demonstration
+
+- Stable task id: PCPR-080
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-080.json
+- Objective: Add Python external-client demonstration. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-080.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-072
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-080.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-080
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-080.json
+- Goal id: PCPR-G800
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-080.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-080.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g800/pcpr-080
+- Parallel lane: pcpr-8
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-080.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-080.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Add Python external-client demonstration, or a typed unavailable/blocked receipt.
+
+## PCPR-081 Add generic MCP-client demonstration
+
+- Stable task id: PCPR-081
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-081.json
+- Objective: Add generic MCP-client demonstration. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-081.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-080
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-081.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-081
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-081.json
+- Goal id: PCPR-G800
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-081.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-081.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g800/pcpr-081
+- Parallel lane: pcpr-8
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-081.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-081.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Add generic MCP-client demonstration, or a typed unavailable/blocked receipt.
+
+## PCPR-082 Prove cross-client objective identity parity
+
+- Stable task id: PCPR-082
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-082.json
+- Objective: Prove cross-client objective identity parity. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-082.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-081
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-082.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-082
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-082.json
+- Goal id: PCPR-G800
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-082.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-082.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g800/pcpr-082
+- Parallel lane: pcpr-8
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-082.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-082.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Prove cross-client objective identity parity, or a typed unavailable/blocked receipt.
+
+## PCPR-083 Prove external clients cannot bypass authority
+
+- Stable task id: PCPR-083
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-083.json
+- Objective: Prove external clients cannot bypass authority. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-083.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-082
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-083.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-083
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-083.json
+- Goal id: PCPR-G800
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-083.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-083.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g800/pcpr-083
+- Parallel lane: pcpr-8
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-083.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-083.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Prove external clients cannot bypass authority, or a typed unavailable/blocked receipt.
+
+## PCPR-090 Prepare threat model
+
+- Stable task id: PCPR-090
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-090.json
+- Objective: Prepare threat model. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-090.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-083
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-090.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-090
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-090.json
+- Goal id: PCPR-G900
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-090.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-090.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g900/pcpr-090
+- Parallel lane: pcpr-9
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-090.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-090.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Prepare threat model, or a typed unavailable/blocked receipt.
+
+## PCPR-091 Prepare trusted-computing-base inventory
+
+- Stable task id: PCPR-091
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-091.json
+- Objective: Prepare trusted-computing-base inventory. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-091.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-090
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-091.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-091
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-091.json
+- Goal id: PCPR-G900
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-091.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-091.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g900/pcpr-091
+- Parallel lane: pcpr-9
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-091.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-091.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Prepare trusted-computing-base inventory, or a typed unavailable/blocked receipt.
+
+## PCPR-092 Prepare security and correctness audit package
+
+- Stable task id: PCPR-092
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-092.json
+- Objective: Prepare security and correctness audit package. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-092.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-091
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-092.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-092
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-092.json
+- Goal id: PCPR-G900
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-092.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-092.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g900/pcpr-092
+- Parallel lane: pcpr-9
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-092.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-092.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Prepare security and correctness audit package, or a typed unavailable/blocked receipt.
+
+## PCPR-093 Run release-candidate gate
+
+- Stable task id: PCPR-093
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-093.json
+- Objective: Run release-candidate gate. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-093.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-092
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-093.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-093
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-093.json
+- Goal id: PCPR-G900
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-093.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-093.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g900/pcpr-093
+- Parallel lane: pcpr-9
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-093.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-093.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Run release-candidate gate, or a typed unavailable/blocked receipt.
+
+## PCPR-094 Produce promotion or honest non-promotion receipt
+
+- Stable task id: PCPR-094
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-094.json
+- Objective: Produce promotion or honest non-promotion receipt. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-094.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-093
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-094.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-094
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-094.json
+- Goal id: PCPR-G900
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-094.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-094.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g900/pcpr-094
+- Parallel lane: pcpr-9
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-094.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-094.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Produce promotion or honest non-promotion receipt, or a typed unavailable/blocked receipt.
+
+## PCPR-095 Publish residual-gap report
+
+- Stable task id: PCPR-095
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-095.json
+- Objective: Publish residual-gap report. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-095.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-094
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-095.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-095
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-095.json
+- Goal id: PCPR-G900
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-095.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-095.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g900/pcpr-095
+- Parallel lane: pcpr-9
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-095.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-095.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Publish residual-gap report, or a typed unavailable/blocked receipt.
+
+## PCPR-096 Recommend the next customer or synthetic pilot
+
+- Stable task id: PCPR-096
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: ipfs_accelerate_py
+- Owned paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-096.json
+- Objective: Recommend the next customer or synthetic pilot. Record an honest R&D receipt at artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-096.json. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: PCPR-095
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-096.json
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-pcpr-096
+- Final result CID or artifact identity: pending CID for artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-096.json
+- Goal id: PCPR-G900
+- Outputs: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-096.json
+- Validation: python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-096.json
+- Board namespace: proof-carrying-platform-qualification-and-release-v1
+- Bundle: pcpr/pcpr-g900/pcpr-096
+- Parallel lane: pcpr-9
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-096.json
+- Allowed paths: external/ipfs_accelerate/, external/ipfs_datasets/, external/ipfs_kit/, artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-096.json
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for Recommend the next customer or synthetic pilot, or a typed unavailable/blocked receipt.

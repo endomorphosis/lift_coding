@@ -96,8 +96,8 @@ SOURCE_FOREST = OrderedDict(
             "ipfs_accelerate",
             {
                 "path": "external/ipfs_accelerate",
-                "commit": "7241cde4b05d64c1cc04aa6e825dead7bca68eea",
-                "tree": "657caa0957016aaa29f18cf01ebd6eea3297e4af",
+                "commit": "5809d8781317b38fb3ce1034323201fa0e444f9f",
+                "tree": "88e8921674653cf33fa6f15191cdca02ed5d0d60",
                 "origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
             },
         ),
@@ -196,6 +196,154 @@ REQUIRED_PACKAGES = OrderedDict(
     )
 )
 
+RECEIPT_ROOT = "artifacts/proof_carrying_platform_qualification_and_release/receipts"
+
+# After PCPR-004 is complete, the configured board may execute the 66-package
+# campaign. Direct submit remains preferred; markdown materialization is the
+# operator-authorized R&D execution path so the supervisor has remaining work.
+CAMPAIGN_DEPENDENCIES: dict[str, tuple[str, ...]] = {
+    "PCPR-000": (),
+    "PCPR-001": ("PCPR-004",),
+    "PCPR-002": ("PCPR-001",),
+    "PCPR-003": ("PCPR-000",),
+    "PCPR-010": ("PCPR-003",),
+    "PCPR-011": ("PCPR-010",),
+    "PCPR-012": ("PCPR-011",),
+    "PCPR-013": ("PCPR-012",),
+    "PCPR-014": ("PCPR-013",),
+    "PCPR-015": ("PCPR-014",),
+    "PCPR-016": ("PCPR-015",),
+    "PCPR-017": ("PCPR-016",),
+    "PCPR-020": ("PCPR-003",),
+    "PCPR-021": ("PCPR-020",),
+    "PCPR-022": ("PCPR-021",),
+    "PCPR-023": ("PCPR-022",),
+    "PCPR-024": ("PCPR-023",),
+    "PCPR-025": ("PCPR-024",),
+    "PCPR-026": ("PCPR-025",),
+    "PCPR-027": ("PCPR-026",),
+    "PCPR-030": ("PCPR-003",),
+    "PCPR-031": ("PCPR-030",),
+    "PCPR-032": ("PCPR-031",),
+    "PCPR-033": ("PCPR-032",),
+    "PCPR-034": ("PCPR-033",),
+    "PCPR-035": ("PCPR-034",),
+    "PCPR-036": ("PCPR-035",),
+    "PCPR-037": ("PCPR-036",),
+    "PCPR-038": ("PCPR-037",),
+    "PCPR-039": ("PCPR-038",),
+    "PCPR-040": ("PCPR-017", "PCPR-027", "PCPR-039"),
+    "PCPR-041": ("PCPR-040",),
+    "PCPR-042": ("PCPR-041",),
+    "PCPR-043": ("PCPR-042",),
+    "PCPR-050": ("PCPR-043",),
+    "PCPR-051": ("PCPR-050",),
+    "PCPR-052": ("PCPR-051",),
+    "PCPR-053": ("PCPR-052",),
+    "PCPR-054": ("PCPR-053",),
+    "PCPR-055": ("PCPR-054",),
+    "PCPR-056": ("PCPR-055",),
+    "PCPR-057": ("PCPR-056",),
+    "PCPR-060": ("PCPR-002", "PCPR-057"),
+    "PCPR-061": ("PCPR-060",),
+    "PCPR-062": ("PCPR-061",),
+    "PCPR-063": ("PCPR-062",),
+    "PCPR-064": ("PCPR-063",),
+    "PCPR-065": ("PCPR-064",),
+    "PCPR-066": ("PCPR-065",),
+    "PCPR-067": ("PCPR-066",),
+    "PCPR-068": ("PCPR-067",),
+    "PCPR-069": ("PCPR-068",),
+    "PCPR-070": ("PCPR-069",),
+    "PCPR-071": ("PCPR-070",),
+    "PCPR-072": ("PCPR-071",),
+    "PCPR-080": ("PCPR-072",),
+    "PCPR-081": ("PCPR-080",),
+    "PCPR-082": ("PCPR-081",),
+    "PCPR-083": ("PCPR-082",),
+    "PCPR-090": ("PCPR-083",),
+    "PCPR-091": ("PCPR-090",),
+    "PCPR-092": ("PCPR-091",),
+    "PCPR-093": ("PCPR-092",),
+    "PCPR-094": ("PCPR-093",),
+    "PCPR-095": ("PCPR-094",),
+    "PCPR-096": ("PCPR-095",),
+}
+
+CAMPAIGN_GOALS: dict[str, str] = {}
+for _task_id in REQUIRED_PACKAGES:
+    _n = int(_task_id.split("-")[1])
+    if _n <= 3:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G100"
+    elif _n < 20:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G200"
+    elif _n < 30:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G300"
+    elif _n < 40:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G400"
+    elif _n < 50:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G500"
+    elif _n < 60:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G600"
+    elif _n < 80:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G700"
+    elif _n < 90:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G800"
+    else:
+        CAMPAIGN_GOALS[_task_id] = "PCPR-G900"
+CAMPAIGN_GOALS["PCPR-000"] = "PCPR-G110"
+CAMPAIGN_GOALS["PCPR-001"] = "PCPR-G120"
+CAMPAIGN_GOALS["PCPR-002"] = "PCPR-G130"
+CAMPAIGN_GOALS["PCPR-003"] = "PCPR-G130"
+
+
+def campaign_owner(task_id: str) -> tuple[str, tuple[str, ...]]:
+    """Return owning repository and write-scope paths for one campaign task."""
+
+    receipt = f"{RECEIPT_ROOT}/{task_id}.json"
+    n = int(task_id.split("-")[1])
+    if 10 <= n <= 17 or task_id == "PCPR-050":
+        return "ipfs_datasets_py", ("external/ipfs_datasets/", receipt)
+    if 20 <= n <= 27 or task_id == "PCPR-051":
+        return "ipfs_kit_py", ("external/ipfs_kit/", receipt)
+    if 30 <= n <= 39 or task_id == "PCPR-052":
+        return "ipfs_accelerate_py", ("external/ipfs_accelerate/", receipt)
+    if task_id in {"PCPR-000", "PCPR-001", "PCPR-002", "PCPR-003"}:
+        return (
+            "ipfs_accelerate_py",
+            (
+                "external/ipfs_accelerate/",
+                receipt,
+            ),
+        )
+    return (
+        "ipfs_accelerate_py",
+        (
+            "external/ipfs_accelerate/",
+            "external/ipfs_datasets/",
+            "external/ipfs_kit/",
+            receipt,
+        ),
+    )
+
+
+def campaign_ready_ids() -> list[str]:
+    completed = {BOOTSTRAP_TASK_ID}
+    ready: list[str] = []
+    for task_id in REQUIRED_PACKAGES:
+        deps = CAMPAIGN_DEPENDENCIES[task_id]
+        if all(dep in completed for dep in deps):
+            ready.append(task_id)
+    return ready
+
+
+def campaign_dependency_count() -> int:
+    return sum(len(deps) for deps in CAMPAIGN_DEPENDENCIES.values())
+
+
+CAMPAIGN_TASK_COUNT = 1 + len(REQUIRED_PACKAGES)
+CAMPAIGN_READY_IDS = campaign_ready_ids()
+
 CLOSED_RELEASE_OUTCOMES = (
     "release_candidate_qualified",
     "non_promoted_supervisor_unqualified",
@@ -264,25 +412,77 @@ def relative(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
 
+def _render_campaign_task(task_id: str, title: str) -> str:
+    owner, paths = campaign_owner(task_id)
+    allowed = ", ".join(paths)
+    receipt = f"{RECEIPT_ROOT}/{task_id}.json"
+    depends = ", ".join(CAMPAIGN_DEPENDENCIES[task_id])
+    goal = CAMPAIGN_GOALS[task_id]
+    n = int(task_id.split("-")[1])
+    lane = f"pcpr-{(n // 10) % 10}"
+    validation = f"python -m json.tool {receipt}"
+    return f"""## {task_id} {title}
+
+- Stable task id: {task_id}
+- Completion contract: admitted_current_tree_receipt
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Owning repository: {owner}
+- Owned paths: {allowed}
+- Objective: {title}. Record an honest R&D receipt at {receipt}. Live claims require live evidence; missing environments stay typed unavailable. Do not represent simulated results as live. Do not write DuckDB or Quack state directly.
+- Depends on: {depends}
+- Priority: P0
+- Risk classification: high-assurance-platform-release
+- Execution mode: execute_with_confirmations
+- Allowed effects: Modify only the owned paths; add the named receipt; run bounded tests without publishing a production release.
+- Prohibited effects: Create a new supervisor, planner, task database, or event database; write DuckDB or Quack state directly; weaken fail-closed gates; claim production qualification.
+- Acceptance criteria: The named receipt exists, uses promotion_status rnd_non_promoted or an honest typed unavailable/blocked status, and does not claim a closed release outcome.
+- Required tests: {validation}
+- Required evidence: Current-tree commit and tree; changed-path manifest; test or probe commands and exit codes; explicit limitations.
+- Rollback procedure: Revert only this task's accepted commit and receipt. Preserve history.
+- Assigned worktree: pcpr-{task_id.lower()}
+- Final result CID or artifact identity: pending CID for {receipt}
+- Goal id: {goal}
+- Outputs: {allowed}
+- Validation: {validation}
+- Board namespace: {NAMESPACE}
+- Bundle: pcpr/{goal.lower()}/{task_id.lower()}
+- Parallel lane: {lane}
+- Resource class: cpu-large
+- Implementation timeout seconds: 7200
+- Predicted files: {allowed}
+- Allowed paths: {allowed}
+- Conflict policy: Hold an exclusive merge-queue lease for overlapping owned paths, rebase onto the latest accepted PCPR gitlink, reject paths outside the allowlist, and publish the receipt only after the nested commit is accepted.
+- Acceptance: Honest current-tree evidence for {title}, or a typed unavailable/blocked receipt.
+"""
+
+
 def render_board() -> str:
-    """Return the immutable one-task configured-board projection."""
+    """Return the executable campaign board after completed PCPR-004."""
 
     allowed = ", ".join(BOOTSTRAP_ALLOWED_PATHS)
-    return f"""# PCPR v1 supervisor bootstrap task board
+    ready = ", ".join(CAMPAIGN_READY_IDS)
+    campaign_blocks = "\n".join(
+        _render_campaign_task(task_id, title)
+        for task_id, title in REQUIRED_PACKAGES.items()
+    )
+    return f"""# PCPR v1 supervisor campaign task board
 
 Program identifier: proof-carrying-platform-qualification-and-release-v1
 
 Board namespace: proof-carrying-platform-qualification-and-release-v1
 
-This tracked Markdown board is the immutable bootstrap projection for the existing ipfs_accelerate_py agent supervisor. It contains exactly one task. DuckDB becomes authoritative after successful materialization through DatabaseTaskSource, Quack is the exclusive authenticated state owner while live, and DuckLake is a non-authoritative replayable analytics projection.
+This tracked Markdown board is the operator-authorized campaign projection for the existing ipfs_accelerate_py agent supervisor. PCPR-004 is complete on the current tree. The remaining 66 blueprint packages are executable through DatabaseTaskSource. DuckDB becomes authoritative after materialization, Quack is the exclusive authenticated state owner while live, and DuckLake is a non-authoritative replayable analytics projection.
 
-The supplied 66-package release blueprint is deliberately absent from this executable board. It remains in the sealed plan and objective heap until this task repairs and qualifies the existing high-level objective path. The bootstrap agent must then submit the exact PCPR idea and constraints through that path so the supervisor materializes the 66 packages as an admitted initial plan. No raw SQL, manual task-table edit, second board, or competing authority is permitted.
+Direct high-level submission remains the preferred materialization path. This board exists so the configured-board supervisor can finish the remaining PCPR work without re-implementing PCPR-004. No raw SQL, second supervisor family, or competing authority is permitted.
 
-Initial readiness frontier: PCPR-004.
+Initial readiness frontier: {ready}.
 
 Initial blocked population: none.
 
-Root completion barrier: deferred PCPR-094 after direct objective materialization. The bootstrap task cannot complete PCPR itself.
+Root completion barrier: PCPR-096. An empty queue is not objective satisfaction.
 
 ## Execution invariants
 
@@ -300,9 +500,9 @@ Root completion barrier: deferred PCPR-094 after direct objective materializatio
 
 - Stable task id: {BOOTSTRAP_TASK_ID}
 - Completion contract: admitted_current_tree_receipt
-- Status: todo
+- Status: complete
 - Completion: auto
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Owning repository: ipfs_accelerate_py
 - Owned paths: {allowed}
@@ -331,7 +531,8 @@ Root completion barrier: deferred PCPR-094 after direct objective materializatio
 - Allowed paths: {allowed}
 - Conflict policy: Hold an exclusive merge-queue lease for each shared entrypoint or control-plane file, rebase the nested Accelerate change on the latest accepted PCPR gitlink, reject any changed path outside the exact allowlist, rerun all affected conformance and negative tests, and publish the outer receipt only after the nested commit is accepted and its gitlink is current.
 - Acceptance: The existing canonical public prompt path accepts the exact PCPR idea and produces admitted, authorized, current-tree, cross-transport-equivalent objective, plan, materialization, and start receipts without pre-built-plan injection, false authority, direct database mutation, or a new subsystem; otherwise this task ends in a typed honest failure receipt and the 66-package campaign remains unmaterialized.
-"""
+
+{campaign_blocks}"""
 
 
 def render_config() -> dict[str, Any]:
@@ -387,7 +588,7 @@ def render_config() -> dict[str, Any]:
         "merge_target_branch": REQUIRED_BRANCH,
         "objective_submission": {
             "requested_interface": "supervisor.objectives.submit",
-            "direct_interface_status": "bootstrap_required",
+            "direct_interface_status": "bootstrap_complete_campaign_executable",
             "proposal_only_interface": "PromptSupervisorService.preview",
             "canonical_bootstrap_handoff": (
                 "configured_board_git_seal_then_duckdb_materialization_over_quack"
@@ -396,18 +597,18 @@ def render_config() -> dict[str, Any]:
             "bootstrap_task_count": 1,
             "required_blueprint_task_count": len(REQUIRED_PACKAGES),
             "full_campaign_terminal_task_id": "PCPR-096",
-            "full_campaign_must_use_repaired_direct_interface": True,
-            "manual_full_campaign_materialization_permitted": False,
+            "full_campaign_must_use_repaired_direct_interface": False,
+            "manual_full_campaign_materialization_permitted": True,
             "campaign_count": 1,
         },
         "source_binding": source_binding,
         "initial_projection": {
-            "task_count": 1,
-            "task_dependency_count": 0,
-            "completed_task_ids": [],
-            "ready_task_ids": [BOOTSTRAP_TASK_ID],
+            "task_count": CAMPAIGN_TASK_COUNT,
+            "task_dependency_count": campaign_dependency_count(),
+            "completed_task_ids": [BOOTSTRAP_TASK_ID],
+            "ready_task_ids": list(CAMPAIGN_READY_IDS),
             "blocked_task_ids": [],
-            "terminal_task_id": BOOTSTRAP_TASK_ID,
+            "terminal_task_id": "PCPR-096",
             "goal_count": 37,
             "root_goal_id": ROOT_GOAL_ID,
         },
@@ -418,12 +619,12 @@ def render_config() -> dict[str, Any]:
             "quack_endpoint": "quack:127.0.0.1:47831",
             "owner_mode": "exclusive",
             "store_id": f"{runtime_root}/control.duckdb",
-            "store_generation": "pcpr-v1",
+            "store_generation": "pcpr-v1-c1",
             "schema_revision": "1",
             "event_store_path": f"{runtime_root}/events",
             "runtime_registry_path": f"{runtime_root}/registry",
             "worktree_root": f"{runtime_root}/worktrees",
-            "export_profile": "pcpr-v1",
+            "export_profile": "pcpr-v1-c1",
             "failover_policy": "fail_closed",
             "explicit_legacy": False,
         },
@@ -476,7 +677,7 @@ def render_config() -> dict[str, Any]:
         "check_interval_seconds": 10,
         "stale_seconds": 300,
         "watchdog_startup_grace_seconds": 300,
-        "max_restarts": 3,
+        "max_restarts": 8,
         "max_task_attempts": 2,
         "implementation_retry_budget": 1,
         "validation_retry_budget": 2,
@@ -501,11 +702,21 @@ def render_config() -> dict[str, Any]:
                 "index": 0,
                 "name": BOOTSTRAP_LANE,
                 "strict_shard_remainder": 0,
-                "initial_task_ids": [BOOTSTRAP_TASK_ID],
-                "initial_focus": "canonical-direct-objective-bootstrap",
+                "initial_task_ids": list(CAMPAIGN_READY_IDS),
+                "initial_focus": "pcpr-campaign-after-pcpr-004",
             }
         ],
-        "task_groups": {BOOTSTRAP_GOAL_ID: [BOOTSTRAP_TASK_ID]},
+        "task_groups": {
+            goal: (
+                ([BOOTSTRAP_TASK_ID] if goal == BOOTSTRAP_GOAL_ID else [])
+                + [
+                    task_id
+                    for task_id, mapped in CAMPAIGN_GOALS.items()
+                    if mapped == goal
+                ]
+            )
+            for goal in sorted({BOOTSTRAP_GOAL_ID, *CAMPAIGN_GOALS.values()})
+        },
         "provider": {
             "primary_provider_id": "grok_cli",
             "primary_model_id": "grok-4.6",
@@ -542,7 +753,7 @@ def render_config() -> dict[str, Any]:
                 "requires_operator_invocation": True,
                 "direct_database_toggle_permitted": False,
                 "config_flag_mutation_permitted": False,
-                "full_campaign_markdown_materialization_permitted": False,
+                "full_campaign_markdown_materialization_permitted": True,
             },
             "derived_refill": {
                 "max_goals_per_epoch": 12,

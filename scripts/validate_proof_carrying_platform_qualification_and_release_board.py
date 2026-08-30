@@ -312,10 +312,12 @@ def validate() -> dict[str, Any]:
     except ValueError as exc:
         errors.append(str(exc))
         tasks = []
-    if [(item[0], item[1]) for item in tasks] != [
-        (generator.BOOTSTRAP_TASK_ID, generator.BOOTSTRAP_TASK_TITLE)
-    ]:
-        errors.append("bootstrap board must contain only exact PCPR-004")
+    expected_ids = [
+        (generator.BOOTSTRAP_TASK_ID, generator.BOOTSTRAP_TASK_TITLE),
+        *list(generator.REQUIRED_PACKAGES.items()),
+    ]
+    if [(item[0], item[1]) for item in tasks] != expected_ids:
+        errors.append("campaign board must contain completed PCPR-004 plus the 66 blueprint packages")
     if tasks:
         fields = tasks[0][2]
         required_task_fields = {
@@ -351,9 +353,9 @@ def validate() -> dict[str, Any]:
         expected_values = {
             "stable_task_id": generator.BOOTSTRAP_TASK_ID,
             "completion_contract": "admitted_current_tree_receipt",
-            "status": "todo",
+            "status": "complete",
             "completion": "auto",
-            "is_schedulable": "true",
+            "is_schedulable": "false",
             "goal_id": generator.BOOTSTRAP_GOAL_ID,
             "depends_on": "",
             "risk_classification": generator.BOOTSTRAP_RISK_CLASSIFICATION,
@@ -375,10 +377,14 @@ def validate() -> dict[str, Any]:
         errors.append("scheduler config differs from its deterministic generator")
     if config:
         projection = config.get("initial_projection") or {}
-        if projection.get("task_count") != 1 or projection.get("ready_task_ids") != [
-            generator.BOOTSTRAP_TASK_ID
-        ]:
-            errors.append("initial projection must admit exactly ready PCPR-004")
+        if projection.get("task_count") != generator.CAMPAIGN_TASK_COUNT:
+            errors.append("initial projection must include PCPR-004 plus 66 campaign tasks")
+        if projection.get("completed_task_ids") != [generator.BOOTSTRAP_TASK_ID]:
+            errors.append("initial projection must mark PCPR-004 complete")
+        if projection.get("ready_task_ids") != list(generator.CAMPAIGN_READY_IDS):
+            errors.append("initial projection ready frontier must follow completed PCPR-004")
+        if projection.get("terminal_task_id") != "PCPR-096":
+            errors.append("campaign terminal task must be PCPR-096")
         if (
             projection.get("goal_count") != 37
             or projection.get("root_goal_id") != generator.ROOT_GOAL_ID
@@ -386,10 +392,11 @@ def validate() -> dict[str, Any]:
             errors.append("initial projection must materialize all 37 goals under PCPR-G000")
         if config.get("max_lanes") != 1 or len(config.get("lanes") or []) != 1:
             errors.append("PCPR bootstrap must configure exactly one lane")
-        if config.get("task_groups") != {
-            generator.BOOTSTRAP_GOAL_ID: [generator.BOOTSTRAP_TASK_ID]
-        }:
-            errors.append("PCPR-004 task group must be PCPR-G110")
+        groups = config.get("task_groups") or {}
+        if generator.BOOTSTRAP_GOAL_ID not in groups or generator.BOOTSTRAP_TASK_ID not in (
+            groups.get(generator.BOOTSTRAP_GOAL_ID) or []
+        ):
+            errors.append("PCPR-004 task group must remain PCPR-G110")
         if config.get("exit_when_all_tracks_terminal") is not False:
             errors.append("bootstrap drain must not imply PCPR objective satisfaction")
         for field in (

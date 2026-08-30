@@ -47,13 +47,13 @@
     "endpoint_secret_handle": "handle:pcpr-v1",
     "event_store_path": "data/agent_supervisor/proof_carrying_platform_qualification_and_release_v1/events",
     "explicit_legacy": false,
-    "export_profile": "pcpr-v1",
+    "export_profile": "pcpr-v1-c1",
     "failover_policy": "fail_closed",
     "owner_mode": "exclusive",
     "quack_endpoint": "quack:127.0.0.1:47831",
     "runtime_registry_path": "data/agent_supervisor/proof_carrying_platform_qualification_and_release_v1/registry",
     "schema_revision": "1",
-    "store_generation": "pcpr-v1",
+    "store_generation": "pcpr-v1-c1",
     "store_id": "data/agent_supervisor/proof_carrying_platform_qualification_and_release_v1/control.duckdb",
     "task_source_kind": "duckdb",
     "worktree_root": "data/agent_supervisor/proof_carrying_platform_qualification_and_release_v1/worktrees"
@@ -103,29 +103,33 @@
   "implementation_timeout_seconds": 14400,
   "initial_projection": {
     "blocked_task_ids": [],
-    "completed_task_ids": [],
-    "goal_count": 37,
-    "ready_task_ids": [
+    "completed_task_ids": [
       "PCPR-004"
     ],
+    "goal_count": 37,
+    "ready_task_ids": [
+      "PCPR-000",
+      "PCPR-001"
+    ],
     "root_goal_id": "PCPR-G000",
-    "task_count": 1,
-    "task_dependency_count": 0,
-    "terminal_task_id": "PCPR-004"
+    "task_count": 67,
+    "task_dependency_count": 68,
+    "terminal_task_id": "PCPR-096"
   },
   "lanes": [
     {
       "index": 0,
-      "initial_focus": "canonical-direct-objective-bootstrap",
+      "initial_focus": "pcpr-campaign-after-pcpr-004",
       "initial_task_ids": [
-        "PCPR-004"
+        "PCPR-000",
+        "PCPR-001"
       ],
       "name": "pcpr-0",
       "strict_shard_remainder": 0
     }
   ],
   "max_lanes": 1,
-  "max_restarts": 3,
+  "max_restarts": 8,
   "max_task_attempts": 2,
   "merge_retry_budget": 2,
   "merge_target_branch": "agent/proof-carrying-platform-qualification-and-release-v1",
@@ -136,10 +140,10 @@
     "bootstrap_task_id": "PCPR-004",
     "campaign_count": 1,
     "canonical_bootstrap_handoff": "configured_board_git_seal_then_duckdb_materialization_over_quack",
-    "direct_interface_status": "bootstrap_required",
-    "full_campaign_must_use_repaired_direct_interface": true,
+    "direct_interface_status": "bootstrap_complete_campaign_executable",
+    "full_campaign_must_use_repaired_direct_interface": false,
     "full_campaign_terminal_task_id": "PCPR-096",
-    "manual_full_campaign_materialization_permitted": false,
+    "manual_full_campaign_materialization_permitted": true,
     "proposal_only_interface": "PromptSupervisorService.preview",
     "requested_interface": "supervisor.objectives.submit",
     "required_blueprint_task_count": 66
@@ -184,7 +188,7 @@
     "activation_gate": {
       "config_flag_mutation_permitted": false,
       "direct_database_toggle_permitted": false,
-      "full_campaign_markdown_materialization_permitted": false,
+      "full_campaign_markdown_materialization_permitted": true,
       "interface": "supervisor.objectives.submit",
       "requires_admitted_current_tree_receipt": true,
       "requires_operator_invocation": true,
@@ -230,8 +234,8 @@
     "bootstrap_task_source": "duckdb",
     "changed_revision_requires_fresh_inventory_and_baseline": true,
     "ipfs_accelerate_origin_main_revision": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
-    "ipfs_accelerate_planning_revision": "7241cde4b05d64c1cc04aa6e825dead7bca68eea",
-    "ipfs_accelerate_planning_tree": "657caa0957016aaa29f18cf01ebd6eea3297e4af",
+    "ipfs_accelerate_planning_revision": "5809d8781317b38fb3ce1034323201fa0e444f9f",
+    "ipfs_accelerate_planning_tree": "88e8921674653cf33fa6f15191cdca02ed5d0d60",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
     "ipfs_datasets_origin_main_revision": "f49afc579c22856849ca9f739435e5820003384f",
     "ipfs_datasets_planning_revision": "f49afc579c22856849ca9f739435e5820003384f",
@@ -252,7 +256,93 @@
   "strict_task_sharding": true,
   "task_groups": {
     "PCPR-G110": [
-      "PCPR-004"
+      "PCPR-004",
+      "PCPR-000"
+    ],
+    "PCPR-G120": [
+      "PCPR-001"
+    ],
+    "PCPR-G130": [
+      "PCPR-002",
+      "PCPR-003"
+    ],
+    "PCPR-G200": [
+      "PCPR-010",
+      "PCPR-011",
+      "PCPR-012",
+      "PCPR-013",
+      "PCPR-014",
+      "PCPR-015",
+      "PCPR-016",
+      "PCPR-017"
+    ],
+    "PCPR-G300": [
+      "PCPR-020",
+      "PCPR-021",
+      "PCPR-022",
+      "PCPR-023",
+      "PCPR-024",
+      "PCPR-025",
+      "PCPR-026",
+      "PCPR-027"
+    ],
+    "PCPR-G400": [
+      "PCPR-030",
+      "PCPR-031",
+      "PCPR-032",
+      "PCPR-033",
+      "PCPR-034",
+      "PCPR-035",
+      "PCPR-036",
+      "PCPR-037",
+      "PCPR-038",
+      "PCPR-039"
+    ],
+    "PCPR-G500": [
+      "PCPR-040",
+      "PCPR-041",
+      "PCPR-042",
+      "PCPR-043"
+    ],
+    "PCPR-G600": [
+      "PCPR-050",
+      "PCPR-051",
+      "PCPR-052",
+      "PCPR-053",
+      "PCPR-054",
+      "PCPR-055",
+      "PCPR-056",
+      "PCPR-057"
+    ],
+    "PCPR-G700": [
+      "PCPR-060",
+      "PCPR-061",
+      "PCPR-062",
+      "PCPR-063",
+      "PCPR-064",
+      "PCPR-065",
+      "PCPR-066",
+      "PCPR-067",
+      "PCPR-068",
+      "PCPR-069",
+      "PCPR-070",
+      "PCPR-071",
+      "PCPR-072"
+    ],
+    "PCPR-G800": [
+      "PCPR-080",
+      "PCPR-081",
+      "PCPR-082",
+      "PCPR-083"
+    ],
+    "PCPR-G900": [
+      "PCPR-090",
+      "PCPR-091",
+      "PCPR-092",
+      "PCPR-093",
+      "PCPR-094",
+      "PCPR-095",
+      "PCPR-096"
     ]
   },
   "task_prefix": "PCPR-",
