@@ -371,9 +371,10 @@ def _load_board(config_path: Path) -> tuple[Any, dict[str, Any], bytes]:
         "pctdd-v1-g6",
         "pctdd-v1-g7",
         "pctdd-v1-g8",
+        "pctdd-v1-g9",
     }:
         raise MaterializationError(
-            "PCTDD materialization requires the sealed g6, g7, or g8 store"
+            "PCTDD materialization requires the sealed g6, g7, g8, or g9 store"
         )
     if program.store_generation == "pctdd-v1-g7" and not isinstance(
         config_payload.get("source_binding_successor_materialization"), Mapping
@@ -385,6 +386,12 @@ def _load_board(config_path: Path) -> tuple[Any, dict[str, Any], bytes]:
     ):
         raise MaterializationError(
             "PCTDD g8 requires its sealed source/provider-route successor policy"
+        )
+    if program.store_generation == "pctdd-v1-g9" and not isinstance(
+        config_payload.get("descendant_source_successor_materialization"), Mapping
+    ):
+        raise MaterializationError(
+            "PCTDD g9 requires its sealed descendant-source successor policy"
         )
     if program.quack_endpoint != "quack:127.0.0.1:27278":
         raise MaterializationError("PCTDD materialization requires the sealed Quack endpoint")
@@ -1181,6 +1188,8 @@ def materialize(config_path: Path) -> dict[str, Any]:
     board, config, _config_bytes = _load_board(config_path)
     population = _population(board, config)
     generation = board.resolved_database_program().store_generation
+    if generation == "pctdd-v1-g9":
+        return _migrate_descendant_source(config=config, population=population)
     if generation == "pctdd-v1-g8":
         return _migrate_source_provider_route(config=config, population=population)
     if generation == "pctdd-v1-g7":
@@ -1389,6 +1398,24 @@ def check_sealed(config_path: Path) -> dict[str, Any]:
     board, config, _config_bytes = _load_board(config_path)
     population = _population(board, config)
     generation = board.resolved_database_program().store_generation
+    if generation == "pctdd-v1-g9":
+        migration = _check_descendant_source(
+            config=config,
+            population=population,
+            allow_progressed=True,
+        )
+        if migration.get("valid") is not True:
+            raise MaterializationError(
+                "PCTDD g9 descendant-source successor is not admitted"
+            )
+        return {
+            **migration,
+            "mode": "check-sealed",
+            "operator_controls_sealed": True,
+            "operator_seal_kind": "accepted_descendant_source_successor",
+            "source_head": population["source_head"],
+            "repository_tree_id": population["repository_tree_id"],
+        }
     if generation == "pctdd-v1-g8":
         migration = _check_source_provider_route(
             config=config,
@@ -1831,6 +1858,28 @@ def _source_provider_route_successor_module() -> Any:
     return module
 
 
+def _descendant_source_successor_module() -> Any:
+    """Load the bounded g9 adapter without creating another task authority."""
+
+    path = ROOT / "scripts/pctdd_g9_descendant_source_successor.py"
+    spec = importlib.util.spec_from_file_location(
+        "pctdd_g9_descendant_source_successor", path
+    )
+    if spec is None or spec.loader is None:
+        raise MaterializationError(
+            "cannot load the sealed PCTDD g9 descendant-source successor"
+        )
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as exc:
+        raise MaterializationError(
+            "cannot load PCTDD g9 descendant-source successor: "
+            f"{type(exc).__name__}: {exc}"
+        ) from exc
+    return module
+
+
 def _migrate_source_binding(
     *, config: Mapping[str, Any], population: Mapping[str, Any]
 ) -> dict[str, Any]:
@@ -1913,6 +1962,48 @@ def _check_source_provider_route(
         ) from exc
 
 
+def _migrate_descendant_source(
+    *, config: Mapping[str, Any], population: Mapping[str, Any]
+) -> dict[str, Any]:
+    module = _descendant_source_successor_module()
+    try:
+        return dict(
+            module.migrate_descendant_source(
+                root=ROOT,
+                config=config,
+                population=population,
+            )
+        )
+    except Exception as exc:
+        raise MaterializationError(
+            "PCTDD g9 descendant-source migration refused: "
+            f"{type(exc).__name__}: {exc}"
+        ) from exc
+
+
+def _check_descendant_source(
+    *,
+    config: Mapping[str, Any],
+    population: Mapping[str, Any],
+    allow_progressed: bool,
+) -> dict[str, Any]:
+    module = _descendant_source_successor_module()
+    try:
+        return dict(
+            module.check_descendant_source(
+                root=ROOT,
+                config=config,
+                population=population,
+                allow_progressed=allow_progressed,
+            )
+        )
+    except Exception as exc:
+        raise MaterializationError(
+            "PCTDD g9 descendant-source migration check refused: "
+            f"{type(exc).__name__}: {exc}"
+        ) from exc
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = _arguments(argv)
     try:
@@ -1927,18 +2018,29 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif command in {"migrate-source", "check-source-migration"}:
             board, config, _config_bytes = _load_board(config_path)
             generation = board.resolved_database_program().store_generation
-            if generation not in {"pctdd-v1-g7", "pctdd-v1-g8"}:
+            if generation not in {"pctdd-v1-g7", "pctdd-v1-g8", "pctdd-v1-g9"}:
                 raise MaterializationError(
-                    f"{command} requires the sealed g7 or g8 configuration"
+                    f"{command} requires the sealed g7, g8, or g9 configuration"
                 )
             population = _population(board, config)
-            if command == "migrate-source" and generation == "pctdd-v1-g8":
+            if command == "migrate-source" and generation == "pctdd-v1-g9":
+                result = _migrate_descendant_source(
+                    config=config,
+                    population=population,
+                )
+            elif command == "migrate-source" and generation == "pctdd-v1-g8":
                 result = _migrate_source_provider_route(
                     config=config,
                     population=population,
                 )
             elif command == "migrate-source":
                 result = _migrate_source_binding(config=config, population=population)
+            elif generation == "pctdd-v1-g9":
+                result = _check_descendant_source(
+                    config=config,
+                    population=population,
+                    allow_progressed=False,
+                )
             elif generation == "pctdd-v1-g8":
                 result = _check_source_provider_route(
                     config=config,

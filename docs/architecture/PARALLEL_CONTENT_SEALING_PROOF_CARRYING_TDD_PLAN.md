@@ -54,6 +54,30 @@ ordinary attempt counters. All other blocked/completed/history records remain
 unchanged. Publication again uses a private stage, hash verification,
 no-overwrite links, and a final marker; g7 remains immutable history.
 
+## G9 descendant-source and sealed-board successor
+
+The stopped g8 authority later accumulated three resolved, generated
+reconciliation guardrails (`PCTDD-054` through `PCTDD-056`) in its Markdown
+bootstrap projection even though durable task/history state remained the
+authority. `PCTDD-DESCENDANT-SOURCE-G9` creates
+`pctdd-v1-g9` under `data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g9` from an exactly stopped and fenced
+g8 prefix. The active board is restored to exactly `PCTDD-000` through
+`PCTDD-053`; the exact removed Markdown blocks and discovery evidence are
+archived by hash without deleting their Git or g8 state/event history.
+
+The successor preserves all 54 task CIDs, statuses, revisions, definitions,
+completion receipts, and the complete event prefix. It appends only one
+operator plan revision and one operator evidence node binding the reviewed
+descendant source, current governed gitlinks, archive, and guardrail policy.
+Dependency, retry-budget, and reconciliation task-producing guardrails are
+disabled for this sealed board; their diagnostics remain state/event-only.
+Capture requires no active claim, attempt, lease, listener, or WAL. Publication
+copies only immutable control and coordination histories into a private stage,
+rehashes them, and links the generation marker last. The tracked pending
+package deliberately contains no fabricated stopped-store hashes; an operator
+must first commit this package, stop/fence g8, run the explicit capture pass,
+commit regenerated controls, and only then migrate g9.
+
 Every task names one protected validation profile through a task-bound
 dispatcher. Profiles contain argv arrays only and execute with `shell=False`.
 Prose, shell operators, unresolved aliases, mismatched task IDs, incomplete

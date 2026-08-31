@@ -49,6 +49,9 @@ BOARD_VALIDATOR: Final = (
 MATERIALIZER: Final = (
     ROOT / "scripts" / "materialize_parallel_content_sealing_proof_carrying_tdd_program.py"
 )
+CONTROL_GENERATOR: Final = (
+    ROOT / "scripts" / "generate_parallel_content_sealing_proof_carrying_tdd_controls.py"
+)
 CONFIGURED_SCHEDULER: Final = (
     ACCEL_ROOT / "scripts" / "ops" / "agent_supervisor" / "configured_board_scheduler.py"
 )
@@ -497,6 +500,31 @@ def materialize(config_path: Path) -> dict[str, Any]:
             "stdout": result["stdout"],
             "stderr": result["stderr"],
         },
+    }
+
+
+def capture_g9_inputs() -> dict[str, Any]:
+    """Run the explicit stopped-g8 capture/final-control generation pass."""
+
+    if not CONTROL_GENERATOR.is_file() or CONTROL_GENERATOR.is_symlink():
+        raise OperatorError("missing sealed PCTDD control generator")
+    result = _run(
+        (sys.executable, str(CONTROL_GENERATOR), "--capture-g9-inputs"),
+        timeout=300.0,
+    )
+    _require_success(result, "g9 stopped-predecessor capture")
+    payload = result.get("json")
+    if (
+        not isinstance(payload, Mapping)
+        or payload.get("capture_status") != "sealed_stopped_g8_capture"
+        or payload.get("tasks") != 54
+    ):
+        raise OperatorError("g9 capture returned no sealed 54-task control package")
+    return {
+        "schema": OPERATOR_SCHEMA,
+        "command": "capture-g9-inputs",
+        "ok": True,
+        "capture": dict(payload),
     }
 
 
@@ -1561,6 +1589,10 @@ def _parser() -> argparse.ArgumentParser:
     commands.add_parser("validate", help="run the sealed dependency and board validators")
     commands.add_parser("materialize", help="stage goals/tasks in DuckDB with PCTDD-000 incomplete")
     commands.add_parser(
+        "capture-g9-inputs",
+        help="capture an exactly stopped g8 and regenerate final g9 controls",
+    )
+    commands.add_parser(
         "seal-controls",
         help="run the sealed profile, validators, preflight, and dry-run before completing PCTDD-000",
     )
@@ -1608,6 +1640,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = validate()
         elif arguments.command == "materialize":
             result = materialize(config_path)
+        elif arguments.command == "capture-g9-inputs":
+            result = capture_g9_inputs()
         elif arguments.command == "seal-controls":
             result = seal_controls(config_path)
         elif arguments.command == "preflight":
