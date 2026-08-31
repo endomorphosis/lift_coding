@@ -2,10 +2,10 @@
   "all_governed_sources_clean_and_gitlink_exact": true,
   "branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
   "captured_utc": "2026-08-30T17:02:36Z",
-  "control_generation_input_head": "85aa9bad12e04e97537c4dcbad2eb89941eaa431",
-  "control_generation_input_tree": "5907232e5768dab9d8483c37720165e6b40193ff",
+  "control_generation_input_head": "9eec0a6d3dd5c0915b85080623c958563d422e3a",
+  "control_generation_input_tree": "97c1546dd5f879dddaedfe8ab6174bf752a54c7f",
   "dirty_user_tree_preserved": true,
-  "evidence_note": "The accepted 85aa stopped-g7 source anchor and current exact governed gitlinks seed the g8 provider-route migration; the marker binds the eventual clean successor HEAD/tree without rewriting accepted completions.",
+  "evidence_note": "The reviewed 9eec g8 descendant-source anchor and exact governed gitlinks seed the pending g9 package; only the final clean-source marker-last receipt admits migration without rewriting accepted task or completion history.",
   "original_user_tree_evidence": {
     "accelerate_status_sha256": "c261a97a9d4d91da96af386077e5cdf9c1532273614a73911d8c07a063913798",
     "captured_utc": "2026-08-28",
@@ -14,32 +14,32 @@
     "root_status_sha256": "f0a737302e4455c55e60edc28403da4f339e9b64811cc0b0dcf0c87e2d9629b3",
     "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac"
   },
-  "planning_root": "/home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1",
+  "planning_root": "/home/barberb/lift_coding/.worktrees/pctdd-g9-descendant-source",
   "schema": "pctdd/repository-baseline@3",
   "sources": [
     {
       "authority": true,
       "dirty": false,
-      "gitlink": "48186e502147bbd0f26f9dc992dd89a83e7667fc",
+      "gitlink": "697054c82e5099f479e69f071fba67b6701bb760",
       "gitlink_matches_nested_head": true,
-      "head": "48186e502147bbd0f26f9dc992dd89a83e7667fc",
+      "head": "697054c82e5099f479e69f071fba67b6701bb760",
       "name": "ipfs_accelerate_py",
-      "origin": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
       "path": "external/ipfs_accelerate",
       "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "tree": "1546918a1e84ed8293f50313bd88e853bd57d8cc"
+      "tree": "717678825fbc47468acf40c81817ca69e09345ef"
     },
     {
       "authority": true,
       "dirty": false,
-      "gitlink": "805bb3617e2f2baa980c84d563388f6afb86659f",
+      "gitlink": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
       "gitlink_matches_nested_head": true,
-      "head": "805bb3617e2f2baa980c84d563388f6afb86659f",
+      "head": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
       "name": "ipfs_datasets_py",
-      "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
       "path": "external/ipfs_datasets",
       "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "tree": "8013c6b4fc49b2246db360c82368b3962a653633"
+      "tree": "ef4aebe3b1d7e39429c7fb71fd8add4de5afa21a"
     },
     {
       "authority": true,
@@ -48,7 +48,7 @@
       "gitlink_matches_nested_head": true,
       "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
       "name": "ipfs_kit_py",
-      "origin": "/home/barberb/lift_coding/external/ipfs_kit",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py",
       "path": "external/ipfs_kit",
       "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "tree": "93070c709af29095fdff11f3e2698543449c08ef"

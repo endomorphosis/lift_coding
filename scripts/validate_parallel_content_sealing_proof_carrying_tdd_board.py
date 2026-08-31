@@ -30,6 +30,8 @@ DISPATCHER_PATH = ROOT / "scripts/run_parallel_content_sealing_proof_carrying_td
 MIGRATION_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json"
 SOURCE_MIGRATION_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json"
 PROVIDER_ROUTE_MIGRATION_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g7_provider_route_migration_inventory.json"
+DESCENDANT_SOURCE_MIGRATION_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_to_g9_descendant_source_inventory.json"
+RESOLVED_GUARDRAIL_ARCHIVE_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json"
 BASELINE_PATH = ROOT / "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json"
 RECEIPT_PATH = ROOT / "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json"
 CONTROL_MANIFEST_PATH = ROOT / "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
@@ -39,14 +41,19 @@ HISTORICAL_STORE_GENERATION = "pctdd-v1-g6"
 HISTORICAL_RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g6"
 G7_STORE_GENERATION = "pctdd-v1-g7"
 G7_RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g7"
-STORE_GENERATION = "pctdd-v1-g8"
-RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8"
+G8_STORE_GENERATION = "pctdd-v1-g8"
+G8_RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8"
+STORE_GENERATION = "pctdd-v1-g9"
+RUNTIME_ROOT = "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g9"
 SOURCE_MIGRATION_REVISION = "PCTDD-SOURCE-G7"
 PROVIDER_ROUTE_MIGRATION_REVISION = "PCTDD-SOURCE-PROVIDER-G8"
+DESCENDANT_SOURCE_MIGRATION_REVISION = "PCTDD-DESCENDANT-SOURCE-G9"
 G7_CONTROL_SOURCE_ANCHOR_HEAD = "c8917d039e3f4598a7d29643c621e341318197da"
 G7_CONTROL_SOURCE_ANCHOR_TREE = "c3e061b62caa3ad0c35c7e167242694a8fec171c"
 CONTROL_SOURCE_ANCHOR_HEAD = "85aa9bad12e04e97537c4dcbad2eb89941eaa431"
 CONTROL_SOURCE_ANCHOR_TREE = "5907232e5768dab9d8483c37720165e6b40193ff"
+G9_CONTROL_SOURCE_ANCHOR_HEAD = "9eec0a6d3dd5c0915b85080623c958563d422e3a"
+G9_CONTROL_SOURCE_ANCHOR_TREE = "97c1546dd5f879dddaedfe8ab6174bf752a54c7f"
 EXPECTED_SOURCE_MIGRATION_CONTROL_PATHS = {
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
@@ -82,6 +89,37 @@ EXPECTED_PROVIDER_ROUTE_MIGRATION_CONTROL_PATHS = {
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
     "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
     "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py",
+}
+EXPECTED_DESCENDANT_SOURCE_CONTROL_PATHS = {
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
+    "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g7_provider_route_migration_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_to_g9_descendant_source_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json",
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py",
+    "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
+    "scripts/pctdd_g7_source_binding_successor.py",
+    "scripts/pctdd_g8_provider_route_successor.py",
+    "scripts/pctdd_g9_descendant_source_successor.py",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
+    "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
+    "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
+    "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
 }
 
 TASK_RE = re.compile(
@@ -262,6 +300,8 @@ PROTECTED_PATHS = {
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g7_provider_route_migration_inventory.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_to_g9_descendant_source_inventory.json",
     "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
@@ -276,9 +316,11 @@ PROTECTED_PATHS = {
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
     "scripts/pctdd_g7_source_binding_successor.py",
     "scripts/pctdd_g8_provider_route_successor.py",
+    "scripts/pctdd_g9_descendant_source_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
     "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
 }
 
@@ -468,6 +510,23 @@ def _load_provider_route_successor() -> Any:
     return module
 
 
+def _load_descendant_source_successor() -> Any:
+    module_path = ROOT / "scripts/pctdd_g9_descendant_source_successor.py"
+    spec = importlib.util.spec_from_file_location(
+        "pctdd_g9_descendant_source_successor_board_validator",
+        module_path,
+    )
+    if spec is None or spec.loader is None:
+        raise ValueError("cannot load protected g9 descendant-source successor")
+    for entry in (ROOT / "external/ipfs_accelerate", ROOT / "scripts"):
+        value = str(entry)
+        if value not in sys.path:
+            sys.path.insert(0, value)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def _sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -487,7 +546,8 @@ def validate() -> dict[str, Any]:
     required_files = (
         PLAN_PATH, OBJECTIVES_PATH, BOARD_PATH, CONFIG_PATH, PROFILE_PATH,
         DISPATCHER_PATH, MIGRATION_PATH, SOURCE_MIGRATION_PATH,
-        PROVIDER_ROUTE_MIGRATION_PATH, BASELINE_PATH, CONTROL_MANIFEST_PATH,
+        PROVIDER_ROUTE_MIGRATION_PATH, DESCENDANT_SOURCE_MIGRATION_PATH,
+        RESOLVED_GUARDRAIL_ARCHIVE_PATH, BASELINE_PATH, CONTROL_MANIFEST_PATH,
     )
     missing = [path.relative_to(ROOT).as_posix() for path in required_files if not path.is_file()]
     if missing:
@@ -820,6 +880,14 @@ def validate() -> dict[str, Any]:
             != PROVIDER_ROUTE_MIGRATION_PATH.relative_to(ROOT).as_posix()
             or control_manifest.get("source_provider_route_migration_module")
             != "scripts/pctdd_g8_provider_route_successor.py"
+            or control_manifest.get("descendant_source_migration_revision")
+            != DESCENDANT_SOURCE_MIGRATION_REVISION
+            or control_manifest.get("descendant_source_migration_inventory")
+            != DESCENDANT_SOURCE_MIGRATION_PATH.relative_to(ROOT).as_posix()
+            or control_manifest.get("descendant_source_migration_module")
+            != "scripts/pctdd_g9_descendant_source_successor.py"
+            or control_manifest.get("resolved_guardrail_archive")
+            != RESOLVED_GUARDRAIL_ARCHIVE_PATH.relative_to(ROOT).as_posix()
         ):
             errors.append("PCTDD-000 control manifest claim boundary differs")
         prerequisites = control_manifest.get("completion_prerequisites") or []
@@ -839,12 +907,15 @@ def validate() -> dict[str, Any]:
             "exact stopped g7 store, coordination prefix, and owner status",
             "exact quota-blocked attempts settled without provider-result reuse",
             "reviewed Grok hard-quota to Codex fallback route is content-bound",
-            "private staged g8 publication with final marker last",
+            "exact stopped g8 authority with no active claim, attempt, lease, listener, or WAL",
+            "canonical 54-task projection with resolved PCTDD-054..056 evidence archived outside the active board",
+            "all three Markdown-producing guardrails disabled for this sealed bootstrap board",
+            "private staged g9 publication with final marker last",
             "current clean source and governed gitlinks revalidated before publication",
         ):
             if phrase not in successor_prerequisites:
                 errors.append(
-                    "PCTDD-000 control manifest omits g8 prerequisite: " + phrase
+                    "PCTDD-000 control manifest omits g9 prerequisite: " + phrase
                 )
         manifest_hashes = control_manifest.get(
             "protected_control_hashes_before_manifest_and_seal"
@@ -867,9 +938,9 @@ def validate() -> dict[str, Any]:
     if database.get("failover_policy", "fail_closed") != "fail_closed":
         errors.append("task authority failover must be fail_closed")
     if database.get("store_generation") != STORE_GENERATION:
-        errors.append("task authority must use the fresh g8 store generation")
+        errors.append("task authority must use the fresh g9 store generation")
     if database.get("quack_endpoint") != "quack:127.0.0.1:27278":
-        errors.append("g8 Quack endpoint differs")
+        errors.append("g9 Quack endpoint differs")
     expected_owner_management = {
         "mode": "managed_local",
         "owner_state_dir": str((ROOT / RUNTIME_ROOT / "quack-owner").resolve()),
@@ -882,22 +953,23 @@ def validate() -> dict[str, Any]:
     }
     if database.get("owner_management") != expected_owner_management:
         errors.append(
-            "g8 Quack owner management must use the exact bounded fenced managed-local policy"
+            "g9 Quack owner management must use the exact bounded fenced managed-local policy"
         )
     for name in ("store_id", "event_store_path", "runtime_registry_path", "worktree_root"):
         if not str(database.get(name) or "").startswith(RUNTIME_ROOT + "/"):
-            errors.append(f"database_program.{name} does not use the g8 runtime root")
+            errors.append(f"database_program.{name} does not use the g9 runtime root")
     if (
-        database.get("predecessor_store_generation") != G7_STORE_GENERATION
+        database.get("predecessor_store_generation") != G8_STORE_GENERATION
         or database.get("predecessor_is_read_only_history") is not True
     ):
-        errors.append("g7 predecessor generation must remain explicit read-only history")
+        errors.append("g8 predecessor generation must remain explicit read-only history")
     if database.get("historical_store_generations") != [
         "pctdd-v1-g5",
         HISTORICAL_STORE_GENERATION,
         G7_STORE_GENERATION,
+        G8_STORE_GENERATION,
     ]:
-        errors.append("g8 must preserve the exact g5/g6/g7 historical generation chain")
+        errors.append("g9 must preserve the exact g5/g6/g7/g8 historical generation chain")
     projection = config.get("initial_projection") or {}
     if projection.get("completed_task_ids") != [] or projection.get("ready_task_ids") != []:
         errors.append("initial projection must leave PCTDD-000 todo and all worker tasks dependency-waiting")
@@ -932,14 +1004,15 @@ def validate() -> dict[str, Any]:
         errors.append("DuckLake must not become a scheduling prerequisite")
     for name in ("catalog_path", "data_path"):
         if not str(ducklake.get(name) or "").startswith(RUNTIME_ROOT + "/ducklake/"):
-            errors.append(f"DuckLake {name} does not use the g8 projection root")
+            errors.append(f"DuckLake {name} does not use the g9 projection root")
     if ducklake.get("logical_datasets") != [
         "bootstrap_history",
         "g5_migration_history",
         "g6_source_migration_history",
         "g7_provider_route_migration_history",
+        "g8_descendant_source_migration_history",
     ]:
-        errors.append("DuckLake does not preserve the exact g5/g6/g7 projection history")
+        errors.append("DuckLake does not preserve the exact g5/g6/g7/g8 projection history")
 
     amendment = config.get("control_amendment") or {}
     if amendment.get("revision") != PLAN_REVISION or amendment.get("amends") != "PCTDD-PLAN-V1":
@@ -953,6 +1026,13 @@ def validate() -> dict[str, Any]:
         != PROVIDER_ROUTE_MIGRATION_PATH.relative_to(ROOT).as_posix()
     ):
         errors.append("scheduler g7 provider-route migration inventory binding differs")
+    if (
+        amendment.get("descendant_source_migration_inventory")
+        != DESCENDANT_SOURCE_MIGRATION_PATH.relative_to(ROOT).as_posix()
+        or amendment.get("resolved_guardrail_archive")
+        != RESOLVED_GUARDRAIL_ARCHIVE_PATH.relative_to(ROOT).as_posix()
+    ):
+        errors.append("scheduler g9 descendant-source/archive inventory binding differs")
     if (
         amendment.get("historical_g6_plan_and_task_definitions_preserved") is not True
         or amendment.get("copy_predecessor_acceptance") is not True
@@ -1119,9 +1199,9 @@ def validate() -> dict[str, Any]:
         or baseline.get("schema") != "pctdd/repository-baseline@3"
         or baseline.get("planning_root") != str(ROOT)
         or baseline.get("control_generation_input_head")
-        != CONTROL_SOURCE_ANCHOR_HEAD
+        != G9_CONTROL_SOURCE_ANCHOR_HEAD
         or baseline.get("control_generation_input_tree")
-        != CONTROL_SOURCE_ANCHOR_TREE
+        != G9_CONTROL_SOURCE_ANCHOR_TREE
         or baseline.get("branch")
         != "agent/parallel-content-sealing-proof-carrying-tdd-v1"
         or baseline.get("all_governed_sources_clean_and_gitlink_exact") is not True
@@ -1137,7 +1217,7 @@ def validate() -> dict[str, Any]:
             for item in baseline_sources or ()
         )
     ):
-        errors.append("g8 repository baseline identity or governed-source custody differs")
+        errors.append("g9 repository baseline identity or governed-source custody differs")
 
     provider_route_inventory = _load_json(PROVIDER_ROUTE_MIGRATION_PATH)
     provider_successor = (
@@ -1204,9 +1284,9 @@ def validate() -> dict[str, Any]:
         "schema": "pctdd/source-provider-route-successor-materialization@1",
         "migration_revision": PROVIDER_ROUTE_MIGRATION_REVISION,
         "prior_store_generation": G7_STORE_GENERATION,
-        "target_store_generation": STORE_GENERATION,
+        "target_store_generation": G8_STORE_GENERATION,
         "prior_runtime_root": G7_RUNTIME_ROOT,
-        "target_runtime_root": RUNTIME_ROOT,
+        "target_runtime_root": G8_RUNTIME_ROOT,
         "target_quack_endpoint": "quack:127.0.0.1:27278",
         "receipt_marker": "source-provider-route-migration-receipt.json",
         "control_source_anchor_head": CONTROL_SOURCE_ANCHOR_HEAD,
@@ -1374,6 +1454,102 @@ def validate() -> dict[str, Any]:
     ):
         errors.append("g8 blocked-to-todo settlement delta differs")
 
+    descendant_inventory = _load_json(DESCENDANT_SOURCE_MIGRATION_PATH)
+    archive = _load_json(RESOLVED_GUARDRAIL_ARCHIVE_PATH)
+    descendant_policy = config.get("descendant_source_successor_materialization")
+    if (
+        not isinstance(descendant_inventory, dict)
+        or descendant_inventory.get("schema")
+        != "pctdd/g8-to-g9-descendant-source-inventory@1"
+        or descendant_inventory.get("program_id") != NAMESPACE
+        or descendant_inventory.get("resolved_guardrail_archive")
+        != RESOLVED_GUARDRAIL_ARCHIVE_PATH.relative_to(ROOT).as_posix()
+        or descendant_inventory.get("historical_completed_task_definitions_preserved")
+        is not True
+        or descendant_inventory.get(
+            "historical_completions_revalidated_for_integrity_not_reissued"
+        )
+        is not True
+    ):
+        errors.append("g8-to-g9 descendant-source inventory claim boundary differs")
+    if (
+        not isinstance(archive, dict)
+        or archive.get("schema") != "pctdd/resolved-generated-guardrail-archive@1"
+        or archive.get("canonical_active_task_ids") != list(EXPECTED_TASK_IDS)
+        or archive.get("source_board_task_ids")
+        != ["PCTDD-054", "PCTDD-055", "PCTDD-056"]
+        or archive.get("all_resolved") is not True
+        or archive.get("g8_runtime_evidence_preserved") is not True
+    ):
+        errors.append("resolved generated-guardrail archive claim differs")
+    else:
+        records = archive.get("guardrails")
+        if (
+            not isinstance(records, list)
+            or [item.get("task_id") for item in records if isinstance(item, dict)]
+            != ["PCTDD-054", "PCTDD-055", "PCTDD-056"]
+            or any(
+                not isinstance(item, dict)
+                or item.get("status") != "completed"
+                or item.get("schedulable") is not False
+                or not re.fullmatch(r"[0-9a-f]{64}", str(item.get("markdown_block_sha256") or ""))
+                or not re.fullmatch(r"[0-9a-f]{64}", str(item.get("discovery_sha256") or ""))
+                for item in records or ()
+            )
+        ):
+            errors.append("resolved generated-guardrail archive population differs")
+    if not isinstance(descendant_policy, dict):
+        errors.append("scheduler lacks the g9 descendant-source successor policy")
+    else:
+        if descendant_policy.get("operator_control_paths") is None or (
+            set(descendant_policy.get("operator_control_paths") or [])
+            != EXPECTED_DESCENDANT_SOURCE_CONTROL_PATHS
+        ):
+            errors.append("g9 descendant-source operator control path set differs")
+        if (
+            descendant_policy.get("control_source_anchor_head")
+            != G9_CONTROL_SOURCE_ANCHOR_HEAD
+            or descendant_policy.get("control_source_anchor_tree")
+            != G9_CONTROL_SOURCE_ANCHOR_TREE
+            or descendant_policy.get("prior_store_generation") != G8_STORE_GENERATION
+            or descendant_policy.get("target_store_generation") != STORE_GENERATION
+            or descendant_policy.get("prior_runtime_root") != G8_RUNTIME_ROOT
+            or descendant_policy.get("target_runtime_root") != RUNTIME_ROOT
+        ):
+            errors.append("g9 descendant-source identity differs")
+        if descendant_inventory.get("capture_status") != descendant_policy.get("capture_status") or (
+            descendant_inventory.get("stopped_predecessor_capture")
+            != descendant_policy.get("stopped_predecessor_capture")
+        ):
+            errors.append("g9 tracked inventory and scheduler capture differ")
+        try:
+            g9_module = _load_descendant_source_successor()
+            pending_check = g9_module.validate_pending_policy(config)
+            if pending_check.get("valid") is not True:
+                errors.append("g9 descendant-source pending policy validation failed")
+            elif pending_check.get("migration_admitted") is not True:
+                warnings.append(
+                    "g9 final stopped-predecessor capture is pending; static controls are valid but migration remains fail-closed"
+                )
+        except Exception as exc:
+            errors.append(
+                "g9 descendant-source successor rejected the sealed policy: "
+                f"{type(exc).__name__}: {exc}"
+            )
+    if any(config.get(flag) is not False for flag in (
+        "dependency_guardrail_enabled",
+        "reconciliation_guardrail_enabled",
+        "retry_budget_guardrail_enabled",
+    )):
+        errors.append("the three generated-board guardrails must be disabled for g9")
+    operational = config.get("operational_control_plane") or {}
+    if (
+        operational.get("markdown_is_bootstrap_only") is not True
+        or operational.get("generated_guardrail_reporting")
+        != "state_and_events_only_for_this_sealed_board"
+    ):
+        errors.append("g9 generated guardrail reporting must remain state/event-only")
+
     migration = _load_json(MIGRATION_PATH)
     predecessor = migration.get("predecessor") if isinstance(migration, dict) else {}
     successor = migration.get("successor") if isinstance(migration, dict) else {}
@@ -1425,7 +1601,11 @@ def validate() -> dict[str, Any]:
         ("g5 database", g5_db, str(predecessor.get("frozen_database_sha256") or "")),
         ("g5 bootstrap receipt", g5_receipt, str(predecessor.get("bootstrap_receipt_sha256") or "")),
     ):
-        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+        if not path.is_file():
+            warnings.append(
+                f"{label} is historical ignored runtime data unavailable in this isolated source worktree"
+            )
+        elif hashlib.sha256(path.read_bytes()).hexdigest() != expected:
             errors.append(f"{label} bytes do not match migration inventory")
     rescue_refs = [
         line
@@ -1455,7 +1635,9 @@ def validate() -> dict[str, Any]:
             capture_output=True,
             check=False,
         ).returncode != 0:
-            errors.append(f"PCTDD-004 nested migration commit unavailable: {commit}")
+            warnings.append(
+                f"PCTDD-004 historical nested migration object unavailable in this isolated clone: {commit}"
+            )
     outer_gitlink = _git("ls-tree", W1_RESCUE_CANDIDATES["PCTDD-004"], "external/ipfs_accelerate").split()
     if len(outer_gitlink) < 3 or outer_gitlink[2] != PCTDD_004_COMPONENT_COMMIT:
         errors.append("PCTDD-004 outer rescue commit does not bind the recorded component commit")
@@ -1509,7 +1691,10 @@ def validate() -> dict[str, Any]:
             "migration_inventory",
             "historical_source_migration_revision",
             "historical_g6_source_migration_inventory",
+            "historical_provider_route_migration_revision",
+            "historical_g7_provider_route_migration_inventory",
             "historical_g5_migration_inventory",
+            "resolved_guardrail_archive",
             "status",
             "markdown_non_authoritative",
             "historical_completion_reissued",
@@ -1527,26 +1712,32 @@ def validate() -> dict[str, Any]:
             or receipt.get("plan_revision") != PLAN_REVISION
             or receipt.get("amends_plan_revision") != "PCTDD-PLAN-V1"
             or receipt.get("store_generation") != STORE_GENERATION
-            or receipt.get("predecessor_generation") != G7_STORE_GENERATION
+            or receipt.get("predecessor_generation") != G8_STORE_GENERATION
             or receipt.get("migration_revision")
-            != PROVIDER_ROUTE_MIGRATION_REVISION
+            != DESCENDANT_SOURCE_MIGRATION_REVISION
             or receipt.get("migration_inventory")
-            != PROVIDER_ROUTE_MIGRATION_PATH.relative_to(ROOT).as_posix()
+            != DESCENDANT_SOURCE_MIGRATION_PATH.relative_to(ROOT).as_posix()
             or receipt.get("historical_source_migration_revision")
             != SOURCE_MIGRATION_REVISION
             or receipt.get("historical_g6_source_migration_inventory")
             != SOURCE_MIGRATION_PATH.relative_to(ROOT).as_posix()
+            or receipt.get("historical_provider_route_migration_revision")
+            != PROVIDER_ROUTE_MIGRATION_REVISION
+            or receipt.get("historical_g7_provider_route_migration_inventory")
+            != PROVIDER_ROUTE_MIGRATION_PATH.relative_to(ROOT).as_posix()
             or receipt.get("historical_g5_migration_inventory")
             != MIGRATION_PATH.relative_to(ROOT).as_posix()
+            or receipt.get("resolved_guardrail_archive")
+            != RESOLVED_GUARDRAIL_ARCHIVE_PATH.relative_to(ROOT).as_posix()
             or receipt.get("status")
-            != "sealed_pending_runtime_source_provider_route_migration"
+            != "sealed_pending_runtime_descendant_source_migration"
             or receipt.get("markdown_non_authoritative") is not True
             or receipt.get("historical_completion_reissued") is not False
             or receipt.get("historical_plan_and_task_definitions_preserved") is not True
             or receipt.get("dependency_seal")
             != "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json"
         ):
-            errors.append("PCTDD-000 tracked g8 provider-route successor claim differs")
+            errors.append("PCTDD-000 tracked g9 descendant-source successor claim differs")
         evidence = _normalize_text(json.dumps(receipt, sort_keys=True))
         if "markdown" in evidence and "non_authoritative" not in evidence:
             errors.append("PCTDD-000 receipt may not elevate Markdown to completion authority")

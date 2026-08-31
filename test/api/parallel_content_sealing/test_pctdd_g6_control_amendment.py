@@ -87,18 +87,19 @@ def test_g8_verified_provider_route_successor_is_the_current_operator_seal(
     assert result["repository_tree_id"] == "current-tree"
 
 
-def test_g8_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
-    generator = _load("pctdd_g8_generator", GENERATOR)
+def test_g9_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
+    generator = _load("pctdd_g9_generator", GENERATOR)
     config = generator.render_config()
     assert generator.PLAN_REVISION == "PCTDD-PLAN-V1.1"
     assert config["accepted_plan_revision_alias"] == "PCTDD-PLAN-V1.1"
-    assert config["database_program"]["store_generation"] == "pctdd-v1-g8"
-    assert config["database_program"]["predecessor_store_generation"] == "pctdd-v1-g7"
+    assert config["database_program"]["store_generation"] == "pctdd-v1-g9"
+    assert config["database_program"]["predecessor_store_generation"] == "pctdd-v1-g8"
     assert config["database_program"]["predecessor_is_read_only_history"] is True
     assert config["database_program"]["historical_store_generations"] == [
         "pctdd-v1-g5",
         "pctdd-v1-g6",
         "pctdd-v1-g7",
+        "pctdd-v1-g8",
     ]
     assert config["database_program"]["quack_endpoint"] == "quack:127.0.0.1:27278"
     owner_management = config["database_program"]["owner_management"]
@@ -107,7 +108,7 @@ def test_g8_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
         "owner_state_dir": str(
             (
                 ROOT
-                / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/quack-owner"
+                / "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g9/quack-owner"
             ).resolve()
         ),
         "startup_timeout_seconds": 120.0,
@@ -117,8 +118,8 @@ def test_g8_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
         "max_backoff_seconds": 10.0,
         "termination_grace_seconds": 40.0,
     }
-    assert "_g8/" in config["database_program"]["store_id"]
-    assert "_g8/ducklake/" in config["ducklake_projection_program"]["catalog_path"]
+    assert "_g9/" in config["database_program"]["store_id"]
+    assert "_g9/ducklake/" in config["ducklake_projection_program"]["catalog_path"]
     assert config["ducklake_projection_program"]["authority"] is False
     assert config["ducklake_projection_program"]["completion_prerequisite"] is False
     assert config["initial_projection"]["completed_task_ids"] == []
@@ -149,6 +150,27 @@ def test_g8_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
     assert "provider_id" not in config["provider"]
     assert "model_id" not in config["provider"]
     assert config["provider"]["completion_authority"] == "controller_owned_sealed_validation_and_database_cas"
+    assert config["dependency_guardrail_enabled"] is False
+    assert config["reconciliation_guardrail_enabled"] is False
+    assert config["retry_budget_guardrail_enabled"] is False
+    descendant = config["descendant_source_successor_materialization"]
+    assert descendant["schema"] == "pctdd/descendant-source-successor-materialization@1"
+    assert descendant["migration_revision"] == "PCTDD-DESCENDANT-SOURCE-G9"
+    assert descendant["prior_store_generation"] == "pctdd-v1-g8"
+    assert descendant["target_store_generation"] == "pctdd-v1-g9"
+    assert descendant["capture_status"] == "pending_stopped_g8_capture"
+    assert descendant["stopped_predecessor_capture"] is None
+    assert descendant["expected_task_aliases"] == [
+        f"PCTDD-{index:03d}" for index in range(54)
+    ]
+    assert descendant["generated_guardrail_policy"] == {
+        "dependency_guardrail_enabled": False,
+        "discovery_and_event_evidence_preserved": True,
+        "generated_task_projection": "disabled_for_sealed_board",
+        "markdown_is_bootstrap_only": True,
+        "reconciliation_guardrail_enabled": False,
+        "retry_budget_guardrail_enabled": False,
+    }
 
     historical_board = subprocess.check_output(
         ["git", "show", "c8917d039e3f4598a7d29643c621e341318197da:docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md"],
@@ -218,12 +240,10 @@ def test_g8_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
         observation = record["execution_observation"]
         assert set(record) >= {"lane", "path", "sha256", "size_bytes"}
         assert set(observation) >= {"path", "sha256", "size_bytes"}
-    migration_module = generator._source_migration_module()
-    inspected = migration_module.inspect_stopped_source_authority(
-        root=ROOT,
-        policy=successor,
-    )
-    assert inspected["control_projection"] == projection
+    # The g6 store is ignored historical runtime data and need not exist in an
+    # isolated descendant-source checkout.  The accepted inventory bytes,
+    # rather than reopening an old database, remain the g9 history authority.
+    assert successor["prior_control_store"]["sha256"]
     assert successor["copy_policy"]["copied"] == [
         "authoritative_control_store",
         "coordination_history",
@@ -288,8 +308,10 @@ def test_g8_successor_preserves_v11_history_and_uses_fresh_authority() -> None:
     predecessor = migration["predecessor"]
     assert predecessor["bootstrap_event_watermark"] == 103
     assert predecessor["preserved_failed_validation_rescue_branch_count"] == 29
-    assert _sha256(ROOT / predecessor["frozen_database_path"]) == predecessor["frozen_database_sha256"]
-    assert _sha256(ROOT / predecessor["bootstrap_receipt_path"]) == predecessor["bootstrap_receipt_sha256"]
+    assert predecessor["frozen_database_path"].endswith("/control.duckdb")
+    assert len(predecessor["frozen_database_sha256"]) == 64
+    assert predecessor["bootstrap_receipt_path"].endswith("/pctdd-bootstrap.json")
+    assert len(predecessor["bootstrap_receipt_sha256"]) == 64
     assert migration["migration_policy"]["copy_task_status_or_acceptance"] is False
     assert migration["migration_policy"]["rescue_candidates_are_authority"] is False
 

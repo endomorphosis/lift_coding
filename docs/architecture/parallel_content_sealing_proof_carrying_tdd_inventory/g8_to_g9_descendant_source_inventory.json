@@ -1,0 +1,12 @@
+{
+  "capture_status": "pending_stopped_g8_capture",
+  "final_capture_command": "python scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py --capture-g9-inputs",
+  "historical_completed_task_definitions_preserved": true,
+  "historical_completions_revalidated_for_integrity_not_reissued": true,
+  "migration_admitted": false,
+  "operator_note": "This tracked pre-capture inventory deliberately contains no live g8 database, owner, coordination, or generation-receipt hashes. Stop and fence g8, capture exact anchors, regenerate controls, commit the final clean descendant source, then migrate g9.",
+  "program_id": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "resolved_guardrail_archive": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json",
+  "schema": "pctdd/g8-to-g9-descendant-source-inventory@1",
+  "stopped_predecessor_capture": null
+}
