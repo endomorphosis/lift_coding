@@ -1,0 +1,579 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-002",
+  "title": "Freeze canonical supervisor contracts or issue non-promotion",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G130",
+  "objective_id": "PCPR-002",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-002@current-head-canonical-supervisor-contract-freeze-v1",
+  "observed_at": "2026-08-31T15:14:31Z",
+  "depends_on": [
+    "PCPR-001"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-0 canonical supervisor-contract freeze or honest non-promotion only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/canonical_supervisor_contract_freeze.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_canonical_supervisor_contract_freeze.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add CanonicalSupervisorContractFreeze@1 to freeze the public objective, task, event, ContextPack, state-machine, and receipt contracts only after live PCPR-001 supervisor_promoted qualification, measured normative surface identities, and a live competing-authority prohibition. Current-head PCPR-001 is rnd_non_promoted with unavailable live cohort and efficiency targets, so this evaluator issues rnd_non_promoted / supervisor_non_promoted and does not freeze. Placeholder schemas, hermetic or simulated qualification, operator override, and an unavailable PCPR-003 inventory cannot mint a freeze. The evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome. Shared-contract stabilization remains PCPR-040."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "fc16befc27c73b47d1d84a2a905fad5b3d987bb6",
+    "outer_tree": "ad536682d2404300da82dfc852a0ba3d78b23ab0",
+    "outer_subject": "Merge commit '975361ed9a7ee70838283bd320bbb8f7ca98cfe8' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "9a9fbfd89ffb32229e90254e0ff40f684446642a",
+    "accelerator_pre_change_tree": "e1dc0f9002237d04f7b212f5c6ec72c3c8702b29",
+    "accelerator_gitlink": "9a9fbfd89ffb32229e90254e0ff40f684446642a",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+    "datasets_gitlink": "f49afc579c22856849ca9f739435e5820003384f",
+    "kit_commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+    "kit_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/canonical_supervisor_contract_freeze.py",
+      "interface": "CanonicalSupervisorContractFreeze@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/canonical-supervisor-contract-freeze@1",
+      "sha256": "77da82e98d7370c6ad130cf68ab7843a9688ea180bd7dd4ff86bf8d2db949936",
+      "bytes": 56596,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_canonical_supervisor_contract_freeze.py",
+      "sha256": "da97501f16dc03d3f16d59d39631caaab0e4bdb7399af2a5d5cd71cbe3b77de7",
+      "bytes": 30464,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/canonical-supervisor-contract-freeze-verdict@1",
+    "interface": "CanonicalSupervisorContractFreeze@1",
+    "verdict_cid": "baguqeerawqleelwwzlntopi6xiuhuqzg2l7c555nbmppi7nmf2w2adpxg6qa",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "competing_authorities_prohibited_by_freeze": false,
+    "continuation_requires_bounded_operator_approval": true,
+    "duckdb_or_quack_state_written": false,
+    "freeze_refused_reason_count": 15,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-001",
+    "goal_id": "PCPR-G120",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "live_campaign_identity": "",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "missed_live_cohort_count": 13,
+    "missed_target_count": 10,
+    "reason": "PCPR-001 current-head qualification is rnd_non_promoted because the required live cohort and efficiency targets remain typed unavailable.",
+    "evidence_kind": "measured"
+  },
+  "public_surfaces": {
+    "frozen": false,
+    "required_surfaces": [
+      "objective",
+      "task",
+      "event",
+      "contextpack",
+      "state_machine",
+      "receipt"
+    ],
+    "catalog": [
+      {
+        "surface": "objective",
+        "contract_name": "SupervisorObjectiveIntent",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "frozen": false,
+        "freeze_eligible": false,
+        "blockers": [
+          "objective:not_measured_live",
+          "objective:not_yet_normative"
+        ],
+        "reason": "Observed from the PCPR-000 contract catalog. Schema is a baseline identity, not a freeze, and not PCPR-040 stabilization.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "surface": "task",
+        "contract_name": "TaskStateTransition",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "frozen": false,
+        "freeze_eligible": false,
+        "blockers": [
+          "task:not_measured_live",
+          "task:not_yet_normative"
+        ],
+        "reason": "Observed from the PCPR-000 contract catalog. Schema is a baseline identity, not a freeze, and not PCPR-040 stabilization.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "surface": "event",
+        "contract_name": "SupervisorEvent",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "frozen": false,
+        "freeze_eligible": false,
+        "blockers": [
+          "event:not_measured_live",
+          "event:not_yet_normative"
+        ],
+        "reason": "Observed from the PCPR-000 contract catalog. Schema is a baseline identity, not a freeze, and not PCPR-040 stabilization.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "surface": "contextpack",
+        "contract_name": "SupervisorContextPack",
+        "schema": "ipfs_datasets_py.proof_context.context_pack",
+        "authority": "ipfs_datasets_py",
+        "evidence_kind": "measured",
+        "frozen": false,
+        "freeze_eligible": false,
+        "blockers": [
+          "contextpack:not_measured_live"
+        ],
+        "reason": "Observed from the PCPR-000 contract catalog. Schema is a baseline identity, not a freeze, and not PCPR-040 stabilization.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "surface": "state_machine",
+        "contract_name": "TaskStateTransition",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "frozen": false,
+        "freeze_eligible": false,
+        "blockers": [
+          "state_machine:not_measured_live",
+          "state_machine:not_yet_normative"
+        ],
+        "reason": "Observed from the PCPR-000 contract catalog. Schema is a baseline identity, not a freeze, and not PCPR-040 stabilization.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "surface": "receipt",
+        "contract_name": "ObjectiveMaterializationReceipt",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "frozen": false,
+        "freeze_eligible": false,
+        "blockers": [
+          "receipt:not_measured_live",
+          "receipt:not_yet_normative"
+        ],
+        "reason": "Observed from the PCPR-000 contract catalog. Schema is a baseline identity, not a freeze, and not PCPR-040 stabilization.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      }
+    ],
+    "all_surfaces_freeze_eligible": false,
+    "evidence_kind": "measured"
+  },
+  "shared_contracts": {
+    "frozen": false,
+    "freeze_task": "PCPR-002",
+    "normative_stabilization_task": "PCPR-040",
+    "catalog": [
+      {
+        "name": "SupervisorObjectiveIntent",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ObjectiveMaterializationReceipt",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "SupervisorContextPack",
+        "schema": "ipfs_datasets_py.proof_context.context_pack",
+        "authority": "ipfs_datasets_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "SemanticArtifactIdentity",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_datasets_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "DurableArtifactReceipt",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_kit_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ProofObligation",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-proof-obligation@1",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ProofResult",
+        "schema": "ipfs_accelerate_py/agent-supervisor/proof-receipt@1",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ProofAdmissionDecision",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ExecutionInvocation",
+        "schema": "ipfs_accelerate_py/agent-supervisor/entrypoints/invocation-request@1",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ExecutionReceipt",
+        "schema": "ipfs_accelerate_py/agent-supervisor/entrypoints/invocation-result@1",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "SupervisorEvent",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "TaskStateTransition",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ReleaseComponentManifest",
+        "schema": "not_yet_normative",
+        "authority": "portfolio",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "PortfolioCompatibilityManifest",
+        "schema": "not_yet_normative",
+        "authority": "portfolio",
+        "evidence_kind": "measured",
+        "freeze_claimed": false,
+        "reason": "Observed from the PCPR-000 catalog; freeze_task remains PCPR-002.",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "competing_authorities": {
+    "prohibited_by_freeze": false,
+    "inventory_task": "PCPR-003",
+    "this_task_created_competing_authority": false,
+    "repository_live_inventory": false,
+    "observations": [
+      {
+        "name": "new_supervisor_family",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "new_planner_family",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "new_meta_controller",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "new_task_database",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "new_event_database",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "direct_duckdb_writes",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "direct_quack_writes",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "self_authorized_promotion",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "model_completion_authority",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      },
+      {
+        "name": "markdown_as_live_authority",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Repository-wide competing-authority inventory is PCPR-003. This worker did not treat an empty local change as a live prohibition."
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "operator_override": {
+    "present": false,
+    "evidence_kind": "measured",
+    "reason": "No bounded operator approval to freeze contracts or close a release was observed. Continuation after supervisor_non_promoted still requires that approval; this worker did not mint it.",
+    "can_freeze_contracts": false,
+    "can_close_release": false
+  },
+  "freeze_refused_reasons": [
+    "qualification_not_supervisor_promoted",
+    "live_qualification_unavailable",
+    "objective:not_measured_live",
+    "objective:not_yet_normative",
+    "task:not_measured_live",
+    "task:not_yet_normative",
+    "event:not_measured_live",
+    "event:not_yet_normative",
+    "contextpack:not_measured_live",
+    "state_machine:not_measured_live",
+    "state_machine:not_yet_normative",
+    "receipt:not_measured_live",
+    "receipt:not_yet_normative",
+    "public_surfaces_not_all_normative",
+    "competing_authority_inventory_unavailable"
+  ],
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion or a contract freeze",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr002-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_canonical_supervisor_contract_freeze.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.47,
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-002.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_canonical_supervisor_contract_freeze.py",
+      "exit_code": 0,
+      "passed": 26,
+      "failed": 0,
+      "duration_seconds": 0.47,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_freeze_cannot_promote": true,
+    "hermetic_pass_cannot_freeze": true,
+    "non_promoted_qualification_cannot_freeze": true,
+    "operator_override_cannot_freeze": true,
+    "placeholder_schema_cannot_freeze": true,
+    "unavailable_competing_authority_inventory_cannot_freeze": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "contracts_frozen": false,
+    "supervisor_promoted": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome.",
+    "PCPR-001 live qualification remains typed unavailable: 13 required cohort cases and 10 efficiency targets were not observed and are not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "Public supervisor surfaces remain baseline_recorded_not_frozen. Five of six still use not_yet_normative schemas; ContextPack has a Datasets schema identity but is not frozen.",
+    "Shared-contract normative stabilization remains PCPR-040.",
+    "Repository-wide competing-authority inventory remains PCPR-003 and is typed unavailable; this task did not treat an empty local change as a live prohibition.",
+    "No bounded operator approval to continue after supervisor_non_promoted was observed; continuation still requires that approval.",
+    "DuckDB task state was not queried and remains typed unavailable. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, ipfs, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic CanonicalSupervisorContractFreeze tests are candidate coverage only; they do not qualify the live supervisor cohort or freeze contracts.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
