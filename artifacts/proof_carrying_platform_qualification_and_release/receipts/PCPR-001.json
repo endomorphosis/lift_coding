@@ -9,8 +9,8 @@
   "status": "implemented",
   "completion_authoritative": false,
   "worker_completion_insufficient": true,
-  "artifact_identity": "urn:pcpr:task-receipt:PCPR-001@current-head-direct-objective-event-driven-qualification-v6",
-  "observed_at": "2026-08-31T05:49:59Z",
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-001@current-head-direct-objective-event-driven-qualification-v7",
+  "observed_at": "2026-08-31T06:00:26Z",
   "depends_on": [
     "PCPR-004"
   ],
@@ -29,7 +29,7 @@
     "every_changed_path_is_allowed": true,
     "protected_paths_unchanged": true,
     "duckdb_or_quack_state_written": false,
-    "implementation_delta": "Rebind PCPR-001 to the current tree after supervisor admitted-claim landed recovery seed binding. Classify landed recovery seed binding and leftover-retrying landed recovery tests as hermetic candidate coverage for automatic refill and stale recovery. Generate outer-receipt promotion, live-cohort, and efficiency sections from DirectObjectiveEventDrivenQualification@1, pin CURRENT_HEAD_UNAVAILABLE_VERDICT_CID, and reject closed PCPR release outcomes. Post-merge auto-start, portal-idle, gitlink landed-merge, admitted-claim landed completion, landed recovery seed binding, leftover-retrying landed recovery, and pending-merge recovery suites are candidate coverage only. Simulated, estimated, hermetic, and unavailable evidence cannot satisfy live promotion. The evaluator never emits a closed PCPR release outcome."
+    "implementation_delta": "Rebind PCPR-001 to the current tree after the prior nested qualification merged and landed-candidate fresh validation rearmed this attempt. Classify landed-candidate fresh validation as hermetic candidate coverage for automatic refill and stale recovery. Generate outer-receipt promotion, live-cohort, and efficiency sections from DirectObjectiveEventDrivenQualification@1, pin CURRENT_HEAD_UNAVAILABLE_VERDICT_CID, and reject closed PCPR release outcomes. Post-merge auto-start, portal-idle, gitlink landed-merge, admitted-claim landed completion, landed recovery seed binding, leftover-retrying landed recovery, pending-merge recovery, and landed-candidate fresh validation suites are candidate coverage only. Simulated, estimated, hermetic, and unavailable evidence cannot satisfy live promotion. The evaluator never emits a closed PCPR release outcome."
   },
   "evidence_legend": {
     "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
@@ -40,21 +40,21 @@
   "current_tree_binding": {
     "outer_repository": "endomorphosis/lift_coding",
     "owning_repository_for_receipts": "ipfs_accelerate_py",
-    "outer_commit": "3e8a894260bf573e23dc839741b15f5465a140c1",
-    "outer_tree": "58709233430a6f7ec208156c33ca0f1e2f801091",
-    "outer_subject": "fix(pcpr): land supervisor admitted-claim landed recovery seed binding",
+    "outer_commit": "cf05ef0004a76684a8f0e2e0e30b2e35a7d9b0a9",
+    "outer_tree": "6dec62ed2b175d64eff60147db32ce9555ebbcf3",
+    "outer_subject": "Merge commit 'cb80dbce737d86a0eaabd7eb5a185956adae615a' into agent/proof-carrying-platform-qualification-and-release-v1",
     "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
     "origin_main_is_ancestor": true,
-    "accelerator_pre_change_commit": "9dc70d4abacfa7f274bc5f8bdf2cd0c73b787321",
-    "accelerator_pre_change_tree": "1c7fd607a590d57562d4ddd13136850b80dbe54a",
-    "accelerator_gitlink": "9dc70d4abacfa7f274bc5f8bdf2cd0c73b787321",
+    "accelerator_pre_change_commit": "12d6bc816ee999d2ed75231cb1cd5a41a690cdec",
+    "accelerator_pre_change_tree": "3cd496c1db6a7d439c6a533d2545ec200745d299",
+    "accelerator_gitlink": "12d6bc816ee999d2ed75231cb1cd5a41a690cdec",
     "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
     "accelerator_origin_main_is_ancestor": true,
     "accelerator_post_change_commit": "pending nested commit after admission",
     "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
-    "prior_receipt_outer_commit": "abbc4ab8e5849efa2d955511adc8946baf51bb80",
-    "prior_receipt_bound_outer_commit": "cd1d59158504221870d4fff328170cd68b612170",
-    "landed_pcpr_001_nested_commit": "6565d1aa7249a80d8c26d170f56f96c3f13cfd0e",
+    "prior_receipt_outer_commit": "cb80dbce737d86a0eaabd7eb5a185956adae615a",
+    "prior_receipt_bound_outer_commit": "3e8a894260bf573e23dc839741b15f5465a140c1",
+    "landed_pcpr_001_nested_commit": "12d6bc816ee999d2ed75231cb1cd5a41a690cdec",
     "first_landed_pcpr_001_nested_commit": "38deb2ea57b171da90e5f2d4194ef6f100f9795b",
     "evidence_kind": "measured"
   },
@@ -63,21 +63,21 @@
       "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/direct_objective_event_driven_qualification.py",
       "interface": "DirectObjectiveEventDrivenQualification@1",
       "schema": "ipfs_accelerate_py/agent-supervisor/direct-objective-event-driven-qualification@1",
-      "sha256": "a098c7e35c90df734bd87a098242d9e5c890a4b1771789bf8c755ec6b1bf3617",
-      "bytes": 46896,
+      "sha256": "c64ae9221f94c8a2d44be09c3322c2a80c6cfa07cd246e32c2cab8848c7c38f3",
+      "bytes": 47470,
       "evidence_kind": "measured"
     },
     {
       "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
-      "sha256": "0cfa9885d6dc7a00072d6fe9b911879e24f9832504a8efeacaac2a063c32a4bc",
-      "bytes": 25661,
+      "sha256": "8ca36a0ed3796e6b8f699d435aa8d19fc80158afadb502362b197a39883adef8",
+      "bytes": 26493,
       "evidence_kind": "measured"
     }
   ],
   "qualification_verdict": {
     "schema": "ipfs_accelerate_py/agent-supervisor/direct-objective-event-driven-qualification-verdict@1",
     "interface": "DirectObjectiveEventDrivenQualification@1",
-    "verdict_cid": "baguqeeraxlb3hefssfyy3ecfnwm6nv2i2argjihfq43ovubv5mbjkbl3oiva",
+    "verdict_cid": "baguqeeraiqbusxid7c3itp46lkjvcjghjhj4zdjvlwxf2q4ifdzycdfkjrva",
     "promotion_status": "rnd_non_promoted",
     "supervisor_disposition": "supervisor_non_promoted",
     "closed_release_outcome": null,
@@ -125,7 +125,7 @@
         "case_id": "stale_task_recovery",
         "live_status": "unavailable",
         "evidence_kind": "unavailable",
-        "reason": "No live stale-task recovery campaign ran. Gitlink landed-merge, admitted-claim landed completion, landed recovery seed binding, leftover-retrying landed recovery, pending-merge dummy-consumer, and stale index.lock recovery tests are hermetic candidates only."
+        "reason": "No live stale-task recovery campaign ran. Gitlink landed-merge, admitted-claim landed completion, landed recovery seed binding, leftover-retrying landed recovery, pending-merge dummy-consumer, stale index.lock recovery, and landed-candidate fresh validation tests are hermetic candidates only."
       },
       {
         "case_id": "provider_outcome_unknown_reconciliation",
@@ -149,7 +149,7 @@
         "case_id": "automatic_task_frontier_refill",
         "live_status": "unavailable",
         "evidence_kind": "unavailable",
-        "reason": "No live automatic task-frontier refill campaign ran. Post-merge auto-start, portal-idle, gitlink landed-merge, admitted-claim landed completion, landed recovery seed binding, leftover-retrying landed recovery, and pending-merge recovery tests are hermetic candidates only."
+        "reason": "No live automatic task-frontier refill campaign ran. Post-merge auto-start, portal-idle, gitlink landed-merge, admitted-claim landed completion, landed recovery seed binding, leftover-retrying landed recovery, pending-merge recovery, and landed-candidate fresh validation tests are hermetic candidates only."
       },
       {
         "case_id": "incremental_plan_reassessment",
@@ -277,7 +277,7 @@
       "passed": 80,
       "failed": 7,
       "skipped": 7,
-      "duration_seconds": 13.17,
+      "duration_seconds": 12.96,
       "evidence_kind": "measured"
     },
     "sealed_failures": [
@@ -304,7 +304,7 @@
       "path": "test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
       "sealed_passed": 18,
       "sealed_failed": 0,
-      "duration_seconds": 0.44,
+      "duration_seconds": 0.43,
       "exit_code": 0,
       "evidence_kind": "measured"
     },
@@ -312,7 +312,7 @@
       "path": "test/api/test_agent_supervisor_database_implementation_daemon.py",
       "authority": "candidate_only",
       "sealed_status": "unavailable",
-      "reason": "The daemon suite is DuckDB-gated. In the sealed environment duckdb is absent: admitted-claim, landed recovery seed, leftover-retrying, stale index.lock, and pending-merge consume tests skipped, so gitlink landed-merge tests were not executed as live qualification.",
+      "reason": "The daemon suite is DuckDB-gated. In the sealed environment duckdb is absent: admitted-claim, landed recovery seed, leftover-retrying, stale index.lock, pending-merge consume, and landed-candidate fresh validation tests skipped, so gitlink landed-merge tests were not executed as live qualification.",
       "evidence_kind": "unavailable"
     },
     "admitted_claim_landed_completion_candidate_suite": {
@@ -333,6 +333,16 @@
       "authority": "candidate_only",
       "sealed_status": "unavailable",
       "reason": "Landed recovery seed binding and leftover-retrying landed recovery tests skip in the sealed environment because duckdb is absent. They are not a live stale-recovery or refill campaign.",
+      "evidence_kind": "unavailable"
+    },
+    "landed_candidate_fresh_validation_candidate_suite": {
+      "paths": [
+        "test/api/test_agent_supervisor_landed_completion_recovery.py",
+        "test/api/test_agent_supervisor_database_implementation_daemon.py"
+      ],
+      "authority": "candidate_only",
+      "sealed_status": "unavailable",
+      "reason": "Landed-candidate fresh validation after the integrating merge skips in the sealed environment because duckdb is absent. Rearming this attempt from a landed nested candidate is not a live stale-recovery or refill campaign.",
       "evidence_kind": "unavailable"
     },
     "pending_merge_recovery_candidate_suite": {
@@ -392,8 +402,8 @@
     "Efficiency targets against the prior Codex-primed route were not measured and are not recorded as zero or passing.",
     "Sealed-environment hermetic suites are incomplete: duckdb, anyio, and pytest-asyncio are absent, producing 7 failures and 7 skips that are dependency gaps, not live campaign results.",
     "Provider-side pytest was not executed and is not used as live qualification.",
-    "Post-merge auto-start, portal-idle, gitlink landed-merge, admitted-claim landed completion, landed recovery seed binding, leftover-retrying landed recovery, and pending-merge recovery tests are hermetic candidate coverage only; they do not satisfy live automatic-refill or stale-recovery qualification.",
-    "The sealed environment cannot import duckdb. test_agent_supervisor_database_implementation_daemon.py admitted-claim, recovery-seed, leftover-retrying, and index.lock cases skipped; test_agent_supervisor_landed_completion_recovery.py skipped; test_agent_supervisor_merge_train.py failed on the duckdb import.",
+    "Post-merge auto-start, portal-idle, gitlink landed-merge, admitted-claim landed completion, landed recovery seed binding, leftover-retrying landed recovery, pending-merge recovery, and landed-candidate fresh validation tests are hermetic candidate coverage only; they do not satisfy live automatic-refill or stale-recovery qualification.",
+    "The sealed environment cannot import duckdb. test_agent_supervisor_database_implementation_daemon.py admitted-claim, recovery-seed, leftover-retrying, index.lock, and landed-candidate fresh validation cases skipped; test_agent_supervisor_landed_completion_recovery.py skipped; test_agent_supervisor_merge_train.py failed on the duckdb import.",
     "Post-change Accelerate commit and tree identities are pending the accepted nested commit.",
     "This receipt is R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome."
   ],
