@@ -2137,7 +2137,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 
 ## PCTDD-055 Resolve 1 preflight-conflicting backlogged worktree merges
 
-- Status: completed
+- Status: blocked
 - Completion: manual
 - Is schedulable: false
 - Review only: true
@@ -2154,7 +2154,7 @@ Namespace: `parallel-content-sealing-proof-carrying-tdd-v1`. Revision: `PCTDD-PL
 - Parallel lane: pctdd-lane-1
 - Resource class: cpu-medium; explicit prover/hash/store reservations when required
 - Validation: test -f /home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/state/discovery/2026-08-31-pctdd-055-reconciliation-37e45ed0b8b5.md
-- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/state/discovery/2026-08-31-pctdd-055-reconciliation-37e45ed0b8b5.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/state/discovery/2026-08-31-pctdd-055-reconciliation-37e45ed0b8b5.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## PCTDD-056 Resolve dirty main checkout blocking 1 worktree merges
 
