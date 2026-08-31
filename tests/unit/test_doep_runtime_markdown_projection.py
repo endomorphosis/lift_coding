@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import threading
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -434,6 +435,50 @@ def test_busy_duckdb_projection_does_not_terminate_task_execution() -> None:
     monitor._write()
 
     assert "typed database state changed" in monitor.projection_failure
+
+
+def test_live_monitor_rebinds_before_failing_closed() -> None:
+    module = _module()
+    monitor = object.__new__(module._LiveMonitor)
+    monitor.stopping = threading.Event()
+    monitor.failure = ""
+    monitor.projection_failure = ""
+    monitor._consecutive_control_failures = 0
+    rebinds: list[bool] = []
+    monitor._rebind = lambda: rebinds.append(True)
+
+    for expected in range(1, module.LIVE_MONITOR_MAX_CONSECUTIVE_FAILURES):
+        assert monitor._handle_control_failure(TimeoutError("contended")) is False
+        assert monitor._consecutive_control_failures == expected
+        assert monitor.failure == ""
+
+    assert rebinds == [True] * (module.LIVE_MONITOR_MAX_CONSECUTIVE_FAILURES - 1)
+    assert monitor._handle_control_failure(TimeoutError("contended")) is True
+    assert "3 consecutive times" in monitor.failure
+
+
+def test_live_monitor_stop_is_safe_before_thread_start() -> None:
+    module = _module()
+    monitor = object.__new__(module._LiveMonitor)
+    monitor.stopping = threading.Event()
+    monitor._thread = threading.Thread(target=lambda: None)
+    closed: list[bool] = []
+    revoked: list[str] = []
+    monitor.source = SimpleNamespace(close=lambda: closed.append(True))
+    monitor.client = object()
+    monitor.grant = SimpleNamespace(grant_id="grant:test")
+    monitor.server = SimpleNamespace(
+        revoke_typed_client_grant=lambda grant_id: revoked.append(grant_id)
+    )
+
+    monitor.stop()
+
+    assert monitor.stopping.is_set()
+    assert closed == [True]
+    assert revoked == ["grant:test"]
+    assert monitor.source is None
+    assert monitor.client is None
+    assert monitor.grant is None
 
 
 def test_historical_blocked_retry_accepts_only_exact_nonadmitted_evidence() -> None:
