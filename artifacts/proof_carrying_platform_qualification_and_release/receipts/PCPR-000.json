@@ -1,0 +1,600 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-000",
+  "title": "Seal repositories, contracts, policies, and supervisor baseline",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G110",
+  "objective_id": "PCPR-000",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-000@current-head-source-seal-and-supervisor-baseline-v1",
+  "observed_at": "2026-08-31T14:48:26Z",
+  "depends_on": [],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-0 source seal, contract/policy baseline, and supervisor baseline only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/source_seal_and_supervisor_baseline.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_source_seal_and_supervisor_baseline.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add SourceSealAndSupervisorBaseline@1 to record the exact current-head portfolio and the three source-authority repositories, hash the immutable bootstrap inputs, content-address scheduler policies, and inventory the fourteen shared contracts as a baseline that is not a freeze. Recursive sibling submodules are not source authority. Gitlink mismatch without an explicit isolated-source binding is typed blocked. Missing origin/main or repositories stay typed unavailable. Simulated cleanliness cannot mint a seal. The evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome. This nested commit, once admitted, changes the Accelerate source seal and requires a fresh inventory for later qualification."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "41dd92e823ecc10be2925f92ef7ce07c494c78ce",
+    "outer_tree": "6de8abf6205711391b5a067ebdd11ec5c1f536c8",
+    "outer_subject": "fix(pcpr): reseal accelerate planning pins to the current gitlink",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "0bc65cad008b96a563978bfe53e3b19a1481b491",
+    "accelerator_pre_change_tree": "48be2c0391e4f3081701a291e67b0d39975b0abe",
+    "accelerator_gitlink": "0bc65cad008b96a563978bfe53e3b19a1481b491",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+    "datasets_gitlink": "f49afc579c22856849ca9f739435e5820003384f",
+    "kit_commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+    "kit_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/source_seal_and_supervisor_baseline.py",
+      "interface": "SourceSealAndSupervisorBaseline@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/source-seal-and-supervisor-baseline@1",
+      "sha256": "579727cb71ea4a717af35fe780b626b4141f4f21995e13625b27161963069c83",
+      "bytes": 62089,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_source_seal_and_supervisor_baseline.py",
+      "sha256": "fbc0b6653d4e412dcc97944ab489bdf37af13eaa442be357b113a9decfa6194c",
+      "bytes": 20844,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/source-seal-and-supervisor-baseline-verdict@1",
+    "interface": "SourceSealAndSupervisorBaseline@1",
+    "verdict_cid": "baguqeerakcgqdihfy4v5gp6z3st52lc35yek54gunvt2mnldp6vybklfdodq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "changed_source_seal_requires_fresh_inventory": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "source_forest": {
+    "schema": "proof-carrying-platform-source-forest@1",
+    "source_authority_count": 3,
+    "recursive_sibling_submodules_are_source_authority": false,
+    "portfolio": {
+      "repository": "portfolio",
+      "path": ".",
+      "binding_kind": "isolated_implementation_worktree",
+      "source_authority": false,
+      "planning_pin_match": null,
+      "changed_source_seal": null,
+      "blockers": [],
+      "observation": {
+        "repository": "portfolio",
+        "path": ".",
+        "commit": "41dd92e823ecc10be2925f92ef7ce07c494c78ce",
+        "tree": "6de8abf6205711391b5a067ebdd11ec5c1f536c8",
+        "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+        "origin_main_is_ancestor": true,
+        "gitlink": null,
+        "clean": true,
+        "exact_toplevel": true,
+        "evidence_kind": "measured",
+        "reason": "Isolated implementation worktree of the sealed PCPR portfolio.",
+        "branch": "implementation/pcpr-000-c12208769e34-attempt-1-1788186940",
+        "recursive_gitlink_count": 8,
+        "recursive_gitlink_digest": "10443ff9b3cb82728f43df26373a8c087616f38d7cb446a801f32226deb978f0",
+        "isolated_source_binding": "isolated_implementation_worktree"
+      }
+    },
+    "repositories": [
+      {
+        "repository": "ipfs_accelerate_py",
+        "path": "external/ipfs_accelerate",
+        "binding_kind": "gitlink",
+        "source_authority": true,
+        "planning_pin_match": true,
+        "changed_source_seal": false,
+        "blockers": [],
+        "observation": {
+          "repository": "ipfs_accelerate_py",
+          "path": "external/ipfs_accelerate",
+          "commit": "0bc65cad008b96a563978bfe53e3b19a1481b491",
+          "tree": "48be2c0391e4f3081701a291e67b0d39975b0abe",
+          "origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+          "origin_main_is_ancestor": true,
+          "gitlink": "0bc65cad008b96a563978bfe53e3b19a1481b491",
+          "clean": true,
+          "exact_toplevel": true,
+          "evidence_kind": "measured",
+          "reason": "Nested HEAD equals the portfolio gitlink.",
+          "branch": "",
+          "recursive_gitlink_count": 10,
+          "recursive_gitlink_digest": "5c66dfd35fea62b100b6f3f82a440ce44cdbd0846f08697b8f537f3cfa0a242a",
+          "isolated_source_binding": ""
+        }
+      },
+      {
+        "repository": "ipfs_datasets_py",
+        "path": "external/ipfs_datasets",
+        "binding_kind": "gitlink",
+        "source_authority": true,
+        "planning_pin_match": true,
+        "changed_source_seal": false,
+        "blockers": [],
+        "observation": {
+          "repository": "ipfs_datasets_py",
+          "path": "external/ipfs_datasets",
+          "commit": "f49afc579c22856849ca9f739435e5820003384f",
+          "tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+          "origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+          "origin_main_is_ancestor": true,
+          "gitlink": "f49afc579c22856849ca9f739435e5820003384f",
+          "clean": true,
+          "exact_toplevel": true,
+          "evidence_kind": "measured",
+          "reason": "Nested HEAD equals the portfolio gitlink.",
+          "branch": "",
+          "recursive_gitlink_count": 10,
+          "recursive_gitlink_digest": "e32cc04bcc451c823b2cd47b63761ed391d18798accc284db43de02c83acbfe6",
+          "isolated_source_binding": ""
+        }
+      },
+      {
+        "repository": "ipfs_kit_py",
+        "path": "external/ipfs_kit",
+        "binding_kind": "gitlink",
+        "source_authority": true,
+        "planning_pin_match": true,
+        "changed_source_seal": false,
+        "blockers": [],
+        "observation": {
+          "repository": "ipfs_kit_py",
+          "path": "external/ipfs_kit",
+          "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+          "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+          "origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+          "origin_main_is_ancestor": true,
+          "gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+          "clean": true,
+          "exact_toplevel": true,
+          "evidence_kind": "measured",
+          "reason": "Nested HEAD equals the portfolio gitlink.",
+          "branch": "",
+          "recursive_gitlink_count": 11,
+          "recursive_gitlink_digest": "cc901e4cabfc3d004a9d51b836744eeebbfa830a226dfb4b583c758f02e63835",
+          "isolated_source_binding": ""
+        }
+      }
+    ],
+    "planning_pins": {
+      "ipfs_accelerate_py": {
+        "path": "external/ipfs_accelerate",
+        "commit": "0bc65cad008b96a563978bfe53e3b19a1481b491",
+        "tree": "48be2c0391e4f3081701a291e67b0d39975b0abe",
+        "origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c"
+      },
+      "ipfs_datasets_py": {
+        "path": "external/ipfs_datasets",
+        "commit": "f49afc579c22856849ca9f739435e5820003384f",
+        "tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+        "origin_main": "f49afc579c22856849ca9f739435e5820003384f"
+      },
+      "ipfs_kit_py": {
+        "path": "external/ipfs_kit",
+        "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+        "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+        "origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668"
+      }
+    },
+    "changed_source_seal_requires_fresh_inventory": false,
+    "evidence_kind": "measured"
+  },
+  "contract_baseline": {
+    "frozen": false,
+    "freeze_task": "PCPR-002",
+    "normative_stabilization_task": "PCPR-040",
+    "catalog": [
+      {
+        "name": "SupervisorObjectiveIntent",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ObjectiveMaterializationReceipt",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "SupervisorContextPack",
+        "schema": "ipfs_datasets_py.proof_context.context_pack",
+        "authority": "ipfs_datasets_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "SemanticArtifactIdentity",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_datasets_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "DurableArtifactReceipt",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_kit_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ProofObligation",
+        "schema": "ipfs_accelerate_py/agent-supervisor/code-proof-obligation@1",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ProofResult",
+        "schema": "ipfs_accelerate_py/agent-supervisor/proof-receipt@1",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ProofAdmissionDecision",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ExecutionInvocation",
+        "schema": "ipfs_accelerate_py/agent-supervisor/entrypoints/invocation-request@1",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ExecutionReceipt",
+        "schema": "ipfs_accelerate_py/agent-supervisor/entrypoints/invocation-result@1",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "SupervisorEvent",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "TaskStateTransition",
+        "schema": "not_yet_normative",
+        "authority": "ipfs_accelerate_py",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "ReleaseComponentManifest",
+        "schema": "not_yet_normative",
+        "authority": "portfolio",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      },
+      {
+        "name": "PortfolioCompatibilityManifest",
+        "schema": "not_yet_normative",
+        "authority": "portfolio",
+        "disposition": "baseline_recorded_not_frozen",
+        "normative_task": "PCPR-040",
+        "freeze_task": "PCPR-002"
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "policy_baseline": {
+    "bundle_cid": "baguqeerau5ns73vihqq6u46yex3og66q536se4fkvbtlzd77ctdq7ys7qsua",
+    "policies": [
+      {
+        "key": "authority_policy",
+        "content_cid": "baguqeerairccawduzmr7iactge37yt7nfhm7zetldupsiw5uwr6mrl52iboq",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      },
+      {
+        "key": "budget_policy",
+        "content_cid": "baguqeeraslbwlr6pdmzdojf52v4r2alj47kq2nalr5duuuysfwgvcfwivgla",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      },
+      {
+        "key": "refill_policy",
+        "content_cid": "baguqeerasdbkl52utrlsb33wllwghdbtfx5wefdzu52qd4y72pelqo66mxna",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      },
+      {
+        "key": "source_binding",
+        "content_cid": "baguqeerajq4vxhiolojsxbjqisfgvonztj4qyfctxsj5pvj4tdzrsuntrshq",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      },
+      {
+        "key": "hard_zero_invariants",
+        "content_cid": "baguqeeraunkbkxcrd64sluvw6exipghhtqhg4knrh4syxcnoiw73bzqt4vzq",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      },
+      {
+        "key": "closed_release_outcomes",
+        "content_cid": "baguqeeral2dkojytoeynbbebedrw5v7usvzxt43oa3mz4qbu546xulapzpxq",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      },
+      {
+        "key": "operational_control_plane",
+        "content_cid": "baguqeerajicfyjt2cxv4hu346jkiubkcfi3zteznwdusqy2o2dtylgnjjl7a",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      },
+      {
+        "key": "objective_submission",
+        "content_cid": "baguqeeraywj7dz4dtssioeqtadp3zbvwprqyhlmnjfmzhnpdb7ty37cryyfa",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      },
+      {
+        "key": "initial_projection",
+        "content_cid": "baguqeeraap7mrdwjq4qwpm6i5aetwfzjmsb5ogu2ek3rtzusqo6ct3zx6inq",
+        "evidence_kind": "measured",
+        "reason": "Observed from the immutable supervisor scheduler config."
+      }
+    ],
+    "markdown_is_bootstrap_only": true,
+    "duckdb_authoritative_after_materialization": true,
+    "quack_exclusive_owner_transport": true,
+    "ducklake_non_authoritative": true,
+    "evidence_kind": "measured"
+  },
+  "supervisor_baseline": {
+    "surfaces": [
+      "objective",
+      "task",
+      "event",
+      "contextpack",
+      "state_machine",
+      "receipt"
+    ],
+    "frozen": false,
+    "supervisor_promoted": false,
+    "qualification_task": "PCPR-001",
+    "freeze_task": "PCPR-002",
+    "direct_objective_handoff_task": "PCPR-004",
+    "board_projection_records_pcpr_004_complete": true,
+    "board_projection_is_not_duckdb_authority": true,
+    "duckdb_task_state": "unavailable",
+    "duckdb_task_state_reason": "This worker did not query or write DuckDB. Bootstrap initial_projection is not live task authority.",
+    "promotion_status": "rnd_non_promoted",
+    "evidence_kind": "measured"
+  },
+  "immutable_bootstrap_inputs": [
+    {
+      "path": "docs/architecture/PROOF_CARRYING_PLATFORM_QUALIFICATION_AND_RELEASE_V1_PLAN.md",
+      "sha256": "14a954145b43a8bb112cbfa2976b53d5f82ca3d16fad9669b7616c15411f896c",
+      "bytes": 35810,
+      "protected": true,
+      "worker_must_not_modify": true,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "docs/architecture/proof_carrying_platform_qualification_and_release_v1.objectives.md",
+      "sha256": "aadcde1450101f4a9c1ad1402240b5f33b027fba4fca4494765b61b418a3ed4f",
+      "bytes": 35267,
+      "protected": true,
+      "worker_must_not_modify": true,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "docs/architecture/proof_carrying_platform_qualification_and_release_v1.todo.md",
+      "sha256": "7f59b35a3643aa94da8b04136029da7c7e2f6eeaa2837a9caa077714ea7102dc",
+      "bytes": 21468,
+      "protected": true,
+      "worker_must_not_modify": true,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "config/proof_carrying_platform_qualification_and_release_v1_supervisor.json",
+      "sha256": "c90403fe66226aa70601dbbd92c36d8a66af5f40666c609ff95cc4a8f9d0c955",
+      "bytes": 14294,
+      "protected": true,
+      "worker_must_not_modify": true,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "scripts/generate_proof_carrying_platform_qualification_and_release_board.py",
+      "sha256": "6bbf12aaeaaa8912ccbd351e89160f3e381c43d845a1c12771669991642dea6e",
+      "bytes": 44409,
+      "protected": true,
+      "worker_must_not_modify": true,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "scripts/validate_proof_carrying_platform_qualification_and_release_board.py",
+      "sha256": "57701d90ba9d9d6477a603de3ebb76391ee4de08a536e2b98667a0ed803bccfd",
+      "bytes": 22133,
+      "protected": true,
+      "worker_must_not_modify": true,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "scripts/run_agent_supervisor_proof_carrying_platform_qualification_and_release.py",
+      "sha256": "a6d24acb00d1dcc14468b791302c34b861b1682cc5478ff4c8108d610dc85055",
+      "bytes": 91483,
+      "protected": true,
+      "worker_must_not_modify": true,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
+      "sha256": "96e675c5030378db25a2b630c234ad5faa040b4758eb7f6d06873329c288c6dc",
+      "bytes": 939,
+      "protected": true,
+      "worker_must_not_modify": true,
+      "evidence_kind": "measured"
+    }
+  ],
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor qualification or a closed release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr000-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_source_seal_and_supervisor_baseline.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.48,
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-000.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_source_seal_and_supervisor_baseline.py",
+      "exit_code": 0,
+      "passed": 20,
+      "failed": 0,
+      "duration_seconds": 0.48,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_clean_cannot_seal": true,
+    "recursive_sibling_submodules_are_not_source_authority": true,
+    "gitlink_mismatch_without_isolated_binding_is_blocked": true,
+    "missing_origin_main_is_unavailable_not_zero": true,
+    "contracts_not_frozen": true,
+    "supervisor_not_promoted": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "contracts_frozen": false,
+    "supervisor_promoted": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D source-seal and baseline record. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "Recursive sibling submodules (Mcp-Plus-Plus, swissknife, hallucinate_app, meta-wearables, and nested gitlinks inside the three source repositories) are inventoried as non-authority only.",
+    "DuckDB task state was not queried and remains typed unavailable; bootstrap initial_projection is not live task authority.",
+    "Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, ipfs, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic SourceSealAndSupervisorBaseline tests are candidate coverage only; they do not qualify the live supervisor cohort.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit. That nested commit changes the Accelerate source seal and requires a fresh inventory for later qualification.",
+    "Contract freeze remains PCPR-002. Shared-contract stabilization remains PCPR-040. Supervisor qualification remains PCPR-001."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
