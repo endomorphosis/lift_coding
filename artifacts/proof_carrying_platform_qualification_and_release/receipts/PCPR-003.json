@@ -1,0 +1,1204 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-003",
+  "title": "Inventory every legacy bypass and false-authority path",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G130",
+  "objective_id": "PCPR-003",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-003@current-head-legacy-bypass-and-false-authority-inventory-v1",
+  "observed_at": "2026-08-31T21:26:20Z",
+  "depends_on": [
+    "PCPR-000"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-0 legacy-bypass and false-authority inventory only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/legacy_bypass_and_false_authority_inventory.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_legacy_bypass_and_false_authority_inventory.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add LegacyBypassAndFalseAuthorityInventory@1 to inventory the closed PCPR-G130 catalog of bypass, mock, simulation, pseudo-identity, fallback, and false-authority path classes across ipfs_datasets_py, ipfs_kit_py, and ipfs_accelerate_py. Each class records source identity, authority analysis, disposition, migration impact, and current-tree static probe evidence. Live claims require live evidence; this evaluator is a static source inventory and issues rnd_non_promoted. Simulated or estimated observations cannot mint presence, absence, or live prohibition. Missing trees stay typed unavailable. The evaluator never writes DuckDB or Quack state, never freezes contracts, never prohibits competing authorities as a live freeze, and never emits a closed PCPR release outcome. Completeness is relative to the closed catalog, not a proof that unlisted runtime bypasses are absent."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "9b710b36e1db60c9d4f827d9c7d34d7775d64666",
+    "outer_tree": "4d88d5cd57f5675eb805c1c1061989bffeb60a1b",
+    "outer_subject": "fix(pcpr): reseal accelerate planning pins to leftover-wait recovery",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+    "accelerator_pre_change_tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+    "accelerator_gitlink": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+    "datasets_gitlink": "f49afc579c22856849ca9f739435e5820003384f",
+    "kit_commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+    "kit_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/legacy_bypass_and_false_authority_inventory.py",
+      "interface": "LegacyBypassAndFalseAuthorityInventory@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/legacy-bypass-and-false-authority-inventory@1",
+      "sha256": "b2f96473b2f78279ad8c7eb2c742f1855187b06d3f77d6e1d60ba552dd86bdf0",
+      "bytes": 72288,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_legacy_bypass_and_false_authority_inventory.py",
+      "sha256": "0b2e2aed2c587808d5fb9f75f453054962148ef3258e162bfd5a04838ab37dad",
+      "bytes": 25287,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/legacy-bypass-and-false-authority-inventory-verdict@1",
+    "interface": "LegacyBypassAndFalseAuthorityInventory@1",
+    "verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "competing_authorities_prohibited": false,
+    "live_runtime_inventory": false,
+    "duckdb_or_quack_state_written": false,
+    "catalog_complete": true,
+    "measured_present_count": 20,
+    "measured_absent_count": 2,
+    "unavailable_count": 0,
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-001",
+    "goal_id": "PCPR-G120",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-001 current-head qualification remains rnd_non_promoted; this inventory does not promote the supervisor.",
+    "evidence_kind": "measured"
+  },
+  "path_inventory": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/legacy-bypass-and-false-authority-inventory@1",
+    "catalog_complete_relative_to_closed_pcpr_list": true,
+    "exhaustive_of_unlisted_runtime_bypasses": false,
+    "required_path_ids": [
+      "datasets_import_time_auto_install",
+      "datasets_false_success_fallbacks",
+      "datasets_untyped_none_fallbacks",
+      "datasets_logic_provider_v1_freeform",
+      "datasets_solver_live_claims",
+      "kit_unqualified_live_storage_claims",
+      "kit_iroh_live_claims",
+      "kit_sibling_test_tree_coupling",
+      "accelerate_legacy_mock_coordinator",
+      "accelerate_fabricated_hardware",
+      "accelerate_pseudo_cid",
+      "accelerate_fabricated_endpoint_success",
+      "accelerate_capability_ladder_gap",
+      "accelerate_mutable_git_branch_deps",
+      "accelerate_python_floor_metadata_drift",
+      "accelerate_legacy_compatibility_module",
+      "accelerate_direct_duckdb_task_state",
+      "simulation_represented_as_live",
+      "client_supplied_policy_allow",
+      "prebuilt_complete_launch_plan_injection",
+      "markdown_as_live_authority",
+      "model_completion_as_terminal_authority"
+    ],
+    "catalog": [
+      {
+        "path_id": "datasets_import_time_auto_install",
+        "category": "auto_install",
+        "repository": "ipfs_datasets_py",
+        "remediating_task": "PCPR-010",
+        "disposition": "remove",
+        "authority_analysis": "Package import may construct an installer and attempt optional dependency installation, violating inert import.",
+        "migration_impact": "Callers that rely on import-time pip/network side effects must switch to an explicit CLI or operator install action.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 29,
+            "needle": "auto_install"
+          },
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 37,
+            "needle": "auto_install"
+          },
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 183,
+            "needle": "auto_install"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_datasets_py",
+          "commit": "f49afc579c22856849ca9f739435e5820003384f",
+          "tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+          "relpaths": [
+            "ipfs_datasets_py/__init__.py"
+          ],
+          "primary_relpath": "ipfs_datasets_py/__init__.py",
+          "primary_sha256": "43dd637ba5a92af65cf2873e91f1a0f0a67b6f2c620561a0d62958d7d7f401bd",
+          "primary_bytes": 53160
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "datasets_false_success_fallbacks",
+        "category": "fallback",
+        "repository": "ipfs_datasets_py",
+        "remediating_task": "PCPR-011",
+        "disposition": "replace_with_typed_outcome",
+        "authority_analysis": "Fallback and stub surfaces return status success without a real download, upload, or transport effect.",
+        "migration_impact": "Callers treating status success as observed effect must handle typed unavailable, simulated, or failed outcomes.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 208,
+            "needle": "_FallbackIPFSDatasets"
+          },
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 220,
+            "needle": "\"status\": \"success\""
+          },
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 224,
+            "needle": "\"status\": \"success\""
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_datasets_py",
+          "commit": "f49afc579c22856849ca9f739435e5820003384f",
+          "tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+          "relpaths": [
+            "ipfs_datasets_py/__init__.py"
+          ],
+          "primary_relpath": "ipfs_datasets_py/__init__.py",
+          "primary_sha256": "43dd637ba5a92af65cf2873e91f1a0f0a67b6f2c620561a0d62958d7d7f401bd",
+          "primary_bytes": 53160
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "datasets_untyped_none_fallbacks",
+        "category": "fallback",
+        "repository": "ipfs_datasets_py",
+        "remediating_task": "PCPR-012",
+        "disposition": "replace_with_typed_outcome",
+        "authority_analysis": "Public load/dataset symbols may be None or empty-success stubs when optional dependencies are absent.",
+        "migration_impact": "Public surfaces need stable, beta, experimental, simulation-only, or unavailable typing instead of silent None.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 229,
+            "needle": "HAVE_IPFS_DATASETS = False"
+          },
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 233,
+            "needle": "load_dataset = None"
+          },
+          {
+            "relpath": "ipfs_datasets_py/__init__.py",
+            "line": 1040,
+            "needle": "HAVE_IPFS_DATASETS = False"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_datasets_py",
+          "commit": "f49afc579c22856849ca9f739435e5820003384f",
+          "tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+          "relpaths": [
+            "ipfs_datasets_py/__init__.py"
+          ],
+          "primary_relpath": "ipfs_datasets_py/__init__.py",
+          "primary_sha256": "43dd637ba5a92af65cf2873e91f1a0f0a67b6f2c620561a0d62958d7d7f401bd",
+          "primary_bytes": 53160
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "datasets_logic_provider_v1_freeform",
+        "category": "false_authority",
+        "repository": "ipfs_datasets_py",
+        "remediating_task": "PCPR-013",
+        "disposition": "quarantine",
+        "authority_analysis": "LogicProviderProtocol version 1 remains importable; free-form payloads must not mint executable BackendRequest values.",
+        "migration_impact": "A version-1 adapter must be explicit and fail-closed; v2 or its successor becomes canonical.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_datasets_py/logic/backends/provider.py",
+            "line": 25,
+            "needle": "LOGIC_PROVIDER_PROTOCOL_VERSION"
+          },
+          {
+            "relpath": "ipfs_datasets_py/logic/backends/provider.py",
+            "line": 27,
+            "needle": "LOGIC_PROVIDER_PROTOCOL_VERSION"
+          },
+          {
+            "relpath": "ipfs_datasets_py/logic/backends/provider.py",
+            "line": 37,
+            "needle": "class LogicProvider"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_datasets_py",
+          "commit": "f49afc579c22856849ca9f739435e5820003384f",
+          "tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+          "relpaths": [
+            "ipfs_datasets_py/logic/backends/provider.py"
+          ],
+          "primary_relpath": "ipfs_datasets_py/logic/backends/provider.py",
+          "primary_sha256": "d1ea5c541826ee5b313ec22b844bff96aa619d89eeaee14a9050dfd04db12073",
+          "primary_bytes": 31791
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "datasets_solver_live_claims",
+        "category": "false_authority",
+        "repository": "ipfs_datasets_py",
+        "remediating_task": "PCPR-017",
+        "disposition": "qualify_or_typed_unavailable",
+        "authority_analysis": "Docs and extras advertise Z3, cvc5, Lean, and Coq without this campaign's live solver qualification.",
+        "migration_impact": "Missing solvers must remain typed unavailable; README claims follow the qualification matrix.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "README.md",
+            "line": 414,
+            "needle": "ipfs-datasets-install-provers"
+          },
+          {
+            "relpath": "README.md",
+            "line": 414,
+            "needle": "cvc5"
+          },
+          {
+            "relpath": "README.md",
+            "line": 414,
+            "needle": "lean"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_datasets_py",
+          "commit": "f49afc579c22856849ca9f739435e5820003384f",
+          "tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+          "relpaths": [
+            "README.md"
+          ],
+          "primary_relpath": "README.md",
+          "primary_sha256": "073af587b436dbcfb7e2e67fe6ac95d790d0f8d5f877749ebb3f1a29f1c87793",
+          "primary_bytes": 37747
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "kit_unqualified_live_storage_claims",
+        "category": "false_authority",
+        "repository": "ipfs_kit_py",
+        "remediating_task": "PCPR-020",
+        "disposition": "qualify_or_typed_unavailable",
+        "authority_analysis": "Public README claims a production-ready toolkit without the PCPR live local/IPFS qualification matrix.",
+        "migration_impact": "Support-matrix generation (PCPR-027) must replace free-text production-ready language.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "relpath": "README.md",
+            "line": 8,
+            "needle": "production-ready"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_kit_py",
+          "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+          "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+          "relpaths": [
+            "README.md"
+          ],
+          "primary_relpath": "README.md",
+          "primary_sha256": "ebc12151a7093aa65765a44e7a833922d2c791fcdca266b059b77e5b1be8f0c1",
+          "primary_bytes": 34225
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "kit_iroh_live_claims",
+        "category": "false_authority",
+        "repository": "ipfs_kit_py",
+        "remediating_task": "PCPR-022",
+        "disposition": "qualify_or_typed_unavailable",
+        "authority_analysis": "Iroh CLI and docs are published as installable live support without a PCPR live Iroh qualification receipt.",
+        "migration_impact": "Iroh must be qualified, experimental, unavailable, or unsupported; live-support claims are removed otherwise.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "docs/QUICK_REFERENCE.md",
+            "line": 75,
+            "needle": "ipfs-kit-iroh"
+          },
+          {
+            "relpath": "docs/QUICK_REFERENCE.md",
+            "line": 75,
+            "needle": "iroh"
+          },
+          {
+            "relpath": "docs/QUICK_REFERENCE.md",
+            "line": 76,
+            "needle": "ipfs-kit-iroh"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_kit_py",
+          "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+          "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+          "relpaths": [
+            "docs/QUICK_REFERENCE.md"
+          ],
+          "primary_relpath": "docs/QUICK_REFERENCE.md",
+          "primary_sha256": "69d97da6b5bcb343d77e48379065219ebdc0ec4040730da7f082990eea64a10c",
+          "primary_bytes": 9316
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "kit_sibling_test_tree_coupling",
+        "category": "sibling_coupling",
+        "repository": "ipfs_kit_py",
+        "remediating_task": "PCPR-025",
+        "disposition": "remove",
+        "authority_analysis": "sitecustomize and benchmarks inject the source tree onto sys.path, coupling installed-package tests to a sibling checkout.",
+        "migration_impact": "Installed packages must use packaged vectors; sibling tests/ directories cannot be required.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "sitecustomize.py",
+            "line": 60,
+            "needle": "sys.path.insert"
+          },
+          {
+            "relpath": "benchmarks/runtime_readiness/run.py",
+            "line": 25,
+            "needle": "sys.path.insert"
+          },
+          {
+            "relpath": "benchmarks/runtime_readiness/run.py",
+            "line": 27,
+            "needle": "sys.path.insert"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_kit_py",
+          "commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+          "tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+          "relpaths": [
+            "sitecustomize.py",
+            "benchmarks/runtime_readiness/run.py"
+          ],
+          "primary_relpath": "sitecustomize.py",
+          "primary_sha256": "66062b6f0bb33ca2d77ed0cdeaba5317b381f2891517c69e7badfa34b0c30ace",
+          "primary_bytes": 3451
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_legacy_mock_coordinator",
+        "category": "mock",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-030",
+        "disposition": "quarantine",
+        "authority_analysis": "Ordinary runtime constructors still substitute MockWorker and a legacy workflow coordinator that can run without a live backend.",
+        "migration_impact": "Move mock coordinators behind an explicit compatibility or simulation namespace; ordinary runtime cannot instantiate them.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate.py",
+            "line": 141,
+            "needle": "MockWorker"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/datasets_integration/workflow.py",
+            "line": 13,
+            "needle": "WorkflowCoordinator"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/datasets_integration/workflow.py",
+            "line": 32,
+            "needle": "WorkflowCoordinator"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/ipfs_accelerate.py",
+            "ipfs_accelerate_py/datasets_integration/workflow.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/ipfs_accelerate.py",
+          "primary_sha256": "3f790bc229417df82d1612879d44a8d11e71368289ab84f2a9bc5c098fe7acc3",
+          "primary_bytes": 108341
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_fabricated_hardware",
+        "category": "simulation",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-031",
+        "disposition": "replace_with_capability_ladder",
+        "authority_analysis": "Mock hardware detection and CUDA mock implementations can report availability without declared/installed/detected/canary/qualified ladder evidence.",
+        "migration_impact": "Device visibility, adapter presence, or test defaults never imply production_authorized.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+            "line": 217,
+            "needle": "_create_mock_hardware_detection"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+            "line": 221,
+            "needle": "_create_mock_hardware_detection"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+            "line": 223,
+            "needle": "_create_mock_hardware_detection"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "primary_sha256": "9ba7a9cf4c774d1b8bc907fb5bc1886d8e994a7b30e689d1ab613c08a554c5fd",
+          "primary_bytes": 42457
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_pseudo_cid",
+        "category": "pseudo_identity",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-032",
+        "disposition": "replace_with_canonical_cid",
+        "authority_analysis": "Hexadecimal SHA-256 slices and Qm-prefixed strings are returned as IPFS CIDs.",
+        "migration_impact": "Callers and caches must use canonical bytes and real CID generation; hex strings are not CIDs.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+            "line": 825,
+            "needle": "mock_cid = f\"Qm"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/mcp/tools/mock_ipfs.py",
+            "line": 26,
+            "needle": "random_cid"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/mcp/tools/mock_ipfs.py",
+            "line": 49,
+            "needle": "random_cid"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+            "ipfs_accelerate_py/mcp/tools/mock_ipfs.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "primary_sha256": "9ba7a9cf4c774d1b8bc907fb5bc1886d8e994a7b30e689d1ab613c08a554c5fd",
+          "primary_bytes": 42457
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_fabricated_endpoint_success",
+        "category": "mock",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-033",
+        "disposition": "quarantine",
+        "authority_analysis": "Endpoint registration and MCP inference can fall back to mock handlers or hardware tests that report passed without a live probe.",
+        "migration_impact": "A registered endpoint is live only after backend, model, canary, timeout, cancellation, and resource admission evidence.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate.py",
+            "line": 785,
+            "needle": "_create_mock_handler"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate.py",
+            "line": 914,
+            "needle": "_create_mock_handler"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/mcp/inference_tools.py",
+            "line": 109,
+            "needle": "_mock_inference"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/ipfs_accelerate.py",
+            "ipfs_accelerate_py/mcp/inference_tools.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/ipfs_accelerate.py",
+          "primary_sha256": "3f790bc229417df82d1612879d44a8d11e71368289ab84f2a9bc5c098fe7acc3",
+          "primary_bytes": 108341
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_capability_ladder_gap",
+        "category": "false_authority",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-034",
+        "disposition": "replace_with_capability_ladder",
+        "authority_analysis": "HardwareDetector.available is a boolean detection flag, not the declared/installed/detected/canary_passed/qualified/production_authorized ladder.",
+        "migration_impact": "Production actions must require production_authorized; detection alone is not qualification.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/hf_model_server/hardware/detector.py",
+            "line": 20,
+            "needle": "available: bool"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/hf_model_server/hardware/detector.py",
+            "line": 32,
+            "needle": "class HardwareDetector"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/hf_model_server/hardware/detector.py",
+            "line": 52,
+            "needle": "_detect_cuda"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/hf_model_server/hardware/detector.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/hf_model_server/hardware/detector.py",
+          "primary_sha256": "05a8a48da6e116c6874a6fdaf0f46c6c87cc93980201bfb50726fe2c0a5d1c0d",
+          "primary_bytes": 8294
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_mutable_git_branch_deps",
+        "category": "bypass",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-035",
+        "disposition": "remove",
+        "authority_analysis": "pyproject extras and requirements pin sibling packages to mutable Git @main rather than immutable commits or signed artifacts.",
+        "migration_impact": "Qualified releases cannot depend on a mutable Git branch.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "pyproject.toml",
+            "line": 180,
+            "needle": "git+https://"
+          },
+          {
+            "relpath": "pyproject.toml",
+            "line": 180,
+            "needle": "@main"
+          },
+          {
+            "relpath": "pyproject.toml",
+            "line": 181,
+            "needle": "git+https://"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "pyproject.toml"
+          ],
+          "primary_relpath": "pyproject.toml",
+          "primary_sha256": "c28b5cb3e0f1fbf6722f515742ab90912ed6f123d9f329ad6da8e5daedbd2607",
+          "primary_bytes": 22208
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_python_floor_metadata_drift",
+        "category": "false_authority",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-036",
+        "disposition": "remove",
+        "authority_analysis": "packaging metadata advertises Python >=3.8 while this campaign's canonical interpreter is Python 3.12.",
+        "migration_impact": "Code, metadata, and CI must agree on the real Python floor.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "pyproject.toml",
+            "line": 16,
+            "needle": "requires-python = \">=3.8\""
+          },
+          {
+            "relpath": "pyproject.toml",
+            "line": 20,
+            "needle": "Programming Language :: Python :: 3.8"
+          },
+          {
+            "relpath": "pyproject.toml",
+            "line": 268,
+            "needle": "requires-python = \">=3.8\""
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "pyproject.toml"
+          ],
+          "primary_relpath": "pyproject.toml",
+          "primary_sha256": "c28b5cb3e0f1fbf6722f515742ab90912ed6f123d9f329ad6da8e5daedbd2607",
+          "primary_bytes": 22208
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_legacy_compatibility_module",
+        "category": "mock",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-030",
+        "disposition": "quarantine",
+        "authority_analysis": "ipfs_accelerate_py_legacy.py remains a compatibility surface with mock IPFS store, mock providers, and mock hardware.",
+        "migration_impact": "Compatibility namespace must be explicit; it cannot be the ordinary runtime.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+            "line": 327,
+            "needle": "_create_mock_handler"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+            "line": 549,
+            "needle": "_create_mock_handler"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+            "line": 603,
+            "needle": "_create_mock_handler"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+          "primary_sha256": "9ba7a9cf4c774d1b8bc907fb5bc1886d8e994a7b30e689d1ab613c08a554c5fd",
+          "primary_bytes": 42457
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "accelerate_direct_duckdb_task_state",
+        "category": "competing_authority",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-003",
+        "disposition": "replace_with_quack_fence",
+        "authority_analysis": "Supervisor stores still open DuckDB connections for task, lease, and coordination state; workers are forbidden from writing those tables directly, and Quack is the exclusive authenticated owner transport once live.",
+        "migration_impact": "All task-state mutations must pass through Quack-fenced owner APIs; this inventory does not itself write DuckDB or Quack.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+            "line": 232,
+            "needle": "connect_duckdb_with_policy"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+            "line": 243,
+            "needle": "duckdb.connect"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+            "line": 528,
+            "needle": "import duckdb"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+          "primary_sha256": "76edd2589f679b967b007b9cb0023694d8323b72559304fe8f9d98f4f564c21f",
+          "primary_bytes": 174632
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "simulation_represented_as_live",
+        "category": "simulation",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-030",
+        "disposition": "quarantine",
+        "authority_analysis": "Simulation, fixture, and mock origins still exist on production-reachable paths and must not satisfy live capability predicates.",
+        "migration_impact": "Explicit simulation receipts must say simulation; PCAR-015 taint rules remain in force and are not a PCPR live qualification.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/architecture_refactorer/legacy_paths.py",
+            "line": 78,
+            "needle": "INVENTORY_CAN_PROMOTE_FAKE_TO_LIVE"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/architecture_refactorer/legacy_paths.py",
+            "line": 254,
+            "needle": "OriginTaint.SIMULATION"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/architecture_refactorer/legacy_paths.py",
+            "line": 263,
+            "needle": "OriginTaint.SIMULATION"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/agent_supervisor/architecture_refactorer/legacy_paths.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/agent_supervisor/architecture_refactorer/legacy_paths.py",
+          "primary_sha256": "45236a1115e917fff044a07e1ddb20fbb9a4c0ce613ad21f2fb5fecf386dab2a",
+          "primary_bytes": 110907
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "client_supplied_policy_allow",
+        "category": "bypass",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-083",
+        "disposition": "remove",
+        "authority_analysis": "Client-supplied policy allow or confirmation must never be authoritative; this class inventories remaining allow-shaped client inputs.",
+        "migration_impact": "External clients cannot bypass confirmation, leases, fencing, or policy pointers.",
+        "present": false,
+        "evidence_kind": "measured",
+        "hit_count": 0,
+        "sample_hits": [],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+            "ipfs_accelerate_py/agent_supervisor/autonomy/policy_evaluation.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+          "primary_sha256": "5285628d8775857e761700c9fb92188d669f798bba9edebc929c388c9cdd597e",
+          "primary_bytes": 36864
+        },
+        "reason": "Named probe files were readable and contained none of the catalog needles. This is not a live prohibition."
+      },
+      {
+        "path_id": "prebuilt_complete_launch_plan_injection",
+        "category": "bypass",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-004",
+        "disposition": "keep_internal_not_public_requirement",
+        "authority_analysis": "CompleteLaunchPlan remains an internal runtime type.  Public Supervisor.run no longer requires caller injection after PCPR-004; leftover injection would restore the bootstrap bypass.",
+        "migration_impact": "Do not reintroduce caller CompleteLaunchPlan injection on the public prompt facade.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+            "line": 272,
+            "needle": "CompleteLaunchPlan injection"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py",
+            "line": 94,
+            "needle": "complete_plan must be a CompleteLaunchPlan"
+          },
+          {
+            "relpath": "ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py",
+            "line": 154,
+            "needle": "complete_plan must be a CompleteLaunchPlan"
+          }
+        ],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+            "ipfs_accelerate_py/agent_supervisor/entrypoints/intent_service.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+          "primary_sha256": "5285628d8775857e761700c9fb92188d669f798bba9edebc929c388c9cdd597e",
+          "primary_bytes": 36864
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "markdown_as_live_authority",
+        "category": "competing_authority",
+        "repository": "portfolio",
+        "remediating_task": "PCPR-004",
+        "disposition": "replace_with_typed_outcome",
+        "authority_analysis": "The immutable Markdown board remains the operator-authorized campaign projection until DuckDB materialization; Markdown is bootstrap-only and cannot be live task authority.",
+        "migration_impact": "After successful materialization DuckDB is authoritative and Quack is the exclusive authenticated state-owner transport.",
+        "present": true,
+        "evidence_kind": "measured",
+        "hit_count": 2,
+        "sample_hits": [
+          {
+            "relpath": "docs/architecture/proof_carrying_platform_qualification_and_release_v1.todo.md",
+            "line": 7,
+            "needle": "DuckDB becomes authoritative after materialization"
+          },
+          {
+            "relpath": "docs/architecture/proof_carrying_platform_qualification_and_release_v1.todo.md",
+            "line": 7,
+            "needle": "tracked Markdown board"
+          }
+        ],
+        "source_identity": {
+          "repository": "portfolio",
+          "commit": "9b710b36e1db60c9d4f827d9c7d34d7775d64666",
+          "tree": "4d88d5cd57f5675eb805c1c1061989bffeb60a1b",
+          "relpaths": [
+            "docs/architecture/proof_carrying_platform_qualification_and_release_v1.todo.md"
+          ],
+          "primary_relpath": "docs/architecture/proof_carrying_platform_qualification_and_release_v1.todo.md",
+          "primary_sha256": "7f59b35a3643aa94da8b04136029da7c7e2f6eeaa2837a9caa077714ea7102dc",
+          "primary_bytes": 214684
+        },
+        "reason": "Static source probe of named catalog files. Not a live runtime campaign and not a closed release."
+      },
+      {
+        "path_id": "model_completion_as_terminal_authority",
+        "category": "competing_authority",
+        "repository": "ipfs_accelerate_py",
+        "remediating_task": "PCPR-001",
+        "disposition": "remove",
+        "authority_analysis": "Model and worker output is candidate evidence only; independent current-tree validation owns terminalization.",
+        "migration_impact": "No task may complete solely from an LLM assertion; receipts stay completion_authoritative false.",
+        "present": false,
+        "evidence_kind": "measured",
+        "hit_count": 0,
+        "sample_hits": [],
+        "source_identity": {
+          "repository": "ipfs_accelerate_py",
+          "commit": "d2bb921548f63f92a5e198ab3c90515b7973c806",
+          "tree": "9ab1f12ddb60e01ce5ffb49334b937320e45956a",
+          "relpaths": [
+            "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+            "ipfs_accelerate_py/agent_supervisor/autonomy/policy_evaluation.py"
+          ],
+          "primary_relpath": "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+          "primary_sha256": "5285628d8775857e761700c9fb92188d669f798bba9edebc929c388c9cdd597e",
+          "primary_bytes": 36864
+        },
+        "reason": "Named probe files were readable and contained none of the catalog needles. This is not a live prohibition."
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "competing_authorities": {
+    "prohibited_by_inventory": false,
+    "inventory_task": "PCPR-003",
+    "freeze_task": "PCPR-002",
+    "this_task_created_competing_authority": false,
+    "repository_live_inventory": false,
+    "repository_static_inventory": true,
+    "observations": [
+      {
+        "name": "new_supervisor_family",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Static source inventory cannot prove repository-wide absence of new_supervisor_family as a live prohibition. This worker did not create one."
+      },
+      {
+        "name": "new_planner_family",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Static source inventory cannot prove repository-wide absence of new_planner_family as a live prohibition. This worker did not create one."
+      },
+      {
+        "name": "new_meta_controller",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Static source inventory cannot prove repository-wide absence of new_meta_controller as a live prohibition. This worker did not create one."
+      },
+      {
+        "name": "new_task_database",
+        "present": true,
+        "evidence_kind": "measured",
+        "scope": "repository",
+        "reason": "Static catalog probe for accelerate_direct_duckdb_task_state. Not a live freeze prohibition."
+      },
+      {
+        "name": "new_event_database",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Static source inventory cannot prove repository-wide absence of new_event_database as a live prohibition. This worker did not create one."
+      },
+      {
+        "name": "direct_duckdb_writes",
+        "present": true,
+        "evidence_kind": "measured",
+        "scope": "repository",
+        "reason": "Static catalog probe for accelerate_direct_duckdb_task_state. Not a live freeze prohibition."
+      },
+      {
+        "name": "direct_quack_writes",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Static source inventory cannot prove repository-wide absence of direct_quack_writes as a live prohibition. This worker did not create one."
+      },
+      {
+        "name": "self_authorized_promotion",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "scope": "repository",
+        "reason": "Static source inventory cannot prove repository-wide absence of self_authorized_promotion as a live prohibition. This worker did not create one."
+      },
+      {
+        "name": "model_completion_authority",
+        "present": false,
+        "evidence_kind": "measured",
+        "scope": "repository",
+        "reason": "Static catalog probe for model_completion_as_terminal_authority. Not a live freeze prohibition."
+      },
+      {
+        "name": "markdown_as_live_authority",
+        "present": true,
+        "evidence_kind": "measured",
+        "scope": "repository",
+        "reason": "Static catalog probe for markdown_as_live_authority. Not a live freeze prohibition."
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, a contract freeze, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr003-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_legacy_bypass_and_false_authority_inventory.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.5,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_source_seal_and_supervisor_baseline.py",
+      "test/api/test_agent_supervisor_direct_objective_event_driven_qualification.py",
+      "test/api/test_agent_supervisor_canonical_supervisor_contract_freeze.py",
+      "test/api/test_agent_supervisor_legacy_bypass_and_false_authority_inventory.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-003.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_legacy_bypass_and_false_authority_inventory.py",
+      "exit_code": 0,
+      "passed": 22,
+      "failed": 0,
+      "duration_seconds": 0.5,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_absence_cannot_prohibit": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "static_inventory_cannot_freeze_contracts": true,
+    "static_inventory_cannot_prohibit_competing_authorities_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "catalog_complete_relative_to_closed_pcpr_list": true,
+    "exhaustive_of_unlisted_runtime_bypasses": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "live_runtime_inventory": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not a live competing-authority prohibition, and not a closed PCPR release outcome.",
+    "The inventory is a static named-file probe of the closed PCPR-G130 catalog. It is not measured_live and cannot satisfy PCPR-002 freeze requirements.",
+    "Completeness is relative to the 22 plan-named path classes. Unlisted runtime bypasses are not proven absent.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "client_supplied_policy_allow and model_completion_as_terminal_authority had no matching needles in nominated files; measured absence is not a live prohibition.",
+    "new_supervisor_family, new_planner_family, new_meta_controller, new_event_database, direct_quack_writes, and self_authorized_promotion remain typed unavailable at repository scope because static absence cannot certify a live prohibition.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, ipfs, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic LegacyBypassAndFalseAuthorityInventory tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
