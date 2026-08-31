@@ -43,6 +43,9 @@ CONFIG: Final = (
 BOARD: Final = ROOT / "config/agent_supervisor_direct_objective_event_driven_planning_board.json"
 OWNER_SESSION: Final = "doep-v1-executor"
 GRANT_TTL_SECONDS: Final = 86_400.0
+LIVE_MONITOR_INTERVAL_SECONDS: Final = 5.0
+LIVE_MONITOR_MAX_CONSECUTIVE_FAILURES: Final = 3
+LIVE_MONITOR_STOP_TIMEOUT_SECONDS: Final = 35.0
 OPERATOR_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-bootstrap-handoff@1"
 BROKER_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-bootstrap-broker@1"
 LIVE_STATUS_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-live-status@1"
@@ -2423,25 +2426,98 @@ class _LiveMonitor:
         self.failure = ""
         self.projection_failure = ""
         self.projection_receipt: dict[str, Any] = {}
-        self.client, self.grant, _token = _make_client(
-            server, board, client_id="doep-state-owner:live-monitor"
-        )
-        self.source = TypedDatabaseTaskSource(self.client, owns_client=True)
+        self._typed_source_class = TypedDatabaseTaskSource
+        self._consecutive_control_failures = 0
+        self.client: Any | None = None
+        self.grant: Any | None = None
+        self.source: Any | None = None
+        self._rebind()
         self._thread = threading.Thread(target=self._run, name="doep-live-monitor", daemon=True)
 
     def start(self) -> None:
-        self._write()
+        try:
+            self._write()
+        except BaseException:
+            # A timed-out framed request poisons its transport.  One fresh
+            # binding gives startup a bounded recovery path without weakening
+            # DuckDB/Quack mutation authority or trusting stale projection
+            # bytes.  A second failure is returned to the fail-closed caller.
+            self._rebind()
+            self._write()
         self._thread.start()
 
     def stop(self) -> None:
         self.stopping.set()
-        self._thread.join(timeout=10.0)
+        # ``start`` performs one authoritative read before starting the
+        # thread.  Cleanup must therefore tolerate that read failing without
+        # attempting to join an unstarted thread.  A live request has a
+        # 30-second typed transport bound, so let it unwind before closing the
+        # binding rather than racing the same request/response stream.
+        if self._thread.ident is not None and self._thread is not threading.current_thread():
+            self._thread.join(timeout=LIVE_MONITOR_STOP_TIMEOUT_SECONDS)
+        self._close_binding()
+        if (
+            self._thread.ident is not None
+            and self._thread is not threading.current_thread()
+            and self._thread.is_alive()
+        ):
+            self._thread.join(timeout=5.0)
+
+    def _close_binding(self) -> None:
+        source = self.source
+        grant = self.grant
+        self.source = None
+        self.client = None
+        self.grant = None
         try:
-            self.source.close()
+            if source is not None:
+                source.close()
         finally:
-            self.server.revoke_typed_client_grant(self.grant.grant_id)
+            if grant is not None:
+                self.server.revoke_typed_client_grant(grant.grant_id)
+
+    def _rebind(self) -> None:
+        self._close_binding()
+        if self.stopping.is_set():
+            return
+        client, grant, _token = _make_client(
+            self.server,
+            self.board,
+            client_id="doep-state-owner:live-monitor",
+        )
+        self.client = client
+        self.grant = grant
+        self.source = self._typed_source_class(client, owns_client=True)
+
+    def _handle_control_failure(self, exc: BaseException) -> bool:
+        """Rebind transient monitor reads and report whether recovery is exhausted."""
+
+        self._consecutive_control_failures += 1
+        detail = f"{type(exc).__name__}: {exc}"
+        self.projection_failure = detail
+        if self.stopping.is_set():
+            return False
+        try:
+            self._rebind()
+        except BaseException as rebind_error:
+            detail = (
+                f"{detail}; rebind={type(rebind_error).__name__}: {rebind_error}"
+            )
+            self.projection_failure = detail
+        if (
+            self._consecutive_control_failures
+            < LIVE_MONITOR_MAX_CONSECUTIVE_FAILURES
+        ):
+            return False
+        self.failure = (
+            "typed control projection failed "
+            f"{self._consecutive_control_failures} consecutive times: {detail}"
+        )
+        return True
 
     def _write(self) -> None:
+        if self.client is None or self.source is None:
+            raise HandoffError("live monitor has no typed Quack binding")
         snapshot = None
         page = None
         generation = None
@@ -2548,13 +2624,14 @@ class _LiveMonitor:
         _atomic_json(self.paths["live_status"], payload)
 
     def _run(self) -> None:
-        while not self.stopping.wait(5.0):
+        while not self.stopping.wait(LIVE_MONITOR_INTERVAL_SECONDS):
             try:
                 self._write()
+                self._consecutive_control_failures = 0
             except BaseException as exc:
-                self.failure = f"{type(exc).__name__}: {exc}"
-                os.kill(os.getpid(), signal.SIGTERM)
-                return
+                if self._handle_control_failure(exc):
+                    os.kill(os.getpid(), signal.SIGTERM)
+                    return
 
 
 def _listener() -> socket.socket:
