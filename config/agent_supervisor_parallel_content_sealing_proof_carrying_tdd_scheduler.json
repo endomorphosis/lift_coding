@@ -39,7 +39,7 @@
       "max_backoff_seconds": 10.0,
       "max_restart_attempts": 8,
       "mode": "managed_local",
-      "owner_state_dir": "/home/barberb/lift_coding/.worktrees/pctdd-g9-descendant-source/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g9/quack-owner",
+      "owner_state_dir": "/home/barberb/lift_coding/.worktrees/pctdd-g9-reviewed-deploy/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g9/quack-owner",
       "startup_timeout_seconds": 120.0,
       "termination_grace_seconds": 40.0
     },
@@ -57,8 +57,8 @@
   "dependency_validator_path": "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
   "descendant_source_successor_materialization": {
     "capture_status": "pending_stopped_g8_capture",
-    "control_source_anchor_head": "9eec0a6d3dd5c0915b85080623c958563d422e3a",
-    "control_source_anchor_tree": "97c1546dd5f879dddaedfe8ab6174bf752a54c7f",
+    "control_source_anchor_head": "3be981e55320fba49c4b8395086cea65c8ac571e",
+    "control_source_anchor_tree": "74e3f2aa0f738b442fbc275a78039223fb11ec34",
     "copy_policy": {
       "copied": [
         "authoritative_control_store",
@@ -142,7 +142,7 @@
       "retry_budget_guardrail_enabled": false
     },
     "governed_gitlinks": {
-      "external/ipfs_accelerate": "697054c82e5099f479e69f071fba67b6701bb760",
+      "external/ipfs_accelerate": "b40fe3266eec8c687a59b703a931ece3e42e06ed",
       "external/ipfs_datasets": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
       "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
     },
@@ -262,7 +262,7 @@
   "max_restarts": 3,
   "max_task_attempts": 2,
   "merge_retry_budget": 2,
-  "merge_target_branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
+  "merge_target_branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1-g9",
   "objective_goal_refinement_enabled": false,
   "objective_refill_enabled": false,
   "objectives_path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md",
@@ -380,14 +380,14 @@
   },
   "schema": "ipfs_accelerate_py.agent_supervisor.parallel-content-sealing-proof-carrying-tdd.scheduler_config@1",
   "source_binding": {
-    "accelerator_planning_revision": "9eec0a6d3dd5c0915b85080623c958563d422e3a",
-    "accelerator_planning_tree": "97c1546dd5f879dddaedfe8ab6174bf752a54c7f",
-    "accelerator_required_ancestor": "9eec0a6d3dd5c0915b85080623c958563d422e3a",
-    "accelerator_required_branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1",
+    "accelerator_planning_revision": "3be981e55320fba49c4b8395086cea65c8ac571e",
+    "accelerator_planning_tree": "74e3f2aa0f738b442fbc275a78039223fb11ec34",
+    "accelerator_required_ancestor": "3be981e55320fba49c4b8395086cea65c8ac571e",
+    "accelerator_required_branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1-g9",
     "bootstrap_task_source": "duckdb",
     "changed_revision_requires_fresh_inventory_and_baseline": true,
-    "ipfs_accelerate_planning_revision": "697054c82e5099f479e69f071fba67b6701bb760",
-    "ipfs_accelerate_planning_tree": "717678825fbc47468acf40c81817ca69e09345ef",
+    "ipfs_accelerate_planning_revision": "b40fe3266eec8c687a59b703a931ece3e42e06ed",
+    "ipfs_accelerate_planning_tree": "175de171c91a15b39bdaa1de2db0c51f319b842c",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
     "ipfs_datasets_planning_revision": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
     "ipfs_datasets_planning_tree": "ef4aebe3b1d7e39429c7fb71fd8add4de5afa21a",

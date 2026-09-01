@@ -69,8 +69,8 @@ G8_RUNTIME_ROOT = (
 G9_RUNTIME_ROOT = (
     "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g9"
 )
-G9_CONTROL_SOURCE_ANCHOR_HEAD = "9eec0a6d3dd5c0915b85080623c958563d422e3a"
-G9_CONTROL_SOURCE_ANCHOR_TREE = "97c1546dd5f879dddaedfe8ab6174bf752a54c7f"
+G9_CONTROL_SOURCE_ANCHOR_HEAD = "3be981e55320fba49c4b8395086cea65c8ac571e"
+G9_CONTROL_SOURCE_ANCHOR_TREE = "74e3f2aa0f738b442fbc275a78039223fb11ec34"
 EXPECTED_PROVIDER_ROUTE = {
     "primary_provider_id": "grok_cli",
     "primary_model_id": "grok-4.6",

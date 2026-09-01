@@ -52,8 +52,8 @@ G7_CONTROL_SOURCE_ANCHOR_HEAD = "c8917d039e3f4598a7d29643c621e341318197da"
 G7_CONTROL_SOURCE_ANCHOR_TREE = "c3e061b62caa3ad0c35c7e167242694a8fec171c"
 CONTROL_SOURCE_ANCHOR_HEAD = "85aa9bad12e04e97537c4dcbad2eb89941eaa431"
 CONTROL_SOURCE_ANCHOR_TREE = "5907232e5768dab9d8483c37720165e6b40193ff"
-G9_CONTROL_SOURCE_ANCHOR_HEAD = "9eec0a6d3dd5c0915b85080623c958563d422e3a"
-G9_CONTROL_SOURCE_ANCHOR_TREE = "97c1546dd5f879dddaedfe8ab6174bf752a54c7f"
+G9_CONTROL_SOURCE_ANCHOR_HEAD = "3be981e55320fba49c4b8395086cea65c8ac571e"
+G9_CONTROL_SOURCE_ANCHOR_TREE = "74e3f2aa0f738b442fbc275a78039223fb11ec34"
 EXPECTED_SOURCE_MIGRATION_CONTROL_PATHS = {
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
@@ -1203,7 +1203,7 @@ def validate() -> dict[str, Any]:
         or baseline.get("control_generation_input_tree")
         != G9_CONTROL_SOURCE_ANCHOR_TREE
         or baseline.get("branch")
-        != "agent/parallel-content-sealing-proof-carrying-tdd-v1"
+        != "agent/parallel-content-sealing-proof-carrying-tdd-v1-g9"
         or baseline.get("all_governed_sources_clean_and_gitlink_exact") is not True
         or baseline.get("dirty_user_tree_preserved") is not True
         or not isinstance(baseline_sources, list)
