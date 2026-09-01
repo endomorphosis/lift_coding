@@ -140,6 +140,7 @@ REQUIRED_HASHED_ARTIFACTS = {
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
     "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
+    "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in",
     "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
     "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py",
@@ -148,6 +149,10 @@ REQUIRED_HASHED_ARTIFACTS = {
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
+    (
+        "scripts/ops/agent_supervisor/"
+        "parallel_content_sealing_proof_carrying_tdd_user_systemd.py"
+    ),
     "scripts/pctdd_g7_source_binding_successor.py",
     G8_PROVIDER_ROUTE_MODULE_RELATIVE,
     G9_DESCENDANT_SOURCE_MODULE_RELATIVE,
@@ -157,6 +162,7 @@ REQUIRED_HASHED_ARTIFACTS = {
     "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py",
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
+    "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py",
 }
 
 SOURCE_PATHS = {
