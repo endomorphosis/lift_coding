@@ -20,7 +20,7 @@
   "program_id": "parallel-content-sealing-proof-carrying-tdd-v1",
   "protected_control_hashes_before_manifest_and_seal": {
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json": "sha256:b94644acaa931b0d08cad069c7b02728be7963ea4cec25beaff6224d440dd192",
-    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:76c347aec553b22b292f04e85e900ab388572315f7c1eb12825a0f100a5cae57",
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:5a8aa876101811eefb0262adf90e08c93a82800283f6d25afd53d6cf7314ac1c",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json": "sha256:326f5ad71f8b5cf3986928587ac956a40de4e358daa4780d9948dcad969e0f3a",
     "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in": "sha256:97f8da6b04885371836dee341283c0370a567dd2c436fec594c169b8205f676e",
     "config/parallel_content_sealing_proof_carrying_tdd_ensure.timer": "sha256:75446294cc9559269850bebc5ee1f704ecb199dd2c33eeb0b8801dff0a9e69e7",
@@ -41,7 +41,7 @@
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json": "sha256:f37c0280f3b088597ec7fae028a978e912af3c0f1cf73c4bf2ef22ed9a2ee78b",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json": "sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json": "sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997",
-    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:dcb303b8eb672d8b5e99b019d0e415140903290f8b114cea2ee17f17f3c121ee",
+    "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json": "sha256:a0be262c7fe9bc1f0432a7abedb6f6e405666c11327b4030036b3b39d747db2d",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json": "sha256:11c32db94286c8a7006d6d63fb27b5d4f2a6c02d471d406e50b73fcaeabd7998",
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
     "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:9ee0219cfc50e47f661bb2938f66d00c9b7f5e99767113bb7ae0f3457069ed4b",
