@@ -109,6 +109,7 @@ def test_templates_render_deterministically_to_resume_only() -> None:
 def test_user_systemd_controls_are_sealed_and_worker_protected() -> None:
     controls = {
         "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in",
+        "config/parallel_content_sealing_proof_carrying_tdd_ensure.timer",
         (
             "scripts/ops/agent_supervisor/"
             "parallel_content_sealing_proof_carrying_tdd_user_systemd.py"

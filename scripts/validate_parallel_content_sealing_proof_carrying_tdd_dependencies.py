@@ -141,6 +141,7 @@ REQUIRED_HASHED_ARTIFACTS = {
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json",
     "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
     "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in",
+    "config/parallel_content_sealing_proof_carrying_tdd_ensure.timer",
     "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
     "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py",
