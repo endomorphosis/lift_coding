@@ -142,7 +142,7 @@
       "retry_budget_guardrail_enabled": false
     },
     "governed_gitlinks": {
-      "external/ipfs_accelerate": "19bf757fc0903dfe082c762c30691b64cfc7eee7",
+      "external/ipfs_accelerate": "347724710f0cbdef8da634eb7810c71aed575871",
       "external/ipfs_datasets": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
       "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
     },
@@ -154,6 +154,7 @@
       "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json",
       "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json",
       "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in",
+      "config/parallel_content_sealing_proof_carrying_tdd_ensure.timer",
       "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
       "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md",
       "docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md",
@@ -932,6 +933,7 @@
     "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py",
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
     "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in",
+    "config/parallel_content_sealing_proof_carrying_tdd_ensure.timer",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_user_systemd.py",
     "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py"
   ],
@@ -1000,8 +1002,8 @@
     "accelerator_required_branch": "agent/parallel-content-sealing-proof-carrying-tdd-v1-g9",
     "bootstrap_task_source": "duckdb",
     "changed_revision_requires_fresh_inventory_and_baseline": true,
-    "ipfs_accelerate_planning_revision": "19bf757fc0903dfe082c762c30691b64cfc7eee7",
-    "ipfs_accelerate_planning_tree": "11ee564765b8f65ae32fbf92f12880b464625bdd",
+    "ipfs_accelerate_planning_revision": "347724710f0cbdef8da634eb7810c71aed575871",
+    "ipfs_accelerate_planning_tree": "2e7382b4bcfbda9de558be2a3d67233f950272fd",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
     "ipfs_datasets_planning_revision": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
     "ipfs_datasets_planning_tree": "ef4aebe3b1d7e39429c7fb71fd8add4de5afa21a",
