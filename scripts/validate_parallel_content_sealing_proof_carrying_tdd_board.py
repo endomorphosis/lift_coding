@@ -113,12 +113,14 @@ EXPECTED_DESCENDANT_SOURCE_CONTROL_PATHS = {
     "scripts/pctdd_g7_source_binding_successor.py",
     "scripts/pctdd_g8_provider_route_successor.py",
     "scripts/pctdd_g9_descendant_source_successor.py",
+    "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
     "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
     "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
     "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py",
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
 }
 
