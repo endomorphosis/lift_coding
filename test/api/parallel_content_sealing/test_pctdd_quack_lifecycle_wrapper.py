@@ -137,6 +137,102 @@ def test_json_object_rejects_path_replacement_during_descriptor_read(
         facade._json_object(path)
 
 
+def test_owner_token_reads_one_stable_private_descriptor(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_stable_private_owner_token")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "owner" / "token.quack-token"
+    path.parent.mkdir(mode=0o700)
+    path.write_text("stable_private_token_123\n", encoding="ascii")
+    path.chmod(0o600)
+    monkeypatch.setattr(
+        Path,
+        "read_text",
+        lambda *_args, **_kwargs: pytest.fail("token must use its checked descriptor"),
+    )
+
+    assert facade._read_owner_token(path) == "stable_private_token_123"
+
+
+def test_owner_token_rejects_fifo_without_blocking(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_nonblocking_owner_token_fifo")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "owner" / "token.quack-token"
+    path.parent.mkdir(mode=0o700)
+    os.mkfifo(path, 0o600)
+    real_open = facade.os.open
+
+    def nonblocking_open(target, flags, *args):
+        assert flags & os.O_NONBLOCK, "token FIFO open must be nonblocking"
+        return real_open(target, flags, *args)
+
+    monkeypatch.setattr(facade.os, "open", nonblocking_open)
+
+    with pytest.raises(facade.OperatorError, match="private regular file"):
+        facade._read_owner_token(path)
+
+
+def test_owner_token_rejects_path_replacement_during_descriptor_read(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_replaced_owner_token_descriptor")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "owner" / "token.quack-token"
+    replacement = tmp_path / "owner" / "replacement.quack-token"
+    path.parent.mkdir(mode=0o700)
+    path.write_text("stable_private_token_123\n", encoding="ascii")
+    replacement.write_text("stable_private_token_123\n", encoding="ascii")
+    path.chmod(0o600)
+    replacement.chmod(0o600)
+    real_read = facade.os.read
+    real_replace = facade.os.replace
+    replaced = False
+
+    def replacing_read(descriptor: int, count: int) -> bytes:
+        nonlocal replaced
+        payload = real_read(descriptor, count)
+        if not replaced:
+            replaced = True
+            real_replace(replacement, path)
+        return payload
+
+    monkeypatch.setattr(facade.os, "read", replacing_read)
+
+    with pytest.raises(facade.OperatorError, match="changed while being read"):
+        facade._read_owner_token(path)
+
+
+def test_owner_token_rejects_nonprivate_linked_and_unbounded_files(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_invalid_owner_token_descriptors")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    owner = tmp_path / "owner"
+    owner.mkdir(mode=0o700)
+
+    nonprivate = owner / "nonprivate.quack-token"
+    nonprivate.write_text("private_token_123", encoding="ascii")
+    nonprivate.chmod(0o640)
+    linked = owner / "linked.quack-token"
+    linked.write_text("private_token_456", encoding="ascii")
+    linked.chmod(0o600)
+    os.link(linked, owner / "linked-alias.quack-token")
+    oversized = owner / "oversized.quack-token"
+    oversized.write_bytes(b"a" * 513)
+    oversized.chmod(0o600)
+
+    for path in (nonprivate, linked, oversized):
+        with pytest.raises(facade.OperatorError, match="private regular file"):
+            facade._read_owner_token(path)
+
+
 def test_runtime_path_rejects_intermediate_symlink_without_touching_target(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -550,7 +646,11 @@ def test_operator_seal_check_uses_scrubbed_environment_when_stopped(
     monkeypatch.setattr(
         facade,
         "_owner_projection",
-        lambda _paths: {"lifecycle": "stopped", "liveness": "dead", "identity": {}},
+        lambda _paths: {
+            "lifecycle": "stopped",
+            "liveness": "dead",
+            "identity": {},
+        },
     )
     monkeypatch.setenv("PCTDD_TEST_QUACK_TOKEN", "must_be_scrubbed_123")
     monkeypatch.setenv("IPFS_ACCELERATE_AGENT_QUACK_TOKEN", "must_be_scrubbed_456")
@@ -908,6 +1008,133 @@ def _owner_test_paths(tmp_path: Path) -> dict[str, Path]:
     }
     paths["database"].write_bytes(b"sealed-database-placeholder")
     return paths
+
+
+def test_private_owner_log_preserves_append_behavior_and_hardens_mode(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_private_owner_log_append")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "logs" / "owner.log"
+    path.parent.mkdir(mode=0o700)
+    path.write_bytes(b"before\n")
+    path.chmod(0o640)
+
+    descriptor = facade._open_private_owner_log(path)
+    try:
+        os.write(descriptor, b"after\n")
+    finally:
+        os.close(descriptor)
+
+    assert path.read_bytes() == b"before\nafter\n"
+    assert path.stat().st_mode & 0o777 == 0o600
+
+
+def test_owner_recovery_rejects_log_fifo_without_blocking_and_releases_lock(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_nonblocking_owner_log_fifo")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    paths = _owner_test_paths(tmp_path)
+    paths["logs"].mkdir(mode=0o700)
+    os.mkfifo(paths["owner_log"], 0o600)
+    program = SimpleNamespace(endpoint_secret_handle="env://PCTDD_TEST_TOKEN")
+    board = SimpleNamespace(
+        config_path=tmp_path / "config.json",
+        resolved_database_program=lambda: program,
+    )
+    observed: dict[str, bool] = {}
+
+    class Winner:
+        def acquire(self) -> bool:
+            observed["acquired"] = True
+            return True
+
+        def release(self) -> None:
+            observed["released"] = True
+
+    real_open = facade.os.open
+
+    def nonblocking_open(target, flags, *args):
+        if Path(target) == paths["owner_log"]:
+            assert flags & os.O_NONBLOCK, "owner-log FIFO open must be nonblocking"
+        return real_open(target, flags, *args)
+
+    monkeypatch.setattr(facade.os, "open", nonblocking_open)
+    monkeypatch.setattr(facade, "_owner_recovery_lock", lambda _path: Winner())
+    monkeypatch.setattr(
+        facade,
+        "_owner_projection",
+        lambda _paths: {"lifecycle": "stopped", "liveness": "dead", "identity": {}},
+    )
+    monkeypatch.setattr(
+        facade.subprocess,
+        "Popen",
+        lambda *_args, **_kwargs: pytest.fail(
+            "unsafe log must fail before owner spawn"
+        ),
+    )
+
+    with pytest.raises(facade.OperatorError, match="owner log"):
+        facade._start_owner(board, paths, timeout=1.0)
+
+    assert observed == {"acquired": True, "released": True}
+
+
+def test_private_owner_log_rejects_path_replacement_during_open(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_replaced_owner_log_descriptor")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    path = tmp_path / "logs" / "owner.log"
+    replacement = tmp_path / "logs" / "replacement.log"
+    path.parent.mkdir(mode=0o700)
+    path.write_bytes(b"original\n")
+    replacement.write_bytes(b"replacement\n")
+    path.chmod(0o600)
+    replacement.chmod(0o600)
+    real_fchmod = facade.os.fchmod
+    real_replace = facade.os.replace
+    replaced = False
+
+    def replacing_fchmod(descriptor: int, mode: int) -> None:
+        nonlocal replaced
+        real_fchmod(descriptor, mode)
+        if not replaced:
+            replaced = True
+            real_replace(replacement, path)
+
+    monkeypatch.setattr(facade.os, "fchmod", replacing_fchmod)
+
+    with pytest.raises(facade.OperatorError, match="changed while being opened"):
+        facade._open_private_owner_log(path)
+
+
+def test_private_owner_log_rejects_linked_and_unbounded_files(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_invalid_owner_log_descriptors")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    logs = tmp_path / "logs"
+    logs.mkdir(mode=0o700)
+    linked = logs / "linked.log"
+    linked.write_bytes(b"linked\n")
+    linked.chmod(0o600)
+    os.link(linked, logs / "linked-alias.log")
+    oversized = logs / "oversized.log"
+    oversized.touch(mode=0o600)
+    os.truncate(oversized, facade.MAX_OWNER_LOG_BYTES + 1)
+
+    for path in (linked, oversized):
+        with pytest.raises(
+            facade.OperatorError,
+            match="bounded private regular file",
+        ):
+            facade._open_private_owner_log(path)
 
 
 def test_owner_recovery_abstains_from_live_nonready_owner_under_shared_lock(

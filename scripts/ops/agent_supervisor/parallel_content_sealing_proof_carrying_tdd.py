@@ -72,6 +72,17 @@ OPERATOR_TASK_ALIAS: Final = "PCTDD-000"
 DEFAULT_MONITOR_SECONDS: Final = 180.0
 MIN_STABLE_HEALTH_SECONDS: Final = 15.0
 MAX_JSON_BYTES: Final = 8 * 1024 * 1024
+MAX_OWNER_LOG_BYTES: Final = 64 * 1024 * 1024
+PRIVATE_FILE_STABLE_FIELDS: Final = (
+    "st_dev",
+    "st_ino",
+    "st_mode",
+    "st_size",
+    "st_mtime_ns",
+    "st_ctime_ns",
+    "st_nlink",
+    "st_uid",
+)
 QUACK_ENDPOINT_RE: Final = re.compile(
     r"^quack:(?://)?(127(?:\.\d{1,3}){3}|localhost|::1):(\d{1,5})$",
     re.IGNORECASE,
@@ -825,26 +836,70 @@ def _token_path(owner_dir: Path, secret_handle: str) -> Path:
     return _contained(owner_dir / f"{safe}.quack-token")
 
 
+def _stable_file_identity(left: Any, right: Any) -> bool:
+    return all(
+        getattr(left, field) == getattr(right, field)
+        for field in PRIVATE_FILE_STABLE_FIELDS
+    )
+
+
+def _private_regular_file(
+    observed: Any,
+    *,
+    minimum_size: int,
+    maximum_size: int,
+) -> bool:
+    return bool(
+        stat.S_ISREG(observed.st_mode)
+        and observed.st_uid == os.geteuid()
+        and stat.S_IMODE(observed.st_mode) == 0o600
+        and observed.st_nlink == 1
+        and minimum_size <= observed.st_size <= maximum_size
+    )
+
+
 def _read_owner_token(path: Path) -> str:
+    """Read one stable private token descriptor without blocking on devices."""
+
+    target = _contained(path)
+    flags = (
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+        | getattr(os, "O_NONBLOCK", 0)
+    )
     try:
-        before = os.lstat(path)
+        descriptor = os.open(target, flags)
     except OSError as exc:
         raise OperatorError("Quack token vault is unavailable") from exc
-    if (
-        stat.S_ISLNK(before.st_mode)
-        or not stat.S_ISREG(before.st_mode)
-        or before.st_uid != os.geteuid()
-        or stat.S_IMODE(before.st_mode) != 0o600
-        or before.st_nlink != 1
-        or not 8 <= before.st_size <= 512
-    ):
-        raise OperatorError("Quack token vault file is not a private regular file")
-    descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))
     try:
+        before = os.fstat(descriptor)
+        if not _private_regular_file(before, minimum_size=8, maximum_size=512):
+            raise OperatorError(
+                "Quack token vault file is not a private regular file"
+            )
+        raw = bytearray()
+        while len(raw) <= 512:
+            chunk = os.read(descriptor, 513 - len(raw))
+            if not chunk:
+                break
+            raw.extend(chunk)
         after = os.fstat(descriptor)
-        if (before.st_dev, before.st_ino) != (after.st_dev, after.st_ino):
-            raise OperatorError("Quack token vault changed while opening")
-        token = os.read(descriptor, 1024).decode("ascii").strip()
+        if (
+            len(raw) > 512
+            or len(raw) != after.st_size
+            or not _stable_file_identity(before, after)
+        ):
+            raise OperatorError("Quack token vault changed while being read")
+        try:
+            current = os.lstat(target)
+        except OSError as exc:
+            raise OperatorError(
+                "Quack token vault changed while being read"
+            ) from exc
+        if not _stable_file_identity(after, current):
+            raise OperatorError("Quack token vault changed while being read")
+        token = bytes(raw).decode("ascii").strip()
     except (OSError, UnicodeError) as exc:
         raise OperatorError("Quack token vault cannot be read safely") from exc
     finally:
@@ -852,6 +907,72 @@ def _read_owner_token(path: Path) -> str:
     if TOKEN_RE.fullmatch(token) is None:
         raise OperatorError("Quack token vault material is malformed")
     return token
+
+
+def _open_private_owner_log(path: Path) -> int:
+    """Open one bounded private append log through a verified descriptor."""
+
+    target = _contained(path)
+    flags = (
+        os.O_WRONLY
+        | os.O_CREAT
+        | os.O_APPEND
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+        | getattr(os, "O_NONBLOCK", 0)
+    )
+    try:
+        descriptor = os.open(target, flags, 0o600)
+    except OSError as exc:
+        raise OperatorError("Quack owner log cannot be opened safely") from exc
+    admitted = False
+    try:
+        opened = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or opened.st_uid != os.geteuid()
+            or opened.st_nlink != 1
+            or not 0 <= opened.st_size <= MAX_OWNER_LOG_BYTES
+        ):
+            raise OperatorError(
+                "Quack owner log is not a bounded private regular file"
+            )
+        os.fchmod(descriptor, 0o600)
+        private = os.fstat(descriptor)
+        if (
+            not _private_regular_file(
+                private,
+                minimum_size=0,
+                maximum_size=MAX_OWNER_LOG_BYTES,
+            )
+            or any(
+                getattr(opened, field) != getattr(private, field)
+                for field in (
+                    "st_dev",
+                    "st_ino",
+                    "st_size",
+                    "st_mtime_ns",
+                    "st_nlink",
+                    "st_uid",
+                )
+            )
+        ):
+            raise OperatorError("Quack owner log changed while being opened")
+        try:
+            current = os.lstat(target)
+        except OSError as exc:
+            raise OperatorError(
+                "Quack owner log changed while being opened"
+            ) from exc
+        if not _stable_file_identity(private, current):
+            raise OperatorError("Quack owner log changed while being opened")
+        admitted = True
+        return descriptor
+    except OSError as exc:
+        raise OperatorError("Quack owner log cannot be opened safely") from exc
+    finally:
+        if not admitted:
+            os.close(descriptor)
 
 
 def _task_projection(connection: Any) -> dict[str, Any]:
@@ -1540,12 +1661,7 @@ def _start_owner(
             str(board.config_path),
             "state-owner",
         ]
-        descriptor = os.open(
-            paths["owner_log"],
-            os.O_WRONLY | os.O_CREAT | os.O_APPEND | getattr(os, "O_NOFOLLOW", 0),
-            0o600,
-        )
-        os.chmod(paths["owner_log"], 0o600)
+        descriptor = _open_private_owner_log(paths["owner_log"])
         with os.fdopen(descriptor, "ab", buffering=0) as log:
             process = subprocess.Popen(
                 argv,
