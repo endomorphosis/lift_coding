@@ -117,7 +117,11 @@ class MaterializationError(RuntimeError):
 def _install_import_roots() -> None:
     """Expose the authoritative accelerator checkout without importing it."""
 
-    for path in (ACCEL_ROOT, ROOT):
+    # ``external/ipfs_accelerate`` contains a regular ``scripts`` package,
+    # which otherwise shadows this checkout's namespace-style operator scripts
+    # under ``python -P``.  Bind the exact local script root as a top-level
+    # import authority so the versioned g7/g8/g9 adapters resolve by filename.
+    for path in (ACCEL_ROOT, ROOT, ROOT / "scripts"):
         value = str(path)
         if value not in sys.path:
             sys.path.insert(0, value)
