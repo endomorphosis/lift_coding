@@ -71,6 +71,7 @@ TASK_PREFIX: Final = "PCTDD-"
 OPERATOR_TASK_ALIAS: Final = "PCTDD-000"
 DEFAULT_MONITOR_SECONDS: Final = 180.0
 MIN_STABLE_HEALTH_SECONDS: Final = 15.0
+DEFAULT_STARTUP_BLOCKER_GRACE_SECONDS: Final = 15.0
 MAX_JSON_BYTES: Final = 8 * 1024 * 1024
 MAX_OWNER_LOG_BYTES: Final = 64 * 1024 * 1024
 PRIVATE_FILE_STABLE_FIELDS: Final = (
@@ -1901,6 +1902,67 @@ def _reject_secret_echo(result: Mapping[str, Any], token: str) -> None:
         raise OperatorError("trusted scheduler child emitted private credential material")
 
 
+def _exact_blocked_task_ids(
+    authority: Mapping[str, Any],
+    *,
+    source: str,
+    require_authenticated: bool,
+) -> frozenset[str]:
+    """Return one exact, bounded blocker set or reject its projection.
+
+    The authenticated Quack projection contains the complete 54-task PCTDD
+    population, so a count/list mismatch, duplicate, or foreign alias cannot
+    be treated as startup-recovery evidence.
+    """
+
+    raw_count = authority.get("blocked_count", 0)
+    raw_ids = authority.get("blocked_task_ids", [])
+    if (
+        isinstance(raw_count, bool)
+        or not isinstance(raw_count, int)
+        or raw_count < 0
+        or raw_count > len(CANONICAL_TASK_ALIASES)
+        or not isinstance(raw_ids, list)
+    ):
+        raise OperatorError(f"malformed {source} blocked-task projection")
+    blocked_ids = tuple(raw_ids)
+    if (
+        len(blocked_ids) != raw_count
+        or any(
+            not isinstance(task_id, str)
+            or task_id not in CANONICAL_TASK_ALIASES
+            for task_id in blocked_ids
+        )
+    ):
+        raise OperatorError(f"malformed {source} blocked-task projection")
+    if len(set(blocked_ids)) != len(blocked_ids):
+        raise OperatorError(f"malformed {source} blocked-task projection")
+    if blocked_ids and (
+        require_authenticated
+        and authority.get("authenticated_query") is not True
+    ):
+        raise OperatorError(
+            f"unauthenticated {source} blocked-task projection"
+        )
+    return frozenset(blocked_ids)
+
+
+def _startup_blocker_grace_seconds(board: Any, monitor_seconds: float) -> float:
+    """Bound detached-lane blocker recovery by policy and monitor deadline."""
+
+    payload = getattr(board, "payload", None)
+    raw_grace: Any = DEFAULT_STARTUP_BLOCKER_GRACE_SECONDS
+    if isinstance(payload, Mapping) and "watchdog_startup_grace_seconds" in payload:
+        raw_grace = payload["watchdog_startup_grace_seconds"]
+    if (
+        isinstance(raw_grace, bool)
+        or not isinstance(raw_grace, (int, float))
+        or not 0.0 <= float(raw_grace) < float("inf")
+    ):
+        raise OperatorError("invalid watchdog startup blocker grace")
+    return min(float(raw_grace), monitor_seconds)
+
+
 def _launch_scheduler_and_monitor(
     config_path: Path,
     *,
@@ -1916,6 +1978,15 @@ def _launch_scheduler_and_monitor(
     """Launch the one configured scheduler and monitor authoritative progress."""
 
     initial_completed = int(initial_authority.get("completed_count") or 0)
+    initial_blocked_ids = _exact_blocked_task_ids(
+        initial_authority,
+        source="initial",
+        require_authenticated=True,
+    )
+    startup_blocker_grace = _startup_blocker_grace_seconds(
+        board,
+        monitor_seconds,
+    )
     program = board.resolved_database_program()
     token = _read_owner_token(_token_path(paths["owner"], program.endpoint_secret_handle))
     result = _run(
@@ -1934,7 +2005,9 @@ def _launch_scheduler_and_monitor(
         token = ""
     _require_success(result, "configured-board detached implementation launch")
 
-    deadline = time.monotonic() + monitor_seconds
+    monitor_started = time.monotonic()
+    deadline = monitor_started + monitor_seconds
+    startup_blocker_deadline = monitor_started + startup_blocker_grace
     last: dict[str, Any] = {}
     healthy_since: float | None = None
     healthy_processes: tuple[int, ...] = ()
@@ -2046,14 +2119,42 @@ def _launch_scheduler_and_monitor(
             "stalled_empty_frontier",
         }:
             # Give newly launched lanes a short admission window before treating
-            # an empty frontier as genuine; explicit blockers fail immediately.
-            if last.get("program_state") == "blocked" or (
-                deadline - time.monotonic() < monitor_seconds - 15.0
-            ):
+            # an empty frontier as genuine. Exact blockers already present in
+            # the authenticated pre-launch authority may be reconciled by those
+            # lanes during the bounded startup window. New, additional, or
+            # malformed blockers remain immediate fail-closed terminals.
+            if last.get("program_state") == "blocked":
+                current_blocked_ids = _exact_blocked_task_ids(
+                    authority,
+                    source="current",
+                    require_authenticated=True,
+                )
+                if not current_blocked_ids:
+                    raise OperatorError(
+                        "malformed current blocked-task projection"
+                    )
+                new_blocked_ids = current_blocked_ids - initial_blocked_ids
+                if new_blocked_ids:
+                    joined = ", ".join(sorted(new_blocked_ids))
+                    raise OperatorError(
+                        "supervisor reported new blocked task after detached "
+                        f"launch: {joined}"
+                    )
+                if time.monotonic() >= startup_blocker_deadline:
+                    raise OperatorError(
+                        "initial authenticated blockers persisted through the "
+                        "bounded startup recovery window"
+                    )
+            elif deadline - time.monotonic() < monitor_seconds - 15.0:
                 raise OperatorError(
                     f"supervisor reached non-progress state: {last['program_state']}"
                 )
         time.sleep(1.0)
+    if last.get("program_state") == "blocked":
+        raise OperatorError(
+            "initial authenticated blockers persisted through the bounded "
+            "startup recovery window"
+        )
     if not progress_observed:
         raise OperatorError(
             "supervisor remained live but made no authoritative task progress "
@@ -2223,6 +2324,17 @@ def _resume_locked(
         if supervisor.get("ready") is not True:
             raise OperatorError(
                 "existing configured-board coordinator is live but not healthy"
+            )
+        blocked_task_ids = _exact_blocked_task_ids(
+            authority,
+            source="runtime resume",
+            require_authenticated=True,
+        )
+        if blocked_task_ids:
+            raise OperatorError(
+                "existing configured-board coordinator is healthy but the "
+                "authoritative board is blocked: "
+                + ", ".join(sorted(blocked_task_ids))
             )
         return {
             "schema": OPERATOR_SCHEMA,

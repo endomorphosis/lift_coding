@@ -1404,6 +1404,76 @@ def test_runtime_resume_refuses_duplicate_when_existing_scheduler_is_unhealthy(
         )
 
 
+def test_runtime_resume_refuses_green_watchdog_result_for_blocked_board(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_resume_blocked_existing_scheduler")
+    config = tmp_path / "config.json"
+    board = SimpleNamespace()
+    payload = {"generation": 8}
+    paths = {"state": tmp_path / "state"}
+    authority = _canonical_runtime_authority(facade)
+    authority.update(
+        {
+            "blocked_count": 1,
+            "blocked_task_ids": ["PCTDD-005"],
+        }
+    )
+    monkeypatch.setattr(
+        facade,
+        "_start_owner",
+        lambda *_args, **_kwargs: {
+            "started": False,
+            "already_running": True,
+            "ready": True,
+        },
+    )
+    monkeypatch.setattr(
+        facade,
+        "_configured_board_preflight",
+        lambda _path: {"valid": True, "checks": []},
+    )
+    monkeypatch.setattr(facade, "_load_board", lambda _path: (board, payload))
+    monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
+    monkeypatch.setattr(
+        facade,
+        "_authenticated_projection",
+        lambda *_args, **_kwargs: authority,
+    )
+    monkeypatch.setattr(
+        facade,
+        "_configured_task_identities",
+        lambda _board: tuple(authority["task_identity_rows"]),
+    )
+    monkeypatch.setattr(
+        facade,
+        "_supervisor_projection",
+        lambda *_args, **_kwargs: {
+            "master_pid": 41001,
+            "master_alive": True,
+            "ready": True,
+            "healthy_lane_count": 4,
+            "expected_lane_count": 4,
+        },
+    )
+
+    with pytest.raises(
+        facade.OperatorError,
+        match=(
+            "coordinator is healthy but the authoritative board is blocked: "
+            "PCTDD-005"
+        ),
+    ):
+        facade._resume_locked(
+            config,
+            board=board,
+            payload=payload,
+            paths=paths,
+            monitor_seconds=30.0,
+        )
+
+
 def test_runtime_resume_relaunches_one_dead_master_after_exact_admission(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -1724,6 +1794,259 @@ def test_scheduler_launch_keeps_private_token_out_of_argv_and_receipt(
     assert token not in json.dumps(result, sort_keys=True)
     assert captured["environment_token"] == token
     assert result["already_running"] is False
+
+
+def _blocked_monitor_status(*task_ids: str) -> dict[str, object]:
+    return {
+        "operational_ready": False,
+        "program_state": "blocked",
+        "task_authority": {
+            "authenticated_query": True,
+            "blocked_count": len(task_ids),
+            "blocked_task_ids": list(task_ids),
+            "in_progress_count": 0,
+            "completed_count": 19,
+        },
+        "supervisor": {
+            "master_pid": 0,
+            "master_alive": False,
+            "ready": False,
+            "expected_lane_count": 1,
+            "lanes": [],
+        },
+    }
+
+
+def _running_monitor_status() -> dict[str, object]:
+    return {
+        "operational_ready": True,
+        "program_state": "running",
+        "task_authority": {
+            "authenticated_query": True,
+            "blocked_count": 0,
+            "blocked_task_ids": [],
+            "in_progress_count": 1,
+            "completed_count": 19,
+        },
+        "supervisor": {
+            "master_pid": 42001,
+            "master_alive": True,
+            "ready": True,
+            "expected_lane_count": 1,
+            "lanes": [
+                {
+                    "healthy": True,
+                    "supervisor_pid": 42002,
+                    "daemon_pid": 42003,
+                }
+            ],
+        },
+    }
+
+
+def _launch_monitor_harness(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    module_name: str,
+    statuses: list[dict[str, object]],
+    startup_grace_seconds: float,
+):
+    facade = _load(module_name)
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    monkeypatch.setattr(facade, "MIN_STABLE_HEALTH_SECONDS", 0.0)
+    token = "private_quack_token_startup_race_12345"
+    program = SimpleNamespace(endpoint_secret_handle="env://PCTDD_TEST_TOKEN")
+    board = SimpleNamespace(
+        payload={"watchdog_startup_grace_seconds": startup_grace_seconds},
+        resolved_database_program=lambda: program,
+    )
+    paths = {"owner": tmp_path / "owner"}
+    monkeypatch.setattr(facade, "_read_owner_token", lambda _path: token)
+    monkeypatch.setattr(
+        facade,
+        "_python_environment",
+        lambda **_kwargs: {"PCTDD_TEST_TOKEN": token},
+    )
+    monkeypatch.setattr(
+        facade,
+        "_run",
+        lambda *_args, **_kwargs: {
+            "returncode": 0,
+            "json": {"valid": True, "detached_pid": 42001},
+            "stdout": "",
+            "stderr": "",
+        },
+    )
+    clock = {"now": 0.0}
+    monkeypatch.setattr(facade.time, "monotonic", lambda: clock["now"])
+    monkeypatch.setattr(
+        facade.time,
+        "sleep",
+        lambda seconds: clock.__setitem__("now", clock["now"] + seconds),
+    )
+    samples = {"count": 0}
+
+    def current_status(_path: Path) -> dict[str, object]:
+        index = min(samples["count"], len(statuses) - 1)
+        samples["count"] += 1
+        return statuses[index]
+
+    monkeypatch.setattr(facade, "status", current_status)
+
+    def invoke(initial_authority: dict[str, object], *, monitor_seconds: float = 10.0):
+        return facade._launch_scheduler_and_monitor(
+            tmp_path / "config.json",
+            board=board,
+            paths=paths,
+            owner={"ready": True},
+            initial_authority=initial_authority,
+            monitor_seconds=monitor_seconds,
+            command="resume",
+            mode="runtime_resume",
+        )
+
+    return facade, invoke, clock, samples
+
+
+def test_scheduler_monitor_allows_exact_initial_blockers_to_recover_during_startup(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _facade, invoke, clock, samples = _launch_monitor_harness(
+        tmp_path,
+        monkeypatch,
+        module_name="pctdd_initial_blocker_startup_recovery",
+        statuses=[
+            _blocked_monitor_status("PCTDD-005", "PCTDD-034"),
+            _blocked_monitor_status("PCTDD-005"),
+            _running_monitor_status(),
+            _running_monitor_status(),
+        ],
+        startup_grace_seconds=5.0,
+    )
+
+    result = invoke(
+        {
+            "authenticated_query": True,
+            "completed_count": 19,
+            "blocked_count": 2,
+            "blocked_task_ids": ["PCTDD-005", "PCTDD-034"],
+        }
+    )
+
+    assert result["process_health_claimed"] is True
+    assert result["authoritative_progress_observed"] is True
+    assert samples["count"] == 4
+    assert clock["now"] == 3.0
+
+
+@pytest.mark.parametrize(
+    ("current_authority", "error"),
+    [
+        (
+            {
+                "authenticated_query": True,
+                "blocked_count": 2,
+                "blocked_task_ids": ["PCTDD-005", "PCTDD-006"],
+                "in_progress_count": 0,
+                "completed_count": 19,
+            },
+            "new blocked task after detached launch: PCTDD-006",
+        ),
+        (
+            {
+                "authenticated_query": True,
+                "blocked_count": 2,
+                "blocked_task_ids": ["PCTDD-005"],
+                "in_progress_count": 0,
+                "completed_count": 19,
+            },
+            "malformed current blocked-task projection",
+        ),
+        (
+            {
+                "authenticated_query": True,
+                "blocked_count": 1,
+                "blocked_task_ids": [["PCTDD-005"]],
+                "in_progress_count": 0,
+                "completed_count": 19,
+            },
+            "malformed current blocked-task projection",
+        ),
+    ],
+)
+def test_scheduler_monitor_rejects_new_or_malformed_startup_blockers_immediately(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    current_authority: dict[str, object],
+    error: str,
+) -> None:
+    current = _blocked_monitor_status("PCTDD-005")
+    current["task_authority"] = current_authority
+    facade, invoke, clock, samples = _launch_monitor_harness(
+        tmp_path,
+        monkeypatch,
+        module_name=f"pctdd_startup_blocker_rejection_{error[:3]}",
+        statuses=[current],
+        startup_grace_seconds=5.0,
+    )
+
+    with pytest.raises(facade.OperatorError, match=error):
+        invoke(
+            {
+                "authenticated_query": True,
+                "completed_count": 19,
+                "blocked_count": 1,
+                "blocked_task_ids": ["PCTDD-005"],
+            }
+        )
+
+    assert samples["count"] == 1
+    assert clock["now"] == 0.0
+
+
+@pytest.mark.parametrize(
+    (
+        "startup_grace_seconds",
+        "monitor_seconds",
+        "expected_samples",
+        "expected_elapsed",
+    ),
+    [(2.0, 10.0, 3, 2.0), (600.0, 2.0, 2, 2.0)],
+)
+def test_scheduler_monitor_rejects_persistent_initial_blockers_at_grace_or_deadline(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    startup_grace_seconds: float,
+    monitor_seconds: float,
+    expected_samples: int,
+    expected_elapsed: float,
+) -> None:
+    facade, invoke, clock, samples = _launch_monitor_harness(
+        tmp_path,
+        monkeypatch,
+        module_name="pctdd_persistent_initial_blocker",
+        statuses=[_blocked_monitor_status("PCTDD-005")],
+        startup_grace_seconds=startup_grace_seconds,
+    )
+
+    with pytest.raises(
+        facade.OperatorError,
+        match="initial authenticated blockers persisted through the bounded",
+    ):
+        invoke(
+            {
+                "authenticated_query": True,
+                "completed_count": 19,
+                "blocked_count": 1,
+                "blocked_task_ids": ["PCTDD-005"],
+            },
+            monitor_seconds=monitor_seconds,
+        )
+
+    assert samples["count"] == expected_samples
+    assert clock["now"] == expected_elapsed
 
 
 def test_scheduler_monitor_reports_terminal_authority_without_stale_pid_health(

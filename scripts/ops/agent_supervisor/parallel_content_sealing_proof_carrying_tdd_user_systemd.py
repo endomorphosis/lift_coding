@@ -69,7 +69,11 @@ RECEIPT_SCHEMA: Final = (
     "ipfs_accelerate_py/agent-supervisor/pctdd-user-systemd-ensure@1"
 )
 MONITOR_SECONDS: Final = 180
-TIMEOUT_SECONDS: Final = 300
+# Bound the complete reviewed recovery envelope: two current-tree preflights
+# (up to 900s each), resume-lock serialization (monitor + 30s), owner recovery
+# (120s), detached scheduler launch (up to 900s), the monitor window, and a
+# bounded margin for validation and process handoff.
+TIMEOUT_SECONDS: Final = 3600
 MAX_UNIT_BYTES: Final = 64 * 1024
 MAX_CONTROL_BYTES: Final = 8 * 1024 * 1024
 SHA256_RE: Final = re.compile(r"^[0-9a-f]{40}$")

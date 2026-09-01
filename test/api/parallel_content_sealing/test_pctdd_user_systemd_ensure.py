@@ -84,6 +84,14 @@ def test_templates_render_deterministically_to_resume_only() -> None:
     assert "Environment=" not in service
     assert "EnvironmentFile=" not in service
     assert "Type=oneshot" in service
+    assert "TimeoutStartSec=3600" in service
+    assert module.TIMEOUT_SECONDS >= (
+        (2 * 900)
+        + (module.MONITOR_SECONDS + 30)
+        + 120
+        + 900
+        + module.MONITOR_SECONDS
+    )
     assert "Restart=no" in service
     assert "KillMode=process" in service
     assert "StartLimitIntervalSec=1800" in service
