@@ -1093,6 +1093,10 @@ def _validate_historical_migration_suffix(
         ).fetchall()
     finally:
         connection.close()
+    evidence_rows = [g7._row_values(row) for row in evidence_rows]
+    plan_rows = [g7._row_values(row) for row in plan_rows]
+    event_rows = [g7._row_values(row) for row in event_rows]
+    operator_rows = [g7._row_values(row) for row in operator_rows]
     if len(operator_rows) != 1:
         _fail("g9 migration suffix operator task differs")
     operator_task_cid = str(operator_rows[0][0])

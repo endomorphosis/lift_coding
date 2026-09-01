@@ -680,6 +680,70 @@ def test_progressed_receipt_keeps_the_initial_source_historical(
     )
 
 
+def test_progressed_suffix_normalizes_authenticated_quack_mapping_rows(
+    migration: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+        DuckDBRow,
+    )
+
+    database, initial, policy, receipt = _historical_migration_authority(
+        migration, tmp_path
+    )
+    _patch_historical_policy_lookup(
+        migration,
+        monkeypatch,
+        root=tmp_path,
+        population=initial,
+        policy=policy,
+    )
+    historical_policy = migration._validate_progressed_receipt(
+        receipt,
+        root=tmp_path,
+        population=_successor_population(),
+        policy=policy,
+    )
+    open_local = migration.g7._open_control_target
+
+    class MappingCursor:
+        def __init__(self, columns: list[str], rows: list[tuple[Any, ...]]) -> None:
+            self.columns = columns
+            self.rows = rows
+
+        def fetchall(self) -> list[DuckDBRow]:
+            return [DuckDBRow(self.columns, row) for row in self.rows]
+
+    class MappingConnection:
+        def __init__(self, target: Path) -> None:
+            self.connection = open_local(target)
+
+        def execute(
+            self, query: str, parameters: list[Any] | None = None
+        ) -> MappingCursor:
+            if parameters is None:
+                self.connection.execute(query)
+            else:
+                self.connection.execute(query, parameters)
+            columns = [str(item[0]) for item in self.connection.description]
+            return MappingCursor(columns, self.connection.fetchall())
+
+        def close(self) -> None:
+            self.connection.close()
+
+    monkeypatch.setattr(
+        migration.g7,
+        "_open_control_target",
+        lambda target: MappingConnection(Path(target)),
+    )
+
+    migration._validate_historical_migration_suffix(
+        database,
+        root=tmp_path,
+        receipt=receipt,
+        historical_policy=historical_policy,
+    )
+
+
 @pytest.mark.parametrize(
     "field",
     ("plan_event_id", "migration_evidence_event_id", "migration_digest"),
