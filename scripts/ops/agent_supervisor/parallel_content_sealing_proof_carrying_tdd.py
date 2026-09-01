@@ -455,7 +455,25 @@ def _run(
         try:
             parsed = json.loads(stdout, object_pairs_hook=_reject_duplicate_keys)
         except (json.JSONDecodeError, OperatorError):
-            parsed = None
+            # Dependency-owned capability resolvers may emit bounded human
+            # diagnostics before the child CLI's final machine record.  Admit
+            # only the final non-empty line as JSON; never scan earlier output
+            # for a convenient-looking authority record.
+            final_line = next(
+                (
+                    line.strip()
+                    for line in reversed(stdout.splitlines())
+                    if line.strip()
+                ),
+                "",
+            )
+            try:
+                parsed = json.loads(
+                    final_line,
+                    object_pairs_hook=_reject_duplicate_keys,
+                )
+            except (json.JSONDecodeError, OperatorError):
+                parsed = None
     return {
         "returncode": int(process.returncode or 0),
         "json": parsed,

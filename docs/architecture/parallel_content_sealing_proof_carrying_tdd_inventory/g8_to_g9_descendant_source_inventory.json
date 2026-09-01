@@ -1,12 +1,590 @@
 {
-  "capture_status": "pending_stopped_g8_capture",
+  "capture_status": "sealed_stopped_g8_capture",
   "final_capture_command": "python scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py --capture-g9-inputs",
   "historical_completed_task_definitions_preserved": true,
   "historical_completions_revalidated_for_integrity_not_reissued": true,
-  "migration_admitted": false,
-  "operator_note": "This tracked pre-capture inventory deliberately contains no live g8 database, owner, coordination, or generation-receipt hashes. Stop and fence g8, capture exact anchors, regenerate controls, commit the final clean descendant source, then migrate g9.",
+  "migration_admitted": true,
+  "operator_note": "Exact stopped g8 anchors captured under the canonical offline owner fence; commit regenerated controls at one clean descendant source before migration.",
   "program_id": "parallel-content-sealing-proof-carrying-tdd-v1",
   "resolved_guardrail_archive": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json",
   "schema": "pctdd/g8-to-g9-descendant-source-inventory@1",
-  "stopped_predecessor_capture": null
+  "stopped_predecessor_capture": {
+    "accepted_plan_root_cid": "baguqeeraaiqrxovjj4y3ecx6jtvzqfrrrqwuag7hl2c35i2z3eapax2nzaya",
+    "control_quiescence": {
+      "effect_claims": 0,
+      "merge_attempts": 0,
+      "provider_invocations": 0,
+      "task_attempts": 0
+    },
+    "coordination_stores": [
+      {
+        "counts": {
+          "active_fenced_leases": 0,
+          "active_maintenance_leases": 0,
+          "active_resource_claims": 0,
+          "active_task_attempts": 0,
+          "active_task_claims": 0
+        },
+        "lane": 0,
+        "path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/state/lane-0/quack-lane-coordination.duckdb",
+        "projection_root": "sha256:578be9f7e31aa139cb738fad36eab1714a4b6ecc555c842b1e86297ff74dbb86",
+        "sha256": "bdac6a2bde64d302b6c754d7de06341d1921ac94d9eefbed2066bd541f38be32",
+        "size_bytes": 17575936
+      },
+      {
+        "counts": {
+          "active_fenced_leases": 0,
+          "active_maintenance_leases": 0,
+          "active_resource_claims": 0,
+          "active_task_attempts": 0,
+          "active_task_claims": 0
+        },
+        "lane": 1,
+        "path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/state/lane-1/quack-lane-coordination.duckdb",
+        "projection_root": "sha256:16db21ddcfba7da438f840d124970c82bbb19a480530e35bddc8af8414729873",
+        "sha256": "82f152dcc1b465c7fc5df93a91ea65962103247eac41a021942d8b19762b88d3",
+        "size_bytes": 12333056
+      },
+      {
+        "counts": {
+          "active_fenced_leases": 0,
+          "active_maintenance_leases": 0,
+          "active_resource_claims": 0,
+          "active_task_attempts": 0,
+          "active_task_claims": 0
+        },
+        "lane": 2,
+        "path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/state/lane-2/quack-lane-coordination.duckdb",
+        "projection_root": "sha256:996a96d8a39125266bc250495b45cf8f1952c6948caf70d9db3ae70ec549e3d4",
+        "sha256": "357a4267f0bb63d0fc6b07326893a3be86cd2476b4496d582589c9aeef91e11a",
+        "size_bytes": 7876608
+      },
+      {
+        "counts": {
+          "active_fenced_leases": 0,
+          "active_maintenance_leases": 0,
+          "active_resource_claims": 0,
+          "active_task_attempts": 0,
+          "active_task_claims": 0
+        },
+        "lane": 3,
+        "path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/state/lane-3/quack-lane-coordination.duckdb",
+        "projection_root": "sha256:2005dec855774929b0ec15849a80ff852b40f5a90247781d9e0054a942f66f83",
+        "sha256": "6faaed293af023586d0633335ea64489a6846b2b713c7a972feca02c174b909c",
+        "size_bytes": 13905920
+      }
+    ],
+    "guardrail_archive": {
+      "path": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json",
+      "sha256": "dfe4759bc9ce74997363f7ac14f8a396222a57dad3b386137e1f9910375d5784",
+      "size_bytes": 4143
+    },
+    "prior_control_projection": {
+      "accepted_tables_digest": "sha256:b0882348daa254b23ed125f52e7bcc50ccdfa43fd8035c1175c539a8b982771b",
+      "counts": {
+        "completion_receipts": 17,
+        "effect_claims": 0,
+        "evidence_nodes": 19,
+        "goals": 24,
+        "merge_attempts": 0,
+        "plan_revisions": 3,
+        "provider_invocations": 0,
+        "task_dependencies": 122,
+        "tasks": 54,
+        "validation_results": 16
+      },
+      "event_count": 276,
+      "event_prefix_digest": "sha256:a6dd0f1395bc40e1a61d03a484247b122c4e3110026a91e171df502039d1ac15",
+      "event_watermark": 276,
+      "historical_row_hashes": {
+        "completion_receipts": [
+          "sha256:038af896031a60b026713c930c1e5d6dca2f30e1320c078f2e265a4f67fbe0b7",
+          "sha256:12a5fbbf48d949d383b1a4eb313f0e467d912d46cee9e4f3d76e91aee3d18370",
+          "sha256:233cc95fb7b24542a0ce7f9ca52ffec165956f182a93a156c7b37a1ff4d6de9a",
+          "sha256:242130e4954505cd2d853da6d3a797fe00fa8e5f77a4ec66ec152226daad35d8",
+          "sha256:395e2eae9bd639c9857929863e4a22b9bb181239ce63570e95995ce006afbd33",
+          "sha256:6513428888d379234f564a7881b553a54dfe92786a8b48c0e5ef64300cbdc0dc",
+          "sha256:6f854539fb5517748d50d7d97b0096968083cf7741e9f0b3bac6a8071caf1b9d",
+          "sha256:722235edf3d1831e581d901b60ed01a8af4742ca935692b39e8934dffea76380",
+          "sha256:768d5cb8e5508f476847d8a39c1e5e1d0f11afe5cba0062e8f4785021f46d8d9",
+          "sha256:82673c89968bda727d10e58202d82660f553ef825d371836183cf167dda61f51",
+          "sha256:883da7fd2ab38647b069b452682524ebc3c2c8168799394e92edb80ff04685f3",
+          "sha256:ab8f10a90b8acf576e99346e52661cecdd5f308b5bbce698b46a8f8481af8792",
+          "sha256:b05910c612c42becf537316fde97dbbff18c876f92efa65ab6f2651c8b38bc11",
+          "sha256:b524767fdfcf104f0f96e84c806d6d1e4aff0f3ab1cd2f94588dc0dcce3f8eae",
+          "sha256:c55e514ee844979cccbe91c8fe8341e844c1e0d012853b7075e8e27793731936",
+          "sha256:d6f137d7b874c2b4c75041857c475ab0351764ad1a665c6a253e01a00b440e7f",
+          "sha256:f410d60596e750dbf4ea101499a5263a1ba44ef342c5f3e6400f23420a6c544e"
+        ],
+        "evidence_nodes": [
+          "sha256:10eb7577943cf0a64807bb20c653a5ba4d7ccdbfa748f02f7e0d1ab1bf7abe12",
+          "sha256:124d72ef672c7d63f2e17c230c0e0c01a2b1a79ae2a22585ceb29be5911cbb9a",
+          "sha256:1ac9eb9331c3f5ae28c25cdc390e29a2fed4e2677e2c59c673eb0009273570ab",
+          "sha256:22677813b24fd99ce4ee8817d54c819bb2aed1e9146e0e4fb7bafa8bcd99cf68",
+          "sha256:26501edfabd476ff7c473e255b51098e8c02f3eb0b80ce9bb2fdbfc1ef3322e2",
+          "sha256:2a6317672a17e9cab8db396cda293c5d100d83ab0727eb933ba1c8bd45087dd0",
+          "sha256:4a555f2d14567f4f3f25d4962362af1b1e005985081baf1951127dbdb42ae2b6",
+          "sha256:6ed3cb8e7997cab8f262ef21c49f1eaafee44751c113f4b9d823c358f90d8995",
+          "sha256:7cf58b64bc39c4089a8d11b4d46e1b5a6ce6cc8fd0454035f50e66a208c473e5",
+          "sha256:8fec846523c70616e4395bc5416b6c9c9cd449c947cb692a5598ba8c1bfccd63",
+          "sha256:a24a815a0d4dd654a96893c02650e185bad8cf545123e2c08abe9a6a1279e8cc",
+          "sha256:a3ffe030adfe4e743ed1ffba6572fae4d1241e383735f9314896e62170e595a6",
+          "sha256:b87581646410040bf7850c5bd13ede1076365e0751979c51a64693267879b82b",
+          "sha256:bb0ef868af0a2a5cf716d07d82a01ebaf8a6620f8e4a13414d7e498eb50ed1da",
+          "sha256:bf2a1da1de1c8cfc76ce12c159dfe535f703894b94447974b5afca172777d5e4",
+          "sha256:ca7e36851f8f26dd5f2775c487a0b83689c659d0c8a8788c5511e4a8745576d8",
+          "sha256:d8081efb60b068f8aea33dbb94e612d21be16e14fb72d335645755805f25f6cd",
+          "sha256:df0a374a141dd18db73f612ef17ead538e3ff2dadf08c77464ff92e6d38f72c0",
+          "sha256:f31cf6e521f4a42049aa00490d53e17c181eab0109a2c69fca58211736545b31"
+        ],
+        "goal_edges": [
+          "sha256:1415128c7c9a1c4ad405504372a14d29aecd528d2afbf58933366572f941f6d3",
+          "sha256:17bf2ea14780ac683767fb95edf349026a99cf90360992a4decd8dada46db1fa",
+          "sha256:184e535a01406c698ed6b62aa744dafe7822900afe4623751946dca41a650dc3",
+          "sha256:1bdc6ea1d176ddade83f3d9273028f66ca1b525ac6da0db7bf4d0ab1902e003e",
+          "sha256:24eced61a04f8c7bf7bac1b764db8e7f69231f8810828e294c8a22f6e29e09c6",
+          "sha256:4fecf6c6df45542e40e760c6a5a8fad646caa009b5d01f808e6c49ecdcf0172b",
+          "sha256:4ffcf4f33b3c746960a7b26f966a2b13fd1d26a430104db3b88c9255f9f44f4c",
+          "sha256:51d164c81a206d42b6e777f5c6f1e68d62aea2f0819a03403d1ef7ebf8d48ccd",
+          "sha256:51e6c39de4af2e85a94211022b435b9046486f67e190fdc5b92640c6257f7d6e",
+          "sha256:7fc7fb24633b74548bccdf9ba905f04aaeec724816869d31ce27361961034ab4",
+          "sha256:8e4f20be5f122cd93e4ded2a3085f8e2c064f4d1e234329c3f0c9fb1c043cdcd",
+          "sha256:9770384ed77d2d5cd988a5508d1905ec2edec0d6dd223740ef3ab4d09e37d697",
+          "sha256:9abf299c50ef728ca9ed97351ce80625df6252a18d16762704930761183f34b6",
+          "sha256:9ee41e57437c766851a7e79046b78cf0b0cec2c97396e84d4d9ed1d4788a04fb",
+          "sha256:b1f472285e9e4c28d92140b142951602898897b7a50246f79b510552b41f19fe",
+          "sha256:c6bc8f50b3d7535c5103fdfc75ddd56f9c7aaa19a552b8293a78f996fbdb74c1",
+          "sha256:d75ccef68d3e33a21fd6e7b5ee819b4463f2e8e3c801f1fa7ab2e8c8706fc9e5",
+          "sha256:dc217cf393b939687d36242e549f9dc157e1a9e45542a4f94d57dfc42fd12f3e",
+          "sha256:dd43389c271ebac3c78bf0e2aeb91f9efc0d85c14d0846773f960d0f94bf77d0",
+          "sha256:e83db3eb4ccac63d08f71908c535e49e8aa60345d5e13078e9a05df87d6258a1",
+          "sha256:e9b1cd4613957619a8c28b1595f1f23b287122d3c00e149806a9691d39ac7a20",
+          "sha256:f09786ef11395a745366f35ce42164463d54950ea18a5595671cbb6811e5ed74",
+          "sha256:f0bafc556ac8e24cb51ea4337fa3fe20044e44196465895d7494d658efab9380"
+        ],
+        "goals": [
+          "sha256:04405129505184671143a273cb2d5018ba78aa5fa3631bba3bedadeac4012a6c",
+          "sha256:079b74117733c56bee36c88c44cea5a89b3989c9b9129ecf200adca273ea9536",
+          "sha256:11aea94299e4b985bd2fdb0a175e07f7726bce0bced54b50ac781f70b120683e",
+          "sha256:11e81252c679adaa70ac80ee08f3f18075d25f6985fd09397390e4966063dbf1",
+          "sha256:161fcd1cfbd18af7ea34218caf57cfc62f74166fd5daf2960be30aa640da3b2f",
+          "sha256:1c48dc0bf84a36da1dcee8cbc9b2b95e52181539809a92c96ea75738c4fa38ef",
+          "sha256:1d24aff23d78cba32ff3b952bfaaf06f883bec97b7b68c76c5b36dbea67ecdca",
+          "sha256:225abf2a14db84867ea984557ee8e463bfe445abc612e2ef593d4944c5f50658",
+          "sha256:2517c279d955f754cb3489924412fcbbd5c558a82d60d2dd972a54e5a220b164",
+          "sha256:2d3c543c024d9c8de024786546e75dc52a3ee895b2ba9548b08a23c75d33f046",
+          "sha256:45c812073bc43a554e7b6ad0064e044479b080fa02c15982b1cdb586882bba8b",
+          "sha256:5700dcc2e0330c9c0699233e69be23a5f61ccc73dd6aadac5c327c335173384f",
+          "sha256:6413537eecb8470497bc8dd7c2d8b028058bb20fb5e7d27073f494710b84c39d",
+          "sha256:66d8fe40a6f2b1640c3232124b05673f37b3cb6c5b19f724656bb14f1a51e6b9",
+          "sha256:85103281feebdb064c966022cf0e3929b72e6268a7a4dcf789c0bf8f6653bae3",
+          "sha256:a7b9604160cedd543c32bc4e2df1251d1124dfa9cc56c4047dc5884857559219",
+          "sha256:ab1fb68aad320a7f0f7c3829972cea35b6ad8fd4e77805e5b96b1b3d26a3d8d1",
+          "sha256:b7e80222bfaef81ac94b955b1add864ab6f739798dda97dd1731bcb23183e6f0",
+          "sha256:df965513d650bd4819e371901f55976e963c700b8ce6fffd542d27ffda4f2998",
+          "sha256:e4e2886f4bc5ea1d10d11faf6f1135a984856ff322d778fa77e1bc0e460ccced",
+          "sha256:eb7aacc5e01de53c1461044fb98b1ad0e6b85b4f6b49d7f7111a18d0f877d635",
+          "sha256:ef14a779f9f83fba841609c64fa5f9e8faad3c15856a98dad39aa6f5296a66a5",
+          "sha256:fe260d9e8ef8fffa9a5c935f76ca02ba4d78aa2745293efbf22de533b3caf5ca",
+          "sha256:fe6369f091732acc7e8a9e77c267c345075242c06b20189404331d1b38ff7022"
+        ],
+        "plan_revisions": [
+          "sha256:55858b24af8e20ecf6de906edf6c67140378d3d97b012037fad5d5e094f89616",
+          "sha256:7b91ed4de6f6e1430047d64ed12c650c5ed49fd253f883f20276e95b3548d59b",
+          "sha256:800ebbb5bd82206cc79762d69b75f862415e3e3473c139c8523f5c7543caf484"
+        ],
+        "validation_results": [
+          "sha256:0086e09d6e5df99e6571c6f8359a748feedc024f3b390b7aebb82a3a18d2a388",
+          "sha256:03e9f1a98e476f2f61eb35776835405cd76bab60c78589cfba4c54704d4bbb13",
+          "sha256:1d7215929c22305e78a74f5b70fa8fd231028d196172a195aa8d437a16f3919e",
+          "sha256:1f44530aacae8beefe6e5b335add64e9e90b88423d22ee47e899d4cc79b610bb",
+          "sha256:47a70dea589c5f0b7e45e2440143e6230dc91f1c5d8a6c27af166b976928714e",
+          "sha256:512e6bb042799fe6f5cb6a9218d11e7f48e9b7b5e585288763d312ed65c2d7ad",
+          "sha256:528742146d564c9c806f85338c084d301817060e23a20cdf6062aa0fd3a19795",
+          "sha256:57f7246e9ed2a76b7ec31ff1446d2cd3a64a4fa4a0b027be20ad5c17852cf2d4",
+          "sha256:78843a5f64743003b593e4a4bd8a6b2bd748a07ed70a6a8fcebec5ea3ddb58b8",
+          "sha256:7aa4204270e88278b49a1446c497af40a9593087bed88b2b628d47fe549d8d3b",
+          "sha256:a7d1df20560591078cf5d4ea9862e3b3acdc367462e5ae5287b133ab2ab7567a",
+          "sha256:b3730919c56e4f0850888402299c5f60836cf857b55715d5c3a36b8f58cfd37e",
+          "sha256:b41eca0c772f041baebf21f13146b1d3de9f5055979a2e02aeef0b4ce399a34a",
+          "sha256:c48ab18c82d7395a911bfaadc82a5e35503ee403c96eb11e6ce66d62f3c06701",
+          "sha256:c55b494cabc729f885f7eaf5b2b5427a8593a1d66f3ff13ceeda1a42bcf16d31",
+          "sha256:d74e80d776032f392499e4ac110a8194562f59c49f95a54ffd96ee2b46dbaddb"
+        ]
+      },
+      "plan": [
+        [
+          "baguqeeraaiqrxovjj4y3ecx6jtvzqfrrrqwuag7hl2c35i2z3eapax2nzaya",
+          "PCTDD-PLAN-V1.1",
+          "active",
+          3,
+          "{\"accepted_completion_changes\":0,\"accepted_definition_changes\":0,\"accepted_plan_root_preserved\":true,\"completed_task_definition_changes\":0,\"current_source_binding\":{\"current_plan_root_cid\":\"baguqeeraxsvpowbhziqvp4zqgzkas7thiforkgyn7cos4maexxcz4wv4mwua\",\"repository_tree_id\":\"3e6337541a6879c4f60ee6b315ffa3583bfc1bc5\",\"source_forest_root\":\"baguqeeraklacm2oe6ayrwqjpcaeya7eg7ds3vbztjd7q3v464ivxuqqgljbq\",\"source_head\":\"13a671c951162052ef4aba9598d53630140bf392\",\"source_identities\":{\"config\":\"sha256:219587f8ff8c2e2fac874d923fb2947f8681ecb268d7f1bc717c6d6a0b669764\",\"dependency_seal\":\"sha256:f52ab0870f7c4b19848724715d596c30587a935b2d7a63ac162b6982ada21a5e\",\"dependency_validator\":\"sha256:67d9c1e64eeb55b489a6e5ce95ee297ebad4c8e769683d8d7b049b9f11968de3\",\"materializer\":\"sha256:98a93307bc255d3cd082996f774ecd0291a172073a55987b8b73e39e26043c57\",\"objectives\":\"sha256:3771a42d8301cc0a5a904edeada71f068979a7db3158ee58f5a0fe3571c2f6b0\",\"plan\":\"sha256:e90887d034e9230bdf7f18119d20ef80d9a797905b05890171a5eff9e3219330\",\"protected:artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json\":\"sha256:e7a1ede7bc4fb9608726759e77971f421ffb385cd2573100921b29f079d50139\",\"protected:config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json\":\"sha256:219587f8ff8c2e2fac874d923fb2947f8681ecb268d7f1bc717c6d6a0b669764\",\"protected:config/parallel_content_sealing_proof_carrying_tdd_benchmark.json\":\"sha256:326f5ad71f8b5cf3986928587ac956a40de4e358daa4780d9948dcad969e0f3a\",\"protected:config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json\":\"sha256:050a6ce010f0721b7f63a6f380a1f83c235a640b85091d75042dfd90bb2a5294\",\"protected:config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json\":\"sha256:f52ab0870f7c4b19848724715d596c30587a935b2d7a63ac162b6982ada21a5e\",\"protected:config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json\":\"sha256:1b61f10063e4ae29acbf2c83fa5a951473d20f558b3ff6a442424d1153d2c780\",\"protected:docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md\":\"sha256:e90887d034e9230bdf7f18119d20ef80d9a797905b05890171a5eff9e3219330\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd.objectives.md\":\"sha256:3771a42d8301cc0a5a904edeada71f068979a7db3158ee58f5a0fe3571c2f6b0\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd.todo.md\":\"sha256:e488ca53ea8f6aa7be7c0b33fdee3390af05e6274b615648ddbce06e922616d8\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/authority_matrix.json\":\"sha256:2ab53517798dcf840dc5aeb6c89b889931b1ed06c6f09592d79568a4a896c827\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/benchmark_preregistration.json\":\"sha256:326f5ad71f8b5cf3986928587ac956a40de4e358daa4780d9948dcad969e0f3a\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/fixture_adapter_inventory.json\":\"sha256:b1ab0748c41944b7c01e0895e930f55c6d7c8907387ff4b71a1141b38d1d3576\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g5_migration_inventory.json\":\"sha256:377ca828ed51ee29355a4d782da847fa0986db506f86ec3f79126ef067b4c250\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g6_source_migration_inventory.json\":\"sha256:a7c9ca60074ab5e92f11fe9c3b0c926f13a86389728bf45de07e3cf80f37ab96\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g7_provider_route_migration_inventory.json\":\"sha256:ce046bc39e4c35eddc628c6e05301a4e96c9d215c1cebde7e096ecea52d6003e\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hash_identity_inventory.json\":\"sha256:c9d66ddb8c0533ece06d7a26be36f49d4e46bf6d9c109eb2c1f68a87be320ae4\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/hashing_critical_path.json\":\"sha256:3f6d6a38ee9958a4e7bc854d726d7c5227effc757cf6924568de1ffd4371af6e\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/overlap_gap_matrix.json\":\"sha256:f37c0280f3b088597ec7fae028a978e912af3c0f1cf73c4bf2ef22ed9a2ee78b\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/proof_claim_matrix.json\":\"sha256:405b681390c20106aaad7b09d5c2a9ced6e21be053c850e6aeb1a7e3528f5133\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/pytest_identity_inventory.json\":\"sha256:836d36cfb9551a4acd32b3e95449dcf2db4f228255d4a113c53f45d3f4898997\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/repository_baseline.json\":\"sha256:ecca874df8cab25a816faf6713b574730ae37787913297ee421acb529979ae14\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/storage_recovery_inventory.json\":\"sha256:11c32db94286c8a7006d6d63fb27b5d4f2a6c02d471d406e50b73fcaeabd7998\",\"protected:docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json\":\"sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e\",\"protected:scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py\":\"sha256:b7f8554e3f9ee79664921bb2ebb8c677f38b996e7b5833384bb73c86b8654224\",\"protected:scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py\":\"sha256:98a93307bc255d3cd082996f774ecd0291a172073a55987b8b73e39e26043c57\",\"protected:scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py\":\"sha256:4abf81defbe8a26266ec1693efaf48f268d7d962238f56c61f370256dd12a3b0\",\"protected:scripts/pctdd_g7_source_binding_successor.py\":\"sha256:f9c58e188003f7df76e3507ab71ead842e33d727550fb4d181bd0cb97f8beeaf\",\"protected:scripts/pctdd_g8_provider_route_successor.py\":\"sha256:3b374cd00d6f4e70e9fa7f875b0c11ce3bf4785f8efdae80e8db9a3281a5e814\",\"protected:scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py\":\"sha256:61757f1a6f66bda791b487a2e96bb7d7dbbe61e8b544b9379a89d7b0e9a04be4\",\"protected:scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py\":\"sha256:fd632f8318a882b76617db2c2b06b26d92583a047fcace793c5d85cc2ff9b827\",\"protected:scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py\":\"sha256:67d9c1e64eeb55b489a6e5ce95ee297ebad4c8e769683d8d7b049b9f11968de3\",\"protected:test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py\":\"sha256:0994308150937934f482109c76751583cf17c6cd8304990edcd630e38b52fbf1\",\"protected:test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py\":\"sha256:1eac5c566cf6bf16a498e502442e7d2f01954c18044bbfa04a59f91138b311b0\",\"protected:test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py\":\"sha256:af9f1c4b07c177a17bab7d7d49c4813f241e0498ec826450d896333c9df74c59\",\"protected:test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py\":\"sha256:5191cd3c43c93deb5784356e886a3a9cb83eda1485c88fe3a1a48dcdc5ee6880\",\"taskboard\":\"sha256:e488ca53ea8f6aa7be7c0b33fdee3390af05e6274b615648ddbce06e922616d8\",\"validator\":\"sha256:fd632f8318a882b76617db2c2b06b26d92583a047fcace793c5d85cc2ff9b827\"}},\"goal_cid\":\"baguqeera5sewggiu4ly66nxq5nywwdyuihec6jvxfn3lb7quuvqsm24uj4ma\",\"last_delta\":{\"current_repository_tree_id\":\"3e6337541a6879c4f60ee6b315ffa3583bfc1bc5\",\"current_source_head\":\"13a671c951162052ef4aba9598d53630140bf392\",\"kind\":\"exact_source_and_provider_route_successor\",\"provider_route_binding_cid\":\"sha256:bdf7a0759c7307a153d8c0967d7d28662d5256634ac07a52b69ac12645e2292d\"},\"plan_alias\":\"PCTDD-PLAN-V1.1\",\"plan_cid\":\"baguqeeraaiqrxovjj4y3ecx6jtvzqfrrrqwuag7hl2c35i2z3eapax2nzaya\",\"provider_role_revision_count\":40,\"provider_route_binding\":{\"authorization\":null,\"fallback_implementer_identity\":\"codex\",\"fallback_model_id\":\"gpt-5.6-terra\",\"fallback_provider_id\":\"codex\",\"fallback_reasoning_effort\":\"medium\",\"fallback_trigger\":\"primary_quota_exhausted\",\"invocation_binding\":null,\"primary_model_id\":\"grok-4.6\",\"primary_provider_id\":\"grok_cli\",\"route_id\":\"agent-supervisor-grok45-terra56-medium-hard-quota-v1\"},\"provider_route_binding_cid\":\"sha256:bdf7a0759c7307a153d8c0967d7d28662d5256634ac07a52b69ac12645e2292d\",\"repository_tree_id\":\"9395357042bf6caae3082dd77328210508edab3b\",\"source_binding_migration_revision\":\"PCTDD-SOURCE-G7\",\"source_head\":\"15722203d786abe954589e8a0665d1813eda2199\",\"source_provider_route_migration_revision\":\"PCTDD-SOURCE-PROVIDER-G8\",\"status\":\"active\"}"
+        ]
+      ],
+      "statuses": {
+        "blocked": 3,
+        "completed": 17,
+        "todo": 34
+      },
+      "task_definition_digest": "sha256:221dac6079020db2218a03585195d060ca2ebab5acb5a61064cc686a27354f1a",
+      "tasks": [
+        {
+          "revision": 2,
+          "status": "completed",
+          "task_alias": "PCTDD-000",
+          "task_cid": "baguqeerantacztqyho52g7266fuhhz3pjpcqfo66bxhjcfjuuuri3llazkgq"
+        },
+        {
+          "revision": 28,
+          "status": "blocked",
+          "task_alias": "PCTDD-001",
+          "task_cid": "baguqeera3ce62yl3w5ar5ygfoh76tmjzzojm5qfhvirjjjuqeserigpa2cra"
+        },
+        {
+          "revision": 11,
+          "status": "completed",
+          "task_alias": "PCTDD-002",
+          "task_cid": "baguqeeraf4q4zjh6vptqe465f5t3anbqxvkmijzaav64x547qp6wos6ug4ma"
+        },
+        {
+          "revision": 5,
+          "status": "completed",
+          "task_alias": "PCTDD-003",
+          "task_cid": "baguqeeraaukol334wl7b6yjkkhmjg6plf3e5hadnl5pc3twlsie54mlo7ita"
+        },
+        {
+          "revision": 5,
+          "status": "completed",
+          "task_alias": "PCTDD-004",
+          "task_cid": "baguqeera6adtz7u32hv77aht2yhfzl5invb5cwjakezju4l5kh3q5b7fbwzq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-005",
+          "task_cid": "baguqeeralebfcpvwg72mkrku5nngr6kuda22x6bqx257fi4w3ztelab56iza"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-006",
+          "task_cid": "baguqeerah7muo423u3xf5gi32hazctify2i55cavbdugzzythfqdl4wyif6a"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-007",
+          "task_cid": "baguqeerazst6lunrikvyslwfqzfbqbpwiivb5hxjsdzwvd7jjsqnnfpadwuq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-008",
+          "task_cid": "baguqeeramaktoanhimz5kwz7fstcrhud72qikdivof2kiyle4b2amm3xrf3q"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-009",
+          "task_cid": "baguqeeraoayurquon4t2vfqbh7unlu5fsk3utx2ufulpvl5zhzq7by7uj24q"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-010",
+          "task_cid": "baguqeeraol3ci3moscxzs743ruierh2x6n4e6vvsfn53yutaeuso5wtmkufa"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-011",
+          "task_cid": "baguqeerawfvvorz5mhjqlftaory24igoufkk6lqnjpiw653xwos52drgeiqq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-012",
+          "task_cid": "baguqeeraruouy34gmls7flbbdo4n7lchrmqzw55rob52eyqmne4crn7v4baq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-013",
+          "task_cid": "baguqeeraw2kl3uspm6avirbgf6pl26zb3tsgx55a4vo5sxxzvt7gn2rniuta"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-014",
+          "task_cid": "baguqeerazj7zumgo3r3yqr5x7fl2f7iudrfgurmthzvvgx6kjyckl3ompdqa"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-015",
+          "task_cid": "baguqeeranxxdj34rirjg26x5lrrlcedadiq5mountjn4m233xngqqxy5gi5q"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-016",
+          "task_cid": "baguqeeraiqrikxgdnrodxnooiacqttz4q5xk226sfit5z4rm4yr2qqeypg7a"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-017",
+          "task_cid": "baguqeerax6x66tsz6mxoaorfsceuklc375a75unhsjoqfpkcmvq7rtqr2s5a"
+        },
+        {
+          "revision": 7,
+          "status": "completed",
+          "task_alias": "PCTDD-018",
+          "task_cid": "baguqeeraegwi43rstsbm7dyqbw2cfrw3xn7z2fyur53dwhq2z5uoeaqlrd6a"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-019",
+          "task_cid": "baguqeera7najgtop7pldgtmcxodowq77ftyt66mpnk3cfebop4wa6lgxlsmq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-020",
+          "task_cid": "baguqeeran33q7cvyxsmazpkekt7aikhsmtucftkortncni3atg7gyvjw25ga"
+        },
+        {
+          "revision": 6,
+          "status": "completed",
+          "task_alias": "PCTDD-021",
+          "task_cid": "baguqeeraiahp6ryajlxkzot3hube3tc3uljejfu7p3oela35bddfpnv5ka6q"
+        },
+        {
+          "revision": 3,
+          "status": "completed",
+          "task_alias": "PCTDD-022",
+          "task_cid": "baguqeerajpwhgwupwfdmbykms4ob6ihppfag72dca2n75pikv4jrkgu32qxq"
+        },
+        {
+          "revision": 3,
+          "status": "completed",
+          "task_alias": "PCTDD-023",
+          "task_cid": "baguqeerablbsistdqlzyixsqqehaifpy4cfjmmmnupwwnzfrx2onikdsguca"
+        },
+        {
+          "revision": 3,
+          "status": "completed",
+          "task_alias": "PCTDD-024",
+          "task_cid": "baguqeerasrnlxawhyi4ngvrlfkdrawly6yjfklmgdvxss2hm6b7krnuwxyyq"
+        },
+        {
+          "revision": 3,
+          "status": "completed",
+          "task_alias": "PCTDD-025",
+          "task_cid": "baguqeeraapm72fhoqno363drnxwjmbptileshzblswozyz6dgug46frkibvq"
+        },
+        {
+          "revision": 3,
+          "status": "completed",
+          "task_alias": "PCTDD-026",
+          "task_cid": "baguqeeralpqu42bhruc4icvi2rmosu6go3k32n7urwciewtf5die747qwmya"
+        },
+        {
+          "revision": 5,
+          "status": "completed",
+          "task_alias": "PCTDD-027",
+          "task_cid": "baguqeeravm62nus6rg5n52x7wwavsqjspxyta2bqyj25uupdamahahfmsuiq"
+        },
+        {
+          "revision": 3,
+          "status": "completed",
+          "task_alias": "PCTDD-028",
+          "task_cid": "baguqeera23hoyo6dhfnpfrh5ma4h6jhnjz5j3vigk4f5r5h47xjiwhu3doea"
+        },
+        {
+          "revision": 13,
+          "status": "completed",
+          "task_alias": "PCTDD-029",
+          "task_cid": "baguqeera2s4tz4myfd7egggeqdj3swxcxfrgws236z7rb7idmmn5jegnbgva"
+        },
+        {
+          "revision": 3,
+          "status": "completed",
+          "task_alias": "PCTDD-030",
+          "task_cid": "baguqeera3zspwfzywvx5p4gi234nokjeoohb7ozldnp2y5ra74ledqnqvvwq"
+        },
+        {
+          "revision": 10,
+          "status": "blocked",
+          "task_alias": "PCTDD-031",
+          "task_cid": "baguqeerawsllwti2jx66v27rdhtlboppfm7zy3i7ax47k5ucuapkxnimzbea"
+        },
+        {
+          "revision": 3,
+          "status": "completed",
+          "task_alias": "PCTDD-032",
+          "task_cid": "baguqeeraaxjsnlmtjo7ic6l2g5lecad2it7habmupnkmjv4wyhv3jyvjfvka"
+        },
+        {
+          "revision": 4,
+          "status": "completed",
+          "task_alias": "PCTDD-033",
+          "task_cid": "baguqeerax3moemmn6oyqdhx6nmeww5qdxo54vh4tkrhejorro3ew4jlczk3q"
+        },
+        {
+          "revision": 18,
+          "status": "blocked",
+          "task_alias": "PCTDD-034",
+          "task_cid": "baguqeerali4k6zayrolznqdh23y4xcpnznnowygnnx6vvhsdixztv7peiada"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-035",
+          "task_cid": "baguqeeraebklpxbhwkd3entgk5f4pyr3juma74uxoabvt7ga24u3d2amjvbq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-036",
+          "task_cid": "baguqeeraqx44hbyw2xisuvtffehfbwwddrzdwsag3vpkh6dtgrysvrzipjua"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-037",
+          "task_cid": "baguqeerarxjeowq46rapfcohizxcsxa5u47kiw5koo3vpcabj2qy2mcw5z3q"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-038",
+          "task_cid": "baguqeeraegiqvtvqnpguncrfiezt6tugpcufwhgifmobazuhhriplhhndc7q"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-039",
+          "task_cid": "baguqeerakrpck4vkouajaypafwfbmqlebxxtq7eidudyqdiiorjt3axyyapq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-040",
+          "task_cid": "baguqeera3yji6ldfpmeqvj2kimmkrziqxpxixzremvd4xag4mtwjfkthvlxa"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-041",
+          "task_cid": "baguqeera7yfjgvrjpbhrcnhfbrqehinakhma3jp4u2qi7q5pe3qphzdzglna"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-042",
+          "task_cid": "baguqeeradh52xs42sp23oix33etexs3fpb2c65nzibrzlxsv5xqu2n7qjcpq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-043",
+          "task_cid": "baguqeera3bhj2wv2kbaj7ffqjc2rbg4j4ysy4zpcrlsta3t4pwznwxosaj6a"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-044",
+          "task_cid": "baguqeerapr7woovxnlw6lc6gvbfo7v3xbeftzrvj63xaoi6ib32j4axbwn7q"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-045",
+          "task_cid": "baguqeera22du5vzyrpfoox33k5nq6ks3kcifk4bct5ruq7unpzy7yfzduebq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-046",
+          "task_cid": "baguqeeraml2xgt37kyktwrye3woado3mjpkr5ep5hppus3zdenxv3yj3hk5a"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-047",
+          "task_cid": "baguqeeraav27eo22s5cmsusena57prxvpcr5n3srhgypu53zlkorlgl2qfda"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-048",
+          "task_cid": "baguqeerahe2jethdqeyi4gj4pahxxyqcvueqojlz27zq7g2y2yosxzi5bbza"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-049",
+          "task_cid": "baguqeeraewuul4cswpy7ilktchalxj4ppitwj4fjmqw6exuxu4d7mo23fsra"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-050",
+          "task_cid": "baguqeera53y4pp5evcm4pymciq6bfgxebgcniyaifqqpgasqbnx5vltfe4eq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-051",
+          "task_cid": "baguqeerayowp3dzkiao3rmtp27zo5zmgtkyrqch6tzcqean63ysgzvsvidgq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-052",
+          "task_cid": "baguqeeratta2iwjyxler2jxheurb7aanx4qerhn5kc5747oixzoh6loziikq"
+        },
+        {
+          "revision": 2,
+          "status": "todo",
+          "task_alias": "PCTDD-053",
+          "task_cid": "baguqeeranbamkgtkry752t3hlnjui4zhknocqmfmcstbsbt6uf6kfletkypa"
+        }
+      ]
+    },
+    "prior_control_store": {
+      "path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/control.duckdb",
+      "sha256": "2b04c5a3673faa7fde09a51d7af727450dd16058c53014a70747acd184f25333",
+      "size_bytes": 40382464
+    },
+    "prior_generation_receipt": {
+      "path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/source-provider-route-migration-receipt.json",
+      "sha256": "a223738b1bc5dd18250e322b03b6275f8de08976f6fd947280a30fb60e950f5b",
+      "size_bytes": 47381
+    },
+    "prior_owner_identity": {
+      "database_uuid": "496924b1-85df-439c-afcf-cb39a6ed0efa",
+      "extension_fingerprint": "sha256:b77954ae50ecc06e10c6e20fc6fd421d73b5c31cf72bb60ae3f29b1f8a85f20b",
+      "fence_epoch": 30,
+      "generation": 30,
+      "listen_uri": "quack:127.0.0.1:27278",
+      "process_birth_id": "birth:f34db2e914cfe03fa3be80efb7945bf7",
+      "revision": 2,
+      "schema_revision": 1,
+      "server_id": "server:6e17a1d1-c790-43c4-aa33-7a847624f951",
+      "started_at": "2026-09-01T00:52:22Z",
+      "status": "stopped",
+      "stopped_at": "2026-09-01T02:55:38Z",
+      "store_id": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/control.duckdb"
+    },
+    "prior_plan_revision": 3,
+    "prior_stopped_owner_status": {
+      "path": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8/quack-owner/quack-state-server.status.json",
+      "sha256": "a99bc237ccb4f2f9552df17cafb0137534852fc8ff201a300551f4b4301aa746",
+      "size_bytes": 3830
+    },
+    "schema": "pctdd/stopped-g8-descendant-source-capture@1"
+  }
 }

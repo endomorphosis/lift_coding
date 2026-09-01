@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import sys
 from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
@@ -41,6 +42,34 @@ def _birth(*, pid: int = 424242, ticks: int = 8888) -> dict[str, object]:
         "boot_id": "boot-pctdd-wrapper",
         "parent_pid": 1,
     }
+
+
+def test_run_accepts_only_final_json_line_after_diagnostics(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_child_final_json_record")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    expected = {
+        "tasks": 54,
+        "capture_status": "sealed_stopped_g8_capture",
+    }
+
+    result = facade._run(
+        (
+            sys.executable,
+            "-c",
+            (
+                "import json; "
+                "print('[ipfs_datasets_py] theorem prover resolver'); "
+                f"print(json.dumps({expected!r}, sort_keys=True))"
+            ),
+        )
+    )
+
+    assert result["returncode"] == 0
+    assert result["json"] == expected
+    assert result["stdout"] == ""
 
 
 def _record(facade, birth: dict[str, object]) -> dict[str, object]:
