@@ -46,7 +46,7 @@
     "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:456cd9f50cfc77039b602865b0519161bef9219a40560ae5584dcb287be9999d",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py": "sha256:2d391409f13e9717bb2652dcfc347e628e4f80fb24d384197ecb975f9087837f",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py": "sha256:75b0c4bad1da463cd4c6ac3379c850297d035ceb8af0b3a05abe2d7370db4ab0",
-    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_user_systemd.py": "sha256:f7fbceae3aacd9156ed3c424a1ee161e4a6cd02eb7dd1bf0ec2e1df6c973bd7a",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_user_systemd.py": "sha256:29e138f94131c2348023664ea3cfe9f3aa3cb3ddabfe95028bffbf337a72265e",
     "scripts/pctdd_g7_source_binding_successor.py": "sha256:f1d849644364d12a50ec8c5c88d52f0e385ec58408a3ea5d1d0e919cce7b2f6c",
     "scripts/pctdd_g8_provider_route_successor.py": "sha256:0a88d8d88ccf63214788ecc935937ddc419b9eb7045a417d6cf84ece69cf1345",
     "scripts/pctdd_g9_descendant_source_successor.py": "sha256:26b96e8cf12000351c5d5edfc6e8165576447d85ef53b7f8f3db4f003307a70e",
@@ -59,7 +59,7 @@
     "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py": "sha256:4b097d2ce99a5bf69215ef4a14849f1f54713a38275c123b529775a5981313c2",
     "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py": "sha256:c82784e8530780a7fb90988528a677a89625997da53605b80282607e0e46736f",
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py": "sha256:fda862f4b9977474519f0119645978f927e5c15fd29e08bb18c1b0d968e282bc",
-    "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py": "sha256:3117e927e31b67f3368e4148a4fa701df8a40c294be3f08bb4fdf44a5da238fb"
+    "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py": "sha256:f4dfc71655bf4f4675c85d170695ade510ed3ae0e6b32116d5def921f95c7a51"
   },
   "resolved_guardrail_archive": "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json",
   "schema": "pctdd/operator-control-manifest@1",
