@@ -95,6 +95,14 @@ FAILED_STATUSES: Final = frozenset(
 OTHER_TERMINAL_STATUSES: Final = frozenset(
     {"cancelled", "superseded"}
 )
+CLOSED_TASK_STATUSES: Final = frozenset(
+    READY_STATUSES
+    | ACTIVE_STATUSES
+    | WAITING_STATUSES
+    | COMPLETED_STATUSES
+    | FAILED_STATUSES
+    | OTHER_TERMINAL_STATUSES
+)
 CANONICAL_TASK_ALIASES: Final = tuple(
     f"PCTDD-{index:03d}" for index in range(54)
 )
@@ -906,6 +914,7 @@ def _task_projection(connection: Any) -> dict[str, Any]:
         (cid, alias, ordinal)
         for cid, alias, ordinal, _state in records
     ]
+    task_statuses = [state for _cid, _alias, _ordinal, state in records]
     operator_statuses = [
         state
         for _cid, alias, _ordinal, state in records
@@ -916,6 +925,10 @@ def _task_projection(connection: Any) -> dict[str, Any]:
         "task_count": task_count,
         "task_aliases": task_aliases,
         "task_ordinals": task_ordinals,
+        "task_statuses": task_statuses,
+        "task_statuses_closed": all(
+            state in CLOSED_TASK_STATUSES for state in task_statuses
+        ),
         "task_identity_rows": (
             task_identity_rows
             if task_count == len(CANONICAL_TASK_ALIASES)
@@ -988,6 +1001,8 @@ def _require_runtime_resume_authority(
     raw_aliases = authority.get("task_aliases")
     raw_ordinals = authority.get("task_ordinals")
     raw_identities = authority.get("task_identity_rows")
+    raw_statuses = authority.get("task_statuses")
+    raw_status_counts = authority.get("status_counts")
     aliases = (
         tuple(str(item) for item in raw_aliases)
         if isinstance(raw_aliases, (list, tuple))
@@ -1013,12 +1028,52 @@ def _require_runtime_resume_authority(
         )
         else ()
     )
+    statuses = (
+        tuple(raw_statuses)
+        if isinstance(raw_statuses, (list, tuple))
+        and all(
+            isinstance(item, str)
+            and item == item.strip().lower()
+            and item in CLOSED_TASK_STATUSES
+            for item in raw_statuses
+        )
+        else ()
+    )
+    status_counts = (
+        dict(raw_status_counts)
+        if isinstance(raw_status_counts, Mapping)
+        and all(
+            isinstance(key, str)
+            and key == key.strip().lower()
+            and key in CLOSED_TASK_STATUSES
+            and isinstance(value, int)
+            and not isinstance(value, bool)
+            and value >= 0
+            for key, value in raw_status_counts.items()
+        )
+        else {}
+    )
+    computed_status_counts: dict[str, int] = {}
+    for status in statuses:
+        computed_status_counts[status] = computed_status_counts.get(status, 0) + 1
     expected_identities = tuple(expected_task_identities)
     operator_status = str(authority.get("operator_task_status") or "").lower()
-    try:
-        task_count = int(authority.get("task_count") or -1)
-    except (TypeError, ValueError):
-        task_count = -1
+    raw_task_count = authority.get("task_count")
+    task_count = (
+        raw_task_count
+        if isinstance(raw_task_count, int) and not isinstance(raw_task_count, bool)
+        else -1
+    )
+    raw_completed_count = authority.get("completed_count")
+    completed_count = (
+        raw_completed_count
+        if isinstance(raw_completed_count, int)
+        and not isinstance(raw_completed_count, bool)
+        else -1
+    )
+    expected_completed_count = sum(
+        1 for status in statuses if status in COMPLETED_STATUSES
+    )
     if authority.get("authenticated_query") is not True:
         raise OperatorError("runtime resume lacks an authenticated Quack query")
     if (
@@ -1028,16 +1083,30 @@ def _require_runtime_resume_authority(
         or len(expected_identities) != len(CANONICAL_TASK_ALIASES)
         or identities != expected_identities
         or authority.get("task_identity_unique") is not True
+        or len(statuses) != len(CANONICAL_TASK_ALIASES)
+        or status_counts != computed_status_counts
+        or sum(status_counts.values()) != len(CANONICAL_TASK_ALIASES)
+        or authority.get("task_statuses_closed") is not True
+        or completed_count != expected_completed_count
     ):
         raise OperatorError("runtime resume task population is not canonical")
-    if operator_status not in OPERATOR_ACCEPTED_STATUSES:
+    if (
+        operator_status not in OPERATOR_ACCEPTED_STATUSES
+        or not statuses
+        or statuses[0] != operator_status
+    ):
         raise OperatorError("runtime resume requires accepted PCTDD-000 controls")
+    accepted_terminal = all(status in COMPLETED_STATUSES for status in statuses)
+    if authority.get("accepted_terminal") is not accepted_terminal:
+        raise OperatorError("runtime resume terminal projection is inconsistent")
     return {
         "authenticated_query": True,
         "canonical_task_count": len(CANONICAL_TASK_ALIASES),
         "canonical_task_population": True,
         "current_task_cid_binding": True,
         "operator_task_status": operator_status,
+        "closed_task_status_population": True,
+        "accepted_terminal": accepted_terminal,
         "direct_database_file_open": False,
     }
 
@@ -1383,96 +1452,204 @@ def status(config_path: Path) -> dict[str, Any]:
     }
 
 
-def _start_owner(board: Any, paths: Mapping[str, Path], *, timeout: float) -> dict[str, Any]:
+def _owner_recovery_lock(path: Path) -> Any:
+    """Return the existing process-shared Quack one-winner authority."""
+
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.runtime.quack_owner_watchdog import (
+        _OneWinnerLock,
+    )
+
+    return _OneWinnerLock(_contained(path))
+
+
+def _start_owner(
+    board: Any,
+    paths: Mapping[str, Path],
+    *,
+    timeout: float,
+    allow_sealed_initial_absence: bool = False,
+) -> dict[str, Any]:
+    """Adopt or recover Quack under its existing one-winner fence.
+
+    A missing historical status is accepted only for a bootstrap whose strict
+    operator seal was already checked.  Every ordinary recovery requires an
+    exact dead process birth.  The shared watchdog lock is re-observed after
+    acquisition, so concurrent bootstrap, resume, and managed-watchdog callers
+    cannot all authorize a new owner from the same stale observation.
+    """
+
     program = board.resolved_database_program()
     if not paths["database"].is_file():
         raise OperatorError("materialize the sealed DuckDB task store before launch")
-    existing = _owner_projection(paths)
-    if existing["lifecycle"] == "ready" and existing["liveness"] == "alive":
-        _authenticated_projection(board, paths)
-        return {"started": False, "already_running": True, "ready": True}
-    if existing["liveness"] == "unknown":
-        raise OperatorError("existing Quack owner liveness is unknown")
-
     for item in (paths["runtime"], paths["state"], paths["logs"], paths["owner"]):
         _private_directory(item)
-    argv = [
-        sys.executable,
-        str(Path(__file__).resolve()),
-        "--config",
-        str(board.config_path),
-        "state-owner",
-    ]
-    descriptor = os.open(
-        paths["owner_log"],
-        os.O_WRONLY | os.O_CREAT | os.O_APPEND | getattr(os, "O_NOFOLLOW", 0),
-        0o600,
+    deadline = time.monotonic() + max(1.0, timeout)
+    winner = _owner_recovery_lock(
+        paths["owner"] / ".managed-owner-recovery.lock"
     )
-    os.chmod(paths["owner_log"], 0o600)
-    with os.fdopen(descriptor, "ab", buffering=0) as log:
-        process = subprocess.Popen(
-            argv,
-            cwd=ROOT,
-            env=_python_environment(secret_handle=program.endpoint_secret_handle),
-            stdin=subprocess.DEVNULL,
-            stdout=log,
-            stderr=subprocess.STDOUT,
-            start_new_session=True,
-            close_fds=True,
-        )
+    lock_acquired = False
+    while time.monotonic() < deadline:
+        existing = _owner_projection(paths)
+        if existing["lifecycle"] == "ready" and existing["liveness"] == "alive":
+            _authenticated_projection(board, paths)
+            return {
+                "started": False,
+                "already_running": True,
+                "ready": True,
+                "one_winner_lock_acquired": False,
+            }
+        if winner.acquire():
+            lock_acquired = True
+            break
+        # A concurrent recovery winner may temporarily publish no status or a
+        # starting status.  It alone may spawn; contenders wait and then adopt
+        # its exact authenticated result instead of inferring absence.
+        time.sleep(min(0.05, max(0.0, deadline - time.monotonic())))
+    if not lock_acquired:
+        raise OperatorError("Quack owner recovery lock remained contended")
+
+    process: subprocess.Popen[bytes] | None = None
+    process_record: Mapping[str, Any] | None = None
+    owner_admitted = False
     try:
-        process_record = _owner_process_record(process.pid)
-        _write_owner_process_record(paths["owner_pid"], process_record)
-    except Exception:
+        existing = _owner_projection(paths)
+        if existing["lifecycle"] == "ready" and existing["liveness"] == "alive":
+            _authenticated_projection(board, paths)
+            return {
+                "started": False,
+                "already_running": True,
+                "ready": True,
+                "one_winner_lock_acquired": True,
+            }
+        if existing["liveness"] == "unknown":
+            raise OperatorError("existing Quack owner liveness is unknown")
+        if existing["liveness"] == "alive":
+            raise OperatorError("existing Quack owner is live but not healthy")
+        if existing["liveness"] == "absent" and not allow_sealed_initial_absence:
+            raise OperatorError("Quack owner absence is not recovery authority")
+        if existing["liveness"] not in {"absent", "dead"}:
+            raise OperatorError("existing Quack owner is not provably recoverable")
+
+        if deadline - time.monotonic() <= 0:
+            raise OperatorError("Quack owner recovery deadline expired")
+        argv = [
+            sys.executable,
+            str(Path(__file__).resolve()),
+            "--config",
+            str(board.config_path),
+            "state-owner",
+        ]
+        descriptor = os.open(
+            paths["owner_log"],
+            os.O_WRONLY | os.O_CREAT | os.O_APPEND | getattr(os, "O_NOFOLLOW", 0),
+            0o600,
+        )
+        os.chmod(paths["owner_log"], 0o600)
+        with os.fdopen(descriptor, "ab", buffering=0) as log:
+            process = subprocess.Popen(
+                argv,
+                cwd=ROOT,
+                env=_python_environment(secret_handle=program.endpoint_secret_handle),
+                stdin=subprocess.DEVNULL,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+                close_fds=True,
+            )
+        try:
+            process_record = _owner_process_record(process.pid)
+            _write_owner_process_record(paths["owner_pid"], process_record)
+        except Exception:
+            _ensure_import_path()
+            from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
+                terminate_process_with_grace,
+            )
+
+            terminate_process_with_grace(
+                process,
+                grace_seconds=5.0,
+                kill_wait_seconds=5.0,
+            )
+            raise
+        while time.monotonic() < deadline:
+            if process.poll() is not None:
+                _cleanup_owned_owner_pid(
+                    paths["owner_pid"],
+                    process_record["process_birth"],
+                )
+                raise OperatorError(
+                    "detached Quack owner exited before authenticated readiness"
+                )
+            try:
+                projection = _authenticated_projection(board, paths)
+            except Exception:
+                time.sleep(0.25)
+                continue
+            observed_owner = _owner_projection(paths)
+            observed_identity = observed_owner.get("identity")
+            observed_birth = (
+                observed_identity.get("process_birth")
+                if isinstance(observed_identity, Mapping)
+                else None
+            )
+            if not isinstance(observed_birth, Mapping) or dict(observed_birth) != dict(
+                process_record["process_birth"]
+            ):
+                raise OperatorError(
+                    "authenticated Quack readiness names a different process birth"
+                )
+            owner_admitted = True
+            return {
+                "started": True,
+                "already_running": False,
+                "detached": True,
+                "ready": True,
+                "pid": process.pid,
+                "authenticated_query": projection["authenticated_query"],
+                "one_winner_lock_acquired": True,
+                "log": str(paths["owner_log"].relative_to(ROOT)),
+            }
         _ensure_import_path()
         from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
             terminate_process_with_grace,
         )
 
-        terminate_process_with_grace(
+        terminated = terminate_process_with_grace(
             process,
             grace_seconds=5.0,
             kill_wait_seconds=5.0,
         )
-        raise
-    deadline = time.monotonic() + max(1.0, timeout)
-    while time.monotonic() < deadline:
-        if process.poll() is not None:
+        if not terminated.timed_out:
             _cleanup_owned_owner_pid(
                 paths["owner_pid"],
                 process_record["process_birth"],
             )
-            raise OperatorError("detached Quack owner exited before authenticated readiness")
+        raise OperatorError("detached Quack owner did not reach authenticated readiness")
+    finally:
         try:
-            projection = _authenticated_projection(board, paths)
-        except Exception:
-            time.sleep(0.25)
-            continue
-        return {
-            "started": True,
-            "already_running": False,
-            "detached": True,
-            "ready": True,
-            "pid": process.pid,
-            "authenticated_query": projection["authenticated_query"],
-            "log": str(paths["owner_log"].relative_to(ROOT)),
-        }
-    _ensure_import_path()
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
-        terminate_process_with_grace,
-    )
+            if process is not None and not owner_admitted and process.poll() is None:
+                _ensure_import_path()
+                from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
+                    terminate_process_with_grace,
+                )
 
-    terminated = terminate_process_with_grace(
-        process,
-        grace_seconds=5.0,
-        kill_wait_seconds=5.0,
-    )
-    if not terminated.timed_out:
-        _cleanup_owned_owner_pid(
-            paths["owner_pid"],
-            process_record["process_birth"],
-        )
-    raise OperatorError("detached Quack owner did not reach authenticated readiness")
+                terminated = terminate_process_with_grace(
+                    process,
+                    grace_seconds=5.0,
+                    kill_wait_seconds=5.0,
+                )
+                if (
+                    not terminated.timed_out
+                    and isinstance(process_record, Mapping)
+                    and isinstance(process_record.get("process_birth"), Mapping)
+                ):
+                    _cleanup_owned_owner_pid(
+                        paths["owner_pid"],
+                        process_record["process_birth"],
+                    )
+        finally:
+            winner.release()
 
 
 def _serve_state_owner(config_path: Path) -> dict[str, Any]:
@@ -1641,6 +1818,32 @@ def _launch_scheduler_and_monitor(
         supervisor = supervisor if isinstance(supervisor, Mapping) else {}
         lanes = supervisor.get("lanes")
         lanes = lanes if isinstance(lanes, list) else []
+        if (
+            authority.get("authenticated_query") is True
+            and authority.get("accepted_terminal") is True
+            and last.get("program_state") == "accepted_terminal"
+        ):
+            response = {
+                "schema": OPERATOR_SCHEMA,
+                "command": command,
+                "mode": mode,
+                "launched": True,
+                "already_running": False,
+                "accepted_terminal": True,
+                "process_health_claimed": False,
+                "monitored": True,
+                "authoritative_progress_observed": True,
+                "initial_completed_count": initial_completed,
+                "state_owner": dict(owner),
+                "scheduler": result["json"] if result["json"] is not None else {
+                    "stdout": result["stdout"],
+                    "stderr": result["stderr"],
+                },
+                "status": last,
+            }
+            if runtime_admission is not None:
+                response["runtime_admission"] = dict(runtime_admission)
+            return response
         process_signature = (
             int(supervisor.get("master_pid") or 0),
             *(
@@ -1654,9 +1857,21 @@ def _launch_scheduler_and_monitor(
             ),
         )
         now = time.monotonic()
+        expected_lane_count = int(supervisor.get("expected_lane_count") or 0)
+        all_lanes_live = bool(
+            expected_lane_count > 0
+            and len(lanes) == expected_lane_count
+            and all(
+                isinstance(lane, Mapping) and lane.get("healthy") is True
+                for lane in lanes
+            )
+        )
         if (
             last["operational_ready"] is True
             and progress_observed
+            and supervisor.get("master_alive") is True
+            and supervisor.get("ready") is True
+            and all_lanes_live
             and process_signature
             and all(process_id > 1 for process_id in process_signature)
         ):
@@ -1672,6 +1887,8 @@ def _launch_scheduler_and_monitor(
                     "mode": mode,
                     "launched": True,
                     "already_running": False,
+                    "accepted_terminal": False,
+                    "process_health_claimed": True,
                     "monitored": True,
                     "stable_health_seconds": now - healthy_since,
                     "authoritative_progress_observed": True,
@@ -1742,19 +1959,62 @@ def launch(
 
     if not monitor_seconds > 0:
         raise OperatorError("--monitor-seconds must be positive")
-    # A real bootstrap launch may recover its *existing* Quack authority before
-    # the strict bootstrap seal check.  The seal checker uses authenticated
-    # Quack while an owner is live, so running it first would make the reviewed
-    # stale-owner recovery in _start_owner unreachable.  Starting the owner
-    # grants no task, provider, merge, or completion authority; every historical
-    # seal and current preflight gate remains mandatory before this entry point
-    # can launch a scheduler.  Accepted descendant runtimes use ``resume``.
+    # The configured-board gate is non-mutating and must pass before any
+    # config-derived directory, database owner, or scheduler side effect.  A
+    # stale ready row whose exact process birth is dead may still need Quack
+    # recovery before the strict historical seal can query the live authority;
+    # all other bootstrap states run the strict seal before and after recovery.
     board, payload = _load_board(config_path)
+    _configured_board_preflight(config_path)
+    revalidated_board, revalidated_payload = _load_board(config_path)
+    if (
+        revalidated_payload != payload
+        or getattr(revalidated_board, "configuration_root", None)
+        != getattr(board, "configuration_root", None)
+    ):
+        raise OperatorError("scheduler configuration changed before owner recovery")
+    board = revalidated_board
     paths = _runtime_paths(board)
-    owner = _start_owner(board, paths, timeout=min(120.0, monitor_seconds))
+    initial_owner = _owner_projection(paths)
+    preflight_report: Mapping[str, Any] | None = None
+    seal_can_precede_owner = not (
+        initial_owner.get("liveness") in {"alive", "unknown"}
+        or initial_owner.get("lifecycle")
+        in {"starting", "ready", "stopping", "unknown", "malformed"}
+    ) or (
+        initial_owner.get("lifecycle") == "ready"
+        and initial_owner.get("liveness") == "alive"
+    )
+    if seal_can_precede_owner:
+        preflight_report = preflight(config_path)
+        sealed_board, sealed_payload = _load_board(config_path)
+        if (
+            sealed_payload != payload
+            or getattr(sealed_board, "configuration_root", None)
+            != getattr(board, "configuration_root", None)
+            or _runtime_paths(sealed_board) != paths
+        ):
+            raise OperatorError("scheduler configuration changed before owner recovery")
+        board = sealed_board
+    owner = _start_owner(
+        board,
+        paths,
+        timeout=min(120.0, monitor_seconds),
+        allow_sealed_initial_absence=bool(
+            preflight_report is not None
+            and initial_owner.get("lifecycle") == "absent"
+            and initial_owner.get("liveness") == "absent"
+        ),
+    )
+    # Always repeat the strict seal against the resulting authenticated owner.
     preflight_report = preflight(config_path)
     revalidated_board, revalidated_payload = _load_board(config_path)
-    if revalidated_payload != payload or _runtime_paths(revalidated_board) != paths:
+    if (
+        revalidated_payload != payload
+        or getattr(revalidated_board, "configuration_root", None)
+        != getattr(board, "configuration_root", None)
+        or _runtime_paths(revalidated_board) != paths
+    ):
         raise OperatorError("scheduler configuration changed during owner recovery")
     initial_authority = _authenticated_projection(revalidated_board, paths)
     return _launch_scheduler_and_monitor(
@@ -1779,11 +2039,29 @@ def _resume_locked(
 ) -> dict[str, Any]:
     """Resume one current runtime while the operator serialization is held."""
 
-    owner = _start_owner(board, paths, timeout=min(120.0, monitor_seconds))
     configured_preflight = _configured_board_preflight(config_path)
     revalidated_board, revalidated_payload = _load_board(config_path)
-    if revalidated_payload != payload or _runtime_paths(revalidated_board) != paths:
+    if (
+        revalidated_payload != payload
+        or getattr(revalidated_board, "configuration_root", None)
+        != getattr(board, "configuration_root", None)
+        or _runtime_paths(revalidated_board) != paths
+    ):
         raise OperatorError("scheduler configuration changed during runtime resume")
+    owner = _start_owner(
+        revalidated_board,
+        paths,
+        timeout=min(120.0, monitor_seconds),
+    )
+    post_owner_board, post_owner_payload = _load_board(config_path)
+    if (
+        post_owner_payload != payload
+        or getattr(post_owner_board, "configuration_root", None)
+        != getattr(board, "configuration_root", None)
+        or _runtime_paths(post_owner_board) != paths
+    ):
+        raise OperatorError("scheduler configuration changed during owner recovery")
+    revalidated_board = post_owner_board
     expected_task_identities = _configured_task_identities(revalidated_board)
     authority = _authenticated_projection(revalidated_board, paths)
     admission = _require_runtime_resume_authority(
@@ -1791,6 +2069,22 @@ def _resume_locked(
         expected_task_identities=expected_task_identities,
     )
     supervisor = _supervisor_projection(revalidated_board, paths)
+    if admission["accepted_terminal"] is True:
+        return {
+            "schema": OPERATOR_SCHEMA,
+            "command": "resume",
+            "mode": "runtime_resume",
+            "valid": True,
+            "launched": False,
+            "already_running": bool(supervisor.get("master_alive") is True),
+            "accepted_terminal": True,
+            "process_health_claimed": False,
+            "monitored": False,
+            "state_owner": dict(owner),
+            "configured_board_preflight": dict(configured_preflight),
+            "runtime_admission": admission,
+            "supervisor": supervisor,
+        }
     if supervisor.get("master_alive") is True:
         if supervisor.get("ready") is not True:
             raise OperatorError(
@@ -1838,6 +2132,15 @@ def resume(
     if not monitor_seconds > 0:
         raise OperatorError("--monitor-seconds must be positive")
     board, payload = _load_board(config_path)
+    _configured_board_preflight(config_path)
+    revalidated_board, revalidated_payload = _load_board(config_path)
+    if (
+        revalidated_payload != payload
+        or getattr(revalidated_board, "configuration_root", None)
+        != getattr(board, "configuration_root", None)
+    ):
+        raise OperatorError("scheduler configuration changed before runtime resume")
+    board = revalidated_board
     paths = _runtime_paths(board)
     _private_directory(paths["state"])
     _ensure_import_path()
@@ -1853,7 +2156,12 @@ def resume(
         ):
             revalidated_board, revalidated_payload = _load_board(config_path)
             revalidated_paths = _runtime_paths(revalidated_board)
-            if revalidated_payload != payload or revalidated_paths != paths:
+            if (
+                revalidated_payload != payload
+                or getattr(revalidated_board, "configuration_root", None)
+                != getattr(board, "configuration_root", None)
+                or revalidated_paths != paths
+            ):
                 raise OperatorError(
                     "scheduler configuration changed before runtime resume"
                 )
