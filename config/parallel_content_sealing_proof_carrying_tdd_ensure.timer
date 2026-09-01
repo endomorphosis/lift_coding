@@ -1,0 +1,14 @@
+# Managed by PCTDDUserSystemdEnsure@1. Do not edit in place.
+[Unit]
+Description=Periodically ensure the fail-closed PCTDD supervisor
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=10min
+AccuracySec=30s
+RandomizedDelaySec=45s
+Persistent=true
+Unit=ipfs-accelerate-pctdd-ensure.service
+
+[Install]
+WantedBy=timers.target

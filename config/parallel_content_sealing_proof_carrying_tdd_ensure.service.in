@@ -1,0 +1,15 @@
+# Managed by PCTDDUserSystemdEnsure@1. Do not edit in place.
+[Unit]
+Description=Fail-closed PCTDD supervisor ensure
+Documentation=@PLAN_URI@
+StartLimitIntervalSec=1800
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+WorkingDirectory=@REPOSITORY_DIRECTORY@
+ExecStart=@PYTHON_EXECUTABLE@ -I @OPERATOR_SCRIPT@ --config @SCHEDULER_CONFIG@ resume --monitor-seconds @MONITOR_SECONDS@
+TimeoutStartSec=@TIMEOUT_SECONDS@
+Restart=no
+KillMode=process
+UMask=0077
