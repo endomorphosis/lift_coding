@@ -269,8 +269,10 @@ def test_inert_install_is_atomic_private_and_idempotent(
 
     assert first["created"] == sorted([module.SERVICE_NAME, module.TIMER_NAME])
     assert first["already_exact"] == []
+    assert first["upgraded_from_sealed_predecessor"] == []
     assert second["created"] == []
     assert second["already_exact"] == sorted([module.SERVICE_NAME, module.TIMER_NAME])
+    assert second["upgraded_from_sealed_predecessor"] == []
     assert first["daemon_reload"] is False
     assert first["timer_enabled_and_started"] is False
     assert first["direct_owner_or_master_launch"] is False
@@ -282,6 +284,183 @@ def test_inert_install_is_atomic_private_and_idempotent(
         assert stat.S_ISREG(observed.st_mode)
         assert observed.st_nlink == 1
         assert stat.S_IMODE(observed.st_mode) == 0o600
+
+
+def test_install_atomically_upgrades_exact_sealed_predecessor(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load("pctdd_systemd_sealed_predecessor_upgrade")
+    unit_dir = tmp_path / "user-units"
+    unit_dir.mkdir(mode=0o700)
+    units = module._render_units()
+    migratable = module._migratable_unit_payloads(units)
+    legacy_service = migratable[module.SERVICE_NAME]
+    assert len(legacy_service) == 1
+    for name, payload in units.items():
+        path = unit_dir / name
+        path.write_bytes(
+            legacy_service[0] if name == module.SERVICE_NAME else payload
+        )
+        path.chmod(0o600)
+    _stub_admission(module, monkeypatch)
+    monkeypatch.setattr(
+        module,
+        "_systemctl_action",
+        lambda *_args, **_kwargs: pytest.fail(
+            "inert migration must not mutate systemd"
+        ),
+    )
+
+    result = module.install(
+        module.SCHEDULER_CONFIG,
+        unit_dir=unit_dir,
+        daemon_reload=False,
+        enable=False,
+    )
+    repeated = module.install(
+        module.SCHEDULER_CONFIG,
+        unit_dir=unit_dir,
+        daemon_reload=False,
+        enable=False,
+    )
+
+    assert result["created"] == []
+    assert result["already_exact"] == [module.TIMER_NAME]
+    assert result["upgraded_from_sealed_predecessor"] == [
+        module.SERVICE_NAME
+    ]
+    assert (unit_dir / module.SERVICE_NAME).read_bytes() == units[
+        module.SERVICE_NAME
+    ]
+    assert repeated["upgraded_from_sealed_predecessor"] == []
+    assert repeated["already_exact"] == sorted(units)
+    assert not list(unit_dir.glob(".*.upgrade.*"))
+
+
+def test_sealed_predecessor_digest_cannot_drift_with_current_template() -> None:
+    module = _load("pctdd_systemd_predecessor_digest")
+    units = module._render_units()
+    units[module.SERVICE_NAME] = units[module.SERVICE_NAME].replace(
+        b"Restart=no\n",
+        b"Restart=yes\n",
+    )
+
+    with pytest.raises(module.EnsureError, match="predecessor_derivation"):
+        module._migratable_unit_payloads(units)
+
+
+def test_upgrade_exchange_rolls_back_a_raced_unknown_target(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load("pctdd_systemd_upgrade_exchange_race")
+    unit_dir = tmp_path / "user-units"
+    unit_dir.mkdir(mode=0o700)
+    units = module._render_units()
+    legacy = module._migratable_unit_payloads(units)[module.SERVICE_NAME][0]
+    service = unit_dir / module.SERVICE_NAME
+    service.write_bytes(legacy)
+    service.chmod(0o600)
+    timer = unit_dir / module.TIMER_NAME
+    timer.write_bytes(units[module.TIMER_NAME])
+    timer.chmod(0o600)
+    raced = unit_dir / "raced.service"
+    unknown = b"[Service]\nExecStart=/bin/false\n"
+    raced.write_bytes(unknown)
+    raced.chmod(0o600)
+    _stub_admission(module, monkeypatch)
+    real_exchange = module._rename_exchange_at
+    exchanged = False
+
+    def race_then_exchange(directory_fd: int, left: str, right: str) -> None:
+        nonlocal exchanged
+        if not exchanged:
+            exchanged = True
+            os.replace(
+                raced.name,
+                right,
+                src_dir_fd=directory_fd,
+                dst_dir_fd=directory_fd,
+            )
+        real_exchange(directory_fd, left, right)
+
+    monkeypatch.setattr(module, "_rename_exchange_at", race_then_exchange)
+
+    with pytest.raises(module.EnsureError, match="changed_before_upgrade"):
+        module.install(
+            module.SCHEDULER_CONFIG,
+            unit_dir=unit_dir,
+            daemon_reload=False,
+            enable=False,
+        )
+
+    assert service.read_bytes() == unknown
+    assert not list(unit_dir.glob(".*.upgrade.*"))
+
+
+def test_preexisting_temporary_is_never_removed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load("pctdd_systemd_preexisting_temporary")
+    unit_dir = tmp_path / "user-units"
+    unit_dir.mkdir(mode=0o700)
+    token = "a" * 32
+    monkeypatch.setattr(module.secrets, "token_hex", lambda _size: token)
+    temporary = unit_dir / (
+        f".{module.SERVICE_NAME}.tmp.{os.getpid()}.{token}"
+    )
+    unknown = b"preserve this unrelated temporary\n"
+    temporary.write_bytes(unknown)
+    temporary.chmod(0o600)
+    _stub_admission(module, monkeypatch)
+
+    with pytest.raises(module.EnsureError, match="atomic_unit_write_failed"):
+        module.install(
+            module.SCHEDULER_CONFIG,
+            unit_dir=unit_dir,
+            daemon_reload=False,
+            enable=False,
+        )
+
+    assert temporary.read_bytes() == unknown
+    assert not (unit_dir / module.SERVICE_NAME).exists()
+
+
+def test_directory_swap_is_detected_with_dirfd_anchored_writes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load("pctdd_systemd_directory_swap")
+    unit_dir = tmp_path / "user-units"
+    displaced = tmp_path / "displaced-user-units"
+    _stub_admission(module, monkeypatch)
+    real_create = module._atomic_private_create
+    swapped = False
+
+    def swap_then_create(name: str, payload: bytes, directory_fd: int) -> None:
+        nonlocal swapped
+        if not swapped:
+            swapped = True
+            unit_dir.rename(displaced)
+            unit_dir.mkdir(mode=0o700)
+        real_create(name, payload, directory_fd)
+
+    monkeypatch.setattr(module, "_atomic_private_create", swap_then_create)
+
+    with pytest.raises(module.EnsureError, match="directory_changed"):
+        module.install(
+            module.SCHEDULER_CONFIG,
+            unit_dir=unit_dir,
+            daemon_reload=False,
+            enable=False,
+        )
+
+    assert list(unit_dir.iterdir()) == []
+    assert sorted(path.name for path in displaced.iterdir()) == sorted(
+        [module.SERVICE_NAME, module.TIMER_NAME]
+    )
 
 
 def test_unrecognized_existing_unit_blocks_all_install_mutation(

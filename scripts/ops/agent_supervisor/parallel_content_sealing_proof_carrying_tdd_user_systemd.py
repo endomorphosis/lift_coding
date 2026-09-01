@@ -14,6 +14,8 @@ network operation.  Installation and removal are explicit CLI operations.
 from __future__ import annotations
 
 import argparse
+import ctypes
+import errno
 import fcntl
 import hashlib
 import importlib.util
@@ -21,6 +23,7 @@ import json
 import os
 import pwd
 import re
+import secrets
 import shutil
 import stat
 import subprocess
@@ -74,6 +77,13 @@ MONITOR_SECONDS: Final = 180
 # (120s), detached scheduler launch (up to 900s), the monitor window, and a
 # bounded margin for validation and process handoff.
 TIMEOUT_SECONDS: Final = 3600
+LEGACY_SERVICE_REVISIONS: Final = (
+    (
+        300,
+        "sha256:b153a19680f7c700d07ccc87bafc2bd587911a0dbd60c8cea6128eea3c9d2ee8",
+    ),
+)
+RENAME_EXCHANGE: Final = 2
 MAX_UNIT_BYTES: Final = 64 * 1024
 MAX_CONTROL_BYTES: Final = 8 * 1024 * 1024
 SHA256_RE: Final = re.compile(r"^[0-9a-f]{40}$")
@@ -323,6 +333,30 @@ def _render_units() -> dict[str, bytes]:
         SERVICE_NAME: template.encode("utf-8"),
         TIMER_NAME: timer.encode("utf-8"),
     }
+
+
+def _migratable_unit_payloads(
+    units: Mapping[str, bytes],
+) -> dict[str, tuple[bytes, ...]]:
+    """Return the closed set of previously sealed unit revisions."""
+
+    service = units.get(SERVICE_NAME)
+    if not isinstance(service, bytes):
+        raise EnsureError("rendered_service_unavailable")
+    current = f"TimeoutStartSec={TIMEOUT_SECONDS}\n".encode("ascii")
+    if service.count(current) != 1:
+        raise EnsureError("rendered_service_timeout_ambiguous")
+    predecessors: list[bytes] = []
+    for legacy_timeout, expected_sha256 in LEGACY_SERVICE_REVISIONS:
+        predecessor = service.replace(
+            current,
+            f"TimeoutStartSec={legacy_timeout}\n".encode("ascii"),
+        )
+        observed_sha256 = "sha256:" + hashlib.sha256(predecessor).hexdigest()
+        if observed_sha256 != expected_sha256:
+            raise EnsureError("sealed_predecessor_derivation_mismatch")
+        predecessors.append(predecessor)
+    return {SERVICE_NAME: tuple(predecessors)}
 
 
 def _subprocess_environment(*, systemd: bool) -> dict[str, str]:
@@ -686,7 +720,12 @@ def _unit_directory_lock(directory: Path) -> Iterator[int]:
             os.close(descriptor)
 
 
-def _inspect_unit(path: Path, expected: bytes) -> str:
+def _inspect_unit(
+    path: Path,
+    expected: bytes,
+    *,
+    migratable: Sequence[bytes] = (),
+) -> str:
     try:
         payload, _evidence = _stable_regular_bytes(
             path,
@@ -696,6 +735,8 @@ def _inspect_unit(path: Path, expected: bytes) -> str:
     except FileNotFoundError:
         return "absent"
     if payload != expected:
+        if payload in migratable:
+            return "migratable"
         raise EnsureError("unrecognized_existing_unit_content")
     return "exact"
 
@@ -707,13 +748,169 @@ def _fsync_directory(descriptor: int) -> None:
         raise EnsureError("unit_directory_sync_failed") from exc
 
 
-def _atomic_private_create(path: Path, payload: bytes, directory_fd: int) -> None:
-    temporary = path.with_name(f".{path.name}.tmp.{os.getpid()}")
+def _unit_name(value: str) -> str:
+    if (
+        not value
+        or value in {".", ".."}
+        or "/" in value
+        or "\x00" in value
+        or (os.altsep is not None and os.altsep in value)
+    ):
+        raise EnsureError("unsafe_unit_name")
+    return value
+
+
+def _require_unit_directory_binding(directory: Path, directory_fd: int) -> None:
+    try:
+        path_stat = os.lstat(directory)
+        descriptor_stat = os.fstat(directory_fd)
+    except OSError as exc:
+        raise EnsureError("unit_directory_changed_during_install") from exc
+    if (
+        stat.S_ISLNK(path_stat.st_mode)
+        or not stat.S_ISDIR(path_stat.st_mode)
+        or (path_stat.st_dev, path_stat.st_ino)
+        != (descriptor_stat.st_dev, descriptor_stat.st_ino)
+    ):
+        raise EnsureError("unit_directory_changed_during_install")
+
+
+def _stable_private_unit_bytes_at(
+    directory_fd: int,
+    name: str,
+) -> tuple[bytes, os.stat_result]:
+    unit_name = _unit_name(name)
+    flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0)
+    flags |= getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(unit_name, flags, dir_fd=directory_fd)
+    except FileNotFoundError:
+        raise
+    except OSError as exc:
+        raise EnsureError("owned_artifact_unavailable") from exc
+    try:
+        before = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(before.st_mode)
+            or before.st_uid != os.geteuid()
+            or before.st_nlink != 1
+            or before.st_size < 0
+            or before.st_size > MAX_UNIT_BYTES
+            or stat.S_IMODE(before.st_mode) != 0o600
+        ):
+            raise EnsureError("owned_artifact_custody_invalid")
+        payload = bytearray()
+        while len(payload) <= MAX_UNIT_BYTES:
+            chunk = os.read(
+                descriptor,
+                min(64 * 1024, MAX_UNIT_BYTES + 1 - len(payload)),
+            )
+            if not chunk:
+                break
+            payload.extend(chunk)
+        after = os.fstat(descriptor)
+    except OSError as exc:
+        raise EnsureError("owned_artifact_read_failed") from exc
+    finally:
+        os.close(descriptor)
+    if len(payload) > MAX_UNIT_BYTES:
+        raise EnsureError("owned_artifact_too_large")
+    stable_fields = (
+        "st_dev",
+        "st_ino",
+        "st_mode",
+        "st_size",
+        "st_mtime_ns",
+        "st_ctime_ns",
+        "st_nlink",
+        "st_uid",
+    )
+    if any(getattr(before, field) != getattr(after, field) for field in stable_fields):
+        raise EnsureError("owned_artifact_changed_during_read")
+    try:
+        observed = os.stat(
+            unit_name,
+            dir_fd=directory_fd,
+            follow_symlinks=False,
+        )
+    except OSError as exc:
+        raise EnsureError("owned_artifact_changed_during_read") from exc
+    if (
+        stat.S_ISLNK(observed.st_mode)
+        or (observed.st_dev, observed.st_ino) != (after.st_dev, after.st_ino)
+    ):
+        raise EnsureError("owned_artifact_changed_during_read")
+    return bytes(payload), after
+
+
+def _inspect_unit_at(
+    directory_fd: int,
+    name: str,
+    expected: bytes,
+    *,
+    migratable: Sequence[bytes] = (),
+) -> str:
+    try:
+        payload, _evidence = _stable_private_unit_bytes_at(directory_fd, name)
+    except FileNotFoundError:
+        return "absent"
+    if payload == expected:
+        return "exact"
+    if payload in migratable:
+        return "migratable"
+    raise EnsureError("unrecognized_existing_unit_content")
+
+
+def _temporary_unit_name(name: str, purpose: str) -> str:
+    return _unit_name(
+        f".{_unit_name(name)}.{purpose}.{os.getpid()}.{secrets.token_hex(16)}"
+    )
+
+
+def _unlink_owned_unit_at(
+    directory_fd: int,
+    name: str,
+    expected_stat: os.stat_result,
+) -> None:
+    try:
+        observed = os.stat(
+            _unit_name(name),
+            dir_fd=directory_fd,
+            follow_symlinks=False,
+        )
+    except FileNotFoundError:
+        return
+    except OSError as exc:
+        raise EnsureError("owned_temporary_cleanup_failed") from exc
+    if (
+        stat.S_ISLNK(observed.st_mode)
+        or (observed.st_dev, observed.st_ino)
+        != (expected_stat.st_dev, expected_stat.st_ino)
+    ):
+        raise EnsureError("owned_temporary_changed_before_cleanup")
+    try:
+        os.unlink(_unit_name(name), dir_fd=directory_fd)
+    except OSError as exc:
+        raise EnsureError("owned_temporary_cleanup_failed") from exc
+
+
+def _create_private_temporary_at(
+    directory_fd: int,
+    name: str,
+    payload: bytes,
+) -> os.stat_result:
     flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_CLOEXEC", 0)
     flags |= getattr(os, "O_NOFOLLOW", 0)
     descriptor = -1
+    created_stat: os.stat_result | None = None
     try:
-        descriptor = os.open(temporary, flags, 0o600)
+        descriptor = os.open(
+            _unit_name(name),
+            flags,
+            0o600,
+            dir_fd=directory_fd,
+        )
+        created_stat = os.fstat(descriptor)
         written = 0
         while written < len(payload):
             count = os.write(descriptor, payload[written:])
@@ -730,10 +927,34 @@ def _atomic_private_create(path: Path, payload: bytes, directory_fd: int) -> Non
             or observed.st_size != len(payload)
         ):
             raise EnsureError("atomic_unit_custody_invalid")
-        os.close(descriptor)
-        descriptor = -1
-        os.link(temporary, path, follow_symlinks=False)
-        temporary.unlink()
+        return observed
+    except (EnsureError, OSError) as exc:
+        if created_stat is not None:
+            _unlink_owned_unit_at(directory_fd, name, created_stat)
+        if isinstance(exc, EnsureError):
+            raise
+        raise EnsureError("atomic_unit_write_failed") from exc
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+
+
+def _atomic_private_create(name: str, payload: bytes, directory_fd: int) -> None:
+    temporary = _temporary_unit_name(name, "tmp")
+    temporary_stat = _create_private_temporary_at(
+        directory_fd,
+        temporary,
+        payload,
+    )
+    try:
+        os.link(
+            temporary,
+            _unit_name(name),
+            src_dir_fd=directory_fd,
+            dst_dir_fd=directory_fd,
+            follow_symlinks=False,
+        )
+        _unlink_owned_unit_at(directory_fd, temporary, temporary_stat)
         _fsync_directory(directory_fd)
     except FileExistsError:
         raise
@@ -742,40 +963,163 @@ def _atomic_private_create(path: Path, payload: bytes, directory_fd: int) -> Non
             raise
         raise EnsureError("atomic_unit_write_failed") from exc
     finally:
-        if descriptor >= 0:
-            os.close(descriptor)
+        _unlink_owned_unit_at(directory_fd, temporary, temporary_stat)
+
+
+def _rename_exchange_at(directory_fd: int, left: str, right: str) -> None:
+    try:
+        renameat2 = ctypes.CDLL(None, use_errno=True).renameat2
+    except (AttributeError, OSError) as exc:
+        raise EnsureError("atomic_unit_exchange_unavailable") from exc
+    renameat2.argtypes = (
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    )
+    renameat2.restype = ctypes.c_int
+    result = renameat2(
+        directory_fd,
+        os.fsencode(_unit_name(left)),
+        directory_fd,
+        os.fsencode(_unit_name(right)),
+        RENAME_EXCHANGE,
+    )
+    if result == 0:
+        return
+    error_number = ctypes.get_errno()
+    if error_number in {errno.ENOSYS, errno.EINVAL, errno.EOPNOTSUPP}:
+        raise EnsureError("atomic_unit_exchange_unavailable")
+    raise EnsureError("atomic_unit_exchange_failed")
+
+
+def _atomic_private_replace(
+    name: str,
+    payload: bytes,
+    previous_payloads: Sequence[bytes],
+    directory_fd: int,
+) -> None:
+    """Replace one exact sealed predecessor without an unowned overwrite."""
+
+    previous, previous_stat = _stable_private_unit_bytes_at(
+        directory_fd,
+        name,
+    )
+    if previous not in previous_payloads:
+        raise EnsureError("unrecognized_existing_unit_content")
+    temporary = _temporary_unit_name(name, "upgrade")
+    temporary_stat = _create_private_temporary_at(
+        directory_fd,
+        temporary,
+        payload,
+    )
+    exchanged = False
+    try:
+        revalidated, revalidated_stat = _stable_private_unit_bytes_at(
+            directory_fd,
+            name,
+        )
+        if (
+            revalidated != previous
+            or (revalidated_stat.st_dev, revalidated_stat.st_ino)
+            != (previous_stat.st_dev, previous_stat.st_ino)
+        ):
+            raise EnsureError("owned_unit_changed_before_upgrade")
+        _rename_exchange_at(directory_fd, temporary, name)
+        exchanged = True
         try:
-            temporary.unlink()
-        except FileNotFoundError:
-            pass
+            displaced, displaced_stat = _stable_private_unit_bytes_at(
+                directory_fd,
+                temporary,
+            )
+            if (
+                displaced != previous
+                or (displaced_stat.st_dev, displaced_stat.st_ino)
+                != (previous_stat.st_dev, previous_stat.st_ino)
+            ):
+                raise EnsureError("owned_unit_changed_before_upgrade")
+        except EnsureError as displaced_error:
+            try:
+                _rename_exchange_at(directory_fd, temporary, name)
+            except EnsureError as rollback_error:
+                raise EnsureError("atomic_unit_upgrade_rollback_failed") from (
+                    rollback_error
+                )
+            exchanged = False
+            _unlink_owned_unit_at(directory_fd, temporary, temporary_stat)
+            raise EnsureError("owned_unit_changed_before_upgrade") from (
+                displaced_error
+            )
+        _unlink_owned_unit_at(directory_fd, temporary, displaced_stat)
+        exchanged = False
+        _fsync_directory(directory_fd)
+    except (EnsureError, OSError) as exc:
+        if isinstance(exc, EnsureError):
+            raise
+        raise EnsureError("atomic_unit_upgrade_failed") from exc
+    finally:
+        if not exchanged:
+            try:
+                _unlink_owned_unit_at(
+                    directory_fd,
+                    temporary,
+                    temporary_stat,
+                )
+            except EnsureError:
+                # After a successful exchange, the predecessor inode—not the
+                # created temporary inode—occupies this name and is removed in
+                # the success path above.
+                if _inspect_unit_at(directory_fd, name, payload) != "exact":
+                    raise
 
 
 def _install_exact_units(
     directory: Path,
     units: Mapping[str, bytes],
-) -> tuple[list[str], list[str]]:
+) -> tuple[list[str], list[str], list[str]]:
     created: list[str] = []
     existing: list[str] = []
+    upgraded: list[str] = []
+    migratable = _migratable_unit_payloads(units)
     with _unit_directory_lock(directory) as directory_fd:
+        _require_unit_directory_binding(directory, directory_fd)
         states = {
-            name: _inspect_unit(directory / name, payload)
+            name: _inspect_unit_at(
+                directory_fd,
+                name,
+                payload,
+                migratable=migratable.get(name, ()),
+            )
             for name, payload in sorted(units.items())
         }
         for name, payload in sorted(units.items()):
             if states[name] == "exact":
                 existing.append(name)
                 continue
+            if states[name] == "migratable":
+                _atomic_private_replace(
+                    name,
+                    payload,
+                    migratable[name],
+                    directory_fd,
+                )
+                if _inspect_unit_at(directory_fd, name, payload) != "exact":
+                    raise EnsureError("published_unit_verification_failed")
+                upgraded.append(name)
+                continue
             try:
-                _atomic_private_create(directory / name, payload, directory_fd)
+                _atomic_private_create(name, payload, directory_fd)
             except FileExistsError:
-                if _inspect_unit(directory / name, payload) != "exact":
+                if _inspect_unit_at(directory_fd, name, payload) != "exact":
                     raise EnsureError("concurrent_unrecognized_unit_publish") from None
                 existing.append(name)
             else:
-                if _inspect_unit(directory / name, payload) != "exact":
+                if _inspect_unit_at(directory_fd, name, payload) != "exact":
                     raise EnsureError("published_unit_verification_failed")
                 created.append(name)
-    return created, existing
+        _require_unit_directory_binding(directory, directory_fd)
+    return created, existing, upgraded
 
 
 def _systemctl_action(capability: Mapping[str, Any], *arguments: str) -> None:
@@ -865,7 +1209,7 @@ def install(
     units = _render_units()
     _require_stable_validation(validation, config_path)
     directory = _ensure_unit_dir(directory)
-    created, existing = _install_exact_units(directory, units)
+    created, existing, upgraded = _install_exact_units(directory, units)
     if daemon_reload:
         _systemctl_action(capability, "daemon-reload")
     if enable:
@@ -883,6 +1227,7 @@ def install(
         "unit_roots": _unit_hashes(units),
         "created": created,
         "already_exact": existing,
+        "upgraded_from_sealed_predecessor": upgraded,
         "daemon_reload": bool(daemon_reload),
         "timer_enabled_and_started": bool(enable),
         "oneshot_command": "reviewed_operator_resume_only",
