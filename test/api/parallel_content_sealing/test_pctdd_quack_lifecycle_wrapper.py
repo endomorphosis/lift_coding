@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import json
 import os
+from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -561,6 +562,578 @@ def test_operator_seal_check_uses_scrubbed_environment_when_stopped(
 
     assert "PCTDD_TEST_QUACK_TOKEN" not in environment
     assert "IPFS_ACCELERATE_AGENT_QUACK_TOKEN" not in environment
+
+
+def test_real_launch_recovers_owner_before_seal_preflight(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_real_launch_owner_before_preflight")
+    config = tmp_path / "config.json"
+    config.write_text("{}\n", encoding="utf-8")
+    board = SimpleNamespace()
+    paths = {"runtime": tmp_path / "runtime"}
+    calls: list[str] = []
+
+    def load_board(_path: Path):
+        calls.append("load_board")
+        return board, {}
+
+    def start_owner(_board, _paths, *, timeout: float):
+        calls.append("start_owner")
+        assert _board is board
+        assert _paths is paths
+        assert timeout == 30.0
+        return {"started": True, "ready": True}
+
+    def rejected_preflight(_path: Path):
+        calls.append("preflight")
+        raise facade.OperatorError("injected sealed preflight rejection")
+
+    monkeypatch.setattr(facade, "_load_board", load_board)
+    monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
+    monkeypatch.setattr(facade, "_start_owner", start_owner)
+    monkeypatch.setattr(facade, "preflight", rejected_preflight)
+    monkeypatch.setattr(
+        facade,
+        "_run",
+        lambda *_args, **_kwargs: pytest.fail(
+            "scheduler must not launch after a preflight rejection"
+        ),
+    )
+
+    with pytest.raises(facade.OperatorError, match="sealed preflight rejection"):
+        facade.launch(config, dry_run=False, monitor_seconds=30.0)
+
+    assert calls == ["load_board", "start_owner", "preflight"]
+
+
+def test_dry_run_remains_owner_side_effect_free(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_dry_run_never_starts_owner")
+    config = tmp_path / "config.json"
+    config.write_text("{}\n", encoding="utf-8")
+    calls: list[str] = []
+
+    def accepted_preflight(_path: Path):
+        calls.append("preflight")
+        return {"configured_board": {"valid": True}}
+
+    def run_scheduler(argv, **_kwargs):
+        calls.append("scheduler_dry_run")
+        assert "--dry-run" in argv
+        return {
+            "returncode": 0,
+            "json": {"valid": True, "mode": "dry_run"},
+            "stdout": "",
+            "stderr": "",
+        }
+
+    monkeypatch.setattr(facade, "preflight", accepted_preflight)
+    monkeypatch.setattr(
+        facade,
+        "_start_owner",
+        lambda *_args, **_kwargs: pytest.fail("dry-run must not start Quack"),
+    )
+    monkeypatch.setattr(
+        facade,
+        "_load_board",
+        lambda *_args, **_kwargs: pytest.fail(
+            "preflight owns dry-run board loading and validation"
+        ),
+    )
+    monkeypatch.setattr(facade, "_run", run_scheduler)
+
+    result = facade.launch(config, dry_run=True, monitor_seconds=0.0)
+
+    assert result["mode"] == "dry_run"
+    assert result["state_owner_started"] is False
+    assert calls == ["preflight", "scheduler_dry_run"]
+
+
+def test_invalid_real_monitor_window_has_no_owner_or_preflight_side_effect(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_invalid_real_monitor_window")
+    config = tmp_path / "config.json"
+    config.write_text("{}\n", encoding="utf-8")
+    monkeypatch.setattr(
+        facade,
+        "_load_board",
+        lambda *_args, **_kwargs: pytest.fail("invalid input must fail before board load"),
+    )
+    monkeypatch.setattr(
+        facade,
+        "_start_owner",
+        lambda *_args, **_kwargs: pytest.fail("invalid input must not start Quack"),
+    )
+    monkeypatch.setattr(
+        facade,
+        "preflight",
+        lambda *_args, **_kwargs: pytest.fail("invalid input must not run preflight"),
+    )
+
+    with pytest.raises(facade.OperatorError, match="monitor-seconds must be positive"):
+        facade.launch(config, dry_run=False, monitor_seconds=0.0)
+
+
+def test_real_launch_revalidates_owner_binding_after_preflight(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_real_launch_revalidates_owner_binding")
+    config = tmp_path / "config.json"
+    config.write_text("{}\n", encoding="utf-8")
+    board = SimpleNamespace()
+    changed_board = SimpleNamespace()
+    paths = {"runtime": tmp_path / "runtime-a"}
+    changed_paths = {"runtime": tmp_path / "runtime-b"}
+    loaded = iter(((board, {"generation": 8}), (changed_board, {"generation": 9})))
+    monkeypatch.setattr(facade, "_load_board", lambda _path: next(loaded))
+    monkeypatch.setattr(
+        facade,
+        "_runtime_paths",
+        lambda value: paths if value is board else changed_paths,
+    )
+    monkeypatch.setattr(
+        facade,
+        "_start_owner",
+        lambda *_args, **_kwargs: {"started": True, "ready": True},
+    )
+    monkeypatch.setattr(
+        facade,
+        "preflight",
+        lambda _path: {"configured_board": {"valid": True}},
+    )
+    monkeypatch.setattr(
+        facade,
+        "_run",
+        lambda *_args, **_kwargs: pytest.fail(
+            "scheduler must not launch with a changed owner binding"
+        ),
+    )
+
+    with pytest.raises(facade.OperatorError, match="changed during owner recovery"):
+        facade.launch(config, dry_run=False, monitor_seconds=30.0)
+
+
+def _canonical_runtime_authority(facade) -> dict[str, object]:
+    identities = [
+        (f"task-cid-{index:03d}", alias, index + 1)
+        for index, alias in enumerate(facade.CANONICAL_TASK_ALIASES)
+    ]
+    return {
+        "authenticated_query": True,
+        "task_count": 54,
+        "task_aliases": list(facade.CANONICAL_TASK_ALIASES),
+        "task_ordinals": list(range(1, 55)),
+        "task_identity_rows": identities,
+        "task_identity_unique": True,
+        "operator_task_status": "completed",
+        "completed_count": 17,
+    }
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("authenticated_query", False),
+        ("task_count", 55),
+        ("task_aliases", [f"PCTDD-{index:03d}" for index in range(1, 55)]),
+        ("task_ordinals", list(range(0, 54))),
+        ("task_identity_unique", False),
+        ("operator_task_status", "todo"),
+        ("operator_task_status", "skipped"),
+        ("operator_task_status", "complete"),
+        ("operator_task_status", "done"),
+        ("task_count", {"malformed": True}),
+        ("task_aliases", "PCTDD-000"),
+        ("task_ordinals", [True, *range(2, 55)]),
+        ("task_identity_rows", [("wrong-cid", "PCTDD-000", 1)]),
+    ],
+)
+def test_runtime_resume_rejects_noncanonical_or_unaccepted_authority(
+    field: str,
+    value: object,
+) -> None:
+    facade = _load(f"pctdd_resume_authority_{field}_{str(value)[:8]}")
+    authority = _canonical_runtime_authority(facade)
+    authority[field] = value
+    expected = tuple(authority.get("task_identity_rows", ()))
+    if field == "task_identity_rows":
+        expected = tuple(_canonical_runtime_authority(facade)["task_identity_rows"])
+
+    with pytest.raises(facade.OperatorError):
+        facade._require_runtime_resume_authority(
+            authority,
+            expected_task_identities=expected,
+        )
+
+
+def test_runtime_resume_propagates_current_tree_preflight_rejection(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_resume_current_tree_preflight_rejection")
+    config = tmp_path / "config.json"
+    board = SimpleNamespace()
+    paths = {"state": tmp_path / "state"}
+    monkeypatch.setattr(
+        facade,
+        "_start_owner",
+        lambda *_args, **_kwargs: {"started": True, "ready": True},
+    )
+    monkeypatch.setattr(
+        facade,
+        "_configured_board_preflight",
+        lambda _path: (_ for _ in ()).throw(
+            facade.OperatorError("protected control preflight rejected")
+        ),
+    )
+    monkeypatch.setattr(
+        facade,
+        "_authenticated_projection",
+        lambda *_args, **_kwargs: pytest.fail(
+            "rejected current-tree controls must not reach task admission"
+        ),
+    )
+    monkeypatch.setattr(
+        facade,
+        "_launch_scheduler_and_monitor",
+        lambda *_args, **_kwargs: pytest.fail(
+            "rejected current-tree controls must not launch the scheduler"
+        ),
+    )
+
+    with pytest.raises(facade.OperatorError, match="protected control"):
+        facade._resume_locked(
+            config,
+            board=board,
+            payload={"generation": 8},
+            paths=paths,
+            monitor_seconds=30.0,
+        )
+
+
+def test_runtime_resume_adopts_healthy_existing_scheduler_idempotently(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_resume_existing_scheduler")
+    config = tmp_path / "config.json"
+    board = SimpleNamespace()
+    payload = {"generation": 8}
+    paths = {"state": tmp_path / "state"}
+    authority = _canonical_runtime_authority(facade)
+    monkeypatch.setattr(
+        facade,
+        "_start_owner",
+        lambda *_args, **_kwargs: {
+            "started": False,
+            "already_running": True,
+            "ready": True,
+        },
+    )
+    monkeypatch.setattr(
+        facade,
+        "_configured_board_preflight",
+        lambda _path: {"valid": True, "checks": []},
+    )
+    monkeypatch.setattr(facade, "_load_board", lambda _path: (board, payload))
+    monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
+    monkeypatch.setattr(
+        facade,
+        "_authenticated_projection",
+        lambda *_args, **_kwargs: authority,
+    )
+    monkeypatch.setattr(
+        facade,
+        "_configured_task_identities",
+        lambda _board: tuple(authority["task_identity_rows"]),
+    )
+    monkeypatch.setattr(
+        facade,
+        "_supervisor_projection",
+        lambda *_args, **_kwargs: {
+            "master_pid": 41001,
+            "master_alive": True,
+            "ready": True,
+            "healthy_lane_count": 4,
+            "expected_lane_count": 4,
+        },
+    )
+    monkeypatch.setattr(
+        facade,
+        "_launch_scheduler_and_monitor",
+        lambda *_args, **_kwargs: pytest.fail(
+            "a healthy existing scheduler must not be launched twice"
+        ),
+    )
+    monkeypatch.setattr(
+        facade,
+        "_read_owner_token",
+        lambda *_args, **_kwargs: pytest.fail(
+            "idempotent scheduler adoption must not reread a launch token"
+        ),
+    )
+
+    result = facade._resume_locked(
+        config,
+        board=board,
+        payload=payload,
+        paths=paths,
+        monitor_seconds=30.0,
+    )
+
+    assert result["launched"] is False
+    assert result["already_running"] is True
+    assert result["runtime_admission"]["canonical_task_count"] == 54
+
+
+def test_runtime_resume_refuses_duplicate_when_existing_scheduler_is_unhealthy(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_resume_unhealthy_existing_scheduler")
+    config = tmp_path / "config.json"
+    board = SimpleNamespace()
+    payload = {"generation": 8}
+    paths = {"state": tmp_path / "state"}
+    authority = _canonical_runtime_authority(facade)
+    monkeypatch.setattr(
+        facade,
+        "_start_owner",
+        lambda *_args, **_kwargs: {
+            "started": False,
+            "already_running": True,
+            "ready": True,
+        },
+    )
+    monkeypatch.setattr(
+        facade,
+        "_configured_board_preflight",
+        lambda _path: {"valid": True, "checks": []},
+    )
+    monkeypatch.setattr(facade, "_load_board", lambda _path: (board, payload))
+    monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
+    monkeypatch.setattr(
+        facade,
+        "_authenticated_projection",
+        lambda *_args, **_kwargs: authority,
+    )
+    monkeypatch.setattr(
+        facade,
+        "_configured_task_identities",
+        lambda _board: tuple(authority["task_identity_rows"]),
+    )
+    monkeypatch.setattr(
+        facade,
+        "_supervisor_projection",
+        lambda *_args, **_kwargs: {
+            "master_pid": 41001,
+            "master_alive": True,
+            "ready": False,
+            "healthy_lane_count": 3,
+            "expected_lane_count": 4,
+        },
+    )
+    monkeypatch.setattr(
+        facade,
+        "_launch_scheduler_and_monitor",
+        lambda *_args, **_kwargs: pytest.fail(
+            "a live unhealthy scheduler must not be duplicated or reclaimed"
+        ),
+    )
+
+    with pytest.raises(facade.OperatorError, match="live but not healthy"):
+        facade._resume_locked(
+            config,
+            board=board,
+            payload=payload,
+            paths=paths,
+            monitor_seconds=30.0,
+        )
+
+
+def test_runtime_resume_serializes_timer_and_manual_ensure_calls(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_resume_operator_serialization")
+    config = tmp_path / "config.json"
+    board = SimpleNamespace()
+    payload = {"generation": 8}
+    paths = {"state": tmp_path / "state"}
+    observed: dict[str, object] = {}
+    monkeypatch.setattr(facade, "_load_board", lambda _path: (board, payload))
+    monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
+    monkeypatch.setattr(facade, "_private_directory", lambda path: path)
+    monkeypatch.setattr(
+        facade,
+        "_resume_locked",
+        lambda *_args, **_kwargs: {"command": "resume", "already_running": True},
+    )
+    facade._ensure_import_path()
+    import ipfs_accelerate_py.agent_supervisor.merge.checkout_lock as checkout_lock
+
+    @contextmanager
+    def serialized(path: Path, *, timeout_seconds: float):
+        observed["path"] = path
+        observed["timeout_seconds"] = timeout_seconds
+        observed["held"] = True
+        yield
+        observed["released"] = True
+
+    monkeypatch.setattr(checkout_lock, "serialized_lock_update", serialized)
+
+    result = facade.resume(config, monitor_seconds=30.0)
+
+    assert result["already_running"] is True
+    assert observed == {
+        "path": paths["state"] / "pctdd-runtime-resume.lock",
+        "timeout_seconds": 60.0,
+        "held": True,
+        "released": True,
+    }
+
+
+def test_runtime_resume_lock_contention_fails_with_bounded_typed_error(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_resume_operator_lock_timeout")
+    config = tmp_path / "config.json"
+    board = SimpleNamespace()
+    payload = {"generation": 8}
+    paths = {"state": tmp_path / "state"}
+    monkeypatch.setattr(facade, "_load_board", lambda _path: (board, payload))
+    monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
+    monkeypatch.setattr(facade, "_private_directory", lambda path: path)
+    facade._ensure_import_path()
+    import ipfs_accelerate_py.agent_supervisor.merge.checkout_lock as checkout_lock
+
+    @contextmanager
+    def contended(_path: Path, *, timeout_seconds: float):
+        assert timeout_seconds == 60.0
+        raise TimeoutError("injected contention")
+        yield  # pragma: no cover
+
+    monkeypatch.setattr(checkout_lock, "serialized_lock_update", contended)
+    monkeypatch.setattr(
+        facade,
+        "_resume_locked",
+        lambda *_args, **_kwargs: pytest.fail(
+            "lock contention must not reach owner or scheduler recovery"
+        ),
+    )
+
+    with pytest.raises(facade.OperatorError, match="timed out serializing"):
+        facade.resume(config, monitor_seconds=30.0)
+
+
+def test_runtime_resume_cli_is_explicit_and_rejects_invalid_window(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_resume_cli_surface")
+    parsed = facade._parser().parse_args(
+        [
+            "--config",
+            str(tmp_path / "config.json"),
+            "resume",
+            "--monitor-seconds",
+            "45",
+        ]
+    )
+
+    assert parsed.command == "resume"
+    assert parsed.monitor_seconds == 45.0
+    monkeypatch.setattr(
+        facade,
+        "_load_board",
+        lambda *_args, **_kwargs: pytest.fail(
+            "invalid resume input must fail before board or state access"
+        ),
+    )
+    with pytest.raises(facade.OperatorError, match="monitor-seconds must be positive"):
+        facade.resume(tmp_path / "config.json", monitor_seconds=0.0)
+
+
+def test_scheduler_launch_keeps_private_token_out_of_argv_and_receipt(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    facade = _load("pctdd_resume_private_token_boundary")
+    monkeypatch.setattr(facade, "ROOT", tmp_path)
+    token = "private_quack_token_12345"
+    program = SimpleNamespace(endpoint_secret_handle="env://PCTDD_TEST_TOKEN")
+    board = SimpleNamespace(resolved_database_program=lambda: program)
+    paths = {"owner": tmp_path / "owner"}
+    captured: dict[str, object] = {}
+    monkeypatch.setattr(facade, "MIN_STABLE_HEALTH_SECONDS", 0.0)
+    monkeypatch.setattr(facade, "_read_owner_token", lambda _path: token)
+
+    def environment(*, token: str, secret_handle: str):
+        captured["environment_token"] = token
+        captured["secret_handle"] = secret_handle
+        return {"PCTDD_TEST_TOKEN": token}
+
+    def run(argv, *, environment, timeout: float):
+        captured["argv"] = tuple(argv)
+        captured["child_environment"] = dict(environment)
+        assert timeout == 900.0
+        return {
+            "returncode": 0,
+            "json": {"valid": True, "detached_pid": 41001},
+            "stdout": "",
+            "stderr": "",
+        }
+
+    status_payload = {
+        "operational_ready": True,
+        "program_state": "running",
+        "task_authority": {"in_progress_count": 1, "completed_count": 17},
+        "supervisor": {
+            "master_pid": 41001,
+            "lanes": [
+                {"supervisor_pid": 41002, "daemon_pid": 41003},
+            ],
+        },
+    }
+    monkeypatch.setattr(facade, "_python_environment", environment)
+    monkeypatch.setattr(facade, "_run", run)
+    monkeypatch.setattr(facade, "status", lambda _path: status_payload)
+    monkeypatch.setattr(facade.time, "sleep", lambda _seconds: None)
+
+    result = facade._launch_scheduler_and_monitor(
+        tmp_path / "config.json",
+        board=board,
+        paths=paths,
+        owner={"ready": True},
+        initial_authority={"completed_count": 17},
+        monitor_seconds=30.0,
+        command="resume",
+        mode="runtime_resume",
+        runtime_admission={"canonical_task_population": True},
+    )
+
+    assert token not in " ".join(captured["argv"])
+    assert token not in json.dumps(result, sort_keys=True)
+    assert captured["environment_token"] == token
+    assert result["already_running"] is False
+
+
+def test_secret_echo_rejection_never_reflects_the_secret() -> None:
+    facade = _load("pctdd_resume_secret_echo_rejection")
+    token = "private_quack_token_67890"
+
+    with pytest.raises(facade.OperatorError) as captured:
+        facade._reject_secret_echo({"stderr": f"accidental {token}"}, token)
+
+    assert token not in str(captured.value)
 
 
 @pytest.mark.parametrize("mismatch", [None, "listen_uri", "extension_fingerprint"])

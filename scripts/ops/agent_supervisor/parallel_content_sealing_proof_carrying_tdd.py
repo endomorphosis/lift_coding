@@ -68,6 +68,7 @@ OWNER_PID_SCHEMA: Final = (
 )
 PROGRAM_ID: Final = "parallel-content-sealing-proof-carrying-tdd-v1"
 TASK_PREFIX: Final = "PCTDD-"
+OPERATOR_TASK_ALIAS: Final = "PCTDD-000"
 DEFAULT_MONITOR_SECONDS: Final = 180.0
 MIN_STABLE_HEALTH_SECONDS: Final = 15.0
 MAX_JSON_BYTES: Final = 8 * 1024 * 1024
@@ -93,6 +94,12 @@ FAILED_STATUSES: Final = frozenset(
 )
 OTHER_TERMINAL_STATUSES: Final = frozenset(
     {"cancelled", "superseded"}
+)
+CANONICAL_TASK_ALIASES: Final = tuple(
+    f"PCTDD-{index:03d}" for index in range(54)
+)
+OPERATOR_ACCEPTED_STATUSES: Final = frozenset(
+    {"completed", "accepted"}
 )
 
 
@@ -583,9 +590,9 @@ def _require_operator_seal(config_path: Path) -> Mapping[str, Any]:
     return payload
 
 
-def preflight(config_path: Path) -> dict[str, Any]:
-    _load_board(config_path)
-    operator_seal = _require_operator_seal(config_path)
+def _configured_board_preflight(config_path: Path) -> Mapping[str, Any]:
+    """Run the current scheduler's non-mutating, current-tree preflight."""
+
     result = _run(
         (
             sys.executable,
@@ -602,6 +609,13 @@ def preflight(config_path: Path) -> dict[str, Any]:
     report = result["json"]
     if not isinstance(report, Mapping) or report.get("valid") is not True:
         raise OperatorError("configured-board preflight did not return valid=true")
+    return report
+
+
+def preflight(config_path: Path) -> dict[str, Any]:
+    _load_board(config_path)
+    operator_seal = _require_operator_seal(config_path)
+    report = _configured_board_preflight(config_path)
     return {
         "schema": OPERATOR_SCHEMA,
         "command": "preflight",
@@ -886,9 +900,35 @@ def _task_projection(connection: Any) -> dict[str, Any]:
         if state in COMPLETED_STATUSES | FAILED_STATUSES | OTHER_TERMINAL_STATUSES
     )
     task_count = len(records)
+    task_aliases = [alias for _cid, alias, _ordinal, _state in records]
+    task_ordinals = [ordinal for _cid, _alias, ordinal, _state in records]
+    task_identity_rows = [
+        (cid, alias, ordinal)
+        for cid, alias, ordinal, _state in records
+    ]
+    operator_statuses = [
+        state
+        for _cid, alias, _ordinal, state in records
+        if alias == OPERATOR_TASK_ALIAS
+    ]
     return {
         "status_counts": dict(sorted(counts.items())),
         "task_count": task_count,
+        "task_aliases": task_aliases,
+        "task_ordinals": task_ordinals,
+        "task_identity_rows": (
+            task_identity_rows
+            if task_count == len(CANONICAL_TASK_ALIASES)
+            else []
+        ),
+        "task_identity_unique": bool(
+            len({cid for cid, _alias, _ordinal, _state in records}) == task_count
+            and len(set(task_aliases)) == task_count
+            and len(set(task_ordinals)) == task_count
+        ),
+        "operator_task_status": (
+            operator_statuses[0] if len(operator_statuses) == 1 else ""
+        ),
         "terminal_count": terminal_count,
         "completed_count": sum(counts.get(item, 0) for item in COMPLETED_STATUSES),
         "ready_count": len(ready_ids),
@@ -904,6 +944,101 @@ def _task_projection(connection: Any) -> dict[str, Any]:
             task_count > 0
             and sum(counts.get(item, 0) for item in COMPLETED_STATUSES) == task_count
         ),
+    }
+
+
+def _configured_task_identities(board: Any) -> tuple[tuple[str, str, int], ...]:
+    """Derive current task CIDs through the existing scheduler authority."""
+
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
+        _configured_board_task_records,
+        _git_identity,
+    )
+
+    source_head, _source_tree = _git_identity(board.repo_root)
+    records = _configured_board_task_records(board, source_head=source_head)
+    identities = tuple(
+        (
+            str(record["canonical_task_cid"]),
+            str(record["task_id"]),
+            ordinal,
+        )
+        for ordinal, record in enumerate(records, start=1)
+    )
+    if tuple(alias for _cid, alias, _ordinal in identities) != CANONICAL_TASK_ALIASES:
+        raise OperatorError("current configured board task population is not canonical")
+    return identities
+
+
+def _require_runtime_resume_authority(
+    authority: Mapping[str, Any],
+    *,
+    expected_task_identities: Sequence[tuple[str, str, int]],
+) -> dict[str, Any]:
+    """Admit only the canonical materialized program for runtime resume.
+
+    Runtime resume intentionally does not reinterpret a historical bootstrap
+    source seal as a current-source seal.  It instead requires the current
+    configured-board preflight plus an authenticated query of the one existing
+    task authority.  No Markdown task, generated appendix, cache, or worker
+    claim can satisfy this gate.
+    """
+
+    raw_aliases = authority.get("task_aliases")
+    raw_ordinals = authority.get("task_ordinals")
+    raw_identities = authority.get("task_identity_rows")
+    aliases = (
+        tuple(str(item) for item in raw_aliases)
+        if isinstance(raw_aliases, (list, tuple))
+        else ()
+    )
+    ordinals = (
+        tuple(raw_ordinals)
+        if isinstance(raw_ordinals, (list, tuple))
+        and all(isinstance(item, int) and not isinstance(item, bool) for item in raw_ordinals)
+        else ()
+    )
+    identities = (
+        tuple(tuple(item) for item in raw_identities)
+        if isinstance(raw_identities, (list, tuple))
+        and all(
+            isinstance(item, (list, tuple))
+            and len(item) == 3
+            and isinstance(item[0], str)
+            and isinstance(item[1], str)
+            and isinstance(item[2], int)
+            and not isinstance(item[2], bool)
+            for item in raw_identities
+        )
+        else ()
+    )
+    expected_identities = tuple(expected_task_identities)
+    operator_status = str(authority.get("operator_task_status") or "").lower()
+    try:
+        task_count = int(authority.get("task_count") or -1)
+    except (TypeError, ValueError):
+        task_count = -1
+    if authority.get("authenticated_query") is not True:
+        raise OperatorError("runtime resume lacks an authenticated Quack query")
+    if (
+        task_count != len(CANONICAL_TASK_ALIASES)
+        or aliases != CANONICAL_TASK_ALIASES
+        or ordinals != tuple(range(1, len(CANONICAL_TASK_ALIASES) + 1))
+        or len(expected_identities) != len(CANONICAL_TASK_ALIASES)
+        or identities != expected_identities
+        or authority.get("task_identity_unique") is not True
+    ):
+        raise OperatorError("runtime resume task population is not canonical")
+    if operator_status not in OPERATOR_ACCEPTED_STATUSES:
+        raise OperatorError("runtime resume requires accepted PCTDD-000 controls")
+    return {
+        "authenticated_query": True,
+        "canonical_task_count": len(CANONICAL_TASK_ALIASES),
+        "canonical_task_population": True,
+        "current_task_cid_binding": True,
+        "operator_task_status": operator_status,
+        "direct_database_file_open": False,
     }
 
 
@@ -1444,50 +1579,48 @@ def _scheduler_command(config_path: Path, *, dry_run: bool) -> tuple[str, ...]:
     return tuple(command)
 
 
-def launch(
+def _reject_secret_echo(result: Mapping[str, Any], token: str) -> None:
+    """Fail closed if a trusted child reflects its private Quack token."""
+
+    try:
+        encoded = json.dumps(result, sort_keys=True, default=str)
+    except (TypeError, ValueError, RecursionError):
+        encoded = str(result)
+    if token and token in encoded:
+        raise OperatorError("trusted scheduler child emitted private credential material")
+
+
+def _launch_scheduler_and_monitor(
     config_path: Path,
     *,
-    dry_run: bool,
-    monitor_seconds: float = DEFAULT_MONITOR_SECONDS,
+    board: Any,
+    paths: Mapping[str, Path],
+    owner: Mapping[str, Any],
+    initial_authority: Mapping[str, Any],
+    monitor_seconds: float,
+    command: str,
+    mode: str,
+    runtime_admission: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    preflight_report = preflight(config_path)
-    board, _payload = _load_board(config_path)
-    if dry_run:
-        result = _run(_scheduler_command(config_path, dry_run=True), timeout=900.0)
-        _require_success(result, "configured-board implementation dry-run")
-        return {
-            "schema": OPERATOR_SCHEMA,
-            "command": "launch",
-            "mode": "dry_run",
-            "valid": True,
-            "preflight": preflight_report["configured_board"],
-            "launch_plan": result["json"] if result["json"] is not None else {
-                "stdout": result["stdout"],
-                "stderr": result["stderr"],
-            },
-            "state_owner_started": False,
-        }
+    """Launch the one configured scheduler and monitor authoritative progress."""
 
-    if not monitor_seconds > 0:
-        raise OperatorError("--monitor-seconds must be positive")
-    paths = _runtime_paths(board)
-    owner = _start_owner(board, paths, timeout=min(120.0, monitor_seconds))
-    initial_authority = _authenticated_projection(board, paths)
     initial_completed = int(initial_authority.get("completed_count") or 0)
-    token = _read_owner_token(
-        _token_path(paths["owner"], board.resolved_database_program().endpoint_secret_handle)
-    )
+    program = board.resolved_database_program()
+    token = _read_owner_token(_token_path(paths["owner"], program.endpoint_secret_handle))
     result = _run(
         _scheduler_command(config_path, dry_run=False),
         environment=_python_environment(
             token=token,
-            secret_handle=board.resolved_database_program().endpoint_secret_handle,
+            secret_handle=program.endpoint_secret_handle,
         ),
         timeout=900.0,
     )
-    # Drop the sole in-memory copy owned by this operator as soon as the
-    # canonical detached scheduler inherits its private environment.
-    token = ""
+    try:
+        _reject_secret_echo(result, token)
+    finally:
+        # Drop the sole in-memory copy owned by this operator as soon as the
+        # canonical detached scheduler inherits its private environment.
+        token = ""
     _require_success(result, "configured-board detached implementation launch")
 
     deadline = time.monotonic() + monitor_seconds
@@ -1533,22 +1666,26 @@ def launch(
             elif healthy_since is not None and (
                 now - healthy_since >= MIN_STABLE_HEALTH_SECONDS
             ):
-                return {
+                response = {
                     "schema": OPERATOR_SCHEMA,
-                    "command": "launch",
-                    "mode": "real",
+                    "command": command,
+                    "mode": mode,
                     "launched": True,
+                    "already_running": False,
                     "monitored": True,
                     "stable_health_seconds": now - healthy_since,
                     "authoritative_progress_observed": True,
                     "initial_completed_count": initial_completed,
-                    "state_owner": owner,
+                    "state_owner": dict(owner),
                     "scheduler": result["json"] if result["json"] is not None else {
                         "stdout": result["stdout"],
                         "stderr": result["stderr"],
                     },
                     "status": last,
                 }
+                if runtime_admission is not None:
+                    response["runtime_admission"] = dict(runtime_admission)
+                return response
         else:
             healthy_since = None
             healthy_processes = ()
@@ -1575,6 +1712,164 @@ def launch(
         "supervisor did not sustain healthy, unblocked execution before the "
         "monitor deadline"
     )
+
+
+def launch(
+    config_path: Path,
+    *,
+    dry_run: bool,
+    monitor_seconds: float = DEFAULT_MONITOR_SECONDS,
+) -> dict[str, Any]:
+    if dry_run:
+        # A dry-run is deliberately side-effect free: it validates the sealed
+        # controls before asking the configured scheduler to render its plan,
+        # and it never starts or recovers the live state owner.
+        preflight_report = preflight(config_path)
+        result = _run(_scheduler_command(config_path, dry_run=True), timeout=900.0)
+        _require_success(result, "configured-board implementation dry-run")
+        return {
+            "schema": OPERATOR_SCHEMA,
+            "command": "launch",
+            "mode": "dry_run",
+            "valid": True,
+            "preflight": preflight_report["configured_board"],
+            "launch_plan": result["json"] if result["json"] is not None else {
+                "stdout": result["stdout"],
+                "stderr": result["stderr"],
+            },
+            "state_owner_started": False,
+        }
+
+    if not monitor_seconds > 0:
+        raise OperatorError("--monitor-seconds must be positive")
+    # A real bootstrap launch may recover its *existing* Quack authority before
+    # the strict bootstrap seal check.  The seal checker uses authenticated
+    # Quack while an owner is live, so running it first would make the reviewed
+    # stale-owner recovery in _start_owner unreachable.  Starting the owner
+    # grants no task, provider, merge, or completion authority; every historical
+    # seal and current preflight gate remains mandatory before this entry point
+    # can launch a scheduler.  Accepted descendant runtimes use ``resume``.
+    board, payload = _load_board(config_path)
+    paths = _runtime_paths(board)
+    owner = _start_owner(board, paths, timeout=min(120.0, monitor_seconds))
+    preflight_report = preflight(config_path)
+    revalidated_board, revalidated_payload = _load_board(config_path)
+    if revalidated_payload != payload or _runtime_paths(revalidated_board) != paths:
+        raise OperatorError("scheduler configuration changed during owner recovery")
+    initial_authority = _authenticated_projection(revalidated_board, paths)
+    return _launch_scheduler_and_monitor(
+        config_path,
+        board=revalidated_board,
+        paths=paths,
+        owner=owner,
+        initial_authority=initial_authority,
+        monitor_seconds=monitor_seconds,
+        command="launch",
+        mode="real",
+    )
+
+
+def _resume_locked(
+    config_path: Path,
+    *,
+    board: Any,
+    payload: Mapping[str, Any],
+    paths: Mapping[str, Path],
+    monitor_seconds: float,
+) -> dict[str, Any]:
+    """Resume one current runtime while the operator serialization is held."""
+
+    owner = _start_owner(board, paths, timeout=min(120.0, monitor_seconds))
+    configured_preflight = _configured_board_preflight(config_path)
+    revalidated_board, revalidated_payload = _load_board(config_path)
+    if revalidated_payload != payload or _runtime_paths(revalidated_board) != paths:
+        raise OperatorError("scheduler configuration changed during runtime resume")
+    expected_task_identities = _configured_task_identities(revalidated_board)
+    authority = _authenticated_projection(revalidated_board, paths)
+    admission = _require_runtime_resume_authority(
+        authority,
+        expected_task_identities=expected_task_identities,
+    )
+    supervisor = _supervisor_projection(revalidated_board, paths)
+    if supervisor.get("master_alive") is True:
+        if supervisor.get("ready") is not True:
+            raise OperatorError(
+                "existing configured-board coordinator is live but not healthy"
+            )
+        return {
+            "schema": OPERATOR_SCHEMA,
+            "command": "resume",
+            "mode": "runtime_resume",
+            "valid": True,
+            "launched": False,
+            "already_running": True,
+            "monitored": False,
+            "state_owner": dict(owner),
+            "configured_board_preflight": dict(configured_preflight),
+            "runtime_admission": admission,
+            "supervisor": supervisor,
+        }
+    return _launch_scheduler_and_monitor(
+        config_path,
+        board=revalidated_board,
+        paths=paths,
+        owner=owner,
+        initial_authority=authority,
+        monitor_seconds=monitor_seconds,
+        command="resume",
+        mode="runtime_resume",
+        runtime_admission=admission,
+    )
+
+
+def resume(
+    config_path: Path,
+    *,
+    monitor_seconds: float = DEFAULT_MONITOR_SECONDS,
+) -> dict[str, Any]:
+    """Ensure the accepted runtime is live after current-tree evolution.
+
+    This is distinct from bootstrap ``launch``: it does not pretend an old
+    source-bound PCTDD-000 receipt seals later accepted implementation commits.
+    The current configured-board preflight and authenticated canonical task
+    population are its fail-closed resume authority.
+    """
+
+    if not monitor_seconds > 0:
+        raise OperatorError("--monitor-seconds must be positive")
+    board, payload = _load_board(config_path)
+    paths = _runtime_paths(board)
+    _private_directory(paths["state"])
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import (
+        serialized_lock_update,
+    )
+
+    lock_path = paths["state"] / "pctdd-runtime-resume.lock"
+    try:
+        with serialized_lock_update(
+            lock_path,
+            timeout_seconds=max(30.0, monitor_seconds + 30.0),
+        ):
+            revalidated_board, revalidated_payload = _load_board(config_path)
+            revalidated_paths = _runtime_paths(revalidated_board)
+            if revalidated_payload != payload or revalidated_paths != paths:
+                raise OperatorError(
+                    "scheduler configuration changed before runtime resume"
+                )
+            return _resume_locked(
+                config_path,
+                board=board,
+                payload=payload,
+                paths=paths,
+                monitor_seconds=monitor_seconds,
+            )
+    except TimeoutError as exc:
+        raise OperatorError("timed out serializing runtime resume") from exc
+    except RuntimeError as exc:
+        if isinstance(exc, OperatorError):
+            raise
+        raise OperatorError("runtime resume serialization is unavailable") from exc
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -1614,6 +1909,19 @@ def _parser() -> argparse.ArgumentParser:
         default=DEFAULT_MONITOR_SECONDS,
         help="positive health-monitoring window after a real launch",
     )
+    resume_parser = commands.add_parser(
+        "resume",
+        help=(
+            "recover/adopt Quack and ensure the existing configured scheduler "
+            "after accepted source evolution"
+        ),
+    )
+    resume_parser.add_argument(
+        "--monitor-seconds",
+        type=float,
+        default=DEFAULT_MONITOR_SECONDS,
+        help="positive health-monitoring window after a runtime resume",
+    )
     status_parser = commands.add_parser(
         "status",
         help="authenticate to Quack and report task, master, and lane health",
@@ -1652,6 +1960,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = launch(
                 config_path,
                 dry_run=bool(arguments.dry_run),
+                monitor_seconds=float(arguments.monitor_seconds),
+            )
+        elif arguments.command == "resume":
+            result = resume(
+                config_path,
                 monitor_seconds=float(arguments.monitor_seconds),
             )
         elif arguments.command == "status":
