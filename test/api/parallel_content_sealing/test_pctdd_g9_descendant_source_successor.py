@@ -286,7 +286,7 @@ def test_pending_policy_is_typed_and_cannot_admit_migration(
         migration._policy(config)
 
 
-def test_check_policy_cli_is_static_before_canonical_branch_integration(
+def test_check_policy_cli_reports_the_sealed_stopped_capture(
     migration: Any, capsys: pytest.CaptureFixture[str]
 ) -> None:
     result = migration.main(
@@ -302,8 +302,8 @@ def test_check_policy_cli_is_static_before_canonical_branch_integration(
     assert result == 0
     payload = json.loads(capsys.readouterr().out)
     assert payload == {
-        "capture_status": "pending_stopped_g8_capture",
-        "migration_admitted": False,
+        "capture_status": "sealed_stopped_g8_capture",
+        "migration_admitted": True,
         "schema": migration.CHECK_SCHEMA,
         "valid": True,
     }
