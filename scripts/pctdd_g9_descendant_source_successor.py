@@ -58,6 +58,9 @@ ORPHAN_RECOVERY_PLAN_SCHEMA: Final[str] = (
 ORPHAN_RECOVERY_RECEIPT_SCHEMA: Final[str] = (
     "pctdd/orphan-terminal-migration-recovery-receipt@1"
 )
+ORPHAN_RECOVERY_VALIDATION_AUTHORITY_SCHEMA: Final[str] = (
+    "pctdd/orphan-terminal-validation-authority@1"
+)
 ORPHAN_RECOVERY_MARKER: Final[str] = (
     "descendant-source-orphan-terminal-recovery-receipt.json"
 )
@@ -99,6 +102,10 @@ GUARDRAIL_FLAGS: Final[tuple[str, ...]] = (
 
 class DescendantSourceSuccessorError(RuntimeError):
     """The g9 descendant-source successor cannot be proven safe."""
+
+
+class _RecoveryPlanStale(RuntimeError):
+    """A zero-progress prepared recovery must be discarded and rebuilt."""
 
 
 class _TransientRecoveryLockCleanup:
@@ -1146,25 +1153,179 @@ def _default_validation_runner(
         }
 
 
+def _validation_authority_projection(
+    validation: Mapping[str, Any], *, expected_profile: str, expected_task: str
+) -> dict[str, Any] | None:
+    """Return the closed identity-bearing subset of dispatcher evidence.
+
+    Elapsed time, output byte counts, and log hashes are observations, not
+    admission identities.  Unknown fields are rejected so private or ambient
+    values can never be smuggled into the recovery receipt.
+    """
+
+    allowed_top = {
+        "attempted", "returncode", "timeout", "stdout_sha256", "stderr_sha256",
+        "stdout_size_bytes", "stderr_size_bytes", "stdout_truncated",
+        "stderr_truncated", "records", "record_parse_error",
+        "duplicate_json_key",
+    }
+    if (
+        not isinstance(validation, Mapping)
+        or not set(validation).issubset(allowed_top)
+        or validation.get("attempted") is not True
+        or type(validation.get("returncode")) is not int
+        or validation.get("stdout_truncated") is not False
+        or validation.get("stderr_truncated") is not False
+        or validation.get("record_parse_error") is not False
+        or validation.get("duplicate_json_key") is not False
+        or validation.get("timeout", False) not in {False, True}
+    ):
+        return None
+    records = validation.get("records")
+    if not isinstance(records, list) or not 1 <= len(records) <= 2:
+        return None
+    normalized: list[dict[str, Any]] = []
+    launchers: list[dict[str, Any]] = []
+    expected_policies = ("required_acceptance", "protected_baseline_regression")
+    required_record_fields = {
+        "task_id", "profile_id", "step", "evidence_policy", "status",
+        "returncode", "validation_python_launcher",
+    }
+    allowed_record_fields = required_record_fields | {
+        "elapsed_seconds", "pytest_phase_evidence"
+    }
+    phase_fields = {
+        "schema", "sha256", "test_count", "phase_count",
+        "fully_passed_test_count", "counts",
+    }
+    count_fields = {
+        "passed", "failed", "skipped", "xfail", "xpass", "error", "rerun"
+    }
+    for index, value in enumerate(records):
+        if (
+            not isinstance(value, Mapping)
+            or not required_record_fields.issubset(value)
+            or not set(value).issubset(allowed_record_fields)
+            or value.get("task_id") != expected_task
+            or value.get("profile_id") != expected_profile
+            or value.get("step") != index
+            or value.get("evidence_policy") != expected_policies[index]
+            or value.get("status") not in {"passed", "failed", "timeout"}
+            or type(value.get("returncode")) is not int
+        ):
+            return None
+        status = str(value["status"])
+        returncode = int(value["returncode"])
+        if (
+            (status == "passed" and returncode != 0)
+            or (status == "timeout" and returncode != 124)
+            or (status == "failed" and returncode in {0, 124})
+        ):
+            return None
+        launcher = value.get("validation_python_launcher")
+        if (
+            not isinstance(launcher, Mapping)
+            or set(launcher) != {
+                "mode", "content_sha256", "interpreter_sha256",
+                "policy_sha256", "sealed",
+            }
+            or launcher.get("sealed") is not True
+            or any(
+                not isinstance(launcher.get(field), str) or not launcher.get(field)
+                for field in (
+                    "mode", "content_sha256", "interpreter_sha256",
+                    "policy_sha256",
+                )
+            )
+        ):
+            return None
+        launcher_record = dict(launcher)
+        launchers.append(launcher_record)
+        phase = value.get("pytest_phase_evidence")
+        normalized_phase: dict[str, Any] | None = None
+        if phase is not None:
+            if not isinstance(phase, Mapping) or set(phase) != phase_fields:
+                return None
+            counts = phase.get("counts")
+            if not isinstance(counts, Mapping) or set(counts) != count_fields:
+                return None
+            numbers = [
+                phase.get("test_count"), phase.get("phase_count"),
+                phase.get("fully_passed_test_count"),
+                *(counts.get(name) for name in count_fields),
+            ]
+            if (
+                phase.get("schema") != "pctdd/pytest-phase-outcome@1"
+                or not isinstance(phase.get("sha256"), str)
+                or not str(phase["sha256"]).startswith("sha256:")
+                or not all(type(number) is int and number >= 0 for number in numbers)
+            ):
+                return None
+            normalized_phase = {
+                "schema": phase["schema"],
+                "sha256": phase["sha256"],
+                "test_count": phase["test_count"],
+                "phase_count": phase["phase_count"],
+                "fully_passed_test_count": phase["fully_passed_test_count"],
+                "counts": {name: counts[name] for name in sorted(count_fields)},
+            }
+        normalized.append(
+            {
+                "task_id": expected_task,
+                "profile_id": expected_profile,
+                "step": index,
+                "evidence_policy": expected_policies[index],
+                "status": status,
+                "returncode": returncode,
+                "pytest_phase_evidence": normalized_phase,
+                "validation_python_launcher": launcher_record,
+            }
+        )
+    if launchers[1:] and any(item != launchers[0] for item in launchers[1:]):
+        return None
+    if int(validation["returncode"]) != normalized[-1]["returncode"]:
+        return None
+    return {
+        "schema": ORPHAN_RECOVERY_VALIDATION_AUTHORITY_SCHEMA,
+        "task_id": expected_task,
+        "profile_id": expected_profile,
+        "attempted": True,
+        "returncode": int(validation["returncode"]),
+        "timeout": validation.get("timeout") is True,
+        "records": normalized,
+    }
+
+
+def _missing_output_validation_authority(
+    *, expected_profile: str, expected_task: str
+) -> dict[str, Any]:
+    return {
+        "schema": ORPHAN_RECOVERY_VALIDATION_AUTHORITY_SCHEMA,
+        "task_id": expected_task,
+        "profile_id": expected_profile,
+        "attempted": False,
+        "returncode": 1,
+        "timeout": False,
+        "reason_code": "declared_outputs_missing",
+        "records": [],
+    }
+
+
 def _validation_is_admitted(
     validation: Mapping[str, Any], *, expected_profile: str, expected_task: str
 ) -> bool:
-    records = validation.get("records")
+    authority = _validation_authority_projection(
+        validation, expected_profile=expected_profile, expected_task=expected_task
+    )
+    if authority is None:
+        return False
+    records = authority["records"]
     if (
-        validation.get("attempted") is not True
-        or validation.get("returncode") != 0
-        or validation.get("timeout") is True
-        or validation.get("stdout_truncated") is not False
-        or validation.get("stderr_truncated") is not False
-        or validation.get("record_parse_error") is True
-        or validation.get("duplicate_json_key") is True
-        or not isinstance(records, list)
+        authority.get("returncode") != 0
+        or authority.get("timeout") is True
         or len(records) != 2
         or any(
-            not isinstance(item, Mapping)
-            or item.get("task_id") != expected_task
-            or item.get("profile_id") != expected_profile
-            or item.get("status") != "passed"
+            item.get("status") != "passed"
             or item.get("returncode") != 0
             for item in records
         )
@@ -1213,23 +1374,32 @@ def _validation_is_admitted(
         )
     ):
         return False
-    launchers = [item.get("validation_python_launcher") for item in records]
-    if not all(
-        isinstance(item, Mapping)
-        and set(item) == {
-            "mode", "content_sha256", "interpreter_sha256", "policy_sha256", "sealed"
-        }
-        and item.get("sealed") is True
-        and all(
-            isinstance(item.get(field), str) and bool(item.get(field))
-            for field in (
-                "mode", "content_sha256", "interpreter_sha256", "policy_sha256"
-            )
-        )
-        for item in launchers
+    return True
+
+
+def _validation_disposition(
+    validation: Mapping[str, Any], *, expected_profile: str, expected_task: str
+) -> tuple[str, dict[str, Any] | None]:
+    authority = _validation_authority_projection(
+        validation, expected_profile=expected_profile, expected_task=expected_task
+    )
+    if _validation_is_admitted(
+        validation, expected_profile=expected_profile, expected_task=expected_task
     ):
-        return False
-    return launchers[0] == launchers[1]
+        return "completed", authority
+    if authority is None or authority.get("timeout") is True:
+        return "blocked", authority
+    records = list(authority["records"])
+    if (
+        int(authority["returncode"]) not in {1, 4, 5}
+        or any(item["status"] == "timeout" or item["returncode"] == 124 for item in records)
+        or records[-1]["status"] != "failed"
+        or any(item["status"] != "passed" for item in records[:-1])
+    ):
+        return "blocked", authority
+    return "retrying", authority
+
+
 def _terminal_claim_binding(
     *, target: Path, task: Any, blocked_receipt: Mapping[str, Any]
 ) -> dict[str, Any]:
@@ -1307,12 +1477,11 @@ def _prepare_orphan_recovery_plan(
             argv = _task_validation_argv(
                 task, alias=alias, recovery_policy=recovery_policy
             )
+            expected_profile = str(recovery_policy["validation_profiles"][alias])
             if output_manifest["missing_outputs"]:
-                validation = {
-                    "attempted": False,
-                    "returncode": 1,
-                    "reason": "declared_outputs_missing",
-                }
+                validation_authority = _missing_output_validation_authority(
+                    expected_profile=expected_profile, expected_task=alias
+                )
                 target_status = "retrying"
             else:
                 try:
@@ -1322,39 +1491,15 @@ def _prepare_orphan_recovery_plan(
                         timeout_seconds=int(recovery_policy["timeout_seconds"]),
                     )
                     validation = dict(observed)
-                except Exception as exc:
-                    validation = {
-                        "attempted": False,
-                        "returncode": 125,
-                        "reason": "validation_infrastructure_error",
-                        "error_type": type(exc).__name__,
-                    }
-                if type(validation.get("returncode")) is not int:
-                    validation = {
-                        "attempted": False,
-                        "returncode": 125,
-                        "reason": "validation_result_malformed",
-                    }
-                admitted = _validation_is_admitted(
-                    validation,
-                    expected_profile=str(recovery_policy["validation_profiles"][alias]),
-                    expected_task=alias,
-                )
-                if admitted:
-                    target_status = "completed"
-                elif (
-                    validation.get("attempted") is True
-                    and validation.get("timeout") is not True
-                    and validation.get("stdout_truncated") is False
-                    and validation.get("stderr_truncated") is False
-                    and validation.get("record_parse_error") is not True
-                    and validation.get("duplicate_json_key") is not True
-                    and isinstance(validation.get("records"), list)
-                    and validation.get("records")
-                ):
-                    target_status = "retrying"
-                else:
+                except Exception:
                     target_status = "blocked"
+                    validation_authority = None
+                else:
+                    target_status, validation_authority = _validation_disposition(
+                        validation,
+                        expected_profile=expected_profile,
+                        expected_task=alias,
+                    )
             evidence_body = {
                 "schema": "pctdd/orphan-terminal-current-tree-validation@1",
                 "source_binding": g7._source_binding(root, population),
@@ -1366,7 +1511,7 @@ def _prepare_orphan_recovery_plan(
                 "blocked_receipt": dict(blocked_receipt),
                 "output_manifest": output_manifest,
                 "validation_argv": argv,
-                "validation": validation,
+                "validation_authority": validation_authority,
                 "target_status": target_status,
                 "claim_binding": claim_binding,
             }
@@ -1439,11 +1584,27 @@ def _validate_recovery_plan(
     for item in decisions:
         evidence = dict(item)
         digest = str(evidence.pop("evidence_digest", ""))
+        authority = item.get("validation_authority")
+        authority_is_bound = (
+            isinstance(authority, Mapping)
+            and authority.get("schema")
+            == ORPHAN_RECOVERY_VALIDATION_AUTHORITY_SCHEMA
+            and authority.get("task_id") == item.get("task_alias")
+            and authority.get("profile_id")
+            == policy["orphan_terminal_recovery"]["validation_profiles"][
+                str(item.get("task_alias"))
+            ]
+        )
         if (
             digest != g7._identity(evidence)
             or item.get("target_status") not in {"completed", "retrying", "blocked"}
             or item.get("source_binding") != plan["source_binding"]
             or item.get("capture_binding") != plan["capture_binding"]
+            or (
+                item.get("target_status") in {"completed", "retrying"}
+                and not authority_is_bound
+            )
+            or (item.get("target_status") == "blocked" and authority is not None)
         ):
             _fail("g9 orphan recovery decision differs")
 
@@ -1498,8 +1659,12 @@ def _revalidate_prepared_recovery_plan(
             )
             if argv != decision["validation_argv"]:
                 _fail(f"{alias} prepared recovery validation command is stale")
+            expected_profile = str(recovery_policy["validation_profiles"][alias])
             if current_manifest["missing_outputs"]:
                 fresh_status = "retrying"
+                fresh_authority = _missing_output_validation_authority(
+                    expected_profile=expected_profile, expected_task=alias
+                )
             else:
                 try:
                     validation = dict(
@@ -1510,30 +1675,25 @@ def _revalidate_prepared_recovery_plan(
                         )
                     )
                 except Exception as exc:
-                    _fail(
-                        f"{alias} prepared recovery revalidation infrastructure failed",
-                        exc,
-                    )
-                if _validation_is_admitted(
+                    raise _RecoveryPlanStale(
+                        f"{alias} prepared recovery revalidation infrastructure failed"
+                    ) from exc
+                fresh_status, fresh_authority = _validation_disposition(
                     validation,
-                    expected_profile=str(recovery_policy["validation_profiles"][alias]),
+                    expected_profile=expected_profile,
                     expected_task=alias,
-                ):
-                    fresh_status = "completed"
-                elif (
-                    validation.get("attempted") is True
-                    and validation.get("timeout") is not True
-                    and validation.get("stdout_truncated") is False
-                    and validation.get("stderr_truncated") is False
-                    and validation.get("record_parse_error") is not True
-                    and isinstance(validation.get("records"), list)
-                    and validation.get("records")
-                ):
-                    fresh_status = "retrying"
-                else:
-                    _fail(f"{alias} prepared recovery revalidation is unavailable")
-            if fresh_status != decision["target_status"]:
-                _fail(f"{alias} prepared recovery validation outcome changed")
+                )
+                if fresh_status == "blocked" or fresh_authority is None:
+                    raise _RecoveryPlanStale(
+                        f"{alias} prepared recovery revalidation is unavailable"
+                    )
+            if (
+                fresh_status != decision["target_status"]
+                or fresh_authority != decision["validation_authority"]
+            ):
+                raise _RecoveryPlanStale(
+                    f"{alias} prepared recovery validation authority changed"
+                )
 
 
 def _verify_prepared_recovery_progress(
@@ -1725,6 +1885,33 @@ def _verify_prepared_recovery_progress(
             _fail(f"prepared recovery lane {lane} completion population differs")
 
 
+def _discard_zero_progress_recovery_plan(
+    *, target: Path, plan: Mapping[str, Any]
+) -> None:
+    """Remove a stale prepared plan only when every authority is unchanged."""
+
+    if g7._control_projection(target / "control.duckdb") != dict(
+        plan["initial_control_projection"]
+    ):
+        _fail("cannot discard a prepared recovery after control progress")
+    initial_lanes = {
+        int(item["lane"]): dict(item["projection"])
+        for item in plan["initial_coordination_projections"]
+    }
+    for lane in range(4):
+        observed = g7._coordination_projection(
+            target / "state" / f"lane-{lane}"
+            / "quack-lane-coordination.duckdb"
+        )
+        if observed != initial_lanes[lane]:
+            _fail("cannot discard a prepared recovery after coordination progress")
+    prepared = target / ORPHAN_RECOVERY_PREPARED
+    if not os.path.lexists(prepared):
+        _fail("zero-progress prepared recovery marker disappeared")
+    prepared.unlink()
+    g7._fsync_directory(target)
+
+
 def _coordination_completion_body(decision: Mapping[str, Any], plan_id: str) -> dict[str, Any]:
     claim = dict(decision["claim_binding"])["claim"]
     return {
@@ -1803,6 +1990,11 @@ def _apply_orphan_recovery_plan(
         install_schema=False,
         repository_tree_id=str(population["repository_tree_id"]),
         plan_root_cid=str(population["plan_root_cid"]),
+        # This operator path freshly revalidates the closed authority
+        # projection immediately before replay.  Disable the generic one-hour
+        # evidence age filter only here so a crash cannot append a second,
+        # grammar-breaking evidence event for the same immutable decision.
+        evidence_freshness_seconds=0,
     ) as source:
         for decision_value in plan["decisions"]:
             decision = dict(decision_value)
@@ -2156,9 +2348,36 @@ def _publish_recovery_receipt(*, root: Path, target: Path, receipt: Mapping[str,
         g7._write_new_json(pending, receipt)
         g7._fsync_private_file(pending, noun="g9 orphan recovery receipt")
         g7._fsync_directory(target)
+    else:
+        observed, _identity = _load_marker_snapshot(
+            root=root,
+            path=pending,
+            noun="pending g9 orphan recovery receipt",
+            required_links=None,
+        )
+        if observed != receipt:
+            _fail("pending g9 orphan recovery receipt differs")
     if not os.path.lexists(marker):
         os.link(pending, marker, follow_symlinks=False)
         g7._fsync_directory(target)
+    marker_receipt, marker_identity = _load_marker_snapshot(
+        root=root,
+        path=marker,
+        noun="g9 orphan recovery marker",
+        required_links=2,
+    )
+    pending_receipt, pending_identity = _load_marker_snapshot(
+        root=root,
+        path=pending,
+        noun="pending g9 orphan recovery receipt",
+        required_links=2,
+    )
+    if (
+        marker_receipt != receipt
+        or pending_receipt != receipt
+        or marker_identity[:2] != pending_identity[:2]
+    ):
+        _fail("g9 orphan recovery marker publication differs")
     if os.path.lexists(pending):
         pending.unlink()
     prepared = target / ORPHAN_RECOVERY_PREPARED
@@ -2195,7 +2414,7 @@ def recover_orphan_terminals(
                 or pending_stat.st_nlink != 2
             ):
                 _fail("g9 orphan recovery marker/pending hardlink differs")
-        receipt, _marker_identity = _load_marker_snapshot(
+        receipt, marker_identity = _load_marker_snapshot(
             root=root,
             path=marker,
             noun="g9 orphan recovery marker",
@@ -2213,6 +2432,14 @@ def recover_orphan_terminals(
             connection_factory=lambda path: g7._open_local_database(path, read_only=True),
         ) as probe, _TransientRecoveryLockCleanup(target):
             g7._close_offline_fence_probe(probe)
+            fenced_receipt, fenced_identity = _load_marker_snapshot(
+                root=root,
+                path=marker,
+                noun="g9 orphan recovery marker",
+                required_links=2 if pending_exists else 1,
+            )
+            if fenced_receipt != receipt or fenced_identity != marker_identity:
+                _fail("g9 orphan recovery marker changed before owner fence")
             _verify_recovery_authority(
                 root=root,
                 target=target,
@@ -2227,9 +2454,12 @@ def recover_orphan_terminals(
         return {"schema": CHECK_SCHEMA, "valid": True, "mode": "recover-orphan-terminals", "replayed": True, "receipt": receipt}
     prepared_path = target / ORPHAN_RECOVERY_PREPARED
     if os.path.lexists(target / ORPHAN_RECOVERY_PENDING):
-        receipt = g7._load_json(
-            target / ORPHAN_RECOVERY_PENDING, root=root,
+        pending_path = target / ORPHAN_RECOVERY_PENDING
+        receipt, pending_identity = _load_marker_snapshot(
+            root=root,
+            path=pending_path,
             noun="pending g9 orphan recovery receipt",
+            required_links=1,
         )
         _validate_recovery_receipt(
             receipt, root=root, population=population, policy=policy,
@@ -2243,6 +2473,14 @@ def recover_orphan_terminals(
             connection_factory=lambda path: g7._open_local_database(path, read_only=True),
         ) as probe, _TransientRecoveryLockCleanup(target):
             g7._close_offline_fence_probe(probe)
+            fenced_receipt, fenced_identity = _load_marker_snapshot(
+                root=root,
+                path=pending_path,
+                noun="pending g9 orphan recovery receipt",
+                required_links=1,
+            )
+            if fenced_receipt != receipt or fenced_identity != pending_identity:
+                _fail("pending g9 orphan recovery receipt changed before owner fence")
             _verify_recovery_authority(
                 root=root,
                 target=target,
@@ -2259,47 +2497,74 @@ def recover_orphan_terminals(
         connection_factory=lambda path: g7._open_local_database(path, read_only=True),
     ) as probe, _TransientRecoveryLockCleanup(target):
         g7._close_offline_fence_probe(probe)
-        replaying_plan = os.path.lexists(prepared_path)
-        if replaying_plan:
-            plan = g7._load_json(prepared_path, root=root, noun="prepared g9 orphan recovery")
-        else:
-            for relative in _store_relative_files():
-                _validate_store(root, target, relative, migration_receipt)
-            plan = _prepare_orphan_recovery_plan(
-                root=root, target=target, population=population, policy=policy,
-                migration_receipt=migration_receipt, validation_runner=validation_runner,
-            )
-            g7._write_new_json(prepared_path, plan)
-            g7._fsync_private_file(prepared_path, noun="prepared g9 orphan recovery")
-            g7._fsync_directory(target)
-        _validate_recovery_plan(
-            plan, root=root, population=population, policy=policy,
-            migration_receipt=migration_receipt,
-        )
-        _verify_prepared_recovery_progress(
-            target=target, policy=policy, plan=plan
-        )
-        if replaying_plan:
-            _revalidate_prepared_recovery_plan(
+        for plan_attempt in range(2):
+            replaying_plan = os.path.lexists(prepared_path)
+            if replaying_plan:
+                plan = g7._load_json(
+                    prepared_path, root=root, noun="prepared g9 orphan recovery"
+                )
+            else:
+                for relative in _store_relative_files():
+                    _validate_store(root, target, relative, migration_receipt)
+                plan = _prepare_orphan_recovery_plan(
+                    root=root,
+                    target=target,
+                    population=population,
+                    policy=policy,
+                    migration_receipt=migration_receipt,
+                    validation_runner=validation_runner,
+                )
+            _validate_recovery_plan(
+                plan,
                 root=root,
-                target=target,
                 population=population,
                 policy=policy,
-                plan=plan,
-                validation_runner=validation_runner,
+                migration_receipt=migration_receipt,
             )
-        blocked = [
-            str(item["task_alias"])
-            for item in plan["decisions"]
-            if item.get("target_status") == "blocked"
-        ]
-        if blocked:
-            prepared_path.unlink(missing_ok=True)
-            g7._fsync_directory(target)
-            _fail(
-                "g9 orphan recovery validation infrastructure is unavailable: "
-                + ",".join(blocked)
+            _verify_prepared_recovery_progress(
+                target=target, policy=policy, plan=plan
             )
+            blocked = [
+                str(item["task_alias"])
+                for item in plan["decisions"]
+                if item.get("target_status") == "blocked"
+            ]
+            if blocked:
+                if replaying_plan:
+                    _discard_zero_progress_recovery_plan(target=target, plan=plan)
+                    if plan_attempt == 0:
+                        continue
+                _fail(
+                    "g9 orphan recovery validation infrastructure is unavailable: "
+                    + ",".join(blocked)
+                )
+            if replaying_plan:
+                try:
+                    _revalidate_prepared_recovery_plan(
+                        root=root,
+                        target=target,
+                        population=population,
+                        policy=policy,
+                        plan=plan,
+                        validation_runner=validation_runner,
+                    )
+                except _RecoveryPlanStale:
+                    _discard_zero_progress_recovery_plan(target=target, plan=plan)
+                    if plan_attempt == 0:
+                        continue
+                    raise
+            else:
+                # A validation-infrastructure failure is never fsynced.  Only
+                # a complete/retryable, source-bound plan may become a crash
+                # replay authority.
+                g7._write_new_json(prepared_path, plan)
+                g7._fsync_private_file(
+                    prepared_path, noun="prepared g9 orphan recovery"
+                )
+                g7._fsync_directory(target)
+            break
+        else:  # pragma: no cover - the bounded loop either breaks or raises.
+            _fail("g9 orphan recovery could not establish a fresh prepared plan")
         g7._assert_source_delta(root, population, policy)
         outcomes = _apply_orphan_recovery_plan(
             root=root, target=target, population=population, plan=plan

@@ -323,6 +323,7 @@ PROTECTED_PATHS = {
     "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py",
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
 }
 
