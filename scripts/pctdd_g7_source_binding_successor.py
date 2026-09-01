@@ -564,8 +564,30 @@ def _canonical_cell(value: Any) -> dict[str, Any]:
     )
 
 
-def _canonical_row(row: Sequence[Any]) -> list[dict[str, Any]]:
-    return [_canonical_cell(value) for value in row]
+def _row_values(row: Sequence[Any] | Mapping[str, Any]) -> tuple[Any, ...]:
+    """Return query values in positional column order.
+
+    Local DuckDB results are tuples, while the authenticated Quack adapter
+    deliberately returns ``DuckDBRow`` mappings for sqlite-row compatibility.
+    Iterating those mappings yields column names, not values.  Identity-bearing
+    projections must therefore normalize through positional access before any
+    destructuring or canonicalization.
+    """
+
+    if isinstance(row, Mapping):
+        try:
+            return tuple(row[index] for index in range(len(row)))
+        except (IndexError, KeyError, TypeError) as exc:
+            raise SourceBindingMigrationError(
+                "database row mapping lacks positional column authority"
+            ) from exc
+    return tuple(row)
+
+
+def _canonical_row(
+    row: Sequence[Any] | Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    return [_canonical_cell(value) for value in _row_values(row)]
 
 
 def _normalized_rows(connection: Any, table: str) -> dict[str, Any]:
@@ -592,21 +614,33 @@ def _control_projection(database: Path | str) -> dict[str, Any]:
     connection = _open_control_target(database)
     try:
         statuses = {
-            str(status): int(count)
-            for status, count in connection.execute(
-                "SELECT status, COUNT(*) FROM tasks GROUP BY status ORDER BY status"
-            ).fetchall()
+            str(values[0]): int(values[1])
+            for values in (
+                _row_values(row)
+                for row in connection.execute(
+                    "SELECT status, COUNT(*) FROM tasks GROUP BY status ORDER BY status"
+                ).fetchall()
+            )
         }
-        plan = connection.execute(
-            "SELECT plan_cid, plan_alias, status, revision, body_json FROM plans"
-        ).fetchall()
-        task_rows = connection.execute(
-            "SELECT task_alias,task_cid,goal_cid,plan_cid,objective_id,ordinal,"
-            "status,revision,priority,identity_json,body_json FROM tasks ORDER BY task_alias"
-        ).fetchall()
-        event_watermark, event_count = connection.execute(
+        plan = [
+            _row_values(row)
+            for row in connection.execute(
+                "SELECT plan_cid, plan_alias, status, revision, body_json FROM plans"
+            ).fetchall()
+        ]
+        task_rows = [
+            _row_values(row)
+            for row in connection.execute(
+                "SELECT task_alias,task_cid,goal_cid,plan_cid,objective_id,ordinal,"
+                "status,revision,priority,identity_json,body_json FROM tasks ORDER BY task_alias"
+            ).fetchall()
+        ]
+        event_row = connection.execute(
             "SELECT COALESCE(MAX(global_sequence),0), COUNT(*) FROM domain_events"
         ).fetchone()
+        if event_row is None:
+            raise SourceBindingMigrationError("control store event aggregate is absent")
+        event_watermark, event_count = _row_values(event_row)
         counts = {
             name: int(connection.execute(f"SELECT COUNT(*) FROM {name}").fetchone()[0])
             for name in (
@@ -773,7 +807,7 @@ def _latest_state_server_from_connection(connection: Any) -> dict[str, Any]:
         "status",
         "revision",
     )
-    result = dict(zip(keys, row, strict=True))
+    result = dict(zip(keys, _row_values(row), strict=True))
     for key in ("schema_revision", "generation", "revision"):
         result[key] = int(result[key])
     return result
@@ -2657,8 +2691,8 @@ def _migration_rows(database: Path | str, receipt: Mapping[str, Any]) -> dict[st
         "migration_event_prefix_digest": _identity(
             [_canonical_row(row) for row in event_rows]
         ),
-        "evidence": [list(row) for row in evidence],
-        "plan": list(plan) if plan is not None else None,
+        "evidence": [list(_row_values(row)) for row in evidence],
+        "plan": list(_row_values(plan)) if plan is not None else None,
         "historical_row_hashes": historical_row_hashes,
     }
 

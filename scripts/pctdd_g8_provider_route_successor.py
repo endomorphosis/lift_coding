@@ -2742,8 +2742,8 @@ def _migration_rows(database: Path | str, receipt: Mapping[str, Any]) -> dict[st
         "migration_event_prefix_digest": g7._identity(
             [g7._canonical_row(row) for row in events]
         ),
-        "evidence": [list(row) for row in evidence],
-        "plan": list(plan) if plan is not None else None,
+        "evidence": [list(g7._row_values(row)) for row in evidence],
+        "plan": list(g7._row_values(plan)) if plan is not None else None,
         "historical_row_hashes": manifests,
     }
 

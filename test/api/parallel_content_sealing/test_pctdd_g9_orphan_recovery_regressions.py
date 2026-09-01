@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 from contextlib import contextmanager
 from copy import deepcopy
@@ -241,6 +242,194 @@ def test_live_progressed_check_uses_only_authenticated_quack_transport(
     assert result["verification_transport"] == "quack"
     assert transport_calls
     assert {target for _operation, target in transport_calls} == {endpoint}
+
+
+def test_live_quack_rows_match_offline_tuple_projections(
+    migration: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import (
+        DuckDBRow,
+    )
+
+    task_columns = (
+        "task_alias",
+        "task_cid",
+        "goal_cid",
+        "plan_cid",
+        "objective_id",
+        "ordinal",
+        "status",
+        "revision",
+        "priority",
+        "identity_json",
+        "body_json",
+    )
+    task_row = (
+        "PCTDD-000",
+        "task:000",
+        "goal:000",
+        "plan:000",
+        "PCTDD-G000",
+        1,
+        "completed",
+        3,
+        "critical",
+        json.dumps({"task_alias": "PCTDD-000"}),
+        json.dumps({"completion_receipt": {"accepted": True}}),
+    )
+    event_columns = (
+        "event_id",
+        "stream_id",
+        "sequence",
+        "global_sequence",
+        "event_type",
+        "task_cid",
+        "attempt_id",
+        "session_id",
+        "recorded_at",
+        "body_json",
+    )
+    event_row = (
+        "event:1",
+        "task:000",
+        1,
+        1,
+        "task.completed",
+        "task:000",
+        None,
+        "session:operator",
+        "2026-09-01T00:00:00Z",
+        "{}",
+    )
+    projection_tables = {
+        "goals",
+        "goal_edges",
+        "task_dependencies",
+        "task_outputs",
+        "task_acceptance",
+        "task_validations",
+        "completion_receipts",
+        "validation_results",
+        "evidence_nodes",
+        "plan_revisions",
+    }
+
+    class Cursor:
+        def __init__(
+            self,
+            columns: tuple[str, ...],
+            rows: list[tuple[Any, ...]],
+            *,
+            mapped: bool,
+        ) -> None:
+            self.columns = columns
+            self.rows = rows
+            self.mapped = mapped
+
+        def _row(self, values: tuple[Any, ...]) -> Any:
+            return DuckDBRow(self.columns, values) if self.mapped else values
+
+        def fetchall(self) -> list[Any]:
+            return [self._row(row) for row in self.rows]
+
+        def fetchone(self) -> Any | None:
+            return self._row(self.rows[0]) if self.rows else None
+
+    class Connection:
+        def __init__(self, *, mapped: bool) -> None:
+            self.mapped = mapped
+
+        def execute(self, sql: str, _parameters: Any = None) -> Cursor:
+            query = " ".join(sql.split())
+            if query.startswith("SELECT status, COUNT(*) FROM tasks"):
+                return Cursor(
+                    ("status", "count_star()"),
+                    [("completed", 1)],
+                    mapped=self.mapped,
+                )
+            if query.startswith("SELECT plan_cid, plan_alias"):
+                return Cursor(
+                    ("plan_cid", "plan_alias", "status", "revision", "body_json"),
+                    [("plan:000", "pctdd", "active", 2, "{}")],
+                    mapped=self.mapped,
+                )
+            if query.startswith("SELECT task_alias,task_cid"):
+                return Cursor(task_columns, [task_row], mapped=self.mapped)
+            if query.startswith("SELECT COALESCE(MAX(global_sequence),0)"):
+                return Cursor(("max", "count_star()"), [(1, 1)], mapped=self.mapped)
+            if query.startswith("SELECT COUNT(*) FROM"):
+                table = query.split("FROM", 1)[1].strip().split()[0]
+                return Cursor(
+                    ("count_star()",),
+                    [(1 if table in {"goals", "tasks"} else 0,)],
+                    mapped=self.mapped,
+                )
+            if query.startswith("DESCRIBE SELECT * FROM"):
+                table = query.rsplit(" ", 1)[1]
+                assert table in projection_tables
+                return Cursor(
+                    ("column_name", "column_type"),
+                    [("task_cid", "VARCHAR")],
+                    mapped=self.mapped,
+                )
+            if query.startswith("SELECT * FROM"):
+                table = query.rsplit(" ", 1)[1]
+                assert table in projection_tables
+                return Cursor(("task_cid",), [], mapped=self.mapped)
+            if query.startswith("SELECT event_id,stream_id"):
+                return Cursor(event_columns, [event_row], mapped=self.mapped)
+            if query.startswith("SELECT server_id,store_id"):
+                columns = (
+                    "server_id",
+                    "store_id",
+                    "database_uuid",
+                    "process_birth_id",
+                    "listen_uri",
+                    "extension_fingerprint",
+                    "schema_revision",
+                    "generation",
+                    "started_at",
+                    "stopped_at",
+                    "status",
+                    "revision",
+                )
+                values = (
+                    "server:1",
+                    "control.duckdb",
+                    "database:1",
+                    "birth:1",
+                    "quack:127.0.0.1:27278",
+                    "sha256:extension",
+                    1,
+                    31,
+                    "2026-09-01T00:00:00Z",
+                    None,
+                    "ready",
+                    1,
+                )
+                return Cursor(columns, [values], mapped=self.mapped)
+            raise AssertionError(f"unexpected projection query: {query}")
+
+        def close(self) -> None:
+            pass
+
+    monkeypatch.setattr(
+        migration.g7, "_open_control_target", lambda _target: Connection(mapped=False)
+    )
+    offline_projection = migration.g7._control_projection(Path("offline.duckdb"))
+    offline_prefix = migration._event_prefix(Path("offline.duckdb"), 1)
+    offline_owner = migration.g7._latest_state_server(Path("offline.duckdb"))
+
+    monkeypatch.setattr(
+        migration.g7, "_open_control_target", lambda _target: Connection(mapped=True)
+    )
+    live_projection = migration.g7._control_projection("quack:127.0.0.1:27278")
+    live_prefix = migration._event_prefix("quack:127.0.0.1:27278", 1)
+    live_owner = migration.g7._latest_state_server("quack:127.0.0.1:27278")
+
+    assert live_projection == offline_projection
+    assert live_prefix == offline_prefix
+    assert live_owner == offline_owner
 
 
 def test_migration_replay_with_final_recovery_marker_skips_recovery_mutation(
