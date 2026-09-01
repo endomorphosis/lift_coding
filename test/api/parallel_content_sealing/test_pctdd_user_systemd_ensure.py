@@ -74,6 +74,8 @@ def test_templates_render_deterministically_to_resume_only() -> None:
     command = exec_lines[0]
     assert str(module.OPERATOR_SCRIPT) in command
     assert str(module.SCHEDULER_CONFIG) in command
+    assert " -E -P " in command
+    assert " -I " not in command
     assert " resume --monitor-seconds 180" in command
     assert " state-owner" not in command
     assert " launch " not in command

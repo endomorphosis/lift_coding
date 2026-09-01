@@ -272,9 +272,13 @@ def _render_units() -> dict[str, bytes]:
 
     service_lines = template.splitlines()
     exec_lines = [line for line in service_lines if line.startswith("ExecStart=")]
+    # Ignore hostile PYTHON* environment and unsafe script-directory imports,
+    # while retaining the reviewed user-site dependency authority where the
+    # pinned DuckDB/Quack runtime is installed.  ``-I`` would also suppress
+    # that authority and make every systemd ensure fail before authentication.
     expected_exec = (
         "ExecStart="
-        f"{_systemd_quote(str(python))} -I {_systemd_quote(str(operator))} "
+        f"{_systemd_quote(str(python))} -E -P {_systemd_quote(str(operator))} "
         f"--config {_systemd_quote(str(config))} resume "
         f"--monitor-seconds {MONITOR_SECONDS}"
     )

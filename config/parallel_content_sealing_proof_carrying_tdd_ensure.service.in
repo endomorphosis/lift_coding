@@ -8,7 +8,7 @@ StartLimitBurst=3
 [Service]
 Type=oneshot
 WorkingDirectory=@REPOSITORY_DIRECTORY@
-ExecStart=@PYTHON_EXECUTABLE@ -I @OPERATOR_SCRIPT@ --config @SCHEDULER_CONFIG@ resume --monitor-seconds @MONITOR_SECONDS@
+ExecStart=@PYTHON_EXECUTABLE@ -E -P @OPERATOR_SCRIPT@ --config @SCHEDULER_CONFIG@ resume --monitor-seconds @MONITOR_SECONDS@
 TimeoutStartSec=@TIMEOUT_SECONDS@
 Restart=no
 KillMode=process
