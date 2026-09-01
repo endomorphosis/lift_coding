@@ -769,6 +769,11 @@ def _require_unit_directory_binding(directory: Path, directory_fd: int) -> None:
     if (
         stat.S_ISLNK(path_stat.st_mode)
         or not stat.S_ISDIR(path_stat.st_mode)
+        or not stat.S_ISDIR(descriptor_stat.st_mode)
+        or path_stat.st_uid != os.geteuid()
+        or descriptor_stat.st_uid != os.geteuid()
+        or stat.S_IMODE(path_stat.st_mode) & 0o022
+        or stat.S_IMODE(descriptor_stat.st_mode) & 0o022
         or (path_stat.st_dev, path_stat.st_ino)
         != (descriptor_stat.st_dev, descriptor_stat.st_ino)
     ):

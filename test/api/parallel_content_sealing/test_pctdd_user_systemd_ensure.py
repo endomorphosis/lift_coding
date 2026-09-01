@@ -463,6 +463,36 @@ def test_directory_swap_is_detected_with_dirfd_anchored_writes(
     )
 
 
+def test_directory_mode_change_is_detected_before_install_success(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load("pctdd_systemd_directory_mode_race")
+    unit_dir = tmp_path / "user-units"
+    _stub_admission(module, monkeypatch)
+    real_create = module._atomic_private_create
+    changed = False
+
+    def chmod_then_create(name: str, payload: bytes, directory_fd: int) -> None:
+        nonlocal changed
+        if not changed:
+            changed = True
+            unit_dir.chmod(0o777)
+        real_create(name, payload, directory_fd)
+
+    monkeypatch.setattr(module, "_atomic_private_create", chmod_then_create)
+
+    with pytest.raises(module.EnsureError, match="directory_changed"):
+        module.install(
+            module.SCHEDULER_CONFIG,
+            unit_dir=unit_dir,
+            daemon_reload=False,
+            enable=False,
+        )
+
+    assert stat.S_IMODE(unit_dir.stat().st_mode) == 0o777
+
+
 def test_unrecognized_existing_unit_blocks_all_install_mutation(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
