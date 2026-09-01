@@ -98,6 +98,21 @@ GUARDRAIL_FLAGS: Final[tuple[str, ...]] = (
     "dependency_guardrail_enabled",
     "reconciliation_guardrail_enabled",
 )
+PROGRAM_ID: Final[str] = "parallel-content-sealing-proof-carrying-tdd-v1"
+PLAN_ALIAS: Final[str] = "PCTDD-PLAN-V1.1"
+SCHEDULER_CONFIG_PATH: Final[str] = (
+    "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json"
+)
+MAX_HISTORICAL_CONTROL_BYTES: Final[int] = 16 * 1024 * 1024
+SOURCE_BINDING_FIELDS: Final[frozenset[str]] = frozenset(
+    {
+        "source_head",
+        "repository_tree_id",
+        "current_plan_root_cid",
+        "source_forest_root",
+        "source_identities",
+    }
+)
 
 
 class DescendantSourceSuccessorError(RuntimeError):
@@ -662,15 +677,252 @@ def _store_record(relative: Path, receipt: Mapping[str, Any]) -> dict[str, Any]:
     return {int(item["lane"]): dict(item) for item in receipt["coordination_stores"]}[lane]
 
 
-def _validate_receipt(
-    receipt: Mapping[str, Any], *, root: Path, population: Mapping[str, Any], policy: Mapping[str, Any]
+def _historical_blob(
+    root: Path,
+    *,
+    source_head: str,
+    relative: Any,
+    noun: str,
+) -> bytes:
+    """Read one bounded tracked blob from the receipt's immutable Git tree."""
+
+    path = g7._safe_relative(relative, noun=noun)
+    if ":" in path:
+        _fail(f"{noun} contains a revision separator")
+    fields = g7._git(root, "ls-tree", source_head, "--", path).split(maxsplit=3)
+    if (
+        len(fields) != 4
+        or fields[0] not in {"100644", "100755"}
+        or fields[1] != "blob"
+        or fields[3] != path
+    ):
+        _fail(f"{noun} is not an exact historical regular Git blob")
+    object_id = fields[2]
+    try:
+        byte_length = int(g7._git(root, "cat-file", "-s", object_id))
+    except (TypeError, ValueError) as exc:
+        _fail(f"{noun} historical Git blob size is malformed", exc)
+    if byte_length < 0 or byte_length > MAX_HISTORICAL_CONTROL_BYTES:
+        _fail(f"{noun} exceeds its historical byte bound")
+    try:
+        process = subprocess.run(
+            ["git", "cat-file", "blob", object_id],
+            cwd=root,
+            stdin=subprocess.DEVNULL,
+            capture_output=True,
+            check=False,
+            timeout=30,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        _fail(f"{noun} cannot be read from the historical source", exc)
+    if process.returncode:
+        _fail(f"{noun} cannot be read from the historical source")
+    payload = bytes(process.stdout)
+    if len(payload) != byte_length:
+        _fail(f"{noun} historical Git blob length differs")
+    return payload
+
+
+def _historical_source_paths(config: Mapping[str, Any]) -> dict[str, str]:
+    """Reconstruct the source-identity path vocabulary used by materialization."""
+
+    required = {
+        "config": SCHEDULER_CONFIG_PATH,
+        "taskboard": config.get("taskboard_path"),
+        "objectives": config.get("objectives_path"),
+        "plan": config.get("plan_path"),
+        "validator": config.get("validator_path"),
+        "materializer": "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py",
+        "dependency_seal": (
+            "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json"
+        ),
+        "dependency_validator": config.get("dependency_validator_path"),
+    }
+    result = {
+        name: g7._safe_relative(value, noun=f"historical {name} path")
+        for name, value in required.items()
+    }
+    protected = config.get("protected_paths")
+    if (
+        not isinstance(protected, list)
+        or not protected
+        or len(protected) != len(set(map(str, protected)))
+    ):
+        _fail("historical scheduler protected-path population differs")
+    for index, raw in enumerate(protected):
+        relative = g7._safe_relative(
+            raw, noun=f"historical protected_paths[{index}]"
+        )
+        result[f"protected:{relative}"] = relative
+    return result
+
+
+def _historical_population(source_binding: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "source_head": str(source_binding["source_head"]),
+        "repository_tree_id": str(source_binding["repository_tree_id"]),
+        "plan_root_cid": str(source_binding["current_plan_root_cid"]),
+        "source_forest": {
+            "source_forest_root": str(source_binding["source_forest_root"])
+        },
+        "source_identities": dict(source_binding["source_identities"]),
+    }
+
+
+def _historical_policy_and_binding(
+    *,
+    root: Path,
+    receipt: Mapping[str, Any],
+    population: Mapping[str, Any],
+    current_policy: Mapping[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Verify the bootstrap source at its commit, separately from current source."""
+
+    raw_binding = receipt.get("source_binding")
+    if not isinstance(raw_binding, Mapping) or set(raw_binding) != SOURCE_BINDING_FIELDS:
+        _fail("g9 historical source binding fields differ")
+    binding = dict(raw_binding)
+    source_head = str(binding.get("source_head") or "")
+    repository_tree = str(binding.get("repository_tree_id") or "")
+    if (
+        len(source_head) != 40
+        or any(character not in "0123456789abcdef" for character in source_head)
+        or len(repository_tree) != 40
+        or any(character not in "0123456789abcdef" for character in repository_tree)
+    ):
+        _fail("g9 historical source Git identity is malformed")
+    if g7._git(root, "rev-parse", f"{source_head}^{{tree}}") != repository_tree:
+        _fail("g9 historical source tree differs")
+
+    anchor = str(current_policy["control_source_anchor_head"])
+    if (
+        g7._git(root, "rev-parse", f"{anchor}^{{tree}}")
+        != current_policy["control_source_anchor_tree"]
+    ):
+        _fail("g9 historical source anchor tree differs")
+    g7._git(root, "merge-base", "--is-ancestor", anchor, source_head)
+    g7._git(
+        root,
+        "merge-base",
+        "--is-ancestor",
+        source_head,
+        str(population["source_head"]),
+    )
+
+    config_bytes = _historical_blob(
+        root,
+        source_head=source_head,
+        relative=SCHEDULER_CONFIG_PATH,
+        noun="historical scheduler config",
+    )
+    config = g7._decode_json(config_bytes, noun="historical scheduler config")
+    historical_policy = _policy(config)
+    historical_policy["repository_root"] = str(root)
+    for field in (
+        "schema",
+        "migration_revision",
+        "prior_store_generation",
+        "target_store_generation",
+        "prior_runtime_root",
+        "target_runtime_root",
+        "target_quack_endpoint",
+        "receipt_marker",
+        "control_source_anchor_head",
+        "control_source_anchor_tree",
+        "stopped_predecessor_capture",
+        "expected_task_aliases",
+        "generated_guardrail_policy",
+        "copy_policy",
+        "orphan_terminal_recovery",
+    ):
+        if historical_policy.get(field) != current_policy.get(field):
+            _fail(f"g9 historical/current policy continuity differs: {field}")
+
+    changed: dict[str, str] = {}
+    delta = g7._git(
+        root,
+        "diff",
+        "--name-status",
+        "--no-renames",
+        anchor,
+        source_head,
+        "--",
+    )
+    for line in delta.splitlines():
+        fields = line.split("\t")
+        if len(fields) != 2 or fields[0] not in {"A", "M"} or fields[1] in changed:
+            _fail(f"g9 historical source delta is not control-only: {line}")
+        changed[fields[1]] = fields[0]
+    historical_allowed = {
+        str(item) for item in historical_policy.get("operator_control_paths", ())
+    }
+    if not changed or not set(changed).issubset(historical_allowed):
+        _fail("g9 historical source changed paths outside operator controls")
+
+    governed = receipt.get("governed_gitlinks")
+    if (
+        not isinstance(governed, Mapping)
+        or dict(governed) != historical_policy.get("governed_gitlinks")
+    ):
+        _fail("g9 historical governed gitlinks differ")
+    for relative, expected in governed.items():
+        if g7._git(root, "rev-parse", f"{source_head}:{relative}") != expected:
+            _fail(f"g9 historical governed gitlink differs: {relative}")
+
+    identities = binding.get("source_identities")
+    if not isinstance(identities, Mapping):
+        _fail("g9 historical source identities are absent")
+    source_paths = _historical_source_paths(config)
+    if set(identities) != set(source_paths):
+        _fail("g9 historical source identity population differs")
+    for name, relative in source_paths.items():
+        expected = str(identities[name])
+        if (
+            len(expected) != 71
+            or not expected.startswith("sha256:")
+            or any(character not in "0123456789abcdef" for character in expected[7:])
+        ):
+            _fail(f"g9 historical source identity is malformed: {name}")
+        payload = _historical_blob(
+            root,
+            source_head=source_head,
+            relative=relative,
+            noun=f"historical source {name}",
+        )
+        if "sha256:" + hashlib.sha256(payload).hexdigest() != expected:
+            _fail(f"g9 historical source identity differs: {name}")
+
+    expected_plan_root = g7._control_plane_content_identity(
+        {
+            "schema": "pctdd-plan-root@1",
+            "program_id": PROGRAM_ID,
+            "plan_alias": PLAN_ALIAS,
+            "source_head": source_head,
+            "repository_tree_id": repository_tree,
+            "source_forest_root": binding["source_forest_root"],
+            "source_identities": dict(identities),
+        }
+    )
+    if binding.get("current_plan_root_cid") != expected_plan_root:
+        _fail("g9 historical plan-root binding differs")
+    return historical_policy, binding
+
+
+def _validate_receipt_contract(
+    receipt: Mapping[str, Any],
+    *,
+    expected_source_binding: Mapping[str, Any],
+    policy: Mapping[str, Any],
 ) -> None:
+    prior_projection = policy["stopped_predecessor_capture"][
+        "prior_control_projection"
+    ]
     body = dict(receipt)
     cid = str(body.pop("receipt_cid", ""))
     if receipt.get("schema") != RECEIPT_SCHEMA or cid != g7._identity(body):
         _fail("g9 migration receipt identity differs")
     if (
-        receipt.get("source_binding") != g7._source_binding(root, population)
+        receipt.get("source_binding") != expected_source_binding
         or receipt.get("migration_revision") != policy["migration_revision"]
         or receipt.get("prior_store_generation") != policy["prior_store_generation"]
         or receipt.get("target_store_generation") != policy["target_store_generation"]
@@ -691,8 +943,214 @@ def _validate_receipt(
         or receipt.get("plan_revision_changes") != 1
         or receipt.get("evidence_node_changes") != 1
         or receipt.get("g8_source_mutated") is not False
+        or receipt.get("prior_event_watermark")
+        != prior_projection["event_watermark"]
+        or receipt.get("prior_event_prefix_digest")
+        != prior_projection["event_prefix_digest"]
     ):
         _fail("g9 migration receipt belongs to another source or policy")
+
+
+def _validate_receipt(
+    receipt: Mapping[str, Any], *, root: Path, population: Mapping[str, Any], policy: Mapping[str, Any]
+) -> None:
+    _validate_receipt_contract(
+        receipt,
+        expected_source_binding=g7._source_binding(root, population),
+        policy=policy,
+    )
+
+
+def _validate_progressed_receipt(
+    receipt: Mapping[str, Any],
+    *,
+    root: Path,
+    population: Mapping[str, Any],
+    policy: Mapping[str, Any],
+) -> dict[str, Any]:
+    try:
+        historical_policy, historical_binding = _historical_policy_and_binding(
+            root=root,
+            receipt=receipt,
+            population=population,
+            current_policy=policy,
+        )
+    except DescendantSourceSuccessorError:
+        raise
+    except Exception as exc:
+        _fail("g9 historical source authority could not be verified", exc)
+    _validate_receipt_contract(
+        receipt,
+        expected_source_binding=historical_binding,
+        policy=historical_policy,
+    )
+    return historical_policy
+
+
+def _decode_database_json(value: Any, *, noun: str) -> dict[str, Any]:
+    return g7._decode_json(str(value).encode("utf-8"), noun=noun)
+
+
+def _validate_historical_migration_suffix(
+    control_target: Path | str,
+    *,
+    root: Path,
+    receipt: Mapping[str, Any],
+    historical_policy: Mapping[str, Any],
+) -> None:
+    """Tie the historical marker to its exact immutable database suffix."""
+
+    raw_suffix = receipt.get("suffix")
+    if not isinstance(raw_suffix, Mapping) or set(raw_suffix) != {
+        "plan_event_id",
+        "migration_evidence_event_id",
+        "migration_digest",
+    }:
+        _fail("g9 migration suffix identity fields differ")
+    suffix = dict(raw_suffix)
+    binding = receipt.get("source_binding")
+    if not isinstance(binding, Mapping):
+        _fail("g9 migration suffix lacks its historical source binding")
+    historical_population = _historical_population(binding)
+    policy = dict(historical_policy)
+    policy["repository_root"] = str(root)
+    prior = policy["stopped_predecessor_capture"]["prior_control_projection"]
+    expected_evidence_body = _migration_body(
+        root=root,
+        population=historical_population,
+        policy=policy,
+        prior=prior,
+    )
+    expected_digest = g7._control_plane_content_identity(expected_evidence_body)
+    if suffix.get("migration_digest") != expected_digest:
+        _fail("g9 migration suffix evidence digest differs")
+    expected_plan_update = {
+        "current_source_binding": dict(binding),
+        "descendant_source_migration_revision": policy["migration_revision"],
+        "resolved_guardrail_archive": dict(
+            policy["stopped_predecessor_capture"]["guardrail_archive"]
+        ),
+        "generated_guardrail_policy": dict(policy["generated_guardrail_policy"]),
+        "accepted_plan_root_preserved": True,
+        "task_definition_changes": 0,
+        "task_status_changes": 0,
+        "accepted_completion_changes": 0,
+    }
+    expected_delta = {
+        "kind": "exact_descendant_source_successor",
+        "current_source_head": binding["source_head"],
+        "current_repository_tree_id": binding["repository_tree_id"],
+        "guardrail_task_projection": "disabled_for_sealed_board",
+    }
+    accepted_plan = str(
+        policy["stopped_predecessor_capture"]["accepted_plan_root_cid"]
+    )
+    revision = int(policy["stopped_predecessor_capture"]["prior_plan_revision"]) + 1
+    prior_plan_rows = prior.get("plan")
+    if not isinstance(prior_plan_rows, list):
+        _fail("g9 migration predecessor plan population differs")
+    matching_prior_plans = [
+        row
+        for row in prior_plan_rows
+        if isinstance(row, (list, tuple))
+        and len(row) == 5
+        and str(row[0]) == accepted_plan
+        and int(row[3]) == revision - 1
+    ]
+    if len(matching_prior_plans) != 1:
+        _fail("g9 migration predecessor plan revision differs")
+    expected_plan_body = _decode_database_json(
+        matching_prior_plans[0][4], noun="g9 migration predecessor plan body"
+    )
+    expected_plan_body.update(expected_plan_update)
+    expected_plan_body["last_delta"] = expected_delta
+    prior_watermark = int(receipt["prior_event_watermark"])
+    if (
+        int(receipt.get("migration_event_watermark") or -1)
+        != prior_watermark + 2
+    ):
+        _fail("g9 migration suffix event watermark differs")
+
+    connection = g7._open_control_target(control_target)
+    try:
+        evidence_rows = connection.execute(
+            "SELECT evidence_id,task_cid,evidence_kind,digest,body_json "
+            "FROM evidence_nodes WHERE evidence_kind=?",
+            [MIGRATION_EVIDENCE_KIND],
+        ).fetchall()
+        plan_rows = connection.execute(
+            "SELECT body_json FROM plan_revisions "
+            "WHERE plan_cid=? AND revision=?",
+            [accepted_plan, revision],
+        ).fetchall()
+        event_rows = connection.execute(
+            "SELECT event_id,event_type,task_cid,global_sequence,body_json "
+            "FROM domain_events WHERE event_id IN (?,?) ORDER BY global_sequence",
+            [suffix["plan_event_id"], suffix["migration_evidence_event_id"]],
+        ).fetchall()
+        operator_rows = connection.execute(
+            "SELECT task_cid FROM tasks WHERE task_alias='PCTDD-000'"
+        ).fetchall()
+    finally:
+        connection.close()
+    if len(operator_rows) != 1:
+        _fail("g9 migration suffix operator task differs")
+    operator_task_cid = str(operator_rows[0][0])
+    if len(evidence_rows) != 1:
+        _fail("g9 migration suffix evidence population differs")
+    evidence_id, task_cid, evidence_kind, digest, evidence_json = evidence_rows[0]
+    if (
+        str(task_cid) != operator_task_cid
+        or str(evidence_kind) != MIGRATION_EVIDENCE_KIND
+        or str(digest) != expected_digest
+        or _decode_database_json(evidence_json, noun="g9 migration evidence body")
+        != expected_evidence_body
+    ):
+        _fail("g9 migration suffix evidence row differs")
+    if (
+        len(plan_rows) != 1
+        or _decode_database_json(
+            plan_rows[0][0], noun="g9 migration plan revision body"
+        )
+        != expected_plan_body
+    ):
+        _fail("g9 migration suffix plan revision differs")
+    if len(event_rows) != 2:
+        _fail("g9 migration suffix event population differs")
+    plan_event, evidence_event = event_rows
+    plan_event_body = _decode_database_json(
+        plan_event[4], noun="g9 migration plan event"
+    )
+    evidence_event_body = _decode_database_json(
+        evidence_event[4], noun="g9 migration evidence event"
+    )
+    plan_event_details = plan_event_body.get("body")
+    evidence_event_details = evidence_event_body.get("body")
+    if (
+        str(plan_event[0]) != suffix["plan_event_id"]
+        or str(plan_event[1]) != "intent.plan_revision_appended"
+        or str(plan_event[2] or "")
+        or int(plan_event[3]) != prior_watermark + 1
+        or not isinstance(plan_event_details, Mapping)
+        or plan_event_details.get("plan_cid") != accepted_plan
+        or int(plan_event_details.get("revision") or -1) != revision
+        or plan_event_details.get("body") != expected_plan_body
+        or plan_event_details.get("delta") != expected_delta
+    ):
+        _fail("g9 migration suffix plan event differs")
+    if (
+        str(evidence_event[0]) != suffix["migration_evidence_event_id"]
+        or str(evidence_event[1]) != "intent.evidence_recorded"
+        or str(evidence_event[2]) != operator_task_cid
+        or int(evidence_event[3]) != prior_watermark + 2
+        or not isinstance(evidence_event_details, Mapping)
+        or evidence_event_details.get("evidence_id") != str(evidence_id)
+        or evidence_event_details.get("task_cid") != operator_task_cid
+        or evidence_event_details.get("evidence_kind") != MIGRATION_EVIDENCE_KIND
+        or evidence_event_details.get("digest") != expected_digest
+        or evidence_event_details.get("body") != expected_evidence_body
+    ):
+        _fail("g9 migration suffix evidence event differs")
 
 
 def _validate_store(root: Path, target: Path, relative: Path, receipt: Mapping[str, Any]) -> None:
@@ -945,6 +1403,26 @@ def _load_initial_migration_receipt(
     )
     _validate_receipt(receipt, root=root, population=population, policy=policy)
     return receipt
+
+
+def _load_progressed_migration_receipt(
+    *, root: Path, target: Path, population: Mapping[str, Any], policy: Mapping[str, Any]
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Load an immutable bootstrap receipt for completed-recovery replay only."""
+
+    marker = target / MIGRATION_MARKER
+    if not marker.is_file() or marker.is_symlink():
+        _fail("g9 migration marker is absent before orphan recovery replay")
+    receipt, _marker_identity = _load_marker_snapshot(
+        root=root, path=marker, noun="g9 migration marker"
+    )
+    historical_policy = _validate_progressed_receipt(
+        receipt,
+        root=root,
+        population=population,
+        policy=policy,
+    )
+    return receipt, historical_policy
 
 
 def _task_validation_argv(
@@ -2191,17 +2669,27 @@ def _recovery_receipt(
 
 def _validate_recovery_receipt(
     receipt: Mapping[str, Any], *, root: Path, population: Mapping[str, Any],
-    policy: Mapping[str, Any], migration_receipt: Mapping[str, Any]
+    policy: Mapping[str, Any], migration_receipt: Mapping[str, Any],
+    expected_source_binding: Mapping[str, Any] | None = None,
+    receipt_policy: Mapping[str, Any] | None = None,
 ) -> None:
+    expected_binding = (
+        g7._source_binding(root, population)
+        if expected_source_binding is None
+        else dict(expected_source_binding)
+    )
+    expected_policy = policy if receipt_policy is None else receipt_policy
     body = dict(receipt)
     cid = str(body.pop("recovery_receipt_cid", ""))
     if (
         receipt.get("schema") != ORPHAN_RECOVERY_RECEIPT_SCHEMA
         or cid != g7._identity(body)
-        or receipt.get("source_binding") != g7._source_binding(root, population)
-        or receipt.get("capture_binding") != _capture_binding(policy)
-        or receipt.get("prior_store_generation") != policy["prior_store_generation"]
-        or receipt.get("target_store_generation") != policy["target_store_generation"]
+        or receipt.get("source_binding") != expected_binding
+        or receipt.get("capture_binding") != _capture_binding(expected_policy)
+        or receipt.get("prior_store_generation")
+        != expected_policy["prior_store_generation"]
+        or receipt.get("target_store_generation")
+        != expected_policy["target_store_generation"]
         or receipt.get("migration_receipt_cid") != migration_receipt["receipt_cid"]
         or receipt.get("candidate_task_aliases") != list(ORPHAN_RECOVERY_ALIASES)
         or receipt.get("one_shot") is not True
@@ -2214,6 +2702,20 @@ def _validate_recovery_receipt(
         or not isinstance(receipt.get("stores"), list)
     ):
         _fail("g9 orphan-terminal recovery receipt differs")
+    outcomes = receipt.get("outcomes")
+    if not isinstance(outcomes, list):
+        _fail("g9 orphan-terminal recovery outcome population differs")
+    for raw in outcomes:
+        if not isinstance(raw, Mapping) or not isinstance(raw.get("decision"), Mapping):
+            _fail("g9 orphan-terminal recovery decision is absent")
+        decision = raw["decision"]
+        if (
+            decision.get("source_binding") != expected_binding
+            or decision.get("capture_binding") != receipt.get("capture_binding")
+            or decision.get("migration_receipt_cid")
+            != migration_receipt["receipt_cid"]
+        ):
+            _fail("g9 orphan-terminal recovery decision source differs")
 
 
 def _verify_recovery_outcomes(target: Path, receipt: Mapping[str, Any]) -> None:
@@ -2397,10 +2899,17 @@ def recover_orphan_terminals(
     policy["repository_root"] = str(root)
     g7._assert_source_delta(root, population, policy)
     target = g7._confined(root, policy["target_runtime_root"], noun="g9 runtime root")
-    migration_receipt = _load_initial_migration_receipt(
-        root=root, target=target, population=population, policy=policy
-    )
     marker = target / ORPHAN_RECOVERY_MARKER
+    completed_recovery_replay = os.path.lexists(marker)
+    if completed_recovery_replay:
+        migration_receipt, receipt_policy = _load_progressed_migration_receipt(
+            root=root, target=target, population=population, policy=policy
+        )
+    else:
+        migration_receipt = _load_initial_migration_receipt(
+            root=root, target=target, population=population, policy=policy
+        )
+        receipt_policy = policy
     if os.path.lexists(marker):
         pending_path = target / ORPHAN_RECOVERY_PENDING
         pending_exists = os.path.lexists(pending_path)
@@ -2423,6 +2932,8 @@ def recover_orphan_terminals(
         _validate_recovery_receipt(
             receipt, root=root, population=population, policy=policy,
             migration_receipt=migration_receipt,
+            expected_source_binding=migration_receipt["source_binding"],
+            receipt_policy=receipt_policy,
         )
         from ipfs_accelerate_py.agent_supervisor.runtime.quack_state_server import (
             offline_state_server_fence,
@@ -2780,6 +3291,7 @@ def _live_g9_owner(
 def _verify_descendant_target(
     *, root: Path, target: Path, control_target: Path | str,
     population: Mapping[str, Any], policy: Mapping[str, Any],
+    historical_policy: Mapping[str, Any],
     receipt: Mapping[str, Any], recovery_receipt: Mapping[str, Any] | None,
     live_owner: Mapping[str, Any] | None, allow_progressed: bool
 ) -> dict[str, Any]:
@@ -2789,6 +3301,17 @@ def _verify_descendant_target(
     captured = dict(policy["stopped_predecessor_capture"]["prior_control_projection"])
     if post.get("task_definition_digest") != captured.get("task_definition_digest"):
         _fail("g9 current task definitions differ from the stopped authority")
+    try:
+        _validate_historical_migration_suffix(
+            control_target,
+            root=root,
+            receipt=receipt,
+            historical_policy=historical_policy,
+        )
+    except DescendantSourceSuccessorError:
+        raise
+    except Exception as exc:
+        _fail("g9 historical migration suffix could not be verified", exc)
     if _event_prefix(
         control_target, int(receipt["migration_event_watermark"])
     ) != receipt["migration_event_prefix_digest"]:
@@ -2848,6 +3371,15 @@ def _verify_descendant_target(
         "orphan_terminal_recovery_receipt": (
             None if recovery_receipt is None else dict(recovery_receipt)
         ),
+        "historical_operator_seal_source_binding": dict(receipt["source_binding"]),
+        "current_configured_board_source_binding": g7._source_binding(
+            root, population
+        ),
+        "current_source_binding_authority": (
+            "configured_board_control_only_descendant"
+            if allow_progressed
+            else "historical_bootstrap_receipt"
+        ),
         "task_count": 54,
         "generated_guardrail_task_rows": 0,
     }
@@ -2870,7 +3402,16 @@ def check_descendant_source(
     receipt, marker_identity = _load_marker_snapshot(
         root=root, path=marker, noun="g9 migration marker"
     )
-    _validate_receipt(receipt, root=root, population=population, policy=policy)
+    if allow_progressed:
+        historical_policy = _validate_progressed_receipt(
+            receipt,
+            root=root,
+            population=population,
+            policy=policy,
+        )
+    else:
+        _validate_receipt(receipt, root=root, population=population, policy=policy)
+        historical_policy = policy
     recovery_marker = target / ORPHAN_RECOVERY_MARKER
     recovery_receipt: dict[str, Any] | None = None
     recovery_identity: tuple[int, ...] | None = None
@@ -2886,6 +3427,10 @@ def check_descendant_source(
             population=population,
             policy=policy,
             migration_receipt=receipt,
+            expected_source_binding=(
+                receipt["source_binding"] if allow_progressed else None
+            ),
+            receipt_policy=historical_policy,
         )
     if os.path.lexists(target / PENDING_MARKER) or os.path.lexists(
         target / PREPARED_RECEIPT
@@ -2942,6 +3487,7 @@ def check_descendant_source(
                     control_target=target / "control.duckdb",
                     population=population,
                     policy=policy,
+                    historical_policy=historical_policy,
                     receipt=receipt,
                     recovery_receipt=recovery_receipt,
                     live_owner=None,
@@ -2958,6 +3504,7 @@ def check_descendant_source(
             control_target=str(policy["target_quack_endpoint"]),
             population=population,
             policy=policy,
+            historical_policy=historical_policy,
             receipt=receipt,
             recovery_receipt=recovery_receipt,
             live_owner=live_owner,

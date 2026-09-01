@@ -147,9 +147,22 @@ def test_live_progressed_check_uses_only_authenticated_quack_transport(
             }
         },
     }
+    historical_binding = {
+        "source_head": "0" * 40,
+        "repository_tree_id": "1" * 40,
+        "current_plan_root_cid": "sha256:" + "2" * 64,
+        "source_forest_root": "sha256:" + "3" * 64,
+        "source_identities": {"config": "sha256:" + "4" * 64},
+    }
+    current_binding = {
+        **historical_binding,
+        "source_head": "5" * 40,
+        "repository_tree_id": "6" * 40,
+    }
     migration_receipt = {
         "migration_event_watermark": 41,
         "migration_event_prefix_digest": "event-prefix:migration",
+        "source_binding": historical_binding,
     }
     recovery_receipt = {
         "recovery_event_watermark": 52,
@@ -187,7 +200,16 @@ def test_live_progressed_check_uses_only_authenticated_quack_transport(
         "_load_marker_snapshot",
         lambda *, path, **_kwargs: marker_records[path],
     )
-    monkeypatch.setattr(migration, "_validate_receipt", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(
+        migration,
+        "_validate_progressed_receipt",
+        lambda *_args, **_kwargs: dict(policy),
+    )
+    monkeypatch.setattr(
+        migration.g7,
+        "_source_binding",
+        lambda *_args, **_kwargs: dict(current_binding),
+    )
     monkeypatch.setattr(
         migration, "_validate_recovery_receipt", lambda *_args, **_kwargs: None
     )
@@ -223,6 +245,15 @@ def test_live_progressed_check_uses_only_authenticated_quack_transport(
     monkeypatch.setattr(migration.g7, "_control_projection", projection)
     monkeypatch.setattr(migration, "_event_prefix", event_prefix)
     monkeypatch.setattr(migration.g7, "_latest_state_server", latest)
+    monkeypatch.setattr(
+        migration,
+        "_validate_historical_migration_suffix",
+        lambda control_target, **_kwargs: (
+            transport_calls.append(("migration-suffix", control_target)),
+            control_target == endpoint
+            or pytest.fail("historical suffix used a local DuckDB path"),
+        ),
+    )
     monkeypatch.setattr(
         migration.g7,
         "_open_local_database",
@@ -475,6 +506,89 @@ def test_migration_replay_with_final_recovery_marker_skips_recovery_mutation(
 
     assert result == expected
     assert checked == [True]
+
+
+def test_completed_recovery_replay_uses_historical_source_authority(
+    migration: Any, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from ipfs_accelerate_py.agent_supervisor.runtime import (
+        quack_state_server as state_server,
+    )
+
+    target = tmp_path / "g9"
+    target.mkdir()
+    (target / migration.MIGRATION_MARKER).write_text("{}\n", encoding="utf-8")
+    recovery_marker = target / migration.ORPHAN_RECOVERY_MARKER
+    recovery_marker.write_text("{}\n", encoding="utf-8")
+    policy = {"target_runtime_root": "g9"}
+    historical_policy = {**policy, "historical": True}
+    historical_binding = {"source_head": "a" * 40}
+    migration_receipt = {
+        "receipt_cid": "sha256:" + "b" * 64,
+        "source_binding": historical_binding,
+    }
+    recovery_receipt = {"recovery_receipt_cid": "sha256:" + "c" * 64}
+    validations: list[dict[str, Any]] = []
+
+    @contextmanager
+    def offline_fence(**_kwargs: Any) -> Any:
+        yield SimpleNamespace(close=lambda: None)
+
+    monkeypatch.setattr(state_server, "offline_state_server_fence", offline_fence)
+    monkeypatch.setattr(migration, "_policy", lambda _config: dict(policy))
+    monkeypatch.setattr(
+        migration.g7, "_assert_source_delta", lambda *_args, **_kwargs: None
+    )
+    monkeypatch.setattr(
+        migration.g7, "_confined", lambda *_args, **_kwargs: target
+    )
+    monkeypatch.setattr(
+        migration,
+        "_load_progressed_migration_receipt",
+        lambda **_kwargs: (migration_receipt, historical_policy),
+    )
+    monkeypatch.setattr(
+        migration,
+        "_load_initial_migration_receipt",
+        lambda **_kwargs: pytest.fail(
+            "completed recovery replay used strict current-source validation"
+        ),
+    )
+    monkeypatch.setattr(
+        migration,
+        "_load_marker_snapshot",
+        lambda **_kwargs: (recovery_receipt, (1, 2, 3)),
+    )
+    monkeypatch.setattr(
+        migration,
+        "_validate_recovery_receipt",
+        lambda _receipt, **kwargs: validations.append(dict(kwargs)),
+    )
+    monkeypatch.setattr(
+        migration, "_verify_recovery_authority", lambda **_kwargs: None
+    )
+    monkeypatch.setattr(
+        migration.g7, "_close_offline_fence_probe", lambda _probe: None
+    )
+    monkeypatch.setattr(migration.g7, "_fsync_directory", lambda _path: None)
+
+    result = migration.recover_orphan_terminals(
+        root=tmp_path,
+        config={"descendant_source_successor_materialization": policy},
+        population={"repository_tree_id": "current-tree"},
+    )
+
+    assert result["replayed"] is True
+    assert validations == [
+        {
+            "root": tmp_path,
+            "population": {"repository_tree_id": "current-tree"},
+            "policy": {**policy, "repository_root": str(tmp_path.resolve())},
+            "migration_receipt": migration_receipt,
+            "expected_source_binding": historical_binding,
+            "receipt_policy": historical_policy,
+        }
+    ]
 
 
 def test_parsed_inner_timeout_is_blocking_not_retrying_or_admitted(

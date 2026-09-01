@@ -7,6 +7,7 @@ import importlib.util
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from contextlib import contextmanager
@@ -559,3 +560,366 @@ def test_partial_target_and_import_fail_closed_without_side_effects(
         )
     assert callable(migration.migrate_descendant_source)
     assert not (tmp_path / "partial-g9" / migration.MIGRATION_MARKER).exists()
+
+
+def _historical_migration_authority(
+    migration: Any, tmp_path: Path
+) -> tuple[Path, dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Create one genuine migration suffix and its immutable receipt."""
+
+    database = _control(migration, tmp_path / "authority")
+    population = _population()
+    policy = _policy(migration, database)
+    prior = migration.g7._control_projection(database)
+    suffix = migration._apply_control_suffix(
+        database,
+        root=tmp_path,
+        population=population,
+        policy=policy,
+        prior_projection=prior,
+    )
+    migration.g7._checkpoint_database(database)
+    post = migration._verify_staged_successor(
+        database,
+        prior=prior,
+        policy=policy,
+        suffix=suffix,
+    )
+    stage = tmp_path / "receipt-stage"
+    (stage / "state").mkdir(parents=True)
+    shutil.copy2(database, stage / "control.duckdb")
+    for lane in range(4):
+        lane_path = (
+            stage / "state" / f"lane-{lane}" / "quack-lane-coordination.duckdb"
+        )
+        lane_path.parent.mkdir()
+        lane_path.write_bytes(f"lane-{lane}".encode())
+    receipt = migration._receipt(
+        root=tmp_path,
+        stage=stage,
+        population=population,
+        policy=policy,
+        prior=prior,
+        post=post,
+        suffix=suffix,
+    )
+    return database, population, policy, receipt
+
+
+def _successor_population() -> dict[str, Any]:
+    population = _population()
+    population.update(
+        {
+            "source_head": "synthetic-g9-successor-head",
+            "repository_tree_id": "synthetic-g9-successor-tree",
+            "source_forest": {"source_forest_root": "forest:g9-successor"},
+            "source_identities": {"accelerate": "synthetic-g9-successor-head"},
+        }
+    )
+    return population
+
+
+def _patch_historical_policy_lookup(
+    migration: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    root: Path,
+    population: dict[str, Any],
+    policy: dict[str, Any],
+) -> dict[str, Any]:
+    binding = migration.g7._source_binding(root, population)
+    monkeypatch.setattr(
+        migration,
+        "_historical_policy_and_binding",
+        lambda **_kwargs: (policy, binding),
+    )
+    return binding
+
+
+def test_progressed_receipt_keeps_the_initial_source_historical(
+    migration: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    database, initial_population, policy, receipt = _historical_migration_authority(
+        migration, tmp_path
+    )
+    successor = _successor_population()
+    historical_binding = _patch_historical_policy_lookup(
+        migration,
+        monkeypatch,
+        root=tmp_path,
+        population=initial_population,
+        policy=policy,
+    )
+
+    with pytest.raises(
+        migration.DescendantSourceSuccessorError,
+        match="another source or policy",
+    ):
+        migration._validate_receipt(
+            receipt,
+            root=tmp_path,
+            population=successor,
+            policy=policy,
+        )
+
+    historical_policy = migration._validate_progressed_receipt(
+        receipt,
+        root=tmp_path,
+        population=successor,
+        policy=policy,
+    )
+    migration._validate_historical_migration_suffix(
+        database,
+        root=tmp_path,
+        receipt=receipt,
+        historical_policy=historical_policy,
+    )
+    assert receipt["source_binding"] == historical_binding
+    assert receipt["source_binding"] != migration.g7._source_binding(
+        tmp_path, successor
+    )
+
+
+@pytest.mark.parametrize(
+    "field",
+    ("plan_event_id", "migration_evidence_event_id", "migration_digest"),
+)
+def test_progressed_suffix_rejects_tampered_evidence_plan_or_event_identity(
+    migration: Any,
+    tmp_path: Path,
+    field: str,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    database, initial, policy, receipt = _historical_migration_authority(
+        migration, tmp_path
+    )
+    _patch_historical_policy_lookup(
+        migration,
+        monkeypatch,
+        root=tmp_path,
+        population=initial,
+        policy=policy,
+    )
+    historical_policy = migration._validate_progressed_receipt(
+        receipt,
+        root=tmp_path,
+        population=_successor_population(),
+        policy=policy,
+    )
+    tampered = json.loads(json.dumps(receipt))
+    tampered["suffix"][field] = f"tampered:{field}"
+    body = {key: value for key, value in tampered.items() if key != "receipt_cid"}
+    tampered["receipt_cid"] = migration.g7._identity(body)
+
+    with pytest.raises(
+        migration.DescendantSourceSuccessorError,
+        match="(?:suffix|event|evidence|plan)",
+    ):
+        migration._validate_historical_migration_suffix(
+            database,
+            root=tmp_path,
+            receipt=tampered,
+            historical_policy=historical_policy,
+        )
+
+
+def test_progressed_receipt_binds_the_captured_predecessor_prefix(
+    migration: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _database, initial, policy, receipt = _historical_migration_authority(
+        migration, tmp_path
+    )
+    _patch_historical_policy_lookup(
+        migration,
+        monkeypatch,
+        root=tmp_path,
+        population=initial,
+        policy=policy,
+    )
+    tampered = json.loads(json.dumps(receipt))
+    tampered["prior_event_prefix_digest"] = "sha256:" + "f" * 64
+    body = {key: value for key, value in tampered.items() if key != "receipt_cid"}
+    tampered["receipt_cid"] = migration.g7._identity(body)
+
+    with pytest.raises(
+        migration.DescendantSourceSuccessorError,
+        match="another source or policy",
+    ):
+        migration._validate_progressed_receipt(
+            tampered,
+            root=tmp_path,
+            population=_successor_population(),
+            policy=policy,
+        )
+
+
+def test_historical_source_identity_rejects_git_symlink_mode(
+    migration: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    relative = "config/scheduler.json"
+    monkeypatch.setattr(
+        migration.g7,
+        "_git",
+        lambda _root, *_args: f"120000 blob {'a' * 40}\t{relative}",
+    )
+
+    with pytest.raises(
+        migration.DescendantSourceSuccessorError,
+        match="historical regular Git blob",
+    ):
+        migration._historical_blob(
+            tmp_path,
+            source_head="b" * 40,
+            relative=relative,
+            noun="historical scheduler config",
+        )
+
+
+def _recovery_receipt_for_source(
+    migration: Any,
+    *,
+    source_binding: dict[str, Any],
+    policy: dict[str, Any],
+    migration_receipt: dict[str, Any],
+) -> dict[str, Any]:
+    body = {
+        "schema": migration.ORPHAN_RECOVERY_RECEIPT_SCHEMA,
+        "source_binding": source_binding,
+        "capture_binding": migration._capture_binding(policy),
+        "prior_store_generation": policy["prior_store_generation"],
+        "target_store_generation": policy["target_store_generation"],
+        "migration_receipt_cid": migration_receipt["receipt_cid"],
+        "recovery_plan_id": "recovery:historical-source",
+        "candidate_task_aliases": list(migration.ORPHAN_RECOVERY_ALIASES),
+        "outcomes": [],
+        "stores": [],
+        "recovery_event_watermark": migration_receipt["migration_event_watermark"],
+        "recovery_event_prefix_digest": "sha256:historical-recovery-events",
+        "one_shot": True,
+    }
+    return {
+        **body,
+        "recovery_receipt_cid": migration.g7._identity(body),
+    }
+
+
+def test_progressed_recovery_must_share_the_migration_receipt_source(
+    migration: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _database, initial, policy, receipt = _historical_migration_authority(
+        migration, tmp_path
+    )
+    _patch_historical_policy_lookup(
+        migration,
+        monkeypatch,
+        root=tmp_path,
+        population=initial,
+        policy=policy,
+    )
+    historical_policy = migration._validate_progressed_receipt(
+        receipt,
+        root=tmp_path,
+        population=_successor_population(),
+        policy=policy,
+    )
+    expected = migration.g7._source_binding(tmp_path, initial)
+    valid = _recovery_receipt_for_source(
+        migration,
+        source_binding=expected,
+        policy=historical_policy,
+        migration_receipt=receipt,
+    )
+    migration._validate_recovery_receipt(
+        valid,
+        root=tmp_path,
+        population=_successor_population(),
+        policy=policy,
+        migration_receipt=receipt,
+        expected_source_binding=expected,
+        receipt_policy=historical_policy,
+    )
+    recovery = _recovery_receipt_for_source(
+        migration,
+        source_binding=migration.g7._source_binding(
+            tmp_path, _successor_population()
+        ),
+        policy=historical_policy,
+        migration_receipt=receipt,
+    )
+
+    with pytest.raises(
+        migration.DescendantSourceSuccessorError,
+        match="recovery receipt differs",
+    ):
+        migration._validate_recovery_receipt(
+            recovery,
+            root=tmp_path,
+            population=_successor_population(),
+            policy=policy,
+            migration_receipt=receipt,
+            expected_source_binding=expected,
+            receipt_policy=historical_policy,
+        )
+
+
+def test_progressed_result_names_historical_and_current_source_authorities(
+    migration: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _database, initial, policy, receipt = _historical_migration_authority(
+        migration, tmp_path
+    )
+    successor = _successor_population()
+    captured = dict(policy["stopped_predecessor_capture"]["prior_control_projection"])
+    projection = {
+        **captured,
+        "event_prefix_digest": receipt["migration_event_prefix_digest"],
+    }
+    monkeypatch.setattr(migration.g7, "_control_projection", lambda _target: projection)
+    monkeypatch.setattr(
+        migration,
+        "_event_prefix",
+        lambda _target, count: receipt["migration_event_prefix_digest"],
+    )
+    monkeypatch.setattr(
+        migration,
+        "_validate_historical_migration_suffix",
+        lambda *_args, **_kwargs: None,
+    )
+    live_identity = {
+        "server_id": "server:g9",
+        "store_id": "store:g9",
+        "database_uuid": "db:g9",
+        "process_birth_id": "birth:g9",
+        "listen_uri": "quack:test",
+        "extension_fingerprint": "sha256:extension",
+        "schema_revision": 1,
+        "generation": 9,
+        "started_at": "now",
+        "status": "ready",
+    }
+    monkeypatch.setattr(
+        migration.g7,
+        "_latest_state_server",
+        lambda _target: {**live_identity, "stopped_at": None},
+    )
+    result = migration._verify_descendant_target(
+        root=tmp_path,
+        target=tmp_path / "unused-g9",
+        control_target="quack:test",
+        population=successor,
+        policy=policy,
+        historical_policy=policy,
+        receipt=receipt,
+        recovery_receipt={"recovery_event_watermark": 1, "recovery_event_prefix_digest": receipt["migration_event_prefix_digest"]},
+        live_owner={"identity": live_identity},
+        allow_progressed=True,
+    )
+    assert result["historical_operator_seal_source_binding"] == (
+        migration.g7._source_binding(tmp_path, initial)
+    )
+    assert result["current_configured_board_source_binding"] == (
+        migration.g7._source_binding(tmp_path, successor)
+    )
+    assert result["current_source_binding_authority"] != (
+        "historical_operator_seal_source_binding"
+    )
