@@ -556,6 +556,11 @@ def _run_child(
         env=dict(environment),
         shell=False,
         stdin=subprocess.DEVNULL,
+        # Reserve stdout for the dispatcher's closed JSON evidence records.
+        # Pytest/tool diagnostics remain bounded and hashed by the outer
+        # recovery runner on stderr, so prose can never confuse admission.
+        stdout=sys.stderr,
+        stderr=sys.stderr,
         start_new_session=True,
         close_fds=True,
     )
@@ -642,6 +647,7 @@ def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
         "sha256": "sha256:" + hashlib.sha256(raw).hexdigest(),
         "test_count": test_count,
         "phase_count": phase_count,
+        "fully_passed_test_count": fully_passed,
         "counts": dict(sorted(normalized_counts.items())),
     }
 

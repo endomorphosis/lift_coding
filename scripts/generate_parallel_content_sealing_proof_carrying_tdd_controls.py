@@ -97,6 +97,9 @@ DESCENDANT_SOURCE_MIGRATION_MODULE = "scripts/pctdd_g9_descendant_source_success
 DESCENDANT_SOURCE_MIGRATION_TEST = (
     "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py"
 )
+ORPHAN_RECOVERY_REGRESSION_TEST = (
+    "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py"
+)
 QUACK_LIFECYCLE_CONTROL_TEST = (
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py"
 )
@@ -170,6 +173,8 @@ DESCENDANT_SOURCE_MIGRATION_CONTROL_PATHS = tuple(
             "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
             DESCENDANT_SOURCE_MIGRATION_MODULE,
             DESCENDANT_SOURCE_MIGRATION_TEST,
+            ORPHAN_RECOVERY_REGRESSION_TEST,
+            VALIDATION_DISPATCHER,
             SOURCE_MIGRATION_MODULE,
             SOURCE_MIGRATION_TEST,
             QUACK_LIFECYCLE_CONTROL_TEST,
@@ -984,6 +989,32 @@ def descendant_source_policy() -> dict[str, Any]:
             "publication": "private_stage_hash_verify_no_overwrite_marker_last",
             "g8_remains_read_only_history": True,
         },
+        "orphan_terminal_recovery": {
+            "schema": "pctdd/orphan-terminal-migration-recovery-policy@1",
+            "candidate_task_aliases": ["PCTDD-001", "PCTDD-031", "PCTDD-034"],
+            "receipt_marker": (
+                "descendant-source-orphan-terminal-recovery-receipt.json"
+            ),
+            "prepared_receipt": (
+                ".descendant-source-orphan-terminal-recovery-prepared.json"
+            ),
+            "validation_dispatcher": VALIDATION_DISPATCHER,
+            "validation_profile_path": VALIDATION_PROFILES.relative_to(ROOT).as_posix(),
+            "validation_profiles": {
+                alias: f"pctdd-validation/{PLAN_REVISION}/{alias}@1"
+                for alias in ("PCTDD-001", "PCTDD-031", "PCTDD-034")
+            },
+            "prior_store_generation": G8_STORE_GENERATION,
+            "target_store_generation": STORE_GENERATION,
+            "timeout_seconds": 21_600,
+            "one_shot": True,
+            "requires_exact_source_binding": True,
+            "requires_exact_stopped_capture": True,
+            "requires_offline_owner_fence": True,
+            "green_transition": "blocked_to_completed",
+            "non_green_transition": "blocked_to_retrying",
+            "coordination_completion_required": True,
+        },
     }
     _descendant_source_migration_module().validate_pending_policy(
         {"descendant_source_successor_materialization": policy}
@@ -1602,6 +1633,7 @@ PROTECTED_ARTIFACTS = (
     G8_RESOLVED_GUARDRAIL_ARCHIVE.relative_to(ROOT).as_posix(),
     DESCENDANT_SOURCE_MIGRATION_MODULE,
     DESCENDANT_SOURCE_MIGRATION_TEST,
+    ORPHAN_RECOVERY_REGRESSION_TEST,
     QUACK_LIFECYCLE_CONTROL_TEST,
 )
 
@@ -1835,6 +1867,7 @@ REQUIRED_HASHED = (
     SOURCE_MIGRATION_TEST,
     PROVIDER_ROUTE_MIGRATION_TEST,
     DESCENDANT_SOURCE_MIGRATION_TEST,
+    ORPHAN_RECOVERY_REGRESSION_TEST,
     QUACK_LIFECYCLE_CONTROL_TEST,
 )
 

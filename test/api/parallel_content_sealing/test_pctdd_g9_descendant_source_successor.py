@@ -245,6 +245,28 @@ def _policy(migration: Any, database: Path, *, pending: bool = False) -> dict[st
             "publication": "private_stage_hash_verify_no_overwrite_marker_last",
             "g8_remains_read_only_history": True,
         },
+        "orphan_terminal_recovery": {
+            "schema": migration.ORPHAN_RECOVERY_POLICY_SCHEMA,
+            "candidate_task_aliases": list(migration.ORPHAN_RECOVERY_ALIASES),
+            "receipt_marker": migration.ORPHAN_RECOVERY_MARKER,
+            "prepared_receipt": migration.ORPHAN_RECOVERY_PREPARED,
+            "validation_dispatcher": "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py",
+            "validation_profile_path": "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
+            "validation_profiles": {
+                alias: f"pctdd-validation/PCTDD-PLAN-V1.1/{alias}@1"
+                for alias in migration.ORPHAN_RECOVERY_ALIASES
+            },
+            "prior_store_generation": "pctdd-v1-g8",
+            "target_store_generation": "pctdd-v1-g9",
+            "timeout_seconds": 21_600,
+            "one_shot": True,
+            "requires_exact_source_binding": True,
+            "requires_exact_stopped_capture": True,
+            "requires_offline_owner_fence": True,
+            "green_transition": "blocked_to_completed",
+            "non_green_transition": "blocked_to_retrying",
+            "coordination_completion_required": True,
+        },
     }
 
 
