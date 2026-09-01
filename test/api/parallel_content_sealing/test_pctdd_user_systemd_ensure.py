@@ -98,6 +98,49 @@ def test_templates_render_deterministically_to_resume_only() -> None:
     assert "WantedBy=timers.target" in timer
 
 
+def test_user_systemd_controls_are_sealed_and_worker_protected() -> None:
+    controls = {
+        "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in",
+        (
+            "scripts/ops/agent_supervisor/"
+            "parallel_content_sealing_proof_carrying_tdd_user_systemd.py"
+        ),
+        "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py",
+    }
+    scheduler = json.loads(
+        (
+            ROOT
+            / "config"
+            / "agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json"
+        ).read_text(encoding="utf-8")
+    )
+    manifest = json.loads(
+        (
+            ROOT
+            / "config"
+            / "parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
+        ).read_text(encoding="utf-8")
+    )
+    seal = json.loads(
+        (
+            ROOT
+            / "config"
+            / "parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert controls <= set(scheduler["protected_paths"])
+    assert controls <= set(
+        scheduler["descendant_source_successor_materialization"][
+            "operator_control_paths"
+        ]
+    )
+    assert controls <= set(
+        manifest["protected_control_hashes_before_manifest_and_seal"]
+    )
+    assert controls <= set(seal["artifacts"])
+
+
 def test_rendered_units_pass_systemd_analyze_when_available(tmp_path: Path) -> None:
     tool = shutil.which("systemd-analyze", path="/usr/bin:/bin")
     if not tool:

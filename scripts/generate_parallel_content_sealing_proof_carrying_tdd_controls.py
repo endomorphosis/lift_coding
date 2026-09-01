@@ -103,6 +103,16 @@ ORPHAN_RECOVERY_REGRESSION_TEST = (
 QUACK_LIFECYCLE_CONTROL_TEST = (
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py"
 )
+QUACK_ENSURE_SERVICE_TEMPLATE = (
+    "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in"
+)
+QUACK_USER_SYSTEMD_CONTROL = (
+    "scripts/ops/agent_supervisor/"
+    "parallel_content_sealing_proof_carrying_tdd_user_systemd.py"
+)
+QUACK_USER_SYSTEMD_CONTROL_TEST = (
+    "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py"
+)
 SOURCE_MIGRATION_CONTROL_PATHS = (
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json",
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json",
@@ -178,6 +188,9 @@ DESCENDANT_SOURCE_MIGRATION_CONTROL_PATHS = tuple(
             SOURCE_MIGRATION_MODULE,
             SOURCE_MIGRATION_TEST,
             QUACK_LIFECYCLE_CONTROL_TEST,
+            QUACK_ENSURE_SERVICE_TEMPLATE,
+            QUACK_USER_SYSTEMD_CONTROL,
+            QUACK_USER_SYSTEMD_CONTROL_TEST,
             "external/ipfs_datasets",
             "external/ipfs_kit",
         }
@@ -1635,6 +1648,9 @@ PROTECTED_ARTIFACTS = (
     DESCENDANT_SOURCE_MIGRATION_TEST,
     ORPHAN_RECOVERY_REGRESSION_TEST,
     QUACK_LIFECYCLE_CONTROL_TEST,
+    QUACK_ENSURE_SERVICE_TEMPLATE,
+    QUACK_USER_SYSTEMD_CONTROL,
+    QUACK_USER_SYSTEMD_CONTROL_TEST,
 )
 
 
@@ -1869,6 +1885,9 @@ REQUIRED_HASHED = (
     DESCENDANT_SOURCE_MIGRATION_TEST,
     ORPHAN_RECOVERY_REGRESSION_TEST,
     QUACK_LIFECYCLE_CONTROL_TEST,
+    QUACK_ENSURE_SERVICE_TEMPLATE,
+    QUACK_USER_SYSTEMD_CONTROL,
+    QUACK_USER_SYSTEMD_CONTROL_TEST,
 )
 
 
