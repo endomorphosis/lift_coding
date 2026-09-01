@@ -39,7 +39,7 @@
       "max_backoff_seconds": 10.0,
       "max_restart_attempts": 8,
       "mode": "managed_local",
-      "owner_state_dir": "/home/barberb/lift_coding/.worktrees/pctdd-g9-reviewed-deploy/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g9/quack-owner",
+      "owner_state_dir": "/home/barberb/lift_coding/.worktrees/pctdd-g9-orphan-recovery/data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g9/quack-owner",
       "startup_timeout_seconds": 120.0,
       "termination_grace_seconds": 40.0
     },
@@ -170,14 +170,43 @@
       "scripts/pctdd_g7_source_binding_successor.py",
       "scripts/pctdd_g8_provider_route_successor.py",
       "scripts/pctdd_g9_descendant_source_successor.py",
+      "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py",
       "scripts/validate_parallel_content_sealing_proof_carrying_tdd_board.py",
       "scripts/validate_parallel_content_sealing_proof_carrying_tdd_dependencies.py",
       "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py",
       "test/api/parallel_content_sealing/test_pctdd_g7_source_binding_successor.py",
       "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py",
       "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py",
+      "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py",
       "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py"
     ],
+    "orphan_terminal_recovery": {
+      "candidate_task_aliases": [
+        "PCTDD-001",
+        "PCTDD-031",
+        "PCTDD-034"
+      ],
+      "coordination_completion_required": true,
+      "green_transition": "blocked_to_completed",
+      "non_green_transition": "blocked_to_retrying",
+      "one_shot": true,
+      "prepared_receipt": ".descendant-source-orphan-terminal-recovery-prepared.json",
+      "prior_store_generation": "pctdd-v1-g8",
+      "receipt_marker": "descendant-source-orphan-terminal-recovery-receipt.json",
+      "requires_exact_source_binding": true,
+      "requires_exact_stopped_capture": true,
+      "requires_offline_owner_fence": true,
+      "schema": "pctdd/orphan-terminal-migration-recovery-policy@1",
+      "target_store_generation": "pctdd-v1-g9",
+      "timeout_seconds": 21600,
+      "validation_dispatcher": "scripts/run_parallel_content_sealing_proof_carrying_tdd_validation.py",
+      "validation_profile_path": "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json",
+      "validation_profiles": {
+        "PCTDD-001": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1",
+        "PCTDD-031": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-031@1",
+        "PCTDD-034": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1"
+      }
+    },
     "prior_runtime_root": "data/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_v1_g8",
     "prior_store_generation": "pctdd-v1-g8",
     "receipt_marker": "descendant-source-migration-receipt.json",
@@ -897,6 +926,7 @@
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/g8_resolved_guardrail_archive.json",
     "scripts/pctdd_g9_descendant_source_successor.py",
     "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py",
+    "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py",
     "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py"
   ],
   "provider": {

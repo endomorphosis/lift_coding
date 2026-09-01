@@ -14,7 +14,7 @@
     "root_status_sha256": "f0a737302e4455c55e60edc28403da4f339e9b64811cc0b0dcf0c87e2d9629b3",
     "root_untracked_list_sha256": "c20615c1a314943dca33d6d1764014096ebbd9632a5404b55992a97883a2a8ac"
   },
-  "planning_root": "/home/barberb/lift_coding/.worktrees/pctdd-g9-reviewed-deploy",
+  "planning_root": "/home/barberb/lift_coding/.worktrees/pctdd-g9-orphan-recovery",
   "schema": "pctdd/repository-baseline@3",
   "sources": [
     {
@@ -36,7 +36,7 @@
       "gitlink_matches_nested_head": true,
       "head": "fd38aa56b03bfd19a21ffd465b498d11657428fb",
       "name": "ipfs_datasets_py",
-      "origin": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "origin": "/home/barberb/lift_coding/.worktrees/pctdd-g9-reviewed-deploy/external/ipfs_datasets",
       "path": "external/ipfs_datasets",
       "status_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "tree": "ef4aebe3b1d7e39429c7fb71fd8add4de5afa21a"
