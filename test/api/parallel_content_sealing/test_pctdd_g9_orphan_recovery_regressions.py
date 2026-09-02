@@ -73,6 +73,9 @@ def _admitted_validation(*, task: str, profile: str) -> dict[str, Any]:
                 "pytest_phase_evidence": {
                     "schema": "pctdd/pytest-phase-outcome@2",
                     "sha256": "sha256:" + "4" * 64,
+                    "collector_integrity": True,
+                    "event_stream_sha256": "sha256:" + "5" * 64,
+                    "event_count": 8,
                     "test_count": 2,
                     "phase_count": 6,
                     "fully_passed_test_count": 2,
@@ -109,6 +112,14 @@ def test_validation_admission_requires_exact_complete_two_record_evidence(
 
     assert migration._validation_is_admitted(
         evidence, expected_profile=profile, expected_task=task
+    )
+
+    legacy_phase_schema = deepcopy(evidence)
+    legacy_phase_schema["records"][0]["pytest_phase_evidence"]["schema"] = (
+        "pctdd/pytest-phase-outcome@1"
+    )
+    assert not migration._validation_is_admitted(
+        legacy_phase_schema, expected_profile=profile, expected_task=task
     )
 
     truncated = deepcopy(evidence)
@@ -938,3 +949,480 @@ def test_replay_revalidates_before_non_expiring_recovery_evidence_apply(
             "evidence_freshness_seconds": 0,
         }
     ]
+
+
+def test_zero_progress_prepared_v1_phase_authority_is_rebuilt_under_v2(
+    migration: Any, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from ipfs_accelerate_py.agent_supervisor.runtime import (
+        quack_state_server as state_server,
+    )
+
+    target = tmp_path / "g9"
+    target.mkdir()
+    prepared = target / migration.ORPHAN_RECOVERY_PREPARED
+    prepared.write_text("{}\n", encoding="utf-8")
+    policy = {"target_runtime_root": "g9"}
+    initial_control = {"event_watermark": 41, "event_prefix_digest": "events:g8"}
+    initial_lanes = [
+        {"lane": lane, "projection": {"lane": lane, "event_watermark": 17}}
+        for lane in range(4)
+    ]
+
+    current_authority = migration._validation_authority_projection(
+        _admitted_validation(
+            task="PCTDD-001",
+            profile="pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1",
+        ),
+        expected_profile="pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-001@1",
+        expected_task="PCTDD-001",
+    )
+    assert current_authority is not None
+    legacy_authority = deepcopy(current_authority)
+    legacy_authority["records"][0]["pytest_phase_evidence"]["schema"] = (
+        "pctdd/pytest-phase-outcome@1"
+    )
+    legacy_plan = {
+        "recovery_plan_id": "recovery:legacy-v1",
+        "initial_control_projection": initial_control,
+        "initial_coordination_projections": initial_lanes,
+        "decisions": [
+            {
+                "task_alias": "PCTDD-001",
+                "target_status": "completed",
+                "validation_authority": legacy_authority,
+            }
+        ],
+    }
+    current_plan = deepcopy(legacy_plan)
+    current_plan["recovery_plan_id"] = "recovery:current-v2"
+    current_plan["decisions"][0]["validation_authority"] = current_authority
+    calls: list[str] = []
+
+    @contextmanager
+    def offline_fence(**_kwargs: Any) -> Any:
+        yield SimpleNamespace(close=lambda: None)
+
+    def revalidate(**kwargs: Any) -> None:
+        authority = kwargs["plan"]["decisions"][0]["validation_authority"]
+        assert (
+            authority["records"][0]["pytest_phase_evidence"]["schema"]
+            == "pctdd/pytest-phase-outcome@1"
+        )
+        calls.append("legacy-v1-rejected")
+        raise migration._RecoveryPlanStale("fresh v2 authority differs")
+
+    def prepare(**_kwargs: Any) -> dict[str, Any]:
+        assert not prepared.exists()
+        calls.append("rebuilt-v2")
+        return deepcopy(current_plan)
+
+    def write_new(path: Path, payload: dict[str, Any]) -> None:
+        assert payload == current_plan
+        calls.append("persisted-v2")
+        path.write_text(json.dumps(payload) + "\n", encoding="utf-8")
+
+    def apply(**kwargs: Any) -> list[dict[str, Any]]:
+        authority = kwargs["plan"]["decisions"][0]["validation_authority"]
+        assert (
+            authority["records"][0]["pytest_phase_evidence"]["schema"]
+            == "pctdd/pytest-phase-outcome@2"
+        )
+        calls.append("applied-v2")
+        return []
+
+    def coordination_projection(path: Path) -> dict[str, Any]:
+        lane = int(path.parent.name.removeprefix("lane-"))
+        return deepcopy(initial_lanes[lane]["projection"])
+
+    monkeypatch.setattr(state_server, "offline_state_server_fence", offline_fence)
+    monkeypatch.setattr(migration, "_policy", lambda _config: dict(policy))
+    monkeypatch.setattr(
+        migration.g7, "_assert_source_delta", lambda *_args, **_kwargs: None
+    )
+    monkeypatch.setattr(migration.g7, "_confined", lambda *_args, **_kwargs: target)
+    monkeypatch.setattr(
+        migration,
+        "_load_initial_migration_receipt",
+        lambda **_kwargs: {"receipt_cid": "migration:g9"},
+    )
+    monkeypatch.setattr(migration.g7, "_load_json", lambda *_args, **_kwargs: legacy_plan)
+    monkeypatch.setattr(migration, "_store_relative_files", lambda: ())
+    monkeypatch.setattr(
+        migration, "_validate_recovery_plan", lambda *_args, **_kwargs: None
+    )
+    monkeypatch.setattr(
+        migration,
+        "_verify_prepared_recovery_progress",
+        lambda *_args, **_kwargs: None,
+    )
+    monkeypatch.setattr(
+        migration.g7,
+        "_control_projection",
+        lambda _path: deepcopy(initial_control),
+    )
+    monkeypatch.setattr(
+        migration.g7,
+        "_coordination_projection",
+        coordination_projection,
+    )
+    monkeypatch.setattr(migration, "_revalidate_prepared_recovery_plan", revalidate)
+    monkeypatch.setattr(migration, "_prepare_orphan_recovery_plan", prepare)
+    monkeypatch.setattr(migration.g7, "_write_new_json", write_new)
+    monkeypatch.setattr(
+        migration.g7, "_fsync_private_file", lambda *_args, **_kwargs: None
+    )
+    monkeypatch.setattr(migration.g7, "_fsync_directory", lambda _path: None)
+    monkeypatch.setattr(migration, "_apply_orphan_recovery_plan", apply)
+    monkeypatch.setattr(
+        migration,
+        "_recovery_receipt",
+        lambda **_kwargs: {"recovery_receipt_cid": "receipt:v2"},
+    )
+    monkeypatch.setattr(
+        migration,
+        "_publish_recovery_receipt",
+        lambda **_kwargs: calls.append("published"),
+    )
+    monkeypatch.setattr(
+        migration.g7, "_close_offline_fence_probe", lambda _probe: None
+    )
+    monkeypatch.setattr(
+        migration.g7,
+        "_retire_private_stage_coordination_locks",
+        lambda _target: None,
+    )
+
+    result = migration.recover_orphan_terminals(
+        root=tmp_path,
+        config={"descendant_source_successor_materialization": policy},
+        population={"repository_tree_id": "tree:g9", "plan_root_cid": "plan:g9"},
+    )
+
+    assert result["replayed"] is False
+    assert calls == [
+        "legacy-v1-rejected",
+        "rebuilt-v2",
+        "persisted-v2",
+        "applied-v2",
+        "published",
+    ]
+    assert json.loads(prepared.read_text(encoding="utf-8")) == current_plan
+
+
+def test_partially_applied_prepared_v1_phase_authority_fails_closed(
+    migration: Any, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from ipfs_accelerate_py.agent_supervisor.runtime import (
+        quack_state_server as state_server,
+    )
+
+    target = tmp_path / "g9"
+    target.mkdir()
+    prepared = target / migration.ORPHAN_RECOVERY_PREPARED
+    prepared_bytes = b'{"historical":"v1"}\n'
+    prepared.write_bytes(prepared_bytes)
+    policy = {"target_runtime_root": "g9"}
+    legacy_plan = {
+        "recovery_plan_id": "recovery:partially-applied-v1",
+        "initial_control_projection": {"event_watermark": 41},
+        "initial_coordination_projections": [
+            {"lane": lane, "projection": {"lane": lane}}
+            for lane in range(4)
+        ],
+        "decisions": [
+            {
+                "task_alias": "PCTDD-001",
+                "target_status": "completed",
+                "validation_authority": {
+                    "schema": migration.ORPHAN_RECOVERY_VALIDATION_AUTHORITY_SCHEMA,
+                    "records": [
+                        {
+                            "pytest_phase_evidence": {
+                                "schema": "pctdd/pytest-phase-outcome@1"
+                            }
+                        }
+                    ],
+                },
+            }
+        ],
+    }
+
+    @contextmanager
+    def offline_fence(**_kwargs: Any) -> Any:
+        yield SimpleNamespace(close=lambda: None)
+
+    def reject_stale_plan(**kwargs: Any) -> None:
+        authority = kwargs["plan"]["decisions"][0]["validation_authority"]
+        assert (
+            authority["records"][0]["pytest_phase_evidence"]["schema"]
+            == "pctdd/pytest-phase-outcome@1"
+        )
+        raise migration._RecoveryPlanStale("fresh v2 authority differs")
+
+    monkeypatch.setattr(state_server, "offline_state_server_fence", offline_fence)
+    monkeypatch.setattr(migration, "_policy", lambda _config: dict(policy))
+    monkeypatch.setattr(
+        migration.g7, "_assert_source_delta", lambda *_args, **_kwargs: None
+    )
+    monkeypatch.setattr(migration.g7, "_confined", lambda *_args, **_kwargs: target)
+    monkeypatch.setattr(
+        migration,
+        "_load_initial_migration_receipt",
+        lambda **_kwargs: {"receipt_cid": "migration:g9"},
+    )
+    monkeypatch.setattr(migration.g7, "_load_json", lambda *_args, **_kwargs: legacy_plan)
+    monkeypatch.setattr(
+        migration, "_validate_recovery_plan", lambda *_args, **_kwargs: None
+    )
+    monkeypatch.setattr(
+        migration,
+        "_verify_prepared_recovery_progress",
+        lambda *_args, **_kwargs: None,
+    )
+    monkeypatch.setattr(
+        migration,
+        "_revalidate_prepared_recovery_plan",
+        reject_stale_plan,
+    )
+    monkeypatch.setattr(
+        migration.g7,
+        "_control_projection",
+        lambda _path: {"event_watermark": 42},
+    )
+    monkeypatch.setattr(
+        migration,
+        "_prepare_orphan_recovery_plan",
+        lambda **_kwargs: pytest.fail("partially applied authority was rebuilt"),
+    )
+    monkeypatch.setattr(
+        migration,
+        "_apply_orphan_recovery_plan",
+        lambda **_kwargs: pytest.fail("partially applied authority was applied"),
+    )
+    monkeypatch.setattr(
+        migration.g7, "_close_offline_fence_probe", lambda _probe: None
+    )
+    monkeypatch.setattr(
+        migration.g7,
+        "_retire_private_stage_coordination_locks",
+        lambda _target: None,
+    )
+
+    with pytest.raises(
+        migration.DescendantSourceSuccessorError,
+        match="cannot discard a prepared recovery after control progress",
+    ):
+        migration.recover_orphan_terminals(
+            root=tmp_path,
+            config={"descendant_source_successor_materialization": policy},
+            population={"repository_tree_id": "tree:g9", "plan_root_cid": "plan:g9"},
+        )
+
+    assert prepared.read_bytes() == prepared_bytes
+
+
+@pytest.mark.parametrize("publication_state", ["pending", "final"])
+def test_content_addressed_v1_phase_recovery_receipt_remains_replayable(
+    migration: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    publication_state: str,
+) -> None:
+    """Immutable history keeps its v1 meaning; only fresh admission moves to v2."""
+
+    from ipfs_accelerate_py.agent_supervisor.runtime import (
+        quack_state_server as state_server,
+    )
+
+    target = tmp_path / "g9"
+    target.mkdir()
+    source_binding = {"source_head": "a" * 40}
+    policy = {
+        "target_runtime_root": "g9",
+        "prior_store_generation": "pctdd-v1-g8",
+        "target_store_generation": "pctdd-v1-g9",
+        "stopped_predecessor_capture": {
+            "schema": migration.CAPTURE_SCHEMA,
+            "capture_id": "capture:g8",
+        },
+    }
+    capture_binding = migration._capture_binding(policy)
+    migration_receipt = {
+        "receipt_cid": "sha256:" + "b" * 64,
+        "source_binding": source_binding,
+        "migration_event_watermark": 41,
+    }
+    outcomes: list[dict[str, Any]] = []
+    for ordinal, alias in enumerate(migration.ORPHAN_RECOVERY_ALIASES):
+        legacy_authority = {
+            "schema": migration.ORPHAN_RECOVERY_VALIDATION_AUTHORITY_SCHEMA,
+            "task_id": alias,
+            "profile_id": f"pctdd-validation/PCTDD-PLAN-V1.1/{alias}@1",
+            "attempted": True,
+            "returncode": 0,
+            "timeout": False,
+            "records": [
+                {
+                    "task_id": alias,
+                    "profile_id": f"pctdd-validation/PCTDD-PLAN-V1.1/{alias}@1",
+                    "step": 0,
+                    "status": "passed",
+                    "returncode": 0,
+                    "evidence_policy": "required_acceptance",
+                    "pytest_phase_evidence": {
+                        "schema": "pctdd/pytest-phase-outcome@1",
+                        "sha256": "sha256:" + "4" * 64,
+                        "test_count": 1,
+                        "phase_count": 3,
+                        "fully_passed_test_count": 1,
+                        "counts": {
+                            "passed": 3,
+                            "failed": 0,
+                            "skipped": 0,
+                            "xfail": 0,
+                            "xpass": 0,
+                            "error": 0,
+                            "rerun": 0,
+                        },
+                    },
+                }
+            ],
+        }
+        decision = {
+            "schema": "pctdd/orphan-terminal-current-tree-validation@1",
+            "task_alias": alias,
+            "task_cid": f"task:{ordinal}",
+            "blocked_revision": 7,
+            "blocked_receipt": {"claim_id": f"claim:{ordinal}"},
+            "claim_binding": {"lane": ordinal % 4, "claim": {}},
+            "source_binding": source_binding,
+            "capture_binding": capture_binding,
+            "migration_receipt_cid": migration_receipt["receipt_cid"],
+            "output_manifest": {"outputs": [], "missing_outputs": []},
+            "validation_argv": ["validation-dispatcher", alias],
+            "validation_authority": legacy_authority,
+            "target_status": "completed",
+            "evidence_digest": "sha256:" + str(ordinal + 1) * 64,
+        }
+        outcomes.append(
+            {
+                "task_alias": alias,
+                "task_cid": decision["task_cid"],
+                "status": "completed",
+                "revision": 8,
+                "lane": ordinal % 4,
+                "coordination_lanes": list(range(4)),
+                "evidence_digest": decision["evidence_digest"],
+                "decision": decision,
+                "control_receipt": {},
+                "coordination_completion": {},
+            }
+        )
+    receipt_body = {
+        "schema": migration.ORPHAN_RECOVERY_RECEIPT_SCHEMA,
+        "source_binding": source_binding,
+        "capture_binding": capture_binding,
+        "prior_store_generation": policy["prior_store_generation"],
+        "target_store_generation": policy["target_store_generation"],
+        "migration_receipt_cid": migration_receipt["receipt_cid"],
+        "recovery_plan_id": "sha256:" + "c" * 64,
+        "candidate_task_aliases": list(migration.ORPHAN_RECOVERY_ALIASES),
+        "outcomes": outcomes,
+        "stores": [],
+        "recovery_event_watermark": 52,
+        "recovery_event_prefix_digest": "sha256:" + "d" * 64,
+        "one_shot": True,
+    }
+    receipt = {
+        **receipt_body,
+        "recovery_receipt_cid": migration.g7._identity(receipt_body),
+    }
+    history_path = target / (
+        migration.ORPHAN_RECOVERY_PENDING
+        if publication_state == "pending"
+        else migration.ORPHAN_RECOVERY_MARKER
+    )
+    migration.g7._write_new_json(history_path, receipt)
+    immutable_bytes = history_path.read_bytes()
+    verified: list[dict[str, Any]] = []
+    published: list[dict[str, Any]] = []
+
+    @contextmanager
+    def offline_fence(**_kwargs: Any) -> Any:
+        yield SimpleNamespace(close=lambda: None)
+
+    monkeypatch.setattr(state_server, "offline_state_server_fence", offline_fence)
+    monkeypatch.setattr(migration, "_policy", lambda _config: deepcopy(policy))
+    monkeypatch.setattr(
+        migration.g7, "_assert_source_delta", lambda *_args, **_kwargs: None
+    )
+    monkeypatch.setattr(migration.g7, "_confined", lambda *_args, **_kwargs: target)
+    monkeypatch.setattr(
+        migration.g7,
+        "_source_binding",
+        lambda *_args, **_kwargs: deepcopy(source_binding),
+    )
+    if publication_state == "final":
+        monkeypatch.setattr(
+            migration,
+            "_load_progressed_migration_receipt",
+            lambda **kwargs: (migration_receipt, kwargs["policy"]),
+        )
+        monkeypatch.setattr(
+            migration,
+            "_load_initial_migration_receipt",
+            lambda **_kwargs: pytest.fail("final history used initial migration loading"),
+        )
+    else:
+        monkeypatch.setattr(
+            migration,
+            "_load_initial_migration_receipt",
+            lambda **_kwargs: migration_receipt,
+        )
+        monkeypatch.setattr(
+            migration,
+            "_load_progressed_migration_receipt",
+            lambda **_kwargs: pytest.fail("pending history used progressed loading"),
+        )
+    monkeypatch.setattr(
+        migration,
+        "_validation_authority_projection",
+        lambda *_args, **_kwargs: pytest.fail(
+            "immutable v1 recovery evidence was reinterpreted as fresh evidence"
+        ),
+    )
+    monkeypatch.setattr(
+        migration,
+        "_verify_recovery_authority",
+        lambda **kwargs: verified.append(deepcopy(kwargs["recovery_receipt"])),
+    )
+    monkeypatch.setattr(
+        migration,
+        "_publish_recovery_receipt",
+        lambda **kwargs: published.append(deepcopy(kwargs["receipt"])),
+    )
+    monkeypatch.setattr(
+        migration.g7, "_close_offline_fence_probe", lambda _probe: None
+    )
+    monkeypatch.setattr(
+        migration.g7,
+        "_retire_private_stage_coordination_locks",
+        lambda _target: None,
+    )
+    monkeypatch.setattr(migration.g7, "_fsync_directory", lambda _path: None)
+
+    result = migration.recover_orphan_terminals(
+        root=tmp_path,
+        config={"descendant_source_successor_materialization": policy},
+        population={"repository_tree_id": "current-tree"},
+    )
+
+    assert result["replayed"] is True
+    assert result["receipt"] == receipt
+    assert verified == [receipt]
+    assert published == ([receipt] if publication_state == "pending" else [])
+    assert history_path.read_bytes() == immutable_bytes
+    assert migration.g7._identity(
+        {key: value for key, value in receipt.items() if key != "recovery_receipt_cid"}
+    ) == receipt["recovery_receipt_cid"]

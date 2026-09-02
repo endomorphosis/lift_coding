@@ -25,6 +25,7 @@ import importlib
 import importlib.util
 import json
 import os
+import re
 import shutil
 import stat
 import subprocess
@@ -1678,7 +1679,8 @@ def _validation_authority_projection(
     }
     phase_fields = {
         "schema", "sha256", "test_count", "phase_count",
-        "fully_passed_test_count", "counts",
+        "fully_passed_test_count", "counts", "collector_integrity",
+        "event_stream_sha256", "event_count",
     }
     count_fields = {
         "passed", "failed", "skipped", "xfail", "xpass", "error", "rerun"
@@ -1738,14 +1740,26 @@ def _validation_authority_projection(
             ]
             if (
                 phase.get("schema") != "pctdd/pytest-phase-outcome@2"
+                or phase.get("collector_integrity") is not True
                 or not isinstance(phase.get("sha256"), str)
-                or not str(phase["sha256"]).startswith("sha256:")
+                or re.fullmatch(r"sha256:[0-9a-f]{64}", str(phase["sha256"]))
+                is None
+                or not isinstance(phase.get("event_stream_sha256"), str)
+                or re.fullmatch(
+                    r"sha256:[0-9a-f]{64}",
+                    str(phase["event_stream_sha256"]),
+                )
+                is None
+                or type(phase.get("event_count")) is not int
                 or not all(type(number) is int and number >= 0 for number in numbers)
             ):
                 return None
             normalized_phase = {
                 "schema": phase["schema"],
                 "sha256": phase["sha256"],
+                "collector_integrity": True,
+                "event_stream_sha256": phase["event_stream_sha256"],
+                "event_count": phase["event_count"],
                 "test_count": phase["test_count"],
                 "phase_count": phase["phase_count"],
                 "fully_passed_test_count": phase["fully_passed_test_count"],
@@ -1845,8 +1859,18 @@ def _validation_is_admitted(
     phase_count = int(phase["phase_count"])
     if (
         phase.get("schema") != "pctdd/pytest-phase-outcome@2"
+        or phase.get("collector_integrity") is not True
+        or re.fullmatch(r"sha256:[0-9a-f]{64}", str(phase.get("sha256") or ""))
+        is None
+        or re.fullmatch(
+            r"sha256:[0-9a-f]{64}",
+            str(phase.get("event_stream_sha256") or ""),
+        )
+        is None
+        or type(phase.get("event_count")) is not int
         or test_count <= 0
         or phase_count != test_count * 3
+        or int(phase["event_count"]) != phase_count + 2
         or int(phase["fully_passed_test_count"]) != test_count
         or int(counts["passed"]) != phase_count
         or sum(int(value) for value in counts.values()) != phase_count

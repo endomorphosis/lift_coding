@@ -4,6 +4,7 @@ import hashlib
 import importlib.metadata
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -29,6 +30,16 @@ def _load(name: str, path: Path):
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _bind_test_subreaper(dispatcher: object, monkeypatch: pytest.MonkeyPatch) -> None:
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import (
+        native_cli_subreaper,
+    )
+
+    source = Path(native_cli_subreaper.__file__).resolve(strict=True)
+    monkeypatch.setattr(dispatcher, "VALIDATION_SUBREAPER_PATH", source)
+    monkeypatch.setattr(dispatcher, "VALIDATION_SUBREAPER_ROOT", source.parents[3])
 
 
 def test_g8_control_generator_is_byte_idempotent() -> None:
@@ -607,6 +618,8 @@ def test_required_phase_evidence_is_complete_all_pass_or_rejected(tmp_path: Path
         "schema": "pctdd/pytest-phase-outcome@2",
         "required_test_target": target,
         "collector_integrity": True,
+        "event_stream_sha256": "sha256:" + "1" * 64,
+        "event_count": 8,
         "exitstatus": 0,
         "test_count": 2,
         "phase_count": 6,
@@ -649,8 +662,49 @@ def test_required_phase_evidence_is_complete_all_pass_or_rejected(tmp_path: Path
         dispatcher._load_required_phase_evidence(path, target=target)
 
 
-def test_required_phase_node_ids_are_normalized_only_by_operator_plugin(
-    monkeypatch: pytest.MonkeyPatch,
+def _phase_stream(
+    dispatcher: object,
+    *,
+    rootpath: Path,
+    node_id: str,
+    nonce: str,
+    duplicate_call: bool = False,
+    phase_order: tuple[str, ...] = ("setup", "call", "teardown"),
+) -> bytes:
+    read_fd, write_fd = os.pipe()
+    plugin = dispatcher._AppendOnlyPytestPhasePlugin(fd=write_fd, nonce=nonce)
+    plugin.emit_configure(str(rootpath))
+    for phase in phase_order:
+        plugin.pytest_runtest_logreport(
+            SimpleNamespace(
+                nodeid=node_id,
+                when=phase,
+                outcome="passed",
+                wasxfail=False,
+            )
+        )
+        if phase == "call" and duplicate_call:
+            plugin.pytest_runtest_logreport(
+                SimpleNamespace(
+                    nodeid=node_id,
+                    when=phase,
+                    outcome="passed",
+                    wasxfail=False,
+                )
+            )
+    plugin.pytest_sessionfinish(SimpleNamespace(), 0)
+    chunks: list[bytes] = []
+    while True:
+        chunk = os.read(read_fd, 65536)
+        if not chunk:
+            break
+        chunks.append(chunk)
+    os.close(read_fd)
+    return b"".join(chunks)
+
+
+def test_required_phase_node_ids_are_normalized_only_by_parent_receipt(
+    tmp_path: Path,
 ) -> None:
     dispatcher = _load("pctdd_phase_node_normalization", DISPATCHER)
     target = (
@@ -658,38 +712,119 @@ def test_required_phase_node_ids_are_normalized_only_by_operator_plugin(
         "test_pctdd_005_prepared_canonical_block.py"
     )
     nested_root = ROOT / "external/ipfs_datasets"
-    monkeypatch.setenv(dispatcher.PYTEST_REPORT_ENV, "phase.json")
-    monkeypatch.setenv(dispatcher.PYTEST_REQUIRED_TARGET_ENV, target)
-    dispatcher.pytest_configure(SimpleNamespace(rootpath=nested_root))
-
     alias = "tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py"
-    assert dispatcher._canonical_pytest_node_id(alias + "::test_contract") == (
-        target + "::test_contract"
+    nonce = "a" * 64
+    raw = _phase_stream(
+        dispatcher,
+        rootpath=nested_root,
+        node_id=alias + "::test_contract",
+        nonce=nonce,
     )
-    assert dispatcher._canonical_pytest_node_id("tests/unit/test_other.py::test_x") == (
-        "tests/unit/test_other.py::test_x"
+    report_path = tmp_path / "phase.json"
+    dispatcher._write_parent_phase_evidence(
+        report_path,
+        raw_stream=raw,
+        nonce=nonce,
+        target=target,
+        returncode=0,
+        transport_integrity=True,
     )
+    payload = json.loads(report_path.read_text(encoding="utf-8"))
+    assert payload["node_ids"] == [target + "::test_contract"]
+    assert payload["event_count"] == 5
+    accepted = dispatcher._load_required_phase_evidence(report_path, target=target)
+    assert accepted["collector_integrity"] is True
+    assert accepted["event_stream_sha256"] == payload["event_stream_sha256"]
     assert not hasattr(dispatcher, "_PYTEST_PHASE_REPORTS")
+    assert not hasattr(dispatcher, "_PYTEST_PHASE_COLLECTOR")
 
 
-def test_required_phase_collector_replacement_fails_closed(
-    monkeypatch: pytest.MonkeyPatch,
+def test_required_phase_append_only_stream_tampering_fails_closed(
     tmp_path: Path,
 ) -> None:
-    dispatcher = _load("pctdd_phase_collector_integrity", DISPATCHER)
+    dispatcher = _load("pctdd_phase_stream_integrity", DISPATCHER)
     target = "test/api/parallel_content_sealing/test_example.py"
-    report_path = tmp_path / "phase.json"
-    monkeypatch.setenv(dispatcher.PYTEST_REPORT_ENV, str(report_path))
-    monkeypatch.setenv(dispatcher.PYTEST_REQUIRED_TARGET_ENV, target)
-    dispatcher.pytest_configure(SimpleNamespace(rootpath=ROOT))
-    dispatcher._PYTEST_PHASE_COLLECTOR.reports = []
+    node_id = target + "::test_contract"
+    nonce = "b" * 64
+    raw = _phase_stream(
+        dispatcher,
+        rootpath=ROOT,
+        node_id=node_id,
+        nonce=nonce,
+    )
+    mutated = raw.replace(b'"disposition":"passed"', b'"disposition":"failed"', 1)
+    with pytest.raises(dispatcher.ProfileError, match="frame chain differs"):
+        dispatcher._parse_pytest_phase_stream(mutated, nonce=nonce)
+    with pytest.raises(dispatcher.ProfileError, match="frame chain differs"):
+        dispatcher._parse_pytest_phase_stream(raw, nonce="c" * 64)
+    with pytest.raises(dispatcher.ProfileError, match="canonical LF"):
+        dispatcher._parse_pytest_phase_stream(raw.replace(b"\n", b"\r\n"), nonce=nonce)
 
-    dispatcher.pytest_sessionfinish(SimpleNamespace(), 0)
-    payload = json.loads(report_path.read_text(encoding="utf-8"))
-    assert payload["collector_integrity"] is False
-    assert payload["test_count"] == 0
-    with pytest.raises(dispatcher.ProfileError, match="target/exit binding"):
-        dispatcher._load_required_phase_evidence(report_path, target=target)
+    duplicate = _phase_stream(
+        dispatcher,
+        rootpath=ROOT,
+        node_id=node_id,
+        nonce=nonce,
+        duplicate_call=True,
+    )
+    with pytest.raises(dispatcher.ProfileError, match="duplicate phase"):
+        dispatcher._write_parent_phase_evidence(
+            tmp_path / "duplicate.json",
+            raw_stream=duplicate,
+            nonce=nonce,
+            target=target,
+            returncode=0,
+            transport_integrity=True,
+        )
+    reordered = _phase_stream(
+        dispatcher,
+        rootpath=ROOT,
+        node_id=node_id,
+        nonce=nonce,
+        phase_order=("call", "setup", "teardown"),
+    )
+    with pytest.raises(dispatcher.ProfileError, match="reordered phases"):
+        dispatcher._write_parent_phase_evidence(
+            tmp_path / "reordered.json",
+            raw_stream=reordered,
+            nonce=nonce,
+            target=target,
+            returncode=0,
+            transport_integrity=True,
+        )
+    off_target = _phase_stream(
+        dispatcher,
+        rootpath=ROOT,
+        node_id="test/api/parallel_content_sealing/test_other.py::test_x",
+        nonce=nonce,
+    )
+    with pytest.raises(dispatcher.ProfileError, match="off-target node"):
+        dispatcher._write_parent_phase_evidence(
+            tmp_path / "off-target.json",
+            raw_stream=off_target,
+            nonce=nonce,
+            target=target,
+            returncode=0,
+            transport_integrity=True,
+        )
+    with pytest.raises(dispatcher.ProfileError, match="finish/child status"):
+        dispatcher._write_parent_phase_evidence(
+            tmp_path / "status.json",
+            raw_stream=raw,
+            nonce=nonce,
+            target=target,
+            returncode=1,
+            transport_integrity=True,
+        )
+    with pytest.raises(dispatcher.ProfileError, match="transport is incomplete"):
+        dispatcher._write_parent_phase_evidence(
+            tmp_path / "transport.json",
+            raw_stream=raw,
+            nonce=nonce,
+            target=target,
+            returncode=0,
+            transport_integrity=False,
+        )
 
 
 def test_materializer_requires_exact_role_budget_outputs_and_independent_controller_validation() -> None:
@@ -810,6 +945,7 @@ def test_materializer_recovers_only_exact_post_cas_operator_receipt() -> None:
 
 def test_dispatcher_uses_nonshadowable_plugin_and_process_tree_boundary(monkeypatch: pytest.MonkeyPatch) -> None:
     dispatcher = _load("pctdd_run_dispatcher", DISPATCHER)
+    _bind_test_subreaper(dispatcher, monkeypatch)
     with dispatcher._sealed_validation_environment() as (environment, python, _receipt):
         assert str(ROOT / "scripts") == environment["PYTHONPATH"].split(dispatcher.os.pathsep)[0]
         assert dispatcher._run_child(
@@ -817,7 +953,7 @@ def test_dispatcher_uses_nonshadowable_plugin_and_process_tree_boundary(monkeypa
             cwd=ROOT,
             environment=environment,
             timeout_seconds=30,
-        ) == 0
+        ) == (0, b"", True)
 
     calls: list[dict[str, object]] = []
 
@@ -833,14 +969,188 @@ def test_dispatcher_uses_nonshadowable_plugin_and_process_tree_boundary(monkeypa
         return FakeProcess()
 
     monkeypatch.setattr(dispatcher.subprocess, "Popen", fake_popen)
+    monkeypatch.setattr(
+        dispatcher,
+        "_terminate_process",
+        lambda _process: calls.append({"fenced": True}),
+    )
     assert dispatcher._run_child(
         ["python", "-V"], cwd=ROOT, environment={}, timeout_seconds=17
-    ) == 0
+    ) == (0, b"", True)
     launch = calls[0]
     assert launch["shell"] is False
     assert launch["start_new_session"] is True
     assert launch["close_fds"] is True
     assert calls[1]["timeout"] == 17
+    assert calls[2] == {"fenced": True}
+
+
+def test_dispatcher_rejects_subreaper_byte_drift_before_launch(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    dispatcher = _load("pctdd_subreaper_byte_binding", DISPATCHER)
+    _bind_test_subreaper(dispatcher, monkeypatch)
+    monkeypatch.setattr(
+        dispatcher,
+        "VALIDATION_SUBREAPER_SHA256",
+        "sha256:" + "0" * 64,
+    )
+    monkeypatch.setattr(
+        dispatcher.subprocess,
+        "Popen",
+        lambda *_args, **_kwargs: pytest.fail("unsealed subreaper launched a child"),
+    )
+    with pytest.raises(dispatcher.ProfileError, match="subreaper bytes differ"):
+        dispatcher._run_child(
+            [sys.executable, "-c", "pass"],
+            cwd=ROOT,
+            environment=dict(os.environ),
+            timeout_seconds=10,
+        )
+
+
+def test_dispatcher_closes_phase_pipe_when_subreaper_preflight_rejects(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    dispatcher = _load("pctdd_subreaper_preflight_pipe_cleanup", DISPATCHER)
+    _bind_test_subreaper(dispatcher, monkeypatch)
+    monkeypatch.setattr(
+        dispatcher,
+        "VALIDATION_SUBREAPER_SHA256",
+        "sha256:" + "0" * 64,
+    )
+    monkeypatch.setattr(
+        dispatcher.subprocess,
+        "Popen",
+        lambda *_args, **_kwargs: pytest.fail("unsealed subreaper launched a child"),
+    )
+    read_fd, write_fd = os.pipe()
+    with pytest.raises(dispatcher.ProfileError, match="subreaper bytes differ"):
+        dispatcher._run_child(
+            [sys.executable, "-c", "pass"],
+            cwd=ROOT,
+            environment=dict(os.environ),
+            timeout_seconds=10,
+            phase_pipe=(read_fd, write_fd),
+        )
+    for fd in (read_fd, write_fd):
+        with pytest.raises(OSError):
+            os.fstat(fd)
+
+
+def test_dispatcher_parent_receives_real_pytest_append_only_stream(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    dispatcher = _load("pctdd_real_phase_pipe", DISPATCHER)
+    _bind_test_subreaper(dispatcher, monkeypatch)
+    target = (
+        "test/api/parallel_content_sealing/test_pctdd_g6_control_amendment.py"
+    )
+    node_id = target + "::test_dispatcher_rejects_prose_shell_options_and_profile_gaps"
+    nonce = "d" * 64
+    read_fd, write_fd = os.pipe()
+    with dispatcher._sealed_validation_environment() as (environment, python, _receipt):
+        child_environment = dict(environment)
+        child_environment[dispatcher.PYTEST_PHASE_FD_ENV] = str(write_fd)
+        child_environment[dispatcher.PYTEST_PHASE_NONCE_ENV] = nonce
+        returncode, raw, transport_integrity = dispatcher._run_child(
+            [
+                python,
+                "-m",
+                "pytest",
+                "-p",
+                dispatcher.PYTEST_PLUGIN_NAME,
+                "-q",
+                node_id,
+                "--tb=short",
+            ],
+            cwd=ROOT,
+            environment=child_environment,
+            timeout_seconds=30,
+            phase_pipe=(read_fd, write_fd),
+        )
+    assert returncode == 0
+    assert transport_integrity is True
+    report_path = tmp_path / "phase.json"
+    dispatcher._write_parent_phase_evidence(
+        report_path,
+        raw_stream=raw,
+        nonce=nonce,
+        target=target,
+        returncode=returncode,
+        transport_integrity=transport_integrity,
+    )
+    accepted = dispatcher._load_required_phase_evidence(report_path, target=target)
+    assert accepted["test_count"] == 1
+    assert accepted["phase_count"] == 3
+    assert accepted["event_count"] == 5
+
+
+def test_dispatcher_fences_descendant_that_holds_phase_pipe_open(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    dispatcher = _load("pctdd_phase_pipe_descendant_fence", DISPATCHER)
+    _bind_test_subreaper(dispatcher, monkeypatch)
+    read_fd, write_fd = os.pipe()
+    pid_path = tmp_path / "descendant.pid"
+    environment = dict(os.environ)
+    environment[dispatcher.PYTEST_PHASE_FD_ENV] = str(write_fd)
+    code = (
+        "import os,pathlib,subprocess,sys;"
+        f"fd=int(os.environ[{dispatcher.PYTEST_PHASE_FD_ENV!r}]);"
+        "child=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'],"
+        "pass_fds=(fd,));"
+        f"pathlib.Path({str(pid_path)!r}).write_text(str(child.pid));"
+        "os.close(fd)"
+    )
+    returncode, raw, transport_integrity = dispatcher._run_child(
+        [sys.executable, "-c", code],
+        cwd=ROOT,
+        environment=environment,
+        timeout_seconds=10,
+        phase_pipe=(read_fd, write_fd),
+    )
+    assert returncode == 0
+    assert raw == b""
+    # The group fence kills the holder and gives the parent a real EOF; the
+    # empty stream is still rejected by the phase parser and cannot be admitted.
+    assert transport_integrity is True
+    with pytest.raises(dispatcher.ProfileError, match="absent or unbounded"):
+        dispatcher._parse_pytest_phase_stream(raw, nonce="e" * 64)
+    descendant_pid = int(pid_path.read_text(encoding="utf-8"))
+    stat_path = Path(f"/proc/{descendant_pid}/stat")
+    if stat_path.is_file():
+        fields = stat_path.read_text(encoding="utf-8").split()
+        assert fields[2] == "Z"
+
+
+def test_dispatcher_fences_descendant_even_after_phase_stream_eof(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    dispatcher = _load("pctdd_phase_pipe_closed_descendant_fence", DISPATCHER)
+    _bind_test_subreaper(dispatcher, monkeypatch)
+    pid_path = tmp_path / "closed-descendant.pid"
+    code = (
+        "import pathlib,subprocess,sys;"
+        "child=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'],"
+        "close_fds=True,start_new_session=True);"
+        f"pathlib.Path({str(pid_path)!r}).write_text(str(child.pid))"
+    )
+    returncode, raw, transport_integrity = dispatcher._run_child(
+        [sys.executable, "-c", code],
+        cwd=ROOT,
+        environment=dict(os.environ),
+        timeout_seconds=10,
+    )
+    assert (returncode, raw, transport_integrity) == (0, b"", True)
+    descendant_pid = int(pid_path.read_text(encoding="utf-8"))
+    stat_path = Path(f"/proc/{descendant_pid}/stat")
+    if stat_path.is_file():
+        fields = stat_path.read_text(encoding="utf-8").split()
+        assert fields[2] == "Z"
 
 
 def test_facade_preflight_and_launch_are_operator_seal_gated(monkeypatch: pytest.MonkeyPatch) -> None:

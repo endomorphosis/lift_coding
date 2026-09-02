@@ -15,9 +15,11 @@ import hashlib
 import json
 import os
 import re
+import secrets
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from contextlib import contextmanager
 from pathlib import Path
@@ -40,8 +42,20 @@ TASK_RE: Final[re.Pattern[str]] = re.compile(r"^PCTDD-(?:0[0-4][0-9]|05[0-3])$")
 FORBIDDEN_TOKENS: Final[frozenset[str]] = frozenset(
     {"&&", "||", ";", "|", "&", ">", ">>", "<", "<<"}
 )
-PYTEST_REPORT_ENV: Final[str] = "PCTDD_PYTEST_PHASE_REPORT"
-PYTEST_REQUIRED_TARGET_ENV: Final[str] = "PCTDD_REQUIRED_TEST_TARGET"
+PYTEST_PHASE_FD_ENV: Final[str] = "PCTDD_PYTEST_PHASE_FD"
+PYTEST_PHASE_NONCE_ENV: Final[str] = "PCTDD_PYTEST_PHASE_NONCE"
+PYTEST_PHASE_EVENT_SCHEMA: Final[str] = "pctdd/pytest-phase-event@1"
+PYTEST_PHASE_OUTCOME_SCHEMA: Final[str] = "pctdd/pytest-phase-outcome@2"
+PYTEST_PHASE_STREAM_MAX_BYTES: Final[int] = 8 * 1024 * 1024
+PYTEST_PHASE_FRAME_MAX_BYTES: Final[int] = 8 * 1024
+VALIDATION_SUBREAPER_ROOT: Final[Path] = ROOT / "external/ipfs_accelerate"
+VALIDATION_SUBREAPER_PATH: Final[Path] = (
+    VALIDATION_SUBREAPER_ROOT
+    / "ipfs_accelerate_py/agent_supervisor/todo_daemon/native_cli_subreaper.py"
+)
+VALIDATION_SUBREAPER_SHA256: Final[str] = (
+    "sha256:bf6fb3338dde2c6a9973b2db4a0e432b55825fcd24a1416159b9cc9f6090e717"
+)
 # ``external/ipfs_accelerate/scripts`` is a regular Python package and shadows
 # the repository-root ``scripts`` namespace once its package root is admitted.
 # Admit this file's directory directly and import the evidence plugin by its
@@ -147,32 +161,90 @@ W1_BASELINE_COMMANDS: Final[dict[str, tuple[tuple[str, tuple[str, ...]], ...]]] 
 }
 
 
-class _PytestPhaseCollector:
-    """Process-local collector whose identity is fixed by the operator plugin.
+def _phase_genesis_digest(nonce: str) -> str:
+    return "sha256:" + hashlib.sha256(
+        ("pctdd/pytest-phase-stream@1\0" + nonce).encode("utf-8")
+    ).hexdigest()
 
-    Worker tests execute in the same interpreter as pytest hooks.  Keeping the
-    evidence population behind a dedicated object, and verifying the exact
-    list identity at session finish, prevents a test from replacing the
-    historical module-level list to rewrite controller-owned node identities.
-    The collector is evidence transport only; admission remains in
-    :func:`_load_required_phase_evidence` in the parent process.
+
+class _AppendOnlyPytestPhasePlugin:
+    """Emit immutable primitive phase observations to the parent dispatcher.
+
+    The plugin never owns the final receipt, target normalization, population
+    admission, or persistent report path.  Its pipe is append-only from the
+    child's perspective: later test code cannot rewrite frames already
+    observed by the parent.  This remains trusted-runner observation evidence,
+    not a direct-execution proof against arbitrary hostile CPython code.
     """
 
-    __slots__ = (
-        "canonical_target",
-        "node_id_aliases",
-        "reports",
-        "reports_identity",
-    )
+    __slots__ = ("_digest", "_fd", "_nonce", "_sequence")
 
-    def __init__(self) -> None:
-        self.canonical_target = ""
-        self.node_id_aliases: tuple[str, ...] = ()
-        self.reports: list[dict[str, Any]] = []
-        self.reports_identity = id(self.reports)
+    def __init__(self, *, fd: int, nonce: str) -> None:
+        self._fd = int(fd)
+        self._nonce = nonce
+        self._sequence = 0
+        self._digest = _phase_genesis_digest(nonce)
 
+    def _emit(self, kind: str, payload: Mapping[str, Any]) -> None:
+        frame = {
+            "schema": PYTEST_PHASE_EVENT_SCHEMA,
+            "session_nonce": self._nonce,
+            "sequence": self._sequence,
+            "previous_digest": self._digest,
+            "kind": kind,
+            **dict(payload),
+        }
+        encoded = (
+            json.dumps(frame, sort_keys=True, separators=(",", ":")) + "\n"
+        ).encode("utf-8")
+        if len(encoded) > PYTEST_PHASE_FRAME_MAX_BYTES:
+            raise RuntimeError("pytest phase frame exceeds the sealed bound")
+        view = memoryview(encoded)
+        while view:
+            written = os.write(self._fd, view)
+            if written <= 0:
+                raise RuntimeError("pytest phase pipe write made no progress")
+            view = view[written:]
+        self._digest = "sha256:" + hashlib.sha256(encoded[:-1]).hexdigest()
+        self._sequence += 1
 
-_PYTEST_PHASE_COLLECTOR = _PytestPhaseCollector()
+    def emit_configure(self, rootpath: str) -> None:
+        self._emit("configure", {"rootpath": rootpath})
+
+    def pytest_runtest_logreport(self, report: Any) -> None:
+        wasxfail = bool(getattr(report, "wasxfail", False))
+        outcome = str(getattr(report, "outcome", "unknown"))
+        when = str(getattr(report, "when", "unknown"))
+        if outcome == "rerun":
+            disposition = "rerun"
+        elif wasxfail and outcome == "skipped":
+            disposition = "xfail"
+        elif wasxfail:
+            disposition = "xpass"
+        elif outcome == "skipped":
+            disposition = "skipped"
+        elif outcome == "failed" and when in {"setup", "teardown"}:
+            disposition = "error"
+        elif outcome == "failed":
+            disposition = "failed"
+        elif outcome == "passed":
+            disposition = "passed"
+        else:
+            disposition = outcome
+        self._emit(
+            "phase",
+            {
+                "node_id": str(getattr(report, "nodeid", ""))[:4096],
+                "phase": when,
+                "disposition": disposition,
+            },
+        )
+
+    def pytest_sessionfinish(self, session: Any, exitstatus: Any) -> None:
+        try:
+            self._emit("finish", {"exitstatus": int(exitstatus)})
+        finally:
+            os.close(self._fd)
 
 
 class ProfileError(ValueError):
@@ -438,123 +510,27 @@ def _sealed_duckdb_extension_directory() -> str:
     return str(next(iter(directories)))
 
 
-def _pytest_node_id_aliases(config: Any, canonical_target: str) -> tuple[str, ...]:
-    """Return operator-derived pytest aliases for one confined target.
-
-    Nested repositories can cause pytest to choose their configuration as its
-    ``rootpath`` and report ``tests/...`` while the sealed profile names
-    ``external/<repo>/tests/...``.  That mapping belongs to the controller,
-    never to a worker-authored test.
-    """
-
-    aliases = {canonical_target}
-    try:
-        target = (ROOT / canonical_target).resolve(strict=False)
-        rootpath = Path(str(config.rootpath)).resolve(strict=False)
-        aliases.add(target.relative_to(rootpath).as_posix())
-    except (AttributeError, OSError, ValueError):
-        pass
-    return tuple(
-        sorted((item for item in aliases if item), key=lambda item: (-len(item), item))
-    )
-
-
-def _canonical_pytest_node_id(node_id: str) -> str:
-    collector = _PYTEST_PHASE_COLLECTOR
-    for alias in collector.node_id_aliases:
-        if node_id == alias:
-            return collector.canonical_target
-        if node_id.startswith(alias + "::"):
-            return collector.canonical_target + node_id[len(alias) :]
-    return node_id
-
-
 def pytest_configure(config: Any) -> None:
-    """Initialize the bounded phase collector when loaded as the sealed plugin."""
+    """Register the append-only observer without exposing receipt authority."""
 
-    if os.environ.get(PYTEST_REPORT_ENV):
-        collector = _PYTEST_PHASE_COLLECTOR
-        collector.reports.clear()
-        collector.reports_identity = id(collector.reports)
-        collector.canonical_target = os.environ.get(
-            PYTEST_REQUIRED_TARGET_ENV, ""
-        ).strip()
-        collector.node_id_aliases = _pytest_node_id_aliases(
-            config, collector.canonical_target
-        )
-
-
-def pytest_runtest_logreport(report: Any) -> None:
-    if not os.environ.get(PYTEST_REPORT_ENV):
+    raw_fd = os.environ.get(PYTEST_PHASE_FD_ENV, "").strip()
+    nonce = os.environ.get(PYTEST_PHASE_NONCE_ENV, "").strip()
+    if not raw_fd and not nonce:
         return
-    wasxfail = bool(getattr(report, "wasxfail", False))
-    outcome = str(getattr(report, "outcome", "unknown"))
-    when = str(getattr(report, "when", "unknown"))
-    if outcome == "rerun":
-        disposition = "rerun"
-    elif wasxfail and outcome == "skipped":
-        disposition = "xfail"
-    elif wasxfail:
-        disposition = "xpass"
-    elif outcome == "skipped":
-        disposition = "skipped"
-    elif outcome == "failed" and when in {"setup", "teardown"}:
-        disposition = "error"
-    elif outcome == "failed":
-        disposition = "failed"
-    elif outcome == "passed":
-        disposition = "passed"
-    else:
-        disposition = outcome
-    _PYTEST_PHASE_COLLECTOR.reports.append(
-        {
-            "node_id": _canonical_pytest_node_id(
-                str(getattr(report, "nodeid", ""))[:4096]
-            ),
-            "phase": when,
-            "disposition": disposition,
-        }
+    if not re.fullmatch(r"[1-9][0-9]{0,9}", raw_fd) or not re.fullmatch(
+        r"[0-9a-f]{64}", nonce
+    ):
+        raise RuntimeError("pytest phase transport binding is malformed")
+    fd = int(raw_fd)
+    os.set_inheritable(fd, False)
+    plugin = _AppendOnlyPytestPhasePlugin(fd=fd, nonce=nonce)
+    os.environ.pop(PYTEST_PHASE_FD_ENV, None)
+    os.environ.pop(PYTEST_PHASE_NONCE_ENV, None)
+    plugin.emit_configure(str(Path(str(config.rootpath)).resolve(strict=False)))
+    config.pluginmanager.register(
+        plugin,
+        name="pctdd-append-only-phase-observer-v1",
     )
-
-
-def pytest_sessionfinish(session: Any, exitstatus: Any) -> None:
-    report_path = os.environ.get(PYTEST_REPORT_ENV, "").strip()
-    if not report_path:
-        return
-    collector = _PYTEST_PHASE_COLLECTOR
-    collector_integrity = bool(
-        type(collector.reports) is list
-        and id(collector.reports) == collector.reports_identity
-    )
-    reports = collector.reports if collector_integrity else []
-    counts = {name: 0 for name in ("passed", *DISALLOWED_REQUIRED_OUTCOMES)}
-    phases_by_node: dict[str, dict[str, str]] = {}
-    for report in reports:
-        disposition = str(report["disposition"])
-        counts[disposition] = counts.get(disposition, 0) + 1
-        phases_by_node.setdefault(str(report["node_id"]), {})[
-            str(report["phase"])
-        ] = disposition
-    fully_passed = sum(
-        1
-        for phases in phases_by_node.values()
-        if phases == {"setup": "passed", "call": "passed", "teardown": "passed"}
-    )
-    payload = {
-        "schema": "pctdd/pytest-phase-outcome@2",
-        "required_test_target": os.environ.get(PYTEST_REQUIRED_TARGET_ENV, ""),
-        "collector_integrity": collector_integrity,
-        "exitstatus": int(exitstatus),
-        "test_count": len(phases_by_node),
-        "phase_count": len(reports),
-        "fully_passed_test_count": fully_passed,
-        "counts": dict(sorted(counts.items())),
-        "node_ids": sorted(phases_by_node),
-    }
-    target = Path(report_path)
-    temporary = target.with_name(f".{target.name}.tmp.{os.getpid()}")
-    temporary.write_text(json.dumps(payload, sort_keys=True) + "\n", encoding="utf-8")
-    os.replace(temporary, target)
 
 
 @contextmanager
@@ -605,17 +581,33 @@ def _terminate_process(process: subprocess.Popen[Any]) -> None:
     accelerator = ROOT / "external/ipfs_accelerate"
     if str(accelerator) not in sys.path:
         sys.path.insert(0, str(accelerator))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import core as process_core
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime import (
         terminate_process_with_grace,
     )
 
-    result = terminate_process_with_grace(
-        process,
-        grace_seconds=5.0,
-        kill_wait_seconds=5.0,
-    )
-    if result.timed_out:
-        raise ProfileError("validation process tree did not terminate after timeout")
+    if process.poll() is None:
+        result = terminate_process_with_grace(
+            process,
+            grace_seconds=5.0,
+            kill_wait_seconds=5.0,
+        )
+        fenced = not result.timed_out
+    else:
+        # The session leader may have exited while a descendant deliberately
+        # retains the append-only FD.  The owned process group remains the
+        # stable kernel fence even after its leader has been reaped.
+        process_core._terminate_owned_process_group(
+            process.pid,
+            grace_seconds=5.0,
+        )
+        fenced = not process_core._process_group_has_live_members(process.pid)
+    try:
+        process.wait(timeout=1.0)
+    except subprocess.TimeoutExpired:
+        fenced = False
+    if not fenced:
+        raise ProfileError("validation process group did not reach a fenced terminal")
 
 
 def _run_child(
@@ -624,27 +616,348 @@ def _run_child(
     cwd: Path,
     environment: Mapping[str, str],
     timeout_seconds: int,
-) -> int:
-    process = subprocess.Popen(
-        list(args),
-        cwd=cwd,
-        env=dict(environment),
-        shell=False,
-        stdin=subprocess.DEVNULL,
-        # Reserve stdout for the dispatcher's closed JSON evidence records.
-        # Pytest/tool diagnostics remain bounded and hashed by the outer
-        # recovery runner on stderr, so prose can never confuse admission.
-        stdout=sys.stderr,
-        stderr=sys.stderr,
-        start_new_session=True,
-        close_fds=True,
-    )
+    phase_pipe: tuple[int, int] | None = None,
+) -> tuple[int, bytes, bool]:
+    pipe_result: dict[str, Any] = {
+        "bytes": b"",
+        "error": "",
+        "overflow": False,
+    }
+    reader: threading.Thread | None = None
+    reader_stop = threading.Event()
+    pass_fds: tuple[int, ...] = ()
+    try:
+        try:
+            if VALIDATION_SUBREAPER_PATH.is_symlink():
+                raise OSError("subreaper source must not be a symlink")
+            subreaper = VALIDATION_SUBREAPER_PATH.resolve(strict=True)
+            subreaper.relative_to(VALIDATION_SUBREAPER_ROOT.resolve(strict=True))
+        except (OSError, ValueError) as exc:
+            raise ProfileError("sealed validation subreaper is unavailable") from exc
+        if not subreaper.is_file() or subreaper.is_symlink():
+            raise ProfileError("sealed validation subreaper is not a regular source file")
+        if _sha256_path(subreaper) != VALIDATION_SUBREAPER_SHA256:
+            raise ProfileError("sealed validation subreaper bytes differ")
+    except BaseException:
+        # Ownership of the caller-created evidence pipe transfers with this
+        # call.  Integrity preflight happens before the reader thread starts,
+        # so close both ends here on every prelaunch rejection.
+        for fd in phase_pipe or ():
+            try:
+                os.close(fd)
+            except OSError:
+                pass
+        raise
+    if phase_pipe is not None:
+        read_fd, write_fd = phase_pipe
+        pass_fds = (write_fd,)
+        os.set_blocking(read_fd, False)
+        pipe_result["eof"] = False
+        pipe_result["unterminated"] = False
+
+        def read_phase_stream() -> None:
+            content = bytearray()
+            try:
+                while True:
+                    try:
+                        chunk = os.read(read_fd, 65536)
+                    except BlockingIOError:
+                        if not reader_stop.wait(0.05):
+                            continue
+                        # The wrapper has reached its terminal.  Retry once so
+                        # a just-closed writer is observed as real EOF instead
+                        # of being mislabeled as a leaked descendant FD.
+                        try:
+                            chunk = os.read(read_fd, 65536)
+                        except BlockingIOError:
+                            pipe_result["unterminated"] = True
+                            break
+                    if not chunk:
+                        pipe_result["eof"] = True
+                        break
+                    if len(content) + len(chunk) > PYTEST_PHASE_STREAM_MAX_BYTES:
+                        pipe_result["overflow"] = True
+                        continue
+                    content.extend(chunk)
+            except OSError as exc:
+                pipe_result["error"] = type(exc).__name__
+            finally:
+                try:
+                    os.close(read_fd)
+                except OSError:
+                    pass
+                pipe_result["bytes"] = bytes(content)
+
+        reader = threading.Thread(
+            target=read_phase_stream,
+            name="pctdd-phase-stream-reader",
+            daemon=True,
+        )
+        reader.start()
+    try:
+        subreaper_args = [str(args[0]), "-I", str(subreaper)]
+        if phase_pipe is not None:
+            subreaper_args.extend(("--pass-fd", str(phase_pipe[1])))
+        subreaper_args.extend(("--", *[str(value) for value in args]))
+        process = subprocess.Popen(
+            subreaper_args,
+            cwd=cwd,
+            env=dict(environment),
+            shell=False,
+            stdin=subprocess.DEVNULL,
+            # Reserve stdout for the dispatcher's closed JSON evidence records.
+            # Pytest/tool diagnostics remain bounded and hashed by the outer
+            # recovery runner on stderr, so prose can never confuse admission.
+            stdout=sys.stderr,
+            stderr=sys.stderr,
+            start_new_session=True,
+            close_fds=True,
+            pass_fds=pass_fds,
+        )
+    except BaseException:
+        if phase_pipe is not None:
+            try:
+                os.close(phase_pipe[1])
+            except OSError:
+                pass
+            if reader is not None:
+                reader_stop.set()
+                reader.join(timeout=5.0)
+        raise
+    if phase_pipe is not None:
+        try:
+            os.close(phase_pipe[1])
+        except OSError:
+            pass
     try:
         process.communicate(timeout=timeout_seconds)
     except subprocess.TimeoutExpired:
+        try:
+            _terminate_process(process)
+        except BaseException:
+            reader_stop.set()
+            if reader is not None:
+                reader.join(timeout=5.0)
+            raise
+        returncode = 124
+    except BaseException:
+        try:
+            _terminate_process(process)
+        finally:
+            reader_stop.set()
+            if reader is not None:
+                reader.join(timeout=5.0)
+        raise
+    else:
+        returncode = int(process.returncode or 0)
+    try:
+        # Successful children may still have daemonized descendants.  Fence
+        # the entire owned session before the parent writes or admits evidence.
         _terminate_process(process)
-        return 124
-    return int(process.returncode or 0)
+    except BaseException:
+        reader_stop.set()
+        if reader is not None:
+            reader.join(timeout=5.0)
+        raise
+    if reader is not None:
+        reader_stop.set()
+        reader.join(timeout=5.0)
+    transport_integrity = bool(
+        reader is None
+        or (
+            not reader.is_alive()
+            and pipe_result.get("eof") is True
+            and pipe_result.get("unterminated") is False
+            and pipe_result.get("overflow") is False
+            and not pipe_result.get("error")
+        )
+    )
+    return returncode, bytes(pipe_result.get("bytes") or b""), transport_integrity
+
+
+def _parse_pytest_phase_stream(
+    raw: bytes,
+    *,
+    nonce: str,
+) -> tuple[Path, tuple[dict[str, str], ...], int, str, int]:
+    """Validate the closed append-only stream produced by the child plugin."""
+
+    if not raw or len(raw) > PYTEST_PHASE_STREAM_MAX_BYTES or not raw.endswith(b"\n"):
+        raise ProfileError("required pytest phase stream is absent or unbounded")
+    expected_sequence = 0
+    expected_digest = _phase_genesis_digest(nonce)
+    rootpath: Path | None = None
+    finish_status: int | None = None
+    phases: list[dict[str, str]] = []
+    split_frames = raw.split(b"\n")
+    if split_frames[-1] != b"" or any(b"\r" in line for line in split_frames[:-1]):
+        raise ProfileError("required pytest phase stream framing is not canonical LF")
+    lines = split_frames[:-1]
+    for index, line in enumerate(lines):
+        if not line or len(line) + 1 > PYTEST_PHASE_FRAME_MAX_BYTES:
+            raise ProfileError("required pytest phase frame is malformed")
+        try:
+            frame = json.loads(
+                line.decode("utf-8"),
+                object_pairs_hook=_reject_duplicate_keys,
+            )
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise ProfileError("required pytest phase frame is not canonical JSON") from exc
+        base_fields = {
+            "schema",
+            "session_nonce",
+            "sequence",
+            "previous_digest",
+            "kind",
+        }
+        if (
+            not isinstance(frame, Mapping)
+            or frame.get("schema") != PYTEST_PHASE_EVENT_SCHEMA
+            or frame.get("session_nonce") != nonce
+            or type(frame.get("sequence")) is not int
+            or frame.get("sequence") != expected_sequence
+            or frame.get("previous_digest") != expected_digest
+            or json.dumps(frame, sort_keys=True, separators=(",", ":")).encode(
+                "utf-8"
+            )
+            != line
+        ):
+            raise ProfileError("required pytest phase frame chain differs")
+        kind = frame.get("kind")
+        if kind == "configure":
+            if index != 0 or rootpath is not None or set(frame) != base_fields | {
+                "rootpath"
+            }:
+                raise ProfileError("required pytest configure frame differs")
+            raw_rootpath = frame.get("rootpath")
+            if not isinstance(raw_rootpath, str) or not raw_rootpath:
+                raise ProfileError("required pytest rootpath is absent")
+            try:
+                rootpath = Path(raw_rootpath).resolve(strict=True)
+                rootpath.relative_to(ROOT.resolve(strict=True))
+            except (OSError, ValueError) as exc:
+                raise ProfileError("required pytest rootpath escapes the repository") from exc
+        elif kind == "phase":
+            if (
+                rootpath is None
+                or finish_status is not None
+                or set(frame)
+                != base_fields | {"node_id", "phase", "disposition"}
+                or not isinstance(frame.get("node_id"), str)
+                or not frame.get("node_id")
+                or len(frame["node_id"]) > 4096
+                or frame.get("phase") not in {"setup", "call", "teardown"}
+                or frame.get("disposition")
+                not in {"passed", *DISALLOWED_REQUIRED_OUTCOMES}
+            ):
+                raise ProfileError("required pytest phase observation differs")
+            phases.append(
+                {
+                    "node_id": str(frame["node_id"]),
+                    "phase": str(frame["phase"]),
+                    "disposition": str(frame["disposition"]),
+                }
+            )
+        elif kind == "finish":
+            if (
+                index != len(lines) - 1
+                or rootpath is None
+                or finish_status is not None
+                or set(frame) != base_fields | {"exitstatus"}
+                or type(frame.get("exitstatus")) is not int
+            ):
+                raise ProfileError("required pytest finish frame differs")
+            finish_status = int(frame["exitstatus"])
+        else:
+            raise ProfileError("required pytest phase frame kind is unknown")
+        expected_digest = "sha256:" + hashlib.sha256(line).hexdigest()
+        expected_sequence += 1
+    if rootpath is None or finish_status is None or not phases:
+        raise ProfileError("required pytest phase stream is incomplete")
+    return (
+        rootpath,
+        tuple(phases),
+        finish_status,
+        "sha256:" + hashlib.sha256(raw).hexdigest(),
+        expected_sequence,
+    )
+
+
+def _write_parent_phase_evidence(
+    path: Path,
+    *,
+    raw_stream: bytes,
+    nonce: str,
+    target: str,
+    returncode: int,
+    transport_integrity: bool,
+) -> None:
+    """Aggregate raw observations and persist the only authoritative receipt."""
+
+    if not transport_integrity:
+        raise ProfileError("required pytest append-only transport is incomplete")
+    rootpath, reports, finish_status, stream_sha256, event_count = (
+        _parse_pytest_phase_stream(raw_stream, nonce=nonce)
+    )
+    if finish_status != returncode:
+        raise ProfileError("required pytest finish/child status binding differs")
+    target_path = _confined_path(target, field="required_test_target")
+    try:
+        nested_alias = target_path.relative_to(rootpath).as_posix()
+    except ValueError as exc:
+        raise ProfileError("required pytest target is outside reported rootpath") from exc
+    aliases = {target, nested_alias}
+
+    counts = {name: 0 for name in ("passed", *DISALLOWED_REQUIRED_OUTCOMES)}
+    phases_by_node: dict[str, dict[str, str]] = {}
+    for report in reports:
+        raw_node_id = report["node_id"]
+        canonical_node_id = raw_node_id
+        for alias in sorted(aliases, key=lambda item: (-len(item), item)):
+            if raw_node_id == alias:
+                canonical_node_id = target
+                break
+            if raw_node_id.startswith(alias + "::"):
+                canonical_node_id = target + raw_node_id[len(alias) :]
+                break
+        phase = report["phase"]
+        node_phases = phases_by_node.setdefault(canonical_node_id, {})
+        if not (
+            canonical_node_id == target
+            or canonical_node_id.startswith(target + "::")
+        ):
+            raise ProfileError("required pytest phase stream contains an off-target node")
+        if phase in node_phases:
+            raise ProfileError("required pytest phase stream contains a duplicate phase")
+        expected_phase = ("setup", "call", "teardown")[len(node_phases)]
+        if phase != expected_phase:
+            raise ProfileError("required pytest phase stream contains reordered phases")
+        node_phases[phase] = report["disposition"]
+        counts[report["disposition"]] += 1
+    fully_passed = sum(
+        1
+        for phases in phases_by_node.values()
+        if phases == {"setup": "passed", "call": "passed", "teardown": "passed"}
+    )
+    payload = {
+        "schema": PYTEST_PHASE_OUTCOME_SCHEMA,
+        "required_test_target": target,
+        "collector_integrity": True,
+        "event_stream_sha256": stream_sha256,
+        "event_count": event_count,
+        "exitstatus": returncode,
+        "test_count": len(phases_by_node),
+        "phase_count": len(reports),
+        "fully_passed_test_count": fully_passed,
+        "counts": dict(sorted(counts.items())),
+        "node_ids": sorted(phases_by_node),
+    }
+    temporary = path.with_name(f".{path.name}.tmp.{os.getpid()}")
+    temporary.write_text(
+        json.dumps(payload, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    os.replace(temporary, path)
 
 
 def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
@@ -656,7 +969,7 @@ def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
     expected_fields = {
         "schema", "required_test_target", "exitstatus", "test_count",
         "phase_count", "fully_passed_test_count", "counts", "node_ids",
-        "collector_integrity",
+        "collector_integrity", "event_stream_sha256", "event_count",
     }
     if (
         not isinstance(payload, Mapping)
@@ -667,6 +980,12 @@ def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
     if (
         payload.get("required_test_target") != target
         or payload.get("collector_integrity") is not True
+        or not isinstance(payload.get("event_stream_sha256"), str)
+        or re.fullmatch(
+            r"sha256:[0-9a-f]{64}", str(payload.get("event_stream_sha256"))
+        )
+        is None
+        or type(payload.get("event_count")) is not int
         or not isinstance(payload.get("exitstatus"), int)
         or isinstance(payload.get("exitstatus"), bool)
         or payload.get("exitstatus") != 0
@@ -682,6 +1001,7 @@ def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
             payload.get("test_count"),
             payload.get("phase_count"),
             payload.get("fully_passed_test_count"),
+            payload.get("event_count"),
         ]
         if not all(isinstance(value, int) and not isinstance(value, bool) for value in raw_numbers):
             raise TypeError("phase counts must be exact JSON integers")
@@ -689,6 +1009,7 @@ def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
         test_count = payload["test_count"]
         phase_count = payload["phase_count"]
         fully_passed = payload["fully_passed_test_count"]
+        event_count = payload["event_count"]
     except (KeyError, TypeError, ValueError) as exc:
         raise ProfileError("required pytest phase counts are malformed") from exc
     if any(value < 0 for value in normalized_counts.values()):
@@ -712,6 +1033,7 @@ def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
         and phase_count == test_count * 3
         and normalized_counts["passed"] == phase_count
         and sum(normalized_counts.values()) == phase_count
+        and event_count == phase_count + 2
         and nodes_are_exact
     )
     if nonzero or not complete:
@@ -722,6 +1044,9 @@ def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
     return {
         "schema": payload["schema"],
         "sha256": "sha256:" + hashlib.sha256(raw).hexdigest(),
+        "collector_integrity": True,
+        "event_stream_sha256": payload["event_stream_sha256"],
+        "event_count": event_count,
         "test_count": test_count,
         "phase_count": phase_count,
         "fully_passed_test_count": fully_passed,
@@ -743,20 +1068,33 @@ def run_profile(task_id: str, *, profile_path: Path = PROFILE_PATH) -> int:
             with tempfile.TemporaryDirectory(prefix="pctdd-validation-") as temporary:
                 report_path = Path(temporary) / "pytest-phase-report.json"
                 child_environment = dict(environment)
+                child_environment.pop(PYTEST_PHASE_FD_ENV, None)
+                child_environment.pop(PYTEST_PHASE_NONCE_ENV, None)
+                phase_pipe: tuple[int, int] | None = None
+                nonce = ""
                 if index == 0:
-                    child_environment[PYTEST_REPORT_ENV] = str(report_path)
-                    child_environment[PYTEST_REQUIRED_TARGET_ENV] = str(
-                        profile["required_test_target"]
-                    )
+                    phase_pipe = os.pipe()
+                    nonce = secrets.token_hex(32)
+                    child_environment[PYTEST_PHASE_FD_ENV] = str(phase_pipe[1])
+                    child_environment[PYTEST_PHASE_NONCE_ENV] = nonce
                     args = [*args[:3], "-p", PYTEST_PLUGIN_NAME, *args[3:]]
-                returncode = _run_child(
+                returncode, raw_stream, transport_integrity = _run_child(
                     args,
                     cwd=cwd,
                     environment=child_environment,
                     timeout_seconds=int(raw["timeout_seconds"]),
+                    phase_pipe=phase_pipe,
                 )
                 if index == 0 and returncode == 0:
                     try:
+                        _write_parent_phase_evidence(
+                            report_path,
+                            raw_stream=raw_stream,
+                            nonce=nonce,
+                            target=str(profile["required_test_target"]),
+                            returncode=returncode,
+                            transport_integrity=transport_integrity,
+                        )
                         phase_evidence = _load_required_phase_evidence(
                             report_path,
                             target=str(profile["required_test_target"]),
