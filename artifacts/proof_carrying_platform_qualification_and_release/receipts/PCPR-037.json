@@ -1,0 +1,488 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-037",
+  "title": "Qualify CPU execution",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G430",
+  "objective_id": "PCPR-037",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-037@current-head-cpu-execution-v1",
+  "observed_at": "2026-09-02T03:47:40Z",
+  "depends_on": [
+    "PCPR-036"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-3 Accelerate live CPU execution qualification only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cpu_execution.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/hardware_capability_ladder.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/kit/hardware_kit.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/cpu_execution_qualification.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_cpu_execution_qualification.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add CpuExecution@1. Run a live stdlib CPU canary covering identity, load, compute, output validation, cancellation, timeout, cleanup, fail-closed resource admission, and repetition. HardwareKit._test_cpu uses that canary instead of numpy-only success. The hardware ladder exposes from_live_cpu_execution without granting production_authorized or the model-gated qualified rung. CUDA and model/provider stay typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "7fa98095c12ef547b4d45727e63bdbbbc19dbac4",
+    "outer_tree": "fdb96dacf0347ddba7bcc5f716447cbe5a881b05",
+    "outer_subject": "Merge commit '16c6da7a70cb759822b04e2565beff069b8d84ae' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "7b4f094ca966e961ddac7bf0fc96f873a93e0f80",
+    "accelerator_pre_change_tree": "118d10ad140ea40c5710b312cff1c8a90cb999cb",
+    "accelerator_gitlink": "7b4f094ca966e961ddac7bf0fc96f873a93e0f80",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "a747bbd619385329b8e613e7e6f75557d471e2c3",
+    "datasets_tree": "15e2aa1c19dffb175b4d7bb57c3afaab52eb0dd8",
+    "datasets_gitlink": "a747bbd619385329b8e613e7e6f75557d471e2c3",
+    "kit_commit": "b0597f8d1d153e75e38d20265fffcd4405130ab9",
+    "kit_tree": "6a9a57bb59be47465b78366e15e99a12fdd572c5",
+    "kit_gitlink": "b0597f8d1d153e75e38d20265fffcd4405130ab9",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cpu_execution.py",
+      "sha256": "34ecc1a8e6f00e3282f823435493a19eea17f078181625d12502adabdc0e4b3a",
+      "bytes": 14825,
+      "evidence_kind": "measured",
+      "interface": "CpuExecution@1",
+      "schema": "ipfs_accelerate_py/assurance/cpu-execution@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/hardware_capability_ladder.py",
+      "sha256": "a9486264fa13862ea4e56a9161628285239fff3adb3c367c3a95171014515719",
+      "bytes": 17522,
+      "evidence_kind": "measured",
+      "interface": "HardwareCapabilityLadder@1",
+      "schema": "ipfs_accelerate_py/assurance/hardware-capability-ladder@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/kit/hardware_kit.py",
+      "sha256": "655a4e9dc3ea8d4d51b371d2a49139aafe9027036b37531942518e0dcf7c8b8d",
+      "bytes": 20071,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/cpu_execution_qualification.py",
+      "sha256": "1f934e4ba9d51bd3a0053cbf932b6b69a9d4dd8f1f6d6061afa4caa80c82ee06",
+      "bytes": 38002,
+      "evidence_kind": "measured",
+      "interface": "CpuExecutionQualification@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/cpu-execution-qualification@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_cpu_execution_qualification.py",
+      "sha256": "d060181447f91f9afa86aac7a8bc0a1323504d0ae2f152e48f90e3d8d3506508",
+      "bytes": 9578,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/cpu-execution-qualification-verdict@1",
+    "interface": "CpuExecutionQualification@1",
+    "verdict_cid": "baguqeeraqnzibzfy4sfh47bzgkotycjyvbzdgoap4o4uoqy3wlqsmk2lis5q",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "live_cpu_execution_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "simulated_results_represented_as_live": false,
+    "live_cuda_qualified": false,
+    "live_cuda_evidence_kind": "unavailable",
+    "live_model_provider_qualified": false,
+    "live_model_provider_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-036",
+    "goal_id": "PCPR-G420",
+    "promotion_status": "rnd_non_promoted",
+    "compatibility_verdict_cid": "baguqeera7faex76px5ynmgrqgg27m36x6lbepssz5gom3t45pfkd6h4bdsaa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-036 aligned Python compatibility metadata on the 3.12 floor. This task qualifies live CPU execution as R&D. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "cpu_execution": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/cpu-execution-qualification@1",
+    "interface": "CpuExecutionQualification@1",
+    "floor_schema": "ipfs_accelerate_py/assurance/cpu-execution@1",
+    "floor_interface": "CpuExecution@1",
+    "floor_task_id": "PCPR-037",
+    "floor_goal_id": "PCPR-G430",
+    "kernel": "cpu_integer_mix32",
+    "live_cpu_execution_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "cpu_identity": {
+      "backend": "cpu",
+      "system": "Linux",
+      "release": "6.17.0-1014-nvidia",
+      "machine": "aarch64",
+      "processor": "aarch64",
+      "python_version": "3.12.3",
+      "python_implementation": "CPython",
+      "cores": 20,
+      "cpuinfo_present": true,
+      "cpu_implementers": [
+        "0x41"
+      ],
+      "cpu_parts": [
+        "0xd85",
+        "0xd87"
+      ],
+      "feature_count": 49,
+      "mem_total_kb": 127601388,
+      "mem_available_kb": 33400692,
+      "origin": "live_observed",
+      "evidence_kind": "measured",
+      "live": true,
+      "simulated": false,
+      "production_authorized": false
+    },
+    "probes": [
+      {
+        "probe_id": "canonical_cpu_execution_module",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical CPU execution module declares the live stdlib canary.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/cpu_execution.py"
+        }
+      },
+      {
+        "probe_id": "ladder_exposes_live_cpu_execution",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Capability ladder exposes live CPU execution without production_authorized.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/hardware_capability_ladder.py"
+        }
+      },
+      {
+        "probe_id": "hardware_kit_uses_live_cpu_canary",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "HardwareKit CPU test uses the live stdlib canary instead of numpy-only success.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/kit/hardware_kit.py"
+        }
+      },
+      {
+        "probe_id": "cpu_identity",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live CPU identity observed from the process host.",
+        "details": {
+          "machine": "aarch64",
+          "cores": 20,
+          "python_version": "3.12.3",
+          "cpuinfo_present": true
+        }
+      },
+      {
+        "probe_id": "cpu_load",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "CPU integer kernel loaded and accepted a zero-length run.",
+        "details": {
+          "kernel": "cpu_integer_mix32"
+        }
+      },
+      {
+        "probe_id": "cpu_compute_kernel",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live CPU kernel completed with the expected digest.",
+        "details": {
+          "kernel": "cpu_integer_mix32",
+          "n": 200000,
+          "expected": 1494583840,
+          "observed": 1494583840
+        }
+      },
+      {
+        "probe_id": "cpu_output_validation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "CPU kernel output matched the pinned fixture digest.",
+        "details": {
+          "n": 8,
+          "expected": 1499458516,
+          "observed": 1499458516
+        }
+      },
+      {
+        "probe_id": "cpu_repetition",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Repeated live CPU execution produced the same digest.",
+        "details": {
+          "first": 1494583840,
+          "second": 1494583840,
+          "n": 200000
+        }
+      },
+      {
+        "probe_id": "cpu_cancellation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live CPU worker honoured cooperative cancellation and joined.",
+        "details": {
+          "thread_alive": false,
+          "finished": true
+        }
+      },
+      {
+        "probe_id": "cpu_timeout",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live CPU worker exceeded the join deadline and was recorded as Timeout.",
+        "details": {
+          "timed_out": true,
+          "outcome": "Timeout"
+        }
+      },
+      {
+        "probe_id": "cpu_cleanup",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Timeout worker was signalled and joined; no leftover CPU worker.",
+        "details": {
+          "thread_alive": false
+        }
+      },
+      {
+        "probe_id": "cpu_resource_admission_fail_closed",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "CPU resource admission refused oversubscription and did not fabricate success.",
+        "details": {
+          "available_cores": 20,
+          "requested_cores": 10020,
+          "admitted": false,
+          "outcome": "Unavailable",
+          "code": "cpu_resource_oversubscription_refused",
+          "live_oom_not_claimed": true
+        }
+      },
+      {
+        "probe_id": "production_authorized_not_granted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Live CPU execution does not grant production_authorized or ladder qualified.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_cuda_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live CUDA. nvidia-smi presence is device visibility, not CUDA qualification. Missing CUDA qualification stays typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-038"
+        }
+      },
+      {
+        "probe_id": "live_model_provider_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify a model or provider path. The CPU kernel is not model inference. Missing model/provider evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-039"
+        }
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "numpy_module": "/usr/lib/python3/dist-packages/numpy/__init__.py",
+    "numpy_required_for_cpu_canary": false,
+    "torch": "unavailable",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "nvidia_smi": "/usr/bin/nvidia-smi",
+    "nvidia_smi_is_not_cuda_qualification": true,
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live CUDA/model qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr037-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_cpu_execution_qualification.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 1.99,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_cpu_execution_qualification.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/torch are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-037.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_cpu_execution_qualification.py",
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "duration_seconds": 1.99,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_cuda_not_claimed": true,
+    "live_model_provider_not_claimed": true,
+    "production_authorized_not_granted": true,
+    "numpy_not_required_for_cpu_canary": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "live_cpu_execution_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "simulated_results_represented_as_live": false,
+    "live_cuda_qualified": false,
+    "live_model_provider_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live CUDA qualification, not live model/provider qualification, and not a closed PCPR release outcome.",
+    "Live CPU execution is qualified as R&D with a stdlib integer kernel. That is not production_authorized and not the hardware-ladder qualified rung, which still requires model compatibility (PCPR-039).",
+    "The CPU canary covers identity, load, compute, output validation, cancellation, timeout, cleanup, fail-closed resource admission, and repetition. It is not a model load or inference path.",
+    "Resource admission refused oversubscription. A live OOM kill was not induced and is not claimed.",
+    "nvidia-smi is present on the sealed PATH. Device visibility is not CUDA qualification. Live CUDA remains PCPR-038.",
+    "Live model/provider qualification remains PCPR-039.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, ipfs, z3, and torch are absent and are not recorded as passing or zero.",
+    "Numpy is present in the sealed environment but is not required for the CPU canary and is not live CPU authority.",
+    "Hermetic CpuExecutionQualification tests are candidate coverage of the live CPU canary; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
