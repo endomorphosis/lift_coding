@@ -1,0 +1,631 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-014",
+  "title": "Stabilize semantic APIs and ContextPack contract",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G220",
+  "objective_id": "PCPR-014",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-014@current-head-datasets-semantic-api-contextpack-canonical-v1",
+  "observed_at": "2026-09-02T03:06:13Z",
+  "depends_on": [
+    "PCPR-013"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-1 Datasets semantic API and ContextPack contract stabilization only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/semantic_apis.py",
+      "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_014_semantic_apis.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish DatasetsSemanticApiCatalog@1 as the closed, versioned public catalog for canonical IR identity, source lineage, ContextPack construction, proof obligations, proof-result validation, translation receipts, interpolation, CEGAR, incremental SMT, and source and rights manifests. DatasetsContextPack@1 is the canonical ContextPack identity contract using ir-canonical-identity-v1. DatasetsContextPackAuthority@0.1 and SemanticPublicAPI@1 remain compatibility-only. Free-form, advisory-as-authority, and executable-without-bounds requests fail closed. Identities are deterministic. Live solvers remain typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_datasets_py",
+    "outer_commit": "58ae31d2dce7aa8d6e35058edc78bbb2ddb34c30",
+    "outer_tree": "a25c640708322e81b17e3b4f5a0034b5d63c6ba8",
+    "outer_subject": "Merge commit 'd1151c589eb7e6222c159ecf833f8f68a1806944' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "datasets_pre_change_commit": "7567a80481d240de090c2e832cd8600e0035c642",
+    "datasets_pre_change_tree": "390003adaa362b8c583c3e98ebbe55f8d9b5e51d",
+    "datasets_gitlink": "7567a80481d240de090c2e832cd8600e0035c642",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "accelerator_commit": "d9268f23fcda1cb6d3321960550f5d39709e806f",
+    "accelerator_tree": "811f72effbe907d692d189e838cae58deb0bb463",
+    "accelerator_gitlink": "d9268f23fcda1cb6d3321960550f5d39709e806f",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "kit_commit": "a4fd25d944e6aaf25fb51e054a3f62bbcbea544d",
+    "kit_tree": "caff018b9390cc55cdcb483d1c94f31b3ee93754",
+    "kit_gitlink": "a4fd25d944e6aaf25fb51e054a3f62bbcbea544d",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/semantic_apis.py",
+      "sha256": "f59dc84747343a21f2142326d63f11f26a8dac08bcf5dc9bc1f3b1cc2659aed1",
+      "bytes": 63741,
+      "evidence_kind": "measured",
+      "interface": "DatasetsSemanticApiCatalog@1",
+      "schema": "ipfs_datasets_py/assurance/semantic-api-catalog@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+      "sha256": "b6a65c4bcbe6d6ea1ff9e3d1e93f543d84d256a5c83199f7b32144f8f22a3a5f",
+      "bytes": 19873,
+      "evidence_kind": "measured",
+      "interface": "DatasetsContextPack@1",
+      "schema": "ipfs_datasets_py/datasets-context-pack@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "sha256": "564926c6ef28271297aceff7187d7f6496e3f99c8036d7786e1dc44f6958f210",
+      "bytes": 39872,
+      "evidence_kind": "measured",
+      "interface": "LogicPlatformManifest@1"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_014_semantic_apis.py",
+      "sha256": "abf5d1c95c7ebc25f7b9a36fed67975f7037b579e9086f471c56f65bf50abeb4",
+      "bytes": 16027,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_datasets_py/assurance/semantic-api-catalog-verdict@1",
+    "interface": "DatasetsSemanticApiCatalog@1",
+    "verdict_cid": "baguqeeraohwniavwmnp27wk2ztc74ucxlco4vxjmyrjz7uei57olqraxes6a",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "semantic_apis_canonical": true,
+    "context_pack_canonical": true,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_solver_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-013",
+    "goal_id": "PCPR-G220",
+    "promotion_status": "rnd_non_promoted",
+    "inventory_task_id": "PCPR-003",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "path_id": "datasets_logic_provider_v1_freeform",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-013 made LogicProviderProtocol@2 canonical and remains rnd_non_promoted. This task publishes the remaining G220 stable semantic APIs and DatasetsContextPack@1. Free-form input cannot mint executable work. Advisory material has no authority. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "semantic_apis": {
+    "schema": "ipfs_datasets_py/assurance/semantic-api-catalog@1",
+    "interface": "DatasetsSemanticApiCatalog@1",
+    "canonical_context_pack_interface": "DatasetsContextPack@1",
+    "canonical_context_pack_schema": "ipfs_datasets_py/datasets-context-pack@1",
+    "v01_context_pack_interface": "DatasetsContextPackAuthority@0.1",
+    "v01_context_pack_maturity": "compatibility_only",
+    "pgir_semantic_api_interface": "SemanticPublicAPI@1",
+    "pgir_semantic_api_maturity": "compatibility_only",
+    "canonical_ir_identity_interface": "CanonicalIRIdentity@1",
+    "semantic_apis_canonical": true,
+    "context_pack_canonical": true,
+    "advisory_authority": "non_authoritative",
+    "missing_bounds_outcome": "rejected",
+    "freeform_payload_outcome": "rejected",
+    "operation_names": [
+      "canonical_ir_identity",
+      "source_lineage",
+      "context_pack",
+      "proof_obligation",
+      "proof_result_validation",
+      "translation_receipt",
+      "interpolation",
+      "cegar",
+      "incremental_smt",
+      "source_rights_manifest"
+    ],
+    "executable_operations": [
+      "interpolation",
+      "cegar",
+      "incremental_smt"
+    ],
+    "inventoried_surfaces": [
+      "ipfs_datasets_py/logic/ir_core/identity.py::canonical_identity",
+      "ipfs_datasets_py/logic/ir_core/source_lineage.py::SourceRelease",
+      "ipfs_datasets_py/proof_context/context_pack.py::admit_datasets_context_pack",
+      "ipfs_datasets_py/logic/ir_core/claims.py::ProofObligation",
+      "ipfs_datasets_py/logic/ir_core/protocols.py::ProofResult",
+      "ipfs_datasets_py/logic/software_verification/receipts.py::LogicTranslationReceipt",
+      "ipfs_datasets_py/logic/backends/smt/interpolation.py::InterpolationBounds",
+      "ipfs_datasets_py/logic/software_verification/cegar.py::CegarBudget",
+      "ipfs_datasets_py/logic/backends/smt/incremental.py::IncrementalSmtFingerprint",
+      "ipfs_datasets_py/logic/ir_core/source_lineage.py::RightsRecord"
+    ],
+    "probes": [
+      {
+        "probe_id": "canonical_ir_identity_profile",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical IR identity profile is ir-canonical-identity-v1.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/ir_core/identity.py",
+          "profile": "ir-canonical-identity-v1"
+        }
+      },
+      {
+        "probe_id": "source_lineage_schemas",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Source lineage v1 schemas and SourceRelease are present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/ir_core/source_lineage.py"
+        }
+      },
+      {
+        "probe_id": "source_rights_record",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "RightsRecord with fail-closed admission is present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/ir_core/source_lineage.py"
+        }
+      },
+      {
+        "probe_id": "context_pack_canonical_interface",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "DatasetsContextPack@1 is the canonical ContextPack contract.",
+        "details": {
+          "relpath": "ipfs_datasets_py/proof_context/context_pack.py",
+          "canonical": "DatasetsContextPack@1",
+          "flagged": true
+        }
+      },
+      {
+        "probe_id": "context_pack_v01_compatibility_only",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "DatasetsContextPackAuthority@0.1 remains compatibility-only.",
+        "details": {
+          "relpath": "ipfs_datasets_py/proof_context/context_pack.py",
+          "v01_maturity": "compatibility_only"
+        }
+      },
+      {
+        "probe_id": "proof_obligation_schema",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ProofObligation@1 schema ir-proof-obligation/v1 is present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/ir_core/claims.py"
+        }
+      },
+      {
+        "probe_id": "proof_result_class",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ProofResult and ExecutionBounds are present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/ir_core/protocols.py"
+        }
+      },
+      {
+        "probe_id": "translation_receipt_interface",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicTranslationReceipt@1 require-current path is present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/software_verification/receipts.py",
+          "interface": "LogicTranslationReceipt@1"
+        }
+      },
+      {
+        "probe_id": "interpolation_interface",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ValidatedCraigInterpolation@1 with InterpolationBounds is present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/backends/smt/interpolation.py",
+          "interface": "ValidatedCraigInterpolation@1"
+        }
+      },
+      {
+        "probe_id": "cegar_interface",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "BoundedInterpolationCegar@1 with CegarBudget is present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/software_verification/cegar.py",
+          "interface": "BoundedInterpolationCegar@1"
+        }
+      },
+      {
+        "probe_id": "incremental_smt_interface",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "IncrementalSmtSession@1 with fingerprint bounds is present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/backends/smt/incremental.py",
+          "interface": "IncrementalSmtSession@1"
+        }
+      },
+      {
+        "probe_id": "manifest_advertises_context_pack",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicPlatformManifest advertises DatasetsContextPack@1.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/platform/manifest.py"
+        }
+      },
+      {
+        "probe_id": "pgir_semantic_api_not_canonical",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "SemanticPublicAPI@1 remains the PGIR-080 catalog and is not the PCPR ContextPack contract.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/semantic/catalog.py",
+          "pgir_interface": "SemanticPublicAPI@1"
+        }
+      },
+      {
+        "probe_id": "corpus_rights_manifest_schema",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ir-corpus-rights-manifest/v1 is present on the corpus builder.",
+        "details": {
+          "relpath": "ipfs_datasets_py/huggingface/corpus.py"
+        }
+      },
+      {
+        "probe_id": "catalog_closed",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-014 semantic API catalog is closed and versioned.",
+        "details": {
+          "relpath": "ipfs_datasets_py/assurance/semantic_apis.py"
+        }
+      },
+      {
+        "probe_id": "identity_deterministic",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical IR identities are deterministic.",
+        "details": {
+          "identity_cid": "bafkreiageny3j2wlf5yg4gkdorhps6tf6buimdnfb4iyil5lsanke6cilm"
+        }
+      },
+      {
+        "probe_id": "context_pack_identity_deterministic",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "DatasetsContextPack@1 identities are deterministic.",
+        "details": {
+          "pack_cid": "bafkreihbzf6nr5t2xhk2jglzgbo2rxjgaubrzeh7xinjcovjvxi6qtcunq"
+        }
+      },
+      {
+        "probe_id": "freeform_context_pack_admitted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Free-form ContextPack payloads cannot mint DatasetsContextPack@1.",
+        "details": {
+          "reason": "free-form ContextPack field(s) cannot mint DatasetsContextPack@1: backend_request"
+        }
+      },
+      {
+        "probe_id": "advisory_context_pack_admitted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Advisory ContextPack material remains non-authoritative.",
+        "details": {
+          "reason": "advisory ContextPack material is non-authoritative and cannot mint DatasetsContextPack@1"
+        }
+      },
+      {
+        "probe_id": "freeform_proof_result_admitted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Free-form payloads cannot mint ProofResult@1 theorem authority.",
+        "details": {
+          "reason": "free-form payload cannot mint ProofResult@1 theorem authority"
+        }
+      },
+      {
+        "probe_id": "freeform_translation_receipt_admitted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Free-form translation payloads cannot mint LogicTranslationReceipt@1.",
+        "details": {
+          "reason": "free-form translation payload cannot mint LogicTranslationReceipt@1"
+        }
+      },
+      {
+        "probe_id": "executable_interpolation_missing_bounds_admitted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Executable interpolation requires positive finite bounds.",
+        "details": {
+          "reason": "executable interpolation requires positive finite bounds"
+        }
+      },
+      {
+        "probe_id": "executable_cegar_missing_bounds_admitted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Executable CEGAR requires a positive finite budget.",
+        "details": {
+          "reason": "executable CEGAR requires a positive finite budget"
+        }
+      },
+      {
+        "probe_id": "executable_incremental_smt_missing_bounds_admitted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Executable incremental SMT requires positive timeout and memory bounds.",
+        "details": {
+          "reason": "executable incremental SMT requires positive timeout_ms and memory_limit_mib"
+        }
+      },
+      {
+        "probe_id": "admitted_unresolved_rights",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Admitted rights require a resolved source-rights status.",
+        "details": {
+          "reason": "admitted rights require a resolved source-rights status"
+        }
+      },
+      {
+        "probe_id": "runtime_unavailable_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Semantic API probes are not represented as live.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_solver_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live solvers. Missing Z3/cvc5/Lean/Coq evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "cvc5": "unavailable",
+    "lean": "unavailable",
+    "coqtop": "unavailable",
+    "multiformats": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live solver qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr014-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_014_semantic_apis.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 1,
+      "duration_seconds": 0.36,
+      "skip_reason": "v0.1 ContextPack builder still uses the optional software-contract CID profile (multiformats), which is unavailable in the sealed environment and is not recorded as passing or failing.",
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/unit/test_pcpr_014_semantic_apis.py"
+    ],
+    "additional_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr014-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_014_semantic_apis.py tests/unit/test_pcpr_013_logic_provider_protocol.py tests/unit/test_pcpr_012_typed_outcomes.py tests/unit/test_pcpr_011_false_success_fallbacks.py tests/unit/test_pcpr_010_import_time_auto_install.py",
+      "exit_code": 0,
+      "passed": 62,
+      "failed": 0,
+      "skipped": 1,
+      "authority": false,
+      "reason": "FACP-adjacent PCPR-010 import-time auto-install, PCPR-011 false-success fallback, PCPR-012 typed-outcome, and PCPR-013 LogicProviderProtocol tests remain candidate coverage only.",
+      "evidence_kind": "measured"
+    },
+    "protocol_regression_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr014-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_013_logic_provider_protocol.py tests/unit/logic/backends/test_provider_protocol_v2.py tests/unit/logic/backends/test_protocol_v1_adapter.py tests/unit/logic/platform/test_manifest.py",
+      "exit_code": 0,
+      "passed": 118,
+      "failed": 0,
+      "authority": false,
+      "reason": "Existing LPC-050/LPC-051 protocol, handshake, and LogicPlatformManifest tests remain candidate coverage only and do not qualify live solvers or close a release.",
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/z3/cvc5/lean/multiformats are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-014.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_014_semantic_apis.py",
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 1,
+      "duration_seconds": 0.36,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "freeform_payload_cannot_admit_context_pack": true,
+    "advisory_cannot_mint_context_pack": true,
+    "freeform_cannot_mint_proof_result": true,
+    "freeform_cannot_mint_translation_receipt": true,
+    "executable_ops_require_bounds": true,
+    "admitted_unresolved_rights_rejected": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_solver_not_claimed": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "semantic_apis_canonical": true,
+    "context_pack_canonical": true,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live solver qualification, and not a closed PCPR release outcome.",
+    "DatasetsContextPackAuthority@0.1 remains importable as an explicit compatibility builder. Its pack CIDs are not reminted as DatasetsContextPack@1.",
+    "SemanticPublicAPI@1 remains the PGIR-080 catalog and is compatibility-only relative to this PCPR catalog.",
+    "Interpolation, CEGAR, and incremental SMT admission here is request-shape and bounds checking only. No solver session was opened. Live cvc5/z3/Lean/Coq evidence stays typed unavailable.",
+    "The optional software-contract CID profile (multiformats) is absent in the sealed environment. The v0.1 ContextPack builder was skipped, not recorded as passing or failing.",
+    "Schema packaging into installed distributions remains for PCPR-015. License metadata remains for PCPR-016. Live solver qualification remains for PCPR-017.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "Sealed-environment z3, cvc5, Lean, Coq, libp2p, and IPFS are absent and are not recorded as passing or zero.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, and ipfs are absent and are not recorded as passing or zero.",
+    "Hermetic DatasetsSemanticApiCatalog tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Datasets commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Datasets commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
