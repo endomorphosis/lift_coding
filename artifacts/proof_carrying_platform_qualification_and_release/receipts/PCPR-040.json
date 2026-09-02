@@ -1,0 +1,766 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-040",
+  "title": "Stabilize shared contracts",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G500",
+  "objective_id": "PCPR-040",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-040@current-head-shared-contract-stabilization-v1",
+  "observed_at": "2026-09-02T04:44:03Z",
+  "depends_on": [
+    "PCPR-017",
+    "PCPR-027",
+    "PCPR-039"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-4 shared-contract identity stabilization only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/shared_contracts.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/shared_contract_stabilization.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_shared_contract_stabilization.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/shared_contracts.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_040_shared_contracts.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/shared_contracts.py",
+      "external/ipfs_kit/tests/test_pcpr_040_shared_contracts.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish SharedContractCatalog@1 as one normative source for the fourteen PCPR shared contracts. Each contract has one schema identity, canonical DAG-JSON bytes, unknown-field rejection, int64 limits, NFC Unicode, and CIDv1/base32/sha2-256 rules. Datasets and Kit bind those identities and refuse remint. Existing owner schemas remain bindings and are not reminted. This is not a freeze, not canonical-byte/CID vectors, not negative or cross-language vectors, and not cross-repository compatibility checks. Live supervisor and CUDA re-qualification stay typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "4370706843bb3bd9bad31b5c53ced98efcfbf183",
+    "outer_tree": "ec56382d728fb144f3efb2a76bc4b072d5747607",
+    "outer_subject": "Merge commit 'c6ebe027e42991b658f839a66be7e6f1c9b653be' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "0fd4ef11c63f5a76e57cabea38e6e8eb37770995",
+    "accelerator_pre_change_tree": "f58cd5ce5a3dff5c86f691bfef31ea142d73370d",
+    "accelerator_gitlink": "0fd4ef11c63f5a76e57cabea38e6e8eb37770995",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "1635856f512c8f417577091ffd33f2834de0d62d",
+    "datasets_tree": "ebe30c3cce6d4f2c74bf6a3be8bbb07bb8c625dd",
+    "datasets_gitlink": "1635856f512c8f417577091ffd33f2834de0d62d",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "kit_commit": "93ce8c123adb5ab85b6735618a08099c4d03db09",
+    "kit_tree": "753ad198c8616051d5c214190a9fc51b0cc8216b",
+    "kit_gitlink": "93ce8c123adb5ab85b6735618a08099c4d03db09",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "kit_post_change_commit": "pending nested commit after admission",
+    "kit_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/shared_contracts.py",
+      "sha256": "bd1f0521ac94bdf9e0d4fbd1bcf8dde0b0773b0bb7e547b6dc1c6f8b9a229358",
+      "bytes": 27086,
+      "evidence_kind": "measured",
+      "interface": "SharedContractCatalog@1",
+      "schema": "ipfs_accelerate_py/assurance/shared-contracts-catalog@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/shared_contract_stabilization.py",
+      "sha256": "2d97bd10982beed4148f05b2615232e914b2d0e5e621fdf68bd74c6a08dff917",
+      "bytes": 51468,
+      "evidence_kind": "measured",
+      "interface": "SharedContractStabilization@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/shared-contract-stabilization@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_shared_contract_stabilization.py",
+      "sha256": "f120ca49074f84fc08746ac7c92f6d8255e808f0f5a0e2395a8f98b9783079bb",
+      "bytes": 9100,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/shared_contracts.py",
+      "sha256": "90c9c0ab85459c9fe9eeebee3653b9207f3b8c7eb232bd268d52feb735f452a2",
+      "bytes": 4711,
+      "evidence_kind": "measured",
+      "interface": "DatasetsSharedContractBinding@1",
+      "schema": "ipfs_datasets_py/assurance/shared-contract-binding@1"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_040_shared_contracts.py",
+      "sha256": "b3ca2f6feaa689f7100ffcd2e08778eb6aa00d1d8be850a0d343269a62085b32",
+      "bytes": 1684,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/shared_contracts.py",
+      "sha256": "87793ebe03d5e6fe807b685acc9a247430edf49df046b5985715949e12ed431a",
+      "bytes": 4538,
+      "evidence_kind": "measured",
+      "interface": "KitSharedContractBinding@1",
+      "schema": "ipfs_kit_py/assurance/shared-contract-binding@1"
+    },
+    {
+      "path": "external/ipfs_kit/tests/test_pcpr_040_shared_contracts.py",
+      "sha256": "1e57edc7d2434a35b65f67bf9f9e11d097c648907b4a770cb41234665f5cc3b3",
+      "bytes": 1494,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/shared-contract-stabilization-verdict@1",
+    "interface": "SharedContractStabilization@1",
+    "verdict_cid": "baguqeeraxym6kuq5ljps7vwbvrkyobtfhrrpbquhbgrcny4viyfxlwversna",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a",
+    "contract_count": 14,
+    "identities_unique": true,
+    "unknown_fields_rejected": true,
+    "canonicalization_deterministic": true,
+    "datasets_binding_aligned": true,
+    "kit_binding_aligned": true,
+    "simulated_results_represented_as_live": false,
+    "live_supervisor_qualified": false,
+    "live_supervisor_evidence_kind": "unavailable",
+    "live_cuda_qualified": false,
+    "live_cuda_evidence_kind": "unavailable",
+    "production_authorized": false,
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-039",
+    "goal_id": "PCPR-G430",
+    "promotion_status": "rnd_non_promoted",
+    "model_provider_verdict_cid": "baguqeeraejqvwpevn5lawzy7pie7cz2atrp62ijbwj4dqx4fvqrxgbr32tla",
+    "datasets_solver_task_id": "PCPR-017",
+    "datasets_solver_verdict_cid": "baguqeeratvkodnxdxcudgddqaxoohvglwyq34grr7zupm6pbnwqk4zrp2ubq",
+    "kit_support_matrix_task_id": "PCPR-027",
+    "kit_support_matrix_verdict_cid": "baguqeera2yepzxux4cwbuzzk2t2oz4ju6n4hkwv4gqq2o6o6jsxua55loo4a",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-017, PCPR-027, and PCPR-039 remain rnd_non_promoted R&D. This task stabilizes shared-contract identities. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "shared_contracts": {
+    "schema": "ipfs_accelerate_py/assurance/shared-contracts-catalog@1",
+    "interface": "SharedContractCatalog@1",
+    "floor_task_id": "PCPR-040",
+    "floor_goal_id": "PCPR-G500",
+    "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a",
+    "frozen": false,
+    "freeze_task": "PCPR-002",
+    "vector_task": "PCPR-041",
+    "negative_vector_task": "PCPR-042",
+    "compatibility_task": "PCPR-043",
+    "contract_count": 14,
+    "contracts": [
+      {
+        "name": "SupervisorObjectiveIntent",
+        "schema": "pcpr/shared-contracts/supervisor-objective-intent@1",
+        "interface": "SupervisorObjectiveIntent@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "pcpr/shared-contracts/supervisor-objective-intent@1",
+        "owner_interface": "SupervisorObjectiveIntent@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "ObjectiveMaterializationReceipt",
+        "schema": "pcpr/shared-contracts/objective-materialization-receipt@1",
+        "interface": "ObjectiveMaterializationReceipt@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "pcpr/shared-contracts/objective-materialization-receipt@1",
+        "owner_interface": "ObjectiveMaterializationReceipt@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "SupervisorContextPack",
+        "schema": "pcpr/shared-contracts/supervisor-context-pack@1",
+        "interface": "SupervisorContextPack@1",
+        "authority": "ipfs_datasets_py",
+        "owner_schema": "ipfs_datasets_py/datasets-context-pack@1",
+        "owner_interface": "DatasetsContextPack@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "SemanticArtifactIdentity",
+        "schema": "pcpr/shared-contracts/semantic-artifact-identity@1",
+        "interface": "SemanticArtifactIdentity@1",
+        "authority": "ipfs_datasets_py",
+        "owner_schema": "pcpr/shared-contracts/semantic-artifact-identity@1",
+        "owner_interface": "SemanticArtifactIdentity@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "DurableArtifactReceipt",
+        "schema": "pcpr/shared-contracts/durable-artifact-receipt@1",
+        "interface": "DurableArtifactReceipt@1",
+        "authority": "ipfs_kit_py",
+        "owner_schema": "pcpr/shared-contracts/durable-artifact-receipt@1",
+        "owner_interface": "DurableArtifactReceipt@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "ProofObligation",
+        "schema": "pcpr/shared-contracts/proof-obligation@1",
+        "interface": "ProofObligation@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "ipfs_accelerate_py/agent-supervisor/code-proof-obligation@1",
+        "owner_interface": "CodeProofObligation@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "ProofResult",
+        "schema": "pcpr/shared-contracts/proof-result@1",
+        "interface": "ProofResult@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "ipfs_accelerate_py/agent-supervisor/proof-receipt@1",
+        "owner_interface": "ProofReceipt@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "ProofAdmissionDecision",
+        "schema": "pcpr/shared-contracts/proof-admission-decision@1",
+        "interface": "ProofAdmissionDecision@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "pcpr/shared-contracts/proof-admission-decision@1",
+        "owner_interface": "ProofAdmissionDecision@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "ExecutionInvocation",
+        "schema": "pcpr/shared-contracts/execution-invocation@1",
+        "interface": "ExecutionInvocation@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "ipfs_accelerate_py/agent-supervisor/entrypoints/invocation-request@1",
+        "owner_interface": "InvocationRequest@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "ExecutionReceipt",
+        "schema": "pcpr/shared-contracts/execution-receipt@1",
+        "interface": "ExecutionReceipt@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "ipfs_accelerate_py/agent-supervisor/entrypoints/invocation-result@1",
+        "owner_interface": "InvocationResult@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "SupervisorEvent",
+        "schema": "pcpr/shared-contracts/supervisor-event@1",
+        "interface": "SupervisorEvent@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "pcpr/shared-contracts/supervisor-event@1",
+        "owner_interface": "SupervisorEvent@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "TaskStateTransition",
+        "schema": "pcpr/shared-contracts/task-state-transition@1",
+        "interface": "TaskStateTransition@1",
+        "authority": "ipfs_accelerate_py",
+        "owner_schema": "pcpr/shared-contracts/task-state-transition@1",
+        "owner_interface": "TaskStateTransition@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "ReleaseComponentManifest",
+        "schema": "pcpr/shared-contracts/release-component-manifest@1",
+        "interface": "ReleaseComponentManifest@1",
+        "authority": "portfolio",
+        "owner_schema": "pcpr/shared-contracts/release-component-manifest@1",
+        "owner_interface": "ReleaseComponentManifest@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      },
+      {
+        "name": "PortfolioCompatibilityManifest",
+        "schema": "pcpr/shared-contracts/portfolio-compatibility-manifest@1",
+        "interface": "PortfolioCompatibilityManifest@1",
+        "authority": "portfolio",
+        "owner_schema": "pcpr/shared-contracts/portfolio-compatibility-manifest@1",
+        "owner_interface": "PortfolioCompatibilityManifest@1",
+        "disposition": "normative_stabilized_not_frozen",
+        "unknown_field_policy": "reject",
+        "freeze_task": "PCPR-002",
+        "vector_task": "PCPR-041",
+        "negative_vector_task": "PCPR-042",
+        "compatibility_task": "PCPR-043",
+        "normative_task": "PCPR-040"
+      }
+    ],
+    "probes": [
+      {
+        "probe_id": "canonical_catalog_module",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical shared-contract catalog declares the fourteen contracts.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/shared_contracts.py"
+        }
+      },
+      {
+        "probe_id": "fourteen_unique_identities",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Fourteen shared contracts each have one schema identity.",
+        "details": {
+          "count": 14,
+          "schema_count": 14
+        }
+      },
+      {
+        "probe_id": "schema_versions_declared",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Each contract schema declares one version and rejects unknown fields.",
+        "details": {}
+      },
+      {
+        "probe_id": "unknown_fields_rejected",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Unknown fields are rejected fail-closed.",
+        "details": {}
+      },
+      {
+        "probe_id": "canonicalization_deterministic",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Catalog canonical bytes are deterministic under key reordering.",
+        "details": {
+          "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a"
+        }
+      },
+      {
+        "probe_id": "cid_rules_closed",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "CID rules reject hex, Qm, and uppercase identifiers.",
+        "details": {}
+      },
+      {
+        "probe_id": "unicode_nfc_identity",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Identity strings normalize to NFC before canonicalization.",
+        "details": {}
+      },
+      {
+        "probe_id": "integer_limits_int64",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Integer fields reject values outside the int64 domain.",
+        "details": {}
+      },
+      {
+        "probe_id": "floats_rejected",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Floating-point values cannot mint a shared-contract identity.",
+        "details": {}
+      },
+      {
+        "probe_id": "owner_schemas_not_reminted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Existing owner schemas remain bindings and are not reminted.",
+        "details": {
+          "SupervisorContextPack": "ipfs_datasets_py/datasets-context-pack@1",
+          "ProofObligation": "ipfs_accelerate_py/agent-supervisor/code-proof-obligation@1",
+          "ProofResult": "ipfs_accelerate_py/agent-supervisor/proof-receipt@1",
+          "ExecutionInvocation": "ipfs_accelerate_py/agent-supervisor/entrypoints/invocation-request@1",
+          "ExecutionReceipt": "ipfs_accelerate_py/agent-supervisor/entrypoints/invocation-result@1"
+        }
+      },
+      {
+        "probe_id": "datasets_binding_does_not_remint",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Datasets binding pins the catalog identities and refuses remint.",
+        "details": {
+          "relpath": "external/ipfs_datasets/ipfs_datasets_py/assurance/shared_contracts.py",
+          "missing_schema_ids": [],
+          "refuse_remint": true,
+          "sibling_import": false
+        }
+      },
+      {
+        "probe_id": "kit_binding_does_not_remint",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Kit binding pins the catalog identities and refuses remint.",
+        "details": {
+          "relpath": "external/ipfs_kit/ipfs_kit_py/assurance/shared_contracts.py",
+          "missing_schema_ids": [],
+          "refuse_remint": true,
+          "sibling_import": false
+        }
+      },
+      {
+        "probe_id": "freeze_not_claimed",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-040 stabilizes identities. Freeze remains PCPR-002 and is not claimed.",
+        "details": {
+          "freeze_task": "PCPR-002",
+          "frozen": false
+        }
+      },
+      {
+        "probe_id": "canonical_byte_vectors_deferred",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Exact canonical-byte and CID vectors remain PCPR-041 and are not claimed here.",
+        "details": {
+          "deferred_task_id": "PCPR-041"
+        }
+      },
+      {
+        "probe_id": "negative_cross_language_vectors_deferred",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Negative and cross-language vectors remain PCPR-042 and are not claimed here.",
+        "details": {
+          "deferred_task_id": "PCPR-042"
+        }
+      },
+      {
+        "probe_id": "cross_repository_compatibility_deferred",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Cross-repository compatibility checks remain PCPR-043 and are not claimed here.",
+        "details": {
+          "deferred_task_id": "PCPR-043"
+        }
+      },
+      {
+        "probe_id": "production_authorized_not_granted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Shared-contract stabilization does not grant production_authorized or a freeze.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_supervisor_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-001 live qualification remains typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-001"
+        }
+      },
+      {
+        "probe_id": "live_cuda_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not re-qualify live CUDA. Missing CUDA re-qualification stays typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-038"
+        }
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "numpy_module": "/usr/lib/python3/dist-packages/numpy/__init__.py",
+    "numpy_not_used_as_qualification": true,
+    "requests_module": "/usr/lib/python3/dist-packages/requests/__init__.py",
+    "requests_not_used_as_qualification": true,
+    "torch": "unavailable",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "aiohttp": "unavailable",
+    "z3": "unavailable",
+    "ipfs": "unavailable",
+    "nvcc": "unavailable",
+    "nvidia_smi": "/usr/bin/nvidia-smi",
+    "nvidia_smi_is_not_contract_qualification": true,
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live CUDA qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr040-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_shared_contract_stabilization.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.43,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_shared_contract_stabilization.py"
+    ],
+    "additional_candidate_suites": {
+      "datasets": {
+        "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_040_shared_contracts.py",
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "duration_seconds": 0.06,
+        "evidence_kind": "measured"
+      },
+      "kit": {
+        "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_kit /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_040_shared_contracts.py",
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "duration_seconds": 0.04,
+        "noconftest_reason": "Sealed-environment aiohttp is unavailable. tests/conftest.py imports aiohttp, so kit collection uses --noconftest. That is not live kit backend qualification.",
+        "evidence_kind": "measured"
+      }
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/torch/duckdb under ~/.local are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-040.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_shared_contract_stabilization.py",
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "duration_seconds": 0.43,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "unknown_fields_rejected": true,
+    "floats_rejected": true,
+    "raw_hex_cid_rejected": true,
+    "identities_not_reminted": true,
+    "contracts_not_frozen": true,
+    "canonical_byte_vectors_not_claimed": true,
+    "live_supervisor_not_claimed": true,
+    "live_cuda_not_reclaimed": true,
+    "production_authorized_not_granted": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "identities_unique": true,
+    "unknown_fields_rejected": true,
+    "canonicalization_deterministic": true,
+    "datasets_binding_aligned": true,
+    "kit_binding_aligned": true,
+    "contracts_frozen": false,
+    "production_authorized": false,
+    "simulated_results_represented_as_live": false,
+    "live_supervisor_qualified": false,
+    "live_cuda_qualified": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome.",
+    "Shared-contract identities are stabilized as one normative catalog. Exact canonical-byte and CID vectors remain PCPR-041. Negative and cross-language vectors remain PCPR-042. Cross-repository compatibility checks remain PCPR-043.",
+    "Existing owner schemas (DatasetsContextPack@1, code-proof-obligation@1, proof-receipt@1, invocation-request@1, invocation-result@1) remain bindings and are not reminted as the shared identity.",
+    "Identity fixtures used to exercise admission are compact envelopes, not the PCPR-041 vector set, and are not live execution or proof qualification.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing. This task does not re-qualify CUDA, solvers, or model/provider paths.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, aiohttp, ipfs, z3, torch, and nvcc are absent and are not recorded as passing or zero.",
+    "Sealed-environment aiohttp is absent. Kit tests/conftest.py imports aiohttp, so the Kit candidate suite was collected with --noconftest. That is not live Kit backend qualification.",
+    "Numpy and requests are present in the sealed environment but are not required for shared-contract stabilization and are not live authority.",
+    "Hermetic SharedContractStabilization tests are candidate coverage of the catalog; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate, Datasets, and Kit commit and tree identities are pending the accepted nested commits."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate, Datasets, and Kit commits and the outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
