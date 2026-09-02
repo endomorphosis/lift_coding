@@ -1,0 +1,420 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-012",
+  "title": "Make typed outcomes canonical",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G210",
+  "objective_id": "PCPR-012",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-012@current-head-datasets-typed-outcomes-canonical-v1",
+  "observed_at": "2026-09-02T02:33:33Z",
+  "depends_on": [
+    "PCPR-011"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-1 Datasets typed-outcome canonicalization only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/typed_outcomes.py",
+      "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "external/ipfs_datasets/ipfs_datasets_py/dataset_manager.py",
+      "external/ipfs_datasets/ipfs_datasets_py/core_operations/dataset_loader.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_012_typed_outcomes.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Make typed outcomes canonical for inventoried datasets_untyped_none_fallbacks. Public load_dataset is never silent None: missing HuggingFace datasets resolve to LoadDatasetSurface / unavailable_load_dataset with DatasetsFormalClaimOutcomes@1 Unavailable. Surface maturity is stable, beta, experimental, simulation_only, or unavailable. dataset_manager and DatasetLoader use the same typed stand-in. Explicit simulation is Simulated and never live. Live solvers and live HuggingFace hub loads remain typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_datasets_py",
+    "outer_commit": "dde6b7fa805424623a8b04163159ec764782df05",
+    "outer_tree": "69eab73de285ae02320f67677227a9af9799fafb",
+    "outer_subject": "Merge commit 'd86b8fbf15419cf98f289e8946cb2211638d14e4' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "datasets_pre_change_commit": "d1453221b9e4e86cc845bffe49f3ca65d28688a1",
+    "datasets_pre_change_tree": "34201b5fb18a0fc145aea26922a8b876b0be2629",
+    "datasets_gitlink": "d1453221b9e4e86cc845bffe49f3ca65d28688a1",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "accelerator_commit": "aa263a7f2a6953b38fd200a898f6c8d2aa12fb98",
+    "accelerator_tree": "5e23813edf6420f5e4bf7b47cdd2840d420ae772",
+    "accelerator_gitlink": "aa263a7f2a6953b38fd200a898f6c8d2aa12fb98",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "kit_commit": "1900d8508f49ad7f7dae7bc253d9ed51a7418a70",
+    "kit_tree": "14e5d8c1786ea1aaf753161dba5665eb44d6d32e",
+    "kit_gitlink": "1900d8508f49ad7f7dae7bc253d9ed51a7418a70",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/typed_outcomes.py",
+      "sha256": "bca83c28b49f980443b5277b15f9657d09fe893d14891ac79108af7df7eaecd1",
+      "bytes": 33695,
+      "evidence_kind": "measured",
+      "interface": "DatasetsTypedOutcomesCanonical@1",
+      "schema": "ipfs_datasets_py/assurance/typed-outcomes-canonical@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9",
+      "bytes": 56829,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/dataset_manager.py",
+      "sha256": "c15c8ac3147d951e5e70145150e0de72dd345e2921a4b2248dc4342e73d330e0",
+      "bytes": 4998,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/core_operations/dataset_loader.py",
+      "sha256": "b0565b8e3299e83df7a25511d95b0684edbdcb6eea9bd57683e95a9e0ca91d01",
+      "bytes": 10385,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_012_typed_outcomes.py",
+      "sha256": "f629427e975983d12a350aa350bcc2fb62880cd1157e34ce9c511add65030ff2",
+      "bytes": 9915,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_datasets_py/assurance/typed-outcomes-canonical-verdict@1",
+    "interface": "DatasetsTypedOutcomesCanonical@1",
+    "verdict_cid": "baguqeera4urjsjdnc4onh2aanu6xqggndixve77glgrmpgvokorjwwpyc7zq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "untyped_none_fallback_present": false,
+    "typed_outcomes_canonical": true,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_solver_evidence_kind": "unavailable",
+    "live_hub_qualified": false,
+    "live_hub_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-011",
+    "goal_id": "PCPR-G210",
+    "promotion_status": "rnd_non_promoted",
+    "inventory_task_id": "PCPR-003",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "path_id": "datasets_untyped_none_fallbacks",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-003 inventoried datasets_untyped_none_fallbacks as present; this task replaces silent None public load/dataset symbols with typed Unavailable or explicit Simulated outcomes and makes DatasetsFormalClaimOutcomes@1 the canonical closed vocabulary. PCPR-011 false-success fallback removal remains rnd_non_promoted. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "typed_outcomes": {
+    "schema": "ipfs_datasets_py/assurance/typed-outcomes-canonical@1",
+    "interface": "DatasetsTypedOutcomesCanonical@1",
+    "untyped_none_fallback_present": false,
+    "typed_outcomes_canonical": true,
+    "missing_dependency_outcome": "unavailable",
+    "explicit_simulation_outcome": "simulated",
+    "canonical_closed_outcomes": [
+      "Attempted",
+      "Compensated",
+      "Failed",
+      "Observed",
+      "Rejected",
+      "Simulated",
+      "Unavailable",
+      "Unknown",
+      "Verified"
+    ],
+    "surface_maturities": [
+      "beta",
+      "experimental",
+      "simulation_only",
+      "stable",
+      "unavailable"
+    ],
+    "inventoried_surfaces": [
+      "ipfs_datasets_py/__init__.py::load_dataset",
+      "ipfs_datasets_py/__init__.py::IPFSDatasets",
+      "ipfs_datasets_py/dataset_manager.py::load_dataset",
+      "ipfs_datasets_py/core_operations/dataset_loader.py::hf_load_dataset"
+    ],
+    "explicit_simulation_surfaces": [
+      "explicit_simulation=True",
+      "IPFS_DATASETS_EXPLICIT_SIMULATION"
+    ],
+    "probes": [
+      {
+        "probe_id": "init_module_level_load_dataset_none",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Package init no longer assigns load_dataset = None at module level.",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py"
+        }
+      },
+      {
+        "probe_id": "init_getattr_load_dataset_none",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Package __getattr__ no longer assigns load_dataset to None.",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py"
+        }
+      },
+      {
+        "probe_id": "dataset_manager_load_dataset_none",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "dataset_manager no longer assigns load_dataset = None.",
+        "details": {
+          "relpath": "ipfs_datasets_py/dataset_manager.py"
+        }
+      },
+      {
+        "probe_id": "dataset_loader_hf_load_dataset_none",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "dataset_loader no longer assigns hf_load_dataset = None.",
+        "details": {
+          "relpath": "ipfs_datasets_py/core_operations/dataset_loader.py"
+        }
+      },
+      {
+        "probe_id": "canonical_closed_outcomes_present",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "DatasetsFormalClaimOutcomes@1 closed vocabulary is present.",
+        "details": {
+          "relpath": "ipfs_datasets_py/assurance/outcomes.py"
+        }
+      },
+      {
+        "probe_id": "runtime_public_load_dataset_is_none",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Runtime public load_dataset is not silent None.",
+        "details": {
+          "unavailable": true,
+          "surface_maturity": "unavailable"
+        }
+      },
+      {
+        "probe_id": "runtime_unavailable_load_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Unavailable load_dataset does not return status success.",
+        "details": {
+          "status": "unavailable",
+          "outcome": "Unavailable",
+          "ok": false
+        }
+      },
+      {
+        "probe_id": "runtime_unavailable_load_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Unavailable and explicit-simulation loads are not represented as live.",
+        "details": {
+          "payload_live": false,
+          "simulated_status": "simulated"
+        }
+      },
+      {
+        "probe_id": "live_solver_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live solvers. Missing Z3/cvc5/Lean/Coq evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_hub_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live HuggingFace hub loads. Missing live hub evidence stays typed unavailable and is not recorded as passing.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "cvc5": "unavailable",
+    "lean": "unavailable",
+    "coqtop": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live solver qualification, live hub qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr012-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_012_typed_outcomes.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.08,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/unit/test_pcpr_012_typed_outcomes.py"
+    ],
+    "additional_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr012-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_012_typed_outcomes.py tests/unit/test_pcpr_011_false_success_fallbacks.py tests/unit/test_pcpr_010_import_time_auto_install.py tests/unit/test_formal_assurance_dataset_outcomes.py",
+      "exit_code": 0,
+      "passed": 66,
+      "failed": 0,
+      "authority": false,
+      "reason": "FACP-023 dataset-outcome, PCPR-010 import-time auto-install, and PCPR-011 false-success fallback tests remain candidate coverage only.",
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-012.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_012_typed_outcomes.py",
+      "exit_code": 0,
+      "passed": 14,
+      "failed": 0,
+      "duration_seconds": 0.08,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "public_load_dataset_is_not_none": true,
+    "unavailable_load_does_not_return_success": true,
+    "missing_dependency_is_unavailable_not_success": true,
+    "explicit_simulation_is_simulated_not_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_solver_not_claimed": true,
+    "live_hub_not_claimed": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "untyped_none_fallback_present": false,
+    "typed_outcomes_canonical": true,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_hub_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live solver qualification, not live HuggingFace hub qualification, and not a closed PCPR release outcome.",
+    "Explicit simulation remains available via explicit_simulation=True or IPFS_DATASETS_EXPLICIT_SIMULATION. Those paths are labeled Simulated and are not live qualification.",
+    "A bound HuggingFace datasets implementation, when importable, is experimental and is not live hub qualification.",
+    "LogicProviderProtocol canonicalization remains for PCPR-013.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "Sealed-environment z3, cvc5, Lean, Coq, libp2p, and IPFS are absent and are not recorded as passing or zero.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, and ipfs are absent and are not recorded as passing or zero.",
+    "Hermetic DatasetsTypedOutcomesCanonical tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Datasets commit and tree identities are pending the accepted nested commit.",
+    "Internal vector-store optional-import load_dataset in ipfs_datasets_py/vector_stores/faiss_store.py remains a local None when datasets is absent; it is not a public package symbol and is not live qualification."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Datasets commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
