@@ -1,0 +1,502 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-013",
+  "title": "Canonicalize LogicProviderProtocol",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G220",
+  "objective_id": "PCPR-013",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-013@current-head-datasets-logic-provider-protocol-canonical-v1",
+  "observed_at": "2026-09-02T02:49:27Z",
+  "depends_on": [
+    "PCPR-012"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-1 Datasets LogicProviderProtocol canonicalization only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/logic/backends/provider.py",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/backends/protocol_v2.py",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/backends/protocol_v1_adapter.py",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/logic_provider_protocol.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_013_logic_provider_protocol.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Make LogicProviderProtocol@2 canonical. Public LogicProviderProtocol aliases LogicProviderProtocolV2. Free-form v1 payloads cannot mint executable BackendRequest@2. The v1 adapter is explicit, fail-closed, and compatibility-only. Advisory v1 data is non-authoritative. Executable @2 operations require positive finite bounds. LogicPlatformManifest advertises LogicProviderProtocol@2 as the handshake protocol; v1 remains listed as compatibility-only. Live solvers remain typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_datasets_py",
+    "outer_commit": "154417d105c231e287384024c86b8043f2beeab9",
+    "outer_tree": "294b3cc66139abf7b61a6100215673dfeb6e6bb6",
+    "outer_subject": "Merge commit '6243332a189bc86d684fac69bd4da835265d53d7' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "datasets_pre_change_commit": "d54a6494f50b5982758f8a6d2aafe24ccc7523b8",
+    "datasets_pre_change_tree": "f7f82b0ccddc3ccb2628f04f26dd17f644ee53a6",
+    "datasets_gitlink": "d54a6494f50b5982758f8a6d2aafe24ccc7523b8",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "accelerator_commit": "aa263a7f2a6953b38fd200a898f6c8d2aa12fb98",
+    "accelerator_tree": "5e23813edf6420f5e4bf7b47cdd2840d420ae772",
+    "accelerator_gitlink": "aa263a7f2a6953b38fd200a898f6c8d2aa12fb98",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "kit_commit": "2bc27b1f56c8b6481de1efd47e3e2d900b948f44",
+    "kit_tree": "ff7edc6eeb7a8dd33fdf53a137761d3bd79865fe",
+    "kit_gitlink": "2bc27b1f56c8b6481de1efd47e3e2d900b948f44",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/logic_provider_protocol.py",
+      "sha256": "1a0a5fc13c81ac853c6848b20213502b42128f395f18dddd25a9e9df56161a62",
+      "bytes": 36965,
+      "evidence_kind": "measured",
+      "interface": "DatasetsLogicProviderProtocolCanonical@1",
+      "schema": "ipfs_datasets_py/assurance/logic-provider-protocol-canonical@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/backends/protocol_v2.py",
+      "sha256": "fa30caa5a8dec3d0a3784776909c41c70a03c2dbbdacd00934fcf33cb56a6c29",
+      "bytes": 56522,
+      "evidence_kind": "measured",
+      "interface": "LogicProviderProtocol@2",
+      "schema": "ipfs_datasets_py/logic-provider-protocol@2"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/backends/protocol_v1_adapter.py",
+      "sha256": "11b58c4687bc64957f1a87969245975ec051c24e309d75055b22e70bf4e3d41b",
+      "bytes": 31230,
+      "evidence_kind": "measured",
+      "interface": "LogicProviderProtocolV1Adapter@1",
+      "schema": "ipfs_datasets_py/logic-provider-v1-adapter@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/backends/provider.py",
+      "sha256": "ba11770d1f2d065ff96bf25b36cb9450ae010d457192bfd609e61794733953b7",
+      "bytes": 33248,
+      "evidence_kind": "measured",
+      "interface": "LogicProviderProtocol@1",
+      "maturity": "compatibility_only"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "sha256": "0efb5b838fd6e7e52d9c7f7f4e84d65f02b5f5ebf12ec139ec1d6d985272582f",
+      "bytes": 38562,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_013_logic_provider_protocol.py",
+      "sha256": "d004d4bdcf03176324adff98c934ad1047c846e1f68aef4039abf52aacc1ae40",
+      "bytes": 12084,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_datasets_py/assurance/logic-provider-protocol-canonical-verdict@1",
+    "interface": "DatasetsLogicProviderProtocolCanonical@1",
+    "verdict_cid": "baguqeerazronp37ld63hphyesw2o3vxhv24e22idzsmzvmd54wwhr5e5ddoq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "v1_freeform_executable_present": false,
+    "logic_provider_protocol_canonical": true,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_solver_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-012",
+    "goal_id": "PCPR-G210",
+    "promotion_status": "rnd_non_promoted",
+    "inventory_task_id": "PCPR-003",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "path_id": "datasets_logic_provider_v1_freeform",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-003 inventoried datasets_logic_provider_v1_freeform as present; this task makes LogicProviderProtocol@2 canonical, keeps the v1 adapter explicit and fail-closed, and forbids free-form payloads from minting executable BackendRequest@2. PCPR-012 typed-outcome canonicalization remains rnd_non_promoted. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "logic_provider_protocol": {
+    "schema": "ipfs_datasets_py/assurance/logic-provider-protocol-canonical@1",
+    "interface": "DatasetsLogicProviderProtocolCanonical@1",
+    "canonical_protocol_interface": "LogicProviderProtocol@2",
+    "canonical_protocol_version": 2,
+    "v1_protocol_interface": "LogicProviderProtocol@1",
+    "v1_adapter_interface": "LogicProviderProtocolV1Adapter@1",
+    "v1_freeform_executable_present": false,
+    "logic_provider_protocol_canonical": true,
+    "v1_maturity": "compatibility_only",
+    "advisory_authority": "non_authoritative",
+    "missing_bounds_outcome": "rejected",
+    "freeform_payload_outcome": "rejected",
+    "canonical_operations": [
+      "attest",
+      "capability",
+      "check",
+      "prove",
+      "reconstruct",
+      "translate",
+      "verify"
+    ],
+    "executable_operations": [
+      "attest",
+      "check",
+      "prove",
+      "reconstruct",
+      "translate",
+      "verify"
+    ],
+    "inventoried_surfaces": [
+      "ipfs_datasets_py/logic/backends/provider.py::LogicProvider",
+      "ipfs_datasets_py/logic/backends/protocol_v2.py::LogicProviderProtocol",
+      "ipfs_datasets_py/logic/backends/protocol_v1_adapter.py::LogicProviderProtocolV1Adapter@1",
+      "ipfs_datasets_py/logic/platform/manifest.py::LogicPlatformManifest"
+    ],
+    "probes": [
+      {
+        "probe_id": "protocol_v2_version_is_2",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicProviderProtocol@2 protocol_version is 2.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/backends/protocol_v2.py"
+        }
+      },
+      {
+        "probe_id": "protocol_v2_canonical_flag",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicProviderProtocol@2 is marked canonical.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/backends/protocol_v2.py"
+        }
+      },
+      {
+        "probe_id": "protocol_v2_canonical_alias",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicProviderProtocol is an alias of LogicProviderProtocolV2.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/backends/protocol_v2.py"
+        }
+      },
+      {
+        "probe_id": "v1_not_canonical",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicProvider@1 remains importable as compatibility-only, not canonical.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/backends/provider.py"
+        }
+      },
+      {
+        "probe_id": "v1_adapter_explicit",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "The version-1 adapter is explicit, fail-closed, and not canonical.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/backends/protocol_v1_adapter.py"
+        }
+      },
+      {
+        "probe_id": "manifest_advertises_v2",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicPlatformManifest advertises LogicProviderProtocol@2.",
+        "details": {
+          "relpath": "ipfs_datasets_py/logic/platform/manifest.py"
+        }
+      },
+      {
+        "probe_id": "freeform_payload_admitted_as_v2",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Free-form v1 payloads are not admitted as LogicProviderProtocol@2.",
+        "details": {
+          "reason": "LogicProvider@1 generic payloads cannot be admitted as LogicProviderProtocol@2; use an explicit v1 adapter (LPC-051)"
+        }
+      },
+      {
+        "probe_id": "new_write_accepted_v1",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "New provider writes reject v1 generic envelopes.",
+        "details": {
+          "reason": "new provider writes must use LogicProviderProtocol@2; v1 generic payloads require adapt_v1_provider_request (LPC-051)"
+        }
+      },
+      {
+        "probe_id": "v1_payload_minted_backend_request",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "v1 free-form payloads cannot mint executable BackendRequest@2.",
+        "details": {
+          "reason": "v1 free-form payload key 'backend_request' cannot mint or bypass BackendRequest@2; supply BackendRequest@2 as an explicit adapter argument"
+        }
+      },
+      {
+        "probe_id": "executable_missing_bounds_admitted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Executable LogicProviderProtocol@2 operations require positive finite bounds.",
+        "details": {
+          "reason": "ProveCheckRequestV2 requires positive finite bounds"
+        }
+      },
+      {
+        "probe_id": "advisory_carries_executable_authority",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Advisory v1 data remains non-authoritative and non-executable.",
+        "details": {
+          "disposition": "advisory"
+        }
+      },
+      {
+        "probe_id": "capability_non_executable",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Capability remains a non-executable typed @2 request.",
+        "details": {}
+      },
+      {
+        "probe_id": "canonical_write_admits_typed_v2",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical write admits typed LogicProviderProtocol@2 and the platform handshake advertises @2.",
+        "details": {
+          "manifest_v2": true,
+          "operation_v2": true
+        }
+      },
+      {
+        "probe_id": "canonical_alias_is_v2",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicProviderProtocol names LogicProviderProtocolV2; v1 and the v1 adapter remain compatibility-only.",
+        "details": {
+          "adapter_interface": "LogicProviderProtocolV1Adapter@1",
+          "canonical_interface": "LogicProviderProtocol@2"
+        }
+      },
+      {
+        "probe_id": "runtime_unavailable_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Protocol canonicalization probes are not represented as live.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_solver_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live solvers. Missing Z3/cvc5/Lean/Coq evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "cvc5": "unavailable",
+    "lean": "unavailable",
+    "coqtop": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live solver qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr013-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_013_logic_provider_protocol.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.23,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/unit/test_pcpr_013_logic_provider_protocol.py"
+    ],
+    "additional_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr013-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_013_logic_provider_protocol.py tests/unit/test_pcpr_012_typed_outcomes.py tests/unit/test_pcpr_011_false_success_fallbacks.py tests/unit/test_pcpr_010_import_time_auto_install.py",
+      "exit_code": 0,
+      "passed": 49,
+      "failed": 0,
+      "authority": false,
+      "reason": "FACP-adjacent PCPR-010 import-time auto-install, PCPR-011 false-success fallback, and PCPR-012 typed-outcome tests remain candidate coverage only.",
+      "evidence_kind": "measured"
+    },
+    "protocol_regression_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr013-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_013_logic_provider_protocol.py tests/unit/logic/backends/test_provider_protocol_v2.py tests/unit/logic/backends/test_protocol_v1_adapter.py tests/unit/logic/platform/test_manifest.py",
+      "exit_code": 0,
+      "passed": 118,
+      "failed": 0,
+      "authority": false,
+      "reason": "Existing LPC-050/LPC-051 protocol and handshake tests remain candidate coverage only and do not qualify live solvers or close a release.",
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/z3/cvc5/lean are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-013.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_013_logic_provider_protocol.py",
+      "exit_code": 0,
+      "passed": 14,
+      "failed": 0,
+      "duration_seconds": 0.23,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "freeform_payload_cannot_admit_as_v2": true,
+    "new_writes_reject_v1": true,
+    "v1_payload_cannot_mint_backend_request": true,
+    "executable_ops_require_bounds": true,
+    "advisory_v1_is_non_authoritative": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_solver_not_claimed": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "v1_freeform_executable_present": false,
+    "logic_provider_protocol_canonical": true,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live solver qualification, and not a closed PCPR release outcome.",
+    "LogicProvider@1 remains importable as an explicit compatibility envelope. Dual-read requires LogicProviderProtocolV1Adapter@1 and cannot mint BackendRequest@2 from free-form payload keys.",
+    "Semantic APIs and ContextPack contract stabilization remain for PCPR-014.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "Sealed-environment z3, cvc5, Lean, Coq, libp2p, and IPFS are absent and are not recorded as passing or zero.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, and ipfs are absent and are not recorded as passing or zero.",
+    "Hermetic DatasetsLogicProviderProtocolCanonical tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Datasets commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Datasets commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
