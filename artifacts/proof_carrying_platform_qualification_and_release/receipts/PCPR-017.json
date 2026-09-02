@@ -1,0 +1,562 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-017",
+  "title": "Qualify real Datasets solver paths",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G230",
+  "objective_id": "PCPR-017",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-017@current-head-datasets-solver-qualification-v1",
+  "observed_at": "2026-09-02T03:57:57Z",
+  "depends_on": [
+    "PCPR-016"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-1 Datasets solver-path qualification only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/solver_qualification.py",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/external_provers/README.md",
+      "external/ipfs_datasets/README.md",
+      "external/ipfs_datasets/tests/unit/test_pcpr_017_solver_qualification.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish DatasetsSolverQualification@1. Bounded live Z3 4.16.0, cvc5 1.3.3, Lean 4.31.0, and Coq/Rocq 9.1.1 were observed on the approved digest-bound root /opt/ipfs-accelerate/formal-toolchains/fvt083-20260801-01 (root-owned, non-writable). Sealed PATH has no z3/cvc5/lean/coqtop; user-home ~/.local and ~/.elan copies are rejected. Hermetic canonical IR round-trip, source-lineage, ContextPack identity, translation receipt, and proof/counterexample fixtures are measured_hermetic and not live. README and external_provers docs no longer present auto-install or production-ready language as live qualification. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_datasets_py",
+    "outer_commit": "63f9544891f661928857ebbd4c39bd2d10ca0c2d",
+    "outer_tree": "1599b104880161d2cf26854b7e0fe966574e3ac1",
+    "outer_subject": "Merge commit 'eef00639cec1807b46c9553074db33b461cd3b61' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "datasets_pre_change_commit": "3e54f3b5b021c81accc1bcc6dbd03071c2307cd4",
+    "datasets_pre_change_tree": "97f45fde01e874d8c157a368464cb31e375e97d4",
+    "datasets_gitlink": "3e54f3b5b021c81accc1bcc6dbd03071c2307cd4",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "accelerator_commit": "7b4f094ca966e961ddac7bf0fc96f873a93e0f80",
+    "accelerator_tree": "118d10ad140ea40c5710b312cff1c8a90cb999cb",
+    "accelerator_gitlink": "7b4f094ca966e961ddac7bf0fc96f873a93e0f80",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "kit_commit": "b0597f8d1d153e75e38d20265fffcd4405130ab9",
+    "kit_tree": "6a9a57bb59be47465b78366e15e99a12fdd572c5",
+    "kit_gitlink": "b0597f8d1d153e75e38d20265fffcd4405130ab9",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/solver_qualification.py",
+      "sha256": "f3fd403c4ff589713c02b941a49db733ba87e27185eaba315e60f17b936dabde",
+      "bytes": 54423,
+      "evidence_kind": "measured",
+      "interface": "DatasetsSolverQualification@1",
+      "schema": "ipfs_datasets_py/assurance/solver-qualification@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "sha256": "1e4b9c066a2c15c6b96f5d5381e1fba676679ff65863b2d741e711972e0d3626",
+      "bytes": 41705,
+      "evidence_kind": "measured",
+      "interface": "LogicPlatformManifest@1"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_017_solver_qualification.py",
+      "sha256": "63b1a9eb2a7c8375c37f18d4d48a07efd6a6d88fe6236fa0505eada0e346b6b0",
+      "bytes": 11086,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/README.md",
+      "sha256": "861a46017a8b267e2fe58835092171d2524da6be0181dc048fbdf005ca13e08e",
+      "bytes": 38228,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/external_provers/README.md",
+      "sha256": "c52e2979fa41eb0ec79380802597ea7c97c770e5603fe6ec4b6aa3e1cbb383aa",
+      "bytes": 19771,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_datasets_py/assurance/solver-qualification-verdict@1",
+    "interface": "DatasetsSolverQualification@1",
+    "verdict_cid": "baguqeeratvkodnxdxcudgddqaxoohvglwyq34grr7zupm6pbnwqk4zrp2ubq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "hermetic_semantic_workflows_qualified": true,
+    "live_z3_qualified": true,
+    "live_cvc5_qualified": true,
+    "live_lean_qualified": true,
+    "live_coq_qualified": true,
+    "live_solver_qualified": true,
+    "live_solver_evidence_kind": "measured_live",
+    "live_z3_evidence_kind": "measured_live",
+    "live_cvc5_evidence_kind": "measured_live",
+    "live_lean_evidence_kind": "measured_live",
+    "live_coq_evidence_kind": "measured_live",
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-016",
+    "goal_id": "PCPR-G230",
+    "promotion_status": "rnd_non_promoted",
+    "inventory_task_id": "PCPR-003",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-016 published DatasetsLicenseMetadata@1 and remains rnd_non_promoted. This task qualifies bounded Datasets solver paths. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "solver_qualification": {
+    "schema": "ipfs_datasets_py/assurance/solver-qualification@1",
+    "interface": "DatasetsSolverQualification@1",
+    "import_side_effects": "none",
+    "verdict_cid": "baguqeeratvkodnxdxcudgddqaxoohvglwyq34grr7zupm6pbnwqk4zrp2ubq",
+    "sealed_path_solvers": {
+      "z3": "unavailable",
+      "cvc5": "unavailable",
+      "lean": "unavailable",
+      "coqtop": "unavailable"
+    },
+    "live_source": "approved_digest_bound_managed_root",
+    "digest_bound_root": "/opt/ipfs-accelerate/formal-toolchains/fvt083-20260801-01",
+    "rejected_live_sources": [
+      "user_home",
+      "user_site",
+      "simulated_fixture",
+      "auto_install"
+    ],
+    "expected_formal_toolchain_deployment_identity": "fa9916ef2e4a927ae633309de7ef09b9d85e798e9a6711ae13bc502c6015e0c8",
+    "probes": [
+      {
+        "probe_id": "canonical_ir_roundtrip",
+        "present": true,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical IR identity is deterministic under ir-canonical-identity-v1",
+        "details": {
+          "cid": "bafkreidnpe7g5winjhgrs5ydkni4mo4qoi6hvrrjxmpicv3zt3bcrincju",
+          "digest": "sha256:6d793e6ed90d49cd1977035351c63b90723c7ac629bb1e8157799ec228a1a24d"
+        }
+      },
+      {
+        "probe_id": "source_lineage_validation",
+        "present": true,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "SourceRelease lineage identity round-trips",
+        "details": {
+          "record_cid": "bafkreifdc3e25parfwgti4jnsyukgzzd2nf7x37hctqqbpjg645uwjusy4"
+        }
+      },
+      {
+        "probe_id": "context_pack_identity",
+        "present": true,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "DatasetsContextPack@1 identity is deterministic",
+        "details": {
+          "pack_cid": "bafkreiazzkgbroumxu2iy7duj66nat3h6a3chjj6dtjpsgcqgjjgn33pn4"
+        }
+      },
+      {
+        "probe_id": "translation_receipt",
+        "present": true,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "SMT compiler produced a current LogicTranslationReceipt@1",
+        "details": {
+          "interface": "LogicTranslationReceipt@1",
+          "receipt_id": "bafkreia4bomaanyq3alas3g6aju5nw3voejiqd2sukohdekiwir3mdswsm",
+          "source_family_id": "software_verification",
+          "target_family_id": "smt"
+        }
+      },
+      {
+        "probe_id": "hermetic_proof_workflow",
+        "present": true,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Hermetic SMT fixture proved the bounded theorem-by-negation obligation",
+        "details": {
+          "disposition": "proved",
+          "live": false,
+          "translation_receipt_id": "bafkreia4bomaanyq3alas3g6aju5nw3voejiqd2sukohdekiwir3mdswsm"
+        }
+      },
+      {
+        "probe_id": "hermetic_counterexample_workflow",
+        "present": true,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Hermetic SMT fixture produced a satisfying assignment",
+        "details": {
+          "disposition": "satisfiable",
+          "live": false
+        }
+      },
+      {
+        "probe_id": "readme_auto_install_not_live",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "README states auto-install and user-home solvers are not live qualification",
+        "details": {
+          "auto_install_claimed_live": false
+        }
+      },
+      {
+        "probe_id": "auto_install_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Auto-install is not represented as live qualification",
+        "details": {}
+      },
+      {
+        "probe_id": "manifest_advertises_solver_qualification",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicPlatformManifest advertises DatasetsSolverQualification@1.",
+        "details": {}
+      },
+      {
+        "probe_id": "user_home_solvers_not_live",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "User-home ~/.local and ~/.elan solver copies are rejected as live evidence",
+        "details": {}
+      },
+      {
+        "probe_id": "user_home_solver_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "User-home solvers are not represented as live.",
+        "details": {}
+      },
+      {
+        "probe_id": "python_user_site_solver_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed PYTHONNOUSERSITE Python modules are the only live Python evidence.",
+        "details": {}
+      },
+      {
+        "probe_id": "hermetic_results_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Hermetic SMT fixtures are measured_hermetic and not live.",
+        "details": {}
+      },
+      {
+        "probe_id": "simulated_results_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Simulated results are not represented as live.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_z3_solver",
+        "present": true,
+        "evidence_kind": "measured_live",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live z3 proved the bounded theorem and produced a sat model",
+        "details": {
+          "ok": true,
+          "path": "/opt/ipfs-accelerate/formal-toolchains/fvt083-20260801-01/provers/bin/z3",
+          "proof_ok": true,
+          "proof_verdict": "unsat",
+          "sat_ok": true,
+          "sat_verdict": "sat",
+          "sha256": "9496faf344fc64efa725b689ee6928f123da717d265a752d5929a59e267521e3",
+          "size": 19519432,
+          "solver_version": "Z3 version 4.16.0 - 64 bit",
+          "source": "approved_digest_bound_managed_root",
+          "translation_receipt_id": "bafkreia4bomaanyq3alas3g6aju5nw3voejiqd2sukohdekiwir3mdswsm",
+          "user_home": false,
+          "user_writable": false
+        }
+      },
+      {
+        "probe_id": "live_cvc5_solver",
+        "present": true,
+        "evidence_kind": "measured_live",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live cvc5 proved the bounded theorem and produced a sat model",
+        "details": {
+          "ok": true,
+          "path": "/opt/ipfs-accelerate/formal-toolchains/fvt083-20260801-01/provers/bin/cvc5",
+          "proof_ok": true,
+          "proof_verdict": "unsat",
+          "sat_ok": true,
+          "sat_verdict": "sat",
+          "sha256": "a5df5ceb97311b31b3232d1f232c4a79cb88127419a1aabeff33dea682e06c40",
+          "size": 255,
+          "solver_version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]",
+          "source": "approved_digest_bound_managed_root",
+          "translation_receipt_id": "bafkreia4bomaanyq3alas3g6aju5nw3voejiqd2sukohdekiwir3mdswsm",
+          "user_home": false,
+          "user_writable": false
+        }
+      },
+      {
+        "probe_id": "live_lean_solver",
+        "present": true,
+        "evidence_kind": "measured_live",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live Lean accepted theorem pcpr017 : True := trivial",
+        "details": {
+          "exit_code": 0,
+          "ok": true,
+          "path": "/opt/ipfs-accelerate/formal-toolchains/fvt083-20260801-01/lean-v4.31.0/bin/lean",
+          "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+          "size": 13824,
+          "solver_version": "Lean (version 4.31.0, aarch64-unknown-linux-gnu, commit 68218e876d2a38b1985b8590fff244a83c321783, Release)",
+          "source": "approved_digest_bound_managed_root",
+          "stderr": "",
+          "stdout": "",
+          "user_home": false,
+          "user_writable": false
+        }
+      },
+      {
+        "probe_id": "live_coq_solver",
+        "present": true,
+        "evidence_kind": "measured_live",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live Coq/Rocq accepted Lemma pcpr017 : True",
+        "details": {
+          "exit_code": 0,
+          "ok": true,
+          "path": "/opt/ipfs-accelerate/formal-toolchains/fvt083-20260801-01/provers/bin/coqc",
+          "sha256": "9893704ee0c2eff3493c7244f23f39a018f392729de8a1dbc7e364622a8321b3",
+          "size": 414,
+          "solver_version": "The Rocq Prover, version 9.1.1",
+          "source": "approved_digest_bound_managed_root",
+          "stderr": "",
+          "stdout": "",
+          "user_home": false,
+          "user_writable": false
+        }
+      },
+      {
+        "probe_id": "live_solver_qualification",
+        "present": true,
+        "evidence_kind": "measured_live",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Bounded live Z3, cvc5, and one Lean or Coq path were observed",
+        "details": {
+          "cvc5": true,
+          "lean_or_coq": true,
+          "z3": true
+        }
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "cvc5": "unavailable",
+    "lean": "unavailable",
+    "coqtop": "unavailable",
+    "z3_python_module": "unavailable",
+    "cvc5_python_module": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr017-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_017_solver_qualification.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 1.81,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/unit/test_pcpr_017_solver_qualification.py"
+    ],
+    "additional_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr017-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_017_solver_qualification.py tests/unit/logic/platform/test_manifest.py tests/unit/test_pcpr_016_license_metadata.py",
+      "exit_code": 0,
+      "passed": 51,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 2.21,
+      "authority": false,
+      "reason": "PCPR-016 license metadata and LogicPlatformManifest tests remain candidate coverage only.",
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/z3/cvc5/lean/multiformats are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-017.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_017_solver_qualification.py",
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 1.81,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_results_not_represented_as_live": true,
+    "hermetic_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "user_home_solvers_not_live": true,
+    "python_user_site_solvers_not_live": true,
+    "auto_install_not_live": true,
+    "sealed_path_z3_unavailable": true,
+    "sealed_path_cvc5_unavailable": true,
+    "sealed_path_lean_unavailable": true,
+    "sealed_path_coqtop_unavailable": true,
+    "hermetic_pass_cannot_qualify_supervisor": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "hermetic_semantic_workflows_qualified": true,
+    "live_z3_qualified": true,
+    "live_cvc5_qualified": true,
+    "live_lean_qualified": true,
+    "live_coq_qualified": true,
+    "live_solver_qualified": true,
+    "simulated_results_represented_as_live": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome.",
+    "Sealed validation PATH has no z3, cvc5, lean, or coqtop. Live solver evidence is the approved digest-bound root /opt/ipfs-accelerate/formal-toolchains/fvt083-20260801-01, which is root-owned and non-writable.",
+    "Provider-local ~/.local/bin/z3, ~/.local/bin/cvc5, ~/.elan/bin/lean, and user-site Python z3 were observed and rejected as live qualification.",
+    "Sealed PYTHONNOUSERSITE Python z3 and cvc5 modules are typed unavailable.",
+    "Hermetic SMT fixtures qualify the proof/counterexample workflow as measured_hermetic only. They do not mint live solver authority.",
+    "Bounded live obligations are one theorem-by-negation (x>=1 entails x>0), one sat Boolean, Lean theorem True, and Coq Lemma True. They do not qualify the full solver surface, Hammer reconstruction, or kernel-level mathlib/stdlib corpora.",
+    "cvc5 and coqc on the digest-bound root are wrapper scripts; recorded sha256 values are of those launchers, not the inner static binaries.",
+    "The expected validation-runner formal-toolchain deployment identity fa9916ef2e4a927ae633309de7ef09b9d85e798e9a6711ae13bc502c6015e0c8 is the sealed PATH contract. This task does not add z3/cvc5/lean/coq as required validation commands and does not claim that identity hashes the solver binaries.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, and ipfs are absent and are not recorded as passing or zero.",
+    "Hermetic DatasetsSolverQualification tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Datasets commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Datasets commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
