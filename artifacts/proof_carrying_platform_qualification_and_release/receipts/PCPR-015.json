@@ -1,0 +1,528 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-015",
+  "title": "Package schemas and shared vectors",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G230",
+  "objective_id": "PCPR-015",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-015@current-head-datasets-schema-packaging-v1",
+  "observed_at": "2026-09-02T03:25:00Z",
+  "depends_on": [
+    "PCPR-014"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-1 Datasets schema and shared-vector packaging only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schema_packaging.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/catalog.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/canonical-ir-identity.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/cegar-budget.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/datasets-context-pack.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/incremental-smt.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/interpolation-bounds.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/proof-obligation.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/proof-result.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/source-lineage.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/source-rights.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/translation-receipt.schema.json",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/vectors/recipes.json",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_015_schema_packaging.py",
+      "external/ipfs_datasets/pyproject.toml",
+      "external/ipfs_datasets/setup.py",
+      "external/ipfs_datasets/MANIFEST.in",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish DatasetsSchemaPackaging@1 and DatasetsSharedVectors@1 as packaged, importlib.resources-loaded contracts. PCPR-stable schemas and compact shared vectors ship as package data. Installed distributions do not load a sibling Datasets tests/ tree. Sibling tests/fixtures paths fail closed. Owner schemas already in the package are declared in pyproject.toml, setup.py, and MANIFEST.in. Live solvers remain typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_datasets_py",
+    "outer_commit": "fe4e8ba344ef1fc27a4400159356f824d1a4f53b",
+    "outer_tree": "3dfd9088b07afc6eb7bdbad03016d7b262d94ce6",
+    "outer_subject": "Merge commit '69fb8953c74ec9bdb311aa119bbd8f3b2db7fcaa' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "datasets_pre_change_commit": "b913deb13341ff9fc68f586395d6beabf83d9f11",
+    "datasets_pre_change_tree": "0c378d3e3dba73aaa2eb1848c88d50a87838c219",
+    "datasets_gitlink": "b913deb13341ff9fc68f586395d6beabf83d9f11",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "accelerator_commit": "9bdc03fb2aa10ee1f7a72f2f9c7efaa19bd08653",
+    "accelerator_tree": "10ccf93a671ba3b17cf08be8ea20285ddd4e8d54",
+    "accelerator_gitlink": "9bdc03fb2aa10ee1f7a72f2f9c7efaa19bd08653",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "kit_commit": "3f6e67f2991b3e9487914e82756c846296894ebe",
+    "kit_tree": "211e92d47cde37b07d4fb6fc6a61260a1bfff79a",
+    "kit_gitlink": "3f6e67f2991b3e9487914e82756c846296894ebe",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/schema_packaging.py",
+      "sha256": "115b8649f5024d5b998ea549b73d780d60e9b79b1a4eebcec29be4d391f81bd7",
+      "bytes": 46361,
+      "evidence_kind": "measured",
+      "interface": "DatasetsSchemaPackaging@1",
+      "schema": "ipfs_datasets_py/assurance/schema-packaging-catalog@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/schemas/catalog.json",
+      "sha256": "c7e4bd505ea0b9d2ab6ebd8f3716ba7daa16a53148d1baad56d6d34448c55905",
+      "bytes": 8005,
+      "evidence_kind": "measured",
+      "catalog_cid": "baguqeerajqth5cj57yo3g7c7rbtk5z3ccdwxeg3duin3kl4oykzydgd3breq"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/vectors/recipes.json",
+      "sha256": "0ce36afd0c2288da180a0915bae707da454a7e6e897f3a515481aedf29fa7ae4",
+      "bytes": 8687,
+      "evidence_kind": "measured",
+      "interface": "DatasetsSharedVectors@1",
+      "schema": "ipfs_datasets_py/assurance/shared-vectors@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "sha256": "5039717aa7245ef8c9fe5a6a581d2327e0c62200709eb792414d655cb3e3a75b",
+      "bytes": 40688,
+      "evidence_kind": "measured",
+      "interface": "LogicPlatformManifest@1"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_015_schema_packaging.py",
+      "sha256": "9d22e16980f4059c3d521607896f0a21873a92e6cb6156958ea9a8c6df8d832f",
+      "bytes": 10625,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/pyproject.toml",
+      "sha256": "8687f46c8d95d0bb1e809c8d0ba15ca5b2046b47d9e00588db1c21257ec6cbad",
+      "bytes": 19573,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/setup.py",
+      "sha256": "37982246e17eb1d328412f92926aaf1c507d957ce14f365da5de7b619dac4d4a",
+      "bytes": 29046,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/MANIFEST.in",
+      "sha256": "c8f7d45546d444ea71823bbc8a07deae9e45ac3b36303faf24b76d559d4b57a1",
+      "bytes": 1917,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_datasets_py/assurance/schema-packaging-verdict@1",
+    "interface": "DatasetsSchemaPackaging@1",
+    "verdict_cid": "baguqeeraekudb3vqa647evdgz4vm4fhwndmgdskrbpbqdxf33uolhqmna6eq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "schemas_packaged": true,
+    "shared_vectors_packaged": true,
+    "sibling_tests_required": false,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_solver_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-014",
+    "goal_id": "PCPR-G220",
+    "promotion_status": "rnd_non_promoted",
+    "inventory_task_id": "PCPR-003",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-014 published DatasetsSemanticApiCatalog@1 and DatasetsContextPack@1 and remains rnd_non_promoted. This task packages those contracts and compact shared vectors as installable package data so an installed distribution does not need a sibling tests tree. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "schema_packaging": {
+    "schema": "ipfs_datasets_py/assurance/schema-packaging-catalog@1",
+    "interface": "DatasetsSchemaPackaging@1",
+    "vector_interface": "DatasetsSharedVectors@1",
+    "vector_schema": "ipfs_datasets_py/assurance/shared-vectors@1",
+    "catalog_cid": "baguqeerajqth5cj57yo3g7c7rbtk5z3ccdwxeg3duin3kl4oykzydgd3breq",
+    "requires_sibling_tests_tree": false,
+    "loader": "importlib.resources",
+    "import_side_effects": "none",
+    "pcpr_stable_schema_names": [
+      "schema_packaging_catalog",
+      "datasets_context_pack",
+      "canonical_ir_identity",
+      "source_lineage",
+      "proof_obligation",
+      "proof_result",
+      "translation_receipt",
+      "interpolation_bounds",
+      "cegar_budget",
+      "incremental_smt",
+      "source_rights"
+    ],
+    "positive_vector_count": 10,
+    "negative_vector_count": 8,
+    "packaging_globs": [
+      "assurance/schemas/*.json",
+      "assurance/vectors/*.json",
+      "logic/bridge/schemas/*.json",
+      "logic/intent_ir/intent_ir.schema.json",
+      "logic/legal_ir/schemas/*.json",
+      "logic/software_contracts/adversarial_assurance/schemas/*.json",
+      "logic/software_contracts/semantic_governor/schemas/*.json",
+      "logic/software_contracts/semantic_state/schemas/*.json",
+      "logic/ui_ux_ir/ui_ux_ir.schema.json",
+      "processors/groth16_backend/schemas/*.json"
+    ],
+    "probes": [
+      {
+        "probe_id": "catalog_packaged",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "schema catalog is packaged"
+      },
+      {
+        "probe_id": "pcpr_schemas_packaged",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-stable schemas load from package data"
+      },
+      {
+        "probe_id": "owner_schemas_packaged",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Owner schemas load from package data"
+      },
+      {
+        "probe_id": "shared_vectors_packaged",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "shared vectors load from package data",
+        "details": {
+          "vector_count": 18
+        }
+      },
+      {
+        "probe_id": "sibling_tests_not_required",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Installed packaging does not require a sibling tests tree."
+      },
+      {
+        "probe_id": "tests_path_rejected",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "installed packaging must not load a sibling tests tree",
+        "details": {
+          "path": "tests/fixtures/context_pack.json"
+        }
+      },
+      {
+        "probe_id": "packaging_globs_declared",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Packaging globs are declared in catalog and packaging files."
+      },
+      {
+        "probe_id": "packaging_manifest_in",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "MANIFEST.in recursive-includes packaged schemas and vectors."
+      },
+      {
+        "probe_id": "packaging_setup_py",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "setup.py package_data includes packaged schemas and vectors."
+      },
+      {
+        "probe_id": "packaging_pyproject",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "pyproject.toml package-data includes packaged schemas and vectors."
+      },
+      {
+        "probe_id": "include_package_data",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "include-package-data remains enabled."
+      },
+      {
+        "probe_id": "positive_vectors_admit",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Positive shared vectors admit against packaged schemas.",
+        "details": {
+          "count": 10
+        }
+      },
+      {
+        "probe_id": "negative_vectors_reject",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Negative shared vectors fail closed.",
+        "details": {
+          "count": 8
+        }
+      },
+      {
+        "probe_id": "identity_deterministic",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Packaged schema catalog identities are deterministic.",
+        "details": {
+          "identity_cid": "baguqeerajqth5cj57yo3g7c7rbtk5z3ccdwxeg3duin3kl4oykzydgd3breq"
+        }
+      },
+      {
+        "probe_id": "manifest_advertises_packaging",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicPlatformManifest advertises DatasetsSchemaPackaging@1."
+      },
+      {
+        "probe_id": "loader_does_not_use_tests_tree",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Schema and vector loaders use importlib.resources, not tests/."
+      },
+      {
+        "probe_id": "sibling_tests_loader_used",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sibling tests-tree loading is not used."
+      },
+      {
+        "probe_id": "simulated_results_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Simulated results are not represented as live."
+      },
+      {
+        "probe_id": "runtime_unavailable_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Packaging probes are not represented as live."
+      },
+      {
+        "probe_id": "live_solver_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live solvers. Missing Z3/cvc5/Lean/Coq evidence stays typed unavailable and is not recorded as False or passing."
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "cvc5": "unavailable",
+    "lean": "unavailable",
+    "coqtop": "unavailable",
+    "multiformats": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live solver qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr015-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_015_schema_packaging.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.24,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/unit/test_pcpr_015_schema_packaging.py"
+    ],
+    "additional_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr015-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_015_schema_packaging.py tests/unit/test_pcpr_014_semantic_apis.py tests/unit/test_pcpr_013_logic_provider_protocol.py tests/unit/logic/platform/test_manifest.py tests/unit/logic/software_contracts/semantic_state/test_schema_packaging.py tests/unit_tests/test_formal_verification_packaging.py tests/unit_tests/logic/zkp/test_provekit_optional_dependencies.py",
+      "exit_code": 0,
+      "passed": 79,
+      "failed": 0,
+      "skipped": 1,
+      "duration_seconds": 1.27,
+      "authority": false,
+      "skip_reason": "PCPR-014 v0.1 ContextPack builder still uses the optional software-contract CID profile (multiformats), which is unavailable in the sealed environment and is not recorded as passing or failing.",
+      "reason": "FACP-adjacent PCPR-013/PCPR-014, LogicPlatformManifest, semantic-state packaging, formal-verification packaging, and Provekit package-data tests remain candidate coverage only.",
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/z3/cvc5/lean/multiformats are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-015.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_015_schema_packaging.py",
+      "exit_code": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.24,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "sibling_tests_path_rejected": true,
+    "freeform_context_pack_rejected": true,
+    "advisory_context_pack_rejected": true,
+    "missing_bounds_rejected": true,
+    "unknown_fields_fail_closed": true,
+    "admitted_unresolved_rights_rejected": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_solver_not_claimed": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "schemas_packaged": true,
+    "shared_vectors_packaged": true,
+    "sibling_tests_required": false,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live solver qualification, and not a closed PCPR release outcome.",
+    "Packaged schemas are the installable identity and compact request/bounds shapes for PCPR-stable Datasets contracts. They do not freeze cross-repository supervisor contracts.",
+    "Shared vectors are compact recipes, not live solver sessions and not a full golden envelope dump.",
+    "Owner schemas remain owned by their leaf modules. This task only declares them as package data so installed wheels can load them without a sibling tests tree.",
+    "License metadata remains for PCPR-016. Live solver qualification remains for PCPR-017.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "Sealed-environment z3, cvc5, Lean, Coq, libp2p, and IPFS are absent and are not recorded as passing or zero.",
+    "The optional software-contract CID profile (multiformats) is absent in the sealed environment. Related PCPR-014 v0.1 ContextPack coverage was skipped in candidate suites, not recorded as passing or failing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, and ipfs are absent and are not recorded as passing or zero.",
+    "Hermetic DatasetsSchemaPackaging tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Datasets commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Datasets commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
