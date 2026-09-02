@@ -1,0 +1,454 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-011",
+  "title": "Remove Datasets false-success fallbacks",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G210",
+  "objective_id": "PCPR-011",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-011@current-head-datasets-false-success-fallback-removal-v1",
+  "observed_at": "2026-09-02T02:19:48Z",
+  "depends_on": [
+    "PCPR-010"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-1 Datasets false-success fallback removal only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "external/ipfs_datasets/ipfs_datasets_py/p2p_networking/libp2p_kit.py",
+      "external/ipfs_datasets/ipfs_datasets_py/p2p_networking/libp2p_kit_stub.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/false_success_fallbacks.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_011_false_success_fallbacks.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Remove Datasets false-success fallbacks inventoried as datasets_false_success_fallbacks. _FallbackIPFSDatasets.download_dataset and upload_dataset no longer return status success; missing core backends stay typed Unavailable via DatasetsFormalClaimOutcomes@1. libp2p_kit and libp2p_kit_stub create_distributed_dataset return Unavailable unless the caller selects explicit_simulation, in which case the outcome is Simulated and never live. Closed non-success statuses are used; simulation requires explicit caller selection. Live solvers and live libp2p/IPFS transport remain typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_datasets_py",
+    "outer_commit": "8e9a372978813ac1c60900e804970123372f1c85",
+    "outer_tree": "b161e001c56e83cf45b4d1154389c26f19dd79cc",
+    "outer_subject": "Merge commit '41a5550a30cd7e9111509435ae41c7f09da5c501' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "datasets_pre_change_commit": "1ab49a5b4c08292963dd177efa4363b5119ebc10",
+    "datasets_pre_change_tree": "30f0117f9b7a4d74e4e48b45ee46200db938c22d",
+    "datasets_gitlink": "1ab49a5b4c08292963dd177efa4363b5119ebc10",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "accelerator_commit": "d4aa008d66033574911e8bdde6cfe12e9817958b",
+    "accelerator_tree": "2e3dd404a6ff7530346ff0b0dc0575e28a521383",
+    "accelerator_gitlink": "d4aa008d66033574911e8bdde6cfe12e9817958b",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "kit_commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+    "kit_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/false_success_fallbacks.py",
+      "sha256": "40176c44e5d60c18686cabfdf582cd11f84962f2c57a0f6964ecd84f22e65641",
+      "bytes": 35692,
+      "evidence_kind": "measured",
+      "interface": "DatasetsFalseSuccessFallbackRemoval@1",
+      "schema": "ipfs_datasets_py/assurance/false-success-fallback-removal@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "sha256": "b004b44b7398dc2020b229ee5e2593dc355be0f1ce4cd153117b605172e42e9a",
+      "bytes": 56882,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/p2p_networking/libp2p_kit.py",
+      "sha256": "4d81a65f393faf9121fbe57475c61a63ff3b877d6c17102ac1bf5316ca149d6b",
+      "bytes": 3997,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/p2p_networking/libp2p_kit_stub.py",
+      "sha256": "709e4f91cdc6b4ce8ed0c1d4c494e84cfc401cc460859eca1b3df5d053720bc6",
+      "bytes": 3948,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_011_false_success_fallbacks.py",
+      "sha256": "814118765db2a765ceaa5e3cc23d5884f8e89fdb76dd3e207451cc4b7bde5eba",
+      "bytes": 9880,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_datasets_py/assurance/false-success-fallback-removal-verdict@1",
+    "interface": "DatasetsFalseSuccessFallbackRemoval@1",
+    "verdict_cid": "baguqeerad6iwavifwwgrmh5utyxjt37gomi2xfbof5khgzslmhbzoisqkzaa",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "false_success_fallback_present": false,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_solver_evidence_kind": "unavailable",
+    "live_transport_qualified": false,
+    "live_transport_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-010",
+    "goal_id": "PCPR-G210",
+    "promotion_status": "rnd_non_promoted",
+    "inventory_task_id": "PCPR-003",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "path_id": "datasets_false_success_fallbacks",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-003 inventoried datasets_false_success_fallbacks as present; this task replaces those fallbacks with typed unavailable or explicit simulated outcomes. PCPR-010 import-time auto-install removal remains rnd_non_promoted. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "false_success_fallbacks": {
+    "schema": "ipfs_datasets_py/assurance/false-success-fallback-removal@1",
+    "interface": "DatasetsFalseSuccessFallbackRemoval@1",
+    "false_success_fallback_present": false,
+    "missing_backend_outcome": "unavailable",
+    "explicit_simulation_outcome": "simulated",
+    "closed_non_success_statuses": [
+      "unavailable",
+      "unsupported",
+      "denied",
+      "rejected",
+      "simulated",
+      "attempted",
+      "failed",
+      "compensated"
+    ],
+    "inventoried_surfaces": [
+      "ipfs_datasets_py/__init__.py::_FallbackIPFSDatasets.download_dataset",
+      "ipfs_datasets_py/__init__.py::_FallbackIPFSDatasets.upload_dataset",
+      "ipfs_datasets_py/p2p_networking/libp2p_kit.py::DistributedDatasetManager.create_distributed_dataset",
+      "ipfs_datasets_py/p2p_networking/libp2p_kit_stub.py::DistributedDatasetManager.create_distributed_dataset"
+    ],
+    "explicit_simulation_surfaces": [
+      "explicit_simulation=True",
+      "IPFS_DATASETS_EXPLICIT_SIMULATION"
+    ],
+    "probes": [
+      {
+        "probe_id": "fallback_download_status_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "_FallbackIPFSDatasets.download_dataset does not return status success.",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py",
+          "method": "download_dataset"
+        }
+      },
+      {
+        "probe_id": "fallback_upload_status_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "_FallbackIPFSDatasets.upload_dataset does not return status success.",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py",
+          "method": "upload_dataset"
+        }
+      },
+      {
+        "probe_id": "fallback_class_status_success_literal",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "_FallbackIPFSDatasets source does not contain a status-success literal.",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py"
+        }
+      },
+      {
+        "probe_id": "libp2p_kit_status_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "libp2p_kit.create_distributed_dataset does not return status success.",
+        "details": {
+          "relpath": "ipfs_datasets_py/p2p_networking/libp2p_kit.py"
+        }
+      },
+      {
+        "probe_id": "libp2p_kit_stub_implementation_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "libp2p_kit no longer pairs Stub implementation with status success.",
+        "details": {
+          "relpath": "ipfs_datasets_py/p2p_networking/libp2p_kit.py"
+        }
+      },
+      {
+        "probe_id": "libp2p_kit_stub_status_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "libp2p_kit_stub.create_distributed_dataset does not return status success.",
+        "details": {
+          "relpath": "ipfs_datasets_py/p2p_networking/libp2p_kit_stub.py"
+        }
+      },
+      {
+        "probe_id": "libp2p_stub_file_stub_implementation_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "libp2p_kit_stub no longer pairs Stub implementation with status success.",
+        "details": {
+          "relpath": "ipfs_datasets_py/p2p_networking/libp2p_kit_stub.py"
+        }
+      },
+      {
+        "probe_id": "runtime_fallback_download_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Runtime fallback download returns typed unavailable, not success.",
+        "details": {
+          "status": "unavailable",
+          "outcome": "Unavailable",
+          "ok": false,
+          "defect_id": "DS-FALSE-001"
+        }
+      },
+      {
+        "probe_id": "runtime_fallback_upload_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Runtime fallback upload returns typed unavailable, not success.",
+        "details": {
+          "status": "unavailable",
+          "outcome": "Unavailable",
+          "ok": false,
+          "defect_id": "DS-FALSE-003"
+        }
+      },
+      {
+        "probe_id": "runtime_libp2p_create_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Runtime libp2p_kit create returns typed unavailable, not success.",
+        "details": {
+          "status": "unavailable"
+        }
+      },
+      {
+        "probe_id": "runtime_libp2p_stub_create_success",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Runtime libp2p_kit_stub create returns typed unavailable, not success.",
+        "details": {
+          "status": "unavailable"
+        }
+      },
+      {
+        "probe_id": "runtime_explicit_simulation_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Explicit simulation is labeled Simulated and is not represented as live.",
+        "details": {
+          "download_status": "simulated",
+          "libp2p_status": "simulated"
+        }
+      },
+      {
+        "probe_id": "live_solver_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live solvers. Missing Z3/cvc5/Lean/Coq evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_transport_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live libp2p or IPFS transport. Missing live backends stay typed unavailable and are not recorded as passing.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live solver qualification, live transport qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr011-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_011_false_success_fallbacks.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.11,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/unit/test_pcpr_011_false_success_fallbacks.py"
+    ],
+    "additional_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr011-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_011_false_success_fallbacks.py tests/unit/test_formal_assurance_dataset_outcomes.py tests/unit/test_pcpr_010_import_time_auto_install.py",
+      "exit_code": 0,
+      "passed": 52,
+      "failed": 0,
+      "authority": false,
+      "reason": "FACP-023 dataset-outcome and PCPR-010 import-time auto-install tests remain candidate coverage only.",
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-011.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_011_false_success_fallbacks.py",
+      "exit_code": 0,
+      "passed": 12,
+      "failed": 0,
+      "duration_seconds": 0.11,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "fallback_download_does_not_return_success": true,
+    "fallback_upload_does_not_return_success": true,
+    "libp2p_stub_does_not_return_success": true,
+    "missing_backend_is_unavailable_not_success": true,
+    "explicit_simulation_is_simulated_not_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_solver_not_claimed": true,
+    "live_transport_not_claimed": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "false_success_fallback_present": false,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_transport_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live solver qualification, not live transport qualification, and not a closed PCPR release outcome.",
+    "Explicit simulation remains available via explicit_simulation=True or IPFS_DATASETS_EXPLICIT_SIMULATION. Those paths are labeled Simulated and are not live qualification.",
+    "Untyped None public load/dataset symbols remain for PCPR-012.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "Sealed-environment z3, cvc5, Lean, Coq, libp2p, and IPFS are absent and are not recorded as passing or zero.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, and ipfs are absent and are not recorded as passing or zero.",
+    "Hermetic DatasetsFalseSuccessFallbackRemoval tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Datasets commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Datasets commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
