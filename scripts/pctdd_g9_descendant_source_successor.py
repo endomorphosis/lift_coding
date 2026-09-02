@@ -1737,7 +1737,7 @@ def _validation_authority_projection(
                 *(counts.get(name) for name in count_fields),
             ]
             if (
-                phase.get("schema") != "pctdd/pytest-phase-outcome@1"
+                phase.get("schema") != "pctdd/pytest-phase-outcome@2"
                 or not isinstance(phase.get("sha256"), str)
                 or not str(phase["sha256"]).startswith("sha256:")
                 or not all(type(number) is int and number >= 0 for number in numbers)
@@ -1844,7 +1844,7 @@ def _validation_is_admitted(
     test_count = int(phase["test_count"])
     phase_count = int(phase["phase_count"])
     if (
-        phase.get("schema") != "pctdd/pytest-phase-outcome@1"
+        phase.get("schema") != "pctdd/pytest-phase-outcome@2"
         or test_count <= 0
         or phase_count != test_count * 3
         or int(phase["fully_passed_test_count"]) != test_count

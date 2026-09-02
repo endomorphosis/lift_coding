@@ -41,6 +41,7 @@ FORBIDDEN_TOKENS: Final[frozenset[str]] = frozenset(
     {"&&", "||", ";", "|", "&", ">", ">>", "<", "<<"}
 )
 PYTEST_REPORT_ENV: Final[str] = "PCTDD_PYTEST_PHASE_REPORT"
+PYTEST_REQUIRED_TARGET_ENV: Final[str] = "PCTDD_REQUIRED_TEST_TARGET"
 # ``external/ipfs_accelerate/scripts`` is a regular Python package and shadows
 # the repository-root ``scripts`` namespace once its package root is admitted.
 # Admit this file's directory directly and import the evidence plugin by its
@@ -145,7 +146,33 @@ W1_BASELINE_COMMANDS: Final[dict[str, tuple[tuple[str, tuple[str, ...]], ...]]] 
     ),
 }
 
-_PYTEST_PHASE_REPORTS: list[dict[str, Any]] = []
+
+class _PytestPhaseCollector:
+    """Process-local collector whose identity is fixed by the operator plugin.
+
+    Worker tests execute in the same interpreter as pytest hooks.  Keeping the
+    evidence population behind a dedicated object, and verifying the exact
+    list identity at session finish, prevents a test from replacing the
+    historical module-level list to rewrite controller-owned node identities.
+    The collector is evidence transport only; admission remains in
+    :func:`_load_required_phase_evidence` in the parent process.
+    """
+
+    __slots__ = (
+        "canonical_target",
+        "node_id_aliases",
+        "reports",
+        "reports_identity",
+    )
+
+    def __init__(self) -> None:
+        self.canonical_target = ""
+        self.node_id_aliases: tuple[str, ...] = ()
+        self.reports: list[dict[str, Any]] = []
+        self.reports_identity = id(self.reports)
+
+
+_PYTEST_PHASE_COLLECTOR = _PytestPhaseCollector()
 
 
 class ProfileError(ValueError):
@@ -411,11 +438,50 @@ def _sealed_duckdb_extension_directory() -> str:
     return str(next(iter(directories)))
 
 
+def _pytest_node_id_aliases(config: Any, canonical_target: str) -> tuple[str, ...]:
+    """Return operator-derived pytest aliases for one confined target.
+
+    Nested repositories can cause pytest to choose their configuration as its
+    ``rootpath`` and report ``tests/...`` while the sealed profile names
+    ``external/<repo>/tests/...``.  That mapping belongs to the controller,
+    never to a worker-authored test.
+    """
+
+    aliases = {canonical_target}
+    try:
+        target = (ROOT / canonical_target).resolve(strict=False)
+        rootpath = Path(str(config.rootpath)).resolve(strict=False)
+        aliases.add(target.relative_to(rootpath).as_posix())
+    except (AttributeError, OSError, ValueError):
+        pass
+    return tuple(
+        sorted((item for item in aliases if item), key=lambda item: (-len(item), item))
+    )
+
+
+def _canonical_pytest_node_id(node_id: str) -> str:
+    collector = _PYTEST_PHASE_COLLECTOR
+    for alias in collector.node_id_aliases:
+        if node_id == alias:
+            return collector.canonical_target
+        if node_id.startswith(alias + "::"):
+            return collector.canonical_target + node_id[len(alias) :]
+    return node_id
+
+
 def pytest_configure(config: Any) -> None:
     """Initialize the bounded phase collector when loaded as the sealed plugin."""
 
     if os.environ.get(PYTEST_REPORT_ENV):
-        _PYTEST_PHASE_REPORTS.clear()
+        collector = _PYTEST_PHASE_COLLECTOR
+        collector.reports.clear()
+        collector.reports_identity = id(collector.reports)
+        collector.canonical_target = os.environ.get(
+            PYTEST_REQUIRED_TARGET_ENV, ""
+        ).strip()
+        collector.node_id_aliases = _pytest_node_id_aliases(
+            config, collector.canonical_target
+        )
 
 
 def pytest_runtest_logreport(report: Any) -> None:
@@ -440,9 +506,11 @@ def pytest_runtest_logreport(report: Any) -> None:
         disposition = "passed"
     else:
         disposition = outcome
-    _PYTEST_PHASE_REPORTS.append(
+    _PYTEST_PHASE_COLLECTOR.reports.append(
         {
-            "node_id": str(getattr(report, "nodeid", ""))[:4096],
+            "node_id": _canonical_pytest_node_id(
+                str(getattr(report, "nodeid", ""))[:4096]
+            ),
             "phase": when,
             "disposition": disposition,
         }
@@ -453,9 +521,15 @@ def pytest_sessionfinish(session: Any, exitstatus: Any) -> None:
     report_path = os.environ.get(PYTEST_REPORT_ENV, "").strip()
     if not report_path:
         return
+    collector = _PYTEST_PHASE_COLLECTOR
+    collector_integrity = bool(
+        type(collector.reports) is list
+        and id(collector.reports) == collector.reports_identity
+    )
+    reports = collector.reports if collector_integrity else []
     counts = {name: 0 for name in ("passed", *DISALLOWED_REQUIRED_OUTCOMES)}
     phases_by_node: dict[str, dict[str, str]] = {}
-    for report in _PYTEST_PHASE_REPORTS:
+    for report in reports:
         disposition = str(report["disposition"])
         counts[disposition] = counts.get(disposition, 0) + 1
         phases_by_node.setdefault(str(report["node_id"]), {})[
@@ -467,11 +541,12 @@ def pytest_sessionfinish(session: Any, exitstatus: Any) -> None:
         if phases == {"setup": "passed", "call": "passed", "teardown": "passed"}
     )
     payload = {
-        "schema": "pctdd/pytest-phase-outcome@1",
-        "required_test_target": os.environ.get("PCTDD_REQUIRED_TEST_TARGET", ""),
+        "schema": "pctdd/pytest-phase-outcome@2",
+        "required_test_target": os.environ.get(PYTEST_REQUIRED_TARGET_ENV, ""),
+        "collector_integrity": collector_integrity,
         "exitstatus": int(exitstatus),
         "test_count": len(phases_by_node),
-        "phase_count": len(_PYTEST_PHASE_REPORTS),
+        "phase_count": len(reports),
         "fully_passed_test_count": fully_passed,
         "counts": dict(sorted(counts.items())),
         "node_ids": sorted(phases_by_node),
@@ -581,15 +656,17 @@ def _load_required_phase_evidence(path: Path, *, target: str) -> dict[str, Any]:
     expected_fields = {
         "schema", "required_test_target", "exitstatus", "test_count",
         "phase_count", "fully_passed_test_count", "counts", "node_ids",
+        "collector_integrity",
     }
     if (
         not isinstance(payload, Mapping)
         or set(payload) != expected_fields
-        or payload.get("schema") != "pctdd/pytest-phase-outcome@1"
+        or payload.get("schema") != "pctdd/pytest-phase-outcome@2"
     ):
         raise ProfileError("required pytest phase evidence schema differs")
     if (
         payload.get("required_test_target") != target
+        or payload.get("collector_integrity") is not True
         or not isinstance(payload.get("exitstatus"), int)
         or isinstance(payload.get("exitstatus"), bool)
         or payload.get("exitstatus") != 0
@@ -668,7 +745,7 @@ def run_profile(task_id: str, *, profile_path: Path = PROFILE_PATH) -> int:
                 child_environment = dict(environment)
                 if index == 0:
                     child_environment[PYTEST_REPORT_ENV] = str(report_path)
-                    child_environment["PCTDD_REQUIRED_TEST_TARGET"] = str(
+                    child_environment[PYTEST_REQUIRED_TARGET_ENV] = str(
                         profile["required_test_target"]
                     )
                     args = [*args[:3], "-p", PYTEST_PLUGIN_NAME, *args[3:]]

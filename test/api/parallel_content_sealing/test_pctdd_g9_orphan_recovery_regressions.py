@@ -71,7 +71,7 @@ def _admitted_validation(*, task: str, profile: str) -> dict[str, Any]:
                 "evidence_policy": "required_acceptance",
                 "validation_python_launcher": dict(launcher),
                 "pytest_phase_evidence": {
-                    "schema": "pctdd/pytest-phase-outcome@1",
+                    "schema": "pctdd/pytest-phase-outcome@2",
                     "sha256": "sha256:" + "4" * 64,
                     "test_count": 2,
                     "phase_count": 6,

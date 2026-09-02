@@ -604,8 +604,9 @@ def test_required_phase_evidence_is_complete_all_pass_or_rejected(tmp_path: Path
     dispatcher = _load("pctdd_phase_dispatcher", DISPATCHER)
     target = "test/api/parallel_content_sealing/test_example.py"
     evidence = {
-        "schema": "pctdd/pytest-phase-outcome@1",
+        "schema": "pctdd/pytest-phase-outcome@2",
         "required_test_target": target,
+        "collector_integrity": True,
         "exitstatus": 0,
         "test_count": 2,
         "phase_count": 6,
@@ -640,6 +641,55 @@ def test_required_phase_evidence_is_complete_all_pass_or_rejected(tmp_path: Path
     path.write_text(json.dumps(duplicate_phase), encoding="utf-8")
     with pytest.raises(dispatcher.ProfileError, match="incomplete_phases"):
         dispatcher._load_required_phase_evidence(path, target=target)
+
+    replaced_collector = json.loads(json.dumps(evidence))
+    replaced_collector["collector_integrity"] = False
+    path.write_text(json.dumps(replaced_collector), encoding="utf-8")
+    with pytest.raises(dispatcher.ProfileError, match="target/exit binding"):
+        dispatcher._load_required_phase_evidence(path, target=target)
+
+
+def test_required_phase_node_ids_are_normalized_only_by_operator_plugin(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    dispatcher = _load("pctdd_phase_node_normalization", DISPATCHER)
+    target = (
+        "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/"
+        "test_pctdd_005_prepared_canonical_block.py"
+    )
+    nested_root = ROOT / "external/ipfs_datasets"
+    monkeypatch.setenv(dispatcher.PYTEST_REPORT_ENV, "phase.json")
+    monkeypatch.setenv(dispatcher.PYTEST_REQUIRED_TARGET_ENV, target)
+    dispatcher.pytest_configure(SimpleNamespace(rootpath=nested_root))
+
+    alias = "tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py"
+    assert dispatcher._canonical_pytest_node_id(alias + "::test_contract") == (
+        target + "::test_contract"
+    )
+    assert dispatcher._canonical_pytest_node_id("tests/unit/test_other.py::test_x") == (
+        "tests/unit/test_other.py::test_x"
+    )
+    assert not hasattr(dispatcher, "_PYTEST_PHASE_REPORTS")
+
+
+def test_required_phase_collector_replacement_fails_closed(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    dispatcher = _load("pctdd_phase_collector_integrity", DISPATCHER)
+    target = "test/api/parallel_content_sealing/test_example.py"
+    report_path = tmp_path / "phase.json"
+    monkeypatch.setenv(dispatcher.PYTEST_REPORT_ENV, str(report_path))
+    monkeypatch.setenv(dispatcher.PYTEST_REQUIRED_TARGET_ENV, target)
+    dispatcher.pytest_configure(SimpleNamespace(rootpath=ROOT))
+    dispatcher._PYTEST_PHASE_COLLECTOR.reports = []
+
+    dispatcher.pytest_sessionfinish(SimpleNamespace(), 0)
+    payload = json.loads(report_path.read_text(encoding="utf-8"))
+    assert payload["collector_integrity"] is False
+    assert payload["test_count"] == 0
+    with pytest.raises(dispatcher.ProfileError, match="target/exit binding"):
+        dispatcher._load_required_phase_evidence(report_path, target=target)
 
 
 def test_materializer_requires_exact_role_budget_outputs_and_independent_controller_validation() -> None:
