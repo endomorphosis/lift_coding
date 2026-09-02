@@ -1,0 +1,832 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-052",
+  "title": "Build clean Accelerate package",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G600",
+  "objective_id": "PCPR-052",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-052@current-head-accelerate-clean-package-v1",
+  "observed_at": "2026-09-02T06:30:30Z",
+  "depends_on": [
+    "PCPR-051"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-5 Accelerate clean package only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/clean_package.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_clean_package.py",
+      "external/ipfs_accelerate/pyproject.toml",
+      "external/ipfs_accelerate/setup.py",
+      "external/ipfs_accelerate/MANIFEST.in",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish AccelerateCleanPackage@1. Package discovery includes only ipfs_accelerate_py and scripts, and excludes sibling ipfs_datasets_py / ipfs_kit_py / ipfs_model_manager_py / ipfs_transformers_py trees. MANIFEST.in prunes sibling gitlinks and recursive submodule checkouts from the sdist. Git pins were moved out of the full and all extras into named libp2p, mcp-p2p, ipfs-transformers, and ipfs-model-manager extras; those extras remain source-checkout development extras, not the release profile. Isolated overlay import and a hermetic python -m build wheel+sdist plus pip --no-deps --no-index --target install were observed without sibling trees, sys.path injection, import-time network, or mutable Git-branch release requires. Built artifacts stay in a private temp directory and are not a published PCPR release. Live CPU/CUDA/model/provider compute remains typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "c00731ed8d67cf207930ad3b5683c2e831474538",
+    "outer_tree": "a4eeb299842779aa2d6cde15c781792d4e8c0b9d",
+    "outer_subject": "Merge commit 'fd90647cfd380bf90f03e69c8c447e00a4b5c6bb' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "84d460fe90928d5a68153cc7645e2a27ed8bd405",
+    "accelerator_pre_change_tree": "dea47bc0e266caa0c4b5df892219403f0d656163",
+    "accelerator_gitlink": "84d460fe90928d5a68153cc7645e2a27ed8bd405",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "3a89ebcd026b10d87986a129c658b2c844aa2527",
+    "datasets_tree": "9be48cc74812411b40c0580e91151b76e05b5bb9",
+    "datasets_gitlink": "3a89ebcd026b10d87986a129c658b2c844aa2527",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "kit_commit": "0d8afb5858a9b65ee937b6f478ec869ce5e63be7",
+    "kit_tree": "45274f0a45def38d5cc5d491e682e4f717ee5005",
+    "kit_gitlink": "0d8afb5858a9b65ee937b6f478ec869ce5e63be7",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/clean_package.py",
+      "sha256": "d7437574cff87f0c00a4fc3c4c42d9ee386e635cf54d6f73b7f511a4ebc2ccbc",
+      "bytes": 70157,
+      "evidence_kind": "measured",
+      "interface": "AccelerateCleanPackage@1",
+      "schema": "ipfs_accelerate_py/assurance/clean-package@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_clean_package.py",
+      "sha256": "0244c4f80276f5532dddd140ba344ca994bd511d0d27da0562e84a54a4e372c0",
+      "bytes": 10388,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/pyproject.toml",
+      "sha256": "1d61a5c7c0debd5433d749da47174fa51ef2ba204ba8bfa9ffdd6f53676939a1",
+      "bytes": 23754,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/setup.py",
+      "sha256": "4b98c912957ac9613812f9e08b733a00d61e3d452edaa2e3863f43ca68f5f979",
+      "bytes": 20041,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/MANIFEST.in",
+      "sha256": "57e782459adc772a1b7c7cc39b743995061710182d180db72ca3b819ddd476f5",
+      "bytes": 1361,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/assurance/clean-package-verdict@1",
+    "interface": "AccelerateCleanPackage@1",
+    "verdict_cid": "baguqeeraq44javupocw7ue4ih2gh32op2dv34uez2ijnnsqoutztklctr2da",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "sibling_source_required": false,
+    "mutable_git_release_requires": false,
+    "isolated_import_without_siblings": true,
+    "simulated_results_represented_as_live": false,
+    "live_compute_qualified": false,
+    "live_compute_evidence_kind": "unavailable",
+    "built_wheel_evidence_kind": "unavailable",
+    "built_sdist_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-051",
+    "goal_id": "PCPR-G600",
+    "promotion_status": "rnd_non_promoted",
+    "kit_clean_package_verdict_cid": "baguqeerag62nxwk2srduwb6jw7znngwrzlflxocmj5enveyhdmvw7qjhtvwq",
+    "datasets_clean_package_verdict_cid": "baguqeerawryb6rdga76wqiufrllhy2cotzmjkmomb5dpga4dyumblfe5t3va",
+    "compatibility_verdict_cid": "baguqeeralan5iwoqbexusnfqfywx3zukpimdrv6usiu2flqznbj5s7yculsa",
+    "compatibility_document_cid": "baguqeerafnibnbrsfaqvbxx444kqk3gi4sh244r7bl7usdxk2krg6njlquza",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-051 remains rnd_non_promoted R&D. This task publishes a clean Accelerate package on that catalog. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "clean_package": {
+    "schema": "ipfs_accelerate_py/assurance/clean-package@1",
+    "interface": "AccelerateCleanPackage@1",
+    "package_name": "ipfs_accelerate_py",
+    "package_version": "0.0.45",
+    "python_requires": ">=3.12",
+    "sibling_trees": [
+      "ipfs_datasets_py",
+      "ipfs_kit_py",
+      "ipfs_model_manager_py",
+      "ipfs_transformers_py",
+      ".tools"
+    ],
+    "recursive_submodule_trees": [
+      "docs/fastmcp",
+      "docs/mcp-python-sdk",
+      "ipfs_accelerate_py/mcplusplus",
+      "test/doc-builder",
+      "test/huggingface_doc_builder",
+      "test/huggingface_transformers"
+    ],
+    "requires_sibling_source_trees": false,
+    "requires_recursive_submodules": false,
+    "editable_local_dependencies": false,
+    "sys_path_injection": false,
+    "import_network": false,
+    "mutable_git_release_requires": false,
+    "runtime_requires_authority": "requirements.txt",
+    "development_requirements_role": "source-checkout-development-and-integration",
+    "named_git_extras": [
+      "libp2p",
+      "mcp-p2p",
+      "ipfs-transformers",
+      "ipfs-model-manager"
+    ],
+    "named_git_extras_role": "source-checkout-development-and-integration",
+    "import_side_effects": "none",
+    "task_id": "PCPR-052",
+    "goal_id": "PCPR-G600",
+    "verdict_cid": "baguqeeraq44javupocw7ue4ih2gh32op2dv34uez2ijnnsqoutztklctr2da",
+    "probes": [
+      {
+        "probe_id": "release_requires_have_no_vcs",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "requirements.txt release requires contain no VCS markers.",
+        "details": {
+          "vcs": [],
+          "editable": []
+        }
+      },
+      {
+        "probe_id": "release_requires_have_no_editable",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "requirements.txt release requires contain no editable markers.",
+        "details": {
+          "vcs": [],
+          "editable": []
+        }
+      },
+      {
+        "probe_id": "mutable_git_release_requires",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Release requires do not pin a mutable Git branch.",
+        "details": {
+          "core": {
+            "editable": [],
+            "vcs": []
+          },
+          "full": {
+            "editable": [],
+            "vcs": []
+          },
+          "all": {
+            "editable": [],
+            "vcs": []
+          }
+        }
+      },
+      {
+        "probe_id": "editable_local_release_requires",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Release requires do not use editable local paths.",
+        "details": {
+          "core": {
+            "editable": [],
+            "vcs": []
+          },
+          "full": {
+            "editable": [],
+            "vcs": []
+          },
+          "all": {
+            "editable": [],
+            "vcs": []
+          }
+        }
+      },
+      {
+        "probe_id": "pyproject_dynamic_dependencies_from_requirements",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "pyproject.toml loads runtime dependencies dynamically from requirements.txt.",
+        "details": {
+          "dynamic": [
+            "dependencies"
+          ],
+          "dynamic_dependency_files": [
+            "requirements.txt"
+          ],
+          "static_dependencies": null
+        }
+      },
+      {
+        "probe_id": "python_requires_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "setup.py and pyproject.toml both require Python >=3.12.",
+        "details": {
+          "pyproject": ">=3.12",
+          "setup": ">=3.12"
+        }
+      },
+      {
+        "probe_id": "python_classifier_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "pyproject.toml advertises Python 3.12 and not the stale 3.10 classifier.",
+        "details": {
+          "classifiers": [
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.12",
+            "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+            "Operating System :: POSIX :: Linux",
+            "Operating System :: Microsoft :: Windows",
+            "Operating System :: MacOS"
+          ]
+        }
+      },
+      {
+        "probe_id": "pyproject_python_classifier_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "pyproject.toml classifiers agree on Python 3.12 and AGPL-3.0-or-later.",
+        "details": {
+          "classifiers": [
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.12",
+            "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+            "Operating System :: POSIX :: Linux",
+            "Operating System :: Microsoft :: Windows",
+            "Operating System :: MacOS"
+          ]
+        }
+      },
+      {
+        "probe_id": "sibling_packages_excluded",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "pyproject.toml package discovery includes only ipfs_accelerate_py and scripts, and excludes siblings.",
+        "details": {
+          "find_include": [
+            "ipfs_accelerate_py",
+            "ipfs_accelerate_py.*",
+            "scripts",
+            "scripts.*"
+          ],
+          "find_exclude": [
+            "ipfs_datasets_py*",
+            "ipfs_kit_py*",
+            "ipfs_model_manager_py*",
+            "ipfs_transformers_py*",
+            "test*",
+            "benchmarks*"
+          ]
+        }
+      },
+      {
+        "probe_id": "sibling_submodules_pruned",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "MANIFEST.in prunes sibling submodule trees from the sdist.",
+        "details": {
+          "prunes": [
+            "prune ipfs_datasets_py",
+            "prune ipfs_kit_py",
+            "prune ipfs_model_manager_py",
+            "prune ipfs_transformers_py",
+            "prune .tools",
+            "prune docs/fastmcp",
+            "prune docs/mcp-python-sdk",
+            "prune ipfs_accelerate_py/mcplusplus",
+            "prune test/doc-builder",
+            "prune test/huggingface_doc_builder",
+            "prune test/huggingface_transformers"
+          ]
+        }
+      },
+      {
+        "probe_id": "recursive_submodules_pruned",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "MANIFEST.in prunes recursive submodule trees from the sdist.",
+        "details": {
+          "prunes": [
+            "prune docs/fastmcp",
+            "prune docs/mcp-python-sdk",
+            "prune ipfs_accelerate_py/mcplusplus",
+            "prune test/doc-builder",
+            "prune test/huggingface_doc_builder",
+            "prune test/huggingface_transformers"
+          ]
+        }
+      },
+      {
+        "probe_id": "pyproject_clean_package_table",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "pyproject.toml declares the AccelerateCleanPackage@1 constraints.",
+        "details": {
+          "table": {
+            "schema": "ipfs_accelerate_py/assurance/clean-package@1",
+            "interface": "AccelerateCleanPackage@1",
+            "task-id": "PCPR-052",
+            "goal-id": "PCPR-G600",
+            "requires-sibling-source-trees": false,
+            "requires-recursive-submodules": false,
+            "editable-local-dependencies": false,
+            "sys-path-injection": false,
+            "import-network": false,
+            "mutable-git-release-requires": false,
+            "runtime-requires-authority": "requirements.txt"
+          }
+        }
+      },
+      {
+        "probe_id": "package_init_has_no_sys_path_injection",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ipfs_accelerate_py/__init__.py does not insert sibling paths.",
+        "details": {}
+      },
+      {
+        "probe_id": "git_extras_are_not_release_profile",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Named libp2p, mcp-p2p, ipfs-transformers, and ipfs-model-manager extras may carry source-checkout Git pins; they are not requirements.txt or the full/all extras.",
+        "details": {
+          "named_git_extras": {
+            "libp2p": {
+              "vcs": [
+                "git+"
+              ],
+              "editable": []
+            },
+            "mcp-p2p": {
+              "vcs": [
+                "git+"
+              ],
+              "editable": []
+            },
+            "ipfs-transformers": {
+              "vcs": [
+                "git+"
+              ],
+              "editable": []
+            },
+            "ipfs-model-manager": {
+              "vcs": [
+                "git+"
+              ],
+              "editable": []
+            }
+          },
+          "core_vcs": [],
+          "full_vcs": [],
+          "all_vcs": [],
+          "named_git_extras_role": "source-checkout-development-and-integration"
+        }
+      },
+      {
+        "probe_id": "full_extra_has_no_vcs",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "The full extra is a convenience release extra without VCS or editable pins.",
+        "details": {
+          "vcs": [],
+          "editable": []
+        }
+      },
+      {
+        "probe_id": "all_extra_has_no_vcs",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "The all extra is a convenience release extra without VCS or editable pins.",
+        "details": {
+          "vcs": [],
+          "editable": []
+        }
+      },
+      {
+        "probe_id": "inner_requirements_git_is_not_release_profile",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ipfs_accelerate_py/requirements.txt may carry source-checkout Git pins; it is not install_requires or the pyproject dynamic release profile.",
+        "details": {
+          "inner_requirements": "ipfs_accelerate_py/requirements.txt",
+          "inner_vcs": [
+            "git+"
+          ],
+          "release_vcs": []
+        }
+      },
+      {
+        "probe_id": "setup_find_packages_excludes_siblings",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "setup.py find_packages excludes sibling trees and reads requirements.txt.",
+        "details": {
+          "python_requires_constant": ">=3.12",
+          "uses_python_requires_constant": true,
+          "find_packages_uses_excludes": true,
+          "reads_requirements_txt": true
+        }
+      },
+      {
+        "probe_id": "manifest_advertises_clean_package",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "AccelerateCleanPackage@1 manifest advertises sibling-free packaging and does not require sibling repositories.",
+        "details": {}
+      },
+      {
+        "probe_id": "isolated_import_without_siblings",
+        "present": true,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Isolated import succeeded without sibling source trees, sys.path injection, or network.",
+        "details": {
+          "import_ok": true,
+          "clean_package_interface": "AccelerateCleanPackage@1",
+          "network_effects": false,
+          "sibling_datasets": "ModuleNotFoundError",
+          "sibling_kit": "ModuleNotFoundError",
+          "sibling_model_manager": "ModuleNotFoundError",
+          "sibling_transformers": "ModuleNotFoundError",
+          "sibling_source_imported": false,
+          "sys_path_injection": false,
+          "version": "0.0.45"
+        }
+      },
+      {
+        "probe_id": "sibling_source_imported",
+        "present": false,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Isolated import did not load a sibling source tree.",
+        "details": {}
+      },
+      {
+        "probe_id": "sys_path_injection_observed",
+        "present": false,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Isolated import did not inject the source checkout.",
+        "details": {}
+      },
+      {
+        "probe_id": "simulated_results_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Simulated results are not represented as live.",
+        "details": {}
+      },
+      {
+        "probe_id": "runtime_unavailable_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Clean-package probes are not represented as live.",
+        "details": {}
+      },
+      {
+        "probe_id": "built_wheel_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No built wheel is represented as a live published release.",
+        "details": {}
+      },
+      {
+        "probe_id": "built_sdist_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No built sdist is represented as a live published release.",
+        "details": {}
+      },
+      {
+        "probe_id": "published_release_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not publish a PCPR release.",
+        "details": {}
+      },
+      {
+        "probe_id": "built_wheel_metadata",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No built wheel artifact is present in source-tree dist/; hermetic temp-dir builds are recorded separately and are not a release.",
+        "details": {
+          "artifacts": []
+        }
+      },
+      {
+        "probe_id": "built_sdist_metadata",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No built sdist artifact is present in source-tree dist/; hermetic temp-dir builds are recorded separately and are not a release.",
+        "details": {
+          "artifacts": []
+        }
+      },
+      {
+        "probe_id": "live_compute_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live Accelerate compute. Missing CPU/CUDA/model/provider evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "hermetic_distribution_build": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live compute qualification, or a closed PCPR release",
+    "status": "observed",
+    "evidence_kind": "measured_hermetic",
+    "published": false,
+    "source_date_epoch": "0",
+    "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr052-*> PYTHONNOUSERSITE=1 SOURCE_DATE_EPOCH=0 /usr/bin/python3.12 -m build --wheel --sdist --outdir <private-temp>",
+    "exit_code": 0,
+    "duration_seconds": 15.94,
+    "tools": {
+      "python": "/usr/bin/python3.12",
+      "python_version": "Python 3.12.3",
+      "setuptools": "82.0.1",
+      "setuptools_module": "/usr/local/lib/python3.12/dist-packages/setuptools/__init__.py",
+      "wheel": "0.42.0",
+      "wheel_module": "/usr/lib/python3/dist-packages/wheel/__init__.py",
+      "build": "1.5.0",
+      "build_module": "/usr/local/lib/python3.12/dist-packages/build/__init__.py",
+      "pip": "24.0",
+      "pip_module": "/usr/lib/python3/dist-packages/pip/__init__.py"
+    },
+    "wheel": {
+      "name": "ipfs_accelerate_py-0.0.45-py3-none-any.whl",
+      "bytes": 21847792,
+      "sha256": "598b1e175f6c9a291d16f1e1c3b2d60e507fb5587e5afc5b662b2f301da984a6",
+      "member_count": 3065,
+      "has_package": true,
+      "has_clean_package_module": true,
+      "license_present": true,
+      "platform_data_layout": false,
+      "sibling_members": [],
+      "committed_to_source_tree": false
+    },
+    "sdist": {
+      "name": "ipfs_accelerate_py-0.0.45.tar.gz",
+      "bytes": 24580429,
+      "sha256": "aa7b3db7f95e7f9bacef7e4c26b87f20486794a941acf33a018ba0f1a81a3a20",
+      "member_count": 4646,
+      "has_package": true,
+      "has_license": true,
+      "has_clean_package_module": true,
+      "sibling_members": [],
+      "committed_to_source_tree": false
+    },
+    "hermetic_install": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr052-*> PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pip install --no-deps --no-index --no-compile --target <private-temp> <wheel>",
+      "exit_code": 0,
+      "import_ok": true,
+      "imported_from_install_prefix": true,
+      "imported_from_source_tree": false,
+      "requires_sibling_tests_tree": false,
+      "ipfs_datasets_py": "ModuleNotFoundError",
+      "ipfs_kit_py": "ModuleNotFoundError",
+      "ipfs_model_manager_py": "ModuleNotFoundError",
+      "ipfs_transformers_py": "ModuleNotFoundError",
+      "clean_package_interface": "AccelerateCleanPackage@1",
+      "requires_sibling_repos": false,
+      "evidence_kind": "measured_hermetic",
+      "live": false,
+      "published": false
+    },
+    "reason": "Hermetic wheel and sdist were built and installed in a private directory. They are not a published PCPR release and were not written into source-tree dist/."
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "pip_path": "/usr/bin/pip",
+    "node_path": "/usr/bin/node",
+    "node_version": "v18.19.1",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "setuptools_module": "/usr/local/lib/python3.12/dist-packages/setuptools/__init__.py",
+    "wheel_module": "/usr/lib/python3/dist-packages/wheel/__init__.py",
+    "build_module": "/usr/local/lib/python3.12/dist-packages/build/__init__.py",
+    "pip_module": "/usr/lib/python3/dist-packages/pip/__init__.py",
+    "duckdb": "unavailable",
+    "z3": "unavailable",
+    "cvc5": "unavailable",
+    "lean": "unavailable",
+    "coqtop": "unavailable",
+    "ipfs": "unavailable",
+    "nvcc": "unavailable",
+    "tsc": "unavailable",
+    "nvidia_smi": "/usr/bin/nvidia-smi",
+    "nvidia_smi_is_not_contract_qualification": true,
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live compute qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr052-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= test/api/test_agent_supervisor_clean_package.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.40,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_clean_package.py"
+    ],
+    "noconftest_reason": "test/api/conftest.py imports ipfs_datasets_py, a sibling package that a sibling-free clean-package probe must not load. Root conftest.py also mutates sys.path. Clean-package probes do not require either conftest.",
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/torch/duckdb under ~/.local are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-052.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= test/api/test_agent_supervisor_clean_package.py",
+      "exit_code": 0,
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 0.40,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "sibling_source_not_required": true,
+    "mutable_git_not_in_release_requires": true,
+    "editable_local_not_in_release_requires": true,
+    "sys_path_injection_not_observed": true,
+    "import_network_not_observed": true,
+    "wheel_and_sdist_not_published": true,
+    "live_compute_not_claimed": true,
+    "production_authorized_not_granted": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "sibling_source_required": false,
+    "mutable_git_release_requires": false,
+    "isolated_import_without_siblings": true,
+    "simulated_results_represented_as_live": false,
+    "live_compute_qualified": false,
+    "contracts_frozen": false,
+    "production_authorized": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live CPU/CUDA/model/provider qualification, not the signed PCPR-055 artifacts, and not a closed PCPR release outcome.",
+    "Hermetic wheel and sdist were built in a private directory and installed with pip --no-deps --no-index --target. Those artifacts were not written into source-tree dist/, were not signed, and are not a published release. PCPR-053/054/055 remain the lock, SBOM, provenance, and signing tasks.",
+    "The wheel is a purelib py3-none-any artifact. That is not CUDA, solver, or supervisor qualification.",
+    "Named extras libp2p, mcp-p2p, ipfs-transformers, and ipfs-model-manager still contain git+ pins. Those extras are source-checkout development/integration only and are not requirements.txt or the full/all extras.",
+    "ipfs_accelerate_py/requirements.txt still contains development git+ pins. That file is source-checkout development/integration only and is not the pyproject dynamic release profile.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing. This task does not re-qualify CPU, CUDA, model/provider paths, IPFS, Iroh, VFS/WAL, CLI/MCP/MCP++ parity, or solvers.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, z3, cvc5, lean, coqtop, ipfs, nvcc, and tsc are absent and are not recorded as passing or zero.",
+    "Hermetic AccelerateCleanPackage tests are candidate coverage of packaging constraints and isolated import; they do not qualify the live supervisor cohort or close a release. test/api/conftest.py was skipped with --noconftest because it imports ipfs_datasets_py.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
