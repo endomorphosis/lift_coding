@@ -1,0 +1,485 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-053",
+  "title": "Produce dependency locks",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G600",
+  "objective_id": "PCPR-053",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-053@current-head-declared-release-profile-locks-v1",
+  "observed_at": "2026-09-02T07:15:24Z",
+  "depends_on": [
+    "PCPR-052"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-5 declared release-profile dependency locks only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/dependency_locks.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_dependency_locks.py",
+      "external/ipfs_accelerate/pyproject.toml",
+      "external/ipfs_accelerate/packaging/pcpr/locks/README.md",
+      "external/ipfs_accelerate/packaging/pcpr/locks/platform-catalog.json",
+      "external/ipfs_accelerate/packaging/pcpr/locks/cpython312/release.lock.json",
+      "external/ipfs_accelerate/packaging/pcpr/locks/cpython312/release.txt",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/dependency_locks.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_053_dependency_locks.py",
+      "external/ipfs_datasets/pyproject.toml",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "external/ipfs_datasets/packaging/pcpr/locks/README.md",
+      "external/ipfs_datasets/packaging/pcpr/locks/cpython312/release.lock.json",
+      "external/ipfs_datasets/packaging/pcpr/locks/cpython312/release.txt",
+      "external/ipfs_kit/ipfs_kit_py/assurance/dependency_locks.py",
+      "external/ipfs_kit/tests/test_pcpr_053_dependency_locks.py",
+      "external/ipfs_kit/pyproject.toml",
+      "external/ipfs_kit/packaging/pcpr/locks/README.md",
+      "external/ipfs_kit/packaging/pcpr/locks/cpython312/release.lock.json",
+      "external/ipfs_kit/packaging/pcpr/locks/cpython312/release.txt",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish AccelerateDependencyLocks@1, DatasetsDependencyLocks@1, KitDependencyLocks@1, and PlatformDependencyLockCatalog@1. Each component freeze is a declared_release_profile lock of the clean-package runtime authority (Accelerate requirements.txt, Datasets empty setup.py install_requires, Kit pyproject.toml [project].dependencies). Mutable Git, editable, and local-path requires are excluded from the release lock; named Git extras remain source-checkout development only. Hash identity, transitive resolution, wheel/sdist/container identities, and native tools stay typed unavailable. Hashes were not invented. uv under ~/.local is not sealed-environment authority. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "0e94e8a586b364d4be985a81155645c12182f979",
+    "outer_tree": "cc681a9c9d9ff10b4bd00b892f832707850e0f13",
+    "outer_subject": "Merge commit 'd2d2e7f4dda83e5d2641fd901303c859ebbb9fd2' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "36f579ced2ad2cd16da3399781426aa511539c85",
+    "accelerator_pre_change_tree": "823138bdc5b8357a4771b2887b5692deeed125bd",
+    "accelerator_gitlink": "36f579ced2ad2cd16da3399781426aa511539c85",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_pre_change_commit": "3a89ebcd026b10d87986a129c658b2c844aa2527",
+    "datasets_pre_change_tree": "9be48cc74812411b40c0580e91151b76e05b5bb9",
+    "datasets_gitlink": "3a89ebcd026b10d87986a129c658b2c844aa2527",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "kit_pre_change_commit": "0d8afb5858a9b65ee937b6f478ec869ce5e63be7",
+    "kit_pre_change_tree": "45274f0a45def38d5cc5d491e682e4f717ee5005",
+    "kit_gitlink": "0d8afb5858a9b65ee937b6f478ec869ce5e63be7",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "kit_post_change_commit": "pending nested commit after admission",
+    "kit_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/dependency_locks.py",
+      "sha256": "66f18da3d2c57d40ac5094a0696eef25f096a3c4fec5175b8a33cb03488cd49b",
+      "bytes": 43325,
+      "evidence_kind": "measured",
+      "interface": "AccelerateDependencyLocks@1",
+      "schema": "ipfs_accelerate_py/assurance/dependency-locks@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_dependency_locks.py",
+      "sha256": "3e465368ea63f04700f4ab918b321e5d97cf875099f31888bda7115e437bb7fa",
+      "bytes": 8133,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/pyproject.toml",
+      "sha256": "d9350a18e5d7be1a88abd48eecb8297c3c01f224f066aff0752c02a7b8fedcaa",
+      "bytes": 24304,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/packaging/pcpr/locks/cpython312/release.lock.json",
+      "sha256": "4c4c5bb305ef74e9b12ac1f2792b135c99381d28bed8b7581951d36d26d847b9",
+      "bytes": 4108,
+      "lock_cid": "baguqeerayvfxbdt6m6go57s6dw2afwsvpkzpt25rewc6kglm2fhwkeowvuxa",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/packaging/pcpr/locks/platform-catalog.json",
+      "sha256": "099e2876f24b89e065341d83c093aaca41a3ca907f57033d84a6b9ee1b824d3c",
+      "bytes": 2095,
+      "catalog_cid": "baguqeerauhw5r5h2sm4mr5tsw4rmenamts5zptfp226xxi7aeu3dzrnwcm5a",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/dependency_locks.py",
+      "sha256": "11d6a1e3b57fa484b224f6dfc4ddb24401b62f18f48b4554a5d955ecdb92750b",
+      "bytes": 38781,
+      "evidence_kind": "measured",
+      "interface": "DatasetsDependencyLocks@1",
+      "schema": "ipfs_datasets_py/assurance/dependency-locks@1"
+    },
+    {
+      "path": "external/ipfs_datasets/packaging/pcpr/locks/cpython312/release.lock.json",
+      "sha256": "f5c16b1fb9ce6f96e1ca51edd156f2479e1f0938456e03c30af273adc3d4f22b",
+      "bytes": 3399,
+      "lock_cid": "baguqeeraxwt7j3qjwfy3yvicngqwrnx2suobs3yxa4ah6gbgbszxrbsrid7q",
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "sha256": "cb2cf7265f017f66bd0fb1ad6242e7782bd77cd370610444909c2271b13983c7",
+      "bytes": 42649,
+      "evidence_kind": "measured",
+      "interface": "LogicPlatformManifest@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/dependency_locks.py",
+      "sha256": "d33cd5300cd9e6567c2f182f22d833cf482243b84ce8f5b64c49340ac6285ab1",
+      "bytes": 37774,
+      "evidence_kind": "measured",
+      "interface": "KitDependencyLocks@1",
+      "schema": "ipfs_kit_py/assurance/dependency-locks@1"
+    },
+    {
+      "path": "external/ipfs_kit/packaging/pcpr/locks/cpython312/release.lock.json",
+      "sha256": "31b9b9a04bfc4b595fc31cf385d489466963034157928bf3fe07fa267bef96ec",
+      "bytes": 4058,
+      "lock_cid": "baguqeerapndvhdlxynq6afrv4mfpsa7ajjregns3nwuth5hnho7rf3xc223a",
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/assurance/dependency-locks-verdict@1",
+    "interface": "AccelerateDependencyLocks@1",
+    "verdict_cid": "baguqeeramphsipll26bz2uddq37mmb6hllng7bkbg2l3rfpr6yz3kqyza5sa",
+    "lock_cid": "baguqeerayvfxbdt6m6go57s6dw2afwsvpkzpt25rewc6kglm2fhwkeowvuxa",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "sibling_source_required": false,
+    "mutable_git_release_lock": false,
+    "hashes_invented": false,
+    "live_resolver_qualified": false,
+    "live_resolver_evidence_kind": "unavailable",
+    "hash_lock_evidence_kind": "unavailable",
+    "simulated_results_represented_as_live": false,
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "component_verdicts": {
+    "ipfs_accelerate_py": {
+      "schema": "ipfs_accelerate_py/assurance/dependency-locks-verdict@1",
+      "interface": "AccelerateDependencyLocks@1",
+      "verdict_cid": "baguqeeramphsipll26bz2uddq37mmb6hllng7bkbg2l3rfpr6yz3kqyza5sa",
+      "lock_cid": "baguqeerayvfxbdt6m6go57s6dw2afwsvpkzpt25rewc6kglm2fhwkeowvuxa",
+      "promotion_status": "rnd_non_promoted",
+      "closed_release_outcome": null,
+      "release_claim": false,
+      "hashes_invented": false,
+      "live_resolver_qualified": false,
+      "direct_requirement_count": 24,
+      "requirements_authority": "requirements.txt",
+      "evidence_kind": "measured"
+    },
+    "ipfs_datasets_py": {
+      "schema": "ipfs_datasets_py/assurance/dependency-locks-verdict@1",
+      "interface": "DatasetsDependencyLocks@1",
+      "verdict_cid": "baguqeeraqekkr4advtjvbxatp53zdnte4oyin43eq55ck7jxwtnx4av6viaa",
+      "lock_cid": "baguqeeraxwt7j3qjwfy3yvicngqwrnx2suobs3yxa4ah6gbgbszxrbsrid7q",
+      "promotion_status": "rnd_non_promoted",
+      "closed_release_outcome": null,
+      "release_claim": false,
+      "hashes_invented": false,
+      "live_resolver_qualified": false,
+      "direct_requirement_count": 0,
+      "requirements_authority": "setup.py:install_requires",
+      "evidence_kind": "measured"
+    },
+    "ipfs_kit_py": {
+      "schema": "ipfs_kit_py/assurance/dependency-locks-verdict@1",
+      "interface": "KitDependencyLocks@1",
+      "verdict_cid": "baguqeerajvl4ybdbdt2yn3g4lro6vkuknmndhkw472fvgtwmlsw3tixetdkq",
+      "lock_cid": "baguqeerapndvhdlxynq6afrv4mfpsa7ajjregns3nwuth5hnho7rf3xc223a",
+      "promotion_status": "rnd_non_promoted",
+      "closed_release_outcome": null,
+      "release_claim": false,
+      "hashes_invented": false,
+      "live_resolver_qualified": false,
+      "direct_requirement_count": 22,
+      "requirements_authority": "pyproject.toml:project.dependencies",
+      "evidence_kind": "measured"
+    }
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-052",
+    "goal_id": "PCPR-G600",
+    "promotion_status": "rnd_non_promoted",
+    "accelerate_clean_package_verdict_cid": "baguqeeraq44javupocw7ue4ih2gh32op2dv34uez2ijnnsqoutztklctr2da",
+    "kit_clean_package_verdict_cid": "baguqeerag62nxwk2srduwb6jw7znngwrzlflxocmj5enveyhdmvw7qjhtvwq",
+    "datasets_clean_package_verdict_cid": "baguqeerawryb6rdga76wqiufrllhy2cotzmjkmomb5dpga4dyumblfe5t3va",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-052 remains rnd_non_promoted R&D. This task publishes declared release-profile locks on that clean-package catalog. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "dependency_locks": {
+    "schema": "ipfs_accelerate_py/assurance/platform-dependency-lock-catalog@1",
+    "interface": "PlatformDependencyLockCatalog@1",
+    "lock_kind": "declared_release_profile",
+    "profile": "release",
+    "python_requires": ">=3.12",
+    "catalog_cid": "baguqeerauhw5r5h2sm4mr5tsw4rmenamts5zptfp226xxi7aeu3dzrnwcm5a",
+    "hashes_invented": false,
+    "live_resolver_qualified": false,
+    "mutable_git": false,
+    "release_claim": false,
+    "closed_release_outcome": null,
+    "task_id": "PCPR-053",
+    "goal_id": "PCPR-G600",
+    "components": {
+      "ipfs_accelerate_py": {
+        "path": "packaging/pcpr/locks/cpython312/release.lock.json",
+        "status": "observed",
+        "evidence_kind": "measured",
+        "package_name": "ipfs_accelerate_py",
+        "package_version": "0.0.45",
+        "lock_kind": "declared_release_profile",
+        "lock_cid": "baguqeerayvfxbdt6m6go57s6dw2afwsvpkzpt25rewc6kglm2fhwkeowvuxa",
+        "direct_requirement_count": 24,
+        "hashes_status": "unavailable",
+        "live": false
+      },
+      "ipfs_datasets_py": {
+        "path": "../ipfs_datasets/packaging/pcpr/locks/cpython312/release.lock.json",
+        "status": "observed",
+        "evidence_kind": "measured",
+        "package_name": "ipfs_datasets_py",
+        "package_version": "0.2.0",
+        "lock_kind": "declared_release_profile",
+        "lock_cid": "baguqeeraxwt7j3qjwfy3yvicngqwrnx2suobs3yxa4ah6gbgbszxrbsrid7q",
+        "direct_requirement_count": 0,
+        "hashes_status": "unavailable",
+        "live": false
+      },
+      "ipfs_kit_py": {
+        "path": "../ipfs_kit/packaging/pcpr/locks/cpython312/release.lock.json",
+        "status": "observed",
+        "evidence_kind": "measured",
+        "package_name": "ipfs_kit_py",
+        "package_version": "0.3.0",
+        "lock_kind": "declared_release_profile",
+        "lock_cid": "baguqeerapndvhdlxynq6afrv4mfpsa7ajjregns3nwuth5hnho7rf3xc223a",
+        "direct_requirement_count": 22,
+        "hashes_status": "unavailable",
+        "live": false
+      }
+    },
+    "unavailable_identities": {
+      "require_hashes_lock": "unavailable",
+      "pip_tools_or_uv_resolve": "unavailable",
+      "transitive_graph": "unavailable",
+      "published_wheel": "unavailable",
+      "published_sdist": "unavailable",
+      "container_digest": "unavailable",
+      "cuda_toolkit": "unavailable",
+      "ipfs_daemon": "unavailable",
+      "host_libmagic": "unavailable",
+      "z3": "unavailable",
+      "cvc5": "unavailable",
+      "lean": "unavailable",
+      "coqtop": "unavailable"
+    },
+    "named_git_extras_not_in_release_lock": {
+      "ipfs_accelerate_py": [
+        "libp2p",
+        "mcp-p2p",
+        "ipfs-transformers",
+        "ipfs-model-manager"
+      ],
+      "ipfs_kit_py": [
+        "libp2p",
+        "ipld-github"
+      ],
+      "role": "source-checkout-development-and-integration"
+    },
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "pip_path": "/usr/bin/pip",
+    "uv_path": "unavailable",
+    "pip_compile_path": "unavailable",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "setuptools_module": "/usr/local/lib/python3.12/dist-packages/setuptools/__init__.py",
+    "wheel_module": "/usr/lib/python3/dist-packages/wheel/__init__.py",
+    "build_module": "/usr/local/lib/python3.12/dist-packages/build/__init__.py",
+    "pip_module": "/usr/lib/python3/dist-packages/pip/__init__.py",
+    "duckdb": "unavailable",
+    "z3": "unavailable",
+    "cvc5": "unavailable",
+    "lean": "unavailable",
+    "coqtop": "unavailable",
+    "ipfs": "unavailable",
+    "nvcc": "unavailable",
+    "tsc": "unavailable",
+    "node_path": "/usr/bin/node",
+    "nvidia_smi": "/usr/bin/nvidia-smi",
+    "nvidia_smi_is_not_contract_qualification": true,
+    "provider_local_uv_is_not_sealed_authority": true,
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live hashed resolution, or a closed PCPR release",
+    "accelerate": {
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr053-*> PYTHONNOUSERSITE=1 /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= test/api/test_agent_supervisor_dependency_locks.py",
+      "sealed_result": {
+        "exit_code": 0,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "duration_seconds": 1.46,
+        "evidence_kind": "measured"
+      }
+    },
+    "datasets": {
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr053-*> PYTHONNOUSERSITE=1 PYTHONPATH=. /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/unit/test_pcpr_053_dependency_locks.py",
+      "sealed_result": {
+        "exit_code": 0,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "duration_seconds": 1.29,
+        "evidence_kind": "measured"
+      }
+    },
+    "kit": {
+      "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr053-*> PYTHONNOUSERSITE=1 PYTHONPATH=. /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_053_dependency_locks.py",
+      "sealed_result": {
+        "exit_code": 0,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "duration_seconds": 1.20,
+        "evidence_kind": "measured"
+      }
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site uv/pytest under ~/.local are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-053.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "accelerate_exit_code": 0,
+      "accelerate_passed": 7,
+      "datasets_exit_code": 0,
+      "datasets_passed": 6,
+      "kit_exit_code": 0,
+      "kit_passed": 5,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "hashes_not_invented": true,
+    "require_hashes_lock_not_claimed": true,
+    "live_resolver_not_claimed": true,
+    "mutable_git_not_in_release_lock": true,
+    "editable_local_not_in_release_lock": true,
+    "path_local_not_in_release_lock": true,
+    "provider_local_uv_not_sealed_authority": true,
+    "wheel_and_sdist_not_published": true,
+    "production_authorized_not_granted": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "sibling_source_required": false,
+    "mutable_git_release_lock": false,
+    "hashes_invented": false,
+    "live_resolver_qualified": false,
+    "simulated_results_represented_as_live": false,
+    "contracts_frozen": false,
+    "production_authorized": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not a hashed pip-tools/uv lock, not SBOM or provenance (PCPR-054), not signed artifacts (PCPR-055), and not a closed PCPR release outcome.",
+    "The locks are declared_release_profile PEP 508 specs. Sealed PATH has pip but no admitted live PyPI metadata resolution. uv and pip-compile are absent from the sealed PATH. Hashes were not invented and remain typed unavailable.",
+    "Datasets core install_requires is empty; that empty set is the lock, not an omission. requirements.txt editable sibling pins remain source-checkout development only.",
+    "Named extras libp2p, mcp-p2p, ipfs-transformers, ipfs-model-manager (Accelerate) and libp2p, ipld-github (Kit) still contain git+ pins. Those extras are source-checkout development/integration only and are not the release lock.",
+    "Host libmagic, CUDA, IPFS daemon, FUSE, z3, cvc5, lean, and coqtop remain typed unavailable and are not this lock.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing. This task does not re-qualify CPU, CUDA, model/provider paths, IPFS, Iroh, VFS/WAL, CLI/MCP/MCP++ parity, or solvers.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Hermetic dependency-lock tests are candidate coverage of declared-spec constraints; they do not qualify a live resolver or close a release.",
+    "Post-change Accelerate, Datasets, and Kit commit and tree identities are pending the accepted nested commits."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate, Datasets, and Kit commits and the outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
