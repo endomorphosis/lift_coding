@@ -1,0 +1,527 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-038",
+  "title": "Qualify real CUDA execution",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G400",
+  "objective_id": "PCPR-038",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-038@current-head-cuda-execution-v1",
+  "observed_at": "2026-09-02T04:08:30Z",
+  "depends_on": [
+    "PCPR-037"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-3 Accelerate live CUDA execution qualification only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cuda_execution.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cuda_execution_kernels.cu",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cuda_execution_kernels_sm121.ptx",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cuda_execution_kernels_sm90.ptx",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/hardware_capability_ladder.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/kit/hardware_kit.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/cuda_execution_qualification.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_cuda_execution_qualification.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add CudaExecution@1. Run a live libcuda driver-API canary covering identity, load, compute, output validation, cancellation, timeout, cleanup, fail-closed resource admission, and repetition. HardwareKit._test_cuda uses that canary instead of torch-only success. The hardware ladder exposes from_live_cuda_execution without granting production_authorized or the model-gated qualified rung. nvidia-smi, torch, and nvcc are not qualification. Model/provider stays typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "2f41f4dfa7296f354f17dcbcd2b4a7e8dbaead38",
+    "outer_tree": "f2f39a0b1f584bd24845d6f796682bf7fe92b560",
+    "outer_subject": "Merge commit 'a2ee5aa4c84faeb783f33b1c58c4c20069a9c51b' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "47f839cc77dab62c1bbfd41f44d2cb4285ed6dba",
+    "accelerator_pre_change_tree": "3c00aeee8dbc31db63f341d6f8d1076967c38fab",
+    "accelerator_gitlink": "47f839cc77dab62c1bbfd41f44d2cb4285ed6dba",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "3e54f3b5b021c81accc1bcc6dbd03071c2307cd4",
+    "datasets_tree": "97f45fde01e874d8c157a368464cb31e375e97d4",
+    "datasets_gitlink": "3e54f3b5b021c81accc1bcc6dbd03071c2307cd4",
+    "kit_commit": "e27294eb853f7fbb1cc8db06ba3c50901a53372f",
+    "kit_tree": "6698c3aad2396fa961f9b1ee70b24909d1f6f6d1",
+    "kit_gitlink": "e27294eb853f7fbb1cc8db06ba3c50901a53372f",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cuda_execution.py",
+      "sha256": "6e31e8f1a61ceed5853e6941290d664db5fe31b04130a4485b2845129a997a0d",
+      "bytes": 37915,
+      "evidence_kind": "measured",
+      "interface": "CudaExecution@1",
+      "schema": "ipfs_accelerate_py/assurance/cuda-execution@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cuda_execution_kernels.cu",
+      "sha256": "a2ecf20e7f95970799a141893614400d67c7cb4266aa66875129abbe93e46ac8",
+      "bytes": 1006,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cuda_execution_kernels_sm121.ptx",
+      "sha256": "36f070a381e6d6915082243b45af4cd89547d0fa2c46fe85426462693069bc93",
+      "bytes": 3079,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/cuda_execution_kernels_sm90.ptx",
+      "sha256": "3de623dfa718ec18983efe3a612512bc74346503d5a3b0384cdd543ae2d00072",
+      "bytes": 3011,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/hardware_capability_ladder.py",
+      "sha256": "fb7283230d87a80e8df13250b41879cc52ac1e45c762eb61e11d9edbf719eea9",
+      "bytes": 19207,
+      "evidence_kind": "measured",
+      "interface": "HardwareCapabilityLadder@1",
+      "schema": "ipfs_accelerate_py/assurance/hardware-capability-ladder@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/kit/hardware_kit.py",
+      "sha256": "a0328d69aa9d9c74b137556930afa06309a235b2e35ee3a0a518c45ae8a39e6d",
+      "bytes": 18849,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/cuda_execution_qualification.py",
+      "sha256": "e2f6838e53bb37cae7f3eeaa6e72a3877e412b0db6b1cef8367f18b3f6023f4c",
+      "bytes": 39521,
+      "evidence_kind": "measured",
+      "interface": "CudaExecutionQualification@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/cuda-execution-qualification@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_cuda_execution_qualification.py",
+      "sha256": "26da47fca457fdfe761b35ba2fbfd4edb8a6f314bdd5ccea98840be44da6c919",
+      "bytes": 9899,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/cuda-execution-qualification-verdict@1",
+    "interface": "CudaExecutionQualification@1",
+    "verdict_cid": "baguqeeraxcutom6w2wjgfymky4wkf55lmq7z3zm26las6v7tzh5q3haxlxja",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "live_cuda_execution_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "simulated_results_represented_as_live": false,
+    "live_cuda_qualified": true,
+    "live_cuda_evidence_kind": "measured",
+    "live_model_provider_qualified": false,
+    "live_model_provider_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-037",
+    "goal_id": "PCPR-G430",
+    "promotion_status": "rnd_non_promoted",
+    "cpu_execution_verdict_cid": "baguqeeraqnzibzfy4sfh47bzgkotycjyvbzdgoap4o4uoqy3wlqsmk2lis5q",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-037 qualified live CPU execution as R&D. This task qualifies live CUDA execution as R&D. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "cuda_execution": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/cuda-execution-qualification@1",
+    "interface": "CudaExecutionQualification@1",
+    "floor_schema": "ipfs_accelerate_py/assurance/cuda-execution@1",
+    "floor_interface": "CudaExecution@1",
+    "floor_task_id": "PCPR-038",
+    "floor_goal_id": "PCPR-G430",
+    "kernel": "cuda_integer_mix32",
+    "live_cuda_execution_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "cuda_identity": {
+      "name": "NVIDIA GB10",
+      "compute_capability_major": 12,
+      "compute_capability_minor": 1,
+      "libcuda": "libcuda.so.1",
+      "driver_result": null,
+      "driver_detail": null
+    },
+    "probes": [
+      {
+        "probe_id": "canonical_cuda_execution_module",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical CUDA execution module declares the live libcuda canary.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/cuda_execution.py"
+        }
+      },
+      {
+        "probe_id": "canonical_cuda_ptx_kernel",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Checked-in PTX kernel is present for driver-API load without nvcc.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/cuda_execution_kernels_sm121.ptx"
+        }
+      },
+      {
+        "probe_id": "ladder_exposes_live_cuda_execution",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Capability ladder exposes live CUDA execution without production_authorized.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/hardware_capability_ladder.py"
+        }
+      },
+      {
+        "probe_id": "hardware_kit_uses_live_cuda_canary",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "HardwareKit CUDA test uses the live libcuda canary instead of torch-only success.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/kit/hardware_kit.py"
+        }
+      },
+      {
+        "probe_id": "cuda_identity",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live CUDA device identity observed through the driver API.",
+        "details": {
+          "name": "NVIDIA GB10",
+          "compute_capability_major": 12,
+          "compute_capability_minor": 1,
+          "libcuda": "libcuda.so.1",
+          "driver_result": null,
+          "driver_detail": null
+        }
+      },
+      {
+        "probe_id": "cuda_load",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "CUDA PTX module loaded and kernel symbols resolved.",
+        "details": {
+          "ptx_label": "sm_121_from_sm121",
+          "load_result": 0,
+          "load_detail": "sm_121_from_sm121",
+          "nvcc_not_used": true,
+          "torch_not_used": true
+        }
+      },
+      {
+        "probe_id": "cuda_compute_kernel",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live CUDA kernel completed with the expected digest.",
+        "details": {
+          "kernel": "cuda_integer_mix32",
+          "n": 200000,
+          "expected": 1494583840,
+          "observed": 1494583840,
+          "detail": "ok",
+          "ptx_label": "sm_121_from_sm121"
+        }
+      },
+      {
+        "probe_id": "cuda_output_validation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "CUDA kernel output matched the pinned fixture digest.",
+        "details": {
+          "n": 8,
+          "expected": 1499458516,
+          "observed": 1499458516,
+          "detail": "ok"
+        }
+      },
+      {
+        "probe_id": "cuda_repetition",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Repeated live CUDA execution produced the same digest.",
+        "details": {
+          "first": 1494583840,
+          "second": 1494583840,
+          "n": 200000,
+          "detail": "ok"
+        }
+      },
+      {
+        "probe_id": "cuda_cancellation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live CUDA worker honoured a host cancel flag and joined.",
+        "details": {
+          "ok": true,
+          "timed_out": false,
+          "ticks": 357872,
+          "thread_alive": false,
+          "finished": true
+        }
+      },
+      {
+        "probe_id": "cuda_timeout",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live CUDA worker exceeded the stream-query deadline and was recorded as Timeout.",
+        "details": {
+          "ok": true,
+          "timed_out": true,
+          "ticks": 357035,
+          "thread_alive": false,
+          "finished": true,
+          "outcome": "Timeout"
+        }
+      },
+      {
+        "probe_id": "cuda_cleanup",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Timeout worker was cancelled and joined; no leftover CUDA stream work.",
+        "details": {
+          "thread_alive": false
+        }
+      },
+      {
+        "probe_id": "cuda_resource_admission_fail_closed",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "CUDA resource admission refused oversubscription and did not fabricate success.",
+        "details": {
+          "free_bytes": 7071821824,
+          "total_bytes": 130663821312,
+          "requested_bytes": 131737563136,
+          "admitted": false,
+          "outcome": "Unavailable",
+          "code": "cuda_resource_oversubscription_refused",
+          "live_oom_not_claimed": true
+        }
+      },
+      {
+        "probe_id": "production_authorized_not_granted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Live CUDA execution does not grant production_authorized or ladder qualified.",
+        "details": {}
+      },
+      {
+        "probe_id": "nvidia_smi_is_not_qualification",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "nvidia-smi and torch are not used as CUDA qualification.",
+        "details": {
+          "nvcc_not_used": true,
+          "torch_not_used": true
+        }
+      },
+      {
+        "probe_id": "live_model_provider_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify a model or provider path. The CUDA kernel is not model inference. Missing model/provider evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-039"
+        }
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "numpy_module": "/usr/lib/python3/dist-packages/numpy/__init__.py",
+    "numpy_required_for_cuda_canary": false,
+    "torch": "unavailable",
+    "nvcc": "unavailable",
+    "libcuda": "libcuda.so.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "nvidia_smi": "/usr/bin/nvidia-smi",
+    "nvidia_smi_is_not_cuda_qualification": true,
+    "nvcc_not_on_sealed_path": true,
+    "torch_not_used_as_qualification": true,
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live model qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr038-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_cuda_execution_qualification.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 6.01,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_cuda_execution_qualification.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/torch/nvcc under /usr/local/cuda are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-038.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_cuda_execution_qualification.py",
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "duration_seconds": 6.01,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "nvidia_smi_is_not_cuda_qualification": true,
+    "torch_is_not_cuda_qualification": true,
+    "nvcc_not_required_for_cuda_canary": true,
+    "live_model_provider_not_claimed": true,
+    "production_authorized_not_granted": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "live_cuda_execution_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "simulated_results_represented_as_live": false,
+    "live_model_provider_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live model/provider qualification, and not a closed PCPR release outcome.",
+    "Live CUDA execution is qualified as R&D with a libcuda driver-API integer kernel. That is not production_authorized and not the hardware-ladder qualified rung, which still requires model compatibility (PCPR-039).",
+    "The CUDA canary covers identity, load, compute, output validation, cancellation, timeout, cleanup, fail-closed resource admission, and repetition. It is not a model load or inference path.",
+    "Resource admission refused oversubscription. A live OOM kill was not induced and is not claimed.",
+    "nvidia-smi is present on the sealed PATH. Device visibility is not CUDA qualification. The live canary used libcuda.so.1, not nvidia-smi.",
+    "nvcc is absent from the sealed PATH. /usr/local/cuda is not an admitted toolchain. The canary loads checked-in PTX through the driver API and does not invoke nvcc.",
+    "Sealed-environment torch is absent and was not used as live CUDA authority.",
+    "Live model/provider qualification remains PCPR-039.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, ipfs, z3, torch, and nvcc are absent and are not recorded as passing or zero.",
+    "Numpy is present in the sealed environment but is not required for the CUDA canary and is not live CUDA authority.",
+    "Hermetic CudaExecutionQualification tests are candidate coverage of the live CUDA canary; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
