@@ -1,0 +1,1152 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-022",
+  "title": "Qualify or de-scope Iroh",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G300",
+  "objective_id": "PCPR-022",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-022@current-head-iroh-qualification-or-descoping-v1",
+  "observed_at": "2026-09-02T02:35:36Z",
+  "depends_on": [
+    "PCPR-021"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-2 Kit Iroh qualification or de-scope only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_kit/ipfs_kit_py/assurance/iroh.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/iroh_qualification.py",
+      "external/ipfs_kit/tests/test_pcpr_iroh_qualification.py",
+      "external/ipfs_kit/README.md",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add LiveIrohAdapter@1 and IrohQualification@1. The live adapter talks to ipfs-kit-iroh-sidecar over stdlib Unix JSON-RPC, never auto-installs, rejects secret material, uses BLAKE3 blob identity (never an IPFS CID), and fails closed when a sidecar is absent. Injected transports are labeled simulated and cannot mint live qualification. Sealed validation PATH has no ipfs-kit-iroh-sidecar or upstream iroh executable and no digest-bound sidecar deployment, so write, read-back, digest, delete, replay, timeout, concurrency, restart, corruption, large objects, credentials, pin, unpin, daemon loss, configuration, upgrade, rollback, and interface parity stay typed unavailable. Iroh is classified experimental; live-support claims are removed from README. Hermetic candidate tests do not represent simulated results as live. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_kit_py",
+    "outer_commit": "7f9fcdc81932741e1b61f600fe7ca253e0e26e1e",
+    "outer_tree": "19b394f9fed27cc4e852cb8ade77fb27540d3f19",
+    "outer_subject": "Merge commit '14d4eb91d97314380a3fd01ac5b4055093cbb31a' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "aa263a7f2a6953b38fd200a898f6c8d2aa12fb98",
+    "accelerator_pre_change_tree": "5e23813edf6420f5e4bf7b47cdd2840d420ae772",
+    "accelerator_gitlink": "aa263a7f2a6953b38fd200a898f6c8d2aa12fb98",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "unchanged by this task",
+    "accelerator_post_change_tree": "unchanged by this task",
+    "datasets_commit": "d1453221b9e4e86cc845bffe49f3ca65d28688a1",
+    "datasets_tree": "34201b5fb18a0fc145aea26922a8b876b0be2629",
+    "datasets_gitlink": "d1453221b9e4e86cc845bffe49f3ca65d28688a1",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "kit_commit": "2bc27b1f56c8b6481de1efd47e3e2d900b948f44",
+    "kit_tree": "ff7edc6eeb7a8dd33fdf53a137761d3bd79865fe",
+    "kit_gitlink": "2bc27b1f56c8b6481de1efd47e3e2d900b948f44",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "kit_post_change_commit": "pending nested commit after admission",
+    "kit_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/iroh.py",
+      "sha256": "3cfe5237d839943b244b1cee8c832b7a5d0c220db9422b90bbdc3cb6d4e68ac3",
+      "bytes": 37314,
+      "evidence_kind": "measured",
+      "interface": "LiveIrohAdapter@1",
+      "schema": "ipfs_kit_py/assurance/iroh@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/iroh_qualification.py",
+      "sha256": "b2c5fefb871718024e1635fbe504973e5f65990b397881e1ee8ab485bb6f8b3d",
+      "bytes": 44723,
+      "evidence_kind": "measured",
+      "interface": "IrohQualification@1",
+      "schema": "ipfs_kit_py/assurance/iroh-qualification@1"
+    },
+    {
+      "path": "external/ipfs_kit/tests/test_pcpr_iroh_qualification.py",
+      "sha256": "e25a8208b88047d17864f734aa0c22cdfd8b31bb541783739adc509d339485ea",
+      "bytes": 14105,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/__init__.py",
+      "sha256": "57a4e15cb3949df62517b9cd666fb541fda5b68bada63db909bb7b47be2346f2",
+      "bytes": 74,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/README.md",
+      "sha256": "2dbe8d5655fe8c7f18274d22889828f99776a88e4bacc0734c315791145b5050",
+      "bytes": 34825,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_kit_py/assurance/iroh-qualification-verdict@1",
+    "interface": "IrohQualification@1",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "iroh_live_qualified": false,
+    "suite_complete": false,
+    "certification_disposition": "Unavailable",
+    "support_class": "experimental",
+    "live_support_claim": false,
+    "descoped": true,
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "python_iroh_observed": false,
+    "interface_parity_qualified": false,
+    "sealed_iroh_sidecar": "unavailable",
+    "sealed_iroh_binary": "unavailable",
+    "sidecar_identity": "unavailable",
+    "live_iroh_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "probes": [
+      {
+        "probe_id": "live_iroh_adapter",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No isolated Iroh sidecar was provisioned. LiveIrohAdapter was not used as live evidence. Iroh remains experimental and is not live-supported.",
+        "details": {
+          "backend_id": "iroh",
+          "schema": "ipfs_kit_py/assurance/iroh@1",
+          "interface": "LiveIrohAdapter@1",
+          "certification_scope": "pcpr-022-iroh-python; not a closed PCPR release",
+          "production_authorized": false,
+          "live_support_claim": false,
+          "support_class": "experimental"
+        }
+      },
+      {
+        "probe_id": "sealed_iroh_sidecar",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable. A digest-bound Iroh sidecar was not provisioned. Missing sidecar evidence stays typed unavailable and is not recorded as zero or passing. Iroh is classified experimental and is not live-supported.",
+        "details": {
+          "binary": "ipfs-kit-iroh-sidecar",
+          "product": "iroh",
+          "path": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "auto_install": false,
+          "support_class": "experimental",
+          "live_support_claim": false
+        }
+      },
+      {
+        "probe_id": "sealed_iroh_binary",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no upstream iroh executable. Upstream iroh is not the Kit sidecar runtime and is not live qualification. Missing binary stays typed unavailable.",
+        "details": {
+          "binary": "iroh",
+          "product": "iroh",
+          "path": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "decision": "not-a-backend-runtime"
+        }
+      },
+      {
+        "probe_id": "sidecar_identity",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No digest-bound ipfs-kit-iroh-sidecar deployment is present on the sealed PATH. Declared pin version=unavailable digest=unavailable. Packaged crate checksums and iroh-releases.json configuration are not live identity.",
+        "details": {
+          "product": "iroh",
+          "binary": "ipfs-kit-iroh-sidecar",
+          "version": "unavailable",
+          "digest": "unavailable"
+        }
+      },
+      {
+        "probe_id": "auto_install_not_used",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-022 never calls install_iroh or IrohInstallManager with install=True and never downloads a sidecar. Missing sidecar stays typed unavailable.",
+        "details": {
+          "IPFS_KIT_AUTO_INSTALL_BINARIES": "unset",
+          "install_invoked": false
+        }
+      },
+      {
+        "probe_id": "live_support_claim_removed",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Iroh is classified experimental. Live-support claims are removed. Disabled-by-default packaging and installable:false platforms are not live qualification. Configuration is not live qualification.",
+        "details": {
+          "support_class": "experimental",
+          "live_support_claim": false,
+          "production_authorized": false,
+          "descoped": true
+        }
+      },
+      {
+        "probe_id": "cli_iroh_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "cli source module ipfs_kit_py.cli is importable. No live Iroh cli session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.cli",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "mcp_iroh_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcp source module ipfs_kit_py.mcp is importable. No live Iroh mcp session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.mcp",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "mcpp_iroh_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcpp source module ipfs_kit_py.mcp_server.mcplusplus is importable. No live Iroh mcpp session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.mcp_server.mcplusplus",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "vfs_wal_not_in_scope",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "VFS/WAL/current-root recovery is PCPR-023. Missing VFS evidence stays typed unavailable.",
+        "details": {
+          "remediating_task": "PCPR-023"
+        }
+      },
+      {
+        "probe_id": "support_matrix_not_generated",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Authoritative support-matrix generation is PCPR-027. This receipt does not replace it.",
+        "details": {
+          "remediating_task": "PCPR-027"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "operation": "write",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "read_back",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "digest",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "delete",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "replay",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "timeout",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "concurrency",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "restart",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "corruption",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "large_object",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "credential",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "interface_parity",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      }
+    ],
+    "iroh_operations": [
+      {
+        "operation": "clean_provisioning",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "pin_persistence",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "unpin_deletion",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "daemon_loss",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "unexpected_content",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "configuration",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "upgrade",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "rollback",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      }
+    ],
+    "operations_observed": [],
+    "operations_missing": [
+      "write",
+      "read_back",
+      "digest",
+      "delete",
+      "replay",
+      "timeout",
+      "concurrency",
+      "restart",
+      "corruption",
+      "large_object",
+      "credential",
+      "interface_parity"
+    ],
+    "blockers": [],
+    "verdict_cid": "baguqeeraevn3kilaikllu3tg2lvhcjyi34sav7u7bjz677xfedplxo5qqtzq"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-021",
+    "goal_id": "PCPR-G300",
+    "promotion_status": "rnd_non_promoted",
+    "pinned_ipfs_verdict_cid": "baguqeera73hiwlkjgzhkhaoazampvyq2zbu5jk4modig3ov6onbjy24n5vlq",
+    "local_backend_verdict_cid": "baguqeeraxsfyay5pfotmvsb3ik3xkeog7tsvuwb6anrx75ld2vmllqqlwwcq",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "path_id": "kit_unqualified_live_storage_claims",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeera73hiwlkjgzhkhaoazampvyq2zbu5jk4modig3ov6onbjy24n5vlq",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-021 recorded the sealed-PATH absence of a digest-bound Kubo daemon and left Iroh typed unavailable. This task classifies Iroh experimental, removes live-support claims, and does not promote PCPR-001 or close a release.",
+    "evidence_kind": "measured"
+  },
+  "iroh": {
+    "schema": "ipfs_kit_py/assurance/iroh-qualification@1",
+    "interface": "IrohQualification@1",
+    "backend_id": "iroh",
+    "adapter_interface": "LiveIrohAdapter@1",
+    "support_class": "experimental",
+    "live_support_claim": false,
+    "descoped": true,
+    "python_iroh_observed": false,
+    "iroh_live_qualified": false,
+    "suite_complete": false,
+    "certification_disposition": "Unavailable",
+    "storage_selectable": false,
+    "production_authorized": false,
+    "hermetic_results_represented_as_live": false,
+    "simulated_results_represented_as_live": false,
+    "sealed_iroh_sidecar": "unavailable",
+    "sealed_iroh_binary": "unavailable",
+    "sidecar_identity": "unavailable",
+    "auto_install": false,
+    "probes": [
+      {
+        "probe_id": "live_iroh_adapter",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No isolated Iroh sidecar was provisioned. LiveIrohAdapter was not used as live evidence. Iroh remains experimental and is not live-supported.",
+        "details": {
+          "backend_id": "iroh",
+          "schema": "ipfs_kit_py/assurance/iroh@1",
+          "interface": "LiveIrohAdapter@1",
+          "certification_scope": "pcpr-022-iroh-python; not a closed PCPR release",
+          "production_authorized": false,
+          "live_support_claim": false,
+          "support_class": "experimental"
+        }
+      },
+      {
+        "probe_id": "sealed_iroh_sidecar",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable. A digest-bound Iroh sidecar was not provisioned. Missing sidecar evidence stays typed unavailable and is not recorded as zero or passing. Iroh is classified experimental and is not live-supported.",
+        "details": {
+          "binary": "ipfs-kit-iroh-sidecar",
+          "product": "iroh",
+          "path": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "auto_install": false,
+          "support_class": "experimental",
+          "live_support_claim": false
+        }
+      },
+      {
+        "probe_id": "sealed_iroh_binary",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no upstream iroh executable. Upstream iroh is not the Kit sidecar runtime and is not live qualification. Missing binary stays typed unavailable.",
+        "details": {
+          "binary": "iroh",
+          "product": "iroh",
+          "path": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "decision": "not-a-backend-runtime"
+        }
+      },
+      {
+        "probe_id": "sidecar_identity",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No digest-bound ipfs-kit-iroh-sidecar deployment is present on the sealed PATH. Declared pin version=unavailable digest=unavailable. Packaged crate checksums and iroh-releases.json configuration are not live identity.",
+        "details": {
+          "product": "iroh",
+          "binary": "ipfs-kit-iroh-sidecar",
+          "version": "unavailable",
+          "digest": "unavailable"
+        }
+      },
+      {
+        "probe_id": "auto_install_not_used",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-022 never calls install_iroh or IrohInstallManager with install=True and never downloads a sidecar. Missing sidecar stays typed unavailable.",
+        "details": {
+          "IPFS_KIT_AUTO_INSTALL_BINARIES": "unset",
+          "install_invoked": false
+        }
+      },
+      {
+        "probe_id": "live_support_claim_removed",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Iroh is classified experimental. Live-support claims are removed. Disabled-by-default packaging and installable:false platforms are not live qualification. Configuration is not live qualification.",
+        "details": {
+          "support_class": "experimental",
+          "live_support_claim": false,
+          "production_authorized": false,
+          "descoped": true
+        }
+      },
+      {
+        "probe_id": "cli_iroh_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "cli source module ipfs_kit_py.cli is importable. No live Iroh cli session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.cli",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "mcp_iroh_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcp source module ipfs_kit_py.mcp is importable. No live Iroh mcp session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.mcp",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "mcpp_iroh_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcpp source module ipfs_kit_py.mcp_server.mcplusplus is importable. No live Iroh mcpp session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.mcp_server.mcplusplus",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "vfs_wal_not_in_scope",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "VFS/WAL/current-root recovery is PCPR-023. Missing VFS evidence stays typed unavailable.",
+        "details": {
+          "remediating_task": "PCPR-023"
+        }
+      },
+      {
+        "probe_id": "support_matrix_not_generated",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Authoritative support-matrix generation is PCPR-027. This receipt does not replace it.",
+        "details": {
+          "remediating_task": "PCPR-027"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "operation": "write",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "read_back",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "digest",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "delete",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "replay",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "timeout",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "concurrency",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "restart",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "corruption",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "large_object",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "credential",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "interface_parity",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      }
+    ],
+    "iroh_operations": [
+      {
+        "operation": "clean_provisioning",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "pin_persistence",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "unpin_deletion",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "daemon_loss",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "unexpected_content",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "configuration",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "upgrade",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      },
+      {
+        "operation": "rollback",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no digest-bound Iroh deployment. Isolated sidecar provisioning was not attempted. Missing sidecar evidence stays typed unavailable. Iroh is classified experimental; live-support claims are removed."
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured",
+    "iroh": "unavailable",
+    "ipfs-kit-iroh-sidecar": "unavailable"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live Iroh qualification, CLI/MCP/MCP++ parity, VFS/WAL qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr022-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_kit /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_iroh_qualification.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.12,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/test_pcpr_iroh_qualification.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio and any non-sealed iroh binary are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-022.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_iroh_qualification.py",
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "duration_seconds": 0.12,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "hermetic_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live_release": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_iroh_not_claimed": true,
+    "live_support_claim_removed": true,
+    "auto_install_not_used": true,
+    "interface_parity_not_claimed": true,
+    "incomplete_suite_cannot_live_qualify": true,
+    "missing_sidecar_is_unavailable_not_zero": true,
+    "iroh_classified_experimental": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "python_iroh_observed": false,
+    "iroh_live_qualified": false,
+    "suite_complete": false,
+    "interface_parity_qualified": false,
+    "live_iroh_qualified": false,
+    "live_support_claim": false,
+    "support_class": "experimental",
+    "descoped": true,
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live Iroh qualification, not CLI/MCP/MCP++ parity, and not a closed PCPR release outcome.",
+    "Sealed validation PATH has no ipfs-kit-iroh-sidecar executable and no upstream iroh executable. No isolated sidecar was provisioned. Live ingest/cat/protect/release/restart/daemon-loss evidence stays typed unavailable and is not recorded as zero or passing.",
+    "Iroh is classified experimental. Live-support claims are removed. Disabled-by-default packaging and installable:false platforms are configuration, not live qualification.",
+    "No digest-bound Iroh sidecar package identity is present, so upgrade and rollback stay typed unavailable.",
+    "CLI, MCP, and MCP++ Iroh sessions were not exercised and stay typed unavailable (PCPR-026).",
+    "VFS/WAL/current-root recovery remains typed unavailable (PCPR-023).",
+    "Injected Unix JSON-RPC transports are labeled simulated and cannot mint live qualification.",
+    "Iroh blob identity is BLAKE3 hex and is never converted to an IPFS CID.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, pytest-asyncio, ipfs, iroh, ipfs-kit-iroh-sidecar, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic IrohQualification tests are candidate coverage only; they do not close a release.",
+    "Post-change Kit commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Kit commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
