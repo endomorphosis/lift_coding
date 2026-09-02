@@ -72,6 +72,9 @@ OPERATOR_TASK_ALIAS: Final = "PCTDD-000"
 DEFAULT_MONITOR_SECONDS: Final = 180.0
 MIN_STABLE_HEALTH_SECONDS: Final = 15.0
 DEFAULT_STARTUP_BLOCKER_GRACE_SECONDS: Final = 15.0
+RUNTIME_PROMOTION_SENTINEL: Final = Path(
+    "/run/user/1000/pctdd-reviewed-candidate-launch-ready"
+)
 MAX_JSON_BYTES: Final = 8 * 1024 * 1024
 MAX_OWNER_LOG_BYTES: Final = 64 * 1024 * 1024
 PRIVATE_FILE_STABLE_FIELDS: Final = (
@@ -2498,6 +2501,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     if not config_path.is_absolute():
         config_path = ROOT / config_path
     try:
+        runtime_mutation_requested = arguments.command in {
+            "state-owner",
+            "resume",
+        } or (
+            arguments.command == "launch"
+            and not bool(getattr(arguments, "dry_run", False))
+        )
+        if (
+            runtime_mutation_requested
+            and not RUNTIME_PROMOTION_SENTINEL.is_file()
+        ):
+            raise OperatorError(
+                "PCTDD runtime is operator-fenced until the reviewed candidate is ready"
+            )
         if arguments.command == "validate":
             result = validate()
         elif arguments.command == "materialize":
