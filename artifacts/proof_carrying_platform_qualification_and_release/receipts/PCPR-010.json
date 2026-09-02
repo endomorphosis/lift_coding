@@ -1,0 +1,371 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-010",
+  "title": "Remove Datasets import-time auto-install",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G210",
+  "objective_id": "PCPR-010",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-010@current-head-datasets-import-time-auto-install-removal-v1",
+  "observed_at": "2026-09-02T02:06:47Z",
+  "depends_on": [
+    "PCPR-003"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-1 Datasets import-time auto-install removal only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "external/ipfs_datasets/ipfs_datasets_py/auto_installer.py",
+      "external/ipfs_datasets/ipfs_datasets_py/ipfs_backend_router.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/__init__.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/initialization.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/import_time_auto_install.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_010_import_time_auto_install.py",
+      "external/ipfs_datasets/tests/unit/test_formal_assurance_import_purity.py",
+      "external/ipfs_datasets/docs/architecture/FORMAL_ASSURANCE_IMPORT_BASELINE.md",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Remove Datasets import-time auto-install. Package import no longer calls _enable_default_auto_install, get_installer, or ensure_repo_installer_current. The package-root installer stand-in is _InertInstaller (auto_install=False). ensure_module resolves via importlib only; missing optional modules stay None / typed unavailable. ipfs_backend_router._auto_install_enabled is fail-closed when env is unset. Explicit installation remains python -m ipfs_datasets_py.auto_installer or initialize_datasets. Live solvers remain typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_datasets_py",
+    "outer_commit": "8a8d50dd46fde811d080132ec6f3bdce4059b1e1",
+    "outer_tree": "b270805744c7de8752847b53843d4c5894a7384b",
+    "outer_subject": "fix(pcpr): reseal accelerate planning pins to nested-owner mapping",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "datasets_pre_change_commit": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_pre_change_tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+    "datasets_gitlink": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "accelerator_commit": "d4aa008d66033574911e8bdde6cfe12e9817958b",
+    "accelerator_tree": "2e3dd404a6ff7530346ff0b0dc0575e28a521383",
+    "accelerator_gitlink": "d4aa008d66033574911e8bdde6cfe12e9817958b",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "kit_commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+    "kit_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/import_time_auto_install.py",
+      "sha256": "3e0c8566c408dcd9b46a813fd38eafd13314b429532d1b2f9615422dc0f69ae6",
+      "bytes": 33152,
+      "evidence_kind": "measured",
+      "interface": "DatasetsImportTimeAutoInstallRemoval@1",
+      "schema": "ipfs_datasets_py/assurance/import-time-auto-install-removal@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "sha256": "1003811514a6678b02e3e539810beab8b33e5da72f893cb780430eba210d7c2d",
+      "bytes": 53749,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/ipfs_backend_router.py",
+      "sha256": "37d0fabc92cec04574245c772beb197f1aaf7fef1db8c5b215fc51c3bbd30f9c",
+      "bytes": 34477,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_010_import_time_auto_install.py",
+      "sha256": "a40c621d9c8c7feda697660200de3d07c37bdbcb270d3229919128f3cd423884",
+      "bytes": 8273,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_datasets_py/assurance/import-time-auto-install-removal-verdict@1",
+    "interface": "DatasetsImportTimeAutoInstallRemoval@1",
+    "verdict_cid": "baguqeerajdxhdv4abibas7zoh33qy5uvxf6zkqp7puxe3r47mzsjykjxmpiq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "import_sets_auto_install_env": false,
+    "import_constructs_installer": false,
+    "import_invokes_repo_installer": false,
+    "router_defaults_auto_install_on": false,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_solver_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-003",
+    "goal_id": "PCPR-G130",
+    "promotion_status": "rnd_non_promoted",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "path_id": "datasets_import_time_auto_install",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-003 inventoried datasets_import_time_auto_install as present; this task removes the import-time path. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "import_time_auto_install": {
+    "schema": "ipfs_datasets_py/assurance/import-time-auto-install-removal@1",
+    "interface": "DatasetsImportTimeAutoInstallRemoval@1",
+    "import_sets_auto_install_env": false,
+    "import_constructs_installer": false,
+    "import_invokes_repo_installer": false,
+    "router_defaults_auto_install_on": false,
+    "package_root_ensure_module_installs": false,
+    "missing_optional_dependency_outcome": "unavailable",
+    "explicit_install_surfaces": [
+      "python -m ipfs_datasets_py.auto_installer",
+      "ipfs_datasets_py.assurance.initialization.initialize_datasets"
+    ],
+    "probes": [
+      {
+        "probe_id": "package_init_enable_default_auto_install_call",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Package import does not call _enable_default_auto_install.",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py"
+        }
+      },
+      {
+        "probe_id": "package_init_enable_default_auto_install_env_write",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "_enable_default_auto_install does not write auto-install env.",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py"
+        }
+      },
+      {
+        "probe_id": "package_init_get_installer_call",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Package import does not call get_installer().",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py"
+        }
+      },
+      {
+        "probe_id": "package_init_ensure_repo_installer_current_call",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Package import does not call ensure_repo_installer_current().",
+        "details": {
+          "relpath": "ipfs_datasets_py/__init__.py"
+        }
+      },
+      {
+        "probe_id": "router_auto_install_default",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Router auto-install is fail-closed when env is unset.",
+        "details": {
+          "relpath": "ipfs_datasets_py/ipfs_backend_router.py"
+        }
+      },
+      {
+        "probe_id": "auto_installer_module_level_construction",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "auto_installer import does not construct DependencyInstaller.",
+        "details": {
+          "relpath": "ipfs_datasets_py/auto_installer.py"
+        }
+      },
+      {
+        "probe_id": "cold_import_inert",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Cold import is inert: no auto-install env write, installer construction, PATH mutation, network, or pip. Missing optional module is None.",
+        "details": {
+          "inert_installer": "_InertInstaller",
+          "auto_install": false,
+          "env_mutated": false,
+          "missing_optional_module": null
+        }
+      },
+      {
+        "probe_id": "live_solver_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live solvers. Missing Z3/cvc5/Lean/Coq evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live solver qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr010-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_010_import_time_auto_install.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.13,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/unit/test_pcpr_010_import_time_auto_install.py"
+    ],
+    "additional_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr010-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_010_import_time_auto_install.py tests/unit/test_formal_assurance_explicit_initialization.py tests/unit/test_auto_installer_runtime_guard.py",
+      "exit_code": 0,
+      "passed": 35,
+      "failed": 0,
+      "authority": false,
+      "reason": "FACP-022 explicit-initialization and auto-installer runtime-guard tests remain candidate coverage only.",
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-010.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_010_import_time_auto_install.py",
+      "exit_code": 0,
+      "passed": 9,
+      "failed": 0,
+      "duration_seconds": 0.13,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "import_does_not_set_auto_install_env": true,
+    "import_does_not_construct_installer": true,
+    "import_does_not_invoke_repo_installer": true,
+    "router_does_not_default_auto_install_on": true,
+    "missing_optional_dependency_is_unavailable_not_success": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_solver_not_claimed": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "import_sets_auto_install_env": false,
+    "import_constructs_installer": false,
+    "import_invokes_repo_installer": false,
+    "router_defaults_auto_install_on": false,
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live solver qualification, and not a closed PCPR release outcome.",
+    "Explicit installation remains available via python -m ipfs_datasets_py.auto_installer and initialize_datasets. Those paths are not import-time and are not live qualification.",
+    "ipfs_datasets_py.auto_installer.ensure_module and lazy_dependencies may still install when a caller constructs the installer with explicit auto_install or truthy env. That is not package import.",
+    "False-success fallbacks remain for PCPR-011. Untyped None fallbacks remain for PCPR-012.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "Sealed-environment z3, cvc5, Lean, and Coq are absent and are not recorded as passing or zero.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, and ipfs are absent and are not recorded as passing or zero.",
+    "Hermetic DatasetsImportTimeAutoInstallRemoval tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Datasets commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Datasets commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
