@@ -1,0 +1,547 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-035",
+  "title": "Pin mutable dependencies",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G420",
+  "objective_id": "PCPR-035",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-035@current-head-mutable-dependency-pinning-v1",
+  "observed_at": "2026-09-02T02:56:03Z",
+  "depends_on": [
+    "PCPR-034"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-3 Accelerate mutable-dependency pinning only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/mutable_dependency_pins.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/mutable_dependency_pinning.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_mutable_dependency_pinning.py",
+      "external/ipfs_accelerate/pyproject.toml",
+      "external/ipfs_accelerate/requirements-hf-server.txt",
+      "external/ipfs_accelerate/ipfs_accelerate_py/requirements.txt",
+      "external/ipfs_accelerate/ipfs_accelerate_py/mcp/requirements-mcp.txt",
+      "external/ipfs_accelerate/install/requirements_base.txt",
+      "external/ipfs_accelerate/install/requirements_apple.txt",
+      "external/ipfs_accelerate/install/requirements_cuda.txt",
+      "external/ipfs_accelerate/install/requirements_github_ci.txt",
+      "external/ipfs_accelerate/install/requirements_openvino.txt",
+      "external/ipfs_accelerate/install/requirements_qualcomm.txt",
+      "external/ipfs_accelerate/ipfs_accelerate_py/worker/skillset/libllama/requirements.txt",
+      "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/p2p/libp2p_runtime.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/p2p_transport.py",
+      "external/ipfs_accelerate/scripts/dependency_installer.py",
+      "external/ipfs_accelerate/scripts/comprehensive_dependency_installer.py",
+      "external/ipfs_accelerate/scripts/setup_environment.py",
+      "external/ipfs_accelerate/scripts/setup/install_p2p_cache_deps.sh",
+      "external/ipfs_accelerate/scripts/auto-update.sh",
+      "external/ipfs_accelerate/scripts/validation/test_cross_platform_cache.sh",
+      "external/ipfs_accelerate/scripts/validation/validate_docker_cache_setup.sh",
+      "external/ipfs_accelerate/test/test_p2p_integration.py",
+      "external/ipfs_accelerate/test/test_p2p_cache_encryption.py",
+      "external/ipfs_accelerate/test/test_docker_runner_cache_connectivity.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add MutableDependencyPins@1 and MutableDependencyPinning@1. Replace git+https @main / unpinned VCS refs in Accelerate qualified extras, install requirement profiles, HF-server requirements, and runtime installer specs with 40-character commits. Kit and Datasets pins bind portfolio gitlinks; transformers and model-manager pins bind Accelerate gitlinks; libp2p and llama.cpp are in-tree declared freezes, not live installs. Kit proof-context inactive @main declarations are retained. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "b96ef13ab327da245f4cf84e378a7fd89856631e",
+    "outer_tree": "e774965af04aeee69cfcbccbd6b6c40a8ec630f1",
+    "outer_subject": "Merge commit '623dac8778c4930fe0e34f26f9dbbb13ae28904e' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "d9268f23fcda1cb6d3321960550f5d39709e806f",
+    "accelerator_pre_change_tree": "811f72effbe907d692d189e838cae58deb0bb463",
+    "accelerator_gitlink": "d9268f23fcda1cb6d3321960550f5d39709e806f",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "d54a6494f50b5982758f8a6d2aafe24ccc7523b8",
+    "datasets_tree": "f7f82b0ccddc3ccb2628f04f26dd17f644ee53a6",
+    "datasets_gitlink": "d54a6494f50b5982758f8a6d2aafe24ccc7523b8",
+    "kit_commit": "a4fd25d944e6aaf25fb51e054a3f62bbcbea544d",
+    "kit_tree": "caff018b9390cc55cdcb483d1c94f31b3ee93754",
+    "kit_gitlink": "a4fd25d944e6aaf25fb51e054a3f62bbcbea544d",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/mutable_dependency_pins.py",
+      "sha256": "cdf63884f0fabf684dee4ded4ef98972d5f264fc485a70cdf119b4a943922ea9",
+      "bytes": 8610,
+      "evidence_kind": "measured",
+      "interface": "MutableDependencyPins@1",
+      "schema": "ipfs_accelerate_py/assurance/mutable-dependency-pins@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/mutable_dependency_pinning.py",
+      "sha256": "e2188875aeb3f131442561b550fee457e431ba1a145457cc78dab2a56919360a",
+      "bytes": 43524,
+      "evidence_kind": "measured",
+      "interface": "MutableDependencyPinning@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mutable-dependency-pinning@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_mutable_dependency_pinning.py",
+      "sha256": "a2a5d4c2ab91db12e4d6b7b6100b0a0d528492d64c880d65a1fb7389b1eb9622",
+      "bytes": 8951,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/mutable-dependency-pinning-verdict@1",
+    "interface": "MutableDependencyPinning@1",
+    "verdict_cid": "baguqeeraglv6z75m4jv2zena6bco62zitwsk4cdep6fqrtfrvped3cyc4naa",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "qualified_profiles_contain_mutable_branch": false,
+    "vcs_refs_are_immutable_commits": true,
+    "simulated_results_represented_as_live": false,
+    "live_vcs_install_qualified": false,
+    "live_vcs_install_evidence_kind": "unavailable",
+    "live_libp2p_qualified": false,
+    "live_libp2p_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-034",
+    "goal_id": "PCPR-G410",
+    "promotion_status": "rnd_non_promoted",
+    "removal_verdict_cid": "baguqeerai2yx5egapigykuz5cutne2pzegfbmefskrctkz2jcs7kauot5hsa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-034 consolidated the capability ladder. This task pins mutable Git dependencies. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "pinning": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/mutable-dependency-pinning@1",
+    "interface": "MutableDependencyPinning@1",
+    "pin_schema": "ipfs_accelerate_py/assurance/mutable-dependency-pins@1",
+    "pin_interface": "MutableDependencyPins@1",
+    "pin_task_id": "PCPR-035",
+    "qualified_profiles_contain_mutable_branch": false,
+    "vcs_refs_are_immutable_commits": true,
+    "pins": {
+      "ipfs_kit_py": {
+        "name": "ipfs_kit_py",
+        "distribution": "ipfs_kit_py",
+        "git_url": "git+https://github.com/endomorphosis/ipfs_kit_py.git",
+        "commit": "a4fd25d944e6aaf25fb51e054a3f62bbcbea544d",
+        "pin_kind": "portfolio_gitlink",
+        "subdirectory": null,
+        "pep508": "ipfs_kit_py @ git+https://github.com/endomorphosis/ipfs_kit_py.git@a4fd25d944e6aaf25fb51e054a3f62bbcbea544d",
+        "live": false,
+        "evidence_kind": "measured"
+      },
+      "ipfs_datasets_py": {
+        "name": "ipfs_datasets_py",
+        "distribution": "ipfs_datasets_py",
+        "git_url": "git+https://github.com/endomorphosis/ipfs_datasets_py.git",
+        "commit": "d54a6494f50b5982758f8a6d2aafe24ccc7523b8",
+        "pin_kind": "portfolio_gitlink",
+        "subdirectory": null,
+        "pep508": "ipfs_datasets_py @ git+https://github.com/endomorphosis/ipfs_datasets_py.git@d54a6494f50b5982758f8a6d2aafe24ccc7523b8",
+        "live": false,
+        "evidence_kind": "measured"
+      },
+      "ipfs_transformers_py": {
+        "name": "ipfs_transformers_py",
+        "distribution": "ipfs_transformers_py",
+        "git_url": "git+https://github.com/endomorphosis/ipfs_transformers_py.git",
+        "commit": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+        "pin_kind": "accelerate_gitlink",
+        "subdirectory": null,
+        "pep508": "ipfs_transformers_py @ git+https://github.com/endomorphosis/ipfs_transformers_py.git@b397988ed9e3e656475c1cf4417b84efdb95daf3",
+        "live": false,
+        "evidence_kind": "measured"
+      },
+      "ipfs_model_manager_py": {
+        "name": "ipfs_model_manager_py",
+        "distribution": "ipfs_model_manager_py",
+        "git_url": "git+https://github.com/endomorphosis/ipfs_model_manager_py.git",
+        "commit": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+        "pin_kind": "accelerate_gitlink",
+        "subdirectory": null,
+        "pep508": "ipfs_model_manager_py @ git+https://github.com/endomorphosis/ipfs_model_manager_py.git@f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+        "live": false,
+        "evidence_kind": "measured"
+      },
+      "libp2p": {
+        "name": "libp2p",
+        "distribution": "libp2p",
+        "git_url": "git+https://github.com/libp2p/py-libp2p.git",
+        "commit": "20d9527ff5a2e8368e77b964b340d0c7ded1a61f",
+        "pin_kind": "declared_freeze",
+        "subdirectory": null,
+        "pep508": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@20d9527ff5a2e8368e77b964b340d0c7ded1a61f",
+        "live": false,
+        "evidence_kind": "measured"
+      },
+      "gguf-py": {
+        "name": "gguf-py",
+        "distribution": "gguf",
+        "git_url": "git+https://github.com/ggerganov/llama.cpp.git",
+        "commit": "b96806d96061049a5b574269b049bf6241d63d46",
+        "pin_kind": "declared_freeze",
+        "subdirectory": "gguf-py",
+        "pep508": "gguf @ git+https://github.com/ggerganov/llama.cpp.git@b96806d96061049a5b574269b049bf6241d63d46#subdirectory=gguf-py",
+        "live": false,
+        "evidence_kind": "measured"
+      }
+    },
+    "probes": [
+      {
+        "probe_id": "canonical_pin_table",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical pin table declares 40-character commits and no live claim.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/mutable_dependency_pins.py",
+          "pin_names": [
+            "ipfs_kit_py",
+            "ipfs_datasets_py",
+            "ipfs_transformers_py",
+            "ipfs_model_manager_py",
+            "libp2p",
+            "gguf-py"
+          ]
+        }
+      },
+      {
+        "probe_id": "pyproject_qualified_extras_pinned",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "pyproject extras full/all/mcp-p2p/libp2p use immutable commits.",
+        "details": {
+          "relpath": "pyproject.toml"
+        }
+      },
+      {
+        "probe_id": "hf_server_requirements_pinned",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "HF-server requirements pin kit and datasets to immutable commits.",
+        "details": {
+          "relpath": "requirements-hf-server.txt"
+        }
+      },
+      {
+        "probe_id": "qualified_profiles_no_mutable_branch",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Qualified requirement profiles and runtime VCS specs contain no mutable branch.",
+        "details": {
+          "mutable_relpaths": [],
+          "missing_relpaths": [],
+          "scanned": [
+            "pyproject.toml",
+            "requirements-hf-server.txt",
+            "ipfs_accelerate_py/requirements.txt",
+            "ipfs_accelerate_py/mcp/requirements-mcp.txt",
+            "install/requirements_base.txt",
+            "install/requirements_apple.txt",
+            "install/requirements_cuda.txt",
+            "install/requirements_github_ci.txt",
+            "install/requirements_openvino.txt",
+            "install/requirements_qualcomm.txt",
+            "ipfs_accelerate_py/worker/skillset/libllama/requirements.txt",
+            "ipfs_accelerate_py/mcplusplus_module/p2p/libp2p_runtime.py",
+            "ipfs_accelerate_py/mcplusplus_module/p2p_transport.py",
+            "scripts/dependency_installer.py",
+            "scripts/comprehensive_dependency_installer.py",
+            "scripts/setup_environment.py",
+            "scripts/setup/install_p2p_cache_deps.sh",
+            "scripts/auto-update.sh",
+            "scripts/validation/test_cross_platform_cache.sh",
+            "scripts/validation/validate_docker_cache_setup.sh"
+          ]
+        }
+      },
+      {
+        "probe_id": "runtime_libp2p_spec_pinned",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "MCP++ libp2p runtime spec is an immutable commit, not @main.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/mcplusplus_module/p2p/libp2p_runtime.py",
+          "pep508": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@20d9527ff5a2e8368e77b964b340d0c7ded1a61f"
+        }
+      },
+      {
+        "probe_id": "llama_cpp_gguf_pin_is_immutable_commit",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "llama.cpp gguf-py subdirectory is pinned to an immutable commit.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/worker/skillset/libllama/requirements.txt",
+          "pin_kind": "declared_freeze"
+        }
+      },
+      {
+        "probe_id": "ipfs_kit_py_gitlink",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ipfs_kit_py pin equals the portfolio gitlink.",
+        "details": {
+          "owner": "portfolio",
+          "relpath": "external/ipfs_kit",
+          "pin_commit": "a4fd25d944e6aaf25fb51e054a3f62bbcbea544d",
+          "gitlink": "a4fd25d944e6aaf25fb51e054a3f62bbcbea544d",
+          "pin_kind": "portfolio_gitlink"
+        }
+      },
+      {
+        "probe_id": "ipfs_datasets_py_gitlink",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ipfs_datasets_py pin equals the portfolio gitlink.",
+        "details": {
+          "owner": "portfolio",
+          "relpath": "external/ipfs_datasets",
+          "pin_commit": "d54a6494f50b5982758f8a6d2aafe24ccc7523b8",
+          "gitlink": "d54a6494f50b5982758f8a6d2aafe24ccc7523b8",
+          "pin_kind": "portfolio_gitlink"
+        }
+      },
+      {
+        "probe_id": "ipfs_transformers_py_gitlink",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ipfs_transformers_py pin equals the accelerate gitlink.",
+        "details": {
+          "owner": "accelerate",
+          "relpath": "ipfs_transformers_py",
+          "pin_commit": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+          "gitlink": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+          "pin_kind": "accelerate_gitlink"
+        }
+      },
+      {
+        "probe_id": "ipfs_model_manager_py_gitlink",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "ipfs_model_manager_py pin equals the accelerate gitlink.",
+        "details": {
+          "owner": "accelerate",
+          "relpath": "ipfs_model_manager_py",
+          "pin_commit": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+          "gitlink": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+          "pin_kind": "accelerate_gitlink"
+        }
+      },
+      {
+        "probe_id": "libp2p_declared_freeze",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "libp2p is an in-tree declared freeze of a 40-character commit. Sealed validation does not re-fetch the remote and does not claim a live libp2p install.",
+        "details": {
+          "commit": "20d9527ff5a2e8368e77b964b340d0c7ded1a61f",
+          "pin_kind": "declared_freeze",
+          "pep508": "libp2p @ git+https://github.com/libp2p/py-libp2p.git@20d9527ff5a2e8368e77b964b340d0c7ded1a61f"
+        }
+      },
+      {
+        "probe_id": "proof_context_kit_inactive_declarations_retained",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Kit Core Metadata inactive libp2p@main declarations remain recorded, not rewritten as Accelerate pins.",
+        "details": {
+          "relpath": "packaging/proof_context/locks/inputs.json"
+        }
+      },
+      {
+        "probe_id": "live_vcs_install_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not install or qualify the pinned packages. Missing live VCS-install evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_libp2p_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live libp2p. A declared commit pin is not a live P2P, CUDA, CPU, or provider qualification.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live VCS-install qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr035-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_mutable_dependency_pinning.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.75,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_mutable_dependency_pinning.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-035.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_mutable_dependency_pinning.py",
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "duration_seconds": 0.75,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_vcs_install_not_claimed": true,
+    "live_libp2p_not_claimed": true,
+    "mutable_branch_not_retained_in_qualified_profiles": true,
+    "declared_freeze_not_live_qualification": true,
+    "kit_core_metadata_not_rewritten": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "qualified_profiles_contain_mutable_branch": false,
+    "vcs_refs_are_immutable_commits": true,
+    "simulated_results_represented_as_live": false,
+    "live_vcs_install_qualified": false,
+    "live_libp2p_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live VCS-install qualification, and not a closed PCPR release outcome.",
+    "Qualified Accelerate extras, install requirement profiles, HF-server requirements, and runtime VCS specs now pin git+https references to 40-character commits. That is identity pinning, not a live package install, wheel, or signed-release qualification (PCPR-052 through PCPR-055).",
+    "ipfs_kit_py and ipfs_datasets_py pins bind the current portfolio source-authority gitlinks. ipfs_transformers_py and ipfs_model_manager_py pins bind Accelerate nested gitlinks. libp2p and llama.cpp/gguf-py pins are in-tree declared freezes; sealed validation does not re-fetch remotes.",
+    "Kit Core Metadata still declares inactive libp2p@main extras under unrequested kit extras. Those declarations remain recorded in proof-context locks and are not Accelerate qualified-profile pins.",
+    "Python floor metadata drift remains for PCPR-036. Live CPU, CUDA, and model/provider qualification remain for PCPR-037 through PCPR-039.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, ipfs, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic MutableDependencyPinning tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
