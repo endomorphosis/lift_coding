@@ -1,0 +1,806 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-027",
+  "title": "Generate authoritative support matrix",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G300",
+  "objective_id": "PCPR-027",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-027@current-head-authoritative-support-matrix-v1",
+  "observed_at": "2026-09-02T18:00:00Z",
+  "depends_on": [
+    "PCPR-026"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-2 Kit authoritative support matrix only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_kit/ipfs_kit_py/assurance/local_durable.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/support_matrix.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/support_matrix_qualification.py",
+      "external/ipfs_kit/tests/test_pcpr_support_matrix_qualification.py",
+      "external/ipfs_kit/README.md",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add AuthoritativeSupportMatrix@1 and SupportMatrixQualification@1. Generate one current-head Kit support matrix using the closed vocabulary hermetic_qualified, live_qualified, conditional, configuration_only, experimental, unavailable, and unsupported. README claims are generated from and checked against that matrix. Zero surfaces are live_qualified. Missing IPFS, Iroh sidecar, live Linux FUSE, container FUSE, and live MCP server stay typed unavailable. Windows WinFsp is unsupported on this host. Simulated and hermetic results cannot mint live qualification. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_kit_py",
+    "outer_commit": "2ed2df052485eca055249887b47db54ffb1574ba",
+    "outer_tree": "b1d3ac84cb23fbe0684aca0fc9cee63922dfb149",
+    "outer_subject": "Merge commit '2cf0dcbfd73a739894c917340f9ce646612eb559' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "7b4f094ca966e961ddac7bf0fc96f873a93e0f80",
+    "accelerator_pre_change_tree": "118d10ad140ea40c5710b312cff1c8a90cb999cb",
+    "accelerator_gitlink": "7b4f094ca966e961ddac7bf0fc96f873a93e0f80",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "unchanged by this task",
+    "accelerator_post_change_tree": "unchanged by this task",
+    "datasets_commit": "3e54f3b5b021c81accc1bcc6dbd03071c2307cd4",
+    "datasets_tree": "97f45fde01e874d8c157a368464cb31e375e97d4",
+    "datasets_gitlink": "3e54f3b5b021c81accc1bcc6dbd03071c2307cd4",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "kit_commit": "e27294eb853f7fbb1cc8db06ba3c50901a53372f",
+    "kit_tree": "6698c3aad2396fa961f9b1ee70b24909d1f6f6d1",
+    "kit_gitlink": "e27294eb853f7fbb1cc8db06ba3c50901a53372f",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "kit_post_change_commit": "pending nested commit after admission",
+    "kit_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/support_matrix.py",
+      "sha256": "cb74b690938a547f9a2105d0b13d67319cd58c12b0a5029c3ce9eb6443ebac62",
+      "bytes": 25200,
+      "evidence_kind": "measured",
+      "interface": "AuthoritativeSupportMatrix@1",
+      "schema": "ipfs_kit_py/assurance/support-matrix@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/support_matrix_qualification.py",
+      "sha256": "4799af70f16f8f2bf3100537ae1b6ac9fb8add821aa2a2febe8eef6aa338fc83",
+      "bytes": 32282,
+      "evidence_kind": "measured",
+      "interface": "SupportMatrixQualification@1",
+      "schema": "ipfs_kit_py/assurance/support-matrix-qualification@1"
+    },
+    {
+      "path": "external/ipfs_kit/tests/test_pcpr_support_matrix_qualification.py",
+      "sha256": "1cfa2cdcf3d8849b3c04f30ee334a2ece1f7ff18f9e0be089a03287fdb211af4",
+      "bytes": 13348,
+      "evidence_kind": "measured",
+      "interface": "SupportMatrixQualification@1",
+      "schema": "ipfs_kit_py/assurance/support-matrix-qualification@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/local_durable.py",
+      "sha256": "10897523788f3d6569f81db7d358cddc20ea0397af8d113bf7649255d14c0075",
+      "bytes": 23499,
+      "evidence_kind": "measured",
+      "interface": "LiveLocalFilesystemAdapter@1",
+      "schema": "ipfs_kit_py/assurance/local-durable@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs.py",
+      "sha256": "1f9ba5a219cd8a3fcb98d51afa3ff00452f0369f9def8019f5654b1cf36def1a",
+      "bytes": 32698,
+      "evidence_kind": "measured",
+      "interface": "LivePinnedIpfsAdapter@1",
+      "schema": "ipfs_kit_py/assurance/pinned-ipfs@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/__init__.py",
+      "sha256": "57a4e15cb3949df62517b9cd666fb541fda5b68bada63db909bb7b47be2346f2",
+      "bytes": 74,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/README.md",
+      "sha256": "726dab0be6bb77e5bb73d42a6c151e75c8b107990f38b2a4d3abc16c31c0ef96",
+      "bytes": 38940,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_kit_py/assurance/support-matrix-qualification-verdict@1",
+    "interface": "SupportMatrixQualification@1",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "support_matrix_live_qualified": false,
+    "suite_complete": false,
+    "certification_disposition": "Conditional",
+    "support_class": "conditional",
+    "live_support_claim": false,
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "support_matrix_generated": true,
+    "readme_claims_agree": true,
+    "live_qualified_row_count": 0,
+    "live_ipfs_transport_qualified": false,
+    "live_ipfs_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "matrix_cid": "baguqeeraslvkepfbkgbqaxzmaxwhax46d7qv5gnnefuqjfu4ht47lg5bdqyq",
+    "probes": [
+      {
+        "probe_id": "authoritative_support_matrix",
+        "present": true,
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "AuthoritativeSupportMatrix@1 classified current-head Kit surfaces with the closed vocabulary. README claims match the generated matrix. Zero surfaces are live_qualified. This is not a closed PCPR release.",
+        "details": {
+          "backend_id": "support_matrix",
+          "schema": "ipfs_kit_py/assurance/support-matrix@1",
+          "interface": "AuthoritativeSupportMatrix@1",
+          "policy": "AuthoritativeSupportMatrixPolicy@1",
+          "certification_scope": "pcpr-027-authoritative-support-matrix; not a closed PCPR release",
+          "production_authorized": false,
+          "live_support_claim": false,
+          "support_class": "conditional",
+          "is_hermetic": true,
+          "live_provider": false,
+          "matrix_cid": "baguqeeraslvkepfbkgbqaxzmaxwhax46d7qv5gnnefuqjfu4ht47lg5bdqyq",
+          "row_count": 12,
+          "live_qualified_row_count": 0,
+          "closed_vocabulary": [
+            "hermetic_qualified",
+            "live_qualified",
+            "conditional",
+            "configuration_only",
+            "experimental",
+            "unavailable",
+            "unsupported"
+          ]
+        }
+      },
+      {
+        "probe_id": "live_ipfs_transport",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Support-matrix generation is not live IPFS.",
+        "details": {
+          "ipfs": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "live_daemon_started": false,
+          "injected_transport_is_not_live": true
+        }
+      },
+      {
+        "probe_id": "live_iroh_sidecar",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed PATH has no ipfs-kit-iroh-sidecar. Iroh remains experimental and typed unavailable as live support.",
+        "details": {
+          "ipfs-kit-iroh-sidecar": "unavailable",
+          "iroh": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "live_sidecar_started": false,
+          "support_class": "experimental"
+        }
+      },
+      {
+        "probe_id": "live_linux_fuse_mount",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No live Linux FUSE mount was exercised. fusermount or /dev/fuse presence is not a live mount and is not recorded as passing.",
+        "details": {
+          "fusermount": "/usr/bin/fusermount",
+          "fusermount3": "/usr/bin/fusermount3",
+          "dev_fuse": "/dev/fuse",
+          "live_mount_started": false,
+          "presence_is_not_support": true
+        }
+      },
+      {
+        "probe_id": "live_mcp_server",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No live MCP stdio, HTTP, or P2P server process was started. Support-matrix generation does not start MCP servers.",
+        "details": {
+          "stdio_server_started": false,
+          "http_server_started": false,
+          "p2p_server_started": false
+        }
+      },
+      {
+        "probe_id": "interface_parity_not_reopened",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Python/CLI/MCP/MCP++ adapter parity is PCPR-026. This receipt does not reopen it.",
+        "details": {
+          "remediating_task": "PCPR-026"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "operation": "closed_vocabulary_admitted",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "classes": "hermetic_qualified,live_qualified,conditional,configuration_only,experimental,unavailable,unsupported"
+        },
+        "limitations": [
+          "hermetic_not_live"
+        ],
+        "detail": "Closed vocabulary admits all seven support classes",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "every_row_uses_closed_class",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "row_count": "12",
+          "classes": "conditional,configuration_only,experimental,hermetic_qualified,unavailable,unsupported"
+        },
+        "limitations": [
+          "hermetic_not_live"
+        ],
+        "detail": "Every matrix row uses the closed support-class vocabulary",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "live_qualified_requires_live_evidence",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "live_qualified_row_count": "0"
+        },
+        "limitations": [
+          "hermetic_not_live"
+        ],
+        "detail": "No live_qualified row was emitted without live evidence",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "hermetic_not_represented_as_live",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "hermetic_rows": "3"
+        },
+        "limitations": [
+          "hermetic_not_live"
+        ],
+        "detail": "Hermetic rows remain hermetic_qualified or non-live",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "simulated_not_represented_as_live",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "simulated_live_rows": "0"
+        },
+        "limitations": [
+          "hermetic_not_live"
+        ],
+        "detail": "No simulated row is marked live",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "readme_claims_agree",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "matrix_cid": "baguqeeraslvkepfbkgbqaxzmaxwhax46d7qv5gnnefuqjfu4ht47lg5bdqyq",
+          "row_count": "12"
+        },
+        "limitations": [
+          "hermetic_not_live"
+        ],
+        "detail": "README support-matrix block matches the generated matrix",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "missing_environments_typed_unavailable",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "unavailable_surfaces": "container_fuse,linux_fuse_live,live_mcp_server,pinned_ipfs"
+        },
+        "limitations": [
+          "hermetic_not_live"
+        ],
+        "detail": "Missing IPFS, FUSE, container FUSE, and MCP server stay unavailable",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "zero_live_qualified_surfaces",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "live_qualified_row_count": "0"
+        },
+        "limitations": [
+          "hermetic_not_live"
+        ],
+        "detail": "Current-head live_qualified count is zero",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "live_ipfs_transport",
+        "status": "blocked",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Support-matrix generation is not live IPFS."
+        },
+        "limitations": [
+          "ipfs_unavailable"
+        ],
+        "detail": "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Support-matrix generation is not live IPFS.",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "live_iroh_sidecar",
+        "status": "blocked",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed PATH has no ipfs-kit-iroh-sidecar. Iroh remains experimental and typed unavailable as live support."
+        },
+        "limitations": [
+          "sidecar_unavailable"
+        ],
+        "detail": "Sealed PATH has no ipfs-kit-iroh-sidecar. Iroh remains experimental and typed unavailable as live support.",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "live_linux_fuse_mount",
+        "status": "blocked",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "No live Linux FUSE mount was exercised. fusermount or /dev/fuse presence is not a live mount and is not recorded as passing."
+        },
+        "limitations": [
+          "live_mount_not_exercised"
+        ],
+        "detail": "No live Linux FUSE mount was exercised. fusermount or /dev/fuse presence is not a live mount and is not recorded as passing.",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "live_mcp_server",
+        "status": "blocked",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "No live MCP stdio, HTTP, or P2P server process was started. Support-matrix generation does not start MCP servers."
+        },
+        "limitations": [
+          "mcp_server_not_started"
+        ],
+        "detail": "No live MCP stdio, HTTP, or P2P server process was started. Support-matrix generation does not start MCP servers.",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      }
+    ],
+    "hermetic_operations": [
+      {
+        "operation": "closed_vocabulary_admitted",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "Closed vocabulary admits all seven support classes",
+        "digests": {
+          "classes": "hermetic_qualified,live_qualified,conditional,configuration_only,experimental,unavailable,unsupported"
+        }
+      },
+      {
+        "operation": "every_row_uses_closed_class",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "Every matrix row uses the closed support-class vocabulary",
+        "digests": {
+          "row_count": "12",
+          "classes": "conditional,configuration_only,experimental,hermetic_qualified,unavailable,unsupported"
+        }
+      },
+      {
+        "operation": "live_qualified_requires_live_evidence",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "No live_qualified row was emitted without live evidence",
+        "digests": {
+          "live_qualified_row_count": "0"
+        }
+      },
+      {
+        "operation": "hermetic_not_represented_as_live",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "Hermetic rows remain hermetic_qualified or non-live",
+        "digests": {
+          "hermetic_rows": "3"
+        }
+      },
+      {
+        "operation": "simulated_not_represented_as_live",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "No simulated row is marked live",
+        "digests": {
+          "simulated_live_rows": "0"
+        }
+      },
+      {
+        "operation": "readme_claims_agree",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "README support-matrix block matches the generated matrix",
+        "digests": {
+          "matrix_cid": "baguqeeraslvkepfbkgbqaxzmaxwhax46d7qv5gnnefuqjfu4ht47lg5bdqyq",
+          "row_count": "12"
+        }
+      },
+      {
+        "operation": "missing_environments_typed_unavailable",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "Missing IPFS, FUSE, container FUSE, and MCP server stay unavailable",
+        "digests": {
+          "unavailable_surfaces": "container_fuse,linux_fuse_live,live_mcp_server,pinned_ipfs"
+        }
+      },
+      {
+        "operation": "zero_live_qualified_surfaces",
+        "status": "passed",
+        "environment": "hermetic",
+        "source": "hermetic_observed",
+        "evidence_kind": "measured_hermetic",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "Current-head live_qualified count is zero",
+        "digests": {
+          "live_qualified_row_count": "0"
+        }
+      }
+    ],
+    "live_unavailable_operations": [
+      {
+        "operation": "live_ipfs_transport",
+        "status": "unobserved",
+        "environment": "sealed",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Support-matrix generation is not live IPFS."
+      },
+      {
+        "operation": "live_iroh_sidecar",
+        "status": "unobserved",
+        "environment": "sealed",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "Sealed PATH has no ipfs-kit-iroh-sidecar. Iroh remains experimental and typed unavailable as live support."
+      },
+      {
+        "operation": "live_linux_fuse_mount",
+        "status": "unobserved",
+        "environment": "sealed",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "No live Linux FUSE mount was exercised. fusermount or /dev/fuse presence is not a live mount and is not recorded as passing."
+      },
+      {
+        "operation": "live_mcp_server",
+        "status": "unobserved",
+        "environment": "sealed",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "No live MCP stdio, HTTP, or P2P server process was started. Support-matrix generation does not start MCP servers."
+      }
+    ],
+    "operations_observed": [
+      "closed_vocabulary_admitted",
+      "every_row_uses_closed_class",
+      "live_qualified_requires_live_evidence",
+      "hermetic_not_represented_as_live",
+      "simulated_not_represented_as_live",
+      "readme_claims_agree",
+      "missing_environments_typed_unavailable",
+      "zero_live_qualified_surfaces"
+    ],
+    "operations_missing": [
+      "live_ipfs_transport",
+      "live_iroh_sidecar",
+      "live_linux_fuse_mount",
+      "live_mcp_server"
+    ],
+    "blockers": [],
+    "verdict_cid": "baguqeera2yepzxux4cwbuzzk2t2oz4ju6n4hkwv4gqq2o6o6jsxua55loo4a"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured",
+    "fusermount": "/usr/bin/fusermount",
+    "fusermount3": "/usr/bin/fusermount3",
+    "docker": "/usr/bin/docker",
+    "podman": "unavailable",
+    "iroh": "unavailable",
+    "ipfs-kit-iroh-sidecar": "unavailable",
+    "dev_fuse": "/dev/fuse"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live IPFS, live Iroh, live FUSE, live MCP servers, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr027-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_kit /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_support_matrix_qualification.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.1,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/test_pcpr_support_matrix_qualification.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio and any non-sealed IPFS helper are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-027.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_support_matrix_qualification.py",
+      "exit_code": 0,
+      "passed": 12,
+      "failed": 0,
+      "duration_seconds": 0.1,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "hermetic_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live_release": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_ipfs_transport_not_claimed": true,
+    "live_iroh_not_claimed": true,
+    "live_fuse_mount_not_claimed": true,
+    "live_mcp_server_not_claimed": true,
+    "live_support_claim_false": true,
+    "auto_install_not_used": true,
+    "live_qualified_row_count_zero": true,
+    "incomplete_suite_cannot_live_qualify": true,
+    "missing_ipfs_is_unavailable_not_zero": true,
+    "presence_is_not_support": true,
+    "readme_claims_generated_from_matrix": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "support_matrix_generated": true,
+    "readme_claims_agree": true,
+    "support_matrix_live_qualified": false,
+    "suite_complete": false,
+    "live_qualified_row_count": 0,
+    "live_ipfs_transport_qualified": false,
+    "live_support_claim": false,
+    "support_class": "conditional",
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live IPFS qualification, not live Iroh qualification, not live FUSE qualification, not live MCP server qualification, and not a closed PCPR release outcome.",
+    "The authoritative support matrix was generated hermetically from current-head Kit surface constants and sealed-PATH probes. Hermetic matrix generation cannot mint live_qualified.",
+    "Zero current-head surfaces are live_qualified. live_qualified remains in the closed vocabulary and is unused until live evidence exists.",
+    "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing.",
+    "Sealed PATH has no ipfs-kit-iroh-sidecar. Iroh remains experimental and typed unavailable as live support.",
+    "No live Linux FUSE or container FUSE mount was exercised. fusermount, /dev/fuse, or docker presence is not a live mount.",
+    "Windows WinFsp is unsupported on this non-Windows sealed host and is not recorded as passing.",
+    "No live MCP stdio, HTTP, or P2P server process was started and that surface stays typed unavailable.",
+    "Python/CLI/MCP/MCP++ adapter parity remains owned by PCPR-026 and is not reopened here.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, pytest-asyncio, anyio, ipfs, iroh, ipfs-kit-iroh-sidecar, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic SupportMatrixQualification tests are candidate coverage only; they do not close a release.",
+    "Post-change Kit commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Kit commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
