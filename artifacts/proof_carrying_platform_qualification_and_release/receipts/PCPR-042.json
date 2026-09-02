@@ -1,0 +1,586 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-042",
+  "title": "Add negative and cross-language vectors",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G500",
+  "objective_id": "PCPR-042",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-042@current-head-negative-cross-language-vectors-v1",
+  "observed_at": "2026-09-02T05:24:53Z",
+  "depends_on": [
+    "PCPR-041"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-4 negative and cross-language vectors only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/negative_cross_language_vectors.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/negative_cross_language_vectors.mjs",
+      "external/ipfs_accelerate/ipfs_accelerate_js/src/assurance/negative_cross_language_vectors.ts",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/negative_cross_language_vectors.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_negative_cross_language_vectors.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/negative_cross_language_vectors.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_042_negative_cross_language_vectors.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/negative_cross_language_vectors.py",
+      "external/ipfs_kit/tests/test_pcpr_042_negative_cross_language_vectors.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish NegativeCrossLanguageVectors@1 as compact mutation recipes. Invalid, stale, unknown, out-of-bound, reordered, reminted, and cross-version inputs fail identically. An independent JavaScript encoder under sealed /usr/bin/node agrees on PCPR-041 CIDs and reject kinds. TypeScript source is published; live tsc stays typed unavailable. Catalog identity baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a and PCPR-041 positive CIDs are reused and not reminted. Datasets and Kit bind the document CID and refuse remint without sibling import or re-encoding. This is not a freeze and not cross-repository compatibility. Live supervisor and CUDA re-qualification stay typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "170b5e1691e13efe9e9f1d774fc0e07053f983cb",
+    "outer_tree": "c9c29d54c183f74efd75e8999ad41db01e821ff4",
+    "outer_subject": "Merge commit '16cb711ebee57481f20d77894319cc3e5099e826' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "ca2c7a7a501e600b4cf251a5f1ab80860142d983",
+    "accelerator_pre_change_tree": "b52bbe311c6274665fb1c8c80398b03c60287cce",
+    "accelerator_gitlink": "ca2c7a7a501e600b4cf251a5f1ab80860142d983",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "39ac4a292c5ceb6bac88ae69bbd2f126c2fd29f8",
+    "datasets_tree": "78b8720612d6955ab4d284879a537ef4c6cbef44",
+    "datasets_gitlink": "39ac4a292c5ceb6bac88ae69bbd2f126c2fd29f8",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "kit_commit": "b0749b558c42b336b2b194b9101ba6e41c148df0",
+    "kit_tree": "2c12a8361c04d872a697e2a2e7a75dd70df18d01",
+    "kit_gitlink": "b0749b558c42b336b2b194b9101ba6e41c148df0",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "kit_post_change_commit": "pending nested commit after admission",
+    "kit_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/negative_cross_language_vectors.py",
+      "sha256": "befa702a45ad4745ed80de06955e5274c741c4adf1859096ba4da0dec2cfeee0",
+      "bytes": 26243,
+      "evidence_kind": "measured",
+      "interface": "NegativeCrossLanguageVectors@1",
+      "schema": "ipfs_accelerate_py/assurance/negative-cross-language-vectors@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/negative_cross_language_vectors.mjs",
+      "sha256": "964fc0d139fd3228cb456d359cdcaabc2135ad9d0c99c596d70c05cf5c7acf55",
+      "bytes": 22669,
+      "evidence_kind": "measured",
+      "interface": "NegativeCrossLanguageVectors@1",
+      "language": "JavaScript"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_js/src/assurance/negative_cross_language_vectors.ts",
+      "sha256": "ecb1a82a85fb41e107b2fc88eb7260931ed59ae0d5f38dbf961047e3b7ccd4f3",
+      "bytes": 2510,
+      "evidence_kind": "measured",
+      "language": "TypeScript",
+      "compiler": "unavailable"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/negative_cross_language_vectors.py",
+      "sha256": "441754b3ac6a4d0ea30e236cacce057b48a59594f09e6ead97771f0d12fdd258",
+      "bytes": 52902,
+      "evidence_kind": "measured",
+      "interface": "NegativeCrossLanguageVectorQualification@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/negative-cross-language-vector-qualification@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_negative_cross_language_vectors.py",
+      "sha256": "745b07a22ab0e79079e355e1174a2b443473bd547c4f523c07cd6a772eecdab1",
+      "bytes": 9667,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/negative_cross_language_vectors.py",
+      "sha256": "3ee9f9de0b8ce1ce10d9cc53552cde3b64086caf7510b21f374d505ee1607418",
+      "bytes": 4508,
+      "evidence_kind": "measured",
+      "interface": "DatasetsNegativeCrossLanguageVectorBinding@1",
+      "schema": "ipfs_datasets_py/assurance/negative-cross-language-vector-binding@1"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_042_negative_cross_language_vectors.py",
+      "sha256": "811b22aa7e1e3ac193a8dd656e8554da7daf92efce9880de99a847d36220eef4",
+      "bytes": 2032,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/negative_cross_language_vectors.py",
+      "sha256": "2c530c7743abb8a4954a3f542b81f2039130daaf6ec12a731af567f864158581",
+      "bytes": 4594,
+      "evidence_kind": "measured",
+      "interface": "KitNegativeCrossLanguageVectorBinding@1",
+      "schema": "ipfs_kit_py/assurance/negative-cross-language-vector-binding@1"
+    },
+    {
+      "path": "external/ipfs_kit/tests/test_pcpr_042_negative_cross_language_vectors.py",
+      "sha256": "94909b141d41ef88c07e5faf983d9f748fbfc5e5c78e82d5792cb797db8b9472",
+      "bytes": 2075,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/negative-cross-language-vector-qualification-verdict@1",
+    "interface": "NegativeCrossLanguageVectorQualification@1",
+    "verdict_cid": "baguqeera5ucb4kihzmf3gs5rnckjuf2khjq6a7vxogcsxmbetjg663yvlblq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a",
+    "vector_document_cid": "baguqeeraior5lq3fvefhgwsm3cjjaxozffmdmqmszwxy4ozfb37mnqx6lfca",
+    "negative_count": 18,
+    "cross_language_count": 7,
+    "categories_complete": true,
+    "javascript_agreed": true,
+    "datasets_binding_aligned": true,
+    "kit_binding_aligned": true,
+    "simulated_results_represented_as_live": false,
+    "live_supervisor_qualified": false,
+    "live_supervisor_evidence_kind": "unavailable",
+    "live_cuda_qualified": false,
+    "live_cuda_evidence_kind": "unavailable",
+    "production_authorized": false,
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-041",
+    "goal_id": "PCPR-G510",
+    "promotion_status": "rnd_non_promoted",
+    "canonical_byte_cid_vector_verdict_cid": "baguqeerafd3yeezarpuf6aicpdycn4sombbpcgfzoekttwytqjpw4pi7qtuq",
+    "shared_contract_verdict_cid": "baguqeeraxym6kuq5ljps7vwbvrkyobtfhrrpbquhbgrcny4viyfxlwversna",
+    "datasets_solver_task_id": "PCPR-017",
+    "datasets_solver_verdict_cid": "baguqeeratvkodnxdxcudgddqaxoohvglwyq34grr7zupm6pbnwqk4zrp2ubq",
+    "kit_support_matrix_task_id": "PCPR-027",
+    "kit_support_matrix_verdict_cid": "baguqeera2yepzxux4cwbuzzk2t2oz4ju6n4hkwv4gqq2o6o6jsxua55loo4a",
+    "model_provider_task_id": "PCPR-039",
+    "model_provider_verdict_cid": "baguqeeraejqvwpevn5lawzy7pie7cz2atrp62ijbwj4dqx4fvqrxgbr32tla",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-041 remains rnd_non_promoted R&D. This task publishes negative and cross-language vectors on that catalog. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "negative_and_cross_language_vectors": {
+    "schema": "ipfs_accelerate_py/assurance/negative-cross-language-vectors@1",
+    "interface": "NegativeCrossLanguageVectors@1",
+    "floor_task_id": "PCPR-042",
+    "floor_goal_id": "PCPR-G520",
+    "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a",
+    "vector_document_cid": "baguqeeraior5lq3fvefhgwsm3cjjaxozffmdmqmszwxy4ozfb37mnqx6lfca",
+    "frozen": false,
+    "freeze_task": "PCPR-002",
+    "normative_task": "PCPR-040",
+    "positive_vector_task": "PCPR-041",
+    "compatibility_task": "PCPR-043",
+    "languages": [
+      "Python",
+      "JavaScript"
+    ],
+    "typescript_compiler": "unavailable",
+    "negative_categories": [
+      "invalid",
+      "stale",
+      "unknown",
+      "out_of_bound",
+      "reordered",
+      "reminted",
+      "cross_version"
+    ],
+    "negative_count": 18,
+    "cross_language_count": 7,
+    "probes": [
+      {
+        "probe_id": "negative_vector_module",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Negative and cross-language vector module declares seven categories.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/negative_cross_language_vectors.py"
+        }
+      },
+      {
+        "probe_id": "seven_negative_categories",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Invalid, stale, unknown, out-of-bound, reordered, reminted, and cross-version categories are present.",
+        "details": {
+          "count": 18,
+          "categories": [
+            "cross_version",
+            "invalid",
+            "out_of_bound",
+            "reminted",
+            "reordered",
+            "stale",
+            "unknown"
+          ]
+        }
+      },
+      {
+        "probe_id": "eighteen_negative_vectors_reject",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Eighteen negative recipes reject with the declared kinds.",
+        "details": {
+          "count": 18
+        }
+      },
+      {
+        "probe_id": "fail_identically_under_reorder",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Unknown-field rejection is identical under key reordering.",
+        "details": {}
+      },
+      {
+        "probe_id": "catalog_identity_not_reminted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-040 catalog CID is reused and is not reminted.",
+        "details": {
+          "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a"
+        }
+      },
+      {
+        "probe_id": "positive_cid_vectors_not_reminted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-041 positive CIDs are reused and are not reminted.",
+        "details": {
+          "vector_document_cid": "baguqeeraior5lq3fvefhgwsm3cjjaxozffmdmqmszwxy4ozfb37mnqx6lfca"
+        }
+      },
+      {
+        "probe_id": "javascript_encoder_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed-environment JavaScript encoder agrees with Python CIDs and reject kinds.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/negative_cross_language_vectors.mjs",
+          "node": "/usr/bin/node",
+          "languages": [
+            "Python",
+            "JavaScript"
+          ]
+        }
+      },
+      {
+        "probe_id": "typescript_source_present",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "TypeScript companion source pins recipe identities. Live tsc stays typed unavailable.",
+        "details": {
+          "relpath": "ipfs_accelerate_js/src/assurance/negative_cross_language_vectors.ts"
+        }
+      },
+      {
+        "probe_id": "typescript_compiler",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "tsc is absent from the sealed PATH. TypeScript compilation stays typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "tsc": "/usr/bin/tsc",
+          "present_on_path": false
+        }
+      },
+      {
+        "probe_id": "datasets_binding_does_not_remint",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Datasets binding pins the negative/cross-language document CID and refuses remint.",
+        "details": {
+          "relpath": "external/ipfs_datasets/ipfs_datasets_py/assurance/negative_cross_language_vectors.py",
+          "missing_categories": [],
+          "refuse_negative_remint": true,
+          "sibling_import": false
+        }
+      },
+      {
+        "probe_id": "kit_binding_does_not_remint",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Kit binding pins the negative/cross-language document CID and refuses remint.",
+        "details": {
+          "relpath": "external/ipfs_kit/ipfs_kit_py/assurance/negative_cross_language_vectors.py",
+          "missing_categories": [],
+          "refuse_negative_remint": true,
+          "sibling_import": false
+        }
+      },
+      {
+        "probe_id": "freeze_not_claimed",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-042 publishes negative and cross-language vectors. Freeze remains PCPR-002 and is not claimed.",
+        "details": {
+          "freeze_task": "PCPR-002",
+          "frozen": false
+        }
+      },
+      {
+        "probe_id": "cross_repository_compatibility_deferred",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Cross-repository compatibility checks remain PCPR-043 and are not claimed here.",
+        "details": {
+          "deferred_task_id": "PCPR-043"
+        }
+      },
+      {
+        "probe_id": "production_authorized_not_granted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Negative and cross-language vectors do not grant production_authorized or a freeze.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_supervisor_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-001 live qualification remains typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-001"
+        }
+      },
+      {
+        "probe_id": "live_cuda_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not re-qualify live CUDA. Missing CUDA re-qualification stays typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-038"
+        }
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "node_path": "/usr/bin/node",
+    "node_version": "v18.19.1",
+    "tsc": "unavailable",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "numpy_module": "/usr/lib/python3/dist-packages/numpy/__init__.py",
+    "numpy_not_used_as_qualification": true,
+    "requests_module": "/usr/lib/python3/dist-packages/requests/__init__.py",
+    "requests_not_used_as_qualification": true,
+    "torch": "unavailable",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "aiohttp": "unavailable",
+    "z3": "unavailable",
+    "ipfs": "unavailable",
+    "nvcc": "unavailable",
+    "nvidia_smi": "/usr/bin/nvidia-smi",
+    "nvidia_smi_is_not_contract_qualification": true,
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live CUDA qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr042-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_negative_cross_language_vectors.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 1.51,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_negative_cross_language_vectors.py"
+    ],
+    "additional_candidate_suites": {
+      "datasets": {
+        "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_042_negative_cross_language_vectors.py",
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "duration_seconds": 0.04,
+        "evidence_kind": "measured"
+      },
+      "kit": {
+        "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_kit /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_042_negative_cross_language_vectors.py",
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "duration_seconds": 0.05,
+        "noconftest_reason": "Sealed-environment aiohttp is unavailable. tests/conftest.py imports aiohttp, so kit collection uses --noconftest. That is not live kit backend qualification.",
+        "evidence_kind": "measured"
+      },
+      "javascript": {
+        "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/node ipfs_accelerate_py/assurance/negative_cross_language_vectors.mjs",
+        "exit_code": 0,
+        "agreed_with_python": true,
+        "simulated": false,
+        "evidence_kind": "measured"
+      }
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/torch/duckdb under ~/.local are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-042.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_negative_cross_language_vectors.py",
+      "exit_code": 0,
+      "passed": 9,
+      "failed": 0,
+      "duration_seconds": 1.51,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "identities_not_reminted": true,
+    "catalog_not_reminted": true,
+    "contracts_not_frozen": true,
+    "compatibility_not_claimed": true,
+    "live_supervisor_not_claimed": true,
+    "live_cuda_not_reclaimed": true,
+    "production_authorized_not_granted": true,
+    "typescript_compiler_not_claimed": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "categories_complete": true,
+    "javascript_agreed": true,
+    "datasets_binding_aligned": true,
+    "kit_binding_aligned": true,
+    "catalog_not_reminted": true,
+    "contracts_frozen": false,
+    "production_authorized": false,
+    "simulated_results_represented_as_live": false,
+    "live_supervisor_qualified": false,
+    "live_cuda_qualified": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome.",
+    "Negative and cross-language vectors are published from compact mutation recipes. Cross-repository compatibility checks remain PCPR-043. Freeze remains PCPR-002.",
+    "The PCPR-040 catalog CID and PCPR-041 positive CIDs are reused and are not reminted.",
+    "JavaScript agreement was measured with sealed /usr/bin/node v18.19.1 against an independent encoder. TypeScript compilation (tsc) is absent from the sealed PATH and stays typed unavailable; the .ts companion is source, not a live compiler run.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing. This task does not re-qualify CUDA, solvers, or model/provider paths.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, aiohttp, ipfs, z3, torch, nvcc, and tsc are absent and are not recorded as passing or zero.",
+    "Sealed-environment aiohttp is absent. Kit tests/conftest.py imports aiohttp, so the Kit candidate suite was collected with --noconftest. That is not live Kit backend qualification.",
+    "Numpy and requests are present in the sealed environment but are not required for negative and cross-language vectors and are not live authority.",
+    "Hermetic NegativeCrossLanguageVector tests are candidate coverage of the vector set; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate, Datasets, and Kit commit and tree identities are pending the accepted nested commits."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate, Datasets, and Kit commits and the outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
