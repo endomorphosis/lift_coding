@@ -1,0 +1,617 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-039",
+  "title": "Qualify one real model/provider path",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G400",
+  "objective_id": "PCPR-039",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-039@current-head-model-provider-execution-v1",
+  "observed_at": "2026-09-02T04:28:23Z",
+  "depends_on": [
+    "PCPR-038"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-3 Accelerate live model/provider execution qualification only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/model_provider_execution.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/hardware_capability_ladder.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/kit/hardware_kit.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/model_provider_execution_qualification.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_model_provider_execution_qualification.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add ModelProviderExecution@1. Run a live local OpenAI-compatible canary covering identity, load, inference, output validation, cancellation, timeout, cleanup, fail-closed resource admission, and repetition. Qualify one live llama.cpp local LLM path (leanstral_local) when present. HardwareKit._test_model_provider uses that canary. The hardware ladder exposes from_live_model_provider_execution without granting production_authorized or the release-grade qualified rung. Torch, transformers, and HuggingFace Hub downloads are not qualification. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "87363035a46d0423462ffb4d00ca19ead9cf7962",
+    "outer_tree": "66d5dffe32b76de7d0d775ea8068ed4261595594",
+    "outer_subject": "Merge commit 'c93e700842310b019bfe3152e63871254a96ae92' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "ef87c714c0bd8020ef24521a282ab3abaca8c3e6",
+    "accelerator_pre_change_tree": "368193ddf45f9a92c6210933bba8adedcfc5b29c",
+    "accelerator_gitlink": "ef87c714c0bd8020ef24521a282ab3abaca8c3e6",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "1635856f512c8f417577091ffd33f2834de0d62d",
+    "datasets_tree": "ebe30c3cce6d4f2c74bf6a3be8bbb07bb8c625dd",
+    "datasets_gitlink": "1635856f512c8f417577091ffd33f2834de0d62d",
+    "kit_commit": "93ce8c123adb5ab85b6735618a08099c4d03db09",
+    "kit_tree": "753ad198c8616051d5c214190a9fc51b0cc8216b",
+    "kit_gitlink": "93ce8c123adb5ab85b6735618a08099c4d03db09",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/model_provider_execution.py",
+      "sha256": "42781f0be688bc48f8805ddf2f413e142da7172b6a0e784e4fe7d9ea6769ed36",
+      "bytes": 42148,
+      "evidence_kind": "measured",
+      "interface": "ModelProviderExecution@1",
+      "schema": "ipfs_accelerate_py/assurance/model-provider-execution@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/hardware_capability_ladder.py",
+      "sha256": "24c1083acd22b37e82e50471facc93435d3d4780b19d4f85ad4d8d4728a1c045",
+      "bytes": 20983,
+      "evidence_kind": "measured",
+      "interface": "HardwareCapabilityLadder@1",
+      "schema": "ipfs_accelerate_py/assurance/hardware-capability-ladder@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/kit/hardware_kit.py",
+      "sha256": "e93377a006269f4f28f3af75e16d5c4d9bd8a282f6349d415c8ae02b8d77d76a",
+      "bytes": 19860,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/model_provider_execution_qualification.py",
+      "sha256": "2a66548dc3170ca043f0a1b7c2730eb1061425843ca581e9f0ff1480463836e9",
+      "bytes": 40762,
+      "evidence_kind": "measured",
+      "interface": "ModelProviderExecutionQualification@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/model-provider-execution-qualification@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_model_provider_execution_qualification.py",
+      "sha256": "c3eff71803e389f668f5a1a223dc49de44e57e2940f1a1841fed113aedd56fb1",
+      "bytes": 10550,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/model-provider-execution-qualification-verdict@1",
+    "interface": "ModelProviderExecutionQualification@1",
+    "verdict_cid": "baguqeeraejqvwpevn5lawzy7pie7cz2atrp62ijbwj4dqx4fvqrxgbr32tla",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "live_model_provider_execution_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "simulated_results_represented_as_live": false,
+    "live_cuda_qualified": false,
+    "live_cuda_evidence_kind": "unavailable",
+    "live_model_provider_qualified": true,
+    "live_model_provider_evidence_kind": "measured",
+    "live_llamacpp_qualified": true,
+    "live_llamacpp_evidence_kind": "measured",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-038",
+    "goal_id": "PCPR-G430",
+    "promotion_status": "rnd_non_promoted",
+    "cuda_execution_verdict_cid": "baguqeeraxcutom6w2wjgfymky4wkf55lmq7z3zm26las6v7tzh5q3haxlxja",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-038 qualified live CUDA execution as R&D. This task qualifies one live model/provider path as R&D. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "model_provider_execution": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/model-provider-execution-qualification@1",
+    "interface": "ModelProviderExecutionQualification@1",
+    "floor_schema": "ipfs_accelerate_py/assurance/model-provider-execution@1",
+    "floor_interface": "ModelProviderExecution@1",
+    "floor_task_id": "PCPR-039",
+    "floor_goal_id": "PCPR-G430",
+    "kernel": "canary_integer_embed8x4",
+    "canary_model_id": "pcpr039-canary-embed-v1",
+    "live_model_provider_execution_qualified": true,
+    "live_llamacpp_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "model_provider_identity": {
+      "canary_model_id": "pcpr039-canary-embed-v1",
+      "canary_provider": "local_openai_compatible",
+      "llamacpp": {
+        "url": "http://127.0.0.1:8080",
+        "model_id": "leanstral_local",
+        "n_params": 118972826624,
+        "n_ctx": 8192,
+        "live": true,
+        "evidence_kind": "measured"
+      }
+    },
+    "llamacpp_identity": {
+      "url": "http://127.0.0.1:8080",
+      "server": "llama.cpp",
+      "model_id": "leanstral_local",
+      "owned_by": "llamacpp",
+      "n_params": 118972826624,
+      "n_ctx": 8192,
+      "n_embd": 4096,
+      "ftype": "NVFP4",
+      "protocol": "openai_compatible"
+    },
+    "probes": [
+      {
+        "probe_id": "canonical_model_provider_execution_module",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical model/provider execution module declares the live canary and llama.cpp path.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/model_provider_execution.py"
+        }
+      },
+      {
+        "probe_id": "ladder_exposes_live_model_provider_execution",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Capability ladder exposes live model/provider execution without production_authorized.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/hardware_capability_ladder.py"
+        }
+      },
+      {
+        "probe_id": "hardware_kit_uses_live_model_provider_canary",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "HardwareKit model/provider test uses the live canary instead of torch success.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/kit/hardware_kit.py"
+        }
+      },
+      {
+        "probe_id": "model_provider_identity",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live local OpenAI-compatible canary model-server identity observed.",
+        "details": {
+          "provider": "local_openai_compatible",
+          "model_id": "pcpr039-canary-embed-v1",
+          "base_url_host": "127.0.0.1",
+          "protocol": "openai_compatible"
+        }
+      },
+      {
+        "probe_id": "model_load",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Canary model-server listed the pinned canary model and accepted a zero-length load.",
+        "details": {
+          "model_id": "pcpr039-canary-embed-v1",
+          "status": 200,
+          "empty_input_digest": 3795535699,
+          "empty_input_expected": 3795535699
+        }
+      },
+      {
+        "probe_id": "model_inference",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live canary model-server completed embedding inference with the expected digest.",
+        "details": {
+          "kernel": "canary_integer_embed8x4",
+          "prompt": "PCPR-039-canary",
+          "expected": 1665861483,
+          "observed": 1665861483,
+          "model": "pcpr039-canary-embed-v1"
+        }
+      },
+      {
+        "probe_id": "model_output_validation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Canary embedding matched the pinned fixture digest.",
+        "details": {
+          "prompt": "PCPR-039",
+          "expected": 3117871203,
+          "observed": 3117871203,
+          "expected_embedding": [
+            217,
+            242,
+            275,
+            317
+          ],
+          "observed_embedding": [
+            217,
+            242,
+            275,
+            317
+          ]
+        }
+      },
+      {
+        "probe_id": "model_provider_chat_path",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live canary chat-completions path returned the model-derived digest.",
+        "details": {
+          "model": "pcpr039-canary-embed-v1",
+          "content": "b9d6f063",
+          "expected": "b9d6f063"
+        }
+      },
+      {
+        "probe_id": "model_repetition",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Repeated live canary embeddings produced the same digest.",
+        "details": {
+          "first": 1665861483,
+          "second": 1665861483,
+          "prompt": "PCPR-039-canary"
+        }
+      },
+      {
+        "probe_id": "model_cancellation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live model-server client honoured a short deadline and joined.",
+        "details": {
+          "thread_alive": false,
+          "finished": true,
+          "timed_out": true,
+          "error": "TimeoutError"
+        }
+      },
+      {
+        "probe_id": "model_timeout",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live model-server client exceeded the HTTP deadline and was recorded as Timeout.",
+        "details": {
+          "timed_out": true,
+          "outcome": "Timeout",
+          "thread_alive": false,
+          "finished": true,
+          "error": "TimeoutError"
+        }
+      },
+      {
+        "probe_id": "model_cleanup",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Timeout worker joined; no leftover PCPR-039 model-server client.",
+        "details": {
+          "thread_alive": false,
+          "leftover": false
+        }
+      },
+      {
+        "probe_id": "model_resource_admission_fail_closed",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Model-server resource admission refused oversubscription and did not fabricate success.",
+        "details": {
+          "max_input_bytes": 4096,
+          "requested_bytes": 4160,
+          "admitted": false,
+          "status": 503,
+          "outcome": "Unavailable",
+          "code": "model_resource_oversubscription_refused",
+          "live_oom_not_claimed": true
+        }
+      },
+      {
+        "probe_id": "llamacpp_identity",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live llama.cpp local model-server identity observed.",
+        "details": {
+          "url": "http://127.0.0.1:8080",
+          "server": "llama.cpp",
+          "model_id": "leanstral_local",
+          "owned_by": "llamacpp",
+          "n_params": 118972826624,
+          "n_ctx": 8192,
+          "n_embd": 4096,
+          "ftype": "NVFP4"
+        }
+      },
+      {
+        "probe_id": "llamacpp_load",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live llama.cpp /v1/models listed a loaded GGUF model.",
+        "details": {
+          "model_id": "leanstral_local",
+          "server": "llama.cpp"
+        }
+      },
+      {
+        "probe_id": "llamacpp_inference",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Live llama.cpp chat completion returned model-generated content.",
+        "details": {
+          "model": "leanstral_local",
+          "object": "chat.completion",
+          "status": 200,
+          "content_length": 6,
+          "usage": {
+            "completion_tokens": 4,
+            "prompt_tokens": 31,
+            "total_tokens": 35,
+            "prompt_tokens_details": {
+              "cached_tokens": 30
+            }
+          },
+          "error": null
+        }
+      },
+      {
+        "probe_id": "llamacpp_output_validation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "llama.cpp OpenAI chat-completion schema and non-empty content matched.",
+        "details": {
+          "model": "leanstral_local",
+          "finish_reason": "length"
+        }
+      },
+      {
+        "probe_id": "llamacpp_repetition",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "reason": "Repeated live llama.cpp completions both returned non-empty content.",
+        "details": {
+          "first_content_length": 6,
+          "second_content_length": 6,
+          "token_identity_not_claimed": true
+        }
+      },
+      {
+        "probe_id": "production_authorized_not_granted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Live model/provider execution does not grant production_authorized or ladder qualified.",
+        "details": {}
+      },
+      {
+        "probe_id": "torch_is_not_qualification",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed-environment torch and transformers are not used as model qualification.",
+        "details": {
+          "torch_not_used": true,
+          "transformers_not_used": true,
+          "huggingface_hub_not_used": true
+        }
+      },
+      {
+        "probe_id": "live_cuda_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not re-qualify live CUDA. PCPR-038 owns CUDA execution. Missing CUDA re-qualification stays typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-038"
+        }
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "numpy_module": "/usr/lib/python3/dist-packages/numpy/__init__.py",
+    "numpy_required_for_model_canary": false,
+    "requests_module": "/usr/lib/python3/dist-packages/requests/__init__.py",
+    "requests_not_used_as_qualification": true,
+    "torch": "unavailable",
+    "transformers": "unavailable",
+    "onnxruntime": "unavailable",
+    "huggingface_hub": "unavailable",
+    "openai_sdk": "unavailable",
+    "anyio": "unavailable",
+    "duckdb": "unavailable",
+    "ollama": "unavailable",
+    "nvcc": "unavailable",
+    "nvidia_smi": "/usr/bin/nvidia-smi",
+    "nvidia_smi_is_not_model_qualification": true,
+    "torch_not_used_as_qualification": true,
+    "transformers_not_used_as_qualification": true,
+    "huggingface_hub_download_not_used": true,
+    "local_llamacpp": "http://127.0.0.1:8080",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr039-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_model_provider_execution_qualification.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 16.49,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_model_provider_execution_qualification.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site torch/transformers/huggingface_hub under ~/.local are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-039.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_model_provider_execution_qualification.py",
+      "exit_code": 0,
+      "passed": 10,
+      "failed": 0,
+      "duration_seconds": 16.49,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "torch_is_not_model_qualification": true,
+    "transformers_is_not_model_qualification": true,
+    "huggingface_hub_download_not_used": true,
+    "live_cuda_not_reclaimed": true,
+    "production_authorized_not_granted": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "live_model_provider_execution_qualified": true,
+    "live_llamacpp_qualified": true,
+    "production_authorized": false,
+    "hardware_ladder_qualified": false,
+    "simulated_results_represented_as_live": false,
+    "live_cuda_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome.",
+    "Live model/provider execution is qualified as R&D with a stdlib OpenAI-compatible canary model-server and one live llama.cpp local LLM path. That is not production_authorized and not a closed hardware-ladder qualified release rung.",
+    "The canary model pcpr039-canary-embed-v1 is a pinned integer embedding served over loopback HTTP. It is live matmul and live provider protocol, not a mock success payload, and not a production LLM.",
+    "The live local LLM path is llama.cpp Server leanstral_local at http://127.0.0.1:8080 (GGUF NVFP4, n_params=118972826624, n_ctx=8192, n_embd=4096). Token identity across repetitions is not claimed.",
+    "The canary covers identity, load, inference, output validation, cancellation, timeout, cleanup, fail-closed resource admission, and repetition. Resource admission refused oversubscription. A live OOM kill was not induced and is not claimed.",
+    "Sealed-environment torch, transformers, onnxruntime, huggingface_hub, and the OpenAI SDK are absent and were not used as live model authority. User-site copies under ~/.local are not the sealed validation environment.",
+    "HuggingFace Hub downloads were not used. ollama is absent from the sealed PATH.",
+    "nvidia-smi is present on the sealed PATH. Device visibility is not model/provider qualification.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing. This task does not re-qualify CUDA.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, ipfs, z3, torch, transformers, nvcc, and ollama are absent and are not recorded as passing or zero.",
+    "Numpy and requests are present in the sealed environment but are not required for the canary and are not live model authority. The canary uses stdlib urllib and integer matmul.",
+    "Hermetic ModelProviderExecutionQualification tests are candidate coverage of the live model/provider canary; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
