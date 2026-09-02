@@ -1,0 +1,564 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-016",
+  "title": "Resolve Datasets license metadata",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G230",
+  "objective_id": "PCPR-016",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-016@current-head-datasets-license-metadata-v1",
+  "observed_at": "2026-09-02T03:40:33Z",
+  "depends_on": [
+    "PCPR-015"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-1 Datasets license metadata agreement only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/license_metadata.py",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "external/ipfs_datasets/ipfs_datasets_py/logic/external_provers/README.md",
+      "external/ipfs_datasets/ipfs_datasets_py.egg-info/PKG-INFO",
+      "external/ipfs_datasets/pyproject.toml",
+      "external/ipfs_datasets/setup.py",
+      "external/ipfs_datasets/README.md",
+      "external/ipfs_datasets/MANIFEST.in",
+      "external/ipfs_datasets/tests/unit/test_pcpr_016_license_metadata.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish DatasetsLicenseMetadata@1 so LICENSE, pyproject metadata, setup.py classifiers and license=, README, MANIFEST.in, setuptools license-files, and tracked egg-info PKG-INFO agree on AGPL-3.0-only. Dual-license authority is explicit none. Historical MIT packaging metadata is not a license grant. Built wheel and sdist artifacts remain typed unavailable. Live solvers remain typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_datasets_py",
+    "outer_commit": "91895ee6bc0b5b37a4c62b175ac75a076f4163a2",
+    "outer_tree": "684e26a320d5686250e22816a548b52feffad475",
+    "outer_subject": "Merge commit '7018cdad49294577e77942c006e72c60411bf75a' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "datasets_pre_change_commit": "a747bbd619385329b8e613e7e6f75557d471e2c3",
+    "datasets_pre_change_tree": "15e2aa1c19dffb175b4d7bb57c3afaab52eb0dd8",
+    "datasets_gitlink": "a747bbd619385329b8e613e7e6f75557d471e2c3",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "accelerator_commit": "9bdc03fb2aa10ee1f7a72f2f9c7efaa19bd08653",
+    "accelerator_tree": "10ccf93a671ba3b17cf08be8ea20285ddd4e8d54",
+    "accelerator_gitlink": "9bdc03fb2aa10ee1f7a72f2f9c7efaa19bd08653",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "kit_commit": "24510963ec43ffeaf3e088c4f215a6a9dbb5cbd5",
+    "kit_tree": "c41ee7822def5c3c0518cc82e250a1d784a12fc1",
+    "kit_gitlink": "24510963ec43ffeaf3e088c4f215a6a9dbb5cbd5",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/license_metadata.py",
+      "sha256": "69fe0d4a7bc94f2037879cc233c62f77de1ae620d864c59c22508373402a792e",
+      "bytes": 37388,
+      "evidence_kind": "measured",
+      "interface": "DatasetsLicenseMetadata@1",
+      "schema": "ipfs_datasets_py/assurance/license-authority@1"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/platform/manifest.py",
+      "sha256": "526ece49f2b413df1300ae59ff722760366c51a76b3d525d3fae8d7ca1e1ca0c",
+      "bytes": 41177,
+      "evidence_kind": "measured",
+      "interface": "LogicPlatformManifest@1"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_016_license_metadata.py",
+      "sha256": "a93e8d9742ca75147726e52b7e66ad83001835887d10c25ba91bb1dce5166326",
+      "bytes": 9738,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/pyproject.toml",
+      "sha256": "c47b4aee3bcb334b13ca66ac0c9a5a161adf33a3b95dfa363982ef97e9f26d57",
+      "bytes": 19611,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/setup.py",
+      "sha256": "4c81ff5ddabc4d91c100971a5621c0554772c90ed6eed8a5008c4df066ab28b8",
+      "bytes": 29100,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/README.md",
+      "sha256": "c089a881abf1e48fc9452a9e31e817f440f40aca43564471de9b41c1ece97a37",
+      "bytes": 37948,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/MANIFEST.in",
+      "sha256": "61bf4f072c9f3daa5e91fbf58d2eba972ab431c1f41f10949031ab9b0c9af6c9",
+      "bytes": 1933,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/external_provers/README.md",
+      "sha256": "cd13c162ba4c3496d355d3b4433b586770c6c6c470b7ca1a03eb772ecedb562a",
+      "bytes": 19637,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py.egg-info/PKG-INFO",
+      "sha256": "c6da6bb4494372352baabb15d5b6a6a7f91984a1b09dbc5dcd6fd5d7ce22d3c1",
+      "bytes": 43260,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_datasets_py/assurance/license-authority-verdict@1",
+    "interface": "DatasetsLicenseMetadata@1",
+    "verdict_cid": "baguqeeram2brcbor6mwzx3h3emwoy66xgtnmnb256ddgk4bvbipcdhadxc4a",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "license_surfaces_agree": true,
+    "dual_license_authority": "none",
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "live_solver_evidence_kind": "unavailable",
+    "built_wheel_evidence_kind": "unavailable",
+    "built_sdist_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-015",
+    "goal_id": "PCPR-G230",
+    "promotion_status": "rnd_non_promoted",
+    "inventory_task_id": "PCPR-003",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-015 published DatasetsSchemaPackaging@1 and DatasetsSharedVectors@1 and remains rnd_non_promoted. This task aligns Datasets distribution license metadata to AGPL-3.0-only and records dual-license authority as none. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "license_metadata": {
+    "schema": "ipfs_datasets_py/assurance/license-authority@1",
+    "interface": "DatasetsLicenseMetadata@1",
+    "spdx": "AGPL-3.0-only",
+    "license_file": "LICENSE",
+    "classifier": "License :: OSI Approved :: GNU Affero General Public License v3",
+    "dual_license_authority": "none",
+    "authoritative_surfaces": [
+      "LICENSE",
+      "pyproject.toml",
+      "setup.py",
+      "README.md"
+    ],
+    "import_side_effects": "none",
+    "verdict_cid": "baguqeeram2brcbor6mwzx3h3emwoy66xgtnmnb256ddgk4bvbipcdhadxc4a",
+    "probes": [
+      {
+        "probe_id": "license_file_is_agpl_v3",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LICENSE is the GNU Affero General Public License v3 text",
+        "details": {
+          "spdx": "AGPL-3.0-only",
+          "family": "AGPL-3.0"
+        }
+      },
+      {
+        "probe_id": "pyproject_license_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "pyproject.toml license metadata is AGPL-3.0-only",
+        "details": {
+          "form": "text",
+          "spdx": "AGPL-3.0-only",
+          "file": null
+        }
+      },
+      {
+        "probe_id": "setup_classifier_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "setup.py license classifier is GNU Affero General Public License v3",
+        "details": {
+          "classifiers": [
+            "License :: OSI Approved :: GNU Affero General Public License v3"
+          ]
+        }
+      },
+      {
+        "probe_id": "setup_license_field_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "setup.py license= is AGPL-3.0-only",
+        "details": {
+          "license_field": "AGPL-3.0-only"
+        }
+      },
+      {
+        "probe_id": "readme_license_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "README license section is AGPL-3.0-only and not dual-licensed",
+        "details": {
+          "mentions_agpl": true,
+          "claims_mit": false,
+          "dual_license_granted": false,
+          "dual_license_negated": true
+        }
+      },
+      {
+        "probe_id": "dual_license_not_granted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Dual-license authority is explicitly none",
+        "details": {
+          "dual_license_authority": "none"
+        }
+      },
+      {
+        "probe_id": "dual_license_granted",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No dual-license grant is present on authoritative surfaces",
+        "details": {}
+      },
+      {
+        "probe_id": "mit_not_authoritative",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "MIT is not the authoritative package license",
+        "details": {}
+      },
+      {
+        "probe_id": "mit_authoritative",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "MIT is not authoritative",
+        "details": {}
+      },
+      {
+        "probe_id": "manifest_in_includes_license",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "MANIFEST.in includes LICENSE",
+        "details": {}
+      },
+      {
+        "probe_id": "setuptools_ships_license_file",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "setuptools license-files includes LICENSE",
+        "details": {
+          "license_files": [
+            "LICENSE"
+          ]
+        }
+      },
+      {
+        "probe_id": "distribution_metadata_declared_to_agree",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LICENSE, pyproject, setup.py, README, and license-file shipping agree on AGPL-3.0-only",
+        "details": {
+          "spdx": "AGPL-3.0-only"
+        }
+      },
+      {
+        "probe_id": "egg_info_license_agrees",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Tracked egg-info PKG-INFO License field is AGPL-3.0-only",
+        "details": {
+          "license_field": "AGPL-3.0-only",
+          "license_file": "LICENSE"
+        }
+      },
+      {
+        "probe_id": "residual_nonauthoritative_mit_documentation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Non-authoritative documentation still mentions MIT; that is not a dual-license grant",
+        "details": {
+          "paths": [
+            "docs/guides/FINANCE_WORKFLOW_GUIDE.md",
+            "docs/tdfol/_build/html/_sources/index.rst.txt",
+            "docs/tdfol/_build/html/_sources/license.rst.txt",
+            "docs/archive/root_status_reports/EXTERNAL_PROVER_INTEGRATION.md",
+            "ipfs_datasets_py/processors/multimedia/omni_converter_mk2/README.md"
+          ]
+        }
+      },
+      {
+        "probe_id": "manifest_advertises_license_metadata",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "LogicPlatformManifest advertises DatasetsLicenseMetadata@1.",
+        "details": {}
+      },
+      {
+        "probe_id": "simulated_results_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Simulated results are not represented as live.",
+        "details": {}
+      },
+      {
+        "probe_id": "runtime_unavailable_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "License metadata probes are not represented as live.",
+        "details": {}
+      },
+      {
+        "probe_id": "built_wheel_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No built wheel is represented as live qualification.",
+        "details": {}
+      },
+      {
+        "probe_id": "built_sdist_represented_as_live",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No built sdist is represented as live qualification.",
+        "details": {}
+      },
+      {
+        "probe_id": "built_wheel_metadata",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No built wheel artifact is present in dist/; source declarations are the live evidence for this task.",
+        "details": {
+          "artifacts": []
+        }
+      },
+      {
+        "probe_id": "built_sdist_metadata",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No built sdist artifact is present in dist/; source declarations are the live evidence for this task.",
+        "details": {
+          "artifacts": []
+        }
+      },
+      {
+        "probe_id": "live_solver_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify live solvers. Missing Z3/cvc5/Lean/Coq evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "cvc5": "unavailable",
+    "lean": "unavailable",
+    "coqtop": "unavailable",
+    "multiformats": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live solver qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr016-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_016_license_metadata.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.17,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/unit/test_pcpr_016_license_metadata.py"
+    ],
+    "additional_candidate_suites": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr016-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_016_license_metadata.py tests/unit/test_pcpr_015_schema_packaging.py tests/unit/logic/platform/test_manifest.py",
+      "exit_code": 0,
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.65,
+      "authority": false,
+      "reason": "PCPR-015 schema packaging and LogicPlatformManifest tests remain candidate coverage only.",
+      "evidence_kind": "measured"
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/z3/cvc5/lean/multiformats are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-016.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_016_license_metadata.py",
+      "exit_code": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.17,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "dual_license_not_granted": true,
+    "mit_not_authoritative": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_solver_not_claimed": true,
+    "built_wheel_not_claimed": true,
+    "built_sdist_not_claimed": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "license_surfaces_agree": true,
+    "dual_license_authority": "none",
+    "simulated_results_represented_as_live": false,
+    "live_solver_qualified": false,
+    "built_wheel_qualified": false,
+    "built_sdist_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live solver qualification, and not a closed PCPR release outcome.",
+    "Canonical Datasets package license is AGPL-3.0-only. Dual-license authority is none. Historical MIT packaging metadata and archived AGPLv3+ classifiers are not current grants.",
+    "Built wheel and sdist artifacts were not present under dist/ and remain typed unavailable. Source declarations now agree so a later build can carry AGPL-3.0-only; this task does not publish a wheel or sdist.",
+    "Tracked egg-info PKG-INFO is a local metadata snapshot, not a published distribution.",
+    "Non-authoritative documentation still mentions MIT in docs/guides/FINANCE_WORKFLOW_GUIDE.md, generated TDFOL sources, an archive report, and ipfs_datasets_py/processors/multimedia/omni_converter_mk2/README.md. Those mentions are not dual-license authority.",
+    "Live solver qualification remains for PCPR-017.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "Sealed-environment z3, cvc5, Lean, Coq, libp2p, and IPFS are absent and are not recorded as passing or zero.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, and ipfs are absent and are not recorded as passing or zero.",
+    "Hermetic DatasetsLicenseMetadata tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Datasets commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Datasets commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
