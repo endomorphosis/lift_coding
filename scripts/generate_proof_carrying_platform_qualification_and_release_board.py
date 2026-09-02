@@ -107,6 +107,7 @@ SOURCE_FOREST = OrderedDict(
                 "path": "external/ipfs_datasets",
                 "commit": "08e6d6bb693dc1a13d7ecf7434a0613eed92c45d",
                 "tree": "75c32a0e97316ee81886f48d04e993f0738b8956",
+                "origin_main": "f49afc579c22856849ca9f739435e5820003384f",
             },
         ),
         (
@@ -115,6 +116,7 @@ SOURCE_FOREST = OrderedDict(
                 "path": "external/ipfs_kit",
                 "commit": "9d24c7d77539801de27e6a33dcedbfcadda89648",
                 "tree": "672b59f145962d00c1e7dacc6ef4158c54b82525",
+                "origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
             },
         ),
     )
