@@ -1,0 +1,1068 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-021",
+  "title": "Qualify pinned IPFS backend",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G300",
+  "objective_id": "PCPR-021",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-021@current-head-pinned-ipfs-backend-qualification-v1",
+  "observed_at": "2026-09-02T02:16:00Z",
+  "depends_on": [
+    "PCPR-020"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-2 Kit pinned IPFS backend qualification only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs_qualification.py",
+      "external/ipfs_kit/tests/test_pcpr_pinned_ipfs_qualification.py",
+      "external/ipfs_kit/README.md",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add LivePinnedIpfsAdapter@1 and PinnedIpfsQualification@1. The live adapter talks to Kubo over stdlib HTTP, never auto-installs, rejects secret material, and fails closed when a daemon is absent. Injected transports are labeled simulated and cannot mint live qualification. Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment, so clean provisioning, add, read-back, digest, pin, unpin, restart, daemon loss, timeout, concurrency, large objects, unexpected content, configuration, upgrade, rollback, and interface parity stay typed unavailable. Hermetic candidate tests do not represent simulated results as live. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_kit_py",
+    "outer_commit": "3a397e56807c5a57e8ac3a8e2062487af71e6223",
+    "outer_tree": "487084bae29ba96a72a6f3b8f573ddc3bb36f580",
+    "outer_subject": "Merge commit 'f664f922c2b6311766fe30abc8efa99fcfe65b35' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "d4aa008d66033574911e8bdde6cfe12e9817958b",
+    "accelerator_pre_change_tree": "2e3dd404a6ff7530346ff0b0dc0575e28a521383",
+    "accelerator_gitlink": "d4aa008d66033574911e8bdde6cfe12e9817958b",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "unchanged by this task",
+    "accelerator_post_change_tree": "unchanged by this task",
+    "datasets_commit": "1ab49a5b4c08292963dd177efa4363b5119ebc10",
+    "datasets_tree": "30f0117f9b7a4d74e4e48b45ee46200db938c22d",
+    "datasets_gitlink": "1ab49a5b4c08292963dd177efa4363b5119ebc10",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "kit_commit": "1900d8508f49ad7f7dae7bc253d9ed51a7418a70",
+    "kit_tree": "14e5d8c1786ea1aaf753161dba5665eb44d6d32e",
+    "kit_gitlink": "1900d8508f49ad7f7dae7bc253d9ed51a7418a70",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "kit_post_change_commit": "pending nested commit after admission",
+    "kit_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs.py",
+      "sha256": "73498a68afe349160573e025175672e016f83a7dd8a2f66be070a4fce95294a0",
+      "bytes": 32627,
+      "evidence_kind": "measured",
+      "interface": "LivePinnedIpfsAdapter@1",
+      "schema": "ipfs_kit_py/assurance/pinned-ipfs@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs_qualification.py",
+      "sha256": "313bd153a419c2b6b890428e38c120a3d0f461fad890c608cd7bd6c012e49e7e",
+      "bytes": 41196,
+      "evidence_kind": "measured",
+      "interface": "PinnedIpfsQualification@1",
+      "schema": "ipfs_kit_py/assurance/pinned-ipfs-qualification@1"
+    },
+    {
+      "path": "external/ipfs_kit/tests/test_pcpr_pinned_ipfs_qualification.py",
+      "sha256": "648e7cda9a9a62945b3893a0e7148fc1f5aa97a47afbb4df13a31dfc91137cf7",
+      "bytes": 12035,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/__init__.py",
+      "sha256": "57a4e15cb3949df62517b9cd666fb541fda5b68bada63db909bb7b47be2346f2",
+      "bytes": 74,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/README.md",
+      "sha256": "44967ac78d2518f4fb4994cfa3ea120a4aba2a331b1c6bafd9f9bd627c55f3ac",
+      "bytes": 34593,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_kit_py/assurance/pinned-ipfs-qualification-verdict@1",
+    "interface": "PinnedIpfsQualification@1",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "pinned_ipfs_live_qualified": false,
+    "suite_complete": false,
+    "certification_disposition": "Unavailable",
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "python_pinned_ipfs_observed": false,
+    "interface_parity_qualified": false,
+    "sealed_ipfs_binary": "unavailable",
+    "pinned_daemon_identity": "unavailable",
+    "live_ipfs_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "probes": [
+      {
+        "probe_id": "live_pinned_ipfs_adapter",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No isolated pinned Kubo daemon was provisioned. LivePinnedIpfsAdapter was not used as live evidence.",
+        "details": {
+          "backend_id": "pinned_ipfs",
+          "schema": "ipfs_kit_py/assurance/pinned-ipfs@1",
+          "interface": "LivePinnedIpfsAdapter@1",
+          "certification_scope": "pcpr-021-pinned-ipfs-python; not a closed PCPR release",
+          "production_authorized": false
+        }
+      },
+      {
+        "probe_id": "sealed_ipfs_binary",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable. A pinned exact Kubo daemon was not provisioned. Missing daemon evidence stays typed unavailable and is not recorded as zero or passing.",
+        "details": {
+          "binary": "ipfs",
+          "product": "kubo",
+          "path": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "auto_install": false
+        }
+      },
+      {
+        "probe_id": "pinned_daemon_identity",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No digest-bound Kubo deployment is present on the sealed PATH. Declared pin version=unavailable digest=unavailable. Configuration is not live qualification.",
+        "details": {
+          "product": "kubo",
+          "binary": "ipfs",
+          "version": "unavailable",
+          "digest": "unavailable"
+        }
+      },
+      {
+        "probe_id": "auto_install_not_used",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-021 never calls ensure_kubo_binary(install=True) and never downloads Kubo. Missing daemon stays typed unavailable.",
+        "details": {
+          "IPFS_KIT_AUTO_INSTALL_BINARIES": "unset",
+          "install_invoked": false
+        }
+      },
+      {
+        "probe_id": "cli_ipfs_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "cli source module ipfs_kit_py.cli is importable. No live pinned-IPFS cli session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.cli",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "mcp_ipfs_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcp source module ipfs_kit_py.mcp is importable. No live pinned-IPFS mcp session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.mcp",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "mcpp_ipfs_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcpp source module ipfs_kit_py.mcp_server.mcplusplus is importable. No live pinned-IPFS mcpp session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.mcp_server.mcplusplus",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "iroh_not_in_scope",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Iroh qualification is PCPR-022. Missing Iroh evidence stays typed unavailable.",
+        "details": {
+          "remediating_task": "PCPR-022"
+        }
+      },
+      {
+        "probe_id": "support_matrix_not_generated",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Authoritative support-matrix generation is PCPR-027. This receipt does not replace it.",
+        "details": {
+          "remediating_task": "PCPR-027"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "operation": "write",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "read_back",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "digest",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "delete",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "replay",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "timeout",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "concurrency",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "restart",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "corruption",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "large_object",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "credential",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "interface_parity",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      }
+    ],
+    "ipfs_operations": [
+      {
+        "operation": "clean_provisioning",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "pin_persistence",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "unpin_deletion",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "daemon_loss",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "unexpected_content",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "configuration",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "upgrade",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "rollback",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      }
+    ],
+    "operations_observed": [],
+    "operations_missing": [
+      "write",
+      "read_back",
+      "digest",
+      "delete",
+      "replay",
+      "timeout",
+      "concurrency",
+      "restart",
+      "corruption",
+      "large_object",
+      "credential",
+      "interface_parity"
+    ],
+    "blockers": [],
+    "verdict_cid": "baguqeera73hiwlkjgzhkhaoazampvyq2zbu5jk4modig3ov6onbjy24n5vlq"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-020",
+    "goal_id": "PCPR-G300",
+    "promotion_status": "rnd_non_promoted",
+    "local_backend_verdict_cid": "baguqeeraxsfyay5pfotmvsb3ik3xkeog7tsvuwb6anrx75ld2vmllqqlwwcq",
+    "inventory_verdict_cid": "baguqeeraossnqpwfmgxwzhx4bmaaqdg2oiumoqujgxh2uz3dhzconolfepqa",
+    "path_id": "kit_unqualified_live_storage_claims",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeraxsfyay5pfotmvsb3ik3xkeog7tsvuwb6anrx75ld2vmllqqlwwcq",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-020 requalified the local durable backend and left pinned IPFS typed unavailable. This task records the sealed-PATH absence of a digest-bound Kubo daemon and does not promote PCPR-001 or close a release.",
+    "evidence_kind": "measured"
+  },
+  "pinned_ipfs": {
+    "schema": "ipfs_kit_py/assurance/pinned-ipfs-qualification@1",
+    "interface": "PinnedIpfsQualification@1",
+    "backend_id": "pinned_ipfs",
+    "adapter_interface": "LivePinnedIpfsAdapter@1",
+    "python_pinned_ipfs_observed": false,
+    "pinned_ipfs_live_qualified": false,
+    "suite_complete": false,
+    "certification_disposition": "Unavailable",
+    "storage_selectable": false,
+    "production_authorized": false,
+    "hermetic_results_represented_as_live": false,
+    "simulated_results_represented_as_live": false,
+    "sealed_ipfs_binary": "unavailable",
+    "pinned_daemon_identity": "unavailable",
+    "auto_install": false,
+    "probes": [
+      {
+        "probe_id": "live_pinned_ipfs_adapter",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No isolated pinned Kubo daemon was provisioned. LivePinnedIpfsAdapter was not used as live evidence.",
+        "details": {
+          "backend_id": "pinned_ipfs",
+          "schema": "ipfs_kit_py/assurance/pinned-ipfs@1",
+          "interface": "LivePinnedIpfsAdapter@1",
+          "certification_scope": "pcpr-021-pinned-ipfs-python; not a closed PCPR release",
+          "production_authorized": false
+        }
+      },
+      {
+        "probe_id": "sealed_ipfs_binary",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable. A pinned exact Kubo daemon was not provisioned. Missing daemon evidence stays typed unavailable and is not recorded as zero or passing.",
+        "details": {
+          "binary": "ipfs",
+          "product": "kubo",
+          "path": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "auto_install": false
+        }
+      },
+      {
+        "probe_id": "pinned_daemon_identity",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No digest-bound Kubo deployment is present on the sealed PATH. Declared pin version=unavailable digest=unavailable. Configuration is not live qualification.",
+        "details": {
+          "product": "kubo",
+          "binary": "ipfs",
+          "version": "unavailable",
+          "digest": "unavailable"
+        }
+      },
+      {
+        "probe_id": "auto_install_not_used",
+        "present": false,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-021 never calls ensure_kubo_binary(install=True) and never downloads Kubo. Missing daemon stays typed unavailable.",
+        "details": {
+          "IPFS_KIT_AUTO_INSTALL_BINARIES": "unset",
+          "install_invoked": false
+        }
+      },
+      {
+        "probe_id": "cli_ipfs_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "cli source module ipfs_kit_py.cli is importable. No live pinned-IPFS cli session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.cli",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "mcp_ipfs_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcp source module ipfs_kit_py.mcp is importable. No live pinned-IPFS mcp session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.mcp",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "mcpp_ipfs_parity",
+        "present": true,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcpp source module ipfs_kit_py.mcp_server.mcplusplus is importable. No live pinned-IPFS mcpp session was exercised. Parity remains typed unavailable until PCPR-026.",
+        "details": {
+          "module": "ipfs_kit_py.mcp_server.mcplusplus",
+          "remediating_task": "PCPR-026",
+          "live_session": false
+        }
+      },
+      {
+        "probe_id": "iroh_not_in_scope",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Iroh qualification is PCPR-022. Missing Iroh evidence stays typed unavailable.",
+        "details": {
+          "remediating_task": "PCPR-022"
+        }
+      },
+      {
+        "probe_id": "support_matrix_not_generated",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Authoritative support-matrix generation is PCPR-027. This receipt does not replace it.",
+        "details": {
+          "remediating_task": "PCPR-027"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "operation": "write",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "read_back",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "digest",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "delete",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "replay",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "timeout",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "concurrency",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "restart",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "corruption",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "large_object",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "credential",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "interface_parity",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+        },
+        "limitations": [
+          "daemon_unavailable"
+        ],
+        "detail": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      }
+    ],
+    "ipfs_operations": [
+      {
+        "operation": "clean_provisioning",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "pin_persistence",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "unpin_deletion",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "daemon_loss",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "unexpected_content",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "configuration",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "upgrade",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      },
+      {
+        "operation": "rollback",
+        "status": "unobserved",
+        "environment": "live",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed validation PATH has no ipfs executable and no digest-bound Kubo deployment. Isolated daemon provisioning was not attempted. Missing daemon evidence stays typed unavailable."
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live pinned-IPFS qualification, CLI/MCP/MCP++ parity, Iroh qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr021-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_kit /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_pinned_ipfs_qualification.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.14,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/test_pcpr_pinned_ipfs_qualification.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio and any non-sealed ipfs binary are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-021.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_pinned_ipfs_qualification.py",
+      "exit_code": 0,
+      "passed": 13,
+      "failed": 0,
+      "duration_seconds": 0.14,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "hermetic_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live_release": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_ipfs_not_claimed": true,
+    "auto_install_not_used": true,
+    "interface_parity_not_claimed": true,
+    "incomplete_suite_cannot_live_qualify": true,
+    "missing_daemon_is_unavailable_not_zero": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "python_pinned_ipfs_observed": false,
+    "pinned_ipfs_live_qualified": false,
+    "suite_complete": false,
+    "interface_parity_qualified": false,
+    "live_ipfs_qualified": false,
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live pinned-IPFS qualification, not CLI/MCP/MCP++ parity, and not a closed PCPR release outcome.",
+    "Sealed validation PATH has no ipfs executable. No isolated Kubo daemon was provisioned. Live add/cat/pin/unpin/restart/daemon-loss evidence stays typed unavailable and is not recorded as zero or passing.",
+    "No digest-bound Kubo package identity is present, so upgrade and rollback stay typed unavailable.",
+    "CLI, MCP, and MCP++ pinned-IPFS sessions were not exercised and stay typed unavailable (PCPR-026).",
+    "Iroh remains typed unavailable (PCPR-022).",
+    "Injected HTTP transports are labeled simulated and cannot mint live qualification.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, pytest-asyncio, ipfs, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic PinnedIpfsQualification tests are candidate coverage only; they do not close a release.",
+    "Post-change Kit commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Kit commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
