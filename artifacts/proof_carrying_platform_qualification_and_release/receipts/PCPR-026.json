@@ -1,0 +1,744 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-026",
+  "title": "Qualify Python/CLI/MCP/MCP++ parity",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G300",
+  "objective_id": "PCPR-026",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-026@current-head-interface-parity-v1",
+  "observed_at": "2026-09-02T12:00:00Z",
+  "depends_on": [
+    "PCPR-025"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-2 Kit Python/CLI/MCP/MCP++ adapter parity only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_kit/ipfs_kit_py/assurance/interface_parity.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/interface_parity_qualification.py",
+      "external/ipfs_kit/tests/test_pcpr_interface_parity_qualification.py",
+      "external/ipfs_kit/ipfs_kit_py/mcp_server/tools/__init__.py",
+      "external/ipfs_kit/README.md",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add InterfaceParitySurface@1 and InterfaceParityQualification@1. Bind live local POSIX put/get/digest/delete to the canonical operation registry and project them through Python, CLI, MCP, and MCP++ adapters under AllInterfaceParityPolicy@1. Semantic payloads and CIDs matched after transport-only field strip. MCP tools package import no longer requires anyio. Live MCP stdio/HTTP/P2P server processes were not started and stay typed unavailable. Sealed PATH has no ipfs executable; live IPFS stays typed unavailable. Adapter sessions cannot mint a closed PCPR release. This evaluator never writes DuckDB or Quack state."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_kit_py",
+    "outer_commit": "7fa98095c12ef547b4d45727e63bdbbbc19dbac4",
+    "outer_tree": "fdb96dacf0347ddba7bcc5f716447cbe5a881b05",
+    "outer_subject": "Merge commit '16c6da7a70cb759822b04e2565beff069b8d84ae' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "7b4f094ca966e961ddac7bf0fc96f873a93e0f80",
+    "accelerator_pre_change_tree": "118d10ad140ea40c5710b312cff1c8a90cb999cb",
+    "accelerator_gitlink": "7b4f094ca966e961ddac7bf0fc96f873a93e0f80",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "unchanged by this task",
+    "accelerator_post_change_tree": "unchanged by this task",
+    "datasets_commit": "a747bbd619385329b8e613e7e6f75557d471e2c3",
+    "datasets_tree": "15e2aa1c19dffb175b4d7bb57c3afaab52eb0dd8",
+    "datasets_gitlink": "a747bbd619385329b8e613e7e6f75557d471e2c3",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "kit_commit": "b0597f8d1d153e75e38d20265fffcd4405130ab9",
+    "kit_tree": "6a9a57bb59be47465b78366e15e99a12fdd572c5",
+    "kit_gitlink": "b0597f8d1d153e75e38d20265fffcd4405130ab9",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "kit_post_change_commit": "pending nested commit after admission",
+    "kit_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/interface_parity.py",
+      "sha256": "1c8e935f8df5acb2c8661999c100ba79099272f3df75e7a8e3b32451b194feb9",
+      "bytes": 14576,
+      "evidence_kind": "measured",
+      "interface": "InterfaceParitySurface@1",
+      "schema": "ipfs_kit_py/assurance/interface-parity@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/interface_parity_qualification.py",
+      "sha256": "7bf3533b071274df75fa6ddaec14e36ecae1dbf414561c7cbe8f27edf59f4ecd",
+      "bytes": 39143,
+      "evidence_kind": "measured",
+      "interface": "InterfaceParityQualification@1",
+      "schema": "ipfs_kit_py/assurance/interface-parity-qualification@1"
+    },
+    {
+      "path": "external/ipfs_kit/tests/test_pcpr_interface_parity_qualification.py",
+      "sha256": "502db9ca45d2203f572cc67fef446fe4b36b768af5e90d92b2967fd5d33272e1",
+      "bytes": 11680,
+      "evidence_kind": "measured",
+      "interface": "InterfaceParityQualification@1",
+      "schema": "ipfs_kit_py/assurance/interface-parity-qualification@1"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/tools/__init__.py",
+      "sha256": "dd2ef160e740427a3fe802d5932462528f068a65bee571da11675f32eeaa2e8b",
+      "bytes": 13302,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/__init__.py",
+      "sha256": "57a4e15cb3949df62517b9cd666fb541fda5b68bada63db909bb7b47be2346f2",
+      "bytes": 74,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/README.md",
+      "sha256": "b13696ae5a1aef351bed423387facdf39f031cb1a3b24a2119b5b7a289edfbdf",
+      "bytes": 36622,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_kit_py/assurance/interface-parity-qualification-verdict@1",
+    "interface": "InterfaceParityQualification@1",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "interface_parity_live_qualified": false,
+    "suite_complete": false,
+    "certification_disposition": "Conditional",
+    "support_class": "conditional",
+    "live_support_claim": false,
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "adapter_parity_observed": true,
+    "interface_parity_qualified": true,
+    "live_server_parity_qualified": false,
+    "live_ipfs_transport_qualified": false,
+    "live_ipfs_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "probes": [
+      {
+        "probe_id": "interface_parity_surface",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "AllInterfaceParityPolicy@1 python/cli/mcp/mcpp adapter sessions executed local-durable put/get/digest/delete against the live local POSIX store. Semantic payloads and CIDs matched. Live MCP server processes were not started.",
+        "details": {
+          "backend_id": "interface_parity",
+          "schema": "ipfs_kit_py/assurance/interface-parity@1",
+          "interface": "InterfaceParitySurface@1",
+          "policy": "AllInterfaceParityPolicy@1",
+          "certification_scope": "pcpr-026-python-cli-mcp-mcpp-adapter-parity; not a closed PCPR release",
+          "production_authorized": false,
+          "live_support_claim": false,
+          "support_class": "conditional",
+          "is_hermetic": false,
+          "live_provider": true,
+          "surfaces": [
+            "python",
+            "cli",
+            "mcp",
+            "mcpp"
+          ],
+          "operations": [
+            "put",
+            "get",
+            "digest",
+            "delete"
+          ],
+          "live_mcp_server": false
+        }
+      },
+      {
+        "probe_id": "live_ipfs_transport",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Adapter sessions against the local POSIX store are not live IPFS.",
+        "details": {
+          "ipfs": "unavailable",
+          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "live_daemon_started": false,
+          "injected_transport_is_not_live": true
+        }
+      },
+      {
+        "probe_id": "live_mcp_server",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "No live MCP stdio, HTTP, or P2P server process was started. In-process MCPToolAdapter and MCPPlusPlusToolAdapter JSON-RPC and framing fixtures are not live server sessions.",
+        "details": {
+          "stdio_server_started": false,
+          "http_server_started": false,
+          "p2p_server_started": false,
+          "injected_adapter_is_not_live_server": true
+        }
+      },
+      {
+        "probe_id": "cli_adapter_session",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "cli adapter module ipfs_kit_py.cli.operation_adapter is importable and was exercised as an in-process adapter session against the live local POSIX store. That is not a live network server.",
+        "details": {
+          "module": "ipfs_kit_py.cli.operation_adapter",
+          "live_session": false,
+          "adapter_session": true
+        }
+      },
+      {
+        "probe_id": "mcp_adapter_session",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcp adapter module ipfs_kit_py.mcp_server.tools.operation_adapter is importable and was exercised as an in-process adapter session against the live local POSIX store. That is not a live network server.",
+        "details": {
+          "module": "ipfs_kit_py.mcp_server.tools.operation_adapter",
+          "live_session": false,
+          "adapter_session": true
+        }
+      },
+      {
+        "probe_id": "mcpp_adapter_session",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mcpp adapter module ipfs_kit_py.mcp_server.tools.operation_adapter is importable and was exercised as an in-process adapter session against the live local POSIX store. That is not a live network server.",
+        "details": {
+          "module": "ipfs_kit_py.mcp_server.tools.operation_adapter",
+          "live_session": false,
+          "adapter_session": true
+        }
+      },
+      {
+        "probe_id": "python_adapter_session",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "python adapter module ipfs_kit_py.high_level_api.operation_adapter is importable and was exercised as an in-process adapter session against the live local POSIX store. That is not a live network server.",
+        "details": {
+          "module": "ipfs_kit_py.high_level_api.operation_adapter",
+          "live_session": false,
+          "adapter_session": true
+        }
+      },
+      {
+        "probe_id": "sibling_test_tree_not_reopened",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Sibling test-tree decoupling is PCPR-025. This receipt does not reopen it.",
+        "details": {
+          "remediating_task": "PCPR-025"
+        }
+      },
+      {
+        "probe_id": "support_matrix_not_generated",
+        "present": false,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Authoritative support-matrix generation is PCPR-027. This receipt does not replace it.",
+        "details": {
+          "remediating_task": "PCPR-027"
+        }
+      }
+    ],
+    "observations": [
+      {
+        "operation": "python_write_read_digest_delete",
+        "status": "passed",
+        "environment": "live",
+        "source": "live_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "surface": "python"
+        },
+        "limitations": [
+          "adapter_not_live_server"
+        ],
+        "detail": "PythonAdapter put/get/digest/delete against live POSIX",
+        "evidence_kind": "measured_live",
+        "live": true,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "cli_write_read_digest_delete",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "stdout_exit_code": "0"
+        },
+        "limitations": [
+          "adapter_not_live_server",
+          "in_process_cli"
+        ],
+        "detail": "CLIAdapter invoke and run against live POSIX",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "mcp_write_read_digest_delete",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "jsonrpc": "tools/call"
+        },
+        "limitations": [
+          "adapter_not_live_server",
+          "in_process_jsonrpc"
+        ],
+        "detail": "MCPToolAdapter call and JSON-RPC tools/call against live POSIX",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "mcpp_write_read_digest_delete",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "framings": "stdio,http,p2p"
+        },
+        "limitations": [
+          "adapter_not_live_server",
+          "in_process_framing"
+        ],
+        "detail": "MCPPlusPlusToolAdapter stdio/http/p2p fixtures against live POSIX",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "cid_identity_parity",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "surfaces": "python,cli,mcp,mcpp"
+        },
+        "limitations": [
+          "adapter_not_live_server"
+        ],
+        "detail": "put of the same bytes produced one CID on every surface",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "semantic_payload_parity",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "policy": "AllInterfaceParityPolicy@1",
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "surfaces": "python,cli,mcp,mcpp"
+        },
+        "limitations": [
+          "adapter_not_live_server",
+          "transport_fields_stripped"
+        ],
+        "detail": "get payloads match across python/cli/mcp/mcpp after strip",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "error_parity",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "signature_valid": true,
+        "freshness": "current",
+        "digests": {
+          "error": "NOT_FOUND",
+          "surfaces": "python,cli,mcp,mcpp"
+        },
+        "limitations": [
+          "adapter_not_live_server"
+        ],
+        "detail": "missing-path get is NOT_FOUND on every surface",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "live_mcp_server",
+        "status": "blocked",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "No live MCP stdio, HTTP, or P2P server process was started. In-process MCPToolAdapter and MCPPlusPlusToolAdapter JSON-RPC and framing fixtures are not live server sessions."
+        },
+        "limitations": [
+          "mcp_server_not_started"
+        ],
+        "detail": "No live MCP stdio, HTTP, or P2P server process was started. In-process MCPToolAdapter and MCPPlusPlusToolAdapter JSON-RPC and framing fixtures are not live server sessions.",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      },
+      {
+        "operation": "live_ipfs_transport",
+        "status": "blocked",
+        "environment": "live",
+        "source": "unavailable",
+        "signature_valid": false,
+        "freshness": "missing",
+        "digests": {
+          "reason": "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Adapter sessions against the local POSIX store are not live IPFS."
+        },
+        "limitations": [
+          "ipfs_unavailable"
+        ],
+        "detail": "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Adapter sessions against the local POSIX store are not live IPFS.",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false
+      }
+    ],
+    "adapter_operations": [
+      {
+        "operation": "python_write_read_digest_delete",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "PythonAdapter put/get/digest/delete against live POSIX",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "surface": "python"
+        }
+      },
+      {
+        "operation": "cli_write_read_digest_delete",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "CLIAdapter invoke and run against live POSIX",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "stdout_exit_code": "0"
+        }
+      },
+      {
+        "operation": "mcp_write_read_digest_delete",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "MCPToolAdapter call and JSON-RPC tools/call against live POSIX",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "jsonrpc": "tools/call"
+        }
+      },
+      {
+        "operation": "mcpp_write_read_digest_delete",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "MCPPlusPlusToolAdapter stdio/http/p2p fixtures against live POSIX",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "framings": "stdio,http,p2p"
+        }
+      },
+      {
+        "operation": "cid_identity_parity",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "put of the same bytes produced one CID on every surface",
+        "digests": {
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "surfaces": "python,cli,mcp,mcpp"
+        }
+      },
+      {
+        "operation": "semantic_payload_parity",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "get payloads match across python/cli/mcp/mcpp after strip",
+        "digests": {
+          "policy": "AllInterfaceParityPolicy@1",
+          "cid": "bafkreibkufzfstay5y73lfb5egxgofjwkyljsmul33vyv5rlsfe2wljpzq",
+          "surfaces": "python,cli,mcp,mcpp"
+        }
+      },
+      {
+        "operation": "error_parity",
+        "status": "passed",
+        "environment": "adapter",
+        "source": "adapter_observed",
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "missing-path get is NOT_FOUND on every surface",
+        "digests": {
+          "error": "NOT_FOUND",
+          "surfaces": "python,cli,mcp,mcpp"
+        }
+      }
+    ],
+    "live_unavailable_operations": [
+      {
+        "operation": "live_mcp_server",
+        "status": "unobserved",
+        "environment": "sealed",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "No live MCP stdio, HTTP, or P2P server process was started. In-process MCPToolAdapter and MCPPlusPlusToolAdapter JSON-RPC and framing fixtures are not live server sessions."
+      },
+      {
+        "operation": "live_ipfs_transport",
+        "status": "unobserved",
+        "environment": "sealed",
+        "source": "unavailable",
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "hermetic_represented_as_live": false,
+        "reason": "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Adapter sessions against the local POSIX store are not live IPFS."
+      }
+    ],
+    "operations_observed": [
+      "python_write_read_digest_delete",
+      "cli_write_read_digest_delete",
+      "mcp_write_read_digest_delete",
+      "mcpp_write_read_digest_delete",
+      "cid_identity_parity",
+      "semantic_payload_parity",
+      "error_parity"
+    ],
+    "operations_missing": [
+      "live_mcp_server",
+      "live_ipfs_transport"
+    ],
+    "blockers": [],
+    "verdict_cid": "baguqeerayk77apikoro3oubm4sxofo2ge2m2kcijywtm5yp6ddz36givywba"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured",
+    "fusermount": "/usr/bin/fusermount",
+    "fusermount3": "/usr/bin/fusermount3",
+    "docker": "/usr/bin/docker",
+    "podman": "unavailable",
+    "iroh": "unavailable",
+    "ipfs-kit-iroh-sidecar": "unavailable",
+    "dev_fuse": "/dev/fuse"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live MCP server processes, live IPFS, support-matrix generation, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr026-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_kit /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_interface_parity_qualification.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.73,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "tests/test_pcpr_interface_parity_qualification.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio and any non-sealed IPFS helper are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-026.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_interface_parity_qualification.py",
+      "exit_code": 0,
+      "passed": 11,
+      "failed": 0,
+      "duration_seconds": 0.73,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "hermetic_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live_release": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_ipfs_transport_not_claimed": true,
+    "live_mcp_server_not_claimed": true,
+    "live_support_claim_false": true,
+    "auto_install_not_used": true,
+    "live_server_parity_not_claimed": true,
+    "incomplete_suite_cannot_live_qualify": true,
+    "missing_ipfs_is_unavailable_not_zero": true,
+    "adapter_session_is_not_live_server": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "adapter_parity_observed": true,
+    "interface_parity_qualified": true,
+    "interface_parity_live_qualified": false,
+    "live_server_parity_qualified": false,
+    "suite_complete": false,
+    "live_ipfs_transport_qualified": false,
+    "live_support_claim": false,
+    "support_class": "conditional",
+    "simulated_results_represented_as_live": false,
+    "hermetic_results_represented_as_live": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live IPFS qualification, not live MCP server qualification, and not a closed PCPR release outcome.",
+    "Python/CLI/MCP/MCP++ adapter sessions for local-durable put/get/digest/delete were measured against the live local POSIX store. In-process adapter sessions are not live MCP stdio/HTTP/P2P server processes.",
+    "Sealed PATH has no ipfs executable. Live IPFS stays typed unavailable and is not recorded as zero or passing. Local POSIX objects are not live IPFS.",
+    "Live MCP stdio, HTTP, and P2P server processes were not started and stay typed unavailable.",
+    "Replay, timeout, concurrency, restart, corruption, large-object, and credential cases remain owned by PCPR-020 and were not re-run through CLI/MCP/MCP++.",
+    "Sibling test-tree decoupling remains owned by PCPR-025 and is not reopened here.",
+    "Authoritative support-matrix generation remains owned by PCPR-027 and is not replaced here.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, pytest-asyncio, anyio, ipfs, iroh, ipfs-kit-iroh-sidecar, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic InterfaceParityQualification tests are candidate coverage only; they do not close a release.",
+    "Post-change Kit commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Kit commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
