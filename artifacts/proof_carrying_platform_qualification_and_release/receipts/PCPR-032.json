@@ -1,0 +1,504 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-032",
+  "title": "Remove pseudo-CID identity",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G410",
+  "objective_id": "PCPR-032",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-032@current-head-pseudo-cid-identity-removal-v1",
+  "observed_at": "2026-09-02T02:10:00Z",
+  "depends_on": [
+    "PCPR-031"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-3 Accelerate pseudo-CID identity removal only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/compatibility/simulation/pseudo_cid.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/compatibility/simulation/__init__.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_accelerate_py_legacy.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/mcp/tools/mock_ipfs.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_backend_router.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/ipfs_kit_integration.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/ipfs/__init__.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/legacy_bypass_and_false_authority_inventory.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/architecture_refactorer/legacy_paths.py",
+      "external/ipfs_accelerate/docs/architecture/architecture_refactorer_inventory/legacy_simulation_inventory.json",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/pseudo_cid_identity_removal.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_pseudo_cid_identity_removal.py",
+      "external/ipfs_accelerate/test/test_ipfs_kit_integration.py",
+      "external/ipfs_accelerate/test/api/test_formal_assurance_mock_origin.py",
+      "external/ipfs_accelerate/test/test_mcp_integration.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Add PseudoCidIdentityRemoval@1 and quarantine random Qm/hex CID generators behind ipfs_accelerate_py.compatibility.simulation.pseudo_cid. Ordinary ipfs_accelerate_py constructors load CanonicalIPFSMultiformats instead of hashlib.sha256(...).hexdigest() labeled as a CID. Legacy store_to_ipfs is typed unavailable. HuggingFace cache and kit integration _generate_cid mint canonical CIDv1 from retained bytes. MockIPFSClient requires explicit simulation, mints canonical CIDs from file bytes, and never emits Qm-prefixed random strings. random_cid is refused even under explicit simulation because identity requires canonical bytes. Simulated stores stay Simulated and are not live. Live IPFS remains typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "d6f90c4369fd60976e13d990d3bf0e9b56e2eca8",
+    "outer_tree": "118370ecc25b66973b974c33786a8b7b300627b5",
+    "outer_subject": "Merge commit '7fd154dfecc696d5def354a2b65036ad1493f629' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "15726be7c439f47a1c76bdec1ef8c88a7b5ff478",
+    "accelerator_pre_change_tree": "4805aa04fbcce976e9f7737554ada9288ab9bf7b",
+    "accelerator_gitlink": "15726be7c439f47a1c76bdec1ef8c88a7b5ff478",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_tree": "47118a8e6d1b6b4e7ae04f9a2efda33aadebca1b",
+    "datasets_gitlink": "f49afc579c22856849ca9f739435e5820003384f",
+    "kit_commit": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_tree": "14da7d92e130b7ba3523d0d6741a3ef7ef1e1bc2",
+    "kit_gitlink": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/compatibility/simulation/pseudo_cid.py",
+      "sha256": "3ab5da5709ffd2a43977b2d2bc39587221517206b7cc7b4996e90969c8ca6cd1",
+      "bytes": 16442,
+      "evidence_kind": "measured",
+      "interface": "PseudoCidIdentity@1",
+      "schema": "ipfs_accelerate_py/compatibility/simulation/pseudo-cid@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/pseudo_cid_identity_removal.py",
+      "sha256": "227398235fda613bb8d66f215b91de9695c5205b7e29572efe4eab251cfa389f",
+      "bytes": 49144,
+      "evidence_kind": "measured",
+      "interface": "PseudoCidIdentityRemoval@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/pseudo-cid-identity-removal@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_pseudo_cid_identity_removal.py",
+      "sha256": "3ad437c0b9b1c6df94323a82f2d2db2695a3f37c0f92b4716b941c1d3cafe59e",
+      "bytes": 10181,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/pseudo-cid-identity-removal-verdict@1",
+    "interface": "PseudoCidIdentityRemoval@1",
+    "verdict_cid": "baguqeeraix4sod7r2ocsw2aqasj6r6tiksk4ts43ywaoosfidtdgbmcgohmq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "ordinary_runtime_uses_pseudo_cid": false,
+    "mock_ipfs_quarantined": true,
+    "random_cid_requires_canonical_bytes": true,
+    "canonical_bytes_produce_real_cid": true,
+    "simulated_results_represented_as_live": false,
+    "live_ipfs_qualified": false,
+    "live_ipfs_evidence_kind": "unavailable",
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-031",
+    "goal_id": "PCPR-G410",
+    "promotion_status": "rnd_non_promoted",
+    "removal_verdict_cid": "baguqeerax6l46w26fq7vmojcf73bwzf3xwmsh6guk5wk5jngrp4gl2ovr6eq",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-031 removed fabricated hardware availability. This task removes pseudo-CID identity. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "removal": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/pseudo-cid-identity-removal@1",
+    "interface": "PseudoCidIdentityRemoval@1",
+    "namespace": "ipfs_accelerate_py.compatibility.simulation.pseudo_cid",
+    "identity_schema": "ipfs_accelerate_py/assurance/content-identity@1",
+    "ordinary_runtime_uses_pseudo_cid": false,
+    "mock_ipfs_quarantined": true,
+    "random_cid_requires_canonical_bytes": true,
+    "canonical_bytes_produce_real_cid": true,
+    "probes": [
+      {
+        "probe_id": "simulation_namespace_pseudo_cid",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Mock IPFS client and random_cid live in the explicit simulation namespace.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/compatibility/simulation/pseudo_cid.py"
+        }
+      },
+      {
+        "probe_id": "canonical_identity_module",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical content identity rejects pseudo-CIDs and mints CIDv1.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/content_identity.py"
+        }
+      },
+      {
+        "probe_id": "ordinary_runtime_multiformats",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Ordinary constructor loads CanonicalIPFSMultiformats, not hexdigest-as-CID.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/ipfs_accelerate.py"
+        }
+      },
+      {
+        "probe_id": "ordinary_legacy_store_no_qm",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Ordinary legacy store_to_ipfs is typed unavailable, not a Qm+hex CID.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/ipfs_accelerate_py_legacy.py"
+        }
+      },
+      {
+        "probe_id": "mock_ipfs_shim_no_random_qm",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "mock_ipfs.py no longer concatenates random Qm strings.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/mcp/tools/mock_ipfs.py"
+        }
+      },
+      {
+        "probe_id": "backend_router_canonical_cid",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Backend router _generate_cid mints canonical CIDv1.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/ipfs_backend_router.py"
+        }
+      },
+      {
+        "probe_id": "kit_integration_canonical_cid",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Kit integration _generate_cid mints canonical CIDv1.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/ipfs_kit_integration.py"
+        }
+      },
+      {
+        "probe_id": "mcp_ipfs_no_random_qm",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "MCP IPFS shim loads the quarantined simulation client, not a Qm stub.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/mcp_server/tools/ipfs/__init__.py"
+        }
+      },
+      {
+        "probe_id": "ordinary_multiformats_runtime",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Ordinary multiformats adapter mints canonical CIDv1, not hex.",
+        "details": {
+          "type_name": "CanonicalIPFSMultiformats",
+          "cid_prefix": "bafkreig",
+          "hex_rejected": "PSEUDO_CID_RAW_HEX"
+        }
+      },
+      {
+        "probe_id": "canonical_cid_roundtrip",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical CID decodes and recomputes against retained bytes.",
+        "details": {
+          "ok": true,
+          "integrity": "digest_valid",
+          "cid": "bafkreigv5bbmq4ae356xbhwyzzk5ws3w6a53euxribyba5h26mnls7xlui"
+        }
+      },
+      {
+        "probe_id": "hex_pseudo_cid_rejected",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Raw SHA-256 hex is rejected as a pseudo-CID.",
+        "details": {}
+      },
+      {
+        "probe_id": "qm_pseudo_cid_rejected",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Qm-prefixed strings are rejected as pseudo-CIDs.",
+        "details": {}
+      },
+      {
+        "probe_id": "ordinary_ipfs_client",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Ordinary IPFS client is typed unavailable and not mock.",
+        "details": {
+          "type_name": "UnavailableIpfsClient"
+        }
+      },
+      {
+        "probe_id": "mock_ipfs_ordinary_instantiation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Mock IPFS ordinary instantiation is refused.",
+        "details": {
+          "code": "simulation_requires_explicit_test_mode"
+        }
+      },
+      {
+        "probe_id": "random_cid_ordinary_instantiation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "random_cid ordinary use is refused.",
+        "details": {
+          "code": "simulation_requires_explicit_test_mode"
+        }
+      },
+      {
+        "probe_id": "random_cid_requires_canonical_bytes",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Even explicit simulation refuses random Qm identity without canonical bytes.",
+        "details": {
+          "code": "pseudo_cid_random_qm_removed"
+        }
+      },
+      {
+        "probe_id": "mock_ipfs_explicit_simulation",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Explicit mock IPFS mints canonical CIDv1 and is not live.",
+        "details": {
+          "origin": "simulated",
+          "outcome": "Simulated",
+          "cid_prefix": "bafkreig"
+        }
+      },
+      {
+        "probe_id": "ordinary_store_to_ipfs",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Ordinary store_to_ipfs is typed unavailable and does not emit a CID.",
+        "details": {
+          "status": "unavailable",
+          "code": "ipfs_store_unavailable"
+        }
+      },
+      {
+        "probe_id": "simulated_store_to_ipfs",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Explicit simulated store mints canonical CID and is labeled Simulated.",
+        "details": {
+          "origin": "simulated",
+          "outcome": "Simulated",
+          "cid_prefix": "bafkreig"
+        }
+      },
+      {
+        "probe_id": "canonical_bytes_produce_real_cid",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical bytes produce a real CIDv1, not a hex digest.",
+        "details": {
+          "codec": "raw",
+          "integrity": "digest_valid"
+        }
+      },
+      {
+        "probe_id": "live_ipfs_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not qualify a live IPFS daemon. Missing storage evidence stays typed unavailable and is not recorded as False or passing.",
+        "details": {}
+      }
+    ],
+    "evidence_kind": "measured"
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "pytest_asyncio": "unavailable",
+    "ipfs": "unavailable",
+    "z3": "unavailable",
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live IPFS qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr032-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_pseudo_cid_identity_removal.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.42,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_pseudo_cid_identity_removal.py"
+    ],
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/duckdb/anyio are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-032.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_pseudo_cid_identity_removal.py",
+      "exit_code": 0,
+      "passed": 12,
+      "failed": 0,
+      "duration_seconds": 0.42,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "live_ipfs_not_claimed": true,
+    "hex_digest_not_a_cid": true,
+    "qm_random_string_not_a_cid": true,
+    "ordinary_runtime_cannot_instantiate_mock_ipfs": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "ordinary_runtime_uses_pseudo_cid": false,
+    "mock_ipfs_quarantined": true,
+    "random_cid_requires_canonical_bytes": true,
+    "canonical_bytes_produce_real_cid": true,
+    "simulated_results_represented_as_live": false,
+    "live_ipfs_qualified": false,
+    "contracts_frozen": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, not live IPFS qualification, and not a closed PCPR release outcome.",
+    "Ordinary runtime now mints canonical CIDv1 from retained bytes. That is content identity, not live IPFS storage qualification (PCPR-021).",
+    "Explicit simulation of MockIPFSClient remains available behind the compatibility/simulation namespace, mints canonical CIDs from retained bytes, and is labeled Simulated, never live.",
+    "random_cid cannot mint identity without canonical bytes, including under explicit simulation.",
+    "Fabricated endpoint-success paths remain for PCPR-033.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, pytest-asyncio, ipfs, and z3 are absent and are not recorded as passing or zero.",
+    "Hermetic PseudoCidIdentityRemoval tests are candidate coverage only; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate commit and tree identities are pending the accepted nested commit."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate commit and outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
