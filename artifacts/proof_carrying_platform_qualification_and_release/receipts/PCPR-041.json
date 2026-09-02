@@ -1,0 +1,565 @@
+{
+  "schema": "ipfs-accelerate.proof-carrying-platform-qualification-and-release.task-receipt@1",
+  "schema_version": 1,
+  "task_id": "PCPR-041",
+  "title": "Add canonical-byte and CID vectors",
+  "board_namespace": "proof-carrying-platform-qualification-and-release-v1",
+  "goal_id": "PCPR-G500",
+  "objective_id": "PCPR-041",
+  "status": "implemented",
+  "completion_authoritative": false,
+  "worker_completion_insufficient": true,
+  "artifact_identity": "urn:pcpr:task-receipt:PCPR-041@current-head-canonical-byte-cid-vectors-v1",
+  "observed_at": "2026-09-02T05:00:09Z",
+  "depends_on": [
+    "PCPR-040"
+  ],
+  "scope": {
+    "language": "Python",
+    "language_version": "3.12",
+    "assurance_scope": "PCPR Python v1 Phase-4 canonical-byte and CID vectors only",
+    "mutation": "declared_outputs",
+    "source_mutation": true,
+    "mutations_to_product_source": true,
+    "changed_paths": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/assurance/canonical_byte_cid_vectors.py",
+      "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/canonical_byte_cid_vectors.py",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_canonical_byte_cid_vectors.py",
+      "external/ipfs_datasets/ipfs_datasets_py/assurance/canonical_byte_cid_vectors.py",
+      "external/ipfs_datasets/tests/unit/test_pcpr_041_canonical_byte_cid_vectors.py",
+      "external/ipfs_kit/ipfs_kit_py/assurance/canonical_byte_cid_vectors.py",
+      "external/ipfs_kit/tests/test_pcpr_041_canonical_byte_cid_vectors.py",
+      "artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json"
+    ],
+    "every_changed_path_is_allowed": true,
+    "protected_paths_unchanged": true,
+    "duckdb_or_quack_state_written": false,
+    "implementation_delta": "Publish CanonicalByteCidVectors@1 as compact recipes that generate exact DAG-JSON bytes and CIDv1 identities for the fourteen PCPR-040 shared contracts. Pins detect remint. Catalog identity baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a is reused and not reminted. Key-order and NFC caf\u00e9 invariants share one CID. Datasets and Kit bind the fourteen vector CIDs and refuse remint without sibling import or re-encoding. This is not a freeze, not negative or cross-language vectors, and not cross-repository compatibility checks. Live supervisor and CUDA re-qualification stay typed unavailable. This evaluator never writes DuckDB or Quack state and never emits a closed PCPR release outcome."
+  },
+  "evidence_legend": {
+    "measured": "Observed directly from the named sealed source tree or sealed validation environment.",
+    "estimated": "A calculated approximation; no estimated values are used by this receipt.",
+    "simulated": "A fixture or deliberate non-production exercise; no simulated values are used as live authority.",
+    "unavailable": "The identity, capability, or result was not present in the sealed environment and is not represented as zero or passing."
+  },
+  "current_tree_binding": {
+    "outer_repository": "endomorphosis/lift_coding",
+    "owning_repository_for_receipts": "ipfs_accelerate_py",
+    "outer_commit": "acd9d4936514fb37d680f78d8d6e87edcad8bac7",
+    "outer_tree": "c3e692d7b75417195934daf5c5c471a01d01751c",
+    "outer_subject": "Merge commit 'f03bf88738b90f566f25838d0c172787bfd57431' into agent/proof-carrying-platform-qualification-and-release-v1",
+    "origin_main": "bb8869ed72eb7002434345d9969efee729c4f7f6",
+    "origin_main_is_ancestor": true,
+    "accelerator_pre_change_commit": "df8b82eba6ec14f78cdba467f5a42fcfb01c6e0b",
+    "accelerator_pre_change_tree": "38a3d04218f09f47055488986296abe0be753521",
+    "accelerator_gitlink": "df8b82eba6ec14f78cdba467f5a42fcfb01c6e0b",
+    "accelerator_origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+    "accelerator_origin_main_is_ancestor": true,
+    "accelerator_post_change_commit": "pending nested commit after admission",
+    "accelerator_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "datasets_commit": "60a2b3928a3220417f7b954fd1b81fe20ba6cf7b",
+    "datasets_tree": "5071de4087bf812e9b8a4cf886f468cfa3d67292",
+    "datasets_gitlink": "60a2b3928a3220417f7b954fd1b81fe20ba6cf7b",
+    "datasets_origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+    "datasets_origin_main_is_ancestor": true,
+    "datasets_post_change_commit": "pending nested commit after admission",
+    "datasets_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "kit_commit": "db948ade4ebb8f711ff6d094141f36da57d683eb",
+    "kit_tree": "e25a644081301a54bee21464fbedab43d2b1e992",
+    "kit_gitlink": "db948ade4ebb8f711ff6d094141f36da57d683eb",
+    "kit_origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+    "kit_origin_main_is_ancestor": true,
+    "kit_post_change_commit": "pending nested commit after admission",
+    "kit_post_change_tree": "dirty-worktree; exact CID after accepted nested commit",
+    "evidence_kind": "measured"
+  },
+  "source_artifacts": [
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/assurance/canonical_byte_cid_vectors.py",
+      "sha256": "33e977fc3a32eaf21d4006dd75f2cc5bda664298c03f5a0bd87470585aa06ace",
+      "bytes": 22495,
+      "evidence_kind": "measured",
+      "interface": "CanonicalByteCidVectors@1",
+      "schema": "ipfs_accelerate_py/assurance/canonical-byte-cid-vectors@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/canonical_byte_cid_vectors.py",
+      "sha256": "6549a41509cdad384a14091a3d49a737dd3b0b3f09f8eef718f18601fef62154",
+      "bytes": 50605,
+      "evidence_kind": "measured",
+      "interface": "CanonicalByteCidVectorQualification@1",
+      "schema": "ipfs_accelerate_py/agent-supervisor/canonical-byte-cid-vector-qualification@1"
+    },
+    {
+      "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_canonical_byte_cid_vectors.py",
+      "sha256": "ce53972f8d7e8e5ab7788f564a77f446df7e0f52d1b4e50ca9016e40333ceea6",
+      "bytes": 9265,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/assurance/canonical_byte_cid_vectors.py",
+      "sha256": "38eca5c99c99cf8cb03039f3016ad4a85d9f232d0a32d94bcb389be798827c62",
+      "bytes": 4743,
+      "evidence_kind": "measured",
+      "interface": "DatasetsCanonicalByteCidVectorBinding@1",
+      "schema": "ipfs_datasets_py/assurance/canonical-byte-cid-vector-binding@1"
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/test_pcpr_041_canonical_byte_cid_vectors.py",
+      "sha256": "8e5e1b529a0d24aa23a9a72c62c5515bd7c9780531f69fb265cfc7b17435090f",
+      "bytes": 1781,
+      "evidence_kind": "measured"
+    },
+    {
+      "path": "external/ipfs_kit/ipfs_kit_py/assurance/canonical_byte_cid_vectors.py",
+      "sha256": "f338af01b5dc49f238f439b60e82bf9c034bf45ec24eaf3f7066105090d5a758",
+      "bytes": 4816,
+      "evidence_kind": "measured",
+      "interface": "KitCanonicalByteCidVectorBinding@1",
+      "schema": "ipfs_kit_py/assurance/canonical-byte-cid-vector-binding@1"
+    },
+    {
+      "path": "external/ipfs_kit/tests/test_pcpr_041_canonical_byte_cid_vectors.py",
+      "sha256": "16f46a53345eb730ff52970bd2de2048ebba61ad03124d61693bc9825d16a86b",
+      "bytes": 1661,
+      "evidence_kind": "measured"
+    }
+  ],
+  "qualification_verdict": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/canonical-byte-cid-vector-qualification-verdict@1",
+    "interface": "CanonicalByteCidVectorQualification@1",
+    "verdict_cid": "baguqeerafd3yeezarpuf6aicpdycn4sombbpcgfzoekttwytqjpw4pi7qtuq",
+    "promotion_status": "rnd_non_promoted",
+    "supervisor_disposition": "supervisor_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "contracts_frozen": false,
+    "duckdb_or_quack_state_written": false,
+    "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a",
+    "vector_document_cid": "baguqeera6gwcyi3f7fkw5eufnhkovmqw7eevkeas4qxds5ws7b7rloic63da",
+    "contract_count": 14,
+    "vector_count": 17,
+    "identities_unique": true,
+    "canonical_bytes_pinned": true,
+    "cid_recomputes": true,
+    "datasets_binding_aligned": true,
+    "kit_binding_aligned": true,
+    "simulated_results_represented_as_live": false,
+    "live_supervisor_qualified": false,
+    "live_supervisor_evidence_kind": "unavailable",
+    "live_cuda_qualified": false,
+    "live_cuda_evidence_kind": "unavailable",
+    "production_authorized": false,
+    "this_task_created_competing_authority": false,
+    "blocker_count": 0,
+    "blockers": [],
+    "evidence_kind": "measured"
+  },
+  "qualification_prerequisite": {
+    "task_id": "PCPR-040",
+    "goal_id": "PCPR-G500",
+    "promotion_status": "rnd_non_promoted",
+    "shared_contract_verdict_cid": "baguqeeraxym6kuq5ljps7vwbvrkyobtfhrrpbquhbgrcny4viyfxlwversna",
+    "datasets_solver_task_id": "PCPR-017",
+    "datasets_solver_verdict_cid": "baguqeeratvkodnxdxcudgddqaxoohvglwyq34grr7zupm6pbnwqk4zrp2ubq",
+    "kit_support_matrix_task_id": "PCPR-027",
+    "kit_support_matrix_verdict_cid": "baguqeera2yepzxux4cwbuzzk2t2oz4ju6n4hkwv4gqq2o6o6jsxua55loo4a",
+    "model_provider_task_id": "PCPR-039",
+    "model_provider_verdict_cid": "baguqeeraejqvwpevn5lawzy7pie7cz2atrp62ijbwj4dqx4fvqrxgbr32tla",
+    "supervisor_live_qualification_task_id": "PCPR-001",
+    "supervisor_live_qualification_promotion_status": "rnd_non_promoted",
+    "live_qualification_evidence_kind": "unavailable",
+    "verdict_cid": "baguqeeratg4ouyc4b76zhwmrtxqrbv57m43edz3gwwtfgcyvlv2ztzlow67a",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "completion_authoritative": false,
+    "reason": "PCPR-040 remains rnd_non_promoted R&D. This task publishes canonical-byte and CID vectors from that catalog. PCPR-001 live qualification remains rnd_non_promoted and is not promoted by this receipt.",
+    "evidence_kind": "measured"
+  },
+  "canonical_byte_and_cid_vectors": {
+    "schema": "ipfs_accelerate_py/assurance/canonical-byte-cid-vectors@1",
+    "interface": "CanonicalByteCidVectors@1",
+    "floor_task_id": "PCPR-041",
+    "floor_goal_id": "PCPR-G510",
+    "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a",
+    "vector_document_cid": "baguqeera6gwcyi3f7fkw5eufnhkovmqw7eevkeas4qxds5ws7b7rloic63da",
+    "vector_seed_cid": "baguqeeragko4w64wovfw2643pvwkugj4x7vqxdvzqzpzzqh3liuzrlibzt2a",
+    "frozen": false,
+    "freeze_task": "PCPR-002",
+    "normative_task": "PCPR-040",
+    "negative_vector_task": "PCPR-042",
+    "compatibility_task": "PCPR-043",
+    "contract_count": 14,
+    "vector_count": 17,
+    "vector_cids": {
+      "SupervisorObjectiveIntent": "baguqeerak5dpgbfqb3y3lzidrzhctptq4czihlmihlrozcysqrwtk57luzya",
+      "ObjectiveMaterializationReceipt": "baguqeerafg73iznwh3di4uegoplcn6wvdleocvqw2ga76jlvfhqhwn2pe4oa",
+      "SupervisorContextPack": "baguqeerajw2hkfnenwv44trg6yova47zknqj73ja5nv4foyunaidtmr3jzoq",
+      "SemanticArtifactIdentity": "baguqeeragx2oegrxxqeeofl7lyggiwyifk4wcd7mitlvqidaqfz6eabnpurq",
+      "DurableArtifactReceipt": "baguqeeraigyma7xmhsrux6ofu6huqkmbahjclnwnnqs7qgvfiviifnzidz5a",
+      "ProofObligation": "baguqeerawigphbus6bfz36rx3sym2rx4glfe3h6ocbkiabhpmmi5kfxyf2zq",
+      "ProofResult": "baguqeerao55s4irzaieuijpqsnsw7hdpi3szochjkbluemjqrloswjj5bbqa",
+      "ProofAdmissionDecision": "baguqeerapfeauyf46dsobfradbbj3dp7m5v2ndr7ewb2lmuijd4gntt2vkea",
+      "ExecutionInvocation": "baguqeeral4cusw4s6vlidwgvfvndfcnikryjncau7gb7b43o2uwx3nfljpkq",
+      "ExecutionReceipt": "baguqeera6dmatb2hueqarvr44465a4lddoj6l7puyqckr444phr43nxe6w6a",
+      "SupervisorEvent": "baguqeera5mn57ji2oa56fjzgujogtlryqpzbho4yiedspdgst6bgyulliloq",
+      "TaskStateTransition": "baguqeeraupifx5zwkjhsfxuktg7dnkdfzva3i3bsd4mmfri4bjgwyix37tpa",
+      "ReleaseComponentManifest": "baguqeeraauz252uyxbcpkpggjbohdpyvdy5vpms77vlp44vw5ek56rgo6ela",
+      "PortfolioCompatibilityManifest": "baguqeerazqmgj3lbt6sxeuzdpu5npsk73o4dulmbfvalct4q4atjobhrd2ma"
+    },
+    "probes": [
+      {
+        "probe_id": "canonical_vector_module",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical-byte and CID vector module declares fourteen contracts.",
+        "details": {
+          "relpath": "ipfs_accelerate_py/assurance/canonical_byte_cid_vectors.py"
+        }
+      },
+      {
+        "probe_id": "fourteen_contract_vectors",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Fourteen shared contracts each have one pinned canonical-byte CID.",
+        "details": {
+          "count": 14,
+          "cid_count": 14
+        }
+      },
+      {
+        "probe_id": "canonical_bytes_pinned",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Exact canonical-byte sha256 pins match the catalog encoder.",
+        "details": {}
+      },
+      {
+        "probe_id": "cid_recomputes_from_bytes",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Retained canonical bytes rehash to the pinned CIDv1 identities.",
+        "details": {
+          "vector_document_cid": "baguqeera6gwcyi3f7fkw5eufnhkovmqw7eevkeas4qxds5ws7b7rloic63da"
+        }
+      },
+      {
+        "probe_id": "key_order_independent",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Opposite key insertion order yields the same canonical bytes and CID.",
+        "details": {}
+      },
+      {
+        "probe_id": "unicode_nfc_same_cid",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "NFC composed and decomposed caf\u00e9 share canonical bytes and CID.",
+        "details": {
+          "nfc_cid": "baguqeeraaaockar3cte5dpud6wuxfbl4k5nvcmg2hz3ex3coajioewdiaonq"
+        }
+      },
+      {
+        "probe_id": "catalog_identity_not_reminted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-040 catalog CID is reused and is not reminted.",
+        "details": {
+          "catalog_cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a"
+        }
+      },
+      {
+        "probe_id": "datasets_binding_does_not_remint",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Datasets binding pins the vector CIDs and refuses remint.",
+        "details": {
+          "relpath": "external/ipfs_datasets/ipfs_datasets_py/assurance/canonical_byte_cid_vectors.py",
+          "missing_vector_cids": [],
+          "refuse_vector_remint": true,
+          "sibling_import": false
+        }
+      },
+      {
+        "probe_id": "kit_binding_does_not_remint",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Kit binding pins the vector CIDs and refuses remint.",
+        "details": {
+          "relpath": "external/ipfs_kit/ipfs_kit_py/assurance/canonical_byte_cid_vectors.py",
+          "missing_vector_cids": [],
+          "refuse_vector_remint": true,
+          "sibling_import": false
+        }
+      },
+      {
+        "probe_id": "freeze_not_claimed",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-041 publishes vectors. Freeze remains PCPR-002 and is not claimed.",
+        "details": {
+          "freeze_task": "PCPR-002",
+          "frozen": false
+        }
+      },
+      {
+        "probe_id": "negative_cross_language_vectors_deferred",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Negative and cross-language vectors remain PCPR-042 and are not claimed here.",
+        "details": {
+          "deferred_task_id": "PCPR-042"
+        }
+      },
+      {
+        "probe_id": "cross_repository_compatibility_deferred",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Cross-repository compatibility checks remain PCPR-043 and are not claimed here.",
+        "details": {
+          "deferred_task_id": "PCPR-043"
+        }
+      },
+      {
+        "probe_id": "production_authorized_not_granted",
+        "present": true,
+        "evidence_kind": "measured",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "Canonical-byte and CID vectors do not grant production_authorized or a freeze.",
+        "details": {}
+      },
+      {
+        "probe_id": "live_supervisor_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "PCPR-001 live qualification remains typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-001"
+        }
+      },
+      {
+        "probe_id": "live_cuda_qualification",
+        "present": null,
+        "evidence_kind": "unavailable",
+        "live": false,
+        "simulated_represented_as_live": false,
+        "reason": "This task does not re-qualify live CUDA. Missing CUDA re-qualification stays typed unavailable and is not recorded as False or passing.",
+        "details": {
+          "deferred_task_id": "PCPR-038"
+        }
+      }
+    ],
+    "evidence_kind": "measured",
+    "anchors": [
+      {
+        "id": "contract.SupervisorObjectiveIntent",
+        "canonical_hex": "7b22696465615f646967657374223a22626167757165657261676b6f34773634776f766677323634337076776b75676a34783776717864767a717a707a7a7168336c69757a726c69627a743261222c22696e74657266616365223a2253757065727669736f724f626a656374697665496e74656e744031222c226c616e6775616765223a22507974686f6e222c226f626a6563746976655f6964223a22504350522d47353130222c22736368656d61223a22706370722f7368617265642d636f6e7472616374732f73757065727669736f722d6f626a6563746976652d696e74656e744031227d",
+        "canonical_sha256": "5746f304b00ef1b5e5038e4e29be70e0b283ad883ae2ec8b12846d3577eba670",
+        "byte_length": 231,
+        "cid": "baguqeerak5dpgbfqb3y3lzidrzhctptq4czihlmihlrozcysqrwtk57luzya",
+        "invariant": "canonical DAG-JSON bytes mint one CIDv1 identity"
+      },
+      {
+        "id": "invariant.key_order",
+        "cid": "baguqeerak5dpgbfqb3y3lzidrzhctptq4czihlmihlrozcysqrwtk57luzya",
+        "same_as": "contract.SupervisorObjectiveIntent",
+        "invariant": "opposite key insertion order yields the same canonical bytes and CID"
+      },
+      {
+        "id": "invariant.unicode_nfc",
+        "canonical_hex": "7b22696e74657266616365223a2250726f6f664f626c69676174696f6e4031222c226c6f6769635f66616d696c79223a2270726f706f736974696f6e616c222c226f626c69676174696f6e5f6964223a226f626c69676174696f6e3a706370722d303431222c22736368656d61223a22706370722f7368617265642d636f6e7472616374732f70726f6f662d6f626c69676174696f6e4031222c2273746174656d656e74223a226361665c7530306539227d",
+        "canonical_sha256": "001c25023b14c9d1be83f5a972857c575b5130da3e764bec4e0250e25868039b",
+        "byte_length": 178,
+        "cid": "baguqeeraaaockar3cte5dpud6wuxfbl4k5nvcmg2hz3ex3coajioewdiaonq",
+        "invariant": "NFC composed and decomposed caf\u00e9 share canonical bytes and CID"
+      },
+      {
+        "id": "catalog.identity",
+        "cid": "baguqeeraqpptps2gf55wmthv3sm5nzlxqqdjfyg2ggkbl5ovfzuvvvsxap4a",
+        "canonical_sha256": "83df37cb462f7b664cf5dc99d6e577840692e0da319415f5d52e695ad65703f8",
+        "byte_length": 8111,
+        "invariant": "PCPR-040 catalog identity is not reminted"
+      }
+    ]
+  },
+  "sealed_validation_environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "python_unqualified": "unavailable",
+    "python3": "/usr/bin/python3",
+    "python3_12": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "git_path": "/usr/bin/git",
+    "usr_bin_user_writable": false,
+    "usr_local_bin_user_writable": false,
+    "pytest_cli": "unavailable",
+    "pytest_module": "/usr/local/lib/python3.12/dist-packages/pytest/__init__.py",
+    "pytest_module_version": "8.1.1",
+    "numpy_module": "/usr/lib/python3/dist-packages/numpy/__init__.py",
+    "numpy_not_used_as_qualification": true,
+    "requests_module": "/usr/lib/python3/dist-packages/requests/__init__.py",
+    "requests_not_used_as_qualification": true,
+    "torch": "unavailable",
+    "duckdb": "unavailable",
+    "anyio": "unavailable",
+    "aiohttp": "unavailable",
+    "z3": "unavailable",
+    "ipfs": "unavailable",
+    "nvcc": "unavailable",
+    "nvidia_smi": "/usr/bin/nvidia-smi",
+    "nvidia_smi_is_not_contract_qualification": true,
+    "evidence_kind": "measured"
+  },
+  "hermetic_candidate_suites": {
+    "authority": "candidate_only; cannot satisfy live supervisor promotion, live CUDA qualification, or a closed PCPR release",
+    "sealed_command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<ipfs-accelerate-validation-home-pcpr041-*> PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_accelerate /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_canonical_byte_cid_vectors.py",
+    "sealed_result": {
+      "exit_code": 0,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 0.96,
+      "evidence_kind": "measured"
+    },
+    "catalog_suites": [
+      "test/api/test_agent_supervisor_canonical_byte_cid_vectors.py"
+    ],
+    "additional_candidate_suites": {
+      "datasets": {
+        "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_datasets /usr/bin/python3.12 -m pytest -q --override-ini=addopts= tests/unit/test_pcpr_041_canonical_byte_cid_vectors.py",
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "duration_seconds": 0.06,
+        "evidence_kind": "measured"
+      },
+      "kit": {
+        "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin PYTHONNOUSERSITE=1 PYTHONPATH=<this-worktree>/external/ipfs_kit /usr/bin/python3.12 -m pytest -q --noconftest --override-ini=addopts= tests/test_pcpr_041_canonical_byte_cid_vectors.py",
+        "exit_code": 0,
+        "passed": 1,
+        "failed": 0,
+        "duration_seconds": 0.04,
+        "noconftest_reason": "Sealed-environment aiohttp is unavailable. tests/conftest.py imports aiohttp, so kit collection uses --noconftest. That is not live kit backend qualification.",
+        "evidence_kind": "measured"
+      }
+    },
+    "provider_side_non_authoritative": {
+      "executed": false,
+      "authority": false,
+      "reason": "Provider-local user-site pytest/torch/duckdb under ~/.local are not the sealed validation environment and were not used as live qualification.",
+      "evidence_kind": "measured"
+    }
+  },
+  "validation": {
+    "commands": [
+      "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json"
+    ],
+    "required_command": {
+      "command": "python -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json",
+      "sealed_equivalent": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m json.tool artifacts/proof_carrying_platform_qualification_and_release/receipts/PCPR-041.json",
+      "unqualified_python_on_sealed_path": "unavailable; canonical interpreter is /usr/bin/python3.12",
+      "status": "passed",
+      "exit_code": 0,
+      "evidence_kind": "measured"
+    },
+    "hermetic_pytest": {
+      "command": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 -m pytest -q --override-ini=addopts= test/api/test_agent_supervisor_canonical_byte_cid_vectors.py",
+      "exit_code": 0,
+      "passed": 9,
+      "failed": 0,
+      "duration_seconds": 0.96,
+      "evidence_kind": "measured"
+    },
+    "token_count": 0,
+    "provider_call_count": 0,
+    "evidence_kind": "measured"
+  },
+  "negative_results": {
+    "simulated_presence_cannot_count_as_live": true,
+    "simulated_results_not_represented_as_live": true,
+    "estimated_values_rejected": true,
+    "hermetic_pass_cannot_qualify_live": true,
+    "closed_release_outcome_not_emitted": true,
+    "direct_database_bypass_not_used": true,
+    "identities_not_reminted": true,
+    "catalog_not_reminted": true,
+    "contracts_not_frozen": true,
+    "negative_vectors_not_claimed": true,
+    "live_supervisor_not_claimed": true,
+    "live_cuda_not_reclaimed": true,
+    "production_authorized_not_granted": true,
+    "evidence_kind": "measured"
+  },
+  "acceptance": {
+    "named_receipt_exists": true,
+    "promotion_status": "rnd_non_promoted",
+    "closed_release_outcome": null,
+    "release_claim": false,
+    "current_head_bound": true,
+    "evidence_classes_distinguished": true,
+    "live_claims_require_live_evidence": true,
+    "identities_unique": true,
+    "canonical_bytes_pinned": true,
+    "cid_recomputes": true,
+    "datasets_binding_aligned": true,
+    "kit_binding_aligned": true,
+    "catalog_not_reminted": true,
+    "contracts_frozen": false,
+    "production_authorized": false,
+    "simulated_results_represented_as_live": false,
+    "live_supervisor_qualified": false,
+    "live_cuda_qualified": false,
+    "supervisor_promoted": false,
+    "duckdb_or_quack_state_written": false
+  },
+  "limitations": [
+    "Worker completion is not authoritative; independent current-tree validation owns terminalization.",
+    "This receipt is an R&D non-promotion. It is not supervisor_promoted, not a contract freeze, and not a closed PCPR release outcome.",
+    "Exact canonical-byte and CID vectors are published from compact recipes. Negative and cross-language vectors remain PCPR-042. Cross-repository compatibility checks remain PCPR-043. Freeze remains PCPR-002.",
+    "The PCPR-040 catalog CID is reused and is not reminted. Identity fixtures from PCPR-040 remain admission exercises, not this vector set.",
+    "Canonical-byte hex is generated from compact recipes and pinned by sha256 plus CIDv1. Full catalog bytes are identified by sha256 and CID rather than dumped as a golden envelope.",
+    "PCPR-001 live qualification remains typed unavailable and is not recorded as zero or passing. This task does not re-qualify CUDA, solvers, or model/provider paths.",
+    "The outer worktree is an isolated implementation branch, not the campaign branch agent/proof-carrying-platform-qualification-and-release-v1.",
+    "DuckDB task state was not queried and remains typed unavailable as live authority. Quack was not contacted. This worker did not write DuckDB or Quack state.",
+    "Sealed-environment duckdb, anyio, aiohttp, ipfs, z3, torch, and nvcc are absent and are not recorded as passing or zero.",
+    "Sealed-environment aiohttp is absent. Kit tests/conftest.py imports aiohttp, so the Kit candidate suite was collected with --noconftest. That is not live Kit backend qualification.",
+    "Numpy and requests are present in the sealed environment but are not required for canonical-byte and CID vectors and are not live authority.",
+    "Hermetic CanonicalByteCidVector tests are candidate coverage of the vector set; they do not qualify the live supervisor cohort or close a release.",
+    "Post-change Accelerate, Datasets, and Kit commit and tree identities are pending the accepted nested commits."
+  ],
+  "rollback": {
+    "destructive_effects": false,
+    "procedure": "Revert only this task's accepted Accelerate, Datasets, and Kit commits and the outer receipt commit. Preserve prior objective, task, event, attempt, and receipt history. Do not rewrite DuckDB or Quack state."
+  },
+  "supervisor_acceptance": {
+    "state": "pending_independent_fenced_supervisor",
+    "completion_authoritative": false
+  }
+}
