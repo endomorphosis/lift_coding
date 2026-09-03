@@ -1071,6 +1071,33 @@ def _pid_alive(pid: int) -> bool:
 def start_state_owner_daemon(config_path: Path) -> dict[str, Any]:
     board, _config = _load_config(config_path)
     paths = _runtime_paths(board)
+    from ipfs_accelerate_py.agent_supervisor.runtime.exclusive_owner_recovery import (
+        admit_dead_exclusive_owner_recovery,
+        restore_archived_exclusive_owner_runtime,
+    )
+
+    program = board.resolved_database_program()
+    endpoint = QUACK_RE.fullmatch(program.quack_endpoint)
+    port = int(endpoint.group(2)) if endpoint is not None else None
+    admission = admit_dead_exclusive_owner_recovery(
+        marker_path=paths["database"].with_name(
+            f".{paths['database'].name}.state-owner.json"
+        ),
+        lock_path=paths["database"].with_name(
+            f".{paths['database'].name}.state-owner.lock"
+        ),
+        listen_port=port,
+        live_runtime=paths["runtime"],
+    )
+    if admission["admitted"] and admission["restore_from"]:
+        restored = restore_archived_exclusive_owner_runtime(
+            paths["runtime"],
+            archive=Path(admission["restore_from"]),
+        )
+        if not restored.get("restored"):
+            raise OperatorError(
+                "dead exclusive owner recovery could not restore the archived runtime"
+            )
     _assert_materialized_source(paths)
     current = status(config_path)
     if (
@@ -1083,7 +1110,10 @@ def start_state_owner_daemon(config_path: Path) -> dict[str, Any]:
             "already_running": True,
             "ready": True,
         }
-    if current["state_owner"]["liveness"] in {"alive", "unknown"}:
+    if (
+        not admission["admitted"]
+        and current["state_owner"]["liveness"] in {"alive", "unknown"}
+    ):
         raise OperatorError(
             "a Quack owner exists outside the canonical combined supervisor launch"
         )
@@ -2211,12 +2241,15 @@ def launch_supervisor(
             ),
             flush=True,
         )
-        result = int(multi_supervisor_main(runner_args))
-        if broker.failure:
-            raise OperatorError(
-                f"executor bootstrap broker failed closed: {broker.failure}"
-            )
-        return result
+        window = float(duration_seconds)
+        while True:
+            result = int(multi_supervisor_main(runner_args))
+            if broker.failure:
+                raise OperatorError(
+                    f"executor bootstrap broker failed closed: {broker.failure}"
+                )
+            if window == float("inf") or result != 0:
+                return result
     finally:
         os.environ.clear()
         os.environ.update(prior_environment)
