@@ -96,8 +96,8 @@ SOURCE_FOREST = OrderedDict(
             "ipfs_accelerate",
             {
                 "path": "external/ipfs_accelerate",
-                "commit": "5ac44bf851fc8f4630723fe300928c9274350389",
-                "tree": "b6173483ac5a076fac196ddc5be304b687053b4a",
+                "commit": "28c756326c2c3f6d5abd63a13768fe498297fde5",
+                "tree": "b26a021056c5b33de44ac8c6bf7599b67abc963c",
                 "origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
             },
         ),
@@ -105,8 +105,8 @@ SOURCE_FOREST = OrderedDict(
             "ipfs_datasets",
             {
                 "path": "external/ipfs_datasets",
-                "commit": "d752929d7b85fbd24ba72090c5f61ff00f2ffdf3",
-                "tree": "9ff1ffb78baa9e2b7c05ab50ae7598344df8422e",
+                "commit": "75072e9ffd2dc5c98f7395baab05cb21ea87f128",
+                "tree": "f74815877a3e57f698487a1aa54694b29d86b931",
                 "origin_main": "f49afc579c22856849ca9f739435e5820003384f",
             },
         ),
@@ -114,8 +114,8 @@ SOURCE_FOREST = OrderedDict(
             "ipfs_kit",
             {
                 "path": "external/ipfs_kit",
-                "commit": "ff9862eb0bd3bc646e52cd14b1fc293e3578862b",
-                "tree": "71b61af9f244209c4508c03c8a57e34beb04bc1d",
+                "commit": "a3cfe857227faa1f89c007b2f7f99154ceb54142",
+                "tree": "eed6eb455aa45c59ecc27de1a35a9898f0c86f44",
                 "origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
             },
         ),
