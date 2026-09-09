@@ -882,6 +882,7 @@ def _make_blocked_retry_recovery_client(
         "select_task_by_cid",
         "executor_retry_cooldown_by_task",
         "executor_insert_retry_cooldown",
+        "executor_update_retry_cooldown",
         "executor_cas_task_status_receipt",
         "executor_insert_task_revision",
         "txn_load_generation",
@@ -3367,6 +3368,11 @@ def recover_claim_verification(*, task_alias: str, expected_revision: int) -> in
         body, terminal, material = _claim_verification_retry_material(
             rows[0], task_alias=task_alias, task_cid=task_cid,
             expected_revision=expected_revision, source_head=head)
+        cooldown_rows = client.execute("executor_retry_cooldown_by_task", {"task_cid": task_cid})
+        if len(cooldown_rows) > 1:
+            raise HandoffError("retry cooldown authority is ambiguous")
+        prior_cooldown = dict(cooldown_rows[0]) if cooldown_rows else None
+        material["expected_released_cooldown"] = prior_cooldown
         generation = client.load_generation()
         material["generation"] = generation.to_record()
         evidence_id = _sha256(_canonical_json_bytes(material))
@@ -3388,7 +3394,8 @@ def recover_claim_verification(*, task_alias: str, expected_revision: int) -> in
             max_task_attempts_after=terminal["attempt_number"] + 1,
             operator_handoff_receipt_id=authorization_id,
             sidecar_evidence_id=evidence_id, now_ms=time.time_ns() // 1_000_000,
-            require_fresh_portal_revalidation=True)
+            require_fresh_portal_revalidation=True,
+            expected_released_cooldown=prior_cooldown)
         record = result.to_dict()
         receipt = {"task_alias": task_alias, "evidence_id": evidence_id, "result": record}
         _immutable_json(evidence_path.with_suffix(".result.json"), receipt)
