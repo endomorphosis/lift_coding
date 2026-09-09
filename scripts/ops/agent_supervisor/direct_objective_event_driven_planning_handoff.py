@@ -2986,6 +2986,8 @@ def recover_doep031_protected_control_plane_update() -> int:
         }
         _immutable_json(paths["doep031_recovery_receipt"], receipt)
         print(json.dumps(receipt, indent=2, sort_keys=True))
+        if not result.accepted:
+            raise HandoffError(f"canonical retry rejected: {result.outcome.value}")
         return 0
     finally:
         try:
@@ -3387,12 +3389,12 @@ def recover_claim_verification(*, task_alias: str, expected_revision: int) -> in
             operator_handoff_receipt_id=authorization_id,
             sidecar_evidence_id=evidence_id, now_ms=time.time_ns() // 1_000_000,
             require_fresh_portal_revalidation=True)
-        if not result.accepted:
-            raise HandoffError(f"canonical retry rejected: {result.outcome.value}")
         record = result.to_dict()
         receipt = {"task_alias": task_alias, "evidence_id": evidence_id, "result": record}
         _immutable_json(evidence_path.with_suffix(".result.json"), receipt)
         print(json.dumps(receipt, indent=2, sort_keys=True))
+        if not result.accepted:
+            raise HandoffError(f"canonical retry rejected: {result.outcome.value}")
         return 0
     finally:
         try:
