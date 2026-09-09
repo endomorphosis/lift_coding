@@ -96,27 +96,27 @@ SOURCE_FOREST = OrderedDict(
             "ipfs_accelerate",
             {
                 "path": "external/ipfs_accelerate",
-                "commit": "416d1f6d6e9e6c4ec1e0a43fa707c9877303e64d",
-                "tree": "ebe454c182f51b992a42445bceaae2ab4b228847",
-                "origin_main": "f8c2f633fa6a781b822176fd63e1a229f96b581c",
+                "commit": "7fd4021fdee10e2422534bf7e016ada7e56c87f5",
+                "tree": "cef6023b0b8c90b169e7150933cfba5688048d94",
+                "origin_main": "7fd4021fdee10e2422534bf7e016ada7e56c87f5",
             },
         ),
         (
             "ipfs_datasets",
             {
                 "path": "external/ipfs_datasets",
-                "commit": "07d5d5431305eca53a1b69cd58d2ffb01d1b2f53",
-                "tree": "9477b875cdbac77e66c230c1841b5ed580860bfe",
-                "origin_main": "f49afc579c22856849ca9f739435e5820003384f",
+                "commit": "997319522a65969473f36b0a238b236e47025a8a",
+                "tree": "92a9a40c4a24a8f7472df4169ec4d1bd77988e2b",
+                "origin_main": "997319522a65969473f36b0a238b236e47025a8a",
             },
         ),
         (
             "ipfs_kit",
             {
                 "path": "external/ipfs_kit",
-                "commit": "e9e13bdfd05a9bd114e9549f49166522c4702b9b",
-                "tree": "db7bd5bd9eb1e6b724fea16b8bd10065c776dc43",
-                "origin_main": "b6c65ba732733d7e33852713ba18aa3b12235668",
+                "commit": "9f5c810d4e1ad7ecc55aa5856fff75ef242db8e2",
+                "tree": "c3781cbbc2a97ee6d94da71da7dd97aa2991b38a",
+                "origin_main": "9f5c810d4e1ad7ecc55aa5856fff75ef242db8e2",
             },
         ),
     )
