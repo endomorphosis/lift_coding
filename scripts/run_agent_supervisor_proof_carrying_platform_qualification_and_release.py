@@ -22,6 +22,7 @@ import stat as stat_module
 import subprocess
 import sys
 import threading
+import tempfile
 import time
 from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
@@ -968,7 +969,9 @@ def _python_environment() -> dict[str, str]:
 
 def _assert_materialized_source(paths: Mapping[str, Path]) -> dict[str, Any]:
     if not paths["database"].is_file() or not paths["bootstrap_receipt"].is_file():
-        raise OperatorError("materialize the sealed PCPR bootstrap before starting services")
+        raise OperatorError(
+            "materialize the sealed PCPR bootstrap before starting services"
+        )
     receipt = _json_object(paths["bootstrap_receipt"])
     forest = _source_forest()
     if (
@@ -978,8 +981,177 @@ def _assert_materialized_source(paths: Mapping[str, Path]) -> dict[str, Any]:
         or receipt["source_forest"].get("source_forest_root")
         != forest["source_forest_root"]
     ):
-        raise OperatorError("current source forest differs from the materialized seal")
+        transition_path = paths["evidence"] / "runtime" / "source-requalification.json"
+        if not transition_path.is_file():
+            raise OperatorError(
+                "current source forest differs from the materialized seal; run requalify-source"
+            )
+        transition = _json_object(transition_path)
+        material = {
+            key: value for key, value in transition.items() if key != "transition_id"
+        }
+        if (
+            transition.get("transition_id") != _identity(material)
+            or transition.get("bootstrap_receipt_id")
+            != receipt.get("bootstrap_receipt_id")
+            or transition.get("source_forest") != forest
+            or transition.get("validation", {}).get("returncode") != 0
+        ):
+            raise OperatorError(
+                "source requalification does not bind this exact forest"
+            )
+        _validate_descendant_source(receipt, forest)
     return receipt
+
+
+def _validate_descendant_source(
+    receipt: Mapping[str, Any], forest: Mapping[str, Any]
+) -> None:
+    """Preserve the original board seal while admitting tested runtime descendants."""
+    original = receipt["source_forest"]
+    pairs = [(ROOT, original["portfolio"]["head"], forest["portfolio"]["head"])]
+    prior = {row["path"]: row for row in original["repositories"]}
+    for row in forest["repositories"]:
+        pairs.append((ROOT / row["path"], prior[row["path"]]["head"], row["head"]))
+    for repository, before, after in pairs:
+        result = subprocess.run(
+            ["git", "merge-base", "--is-ancestor", before, after],
+            cwd=repository,
+            capture_output=True,
+        )
+        if result.returncode:
+            raise OperatorError(
+                "source requalification requires descendant repository heads"
+            )
+    # The task program and its semantic scheduler policy remain immutable.
+    config_path = DEFAULT_CONFIG.as_posix()
+    baseline = str(receipt["source_head"])
+    before = json.loads(_git("show", f"{baseline}:{config_path}"))
+    after = json.loads((ROOT / config_path).read_text())
+    for value in (before, after):
+        value.pop("source_binding", None)
+    if before != after:
+        raise OperatorError("source requalification cannot change the scheduler policy")
+    for key in ("taskboard_path", "objectives_path", "plan_path"):
+        relative = after[key]
+        if (
+            _git("show", f"{baseline}:{relative}", binary=True)
+            != (ROOT / relative).read_bytes()
+        ):
+            raise OperatorError(
+                "source requalification cannot change the sealed task program"
+            )
+
+
+def requalify_source(config_path: Path) -> dict[str, Any]:
+    """Validate an exact clean descendant forest without rewriting task authority."""
+    board, _ = _load_config(config_path)
+    paths = _runtime_paths(board)
+    receipt = _json_object(paths["bootstrap_receipt"])
+    forest = _source_forest()
+    _validate_descendant_source(receipt, forest)
+    argv = [
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "test/api/causal_federation/test_typed_state_owner.py",
+        "test/api/test_agent_supervisor_quack_owner_commands.py",
+        "-o",
+        "log_cli=false",
+        "--tb=short",
+    ]
+    for index, value in enumerate(argv):
+        if value.startswith("test/"):
+            argv[index] = str(ACCEL_ROOT / value)
+    with tempfile.TemporaryDirectory(
+        prefix="pcpr-source-validation-"
+    ) as validation_root:
+        result = subprocess.run(
+            argv,
+            cwd=validation_root,
+            env=_python_environment(),
+            capture_output=True,
+            timeout=600,
+        )
+    if result.returncode:
+        raise OperatorError(
+            "source requalification regression suite failed: "
+            + result.stdout.decode(errors="replace")[-3000:]
+        )
+    if _source_forest() != forest:
+        raise OperatorError("source changed during requalification")
+    material = {
+        "schema": "ipfs_accelerate_py/agent-supervisor/source-requalification@1",
+        "bootstrap_receipt_id": receipt["bootstrap_receipt_id"],
+        "source_forest": forest,
+        "completion_authority": False,
+        "observed_at": datetime.now(UTC).isoformat(),
+        "validation": {
+            "argv": argv,
+            "returncode": result.returncode,
+            "stdout_digest": _identity(result.stdout),
+            "stderr_digest": _identity(result.stderr),
+        },
+    }
+    transition = {**material, "transition_id": _identity(material)}
+    _atomic_json(
+        paths["evidence"] / "runtime" / "source-requalification.json", transition
+    )
+    return transition
+
+
+def authoritative_status(config_path: Path) -> dict[str, Any]:
+    """Read the sealed board through an independently admitted owner session."""
+    board, _ = _load_config(config_path)
+    paths = _runtime_paths(board)
+    receipt = _assert_materialized_source(paths)
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+        STATUS_BOOTSTRAP_CLIENT_ID, TYPED_STATE_OWNER_TOKEN_FILENAME,
+        TYPED_STATE_OWNER_SOCKET_FILENAME, TypedStateOwnerConnection,
+        compact_default_owner_socket_path,
+    )
+    published = _json_object(paths["owner_status"])["identity"]
+    client = TypedStateOwnerConnection(
+        socket_path=compact_default_owner_socket_path(
+            paths["owner"] / TYPED_STATE_OWNER_SOCKET_FILENAME, identity=paths["database"]),
+        token=(paths["owner"] / TYPED_STATE_OWNER_TOKEN_FILENAME).read_text().strip(),
+        client_id=STATUS_BOOTSTRAP_CLIENT_ID,
+        process_birth_id=f"pcpr-status:{os.getpid()}:{time.time_ns()}",
+        store_id=_control_plane_store_id(board.resolved_database_program()),
+        status_bootstrap=True,
+    )
+    def rows(operation: str, parameters: Sequence[Any] = ()) -> list[dict[str, Any]]:
+        cursor = client.execute_operation(operation, parameters)
+        columns = tuple(item[0] for item in cursor.description)
+        return [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+    try:
+        for key in ("server_id", "process_birth_id", "database_uuid", "generation", "fence_epoch"):
+            if client.identity.get(key) != published.get(key):
+                raise OperatorError("status admission differs from the published owner birth")
+        for _ in range(3):
+            control = rows("executor_control_snapshot")[0]
+            tasks = rows("executor_task_projection_page", [512, 0])
+            leases = rows("executor_retry_cooldown_page", [512, 0])
+            completion = dict(client.completion_progress_snapshot(receipt["database_task_source_receipt"]["task_cids"]))
+            states = completion["completion_projection"]["task_states"]
+            expected = sorted((row["task_cid"], row["status"], row["revision"]) for row in states)
+            observed = sorted((row["task_cid"], row["status"], row["revision"]) for row in tasks)
+            control_states = sorted((row["task_cid"], row["status"], row["revision"]) for row in json.loads(control["tasks_json"]))
+            if expected == observed == control_states:
+                break
+        else:
+            raise OperatorError("task authority changed during bounded status observation")
+        return {"schema": "ipfs_accelerate_py/agent-supervisor/database-board-status@1",
+                "board_namespace": board.board_namespace, "authoritative_task_observation": True,
+                "observed_at": datetime.now(UTC).isoformat(), "owner_identity": dict(client.identity),
+                "source_forest": _source_forest(), "control": control,
+                "tasks": tasks, "leases": leases, "completion_snapshot": completion,
+                "completion_authority": False,
+                "completion_gate": "goal_and_terminal_receipt_review_required"}
+    finally:
+        client.close()
 
 
 def _build_state_owner(board: Any, paths: Mapping[str, Path]) -> Any:
@@ -2181,6 +2353,12 @@ def launch_supervisor(
     try:
         identity = server.start()
         ready = server.ready()
+        server.bind_database_status_scope(
+            board_namespace=board.board_namespace,
+            plan_root_cid=bootstrap_receipt["plan_root_cid"],
+            repository_tree_id=bootstrap_receipt["repository_tree_id"],
+            task_cids=bootstrap_receipt["database_task_source_receipt"]["task_cids"],
+        )
         route_policy = _ExecutionRoutePolicyProvider(
             server=server,
             board=board,
@@ -2269,6 +2447,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("materialize")
+    commands.add_parser("requalify-source")
+    commands.add_parser("authoritative-status")
     commands.add_parser("state-owner")
     commands.add_parser("state-owner-daemon")
     status_parser = commands.add_parser("status")
@@ -2286,6 +2466,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     if not config_path.is_absolute():
         config_path = ROOT / config_path
     try:
+        if arguments.command == "authoritative-status":
+            print(json.dumps(authoritative_status(config_path), indent=2, sort_keys=True))
+            return 0
+        if arguments.command == "requalify-source":
+            print(json.dumps(requalify_source(config_path), indent=2, sort_keys=True))
+            return 0
         if arguments.command == "materialize":
             result = materialize(config_path)
             print(json.dumps(result, indent=2, sort_keys=True))

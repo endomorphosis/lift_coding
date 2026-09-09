@@ -105,6 +105,30 @@ def validate_source_forest(
     errors: list[str],
     warnings: list[str],
 ) -> tuple[list[dict[str, Any]], bool]:
+    runtime_root = ROOT / str(config.get("runtime_paths", {}).get("root", ""))
+    transition_path = runtime_root / "evidence/runtime/source-requalification.json"
+    if transition_path.is_file():
+        try:
+            operator_path = ROOT / "scripts/run_agent_supervisor_proof_carrying_platform_qualification_and_release.py"
+            spec = importlib.util.spec_from_file_location("pcpr_requalified_operator", operator_path)
+            if spec is None or spec.loader is None:
+                raise RuntimeError("source requalification operator is unavailable")
+            operator = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(operator)
+            board, _ = operator._load_config(ROOT / operator.DEFAULT_CONFIG)
+            paths = operator._runtime_paths(board)
+            operator._assert_materialized_source(paths)
+            forest = operator._source_forest()
+            if git("branch", "--show-current") != generator.REQUIRED_BRANCH:
+                raise RuntimeError("requalified runtime is on the wrong board branch")
+            rows = [{"repository": "portfolio", "path": ".", **forest["portfolio"], "valid": True}]
+            rows += [{**row, "valid": True} for row in forest["repositories"]]
+            warnings.append("runtime source admitted by exact descendant-source requalification; historical board seal preserved")
+            return rows, True
+        except Exception as exc:
+            errors.append("runtime source requalification rejected: " + str(exc))
+            return [], False
+
     binding = config.get("source_binding")
     if not isinstance(binding, Mapping):
         errors.append("config source_binding must be an object")
