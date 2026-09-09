@@ -3277,16 +3277,150 @@ def status(*, require_ready: bool) -> int:
     return 0 if ready or not require_ready else 1
 
 
+CLAIM_VERIFICATION_FAILURE_REASON = "post-merge completion recovery seed failed claim verification"
+
+
+def _claim_verification_retry_material(
+    task_row: Mapping[str, Any], *, task_alias: str, task_cid: str,
+    expected_revision: int, source_head: str,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Bind an operator retry to a pre-provider verifier failure, never acceptance."""
+    try:
+        body = json.loads(str(task_row.get("body_json") or ""))
+    except (ValueError, TypeError) as exc:
+        raise HandoffError("claim-verification task body is malformed") from exc
+    terminal = body.get("completion_receipt") if isinstance(body, dict) else None
+    if not (
+        task_row.get("task_alias") == task_alias
+        and task_row.get("task_cid") == task_cid
+        and task_row.get("status") == "blocked"
+        and type(expected_revision) is int and expected_revision > 0
+        and task_row.get("revision") == expected_revision
+        and isinstance(terminal, dict)
+        and terminal.get("operation") == "database_portal_terminal_failure"
+        and terminal.get("reason") == CLAIM_VERIFICATION_FAILURE_REASON
+        and terminal.get("retryable") is False
+        and terminal.get("control_expected_status") == "in_progress"
+        and terminal.get("control_expected_revision") == expected_revision - 1
+        and type(terminal.get("attempt_number")) is int
+        and 1 <= terminal["attempt_number"] < 10_000
+        and re.fullmatch(r"[0-9a-f]{40}", source_head) is not None
+    ):
+        raise HandoffError("claim-verification retry differs from exact blocked authority")
+    material = {
+        "schema": "doep/claim-verification-fresh-validation-recovery@1",
+        "task_alias": task_alias, "task_cid": task_cid,
+        "expected_revision": expected_revision,
+        "source_head": source_head,
+        "task_body_sha256": _sha256(_canonical_json_bytes(body)),
+        "terminal_receipt_sha256": _sha256(_canonical_json_bytes(terminal)),
+        "terminal_receipt": terminal,
+        "fresh_attempt_number": terminal["attempt_number"] + 1,
+        "attempt_refunded": False,
+        "require_fresh_portal_revalidation": True,
+        "historical_completion_evidence_accepted": False,
+        "authority": "user_authorized_operator_retry_after_pre_provider_verifier_failure",
+    }
+    return body, terminal, material
+
+
+def recover_claim_verification(*, task_alias: str, expected_revision: int) -> int:
+    """Retry an exact verifier block through the owner with fresh validation.
+
+    A historical seed may no longer qualify after target source advances.
+    Preserve it as evidence and issue a new attempt requiring Portal validation;
+    do not rewrite the historical seed or accept the old candidate by fiat.
+    """
+    board, population, paths = _load()
+    prior_pid = 0
+    if paths["operator_pid"].is_file():
+        try:
+            prior_pid = int(paths["operator_pid"].read_text().strip())
+        except (OSError, ValueError):
+            raise HandoffError("cannot determine existing DOEP operator identity")
+    if _pid_alive(prior_pid):
+        raise HandoffError("stop the live DOEP operator before exact retry recovery")
+    matches = [task for task in population["tasks"] if task.get("task_alias") == task_alias]
+    if len(matches) != 1:
+        raise HandoffError("retry task is not unique in sealed DOEP population")
+    task_cid = str(matches[0]["task_cid"])
+    head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT,
+                          text=True, capture_output=True, check=True).stdout.strip()
+    clean = subprocess.run(["git", "diff", "--quiet", "HEAD", "--",
+                            str(Path(__file__).relative_to(ROOT)), str(CONFIG.relative_to(ROOT)),
+                            str(BOARD.relative_to(ROOT))], cwd=ROOT, check=False)
+    if clean.returncode != 0:
+        raise HandoffError("retry operator controls differ from committed source")
+    server = _build_server(board, paths)
+    client = grant = None
+    try:
+        server.start()
+        if not server.ready():
+            raise HandoffError("Quack owner did not become ready for exact retry")
+        client, grant = _make_blocked_retry_recovery_client(
+            server, board, task_cid=task_cid, task_alias=task_alias)
+        rows = client.execute("select_task_by_cid", {"task_cid": task_cid})
+        if len(rows) != 1:
+            raise HandoffError("retry task authority is absent or ambiguous")
+        body, terminal, material = _claim_verification_retry_material(
+            rows[0], task_alias=task_alias, task_cid=task_cid,
+            expected_revision=expected_revision, source_head=head)
+        generation = client.load_generation()
+        material["generation"] = generation.to_record()
+        evidence_id = _sha256(_canonical_json_bytes(material))
+        evidence_path = paths["evidence"] / "operator-recovery" / (evidence_id.replace(":", "-") + ".json")
+        _immutable_json(evidence_path, {**material, "evidence_id": evidence_id})
+        authorization = {
+            "schema": "doep/claim-verification-fresh-validation-authorization@1",
+            "evidence_id": evidence_id, "task_cid": task_cid,
+            "expected_revision": expected_revision,
+            "require_fresh_portal_revalidation": True,
+        }
+        authorization_id = _sha256(_canonical_json_bytes(authorization))
+        _immutable_json(evidence_path.with_suffix(".authorization.json"),
+                        {**authorization, "authorization_id": authorization_id})
+        result = client.recover_blocked_task_retry(
+            task_cid=task_cid, expected_task_revision=expected_revision,
+            task_body=body, terminal_receipt=terminal,
+            max_task_attempts_before=terminal["attempt_number"],
+            max_task_attempts_after=terminal["attempt_number"] + 1,
+            operator_handoff_receipt_id=authorization_id,
+            sidecar_evidence_id=evidence_id, now_ms=time.time_ns() // 1_000_000,
+            require_fresh_portal_revalidation=True)
+        if not result.accepted:
+            raise HandoffError(f"canonical retry rejected: {result.outcome.value}")
+        record = result.to_dict()
+        receipt = {"task_alias": task_alias, "evidence_id": evidence_id, "result": record}
+        _immutable_json(evidence_path.with_suffix(".result.json"), receipt)
+        print(json.dumps(receipt, indent=2, sort_keys=True))
+        return 0
+    finally:
+        try:
+            if client is not None:
+                client.close()
+        finally:
+            try:
+                if grant is not None:
+                    server.revoke_typed_client_grant(grant.grant_id)
+            finally:
+                server.stop()
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("run")
     commands.add_parser("recover-blocked-lock-timeout")
     commands.add_parser("recover-doep-031-protected-control-plane-update")
+    recovery_parser = commands.add_parser("recover-claim-verification")
+    recovery_parser.add_argument("--task", required=True)
+    recovery_parser.add_argument("--expected-revision", type=int, required=True)
     status_parser = commands.add_parser("status")
     status_parser.add_argument("--require-ready", action="store_true")
     args = parser.parse_args(argv)
     try:
+        if args.command == "recover-claim-verification":
+            return recover_claim_verification(task_alias=args.task, expected_revision=args.expected_revision)
         if args.command == "run":
             return launch()
         if args.command == "recover-blocked-lock-timeout":
