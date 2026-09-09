@@ -1,0 +1,169 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-007.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/hash_memo_contracts.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py"
+  ],
+  "claim": "Worker-authored contracts that datasets-owned hash memo schemas bind every authority-relevant profile and invalidator. Typed unavailable hash-memo store, prepared canonical block, file chunk manifest, native batch hasher, production ZK, key ceremony, direct-execution, kit proof-seal-store, datasets incremental-sealing evidence, and serial WAL/CAS publication cases are recorded without changing claim meaning. This receipt does not complete PCTDD-007, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; semantic reuse; current-root publication; production ZK; adapter execution; kit byte storage; prepared canonical block assembly; chunk-manifest substitution; self-approval; task completion",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-007@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "chunk_manifest_replaces_raw_cid": false,
+    "filesystem_metadata_is_candidate_only": true,
+    "git_blob_oid_is_lookup_key_only": true,
+    "hash_memo_invalidator_binding": "HashMemoInvalidatorBinding@1",
+    "hash_memo_profile_binding": "HashMemoProfileBinding@1",
+    "hash_memo_schema_catalog": "HashMemoSchemaCatalog@1",
+    "may_authorize_skip": false,
+    "may_decide_semantic_reuse": false,
+    "production_admitted": false,
+    "required_invalidators": [
+      "corruption",
+      "dirty_overlay",
+      "mode_change",
+      "type_change",
+      "stale_parent",
+      "stale_snapshot",
+      "concurrent_writer",
+      "crash_phase",
+      "recovery",
+      "profile_change",
+      "codec_change",
+      "multicodec_change",
+      "multihash_change",
+      "cid_version_change",
+      "multibase_change",
+      "ordering_change",
+      "normalization_change",
+      "unverified_metadata",
+      "chunk_manifest_substitution",
+      "git_blob_as_cid",
+      "filesystem_metadata_as_identity",
+      "composed_chunk_sha"
+    ],
+    "required_profile_dimensions": [
+      "canonical bytes",
+      "codec",
+      "multicodec",
+      "multihash",
+      "CID version",
+      "multibase",
+      "ordering",
+      "normalization"
+    ],
+    "required_profiles": [
+      "datasets_cid_utils",
+      "accelerate_closed_cid_utils",
+      "accelerate_multiformats_identity",
+      "datasets_software_contract_content",
+      "datasets_ir_core_identity",
+      "accelerate_content_identity_bridge",
+      "accelerate_assurance_content_identity",
+      "datasets_ipld_cid",
+      "datasets_profile_g",
+      "kit_coordination_cid",
+      "kit_proof_certificate_cid",
+      "datasets_knowledge_graph_ipld",
+      "accelerate_kubo_cid"
+    ],
+    "sha256_composed_from_chunks": false,
+    "stores_bytes": false,
+    "verified_hash_memo": "VerifiedHashMemo@1"
+  },
+  "dependency_receipts": [
+    "PCTDD-001",
+    "PCTDD-003"
+  ],
+  "limitations": {
+    "datasets_incremental_sealing_evidence": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "incremental_sealing_evidence_module_absent_on_current_datasets_pin",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "file_chunk_manifest": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "file_chunk_manifest_not_assembled_by_hash_memo",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "hash_memo_store": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "hash_memo_store_not_implemented",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "kit_proof_seal_store": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "proof_seal_store_module_absent_on_current_kit_pin",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "native_batch_hasher": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "native_batch_hasher_not_installed",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "prepared_canonical_block": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "prepared_canonical_block_not_assembled_by_hash_memo",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "serial_wal_cas_publication": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "hash_memo_has_no_publication_authority",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-007",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-007@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
