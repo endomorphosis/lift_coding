@@ -64,3 +64,20 @@ def test_retry_refuses_unqualified_terminal_receipt(field, value):
     data["body_json"] = json.dumps(body)
     with pytest.raises(m.HandoffError, match="exact blocked authority"):
         material(m, data)
+
+@pytest.mark.parametrize('passed', [False, True])
+def test_dependency_budget_retry_requires_repaired_preflight(passed):
+    m = module()
+    data = row()
+    body = json.loads(data['body_json'])
+    t = body['completion_receipt']
+    t.update(operation='database_portal_typed_deferral_budget_exhausted', reason='typed_portal_deferral_budget_exhausted', attempt_consumed=False, retry_budget={'matching_attempts':[{'attempt_id':t['attempt_id'],'reason':'validation_project_dependency_preflight_failed'}]})
+    data['body_json'] = json.dumps(body)
+    kwargs=dict(task_alias='DOEP-011',task_cid='sha256:task',expected_revision=24,source_head='a'*40,repaired_dependency_preflight={'passed':passed})
+    if not passed:
+        with pytest.raises(m.HandoffError):m._claim_verification_retry_material(data,**kwargs)
+    else:
+        b, terminal, evidence=m._claim_verification_retry_material(data,**kwargs)
+        assert b == body
+        assert evidence['repaired_dependency_preflight']['passed'] is True
+        assert evidence['require_fresh_portal_revalidation'] is True
