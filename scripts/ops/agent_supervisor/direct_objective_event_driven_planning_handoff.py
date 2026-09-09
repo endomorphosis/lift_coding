@@ -18,6 +18,7 @@ import json
 import os
 import re
 import signal
+import shlex
 import socket
 import struct
 import subprocess
@@ -3286,6 +3287,7 @@ CLAIM_VERIFICATION_FAILURE_REASON = "post-merge completion recovery seed failed 
 def _claim_verification_retry_material(
     task_row: Mapping[str, Any], *, task_alias: str, task_cid: str,
     expected_revision: int, source_head: str,
+    repaired_dependency_preflight: Mapping[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     """Bind an operator retry to a pre-provider verifier failure, never acceptance."""
     try:
@@ -3293,6 +3295,17 @@ def _claim_verification_retry_material(
     except (ValueError, TypeError) as exc:
         raise HandoffError("claim-verification task body is malformed") from exc
     terminal = body.get("completion_receipt") if isinstance(body, dict) else None
+    dependency_retry = bool(
+        isinstance(repaired_dependency_preflight, Mapping)
+        and repaired_dependency_preflight.get("passed") is True
+        and isinstance(terminal, Mapping)
+        and terminal.get("operation") == "database_portal_typed_deferral_budget_exhausted"
+        and terminal.get("reason") == "typed_portal_deferral_budget_exhausted"
+        and terminal.get("attempt_consumed") is False
+        and any(isinstance(row, Mapping) and row.get("attempt_id") == terminal.get("attempt_id")
+                and row.get("reason") == "validation_project_dependency_preflight_failed"
+                for row in terminal.get("retry_budget", {}).get("matching_attempts", []))
+    )
     if not (
         task_row.get("task_alias") == task_alias
         and task_row.get("task_cid") == task_cid
@@ -3300,8 +3313,8 @@ def _claim_verification_retry_material(
         and type(expected_revision) is int and expected_revision > 0
         and task_row.get("revision") == expected_revision
         and isinstance(terminal, dict)
-        and terminal.get("operation") == "database_portal_terminal_failure"
-        and terminal.get("reason") == CLAIM_VERIFICATION_FAILURE_REASON
+        and (dependency_retry or (terminal.get("operation") == "database_portal_terminal_failure"
+             and terminal.get("reason") == CLAIM_VERIFICATION_FAILURE_REASON))
         and terminal.get("retryable") is False
         and terminal.get("control_expected_status") == "in_progress"
         and terminal.get("control_expected_revision") == expected_revision - 1
@@ -3324,10 +3337,12 @@ def _claim_verification_retry_material(
         "historical_completion_evidence_accepted": False,
         "authority": "user_authorized_operator_retry_after_pre_provider_verifier_failure",
     }
+    if dependency_retry:
+        material["repaired_dependency_preflight"] = dict(repaired_dependency_preflight)
     return body, terminal, material
 
 
-def recover_claim_verification(*, task_alias: str, expected_revision: int) -> int:
+def recover_claim_verification(*, task_alias: str, expected_revision: int, repaired_dependency: bool = False) -> int:
     """Retry an exact verifier block through the owner with fresh validation.
 
     A historical seed may no longer qualify after target source advances.
@@ -3346,7 +3361,22 @@ def recover_claim_verification(*, task_alias: str, expected_revision: int) -> in
     matches = [task for task in population["tasks"] if task.get("task_alias") == task_alias]
     if len(matches) != 1:
         raise HandoffError("retry task is not unique in sealed DOEP population")
-    task_cid = str(matches[0]["task_cid"])
+    selected_task = matches[0]
+    task_cid = str(selected_task["task_cid"])
+    repaired_preflight = None
+    if repaired_dependency:
+        from ipfs_accelerate_py.agent_supervisor.validation.project_dependency_preflight import preflight_validation_project_dependencies
+        repository = str(selected_task["owning_repository"])
+        commands = ["cd " + shlex.quote(repository) + " && " + shlex.join(argv)
+                    for argv in selected_task["execution_validation"]]
+        repaired_preflight = preflight_validation_project_dependencies(ROOT, commands, task_authority={
+            "board_namespace": PROGRAM_ID, "canonical_task_cid": task_cid,
+            "declared_outputs": list(selected_task["superproject_outputs"]),
+        })
+        if repaired_preflight.get("passed") is not True:
+            raise HandoffError("current dependency preflight has not been repaired")
+        if subprocess.run(["git", "diff", "--quiet", "HEAD"], cwd=ROOT / repository).returncode:
+            raise HandoffError("repaired dependency source is not committed")
     head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT,
                           text=True, capture_output=True, check=True).stdout.strip()
     clean = subprocess.run(["git", "diff", "--quiet", "HEAD", "--",
@@ -3367,7 +3397,8 @@ def recover_claim_verification(*, task_alias: str, expected_revision: int) -> in
             raise HandoffError("retry task authority is absent or ambiguous")
         body, terminal, material = _claim_verification_retry_material(
             rows[0], task_alias=task_alias, task_cid=task_cid,
-            expected_revision=expected_revision, source_head=head)
+            expected_revision=expected_revision, source_head=head,
+            repaired_dependency_preflight=repaired_preflight)
         cooldown_rows = client.execute("executor_retry_cooldown_by_task", {"task_cid": task_cid})
         if len(cooldown_rows) > 1:
             raise HandoffError("retry cooldown authority is ambiguous")
@@ -3424,10 +3455,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     recovery_parser = commands.add_parser("recover-claim-verification")
     recovery_parser.add_argument("--task", required=True)
     recovery_parser.add_argument("--expected-revision", type=int, required=True)
+    dependency_parser = commands.add_parser("recover-repaired-dependency-preflight")
+    dependency_parser.add_argument("--task", required=True)
+    dependency_parser.add_argument("--expected-revision", type=int, required=True)
     status_parser = commands.add_parser("status")
     status_parser.add_argument("--require-ready", action="store_true")
     args = parser.parse_args(argv)
     try:
+        if args.command == "recover-repaired-dependency-preflight":
+            return recover_claim_verification(task_alias=args.task, expected_revision=args.expected_revision, repaired_dependency=True)
         if args.command == "recover-claim-verification":
             return recover_claim_verification(task_alias=args.task, expected_revision=args.expected_revision)
         if args.command == "run":
