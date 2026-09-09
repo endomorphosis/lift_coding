@@ -1,0 +1,115 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/source_object_identity.py",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py"
+  ],
+  "claim": "Worker-authored source-object identity bridging that Git blob OIDs remain verified memo lookup keys and dirty filesystem metadata remains candidate-only. Typed unavailable production ZK, key ceremony, native batch hashing, direct-execution, prepared canonical block, persistent hash memo, kit hash-memo store, datasets incremental-sealing evidence, and serial WAL/CAS publication cases are recorded without changing claim meaning. This receipt does not complete PCTDD-006, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; current-root publication; production ZK; git blob as CID; dirty metadata as identity; self-approval; task completion",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "claim_class": "IntegrityCommitment",
+    "dirty_metadata_role": "candidate_only",
+    "does_not": "execution or semantics; current-root publication; production ZK; git blob as CID; dirty metadata as identity; self-approval",
+    "establishes": "Git blobs remain memo keys and dirty metadata remains candidate-only",
+    "git_blob_role": "memo_lookup_key",
+    "interface": "SourceObjectIdentity@1",
+    "may_authorize_skip": false,
+    "predecessor_interfaces": [
+      "ContentIdentity@1",
+      "IncrementalProofSealer@1"
+    ],
+    "production_admitted": false,
+    "profile": "CIDv1/base32/raw/sha2-256",
+    "publication_authority_invoked": false,
+    "result_interface": "SourceObjectIdentityResult@1",
+    "schema_authority": "ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.source_object_identity"
+  },
+  "dependency_receipts": [
+    "PCTDD-001"
+  ],
+  "limitations": {
+    "datasets_incremental_sealing_evidence": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "incremental_sealing_evidence_module_absent_on_current_datasets_pin",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "kit_hash_memo_store": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "kit_hash_memo_store_not_present",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "native_batch_hasher": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "native_batch_hasher_not_installed",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "persistent_hash_memo": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "datasets_hash_memo_contracts_not_present",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "prepared_canonical_block": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "prepared_canonical_block_not_on_current_datasets_pin",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "serial_wal_cas_publication": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "bridging_has_no_publication_authority",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-006",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
