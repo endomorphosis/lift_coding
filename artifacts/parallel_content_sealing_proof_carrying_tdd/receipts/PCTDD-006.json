@@ -1,0 +1,39 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/source_object_identity.py",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py"
+  ],
+  "claim": "Worker-authored source-object identity bridge: exact supplied bytes are bound to a SHA-256 digest and raw CIDv1; a Git blob OID is only a verified memo lookup key and dirty filesystem metadata is candidate-only. Memo reuse rechecks exact bytes before release. Typed unavailable CID-provider outcomes preserve the claim and do not admit or self-approve. This receipt does not complete PCTDD-006, admit its own tests, publish a root, or promote results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; current-root publication; task completion; proof admission; scheduler authority; identity mutation",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": ["PCTDD-001"],
+  "limitations": {
+    "cid_provider": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "cid_provider_unavailable_or_invalid",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "dirty_filesystem_metadata": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "metadata_candidate_only",
+      "self_approved": false,
+      "status": "candidate_only"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "task_id": "PCTDD-006",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
