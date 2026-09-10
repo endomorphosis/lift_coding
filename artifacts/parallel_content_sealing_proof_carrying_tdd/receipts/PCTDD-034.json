@@ -1,0 +1,47 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-034.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/aggregate_test_pass_statement.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py"
+  ],
+  "claim": "Worker-authored aggregate public-input contracts bind the complete exact selected receipt-leaf population and preserve TestPassStatementV1 without upgrading receipt-leaf claims. Typed unavailable aggregate ZK, production ZK, runner attestation, and direct execution are recorded without changing claim meaning. This receipt does not complete PCTDD-034 or admit its own tests.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; CPython execution; production ZK; proof admission; signed admission; upgrade of receipt leaf evidence; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "aggregate_test_batch": "AggregateTestBatch@1",
+    "aggregate_test_batch_leaf": "AggregateTestBatchLeaf@1",
+    "aggregate_test_pass_public_inputs": "AggregateTestPassPublicInputs@1",
+    "aggregate_test_pass_statement": "AggregateTestPassStatement@1",
+    "cannot_exceed_leaf_evidence": true,
+    "enforces_exact_completeness": true,
+    "leaf_statement": "TestPassStatementV1",
+    "leaf_statement_version": 1,
+    "may_authorize_skip": false,
+    "production_admitted": false,
+    "required_public_inputs": ["batch_cid", "ordered_leaf_root_cid", "selection_root_cid", "count", "leaf_cids", "receipt_cids", "policy_cid", "issuer_id", "epoch", "verifying_key_cid", "leaf_statement_interface", "leaf_statement_version", "completeness"],
+    "successor_proof_claim_class": "ReceiptAggregationZkProof"
+  },
+  "dependency_receipts": ["PCTDD-026", "PCTDD-033"],
+  "limitations": {
+    "aggregate_selected_test_zk": {"claim_unchanged": true, "production_admitted": false, "reason_code": "aggregate_selected_test_zk_missing", "self_approved": false, "status": "typed_unavailable"},
+    "direct_execution_profile": {"claim_unchanged": true, "production_admitted": false, "reason_code": "direct_execution_profile_optional", "self_approved": false, "status": "typed_unavailable"},
+    "production_zk": {"claim_unchanged": true, "production_admitted": false, "reason_code": "production_zk_key_ceremony_unavailable", "self_approved": false, "status": "typed_unavailable"},
+    "signed_runner_attestation": {"claim_unchanged": true, "production_admitted": false, "reason_code": "signed_runner_attestation_not_verified", "self_approved": false, "status": "typed_unavailable"}
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {"admitted": false, "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence", "classification": "none"},
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-034",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
