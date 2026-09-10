@@ -21,6 +21,7 @@
     "leaf_statement": "TestPassStatementV1",
     "leaf_statement_version": 1,
     "may_authorize_skip": false,
+    "ordered_leaf_root_recomputed": true,
     "production_admitted": false,
     "required_public_inputs": ["batch_cid", "ordered_leaf_root_cid", "selection_root_cid", "count", "leaf_cids", "receipt_cids", "policy_cid", "issuer_id", "epoch", "verifying_key_cid", "leaf_statement_interface", "leaf_statement_version", "completeness"],
     "successor_proof_claim_class": "ReceiptAggregationZkProof"
