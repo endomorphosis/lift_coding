@@ -1,0 +1,71 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/source_object_identity.py",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py"
+  ],
+  "claim": "Worker-authored source-object identity bridge: Git blob object IDs are verified memo lookup keys only, dirty filesystem metadata is candidate-only, and every reusable source identity is re-derived from supplied bytes. This receipt does not complete PCTDD-006, admit its own tests, publish a root, or promote a source handle into an identity claim.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; current-root publication; task completion; source identity from Git OID or filesystem metadata; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": [
+    "PCTDD-001"
+  ],
+  "identity_contract": {
+    "byte_identity": "sha256 of supplied source bytes under pctdd/source-object-bytes@1",
+    "dirty_metadata": "candidate_only; it nominates a byte rehash and is excluded from the identity payload",
+    "git_blob_oid": "verified_memo_lookup_key_only; it is never substituted for byte-derived identity",
+    "memo_reuse": "requires Git blob verification and exact supplied-byte rehash before return",
+    "publication_authority_invoked": false,
+    "self_approved": false
+  },
+  "limitations": {
+    "cid_provider": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "cid_provider_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "serial_wal_cas_publication": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "source_identity_bridge_has_no_publication_authority",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g6",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "independently validate byte rehash and controller admission; never treat a predecessor Git object ID as task completion evidence",
+    "classification": "source-handle-candidate-only",
+    "outer_commit": "unavailable"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g9",
+  "task_id": "PCTDD-006",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
