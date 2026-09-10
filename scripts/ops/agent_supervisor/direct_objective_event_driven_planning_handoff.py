@@ -3208,6 +3208,104 @@ def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
     return board, population, paths
 
 
+def _bind_native_status(server: Any, population: Mapping[str, Any]) -> None:
+    """The admitted launcher binds independent readers to the original board."""
+    server.bind_database_status_scope(
+        board_namespace=PROGRAM_ID,
+        plan_root_cid=population["plan_root_cid"],
+        repository_tree_id=population["repository_tree_id"],
+        task_cids=[task["task_cid"] for task in population["tasks"]],
+    )
+
+
+def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]:
+    """Read live state using this invocation's own native read-only session."""
+    from ipfs_accelerate_py.agent_supervisor.merge.database_worktree_registry import process_birth_id
+    from ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle import (
+        OwnerLiveness, ProcessBirthIdentity, owner_liveness, read_process_birth,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+        STATUS_BOOTSTRAP_CLIENT_ID, TYPED_STATE_OWNER_SOCKET_FILENAME,
+        TYPED_STATE_OWNER_TOKEN_FILENAME, TypedStateOwnerConnection,
+        compact_default_owner_socket_path,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.quack_state_client import QuackStateClient
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_database_task_source import TypedDatabaseTaskSource
+
+    board, population, paths = _load()
+    aliases = {task["task_alias"]: task["task_cid"] for task in population["tasks"]}
+    if (len(history_tasks) > 8 or len(set(history_tasks)) != len(history_tasks)
+            or any(alias not in aliases for alias in history_tasks)):
+        raise HandoffError("history request is outside the sealed DOEP population or bound")
+    owner = _json_object(paths["owner_status"])
+    identity = owner.get("identity")
+    if (owner.get("lifecycle") != "ready" or not isinstance(identity, Mapping)
+            or not isinstance(identity.get("process_birth"), Mapping)
+            or owner_liveness(ProcessBirthIdentity.from_dict(dict(identity["process_birth"])))
+            is not OwnerLiveness.ALIVE):
+        raise HandoffError("native status requires the exact live DOEP owner")
+    birth = read_process_birth(os.getpid())
+    if birth is None:
+        raise HandoffError("native status reader process birth is unavailable")
+    reader_birth_id = process_birth_id(birth)
+    connection = TypedStateOwnerConnection(
+        socket_path=compact_default_owner_socket_path(
+            paths["owner"] / TYPED_STATE_OWNER_SOCKET_FILENAME, identity=paths["database"]),
+        token=(paths["owner"] / TYPED_STATE_OWNER_TOKEN_FILENAME).read_text().strip(),
+        client_id=STATUS_BOOTSTRAP_CLIENT_ID,
+        process_birth_id=reader_birth_id, store_id=_store_id(board), status_bootstrap=True,
+    )
+    client = None
+    try:
+        keys = ("server_id", "process_birth_id", "store_id", "database_uuid", "generation", "fence_epoch")
+        if any(connection.identity.get(key) != identity.get(key) for key in keys):
+            raise HandoffError("native status differs from the current DOEP owner")
+        client = QuackStateClient(
+            owner_id=STATUS_BOOTSTRAP_CLIENT_ID, store_id=_store_id(board),
+            process_birth_id=reader_birth_id, connection_factory=lambda _endpoint: connection,
+        )
+        client.attach(board.resolved_database_program().quack_endpoint, server_id=identity["server_id"])
+        source = TypedDatabaseTaskSource(client, owns_client=False)
+        # A requested history and closeout must describe the same stable store
+        # generation. Failed reads are returned, never replayed as mutations.
+        for _attempt in range(4):
+            before = client.load_generation()
+            histories = {alias: dict(source.task_revision_history_projection(aliases[alias]))
+                         for alias in history_tasks}
+            snapshot = connection.completion_closeout_snapshot(sorted(aliases.values()))
+            after = client.load_generation()
+            if before.content_id == after.content_id:
+                break
+        else:
+            raise HandoffError("native status changed during bounded observation")
+        facts = snapshot["closeout_facts"]
+        relations = facts["relations"]
+        if (facts["truncated"] or not relations["tasks"]["available"]
+                or not relations["goals"]["available"]):
+            raise HandoffError("native status population is unavailable or truncated")
+        tasks, goals = relations["tasks"]["rows"], relations["goals"]["rows"]
+        if (len(tasks) != len(aliases)
+                or {row["task_alias"]: row["task_cid"] for row in tasks} != aliases):
+            raise HandoffError("native status task aliases differ from the sealed DOEP population")
+        return {
+            "schema": "ipfs_accelerate_py/agent-supervisor/database-board-status@1",
+            "board_namespace": PROGRAM_ID, "authoritative_task_observation": True,
+            "observed_at": _utc_now(), "owner_identity": dict(connection.identity),
+            "control": {"task_count": len(tasks), "goal_count": len(goals),
+                        "tasks_json": json.dumps(tasks), "goals_json": json.dumps(goals)},
+            "tasks": tasks, "leases": relations["leases"]["rows"],
+            "completion_snapshot": snapshot["completion_snapshot"],
+            "closeout_snapshot": dict(snapshot), "task_histories": histories,
+            "required_goal_count": len(population["goals"]),
+            "completion_authority": False,
+            "completion_gate": "sealed_goal_and_terminal_receipt_review_required",
+        }
+    finally:
+        if client is not None:
+            client.close()
+        connection.close()
+
+
 def launch(*, observe_history_only: bool = False) -> int:
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         configured_board_launch_plan,
@@ -3256,6 +3354,7 @@ def launch(*, observe_history_only: bool = False) -> int:
             population,
             objective_observation,
         )
+        _bind_native_status(server, population)
         launch_id = (
             "sha256:"
             + hashlib.sha256(
@@ -3639,10 +3738,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     dependency_parser = commands.add_parser("recover-repaired-dependency-preflight")
     dependency_parser.add_argument("--task", required=True)
     dependency_parser.add_argument("--expected-revision", type=int, required=True)
+    native_parser = commands.add_parser("authoritative-status")
+    native_parser.add_argument("--history-task", action="append", default=[])
     status_parser = commands.add_parser("status")
     status_parser.add_argument("--require-ready", action="store_true")
     args = parser.parse_args(argv)
     try:
+        if args.command == "authoritative-status":
+            print(json.dumps(authoritative_status(history_tasks=args.history_task), sort_keys=True))
+            return 0
         if args.command == "recover-repaired-dependency-preflight":
             return recover_claim_verification(task_alias=args.task, expected_revision=args.expected_revision, repaired_dependency=True)
         if args.command == "recover-claim-verification":
