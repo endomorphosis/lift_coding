@@ -1,0 +1,41 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/prepared_canonical_block_contracts.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py"
+  ],
+  "claim": "Worker-authored datasets contracts that prepared canonical blocks retain exact supplied canonical bytes and their existing raw SHA-256 and CID under a profile binding; ordered batches bind those identities without changing them. Typed unavailable canonicalizer execution, storage/publication, proof-admission, and production-ZK cases are recorded without changing claim meaning. This receipt does not complete PCTDD-005, admit its own tests, or promote results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "canonicalization semantics; execution or semantics; proof admission; skip; storage writes; current-root publication; task completion; production ZK; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "batch": "PreparedCanonicalBlockBatch@1",
+    "block": "PreparedCanonicalBlock@1",
+    "canonical_bytes_preserved": true,
+    "canonical_cid_preserved": true,
+    "canonical_sha256_preserved": true,
+    "may_authorize_skip": false,
+    "ordered_batch_identity": true,
+    "production_admitted": false,
+    "raw_cid_profile": "cidv1-base32-raw-sha2-256"
+  },
+  "dependency_receipts": ["PCTDD-001"],
+  "limitations": {
+    "canonicalizer_execution": {"claim_unchanged": true, "production_admitted": false, "reason_code": "canonicalizer_not_invoked_by_preparation", "self_approved": false, "status": "typed_unavailable"},
+    "content_publication": {"claim_unchanged": true, "production_admitted": false, "reason_code": "prepared_block_has_no_storage_or_publication_authority", "self_approved": false, "status": "typed_unavailable"},
+    "production_zk": {"claim_unchanged": true, "production_admitted": false, "reason_code": "production_zk_key_ceremony_unavailable", "self_approved": false, "status": "typed_unavailable"},
+    "proof_admission": {"claim_unchanged": true, "production_admitted": false, "reason_code": "prepared_block_has_no_proof_admission_authority", "self_approved": false, "status": "typed_unavailable"}
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "task_id": "PCTDD-005",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
