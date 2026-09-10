@@ -1,0 +1,55 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/prepared_canonical_block.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py"
+  ],
+  "claim": "Worker-authored prepared canonical block and ordered batch contracts retain only exact existing canonical source bytes after recomputing their raw CIDv1 identity. They do not canonicalize new content or change byte/CID meaning. Typed unavailable successors are recorded without changing the claim. This receipt does not complete PCTDD-005, admit its own tests, or publish a root.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "canonicalize new content; alter bytes or CIDs; execution or semantics; storage; scheduling; proof; current-root publication; task completion; production ZK; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "batch": "PreparedCanonicalBlockBatch@1",
+    "block": "PreparedCanonicalBlock@1",
+    "cid_profile": "software-contract-cid-profile-v1 raw CIDv1/base32/sha2-256",
+    "existing_canonical_bytes_preserved": true,
+    "existing_canonical_cids_preserved": true,
+    "production_admitted": false
+  },
+  "dependency_receipts": ["PCTDD-001"],
+  "limitations": {
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "serial_wal_cas_publication": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "prepared_block_has_no_publication_authority",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "independently implement current-tree contracts and issue fresh controller-validated evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-005",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
