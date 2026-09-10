@@ -108,7 +108,10 @@ def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, 
     monkeypatch.setattr(m, '_BootstrapBroker', Child)
     monkeypatch.setattr(m, '_LiveMonitor', Child)
     monkeypatch.setattr(m, '_store_id', lambda board: 'store:test')
+    bindings = []
+    monkeypatch.setattr(m, '_bind_native_status', lambda server, population: bindings.append(population))
     assert m.launch() == runner_result
+    assert bindings == [population()]
     assert paths['bootstrap_receipt'].read_bytes() == historical
     after = paths['bootstrap_receipt'].stat()
     assert (after.st_ino, after.st_mtime_ns) == (before.st_ino, before.st_mtime_ns)
