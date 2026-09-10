@@ -788,6 +788,7 @@ def _runtime_paths(board: Any) -> dict[str, Path]:
     paths["doep031_recovery_authorization"] = paths["evidence"] / "bootstrap/doep-031-protected-control-plane-authorization.json"
     paths["doep031_recovery_receipt"] = paths["evidence"] / "bootstrap/doep-031-protected-control-plane-recovery.json"
     paths["bootstrap_receipt"] = paths["evidence"] / "bootstrap/bootstrap-materialization.json"
+    paths["launch_observation"] = paths["evidence"] / "runtime/launch-observation.json"
     paths["handoff_receipt"] = paths["evidence"] / "bootstrap/supervisor-handoff.json"
     paths["operator_pid"] = paths["state"] / "doep-handoff.pid"
     paths["owner_status"] = paths["owner"] / "quack-state-server.status.json"
@@ -2022,16 +2023,15 @@ def _seal_route_policy(
     )
     try:
         with TypedDatabaseTaskSource(client, owns_client=True) as source:
-            snapshot = source.snapshot()
-            page = source.list_tasks(limit=500)
-            if page.next_cursor:
-                raise HandoffError("DOEP population exceeds the bounded typed task page")
-            aliases = {task.task_alias for task in page.tasks}
             expected_aliases = {
                 str(task["task_alias"])
                 for task in population.get("tasks", ())
                 if isinstance(task, Mapping)
             }
+            snapshot, policy = source.seal_execution_route_snapshot(
+                {alias: GROK_CODEX_EXECUTION_MODE for alias in expected_aliases}
+            )
+            aliases = {entry.task_alias for entry in policy.entries}
             if aliases != expected_aliases or len(aliases) != 85:
                 raise HandoffError("typed task population differs from the sealed DOEP board")
             if (
@@ -2042,11 +2042,11 @@ def _seal_route_policy(
                 or snapshot.dependency_count != 233
             ):
                 raise HandoffError("typed snapshot differs from the sealed DOEP identities")
-            policy = source.seal_execution_route_policy(
-                {alias: GROK_CODEX_EXECUTION_MODE for alias in aliases}
-            )
             receipt = {
-                "schema": "ipfs_accelerate_py/agent-supervisor/doep-bootstrap-materialization@1",
+                "schema": "ipfs_accelerate_py/agent-supervisor/doep-launch-observation@1",
+                "completion_authoritative": False,
+                "source_adoption_authoritative": False,
+                "execution_route_policy": policy.public_summary(),
                 "program_id": PROGRAM_ID,
                 "verified_at": _utc_now(),
                 "objective_id": population.get("objective", {}).get("objective_id"),
@@ -2063,9 +2063,6 @@ def _seal_route_policy(
                 "plan_count": snapshot.plan_count,
                 "task_count": snapshot.task_count,
                 "dependency_count": snapshot.dependency_count,
-                "initial_ready_task_ids": [
-                    task.task_alias for task in source.ready_tasks(limit=85).tasks
-                ],
                 "state_authority": "DuckDB through exclusive QuackStateServer@1",
                 "ducklake_authority": False,
             }
@@ -3108,19 +3105,25 @@ def launch() -> int:
         identity = server.start()
         if not server.ready():
             raise HandoffError("Quack state owner did not become ready")
-        policy, bootstrap_receipt = _seal_route_policy(
+        policy, launch_observation = _seal_route_policy(
             server,
             board,
             population,
             objective_observation,
         )
-        _atomic_json(paths["bootstrap_receipt"], bootstrap_receipt)
         launch_id = (
             "sha256:"
             + hashlib.sha256(
                 f"{PROGRAM_ID}:{os.getpid()}:{identity.process_birth_id}:{time.time_ns()}".encode()
             ).hexdigest()
         )
+        # Resume observes the live typed state. It must never rewrite the
+        # historical bootstrap materialization or certify descendant source.
+        _atomic_json(paths["launch_observation"], {
+            **launch_observation,
+            "launch_id": launch_id,
+            "owner_identity": identity.to_dict(),
+        })
         listener = _listener()
         broker = _BootstrapBroker(
             listener=listener,
