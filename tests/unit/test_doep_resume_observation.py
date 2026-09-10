@@ -77,13 +77,17 @@ def test_route_observation_uses_only_the_paired_projection(monkeypatch, drift):
 
 
 @pytest.mark.parametrize('runner_result', [0, 17])
-def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, monkeypatch, runner_result):
+@pytest.mark.parametrize('history_only', [False, True])
+@pytest.mark.parametrize('history_failure', [False, True])
+def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, monkeypatch, runner_result, history_only, history_failure):
     m = module()
     from ipfs_accelerate_py.agent_supervisor.runtime import configured_board_scheduler as scheduler
     from ipfs_accelerate_py.agent_supervisor.runtime import multi_supervisor_runner as runner
     paths = {name: tmp_path / name for name in ('state', 'logs', 'evidence', 'owner', 'operator_pid', 'bootstrap_receipt', 'handoff_receipt', 'launch_observation')}
     historical = b'{"historical":"materialization","verified_at":"original"}\n'
     paths['bootstrap_receipt'].write_bytes(historical)
+    for name in ('handoff_receipt', 'launch_observation'):
+        paths[name].write_bytes(historical)
     before = paths['bootstrap_receipt'].stat()
     board = SimpleNamespace()
     identity = SimpleNamespace(process_birth_id='birth:test', to_dict=lambda: {'server_id': 'owner:test', 'process_birth_id': 'birth:test'})
@@ -92,7 +96,7 @@ def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, 
     class Child:
         failure = ''
         def __init__(self, **kwargs):
-            pass
+            assert not (history_only or history_failure), 'history inspection must complete before lane/broker/monitor machinery'
         def start(self):
             pass
         def stop(self):
@@ -104,14 +108,32 @@ def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, 
     monkeypatch.setattr(m, '_objective_observation', lambda *args: {'revision': 1})
     monkeypatch.setattr(m, '_build_server', lambda *args: server)
     monkeypatch.setattr(m, '_seal_route_policy', lambda *args: (policy(), {'schema': 'ipfs_accelerate_py/agent-supervisor/doep-launch-observation@1', 'completion_authoritative': False, 'source_adoption_authoritative': False}))
+    def observe(*args, **kwargs):
+        if history_failure:
+            raise m.HandoffError('unknown native history')
+        return {
+            'observation_cid': 'history:test', 'completion_authoritative': False,
+            'source_adoption_authoritative': False, 'recovery_authoritative': False,
+        }
+    monkeypatch.setattr(m, '_observe_task_histories', observe)
     monkeypatch.setattr(m, '_listener', lambda: SimpleNamespace(fileno=lambda: 99))
     monkeypatch.setattr(m, '_BootstrapBroker', Child)
     monkeypatch.setattr(m, '_LiveMonitor', Child)
     monkeypatch.setattr(m, '_store_id', lambda board: 'store:test')
-    assert m.launch() == runner_result
+    if history_failure:
+        with pytest.raises(m.HandoffError, match='unknown native history'):
+            m.launch(observe_history_only=history_only)
+    else:
+        assert m.launch(observe_history_only=history_only) == (0 if history_only else runner_result)
     assert paths['bootstrap_receipt'].read_bytes() == historical
     after = paths['bootstrap_receipt'].stat()
     assert (after.st_ino, after.st_mtime_ns) == (before.st_ino, before.st_mtime_ns)
+    if history_only or history_failure:
+        assert all(paths[name].read_bytes() == historical for name in ('handoff_receipt', 'launch_observation'))
+        assert len(list((paths['evidence'] / 'runtime/task-history').glob('*.json'))) == (0 if history_failure else 1)
+        assert stopped == ['owner']
+        assert not paths['operator_pid'].exists()
+        return
     observation = json.loads(paths['launch_observation'].read_text())
     handoff = json.loads(paths['handoff_receipt'].read_text())
     assert observation['launch_id'] == handoff['launch_id']

@@ -47,6 +47,9 @@ GRANT_TTL_SECONDS: Final = 86_400.0
 LIVE_MONITOR_INTERVAL_SECONDS: Final = 5.0
 LIVE_MONITOR_MAX_CONSECUTIVE_FAILURES: Final = 3
 LIVE_MONITOR_STOP_TIMEOUT_SECONDS: Final = 35.0
+HISTORY_OBSERVER_CLIENT_ID: Final = "doep-state-owner:history-observer"
+HISTORY_TASK_ALIASES: Final = ("DOEP-031", "DOEP-032", "DOEP-041", "DOEP-063")
+HISTORY_OBSERVATION_MAX_BYTES: Final = 64 * 1024 * 1024
 OPERATOR_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-bootstrap-handoff@1"
 BROKER_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-bootstrap-broker@1"
 LIVE_STATUS_SCHEMA: Final = "ipfs_accelerate_py/agent-supervisor/doep-live-status@1"
@@ -822,6 +825,15 @@ def _make_client(server: Any, board: Any, *, client_id: str) -> tuple[Any, Any, 
         "executor_retry_cooldown_page",
         "executor_retry_cooldown_by_task",
     )
+    if client_id == HISTORY_OBSERVER_CLIENT_ID:
+        # This capability never leaves the native owner process. It has no
+        # commands, executor admission, lease, queue or recovery authority.
+        allowed = (
+            "whoami_metadata",
+            "load_store_generation",
+            "executor_task_projection_by_identity",
+            "executor_task_revision_history_page",
+        )
     token, grant = server.issue_typed_client_grant_record(
         client_id=client_id,
         process_birth_id=identity.process_birth_id,
@@ -852,6 +864,134 @@ def _make_client(server: Any, board: Any, *, client_id: str) -> tuple[Any, Any, 
         server.revoke_typed_client_grant(grant.grant_id)
         raise
     return client, grant, token
+
+
+def _history_source_observation() -> dict[str, Any]:
+    """Describe exact clean source without issuing source or task acceptance."""
+    result = {}
+    for relative in (".", "external/ipfs_accelerate", "external/ipfs_datasets", "external/ipfs_kit"):
+        repository = ROOT / relative
+        head = _git_read(repository, "rev-parse", "HEAD")
+        tree = _git_read(repository, "rev-parse", "HEAD^{tree}")
+        if _git_read(repository, "status", "--porcelain=v1", "--untracked-files=all"):
+            raise HandoffError("history observation requires clean current source")
+        if relative != ".":
+            if _git_read(ROOT, "rev-parse", "HEAD:" + relative) != head:
+                raise HandoffError("history observation source gitlink differs")
+        result[relative] = {"head": head, "tree": tree}
+    return result
+
+
+def _observe_task_histories(
+    server: Any, board: Any, population: Mapping[str, Any], *, launch_id: str,
+) -> dict[str, Any]:
+    """Read the four unresolved histories before dispatch, using our own grant.
+
+    Canonical history validation remains in TypedDatabaseTaskSource. The outer
+    generation sandwich additionally prevents four individually stable task
+    histories from being presented as one observation across a transition.
+    This is evidence for independent reconciliation, never a retry grant,
+    no-effects assertion, source-admission receipt or completion certificate.
+    """
+    from ipfs_accelerate_py.agent_supervisor.task_sources.control_plane_contracts import (
+        content_identity,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.intent_repository import (
+        TASK_REVISION_HISTORY_PROJECTION_SCHEMA,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_database_task_source import (
+        TypedDatabaseTaskSource,
+    )
+
+    if not re.fullmatch(r"sha256:[0-9a-f]{64}", launch_id):
+        raise HandoffError("history observation has no exact launch identity")
+    selected: dict[str, str] = {}
+    for task in population.get("tasks", ()):
+        if not isinstance(task, Mapping) or task.get("task_alias") not in HISTORY_TASK_ALIASES:
+            continue
+        alias = str(task["task_alias"])
+        cid = str(task.get("task_cid") or "")
+        if alias in selected or not re.fullmatch(r"sha256:[0-9a-f]{64}", cid):
+            raise HandoffError("history task population is ambiguous or invalid")
+        selected[alias] = cid
+    if set(selected) != set(HISTORY_TASK_ALIASES) or len(set(selected.values())) != len(selected):
+        raise HandoffError("history task population differs from the sealed scope")
+    identity = server.identity
+    if identity is None or not server.ready():
+        raise HandoffError("history observation has no ready native owner")
+    owner = identity.to_dict()
+    source_identity = _history_source_observation()
+    client, grant, _token = _make_client(server, board, client_id=HISTORY_OBSERVER_CLIENT_ID)
+    try:
+        with TypedDatabaseTaskSource(client, owns_client=True) as source:
+            for _attempt in range(4):
+                before = client.load_generation()
+                histories = {}
+                for alias in HISTORY_TASK_ALIASES:
+                    history = dict(source.task_revision_history_projection(selected[alias]))
+                    unsigned = {key: value for key, value in history.items() if key != "projection_cid"}
+                    if (
+                        set(history) != {"schema", "task_cid", "revisions", "projection_cid"}
+                        or history["schema"] != TASK_REVISION_HISTORY_PROJECTION_SCHEMA
+                        or history["task_cid"] != selected[alias]
+                        or history["projection_cid"] != content_identity(unsigned)
+                    ):
+                        raise HandoffError("typed task history identity differs")
+                    histories[alias] = history
+                after = client.load_generation()
+                if before.content_id == after.content_id:
+                    break
+            else:
+                raise HandoffError("typed task history changed during bounded observation")
+        if (
+            not server.ready() or server.identity is None
+            or server.identity.to_dict() != owner
+            or _history_source_observation() != source_identity
+        ):
+            raise HandoffError("history source or owner identity changed")
+        observation = {
+            "schema": "ipfs_accelerate_py/agent-supervisor/doep-task-history-observation@1",
+            "program_id": PROGRAM_ID,
+            "launch_id": launch_id,
+            "observed_at": _utc_now(),
+            "owner_identity": owner,
+            "source_observation": source_identity,
+            "store_generation": after.to_record(),
+            "task_histories": histories,
+            "credential_transport": "native_owner_pid_bound_typed_grant",
+            "completion_authoritative": False,
+            "source_adoption_authoritative": False,
+            "recovery_authoritative": False,
+        }
+        observation["observation_cid"] = content_identity(observation)
+        if len(_canonical_json_bytes(observation)) > HISTORY_OBSERVATION_MAX_BYTES:
+            raise HandoffError("history observation exceeds its byte bound")
+        return observation
+    finally:
+        server.revoke_typed_client_grant(grant.grant_id)
+
+
+def _publish_history_observation(path: Path, observation: Mapping[str, Any]) -> None:
+    """Publish new bounded evidence without opening or replacing an incumbent."""
+    encoded = _canonical_json_bytes(observation) + b"\n"
+    if len(encoded) > HISTORY_OBSERVATION_MAX_BYTES:
+        raise HandoffError("history observation exceeds its publication byte bound")
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    temporary = path.with_name(f".{path.name}.tmp.{os.getpid()}.{threading.get_ident()}")
+    descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    try:
+        with os.fdopen(descriptor, "wb") as stream:
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        try:
+            os.link(temporary, path, follow_symlinks=False)
+        except FileExistsError as exc:
+            # Even an apparently identical incumbent is retained unchanged.
+            # In particular, never open a FIFO/symlink or infer past evidence.
+            raise HandoffError("history observation already exists") from exc
+    finally:
+        temporary.unlink()
 
 
 def _make_blocked_retry_recovery_client(
@@ -3063,7 +3203,7 @@ def _load() -> tuple[Any, dict[str, Any], dict[str, Path]]:
     return board, population, paths
 
 
-def launch() -> int:
+def launch(*, observe_history_only: bool = False) -> int:
     from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
         configured_board_launch_plan,
     )
@@ -3117,6 +3257,31 @@ def launch() -> int:
                 f"{PROGRAM_ID}:{os.getpid()}:{identity.process_birth_id}:{time.time_ns()}".encode()
             ).hexdigest()
         )
+        # The native owner can read exact histories with its own narrowly
+        # admitted client before any lane receives a dispatch capability.
+        history_observation = _observe_task_histories(
+            server, board, population, launch_id=launch_id,
+        )
+        history_path = paths["evidence"] / "runtime/task-history" / (launch_id[7:] + ".json")
+        _publish_history_observation(history_path, history_observation)
+        if observe_history_only:
+            # A qualified stopped-owner inspection can obtain exact history
+            # before an operator decides whether the native service may
+            # resume. It issues no lane grant and preserves prior handoff,
+            # launch-observation and bootstrap files unchanged.
+            print(json.dumps({
+                "schema": OPERATOR_SCHEMA,
+                "command": "observe-task-histories",
+                "program_id": PROGRAM_ID,
+                "launch_id": launch_id,
+                "history_path": str(history_path),
+                "observation_cid": history_observation["observation_cid"],
+                "completion_authoritative": False,
+                "source_adoption_authoritative": False,
+                "recovery_authoritative": False,
+                "lane_dispatch_started": False,
+            }, sort_keys=True), flush=True)
+            return 0
         # Resume observes the live typed state. It must never rewrite the
         # historical bootstrap materialization or certify descendant source.
         _atomic_json(paths["launch_observation"], {
@@ -3191,6 +3356,13 @@ def launch() -> int:
             "credential_transport": "private_inherited_socket",
             "raw_token_in_argv_or_environment": False,
             "canonical_runner": "configured_board_scheduler -> multi_supervisor_runner",
+            "task_history_observation": {
+                "path": str(history_path),
+                "observation_cid": history_observation["observation_cid"],
+                "completion_authoritative": False,
+                "source_adoption_authoritative": False,
+                "recovery_authoritative": False,
+            },
         }
         _atomic_json(paths["handoff_receipt"], handoff)
         print(json.dumps(handoff, sort_keys=True), flush=True)
@@ -3453,6 +3625,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("run")
+    commands.add_parser("observe-task-histories")
     commands.add_parser("recover-blocked-lock-timeout")
     commands.add_parser("recover-doep-031-protected-control-plane-update")
     recovery_parser = commands.add_parser("recover-claim-verification")
@@ -3471,6 +3644,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return recover_claim_verification(task_alias=args.task, expected_revision=args.expected_revision)
         if args.command == "run":
             return launch()
+        if args.command == "observe-task-histories":
+            return launch(observe_history_only=True)
         if args.command == "recover-blocked-lock-timeout":
             return recover_blocked_lock_timeout()
         if args.command == "recover-doep-031-protected-control-plane-update":
