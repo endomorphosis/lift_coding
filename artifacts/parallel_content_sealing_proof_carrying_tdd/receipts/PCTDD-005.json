@@ -1,0 +1,40 @@
+{
+  "schema": "pctdd/task-receipt@1",
+  "task_id": "PCTDD-005",
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "status": "implementation_submitted_pending_controller_validation",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/prepared_canonical_block_contracts.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py"
+  ],
+  "dependency_receipts": ["PCTDD-001"],
+  "claim_class": "IntegrityCommitment",
+  "claim": "Worker-authored PreparedCanonicalBlock@1 and PreparedCanonicalBlockBatch@1 contracts bind exact pre-existing canonical bytes to recomputed raw CIDv1 and SHA-256 identities, with deterministic ordered batching. Golden source vectors prove that preparation preserves bytes and CIDs. This receipt does not canonicalize, execute, prove, publish, admit, or complete the task.",
+  "claim_does_not": "canonicalization; execution or semantics; proof; skip; storage write; WAL/CAS publication; admission; task completion; production ZK",
+  "contracts": {
+    "prepared_canonical_block": "PreparedCanonicalBlock@1",
+    "prepared_canonical_block_batch": "PreparedCanonicalBlockBatch@1",
+    "content_profile": "software-contract-cid-profile-v1",
+    "preserves_existing_canonical_bytes": true,
+    "preserves_existing_raw_cids": true,
+    "may_authorize_skip": false,
+    "publication_authority": false,
+    "production_admitted": false
+  },
+  "limitations": {
+    "canonicalization": {"status": "typed_unavailable", "reason_code": "prepared_block_does_not_canonicalize", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "immutable_storage": {"status": "typed_unavailable", "reason_code": "immutable_store_not_invoked", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "publication": {"status": "typed_unavailable", "reason_code": "wal_cas_publication_not_authorized", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "production_zk": {"status": "typed_unavailable", "reason_code": "production_zk_key_ceremony_unavailable", "claim_unchanged": true, "production_admitted": false, "self_approved": false}
+  },
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1",
+  "worker_authored_test_is_sufficient_alone": false,
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "self_approval": false,
+  "publication_authority_invoked": false,
+  "markdown_non_authoritative": true
+}
