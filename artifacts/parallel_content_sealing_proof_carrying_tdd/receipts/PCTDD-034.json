@@ -2,8 +2,6 @@
   "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
   "changed_paths": [
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-034.json",
-    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
-    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/aggregate_test_pass_statement.py",
     "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py"
   ],
   "claim": "Worker-authored aggregate public-input contracts bind the complete exact selected receipt-leaf population and preserve TestPassStatementV1 without upgrading receipt-leaf claims. Typed unavailable aggregate ZK, production ZK, runner attestation, and direct execution are recorded without changing claim meaning. This receipt does not complete PCTDD-034 or admit its own tests.",
