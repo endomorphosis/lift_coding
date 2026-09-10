@@ -1,0 +1,116 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-005.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/__init__.py",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/prepared_canonical_block_contracts.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_005_prepared_canonical_block.py"
+  ],
+  "claim": "Worker-authored contracts that prepared canonical blocks preserve existing canonical bytes and CIDs under golden vectors. Typed unavailable production ZK, key ceremony, native batch hashing, direct-execution, serial WAL/CAS publication, chunk-manifest implementation, hash-memo store, and source-object identity bridging cases are recorded without changing claim meaning. This receipt does not complete PCTDD-005, admit its own tests, or promote g5 results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; skip; current-root publication; task completion; production ZK; native batch hashing; Git blob identity; filesystem-metadata reuse; chunk-manifest replacement of the raw full-stream CID; composition of stream SHA-256 from independent chunk hashes; persistent memo storage; source-object identity bridging; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "canonical_profile_binding": "CanonicalProfileBinding@1",
+    "chunk_manifest_binding": "ChunkManifestBinding@1",
+    "chunk_manifest_replaces_raw_full_stream_cid": false,
+    "content_profile": "software-contract-cid-profile-v1",
+    "filesystem_metadata_is_candidate_only": true,
+    "git_blob_oid_is_memo_lookup_key_only": true,
+    "may_authorize_skip": false,
+    "prepared_canonical_batch": "PreparedCanonicalBatch@1",
+    "prepared_canonical_block": "PreparedCanonicalBlock@1",
+    "production_admitted": false,
+    "publication_authority_invoked": false,
+    "raw_sha256_composed_from_chunk_hashes": false,
+    "required_profile_fields": [
+      "profile_id",
+      "codec",
+      "multicodec",
+      "multihash",
+      "cid_version",
+      "multibase",
+      "ordering",
+      "normalization"
+    ],
+    "source_profile_mapping": "SourceProfileMapping@1"
+  },
+  "dependency_receipts": [
+    "PCTDD-001"
+  ],
+  "limitations": {
+    "chunk_manifest_implementation": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "chunk_manifest_implementation_deferred_to_pctdd_009",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "direct_execution_profile": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "direct_execution_profile_optional",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "key_ceremony": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "native_batch_hasher": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "native_batch_hasher_not_installed",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "production_zk": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "production_zk_key_ceremony_unavailable",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "serial_wal_cas_publication": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "contracts_have_no_publication_authority",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "source_object_identity_bridging": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "source_object_identity_bridging_deferred_to_pctdd_006",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    },
+    "verified_hash_memo_store": {
+      "claim_unchanged": true,
+      "production_admitted": false,
+      "reason_code": "hash_memo_store_deferred_to_pctdd_007_008",
+      "self_approved": false,
+      "status": "typed_unavailable"
+    }
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "predecessor_generation": "pctdd-v1-g5",
+  "predecessor_rescue_candidate": {
+    "admitted": false,
+    "application_policy": "no g5 rescue candidate; independently implement current-tree contracts and issue fresh g6 evidence",
+    "classification": "none"
+  },
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-005",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-005@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
