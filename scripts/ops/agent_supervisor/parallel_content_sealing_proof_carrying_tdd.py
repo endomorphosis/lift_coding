@@ -2498,6 +2498,26 @@ def main(argv: Sequence[str] | None = None) -> int:
     if not config_path.is_absolute():
         config_path = ROOT / config_path
     try:
+        if arguments.command == "resume" or (
+            arguments.command == "launch" and arguments.real
+        ):
+            # Delegate the complete native operator before owner credentials
+            # or inherited admission descriptors exist. Its inner invocation
+            # repeats all original source, owner and canonical task checks.
+            _ensure_import_path()
+            from ipfs_accelerate_py.agent_supervisor.runtime.durable_launch import (
+                delegate_repair_service_launch,
+            )
+
+            try:
+                delegated = delegate_repair_service_launch(
+                    [sys.executable, str(Path(__file__).resolve()),
+                     *(sys.argv[1:] if argv is None else argv)]
+                )
+            except RuntimeError as exc:
+                raise OperatorError("native launch lifetime admission unavailable") from exc
+            if delegated is not None:
+                return delegated
         if arguments.command == "validate":
             result = validate()
         elif arguments.command == "materialize":
