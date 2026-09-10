@@ -3296,6 +3296,7 @@ def authoritative_status(*, history_tasks: Sequence[str] = ()) -> dict[str, Any]
             "tasks": tasks, "leases": relations["leases"]["rows"],
             "completion_snapshot": snapshot["completion_snapshot"],
             "closeout_snapshot": dict(snapshot), "task_histories": histories,
+            "store_generation": after.to_record(),
             "required_goal_count": len(population["goals"]),
             "completion_authority": False,
             "completion_gate": "sealed_goal_and_terminal_receipt_review_required",
@@ -3725,6 +3726,19 @@ def recover_claim_verification(*, task_alias: str, expected_revision: int, repai
                 server.stop()
 
 
+def _retained_pool_source_admission() -> dict[str, Any]:
+    """Negative release diagnostics still require ordinary current-root admission."""
+    from ipfs_accelerate_py.agent_supervisor.runtime.configured_board_scheduler import (
+        preflight_configured_board,
+    )
+    board, _population, _paths = _load()
+    before = _history_source_observation()
+    result = preflight_configured_board(board)
+    if result.get("valid") is not True or _history_source_observation() != before:
+        raise HandoffError("retained-pool observation source is not currently admitted")
+    return {"source_admitted": True, "source_observation": before}
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -3740,10 +3754,27 @@ def main(argv: Sequence[str] | None = None) -> int:
     dependency_parser.add_argument("--expected-revision", type=int, required=True)
     native_parser = commands.add_parser("authoritative-status")
     native_parser.add_argument("--history-task", action="append", default=[])
+    admission_parser = commands.add_parser("retained-pool-release-admission")
+    admission_parser.add_argument("--request-json", type=Path, required=True)
     status_parser = commands.add_parser("status")
     status_parser.add_argument("--require-ready", action="store_true")
     args = parser.parse_args(argv)
     try:
+        if args.command == "retained-pool-release-admission":
+            import importlib.util
+            specification = importlib.util.spec_from_file_location(
+                "doep_retained_pool_admission", Path(__file__).with_name("retained_pool_admission.py"))
+            if specification is None or specification.loader is None:
+                raise HandoffError("native retained-pool admission module is unavailable")
+            admission = importlib.util.module_from_spec(specification)
+            specification.loader.exec_module(admission)
+            _board, _population, paths = _load()
+            result = admission.release_admission_file(
+                args.request_json, repo_root=ROOT, runtime_root=paths["root"],
+                observe_status=authoritative_status, observe_source=_retained_pool_source_admission,
+            )
+            print(json.dumps(result, sort_keys=True))
+            return 0 if result["disposition"] == "deferred" else 2
         if args.command == "authoritative-status":
             print(json.dumps(authoritative_status(history_tasks=args.history_task), sort_keys=True))
             return 0
