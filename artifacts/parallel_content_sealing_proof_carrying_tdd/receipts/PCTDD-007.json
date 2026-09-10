@@ -1,0 +1,40 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-007.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/hash_memo_contracts.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_007_hash_memo_contracts.py"
+  ],
+  "claim": "Worker-authored datasets contracts for persistent verified hash memos. The versioned envelope binds its established source and canonical hash identities, every authority-relevant profile, and every authority-relevant invalidator; untrusted stored bytes are canonical-decoded and reverified. Typed unavailable store, reuse-admission, publication, production-ZK, and direct-execution cases are recorded without changing claim meaning. This receipt does not complete PCTDD-007, admit its own tests, or promote results.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "canonicalization; CID derivation or replacement; execution or semantics; skip; reuse admission; storage; WAL/CAS; current-root publication; production ZK; scheduler or completion authority",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-007@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "hash_memo": "VerifiedHashMemo@1",
+    "hash_memo_key": "HashMemoKey@1",
+    "hash_memo_invalidator": "HashMemoInvalidator@1",
+    "may_authorize_reuse": false,
+    "production_admitted": false,
+    "required_invalidators": ["source_bytes", "source_identity", "canonicalization_profile", "hash_profile", "cid_profile", "content_profile", "policy"],
+    "required_profile_bindings": ["source_identity_profile", "canonicalization_profile", "hash_profile", "cid_profile", "content_profile"],
+    "verified_on_persistent_read": true
+  },
+  "dependency_receipts": ["PCTDD-001", "PCTDD-003"],
+  "limitations": {
+    "direct_execution_profile": {"claim_unchanged": true, "production_admitted": false, "reason_code": "direct_execution_profile_optional", "self_approved": false, "status": "typed_unavailable"},
+    "memo_reuse_admission": {"claim_unchanged": true, "production_admitted": false, "reason_code": "memo_has_no_execution_authority", "self_approved": false, "status": "typed_unavailable"},
+    "memo_store": {"claim_unchanged": true, "production_admitted": false, "reason_code": "persistent_memo_store_not_implemented", "self_approved": false, "status": "typed_unavailable"},
+    "production_zk": {"claim_unchanged": true, "production_admitted": false, "reason_code": "production_zk_key_ceremony_unavailable", "self_approved": false, "status": "typed_unavailable"},
+    "publication": {"claim_unchanged": true, "production_admitted": false, "reason_code": "memo_has_no_publication_authority", "self_approved": false, "status": "typed_unavailable"}
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "task_id": "PCTDD-007",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-007@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
