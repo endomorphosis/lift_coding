@@ -1,0 +1,31 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-006.json",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/source_object_identity.py",
+    "external/ipfs_accelerate/test/api/parallel_content_sealing/test_pctdd_006_source_object_identity.py"
+  ],
+  "claim": "Worker-authored source-object identity bridge: a Git blob OID can key an in-memory memo only after exact Git object framing revalidates the supplied bytes. Filesystem metadata remains candidate-only. This receipt does not complete PCTDD-006, admit its own tests, invoke publication, or promote an unavailable capability.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "execution or semantics; CID substitution; storage or publication; task completion; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "dependency_receipts": ["PCTDD-001"],
+  "limitations": {
+    "git_blob_oid_absent": {"status": "typed_unavailable", "reason_code": "git_blob_oid_not_supplied", "production_admitted": false, "claim_unchanged": true, "self_approved": false},
+    "git_blob_oid_malformed": {"status": "typed_unavailable", "reason_code": "git_blob_oid_malformed", "production_admitted": false, "claim_unchanged": true, "self_approved": false},
+    "production_zk": {"status": "typed_unavailable", "reason_code": "production_zk_key_ceremony_unavailable", "production_admitted": false, "claim_unchanged": true, "self_approved": false},
+    "serial_wal_cas_publication": {"status": "typed_unavailable", "reason_code": "source_identity_bridge_has_no_publication_authority", "production_admitted": false, "claim_unchanged": true, "self_approved": false},
+    "sealed_quack_extension": {"status": "typed_unavailable", "reason_code": "sealed_quack_extension_path_unavailable", "production_admitted": false, "claim_unchanged": true, "self_approved": false}
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "store_generation": "pctdd-v1-g6",
+  "task_id": "PCTDD-006",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-006@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
