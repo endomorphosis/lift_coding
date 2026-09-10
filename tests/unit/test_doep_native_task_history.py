@@ -148,10 +148,18 @@ def test_history_observation_byte_bound_revokes_grant(monkeypatch):
 
 
 def test_history_publication_is_bounded_and_never_replaces_evidence(tmp_path, monkeypatch):
+    import stat
     m = module()
     target = tmp_path / 'history.json'
     value = {'history': 'original unknown callback'}
+    synced = []
+    original_fsync = os.fsync
+    def fsync(descriptor):
+        synced.append(stat.S_ISDIR(os.fstat(descriptor).st_mode))
+        return original_fsync(descriptor)
+    monkeypatch.setattr(m.os, 'fsync', fsync)
     m._publish_history_observation(target, value)
+    assert synced == [False, True], 'file then directory durability must precede success'
     original = target.read_bytes()
     identity = target.stat()
     with pytest.raises(m.HandoffError, match='already exists'):

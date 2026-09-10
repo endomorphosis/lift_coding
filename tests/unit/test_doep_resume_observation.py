@@ -78,7 +78,7 @@ def test_route_observation_uses_only_the_paired_projection(monkeypatch, drift):
 
 @pytest.mark.parametrize('runner_result', [0, 17])
 @pytest.mark.parametrize('history_only', [False, True])
-@pytest.mark.parametrize('history_failure', [False, True])
+@pytest.mark.parametrize('history_failure', [False, 'read', 'publication'])
 def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, monkeypatch, runner_result, history_only, history_failure):
     m = module()
     from ipfs_accelerate_py.agent_supervisor.runtime import configured_board_scheduler as scheduler
@@ -109,13 +109,17 @@ def test_full_launch_preserves_bootstrap_and_propagates_runner_result(tmp_path, 
     monkeypatch.setattr(m, '_build_server', lambda *args: server)
     monkeypatch.setattr(m, '_seal_route_policy', lambda *args: (policy(), {'schema': 'ipfs_accelerate_py/agent-supervisor/doep-launch-observation@1', 'completion_authoritative': False, 'source_adoption_authoritative': False}))
     def observe(*args, **kwargs):
-        if history_failure:
+        if history_failure == 'read':
             raise m.HandoffError('unknown native history')
         return {
             'observation_cid': 'history:test', 'completion_authoritative': False,
             'source_adoption_authoritative': False, 'recovery_authoritative': False,
         }
     monkeypatch.setattr(m, '_observe_task_histories', observe)
+    if history_failure == 'publication':
+        def publish(*args, **kwargs):
+            raise m.HandoffError('unknown native history publication durability')
+        monkeypatch.setattr(m, '_publish_history_observation', publish)
     monkeypatch.setattr(m, '_listener', lambda: SimpleNamespace(fileno=lambda: 99))
     monkeypatch.setattr(m, '_BootstrapBroker', Child)
     monkeypatch.setattr(m, '_LiveMonitor', Child)

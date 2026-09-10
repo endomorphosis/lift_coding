@@ -990,6 +990,11 @@ def _publish_history_observation(path: Path, observation: Mapping[str, Any]) -> 
             # Even an apparently identical incumbent is retained unchanged.
             # In particular, never open a FIFO/symlink or infer past evidence.
             raise HandoffError("history observation already exists") from exc
+        directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        try:
+            os.fsync(directory)
+        finally:
+            os.close(directory)
     finally:
         temporary.unlink()
 
