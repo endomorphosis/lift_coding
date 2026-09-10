@@ -1,0 +1,20 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": ["artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-035.json", "external/ipfs_accelerate/test/api/proof_carrying_tdd/test_pctdd_035_aggregate_zk_adapter.py"],
+  "claim": "Worker-authored aggregate ZK adapter contracts permit proof generation only through an independently admitted real backend and key; all other production proving cases are typed unavailable without changing receipt-leaf claim meaning.",
+  "claim_class": "ReceiptAggregationZkProof",
+  "claim_does_not": "execution or semantics; skip; CPython execution; self-approval; task completion; proof admission without controller authority; upgrade of receipt leaf evidence",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-035@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {"adapter": "AggregateZkBackendAdapter@1", "proof": "AggregateSelectedTestZkProof@1", "circuit_id": "circuit:aggregate-selected-test-pass@1", "only_admitted_real_backend_and_key_may_prove": true, "cannot_exceed_leaf_evidence": true, "may_authorize_skip": false},
+  "dependency_receipts": ["PCTDD-033", "PCTDD-034"],
+  "limitations": {"aggregate_zk_backend_not_admitted": {"status": "typed_unavailable", "production_admitted": false, "claim_unchanged": true, "self_approved": false}, "aggregate_zk_key_not_admitted": {"status": "typed_unavailable", "production_admitted": false, "claim_unchanged": true, "self_approved": false}, "aggregate_zk_backend_not_real": {"status": "typed_unavailable", "production_admitted": false, "claim_unchanged": true, "self_approved": false}},
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "task_id": "PCTDD-035",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-035@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
