@@ -1,0 +1,42 @@
+{
+  "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
+  "changed_paths": [
+    "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-034.json",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/pctdd/aggregate_test_pass_statement.py",
+    "external/ipfs_datasets/tests/unit/logic/zkp/pctdd/test_pctdd_034_aggregate_test_pass_statement.py"
+  ],
+  "claim": "Worker-authored AggregateTestPassPublicInputs@1 derives exact aggregate population completeness from AggregateTestBatch@1 without inspecting, asserting, or upgrading TestPassStatementV1 receipt leaves. Typed unavailable aggregate ZK, receipt-outcome verification, production ZK, and completion authority cases preserve this claim.",
+  "claim_class": "IntegrityCommitment",
+  "claim_does_not": "receipt verification or outcome inspection; execution; aggregate pass claim; skip; proof verification; production admission; task completion; upgrade of receipt leaves; self-approval",
+  "completion_authoritative": false,
+  "completion_authority": "controller-owned sealed profile pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1 plus DuckDB/Quack compare-and-set; this receipt is not completion",
+  "contracts": {
+    "aggregate_test_pass_public_inputs": "AggregateTestPassPublicInputs@1",
+    "aggregate_test_pass_statement": "AggregateTestPassStatement@1",
+    "binds_completeness": true,
+    "binds_count": true,
+    "binds_ordered_leaf_root": true,
+    "binds_selection_root": true,
+    "leaf_statement": "TestPassStatementV1",
+    "leaf_statement_version": 1,
+    "may_authorize_skip": false,
+    "production_admitted": false,
+    "receipt_claim_upgraded": false
+  },
+  "dependency_receipts": ["PCTDD-026", "PCTDD-033"],
+  "limitations": {
+    "aggregate_selected_test_zk": {"status": "typed_unavailable", "reason_code": "aggregate_selected_test_zk_missing", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "completion_authority": {"status": "typed_unavailable", "reason_code": "controller_validation_required", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "receipt_outcome_verification": {"status": "typed_unavailable", "reason_code": "receipt_leaf_claim_not_upgraded", "claim_unchanged": true, "production_admitted": false, "self_approved": false},
+    "production_zk": {"status": "typed_unavailable", "reason_code": "production_zk_key_ceremony_unavailable", "claim_unchanged": true, "production_admitted": false, "self_approved": false}
+  },
+  "markdown_non_authoritative": true,
+  "plan_revision": "PCTDD-PLAN-V1.1",
+  "publication_authority_invoked": false,
+  "schema": "pctdd/task-receipt@1",
+  "self_approval": false,
+  "status": "implementation_submitted_pending_controller_validation",
+  "task_id": "PCTDD-034",
+  "validation_profile": "pctdd-validation/PCTDD-PLAN-V1.1/PCTDD-034@1",
+  "worker_authored_test_is_sufficient_alone": false
+}
