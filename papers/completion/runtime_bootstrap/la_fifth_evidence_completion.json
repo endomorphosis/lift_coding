@@ -1,0 +1,827 @@
+{
+  "schema": "paper-fifth-launch-evidence-maintenance/v1",
+  "paper": "law_to_action",
+  "started_at": "2026-09-11T17:30:21.832188+00:00",
+  "apply": true,
+  "provider_invoked": false,
+  "source_commit": "35070174b78353749152f290521c000a2612a07c",
+  "audit_sha256": "7cd570ee159e72fb72cf17ffe5b212eb2504c1ad746c9f8a61c7a56720bdbef4",
+  "validations": {
+    "LA-002": {
+      "argv": [
+        "python3",
+        "scripts/paper_supervisors.py",
+        "verify-task",
+        "--paper",
+        "law_to_action",
+        "--task",
+        "LA-002"
+      ],
+      "started_at": "2026-09-11T17:30:21.982217+00:00",
+      "finished_at": "2026-09-11T17:30:25.702770+00:00",
+      "exit_code": 0,
+      "validation_log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la_fifth_evidence_completion-LA-002-verify.json",
+      "validation_log_sha256": "2e1df3a167316d7990e495070e2ac70089fc75e6e6c15c1c7cafc1259bf866b4",
+      "receipt_path": "papers/completion/law_to_action/receipts/LA-002.json",
+      "receipt_sha256": "625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+      "acceptance_criteria": [
+        {
+          "criterion": "Matrix covers each contribution, every logic/backend family, trained normalizer claim and numerical corpus claim.",
+          "status": "met",
+          "explanation": "The matrix audits all four draft contributions; the full baseline and Wave-2 registry lists; seven unqualified backend kinds; deterministic versus optional-provider normalizer behavior; and each reported municipal, Netherlands, Belgium, CVEfixes, and SkillCenter quantity. It records these as inspected, declared-only, fixture-only, unsupported, or future work rather than research results.",
+          "evidence": [
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+          ]
+        },
+        {
+          "criterion": "Explicit OFF/default in-memory-store and fixture-versus-live limitations recorded.",
+          "status": "met",
+          "explanation": "The matrix and scope identify OFF pass-through, the process-local InMemoryCapabilityConsumptionStore default, non-blocking AUDIT/SHADOW modes, and the fixture-only CVE, admissibility, MCP, and enforcement-test surfaces. They reserve live-hub, real-token, durable-state, and transport claims for later direct evidence.",
+          "evidence": [
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+          ]
+        },
+        {
+          "criterion": "Bounded paper scope, protected routes and essential versus optional experiments are selected.",
+          "status": "met",
+          "explanation": "scope.md selects explicit ENFORCE mediation at SupervisorPreInvocationEnforcement.authorize_and_delegate around one benchmark-owned sandbox handler, with generated-code-effect correlation as an input only. It lists the prerequisite protocol, source, route, backend, fixed-action, and durable-state experiments, and excludes legal fidelity, trained normalization, all-family backends, live network parity, and closed-loop studies from the core claim.",
+          "evidence": [
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+          ]
+        }
+      ],
+      "source_commit": "35070174b78353749152f290521c000a2612a07c",
+      "provider_attempt_success_claimed": false,
+      "execution_kind": "agent_assisted_postmerge_revalidation"
+    },
+    "LA-003": {
+      "argv": [
+        "python3",
+        "scripts/paper_supervisors.py",
+        "verify-task",
+        "--paper",
+        "law_to_action",
+        "--task",
+        "LA-003"
+      ],
+      "started_at": "2026-09-11T17:30:25.703181+00:00",
+      "finished_at": "2026-09-11T17:30:29.373773+00:00",
+      "exit_code": 0,
+      "validation_log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la_fifth_evidence_completion-LA-003-verify.json",
+      "validation_log_sha256": "f206bc6b873376d5656741ae5ef1e7eb8e5048ecfa7e1c65acf6b86b59f05522",
+      "receipt_path": "papers/completion/law_to_action/receipts/LA-003.json",
+      "receipt_sha256": "fad876022b0e53833a8741c677b91b296a2b409af99c3b1e90eccee041756ad0",
+      "acceptance_criteria": [
+        {
+          "criterion": "Protocol has exact sample-size/repetition values justified by independent units and available resources; no invented power guarantee.",
+          "status": "met",
+          "explanation": "Exact30 independent lineage families/60 paired cases,6/6/18 split quotas and three named seeds yield900 planned attempts in each separate study. The one-reserved-core,2GiB fixed-action plan fits the recorded host observation, subject to scheduler/control qualification.16 process/thread slots permit solver/checker descendants. Aggregate CPU/wall thresholds and actual-usage/overshoot accounting replace the invalid one-process assumption. Five CPU-hours is a stopping budget, not measured use or full-job wall time. The text explicitly makes no power/significance guarantee. Source cohort and resource enforcement are not yet qualified; planned sample counts are not observed counts.",
+          "evidence": [
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+          ]
+        },
+        {
+          "criterion": "Source derivatives, CVE vulnerable/fixed pairs and skill variants remain in the same split.",
+          "status": "met",
+          "explanation": "All derivatives inherit a globally unique parent-family split. Vulnerable/fixed CVE pairs and skill variants are atomic, with frozen canonical UTF-8 SHA256 ranking, cumulative per-population quotas, and deterministic tie-break. Final labels/siblings/patches cannot leak through retrieval. Cohort shortfalls/duplicates/cross-population IDs reject rather than silently changing counts. Synthetic partition checks confirm the rule, not actual corpus deduplication or label independence; LA-004\u2013LA-007 retain those obligations.",
+          "evidence": [
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+          ]
+        },
+        {
+          "criterion": "Forbidden effects, allowed task success, false denial, abstention and all failures/timeouts have formulas and reporting rules.",
+          "status": "met",
+          "explanation": "False denial uses D only; abstention uses disjoint A; a separately named union measures withholding. Useful success, forbidden effects on both allowed and forbidden requests, observed and scheduled conservative bounds, operational loss, failure/timeouts, undefined rates, and every planned/not-started record have explicit formulas/reporting rules. Group resource-limit events retain actual cost and terminal reason rather than becoming safe denials. No actual effect data, task-success oracle or empirical metric estimates were produced.",
+          "evidence": [
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+          ]
+        },
+        {
+          "criterion": "Protocol records model/solver availability and compute/provider requirements without assuming paid access.",
+          "status": "met",
+          "explanation": "Historical provider visibility is distinguished from host capacity and future scientific qualification. Named solver/checker, real UCAN, durable consumption, independent source/oracle and model requirements are explicit. Model-free A1/A2 are equivalence controls; actual prompt/retrieval and closed-loop comparisons remain a separate planned model study with call/token/time ceilings and zero added paid-provider budget. No source/model/tool availability or fixture substitution is assumed. The scientific model identity and real mechanism qualification remain future prerequisites; no currently dispatchable model experiment is claimed.",
+          "evidence": [
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
+            "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+          ]
+        }
+      ],
+      "source_commit": "35070174b78353749152f290521c000a2612a07c",
+      "provider_attempt_success_claimed": false,
+      "execution_kind": "agent_assisted_protocol_completion"
+    }
+  },
+  "mutations": [
+    {
+      "kind": "admit_required_snapshot_directory",
+      "event": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+        "event_id": "baguqeeracjukoomgpwuckp5dqdppnmhmvrgheusozxicbzla5bpjn2g27tdq",
+        "event_type": "intent.task_upserted",
+        "global_sequence": 124,
+        "recorded_at": "2026-09-11T17:30:32Z",
+        "subject_id": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka",
+        "revision": 5,
+        "changed": true,
+        "details": {
+          "task_cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka",
+          "task_alias": "LA-003",
+          "goal_cid": "baguqeerahekkeofxizpm325yrnp2m5cnorsv3mpqghfccmodp2nzd46pmulq",
+          "plan_cid": "baguqeerafy6peqaklnygmctyav2snv2ascfb63amjhchdpuravkgq4bglsqq",
+          "objective_id": "baguqeera3jeaigpa5uqtxvr65ocsgxwbregaew36uk2unlrdb4rlg3qw2n5a",
+          "ordinal": 3,
+          "status": "blocked",
+          "priority": "P0",
+          "revision": 5,
+          "identity": {
+            "repository_tree_id": "git-tree:7683e33d1af33b616a364b6416624a894854f4cb",
+            "task_alias": "LA-003",
+            "task_cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka"
+          },
+          "body": {
+            "allowed paths": "",
+            "board namespace": "vericodegen-2026-law_to_action",
+            "board_namespace": "vericodegen-2026-law_to_action",
+            "bundle": "law_to_action/LA-G2",
+            "completion": "auto",
+            "completion_receipt": {
+              "attempt_consumed": true,
+              "attempt_id": "attempt:5f135e18aeaf4a9fa3b4b6f11ebb72a6",
+              "attempt_number": 1,
+              "backoff_seconds": null,
+              "claim_id": "claim:d970e5bfc0bc4ab49fa5c1980373ef2e",
+              "control_expected_revision": 3,
+              "control_result_revision": 4,
+              "deferred": false,
+              "failure_kind": "portal_execution",
+              "fence_epoch": 1,
+              "fencing_token": 1,
+              "infrastructure_failure": null,
+              "lease_id": "lease:5f58050189564dd0a87071fa5b14c498",
+              "operation": "database_portal_attempt_failure",
+              "owner_session_id": "embedded-store:e5e84a5a5e3ee006b1ca84ea6fb89d0a",
+              "portal_retryable_failure": true,
+              "provider_call_allowed": null,
+              "provider_dispatched": true,
+              "reason": "portal_provider_failed",
+              "repair_required": true,
+              "task_cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka"
+            },
+            "depends on": "LA-002",
+            "description": "Specify research questions, source selection, number of independent source families and cases, mutation taxonomy, seeds/repetitions, resource limits and model/tool requirements before collecting outcomes. Define five arms: unguarded sandbox, prompt-only, retrieval+prompt, lightweight policy+UCAN, full enforcement. Separate fixed-action gate comparison from closed-loop agent planning. Predefine metrics, denominators, confidence intervals, exclusions and negative-result handling. If resources are absent, document a narrower still-useful evaluated contribution.",
+            "goal id": "LA-G2",
+            "implementation timeout seconds": "7200",
+            "is schedulable": "true",
+            "native_source_block": "## LA-003 Predeclare benchmark protocol, task populations, leakage controls and run budget\n\n- Status: todo\n- Completion: auto\n- Is schedulable: true\n- Review only: false\n- Priority: P0\n- Track: law_to_action\n- Depends on: LA-002\n- Goal id: LA-G2\n- Parent goal: LA-G000\n- Objective heap: papers/completion/law_to_action/paper.objectives.md\n- Board namespace: vericodegen-2026-law_to_action\n- Bundle: law_to_action/LA-G2\n- Parallel lane: law_to_action\n- Outputs: papers/completion/law_to_action/benchmark/protocol.md, papers/completion/law_to_action/benchmark/protocol.json, papers/completion/law_to_action/benchmark/resource_plan.json, papers/completion/law_to_action/receipts/LA-003.json\n- Predicted files: papers/completion/law_to_action/benchmark/protocol.md, papers/completion/law_to_action/benchmark/protocol.json, papers/completion/law_to_action/benchmark/resource_plan.json, papers/completion/law_to_action/receipts/LA-003.json, papers/completion/law_to_action/receipts/snapshots/LA-003/\n- Allowed paths: \n- Resource class: cpu-medium\n- Resource stage: execution\n- Implementation timeout seconds: 7200\n- Validation: python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-003\n- Acceptance: Protocol has exact sample-size/repetition values justified by independent units and available resources; no invented power guarantee.; Source derivatives, CVE vulnerable/fixed pairs and skill variants remain in the same split.; Forbidden effects, allowed task success, false denial, abstention and all failures/timeouts have formulas and reporting rules.; Protocol records model/solver availability and compute/provider requirements without assuming paid access.\n- Paper evidence: p8 \u00a77 lines 320\u2013327; p16 Appendix E.1 lines 514\u2013523 and E.2\n- Reuse candidates: external/ipfs_datasets/tests/benchmarks/logic/test_intent_admissibility_benchmark.py, external/ipfs_datasets/tests/fixtures/logic/admissibility/benchmark/splits.json\n- Receipt: papers/completion/law_to_action/receipts/LA-003.json\n\nSpecify research questions, source selection, number of independent source families and cases, mutation taxonomy, seeds/repetitions, resource limits and model/tool requirements before collecting outcomes. Define five arms: unguarded sandbox, prompt-only, retrieval+prompt, lightweight policy+UCAN, full enforcement. Separate fixed-action gate comparison from closed-loop agent planning. Predefine metrics, denominators, confidence intervals, exclusions and negative-result handling. If resources are absent, document a narrower still-useful evaluated contribution.\n\nAcceptance criteria:\n\n1. Protocol has exact sample-size/repetition values justified by independent units and available resources; no invented power guarantee.\n2. Source derivatives, CVE vulnerable/fixed pairs and skill variants remain in the same split.\n3. Forbidden effects, allowed task success, false denial, abstention and all failures/timeouts have formulas and reporting rules.\n4. Protocol records model/solver availability and compute/provider requirements without assuming paid access.\n\nRecord dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.\n\n",
+            "objective heap": "papers/completion/law_to_action/paper.objectives.md",
+            "paper evidence": "p8 \u00a77 lines 320\u2013327; p16 Appendix E.1 lines 514\u2013523 and E.2",
+            "parallel lane": "law_to_action",
+            "parent goal": "LA-G000",
+            "predicted files": "papers/completion/law_to_action/benchmark/protocol.md, papers/completion/law_to_action/benchmark/protocol.json, papers/completion/law_to_action/benchmark/resource_plan.json, papers/completion/law_to_action/receipts/LA-003.json, papers/completion/law_to_action/receipts/snapshots/LA-003/",
+            "receipt": "papers/completion/law_to_action/receipts/LA-003.json",
+            "resource class": "cpu-medium",
+            "resource stage": "execution",
+            "reuse candidates": "external/ipfs_datasets/tests/benchmarks/logic/test_intent_admissibility_benchmark.py, external/ipfs_datasets/tests/fixtures/logic/admissibility/benchmark/splits.json",
+            "review only": "false",
+            "source_root": "baguqeerakh4pyeks3alawit7wohpzlwlfryjiakrfjellpofeuezv4l5ja5a",
+            "title": "Predeclare benchmark protocol, task populations, leakage controls and run budget",
+            "track": "law_to_action",
+            "validation": "python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-003"
+          },
+          "recorded_at": "2026-09-11T17:30:31Z",
+          "outputs": [
+            {
+              "kind": "file",
+              "path": "papers/completion/law_to_action/benchmark/protocol.md"
+            },
+            {
+              "kind": "file",
+              "path": "papers/completion/law_to_action/benchmark/protocol.json"
+            },
+            {
+              "kind": "file",
+              "path": "papers/completion/law_to_action/benchmark/resource_plan.json"
+            },
+            {
+              "kind": "file",
+              "path": "papers/completion/law_to_action/receipts/LA-003.json"
+            },
+            {
+              "path": "papers/completion/law_to_action/receipts/snapshots/LA-003/",
+              "kind": "directory"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "append_corrected_evidence",
+      "receipt": {
+        "operation": "paper_command_receipt_correction",
+        "task_id": "LA-002",
+        "paper_receipt": "papers/completion/law_to_action/receipts/LA-002.json",
+        "evidence_digest": "sha256:625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+        "source_commit": "35070174b78353749152f290521c000a2612a07c",
+        "prior_native_receipt_sha256": "77ea5ea67d14c697182109f40f6ae1e44bdda8f7a6107ea8d2e6d723d2728d9c",
+        "validation_event": {
+          "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+          "event_id": "baguqeerasf3mbbj3zbb7cfsz6akvo7xgl27micoftxymfuig7r2pza5msxpa",
+          "event_type": "intent.validation_recorded",
+          "global_sequence": 125,
+          "recorded_at": "2026-09-11T17:30:32Z",
+          "subject_id": "baguqeeraqsaiyl5ewmqg33q3sool6oufbb5ruty6o6qw4jeq3nwhpqmaii7a",
+          "revision": 0,
+          "changed": true,
+          "details": {
+            "result_id": "baguqeeraqsaiyl5ewmqg33q3sool6oufbb5ruty6o6qw4jeq3nwhpqmaii7a",
+            "run_id": "baguqeerafz3ndmq2r5smawqjbg3fskgpxsmfzjy25lfcc2beo7uurwent2cq",
+            "task_cid": "baguqeerahx67ejaalgj7544gnwugb2ovfg5ajgfe5nlzxjwr2knqj2keap7a",
+            "outcome": "passed",
+            "evidence_digest": "sha256:625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+            "argv": [
+              "python3",
+              "scripts/paper_supervisors.py",
+              "verify-task",
+              "--paper",
+              "law_to_action",
+              "--task",
+              "LA-002"
+            ],
+            "body": {
+              "argv": [
+                "python3",
+                "scripts/paper_supervisors.py",
+                "verify-task",
+                "--paper",
+                "law_to_action",
+                "--task",
+                "LA-002"
+              ],
+              "started_at": "2026-09-11T17:30:21.982217+00:00",
+              "finished_at": "2026-09-11T17:30:25.702770+00:00",
+              "exit_code": 0,
+              "validation_log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la_fifth_evidence_completion-LA-002-verify.json",
+              "validation_log_sha256": "2e1df3a167316d7990e495070e2ac70089fc75e6e6c15c1c7cafc1259bf866b4",
+              "receipt_path": "papers/completion/law_to_action/receipts/LA-002.json",
+              "receipt_sha256": "625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+              "acceptance_criteria": [
+                {
+                  "criterion": "Matrix covers each contribution, every logic/backend family, trained normalizer claim and numerical corpus claim.",
+                  "status": "met",
+                  "explanation": "The matrix audits all four draft contributions; the full baseline and Wave-2 registry lists; seven unqualified backend kinds; deterministic versus optional-provider normalizer behavior; and each reported municipal, Netherlands, Belgium, CVEfixes, and SkillCenter quantity. It records these as inspected, declared-only, fixture-only, unsupported, or future work rather than research results.",
+                  "evidence": [
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+                  ]
+                },
+                {
+                  "criterion": "Explicit OFF/default in-memory-store and fixture-versus-live limitations recorded.",
+                  "status": "met",
+                  "explanation": "The matrix and scope identify OFF pass-through, the process-local InMemoryCapabilityConsumptionStore default, non-blocking AUDIT/SHADOW modes, and the fixture-only CVE, admissibility, MCP, and enforcement-test surfaces. They reserve live-hub, real-token, durable-state, and transport claims for later direct evidence.",
+                  "evidence": [
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+                  ]
+                },
+                {
+                  "criterion": "Bounded paper scope, protected routes and essential versus optional experiments are selected.",
+                  "status": "met",
+                  "explanation": "scope.md selects explicit ENFORCE mediation at SupervisorPreInvocationEnforcement.authorize_and_delegate around one benchmark-owned sandbox handler, with generated-code-effect correlation as an input only. It lists the prerequisite protocol, source, route, backend, fixed-action, and durable-state experiments, and excludes legal fidelity, trained normalization, all-family backends, live network parity, and closed-loop studies from the core claim.",
+                  "evidence": [
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+                  ]
+                }
+              ],
+              "source_commit": "35070174b78353749152f290521c000a2612a07c",
+              "provider_attempt_success_claimed": false,
+              "execution_kind": "agent_assisted_postmerge_revalidation"
+            },
+            "recorded_at": "2026-09-11T17:30:32Z",
+            "revision": 0
+          }
+        },
+        "audit_sha256": "7cd570ee159e72fb72cf17ffe5b212eb2504c1ad746c9f8a61c7a56720bdbef4",
+        "provider_invoked": false,
+        "provider_attempt_success_claimed": false,
+        "benchmark_result_claimed": false,
+        "recorded_at": "2026-09-11T17:30:32.232997+00:00"
+      },
+      "event": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+        "event_id": "baguqeera47gxq5phhl56wcg3yeuykfs4mphkjovq422fuo6flagfhz7xeblq",
+        "event_type": "intent.evidence_recorded",
+        "global_sequence": 126,
+        "recorded_at": "2026-09-11T17:30:32Z",
+        "subject_id": "baguqeera7iyffkmjuvt4zcx4rkq2ezowuc6mnzep2du22iiubep3v3aavkbq",
+        "revision": 0,
+        "changed": true,
+        "details": {
+          "evidence_id": "baguqeera7iyffkmjuvt4zcx4rkq2ezowuc6mnzep2du22iiubep3v3aavkbq",
+          "parent_evidence_id": "",
+          "task_cid": "baguqeerahx67ejaalgj7544gnwugb2ovfg5ajgfe5nlzxjwr2knqj2keap7a",
+          "evidence_kind": "paper_command_receipt_correction",
+          "digest": "sha256:625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+          "body": {
+            "operation": "paper_command_receipt_correction",
+            "task_id": "LA-002",
+            "paper_receipt": "papers/completion/law_to_action/receipts/LA-002.json",
+            "evidence_digest": "sha256:625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+            "source_commit": "35070174b78353749152f290521c000a2612a07c",
+            "prior_native_receipt_sha256": "77ea5ea67d14c697182109f40f6ae1e44bdda8f7a6107ea8d2e6d723d2728d9c",
+            "validation_event": {
+              "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+              "event_id": "baguqeerasf3mbbj3zbb7cfsz6akvo7xgl27micoftxymfuig7r2pza5msxpa",
+              "event_type": "intent.validation_recorded",
+              "global_sequence": 125,
+              "recorded_at": "2026-09-11T17:30:32Z",
+              "subject_id": "baguqeeraqsaiyl5ewmqg33q3sool6oufbb5ruty6o6qw4jeq3nwhpqmaii7a",
+              "revision": 0,
+              "changed": true,
+              "details": {
+                "result_id": "baguqeeraqsaiyl5ewmqg33q3sool6oufbb5ruty6o6qw4jeq3nwhpqmaii7a",
+                "run_id": "baguqeerafz3ndmq2r5smawqjbg3fskgpxsmfzjy25lfcc2beo7uurwent2cq",
+                "task_cid": "baguqeerahx67ejaalgj7544gnwugb2ovfg5ajgfe5nlzxjwr2knqj2keap7a",
+                "outcome": "passed",
+                "evidence_digest": "sha256:625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+                "argv": [
+                  "python3",
+                  "scripts/paper_supervisors.py",
+                  "verify-task",
+                  "--paper",
+                  "law_to_action",
+                  "--task",
+                  "LA-002"
+                ],
+                "body": {
+                  "argv": [
+                    "python3",
+                    "scripts/paper_supervisors.py",
+                    "verify-task",
+                    "--paper",
+                    "law_to_action",
+                    "--task",
+                    "LA-002"
+                  ],
+                  "started_at": "2026-09-11T17:30:21.982217+00:00",
+                  "finished_at": "2026-09-11T17:30:25.702770+00:00",
+                  "exit_code": 0,
+                  "validation_log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la_fifth_evidence_completion-LA-002-verify.json",
+                  "validation_log_sha256": "2e1df3a167316d7990e495070e2ac70089fc75e6e6c15c1c7cafc1259bf866b4",
+                  "receipt_path": "papers/completion/law_to_action/receipts/LA-002.json",
+                  "receipt_sha256": "625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+                  "acceptance_criteria": [
+                    {
+                      "criterion": "Matrix covers each contribution, every logic/backend family, trained normalizer claim and numerical corpus claim.",
+                      "status": "met",
+                      "explanation": "The matrix audits all four draft contributions; the full baseline and Wave-2 registry lists; seven unqualified backend kinds; deterministic versus optional-provider normalizer behavior; and each reported municipal, Netherlands, Belgium, CVEfixes, and SkillCenter quantity. It records these as inspected, declared-only, fixture-only, unsupported, or future work rather than research results.",
+                      "evidence": [
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+                      ]
+                    },
+                    {
+                      "criterion": "Explicit OFF/default in-memory-store and fixture-versus-live limitations recorded.",
+                      "status": "met",
+                      "explanation": "The matrix and scope identify OFF pass-through, the process-local InMemoryCapabilityConsumptionStore default, non-blocking AUDIT/SHADOW modes, and the fixture-only CVE, admissibility, MCP, and enforcement-test surfaces. They reserve live-hub, real-token, durable-state, and transport claims for later direct evidence.",
+                      "evidence": [
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+                      ]
+                    },
+                    {
+                      "criterion": "Bounded paper scope, protected routes and essential versus optional experiments are selected.",
+                      "status": "met",
+                      "explanation": "scope.md selects explicit ENFORCE mediation at SupervisorPreInvocationEnforcement.authorize_and_delegate around one benchmark-owned sandbox handler, with generated-code-effect correlation as an input only. It lists the prerequisite protocol, source, route, backend, fixed-action, and durable-state experiments, and excludes legal fidelity, trained normalization, all-family backends, live network parity, and closed-loop studies from the core claim.",
+                      "evidence": [
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+                      ]
+                    }
+                  ],
+                  "source_commit": "35070174b78353749152f290521c000a2612a07c",
+                  "provider_attempt_success_claimed": false,
+                  "execution_kind": "agent_assisted_postmerge_revalidation"
+                },
+                "recorded_at": "2026-09-11T17:30:32Z",
+                "revision": 0
+              }
+            },
+            "audit_sha256": "7cd570ee159e72fb72cf17ffe5b212eb2504c1ad746c9f8a61c7a56720bdbef4",
+            "provider_invoked": false,
+            "provider_attempt_success_claimed": false,
+            "benchmark_result_claimed": false,
+            "recorded_at": "2026-09-11T17:30:32.232997+00:00"
+          },
+          "created_at": "2026-09-11T17:30:32Z",
+          "revision": 0
+        }
+      }
+    },
+    {
+      "kind": "agent_assisted_protocol_complete",
+      "revision": 6,
+      "receipt": {
+        "operation": "paper_agent_assisted_protocol_complete",
+        "task_id": "LA-003",
+        "paper_receipt": "papers/completion/law_to_action/receipts/LA-003.json",
+        "evidence_digest": "sha256:fad876022b0e53833a8741c677b91b296a2b409af99c3b1e90eccee041756ad0",
+        "source_commit": "35070174b78353749152f290521c000a2612a07c",
+        "prior_native_receipt_sha256": "9e10287e080ba6324e8894a2bf7579f5c2505a562eb7708a5e2b85768e816ddd",
+        "validation_event": {
+          "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+          "event_id": "baguqeeraunn6fvrryw5nwoic2flj3vwjfuvqhzxavnefqyvhvkxnhlphz2mq",
+          "event_type": "intent.validation_recorded",
+          "global_sequence": 127,
+          "recorded_at": "2026-09-11T17:30:32Z",
+          "subject_id": "baguqeeraw2odsb25t2bmdgemjz3koaja2cljzy2ug3qrtx6m5e6fxexcn74q",
+          "revision": 0,
+          "changed": true,
+          "details": {
+            "result_id": "baguqeeraw2odsb25t2bmdgemjz3koaja2cljzy2ug3qrtx6m5e6fxexcn74q",
+            "run_id": "baguqeerantag5ijzrcrmjah6bdcrpxns5mdfmgfukyoo2nypykmrd26lg5dq",
+            "task_cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka",
+            "outcome": "passed",
+            "evidence_digest": "sha256:fad876022b0e53833a8741c677b91b296a2b409af99c3b1e90eccee041756ad0",
+            "argv": [
+              "python3",
+              "scripts/paper_supervisors.py",
+              "verify-task",
+              "--paper",
+              "law_to_action",
+              "--task",
+              "LA-003"
+            ],
+            "body": {
+              "argv": [
+                "python3",
+                "scripts/paper_supervisors.py",
+                "verify-task",
+                "--paper",
+                "law_to_action",
+                "--task",
+                "LA-003"
+              ],
+              "started_at": "2026-09-11T17:30:25.703181+00:00",
+              "finished_at": "2026-09-11T17:30:29.373773+00:00",
+              "exit_code": 0,
+              "validation_log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la_fifth_evidence_completion-LA-003-verify.json",
+              "validation_log_sha256": "f206bc6b873376d5656741ae5ef1e7eb8e5048ecfa7e1c65acf6b86b59f05522",
+              "receipt_path": "papers/completion/law_to_action/receipts/LA-003.json",
+              "receipt_sha256": "fad876022b0e53833a8741c677b91b296a2b409af99c3b1e90eccee041756ad0",
+              "acceptance_criteria": [
+                {
+                  "criterion": "Protocol has exact sample-size/repetition values justified by independent units and available resources; no invented power guarantee.",
+                  "status": "met",
+                  "explanation": "Exact30 independent lineage families/60 paired cases,6/6/18 split quotas and three named seeds yield900 planned attempts in each separate study. The one-reserved-core,2GiB fixed-action plan fits the recorded host observation, subject to scheduler/control qualification.16 process/thread slots permit solver/checker descendants. Aggregate CPU/wall thresholds and actual-usage/overshoot accounting replace the invalid one-process assumption. Five CPU-hours is a stopping budget, not measured use or full-job wall time. The text explicitly makes no power/significance guarantee. Source cohort and resource enforcement are not yet qualified; planned sample counts are not observed counts.",
+                  "evidence": [
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+                  ]
+                },
+                {
+                  "criterion": "Source derivatives, CVE vulnerable/fixed pairs and skill variants remain in the same split.",
+                  "status": "met",
+                  "explanation": "All derivatives inherit a globally unique parent-family split. Vulnerable/fixed CVE pairs and skill variants are atomic, with frozen canonical UTF-8 SHA256 ranking, cumulative per-population quotas, and deterministic tie-break. Final labels/siblings/patches cannot leak through retrieval. Cohort shortfalls/duplicates/cross-population IDs reject rather than silently changing counts. Synthetic partition checks confirm the rule, not actual corpus deduplication or label independence; LA-004\u2013LA-007 retain those obligations.",
+                  "evidence": [
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+                  ]
+                },
+                {
+                  "criterion": "Forbidden effects, allowed task success, false denial, abstention and all failures/timeouts have formulas and reporting rules.",
+                  "status": "met",
+                  "explanation": "False denial uses D only; abstention uses disjoint A; a separately named union measures withholding. Useful success, forbidden effects on both allowed and forbidden requests, observed and scheduled conservative bounds, operational loss, failure/timeouts, undefined rates, and every planned/not-started record have explicit formulas/reporting rules. Group resource-limit events retain actual cost and terminal reason rather than becoming safe denials. No actual effect data, task-success oracle or empirical metric estimates were produced.",
+                  "evidence": [
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+                  ]
+                },
+                {
+                  "criterion": "Protocol records model/solver availability and compute/provider requirements without assuming paid access.",
+                  "status": "met",
+                  "explanation": "Historical provider visibility is distinguished from host capacity and future scientific qualification. Named solver/checker, real UCAN, durable consumption, independent source/oracle and model requirements are explicit. Model-free A1/A2 are equivalence controls; actual prompt/retrieval and closed-loop comparisons remain a separate planned model study with call/token/time ceilings and zero added paid-provider budget. No source/model/tool availability or fixture substitution is assumed. The scientific model identity and real mechanism qualification remain future prerequisites; no currently dispatchable model experiment is claimed.",
+                  "evidence": [
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.md",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/protocol.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/outputs/resource_plan.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validation/protocol-validator.log",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/scientific-criteria-review.json",
+                    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/resource-correction-audit.json"
+                  ]
+                }
+              ],
+              "source_commit": "35070174b78353749152f290521c000a2612a07c",
+              "provider_attempt_success_claimed": false,
+              "execution_kind": "agent_assisted_protocol_completion"
+            },
+            "recorded_at": "2026-09-11T17:30:32Z",
+            "revision": 0
+          }
+        },
+        "audit_sha256": "7cd570ee159e72fb72cf17ffe5b212eb2504c1ad746c9f8a61c7a56720bdbef4",
+        "provider_invoked": false,
+        "provider_attempt_success_claimed": false,
+        "benchmark_result_claimed": false,
+        "recorded_at": "2026-09-11T17:30:32.424935+00:00",
+        "prior_failure_attempt_id": "attempt:5f135e18aeaf4a9fa3b4b6f11ebb72a6"
+      }
+    }
+  ],
+  "success": true,
+  "maintenance_owner": {
+    "pid": 1002337,
+    "birth": "55753621",
+    "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+    "log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/fifth-evidence-maintenance-owner/owner.log",
+    "argv": [
+      "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+      "/home/barberb/lift_coding/scripts/paper_state_owner.py",
+      "--database",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/control.duckdb",
+      "--state-dir",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/fifth-evidence-maintenance-owner",
+      "--store-id",
+      "vericodegen-2026-law_to_action",
+      "--secret-handle",
+      "handle:vericodegen-2026:law_to_action:fifth-evidence-maintenance"
+    ]
+  },
+  "owner_identity": {
+    "contract_version": 1,
+    "credential_generation": 1,
+    "database_uuid": "1a3666fc-75c6-4c20-bb6d-be27b1cc0767",
+    "extension_fingerprint": "sha256:b77954ae50ecc06e10c6e20fc6fd421d73b5c31cf72bb60ae3f29b1f8a85f20b",
+    "fence_epoch": 8,
+    "generation": 8,
+    "interface": "StateServerIdentity@1",
+    "listen_uri": "quack:127.0.0.1:46665",
+    "process_birth": {
+      "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+      "parent_pid": 989887,
+      "pid": 1002337,
+      "start_time_ticks": 55753621
+    },
+    "process_birth_id": "birth:8f0d7174bf65caf0d8d01f6f9e36ec3a",
+    "repository_id": "repository:vericodegen-2026-law_to_action",
+    "revision": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/state-server-identity@1",
+    "schema_fingerprint": "sha256:3ea5f70cebacfe748017c9540bf87016075443f4ccc33376ec0a179ed576e190",
+    "schema_revision": 1,
+    "secret_handle": "handle:vericodegen-2026:law_to_action:fifth-evidence-maintenance",
+    "server_id": "server:4b403787-2497-4f18-a940-4beb23cc8ae0",
+    "started_at": "2026-09-11T17:30:30Z",
+    "startup_epoch": 1789147830,
+    "status": "ready",
+    "store_id": "vericodegen-2026-law_to_action"
+  },
+  "retained_failed_attempt": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/database-task-attempt@1",
+    "interface": "DatabaseTaskAttempt@1",
+    "attempt_id": "attempt:5f135e18aeaf4a9fa3b4b6f11ebb72a6",
+    "claim_id": "claim:d970e5bfc0bc4ab49fa5c1980373ef2e",
+    "task_cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka",
+    "task_alias": "LA-003",
+    "attempt_number": 1,
+    "owner_session_id": "embedded-store:e5e84a5a5e3ee006b1ca84ea6fb89d0a",
+    "fencing_token": 1,
+    "fence_epoch": 1,
+    "lease_id": "lease:5f58050189564dd0a87071fa5b14c498",
+    "committed_phase": "failed",
+    "status": "failed",
+    "started_at_ms": 1789145568998,
+    "finished_at_ms": 1789146025592,
+    "revision": 3,
+    "body": {
+      "worktree_id": ""
+    }
+  },
+  "retained_failure_receipt": {
+    "attempt_consumed": true,
+    "attempt_id": "attempt:5f135e18aeaf4a9fa3b4b6f11ebb72a6",
+    "attempt_number": 1,
+    "backoff_seconds": null,
+    "claim_id": "claim:d970e5bfc0bc4ab49fa5c1980373ef2e",
+    "control_expected_revision": 3,
+    "control_result_revision": 4,
+    "deferred": false,
+    "failure_kind": "portal_execution",
+    "fence_epoch": 1,
+    "fencing_token": 1,
+    "infrastructure_failure": null,
+    "lease_id": "lease:5f58050189564dd0a87071fa5b14c498",
+    "operation": "database_portal_attempt_failure",
+    "owner_session_id": "embedded-store:e5e84a5a5e3ee006b1ca84ea6fb89d0a",
+    "portal_retryable_failure": true,
+    "provider_call_allowed": null,
+    "provider_dispatched": true,
+    "reason": "portal_provider_failed",
+    "repair_required": true,
+    "task_cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka"
+  },
+  "final_tasks": [
+    {
+      "task_alias": "LA-001",
+      "task_cid": "baguqeeraeyqysmvzat3bbdq36wujh6rcnndigf2tqb4rb7u6rrjf3bigd3wq",
+      "status": "completed",
+      "revision": 8
+    },
+    {
+      "task_alias": "LA-002",
+      "task_cid": "baguqeerahx67ejaalgj7544gnwugb2ovfg5ajgfe5nlzxjwr2knqj2keap7a",
+      "status": "completed",
+      "revision": 7
+    },
+    {
+      "task_alias": "LA-003",
+      "task_cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka",
+      "status": "completed",
+      "revision": 6
+    },
+    {
+      "task_alias": "LA-004",
+      "task_cid": "baguqeera5ivphnjzyfjexbnfnlacr4hweebv75fcwhke24ya23efou2ishva",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-005",
+      "task_cid": "baguqeeracjvnikxagfollti2zvwbijyps7gw2nvhagewx75oztzmgmwla4gq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-006",
+      "task_cid": "baguqeeraild45mhndku3575wc4mwrf2g2qhq2iyhm2zmb2uwzop35pv4ssoq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-007",
+      "task_cid": "baguqeeraidfsyezhr2on5nyfkylamwtv7jhnbcwyb23j7r7q563fdybx3yuq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-008",
+      "task_cid": "baguqeerajx2zoroi2sw4phn4rl7btfvetfqpwy3bqwz6lzvz7j3r75uzropq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-009",
+      "task_cid": "baguqeerapwukrr5damt7oclxcdonw573mo6oafwqa64oz6vbdkbaon27khja",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-010",
+      "task_cid": "baguqeeravwsrtcfybwypzfipvqh7pmue5r37jzo2qlvffuuqxs4tsnttlhdq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-011",
+      "task_cid": "baguqeeraqyavp3epfpzbaswijgtn2jgyeyh6bgeyp4adwnwigrlkqi2hng4q",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-012",
+      "task_cid": "baguqeera5khofplwwzhcpm2hhpmd6tuhr4q3blblywennuamcbo4qepqro2q",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-013",
+      "task_cid": "baguqeerai2w42l6e6jopn7lxcenjqdzkmw4nxl5cuyl6m3uxpnv7qguvgvka",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-014",
+      "task_cid": "baguqeerajpn4hzjagrhanq33t6oqomkij37w6dnyz3awuz6r6zhsxk5a72ta",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-015",
+      "task_cid": "baguqeeraesj3yxjjv5ez7jkcmlp5mgyzi5txvfiswpuwwlv2qlfyck5r7rtq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-016",
+      "task_cid": "baguqeerajnpucvuihgzssvjjhftm25rvwxsfn5s344lkeounlpi7wsv6lq5q",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-017",
+      "task_cid": "baguqeeral3ttqjcs3lgy4g53kplu3biynhd7roq5tc7cdel6t6au45einkra",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-018",
+      "task_cid": "baguqeera5fqdxil6uu7aaaeudilckk56ots7jym4nkxpo3qvbewanceboccq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-019",
+      "task_cid": "baguqeeraj4rlrsqiknoe3pv3mgk4ypqmevjcibkypjqexpvntafzatqem6yq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-020",
+      "task_cid": "baguqeerapkraxlef346tijalfkgsdfssoecevon62bbg6f3qga757mxghp2q",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-021",
+      "task_cid": "baguqeeraeviogdaiyjoukfl5ctt3zrcmfeg7nbegtle6wr4kjgsjdpn3utfa",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-022",
+      "task_cid": "baguqeerauioboytpo6pwuxymhdzmd4tamw52wq5jlrnaao3xcwpcjzya4mxq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-023",
+      "task_cid": "baguqeerauam6ohylje4wcdxgv4rxoo2gjr6rqzijylc7apxrvr4ue4lyjkjq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-024",
+      "task_cid": "baguqeerat43st5o2vulahtcvtzi5agx24xdt64kido3yk4f743sevvf3k47a",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "LA-025",
+      "task_cid": "baguqeerabzl5c2pau7yau67ha44uaxnfjfb3pcfk4j55ypzxtf4kyi5wioaq",
+      "status": "ready",
+      "revision": 3
+    }
+  ],
+  "finished_at": "2026-09-11T17:30:34.250264+00:00",
+  "cleanup_errors": []
+}

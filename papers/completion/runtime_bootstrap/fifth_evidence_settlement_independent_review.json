@@ -1,0 +1,21 @@
+{
+  "schema": "paper-maintenance-independent-review/v1",
+  "reviewed_at": "2026-09-11T17:30:09.958373+00:00",
+  "reviewer": "monitor_and_review",
+  "helper_sha256": "c5909d57e2f79b7935b97a8abe9035fcf98958e3d63d985e417a45faa6a7798e",
+  "blocking_findings_resolved": [
+    "Use all-owner execution query, because native list_running_attempts defaults to maintenance owner"
+  ],
+  "minor_findings_resolved": [
+    "Mark cleanup failure unsuccessful",
+    "Put initial owned-process report write under try/finally"
+  ],
+  "verified": [
+    "Exact stopped campaign and database+WAL/backup hashes",
+    "Clean committed source and exact corrected receipt hashes",
+    "Real committed verify-task CLI and exact native criteria/argv",
+    "LA003 exact terminal failed attempt/released claim binding and native completion CAS",
+    "Completed LA002/AF003 task records remain unchanged while corrected validation/evidence is appended"
+  ],
+  "live_mutation_during_review": false
+}

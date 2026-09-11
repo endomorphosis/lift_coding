@@ -1,0 +1,337 @@
+{
+  "schema": "paper-ns-exact-index-repair/v1",
+  "apply": true,
+  "started_at": "2026-09-11T17:06:36.923157+00:00",
+  "database": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/control.coordination.duckdb",
+  "baseline": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/.maintenance_backups/ns-coordination-20260911T165817Z",
+  "baseline_hashes": {
+    "control.coordination.duckdb": "a37bc0c71dfb5fb633577d3c5d35773db53c4e3ed1fcc00d3094bf411ac91cb2",
+    "control.coordination.duckdb.wal": "b20cdca404e0d39db868df89669f347acc1e1ab8ddd09381fed214fe668d561e"
+  },
+  "original_hashes": {
+    "control.coordination.duckdb": "a37bc0c71dfb5fb633577d3c5d35773db53c4e3ed1fcc00d3094bf411ac91cb2",
+    "control.coordination.duckdb.wal": "b20cdca404e0d39db868df89669f347acc1e1ab8ddd09381fed214fe668d561e"
+  },
+  "open_handles_before": {
+    "matching_handles": [],
+    "inaccessible_non_ns_processes": [
+      459644,
+      1187326,
+      1187330,
+      1856842,
+      1949811,
+      2083983,
+      2149090,
+      2196586,
+      2412803,
+      2525485,
+      2986196,
+      2991100,
+      3000293,
+      3007771,
+      3019702,
+      3021641,
+      3028276,
+      3037981,
+      3057497,
+      3080641
+    ]
+  },
+  "duckdb_version": "1.5.5",
+  "sql": [
+    "CHECKPOINT",
+    "BEGIN TRANSACTION",
+    "DROP INDEX coordination_tasks_ready_idx",
+    "CREATE INDEX coordination_tasks_ready_idx ON coordination_tasks(ready, registered_at_ms, task_cid);",
+    "COMMIT",
+    "CHECKPOINT"
+  ],
+  "paper_completion_attempted": false,
+  "finished_at": "2026-09-11T17:06:37.239073+00:00",
+  "logical_before": {
+    "coordination_metadata": {
+      "rows": 2,
+      "sha256": "64b2858239b2175cab4b53db095a73a63910d28fc25e205a3c87b22b2d0207cf"
+    },
+    "coordination_tasks": {
+      "rows": 2,
+      "sha256": "956266d6edc2bfb771ee6c04a64b8c260f7e16994368922a6886548b223c115d"
+    },
+    "fenced_leases": {
+      "rows": 4,
+      "sha256": "caa6a5399e31a220dd76e1c23ea4af6cc379a6ecf3f22797c21fa13c248a65c7"
+    },
+    "lease_events": {
+      "rows": 2342,
+      "sha256": "05faafc62871cbf8a86e6055fb35e59b68202d87b5ecae5d748548dbf38237b2"
+    },
+    "maintenance_leases": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "resource_claims": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "task_attempts": {
+      "rows": 4,
+      "sha256": "5d9700ae7ac7ee1d6bc910f49f814679d38e98363136cc7a746d2d4d5a6a3024"
+    },
+    "task_claims": {
+      "rows": 4,
+      "sha256": "1c6b19f2a43d416f9acdfe43cad77bed9bca69f9b5cd6cb546530143715d1d8f"
+    },
+    "task_completions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "task_dependencies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "token_history": {
+      "rows": 4,
+      "sha256": "ac19268950645709561f07148244228752af3cbd0599409d6a1edaa4e4b5fbe9"
+    },
+    "schema": {
+      "tables": [
+        [
+          "coordination_metadata",
+          "CREATE TABLE coordination_metadata(\"key\" VARCHAR PRIMARY KEY, \"value\" VARCHAR NOT NULL);"
+        ],
+        [
+          "coordination_tasks",
+          "CREATE TABLE coordination_tasks(task_cid VARCHAR PRIMARY KEY, task_id VARCHAR NOT NULL, worktree_id VARCHAR DEFAULT('') NOT NULL, registered_at_ms BIGINT NOT NULL, ready BOOLEAN DEFAULT(CAST('t' AS BOOLEAN)) NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "fenced_leases",
+          "CREATE TABLE fenced_leases(lease_id VARCHAR PRIMARY KEY, lease_kind VARCHAR NOT NULL, scope_key VARCHAR NOT NULL, \"scope\" VARCHAR NOT NULL, \"mode\" VARCHAR NOT NULL, owner_session_id VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, acquired_at_ms BIGINT NOT NULL, expires_at_ms BIGINT NOT NULL, state VARCHAR NOT NULL, revision BIGINT NOT NULL, task_cid VARCHAR DEFAULT('') NOT NULL, worktree_id VARCHAR DEFAULT('') NOT NULL, resource_kind VARCHAR DEFAULT('') NOT NULL, resource_id VARCHAR DEFAULT('') NOT NULL, repository_id VARCHAR DEFAULT('') NOT NULL, path VARCHAR DEFAULT('') NOT NULL, claim_id VARCHAR DEFAULT('') NOT NULL, attempt_id VARCHAR DEFAULT('') NOT NULL, attempt_number BIGINT DEFAULT(0) NOT NULL, idempotency_key VARCHAR DEFAULT('') NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "lease_events",
+          "CREATE TABLE lease_events(event_id VARCHAR PRIMARY KEY, lease_id VARCHAR NOT NULL, scope_key VARCHAR NOT NULL, event_type VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, observed_at_ms BIGINT NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "maintenance_leases",
+          "CREATE TABLE maintenance_leases(lease_id VARCHAR PRIMARY KEY, \"scope\" VARCHAR NOT NULL, owner_session_id VARCHAR NOT NULL, process_birth_id VARCHAR DEFAULT('') NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, acquired_at_ms BIGINT NOT NULL, expires_at_ms BIGINT NOT NULL, released_at_ms BIGINT, state VARCHAR NOT NULL, revision BIGINT NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "resource_claims",
+          "CREATE TABLE resource_claims(claim_id VARCHAR PRIMARY KEY, resource_kind VARCHAR NOT NULL, resource_id VARCHAR NOT NULL, owner_session_id VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, acquired_at_ms BIGINT NOT NULL, expires_at_ms BIGINT NOT NULL, state VARCHAR NOT NULL, revision BIGINT NOT NULL, lease_id VARCHAR NOT NULL, task_cid VARCHAR DEFAULT('') NOT NULL, repository_id VARCHAR DEFAULT('') NOT NULL, path VARCHAR DEFAULT('') NOT NULL, worktree_id VARCHAR DEFAULT('') NOT NULL, \"mode\" VARCHAR DEFAULT('exclusive') NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "task_attempts",
+          "CREATE TABLE task_attempts(attempt_id VARCHAR PRIMARY KEY, task_cid VARCHAR NOT NULL, attempt_number BIGINT NOT NULL, owner_session_id VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, started_at_ms BIGINT NOT NULL, finished_at_ms BIGINT, status VARCHAR NOT NULL, revision BIGINT NOT NULL);"
+        ],
+        [
+          "task_claims",
+          "CREATE TABLE task_claims(claim_id VARCHAR PRIMARY KEY, task_cid VARCHAR NOT NULL, owner_session_id VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, claimed_at_ms BIGINT NOT NULL, expires_at_ms BIGINT NOT NULL, released_at_ms BIGINT, state VARCHAR NOT NULL, revision BIGINT NOT NULL, attempt_id VARCHAR NOT NULL, attempt_number BIGINT NOT NULL, lease_id VARCHAR NOT NULL, worktree_id VARCHAR DEFAULT('') NOT NULL, idempotency_key VARCHAR DEFAULT('') NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "task_completions",
+          "CREATE TABLE task_completions(task_cid VARCHAR PRIMARY KEY, completed_at_ms BIGINT NOT NULL, status VARCHAR NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "task_dependencies",
+          "CREATE TABLE task_dependencies(task_cid VARCHAR, dependency_task_cid VARCHAR, PRIMARY KEY(task_cid, dependency_task_cid));"
+        ],
+        [
+          "token_history",
+          "CREATE TABLE token_history(scope_key VARCHAR, fencing_token BIGINT, fence_epoch BIGINT, recorded_at_ms BIGINT NOT NULL, PRIMARY KEY(scope_key, fencing_token, fence_epoch));"
+        ]
+      ],
+      "indexes": [
+        [
+          "coordination_tasks_ready_idx",
+          "CREATE INDEX coordination_tasks_ready_idx ON coordination_tasks(ready, registered_at_ms, task_cid);"
+        ],
+        [
+          "fenced_leases_idempotency_idx",
+          "CREATE INDEX fenced_leases_idempotency_idx ON fenced_leases(idempotency_key);"
+        ],
+        [
+          "fenced_leases_owner_idx",
+          "CREATE INDEX fenced_leases_owner_idx ON fenced_leases(owner_session_id, state);"
+        ],
+        [
+          "fenced_leases_scope_state_idx",
+          "CREATE INDEX fenced_leases_scope_state_idx ON fenced_leases(scope_key, state, expires_at_ms);"
+        ],
+        [
+          "lease_events_scope_idx",
+          "CREATE INDEX lease_events_scope_idx ON lease_events(scope_key, observed_at_ms);"
+        ],
+        [
+          "maintenance_leases_scope_idx",
+          "CREATE INDEX maintenance_leases_scope_idx ON maintenance_leases(\"scope\", state);"
+        ],
+        [
+          "resource_claims_resource_idx",
+          "CREATE INDEX resource_claims_resource_idx ON resource_claims(resource_kind, resource_id, state);"
+        ],
+        [
+          "task_attempts_task_number_uidx",
+          "CREATE UNIQUE INDEX task_attempts_task_number_uidx ON task_attempts(task_cid, attempt_number);"
+        ],
+        [
+          "task_claims_idempotency_idx",
+          "CREATE INDEX task_claims_idempotency_idx ON task_claims(idempotency_key);"
+        ],
+        [
+          "task_claims_task_idx",
+          "CREATE INDEX task_claims_task_idx ON task_claims(task_cid, state);"
+        ],
+        [
+          "task_dependencies_dep_idx",
+          "CREATE INDEX task_dependencies_dep_idx ON task_dependencies(dependency_task_cid);"
+        ]
+      ]
+    }
+  },
+  "logical_after": {
+    "coordination_metadata": {
+      "rows": 2,
+      "sha256": "64b2858239b2175cab4b53db095a73a63910d28fc25e205a3c87b22b2d0207cf"
+    },
+    "coordination_tasks": {
+      "rows": 2,
+      "sha256": "956266d6edc2bfb771ee6c04a64b8c260f7e16994368922a6886548b223c115d"
+    },
+    "fenced_leases": {
+      "rows": 4,
+      "sha256": "caa6a5399e31a220dd76e1c23ea4af6cc379a6ecf3f22797c21fa13c248a65c7"
+    },
+    "lease_events": {
+      "rows": 2342,
+      "sha256": "05faafc62871cbf8a86e6055fb35e59b68202d87b5ecae5d748548dbf38237b2"
+    },
+    "maintenance_leases": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "resource_claims": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "task_attempts": {
+      "rows": 4,
+      "sha256": "5d9700ae7ac7ee1d6bc910f49f814679d38e98363136cc7a746d2d4d5a6a3024"
+    },
+    "task_claims": {
+      "rows": 4,
+      "sha256": "1c6b19f2a43d416f9acdfe43cad77bed9bca69f9b5cd6cb546530143715d1d8f"
+    },
+    "task_completions": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "task_dependencies": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "token_history": {
+      "rows": 4,
+      "sha256": "ac19268950645709561f07148244228752af3cbd0599409d6a1edaa4e4b5fbe9"
+    },
+    "schema": {
+      "tables": [
+        [
+          "coordination_metadata",
+          "CREATE TABLE coordination_metadata(\"key\" VARCHAR PRIMARY KEY, \"value\" VARCHAR NOT NULL);"
+        ],
+        [
+          "coordination_tasks",
+          "CREATE TABLE coordination_tasks(task_cid VARCHAR PRIMARY KEY, task_id VARCHAR NOT NULL, worktree_id VARCHAR DEFAULT('') NOT NULL, registered_at_ms BIGINT NOT NULL, ready BOOLEAN DEFAULT(CAST('t' AS BOOLEAN)) NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "fenced_leases",
+          "CREATE TABLE fenced_leases(lease_id VARCHAR PRIMARY KEY, lease_kind VARCHAR NOT NULL, scope_key VARCHAR NOT NULL, \"scope\" VARCHAR NOT NULL, \"mode\" VARCHAR NOT NULL, owner_session_id VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, acquired_at_ms BIGINT NOT NULL, expires_at_ms BIGINT NOT NULL, state VARCHAR NOT NULL, revision BIGINT NOT NULL, task_cid VARCHAR DEFAULT('') NOT NULL, worktree_id VARCHAR DEFAULT('') NOT NULL, resource_kind VARCHAR DEFAULT('') NOT NULL, resource_id VARCHAR DEFAULT('') NOT NULL, repository_id VARCHAR DEFAULT('') NOT NULL, path VARCHAR DEFAULT('') NOT NULL, claim_id VARCHAR DEFAULT('') NOT NULL, attempt_id VARCHAR DEFAULT('') NOT NULL, attempt_number BIGINT DEFAULT(0) NOT NULL, idempotency_key VARCHAR DEFAULT('') NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "lease_events",
+          "CREATE TABLE lease_events(event_id VARCHAR PRIMARY KEY, lease_id VARCHAR NOT NULL, scope_key VARCHAR NOT NULL, event_type VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, observed_at_ms BIGINT NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "maintenance_leases",
+          "CREATE TABLE maintenance_leases(lease_id VARCHAR PRIMARY KEY, \"scope\" VARCHAR NOT NULL, owner_session_id VARCHAR NOT NULL, process_birth_id VARCHAR DEFAULT('') NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, acquired_at_ms BIGINT NOT NULL, expires_at_ms BIGINT NOT NULL, released_at_ms BIGINT, state VARCHAR NOT NULL, revision BIGINT NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "resource_claims",
+          "CREATE TABLE resource_claims(claim_id VARCHAR PRIMARY KEY, resource_kind VARCHAR NOT NULL, resource_id VARCHAR NOT NULL, owner_session_id VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, acquired_at_ms BIGINT NOT NULL, expires_at_ms BIGINT NOT NULL, state VARCHAR NOT NULL, revision BIGINT NOT NULL, lease_id VARCHAR NOT NULL, task_cid VARCHAR DEFAULT('') NOT NULL, repository_id VARCHAR DEFAULT('') NOT NULL, path VARCHAR DEFAULT('') NOT NULL, worktree_id VARCHAR DEFAULT('') NOT NULL, \"mode\" VARCHAR DEFAULT('exclusive') NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "task_attempts",
+          "CREATE TABLE task_attempts(attempt_id VARCHAR PRIMARY KEY, task_cid VARCHAR NOT NULL, attempt_number BIGINT NOT NULL, owner_session_id VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, started_at_ms BIGINT NOT NULL, finished_at_ms BIGINT, status VARCHAR NOT NULL, revision BIGINT NOT NULL);"
+        ],
+        [
+          "task_claims",
+          "CREATE TABLE task_claims(claim_id VARCHAR PRIMARY KEY, task_cid VARCHAR NOT NULL, owner_session_id VARCHAR NOT NULL, fencing_token BIGINT NOT NULL, fence_epoch BIGINT NOT NULL, claimed_at_ms BIGINT NOT NULL, expires_at_ms BIGINT NOT NULL, released_at_ms BIGINT, state VARCHAR NOT NULL, revision BIGINT NOT NULL, attempt_id VARCHAR NOT NULL, attempt_number BIGINT NOT NULL, lease_id VARCHAR NOT NULL, worktree_id VARCHAR DEFAULT('') NOT NULL, idempotency_key VARCHAR DEFAULT('') NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "task_completions",
+          "CREATE TABLE task_completions(task_cid VARCHAR PRIMARY KEY, completed_at_ms BIGINT NOT NULL, status VARCHAR NOT NULL, body_json VARCHAR DEFAULT('{}') NOT NULL);"
+        ],
+        [
+          "task_dependencies",
+          "CREATE TABLE task_dependencies(task_cid VARCHAR, dependency_task_cid VARCHAR, PRIMARY KEY(task_cid, dependency_task_cid));"
+        ],
+        [
+          "token_history",
+          "CREATE TABLE token_history(scope_key VARCHAR, fencing_token BIGINT, fence_epoch BIGINT, recorded_at_ms BIGINT NOT NULL, PRIMARY KEY(scope_key, fencing_token, fence_epoch));"
+        ]
+      ],
+      "indexes": [
+        [
+          "coordination_tasks_ready_idx",
+          "CREATE INDEX coordination_tasks_ready_idx ON coordination_tasks(ready, registered_at_ms, task_cid);"
+        ],
+        [
+          "fenced_leases_idempotency_idx",
+          "CREATE INDEX fenced_leases_idempotency_idx ON fenced_leases(idempotency_key);"
+        ],
+        [
+          "fenced_leases_owner_idx",
+          "CREATE INDEX fenced_leases_owner_idx ON fenced_leases(owner_session_id, state);"
+        ],
+        [
+          "fenced_leases_scope_state_idx",
+          "CREATE INDEX fenced_leases_scope_state_idx ON fenced_leases(scope_key, state, expires_at_ms);"
+        ],
+        [
+          "lease_events_scope_idx",
+          "CREATE INDEX lease_events_scope_idx ON lease_events(scope_key, observed_at_ms);"
+        ],
+        [
+          "maintenance_leases_scope_idx",
+          "CREATE INDEX maintenance_leases_scope_idx ON maintenance_leases(\"scope\", state);"
+        ],
+        [
+          "resource_claims_resource_idx",
+          "CREATE INDEX resource_claims_resource_idx ON resource_claims(resource_kind, resource_id, state);"
+        ],
+        [
+          "task_attempts_task_number_uidx",
+          "CREATE UNIQUE INDEX task_attempts_task_number_uidx ON task_attempts(task_cid, attempt_number);"
+        ],
+        [
+          "task_claims_idempotency_idx",
+          "CREATE INDEX task_claims_idempotency_idx ON task_claims(idempotency_key);"
+        ],
+        [
+          "task_claims_task_idx",
+          "CREATE INDEX task_claims_task_idx ON task_claims(task_cid, state);"
+        ],
+        [
+          "task_dependencies_dep_idx",
+          "CREATE INDEX task_dependencies_dep_idx ON task_dependencies(dependency_task_cid);"
+        ]
+      ]
+    }
+  },
+  "logical_before_sha256": "667ac6707188bbe6502f93ca02031f4c46392fd7894886a11bad81136595e4c0",
+  "logical_after_sha256": "667ac6707188bbe6502f93ca02031f4c46392fd7894886a11bad81136595e4c0",
+  "all_rows_and_schema_unchanged": true,
+  "database_sha256_after": "082f8cd0b57edcb71b5c5e984283c97cb3a27b1c907a5cefb5171e18a47f3293",
+  "wal_exists_after_duckdb_checkpoint": false,
+  "completed": true
+}

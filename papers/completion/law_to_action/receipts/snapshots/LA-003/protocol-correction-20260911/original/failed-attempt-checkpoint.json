@@ -1,0 +1,43 @@
+{
+  "schema": "paper-failed-attempt-artifact-checkpoint/v1",
+  "captured_at": "2026-09-11T17:03:28.928727+00:00",
+  "paper": "law_to_action",
+  "task_id": "LA-003",
+  "attempt_id": "attempt:5f135e18aeaf4a9fa3b4b6f11ebb72a6",
+  "claim_id": "claim:d970e5bfc0bc4ab49fa5c1980373ef2e",
+  "implementation_commit": "b10a9bddb1d93b0526a368cd42c3d10cfb08798f",
+  "parent_commit": "418980b7522555d03194e74eb5c790f9e7106437",
+  "files": [
+    {
+      "path": "papers/completion/law_to_action/benchmark/protocol.md",
+      "sha256": "df9dba9b048eafa59a7ac9b1ae842a78cd8910dc931f98b5f7a7dce42cae0c98",
+      "size_bytes": 11476
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/protocol.json",
+      "sha256": "de8863191437800858415d66ef46707682e149d25b8af57f22e3cee52b4afad3",
+      "size_bytes": 5754
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/resource_plan.json",
+      "sha256": "668abadfdad659d74c0841cd83c1c031c8a2bf4882fcb0934427135db8dae521",
+      "size_bytes": 2892
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/LA-003.json",
+      "sha256": "efa341eef2ef2b4d1c0a615f275519335629c0880a318609283de940553a2beb",
+      "size_bytes": 981
+    }
+  ],
+  "patch_sha256": "97d49f3b5a7eb82a3712a1f9b4b4f6ac76c1de8c58b2958dc617067dc4101db8",
+  "source": "native portal-task-state last_implementation_commit and immutable Git objects",
+  "reason": "Retain substantive protocol output after exact snapshotdirectory output contract blocked native validation; completed/task credit remains false.",
+  "database_mutated": false,
+  "live_worktree_mutated": false,
+  "provider_invoked": false,
+  "review_notes": [
+    "Decision false-denial numerator currently adds abstentions while adjacent text says abstention is not denial; use distinct definitions.",
+    "Simple hash-to-split rule does not establish exact stratified allocation quotas without a deterministic ranked assignment or equivalent rule.",
+    "Fixed-action prompt/retrieval arms have no model in this revision; only gate behavior can be compared, not effectiveness of prompt/retrieval-guided agent planning."
+  ]
+}

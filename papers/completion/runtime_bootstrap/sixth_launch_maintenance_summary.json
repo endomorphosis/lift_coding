@@ -1,0 +1,37 @@
+{
+  "schema": "paper-campaign-maintenance-summary/v1",
+  "status": "maintenance_completed_before_restart",
+  "primary_provider": "grok",
+  "fallback_provider": "codex",
+  "fallback_model": "gpt-5.6-terra",
+  "fallback_reasoning_effort": "high",
+  "fallback_trigger": "independently_verified_primary_quota_exhaustion",
+  "runtime_tests": {
+    "receipt_checks_passed": 26,
+    "campaign_tests_passed": 7,
+    "committed_native_mount_and_commit_tests_passed": 20
+  },
+  "completed_repairs": {
+    "ready_task_snapshot_scopes": "snapshot_output_repair_applied.json",
+    "NS_coordination_index": "ns_coordination_index_live_repair.json",
+    "NS002_native_completion": "ns_002_native_completion.json",
+    "LA002_corrected_evidence_and_LA003_protocol_completion": "la_fifth_evidence_completion.json",
+    "AF003_corrected_evidence_and_selected_runtime": "af_fifth_evidence_completion.json"
+  },
+  "no_provider_replay_during_maintenance": true,
+  "no_benchmark_result_claimed": true,
+  "task_counts": {
+    "autoformalization": {
+      "completed": 3,
+      "ready": 22
+    },
+    "law_to_action": {
+      "completed": 3,
+      "ready": 22
+    },
+    "neurosymbolic_supervision": {
+      "completed": 2,
+      "ready": 23
+    }
+  }
+}

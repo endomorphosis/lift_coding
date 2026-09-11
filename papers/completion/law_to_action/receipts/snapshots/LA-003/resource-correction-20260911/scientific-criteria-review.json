@@ -1,0 +1,41 @@
+{
+  "schema": "paper-scientific-criteria-review/v1",
+  "reviewed_at": "2026-09-11T17:26:01.247318+00:00",
+  "method": "Manual criterion-by-criterion review of final protocol prose and machine-readable definitions, separately from executable validator success.",
+  "reviewer": "monitor_and_review",
+  "independence_limit": "This agent also implemented the corrections; root independent acceptance/integration review remains required.",
+  "documents_sha256": {
+    "protocol.md": "8a2117b73a59874adee5b8fffff3cc1fc58b3f48e2bbe7b4859c5c7b8e97737b",
+    "protocol.json": "ed3e66b1c8a154351d15975d67152531487fb7e216e072c2ed62933256ae78fc",
+    "resource_plan.json": "985d48de55803995bec8ab4b75ffb0979a1c3f49c66f314d97caa7609db616aa"
+  },
+  "criteria": [
+    {
+      "criterion": "Protocol has exact sample-size/repetition values justified by independent units and available resources; no invented power guarantee.",
+      "judgment": "met_for_protocol_definition",
+      "reason": "Exact30 independent lineage families/60 paired cases,6/6/18 split quotas and three named seeds yield900 planned attempts in each separate study. The one-reserved-core,2GiB fixed-action plan fits the recorded host observation, subject to scheduler/control qualification.16 process/thread slots permit solver/checker descendants. Aggregate CPU/wall thresholds and actual-usage/overshoot accounting replace the invalid one-process assumption. Five CPU-hours is a stopping budget, not measured use or full-job wall time. The text explicitly makes no power/significance guarantee.",
+      "limitation": "Source cohort and resource enforcement are not yet qualified; planned sample counts are not observed counts."
+    },
+    {
+      "criterion": "Source derivatives, CVE vulnerable/fixed pairs and skill variants remain in the same split.",
+      "judgment": "met_for_protocol_definition",
+      "reason": "All derivatives inherit a globally unique parent-family split. Vulnerable/fixed CVE pairs and skill variants are atomic, with frozen canonical UTF-8 SHA256 ranking, cumulative per-population quotas, and deterministic tie-break. Final labels/siblings/patches cannot leak through retrieval. Cohort shortfalls/duplicates/cross-population IDs reject rather than silently changing counts.",
+      "limitation": "Synthetic partition checks confirm the rule, not actual corpus deduplication or label independence; LA-004\u2013LA-007 retain those obligations."
+    },
+    {
+      "criterion": "Forbidden effects, allowed task success, false denial, abstention and all failures/timeouts have formulas and reporting rules.",
+      "judgment": "met_for_protocol_definition",
+      "reason": "False denial uses D only; abstention uses disjoint A; a separately named union measures withholding. Useful success, forbidden effects on both allowed and forbidden requests, observed and scheduled conservative bounds, operational loss, failure/timeouts, undefined rates, and every planned/not-started record have explicit formulas/reporting rules. Group resource-limit events retain actual cost and terminal reason rather than becoming safe denials.",
+      "limitation": "No actual effect data, task-success oracle or empirical metric estimates were produced."
+    },
+    {
+      "criterion": "Protocol records model/solver availability and compute/provider requirements without assuming paid access.",
+      "judgment": "met_for_protocol_definition",
+      "reason": "Historical provider visibility is distinguished from host capacity and future scientific qualification. Named solver/checker, real UCAN, durable consumption, independent source/oracle and model requirements are explicit. Model-free A1/A2 are equivalence controls; actual prompt/retrieval and closed-loop comparisons remain a separate planned model study with call/token/time ceilings and zero added paid-provider budget. No source/model/tool availability or fixture substitution is assumed.",
+      "limitation": "The scientific model identity and real mechanism qualification remain future prerequisites; no currently dispatchable model experiment is claimed."
+    }
+  ],
+  "conclusion": "All four LA-003 protocol-definition criteria are supported. Experimental execution, source/oracle/tool qualification, and paper completion remain unproven.",
+  "new_experiments_run": false,
+  "outcome_data_inspected_for_revision": false
+}
