@@ -1,0 +1,149 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-005",
+  "status": "complete",
+  "completed_at": "2026-09-11T22:34:23.679354+00:00",
+  "source_versions": {
+    "guideline_freeze": "AF-005/v1",
+    "gold_facet_schema": "autoformalization-gold-facet/v1",
+    "packet_schema": "autoformalization-annotation-packet/v1",
+    "python": {
+      "interpreter": "/usr/bin/python3.12",
+      "version": "Python 3.12.3",
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+    },
+    "freeze_generator": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze_annotation_evidence.py",
+      "sha256": "573457bd45fceb61049d026ece2438dfdb9e0f18c2d128d99193450922ecab73"
+    },
+    "independent_qualifier": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify_annotation_evidence.py",
+      "sha256": "7d882e8bb1492d68a0dc2990bce823c6da7a49bb75eec0952b4cfdc7eed9a09b"
+    },
+    "af004_pins": {
+      "frozen_splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+      "teacher_manifest_sha256": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4",
+      "corpus_manifest_sha256": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+      "private_membership_commitment_sha256": "fd6f3bf368de242f7a6d21867695d4eb5c644bf09a4a7f82cf687a76fa2c9126"
+    },
+    "historical_operator_review": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-005/operator-review/generator_execution.json",
+      "sha256": "f547221689e3dd44ee51f69fe07308cc2cc62b7bff941bf2dbd63ed173ab94df",
+      "boundary": "Prior operator-Python preparation under /home/barberb/.local/bin/python; not the sealed validation environment and not independent human annotation."
+    }
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze-check.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze-check.stdout.log": "5267b7523c85c2cbe9d8d3f8c16087f8153a1a4eb46fa8bf24d8c5b805757848",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze_annotation_evidence.py": "573457bd45fceb61049d026ece2438dfdb9e0f18c2d128d99193450922ecab73",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/operator-review/generator_execution.json": "f547221689e3dd44ee51f69fe07308cc2cc62b7bff941bf2dbd63ed173ab94df",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/operator-review/generator_execution.txt": "ef4e56c1092eb22a7c2a2cf1142c9daf86c3153fcfd2ddfb77d4de606cdd2a68",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_guidelines.md": "89fa7b89a7370c42a308d0d818cdc21cfab36db287d1e9ca2c0a6180aaecf753",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_packets.jsonl": "5357925f4f77cc5e112497ab15bc7ac4a89c0ff7182073606e6a884b4efc592d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/gold_facets.jsonl": "a39ee2444064e1c2a104b9db2a8a0fce54072e76a187b79b6e4df34da1c96f12",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/evidence/annotation_provenance.json": "bcdc4966989032a810db60f4c1711b3f161f7e65f180134242e138e5593bdde8",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stdout.log": "2e227a4665661fe057fa3277788f59abad42bd7d4c65f566ca22584e24087ed1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify_annotation_evidence.py": "7d882e8bb1492d68a0dc2990bce823c6da7a49bb75eec0952b4cfdc7eed9a09b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/run_sealed_validation.py": "6c1a90d36e9c05bd0bf659904dfc4dea76e18bab67b849015ee72557bdfab1a9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-005/validation-execution.json": "d9e8a2db6fa1021ae37b9cf465b2acf76b1feb05e8253106d20d65d0b3138f31"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/data/annotation_guidelines.md": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_guidelines.md",
+    "papers/completion/autoformalization/data/annotation_packets.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_packets.jsonl",
+    "papers/completion/autoformalization/data/gold_facets.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/gold_facets.jsonl",
+    "papers/completion/autoformalization/evidence/annotation_provenance.json": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/evidence/annotation_provenance.json"
+  },
+  "criteria": [
+    {
+      "criterion": "Gold/admissible-alternative schema and annotation instructions are frozen before scored model outputs are inspected.",
+      "status": "met",
+      "explanation": "The AF-005/v1 guidelines freeze the ten-facet gold and admissible-alternative schema, candidate-blind packet contract, and freeze-before-outputs rule. 100 unbound final-test slots and 122 development locators contain no model outputs, teacher IR, gold values, or final-test bodies. The generator and qualifier read only pinned AF-002/AF-004/AF-006 inputs; this is not a universal audit of other processes or filesystem history.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_guidelines.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_packets.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze_annotation_evidence.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify_annotation_evidence.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze-check.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Agreement/disagreement counts and adjudication are based on real records; automatic teacher-derived labels are identified separately.",
+      "status": "met",
+      "explanation": "The real inventory is zero independent annotators, zero double-annotated units, zero agreements, zero disagreements, and zero adjudications. Kappa or majority is not imputed. Teacher/compiler/view labels, rights-review flags, constructed minimal pairs, and synthetic roundtrip fixtures are identified separately and are not gold; existing_semantic_labels_used remains 0.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/evidence/annotation_provenance.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/gold_facets.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify_annotation_evidence.py"
+      ]
+    },
+    {
+      "criterion": "Unavailable independent review is recorded as pending and causes affected semantic claims to remain unmeasured.",
+      "status": "met",
+      "explanation": "Independent human review is required and unavailable. Packets and pending gold templates are prepared; gold values remain unfilled; independent_review.status is pending; every gold record and the provenance ledger mark semantic claims unmeasured. This preparation does not complete annotation or any A-E/T0-T5 score.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/evidence/annotation_provenance.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/gold_facets.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualified-outputs/data/annotation_guidelines.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stdout.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-7ju0u30m",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze_annotation_evidence.py",
+        "--root",
+        ".",
+        "--check"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze_annotation_evidence.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze-check.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze-check.stderr.log",
+      "started_at": "2026-09-11T22:32:58.411009+00:00",
+      "finished_at": "2026-09-11T22:32:58.442736+00:00",
+      "execution_kind": "sealed freeze-generator self-check against current public artifacts"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-7ju0u30m",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify_annotation_evidence.py",
+        "--root",
+        "."
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify_annotation_evidence.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stderr.log",
+      "started_at": "2026-09-11T22:32:58.443269+00:00",
+      "finished_at": "2026-09-11T22:32:58.498968+00:00",
+      "execution_kind": "sealed independent freeze-contract qualification; not human annotation"
+    }
+  ],
+  "limitations": [
+    "Independent human review was unavailable; packets are prepared and gold values are unfilled.",
+    "Zero agreement counts are an inventory of missing independent records, not a measured reliability statistic.",
+    "The 100 final-test entries are unbound provisional templates, not a frozen unique-unit evaluation sample.",
+    "Teacher-derived, rights-review, constructed-conformance, and synthetic-fixture labels are identified separately and are not gold.",
+    "No A-E/T0-T5 candidate output was scored; semantic fidelity, transfer, and proof-meaning claims remain unmeasured.",
+    "The freeze/qualify inspection scope is the listed pinned inputs, not a universal filesystem or process audit.",
+    "Coding/implementation and natural-trace populations remain unqualified and out of this sample."
+  ],
+  "completion_scope": "Annotation schema, candidate-blind packets, pending gold templates, and provenance freeze only. Independent human review, source binding, and all semantic scores remain open."
+}

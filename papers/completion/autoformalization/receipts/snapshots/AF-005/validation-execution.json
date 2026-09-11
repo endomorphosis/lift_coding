@@ -1,0 +1,60 @@
+{
+  "schema": "paper-af005-validation-execution/v1",
+  "python": "/usr/bin/python3.12",
+  "python_version": "Python 3.12.3",
+  "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+  "home": "/tmp/ipfs-accelerate-validation-home-7ju0u30m",
+  "cwd": ".",
+  "provider_invoked": false,
+  "independent_annotations_created": 0,
+  "native_state_modified": false,
+  "commands": [
+    {
+      "name": "freeze-check",
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-7ju0u30m",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze_annotation_evidence.py",
+        "--root",
+        ".",
+        "--check"
+      ],
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze_annotation_evidence.py",
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-11T22:32:58.411009+00:00",
+      "finished_at": "2026-09-11T22:32:58.442736+00:00",
+      "stdout_log": "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze-check.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-005/freeze-check.stderr.log",
+      "stdout_bytes": 712,
+      "stderr_bytes": 0
+    },
+    {
+      "name": "qualify",
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-7ju0u30m",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify_annotation_evidence.py",
+        "--root",
+        "."
+      ],
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify_annotation_evidence.py",
+      "cwd": ".",
+      "exit_code": 0,
+      "started_at": "2026-09-11T22:32:58.443269+00:00",
+      "finished_at": "2026-09-11T22:32:58.498968+00:00",
+      "stdout_log": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-005/qualify.stderr.log",
+      "stdout_bytes": 1365,
+      "stderr_bytes": 0
+    }
+  ]
+}
