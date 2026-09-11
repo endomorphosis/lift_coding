@@ -1,0 +1,326 @@
+{
+  "cpu_threads": 2,
+  "embedding_model": {
+    "device": "cpu",
+    "distinct": true,
+    "dtype": "torch.float32",
+    "files": [
+      {
+        "path": "1_Pooling/config.json",
+        "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+        "size": 190
+      },
+      {
+        "path": "README.md",
+        "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+        "size": 10502
+      },
+      {
+        "path": "config.json",
+        "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "size": 612
+      },
+      {
+        "path": "config_sentence_transformers.json",
+        "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+        "size": 116
+      },
+      {
+        "path": "model.safetensors",
+        "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "size": 90868376
+      },
+      {
+        "path": "modules.json",
+        "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+        "size": 349
+      },
+      {
+        "path": "sentence_bert_config.json",
+        "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+        "size": 53
+      },
+      {
+        "path": "special_tokens_map.json",
+        "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "size": 112
+      },
+      {
+        "path": "tokenizer.json",
+        "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "size": 466247
+      },
+      {
+        "path": "tokenizer_config.json",
+        "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "size": 350
+      },
+      {
+        "path": "vocab.txt",
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+        "size": 231508
+      }
+    ],
+    "finite": true,
+    "loader": "transformers.AutoTokenizer.from_pretrained + transformers.AutoModel.from_pretrained",
+    "local_files_only": true,
+    "max_length": 256,
+    "model_directory": "/home/barberb/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "output_sha256": "7130de4c1cb24cc4340c98232f173ff5f53c32d569207c12f54829a866753060",
+    "output_shape": [
+      2,
+      384
+    ],
+    "pooling": "attention-mask mean pooling then L2 normalization",
+    "qualification": "local loading and two synthetic embedding inferences only; no semantic-quality or retrieval measurement",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "synthetic_inputs": [
+      "A valve is closed.",
+      "A sensor is active."
+    ],
+    "trust_remote_code": false
+  },
+  "memory_limit_bytes": 17179869184,
+  "native_checker": {
+    "binary_path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+    "binary_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+    "probe": {
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+        "/tmp/af-003-command-correction-ebqtr67x/papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/sentinel.lean"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "source_artifact": "sentinel.lean",
+    "status": "fresh kernel checks synthetic identity theorem; no task-generated proof or bridge qualified",
+    "version": {
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)\n"
+    }
+  },
+  "python": {
+    "executable": "/usr/bin/python3.12",
+    "version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]"
+  },
+  "runtime_packages": {
+    "numpy": "1.26.4",
+    "safetensors": "0.7.0",
+    "tokenizers": "0.21.4",
+    "torch": "2.13.0",
+    "transformers": "4.52.1"
+  },
+  "schema": "autoformalization-selected-runtime-smoke/v1",
+  "scope": "Synthetic preflight only; no corpus, held-out input, training, benchmark or rollout.",
+  "solver_probes": [
+    {
+      "binary_path": "/home/barberb/.local/bin/z3",
+      "binary_sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+      "probe": {
+        "argv": [
+          "/home/barberb/.local/bin/z3",
+          "-in",
+          "-smt2"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "unsat\n"
+      },
+      "resolved_binary": "/home/barberb/.local/bin/z3",
+      "status": "synthetic QF_LIA smoke only; solver-local result",
+      "stdin_artifact": "sentinel.smt2",
+      "version": {
+        "argv": [
+          "/home/barberb/.local/bin/z3",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "Z3 version 4.15.4 - 64 bit\n"
+      }
+    },
+    {
+      "binary_path": "/home/barberb/.local/bin/cvc5",
+      "binary_sha256": "85827e46576d68570c520a2b2927fe1d260d0bfb2b93919f53f50ed29ee1e419",
+      "probe": {
+        "argv": [
+          "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+          "--lang=smt2"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "unsat\n"
+      },
+      "resolved_binary": "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+      "status": "synthetic QF_LIA smoke only; solver-local result",
+      "stdin_artifact": "sentinel.smt2",
+      "version": {
+        "argv": [
+          "/home/barberb/.local/share/ipfs_datasets_py/theorem-provers/bin/cvc5",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]\ncompiled with GCC version 11.4.0\non Feb 26 2026 01:24:28\n\nCopyright (c) 2009-2025 by the authors and their institutional\naffiliations listed at https://cvc5.github.io/people.html\n\ncvc5 is open-source and is covered by the BSD license (modified).\n\nTHIS SOFTWARE IS PROVIDED AS-IS, WITHOUT ANY WARRANTIES.\nUSE AT YOUR OWN RISK.\n\nThis version of cvc5 is linked against the following non-(L)GPL'ed\nthird party libraries.\n\n  CaDiCaL - Simplified Satisfiability Solver\n  See https://github.com/arminbiere/cadical for copyright information.\n\n  Editline Library\n  See https://thrysoee.dk/editline\n  for copyright information.\n\n  SymFPU - The Symbolic Floating Point Unit\n  See https://github.com/martin-cs/symfpu/tree/CVC4 for copyright information.\n\nThis version of cvc5 is linked against the following third party\nlibraries covered by the LGPLv3 license.\nSee licenses/lgpl-3.0.txt for more information.\n\n  GMP - Gnu Multi Precision Arithmetic Library\n  See http://gmplib.org for copyright information.\n\n  LibPoly polynomial library\n  See https://github.com/SRI-CSL/libpoly for copyright and\n  licensing information.\n\ncvc5 is statically linked against these libraries. To recompile\nthis version of cvc5 with different versions of these libraries\nfollow the instructions on https://github.com/cvc5/cvc5/blob/main/INSTALL.md\n\nSee the file COPYING (distributed with the source code, and with\nall binaries) for the full cvc5 copyright, licensing, and (lack of)\nwarranty information.\n\n"
+      }
+    }
+  ],
+  "source_interfaces": [
+    {
+      "compiler_version": "intent-formalization-compiler/v1",
+      "constructor_signature": "()",
+      "instantiated": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.compiler",
+      "qualification": "import and constructor smoke only; not source-formalization or training qualification",
+      "source_file": "/tmp/af-003-command-correction-ebqtr67x/external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+      "source_sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552",
+      "symbol": "IntentFormalizationCompiler",
+      "view_registry": {
+        "registry_id": "intent-ir-formalization-views",
+        "schema_version": "formalization-view-registry/v1",
+        "views": [
+          {
+            "capabilities": [
+              "action_contracts",
+              "hoare_triples",
+              "source_grounding"
+            ],
+            "description": "Actions with preconditions, effects, and observations.",
+            "formula_schema": "formal-formula/v1",
+            "logic_family": "dynamic_hoare",
+            "metadata": {
+              "intent_constructs": [
+                "action"
+              ]
+            },
+            "schema_version": "formalization-view/v1",
+            "view_id": "intent-ir-view/action-hoare/v1"
+          },
+          {
+            "capabilities": [
+              "source_grounding",
+              "typed_symbols"
+            ],
+            "description": "Typed Intent entities, predicates, and action facts.",
+            "formula_schema": "formal-formula/v1",
+            "logic_family": "typed_first_order",
+            "metadata": {
+              "intent_constructs": [
+                "statement",
+                "action"
+              ]
+            },
+            "schema_version": "formalization-view/v1",
+            "view_id": "intent-ir-view/facts/v1"
+          },
+          {
+            "capabilities": [
+              "failure_conditions",
+              "proof_obligations",
+              "source_grounding"
+            ],
+            "description": "Explicit failure conditions and failure transitions.",
+            "formula_schema": "formal-formula/v1",
+            "logic_family": "safety_liveness",
+            "metadata": {
+              "intent_constructs": [
+                "failure"
+              ]
+            },
+            "schema_version": "formalization-view/v1",
+            "view_id": "intent-ir-view/failure/v1"
+          },
+          {
+            "capabilities": [
+              "deontic_modality",
+              "intention",
+              "source_grounding"
+            ],
+            "description": "Goals, intentions, requirements, permissions, and prohibitions.",
+            "formula_schema": "formal-formula/v1",
+            "logic_family": "intention_deontic",
+            "metadata": {
+              "intent_constructs": [
+                "goal",
+                "modality"
+              ]
+            },
+            "schema_version": "formalization-view/v1",
+            "view_id": "intent-ir-view/intention-deontic/v1"
+          },
+          {
+            "capabilities": [
+              "invariants",
+              "proof_obligations",
+              "source_grounding"
+            ],
+            "description": "State invariants represented as always obligations.",
+            "formula_schema": "formal-formula/v1",
+            "logic_family": "safety",
+            "metadata": {
+              "intent_constructs": [
+                "invariant"
+              ]
+            },
+            "schema_version": "formalization-view/v1",
+            "view_id": "intent-ir-view/invariant/v1"
+          },
+          {
+            "capabilities": [
+              "observations",
+              "proof_obligations",
+              "source_grounding"
+            ],
+            "description": "Observable criteria and evidence obligations.",
+            "formula_schema": "formal-formula/v1",
+            "logic_family": "verification_condition",
+            "metadata": {
+              "intent_constructs": [
+                "verification"
+              ]
+            },
+            "schema_version": "formalization-view/v1",
+            "view_id": "intent-ir-view/verification/v1"
+          },
+          {
+            "capabilities": [
+              "source_grounding",
+              "state_transitions",
+              "temporal_control"
+            ],
+            "description": "Entry, terminal, sequencing, branching, retry, and concurrency.",
+            "formula_schema": "formal-formula/v1",
+            "logic_family": "workflow_temporal",
+            "metadata": {
+              "intent_constructs": [
+                "control_edge",
+                "workflow_boundary"
+              ]
+            },
+            "schema_version": "formalization-view/v1",
+            "view_id": "intent-ir-view/workflow-temporal/v1"
+          }
+        ]
+      }
+    },
+    {
+      "architecture_version": "proof_aware_auxiliary_heads_v2",
+      "constructor_signature": "(*, state: 'Optional[ModalAutoencoderTrainingState]' = None, initial_embedding_scale: 'float' = 0.02, initial_embedding_rotation_scale: 'float' = 0.1, modal_families: 'Optional[Sequence[str]]' = None, feature_codec: 'Optional[Any]' = None, compiler_quality_embedding_weight_scale: 'float' = 0.5, compiler_quality_family_logit_scale: 'float' = 0.0, logic_signature_embedding_weight_scale: 'float' = 0.5, logic_signature_family_logit_scale: 'float' = 0.0, logic_signature_legal_ir_view_logit_scale: 'float' = 0.0, round_trip_signal_embedding_weight_scale: 'float' = 0.5, round_trip_signal_family_logit_scale: 'float' = 0.0, round_trip_signal_legal_ir_view_logit_scale: 'float' = 0.0, decompiler_plan_embedding_weight_scale: 'float' = 0.5, decompiler_plan_family_logit_scale: 'float' = 0.0, decompiler_plan_legal_ir_view_logit_scale: 'float' = 0.0, predicate_argument_embedding_weight_scale: 'float' = 0.5, predicate_argument_family_logit_scale: 'float' = 0.0, predicate_argument_legal_ir_view_logit_scale: 'float' = 0.0, feature_embedding_weight_scale: 'float' = 0.5, family_embedding_weight_scale: 'float' = 0.5, family_semantic_slot_embedding_weight_scale: 'float' = 0.5, family_semantic_slot_legal_ir_view_embedding_weight_scale: 'float' = 0.5, family_legal_ir_view_embedding_weight_scale: 'float' = 0.5, semantic_slot_embedding_weight_scale: 'float' = 0.5, feature_family_logit_scale: 'float' = 0.0, semantic_slot_family_logit_scale: 'float' = 0.0, legal_ir_view_family_logit_scale: 'float' = 0.0, semantic_slot_legal_ir_view_family_logit_scale: 'float' = 0.0, family_semantic_slot_legal_ir_view_logit_scale: 'float' = 0.0, semantic_slot_interaction_weight: 'float' = 0.35, max_semantic_slot_interactions: 'int' = 64, legal_ir_view_logit_scale: 'float' = 1.0, semantic_slot_legal_ir_view_logit_scale: 'float' = 0.0, legal_ir_view_embedding_weight_scale: 'float' = 0.5, semantic_slot_legal_ir_view_embedding_weight_scale: 'float' = 0.5, cosine_reconstruction_weight: 'float' = 0.5, max_token_features: 'int' = 48, max_token_bigram_features: 'int' = 24, max_token_trigram_features: 'int' = 12, max_codec_feature_keys: 'int' = 0, max_legal_ir_token_features: 'int' = 24, max_legal_ir_token_bigram_features: 'int' = 12, max_legal_ir_token_trigram_features: 'int' = 8, max_compiler_latent_profile_features: 'int' = 48, max_round_trip_bridge_features: 'int' = 64, max_clause_topology_features: 'int' = 64, max_legal_semantic_frame_features: 'int' = 64, max_normative_polarity_features: 'int' = 48, max_compiler_contract_features: 'int' = 64, max_decompiler_surface_template_features: 'int' = 48, max_canonical_ir_graph_features: 'int' = 64, max_cycle_consistency_features: 'int' = 64, max_equivalence_prototype_features: 'int' = 48, max_contrastive_ir_boundary_features: 'int' = 64, max_repair_plan_features: 'int' = 64, max_logic_view_contract_features: 'int' = 64, max_objective_residual_features: 'int' = 64, max_provenance_alignment_features: 'int' = 64, max_discourse_flow_features: 'int' = 64, max_proof_obligation_features: 'int' = 64, max_entity_binding_features: 'int' = 64, max_defeasible_priority_features: 'int' = 64, max_constraint_grounding_features: 'int' = 64, max_quantitative_formula_features: 'int' = 64, max_definition_grounding_features: 'int' = 64, max_quantifier_scope_features: 'int' = 64, max_procedural_lifecycle_features: 'int' = 64, max_enforcement_remedy_features: 'int' = 64, max_mental_state_features: 'int' = 64, max_reference_dependency_features: 'int' = 64, max_amendment_operation_features: 'int' = 64, max_authority_jurisdiction_features: 'int' = 64, max_discretion_standard_features: 'int' = 64, max_temporal_validity_features: 'int' = 64, max_evidentiary_burden_features: 'int' = 64, max_legal_relation_features: 'int' = 64, max_status_transition_features: 'int' = 64, max_condition_consequence_features: 'int' = 64, max_applicability_scope_features: 'int' = 64, max_coreference_binding_features: 'int' = 64, max_logical_connective_features: 'int' = 64, max_enumeration_hierarchy_features: 'int' = 64, embedding_head_update_normalization: 'float' = 1.0, family_logit_head_update_normalization: 'float' = 0.0, legal_ir_view_head_update_normalization: 'float' = 0.0, feature_activity_reference: 'int' = 64, feature_logit_clip: 'float' = 24.0, proof_head_max_labels: 'int' = 64, proof_head_max_family_contexts: 'int' = 32, proof_head_logit_clip: 'float' = 12.0, proof_head_abstention_threshold: 'float' = 0.55, proof_feedback_version_fingerprint: 'str' = '', compute_device: 'str' = 'auto', legacy_embedding_adapters: 'Optional[Any]' = None, legacy_distillation_adapters: 'Optional[Any]' = None) -> 'None'",
+      "initial_state_sha256": "7de39589f48c85e46f8958ea1c3126614b72b7e763e9bf43e2beee8336f42391",
+      "instantiated": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder",
+      "qualification": "import and constructor smoke only; not source-formalization or training qualification",
+      "source_file": "/tmp/af-003-command-correction-ebqtr67x/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "source_sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+      "symbol": "AdaptiveModalAutoencoder",
+      "trained_checkpoint": null
+    }
+  ]
+}
