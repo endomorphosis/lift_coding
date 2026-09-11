@@ -769,8 +769,8 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Board namespace: vericodegen-2026-law_to_action
 - Bundle: law_to_action/LA-G6
 - Parallel lane: law_to_action
-- Outputs: papers/completion/law_to_action/related_work.md, papers/completion/law_to_action/manuscript/related_work.bib, papers/completion/law_to_action/novelty_statement.md, papers/completion/law_to_action/receipts/LA-021.json
-- Predicted files: papers/completion/law_to_action/related_work.md, papers/completion/law_to_action/manuscript/related_work.bib, papers/completion/law_to_action/novelty_statement.md, papers/completion/law_to_action/receipts/LA-021.json, papers/completion/law_to_action/receipts/snapshots/LA-021/
+- Outputs: papers/completion/law_to_action/related_work.md, papers/completion/law_to_action/manuscript/related_work.bib, papers/completion/law_to_action/novelty_statement.md, papers/completion/law_to_action/manuscript/main.tex, papers/completion/law_to_action/receipts/LA-021.json
+- Predicted files: papers/completion/law_to_action/related_work.md, papers/completion/law_to_action/manuscript/related_work.bib, papers/completion/law_to_action/novelty_statement.md, papers/completion/law_to_action/manuscript/main.tex, papers/completion/law_to_action/receipts/LA-021.json, papers/completion/law_to_action/receipts/snapshots/LA-021/
 - Allowed paths: 
 - Resource class: cpu-medium
 - Resource stage: execution
@@ -781,7 +781,7 @@ Record dependencies, exact code/data/model/tool versions, actual command logs, f
 - Reuse candidates: 
 - Receipt: papers/completion/law_to_action/receipts/LA-021.json
 
-Research current primary papers/specifications on verifiable generated code, agent runtime enforcement, proof-carrying authorization, executable legal rules and relevant agent-security benchmarks. Build a concise comparison of actual assurance boundary, source fidelity, generated-code effect observation and useful-work measurement. Confirm citation metadata and avoid unsupported novelty/superiority claims. Keep broad infrastructure descriptions subordinate to the tested contribution.
+Research current primary papers/specifications on verifiable generated code, agent runtime enforcement, proof-carrying authorization, executable legal rules and relevant agent-security benchmarks. Build a concise comparison of actual assurance boundary, source fidelity, generated-code effect observation and useful-work measurement. Confirm citation metadata and avoid unsupported novelty/superiority claims. Keep broad infrastructure descriptions subordinate to the tested contribution. Integrate the reviewed related-work discussion, citations and workshop fit into manuscript/main.tex as part of this task. Ensure the selected bibliography is actually loaded, existing citation keys remain resolvable without duplicate entries, and retain a real compilation/citation check. Inherited bibliography access dates are historical source text, not evidence of fresh verification. Verify the closest current runtime-enforcement systems, including AgentSpec, Progent and CaMeL, from their primary sources; citing a system does not mean it was benchmarked.
 
 Acceptance criteria:
 

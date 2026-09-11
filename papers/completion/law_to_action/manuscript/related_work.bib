@@ -1,0 +1,409 @@
+% Working LA-021 bibliography. Most inherited entries still require primary-source
+% verification. Three versioned arXiv records are documented in the operator review.
+% LA-021 related-work bibliography for the law-to-action workshop paper.
+% Keys mcp, mcp-auth, catala, cvefixes, quack, ipfs, libp2p, and ucan are retained
+% from the reconstructed manuscript bibliography (papers/completion/law_to_action/manuscript/references.bib).
+% Merge by key in LA-022; do not duplicate those eight entries.
+% Remaining keys are primary sources added for related work, baseline rationale,
+% and workshop fit. Listing a system here is not a claim that it was executed
+% as a scored experimental arm.
+%
+% Metadata policy: structured fields follow the named primary venue, DOI, RFC,
+% specification, or e-print. Access dates are recorded only for web specifications
+% and the workshop CFP. This file does not invent page counts or DOIs for
+% unrecovered records.
+
+% --- Infrastructure retained from the reconstructed manuscript ---------------
+
+@misc{mcp,
+  author = {{Model Context Protocol contributors}},
+  title = {{Model Context Protocol specification, revision 2025-11-25}},
+  year = {2025},
+  url = {https://modelcontextprotocol.io/specification/2025-11-25},
+  note = {Accessed 6 September 2026. Primary MCP tool-invocation specification cited by the reconstructed manuscript.}
+}
+
+@misc{mcp-auth,
+  author = {{Model Context Protocol contributors}},
+  title = {{Model Context Protocol: Authorization, revision 2025-11-25}},
+  year = {2025},
+  url = {https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization},
+  note = {Accessed 6 September 2026. States that application implementations remain responsible for enforcing security requirements.}
+}
+
+@article{catala,
+  author = {Denis Merigoux and Nicolas Chataing and Jonathan Protzenko},
+  title = {{Catala: A programming language for the law}},
+  journal = {Proceedings of the ACM on Programming Languages},
+  volume = {5},
+  number = {ICFP},
+  pages = {77:1--77:29},
+  year = {2021},
+  doi = {10.1145/3473582}
+}
+
+@inproceedings{cvefixes,
+  author = {Guru Bhandari and Amara Naseer and Leon Moonen},
+  title = {{CVEfixes: Automated collection of vulnerabilities and their fixes from open-source software}},
+  booktitle = {Proceedings of the 17th International Conference on Predictive Models and Data Analytics in Software Engineering},
+  year = {2021},
+  doi = {10.1145/3475960.3475985}
+}
+
+@misc{quack,
+  author = {{DuckDB team}},
+  title = {{Quack: The duckdb client-server protocol}},
+  year = {2026},
+  url = {https://duckdb.org/2026/05/12/quack-remote-protocol},
+  note = {12 May 2026. Accessed 6 September 2026. Operational-state substrate, not a safety theorem.}
+}
+
+@misc{ipfs,
+  author = {{IPFS contributors}},
+  title = {{Content identifiers (CIDs)}},
+  year = {2026},
+  url = {https://docs.ipfs.tech/concepts/content-addressing/},
+  note = {Documentation accessed 6 September 2026. Content identity is not publication, availability, or authorization.}
+}
+
+@misc{libp2p,
+  author = {{libp2p contributors}},
+  title = {{libp2p connections specification}},
+  year = {2026},
+  url = {https://github.com/libp2p/specs/blob/master/connections/README.md},
+  note = {Specification accessed 6 September 2026. Transport identity is not a tool grant.}
+}
+
+@misc{ucan,
+  author = {{UCAN contributors}},
+  title = {{User controlled authorization network (UCAN) specification}},
+  year = {2026},
+  url = {https://ucan.xyz/specification/},
+  note = {Specification accessed 6 September 2026. Signed delegation is distinct from theorem checking and from exact proof-capability binding.}
+}
+
+% --- Complete mediation, proof-carrying code/auth, runtime enforcement ------
+
+@article{saltzer1975protection,
+  author = {Jerome H. Saltzer and Michael D. Schroeder},
+  title = {The Protection of Information in Computer Systems},
+  journal = {Proceedings of the IEEE},
+  volume = {63},
+  number = {9},
+  pages = {1278--1308},
+  year = {1975},
+  doi = {10.1109/PROC.1975.9939}
+}
+
+@inproceedings{necula1997pcc,
+  author = {George C. Necula},
+  title = {Proof-Carrying Code},
+  booktitle = {Proceedings of the 24th {ACM} {SIGPLAN}-{SIGACT} Symposium on Principles of Programming Languages},
+  series = {POPL '97},
+  pages = {106--119},
+  year = {1997},
+  publisher = {ACM},
+  doi = {10.1145/263699.263712}
+}
+
+@inproceedings{appel1999pca,
+  author = {Andrew W. Appel and Edward W. Felten},
+  title = {Proof-Carrying Authentication},
+  booktitle = {Proceedings of the 6th {ACM} Conference on Computer and Communications Security},
+  series = {CCS '99},
+  pages = {52--62},
+  year = {1999},
+  publisher = {ACM},
+  doi = {10.1145/319709.319718}
+}
+
+@article{schneider2000enforceable,
+  author = {Fred B. Schneider},
+  title = {Enforceable Security Policies},
+  journal = {ACM Transactions on Information and System Security},
+  volume = {3},
+  number = {1},
+  pages = {30--50},
+  year = {2000},
+  doi = {10.1145/353323.353382}
+}
+
+@inproceedings{erlingsson2000irm,
+  author = {\'{U}lfar Erlingsson and Fred B. Schneider},
+  title = {{IRM} Enforcement of {Java} Stack Inspection},
+  booktitle = {Proceeding of the 2000 {IEEE} Symposium on Security and Privacy},
+  pages = {246--255},
+  year = {2000},
+  publisher = {IEEE},
+  doi = {10.1109/SECPRI.2000.848461}
+}
+
+@article{ligatti2005edit,
+  author = {Jay Ligatti and Lujo Bauer and David Walker},
+  title = {Edit automata: enforcement mechanisms for run-time security policies},
+  journal = {International Journal of Information Security},
+  volume = {4},
+  number = {1},
+  pages = {2--16},
+  year = {2005},
+  doi = {10.1007/s10207-004-0046-8}
+}
+
+@article{hamlen2006enforcement,
+  author = {Kevin W. Hamlen and Greg Morrisett and Fred B. Schneider},
+  title = {Computability Classes for Enforcement Mechanisms},
+  journal = {ACM Transactions on Programming Languages and Systems},
+  volume = {28},
+  number = {1},
+  pages = {175--205},
+  year = {2006},
+  doi = {10.1145/1111596.1111603}
+}
+
+@inproceedings{pnueli1998translation,
+  author = {Amir Pnueli and Michael Siegel and Eli Singerman},
+  title = {Translation Validation},
+  booktitle = {Tools and Algorithms for the Construction and Analysis of Systems},
+  series = {Lecture Notes in Computer Science},
+  volume = {1384},
+  pages = {151--166},
+  year = {1998},
+  publisher = {Springer},
+  doi = {10.1007/BFb0054170}
+}
+
+% --- Executable legal rules -------------------------------------------------
+
+@article{sergot1986bna,
+  author = {M. J. Sergot and F. Sadri and R. A. Kowalski and F. Kriwaczek and P. Hammond and H. T. Cory},
+  title = {The {British} {Nationality} {Act} as a Logic Program},
+  journal = {Communications of the ACM},
+  volume = {29},
+  number = {5},
+  pages = {370--386},
+  year = {1986},
+  doi = {10.1145/5689.5920}
+}
+
+@article{prakken2015lawlogic,
+  author = {Henry Prakken and Giovanni Sartor},
+  title = {Law and logic: A review from an argumentation perspective},
+  journal = {Artificial Intelligence},
+  volume = {227},
+  pages = {214--245},
+  year = {2015},
+  doi = {10.1016/j.artint.2015.06.005}
+}
+
+@article{benzmueller2020logikey,
+  author = {Christoph Benzm{\"u}ller and Xavier Parent and Leendert van der Torre},
+  title = {Designing normative theories for ethical and legal reasoning: {LogiKEy} framework, methodology, and tool support},
+  journal = {Artificial Intelligence},
+  volume = {287},
+  pages = {103348},
+  year = {2020},
+  doi = {10.1016/j.artint.2020.103348}
+}
+
+@inproceedings{merigoux2021tax,
+  author = {Denis Merigoux and Rapha{\"e}l Monat and Jonathan Protzenko},
+  title = {A Modern Compiler for the {French} Tax Code},
+  booktitle = {Proceedings of the 30th {ACM} {SIGPLAN} International Conference on Compiler Construction},
+  series = {CC 2021},
+  pages = {71--82},
+  year = {2021},
+  publisher = {ACM},
+  doi = {10.1145/3446804.3446850}
+}
+
+% --- Capabilities and authorization languages --------------------------------
+
+@phdthesis{miller2006robust,
+  author = {Mark S. Miller},
+  title = {Robust Composition: Towards a Unified Approach to Access Control and Concurrency Control},
+  school = {Johns Hopkins University},
+  year = {2006}
+}
+
+@inproceedings{birgisson2014macaroons,
+  author = {Arnar Birgisson and Joe Gibbs Politz and {\'{U}}lfar Erlingsson and Ankur Taly and Michael Vrable and Mark Lentczner},
+  title = {Macaroons: Cookies with Contextual Caveats for Decentralized Authorization in the Cloud},
+  booktitle = {Proceedings of the 2014 Network and Distributed System Security Symposium},
+  series = {NDSS 2014},
+  year = {2014},
+  publisher = {Internet Society}
+}
+
+@inproceedings{pang2019zanzibar,
+  author = {Ruoming Pang and Ram{\'{o}}n C{\'{a}}ceres and Mike Burrows and Zhifeng Chen and Pratik Godiwala and Ankur Kapoor and Christopher J. Hill and Kamil Kowalczyk and Alexander Piwonka and David Ramadan and David Rosenthal and David Sun and Rodrigo Tuttle and Jason Wang and Aaron Weingarten and Maya Zaks},
+  title = {Zanzibar: {Google}'s Consistent, Global Authorization System},
+  booktitle = {2019 {USENIX} Annual Technical Conference ({USENIX} {ATC} 19)},
+  pages = {33--46},
+  year = {2019},
+  publisher = {{USENIX} Association}
+}
+
+@article{cutler2024cedar,
+  author = {Joseph W. Cutler and Craig Disselkoen and Aaron Eline and Shaobo He and Kyle Headley and Michael Hicks and Kesha Hietala and Eleftherios Ioannidis and John Kastner and Anwar Mamat and Darin McAdams and Matt McCutchen and Neha Rungta and Emina Torlak and Andrew Wells},
+  title = {Cedar: A New Language for Expressive, Fast, Safe, and Analyzable Authorization},
+  journal = {Proceedings of the ACM on Programming Languages},
+  volume = {8},
+  number = {OOPSLA1},
+  pages = {103:1--103:28},
+  year = {2024},
+  doi = {10.1145/3649817},
+  eprint = {2403.04623},
+  eprinttype = {arXiv}
+}
+
+% --- Verifiable generated code ----------------------------------------------
+
+@article{leroy2009compcert,
+  author = {Xavier Leroy},
+  title = {Formal verification of a realistic compiler},
+  journal = {Communications of the ACM},
+  volume = {52},
+  number = {7},
+  pages = {107--115},
+  year = {2009},
+  doi = {10.1145/1538788.1538814}
+}
+
+@misc{chen2021codex,
+  author = {Mark Chen and Jerry Tworek and Heewoo Jun and Qiming Yuan and Henrique Ponde de Oliveira Pinto and Jared Kaplan and Harri Edwards and Yuri Burda and Nicholas Joseph and Greg Brockman and Alex Ray and Raul Puri and Gretchen Krueger and Michael Petrov and Heidy Khlaaf and Girish Sastry and Pamela Mishkin and Brooke Chan and Scott Gray and Nick Ryder and Mikhail Pavlov and Alethea Power and Lukasz Kaiser and Mohammad Bavarian and Clemens Winter and Philippe Tillet and Felipe Petroski Such and Dave Cummings and Matthias Plappert and Fotios Chantzis and Elizabeth Barnes and Ariel Herbert-Voss and William Hebgen Guss and Alex Nichol and Alex Paino and Nikolas Tezak and Jie Tang and Igor Babuschkin and Suchir Balaji and Shantanu Jain and William Saunders and Christopher Hesse and Andrew N. Carr and Jan Leike and Josh Achiam and Vedant Misra and Evan Morikawa and Alec Radford and Matthew Knight and Miles Brundage and Mira Murati and Katie Mayer and Peter Welinder and Bob McGrew and Dario Amodei and Sam McCandlish and Ilya Sutskever and Wojciech Zaremba},
+  title = {Evaluating Large Language Models Trained on Code},
+  year = {2021},
+  eprint = {2107.03374},
+  eprinttype = {arXiv},
+  note = {HumanEval functional-correctness benchmark; not a forbidden-effect mediation measurement.}
+}
+
+@inproceedings{jimenez2024swebench,
+  author = {Carlos E. Jimenez and John Yang and Alexander Wettig and Shunyu Yao and Kexin Pei and Ofir Press and Karthik Narasimhan},
+  title = {{SWE}-bench: Can Language Models Resolve Real-World {GitHub} Issues?},
+  booktitle = {The Twelfth International Conference on Learning Representations},
+  year = {2024},
+  note = {OpenReview: https://openreview.net/forum?id=VTF8yNQM66. Issue-resolution utility, not gated handler-effect counters.}
+}
+
+@inproceedings{sun2024clover,
+  author = {Chuyue Sun and Ying Sheng and Oded Padon and Clark Barrett},
+  title = {Clover: Closed-Loop Verifiable Code Generation},
+  booktitle = {Proceedings of the 24th Conference on Formal Methods in Computer-Aided Design ({FMCAD} 2024)},
+  pages = {194--203},
+  year = {2024},
+  publisher = {{TU} Wien Academic Press},
+  doi = {10.34727/2024/isbn.978-3-85448-065-5_27},
+  eprint = {2310.17807},
+  eprinttype = {arXiv}
+}
+
+@inproceedings{yang2023leandojo,
+  author = {Kaiyu Yang and Aidan Swope and Alex Gu and Rahul Chalamala and Peiyang Song and Shixing Yu and Saad Godil and Ryan J. Prenger and Animashree Anandkumar},
+  title = {{LeanDojo}: Theorem Proving with Retrieval-Augmented Language Models},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume = {36},
+  year = {2023}
+}
+
+@inproceedings{wu2022autoformalization,
+  author = {Yuhuai Wu and Albert Q. Jiang and Wenda Li and Markus N. Rabe and Charles Staats and Mateja Jamnik and Christian Szegedy},
+  title = {Autoformalization with Large Language Models},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume = {35},
+  year = {2022},
+  eprint = {2205.12615},
+  eprinttype = {arXiv}
+}
+
+% --- Agent security, tool-use, and capability isolation ---------------------
+
+@inproceedings{debenedetti2024agentdojo,
+  author = {Edoardo Debenedetti and Jie Zhang and Mislav Balunovi{\'{c}} and Luca Beurer-Kellner and Marc Fischer and Florian Tram{\`{e}}r},
+  title = {{AgentDojo}: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for {LLM} Agents},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume = {37},
+  year = {2024},
+  eprint = {2406.13352},
+  eprinttype = {arXiv},
+  note = {Datasets and Benchmarks track. Utility versus attack-success in dynamic tool environments; not this paper's sandbox-handler counters.}
+}
+
+@inproceedings{ruan2024toolemu,
+  author = {Yangjun Ruan and Honghua Dong and Andrew Wang and Silviu Pitis and Yongchao Zhou and Jimmy Ba and Yann Dubois and Chris J. Maddison and Tatsunori Hashimoto},
+  title = {Identifying the Risks of {LM} Agents with an {LM}-Emulated Sandbox},
+  booktitle = {The Twelfth International Conference on Learning Representations},
+  year = {2024},
+  eprint = {2309.15817},
+  eprinttype = {arXiv},
+  note = {ToolEmu. Emulated tools are not independently observed handler mutations.}
+}
+
+@inproceedings{zhan2024injecagent,
+  author = {Qiusi Zhan and Zhixiang Liang and Zifan Ying and Daniel Kang},
+  title = {{InjecAgent}: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents},
+  booktitle = {Findings of the Association for Computational Linguistics: {ACL} 2024},
+  pages = {10471--10506},
+  year = {2024},
+  doi = {10.18653/v1/2024.findings-acl.624},
+  eprint = {2403.02691},
+  eprinttype = {arXiv}
+}
+
+@misc{yao2024taubench,
+  author = {Shunyu Yao and Noah Shinn and Pedram Razavi and Karthik Narasimhan},
+  title = {$\tau$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains},
+  year = {2024},
+  eprint = {2406.12045},
+  eprinttype = {arXiv},
+  note = {Policy-following success in tool-agent-user interaction; not a generated-code-to-protected-effect mediation measurement.}
+}
+
+@inproceedings{andriushchenko2025agentharm,
+  author = {Maksym Andriushchenko and Alexandra Souly and Mateusz Dziemian and Derek Duenas and Maxwell Lin and Justin Wang and Dan Hendrycks and Andy Zou and Zico Kolter and Matt Fredrikson and Eric Winsor and Jerome Wynne and Yarin Gal and Xander Davies},
+  title = {{AgentHarm}: A Benchmark for Measuring Harmfulness of {LLM} Agents},
+  booktitle = {The Thirteenth International Conference on Learning Representations},
+  year = {2025},
+  eprint = {2410.09024},
+  eprinttype = {arXiv}
+}
+
+@misc{debenedetti2025camel,
+  author = {Edoardo Debenedetti and Ilia Shumailov and Tianqi Fan and Jamie Hayes and Nicholas Carlini and Daniel Fabian and Christoph Kern and Chongyang Shi and Andreas Terzis and Florian Tram{\`{e}}r},
+  title = {Defeating Prompt Injections by Design},
+  year = {2025},
+  eprint = {2503.18813},
+  eprinttype = {arXiv},
+  url = {https://arxiv.org/abs/2503.18813v2},
+  note = {CaMeL capability isolation for LLM agents. Version 2, 24 June 2025; metadata checked 11 September 2026. Not executed as a scored arm here.}
+}
+
+% --- Workshop fit -----------------------------------------------------------
+
+@misc{vericode2026cfp,
+  author = {{NeurIPS 2026 Workshop on AI for Verifiable Coding organizers}},
+  title = {Call for Papers},
+  year = {2026},
+  url = {https://vericodegen.github.io/cfp.html},
+  note = {Accessed 11 September 2026. Research track: 4--9 main-text pages excluding references and appendices; official 2026 workshop template; double-blind submission including linked artifacts; methodology-essential LLM disclosure; non-archival workshop.}
+}
+
+@misc{wang2025agentspec,
+  author = {Haoyu Wang and Christopher M. Poskitt and Jun Sun},
+  title = {AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM Agents},
+  year = {2025},
+  eprint = {2503.18666},
+  eprinttype = {arXiv},
+  url = {https://arxiv.org/abs/2503.18666v3},
+  note = {Version 3, 31 July 2025. Metadata checked 11 September 2026. Not benchmarked in this paper.}
+}
+
+@misc{shi2025progent,
+  author = {Tianneng Shi and Jingxuan He and Zhun Wang and Hongwei Li and Linyu Wu and Wenbo Guo and Dawn Song},
+  title = {Progent: Securing AI Agents with Privilege Control},
+  year = {2025},
+  eprint = {2504.11703},
+  eprinttype = {arXiv},
+  url = {https://arxiv.org/abs/2504.11703v3},
+  note = {Version 3 revised 14 May 2026; initial submission 2025. Metadata checked 11 September 2026. Not benchmarked in this paper.}
+}

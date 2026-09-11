@@ -662,7 +662,7 @@
       "paper_evidence": [
         "p9 eight references; pp1\u20132 contributions; p8 conclusion"
       ],
-      "description": "Research current primary papers/specifications on verifiable generated code, agent runtime enforcement, proof-carrying authorization, executable legal rules and relevant agent-security benchmarks. Build a concise comparison of actual assurance boundary, source fidelity, generated-code effect observation and useful-work measurement. Confirm citation metadata and avoid unsupported novelty/superiority claims. Keep broad infrastructure descriptions subordinate to the tested contribution.",
+      "description": "Research current primary papers/specifications on verifiable generated code, agent runtime enforcement, proof-carrying authorization, executable legal rules and relevant agent-security benchmarks. Build a concise comparison of actual assurance boundary, source fidelity, generated-code effect observation and useful-work measurement. Confirm citation metadata and avoid unsupported novelty/superiority claims. Keep broad infrastructure descriptions subordinate to the tested contribution. Integrate the reviewed related-work discussion, citations and workshop fit into manuscript/main.tex as part of this task. Ensure the selected bibliography is actually loaded, existing citation keys remain resolvable without duplicate entries, and retain a real compilation/citation check. Inherited bibliography access dates are historical source text, not evidence of fresh verification. Verify the closest current runtime-enforcement systems, including AgentSpec, Progent and CaMeL, from their primary sources; citing a system does not mean it was benchmarked.",
       "acceptance_criteria": [
         "Closest related systems and implementable baseline rationale are cited from primary sources.",
         "Novelty statement matches the bounded experimental contribution and acknowledges modeling/trust assumptions.",
@@ -671,7 +671,8 @@
       "deliverables": [
         "papers/completion/law_to_action/related_work.md",
         "papers/completion/law_to_action/manuscript/related_work.bib",
-        "papers/completion/law_to_action/novelty_statement.md"
+        "papers/completion/law_to_action/novelty_statement.md",
+        "papers/completion/law_to_action/manuscript/main.tex"
       ],
       "suggested_code_paths": [],
       "implementation_paths": []
