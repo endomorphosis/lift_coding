@@ -1,0 +1,174 @@
+{
+  "schema": "vericodegen-native-submodule-proof/v1",
+  "started_at": "2026-09-11T15:08:53.242518+00:00",
+  "lane": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+  "parent_commit": "bd0daf73a9d94f6b4c2467ffea89ea40dedf48a8",
+  "test_worktree": "/tmp/vericodegen-native-submodule-proof-vhs8l2t3/child",
+  "native_module": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+  "native_method": "PortalImplementationDaemon._initialize_worktree_submodules",
+  "offline_local_only": true,
+  "daemon_loop_started": false,
+  "provider_invoked": false,
+  "network_fetch_permitted": false,
+  "root_index_sha256_before": "57fb070b931374128b1a30ae76bf63ca537560eaacde22e347a14bb002ce47a5",
+  "results": [
+    {
+      "path": "external/ipfs_accelerate",
+      "expected_pin": "14d988826326c060d98871e655c8125fc92e2d82",
+      "actual_head": "14d988826326c060d98871e655c8125fc92e2d82",
+      "exact_pin_match": true,
+      "clean": true,
+      "source_common_gitdir": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_accelerate/.git",
+      "child_common_gitdir": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_accelerate/.git",
+      "source_is_lane_local": true
+    },
+    {
+      "path": "external/ipfs_datasets",
+      "expected_pin": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "actual_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "exact_pin_match": true,
+      "clean": true,
+      "source_common_gitdir": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_datasets/.git",
+      "child_common_gitdir": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_datasets/.git",
+      "source_is_lane_local": true
+    },
+    {
+      "path": "external/ipfs_kit",
+      "expected_pin": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "actual_head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "exact_pin_match": true,
+      "clean": true,
+      "source_common_gitdir": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_kit/.git",
+      "child_common_gitdir": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_kit/.git",
+      "source_is_lane_local": true
+    }
+  ],
+  "events": [
+    {
+      "name": "offline_nested_submodule_initialization_skipped",
+      "payload": {
+        "schema": "ipfs_accelerate_py.agent_supervisor.offline-nested-submodule-skip@1",
+        "reason": "explicit_authority_dependencies_only",
+        "parent_relative": "external/ipfs_accelerate",
+        "declared_submodule_count": 10,
+        "declared_submodule_paths": [
+          "docs/fastmcp",
+          "docs/mcp-python-sdk",
+          "ipfs_accelerate_py/mcplusplus",
+          "ipfs_datasets_py",
+          "ipfs_kit_py",
+          "ipfs_model_manager_py",
+          "ipfs_transformers_py",
+          "test/doc-builder",
+          "test/huggingface_doc_builder",
+          "test/huggingface_transformers"
+        ],
+        "declared_submodule_paths_omitted": 0,
+        "declared_submodule_manifest_sha256": "201c090d6475d7408b6712bd0c13553856347c49347bd2db3e839018b08068fc",
+        "max_recorded_paths": 32,
+        "offline_local_only": true,
+        "nested_creator_invoked": false,
+        "nested_discovery_invoked": false,
+        "recursive_initialization_attempted": false,
+        "fetch_attempted": false,
+        "fallback_used": false
+      }
+    },
+    {
+      "name": "offline_nested_submodule_initialization_skipped",
+      "payload": {
+        "schema": "ipfs_accelerate_py.agent_supervisor.offline-nested-submodule-skip@1",
+        "reason": "explicit_authority_dependencies_only",
+        "parent_relative": "external/ipfs_datasets",
+        "declared_submodule_count": 10,
+        "declared_submodule_paths": [
+          ".tools/ipfs_kit_py",
+          "ipfs_accelerate_py",
+          "ipfs_datasets_py/logic/CEC/DCEC_Library",
+          "ipfs_datasets_py/logic/CEC/Eng-DCEC",
+          "ipfs_datasets_py/logic/CEC/ShadowProver",
+          "ipfs_datasets_py/logic/CEC/Talos",
+          "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+          "ipfs_datasets_py/multimedia/omni_converter_mk2",
+          "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+          "ipfs_kit_py"
+        ],
+        "declared_submodule_paths_omitted": 0,
+        "declared_submodule_manifest_sha256": "954411a0ddb93f77cef1abca0ff56e9d71b998da59c30412d0b03259331cb626",
+        "max_recorded_paths": 32,
+        "offline_local_only": true,
+        "nested_creator_invoked": false,
+        "nested_discovery_invoked": false,
+        "recursive_initialization_attempted": false,
+        "fetch_attempted": false,
+        "fallback_used": false
+      }
+    },
+    {
+      "name": "offline_nested_submodule_initialization_skipped",
+      "payload": {
+        "schema": "ipfs_accelerate_py.agent_supervisor.offline-nested-submodule-skip@1",
+        "reason": "explicit_authority_dependencies_only",
+        "parent_relative": "external/ipfs_kit",
+        "declared_submodule_count": 15,
+        "declared_submodule_paths": [
+          "docs/filecoin-address-python",
+          "docs/filesystem_spec",
+          "docs/ipfs-docs",
+          "docs/ipfs_cluster",
+          "docs/ipfsspec",
+          "docs/lassie",
+          "docs/libp2p-universal-connectivity",
+          "docs/libp2p_docs",
+          "docs/lighthouse-python-sdk",
+          "docs/mcp-python-sdk",
+          "docs/storacha_specs",
+          "ipfs_accelerate_py",
+          "py-ipld-car",
+          "py-ipld-dag-pb",
+          "py-ipld-unixfs"
+        ],
+        "declared_submodule_paths_omitted": 0,
+        "declared_submodule_manifest_sha256": "885175f83b45d3569f5718af3d9ba6bb175631006976bcabad2b7f9dd1ee2f2c",
+        "max_recorded_paths": 32,
+        "offline_local_only": true,
+        "nested_creator_invoked": false,
+        "nested_discovery_invoked": false,
+        "recursive_initialization_attempted": false,
+        "fetch_attempted": false,
+        "fallback_used": false
+      }
+    }
+  ],
+  "cleanup": [
+    {
+      "path": "/tmp/vericodegen-native-submodule-proof-vhs8l2t3/child/external/ipfs_kit",
+      "returncode": 0,
+      "removed": true,
+      "stderr": ""
+    },
+    {
+      "path": "/tmp/vericodegen-native-submodule-proof-vhs8l2t3/child/external/ipfs_datasets",
+      "returncode": 0,
+      "removed": true,
+      "stderr": ""
+    },
+    {
+      "path": "/tmp/vericodegen-native-submodule-proof-vhs8l2t3/child/external/ipfs_accelerate",
+      "returncode": 0,
+      "removed": true,
+      "stderr": ""
+    },
+    {
+      "path": "/tmp/vericodegen-native-submodule-proof-vhs8l2t3/child",
+      "returncode": 0,
+      "removed": true,
+      "stderr": ""
+    }
+  ],
+  "parent_child_status": "",
+  "success": true,
+  "temporary_parent_removed": true,
+  "root_index_bytes_unchanged": true,
+  "finished_at": "2026-09-11T15:09:03.125660+00:00"
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "vericodegen-tex-toolchain-validation/v1",
+  "completed_at": "2026-09-11T14:59:55.190499+00:00",
+  "installation_root": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX",
+  "sudo_noninteractive_available": false,
+  "system_packages_changed": false,
+  "native_repository_files_edited": false,
+  "latexmk_version": "Latexmk, John Collins, 9 March 2026. Version 4.88",
+  "pdflatex_version": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+  "robust_worker_command": [
+    "/home/barberb/.local/bin/vericodegen-latexmk",
+    "-g",
+    "-pdf",
+    "-interaction=nonstopmode",
+    "-halt-on-error",
+    "-file-line-error",
+    "neurips_2026_vericode_workshop.tex"
+  ],
+  "validation_environment": {
+    "PATH": "/usr/bin:/bin"
+  },
+  "validation_workdir": "/tmp/vericodegen-tex-bootstrap-20260911/template",
+  "exit_code": 0,
+  "template_pdf": "/tmp/vericodegen-tex-bootstrap-20260911/template/neurips_2026_vericode_workshop.pdf",
+  "template_pdf_sha256": "23bdaec8bc236765b8cce5486e4ef087f0bb18237b390276e3049c99bc0d84f3",
+  "build_log": "/tmp/vericodegen-tex-bootstrap-20260911/template-build.log",
+  "supplied_inputs": {
+    "neurips_2026_vericode_workshop.tex": {
+      "source_sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "test_copy_sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "identical": true
+    },
+    "neurips_2026_vericode.sty": {
+      "source_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "test_copy_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "identical": true
+    },
+    "checklist.tex": {
+      "source_sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "test_copy_sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "identical": true
+    }
+  },
+  "explicit_packages_added": [
+    "environ",
+    "lineno",
+    "units",
+    "mathtools",
+    "algorithms",
+    "algorithmicx",
+    "pgf",
+    "enumitem",
+    "multirow",
+    "cleveref",
+    "collection-fontsrecommended",
+    "microtype"
+  ],
+  "package_scope": "Required template dependencies and common manuscript math/algorithm/table packages; entire latexextra/mathscience collections were not installed."
+}

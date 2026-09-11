@@ -2,23 +2,18 @@
 """Build, inspect, and run the three paper boards with ipfs_accelerate_py.
 
 The default command is validation; live provider work requires the run command.
-The Markdown boards are the runtime authority. tasks.json is the reviewed seed.
+Markdown and tasks.json are reviewed import sources. Live scheduling uses the
+Quack database campaign in paper_supervisor_campaign.py.
 """
 
 from __future__ import annotations
 
 import argparse
-from contextlib import ExitStack
-import fcntl
 import hashlib
 import json
 import os
 from pathlib import Path
-import shlex
-import signal
-import subprocess
 import sys
-import time
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = Path("papers/completion")
@@ -93,7 +88,7 @@ def build(paper: str):
         "board_namespace": f"vericodegen-2026-{paper}",
         "state_prefix": f"paper_{paper}", "submodule_paths": list(SUBMODULES),
         "implementation_timeout_seconds": 7200, "max_task_attempts": 3,
-        "runtime_authority": "explicit native legacy-markdown task source",
+        "runtime_authority": "native DatabaseTaskSource through dedicated Quack owner; fail closed",
         "refill_policy": "fixed reviewed board; split/discover follow-ups explicitly with lineage",
     }
     write_json(ROOT / folder / "supervisor.json", cfg)
@@ -163,39 +158,18 @@ def state_root() -> Path:
 
 
 def supervisor_argv(paper: str) -> list[str]:
-    cfg = config(paper)
-    lane = state_root() / paper
-    argv = [
-        "--todo-path", cfg["todo_path"], "--objective-path", cfg["objective_path"],
-        "--task-prefix", cfg["task_prefix"], "--state-prefix", cfg["state_prefix"],
-        "--state-dir", str(lane / "state"), "--worktree-root", str(lane / "worktrees"),
-        "--merge-queue-dir", str(state_root() / "merge-queue"),
-        "--objective-graph-path", str(lane / "objective_graph.json"),
-        "--objective-bundle-dir", str(lane / "bundles"),
-        "--objective-dataset-dir", str(lane / "datasets"),
-        "--objective-discovery-dir", str(lane / "discovery"),
-        "--task-source-kind", "legacy-markdown", "--authority-mode", "legacy_markdown",
-        "--explicit-legacy-task-source", "--implement",
-        "--max-task-attempts", str(cfg["max_task_attempts"]),
-        "--implementation-timeout", str(cfg["implementation_timeout_seconds"]),
-        "--implementation-max-timeout", str(cfg["implementation_timeout_seconds"]),
-        "--implementation-log-stall-seconds", "1800", "--daemon-interval", "30",
-        "--check-interval", "30", "--implementation-retry-budget", "3",
-        "--validation-retry-budget", "3", "--merge-retry-budget", "3",
-        "--no-objective-goal-refinement", "--no-objective-goal-completion-reconcile",
-        "--no-objective-goal-migration",
-    ]
-    for path in cfg["submodule_paths"]:
-        argv.extend(["--worktree-submodule-path", path])
-    # Board state is mutable; protect original PDFs, reviewed seed, and validator.
-    protected = ["scripts/paper_supervisors.py", "papers/completion/README.md", *TEMPLATES]
-    for other in PAPERS:
-        other_cfg = config(other)
-        protected.extend([other_cfg["pdf"], other_cfg["manifest_path"], other_cfg["review_path"],
-                          str(BASE / other / "supervisor.json")])
-    for path in protected:
-        argv.extend(["--implementation-protected-path", path])
-    return argv
+    """Validate the actual database command with a non-routable sample identity.
+
+    Live identities are supplied exclusively by the campaign owner's verified
+    readiness. This helper never launches a process or resolves credentials.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from paper_supervisor_campaign import native_argv
+    ready = {"quack_endpoint": "quack:127.0.0.1:1",
+             "endpoint_secret_handle": "handle:validation-only:" + paper,
+             "store_id": "vericodegen-2026-" + paper,
+             "store_generation": "1", "schema_revision": "1"}
+    return native_argv(ROOT, paper, state_root() / paper, ready)[4:]
 
 
 def check_dag(graph: dict[str, list[str]]):
@@ -444,80 +418,6 @@ def verify_goal(paper: str, goal_id: str):
     return results
 
 
-def command(paper: str):
-    return [sys.executable, "-P", "-m",
-            "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor",
-            *supervisor_argv(paper)]
-
-
-def run(papers: list[str]):
-    for paper in papers:
-        validate(paper)
-    # Ephemeral workers start from committed trees. Reject uncommitted inputs
-    # instead of silently launching workers that cannot see the reviewed board.
-    scope = ["papers", "scripts/paper_supervisors.py"]
-    dirty = subprocess.check_output(["git", "status", "--porcelain", "--", *scope], cwd=ROOT, text=True)
-    if dirty.strip():
-        raise ValueError("commit the reviewed papers/completion files, input PDFs, and launcher in the integration checkout before run; native ephemeral workers need committed inputs")
-    env = os.environ.copy()
-    env["PYTHONPATH"] = os.pathsep.join([*(str(ROOT / p) for p in SUBMODULES), env.get("PYTHONPATH", "")])
-    children = []
-    locks = ExitStack()
-    previous_handler = signal.getsignal(signal.SIGTERM)
-
-    def terminate(_signum, _frame):
-        raise KeyboardInterrupt
-
-    try:
-        # Claim every requested lane before starting any child.
-        for paper in papers:
-            lane = state_root() / paper
-            lane.mkdir(parents=True, exist_ok=True)
-            handle = locks.enter_context((lane / "launcher.lock").open("a"))
-            try:
-                fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-            except BlockingIOError as exc:
-                raise RuntimeError(f"a launcher already owns {paper}") from exc
-        signal.signal(signal.SIGTERM, terminate)
-        for paper in papers:
-            lane = state_root() / paper
-            lane.mkdir(parents=True, exist_ok=True)
-            with (lane / "supervisor.log").open("a", encoding="utf-8") as log:
-                child = subprocess.Popen(command(paper), cwd=ROOT, env=env,
-                                         stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
-                                         start_new_session=True)
-            children.append((paper, child))
-            print(f"{paper}: PID {child.pid}; log {lane / 'supervisor.log'}", flush=True)
-        while any(child.poll() is None for _, child in children):
-            failed = [(name, child.returncode) for name, child in children if child.poll() not in (None, 0)]
-            if failed:
-                raise RuntimeError(f"supervisor exited unsuccessfully: {failed}")
-            time.sleep(1)
-        if any(child.returncode for _, child in children):
-            raise RuntimeError("one or more supervisors failed")
-    finally:
-        signal.signal(signal.SIGTERM, previous_handler)
-        for _, child in children:
-            if child.poll() is None:
-                try:
-                    # Native helper follows descendant sessions as well as the
-                    # process group, including managed implementation workers.
-                    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import terminate_pid_tree
-                    terminate_pid_tree(child.pid, grace_seconds=2.0, freeze_first=True, require_gone=True)
-                except ProcessLookupError:
-                    pass
-        for _, child in children:
-            try:
-                child.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                try:
-                    os.killpg(child.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-                child.wait()
-        locks.close()
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("build", "validate", "commands", "run", "verify-task", "verify-goal"), nargs="?", default="validate")
@@ -534,13 +434,13 @@ def main():
     elif args.action == "validate":
         print(json.dumps([validate(paper) for paper in papers], indent=2))
     elif args.action == "commands":
-        print("# Run from the committed integration checkout; one command per supervisor.")
-        pythonpath = os.pathsep.join(str(ROOT / path) for path in SUBMODULES)
-        for paper in papers:
-            validate(paper)
-            print(shlex.join(["env", f"PYTHONPATH={pythonpath}", *command(paper)]))
+        print("python3 scripts/paper_supervisor_campaign.py start")
+        print("python3 scripts/paper_supervisor_campaign.py status")
     elif args.action == "run":
-        run(papers)
+        if args.paper != "all":
+            parser.error("the Quack/DuckLake campaign starts all three isolated lanes together")
+        os.execv(sys.executable, [sys.executable, str(ROOT / "scripts/paper_supervisor_campaign.py"),
+                                 "start", "--state-root", str(state_root())])
     elif args.action == "verify-task":
         if not args.task:
             parser.error("--task is required")
