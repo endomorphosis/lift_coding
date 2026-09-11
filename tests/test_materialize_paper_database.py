@@ -29,7 +29,9 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                     self.assertIn("predicted files", task)
                     self.assertTrue(task["native_source_block"].startswith("## " + task["task_id"]))
                     self.assertTrue(all(isinstance(item, dict) and item["path"] for item in task["outputs"]))
-                    self.assertTrue(all(item["argv"][:2] == ["bash", "-lc"] for item in task["validation_commands"]))
+                    self.assertTrue(all(item["argv"] == ["python3", "scripts/paper_supervisors.py", "verify-task",
+                                                        "--paper", paper, "--task", task["task_id"]]
+                                        for item in task["validation_commands"]))
                     seen.add(task["task_cid"])
                 for goal in population["objectives"]:
                     parents = [v.strip() for v in goal["native_fields"].get("parent", "").split(",") if v.strip()]
@@ -61,7 +63,8 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                 projection = DatabasePortalExecutionBridge._render_projection(None, attempt, record)
                 self.assertIn("- Goal Id: LA-G2", projection)
                 self.assertIn("- Predicted Files:", projection)
-                self.assertIn("bash -lc 'python3 scripts/paper_supervisors.py verify-task", projection)
+                self.assertIn("python3 scripts/paper_supervisors.py verify-task", projection)
+                self.assertNotIn("bash -lc", projection)
             self.assertFalse(list(Path(tmp).glob(".paper-bootstrap-*")))
 
     def test_existing_database_is_never_opened_or_replaced(self):
@@ -86,6 +89,13 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "unknown dependency"):
                 MODULE.materialize("law_to_action", db)
             self.assertFalse(db.exists())
+
+    def test_validation_import_rejects_shell_wrappers_compounds_and_other_task_authority(self):
+        command = "python3 scripts/paper_supervisors.py verify-task --paper law_to_action --task LA-001"
+        self.assertEqual(MODULE._validation_argv(command, "law_to_action", "LA-001"), command.split())
+        for invalid in ("bash -lc '" + command + "'", command + " && true", command.replace("LA-001", "LA-002")):
+            with self.subTest(command=invalid), self.assertRaisesRegex(ValueError, "direct reviewed paper verifier"):
+                MODULE._validation_argv(invalid, "law_to_action", "LA-001")
 
 
 if __name__ == "__main__":
