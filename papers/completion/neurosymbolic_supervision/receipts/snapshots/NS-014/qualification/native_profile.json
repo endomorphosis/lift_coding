@@ -1,0 +1,126 @@
+{
+  "schema": "neurosymbolic-supervision/native-proof-profile@1",
+  "task_id": "NS-014",
+  "observed_at": "2026-09-11T18:19:53Z",
+  "observation_profile": {
+    "name": "sealed-validation-native-profile",
+    "interpreter": "/usr/bin/python3.12",
+    "python_version": "3.12.3",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "home": "fresh validation-style HOME",
+    "machine": "aarch64",
+    "system": "Linux"
+  },
+  "qualification_status": "unavailable",
+  "qualification_reason_codes": [
+    "no_verified_backend_version",
+    "no_verified_circuit_profile",
+    "no_approved_verification_key_or_setup_origin",
+    "no_exact_statement_or_public_input_binding",
+    "no_genuine_proof_payload_or_measured_prove_verify_run"
+  ],
+  "candidate_backend": {
+    "backend_id": "groth16",
+    "proof_system": "Groth16",
+    "curve": "BN254",
+    "ffi_transport": "local Rust CLI subprocess",
+    "source_declared_package_version": "0.1.0",
+    "native_binary_reported_version": null,
+    "native_binary_version_disposition": "The executable rejects --version; source Cargo.toml is not a runtime-version attestation.",
+    "enabled_by_default": false,
+    "explicit_opt_in_environment_variable": "IPFS_DATASETS_ENABLE_GROTH16",
+    "source_bindings": [
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16.py",
+        "sha256": "8b925d227a2d545ed095e1e4cf9b63553178b57f9bbf44a8e67ae5b1c65901c1"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16_ffi.py",
+        "sha256": "388413638c87d76e9b9205d955f6286269b0e93d0cb073c04ee553f3528794d6"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml",
+        "sha256": "f0b4b36d08496c9660945ca69e7fab2af6074ad56668830822d93573555f1231"
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.lock",
+        "sha256": "592b3736d8e2c25f54aa1c7f5ea8cd1c1649c644762d1973f2687918bf9e470f"
+      }
+    ],
+    "native_executable": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16",
+      "sha256": "7cd14c97f321c0b4220cfc881c424800f2da288b3056c49c2a6bf7a030bb02dc",
+      "bytes": 2464288,
+      "format": "ELF 64-bit LSB PIE executable, ARM aarch64",
+      "reachable_in_observation_profile": true,
+      "observed_command": ["groth16", "--help"],
+      "observed_exit_code": 0,
+      "observed_subcommands": ["prove", "verify", "setup", "export-solidity"],
+      "qualification_disposition": "Executable reachability and help text do not establish its build provenance, version, circuit relation, key policy, or a proof result."
+    }
+  },
+  "candidate_circuit_and_relation": {
+    "candidate_id": "TDFOL_v1 derivation helper with circuit_version=2",
+    "status": "source_inspected_only_not_qualified",
+    "source": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/legal_theorem_semantics.py",
+      "sha256": "f312cad16d212f1f3670490aa8f4232be96b21b56642796dba9cb44ffa3241e9"
+    },
+    "declared_public_input_fields": [
+      "theorem",
+      "theorem_hash",
+      "axioms_commitment",
+      "circuit_ref",
+      "circuit_version",
+      "ruleset_id"
+    ],
+    "exact_statement": null,
+    "exact_public_inputs": null,
+    "statement_to_public_input_binding_verified": false,
+    "relation_boundary": "The inspected helper derives only named atoms, facts, and one-antecedent implications by forward chaining. It is neither a model of arbitrary CPython or pytest execution nor a proof of full temporal, deontic, or first-order semantics.",
+    "outer_claim_binding_verified": false,
+    "outer_claim_binding_reason": "No source root, test inventory/root, fixture/call/teardown outcome, runtime identity, or obligation record was supplied as verified public input to an actual accepted proof."
+  },
+  "key_and_setup": {
+    "approved_key_policy_id": null,
+    "setup_origin": null,
+    "verification_key_id": null,
+    "verification_key_verified": false,
+    "candidate_files_observed": [
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v1/proving_key.bin",
+        "sha256": "0efdaa9a518082122df987297fcd05b0ce411aa859d42cbe88a1b33d3be8c0a3",
+        "bytes": 4464,
+        "disposition": "Unapproved artifact: no retained setup manifest, ceremony origin, key identifier, allowlist, or circuit/profile binding. Not used."
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v1/verifying_key.bin",
+        "sha256": "790157b0ab34735872fc750a60eede767299c6771cd1501afe313eca6a11f67d",
+        "bytes": 776,
+        "disposition": "Unapproved artifact: no retained setup manifest, ceremony origin, key identifier, allowlist, or circuit/profile binding. Not used."
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v2/proving_key.bin",
+        "sha256": "88bb2c916824dd86bc32f3419b622705eaa9724b2af6bc5231fc20ddb1642330",
+        "bytes": 24553648,
+        "disposition": "Unapproved artifact: no retained setup manifest, ceremony origin, key identifier, allowlist, or circuit/profile binding. Not used."
+      },
+      {
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/artifacts/v2/verifying_key.bin",
+        "sha256": "3c5d85cf1ac5d305237704e1b26714ee89140fc46b3f87cbd0a9695a5a65d76d",
+        "bytes": 776,
+        "disposition": "Unapproved artifact: no retained setup manifest, ceremony origin, key identifier, allowlist, or circuit/profile binding. Not used."
+      }
+    ],
+    "silent_or_seeded_setup_permitted_for_retained_result": false,
+    "reason": "The adapter's setup/ensure-setup facility and checked-in key-shaped files do not substitute for an approved, digest-bound setup record and verification-key policy."
+  },
+  "required_for_reopening": [
+    "A digest-bound executable with a reported backend version and an approved deployment/profile record.",
+    "A named circuit source/build digest and a precise relation statement with canonical public-input values.",
+    "A verified verification-key identifier, setup/ceremony origin, key-policy allowlist, and revocation/currentness check.",
+    "A genuine proof payload that verifies against those exact public inputs, with separately measured generation and verification elapsed time.",
+    "Positive and rejection evidence through the real admission boundary for all Table 16 cases."
+  ],
+  "claim_boundary": "This is a capability-and-provenance observation. It records no qualified native proof result, runtime execution result, test-attestation result, or proof-performance measurement."
+}
