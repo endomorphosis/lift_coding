@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Close only AF-S01 or LA-G1 after fresh, committed native validation.
+"""Close AF-S01, LA-G1 or NS-SG1 after fresh, committed native validation.
 
 Dry run is the default. Connects only to the campaign's existing authenticated
-Quack owner; never opens database files, starts processes, or mutates tasks.
+Quack owner; never opens database files, starts owners/providers, or mutates tasks.
 Historical completed-task evidence is authenticated without an age cutoff;
 fresh verify-task and native goal-validation receipts establish currentness.
 """
@@ -45,6 +45,16 @@ TARGETS = {
         "receipts": {
             "LA-001": "06ab422d87cb3cbf2341ff5384aa19701ad59f5927d6a03aa9620e6af46068b1",
             "LA-002": "625b62a00bc7508691388b3dd24c818d0345d7d8e3321ca9f33b7d5f08dc9df1",
+        },
+    },
+    "neurosymbolic_supervision": {
+        "goal": "NS-SG1", "members": ("NS-001", "NS-002", "NS-003"),
+        "audit": "ns004_native_completion.json",
+        "audit_sha256": "680a8beb170914b046be2598fcbb65f7ab81cb0b21fcae11b53aa466899af55b",
+        "receipts": {
+            "NS-001": "5d3dc2608e683bbca03bf23d75c6b429d568bdfc31e348b58428d91352ce45c1",
+            "NS-002": "1b062da74fa2b8d1a7ae2a068bc1adbb5bba23e938309d9ccc1ed2833aabfddc",
+            "NS-003": "0df4b9ea954bd2c43ede5761516e70e54f5c3d353e977ed96d88285d3d09d178",
         },
     },
 }
@@ -140,6 +150,19 @@ def authenticated_owner(paper, repo):
                 os.environ[key] = value
 
 
+def owner_binding(ready):
+    """Pin all readiness authority fields while allowing the owner's 5s health refresh.
+
+    paper_state_owner.serve updates only checked_at/remote_health while ready.
+    Keep the entire native StateServerIdentity (including credentials, schema,
+    endpoint, generation, and PID/birth/boot identity), routing fields, initial
+    readiness probe, and unknown fields fail-closed rather than selecting a
+    narrower subset of authority fields.
+    """
+    return {key: value for key, value in ready.items()
+            if key not in ("checked_at", "remote_health")}
+
+
 def checked_owner(connection, paper, ready):
     identity = rows(connection,
         "SELECT server_id, database_uuid, generation, schema_revision FROM state_servers "
@@ -152,7 +175,8 @@ def checked_owner(connection, paper, ready):
     uuid = rows(connection, "SELECT value FROM control_plane_metadata WHERE key = 'database_uuid'")
     require(len(uuid) == 1 and uuid[0]["value"] == identity[0]["database_uuid"], "Database UUID differs")
     current = C.read(STATE / paper / "quack-owner/paper-owner.ready.json")
-    require(current == ready and C.alive(C.owner_process(current)), "Owner changed during validation")
+    require(current.get("ready") is True and owner_binding(current) == owner_binding(ready)
+            and C.alive(C.owner_process(current)), "Owner changed during validation")
     return identity[0]
 
 
@@ -167,7 +191,7 @@ def population(source, connection, target, seeds, baseline):
     require(len(by_alias) == len(goals), "Ambiguous goal aliases")
     goal = plain(source.get_goal(target["goal"]))
     require(goal and by_alias[target["goal"]]["goal_cid"] == goal["goal_cid"], "Target goal identity differs")
-    # These two source goals have no child goals. Reject every additional
+    # These source-review goals have no child goals. Reject every additional
     # descendant even if it currently has no task; parent pointers and edges
     # are both checked, as are the task-to-goal contracts for all 25 tasks.
     require(not any(g["parent_goal_cid"] == goal["goal_cid"] for g in goals), "Target has additional descendant goals")
