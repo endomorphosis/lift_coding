@@ -68,6 +68,7 @@ OWNER_PID_SCHEMA: Final = (
 )
 PROGRAM_ID: Final = "parallel-content-sealing-proof-carrying-tdd-v1"
 TASK_PREFIX: Final = "PCTDD-"
+NATIVE_STOP_MARKERS: Final = ("HOLD", "OPERATOR_STOP", "watchdog.disabled", "watchdog.hold")
 OPERATOR_TASK_ALIAS: Final = "PCTDD-000"
 DEFAULT_MONITOR_SECONDS: Final = 180.0
 MIN_STABLE_HEALTH_SECONDS: Final = 15.0
@@ -379,6 +380,24 @@ def _runtime_paths(board: Any) -> dict[str, Path]:
         "owner_log": logs / "pctdd-quack-owner.log",
         "master_pid": state / "configured-board-master.pid",
     }
+
+
+def _require_native_start_allowed(paths: Mapping[str, Path]) -> None:
+    """Honor configured operator stops without changing read-only recovery APIs.
+
+    Presence, including a dangling symlink, blocks new work. Unknown filesystem
+    state is not permission to restart. Callers recheck at their spawn boundary;
+    these observations do not replace the existing resume and owner fences.
+    """
+
+    for name in NATIVE_STOP_MARKERS:
+        try:
+            (paths["runtime"] / name).lstat()
+        except FileNotFoundError:
+            continue
+        except OSError as exc:
+            raise OperatorError("native stop marker observation failed") from exc
+        raise OperatorError("native start blocked by stop marker: " + name)
 
 
 def _python_environment(*, token: str = "", secret_handle: str = "") -> dict[str, str]:
@@ -1619,6 +1638,7 @@ def _start_owner(
     cannot all authorize a new owner from the same stale observation.
     """
 
+    _require_native_start_allowed(paths)
     program = board.resolved_database_program()
     if not paths["database"].is_file():
         raise OperatorError("materialize the sealed DuckDB task store before launch")
@@ -1680,8 +1700,10 @@ def _start_owner(
             str(board.config_path),
             "state-owner",
         ]
+        _require_native_start_allowed(paths)
         descriptor = _open_private_owner_log(paths["owner_log"])
         with os.fdopen(descriptor, "ab", buffering=0) as log:
+            _require_native_start_allowed(paths)
             process = subprocess.Popen(
                 argv,
                 cwd=ROOT,
@@ -1977,6 +1999,7 @@ def _launch_scheduler_and_monitor(
 ) -> dict[str, Any]:
     """Launch the one configured scheduler and monitor authoritative progress."""
 
+    _require_native_start_allowed(paths)
     initial_completed = int(initial_authority.get("completed_count") or 0)
     initial_blocked_ids = _exact_blocked_task_ids(
         initial_authority,
@@ -1989,6 +2012,7 @@ def _launch_scheduler_and_monitor(
     )
     program = board.resolved_database_program()
     token = _read_owner_token(_token_path(paths["owner"], program.endpoint_secret_handle))
+    _require_native_start_allowed(paths)
     result = _run(
         _scheduler_command(config_path, dry_run=False),
         environment=_python_environment(
@@ -2283,6 +2307,7 @@ def _resume_locked(
         or _runtime_paths(revalidated_board) != paths
     ):
         raise OperatorError("scheduler configuration changed during runtime resume")
+    _require_native_start_allowed(paths)
     owner = _start_owner(
         revalidated_board,
         paths,
@@ -2387,6 +2412,7 @@ def _maintain_accepted_submodule_before_resume(
                 if (current_payload != payload or _runtime_paths(current_board) != paths or
                     getattr(current_board, "configuration_root", None) != getattr(board, "configuration_root", None)):
                     raise OperatorError("scheduler configuration changed during dependency maintenance")
+                _require_native_start_allowed(paths)
 
             guard()
             return maintain_accepted_configured_submodule(
@@ -2441,6 +2467,7 @@ def resume(
         raise OperatorError("scheduler configuration changed before runtime resume")
     board = revalidated_board
     paths = _runtime_paths(board)
+    _require_native_start_allowed(paths)
     _private_directory(paths["state"])
     _ensure_import_path()
     from ipfs_accelerate_py.agent_supervisor.merge.checkout_lock import (
@@ -2464,6 +2491,7 @@ def resume(
                 raise OperatorError(
                     "scheduler configuration changed before runtime resume"
                 )
+            _require_native_start_allowed(revalidated_paths)
             if maintenance_needed:
                 _maintain_accepted_submodule_before_resume(
                     config_path, board=revalidated_board, payload=revalidated_payload,

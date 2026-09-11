@@ -644,7 +644,7 @@ def test_operator_seal_check_refuses_non_exact_owner_without_token_read(
     monkeypatch.setattr(facade, "ROOT", tmp_path)
     program = _live_program()
     board = SimpleNamespace(resolved_database_program=lambda: program)
-    paths = {"owner": tmp_path / "owner"}
+    paths = {"runtime": tmp_path / "runtime", "owner": tmp_path / "owner"}
     monkeypatch.setattr(
         facade,
         "_owner_projection",
@@ -951,7 +951,7 @@ def test_runtime_resume_propagates_current_tree_preflight_rejection(
     facade = _load("pctdd_resume_current_tree_preflight_rejection")
     config = tmp_path / "config.json"
     board = SimpleNamespace()
-    paths = {"state": tmp_path / "state"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state"}
     monkeypatch.setattr(
         facade,
         "_start_owner",
@@ -1272,7 +1272,7 @@ def test_runtime_resume_adopts_healthy_existing_scheduler_idempotently(
     config = tmp_path / "config.json"
     board = SimpleNamespace()
     payload = {"generation": 8}
-    paths = {"state": tmp_path / "state"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state"}
     authority = _canonical_runtime_authority(facade)
     monkeypatch.setattr(
         facade,
@@ -1347,7 +1347,7 @@ def test_runtime_resume_refuses_duplicate_when_existing_scheduler_is_unhealthy(
     config = tmp_path / "config.json"
     board = SimpleNamespace()
     payload = {"generation": 8}
-    paths = {"state": tmp_path / "state"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state"}
     authority = _canonical_runtime_authority(facade)
     monkeypatch.setattr(
         facade,
@@ -1412,7 +1412,7 @@ def test_runtime_resume_refuses_green_watchdog_result_for_blocked_board(
     config = tmp_path / "config.json"
     board = SimpleNamespace()
     payload = {"generation": 8}
-    paths = {"state": tmp_path / "state"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state"}
     authority = _canonical_runtime_authority(facade)
     authority.update(
         {
@@ -1482,7 +1482,7 @@ def test_runtime_resume_relaunches_one_dead_master_after_exact_admission(
     config = tmp_path / "config.json"
     board = SimpleNamespace()
     payload = {"generation": 8}
-    paths = {"state": tmp_path / "state"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state"}
     authority = _canonical_runtime_authority(facade)
     launched: list[dict[str, object]] = []
     monkeypatch.setattr(
@@ -1546,7 +1546,7 @@ def test_runtime_resume_returns_accepted_terminal_without_scheduler_health_claim
     config = tmp_path / "config.json"
     board = SimpleNamespace()
     payload = {"generation": 8}
-    paths = {"state": tmp_path / "state"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state"}
     authority = _canonical_runtime_authority(facade)
     authority.update(
         {
@@ -1619,7 +1619,7 @@ def test_runtime_resume_serializes_timer_and_manual_ensure_calls(
     config = tmp_path / "config.json"
     board = SimpleNamespace()
     payload = {"generation": 8}
-    paths = {"state": tmp_path / "state"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state"}
     observed: dict[str, object] = {}
     monkeypatch.setattr(facade, "_load_board", lambda _path: (board, payload))
     monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
@@ -1666,7 +1666,7 @@ def test_runtime_resume_lock_contention_fails_with_bounded_typed_error(
     config = tmp_path / "config.json"
     board = SimpleNamespace()
     payload = {"generation": 8}
-    paths = {"state": tmp_path / "state"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state"}
     monkeypatch.setattr(facade, "_load_board", lambda _path: (board, payload))
     monkeypatch.setattr(facade, "_runtime_paths", lambda _board: paths)
     monkeypatch.setattr(
@@ -1734,7 +1734,7 @@ def test_scheduler_launch_keeps_private_token_out_of_argv_and_receipt(
     token = "private_quack_token_12345"
     program = SimpleNamespace(endpoint_secret_handle="env://PCTDD_TEST_TOKEN")
     board = SimpleNamespace(resolved_database_program=lambda: program)
-    paths = {"owner": tmp_path / "owner"}
+    paths = {"runtime": tmp_path / "runtime", "owner": tmp_path / "owner"}
     captured: dict[str, object] = {}
     monkeypatch.setattr(facade, "MIN_STABLE_HEALTH_SECONDS", 0.0)
     monkeypatch.setattr(facade, "_read_owner_token", lambda _path: token)
@@ -1861,7 +1861,7 @@ def _launch_monitor_harness(
         payload={"watchdog_startup_grace_seconds": startup_grace_seconds},
         resolved_database_program=lambda: program,
     )
-    paths = {"owner": tmp_path / "owner"}
+    paths = {"runtime": tmp_path / "runtime", "owner": tmp_path / "owner"}
     monkeypatch.setattr(facade, "_read_owner_token", lambda _path: token)
     monkeypatch.setattr(
         facade,
@@ -2058,7 +2058,7 @@ def test_scheduler_monitor_reports_terminal_authority_without_stale_pid_health(
     token = "private_quack_token_terminal_12345"
     program = SimpleNamespace(endpoint_secret_handle="env://PCTDD_TEST_TOKEN")
     board = SimpleNamespace(resolved_database_program=lambda: program)
-    paths = {"owner": tmp_path / "owner"}
+    paths = {"runtime": tmp_path / "runtime", "owner": tmp_path / "owner"}
     monkeypatch.setattr(facade, "_read_owner_token", lambda _path: token)
     monkeypatch.setattr(
         facade,
@@ -2210,7 +2210,7 @@ def test_authenticated_projection_binds_live_endpoint_and_extension(
         "open_quack_transport_connection",
         lambda _endpoint, token: Connection(),
     )
-    paths = {"owner": tmp_path / "owner"}
+    paths = {"runtime": tmp_path / "runtime", "owner": tmp_path / "owner"}
 
     if mismatch is None:
         result = facade._authenticated_projection(board, paths)

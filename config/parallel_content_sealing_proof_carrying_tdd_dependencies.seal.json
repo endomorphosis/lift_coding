@@ -4,8 +4,8 @@
     "artifacts/parallel_content_sealing_proof_carrying_tdd/receipts/PCTDD-000.json": "sha256:b94644acaa931b0d08cad069c7b02728be7963ea4cec25beaff6224d440dd192",
     "config/agent_supervisor_parallel_content_sealing_proof_carrying_tdd_scheduler.json": "sha256:941688f9491f5454b89b8d8f553504bb5e0fc5d2e77a56579066ed6c2d8e83dd",
     "config/parallel_content_sealing_proof_carrying_tdd_benchmark.json": "sha256:326f5ad71f8b5cf3986928587ac956a40de4e358daa4780d9948dcad969e0f3a",
-    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json": "sha256:8f8b27c61b4ccddf3433e035bc0479691dc457aeb1df2a9319fb76f3181d6773",
-    "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in": "sha256:97f8da6b04885371836dee341283c0370a567dd2c436fec594c169b8205f676e",
+    "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json": "sha256:4f9e287accc3483da95d0762a51a7e017a6b8ce406fb7fc3dd99e1f146613c2a",
+    "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in": "sha256:dd99907f6d441642815972dd765bb6ed3945c3f14b7cf3d3e048240fcf4eb357",
     "config/parallel_content_sealing_proof_carrying_tdd_ensure.timer": "sha256:12d6b6fb95e90a434f3b686393bcd196de6e1bbd65d80c10ceb31a0ff9781301",
     "config/parallel_content_sealing_proof_carrying_tdd_validation_profiles.json": "sha256:1b61f10063e4ae29acbf2c83fa5a951473d20f558b3ff6a442424d1153d2c780",
     "docs/architecture/PARALLEL_CONTENT_SEALING_PROOF_CARRYING_TDD_PLAN.md": "sha256:dc73d3121abe4aad8a955dcc9d47f4959cd8f2b5b32ae31fe39179af49eb1a71",
@@ -29,8 +29,8 @@
     "docs/architecture/parallel_content_sealing_proof_carrying_tdd_inventory/zkp_backend_inventory.json": "sha256:64a98881608e369b79eb13211cd761f8c8c181858efd388dcd34e748a598196e",
     "scripts/generate_parallel_content_sealing_proof_carrying_tdd_controls.py": "sha256:9ee0219cfc50e47f661bb2938f66d00c9b7f5e99767113bb7ae0f3457069ed4b",
     "scripts/materialize_parallel_content_sealing_proof_carrying_tdd_program.py": "sha256:2d391409f13e9717bb2652dcfc347e628e4f80fb24d384197ecb975f9087837f",
-    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py": "sha256:8b18df65a6b7204bb7de730ca998ab33d70b1b7485291a05f813e6d4c0087933",
-    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_user_systemd.py": "sha256:2cdae63d623574b58b6a125b7db7969ea375bb397b5ea5e0cb71c01a05289f68",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py": "sha256:9cc8e3e019afa1c612c2b85291e1f0fd09bb647a55922e4ef1948231de42dbf3",
+    "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_user_systemd.py": "sha256:6dd08f6a4f98733ea010dd5d7fd3f2abfeae13f6f1654a1432f17233b77cca99",
     "scripts/pctdd_g7_source_binding_successor.py": "sha256:f1d849644364d12a50ec8c5c88d52f0e385ec58408a3ea5d1d0e919cce7b2f6c",
     "scripts/pctdd_g8_provider_route_successor.py": "sha256:0a88d8d88ccf63214788ecc935937ddc419b9eb7045a417d6cf84ece69cf1345",
     "scripts/pctdd_g9_descendant_source_successor.py": "sha256:7355003eeb3e470098d77d898c79e35d06837e057ea28a0291c4c0b5bf477ec7",
@@ -42,8 +42,8 @@
     "test/api/parallel_content_sealing/test_pctdd_g8_provider_route_successor.py": "sha256:af9f1c4b07c177a17bab7d7d49c4813f241e0498ec826450d896333c9df74c59",
     "test/api/parallel_content_sealing/test_pctdd_g9_descendant_source_successor.py": "sha256:292d787ac9b99be370ab707547df2bd25cc6cf7ee9fd51208973482b453f066b",
     "test/api/parallel_content_sealing/test_pctdd_g9_orphan_recovery_regressions.py": "sha256:3c450c71ef1e135d648a934c06b558ef56cdca8c150a1327117ead8df3b7bccd",
-    "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py": "sha256:fda862f4b9977474519f0119645978f927e5c15fd29e08bb18c1b0d968e282bc",
-    "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py": "sha256:151a1baf7997d7a92b8754bcda847367237882b40a17993f00b3fe5bcc520946"
+    "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py": "sha256:e6d96cfcacefd1a303770e1f3d6d3550612aecfc53f61cd1af39abc5e9f386ee",
+    "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py": "sha256:7a5dfc5c65fc455fd435186f07eaaf34444859b4be31cb74e640004d410da8ec"
   },
   "board_namespace": "parallel-content-sealing-proof-carrying-tdd-v1",
   "environment": {

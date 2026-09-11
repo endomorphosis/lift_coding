@@ -23,11 +23,23 @@ INSTALLER = (
 )
 
 
-def _load(name: str):
+def _load(name: str, *, exact_legacy_namespace: bool = False):
     spec = importlib.util.spec_from_file_location(name, INSTALLER)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    if exact_legacy_namespace:
+        # Installation is mocked and all output paths are disposable. Preserve
+        # the real native namespace bound by the closed predecessor hashes.
+        render = module._render_units
+        def canonical_units():
+            units = render()
+            units[module.SERVICE_NAME] = units[module.SERVICE_NAME].replace(
+                str(module.ROOT).encode(),
+                b"/home/barberb/lift_coding/.worktrees/pctdd-g9-orphan-recovery",
+            ).replace(str(module._python_executable()).encode(), b"/usr/bin/python3.12")
+            return units
+        module._render_units = canonical_units
     return module
 
 
@@ -181,7 +193,7 @@ def test_install_rejects_control_gate_before_capability_or_external_write(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_control_gate_first")
+    module = _load("pctdd_systemd_control_gate_first", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     monkeypatch.setattr(
         module,
@@ -214,7 +226,7 @@ def test_install_revalidates_controls_before_first_external_write(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_control_revalidation")
+    module = _load("pctdd_systemd_control_revalidation", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     _stub_admission(module, monkeypatch)
     monkeypatch.setattr(
@@ -245,7 +257,7 @@ def test_inert_install_is_atomic_private_and_idempotent(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_inert_idempotent_install")
+    module = _load("pctdd_systemd_inert_idempotent_install", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     _stub_admission(module, monkeypatch)
     monkeypatch.setattr(
@@ -292,13 +304,13 @@ def test_install_atomically_upgrades_exact_sealed_predecessor(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_sealed_predecessor_upgrade")
+    module = _load("pctdd_systemd_sealed_predecessor_upgrade", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     unit_dir.mkdir(mode=0o700)
     units = module._render_units()
     migratable = module._migratable_unit_payloads(units)
     legacy_service = migratable[module.SERVICE_NAME]
-    assert len(legacy_service) == 1
+    assert len(legacy_service) == 2
     for name, payload in units.items():
         path = unit_dir / name
         path.write_bytes(
@@ -341,7 +353,7 @@ def test_install_atomically_upgrades_exact_sealed_predecessor(
 
 
 def test_sealed_predecessor_digest_cannot_drift_with_current_template() -> None:
-    module = _load("pctdd_systemd_predecessor_digest")
+    module = _load("pctdd_systemd_predecessor_digest", exact_legacy_namespace=True)
     units = module._render_units()
     units[module.SERVICE_NAME] = units[module.SERVICE_NAME].replace(
         b"Restart=no\n",
@@ -356,7 +368,7 @@ def test_upgrade_exchange_rolls_back_a_raced_unknown_target(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_upgrade_exchange_race")
+    module = _load("pctdd_systemd_upgrade_exchange_race", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     unit_dir.mkdir(mode=0o700)
     units = module._render_units()
@@ -405,7 +417,7 @@ def test_preexisting_temporary_is_never_removed(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_preexisting_temporary")
+    module = _load("pctdd_systemd_preexisting_temporary", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     unit_dir.mkdir(mode=0o700)
     token = "a" * 32
@@ -434,7 +446,7 @@ def test_directory_swap_is_detected_with_dirfd_anchored_writes(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_directory_swap")
+    module = _load("pctdd_systemd_directory_swap", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     displaced = tmp_path / "displaced-user-units"
     _stub_admission(module, monkeypatch)
@@ -469,7 +481,7 @@ def test_directory_mode_change_is_detected_before_install_success(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_directory_mode_race")
+    module = _load("pctdd_systemd_directory_mode_race", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     _stub_admission(module, monkeypatch)
     real_create = module._atomic_private_create
@@ -499,7 +511,7 @@ def test_unrecognized_existing_unit_blocks_all_install_mutation(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_unknown_existing_install")
+    module = _load("pctdd_systemd_unknown_existing_install", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     unit_dir.mkdir(mode=0o700)
     service = unit_dir / module.SERVICE_NAME
@@ -530,7 +542,7 @@ def test_unsafe_existing_unit_custody_fails_closed(
     monkeypatch: pytest.MonkeyPatch,
     unsafe_kind: str,
 ) -> None:
-    module = _load(f"pctdd_systemd_unsafe_{unsafe_kind}")
+    module = _load(f"pctdd_systemd_unsafe_{unsafe_kind}", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     unit_dir.mkdir(mode=0o700)
     target = unit_dir / "outside"
@@ -558,7 +570,7 @@ def test_enable_requires_explicit_reload_before_any_validation(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_enable_requires_reload")
+    module = _load("pctdd_systemd_enable_requires_reload", exact_legacy_namespace=True)
     monkeypatch.setattr(
         module,
         "_validate_current_controls",
@@ -578,7 +590,7 @@ def test_systemctl_actions_require_the_exact_default_unit_directory(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_action_default_directory")
+    module = _load("pctdd_systemd_action_default_directory", exact_legacy_namespace=True)
     custom = tmp_path / "custom"
     default = tmp_path / "default"
     monkeypatch.setattr(module, "_default_unit_dir", lambda: default)
@@ -601,7 +613,7 @@ def test_explicit_install_activation_uses_only_timer_enable_and_rearm(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_explicit_activation")
+    module = _load("pctdd_systemd_explicit_activation", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     _stub_admission(module, monkeypatch)
     monkeypatch.setattr(module, "_default_unit_dir", lambda: unit_dir)
@@ -783,7 +795,7 @@ def test_uninstall_refuses_unknown_content_before_disable_or_removal(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_unknown_uninstall")
+    module = _load("pctdd_systemd_unknown_uninstall", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     unit_dir.mkdir(mode=0o700)
     service = unit_dir / module.SERVICE_NAME
@@ -812,7 +824,7 @@ def test_clean_uninstall_disables_timer_then_removes_only_exact_units(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_clean_uninstall")
+    module = _load("pctdd_systemd_clean_uninstall", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     unrelated = unit_dir / "unrelated.service"
     _stub_admission(module, monkeypatch)
@@ -853,7 +865,7 @@ def test_disable_refuses_incomplete_exact_pair_without_systemctl(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_incomplete_disable")
+    module = _load("pctdd_systemd_incomplete_disable", exact_legacy_namespace=True)
     unit_dir = tmp_path / "user-units"
     unit_dir.mkdir(mode=0o700)
     units = module._render_units()
@@ -884,7 +896,7 @@ def test_uninstall_of_absent_directory_is_idempotent_and_has_no_action(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    module = _load("pctdd_systemd_absent_uninstall")
+    module = _load("pctdd_systemd_absent_uninstall", exact_legacy_namespace=True)
     unit_dir = tmp_path / "missing-units"
     _stub_admission(module, monkeypatch)
     monkeypatch.setattr(

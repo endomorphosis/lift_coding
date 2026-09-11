@@ -77,6 +77,7 @@ MONITOR_SECONDS: Final = 180
 # (120s), detached scheduler launch (up to 900s), the monitor window, and a
 # bounded margin for validation and process handoff.
 TIMEOUT_SECONDS: Final = 3600
+PRE_STOP_MARKER_SERVICE_SHA256: Final = "76c58a2d5b9dacd1233530de270c4c01b1377071094bc049a8614ee9288110af"
 LEGACY_SERVICE_REVISIONS: Final = (
     (
         300,
@@ -262,6 +263,24 @@ def _python_executable() -> Path:
     return resolved
 
 
+def _stop_marker_conditions(config: Path) -> tuple[str, ...]:
+    raw, _evidence = _stable_regular_bytes(config, max_bytes=MAX_CONTROL_BYTES)
+    try:
+        payload = json.loads(raw)
+        relative = payload["runtime_paths"]["root"]
+    except (ValueError, TypeError, KeyError) as exc:
+        raise EnsureError("configured_stop_marker_root_invalid") from exc
+    if (not isinstance(relative, str) or not relative or
+        Path(relative).is_absolute() or ".." in Path(relative).parts):
+        raise EnsureError("configured_stop_marker_root_invalid")
+    root = _absolute(ROOT / relative)
+    # Use the operator's closed marker set so timer and explicit resume agree.
+    return tuple(
+        "ConditionPathExists=!" + _systemd_directive_path(str(root / name))
+        for name in _load_operator().NATIVE_STOP_MARKERS
+    )
+
+
 def _render_units() -> dict[str, bytes]:
     repository = _absolute(ROOT)
     operator = _exact_repo_file(OPERATOR_SCRIPT)
@@ -270,8 +289,10 @@ def _render_units() -> dict[str, bytes]:
     python = _python_executable()
     template = _utf8_template(SERVICE_TEMPLATE)
     plan_uri = plan.as_uri().replace("%", "%%")
+    stop_conditions = _stop_marker_conditions(config)
     replacements = {
         "@PLAN_URI@": plan_uri,
+        "@STOP_MARKER_CONDITIONS@": "\n".join(stop_conditions),
         "@REPOSITORY_DIRECTORY@": _systemd_directive_path(str(repository)),
         "@PYTHON_EXECUTABLE@": _systemd_quote(str(python)),
         "@OPERATOR_SCRIPT@": _systemd_quote(str(operator)),
@@ -308,6 +329,7 @@ def _render_units() -> dict[str, bytes]:
     )
     if (
         exec_lines != [expected_exec]
+        or tuple(line for line in service_lines if line.startswith("Condition")) != stop_conditions
         or any(line.startswith(forbidden_directives) for line in service_lines)
         or " state-owner" in expected_exec
         or " launch " in expected_exec
@@ -350,9 +372,20 @@ def _migratable_unit_payloads(
     current = f"TimeoutStartSec={TIMEOUT_SECONDS}\n".encode("ascii")
     if service.count(current) != 1:
         raise EnsureError("rendered_service_timeout_ambiguous")
+    conditions = tuple(
+        line for line in service.splitlines(keepends=True)
+        if line.startswith(b"ConditionPathExists=!")
+    )
+    if len(conditions) != len(_load_operator().NATIVE_STOP_MARKERS):
+        raise EnsureError("rendered_service_stop_markers_ambiguous")
+    previous_service = service
+    for line in conditions:
+        previous_service = previous_service.replace(line, b"", 1)
+    if hashlib.sha256(previous_service).hexdigest() != PRE_STOP_MARKER_SERVICE_SHA256:
+        raise EnsureError("sealed_predecessor_derivation_mismatch")
     predecessors: list[bytes] = []
     for legacy_timeout, expected_sha256 in LEGACY_SERVICE_REVISIONS:
-        predecessor = service.replace(
+        predecessor = previous_service.replace(
             current,
             f"TimeoutStartSec={legacy_timeout}\n".encode("ascii"),
         )
@@ -360,6 +393,7 @@ def _migratable_unit_payloads(
         if observed_sha256 != expected_sha256:
             raise EnsureError("sealed_predecessor_derivation_mismatch")
         predecessors.append(predecessor)
+    predecessors.append(previous_service)
     timer = units.get(TIMER_NAME)
     anchor = b"OnActiveSec=3min\n"
     if not isinstance(timer, bytes) or timer.count(anchor) != 1:

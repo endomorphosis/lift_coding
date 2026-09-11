@@ -11,12 +11,13 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[3]
-BASE = "3e6a1829cd8273566a88e179b88636e3517da380"
+BASE = "ea2471103f0ca5d415bdbed4d2d01d6c81abad34"
 APPROVED = {
-    "config/parallel_content_sealing_proof_carrying_tdd_ensure.timer",
+    "config/parallel_content_sealing_proof_carrying_tdd_ensure.service.in",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd.py",
     "scripts/ops/agent_supervisor/parallel_content_sealing_proof_carrying_tdd_user_systemd.py",
     "test/api/parallel_content_sealing/test_pctdd_user_systemd_ensure.py",
+    "test/api/parallel_content_sealing/test_pctdd_quack_lifecycle_wrapper.py",
 }
 MANIFEST = "config/parallel_content_sealing_proof_carrying_tdd_control_manifest.json"
 SEAL = "config/parallel_content_sealing_proof_carrying_tdd_dependencies.seal.json"

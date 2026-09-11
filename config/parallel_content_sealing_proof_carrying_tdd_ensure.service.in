@@ -4,6 +4,7 @@ Description=Fail-closed PCTDD supervisor ensure
 Documentation=@PLAN_URI@
 StartLimitIntervalSec=1800
 StartLimitBurst=3
+@STOP_MARKER_CONDITIONS@
 
 [Service]
 Type=oneshot

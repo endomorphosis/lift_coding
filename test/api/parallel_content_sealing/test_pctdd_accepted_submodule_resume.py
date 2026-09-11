@@ -27,7 +27,7 @@ def setup(tmp_path, monkeypatch):
     f = facade()
     board = SimpleNamespace(configuration_root="exact")
     payload = {"accepted": "config"}
-    paths = {"state": tmp_path / "state", "owner": tmp_path / "owner"}
+    paths = {"runtime": tmp_path / "runtime", "state": tmp_path / "state", "owner": tmp_path / "owner"}
     events = []
     held = {"resume": False}
     monkeypatch.setattr(f, "_load_board", lambda p: (board, payload))
