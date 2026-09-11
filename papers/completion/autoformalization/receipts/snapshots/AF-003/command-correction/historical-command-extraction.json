@@ -1,0 +1,16 @@
+{
+  "log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/3fcf23bb9e38511c396579ee/implementation-logs/af-003-attempt-1.log",
+  "sha256": "ad99cf66987bedac59d7c7e8aedf5fa9dcb3a2b0705c8131743df870e6717c65",
+  "extracted": [
+    {
+      "line": 8971,
+      "shell": "ls -ld external external/ipfs_datasets external/ipfs_datasets/ipfs_datasets_py 2>&1; stat -c '%N' external/ipfs_datasets/.git 2>&1 || true; PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 - <<'PY'\nimport importlib.util, shutil, json, sys\nmods=('numpy','requests','torch','spacy','faiss','transformers','lean_dojo','openai','ipfs_datasets_py')\nexes=('lean','lake','elan','cvc5','z3','vampire','eprover','prover9','coqc','isabelle')\nprint(json.dumps({'python':sys.version.split()[0], 'modules':{m:bool(importlib.util.find_spec(m)) for m in mods}, 'executables':{e:shutil.which(e) for e in exes}},sort_keys=True))\nPY\nsha256sum papers/completion/autoformalization/evidence/source_audit_private.json papers/completion/autoformalization/evidence/runtime_capability_matrix.json papers/completion/autoformalization/config/environment_manifest.json",
+      "program": "import importlib.util, shutil, json, sys\nmods=('numpy','requests','torch','spacy','faiss','transformers','lean_dojo','openai','ipfs_datasets_py')\nexes=('lean','lake','elan','cvc5','z3','vampire','eprover','prover9','coqc','isabelle')\nprint(json.dumps({'python':sys.version.split()[0], 'modules':{m:bool(importlib.util.find_spec(m)) for m in mods}, 'executables':{e:shutil.which(e) for e in exes}},sort_keys=True))\n"
+    },
+    {
+      "line": 8989,
+      "shell": "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin /usr/bin/python3.12 - <<'PY'\nimport importlib.metadata as md\nfor name in ('numpy','requests','spacy','faiss-cpu','transformers','openai'):\n try:\n  dist=md.distribution(name)\n  print(f'{name}\\t{dist.version}\\t{dist.locate_file(\"\")}')\n except md.PackageNotFoundError:\n  print(f'{name}\\tabsent')\nPY\nls -l external/ipfs_datasets/.git && sed -n '1,20p' external/ipfs_datasets/.git; git -C external/ipfs_datasets rev-parse HEAD 2>&1 || true; git -C external/ipfs_datasets status --porcelain=v1 2>&1 || true; find external/ipfs_datasets -maxdepth 1 -type f -name 'pyproject.toml' -o -name 'setup.py' -print",
+      "program": "import importlib.metadata as md\nfor name in ('numpy','requests','spacy','faiss-cpu','transformers','openai'):\n try:\n  dist=md.distribution(name)\n  print(f'{name}\\t{dist.version}\\t{dist.locate_file(\"\")}')\n except md.PackageNotFoundError:\n  print(f'{name}\\tabsent')\n"
+    }
+  ]
+}

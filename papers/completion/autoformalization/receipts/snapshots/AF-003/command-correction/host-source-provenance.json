@@ -1,0 +1,240 @@
+{
+  "schema": "paper-host-source-provenance-clarification/v1",
+  "observed_at": "2026-09-11T17:29:36.782337+00:00",
+  "integration_commit": "c5bddbb97958a9189a3f11370a72b0e6270a7f42",
+  "source_gitlink": "160000 commit ac82107e246b30e35a2bbdcf75e01370d22350c6\texternal/ipfs_datasets",
+  "host_head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+  "host_tracked_status": "",
+  "role_crosschecks": [
+    {
+      "role": "S01",
+      "path": "ipfs_datasets_py/logic/ir_core/identity.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "283d46385f982381bc7f3e8b4f0ed4948be834487dc4d7e7f604e091f0c857fa"
+    },
+    {
+      "role": "S02",
+      "path": "ipfs_datasets_py/logic/formalization/compiler.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "18d0a4e71385f657355366c282c65c8616c2ddb5278348ca261047f5722b79f7"
+    },
+    {
+      "role": "S03",
+      "path": "ipfs_datasets_py/logic/formalization/samples.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "e537994d17982bd9b612c2535bf8a9da3dd10c356392b0ac543db5ab9a40ca2c"
+    },
+    {
+      "role": "S04",
+      "path": "ipfs_datasets_py/logic/formalization/views.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "fac9c2cda82a2b076b83ffaedbcd8188916d5511d9e2aa5a13cbe5e9a978e6e3"
+    },
+    {
+      "role": "S05",
+      "path": "ipfs_datasets_py/logic/types/fol_types.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "7c4367457ff94628740cd2ecdb97b4a0c2878f99cb3206d4a05bc8d965ef0169"
+    },
+    {
+      "role": "S06",
+      "path": "ipfs_datasets_py/logic/formalization/artifacts_v3.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "cdf999e4ea4b26a0ef4b5043d7567ffba1385bdc070f303f217cbef96a0e5510"
+    },
+    {
+      "role": "S07",
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "effd4ae1ce39e0ce095fe2e5aca019178c822e35282a4b5f19fedf132fc11552"
+    },
+    {
+      "role": "S08",
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87"
+    },
+    {
+      "role": "S09",
+      "path": "ipfs_datasets_py/logic/legal_ir/typed_adapter.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "80204883247be10831b6d2c3f831336a80bab2a00f427f6dc35f363edd96fbb2"
+    },
+    {
+      "role": "S10",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_modal_parser.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "2d12dff43f85c18bb20f4ac2bc878a2d2ef27a7e2b1a6dc6493b100f7138b0e0"
+    },
+    {
+      "role": "S11",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "e1bee6ba59b916cf02cb47cb712df2e90d02f6273abf544121ab6eae59c32c9e"
+    },
+    {
+      "role": "S12",
+      "path": "ipfs_datasets_py/logic/fol/text_to_fol.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "bfab64afed5c3752fbd765574102a141919f157f452a78e996564516d34b5c4a"
+    },
+    {
+      "role": "S13",
+      "path": "ipfs_datasets_py/logic/security_models/crypto_exchange/extractors/python_ast_extractor.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "788c95fd11c79cdc0af84e7b9e278fac802e063e59d0e4689a688abad33d8a3a"
+    },
+    {
+      "role": "S15",
+      "path": "ipfs_datasets_py/processors/enhanced_multimodal_processor.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "6ce2242343fe5e3e6829bd48537eb1eabb6b7c54005da5f6f69500b9f73b905f"
+    },
+    {
+      "role": "S16",
+      "path": "ipfs_datasets_py/processors/file_converter/image_processor.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "1eb49f79c415ccb0cbef653126c3132d07e60a2180b8b1b0706bea71d79a96b6"
+    },
+    {
+      "role": "S17",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder_advisor.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "1499fdec2eb88867b122a0175fc64428239765f155d366380c98073ee4777700"
+    },
+    {
+      "role": "S18",
+      "path": "ipfs_datasets_py/logic/integration/converters/modal_logic_extension.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "a18399d2b7e07506b1ab7e5951a27271081ec411f1d29187483cab08363c0ce9"
+    },
+    {
+      "role": "S19",
+      "path": "ipfs_datasets_py/logic/external_provers/prover_router.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "cc4048edefd664f3d8c1392fe3400c9059caf353f04b96d42d4f5b21edca9b9d"
+    },
+    {
+      "role": "S20",
+      "path": "ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "157dd0aa6f119cb6e9800f75c08189e86b500eca526cbeb2242bb629339077ab"
+    },
+    {
+      "role": "S21",
+      "path": "ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "4e042e5b1c163c6397bcd9fd0bccae665f8c43a95dca083403405cfa00179802"
+    },
+    {
+      "role": "S22",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "86e94357d18b5894246bd237a5263f3d36739f70589b23f13ecc1910526419cd"
+    },
+    {
+      "role": "S23",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "fd40489c229a8976e50e31d5b9b46184796d7b0cd73e35531dfd0e817833b26f"
+    },
+    {
+      "role": "S24",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387"
+    },
+    {
+      "role": "S25",
+      "path": "ipfs_datasets_py/logic/modal/autoencoder_loop.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "e77289ee5e3cc80839e7679cb88848b36df97728ec5465c41b6e6e291269017e"
+    },
+    {
+      "role": "S26",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e"
+    },
+    {
+      "role": "S27",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e"
+    },
+    {
+      "role": "S28",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "40462cb1a4186d1c5ffe974b07919c1c13339bbe576b1c4ab742ae499a1cd87e"
+    },
+    {
+      "role": "S29",
+      "path": "ipfs_datasets_py/logic/modal/introspection_analysis.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "a535490dd20776d7388c600adc91034186fcbc41af32b823fa2215b11dbf6a13"
+    },
+    {
+      "role": "S30",
+      "path": "ipfs_datasets_py/logic/modal/introspection_export.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "9ddcb15a485fdccb7ff911dfd54e6912e34c0367200c71f3c10f3c871ee924c5"
+    },
+    {
+      "role": "S31",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387"
+    },
+    {
+      "role": "S33",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "297560cb9ffe828b003ea913133d2f857bea0496a4b18284428a38575f36b88e"
+    },
+    {
+      "role": "S34",
+      "path": "ipfs_datasets_py/logic/intent_ir/graphrag/retrieval.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "dc0c8e8bb660d85c002d0e4354c6cb8d9926b9d31b7ac25471a7e6e26a45ca33"
+    },
+    {
+      "role": "S35",
+      "path": "ipfs_datasets_py/logic/intent_ir/graphrag/skillcenter_cid_vectors.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "7e1b731561c1b73bb513eb6d51bd58acc89a87afbf2888e53b2a2aee539a86bb"
+    },
+    {
+      "role": "S36",
+      "path": "ipfs_datasets_py/logic/hammers/learned_selector.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "7e92a319576ce1d05843bbf29a39b4c3d32c343c43f5ce0748f9ec6a3d2750da"
+    },
+    {
+      "role": "S37",
+      "path": "scripts/ops/logic/probe_itp_hammer_environment.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "55bc429e0f591ba2ded781441285d212270639b29bb33cd250f70cd2424b8261"
+    },
+    {
+      "role": "S38",
+      "path": "ipfs_datasets_py/logic/tactician/planner.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "8952b5258803d1067075e8f4195ca2b8b25158d9e7f8a3be9fb607773d6c7d56"
+    },
+    {
+      "role": "S39",
+      "path": "ipfs_datasets_py/logic/modal/leanstral.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "d50a5fbb9473d7d23a227989bbde811f9a44fd6cf57429b15a57e70e4b8ea7bc"
+    },
+    {
+      "role": "S40",
+      "path": "scripts/ops/legal_ir/hammer_leanstral_rollout_gate.py",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "sha256": "da1d91e1521a4523d8949d99fa63a6bdc7a48bed932bc4877d72fa0d17423a6d"
+    }
+  ],
+  "historical_manuscript_snapshot": "unknown",
+  "scope": "Host Git objects substantiate current source bytes; no claim that provider-visible Git lookup succeeded."
+}

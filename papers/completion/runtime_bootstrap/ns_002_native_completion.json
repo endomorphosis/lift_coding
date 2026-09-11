@@ -1,0 +1,979 @@
+{
+  "schema": "paper-ns-002-native-completion-maintenance/v1",
+  "started_at": "2026-09-11T17:29:56.438232+00:00",
+  "apply": true,
+  "success": true,
+  "provider_invoked": false,
+  "effect_replayed": false,
+  "stopped_audit_sha256": "7cd570ee159e72fb72cf17ffe5b212eb2504c1ad746c9f8a61c7a56720bdbef4",
+  "helper_sha256": "24f4ec184301a6f114f0fc0d871126aab3af504fb030a29828dcaa12324e1166",
+  "stage": "native_completion_verified",
+  "stopped_database_files": {
+    "control.execution.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T171348Z-fifth-launch/neurosymbolic_supervision/control.execution.duckdb",
+      "sha256": "7828ca1c3e1991e901d0574a67d775c83baee5b65b263f406f172d2ed3b401a4",
+      "bytes": 8400896
+    },
+    "control.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T171348Z-fifth-launch/neurosymbolic_supervision/control.duckdb",
+      "sha256": "d8ec7af31bc2aec65b5ab2c7b87e12b91135c559cafd4303c8e95d703061c710",
+      "bytes": 41168896
+    },
+    "control.coordination.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T171348Z-fifth-launch/neurosymbolic_supervision/control.coordination.duckdb",
+      "sha256": "082f8cd0b57edcb71b5c5e984283c97cb3a27b1c907a5cefb5171e18a47f3293",
+      "bytes": 10760192
+    }
+  },
+  "validation": {
+    "argv": [
+      "python3",
+      "scripts/paper_supervisors.py",
+      "verify-task",
+      "--paper",
+      "neurosymbolic_supervision",
+      "--task",
+      "NS-002"
+    ],
+    "cwd": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+    "started_at": "2026-09-11T17:29:56.608191+00:00",
+    "finished_at": "2026-09-11T17:30:00.478926+00:00",
+    "returncode": 0,
+    "log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/ns_002_native_completion.validation.log",
+    "log_sha256": "9e822eb7f772e1152ec1a5ddb4fcc3ac706f157ea6f392050353d1867a272742"
+  },
+  "expected_head": "2b21c37b75951161574b4ffd5487f89392a9c440",
+  "receipt_sha256": "1b062da74fa2b8d1a7ae2a068bc1adbb5bba23e938309d9ccc1ed2833aabfddc",
+  "maintenance_owner_process": {
+    "pid": 950533,
+    "birth": "55751063",
+    "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+    "log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/completion-maintenance-owner-ns_002_native_completion/owner.log",
+    "argv": [
+      "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+      "/home/barberb/lift_coding/scripts/paper_state_owner.py",
+      "--database",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/control.duckdb",
+      "--state-dir",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/completion-maintenance-owner-ns_002_native_completion",
+      "--store-id",
+      "vericodegen-2026-neurosymbolic_supervision",
+      "--secret-handle",
+      "handle:vericodegen-2026:neurosymbolic_supervision:ns002-completion"
+    ]
+  },
+  "maintenance_owner_identity": {
+    "contract_version": 1,
+    "credential_generation": 1,
+    "database_uuid": "17351fb0-0d3b-4069-a697-51f09ecf0a99",
+    "extension_fingerprint": "sha256:b77954ae50ecc06e10c6e20fc6fd421d73b5c31cf72bb60ae3f29b1f8a85f20b",
+    "fence_epoch": 8,
+    "generation": 8,
+    "interface": "StateServerIdentity@1",
+    "listen_uri": "quack:127.0.0.1:34183",
+    "process_birth": {
+      "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+      "parent_pid": 938705,
+      "pid": 950533,
+      "start_time_ticks": 55751063
+    },
+    "process_birth_id": "birth:0107d1138aae9fbb4894379369fb0b5c",
+    "repository_id": "repository:vericodegen-2026-neurosymbolic_supervision",
+    "revision": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/state-server-identity@1",
+    "schema_fingerprint": "sha256:3ea5f70cebacfe748017c9540bf87016075443f4ccc33376ec0a179ed576e190",
+    "schema_revision": 1,
+    "secret_handle": "handle:vericodegen-2026:neurosymbolic_supervision:ns002-completion",
+    "server_id": "server:cf098c5e-d008-4c8c-b37b-e4d9f93267ad",
+    "started_at": "2026-09-11T17:30:04Z",
+    "startup_epoch": 1789147804,
+    "status": "ready",
+    "store_id": "vericodegen-2026-neurosymbolic_supervision"
+  },
+  "original_attempt": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/database-task-attempt@1",
+    "interface": "DatabaseTaskAttempt@1",
+    "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+    "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "task_alias": "NS-002",
+    "attempt_number": 2,
+    "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+    "fencing_token": 2,
+    "fence_epoch": 2,
+    "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+    "committed_phase": "validation",
+    "status": "running",
+    "started_at_ms": 1789143746913,
+    "finished_at_ms": null,
+    "revision": 5,
+    "body": {
+      "worktree_id": ""
+    }
+  },
+  "original_validation_phase": {
+    "phase": "validation",
+    "committed_at_ms": 1789145671770,
+    "fencing_token": 2,
+    "fence_epoch": 2,
+    "revision": 5,
+    "body": {
+      "argv": [
+        "portal-supervisor-gates"
+      ],
+      "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+      "evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+      "outcome": "passed",
+      "portal_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+      "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+      "validator": "DatabasePortalExecutionBridge@1"
+    }
+  },
+  "original_phase_archive": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/ns_002_native_completion.prior-validation.json",
+    "sha256": "1327e528adac5f377fd377d120a29dd3a0cdb8298d2e33881d82ec11fbe1a3fa"
+  },
+  "provider_effect_before": {
+    "provider_invocations": {
+      "count": 1,
+      "sha256": "1a2ce8e93820ef8deacb7133c71373f0c9cd18ad70bc94539f85f102f6333050"
+    },
+    "effect_claims": {
+      "count": 1,
+      "sha256": "9f71f1db6af7b5f8f4ddf29777df5614194539a5b856f2bb483053c79cb2c6d2"
+    }
+  },
+  "fresh_validation": {
+    "outcome": "passed",
+    "evidence_digest": "sha256:deb4c889c8e4c5b90bcc423d710040ada9a347a407860646591aae406ff88940",
+    "argv": [
+      "python3",
+      "scripts/paper_supervisors.py",
+      "verify-task",
+      "--paper",
+      "neurosymbolic_supervision",
+      "--task",
+      "NS-002"
+    ],
+    "validator": "paper_agent_assisted_postmerge_revalidation",
+    "execution_kind": "agent_assisted_postmerge_revalidation",
+    "provider_rerun": false,
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+    "acceptance_criteria": [
+      {
+        "criterion": "Manifest captures loaded __file__ locations, source digests, commits/overlays, interpreter/dependency versions, native binaries, and rollout flags.",
+        "status": "met",
+        "explanation": "The forest freezes four successful imports at their observed __file__ locations and hashes, records the three consumer gitlinks and their unresolved nested-worktree overlays, and binds every consulted source. The companion capability inventory records the validation-profile interpreter, declared and installed dependencies, absent native binaries, and explicit off/unauthorized rollout flags. The import probe independently preserves both successful imports and the two retained dependency failures.",
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json",
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/capabilities.json",
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
+        ]
+      },
+      {
+        "criterion": "Each draft mechanism receives independent location/implementation/integration/validation/rollout statuses.",
+        "status": "met",
+        "explanation": "The implementation inventory gives each retained or claimed mechanism a separate five-axis status rather than inferring integration, validation, or rollout from source presence. Exact names not located remain specification-only; similarly scoped modules are separately named and qualified.",
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json",
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json"
+        ]
+      },
+      {
+        "criterion": "Table 5 values are traceable to raw artifacts; absence of live model receipts and measured prover timing is retained.",
+        "status": "met",
+        "explanation": "The preliminary-evidence record names and hashes the checked-in semantic harness and sealer summary, recomputes their counts and aggregate values, and compares their rounded values to Table 5. The raw-artifact recomputation preserves zero model receipts, zero production-eligible rows, zero measured prover CPU rows, and zero measured GPU rows; it explicitly classifies the result as preliminary rather than a live experiment.",
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary_evidence.json",
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary-arithmetic.log"
+        ]
+      },
+      {
+        "criterion": "No optional unavailable component is described as operational or used to block unrelated work.",
+        "status": "met",
+        "explanation": "Unavailable semantic-state and incremental-sealer imports are explicitly blocked, native provers are unavailable, and each operational claim is negative or bounded. Their failures do not invalidate static source provenance or arithmetic over existing raw reports; no completed mechanism is represented as a live repair, prover, provider, or rollout.",
+        "evidence": [
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/capabilities.json",
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json",
+          "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
+        ]
+      }
+    ],
+    "validation_manifest": {
+      "schema": "paper-agent-assisted-postmerge-revalidation/v1",
+      "identity": {
+        "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+        "task_alias": "NS-002",
+        "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+        "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+        "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+        "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+        "attempt_number": 2,
+        "fencing_token": 2,
+        "fence_epoch": 2
+      },
+      "source_commit": "2b21c37b75951161574b4ffd5487f89392a9c440",
+      "source_tree": "3fcf7fc330123206bd52c3c2a54cd85fd1063169",
+      "original_provider_merge": "21441b56d03f7381cdd673b1cf7e97a8f36466bb",
+      "paper_receipt": "papers/completion/neurosymbolic_supervision/receipts/NS-002.json",
+      "paper_receipt_sha256": "1b062da74fa2b8d1a7ae2a068bc1adbb5bba23e938309d9ccc1ed2833aabfddc",
+      "validation": {
+        "argv": [
+          "python3",
+          "scripts/paper_supervisors.py",
+          "verify-task",
+          "--paper",
+          "neurosymbolic_supervision",
+          "--task",
+          "NS-002"
+        ],
+        "cwd": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+        "started_at": "2026-09-11T17:29:56.608191+00:00",
+        "finished_at": "2026-09-11T17:30:00.478926+00:00",
+        "returncode": 0,
+        "log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/ns_002_native_completion.validation.log",
+        "log_sha256": "9e822eb7f772e1152ec1a5ddb4fcc3ac706f157ea6f392050353d1867a272742"
+      },
+      "original_provider_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+      "original_provider_evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+      "original_effect_receipt_sha256": "49a027a3a0e8ea902240f6c0c6bfac66429c327cc55bf8603e64bfc87fd6021b",
+      "superseded_validation_phase_sha256": "b27c098260f75f7b4cdd1c9cd6797f2433c971fcd6dd85d6f8995fd22e26757d",
+      "provider_rerun": false,
+      "benchmark_results_added": false
+    },
+    "supersedes_validation_phase": {
+      "phase": "validation",
+      "committed_at_ms": 1789145671770,
+      "fencing_token": 2,
+      "fence_epoch": 2,
+      "revision": 5,
+      "body": {
+        "argv": [
+          "portal-supervisor-gates"
+        ],
+        "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+        "evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+        "outcome": "passed",
+        "portal_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+        "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+        "validator": "DatabasePortalExecutionBridge@1"
+      }
+    },
+    "correction_reason": "Replace future-dated/unreproducible receipt provenance with reviewed committed artifacts and fresh CLI evidence."
+  },
+  "refreshed_attempt": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/database-task-attempt@1",
+    "interface": "DatabaseTaskAttempt@1",
+    "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+    "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "task_alias": "NS-002",
+    "attempt_number": 2,
+    "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+    "fencing_token": 2,
+    "fence_epoch": 2,
+    "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+    "committed_phase": "validation",
+    "status": "running",
+    "started_at_ms": 1789143746913,
+    "finished_at_ms": null,
+    "revision": 6,
+    "body": {
+      "worktree_id": ""
+    }
+  },
+  "final_attempt": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/database-task-attempt@1",
+    "interface": "DatabaseTaskAttempt@1",
+    "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+    "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "task_alias": "NS-002",
+    "attempt_number": 2,
+    "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+    "fencing_token": 2,
+    "fence_epoch": 2,
+    "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+    "committed_phase": "complete",
+    "status": "succeeded",
+    "started_at_ms": 1789143746913,
+    "finished_at_ms": 1789147807310,
+    "revision": 7,
+    "body": {
+      "worktree_id": ""
+    }
+  },
+  "final_task": {
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "task_alias": "NS-002",
+    "goal_cid": "baguqeera3lk7tmghlo6vpv3dp6uktnfm7feygxtcv3ybmm6cqcirerhlti6q",
+    "plan_cid": "baguqeeraxsfwfp7jiqhqlqg7esasezoq4772vwev2bj37y4i52x3eaotlema",
+    "objective_id": "baguqeeraj6cjx6uhsemsxb6n2j6ritest7uawsqov4redtlpdhetnkaj73da",
+    "ordinal": 2,
+    "status": "completed",
+    "revision": 7,
+    "priority": "P0",
+    "body": {
+      "allowed paths": "",
+      "board namespace": "vericodegen-2026-neurosymbolic_supervision",
+      "board_namespace": "vericodegen-2026-neurosymbolic_supervision",
+      "bundle": "neurosymbolic_supervision/NS-SG1",
+      "completion": "auto",
+      "completion_receipt": {
+        "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+        "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+        "coordination_preparation": {
+          "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+          "attempt_number": 2,
+          "body": {
+            "validation": {
+              "acceptance_criteria": [
+                {
+                  "criterion": "Manifest captures loaded __file__ locations, source digests, commits/overlays, interpreter/dependency versions, native binaries, and rollout flags.",
+                  "evidence": [
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json",
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/capabilities.json",
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
+                  ],
+                  "explanation": "The forest freezes four successful imports at their observed __file__ locations and hashes, records the three consumer gitlinks and their unresolved nested-worktree overlays, and binds every consulted source. The companion capability inventory records the validation-profile interpreter, declared and installed dependencies, absent native binaries, and explicit off/unauthorized rollout flags. The import probe independently preserves both successful imports and the two retained dependency failures.",
+                  "status": "met"
+                },
+                {
+                  "criterion": "Each draft mechanism receives independent location/implementation/integration/validation/rollout statuses.",
+                  "evidence": [
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json",
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json"
+                  ],
+                  "explanation": "The implementation inventory gives each retained or claimed mechanism a separate five-axis status rather than inferring integration, validation, or rollout from source presence. Exact names not located remain specification-only; similarly scoped modules are separately named and qualified.",
+                  "status": "met"
+                },
+                {
+                  "criterion": "Table 5 values are traceable to raw artifacts; absence of live model receipts and measured prover timing is retained.",
+                  "evidence": [
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary_evidence.json",
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary-arithmetic.log"
+                  ],
+                  "explanation": "The preliminary-evidence record names and hashes the checked-in semantic harness and sealer summary, recomputes their counts and aggregate values, and compares their rounded values to Table 5. The raw-artifact recomputation preserves zero model receipts, zero production-eligible rows, zero measured prover CPU rows, and zero measured GPU rows; it explicitly classifies the result as preliminary rather than a live experiment.",
+                  "status": "met"
+                },
+                {
+                  "criterion": "No optional unavailable component is described as operational or used to block unrelated work.",
+                  "evidence": [
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/capabilities.json",
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json",
+                    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
+                  ],
+                  "explanation": "Unavailable semantic-state and incremental-sealer imports are explicitly blocked, native provers are unavailable, and each operational claim is negative or bounded. Their failures do not invalidate static source provenance or arithmetic over existing raw reports; no completed mechanism is represented as a live repair, prover, provider, or rollout.",
+                  "status": "met"
+                }
+              ],
+              "argv": [
+                "python3",
+                "scripts/paper_supervisors.py",
+                "verify-task",
+                "--paper",
+                "neurosymbolic_supervision",
+                "--task",
+                "NS-002"
+              ],
+              "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+              "correction_reason": "Replace future-dated/unreproducible receipt provenance with reviewed committed artifacts and fresh CLI evidence.",
+              "evidence_digest": "sha256:deb4c889c8e4c5b90bcc423d710040ada9a347a407860646591aae406ff88940",
+              "execution_kind": "agent_assisted_postmerge_revalidation",
+              "outcome": "passed",
+              "provider_rerun": false,
+              "replayed": true,
+              "supersedes_validation_phase": {
+                "body": {
+                  "argv": [
+                    "portal-supervisor-gates"
+                  ],
+                  "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+                  "evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+                  "outcome": "passed",
+                  "portal_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+                  "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+                  "validator": "DatabasePortalExecutionBridge@1"
+                },
+                "committed_at_ms": 1789145671770,
+                "fence_epoch": 2,
+                "fencing_token": 2,
+                "phase": "validation",
+                "revision": 5
+              },
+              "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+              "validation_manifest": {
+                "benchmark_results_added": false,
+                "identity": {
+                  "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+                  "attempt_number": 2,
+                  "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+                  "fence_epoch": 2,
+                  "fencing_token": 2,
+                  "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+                  "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+                  "task_alias": "NS-002",
+                  "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq"
+                },
+                "original_effect_receipt_sha256": "49a027a3a0e8ea902240f6c0c6bfac66429c327cc55bf8603e64bfc87fd6021b",
+                "original_provider_evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+                "original_provider_merge": "21441b56d03f7381cdd673b1cf7e97a8f36466bb",
+                "original_provider_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+                "paper_receipt": "papers/completion/neurosymbolic_supervision/receipts/NS-002.json",
+                "paper_receipt_sha256": "1b062da74fa2b8d1a7ae2a068bc1adbb5bba23e938309d9ccc1ed2833aabfddc",
+                "provider_rerun": false,
+                "schema": "paper-agent-assisted-postmerge-revalidation/v1",
+                "source_commit": "2b21c37b75951161574b4ffd5487f89392a9c440",
+                "source_tree": "3fcf7fc330123206bd52c3c2a54cd85fd1063169",
+                "superseded_validation_phase_sha256": "b27c098260f75f7b4cdd1c9cd6797f2433c971fcd6dd85d6f8995fd22e26757d",
+                "validation": {
+                  "argv": [
+                    "python3",
+                    "scripts/paper_supervisors.py",
+                    "verify-task",
+                    "--paper",
+                    "neurosymbolic_supervision",
+                    "--task",
+                    "NS-002"
+                  ],
+                  "cwd": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+                  "finished_at": "2026-09-11T17:30:00.478926+00:00",
+                  "log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/ns_002_native_completion.validation.log",
+                  "log_sha256": "9e822eb7f772e1152ec1a5ddb4fcc3ac706f157ea6f392050353d1867a272742",
+                  "returncode": 0,
+                  "started_at": "2026-09-11T17:29:56.608191+00:00"
+                }
+              },
+              "validator": "paper_agent_assisted_postmerge_revalidation"
+            }
+          },
+          "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+          "control_expected_revision": 6,
+          "control_expected_status": "in_progress",
+          "evidence_digest": "sha256:deb4c889c8e4c5b90bcc423d710040ada9a347a407860646591aae406ff88940",
+          "fence_epoch": 2,
+          "fencing_token": 2,
+          "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+          "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+          "preparation_digest": "sha256:d0d5bdcadf7fb0dda02905bc6c8a4fb53a4f661f0cb7e22f01f0aca0f9f183a2",
+          "prepared_at_ms": 1789147806967,
+          "replayed": false,
+          "schema": "ipfs_accelerate_py/agent-supervisor/task-completion-preparation@1",
+          "status": "prepared",
+          "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq"
+        },
+        "evidence_digest": "sha256:deb4c889c8e4c5b90bcc423d710040ada9a347a407860646591aae406ff88940",
+        "fence_epoch": 2,
+        "fencing_token": 2,
+        "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+        "operation": "database_complete",
+        "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+        "validation": {
+          "acceptance_criteria": [
+            {
+              "criterion": "Manifest captures loaded __file__ locations, source digests, commits/overlays, interpreter/dependency versions, native binaries, and rollout flags.",
+              "evidence": [
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json",
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/capabilities.json",
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
+              ],
+              "explanation": "The forest freezes four successful imports at their observed __file__ locations and hashes, records the three consumer gitlinks and their unresolved nested-worktree overlays, and binds every consulted source. The companion capability inventory records the validation-profile interpreter, declared and installed dependencies, absent native binaries, and explicit off/unauthorized rollout flags. The import probe independently preserves both successful imports and the two retained dependency failures.",
+              "status": "met"
+            },
+            {
+              "criterion": "Each draft mechanism receives independent location/implementation/integration/validation/rollout statuses.",
+              "evidence": [
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json",
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json"
+              ],
+              "explanation": "The implementation inventory gives each retained or claimed mechanism a separate five-axis status rather than inferring integration, validation, or rollout from source presence. Exact names not located remain specification-only; similarly scoped modules are separately named and qualified.",
+              "status": "met"
+            },
+            {
+              "criterion": "Table 5 values are traceable to raw artifacts; absence of live model receipts and measured prover timing is retained.",
+              "evidence": [
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary_evidence.json",
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary-arithmetic.log"
+              ],
+              "explanation": "The preliminary-evidence record names and hashes the checked-in semantic harness and sealer summary, recomputes their counts and aggregate values, and compares their rounded values to Table 5. The raw-artifact recomputation preserves zero model receipts, zero production-eligible rows, zero measured prover CPU rows, and zero measured GPU rows; it explicitly classifies the result as preliminary rather than a live experiment.",
+              "status": "met"
+            },
+            {
+              "criterion": "No optional unavailable component is described as operational or used to block unrelated work.",
+              "evidence": [
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/capabilities.json",
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json",
+                "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
+              ],
+              "explanation": "Unavailable semantic-state and incremental-sealer imports are explicitly blocked, native provers are unavailable, and each operational claim is negative or bounded. Their failures do not invalidate static source provenance or arithmetic over existing raw reports; no completed mechanism is represented as a live repair, prover, provider, or rollout.",
+              "status": "met"
+            }
+          ],
+          "argv": [
+            "python3",
+            "scripts/paper_supervisors.py",
+            "verify-task",
+            "--paper",
+            "neurosymbolic_supervision",
+            "--task",
+            "NS-002"
+          ],
+          "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+          "correction_reason": "Replace future-dated/unreproducible receipt provenance with reviewed committed artifacts and fresh CLI evidence.",
+          "evidence_digest": "sha256:deb4c889c8e4c5b90bcc423d710040ada9a347a407860646591aae406ff88940",
+          "execution_kind": "agent_assisted_postmerge_revalidation",
+          "outcome": "passed",
+          "provider_rerun": false,
+          "replayed": true,
+          "supersedes_validation_phase": {
+            "body": {
+              "argv": [
+                "portal-supervisor-gates"
+              ],
+              "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+              "evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+              "outcome": "passed",
+              "portal_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+              "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+              "validator": "DatabasePortalExecutionBridge@1"
+            },
+            "committed_at_ms": 1789145671770,
+            "fence_epoch": 2,
+            "fencing_token": 2,
+            "phase": "validation",
+            "revision": 5
+          },
+          "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+          "validation_manifest": {
+            "benchmark_results_added": false,
+            "identity": {
+              "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+              "attempt_number": 2,
+              "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+              "fence_epoch": 2,
+              "fencing_token": 2,
+              "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+              "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+              "task_alias": "NS-002",
+              "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq"
+            },
+            "original_effect_receipt_sha256": "49a027a3a0e8ea902240f6c0c6bfac66429c327cc55bf8603e64bfc87fd6021b",
+            "original_provider_evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+            "original_provider_merge": "21441b56d03f7381cdd673b1cf7e97a8f36466bb",
+            "original_provider_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+            "paper_receipt": "papers/completion/neurosymbolic_supervision/receipts/NS-002.json",
+            "paper_receipt_sha256": "1b062da74fa2b8d1a7ae2a068bc1adbb5bba23e938309d9ccc1ed2833aabfddc",
+            "provider_rerun": false,
+            "schema": "paper-agent-assisted-postmerge-revalidation/v1",
+            "source_commit": "2b21c37b75951161574b4ffd5487f89392a9c440",
+            "source_tree": "3fcf7fc330123206bd52c3c2a54cd85fd1063169",
+            "superseded_validation_phase_sha256": "b27c098260f75f7b4cdd1c9cd6797f2433c971fcd6dd85d6f8995fd22e26757d",
+            "validation": {
+              "argv": [
+                "python3",
+                "scripts/paper_supervisors.py",
+                "verify-task",
+                "--paper",
+                "neurosymbolic_supervision",
+                "--task",
+                "NS-002"
+              ],
+              "cwd": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+              "finished_at": "2026-09-11T17:30:00.478926+00:00",
+              "log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/ns_002_native_completion.validation.log",
+              "log_sha256": "9e822eb7f772e1152ec1a5ddb4fcc3ac706f157ea6f392050353d1867a272742",
+              "returncode": 0,
+              "started_at": "2026-09-11T17:29:56.608191+00:00"
+            }
+          },
+          "validator": "paper_agent_assisted_postmerge_revalidation"
+        }
+      },
+      "depends on": "",
+      "description": "Map every retained mechanism to code commit/path, gitlink, overlay, import path, dependency lock, runtime mode, capability, and original evidence. Resolve duplicate external and hallucinate_app copies. Locate ProcedureCegis, CompositionEdge, incremental SMT, CEGAR, and abstract-interpreter claims in their actual worktrees or mark unresolved/specification-only. Recompute the preliminary table arithmetic from existing raw artifacts without treating it as a new live experiment; record estimated versus measured provenance. Work in a paper-specific isolated checkout and coordinate with active code owners.",
+      "goal id": "NS-SG1",
+      "implementation timeout seconds": "7200",
+      "is schedulable": "true",
+      "native_source_block": "## NS-002 Inventory the actual loaded forest and reproduce provenance of preliminary artifacts\n\n- Status: todo\n- Completion: auto\n- Is schedulable: true\n- Review only: false\n- Priority: P0\n- Track: neurosymbolic_supervision\n- Depends on: \n- Goal id: NS-SG1\n- Parent goal: NS-G000\n- Objective heap: papers/completion/neurosymbolic_supervision/paper.objectives.md\n- Board namespace: vericodegen-2026-neurosymbolic_supervision\n- Bundle: neurosymbolic_supervision/NS-SG1\n- Parallel lane: neurosymbolic_supervision\n- Outputs: papers/completion/neurosymbolic_supervision/artifacts/source_forest.json, papers/completion/neurosymbolic_supervision/artifacts/capabilities.json, papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json, papers/completion/neurosymbolic_supervision/audit/preliminary_evidence.json, papers/completion/neurosymbolic_supervision/receipts/NS-002.json\n- Predicted files: papers/completion/neurosymbolic_supervision/artifacts/source_forest.json, papers/completion/neurosymbolic_supervision/artifacts/capabilities.json, papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json, papers/completion/neurosymbolic_supervision/audit/preliminary_evidence.json, papers/completion/neurosymbolic_supervision/receipts/NS-002.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/\n- Allowed paths: \n- Resource class: cpu-medium\n- Resource stage: execution\n- Implementation timeout seconds: 7200\n- Validation: python3 scripts/paper_supervisors.py verify-task --paper neurosymbolic_supervision --task NS-002\n- Acceptance: Manifest captures loaded __file__ locations, source digests, commits/overlays, interpreter/dependency versions, native binaries, and rollout flags.; Each draft mechanism receives independent location/implementation/integration/validation/rollout statuses.; Table 5 values are traceable to raw artifacts; absence of live model receipts and measured prover timing is retained.; No optional unavailable component is described as operational or used to block unrelated work.\n- Paper evidence: PDF pp. 1\u20132, \u00a71: final artifact must freeze exact multi-repository forest; PDF p. 8, Table 5: 40 controlled tasks and 40 sealer transitions; PDF p. 9, \u00a79.1; p. 20, \u00a7H.2: standalone heads differ from consumer pins\n- Reuse candidates: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/, external/ipfs_accelerate/docs/benchmarks/semantic_compression_harness_results.md, external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/summary.json, external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/\n- Receipt: papers/completion/neurosymbolic_supervision/receipts/NS-002.json\n\nMap every retained mechanism to code commit/path, gitlink, overlay, import path, dependency lock, runtime mode, capability, and original evidence. Resolve duplicate external and hallucinate_app copies. Locate ProcedureCegis, CompositionEdge, incremental SMT, CEGAR, and abstract-interpreter claims in their actual worktrees or mark unresolved/specification-only. Recompute the preliminary table arithmetic from existing raw artifacts without treating it as a new live experiment; record estimated versus measured provenance. Work in a paper-specific isolated checkout and coordinate with active code owners.\n\nAcceptance criteria:\n\n1. Manifest captures loaded __file__ locations, source digests, commits/overlays, interpreter/dependency versions, native binaries, and rollout flags.\n2. Each draft mechanism receives independent location/implementation/integration/validation/rollout statuses.\n3. Table 5 values are traceable to raw artifacts; absence of live model receipts and measured prover timing is retained.\n4. No optional unavailable component is described as operational or used to block unrelated work.\n\nRecord dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt. Expand this task into bounded follow-ups when discovery requires it; preserve its goal and evidence obligations.\n\n",
+      "objective heap": "papers/completion/neurosymbolic_supervision/paper.objectives.md",
+      "paper evidence": "PDF pp. 1\u20132, \u00a71: final artifact must freeze exact multi-repository forest; PDF p. 8, Table 5: 40 controlled tasks and 40 sealer transitions; PDF p. 9, \u00a79.1; p. 20, \u00a7H.2: standalone heads differ from consumer pins",
+      "parallel lane": "neurosymbolic_supervision",
+      "parent goal": "NS-G000",
+      "predicted files": "papers/completion/neurosymbolic_supervision/artifacts/source_forest.json, papers/completion/neurosymbolic_supervision/artifacts/capabilities.json, papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json, papers/completion/neurosymbolic_supervision/audit/preliminary_evidence.json, papers/completion/neurosymbolic_supervision/receipts/NS-002.json, papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/",
+      "receipt": "papers/completion/neurosymbolic_supervision/receipts/NS-002.json",
+      "resource class": "cpu-medium",
+      "resource stage": "execution",
+      "reuse candidates": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing/, external/ipfs_accelerate/docs/benchmarks/semantic_compression_harness_results.md, external/ipfs_accelerate/artifacts/agent_supervisor/incremental_proof_sealer/summary.json, external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/",
+      "review only": "false",
+      "source_root": "baguqeeral735j5sfqfwqykxq3c3mwk2jkni5d5s4mwrimkmbrqnhpbnz7oaq",
+      "title": "Inventory the actual loaded forest and reproduce provenance of preliminary artifacts",
+      "track": "neurosymbolic_supervision",
+      "validation": "python3 scripts/paper_supervisors.py verify-task --paper neurosymbolic_supervision --task NS-002"
+    },
+    "dependencies": [],
+    "outputs": [
+      {
+        "ordinal": 0,
+        "path": "papers/completion/neurosymbolic_supervision/artifacts/source_forest.json",
+        "effect": {
+          "kind": "file",
+          "path": "papers/completion/neurosymbolic_supervision/artifacts/source_forest.json"
+        }
+      },
+      {
+        "ordinal": 1,
+        "path": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+        "effect": {
+          "kind": "file",
+          "path": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json"
+        }
+      },
+      {
+        "ordinal": 2,
+        "path": "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json",
+        "effect": {
+          "kind": "file",
+          "path": "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json"
+        }
+      },
+      {
+        "ordinal": 3,
+        "path": "papers/completion/neurosymbolic_supervision/audit/preliminary_evidence.json",
+        "effect": {
+          "kind": "file",
+          "path": "papers/completion/neurosymbolic_supervision/audit/preliminary_evidence.json"
+        }
+      },
+      {
+        "ordinal": 4,
+        "path": "papers/completion/neurosymbolic_supervision/receipts/NS-002.json",
+        "effect": {
+          "kind": "file",
+          "path": "papers/completion/neurosymbolic_supervision/receipts/NS-002.json"
+        }
+      }
+    ],
+    "acceptance": [
+      {
+        "ordinal": 0,
+        "criterion": "Manifest captures loaded __file__ locations, source digests, commits/overlays, interpreter/dependency versions, native binaries, and rollout flags.",
+        "evidence_policy": {
+          "criterion": "Manifest captures loaded __file__ locations, source digests, commits/overlays, interpreter/dependency versions, native binaries, and rollout flags."
+        }
+      },
+      {
+        "ordinal": 1,
+        "criterion": "Each draft mechanism receives independent location/implementation/integration/validation/rollout statuses.",
+        "evidence_policy": {
+          "criterion": "Each draft mechanism receives independent location/implementation/integration/validation/rollout statuses."
+        }
+      },
+      {
+        "ordinal": 2,
+        "criterion": "Table 5 values are traceable to raw artifacts; absence of live model receipts and measured prover timing is retained.",
+        "evidence_policy": {
+          "criterion": "Table 5 values are traceable to raw artifacts; absence of live model receipts and measured prover timing is retained."
+        }
+      },
+      {
+        "ordinal": 3,
+        "criterion": "No optional unavailable component is described as operational or used to block unrelated work.",
+        "evidence_policy": {
+          "criterion": "No optional unavailable component is described as operational or used to block unrelated work."
+        }
+      }
+    ],
+    "validations": [
+      {
+        "ordinal": 0,
+        "argv": [
+          "python3",
+          "scripts/paper_supervisors.py",
+          "verify-task",
+          "--paper",
+          "neurosymbolic_supervision",
+          "--task",
+          "NS-002"
+        ],
+        "policy": {
+          "source_command": "python3 scripts/paper_supervisors.py verify-task --paper neurosymbolic_supervision --task NS-002"
+        }
+      }
+    ]
+  },
+  "final_claim": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/task-claim@1",
+    "interface": "TaskClaim@1",
+    "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+    "fencing_token": 2,
+    "fence_epoch": 2,
+    "claimed_at_ms": 1789143746913,
+    "expires_at_ms": 1789152871746,
+    "claimed_at": "2026-09-11T16:22:26+00:00",
+    "expires_at": "2026-09-11T18:54:31+00:00",
+    "state": "released",
+    "revision": 251,
+    "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+    "attempt_number": 2,
+    "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+    "worktree_id": "",
+    "idempotency_key": "",
+    "body": {}
+  },
+  "coordination_completion": {
+    "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+    "attempt_number": 2,
+    "body": {
+      "validation": {
+        "acceptance_criteria": [
+          {
+            "criterion": "Manifest captures loaded __file__ locations, source digests, commits/overlays, interpreter/dependency versions, native binaries, and rollout flags.",
+            "evidence": [
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json",
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/capabilities.json",
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
+            ],
+            "explanation": "The forest freezes four successful imports at their observed __file__ locations and hashes, records the three consumer gitlinks and their unresolved nested-worktree overlays, and binds every consulted source. The companion capability inventory records the validation-profile interpreter, declared and installed dependencies, absent native binaries, and explicit off/unauthorized rollout flags. The import probe independently preserves both successful imports and the two retained dependency failures.",
+            "status": "met"
+          },
+          {
+            "criterion": "Each draft mechanism receives independent location/implementation/integration/validation/rollout statuses.",
+            "evidence": [
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json",
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/source_forest.json"
+            ],
+            "explanation": "The implementation inventory gives each retained or claimed mechanism a separate five-axis status rather than inferring integration, validation, or rollout from source presence. Exact names not located remain specification-only; similarly scoped modules are separately named and qualified.",
+            "status": "met"
+          },
+          {
+            "criterion": "Table 5 values are traceable to raw artifacts; absence of live model receipts and measured prover timing is retained.",
+            "evidence": [
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary_evidence.json",
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/preliminary-arithmetic.log"
+            ],
+            "explanation": "The preliminary-evidence record names and hashes the checked-in semantic harness and sealer summary, recomputes their counts and aggregate values, and compares their rounded values to Table 5. The raw-artifact recomputation preserves zero model receipts, zero production-eligible rows, zero measured prover CPU rows, and zero measured GPU rows; it explicitly classifies the result as preliminary rather than a live experiment.",
+            "status": "met"
+          },
+          {
+            "criterion": "No optional unavailable component is described as operational or used to block unrelated work.",
+            "evidence": [
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/artifacts/capabilities.json",
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/implementation_inventory.json",
+              "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-002/audit/import-probe.log"
+            ],
+            "explanation": "Unavailable semantic-state and incremental-sealer imports are explicitly blocked, native provers are unavailable, and each operational claim is negative or bounded. Their failures do not invalidate static source provenance or arithmetic over existing raw reports; no completed mechanism is represented as a live repair, prover, provider, or rollout.",
+            "status": "met"
+          }
+        ],
+        "argv": [
+          "python3",
+          "scripts/paper_supervisors.py",
+          "verify-task",
+          "--paper",
+          "neurosymbolic_supervision",
+          "--task",
+          "NS-002"
+        ],
+        "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+        "correction_reason": "Replace future-dated/unreproducible receipt provenance with reviewed committed artifacts and fresh CLI evidence.",
+        "evidence_digest": "sha256:deb4c889c8e4c5b90bcc423d710040ada9a347a407860646591aae406ff88940",
+        "execution_kind": "agent_assisted_postmerge_revalidation",
+        "outcome": "passed",
+        "provider_rerun": false,
+        "replayed": true,
+        "supersedes_validation_phase": {
+          "body": {
+            "argv": [
+              "portal-supervisor-gates"
+            ],
+            "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+            "evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+            "outcome": "passed",
+            "portal_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+            "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+            "validator": "DatabasePortalExecutionBridge@1"
+          },
+          "committed_at_ms": 1789145671770,
+          "fence_epoch": 2,
+          "fencing_token": 2,
+          "phase": "validation",
+          "revision": 5
+        },
+        "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+        "validation_manifest": {
+          "benchmark_results_added": false,
+          "identity": {
+            "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+            "attempt_number": 2,
+            "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+            "fence_epoch": 2,
+            "fencing_token": 2,
+            "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+            "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+            "task_alias": "NS-002",
+            "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq"
+          },
+          "original_effect_receipt_sha256": "49a027a3a0e8ea902240f6c0c6bfac66429c327cc55bf8603e64bfc87fd6021b",
+          "original_provider_evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+          "original_provider_merge": "21441b56d03f7381cdd673b1cf7e97a8f36466bb",
+          "original_provider_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+          "paper_receipt": "papers/completion/neurosymbolic_supervision/receipts/NS-002.json",
+          "paper_receipt_sha256": "1b062da74fa2b8d1a7ae2a068bc1adbb5bba23e938309d9ccc1ed2833aabfddc",
+          "provider_rerun": false,
+          "schema": "paper-agent-assisted-postmerge-revalidation/v1",
+          "source_commit": "2b21c37b75951161574b4ffd5487f89392a9c440",
+          "source_tree": "3fcf7fc330123206bd52c3c2a54cd85fd1063169",
+          "superseded_validation_phase_sha256": "b27c098260f75f7b4cdd1c9cd6797f2433c971fcd6dd85d6f8995fd22e26757d",
+          "validation": {
+            "argv": [
+              "python3",
+              "scripts/paper_supervisors.py",
+              "verify-task",
+              "--paper",
+              "neurosymbolic_supervision",
+              "--task",
+              "NS-002"
+            ],
+            "cwd": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+            "finished_at": "2026-09-11T17:30:00.478926+00:00",
+            "log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/ns_002_native_completion.validation.log",
+            "log_sha256": "9e822eb7f772e1152ec1a5ddb4fcc3ac706f157ea6f392050353d1867a272742",
+            "returncode": 0,
+            "started_at": "2026-09-11T17:29:56.608191+00:00"
+          }
+        },
+        "validator": "paper_agent_assisted_postmerge_revalidation"
+      }
+    },
+    "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+    "control_completion": {
+      "receipt_cid": "baguqeera5zgsgdptaseb2hqaxccf7qzk33o3ms2tpgf43pci3czhxnamhnfq",
+      "receipt_digest": "sha256:948ecfece2bdcc202db7a8ae20c4f67c7191217f105da4f1ae7a9dd7bdb89dbc",
+      "revision": 7,
+      "status": "completed",
+      "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq"
+    },
+    "control_expected_revision": 6,
+    "control_expected_status": "in_progress",
+    "evidence_digest": "sha256:deb4c889c8e4c5b90bcc423d710040ada9a347a407860646591aae406ff88940",
+    "fence_epoch": 2,
+    "fencing_token": 2,
+    "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+    "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+    "preparation_digest": "sha256:d0d5bdcadf7fb0dda02905bc6c8a4fb53a4f661f0cb7e22f01f0aca0f9f183a2",
+    "prepared_at_ms": 1789147806967,
+    "schema": "ipfs_accelerate_py/agent-supervisor/task-completion-preparation@1",
+    "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+    "status": "succeeded"
+  },
+  "provider_effect_after": {
+    "provider_invocations": {
+      "count": 1,
+      "sha256": "1a2ce8e93820ef8deacb7133c71373f0c9cd18ad70bc94539f85f102f6333050"
+    },
+    "effect_claims": {
+      "count": 1,
+      "sha256": "9f71f1db6af7b5f8f4ddf29777df5614194539a5b856f2bb483053c79cb2c6d2"
+    }
+  },
+  "native_resume_result": {
+    "resumed": true,
+    "attempt": {
+      "schema": "ipfs_accelerate_py/agent-supervisor/database-task-attempt@1",
+      "interface": "DatabaseTaskAttempt@1",
+      "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+      "claim_id": "claim:cff3aa3b15834d97b461111246961c69",
+      "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+      "task_alias": "NS-002",
+      "attempt_number": 2,
+      "owner_session_id": "embedded-store:3aa965b11834111124c5fc19555f67f9",
+      "fencing_token": 2,
+      "fence_epoch": 2,
+      "lease_id": "lease:412e320fbb494438b7091c271ed88193",
+      "committed_phase": "complete",
+      "status": "succeeded",
+      "started_at_ms": 1789143746913,
+      "finished_at_ms": 1789147807310,
+      "revision": 7,
+      "body": {
+        "worktree_id": ""
+      }
+    },
+    "provider_result": {
+      "accepted": true,
+      "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+      "binding_id": "sha256:c8115ec7fd01dc80dea75ba107b8698f50171b4c1a377b2d54a7504716b8c347",
+      "completion_authority": "DatabaseImplementationDaemon",
+      "evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+      "execution_mode": "database-authoritative-portal-bridge",
+      "interface": "DatabasePortalExecutionBridge@1",
+      "portal_evidence": {
+        "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+        "binding_id": "sha256:c8115ec7fd01dc80dea75ba107b8698f50171b4c1a377b2d54a7504716b8c347",
+        "events_digest": "sha256:a5f4da03498224306d57a95a34d554c56401b204522651c6e9d748a254414920",
+        "portal_passes": [
+          {
+            "active_task_id": "",
+            "blocked_count": 0,
+            "completed_count": 0,
+            "implementation": {
+              "attempt": 1,
+              "attempt_consumed": true,
+              "branch": "implementation/ns-002-60f9ed63ea4d-attempt-1-1789144893",
+              "implementation_commit": "fdee5121ec96a9d82d9f8264252205191a2fb9b6",
+              "provider_dispatched": true,
+              "returncode": 0,
+              "task_id": "NS-002"
+            },
+            "merge_reconciliation": [],
+            "ready_count": 1,
+            "selection_idle_reason": "",
+            "task_count": 1,
+            "unchanged": false,
+            "write_count": 0
+          },
+          {
+            "active_task_id": "",
+            "blocked_count": 0,
+            "completed_count": 1,
+            "merge_reconciliation": [],
+            "ready_count": 0,
+            "selection_idle_reason": "no_shard_selectable_ready_tasks",
+            "task_count": 1,
+            "unchanged": false,
+            "write_count": 3
+          }
+        ],
+        "projection_digest": "sha256:beb16fc8005b87b005787c07ccf5d65d73ace5b6c87b7cab7b45cdbf6bb67543",
+        "projection_immutable_digest": "sha256:50dc679698e7beb90ce69d3d799c3a85a3330cb71a92406b2905dd97d730731f",
+        "state_digest": "sha256:bf0c07f69e71be671aa9773ea4ba411e2592dd45d720cc3ca7e0c5e8c22684fd",
+        "task_alias": "NS-002",
+        "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq"
+      },
+      "provider": "PortalImplementationDaemon",
+      "receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+      "schema": "ipfs_accelerate_py/agent-supervisor/database-portal-execution-receipt@1",
+      "status": "succeeded",
+      "task_alias": "NS-002",
+      "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq"
+    },
+    "effect_result": {
+      "attempt_id": "attempt:694d560c19fd4379b543fbd45c4eb2fb",
+      "effect": "portal-supervised-accepted-effect",
+      "effect_key": "portal:baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq:attempt:694d560c19fd4379b543fbd45c4eb2fb",
+      "evidence_digest": "sha256:5a1df876cd5269fd81ecb051ea272c6bf72a6208f2c71dc2f82a0e1a46b4e1bd",
+      "portal_receipt_id": "sha256:a658f7488b34c9db261a98382598d3eaea9046eb1802182b94230930d03dba4a",
+      "status": "applied",
+      "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq"
+    },
+    "provider_duplicated": true,
+    "effect_duplicated": true,
+    "committed_phase": "complete",
+    "status": "succeeded"
+  },
+  "cleanup_errors": [],
+  "finished_at": "2026-09-11T17:30:08.148059+00:00"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "paper-command-and-runtime-selection-correction/v1",
+  "started_at": "2026-09-11T17:29:36.398044+00:00",
+  "finished_at": "2026-09-11T17:32:38.093703+00:00",
+  "integration_commit": "c5bddbb97958a9189a3f11370a72b0e6270a7f42",
+  "original_receipt_sha256": "a53348381639aeee48f06083fdaefdf894683c0f61d78cd4fc957ec41591ca31",
+  "original_literal_command": [
+    "/usr/bin/python3.12",
+    "-c",
+    "import importlib.util, importlib.metadata, shutil; sealed dependency/executable probe"
+  ],
+  "original_literal_exit_code": 1,
+  "original_criterion3_judgment": "unmet: selected model/solver/checker were null; static blocked profile was not a selection",
+  "corrected_criterion3_judgment": "met for audit/manifest selection: existing intended AE source, real cached embedding model, compiler registry, solver binaries and native checker are pinned and bounded-smoke qualified; full research execution remains separate.",
+  "role_hash_crosschecks": 38,
+  "preserved_old_snapshot_count": 4,
+  "runtime_context_limit": "Historical provider sandbox observations are preserved; fresh host replay/profile must not be reported as sandbox availability.",
+  "scientific_outcomes_changed": false,
+  "new_benchmark_executed": false,
+  "training_executed": false,
+  "local_embedding_synthetic_smoke_executed": true,
+  "native_solver_checker_synthetic_smoke_executed": true,
+  "live_database_mutated": false,
+  "live_lane_mutated": false,
+  "provider_invoked": false,
+  "remaining": [
+    "AF004/005 data and labels",
+    "AF007 bridge qualification",
+    "AF009 numerical updates",
+    "AF010 executable conditions and direct-model selection",
+    "AF011 actual checkpoints",
+    "all planned benchmarks"
+  ],
+  "context_reconciliation": "Historical static dictionaries equal immutable original snapshots; current source roles/routes now label all old availability statements by their provider context."
+}

@@ -1,0 +1,489 @@
+{
+  "schema": "paper-fifth-launch-evidence-maintenance/v1",
+  "paper": "autoformalization",
+  "started_at": "2026-09-11T17:33:24.064083+00:00",
+  "apply": true,
+  "provider_invoked": false,
+  "source_commit": "48e9333c109e4d27b668d8f2548f149126aa6af2",
+  "audit_sha256": "7cd570ee159e72fb72cf17ffe5b212eb2504c1ad746c9f8a61c7a56720bdbef4",
+  "validations": {
+    "AF-003": {
+      "argv": [
+        "python3",
+        "scripts/paper_supervisors.py",
+        "verify-task",
+        "--paper",
+        "autoformalization",
+        "--task",
+        "AF-003"
+      ],
+      "started_at": "2026-09-11T17:33:24.218951+00:00",
+      "finished_at": "2026-09-11T17:33:27.943365+00:00",
+      "exit_code": 0,
+      "validation_log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af_fifth_evidence_completion-AF-003-verify.json",
+      "validation_log_sha256": "00770b2569794b8a9b42b3b6a00470c8b9384e2c14c7fb87584762eb4ec590e4",
+      "receipt_path": "papers/completion/autoformalization/receipts/AF-003.json",
+      "receipt_sha256": "57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+      "acceptance_criteria": [
+        {
+          "criterion": "All 40 roles have resolved mappings or a concrete unresolved status and recovery task.",
+          "status": "met",
+          "explanation": "All40 roles are retained;38 mappings match exact host Git objects, and S14/S32 retain explicit recovery tasks. Manuscript-era source identity remains unresolved.",
+          "evidence": [
+            "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json"
+          ]
+        },
+        {
+          "criterion": "Runtime matrix separates implemented, documented-only, fixture-only, unsupported and unavailable routes; importability is not credited as end-to-end success.",
+          "status": "met",
+          "explanation": "All five classifications and actual route counts are retained. Historical sandbox observations are separated from selected host smoke; zero end-to-end research routes are credited.",
+          "evidence": [
+            "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/runtime_capability_matrix.json"
+          ]
+        },
+        {
+          "criterion": "Chosen model/solver entry points, feature flags and resource constraints are pinned in a manifest.",
+          "status": "met",
+          "explanation": "Pins intended AdaptiveModalAutoencoder architecture/source/default initialization, real MiniLM checkpoint/tokenizer/pooling, Intent compiler registry, Z3/CVC5 binaries and Lean4.33.1, with source/model/binary hashes, CPU/16GiB limits and bounded synthetic smoke. Trained checkpoints, direct-model A and evaluation integration remain explicitly unqualified in their later tasks.",
+          "evidence": [
+            "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/config/environment_manifest.json",
+            "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log",
+            "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/host-source-provenance.json"
+          ]
+        },
+        {
+          "criterion": "Private repository identities stay in an internal ledger for later anonymization.",
+          "status": "met",
+          "explanation": "Host Git identity reconciliation is retained in the internal private ledger and immutable audit snapshots for later anonymous export; old provider-visible Git failures are preserved.",
+          "evidence": [
+            "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json"
+          ]
+        }
+      ],
+      "source_commit": "48e9333c109e4d27b668d8f2548f149126aa6af2",
+      "provider_attempt_success_claimed": false,
+      "execution_kind": "agent_assisted_postmerge_revalidation"
+    }
+  },
+  "mutations": [
+    {
+      "kind": "append_corrected_evidence",
+      "receipt": {
+        "operation": "paper_command_receipt_correction",
+        "task_id": "AF-003",
+        "paper_receipt": "papers/completion/autoformalization/receipts/AF-003.json",
+        "evidence_digest": "sha256:57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+        "source_commit": "48e9333c109e4d27b668d8f2548f149126aa6af2",
+        "prior_native_receipt_sha256": "fe0c6ee70bf4b031634b5d028d18c745db6da0daf98b28fa9ead0b2315209580",
+        "validation_event": {
+          "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+          "event_id": "baguqeerawd5wwwdrie3yjkaew4p5i4jtidbghfqgafpxu6fivwbpoehyq7wq",
+          "event_type": "intent.validation_recorded",
+          "global_sequence": 124,
+          "recorded_at": "2026-09-11T17:33:31Z",
+          "subject_id": "baguqeeral2et6jlmt5irk4hmbedngcbpg5cwgz3kfo2epqa477qpdf7nximq",
+          "revision": 0,
+          "changed": true,
+          "details": {
+            "result_id": "baguqeeral2et6jlmt5irk4hmbedngcbpg5cwgz3kfo2epqa477qpdf7nximq",
+            "run_id": "baguqeerah4x764f6kp2sjhr73durxrfrb267zgnnkihalxqxwrqvpyl3jqbq",
+            "task_cid": "baguqeerahtsqd4lwljjf5jveejkb7cv5j2dnpikl7zafo6xpbxhygd423ybq",
+            "outcome": "passed",
+            "evidence_digest": "sha256:57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+            "argv": [
+              "python3",
+              "scripts/paper_supervisors.py",
+              "verify-task",
+              "--paper",
+              "autoformalization",
+              "--task",
+              "AF-003"
+            ],
+            "body": {
+              "argv": [
+                "python3",
+                "scripts/paper_supervisors.py",
+                "verify-task",
+                "--paper",
+                "autoformalization",
+                "--task",
+                "AF-003"
+              ],
+              "started_at": "2026-09-11T17:33:24.218951+00:00",
+              "finished_at": "2026-09-11T17:33:27.943365+00:00",
+              "exit_code": 0,
+              "validation_log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af_fifth_evidence_completion-AF-003-verify.json",
+              "validation_log_sha256": "00770b2569794b8a9b42b3b6a00470c8b9384e2c14c7fb87584762eb4ec590e4",
+              "receipt_path": "papers/completion/autoformalization/receipts/AF-003.json",
+              "receipt_sha256": "57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+              "acceptance_criteria": [
+                {
+                  "criterion": "All 40 roles have resolved mappings or a concrete unresolved status and recovery task.",
+                  "status": "met",
+                  "explanation": "All40 roles are retained;38 mappings match exact host Git objects, and S14/S32 retain explicit recovery tasks. Manuscript-era source identity remains unresolved.",
+                  "evidence": [
+                    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json"
+                  ]
+                },
+                {
+                  "criterion": "Runtime matrix separates implemented, documented-only, fixture-only, unsupported and unavailable routes; importability is not credited as end-to-end success.",
+                  "status": "met",
+                  "explanation": "All five classifications and actual route counts are retained. Historical sandbox observations are separated from selected host smoke; zero end-to-end research routes are credited.",
+                  "evidence": [
+                    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/runtime_capability_matrix.json"
+                  ]
+                },
+                {
+                  "criterion": "Chosen model/solver entry points, feature flags and resource constraints are pinned in a manifest.",
+                  "status": "met",
+                  "explanation": "Pins intended AdaptiveModalAutoencoder architecture/source/default initialization, real MiniLM checkpoint/tokenizer/pooling, Intent compiler registry, Z3/CVC5 binaries and Lean4.33.1, with source/model/binary hashes, CPU/16GiB limits and bounded synthetic smoke. Trained checkpoints, direct-model A and evaluation integration remain explicitly unqualified in their later tasks.",
+                  "evidence": [
+                    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/config/environment_manifest.json",
+                    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log",
+                    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/host-source-provenance.json"
+                  ]
+                },
+                {
+                  "criterion": "Private repository identities stay in an internal ledger for later anonymization.",
+                  "status": "met",
+                  "explanation": "Host Git identity reconciliation is retained in the internal private ledger and immutable audit snapshots for later anonymous export; old provider-visible Git failures are preserved.",
+                  "evidence": [
+                    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json"
+                  ]
+                }
+              ],
+              "source_commit": "48e9333c109e4d27b668d8f2548f149126aa6af2",
+              "provider_attempt_success_claimed": false,
+              "execution_kind": "agent_assisted_postmerge_revalidation"
+            },
+            "recorded_at": "2026-09-11T17:33:31Z",
+            "revision": 0
+          }
+        },
+        "audit_sha256": "7cd570ee159e72fb72cf17ffe5b212eb2504c1ad746c9f8a61c7a56720bdbef4",
+        "provider_invoked": false,
+        "provider_attempt_success_claimed": false,
+        "benchmark_result_claimed": false,
+        "recorded_at": "2026-09-11T17:33:31.880076+00:00"
+      },
+      "event": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+        "event_id": "baguqeera2sivfofnzc6hfzks56uvi45hdmg7efekaosodii2z7evnp7yk6hq",
+        "event_type": "intent.evidence_recorded",
+        "global_sequence": 125,
+        "recorded_at": "2026-09-11T17:33:31Z",
+        "subject_id": "baguqeeraftxehfjsg4c5pcxaov5f4pzlcelwuq5viaj6yclpvjb6ug7l5taq",
+        "revision": 0,
+        "changed": true,
+        "details": {
+          "evidence_id": "baguqeeraftxehfjsg4c5pcxaov5f4pzlcelwuq5viaj6yclpvjb6ug7l5taq",
+          "parent_evidence_id": "",
+          "task_cid": "baguqeerahtsqd4lwljjf5jveejkb7cv5j2dnpikl7zafo6xpbxhygd423ybq",
+          "evidence_kind": "paper_command_receipt_correction",
+          "digest": "sha256:57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+          "body": {
+            "operation": "paper_command_receipt_correction",
+            "task_id": "AF-003",
+            "paper_receipt": "papers/completion/autoformalization/receipts/AF-003.json",
+            "evidence_digest": "sha256:57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+            "source_commit": "48e9333c109e4d27b668d8f2548f149126aa6af2",
+            "prior_native_receipt_sha256": "fe0c6ee70bf4b031634b5d028d18c745db6da0daf98b28fa9ead0b2315209580",
+            "validation_event": {
+              "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+              "event_id": "baguqeerawd5wwwdrie3yjkaew4p5i4jtidbghfqgafpxu6fivwbpoehyq7wq",
+              "event_type": "intent.validation_recorded",
+              "global_sequence": 124,
+              "recorded_at": "2026-09-11T17:33:31Z",
+              "subject_id": "baguqeeral2et6jlmt5irk4hmbedngcbpg5cwgz3kfo2epqa477qpdf7nximq",
+              "revision": 0,
+              "changed": true,
+              "details": {
+                "result_id": "baguqeeral2et6jlmt5irk4hmbedngcbpg5cwgz3kfo2epqa477qpdf7nximq",
+                "run_id": "baguqeerah4x764f6kp2sjhr73durxrfrb267zgnnkihalxqxwrqvpyl3jqbq",
+                "task_cid": "baguqeerahtsqd4lwljjf5jveejkb7cv5j2dnpikl7zafo6xpbxhygd423ybq",
+                "outcome": "passed",
+                "evidence_digest": "sha256:57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+                "argv": [
+                  "python3",
+                  "scripts/paper_supervisors.py",
+                  "verify-task",
+                  "--paper",
+                  "autoformalization",
+                  "--task",
+                  "AF-003"
+                ],
+                "body": {
+                  "argv": [
+                    "python3",
+                    "scripts/paper_supervisors.py",
+                    "verify-task",
+                    "--paper",
+                    "autoformalization",
+                    "--task",
+                    "AF-003"
+                  ],
+                  "started_at": "2026-09-11T17:33:24.218951+00:00",
+                  "finished_at": "2026-09-11T17:33:27.943365+00:00",
+                  "exit_code": 0,
+                  "validation_log": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/af_fifth_evidence_completion-AF-003-verify.json",
+                  "validation_log_sha256": "00770b2569794b8a9b42b3b6a00470c8b9384e2c14c7fb87584762eb4ec590e4",
+                  "receipt_path": "papers/completion/autoformalization/receipts/AF-003.json",
+                  "receipt_sha256": "57138515df7e9963716ce9dcbe2400d6e5a664584cfa017c9fae0ed1258867e6",
+                  "acceptance_criteria": [
+                    {
+                      "criterion": "All 40 roles have resolved mappings or a concrete unresolved status and recovery task.",
+                      "status": "met",
+                      "explanation": "All40 roles are retained;38 mappings match exact host Git objects, and S14/S32 retain explicit recovery tasks. Manuscript-era source identity remains unresolved.",
+                      "evidence": [
+                        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json"
+                      ]
+                    },
+                    {
+                      "criterion": "Runtime matrix separates implemented, documented-only, fixture-only, unsupported and unavailable routes; importability is not credited as end-to-end success.",
+                      "status": "met",
+                      "explanation": "All five classifications and actual route counts are retained. Historical sandbox observations are separated from selected host smoke; zero end-to-end research routes are credited.",
+                      "evidence": [
+                        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/runtime_capability_matrix.json"
+                      ]
+                    },
+                    {
+                      "criterion": "Chosen model/solver entry points, feature flags and resource constraints are pinned in a manifest.",
+                      "status": "met",
+                      "explanation": "Pins intended AdaptiveModalAutoencoder architecture/source/default initialization, real MiniLM checkpoint/tokenizer/pooling, Intent compiler registry, Z3/CVC5 binaries and Lean4.33.1, with source/model/binary hashes, CPU/16GiB limits and bounded synthetic smoke. Trained checkpoints, direct-model A and evaluation integration remain explicitly unqualified in their later tasks.",
+                      "evidence": [
+                        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/config/environment_manifest.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/host-source-provenance.json"
+                      ]
+                    },
+                    {
+                      "criterion": "Private repository identities stay in an internal ledger for later anonymization.",
+                      "status": "met",
+                      "explanation": "Host Git identity reconciliation is retained in the internal private ledger and immutable audit snapshots for later anonymous export; old provider-visible Git failures are preserved.",
+                      "evidence": [
+                        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json"
+                      ]
+                    }
+                  ],
+                  "source_commit": "48e9333c109e4d27b668d8f2548f149126aa6af2",
+                  "provider_attempt_success_claimed": false,
+                  "execution_kind": "agent_assisted_postmerge_revalidation"
+                },
+                "recorded_at": "2026-09-11T17:33:31Z",
+                "revision": 0
+              }
+            },
+            "audit_sha256": "7cd570ee159e72fb72cf17ffe5b212eb2504c1ad746c9f8a61c7a56720bdbef4",
+            "provider_invoked": false,
+            "provider_attempt_success_claimed": false,
+            "benchmark_result_claimed": false,
+            "recorded_at": "2026-09-11T17:33:31.880076+00:00"
+          },
+          "created_at": "2026-09-11T17:33:31Z",
+          "revision": 0
+        }
+      }
+    }
+  ],
+  "success": true,
+  "maintenance_owner": {
+    "pid": 1305820,
+    "birth": "55771487",
+    "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+    "log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/fifth-evidence-maintenance-owner/owner.log",
+    "argv": [
+      "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+      "/home/barberb/lift_coding/scripts/paper_state_owner.py",
+      "--database",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/control.duckdb",
+      "--state-dir",
+      "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/fifth-evidence-maintenance-owner",
+      "--store-id",
+      "vericodegen-2026-autoformalization",
+      "--secret-handle",
+      "handle:vericodegen-2026:autoformalization:fifth-evidence-maintenance"
+    ]
+  },
+  "owner_identity": {
+    "contract_version": 1,
+    "credential_generation": 1,
+    "database_uuid": "24e4319a-319f-46b2-a231-2df7eb25c420",
+    "extension_fingerprint": "sha256:b77954ae50ecc06e10c6e20fc6fd421d73b5c31cf72bb60ae3f29b1f8a85f20b",
+    "fence_epoch": 9,
+    "generation": 9,
+    "interface": "StateServerIdentity@1",
+    "listen_uri": "quack:127.0.0.1:37557",
+    "process_birth": {
+      "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+      "parent_pid": 1296603,
+      "pid": 1305820,
+      "start_time_ticks": 55771487
+    },
+    "process_birth_id": "birth:f9ce3025ec3bc7e763594ee99d7e3714",
+    "repository_id": "repository:vericodegen-2026-autoformalization",
+    "revision": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/state-server-identity@1",
+    "schema_fingerprint": "sha256:3ea5f70cebacfe748017c9540bf87016075443f4ccc33376ec0a179ed576e190",
+    "schema_revision": 1,
+    "secret_handle": "handle:vericodegen-2026:autoformalization:fifth-evidence-maintenance",
+    "server_id": "server:6cc123d1-098e-438a-8f58-1f045d7b970c",
+    "started_at": "2026-09-11T17:33:28Z",
+    "startup_epoch": 1789148008,
+    "status": "ready",
+    "store_id": "vericodegen-2026-autoformalization"
+  },
+  "final_tasks": [
+    {
+      "task_alias": "AF-001",
+      "task_cid": "baguqeeraqxyaolszbgigx4ygjb74nkzn36qjyqdyloesuqkc6iy5qauwcifa",
+      "status": "completed",
+      "revision": 8
+    },
+    {
+      "task_alias": "AF-002",
+      "task_cid": "baguqeera3mwymnfki5wf7vqk6g5k5dlgndfuot3a4qgggy6x4xogidvcv6aq",
+      "status": "completed",
+      "revision": 7
+    },
+    {
+      "task_alias": "AF-003",
+      "task_cid": "baguqeerahtsqd4lwljjf5jveejkb7cv5j2dnpikl7zafo6xpbxhygd423ybq",
+      "status": "completed",
+      "revision": 7
+    },
+    {
+      "task_alias": "AF-004",
+      "task_cid": "baguqeerafrpqpvvdoxqotb2os3f4c5fnacbf7tdwi5cpo37a5q3fkzm2t3tq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-005",
+      "task_cid": "baguqeerakhicosafg672mjepnuvecprvulbijw7e3f7kyq5fssfogoim64wa",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-006",
+      "task_cid": "baguqeerabnnk56cu3k46uxkhilqfbsnedn4dybru32zwmoojojm6aewxwjva",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-007",
+      "task_cid": "baguqeeradgkthihgnusw67mz2gcihjqnmt65v32dfgy6clrdmjwrn5b2d5ha",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-008",
+      "task_cid": "baguqeerauq66dhafxvj5x7vo2i3xdvuunjttmyulsuoojczrn3dc5suwvgca",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-009",
+      "task_cid": "baguqeerawqcdzumvvxeckex4lwyexnlwhklikgt6ptcwkw7qpf3no5f7lywq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-010",
+      "task_cid": "baguqeeraxhmnlksxil4tahnr3eerh4ad5yr4qwdrxxtnga3ouc77zpbrsiaq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-011",
+      "task_cid": "baguqeerai5kwqswl4ggqwbzng7f6u6bspdxyi4v475kpsrmxhg3c7azqwnba",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-015",
+      "task_cid": "baguqeeragwca5hr6omwcdo5fboub7au4qm6xrg5e5vxhlrijppb6odfrhr6q",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-012",
+      "task_cid": "baguqeerav47fdgy6ok4i775htsrl4z3fugldvjqdxicn2guvqpjyg6gwwp3a",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-013",
+      "task_cid": "baguqeera74cylaej5bdtik2opdburgpzciwenjpka3p6wbrm5apqalkwoija",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-014",
+      "task_cid": "baguqeeraxylh57ljbxcj53odysl4erbkc7aha6zhk22ddty27lsxkqvnwrha",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-016",
+      "task_cid": "baguqeera2vorfexdu3cjkkbjmvxopzw72contlmncol43xrpu53aow5v2l7a",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-017",
+      "task_cid": "baguqeerat24vzp3hsd7v2jmjkwizeqvupssdpqh5jbsisntmooeif2kcvp3q",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-018",
+      "task_cid": "baguqeerarf4ja7fx2ggh7pnmevupd2mywkoj2l6rauctrftrya6ajkuwbffq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-019",
+      "task_cid": "baguqeerav7rr3t2qaklck4ob5i2g7bq5yjb4fouityzgzcn5iddagw76wzua",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-020",
+      "task_cid": "baguqeerattqiuj23pmpys4z3ebxlvqmkt5kupn44qcboaqklumrupx4fivda",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-021",
+      "task_cid": "baguqeerae5elq22qvgqnw7sei4tomjtjiat4ctwbi6xwsroivwgy5n7xd7fq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-022",
+      "task_cid": "baguqeeravwbdasbkspetjz2vvznix4aehjbt5zwonkgwj6tvbws2vuxrpp6a",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-023",
+      "task_cid": "baguqeera2plxewcoqaz6awvzdzicviulr2p7l4cq7vpuegpzsw2wrivlyfrq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-024",
+      "task_cid": "baguqeerawfto7tkuqo2hl4nwobhw5pmoyochr55pbgcywyry2di3vjbnwyhq",
+      "status": "ready",
+      "revision": 3
+    },
+    {
+      "task_alias": "AF-025",
+      "task_cid": "baguqeeratehgxtrrx524upipaav3xplttynhoo5u5ltaa7zvyqv5ednplizq",
+      "status": "ready",
+      "revision": 3
+    }
+  ],
+  "finished_at": "2026-09-11T17:33:34.944061+00:00",
+  "cleanup_errors": []
+}

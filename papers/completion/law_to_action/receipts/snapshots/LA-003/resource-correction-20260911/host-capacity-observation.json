@@ -1,0 +1,8 @@
+{
+  "observed_at": "2026-09-11T17:24:09.713625+00:00",
+  "observer_context": "Host staging agent; scheduler reservation and attempt cgroup enforcement are not qualified by this observation.",
+  "logical_cpus_allowed_to_observer": 20,
+  "host_physical_memory_bytes": 130663821312,
+  "host_available_memory_bytes_at_observation": 108935700480,
+  "interpretation": "The proposed one-core/2GiB attempt fits the observed host capacity. Shared scheduler reservation, actual toolchain availability and enforced per-attempt controls remain prerequisite qualification work."
+}
