@@ -1,0 +1,178 @@
+{
+  "schema": "paper-validation-worker-preflight/v1",
+  "observed_at": "2026-09-11T15:37:34.292770+00:00",
+  "lane": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+  "parent_commit": "f6dc0b581c53fdb721a54531a3a33fb506f6df61",
+  "native_guard_modified": false,
+  "provider_invoked": false,
+  "live_task_rows_modified": false,
+  "submodules": [
+    {
+      "path": "external/ipfs_accelerate",
+      "commit": "4972284aeaf44e301cfa857cc93bad17ffb8aaaa",
+      "exact_pin": true
+    },
+    {
+      "path": "external/ipfs_datasets",
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "exact_pin": true
+    },
+    {
+      "path": "external/ipfs_kit",
+      "commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "exact_pin": true
+    }
+  ],
+  "cleanup": [
+    {
+      "path": "external/ipfs_kit",
+      "removed": true
+    },
+    {
+      "path": "external/ipfs_datasets",
+      "removed": true
+    },
+    {
+      "path": "external/ipfs_accelerate",
+      "removed": true
+    }
+  ],
+  "worktree_common_gitdir": "/home/barberb/lift_coding/.git",
+  "lane_common_gitdir": "/home/barberb/lift_coding/.git",
+  "original_command": "bash -lc 'python3 scripts/paper_supervisors.py verify-task --paper neurosymbolic_supervision --task NS-001'",
+  "corrected_commands": [
+    "python3 scripts/paper_supervisors.py verify-task --paper neurosymbolic_supervision --task NS-001"
+  ],
+  "original_preflight": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/validation-project-dependency-preflight@1",
+    "workspace": "/tmp/vericodegen-validation-worktree-uh9fmlts/worker",
+    "applicable": false,
+    "automatic_install_attempted": false,
+    "probe_scope": "installed_distribution_metadata",
+    "validation_command_count": 1,
+    "validation_roots": [],
+    "project_roots": [],
+    "projects": [],
+    "dependency_neutral_command_count": 0,
+    "dependency_neutral_commands": [],
+    "invalid_commands": [
+      {
+        "command_index": 0,
+        "command_sha256": "a41b64f4a1c1620f1ae2ee31f873eb27c1029bc5510c9eeb565ce39df38d0d4d",
+        "reason": "validation_repository_root_is_unsafe"
+      }
+    ],
+    "passed": false,
+    "reason": "project_dependency_contract_collection_failed",
+    "remediation": {
+      "kind": "repair_static_project_dependency_contract",
+      "automatic_provisioning": false
+    },
+    "receipt_id": "f6cc7d5b754cc27af4c747399c60cae29449ec89c070e3a8da35ea9ecdba8ff8",
+    "retry_fingerprint": "fdf6436ff29cc9e60bb43ed0c13bf1ecd0996a1107c85236392a52c0d06a12a2"
+  },
+  "corrected_preflight": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/validation-project-dependency-preflight@1",
+    "workspace": "/tmp/vericodegen-validation-worktree-uh9fmlts/worker",
+    "applicable": true,
+    "automatic_install_attempted": false,
+    "probe_scope": "installed_distribution_metadata",
+    "validation_command_count": 1,
+    "validation_roots": [
+      ""
+    ],
+    "project_roots": [
+      ""
+    ],
+    "projects": [
+      {
+        "root": "",
+        "project_name_sha256": "ed7bf48a94708c873a31c7ccbefa7e3deb6d8fa9c472b5e9387ea2262f3276ac",
+        "applicable": true,
+        "passed": true,
+        "reason": "static_project_dependencies_collected",
+        "pyproject_sha256": "8181fe8ff2b716da6009f52207f6229d2f1fd947e74f51339652864366657e19",
+        "dependency_source": "pep621_static",
+        "validation_dependency_source": "not_applicable",
+        "pytest_invoked": false,
+        "selected_validation_extras": [],
+        "requirement_count": 0,
+        "requirement_sha256": [],
+        "requires_python_declared": true,
+        "requires_python_sha256": "b1c80780355d1ae8415aad6ffec4a3a5c51574d67ebde0d845a3203d8b084734",
+        "dependency_manifests": []
+      }
+    ],
+    "dependency_neutral_command_count": 0,
+    "dependency_neutral_commands": [],
+    "invalid_commands": [],
+    "passed": true,
+    "reason": "approved_validation_environment_satisfies_project_dependencies",
+    "probe": {
+      "passed": true,
+      "probe_source_sha256": "15941576996608530fa465bb0e246cf5bd41a0b9d050805bf21a21a878519f3d",
+      "projects": [
+        {
+          "dependency_closure": {
+            "bounds": {
+              "contexts": 4096,
+              "depth": 32,
+              "edges": 2048,
+              "installed_version_bytes": 512,
+              "metadata_text_bytes": 2097152,
+              "nodes": 256,
+              "requirement_bytes": 2048,
+              "requirements": 4096
+            },
+            "cycle_count": 0,
+            "cycles": [],
+            "edge_count": 0,
+            "expanded_context_count": 0,
+            "metadata_distribution_count": 0,
+            "metadata_requirement_count": 0,
+            "metadata_text_bytes": 0,
+            "mode": "recursive_installed_metadata",
+            "node_count": 0,
+            "requirement_evaluation_count": 0,
+            "stopped_on_bound": false
+          },
+          "incompatible": [],
+          "invalid": [],
+          "marker_skipped": [],
+          "missing": [],
+          "observed": [],
+          "passed": true,
+          "project_name_sha256": "ed7bf48a94708c873a31c7ccbefa7e3deb6d8fa9c472b5e9387ea2262f3276ac",
+          "pyproject_sha256": "8181fe8ff2b716da6009f52207f6229d2f1fd947e74f51339652864366657e19",
+          "reason": "project_dependencies_satisfied",
+          "root": ""
+        }
+      ],
+      "python_executable": "/usr/bin/python3.12",
+      "python_version": "3.12.3",
+      "reason": "project_dependencies_satisfied",
+      "schema": "ipfs_accelerate_py/agent-supervisor/validation-project-dependency-probe@1",
+      "preflight_source_delivery": {
+        "mode": "compressed_argv_copy",
+        "sha256": "15941576996608530fa465bb0e246cf5bd41a0b9d050805bf21a21a878519f3d",
+        "bytes": 126589
+      },
+      "validation_python_launcher": {
+        "content_sha256": "49591e90f1aa6eed4159199ef71c0b1286d17fecb8240066017f9d46773d82c3",
+        "interpreter_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f",
+        "interpreter_stat": "{\"device\":66306,\"inode\":1310800,\"mode\":493,\"mtime_ns\":1772540118000000000,\"path\":\"/usr/bin/python3.12\",\"size\":7845032}",
+        "mode": "linux:sealed-memfd",
+        "policy_sha256": "cb1f7ede6578bd9633f80291fe60c8be2740a7d469ff793783ffb52154cd51b8",
+        "sealed": true
+      }
+    },
+    "missing_requirements": [],
+    "incompatible_requirements": [],
+    "invalid_requirements": [],
+    "receipt_id": "cf81cecfd7b949c04d4fce3931dfa1479faca526a2b909455a4d0988551e9d89",
+    "retry_fingerprint": "323133930aed5646a8bce91c775a4df46f3a9f82b936171d184c8d2bc49396eb"
+  },
+  "passed": true,
+  "test_worktree_removed": true,
+  "root_index_unchanged": true
+}

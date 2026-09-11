@@ -12,6 +12,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -71,6 +72,25 @@ def _topological(graph):
     for key in graph:
         visit(key)
     return ordered
+
+
+def _validation_argv(command, paper, task_id):
+    """Keep the reviewed verifier as literal argv through the native bridge.
+
+    Wrapping this command in a nested shell changes its native safety policy
+    and blocks provider dispatch. This importer accepts only the verifier
+    bound to this exact paper/task; arbitrary shell programs need a separately
+    reviewed execution contract.
+    """
+    expected = ["python3", "scripts/paper_supervisors.py", "verify-task",
+                "--paper", paper, "--task", task_id]
+    try:
+        actual = shlex.split(command)
+    except ValueError as exc:
+        raise ValueError(f"task {task_id} has malformed validation argv") from exc
+    if actual != expected:
+        raise ValueError(f"task {task_id} validation must be its direct reviewed paper verifier")
+    return actual
 
 
 def build_population(paper, repo_root=ROOT):
@@ -156,7 +176,7 @@ def build_population(paper, repo_root=ROOT):
                   "outputs": [{"path": output, "kind": "directory" if output.endswith("/") else "file"}
                               for output in task.outputs],
                   "acceptance_criteria": criteria,
-                  "validation_commands": [{"argv": ["bash", "-lc", command], "source_command": command}
+                  "validation_commands": [{"argv": _validation_argv(command, paper, alias), "source_command": command}
                                           for command in task.validation],
                   "description": seed["description"] if seed else blocks.get(alias, ""),
                   "native_source_block": blocks.get(alias, ""), "source_root": source_root}

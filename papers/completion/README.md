@@ -4,7 +4,10 @@ Reviewed 2026-09-11. This program prepares **three independent
 `ipfs_accelerate_py.agent_supervisor` implementation supervisors**, one per PDF.
 Each has a root goal, subgoals, a dependency-ordered taskboard, a detailed review,
 and its own configuration. Research tasks are open; creating these boards does
-not establish experimental results. Supervisors have not been started.
+not establish experimental results. All three supervisors were launched on
+September 11; initial startup and validation-command defects were found before
+any model dispatch. Saved task histories and the exact repairs are recorded in
+`runtime_bootstrap/`. Use the live status command below for current execution.
 
 | Paper | Review | Native goals and TODOs | Main text / total PDF pages | Main missing evidence |
 | --- | --- | --- | --- | --- |
