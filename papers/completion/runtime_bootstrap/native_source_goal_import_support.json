@@ -1,0 +1,44 @@
+{
+  "checkout": "/tmp/source-goal-native-import-78a2wv03/ipfs_accelerate",
+  "base_commit": "228a769c74bd2743530ca4834ece38dccc45f880",
+  "support_files": {
+    "ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py": {
+      "source": "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py",
+      "sha256": "958a7c9c6fb8e8810922a8dd80fae9e375a1917ec4e90910be19703eb698b00b"
+    },
+    "ipfs_accelerate_py/agent_supervisor/analysis/mcp_invocation_trace.py": {
+      "source": "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_invocation_trace.py",
+      "sha256": "c263ada779b3996774ef93311b992b914ecdb02e31f04c669e5928a54b584a43"
+    }
+  },
+  "schema": "paper-native-goal-import-support/v1",
+  "recorded_at": "2026-09-11T17:52:32.782264+00:00",
+  "patch": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/native_source_goal_import_support.patch",
+    "sha256": "d9183efbdd5b0b4170a180599f808607c70b9767384159cc984c5232d7447edd"
+  },
+  "qualification": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/native_source_goal_import_qualification.json",
+    "sha256": "d7919766512e0ab74ca13fe52c01c13fa4255a2063edc10a008bbb3b932df8fc"
+  },
+  "tests": {
+    "interpreter": "python3 (3.12.3), pytest 9.1.1",
+    "cwd": "/tmp/source-goal-native-import-78a2wv03/ipfs_accelerate",
+    "argv": [
+      "python3",
+      "-m",
+      "pytest",
+      "-q",
+      "test/api/test_agent_supervisor_mcp_contract_analysis.py",
+      "test/api/test_agent_supervisor_mcp_contract_prover.py",
+      "test/api/test_agent_supervisor_mcp_contract_obligations.py"
+    ],
+    "passed": 54,
+    "skipped": 0,
+    "seconds": 1.18,
+    "exit_code": 0,
+    "note": "Actual stdout was retained in the execution tool result; no standalone full stdout file was created."
+  },
+  "live_lane_mutations": false,
+  "canonical_files_modified": false
+}
