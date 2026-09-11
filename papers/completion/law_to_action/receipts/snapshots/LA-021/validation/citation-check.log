@@ -1,0 +1,10 @@
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+python=/usr/bin/python3.12
+capability_gap: pdflatex absent from PATH
+capability_gap: latexmk absent from PATH
+capability_gap: bibtex absent from PATH
+LA-021 citation/novelty/bibliography check: PASS
+bib_entries=39 cited_keys=39 inherited=8
+bibliography=related_work; nocite=absent; related-work section=present
+Cedar/Hamlen/Clover DOIs match Crossref-checked identifiers
+AgentSpec/Progent/CaMeL cited; listed systems marked unrun

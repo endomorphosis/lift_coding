@@ -1,0 +1,80 @@
+{
+  "schema": "paper-la021-primary-source-metadata/v1",
+  "retrieved_at": "2026-09-11T22:16:00Z",
+  "scope": "Identifier and bounded-abstract checks against Crossref, arXiv Atom, doi.org/DataCite, and live specification/CFP URLs. This is not a benchmark of the named systems and not a claim that every PDF was downloaded.",
+  "corrections": [
+    {
+      "key": "cutler2024cedar",
+      "draft_identifier": "doi:10.1145/3649817; arXiv:2403.04623",
+      "checked_identifier": "doi:10.1145/3649835; arXiv:2403.04651",
+      "reason": "Crossref 10.1145/3649817 is Cocoon; arXiv 2403.04623 is an unrelated physics preprint. Cedar is PACMPL 8(OOPSLA1) 670-697."
+    },
+    {
+      "key": "hamlen2006enforcement",
+      "draft_identifier": "doi:10.1145/1111596.1111603",
+      "checked_identifier": "doi:10.1145/1111596.1111601",
+      "reason": "Draft DOI is not in Crossref. Hamlen/Morrisett/Schneider TOPLAS 28(1) 2006 uses 10.1145/1111596.1111601."
+    },
+    {
+      "key": "sun2024clover",
+      "draft_identifier": "doi:10.34727/2024/isbn.978-3-85448-065-5_27",
+      "checked_identifier": "doi:10.1007/978-3-031-65112-0_7; arXiv:2310.17807",
+      "reason": "The listed FMCAD DOI resolves to Dureja et al. Clover's Crossref chapter is Springer LNCS AI Verification 2024, pages 134-155."
+    }
+  ],
+  "closest_runtime_systems": [
+    {
+      "system": "AgentSpec",
+      "key": "wang2025agentspec",
+      "url": "https://arxiv.org/abs/2503.18666v3",
+      "updated": "2025-07-31",
+      "bounded_description": "A rule language expresses triggers, predicates and runtime enforcement for agents. Its reported domains include code execution.",
+      "benchmarked_here": false
+    },
+    {
+      "system": "Progent",
+      "key": "shi2025progent",
+      "url": "https://arxiv.org/abs/2504.11703v3",
+      "updated": "2026-05-14",
+      "bounded_description": "Symbolic policies constrain tool names and arguments. The current abstract describes SMT classification of policy updates, with automatic narrowing and approval for expansion.",
+      "benchmarked_here": false
+    },
+    {
+      "system": "CaMeL",
+      "key": "debenedetti2025camel",
+      "url": "https://arxiv.org/abs/2503.18813v2",
+      "updated": "2025-06-24",
+      "bounded_description": "A layer separates control and data flow from trusted queries and uses capabilities to constrain data flow at tool calls.",
+      "benchmarked_here": false
+    }
+  ],
+  "workshop_cfp": {
+    "url": "https://vericodegen.github.io/cfp.html",
+    "http_status": 200,
+    "byte_length": 14053,
+    "checked_at": "2026-09-11",
+    "main_text_pages": "4-9 excluding references and appendices",
+    "template": "neurips_2026_vericode_workshop.tex with neurips_2026_vericode.sty",
+    "abstract_deadline_aoe": "2026-09-11",
+    "paper_deadline_aoe": "2026-09-13",
+    "non_archival": true,
+    "relevant_topic": "Verification of and for AI: formal validation of generated outputs, runtime monitoring of agents, verified guardrails, and constrained tool use."
+  },
+  "url_liveness_http_200": [
+    "https://modelcontextprotocol.io/specification/2025-11-25",
+    "https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization",
+    "https://docs.ipfs.tech/concepts/content-addressing/",
+    "https://github.com/libp2p/specs/blob/master/connections/README.md",
+    "https://ucan.xyz/specification/",
+    "https://duckdb.org/2026/05/12/quack-remote-protocol",
+    "https://vericodegen.github.io/cfp.html",
+    "https://arxiv.org/abs/2503.18666v3",
+    "https://arxiv.org/abs/2504.11703v3",
+    "https://arxiv.org/abs/2503.18813v2"
+  ],
+  "openreview_swebench": {
+    "id": "VTF8yNQM66",
+    "status": "HTML redirected to login challenge; no Crossref DOI recovered. ICLR 2024 identity retained."
+  },
+  "inherited_access_dates": "Specification notes dated 6 September 2026 are reconstructed source text, not new observations from this check."
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-021",
+  "status": "complete",
+  "completed_at": "2026-09-11T22:36:34.652853+00:00",
+  "completion_mode": "Primary-source identifier checks, bounded novelty statement, and manuscript integration of related work. Not a scored bake-off, not a completed end-to-end safety result, and not a claim that listed systems were benchmarked.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/operator-review/primary_sources.json": "a8b608ca94cebb6cb00c38a40c5c8f4bd46e0b3171ee68d5f86de36e15525066",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex": "bdb796d81ae9b7e0faadddd13c96da54ebbbd282c7f3355239b02419469f269d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/related_work.bib": "dc70504f8fce3435c86fccb4216a08822990f20e23b16af1b6de99cabaa84eac",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/novelty_statement.md": "0093a2a52a44bcf6090d511406c8939fe62d6f42120c801ee17cfdf674123545",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/related_work.md": "f3228d2bd263f10fbe23a4892d51734f35747aaffd530113cc39e13a0eedaf52",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/citation-check.log": "f102fb73d2a0127ea5d76ece1fe98d97798b185a04478d65bbbc931c9088e97f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/citation_check.py": "3c1a43b12ba425267346917c225b6f6dd98f193296f60dfb6192d9a759750b03",
+    "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/primary_source_metadata.json": "913b37676701a0f363e5364269f3d482744c1f0259f4965ed2ee2a6eb6f5cb14"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/related_work.md": "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/related_work.md",
+    "papers/completion/law_to_action/novelty_statement.md": "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/novelty_statement.md",
+    "papers/completion/law_to_action/manuscript/related_work.bib": "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/related_work.bib",
+    "papers/completion/law_to_action/manuscript/main.tex": "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex"
+  },
+  "criteria": [
+    {
+      "criterion": "Closest related systems and implementable baseline rationale are cited from primary sources.",
+      "status": "met",
+      "explanation": "Related work cites complete mediation, IRM/edit automata, proof-carrying code/authentication, Catala, UCAN/Cedar/Macaroons, AgentDojo, and the versioned AgentSpec, Progent, and CaMeL arXiv records from primary identifiers. Crossref/arXiv checks corrected Cedar, Hamlen, and Clover DOIs. Implementable arms A0-A4 are justified as mechanism classes in this stack, not imported suites. Every comparison table cell for external systems is Not benchmarked.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/related_work.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/related_work.bib",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/primary_source_metadata.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/operator-review/primary_sources.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/citation-check.log"
+      ]
+    },
+    {
+      "criterion": "Novelty statement matches the bounded experimental contribution and acknowledges modeling/trust assumptions.",
+      "status": "met",
+      "explanation": "novelty_statement.md and the manuscript abstract/introduction/conclusion state the planned ENFORCE mediation test on one sandbox route, keep Legal/Security/Intent IR as models, record OFF/in-memory trust limits, and reject first-of-kind or superiority claims. AgentSpec, Progent, and CaMeL are named as already supplying runtime-rule and tool-privilege mechanisms.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/novelty_statement.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/citation-check.log"
+      ]
+    },
+    {
+      "criterion": "References and workshop fit are reflected in editable manuscript without pretending all listed systems were benchmarked.",
+      "status": "met",
+      "explanation": "main.tex loads only related_work.bib, contains a Related work section, cites the live 2026 CFP, and states that listed systems were not executed as scored arms. The sealed-PATH checker resolved all 39 citation keys with no nocite dump and no duplicate inherited keys. pdflatex/latexmk/bibtex are absent from PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin, so no compiled PDF is retained.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/main.tex",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/outputs/manuscript/related_work.bib",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/citation-check.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/citation_check.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/citation-check.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-021/validation/citation_check.py",
+      "started_at": "2026-09-11T22:36:34.632610+00:00",
+      "completed_at": "2026-09-11T22:36:34.652853+00:00",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    }
+  ],
+  "source_versions": {
+    "authoritative_environment": "/usr/bin/python3.12 with PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin; pdflatex/latexmk/bibtex absent.",
+    "citation_checker": "3c1a43b12ba425267346917c225b6f6dd98f193296f60dfb6192d9a759750b03",
+    "related_work_md": "f3228d2bd263f10fbe23a4892d51734f35747aaffd530113cc39e13a0eedaf52",
+    "related_work_bib": "dc70504f8fce3435c86fccb4216a08822990f20e23b16af1b6de99cabaa84eac",
+    "novelty_statement_md": "0093a2a52a44bcf6090d511406c8939fe62d6f42120c801ee17cfdf674123545",
+    "main_tex": "bdb796d81ae9b7e0faadddd13c96da54ebbbd282c7f3355239b02419469f269d",
+    "latex_toolchain": "capability_gap: pdflatex, latexmk, and bibtex are not on the sealed validation PATH.",
+    "workshop_cfp": "https://vericodegen.github.io/cfp.html recorded HTTP 200, 14053 bytes, 11 September 2026",
+    "operator_review": "a8b608ca94cebb6cb00c38a40c5c8f4bd46e0b3171ee68d5f86de36e15525066"
+  },
+  "limitations": [
+    "Listing a system is not benchmarking it. No external suite was executed as a scored arm.",
+    "This task does not produce empirical forbidden-effect or utility measurements.",
+    "pdflatex/latexmk/bibtex are unavailable in the sealed validation PATH; no compiled PDF is retained.",
+    "OpenReview HTML for SWE-bench redirected to a login challenge; no Crossref DOI was recovered for that entry.",
+    "Inherited specification access dates of 6 September 2026 remain reconstructed source text.",
+    "LA-022 still has to reconcile the full results narrative with evidence actually produced."
+  ]
+}
