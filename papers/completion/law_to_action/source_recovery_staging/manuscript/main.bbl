@@ -1,0 +1,56 @@
+\begin{thebibliography}{8}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Model Context Protocol contributors}(2025{\natexlab{a}})]{mcp}
+{Model Context Protocol contributors}.
+\newblock {Model Context Protocol specification, revision 2025-11-25}, 2025{\natexlab{a}}.
+\newblock URL \url{https://modelcontextprotocol.io/specification/2025-11-25}.
+\newblock Accessed 6 September 2026.
+
+\bibitem[{Model Context Protocol contributors}(2025{\natexlab{b}})]{mcp-auth}
+{Model Context Protocol contributors}.
+\newblock {Model Context Protocol: Authorization, revision 2025-11-25}, 2025{\natexlab{b}}.
+\newblock URL \url{https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization}.
+\newblock Accessed 6 September 2026.
+
+\bibitem[Merigoux et~al.(2021)Merigoux, Chataing, and Protzenko]{catala}
+Denis Merigoux, Nicolas Chataing, and Jonathan Protzenko.
+\newblock {Catala: A programming language for the law}.
+\newblock \emph{Proceedings of the ACM on Programming Languages}, 5\penalty0 (ICFP):\penalty0 77:1--77:29, 2021.
+\newblock \doi{10.1145/3473582}.
+
+\bibitem[Bhandari et~al.(2021)Bhandari, Naseer, and Moonen]{cvefixes}
+Guru Bhandari, Amara Naseer, and Leon Moonen.
+\newblock {CVEfixes: Automated collection of vulnerabilities and their fixes from open-source software}.
+\newblock In \emph{Proceedings of the 17th International Conference on Predictive Models and Data Analytics in Software Engineering}, 2021.
+\newblock \doi{10.1145/3475960.3475985}.
+
+\bibitem[{DuckDB team}(2026)]{quack}
+{DuckDB team}.
+\newblock {Quack: The duckdb client-server protocol}, 2026.
+\newblock URL \url{https://duckdb.org/2026/05/12/quack-remote-protocol}.
+\newblock 12 May 2026. Accessed 6 September 2026.
+
+\bibitem[{IPFS contributors}(2026)]{ipfs}
+{IPFS contributors}.
+\newblock {Content identifiers (CIDs)}, 2026.
+\newblock URL \url{https://docs.ipfs.tech/concepts/content-addressing/}.
+\newblock Documentation accessed 6 September 2026.
+
+\bibitem[{libp2p contributors}(2026)]{libp2p}
+{libp2p contributors}.
+\newblock {libp2p connections specification}, 2026.
+\newblock URL \url{https://github.com/libp2p/specs/blob/master/connections/README.md}.
+\newblock Specification accessed 6 September 2026.
+
+\bibitem[{UCAN contributors}(2026)]{ucan}
+{UCAN contributors}.
+\newblock {User controlled authorization network (UCAN) specification}, 2026.
+\newblock URL \url{https://ucan.xyz/specification/}.
+\newblock Specification accessed 6 September 2026.
+
+\end{thebibliography}

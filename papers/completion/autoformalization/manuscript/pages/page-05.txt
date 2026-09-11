@@ -1,0 +1,60 @@
+152   Family targets may be mixed. Evaluation reports cross-entropy, target entropy, and excess cross-
+153   entropy. Since H(q, p) − H(q) = DKL (q∥p), a nonzero cross-entropy need not be avoidable error:
+154   it can include the target distribution’s own entropy. Neither cosine similarity nor cross-entropy is a
+155   theorem about recovered meaning. [artifact S24]
+
+156   4.3   Guarded optimization rather than an unrestricted fit
+
+157   The generalizable projection trainer selects update groups—family logits, decoded embeddings,
+158   global or feature-specific view logits, and combined updates—and evaluates candidate learning-rate
+159   steps. It can concentrate on hard examples, use bounded pre-screening, and select a candidate only
+160   when the chosen objective improves without disallowed regression. Candidate changes are evaluated
+161   transactionally and rolled back before selection; timeout, no-improvement, and regression remain
+162   visible. A configurable deadband can relax a named numerical tolerance, so its mode and protected
+163   metrics belong in the experiment manifest. [artifact S24]
+164   Validation examples supplied to this repeated selection procedure are model-selection data, not an
+165   untouched test set. Moreover, when no validation set is supplied, the inspected function falls back
+166   to evaluating training samples. The paper’s generalization claims therefore require explicit disjoint
+167   source-family splits, separate final test data, disabled sample memory, and frozen targets. Source
+168   derivatives and multiple views of one passage must not cross partitions.
+
+169   4.4   Proof-aware auxiliary supervision
+
+170   Seven explicit heads predict obligation family, semantic slots, premise family, route availability,
+171   trusted outcome, reconstruction success, and minimal failing contract. Categorical heads use nor-
+172   malized class probabilities; multilabel heads use independent sigmoid probabilities. Only version-
+173   matched, trusted, eligible feedback trains them; duplicates and excluded holdout records are tracked.
+174   The code reports coverage, abstention, and family-specific metrics. [artifact S24]
+175   Critically, these proof-head parameters are isolated. Their declared weight in the primary representa-
+176   tion objective is zero, and protected compiler cross-entropy, embedding, structural reconstruction,
+177   provenance, and anti-copy parameter fingerprints are checked before and after an update. A prediction
+178   of proof success can prioritize a route but cannot certify a formula. This protects against learning to
+179   replace a difficult source statement with an easier, different theorem. [artifact S24]
+
+180   4.5   How learning improves deterministic formalization
+
+181   Introspection exposes feature contributions, embedding residuals, family margins, underrepresented
+182   view components, and pipeline-stage diagnostics. The TODO supervisor separates parameter updates
+183   from deterministic program-synthesis tasks. A high reconstruction loss can request a shared-weight
+184   update; a missing exception-scoping rule requires a compiler/decompiler repair and new regression
+185   tests. The cost-gated loop avoids expensive model repair unless it is enabled and its configured
+186   expected benefit exceeds call cost. Those estimates are decisions to evaluate, not measured economic
+187   guarantees. [artifact S24,S25,S29]
+188   Stable-feature promotion is an explicit join between the two loops. The export excludes raw source,
+189   token-level copying channels, sample identifiers, and sample-memory state. Integration resolves it
+190   against canonical view contracts and requires paired, fixed-canary evidence, including source-copy
+191   and symbolic-validity guardrails, before emitting content-addressed guidance with rollback metadata.
+192   This is a guarded transfer of learned regularities into a deterministic compiler-facing interface, not
+193   gradient descent through arbitrary parser code and not unconstrained rule invention. [artifact S30]
+
+194   5     Retrieval, tacticians, and proof reconstruction
+195   5.1   Three retrieval signals, not three truth criteria
+
+196   BM25 supplies lexical candidates: the sample builder ranks frames, while a separate GraphRAG thin
+197   client reads sharded postings and applies term-frequency, inverse-frequency, and length-normalization
+198   scoring. Vector indexes instead retrieve neighbors of a declared embedding; the inspected FAISS
+199   store maintains indexes, metadata, and identifier mappings. Graph adjacency and bounded walks
+
+
+                                                        5
+

@@ -1,0 +1,60 @@
+683   N     Retrieval substrates and premise formation
+
+684   The architecture has more than one retrieval implementation. This appendix separates lexical lookup,
+685   embedding-neighbor search, graph navigation, and formal premise admission. It does not claim that
+686   a single request automatically combines every index or that a learned fusion policy has been trained.
+687   The relevant inspected sources are the legal sample builder, GraphRAG thin client, FAISS store, and
+688   Hammer selector contract. [artifact S22,S34–S36]
+
+689   N.1   BM25 in sample construction and corpus lookup
+
+690   The sample builder invokes a BM25 frame selector to produce candidates and a selected ontology
+691   frame. This is supervision provenance: a selected frame may be useful but is not automatically
+692   a human-validated semantic label. The GraphRAG thin client is a different consumer of lexical
+693   indexing. It tokenizes the query, locates relevant posting shards, and computes a term contribution of
+694   the form
+                                                           tf(t, d)(k1 + 1)
+                                 s(t, d) = idf(t)                                   .                   (15)
+                                                  tf(t, d) + k1 (1 − b + b |d|/|d|)
+695   For one inspected posting schema, term frequency combines configured title and body weights.
+696   However, a separate schema branch keyed by legal identifiers sums the supplied term frequencies
+697   instead. Consequently, a response labeled “bm25” is not by itself evidence that every data schema
+698   used the same full scoring formula. The manifest, posting schema, scoring branch, tokenizer, and
+699   parameters belong in a reproducible run record. [artifact S34]
+700   Lexical retrieval is useful for citations, names, identifiers, and distinctive vocabulary. It can also
+701   miss paraphrases, rank a superficially matching exception above a controlling rule, or omit a relevant
+702   provision. Its score supplies ordering, not entailment, completeness, or applicability. Frame-selection
+703   errors can propagate into compiler-derived supervision unless independent checks expose them.
+
+704   N.2   Vector indexing is separate from representation learning
+
+705   The FAISS store maintains numerical indexes, per-collection metadata, and mappings between
+706   external identifiers and internal index positions. Its inspected constructor requires real FAISS and
+707   NumPy availability; legacy mock definitions in the file are not evidence of a successful real store
+708   query. An evaluated route must identify the actual backend and status. [artifact S35]
+709   Three operations must be recorded separately: producing a vector with a frozen or trained encoder;
+710   fitting any index structures that a selected index type requires; and changing semantic model parame-
+711   ters. The adaptive autoencoder’s embedding reconstruction is a fourth, separately specified numerical
+712   operation. A published numerical vector does not prove that the corresponding source was formally
+713   interpreted, and a store over vectors does not establish that those vectors came from this autoencoder.
+714   The thin client declares a vector subcommand and contains an embedding helper, but its inspected
+715   dispatch does not execute a vector query. Actual vector search must therefore be attributed to another
+716   verified entry point rather than to that declaration. This is a route-specific gap, not a claim that the
+717   repository lacks vector indexing. [artifact S34,S35]
+
+718   N.3   Graphs connect evidence without silently adding axioms
+
+719   The thin client can retrieve incoming/outgoing adjacency records and execute bounded walks over
+720   CID-linked nodes. Its results retain neighbor identifiers and edge metadata. A graph can connect
+721   a source passage to a definition, entity, related artifact, or dependency; an index edge does not
+722   necessarily assert a logical implication. [artifact S34]
+723   At the query boundary, lexical and vector hits can nominate seeds, graph navigation can expand their
+724   context, and exact artifact identities can retrieve declarations. This is a proposed composition of the
+725   available interfaces, not a measured fusion algorithm. A premise-admission stage must then inspect
+726   source lineage, entity and temporal alignment, domain applicability, declared authority, and the
+727   relevant interpretation. Keep “retrieved”, “admitted premise”, “assumed”, and “proved” as separate
+728   states.
+
+
+                                                        22
+

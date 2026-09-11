@@ -1,0 +1,60 @@
+729   Identity and reuse. The inward IR kernel binds canonicalization profile, domain, schema, collection
+730   semantics, and payload into content identity. A CID identifies those bytes; it is not a proof of meaning.
+731   Reuse of a proof or translation must also bind the relevant premises, theory, toolchain, policy, and
+732   checker evidence. Similarity retrieval is not an exact-result cache, and equality of an embedding is
+733   not equality of canonical declarations. [artifact S01]
+
+734   O     Tactician, Hammer, and Leanstral: distinct computational roles
+
+               Table 12: Planning, proposal, and checking do not have interchangeable authority.
+
+      Component           Computation or output                       Acceptance boundary
+      Tactician           Policy-bound route ordering and finite      Pure plan; no theorem or execution
+                          acyclic subgoals; stop/abstain reasons.     result is produced.
+      Hammer selector     Rank existing premise candidates from       Relevance score is not logical
+                          reproducible features.                      implication; sources still require
+                                                                      admission.
+      ATP portfolio       Search translated first-order problems      Supported translation, explicit
+                          using allowed Vampire/E routes.             execution permission, native
+                                                                      reconstruction.
+      SMT portfolio       Search admitted SMT-LIB encodings           Solver-local outcome retains theory
+                          using allowed Z3/cvc5 routes.               and scope; not automatically an ITP
+                                                                      theorem.
+      ITP frontend and    Capture the native goal and reconstruct     The originating Lean/Coq/Isabelle
+      reconstructor       a native tactic/term candidate.             checker accepts the proof in a pinned
+                                                                      environment.
+      Leanstral           Suggest proof edits, strategies, or         Raw generated text remains untrusted;
+                          bounded compiler work through               configured independent checks are
+                          configured lanes.                           required.
+      Adaptive proof      Predict route availability, outcome,        Version-matched admitted feedback;
+      heads               premise family, reconstruction, and         prediction cannot replace checking.
+                          failure categories.
+
+
+735   O.1   Planning is deterministic until explicitly guided
+
+736   The local LogicTactician validates the goal and policy, binds the configuration identity, validates
+737   and partitions candidate sources, optionally applies pinned guidance, selects routes under budgets, and
+738   decomposes declared proof gaps. Cycles cause abstention rather than a malformed plan. Excluded
+739   sources retain a reason, and final plans carry input roots and guidance identities. The planner’s own
+740   implementation performs no proof, write, or network work. [artifact S38]
+741   This is a domain-neutral orchestration layer. Its name should not be taken to imply implementation of
+742   an external tactic-learning system. A separate executor is needed to realize a plan, and that execution
+743   must supply its own artifacts and outcomes. Optional ranking and nomination have a narrower
+744   contract than unconstrained generation of new assumptions or arbitrary executable tasks.
+
+745   O.2   The supported-fragment Hammer workflow
+
+746   The inspected Hammer guide describes a native goal, premise selection, translation to TPTP or SMT-
+747   LIB, a bounded external portfolio, candidate normalization, reconstruction, kernel checking, and
+748   receipt persistence. Each target ITP has a frontend and matching reconstructor. The first-order-safe
+749   fragment admits explicit term/connective forms and finite sort signatures under the translation contract;
+750   unsupported dependent types, higher-order predicate quantification, unresolved polymorphism, and
+751   opaque unrecognized terms must return unsupported rather than be erased. [artifact S37]
+752   All external solvers require operator opt-in. A missing native toolchain remains unavailable; a timeout
+753   remains a timeout. In this ITP Hammer contract, a solver’s answer is an untrusted candidate until the
+754   originating native checker accepts reconstruction. This statement is specific to that contract; another
+
+
+                                                         23
+

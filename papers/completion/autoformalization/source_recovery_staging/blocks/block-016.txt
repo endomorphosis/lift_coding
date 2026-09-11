@@ -1,0 +1,16 @@
+      Table 4: All twelve reference checks. “Expected” includes finding a counterexample when the tested
+      shortcut is invalid.
+      Check                                          Cases    Expected outcome
+      Normal modal distribution                        512    No finite countermodel
+      Reflexive factivity                               32    No finite countermodel
+      Serial D                                          72    No finite countermodel
+      Obligation not actuality                           1    Explicit separating model
+      Belief without factivity                           1    Explicit separating model
+      Until not conjunction                             64    26 disagreements
+      Always not current truth                           1    Explicit separating trace
+      Quantifier order                                   1    Diagonal-relation witness
+      Guarded writes                                     4    Safe relation 0; unsafe 1 violation
+      Complete audit window                             16    1 violating assignment
+      Incomplete/unaligned traces                        3    Unknown, unresolved, bounded satisfaction
+      Round-trip shared loss                             1    Equal recompiled IR; unequal source
+                                                              meaning

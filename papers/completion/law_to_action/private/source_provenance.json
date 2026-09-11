@@ -1,0 +1,72 @@
+{
+  "schema": "law-to-action-private-source-provenance/v1",
+  "recorded_at": "2026-09-11T16:06:51.477105+00:00",
+  "classification": "private author companion; exclude from anonymous public bundles",
+  "recovery_mode": "PDF reconstruction, not original source retrieval",
+  "author_identity": null,
+  "original_author_latex_available": false,
+  "original_bibliography_available": false,
+  "overleaf_project": {
+    "url": "https://www.overleaf.com/project/6a7b4742e20ac910c422a7e0",
+    "provided_by": "user",
+    "paper_membership": "unverified",
+    "authenticated_access": "not available in this session",
+    "download_confirmed": false
+  },
+  "provided_inputs_sha256": {
+    "papers/from_law_to_action_corpus_grounded-1.pdf": "000b0d1960854966be836788f05c1fe33b8c0c6a2943a8d88f20241f99b38da0",
+    "papers/completion/law_to_action/extracted.txt": "7ba3ca062ada2271540676831842f095769a6feb085d2290ba96b26fa7182541",
+    "papers/neurips_2026_vericode_workshop.tex": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+    "papers/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "papers/checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6"
+  },
+  "original_pdf_reported_pins": [
+    {
+      "source": "hitoshura25/cvefixes",
+      "revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+      "page": 11,
+      "printed_lines": [
+        393,
+        395
+      ],
+      "verification_status": "transcribed from PDF; not independently fetched or verified"
+    },
+    {
+      "source": "Tommysha/skillcenter-bundles",
+      "revision": "f9dd4fec3c86d85ebf116c7408ac5ce602c418a1",
+      "page": 11,
+      "printed_lines": [
+        416,
+        418
+      ],
+      "verification_status": "transcribed from PDF; not independently fetched or verified"
+    },
+    {
+      "source": "U.S. Code release point",
+      "release_point": "us/pl/118/45",
+      "page": 10,
+      "printed_lines": [
+        373,
+        375
+      ],
+      "verification_status": "transcribed from PDF; exact dataset revision missing"
+    }
+  ],
+  "private_implementation_companion": {
+    "described_in_pdf_pages": [
+      10,
+      14
+    ],
+    "available": false,
+    "repository_revision": null,
+    "source_to_code_map": null
+  },
+  "unavailable_author_fields": [
+    "Author identities and affiliations",
+    "Original manuscript revision/export history",
+    "Exact private implementation companion and repository/source map",
+    "Source licenses and author review/consent records not supplied",
+    "Exact original writing model/tool versions and executed-run records"
+  ],
+  "disposition": "Leave unknown fields explicit. LA-002/004/023/024/025 cover code provenance, corpus freezing, artifact, anonymization and final author review; source reconstruction does not satisfy those tasks."
+}

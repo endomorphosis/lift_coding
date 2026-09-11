@@ -1,0 +1,20 @@
+                 Table 13: Separate measurements for retrieval, planning, and proof assistance.
+
+      Comparison                         Controlled variable                Required outcome
+      Lexical / vector / graph           Same corpus, queries, target       Independently judged relevant
+                                         interpretation and budget          context and accepted-premise
+                                                                            yield
+      Baseline / graph selector          Same goal and candidate            Recall against stated labels;
+                                         corpus                             proxy status; actual useful
+                                                                            proof coverage
+      Unguided / guided plan             Same admitted sources and          Deterministic replay, subgoal
+                                         route budget                       coverage, abstention and total
+                                                                            cost
+      Hammer / Leanstral assistance      Same source goal, native           Candidate rate, reconstruction
+                                         checker and resource envelope      acceptance, unsupported and
+                                                                            timeout rates
+      Proof heads off / on               Same representation checkpoint     Calibration, route value,
+                                         and isolated update policy         protected-objective invariance
+      Guidance off / promoted            Same compiler profile and          Actual consumer activation,
+                                         frozen source families             independent source fidelity,
+                                                                            regressions

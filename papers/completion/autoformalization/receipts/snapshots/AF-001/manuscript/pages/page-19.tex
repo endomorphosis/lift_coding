@@ -1,0 +1,61 @@
+% Original PDF page 19; hash in recovery-map.json.
+\recoverypage{19}
+\noindent
+For a categorical family or view target, normalize the nonnegative target row and apply\par
+
+\input{equations/equation-13.tex}
+\noindent
+where M selects available target rows. The denominator in the inspected path is the total sample count,\linebreak[4]
+not necessarily the count of active rows. The cosine term is evaluated on nonzero target/prediction\linebreak[4]
+norms. The broad norm-ratio guard is zero within its safe region and penalizes extreme ratios. L2\linebreak[4]
+regularization is normalized by the number of parameters. Not every term is active for every selected\linebreak[4]
+head.\linebreak[4]
+Microbatches contribute their globally normalized losses before gradients are accumulated. The\linebreak[4]
+implementation calls backward, rejects nonfinite packed loss metrics, computes and clips the gradient\linebreak[4]
+norm, and performs\par
+
+\input{equations/equation-14.tex}
+\noindent
+with a bounded step. The inspected code directly adds the scaled negative gradient; it does not\linebreak[4]
+implement Adam moments. Changed parameter rows are scattered back into the canonical transaction-\linebreak[4]
+aware maps. Device residency is an execution optimization, not a different symbolic semantics. Some\linebreak[4]
+configured groups may have no active parameters; a reported forward-only no-op must not be counted\linebreak[4]
+as learning progress.\par
+
+\subsection*{J.2  The outer model-selection step}
+\noindent
+The generalizable trainer evaluates family, reconstructed-embedding, global-view, detailed-view,\linebreak[4]
+and combined update candidates. It tries learning-rate multipliers, may select hard examples, can\linebreak[4]
+cap target construction and pre-screen candidates, and compares candidate objective changes with\linebreak[4]
+per-metric regression limits. It temporarily applies candidate state, evaluates, and rolls it back before\linebreak[4]
+deciding which candidate to commit. The evaluated objective also includes view/structural losses,\linebreak[4]
+which need not be differentiable tensors.\linebreak[4]
+This is an inner numerical update surrounded by guarded discrete selection. Calling every stage\linebreak[4]
+backpropagation would be wrong. Equally, describing the tensor path as only heuristic tweaking\linebreak[4]
+would miss its actual backward and parameter-update operations. If validation samples are absent,\linebreak[4]
+evaluation falls back to training examples; that case must not be labeled held-out validation. A\linebreak[4]
+nonzero deadband changes the acceptance policy and must be disclosed, not buried as a numerical\linebreak[4]
+implementation detail.\par
+
+\subsection*{J.3  Proof-feedback heads and objective isolation}
+\noindent
+The categorical heads are obligation family, trusted outcome, and reconstruction success. The\linebreak[4]
+multilabel heads are semantic slots, premise family, proof-route availability, and minimal failing\linebreak[4]
+contract. The default vocabulary and family-context sizes are bounded. A head can abstain when its\linebreak[4]
+confidence or available labels are inadequate.\linebreak[4]
+Training accepts only records passing trust, partition, and compiler/toolchain version checks. Dupli-\linebreak[4]
+cate IDs are not trained repeatedly. The first admissible version may pin previously empty proof-head\linebreak[4]
+state; mismatches are excluded. The implementation compares protected objective fingerprints and\linebreak[4]
+reports a proof-loss weight of zero in the primary representation objective. This is a useful causal\linebreak[4]
+design: proof feedback can teach prediction and route selection without being permitted to rewrite\linebreak[4]
+the statement solely to maximize provability. Actual downstream benefit still needs an ablation.\par
+
+\section*{K  Constrained decoding and learned-to-symbolic promotion}
+\subsection*{K.1  Grammar controls the candidate language}
+\noindent
+The decoder implementation declares typed productions and a frozen vocabulary of 143 tokens,\linebreak[4]
+including special, binder, operator, type, family, proof, tactic, source, identifier and production\linebreak[4]
+categories. Its declared masks are valid token, grammar, binder, type and family; its search bounds\linebreak[4]
+are 16 beam entries and 64 decode steps. These are implementation constants, not results of a newly\linebreak[4]
+trained model. The exact profile and any changes belong in the run manifest.\par
+

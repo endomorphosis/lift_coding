@@ -1,0 +1,63 @@
+% Original PDF page 13; hash in recovery-map.json.
+\recoverypage{13}
+\input{blocks/block-014.tex}
+\noindent
+Integration status to fill. For each claimed source-to-proof route, publish the exact frontend,\linebreak[4]
+domain adapter, syntax/elaboration version, logical profile, backend, optional features actually\linebreak[4]
+enabled, and result checker. Report an unsupported or unavailable route honestly. An importable\linebreak[4]
+adapter, passing schema test, old benchmark guide, or advertised feature list is not current end-to-end\linebreak[4]
+evidence.\par
+
+\section*{B  Preservation contract and proof-transfer argument}
+\noindent
+Let SB be the source models admitted under explicit bridge assumptions B. Let \ensuremath{\tau} be fixed on a\linebreak[4]
+specified premise and goal language. The contract is not required to cover every source sentence.\linebreak[4]
+Proposition 1 (Conditional semantic consequence transfer). Suppose for every s \ensuremath{\in} SB satisfying\linebreak[4]
+\ensuremath{\Gamma}, there exists a target model t such that RB (s, t) holds. Suppose related models preserve premises\linebreak[4]
+in the direction of Equation 7 and reflect the goal in the direction of Equation 8. If a sound target\linebreak[4]
+checker establishes \ensuremath{\tau} (\ensuremath{\Gamma}) |= \ensuremath{\tau} (\ensuremath{\phi}), then \ensuremath{\Gamma} |=SB \ensuremath{\phi}.\par
+
+\noindent
+Proof. Take any s \ensuremath{\in} SB satisfying \ensuremath{\Gamma}. Existence supplies a related t. Premise preservation gives\linebreak[4]
+t |= \ensuremath{\tau} (\ensuremath{\Gamma}). Target consequence gives t |= \ensuremath{\tau} (\ensuremath{\phi}). Goal reflection gives s |= \ensuremath{\phi}. The argument holds for\linebreak[4]
+each such s.\par
+
+\noindent
+This is a paper-level conditional argument, not a machine-checked theorem of the repository. It\linebreak[4]
+does not establish that the source extraction was faithful, that B was appropriate, that the model\linebreak[4]
+class was nonempty, or that a legacy converter satisfies the two preservation directions. Test consis-\linebreak[4]
+tency/reachability separately to avoid reporting a vacuous result as practical assurance.\par
+
+\noindent
+Suggested translation receipt. The following is specification notation rather than a newly imple-\linebreak[4]
+mented replacement for existing contracts:\par
+
+\noindent
+source-view, target-view, source-formula-root,\linebreak[4]
+target-formula-root,\linebreak[4]
+signature-map, interpretation-profile, bridge-assumptions,\linebreak[4]
+preserved-property, preservation-direction,\linebreak[4]
+supported-fragment,\linebreak[4]
+named-losses, source-map-root, checker-environment,\linebreak[4]
+checker-result, proof-or-countermodel-reference, status\par
+
+\noindent
+A consuming query must check that the receipt's preserved property and direction are adequate for that\linebreak[4]
+query. Equi-satisfiability alone cannot establish a mapping of every model's temporal observations.\linebreak[4]
+A loss flag cannot be ignored because a later solver returned UNSAT.\par
+
+\noindent
+Multi-source joins. For a document actor, code parameter, and event field, include a reviewed\linebreak[4]
+alignment claim rather than collapsing all matching strings. Bind namespace, tenant, instance identity,\linebreak[4]
+role, validity interval, source authority, and resolution method. Time bridges must specify clock origin,\linebreak[4]
+monotonicity, calendar/duration semantics, timezone where relevant, and unit conversion. Missing\linebreak[4]
+evidence remains unresolved. The result should retain all bridge assumptions so that revocation or\linebreak[4]
+source changes can invalidate dependent conclusions.\par
+
+\noindent
+Contradictory sources. Classical theorem provers may derive any goal from inconsistent premises.\linebreak[4]
+Do not repair inconsistency by suppressing an inconvenient observation or promoting a model's\linebreak[4]
+confidence. Partition contexts, identify conflicting premises, request authoritative resolution, or\linebreak[4]
+choose a separately justified inconsistency-tolerant semantics. Such a change is a logic-profile change\linebreak[4]
+and must not be hidden inside a translation adapter.\par
+

@@ -1,0 +1,17 @@
+{
+  "schema": "paper-runtime-update/v1",
+  "reason": "Use qualified explicit Grok route and integrate three verified source recovery checkpoints",
+  "created_at": "2026-09-11T16:13:39.076379+00:00",
+  "campaign_script_sha256": "620830626be01e7d29adcf0f82fa7a882bf0b61a3536f4d5bda38917a1fd9028",
+  "lanes": {
+    "autoformalization": {
+      "accelerator_commit": "6f90d40390c9c5919b6c9de734dd425c2119ecdc"
+    },
+    "law_to_action": {
+      "accelerator_commit": "ae1b1c8584f6c83889147b88bd5963ba5821f8ae"
+    },
+    "neurosymbolic_supervision": {
+      "accelerator_commit": "f4efcfc4088851536e38f4785a5f753ef9c346b4"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+         Compiler-Guided Autoformalization with Adaptive
+                   Multi-View Representations
+
+
+                                                  Anonymous Author(s)
+                                                      Affiliation
+                                                       Address
+                                                        email
+
+
+
+                                                         Abstract
+
+ 1             Autoformalization requires both faithful interpretation and a computational route
+ 2             for reasoning about it. We describe a compiler-guided architecture coupling en-
+ 3             gineered symbolic IRs to adaptive multi-view representation learning. Determin-
+ 4             istic parsers construct source-grounded declarations; decompilers expose source-
+ 5             withheld reconstruction errors; and shared feature, family, semantic-slot, and view
+ 6             parameters are optimized by an implemented packed tensor update and guarded
+ 7             outer selection. BM25, vector indexes, and knowledge-graph traversal supply
+ 8             complementary context rather than truth criteria. A policy-constrained Tactician
+ 9             organizes search, an ITP Hammer translates supported fragments and reconstructs
+10             solver candidates, and Leanstral supplies advisory proof-engineering proposals. In-
+11             dependently admitted feedback trains isolated proof heads or motivates separately
+12             tested compiler/decompiler changes. Stable learned guidance reaches enabled
+13             consumers only through source-free, fixed-canary promotion. Shared symbols
+14             and explicit preservation contracts connect deontic, temporal, frame, event, graph,
+15             Legal, Security, and Intent views without equating their semantics. We distinguish
+16             numerical reconstruction from symbolic round trips, and model prediction from
+17             checked proof. A synthetic policy–code–trace example and twelve standalone
+18             semantic checks illustrate composition. This source-audited methods draft reports
+19             no new checkpoint training or end-to-end performance: held-out source fidelity,
+20             retrieval benefit, native proof coverage, and total learning/verification cost remain
+21             to be measured.
+
+
+22   1    Introduction
+23   Autoformalization makes heterogeneous material available to mechanical reasoning, but a formula
+24   can be well typed and provable while misrepresenting its source. A requirement, implementation, and
+25   execution trace also have different truth conditions: an obligation is not an observation, permission
+26   is not execution, and belief is not fact. Recent mathematical autoformalization demonstrates useful
+27   natural-language translation into formal statements [1, 2, 9]. Our question is how to learn better
+28   source-to-symbolic mappings while preserving these distinctions across domains and logical views.
+29   The method couples a deterministic semantic pipeline to adaptive representation learning. Compilers
+30   create source-grounded intermediate representations (IRs), decomposers expose multiple logical
+31   views, and decompilers reconstruct inspectable content. An adaptive modal autoencoder learns
+32   reusable feature-to-embedding and feature-to-family/view parameters against these targets. Recon-
+33   struction, structural, provenance, grammar, and cross-view diagnostics identify where the symbolic
+34   pipeline is inadequate. Bounded optimization then either updates model parameters or proposes a
+35   separately validated compiler/decompiler improvement. Checked proof feedback supplies additional,
+36   isolated prediction heads rather than rewarding arbitrary changes that make the input easier to prove.
+
+     Submitted to NeurIPS 2026 Workshop on AI for Verifiable Coding. Do not distribute.
+

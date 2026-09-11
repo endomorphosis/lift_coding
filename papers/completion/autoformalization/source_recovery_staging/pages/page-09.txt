@@ -1,0 +1,56 @@
+          Table 1: Measurements needed to distinguish learning from copying or teacher self-consistency.
+
+      Question                Required comparison
+      Generalization          Sample-memory on/off; disjoint final test set; supervised target provenance
+      Reconstruction          Embedding MSE/cosine versus source-withheld text and independently
+                              labeled IR facets
+      Multi-view learning     Per-family/view CE and coverage; modal/exception/quantifier minimal pairs
+      Proof feedback          Heads off/on; calibration, abstention, actual checker outcomes,
+                              protected-objective invariance
+      Compiler transfer       No guidance versus admitted guidance; fixed-canary and held-out fidelity;
+                              rollback
+      Economics               Compilation, target construction, gradient updates, validation, search, retries,
+                              and provider cost
+
+
+342   The empirical evaluation must isolate distinct questions (Table 1). In particular, report deterministic-
+343   only, adaptive-with-memory, adaptive-without-memory, source-free promoted guidance, and proof-
+344   head ablations. Also ablate BM25/vector/graph context, deterministic versus optional premise
+345   ranking, and Hammer versus Leanstral assistance. Use matched tasks, model budgets, teacher targets,
+346   and acceptance checks. Keep source-family and temporal test splits separate from the repeatedly
+347   consulted selection set. [To complete: Supply frozen checkpoint/configuration identities, training
+348   and split counts, teacher-vector provenance, enabled heads, held-out fidelity, and independent
+349   proof-transfer results.]
+350   A controlled compiler/realizer cycle can consistently omit the same fact; a solver can prove that
+351   incomplete formalization; and a student can learn the same omission from its teacher. Final evaluation
+352   must therefore use independent source interpretations, countermodels, and useful proof coverage, not
+353   only parse success, round-trip agreement, or an aggregate score. Include abstentions and unsupported
+354   cases in the denominator and report actual extraction, annotation, learning, repair, proof, and review
+355   costs.
+
+356   9     Related work, limitations, and conclusion
+357   Mathematical autoformalization [1, 2, 9] motivates learned statement generation, but our source
+358   pipeline combines domain-specific parsing, structured targets, adaptive representation heads, and
+359   checked compilation guidance. Learned perception plus symbolic execution is established in neural-
+360   symbolic reasoning [8]; here provenance, modal scope, and separate proof-feedback objectives are
+361   material. We do not claim to originate multi-logic interoperability: institutions formalize signatures,
+362   models, and satisfaction [4], while LogiKEy combines normative logics by HOL embedding [3].
+363   Frame logic, event calculus, and hammer reconstruction are established foundations [5, 6, 10].
+364   The main limitations are teacher bias, possible sample-memory shortcuts, repeated validation-set
+365   selection, unmeasured checkpoint activation, dynamic source behavior, lossy legacy translations,
+366   and bounded backend coverage. The proof space is neither a universal latent space nor a universal
+367   decision procedure. A trained view classifier, valid source map, or high reconstruction score does not
+368   by itself establish faithful interpretation. Result kinds remain distinct: theorem proof, satisfiability,
+369   finite runtime observation, evidence readiness, and policy approval. [artifact S19]
+370   The methodology is best understood as a coupled learning and compilation system: symbolic structure
+371   supplies auditable targets; trainable shared representations expose systematic errors; constrained
+372   proposals and fixed-canary admission improve the compiler-facing path; and modality-aware views
+373   support explicitly justified reasoning. The next result to establish is whether this cycle improves
+374   independent source fidelity and useful cross-view proof coverage on genuinely unseen material, at a
+375   favorable total cost.
+
+
+
+
+                                                         9
+
