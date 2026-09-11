@@ -1,0 +1,927 @@
+{
+  "schema": "neurosymbolic-supervision/artifact-citation-map@1",
+  "task_id": "NS-021",
+  "frozen_at": "2026-09-11",
+  "anonymity_rule": "Submission-facing citations are either primary bibliographic records in verified_references.bib or anonymous supplement identifiers of the form anon-supplement:<role>. Identifying repository URLs, usernames, Overleaf projects, author-local worktrees, and companion reconciliation handoffs are excluded.",
+  "manuscript_application": "NS-022",
+  "anonymity_application": "NS-024",
+  "source_extract": {
+    "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+    "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+  },
+  "label_count": 47,
+  "labels": [
+    {
+      "id": "D1",
+      "kind": "internal_workstream",
+      "scientific_role": "Frozen multi-repository source forest, semantic index/producer, and import/daemon hygiene.",
+      "anonymous_citation": "anon-supplement:source-forest",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/artifacts/source_forest.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the frozen source-forest inventory",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 2,
+          "numbered_lines": [
+            37,
+            45
+          ],
+          "excerpt": "final artifact must freeze the exact multi-repository source forest [D1, A1–A5, N1–N14]"
+        }
+      ],
+      "notes": "NS-002 inventory binds inspected bytes; it is not a live deployment.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "D2",
+      "kind": "internal_workstream",
+      "scientific_role": "Incremental SMT wrapper: named assertions and replay identity without retained-clause speedup.",
+      "anonymous_citation": "anon-supplement:incremental-smt-limit",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the inspected solver-replay path, which rebuilds the solver per check",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 3,
+          "numbered_lines": [
+            87
+          ],
+          "excerpt": "Solver diversity, same-solver core rechecking ... [D2]"
+        },
+        {
+          "pdf_page": 12,
+          "numbered_lines": [
+            644
+          ],
+          "excerpt": "current wrapper rebuilds its solver [D2]"
+        }
+      ],
+      "notes": "Inventory records the named wrapper as specification-only in the inspected forest. Do not cite a missing module as an evaluated backend.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "D3",
+      "kind": "internal_workstream",
+      "scientific_role": "Abstract-interpretation profile: transfer semantics, domain, widening/narrowing; no whole-front-end soundness.",
+      "anonymous_citation": "anon-supplement:abstract-interpretation-profile",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the bounded abstract-interpretation profile (baseline02)",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [
+        "baseline02"
+      ],
+      "sample_locations": [
+        {
+          "pdf_page": 12,
+          "numbered_lines": [
+            636
+          ],
+          "excerpt": "Do not call the entire Python front end sound ... [D3]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "D4",
+      "kind": "internal_workstream",
+      "scientific_role": "Assume-guarantee composition: producer/consumer clauses, uncovered prose, cyclic closure.",
+      "anonymous_citation": "anon-supplement:assume-guarantee-profile",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "assume-guarantee discharge of producer/consumer clauses",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 12,
+          "numbered_lines": [
+            640
+          ],
+          "excerpt": "expose uncovered prose clauses [D4]"
+        }
+      ],
+      "notes": "Named CompositionEdge identifier was not located; keep as a specified interface, not a located module.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "D5",
+      "kind": "internal_workstream",
+      "scientific_role": "Interpolation/CEGAR versus CEGIS: refine abstractions versus refine bounded candidates.",
+      "anonymous_citation": "anon-supplement:cegar-cegis-distinction",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "CEGAR on abstractions and CEGIS on bounded candidates (baseline03, baseline05)",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [
+        "baseline03",
+        "baseline05"
+      ],
+      "sample_locations": [
+        {
+          "pdf_page": 12,
+          "numbered_lines": [
+            649
+          ],
+          "excerpt": "CEGAR refines abstractions, while CEGIS refines bounded candidates [D5]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "D6",
+      "kind": "internal_workstream",
+      "scientific_role": "Translation and e-graph extraction: freeze source/target, rule trust, and distinct equivalence claims.",
+      "anonymous_citation": "anon-supplement:translation-egraph-profile",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "translation and equality-saturation extraction under a frozen source/target profile (baseline04, baseline06)",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [
+        "baseline04",
+        "baseline06"
+      ],
+      "sample_locations": [
+        {
+          "pdf_page": 12,
+          "numbered_lines": [
+            659
+          ],
+          "excerpt": "Opaque interface names are not implementation evidence [D6]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "D7",
+      "kind": "internal_workstream",
+      "scientific_role": "Tactician/Hammer/proof-assistant candidates require the actual backend and native reconstruction.",
+      "anonymous_citation": "anon-supplement:hammer-tactician-boundary",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "premise and tactic predictions as candidates for an actual checker (baseline09, baseline10)",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [
+        "baseline09",
+        "baseline10"
+      ],
+      "shared_with_related_papers": true,
+      "sample_locations": [
+        {
+          "pdf_page": 12,
+          "numbered_lines": [
+            653
+          ],
+          "excerpt": "no fake bridge, universal provider or cross-logic soundness assumption [D7; W2, W4]"
+        }
+      ],
+      "notes": "Hammer/Tactician surfaces are also in the autoformalization submission; do not count one backend qualification as independent evidence in both papers.",
+      "identifying": false,
+      "range_only": false
+    },
+    {
+      "id": "A1",
+      "kind": "internal_workstream",
+      "scientific_role": "Pre-implementation kernel: defer/abstain/authorize residual; local hook count is not workflow savings.",
+      "anonymous_citation": "anon-supplement:provider-admission-kernel",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the obligation-gated provider-admission kernel",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 4,
+          "numbered_lines": [
+            118
+          ],
+          "excerpt": "local zero provider-hook count is not a measurement of saved model calls [A1, N1]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "A2",
+      "kind": "internal_workstream",
+      "scientific_role": "Bounded synthesizer emits candidates; it neither executes nor certifies nor promotes output.",
+      "anonymous_citation": "anon-supplement:bounded-synthesis-nonauthority",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the bounded synthesis state machine, which does not execute or promote its output",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 5,
+          "numbered_lines": [
+            2119
+          ],
+          "excerpt": "The synthesizer neither executes nor certifies nor promotes its output [A2]"
+        }
+      ],
+      "notes": "Draft name ProcedureCegis was not located; do not substitute a similarly named module as evidence.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "A3",
+      "kind": "internal_workstream",
+      "scientific_role": "Architecture/refactoring inventory and SCC/CST program; source maps are not semantic equivalence.",
+      "anonymous_citation": "anon-supplement:refactoring-holdout",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/qualification/extensions_scope.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the optional refactoring hold-out, which is not in the evaluated core",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 17,
+          "numbered_lines": [
+            3729
+          ],
+          "excerpt": "surfaces—not just existing happy-path tests [A3; W4]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "A4",
+      "kind": "internal_workstream",
+      "scientific_role": "Repository-reported 40-task semantic-context preliminary arithmetic, not live inference savings.",
+      "anonymous_citation": "anon-supplement:preliminary-context-report",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/preliminary_evidence.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the checked-in preliminary context report",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 8,
+          "numbered_lines": [
+            913
+          ],
+          "excerpt": "Repository-reported preliminary evidence [A4–A5]"
+        }
+      ],
+      "notes": "Keep the no-model-receipts limitation. Not a shared result with the other two papers.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "A5",
+      "kind": "internal_workstream",
+      "scientific_role": "Repository-reported sealer/certificate preliminary summary and signature/membership limits.",
+      "anonymous_citation": "anon-supplement:preliminary-sealer-report",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/preliminary_evidence.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the checked-in sealer summary, which has no measured prover timing",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 5,
+          "numbered_lines": [
+            181
+          ],
+          "excerpt": "correctly verify signatures while proving nothing about honest execution [K1, A5]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "B1",
+      "kind": "internal_workstream",
+      "scientific_role": "Pointer to an author-local architecture worktree; not a frozen anonymous artifact.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "remove_from_submission",
+      "recommended_in_text": "omit; if retained, describe only the frozen architecture-inventory artifact without author-local worktrees",
+      "supports_adjacent_statement": false,
+      "identifying": true,
+      "sample_locations": [
+        {
+          "pdf_page": 17,
+          "numbered_lines": [
+            520
+          ],
+          "excerpt": "remains separately tracked against the author’s local worktree [B1; W4]"
+        }
+      ],
+      "notes": "Identifying author-local state. Remove the worktree pointer. ArchitectureIR inventory may be cited only if an anonymous supplement path exists.",
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "N1",
+      "kind": "internal_workstream",
+      "scientific_role": "Provider-admission residual path and hook-count non-saving.",
+      "anonymous_citation": "anon-supplement:provider-admission-kernel",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the obligation-gated residual dispatch path",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": false,
+      "shared_with_related_papers": false,
+      "notes": "",
+      "identifying": false
+    },
+    {
+      "id": "N2",
+      "kind": "internal_workstream",
+      "scientific_role": "Range-only member of N1–N14; no independent statement in the draft.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "remove_from_submission",
+      "recommended_in_text": "omit the unused range member",
+      "supports_adjacent_statement": false,
+      "bibliographic_support": [],
+      "range_only": true,
+      "shared_with_related_papers": false,
+      "notes": "No independent draft statement; collapse the N1–N14 range rather than inventing a definition.",
+      "identifying": false
+    },
+    {
+      "id": "N3",
+      "kind": "internal_workstream",
+      "scientific_role": "Range-only member of N1–N14; no independent statement in the draft.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "remove_from_submission",
+      "recommended_in_text": "omit the unused range member",
+      "supports_adjacent_statement": false,
+      "bibliographic_support": [],
+      "range_only": true,
+      "shared_with_related_papers": false,
+      "notes": "No independent draft statement; collapse the N1–N14 range rather than inventing a definition.",
+      "identifying": false
+    },
+    {
+      "id": "N4",
+      "kind": "internal_workstream",
+      "scientific_role": "Shared IR kernel: declarations, runs, results, receipts; domains do not share verdict authority.",
+      "anonymous_citation": "anon-supplement:ir-kernel",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the domain-neutral claim/evidence kernel",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": false,
+      "shared_with_related_papers": true,
+      "notes": "IR kernel and native-proof adapter are shared implementation surfaces with the companion submissions; do not triple-count inspection as independent replication.",
+      "identifying": false
+    },
+    {
+      "id": "N5",
+      "kind": "internal_workstream",
+      "scientific_role": "Covered by N4–N7 (formalization/authorization cluster); no independent bracket.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "name the Legal/Security/Intent source mappings, not N5",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": true,
+      "shared_with_related_papers": true,
+      "notes": "No independent draft statement; collapse the N1–N14 range rather than inventing a definition.",
+      "identifying": false
+    },
+    {
+      "id": "N6",
+      "kind": "internal_workstream",
+      "scientific_role": "Covered by N4–N7; no independent bracket.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "name unsupported-modality exposure, not N6",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": true,
+      "shared_with_related_papers": true,
+      "notes": "No independent draft statement; collapse the N1–N14 range rather than inventing a definition.",
+      "identifying": false
+    },
+    {
+      "id": "N7",
+      "kind": "internal_workstream",
+      "scientific_role": "Authorization interface and receipt-consumption rollout defaulting off/shadow.",
+      "anonymous_citation": "anon-supplement:authorization-interface",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the manifest-bound authorization interface, qualified only at the exercised rollout",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": false,
+      "shared_with_related_papers": true,
+      "notes": "IR kernel and native-proof adapter are shared implementation surfaces with the companion submissions; do not triple-count inspection as independent replication.",
+      "identifying": false
+    },
+    {
+      "id": "N8",
+      "kind": "internal_workstream",
+      "scientific_role": "Loss-aware translation: a target check does not imply source semantics; translation validation of the particular conversion.",
+      "anonymous_citation": "anon-supplement:translation-validation",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "loss-aware translation with per-conversion validation (baseline04)",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [
+        "baseline04"
+      ],
+      "range_only": false,
+      "shared_with_related_papers": true,
+      "notes": "",
+      "identifying": false
+    },
+    {
+      "id": "N9",
+      "kind": "internal_workstream",
+      "scientific_role": "Opt-in native Groth16 wrapper and restricted derivation helper; not a qualified circuit/ceremony.",
+      "anonymous_citation": "anon-supplement:native-proof-unavailable",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/qualification/native_profile.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the unavailable native-proof profile",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": false,
+      "shared_with_related_papers": true,
+      "notes": "IR kernel and native-proof adapter are shared implementation surfaces with the companion submissions; do not triple-count inspection as independent replication.",
+      "identifying": false
+    },
+    {
+      "id": "N10",
+      "kind": "internal_workstream",
+      "scientific_role": "Native prover performance/ceremony non-establishment, paired with N9.",
+      "anonymous_citation": "anon-supplement:native-proof-unavailable",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/qualification/native_results.jsonl",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the unavailable native-proof profile",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": false,
+      "shared_with_related_papers": true,
+      "notes": "IR kernel and native-proof adapter are shared implementation surfaces with the companion submissions; do not triple-count inspection as independent replication.",
+      "identifying": false
+    },
+    {
+      "id": "N11",
+      "kind": "internal_workstream",
+      "scientific_role": "Real-tool/restart integration of authorization is not implied by the inspected layer.",
+      "anonymous_citation": "anon-supplement:authorization-interface",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the unconnected enforcement adapter",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": false,
+      "shared_with_related_papers": false,
+      "notes": "",
+      "identifying": false
+    },
+    {
+      "id": "N12",
+      "kind": "internal_workstream",
+      "scientific_role": "Assume-guarantee implication query G ∧ ¬A and composition-graph receipts.",
+      "anonymous_citation": "anon-supplement:assume-guarantee-profile",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "encoded implication discharge G ∧ ¬A",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [],
+      "range_only": false,
+      "shared_with_related_papers": false,
+      "notes": "",
+      "identifying": false
+    },
+    {
+      "id": "N13",
+      "kind": "internal_workstream",
+      "scientific_role": "Bounded QF_LIA CEGAR adapter over existing contracts, not an unrestricted model checker.",
+      "anonymous_citation": "anon-supplement:cegar-adapter",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the bounded CEGAR refinement adapter (baseline03)",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [
+        "baseline03"
+      ],
+      "range_only": false,
+      "shared_with_related_papers": false,
+      "notes": "",
+      "identifying": false
+    },
+    {
+      "id": "N14",
+      "kind": "internal_workstream",
+      "scientific_role": "Abstract-state consumers may prune only under a sound admitted approximation, never a learned score.",
+      "anonymous_citation": "anon-supplement:abstract-interpretation-profile",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/implementation_inventory.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "sound admitted approximation, not a model score (baseline02)",
+      "supports_adjacent_statement": true,
+      "bibliographic_support": [
+        "baseline02"
+      ],
+      "range_only": false,
+      "shared_with_related_papers": false,
+      "notes": "",
+      "identifying": false
+    },
+    {
+      "id": "K1",
+      "kind": "internal_workstream",
+      "scientific_role": "Certificates, CAS membership, and signatures establish inclusion or a signed observation, not honest execution.",
+      "anonymous_citation": "anon-supplement:certificate-semantics",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "certificate and content-addressed membership records",
+      "supports_adjacent_statement": true,
+      "range_only": false,
+      "notes": "",
+      "sample_locations": [
+        {
+          "pdf_page": 6,
+          "numbered_lines": [
+            181
+          ],
+          "excerpt": "signatures while proving nothing about honest execution [K1, A5]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false
+    },
+    {
+      "id": "K2",
+      "kind": "internal_workstream",
+      "scientific_role": "Range member of K1–K4 (publication/recovery). No independent scientific statement outside author-only Appendix K.2.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "remove_from_submission",
+      "recommended_in_text": "omit the campaign-directive label; describe publication exclusivity in scientific terms",
+      "supports_adjacent_statement": false,
+      "range_only": true,
+      "notes": "Appendix K.2 is an author-only campaign checklist; it must not remain in the anonymous submission.",
+      "sample_locations": [
+        {
+          "pdf_page": 6,
+          "numbered_lines": [
+            2379
+          ],
+          "excerpt": "recovery must explicitly reconcile those boundaries [K1–K4]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false
+    },
+    {
+      "id": "K3",
+      "kind": "internal_workstream",
+      "scientific_role": "Range member of K1–K4. No independent bracketed statement.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "remove_from_submission",
+      "recommended_in_text": "omit the unused range member",
+      "supports_adjacent_statement": false,
+      "range_only": true,
+      "notes": "",
+      "sample_locations": [
+        {
+          "pdf_page": 6,
+          "numbered_lines": [
+            2379
+          ],
+          "excerpt": "recovery must explicitly reconcile those boundaries [K1–K4]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false
+    },
+    {
+      "id": "K4",
+      "kind": "internal_workstream",
+      "scientific_role": "Recovery must reconcile publication/CAS/operational boundaries after faults.",
+      "anonymous_citation": "anon-supplement:publication-recovery",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/protocol/preregistered_protocol.md",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "parent-bound publication and crash-recovery reconciliation",
+      "supports_adjacent_statement": true,
+      "range_only": false,
+      "notes": "",
+      "sample_locations": [
+        {
+          "pdf_page": 6,
+          "numbered_lines": [
+            2379
+          ],
+          "excerpt": "recovery must explicitly reconcile those boundaries [K1–K4]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false
+    },
+    {
+      "id": "P3",
+      "kind": "internal_workstream",
+      "scientific_role": "Retrieval projections and optional history stores cannot create readiness, leases, or acceptance.",
+      "anonymous_citation": "anon-supplement:retrieval-nonauthority",
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "retrieval or history stores, which do not create readiness or acceptance",
+      "supports_adjacent_statement": true,
+      "sample_locations": [],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "P6",
+      "kind": "internal_workstream",
+      "scientific_role": "Predecessor proof-grounded learning campaign; no new tokenizer or universal interlingua is established.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the prior learned-artifact limitation, which remains a no-go until a distinct frozen artifact exists",
+      "supports_adjacent_statement": true,
+      "sample_locations": [],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "P8",
+      "kind": "internal_workstream",
+      "scientific_role": "Parallel sealing / staged fixture protocol exists as specified infrastructure; this draft does not newly qualify it.",
+      "anonymous_citation": "anon-supplement:fixture-reuse-protocol",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/protocol/preregistered_protocol.md",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the staged fixture-definition/instance/teardown reuse protocol",
+      "supports_adjacent_statement": true,
+      "sample_locations": [
+        {
+          "pdf_page": 13,
+          "numbered_lines": [
+            370
+          ],
+          "excerpt": "no new qualification of this entire protocol is asserted here [P8; W3]"
+        }
+      ],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "P11",
+      "kind": "internal_workstream",
+      "scientific_role": "Successor uncompleted learning work cannot share a positive-result label with the predecessor no-go.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the uncompleted learned-representation campaign, which is not a result",
+      "supports_adjacent_statement": true,
+      "sample_locations": [],
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "W1",
+      "kind": "named_directive",
+      "scientific_role": "Semantic-addressed world: exact resolution, logical datasets vs layout, world-root CAS; similarity never substitutes.",
+      "anonymous_citation": "anon-supplement:semantic-world-exact-resolution",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/qualification/extensions_scope.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "optional exact-resolution world state, which is not in the evaluated core",
+      "supports_adjacent_statement": true,
+      "notes": "Table 14 already states the scientific content. Replace the W-label with that content; do not cite an author-only heading index.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "W2",
+      "kind": "named_directive",
+      "scientific_role": "Program world: frames/traces/residuals remain candidate-tier until validated; PlanDelta invalidation.",
+      "anonymous_citation": "anon-supplement:program-world-candidates",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/qualification/extensions_scope.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "candidate program-world residuals, which require independent validation",
+      "supports_adjacent_statement": true,
+      "notes": "Table 14 already states the scientific content. Replace the W-label with that content; do not cite an author-only heading index.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "W3",
+      "kind": "named_directive",
+      "scientific_role": "Parallel sealing and fixture-aware TDD: reuse only with current inputs, effects, evidence, and publication checks.",
+      "anonymous_citation": "anon-supplement:fixture-reuse-protocol",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/protocol/preregistered_protocol.md",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "phase-aware fixture and proof-unit reuse with a cold-execution reference",
+      "supports_adjacent_statement": true,
+      "notes": "Table 14 already states the scientific content. Replace the W-label with that content; do not cite an author-only heading index.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "W4",
+      "kind": "named_directive",
+      "scientific_role": "Semantic refactoring: CST-aware codemods and partitions; verified episodes do not prove universal equivalence.",
+      "anonymous_citation": "anon-supplement:refactoring-holdout",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/qualification/extensions_scope.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "optional semantic refactoring, which is future work unless independently qualified",
+      "supports_adjacent_statement": true,
+      "notes": "Table 14 already states the scientific content. Replace the W-label with that content; do not cite an author-only heading index.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "ASEH",
+      "kind": "named_program",
+      "scientific_role": "Paired end-to-end telemetry, deterministic-first routing, one state-transition authority.",
+      "anonymous_citation": "anon-supplement:efficiency-hardening-protocol",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/protocol/preregistered_protocol.md",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "matched-budget telemetry and a single state-transition authority",
+      "supports_adjacent_statement": true,
+      "notes": "Table 13 already names the retained method. Drop the acronym in scientific text.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "DOEP",
+      "kind": "named_program",
+      "scientific_role": "High-level idea to typed objective to goal/task DAG; event-driven PlanDelta; queue exhaustion is not success.",
+      "anonymous_citation": "anon-supplement:objective-event-planning",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "typed objective compilation and event-driven plan invalidation",
+      "supports_adjacent_statement": true,
+      "notes": "Table 13 already names the retained method. Drop the acronym in scientific text.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "PCPR",
+      "kind": "named_program",
+      "scientific_role": "Platform qualification: one loaded integrated forest, truthful unavailable/simulation statuses, current evidence.",
+      "anonymous_citation": "anon-supplement:source-forest",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/artifacts/source_forest.json",
+      "disposition": "replace_with_anonymous_artifact",
+      "recommended_in_text": "the frozen loaded forest and capability inventory",
+      "supports_adjacent_statement": true,
+      "notes": "Table 13 already names the retained method. Drop the acronym in scientific text.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "PCSM",
+      "kind": "named_program",
+      "scientific_role": "Semantic minification: canonical IR versus local projection; M1 source-linked edits, M2 declared abstraction, M3 advisory learning.",
+      "anonymous_citation": "anon-supplement:semantic-minification-holdout",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/qualification/extensions_scope.json",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "optional semantic minification, which is not an evaluated core mechanism",
+      "supports_adjacent_statement": true,
+      "notes": "Table 13 already names the retained method. Drop the acronym in scientific text.",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "PCTDD",
+      "kind": "named_program",
+      "scientific_role": "Staged fixture identities from collection seed through teardown; alias of the W3 protocol.",
+      "anonymous_citation": "anon-supplement:fixture-reuse-protocol",
+      "resolves_to": "papers/completion/neurosymbolic_supervision/protocol/preregistered_protocol.md",
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "the staged fixture-definition/instance/teardown protocol",
+      "supports_adjacent_statement": true,
+      "notes": "",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "M1",
+      "kind": "internal_stage",
+      "scientific_role": "PCSM source-linked edits. Not a bibliographic citation.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "source-linked edits under a declared resolver/renderer profile",
+      "supports_adjacent_statement": true,
+      "notes": "",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "M2",
+      "kind": "internal_stage",
+      "scientific_role": "PCSM declared abstraction. Not a bibliographic citation.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "declared abstraction, not inferred from a patch schema",
+      "supports_adjacent_statement": true,
+      "notes": "",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    },
+    {
+      "id": "M3",
+      "kind": "internal_stage",
+      "scientific_role": "PCSM advisory learning. Not a bibliographic citation.",
+      "anonymous_citation": null,
+      "resolves_to": null,
+      "disposition": "replace_with_scientific_description",
+      "recommended_in_text": "advisory learning, which cannot authorize edits",
+      "supports_adjacent_statement": true,
+      "notes": "",
+      "identifying": false,
+      "shared_with_related_papers": false,
+      "range_only": false
+    }
+  ],
+  "identifying_links": [
+    {
+      "where": "papers/completion/neurosymbolic_supervision/manuscript/BUILD.md",
+      "text": "absolute user-local toolchain path",
+      "issue": "Identifying host/user path. Not a scientific citation. Keep out of the anonymous PDF and supplement.",
+      "disposition": "exclude_from_submission",
+      "owner_task": "NS-024"
+    },
+    {
+      "where": "draft PDF p.17 line 520",
+      "text": "the author’s local worktree [B1; W4]",
+      "issue": "Identifies author-local state.",
+      "disposition": "remove_from_submission",
+      "owner_task": "NS-022"
+    },
+    {
+      "where": "draft PDF p.21 lines 594–596",
+      "text": "previous complete heading index remains in the companion reconciliation handoff",
+      "issue": "Author-only review/reconciliation history, not a bibliographic source.",
+      "disposition": "replace_with_scientific_description",
+      "replacement": "Table 14 already states the four retained world/test/refactoring methods. Delete the handoff sentence.",
+      "owner_task": "NS-022"
+    },
+    {
+      "where": "draft PDF p.25 lines 701–706",
+      "text": "Appendix K.2 Final author actions; separate audit/ledger is author-only",
+      "issue": "Campaign directives and author-only ledger.",
+      "disposition": "remove_from_submission",
+      "owner_task": "NS-022"
+    }
+  ],
+  "author_only_material": [
+    {
+      "id": "H.3-companion-handoff",
+      "pdf": "p.21, §H.3 lines 594–596",
+      "action": "Replace with the scientific Table 14 descriptions; do not cite a private heading index."
+    },
+    {
+      "id": "K.2-author-actions",
+      "pdf": "p.25, §K.2 lines 700–706",
+      "action": "Remove from the anonymous manuscript. Scientific freeze/disclosure work is owned by NS-022/NS-024/NS-025."
+    },
+    {
+      "id": "B1-local-worktree",
+      "pdf": "p.17 line 520",
+      "action": "Remove. Do not invent an anonymous path for an unfrozen author-local tree."
+    }
+  ],
+  "manuscript_replacements": {
+    "rule": "NS-022 rewrites scientific text. NS-021 does not edit manuscript/main.tex or manuscript/references.bib.",
+    "bibliography": "Replace the literal thebibliography/note-field transcriptions with audit/verified_references.bib.",
+    "internal_labels": "Every remaining D/A/N/K/P/W/ASEH/DOEP/PCPR/PCSM/PCTDD/M1–M3/B1 token is either replaced by recommended_in_text or deleted.",
+    "citation_commands": "Use numeric labels [1]–[12] bound to baseline01–baseline12, or equivalent natbib keys from verified_references.bib."
+  },
+  "unresolved_internal_shorthand_in_these_outputs": false,
+  "identifying_repository_link_in_these_outputs": false
+}
