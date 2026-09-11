@@ -49,6 +49,7 @@ class CampaignTests(unittest.TestCase):
             "IPFS_ACCELERATE_AGENT_CODEX_MODEL": "gpt-5.6-terra",
             "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_TRIGGER": "primary_quota_exhausted",
             "IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT": "high",
+            "IPFS_ACCELERATE_AGENT_WORKTREE_POOL_ENABLED": "false",
         }
         foreign = {"IPFS_ACCELERATE_AGENT_IMPLEMENTATION_ROUTE_" + suffix: "foreign-test-only"
                    for suffix in ("BOARD_NAMESPACE", "AUTHORIZATION_PATH", "AUTHORIZATION_SHA256",
