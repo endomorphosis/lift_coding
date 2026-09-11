@@ -1,0 +1,201 @@
+{
+  "source_commit": "324a85e13927947f9f6ff45d3fc23c8cdb23cfd5",
+  "implementation_commit": "325a3d1fc41031ccb674792754a041717ecf8c18",
+  "files": [
+    {
+      "path": "papers/completion/law_to_action/benchmark/cases/schema.json",
+      "sha256": "15b01791290f51cd6adf81fcba4194029466758fa5d58462062e0f248bf9a279",
+      "bytes": 2082
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/corpus_counts.json",
+      "sha256": "9bb3e85c460fc33710a2cfe12d836e6e9a9a62a63c9985e5250e475bd30de5fc",
+      "bytes": 3199
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/handlers/__init__.py",
+      "sha256": "4edebaad0eb70b880c73a522ce6c5f2aa194ed02ad026b8cf58083944870eb5e",
+      "bytes": 427
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "sha256": "271fa32365910d9b63c45d60bdd688f0b4c43d3cec955df513bacacaf820a2f7",
+      "bytes": 4504
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/manifests/sources.json",
+      "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6",
+      "bytes": 51880
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/manifests/splits.json",
+      "sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6",
+      "bytes": 17657
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/protocol.json",
+      "sha256": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+      "bytes": 22587
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/protocol.md",
+      "sha256": "f7b232fd849fb01150446dd5a17bfc79cd1d1d60d90db871c00ae75c84d9ac41",
+      "bytes": 17104
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/resource_plan.json",
+      "sha256": "985d48de55803995bec8ab4b75ffb0979a1c3f49c66f314d97caa7609db616aa",
+      "bytes": 8234
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/run.py",
+      "sha256": "e6f2a3542ac764b0dfbf1ae146ace8e709aac318f297364fbb2495cca96ad6fa",
+      "bytes": 19221
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/scripts/recount_sources.py",
+      "sha256": "00ed29bee546d8aa865afacb5a3d64d068e6d0222535a2b9065e76798e04ce65",
+      "bytes": 5511
+    },
+    {
+      "path": "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py",
+      "sha256": "a0b7196c8e14c39f6a6d19ccc0bb1322734e073941fb14a0fa93240bfffc2fcc",
+      "bytes": 4876
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/LA-008.json",
+      "sha256": "03b7337b0245cff24580ecd054433bc9cd857488ee86a2ad306a6107ec904697",
+      "bytes": 11013
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/cases/schema.json",
+      "sha256": "15b01791290f51cd6adf81fcba4194029466758fa5d58462062e0f248bf9a279",
+      "bytes": 2082
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/__init__.py",
+      "sha256": "4edebaad0eb70b880c73a522ce6c5f2aa194ed02ad026b8cf58083944870eb5e",
+      "bytes": 427
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/effects.py",
+      "sha256": "271fa32365910d9b63c45d60bdd688f0b4c43d3cec955df513bacacaf820a2f7",
+      "bytes": 4504
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py",
+      "sha256": "e6f2a3542ac764b0dfbf1ae146ace8e709aac318f297364fbb2495cca96ad6fa",
+      "bytes": 19221
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/tests/test_measurement_integrity.py",
+      "sha256": "a0b7196c8e14c39f6a6d19ccc0bb1322734e073941fb14a0fa93240bfffc2fcc",
+      "bytes": 4876
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/records.jsonl",
+      "sha256": "3a8f1d8a592788175ca89c429f50c159945f115d41f67d783a28759de9ec2c0d",
+      "bytes": 3462
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/request.json",
+      "sha256": "4fa016cf440ea830d14452affe9f58270624354de73d34e69601fac1a9163c13",
+      "bytes": 690
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/sandbox-state/effects.jsonl",
+      "sha256": "f99cd2d7cd3bc4799f99c8f3c84afc774b1af72479a34258eb5ae0b1a4b6696b",
+      "bytes": 319
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/sandbox-state/exports/result.json",
+      "sha256": "4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+      "bytes": 11
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/trace.json",
+      "sha256": "3a8f1d8a592788175ca89c429f50c159945f115d41f67d783a28759de9ec2c0d",
+      "bytes": 3462
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/worker.stderr.raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/worker.stdout.raw",
+      "sha256": "8af876d39c3ebe0f421f706e7086d4de4d499427d8a9061aa2c67241924aeac7",
+      "bytes": 911
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl",
+      "sha256": "30052bd4db7e5e3814577c21bf32f79710336935a0a443a1a66476f3a4c93699",
+      "bytes": 6269
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/request.json",
+      "sha256": "28cc31f66aeefe2c009a09839a02d2409ea8c0409ae8d9a7e8072ad52bae6238",
+      "bytes": 688
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/trace.json",
+      "sha256": "8741cfe4a863367ecb6ef921d3e5515feb2d14e15e1bcfd33bc7815c62709533",
+      "bytes": 2808
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/worker.stderr.raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/worker.stdout.raw",
+      "sha256": "dd452ef139d4eeaa29ff3c4407ff5e3debb2e5588f5f11a15c81deac65534b84",
+      "bytes": 600
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/request.json",
+      "sha256": "7cf1faf86e75573ead4b170f5e9c41efbe263bd7175f8f7fdb5b1c25d1e48fc4",
+      "bytes": 690
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/sandbox-state/effects.jsonl",
+      "sha256": "4a6079aaa4e4f39b903136806c57cfe8b13e3e97b0cda958ea03cb67e5081da4",
+      "bytes": 319
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/sandbox-state/exports/result.json",
+      "sha256": "4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+      "bytes": 11
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/trace.json",
+      "sha256": "fc0769a832607592273c9eab72423e2da475193513233459b863976f6e0a7f8e",
+      "bytes": 3461
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stderr.raw",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stdout.raw",
+      "sha256": "c54b095d306c05fa1bea0984fe5ae21941a958de7a76c5a80d3346de8a133281",
+      "bytes": 911
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log",
+      "sha256": "a116991ff4bd047cb0c542e1346a1cf6f8e312ea1dbd1fc27302f002acfcc0df",
+      "bytes": 1484
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/replay.log",
+      "sha256": "1d99f74e4e070f34d6e9ca2fcad9ec72f9dcb3aea3e68c103d7232ece3fb7222",
+      "bytes": 3754
+    },
+    {
+      "path": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/smoke.log",
+      "sha256": "7aa8a7ac16f3f2ad6981b0020d12f095def0d4a6fece2bd4bd5f059274a08fe4",
+      "bytes": 318
+    }
+  ]
+}

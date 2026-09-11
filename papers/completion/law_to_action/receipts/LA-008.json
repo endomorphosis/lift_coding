@@ -1,121 +1,287 @@
 {
-  "schema": "paper-task-evidence/v1",
-  "paper_id": "law_to_action",
-  "task_id": "LA-008",
-  "status": "complete",
-  "completed_at": "2026-09-11T18:24:30Z",
-  "completion_mode": "Bounded fixture-only sandbox-harness qualification. The retained smoke traces establish measurement behavior only; they are explicitly excluded from empirical benchmark denominators and do not qualify solver, cryptographic capability, durable-storage, network, or model claims.",
   "artifacts": {
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py": "e6f2a3542ac764b0dfbf1ae146ace8e709aac318f297364fbb2495cca96ad6fa",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/correction-scope.json": "6306d52113f221aee0841356a3ac2dd7380dc1b010aeac2cd3272c7b52d565e0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/exact-task-contract.json": "5f3323c121ab70d73a4c280a90d0de9977d925a183bf97cb115ae1ca6b992b56",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/finalize_candidate.py": "4ce0f0df0404071315e068a9e0590ba03abb8eb42e5ccf244c5a64fba1e03a4f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/independent-review/probe.stdout.log": "2d64725120735928bdb6949aef43c7288dbf6f0c4b1b5cff6016e82326ee20ce",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/independent-review/probe_postconditions.py": "bac17cfc7d382d9bd517488ab22c9edb2edbcb6aee73d121fea97603cf7ed160",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/records.jsonl": "a0544d677c065c51b69a1e0ebf724d6f484a5fc6db3119ee756ddee3fa0da020",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/0f3995df-3d47-4b6d-b0d3-8ae9d92c0386/request.json": "1abfe5f9249971caabac3a52a199d0b9969bb38e97a632268daa9670101c2f56",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/0f3995df-3d47-4b6d-b0d3-8ae9d92c0386/trace.json": "87ba6944bb8dd9404d3ec88cf1e0423f22838d2c342d5bb455a1405824dcb9b1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/0f3995df-3d47-4b6d-b0d3-8ae9d92c0386/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/0f3995df-3d47-4b6d-b0d3-8ae9d92c0386/worker.stdout.raw": "55398efb0ea71a7d8a63dabead75b60850f55301b998ed943309174e09d0a90b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/50b78c22-46b7-460f-a052-b9004356603c/request.json": "322d77049eab8c9e3bcfd1be98b06cd42356d2c4f8a8bd7ccccb231f2490ea6e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/50b78c22-46b7-460f-a052-b9004356603c/trace.json": "841d27cf9dc3c340d06a820895bc8aebd79b6a2a97b21e0f271437c1785e45fa",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/50b78c22-46b7-460f-a052-b9004356603c/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/50b78c22-46b7-460f-a052-b9004356603c/worker.stdout.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/7ecb8c68-c4df-4b93-aafa-102b4eaf25ba/request.json": "dc6c61f43f5803adf652a537fff380265494559e7b7ea628e79a36f2f0a76b8c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/7ecb8c68-c4df-4b93-aafa-102b4eaf25ba/trace.json": "e3e63c951c7dc4c7ea20c59d01142c6ddade1942d3fc95ea3178805ebc118081",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/7ecb8c68-c4df-4b93-aafa-102b4eaf25ba/worker.stderr.raw": "69196a4b0c36ac75ec96ff849fb46035e81ed3902b28cbecfed43290ea3c984d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/7ecb8c68-c4df-4b93-aafa-102b4eaf25ba/worker.stdout.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/8756c927-e85c-490c-acc7-74a913456f05/request.json": "565b43a0107c713472c8b92e57caacb52f44fa0605e46863ae2c7efae878c4f0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/8756c927-e85c-490c-acc7-74a913456f05/trace.json": "4545e2865f2f810bf2d20d30ebffa28b610ea1ed6730febfabbb888282a09534",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/8756c927-e85c-490c-acc7-74a913456f05/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/traces/8756c927-e85c-490c-acc7-74a913456f05/worker.stdout.raw": "4b1c6f9aac1bca64175885d2858ecd095eb407da6e243526f2b4cfb029b763d1",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/original-files.json": "bfa3a8606b97c6cb170574845dee1c5a15de6b4faef765ac57d0d3a81c270cc6",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/original-receipt.json": "03b7337b0245cff24580ecd054433bc9cd857488ee86a2ad306a6107ec904697",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/cases/schema.json": "d67d59b647223a7ddd705d4a6f0a158fa31cac7468d0d36e8d7b572856c4ba0e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/handlers/__init__.py": "4edebaad0eb70b880c73a522ce6c5f2aa194ed02ad026b8cf58083944870eb5e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/handlers/effects.py": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/run.py": "5c454f0d6060d9682330ed0d9ab98f75d2c0f7f74d7609804b95e2da5d7eadd0",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/tests/test_measurement_integrity.py": "0d96890144cf355b238872c55e9210d7cb5bb9f3500773f2c32f3ee479ccb2c4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/preservation-check.json": "5cc32c0a92b201deca8492b930093b280386535d9753e4649d87a44b1765f483",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/qualify_negative_controls.py": "6333c942be7088d142f36f8152580b4a16a94d8a25fa8c4f03ce3b1e6da127bb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/records.jsonl": "637843dff073566bd437a0b46d756e9dcd94211315cefecd74aa91ca51a4f9ac",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/traces/55ef6d29-27f5-4d1d-8101-0819b665bb73/request.json": "44c625272d2043e3e322d94eba12697c028a3aeafb6e1f6aeaf723c608e8f4dc",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/traces/55ef6d29-27f5-4d1d-8101-0819b665bb73/sandbox-state/effects.jsonl": "d3876d50ff050d2d0c51499a1be747db602a7eb4f922e8e417d4adaeb54f2b7f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/traces/55ef6d29-27f5-4d1d-8101-0819b665bb73/sandbox-state/exports/result.json": "4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/traces/55ef6d29-27f5-4d1d-8101-0819b665bb73/trace.json": "637843dff073566bd437a0b46d756e9dcd94211315cefecd74aa91ca51a4f9ac",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/traces/55ef6d29-27f5-4d1d-8101-0819b665bb73/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/traces/55ef6d29-27f5-4d1d-8101-0819b665bb73/worker.stdout.raw": "20dbf3715422205bdd4a5b0a4b3903ee513fcb9dd166755081439535399c303a",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/reproduce_observer_regression.py": "efcf1bfe0dfbcf672aec5ec977fc39f90328efaab6980891495d8698d062b334",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/records.jsonl": "86060087b27d209612533ba8237283be9a8e29468593da606f9e50b046edc575",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/534d65f7-c3a6-43cb-a27b-079a7b1599c1/request.json": "f14acb89d7d6f11dd2c56ed076714ff212463ca9dea9654a876171f3b144b98b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/534d65f7-c3a6-43cb-a27b-079a7b1599c1/sandbox-state/effects.jsonl": "215dd062097d58f8d4f7d2c1fc703f1e0e416f5a279f6f2ccf5cddc8e7c84394",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/534d65f7-c3a6-43cb-a27b-079a7b1599c1/sandbox-state/exports/result.json": "4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/534d65f7-c3a6-43cb-a27b-079a7b1599c1/trace.json": "80eebb6efe692a5f0b7578699a56e8d737eec89b0288a7431bfac51a4c79850e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/534d65f7-c3a6-43cb-a27b-079a7b1599c1/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/534d65f7-c3a6-43cb-a27b-079a7b1599c1/worker.stdout.raw": "a699d918d154b54498de14c43cc1e26f9ddece11fb3adf3ca54a45d330ac9848",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/d0c3ce6c-f233-414c-8740-87c011622e9d/request.json": "573bc1f14eaff425134ca1b9e6b7a4cde6590f66cd88dbd5a6a4a330e724f7ce",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/d0c3ce6c-f233-414c-8740-87c011622e9d/trace.json": "ce2ec2a426a2a5503bcd4bb1c191dbcec81d682b37f083299b3b1aba9d17f39e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/d0c3ce6c-f233-414c-8740-87c011622e9d/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces/d0c3ce6c-f233-414c-8740-87c011622e9d/worker.stdout.raw": "e35a0e45c24b421972ac78a0e66dfabd8931574f3bff2acfd97cefe42793802f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/measurement-integrity.json": "357746606000e4c87dff6cb5bbc2826060e181406aa70a639720f6f4363ee6bb",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/measurement-integrity.stderr.raw": "eb7251baa1029899193ea0b1e3ff0d9f5d2c38a3e1a77ae4dd673dfc47f6d507",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/measurement-integrity.stdout.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.json": "ed7fc805b2d7983e2e3bf72e650a30c777b96262968233cb46418a214cc1f0f2",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.stdout.raw": "f96a846df5faba51cc3b99106c2c26ee4b87d952b23a685debef3a070a921e67",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/observer-regression.json": "e630a9363c369678a3750c3842b6dd2e75d3a03276597674532d4431f7cf0920",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/observer-regression.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/observer-regression.stdout.raw": "0249f406f8b526e105cc4f3c21fd569473d014f52704523e7f98807557e3a180",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/replay.json": "01e2fca2a08d0651aff892f119fc7f1878664132f6466111d11118343f072d95",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/replay.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/replay.stdout.raw": "a3ad686660644873790786fda786f03b12d97348222571e1b47c609901a89353",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/smoke.json": "07ce36bef572f48f1f06c2a51fb6cc682eabc9d4679109f3ec38788aa78feb6c",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/smoke.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/smoke.stdout.raw": "ce5ab77084b0717df203687575fd59a2f0317fc6d282efbf3ffe565c22adcbdf",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/cases/schema.json": "15b01791290f51cd6adf81fcba4194029466758fa5d58462062e0f248bf9a279",
     "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/__init__.py": "4edebaad0eb70b880c73a522ce6c5f2aa194ed02ad026b8cf58083944870eb5e",
     "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/effects.py": "271fa32365910d9b63c45d60bdd688f0b4c43d3cec955df513bacacaf820a2f7",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/cases/schema.json": "15b01791290f51cd6adf81fcba4194029466758fa5d58462062e0f248bf9a279",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py": "e6f2a3542ac764b0dfbf1ae146ace8e709aac318f297364fbb2495cca96ad6fa",
     "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/tests/test_measurement_integrity.py": "a0b7196c8e14c39f6a6d19ccc0bb1322734e073941fb14a0fa93240bfffc2fcc",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log": "a116991ff4bd047cb0c542e1346a1cf6f8e312ea1dbd1fc27302f002acfcc0df",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/smoke.log": "7aa8a7ac16f3f2ad6981b0020d12f095def0d4a6fece2bd4bd5f059274a08fe4",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/replay.log": "1d99f74e4e070f34d6e9ca2fcad9ec72f9dcb3aea3e68c103d7232ece3fb7222",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl": "30052bd4db7e5e3814577c21bf32f79710336935a0a443a1a66476f3a4c93699",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/trace.json": "fc0769a832607592273c9eab72423e2da475193513233459b863976f6e0a7f8e",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stdout.raw": "c54b095d306c05fa1bea0984fe5ae21941a958de7a76c5a80d3346de8a133281",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/trace.json": "8741cfe4a863367ecb6ef921d3e5515feb2d14e15e1bcfd33bc7815c62709533",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/worker.stdout.raw": "dd452ef139d4eeaa29ff3c4407ff5e3debb2e5588f5f11a15c81deac65534b84",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/records.jsonl": "3a8f1d8a592788175ca89c429f50c159945f115d41f67d783a28759de9ec2c0d",
-    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/trace.json": "3a8f1d8a592788175ca89c429f50c159945f115d41f67d783a28759de9ec2c0d"
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/request.json": "4fa016cf440ea830d14452affe9f58270624354de73d34e69601fac1a9163c13",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/sandbox-state/effects.jsonl": "f99cd2d7cd3bc4799f99c8f3c84afc774b1af72479a34258eb5ae0b1a4b6696b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/sandbox-state/exports/result.json": "4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/trace.json": "3a8f1d8a592788175ca89c429f50c159945f115d41f67d783a28759de9ec2c0d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/worker.stdout.raw": "8af876d39c3ebe0f421f706e7086d4de4d499427d8a9061aa2c67241924aeac7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl": "30052bd4db7e5e3814577c21bf32f79710336935a0a443a1a66476f3a4c93699",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/request.json": "28cc31f66aeefe2c009a09839a02d2409ea8c0409ae8d9a7e8072ad52bae6238",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/trace.json": "8741cfe4a863367ecb6ef921d3e5515feb2d14e15e1bcfd33bc7815c62709533",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/worker.stdout.raw": "dd452ef139d4eeaa29ff3c4407ff5e3debb2e5588f5f11a15c81deac65534b84",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/request.json": "7cf1faf86e75573ead4b170f5e9c41efbe263bd7175f8f7fdb5b1c25d1e48fc4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/sandbox-state/effects.jsonl": "4a6079aaa4e4f39b903136806c57cfe8b13e3e97b0cda958ea03cb67e5081da4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/sandbox-state/exports/result.json": "4062edaf750fb8074e7e83e0c9028c94e32468a8b6f1614774328ef045150f93",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/trace.json": "fc0769a832607592273c9eab72423e2da475193513233459b863976f6e0a7f8e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stdout.raw": "c54b095d306c05fa1bea0984fe5ae21941a958de7a76c5a80d3346de8a133281",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log": "a116991ff4bd047cb0c542e1346a1cf6f8e312ea1dbd1fc27302f002acfcc0df",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/replay.log": "1d99f74e4e070f34d6e9ca2fcad9ec72f9dcb3aea3e68c103d7232ece3fb7222",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/smoke.log": "7aa8a7ac16f3f2ad6981b0020d12f095def0d4a6fece2bd4bd5f059274a08fe4"
   },
-  "outputs": {
-    "papers/completion/law_to_action/benchmark/run.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py",
-    "papers/completion/law_to_action/benchmark/handlers/__init__.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/__init__.py",
-    "papers/completion/law_to_action/benchmark/handlers/effects.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/effects.py",
-    "papers/completion/law_to_action/benchmark/cases/schema.json": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/cases/schema.json",
-    "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/tests/test_measurement_integrity.py"
-  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-m",
+        "unittest",
+        "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py",
+        "-v"
+      ],
+      "completed_at": "2026-09-11T18:50:28.508052Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/measurement-integrity.json",
+      "started_at": "2026-09-11T18:50:27.777987Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/reproduce_observer_regression.py"
+      ],
+      "completed_at": "2026-09-11T18:50:28.550258Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/observer-regression.json",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/reproduce_observer_regression.py",
+      "started_at": "2026-09-11T18:50:28.508733Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/benchmark/run.py",
+        "smoke",
+        "--trace-dir",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces",
+        "--records",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/records.jsonl",
+        "--seed",
+        "104729",
+        "--timeout-seconds",
+        "5"
+      ],
+      "completed_at": "2026-09-11T18:50:28.688705Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/smoke.json",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/run.py",
+      "started_at": "2026-09-11T18:50:28.550814Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/benchmark/run.py",
+        "replay",
+        "--source-records",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/records.jsonl",
+        "--index",
+        "0",
+        "--trace-dir",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/traces",
+        "--records",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/records.jsonl",
+        "--timeout-seconds",
+        "5"
+      ],
+      "completed_at": "2026-09-11T18:50:28.767298Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/replay.json",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/run.py",
+      "started_at": "2026-09-11T18:50:28.689216Z"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/qualify_negative_controls.py"
+      ],
+      "completed_at": "2026-09-11T18:50:28.945123Z",
+      "cwd": ".",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.json",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/qualify_negative_controls.py",
+      "started_at": "2026-09-11T18:50:28.767886Z"
+    }
+  ],
+  "completed_at": "2026-09-11T18:50:28.957445Z",
+  "completion_mode": "Corrected trusted bounded declarative fixture measurement checkpoint. Independent actual filesystem hashing and requested postconditions are qualified; arbitrary code, OS/network isolation and empirical research remain outside this route.",
   "criteria": [
     {
       "criterion": "One authorized operation produces expected observed effects and a rejected operation produces none.",
-      "status": "met",
-      "explanation": "The sole handler mutation is a bounded export_json operation. The smoke runs one exact-context authorized fixture (one observer event and one export) and one denied fixture (zero observer events and zero exports); the observer rereads the journal and filesystem rather than receiving the handler return object.",
       "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/trace.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/trace.json"
-      ]
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/measurement-integrity.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/observer-regression.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/smoke.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/records.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/independent-review/probe.stdout.log"
+      ],
+      "explanation": "Actual smoke runs an authorized fixture with one independently hashed export matching the requested target, bytes and SHA256 and a denied fixture with no state entries. Journal events are separate claims checked one-to-one against actual files and the exact run ID. Regression tests reject unjournaled, missing, extra, duplicate, forged, linked and unexpected state; even an internally consistent forged journal cannot make a wrong requested export pass.",
+      "status": "met"
     },
     {
       "criterion": "Reject-all policy is detected by allowed-work metrics.",
-      "status": "met",
-      "explanation": "allowed_work_metrics reports scheduled allowed work, successful allowed work, decision denials, and reject_all_detected. The integrity test feeds two denied allowed-work records and asserts detection rather than treating a zero-effect result as safe.",
       "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/tests/test_measurement_integrity.py",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log"
-      ]
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/measurement-integrity.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/records.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/run.py"
+      ],
+      "explanation": "Two actual subprocess controls deliberately deny scheduled allowed fixture work. The allowed-work metric records zero successes and reject_all_detected=true. Success is recomputed from actual exit status, independent file/journal integrity and exact requested postconditions; a count or stored expected-measurement flag alone earns no credit.",
+      "status": "met"
     },
     {
       "criterion": "Harness supports deterministic replay, actual exit statuses/timeouts, unique run IDs and raw trace retention.",
-      "status": "met",
-      "explanation": "Every subprocess result retains return code/signal/timeout/wall time and raw request/stdout/stderr files under a UUID run directory. Replays use the recorded case and seed, compare a semantic digest that excludes IDs and timing, and receive a new UUID. The test suite also causes and verifies a real SIGKILL timeout.",
       "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/replay.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/records.jsonl",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/trace.json",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stdout.raw",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stderr.raw"
-      ]
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/measurement-integrity.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/replay.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/replay/records.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/negative-controls/records.jsonl"
+      ],
+      "explanation": "Fresh actual smoke and replay retain UUID request/stdout/stderr/trace files and agree on deterministic semantic effects. Separate retained controls exercise a real SIGKILL timeout and real handler error exit 2. Checked append loops preserve and reject incomplete JSONL tails; tests inject short writes and failed partial writes. UTC start is captured before child execution and completion afterwards.",
+      "status": "met"
     },
     {
       "criterion": "Harness smoke checks verify measurement correctness without treating fixtures as empirical benchmark results.",
-      "status": "met",
-      "explanation": "The runner refuses non-fixture case execution, marks every retained record empirical_eligible=false, labels fixture-only crypto and disabled network, and prints empirical_benchmark_result=false. The smoke command is therefore a measurement qualification check only.",
       "evidence": [
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/smoke.log",
-        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl"
-      ]
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/measurement-integrity.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/observer-regression.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/correction-scope.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/cases/schema.json"
+      ],
+      "explanation": "The 22-test suite and retained side-by-side original/corrected observer reproduction qualify only a trusted bounded declarative export_json fixture route. Literal source strings are data; arbitrary source execution is not admitted. Every retained fixture is empirical_eligible=false. Labels explicitly say network not exercised and not isolated; no OS filesystem/network isolation, real solver/crypto/model/product runtime, natural benchmark or research outcome is qualified here.",
+      "status": "met"
     }
   ],
-  "commands": [
-    {
-      "argv": ["/usr/bin/python3.12", "-m", "unittest", "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py", "-v"],
-      "cwd": ".",
-      "exit_code": 0,
-      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log"
-    },
-    {
-      "argv": ["/usr/bin/python3.12", "papers/completion/law_to_action/benchmark/run.py", "smoke", "--trace-dir", "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces", "--records", "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl", "--seed", "104729", "--timeout-seconds", "5"],
-      "cwd": ".",
-      "exit_code": 0,
-      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/smoke.log",
-      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py"
-    },
-    {
-      "argv": ["/usr/bin/python3.12", "papers/completion/law_to_action/benchmark/run.py", "replay", "--source-records", "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl", "--index", "0", "--trace-dir", "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces", "--records", "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/records.jsonl", "--timeout-seconds", "5"],
-      "cwd": ".",
-      "exit_code": 0,
-      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/replay.log",
-      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py"
-    }
-  ],
-  "source_versions": {
-    "python": "/usr/bin/python3.12 (3.12.3)",
-    "harness_schema": "law-to-action-sandbox-harness/v1",
-    "harness_version": "1.0.0",
-    "case_schema": "law-to-action-benchmark-case/v1",
-    "handler": "bounded-export-handler/v1",
-    "observer": "filesystem-journal-observer/v1",
-    "solver": "none; no solver claim",
-    "crypto": "fixture_only; no real capability claim",
-    "storage": "ephemeral filesystem; no durable consumption claim",
-    "network": "disabled in fixture labels; no network qualification claim",
-    "model": "none"
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/cases/schema.json": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/cases/schema.json",
+    "papers/completion/law_to_action/benchmark/handlers/__init__.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/handlers/__init__.py",
+    "papers/completion/law_to_action/benchmark/handlers/effects.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/handlers/effects.py",
+    "papers/completion/law_to_action/benchmark/run.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/run.py",
+    "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/outputs/benchmark/tests/test_measurement_integrity.py"
   },
-  "claim_limitations": [
-    "The fixture gate is deliberately not UCAN, signed-capability, solver/checker, or product-runtime enforcement; LA-010 through LA-014 remain required for those claims.",
-    "The handler accepts a bounded declarative export instruction and does not execute arbitrary generated source code; it qualifies only this selected generated-code-effect observation route.",
-    "Fixture smoke and replay records are retained qualification evidence, not empirical cases, source labels, benchmark attempts, or paper performance results.",
-    "This task does not establish source fidelity, legal/CVE/skill labels, model behavior, durable replay prevention, transport containment, or full resource-cgroup qualification."
-  ]
+  "paper_id": "law_to_action",
+  "schema": "paper-task-evidence/v1",
+  "source_versions": {
+    "corrected_current_output_sha256": {
+      "papers/completion/law_to_action/benchmark/cases/schema.json": "d67d59b647223a7ddd705d4a6f0a158fa31cac7468d0d36e8d7b572856c4ba0e",
+      "papers/completion/law_to_action/benchmark/handlers/__init__.py": "4edebaad0eb70b880c73a522ce6c5f2aa194ed02ad026b8cf58083944870eb5e",
+      "papers/completion/law_to_action/benchmark/handlers/effects.py": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+      "papers/completion/law_to_action/benchmark/run.py": "5c454f0d6060d9682330ed0d9ab98f75d2c0f7f74d7609804b95e2da5d7eadd0",
+      "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py": "0d96890144cf355b238872c55e9210d7cb5bb9f3500773f2c32f3ee479ccb2c4"
+    },
+    "empirical_benchmark_result": false,
+    "frozen_task_seed_sha256": "95dc6a59fe049062676ac48673e301c4a05b8fa9c6860d92f254cb2d7f4459ef",
+    "future_gates": [
+      "Arbitrary untrusted source must not be admitted until separate OS/filesystem/network isolation is implemented and qualified.",
+      "Real solver, cryptographic capability, storage, network, model and product integration remain unqualified by these fixtures.",
+      "Natural source admission and empirical benchmark execution remain downstream; every retained run has empirical_eligible=false."
+    ],
+    "handler": "bounded-export-handler/v2",
+    "harness": "2.0.0",
+    "historical_implementation_commit": "325a3d1fc41031ccb674792754a041717ecf8c18",
+    "historical_merged_commit": "324a85e13927947f9f6ff45d3fc23c8cdb23cfd5",
+    "historical_receipt_sha256": "03b7337b0245cff24580ecd054433bc9cd857488ee86a2ad306a6107ec904697",
+    "isolation": {
+      "arbitrary_generated_source_execution": false,
+      "network": "not_exercised_not_isolated",
+      "os_filesystem_isolation": false,
+      "os_network_isolation": false
+    },
+    "measurement_boundary": "Trusted bounded declarative export_json fixtures, a real environment-scrubbed child subprocess, parent post-exit filesystem hashing, exact requested postconditions and journal/file bijection.",
+    "observer": "independent-filesystem-journal-observer/v2",
+    "python": "Python 3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "python_executable_sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+  },
+  "status": "complete",
+  "task_id": "LA-008"
 }
