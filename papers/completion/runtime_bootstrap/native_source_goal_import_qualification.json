@@ -1,0 +1,114 @@
+{
+  "schema": "paper-native-source-goal-import-qualification/v1",
+  "runtime_checkout": "/tmp/source-goal-native-import-78a2wv03/ipfs_accelerate",
+  "started_at": "2026-09-11T17:51:13.083449+00:00",
+  "goal_validations": [
+    {
+      "paper": "autoformalization",
+      "source_commit": "c0dca6c0b397f842a05538b212e657b879071cb2",
+      "source_tree": "1fcd390e939c739b46d6ac12b7a62251bd3eb86f",
+      "declared_goal_fields": {
+        "status": "active",
+        "parent": "AF-G000",
+        "depends_on": "",
+        "fib_priority": "2",
+        "priority": "P0",
+        "track": "autoformalization",
+        "bundle": "autoformalization/AF-S01",
+        "goal": "Recover editable material, define claim-linked protocols, and pin actual implementation/runtime capabilities without blocking independent work on inaccessible author sources.",
+        "outputs": "papers/completion/autoformalization/manuscript/main.tex, papers/completion/autoformalization/manuscript/references.bib, papers/completion/autoformalization/evidence/source_recovery.json, papers/completion/autoformalization/evidence/source_discrepancies.md, papers/completion/autoformalization/protocol.md, papers/completion/autoformalization/config/experiment_plan.json, papers/completion/autoformalization/evidence/claim_task_map.json, papers/completion/autoformalization/evidence/deadline_scope_options.md, papers/completion/autoformalization/evidence/source_audit_private.json, papers/completion/autoformalization/evidence/runtime_capability_matrix.json, papers/completion/autoformalization/config/environment_manifest.json",
+        "gap_task": "AF-001, AF-002, AF-003",
+        "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+        "validation": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S01"
+      },
+      "receipt": {
+        "schema": "ipfs_accelerate_py.agent_supervisor.goal-validation@1",
+        "goal_id": "AF-S01",
+        "attempted": true,
+        "passed": true,
+        "returncode": 0,
+        "results": [
+          {
+            "command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S01",
+            "started_at": "2026-09-11T17:51:13.183955+00:00",
+            "finished_at": "2026-09-11T17:51:16.555282+00:00",
+            "returncode": 0,
+            "stdout": "rrection-audit.json\": \"89a25eecdea5d9892dc906bee86ad2a18abbe342b90713c8030e0b656e4f8743\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/runtime_capability_matrix.json\": \"92b19f363faee75a2ffbcc67d0b9092c6ccbd2666f13ae78a11b68c9c7a4ff6b\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json\": \"f865eca0f686e1d179cc71c4e8a7a9c36928780468df3384b73803c9c35bd454\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-command-extraction.json\": \"2b30744086a69aef865f24259503b7d78fdaf11e23369f0ac32b3b9fb4fb6311\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-dependency-probe.py\": \"92a4ca195e2d16f1d033b11067695f86810751feba08195f9f23a006c3238f5f\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-dependency-probe.stderr.log\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-dependency-probe.stdout.log\": \"af3d136595a77246b760b59fc4c26d0091c26d793f360f89d50012b0acf7a256\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-distribution-probe.py\": \"04d01df4f8ae688e19e67af8a7d5e56604bc848564da8ffe9233323960f80d39\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-distribution-probe.stderr.log\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-distribution-probe.stdout.log\": \"d798eb3f46148c0901e703513a20ce6de3c0de8ea34e0c92ace0af8b432730cd\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/host-source-provenance.json\": \"7a137973aa5d2279e0b8a6ebf44f756de4404415a3d5be3cf77469428b740b48\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/manifest-validation.stderr.log\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/manifest-validation.stdout.log\": \"41e5b7ccb2c16614facfd374421bcc98d8bd38da844abccd042c2a3954a9470e\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/original-literal-command.stderr.log\": \"c2991ee16dc3ec7a542e8bb72d6360b32fc028f41cb33d3d9638cc2de16e6248\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/original-literal-command.stdout.log\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/original-receipt.json\": \"a53348381639aeee48f06083fdaefdf894683c0f61d78cd4fc957ec41591ca31\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stderr.log\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log\": \"0ad4111bbac7dab13b99db1c7119d876439885eaacc2165e572b3bf787c66b67\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected_runtime_smoke.py\": \"eae7db51b56ff153b48a1444e6457f134dad9c1dac84a252701203e5c6badc19\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/sentinel.lean\": \"e2947f62292f80356beb235bf71268c30eb82f21240aef0bd592203f86eb4f67\",\n      \"papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/sentinel.smt2\": \"0081d3444afc92c0d414efa337f83e0c2caf36953f95db8ad534d4f86eccebb7\"\n    },\n    \"limitation\": \"Recorded evidence is checked; this is not independent scientific replication.\"\n  }\n]\n",
+            "stderr": ""
+          }
+        ],
+        "started_at": "2026-09-11T17:51:13.174468+00:00",
+        "finished_at": "2026-09-11T17:51:16.652715+00:00",
+        "repository_id": "/home/barberb/lift_coding/.git",
+        "tree_id": "1fcd390e939c739b46d6ac12b7a62251bd3eb86f",
+        "receipt_cid": "baguqeeraqj7wuvkzbhabgk7elih6gvb7dykxtgyph6t5es7pfy27tpawovsq"
+      }
+    },
+    {
+      "paper": "law_to_action",
+      "source_commit": "9da0b52a1e0b9b1dc149b106465f662f97e94d7e",
+      "source_tree": "937645038081d4f1db778c7701020eeac5c1e677",
+      "declared_goal_fields": {
+        "status": "active",
+        "parent": "LA-G000",
+        "depends_on": "",
+        "fib_priority": "2",
+        "priority": "P0",
+        "track": "law_to_action",
+        "bundle": "law_to_action/LA-G1",
+        "goal": "Recover or faithfully reconstruct source; audit every implementation and result claim against pinned repository evidence.",
+        "outputs": "papers/completion/law_to_action/manuscript/main.tex, papers/completion/law_to_action/manuscript/references.bib, papers/completion/law_to_action/source_recovery.md, papers/completion/law_to_action/private/source_provenance.json, papers/completion/law_to_action/claim_evidence_matrix.json, papers/completion/law_to_action/scope.md, papers/completion/law_to_action/environment_inventory.json",
+        "gap_task": "LA-001, LA-002",
+        "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+        "validation": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G1"
+      },
+      "receipt": {
+        "schema": "ipfs_accelerate_py.agent_supervisor.goal-validation@1",
+        "goal_id": "LA-G1",
+        "attempted": true,
+        "passed": true,
+        "returncode": 0,
+        "results": [
+          {
+            "command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G1",
+            "started_at": "2026-09-11T17:51:16.852466+00:00",
+            "finished_at": "2026-09-11T17:51:20.379976+00:00",
+            "returncode": 0,
+            "stdout": "pshots/LA-001/compiled/main.bbl\": \"1b7d0953249defced8ed6df23085f10bd42475cd55849943a5cafceb9bbef052\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-001/compiled/main.blg\": \"ab4bf0ef3d32f4b5cd31d960952c0a772f679641601cb3aab74db3d1b2d7b782\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/from_law_to_action_corpus_grounded-1.pdf\": \"000b0d1960854966be836788f05c1fe33b8c0c6a2943a8d88f20241f99b38da0\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/extracted.txt\": \"7ba3ca062ada2271540676831842f095769a6feb085d2290ba96b26fa7182541\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/neurips_2026_vericode_workshop.tex\": \"c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/neurips_2026_vericode.sty\": \"2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/checklist.tex\": \"780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6\"\n    },\n    \"limitation\": \"Recorded evidence is checked; this is not independent scientific replication.\"\n  },\n  {\n    \"task\": \"LA-002\",\n    \"artifact_integrity_valid\": true,\n    \"current_outputs_checked\": false,\n    \"completed_at\": \"2026-09-11T16:50:24+00:00\",\n    \"outputs\": {\n      \"papers/completion/law_to_action/claim_evidence_matrix.json\": \"papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json\",\n      \"papers/completion/law_to_action/scope.md\": \"papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md\",\n      \"papers/completion/law_to_action/environment_inventory.json\": \"papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json\"\n    },\n    \"artifacts\": {\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json\": \"975e422a30b5b719b91abc61f84f0d71596a7dcc6a47699c247b990b91096808\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md\": \"88800274dd2adca8eddbfce8c072a6871f44076e5d12d23636f6936294b3e587\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json\": \"08edc18b882c5607a4ea248888ca3473e9576f199ba36df2eaaf6f16e88d4d82\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log\": \"9b2a8a953a48d77925ad61ce13d742381335d2e922e53c4a02ee4e5848106c7b\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/correction-audit.json\": \"5cdfabd359f14e7983dcd99824ab8bd6d51e306fca6bb0073053631cbfd22224\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log\": \"e74cf4ea34774975457a10dda871a9ec9dba26d95286643a1124813d648cdfc3\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/host-source-provenance.json\": \"82dc7e3f963bff999a765d8b5abe3a0e60774f8df4fa3e891d8a8c2a88983a8f\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/original-native-command-excerpt.log\": \"2b597dd9aab9227ceaa1614e3efd330b896b59c6a5120d87a7e91c5777106d24\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/previous-audit-structure.log\": \"9b2a8a953a48d77925ad61ce13d742381335d2e922e53c4a02ee4e5848106c7b\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/previous-receipt.json\": \"9d00e6d75e2d99012a77d4e0a53d5566ace886a7a3d3224a67928ed302e1565b\",\n      \"papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/recorded-literal-replay.log\": \"33ceb9272fb7f9c4484571aae626a932270950c023d5c1214784d52ac5d202f1\"\n    },\n    \"limitation\": \"Recorded evidence is checked; this is not independent scientific replication.\"\n  }\n]\n",
+            "stderr": ""
+          }
+        ],
+        "started_at": "2026-09-11T17:51:16.844231+00:00",
+        "finished_at": "2026-09-11T17:51:20.467665+00:00",
+        "repository_id": "/home/barberb/lift_coding/.git",
+        "tree_id": "937645038081d4f1db778c7701020eeac5c1e677",
+        "receipt_cid": "baguqeerasptxwycyd4cmc2g6gggzvre3f2ujm7uavetgx4tvtgaoi7dwvruq"
+      }
+    }
+  ],
+  "success": true,
+  "negative_validation": {
+    "schema": "ipfs_accelerate_py.agent_supervisor.goal-validation@1",
+    "goal_id": "qualification-negative",
+    "attempted": true,
+    "passed": false,
+    "returncode": 1,
+    "results": [
+      {
+        "command": "false",
+        "started_at": "2026-09-11T17:51:47.276677+00:00",
+        "finished_at": "2026-09-11T17:51:47.279198+00:00",
+        "returncode": 1,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "started_at": "2026-09-11T17:51:47.268883+00:00",
+    "finished_at": "2026-09-11T17:51:47.389779+00:00",
+    "repository_id": "/home/barberb/lift_coding/.git",
+    "tree_id": "937645038081d4f1db778c7701020eeac5c1e677",
+    "failed_command": "false",
+    "receipt_cid": "baguqeeranbpyuu22qz3ccui62a4ufwcitymkdmzbv2in5aynpd27kcclm22a"
+  },
+  "finished_at": "2026-09-11T17:51:47.390016+00:00"
+}
