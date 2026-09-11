@@ -133,8 +133,9 @@ def environment(repo):
                IPFS_ACCELERATE_AGENT_CODEX_MODEL="gpt-5.6-terra",
                IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_TRIGGER="primary_quota_exhausted",
                IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT="high",
-               # Retain one reusable idle checkout per paper. Native release
-               # prunes idle entries; active/recovery leases remain protected.
+               # Successful merged workspaces use native terminal cleanup.
+               # Failure rescue and ownership checks remain native obligations.
+               IPFS_ACCELERATE_AGENT_WORKTREE_POOL_ENABLED="false",
                IPFS_ACCELERATE_AGENT_WORKTREE_POOL_MAX_ENTRIES="1")
     return env
 
