@@ -1,0 +1,90 @@
+{
+  "schema": "paper-maintenance-preflight-resume/v1",
+  "original_audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+  "prior_failed_report_sha256": "657fd62b55db2f889d1a53b179eb165af8c180535e6528130944f8872f16b1d4",
+  "reason": "Only retained pre-dispatch context JSON files existed; original implementation stdout log absent. No task transitions occurred.",
+  "current_files": {
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/control.execution.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/autoformalization/control.execution.duckdb",
+      "sha256": "1b348b0c579a0863901df35f74b2c53554bc62677f9b49b7eed1ba6080f4b3bd"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/control.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/autoformalization/control.duckdb",
+      "sha256": "ffabdf6e69f7a900a17dd500e73cf043f940c7a7662b0d24c2d95553f85d8264"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/control.duckdb.bootstrap.json": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/autoformalization/control.duckdb.bootstrap.json",
+      "sha256": "0dcd91eb69ea7a8f32ee8ee8c536d18ad501c36d6aac116bd3eea668a701a4e5"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/control.coordination.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/autoformalization/control.coordination.duckdb",
+      "sha256": "ddf0405aac5641054e6bde7933a890584f28a52d13587b1c574c64e37239885b"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/control.execution.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/law_to_action/control.execution.duckdb",
+      "sha256": "437d3afae07fa85671cef6cb9352e98c180d330514a6ee40215e0884672da375"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/control.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/law_to_action/control.duckdb",
+      "sha256": "56f5c68858b3d008e81dc6a369b60e71bf5e28c7362f9de10ab2f92438dd7d7a"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/control.duckdb.bootstrap.json": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/law_to_action/control.duckdb.bootstrap.json",
+      "sha256": "5abbade521af4ec6a0d5829eb736d7931a6414f8adc9476a00d4b4b37c8de140"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/control.coordination.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/law_to_action/control.coordination.duckdb",
+      "sha256": "1c4c1ffda383855fa2b63b12c11c10962e8b1482877a56c9261d042c52b91a7c"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/control.execution.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/neurosymbolic_supervision/control.execution.duckdb",
+      "sha256": "1046c7677208e45bfed9aa763a70e545f549cafe52f2f246d4e73b9559d9ba6e"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/control.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/neurosymbolic_supervision/control.duckdb",
+      "sha256": "a82ba84f340200b790aaac67cf8c078e98b821ed848daf65d25e446f6fb0f0f3"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/control.duckdb.bootstrap.json": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/neurosymbolic_supervision/control.duckdb.bootstrap.json",
+      "sha256": "b672e09ccfb447a8130974a10ba7f9d49bbda6619b0a845d25bf06cf7788ca20"
+    },
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/control.coordination.duckdb": {
+      "backup": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/backups/20260911T162045Z-source-maintenance-preflight/neurosymbolic_supervision/control.coordination.duckdb",
+      "sha256": "a37bc0c71dfb5fb633577d3c5d35773db53c4e3ed1fcc00d3094bf411ac91cb2"
+    }
+  },
+  "table_equality": {
+    "autoformalization/tasks": true,
+    "autoformalization/goals": true,
+    "autoformalization/domain_events": true,
+    "autoformalization/database_task_attempts": true,
+    "autoformalization/attempt_phases": true,
+    "autoformalization/provider_invocations": true,
+    "autoformalization/effect_claims": true,
+    "autoformalization/task_claims": true,
+    "autoformalization/fenced_leases": true,
+    "autoformalization/task_attempts": true,
+    "law_to_action/tasks": true,
+    "law_to_action/goals": true,
+    "law_to_action/domain_events": true,
+    "law_to_action/database_task_attempts": true,
+    "law_to_action/attempt_phases": true,
+    "law_to_action/provider_invocations": true,
+    "law_to_action/effect_claims": true,
+    "law_to_action/task_claims": true,
+    "law_to_action/fenced_leases": true,
+    "law_to_action/task_attempts": true,
+    "neurosymbolic_supervision/tasks": true,
+    "neurosymbolic_supervision/goals": true,
+    "neurosymbolic_supervision/domain_events": true,
+    "neurosymbolic_supervision/database_task_attempts": true,
+    "neurosymbolic_supervision/attempt_phases": true,
+    "neurosymbolic_supervision/provider_invocations": true,
+    "neurosymbolic_supervision/effect_claims": true,
+    "neurosymbolic_supervision/task_claims": true,
+    "neurosymbolic_supervision/fenced_leases": true,
+    "neurosymbolic_supervision/task_attempts": true
+  },
+  "provider_invoked": false,
+  "prior_failed_report": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/source-checkpoint-maintenance.preflight-context-files.json"
+}

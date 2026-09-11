@@ -1,0 +1,109 @@
+{
+  "schema": "paper-exact-dead-owner-lifecycle-retirement/v1",
+  "started_at": "2026-09-11T16:19:15.676147+00:00",
+  "task_id": "AF-003",
+  "before": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+    "record_id": "baguqeeraig6tstwaidrb73gsifi4lp4r6kt7wosskjglaeasy4ibntcgpcpa",
+    "task_id": "AF-003",
+    "canonical_task_cid": "baguqeeraolwa4g56lfoekzpgkxgmgir2257ktucrotfa35nlesrfgvki62ta",
+    "attempt": 1,
+    "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b:0/1:4057439",
+    "state": "preparing",
+    "owner": {
+      "pid": 4057439,
+      "start_time_ticks": 55192911,
+      "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+      "parent_pid": 4045123
+    },
+    "lease_id": "06ebbebf1f957e6f56cdceab66fcc87d17f29f59",
+    "fence": 1,
+    "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-003-72ec0e1bbe59-attempt-1-1789142463",
+    "branch": "implementation/af-003-72ec0e1bbe59-attempt-1-1789142463",
+    "merge_target": "agent/vericodegen-2026-autoformalization",
+    "created_at": 1789142463.6781127,
+    "updated_at": 1789142463.6781127,
+    "expires_at": 1789164063.6781127,
+    "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+    "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b",
+    "terminal_reason": ""
+  },
+  "workspace_absent": true,
+  "record_backups": [
+    {
+      "path": "/home/barberb/lift_coding/.git/agent-worktree-lifecycle/ws-4336fae53557e7c59cd070a4.json",
+      "sha256": "579c41f553a95d027fa88b69b10ed2dae501dc343d67d26e34b8a78633b454a6",
+      "payload": {
+        "attempt": 1,
+        "branch": "implementation/af-003-72ec0e1bbe59-attempt-1-1789142463",
+        "canonical_task_cid": "baguqeeraolwa4g56lfoekzpgkxgmgir2257ktucrotfa35nlesrfgvki62ta",
+        "created_at": 1789142463.6781127,
+        "expires_at": 1789164063.6781127,
+        "fence": 1,
+        "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b:0/1:4057439",
+        "lease_id": "06ebbebf1f957e6f56cdceab66fcc87d17f29f59",
+        "merge_target": "agent/vericodegen-2026-autoformalization",
+        "owner": {
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 4045123,
+          "pid": 4057439,
+          "start_time_ticks": 55192911
+        },
+        "record_id": "baguqeeraig6tstwaidrb73gsifi4lp4r6kt7wosskjglaeasy4ibntcgpcpa",
+        "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+        "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+        "state": "preparing",
+        "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b",
+        "task_id": "AF-003",
+        "terminal_reason": "",
+        "updated_at": 1789142463.6781127,
+        "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-003-72ec0e1bbe59-attempt-1-1789142463"
+      }
+    },
+    {
+      "path": "/home/barberb/lift_coding/.git/agent-worktree-lifecycle/task-baguqeeraolwa4g56lfoekzpgkxgmgir2257ktucrotfa35n-5b2a6b6f283f297d4079726b-a1.json",
+      "sha256": "a7cad5baf12e07fb17cf8284a59a1d7d5ca852521f05e3dd4c1ceda9ea03795d",
+      "payload": {
+        "attempt": 1,
+        "canonical_task_cid": "baguqeeraolwa4g56lfoekzpgkxgmgir2257ktucrotfa35nlesrfgvki62ta",
+        "fence": 1,
+        "lease_id": "06ebbebf1f957e6f56cdceab66fcc87d17f29f59",
+        "record_id": "baguqeeraig6tstwaidrb73gsifi4lp4r6kt7wosskjglaeasy4ibntcgpcpa",
+        "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+        "state": "preparing",
+        "task_id": "AF-003",
+        "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-003-72ec0e1bbe59-attempt-1-1789142463"
+      }
+    }
+  ],
+  "native_api": "WorktreeLifecycleStore.finalize_exact_dead_owner",
+  "provider_invoked": false,
+  "terminal": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/worktree-lifecycle-record@1",
+    "record_id": "baguqeeraig6tstwaidrb73gsifi4lp4r6kt7wosskjglaeasy4ibntcgpcpa",
+    "task_id": "AF-003",
+    "canonical_task_cid": "baguqeeraolwa4g56lfoekzpgkxgmgir2257ktucrotfa35nlesrfgvki62ta",
+    "attempt": 1,
+    "lane_id": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b:0/1:4057439",
+    "state": "terminal",
+    "owner": {
+      "pid": 4057439,
+      "start_time_ticks": 55192911,
+      "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+      "parent_pid": 4045123
+    },
+    "lease_id": "06ebbebf1f957e6f56cdceab66fcc87d17f29f59",
+    "fence": 2,
+    "workspace_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-003-72ec0e1bbe59-attempt-1-1789142463",
+    "branch": "implementation/af-003-72ec0e1bbe59-attempt-1-1789142463",
+    "merge_target": "agent/vericodegen-2026-autoformalization",
+    "created_at": 1789142463.6781127,
+    "updated_at": 1789143555.6767473,
+    "expires_at": 1789143555.6767473,
+    "repo_root": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+    "state_dir": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b",
+    "terminal_reason": "audited_third_launch_stopped_before_provider_with_absent_workspace"
+  },
+  "success": true,
+  "finished_at": "2026-09-11T16:19:15.683691+00:00"
+}

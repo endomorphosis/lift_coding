@@ -79,7 +79,15 @@ def lane_work(paper, audit):
                 R.require(R.sha(projection) == projections[0]["sha256"], "AF-003 event evidence changed")
                 state = C.read(projection.with_name("portal-task-state.json"))
                 R.require(state.get("implementation_in_progress") is False and not state.get("active_log_path") and not state.get("last_implementation_log_path"), "AF-003 provider progress exists")
-                R.require(not list(projection.parent.glob("implementation-logs/*")), "AF-003 implementation log exists")
+                # Context compilation happens before dispatch and writes JSON
+                # alongside implementation logs. Preserve and authenticate it.
+                context_files = list(projection.parent.glob("implementation-logs/*"))
+                allowed_context_names = {"af-003-attempt-1-context-receipt.json", "af-003-base-context-receipt.json", "af-003-base-context-capsule.json"}
+                for path in context_files:
+                    R.require(path.is_file() and path.name in allowed_context_names, "AF-003 implementation output exists")
+                    backup_path = Path(C.read(AUDIT)["backup_root"]) / paper / "state" / path.relative_to(lane / "state")
+                    R.require(R.sha(path) == R.sha(backup_path), "AF-003 context changed since stopped backup")
+                report["retained_pre_dispatch_context"] = [{"path": str(p), "sha256": R.sha(p)} for p in context_files]
                 R.require(daemon.provider_invocation_recorded(attempt.attempt_id, idempotency_key="provider:" + attempt.attempt_id) is None, "AF-003 provider receipt exists")
                 retired = daemon._block_portal_failed_attempt(attempt, DatabasePortalBridgeError(
                     "campaign_stopped_during_pre_provider_setup", result={"implementation": {
@@ -170,7 +178,11 @@ def main():
         R.require(not C.alive(campaign["controller"]), "controller is live")
         for lane in campaign["lanes"].values():
             R.require(not C.alive(lane["owner"]) and not C.alive(lane["supervisor"]), "campaign child is live")
+        resume_path = Path(__file__).with_name("third_launch_maintenance_preflight_resume.json")
+        resumed_files = C.read(resume_path)["current_files"] if resume_path.exists() else audit["files"]
         for original, entry in audit["files"].items():
+            R.require(R.sha(Path(entry["backup"])) == entry["sha256"], "original backup changed")
+        for original, entry in resumed_files.items():
             R.require(R.sha(Path(original)) == entry["sha256"] and R.sha(Path(entry["backup"])) == entry["sha256"], "saved database/backup changed")
         for paper in C.PAPERS:
             repo = ROOT / ".worktrees" / ("vericodegen-" + paper + "-2026")

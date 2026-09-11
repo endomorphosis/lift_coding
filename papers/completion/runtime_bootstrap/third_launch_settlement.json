@@ -1,0 +1,1072 @@
+{
+  "success": true,
+  "lanes": [
+    {
+      "schema": "paper-source-checkpoint-maintenance/v1",
+      "paper": "autoformalization",
+      "started_at": "2026-09-11T16:20:57.997600+00:00",
+      "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+      "provider_invoked": false,
+      "mutations": [
+        {
+          "kind": "record_interrupted_setup",
+          "attempt": {
+            "schema": "ipfs_accelerate_py/agent-supervisor/database-task-attempt@1",
+            "interface": "DatabaseTaskAttempt@1",
+            "attempt_id": "attempt:3af2e23cd12945989dc90fb231546d7e",
+            "claim_id": "claim:a03e282aa5bc407cab056bbd89a1766f",
+            "task_cid": "baguqeerahtsqd4lwljjf5jveejkb7cv5j2dnpikl7zafo6xpbxhygd423ybq",
+            "task_alias": "AF-003",
+            "attempt_number": 1,
+            "owner_session_id": "embedded-store:cefb9b5ef601df2e4744e836aafa302d",
+            "fencing_token": 1,
+            "fence_epoch": 1,
+            "lease_id": "lease:e402d4fb266c4a25be039f53a3cccbd1",
+            "committed_phase": "blocked",
+            "status": "blocked",
+            "started_at_ms": 1789142462399,
+            "finished_at_ms": 1789143660750,
+            "revision": 3,
+            "body": {
+              "worktree_id": ""
+            }
+          },
+          "evidence_basis": "stopped process tree, context-only durable phase, only task_selected event, no implementation log/provider receipt",
+          "native_import_failure_observed_for_this_attempt": false
+        },
+        {
+          "kind": "verified_source_checkpoint",
+          "task_id": "AF-001",
+          "status": "completed",
+          "revision": 8,
+          "completion": {
+            "operation": "paper_agent_assisted_checkpoint_complete",
+            "task_id": "AF-001",
+            "paper_receipt": "papers/completion/autoformalization/receipts/AF-001.json",
+            "evidence_digest": "sha256:5455f0b3084fd4950d35e6168193d70b152b44c7d62f9252f26ecdebe25fe4d5",
+            "prior_failure_receipt_sha256": "a01e3b1c85dc06d829255189792bd07fa3f5043761f354ffd91520cb92478721",
+            "prior_failure_attempt_id": "attempt:49eb08320f664a5480f6e48b099d5c58",
+            "validation_event": {
+              "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+              "event_id": "baguqeeraxigg2xs7pcarm6fle7w6wfkphagm4zjvwjjp75kum6e2jfiuj4bq",
+              "event_type": "intent.validation_recorded",
+              "global_sequence": 92,
+              "recorded_at": "2026-09-11T16:21:06Z",
+              "subject_id": "baguqeeraonasmsadlaucy7vbsneaqdvfmhdfojozp2erozbhxfmr6f6zk7sq",
+              "revision": 0,
+              "changed": true,
+              "details": {
+                "result_id": "baguqeeraonasmsadlaucy7vbsneaqdvfmhdfojozp2erozbhxfmr6f6zk7sq",
+                "run_id": "baguqeerahlve44lvuvy472uvlapke3xadeu2or6qoutdpx7rb2e6mjzdau5a",
+                "task_cid": "baguqeeraqxyaolszbgigx4ygjb74nkzn36qjyqdyloesuqkc6iy5qauwcifa",
+                "outcome": "passed",
+                "evidence_digest": "sha256:5455f0b3084fd4950d35e6168193d70b152b44c7d62f9252f26ecdebe25fe4d5",
+                "argv": [
+                  "python3",
+                  "scripts/paper_supervisors.py",
+                  "verify-task",
+                  "--paper",
+                  "autoformalization",
+                  "--task",
+                  "AF-001"
+                ],
+                "body": {
+                  "execution_kind": "agent_assisted_checkpoint_validation",
+                  "receipt_path": "papers/completion/autoformalization/receipts/AF-001.json",
+                  "exit_code": 0,
+                  "validation_log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/source-checkpoint-maintenance-owner/AF-001-verify-task.json",
+                  "validation_log_sha256": "6ab4acb4f387c69242ea6e27d1ade7a7316d955ae886325fd8c2204ac342149e",
+                  "source_commit": "41e9532af266876938e5f152ef1fe4c431ee026b",
+                  "provider_attempt_success_claimed": false,
+                  "acceptance_criteria": [
+                    {
+                      "criterion": "Editable source builds into a PDF with all original equations/tables/citations accounted for, or recovered-source failures and reconstruction progress are explicitly recorded.",
+                      "status": "met",
+                      "explanation": "The task explicitly permits documented recovery failures and reconstruction progress. The compiled editable review copy maps all 859 original numbered lines, 15 equations, 13 tables and 10 references; the discrepancy audit identifies inline-math, table-cell, bibliography and checklist work still required. This is a recovery checkpoint, not publication-ready reconstruction or empirical validation.",
+                      "evidence": [
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+                      ]
+                    },
+                    {
+                      "criterion": "Historical evidence is distinguished from newly reconstructed material; absent logs are not manufactured.",
+                      "status": "met",
+                      "explanation": "Source-origin records identify PDF reconstruction and preserve the original PDF hash, all 44 TBD values and other pending markers. Missing author LaTeX/BibTeX, private source ledger, reference suite and original experimental logs remain explicitly absent. No experiment ran and no result was filled.",
+                      "evidence": [
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+                      ]
+                    },
+                    {
+                      "criterion": "Source recovery does not gate independent protocol or code preflight tasks.",
+                      "status": "met",
+                      "explanation": "AF-002 and AF-003 retain empty prerequisite lists in the reviewed task manifest, recorded in source_recovery.json. Source recovery and unavailable Overleaf access do not block protocol or code-audit scheduling.",
+                      "evidence": [
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+                      ]
+                    },
+                    {
+                      "criterion": "Manuscript-specific source recovery is distinguished from the now-available local research template and checklist; reconstruction uses the local research shell without modifying shared inputs.",
+                      "status": "met",
+                      "explanation": "The recovered text is newly reconstructed from the original paper PDF. The research style and supplied template/checklist copies are byte-identical to the user-provided inputs; shared originals were not edited. Pending official checklist answers remain explicit.",
+                      "evidence": [
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json",
+                        "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+                      ]
+                    }
+                  ]
+                },
+                "recorded_at": "2026-09-11T16:21:06Z",
+                "revision": 0
+              }
+            },
+            "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+            "provider_invoked": false,
+            "benchmark_result_claimed": false,
+            "completed_at": "2026-09-11T16:21:06.276366+00:00",
+            "scope": "source recovery and explicitly reconciled reconstruction only"
+          }
+        },
+        {
+          "kind": "requeue_after_route_repair",
+          "task_id": "AF-002",
+          "revision": 5,
+          "receipt": {
+            "operation": "paper_explicit_provider_pin_repair",
+            "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+            "prior_failure_receipt_sha256": "eafe7d0007ebcad9b59c5859a0c77879fd986409a104ce6f22761761a7fc108e",
+            "prior_attempt_id": "attempt:6d6036f8dd434257aca09c6981c0280a",
+            "provider": "grok",
+            "configuration_sha256": "5415ac2cc8bf75d5626e114812814ef97217b71deb69031e6303bf29808406d1",
+            "reason": "supported_explicit_grok_route_qualified_without_provider_call",
+            "requeued_at": "2026-09-11T16:21:06.641417+00:00",
+            "old_attempt_history_preserved": true,
+            "provider_invoked": false
+          }
+        },
+        {
+          "kind": "requeue_after_route_repair",
+          "task_id": "AF-003",
+          "revision": 5,
+          "receipt": {
+            "operation": "paper_explicit_provider_pin_repair",
+            "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+            "prior_failure_receipt_sha256": "2fab7f6248664742223f968e61e696de787cd24d5976bafef325e40a0ce592ef",
+            "prior_attempt_id": "attempt:3af2e23cd12945989dc90fb231546d7e",
+            "provider": "grok",
+            "configuration_sha256": "5415ac2cc8bf75d5626e114812814ef97217b71deb69031e6303bf29808406d1",
+            "reason": "supported_explicit_grok_route_qualified_without_provider_call",
+            "requeued_at": "2026-09-11T16:21:06.923885+00:00",
+            "old_attempt_history_preserved": true,
+            "provider_invoked": false
+          }
+        }
+      ],
+      "success": true,
+      "maintenance_owner_process": {
+        "pid": 2376376,
+        "birth": "55336444",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/source-checkpoint-maintenance-owner/owner.log",
+        "argv": [
+          "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+          "/home/barberb/lift_coding/scripts/paper_state_owner.py",
+          "--database",
+          "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/control.duckdb",
+          "--state-dir",
+          "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/source-checkpoint-maintenance-owner",
+          "--store-id",
+          "vericodegen-2026-autoformalization",
+          "--secret-handle",
+          "handle:vericodegen-2026:autoformalization:source-checkpoint-maintenance"
+        ]
+      },
+      "owner_identity": {
+        "contract_version": 1,
+        "credential_generation": 1,
+        "database_uuid": "24e4319a-319f-46b2-a231-2df7eb25c420",
+        "extension_fingerprint": "sha256:b77954ae50ecc06e10c6e20fc6fd421d73b5c31cf72bb60ae3f29b1f8a85f20b",
+        "fence_epoch": 6,
+        "generation": 6,
+        "interface": "StateServerIdentity@1",
+        "listen_uri": "quack:127.0.0.1:39673",
+        "process_birth": {
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 2375378,
+          "pid": 2376376,
+          "start_time_ticks": 55336444
+        },
+        "process_birth_id": "birth:aa8b6a5673004018119c24d4bc84b034",
+        "repository_id": "repository:vericodegen-2026-autoformalization",
+        "revision": 0,
+        "schema": "ipfs_accelerate_py/agent-supervisor/state-server-identity@1",
+        "schema_fingerprint": "sha256:3ea5f70cebacfe748017c9540bf87016075443f4ccc33376ec0a179ed576e190",
+        "schema_revision": 1,
+        "secret_handle": "handle:vericodegen-2026:autoformalization:source-checkpoint-maintenance",
+        "server_id": "server:1aefd7b1-1c33-44cc-b834-96a2e63242ee",
+        "started_at": "2026-09-11T16:20:58Z",
+        "startup_epoch": 1789143658,
+        "status": "ready",
+        "store_id": "vericodegen-2026-autoformalization"
+      },
+      "retained_pre_dispatch_context": [
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b/implementation-logs/af-003-attempt-1-context-receipt.json",
+          "sha256": "f651d0ec6343539272ec149739654bbf9641acb96157eadae7038805f47d745e"
+        },
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b/implementation-logs/af-003-base-context-receipt.json",
+          "sha256": "f651d0ec6343539272ec149739654bbf9641acb96157eadae7038805f47d745e"
+        },
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_database_portal_attempts/d0b1549ed28eb90223eb395b/implementation-logs/af-003-base-context-capsule.json",
+          "sha256": "4aab042fdc6392def435c1544b7040d4360d02faefe28249f247a64ada4a084b"
+        }
+      ],
+      "final_tasks": [
+        {
+          "task_alias": "AF-001",
+          "task_cid": "baguqeeraqxyaolszbgigx4ygjb74nkzn36qjyqdyloesuqkc6iy5qauwcifa",
+          "status": "completed",
+          "revision": 8
+        },
+        {
+          "task_alias": "AF-002",
+          "task_cid": "baguqeera3mwymnfki5wf7vqk6g5k5dlgndfuot3a4qgggy6x4xogidvcv6aq",
+          "status": "ready",
+          "revision": 5
+        },
+        {
+          "task_alias": "AF-003",
+          "task_cid": "baguqeerahtsqd4lwljjf5jveejkb7cv5j2dnpikl7zafo6xpbxhygd423ybq",
+          "status": "ready",
+          "revision": 5
+        },
+        {
+          "task_alias": "AF-004",
+          "task_cid": "baguqeerafrpqpvvdoxqotb2os3f4c5fnacbf7tdwi5cpo37a5q3fkzm2t3tq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-005",
+          "task_cid": "baguqeerakhicosafg672mjepnuvecprvulbijw7e3f7kyq5fssfogoim64wa",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-006",
+          "task_cid": "baguqeerabnnk56cu3k46uxkhilqfbsnedn4dybru32zwmoojojm6aewxwjva",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-007",
+          "task_cid": "baguqeeradgkthihgnusw67mz2gcihjqnmt65v32dfgy6clrdmjwrn5b2d5ha",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-008",
+          "task_cid": "baguqeerauq66dhafxvj5x7vo2i3xdvuunjttmyulsuoojczrn3dc5suwvgca",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-009",
+          "task_cid": "baguqeerawqcdzumvvxeckex4lwyexnlwhklikgt6ptcwkw7qpf3no5f7lywq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-010",
+          "task_cid": "baguqeeraxhmnlksxil4tahnr3eerh4ad5yr4qwdrxxtnga3ouc77zpbrsiaq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-011",
+          "task_cid": "baguqeerai5kwqswl4ggqwbzng7f6u6bspdxyi4v475kpsrmxhg3c7azqwnba",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-015",
+          "task_cid": "baguqeeragwca5hr6omwcdo5fboub7au4qm6xrg5e5vxhlrijppb6odfrhr6q",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-012",
+          "task_cid": "baguqeerav47fdgy6ok4i775htsrl4z3fugldvjqdxicn2guvqpjyg6gwwp3a",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-013",
+          "task_cid": "baguqeera74cylaej5bdtik2opdburgpzciwenjpka3p6wbrm5apqalkwoija",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-014",
+          "task_cid": "baguqeeraxylh57ljbxcj53odysl4erbkc7aha6zhk22ddty27lsxkqvnwrha",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-016",
+          "task_cid": "baguqeera2vorfexdu3cjkkbjmvxopzw72contlmncol43xrpu53aow5v2l7a",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-017",
+          "task_cid": "baguqeerat24vzp3hsd7v2jmjkwizeqvupssdpqh5jbsisntmooeif2kcvp3q",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-018",
+          "task_cid": "baguqeerarf4ja7fx2ggh7pnmevupd2mywkoj2l6rauctrftrya6ajkuwbffq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-019",
+          "task_cid": "baguqeerav7rr3t2qaklck4ob5i2g7bq5yjb4fouityzgzcn5iddagw76wzua",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-020",
+          "task_cid": "baguqeerattqiuj23pmpys4z3ebxlvqmkt5kupn44qcboaqklumrupx4fivda",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-021",
+          "task_cid": "baguqeerae5elq22qvgqnw7sei4tomjtjiat4ctwbi6xwsroivwgy5n7xd7fq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-022",
+          "task_cid": "baguqeeravwbdasbkspetjz2vvznix4aehjbt5zwonkgwj6tvbws2vuxrpp6a",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-023",
+          "task_cid": "baguqeera2plxewcoqaz6awvzdzicviulr2p7l4cq7vpuegpzsw2wrivlyfrq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-024",
+          "task_cid": "baguqeerawfto7tkuqo2hl4nwobhw5pmoyochr55pbgcywyry2di3vjbnwyhq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "AF-025",
+          "task_cid": "baguqeeratehgxtrrx524upipaav3xplttynhoo5u5ltaa7zvyqv5ednplizq",
+          "status": "ready",
+          "revision": 2
+        }
+      ],
+      "next_eligible_tasks": [
+        "AF-002",
+        "AF-003"
+      ],
+      "finished_at": "2026-09-11T16:21:09.731336+00:00",
+      "cleanup_errors": []
+    },
+    {
+      "schema": "paper-source-checkpoint-maintenance/v1",
+      "paper": "law_to_action",
+      "started_at": "2026-09-11T16:21:10.304210+00:00",
+      "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+      "provider_invoked": false,
+      "mutations": [
+        {
+          "kind": "verified_source_checkpoint",
+          "task_id": "LA-001",
+          "status": "completed",
+          "revision": 8,
+          "completion": {
+            "operation": "paper_agent_assisted_checkpoint_complete",
+            "task_id": "LA-001",
+            "paper_receipt": "papers/completion/law_to_action/receipts/LA-001.json",
+            "evidence_digest": "sha256:06ab422d87cb3cbf2341ff5384aa19701ad59f5927d6a03aa9620e6af46068b1",
+            "prior_failure_receipt_sha256": "52e3c36e27e3948b2b655b26c9e6da56b49ed92b0762550c43395afd4abe0ead",
+            "prior_failure_attempt_id": "attempt:544ba23423824989b37f6b35500566b1",
+            "validation_event": {
+              "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+              "event_id": "baguqeerar6notap6e6u24qvmfozvbuggm545fodrv7m2i64orupy7bszscda",
+              "event_type": "intent.validation_recorded",
+              "global_sequence": 94,
+              "recorded_at": "2026-09-11T16:21:19Z",
+              "subject_id": "baguqeerahc6pontszxqqqxoun4is4opcsebgs5f2icit776w3k5rtk6rpfga",
+              "revision": 0,
+              "changed": true,
+              "details": {
+                "result_id": "baguqeerahc6pontszxqqqxoun4is4opcsebgs5f2icit776w3k5rtk6rpfga",
+                "run_id": "baguqeeradqlwdz2d4l6na2pfjc5hgm4pcocv7fbow7ukcmr3kmxoxev7ytza",
+                "task_cid": "baguqeeraeyqysmvzat3bbdq36wujh6rcnndigf2tqb4rb7u6rrjf3bigd3wq",
+                "outcome": "passed",
+                "evidence_digest": "sha256:06ab422d87cb3cbf2341ff5384aa19701ad59f5927d6a03aa9620e6af46068b1",
+                "argv": [
+                  "python3",
+                  "scripts/paper_supervisors.py",
+                  "verify-task",
+                  "--paper",
+                  "law_to_action",
+                  "--task",
+                  "LA-001"
+                ],
+                "body": {
+                  "execution_kind": "agent_assisted_checkpoint_validation",
+                  "receipt_path": "papers/completion/law_to_action/receipts/LA-001.json",
+                  "exit_code": 0,
+                  "validation_log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/source-checkpoint-maintenance-owner/LA-001-verify-task.json",
+                  "validation_log_sha256": "677c874e86d00a16b26f9c3917f04d6bca55b545da8f0013683ebd00b6da3fc8",
+                  "source_commit": "e36326ab24d86c859efafa8e4af7aa6d90c72700",
+                  "provider_attempt_success_claimed": false,
+                  "acceptance_criteria": [
+                    {
+                      "criterion": "Editable main.tex and bibliography compile without requiring an unavailable remote editor.",
+                      "status": "met",
+                      "explanation": "The canonical editable main.tex contains all seven tables inline and uses references.bib. The recorded local Latexmk/pdfTeX/BibTeX build succeeded without a remote editor, producing 17 pages (eight main-text pages) with no unresolved citations or overfull boxes.",
+                      "evidence": [
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/outputs/manuscript/main.tex",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/outputs/manuscript/references.bib",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/reconstruction-audit/canonical-build.log",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/compiled/main.pdf"
+                      ]
+                    },
+                    {
+                      "criterion": "All sections, tables, equations, footnotes and references accounted for in a reconstruction/recovery audit.",
+                      "status": "met",
+                      "explanation": "The source inventory and actual fidelity audit account for all 549 numbered lines, 122 narrative/heading units, seven tables with 50 rows/150 cells, eight full references, an eight-line provenance chain and twelve trace steps. No displayed equations, figures or author footnotes occur; the workshop footer is retained. Ten original C1 cells were visually checked due to column-interleaved extraction. Layout/hyphenation/inline-font uncertainties and subsequent scientific tasks are explicitly documented.",
+                      "evidence": [
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/outputs/source_recovery.md",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/reconstruction-audit/inventory.json",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/reconstruction-audit/fidelity_audit.json",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/reconstruction-audit/original-page-13.png",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/reconstruction-audit/fidelity-audit.log"
+                      ]
+                    },
+                    {
+                      "criterion": "Private author provenance is separated from anonymous artifact files; no fabricated source pins.",
+                      "status": "met",
+                      "explanation": "The private companion separately records the user project URL, unavailable author/source fields and only pins transcribed from the supplied PDF, explicitly unverified. The manuscript uses anonymous author rendering and empty PDF author metadata and contains no newly added author identity or Overleaf URL. Existing draft symbol/dataset identifiability remains an explicit LA-024 obligation; private receipts/snapshots must be excluded from anonymous releases.",
+                      "evidence": [
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/outputs/private/source_provenance.json",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/outputs/source_recovery.md",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/compiled/main.pdf"
+                      ]
+                    },
+                    {
+                      "criterion": "Manuscript-specific source recovery is distinguished from the now-available local research template and checklist; reconstruction uses the local research shell without modifying shared inputs.",
+                      "status": "met",
+                      "explanation": "The audit distinguishes PDF-derived manuscript/bibliography reconstruction from supplied research-format inputs. The canonical source uses the default neurips_2026_vericode research style through a local input path. Original shell, style and checklist hashes/copies were verified unchanged; the checklist remains a separate unchanged input for truthful completion in LA-024.",
+                      "evidence": [
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/outputs/manuscript/main.tex",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/reconstruction-audit/fidelity_audit.json",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/neurips_2026_vericode_workshop.tex",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/neurips_2026_vericode.sty",
+                        "papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/checklist.tex"
+                      ]
+                    }
+                  ]
+                },
+                "recorded_at": "2026-09-11T16:21:19Z",
+                "revision": 0
+              }
+            },
+            "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+            "provider_invoked": false,
+            "benchmark_result_claimed": false,
+            "completed_at": "2026-09-11T16:21:19.570911+00:00",
+            "scope": "source recovery and explicitly reconciled reconstruction only"
+          }
+        },
+        {
+          "kind": "requeue_after_route_repair",
+          "task_id": "LA-002",
+          "revision": 5,
+          "receipt": {
+            "operation": "paper_explicit_provider_pin_repair",
+            "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+            "prior_failure_receipt_sha256": "d9e365abed858da2e3cb1a580ef06d397d81a833c6975732d10662792c37018f",
+            "prior_attempt_id": "attempt:e82b91c1c0ae4095afbf319691bd7b28",
+            "provider": "grok",
+            "configuration_sha256": "5415ac2cc8bf75d5626e114812814ef97217b71deb69031e6303bf29808406d1",
+            "reason": "supported_explicit_grok_route_qualified_without_provider_call",
+            "requeued_at": "2026-09-11T16:21:19.883536+00:00",
+            "old_attempt_history_preserved": true,
+            "provider_invoked": false
+          }
+        }
+      ],
+      "success": true,
+      "maintenance_owner_process": {
+        "pid": 2401282,
+        "birth": "55337675",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/source-checkpoint-maintenance-owner/owner.log",
+        "argv": [
+          "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+          "/home/barberb/lift_coding/scripts/paper_state_owner.py",
+          "--database",
+          "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/control.duckdb",
+          "--state-dir",
+          "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/source-checkpoint-maintenance-owner",
+          "--store-id",
+          "vericodegen-2026-law_to_action",
+          "--secret-handle",
+          "handle:vericodegen-2026:law_to_action:source-checkpoint-maintenance"
+        ]
+      },
+      "owner_identity": {
+        "contract_version": 1,
+        "credential_generation": 1,
+        "database_uuid": "1a3666fc-75c6-4c20-bb6d-be27b1cc0767",
+        "extension_fingerprint": "sha256:b77954ae50ecc06e10c6e20fc6fd421d73b5c31cf72bb60ae3f29b1f8a85f20b",
+        "fence_epoch": 5,
+        "generation": 5,
+        "interface": "StateServerIdentity@1",
+        "listen_uri": "quack:127.0.0.1:38681",
+        "process_birth": {
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 2375378,
+          "pid": 2401282,
+          "start_time_ticks": 55337675
+        },
+        "process_birth_id": "birth:77069d65583adaf1da6803deb67df3da",
+        "repository_id": "repository:vericodegen-2026-law_to_action",
+        "revision": 0,
+        "schema": "ipfs_accelerate_py/agent-supervisor/state-server-identity@1",
+        "schema_fingerprint": "sha256:3ea5f70cebacfe748017c9540bf87016075443f4ccc33376ec0a179ed576e190",
+        "schema_revision": 1,
+        "secret_handle": "handle:vericodegen-2026:law_to_action:source-checkpoint-maintenance",
+        "server_id": "server:48857ea5-5b5f-412c-872d-badc50619004",
+        "started_at": "2026-09-11T16:21:10Z",
+        "startup_epoch": 1789143670,
+        "status": "ready",
+        "store_id": "vericodegen-2026-law_to_action"
+      },
+      "final_tasks": [
+        {
+          "task_alias": "LA-001",
+          "task_cid": "baguqeeraeyqysmvzat3bbdq36wujh6rcnndigf2tqb4rb7u6rrjf3bigd3wq",
+          "status": "completed",
+          "revision": 8
+        },
+        {
+          "task_alias": "LA-002",
+          "task_cid": "baguqeerahx67ejaalgj7544gnwugb2ovfg5ajgfe5nlzxjwr2knqj2keap7a",
+          "status": "ready",
+          "revision": 5
+        },
+        {
+          "task_alias": "LA-003",
+          "task_cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-004",
+          "task_cid": "baguqeera5ivphnjzyfjexbnfnlacr4hweebv75fcwhke24ya23efou2ishva",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-005",
+          "task_cid": "baguqeeracjvnikxagfollti2zvwbijyps7gw2nvhagewx75oztzmgmwla4gq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-006",
+          "task_cid": "baguqeeraild45mhndku3575wc4mwrf2g2qhq2iyhm2zmb2uwzop35pv4ssoq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-007",
+          "task_cid": "baguqeeraidfsyezhr2on5nyfkylamwtv7jhnbcwyb23j7r7q563fdybx3yuq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-008",
+          "task_cid": "baguqeerajx2zoroi2sw4phn4rl7btfvetfqpwy3bqwz6lzvz7j3r75uzropq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-009",
+          "task_cid": "baguqeerapwukrr5damt7oclxcdonw573mo6oafwqa64oz6vbdkbaon27khja",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-010",
+          "task_cid": "baguqeeravwsrtcfybwypzfipvqh7pmue5r37jzo2qlvffuuqxs4tsnttlhdq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-011",
+          "task_cid": "baguqeeraqyavp3epfpzbaswijgtn2jgyeyh6bgeyp4adwnwigrlkqi2hng4q",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-012",
+          "task_cid": "baguqeera5khofplwwzhcpm2hhpmd6tuhr4q3blblywennuamcbo4qepqro2q",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-013",
+          "task_cid": "baguqeerai2w42l6e6jopn7lxcenjqdzkmw4nxl5cuyl6m3uxpnv7qguvgvka",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-014",
+          "task_cid": "baguqeerajpn4hzjagrhanq33t6oqomkij37w6dnyz3awuz6r6zhsxk5a72ta",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-015",
+          "task_cid": "baguqeeraesj3yxjjv5ez7jkcmlp5mgyzi5txvfiswpuwwlv2qlfyck5r7rtq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-016",
+          "task_cid": "baguqeerajnpucvuihgzssvjjhftm25rvwxsfn5s344lkeounlpi7wsv6lq5q",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-017",
+          "task_cid": "baguqeeral3ttqjcs3lgy4g53kplu3biynhd7roq5tc7cdel6t6au45einkra",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-018",
+          "task_cid": "baguqeera5fqdxil6uu7aaaeudilckk56ots7jym4nkxpo3qvbewanceboccq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-019",
+          "task_cid": "baguqeeraj4rlrsqiknoe3pv3mgk4ypqmevjcibkypjqexpvntafzatqem6yq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-020",
+          "task_cid": "baguqeerapkraxlef346tijalfkgsdfssoecevon62bbg6f3qga757mxghp2q",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-021",
+          "task_cid": "baguqeeraeviogdaiyjoukfl5ctt3zrcmfeg7nbegtle6wr4kjgsjdpn3utfa",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-022",
+          "task_cid": "baguqeerauioboytpo6pwuxymhdzmd4tamw52wq5jlrnaao3xcwpcjzya4mxq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-023",
+          "task_cid": "baguqeerauam6ohylje4wcdxgv4rxoo2gjr6rqzijylc7apxrvr4ue4lyjkjq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-024",
+          "task_cid": "baguqeerat43st5o2vulahtcvtzi5agx24xdt64kido3yk4f743sevvf3k47a",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "LA-025",
+          "task_cid": "baguqeerabzl5c2pau7yau67ha44uaxnfjfb3pcfk4j55ypzxtf4kyi5wioaq",
+          "status": "ready",
+          "revision": 2
+        }
+      ],
+      "next_eligible_tasks": [
+        "LA-002"
+      ],
+      "finished_at": "2026-09-11T16:21:22.547389+00:00",
+      "cleanup_errors": []
+    },
+    {
+      "schema": "paper-source-checkpoint-maintenance/v1",
+      "paper": "neurosymbolic_supervision",
+      "started_at": "2026-09-11T16:21:22.792543+00:00",
+      "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+      "provider_invoked": false,
+      "mutations": [
+        {
+          "kind": "verified_source_checkpoint",
+          "task_id": "NS-001",
+          "status": "completed",
+          "revision": 8,
+          "completion": {
+            "operation": "paper_agent_assisted_checkpoint_complete",
+            "task_id": "NS-001",
+            "paper_receipt": "papers/completion/neurosymbolic_supervision/receipts/NS-001.json",
+            "evidence_digest": "sha256:5d3dc2608e683bbca03bf23d75c6b429d568bdfc31e348b58428d91352ce45c1",
+            "prior_failure_receipt_sha256": "15a915811e4825ee4e1467c3ccd05334eab051c187f00998ab05f27a2b83591e",
+            "prior_failure_attempt_id": "attempt:a21ec76643af43b59d68bbc8dbc64ee1",
+            "validation_event": {
+              "schema": "ipfs_accelerate_py/agent-supervisor/intent-receipt@1",
+              "event_id": "baguqeera4sd7cjstsr5v7mntmofgluxqfnaoh4lz33qur3n4unk52377tt6q",
+              "event_type": "intent.validation_recorded",
+              "global_sequence": 90,
+              "recorded_at": "2026-09-11T16:21:31Z",
+              "subject_id": "baguqeerafxmbkfcojumfl6lnzdenis4n3bio7ptirv2m3prufj7pyacv3kyq",
+              "revision": 0,
+              "changed": true,
+              "details": {
+                "result_id": "baguqeerafxmbkfcojumfl6lnzdenis4n3bio7ptirv2m3prufj7pyacv3kyq",
+                "run_id": "baguqeerays4oxb5ndoknwijltqlda35nyzrqsg4spyt3wb27r3cvgj73xzyq",
+                "task_cid": "baguqeerauj4ylyfvkbx7zjedjjb6ozomofgvn4tyw7zmpm3vp2qelrkmxwaa",
+                "outcome": "passed",
+                "evidence_digest": "sha256:5d3dc2608e683bbca03bf23d75c6b429d568bdfc31e348b58428d91352ce45c1",
+                "argv": [
+                  "python3",
+                  "scripts/paper_supervisors.py",
+                  "verify-task",
+                  "--paper",
+                  "neurosymbolic_supervision",
+                  "--task",
+                  "NS-001"
+                ],
+                "body": {
+                  "execution_kind": "agent_assisted_checkpoint_validation",
+                  "receipt_path": "papers/completion/neurosymbolic_supervision/receipts/NS-001.json",
+                  "exit_code": 0,
+                  "validation_log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/source-checkpoint-maintenance-owner/NS-001-verify-task.json",
+                  "validation_log_sha256": "9803a7a29482418847d01c51d12b0389f320ec04aeef804e98debcd63157760a",
+                  "source_commit": "d8688cbe0d5c368b76810f9dd801c2f7900bba14",
+                  "provider_attempt_success_claimed": false,
+                  "acceptance_criteria": [
+                    {
+                      "criterion": "Editable source builds to PDF with one documented command.",
+                      "status": "met",
+                      "explanation": "Canonical self-contained main.tex compiles with the documented absolute TeX Live wrapper. The successful build log and compiled PDF are retained; this establishes an editable source build, not publication-ready layout.",
+                      "evidence": [
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.tex",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/BUILD.md",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-build.log",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.pdf"
+                      ]
+                    },
+                    {
+                      "criterion": "All sections, equations, tables, and references are either recovered or explicitly reconciled against the baseline.",
+                      "status": "met",
+                      "explanation": "The actual reconstruction audit accounts for all 778numbered PDF lines, 95headings, 18tables with every extracted line retained, 6numbered equations, 12references, and 17algorithmsteps. Numbered equations were visually compared to original pages; 44inline-math lines, table-cell typesetting, reference metadata, and line-wrap ambiguities are explicitly reconciled to baseline page/text/hash and assigned existing bounded follow-ups. This uses the criterion\u2019s explicit-reconciliation option; it does not assert exact original LaTeX or complete visual fidelity.",
+                      "evidence": [
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/main.tex",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/references.bib",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/reconstruction_discrepancies.json",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-reconstruction-check.log",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-equation-visual-check.json"
+                      ]
+                    },
+                    {
+                      "criterion": "A source-origin record distinguishes original recovery from reconstruction and lists unresolved author-owned material.",
+                      "status": "met",
+                      "explanation": "The source-origin record identifies PDF-derived reconstruction, records original PDF/extraction/template hashes and assistant/tooling assistance, distinguishes new uncommitted derivatives from original author sources, and lists author-owned source access and metadata uncertainties.",
+                      "evidence": [
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/source_recovery.md",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/reconstruction_discrepancies.json",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/source_inputs.json"
+                      ]
+                    },
+                    {
+                      "criterion": "Overleaf source provenance and project-to-paper identity are verified if accessible; otherwise access remains explicitly unresolved and reconstruction proceeds without blocking protocol/code work.",
+                      "status": "met",
+                      "explanation": "Original Overleaf access remains explicitly unresolved: prior authorized retrieval returned HTTP 403, no source was downloaded, and paper membership is unverified. The alternative specified in the criterion was followed: reconstruction proceeds independently without claiming recovered source provenance or blocking protocol/code tasks.",
+                      "evidence": [
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/source_recovery.md",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/reconstruction_discrepancies.json",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/source_inputs.json"
+                      ]
+                    },
+                    {
+                      "criterion": "Manuscript-specific source recovery is distinguished from the now-available local research template and checklist; reconstruction uses the local research shell without modifying shared inputs.",
+                      "status": "met",
+                      "explanation": "The canonical source uses an unchanged copy of the supplied research workshop style, with its official anonymous author block. The original PDF, template, style, and checklist input hashes were checked unchanged. Official checklist.tex is copied unchanged and unanswered; its draftplaceholder is explicitly reconciled to later NS-024 work. No competition or generic style substitution was made.",
+                      "evidence": [
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/BUILD.md",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/source_recovery.md",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/audit/NS-001-reconstruction-check.log",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/inputs/neurips_2026_vericode_workshop.tex",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/neurips_2026_vericode.sty",
+                        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-001/manuscript/checklist.tex"
+                      ]
+                    }
+                  ]
+                },
+                "recorded_at": "2026-09-11T16:21:30Z",
+                "revision": 0
+              }
+            },
+            "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+            "provider_invoked": false,
+            "benchmark_result_claimed": false,
+            "completed_at": "2026-09-11T16:21:31.042831+00:00",
+            "scope": "source recovery and explicitly reconciled reconstruction only"
+          }
+        },
+        {
+          "kind": "requeue_after_route_repair",
+          "task_id": "NS-002",
+          "revision": 5,
+          "receipt": {
+            "operation": "paper_explicit_provider_pin_repair",
+            "audit_sha256": "75bf1e65adc9b2c53f39b8b1758a6a35e97c831ed6aa0c9e41dcc3750fca776c",
+            "prior_failure_receipt_sha256": "4a88d4d534fc049d6f3cde53966eaa4b7568616b482d926a3277ec62d3e5c19a",
+            "prior_attempt_id": "attempt:caa4bc33e41a48e6b33d898dad731eed",
+            "provider": "grok",
+            "configuration_sha256": "5415ac2cc8bf75d5626e114812814ef97217b71deb69031e6303bf29808406d1",
+            "reason": "supported_explicit_grok_route_qualified_without_provider_call",
+            "requeued_at": "2026-09-11T16:21:31.248152+00:00",
+            "old_attempt_history_preserved": true,
+            "provider_invoked": false
+          }
+        }
+      ],
+      "success": true,
+      "maintenance_owner_process": {
+        "pid": 2436968,
+        "birth": "55338924",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "log": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/source-checkpoint-maintenance-owner/owner.log",
+        "argv": [
+          "/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python",
+          "/home/barberb/lift_coding/scripts/paper_state_owner.py",
+          "--database",
+          "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/control.duckdb",
+          "--state-dir",
+          "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/source-checkpoint-maintenance-owner",
+          "--store-id",
+          "vericodegen-2026-neurosymbolic_supervision",
+          "--secret-handle",
+          "handle:vericodegen-2026:neurosymbolic_supervision:source-checkpoint-maintenance"
+        ]
+      },
+      "owner_identity": {
+        "contract_version": 1,
+        "credential_generation": 1,
+        "database_uuid": "17351fb0-0d3b-4069-a697-51f09ecf0a99",
+        "extension_fingerprint": "sha256:b77954ae50ecc06e10c6e20fc6fd421d73b5c31cf72bb60ae3f29b1f8a85f20b",
+        "fence_epoch": 5,
+        "generation": 5,
+        "interface": "StateServerIdentity@1",
+        "listen_uri": "quack:127.0.0.1:34349",
+        "process_birth": {
+          "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+          "parent_pid": 2375378,
+          "pid": 2436968,
+          "start_time_ticks": 55338924
+        },
+        "process_birth_id": "birth:7769c3240e07eab9520b00f9ac38b13d",
+        "repository_id": "repository:vericodegen-2026-neurosymbolic_supervision",
+        "revision": 0,
+        "schema": "ipfs_accelerate_py/agent-supervisor/state-server-identity@1",
+        "schema_fingerprint": "sha256:3ea5f70cebacfe748017c9540bf87016075443f4ccc33376ec0a179ed576e190",
+        "schema_revision": 1,
+        "secret_handle": "handle:vericodegen-2026:neurosymbolic_supervision:source-checkpoint-maintenance",
+        "server_id": "server:2f92c224-62a6-4d4f-9da6-21de078134a6",
+        "started_at": "2026-09-11T16:21:23Z",
+        "startup_epoch": 1789143683,
+        "status": "ready",
+        "store_id": "vericodegen-2026-neurosymbolic_supervision"
+      },
+      "final_tasks": [
+        {
+          "task_alias": "NS-001",
+          "task_cid": "baguqeerauj4ylyfvkbx7zjedjjb6ozomofgvn4tyw7zmpm3vp2qelrkmxwaa",
+          "status": "completed",
+          "revision": 8
+        },
+        {
+          "task_alias": "NS-002",
+          "task_cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+          "status": "ready",
+          "revision": 5
+        },
+        {
+          "task_alias": "NS-003",
+          "task_cid": "baguqeeralbsv5253fgirj64pemzp6fjkc2ivcjjjz2vylzi2ohxm765imfha",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-004",
+          "task_cid": "baguqeerasgyig3s3bpmq2xqcjqbyvla7xavw5f357uehxdhxbzc7tdtfsffa",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-005",
+          "task_cid": "baguqeerav7gaviq33pmxnnazggwzu2zcnxilcbp3b6zjxc4abfl6nxczxknq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-006",
+          "task_cid": "baguqeeraay5z4yt524xbc6w3ixo5hbqse775vgjnwbwwfd2pi7aonbvp27za",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-007",
+          "task_cid": "baguqeerameq52fwdfqetcd2odgwourjn4gzhurddwntx2ojhiqtcceoumx3q",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-008",
+          "task_cid": "baguqeeracllsccqfu2dtqkla5mpvo47xhq3grf5gi5mlfa5g6dqm7hmwf3ja",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-009",
+          "task_cid": "baguqeeranuvqo3wppkyxrsbxzkqxm37b5j6xjiqdfegsqc5wlephkzcg4tbq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-010",
+          "task_cid": "baguqeeraxkxmw2mfui3sqa7jtwojdnxubjnchbg4pdy6yxacjycualh7lrla",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-011",
+          "task_cid": "baguqeeravxh7tzskbol27nv2lumwxonzkl6mmhc3pmu24anpd63zfzktpopa",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-012",
+          "task_cid": "baguqeeratvp7364bkn7ifddzv5gktwg4276t7odp72mhe6z2hc6asuluwota",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-013",
+          "task_cid": "baguqeeraohkkpm7gw5xxoks3hgv4yfvsffcqvmosan4tvkjd4khpfidoyrna",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-014",
+          "task_cid": "baguqeerayjpz7p662tvs6bavpejq6fw4tdj2c2v3m6kc7wgovdccn3yzglya",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-015",
+          "task_cid": "baguqeeraimo7bi2gyl5vw6cmcaxlge6rlrkq6n3756ggasvyx4msgbetyv5a",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-016",
+          "task_cid": "baguqeeraumwr2l6x7safw4yxtthtacesqluagswb6b36dzf6uiwc4alkeaqa",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-017",
+          "task_cid": "baguqeera3b47wxkqgasy6273yoviaonjttn3sv73hf3u3xvc5rkcskzondla",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-018",
+          "task_cid": "baguqeeraeunez23xtulwfv4khb3t6laal7kzycbunpn6ncog4vpdytvevapa",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-019",
+          "task_cid": "baguqeerago6nsmurnckvpgdhxejz5qnfzlpxswsfrhpqnflt333hmjtpwdaa",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-020",
+          "task_cid": "baguqeera4r2wwglfc6hr2sed2zmkog7jadkxfb6bavhn2vl4eak6pmni2czq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-021",
+          "task_cid": "baguqeera5gqehhp7h4edsgrjl4ecjbskufjxpd73l2dkb2h73bgbhajmyf5a",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-023",
+          "task_cid": "baguqeerarggv3po2fweo5l4ajjeu5y4ekrvnvgr55aey2osb3scvspqkffyq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-022",
+          "task_cid": "baguqeeratzwt25i3kkqqhgktuyfcdjxtcrxeosiqohqomqvzgxsfqidiamuq",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-024",
+          "task_cid": "baguqeeraqkivn2kb27scvzto6kd7nrgvaefyxfcuu6mzcoxnfvo5ivxp36ca",
+          "status": "ready",
+          "revision": 2
+        },
+        {
+          "task_alias": "NS-025",
+          "task_cid": "baguqeera5b3mlcrqr7qpaww2z5yhflahdebo36gscp5scmysbc4ngtzoh7pq",
+          "status": "ready",
+          "revision": 2
+        }
+      ],
+      "next_eligible_tasks": [
+        "NS-002"
+      ],
+      "finished_at": "2026-09-11T16:21:33.210055+00:00",
+      "cleanup_errors": []
+    }
+  ]
+}
