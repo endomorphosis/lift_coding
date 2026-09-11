@@ -13,18 +13,6 @@
     "natural_gold_admission": false,
     "semantic_claim_admission": false
   },
-  "partition_checkpoint": {
-    "access_scope": "Actual reconstructed Codex container private-tree exclusion plus actually invoked trusted role/hash/digest gate. Unknown and sealed-final roles fail closed. AF007/008 must integrate the gate and partition-specific access before any training/scoring; no current runner or public-network denial is claimed.",
-    "annotation": "AF005 owns independent candidate-blind annotation/adjudication.1913unique final candidates are not1913adjudicated units or measured outcomes.",
-    "boundary_report_sha256": "6621d44a2905f246a581ec4b766cd3cb527a5fc5aa5269babe880bf8a506aaa4",
-    "frozen_splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
-    "group_definition": "Whole CFR parts and MPEP chapters at their source editions; whole USC/guidance editions; transitive union of detected identity/derivative/exact/near-duplicate/paraphrase relationships.20operational source-family/time groups does not mean20publishers or statistically independent editions.",
-    "historical_status_resolution": "The immutable splits manifest retains its pre-qualification candidate status. This new attestation and split audit resolve that historical status without changing any split bytes, salt, membership, source export or counts.",
-    "scientific_review_sha256": "4508a8ed6d640210d033583f6d07c55d376d81317319e08488e2be57db9a9971",
-    "scope": "AF004 data-partition checkpoint only",
-    "source_commit": "70af4e50576ea005527bc1fa154d7164f0cffcca",
-    "status": "qualified"
-  },
   "proof_feedback": {
     "records": 0,
     "status": "pending_actual_checker_feedback_task"
@@ -112,7 +100,6 @@
     "status": "actually_executed_preseal_only",
     "vectors_exported_to_provider": false
   },
-  "status": "data_partition_checkpoint_qualified",
   "upstream_vector_exclusion": {
     "producer": "local-hashed-term-projection@1.0.0",
     "status": "excluded_from_semantic_embedding_and_teacher_claims",

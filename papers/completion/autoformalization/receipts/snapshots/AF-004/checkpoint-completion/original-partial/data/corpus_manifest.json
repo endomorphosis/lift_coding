@@ -20,18 +20,18 @@
         "2024-12-31": 175
       },
       "component_record_size_histogram": {
-        "10": 2,
-        "15": 1,
-        "1738": 1,
-        "25": 1,
-        "28": 1,
-        "29": 1,
         "3": 3,
         "4": 3,
         "5": 2,
         "6": 2,
         "7": 1,
-        "8": 2
+        "8": 2,
+        "10": 2,
+        "15": 1,
+        "25": 1,
+        "28": 1,
+        "29": 1,
+        "1738": 1
       },
       "exact_normalized_alias_records": 8,
       "natural_source_records": 1921,
@@ -68,8 +68,8 @@
         "2024-07-01": 15
       },
       "component_record_size_histogram": {
-        "11": 1,
-        "2": 2
+        "2": 2,
+        "11": 1
       },
       "exact_normalized_alias_records": 0,
       "natural_source_records": 15,
@@ -152,18 +152,6 @@
       "remediation": "Acquire retained execution traces tied to exact natural source and executable versions, rights and time provenance; generated traces remain their own derived-data population"
     }
   },
-  "partition_checkpoint": {
-    "access_scope": "Actual reconstructed Codex container private-tree exclusion plus actually invoked trusted role/hash/digest gate. Unknown and sealed-final roles fail closed. AF007/008 must integrate the gate and partition-specific access before any training/scoring; no current runner or public-network denial is claimed.",
-    "annotation": "AF005 owns independent candidate-blind annotation/adjudication.1913unique final candidates are not1913adjudicated units or measured outcomes.",
-    "boundary_report_sha256": "6621d44a2905f246a581ec4b766cd3cb527a5fc5aa5269babe880bf8a506aaa4",
-    "frozen_splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
-    "group_definition": "Whole CFR parts and MPEP chapters at their source editions; whole USC/guidance editions; transitive union of detected identity/derivative/exact/near-duplicate/paraphrase relationships.20operational source-family/time groups does not mean20publishers or statistically independent editions.",
-    "historical_status_resolution": "The immutable splits manifest retains its pre-qualification candidate status. This new attestation and split audit resolve that historical status without changing any split bytes, salt, membership, source export or counts.",
-    "scientific_review_sha256": "4508a8ed6d640210d033583f6d07c55d376d81317319e08488e2be57db9a9971",
-    "scope": "AF004 data-partition checkpoint only",
-    "source_commit": "70af4e50576ea005527bc1fa154d7164f0cffcca",
-    "status": "qualified"
-  },
   "population_limitations": {
     "development_domain": "CFR legal material only; no cross-domain training capability inferred",
     "fixed_one_shot_allocation": "The giant derivative-connected component remains whole, yielding 69 training / 15 selection / 38 canary versus 1913 unique final units. Do not rebalance or retry the salt after this result.",
@@ -184,5 +172,5 @@
       "sha256": "56b63af81a6fdfc5917005a5bf18de7252c4f8d9d334d414b74f9c3c6bbfb1c4"
     }
   ],
-  "status": "data_partition_checkpoint_qualified"
+  "status": "candidate_partitioned_pending_access_enforcement_and_independence_review"
 }

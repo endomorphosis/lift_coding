@@ -1,5 +1,8 @@
 {
-  "blockers_before_AF004_acceptance": [],
+  "blockers_before_AF004_acceptance": [
+    "Actual provider/harness mount and network isolation has not been exercised by this isolated candidate builder; owner-only files and a locked flag alone do not prove criterion3.",
+    "Operational part/chapter connected components require scientific review of macro-edition dependence before calling the frozen source-family/time heterogeneity floor satisfied."
+  ],
   "checks": {
     "all_records_accounted_for": true,
     "final_test_ge_100_natural_units": true,
@@ -8,38 +11,15 @@
     "four_nonempty_partitions": true,
     "holdout_paths_owner_only": true,
     "identity_exact_near_duplicate_and_cross_view_detected_edges_unsplit": true,
-    "independent_agent_contract_review": "qualified_operational_groups_with_macro_edition_limits",
     "prespecified_thresholds_unchanged": true,
     "same_user_host_access_security_boundary": false,
-    "scoped_provider_mount_deny_test": "passed_actual_reconstructed_Codex_filesystem_boundary",
-    "trusted_role_admission": "passed_actual_export_and_private_digest_negative_checks",
+    "scoped_provider_mount_deny_test": "pending_root_harness_enforcement",
     "whole_part_chapter_adjacent_sections_unsplit": true
   },
   "created_at": "2026-09-11T18:14:00.233621+00:00",
   "cross_partition_detected_graph_edges": 0,
   "dependency_boundary": "AF005independent annotation follows AF004. Pending annotation is not a circular prerequisite for completing the corpus task;100adjudicated semantic results remain unmeasured until that later work.",
   "detected_graph_edges_total": 1780,
-  "downstream_handoff": {
-    "AF005_annotation_and_preoutcome_sampling": [
-      "Freeze count-aware selection of at least100unique natural units spanning at least20operational groups before annotation selection or scored outputs. Include at least one selected unit per group; some groups cannot supply five unique units.",
-      "Freeze the estimand and source/group weights. Preserve selected eligibility/status denominators and domain/time coverage; do not assume the sampled subset retains all4macro-editions automatically.",
-      "Acquire real candidate-blind independent annotations, disagreement and adjudication records. Automatic teacher/IR values and rights reviews are not semantic gold."
-    ],
-    "AF007_AF008_runner_admission": [
-      "Keep all training, teacher fitting, model/hyperparameter selection, canary, retrieval and patch channels fail closed until role-specific frozen export checks and private heldout identity/content denial are wired and exercised. Unknown roles are denied; the private deny index never enters provider context.",
-      "Only a separately authorized sealed final harness may receive final material after checkpoint/configuration/patch lock. Preserve append-only raw results and prevent them feeding development.",
-      "The actual Codex filesystem probe establishes private-path exclusion for the reconstructed container. Grok was source-reviewed, not dynamically probed. Bridge networking remains enabled; neither internet retrieval nor pretraining contamination is excluded."
-    ],
-    "population_limits": [
-      "Development remains69training/15selection/38canary unique CFR units at2024-07-01; the final pool is1913units/20groups within4macro-editions. No unseen-edition, forward-temporal, broad cross-domain training or statistical independence claim.",
-      "Coding requirements/implementation and natural traces remain provenance-qualified acquisition obligations, not empirical zeros or deleted scope. Admit additional cohorts only through separately versioned pre-outcome decisions; preserve this salt and partition."
-    ],
-    "statistics": [
-      "Retain the preregistered95% source-family/time-group cluster bootstrap with10000resamples and separate seed summaries; disclose correlation across4macro-editions rather than implying20independently sampled corpora.",
-      "One final component contains1738of1921records. Deduplicate8aliases to1913units, freeze group/source weighting before outcomes, and do not let the giant component erase the20-group floor.",
-      "Any supplementary hierarchy-aware/macro-edition sensitivity analysis or estimand amendment must be declared before affected outcomes; no unsupported power or independent-edition uncertainty claims."
-    ]
-  },
   "downstream_unmet_prerequisites": [
     "Independent semantic annotation/adjudication remains AF005;100 independently adjudicated final units have not yet been claimed.",
     "Coding requirements, implementation and trace populations are inventoried but not qualified; their empirical rows remain pending."
@@ -163,20 +143,8 @@
     "started_at": "2026-09-11T17:58:59.155015+00:00",
     "tokens_covered": 4983704
   },
-  "partition_checkpoint": {
-    "access_scope": "Actual reconstructed Codex container private-tree exclusion plus actually invoked trusted role/hash/digest gate. Unknown and sealed-final roles fail closed. AF007/008 must integrate the gate and partition-specific access before any training/scoring; no current runner or public-network denial is claimed.",
-    "annotation": "AF005 owns independent candidate-blind annotation/adjudication.1913unique final candidates are not1913adjudicated units or measured outcomes.",
-    "boundary_report_sha256": "6621d44a2905f246a581ec4b766cd3cb527a5fc5aa5269babe880bf8a506aaa4",
-    "frozen_splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
-    "group_definition": "Whole CFR parts and MPEP chapters at their source editions; whole USC/guidance editions; transitive union of detected identity/derivative/exact/near-duplicate/paraphrase relationships.20operational source-family/time groups does not mean20publishers or statistically independent editions.",
-    "historical_status_resolution": "The immutable splits manifest retains its pre-qualification candidate status. This new attestation and split audit resolve that historical status without changing any split bytes, salt, membership, source export or counts.",
-    "scientific_review_sha256": "4508a8ed6d640210d033583f6d07c55d376d81317319e08488e2be57db9a9971",
-    "scope": "AF004 data-partition checkpoint only",
-    "source_commit": "70af4e50576ea005527bc1fa154d7164f0cffcca",
-    "status": "qualified"
-  },
   "public_data_contamination_limit": "This corpus is public and may exist in pretrained model data, host caches or public downloads. Secret assignment and scoped no-network mounts prevent declared workflow reads, not unknowable pretraining exposure. Development exports can permit complement inference if an actor independently obtains the full public corpus; no claim of cryptographic or adversarial secrecy is made.",
   "schema": "autoformalization-split-audit/v2",
   "semantic_or_benchmark_results_claimed": false,
-  "status": "data_partition_checkpoint_qualified"
+  "status": "candidate_partitioned_pending_access_enforcement_and_independence_review"
 }

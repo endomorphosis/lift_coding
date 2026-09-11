@@ -1,0 +1,141 @@
+{
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/build_lexical_graph.py": "3371d41f515bbc57e0b5334a009b9a74f4323726f707dfa03d82ae4e2e6a7936",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/candidate_verification.json": "8aacbdf627ef6b69b2baad831a7fb130a015711e2ab5990c87e11689c02498bd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/checkpoint-validation.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/checkpoint-validation.stdout.log": "ae0321c53f9d06f70e052510c8583a120462358e8dfff06a59331216bb679373",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/host-sentinel-proof.json": "81cc1060640b95110747e19242b491a694f68b67b5b673b1053a5b0352497f39",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/probe-receipt.json": "a395b64d80d78bad2ac38375cdb48b867b70c765c5ec02167935196d2adfd928",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/probe.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/probe.stdout.log": "fc39f2166d9625ef9478541cbd513e3b896722d61009870357957b9a14ca4e2a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/probe_command.py": "ac872945b914366f5dbf98c7f3e7ff93e9e59218fb0515dcbfe545fdfbb33ff6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/report.json": "6621d44a2905f246a581ec4b766cd3cb527a5fc5aa5269babe880bf8a506aaa4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/downstream-handoff.json": "d0bd81e1cfafab27240e4dd470b6718cb1454394ac8fb3c5d555433392afb777",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/original-partial/data/corpus_manifest.json": "52eef2182d4de20b43822694a03e55e12864d76ced6b5d8b0ef81221d0a89104",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/original-partial/data/splits.json": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/original-partial/data/teacher_manifest.json": "dcee7f2d3e74ce804a57978360047337353b2f958713ffe924f6ba9c9a8a0906",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/original-partial/evidence/split_audit.json": "cfce1dc56a4bca7cc7a84631f3e52e6509bc29a48da4afa3b7491e42980175b1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/preserved-partial-files.json": "06020ea0c3bd7dd7ef33e4e3c3a393395d248cfba69d6ab52498140ff6f5919f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/corpus_manifest.json": "ca410804725f7e323551082243cea3ca5e381bcdc87b0726a0dd6f5dcfbb5ed6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/splits.json": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/teacher_manifest.json": "90dab08c92142210e386f9c71343766eba42ca920e5db0318a015a44e8ae3fa4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/evidence/split_audit.json": "19a9a272511a4685b6950c119e580b7053e71dd7b59bfb6ef1fe3dd020174121",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualify_partition_checkpoint.py": "ad5d5d8783d8623e223fb20555352b98970feb783a7b240cea1fda5e2a77decd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/scientific-review/review.json": "4508a8ed6d640210d033583f6d07c55d376d81317319e08488e2be57db9a9971",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/scientific-review/review.md": "f8a5025bab62771b7da6cc93bd78e077cf2bcad6c9503d35efb090622f74907e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/stage_candidate.py": "300ffdbf32f23446342ccef69a15e962f44e3a4155a3e3f4147bf15d886d913e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/data_admission.py": "f1fa0421255b2bfccbf744fa608009c95a605a4b923bf5bd32e49266382d0890",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/final_handoff_privacy.log": "6dace5158ad5dc0359ad9294e8e82e23c3d68852b159b305afbc5674bfd9452d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/final_handoff_privacy_verification.json": "abdd793dd5f8efbfda1f94f5bc64a167c9059877f7798ba0b35f4b75a5b75a22",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/fixed_canary.sources.jsonl": "98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/grouping_plan.json": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/lexical_graph.log": "88936d42070e5717fb4e197a221c6b4d13afe04a4fbb0f8af72bd6f78c988f7c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/lexical_graph_audit.json": "3930e991375b6c9d42f6eeb2694441c22a267b4ebfdd83f6f07479dff005e4c4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/materialize_candidate.final.log": "5168a29b30b84d786048bcac7ac318bac591ddde7dcad1f4fc194389833b39a8",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/materialize_candidate.log": "7549f40fd4fde4a88c3a71413267db8fd94561b448c48a01496d3ac88da8b2e2",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/materialize_candidate.manifest_refinement.log": "5168a29b30b84d786048bcac7ac318bac591ddde7dcad1f4fc194389833b39a8",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/materialize_candidate.py": "6a4ec199e75027353843dc67cbf8601d4e0dc914d4b17bc6a4ef8fd6f5c0339b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/paraphrase_graph.attempt1.log": "4d5ae48a4bf9898cf36360648b2935c891f7450825790c961531538a1d703a7a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/paraphrase_graph.log": "d8d5e2acdf4128ae613e2fd06618d58418ee033e6e8dcd7aadb6c01609654597",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/paraphrase_graph_audit.json": "cb344117857eb98c385e70c54d865d22cac973ec283b4c8e917a89a30550cb24",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/patent-legal-corpus-86c77cb6.README.md": "39e2f77f9fb2d4e1d7ffc2056eb2ea0c6b345abeacc6b5d68a728b181e434246",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/patent-legal-corpus-86c77cb6.coverage.json": "56b63af81a6fdfc5917005a5bf18de7252c4f8d9d334d414b74f9c3c6bbfb1c4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/screen_paraphrases.py": "a3b11fb9a4df81cab24b272929431f195ad46d999630448c8e1414b21a74764b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/selection.sources.jsonl": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/source_unit_accounting_addendum.json": "ba202fb0b532ce573c3fbfe492302f34c1b518021c5d3e4ba3b18ee05cdf023a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/train.sources.jsonl": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/verify_candidate.final.log": "4a99c9877d2dde9d47233416f994646ac30e6825376c04af95503964d744a3fc",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/verify_candidate.log": "4a99c9877d2dde9d47233416f994646ac30e6825376c04af95503964d744a3fc",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/verify_candidate.py": "b2942e336551b8249c84c738fc3853f554006f86daef2be6a135281155717277",
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/verify_final_handoff.py": "7a5c1945d178b6715a949b71418863d1a1930495eef0eca4033525279baabc63"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualify_partition_checkpoint.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "finished_at": "2026-09-11T18:26:20.365498+00:00",
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/checkpoint-validation.stdout.log",
+      "scope": "Actual fresh trusted partition/role-admission/privacy validation against frozen artifacts and private commitments; verifies retained actual container evidence without rerunning Docker or invoking providers.",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualify_partition_checkpoint.py",
+      "started_at": "2026-09-11T18:26:19.501263+00:00"
+    }
+  ],
+  "completed_at": "2026-09-11T18:26:20.365498+00:00",
+  "completion_scope": "Versioned data-partition checkpoint only; does not complete empirical research, human annotation, runner wiring or any paper benchmark.",
+  "criteria": [
+    {
+      "criterion": "Counts and exclusions are reported per domain/source family/time group and split.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/corpus_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/splits.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/checkpoint-validation.stdout.log"
+      ],
+      "explanation": "Inventory accounts for2174observed legal/policy rows,131reserved exclusions,2043eligible records/2035distinct normalized units, exact grouped split counts,5excluded synthetic fixtures, and explicitly unqualified coding/trace populations. Final per-record membership stays private; public counts/commitments preserve source/time and group accounting.",
+      "status": "met"
+    },
+    {
+      "criterion": "Exact/near-duplicate, paraphrase, adjacent-section and cross-view leakage checks pass or excluded cases are documented.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/evidence/split_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/lexical_graph_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/paraphrase_graph_audit.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/scientific-review/review.json"
+      ],
+      "explanation": "Whole-part/chapter adjacency, identity/exact/source-hash links, all-pair five-token shingle screening and fixed full-text MiniLM window screening produce28transitive components with zero detected cross-split edges. Thresholds and one-shot salt were not retried;20final operational groups remain whole. Imperfect semantic recall and4macro-edition dependence are documented.",
+      "status": "met"
+    },
+    {
+      "criterion": "Final-test source IDs/labels cannot enter training, hyperparameter selection, canary tuning or patch generation.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/report.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/probe-receipt.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/probe.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/checkpoint-validation.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/data_admission.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/downstream-handoff.json"
+      ],
+      "explanation": "Actual reconstructed Codex container probe denies private research paths with positive workspace/toolchain controls. Actual trusted role-admission checks bind immutable split/export hashes and reject final identities/content (including renamed final records), selection-as-training, altered manifest hashes, patch and unsealed final roles. Private IDs/bodies are absent from staged provider artifacts. All future channels remain closed until AF007/008wiring; bridge/public/pretraining exposure is not claimed absent.",
+      "status": "met"
+    },
+    {
+      "criterion": "Dataset and vector/teacher manifests are content hashed and do not invent corpus counts or licenses.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/corpus_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/teacher_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/checkpoint-validation.stdout.log"
+      ],
+      "explanation": "Source/revision/license declarations and all four manifests are hash-bound. The pinned real MiniLM producer actually ran only a preseal grouping screen; its private vector commitment is retained. Hashed-term projections and mocks are excluded from semantic-teacher claims; independent gold, trained/proof targets and all research outcomes remain unmeasured in downstream tasks.",
+      "status": "met"
+    }
+  ],
+  "limitations": [
+    "No research evaluations, semantic adjudication, human review, trained-model fitting or final-test scoring performed.",
+    "20operational source-family/time groups are not20publishers or statistically independent macro-editions.",
+    "Future AF007/008runners and all data channels remain fail closed until explicitly wired and exercised; only locked authorized final harness may access final data.",
+    "Actual filesystem reconstruction qualifies Codex; Grok was not dynamically probed. Public bridge-network access and model pretraining exposure remain possible.",
+    "Coding/implementation/trace populations and100independently adjudicated final units remain explicit downstream obligations."
+  ],
+  "outputs": {
+    "papers/completion/autoformalization/data/corpus_manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/corpus_manifest.json",
+    "papers/completion/autoformalization/data/splits.json": "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/splits.json",
+    "papers/completion/autoformalization/data/teacher_manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/data/teacher_manifest.json",
+    "papers/completion/autoformalization/evidence/split_audit.json": "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/qualified-outputs/evidence/split_audit.json"
+  },
+  "schema": "paper-task-evidence/v1",
+  "source_versions": {
+    "actual_container_probe": "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/container-boundary/report.json",
+    "frozen_splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "grouping_plan_sha256": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa",
+    "independent_agent_review": "papers/completion/autoformalization/receipts/snapshots/AF-004/checkpoint-completion/scientific-review/review.json",
+    "integrated_partial_source_commit": "70af4e50576ea005527bc1fa154d7164f0cffcca",
+    "private_membership_commitment_sha256": "fd6f3bf368de242f7a6d21867695d4eb5c644bf09a4a7f82cf687a76fa2c9126",
+    "selected_encoder_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "upstream_dataset_revision": "86c77cb650d30ee366983d1b2e25cd85e8c22e34"
+  },
+  "status": "complete",
+  "task_id": "AF-004"
+}

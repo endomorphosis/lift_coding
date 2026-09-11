@@ -1,0 +1,40 @@
+{
+  "observed_at": "2026-09-11T18:17:20.772961+00:00",
+  "sentinel_paths": [
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/af004-v1/.container-boundary-sentinel-7abfeb49e355acbae0a21a95",
+    "/home/barberb/.af004-host-home-sentinel-7abfeb49e355acbae0a21a95"
+  ],
+  "sentinel_inodes": {
+    "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/autoformalization/af004-v1/.container-boundary-sentinel-7abfeb49e355acbae0a21a95": [
+      66306,
+      34390308
+    ],
+    "/home/barberb/.af004-host-home-sentinel-7abfeb49e355acbae0a21a95": [
+      66306,
+      2530342
+    ]
+  },
+  "facts": {
+    "private_sentinel": {
+      "exists_on_host": true,
+      "is_directory": false
+    },
+    "host_home_sentinel": {
+      "exists_on_host": true,
+      "is_directory": false
+    },
+    "private_research_root": {
+      "exists_on_host": true,
+      "is_directory": true
+    },
+    "private_raw_directory": {
+      "exists_on_host": true,
+      "is_directory": true
+    },
+    "private_lexical_membership": {
+      "exists_on_host": true,
+      "is_directory": false
+    }
+  },
+  "no_corpus_contents_read": true
+}
