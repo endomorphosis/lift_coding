@@ -1,0 +1,21 @@
+{
+  "schema": "vericodegen-lane-source-snapshot/v1",
+  "captured_at": "2026-09-11T15:02:49.889375+00:00",
+  "campaign_base": "9745577bda2428bb7153e0910a19037b494c6d6c",
+  "accelerate_base": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+  "tracked_dirty_paths": [
+    "ipfs_accelerate_py/agent_implementation_route.py",
+    "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py",
+    "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py",
+    "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py"
+  ],
+  "tracked_patch_sha256": "6a4913f2a0448532293895b301f7e0f768be504a5ba933b89bae275659cb35d3",
+  "quack_test_sha256": "41082187999e4a62f27c59f559b9f42b724a85227c0236b5b510ee826205e72d",
+  "dirty_path_sha256": {
+    "ipfs_accelerate_py/agent_implementation_route.py": "f99e5d1bd84bd886e35d64a9b082458863aea829b743bdb7746a47a12a23d0b5",
+    "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py": "40d1195cccf57da854072e0fe41bf087bb744b88eec56157979eb6a1f115d049",
+    "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py": "7fe6055fc60884149b4a43fe28543d62e90620dd942b569a748fa02be5a19ff1",
+    "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py": "371573eb906de095fc5d97c3008ebec0ed7663cab25ac0af4991cb7ea95b2533"
+  },
+  "root_index_sha256_before": "57fb070b931374128b1a30ae76bf63ca537560eaacde22e347a14bb002ce47a5"
+}

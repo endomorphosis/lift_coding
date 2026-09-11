@@ -1,0 +1,76 @@
+{
+  "schema": "vericodegen-lane-submodule-config/v1",
+  "created_at": "2026-09-11T15:07:51.886827+00:00",
+  "root_index_sha256_before": "57fb070b931374128b1a30ae76bf63ca537560eaacde22e347a14bb002ce47a5",
+  "common_config_sha256_before": "fbd44e3d59f607f824be206c4b798ba1739147b253775b885056191152cd2d8d",
+  "lanes": [
+    {
+      "paper_id": "autoformalization",
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+      "worktree_gitdir": "/home/barberb/lift_coding/.git/worktrees/vericodegen-autoformalization-2026",
+      "submodules": {
+        "external/ipfs_accelerate": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_accelerate",
+          "expected_pin": "14d988826326c060d98871e655c8125fc92e2d82",
+          "pin_present_in_local_source": true
+        },
+        "external/ipfs_datasets": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_datasets",
+          "expected_pin": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "pin_present_in_local_source": true
+        },
+        "external/ipfs_kit": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/external/ipfs_kit",
+          "expected_pin": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "pin_present_in_local_source": true
+        }
+      }
+    },
+    {
+      "paper_id": "law_to_action",
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026",
+      "worktree_gitdir": "/home/barberb/lift_coding/.git/worktrees/vericodegen-law_to_action-2026",
+      "submodules": {
+        "external/ipfs_accelerate": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/external/ipfs_accelerate",
+          "expected_pin": "d5eef39f0c98208fe4886efdf427dcabd2800379",
+          "pin_present_in_local_source": true
+        },
+        "external/ipfs_datasets": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/external/ipfs_datasets",
+          "expected_pin": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "pin_present_in_local_source": true
+        },
+        "external/ipfs_kit": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/external/ipfs_kit",
+          "expected_pin": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "pin_present_in_local_source": true
+        }
+      }
+    },
+    {
+      "paper_id": "neurosymbolic_supervision",
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+      "worktree_gitdir": "/home/barberb/lift_coding/.git/worktrees/vericodegen-neurosymbolic_supervision-2026",
+      "submodules": {
+        "external/ipfs_accelerate": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate",
+          "expected_pin": "1b6a63c63b40a0fe4329d9b50ccc0fd8af3157f4",
+          "pin_present_in_local_source": true
+        },
+        "external/ipfs_datasets": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_datasets",
+          "expected_pin": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+          "pin_present_in_local_source": true
+        },
+        "external/ipfs_kit": {
+          "url": "file:///home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_kit",
+          "expected_pin": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+          "pin_present_in_local_source": true
+        }
+      }
+    }
+  ],
+  "common_config_unchanged": true,
+  "root_index_unchanged": true
+}

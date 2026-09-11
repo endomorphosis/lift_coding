@@ -101,9 +101,10 @@ builder. It checks task and parent DAGs, goal membership, namespaces, outputs,
 reviewed acceptance criteria, template inputs, and isolated-worktree settings.
 It does not call a model, run a benchmark, or claim live provider readiness.
 The checked result is saved in [validation.json](validation.json).
-The 18 focused tests in `tests/test_paper_supervisors.py` cover evidence integrity,
-follow-up coverage, native lane isolation, launch preflight, duplicate lane
-locks, and termination using a dummy Python child. Run them with
+The focused tests in `tests/test_paper_supervisors.py` cover evidence integrity,
+follow-up coverage and isolated native database configuration. Additional
+materializer, Quack owner, campaign lifecycle and DuckLake integration suites
+exercise fresh temporary stores without running paper experiments. Run them with
 `python3 -m unittest discover -s tests -p test_paper_supervisors.py -v`.
 
 Use a committed integration checkout containing these inputs before live work:
@@ -113,35 +114,44 @@ this review. Commit only the reviewed campaign inputs in the integration
 checkout, or carry them to a dedicated integration branch through your normal
 Git workflow. Do not discard existing work to satisfy launch preflight.
 
-Start all three foreground supervisors with:
+The database campaign uses three dedicated DuckDB owners served over authenticated
+loopback Quack, three native implementation supervisors, and a genuine DuckLake
+catalog containing history fetched through Quack. Each paper has its own branch,
+checkout, database, worker directories and merge queue. The native supervisor
+performs task claims, implementation, validation and merges. The campaign process
+starts owners, checks real remote readiness, monitors children and projects history.
+A failed lane is reported; it is never silently reset or switched to another task
+authority. Native execution/coordination bookkeeping uses private local sidecars.
 
 ```bash
-python3 scripts/paper_supervisors.py run --paper all
+python3 scripts/paper_supervisor_campaign.py start
+python3 scripts/paper_supervisor_campaign.py status
+python3 scripts/paper_supervisor_campaign.py stop
 ```
 
-Or select one paper:
+`start` launches a detached controller. `serve` runs the same controller in the
+foreground. The older `paper_supervisors.py run --paper all` entry point delegates
+to this database campaign. `status` checks process birth identities and fetches
+current tasks/events through each actual Quack endpoint. Stopping the controller
+terminates only its owned supervisors and owners. It does not stop other campaigns.
+
+Integration branches are `agent/vericodegen-2026-<paper>`, in
+`.worktrees/vericodegen-<paper>-2026`. Runtime source pins and the verified TeX
+installation are recorded in [runtime_bootstrap/](runtime_bootstrap/).
+Workers can compile with the tested user-local command:
 
 ```bash
-python3 scripts/paper_supervisors.py run --paper autoformalization
-python3 scripts/paper_supervisors.py run --paper law_to_action
-python3 scripts/paper_supervisors.py run --paper neurosymbolic_supervision
+/home/barberb/.local/bin/vericodegen-latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-error main.tex
 ```
 
-The launcher imports the native supervisor; it is not a substitute scheduler.
-It leaves the existing provider/model configuration in effect, uses separate
-task prefixes and state/worker directories, and supplies all three submodule
-paths to native worktree initialization. A common merge queue coordinates
-changes to shared libraries. Lane locks prevent duplicate launches through this
-controller. Shared edits must still pass native validation and merge handling;
-parallelism does not guarantee conflict-free integration.
-
-State and logs default to
-`~/.local/state/ipfs_accelerate_py/vericodegen-2026/<paper>/` (or `$XDG_STATE_HOME`).
-Set `VERICODEGEN_STATE_ROOT` to choose another campaign location. Each lane logs
-to `supervisor.log`; native task state and events are under `state/`. The
-foreground launcher waits for the supervisors and handles interruption by
-terminating its owned native process trees. No background daemon was started by
-this preparation task.
+State defaults to `~/.local/state/ipfs_accelerate_py/vericodegen-2026/`;
+use `--state-root` for another location. The campaign files are `campaign.json`,
+`health.json`, `campaign.log`, `quack-snapshot.json`, and `ducklake-status.json`.
+Each paper has `owner.log`, `supervisor.log`, `control.duckdb`, and native worker
+state beneath `state/`. The owner alone opens its live control database file;
+inspect it through Quack. The opaque token handle is public; token files stay
+private and resolved credentials are scrubbed from provider environments.
+DuckLake lives under `ducklake/` and is a history projection, not task authority.
 
 Long training/benchmark jobs should checkpoint progress and publish heartbeat
 logs. A task attempt has a two-hour worker limit and three attempts; a genuinely
@@ -153,14 +163,17 @@ resources are occupied. Do not change any other paper's manuscript/results.
 
 ## Boards, follow-ups and completion evidence
 
-`tasks.json` is the reviewed seed. `paper.objectives.md` and `paper.todo.md` are
-the native runtime boards. `build` is a one-time renderer and refuses to
-overwrite an existing board, preserving status and follow-up work. Source PDFs,
-templates, reviews, seed manifests, configurations and the validation script are
-protected worker inputs. Extend native boards with unique same-paper IDs,
-explicit goal lineage/dependencies/outputs/validation and concrete acceptance
-criteria when further work is discovered. The root goal must account for those
-follow-ups too; a drained seed list alone is insufficient.
+`tasks.json`, `paper.objectives.md` and `paper.todo.md` are reviewed import
+sources. `materialize_paper_database.py` imports their complete native task and
+goal contracts into a new database once, verifies dependencies and readiness,
+and refuses to overwrite an existing store. Live statuses and discovered tasks
+belong in the native database. Private per-attempt Markdown projections used by
+the native execution bridge do not grant scheduling authority. Source PDFs,
+templates, reviews, seed manifests, configurations and validators are protected
+worker inputs. Register follow-ups through the native database API with unique
+same-paper IDs, explicit goal lineage, dependencies, outputs, validation and
+concrete acceptance criteria; preserve/export their evidence contracts for the
+receipt verifier. The root goal must account for those follow-ups too.
 
 Twelve implementation tasks declare narrow source-edit scopes through native
 `Allowed paths`; `Reuse candidates` is a discovery hint only. Additional source

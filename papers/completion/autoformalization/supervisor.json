@@ -25,6 +25,9 @@
   ],
   "implementation_timeout_seconds": 7200,
   "max_task_attempts": 3,
-  "runtime_authority": "explicit native legacy-markdown task source",
-  "refill_policy": "fixed reviewed board; split/discover follow-ups explicitly with lineage"
+  "runtime_authority": "native DatabaseTaskSource via dedicated loopback Quack owner; fail closed",
+  "refill_policy": "fixed reviewed board; split/discover follow-ups explicitly with lineage",
+  "history_projection": "DuckLake; non-authoritative snapshots fetched through Quack",
+  "runtime_launcher": "scripts/paper_supervisor_campaign.py",
+  "source_board_policy": "Markdown and JSON are reviewed import sources; runtime task changes belong to the database"
 }

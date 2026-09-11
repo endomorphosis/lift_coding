@@ -1,0 +1,27 @@
+{
+  "schema": "paper-database-daemon-smoke/v1",
+  "paper": "neurosymbolic_supervision",
+  "task_alias": "NS-001",
+  "initial_task_count": 25,
+  "claimed_task_count": 1,
+  "native_api": "DatabaseImplementationDaemon.claim_next",
+  "remote_authority": {
+    "task_status": "in_progress",
+    "revision_increment": 1,
+    "new_domain_events": 1,
+    "event_type": "intent.task_status_changed"
+  },
+  "sidecar_row_counts": {
+    "execution_attempts": 1,
+    "execution_events": 1,
+    "provider_invocations": 0,
+    "coordination_claims": 1,
+    "coordination_attempts": 1
+  },
+  "committed_phase": "claimed",
+  "provider_invocations": 0,
+  "markdown_unchanged": true,
+  "owned_owner_stopped": true,
+  "owned_listener_closed": true,
+  "owned_token_removed": true
+}

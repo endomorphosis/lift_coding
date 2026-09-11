@@ -2,13 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
-import fcntl
 import os
-import re
-import select
-import signal
-import subprocess
-import sys
 import json
 from pathlib import Path
 import tempfile
@@ -198,104 +192,18 @@ class PaperEvidenceTests(unittest.TestCase):
 
 
 class PaperLauncherTests(unittest.TestCase):
-    def test_dirty_or_untracked_inputs_start_no_children(self):
-        for status in (" M papers/completion/law_to_action/tasks.json\n",
-                       "?? papers/completion/law_to_action/paper.todo.md\n"):
-            with self.subTest(status=status), \
-                    patch.object(MODULE, "validate", return_value={}), \
-                    patch.object(MODULE.subprocess, "check_output", return_value=status), \
-                    patch.object(MODULE.subprocess, "Popen") as popen:
-                with self.assertRaisesRegex(ValueError, "commit the reviewed"):
-                    MODULE.run(list(MODULE.PAPERS))
-                popen.assert_not_called()
-
-    def test_native_lane_configs_are_isolated_with_one_shared_merge_queue(self):
+    def test_native_database_lane_configs_are_isolated(self):
         _, _, parse_args, make_config = MODULE.native_modules()
         with tempfile.TemporaryDirectory() as state, patch.dict(os.environ, {"VERICODEGEN_STATE_ROOT": state}):
             configs = [make_config(parse_args(MODULE.supervisor_argv(paper)), repo_root=MODULE.ROOT)
                        for paper in MODULE.PAPERS]
         for field in ("state_prefix", "task_prefix", "state_dir", "state_path", "worktree_root"):
             self.assertEqual(len({str(getattr(cfg, field)) for cfg in configs}), 3, field)
-        self.assertEqual(len({str(cfg.merge_queue_dir) for cfg in configs}), 1)
+        self.assertEqual(len({str(cfg.merge_queue_dir) for cfg in configs}), 3)
         self.assertTrue(all(cfg.implement and cfg.use_ephemeral_worktree for cfg in configs))
 
-    def test_duplicate_lane_rejects_all_children_and_releases_prior_locks(self):
-        with tempfile.TemporaryDirectory() as state:
-            root = Path(state)
-            occupied = root / "law_to_action" / "launcher.lock"
-            occupied.parent.mkdir()
-            with occupied.open("a") as lock, \
-                    patch.object(MODULE, "validate", return_value={}), \
-                    patch.object(MODULE, "state_root", return_value=root), \
-                    patch.object(MODULE.subprocess, "check_output", return_value=""), \
-                    patch.object(MODULE.subprocess, "Popen") as popen:
-                fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-                with self.assertRaisesRegex(RuntimeError, "already owns law_to_action"):
-                    MODULE.run(["autoformalization", "law_to_action"])
-                popen.assert_not_called()
-                with (root / "autoformalization" / "launcher.lock").open("a") as released:
-                    fcntl.flock(released.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-
-    def test_sigterm_stops_dummy_child_and_releases_lane_lock(self):
-        # Run an isolated launcher interpreter so the unittest process never
-        # changes signal disposition or risks signaling a provider process.
-        launcher_path = Path(MODULE.__file__).resolve()
-        with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            subprocess.run(["git", "init", "-q", str(root)], check=True)
-            wrapper = root / "dummy_launcher.py"
-            wrapper.write_text(
-                "import importlib.util, pathlib, sys\n"
-                f"spec = importlib.util.spec_from_file_location('launcher', {str(launcher_path)!r})\n"
-                "m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)\n"
-                "m.native_modules()  # imports cleanup helper; starts no supervisor\n"
-                f"m.ROOT = pathlib.Path({str(root)!r})\n"
-                f"m.state_root = lambda: pathlib.Path({str(root / 'state')!r})\n"
-                "m.validate = lambda paper: {}\n"
-                "m.command = lambda paper: [sys.executable, '-c', 'import time; time.sleep(120)']\n"
-                "try:\n"
-                "    m.run(['law_to_action'])\n"
-                "except KeyboardInterrupt:\n"
-                "    print('dummy launcher cleaned up', flush=True)\n"
-            )
-            # The wrapper is outside the preflight's papers/scripts scope.
-            proc = subprocess.Popen([sys.executable, str(wrapper)], cwd=root,
-                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-            child_pid = None
-            try:
-                startup = []
-                import time
-                deadline = time.monotonic() + 20
-                while time.monotonic() < deadline:
-                    ready, _, _ = select.select([proc.stdout], [], [], max(0, deadline - time.monotonic()))
-                    if not ready:
-                        break
-                    line = proc.stdout.readline()
-                    if not line:
-                        break
-                    startup.append(line)
-                    match = re.search(r"law_to_action: PID (\d+);", line)
-                    if match:
-                        child_pid = int(match.group(1))
-                        break
-                self.assertIsNotNone(child_pid, "dummy child did not start: " + "".join(startup))
-                proc.send_signal(signal.SIGTERM)
-                out, err = proc.communicate(timeout=20)
-                self.assertEqual(proc.returncode, 0, err)
-                self.assertIn("dummy launcher cleaned up", out)
-                with self.assertRaises(ProcessLookupError):
-                    os.kill(child_pid, 0)
-                with (root / "state/law_to_action/launcher.lock").open("a") as lock:
-                    fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-            finally:
-                if proc.poll() is None:
-                    proc.kill()
-                proc.communicate()
-                if child_pid is not None:
-                    try:
-                        os.killpg(child_pid, signal.SIGKILL)
-                    except ProcessLookupError:
-                        pass
+        self.assertTrue(all(cfg.database_program.authority_mode == "quack" for cfg in configs))
+        self.assertTrue(all(cfg.database_program.task_source_kind == "duckdb" for cfg in configs))
 
 
 if __name__ == "__main__":

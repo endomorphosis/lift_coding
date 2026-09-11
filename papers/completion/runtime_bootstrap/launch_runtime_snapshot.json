@@ -1,0 +1,34 @@
+{
+  "schema": "paper-launch-runtime-snapshot/v1",
+  "canonical_head": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+  "files": {
+    "ipfs_accelerate_py/agent_implementation_route.py": "f99e5d1bd84bd886e35d64a9b082458863aea829b743bdb7746a47a12a23d0b5",
+    "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py": "40d1195cccf57da854072e0fe41bf087bb744b88eec56157979eb6a1f115d049",
+    "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py": "7fe6055fc60884149b4a43fe28543d62e90620dd942b569a748fa02be5a19ff1",
+    "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py": "371573eb906de095fc5d97c3008ebec0ed7663cab25ac0af4991cb7ea95b2533",
+    "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py": "868699e6f2542cfc6b4e57c8e2d2020ef2c842e9f55ea4e68bf704ce30b9bccf",
+    "ipfs_accelerate_py/_hash_resources.py": "6037d8aa7d70f70deae36e26c45e08c90c617be558253d85004589463eea9420",
+    "ipfs_accelerate_py/agent_supervisor/runtime/hash_pressure.py": "63c6831518647017eb49c88693fe6bbf54ba8c586b9b9826356be4b099df817d",
+    "test/api/test_agent_supervisor_quack_session_sql.py": "41082187999e4a62f27c59f559b9f42b724a85227c0236b5b510ee826205e72d",
+    "test/api/test_agent_supervisor_quack_transport_native.py": "df424b358cb0885fbc1cb4c95d4a59c4ef17c16c2b587f6da2eb608fbda7fc5d",
+    "test/api/test_agent_supervisor_database_observation.py": "029bf65e5e1e4a1eb035bf26fbd5c837f330b4157bd696ec42ee8a4b0d6b9afa"
+  },
+  "notes": [
+    "Includes two preexisting untracked hash resource modules required by the dirty provider route.",
+    "Original canonical checkout and index are preserved."
+  ],
+  "lanes": {
+    "autoformalization": {
+      "accelerator_commit": "5b9f64f87d7082e842b7300772d06854d793ad7f",
+      "accelerator_tree": "d3a1a386608cc2351b4310c491f30d7da78c4628"
+    },
+    "law_to_action": {
+      "accelerator_commit": "545155ae0ccb9198327053a986fc9f69c60a1ec9",
+      "accelerator_tree": "d3a1a386608cc2351b4310c491f30d7da78c4628"
+    },
+    "neurosymbolic_supervision": {
+      "accelerator_commit": "7ec54cd4c26d81c91f01a6d223c6e3b387c7c433",
+      "accelerator_tree": "d3a1a386608cc2351b4310c491f30d7da78c4628"
+    }
+  }
+}

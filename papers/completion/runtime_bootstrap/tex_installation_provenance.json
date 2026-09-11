@@ -1,0 +1,15 @@
+{
+  "release": "v2026.09",
+  "published_at": "2026-09-01T07:33:30Z",
+  "download_url": "https://github.com/rstudio/tinytex-releases/releases/download/v2026.09/TinyTeX-1-linux-arm64-v2026.09.tar.xz",
+  "archive_sha256": "ef8eb34928ed5ea4a39dfd1b797c6cdac7db7c0b3d289727bea03f716d222086",
+  "github_asset_digest": "sha256:ef8eb34928ed5ea4a39dfd1b797c6cdac7db7c0b3d289727bea03f716d222086",
+  "archive_bytes": 53327772,
+  "installation_root": "/home/barberb/.local/share/vericodegen-texlive/.TinyTeX",
+  "bin_path": "/home/barberb/.local/bin",
+  "official_docs": [
+    "https://yihui.org/tinytex/",
+    "https://yihui.org/en/2026/03/tinytex-arm64/"
+  ],
+  "installer_note": "Archive extraction succeeded. Installer archive-retention move targeted the current archive directory and returned same-file error; documented tlmgr postactions were then run successfully to set sys_bin, xetex script, and command links."
+}
