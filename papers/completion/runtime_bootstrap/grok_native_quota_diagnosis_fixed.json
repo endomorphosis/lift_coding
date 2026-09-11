@@ -1,0 +1,153 @@
+{
+  "fallback_dispatched": false,
+  "finished_at": "2026-09-11T16:32:58.688192+00:00",
+  "implementation_dispatched": false,
+  "independent_verifier_confirmed": true,
+  "independent_verifier_return_type": "AgentImplementationQuotaEvidence",
+  "live_state_mutated": false,
+  "preflight_overflow": false,
+  "preflight_receipt": {
+    "evidence_overflow": false,
+    "evidence_sha256": "sha256:db48ec878426d72eedede180d6330516fec9bd09e7d68c73a4c5a06dec5f750c",
+    "evidence_size": 140,
+    "expires_at_ms": 1789144436143,
+    "failure_class": "hard_quota_exhausted",
+    "nonce": "d05ca85f6c1da20ff92889eda63418be3cbfb7ed42308c19cb9b9f94ef7f113f",
+    "observed_at_ms": 1789144376143,
+    "primary_dispatched": false,
+    "primary_model": "grok-4.6",
+    "primary_provider": "grok",
+    "probe_contract_id": "sha256:07538c08220ab4c06d65e47666f00b60adb43e0c746b5913d41ceebba904cd16",
+    "probe_returncode": 1,
+    "receipt_id": "sha256:3909970f3a6885b5b04d8bfed5bfa6efe7442e3f411d22e550315a3740ad12ab",
+    "schema": "ipfs_accelerate_py.agent_supervisor.grok-failure-receipt@4",
+    "source": "isolated_no_tools_pre_dispatch_probe"
+  },
+  "preflight_returncode": 1,
+  "probes_are_real": true,
+  "quota_high_decision": {
+    "authorized": true,
+    "evidence_id": "sha256:f1fdae7ff0d5ecfa534dfcc5235fc02bf14096c66dfb6bb70148c8d6c2cef60c",
+    "fallback_model": "gpt-5.6-terra",
+    "fallback_reasoning_effort": "high",
+    "reason_code": "quota_exhausted",
+    "verifier_status": "confirmed_quota"
+  },
+  "schema": "paper-grok-native-quota-diagnosis/v1",
+  "started_at": "2026-09-11T16:32:54.117508+00:00",
+  "verifier_observation": {
+    "files": [
+      {
+        "bytes": 8018,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/chat_history.jsonl",
+        "sha256": "4a7400f04760ef40dec4c5884f91fb1b967f57da9a2bb2b6fbeb61608885d1d1"
+      },
+      {
+        "bytes": 0,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/chat_history.jsonl.lock",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 479,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/events.jsonl",
+        "sha256": "97218b652c69302d4e320b4eae5103bb5bbbf8f148452201a086bb7c59f67d59"
+      },
+      {
+        "bytes": 509,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/prompt_context.json",
+        "sha256": "c49e98cc58d4084f7242620a9aa8d96efb1d4ae611501b83f625de10e18a5fdb"
+      },
+      {
+        "bytes": 106,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/rewind_points.jsonl",
+        "sha256": "2370c6da21d9a8962eb535750d54a429d30dfed3c0aa6582e0cfc279b90644f9"
+      },
+      {
+        "bytes": 0,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/rewind_points.jsonl.lock",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 1507,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/signals.json",
+        "sha256": "e4dc3a6390549893f40dd64a4a6c9d2b0725c83ee086c28f1c44839833f223d4"
+      },
+      {
+        "bytes": 882,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/summary.json",
+        "sha256": "76ad5b07bf0b7cf1dfc62e6a5e394e76ba981e5aca1ce2fe054842717d45b515"
+      },
+      {
+        "bytes": 0,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/summary.json.lock",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 5170,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/system_prompt.txt",
+        "sha256": "ebe469aeb8e18906cd8cc31f3beca49a1f2e2447c15dcfc9fc472ea2bb4a8d1c"
+      },
+      {
+        "bytes": 1,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/title_refresh_idx",
+        "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+      },
+      {
+        "bytes": 1193,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/updates.jsonl",
+        "sha256": "1626abcda10a71c7aa654934feade0c9986d6fb462b530471f664837fc1bb666"
+      },
+      {
+        "bytes": 0,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/updates.jsonl.lock",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 636,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/f56b888e-61e6-4485-99af-f0bb1bbc0abf/usage.json",
+        "sha256": "dc1dedca7fbc80d78cd84286dc08a7ed1d92194e8750e8b16708d48324baeace"
+      },
+      {
+        "bytes": 165,
+        "relative": "sessions/%2Ftmp%2Fasref-grok-quota-verifier-8fwx6qc3%2Fworkspace/prompt_history.jsonl",
+        "sha256": "649fb70ca2be7ddef2abb28b2a78d6b23eb1df8f960680c9aa3f29bc56314803"
+      },
+      {
+        "bytes": 36864,
+        "relative": "sessions/session_search.sqlite",
+        "sha256": "0eb193891338eeb8444fcd114bf6bdd0b522968feb8213432c8ecefa373eeab7"
+      }
+    ],
+    "native_validator_file": "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_implementation_route.py",
+    "session_id": "f56b888e-61e6-4485-99af-f0bb1bbc0abf",
+    "update_shapes": [
+      {
+        "keys": [
+          "method",
+          "params",
+          "timestamp"
+        ],
+        "type": null
+      },
+      {
+        "keys": [
+          "method",
+          "params",
+          "timestamp"
+        ],
+        "type": null
+      },
+      {
+        "keys": [
+          "method",
+          "params",
+          "timestamp"
+        ],
+        "type": null
+      }
+    ],
+    "validator_return_line": 3658,
+    "validator_returned_none": false,
+    "verifier_returncode": 1
+  }
+}
