@@ -132,7 +132,10 @@ def environment(repo):
                IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_PROVIDER="codex",
                IPFS_ACCELERATE_AGENT_CODEX_MODEL="gpt-5.6-terra",
                IPFS_ACCELERATE_AGENT_IMPLEMENTATION_FALLBACK_TRIGGER="primary_quota_exhausted",
-               IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT="high")
+               IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT="high",
+               # Retain one reusable idle checkout per paper. Native release
+               # prunes idle entries; active/recovery leases remain protected.
+               IPFS_ACCELERATE_AGENT_WORKTREE_POOL_MAX_ENTRIES="1")
     return env
 
 
