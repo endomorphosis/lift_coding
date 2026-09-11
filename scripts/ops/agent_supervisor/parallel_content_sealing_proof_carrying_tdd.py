@@ -2362,6 +2362,42 @@ def _resume_locked(
     )
 
 
+def _maintain_accepted_submodule_before_resume(
+    config_path: Path, *, board: Any, payload: Mapping[str, Any], paths: Mapping[str, Path]
+) -> Mapping[str, Any]:
+    """Self-repair accepted dependency checkout drift under the resume guard.
+
+    This never repairs a Git lock, changes the executing accelerator, or admits
+    task/callback results. The runtime helper creates its own fresh preflight and
+    allows only one clean, declared datasets/kit descendant gitlink mismatch.
+    """
+    _ensure_import_path()
+    from ipfs_accelerate_py.agent_supervisor.runtime.accepted_submodule_maintenance import (
+        maintain_accepted_configured_submodule,
+    )
+    from ipfs_accelerate_py.agent_supervisor.task_sources.duckdb_state import exclusive_file_lock
+
+    winner = _owner_recovery_lock(paths["owner"] / ".managed-owner-recovery.lock")
+    if not winner.acquire():
+        raise OperatorError("accepted dependency maintenance owner guard is contended")
+    try:
+        with exclusive_file_lock(paths["owner"] / "write-transaction.lock", timeout_seconds=30):
+            def guard() -> None:
+                current_board, current_payload = _load_board(config_path)
+                if (current_payload != payload or _runtime_paths(current_board) != paths or
+                    getattr(current_board, "configuration_root", None) != getattr(board, "configuration_root", None)):
+                    raise OperatorError("scheduler configuration changed during dependency maintenance")
+
+            guard()
+            return maintain_accepted_configured_submodule(
+                board,
+                archive_root=Path.home() / ".local/state/ipfs-taskboard-native-maintenance",
+                custody_guard=guard,
+            )
+    finally:
+        winner.release()
+
+
 def resume(
     config_path: Path,
     *,
@@ -2378,7 +2414,24 @@ def resume(
     if not monitor_seconds > 0:
         raise OperatorError("--monitor-seconds must be positive")
     board, payload = _load_board(config_path)
-    _configured_board_preflight(config_path)
+    maintenance_needed = False
+    try:
+        _configured_board_preflight(config_path)
+    except OperatorError as rejected_preflight:
+        # Pure assessment precedes even config-derived state directory creation.
+        # Only the exact admissible checkout mismatch reaches the native guards;
+        # the mutating helper independently repeats assessment under those guards.
+        try:
+            _ensure_import_path()
+            from ipfs_accelerate_py.agent_supervisor.runtime.accepted_submodule_maintenance import (
+                assess_accepted_configured_submodule,
+            )
+            assessment = assess_accepted_configured_submodule(board)
+            maintenance_needed = assessment.get("needed") is True
+            if not maintenance_needed:
+                raise rejected_preflight
+        except Exception:
+            raise rejected_preflight
     revalidated_board, revalidated_payload = _load_board(config_path)
     if (
         revalidated_payload != payload
@@ -2410,6 +2463,11 @@ def resume(
             ):
                 raise OperatorError(
                     "scheduler configuration changed before runtime resume"
+                )
+            if maintenance_needed:
+                _maintain_accepted_submodule_before_resume(
+                    config_path, board=revalidated_board, payload=revalidated_payload,
+                    paths=revalidated_paths,
                 )
             return _resume_locked(
                 config_path,
