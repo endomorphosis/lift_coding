@@ -28,7 +28,19 @@ def observe_lane(lane, *, now=None, stale_seconds=1800):
     """
     lane = Path(lane).resolve()
     clock = time.time() if now is None else float(now)
-    records, notices = [], []
+    records, notices, supervisors = [], [], []
+    for path in (lane / "state").glob("*_supervisor_status.json"):
+        try:
+            status = json.loads(path.read_text())
+            record = {key: status.get(key) for key in (
+                "status", "updated_at", "restart_count", "last_exit_code", "daemon_pid",
+                "daemon_pid_alive", "active_worker_count", "log_path")}
+            record["projection"] = str(path)
+            supervisors.append(record)
+            if status.get("status") in {"restarting", "failed", "error", "stalled"}:
+                notices.append({"reason": "native_supervisor_requires_attention", **record})
+        except (OSError, ValueError, TypeError):
+            notices.append({"reason": "supervisor_projection_unreadable", "projection": str(path)})
     paths = list((lane / "state").glob("*_database_portal_attempts/*/portal-task-state.json"))
     dated = []
     for path in paths:
@@ -46,7 +58,7 @@ def observe_lane(lane, *, now=None, stale_seconds=1800):
                 raise ValueError("worker state projection is not an object")
             record = {key: state.get(key) for key in (
                 "active_task_id", "active_phase", "heartbeat_at", "last_progress_at",
-                "active_phase_started_at", "implementation_in_progress",
+                "active_phase_started_at", "active_worktree_path", "active_branch", "implementation_in_progress",
                 "last_implementation_task_id", "last_implementation_returncode",
                 "last_validation_returncode", "last_merge_returncode", "last_merge_commit")}
             record["projection"] = str(path)
@@ -54,7 +66,7 @@ def observe_lane(lane, *, now=None, stale_seconds=1800):
             record["progress_age_seconds"] = _age(state.get("last_progress_at"), clock)
             active = bool(state.get("active_task_id"))
             record["active_projection"] = active
-            log_path = Path(str(state.get("last_implementation_log_path") or ""))
+            log_path = Path(str(state.get("active_log_path") or state.get("last_implementation_log_path") or ""))
             if log_path.is_absolute() and log_path.resolve().is_relative_to(lane) and log_path.is_file():
                 info = log_path.stat()
                 record.update(log_path=str(log_path), log_bytes=info.st_size,
@@ -67,5 +79,5 @@ def observe_lane(lane, *, now=None, stale_seconds=1800):
         except (OSError, ValueError, TypeError) as exc:
             notices.append({"reason": "worker_projection_unreadable", "projection": str(path), "error_type": type(exc).__name__})
     return {"observed_at": datetime.fromtimestamp(clock, timezone.utc).isoformat(),
-            "authoritative": False, "attempts": records, "notices": notices,
+            "authoritative": False, "supervisors": supervisors, "attempts": records, "notices": notices,
             "projection_count": len(paths), "projection_limit": 100}

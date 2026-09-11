@@ -1,0 +1,170 @@
+{
+  "schema": "vericodegen-first-launch/v1",
+  "observed_at": "2026-09-11T15:22:23.894730+00:00",
+  "campaign_started_at": "2026-09-11T15:19:01.863163+00:00",
+  "campaign_stopped_at": "2026-09-11T15:21:04.768130+00:00",
+  "failure": "DatabaseProgramConfigError: quack authority requires endpoint_secret_handle",
+  "failure_stage": "managed daemon configuration before database daemon open, claim, worktree, or provider",
+  "controller": {
+    "pid": 106363,
+    "recorded_birth": "54964829",
+    "matching_process_exists": false,
+    "state": null
+  },
+  "cleanup_errors": [],
+  "lanes": {
+    "autoformalization": {
+      "repo": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+      "owner": {
+        "pid": 123784,
+        "recorded_birth": "54966114",
+        "matching_process_exists": false,
+        "state": null
+      },
+      "supervisor": {
+        "pid": 169328,
+        "recorded_birth": "54969339",
+        "matching_process_exists": false,
+        "state": null
+      },
+      "owner_ready": false,
+      "owner_stopped": true,
+      "supervisor_status": "stopped",
+      "daemon_pid": null,
+      "owner_token_files_remaining": 0,
+      "owner_listener_closed": true,
+      "task_status_counts": {
+        "ready": 25
+      },
+      "domain_event_counts": {
+        "intent.goal_upserted": 8,
+        "intent.task_upserted": 25,
+        "intent.goal_edge_linked": 7,
+        "intent.objective_upserted": 9,
+        "intent.plan_upserted": 8
+      },
+      "remote_attempt_count": 0,
+      "domain_event_count": 57,
+      "execution_or_coordination_sidecars": [],
+      "worker_worktree_exists": false,
+      "startup_error_logs": [
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_implementation_daemon_20260911T151950Z.log",
+          "sha256": "834a04dd0b1bd10691e0ef69b5ba763e1236dcc1e0d936284260c67a2ceb56ca",
+          "missing_handle_error": true
+        },
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/state/paper_autoformalization_implementation_daemon_20260911T152024Z.log",
+          "sha256": "834a04dd0b1bd10691e0ef69b5ba763e1236dcc1e0d936284260c67a2ceb56ca",
+          "missing_handle_error": true
+        }
+      ],
+      "bootstrap_event_watermark": 57,
+      "unchanged_task_event_count": true
+    },
+    "law_to_action": {
+      "repo": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026",
+      "owner": {
+        "pid": 151655,
+        "recorded_birth": "54967434",
+        "matching_process_exists": false,
+        "state": null
+      },
+      "supervisor": {
+        "pid": 169329,
+        "recorded_birth": "54969340",
+        "matching_process_exists": false,
+        "state": null
+      },
+      "owner_ready": false,
+      "owner_stopped": true,
+      "supervisor_status": "stopped",
+      "daemon_pid": null,
+      "owner_token_files_remaining": 0,
+      "owner_listener_closed": true,
+      "task_status_counts": {
+        "ready": 25
+      },
+      "domain_event_counts": {
+        "intent.task_upserted": 25,
+        "intent.objective_upserted": 10,
+        "intent.plan_upserted": 9,
+        "intent.goal_upserted": 9,
+        "intent.goal_edge_linked": 8
+      },
+      "remote_attempt_count": 0,
+      "domain_event_count": 61,
+      "execution_or_coordination_sidecars": [],
+      "worker_worktree_exists": false,
+      "startup_error_logs": [
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_implementation_daemon_20260911T151950Z.log",
+          "sha256": "9c9501e15c7de01fe1418d3df54c05597a7aea08d6395534f85658062e4a7013",
+          "missing_handle_error": true
+        },
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/state/paper_law_to_action_implementation_daemon_20260911T152024Z.log",
+          "sha256": "9c9501e15c7de01fe1418d3df54c05597a7aea08d6395534f85658062e4a7013",
+          "missing_handle_error": true
+        }
+      ],
+      "bootstrap_event_watermark": 61,
+      "unchanged_task_event_count": true
+    },
+    "neurosymbolic_supervision": {
+      "repo": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026",
+      "owner": {
+        "pid": 158380,
+        "recorded_birth": "54968687",
+        "matching_process_exists": false,
+        "state": null
+      },
+      "supervisor": {
+        "pid": 169332,
+        "recorded_birth": "54969340",
+        "matching_process_exists": false,
+        "state": null
+      },
+      "owner_ready": false,
+      "owner_stopped": true,
+      "supervisor_status": "stopped",
+      "daemon_pid": null,
+      "owner_token_files_remaining": 0,
+      "owner_listener_closed": true,
+      "task_status_counts": {
+        "ready": 25
+      },
+      "domain_event_counts": {
+        "intent.objective_upserted": 9,
+        "intent.plan_upserted": 8,
+        "intent.task_upserted": 25,
+        "intent.goal_edge_linked": 7,
+        "intent.goal_upserted": 8
+      },
+      "remote_attempt_count": 0,
+      "domain_event_count": 57,
+      "execution_or_coordination_sidecars": [],
+      "worker_worktree_exists": false,
+      "startup_error_logs": [
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_implementation_daemon_20260911T151950Z.log",
+          "sha256": "df0b7bf31e2375a14b1373f245540be2bf2522c08b771a0c8802aa92f242ea88",
+          "missing_handle_error": true
+        },
+        {
+          "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/state/paper_neurosymbolic_supervision_implementation_daemon_20260911T152024Z.log",
+          "sha256": "df0b7bf31e2375a14b1373f245540be2bf2522c08b771a0c8802aa92f242ea88",
+          "missing_handle_error": true
+        }
+      ],
+      "bootstrap_event_watermark": 57,
+      "unchanged_task_event_count": true
+    }
+  },
+  "owned_processes_verified_gone": 6,
+  "unchanged_ready_tasks": 75,
+  "task_claims": 0,
+  "provider_invocations": 0,
+  "existing_stores_preserved": true,
+  "live_database_mutations_performed_by_observer": 0
+}
