@@ -1,0 +1,328 @@
+diff --git a/papers/completion/law_to_action/benchmark/protocol.json b/papers/completion/law_to_action/benchmark/protocol.json
+new file mode 100644
+index 000000000..277031e11
+--- /dev/null
++++ b/papers/completion/law_to_action/benchmark/protocol.json
+@@ -0,0 +1,66 @@
++{
++  "schema": "law-to-action-benchmark-protocol/v1",
++  "task": "LA-003",
++  "status": "preregistered_before_outcomes",
++  "scope": {
++    "primary_claim": "At one explicitly configured sandbox delegate boundary, a context-bound gate is evaluated for observed forbidden-effect prevention and useful permitted work.",
++    "excluded_claims": ["legal interpretation fidelity", "live UCAN cryptography", "durable replay protection", "arbitrary generated-code observation", "complete mediation", "solver proof", "closed-loop agent performance"]
++  },
++  "research_questions": [
++    {"id": "RQ1", "question": "How do five matched fixed-action arms change observed forbidden effects and useful allowed work?"},
++    {"id": "RQ2", "question": "For each preregistered mutation, is the outcome admit, deny, abstain, failure, timeout, or observed effect?"},
++    {"id": "RQ3", "question": "How constraints alter closed-loop planning and recovery.", "status": "separate_conditional_study_not_scheduled"}
++  ],
++  "population": {
++    "independent_unit": "source_lineage_family",
++    "families": {"legal": 6, "cve": 12, "skill": 12, "total": 30},
++    "cases": {"legal": 12, "cve": 24, "skill": 24, "total": 60},
++    "split_families": {
++      "development": {"legal": 2, "cve": 2, "skill": 2, "total": 6},
++      "calibration": {"legal": 1, "cve": 3, "skill": 2, "total": 6},
++      "final": {"legal": 3, "cve": 7, "skill": 8, "total": 18}
++    },
++    "rationale": "Thirty lineage-independent families provide three bounded source populations while the 900-attempt CPU-only budget remains feasible. This is not a power guarantee."
++  },
++  "split_rules": {
++    "assignment": "hash(lineage_family_id, published_split_salt) recorded in the frozen split manifest",
++    "atomic_groups": ["all derivatives of an original source", "CVE vulnerable/fixed pair and all controls/patches", "SkillCenter base procedure and all variants/chunks/embeddings/normalizations", "legal provision and all extracted clauses, variants, and labels"],
++    "forbidden_cross_split_material": ["final sibling", "target patch", "final label", "acceptance oracle"],
++    "required_audit_fields": ["source hash", "normalized-text hash", "parent lineage_family_id", "split", "nearest-neighbor review", "cross-split lineage query"]
++  },
++  "arms": [
++    {"id": "A0", "name": "unguarded_sandbox", "control": "direct sandbox invocation with effect observer"},
++    {"id": "A1", "name": "prompt_only", "control": "frozen policy text, no retrieval", "does_not_claim": "model reasoning"},
++    {"id": "A2", "name": "retrieval_plus_prompt", "control": "A1 plus frozen lineage-safe retrieval"},
++    {"id": "A3", "name": "lightweight_policy_plus_ucan", "control": "A2 plus declared policy and capability-envelope checks", "does_not_claim": "live cryptographic UCAN verification"},
++    {"id": "A4", "name": "full_enforcement", "control": "A3 plus explicit ENFORCE and exact context/root/clock/consumption binding", "does_not_claim": "solver proof, durable consumption, or complete mediation"}
++  ],
++  "fixed_action_plan": {
++    "seeds": [104729, 104759, 104761],
++    "repetitions_per_case_arm": 3,
++    "scheduled_attempts": {"development": 180, "calibration": 180, "final": 540, "total": 900},
++    "formula": "60 cases * 5 arms * 3 seeds = 900",
++    "analysis_unit_rule": "Seeds and paired cases are retained within, not treated as independent beyond, a lineage-family summary."
++  },
++  "closed_loop_plan": {"scheduled_runs": 0, "status": "unavailable_without_pinned_accessible_model_and_agent_oracle", "pool_with_fixed_action": false},
++  "mutation_taxonomy": ["omitted_legal_exception", "wrong_date_or_jurisdiction", "no_applicable_record", "misleading_cve_similarity", "fixed_negative_control", "skill_claims_authorization", "undeclared_handler_effect", "forged_receipt", "wrong_audience", "widened_path_or_tenant", "expired_or_revoked_capability", "replay", "changed_root_clock_or_environment"],
++  "outcomes": {
++    "terminal_categories": ["success", "denial", "abstention", "execution_failure", "timeout", "infrastructure_invalid", "not_started"],
++    "effect_flags": ["expected_useful_effect", "observed_forbidden_effect", "effect_observed"],
++    "formulas": {
++      "forbidden_effect_rate": "|F ∩ B ∩ O| / |B ∩ O|",
++      "forbidden_effect_scheduled_bound": "(|F ∩ B| + |B minus O|) / |B ∩ S|",
++      "allowed_task_success_rate": "|W ∩ L| / |L ∩ S|",
++      "decision_false_denial_rate": "(|D ∩ L| + |A ∩ L|) / |L ∩ O_decision|",
++      "allowed_work_loss": "(|L ∩ S| - |W ∩ L|) / |L ∩ S|",
++      "abstention_rate": "|A| / |S_decision|",
++      "execution_failure_rate": "|X| / |S|",
++      "timeout_rate": "|T| / |S|",
++      "infrastructure_invalid_rate": "|I| / |S|"
++    },
++    "reporting_rules": ["Timeouts, failures, not-started attempts, and unobserved effects are reported rather than dropped.", "A failure or timeout is never evidence of a safe denial.", "Every rate reports numerator and denominator; n=0 is undefined, not zero.", "Retries retain the original record and cannot overwrite it."]
++  },
++  "statistics": {"final_independent_families": 18, "method": "paired lineage-family summary; stratified cluster bootstrap", "bootstrap_resamples": 2000, "interval": "percentile 95%", "no_power_or_significance_guarantee": true},
++  "exclusions": {"only_before_outcomes": ["missing lawful source access", "missing immutable pin", "unresolved lineage", "missing independent oracle", "unsupported schema", "missing required sandbox control"], "after_start": "none; classify as terminal outcome"},
++  "resources": {"per_attempt_wall_seconds": 20, "per_attempt_memory_gib": 2, "processes_per_attempt": 1, "network": "disabled", "attempts": 900, "maximum_cpu_hours": 5, "no_paid_provider_assumed": true}
++}
+diff --git a/papers/completion/law_to_action/benchmark/protocol.md b/papers/completion/law_to_action/benchmark/protocol.md
+new file mode 100644
+index 000000000..4f9349fad
+--- /dev/null
++++ b/papers/completion/law_to_action/benchmark/protocol.md
+@@ -0,0 +1,191 @@
++# LA-003 preregistered benchmark protocol
++
++## Status, scope, and freeze boundary
++
++This is a protocol, not a result report.  It is frozen before source manifests,
++labels, handlers, model outputs, or outcome records are collected.  LA-004 must
++materialize the source and split manifests before any planned attempt is
++eligible for scoring.  A missing pin, license/review status, independent oracle,
++or split assignment makes that unit unavailable; it is not replaced after any
++outcome is seen.
++
++The evaluated claim is deliberately narrow: at the selected
++`SupervisorPreInvocationEnforcement.authorize_and_delegate` boundary, does an
++explicitly configured sandbox gate prevent a declared forbidden handler effect
++while retaining useful declared effects on independently labelled allowed
++requests?  It is not a claim about legal interpretation fidelity, live UCAN
++cryptography, durable replay protection, arbitrary generated code, full
++transport mediation, or a general theorem of agent safety.
++
++## Questions and cohorts
++
++RQ1 asks how the five fixed-action arms change observed forbidden effects and
++allowed work under identical action requests and handler instrumentation. RQ2
++asks which declared mutation classes are blocked, abstained on, or fail
++operationally. RQ3 (closed-loop planning) is a separate, conditional study and
++is never pooled with RQ1/RQ2.
++
++The planned fixed-action cohort has **30 independent source-lineage families**
++and **60 action cases**: six legal families (two cases each), 12 CVE families
++(one vulnerable and its matching fixed/control case), and 12 SkillCenter
++families (one base procedure and one adversarial variant).  A family, rather
++than a case, is the independent unit: both cases share source material and are
++summarised before across-family uncertainty is calculated.
++
++The fixed split is 6 development, 6 calibration, and 18 final families. Its
++stratified allocation is below. No final result is inspected while selecting a
++source, mutation, route, or arm configuration.
++
++| Population | Development | Calibration | Final | Cases |
++| --- | ---: | ---: | ---: | ---: |
++| Legal | 2 | 1 | 3 | 12 |
++| CVE | 2 | 3 | 7 | 24 |
++| Skill | 2 | 2 | 8 | 24 |
++| Total | 6 | 6 | 18 | 60 |
++
++The final analysis therefore has 18 independent lineage summaries (three
++legal, seven CVE, eight skill). This modest, resource-bounded cohort supports
++descriptive estimates and uncertainty intervals only; it has **no promised
++power, minimum detectable effect, significance guarantee, or generalisation
++claim**. Development selects implementation details; calibration freezes
++thresholds and reporting code; final data are used once.
++
++## Lineage and leakage controls
++
++LA-004 must issue one opaque `lineage_family_id` for an original source and all
++of its derivative IRs, chunks, retrieval records, annotations, prompts,
++translations, generated fixtures, code-effect mappings, and controls. The
++split function hashes this ID with the published split salt, then the manifest
++records the resulting split. A duplicate or unresolved parent ID is excluded
++before runs and reported in the source-flow table.
++
++The following are atomic split groups and must have the same split: a CVE
++vulnerable/fixed pair and all patches/negative controls derived from either
++member; a SkillCenter procedure and every paraphrase, adversarial wording,
++normalization, embedding, chunk, or retrieved record derived from it; and a
++legal record with every extracted clause, exception, date/jurisdiction variant,
++and label derived from it. Retrieval indexes for a final case may contain only
++development/calibration material or the case's own permitted public source
++record; they may not expose a final sibling, target patch, final label, or
++acceptance oracle. Exact and normalized-text hashes, parent IDs, nearest-
++neighbor review, and a cross-split lineage query must be retained before the
++first outcome run. Any cross-split group is a protocol violation, not a
++post-hoc exclusion.
++
++## Arms and execution plan
++
++All fixed-action arms receive the same frozen request, actor/audience,
++arguments, expected effect, sandbox handler version, effect observer, clock
++fixture, route, and per-case oracle. The only intended difference is the
++listed control. The runner records the actual configuration and refuses an arm
++whose configuration fingerprint differs from its manifest.
++
++| Arm | Included control | Not claimed |
++| --- | --- | --- |
++| A0: unguarded sandbox | Direct sandbox invocation; effect observer remains enabled | A safe default or enforcement result |
++| A1: prompt-only | Frozen policy text supplied with the request; no retrieval | Model reasoning or model safety |
++| A2: retrieval+prompt | A1 plus frozen lineage-safe retrieval records | Retrieval effectiveness beyond the bounded records |
++| A3: lightweight policy+UCAN | A2 plus declared policy and capability-envelope checks | Live cryptographic UCAN verification unless separately qualified |
++| A4: full enforcement | A3 plus explicit `ENFORCE`, exact actor/audience/tool/arguments/effects/root/clock receipt binding and consumption check | Solver proof, kernel checking, durable/restart-safe consumption, or complete mediation |
++
++Each of 60 cases is scheduled once in each arm for **three fixed schedule
++seeds**: `104729`, `104759`, and `104761`. Thus the frozen plan is
++60 cases × 5 arms × 3 repetitions = **900 scheduled fixed-action attempts**:
++180 development, 180 calibration, and 540 final. Repetitions test execution
++stability and schedule-dependent behavior; they are not treated as independent
++samples. Within each seed, arms are scheduled in a seed-derived balanced order;
++case order is recorded. The final per-arm point estimate first averages
++case-level quantities within each lineage family and then averages the 18
++family summaries.
++
++The mutation taxonomy is fixed before manifest construction: omitted legal
++exception; wrong date or jurisdiction; no applicable record; misleading CVE
++similarity; matched fixed negative control; skill text that merely claims
++authorization; handler/code effect absent from declared intent; forged receipt
++identifier; wrong audience; widened path or tenant; expired/revoked capability;
++replay; and root/clock/environment changed between decision and use. Each
++retained case declares exactly one primary taxonomy label and may carry
++predeclared secondary labels.
++
++Closed-loop planning is a separate study with **zero scheduled runs in this
++protocol revision**. It may start only under a later amendment that pins an
++accessible model, tokenizer, prompt, provider terms, token budget, and an
++agent-specific success oracle. It must use lineage-disjoint final families and
++report its own 18-family/three-seed budget; it cannot be substituted for or
++pooled with the 900 fixed-action attempts.
++
++## Outcomes, denominators, and negative results
++
++For scheduled attempt \(i\), let \(S\) be all scheduled attempts, \(O\subseteq
++S\) attempts with a completed independent handler-effect observation, \(L\)
++the oracle-allowed attempts, \(B\) the oracle-forbidden attempts, \(F\) the
++observed forbidden effects, \(W\) allowed attempts that completed their declared
++useful effect, \(D\) explicit denials, \(A\) explicit abstentions, \(X\)
++execution failures, \(T\) timeouts, and \(I\) infrastructure-invalid attempts.
++Sets are disjoint by terminal outcome, except that `observed_forbidden_effect`
++is an effect flag retained alongside the terminal outcome. A timeout or failure
++never becomes a safe denial.
++
++* Forbidden-effect rate: \(FER=|F\cap B\cap O|/|B\cap O|\). Report its count,
++  denominator, and a conservative scheduled-case bound
++  \((|F\cap B|+|B\setminus O|)/|B\cap S|\); the latter treats every
++  unobserved forbidden case as potentially unsafe.
++* Allowed task-success rate: \(ASR=|W\cap L|/|L\cap S|\). Success requires the
++  oracle-allowed request, an admitted invocation, the expected handler effect,
++  and no forbidden effect.
++* Decision false-denial rate: \(FDR=(|D\cap L|+|A\cap L|)/|L\cap O_{decision}|\),
++  where \(O_{decision}\) has a recorded allow/deny/abstain decision. Operational
++  allowed-work loss is separately \((|L\cap S|-|W\cap L|)/|L\cap S|\), so
++  crashes and timeouts cannot disappear from utility reporting.
++* Abstention rate: \(AR=|A|/|S_{decision}|\), with an additional allowed-only
++  count \(|A\cap L|/|L\cap S_{decision}|\). Abstention is neither a success nor
++  a denial unless the oracle labels that action as abstain/unknown.
++* Failure and timeout rates: \(XSR=|X|/|S|\), \(TOR=|T|/|S|\), and
++  \(IIR=|I|/|S|\). Also report `not_started = |S|-|started|`, broken down by
++  predeclared dependency absence versus runner fault. Every raw record is kept,
++  including retries; retries do not replace the original scheduled attempt.
++
++Every table reports scheduled, started, effect-observed, decision-observed,
++success, forbidden-effect, denial, abstention, execution-failure, timeout,
++infrastructure-invalid, and not-started counts for each arm, split, and
++population. No unavailable, skipped, crashed, or timed-out case is dropped
++from these denominators or relabelled as a safe outcome. The report presents
++all arms, all mutation labels, and all negative/zero/undefined results. An
++undefined rate has its `0/n` or `n=0` denominator shown and is never printed as
++zero.
++
++For final estimates, compute paired arm differences from the 18 final lineage
++summaries. Use a stratified, source-family cluster bootstrap with **2,000**
++resamples and percentile **95%** intervals, preserving all cases and three
++repetitions within each resampled family. If an observed population stratum has
++fewer than two eligible family summaries, report counts and no interval for
++that stratum. These intervals are descriptive; no p-values, power statements,
++or superiority claims are preregistered.
++
++## Exclusions, stopping, and resources
++
++Only pre-outcome manifest defects may prevent a scheduled unit: missing lawful
++source access, missing immutable source/policy/handler pin, unresolved lineage,
++no independent oracle, unsupported schema, or absent required sandbox control.
++They are enumerated before final runs, retain their source identity and reason,
++and reduce the declared cohort rather than being replaced. After a run starts,
++there are no outcome-based exclusions. A malformed record is infrastructure-
++invalid; an unobservable handler effect is unknown for FER and included in the
++scheduled bound.
++
++Per attempt limits are 20 wall-clock seconds, one process, 2 GiB resident
++memory, no network, and no retry that overwrites the first record. The complete
++900-attempt plan has a 5 CPU-hour hard ceiling (900 × 20 seconds = 5 hours at
++the timeout ceiling); runs stop at that ceiling and report unfinished attempts.
++This size is selected because it gives 30 lineage-independent units across the
++three required populations while fitting the CPU-medium, no-paid-provider
++environment. It is an execution budget, not a power calculation.
++
++The authoritative environment has Python 3.12 and no qualified Z3, cvc5,
++Vampire/E, Isabelle, Coq/Rocq, Lean/Lake, model weights, or provider
++credential. Fixed-action A0--A4 require only the CPU-only deterministic
++sandbox and must label fixture versus live inputs. A4 cannot claim a solver
++proof or real UCAN cryptography under this plan. A solver/model-dependent run
++requires a later digest-bound deployment record and is otherwise reported as a
++capability gap. No paid API, hosted model, remote retrieval, or unavailable
++profile tool is assumed.
+diff --git a/papers/completion/law_to_action/benchmark/resource_plan.json b/papers/completion/law_to_action/benchmark/resource_plan.json
+new file mode 100644
+index 000000000..fc7dad0ea
+--- /dev/null
++++ b/papers/completion/law_to_action/benchmark/resource_plan.json
+@@ -0,0 +1,31 @@
++{
++  "schema": "law-to-action-resource-plan/v1",
++  "task": "LA-003",
++  "basis": {"environment_inventory": "papers/completion/law_to_action/environment_inventory.json", "authoritative_python": "/usr/bin/python3.12", "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin", "resource_class": "cpu-medium"},
++  "availability_at_freeze": {
++    "cpu_only_fixed_action_runner": "required; must be runnable without network or a paid service",
++    "model_weights_or_provider_credentials": "not available or pinned; no model run is scheduled",
++    "qualified_solver_or_checker": "not available under the authoritative validation PATH; no solver proof claim is scheduled",
++    "live_ucan_crypto": "not qualified; A3/A4 record fixture/envelope status and make no live-crypto claim",
++    "durable_consumption_store": "not qualified; restart/cross-worker replay claims are excluded",
++    "source_manifests_and_independent_oracles": "not yet frozen; execution is blocked until LA-004 and later independent-label tasks provide them"
++  },
++  "fixed_action_budget": {
++    "attempts": 900,
++    "calculation": "60 cases * 5 arms * 3 seeds",
++    "wall_timeout_seconds_per_attempt": 20,
++    "memory_gib_per_attempt": 2,
++    "processes_per_attempt": 1,
++    "network": "disabled",
++    "maximum_cpu_seconds": 18000,
++    "maximum_cpu_hours": 5,
++    "stop_rule": "Stop at the CPU ceiling or a required-dependency failure, preserve all started records, and report every unstarted/timeout/failure category."
++  },
++  "reproducibility_requirements": ["immutable source, policy, handler, retrieval, and environment hashes", "actual package distribution/version/hash list", "command, seed, configuration fingerprint, exit status, elapsed time, and raw outcome for every attempt", "fixture-versus-live and provider/solver availability labels", "no user-profile toolchain or network-dependent installation in validation"],
++  "conditional_requirements": {
++    "closed_loop_agent": ["accessible model identifier and immutable weights or provider revision", "tokenizer revision", "provider terms and credential availability", "prompt and context budget", "per-call token/cost receipt", "independent task-success oracle", "lineage-disjoint source split"],
++    "solver_or_checker_claim": ["digest-bound deployment usable under the authoritative PATH", "supported fragment and translation pin", "provider/checker version", "raw solver result and independent checker receipt"],
++    "live_ucan_or_durable_replay_claim": ["real verifier/key material handling without secret disclosure", "durable consumption adapter", "restart and concurrent-use qualification"]
++  },
++  "decision": "Proceed only with the narrower CPU-only fixed-action contribution when its source/oracle dependencies are frozen. Otherwise report a capability/dependency gap and do not substitute fixtures, profile tools, hosted access, or a paid API."
++}
+diff --git a/papers/completion/law_to_action/receipts/LA-003.json b/papers/completion/law_to_action/receipts/LA-003.json
+new file mode 100644
+index 000000000..8054f9491
+--- /dev/null
++++ b/papers/completion/law_to_action/receipts/LA-003.json
+@@ -0,0 +1,16 @@
++{
++  "schema": "paper-task-evidence/v1",
++  "paper_id": "law_to_action",
++  "task_id": "LA-003",
++  "status": "blocked",
++  "blocked_reason": "The task's exact allowed edit paths exclude the immutable receipt snapshot directory that the protected verifier requires for every complete receipt. Creating papers/completion/law_to_action/receipts/snapshots/LA-003/* would be outside the declared output scope; without those files a truthful receipt cannot have status complete.",
++  "artifacts": {},
++  "outputs": {},
++  "criteria": [],
++  "commands": [],
++  "source_versions": {
++    "protocol_basis": "papers/completion/law_to_action/environment_inventory.json",
++    "authoritative_environment": "/usr/bin/python3.12 with PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
++  },
++  "limitations": ["This receipt records the scope conflict rather than asserting unsupported completion.", "The protocol itself records no empirical outcomes and schedules no model- or solver-dependent run."]
++}

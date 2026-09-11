@@ -1,0 +1,20 @@
+{
+  "schema": "paper-resource-protocol-correction-audit/v1",
+  "corrected_at": "2026-09-11T17:26:01.247318+00:00",
+  "protocol_revision": "LA-003/v3",
+  "previous_receipt_sha256": "b3083aad2fcc7d2df39b143c828909d657bcaa59f3e069794da78e28d4c60fe2",
+  "previous_receipt": "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/previous-receipt.json",
+  "changes": [
+    "Allow solver/checker descendants in one bounded aggregate resource group instead of assuming a single process.",
+    "Enforce one reserved logical CPU by singleton cpuset plus one-core quota, pin each tool to one thread, and impose16 aggregate process/thread slots.",
+    "Bound aggregate group memory to2GiB with no additional swap and distinguish20wall-second from20aggregateCPU-second stopping thresholds.",
+    "Charge actual group CPU and termination overhead; preserve overshoot and distinguish nominal attempt-wall sum from actual group CPU/global job wall time.",
+    "Retain setup/qualification/watchdog overhead separately in full cost and require real containment enforcement qualification before scored runs."
+  ],
+  "historical_artifact_rule": "Every prior immutable snapshot is preserved byte-for-byte; new outputs/script/log/review live in this new resource-correction namespace.",
+  "validation_scope": "Actual protocol validator uses document reads and synthetic arithmetic only; host capacity observation is discovery, not enforcement qualification.",
+  "live_database_mutated": false,
+  "live_worktree_mutated": false,
+  "provider_invoked": false,
+  "experiments_executed": 0
+}

@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "papers/completion/law_to_action/receipts/snapshots/LA-003/resource-correction-20260911/validate_protocol.py",
+    "--protocol-dir",
+    "papers/completion/law_to_action/benchmark"
+  ],
+  "cwd": ".",
+  "physical_cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la_003_protocol_correction/candidate",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_at": "2026-09-11T17:24:09.714026+00:00",
+  "finished_at": "2026-09-11T17:24:09.759380+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"status\": \"pass\",\n  \"scope\": \"protocol document and synthetic arithmetic validation only\",\n  \"source_corpora_loaded\": false,\n  \"benchmark_results_loaded\": false,\n  \"provider_invoked\": false,\n  \"experiments_executed\": 0,\n  \"synthetic_checks\": [\n    \"exact ranked strata and reversed-input invariance\",\n    \"short/duplicate/cross-population cohorts rejected\",\n    \"family-derived case membership\",\n    \"distinct denial/abstention/withholding and undefined denominator\",\n    \"balanced fixed schedule\",\n    \"real-mechanism and model-study separation\",\n    \"independent budget arithmetic\",\n    \"group resource scope and separate CPU/wall accounting; no live enforcement qualification\"\n  ],\n  \"documents_sha256\": {\n    \"protocol.json\": \"ed3e66b1c8a154351d15975d67152531487fb7e216e072c2ed62933256ae78fc\",\n    \"protocol.md\": \"8a2117b73a59874adee5b8fffff3cc1fc58b3f48e2bbe7b4859c5c7b8e97737b\",\n    \"resource_plan.json\": \"985d48de55803995bec8ab4b75ffb0979a1c3f49c66f314d97caa7609db616aa\"\n  }\n}\n",
+  "stderr": "",
+  "execution_context": "Independent host protocol document/synthetic arithmetic check; no empirical experiment, resource stress test or provider call."
+}
