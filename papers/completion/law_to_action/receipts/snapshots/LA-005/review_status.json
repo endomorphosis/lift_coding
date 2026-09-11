@@ -1,0 +1,26 @@
+{
+  "schema": "law-to-action-legal-review-status/v1",
+  "task_id": "LA-005",
+  "packet_preparation": "complete",
+  "independent_human_legal_review": "not_obtained",
+  "generated_labels_are_expert_review": false,
+  "applicability_labels": "unknown",
+  "forced_permission_or_denial": false,
+  "agreement": "not_applicable_no_independent_reviewer",
+  "disagreement_records": 0,
+  "final_adjudication": null,
+  "adjudication_status": "unresolved_missing_expert_review",
+  "claims_narrowed": true,
+  "visible_unresolved": true,
+  "evaluation_admission": "blocked_until_independent_human_legal_review",
+  "records": 12,
+  "held_out_records": 8,
+  "required_mutation_classes_present": [
+    "omitted_legal_exception",
+    "wrong_date_or_jurisdiction",
+    "unsupported_construct",
+    "no_applicable_record"
+  ],
+  "dependency": "Competent independent human legal reviewer with access to the six pinned USCODE-2024 section PDFs, legal.jsonl, and legal_guidelines.md.",
+  "limitation": "This status object is packet-preparer provenance. It is not independent expert review."
+}
