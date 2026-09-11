@@ -1,0 +1,98 @@
+{
+  "schema": "vericodegen-source-inputs/v1",
+  "reviewed_at": "2026-09-11",
+  "inputs": [
+    {
+      "path": "papers/autoformalization_training_methods_revised-1.pdf",
+      "size_bytes": 312201,
+      "sha256": "15a19fbfb7bc700c0827a8e48711422283f7703810689d3834a346826fbe5943",
+      "role": "reviewed_draft"
+    },
+    {
+      "path": "papers/checklist.tex",
+      "size_bytes": 26167,
+      "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "role": "user_supplied_template"
+    },
+    {
+      "path": "papers/from_law_to_action_corpus_grounded-1.pdf",
+      "size_bytes": 155420,
+      "sha256": "000b0d1960854966be836788f05c1fe33b8c0c6a2943a8d88f20241f99b38da0",
+      "role": "reviewed_draft"
+    },
+    {
+      "path": "papers/neurips_2026.sty",
+      "size_bytes": 13704,
+      "sha256": "c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a",
+      "role": "user_supplied_template"
+    },
+    {
+      "path": "papers/neurips_2026_vericode.sty",
+      "size_bytes": 13757,
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "role": "user_supplied_template"
+    },
+    {
+      "path": "papers/neurips_2026_vericode_competition.sty",
+      "size_bytes": 13933,
+      "sha256": "a0178f152d13cf24f44936da0ee95bab975ceced8d54980efbbf8f7c1bb31f72",
+      "role": "user_supplied_template"
+    },
+    {
+      "path": "papers/neurips_2026_vericode_workshop.tex",
+      "size_bytes": 17416,
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "role": "user_supplied_template"
+    },
+    {
+      "path": "papers/neurips_2026_vericode_workshop_competition.tex",
+      "size_bytes": 17871,
+      "sha256": "0e21c08ce8a32cb3d4c0fb7123d38249209c2ef488a0c210acbea026f6fefc23",
+      "role": "user_supplied_template"
+    },
+    {
+      "path": "papers/vericodegen_neurosymbolic_supervision_workshop_draft.pdf",
+      "size_bytes": 216948,
+      "sha256": "2e4c0efda38036ad25a346200687bed3fb6ad20966400927b3f048f8caefacae",
+      "role": "reviewed_draft"
+    }
+  ],
+  "repositories": [
+    {
+      "path": ".",
+      "head": "8601408d6406681a14a9488d31d1cd9a16164649",
+      "has_tracked_or_submodule_modifications": true,
+      "evidence_status": "review-time source location, not a frozen experimental environment"
+    },
+    {
+      "path": "external/ipfs_accelerate",
+      "head": "5d79bbf8bb61e027fbda76920580cb9d4fd919c1",
+      "has_tracked_or_submodule_modifications": true,
+      "evidence_status": "review-time source location, not a frozen experimental environment"
+    },
+    {
+      "path": "external/ipfs_datasets",
+      "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "has_tracked_or_submodule_modifications": true,
+      "evidence_status": "review-time source location, not a frozen experimental environment"
+    },
+    {
+      "path": "external/ipfs_kit",
+      "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "has_tracked_or_submodule_modifications": true,
+      "evidence_status": "review-time source location, not a frozen experimental environment"
+    }
+  ],
+  "overleaf": {
+    "url": "https://www.overleaf.com/project/6a7b4742e20ac910c422a7e0",
+    "provided_by": "user",
+    "access": "HTTP 403 from direct HTTP retrieval; web tool could not open",
+    "contents_downloaded": false,
+    "paper_membership": "unverified"
+  },
+  "manuscript_specific_tex_or_bib_found": false,
+  "research_template": "papers/neurips_2026_vericode_workshop.tex",
+  "research_style": "papers/neurips_2026_vericode.sty",
+  "checklist": "papers/checklist.tex",
+  "experiments_run_during_review": false
+}

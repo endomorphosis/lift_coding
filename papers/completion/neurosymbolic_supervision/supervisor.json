@@ -1,0 +1,30 @@
+{
+  "schema": "vericodegen-paper-supervisor/v1",
+  "paper_id": "neurosymbolic_supervision",
+  "title": "Proof-Carrying Neurosymbolic Supervision: State, Logic-Governed Decisions, and Test-Evidence Reuse",
+  "pdf": "papers/vericodegen_neurosymbolic_supervision_workshop_draft.pdf",
+  "todo_path": "papers/completion/neurosymbolic_supervision/paper.todo.md",
+  "objective_path": "papers/completion/neurosymbolic_supervision/paper.objectives.md",
+  "review_path": "papers/completion/neurosymbolic_supervision/review.md",
+  "manifest_path": "papers/completion/neurosymbolic_supervision/tasks.json",
+  "research_template_paths": [
+    "papers/neurips_2026_vericode_workshop.tex",
+    "papers/neurips_2026_vericode.sty",
+    "papers/checklist.tex"
+  ],
+  "source_project": "https://www.overleaf.com/project/6a7b4742e20ac910c422a7e0",
+  "source_project_access": "HTTP 403 on 2026-09-11; paper membership unverified",
+  "task_prefix": "NS-",
+  "root_goal_id": "NS-G000",
+  "board_namespace": "vericodegen-2026-neurosymbolic_supervision",
+  "state_prefix": "paper_neurosymbolic_supervision",
+  "submodule_paths": [
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit"
+  ],
+  "implementation_timeout_seconds": 7200,
+  "max_task_attempts": 3,
+  "runtime_authority": "explicit native legacy-markdown task source",
+  "refill_policy": "fixed reviewed board; split/discover follow-ups explicitly with lineage"
+}
