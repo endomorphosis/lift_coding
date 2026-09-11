@@ -9,7 +9,14 @@
     "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json": "975e422a30b5b719b91abc61f84f0d71596a7dcc6a47699c247b990b91096808",
     "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md": "88800274dd2adca8eddbfce8c072a6871f44076e5d12d23636f6936294b3e587",
     "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json": "08edc18b882c5607a4ea248888ca3473e9576f199ba36df2eaaf6f16e88d4d82",
-    "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log": "9b2a8a953a48d77925ad61ce13d742381335d2e922e53c4a02ee4e5848106c7b"
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log": "9b2a8a953a48d77925ad61ce13d742381335d2e922e53c4a02ee4e5848106c7b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/correction-audit.json": "5cdfabd359f14e7983dcd99824ab8bd6d51e306fca6bb0073053631cbfd22224",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log": "e74cf4ea34774975457a10dda871a9ec9dba26d95286643a1124813d648cdfc3",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/host-source-provenance.json": "82dc7e3f963bff999a765d8b5abe3a0e60774f8df4fa3e891d8a8c2a88983a8f",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/original-native-command-excerpt.log": "2b597dd9aab9227ceaa1614e3efd330b896b59c6a5120d87a7e91c5777106d24",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/previous-audit-structure.log": "9b2a8a953a48d77925ad61ce13d742381335d2e922e53c4a02ee4e5848106c7b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/previous-receipt.json": "9d00e6d75e2d99012a77d4e0a53d5566ace886a7a3d3224a67928ed302e1565b",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/recorded-literal-replay.log": "33ceb9272fb7f9c4484571aae626a932270950c023d5c1214784d52ac5d202f1"
   },
   "outputs": {
     "papers/completion/law_to_action/claim_evidence_matrix.json": "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
@@ -17,22 +24,74 @@
     "papers/completion/law_to_action/environment_inventory.json": "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json"
   },
   "criteria": [
-    {"criterion": "Matrix covers each contribution, every logic/backend family, trained normalizer claim and numerical corpus claim.", "status": "met", "explanation": "The matrix audits all four draft contributions; the full baseline and Wave-2 registry lists; seven unqualified backend kinds; deterministic versus optional-provider normalizer behavior; and each reported municipal, Netherlands, Belgium, CVEfixes, and SkillCenter quantity. It records these as inspected, declared-only, fixture-only, unsupported, or future work rather than research results.", "evidence": ["papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json", "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json", "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"]},
-    {"criterion": "Explicit OFF/default in-memory-store and fixture-versus-live limitations recorded.", "status": "met", "explanation": "The matrix and scope identify OFF pass-through, the process-local InMemoryCapabilityConsumptionStore default, non-blocking AUDIT/SHADOW modes, and the fixture-only CVE, admissibility, MCP, and enforcement-test surfaces. They reserve live-hub, real-token, durable-state, and transport claims for later direct evidence.", "evidence": ["papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json", "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md", "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"]},
-    {"criterion": "Bounded paper scope, protected routes and essential versus optional experiments are selected.", "status": "met", "explanation": "scope.md selects explicit ENFORCE mediation at SupervisorPreInvocationEnforcement.authorize_and_delegate around one benchmark-owned sandbox handler, with generated-code-effect correlation as an input only. It lists the prerequisite protocol, source, route, backend, fixed-action, and durable-state experiments, and excludes legal fidelity, trained normalization, all-family backends, live network parity, and closed-loop studies from the core claim.", "evidence": ["papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md", "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json", "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"]}
+    {
+      "criterion": "Matrix covers each contribution, every logic/backend family, trained normalizer claim and numerical corpus claim.",
+      "status": "met",
+      "explanation": "The matrix audits all four draft contributions; the full baseline and Wave-2 registry lists; seven unqualified backend kinds; deterministic versus optional-provider normalizer behavior; and each reported municipal, Netherlands, Belgium, CVEfixes, and SkillCenter quantity. It records these as inspected, declared-only, fixture-only, unsupported, or future work rather than research results.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+      ]
+    },
+    {
+      "criterion": "Explicit OFF/default in-memory-store and fixture-versus-live limitations recorded.",
+      "status": "met",
+      "explanation": "The matrix and scope identify OFF pass-through, the process-local InMemoryCapabilityConsumptionStore default, non-blocking AUDIT/SHADOW modes, and the fixture-only CVE, admissibility, MCP, and enforcement-test surfaces. They reserve live-hub, real-token, durable-state, and transport claims for later direct evidence.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+      ]
+    },
+    {
+      "criterion": "Bounded paper scope, protected routes and essential versus optional experiments are selected.",
+      "status": "met",
+      "explanation": "scope.md selects explicit ENFORCE mediation at SupervisorPreInvocationEnforcement.authorize_and_delegate around one benchmark-owned sandbox handler, with generated-code-effect correlation as an input only. It lists the prerequisite protocol, source, route, backend, fixed-action, and durable-state experiments, and excludes legal fidelity, trained normalization, all-family backends, live network parity, and closed-loop studies from the core claim.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log"
+      ]
+    }
   ],
   "commands": [
     {
-      "argv": ["/usr/bin/python3.12", "-c", "LA-002 structural assertions over matrix, scope, and inventory"],
+      "argv": [
+        "/usr/bin/python3.12",
+        "-c",
+        "import json, pathlib; base=pathlib.Path(\"papers/completion/law_to_action\"); matrix=json.loads((base/\"claim_evidence_matrix.json\").read_text()); inventory=json.loads((base/\"environment_inventory.json\").read_text()); scope=(base/\"scope.md\").read_text(); assert len(matrix[\"contributions\"]) == 4; assert matrix[\"trained_normalizer_claim\"][\"status\"] == \"unsupported\"; assert len(matrix[\"numerical_corpus_claims\"]) == 7; assert matrix[\"enforcement_defaults_and_test_limits\"][\"default_mode\"][\"value\"] == \"off\"; assert matrix[\"enforcement_defaults_and_test_limits\"][\"default_consumption_store\"][\"value\"] == \"InMemoryCapabilityConsumptionStore\"; assert matrix[\"logic_and_backend_inventory\"][\"runtime_backend_kinds_all_unqualified\"]; assert \"fixture\" in scope.lower() and \"essential\" in scope.lower() and \"optional\" in scope.lower(); assert inventory[\"authoritative_validation_environment\"][\"python\"] == \"/usr/bin/python3.12\"; print(\"LA-002 audit structural check: PASS\"); print(\"contributions=4; corpus_claims=7; default=OFF; store=InMemoryCapabilityConsumptionStore\"); print(\"logic/backend inventory, fixture/live limitations, selected routes, and experiment triage: present\")"
+      ],
       "cwd": ".",
       "exit_code": 0,
-      "log": "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/exact-structural-replay.log",
+      "executed_at": "2026-09-11T16:58:26.878637+00:00",
+      "environment": {
+        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit"
+      },
+      "execution_context": "Host replay on hash-verified frozen audit outputs; original provider command substantiated separately."
     }
   ],
   "source_versions": {
     "audit_outputs": "claim_evidence_matrix.json=975e422a30b5b719b91abc61f84f0d71596a7dcc6a47699c247b990b91096808; scope.md=88800274dd2adca8eddbfce8c072a6871f44076e5d12d23636f6936294b3e587; environment_inventory.json=08edc18b882c5607a4ea248888ca3473e9576f199ba36df2eaaf6f16e88d4d82",
-    "external_git_revisions": "unavailable because each external worktree has a broken gitdir pointer; matrix and inventory retain current source-file SHA-256 pins rather than inventing commits.",
-    "authoritative_environment": "/usr/bin/python3.12 with PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin; no qualified solver/checker deployment is present."
+    "external_git_revisions": "Provider-visible Git resolution failed in the historical isolated checkout. Separate host provenance establishes ipfs_accelerate=8eeaba2bede5594f6b20ab19741cc4d6cae3eb4f; ipfs_datasets=ac82107e246b30e35a2bbdcf75e01370d22350c6; ipfs_kit=6196017ca3df016c7159dce43af60f2a0d96a9ae. Original observation is retained in prior receipt and output snapshots.",
+    "authoritative_environment": "/usr/bin/python3.12 with PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin; no qualified solver/checker deployment is present.",
+    "host_provenance_evidence": "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/host-source-provenance.json"
   },
-  "limitations": ["This complete receipt verifies immutable audit artifacts and their current-output identities; it does not convert inspection, fixtures, registry declarations, or release-card counts into empirical results.", "No benchmark result, corpus recount, trained-model evaluation, live transport run, or solver/checker qualification was performed by LA-002."]
+  "limitations": [
+    "This complete receipt verifies immutable audit artifacts and their current-output identities; it does not convert inspection, fixtures, registry declarations, or release-card counts into empirical results.",
+    "No benchmark result, corpus recount, trained-model evaluation, live transport run, or solver/checker qualification was performed by LA-002.",
+    "The literal command in the superseded receipt was not executable; corrected argv and a fresh host replay substantiate only the structural audit. The original provider log independently records the underlying structural assertions succeeding."
+  ],
+  "corrected_at": "2026-09-11T16:58:26.878637+00:00",
+  "corrections": [
+    {
+      "reason": "Replace non-executable English command description with substantiated executable argv and a fresh literal replay log; clarify historical provider Git visibility versus independently proved host pins.",
+      "previous_receipt": "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/previous-receipt.json",
+      "audit": "papers/completion/law_to_action/receipts/snapshots/LA-002/command-correction-20260911/correction-audit.json",
+      "historical_completed_at_preserved": true
+    }
+  ]
 }

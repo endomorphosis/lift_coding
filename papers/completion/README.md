@@ -181,10 +181,12 @@ same-paper IDs, explicit goal lineage, dependencies, outputs, validation and
 concrete acceptance criteria; preserve/export their evidence contracts for the
 receipt verifier. The root goal must account for those follow-ups too.
 
-Twelve implementation tasks declare narrow source-edit scopes through native
-`Allowed paths`; `Reuse candidates` is a discovery hint only. Additional source
-repairs need explicit scope on a follow-up before dispatch. Evidence snapshot
-directories are included in `Predicted files`. Baseline tests and independent
+Twelve implementation tasks name intended source-edit paths in `Allowed paths`.
+The native worker derives its write scope from `Outputs`; those source paths
+still need an exact output contract or a bounded follow-up before dispatch.
+`Reuse candidates` is a discovery hint only. Each task's own evidence snapshot
+directory must be included in native `Outputs`; `Predicted files` alone does
+not grant write scope. Baseline tests and independent
 oracles must not be weakened to improve reported results. The initial
 `cpu-medium` / `execution` metadata describes the implementation worker; protocol
 tasks must allocate and declare actual GPU/network resources for experiments.
@@ -197,7 +199,7 @@ Each task writes
   "schema": "paper-task-evidence/v1",
   "task_id": "AF-001",
   "status": "complete",
-  "completed_at": "2026-09-11T18:00:00+00:00",
+  "completed_at": "2026-09-11T00:00:00+00:00",
   "source_versions": {"repository": "actual commit; record relevant dirty overlay and dependencies"},
   "artifacts": {
     "papers/completion/autoformalization/receipts/snapshots/AF-001/main.tex": "actual sha256",
@@ -221,12 +223,30 @@ Each task writes
 ```
 
 The example is a schema illustration, not a receipt or experiment result.
-Snapshot every declared output (all files for directory outputs); keep immutable
-evidence under the task's snapshots directory. Criteria refer to those hashed
+Snapshot every scientific deliverable (all files for directory deliverables);
+keep immutable evidence under the task's snapshots directory. The task's own
+receipt and snapshot directory are native bookkeeping outputs: do not
+recursively snapshot the snapshot directory. Criteria refer to those hashed
 snapshots. Record the actual tools, commands, versions, data/model identities,
 errors, human annotation provenance and full result denominators. Use the exact
 seed criteria list; for a new native follow-up, its complete `Acceptance` field
 is one criterion. Follow-up validation uses the same `verify-task` command.
+
+Read the actual UTC clock when recording `completed_at`, for example with
+`datetime.now(timezone.utc).isoformat()`; never copy the example timestamp or
+guess a future time. Preserve the exact executable argument vector in each
+`commands[].argv`, including the complete Python `-c` program. A prose label
+for a command is not executable evidence. For Python reading a program from
+stdin (`python3 -`), retain that complete program as a hashed snapshot and set
+`commands[].stdin_artifact` to its repository-relative snapshot path. Record
+literal environment values and the actual working directory needed to replay
+the command. Named repository scripts may use their retained source version;
+an explicit `script_artifact` can bind a separate immutable script copy.
+
+When correcting a receipt, retain the original receipt and original snapshots
+as immutable history, add the exact replay source and logs, and clearly label
+the later replay's timestamp and environment. A later successful replay does
+not prove that an earlier malformed command ran successfully.
 
 ```bash
 python3 scripts/paper_supervisors.py verify-task --paper autoformalization --task AF-001
